@@ -67,6 +67,377 @@ docker_best_practices_data:
   - link: "/continuous_integration/static_analysis/rules/docker-best-practices/zypper-use-y"
     tag: "zypper-use-y"
     text: "Always use -y with zypper install"
+javascript_best_practices_data:
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/for-direction"
+    tag: "for-direction"
+    text: "Check for loop is moving in the right direction"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/new-parens"
+    tag: "new-parens"
+    text: "Invoking a constructor must use parentheses"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-alert"
+    tag: "no-alert"
+    text: "Avoid the use of alert, confirm, and prompt"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-async-promise-executor"
+    tag: "no-async-promise-executor"
+    text: "Promise executor cannot be an async function"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-caller"
+    tag: "no-caller"
+    text: "Avoid the use of arguments.caller or arguments.callee"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-case-declarations"
+    tag: "no-case-declarations"
+    text: "Avoid lexical declarations in case clauses"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-compare-neg-zero"
+    tag: "no-compare-neg-zero"
+    text: "Direct comparison with -0 detected"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-cond-assign"
+    tag: "no-cond-assign"
+    text: "Avoid assignment operators in conditional expressions"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-console"
+    tag: "no-console"
+    text: "Avoid leaving console debug statements"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-debugger"
+    tag: "no-debugger"
+    text: "Disallow the use of debugger"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-delete-var"
+    tag: "no-delete-var"
+    text: "Avoid using delete on variables directly"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-dupe-args"
+    tag: "no-dupe-args"
+    text: "Function parameters redeclared"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-dupe-class-members"
+    tag: "no-dupe-class-members"
+    text: "Avoid duplicate class members"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-dupe-keys"
+    tag: "no-dupe-keys"
+    text: "Avoid duplicate keys in object literals"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-duplicate-case"
+    tag: "no-duplicate-case"
+    text: "Avoid duplicate case labels"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-empty"
+    tag: "no-empty"
+    text: "Avoid empty block statements"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-empty-character-class"
+    tag: "no-empty-character-class"
+    text: "Avoid empty character classes in regular expressions"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-empty-pattern"
+    tag: "no-empty-pattern"
+    text: "Avoid empty destructuring patterns"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-ex-assign"
+    tag: "no-ex-assign"
+    text: "Avoid reassigning exceptions in catch clauses"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-implied-eval"
+    tag: "no-implied-eval"
+    text: "Prevent the use methods similar to eval()"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-import-assign"
+    tag: "no-import-assign"
+    text: "Prevent assigning to imported bindings"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-inner-declarations"
+    tag: "no-inner-declarations"
+    text: "Avoid variable or function declaration in nested blocks"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-iterator"
+    tag: "no-iterator"
+    text: "Avoid the use of the __iterator__ property"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-loss-of-precision"
+    tag: "no-loss-of-precision"
+    text: "Avoid numbers that lose precision"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-new-symbol"
+    tag: "no-new-symbol"
+    text: "Avoid new statements with the Symbol object"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-octal"
+    tag: "no-octal"
+    text: "Avoid using octal literals to prevent unexpected behavior"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-proto"
+    tag: "no-proto"
+    text: "Avoid the use of the __proto__ property"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-script-url"
+    tag: "no-script-url"
+    text: "Avoid using JavaScript in URLs"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-unsafe-negation"
+    tag: "no-unsafe-negation"
+    text: "Avoid negating the left operand of relational operators"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/no-with"
+    tag: "no-with"
+    text: "The with statement can lead to ambiguous code"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/require-yield"
+    tag: "require-yield"
+    text: "Require yield in generator functions"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/use-isnan"
+    tag: "use-isnan"
+    text: "Avoid direct comparison with NaN"
+  - link: "/continuous_integration/static_analysis/rules/javascript-best-practices/valid-typeof"
+    tag: "valid-typeof"
+    text: "Compare typeof expressions against valid strings"
+javascript_browser_security_data:
+  - link: "/continuous_integration/static_analysis/rules/javascript-browser-security/event-check-origin"
+    tag: "event-check-origin"
+    text: "Check origin of events"
+  - link: "/continuous_integration/static_analysis/rules/javascript-browser-security/inner-outer-html"
+    tag: "inner-outer-html"
+    text: "Do not modify innerHTML or outerHTML"
+  - link: "/continuous_integration/static_analysis/rules/javascript-browser-security/insecure-websocket"
+    tag: "insecure-websocket"
+    text: "Websockets must use SSL connections"
+  - link: "/continuous_integration/static_analysis/rules/javascript-browser-security/local-storage-sensitive-data"
+    tag: "local-storage-sensitive-data"
+    text: "Do not store sensitive data to local storage"
+  - link: "/continuous_integration/static_analysis/rules/javascript-browser-security/manual-sanitization"
+    tag: "manual-sanitization"
+    text: "Avoid manual sanitization of inputs"
+  - link: "/continuous_integration/static_analysis/rules/javascript-browser-security/postmessage-permissive-origin"
+    tag: "postmessage-permissive-origin"
+    text: "Specify origin in postMessage"
+  - link: "/continuous_integration/static_analysis/rules/javascript-browser-security/react-dangerously-inner-html"
+    tag: "react-dangerously-inner-html"
+    text: "Do not inject unsanitized HTML"
+  - link: "/continuous_integration/static_analysis/rules/javascript-browser-security/regexp-non-literal"
+    tag: "regexp-non-literal"
+    text: "Do not use variable for regular expressions"
+javascript_code_style_data:
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/assignment-name"
+    tag: "assignment-name"
+    text: "Assigment name should use camelCase"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/class-name"
+    tag: "class-name"
+    text: "Class name should be PascalCase"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/eqeqeq"
+    tag: "eqeqeq"
+    text: "Enforce the use of === and !=="
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/func-name-matching"
+    tag: "func-name-matching"
+    text: "Function names must match the name of the assignation."
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/func-names"
+    tag: "func-names"
+    text: "Enforce named function expressions"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/function-naming"
+    tag: "function-naming"
+    text: "Function name should use camelCase or PascalCase"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/max-class-lines"
+    tag: "max-class-lines"
+    text: "Classes must be less than 100 lines"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/max-function-lines"
+    tag: "max-function-lines"
+    text: "Functions must be less than 200 lines"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/max-params"
+    tag: "max-params"
+    text: "Enforce a maximum number of parameters in a function"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/method-name"
+    tag: "method-name"
+    text: "Method name should use camelCase"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/no-array-constructor"
+    tag: "no-array-constructor"
+    text: "Avoid Array constructors"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/no-div-regex"
+    tag: "no-div-regex"
+    text: "Avoid equal signs at the beginning of regular expressions"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/no-duplicate-imports"
+    tag: "no-duplicate-imports"
+    text: "Avoid duplicate module imports"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/no-floating-decimal"
+    tag: "no-floating-decimal"
+    text: "Avoid leading or trailing decimal points in numbers"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/no-lonely-if"
+    tag: "no-lonely-if"
+    text: "Avoid if statements as the only statement in else blocks"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/no-multi-assign"
+    tag: "no-multi-assign"
+    text: "Avoid the use of chained assignment expressions"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/no-new"
+    tag: "no-new"
+    text: "Avoid new operators outside of assignments or comparisons"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/no-new-func"
+    tag: "no-new-func"
+    text: "Avoid new operators with the Function object"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/no-new-object"
+    tag: "no-new-object"
+    text: "Avoid Object constructors"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/no-return-assign"
+    tag: "no-return-assign"
+    text: "Avoid assignment operators in return statements"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/no-self-compare"
+    tag: "no-self-compare"
+    text: "Avoid comparisons where both sides are exactly the same"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/no-var"
+    tag: "no-var"
+    text: "Require let or const instead of var"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/parameter-name"
+    tag: "parameter-name"
+    text: "Parameter name should use camelCase"
+  - link: "/continuous_integration/static_analysis/rules/javascript-code-style/radix"
+    tag: "radix"
+    text: "Consistent use of the radix argument using parseInt"
+javascript_common_security_data:
+  - link: "/continuous_integration/static_analysis/rules/javascript-common-security/axios-avoid-insecure-http"
+    tag: "axios-avoid-insecure-http"
+    text: "Avoid insecure HTTP requests with Axios"
+  - link: "/continuous_integration/static_analysis/rules/javascript-common-security/unique-function-arguments"
+    tag: "unique-function-arguments"
+    text: "Function argument names should be unique"
+  - link: "/continuous_integration/static_analysis/rules/javascript-common-security/xml-no-external-entities"
+    tag: "xml-no-external-entities"
+    text: "Do not use external XML entities"
+javascript_express_data:
+  - link: "/continuous_integration/static_analysis/rules/javascript-express/access-restriction"
+    tag: "access-restriction"
+    text: "Limit exposure to sensitive directories and files"
+  - link: "/continuous_integration/static_analysis/rules/javascript-express/default-session-config"
+    tag: "default-session-config"
+    text: "Enforce overriding default config"
+  - link: "/continuous_integration/static_analysis/rules/javascript-express/external-filename-upload"
+    tag: "external-filename-upload"
+    text: "Avoid using unsanitized user input with sendFile"
+  - link: "/continuous_integration/static_analysis/rules/javascript-express/external-resource"
+    tag: "external-resource"
+    text: "Avoid rendering resource based on unsanitized user input"
+  - link: "/continuous_integration/static_analysis/rules/javascript-express/hardcoded-secret"
+    tag: "hardcoded-secret"
+    text: "Avoid using a hard-coded secret"
+  - link: "/continuous_integration/static_analysis/rules/javascript-express/https-protocol-missing"
+    tag: "https-protocol-missing"
+    text: "Use `https` protocol over `http`"
+  - link: "/continuous_integration/static_analysis/rules/javascript-express/insecure-allow-origin"
+    tag: "insecure-allow-origin"
+    text: "Avoid using an insecure Access-Control-Allow-Origin header"
+  - link: "/continuous_integration/static_analysis/rules/javascript-express/insecure-cookie"
+    tag: "insecure-cookie"
+    text: "Avoid setting insecure cookie settings"
+  - link: "/continuous_integration/static_analysis/rules/javascript-express/jwt-not-revoked"
+    tag: "jwt-not-revoked"
+    text: "Ensure an isRevoked method is used for tokens"
+  - link: "/continuous_integration/static_analysis/rules/javascript-express/missing-helmet"
+    tag: "missing-helmet"
+    text: "Express application should use Helmet"
+  - link: "/continuous_integration/static_analysis/rules/javascript-express/path-traversal"
+    tag: "path-traversal"
+    text: "Avoid allowing access to unintended directories or files"
+  - link: "/continuous_integration/static_analysis/rules/javascript-express/reduce-server-fingerprinting"
+    tag: "reduce-server-fingerprinting"
+    text: "Server fingerprinting misconfiguration"
+  - link: "/continuous_integration/static_analysis/rules/javascript-express/xss-vulnerability"
+    tag: "xss-vulnerability"
+    text: "Avoid sending unsanitized user input in response"
+javascript_inclusive_data:
+  - link: "/continuous_integration/static_analysis/rules/javascript-inclusive/comments"
+    tag: "comments"
+    text: "Check comments for wording issues"
+  - link: "/continuous_integration/static_analysis/rules/javascript-inclusive/declarations"
+    tag: "declarations"
+    text: "Check declaration names for wording issues"
+  - link: "/continuous_integration/static_analysis/rules/javascript-inclusive/formal-parameters"
+    tag: "formal-parameters"
+    text: "Check parameter names for wording issues"
+  - link: "/continuous_integration/static_analysis/rules/javascript-inclusive/identifiers"
+    tag: "identifiers"
+    text: "Check identifier names for wording issues"
+javascript_node_security_data:
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/argon2"
+    tag: "argon2"
+    text: "Use strong security mechanisms with argon2"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/avoid-crypto-rc4"
+    tag: "avoid-crypto-rc4"
+    text: "Avoid RC4"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/avoid-crypto-sha1"
+    tag: "avoid-crypto-sha1"
+    text: "Avoid SHA1 security protocol"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/avoid-des"
+    tag: "avoid-des"
+    text: "Avoid DES and 3DES"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/chmod-permissions"
+    tag: "chmod-permissions"
+    text: "Do not give 777 permissions to a file"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/command-injection"
+    tag: "command-injection"
+    text: "Avoid command injection"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/crypto-avoid-weak-hash"
+    tag: "crypto-avoid-weak-hash"
+    text: "Avoid weak hash algorithm from CryptoJS"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/detect-buffer-noassert"
+    tag: "detect-buffer-noassert"
+    text: "Avoid calls to 'buffer' with 'noAssert' flag set"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/detect-child-process"
+    tag: "detect-child-process"
+    text: "Avoid instances of 'child_process' and non-literal 'exec()'"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/detect-eval-with-expression"
+    tag: "detect-eval-with-expression"
+    text: "Avoid `eval` with expressions"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/detect-new-buffer"
+    tag: "detect-new-buffer"
+    text: "Avoid Buffer(argument) with non-literal values"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/detect-non-literal-fs-filename"
+    tag: "detect-non-literal-fs-filename"
+    text: "Avoid variables in 'fs' calls filename argument"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/detect-non-literal-regexp"
+    tag: "detect-non-literal-regexp"
+    text: "Detects non-literal values in regular expressions"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/detect-non-literal-require"
+    tag: "detect-non-literal-require"
+    text: "Avoid require with non-literal values"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/detected-jwt-token"
+    tag: "detected-jwt-token"
+    text: "Detects hardcoded JWT tokens within the codebase."
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/hardcoded-hmac-key"
+    tag: "hardcoded-hmac-key"
+    text: "Avoid hardcoded HMAC keys"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/insecure-hash"
+    tag: "insecure-hash"
+    text: "Do not use weak hash functions"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/insecure-jwt-secret-usage"
+    tag: "insecure-jwt-secret-usage"
+    text: "Insecure Usage of a Static Secret in JWT Signing"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/jwt-hardcoded-secret"
+    tag: "jwt-hardcoded-secret"
+    text: "Do not use hardcoded secret with a JWT"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/jwt-sensitive-data"
+    tag: "jwt-sensitive-data"
+    text: "Do not put sensitive data in objects"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/jwt-weak-encryption"
+    tag: "jwt-weak-encryption"
+    text: "Use default encryption from the JWT library"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/log-sensitive-data"
+    tag: "log-sensitive-data"
+    text: "Avoid logging sensitive data"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/oauth2-hardcoded-secret"
+    tag: "oauth2-hardcoded-secret"
+    text: "Do not use hardcoded secret for OAuth2 providers"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/sql-injection"
+    tag: "sql-injection"
+    text: "Avoid SQL injection"
+  - link: "/continuous_integration/static_analysis/rules/javascript-node-security/variable-sql-statement-injection"
+    tag: "variable-sql-statement-injection"
+    text: "Avoid SQL injections"
+jsx_react_data:
+  - link: "/continuous_integration/static_analysis/rules/jsx-react/jsx-key"
+    tag: "jsx-key"
+    text: "Prevent missing key props in iterators/collection literals"
+  - link: "/continuous_integration/static_analysis/rules/jsx-react/jsx-no-comment-textnodes"
+    tag: "jsx-no-comment-textnodes"
+    text: "Avoid comments from being inserted as text nodes"
+  - link: "/continuous_integration/static_analysis/rules/jsx-react/jsx-no-duplicate-key"
+    tag: "jsx-no-duplicate-key"
+    text: "Ensures unique key prop"
+  - link: "/continuous_integration/static_analysis/rules/jsx-react/jsx-no-duplicate-props"
+    tag: "jsx-no-duplicate-props"
+    text: "Avoid duplicate properties in JSX"
+  - link: "/continuous_integration/static_analysis/rules/jsx-react/jsx-no-target-blank"
+    tag: "jsx-no-target-blank"
+    text: "Prevent target='_blank' security risks"
+  - link: "/continuous_integration/static_analysis/rules/jsx-react/no-children-prop"
+    tag: "no-children-prop"
+    text: "Avoid passing children as props"
+  - link: "/continuous_integration/static_analysis/rules/jsx-react/no-danger-with-children"
+    tag: "no-danger-with-children"
+    text: "Avoid using children with dangerouslySetInnerHTML"
+  - link: "/continuous_integration/static_analysis/rules/jsx-react/no-deprecated"
+    tag: "no-deprecated"
+    text: "Avoid deprecated methods"
+  - link: "/continuous_integration/static_analysis/rules/jsx-react/no-render-return-value"
+    tag: "no-render-return-value"
+    text: "Avoid usage of the return value of ReactDOM.render"
+  - link: "/continuous_integration/static_analysis/rules/jsx-react/no-string-refs"
+    tag: "no-string-refs"
+    text: "Avoid using string references"
+  - link: "/continuous_integration/static_analysis/rules/jsx-react/require-render-return"
+    tag: "require-render-return"
+    text: "Enforce class for returning value in render function"
 python_best_practices_data:
   - link: "/continuous_integration/static_analysis/rules/python-best-practices/ambiguous-class-name"
     tag: "ambiguous-class-name"
@@ -456,6 +827,401 @@ python_security_data:
   - link: "/continuous_integration/static_analysis/rules/python-security/yaml-load"
     tag: "yaml-load"
     text: "avoid deserializing untrusted YAML"
+tsx_react_data:
+  - link: "/continuous_integration/static_analysis/rules/tsx-react/jsx-no-comment-textnodes"
+    tag: "jsx-no-comment-textnodes"
+    text: "Avoid comments from being inserted as text nodes"
+  - link: "/continuous_integration/static_analysis/rules/tsx-react/no-children-prop"
+    tag: "no-children-prop"
+    text: "Avoid passing children as props"
+  - link: "/continuous_integration/static_analysis/rules/tsx-react/no-danger-with-children"
+    tag: "no-danger-with-children"
+    text: "Avoid using children with dangerouslySetInnerHTML"
+  - link: "/continuous_integration/static_analysis/rules/tsx-react/no-deprecated"
+    tag: "no-deprecated"
+    text: "Avoid deprecated methods"
+  - link: "/continuous_integration/static_analysis/rules/tsx-react/no-render-return-value"
+    tag: "no-render-return-value"
+    text: "Avoid usage of the return value of ReactDOM.render"
+  - link: "/continuous_integration/static_analysis/rules/tsx-react/no-string-refs"
+    tag: "no-string-refs"
+    text: "Avoid using string references"
+  - link: "/continuous_integration/static_analysis/rules/tsx-react/require-render-return"
+    tag: "require-render-return"
+    text: "Enforce class for returning value in render function"
+  - link: "/continuous_integration/static_analysis/rules/tsx-react/tsx-key"
+    tag: "tsx-key"
+    text: "Prevent missing key props in iterators/collection literals"
+  - link: "/continuous_integration/static_analysis/rules/tsx-react/tsx-no-duplicate-key"
+    tag: "tsx-no-duplicate-key"
+    text: "Ensures unique key prop"
+  - link: "/continuous_integration/static_analysis/rules/tsx-react/tsx-no-target-blank"
+    tag: "tsx-no-target-blank"
+    text: "Prevent target='_blank' security risks"
+typescript_best_practices_data:
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/ban-types"
+    tag: "ban-types"
+    text: "Avoid certain types"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/boolean-prop-naming"
+    tag: "boolean-prop-naming"
+    text: "Consistent naming for boolean props"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/for-direction"
+    tag: "for-direction"
+    text: "Check for loop is moving in the right direction"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/new-parens"
+    tag: "new-parens"
+    text: "Invoking a constructor must use parentheses"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-alert"
+    tag: "no-alert"
+    text: "Avoid the use of alert, confirm, and prompt"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-async-promise-executor"
+    tag: "no-async-promise-executor"
+    text: "Promise executor cannot be an async function"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-caller"
+    tag: "no-caller"
+    text: "Avoid the use of arguments.caller or arguments.callee"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-compare-neg-zero"
+    tag: "no-compare-neg-zero"
+    text: "Direct comparison with -0 detected"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-cond-assign"
+    tag: "no-cond-assign"
+    text: "Avoid assignment operators in conditional expressions"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-console"
+    tag: "no-console"
+    text: "Avoid leaving console debug statements"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-debugger"
+    tag: "no-debugger"
+    text: "Disallow the use of debugger"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-delete-var"
+    tag: "no-delete-var"
+    text: "Avoid using delete on variables directly"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-dupe-keys"
+    tag: "no-dupe-keys"
+    text: "Avoid duplicate keys in object literals"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-duplicate-enum-values"
+    tag: "no-duplicate-enum-values"
+    text: "Avoid duplicate enum member values"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-duplicate-type-constituents"
+    tag: "no-duplicate-type-constituents"
+    text: "Avoid duplicate constituents of unions or intersections"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-empty"
+    tag: "no-empty"
+    text: "Avoid empty block statements"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-empty-character-class"
+    tag: "no-empty-character-class"
+    text: "Avoid empty character classes in regular expressions"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-empty-pattern"
+    tag: "no-empty-pattern"
+    text: "Avoid empty destructuring patterns"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-ex-assign"
+    tag: "no-ex-assign"
+    text: "Avoid reassigning exceptions in catch clauses"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-explicit-any"
+    tag: "no-explicit-any"
+    text: "Avoid the any type"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-extra-non-null-assertion"
+    tag: "no-extra-non-null-assertion"
+    text: "Avoid extra non-null assertions"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-implied-eval"
+    tag: "no-implied-eval"
+    text: "Prevent the use methods similar to eval()"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-inner-declarations"
+    tag: "no-inner-declarations"
+    text: "Avoid variable or function declaration in nested blocks"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-iterator"
+    tag: "no-iterator"
+    text: "Avoid the use of the __iterator__ property"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-loss-of-precision"
+    tag: "no-loss-of-precision"
+    text: "Avoid numbers that lose precision"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-namespace"
+    tag: "no-namespace"
+    text: "Avoid TypeScript namespaces"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-non-null-optional-chain"
+    tag: "no-non-null-optional-chain"
+    text: "Avoid non-null assertions after an optional chain"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-proto"
+    tag: "no-proto"
+    text: "Avoid the use of the __proto__ property"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-script-url"
+    tag: "no-script-url"
+    text: "Avoid using Javascript in URLs"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-unnecessary-type-constraint"
+    tag: "no-unnecessary-type-constraint"
+    text: "Avoid unnecessary constraints on generic types"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-unsafe-assignment"
+    tag: "no-unsafe-assignment"
+    text: "Avoid assigning a value with type any"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-unsafe-declaration-merging"
+    tag: "no-unsafe-declaration-merging"
+    text: "Avoid unsafe declaration merging"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-unsafe-negation"
+    tag: "no-unsafe-negation"
+    text: "Avoid negating the left operand of relational operators"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/no-var-requires"
+    tag: "no-var-requires"
+    text: "Avoid require statements"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/require-yield"
+    tag: "require-yield"
+    text: "Require yield in generator functions"
+  - link: "/continuous_integration/static_analysis/rules/typescript-best-practices/triple-slash-reference"
+    tag: "triple-slash-reference"
+    text: "Avoid triple slash in favor of ES6 import declarations"
+typescript_browser_security_data:
+  - link: "/continuous_integration/static_analysis/rules/typescript-browser-security/event-check-origin"
+    tag: "event-check-origin"
+    text: "Check origin of events"
+  - link: "/continuous_integration/static_analysis/rules/typescript-browser-security/inner-outer-html"
+    tag: "inner-outer-html"
+    text: "Do not modify innerHTML or outerHTML"
+  - link: "/continuous_integration/static_analysis/rules/typescript-browser-security/insecure-websocket"
+    tag: "insecure-websocket"
+    text: "Websockets must use SSL connections"
+  - link: "/continuous_integration/static_analysis/rules/typescript-browser-security/local-storage-sensitive-data"
+    tag: "local-storage-sensitive-data"
+    text: "Do not store sensitive data to local storage"
+  - link: "/continuous_integration/static_analysis/rules/typescript-browser-security/manual-sanitization"
+    tag: "manual-sanitization"
+    text: "Avoid manual sanitization of inputs"
+  - link: "/continuous_integration/static_analysis/rules/typescript-browser-security/postmessage-permissive-origin"
+    tag: "postmessage-permissive-origin"
+    text: "Specify origin in postMessage"
+  - link: "/continuous_integration/static_analysis/rules/typescript-browser-security/react-dangerously-inner-html"
+    tag: "react-dangerously-inner-html"
+    text: "Do not inject unsanitized HTML"
+  - link: "/continuous_integration/static_analysis/rules/typescript-browser-security/regexp-non-literal"
+    tag: "regexp-non-literal"
+    text: "Do not use variable for regular expressions"
+typescript_code_style_data:
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/array-type"
+    tag: "array-type"
+    text: "Require consistently using either T[] or Array<T> for arrays"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/assignment-name"
+    tag: "assignment-name"
+    text: "Assigment name should use camelCase"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/ban-ts-comment"
+    tag: "ban-ts-comment"
+    text: "Avoid @ts-<directive> comments"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/ban-tslint-comment"
+    tag: "ban-tslint-comment"
+    text: "Avoid using TSLint comments"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/class-name"
+    tag: "class-name"
+    text: "Class name should be PascalCase"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/eqeqeq"
+    tag: "eqeqeq"
+    text: "Enforce the use of === and !=="
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/func-name-matching"
+    tag: "func-name-matching"
+    text: "Function names must match the name of the assignation"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/func-names"
+    tag: "func-names"
+    text: "Enforce named function expressions"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/function-naming"
+    tag: "function-naming"
+    text: "Function name should use camelCase or PascalCase"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/max-class-lines"
+    tag: "max-class-lines"
+    text: "Classes must be less than 100 lines"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/max-function-lines"
+    tag: "max-function-lines"
+    text: "Functions must be less than 200 lines"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/max-params"
+    tag: "max-params"
+    text: "Enforce a maximum number of parameters in a function"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/method-name"
+    tag: "method-name"
+    text: "Method name should use camelCase"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-array-constructor"
+    tag: "no-array-constructor"
+    text: "Avoid Array constructors"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-confusing-non-null-assertion"
+    tag: "no-confusing-non-null-assertion"
+    text: "Avoid non-null assertion in confusing locations"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-div-regex"
+    tag: "no-div-regex"
+    text: "Avoid equal signs explicitly at the beginning of regex"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-duplicate-imports"
+    tag: "no-duplicate-imports"
+    text: "Avoid duplicate module imports"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-empty-interface"
+    tag: "no-empty-interface"
+    text: "Avoid the declaration of empty interfaces"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-floating-decimal"
+    tag: "no-floating-decimal"
+    text: "Avoid leading or trailing decimal points in numbers"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-inferrable-types"
+    tag: "no-inferrable-types"
+    text: "Avoid explicit type declarations for variables and params"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-lonely-if"
+    tag: "no-lonely-if"
+    text: "Avoid if statements as the only statement in else blocks"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-multi-assign"
+    tag: "no-multi-assign"
+    text: "Avoid the use of chained assignment expressions"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-new"
+    tag: "no-new"
+    text: "Avoid new operators outside of assignments or comparisons"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-new-func"
+    tag: "no-new-func"
+    text: "Avoid new operators with the Function object"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-new-object"
+    tag: "no-new-object"
+    text: "Avoid Object constructors"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-return-assign"
+    tag: "no-return-assign"
+    text: "Avoid assignment operators in return statements"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-self-compare"
+    tag: "no-self-compare"
+    text: "Avoid comparisons where both sides are exactly the same"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-useless-empty-export"
+    tag: "no-useless-empty-export"
+    text: "Avoid empty exports that don't change anything"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/no-var"
+    tag: "no-var"
+    text: "Require let or const instead of var"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/parameter-name"
+    tag: "parameter-name"
+    text: "Parameter name should use camelCase"
+  - link: "/continuous_integration/static_analysis/rules/typescript-code-style/radix"
+    tag: "radix"
+    text: "Consistent use of the radix argument using parseInt"
+typescript_common_security_data:
+  - link: "/continuous_integration/static_analysis/rules/typescript-common-security/axios-avoid-insecure-http"
+    tag: "axios-avoid-insecure-http"
+    text: "Avoid insecure HTTP requests with Axios"
+  - link: "/continuous_integration/static_analysis/rules/typescript-common-security/unique-function-arguments"
+    tag: "unique-function-arguments"
+    text: "Function argument names should be unique"
+  - link: "/continuous_integration/static_analysis/rules/typescript-common-security/xml-no-external-entities"
+    tag: "xml-no-external-entities"
+    text: "Do not use external XML entities"
+typescript_express_data:
+  - link: "/continuous_integration/static_analysis/rules/typescript-express/access-restriction"
+    tag: "access-restriction"
+    text: "Limit exposure to sensitive directories and files"
+  - link: "/continuous_integration/static_analysis/rules/typescript-express/default-session-config"
+    tag: "default-session-config"
+    text: "Enforce overriding default config"
+  - link: "/continuous_integration/static_analysis/rules/typescript-express/external-filename-upload"
+    tag: "external-filename-upload"
+    text: "Avoid using unsanitized user input with sendFile"
+  - link: "/continuous_integration/static_analysis/rules/typescript-express/external-resource"
+    tag: "external-resource"
+    text: "Avoid rendering resource based on unsanitized user input"
+  - link: "/continuous_integration/static_analysis/rules/typescript-express/hardcoded-secret"
+    tag: "hardcoded-secret"
+    text: "Avoid using a hard-coded secret"
+  - link: "/continuous_integration/static_analysis/rules/typescript-express/https-protocol-missing"
+    tag: "https-protocol-missing"
+    text: "Use `https` protocol over `http`"
+  - link: "/continuous_integration/static_analysis/rules/typescript-express/insecure-allow-origin"
+    tag: "insecure-allow-origin"
+    text: "Avoid using an insecure Access-Control-Allow-Origin header"
+  - link: "/continuous_integration/static_analysis/rules/typescript-express/insecure-cookie"
+    tag: "insecure-cookie"
+    text: "Avoid setting insecure cookie settings"
+  - link: "/continuous_integration/static_analysis/rules/typescript-express/jwt-not-revoked"
+    tag: "jwt-not-revoked"
+    text: "Ensure an isRevoked method is used for tokens"
+  - link: "/continuous_integration/static_analysis/rules/typescript-express/missing-helmet"
+    tag: "missing-helmet"
+    text: "Express application should use Helmet"
+  - link: "/continuous_integration/static_analysis/rules/typescript-express/path-traversal"
+    tag: "path-traversal"
+    text: "Avoid allowing access to unintended directories or files"
+  - link: "/continuous_integration/static_analysis/rules/typescript-express/reduce-server-fingerprinting"
+    tag: "reduce-server-fingerprinting"
+    text: "Server fingerprinting misconfiguration"
+  - link: "/continuous_integration/static_analysis/rules/typescript-express/xss-vulnerability"
+    tag: "xss-vulnerability"
+    text: "Avoid sending unsanitized user input in response"
+typescript_inclusive_data:
+  - link: "/continuous_integration/static_analysis/rules/typescript-inclusive/comments"
+    tag: "comments"
+    text: "Check comments for wording issues"
+  - link: "/continuous_integration/static_analysis/rules/typescript-inclusive/declarations"
+    tag: "declarations"
+    text: "Check declaration names for wording issues"
+  - link: "/continuous_integration/static_analysis/rules/typescript-inclusive/formal-parameters"
+    tag: "formal-parameters"
+    text: "Check parameter names for wording issues"
+  - link: "/continuous_integration/static_analysis/rules/typescript-inclusive/identifiers"
+    tag: "identifiers"
+    text: "Check identifier names for wording issues"
+typescript_node_security_data:
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/argon2"
+    tag: "argon2"
+    text: "Use strong security mechanisms with argon2"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/avoid-crypto-rc4"
+    tag: "avoid-crypto-rc4"
+    text: "Avoid RC4"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/avoid-crypto-sha1"
+    tag: "avoid-crypto-sha1"
+    text: "Avoid SHA1 security protocol"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/avoid-des"
+    tag: "avoid-des"
+    text: "Avoid DES and 3DES"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/chmod-permissions"
+    tag: "chmod-permissions"
+    text: "Do not give 777 permissions to a file"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/command-injection"
+    tag: "command-injection"
+    text: "Avoid command injection"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/crypto-avoid-weak-hash"
+    tag: "crypto-avoid-weak-hash"
+    text: "Avoid weak hash algorithm from CryptoJS"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/detect-buffer-noassert"
+    tag: "detect-buffer-noassert"
+    text: "Avoid calls to 'buffer' with 'noAssert' flag set"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/detect-child-process"
+    tag: "detect-child-process"
+    text: "Avoid instances of 'child_process' and non-literal 'exec()'"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/detect-eval-with-expression"
+    tag: "detect-eval-with-expression"
+    text: "Avoid `eval` with expressions"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/detect-new-buffer"
+    tag: "detect-new-buffer"
+    text: "Avoid Buffer(argument) with non-literal values"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/detect-non-literal-fs-filename"
+    tag: "detect-non-literal-fs-filename"
+    text: "Avoid variables in 'fs' calls filename argument"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/detect-non-literal-regexp"
+    tag: "detect-non-literal-regexp"
+    text: "Detects non-literal values in regular expressions"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/detect-non-literal-require"
+    tag: "detect-non-literal-require"
+    text: "Avoid require with non-literal values"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/detected-jwt-token"
+    tag: "detected-jwt-token"
+    text: "Detects hardcoded JWT tokens within the codebase"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/hardcoded-hmac-key"
+    tag: "hardcoded-hmac-key"
+    text: "Detects hardcoded HMAC keys"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/insecure-hash"
+    tag: "insecure-hash"
+    text: "Do not use weak hash functions"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/insecure-jwt-secret-usage"
+    tag: "insecure-jwt-secret-usage"
+    text: "Insecure Usage of a Static Secret in JWT Signing"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/jwt-hardcoded-secret"
+    tag: "jwt-hardcoded-secret"
+    text: "Do not use hardcoded secret with a JWT"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/jwt-sensitive-data"
+    tag: "jwt-sensitive-data"
+    text: "Do not put sensitive data in objects"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/jwt-weak-encryption"
+    tag: "jwt-weak-encryption"
+    text: "Use default encryption from the JWT library"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/log-sensitive-data"
+    tag: "log-sensitive-data"
+    text: "Avoid logging sensitive data"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/oauth2-hardcoded-secret"
+    tag: "oauth2-hardcoded-secret"
+    text: "Do not use hardcoded secret for OAuth2 providers"
+  - link: "/continuous_integration/static_analysis/rules/typescript-node-security/sql-injection"
+    tag: "sql-injection"
+    text: "Avoid SQL injection"
 further_reading:
   - link: "/continuous_integration/static_analysis/"
     tag: "Documentation"
@@ -466,7 +1232,7 @@ further_reading:
 
 {{% site-region region="us,us3,us5,eu,ap1" %}}
 <div class="alert alert-warning">
-  Static Analysis is in private beta. Python is the only supported language. To request access, <a href="/help">contact Support</a>.
+  Static Analysis is in private beta. Python, JavaScript, TypeScript, and Docker are the only supported languages. To request access, <a href="/help">contact Support</a>.
 </div>
 {{% /site-region %}}
 
@@ -478,15 +1244,101 @@ further_reading:
 
 Datadog Static Analysis provides out-of-the-box rules to help detect violations in your CI/CD pipelines in code reviews and identify bugs, security, and maintainability issues. For more information, see the [Static Analysis documentation][1].
 
-## Rules
+## Docker rules
 
 ### Follow best practices with using Docker
 
 **Ruleset ID:** `docker-best-practices`
 
+Best practices for using Docker.
+
 {{< sa-rule-list "docker_best_practices_data" >}}
 
 <br>
+
+## JavaScript rules
+
+### Follow best practices for writing JavaScript code
+
+**Ruleset ID:** `javascript-best-practices`
+
+Rules to enforce JavaScript best practices.
+
+{{< sa-rule-list "javascript_best_practices_data" >}}
+
+<br>
+
+### Security rules for JavaScript web applications
+
+**Ruleset ID:** `javascript-browser-security`
+
+Rules focused on finding security issues in your JavaScript web applications.
+
+{{< sa-rule-list "javascript_browser_security_data" >}}
+
+<br>
+
+### Enforce JavaScript code style
+
+**Ruleset ID:** `javascript-code-style`
+
+Rules to enforce JavaScript code style.
+
+{{< sa-rule-list "javascript_code_style_data" >}}
+
+<br>
+
+### Common security rules for JavaScript
+
+**Ruleset ID:** `javascript-common-security`
+
+Rules focused on finding security issues in your JavaScript code.
+
+{{< sa-rule-list "javascript_common_security_data" >}}
+
+<br>
+
+### Check for Express.js best practices and security
+
+**Ruleset ID:** `javascript-express`
+
+Rules specifically for Express.js best practices and security.
+
+{{< sa-rule-list "javascript_express_data" >}}
+
+<br>
+
+### Check JavaScript code for wording issues
+
+**Ruleset ID:** `javascript-inclusive`
+
+Rules for JavaScript to avoid inappropriate wording in the code and comments.
+
+{{< sa-rule-list "javascript_inclusive_data" >}}
+
+<br>
+
+### Identify potential security hotspots in Node
+
+**Ruleset ID:** `javascript-node-security`
+
+Rules to identify potential security hotspots in Node. This may include false positives that require further triage.
+
+{{< sa-rule-list "javascript_node_security_data" >}}
+
+<br>
+
+### React specific linting rules
+
+**Ruleset ID:** `jsx-react`
+
+This plugin exports a `recommended` configuration that enforces React good practices.
+
+{{< sa-rule-list "jsx_react_data" >}}
+
+<br>
+
+## Python rules
 
 ### Follow best practices for writing Python code
 
@@ -577,6 +1429,88 @@ Rules focused on finding security and vulnerability issues in your Python code, 
  - Unsafe deserialization
 
 {{< sa-rule-list "python_security_data" >}}
+
+<br>
+
+## TypeScript rules
+
+### TypeScript React code quality
+
+**Ruleset ID:** `tsx-react`
+
+This plugin exports a `recommended` configuration that enforces React good practices.
+
+{{< sa-rule-list "tsx_react_data" >}}
+
+<br>
+
+### Follow best practices for writing TypeScript code
+
+**Ruleset ID:** `typescript-best-practices`
+
+Rules to enforce TypeScript best practices.
+
+{{< sa-rule-list "typescript_best_practices_data" >}}
+
+<br>
+
+### Security rules for TypeScript web applications
+
+**Ruleset ID:** `typescript-browser-security`
+
+Rules focused on finding security issues in your TypeScript web applications.
+
+{{< sa-rule-list "typescript_browser_security_data" >}}
+
+<br>
+
+### TypeScript opinionated code patterns
+
+**Ruleset ID:** `typescript-code-style`
+
+Rules considered to be best practice for modern TypeScript codebases, but that do not impact program logic. These rules are generally opinionated about enforcing simpler code patterns.
+
+{{< sa-rule-list "typescript_code_style_data" >}}
+
+<br>
+
+### Common security rules for TypeScript
+
+**Ruleset ID:** `typescript-common-security`
+
+Rules focused on finding security issues in your TypeScript code.
+
+{{< sa-rule-list "typescript_common_security_data" >}}
+
+<br>
+
+### Check for Express.js TypeScript best practices and security
+
+**Ruleset ID:** `typescript-express`
+
+Rules specifically for Express.js TypeScript best practices and security.
+
+{{< sa-rule-list "typescript_express_data" >}}
+
+<br>
+
+### Check Python code for wording issues
+
+**Ruleset ID:** `typescript-inclusive`
+
+Rules for Python to avoid inappropriate wording in the code and comments.
+
+{{< sa-rule-list "typescript_inclusive_data" >}}
+
+<br>
+
+### Identify potential security hotspots in Node
+
+**Ruleset ID:** `typescript-node-security`
+
+Rules to identify potential security hotspots in Node. This may include false positives that require further triage.
+
+{{< sa-rule-list "typescript_node_security_data" >}}
 
 <br>
 

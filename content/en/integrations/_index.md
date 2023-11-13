@@ -15,7 +15,7 @@ cascade:
 - _target:
     path: /integrations/azure.md
   algolia:
-    rank: 60
+    rank: 80
     category: Documentation
     subcategory: Integrations
     tags: ['azure', 'microsoft azure']
@@ -29,10 +29,17 @@ cascade:
 - _target:
     path: /integrations/google_cloud_platform.md
   algolia:
-    rank: 60
+    rank: 80
     category: Documentation
     subcategory: Integrations
     tags: ['gcp', 'google cloud platform']
+- _target:
+    path: /integrations/amazon_web_services.md
+  algolia:
+    rank: 80
+    category: Documentation
+    subcategory: Integrations
+    tags: ['aws', 'amazon web services']
 - _target:
     path: /integrations/eks_fargate.md
   algolia:
@@ -66,12 +73,21 @@ cascade:
   aliases:
     - /integrations/wmi/
 - _target:
-    path: /integrations/*.md
-  algolia:
-    rank: 60
-    category: Documentation
-    subcategory: Integrations
-
+    path: /integrations/jfrog_platform_self_hosted.md
+  aliases:
+    - /integrations/jfrog_platform/
+- _target:
+    path: /integrations/komodor_license.md
+  aliases:
+    - /integrations/komodor_komodor/
+- _target:
+    path: /integrations/shoreline_license.md
+  aliases:
+    - /integrations/shoreline_software_license/
+- _target:
+    path: /integrations/stormforge_license.md
+  aliases:
+    - /integrations/stormforge_stormforge_license/
 ---
 
 More than {{< translate key="integration_count" >}} built-in integrations. See across all your systems, apps, and services.

@@ -32,6 +32,8 @@ APM tracer integrations support a *Propagation Mode*, which controls the amount 
 - `service` mode sends the service name, allowing you to understand which services are the contributors to database load. This is the only supported mode for SQL Server applications.
 - `none` mode disables propagation and does not send any information from applications.
 
+SQL Server does not support `full` propagation mode due to statement caching behavior which could cause performance issues when including full trace context.
+
 | DD_DBM_PROPAGATION_MODE  | Postgres  |   MySQL   |  SQL Server  |
 |:-------------------------|:---------:|:---------:|:------------:|
 | `full`                   | {{< X >}} | {{< X >}} |          |
@@ -287,8 +289,6 @@ Enable the database monitoring propagation feature by setting the following envi
    - For Postgres and MySQL: `DD_DBM_PROPAGATION_MODE=full`
    - For SQL Server: `DD_DBM_PROPAGATION_MODE=service`
 
-SQL Server does not support full propagation mode due to the inability for the server to cache statements which contain full trace context.
-
 [1]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [2]: /tracing/trace_collection/dd_libraries/dotnet-core
 
@@ -389,11 +389,11 @@ When viewing a Query Sample in Database Monitoring, if the associated trace has 
 
 {{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="Visualize the downstream database hosts that your APM Services depend on from the Service Page.">}}
 
-On the APM Service Page, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors.
+On the APM page for a given service, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors. To view a service's page, click on the service in the [Service Catalog][26] to open a details panel, then click **View Service Page** in the panel.
 
 ### Identify potential optimizations using explain plans for database queries in traces
 
-{{< img src="database_monitoring/explain_plans_in_traces.png" alt="Identify inefficiencies using explain plans for database queries within traces.">}}
+{{< img src="database_monitoring/explain_plans_in_traces_update.png" alt="Identify inefficiencies using explain plans for database queries within traces.">}}
 
 View historical performance of similar queries to those executed in your trace, including sampled wait events, average latency, and recently captured explain plans, to contextualize how a query is expected to perform. Determine if the behavior is abnormal and continue the investigation by pivoting to Database Monitoring for additional context about the underlying database hosts.
 
@@ -426,3 +426,4 @@ View historical performance of similar queries to those executed in your trace, 
 [23]: https://github.com/DataDog/dd-trace-java
 [24]: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview
 [25]: https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set
+[26]: https://app.datadoghq.com/services

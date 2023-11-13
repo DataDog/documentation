@@ -1,7 +1,10 @@
 ---
-title: Setting up Service Catalog
+title: Adding Entries to Service Catalog
 kind: documentation
 further_reading:
+- link: "/tracing/service_catalog/adding_metadata"
+  tag: "Documentation"
+  text: "Adding metadata"
 - link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
   tag: "Terraform"
   text: "Create and manage service definitions with Terraform"
@@ -18,85 +21,45 @@ further_reading:
 
 ## Overview
 
-Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries. You can add service metadata to these entries through the Datadog UI, [API][1], or use automated pipelines through the [GitHub integration][11] or [Terraform][2].
+Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries. If you are not, there are many other ways to add services to your Service Catalog.
 
-## Add service definition metadata
+{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Opt in to the private beta!" >}}
+Datadog automatically discovers the dependencies of instrumented services, including databases or third-party APIs, even if the dependency hasn't been instrumented. The Service Catalog lists these as separate entries. To differentiate auto-detected components from instrumented services, you can request access to the private beta for inferred services.
+{{< /callout >}}
 
-If your service is listed in Service Catalog and already has metadata associated with it, the original source is listed in the **Metadata Source** column on the **Ownership** view. Return to that source to make any updates you need to make.
+## Create user-defined services
 
-If the service has not been assigned any service definition metadata, or if the service isn't listed in the Service Catalog yet, you can add it:
+You can add services to Service Catalog that are not associated with any Datadog telemetry. To create such an entry, name your service in the `dd-service` field in a `service.datadog.yaml` file at the root of the repository, using one of the supported metadata schema versions. For example: 
 
-1. On the [Service Catalog][10] page, click **Setup & Config**. The **Manage Entries** tabs shows you how many services are without metadata.
+#### Example
+{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+schema-version: v2.1
+dd-service: my-unmonitored-cron-job
+team: shopist
+contacts:
+ - type: slack
+   contact: https://datadogincidents.slack.com/archives/XXXXX
+application: shopist
+description: important cron job for shopist backend
+tier: tier1
+lifecycle: production
+links:
+ - name: Common Operations
+   type: runbook
+   url: https://datadoghq.atlassian.net/wiki/
+ - name: Disabling Deployments
+   type: runbook
+   url: https://datadoghq.atlassian.net/wiki/
+tags: []
+integrations:
+ pagerduty:
+   service-url: https://datadog.pagerduty.com/service-directory/XXXXXXX
+External Resources (Optional)
+{{< /code-block >}}
 
-2. Click **Create New Entry**.
+You can register multiple services in one YAML file by separating each definition with three dashes (`---`).
 
-3. Specify which service you are adding metadata to. This can be the name of a service already listed in the Service Catalog that doesn't have service definition metadata defined for it yet, or it can be the name of a service not sending any data.
-
-4. Enter details for Team, On-call, Contacts, Documentation, Code repo, and Other links.
-
-4. Switch to the **Code** view to see the JSON and cURL generated for the metadata you've entered. You can copy this code as a jumping off point for programmatically providing service definitions by API, Terraform, or GitHub, without having to learn the schema for service definitions.
-
-5. If you have the [Service Catalog Write][13] permission, you can submit the metadata by clicking **Save Entry**, or by running the cURL command provided on the **Code** view.
-
-## Store and edit service definitions in GitHub
-
-Configure the [GitHub integration][6] to directly link from where you view the service's definition in the Service Catalog to where it's stored and editable in GitHub.
-
-To install the GitHub integration, navigate to the [integration tile][7] and click **Link GitHub Account** in the **Repo Configuration** tab. 
-
-### Service definition YAML files
-
-Datadog scans for the `service.datadog.yaml` file at the root of each repository with read permissions. You can register multiple services in one YAML file by creating multiple YAML documents. Separate each document with three dashes (`---`).
-
-### Modify service definition
-
-When the GitHub integration is set up for your service definitions, an **Edit in Github** button appears in the service's **Definition** tab and links you to GitHub to commit changes.
-
-{{< img src="tracing/service_catalog/svc_cat_contextual_link.png" alt="An Edit in Github button appears in the Definition tab of a service in the Service Catalog" style="width:90%;" >}}
-
-After you update the YAML files for your repositories, your changes propagate to the Service Catalog. 
-
-To prevent accidental overwriting, create and modify your service definition files with either the GitHub integration or the [Service Definition API endpoints][1]. Updating the same service using both the GitHub and the API may result in unintended overwriting.  
-
-## Automate service definition updates with Terraform
-
-The Service Catalog provides a service definition as a [Terraform resource][14]. Creating and managing services in the Service Catalog through automated pipelines requires [Datadog Provider][8] v3.16.0 or later.
-
-For more information, see the [Datadog Provider documentation][9].
-
-## Open-Source Metadata Provider
-
-As an alternative to the GitHub integration and Terraform, you can use an open-sourced GitHub Action solution named [Datadog Service Catalog Metadata Provider][12]. 
-
-This GitHub Action allows you to register your services with the Service Catalog using a GitHub Action, with full control over when this information is sent to Datadog, and implement other compliance checks unique to your organization.
-
-
-## Import data from Backstage 
-
-{{< img src="/tracing/service_catalog/service-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}
-
-If you already have data or services registered in Backstage, you can import these services into Datadog directly. 
-
-If you use API or Terraform, replace the YAMLs in your requests. 
-
-If you use GitHub integration, directly save your Backstage YAMLs to a repo with Datadog read permission. Datadog scans for files named [`catalog-info.yaml`][15] located at the root folder of a repo.
-
-Upon import, the following occurs:
-- Datadog only recognizes `kind:component` in Backstage YAMLs as services
-- `name` gets converted to `DD-SERVICE`
-- `namespace` values get mapped to custom tags
-- `lifecycle` gets mapped to `lifecycle`
-- `owner` gets mapped to `team`
-- `metadata.links` gets mapped to `links`
-- `metadata.description` gets mapped to `description`
-- Other `specs` values get mapped to custom tags
-
-## Import data from ServiceNow
-
-You can populate your Datadog Service Catalog with services from your ServiceNow CMDB by using the Service Ingestion feature in the [Datadog-ServiceNow integration][16].
-
-
-## Discover services being reported in other Datadog telemetry data
+## Discover additional services
 
 To discover other services through existing Datadog telemetry such as infrastructure metrics, navigate to the [**Setup & Config** tab][3] on the top of the page and click on the **Import Entries** tab. You can import services from other Datadog telemetry containing the `DD_SERVICE` [tag][5].
 
@@ -108,6 +71,35 @@ To remove your imported services from the default **Explore** view, click **Clea
 
 {{< img src="tracing/service_catalog/clear_imported_services.png" alt="Confirm the deletion of previously imported services in the Service Catalog setup and configuration section" style="width:90%;" >}}
 
+## Import data from other sources
+
+### Backstage 
+
+{{< img src="/tracing/service_catalog/service-catalog-backstage-import.png" alt="Service panel highlighting backstage metadata, links and definition" style="width:90%;" >}}
+
+If you already have data or services registered in Backstage, you can import these services into Datadog directly. 
+
+If you use API or Terraform, replace the YAMLs in your requests. 
+
+If you use GitHub integration, directly save your Backstage YAMLs to a repo with Datadog read permission. Datadog scans for files named [`catalog-info.yaml`][15] located at the root folder of a repo.
+
+Upon import, the following occurs:
+- Datadog only recognizes `kind:component` in Backstage YAMLs as services
+- `metadata.name` gets mapped to `dd-service`
+- `metadata.namespace` gets mapped to a custom tag with the format `namespace:${metadata.namespace}`
+- `spec.lifecycle` gets mapped to `lifecycle`
+- `spec.owner` gets mapped to `team`
+- `metadata.links` gets mapped to `links`
+  - The annotation `github.com/project-slug` maps to a link with `type=repo` and `url=https://www.github.com/${github.com/project-slug}`
+- `metadata.description` gets mapped to `description`
+- `spec.system` gets mapped to `application`
+- Other `spec` values get mapped to custom tags
+
+### ServiceNow
+
+You can populate your Datadog Service Catalog with services from your ServiceNow CMDB by using the Service Ingestion feature in the [Datadog-ServiceNow integration][16].
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -118,13 +110,5 @@ To remove your imported services from the default **Explore** view, click **Clea
 [4]: https://github.com/DataDog/schema/blob/main/service-catalog/v2/schema.json
 [5]: /getting_started/tagging/unified_service_tagging
 [6]: /integrations/github/
-[7]: https://app.datadoghq.com/integrations/github
-[8]: https://registry.terraform.io/providers/DataDog/datadog/latest/
-[9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
-[10]: https://app.datadoghq.com/services
-[11]: https://docs.datadoghq.com/tracing/service_catalog/setup#store-and-edit-service-definitions-in-github
-[12]: https://github.com/marketplace/actions/datadog-service-catalog-metadata-provider
-[13]: https://app.datadoghq.com/personal-settings/profile
-[14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml
 [15]: https://backstage.io/docs/features/software-catalog/descriptor-format/
 [16]: https://docs.datadoghq.com/integrations/servicenow/#service-ingestion

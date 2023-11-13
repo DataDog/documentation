@@ -17,6 +17,10 @@ further_reading:
   text: "Enable Application Security Management"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
 Datadog Application Security Management (ASM) provides observability into application-level attacks that aim to exploit code-level vulnerabilities or abuse the business logic of your application, and into any bad actors targeting your systems.

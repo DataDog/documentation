@@ -22,8 +22,8 @@ content/en/api/tsconfig.json
 # Ignoring all automated content
 temp
 
-# Developers/apps
-content/en/developers/datadog_apps.md
+# Developers/ui_extensions
+content/en/developers/ui_extensions.md
 
 # Agent section
 content/en/agent/basic_agent_usage/ansible.md
@@ -51,7 +51,6 @@ content/en/integrations/guide/amazon_cloudformation.md
 !content/en/integrations/_index.md
 !content/en/integrations/cloudcheckr.md
 !content/en/integrations/kubernetes.md
-!content/en/integrations/kubernetes_state_core.md
 !content/en/integrations/rss.md
 !content/en/integrations/system.md
 !content/en/integrations/tcp_rtt.md

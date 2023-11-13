@@ -31,7 +31,7 @@ title: API ソース属性
 | Amazon Auto Scaling           | amazon auto scaling           | autoscaling                |
 | Bigpanda                      | bigpanda                      | bigpanda                   |
 | Amazon App Runner             | amazon app runner             | awsapprunner               |
-| Amazon Backup                 | amazon backup                 | awsbackup                  |
+| AWS Backup                    | amazon backup                 | awsbackup                  |
 | Amazon Billing                | amazon billing                | billing                    |
 | Amazon Certificate Manager    | amazon certificate manager    | awscertificatemanager      |
 | Amazon Cloudfront             | amazon cloudfront             | cloudfront                 |
@@ -56,7 +56,7 @@ title: API ソース属性
 | Amazon Ecs                    | amazon ecs                    | ecs                        |
 | Amazon Efs                    | amazon efs                    | efs                        |
 | Amazon Elasticache            | amazon elasticache            | elasticache                |
-| Amazon Elasticbeanstalk       | amazon elasticbeanstalk       | elasticbeanstalk           |
+| AWS Elastic Beanstalk         | amazon elasticbeanstalk       | elasticbeanstalk           |
 | Amazon Elastic Transcoder     | amazon elastic transcoder     | elastictranscoder          |
 | Amazon Mediaconnect           | amazon mediaconnect           | mediaconnect               |
 | Amazon Mediaconvert           | amazon mediaconvert           | mediaconvert               |
@@ -79,7 +79,7 @@ title: API ソース属性
 | Amazon Kinesis Data Analytics | amazon kinesis data analytics | kinesisanalytics           |
 | Amazon Kinesis                | amazon kinesis                | kinesis                    |
 | Amazon Kms                    | amazon kms                    | kms                        |
-| Amazon Lambda                 | amazon lambda                 | lambda                     |
+| AWS Lambda                    | amazon lambda                 | lambda                     |
 | Amazon Lex                    | amazon lex                    | awslex                     |
 | Amazon App Mesh               | amazon app mesh               | amazonappmesh              |
 | Amazon Machine Learning       | amazon machine learning       | machinelearning            |

@@ -25,7 +25,7 @@ The Java Tracer supports automatic instrumentation for the following Oracle JDK 
 
 | Java versions | Operating Systems                                                               | Support level                       | Tracer version |
 | -------------| ------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
-| 18 to 19     | Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64) | [Beta](#levels-of-support)               | Latest         |
+| 18 to 21     | Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64) | [Beta](#levels-of-support)               | Latest         |
 | 8 to 17      | Linux (arm64)<br>Mac (arm64)                                                    | [Beta](#levels-of-support)               | Latest         |
 | 7            | Linux (arm64)<br>Mac (arm64)                                                    | [End-of-life](#levels-of-support)         | v0             |
 | 8 to 17      | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [GA](#levels-of-support)                   | Latest         |
@@ -81,7 +81,7 @@ Beta integrations are disabled by default but can be enabled individually:
 | Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |
 | Tomcat                  | 5.5+       | Fully Supported | `tomcat`                                       |
-| Vert.x                  | 3.4-3.9.x  | Fully Supported | `vertx`, `vertx-3.4`                           |
+| Vert.x                  | 3.4+       | Fully Supported | `vertx`, `vertx-3.4`, `vertx-3.9`, `vertx-4.0`  |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss.
 Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
@@ -127,7 +127,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | HttpURLConnection        | all         | Fully Supported | `httpurlconnection`, `urlconnection`           |
 | Kafka-Clients            | 0.11+       | Fully Supported | `kafka`                                        |
 | Kafka-Streams            | 0.11+       | Fully Supported | `kafka`, `kafka-streams`                       |
-| Java RMI                 | all         | Fully Supported | `rmi`, `rmi-client`, `rmi-server`              |
+| Java RMI                 | all         | Distributed Tracing Not Supported | `rmi`, `rmi-client`, `rmi-server`              |
 | Jax RS Clients           | 2.0+        | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | Jersey Client            | 1.9-2.29    | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | JMS                      | 1 and 2     | Fully Supported | `jms`, `jms-1`, `jms-2`                        |
@@ -173,9 +173,9 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | RediScala | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                     |
 | Redisson | 2.x-3.x      | Fully Supported | `redisson`, `redis`                                                                     |
 | SpyMemcached            | 2.12+    | Fully Supported | `spymemcached`                                                                           |
-| Vert.x Cassandra Client | 3.9		 | Fully Supported | `cassandra`																			  |
+| Vert.x Cassandra Client | 3.9+		 | Fully Supported | `cassandra`																			  |
 | Vert.x Redis Client     | 3.9      | Fully Supported | `vertx-redis-client`                                                                     |
-| Vert.x MySQL Client     | 3.9      | Fully Supported | `vertx-sql-client`																		  |
+| Vert.x MySQL Client     | 3.9+      | Fully Supported | `vertx-sql-client`																		  |
 
 `dd-java-agent` is also compatible with common JDBC drivers including:
 

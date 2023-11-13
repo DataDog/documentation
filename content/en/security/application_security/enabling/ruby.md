@@ -22,11 +22,12 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-You can monitor application security for Ruby apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+You can monitor application security for Ruby apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
 
-## Get started
+## Enabling threat detection
+### Get started
 
 1. **Update your Gemfile to include the Datadog library**:
 
@@ -181,7 +182,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{% tab "Amazon ECS" %}}
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 
