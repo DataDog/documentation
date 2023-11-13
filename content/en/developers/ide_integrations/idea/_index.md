@@ -10,7 +10,7 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about Source Code Integration."
-- link: "https://docs.datadoghq.com/continuous_integration/static_analysis/?tab=githubactions"
+- link: "/continuous_integration/static_analysis/?tab=githubactions"
   tag: "Documentation"
   text: "Learn about Static Analysis."
 - link: "https://www.jetbrains.com/lp/toolbox/"
