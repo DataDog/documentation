@@ -1,5 +1,5 @@
 ---
-title: Network Topology Map
+title: Network Device Topology Map
 kind: documentation
 is_beta: true
 further_reading:
@@ -15,13 +15,13 @@ further_reading:
 <div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">The Network Topology Map for Datadog Network Device Monitoring is in public beta.</div>
+<div class="alert alert-warning">The Network Device Topology Map for Datadog Network Device Monitoring is in public beta.</div>
 
 ## Overview
 
-The [Network Topology Map][2] provides an overview of your network's physical connections, so you can more easily identify issues in your devices and understand their upstream and downstream impacts.
+The [Network Device Topology Map][2] provides an overview of your network's physical connections, so you can more easily identify issues in your devices and understand their upstream and downstream impacts.
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_search.mp4" alt="The network topology map, with vendor:cisco added to the search bar, and then the Filter nodes box filtered by nyc. A node is selected and the inspect option chosen, showing its connected nodes. One of the connected nodes is then selected, and the inspect option is selected again, displaying additional connected nodes" video="true" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_search.mp4" alt="The network device topology map, with vendor:cisco added to the search bar, and then the Filter nodes box filtered by nyc. A node is selected and the inspect option chosen, showing its connected nodes. One of the connected nodes is then selected, and the inspect option is selected again, displaying additional connected nodes" video="true" >}}
 
 ## Setup
 
@@ -37,7 +37,7 @@ The Datadog Agent version 7.46 and later automatically collects topology data. N
 
 In addition to providing an overview of your network's physical connections, you can investigate individual devices to understand their connections, flows, and overall status. Hovering over a device displays its overall status and key metrics. You can also click on a device to see the following options:
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_detail_menu.png" alt="The network topology map with a device selected, displaying information about the device as well as the options to Inspect, View device details, and view flow details" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_detail_menu.png" alt="The network device topology map with a device selected, displaying information about the device as well as the options to Inspect, View device details, and view flow details" style="width:80%;" >}}
 
 ### Inspect
 
