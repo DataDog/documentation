@@ -1,5 +1,5 @@
 ---
-title: Run API and Multistep API Tests On An Application That Requires Authentication
+title: Use Authentication In API And Multistep API Tests
 kind: guide
 description: Learn how to ensure your Synthetic API and multistep API tests can log in to your applications. 
 further_reading:
