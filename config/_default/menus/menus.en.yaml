@@ -4512,6 +4512,10 @@ main:
     parent: account_management
     identifier: account_management_scim
     weight: 5
+  - name: Okta
+    url: account_management/scim/okta
+    parent: account_management_scim
+    weight: 501
   - name: Azure
     url: account_management/scim/azure
     parent: account_management_scim
