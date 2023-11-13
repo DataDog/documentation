@@ -10335,6 +10335,15 @@ components:
       properties:
         aggregations:
           $ref: '#/components/schemas/MetricCustomAggregations'
+        exclude_tags_mode:
+          description: 'When set to true, the configuration will exclude the configured
+            tags and include any other submitted tags.
+
+            When set to false, the configuration will include the configured tags
+            and exclude any other submitted tags.
+
+            Defaults to false. Requires `tags` property.'
+          type: boolean
         include_percentiles:
           description: 'Toggle to include/exclude percentiles for a distribution metric.
 
@@ -25706,7 +25715,11 @@ paths:
       description: 'Update the tag configuration of a metric or percentile aggregations
         of a distribution metric or custom aggregations
 
-        of a count, rate, or gauge metric.
+        of a count, rate, or gauge metric. By setting `exclude_tags_mode` to true
+        the behavior is changed
+
+        from an allow-list to a deny-list, and tags in the defined list will not be
+        queryable.
 
         Can only be used with application keys from users with the `Manage Tags for
         Metrics` permission.'

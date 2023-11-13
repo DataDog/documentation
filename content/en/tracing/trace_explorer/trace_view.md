@@ -19,6 +19,8 @@ further_reading:
 - link: "/tracing/trace_explorer/trace_view/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
+algolia:
+  tags: ['trace view']
 ---
 
 View an individual [trace][1] to see all of its [spans][2] and associated metadata. Each trace can be viewed either as a flame graph or as a list (grouped by [service][3] or host).
