@@ -224,7 +224,20 @@ algolia_sync_preview:manual:
   allow_failure: true
   interruptible: true
   timeout: 2h
+  cache:
+    - *hugo_cache
+    - *yarn_cache
+    - *pip_cache
+  dependencies:
+    - build_preview
   script:
+    # build the site to get algolia.json ondemand
+    - touch Makefile.config preview_error.log
+    - make dependencies
+    - make config
+    - yarn run prebuild
+    - build_site
+    # end build
     - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v0.3.29.tgz
     - >
       ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id')

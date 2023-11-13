@@ -141,3 +141,5 @@ outputFormats:
 
 timeout: "90s"
 
+minify:
+  disableSVG: true
