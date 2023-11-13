@@ -3,6 +3,9 @@ title: Custom Time Frames
 kind: guide
 ---
 
+## Overview
+<div class="alert alert-info">Queries are run in UTC time, but the query time range is selected according to your <strong>browser</strong>. Toggle between displaying the default time zone or UTC from the dashboard configure action. For more information, see the <a href="/dashboards/#display-utc-time">Dashboard Settings documentation</a>.</div>
+
 Many views in Datadog can be scoped to a specific time frame. Time controls include a list of common time frames and a calendar picker for quick selection.
 
 To increment by month, day, year, hour, or minute, highlight a portion of the time frame and use the `[↑]` and `[↓]` keys:
@@ -13,17 +16,11 @@ You can also type or paste custom dates and timestamps—including ones copied f
 
 {{< img src="dashboards/guide/custom_time_frames/copy_and_paste.mp4" alt="Copy and paste time frame" video="true" >}}
 
-Both fixed and relative custom time frames are supported:
-
-{{< img src="dashboards/guide/custom_time_frames/custom_fixed_time_frame.mp4" alt="Type custom fixed time frame" video="true" width="500" >}}
-
-{{< img src="dashboards/guide/custom_time_frames/custom_relative_time_frame.mp4" alt="Type custom relative time frame" video="true" width="500" >}}
-
-**Note**: Queries are run in UTC time, but the query time range is selected according to your browser. Toggle between displaying the default time zone or UTC from the dashboard configure action. For more information, see the [Dashboard Settings][1] documentation.
-
 ## Supported syntaxes
 
 ### Fixed dates
+
+{{< img src="dashboards/guide/custom_time_frames/custom_fixed_time_frame.mp4" alt="Type custom fixed time frame" video="true" width="500" >}}
 
 | Format                       | Examples                                         |
 |------------------------------|--------------------------------------------------|
@@ -38,22 +35,26 @@ Both fixed and relative custom time frames are supported:
 | Unix seconds timestamp       | 1577883600                                       |
 | Unix milliseconds timestamp  | 1577883600000                                    |
 
-Any fixed date can be entered as part of a range. Examples:
+Any fixed date can be entered as part of a range. For example:
   * `1577883600 - 1578009540`
   * `Jan 1 - Jan 2`
   * `6:00 am - 1:00 pm`
 
 ### Relative dates
 
-| Format         | Examples                                                                         | Notes                                                     |
-|----------------|----------------------------------------------------------------------------------|-----------------------------------------------------------|
-| `N{unit}`      | 3m<br>3 min<br>3h<br>3 hours<br>3d<br>3 days<br>3w<br>3 weeks<br>3mo<br>3 months | Displays the past N units, for example: the past 3 months |
-| `today`        | Nov 9, 12:00 am - Nov 9, 3:15 pm                                                 | Displays the current calendar day until present           |
-| `yesterday`    | Nov 8, 12:00 am - Nov 9, 12:00 am                                                | Displays the full previous calendar day                   |
-| `this month`   |                                                                                  | Displays the current calendar month until present         |
-| `last month`   |                                                                                  | Displays the full previous calendar month                 |
-| `this year`    |                                                                                  | Displays the current calendar year until present          |
-| `last year`    |                                                                                  | Displays the full previous calendar year                  |
+Relative dates **do not** update as time passes, they are calculated when entered.
+
+{{< img src="dashboards/guide/custom_time_frames/custom_relative_time_frame.mp4" alt="Type custom relative time frame" video="true" width="500" >}}
+
+| Format         | Notes                                                                            |
+|----------------|----------------------------------------------------------------------------------|
+| `N{unit}`<br> See the list of accepted units below      | Displays the past N units. For example, **3 mo** (the past 3 months)             |
+| `today`        | Displays the current calendar day until present                                 |
+| `yesterday`    | Displays the full previous calendar day                                         |
+| `this month`   | Displays the current calendar month until present                                |
+| `last month`   | Displays the full previous calendar month                                        |
+| `this year`    | Displays the current calendar year until present                                 |
+| `last year`    | Displays the full previous calendar year                                         |
 
 The following strings are accepted for any `{unit}` in a relative date:
   * Minutes: `m`, `min`, `mins`, `minute`, `minutes`
@@ -62,16 +63,14 @@ The following strings are accepted for any `{unit}` in a relative date:
   * Weeks: `w`, `week`, `weeks`
   * Months: `mo`, `mos`, `mon`, `mons`, `month`, `months`
 
-**Note**: The following timeframes do not update as time passes, they are calculated when entered: `today`, `yesterday`, `this month`, `this year`, and `last year`. 
-
 ### Calendar aligned dates
+
+Calendar aligned dates update to reflect the current present day. For example, if you select `week to date` on November 2, on November 9, it displays data from November 1 - November 9.
 
 | Format         | Examples                                                                         | Notes                                                     |
 |----------------|----------------------------------------------------------------------------------|-----------------------------------------------------------|
 | `week to date` |  Nov 6, 12:00 am - Nov 8, 4:52 pm                                                | Displays the week from 12AM Monday until present          |
 | `month to date`|  Nov 1, 12:00 am - Nov 8, 4:55 pm                                                | Displays the 1st of the month until present               |
-
-Calendar aligned dates update to reflect the current present day.
 
 ## URLs
 
@@ -86,5 +85,3 @@ https://app.datadoghq.com/dash/host/<DASHBOARD_ID>?from_ts=<QUERY_START>&to_ts=<
 * The `from_ts` parameter is the Unix milliseconds timestamp of the query starting time. For example, `1683518770980`.
 * The `to_ts` parameter is the Unix milliseconds timestamp of the query ending time. For example, `1683605233205`.
 * `live=true` indicates that relative time specifications are retained when a query is saved or shared. You can also use `live=false`.
-
-[1]: /dashboards/#display-utc-time
