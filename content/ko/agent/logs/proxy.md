@@ -225,7 +225,7 @@ HAProxy 설정이 완료되면 다시 로드하거나 HAProxy를 다시 시작�
 {{% tab "NGINX" %}}
 ### 로그에 대한 TCP 프록시로 NGINX 사용
 
-#### 에이전트 설정
+#### Agent 설정
 
 `datadog.yaml` Agent 설정 파일을 편집하고 `logs_config.logs_dd_url`을 설정하여 Datadog과 직접 연결을 설정하는 대신 새로 생성된 프록시를 사용하도록 합니다.
 
