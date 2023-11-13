@@ -4,7 +4,7 @@ kind: documentation
 aliases:
     - /tracing/dynamic_instrumentation/
     - /dynamic_instrumentation/how-it-works/
-is_beta: true
+is_beta: false
 private: false
 further_reading:
 - link: "/dynamic_instrumentation/expression-language/"
@@ -35,10 +35,6 @@ further_reading:
 ## Overview
 
 Dynamic instrumentation allows you to add instrumentation into your running production systems without any restarts and at any location in your application's code, including third-party libraries. You can add or modify telemetry for logs, metrics, spans, and corresponding tagging, from the Datadog UI. Dynamic Instrumentation has low overhead and has no side effects on your system.
-
-{{< callout url="#" btn_hidden="true" >}}
-  Dynamic Instrumentation is in beta!
-{{< /callout >}} 
 
 ## Getting started
 
@@ -112,7 +108,7 @@ A *log probe* emits a log when it executes.
 
 Log probes are enabled by default on all service instances that match the specified environment and version. They are rate-limited to execute at most 5000 times per second, on each instance of your service.
 
-If you enable **Capture method parameters and local variables** on the log probe, the following debugging data is captured and added to the log event:
+If you enable **Capture method parameters and local variables** (still in Beta) on the log probe, the following debugging data is captured and added to the log event:
   - **Method arguments**, **local variables**, and **fields**, with the following default limits:
     - Follow references three levels deep (configurable in the UI).
     - The first 100 items inside collections.
@@ -127,8 +123,9 @@ You must set a log message template on every log probe. The template supports em
 
 You can also set a condition on a log probe using the [expression language][15]. The expression must evaluate to a Boolean. The probe executes if the expression is true, and does not capture or emit any data if the expression is false.
 
-<div class="alert alert-warning"><p><strong>Warning: The captured data may contain sensitive information, including personal data, passwords, and secrets such as AWS keys.</strong></p><p>To prevent this information from being sent to Datadog, do one of the following options:<ul><li>
-Configure <a href="/sensitive_data_scanner/">Sensitive Data Scanner</a> to detect and filter out the sensitive data based on regex patterns.</li><li>Turn off the <code>Capture method parameters and local variables</code> option and explicitly select the variables you want to include in the log message template. Doing so ensures that log probes contain only data related to the variables that you specifically identify.</li></ul></p><p>Alternatively, if you need to log this data but want to mitigate the risk associated with it being accessible in the Datadog product, you can limit which users in your organization can view the captured data by setting up a <a href="/logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs">Restriction query</a> on <code>source:dd_debugger</code>.</p></div>
+<div class="alert alert-warning"><p><strong>Warning: The captured data may contain sensitive information, including personal data, passwords, and secrets such as AWS keys.</strong></p><p>To prevent this information from being sent to Datadog:<ul><li>
+We have build in a automatic mechanism to scrub data from variable names that contain sensitve information, like 'password', 'key' etc - review our default configuration. You can also extend the configuration matching your particular use case by following these <a href="TODO">Instructions</a>.</li>
+<li>Secondly you Configure <a href="/sensitive_data_scanner/">Sensitive Data Scanner</a> to detect and filter out the sensitive data based on regex patterns.</li><li>Turn off the <code>Capture method parameters and local variables</code> option and explicitly select the variables you want to include in the log message template. Doing so ensures that log probes contain only data related to the variables that you specifically identify.</li></ul></p><p>Alternatively, if you need to log this data but want to mitigate the risk associated with it being accessible in the Datadog product, you can limit which users in your organization can view the captured data by setting up a <a href="/logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs">Restriction query</a> on <code>source:dd_debugger</code>.</p></div>
 
 
 To create a log probe:
