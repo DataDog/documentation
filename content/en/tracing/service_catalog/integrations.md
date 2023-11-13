@@ -19,7 +19,7 @@ When you configure a service account for a [Datadog integration][10], you can in
 
 ## PagerDuty integration
 
-You can add PagerDuty metadata to a service so that the Service Catalog displays and links to information such as who is on-call and whether there are active PagerDuty incidents for the service. Only one on-call can be shown at a time, so the PagerDuty integration will pick the first user returned when sorting by escalation level, then email alphabetically.  
+You can add PagerDuty metadata to a service so that the Service Catalog displays and links to information such as who is on-call and whether there are active PagerDuty incidents for the service. Because only one on-call can be displayed, Datadog selects the first user by escalation level, then alphabetically by email.
 
 ### Setup
 
