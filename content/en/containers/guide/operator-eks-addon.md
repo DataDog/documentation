@@ -79,7 +79,7 @@ Follow the instructions to set up the Datadog Agent by using the `DatadogAgent` 
      name: datadog
    spec:
      global:
-       # required in case Agent can not resolve cluster name through IMDS, see the note below.
+       # Required in case the Agent cannot resolve the cluster name through IMDS. See the note below.
        clusterName: <CLUSTER_NAME>
        registry: 709825985650.dkr.ecr.us-east-1.amazonaws.com/datadog
        credentials:
