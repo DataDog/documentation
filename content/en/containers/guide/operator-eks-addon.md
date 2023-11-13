@@ -122,7 +122,7 @@ Confirm all Agent resources are deleted and proceed with add-on uninstallation:
 
 * Go to the EKS cluster in the AWS console.
 * Go to the add-on tab and select the *Datadog Operator* add-on.
-* Click Remove and the confirmation prompt.
+* Click **Remove** and confirm when prompted.
 
 {{% /tab %}}
 {{% tab "CLI" %}}
