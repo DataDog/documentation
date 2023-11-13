@@ -53,7 +53,7 @@ Here is an example of `cassandra.db.read_count` with the `week_before()` value s
 
 {{< img src="dashboards/functions/timeshift/simple_week_before_example.png" alt="simple week before example" style="width:80%;">}}
 
-### 4 weeks before
+### Month before
 
 | Function         | Description                                                                                | Example                          |
 |:-----------------|:-------------------------------------------------------------------------------------------|:---------------------------------|
