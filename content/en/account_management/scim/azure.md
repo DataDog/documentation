@@ -1,10 +1,11 @@
 ---
-title: SCIM with Azure
+title: Configure SCIM with Azure Active Directory
 kind: documentation
 ---
-## Configure SCIM with Azure Active Directory
 
-### Add Datadog to the Azure AD application gallery
+See the following instructions to synchronize your Datadog users with Azure Active Directory using SCIM.
+
+## Add Datadog to the Azure AD application gallery
 
 1. In your Azure portal, go to **Azure Active Directory** -> **Enterprise Applications**
 2. Click **New Application** -> **Create your own application**
@@ -15,7 +16,7 @@ kind: documentation
 
 **Note:** If you already have Datadog configured with Azure AD for SSO, go to **Enterprise Applications** and select your existing Datadog application.
 
-### Configure automatic user provisioning
+## Configure automatic user provisioning
 
 1. In the application management screen, select **Provisioning** in the left panel
 2. In the **Provisioning Mode** menu, select **Automatic**
@@ -29,9 +30,9 @@ kind: documentation
 5. Click **Test Connection**, and wait for the message confirming that the credentials are authorized to enable provisioning.
 6. Click **Save**. The mapping section appears. See the following section to configure mapping.
 
-### Attribute mapping
+## Attribute mapping
 
-#### User attributes
+### User attributes
 
 1. Expand the **Mappings** section
 2. Click **Provision Azure Active Directory Users**
@@ -51,6 +52,6 @@ kind: documentation
 
 7. After you set your mappings, click **Save**.
 
-#### Group attributes
+### Group attributes
 
 Group mapping is not supported.
