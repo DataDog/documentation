@@ -52,7 +52,7 @@ Add-on installation is asynchronous. To check installation status, run:
 
 To verify that the installation was successful, use the AWS Management Console, `eksctl`, or the AWS CLI to confirm that a `datadog-operator` pod is running.
 
-## Configuring Agent
+## Configuring the Agent
 
 After you have installed the Operator add-on, you can proceed to set up the Datadog Agent.
 
