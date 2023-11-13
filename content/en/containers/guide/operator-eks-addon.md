@@ -95,7 +95,7 @@ Follow the instructions to set up the Datadog Agent by using the `DatadogAgent` 
        logCollection:
          enabled: true
    ```
-   This agent instance configuration pulls the Datadog agent image from an AWS Marketplace hosted ECR repository which also contains the image for the Datadog Operator Amazon EKS add-on. Should you require alternatives, kindly edit the 'global.registry' entry in the manifest above.
+   This Agent instance configuration pulls the Datadog agent image from an AWS Marketplace hosted ECR repository, which also contains the image for the Datadog Operator Amazon EKS add-on. Should you require alternatives, edit the 'global.registry' entry in the manifest above.
 
    For all configuration options, see the [Operator configuration spec][6].
 
