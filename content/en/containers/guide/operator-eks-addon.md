@@ -23,7 +23,7 @@ These restriction are necessary to make Operator compliant with the EKS add-on p
 ## Prerequisites
 
 * Subscription to the [Datadog Operator][1] product.
-* Kubectl
+* kubectl installed
 * If you are using the command line interface for setting up the add-on, [AWS CLI](https://aws.amazon.com/cli/)
 
 ## Installing Operator
