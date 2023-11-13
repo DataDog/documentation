@@ -82,7 +82,7 @@ persistence:
 ## for your own processing steps.
 pipelineConfig:
   ## SOURCES: Data sources that Observability Pipelines Worker collects data from.
-  ## For a Datadog use case, we will receive data from the Datadog agent.
+  ## For a Datadog use case, the Worker receives data from the Datadog agent.
   sources:
     datadog_agent:
       address: 0.0.0.0:8282
@@ -110,8 +110,8 @@ pipelineConfig:
       source: |
         del(.status)
 
-    ## This is a placeholder for your own remap (or other transform)
-    ## steps with tags set up. Datadog recommends these tag assignments.
+    ## This is a placeholder for your own remap (or other transforms)
+    ## steps with tags. Datadog recommends these tag assignments.
     ## They show which data has been moved over to OP and what still needs
     ## to be moved.
     logs_enrich:
@@ -171,7 +171,7 @@ pipelineConfig:
       buffer:
         type: disk
         max_size: 42949672959
-    ## This sink writes logs to an S3 bucket of your choice, in a format that Datadog
+    ## This sink writes logs to an S3 bucket that you specify, in a format that Datadog
     ## can rehydrate from. You need to fill in the ${DD_ARCHIVES_BUCKET}
     ## and ${DD_ARCHIVES_REGION} parameters to fit your S3 configuration.
     datadog_archives:
