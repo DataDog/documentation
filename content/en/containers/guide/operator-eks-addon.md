@@ -99,7 +99,7 @@ Follow the instructions to set up the Datadog Agent by using the `DatadogAgent` 
 
    For all configuration options, see the [Operator configuration spec][6].
 
-   **Note:** If access to IMDS v1 is blocked on the node, Agent will not be able to resolve the cluster name and certain features for example [Orchestrator Explorer][6] will not work. Hence, it is recommended to add `spec.global.ClusterName` in the `DatadogAgent` manifest. See this [comment][8] on how to configure Agent to request metadata using IMDS v2.
+   **Note:** If access to IMDS v1 is blocked on the node, the Agent cannot resolve the cluster name, and certain features (for example, [Orchestrator Explorer][6]) do not work. Hence, Datadog recommends adding `spec.global.ClusterName` in the `DatadogAgent` manifest. See this [comment][8] on how to configure the Agent to request metadata using IMDS v2.
 
 4. Deploy the Datadog Agent:
    ```bash
