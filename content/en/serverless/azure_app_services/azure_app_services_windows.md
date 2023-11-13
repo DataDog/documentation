@@ -235,7 +235,7 @@ Learn more about [custom metrics][10].
 [3]: https://portal.azure.com/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
-[6]: /logs/log_collection/csharp/?tab=serilog#agentless-logging
+[6]: /logs/log_collection/java/?tab=log4j#agentless-logging
 [7]: /developers/dogstatsd
 [8]: https://search.maven.org/artifact/com.datadoghq/java-dogstatsd-client
 [9]: /developers/dogstatsd/?tab=java#code
