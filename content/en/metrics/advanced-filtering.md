@@ -70,7 +70,7 @@ avg:system.cpu.user{env:prod AND location NOT IN (atlanta,seattle,las-vegas)}
 
 ## Wildcard filtered queries 
 
-Tag value prefix, suffix, and infix wildcard matching is supported: 
+Tag value prefix, suffix, and substring wildcard matching is supported: 
 -  `pod_name: web-*` 
 -  `cluster:*-trace`
 -  `node:*-prod-*`
