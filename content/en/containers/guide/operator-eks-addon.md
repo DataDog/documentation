@@ -147,6 +147,6 @@ To delete the add-on, run:
 [5]: https://app.datadoghq.com/account/settings#api
 [6]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 [7]: https://docs.datadoghq.com/infrastructure/containers/orchestrator_explorer/?tab=datadogoperator
-[8]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml#L407-L416
+[8]: https://github.com/DataDog/datadog-agent/blob/4896a45f586f74de1da2e985f98988f0181afc36/pkg/config/config_template.yaml#L407-L416
 [9]: https://github.com/DataDog/datadog-operator/issues/654
 [10]: /integrations/eks_fargate/#setup
