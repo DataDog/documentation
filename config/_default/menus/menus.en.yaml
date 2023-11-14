@@ -3293,10 +3293,10 @@ main:
     parent: cspm
     identifier: resource_catalog
     weight: 114
-  - name: Resource Collection Filters
-    url: /security/cloud_security_management/resource_collection_filters
+  - name: Resource Evaluation Filters
+    url: /security/cloud_security_management/resource_evaluation_filters
     parent: cspm
-    identifier: resource_collection_filters
+    identifier: resource_evaluation_filters
     weight: 116
   - name: Identity Risks
     url: security/identity_risks/
