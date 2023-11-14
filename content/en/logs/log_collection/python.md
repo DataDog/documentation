@@ -77,7 +77,15 @@ If logs are in JSON format, Datadog automatically [parses the log messages][10] 
 
 If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Python instructions][4].
 
-If logs are in JSON format, trace values are automatically extracted if the trace information is at the top level of the JSON or at the top level in the `extra` or `record.extra` blocks.
+**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
+
+Once this is done, the log should have the following format:
+
+```xml
+2019-01-07 15:20:15,972 DEBUG [flask.app] [app.py:100] [dd.trace_id=5688176451479556031 dd.span_id=4663104081780224235] - this is an example
+```
+
+If logs are in JSON format, trace values are automatically extracted if the trace information is at the top level of the JSON or at the top level in the `extra` or `record.extra` blocks. The following are examples of valid JSON logs where trace values will be automatically parsed.
 
 ```json
 {
@@ -116,14 +124,6 @@ If logs are in JSON format, trace values are automatically extracted if the trac
     }
   }
 }
-```
-
-**Note**: If the APM tracer injects `service` into your logs, it overrides the value set in the agent configuration.
-
-Once this is done, the log should have the following format:
-
-```xml
-2019-01-07 15:20:15,972 DEBUG [flask.app] [app.py:100] [dd.trace_id=5688176451479556031 dd.span_id=4663104081780224235] - this is an example
 ```
 
 ## Further Reading
