@@ -46,6 +46,12 @@ The Cloud Security Management (CSM) Enterprise package includes [CSM Threats][1]
 * [containerd][16] v1.5.6 or later (Kubernetes and hosts only).</br>
 **Note**: CSM Vulnerabilities is not available for CRI-O runtime.
 
+**CSM Identity Risks**: 
+
+To use CSM Identity Risks, you must [enable resource collection for AWS][2] and [enable CloudTrail logs forwarding][4].
+
+**Note**: If you've enabled [Cloud Security Management Misconfigurations][5] for your AWS accounts, you already have [cloud resource collection][2] enabled. Similarly, if you use [Cloud SIEM][6], you already have [CloudTrail logs forwarding][4] enabled.
+
 ## Enable resource scanning for CSM misconfigurations
 
 To enable resource scanning for your cloud accounts, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, and Google Cloud project.
@@ -601,6 +607,32 @@ sbom:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Enable CloudTrail logs forwarding for identity risks
+
+<div class="alert alert-info">At this time, CSM Identity Risks is available for AWS only.</div>
+
+### Set up the Datadog AWS integration
+
+If you haven't already, set up the [Amazon Web Services integration][1]. You must also add the [required permissions][2] for resource collection.
+
+### Enable AWS CloudTrail logging 
+
+To enable CloudTrail log collection, follow the instructions on the CSM Setup page.
+
+1. In AWS CloudTrail, create a trail and select the S3 bucket where you want to write the logs to.
+
+### Send AWS CloudTrail logs to Datadog
+
+Set up a trigger on your Datadog Forwarder Lambda function to send CloudTrail logs stored in the S3 bucket to Datadog for monitoring.
+
+1. Go to the [Datadog Forwarder Lambda][6] that was created during the AWS integration set up.
+2. Click **Add trigger**.
+3. Select **S3** for the trigger.
+4. Select the S3 bucket you are using to collect AWS CloudTrail logs. 
+5. For Event type, select **All object create events**.
+6. Click **Add**.
+7. See CloudTrail logs in Datadog's [Log Explorer][7].
 
 ## Further reading
 
