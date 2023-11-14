@@ -21,7 +21,9 @@ further_reading:
 
 **What is Historical Metric Ingestion?** If you emit metric points with timestamps that are older than an hour relative to the time of submission, Datadog will classify these points as Historical Metrics. 
 
-For example, if you emit a metric point at 1:00 PM EST, and the timestamp on that point reads 10:00 AM EST, it will be classified as a Late Metric, as it is delayed by 3 hours relative to the time of submission.
+{{< img src="metrics/hmi_intro.png" alt="Historical Metrics" video=true >}}
+
+For example, if you emit a metric point at 1:00 PM EST, and the timestamp on that point reads 10:00 AM EST, it will be classified as a *Historical Metric*, as it is delayed by 3 hours relative to the time of submission.
 
 **Why is this important for the average Datadog Metrics user?** Previously, Datadog did not support Late Metrics. With the introduction of Late Metric Ingestion, you can now monitor a variety of new use cases with your Datadog Metrics, such as Outage Recovery, Overwriting Invalid Metrics, and Managing IoT Delays.
 
@@ -431,6 +433,8 @@ Ingesting Late Metrics will include some ingestion latencies, which depends on t
 *Above mentioned ingestion latencies are not final and are subject to improvements with compliance to Datadog's committment to continuous growth.*
 
 ## Historical Metrics Ingestion: Billing
+
+
 
 [1]: /metrics/summary/
 [2]: /metrics/#submit-metrics
