@@ -26,6 +26,8 @@ The Cloud Security Management (CSM) Enterprise package includes [CSM Threats][1]
 
 ## Prerequisites
 
+To set up CSM Enterprise, you need the following:
+
 * [Datadog Agent][14] 7.46 or later.
 * Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. 
 
