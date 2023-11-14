@@ -121,7 +121,7 @@ fips:
   https: false
 ```
 
-The `fips` setting is available in Agent versions >= 7.41. When the setting is enabled, the Datadog Agent redirects all of its communications to the Datadog Agent FIPS Proxy. This setting ignores custom URL options, such as `dd_url`.
+The `fips` setting is available in Agent versions >= 7.41. When the setting is enabled, the Datadog Agent redirects all of its communications to the Datadog Agent FIPS Proxy for supported products. This setting ignores custom URL options, such as `dd_url`.
 
 The `https` option is set to `false` because the Agent uses HTTP to communicate with the proxy. The Datadog Agent FIPS Proxy runs on the same host as the Agent and relies on the host's security for protection of that communication.
 
@@ -183,7 +183,7 @@ fips:
   use_https: false
 ```
 
-The `fips` setting is available in Agent versions >= 7.41. When the setting is enabled, the Datadog Agent redirects all of its communications to the Datadog Agent FIPS Proxy. This setting ignores custom URL options, such as `dd_url`.
+The `fips` setting is available in Agent versions >= 7.41. When the setting is enabled, the Datadog Agent redirects all of its communications to the Datadog Agent FIPS Proxy for supported products. This setting ignores custom URL options, such as `dd_url`.
 
 The `use_https` option is set to `false` because the Agent uses HTTP to communicate with the proxy. The Datadog Agent FIPS Proxy runs on the same host as the Datadog Agent and relies on the host's security for protection of that communication.
 
