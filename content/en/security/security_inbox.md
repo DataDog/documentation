@@ -9,13 +9,7 @@ Security Inbox provides a consolidated, actionable list of your most critical se
 
 Security issues are a consolidation of other security detections and attributes such as a resource being publicly accessible, running on roles with high privileges, or if a public exploit exists. They also incorporate context from potential suspicious activity detected from cloud logs, application traces, and file and process activity detected on a host.
 
-When a combination of risks suggesting a potential attack path in your environment is detected, a security issue is generated and displayed in the Security Inbox. 
-
-## Prioritize issues for remediation
-
-The Security Inbox on the Security menu
-
-The order in which security issues are displayed is based on the following criteria:
+When a combination of risks suggesting a potential attack path in your environment is detected, a security issue is generated and displayed in the Security Inbox. The order in which security issues are listed is based on the following criteria:
 
 - Higher severity issues are listed first
 - Whether an issue has a threat attached to it
@@ -26,4 +20,3 @@ The order in which security issues are displayed is based on the following crite
 For a filtered view, click ASM to view ASM-specific vulnerabilities or CSM to view CSM-specific vulnerabilities.
 
 {{< img src="security/csm/security_inbox.png" alt="The Security Inbox on the CSM overview shows prioritized issues for remediation" width="100%">}}
-
