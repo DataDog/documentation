@@ -188,7 +188,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. Replace `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` with the AWS credentials you created earlier. `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1.
   
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
-[2]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
+[2]: /resources/yaml/observability_pipelines/archives/pipeline.yaml
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
 1. Download the [Helm chart][1] for AWS EKS.
@@ -207,7 +207,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
         -f aws_eks.yaml
     ```
 
-[1]: /resources/yaml/observability_pipelines/datadog/aws_eks.yaml
+[1]: /resources/yaml/observability_pipelines/archives/aws_eks.yaml
 {{% /tab %}}
 
 {{% tab "APT-based Linux" %}}
