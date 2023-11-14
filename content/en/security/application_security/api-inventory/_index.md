@@ -42,7 +42,7 @@ All other environments are marked as production.
 
 ### Service Under Attack
 
-This risk is detected for API endpoints that have experienced [attacks](/security/application_security/threats/) in the selected timeframe. 
+This risk is detected for API endpoints that have experienced [attacks](/security/application_security/threats/) in the last week.
 
 ### Processing Sensitive Data
 
