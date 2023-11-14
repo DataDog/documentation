@@ -346,7 +346,7 @@ spec:
 ```
 See [Autodiscovery Container Identifiers][1] for information on the `<INTEGRATION_AUTODISCOVERY_IDENTIFIER>`.
 
-**Note**: If you are using the Cluster Agent and looking to configure Autodiscovery for a cluster check, add an override `extraConfd.configDataMap` to the `clusterAgent` component and make sure to include `cluster_check: true`. See [Cluster Check][2] for more context.
+**Note**: If you are using the Cluster Agent and looking to configure Autodiscovery for a cluster check, add an override `extraConfd.configDataMap` to the `clusterAgent` component and make sure to include `cluster_check: true`. See [Cluster Checks][2] for more context.
 
 [1]: /agent/guide/ad_identifiers/
 [2]: /agent/cluster_agent/clusterchecks
