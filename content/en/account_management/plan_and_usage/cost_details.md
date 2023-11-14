@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Estimated Cost Summary and Cost Chargebacks help you understand your estimated month-to-date and historical Datadog costs.
+Cost Summary and Cost Chargebacks help you understand your estimated month-to-date, projected end-of-month and historical Datadog costs.
 
 You can break down your costs by sub-organization and by product to:
 - Allocate costs according to their source
@@ -23,23 +23,26 @@ You can break down your costs by sub-organization and by product to:
 
 ### Permissions
 
-To view the Estimated Cost Summary and Cost Chargebacks data, you must be a Datadog Admin user.
+To view the Cost Summary and Cost Chargebacks data, you must be a Datadog Admin user.
 
-Alternately, roles with Billing Read (`billing_read`) and Usage Read (`usage_read`) [permissions][1] can view the Estimated Cost Summary and Cost Chargebacks data.
+Alternately, roles with Billing Read (`billing_read`) and Usage Read (`usage_read`) [permissions][1] can view the Cost Summary and Cost Chargebacks data.
 
 ## Cost summary
 
 Use the cost summary to:
 - View estimated month-to-date costs
+- View projected end-of-month costs
 - View cost trends within the month
 - Filter and group costs by product or sub-organization
 - View cumulative day-over-day costs
 
-### Estimated Cost Summary (parent organization)
+Projected end-of-month costs are calculated by applying current month projected usage data against your contracted rates. Projections are available approximately after the 12th day of the month and are updated daily. Because the costs are a prediction, the amount may differ from your finalized monthly cost.
 
-The cost summary functionality changes according to whether you use Datadog as a single organization or a multi-organization. As a multi-organization, you can view estimated costs for the parent organization and each sub-organization. 
+### Cost Summary (parent organization)
 
-{{< img src="account_management/plan_and_usage/cost_details/multi-org-estimated-cost-summary.png" alt="Screenshot of the Estimated Cost Summary for a parent organization, showing the overall month to date cost, a graph of cumulative cost breakdown, and a summary table." >}}
+The cost summary functionality changes according to whether you use Datadog as a single organization or a multi-organization. As a multi-organization, you can view estimated and projected costs for the parent organization and each sub-organization. 
+
+**UPDATE IMAGE WITH PROJECTION AT PARENT ORG** {{< img src="account_management/plan_and_usage/cost_details/multi-org-estimated-cost-summary.png" alt="Screenshot of the Estimated Cost Summary for a parent organization, showing the overall month to date cost, a graph of cumulative cost breakdown, and a summary table." >}}
 
 1. While logged in to the parent organization, navigate to [Plan & Usage][2].
 1. Click the **Usage** tab.
@@ -55,13 +58,13 @@ To download the data as a comma separated value file, click **Download as CSV**.
 
 See [Get estimated cost across your account][3] to query estimated cost data through the API.
 
-### Estimated Cost Summary (sub-organization)
+### Cost Summary (sub-organization)
 
 <div class="alert alert-warning">This feature is in beta. To request access and confirm your organization meets the feature criteria, contact your account representative or <a href="https://docs.datadoghq.com/help/">Customer Support</a>.</div>
 
 As a sub-organization, you can view the costs for your organization only. This restriction allows for more distributed ownership and removes the need to grant broader Admin permissions to the parent organization.
 
-{{< img src="account_management/plan_and_usage/sub-org-estimated-cost-summary.png" alt="Screenshot of the Estimated Cost Summary for a sub-organization, showing the overall month to date cost, a graph of cumulative cost breakdown, and a summary table." >}}
+**UPDATE IMAGE WITH PROJECTION AT SUB ORG** {{< img src="account_management/plan_and_usage/sub-org-estimated-cost-summary.png" alt="Screenshot of the Estimated Cost Summary for a sub-organization, showing the overall month to date cost, a graph of cumulative cost breakdown, and a summary table." >}}
 
 1. While logged in to the sub-organization, navigate to [Plan & Usage][2].
 1. Click the **Usage** tab.
@@ -82,6 +85,10 @@ See [Get estimated cost across your account][3] to query estimated cost data thr
 Use the cost chargebacks to:
 - View estimated month-to-date and historical costs for multi-organizations
 - Attribute costs to each sub-organization
+
+Cost chargebacks are dervied by:
+- Calculating the sub-organization usage ratio. This is done by dividing usage per sub-organization by the total parent organization usage.
+- Applying the sub-organization usage ratio against the parent organization costs, providing the cost chargebacks per sub-organization.
 
 ### Historical cost chargebacks
 
