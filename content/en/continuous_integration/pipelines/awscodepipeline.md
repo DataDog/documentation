@@ -39,7 +39,7 @@ More information about monitoring pipeline events can be found in the [official 
 4. Under **HTTP method**, select **POST**.
 5. Under Connection type, select **Create a new connection**:
    1. Choose a name for the connection (for example, **datadog-ci-visibility-connection**) and optionally add a description.
-   2. Under **Destination type**, select **Other**
+   2. Under **Destination type**, select **Other**.
    3. Under **Authorization type**, select **API key**.
    Input **DD-API-KEY** as the **API key name** and input your [Datadog API Key][5] in the **Value** field.
 6. Click on **Create**.
