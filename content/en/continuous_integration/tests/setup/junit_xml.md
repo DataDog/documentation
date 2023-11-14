@@ -335,7 +335,7 @@ To add [codeowners][11] information to your Junit XML tests, you will need three
 1. A `CODEOWNERS` file in your repository.
 2. Provide the source file in your Junit XML report. This is currently done automatically with the following plugins:
    phpunit, and most of python and ruby plugins (pytest, unittest, ruby minitest, ...). For the rest of the plugins,
-   you will need to provide the source file via the tag `test.source.file`
+   you will need to provide the source file manually via the tag `test.source.file`.
 3. Enable the Github app. To do this follow the steps in the next section. If you already have an app, make sure it has
    the `Contents: Read` permission.
 
