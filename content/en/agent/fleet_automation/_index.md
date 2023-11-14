@@ -11,7 +11,7 @@ further_reading:
   text: "Learn about the Agent configuration view"
 ---
 
-{{< callout btn_hidden="true">}}Fleet Automation is in private beta.{{< /callout >}}
+{{< callout btn_hidden="true" header="false">}}Fleet Automation is in private beta.{{< /callout >}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Fleet Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
