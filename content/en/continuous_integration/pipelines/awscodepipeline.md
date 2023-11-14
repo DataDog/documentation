@@ -96,8 +96,7 @@ with the related pipeline inside Datadog Pipeline Visibility.
 Name the variable `DD_PIPELINE_EXECUTION_ID`, and the value `#{codepipeline.PipelineExecutionId}`. Leave the type as _Plaintext_.
 4. Click **Done** to save your changes.
 
-The steps above allow you to add the pipeline execution ID to your CodeBuild action environment variables. More information
-can be found in the official AWS guide on [Working with Variables][10].
+The steps above allow you to add the pipeline execution ID to your CodeBuild action environment variables. For more information on working with variables, see the [official AWS guide][10].
 
 ## Visualize pipeline data in Datadog
 
