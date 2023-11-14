@@ -14,8 +14,6 @@ further_reading:
 <div class="alert alert-warning">Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">CSM Identity Risks is in beta.</div>
-
 Cloud Security Management Identity Risks (CSM Identity Risks) provides in-depth visibility into your organization's IAM risks. It enables you to detect and resolve identity risks on an ongoing basis to secure your cloud infrastructure from IAM-based attacks.
 
 <div class="alert alert-info">At this time, CSM Identity Risks is available for AWS only.</div>
