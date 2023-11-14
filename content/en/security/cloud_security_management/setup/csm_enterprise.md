@@ -26,33 +26,32 @@ The Cloud Security Management (CSM) Enterprise package includes [CSM Threats][1]
 
 ## Prerequisites
 
-To set up CSM Enterprise, you need the following:
+CSM Enterprise requires [Datadog Agent][14] 7.46 or later. Additionally, see the following requirements for CSM Threats and CSM Vulnerabilities:
 
-* [Datadog Agent][14] 7.46 or later.
+### CSM Threats
+
+CSM Threats supports the following Linux distributions:
+
+* Ubuntu LTS (18.04, 20.04, and 22.04)
+* Debian 10 or later
+* Amazon Linux 2 (kernels 4.15, 5.4, and 5.10) and 2023
+* SUSE Linux Enterprise Server 12 and 15
+* Red Hat Enterprise Linux 7, 8, and 9
+* Oracle Linux 7, 8, and 9
+* CentOS 7
+* Custom kernel builds are not supported.
+
+**Notes**: 
+
+* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][15].
 * Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. 
 
-**CSM Threats** supports the following Linux distributions:
-  * Ubuntu LTS (18.04, 20.04, and 22.04)
-  * Debian 10 or later
-  * Amazon Linux 2 (kernels 4.15, 5.4, and 5.10) and 2023
-  * SUSE Linux Enterprise Server 12 and 15
-  * Red Hat Enterprise Linux 7, 8, and 9
-  * Oracle Linux 7, 8, and 9
-  * CentOS 7
-  * Custom kernel builds are not supported.
-* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][15].
-
-**CSM Vulnerabilities**:
+### CSM Vulnerabilities
 
 * [Helm Chart][17] v3.33.6 or later (Kubernetes only).
-* [containerd][16] v1.5.6 or later (Kubernetes and hosts only).</br>
+* [containerd][16] v1.5.6 or later (Kubernetes and hosts only).
+
 **Note**: CSM Vulnerabilities is not available for CRI-O runtime.
-
-**CSM Identity Risks**: 
-
-To use CSM Identity Risks, you must [enable resource collection for AWS][2] and [enable CloudTrail logs forwarding][4].
-
-**Note**: If you've enabled [Cloud Security Management Misconfigurations][5] for your AWS accounts, you already have [cloud resource collection][2] enabled. Similarly, if you use [Cloud SIEM][6], you already have [CloudTrail logs forwarding][4] enabled.
 
 ## Enable resource scanning for CSM misconfigurations
 
@@ -611,6 +610,12 @@ sbom:
 {{< /tabs >}}
 
 ## Enable CloudTrail logs forwarding for identity risks
+
+**CSM Identity Risks**: 
+
+To use CSM Identity Risks, you must [enable resource collection for AWS][2] and [enable CloudTrail logs forwarding][4].
+
+**Note**: If you've enabled [Cloud Security Management Misconfigurations][5] for your AWS accounts, you already have [cloud resource collection][2] enabled. Similarly, if you use [Cloud SIEM][6], you already have [CloudTrail logs forwarding][4] enabled.
 
 <div class="alert alert-info">At this time, CSM Identity Risks is available for AWS only.</div>
 

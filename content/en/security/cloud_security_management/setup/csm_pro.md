@@ -17,10 +17,16 @@ The Cloud Security Management (CSM) Pro package includes [CSM Misconfigurations]
 
 ## Prerequisites
 
-**CSM Vulnerabilities**:
+### CSM Misconfigurations
 
+To enable CSM Misconfigurations, you must first set up the Datadog cloud account integrations for AWS, Azure, and Google Cloud Platform.
+
+### CSM Vulnerabilities
+
+* [Datadog Agent][11] 7.46 or later.
 * [Helm Chart][9] v3.33.6 or later (Kubernetes only).
-* [containerd][8] v1.5.6 or later (Kubernetes and hosts only). </br>
+* [containerd][8] v1.5.6 or later (Kubernetes and hosts only).
+
 **Note**: CSM Vulnerabilities is not available for CRI-O runtime.
 
 ## Enable resource scanning for CSM misconfigurations
@@ -160,6 +166,7 @@ container_image:
 [3]: /security/cloud_security_management/setup
 [4]: /security/cloud_security_management
 [5]: /security/threats/
-[10]: https://www.cisa.gov/sbom
 [8]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/
 [9]: /containers/kubernetes/installation/?tab=helm
+[10]: https://www.cisa.gov/sbom
+[11]: /agent
