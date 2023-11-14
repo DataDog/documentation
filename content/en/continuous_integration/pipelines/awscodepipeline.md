@@ -33,7 +33,7 @@ More information about monitoring pipeline events can be found in the [official 
 
 ### Create the API Destination
 
-1. In the AWS Console, go to **EventBridge > API destinations** and click on **Create API destination**.
+1. In the AWS Console, go to **EventBridge > API destinations** and click **Create API destination**.
 2. Choose a name for the API Destination (for example, **datadog-ci-visibility-api**) and optionally add a description.
 3. Under **API destination endpoint**, input <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook</code>.
 4. Under **HTTP method**, select **POST**.
@@ -46,9 +46,9 @@ More information about monitoring pipeline events can be found in the [official 
 
 ### Create the EventBridge Rule
 
-1. In the AWS Console, go to **EventBridge > Rules** and click on **Create Rule**.
+1. In the AWS Console, go to **EventBridge > Rules** and click **Create Rule**.
 2. Choose a name for the rule (for example, **datadog-ci-visibility-integration**) and optionally add a description.
-3. Leave the event bus as **default**, and, under **Rule Type**, select **Rule with an event pattern**. Click on **Next**.
+3. Leave the event bus as **default**, and, under **Rule Type**, select **Rule with an event pattern**. Click **Next**.
 4. Under **Event Source**, select **AWS events or EventBridge partner events**.
 5. Under **Creation Method**, select **Custom pattern (JSON editor)**. Then, under **Event Pattern**, input the following JSON:
    ```
@@ -59,11 +59,11 @@ More information about monitoring pipeline events can be found in the [official 
    ```
    The JSON above sets up the integration for all of your pipelines. To restrict the set of pipelines,
    follow the [Only monitor specific pipelines][6] section below.
-6. Click on **Next**.
+6. Click **Next**.
 7. Under **Target Types**, select **EventBridge API destination**. Then, choose **Use an existing API Destination**
 and select the API destination that you have created in the previous step. Alternatively, you can also create the API destination
 by following the steps outlined in the [Create the API Destination][7] section.
-8. Under **Headers Parameters**, Click on **Add header parameter**. Input `DD-CI-PROVIDER-AWSCODEPIPELINE` as the key and `true` as the value.
+8. Under **Headers Parameters**, click **Add header parameter**. Input `DD-CI-PROVIDER-AWSCODEPIPELINE` as the key and `true` as the value.
 9. Choose **Create a new role for this specific resource** (or use an existing one).
 10. Review that the information is correct and create the rule.
 
@@ -89,12 +89,12 @@ The event pattern above sets up the integration only for the `first-pipeline` an
 ### Correlate pipelines with tests
 
 If you are using [Test Visibility][8] and your pipeline contains one or more [AWS CodeBuild][9] actions to execute tests, you can correlate your tests
-with the related pipeline inside Datadog Pipeline Visibility. To do that:
-1. In the AWS Console, go to your pipeline configuration and click on **Edit**
-2. Go to the stage containing the AWS CodeBuild action, click on **Edit Stage**, and then edit the relevant action.
-3. Under **Environment variables**, add a new environment variable.
+with the related pipeline inside Datadog Pipeline Visibility.
+1. In the AWS Console, go to your pipeline configuration and click **Edit**
+2. Go to the stage containing the AWS CodeBuild action, click **Edit Stage**, and then edit the relevant action.
+3. Under **Environment variables**, add an environment variable.
 Name the variable `DD_PIPELINE_EXECUTION_ID`, and the value `#{codepipeline.PipelineExecutionId}`. Leave the type as _Plaintext_.
-4. Click on **Done** to save your changes.
+4. Click **Done** to save your changes.
 
 The steps above allow you to add the pipeline execution ID to your CodeBuild action environment variables. More information
 can be found in the official AWS guide on [Working with Variables][10].
