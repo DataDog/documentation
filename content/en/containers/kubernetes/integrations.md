@@ -522,7 +522,7 @@ The following configuration defines the integration template for Redis container
           password: "%%env_REDIS_PASSWORD%%"
 ```
 As a result, the Agent contains a `redisdb.yaml` file with the above configuration in the `conf.d` directory.
-**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text. Hence, you must pass the `REDIS_PASSWORD` environment variable to the Agent. See the [Autodiscovery template variable documentation][1].
+**Note**: The `"%%env_<ENV_VAR>%%"` template variable logic is used to avoid storing the password in plain text. Hence, you must pass the `REDIS_PASSWORD` environment variable to the Agent. See the [Autodiscovery Template Variable documentation][1].
 
 [1]: /agent/faq/template_variables/
 {{% /tab %}}
