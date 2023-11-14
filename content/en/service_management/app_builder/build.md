@@ -197,9 +197,13 @@ Each component features a list of corresponding configuration options that you c
 
 To delete or duplicate a component, select the component and click the three dot ellipsis (*...*) to display the **Delete** or **Duplicate** options.
 
+### Dynamic values
+
+Mention tables here.
+
 ## Queries
 
-Queries form the logic behind your app and enable interactions with Datadog integrations. To add a query, click the plus (**+**) icon in the **Queries** section and search for an action to add to your app.
+Queries form the logic behind your app and enable interactions with Datadog integrations. Queries can take inputs from other queries or from UI components, and return outputs for use elsewhere in your app. To add a query, click the plus (**+**) icon in the **Queries** section and search for a query to add to your app.
 
 After you add a query to your app, ensure that you've entered any required inputs. Input fields with the variable button (**{{**) can take [variables](#variables).
 
@@ -209,19 +213,43 @@ Configuring debounce ensures that your query is only triggered once per user inp
 
 ### Conditional queries
 
-You can set a condition that must be met before a query can run. To set a query, enter an expression in the **Condition** field in the **Advanced** section of the query. The condition must evaluate to true before the query runs. For example, if you want a given query to run only if a UI component named `select0` exists and contains at least one value, you can use the expression `${select0.value && select0.value.length > 0}`.
+You can set a condition that must be met before a query can run. To set a query, enter an expression in the **Condition** field in the **Advanced** section of the query. The condition must evaluate to true before the query runs. For example, if you want a given query to run only if a UI component named `select0` exists and is not empty, you can use the expression `${select0.value && select0.value.length > 0}`.
 
-### Post Query Transformation
+### Post query transformation
+
+You can perform a post query transformation to simplify or transform the output of a query. Add a post query transformation in the **Advanced** section of a query.
+
+For example, the Slack _List Channels_ action returns an array of dictionaries containing the ID and name for each channel. To discard the IDs and return only an array of names, add the following query transformation:
+
+{{< code-block lang="js" collapsible="false" >}}
+// Use `outputs` to reference the query's unformatted output.
+// TODO: Apply transformations to the raw query output
+arr = []
+object = outputs.channels
+for (var item in object) {
+    arr.push(object[item].name);
+}
+
+return arr
+}
+{{< /code-block >}}
 
 ### Error notifications
 
-Use the **Advanced** section of the query to configure:
-- Debounce, which ensures that an action only triggers once per user input.
-- Conditions that must be met for the app to trigger. For example, 
-- 
+To display a toast to the user when the system returns an error, toggle **Show Toast on Errors** in the **Advanced** section of a query.
+
+### Confirmation prompts
+
+To prompt a user for confirmation before the query runs, toggle the **Requires Confirmation** option in the **Advanced** section of a query.
 
 ## Variables
 
+Creating a useful app sometimes necessitates passing data from one part of your app to another. You can perform this kind of data interpolation with variables.
 
+Variables use the syntax (`${}`). To use a variable, use the query or UI component name and access the child fields using dot notation. For example, if you have a select component named `select0` and you want to access its default value field in a query, use the syntax `${select0.defaultValue}`. If you're not sure what to enter as a variable, type `${` to open a suggestions menu with all available variables.
+
+{{< img src="service_management/app_builder/select_variable.mp4" alt="If you're not sure what to enter as a variable, type ${ to open a suggestions menu with all available variables" video=true >}}
 
 ## Preview an app
+
+Click the **Preview** button to preview your app. Preview mode allows you to view the app from the user's perspective. Use the preview mode to interact with the app UI and test your queries. When you're done, click **Edit** to return to the app builder.
