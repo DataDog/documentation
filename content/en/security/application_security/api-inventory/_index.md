@@ -114,8 +114,3 @@ This risk is determined by [Vulnerability Management](/security/application_secu
 
 By default, API Security Inventory will evaluate every 10th request (10% sample rate).
 
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
