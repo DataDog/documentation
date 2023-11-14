@@ -5,7 +5,14 @@ kind: documentation
 
 ## Overview
 
-API Security Inventory works in tandem with the [Datadog API Catalog](tracing/api_catalog/) to surface security insights for your API assets.
+API Security Inventory monitors your API traffic to provide visibility into the security posture of your APIs, including:
+
+- **Authentication**: type of authentication used (e.g. Basic Auth, API key, etc.)
+- **Public Exposure**: Whether the API is processing traffic from the internet
+- **Production status**: if the API is running in production environment
+- **Sensitive data flows**: Sensitive data handled by the API and flows between APIs.
+- **Attack Exposure**: if the endpoint is targeted by attacks (powered by Application Threat Management)
+- **Vulnerabilities**:  if the endpoint contains vulnerability (powered by Application Vulnerability Management)
 
 Using the API Security Inventory you can:
 
@@ -17,20 +24,21 @@ Using the API Security Inventory you can:
 
 ## How Does it Work?
 
-When API Inventory Security is enabled, every endpoint from the [Datadog API Catalog](tracing/api_catalog/) is cross-correlated with the detections from both:
+API Inventory leverages the datadog tracing library with [ASM enabled](/security/application_security/enabling/) to gather security metadata about API traffic, including the API schema, types of sensitive data processed and the authentication scheme.
+
 
 - [Threat Monitoring and Protection](/security/application_security/threats/), and
 - [Vulnerability Management](/security/application_security/vulnerability_management/)
 
-As a prerequisite, you should have [enabled ASM](/security/application_security/enabling/) with Remote Configuration support.
+API Inventory Security leverages remote configuration to manage and configure scanning rules detecting sensitive data and authentication.
 
 For each endpoint we calculate the risks outlined below.
 
 ### Service in Production
 
-A regular expression is applied to the `env` tag for detecting non-production environments. Environments that do not match this, are assumed to be production.
+The `env` tag is checked for patterns that frequently represent non-production environments. For example, detecting `dev`, `alpha`, `beta`, `sandbox`, and similar valuesm, will mark the environment as a non-production one.
 
-    ^(.*-)?(dev|pdev|dit|alpha|beta|lab|perf|uat|sit|sat|sandbox|pre-prod|preprod|test|develop|development|loadtest|testing|integ|int|integration|stag|stage|staging|stg|tst|ci|qa|qual|accept)\\d*(-.*)?$
+All other environments are marked as production.
 
 ### Service Under Attack
 
@@ -38,13 +46,17 @@ This risk is detected for API endpoints that have experienced [attacks](/securit
 
 ### Processing Sensitive Data
 
-This feature relies on [the ASM client libraries](/security/application_security/threats/) being present in your application. They match known patterns for sensitive data in both API request, and the corresponding response values. If anything matches, that endpoint is marked as containing sensitive data.
+[ASM](/security/application_security/threats/) matches known patterns for sensitive data in both API requests and responses. If anything matches, that endpoint is tagged with the type of sensitive data processed.
 
 The matching happens entirely in your application, and none of the sensitive data is sent to Datadog.
 
 The currently supported sensitive data categories are:
 
-- `PII` (Personally Identifiable Information)
+- `PII` (Personally Identifiable Information), detecting:
+  - Canadian social insurance numbers
+  - UK national insurance numbers
+  - US vehicle identification numbers
+  - Passport numbers
  
 ### Publicly Accessible
 
