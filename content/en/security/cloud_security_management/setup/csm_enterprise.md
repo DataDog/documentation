@@ -24,6 +24,10 @@ further_reading:
 
 The Cloud Security Management (CSM) Enterprise package includes [CSM Threats][1], [CSM Misconfigurations][2] (cloud accounts and Agent), [CSM Identity Risks][3], and [CSM Vulnerabilities][4] (container images and hosts). To learn more about the available CSM packages, see [Setting up Cloud Security Management][8].
 
+- Enable resource scanning for CSM misconfigurations
+- Configure CSM for threats
+- Configure CSM for vulnerabilities
+
 ## Prerequisites
 
 CSM Enterprise requires [Datadog Agent][14] 7.46 or later. Additionally, see the following requirements for CSM Threats and CSM Vulnerabilities:
