@@ -85,7 +85,7 @@ Once this is done, the log should have the following format:
 2019-01-07 15:20:15,972 DEBUG [flask.app] [app.py:100] [dd.trace_id=5688176451479556031 dd.span_id=4663104081780224235] - this is an example
 ```
 
-If logs are in JSON format, trace values are automatically extracted if the trace information is at the top level of the JSON or at the top level in the `extra` or `record.extra` blocks. The following are examples of valid JSON logs where trace values are automatically parsed.
+If logs are in JSON format, trace values are automatically extracted if the values are at the top level of the JSON or at the top level in the `extra` or `record.extra` blocks. The following are examples of valid JSON logs where trace values are automatically parsed.
 
 ```json
 {
