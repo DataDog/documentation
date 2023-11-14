@@ -43,15 +43,15 @@ Relative dates **do not** update over time; they are calculated when entered.
 
 {{< img src="dashboards/guide/custom_time_frames/custom_relative_time_frame.mp4" alt="Type custom relative time frame" video="true" width="500" >}}
 
-| Format         | Notes                                                                            |
-|----------------|----------------------------------------------------------------------------------|
-| `N{unit}`<br> See the list of accepted units below      | Displays the past N units. For example, **3 mo** (the past 3 months)             |
-| `today`        | Displays the current calendar day until present                                 |
-| `yesterday`    | Displays the full previous calendar day                                         |
-| `this month`   | Displays the current calendar month until present                                |
-| `last month`   | Displays the full previous calendar month                                        |
-| `this year`    | Displays the current calendar year until present                                 |
-| `last year`    | Displays the full previous calendar year                                         |
+| Format                                             | Description                                                         |
+|----------------------------------------------------|---------------------------------------------------------------------|
+| `N{unit}`<br> See the list of accepted units below | Displays the past N units. For example, **3 mo** (the past 3 months)|
+| `today`                                            | Displays the current calendar day until present                     |
+| `yesterday`                                        | Displays the full previous calendar day                             |
+| `this month`                                       | Displays the current calendar month until present                   |
+| `last month`                                       | Displays the full previous calendar month                           |
+| `this year`                                        | Displays the current calendar year until present                    |
+| `last year`                                        | Displays the full previous calendar year                            |
 
 The following strings are accepted for any `{unit}` in a relative date:
   * Minutes: `m`, `min`, `mins`, `minute`, `minutes`
@@ -62,12 +62,12 @@ The following strings are accepted for any `{unit}` in a relative date:
 
 ### Calendar aligned dates
 
-Calendar aligned dates update to reflect the current day. For example, if you select `week to date` on November 2, on November 9, it displays data from November 1 - November 9.
+Calendar aligned dates update to reflect the current day.
 
-| Format         | Examples                                                                         | Notes                                                     |
-|----------------|----------------------------------------------------------------------------------|-----------------------------------------------------------|
-| `week to date` |  Nov 6, 12:00 am - Nov 8, 4:52 pm                                                | Displays the week from 12AM Monday until present          |
-| `month to date`|  Nov 1, 12:00 am - Nov 8, 4:55 pm                                                | Displays the 1st of the month until present               |
+| Format         | Description                                      |
+|----------------|--------------------------------------------------|
+| `week to date` | Displays the week from 12AM Monday until present |
+| `month to date`| Displays the 1st of the month until present      |
 
 ## URLs
 
