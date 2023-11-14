@@ -22,14 +22,12 @@ further_reading:
 
 ## Configure the Datadog integration
 
-To set up the integration between [AWS CodePipeline][1] and Datadog CI Visibility, two AWS resources need to be created:
+To set up the integration between [AWS CodePipeline][1] and Datadog CI Visibility, create two AWS resources:
 1. [API Destination][2]: an HTTP endpoint pointing to Datadog's intake.
 2. [AWS EventBridge Rule][3]: a rule that forwards CodePipeline events to the API Destination.
 
-The following guide separates the two creation steps for clarity, but note that it's not required to create the resources
-separately. They can also be created at the same time during the EventBridge Rule creation process.
-
-More information about monitoring pipeline events can be found in the [official AWS guide][4].
+You can create these resources separately, or at the same time, during the EventBridge Rule creation process.
+For more information about monitoring pipeline events, see the [official AWS guide][4].
 
 ### Create the API Destination
 
