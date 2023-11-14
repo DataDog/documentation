@@ -4,6 +4,11 @@ kind: documentation
 aliases:
 - /app_builder/build
 disable_toc: false
+further_reading:
+- link: "/service_management/workflows/actions_catalog/"
+  tag: "Documentation"
+  text: "Actions Catalog"
+---
 ---
 
 You can create an app or edit existing apps from the App Builder [Explore][1] tab. The **Explore** tab lists information about existing apps, such as the author, status, the dates that each app was last modified, and whether the app is published or not.
@@ -252,4 +257,8 @@ Variables use the syntax (`${}`). To use a variable, use the query or UI compone
 
 ## Preview an app
 
-Click the **Preview** button to preview your app. Preview mode allows you to view the app from the user's perspective. Use the preview mode to interact with the app UI and test your queries. When you're done, click **Edit** to return to the app builder.
+Click the **Preview** button to preview your app. Preview mode allows you to view the app from the user's perspective. Use preview mode to interact with the app UI and test your queries. When you're done, click **Edit** to return to the app builder.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
