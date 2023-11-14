@@ -42,7 +42,7 @@ More information about monitoring pipeline events can be found in the [official 
    2. Under **Destination type**, select **Other**.
    3. Under **Authorization type**, select **API key**.
    Input **DD-API-KEY** as the **API key name** and input your [Datadog API Key][5] in the **Value** field.
-6. Click on **Create**.
+6. Click **Create**.
 
 ### Create the EventBridge Rule
 
