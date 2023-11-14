@@ -55,6 +55,8 @@ We mark an endpoint as public if the client IP address is not within one of thes
 - 192.168.0.0/16
 - 169.254.1.0/16
 
+See [Configuring a client IP header](/security/application_security/threats/library_configuration/#configuring-a-client-ip-header) for more information on the required library configuration.
+
 If the `X-Forwarded-For` header is present in the request, this risk will be determined against this header's value.
 
 ### Unauthenticated Endpoint
