@@ -70,35 +70,37 @@ You can enable APM when installing the Agent with the [Datadog Operator](#operat
 
 ### Operator
 
-The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
+The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and OpenShift.
 
 For the Datadog Operator:
 
 1. Make sure you've [installed the Datadog Operator on Kubernetes][3].
 2. Configure `datadog-agent.yaml` as shown in the following example:
 
-**TODO: UPDATE EXAMPLE**
-{{< highlight yaml "hl_lines=2-3" >}}
-    datadog:
-      placeholder:
-      placeholder:
-{{< /highlight >}}
+```bash
+   features:
+     apm:
+       instrumentation:
+         enabled: true
+```
+3. After the Datadog Cluster Agent starts again, restart your services. 
 
 ### Helm Chart
 
 You can use the Datadog Helm chart to install the Datadog Agent on all nodes in your cluster with a DaemonSet.
 
-For a Helm Chart:
+To enable single step instrumentation for the whole cluster:
 
 1. Make sure you've [installed the Datadog Agent on Kubernetes][4].
-2. Configure `datadog-values.yaml` as shown in the following example:
+2. Add the following configuration to `datadog-values.yaml`:
 
-**TODO: UPDATE EXAMPLE**
-{{< highlight yaml "hl_lines=2-3" >}}
-    datadog:
-      placeholder:
-      placeholder:
-{{< /highlight >}}
+```bash
+   datadog:  
+     apm:
+       instrumentation:
+         enabled: true
+```
+3. After the Datadog Cluster Agent starts again, restart your services. 
 
 [3]: /containers/kubernetes/installation/?tab=operator
 [4]: /containers/kubernetes/installation/?tab=helm
@@ -109,6 +111,51 @@ For a Helm Chart:
 ### Tagging observability data by environment
 
 Set `DD_ENV` in your one-line install command for Linux and the library injector installation command for Docker to automatically tag instrumented services and other telemetry that pass through the Agent with a specific environment. For example, if the Agent is installed in your staging environment, set `DD_ENV=staging` to associate your observability data with `staging`.
+
+### Enabling or disabling namespaces
+
+You can configure your Kubernetes setup to enable or disable observability data collection for specific namespaces.
+
+To enable specific namespaces:
+
+1. Add the following configuration to `instrumentation` in datadog-agent.yaml or datadog-values.yaml: 
+{{< highlight yaml "hl_lines=3-5" >}}
+   instrumentation:
+      enabled: true
+      enabledNamespaces:
+          - namespace1
+          - namespace2
+{{< /highlight >}}
+2. Restart your services.
+
+To disable specific namespaces:
+
+1. Add the following configuration to `instrumentation` in datadog-agent.yaml or datadog-values.yaml: 
+{{< highlight yaml "hl_lines=3-5" >}}
+   instrumentation:
+      enabled: true
+      disabledNamespaces:
+          - namespace1
+          - namespace2
+{{< /highlight >}}
+2. Restart your services.
+
+### Specifying a tracing library version
+
+You can configure your Kubernetes setup to use specific tracing library versions:
+
+1. Add the following configuration to `instrumentation` in datadog-agent.yaml or datadog-values.yaml: 
+{{< highlight yaml "hl_lines=3-9" >}}
+   instrumentation:
+      enabled: true
+      libVersions:
+         libVersions:
+         dotnet: v2.40.0
+         python: v1.20.6
+         java: v1.22.0
+         js: v4.17.0
+         ruby: v1.15.0
+{{< /highlight >}}
 
 ## Removing Single Step APM instrumentation from your Agent
 
@@ -141,7 +188,9 @@ Run the following commands and restart the service to stop injecting the library
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
-**TODO: ADD INSTRUCTIONS**
+
+Add the `admission.datadoghq.com/enabled=false` on a service to disable single step instrumentation for that specific service.
+
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -149,7 +198,6 @@ Run the following commands and restart the service to stop injecting the library
 ### Removing APM for all services on the infrastructure
 
 To stop producing traces, remove library injectors and restart the infrastructure:
-
 
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
@@ -177,7 +225,29 @@ To stop producing traces, remove library injectors and restart the infrastructur
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
-**TODO: ADD INSTRUCTIONS**
+
+For Operator:
+
+1. Update the following configuration in `datadog-values.yaml`:
+{{< highlight yaml "hl_lines=4" >}}
+  features:  
+    apm:
+      instrumentation:
+        enabled: false
+{{< /highlight >}}
+2. Restart your services.
+
+For Helm Charts: 
+
+1. Update the following configuration in `datadog-values.yaml`:
+{{< highlight yaml "hl_lines=4" >}}
+  datadog:  
+    apm:
+      instrumentation:
+        enabled: false
+{{< /highlight >}}
+2. Restart your services.
+
 {{% /tab %}}
 
 {{< /tabs >}}
