@@ -615,12 +615,6 @@ sbom:
 
 ## Enable CloudTrail logs forwarding for identity risks
 
-**CSM Identity Risks**: 
-
-To use CSM Identity Risks, you must [enable resource collection for AWS][2] and [enable CloudTrail logs forwarding][4].
-
-**Note**: If you've enabled [Cloud Security Management Misconfigurations][5] for your AWS accounts, you already have [cloud resource collection][2] enabled. Similarly, if you use [Cloud SIEM][6], you already have [CloudTrail logs forwarding][4] enabled.
-
 <div class="alert alert-info">At this time, CSM Identity Risks is available for AWS only.</div>
 
 ### Set up the Datadog AWS integration
