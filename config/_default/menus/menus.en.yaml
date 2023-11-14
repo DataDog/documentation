@@ -3293,6 +3293,11 @@ main:
     parent: cspm
     identifier: resource_catalog
     weight: 114
+  - name: Resource Collection Filters
+    url: /security/cloud_security_management/resource_collection_filters
+    parent: cspm
+    identifier: resource_collection_filters
+    weight: 116
   - name: Identity Risks
     url: security/identity_risks/
     parent: csm
