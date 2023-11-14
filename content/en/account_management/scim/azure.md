@@ -1,6 +1,8 @@
 ---
 title: Configure SCIM with Azure Active Directory
 kind: documentation
+algolia:
+  tags: ["scim", "identity provider", "IdP", "Azure AD"]
 ---
 
 See the following instructions to synchronize your Datadog users with Azure Active Directory using SCIM.
