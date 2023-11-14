@@ -21567,7 +21567,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - monitors_read
+        - monitors_downtime
       summary: Get a downtime
       tags:
       - Downtimes
