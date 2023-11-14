@@ -330,6 +330,26 @@ For mobile apps (Swift, Android):
 : The name of the device being tested.<br/>
 **Examples**: `iPhone 12 Pro Simulator`, `iPhone 13 (QA team)`
 
+## Adding code owners
+To add [codeowners][11] information to your Junit XML tests, you will need three things:
+1. A `CODEOWNERS` file in your repository.
+2. Provide the source file in your Junit XML report. This is currently done automatically with the following plugins:
+   phpunit, and most of python and ruby plugins (pytest, unittest, ruby minitest, ...). For the rest of the plugins,
+   you will need to provide the source file via the tag `test.source.file`
+3. Enable the Github app. To do this follow the steps in the next section. If you already have an app, make sure it has
+   the `Contents: Read` permission.
+
+### Configure a GitHub App
+
+The Junit XML uses a private [GitHub App][12] to read the `CODEOWNERS` file.
+
+1. Go to the [GitHub integration tile][13].
+2. Click **Link GitHub Account**.
+3. Follow the instructions to configure the integration for a personal or organization account.
+4. In **Edit Permissions**, grant `Contents: Read` access.
+5. Click **Create App in GitHub** to finish the app creation process GitHub.
+6. Give the app a name, for example, `Datadog CI Visibility`.
+7. Click **Install GitHub App** and follow the instructions on GitHub.
 
 ## Providing metadata with XPath expressions
 
@@ -498,3 +518,6 @@ For more information, see [Code Coverage][10].
 [7]: /getting_started/site/
 [8]: https://www.w3schools.com/xml/xpath_syntax.asp
 [10]: /continuous_integration/tests/code_coverage/?tab=junitreportuploads
+[11]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+[12]: https://docs.github.com/developers/apps/getting-started-with-apps/about-apps
+[13]: https://app.datadoghq.com/integrations/github/
