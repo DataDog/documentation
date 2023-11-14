@@ -56,11 +56,9 @@ You can decide to fall back on the regular browser test algorithm by clearing th
 
 ## Timeout
 
-If a browser test cannot locate an element, it retries the step for 60 seconds.
+If a browser test cannot locate an element, it retries the step for 60 seconds. You can decrease or increase this time up to 300 seconds if you want your test to wait for less or more time to be able to find the step's targeted element.
 
-You can decide to decrease or increase this time out up to 300 seconds if you want your test to wait for less or more time to be able to find the step targeted element.
-
-{{< img src="synthetics/browser_tests/advanced_options/time_before_fail.png" alt="Time before fail" style="width:50%">}}
+You can manually trigger a failed test immediately after it fails, or schedule the failed test to run again, or in a CI pipeline. 
 
 ## Optional step
 
