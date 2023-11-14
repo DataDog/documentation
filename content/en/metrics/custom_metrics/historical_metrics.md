@@ -424,19 +424,21 @@ public class DogStatsdClient
 
 Ingesting Late Metrics will include some ingestion latencies, which depends on the delay associated with the metric timestamp.
 
-{{< img src="metrics/hmi_intro.png" alt="Historical Metrics" video=false >}}
-
 | Metric Delayed by:   | Ingestion Latency                     |
 |----------------------|---------------------------------------|
 | 1-12 hours           | Near Real-Time Ingestion (1 hour MAX) |
 | 12 hours - 30 days   | Up to 14 hour latency                 |
 | +30 days             | +14 hours latency                     |
 
+{{< img src="metrics/hmi_latency.png" alt="Historical Metrics Latency" video=false >}}
+
 *Above mentioned ingestion latencies are not final and are subject to improvements with compliance to Datadog's committment to continuous growth.*
 
 ## Historical Metrics Ingestion: Billing
 
+Historical Metrics will be billed under the Custom Metrics billing SKU. 
 
+{{< img src="metrics/hmi_billing.png" alt="Historical Metrics Billing" video=false >}}
 
 [1]: /metrics/summary/
 [2]: /metrics/#submit-metrics
