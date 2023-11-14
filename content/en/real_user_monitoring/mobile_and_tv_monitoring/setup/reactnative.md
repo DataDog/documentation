@@ -45,13 +45,30 @@ To install with Yarn, run:
 yarn add @datadog/mobile-react-native
 ```
 
+### iOS
+
 Install the added pod:
 
 ```sh
 (cd ios && pod install)
 ```
 
-Versions `1.0.0-rc5` and higher require you to have `compileSdkVersion = 31` in the Android application setup, which implies that you should use Build Tools version 31, Android Gradle Plugin version 7, and Gradle version 7 or higher. To modify the versions, change the values in the `buildscript.ext` block of your application's top-level `build.gradle` file. Datadog recommends using React Native version 0.67 or higher.
+### Android
+
+If you use a React Native version strictly over 0.67, make sure to use Java version 17. If you use React Native version equal or below ot 0.67, make sure to use Java version 11.
+
+In your `android/build.gradle` file, specify the `kotlinVersion` to avoid clashes among kotlin dependencies:
+
+```groovy
+buildscript {
+    ext {
+        // targetSdkVersion = ...
+        kotlinVersion = "1.8.21"
+    }
+}
+```
+
+The Datadog React Native SDK requires you to have `compileSdkVersion = 31` or higher in the Android application setup, which implies that you should use Build Tools version 31 or higher, Android Gradle Plugin version 7, and Gradle version 7 or higher. To modify the versions, change the values in the `buildscript.ext` block of your application's top-level `build.gradle` file. Datadog recommends using a React Native version that's actively supported.
 
 ### Specify application details in the UI
 
@@ -386,6 +403,12 @@ const config = new DdSdkReactNativeConfiguration(
 )
 ```
 
+## New architecture support
+
+The [React Native new architecture][17] is supported by the RUM React Native SDK in version `>=1.8.0`.
+
+The minimum supported React Native version for the new architecture is `0.71`.
+
 ## Troubleshooting
 
 ### Usage with `use_frameworks!`
@@ -438,3 +461,4 @@ end
 [14]: https://stackoverflow.com/questions/37388126/use-frameworks-for-only-some-pods-or-swift-pods/60914505#60914505
 [15]: /getting_started/tagging/#define-tags
 [16]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
+[17]: https://reactnative.dev/docs/the-new-architecture/landing-page

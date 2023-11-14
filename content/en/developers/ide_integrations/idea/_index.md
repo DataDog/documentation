@@ -10,6 +10,9 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about Source Code Integration."
+- link: "/continuous_integration/static_analysis/?tab=githubactions"
+  tag: "Documentation"
+  text: "Learn about Static Analysis."
 - link: "https://www.jetbrains.com/lp/toolbox/"
   tag: "External Site"
   text: "Learn about the JetBrains Toolbox."
@@ -17,7 +20,7 @@ further_reading:
 
 ## Overview
 
-The Datadog plugin for the IntelliJ Platform (IDEA and GoLand) helps you to improve software performance by providing meaningful code-level insights in the IDE based on real-time observability data.
+The Datadog plugin for the IntelliJ Platform is available for IDEA, GoLand, and PyCharm. It helps you improve software performance by providing meaningful code-level insights directly in the IDE based on real-time observability data.
 
 {{< img src="/developers/ide_integrations/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
@@ -33,6 +36,8 @@ The **Continuous Profiler** helps you to reduce latency and lower cloud costs by
 - Spend the most time on locks, disk I/O, and socket I/O
 
 The **Logs Navigation** support opens the Datadog Log Explorer with a view matching the context in which you are working.
+
+The **Static Analysis** integration analyzes your code (locally) against predefined rules to detect and fix problems before you commit changes.
 
 ## Requirements
 
@@ -150,7 +155,7 @@ The active Profiling tab also affects the project tree view, which is annotated 
 
 ## Logs navigation
 
-You can navigate to the [Log Explorer][5] on the Datadog platform directly from your Java or Go source files. Look for the **View Logs** links following the log statements in your source code:
+You can navigate to the [Log Explorer][5] on the Datadog platform directly from your Java, Go, and Python source files. Look for the **View Logs** links following the log statements in your source code:
 
 {{< img src="/developers/ide_integrations/idea/logs-navigation.png" alt="A source file showing a View Logs link." style="width:100%;" >}}
 
@@ -158,11 +163,29 @@ Clicking the link opens the **Log Explorer** with a query that matches the logge
 
 ## View in IDE
 
-The **View in IntelliJ IDEA** feature provides a link from the Datadog platform directly to your Java source files (not yet available for Go). Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
+The **View in IntelliJ/GoLand/PyCharm** feature provides a link from the Datadog platform directly to your Java, Go, and Python source files. Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
 
 {{< img src="/developers/ide_integrations/idea/view-in-idea.png" alt="A stack trace on the Datadog platform showing the View in IntelliJ button." style="width:100%;" >}}
 
 <div class="alert alert-info">This feature has two prerequisites: (1) Source Code Integration is configured for your service and (2) the JetBrains Toolbox is installed on your development machine.</div>
+
+## Static Analysis
+The Datadog plugin runs a set of [Static Analysis][12] rules on your source files as you edit them. The goal is to detect and fix problems in your code before you commit your changes.
+
+The Static Analyzer has rules defined for [Python][13] and [Docker][14] files. For these file types, issues are shown in the source code editor with the JetBrains inspection system, and suggested fixes can be applied directly:
+
+{{< img src="/developers/ide_integrations/idea/static-analysis-issue.png" alt="A static analysis rule violation and recommended fix." style="width:100%;" >}}
+
+Additionally, all issues detected by this feature are listed in the standard **Problems** view.
+
+### Getting started
+When you start editing a source file (Python and Docker files are supported), the plugin checks for `static-analysis.datadog.yml` at your source repository's root. It prompts you to create it if necessary:
+
+{{< img src="/developers/ide_integrations/idea/static-analysis-onboard.png" alt="A banner for onboarding." style="width:100%;" >}}
+
+Once the configuration file is created, the static analyzer runs automatically in the background.
+
+<div class="alert alert-info">The Static Analysis feature does not require a Datadog account as source files are analyzed locally.</div>
 
 ## Feedback
 
@@ -189,3 +212,6 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 [9]: /continuous_integration/guides/flaky_test_management/
 [10]: /watchdog/insights
 [11]: mailto:team-ide-integration@datadoghq.com
+[12]: /continuous_integration/static_analysis/?tab=githubactions
+[13]: /continuous_integration/static_analysis/rules/#python-rules
+[14]: /continuous_integration/static_analysis/rules/#docker-rules

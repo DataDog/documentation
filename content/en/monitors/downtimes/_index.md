@@ -29,8 +29,6 @@ To schedule a [monitor downtime][1] in Datadog navigate to _Monitors > Manage Do
 
 To mute an individual monitor, click the **Mute** button at the top of the monitor status page. This creates a downtime schedule for that particular monitor.
 
-{{< img src="/monitors/downtimes/downtime_fm_monitor.png" alt="Add a downtime schedule from an individual monitor with Mute" style="width:100%;" >}}
-
 ## Choose what to silence
 
 Apply downtime schedules to specific monitors by [name](#by-monitor-name) or to a broad range of monitors by monitor [tags](#by-monitor-tags). Apply additional filters through the [*Group scope*](#downtime-scope). Click **Preview affected monitors** to see the monitors included. For more examples and use cases see  [Scoping downtimes schedules][2].
