@@ -77,7 +77,7 @@ If logs are in JSON format, Datadog automatically [parses the log messages][10] 
 
 If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs, `env`, `service`, and `version` to your logs by [following the APM Python instructions][4].
 
-If logs are in JSON format, trace values are automatically extracted if at the top level of the JSON, `extra`, or `record.extra` blocks.
+If logs are in JSON format, trace values are automatically extracted if the trace information is at the top level of the JSON or at the top level in the `extra` or `record.extra` blocks.
 
 ```json
 {
