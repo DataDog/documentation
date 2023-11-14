@@ -35,7 +35,7 @@ More information about monitoring pipeline events can be found in the [official 
 
 1. In the AWS Console, go to **EventBridge > API destinations** and click on **Create API destination**.
 2. Choose a name for the API Destination (for example, **datadog-ci-visibility-api**) and optionally add a description.
-3. Under **API destination endpoint**, input <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook</code>
+3. Under **API destination endpoint**, input <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook</code>.
 4. Under **HTTP method**, select **POST**.
 5. Under Connection type, select **Create a new connection**:
    1. Choose a name for the connection (for example, **datadog-ci-visibility-connection**) and optionally add a description.
