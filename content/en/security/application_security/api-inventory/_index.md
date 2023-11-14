@@ -22,6 +22,28 @@ Using the API Security Inventory you can:
 
 {{< img src="security/application_security/api/welcome.png" alt="API Security Inventory main page">}}
 
+## How to Enable
+
+### Via Remote Configuration
+
+If your library is configured to use remote configuration, then the following tracer versions
+are compatible without any additional configuration.
+
+|Technology|Minimum version|
+|----------|----------|
+|Python    | v2.1.6   |
+
+### Via Environment Variables
+
+The following library versions support API Security Inventory features by setting
+the environment variable `DD_EXPERIMENTAL_API_SECURITY_ENABLED` to `true`.
+
+|Technology|Minimum version|
+|----------|----------|
+|Java      | v1.22.0  | 
+|Python    | v1.16.0  |
+|Ruby      | v1.15.0  |
+
 ## How Does it Work?
 
 API Inventory leverages the datadog tracing library with [ASM enabled](/security/application_security/enabling/) to gather security metadata about API traffic, including the API schema, types of sensitive data processed and the authentication scheme.
@@ -46,17 +68,24 @@ This risk is detected for API endpoints that have experienced [attacks](/securit
 
 ### Processing Sensitive Data
 
-[ASM](/security/application_security/threats/) matches known patterns for sensitive data in both API requests and responses. If anything matches, that endpoint is tagged with the type of sensitive data processed.
+[ASM](/security/application_security/threats/) matches known patterns for sensitive data in API requests. If anything matches, that endpoint is tagged with the type of sensitive data processed.
+
+<div class="alert alert-info">
+Sensitive data scanning in API responses is planned, but is not currently available.
+</div>
 
 The matching happens entirely in your application, and none of the sensitive data is sent to Datadog.
 
 The currently supported sensitive data categories are:
 
-- `PII` (Personally Identifiable Information), detecting:
+- `pii` (Personally Identifiable Information), detecting:
   - Canadian social insurance numbers
+  - United States social security numbers
   - UK national insurance numbers
   - US vehicle identification numbers
   - Passport numbers
+- `payments`:
+  - Credit card numbers
  
 ### Publicly Accessible
 
@@ -68,8 +97,6 @@ We mark an endpoint as public if the client IP address is not within one of thes
 - 169.254.1.0/16
 
 See [Configuring a client IP header](/security/application_security/threats/library_configuration/#configuring-a-client-ip-header) for more information on the required library configuration.
-
-If the `X-Forwarded-For` header is present in the request, this risk will be determined against this header's value.
 
 ### Unauthenticated Endpoint
 
