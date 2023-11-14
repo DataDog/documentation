@@ -45,8 +45,8 @@ You can also access Pipeline Scanner in the Log Pipelines page and then define t
 
 The number of sessions you can launch is limited to:
 
-- A maximum of 3 concurrent sessions
-- A maximum of 12 sessions over a 12-hour sliding window
+- A maximum of 3 concurrent sessions.
+- A maximum of 12 sessions over a 12-hour sliding window.
 
 ## Further reading
 
