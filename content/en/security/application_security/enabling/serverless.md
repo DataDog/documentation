@@ -27,25 +27,25 @@ See [compatibility requirements][4] for information about what ASM features are 
 
 ## AWS Lambda
 
-<div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using the Lambda extension.</div>
+<div class="alert alert-info">ASM support for AWS Lambda is in beta. Application Security Threat detection is done by using the Datadog's AWS Lambda Extension along with APM Tracing.</div>
 
 Configuring ASM for AWS Lambda involves:
 
 1. Identifying functions that are vulnerable or are under attack, which would most benefit from ASM. Find them on [the Security tab of your Service Catalog][1].
-2. Setting up ASM instrumentation by using the Datadog CI, AWS CDK, [Datadog Serverless Framework plugin][6], or manually by using the Datadog tracing layers.
+2. Setting up ASM instrumentation by using the [Datadog CLI](https://docs.datadoghq.com/serverless/serverless_integrations/cli), [AWS CDK](https://github.com/DataDog/datadog-cdk-constructs), [Datadog Serverless Framework plugin][6], or manually by using the Datadog tracing layers.
 3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
 ### Prerequisites
 
-- [Serverless APM][2] is configured on the Lambda function to send traces directly to Datadog. 
-- A tracing library is installed. X-Ray tracing, by itself, is not sufficient for ASM. Add the tracing library by following the steps below.
+- [Serverless APM Tracing][apm-lambda-tracing-setup] is setup on the Lambda function to send traces directly to Datadog.
+  X-Ray tracing, by itself, is not sufficient for ASM and requires APM Tracing to be enabled.
 
 ### Get started
 
 {{< tabs >}}
 {{% tab "Serverless Framework" %}}
 
-The [Datadog Serverless Framework plugin][1] automatically configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
+The [Datadog Serverless Framework plugin][1] can be used to automatically configure and deploy your lambda with ASM.
 
 To install and configure the Datadog Serverless Framework plugin:
 
@@ -53,17 +53,140 @@ To install and configure the Datadog Serverless Framework plugin:
    ```sh
    serverless plugin install --name serverless-plugin-datadog
    ```
-2. Enable ASM by updating your `serverless.yml` (or whichever way you set environment variables for your function):
+    
+2. Enable ASM by updating your `serverless.yml` with the `enableASM` configuration parameter:
    ```yaml
-   environment:
-     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
-     DD_SERVERLESS_APPSEC_ENABLED: true
+   custom:
+     datadog:
+       enableASM: true
    ```
-3. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
+   
+   Overall, your new `serverless.yml` file should contain at least:
+   ```yaml
+   custom:
+     datadog:
+       apiKeySecretArn: "{Datadog_API_Key_Secret_ARN}" # or apiKey
+       enableDDTracing: true
+       enableASM: true
+   ```
+   See also the complete list of [plugin parameters][4] to further configure your lambda settings.
+   
+4. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
+[4]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/#configuration-parameters
+
+{{% /tab %}}
+{{% tab "Datadog CLI" %}}
+
+The Datadog CLI modifies existing Lambda function configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
+
+**If you are configuring initial tracing for your functions**, perform the following steps:
+
+1. Install the Datadog CLI client:
+
+    ```sh
+    npm install -g @datadog/datadog-ci
+    ```
+
+2. If you are new to Datadog serverless monitoring, launch the Datadog CLI in interactive mode to guide your first installation for a quick start, and you can ignore the remaining steps. To permanently install Datadog for your production applications, skip this step and follow the remaining ones to run the Datadog CLI command in your CI/CD pipelines after your normal deployment.
+
+    ```sh
+    datadog-ci lambda instrument -i --appsec
+    ```
+
+3. Configure the AWS credentials:
+
+    Datadog CLI requires access to the AWS Lambda service, and depends on the AWS JavaScript SDK to [resolve the credentials][1]. Ensure your AWS credentials are configured using the same method you would use when invoking the AWS CLI.
+
+4. Configure the Datadog site:
+
+    ```sh
+    export DATADOG_SITE="<DATADOG_SITE>"
+    ```
+
+    Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct **Datadog site** is selected on the right-hand side of this page).
+
+5. Configure the Datadog API key:
+
+    Datadog recommends saving the Datadog API key in AWS Secrets Manager for security. The key needs to be stored as a plaintext string (not a JSON blob). Ensure your Lambda functions have the required `secretsmanager:GetSecretValue` IAM permission.
+
+    ```sh
+    export DATADOG_API_KEY_SECRET_ARN="<DATADOG_API_KEY_SECRET_ARN>"
+    ```
+
+    For testing purposes, you can also set the Datadog API key in plaintext:
+
+    ```sh
+    export DATADOG_API_KEY="<DATADOG_API_KEY>"
+    ```
+
+6. Instrument your Lambda functions:
+
+    To instrument your Lambda functions, run the following command.
+
+    ```sh
+    datadog-ci lambda instrument --appsec -f <functionname> -f <another_functionname> -r <aws_region> -v {{< latest-lambda-layer-version layer="python" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
+    ```
+
+    To fill in the placeholders:
+    - Replace `<functionname>` and `<another_functionname>` with your Lambda function names. 
+    - Alternatively, you can use `--functions-regex` to automatically instrument multiple functions whose names match the given regular expression.
+    - Replace `<aws_region>` with the AWS region name.
+
+   **Note**: Instrument your Lambda functions in a development or staging environment first. If the instrumentation result is unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
+
+    Additional parameters can be found in the [CLI documentation][2].
+
+
+[1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
+[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
+
+{{% /tab %}}
+{{% tab "AWS CDK" %}}
+
+The [Datadog CDK Construct][1] automatically installs Datadog on your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
+
+1. Install the Datadog CDK constructs library:
+
+    ```sh
+    # For AWS CDK v1
+    pip install datadog-cdk-constructs
+
+    # For AWS CDK v2
+    pip install datadog-cdk-constructs-v2
+    ```
+
+2. Instrument your Lambda functions
+
+    ```python
+    # For AWS CDK v1
+    from datadog_cdk_constructs import Datadog
+    # NOT SUPPORTED IN V1
+
+    # For AWS CDK v2
+    from datadog_cdk_constructs_v2 import Datadog
+
+    datadog = Datadog(self, "Datadog",
+        python_layer_version={{< latest-lambda-layer-version layer="python" >}},
+        extension_layer_version={{< latest-lambda-layer-version layer="extension" >}},
+        site="<DATADOG_SITE>",
+        api_key_secret_arn="<DATADOG_API_KEY_SECRET_ARN>", // or api_key
+        enable_asm=True,
+      )
+    datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
+    ```
+
+    To fill in the placeholders:
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
+
+    More information and additional parameters can be found on the [Datadog CDK documentation][1].
+
+[1]: https://github.com/DataDog/datadog-cdk-constructs
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 
 {{% /tab %}}
 {{% tab "Custom" %}}
@@ -204,11 +327,7 @@ To install and configure the Datadog Serverless Framework plugin:
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
      DD_SERVERLESS_APPSEC_ENABLED: true
    ```
-   For **NodeJS or Python functions** also add:
-   ```yaml
-   environment:
-     DD_TRACE_ENABLED: true
-   ```
+
 4. For **Node** and **Python** functions only, double-check that the function's handler is set correctly:
     - **Node**: Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler`. 
        - Also, set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
@@ -218,123 +337,6 @@ To install and configure the Datadog Serverless Framework plugin:
 5. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
 
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
-
-{{% /tab %}}
-{{% tab "Datadog CLI" %}}
-
-The Datadog CLI modifies existing Lambda function configurations to enable instrumentation without requiring a new deployment. It is the quickest way to get started with Datadog's serverless monitoring.
-
-**If you are configuring initial tracing for your functions**, perform the following steps:
-
-1. Install the Datadog CLI client:
-
-    ```sh
-    npm install -g @datadog/datadog-ci
-    ```
-
-2. If you are new to Datadog serverless monitoring, launch the Datadog CLI in interactive mode to guide your first installation for a quick start, and you can ignore the remaining steps. To permanently install Datadog for your production applications, skip this step and follow the remaining ones to run the Datadog CLI command in your CI/CD pipelines after your normal deployment.
-
-    ```sh
-    datadog-ci lambda instrument -i --appsec
-    ```
-
-3. Configure the AWS credentials:
-
-    Datadog CLI requires access to the AWS Lambda service, and depends on the AWS JavaScript SDK to [resolve the credentials][1]. Ensure your AWS credentials are configured using the same method you would use when invoking the AWS CLI.
-
-4. Configure the Datadog site:
-
-    ```sh
-    export DATADOG_SITE="<DATADOG_SITE>"
-    ```
-
-    Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct **Datadog site** is selected on the right-hand side of this page).
-
-5. Configure the Datadog API key:
-
-    Datadog recommends saving the Datadog API key in AWS Secrets Manager for security. The key needs to be stored as a plaintext string (not a JSON blob). Ensure your Lambda functions have the required `secretsmanager:GetSecretValue` IAM permission.
-
-    ```sh
-    export DATADOG_API_KEY_SECRET_ARN="<DATADOG_API_KEY_SECRET_ARN>"
-    ```
-
-    For testing purposes, you can also set the Datadog API key in plaintext:
-
-    ```sh
-    export DATADOG_API_KEY="<DATADOG_API_KEY>"
-    ```
-
-6. Instrument your Lambda functions:
-
-    To instrument your Lambda functions, run the following command.
-
-    ```sh
-    datadog-ci lambda instrument --appsec -f <functionname> -f <another_functionname> -r <aws_region> -v {{< latest-lambda-layer-version layer="python" >}} -e {{< latest-lambda-layer-version layer="extension" >}}
-    ```
-
-    To fill in the placeholders:
-    - Replace `<functionname>` and `<another_functionname>` with your Lambda function names. 
-    - Alternatively, you can use `--functions-regex` to automatically instrument multiple functions whose names match the given regular expression.
-    - Replace `<aws_region>` with the AWS region name.
-
-   **Note**: Instrument your Lambda functions in a development or staging environment first. If the instrumentation result is unsatisfactory, run `uninstrument` with the same arguments to revert the changes.
-
-    Additional parameters can be found in the [CLI documentation][2].
-
-
-[1]: https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html
-[2]: https://docs.datadoghq.com/serverless/serverless_integrations/cli
-
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
-
-The [Datadog CDK Construct][1] automatically installs Datadog on your functions using Lambda Layers, and configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
-
-1. Install the Datadog CDK constructs library:
-
-    ```sh
-    # For AWS CDK v1
-    pip install datadog-cdk-constructs
-
-    # For AWS CDK v2
-    pip install datadog-cdk-constructs-v2
-    ```
-
-2. Instrument your Lambda functions
-
-    ```python
-    # For AWS CDK v1
-    from datadog_cdk_constructs import Datadog
-    # NOT SUPPORTED IN V1
-
-    # For AWS CDK v2
-    from datadog_cdk_constructs_v2 import Datadog
-
-    datadog = Datadog(self, "Datadog",
-        python_layer_version={{< latest-lambda-layer-version layer="python" >}},
-        extension_layer_version={{< latest-lambda-layer-version layer="extension" >}},
-        site="<DATADOG_SITE>",
-        api_key_secret_arn="<DATADOG_API_KEY_SECRET_ARN>",
-        enable_asm=True,
-      )
-    datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
-    ```
-
-    To fill in the placeholders:
-    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
-    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
-
-    More information and additional parameters can be found on the [Datadog CDK documentation][1].
-
-[1]: https://github.com/DataDog/datadog-cdk-constructs
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-
-{{% /tab %}}
-{{% tab "Serverless Plugin" %}}
-
-Set the `enableASM` configuration parameter to `true` in your `serverless.yml` file. See the [Serverless integration][6] docs for more information.
-
-[6]: https://docs.datadoghq.com/serverless/libraries_integrations/plugin/#configuration-parameters
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -1002,3 +1004,4 @@ A few minutes after you enable your application and exercise it, **threat inform
 [4]: /security/application_security/enabling/compatibility/serverless
 [5]: /security/default_rules/security-scan-detected/
 [6]: /serverless/libraries_integrations/plugin/
+[apm-lambda-tracing-setup]: https://docs.datadoghq.com/serverless/aws_lambda/distributed_tracing/

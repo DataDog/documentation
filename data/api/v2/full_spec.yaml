@@ -10335,6 +10335,15 @@ components:
       properties:
         aggregations:
           $ref: '#/components/schemas/MetricCustomAggregations'
+        exclude_tags_mode:
+          description: 'When set to true, the configuration will exclude the configured
+            tags and include any other submitted tags.
+
+            When set to false, the configuration will include the configured tags
+            and exclude any other submitted tags.
+
+            Defaults to false. Requires `tags` property.'
+          type: boolean
         include_percentiles:
           description: 'Toggle to include/exclude percentiles for a distribution metric.
 
@@ -15216,6 +15225,13 @@ components:
             description: Field.
             type: string
           type: array
+        hasOptionalGroupByFields:
+          description: When false, events without a group-by value are ignored by
+            the rule. When true, events with missing group-by fields are processed
+            with `N/A`, replacing the missing values.
+          example: false
+          readOnly: true
+          type: boolean
         metric:
           deprecated: true
           description: '(Deprecated) The target field to aggregate over when using
@@ -21551,7 +21567,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - monitors_read
+        - monitors_downtime
       summary: Get a downtime
       tags:
       - Downtimes
@@ -25699,7 +25715,11 @@ paths:
       description: 'Update the tag configuration of a metric or percentile aggregations
         of a distribution metric or custom aggregations
 
-        of a count, rate, or gauge metric.
+        of a count, rate, or gauge metric. By setting `exclude_tags_mode` to true
+        the behavior is changed
+
+        from an allow-list to a deny-list, and tags in the defined list will not be
+        queryable.
 
         Can only be used with application keys from users with the `Manage Tags for
         Metrics` permission.'

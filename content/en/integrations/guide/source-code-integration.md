@@ -203,9 +203,11 @@ Setting up the GitHub integration also allows you to see inline code snippets in
 Repositories on self-hosted instances or private URLs are not supported out-of-the-box by the Source Code Integration. To enable this feature, <a href="/help">contact Support</a>.
 </div>
 
-To link telemetry to your source code, Datadog collects metadata for every commit SHA from your Git repository with the [`datadog-ci git-metadata upload`][1] command.
+To link telemetry to your source code, you can upload your repository metadata with the [`datadog-ci git-metadata upload`][1] command.
 
 When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
+
+Run this command for every commit that you need to be synchronized with Datadog.
 
 ### Validation
 
@@ -245,10 +247,18 @@ If you're using the GitHub integration, or if you're hosting your repositories o
 {{% /tab %}}
 {{% tab "Continuous Profiler" %}}
 
-You can see links from profile frames to their source repository in the [Continuous Profiler][1].
+You can see a source code preview for profile frames broken down by line in the [Continuous Profiler][1].
 
 1. Navigate to [**APM** > **Profile Search**][2].
-2. Click on a profile and hover your cursor over a method in the flamegraph. A kebab icon with the **More actions** label appears on the right.
+2. Select **by Line** granularity in the explorer dropdowns.
+3. Hover your cursor over a method in the flame graph.
+
+{{< img src="integrations/guide/source_code_integration/profiler-source-code-preview.png" alt="Source code preview in the Continuous Profiler" style="width:100%;">}}
+
+You can also see links from profile frames to their source repository. This is supported for profile broken down by line, method, or file.
+
+1. Navigate to [**APM** > **Profile Search**][2].
+2. Hover your cursor over a method in the flame graph. A kebab icon with the **More actions** label appears on the right.
 3. Click **More actions** > **View in repo** to open the trace in its source code repository.
 
 {{< img src="integrations/guide/source_code_integration/profiler-link-to-git.png" alt="Link to GitHub from the Continuous Profiler" style="width:100%;">}}
