@@ -64,7 +64,7 @@ For more details about how to use `.as_count()` and `.as_rate()` see the [Visual
 
 ## Rollup with calendar aligned queries 
 
-![calendar_aligned_queries](https://github.com/DataDog/documentation/assets/5199201/3c8f97c2-9237-4eb9-9b0e-c81dfca2f698)
+![calendar_aligned_queries](https://github.com/DataDog/documentation/assets/5199201/41523abd-f897-4d22-a9ec-e6050d491c2a)
 
 You can customize how your metrics data is bucketed over time when using the `.rollup()` function with calendar aligned queries. This feature allows you the flexibility to define:
 
