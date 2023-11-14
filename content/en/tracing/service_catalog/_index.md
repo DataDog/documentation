@@ -31,7 +31,7 @@ algolia:
   tags: ['service catalog']
 ---
 
-{{< img src="tracing/service_catalog/service_catalog.mp4" video=true alt="Navigating around the Service Catalog" style="width:100%;" >}}
+{{< img src="tracing/service_catalog/service_catalog_updated.mp4" video=true alt="Navigating around the Service Catalog" style="width:100%;" >}}
 
 ## Overview
 

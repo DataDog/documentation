@@ -27,6 +27,16 @@ When the Agent is deployed on a remote host, the Agent host is different from th
 - The Datadog Agent hostname is always set on spans.
 - The Tracer hostname is set on spans if `DD_TRACE_REPORT_HOSTNAME` is `true` (default is `false`).
 
+ Language | Config | Environment Variable
+----------|--------|---------------------
+Ruby | `tracing.report_hostname` | `DD_TRACE_REPORT_HOSTNAME`
+C++ | `dd.trace.report-hostname` | `DD_TRACE_REPORT_HOSTNAME`
+Node.js | `reportHostname` | `DD_TRACE_REPORT_HOSTNAME`
+Go | - | `DD_TRACE_REPORT_HOSTNAME`
+Python | - | `DD_TRACE_REPORT_HOSTNAME`
+PHP | `datadog.trace.report_hostname` | `DD_TRACE_REPORT_HOSTNAME`
+Java |  `dd.trace.report-hostname` | `DD_TRACE_REPORT_HOSTNAME`
+
 ### When does APM use host information? 
 
 APM uses host information when you create [retention filters][2], generate [metrics from spans][3], or create [sensitive data scanner rules][4] using host tag filters in queries. For example, host tag filters like `availability-zone` and `cluster-name` are enriched from the Datadog Agent host information.

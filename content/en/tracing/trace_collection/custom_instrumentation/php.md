@@ -134,6 +134,10 @@ class SampleRegistry
 To write custom instrumentation, you do not need any additional composer package.
 </div>
 
+<div class="alert alert-info">
+    The Datadog APM PHP Api is fully documented <strong><a href="https://github.com/DataDog/dd-trace-php/blob/master/ext/ddtrace.stub.php">in stubs</a></strong>. This allows you to have automated documentation in PHPStorm. You can still go through the stub file for more info about Datadog APM PHP API.
+</div>
+
 To avoid mixing application or service business logic with instrumentation code, write the required code in a separate file.
 
 1. Create a file `datadog/instrumentation.php` and add it to the composer autoloader.
@@ -422,6 +426,10 @@ You can configure the propagation of context for distributed traces by injecting
 Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][3] page.
 
 ## API reference
+
+<div class="alert alert-info">
+    The Datadog APM PHP Api is fully documented <strong><a href="https://github.com/DataDog/dd-trace-php/blob/master/ext/ddtrace.stub.php">in stubs</a></strong>. This allows you to have automated documentation in PHPStorm. You can still go through the stub file for more info about Datadog APM PHP API.
+</div>
 
 ### Parameters of the tracing closure
 
