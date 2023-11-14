@@ -28,7 +28,7 @@ cascade:
 
 ### Supported features
 
-|  | Jenkins | GitLab | CircleCI | Buildkite | GitHub Actions | Azure Pipelines | Codefresh | TeamCity | AWS CodePipeline |
+|  | Jenkins | GitLab | CircleCI | Buildkite | GitHub Actions | Azure Pipelines | Codefresh | TeamCity | AWS Code Pipeline |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | {{< ci-details title="Pipeline trace visualization" >}}Visualization of pipeline executions with associated tracing.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | {{< ci-details title="Partial retries" >}}Identification of partial retries (for example, when only a subset of jobs were retried).{{< /ci-details >}} |  | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
