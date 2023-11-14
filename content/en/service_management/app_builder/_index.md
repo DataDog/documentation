@@ -18,7 +18,7 @@ Datadog App Builder is a low-code application building platform that streamlines
 
 ## Configure App Builder actions
 
-Datadog App Builder provides an [Action Catalog][1] of over 300 actions across several integrations. The Acton Catalog and the connection credentials for each integration are shared with [Datadog Workflow Automation][2]. If there isn't an integration that accomplishes your task, generic actions such as the HTTP request and JavaScript function allow you to perform any task your app requires.
+Datadog App Builder provides an [Action Catalog][1] of over 300 actions across several integrations. The Action Catalog and the connection credentials for each integration are shared with [Datadog Workflow Automation][2]. If there isn't an integration that accomplishes your task, generic actions such as the HTTP request and JavaScript function allow you to perform any task your app requires.
 
 ## Start with blueprints
 
@@ -29,7 +29,7 @@ Below are a few examples of apps you can build:
 - Monitor your PagerDuty service status to get complete context while working on incidents.
 - Allow users to manage their EC2 instances directly from a dashboard.
 - Allow users to explore and view the content of an S3 bucket.
-- Use a PagerDuty integration to see who is on-call for each team in an org.
+- Use a PagerDuty integration to see who is on-call for each team in an organization.
 - Summarize the progress of each PR in a given repo.
 
 ## Get started faster with Bits AI
