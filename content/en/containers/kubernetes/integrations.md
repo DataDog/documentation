@@ -562,7 +562,7 @@ As a result, the Agent contains a `redisdb.yaml` file with the above configurati
 
 Configurations below apply to an Apache container image with the `<CONTAINER_IDENTIFIER>`: `apache`. The Autodiscovery templates are configured to collect metrics from the Apache container and set up a Datadog-HTTP check with instances for testing two endpoints.
 
-Check names are `apache`, `http_check`, their `<INIT_CONFIG>`, and `<INSTANCE_CONFIG>`. Full configurations can be found in their respective documentation page: [Datadog-Apache integration][9], [Datadog-HTTP check integration][10].
+Check names are `apache`, `http_check`, their `<INIT_CONFIG>`, and `<INSTANCE_CONFIG>`. Full configurations can be found in their respective documentation: [Datadog-Apache integration][9] and [Datadog-HTTP check integration][10].
 
 {{< tabs >}}
 {{% tab "Kubernetes (AD v2)" %}}
