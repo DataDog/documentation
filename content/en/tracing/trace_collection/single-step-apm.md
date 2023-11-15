@@ -76,76 +76,7 @@ For a Docker Linux container:
 
 {{% tab "Kubernetes" %}}
 
-You can enable APM when installing the Agent with the [Datadog Operator](#operator) or [Helm chart](#helm-chart).
-
-### Operator
-
-The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and OpenShift.
-
-#### Prerequisites
-
-- Kubernetes Cluster version v1.20.X+ and v1.11.0+. For earlier versions, because of limited CRD support, the Operator may not work as expected.
-- [`Helm`][7] for deploying the `datadog-operator`.
-- [`Kubectl` CLI][8] for installing the `datadog-agent`.
-
-#### Installation
-
-To enable instrumentation with the Datadog Operator:
-
-1. Install the [Datadog Operator][9]:
-
-   ```shell
-   helm repo add datadog https://helm.datadoghq.com
-   helm install my-datadog-operator datadog/datadog-operator
-   ```
-
-2. Create a Kubernetes secret with your API and app keys
-
-   ```shell
-   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
-   ```
-   Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API][10] and [application keys][11].
-
-2. Create a file, `datadog-agent.yaml`, with the spec of your Datadog Agent deployment configuration. The simplest configuration is as follows:
-
-   ```yaml
-   kind: DatadogAgent
-   apiVersion: datadoghq.com/v2alpha1
-   metadata:
-     name: datadog
-   spec:
-     global:
-       site: <DATADOG_SITE>
-       credentials:
-         apiSecret:
-           secretName: datadog-secret
-           keyName: api-key
-         appSecret:
-           secretName: datadog-secret
-           keyName: app-key
-   features:
-     apm:
-       instrumentation:
-         enabled: true  
-     override:
-       clusterAgent:
-         image:
-           name: gcr.io/datadoghq/cluster-agent:latest
-       nodeAgent:
-         image:
-           name: gcr.io/datadoghq/agent:latest
-   ```
-
-   Replace `<DATADOG_SITE>` with your [Datadog site][12]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct **DATADOG SITE** is selected on this page).
-
-3. Deploy the Datadog Agent with the above configuration file:
-   ```shell
-   kubectl apply -f /path/to/your/datadog-agent.yaml
-   ```
-
-### Helm chart
-
-You can use the Datadog Helm chart to install the Datadog Agent on all nodes in your cluster with a DaemonSet.
+You can enable APM when installing the Agent with the Datadog Helm chart. Use the Datadog Helm chart to install the Datadog Agent on all nodes in your cluster with a DaemonSet.
 
 #### Prerequisites
 
@@ -209,82 +140,6 @@ To enable single step instrumentation with Helm:
 
 You can choose to selectively instrument or to not instrument specific namespaces.
 
-#### Operator
-
-To enable instrumentation for specific namespaces:
-
-1. Add the `enabledNamespaces` configuration to your `datadog-agent.yaml` file:
-   ```yaml
-      kind: DatadogAgent
-      apiVersion: datadoghq.com/v2alpha1
-      metadata:
-        name: datadog
-      spec:
-        global:
-          site: <DATADOG_SITE>
-          credentials:
-            apiSecret:
-              secretName: datadog-secret
-              keyName: api-key
-            appSecret:
-              secretName: datadog-secret
-              keyName: app-key
-      features:
-        apm:
-          instrumentation:
-            enabled: true 
-            enabledNamespaces: # Add namespaces to instrument
-              - default
-              - applications
-        override:
-          clusterAgent:
-            image:
-              name: gcr.io/datadoghq/cluster-agent:latest
-          nodeAgent:
-            image:
-              name: gcr.io/datadoghq/agent:latest
-   ```
-
-2. Restart your services.
-
-To disable instrumentation for specific namespaces:
-
-1. Add the `disabledNamespaces` configuration to your `datadog-agent.yaml` file:
-   ```yaml
-      kind: DatadogAgent
-      apiVersion: datadoghq.com/v2alpha1
-      metadata:
-        name: datadog
-      spec:
-        global:
-          site: <DATADOG_SITE>
-          credentials:
-            apiSecret:
-              secretName: datadog-secret
-              keyName: api-key
-            appSecret:
-              secretName: datadog-secret
-              keyName: app-key
-      features:
-        apm:
-          instrumentation:
-            enabled: true 
-            disabledNamespaces: # Add namespaces to not instrument
-              - default
-              - applications
-        override:
-          clusterAgent:
-            image:
-              name: gcr.io/datadoghq/cluster-agent:latest
-          nodeAgent:
-            image:
-              name: gcr.io/datadoghq/agent:latest
-   ```
-
-2. Restart your services.
-
-#### Helm chart
-
 To enable instrumentation for specific namespaces:
 
 1. Add the `enabledNamespaces` configuration to your `datadog-values.yaml` file:
@@ -335,47 +190,6 @@ To disable instrumentation for specific namespaces:
 
 You can optionally set specific tracing library versions to use. If you don't set a specific version, it defaults to the latest version.
 
-#### Operator
-
-1. Add the following configuration to your `datadog-agent.yaml` file:
-   ```yaml
-      kind: DatadogAgent
-      apiVersion: datadoghq.com/v2alpha1
-      metadata:
-        name: datadog
-      spec:
-        global:
-          site: <DATADOG_SITE>
-          credentials:
-            apiSecret:
-              secretName: datadog-secret
-              keyName: api-key
-            appSecret:
-              secretName: datadog-secret
-              keyName: app-key
-      features:
-        apm:
-          instrumentation:
-            enabled: true 
-            libVersions: # Add any versions you want to set
-               dotnet: v2.40.0
-               python: v1.20.6
-               java: v1.22.0
-               js: v4.17.0
-               ruby: v1.15.0 
-        override:
-          clusterAgent:
-            image:
-              name: gcr.io/datadoghq/cluster-agent:latest
-          nodeAgent:
-            image:
-              name: gcr.io/datadoghq/agent:latest
-   ```
-
-2. Restart your services.
-
-#### Helm chart
-
 1. Add the following configuration to your `datadog-values.yaml` file:
    ```yaml
    datadog:
@@ -406,15 +220,9 @@ You can optionally set specific tracing library versions to use. If you don't se
 
 Set `DD_ENV` in your one-line install command for Linux and the library injector installation command for Docker to automatically tag instrumented services and other telemetry that pass through the Agent with a specific environment. For example, if the Agent is installed in your staging environment, set `DD_ENV=staging` to associate your observability data with `staging`.
 
-For Kubernetes, you can add this to your configuration files:
-- Datadog Operator: Add a `- env:<env-name>` tag to `datadog-agent.yaml`.
-   ```yaml
-   spec:
-      global:
-         tags:
-            - env:staging
-   ```
-- Helm charts: Add a `- env:<env-name>` tag to `datadog-values.yaml`
+For Kubernetes, you can add this to your configuration file:
+
+Add a `- env:<env-name>` tag to `datadog-values.yaml`:
    ```yaml
    datadog:
       tags:
@@ -499,29 +307,12 @@ To stop producing traces, remove library injectors and restart the infrastructur
 
 {{% tab "Kubernetes" %}}
 
-For the Datadog Operator:
-
-1. Update the following configuration in `datadog-agent.yaml`:
-   ```yaml
-   features:  
-     apm:
-       instrumentation:
-         enabled: false # Change this
-   ```
-
-2. Deploy the Datadog Agent with the updated configuration file:
-   ```shell
-   kubectl apply -f /path/to/your/datadog-agent.yaml
-   ```
-
-For Helm charts: 
-
 1. Update the following configuration in `datadog-values.yaml`:
    ```yaml
    datadog:  
      apm:
        instrumentation:
-         enabled: false # Change this
+         enabled: false # Set to false to disable instrumentation
    ```
 
 2. Run the following command:
@@ -538,4 +329,3 @@ For Helm charts:
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/remote_config
 [3]: /tracing/service_catalog/
-
