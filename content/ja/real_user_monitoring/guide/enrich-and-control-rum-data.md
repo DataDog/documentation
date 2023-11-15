@@ -66,6 +66,7 @@ datadogRum.init({
         if (event.type === 'resource' && event.resource.type === 'fetch') {
             event.context.responseHeaders = Object.fromEntries(context.response.headers)
         }
+        return true
     },
     ...
 });

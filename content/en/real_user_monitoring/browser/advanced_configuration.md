@@ -348,6 +348,7 @@ datadogRum.init({
         if (event.type === 'resource' && event.resource.type === 'fetch') {
             event.context.responseHeaders = Object.fromEntries(context.response.headers)
         }
+        return true
     },
     ...
 });
@@ -363,6 +364,7 @@ window.DD_RUM.onReady(function() {
             if (event.type === 'resource' && event.resource.type === 'fetch') {
                 event.context.responseHeaders = Object.fromEntries(context.response.headers)
             }
+            return true
         },
         ...
     })
@@ -379,6 +381,7 @@ window.DD_RUM &&
             if (event.type === 'resource' && event.resource.type === 'fetch') {
                 event.context.responseHeaders = Object.fromEntries(context.response.headers)
             }
+            return true
         },
         ...
     });
