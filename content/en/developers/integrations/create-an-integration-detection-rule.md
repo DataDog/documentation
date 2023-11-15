@@ -26,7 +26,7 @@ Create an out-of-the-box detection rule to help users find value in your Datadog
 
 ### Open a pull request
 
-1. Save the detection rule JSON file to your integration's `assets/security_rules` folder.  
+1. Save the detection rule JSON file to your integration's `assets/security` folder.  
 
 2. Open a pull request (PR) with your integration files along with your detection rule JSON file to the corresponding integration folder in either the [`integrations-extras` GitHub repository][5] or [`Marketplace` Github repository][6]. 
 
