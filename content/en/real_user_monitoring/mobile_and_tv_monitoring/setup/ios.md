@@ -29,7 +29,7 @@ further_reading:
 
 ## Overview
 
-Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user journeys of your application's individual users. 
+Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user journeys of your application's individual users.
 
 ## Setup
 
@@ -38,7 +38,7 @@ Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real
 3. Initialize the library.
 4. Initialize the RUM Monitor, `DatadogURLSessionDelegate`, to start sending data.
 
-**Note:** The minimum supported version for the Datadog iOS SDK is iOS v11+. The Datadog iOS SDK also supports tvOS. 
+**Note:** The minimum supported version for the Datadog iOS SDK is iOS v11+. The Datadog iOS SDK also supports tvOS.
 
 ### Declare the SDK as a dependency
 
@@ -98,13 +98,13 @@ DatadogRUM.xcframework
 
    {{< img src="real_user_monitoring/ios/ios-create-application.png" alt="Create a RUM application for iOS in Datadog" style="width:100%;border:none" >}}
 
-To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][6] to configure the `dd-sdk-ios` library, they would be exposed client-side in the iOS application's byte code. 
+To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][6] to configure the `dd-sdk-ios` library, they would be exposed client-side in the iOS application's byte code.
 
 For more information about setting up a client token, see the [Client token documentation][7].
 
 ### Initialize the library
 
-In the initialization snippet, set an environment name, service name, and version number. In the examples below, `app-name` specifies the variant of the application that generates data. 
+In the initialization snippet, set an environment name, service name, and version number. In the examples below, `app-name` specifies the variant of the application that generates data.
 
 For more information, see [Using Tags][11].
 
@@ -120,7 +120,7 @@ Datadog.initialize(
     clientToken: "<client token>",
     env: "<environment>",
     service: "<service name>"
-  ), 
+  ),
   trackingConsent: trackingConsent
 )
 ```
@@ -151,7 +151,7 @@ Datadog.initialize(
     env: "<environment>",
     site: .eu1,
     service: "<service name>"
-  ), 
+  ),
   trackingConsent: trackingConsent
 )
 ```
@@ -183,7 +183,7 @@ Datadog.initialize(
     env: "<environment>",
     site: .us3,
     service: "<service name>"
-  ), 
+  ),
   trackingConsent: trackingConsent
 )
 ```
@@ -214,8 +214,8 @@ Datadog.initialize(
     clientToken: "<client token>",
     env: "<environment>",
     site: .us5,
-    service: "<service name>"    
-  ), 
+    service: "<service name>"
+  ),
   trackingConsent: trackingConsent
 )
 ```
@@ -247,7 +247,7 @@ Datadog.initialize(
     env: "<environment>",
     site: .us1_fed,
     service: "<service name>"
-  ), 
+  ),
   trackingConsent: trackingConsent
 )
 ```
@@ -279,7 +279,7 @@ Datadog.initialize(
     env: "<environment>",
     site: .ap1,
     service: "<service name>"
-  ), 
+  ),
   trackingConsent: trackingConsent
 )
 ```
@@ -301,7 +301,7 @@ configuration.site = [DDSite ap1];
 
 The RUM iOS SDK automatically tracks user sessions depending on options provided at the SDK initialization. To add GDPR compliance for your EU users and other [initialization parameters][9] to the SDK configuration, see the [Set tracking consent documentation][8].
 
-### Initialize the RUM Monitor and `DDURLSessionDelegate`
+### Initialize the RUM Monitor and enable `URLSessionInstrumentation`
 
 Configure and register the RUM Monitor. You only need to do it once, usually in your `AppDelegate` code:
 
@@ -335,22 +335,31 @@ configuration.uiKitActionsPredicate = [DDDefaultUIKitRUMActionsPredicate new];
 {{% /tab %}}
 {{% /tabs %}}
 
-To monitor requests sent from the `URLSession` instance as resources, assign `DDURLSessionDelegate()` as a `delegate` of that `URLSession`:
+To monitor requests sent from the `URLSession` instance as resources, enable `URLSessionInstrumentation` for your delegate type and pass the delegate instance to the `URLSession`:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
+URLSessionInstrumentation.enable(
+    with: .init(
+        delegateClass: SessionDelegate.self
+    )
+)
+
 let session = URLSession(
     configuration: .default,
-    delegate: DatadogURLSessionDelegate(),
+    delegate: SessionDelegate(),
     delegateQueue: nil
 )
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
+DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[SessionDelegate class]];
+[DDURLSessionInstrumentation enableWithConfiguration:config];
+
 NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
-                                                      delegate:[[DDNSURLSessionDelegate alloc] init]
+                                                      delegate:[[SessionDelegate alloc] init]
                                                  delegateQueue:nil];
 ```
 {{% /tab %}}
@@ -377,7 +386,7 @@ RUM.enable(
 
 ## Track iOS errors
 
-[iOS Crash Reporting and Error Tracking][13] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][10]. 
+[iOS Crash Reporting and Error Tracking][13] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][10].
 
 ## Further Reading
 
