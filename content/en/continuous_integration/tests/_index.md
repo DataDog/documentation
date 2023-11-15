@@ -35,6 +35,21 @@ cascade:
 
 [Test Visibility][1] provides a test-first view into your CI health by displaying important metrics and results from your tests. It can help you investigate performance problems and test failures that concern you the most because you work on the related code, not because you maintain the pipelines they are run in.
 
+## Setup
+
+{{< whatsnext desc="Choose a language to set up Test Visibility in Datadog:" >}}
+    {{< nextlink href="continuous_integration/tests/setup/dotnet" >}}.NET{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/java" >}}Java{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/javascript" >}}JavaScript{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/ruby" >}}Ruby{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/swift" >}}Swift{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/junit_upload" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/containers" >}}Tests running in containers{{< /nextlink >}}
+{{< /whatsnext >}}
+
+In addition to tests, CI Visibility provides visibility over the whole testing phase of your project (except for Ruby).
+
 ### Supported features
 
 |                                                                                                                                                                                                                  |   .NET  |   Java  |      Javascript      |     Python      |   Ruby  |  Swift  |       JUnit Xml      |
@@ -53,21 +68,6 @@ cascade:
 | {{< ci-details title="Code coverage support" >}}Ability to report total code coverage metrics.{{< /ci-details >}}                                                                                                | {{< X >}} | {{< X >}} |        {{< X >}}       |                 |         | {{< X >}} |   {{< X >}} (manual)   |
 | {{< ci-details title="Benchmark tests support" >}}Automatic detection of performance statistics for benchmark tests.{{< /ci-details >}}                                                                          | {{< X >}} |         |                      |    {{< X >}}    |         | {{< X >}} |                      |
 | {{< ci-details title="Parameterized tests" >}}Automatic detection of parameterized tests.{{< /ci-details >}}                                                                                                     | {{< X >}} | {{< X >}} |        {{< X >}}       |    {{< X >}}    |         | {{< X >}} |                      |
-
-## Setup
-
-{{< whatsnext desc="Choose a language to set up Test Visibility in Datadog:" >}}
-    {{< nextlink href="continuous_integration/tests/setup/dotnet" >}}.NET{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/setup/java" >}}Java{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/setup/javascript" >}}JavaScript{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/setup/python" >}}Python{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/setup/ruby" >}}Ruby{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/setup/swift" >}}Swift{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/junit_upload" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/containers" >}}Tests running in containers{{< /nextlink >}}
-{{< /whatsnext >}}
-
-In addition to tests, CI Visibility provides visibility over the whole testing phase of your project (except for Ruby).
 
 ## Default configurations
 
