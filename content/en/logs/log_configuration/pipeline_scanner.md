@@ -15,9 +15,9 @@ further_reading:
 
 ## Overview
 
-The Log Pipeline Scanner helps you to inspect your logs so that you can find out which log pipelines and processors are applied to them. Log pipelines are made up of a sequential chain of processors that parse and enrich your logs. A large organization might have hundreds of pipelines that modify logs from multiple services. These pipelines are set up and managed by different teams for their specific use cases, such as security monitoring, compliance audits, and DevOps. If you are trying to parse new logs, it might be difficult to know which processors and pipelines are modifying the logs.
+The Log Pipelines Scanner allows you to scan log pipelines in real time, tracing specific logs and quickly identifying which pipelines and processing rules have made changes to its fields. Organizations rely on log pipelines to process extensive log volumes, each team restructuring and enriching logs differently for their specific use cases, such as security monitoring, compliance audits, and DevOps.
 
-Log Pipeline Scanner traces your queried logs so that you can see in real time which pipelines and processing rules have modified them. This lets you and your team:
+This lets you and your team:
 
 - Troubleshoot log processing issues, such as unparsed logs, missing tags, or unexpected changes to the log structure.
 - Determine and remove conflicting or redundant processing rules.
