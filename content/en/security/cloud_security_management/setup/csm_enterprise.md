@@ -28,7 +28,7 @@ The Cloud Security Management (CSM) Enterprise package includes [CSM Threats][1]
 
 {{% csm-prereqs-enterprise %}}
 
-## Enable resource scanning for misconfigurations
+## Enable resource scanning for cloud accounts
 
 To enable resource scanning for your cloud accounts, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, and Google Cloud project.
 
@@ -584,31 +584,37 @@ sbom:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Enable CloudTrail logs forwarding for identity risks
+## Enable CloudTrail logs forwarding
 
 <div class="alert alert-info">At this time, CSM Identity Risks is available for AWS only.</div>
 
 ### Set up the Datadog AWS integration
 
-If you haven't already, set up the [Amazon Web Services integration][1]. You must also add the [required permissions][2] for resource collection.
+If you haven't already, set up the [Amazon Web Services integration][18].
 
-### Enable AWS CloudTrail logging 
+### Enable AWS CloudTrail logging
 
-To enable CloudTrail log collection, follow the instructions on the CSM Setup page.
+Enable AWS CloudTrail logging so that logs are sent to a S3 bucket.
 
-1. In AWS CloudTrail, create a trail and select the S3 bucket where you want to write the logs to.
+1. Click **Create trail** on the [CloudTrail dashboard][19].
+2. Enter a name for your trail.
+3. Create a new S3 bucket or use an existing S3 bucket to store the CloudTrail logs. 
+4. Create a new AWS KMS key or use an existing AWS KMS key. Click **Next**.
+5. Leave the event type with the default management read and write events, or choose additional event types you want to send to Datadog. 
+6. Click **Next**.
+7. Review and click **Create trail**.
 
 ### Send AWS CloudTrail logs to Datadog
 
 Set up a trigger on your Datadog Forwarder Lambda function to send CloudTrail logs stored in the S3 bucket to Datadog for monitoring.
 
-1. Go to the [Datadog Forwarder Lambda][6] that was created during the AWS integration set up.
+1. Go to the [Datadog Forwarder Lambda][20] that was created during the AWS integration set up.
 2. Click **Add trigger**.
 3. Select **S3** for the trigger.
 4. Select the S3 bucket you are using to collect AWS CloudTrail logs. 
 5. For Event type, select **All object create events**.
 6. Click **Add**.
-7. See CloudTrail logs in Datadog's [Log Explorer][7].
+7. See CloudTrail logs in Datadog's [Log Explorer][21].
 
 ## Further reading
 
@@ -624,7 +630,11 @@ Set up a trigger on your Datadog Forwarder Lambda function to send CloudTrail lo
 [8]: /security/cloud_security_management/setup
 [11]: https://www.cisa.gov/sbom
 [12]: /security/cloud_security_management
-[15]: /security/cloud_security_management/troubleshooting
 [14]: /agent
+[15]: /security/cloud_security_management/troubleshooting
 [16]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/
 [17]: /containers/kubernetes/installation/?tab=helm
+[18]: /integrations/amazon_web_services/
+[19]: https://console.aws.amazon.com/cloudtrail/home
+[20]: https://console.aws.amazon.com/lambda/home
+[21]: https://app.datadoghq.com/logs?query=service%3Acloudtrail
