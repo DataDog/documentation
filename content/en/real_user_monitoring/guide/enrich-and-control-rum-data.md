@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The RUM Browser SDK captures RUM events and populates their main attributes. The `beforeSend` callback function gives you access to every event collected by the RUM SDK before they are sent to Datadog. 
+The RUM Browser SDK captures RUM events and populates their main attributes. The `beforeSend` callback function gives you access to every event collected by the RUM SDK before they are sent to Datadog.
 
 Intercepting the RUM events allows you to:
 
@@ -64,8 +64,9 @@ datadogRum.init({
     beforeSend: (event, context) => {
         // collect a RUM resource's response headers
         if (event.type === 'resource' && event.resource.type === 'fetch') {
-            event.context = {...event.context, responseHeaders: context.response.headers}
+            event.context.responseHeaders = Object.fromEntries(context.response.headers)
         }
+        return true
     },
     ...
 });
