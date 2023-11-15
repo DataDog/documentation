@@ -17,7 +17,7 @@ The following examples show how it works on each infrastructure type.
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 
-In one command, you can install, configure, and start the Agent with APM and [Remote Configuration][1] enabled, and set up automatic instrumentation of your services.
+In one command, you can install, configure, and start the Agent with APM and [Remote Configuration][2] enabled, and set up automatic instrumentation of your services.
 
 For an Ubuntu host:
 
@@ -30,14 +30,14 @@ For an Ubuntu host:
    Replace `<YOUR_DD_API_KEY>` with your [Datadog API][4].
    Replace `<YOUR_DD_SITE>` with your [Datadog site][3]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct **DATADOG SITE** is selected on this page).
 2. Restart the services on the host or VM.
-3. [Explore the performance observability of your services in Datadog][2].
+3. [Explore the performance observability of your services in Datadog][5].
 
    <div class="alert alert-info">You can optionally set an environment for your services and other telemetry that pass through the Agent. Read <a href="#tagging-observability-data-by-environment">tagging observability data by environment</a> to learn how. </div>
 
-[1]: /agent/remote_config
-[2]: /tracing/service_catalog/
+[2]: /agent/remote_config
 [3]: /getting_started/site/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: /tracing/service_catalog/
 
 {{% /tab %}}
 
@@ -62,15 +62,15 @@ For a Docker Linux container:
      -v /var/run/docker.sock:/var/run/docker.sock:ro \
      gcr.io/datadoghq/agent:7
    ```
-   Replace `<YOUR_DD_API_KEY>` with your [Datadog API][4].
+   Replace `<YOUR_DD_API_KEY>` with your [Datadog API][5].
 
 3. Restart the Docker containers.
-4. [Explore the performance observability of your services in Datadog][2].
+4. [Explore the performance observability of your services in Datadog][6].
 
    <div class="alert alert-info">You can optionally set an environment for your services and other telemetry that pass through the Agent. Read <a href="#tagging-observability-data-by-environment">tagging observability data by environment</a> to learn how. </div>
 
-[1]: /agent/remote_config
-[2]: /tracing/service_catalog/
+[5]: https://app.datadoghq.com/organization-settings/api-keys
+[6]: /tracing/service_catalog/
 
 {{% /tab %}}
 
@@ -85,14 +85,14 @@ The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and Open
 #### Prerequisites
 
 - Kubernetes Cluster version v1.20.X+: Tests were done on v1.20.0+; should be supported in v1.11.0+. For earlier versions, because of limited CRD support, the Operator may not work as expected.
-- [`Helm`][2] for deploying the `datadog-operator`.
-- [`Kubectl` CLI][3] for installing the `datadog-agent`.
+- [`Helm`][7] for deploying the `datadog-operator`.
+- [`Kubectl` CLI][8] for installing the `datadog-agent`.
 
 #### Installation
 
 To enable instrumentation with the Datadog Operator:
 
-1. Install the [Datadog Operator][5]:
+1. Install the [Datadog Operator][9]:
 
    ```shell
    helm repo add datadog https://helm.datadoghq.com
@@ -104,7 +104,7 @@ To enable instrumentation with the Datadog Operator:
    ```shell
    kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
    ```
-   Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API][6] and [application keys][7].
+   Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API][10] and [application keys][11].
 
 2. Create a file, `datadog-agent.yaml`, with the spec of your Datadog Agent deployment configuration. The simplest configuration is as follows:
 
@@ -136,7 +136,7 @@ To enable instrumentation with the Datadog Operator:
            name: gcr.io/datadoghq/agent:latest
    ```
 
-   Replace `<DATADOG_SITE>` with your [Datadog site][10]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct **DATADOG SITE** is selected on this page).
+   Replace `<DATADOG_SITE>` with your [Datadog site][12]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct **DATADOG SITE** is selected on this page).
 
 3. Deploy the Datadog Agent with the above configuration file:
    ```shell
@@ -149,7 +149,7 @@ You can use the Datadog Helm chart to install the Datadog Agent on all nodes in 
 
 #### Prerequisites
 
-- [Helm][1]
+- [Helm][13]
 - If this is a fresh install, add the Helm Datadog repo:
     ```bash
     helm repo add datadog https://helm.datadoghq.com
@@ -161,7 +161,7 @@ You can use the Datadog Helm chart to install the Datadog Agent on all nodes in 
 To enable single step instrumentation with Helm:
 
 1. Create an empty `datadog-values.yaml` file. Any parameters not specified in this file default to those set in [`values.yaml`][14].
-2. Create a Kubernetes Secret to store your Datadog [API key][3] and [app key][15]:
+2. Create a Kubernetes Secret to store your Datadog [API key][10] and [app key][11]:
    
    ```bash
    kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY --from-literal app-key=$DD_APP_KEY
@@ -176,7 +176,7 @@ To enable single step instrumentation with Helm:
       instrumentation:
          enabled: true
    ```
-   Replace `<DATADOG_SITE>` with your [Datadog site][13]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
+   Replace `<DATADOG_SITE>` with your [Datadog site][12]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 4. Run the following command:
    ```bash
    helm install <RELEASE_NAME> \
@@ -196,20 +196,14 @@ To enable single step instrumentation with Helm:
     datadog/datadog
    ```
 
-[1]: https://v3.helm.sh/docs/intro/install/
-[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-state-metrics
-[5]: /agent/kubernetes/apm?tab=helm
-[6]: /agent/kubernetes/log?tab=helm
-[8]: https://gcr.io/datadoghq
-[9]: https://gallery.ecr.aws/datadog/
-[10]: https://hub.docker.com/u/datadog/
-[11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
-[12]: /integrations/kubernetes_state_core
-[13]: /getting_started/site
-[14]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
-[15]: https://app.datadoghq.com/organization-settings/application-keys
+[7]: https://v3.helm.sh/docs/intro/install/
+[8]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+[9]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
+[10]: https://app.datadoghq.com/organization-settings/api-keys
+[11]: https://app.datadoghq.com/organization-settings/application-keys
+[12]: /getting_started/site
+[13]: https://v3.helm.sh/docs/intro/install/
+[14]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 
 ### Enabling or disabling namespaces
 
@@ -408,14 +402,6 @@ You can optionally set specific tracing library versions to use. If you don't se
     --set targetSystem=<TARGET_SYSTEM> \
     datadog/datadog
    ```
-
-[3]: /containers/kubernetes/installation/?tab=operator
-[4]: /containers/kubernetes/installation/?tab=helm
-[5]: https://artifacthub.io/packages/helm/datadog/datadog-operator
-[6]: https://app.datadoghq.com/organization-settings/api-keys
-[7]: https://app.datadoghq.com/organization-settings/application-keys
-[9]: /getting_started/site
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -554,5 +540,6 @@ For Helm charts:
 {{< /tabs >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /tracing/services/
+[2]: /agent/remote_config
+[3]: /tracing/service_catalog/
 
