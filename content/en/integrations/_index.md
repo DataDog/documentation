@@ -6,7 +6,7 @@ aliases:
     - /integrations/verisign_openhybrid/
     - /integrations/snyk/
     - /integrations/lightstep_incident_response/
-    - /integrarions/mainstorconcept_ziris/
+    - /integrations/mainstorconcept_ziris/
 description: Gather data from all of your systems, apps, & services
 cascade:
 - _target:
