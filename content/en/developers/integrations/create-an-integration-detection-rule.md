@@ -4,7 +4,7 @@ further_reading:
   tag: Documentation
   text: Log Detection Rules
 kind: documentation
-title: Create an Integration-Detection Rule
+title: Create an Integration Detection Rule
 description: Learn how to create a detection rule for your integration.
 ---
 ## Overview
@@ -26,31 +26,31 @@ To create a Datadog integration, see [Create a New Integration][3].
 
 4. Save the JSON file and name it according to your detection rule title. For example, `your_integration_name_rule_name.json`.
 
-5. In the detection rule JSON file, add and fill out the partnerRuleId, and remove the `isEnabled` attribute. For more information, see [Configuration best practices](#configuration-best-practices).
+5. In the detection rule JSON file, add and fill out the `partnerRuleId`, and remove the `isEnabled` attribute. For more information, see [Configuration best practices](#configuration-best-practices).
 
 ### Open a pull request
 
 1. Save the detection rule JSON file to your integration's `assets/security` folder.  
 
-2. Open a pull request (PR) with your integration files along with your detection rule JSON file to the corresponding integration folder in either the [`integrations-extras` GitHub repository][5] or [`Marketplace` Github repository][6]. 
+2. Open a pull request (PR) to update the corresponding integration folder in either the [`integrations-extras` GitHub repository][5] or [`Marketplace` Github repository][6]. The PR should include your detection rule JSON file, along with any new integration files.
 
-3. After it's approved, Datadog merges the PR and your integration-recommended monitor is pushed to production.
+3. Datadog approves and merges the PR, and your integration-recommended monitor is pushed to production.
 
 ## Verify your detection rule in production
 
-To see the out-of-the-box detection rule, the relevant integration tile must be `Installed` in Datadog and Cloud SIEM must be enabled. 
+To see the out-of-the-box detection rule, the relevant integration tile must be `Installed` in Datadog, and Cloud SIEM must be enabled. 
 
-Find your detection rule in the [Detection Rules list][2]. Ensure logos render correctly on the Detection Rules list page.
-
-Enable the detection rule to ensure the rule triggers as expected. 
+1. Find your detection rule in the [Detection Rules list][2], and expand it. 
+2. Ensure that its logos render correctly.
+3. Verify that the rule is enabled.
 
 ## Configuration best practices
 
-In addition to the detection rule definition, the PartnerRuleId field is required for partner contributed detection rules. The `isEnabled` field should be removed as it does not apply to partner contributed detection rules.
+In addition to the detection rule definition, the `partnerRuleId` field is required for partner contributed detection rules. The `isEnabled` field should be removed as it does not apply to partner contributed detection rules.
 
 |      | Description    | Examples |
 | ---  | ----------- | ----------- |
-|PartnerRuleId | Unique identifier for the rule, following the format `ext-00*-***` where * could be any alphanumeric characters. | `ext-003-bzd` |
+|partnerRuleId | Unique identifier for the rule, following the format `ext-00*-***` where * could be any alphanumeric characters. | `ext-003-bzd` |
 
 Below is an example of a well-defined detection rule:
 
@@ -58,71 +58,71 @@ Below is an example of a well-defined detection rule:
 
 For more information, see the documentation on [configuring a detection rule][7].
 
-## Understanding Validation Messages
+## Understanding validation messages
 
-### Rule JSON Parsing
+### Rule JSON parsing
 ```
-File={file_path} in collection={collection} is an invalid JSON: error={error}
+File=<FILE_PATH> in collection=<COLLECTION> is an invalid JSON: error=<ERROR>
 ```
-This error means that the JSON located at {file_path} is considered invalid JSON
+This error means that the JSON located at `<FILE_PATH>` is considered invalid JSON
 
-### RuleId/Rule Name
+### Rule ID/Rule name
 ```
-partnerRuleId is empty for rule name="{rule_name}" - partnerRuleId={new_rule_id} is available
+partnerRuleId is empty for rule name="<RULE_NAME>" - partnerRuleId=<NEW_RULE_ID> is available
 ```
-A partnerRuleId is required for each rule and is missing. Use the generated ID. 
-
-```
-partnerRuleId={rule_id} is in the incorrect format for rule name="{rule_name}", it must follow the format=^[a-z0-9]{3}-[a-z0-9]{3}-[a-z0-9]{3}$ - partnerRuleId={new_rule_id} is available
-```
-The rule name {rule_name} is in the incorrect format.  Use the generated partnerRuleId: {new_rule_id} to fix the issue.
+A `partnerRuleId` is required for each rule and is missing. Use the generated `<NEW_RULE_ID>`. 
 
 ```
-Duplicate partnerRuleId={rule_id} for rule name="{rule_name}" - {rule_id_key} must be unique and it is already used in rule_ids="{rule_ids}" - {rule_id_key}={new_rule_id} is available
+partnerRuleId=<RULE_ID> is in the incorrect format for rule name="<RULE_NAME>", it must follow the format=^[a-z0-9]{3}-[a-z0-9]{3}-[a-z0-9]{3}$ - partnerRuleId=<NEW_RULE_ID> is available
 ```
-Each partnerRuleId must be unique. The current ID is already being used. The newly generated partnerRuleId is available.
+The rule name is not in the correct format. Use the generated `partnerRuleId: <NEW_RULE_ID>` to fix the issue.
 
 ```
-Duplicate name="{rule_name}" for {rule_id_key}={rule_id} - name must be unique.
+Duplicate partnerRuleId=<RULE_ID> for rule name="<RULE_NAME>" - <RULE_ID_KEY> must be unique and it is already used in rule_ids="<RULE_IDS>" - <RULE_ID_KEY>=<NEW_RULE_ID> is available
+```
+Each `partnerRuleId` must be unique. The current ID is already being used. The newly generated `partnerRuleId` is available.
+
+```
+Duplicate name="<RULE_NAME>" for <RULE_ID_KEY>=<RULE_ID> - name must be unique.
 ```
 Each rule name must be unique. The current name is already being used. Update the rule name to be unique.
 
-### MITRE Tags
+### MITRE tags
 ```
-The rule with partnerRuleId={rule_id} contains a MITRE tag tactic but it does not contain the tag `security:attack` is not present in, please add it
+The rule with partnerRuleId=<RULE_ID> contains a MITRE tag tactic but it does not contain the tag `security:attack` is not present in, please add it
 ```
-When a rule contains a MITRE tag `tactic:xxx`, the tag `security:attack` must be added to the list of tags.
+When a rule contains a MITRE tag `tactic:<TAG_VALUE>`, the tag `security:attack` must be added to the list of tags.
 
 ```
-The MITRE tactic/technique tag={tag} for partnerRuleId={rule_id} appears to be incorrect (i.e. it does not exist in the MITRE framework).
+The MITRE tactic/technique tag=<TAG> for partnerRuleId=<RULE_ID> appears to be incorrect (i.e. it does not exist in the MITRE framework).
 ```
-The listed tactic/technique tag {tag} does not follow the [MITRE framework](https://attack.mitre.org/). Please select a different tag.
+The listed tactic/technique tag `<TAG>` does not follow the [MITRE framework](https://attack.mitre.org/). Please select a different tag.
 
 ### Cases
 ```
-The case status {case_status} for {rule_id_key}={rule_id} is incorrect, it should be one of {status_list}.
+The case status <CASE_STATUS> for <RULE_ID_KEY>=<RULE_ID> is incorrect, it should be one of <STATUS_LIST>.
 ```
-The case status must be either CRITICAL, HIGH, MEDIUM, LOW, or INFO.
+The case status must be either `CRITICAL`, `HIGH`, `MEDIUM`, `LOW`, or `INFO`.
 
 ```
-The case ordering for partnerRuleId={rule_id} is incorrect, please modify to order cases from the highest severity to the lowest.
+The case ordering for partnerRuleId=<RULE_ID> is incorrect, please modify to order cases from the highest severity to the lowest.
 ```
-Each rule definition must be ordered by decreasing severity. Please re-order the cases into CRITICAL, HIGH, MEDIUM, LOW, and INFO.
+Each rule definition must be ordered by decreasing severity. Please reorder the cases into `CRITICAL`, `HIGH`, `MEDIUM`, `LOW`, and `INFO`.
 
-### Source Tags
+### Source tags
 ```
-source={source} in the tags of the rule with partnerRule={rule_id} is not supported by Datadog documentation.
+source=<SOURCE> in the tags of the rule with partnerRule=<RULE_ID> is not supported by Datadog documentation.
 ```
 Reach out to Datadog to address the issue.
 
-### Rule Content Validation/ Rule Update
+### Rule content validation/ rule update
 ```
-{rule_id_key}={rule_id} name="{rule_name}" - error={error}
+<RULE_ID_KEY>=<RULE_ID> name="<RULE_NAME>" - error=<ERROR>
 ```
 Reach out to Datadog to address the issue.
 
 ```
-Internal failure for {rule_id_key}={rule_id} name="{rule_name}"- Contact Datadog Team
+Internal failure for <RULE_ID_KEY>=<RULE_ID> name="<RULE_NAME>"- Contact Datadog Team
 ```
 Reach out to Datadog to address the issue.
 
