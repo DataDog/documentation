@@ -3228,11 +3228,6 @@ main:
     parent: cloud_workload_security
     identifier: cws_security_signals
     weight: 204
-  - name: Runtime Anomaly Detection
-    url: security/threats/runtime_anomaly_detection
-    parent: cloud_workload_security
-    identifier: cws_workload_anomaly_detection
-    weight: 208
   - name: Creating Custom Agent Rules
     url: security/threats/agent_expressions
     parent: cloud_workload_security
