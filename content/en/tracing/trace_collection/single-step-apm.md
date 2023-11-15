@@ -10,14 +10,14 @@ Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.j
 
 ## Enable APM on your services in one step
 
-If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation (beta)** option selected, the Agent is installed and configured to enable APM (with the `DD_APM_INSTRUMENTATION_ENABLED` parameter) and to inject the Datadog tracing library into your code for automatic instrumentation, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
+If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation (beta)** option selected, the Agent is installed and configured to enable APM. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
 
 The following examples show how it works on each infrastructure type. 
 
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 
-In one command, you can install, configure, and start the Agent with APM and [Remote Configuration][1] enabled, and set up library injection for automatic instrumentation of all services on the host or VM.
+In one command, you can install, configure, and start the Agent with APM and [Remote Configuration][1] enabled, and set up automatic instrumentation of your services.
 
 For an Ubuntu host:
 
@@ -186,7 +186,6 @@ To enable single step instrumentation with Helm:
    ```
 
 - `<RELEASE_NAME>`: Your release name. For example, `datadog-agent`.
-
 - `<TARGET_SYSTEM>`: The name of your OS. For example, `linux` or `windows`.
 
 **Note**: If you are using Helm `2.x`, run the following:
@@ -308,7 +307,13 @@ To enable instrumentation for specific namespaces:
             - applications
 {{< /highlight >}}
 
-2. Restart your services.
+4. Run the following command:
+   ```bash
+   helm install <RELEASE_NAME> \
+    -f datadog-values.yaml \
+    --set targetSystem=<TARGET_SYSTEM> \
+    datadog/datadog
+   ```
 
 To disable instrumentation for specific namespaces:
 
@@ -326,7 +331,13 @@ To disable instrumentation for specific namespaces:
             - applications
 {{< /highlight >}}
 
-2. Restart your services.
+4. Run the following command:
+   ```bash
+   helm install <RELEASE_NAME> \
+    -f datadog-values.yaml \
+    --set targetSystem=<TARGET_SYSTEM> \
+    datadog/datadog
+   ```
 
 ### Specifying tracing library versions
 
@@ -390,7 +401,13 @@ You can optionally set specific tracing library versions to use. If you don't se
             ruby: v1.15.0 
 {{< /highlight >}}
 
-2. Restart your services.
+4. Run the following command:
+   ```bash
+   helm install <RELEASE_NAME> \
+    -f datadog-values.yaml \
+    --set targetSystem=<TARGET_SYSTEM> \
+    datadog/datadog
+   ```
 
 [3]: /containers/kubernetes/installation/?tab=operator
 [4]: /containers/kubernetes/installation/?tab=helm
@@ -406,14 +423,28 @@ You can optionally set specific tracing library versions to use. If you don't se
 
 Set `DD_ENV` in your one-line install command for Linux and the library injector installation command for Docker to automatically tag instrumented services and other telemetry that pass through the Agent with a specific environment. For example, if the Agent is installed in your staging environment, set `DD_ENV=staging` to associate your observability data with `staging`.
 
+For Kubernetes, you can add this to your configuration files:
+- Datadog Operator: Add a `- env:<env-name>` tag to `datadog-agent.yaml`.
+   ```yaml
+   spec:
+      global:
+         tags:
+            - env:staging
+   ```
+- Helm charts: Add a `- env:<env-name>` tag to `datadog-values.yaml`
+   ```yaml
+   datadog:
+      tags:
+         - env:staging
+   ```
+
 ## Removing Single Step APM instrumentation from your Agent
 
-If you don't want to collect trace data for a particular service, or for all services on a particular host, VM, or container, run one of the following commands directly on the relevant infrastructure to remove APM instrumentation.
+If you don't want to collect trace data for a particular service, host, VM, or container, complete the follow steps:
 
 ### Removing instrumentation for specific services
 
 Run the following commands and restart the service to stop injecting the library into the service and stop producing traces from that service.
-
 
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
@@ -510,9 +541,12 @@ For Helm charts:
          enabled: false
 {{< /highlight >}}
 
-2. Deploy the Datadog Agent with the updated configuration file:
-   ```shell
-   kubectl apply -f /path/to/your/datadog-values.yaml
+4. Run the following command:
+   ```bash
+   helm install <RELEASE_NAME> \
+    -f datadog-values.yaml \
+    --set targetSystem=<TARGET_SYSTEM> \
+    datadog/datadog
    ```
 
 {{% /tab %}}
