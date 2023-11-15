@@ -53,9 +53,21 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 {{< /tabs >}}
 
-## Configure the Agent for threats and misconfigurations
+## Configure the Agent for hosts and containers
 
-### Enable Remote Configuration
+### Follow the in-app instructions (recommended)
+
+To enable CSM on the Agent, navigate to the [**Cloud Security Management Setup** page][5] and click **Hosts and containers**.
+
+{{< img src="security/csm/hosts_containers_setup.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
+
+For each version of the Agent that is installed, click **Enable** and follow the step-by-step instructions.
+
+Alternatively, use the following examples to enable CSM Enterprise for threats:
+
+### Configure the Agent for Threats and Misconfigurations
+
+#### Enable Remote Configuration
 
 {{< site-region region="us3,us5,eu,gov,ap1" >}}
 <div class="alert alert-warning">Remote Configuration for CSM Threats is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
@@ -69,17 +81,7 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
 
 **Note**: Without Remote Configuration, Agent rules must be manually deployed to the Datadog Agent.
 
-### Configure the Agent
-
-#### Follow the in-app instructions (recommended)
-
-To enable CSM on the Agent, navigate to the [**Cloud Security Management Setup** page][5] and click **Hosts and containers**.
-
-{{< img src="security/csm/hosts_containers_setup.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
-
-For each version of the Agent that is installed, click **Enable** and follow the step-by-step instructions.
-
-Alternatively, use the following examples to enable CSM Enterprise for threats:
+#### Configure the Agent
 
 {{< tabs >}}
 {{% tab "Kubernetes (Helm)" %}}
@@ -426,25 +428,13 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configure the Agent for vulnerabilities
+### Configure the Agent for Vulnerabilities
 
 The following instructions enables the image metadata collection and [Software Bill of Materials (SBOM)][11] collection in the Datadog Agent. This allows you to scan the libraries in your container images and hosts to detect vulnerabilities. Vulnerabilities are evaluated and and scanned against your containers and hosts every hour.
 
 **Note**: CSM Vulnerabilities is not available for AWS Fargate or Windows environments.
 
-### Configure the Agent
-
-#### Follow the in-app instructions (recommended)
-
-To enable CSM Vulnerabilities on the Agent for your hosts and containers, navigate to the [**Cloud Security Management Setup** page][5] and click **Hosts and containers**.
-
-{{< img src="security/csm/hosts_containers_setup.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
-
-For each version of the Agent that is installed, click **Enable** and follow the step-by-step instructions.
-
-Alternatively, use the following examples to enable CSM Vulnerabilities:
-
-### Containers
+#### Containers
 
 {{< tabs >}}
 {{% tab "Kubernetes" %}}
@@ -528,8 +518,7 @@ container_image:
 {{% /tab %}}
 {{< /tabs >}}
 
-
-### Hosts
+#### Hosts
 
 **Note**: CSM Enterprise customers can enable both container and host SBOM collection at the same time by combining the [containers](#containers) setup with the following setup for hosts configuration:
 
