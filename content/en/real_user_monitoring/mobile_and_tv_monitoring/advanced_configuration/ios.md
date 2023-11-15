@@ -76,7 +76,7 @@ For more details and available options, filter the [relevant file on GitHub][9] 
 
 ### Add your own performance timing
 
-In addition to RUM's default attributes, you can measure where your application is spending its time by using the `addTiming(name:)` API. The timing measure is relative to the start of the current RUM view. 
+In addition to RUM's default attributes, you can measure where your application is spending its time by using the `addTiming(name:)` API. The timing measure is relative to the start of the current RUM view.
 
 For example, you can time how long it takes for your hero image to appear:
 
@@ -86,7 +86,7 @@ For example, you can time how long it takes for your hero image to appear:
 func onHeroImageLoaded() {
     let rum = RUMMonitor.shared()
     rum.addTiming(name: "hero_image")
-} 
+}
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
@@ -98,13 +98,13 @@ func onHeroImageLoaded() {
 {{% /tab %}}
 {{< /tabs >}}
 
-Once you set the timing, it is accessible as `@view.custom_timings.<timing_name>`. For example, `@view.custom_timings.hero_image`. 
+Once you set the timing, it is accessible as `@view.custom_timings.<timing_name>`. For example, `@view.custom_timings.hero_image`.
 
 To create visualizations in your dashboards, [create a measure][4] first.
 
 ### Custom Actions
 
-In addition to [tracking actions automatically](#automatically-track-user-actions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addAction(type:name:)` API. 
+In addition to [tracking actions automatically](#automatically-track-user-actions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addAction(type:name:)` API.
 
 To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startAction(type:name:)` or `.stopAction(type:name:)`.
 
@@ -162,7 +162,7 @@ import DatadogRUM
 let rum = RUMMonitor.shared()
 
 rum.startResource(
-    resourceKey: "resource-key", 
+    resourceKey: "resource-key",
     request: request
 )
 
@@ -187,7 +187,7 @@ rum.stopResource(
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: The `String` used for `resourceKey` in both calls must be unique for the resource you are calling. This is necessary for the RUM iOS SDK to match a resource's start with its completion. 
+**Note**: The `String` used for `resourceKey` in both calls must be unique for the resource you are calling. This is necessary for the RUM iOS SDK to match a resource's start with its completion.
 
 Find more details and available options in the [`DDRUMMonitor` class][9].
 
@@ -213,7 +213,7 @@ For more details and available options, refer to the code documentation comments
 
 ## Track custom global attributes
 
-In addition to the [default RUM attributes][7] captured by the RUM iOS SDK automatically, you can choose to add additional contextual information (such as custom attributes) to your RUM events to enrich your observability within Datadog. 
+In addition to the [default RUM attributes][7] captured by the RUM iOS SDK automatically, you can choose to add additional contextual information (such as custom attributes) to your RUM events to enrich your observability within Datadog.
 
 Custom attributes allow you to filter and group information about observed user behavior (such as the cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
 
@@ -243,7 +243,7 @@ The following attributes are **optional**, you should provide **at least one** o
 | `usr.name`  | String | User friendly name, displayed by default in the RUM UI.                                                  |
 | `usr.email` | String | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
 
-To identify user sessions, use the `setUserInfo(id:name:email:)` API. 
+To identify user sessions, use the `setUserInfo(id:name:email:)` API.
 
 For example:
 
@@ -261,7 +261,7 @@ Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 {{< /tabs >}}
 
 ## Initialization Parameters
- 
+
 You can use the following properties in `Datadog.Configuration` when creating the Datadog configuration to initialize the library:
 
 `site`
@@ -373,7 +373,7 @@ class YourCustomPredicate: UIKitRUMViewsPredicate {
 {{% /tab %}}
 {{< /tabs >}}
 
-You can even come up with a more dynamic solution depending on your app's architecture. 
+You can even come up with a more dynamic solution depending on your app's architecture.
 
 For example, if your view controllers use `accessibilityLabel` consistently, you can name views by the value of accessibility label:
 
@@ -421,22 +421,31 @@ To automatically track user tap actions, set the `uiKitActionsPredicate` option 
 
 ### Automatically track network requests
 
-To automatically track resources (network requests) and get their timing information such as time to first byte or DNS resolution, use the `urlSessionTracking` option when enabling RUM and set `DatadogURLSessionDelegate` for the `URLSession` that you want to monitor:
+To automatically track resources (network requests) and get their timing information such as time to first byte or DNS resolution, use the `urlSessionTracking` option when enabling RUM and enable `URLSessionInstrumentation`:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
 ```swift
+URLSessionInstrumentation.enable(
+    with: .init(
+        delegateClass: SessionDelegate.self
+    )
+)
+
 let session = URLSession(
     configuration: .default,
-    delegate: DatadogURLSessionDelegate(),
+    delegate: SessionDelegate(),
     delegateQueue: nil
 )
 ```
 {{% /tab %}}
 {{% tab "Objective-C" %}}
 ```objective-c
+DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[SessionDelegate class]];
+[DDURLSessionInstrumentation enableWithConfiguration:config];
+
 NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
-                                                      delegate:[[DDNSURLSessionDelegate alloc] init]
+                                                      delegate:[[SessionDelegate alloc] init]
                                                  delegateQueue:nil];
 ```
 {{% /tab %}}
@@ -463,9 +472,15 @@ RUM.enable(
   )
 )
 
+URLSessionInstrumentation.enable(
+    with: .init(
+        delegateClass: SessionDelegate.self
+    )
+)
+
 let session = URLSession(
     configuration: .default,
-    delegate: DDURLSessionDelegate(),
+    delegate: SessionDelegate(),
     delegateQueue: nil
 )
 ```
@@ -489,7 +504,7 @@ DDRUMURLSessionTracking *urlSessionTracking = [DDRUMURLSessionTracking new];
 {{% /tab %}}
 {{< /tabs >}}
 
-To add custom attributes to resources, use the `URLSessionTracking.resourceAttributesProvider` option when enabling the RUM. By setting attributes provider closure, you can return additional attributes to be attached to tracked resource. 
+To add custom attributes to resources, use the `URLSessionTracking.resourceAttributesProvider` option when enabling the RUM. By setting attributes provider closure, you can return additional attributes to be attached to tracked resource.
 
 For instance, you may want to add HTTP request and response headers to the RUM resource:
 
@@ -503,11 +518,27 @@ RUM.enable(
                 "request.headers" : redactedHeaders(from: request),
                 "response.headers" : redactedHeaders(from: response)
             ]
-        } 
+        }
     )
   )
 )
 ```
+
+If you don't want to track requests, you can disable URLSessionInstrumentation for the delegate type:
+
+{{< tabs >}}
+{{% tab "Swift" %}}
+```swift
+```swift
+URLSessionInstrumentation.disable(delegateClass: SessionDelegate.self)
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+[DDURLSessionInstrumentation disableWithDelegateClass:[SessionDelegate class]];
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Automatically track errors
 
@@ -567,7 +598,7 @@ To modify attributes of a RUM event before it is sent to Datadog or to drop an e
 ```swift
 let configuration = RUM.Configuration(
     applicationID: "<rum application id>",
-    viewEventMapper: { viewEvent in 
+    viewEventMapper: { viewEvent in
         return viewEvent
     }
     resourceEventMapper: { resourceEvent in
@@ -612,7 +643,7 @@ DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicat
 {{% /tab %}}
 {{< /tabs >}}
 
-Each mapper is a Swift closure with a signature of `(T) -> T?`, where `T` is a concrete RUM event type. This allows changing portions of the event before it is sent. 
+Each mapper is a Swift closure with a signature of `(T) -> T?`, where `T` is a concrete RUM event type. This allows changing portions of the event before it is sent.
 
 For example, to redact sensitive information in a RUM Resource's `url`, implement a custom `redacted(_:) -> String` function and use it in `resourceEventMapper`:
 
@@ -667,7 +698,7 @@ The `trackingConsent` setting can be one of the following values:
 2. `.granted`: The RUM iOS SDK starts collecting the data and sends it to Datadog.
 3. `.notGranted`: The RUM iOS SDK does not collect any data. No logs, traces, or RUM events are sent to Datadog.
 
-To change the tracking consent value after the RUM iOS SDK is initialized, use the `Datadog.set(trackingConsent:)` API call. The RUM iOS SDK changes its behavior according to the new value. 
+To change the tracking consent value after the RUM iOS SDK is initialized, use the `Datadog.set(trackingConsent:)` API call. The RUM iOS SDK changes its behavior according to the new value.
 
 For example, if the current tracking consent is `.pending`:
 
@@ -707,7 +738,7 @@ This means that even if users open your application while offline, no data is lo
 
 ## Configuring a custom proxy for Datadog data upload
 
-If your app is running on devices behind a custom proxy, you can inform the RUM iOS SDK's data uploader to ensure that all tracked data is uploaded with the relevant configuration. 
+If your app is running on devices behind a custom proxy, you can inform the RUM iOS SDK's data uploader to ensure that all tracked data is uploaded with the relevant configuration.
 
 When initializing the iOS SDK, specify this in your proxy configuration.
 
@@ -721,13 +752,13 @@ Datadog.initialize(
     clientToken: "<client token>",
     env: "<environment>",
     proxyConfiguration: [
-        kCFNetworkProxiesHTTPEnable: true, 
-        kCFNetworkProxiesHTTPPort: 123, 
-        kCFNetworkProxiesHTTPProxy: "www.example.com", 
-        kCFProxyUsernameKey: "proxyuser", 
-        kCFProxyPasswordKey: "proxypass" 
+        kCFNetworkProxiesHTTPEnable: true,
+        kCFNetworkProxiesHTTPPort: 123,
+        kCFNetworkProxiesHTTPProxy: "www.example.com",
+        kCFProxyUsernameKey: "proxyuser",
+        kCFProxyPasswordKey: "proxypass"
     ]
-  ), 
+  ),
   trackingConsent: trackingConsent
 )
 ```
