@@ -35,10 +35,6 @@ Use [Remote Configuration][7] to automatically deploy new and updated rules to t
 
 {{< img src="security/cws/threats_detection_rules.png" alt="CSM Threats detection rules in the Datadog app" width="100%">}}
 
-## Model expected workload behavior
-
-Create a baseline of expected workload behavior with [Workload Security Profiles][10]. Workload Security Profiles uses a behavior learning model to help identify suspicious activity indicative of a threat or misconfiguration. It also generates suppression suggestions for any known, acceptable workload behavior. Use the insight gained from Security Profiles to investigate security alerts and to identify previously unseen, anomalous behavior.
-
 ## Set up real-time notifications
 
 [Send real-time notifications][3] when a threat is detected in your environment, so that your teams can take action to mitigate the risk. Notifications can be sent to [Slack, email, PagerDuty, webhooks, and more][4].
@@ -70,4 +66,3 @@ Investigate and triage security signals in the [Threats Explorer][8]. View detai
 [7]: /security/threats/setup
 [8]: /security/threats/security_signals
 [9]: /network_monitoring/performance/
-[10]: /security/threats/security_profiles

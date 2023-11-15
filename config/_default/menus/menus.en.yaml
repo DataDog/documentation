@@ -3228,11 +3228,6 @@ main:
     parent: cloud_workload_security
     identifier: cws_security_signals
     weight: 204
-  - name: Security Profiles
-    url: security/threats/security_profiles
-    parent: cloud_workload_security
-    identifier: cws_workload_security_profiles
-    weight: 206
   - name: Runtime Anomaly Detection
     url: security/threats/runtime_anomaly_detection
     parent: cloud_workload_security
