@@ -17,6 +17,6 @@ When a combination of risks suggesting a potential attack path in your environme
 - Number of resources impacted
 - Discovered date (newer issues are listed first)
 
-For a filtered view, click ASM to view ASM-specific vulnerabilities or CSM to view CSM-specific vulnerabilities.
+For a filtered view, click **Application Security** to view ASM-specific vulnerabilities or **Cloud Security** to view CSM-specific vulnerabilities.
 
-{{< img src="security/csm/security_inbox.png" alt="The Security Inbox on the CSM overview shows prioritized issues for remediation" width="100%">}}
+{{< img src="security/csm/security_inbox_2.png" alt="The Security Inbox shows prioritized security issues for remediation" width="100%">}}
