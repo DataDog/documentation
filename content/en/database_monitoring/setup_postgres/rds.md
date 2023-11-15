@@ -242,7 +242,9 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
    ssl: allow
    ```
 
-If you want to authenticate with IAM, set the `region` and `instance_endpoint` parameters. **Note**: only set the `region` parameter if you want to use IAM authentication. IAM authentication takes precedence over the `password` field.
+   If you want to authenticate with IAM, set the `region` and `instance_endpoint` parameters. 
+   
+   **Note**: only set the `region` parameter if you want to use IAM authentication. IAM authentication takes precedence over the `password` field.
 
    ```yaml
    init_config:
@@ -263,13 +265,14 @@ If you want to authenticate with IAM, set the `region` and `instance_endpoint` p
        # dbname: '<DB_NAME>'
    ```
 
-Please see [this guide][9] on how to configure IAM authentication on your RDS instance.
+   For information on configuring IAM authentication on your RDS instance, see [Connecting with Managed Authentication][3].
 
 2. [Restart the Agent][2].
 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[3]: /database_monitoring/guide/managed_authentication
 {{% /tab %}}
 {{% tab "Docker" %}}
 
