@@ -339,6 +339,8 @@ To add [codeowners][11] information to your Junit XML tests, you will need three
 3. Enable the Github app. To do this follow the steps in the next section. If you already have an app, make sure it has
    the `Contents: Read` permission.
 
+Note that Github is the only supported git provider for this feature at the moment.
+
 ### Configure a GitHub App
 
 The Junit XML uses a private [GitHub App][12] to read the `CODEOWNERS` file.
