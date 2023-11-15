@@ -21,6 +21,10 @@ Instrument your services and track user activity to detect and block bad actors.
 
 [Track user logins and activity](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to detect account takeovers and business logic abuse with out-of-the-box detection rules, and to ultimately block attackers.
 
+<div class="alert alert-info">
+<strong>Automated Detection of User Activity:</strong> Datadog Tracing Libraries attempt to detect and report user activity events automatically. For more information, read <a href="/security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Disabling automatic user activity event tracking</a>.
+</div>
+
 The custom user activity for which out-of-the-box detection rules are available are as follow:
 
 | Built-in event names   | Required metadata                                    | Related rules                                                                                                                                                                                                       |
@@ -679,6 +683,32 @@ track_custom_event(tracer, event_name, metadata)
 
 {{< /programming-lang-wrapper >}}
 
+## Automatic user activity event tracking
+
+When ASM is enabled, recent Datadog Tracing Libraries attempt to detect user activity events automatically.
+
+The events that can be automatically detected are:
+
+- `users.login.success`
+- `users.login.failure`
+- `users.signup`
+
+### Automatic user activity event tracking mode
+
+Automatic user activity tracking offers two modes: <code>safe</code>, and <code>extended</code>
+
+In <code>safe</code> mode, the trace library does not include any PII information on the events metadata. The tracer library tries to collect the user ID, and only if the user ID is a valid [GUID][10]
+
+In <code>extended</code> mode, the trace library tries to collect the user ID, and the user email. In this mode, we do not check the type for the user ID to be a GUID. The trace library reports whatever value can be extracted from the event.
+
+To configure automatic user event tracking mode, you can set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>safe</code> or <code>extended</code>. By default, the tracer library uses the <code>safe</code> mode.
+
+**Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, we recommend using the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
+
+## Disabling automatic user activity event tracking
+
+If you wish to disable the detection of these events, you should set the environment variable <code>DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING</code> to <code>disabled</code>. This should be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -691,3 +721,4 @@ track_custom_event(tracer, event_name, metadata)
 [8]: /security/default_rules/bl-account-deletion-ratelimit/
 [9]: /security/default_rules/bl-password-reset/
 [10]: /security/default_rules/bl-payment-failures/
+[11]: https://guid.one/guid

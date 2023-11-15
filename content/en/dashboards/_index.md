@@ -137,7 +137,7 @@ Dashboards are useful for displaying key performance metrics on large screens or
 
 #### Version history
 
-From a dashboard click on the version history icon in the top right corner of the page to open the Version History side panel. You can preview, restore, or clone your dashboard's version history. For more information, see the [Version History guide][12].
+From a dashboard, click on the settings icon and then click the version history option to open the Version History side panel. You can preview, restore, or clone your dashboard's version history. For more information, see the [Version History guide][12].
 
 #### Generate public URL
 
@@ -163,27 +163,42 @@ To limit the search to a specific dashboard, include the dashboard's name in the
 
 #### Permissions
 
-At the top of the dashboard, click on settings and select *Permissions*.
-
-{{< img src="dashboards/dashboard-menu-permissions.png" alt="The dashboard settings menu" style="width:50%;">}}
-
-Use the pop-up to select one or more roles, teams (beta), or users (beta) that may edit the dashboard.
+<div class="alert alert-info"><em>View</em> restrictions on individual dashboards are available to anyone on an <strong>Enterprise</strong> tier plan. Reach out to your account team or <a href="/help/">Datadog support</a> to enable this feature. </div>
 
 {{< img src="dashboards/access_popup.png" alt="Dialog box with dropdown menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
 
-Any user setting access control rules has to include one or more roles they are a part of to prevent locking an organization out. For more information about roles, see the [RBAC documentation][15].
+Use granular access controls to limit the [roles][15] that may edit a particular dashboard:
+1. While viewing a dashboard, click on the cog in the upper right. The settings menu opens.
+1. Select **Permissions**.
+1. Click **Restrict Access**.
+1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. Use the dropdown to select one or more roles, teams, or users that may edit the dashboard.
+1. Click **Add**.
+1. The dialog box updates to show that the role you selected has the **Editor** permission.
+1. Click **Save**
+
+**Note:** To maintain your edit access to the dashboard, the system requires you to include at least one role that you are a member of before saving. For more information about roles, see the [RBAC documentation][15].
+
+To restore general access to a dashboard with restricted access, follow the steps below:
+1. While viewing the dashboard, click on the cog in the upper right. The settings menu opens.
+1. Select **Permissions**.
+1. Click **Restore Full Access**.
+1. Click **Save**.
 
 If the dashboard was created with the deprecated "read only" setting, the access control list pre-populates with a list of roles that have the Access Management (`user_access_manage`) permission.
 
 If you manage your dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your dashboards. For more information, see the [Terraform Dashboard role restriction guide][16].
 
-**Note:** View restrictions on individual dashboards are available to anyone on an Enterprise tier plan. Reach out to your account team or [Datadog support][17] to enable this feature. 
+The access indicator appears at the top right of each edit-restricted dashboard. Depending on your permissions, it may say **Gain Edit Access** or **Request Edit Access**. Click the access indicator to understand your access permissions and what steps to take to edit the dashboard.
 
 #### High-density mode
 
 High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default on large screens for dashboards that use group widgets.
 
 {{< img src="dashboards/high-density-mode.png" alt="The high-density mode display" style="width:90%;">}}
+
+Select **Increase density on wide screens** to expand widgets to the width of the screen.
+
 #### Clone dashboard
 
 Use this option to copy the entire dashboard to a new dashboard. You are prompted to name the clone.
@@ -206,26 +221,27 @@ Use this option to permanently delete your dashboard. You are prompted to confir
 
 ## Dashboard details
 
-From an individual dashboard, click the caret icon next to the dashboard title to view and edit dashboard details. A dropdown panel opens.
+From an individual dashboard, hover over the dashboard title to view and edit dashboard details. A popover panel opens.
 
 {{< img src="dashboards/suggested_dashboards.png" alt="Suggested dashboards" >}}
 
-Under the title, a byline tells you who created the dashboard.
+Under the title, the avatar tells you who created the dashboard.
 
-### Suggested dashboards and active users
+### Suggested dashboards
 
-From an individual dashboard, Datadog offers suggestions for viewing related dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. The rightmost section of the dashboard details view displays a list of the most active users of this dashboard.
+From an individual dashboard, Datadog offers suggestions for viewing related dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other existing dashboards. 
+
+To add a suggested dashboards list, add `[[suggested_dashboards]]` inside the dashboard description. 
 
 ### Edit details
 
-Update Markdown-supported dashboard descriptions or associate [teams][18] with a dashboard:
+Update Markdown-supported dashboard descriptions or associate [teams][17] with a dashboard:
 
 1. Open the dashboard you wish to edit.
-1. Click the caret icon next to the dashboard title. A dropdown panel opens.
-1. Click **Edit**. The panel changes to edit mode.
+1. Hover the dashboard title. A dropdown panel opens.
+1. Click on the dashboard title or description to edit them. 
+1. Once done editing click the done button.
 1. Select up to 5 teams from the **Teams** dropdown.
-1. Enter a description in the text box. Format your text in Markdown.
-1. Click **Save**.
 
 
 ## Dashboard list
@@ -234,7 +250,7 @@ Search, view, or create dashboards and lists on the [Dashboard List][4] page.
 
 ### Teams
 
-Use the **My Teams** toggle to switch between viewing all dashboards and only dashboards owned by your [teams][18].
+Use the **My Teams** toggle to switch between viewing all dashboards and only dashboards owned by your [teams][17].
 
 To edit the teams associated with one or more dashboards, take the following steps:
 1. Select the checkbox next to each dashboard you wish to modify.
@@ -307,7 +323,7 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 The [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3], enables you to view your dashboards in a mobile-friendly format.
 
-On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][19]. Click on an individual dashboard to view it.
+On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][18]. Click on an individual dashboard to view it.
 
 **Note**: To set up or edit a dashboard, you must log in to the Datadog browser UI.
 
@@ -342,6 +358,5 @@ You can add SLOs, Monitors, and Open Incidents widgets to your mobile home scree
 [14]: /events/
 [15]: /account_management/rbac/
 [16]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
-[17]: /help/
-[18]: /account_management/teams/
-[19]: /dashboards/template_variables/#saved-views
+[17]: /account_management/teams/
+[18]: /dashboards/template_variables/#saved-views

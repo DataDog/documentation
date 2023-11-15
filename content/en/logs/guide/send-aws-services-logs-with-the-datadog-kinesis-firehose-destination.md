@@ -102,7 +102,7 @@ You can also create a subscription filter through the AWS console.
 
 Check the **Subscriptions** column in the log groups index page in [CloudWatch][1] to confirm that the new Kinesis stream is now subscribed to your log groups.
 
-### Search for AWS Kinesis logs in Datadog
+### Search for Amazon Kinesis logs in Datadog
 
 After you have set up an Amazon Kinesis delivery stream, you can analyze the logs subscribed to your delivery stream in Datadog. 
 

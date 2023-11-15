@@ -12,6 +12,10 @@ further_reading:
     text: "Managing CSM Threats Detection Rules"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Workload Security Profiles are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Workload Security Profiles provides a baseline of expected workload activity through a behavioral learning model that helps identify potential threats or misconfigurations. This insight can be used when investigating security alerts, including [generating suppression suggestions](#suppress-signals-based-on-suggestions) for known, acceptable workload behavior, as well as identifying previously unseen, anomalous behavior.
 
 ## Compatibility
@@ -71,7 +75,7 @@ In general, the higher the commonality score, the more likely that a given proce
 
 ### Security signals side panel
 
-Security profile details also appear in the signal panel in the [Security Signals Explorer][3]. You can use this information to better understand the workload activity and potentially help distinguish between potential threats and normal workload behavior. You can also navigate directly to the relevant security profile using the **View Security Profile** link. 
+Security profile details also appear in the signal panel in the [Threats Explorer][3]. You can use this information to better understand the workload activity and potentially help distinguish between potential threats and normal workload behavior. You can also navigate directly to the relevant security profile using the **View Security Profile** link. 
 
 {{< img src="security/cws/security_profiles/signal-security-profile.png" alt="CSM Threats security profile page" width="80%">}}
 
@@ -89,4 +93,4 @@ To accept the suggestion, click **Suppress Signals**, then click **Add Suppressi
 
 [1]: /security/threats/setup
 [2]: https://app.datadoghq.com/security/workload/profiles
-[3]: /security/explorer
+[3]: /security/threats/security_signals

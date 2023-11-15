@@ -192,8 +192,8 @@ instances:
 logs:
 
   - type: file
-    path: "/path/to/your/php/application-json.log"
-    service: "<SERVICE_NAME>"
+    path: "<path_to_your_php_application_json>.log"
+    service: "<service_name>"
     source: php
     sourcecategory: sourcecode
 ```

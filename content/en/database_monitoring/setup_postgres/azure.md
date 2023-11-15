@@ -91,6 +91,8 @@ Create the `datadog` user:
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
+**Note:** Azure managed identity authentication is also supported. Please see [the guide][12] on how to configure this for your Azure instance.
+
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
 
@@ -219,7 +221,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        port: 5432
        username: 'datadog@<AZURE_INSTANCE_ENDPOINT>'
        password: '<PASSWORD>'
-       ssl: true
+       ssl: 'require'
        ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
        # pg_stat_statements_view: datadog.pg_stat_statements()
        # pg_stat_activity_view: datadog.pg_stat_activity()
@@ -229,14 +231,14 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
        azure:
         deployment_type: '<DEPLOYMENT_TYPE>'
-        name: '<AZURE_INSTANCE_ENDPOINT>'
+        fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
    ```
 2. [Restart the Agent][2].
 
 See the [Postgres integration spec][3] for additional information on setting `deployment_type` and `name` fields.
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
 {{% /tab %}}
 {{% tab "Docker" %}}
@@ -263,7 +265,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "port": 5432,
     "username": "datadog@<AZURE_INSTANCE_ENDPOINT>",
     "password": "<UNIQUEPASSWORD>",
-    "ssl": true,
+    "ssl": "require",
     "azure": {
       "deployment_type": "<DEPLOYMENT_TYPE>",
       "name": "<AZURE_INSTANCE_ENDPOINT>"
@@ -288,7 +290,7 @@ FROM datadog/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog@<AZURE_INSTANCE_ENDPOINT>","password": "<UNIQUEPASSWORD>", "ssl": true, "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog@<AZURE_INSTANCE_ENDPOINT>","password": "<UNIQUEPASSWORD>", "ssl": "require", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
@@ -305,7 +307,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 [1]: /agent/docker/integrations/?tab=docker
 [2]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
-[3]: /agent/guide/secrets-management
+[3]: /agent/configuration/secrets-management
 [4]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -334,10 +336,10 @@ instances:
     port: 5432
     username: "datadog@<AZURE_INSTANCE_ENDPOINT>"
     password: "<UNIQUEPASSWORD>"
-    ssl: true
+    ssl: "require"
     azure:
       deployment_type: "<DEPLOYMENT_TYPE>"
-      name: "<AZURE_INSTANCE_ENDPOINT>"' \
+      fully_qualified_domain_name: "<AZURE_INSTANCE_ENDPOINT>"' \
   datadog/datadog
 ```
 
@@ -361,11 +363,11 @@ instances:
     port: 5432
     username: 'datadog@<AZURE_INSTANCE_ENDPOINT>'
     password: '<PASSWORD>'
-    ssl: true
+    ssl: "require"
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<AZURE_INSTANCE_ENDPOINT>'
+      fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 
     ## Required: For Postgres 9.6, uncomment these lines to use the functions created in the setup
     # pg_stat_statements_view: datadog.pg_stat_statements()
@@ -396,10 +398,10 @@ metadata:
           "port": 5432,
           "username": "datadog@<AZURE_INSTANCE_ENDPOINT>",
           "password": "<UNIQUEPASSWORD>",
-          "ssl": true,
+          "ssl": "require",
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
-            "name": "<AZURE_INSTANCE_ENDPOINT>"
+            "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"
           }
         }
       ]
@@ -428,7 +430,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
-[5]: /agent/guide/secrets-management
+[5]: /agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -457,7 +459,8 @@ If you have installed and configured the integrations and Agent as described, an
 [5]: /integrations/faq/postgres-custom-metric-collection-explained/
 [6]: https://www.postgresql.org/docs/current/app-psql.html
 [7]: https://app.datadoghq.com/account/settings/agent/latest
-[8]: /agent/guide/agent-commands/#agent-status-and-information
+[8]: /agent/configuration/agent-commands/#agent-status-and-information
 [9]: https://app.datadoghq.com/databases
 [10]: /integrations/azure_db_for_postgresql/
 [11]: /database_monitoring/setup_postgres/troubleshooting/
+[12]: /database_monitoring/guide/managed_authentication

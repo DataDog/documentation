@@ -34,6 +34,7 @@ cascade:
 {{< whatsnext desc="General Guides:" >}}
     {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}How to set up RBAC for monitors{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}How to create monitors in synthetic tests{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/non_static_thresholds" >}}How to monitor non-static thresholds{{< /nextlink >}}
     {{< nextlink href="monitors/guide/anomaly-monitor" >}}Anomaly monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/change-alert" >}}Change Alert monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}Monitor ephemeral servers for reboots{{< /nextlink >}}
@@ -44,6 +45,7 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Querying:" >}}
+    {{< nextlink href="/monitors/guide/custom_schedules" >}}Add custom schedules to customize monitor evaluation frequencies{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-arithmetic-and-sparse-metrics" >}}Monitor arithmetic and sparse metrics{{< /nextlink >}}
     {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() monitor evaluations{{< /nextlink >}}
 {{< /whatsnext >}}

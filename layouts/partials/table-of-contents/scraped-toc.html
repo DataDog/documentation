@@ -25,7 +25,7 @@
       {{ end }}
 
       <li>
-          <a href="#{{ $h_id }}">{{ $h_title }}</a>
+          <a href="#{{ $h_id }}">{{ $h_title | safeHTML }}</a>
 
       {{ $prev_h_level = $h_level }}
     {{ end }}

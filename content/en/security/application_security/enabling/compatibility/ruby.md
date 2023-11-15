@@ -14,8 +14,10 @@ The following ASM capabilities are supported in the Ruby library, for the specif
 | -------------------------------- | ----------------------------|
 | Threat Detection  | 1.9.0  |
 | Threat Protection | 1.11.0 |
+| Customize response to blocked requests | 1.15.0 |
 | Vulnerability Management for Open Source Software (OSS) | 1.11.0 |
 | Vulnerability Management for Code-level (beta) | not supported |
+| Automatic user activity event tracking | 1.14.0 |
 
 The minimum tracer version to get all supported ASM capabilities for Ruby is 1.11.0.
 
@@ -25,10 +27,10 @@ The minimum tracer version to get all supported ASM capabilities for Ruby is 1.1
 |Type | Threat Detection support | Vulnerability Management for OSS support |
 | ---   |   ---             |           ----        |
 | Docker | {{< X >}}  |  |
-| Kubernetes | {{< X >}}  | | 
-| AWS ECS | {{< X >}}  | |
+| Kubernetes | {{< X >}}  | |
+| Amazon ECS | {{< X >}}  | |
 | AWS Fargate | {{< X >}}  | |
-| AWS Lambda |  | | 
+| AWS Lambda |  | |
 
 ## Language and framework compatibility
 
@@ -93,7 +95,7 @@ These are supported on the following architectures:
 
 ##### ASM Capability Notes
 - **Vulnerability Management for Code-level** is not supported
-- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below. 
+- **Threat Protection** also works at the HTTP request (input) layer, and so works for all databases by default, even those not listed in the table below.
 
 | Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
 |-------------------|-----------------|--------------------------------------------------------------------------|
@@ -105,6 +107,16 @@ These are supported on the following architectures:
 | Sequel        | {{< X >}} |   {{< X >}}    |
 | Elasticsearch     | {{< X >}} |   {{< X >}}    |
 
+### User Authentication Frameworks compatibility
+
+**Integrations to User Authentication Frameworks provide:**
+
+- User login events, including the user IDs
+- Account Takeover detection monitoring for user login events
+
+| Framework         | Minimum Framework Version   |
+|-------------------| --------------------------- |
+| Devise            | 3.2.1
 
 [1]: /tracing/trace_collection/compatibility/ruby/
 [2]: https://www.ruby-lang.org/

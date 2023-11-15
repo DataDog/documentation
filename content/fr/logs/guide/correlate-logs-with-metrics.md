@@ -26,7 +26,7 @@ Pour mettre en corrélation des logs et des métriques dans le [Log Explorer][4
 1. Cliquez sur un log dans la colonne **Content**. Un volet s'affiche alors, avec des informations détaillées sur le log.
 2. Cliquez sur l'onglet **Metrics** dans le volet.
 
-{{< img src="logs/guide/correlate-logs-with-metrics/log-explorer-metrics-tab.jpg" alt="Métriques du Log Explorer"  >}}
+{{< img src="logs/guide/correlate-logs-with-metrics/log-explorer-metrics-tab.jpg" alt="Métriques du Log Explorer" >}}
 
 ## Dashboards
 

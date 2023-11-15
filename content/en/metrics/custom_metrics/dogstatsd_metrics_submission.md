@@ -208,8 +208,8 @@ while (TRUE) {
 const tracer = require('dd-trace');
 tracer.init();
 
-tracer.dogstatsd.increment('example_metric.increment', 1, ['environment:dev']);
-tracer.dogstatsd.decrement('example_metric.decrement', 1, ['environment:dev']);
+tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev' });
+tracer.dogstatsd.decrement('example_metric.decrement', 1, { environment: 'dev' });
 ```
 {{< /programming-lang >}}
 
@@ -388,7 +388,7 @@ tracer.init();
 let i = 0;
 while(true) {
   i++;
-  tracer.dogstatsd.gauge('example_metric.gauge', i, ['environment:dev']);
+  tracer.dogstatsd.gauge('example_metric.gauge', i, { environment: 'dev' });
 }
 ```
 {{< /programming-lang >}}
@@ -989,7 +989,7 @@ const tracer = require('dd-trace');
 tracer.init();
 
 while(true) {
-  tracer.dogstatsd.distribution('example_metric.distribution', Math.random() * 20, ['environment:dev']);
+  tracer.dogstatsd.distribution('example_metric.distribution', Math.random() * 20, { environment: 'dev' });
   await new Promise(r => setTimeout(r, 2000));
 }
 ```
@@ -1117,7 +1117,7 @@ $statsd->increment('example_metric.increment', array('environment' => 'dev', 'ac
 
 {{< programming-lang lang="nodejs" >}}
 ```javascript
-tracer.dogstatsd.increment('example_metric.increment', 1, ['environment:dev', 'account:local']);
+tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev', account: 'local' });
 ```
 {{< /programming-lang >}}
 
@@ -1137,6 +1137,6 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 [4]: /dashboards/functions/arithmetic/#integral
 [5]: /metrics/types/?tab=gauge#definition
 [6]: /metrics/types/?tab=histogram#definition
-[7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[7]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [8]: /metrics/distributions/
 [9]: /metrics/types/?tab=distribution#definition

@@ -19,6 +19,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/kubernetes-security-best-practices/"
     tag: "Blog"
     text: "Best practices for securing Kubernetes applications"
+  - link: "https://www.datadoghq.com/blog/workload-security-evaluator/"
+    tag: "Blog"
+    text: "Run Atomic Red Team detection tests in container environments with Datadog’s Workload Security Evaluator"
   - link: "https://www.datadoghq.com/blog/security-context-with-datadog-cloud-security-management/"
     tag: "Blog"
     text: "Add security context to observability data with Datadog Cloud Security Management"
@@ -31,9 +34,16 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/custom-detection-rules-with-datadog-cloud-security-management/"
     tag: "Blog"
     text: "Customize rules for detecting cloud misconfigurations with Datadog Cloud Security Management"
+  - link: "https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/"
+    tag: "Blog"
+    text: "Build sufficient security coverage for your cloud environment"
 algolia:
   tags: ['inbox']
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
 
@@ -66,19 +76,23 @@ Remediating security issues can meaningfully improve your organization's securit
 
 Available for [CSM Misconfigurations][2], the [security posture score][5] helps you track your organization's overall health. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure compliance rules.
 
-Improve your organization's score by remediating findings, either by resolving the underlying issue or by muting the finding.
+Improve your organization's score by remediating misconfigurations, either by resolving the underlying issue or by muting the misconfiguration.
 
 {{< img src="security/csm/health_scores.png" alt="The posture score on the CSM overview page tracks your organization's overall health" width="100%">}}
 
 ## Explore and remediate issues
 
-Use the [Issues page][7] to review and remediate your organization's detections and findings. View detailed information about a detection, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
+Use the [Issues page][7] to review and remediate your organization's security detections. View detailed information about a detection, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
 {{< img src="security/cws/threats_page.png" alt="CSM Threats page" width="100%">}}
 
+## Subscribe to weekly digest reports
+
+Receive a weekly summary of Cloud Security Management activity over the past week, including important new security issues discovered in the last seven days. Subscriptions to the weekly digest report are managed on a per user basis. To [subscribe to the weekly digest report][11], you must have the `security_monitoring_signals_read` permission.
+
 ## Next steps
 
-To get started with CSM, navigate to the [**Security** > **Setup**][3] section in Datadog, which has detailed information on how to set up and configure CSM.
+To get started with CSM, navigate to the [**Security** > **Setup**][3] section in Datadog, which has detailed steps on how to set up and configure CSM. For more information, see [Setting Up Cloud Security Management][10].
 
 ## Further reading
 
@@ -93,3 +107,5 @@ To get started with CSM, navigate to the [**Security** > **Setup**][3] section i
 [7]: https://app.datadoghq.com/security?product=cws
 [8]: /security/identity_risks/
 [9]: /security/infrastructure_vulnerabilities/
+[10]: /security/cloud_security_management/setup/
+[11]: https://app.datadoghq.com/security/configuration/reports
