@@ -78,7 +78,7 @@ For a Docker Linux container:
 
 You can enable APM when installing the Agent with the Datadog Helm chart. Use the Datadog Helm chart to install the Datadog Agent on all nodes in your cluster with a DaemonSet.
 
-#### Prerequisites
+### Prerequisites
 
 - [Helm][13]
 - If this is a fresh install, add the Helm Datadog repo:
@@ -87,7 +87,7 @@ You can enable APM when installing the Agent with the Datadog Helm chart. Use th
     helm repo update
     ```
 
-#### Installation
+### Installation
 
 To enable single step instrumentation with Helm:
 
