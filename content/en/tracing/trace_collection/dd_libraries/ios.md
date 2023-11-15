@@ -69,7 +69,7 @@ DatadogTrace.xcframework
 {{% /tab %}}
 {{< /tabs >}}
 
-2. Initialize the library with your application context and your [Datadog client token][2]. For security reasons, you must use a client token: you cannot use [Datadog API keys][3] to configure the `dd-sdk-ios` library as they would be exposed client-side in the iOS application IPA byte code. 
+2. Initialize the library with your application context and your [Datadog client token][2]. For security reasons, you must use a client token: you cannot use [Datadog API keys][3] to configure the `dd-sdk-ios` library as they would be exposed client-side in the iOS application IPA byte code.
 
 For more information about setting up a client token, see the [client token documentation][2].
 
@@ -85,7 +85,7 @@ Datadog.initialize(
         clientToken: "<client token>",
         env: "<environment>",
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 ```
@@ -115,7 +115,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .eu1,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 ```
@@ -146,7 +146,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .us3,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 ```
@@ -177,7 +177,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .us5,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 ```
@@ -208,7 +208,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .us1_fed,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 ```
@@ -239,7 +239,7 @@ Datadog.initialize(
         env: "<environment>",
         site: .ap1,
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: trackingConsent
 )
 ```
@@ -273,7 +273,7 @@ The SDK changes its behavior according to the new value. For example, if the cur
 
 Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][6]. The cache directory cannot be read by any other app installed on the device.
 
-When writing your application, enable development logs to log to console all internal messages in the SDK with a priority equal to or higher than the provided level. 
+When writing your application, enable development logs to log to console all internal messages in the SDK with a priority equal to or higher than the provided level.
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -442,7 +442,7 @@ for (NSString *key in headersWriter.tracePropagationHTTPHeaders) {
 
 This sets additional tracing headers on your request so your backend can extract the request and continue distributed tracing. Once the request is done, call `span.finish()` within a completion handler. If your backend is also instrumented with [Datadog APM & Distributed Tracing][10], the entire front-to-back trace appears in the Datadog dashboard.
 
-* In order for the SDK to automatically trace all network requests made to the given hosts, specify the `firstPartyHosts` array in the Datadog initialization and use `DDURLSessionDelegate` as a delegate of the `URLSession` instance you want to monitor:
+* In order for the SDK to automatically trace all network requests made to the given hosts, specify the `firstPartyHosts` array in the Datadog initialization, enable `URLSessionInstrumentation` for your delegate type and pass the delegate instance to the URLSession:
 
 {{< tabs >}}
 {{% tab "Swift" %}}
@@ -457,9 +457,15 @@ Trace.enable(
     )
 )
 
+URLSessionInstrumentation.enable(
+    with: .init(
+        delegateClass: SessionDelegate.self,
+    )
+)
+
 let session = URLSession(
     configuration: .default,
-    delegate: DatadogURLSessionDelegate(),
+    delegate: SessionDelegate(),
     delegateQueue: nil
 )
 ```
