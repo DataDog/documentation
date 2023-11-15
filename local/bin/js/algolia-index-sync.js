@@ -160,16 +160,16 @@ const sync = () => {
     const client = algoliasearch(appId, adminKey);
     const index = client.initIndex(indexName);
 
-    // updateSettings(index)
-    //     .then(() => {
-    //         console.log(`${indexName} settings update complete`);
-    //         updateReplicas(client, indexName);
-    //     })
-    //     .catch((err) => console.error(err));
+    updateSettings(index)
+        .then(() => {
+            console.log(`${indexName} settings update complete`);
+            updateReplicas(client, indexName);
+        })
+        .catch((err) => console.error(err));
 
-    // updateSynonyms(index)
-    //     .then(() => console.log(`${indexName} synonyms update complete`))
-    //     .catch((err) => console.error(err));
+    updateSynonyms(index)
+        .then(() => console.log(`${indexName} synonyms update complete`))
+        .catch((err) => console.error(err));
 
     updateIndex(indexName);
 };
