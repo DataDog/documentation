@@ -5,9 +5,9 @@ further_reading:
   - link: "/security/cloud_security_management/guide"
     tag: "Documentation"
     text: Cloud Security Management Guides
-  - link: "/integrations/jira/"
+  - link: "/security/cloud_security_management/setup"
     tag: "Documentation"
-    text: Datadog Jira Integration
+    text: Setting Up Cloud Security Management
 ---
 
 You can use resource tags to create filters that include or exclude resources from being evaluated by Cloud Security Management (CSM). The filters must be specified as a comma-separated list of `key:value` pairs.
@@ -73,4 +73,6 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Further Reading
 
+{{< partial name="whats-next/whats-next.html" >}}

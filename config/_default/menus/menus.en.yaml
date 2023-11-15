@@ -3294,7 +3294,7 @@ main:
     identifier: resource_catalog
     weight: 114
   - name: Resource Evaluation Filters
-    url: /security/cloud_security_management/resource_evaluation_filters
+    url: /security/cloud_security_management/guide/resource_evaluation_filters
     parent: cspm
     identifier: resource_evaluation_filters
     weight: 116
