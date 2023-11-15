@@ -35,6 +35,8 @@ Private locations allow you to **monitor internal-facing applications or any pri
 * **Verify application performance in your internal CI environment** before you release new features to production with [Continuous Testing and CI/CD][1].
 * **Compare application performance** from both inside and outside your internal network.
 
+{{< img src="synthetics/private_locations/private_locations_worker.png" alt="Architecture diagram of how a private location works in Synthetic Monitoring" style="width:100%;">}}
+
 Private locations come as Docker containers that you can install wherever makes sense inside of your private network. Once created and installed, you can assign [Synthetic tests][2] to your private location just like you would with any managed location.
 
 Your private location worker pulls your test configurations from Datadog's servers using HTTPS, executes the test on a schedule or on-demand, and returns the test results to Datadog's servers. You can then visualize your private locations test results in a completely identical manner to how you would visualize tests running from managed locations:
