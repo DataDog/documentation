@@ -12,7 +12,7 @@ Every metric query is inherently aggregated. However, appending the `.rollup()` 
 
 To apply a rollup, navigate to the **Add function** (Σ) button of the graphing editor: 
 
-{{< img src="dashboards/functions/rollup/rollup_option.mp4" alt="Select the Rollup average option from the Add function button" video=true >}}
+{{< img src="dashboards/functions/rollup/rollup_option_1.mp4" alt="Select the Rollup average option from the Add function button" video=true >}}
 
 **Note**: The Distribution Metric type does not have a rollup `aggregator` parameter. This metric type is aggregated both in time and space. See the documentation on [rollup for distributions with percentiles][2] to learn more.
 
