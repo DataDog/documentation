@@ -389,86 +389,90 @@ main:
     url: agent/remote_config
     parent: agent
     weight: 9
+  - name: Fleet Automation
+    url: agent/fleet_automation
+    parent: agent
+    weight: 10
   - name: Versions
     url: agent/versions
     parent: agent
     identifier: agent_versions
-    weight: 10
+    weight: 11
   - name: Upgrade to Agent v7
     url: agent/versions/upgrade_to_agent_v7/
     parent: agent_versions
-    weight: 1001
+    weight: 1101
   - name: Upgrade to Agent v6
     url: agent/versions/upgrade_to_agent_v6/
     parent: agent_versions
-    weight: 1002
+    weight: 1102
   - name: Upgrade Between Agent Minor Versions
     url: agent/versions/upgrade_between_agent_minor_versions
     parent: agent_versions
-    weight: 1003
+    weight: 1103
   - name: Troubleshooting
     url: agent/troubleshooting/
     parent: agent
-    weight: 11
+    weight: 12
     identifier: agent_troubleshooting
   - name: Container Hostname Detection
     url: agent/troubleshooting/hostname_containers/
     parent: agent_troubleshooting
-    weight: 1101
+    weight: 1201
   - name: Debug Mode
     url: agent/troubleshooting/debug_mode/
     parent: agent_troubleshooting
-    weight: 1102
+    weight: 1202
   - name: Agent Flare
     url: agent/troubleshooting/send_a_flare/
     parent: agent_troubleshooting
-    weight: 1103
+    weight: 1203
   - name: Agent Check Status
     url: agent/troubleshooting/agent_check_status/
     parent: agent_troubleshooting
-    weight: 1104
+    weight: 1204
   - name: NTP Issues
     url: agent/troubleshooting/ntp/
     parent: agent_troubleshooting
-    weight: 1105
+    weight: 1205
   - name: Permission Issues
     url: agent/troubleshooting/permissions/
     parent: agent_troubleshooting
-    weight: 1106
+    weight: 1206
   - name: Integrations Issues
     url: agent/troubleshooting/integrations/
     parent: agent_troubleshooting
-    weight: 1107
+    weight: 1207
   - name: Site Issues
     url: agent/troubleshooting/site/
     parent: agent_troubleshooting
-    weight: 1108
+    weight: 1208
   - name: Autodiscovery Issues
     url: agent/troubleshooting/autodiscovery/
     parent: agent_troubleshooting
-    weight: 1109
+    weight: 1209
   - name: Windows Container Issues
     url: agent/troubleshooting/windows_containers
-    weight: 1110
+    weight: 1210
     parent: agent_troubleshooting
   - name: Agent Runtime Configuration
     url: agent/troubleshooting/config
-    weight: 1111
+    weight: 1211
     parent: agent_troubleshooting
   - name: High CPU or Memory Consumption
     url: agent/troubleshooting/high_memory_usage/
-    weight: 1112
+    weight: 1212
     parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/
     identifier: agent_guides
     parent: agent
-    weight: 12
+    weight: 13
   - name: Data Security
     identifier: agent_security
     url: data_security/agent/
     parent: agent
-    weight: 13
+    weight: 14
   - name: Containers
     url: containers/
     identifier: containers
