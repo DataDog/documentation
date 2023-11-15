@@ -29,9 +29,9 @@ To enable CSM Misconfigurations, you must first set up the Datadog cloud account
 
 **Note**: CSM Vulnerabilities is not available for CRI-O runtime.
 
-## Enable resource scanning for CSM misconfigurations
+## Enable resource scanning for cloud accounts
 
-To enable resource scanning for your cloud accounts, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, and Google Cloud project.
+To enable resource scanning for your cloud accounts for CSM Misconfigurations, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, and Google Cloud project.
 
 {{< tabs >}}
 {{% tab "AWS" %}}
@@ -54,10 +54,9 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 {{< /tabs >}}
 
+## Configure the Agent for hosts and containers
 
-## Configure CSM for container vulnerabilities
-
-The following instructions enables the container image metadata collection and [Software Bill of Materials (SBOM)][10] collection in the Datadog Agent. This allows you to scan the libraries in container images to detect vulnerabilities. Vulnerabilities are evaluated and and scanned against your containers every hour.
+The following instructions enables the container image metadata collection and [Software Bill of Materials (SBOM)][10] collection in the Datadog Agent for CSM Vulnerabilities. This allows you to scan the libraries in container images to detect vulnerabilities. Vulnerabilities are evaluated and and scanned against your containers every hour.
 
 **Note**: CSM Vulnerabilities is not available for AWS Fargate or Windows environments.
 
