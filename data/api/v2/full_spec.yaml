@@ -21472,17 +21472,17 @@ paths:
       x-undo:
         operationId: CancelDowntime
         parameters:
-        - name: downtime_id
+        - name: downtime_uuid
           source: data.id
         type: unsafe
-  /api/v2/downtime/{downtime_id}:
+  /api/v2/downtime/{downtime_uuid}:
     delete:
       description: Cancel a downtime.
       operationId: CancelDowntime
       parameters:
       - description: ID of the downtime to cancel.
         in: path
-        name: downtime_id
+        name: downtime_uuid
         required: true
         schema:
           example: 00000000-0000-1234-0000-000000000000
@@ -21516,12 +21516,12 @@ paths:
       x-undo:
         type: idempotent
     get:
-      description: Get downtime detail by `downtime_id`.
+      description: Get downtime detail by `downtime_uuid`.
       operationId: GetDowntime
       parameters:
       - description: ID of the downtime to fetch.
         in: path
-        name: downtime_id
+        name: downtime_uuid
         required: true
         schema:
           example: 00000000-0000-1234-0000-000000000000
@@ -21575,12 +21575,12 @@ paths:
       x-undo:
         type: safe
     patch:
-      description: Update a downtime by `downtime_id`.
+      description: Update a downtime by `downtime_uuid`.
       operationId: UpdateDowntime
       parameters:
       - description: ID of the downtime to update.
         in: path
-        name: downtime_id
+        name: downtime_uuid
         required: true
         schema:
           example: 00e000000-0000-1234-0000-000000000000

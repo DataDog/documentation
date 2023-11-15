@@ -236,11 +236,11 @@
     "summary": "Cancel a downtime"
   },
   "GetDowntime": {
-    "description": "Get downtime detail by `downtime_id`.",
+    "description": "Get downtime detail by `downtime_uuid`.",
     "summary": "Get a downtime"
   },
   "UpdateDowntime": {
-    "description": "Update a downtime by `downtime_id`.",
+    "description": "Update a downtime by `downtime_uuid`.",
     "summary": "Update a downtime",
     "request_description": "Update a downtime request body.",
     "request_schema_description": "Request for editing a downtime."
