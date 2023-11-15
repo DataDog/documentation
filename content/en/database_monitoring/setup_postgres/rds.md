@@ -218,7 +218,7 @@ To monitor RDS hosts, install the Datadog Agent in your infrastructure and confi
 
 To configure collecting Database Monitoring metrics for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an RDS database:
 
-1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. Set the `region` parameter to configure the Agent to connect using IAM authentication. See the [sample postgres.d/conf.yaml][1] for all available configuration options.
+1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][1] for all available configuration options.
    ```yaml
    init_config:
    instances:
@@ -227,9 +227,6 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        port: 5432
        username: datadog
        password: '<PASSWORD>'
-       aws:
-         instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
-         region: '<REGION>'
        tags:
          - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
        ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
@@ -245,11 +242,37 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
    ssl: allow
    ```
 
+   If you want to authenticate with IAM, set the `region` and `instance_endpoint` parameters. 
+   
+   **Note**: only set the `region` parameter if you want to use IAM authentication. IAM authentication takes precedence over the `password` field.
+
+   ```yaml
+   init_config:
+   instances:
+     - dbm: true
+       host: '<AWS_INSTANCE_ENDPOINT>'
+       port: 5432
+       username: datadog
+       aws:
+         instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
+         region: '<REGION>'
+       tags:
+         - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
+       ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
+       # pg_stat_statements_view: datadog.pg_stat_statements()
+       # pg_stat_activity_view: datadog.pg_stat_activity()
+       ## Optional: Connect to a different database if needed for `custom_queries`
+       # dbname: '<DB_NAME>'
+   ```
+
+   For information on configuring IAM authentication on your RDS instance, see [Connecting with Managed Authentication][3].
+
 2. [Restart the Agent][2].
 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[3]: /database_monitoring/guide/managed_authentication
 {{% /tab %}}
 {{% tab "Docker" %}}
 
