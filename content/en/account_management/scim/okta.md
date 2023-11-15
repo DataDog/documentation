@@ -36,7 +36,7 @@ For prerequisites, capabilities, and limitations, see [SCIM][1].
     - **Create Users**
     - **Update User Attributes**
     - **Deactivate Users**
-8. Under **Datadog Attribute Mappings**, you can find the mapping of Okta attributes to Datadog Attributes already pre-configured. You can re-map them if needed, but map the Okta values to the same set of Datadog values.
+8. Under **Datadog Attribute Mappings**, find the mapping of Okta attributes to Datadog attributes already pre-configured. You can re-map them if needed, but map the Okta values to the same set of Datadog values.
 
 ### Group attributes
 
