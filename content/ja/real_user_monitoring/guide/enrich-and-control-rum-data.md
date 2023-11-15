@@ -64,7 +64,7 @@ datadogRum.init({
     beforeSend: (event, context) => {
         // RUM リソースの応答ヘッダーを収集します
         if (event.type === 'resource' && event.resource.type === 'fetch') {
-            event.context = {...event.context, responseHeaders: context.response.headers}
+            event.context.responseHeaders = Object.fromEntries(context.response.headers)
         }
     },
     ...
