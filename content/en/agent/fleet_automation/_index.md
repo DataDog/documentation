@@ -23,9 +23,9 @@ Datadog Fleet Automation allows you to centrally govern and remotely manage Data
 
 {{< img src="agent/fleet_automation/fleet-automation-view.png" alt="The fleet automation page" style="width:100%;" >}}
 
-With Fleet Automation platform, you can:
+With the Fleet Automation platform, you can:
 - View Agent and Agent integration configurations to help confirm deployment changes and ensure configuration consistency.
-- Easily send a flare from within your organization, reducing the time it takes to debug issues on an Agent.
+- Send a flare from within your organization, reducing the time it takes to debug issues on an Agent.
 - Ensure your fleet of Agents is using the latest feature enhancements by identifying outdated Agent versions.
 - Help rotate API keys and ensure old keys can be disabled with no impact by identifying which Agents, and how many Agents, are using a particular key.
 
@@ -44,7 +44,7 @@ Selecting an Agent gives you more information about it, including its configurat
 
 ## Configuring Fleet Automation
 
-Fleet Automation incorporates several Datadog features, which are all enabled automatically in Agents version 7.49/6.49 or later. To ensure you have access to all of the features, upgrade your Agents to version 7.49/6.49 or later.
+Fleet Automation incorporates several Datadog features, which are all enabled automatically in Agent version 7.49/6.49 or later. To ensure you have access to all of the features, upgrade your Agents to version 7.49/6.49 or later.
 
 If you're using an older Agent, you might still be able to enable the following Datadog features individually:
 - **Remote Configuration**: For information on supported Agent versions and configuration steps, see [Enabling Remote Configuration][3].
@@ -73,7 +73,7 @@ Fleet Automation is available to all users in a Datadog organization. You can co
 
 | Permission | Description |
 |--------------|---------------|
-| `API keys read`| Restricts which users can view and search agents by API key. |
+| `API keys read`| Restricts which users can view and search Agents by API key. |
 | `Agent flare collection` | Restricts which users can remotely send flares. |
 
 For information on setting up roles and permissions, see [Access Control][5].
