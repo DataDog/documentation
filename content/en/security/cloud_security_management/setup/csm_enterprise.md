@@ -24,40 +24,11 @@ further_reading:
 
 The Cloud Security Management (CSM) Enterprise package includes [CSM Threats][1], [CSM Misconfigurations][2] (cloud accounts and Agent), [CSM Identity Risks][3], and [CSM Vulnerabilities][4] (container images and hosts). To learn more about the available CSM packages, see [Setting up Cloud Security Management][8].
 
-- Enable resource scanning for CSM misconfigurations
-- Configure CSM for threats
-- Configure CSM for vulnerabilities
-
 ## Prerequisites
 
-CSM Enterprise requires [Datadog Agent][14] 7.46 or later. Additionally, see the following requirements for CSM Threats and CSM Vulnerabilities:
+{{% csm-prereqs-enterprise %}}
 
-### CSM Threats
-
-CSM Threats supports the following Linux distributions:
-
-* Ubuntu LTS (18.04, 20.04, and 22.04)
-* Debian 10 or later
-* Amazon Linux 2 (kernels 4.15, 5.4, and 5.10) and 2023
-* SUSE Linux Enterprise Server 12 and 15
-* Red Hat Enterprise Linux 7, 8, and 9
-* Oracle Linux 7, 8, and 9
-* CentOS 7
-* Custom kernel builds are not supported.
-
-**Notes**: 
-
-* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][15].
-* Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. 
-
-### CSM Vulnerabilities
-
-* [Helm Chart][17] v3.33.6 or later (Kubernetes only).
-* [containerd][16] v1.5.6 or later (Kubernetes and hosts only).
-
-**Note**: CSM Vulnerabilities is not available for CRI-O runtime.
-
-## Enable resource scanning for CSM misconfigurations
+## Enable resource scanning for misconfigurations
 
 To enable resource scanning for your cloud accounts, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, and Google Cloud project.
 
@@ -82,7 +53,7 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 {{< /tabs >}}
 
-## Configure CSM for threats
+## Configure the Agent for threats and misconfigurations
 
 ### Enable Remote Configuration
 
@@ -455,7 +426,7 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configure CSM for vulnerabilities
+## Configure the Agent for vulnerabilities
 
 The following instructions enables the image metadata collection and [Software Bill of Materials (SBOM)][11] collection in the Datadog Agent. This allows you to scan the libraries in your container images and hosts to detect vulnerabilities. Vulnerabilities are evaluated and and scanned against your containers and hosts every hour.
 
