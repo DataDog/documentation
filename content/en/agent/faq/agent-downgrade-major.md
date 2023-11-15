@@ -36,7 +36,7 @@ The command works on all supported versions of Amazon Linux, CentOS, Debian, Fed
 [1]: /agent/guide/how-do-i-uninstall-the-agent/
 [2]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-6-latest.amd64.msi
 [3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
+[4]: https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json
 {{% /tab %}}
 {{% tab "MacOS" %}}
 

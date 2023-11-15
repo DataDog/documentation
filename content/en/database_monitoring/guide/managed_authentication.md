@@ -84,6 +84,7 @@ instances:
  port: 5432
  username: datadog
  aws:
+   instance_endpoint: example-endpoint.us-east-2.rds.amazonaws.com
    region: us-east-2
 ```
 
