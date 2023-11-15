@@ -111,10 +111,13 @@ The `ddtrace` library includes support for the following libraries:
 | [gevent][52]      | >= 1.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
 | [Grpc][53]        | >= 1.8.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
 | [httplib][54]     | Fully Supported   | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#httplib     |
+| [Logbook][66]     | >= 1.0.0          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#logbook     |
+| [Loguru][65]      | >= 0.4.0          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#loguru     |
 | [Jinja2][55]      | >= 2.7            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
 | [Kombu][56]       | >= 4.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
 | [Mako][57]        | >= 0.1.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
 | [Requests][58]    | >= 2.08           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
+| [structlog][64]   | >= 20.2.0         | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#structlog   | 
 | [urllib3][59]     | >= 1.22           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
 | [graphql-core][60]| >= 2.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#graphql |
 | [pytest][14]              | >= 3.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest  |
@@ -187,3 +190,6 @@ The `ddtrace` library includes support for the following libraries:
 [61]: https://gunicorn.org/
 [62]: https://snowflake.com/
 [63]: https://opensearch.org/
+[64]: https://www.structlog.org/en/stable/
+[65]: https://loguru.readthedocs.io/en/stable/
+[66]: https://logbook.readthedocs.io/en/stable/
