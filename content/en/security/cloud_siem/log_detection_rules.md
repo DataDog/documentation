@@ -99,7 +99,7 @@ The Detection Rules join the logs together using a group by value. The group by 
 
 The Detection Rule cases join these queries together based on their group by value. The group by attribute is typically the same attribute because the value must be the same for the case to be met. If a group by value doesn't exist, the case will never be met. A Security Signal is generated for each unique group by value when a case is matched.
 
-{{< img src="security/security_monitoring/detection_rules/set_rule_case3.png" alt="The set rule cases section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:55%;" >}}
+{{< img src="security/security_monitoring/detection_rules/set_rule_case4.png" alt="The set rule cases section set to trigger a high severity signal when failed_login is greater than five and successful_login is greater than zero" style="width:90%;" >}}
 
 In this example, when greater than five failed logins and a successful login exist for the same `@usr.name`, the first case is matched, and a Security Signal is generated.
 
