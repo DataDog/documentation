@@ -242,7 +242,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
    ssl: allow
    ```
 
-If you want to authenticate via IAM, set the `region` and `instance_endpoint` parameters. **Note**: only set the `region` parameter if you want to use IAM authentication, it will take precedence over the `password` field.
+If you want to authenticate with IAM, set the `region` and `instance_endpoint` parameters. **Note**: only set the `region` parameter if you want to use IAM authentication. IAM authentication takes precedence over the `password` field.
 
    ```yaml
    init_config:
