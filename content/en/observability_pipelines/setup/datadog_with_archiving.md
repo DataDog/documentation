@@ -95,7 +95,13 @@ To run the Worker in your AWS account, you need administrative access to that ac
 
 ## Set up Log Archives
 
-The sample configuration you download later, when you [install the Observability Pipelines Worker](#install-the-observability-pipelines-worker), includes a sink for sending logs to Amazon S3 under a Datadog-rehydratable format. To use this configuration, create an S3 bucket for your archives and set up an IAM policy that allows the Workers to write to the S3 bucket. Then, connect the S3 bucket to Datadog Log Archives.
+When you [install the Observability Pipelines Worker](#install-the-observability-pipelines-worker) later on, the sample configuration provided includes a sink for sending logs to Amazon S3 under a Datadog-rehydratable format. To use this configuration, create an S3 bucket for your archives and set up an IAM policy that allows the Workers to write to the S3 bucket. Then, connect the S3 bucket to Datadog Log Archives.
+
+{{% site-region region="us,us3,us5" %}}
+See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
+
+[1]: https://aws.amazon.com/s3/pricing/
+{{% /site-region %}}
 
 ### Create an S3 bucket and set up an IAM policy
 
@@ -111,7 +117,7 @@ The sample configuration you download later, when you [install the Observability
 
 {{% op-datadog-archives-s3-setup %}}
 
-3. [Create a service account][1] to use the policy you created above. Replace `${DD_ARCHIVES_SERVICE_ACCOUNT}` in the Helm config with the service account name.
+3. [Create a service account][1] to use the policy you created above.
 
 [1]: https://docs.aws.amazon.com/eks/latest/userguide/associate-service-account-role.html
 
@@ -139,12 +145,6 @@ The sample configuration you download later, when you [install the Observability
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% site-region region="us,us3,us5" %}}
-See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
-
-[1]: https://aws.amazon.com/s3/pricing/
-{{% /site-region %}}
-
 ### Connect the S3 bucket to Datadog Log Archives
 
 You need to connect the S3 bucket you created earlier to Datadog Log Archives so that you can rehydrate the archives later on.
@@ -152,7 +152,7 @@ You need to connect the S3 bucket you created earlier to Datadog Log Archives so
 1. Navigate to Datadog [Log Forwarding][5].
 1. Click **Add a new archive**.
 1. Enter a descriptive archive name.
-1. Add a query that filters out all logs going through log pipelines so that none of those logs go into this archive. For example, add the query `observability_pipelines_read_only_archive`, assuming no logs going through the pipeline have that tag added.
+1. Add a query that filters out all logs going through log pipelines so that those logs do not go into this archive. For example, add the query `observability_pipelines_read_only_archive`, assuming that no logs going through the pipeline have that tag added.
 1. Select **AWS S3**.
 1. Select the AWS Account that your bucket is in.
 1. Enter the name of the S3 bucket.
@@ -193,7 +193,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 {{% tab "AWS EKS" %}}
 1. Download the [Helm chart][1] for AWS EKS.
 
-2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
+2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Replace `${DD_ARCHIVES_SERVICE_ACCOUNT}` in the Helm config with the service account you created earlier. Then, install it in your cluster with the following commands:
 
     ```shell
     helm repo add datadog https://helm.datadoghq.com
@@ -255,7 +255,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     sudo systemctl restart observability-pipelines-worker
     ```
 
-[1]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
+[1]: /resources/yaml/observability_pipelines/archives/pipeline.yaml
 {{% /tab %}}
 {{% tab "RPM-based Linux" %}}
 1. Run the following commands to set up the Datadog `rpm` repo on your system:
@@ -303,7 +303,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     sudo systemctl restart observability-pipelines-worker
     ```
 
-[1]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
+[1]: /resources/yaml/observability_pipelines/archives/pipeline.yaml
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
 Set up the Worker module in your existing Terraform using this sample configuration. Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline.
