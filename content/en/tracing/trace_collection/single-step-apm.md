@@ -84,7 +84,7 @@ The Datadog Operator is a way to deploy the Datadog Agent on Kubernetes and Open
 
 #### Prerequisites
 
-- Kubernetes Cluster version v1.20.X+: Tests were done on v1.20.0+; should be supported in v1.11.0+. For earlier versions, because of limited CRD support, the Operator may not work as expected.
+- Kubernetes Cluster version v1.20.X+ and v1.11.0+. For earlier versions, because of limited CRD support, the Operator may not work as expected.
 - [`Helm`][7] for deploying the `datadog-operator`.
 - [`Kubectl` CLI][8] for installing the `datadog-agent`.
 
@@ -214,72 +214,72 @@ You can choose to selectively instrument or to not instrument specific namespace
 To enable instrumentation for specific namespaces:
 
 1. Add the `enabledNamespaces` configuration to your `datadog-agent.yaml` file:
-{{< highlight yaml "hl_lines=19-21" >}}
-   kind: DatadogAgent
-   apiVersion: datadoghq.com/v2alpha1
-   metadata:
-     name: datadog
-   spec:
-     global:
-       site: <DATADOG_SITE>
-       credentials:
-         apiSecret:
-           secretName: datadog-secret
-           keyName: api-key
-         appSecret:
-           secretName: datadog-secret
-           keyName: app-key
-   features:
-     apm:
-       instrumentation:
-         enabled: true 
-         enabledNamespaces:
-           - default
-           - applications
-     override:
-       clusterAgent:
-         image:
-           name: gcr.io/datadoghq/cluster-agent:latest
-       nodeAgent:
-         image:
-           name: gcr.io/datadoghq/agent:latest
-{{< /highlight >}}
+   ```yaml
+      kind: DatadogAgent
+      apiVersion: datadoghq.com/v2alpha1
+      metadata:
+        name: datadog
+      spec:
+        global:
+          site: <DATADOG_SITE>
+          credentials:
+            apiSecret:
+              secretName: datadog-secret
+              keyName: api-key
+            appSecret:
+              secretName: datadog-secret
+              keyName: app-key
+      features:
+        apm:
+          instrumentation:
+            enabled: true 
+            enabledNamespaces: # Add namespaces to instrument
+              - default
+              - applications
+        override:
+          clusterAgent:
+            image:
+              name: gcr.io/datadoghq/cluster-agent:latest
+          nodeAgent:
+            image:
+              name: gcr.io/datadoghq/agent:latest
+   ```
 
 2. Restart your services.
 
 To disable instrumentation for specific namespaces:
 
 1. Add the `disabledNamespaces` configuration to your `datadog-agent.yaml` file:
-{{< highlight yaml "hl_lines=19-21" >}}
-   kind: DatadogAgent
-   apiVersion: datadoghq.com/v2alpha1
-   metadata:
-     name: datadog
-   spec:
-     global:
-       site: <DATADOG_SITE>
-       credentials:
-         apiSecret:
-           secretName: datadog-secret
-           keyName: api-key
-         appSecret:
-           secretName: datadog-secret
-           keyName: app-key
-   features:
-     apm:
-       instrumentation:
-         enabled: true 
-         disabledNamespaces:
-           - default
-           - applications
-     override:
-       clusterAgent:
-         image:
-           name: gcr.io/datadoghq/cluster-agent:latest
-       nodeAgent:
-         image:
-           name: gcr.io/datadoghq/agent:latest
-{{< /highlight >}}
+   ```yaml
+      kind: DatadogAgent
+      apiVersion: datadoghq.com/v2alpha1
+      metadata:
+        name: datadog
+      spec:
+        global:
+          site: <DATADOG_SITE>
+          credentials:
+            apiSecret:
+              secretName: datadog-secret
+              keyName: api-key
+            appSecret:
+              secretName: datadog-secret
+              keyName: app-key
+      features:
+        apm:
+          instrumentation:
+            enabled: true 
+            disabledNamespaces: # Add namespaces to not instrument
+              - default
+              - applications
+        override:
+          clusterAgent:
+            image:
+              name: gcr.io/datadoghq/cluster-agent:latest
+          nodeAgent:
+            image:
+              name: gcr.io/datadoghq/agent:latest
+   ```
 
 2. Restart your services.
 
@@ -288,31 +288,30 @@ To disable instrumentation for specific namespaces:
 To enable instrumentation for specific namespaces:
 
 1. Add the `enabledNamespaces` configuration to your `datadog-values.yaml` file:
-{{< highlight yaml "hl_lines=8-10" >}}
-   datadog:
-     apiKeyExistingSecret: datadog-secret
-     appKeyExistingSecret: datadog-secret
-     site: <DATADOG_SITE>
-     apm:
-       instrumentation:
-         enabled: true
-         enabledNamespaces:
-            - default
-            - applications
-{{< /highlight >}}
+   ```yaml
+      datadog:
+        apiKeyExistingSecret: datadog-secret
+        appKeyExistingSecret: datadog-secret
+        site: <DATADOG_SITE>
+        apm:
+          instrumentation:
+            enabled: true
+            enabledNamespaces: # Add namespaces to instrument
+               - default
+               - applications
+   ```
 
-4. Run the following command:
+2. Run the following command:
    ```bash
-   helm install <RELEASE_NAME> \
+   helm upgrade <RELEASE_NAME> \
     -f datadog-values.yaml \
-    --set targetSystem=<TARGET_SYSTEM> \
     datadog/datadog
    ```
 
 To disable instrumentation for specific namespaces:
 
 1. Add the `disabledNamespaces` configuration to your `datadog-values.yaml` file:
-{{< highlight yaml "hl_lines=8-10" >}}
+   ```yaml
    datadog:
      apiKeyExistingSecret: datadog-secret
      appKeyExistingSecret: datadog-secret
@@ -320,16 +319,15 @@ To disable instrumentation for specific namespaces:
      apm:
        instrumentation:
          enabled: true
-         disabledNamespaces:
+         disabledNamespaces: # Add namespaces to not instrument
             - default
             - applications
-{{< /highlight >}}
+   ```
 
-4. Run the following command:
+2. Run the following command:
    ```bash
-   helm install <RELEASE_NAME> \
+   helm upgrade <RELEASE_NAME> \
     -f datadog-values.yaml \
-    --set targetSystem=<TARGET_SYSTEM> \
     datadog/datadog
    ```
 
@@ -340,46 +338,46 @@ You can optionally set specific tracing library versions to use. If you don't se
 #### Operator
 
 1. Add the following configuration to your `datadog-agent.yaml` file:
-{{< highlight yaml "hl_lines=19-24" >}}
-   kind: DatadogAgent
-   apiVersion: datadoghq.com/v2alpha1
-   metadata:
-     name: datadog
-   spec:
-     global:
-       site: <DATADOG_SITE>
-       credentials:
-         apiSecret:
-           secretName: datadog-secret
-           keyName: api-key
-         appSecret:
-           secretName: datadog-secret
-           keyName: app-key
-   features:
-     apm:
-       instrumentation:
-         enabled: true 
-         libVersions:
-            dotnet: v2.40.0
-            python: v1.20.6
-            java: v1.22.0
-            js: v4.17.0
-            ruby: v1.15.0 
-     override:
-       clusterAgent:
-         image:
-           name: gcr.io/datadoghq/cluster-agent:latest
-       nodeAgent:
-         image:
-           name: gcr.io/datadoghq/agent:latest
-{{< /highlight >}}
+   ```yaml
+      kind: DatadogAgent
+      apiVersion: datadoghq.com/v2alpha1
+      metadata:
+        name: datadog
+      spec:
+        global:
+          site: <DATADOG_SITE>
+          credentials:
+            apiSecret:
+              secretName: datadog-secret
+              keyName: api-key
+            appSecret:
+              secretName: datadog-secret
+              keyName: app-key
+      features:
+        apm:
+          instrumentation:
+            enabled: true 
+            libVersions: # Add any versions you want to set
+               dotnet: v2.40.0
+               python: v1.20.6
+               java: v1.22.0
+               js: v4.17.0
+               ruby: v1.15.0 
+        override:
+          clusterAgent:
+            image:
+              name: gcr.io/datadoghq/cluster-agent:latest
+          nodeAgent:
+            image:
+              name: gcr.io/datadoghq/agent:latest
+   ```
 
 2. Restart your services.
 
 #### Helm chart
 
 1. Add the following configuration to your `datadog-values.yaml` file:
-{{< highlight yaml "hl_lines=8-13" >}}
+   ```yaml
    datadog:
      apiKeyExistingSecret: datadog-secret
      appKeyExistingSecret: datadog-secret
@@ -387,19 +385,18 @@ You can optionally set specific tracing library versions to use. If you don't se
      apm:
        instrumentation:
        enabled: true
-       libVersions:
+       libVersions: # Add any versions you want to set
             dotnet: v2.40.0
             python: v1.20.6
             java: v1.22.0
             js: v4.17.0
             ruby: v1.15.0 
-{{< /highlight >}}
+   ```
 
-4. Run the following command:
+2. Run the following command:
    ```bash
-   helm install <RELEASE_NAME> \
+   helm upgrade <RELEASE_NAME> \
     -f datadog-values.yaml \
-    --set targetSystem=<TARGET_SYSTEM> \
     datadog/datadog
    ```
 {{% /tab %}}
@@ -505,12 +502,12 @@ To stop producing traces, remove library injectors and restart the infrastructur
 For the Datadog Operator:
 
 1. Update the following configuration in `datadog-agent.yaml`:
-{{< highlight yaml "hl_lines=4" >}}
+   ```yaml
    features:  
      apm:
        instrumentation:
-         enabled: false
-{{< /highlight >}}
+         enabled: false # Change this
+   ```
 
 2. Deploy the Datadog Agent with the updated configuration file:
    ```shell
@@ -520,18 +517,17 @@ For the Datadog Operator:
 For Helm charts: 
 
 1. Update the following configuration in `datadog-values.yaml`:
-{{< highlight yaml "hl_lines=4" >}}
+   ```yaml
    datadog:  
      apm:
        instrumentation:
-         enabled: false
-{{< /highlight >}}
+         enabled: false # Change this
+   ```
 
-4. Run the following command:
+2. Run the following command:
    ```bash
-   helm install <RELEASE_NAME> \
+   helm upgrade <RELEASE_NAME> \
     -f datadog-values.yaml \
-    --set targetSystem=<TARGET_SYSTEM> \
     datadog/datadog
    ```
 
