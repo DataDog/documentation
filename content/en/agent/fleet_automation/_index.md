@@ -19,39 +19,39 @@ further_reading:
 
 ## Overview
 
-Datadog Fleet Automation allows you to gain visibility into your fleet of Agents to ensure they are set up correctly and optimized to meet your evolving observability needs.
+Datadog Fleet Automation allows you to centrally govern and remotely manage Datadog Agents at scale to support their evolving observability needs.
 
-{{< img src="agent/fleet_automation/fleet_automation1.png" alt="The fleet automation page." style="width:100%;" >}}
+{{< img src="agent/fleet_automation/fleet_automation2.png" alt="The fleet automation page" style="width:100%;" >}}
 
-With Fleet Automation, you can:
-- Reduce the time it takes to debug an issue by sending a remote flare straight from the [Fleet Automation][1] page.
-- Ensure you're running up-to-date Agents with the latest security fixes and feature enhancements by identifying outdated Agent versions.
-- Identify which Agents are using a particular API key so you can safely rotate keys and disable old keys without impact.
-- View Agent and Agent integration configurations to help confirm deployment changes and troubleshoot any configuration related issues.
+With Fleet Automation platform, you can:
+- View Agent and Agent integration configurations to help confirm deployment changes and ensure configuration consistency.
+- Easily send a flare from within your organization, reducing the time it takes to debug issues on an Agent.
+- Ensure your fleet of Agents is using the latest feature enhancements by identifying outdated Agent versions.
+- Help rotate API keys and ensure old keys can be disabled with no impact by identifying which Agents, and how many Agents, are using a particular key.
 
 To access Fleet Automation, click **Integrations** > [**Fleet Automation**][1].
 
-Use the Fleet Automation page to gain insight into unmonitored Agents, Agents that need to be updated, or Agents that have integration issues. For each Agent, you can see:
+Use the Fleet Automation page to gain insight into unmonitored hosts, Agents that need to be updated, or Agents that have integration issues. For each Agent, you can see:
 - The Agent version
 - Whether the Agent has any unconfigured or misconfigured integrations
 - The services that the Agent is monitoring
-- The Remote Configuration status of each Agent
+- The Agent's Remote Configuration status
 - The products that are enabled on the Agent
 
 Selecting an Agent gives you more information about it, including its configuration, connected integrations, and a support tab that you can use to send a remote flare.
 
-{{< img src="agent/fleet_automation/selected_agent.png" alt="An Agent's integration information," style="width:100%;" >}}
+{{< img src="agent/fleet_automation/selected_agent2.png" alt="An Agent's integration information" style="width:100%;" >}}
 
 ## Configuring Fleet Automation
 
-Fleet Automation incorporates several Datadog features, which are all enabled automatically in Agents version 7.49/6.49 or later. To ensure you have access to all of the features, upgrade your Agent to version 7.49/6.49 or later.
+Fleet Automation incorporates several Datadog features, which are all enabled automatically in Agents version 7.49/6.49 or later. To ensure you have access to all of the features, upgrade your Agents to version 7.49/6.49 or later.
 
 If you're using an older Agent, you might still be able to enable the following Datadog features individually:
 - **Remote Configuration**: For information on supported Agent versions and configuration steps, see [Enabling Remote Configuration][3].
 - **Agent configuration**: Agent version 7.39/6.39 or later is required to enable the Agent configuration tab. It is enabled by default in Agent versions 7.47.0/6.47.0 or later. To enable Agent configuration manually, set `inventories_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the `DD_INVENTORIES_CONFIGURATION_ENABLED` environment variable.
 - **Agent integration configuration**: Agent integration configuration is enabled by default on Agent versions 7.49/6.49 or later. To enable Agent integration configuration manually, set `inventories_checks_configuration_enabled` in your [Agent configuration file][2] to `true`. Alternatively, use the environment variable `DD_INVENTORIES_CHECKS_CONFIGURATION_ENABLED`.
 
-Datadog recommends upgrading your Agents regularly to make sure you have access to the latest features and security updates.
+Datadog recommends upgrading your Agents regularly to make sure you have access to the latest features.
 
 ## Send a remote flare
 
@@ -64,6 +64,8 @@ To send a remote flare:
 1. Provide an existing Zendesk support ticket number. If you don't provide a ticket number, one is created on your behalf.
 1. Enable **Debug mode** to allow Datadog support staff to troubleshoot your issue faster. The log level is reset to its previous configuration after you send the flare.
 1. Click **Send Ticket**.
+
+{{< img src="agent/fleet_automation/send_flare.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:100%;" >}}
 
 ## Control access to Fleet Automation
 
