@@ -96,7 +96,7 @@ Deletes a connection. Perform this operation either from the source organization
 
 ## Create a widget with cross-organization data
 
-Cross-organization query [dashboard widgets][2] are available for Datadog organizations that exist as a _destination_ organization for at least one [connection](#configure-connections).
+Cross-organization [dashboard widgets][2] are available for Datadog organizations that exist as a _destination_ organization for at least one [connection](#configure-connections).
 
 Each query in a widget can display data from a single organization. You can combine queries into a cross-organization formula query.
 
@@ -159,7 +159,7 @@ The [Datadog Terraform Provider][9] does not support cross-organization queries.
 
 Note the `cross_org_uuids` parameter in the JSON widget definition payload. 
 - This parameter is optional. If omitted, the query runs on the organization on which the widget is defined.
-- Use the organization identifier, which you can recover from the [Organizations endpoint][7], to run from your top-level "parent" organization.
+- Use the organization identifier, which you can recover from the [Organizations endpoint][7], to identify the organization on which the query runs.
 - Though this parameter accepts an array, the array must contain only one element. Adding multiple elements to the `cross_org_uuids` array results in a 400 error.
 
 [1]: /account_management/multi_organization/
