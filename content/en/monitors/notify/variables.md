@@ -230,9 +230,9 @@ This is the escalation message @dev-team@company.com
 {{% /tab %}}
 {{< /tabs >}}
 
-If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, it is recommended to configure a corresponding `recovery` condition in order for a recovery notification to be sent to the handle. 
+If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, it is recommended to configure a corresponding `recovery` condition in order for a recovery notification to be sent to the handle.
 
-**Note**: Any text or notification handle placed **outside** the configured conditional variables is invoked with every monitor state transition. Any text or notification handle placed **inside** of configured conditional variables is only invoked if the monitor state transition matches its condition. 
+**Note**: Any text or notification handle placed **outside** the configured conditional variables is invoked with every monitor state transition. Any text or notification handle placed **inside** of configured conditional variables is only invoked if the monitor state transition matches its condition.
 
 ## Attribute and tag variables
 
@@ -322,6 +322,7 @@ To include **any** attribute or tag from a log, a trace span, a RUM event, a CI 
 | Trace Analytics | `{{span.attributes.key}}` or `{{span.tags.key}}` |
 | Error Tracking  | Traces: `{{span.attributes.[error.message]}}`<br>RUM Events: `{{rum.attributes.[error.message]}}`<br>Logs: `{{log.attributes.[error.message]}}`             |
 | RUM             | `{{rum.attributes.key}}` or `{{rum.tags.key}}`   |
+| Audit Trail     | `{{audit.attributes.key}}` or `{{audit.message}}`    |
 | CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
 | CI Test         | `{{citest.attributes.key}}`                      |
 | Database Monitoring | `{{databasemonitoring.attributes.key}}`      |
@@ -395,18 +396,20 @@ Variable content is escaped by default. To prevent content such as JSON or code 
 
 Use template variables to customize your monitor notifications. The built-in variables are:
 
-| Variable                       | Description                                                                   |
-|--------------------------------|-------------------------------------------------------------------------------|
-| `{{value}}`                    | The value that breached the alert for metric based query monitors.            |
-| `{{threshold}}`                | The value of the alert threshold set in the monitor's alert conditions.       |
-| `{{warn_threshold}}`           | The value of the warning threshold set in the monitor's alert conditions.     |
-| `{{ok_threshold}}`             | The value that recovered the Service Check monitor.                            |
-| `{{comparator}}`               | The relational value set in the monitor's alert conditions.                   |
-| `{{first_triggered_at}}`       | The UTC date and time when the monitor first triggered.                       |
-| `{{first_triggered_at_epoch}}` | The UTC date and time when the monitor first triggered in epoch milliseconds. |
-| `{{last_triggered_at}}`        | The UTC date and time when the monitor last triggered.                        |
-| `{{last_triggered_at_epoch}}`  | The UTC date and time when the monitor last triggered in epoch milliseconds.  |
-| `{{triggered_duration_sec}}`   | The number of seconds the monitor has been in a triggered state.              |
+| Variable                          | Description                                                                   |
+|-----------------------------------|-------------------------------------------------------------------------------|
+| `{{value}}`                       | The value that breached the alert for metric based query monitors.            |
+| `{{threshold}}`                   | The value of the alert threshold set in the monitor's alert conditions.       |
+| `{{warn_threshold}}`              | The value of the warning threshold set in the monitor's alert conditions.     |
+| `{{alert_recovery_threshold}}`    | The value that recovered the monitor from its `ALERT` state.                  |
+| `{{warn_recovery_threshold}}`     | The value that recovered the monitor from its `WARN` state.                   |
+| `{{ok_threshold}}`                | The value that recovered the Service Check monitor.                           |
+| `{{comparator}}`                  | The relational value set in the monitor's alert conditions.                   |
+| `{{first_triggered_at}}`          | The UTC date and time when the monitor first triggered.                       |
+| `{{first_triggered_at_epoch}}`    | The UTC date and time when the monitor first triggered in epoch milliseconds. |
+| `{{last_triggered_at}}`           | The UTC date and time when the monitor last triggered.                        |
+| `{{last_triggered_at_epoch}}`     | The UTC date and time when the monitor last triggered in epoch milliseconds.  |
+| `{{triggered_duration_sec}}`      | The number of seconds the monitor has been in a triggered state.              |
 
 ### Evaluation
 

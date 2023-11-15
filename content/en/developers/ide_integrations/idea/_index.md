@@ -37,6 +37,9 @@ The **Continuous Profiler** helps you to reduce latency and lower cloud costs by
 
 The **Logs Navigation** support opens the Datadog Log Explorer with a view matching the context in which you are working.
 
+
+The **CI Test Runs** feature opens the Continuous Integration Visibility Explorer to show recent runs for a selected test.
+
 The **Static Analysis** integration analyzes your code (locally) against predefined rules to detect and fix problems before you commit changes.
 
 ## Requirements
@@ -161,6 +164,13 @@ You can navigate to the [Log Explorer][5] on the Datadog platform directly from 
 
 Clicking the link opens the **Log Explorer** with a query that matches the logger name, log level, and log message as closely as possible.
 
+## CI Test Runs
+You can view recent test runs in the [Continuous Integration Visibility Explorer][12] by navigating directly from your source files. Look for the **View Test Runs** links following test method declarations in your source code:
+
+{{< img src="/developers/ide_integrations/idea/ci-navigation.png" alt="A source file showing a View Test Runs link." style="width:100%;" >}}
+
+Clicking the link opens the **Test Runs** tab showing the recent history for one test case.
+
 ## View in IDE
 
 The **View in IntelliJ/GoLand/PyCharm** feature provides a link from the Datadog platform directly to your Java, Go, and Python source files. Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
@@ -170,9 +180,9 @@ The **View in IntelliJ/GoLand/PyCharm** feature provides a link from the Datadog
 <div class="alert alert-info">This feature has two prerequisites: (1) Source Code Integration is configured for your service and (2) the JetBrains Toolbox is installed on your development machine.</div>
 
 ## Static Analysis
-The Datadog plugin runs a set of [Static Analysis][12] rules on your source files as you edit them. The goal is to detect and fix problems in your code before you commit your changes.
+The Datadog plugin runs a set of [Static Analysis][13] rules on your source files as you edit them. The goal is to detect and fix problems in your code before you commit your changes.
 
-The Static Analyzer has rules defined for [Python][13] and [Docker][14] files. For these file types, issues are shown in the source code editor with the JetBrains inspection system, and suggested fixes can be applied directly:
+The Static Analyzer has rules defined for [Python][14] and [Docker][15] files. For these file types, issues are shown in the source code editor with the JetBrains inspection system, and suggested fixes can be applied directly:
 
 {{< img src="/developers/ide_integrations/idea/static-analysis-issue.png" alt="A static analysis rule violation and recommended fix." style="width:100%;" >}}
 
@@ -212,6 +222,7 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 [9]: /continuous_integration/guides/flaky_test_management/
 [10]: /watchdog/insights
 [11]: mailto:team-ide-integration@datadoghq.com
-[12]: /continuous_integration/static_analysis/?tab=githubactions
-[13]: /continuous_integration/static_analysis/rules/#python-rules
-[14]: /continuous_integration/static_analysis/rules/#docker-rules
+[12]: /continuous_integration/explorer/?tab=testruns
+[13]: /continuous_integration/static_analysis/?tab=githubactions
+[14]: /continuous_integration/static_analysis/rules/#python-rules
+[15]: /continuous_integration/static_analysis/rules/#docker-rules
