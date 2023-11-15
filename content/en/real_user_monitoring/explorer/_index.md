@@ -27,13 +27,13 @@ You can:
 - Investigate performance issues affecting views, resources, or actions
 - Troubleshoot application errors and long tasks
 
-{{< img src="real_user_monitoring/explorer/rum_explorer-1.png" alt="RUM Explorer" style="width:95%;" >}}
+{{< img src="real_user_monitoring/explorer/rum-explorer-2.png" alt="RUM Explorer" style="width:95%;" >}}
 
 ## View by application
 
 Use the application selector in the top navigation to select and view all RUM data for a specific application.
 
-{{< img src="real_user_monitoring/explorer/application-selector.png" alt="Click the application selector to view all RUM data for a specific application" style="width:95%;" >}}
+{{< img src="real_user_monitoring/explorer/application-selector-2.png" alt="Click the application selector to view all RUM data for a specific application" style="width:95%;" >}}
 
 ## Search and filter
 
