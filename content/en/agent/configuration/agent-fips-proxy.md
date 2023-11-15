@@ -13,10 +13,6 @@ algolia:
   tags: ["fips", "fips proxy", "compliance", "fedramp", "govcloud"]
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-  The Datadog Agent FIPS Proxy is in public beta.
-{{< /callout >}}
-
 {{< site-region region="us,us3,us5,eu,ap1" >}}
 <div class="alert alert-warning">The Datadog Agent FIPS Proxy is available only in the US1-FED region.</a></div>
 {{< /site-region >}}
@@ -27,16 +23,18 @@ The Datadog Agent FIPS Proxy is a separately distributed component that you depl
 
 ## Supported platforms and limitations
 
-The Datadog Agent FIPS Proxy's compliance is based on its use of the FIPS 140-2 validated [Cryptographic Module - Certificate #4024][1]. See the related [security policy][2] for information about validated operating environments and restrictions.
+The Datadog Agent FIPS Proxy's compliance is based on its use of the FIPS 140-2 validated [Cryptographic Module - Certificate #4282][1]. See the related [security policy][2] for information about validated operating environments and restrictions.
 
 **It is your responsibility to ensure operating environment compliance with the security policy and wider FIPS guidance.**
 
-Supported platforms (64-bit x86 only):
+Supported platforms (64-bit x86):
 
 |||
 | ---  | ----------- |
 | Bare metal and VMs | RHEL >= 7<br>Debian >= 8<br>Ubuntu >= 14.04|
 | Cloud and container| Amazon ECS<br>AWS EKS (Helm)|
+
+**Note**: arm64 architecture is available in beta
 
 Supported products (Agent 7.45+):
 
@@ -58,7 +56,7 @@ The Datadog Agent FIPS Proxy does **not** support the following:
 
 ## Prerequisites
 
-- TCP port range available: 9803 to 9816
+- TCP port range available: 9803 to 9818
 - Datadog Agent >= v7.41
 
 ## Install the Agent with FIPS support
@@ -123,7 +121,7 @@ fips:
   https: false
 ```
 
-The `fips` setting is available in Agent versions >= 7.41. When the setting is enabled, the Datadog Agent redirects all of its communications to the Datadog Agent FIPS Proxy. This setting ignores custom URL options, such as `dd_url`.
+The `fips` setting is available in Agent versions >= 7.41. When the setting is enabled, the Datadog Agent redirects all of its communications to the Datadog Agent FIPS Proxy for supported products. This setting ignores custom URL options, such as `dd_url`.
 
 The `https` option is set to `false` because the Agent uses HTTP to communicate with the proxy. The Datadog Agent FIPS Proxy runs on the same host as the Agent and relies on the host's security for protection of that communication.
 
@@ -185,7 +183,7 @@ fips:
   use_https: false
 ```
 
-The `fips` setting is available in Agent versions >= 7.41. When the setting is enabled, the Datadog Agent redirects all of its communications to the Datadog Agent FIPS Proxy. This setting ignores custom URL options, such as `dd_url`.
+The `fips` setting is available in Agent versions >= 7.41. When the setting is enabled, the Datadog Agent redirects all of its communications to the Datadog Agent FIPS Proxy for supported products. This setting ignores custom URL options, such as `dd_url`.
 
 The `use_https` option is set to `false` because the Agent uses HTTP to communicate with the proxy. The Datadog Agent FIPS Proxy runs on the same host as the Datadog Agent and relies on the host's security for protection of that communication.
 
@@ -243,7 +241,7 @@ sudo journalctl -u datadog-fips-proxy --no-pager
 
 ### Proxy cannot bind socket
 
-If the proxy logs show a `bind socket` error, the proxy is trying to use a port that is already in use on the host. The Datadog Agent FIPS Proxy uses the TCP port range from 9803 up to and including 9816. Ports in this range must be available on the host and not used by other services.
+If the proxy logs show a `bind socket` error, the proxy is trying to use a port that is already in use on the host. The Datadog Agent FIPS Proxy uses the TCP port range from 9803 up to and including 9818. Ports in this range must be available on the host and not used by other services.
 
 In the following example, the Datadog Agent FIPS Proxy is unable to bind a socket on port `9804` because the port is already in use:
 
@@ -270,7 +268,7 @@ connect: connection refused, context deadline exceeded (Client.Timeout exceeded 
 - Follow the steps in [Check the proxy status](#check-the-proxy-status) to verify that the Datadog Agent FIPS Proxy is running.
 - Verify that the port range from the proxy matches the one from the Agent.
 
-If the proxy is running and the port range is correct, a local firewall on the machine may be blocking the Agent's access to the proxy. Set your firewall to allow connections to TCP ports from 9804 to 9816.
+If the proxy is running and the port range is correct, a local firewall on the machine may be blocking the Agent's access to the proxy. Set your firewall to allow connections to TCP ports from 9804 to 9818.
 
 You can use `curl` to verify that the proxy is accessible:
 
@@ -355,8 +353,8 @@ to have all the available products supported by the Datadog Agent and the Datado
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4024
-[2]: https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp4024.pdf
+[1]: https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4282
+[2]: https://csrc.nist.gov/CSRC/media/projects/cryptographic-module-validation-program/documents/security-policies/140sp4282.pdf
 [3]: /agent/troubleshooting/
 [4]: https://ip-ranges.ddog-gov.com/
 [5]: /agent/configuration/network/#destinations
