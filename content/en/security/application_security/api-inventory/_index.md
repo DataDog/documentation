@@ -26,7 +26,7 @@ Using the API Security Inventory you can:
 
 ### Via Remote Configuration
 
-If your library is configured to use remote configuration, then the following tracer versions
+If your library is configured to use [remote configuration][1], then the following tracer versions
 are compatible without any additional configuration.
 
 |Technology|Minimum version|
@@ -52,13 +52,13 @@ API Inventory leverages the datadog tracing library with [ASM enabled](/security
 - [Threat Monitoring and Protection](/security/application_security/threats/), and
 - [Vulnerability Management](/security/application_security/vulnerability_management/)
 
-API Inventory Security leverages remote configuration to manage and configure scanning rules detecting sensitive data and authentication.
+API Inventory Security leverages [remote configuration][1] to manage and configure scanning rules detecting sensitive data and authentication.
 
 For each endpoint we calculate the risks outlined below.
 
 ### Service in Production
 
-The `env` tag is checked for patterns that frequently represent non-production environments. For example, detecting `dev`, `alpha`, `beta`, `sandbox`, and similar valuesm, will mark the environment as a non-production one.
+The `env` tag is checked for patterns that frequently represent non-production environments. For example, detecting `dev`, `alpha`, `beta`, `sandbox`, and similar values, will mark the environment as a non-production one.
 
 All other environments are marked as production.
 
@@ -114,3 +114,4 @@ This risk is determined by [Vulnerability Management](/security/application_secu
 
 By default, API Security Inventory will evaluate every 10th request (10% sample rate).
 
+[1]: /agent/remote_config/
