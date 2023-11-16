@@ -1029,9 +1029,9 @@ main:
     identifier: infrastructure_resource_catalog
     weight: 5
   - name: Cloud Resources Schema
-    url: infrastructure/resource_catalog/schema
+    url: infrastructure/resource_catalog/custom_rules/schema
     parent: infrastructure_resource_catalog
-    identifier: infrastructure_resource_catalog_schema
+    identifier: infrastructure_resource_catalog_custom_rules_schema
     weight: 501
   - name: Metrics
     url: metrics/
@@ -3261,7 +3261,7 @@ main:
   - name: Custom Rules
     url: security/misconfigurations/custom_rules
     parent: cspm
-    identifier: custom_rules
+    identifier: cspm_custom_rules
     weight: 103
   - name: Compliance Reports
     url: security/misconfigurations/frameworks_and_benchmarks
