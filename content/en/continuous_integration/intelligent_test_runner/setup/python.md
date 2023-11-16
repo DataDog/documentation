@@ -89,7 +89,7 @@ Designating tests as unskippable ensures that the Intelligent Test Runner runs t
 Unskippable tests are supported in the following versions and testing frameworks:
 
 * `pytest`
-  * From `ddtrace>=1.19.0`
+  * From `ddtrace>=1.19.0`.
 * `unittest`
   * From `ddtrace>=TBD`
 
