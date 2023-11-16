@@ -4,10 +4,10 @@ kind: documentation
 aliases:
     - /security/infrastructure_vulnerabilities
 further_reading:
-- link: "/security/cloud_security_management/setup/csm_pro?tab=aws#configure-csm-for-container-vulnerabilities"
+- link: "/security/cloud_security_management/setup/csm_pro?tab=aws#configure-the-agent-for-hosts-and-containers"
   tag: "Documentation"
   text: "Setting up container vulnerabilities"
-- link: "/security/cloud_security_management/setup/csm_enterprise/?tab=aws#configure-csm-for-vulnerabilities"
+- link: "/security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities"
   tag: "Documentation"
   text: "Setting up host vulnerabilities"
 - link: "https://www.datadoghq.com/blog/mitigate-identity-risks-and-infrastructure-vulnerabilities-with-datadog/"

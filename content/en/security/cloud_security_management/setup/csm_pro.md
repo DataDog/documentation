@@ -64,7 +64,7 @@ Alternatively, use the following examples to enable CSM Vulnerabilities on your 
 
 
 {{< tabs >}}
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes(Helm)" %}}
 
 Add the following to your `values.yaml` helm configuration file:
 
@@ -75,6 +75,26 @@ datadog:
   sbom:
     containerImage:
       enabled: true
+```
+
+{{% /tab %}}
+
+{{% tab "Kubernetes(Operator)" %}}
+
+Add the following to the spec section of your `values.yaml` file:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  features:
+    # ...
+    sbom:
+      enabled: true
+      containerImage:
+        enabled: true
 ```
 
 {{% /tab %}}
