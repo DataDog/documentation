@@ -43,6 +43,7 @@ You can also access Pipeline Scanner in the Log Pipelines page and then define t
 
 ### Limitations
 
+The `logs_write_pipelines` permission is required to use the Pipeline Scanner.
 The number of sessions you can launch is limited to:
 
 - A maximum of 3 concurrent sessions.
