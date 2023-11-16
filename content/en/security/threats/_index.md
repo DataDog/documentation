@@ -6,6 +6,8 @@ aliases:
   - /security/cloud_workload_security/
   - /security/cloud_workload_security/agent_expressions
   - /security/cloud_workload_security/backend/
+  - /security/threats/security_profiles
+  - /security/threats/runtime_anomaly_detection
 ---
 
 {{< site-region region="gov" >}}
@@ -34,10 +36,6 @@ CSM Threats comes with more than 50 out-of-the-box detection rules that are main
 Use [Remote Configuration][7] to automatically deploy new and updated rules to the Agent. [Customize the rules][5] by defining how each rule monitors process, network, and file activity, [create custom rules][6], and [set up real-time notifications](#set-up-real-time-notifications) for new signals.
 
 {{< img src="security/cws/threats_detection_rules.png" alt="CSM Threats detection rules in the Datadog app" width="100%">}}
-
-## Model expected workload behavior
-
-Create a baseline of expected workload behavior with [Workload Security Profiles][10]. Workload Security Profiles uses a behavior learning model to help identify suspicious activity indicative of a threat or misconfiguration. It also generates suppression suggestions for any known, acceptable workload behavior. Use the insight gained from Security Profiles to investigate security alerts and to identify previously unseen, anomalous behavior.
 
 ## Set up real-time notifications
 
@@ -70,4 +68,3 @@ Investigate and triage security signals in the [Threats Explorer][8]. View detai
 [7]: /security/threats/setup
 [8]: /security/threats/security_signals
 [9]: /network_monitoring/performance/
-[10]: /security/threats/security_profiles
