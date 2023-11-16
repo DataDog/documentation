@@ -21,7 +21,43 @@ further_reading:
 
 ## Overview
 
-Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries. 
+Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries. If you are not, there are many other ways to add services to your Service Catalog.
+
+{{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Opt in to the private beta!" >}}
+Datadog automatically discovers the dependencies of instrumented services, including databases or third-party APIs, even if the dependency hasn't been instrumented. The Service Catalog lists these as separate entries. To differentiate auto-detected components from instrumented services, you can request access to the private beta for inferred services.
+{{< /callout >}}
+
+## Create user-defined services
+
+You can add services to Service Catalog that are not associated with any Datadog telemetry. To create such an entry, name your service in the `dd-service` field in a `service.datadog.yaml` file at the root of the repository, using one of the supported metadata schema versions. For example: 
+
+#### Example
+{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+schema-version: v2.1
+dd-service: my-unmonitored-cron-job
+team: shopist
+contacts:
+ - type: slack
+   contact: https://datadogincidents.slack.com/archives/XXXXX
+application: shopist
+description: important cron job for shopist backend
+tier: tier1
+lifecycle: production
+links:
+ - name: Common Operations
+   type: runbook
+   url: https://datadoghq.atlassian.net/wiki/
+ - name: Disabling Deployments
+   type: runbook
+   url: https://datadoghq.atlassian.net/wiki/
+tags: []
+integrations:
+ pagerduty:
+   service-url: https://datadog.pagerduty.com/service-directory/XXXXXXX
+External Resources (Optional)
+{{< /code-block >}}
+
+You can register multiple services in one YAML file by separating each definition with three dashes (`---`).
 
 ## Discover additional services
 

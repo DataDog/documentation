@@ -73,7 +73,7 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
 
 #### Follow the in-app instructions (recommended)
 
-To enable CSM on the Agent, navigate to the [**Cloud Security Management Setup** page][8] and click **Hosts and containers**.
+To enable CSM on the Agent, navigate to the [**Cloud Security Management Setup** page][5] and click **Hosts and containers**.
 
 {{< img src="security/csm/hosts_containers_setup.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
 

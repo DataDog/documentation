@@ -27,6 +27,9 @@ As of dd-trace-java 1.0.0, you have two options for the engine that generates pr
 {{< tabs >}}
 {{% tab "Datadog Profiler" %}}
 
+Supported operating systems:
+- Linux
+
 Minimum JDK versions:
 - OpenJDK 8u352+, 11.0.17+, 17.0.5+ (including builds on top of it: Amazon Corretto, Azul Zulu, and others)
 - Oracle JDK 8u352+, 11.0.17+, 17.0.5+
@@ -39,6 +42,10 @@ The Datadog Profiler uses the JVMTI `AsyncGetCallTrace` function, in which there
 {{% /tab %}}
 
 {{% tab "JFR" %}}
+
+Supported operating systems:
+- Linux
+- Windows
 
 Minimum JDK versions:
 - OpenJDK [1.8.0.262/8u262+][3], 11+ (including builds on top of it: Amazon Corretto, and others)
@@ -197,12 +204,31 @@ For JMC users, the `datadog.MethodSample` event is emitted for wallclock samples
 
 The wallclock engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
-### Datadog profiler allocation engine
+### Profiler allocation engine
 
+{{< tabs >}}
+{{% tab "JFR" %}}
+The JFR based allocation profiling engine is enabled by default since JDK 16.
+The reason it's not enabled by default for JDK 8 and 11, is that an allocation intensive
+application can lead to high overhead and large recording sizes.
+To enable it for JDK 8 and 11, add the following:
+
+```
+export DD_PROFILING_ENABLED_EVENTS=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB
+```
+
+or:
+
+```
+-Ddd.profiling.enabled.events=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB
+```
+{{% /tab %}}
+
+{{% tab "Datadog Profiler" %}}
 _Requires JDK 11+._
 
 The Datadog allocation profiling engine contextualizes allocation profiles, which supports allocation profiles filtered by endpoint.
-In dd-java-agent earlier than v1.17.0 it is disabled by default, but you can enable it with:
+In dd-java-agent earlier than v1.17.0 it is **disabled** by default. Enable it with:
 
 ```
 export DD_PROFILING_DDPROF_ENABLED=true # this is the default in v1.7.0+
@@ -219,6 +245,9 @@ or:
 For JMC users, the Datadog allocation events are `datadog.ObjectAllocationInNewTLAB` and `datadog.ObjectAllocationOutsideTLAB`.
 
 The allocation profiler engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### Live-heap profiler engine
 
