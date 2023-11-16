@@ -60,7 +60,7 @@ DD_ENV=ci DD_SERVICE=my-python-app DD_CIVISIBILITY_ITR_ENABLED=true pytest --ddt
 To run tests on services with the Intelligent Test Runner enabled, set `DD_CIVISIBILITY_ITR_ENABLED` to true.
 
 `DD_CIVISIBILITY_ITR_ENABLED` (Optional)
-: Enable the Intelligent Test Runner coverage and test skipping features<br />
+: Enable the Intelligent Test Runner coverage and test skipping features.<br />
 **Default**: `(false)`
 
 After completing setup, run your tests as you normally do:
