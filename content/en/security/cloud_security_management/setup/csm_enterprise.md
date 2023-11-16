@@ -410,7 +410,7 @@ The following instructions enables the image metadata collection and [Software B
 #### Containers
 
 {{< tabs >}}
-{{% tab "Kubernetes" %}}
+{{% tab "Kubernetes(Helm)" %}}
 
 Add the following to your `values.yaml` helm configuration file:
 
@@ -421,6 +421,26 @@ datadog:
   sbom:
     containerImage:
       enabled: true
+```
+
+{{% /tab %}}
+
+{{% tab "Kubernetes(Operator)" %}}
+
+Add the following to the spec section of your `values.yaml` file:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  features:
+    # ...
+    sbom:
+      enabled: true
+      containerImage:
+        enabled: true
 ```
 
 {{% /tab %}}
@@ -496,7 +516,8 @@ container_image:
 **Note**: CSM Enterprise customers can enable both container and host SBOM collection at the same time by combining the [containers](#containers) setup with the following setup for hosts configuration:
 
 {{< tabs >}}
-{{% tab "Kubernetes" %}}
+
+{{% tab "Kubernetes(Helm)" %}}
 
 ```yaml
 datadog:
@@ -505,6 +526,27 @@ datadog:
       enabled: true
 ```
 
+{{% /tab %}}
+
+{{% tab "Kubernetes(Operator)" %}}
+
+Add the following to the spec section of your `values.yaml` file:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  features:
+    # ...
+    sbom:
+      enabled: true
+      containerImage:
+        enabled: true
+      host:
+        enabled: true
+```
 {{% /tab %}}
 
 {{% tab "ECS EC2" %}}
