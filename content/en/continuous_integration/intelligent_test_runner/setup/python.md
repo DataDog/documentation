@@ -137,7 +137,8 @@ class MyTestCase(unittest.TestCase):
       assert True
 ```
 
-**Note**: This does not override any other `skip` marks, or `skipIf` marks that have a `condition` evaluating to `True`.
+
+Using `@unittest.skipif` does not override any other `skip` marks, or `skipIf` marks that have a `condition` evaluating to `True`.
 
 
 ## Further reading
