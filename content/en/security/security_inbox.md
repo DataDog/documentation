@@ -9,17 +9,15 @@ Security Inbox provides a consolidated, actionable list of your most important s
 
 ## Types of findings in Security Inbox
 
-The findings that appear in the Security Inbox are generated from Application Security Management (ASM) and Cloud Security Management (CSM). These include the following types of findings:
+The findings that appear in Security Inbox are generated from Application Security Management (ASM) and Cloud Security Management (CSM). These include the following types of findings:
 
 - [Misconfigurations][1] for [CSM Misconfigurations][2].
 - [Identity risks][1] for [CSM Identity Risks][3].
 - Application library vulnerabilities for [ASM library vulnerabilities][4]. All high and critical application library vulnerabilities on production services under attack appear in the inbox.
 - Application code vulnerabilities for [ASM code-level vulnerabilities][5]. All high and critical application code vulnerabilities appear in the inbox.
-- [Attack Paths][1]. An attack path outlines a series of interconnected misconfigurations, container image, host, and application vulnerabilities that malicious actors could leverage to gain unauthorized access, escalate privileges, or compromise sensitive data in your cloud environment. All attack paths are listed in the Security Inbox by default.
+- [Attack Paths][1]. An attack path outlines a series of interconnected misconfigurations, container image, host, and application vulnerabilities that malicious actors could leverage to gain unauthorized access, escalate privileges, or compromise sensitive data in your cloud environment. All attack paths are listed in Security Inbox by default.
 
-## Risks
-
-The Security Inbox provides a curated list of findings worth remediating based on the following detected risks:
+Security Inbox also takes the following detected risks into consideration when determining which findings appear in the inbox:
 
 - **Public accessibility**: Publicly exposed resources carry elevated risk, especially if they contain vulnerabilities or misconfigurations. To learn more, see [How Datadog Determines if Resources are Publicly Accessible][6].
 - **Privileged access**: Resources with privileged access carry elevated risk as they grant elevated permissions that can expand the attack surface. To learn more, see [How Datadog Determines if Resources are Publicly Accessible][6].
