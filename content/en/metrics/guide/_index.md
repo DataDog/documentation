@@ -18,6 +18,7 @@ cascade:
     {{< nextlink href="metrics/guide/calculating-the-system-mem-used-metric/" >}}Calculating the system.mem.used metric{{< /nextlink >}}
     {{< nextlink href="metrics/guide/interpolation-the-fill-modifier-explained/" >}}Interpolation and the fill modifier{{< /nextlink >}}
     {{< nextlink href="metrics/guide/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs" >}}Why does zooming out a timeframe also smooth out my graphs?{{< /nextlink >}}
+    {{< nextlink href="metrics/guide/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph" >}}What is the granularity of my graphs? Am I seeing raw data or aggregates on my graph?{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Custom metrics guides:" >}}

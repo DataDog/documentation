@@ -1,8 +1,9 @@
 ---
 title: What is the granularity of my graphs? Am I seeing raw data or aggregates on my graph?
-kind: faq
+kind: guide
 aliases:
     - /graphing/faq/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph
+    - /dashboards/faq/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph
 ---
 
 Datadog graphs generally display local aggregates instead of the original submitted values.
