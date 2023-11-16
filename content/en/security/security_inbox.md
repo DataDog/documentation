@@ -1,6 +1,16 @@
 ---
 title: Security Inbox
 kind: documentation
+further_reading:
+- link: "/security/application_security/"
+  tag: "Documentation"
+  text: "Learn more about Application Security Management"
+- link: "/security/cloud_security_management"
+  tag: "Documentation"
+  text: "Learn more about Cloud Security Management"
+- link: "/security/default_rules/#all"
+  tag: "Documentation"
+  text: "Out-of-the-box Detection Rules"
 ---
 
 Security Inbox provides a consolidated, actionable list of your most important security findings. It automatically contextualizes and correlates insights from Datadog security products across vulnerabilities, signals, misconfigurations, and identity risks into a unified, prioritized view of actions to take to strengthen your environment.
@@ -24,6 +34,10 @@ Security Inbox also takes the following detected risks into consideration when d
 - **Under attack**: Resources that are seeing suspicious security activity carry elevated risks. Resources are flagged as "Under Attack" if a security signal has been detected on the resource in the last 15 days.
 - **Exploit available**: Vulnerabilities with public exploits available carry elevated risks. The availability of a public exploit is verified with different exploit databases, such as [cisa.gov][7], [exploit-db.com][8], and [nvd.nist.gov][9].
 - **In production**: Vulnerabilities in production environments carry elevated risks. The environment is computed from the `env` tag.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/default_rules/?category=cat-csm-security-issues#all
 [2]: /security/misconfigurations/
