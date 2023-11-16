@@ -6,6 +6,8 @@ aliases:
   - /security/cloud_workload_security/
   - /security/cloud_workload_security/agent_expressions
   - /security/cloud_workload_security/backend/
+  - /security/threats/security_profiles
+  - /security/threats/runtime_anomaly_detection
 ---
 
 {{< site-region region="gov" >}}
