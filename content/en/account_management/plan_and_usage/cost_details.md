@@ -54,9 +54,9 @@ Use the search facets at the left to filter the cost by **Products** or by **Sub
 
 #### Download
 
-To download the data as a comma separated value file, click **Download as CSV**.
-
-See [Get estimated cost across your account][3] to query estimated cost data through the API.
+- To download the data as a comma separated value file, click **Download as CSV**.
+- See [Get estimated cost across your account][3] to query estimated cost data through the API.
+- See [Get projected cost across your account][6] to query projected cost data through the API.
 
 ### Cost Summary (sub-organization)
 
@@ -77,8 +77,6 @@ Use the search facets at the left to filter the cost by **Products**. Use the **
 #### Download
 
 To download the data as a comma separated value file, click **Download as CSV**.
-
-See [Get estimated cost across your account][3] to query estimated cost data through the API.
 
 ## Cost chargebacks
 
@@ -145,3 +143,4 @@ Products billed by the sum of usage throughout the month include indexed logs an
 [3]: /api/latest/usage-metering/#get-estimated-cost-across-your-account
 [4]: /api/latest/usage-metering/#get-historical-cost-across-your-account
 [5]: /account_management/plan_and_usage/cost_details/#cost-summary
+[6]: /api/latest/usage-metering/#get-projected-cost-across-your-account
