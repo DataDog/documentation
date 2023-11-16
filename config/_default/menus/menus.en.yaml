@@ -2404,56 +2404,61 @@ main:
     parent: ci
     identifier: pipeline_visibility
     weight: 2
+  - name: AWS CodePipeline
+    url: continuous_integration/pipelines/awscodepipeline/
+    parent: pipeline_visibility
+    identifier: ci_awscodepipeline
+    weight: 201
   - name: Azure
     url: continuous_integration/pipelines/azure/
     parent: pipeline_visibility
     identifier: ci_azure
-    weight: 201
+    weight: 202
   - name: Buildkite
     url: continuous_integration/pipelines/buildkite/
     parent: pipeline_visibility
     identifier: ci_buildkite
-    weight: 202
+    weight: 203
   - name: CircleCI
     url: continuous_integration/pipelines/circleci/
     parent: pipeline_visibility
     identifier: ci_circleci
-    weight: 203
+    weight: 204
   - name: Codefresh
     url: continuous_integration/pipelines/codefresh/
     parent: pipeline_visibility
     identifier: ci_codefresh
-    weight: 204
+    weight: 205
   - name: GitHub Actions
     url: continuous_integration/pipelines/github/
     parent: pipeline_visibility
     identifier: ci_github
-    weight: 205
+    weight: 206
   - name: GitLab
     url: continuous_integration/pipelines/gitlab/
     parent: pipeline_visibility
     identifier: ci_gitlab
-    weight: 206
+    weight: 207
   - name: Jenkins
     url: continuous_integration/pipelines/jenkins/
     parent: pipeline_visibility
     identifier: ci_jenkins
-    weight: 207
+    weight: 208
   - name: TeamCity
     url: continuous_integration/pipelines/teamcity/
     parent: pipeline_visibility
     identifier: ci_teamcity
-    weight: 208
+    weight: 209
   - name: Custom Commands
     url: continuous_integration/pipelines/custom_commands/
     parent: pipeline_visibility
     identifier: ci_custom_commands
-    weight: 209
+    weight: 210
   - name: Custom Tags and Metrics
     url: continuous_integration/pipelines/custom_tags_and_metrics/
     parent: pipeline_visibility
     identifier: ci_custom_tags_and_metrics
-    weight: 210
+    weight: 211
   - name: Search and Manage
     url: continuous_integration/search/
     parent: ci
