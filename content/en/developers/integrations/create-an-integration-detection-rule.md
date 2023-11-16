@@ -15,8 +15,8 @@ Create an out-of-the-box detection rule to help users find value in your Datadog
 
 To create a Datadog integration, see [Create a New Integration][3].
 
-## Steps to create a detection rule
-### Build a detection rule JSON Schema
+## Create a detection rule
+### Build a detection rule JSON schema
 
 1. Navigate to **[Security > Cloud SIEM > Detection Rules > New Rule][4]** and create a new rule.
 
@@ -52,9 +52,15 @@ In addition to the detection rule definition, the `partnerRuleId` field is requi
 | ---  | ----------- | ----------- |
 |partnerRuleId | Unique identifier for the rule, following the format `ext-00*-***` where * could be any alphanumeric characters. | `ext-003-bzd` |
 
-Below is an example of a well-defined detection rule:
+### Example of a well-defined detection rule
 
-{{image to be included}}
+Selecting a rule type and defining search queries:
+
+{{< img src="developers/integrations/SIEM_detection_rule_top.png" alt="Steps 1-3 of a filled-out detection rule creation form" style="width:90%;" >}}
+
+Setting rule cases and writing the notification message:
+
+{{< img src="developers/integrations/SIEM_detection_rule_bottom.png" alt="Steps 4 and 5 of a filled-out detection rule creation form" style="width:90%;" >}}
 
 For more information, see the documentation on [configuring a detection rule][7].
 
