@@ -21,44 +21,46 @@ further_reading:
 
 ## Overview
 
-Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you proactively secure your cloud infrastructure by detecting, prioritizing, and managing vulnerabilities across your container images and hosts. It leverages deep observability context and industry insights to help you remediate vulnerabilities that are most important to you at a given point in time. 
+Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you proactively secure your cloud infrastructure by detecting, prioritizing, and managing vulnerabilities across your container images and hosts. It leverages deep [observability context][6] and industry insights to help you remediate vulnerabilities that are most important to you at a given point in time. 
 
 **Note**: If you're looking for vulnerability management for your application libraries and custom application code, see [Application Vulnerability Management][5].
 
 ## Explore vulnerabilities
 The [Vulnerability Explorer][1] shows a complete list of vulnerabilities detected across your infrastructure, ordering them based on their severity, offering grouping, filtering, and triaging capabilities so you can investigate, assign, and remediate problems.
 
-(update screen shot when beta tags are removed)
+Add screenshot of different grouping and triaging functionality(WIP)
 
 {{< img src="security/vulnerabilities/CSM_Vulnerabilities.png" alt="The CSM Vulnerability page sorting by unique vulnerabilities" width="100%">}}
 
 Select a specific vulnerability to see its details, including which containers and hosts are affected, severity breakdown score, and recommended remediation steps.
 The severity of a vulnerability is modified from the base score to take into account the following:
 
-- If the underlying infrastructure is running and how wide-spread the impact is.
+- Whether the underlying infrastructure is running and how wide-spread the impact is.
 - The environment in which the underlying infrastructure is running. For example, if the environment is not production, the severity is downgraded.
-- Known active exploits for a given vulnerability from sources such as [CISA KEV catalog][9].
+- Whether there is an active exploit for a given vulnerability from sources such as [CISA KEV catalog][9].
 
-On the details explorer, you can also click **See Impacted Resources in CSM** to gain better insights into your overall risk.
+Add screenshot of Severity Breakdown of a vulnerability that we downgraded from Critical to High
 
 {{< img src="security/vulnerabilities/container_vulnerability_2.png" alt="Details of a specific vulnerability, highlighting next steps and severity breakdown" width="100%">}}
 
-## Manage container vulnerabilities
+You can also view vulnerabilities in your container images on the [container images][2] page. Observe the number of vulnerabilities that exist in your container images. Additionally sort by **source**, **image tag**, **repo digest**, and more. View additional details about any vulnerability by clicking the container image and reviewing the **Vulnerabilities** tab.
 
-(update screen shot when beta tags are removed)
+{{< img src="security/vulnerabilities/container_images_2.png" alt="The Container Images tab highlighting vulnerabilities and container column sort feature" width="100%">}}
 
-The [container images][2] page shows a complete list of container-based vulnerabilities, allowing you to order them by vulnerability **status**, and sort by **source**, **image tag**, **repo digest**, and more. You can also view additional details about any container-based vulnerability by clicking the container image and reviewing the **Vulnerabilities** tab. 
+On the details explorer, you can also view impacted resources in CSM to gain better insights to your overall risk.
 
-{{< img src="security/vulnerabilities/container_images_tab.png" alt="The Container Images tab highlighting vulnerabilities and container column sort feature" width="100%">}}
+{{< img src="security/vulnerabilities/container_vulnerability.png" alt="The Container Images side panel details on the vulnerabilities tab" width="100%">}}
+
+All vulnerabilities include a collection of links and references to websites or information sources that help you understand the context behind each vulnerability.
 
 ## Triage and remediate
 
-While on the [Vulnerability Explorer][1], you can change the status of a vulnerability, assign it to a team for further review, and view links and information sources to understand the context behind each vulnerability.
+The [Vulnerability Explorer][1] also offers triaging options for detected vulnerabilities that enable you to change the status of a vulnerability, and assign it to individual members for remediation and tracking.
 
-(Also needs new screenshot)
+**Note**: To help you focus on the vulnerabilities that truly matter, vulnerabilities are auto-closed for infrastructure that is either no longer running, or contains the remediated fixed version of the previously-vulnerable package.
+
+Update screenshot for triaging (WIP) and auto-closed 
 {{< img src="security/vulnerabilities/CSM_vulnerabilities_assign_team.png" alt="Details explorer of a specific vulnerability highlighting the ability to assign a team member" width="100%">}}
-
-**Note**: CSM vulnerabilities are auto-closed when the infrastructure is either no longer running, or contains the remediated fix to the previously-vulnerable package(s).
 
 
 [1]: https://app.datadoghq.com/security/csm/vm
@@ -66,7 +68,9 @@ While on the [Vulnerability Explorer][1], you can change the status of a vulnera
 [3]: https://app.datadoghq.com/security/csm
 [4]: https://app.datadoghq.com/security/infra-vulnerability?query=asset_type%3AHost&group=none
 [5]: /security/application_security/vulnerability_management/
+[6]: https://www.datadoghq.com/product/infrastructure-monitoring/
 [9]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
+
 
 ## Further reading
 
