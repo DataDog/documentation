@@ -15,7 +15,7 @@ You can use resource tags to create filters that include or exclude resources fr
 **Notes**:
 
 - Resource evaluation filters can only be used with hosts that are scanned by cloud integrations.
-- Tags must be applied directly to the resource. User tags added in Datadog are not taken into account by the filters. The only exception is for tags added on the integration tiles for AWS and Google Cloud Platform.
+- Tags must be applied directly to the resource. The filters do not take into account user tags added in Datadog. The only exception is for tags added on the integration tiles for AWS and Google Cloud Platform.
 
 | Format                       | Value        |
 |------------------------------|--------------|
