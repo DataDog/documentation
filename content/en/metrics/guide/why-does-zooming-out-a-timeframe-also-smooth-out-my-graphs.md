@@ -10,6 +10,7 @@ further_reading:
   text: "Learn more about the rollup function"
 aliases:
     - /graphing/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs
+    - /dashboards/faq/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs
 ---
 
 Within Datadog, a graph can only contain a set number of points and, as the timeframe over which a metric is viewed increases, aggregation between points occurs so that the number of points remains under that set number. Thus, granularity is lost as the timeframe increases. For instance, for a four hour time window, data is aggregated to have one value per minute for a line graph, and one value per two minutes for a bar graph. As you zoom out by selecting a larger timeframe, the data shown on the graph represents a longer time period.
