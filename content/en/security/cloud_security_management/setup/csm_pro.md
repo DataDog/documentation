@@ -64,7 +64,7 @@ Alternatively, use the following examples to enable CSM Vulnerabilities on your 
 
 
 {{< tabs >}}
-{{% tab "Kubernetes(Helm)" %}}
+{{% tab "Kubernetes (Helm)" %}}
 
 Add the following to your `values.yaml` helm configuration file:
 
@@ -79,7 +79,7 @@ datadog:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes(Operator)" %}}
+{{% tab "Kubernetes (Operator)" %}}
 
 Add the following to the spec section of your `values.yaml` file:
 

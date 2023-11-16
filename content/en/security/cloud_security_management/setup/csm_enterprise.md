@@ -410,7 +410,7 @@ The following instructions enables the image metadata collection and [Software B
 #### Containers
 
 {{< tabs >}}
-{{% tab "Kubernetes(Helm)" %}}
+{{% tab "Kubernetes (Helm)" %}}
 
 Add the following to your `values.yaml` helm configuration file:
 
@@ -425,7 +425,7 @@ datadog:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes(Operator)" %}}
+{{% tab "Kubernetes (Operator)" %}}
 
 Add the following to the spec section of your `values.yaml` file:
 
@@ -517,7 +517,7 @@ container_image:
 
 {{< tabs >}}
 
-{{% tab "Kubernetes(Helm)" %}}
+{{% tab "Kubernetes (Helm)" %}}
 
 ```yaml
 datadog:
@@ -528,7 +528,7 @@ datadog:
 
 {{% /tab %}}
 
-{{% tab "Kubernetes(Operator)" %}}
+{{% tab "Kubernetes (Operator)" %}}
 
 Add the following to the spec section of your `values.yaml` file:
 
