@@ -24097,7 +24097,8 @@ paths:
         type: safe
   /api/v1/host/{host_name}/mute:
     post:
-      description: Mute a host.
+      description: Mute a host. **Note:** This creates a [Downtime V2](https://docs.datadoghq.com/api/latest/downtimes/#schedule-a-downtime)
+        for the host.
       operationId: MuteHost
       parameters:
       - description: Name of the host to mute.
