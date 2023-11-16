@@ -29,11 +29,13 @@ cascade:
 {{< nextlink href="/getting_started/profiler" >}}<u>Profiler</u>: Use Continuous Profiler to find and fix performance problems in your code.{{< /nextlink >}}
 {{< nextlink href="/getting_started/tagging" >}}<u>Tags</u>: Start tagging your metrics, logs, and traces.{{< /nextlink >}}
 {{< nextlink href="/getting_started/api" >}}<u>API</u>: Get started with the Datadog HTTP API.{{< /nextlink >}}
+{{< nextlink href="/getting_started/session_replay" >}}<u>Session Replay</u>: Get an in-depth look at how users are interacting with your product with Session Replays.{{< /nextlink >}}
 {{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic Monitoring</u>: Start testing and monitoring your API endpoints and key business journeys with Synthetic tests.{{< /nextlink >}}
 {{< nextlink href="/getting_started/incident_management" >}}<u>Incident Management</u>: Communicate and track problems in your systems.{{< /nextlink >}}
 {{< nextlink href="/getting_started/database_monitoring" >}}<u>Database Monitoring</u>: View the health and performance of databases, and quickly troubleshoot any issues that arise.{{< /nextlink >}}
 {{< nextlink href="/getting_started/cloud_security_management" >}}<u>Cloud Security Management</u>: Discover best practices for getting your team up and running with CSM.{{< /nextlink >}}
 {{< nextlink href="/getting_started/application_security" >}}<u>Application Security Management</u>: Discover best practices for getting your team up and running with ASM.{{< /nextlink >}}
 {{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: Discover best practices for getting your team up and running with Cloud SIEM.{{< /nextlink >}}
+{{< nextlink href="/getting_started/workflow_automation" >}}<u>Workflow Automation</u>: Automate end-to-end processes in response to alerts and security signals.{{< /nextlink >}}
 {{< nextlink href="/getting_started/learning_center" >}}<u>Learning Center</u>: Follow a learning path, take a self-guided class or lab, and explore the Datadog certification program.{{< /nextlink >}}
 {{< /whatsnext >}}

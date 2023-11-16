@@ -1,4 +1,5 @@
 import Modal from 'bootstrap/js/dist/modal';
+import Tooltip from 'bootstrap/js/dist/tooltip';
 import { getSignupFailover } from 'signup-failover';
 
 import 'bootstrap/js/dist/dropdown';
@@ -42,3 +43,7 @@ document.querySelectorAll('.sign-up-trigger').forEach(item => {
 
 // TODO: split up code from datadog-docs.js into modules after webpack migration
 // import './components/sidenav';
+
+// Add Bootstrap Tooltip across docs
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+Array.from(tooltipTriggerList).map(tooltipTriggerEl => new Tooltip(tooltipTriggerEl))

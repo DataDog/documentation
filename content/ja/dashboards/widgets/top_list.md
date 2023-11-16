@@ -13,7 +13,7 @@ further_reading:
   text: コンテキストリンク
 kind: documentation
 title: トップリストウィジェット
-widget_type: トップリスト
+widget_type: toplist
 ---
 
 トップリスト可視化機能を使用すると、`hostname`、`service` などのタグ値のリストを任意のメトリクス値の最大値または最小値と共に表示できます。たとえば、CPU を多く使用しているサービス、ディスクの空き容量が少ないホストなどをリストできます。

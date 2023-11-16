@@ -21,26 +21,9 @@ aliases:
 
 First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, traces, and logs. After installation is complete, refer to the following topics to configure your installation to suit your monitoring needs.
 
-### Metrics
-- [Collect metrics from non-Lambda resources](#collect-metrics-from-non-lambda-resources)
-- [Submit custom metrics](#submit-custom-metrics)
-
-### Logs
-- [Filter or scrub information from logs](#filter-or-scrub-information-from-logs)
-- [Enable/disable logs collection](#enabledisable-log-collection)
-- [Collect logs from non-Lambda resources](#collect-logs-from-non-lambda-resources)
-- [Parse and transform logs](#parse-and-transform-logs)
-- [Connect logs and traces](#connect-logs-and-traces)
-
-### APM
 - [Connect telemetry using tags](#connect-telemetry-using-tags)
 - [Collect the request and response payloads](#collect-the-request-and-response-payloads)
-- [Collect metrics from non-Lambda resources](#collect-metrics-from-non-lambda-resources)
-- [Collect logs from non-Lambda resources](#collect-logs-from-non-lambda-resources)
 - [Collect traces from non-Lambda resources](#collect-traces-from-non-lambda-resources)
-- [Filter or scrub information from logs](#filter-or-scrub-information-from-logs)
-- [Enable/disable logs collection](#enabledisable-log-collection)
-- [Parse and transform logs](#parse-and-transform-logs)
 - [Configure the Datadog tracer](#configure-the-datadog-tracer)
 - [Select sampling rates for ingesting APM spans](#select-sampling-rates-for-ingesting-apm-spans)
 - [Filter or scrub sensitive information from traces](#filter-or-scrub-sensitive-information-from-traces)
@@ -60,35 +43,6 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
 
-### Security
-- [Enable Threat Detection to observe attack attempts](#enable-threat-detection-to-observe-attack-attempts)
-
-### Others
-- [Connect telemetry using tags](#connect-telemetry-using-tags)
-- [Collect the request and response payloads](#collect-the-request-and-response-payloads)
-- [Collect metrics from non-Lambda resources](#collect-metrics-from-non-lambda-resources)
-- [Collect logs from non-Lambda resources](#collect-logs-from-non-lambda-resources)
-- [Collect traces from non-Lambda resources](#collect-traces-from-non-lambda-resources)
-- [Filter or scrub information from logs](#filter-or-scrub-information-from-logs)
-- [Disable logs collection](#disable-logs-collection)
-- [Parse and transform logs](#parse-and-transform-logs)
-- [Configure the Datadog tracer](#configure-the-datadog-tracer)
-- [Select sampling rates for ingesting APM spans](#select-sampling-rates-for-ingesting-apm-spans)
-- [Filter or scrub sensitive information from traces](#filter-or-scrub-sensitive-information-from-traces)
-- [Disable trace collection](#disable-trace-collection)
-- [Connect logs and traces](#connect-logs-and-traces)
-- [Link errors to your source code](#link-errors-to-your-source-code)
-- [Submit custom metrics](#submit-custom-metrics)
-- [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
-- [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
-- [Propagate trace context over AWS resources](#propagate-trace-context-over-aws-resources)
-- [Merge X-Ray and Datadog traces](#merge-x-ray-and-datadog-traces)
-- [Enable AWS Lambda code signing](#enable-aws-lambda-code-signing)
-- [Migrate to the Datadog Lambda extension](#migrate-to-the-datadog-lambda-extension)
-- [Migrating between x86 to arm64 with the Datadog Lambda Extension](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
-- [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
-- [Troubleshoot](#troubleshoot)
-- [Further Reading](#further-reading)
 
 ## Enable Threat Detection to observe attack attempts
 
@@ -96,20 +50,10 @@ Get alerted on attackers targeting your serverless applications and respond quic
 
 To get started, first ensure that you have [tracing enabled][43] for your functions.
 
-To enable threat monitoring, add the following environment variables depending on the language:
+To enable threat monitoring, add the following environment variables to your deployment:
    ```yaml
    environment:
      DD_SERVERLESS_APPSEC_ENABLED: true
-   ```
-   For **Go functions only** also add:
-   ```yaml
-   environment:
-     DD_UNIVERSAL_INSTRUMENTATION: true
-   ```
-   For **NodeJS or Python functions** also add:
-   ```yaml
-   environment:
-     DD_EXPERIMENTAL_ENABLE_PROXY: true
      AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
    ```
 
@@ -330,18 +274,7 @@ DD_APM_REPLACE_TAGS=[
 ]
 ```
 
-## Collect metrics from non-Lambda resources
 
-In addition to collecting real-time [Datadog Lambda enhanced metrics][7], Datadog can also help you collect metrics for AWS managed resources—such as [API Gateway][8], [AppSync][9], and [SQS][10]—to help you monitor your entire serverless application. The metrics are also enriched with the corresponding AWS resource tags.
-
-To collect these metrics, set up the [Datadog AWS integration][3].
-
-## Collect logs from non-Lambda resources
-
-Logs generated by managed resources besides AWS Lambda functions can be valuable in helping identify the root cause of issues in your serverless applications. Datadog recommends you [collect logs][11] from the following AWS managed resources in your environment:
-- APIs: API Gateway, AppSync, ALB
-- Queues & Streams: SQS, SNS, Kinesis
-- Data Stores: DynamoDB, S3, RDS
 
 ## Collect traces from non-Lambda resources
 
@@ -410,120 +343,6 @@ For a more granular approach, use these service-specific identifiers:
 | `DD_SERVICE_MAPPING="08se3mvh28:new-service-name"` | Renames specific upstream service `08se3mvh28.execute-api.eu-west-1.amazonaws.com` to `new-service-name` |
 
 For renaming downstream services, see `DD_SERVICE_MAPPING` in the [tracer's config documentation][45].
-
-## Filter or scrub information from logs
-
-To exclude the `START` and `END` logs, set the environment variable `DD_LOGS_CONFIG_PROCESSING_RULES` to `[{"type": "exclude_at_match", "name": "exclude_start_and_end_logs", "pattern": "(START|END) RequestId"}]`. Alternatively, you can add a `datadog.yaml` file in your project root directory with the following content:
-
-```yaml
-logs_config:
-  processing_rules:
-    - type: exclude_at_match
-      name: exclude_start_and_end_logs
-      pattern: (START|END) RequestId
-```
-
-Datadog recommends keeping the `REPORT` logs, as they are used to populate the invocations list in the serverless function views.
-
-To scrub or filter other logs before sending them to Datadog, see [Advanced Log Collection][13].
-
-## Enable/disable log collection
-
-Log collection through the Datadog Lambda extension is enabled by default.
-
-{{< tabs >}}
-{{% tab "Serverless Framework" %}}
-
-```yaml
-custom:
-  datadog:
-    # ... other required parameters, such as the Datadog site and API key
-    enableDDLogs: true
-```
-
-{{% /tab %}}
-{{% tab "AWS SAM" %}}
-
-```yaml
-Transform:
-  - AWS::Serverless-2016-10-31
-  - Name: DatadogServerless
-    Parameters:
-      # ... other required parameters, such as the Datadog site and API key
-      enableDDLogs: true
-```
-
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
-
-```typescript
-const datadog = new Datadog(this, "Datadog", {
-    // ... other required parameters, such as the Datadog site and API key
-    enableDatadogLogs: true
-});
-datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
-```
-
-{{% /tab %}}
-{{% tab "Others" %}}
-
-Set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `true` on your Lambda functions.
-
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Disable log collection
-
-If you want to stop collecting logs using the Datadog Forwarder Lambda function, remove the subscription filter from your own Lambda function's CloudWatch log group.
-
-If you want to stop collecting logs using the Datadog Lambda extension, follow the instructions below for the installation method you use:
-
-{{< tabs >}}
-{{% tab "Serverless Framework" %}}
-
-```yaml
-custom:
-  datadog:
-    # ... other required parameters, such as the Datadog site and API key
-    enableDDLogs: false
-```
-
-{{% /tab %}}
-{{% tab "AWS SAM" %}}
-
-```yaml
-Transform:
-  - AWS::Serverless-2016-10-31
-  - Name: DatadogServerless
-    Parameters:
-      # ... other required parameters, such as the Datadog site and API key
-      enableDDLogs: false
-```
-
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
-
-```typescript
-const datadog = new Datadog(this, "Datadog", {
-    // ... other required parameters, such as the Datadog site and API key
-    enableDatadogLogs: false
-});
-datadog.addLambdaFunctions([<LAMBDA_FUNCTIONS>]);
-```
-
-{{% /tab %}}
-{{% tab "Others" %}}
-
-Set the environment variable `DD_SERVERLESS_LOGS_ENABLED` to `false` on your Lambda functions.
-
-{{% /tab %}}
-{{< /tabs >}}
-
-For more information, see [Log Management][47].
-
-## Parse and transform logs
-
-To parse and transform your logs in Datadog, see documentation for [Datadog log pipelines][14].
 
 ## Configure the Datadog tracer
 
@@ -763,10 +582,6 @@ export class ExampleStack extends cdk.Stack {
 [2]: https://app.datadoghq.com/integrations/github/
 {{% /tab %}}
 {{< /tabs >}}
-
-## Submit custom metrics
-
-You can monitor your custom business logic by [submitting custom metrics][27].
 
 ## Collect Profiling data (public beta)
 

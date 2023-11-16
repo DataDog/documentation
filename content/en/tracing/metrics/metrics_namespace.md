@@ -5,9 +5,9 @@ further_reading:
     - link: 'tracing/trace_collection/'
       tag: 'Documentation'
       text: 'Learn how to setup APM tracing with your application'
-    - link: 'tracing/services/services_list/'
+    - link: 'tracing/service_catalog/'
       tag: 'Documentation'
-      text: 'Discover the list of services reporting to Datadog'
+      text: 'Discover and catalog the services reporting to Datadog'
     - link: 'tracing/services/service_page'
       tag: 'Documentation'
       text: 'Learn more about services in Datadog'
@@ -203,6 +203,6 @@ This metric does not support percentile aggregations. Read the [Latency Distribu
 [5]: /metrics/types/?tab=count#metric-types
 [6]: /metrics/types/?tab=distribution#metric-types
 [7]: /metrics/types/?tab=gauge#metric-types
-[8]: /tracing/services/services_list/#services-types
+[8]: /tracing/service_catalog/#services-types
 [9]: /tracing/glossary/#services
 [10]: /tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm/

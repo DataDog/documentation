@@ -10,7 +10,7 @@ kind: documentation
 title: Suivi des déploiements pour les applications sans serveur AWS Lambda
 ---
 
-{{< img src="serverless/deployment_tracking.jpeg" alt="Suivi des déploiements sans serveur"  style="width:100%;">}}
+{{< img src="serverless/deployment_tracking.jpeg" alt="Suivi des déploiements sans serveur" style="width:100%;">}}
 
 Le suivi des déploiements vous aide à identifier lorsqu'une nouvelle version de code ou un changement de configuration entraîne une hausse soudaine d'erreurs, une dégradation des performances ou un changement d'état de votre environnement cloud.
 
@@ -30,7 +30,7 @@ cloudtrail:LookupEvents
 
 Si vous avez ajouté l'autorisation, mais que les événements de vos fonctions AWS Lambda ne s'affichent pas, activez le suivi des déploiements depuis le carré de l'intégration AWS Lambda.
 
-{{< img src="serverless/lambda_integration_settings.png" alt="Paramètres de l'intégration Lambda"  style="width:100%;">}}
+{{< img src="serverless/lambda_integration_settings.png" alt="Paramètres de l'intégration Lambda" style="width:100%;">}}
 
 ## Pour aller plus loin
 

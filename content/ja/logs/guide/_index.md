@@ -24,10 +24,13 @@ title: ログガイド
     {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/" >}}Datadog Kinesis Firehose Destination を使用して AWS サービスログを送信する{{< /nextlink >}}
     {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Amazon EventBridge API Destination を使用して Datadog にイベントとログを送信する{{< /nextlink >}}
     {{< nextlink href="/logs/guide/forwarder/" >}}Datadog Lambda Forwarder を設定する{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/azure-logging-guide/" >}}Azure ログを Datadog に送信{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/azure-native-logging-guide/" >}}Datadog リソースで Azure ログを送信{{< /nextlink >}} 
+    {{< nextlink href="/logs/guide/apigee" >}}Apigee ログを収集する{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/azure-logging-guide/" >}}Datadog へ Azure ログを送信する{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/azure-native-logging-guide/" >}}Datadog リソースで Azure ログを送信する{{< /nextlink >}}
+    {{< nextlink href="/integrations/google_cloud_platform/#log-collection" >}}Datadog Dataflow テンプレートで Google Cloud ログを収集する{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/collect-google-cloud-logs-with-push/" >}}Pub/Sub Push サブスクリプションで Google Cloud ログを収集する{{< /nextlink >}}
     {{< nextlink href="logs/guide/collect-heroku-logs" >}}Heroku ログを収集する{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/" >}}Datadog Lambda 関数を使用して AWS サービスログを送信する{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/" >}}Datadog Lambda 関数で AWS サービスのログを送信する{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}ログ収集のトラブルシューティングガイド{{< /nextlink >}}
     {{< nextlink href="logs/guide/docker-logs-collection-troubleshooting-guide" >}}Docker ログ収集のトラブルシューティングガイド{{< /nextlink >}}
     {{< nextlink href="logs/guide/lambda-logs-collection-troubleshooting-guide" >}}Lambda ログ収集のトラブルシューティングガイド{{< /nextlink >}}

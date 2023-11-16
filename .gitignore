@@ -22,16 +22,8 @@ content/en/api/tsconfig.json
 # Ignoring all automated content
 temp
 
-# Developers/integrations
-content/en/developers/integrations/_index.md
-content/en/developers/integrations/create_an_integration.md
-content/en/developers/integrations/create_a_tile.md
-content/en/developers/integrations/develop_an_offering.md
-content/en/developers/integrations/*.md
-content/en/developers/datadog_apps.md
-content/en/developers/integrations/api_integration.md
-content/en/developers/integrations/agent_integration.md
-content/en/developers/integrations/log_integration.md
+# Developers/ui_extensions
+content/en/developers/ui_extensions.md
 
 # Agent section
 content/en/agent/basic_agent_usage/ansible.md
@@ -39,9 +31,11 @@ content/en/agent/basic_agent_usage/chef.md
 content/en/agent/basic_agent_usage/heroku.md
 content/en/agent/basic_agent_usage/puppet.md
 content/en/agent/basic_agent_usage/saltstack.md
+content/en/agent/guide/ansible_standalone_role.md
 
 # Tracing
 content/en/tracing/trace_collection/dd_libraries/ruby.md
+content/en/tracing/trace_collection/compatibility/ruby.md
 
 # Log collection
 content/en/logs/guide/forwarder.md
@@ -52,11 +46,11 @@ package-lock.json
 # Ignoring all integrations file
 content/en/integrations/*.md
 data/integrations/
+layouts/shortcodes/integration_categories.md
 content/en/integrations/guide/amazon_cloudformation.md
 !content/en/integrations/_index.md
 !content/en/integrations/cloudcheckr.md
 !content/en/integrations/kubernetes.md
-!content/en/integrations/kubernetes_state_core.md
 !content/en/integrations/rss.md
 !content/en/integrations/system.md
 !content/en/integrations/tcp_rtt.md

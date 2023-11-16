@@ -36,7 +36,7 @@ To clone a rule:
 
 1. Find the rule you want to copy one of the following ways:
    - Navigate to [**Security** > **Configuration** > **Cloud Security Management** > **Compliance Rules**][1]. Select a rule you want to copy to open its details page.
-   - Navigate to [**Security** > **Cloud Security Management** > **Explorer** > **Misconfigurations**][2]. Select a finding to open its details, and select **Edit Rule** from the **Rule** menu.
+   - Navigate to [**Security** > **Cloud Security Management** > **Explorer** > **Misconfigurations**][2]. Select a misconfiguration to open its details, and select **Edit Rule** from the **Rule** menu.
 2. Make any changes you want for your new rule.
 3. Scroll to the bottom of the details page and click **Clone Rule**.
 
@@ -52,32 +52,31 @@ To create a rule from scratch:
 
    {{< img src="security/cspm/custom_rules/custom_rules_first_half.png" alt="Custom Rules Steps" width="100%">}}
 
-6. Exclude benign activity by specifying queries to include or remove certain resources from findings.
+6. Exclude benign activity by specifying queries to include or remove certain resources from misconfigurations.
 7. Validate the logic of your rule by selecting resources and clicking **Test Rule**. See which resources passed and failed, along with corresponding resource tags.
 8. Specify a severity (`Critical`, `High`, `Medium`, `Low`, or `Info`) for the rule.
 9. Select a facet (for example, for each resource type or for each account ID), and [specify a notification target][5] to signal.
 10. In **Say what's happening**, write a description for the notification, using notification options to make it useful. Read [Notifications][6] for details.
-11. Specify tags to apply to the result findings. Read [Tagging findings](#tagging-findings) for more information.
+11. Specify tags to apply to the result misconfigurations. Read [Tagging misconfigurations](#tagging-misconfigurations) for more information.
 12. Click **Save Rule**.
 
     {{< img src="security/cspm/custom_rules/custom_rules_second_half.png" alt="Custom Rules Steps" width="100%">}}
 
-## Tagging findings
+## Tagging misconfigurations
 
-When you create, clone, or modify CSM Misconfigurations compliance rules, you can specify tags to apply to findings so that you can group, filter, and search findings by those tags. When you clone a rule, some tags are carried forward into the new rule, and others are not (see table below).
+When you create, clone, or modify CSM Misconfigurations compliance rules, you can specify tags to apply to misconfigurations so that you can group, filter, and search misconfigurations by those tags. When you clone a rule, some tags are carried forward into the new rule, and others are not (see table below).
 
 You can assign almost any key-value as a tag. The following table shows tags that are useful in common security scenarios.
 
 | Key     | Valid values    | Description |
 | ------  | --------------- | ----------- |
 | `scored` | `true`, `false` | Indicates whether to include the rule when calculating organization's overall posture score. Automatically added to cloned rules. |
-| `security` | `compliance` | Categorizes findings on the [Security Signals page][7]. Can't be removed. |
+| `security` | `compliance` | Categorizes misconfigurations on the [Security Signals page][7]. Can't be removed. |
 | `requirement` | String | Not allowed for custom rules. Indicates a requirement related to a compliance framework. Don't add this to rules not part of a compliance framework. |
 | `cloud_provider` | `aws`, `gcp`, `azure` | Cannot be removed. Is set automatically based on resource type.  |
 | `control` | String | Not allowed for custom rules. Indicates a control related to a compliance framework. Don't add this to rules not part of a compliance framework. |
 | `source` | String from a defined set given by cloud providers as listed in the [Source facet in the Misconfigurations explorer][2]. | Cannot be removed. Automatically added to cloned rules. Facilitates grouping rules by cloud provider. |
 | `framework` | String | Not allowed for custom rules. Indicates the compliance framework the rule belongs to. Not automatically added to cloned rules. |
-
 
 ## Further reading
 

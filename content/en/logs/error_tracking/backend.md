@@ -18,7 +18,7 @@ If you aren't already collecting logs with Datadog, see the [Logs documentation]
 
 ## Setup
 
-For languages such as **Python**, **Java**, and **Ruby**, no additional configuration is needed if the `source` tag in your logs is configured correctly. All required attributes are automatically tagged and sent to Datadog. 
+For languages such as **Python**, **Java**, and **Ruby**, no additional configuration is needed if the `source` tag in your logs is configured correctly. All required attributes are automatically tagged and sent to Datadog.
 
 For backend languages such as **C#**, **.NET**, **Go**, and **Node.js**, the code examples in each section demonstrate how to properly configure an error log and attach the required stack trace in the log's `error.stack`.
 
@@ -52,7 +52,7 @@ To log a caught exception yourself, you may optionally use:
 ```csharp
 var log = new LoggerConfiguration()
     .WriteTo.File(new JsonFormatter(renderMessage: true), "log.json")
-    .Enrich.WithExceptionDetails() 
+    .Enrich.WithExceptionDetails()
     .CreateLogger();
 try {
   // …
@@ -131,9 +131,9 @@ type stackTracer interface {
 }
 
 type errorField struct {
-  kind    string `json:"kind"`
-  stack   string `json:"stack"`
-  message string `json:"message"`
+  Kind    string `json:"kind"`
+  Stack   string `json:"stack"`
+  Message string `json:"message"`
 }
 
 func ErrorField(err error) errorField {
@@ -146,9 +146,9 @@ func ErrorField(err error) errorField {
 		}
     }
     return errorField{
-        kind: reflect.TypeOf(err).String(),
-        stack: stack,
-        message: err.Error(),
+        Kind: reflect.TypeOf(err).String(),
+        Stack: stack,
+        Message: err.Error(),
     }
 }
 
@@ -233,38 +233,80 @@ except:
 
 ### Ruby on Rails
 
-#### Lograge (JSON)
+#### Custom logger formatter
 
-If you have not set up log collection for Ruby on Rails, see the [Ruby on Rails Log Collection documentation][7]. 
+If you have not set up log collection for Ruby on Rails, see the [Ruby on Rails Log Collection documentation][7].
 
-To log a caught exception yourself, you may optionally use:
+To manually log an error, create a formatter using JSON and map the exception values to the correct fields:
 
 ```ruby
-# Lograge config
-config.lograge.enabled = true
+require 'json'
+require 'logger'
 
-# This specifies to log in JSON format
-config.lograge.formatter = Lograge::Formatters::Json.new
+class JsonWithErrorFieldFormatter < ::Logger::Formatter
+    def call(severity, datetime, progname, message)
+        log = {
+            timestamp: "#{datetime.to_s}",
+            level: severity,
+        }
 
-# Disables log coloration
-config.colorize_logging = false
+        if message.is_a?(Hash)
+            log = log.merge(message)
+        elsif message.is_a?(Exception)
+            log['message'] = message.inspect
+            log['error'] = {
+                kind: message.class,
+                message: message.message,
+                stack: message.backtrace.join("\n"),
+            }
+        else
+            log['message'] = message.is_a?(String) ? message : message.inspect
+        end
 
-# Log to a dedicated file
-config.lograge.logger = ActiveSupport::Logger.new(Rails.root.join('log', "#{Rails.env}.log"))
-
-# Configure logging of exceptions to the correct fields
-config.lograge.custom_options = lambda do |event|
-    {
-      error: {
-        type: event.payload[:exception][0],
-        message: event.payload[:exception][1],
-        stack: event.payload[:exception_object].backtrace
-      }
-    }
-  end  
+        JSON.dump(log) + "\n"
+    end
 end
 ```
 
+And use it in your logger:
+```ruby
+logger = Logger.new(STDOUT)
+logger.formatter = JsonWithErrorFieldFormatter.new
+```
+
+If you use **Lograge**, you can also set it up to send formatted error logs:
+``` ruby
+Rails.application.configure do
+    jsonLogger = Logger.new(STDOUT) # STDOUT or file depending on your agent configuration
+    jsonLogger.formatter = JsonWithErrorFieldFormatter.new
+
+    # Replacing Rails default TaggedLogging logger with a new one with the json formatter.
+    # TaggedLogging is incompatible with more complex json format messages
+    config.logger = jsonLogger
+
+    # Lograge config
+    config.lograge.enabled = true
+    config.lograge.formatter = Lograge::Formatters::Raw.new
+
+    # Disables log coloration
+    config.colorize_logging = false
+
+    # Configure logging of exceptions to the correct fields
+    config.lograge.custom_options = lambda do |event|
+        if event.payload[:exception_object]
+            return {
+                level: 'ERROR',
+                message: event.payload[:exception_object].inspect,
+                error: {
+                    kind: event.payload[:exception_object].class,
+                    message: event.payload[:exception_object].message,
+                    stack: event.payload[:exception_object].backtrace.join("\n")
+                }
+            }
+        end
+    end
+end
+```
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

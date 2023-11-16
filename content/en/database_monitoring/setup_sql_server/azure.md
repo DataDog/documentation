@@ -54,6 +54,8 @@ Grant the Agent access to each additional Azure SQL Database on this server:
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
+**Note:** Azure managed identity authentication is also supported. Please see [the guide][3] on how to configure this for your Azure SQL DB instance.
+
 When configuring the Datadog Agent, specify one check instance for each application database located on a given Azure SQL DB server. Do not include `master` and other [system databases][2]. The Datadog Agent must connect directly to each application database in Azure SQL DB because each database is running in an isolated compute environment. This also means that `database_autodiscovery` does not work for Azure SQL DB, so it should not be enabled.
 
 **Note:** Azure SQL Database deploys a database in an isolated network; each database is treated as a single host. This means that if you run Azure SQL Database in an elastic pool, each database in the pool is treated as a separate host.
@@ -84,6 +86,7 @@ See [Install the Agent](#install-the-agent) for more detailed instructions on ho
 
 [1]: https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles
 [2]: https://docs.microsoft.com/en-us/sql/relational-databases/databases/system-databases
+[3]: /database_monitoring/guide/managed_authentication
 {{% /tab %}}
 
 {{% tab "Azure SQL Managed Instance" %}}
@@ -113,6 +116,9 @@ USE [database_name];
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
+**Note:** Azure managed identity authentication is also supported. Please see [the guide][1] on how to configure this for your Azure SQL DB instance.
+
+[3]: /database_monitoring/guide/managed_authentication
 {{% /tab %}}
 
 {{% tab "SQL Server on Windows Azure VM" %}}
@@ -195,8 +201,8 @@ Once all Agent configuration is complete, [restart the Datadog Agent][9].
 [6]: https://docs.microsoft.com/en-us/sql/ado/microsoft-activex-data-objects-ado
 [7]: https://docs.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server
 [8]: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
-[9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: /agent/guide/agent-commands/#agent-status-and-information
+[9]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[10]: /agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Linux Host" %}}
@@ -242,8 +248,8 @@ Once all Agent configuration is complete, [restart the Datadog Agent][6].
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
 [5]: /getting_started/tagging/unified_service_tagging
-[6]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: /agent/guide/agent-commands/#agent-status-and-information
+[6]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[7]: /agent/configuration/agent-commands/#agent-status-and-information
 [8]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Docker" %}}
@@ -293,7 +299,7 @@ Use the `service` and `env` tags to link your database telemetry to other teleme
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
 [4]: /getting_started/tagging/unified_service_tagging
-[5]: /agent/guide/agent-commands/#agent-status-and-information
+[5]: /agent/configuration/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -403,7 +409,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L353-L383
-[5]: /agent/guide/secrets-management
+[5]: /agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 

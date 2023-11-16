@@ -14,6 +14,10 @@ further_reading:
   text: "Monitor and diagnose network performance issues with SNMP Traps"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
+{{< /site-region >}}
+
 ## Overview
 
 Use NetFlow Monitoring in Datadog to visualize and monitor your flow records from your NetFlow-enabled devices.
@@ -26,7 +30,7 @@ To use NetFlow Monitoring with Network Device Monitoring, ensure you are using t
 
 ## Configuration
 
-To configure your devices to send NetFlow, sFlow, or IPFIX traffic to the Agent NetFlow server, your devices must be configured to send traffic to the IP address that the Datadog Agent is installed on, specifically the `flow_type` and `port`.
+To configure your devices to send NetFlow, jFlow, sFlow, or IPFIX traffic to the Agent NetFlow server, your devices must be configured to send traffic to the IP address that the Datadog Agent is installed on, specifically the `flow_type` and `port`.
 
 Edit your [`datadog.yaml`][3] Agent configuration file to enable NetFlow:
 
@@ -77,6 +81,6 @@ NetFlow data is retained for 30 days by default.
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /network_monitoring/devices/snmp_metrics/
-[3]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
-[4]: /agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
+[3]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[4]: /agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [5]: https://app.datadoghq.com/infrastructure/devices?facets=&viewTab=netflow

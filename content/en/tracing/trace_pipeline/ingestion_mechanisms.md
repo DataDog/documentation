@@ -47,7 +47,7 @@ For instance, if service `A` has more traffic than service `B`, the Agent might 
 
 #### Remote configuration
 
-<div class="alert alert-warning">Remote configuration for ingestion configuration in the Agent is in beta. Contact <a href="/help/">Datadog Support</a> to request access.</div>
+<div class="alert alert-info"><strong> Remote configuration for ingestion configuration in the Agent is in beta.</strong></div>
 
 Sampling rate configuration in the Agent is configurable remotely if you are using Agent version [7.42.0][20] or higher. Read [How Remote Configuration Works][23] for information about enabling remote configuration in your Agents. With remote configuration, you can change the parameter without having to restart the Agent.
 
@@ -61,7 +61,7 @@ Set Agent's target traces-per-second in its main configuration file (`datadog.ya
 
 **Notes**:
 - Remotely configured parameters take precedence over local configurations - environment variables and `datadog.yaml` configuration.
-- The traces-per-second sampling rate set in the Agent only applies to Datadog tracing libraries other than PHP. It has no effect on other tracing libraries such as OpenTelemetry SDKs.
+- The traces-per-second sampling rate set in the Agent only applies to Datadog tracing libraries. It has no effect on other tracing libraries such as OpenTelemetry SDKs.
 
 All the spans from a trace sampled using the Datadog Agent [automatically computed sampling rates](#in-the-agent) are tagged with the ingestion reason `auto`. The `ingestion_reason` tag is also set on [usage metrics][2]. Services using the Datadog Agent default mechanism are labeled as `Automatic` in the [Ingestion Control Page][5] Configuration column.
 
@@ -609,7 +609,9 @@ If you need to sample a specific span, but don't need the full trace to be avail
 
 For example, if you are building [metrics from spans][6] to monitor specific services, you can configure span sampling rules to ensure that these metrics are based on 100% of the application traffic, without having to ingest 100% of traces for all the requests flowing through the service.
 
-**Note**: This feature is available from version [7.40.0][19] of the Datadog Agent.
+This feature is available for Datadog Agent v[7.40.0][19]+.
+
+**Note**: Single span sampling rules **cannot** be used to drop spans that are kept by [head-based sampling](#head-based-sampling), only to keep additional spans that are dropped by head-based sampling.
 
 {{< tabs >}}
 {{% tab "Java" %}}

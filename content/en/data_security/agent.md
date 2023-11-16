@@ -27,7 +27,7 @@ The official repositories and binary packages of the Agent are signed. Verify th
   - [C6559B690CA882F023BDF3F63F4D1729FD4BF915][5]
   - [A4C0B90D7443CF6E4E8AA341F1068E14E09422B3][6]
 - Windows MSI:
-  - DigiCert certificate fingerprint `21fe8679bdfb16b879a87df228003758b62abf5e`
+  - DigiCert certificate fingerprint `720FE30A376658011C45FF1BE04BDAC071F0DEA2`
 - MacOS PKG:
   - Apple certificate fingerprint `FDD2ADF623EA75E62C6DC6DBFBA7520CA549AB7314E660D78B0E3DCCF15B2FBA`
 
@@ -86,7 +86,7 @@ For more information, see the [Secrets Management][18] documentation.
 [5]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
 [6]: https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 [7]: /agent/faq/network/
-[8]: /agent/proxy/
+[8]: /agent/configuration/proxy/
 [9]: /agent/troubleshooting/
 [10]: https://coreos.com/clair
 [11]: https://snyk.io
@@ -96,6 +96,6 @@ For more information, see the [Secrets Management][18] documentation.
 [15]: https://www.datadoghq.com/8869756E.asc.txt
 [16]: /agent/faq/windows-agent-ddagent-user/
 [17]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
-[18]: /agent/guide/secrets-management/
+[18]: /agent/configuration/secrets-management/
 [19]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
 [20]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
