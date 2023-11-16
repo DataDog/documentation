@@ -20,7 +20,7 @@ To create a Datadog integration, see [Create a New Integration][3].
 
 1. Navigate to **[Security > Cloud SIEM > Detection Rules > New Rule][4]** and create a new rule.
 
-2. Follow the [best practices](#configuration-best-practices) listed in this guide to configure your detection rule.
+2. Follow the [best practices](#configuration-best-practices) in this guide to configure your detection rule.
  
 3. Click **Export to JSON**.
 
