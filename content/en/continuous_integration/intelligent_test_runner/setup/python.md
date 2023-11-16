@@ -91,7 +91,7 @@ Unskippable tests are supported in the following versions and testing frameworks
 * `pytest`
   * From `ddtrace>=1.19.0`.
 * `unittest`
-  * From `ddtrace>=TBD`
+  * From `ddtrace>=2.2.0`.
 
 ### Marking tests as unskippable in `pytest`
 
