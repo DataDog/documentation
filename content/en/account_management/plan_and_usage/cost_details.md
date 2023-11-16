@@ -84,7 +84,7 @@ Use the cost chargebacks to:
 - View estimated month-to-date and historical costs for multi-organizations
 - Attribute costs to each sub-organization
 
-Cost chargebacks are dervied by:
+Cost chargebacks are derived by:
 - Calculating the sub-organization usage ratio. This is done by dividing usage per sub-organization by the total parent organization usage.
 - Applying the sub-organization usage ratio against the parent organization costs, providing the cost chargebacks per sub-organization.
 
