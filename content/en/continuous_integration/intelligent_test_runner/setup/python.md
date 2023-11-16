@@ -26,7 +26,7 @@ Intelligent Test Runner is only supported in the following versions and testing 
   * From `Python>=3.7`.
   * Requires `coverage>=5.5`.
 * `unittest`
-  * From `ddtrace>=TBD`
+  * From `ddtrace>=2.2.0`
   * From `Python>=3.7`
 
 ## Setup
