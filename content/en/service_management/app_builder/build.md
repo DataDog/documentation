@@ -9,7 +9,6 @@ further_reading:
   tag: "Documentation"
   text: "Actions Catalog"
 ---
----
 
 You can create an app or edit existing apps from the App Builder [Explore][1] tab. The **Explore** tab lists information about existing apps, such as the author, status, the dates that each app was last modified, and whether the app is published or not.
 - Hover over an app for the options to edit, delete, view or clone the app.
@@ -18,9 +17,10 @@ You can create an app or edit existing apps from the App Builder [Explore][1] ta
 ## Build an app from a blueprint
 
 1. Click the [**Blueprints**][2] tab.
-1. Find the blueprint you'd like to use, and select it. The app template opens.
-1. If desired, select the app name and enter a new name and description for the app.
-1. App queries that require attention are marked with exclamation marks. Click on each query you'd like to modify and fill in the required fields.
+1. Find the blueprint you'd like to use, and select it.
+1. Click **Use Blueprint** to open the app template.
+1. To change the app name and description, click the app name.
+1. Each blueprint template comes loaded with demo data. You can begin customizing the app immediately by editing the **Connection** for each query.
 1. To save the app, click **Save as New App**.
 1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
 1. When you're finished modifying the app, Click **Run** to test it.
@@ -31,21 +31,18 @@ You can create an app or edit existing apps from the App Builder [Explore][1] ta
 ## Create a custom app
 
 To create an app:
-1. From [App Builder][2], click **New App**.
-1. If desired, select the app name and enter a new name and description for the app.
-1. Drag UI components into the app canvas.
-1. Use queries to populate or interact with your canvas.
+1. From [App Builder][1], click **New App**.
+1. To change the app name and description, click the app name.
+1. Drag [UI components](#app-canvas-and-components) into the app canvas.
+1. Use [queries](#queries) to populate or interact with your canvas.
 1. To save the app, click **Save as New App**.
-1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
+1. To [preview](#preview-an-app) the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
 1. When you're finished modifying the app, Click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
-[1]: https://app.datadoghq.com/app-builder/apps/
-[2]: https://app.datadoghq.com/app-builder/blueprints
-
 ## Build an app with JSON
 
-Build or edit a workflow in JSON by clicking the cog (**Settings**) icon, and selecting **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
+To build or edit a workflow in JSON, click the cog (**Settings**) icon, and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
 
 A typical workflow contains the following top-level keys:
 - `name`: The name of the app.
@@ -208,13 +205,13 @@ Mention tables here.
 
 ## Queries
 
-Queries form the logic behind your app and enable interactions with Datadog integrations. Queries can take inputs from other queries or from UI components, and return outputs for use elsewhere in your app. To add a query, click the plus (**+**) icon in the **Queries** section and search for a query to add to your app.
+Queries form the logic behind your app and enable interactions with Datadog integrations. Queries can take inputs from other queries or from UI components, and return outputs for use in other queries or UI components. To add a query, click the plus (**+**) icon in the **Queries** section and search for a query to add to your app.
 
 After you add a query to your app, ensure that you've entered any required inputs. Input fields with the variable button (**{{**) can take [variables](#variables).
 
 ### Debounce
 
-Configuring debounce ensures that your query is only triggered once per user input. By default, debounce is set to 0 milliseconds (ms). To prevent a query from being called too frequently, increase the debounce. Configure debounce in the **Advanced** section of a query.
+Configuring debounce ensures that your query is only triggered once per user input. By default, debounce is set to `0` milliseconds (ms). To prevent a query from being called too frequently, increase the debounce. Configure debounce in the **Advanced** section of a query.
 
 ### Conditional queries
 
@@ -249,11 +246,13 @@ To prompt a user for confirmation before the query runs, toggle the **Requires C
 
 ## Variables
 
-Creating a useful app sometimes necessitates passing data from one part of your app to another. You can perform this kind of data interpolation with variables.
+Use app variables to pass data from one part of your app to another. Additionally, you can use app variables to pass in data from your dashboard using dashboard template variables.
 
-Variables use the syntax (`${}`). To use a variable, use the query or UI component name and access the child fields using dot notation. For example, if you have a select component named `select0` and you want to access its default value field in a query, use the syntax `${select0.defaultValue}`. If you're not sure what to enter as a variable, type `${` to open a suggestions menu with all available variables.
+Variables are enclosed in braces, proceeded by a dollar sign (`${}`). To use a variable, use the query or UI component name and access the child fields using dot notation. For example, if you have a select component named `select0` and you want to access its default value field in a query, use the syntax `${select0.defaultValue}`. If you're not sure what to enter as a variable, type `${` to open a suggestions menu with all available variables.
 
-{{< img src="service_management/app_builder/select_variable.mp4" alt="If you're not sure what to enter as a variable, type ${ to open a suggestions menu with all available variables" video=true >}}
+{{< img src="service_management/app_builder/select-variable.mp4" alt="If you're not sure what to enter as a variable, type ${ to open a suggestions menu with all available variables" video=true >}}
+
+For more information using dashboard template variables, see [Embedding apps in dashboards][3].
 
 ## Preview an app
 
@@ -262,3 +261,7 @@ Click the **Preview** button to preview your app. Preview mode allows you to vie
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/app-builder/apps/
+[2]: https://app.datadoghq.com/app-builder/blueprints
+[3]: /service_management/app_builder/embedded_apps
