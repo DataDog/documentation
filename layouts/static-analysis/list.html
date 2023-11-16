@@ -228,12 +228,12 @@
         </div>
 
         <nav id="static-analysis-nav" class="container px-0">
-            {{/*  FILTER BTNS - Keep here. filters scratch pad  needs to form */}}
-            {{ $filterKeys := (slice "Languages" "Categories" "Severities") }}
+            {{/*  FILTER TYPES - Keep here. filters scratch pad  needs to form */}}
+            {{ $filter_types := (slice "Languages" "Categories" "Severities") }}
             <div class="filters-static-analysis row">
-                {{ range $filterKeys }}
-                {{ $filter := . | lower}}
-                <div class='filter-type flex-column col col-md-{{cond (eq $filter "languages") "12" "6" }}' data-id="{{$filter}}" >
+                {{ range $filter_types }}
+                {{ $filter_type := . | lower}}
+                <div class='filter-type flex-column col col-md-{{cond (eq $filter_type "languages") "12" "6" }}' data-id="{{$filter_type}}" >
                     <p class="filter-type-name fw-semibold">{{ . }}</p>
                     <div class="filter-component position-relative">
                         <button 
@@ -242,36 +242,23 @@
                         >
                             <div class="selections d-flex">
                                 {{/*  All  */}}
-                                {{/*  
-                                    For each filter key, I need to 
-                                    determine what values are in it's respective this.filterValue['{{$filter}}']
-                                    for each item in the array, I need to render the int-logo and name for this div.selections    
-                                */}}
-                                <template x-if="!filterValue['{{$filter}}'].length">
+                                <template x-if="!filterValue['{{$filter_type}}'].length">
                                     <span class="all fw-semibold">All</span>
                                 </template>
-                                <template x-for="(filter, idx) in filterValue['{{$filter}}']" :key="idx">  
-                                <div class="selection-container rounded d-flex align-items-center">
-                                    {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" "javascript" "variant" "avatar") }}
-                                    {{ if $int_logo }}
-                                    <img src="{{ $int_logo }}" height="14" alt="{{$int_logo}}"/>
-                                    {{ end }}
-                                    <span class="selection-name" x-text="filter"></span>
-                                    <div class="" @click.stop="deleteOneSelection('{{ $filter }}', filter )">
-                                        {{ partial "icon" (dict "name" "close-light_x" "title" "close" "size" "14px") }}
+                                {{/*  
+                                    Render filter selections from `filterValue` data.
+                                */}}
+                                <template x-for="(filter, idx) in filterValue['{{$filter_type}}']" :key="idx">
+                                    <div class="selection-container rounded d-flex align-items-center">
+                                        <template x-if="filter.split(',')[1]">
+                                            <img :src="filter.split(',')[1]" height="14" alt="filter.split(',')[0]"/>
+                                        </template>
+                                        <span class="selection-name" x-text="filter.split(',')[0]"></span>
+                                        <div class="" @click.stop="deleteOneSelection('{{ $filter_type }}', filter )">
+                                            {{ partial "icon" (dict "name" "close-light_x" "title" "close" "size" "14px") }}
+                                        </div>
                                     </div>
-                                </div>
                                 </template>
-                                {{/*  {{ range seq 6 }}
-                                <div class="selection-container rounded d-flex align-items-center">
-                                    {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" "Docker" "variant" "avatar") }}
-                                    {{ if $int_logo }}
-                                    <img src="{{ $int_logo }}" height="14" alt="{{$int_logo}}"/>
-                                    {{ end }}
-                                    <span class="selection-name">Docker</span>
-                                    {{ partial "icon" (dict "name" "close-light_x" "title" "close" "size" "14px") }}
-                                </div>
-                                {{ end }}  */}}
                             </div>
                             <div class="overflow-gradient h-100 position-absolute top-0 end-0 rounded-end">
                                 {{ partial "icon" (dict "name" "cancel-circle" "title" "remove filters" ) }}
@@ -282,18 +269,18 @@
                         </button>
                         <form 
                         class="d-flex flex-column bg-white rounded position-absolute w-100"
-                        x-cloak x-show.important="openedFilterForm === '{{$filter}}'"
+                        x-cloak x-show.important="openedFilterForm === '{{$filter_type}}'"
                         >
                             <div class="filter-category-container">
-                                {{/*  <input id="all" type="checkbox">  */}}
-                                <label for="all">All</label>
+                                <span>All</span>
                             </div>
                             {{ range index ($pad.Get "filters") . }}
                             <div class="filter-category-container">
-                                <input id="{{ . }}" type="checkbox" value="{{ . }}" x-model="filterValue['{{$filter}}']">
                                 {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" . "variant" "avatar") }}
+                                {{/*  store int_logo with filter value if int_logo is present */}}
+                                <input id="{{ . }}" type="checkbox" value='{{ cond ($int_logo | not ) . (printf "%s,%s" . $int_logo) }}' x-model="filterValue['{{$filter_type}}']">
                                 {{ if $int_logo }}
-                                <img src="{{ $int_logo }}" height="16" alt="{{$int_logo}}"/>
+                                <img src="{{ $int_logo }}" height="16" alt="{{ . }}"/>
                                 {{ end }}
                                 <label for="{{ . }}">{{.}}</label>
                             </div>
