@@ -30,7 +30,7 @@ The findings that appear in Security Inbox are generated from Application Securi
 Security Inbox also takes the following detected risks into consideration when determining which findings appear in the inbox:
 
 - **Public accessibility**: Publicly exposed resources carry elevated risk, especially if they contain vulnerabilities or misconfigurations. To learn more, see [How Datadog Determines if Resources are Publicly Accessible][6].
-- **Privileged access**: Resources with privileged access carry elevated risk as they grant elevated permissions that can expand the attack surface. To learn more, see [How Datadog Determines if Resources are Publicly Accessible][6].
+- **Privileged access**: Resources with privileged access carry elevated risk as they grant elevated permissions that can expand the attack surface.
 - **Under attack**: Resources that are seeing suspicious security activity carry elevated risks. Resources are flagged as "Under Attack" if a security signal has been detected on the resource in the last 15 days.
 - **Exploit available**: Vulnerabilities with public exploits available carry elevated risks. The availability of a public exploit is verified with different exploit databases, such as [cisa.gov][7], [exploit-db.com][8], and [nvd.nist.gov][9].
 - **In production**: Vulnerabilities in production environments carry elevated risks. The environment is computed from the `env` tag.
