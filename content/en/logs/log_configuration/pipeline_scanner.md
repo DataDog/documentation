@@ -11,7 +11,7 @@ further_reading:
       text: "Learn more about log processors"
 ---
 
-<div class="alert alert-warning">Log Pipelines Scanner is in beta. </div>
+<div class="alert alert-warning">Log Pipelines Scanner is in private beta. <a href="/help">Contact Support</a> to request access. </div>
 
 ## Overview
 
@@ -39,11 +39,12 @@ The Pipeline Scanner samples and annotates logs matching the search query with t
 
 You can modify the pipelines and processors in the right side panel. The modifications you make do not affect the logs that have already been processed. Click **Play** to view the new logs that have been modified by the updated pipelines and processors.
 
-You can also access Pipeline Scanner in the Log Pipelines page and then define the query for the logs you want to inspect.
+You can also access Pipeline Scanner in the [Log Pipelines][2] page and then define the query for the logs you want to inspect.
 
 ### Limitations
 
-The `logs_write_pipelines` permission is required to use the Pipeline Scanner.
+The `logs_write_pipelines` permission is required to use the Pipeline Scanner. See [Log Management RBAC permissions][3] for more information.
+
 The number of sessions you can launch is limited to:
 
 - A maximum of 3 concurrent sessions.
@@ -54,3 +55,5 @@ The number of sessions you can launch is limited to:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs
+[2]: https://app.datadoghq.com/logs/pipelines
+[3]: /account_management/rbac/permissions/#log-management
