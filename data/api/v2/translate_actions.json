@@ -1344,6 +1344,10 @@
     "description": "Get hourly usage for observability pipelines.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
     "summary": "Get hourly usage for observability pipelines"
   },
+  "GetProjectedCost": {
+    "description": "Get projected cost across multi-org and single root-org accounts.\nProjected cost data is only available for the current month and becomes available around the 12th of the month.\nThis endpoint requires the usage_read authorization scope.",
+    "summary": "Get projected cost across your account"
+  },
   "SendInvitations": {
     "description": "Sends emails to one or more users inviting them to join the organization.",
     "summary": "Send invitation emails",
