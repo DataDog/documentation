@@ -40,7 +40,7 @@ Projected end-of-month costs are calculated by applying the current month's proj
 
 ### Cost Summary (parent organization)
 
-The cost summary functionality changes according to whether you use Datadog as a single organization or a multi-organization. As a multi-organization, you can view estimated and projected costs for the parent organization and each sub-organization. 
+The cost summary functionality changes according to your Datadog usage as a single organization or a multi-organization. As a multi-organization, you can view estimated and projected costs for the parent organization and each sub-organization. 
 
 {{< img src="account_management/plan_and_usage/multi-org-estimated-projected-cost-summary.png" alt="Screenshot of the Cost Summary for a parent organization, showing the overall month to date cost, projected cost, a graph of cumulative cost breakdown, and a summary table." >}}
 
