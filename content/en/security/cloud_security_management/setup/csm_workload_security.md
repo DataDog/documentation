@@ -61,6 +61,7 @@ Alternatively, use the following examples to enable CSM Workload Security:
         runtime:
           enabled: true
     ```
+
 2. Restart the Agent.
 
 {{% /tab %}}
@@ -82,7 +83,6 @@ Alternatively, use the following examples to enable CSM Workload Security:
 2. Restart the Agent.
 
 
-[1]: /security/threats/runtime_anomaly_detection
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 
 {{% /tab %}}

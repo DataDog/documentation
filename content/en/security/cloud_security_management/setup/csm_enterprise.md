@@ -122,7 +122,6 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
 2. Restart the Agent.
 
 
-[1]: /security/threats/runtime_anomaly_detection
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 
 {{% /tab %}}
