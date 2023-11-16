@@ -1019,15 +1019,20 @@ main:
     parent: infrastructure
     identifier: infrastructure_process
     weight: 4
+  - name: Increase Process Retention
+    url: infrastructure/process/increase_process_retention/
+    parent: infrastructure_process
+    weight: 401
   - name: Resource Catalog
     url: infrastructure/resource_catalog/
     parent: infrastructure
     identifier: infrastructure_resource_catalog
     weight: 5
-  - name: Increase Process Retention
-    url: infrastructure/process/increase_process_retention/
-    parent: infrastructure_process
-    weight: 401
+  - name: Cloud Resources Schema
+    url: infrastructure/resource_catalog/schema
+    parent: infrastructure_resource_catalog
+    identifier: infrastructure_resource_catalog_schema
+    weight: 501
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
@@ -3258,11 +3263,6 @@ main:
     parent: cspm
     identifier: custom_rules
     weight: 103
-  - name: Cloud Resources Schema
-    url: security/misconfigurations/custom_rules/schema/
-    parent: cspm
-    identifier: cspm_schema_gcp_test
-    weight: 104
   - name: Compliance Reports
     url: security/misconfigurations/frameworks_and_benchmarks
     parent: cspm

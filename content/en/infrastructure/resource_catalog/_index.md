@@ -30,10 +30,10 @@ Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to g
 
 ## Setup
 
-By default, all hosts are automatically monitored by the Datadog Agent. For cloud resources to appear in the Resource Catalog, enable resource collection from the [Resource Catalog][2] setup page. To gain insights into your security risks, enable [Cloud Security Management][1] for each cloud account. 
+By default, all hosts are automatically monitored by the Datadog Agent. For cloud resources to appear in the Resource Catalog, enable resource collection from the [Resource Catalog][5] setup page. To gain insights into your security risks, enable [Cloud Security Management][1] for each cloud account. 
 
 **Note**: Enabling Cloud Security Management automatically enables resource collection for the Resource Catalog Inventory tab.
-Enabling resource collection for the resource catalog does not enable the CSM product.
+Enabling resource collection for the resource catalog does _not_ enable the CSM product.
 
 The Resource Catalog is useful for:
 
@@ -95,6 +95,7 @@ Click the **Share** button and select **Share event** to share a link to the cur
 [2]: https://app.datadoghq.com/infrastructure/catalog
 [3]: /integrations/#cat-notification
 [4]: /account_management/teams
+[5]: https://app.datadoghq.com/infrastructure/catalog/configuration
 
 
 
