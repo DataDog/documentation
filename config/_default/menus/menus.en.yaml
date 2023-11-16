@@ -7906,6 +7906,19 @@ api:
         - GetUsageApplicationSecurityMonitoring
       unstable: []
       order: 38
+  - name: Get active billing dimensions for cost attribution
+    url: '#get-active-billing-dimensions-for-cost-attribution'
+    identifier: usage-metering-get-active-billing-dimensions-for-cost-attribution
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetActiveBillingDimensions
+      unstable:
+        - v2
+      order: 5
   - name: Get all custom metrics by hourly average
     url: '#get-all-custom-metrics-by-hourly-average'
     identifier: usage-metering-get-all-custom-metrics-by-hourly-average
