@@ -6591,6 +6591,11 @@ components:
           $ref: '#/components/schemas/IncidentAttachmentLinkAttributesAttachmentObject'
         attachment_type:
           $ref: '#/components/schemas/IncidentAttachmentLinkAttachmentType'
+        modified:
+          description: Timestamp when the incident attachment link was last modified.
+          format: date-time
+          readOnly: true
+          type: string
       required:
       - attachment_type
       - attachment
@@ -6896,9 +6901,22 @@ components:
       - TEXTARRAY
       - METRICTAG
       - AUTOCOMPLETE
+    IncidentImpactsType:
+      description: The incident impacts type.
+      enum:
+      - incident_impacts
+      example: incident_impacts
+      type: string
+      x-enum-varnames:
+      - INCIDENT_IMPACTS
     IncidentIntegrationMetadataAttributes:
       description: Incident integration metadata's attributes for a create request.
       properties:
+        created:
+          description: Timestamp when the incident todo was created.
+          format: date-time
+          readOnly: true
+          type: string
         incident_id:
           description: UUID of the incident this integration metadata is connected
             to.
@@ -6915,6 +6933,11 @@ components:
           type: integer
         metadata:
           $ref: '#/components/schemas/IncidentIntegrationMetadataMetadata'
+        modified:
+          description: Timestamp when the incident todo was last modified.
+          format: date-time
+          readOnly: true
+          type: string
         status:
           description: 'A number indicating the status of this integration metadata.
             0 indicates unknown;
@@ -7014,6 +7037,8 @@ components:
           description: The incident integration metadata's ID.
           example: 00000000-0000-0000-1234-000000000000
           type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentIntegrationRelationships'
         type:
           $ref: '#/components/schemas/IncidentIntegrationMetadataType'
       required:
@@ -7034,6 +7059,25 @@ components:
       type: string
       x-enum-varnames:
       - INCIDENT_INTEGRATIONS
+    IncidentIntegrationRelationships:
+      description: The incident's integration relationships from a response.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        last_modified_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+      type: object
+    IncidentNonDatadogCreator:
+      description: Incident's non Datadog creator.
+      nullable: true
+      properties:
+        image_48_px:
+          description: Non Datadog creator `48px` image.
+          type: string
+        name:
+          description: Non Datadog creator name.
+          type: string
+      type: object
     IncidentNotificationHandle:
       description: A notification handle that will be notified at incident creation.
       properties:
@@ -7064,6 +7108,14 @@ components:
       x-enum-varnames:
       - USERS
       - ATTACHMENTS
+    IncidentRespondersType:
+      description: The incident responders type.
+      enum:
+      - incident_responders
+      example: incident_responders
+      type: string
+      x-enum-varnames:
+      - INCIDENT_RESPONDERS
     IncidentResponse:
       description: Response with an incident.
       properties:
@@ -7081,6 +7133,17 @@ components:
     IncidentResponseAttributes:
       description: The incident's attributes from a response.
       properties:
+        archived:
+          description: Timestamp of when the incident was archived.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        case_id:
+          description: The incident case id.
+          format: int64
+          nullable: true
+          type: integer
         created:
           description: Timestamp when the incident was created.
           format: date-time
@@ -7131,6 +7194,8 @@ components:
           format: date-time
           readOnly: true
           type: string
+        non_datadog_creator:
+          $ref: '#/components/schemas/IncidentNonDatadogCreator'
         notification_handles:
           description: Notification handles that will be notified of the incident
             during update.
@@ -7147,6 +7212,12 @@ components:
           description: Timestamp when the incident's state was last changed from active
             or stable to resolved or completed.
           format: date-time
+          nullable: true
+          type: string
+        severity:
+          $ref: '#/components/schemas/IncidentSeverity'
+        state:
+          description: The state incident.
           nullable: true
           type: string
         time_to_detect:
@@ -7178,6 +7249,10 @@ components:
         title:
           description: The title of the incident, which summarizes what happened.
           example: A test incident title
+          type: string
+        visibility:
+          description: The incident visibility status.
+          nullable: true
           type: string
       required:
       - title
@@ -7240,10 +7315,16 @@ components:
           $ref: '#/components/schemas/NullableRelationshipToUser'
         created_by_user:
           $ref: '#/components/schemas/RelationshipToUser'
+        impacts:
+          $ref: '#/components/schemas/RelationshipToIncidentImpacts'
         integrations:
           $ref: '#/components/schemas/RelationshipToIncidentIntegrationMetadatas'
         last_modified_by_user:
           $ref: '#/components/schemas/RelationshipToUser'
+        responders:
+          $ref: '#/components/schemas/RelationshipToIncidentResponders'
+        user_defined_fields:
+          $ref: '#/components/schemas/RelationshipToIncidentUserDefinedFields'
       type: object
     IncidentSearchResponse:
       description: Response with incidents and facets.
@@ -7626,6 +7707,24 @@ components:
       required:
       - data
       type: object
+    IncidentSeverity:
+      description: The incident severity.
+      enum:
+      - UNKNOWN
+      - SEV-1
+      - SEV-2
+      - SEV-3
+      - SEV-4
+      - SEV-5
+      example: UNKNOWN
+      type: string
+      x-enum-varnames:
+      - UNKNOWN
+      - SEV_1
+      - SEV_2
+      - SEV_3
+      - SEV_4
+      - SEV_5
     IncidentTeamCreateAttributes:
       description: The incident team's attributes for a create request.
       properties:
@@ -7885,6 +7984,11 @@ components:
           description: The follow-up task's content.
           example: Restore lost data.
           type: string
+        created:
+          description: Timestamp when the incident todo was created.
+          format: date-time
+          readOnly: true
+          type: string
         due_date:
           description: Timestamp when the todo should be completed by.
           example: '2023-07-10T05:00:00.000000+00:00'
@@ -7893,6 +7997,11 @@ components:
         incident_id:
           description: UUID of the incident this todo is connected to.
           example: 00000000-aaaa-0000-0000-000000000000
+          type: string
+        modified:
+          description: Timestamp when the incident todo was last modified.
+          format: date-time
+          readOnly: true
           type: string
       required:
       - content
@@ -7955,6 +8064,14 @@ components:
       required:
       - data
       type: object
+    IncidentTodoRelationships:
+      description: The incident's relationships from a response.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        last_modified_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+      type: object
     IncidentTodoResponse:
       description: Response with an incident todo.
       properties:
@@ -7978,6 +8095,8 @@ components:
           description: The incident todo's ID.
           example: 00000000-0000-0000-1234-000000000000
           type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentTodoRelationships'
         type:
           $ref: '#/components/schemas/IncidentTodoType'
       required:
@@ -8088,6 +8207,14 @@ components:
       required:
       - data
       type: object
+    IncidentUserDefinedFieldType:
+      description: The incident user defined fields type.
+      enum:
+      - user_defined_field
+      example: user_defined_field
+      type: string
+      x-enum-varnames:
+      - USER_DEFINED_FIELD
     IncidentsResponse:
       description: Response with a list of incidents.
       properties:
@@ -10789,6 +10916,7 @@ components:
       type: object
     NullableRelationshipToUser:
       description: Relationship to user.
+      nullable: true
       properties:
         data:
           $ref: '#/components/schemas/NullableRelationshipToUserData'
@@ -12651,6 +12779,30 @@ components:
       - id
       - type
       type: object
+    RelationshipToIncidentImpactData:
+      description: Relationship to impact object.
+      properties:
+        id:
+          description: A unique identifier that represents the impact.
+          example: 00000000-0000-0000-2345-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentImpactsType'
+      required:
+      - id
+      - type
+      type: object
+    RelationshipToIncidentImpacts:
+      description: Relationship to impacts.
+      properties:
+        data:
+          description: An array of incident impacts.
+          items:
+            $ref: '#/components/schemas/RelationshipToIncidentImpactData'
+          type: array
+      required:
+      - data
+      type: object
     RelationshipToIncidentIntegrationMetadataData:
       description: A relationship reference for an integration metadata object.
       example:
@@ -12716,6 +12868,54 @@ components:
       required:
       - id
       - type
+      type: object
+    RelationshipToIncidentResponderData:
+      description: Relationship to impact object.
+      properties:
+        id:
+          description: A unique identifier that represents the responder.
+          example: 00000000-0000-0000-2345-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentRespondersType'
+      required:
+      - id
+      - type
+      type: object
+    RelationshipToIncidentResponders:
+      description: Relationship to incident responders.
+      properties:
+        data:
+          description: An array of incident responders.
+          items:
+            $ref: '#/components/schemas/RelationshipToIncidentResponderData'
+          type: array
+      required:
+      - data
+      type: object
+    RelationshipToIncidentUserDefinedFieldData:
+      description: Relationship to impact object.
+      properties:
+        id:
+          description: A unique identifier that represents the responder.
+          example: 00000000-0000-0000-2345-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentUserDefinedFieldType'
+      required:
+      - id
+      - type
+      type: object
+    RelationshipToIncidentUserDefinedFields:
+      description: Relationship to incident user defined fields.
+      properties:
+        data:
+          description: An array of user defined fields.
+          items:
+            $ref: '#/components/schemas/RelationshipToIncidentUserDefinedFieldData'
+          type: array
+      required:
+      - data
       type: object
     RelationshipToOrganization:
       description: Relationship to an organization.
