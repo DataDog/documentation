@@ -10335,6 +10335,15 @@ components:
       properties:
         aggregations:
           $ref: '#/components/schemas/MetricCustomAggregations'
+        exclude_tags_mode:
+          description: 'When set to true, the configuration will exclude the configured
+            tags and include any other submitted tags.
+
+            When set to false, the configuration will include the configured tags
+            and exclude any other submitted tags.
+
+            Defaults to false. Requires `tags` property.'
+          type: boolean
         include_percentiles:
           description: 'Toggle to include/exclude percentiles for a distribution metric.
 
@@ -11774,6 +11783,62 @@ components:
       type: string
       x-enum-varnames:
       - PROCESS
+    ProjectedCost:
+      description: Projected Cost data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ProjectedCostAttributes'
+        id:
+          description: Unique ID of the response.
+          type: string
+        type:
+          $ref: '#/components/schemas/ProjectedCostType'
+      type: object
+    ProjectedCostAttributes:
+      description: Projected Cost attributes data.
+      properties:
+        charges:
+          description: List of charges data reported for the requested month.
+          items:
+            $ref: '#/components/schemas/ChargebackBreakdown'
+          type: array
+        date:
+          description: The month requested.
+          format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        projected_total_cost:
+          description: The total projected cost of products for the month.
+          format: double
+          type: number
+        public_id:
+          description: The organization public ID.
+          type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
+          type: string
+      type: object
+    ProjectedCostResponse:
+      description: Projected Cost response.
+      properties:
+        data:
+          description: Response containing Projected Cost.
+          items:
+            $ref: '#/components/schemas/ProjectedCost'
+          type: array
+      type: object
+    ProjectedCostType:
+      default: projected_cost
+      description: Type of cost data.
+      enum:
+      - projected_cost
+      example: projected_cost
+      type: string
+      x-enum-varnames:
+      - PROJECt_COST
     QueryFormula:
       description: A formula for calculation based on one or more queries.
       properties:
@@ -15216,6 +15281,13 @@ components:
             description: Field.
             type: string
           type: array
+        hasOptionalGroupByFields:
+          description: When false, events without a group-by value are ignored by
+            the rule. When true, events with missing group-by fields are processed
+            with `N/A`, replacing the missing values.
+          example: false
+          readOnly: true
+          type: boolean
         metric:
           deprecated: true
           description: '(Deprecated) The target field to aggregate over when using
@@ -16585,7 +16657,7 @@ components:
           type: object
         integrations:
           $ref: '#/components/schemas/ServiceDefinitionV2Dot2Integrations'
-        langauges:
+        languages:
           description: 'The service''s programming language. Datadog recognizes the
             following languages: `dotnet`, `go`, `java`, `js`, `php`, `python`, `ruby`,
             and `c++`.'
@@ -19220,7 +19292,7 @@ components:
               an organization. Mute and unmute hosts. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
-            monitors_write: Edit, mute, and delete individual monitors.
+            monitors_write: Edit and delete individual monitors.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View CSPM Findings.
@@ -21551,7 +21623,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - monitors_read
+        - monitors_downtime
       summary: Get a downtime
       tags:
       - Downtimes
@@ -25699,7 +25771,11 @@ paths:
       description: 'Update the tag configuration of a metric or percentile aggregations
         of a distribution metric or custom aggregations
 
-        of a count, rate, or gauge metric.
+        of a count, rate, or gauge metric. By setting `exclude_tags_mode` to true
+        the behavior is changed
+
+        from an allow-list to a deny-list, and tags in the defined list will not be
+        queryable.
 
         Can only be used with application keys from users with the `Manage Tags for
         Metrics` permission.'
@@ -31987,6 +32063,60 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 39
+      x-undo:
+        type: safe
+  /api/v2/usage/projected_cost:
+    get:
+      description: 'Get projected cost across multi-org and single root-org accounts.
+
+        Projected cost data is only available for the current month and becomes available
+        around the 12th of the month.
+
+        This endpoint requires the usage_read authorization scope.'
+      operationId: GetProjectedCost
+      parameters:
+      - description: String to specify whether cost is broken down at a parent-org
+          level or at the sub-org level. Available views are `summary` and `sub-org`.
+          Defaults to `summary`.
+        in: query
+        name: view
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/ProjectedCostResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get projected cost across your account
+      tags:
+      - Usage Metering
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v2/user_invitations:
