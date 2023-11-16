@@ -27,16 +27,16 @@ Injection styles can be configured using:
 - System Property: `-Ddd.trace.propagation.style.inject=datadog,b3multi`
 - Environment Variable: `DD_TRACE_PROPAGATION_STYLE_INJECT=datadog,b3multi`
 
-The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for injection. By default only Datadog injection style is enabled.
+The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for injection. By default, the `datadog` and `tracecontext` injection styles are enabled.
 
 Extraction styles can be configured using:
 
 - System Property: `-Ddd.trace.propagation.style.extract=datadog,b3multi`
 - Environment Variable: `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog,b3multi`
 
-The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for extraction. By default only Datadog extraction style is enabled.
+The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for extraction. By default, the `datadog` and `tracecontext` extraction styles are enabled using the `datadog,tracecontext` setting, meaning the `datadog` style has higher priority than the `tracecontext` style.
 
-If multiple extraction styles are enabled, the extraction attempt is done on the order those styles are configured and first successful extracted value is used.
+When multiple extraction styles are enabled, the extraction attempt is done on the order those styles are configured, using the first successful extracted value. If later valid trace contexts are found, they are terminated and appended as span links. Moreover, if the `tracecontext` style is enabled, W3C Tracestate is propagated if W3C Traceparent matches the extracted context.
 
 For reference details about the context propagation settings and other configuration, read [Java Tracing Library Configuration][1].
 
