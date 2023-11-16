@@ -742,6 +742,47 @@ components:
       type: string
       x-enum-varnames:
       - API_KEYS
+    ActiveBillingDimensionsAttributes:
+      description: List of active billing dimensions.
+      properties:
+        month:
+          description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`.'
+          format: date-time
+          type: string
+        values:
+          description: 'List of active billing dimensions. Example: `[infra_host,
+            apm_host, serverless_infra]`.'
+          items:
+            description: A given billing dimension in a list.
+            example: infra_host
+            type: string
+          type: array
+      type: object
+    ActiveBillingDimensionsBody:
+      description: Active billing dimensions data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ActiveBillingDimensionsAttributes'
+        id:
+          description: Unique ID of the response.
+          type: string
+        type:
+          $ref: '#/components/schemas/ActiveBillingDimensionsType'
+      type: object
+    ActiveBillingDimensionsResponse:
+      description: Active billing dimensions response.
+      properties:
+        data:
+          $ref: '#/components/schemas/ActiveBillingDimensionsBody'
+      type: object
+    ActiveBillingDimensionsType:
+      default: billing_dimensions
+      description: Type of active billing dimensions data.
+      enum:
+      - billing_dimensions
+      type: string
+      x-enum-varnames:
+      - BILLING_DIMENSIONS
     ApmRetentionFilterType:
       default: apm_retention_filter
       description: The type of the resource.
@@ -21192,6 +21233,50 @@ paths:
         cursorPath: meta.pagination.next_cursor
         limitParam: page[size]
         resultsPath: data
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/cost_by_tag/active_billing_dimensions:
+    get:
+      description: Get active billing dimensions for cost attribution. Cost data for
+        a given month becomes available no later than the 17th of the following month.
+      operationId: GetActiveBillingDimensions
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/ActiveBillingDimensionsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get active billing dimensions for cost attribution
+      tags:
+      - Usage Metering
+      x-menu-order: 5
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
