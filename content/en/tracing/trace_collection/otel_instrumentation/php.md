@@ -28,7 +28,6 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 ## Configuring OpenTelemetry to use the Datadog tracing library
 
-1.
 1. Add your desired manual OpenTelemetry instrumentation to your PHP code following the [OpenTelemetry PHP Manual Instrumentation documentation][5].
 2. Install the [Datadog PHP tracing library][6].
 3. Set `DD_TRACE_OTEL_ENABLED` to `true`.
