@@ -94,7 +94,7 @@ You are required to add the following incident attributes:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://cloud.google.com/blog/products/devops-sre/using-the-four-keys-to-measure-your-devops-performance
-[2]: /api/latest/continuous_integration/TBD
+[2]: /api/latest/dora-metrics
 [3]: https://www.npmjs.com/package/@datadog/datadog-ci
 [4]: /integrations/github/
 [5]: https://app.datadoghq.com/organization-settings/api-keys
