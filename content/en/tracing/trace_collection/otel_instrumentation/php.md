@@ -21,16 +21,16 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 | Feature                                | Support notes                                           |
 |----------------------------------------|---------------------------------------------------------|
-| [OpenTelemetry Context propagation][1] | [Datadog distributed header format][5] is used instead. |
-| [Span processors][2]                   | Partially supported                                     |
-| [Span Exporters][3]                    | Partially supported                                     |
-| Trace/span [ID generators][4]          | ID generation is performed by `ddtrace`.                |
+| [OpenTelemetry Context propagation][1] | [Datadog distributed header format][4] is used instead. |
+| [Span limits][2]                       | Unsupported                                             |
+| Trace/span [ID generators][3]          | ID generation is performed by `ddtrace`.                |
+| [Metrics API][7]                       | Unsupported                                             |
 
 ## Configuring OpenTelemetry to use the Datadog tracing library
 
 1.
-1. Add your desired manual OpenTelemetry instrumentation to your PHP code following the [OpenTelemetry PHP Manual Instrumentation documentation][6].
-2. Install the [Datadog PHP tracing library][7].
+1. Add your desired manual OpenTelemetry instrumentation to your PHP code following the [OpenTelemetry PHP Manual Instrumentation documentation][5].
+2. Install the [Datadog PHP tracing library][6].
 3. Set `DD_TRACE_OTEL_ENABLED` to `true`.
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application.
@@ -40,10 +40,10 @@ Datadog combines these OpenTelemetry spans with other Datadog APM spans into a s
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/instrumentation/php/propagation/
-[2]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-processor
-[3]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
-[4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#id-generators
-[5]: /tracing/trace_collection/trace_context_propagation/php/
-[6]: https://opentelemetry.io/docs/instrumentation/php/manual/
-[7]: /tracing/trace_collection/dd_libraries/php#getting-started
+[2]: https://opentelemetry.io/docs/specs/otel/trace/sdk/#span-limits
+[3]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#id-generators
+[4]: /tracing/trace_collection/trace_context_propagation/php/
+[5]: https://opentelemetry.io/docs/instrumentation/php/manual/
+[6]: /tracing/trace_collection/dd_libraries/php#getting-started
+[7]: https://opentelemetry.io/docs/specs/otel/metrics/
 
