@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Cost Summary and Cost Chargebacks help you understand your estimated month-to-date, projected end-of-month and historical Datadog costs.
+Cost Summary and Cost Chargebacks help you understand your estimated month-to-date, projected end-of-month, and historical Datadog costs.
 
 You can break down your costs by sub-organization and by product to:
 - Allocate costs according to their source
