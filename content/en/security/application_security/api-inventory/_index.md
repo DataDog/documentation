@@ -11,8 +11,8 @@ API Security Inventory monitors your API traffic to provide visibility into the 
 - **Public Exposure**: Whether the API is processing traffic from the internet
 - **Production status**: if the API is running in production environment
 - **Sensitive data flows**: Sensitive data handled by the API and flows between APIs.
-- **Attack Exposure**: if the endpoint is targeted by attacks (powered by Application Threat Management)
-- **Vulnerabilities**:  if the endpoint contains vulnerability (powered by Application Vulnerability Management)
+- **Attack Exposure**: if the endpoint is targeted by attacks (powered by [Application Threat Management][2])
+- **Vulnerabilities**:  if the endpoint contains vulnerability (powered by [Application Vulnerability Management][3])
 
 Using the API Security Inventory you can:
 
@@ -24,25 +24,12 @@ Using the API Security Inventory you can:
 
 ## How to Enable
 
-### Via Remote Configuration
-
 If your library is configured to use [remote configuration][1], then the following tracer versions
 are compatible without any additional configuration.
 
 |Technology|Minimum version|
 |----------|----------|
 |Python    | v2.1.6   |
-
-### Via Environment Variables
-
-The following library versions support API Security Inventory features by setting
-the environment variable `DD_EXPERIMENTAL_API_SECURITY_ENABLED` to `true`.
-
-|Technology|Minimum version|
-|----------|----------|
-|Java      | v1.22.0  | 
-|Python    | v1.16.0  |
-|Ruby      | v1.15.0  |
 
 ## How Does it Work?
 
@@ -115,3 +102,5 @@ This risk is determined by [Vulnerability Management](/security/application_secu
 By default, API Security Inventory will evaluate every 10th request (10% sample rate).
 
 [1]: /agent/remote_config/
+[2]: /security/application_security/threats/
+[3]: /security/application_security/vulnerability_management/
