@@ -7805,6 +7805,18 @@ api:
     url: /api/latest/usage-metering/
     identifier: usage-metering
     generated: true
+  - name: Get projected cost across your account
+    url: '#get-projected-cost-across-your-account'
+    identifier: usage-metering-get-projected-cost-across-your-account
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetProjectedCost
+      unstable: []
+      order: 7
   - name: Get hourly usage for observability pipelines
     url: '#get-hourly-usage-for-observability-pipelines'
     identifier: usage-metering-get-hourly-usage-for-observability-pipelines

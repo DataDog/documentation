@@ -11783,6 +11783,62 @@ components:
       type: string
       x-enum-varnames:
       - PROCESS
+    ProjectedCost:
+      description: Projected Cost data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ProjectedCostAttributes'
+        id:
+          description: Unique ID of the response.
+          type: string
+        type:
+          $ref: '#/components/schemas/ProjectedCostType'
+      type: object
+    ProjectedCostAttributes:
+      description: Projected Cost attributes data.
+      properties:
+        charges:
+          description: List of charges data reported for the requested month.
+          items:
+            $ref: '#/components/schemas/ChargebackBreakdown'
+          type: array
+        date:
+          description: The month requested.
+          format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        projected_total_cost:
+          description: The total projected cost of products for the month.
+          format: double
+          type: number
+        public_id:
+          description: The organization public ID.
+          type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
+          type: string
+      type: object
+    ProjectedCostResponse:
+      description: Projected Cost response.
+      properties:
+        data:
+          description: Response containing Projected Cost.
+          items:
+            $ref: '#/components/schemas/ProjectedCost'
+          type: array
+      type: object
+    ProjectedCostType:
+      default: projected_cost
+      description: Type of cost data.
+      enum:
+      - projected_cost
+      example: projected_cost
+      type: string
+      x-enum-varnames:
+      - PROJECt_COST
     QueryFormula:
       description: A formula for calculation based on one or more queries.
       properties:
@@ -32007,6 +32063,60 @@ paths:
       tags:
       - Usage Metering
       x-menu-order: 39
+      x-undo:
+        type: safe
+  /api/v2/usage/projected_cost:
+    get:
+      description: 'Get projected cost across multi-org and single root-org accounts.
+
+        Projected cost data is only available for the current month and becomes available
+        around the 12th of the month.
+
+        This endpoint requires the usage_read authorization scope.'
+      operationId: GetProjectedCost
+      parameters:
+      - description: String to specify whether cost is broken down at a parent-org
+          level or at the sub-org level. Available views are `summary` and `sub-org`.
+          Defaults to `summary`.
+        in: query
+        name: view
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/ProjectedCostResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get projected cost across your account
+      tags:
+      - Usage Metering
+      x-menu-order: 7
       x-undo:
         type: safe
   /api/v2/user_invitations:
