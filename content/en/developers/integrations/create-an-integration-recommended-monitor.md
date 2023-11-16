@@ -53,8 +53,8 @@ In addition to the monitor definition, the Title, Description, and Tags fields a
 
 |      | Description    | Examples |
 | ---  | ----------- | ----------- |
-|Title | Allows users to quickly understand the underlying failure mode the alert is covering. Do not use template variables.| - New flaky tests<br> - High CPU usage on hosts<br> - New Error Tracking issues</br> - Too many opened connections on databases|
-|Description | Provides extra context around the failure mode and also about the impact this mode can have on the system. It should be concise and allow users to understand at a glance whether it is relevant or not for them to create a monitor out of it.| **Title**: Too many opened connections on databases<br> **Description**: Get notified whenever the number of connections to the database is too high. When too many connections are opened, new clients might not be able to open new connections and thus to execute the queries serving end-users.|
+|Title | Allows users to quickly understand the underlying failure mode the alert is covering. The rule for the title is starting with an object and following with a verb. Do not use template variables.| - Pods are failing<br> - Cache usage is high <br> - Error rate is high <br> - Disk space is low|
+|Description | Provides extra context around the failure mode and also about the impact this mode can have on the system. It should be concise and allow users to understand at a glance whether it is relevant or not for them to create a monitor out of it.| **Title**: Unacknowledged Messages are higher than usual<br> **Description**: Unacked messages are those that have been delivered to a consumer but have not been acknowledged as processed or handled. This monitor tracks the ratio of unacked messages to avoid potential bottlenecks which could lead to delays in message processing.|
 |Tags | Set to "integration:<app_id>".| See other available monitor tags [here][8].|
 
 Below is an example of a well-defined monitor:
