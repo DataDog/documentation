@@ -77,13 +77,13 @@ You have 2 options to install the `ddev` CLI.
 
 {{< tabs >}}
 {{% tab "MacOS" %}}
-1. In your browser, download the `.pkg` file: [ddev-{{< sdk-version "integrations-core" >}}.pkg](https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}.pkg)
+1. In your browser, download the `.pkg` file: [ddev-5.2.1.pkg](https://github.com/DataDog/integrations-core/releases/download/ddev-v5.2.1/ddev-5.2.1.pkg)
 2. Run your downloaded file and follow the on-screen instructions.
 3. Restart your terminal.
 4. To verify that the `ddev` command has been added to your `PATH`, run the following command to retrieve the `ddev` version:
    ```shell
    ddev --version
-   {{< sdk-version "integrations-core" >}}
+   5.2.1
    ```
 {{% /tab %}}
 
