@@ -229,6 +229,18 @@
     "request_description": "New dashboards of the dashboard list.",
     "request_schema_description": "Request containing the list of dashboards to update to."
   },
+  "CreateDORADeployment": {
+    "description": "Use this API endpoint to provide data about deployments for DORA metrics.\n\nThis is necessary for:\n- Deployment Frequency\n- Change Lead Time\n- Change Failure Rate",
+    "summary": "Send a deployment event for DORA Metrics",
+    "request_description": "",
+    "request_schema_description": "Request to create a DORA deployment event."
+  },
+  "CreateDORAIncident": {
+    "description": "Use this API endpoint to provide data about incidents for DORA metrics.\n\nThis is necessary for:\n- Change Failure Rate\n- Time to Restore",
+    "summary": "Send an incident event for DORA Metrics",
+    "request_description": "",
+    "request_schema_description": "Request to create a DORA incident event."
+  },
   "ListDowntimes": {
     "description": "Get all scheduled downtimes.",
     "summary": "Get all downtimes"
