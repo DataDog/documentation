@@ -99,7 +99,7 @@ instances:
 ### Monitoring relation metrics for multiple databases
 In order to collect relation metrics (such as `postgresql.seq_scans`, `postgresql.dead_rows`, `postgresql.index_rows_read`, and `postgresql.table_size`), the Agent must be configured to connect to each database (by default, the Agent only connects to the `postgres` database).
 
-Specify a single "DBM" instance to collect DBM telemetry from all databases. Use the `database_autodiscovery` option to avoid specifying each logical database.
+Specify a single "DBM" instance to collect DBM telemetry from all databases. Use the `database_autodiscovery` option to avoid specifying each database name.
 ```yaml
 init_config:
 instances:
