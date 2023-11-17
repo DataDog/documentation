@@ -18,7 +18,7 @@ further_reading:
 
 To modify security signals, you must have the `security_monitoring_signals_write` permission. See [Role Based Access Control][3] for more information about Datadog's default roles and granular role-based access control permissions available for Cloud Security Management.
 
-{{< img src="security/cws/csm_threats_signals.png" alt="CSM Threats security signals page" width="100%">}}
+{{< img src="security/cws/threats_page_2.png" alt="CSM Threats security signals page" width="100%">}}
 
 ## Filter security signals
 

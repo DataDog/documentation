@@ -13,7 +13,7 @@ For example, the CSM Misconfigurations rule ['Block Public Access' feature is en
 
 **Note**: Muting a misconfiguration removes it from the calculation of your posture score.
 
-{{< img src="security/csm/mute_issue.png" alt="The Mute Issue dialog box contains fields for specifying the reason and duration of the mute" style="width:100%;">}}
+{{< img src="security/csm/mute_issue_2.png" alt="The Mute Issue dialog box contains fields for specifying the reason and duration of the mute" style="width:100%;">}}
 
 1. On the misconfiguration, issue, or identity risk side panel, select one or more resources.
 2. Select **Actions** > **Mute for...**.

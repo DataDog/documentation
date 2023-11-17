@@ -169,7 +169,7 @@ You can trigger an existing workflow from the finding, misconfiguration, and res
 
 In the side panel, click **Actions** > **Run Workflow**, and select a workflow to run. Depending on the workflow, you may be required to enter additional input parameters, such as incident details and severity, the name of the impacted S3 bucket, or the Slack channel you want to send an alert to.
 
-{{< img src="/security/csm/run_workflow_side_panel.png" alt="The Actions menu on the misconfigurations side panel showing a list of actions to run" width="100%">}}
+{{< img src="/security/csm/run_workflow_side_panel_2.png" alt="The Actions menu on the misconfigurations side panel showing a list of actions to run" width="100%">}}
 
 After running the workflow, additional information is shown on the side panel. You can click the link to view the workflow.
 
