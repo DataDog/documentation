@@ -33,12 +33,12 @@ Change Failure Rate
 Time to Restore Service
 : How long it takes an organization to recover from a failure in production.
 
-Defining and tracking DORA metrics can help you identify areas of improvement for your team or organization's software delivery speed and quality.
+Defining and tracking DORA metrics can help you identify areas of improvement for your team or organization's speed and quality of software delivery.
 
 ## Set up DORA Metrics
 
 Services tracked for DORA Metrics must be registered in the [Service Catalog][2]. See [Adding Entries to Service catalog][3].
-The owner `team` from the catalog is automatically attached to all metrics.
+The `team` ownership from Service Catalog is automatically associated with all metrics.
 
 ### Deployment frequency
 
@@ -119,13 +119,13 @@ Optional parameters:
 
 ### Lead time for changes
 
-Change lead time, or lead time for changes, is calculated as the time from creation of the first commit to when that commit's deployment is finished.
+Lead time for changes, or change lead time, is calculated as the time from creation of the first commit to when that commit's deployment is finished.
 
-For change lead time to be available, you must send deployment events as described in [deployment frequency](#deployment-frequency) while your repository metadata is being synchronized to Datadog.
+For change lead time to be available, you must [send deployment events](#deployment-frequency) while your repository metadata is being synchronized to Datadog.
 
 The deployment events must include the `repository_url` and `commit_sha` fields.
 
-Change lead time automatically finds new commits included since the previous deployment. The first deployment sent for a service will not have change lead time.
+Change lead time automatically finds new commits included since the previous deployment. Change lead time is not available for the first deployment of a service.
 
 <!--
 The Following tabs were mostly copied from the Source Code Integration docs until we find a way to document this in a shared page
@@ -140,7 +140,6 @@ Datadog doesn't store the actual content of files in your repository, only Git c
 {{% tab "GitHub" %}}
 
 Install Datadog's [GitHub integration][1] on the [GitHub integration tile][2] to allow Datadog to synchronize your repository metadata automatically. When specifying permissions on the integration tile, select at least **Read** permissions for **Contents**.
-
 
 [1]: https://docs.datadoghq.com/integrations/github/
 [2]: https://app.datadoghq.com/integrations/github/
@@ -188,9 +187,9 @@ links:
     url: https://github.com/organization/example-repository/tree/main/src/apps/shopist
 ```
 
-Results in considering for the service `shopist` only the git commits that include changes within `src/apps/shopist/**`.
+DORA Metrics for the service `shopist` consider only the git commits that include changes within `src/apps/shopist/**`.
 
-More fine grained control of the filtering can be configured through `extensions.dora_metrics`.
+More fine-grained control of the filtering can be configured through `extensions.dora_metrics`.
 
 **Example (schema version v2.2):**
 
@@ -202,7 +201,7 @@ extensions:
       - src/libs/utils/**
 ```
 
-Results in considering for the service `shopist` only the git commits that include changes within `src/apps/shopist/**` or `src/libs/utils/**`.
+DORA Metrics for the service `shopist` consider only the git commits that include changes within `src/apps/shopist/**` or `src/libs/utils/**`.
 
 ### Change failure rate
 
@@ -210,7 +209,7 @@ Change failure rate is calculated as the percentage of incident events out of th
 
 Submit deployment events as described in [deployment frequency](#deployment-frequency).
 
-Additionally submit an incident with the [DORA Metrics API][7].
+Additionally, submit an incident with the [DORA Metrics API][7].
 
 You are required to provide the following incident attributes:
 
@@ -263,13 +262,13 @@ Mean time to restore (MTTR) is calculated as the duration distribution for *reso
 
 Follow the steps described in [change failure rate](#change-failure-rate) to send incident events.
 
-Events can be sent both when started and after resolution. The incident is counted as the same incident if the `env`, `service` and `started_at` match.
+Events can be sent both at the start of and after incident resolution. Incident events are matched via `env`, `service`, and `started_at`.
 
 ## Limitations
 
-- Deployment and incident events must be sent as soon as possible. Events older than 1 hour will be rejected.
-- Deployments or incidents of the same service cannot happen at the same second.
-- For [change lead time](#lead-time-for-changes) the retention of git metadata is 1 month. This means commits older that 1 month will not be accounted for.
+- Deployment and incident events must be sent as soon as possible. Events for which the `started_at` timestamp is 1 hour older than the current time are not accepted.
+- Deployments or incidents of the same service cannot occur at the same second.
+- For [change lead time](#lead-time-for-changes), the retention of git metadata is 1 month. Commits older that 1 month are not accounted for.
 
 ## Further Reading
 
