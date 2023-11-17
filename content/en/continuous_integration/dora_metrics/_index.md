@@ -264,6 +264,13 @@ Follow the steps described in [change failure rate](#change-failure-rate) to sen
 
 Events can be sent both at the start of and after incident resolution. Incident events are matched via `env`, `service`, and `started_at`.
 
+## Use DORA Metrics
+
+In the DORA Metrics [page](8), you can visualize your DORA metrics and filter by team, service, repository, environment, and time period.
+
+You can identify improvements or regressions for each metric, as well as visualize and compare trends over time. DORA metrics can be exported to dashboards and alerted on via [metric monitors](9).
+
+
 ## Limitations
 
 - Deployment and incident events must be sent as soon as possible. Events for which the `started_at` timestamp is 1 hour older than the current time are not accepted.
@@ -281,3 +288,5 @@ Events can be sent both at the start of and after incident resolution. Incident 
 [5]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
 [6]: /tracing/service_catalog/adding_metadata
 [7]: /api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
+[8]: https://app.datadoghq.com/ci/dora
+[9]: https://docs.datadoghq.com/monitors/types/metric/?tab=threshold
