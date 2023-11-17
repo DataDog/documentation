@@ -1460,7 +1460,7 @@ main:
     identifier: app_builder_build
     weight: 1
   - name: Authentication
-    url: service_management/app_builder/access/
+    url: service_management/app_builder/auth/
     parent: app_builder
     identifier: app_builder_access
     weight: 2
