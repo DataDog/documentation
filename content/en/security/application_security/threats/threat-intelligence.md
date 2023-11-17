@@ -60,11 +60,11 @@ As seen in the table above, APM requires ASM to display threat intelligence. Als
 
 When viewing the traces in the ASM Traces Explorer, you can see threat intelligence data under the `@appsec` attribute. The `category` and `security_activity` attributes are both set.
 
-{{< img src="security/application_security/threats/threat_intel/threat_intel_appsec.png" alt="Example of the appsec attribute containing threat intelligence data">}}
+{{< img src="security/application_security/threats/threat_intel/threat_intel_appsec_2.png" alt="Example of the appsec attribute containing threat intelligence data">}}
 
 Under `@threat_intel.results` you can always see the full details of what was matched from which source:
 
- {{< img src="security/application_security/threats/threat_intel/threat_intel_generic.png" alt="Example of the threat_intel attribute containing threat intelligence data">}}
+ {{< img src="security/application_security/threats/threat_intel/threat_intel_generic_2.png" alt="Example of the threat_intel attribute containing threat intelligence data">}}
 
 ## Further Reading
 
