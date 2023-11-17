@@ -72,9 +72,9 @@ As In-App WAF rules are toggled between modes, the changes are reflected in near
 
 Manage In-App WAF by navigating to Security --> Application Security --> Configuration --> [In-App WAF][9].
 
-View blocked suspicious requests in the [Trace Explorer][11] by filtering on the facet `Blocked:true`.
+View blocked suspicious requests in the [Trace Explorer][11] by filtering on the facet `@appsec.blocked:true`.
 
-{{< img src="security/application_security/blocked-true.png" alt="ASM Trace Explorer filtered using facet Blocked set to true." style="width:100%;" >}}
+{{< img src="security/application_security/blocked-true-2.png" alt="ASM Trace Explorer filtered using facet Blocked set to true." style="width:100%;" >}}
 
 ### Configure In-App WAF
 
