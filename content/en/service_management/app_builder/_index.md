@@ -8,7 +8,7 @@ further_reading:
   text: "Actions Catalog"
 ---
 
-{{< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" custom_class="sign-up-trigger" btn_hidden="false" header="Join the Beta!">}}
+{{< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" d_toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger" btn_hidden="false" header="Join the Beta!">}}
 Datadog App Builder is in private beta. Complete the form to request access.
 {{< /callout >}}
 
@@ -19,6 +19,8 @@ Datadog App Builder is a low-code application building platform that streamlines
 ## Configure App Builder actions
 
 Datadog App Builder provides an [Action Catalog][1] of over 300 actions across several integrations. The Action Catalog and the connection credentials for each integration are shared with [Datadog Workflow Automation][2]. If there isn't an integration that accomplishes your task, generic actions such as the HTTP request and JavaScript function allow you to perform any task your app requires.
+
+{{< img src="/service_management/app_builder/app-builder-actions.png" alt="Datadog App Builder provides an Action Catalog of over 300 actions across several integrations." style="width:100%;" >}}
 
 ## Start with blueprints
 
@@ -32,6 +34,8 @@ Below are a few examples of apps you can build:
 - Use a PagerDuty integration to see who is on-call for each team in an organization.
 - Summarize the progress of each PR in a given repo.
 
+{{< img src="/service_management/app_builder/app-builder-blueprints.png" alt="App blueprints" style="width:100%;" >}}
+
 ## Get started faster with Bits AI
 
 Ask Bits AI to create an app for you! You can query Bits AI in the Datadog web app, the Datadog mobile app, or in Slack.
@@ -41,6 +45,8 @@ Bits AI is in private beta. To sign up or find out more, see [Bits AI][1].
 ## Take action directly from dashboards
 
 Use your apps from the Apps page, or access them independently from dashboards. Datadog Apps function as native dashboard integrations, allowing you to customize and take action on your data straight from your Dashboard.
+
+{{< img src="/service_management/app_builder/app-builder-embedded-dashboard.png" alt="An app embedded in a dashboard" style="width:100%;" >}}
 
 ## Further reading
 
