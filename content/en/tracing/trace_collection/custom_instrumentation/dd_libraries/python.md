@@ -6,6 +6,7 @@ aliases:
     - /tracing/manual_instrumentation/python
     - /tracing/custom_instrumentation/python
     - /tracing/setup_overview/custom_instrumentation/python
+    - /tracing/trace_collection/custom_instrumentation/python
 description: 'Manually instrument your Python application to send custom traces to Datadog.'
 code_lang: python
 type: multi-code-lang

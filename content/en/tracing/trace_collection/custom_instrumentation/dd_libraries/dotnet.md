@@ -9,6 +9,7 @@ aliases:
     - /tracing/manual_instrumentation/dotnet
     - /tracing/custom_instrumentation/dotnet
     - /tracing/setup_overview/custom_instrumentation/dotnet
+    - /tracing/trace_collection/custom_instrumentation/dotnet
 description: 'Manually instrument your .NET application to send custom traces to Datadog.'
 further_reading:
     - link: 'tracing/guide/instrument_custom_method'

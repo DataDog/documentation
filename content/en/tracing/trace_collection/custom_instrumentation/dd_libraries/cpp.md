@@ -5,6 +5,7 @@ aliases:
     - /tracing/manual_instrumentation/cpp
     - /tracing/custom_instrumentation/cpp
     - /tracing/setup_overview/custom_instrumentation/cpp
+    - /tracing/trace_collection/custom_instrumentation/cpp
 description: 'Manually instrument your C++ application to send custom traces to Datadog.'
 code_lang: cpp
 type: multi-code-lang

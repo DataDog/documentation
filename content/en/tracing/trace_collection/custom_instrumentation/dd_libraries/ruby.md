@@ -6,6 +6,7 @@ aliases:
     - /tracing/manual_instrumentation/ruby
     - /tracing/custom_instrumentation/ruby
     - /tracing/setup_overview/custom_instrumentation/ruby
+    - /tracing/trace_collection/custom_instrumentation/ruby
 description: 'Manually instrument your Ruby application to send custom traces to Datadog.'
 code_lang: ruby
 type: multi-code-lang
