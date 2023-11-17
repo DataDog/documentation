@@ -3063,6 +3063,11 @@ components:
           description: The SECL expression of the Agent rule.
           example: exec.file.name == \"sh\"
           type: string
+        filters:
+          description: The platforms the Agent rule is supported on.
+          items:
+            type: string
+          type: array
         name:
           description: The name of the Agent rule.
           example: my_agent_rule
