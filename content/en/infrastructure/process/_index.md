@@ -134,7 +134,7 @@ For example:
     "containerDefinitions": [
         {
             "name": "datadog-agent",
-            "image": "public.ecr.aws/datadog/agent",
+            "image": "public.ecr.aws/datadog/agent:latest",
             ...
             "environment": [
                 {
