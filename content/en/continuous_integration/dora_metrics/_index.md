@@ -62,8 +62,9 @@ You can optionally add the following deployment attributes:
 
 See the [API docs][1] for the full spec and more examples with the API SDKs.
 
+For the following example, replace `<DD_SITE>` in the URL with {{< region-param key="dd_site" >}}:
 ```bash
-  curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/dora/deployment" \
+  curl -X POST "https://api.<DD_SITE>/api/v2/dora/deployment" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "DD-API-KEY: ${DD_API_KEY}" \
@@ -92,9 +93,10 @@ EOF
 
 The [`datadog-ci`][1] CLI tool provides a shortcut to send the deployments within CI.
 
+For the following example, set the `DD_SITE` env var to {{< region-param key="dd_site" >}}:
 ```bash
 export DD_BETA_COMMANDS_ENABLED=1
-export DD_SITE={{< region-param key="dd_site" >}}
+export DD_SITE="DD_SITE"
 export DD_API_KEY="api-key"
 
 export deploy_start=`date +%s`
