@@ -34,8 +34,8 @@ instances:
     [...]
 ```
 
-### Monitoring multiple logical databases
-Use the `database_autodiscovery` option to permit the Agent to discover all logical databases on your host to monitor. You can specify `include` or `exclude` fields to narrow the scope of databases discovered. See the sample [postgres.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example) for more details
+### Monitoring multiple databases on a database host
+Use the `database_autodiscovery` option to permit the Agent to discover all databases on your host to monitor. You can specify `include` or `exclude` fields to narrow the scope of databases discovered. See the sample [postgres.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example) for more details
 ```yaml
 init_config:
 instances:
@@ -49,8 +49,8 @@ instances:
       # Optionally, set the include field to specify
       # a set of databases you are interested in discovering
       include:
-        - foo.*
-        - bar-db.*
+        - mydb.*
+        - example.*
     tags:
       - 'env:prod'
       - 'team:team-discovery'
@@ -96,8 +96,8 @@ instances:
         - 'table:employees'
 ```
 
-### Monitoring relation metrics for multiple logical databases
-In order to collect relation metrics (such as `postgresql.seq_scans`, `postgresql.dead_rows`, `postgresql.index_rows_read`, and `postgresql.table_size`), the Agent must be configured to connect to each logical database (by default, the Agent only connects to the `postgres` database).
+### Monitoring relation metrics for multiple databases
+In order to collect relation metrics (such as `postgresql.seq_scans`, `postgresql.dead_rows`, `postgresql.index_rows_read`, and `postgresql.table_size`), the Agent must be configured to connect to each database (by default, the Agent only connects to the `postgres` database).
 
 Specify a single "DBM" instance to collect DBM telemetry from all databases. Use the `database_autodiscovery` option to avoid specifying each logical database.
 ```yaml
