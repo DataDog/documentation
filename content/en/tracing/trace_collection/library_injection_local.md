@@ -327,7 +327,7 @@ When an app that is written in a supported language is launched, it is automatic
 
 ## Configure the injection
 
-Configure host injection in one the following ways:
+Configure host injection in one of the following ways:
 - Set environment variables on the process being launched.
 - Specify host injection configuration in the `/etc/datadog-agent/inject/host_config.yaml` file.
 
