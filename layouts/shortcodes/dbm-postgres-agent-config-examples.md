@@ -35,7 +35,7 @@ instances:
 ```
 
 ### Monitoring multiple databases on a database host
-Use the `database_autodiscovery` option to permit the Agent to discover all databases on your host to monitor. You can specify `include` or `exclude` fields to narrow the scope of databases discovered. See the sample [postgres.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example) for more details
+Use the `database_autodiscovery` option to permit the Agent to discover all databases on your host to monitor. You can specify `include` or `exclude` fields to narrow the scope of databases discovered. See the sample [postgres.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example) for more details.
 ```yaml
 init_config:
 instances:
