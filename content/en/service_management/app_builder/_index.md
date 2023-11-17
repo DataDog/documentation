@@ -8,8 +8,8 @@ further_reading:
   text: "Actions Catalog"
 ---
 
-{{< callout btn_hidden="true" header="false">}}
-Datadog App Builder is in private beta.
+{{< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" custom_class="sign-up-trigger" btn_hidden="false" header="Join the Beta!">}}
+Datadog App Builder is in private beta. Complete the form to request access.
 {{< /callout >}}
 
 Datadog App Builder is a low-code application building platform that streamlines the development of your internal tools with a user-friendly drag-and-drop interface and built-in support for JavaScript. App Builder makes use of integrations with popular services such as AWS and GitHub, allowing you to leverage data and seamlessly connect with external APIs and data stores. By integrating with Datadog's existing capabilities, App Builder provides a centralized context, empowering you to take preventive actions or respond to ongoing incidents, all within the same view you use for troubleshooting.

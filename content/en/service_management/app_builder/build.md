@@ -10,6 +10,10 @@ further_reading:
   text: "Actions Catalog"
 ---
 
+{{< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" custom_class="sign-up-trigger" btn_hidden="false" header="Join the Beta!">}}
+Datadog App Builder is in private beta. Complete the form to request access.
+{{< /callout >}}
+
 You can create an app or edit existing apps from the App Builder [Explore][1] tab. The **Explore** tab lists information about existing apps, including the author, status, the dates that each app was last modified, and whether the app is published or not.
 - Hover over an app for the options to edit, delete, view or clone the app.
 - Toggle **My apps** if you want to see only apps that you created.
