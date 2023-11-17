@@ -4303,6 +4303,178 @@ components:
           nullable: true
           type: string
       type: object
+    DORADeploymentRequest:
+      description: Request to create a DORA deployment event.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORADeploymentRequestData'
+      required:
+      - data
+      type: object
+    DORADeploymentRequestAttributes:
+      description: Attributes to create a DORA deployment event.
+      properties:
+        finished_at:
+          description: Unix timestamp in nanoseconds when the deployment finished.
+            It should not be older than 3 hours.
+          example: 1693491984000000000
+          format: int64
+          type: integer
+        git:
+          $ref: '#/components/schemas/DORAGitInfo'
+        id:
+          description: Deployment ID.
+          type: string
+        service:
+          description: Service name from a service available in the Service Catalog.
+          example: shopist
+          type: string
+        started_at:
+          description: Unix timestamp in nanoseconds when the deployment started.
+          example: 1693491974000000000
+          format: int64
+          type: integer
+        version:
+          description: Version to correlate with [APM Deployment Tracking](https://docs.datadoghq.com/tracing/services/deployment_tracking/).
+          example: v1.12.07
+          type: string
+      required:
+      - service
+      - started_at
+      - finished_at
+      type: object
+    DORADeploymentRequestData:
+      description: The JSON:API data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DORADeploymentRequestAttributes'
+      required:
+      - attributes
+      type: object
+    DORADeploymentResponse:
+      description: Response after receiving a DORA deployment event.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORADeploymentResponseData'
+      required:
+      - data
+      type: object
+    DORADeploymentResponseData:
+      description: The JSON:API data.
+      properties:
+        id:
+          description: The ID of the received DORA deployment event.
+          example: 4242fcdd31586083
+          type: string
+        type:
+          $ref: '#/components/schemas/DORADeploymentType'
+      required:
+      - id
+      type: object
+    DORADeploymentType:
+      default: dora_deployment
+      description: JSON:API type for DORA deployment events.
+      enum:
+      - dora_deployment
+      example: dora_deployment
+      type: string
+      x-enum-varnames:
+      - DORA_DEPLOYMENT
+    DORAGitInfo:
+      description: Git info for DORA Metrics events.
+      properties:
+        commit_sha:
+          $ref: '#/components/schemas/GitCommitSHA'
+        repository_url:
+          $ref: '#/components/schemas/GitRepositoryURL'
+      required:
+      - repository_url
+      - commit_sha
+      type: object
+    DORAIncidentRequest:
+      description: Request to create a DORA incident event.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORAIncidentRequestData'
+      required:
+      - data
+      type: object
+    DORAIncidentRequestAttributes:
+      description: Attributes to create a DORA incident event.
+      properties:
+        finished_at:
+          description: Unix timestamp in nanoseconds when the deployment finished.
+            It should not be older than 3 hours.
+          example: 1693491984000000000
+          format: int64
+          type: integer
+        git:
+          $ref: '#/components/schemas/DORAGitInfo'
+        id:
+          description: Incident ID
+          type: string
+        name:
+          description: Incident name.
+          example: Webserver is down failing all requests
+          type: string
+        service:
+          description: Service name from a service available in the Service Catalog.
+          example: shopist
+          type: string
+        severity:
+          description: Incident severity.
+          example: High
+          type: string
+        started_at:
+          description: Unix timestamp in nanoseconds when the deployment started.
+          example: 1693491974000000000
+          format: int64
+          type: integer
+        version:
+          description: Version to correlate with [APM Deployment Tracking](https://docs.datadoghq.com/tracing/services/deployment_tracking/).
+          example: v1.12.07
+          type: string
+      required:
+      - service
+      - started_at
+      type: object
+    DORAIncidentRequestData:
+      description: The JSON:API data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DORAIncidentRequestAttributes'
+      required:
+      - attributes
+      type: object
+    DORAIncidentResponse:
+      description: Response after receiving a DORA incident event.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORAIncidentResponseData'
+      required:
+      - data
+      type: object
+    DORAIncidentResponseData:
+      description: Response after receiving a DORA incident event.
+      properties:
+        id:
+          description: The ID of the received DORA incident event.
+          example: 4242fcdd31586083
+          type: string
+        type:
+          $ref: '#/components/schemas/DORAIncidentType'
+      required:
+      - id
+      type: object
+    DORAIncidentType:
+      default: dora_incident
+      description: JSON:API type for DORA incident events.
+      enum:
+      - dora_incident
+      example: dora_incident
+      type: string
+      x-enum-varnames:
+      - DORA_INCIDENT
     DashboardListAddItemsRequest:
       description: Request containing a list of dashboards to add.
       properties:
@@ -6296,6 +6468,15 @@ components:
       - _HANDLE
       - EMAIL
       - _EMAIL
+    GitCommitSHA:
+      description: Git Commit SHA.
+      example: 66adc9350f2cc9b250b69abddab733dd55e1a588
+      pattern: ^[a-fA-F0-9]{40,}$
+      type: string
+    GitRepositoryURL:
+      description: Git Repository URL
+      example: https://github.com/organization/example-repository
+      type: string
     GroupScalarColumn:
       description: A column containing the tag keys and values in a group.
       properties:
@@ -21959,6 +22140,116 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/dora/deployment:
+    post:
+      description: 'Use this API endpoint to provide data about deployments for DORA
+        metrics.
+
+
+        This is necessary for:
+
+        - Deployment Frequency
+
+        - Change Lead Time
+
+        - Change Failure Rate'
+      operationId: CreateDORADeployment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DORADeploymentRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORADeploymentResponse'
+          description: OK
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORADeploymentResponse'
+          description: OK - but delayed due to incident
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      summary: Send a deployment event for DORA Metrics
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in private beta for CI Pipeline Visibility
+        customers.
+
+        If you want to request access, complete the [form](https://forms.gle/Eqq6uXfGjYxmqpjDA).'
+  /api/v2/dora/incident:
+    post:
+      description: 'Use this API endpoint to provide data about incidents for DORA
+        metrics.
+
+
+        This is necessary for:
+
+        - Change Failure Rate
+
+        - Time to Restore'
+      operationId: CreateDORAIncident
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DORAIncidentRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAIncidentResponse'
+          description: OK
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAIncidentResponse'
+          description: OK - but delayed due to incident
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      summary: Send an incident event for DORA Metrics
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in private beta for CI Pipeline Visibility
+        customers.
+
+        If you want to request access, complete the [form](https://forms.gle/Eqq6uXfGjYxmqpjDA).'
   /api/v2/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -33221,6 +33512,8 @@ tags:
   name: Container Images
 - description: The Containers API allows you to query container data for your organization.
   name: Containers
+- description: Send events for DORA Metrics to measure and improve software delivery.
+  name: DORA Metrics
 - description: 'Interact with your dashboard lists through the API to
 
     organize, find, and share all of your dashboards with your team and

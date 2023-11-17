@@ -9154,6 +9154,36 @@ api:
       unstable:
         - v2
       order: 1
+  - name: DORA Metrics
+    url: /api/latest/dora-metrics/
+    identifier: dora-metrics
+    generated: true
+  - name: Send an incident event for DORA Metrics
+    url: '#send-an-incident-event-for-dora-metrics'
+    identifier: dora-metrics-send-an-incident-event-for-dora-metrics
+    parent: dora-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateDORAIncident
+      unstable:
+        - v2
+      order: 4
+  - name: Send a deployment event for DORA Metrics
+    url: '#send-a-deployment-event-for-dora-metrics'
+    identifier: dora-metrics-send-a-deployment-event-for-dora-metrics
+    parent: dora-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateDORADeployment
+      unstable:
+        - v2
+      order: 4
   - name: Fastly Integration
     url: /api/latest/fastly-integration/
     identifier: fastly-integration
