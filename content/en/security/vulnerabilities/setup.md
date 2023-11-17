@@ -8,6 +8,7 @@ further_reading:
 aliases:
   - /security/infrastructure_vulnerability/setup/
   - /security/infrastructure_vulnerabilities/setup/
+  - /security/cloud_security_management/setup/csm_enterprise/?tab=aws#configure-the-agent-for-vulnerabilities
 ---
 
 {{< site-region region="gov" >}}
