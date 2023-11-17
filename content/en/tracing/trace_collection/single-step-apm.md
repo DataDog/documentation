@@ -76,7 +76,7 @@ For a Docker Linux container:
 
 {{% tab "Kubernetes" %}}
 
-You can enable APM when installing the Agent with the Datadog Helm chart. Use the Datadog Helm chart to install the Datadog Agent on all nodes in your cluster with a DaemonSet.
+You can enable APM by installing the Agent with the Datadog Helm chart. This deploys the Datadog Agent across all nodes in your Linux-based Kubernetes cluster with a DaemonSet.
 
 ### Requirements
 
@@ -131,7 +131,7 @@ To enable single step instrumentation with Helm:
 
 ### Enabling or disabling instrumentation for namespaces
 
-You can choose to selectively instrument or to not instrument specific namespaces.
+You can choose to selectively instrument specific namespaces or choose to not instrument them.
 
 To enable instrumentation for specific namespaces, add the `enabledNamespaces` configuration to your `datadog-values.yaml` file:
 \{{< highlight yaml "hl_lines=6-8" >}}
@@ -146,7 +146,6 @@ To enable instrumentation for specific namespaces, add the `enabledNamespaces` c
  {{< /highlight >}}
 
 To disable instrumentation for specific namespaces, add the `disabledNamespaces` configuration to your `datadog-values.yaml` file:
-
 {{< highlight yaml "hl_lines=6-8" >}}
    datadog:
      apiKeyExistingSecret: datadog-secret
@@ -162,8 +161,7 @@ To disable instrumentation for specific namespaces, add the `disabledNamespaces`
 
 You can optionally set specific tracing library versions to use. If you don't set a specific version, it defaults to the latest version.
 
-Add the following configuration to your `datadog-values.yaml` file:
-
+To set specific tracing library versions, add the following configuration to your `datadog-values.yaml` file:
 {{< highlight yaml "hl_lines=6-11" >}}
    datadog:
      apiKeyExistingSecret: datadog-secret
