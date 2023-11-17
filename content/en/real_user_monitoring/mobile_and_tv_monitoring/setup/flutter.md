@@ -48,7 +48,7 @@ First, ensure that you have your environment set up properly for each platform.
 Datadog supports Flutter Monitoring for iOS and Android for Flutter 3.0+.
 </div>
 
-We do not officially support Flutter Web, though our current Flutter SDK for mobile apps allows you to achieve some out of the box monitoring. Here are known limitations:
+Datadog does not officially support Flutter Web, but the current Flutter SDK for mobile apps allows you to achieve some out-of-the-box monitoring. Here are known limitations:
   * All Actions reported from Flutter are labeled with type `custom`.
   * Long running actions (`startAction` / `stopAction`) are not supported.
   * Manually reporting RUM resources (`startResource` / `stopResource`) is not supported.
@@ -57,7 +57,7 @@ We do not officially support Flutter Web, though our current Flutter SDK for mob
   * `addUserExtraInfo` is not supported.
   * `stopSession` is not supported.
 
-We are not actively working on supporting Flutter web, but we are often re-evaluating our priorities based on your feedback. If you have a Flutter Web app and would want to use Datadog RUM to monitor its performance, please reach out to your customer support team and escalate this feature request.
+No Flutter Web support is planned, but Datadog's priorities are often re-evaluated based on your feedback. If you have a Flutter Web app and would want to use Datadog RUM to monitor its performance, reach out to your customer support team and escalate this feature request.
 
 #### iOS
 
