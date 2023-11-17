@@ -118,7 +118,26 @@ datadog:
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
+{{% tab "ECS Fargate" %}}
 
+In order to collect processes, the Datadog Agent must be running as a container within the Task.
+
+To collect process information in ECS Fargate, add the `PidMode` term to the Task Definition and set it as follows:
+
+```text
+"pidMode": "task"
+```
+
+Once enabled, use the `AWS Fargate` Containers facet on the [Live Processes page][1] to filter processes by ECS or EKS, or enter `fargate:ecs` or `fargate:eks` in the search query.
+
+{{< img src="infrastructure/process/fargate_ecs.png" alt="Processes in AWS Fargate" >}}
+
+For more information about using Amazon ECS on AWS Fargate, see the [ECS Fargate integration documentation][2].
+
+[1]: https://app.datadoghq.com/process
+[2]: /integrations/ecs_fargate/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### I/O stats
