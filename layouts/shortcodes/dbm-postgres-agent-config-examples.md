@@ -112,6 +112,9 @@ instances:
     password: '<PASSWORD>'
     database_autodiscovery:
       enabled: true
+      exclude:
+        - users$
+        - inventory$
     relations:
       - relation_regex: .*
   # This instance only collects data from the `users` database
