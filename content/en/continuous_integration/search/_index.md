@@ -137,7 +137,7 @@ Hovering over the commit author avatar shows detailed information about the late
 
 #### Test regressions
 
-Test regressions are evaluated per commit in an effort to tie performance regressions to specific code changes.
+[Test regressions][106] are evaluated per commit in an effort to tie performance regressions to specific code changes.
 
 #### Investigate for more details
 

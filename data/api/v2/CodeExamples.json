@@ -138,6 +138,20 @@
       "description": "Update Confluent account returns \"OK\" response"
     }
   ],
+  "CreateDORADeployment": [
+    {
+      "group": "dora_metrics",
+      "suffix": "",
+      "description": "Send a deployment event for DORA Metrics returns \"OK\" response"
+    }
+  ],
+  "CreateDORAIncident": [
+    {
+      "group": "dora_metrics",
+      "suffix": "",
+      "description": "Send an incident event for DORA Metrics returns \"OK\" response"
+    }
+  ],
   "CreateDashboardListItems": [
     {
       "group": "dashboard_lists",
