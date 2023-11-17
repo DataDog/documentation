@@ -28,9 +28,7 @@ Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you proact
 ## Explore vulnerabilities
 The [Vulnerability Explorer][1] shows a complete list of vulnerabilities detected across your infrastructure, ordering them based on their severity, offering grouping, filtering, and triaging capabilities so you can investigate, assign, and remediate problems.
 
-Add screenshot of different grouping and triaging functionality(WIP)
-
-{{< img src="security/vulnerabilities/CSM_Vulnerabilities.png" alt="The CSM Vulnerability page sorting by unique vulnerabilities" width="100%">}}
+{{< img src="security/vulnerabilities/CSM_Vulnerabilities_3.png" alt="The CSM Vulnerability page sorting by unique vulnerabilities" width="100%">}}
 
 Select a specific vulnerability to see its details, including which containers and hosts are affected, severity breakdown score, and recommended remediation steps.
 The severity of a vulnerability is modified from the base score to take into account the following:
@@ -39,9 +37,7 @@ The severity of a vulnerability is modified from the base score to take into acc
 - The environment in which the underlying infrastructure is running. For example, if the environment is not production, the severity is downgraded.
 - Whether there is an active exploit for a given vulnerability from sources such as [CISA KEV catalog][9].
 
-Add screenshot of Severity Breakdown of a vulnerability that we downgraded from Critical to High
-
-{{< img src="security/vulnerabilities/container_vulnerability_2.png" alt="Details of a specific vulnerability, highlighting next steps and severity breakdown" width="100%">}}
+{{< img src="security/vulnerabilities/container_vulnerability_3.png" alt="Details of a specific vulnerability, highlighting next steps and severity breakdown" width="100%">}}
 
 You can also view vulnerabilities in your container images on the [container images][2] page. Observe the number of vulnerabilities that exist in your container images. Additionally sort by **source**, **image tag**, **repo digest**, and more. View additional details about any vulnerability by clicking the container image and reviewing the **Vulnerabilities** tab.
 
@@ -59,7 +55,6 @@ The [Vulnerability Explorer][1] also offers triaging options for detected vulner
 
 **Note**: To help you focus on the vulnerabilities that truly matter, vulnerabilities are auto-closed for infrastructure that is either no longer running, or contains the remediated fixed version of the previously-vulnerable package.
 
-Update screenshot for triaging (WIP) and auto-closed 
 {{< img src="security/vulnerabilities/CSM_vulnerabilities_assign_team.png" alt="Details explorer of a specific vulnerability highlighting the ability to assign a team member" width="100%">}}
 
 
