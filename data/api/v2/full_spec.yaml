@@ -12120,7 +12120,7 @@ components:
       description: Powerpack relationship object.
       properties:
         author:
-          $ref: '#/components/schemas/Creator'
+          $ref: '#/components/schemas/RelationshipToUser'
       type: object
     PowerpackResponse:
       description: Response object which includes a single powerpack configuration.
@@ -12192,6 +12192,7 @@ components:
         last_offset:
           description: The last offset.
           format: int64
+          nullable: true
           type: integer
         limit:
           description: Pagination limit.
