@@ -150,7 +150,7 @@ For example:
                 {
                     "name": "DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED",
                     "value": "true"
-                },
+                }
                 ...
              ]
          ...
