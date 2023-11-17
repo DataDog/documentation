@@ -24,7 +24,7 @@ For an Ubuntu host:
 1. Run the one-line install command:
 
    ```shell
-   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)”
+   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
    ```
 
    Replace `<YOUR_DD_API_KEY>` with your [Datadog API][4].
@@ -78,53 +78,46 @@ For a Docker Linux container:
 
 You can enable APM when installing the Agent with the Datadog Helm chart. Use the Datadog Helm chart to install the Datadog Agent on all nodes in your cluster with a DaemonSet.
 
-### Prerequisites
+### Requirements
 
-- [Helm][13]
-- If this is a fresh install, add the Helm Datadog repo:
-    ```bash
-    helm repo add datadog https://helm.datadoghq.com
-    helm repo update
-    ```
+- Make sure you have [Helm][13] installed.
 
 ### Installation
 
 To enable single step instrumentation with Helm:
 
-1. Create an empty `datadog-values.yaml` file. Any parameters not specified in this file default to those set in [`values.yaml`][14].
-2. Create a Kubernetes Secret to store your Datadog [API key][10] and [app key][11]:
-   
+1. Add the Helm Datadog repo:
    ```bash
-   kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY --from-literal app-key=$DD_APP_KEY
+    helm repo add datadog https://helm.datadoghq.com
+    helm repo update
+    ```
+2. Create a Kubernetes secret to store your Datadog [API key][10]:
+   ```bash
+   kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
    ```
-3. Set the following parameters in your `datadog-values.yaml` to reference the secret and enable single step instrumentation:
+3. Create `datadog-values.yaml` and add the following configuration:
    ```
    datadog:
     apiKeyExistingSecret: datadog-secret
-    appKeyExistingSecret: datadog-secret
     site: <DATADOG_SITE>
     apm:
       instrumentation:
-         enabled: true
    ```
-   Replace `<DATADOG_SITE>` with your [Datadog site][12]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
+   Replace `<DATADOG_SITE>` with your [Datadog site][12]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the this page.)
+
+   <div class="alert alert-info">
+      Here you can also optionally configure the following:
+      <ul>
+         <li><a href="#enabling-or-disabling-instrumentation-for-namespaces">Enabling or disabling instrumentation for namespaces.</a></li>
+         <li><a href="#specifying-tracing-library-versions">Specifying tracing library versions.</a></li>
+         <li><a href="#tagging-observability-data-by-environment">Tagging observability data by environment.</a></li>
+      </ul>
+   </div>
+
+
 4. Run the following command:
    ```bash
-   helm install <RELEASE_NAME> \
-    -f datadog-values.yaml \
-    --set targetSystem=<TARGET_SYSTEM> \
-    datadog/datadog
-   ```
-
-- `<RELEASE_NAME>`: Your release name. For example, `datadog-agent`.
-- `<TARGET_SYSTEM>`: The name of your OS. For example, `linux` or `windows`.
-
-**Note**: If you are using Helm `2.x`, run the following:
-   ```bash
-   helm install --name <RELEASE_NAME> \
-    -f datadog-values.yaml \
-    --set targetSystem=<TARGET_SYSTEM> \
-    datadog/datadog
+   helm install datadog-agent -f datadog-values.yaml --set datadog.apiKeyExistingSecret=datadog-secret datadog/datadog
    ```
 
 [7]: https://v3.helm.sh/docs/intro/install/
@@ -136,83 +129,55 @@ To enable single step instrumentation with Helm:
 [13]: https://v3.helm.sh/docs/intro/install/
 [14]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 
-### Enabling or disabling namespaces
+### Enabling or disabling instrumentation for namespaces
 
 You can choose to selectively instrument or to not instrument specific namespaces.
 
-To enable instrumentation for specific namespaces:
-
-1. Add the `enabledNamespaces` configuration to your `datadog-values.yaml` file:
-   ```yaml
+To enable instrumentation for specific namespaces, add the `enabledNamespaces` configuration to your `datadog-values.yaml` file:
+\{{< highlight yaml "hl_lines=6-8" >}}
       datadog:
         apiKeyExistingSecret: datadog-secret
-        appKeyExistingSecret: datadog-secret
         site: <DATADOG_SITE>
         apm:
           instrumentation:
-            enabled: true
             enabledNamespaces: # Add namespaces to instrument
                - default
                - applications
-   ```
+ {{< /highlight >}}
 
-2. Run the following command:
-   ```bash
-   helm upgrade <RELEASE_NAME> \
-    -f datadog-values.yaml \
-    datadog/datadog
-   ```
+To disable instrumentation for specific namespaces, add the `disabledNamespaces` configuration to your `datadog-values.yaml` file:
 
-To disable instrumentation for specific namespaces:
-
-1. Add the `disabledNamespaces` configuration to your `datadog-values.yaml` file:
-   ```yaml
+{{< highlight yaml "hl_lines=6-8" >}}
    datadog:
      apiKeyExistingSecret: datadog-secret
-     appKeyExistingSecret: datadog-secret
      site: <DATADOG_SITE>
      apm:
        instrumentation:
-         enabled: true
          disabledNamespaces: # Add namespaces to not instrument
             - default
             - applications
-   ```
-
-2. Run the following command:
-   ```bash
-   helm upgrade <RELEASE_NAME> \
-    -f datadog-values.yaml \
-    datadog/datadog
-   ```
+{{< /highlight >}}
 
 ### Specifying tracing library versions
 
 You can optionally set specific tracing library versions to use. If you don't set a specific version, it defaults to the latest version.
 
-1. Add the following configuration to your `datadog-values.yaml` file:
-   ```yaml
+Add the following configuration to your `datadog-values.yaml` file:
+
+{{< highlight yaml "hl_lines=6-11" >}}
    datadog:
      apiKeyExistingSecret: datadog-secret
-     appKeyExistingSecret: datadog-secret
      site: <DATADOG_SITE>
      apm:
        instrumentation:
-       enabled: true
-       libVersions: # Add any versions you want to set
-            dotnet: v2.40.0
-            python: v1.20.6
-            java: v1.22.0
-            js: v4.17.0
-            ruby: v1.15.0 
-   ```
+         libVersions: # Add any versions you want to set
+               dotnet: v2.40.0
+               python: v1.20.6
+               java: v1.22.0
+               js: v4.17.0
+               ruby: v1.15.0 
+{{< /highlight >}}
 
-2. Run the following command:
-   ```bash
-   helm upgrade <RELEASE_NAME> \
-    -f datadog-values.yaml \
-    datadog/datadog
-   ```
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -260,17 +225,17 @@ Run the following commands and restart the service to stop injecting the library
 
 {{% tab "Kubernetes" %}}
 
-1. Go to the configuration file for the Kubernetes service you want to disable instrumentation for.
-2. Add the `admission.datadoghq.com/enabled=false` annotation to the file:
+1. Add the `admission.datadoghq.com/enabled=false` label to the pod spec:
    ```yaml
    metadata:
       annotations:
          admission.datadoghq.com/enabled: "false"
    ```
-3. Update the service:
+2. Apply the configuration:
    ```bash
-   kubectl apply -f /path/to/your/service.yaml
+   kubectl apply -f /path/to/your/deployment.yaml
    ```
+3. Restart the services you want to remove instrumentation for.
 
 {{% /tab %}}
 
@@ -307,20 +272,14 @@ To stop producing traces, remove library injectors and restart the infrastructur
 
 {{% tab "Kubernetes" %}}
 
-1. Update the following configuration in `datadog-values.yaml`:
-   ```yaml
-   datadog:  
-     apm:
-       instrumentation:
-         enabled: false # Set to false to disable instrumentation
-   ```
-
+1. Remove `instrumentation:` and all following configuration in `datadog-values.yaml`.
 2. Run the following command:
    ```bash
    helm upgrade <RELEASE_NAME> \
     -f datadog-values.yaml \
     datadog/datadog
    ```
+3. Restart your services.
 
 {{% /tab %}}
 
