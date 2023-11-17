@@ -61,11 +61,11 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 To enable CSM on the Agent, navigate to the [**Cloud Security Management Setup** page][5] and click **Hosts and containers**.
 
-{{< img src="security/csm/hosts_containers_setup.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
+{{< img src="security/csm/hosts_containers_setup_2.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
 
 For each version of the Agent that is installed, click **Enable** and follow the step-by-step instructions.
 
-Alternatively, use the following examples to enable CSM Enterprise for threats:
+Alternatively, use the following examples to enable CSM Enterprise:
 
 ### Configure the Agent for Threats and Misconfigurations
 
