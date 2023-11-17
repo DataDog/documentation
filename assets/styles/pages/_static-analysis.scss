@@ -32,9 +32,13 @@
                                 position: relative;
                                 top: -1px
                             }
-                            i.icon-close-light_x {
-                                display: inherit;
-                                color: $brand-primary
+                            .close-light-wrapper{
+                                position: relative;
+                                top: 2px;
+                                i.icon-close-light_x {
+                                    display: inherit;
+                                    color: $brand-primary
+                                }
                             }
                         }
                         .all {
@@ -61,14 +65,16 @@
                         grid-template-columns: repeat(3, 1fr);
                         align-items: center;
 
-                        i.icon-cancel-circle {
+                        .cancel-circle-wrapper {
                             display: inherit;
                             position: relative;
-                            top: 1px;
-                            color: $brand-primary;
+                            top: 3px;
                             grid-column: 2/span 1;
+                            i.icon-cancel-circle {
+                                color: $brand-primary;
+                            }
                         }
-                        span {
+                        .chevron-wrapper {
                             top: -1px;
                             grid-column: 3/span 1;
                             padding: 0 8px 
@@ -89,10 +95,11 @@
                         input {
                             width: 16px;
                             height: 16px;
+                            cursor: pointer
                         }
                         label {
-                            position: relative;
-                            top: -1px
+                            column-gap: 8px;
+                            cursor: pointer
                         }
                     }
                 }

@@ -33,7 +33,7 @@
         filteredRulesets: new Set(),
         updateFilterValue (filter, value) {
             // Setter on filter
-            this.filterValue[filter] = value
+            this.filterValue[filter].push(value)
         },
         resetFilteredRulesets () {
             // Setter on filter
@@ -55,35 +55,45 @@
             // Compares search values and filter values against ruleset info (dataSet)
 
             const datasetArr = dataSet.split(';')
-            const filterValues = Object.values(this.filterValue)
+            const filterValues = Object.values(this.filterValue).flat()
             const searchValues = this.searchValue.split(' ')
-
-            const containsFilteredValue = filterValues.every(value => datasetArr[0].toLowerCase().includes(value)) // checks every filter attrs matches selected filters
+            const containsFilteredValue = filterValues.every(value => datasetArr[0].toLowerCase().includes(value.toLowerCase())) // checks every filter attrs matches selected filters
             const containsSearchValues = searchValues.some(word => datasetArr.slice(1).join(' ').includes(word.toLowerCase())) // checks search attrs match a typed search word
 
             this.shouldShowRuleSet(ruleEl.closest('.ruleset'), containsSearchValues && containsFilteredValue)
-            
+
+            if(containsSearchValues && containsFilteredValue){
+                ruleEl.classList.add('show')
+            }else{
+                ruleEl.classList.remove('show')    
+            }
+
             return containsSearchValues && containsFilteredValue
         },
-        pushState (filtering=true, filter=undefined) {
-            // Updates url with new query params for filter and search without refreshing the page
+        pushState (filterType=undefined, filterOption=undefined) {
+            // Updates url with new query params for filter type and search without refreshing the page
 
             const url = new URL(window.location.href)
-      
-            if(filtering){
-                url.searchParams.set(filter, this.filterValue[filter])
-            }else if(!filtering){
+            let newURL = ''
+            if(filterType){
+                if(!url.searchParams.getAll(filterType).includes(filterOption)){
+                    url.searchParams.append(filterType, filterOption)
+                }else{
+                    // remove one key:value param
+                    const regex = new RegExp(`([\\&\\?])${filterType}=${filterOption.replace(' ', '\\+')}`, 'g');
+                    newURL = url.toString().replaceAll(regex, '').replace('/&', '/?')
+                }
+                if(!this.filterValue[filterType].length) {
+                    url.searchParams.delete(filterType)
+                }
+            }else {
                 url.searchParams.set('search', this.searchValue)
+                if(!this.searchValue) {
+                    url.searchParams.delete('search')
+                }
             }
       
-            if(!this.searchValue) {
-                url.searchParams.delete('search')
-            }
-            if(!this.filterValue[filter]) {
-                url.searchParams.delete(filter)
-            }
-      
-            window.history.pushState(null,'', url.toString())
+            window.history.pushState(null,'', newURL || url.toString())
         },
         updateWithURLParams () {
             // Updates x-data properties with url param values
@@ -93,7 +103,7 @@
                 if(key === 'search'){
                     this.searchValue = value
                 }else{
-                    this.filterValue[key] = value
+                    this.filterValue[key].push(`${value},https://static.datadoghq.com/static/images/logos/${value.toLowerCase()}_avatar.svg`)
                 }
             })
         },
@@ -124,12 +134,22 @@
             })
         },
         toggleFilterForm (selectedFilterFormEl) {
+            // manage filter form accordian
             const filterTypeID = selectedFilterFormEl.closest('.filter-type').dataset.id
             this.openedFilterForm = (this.openedFilterForm === filterTypeID) ? null : filterTypeID
         },
-        deleteOneSelection(filterType, selection) {
-            console.log(filterType, selection)
-            this.filterValue[filterType] = this.filterValue[filterType].filter(s => s !== selection)
+        deleteOneSelection (filterType, filterOption) {
+            // delete one filterOption at a time
+            this.filterValue[filterType] = this.filterValue[filterType].filter(s => s !== filterOption)
+            this.pushState(filterType, filterOption)
+        },
+        deleteAllSelections (filterType) {
+            // delete all selections and url params of a filter type
+            this.filterValue[filterType] = []
+            this.openedFilterForm = null
+            const url = new URL(window.location.href)
+            url.searchParams.delete(filterType)
+            window.history.pushState(null,'', url.toString())
         }
     }"
     x-init="updateWithURLParams()">
@@ -227,8 +247,8 @@
             </div>
         </div>
 
+        {{/*  NAV - Keep here. filters scratch pad needs to form first */}}
         <nav id="static-analysis-nav" class="container px-0">
-            {{/*  FILTER TYPES - Keep here. filters scratch pad  needs to form */}}
             {{ $filter_types := (slice "Languages" "Categories" "Severities") }}
             <div class="filters-static-analysis row">
                 {{ range $filter_types }}
@@ -247,6 +267,7 @@
                                 </template>
                                 {{/*  
                                     Render filter selections from `filterValue` data.
+                                    [filter value, integration logo] = filter 
                                 */}}
                                 <template x-for="(filter, idx) in filterValue['{{$filter_type}}']" :key="idx">
                                     <div class="selection-container rounded d-flex align-items-center">
@@ -254,19 +275,24 @@
                                             <img :src="filter.split(',')[1]" height="14" alt="filter.split(',')[0]"/>
                                         </template>
                                         <span class="selection-name" x-text="filter.split(',')[0]"></span>
-                                        <div class="" @click.stop="deleteOneSelection('{{ $filter_type }}', filter )">
-                                            {{ partial "icon" (dict "name" "close-light_x" "title" "close" "size" "14px") }}
+                                        <div class="close-light-wrapper" @click.stop="deleteOneSelection('{{ $filter_type }}', filter )">
+                                            {{ partial "icon" (dict "name" "close-light_x" "title" "delete" "size" "14px") }}
                                         </div>
                                     </div>
                                 </template>
                             </div>
                             <div class="overflow-gradient h-100 position-absolute top-0 end-0 rounded-end">
-                                {{ partial "icon" (dict "name" "cancel-circle" "title" "remove filters" ) }}
-                                <span class="d-flex align-items-center justify-content-center position-relative h-100">
+                                <span class="cancel-circle-wrapper" @click.stop="deleteAllSelections('{{ $filter_type }}')">
+                                    {{ partial "icon" (dict "name" "cancel-circle" "title" "delete all" ) }}
+                                </span>
+                                <span class="chevron-wrapper d-flex align-items-center justify-content-center position-relative h-100">
                                     <div class="chevron chevron-down"></div>
                                 </span>
                             </div>
                         </button>
+                        {{/*  
+                            Form     
+                        */}}
                         <form 
                         class="d-flex flex-column bg-white rounded position-absolute w-100"
                         x-cloak x-show.important="openedFilterForm === '{{$filter_type}}'"
@@ -278,11 +304,19 @@
                             <div class="filter-category-container">
                                 {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" . "variant" "avatar") }}
                                 {{/*  store int_logo with filter value if int_logo is present */}}
-                                <input id="{{ . }}" type="checkbox" value='{{ cond ($int_logo | not ) . (printf "%s,%s" . $int_logo) }}' x-model="filterValue['{{$filter_type}}']">
-                                {{ if $int_logo }}
-                                <img src="{{ $int_logo }}" height="16" alt="{{ . }}"/>
-                                {{ end }}
-                                <label for="{{ . }}">{{.}}</label>
+                                <input 
+                                id="{{ . | anchorize }}" 
+                                type="checkbox" 
+                                value='{{ cond ($int_logo | not ) . (printf "%s,%s" . $int_logo) }}' 
+                                x-model="filterValue['{{$filter_type}}']"
+                                @input="resetFilteredRulesets"
+                                @input.debounce="pushState('{{ $filter_type }}', '{{ . }}')">
+                                <label for="{{ . | anchorize }}" class="d-flex align-items-center">
+                                    {{ if $int_logo }}
+                                    <img src="{{ $int_logo }}" height="16" alt="{{ . }}"/>
+                                    {{ end }}
+                                    {{.}}
+                                </label>
                             </div>
                             {{ end }}
                         </form>
@@ -293,7 +327,7 @@
             </div>
             {{/*  SEARCH  */}}
             <form class="search-static-analysis">
-                <input type="text" placeholder="Search here" class="w-100 px-1" x-model="searchValue" @input="resetFilteredRulesets" @input.debounce="pushState(false)">
+                <input type="text" placeholder="Search here" class="w-100 px-1" x-model="searchValue" @input="resetFilteredRulesets" @input.debounce="pushState()">
             </form>
           </nav>
     </div>
