@@ -42,7 +42,7 @@ The owner `team` from the catalog is automatically attached to all metrics.
 
 ### Deployment frequency
 
-Submit a deployment with the [DORA Metrics API][4] or with the `datadog-ci dora deployment` command using the [`datadog-ci`][5] CLI tool.
+Submit a deployment with the [DORA Metrics API][5] or with the `datadog-ci dora deployment` command using the [`datadog-ci`][4] CLI tool.
 
 You are required to provide the following deployment attributes:
 
@@ -60,10 +60,10 @@ You can optionally add the following deployment attributes:
 {{< tabs >}}
 {{% tab "API - Curl" %}}
 
-See the [API docs][6] for the full spec and more examples with the API SDKs.
+See the [API docs][1] for the full spec and more examples with the API SDKs.
 
-{{< code-block lang="shell" >}}
-  curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/dora/deployment" \
+```bash
+  curl -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/dora/deployment" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "DD-API-KEY: ${DD_API_KEY}" \
@@ -83,32 +83,35 @@ See the [API docs][6] for the full spec and more examples with the API SDKs.
     }
   }
 EOF
-{{< /code-block >}}
+```
+
+[1]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
 {{% /tab %}}
 
 {{% tab "datadog-ci CLI" %}}
 
-The [`datadog-ci`][5] CLI tool provides a shortcut to send the deployments within CI.
+The [`datadog-ci`][1] CLI tool provides a shortcut to send the deployments within CI.
 
+```bash
 export DD_BETA_COMMANDS_ENABLED=1
-export DD_SITE={{< region-param key="dd_site" >}}
+export DD_SITE={{< region-param key="dd_site" code="true" >}}
 export DD_API_KEY="api-key"
 
-{{< code-block lang="shell" >}}
 export deploy_start=`date +%s`
 ./your-deploy-script.sh
 datadog-ci dora deployment --service shopist --env prod \
     --started-at $deploy_start --finished-at `date +%s` \
     --git-repository-url "https://github.com/organization/example-repository" \
     --git-commit-sha 66adc9350f2cc9b250b69abddab733dd55e1a588
-{{< /code-block >}}
+```
 
 Optional parameters:
-  - `finished-at`` will be automatically set to now if not provided.
+  - `finished-at` will be automatically set to now if not provided.
   - `env`
   - `git-repository-url` and `git-commit-sha` can be omitted if the deployment CI job is running on exactly the same git checkout that has been deployed.
   - `skip-git` disables the git details ([change lead time](#lead-time-for-changes) will not be available).
 
+[1]: https://www.npmjs.com/package/@datadog/datadog-ci
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -191,8 +194,8 @@ See the [API docs][7] for the full spec and more examples with the API SDKs.
 
 #### Example
 
-{{< code-block lang="shell" >}}
-  curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/dora/incident" \
+```bash
+curl -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/dora/incident" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "DD-API-KEY: ${DD_API_KEY}" \
@@ -214,13 +217,13 @@ See the [API docs][7] for the full spec and more examples with the API SDKs.
     }
   }
 EOF
-{{< /code-block >}}
+```
 
 ### Time to restore service
 
 Mean time to restore (MTTR) is calculated as the duration distribution for *resolved incident* events.
 
-*Resolved incident* are incidents that include `finished_at`.
+*Resolved incidents* are incidents that include `finished_at`.
 
 Follow the steps described in [change failure rate](#change-failure-rate) to send incident events.
 
@@ -239,7 +242,6 @@ Events can be sent both when started and after resolution. The incident is count
 [1]: https://cloud.google.com/blog/products/devops-sre/using-the-four-keys-to-measure-your-devops-performance
 [2]: /tracing/service_catalog
 [3]: /tracing/service_catalog/setup
-[4]: /api/latest/dora-metrics
-[5]: https://www.npmjs.com/package/@datadog/datadog-ci
-[6]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
-[7]: /api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
+[4]: https://www.npmjs.com/package/@datadog/datadog-ci
+[5]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
+[6]: /api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
