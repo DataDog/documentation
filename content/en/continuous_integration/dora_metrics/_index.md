@@ -63,7 +63,7 @@ You can optionally add the following deployment attributes:
 See the [API docs][1] for the full spec and more examples with the API SDKs.
 
 ```bash
-  curl -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/dora/deployment" \
+  curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/dora/deployment" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "DD-API-KEY: ${DD_API_KEY}" \
@@ -94,7 +94,7 @@ The [`datadog-ci`][1] CLI tool provides a shortcut to send the deployments withi
 
 ```bash
 export DD_BETA_COMMANDS_ENABLED=1
-export DD_SITE={{< region-param key="dd_site" code="true" >}}
+export DD_SITE={{< region-param key="dd_site" >}}
 export DD_API_KEY="api-key"
 
 export deploy_start=`date +%s`
@@ -174,7 +174,7 @@ Change failure rate is calculated as the percentage of incident events out of th
 
 Submit deployment events as described in [deployment frequency](#deployment-frequency).
 
-Additionally submit an incident with the [DORA Metrics API][7].
+Additionally submit an incident with the [DORA Metrics API][6].
 
 You are required to provide the following incident attributes:
 
@@ -190,12 +190,12 @@ You can optionally add the following incident attributes:
 - `repository_url`
 - `commit_sha`
 
-See the [API docs][7] for the full spec and more examples with the API SDKs.
+See the [API docs][6] for the full spec and more examples with the API SDKs.
 
 #### Example
 
 ```bash
-curl -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/dora/incident" \
+curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/dora/incident" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "DD-API-KEY: ${DD_API_KEY}" \
