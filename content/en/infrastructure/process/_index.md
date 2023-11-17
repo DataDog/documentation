@@ -134,10 +134,36 @@ Once enabled, use the `AWS Fargate` Containers facet on the [Live Processes page
 
 {{< img src="infrastructure/process/fargate_ecs.png" alt="Processes in AWS Fargate" >}}
 
-For more information about using Datadog Agent with AWS ECS Fargate, see the [ECS Fargate integration documentation][2].
+To enable process monitoring in ECS Fargate, set the `DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED` environment variable to `true` in the Datadog Agent container definition within the task definition.
+
+For example:
+
+```json
+{
+    "taskDefinitionArn": "...",
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "image": "public.ecr.aws/datadog/agent:7.50.0-rc.1",
+            ...
+            "environment": [
+                {
+                    "name": "DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED",
+                    "value": "true"
+                }
+                ...
+             ]
+         ...
+         }
+    ]
+  ...
+}
+```
+
+For more information about installing the Datadog Agent with AWS ECS Fargate, see the [ECS Fargate integration documentation][2].
 
 [1]: https://app.datadoghq.com/process
-[2]: /integrations/ecs_fargate/
+[2]: /integrations/ecs_fargate/#installation
 [3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#other_task_definition_params
 
 {{% /tab %}}
