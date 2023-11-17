@@ -34,6 +34,29 @@ instances:
     [...]
 ```
 
+### Monitoring multiple logical databases
+Use the `database_autodiscovery` option to permit the Agent to discover all logical databases on your host to monitor. You can specify `include` or `exclude` fields to narrow the scope of databases discovered. See the sample [postgres.d/conf.yaml](https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example) for more details
+```yaml
+init_config:
+instances:
+  - dbm: true
+    host: example-service-primary.example-host.com
+    port: 5432
+    username: datadog
+    password: '<PASSWORD>'
+    database_autodiscovery:
+      enabled: true
+      # Optionally, set the include field to specify
+      # a set of databases you are interested in discovering
+      include:
+        - foo.*
+        - bar-db.*
+    tags:
+      - 'env:prod'
+      - 'team:team-discovery'
+      - 'service:example-service'
+```
+
 ### Storing passwords securely
 While it is possible to declare passwords directly in the Agent configuration files, it is a more secure practice to encrypt and store database credentials elsewhere using secret management software such as [Vault](https://www.vaultproject.io/). The Agent is able to read these credentials using the `ENC[]` syntax. Review the [secrets management documentation](/agent/configuration/secrets-management/) for the required setup to store these credentials. The following example shows how to declare and use those credentials:
 ```yaml
@@ -76,17 +99,21 @@ instances:
 ### Monitoring relation metrics for multiple logical databases
 In order to collect relation metrics (such as `postgresql.seq_scans`, `postgresql.dead_rows`, `postgresql.index_rows_read`, and `postgresql.table_size`), the Agent must be configured to connect to each logical database (by default, the Agent only connects to the `postgres` database).
 
-Specify a single "DBM" instance to collect DBM telemetry from all databases. Additionally, specify all logical databases the Agent must connect to. It is important to only have `dbm: true` on one configuration instance per host to prevent duplication of metrics.
+Specify a single "DBM" instance to collect DBM telemetry from all databases. Use the `database_autodiscovery` option to avoid specifying each logical database.
 ```yaml
 init_config:
 instances:
   # This instance is the "DBM" instance. It will connect to the
-  # `postgres` database and send DBM telemetry from all databases
+  # all logical databases, and send DBM telemetry from all databases
   - dbm: true
     host: example-service-primary.example-host.com
     port: 5432
     username: datadog
     password: '<PASSWORD>'
+    database_autodiscovery:
+      enabled: true
+    relations:
+      - relation_regex: .*
   # This instance only collects data from the `users` database
   # and collects relation metrics from tables prefixed by "2022_"
   - host: example-service-primary.example-host.com
