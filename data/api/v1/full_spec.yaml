@@ -19455,6 +19455,16 @@ components:
             Pro hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        custom_historical_ts_avg:
+          description: Shows the average number of distinct historical custom metrics
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        custom_live_ts_avg:
+          description: Shows the average number of distinct live custom metrics over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
         custom_ts_avg:
           description: Shows the average number of distinct custom metrics over all
             hours in the current date for the given org.
@@ -19984,6 +19994,16 @@ components:
         cspm_host_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management
             Pro hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        custom_historical_ts_sum:
+          description: Shows the average number of distinct historical custom metrics
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        custom_live_ts_sum:
+          description: Shows the average number of distinct live custom metrics over
+            all hours in the current months for all organizations.
           format: int64
           type: integer
         custom_ts_sum:
