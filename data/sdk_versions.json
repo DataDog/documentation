@@ -18,5 +18,9 @@
   {
     "client": "datadog-api-client-typescript",
     "version": "v1.19.0"
+  },
+  {
+    "client": "integrations-core",
+    "version": "ddev-v6.0.2"
   }
 ]

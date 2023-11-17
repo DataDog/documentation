@@ -1,9 +1,7 @@
 on:
-  push:
-    branches: [brian.deutsch/ddev-version-automation]
-  # schedule:
-  #   # At 08:00 on every day-of-week from Monday through Friday.
-  #   - cron: '0 8 * * 1-5'
+  schedule:
+    # At 08:00 on every day-of-week from Monday through Friday.
+    - cron: '0 8 * * 1-5'
 
 permissions: {}
 jobs:
@@ -38,28 +36,28 @@ jobs:
             }))
             console.log(versions)
             return JSON.stringify(versions)
-      # - uses: actions/checkout@v3
-      # - name: Write version
-      #   run: |-
-      #     echo '${{steps.set-versions.outputs.result}}' | jq > ./data/sdk_versions.json
-      #     git add ./data/sdk_versions.json
-      #     git config user.name packages
-      #     git config user.email packages@datadoghq.com
-      #     git add .
-      #     git commit -m "Bump SDK"
-      #     git push -f origin HEAD:refs/heads/sdk/versions
-      # - uses: actions/github-script@v6
-      #   name: Propose change with latest versions
-      #   with:
-      #     github-token: ${{secrets.GITHUB_TOKEN}}
-      #     result-encoding: string
-      #     script: |
-      #       await github.rest.pulls.create({
-      #         owner: context.repo.owner,
-      #         repo: context.repo.repo,
-      #         title: "[SDK] new versions are available",
-      #         body: "SSID",
-      #         head: "sdk/versions",
-      #         base: "master",
-      #         maintainer_can_modify: true
-      #       })
+      - uses: actions/checkout@v3
+      - name: Write version
+        run: |-
+          echo '${{steps.set-versions.outputs.result}}' | jq > ./data/sdk_versions.json
+          git add ./data/sdk_versions.json
+          git config user.name packages
+          git config user.email packages@datadoghq.com
+          git add .
+          git commit -m "Bump SDK"
+          git push -f origin HEAD:refs/heads/sdk/versions
+      - uses: actions/github-script@v6
+        name: Propose change with latest versions
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          result-encoding: string
+          script: |
+            await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "[SDK] new versions are available",
+              body: "SSID",
+              head: "sdk/versions",
+              base: "master",
+              maintainer_can_modify: true
+            })
