@@ -122,17 +122,7 @@ datadog:
 
 <div class="alert alert-warning">You can view your ECS Fargate processes in Datadog. To see their relationship to ECS Fargate containers, use the Datadog Agent v7.50.0 or later.</div>
 
-In order to collect processes, the Datadog Agent must be running as a container within the Task.
-
-To collect process information in ECS Fargate, add the [`PidMode` parameter][3] to the Task Definition and set it to `task` as follows:
-
-```text
-"pidMode": "task"
-```
-
-Once enabled, use the `AWS Fargate` Containers facet on the [Live Processes page][1] to filter processes by ECS, or enter `fargate:ecs` in the search query.
-
-{{< img src="infrastructure/process/fargate_ecs.png" alt="Processes in AWS Fargate" >}}
+In order to collect processes, the Datadog Agent must be running as a container within the task.
 
 To enable process monitoring in ECS Fargate, set the `DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED` environment variable to `true` in the Datadog Agent container definition within the task definition.
 
@@ -144,7 +134,7 @@ For example:
     "containerDefinitions": [
         {
             "name": "datadog-agent",
-            "image": "public.ecr.aws/datadog/agent:7.50.0-rc.1",
+            "image": "public.ecr.aws/datadog/agent:latest",
             ...
             "environment": [
                 {
@@ -159,6 +149,16 @@ For example:
   ...
 }
 ```
+
+To start collecting process information in ECS Fargate, add the [`PidMode` parameter][3] to the Task Definition and set it to `task` as follows:
+
+```text
+"pidMode": "task"
+```
+
+Once enabled, use the `AWS Fargate` Containers facet on the [Live Processes page][1] to filter processes by ECS, or enter `fargate:ecs` in the search query.
+
+{{< img src="infrastructure/process/fargate_ecs.png" alt="Processes in AWS Fargate" >}}
 
 For more information about installing the Datadog Agent with AWS ECS Fargate, see the [ECS Fargate integration documentation][2].
 
