@@ -10,6 +10,8 @@ aliases:
   - /security/cspm/getting_started
   - /security/cspm/setup
   - /security/misconfigurations/setup
+  - /security/vulnerabilities/setup
+  - /security/infrastructure_vulnerabilities/setup/
 further_reading:
 - link: "/getting_started/cloud_security_management"
   tag: "Documentation"
