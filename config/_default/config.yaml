@@ -121,7 +121,7 @@ security:
   funcs:
     getenv:
       # allow os.Getenv to read gitlab CI_ prefixed os environment vars
-      - ^(HUGO_|CI_)
+      - ^(HUGO_|CI_|IA_SUBDOMAIN)
   exec:
     osEnv:
       # as suggested here https://github.com/gohugoio/hugo/issues/9333#issuecomment-1022435616

@@ -728,6 +728,13 @@
       "description": "Edit an API test returns \"OK\" response"
     }
   ],
+  "PatchTest": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Patch a Synthetic test returns \"OK\" response"
+    }
+  ],
   "TriggerTests": [
     {
       "group": "synthetics",
