@@ -24,6 +24,8 @@ further_reading:
 
 The Cloud Security Management (CSM) Enterprise package includes [CSM Threats][1], [CSM Misconfigurations][2] (cloud accounts and Agent), [CSM Identity Risks][3], and [CSM Vulnerabilities][4] (container images and hosts). To learn more about the available CSM packages, see [Setting up Cloud Security Management][8].
 
+<div class="alert alert-info"><strong>Note</strong>: At this time, CSM Identity Risks is available for AWS only.</div>
+
 ## Prerequisites
 
 {{% csm-prereqs-enterprise %}}
@@ -591,8 +593,6 @@ sbom:
 {{< /tabs >}}
 
 ## Enable CloudTrail logs forwarding
-
-<div class="alert alert-info">At this time, CSM Identity Risks is available for AWS only.</div>
 
 ### Set up the Datadog AWS integration
 

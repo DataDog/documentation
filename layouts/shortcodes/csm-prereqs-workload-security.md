@@ -1,4 +1,4 @@
-* [Datadog Agent][1] 7.46 or later.
+* [Datadog Agent][101] 7.46 or later.
 * CSM Threats supports the following Linux distributions:
   * Ubuntu LTS (18.04, 20.04, and 22.04)
   * Debian 10 or later
@@ -12,7 +12,7 @@
 **Notes**: 
 
 * Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. 
-* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][2].
+* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][102].
 
-[1]: /agent
-[2]: /security/cloud_security_management/troubleshooting
+[101]: /agent
+[102]: /security/cloud_security_management/troubleshooting

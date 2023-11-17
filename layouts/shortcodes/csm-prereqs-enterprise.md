@@ -1,4 +1,4 @@
-CSM Enterprise requires [Datadog Agent][1] 7.46 or later. Additionally, see the following requirements for CSM Threats and CSM Vulnerabilities:
+CSM Enterprise requires [Datadog Agent][101] 7.46 or later. Additionally, see the following requirements for CSM Threats and CSM Vulnerabilities:
 
 ### CSM Threats
 
@@ -15,17 +15,17 @@ CSM Threats supports the following Linux distributions:
 
 **Notes**: 
 
-* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][2].
+* For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][102].
 * Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported. 
 
 ### CSM Vulnerabilities
 
-* [Helm Chart][3] v3.33.6 or later (Kubernetes only).
-* [containerd][4] v1.5.6 or later (Kubernetes and hosts only).
+* [Helm Chart][103] v3.33.6 or later (Kubernetes only).
+* [containerd][104] v1.5.6 or later (Kubernetes and hosts only).
 
 **Note**: CSM Vulnerabilities is not available for CRI-O runtime.
 
-[1]: /agent
-[2]: /security/cloud_security_management/troubleshooting
-[3]: /containers/kubernetes/installation/?tab=helm
-[4]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/
+[101]: /agent
+[102]: /security/cloud_security_management/troubleshooting
+[103]: /containers/kubernetes/installation/?tab=helm
+[104]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/
