@@ -94,7 +94,7 @@ ci-pipeline-fingerprints:
   - id1
   - id2
 extensions:
-  datadoghq.com/sdp:
+  additionalProperties:
     customField1: customValue1
     customField2: customValue2
 {{< /code-block >}}
