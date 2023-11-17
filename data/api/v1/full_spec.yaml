@@ -14934,6 +14934,55 @@ components:
         type:
           $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
       type: object
+    SyntheticsPatchTestBody:
+      description: Wrapper around an array of [JSON Patch](https://jsonpatch.com)
+        operations to perform on the test
+      properties:
+        data:
+          description: Array of [JSON Patch](https://jsonpatch.com) operations to
+            perform on the test
+          example:
+          - op: replace
+            path: /name
+            value: New test name
+          - op: remove
+            path: /config/assertions/0
+          items:
+            $ref: '#/components/schemas/SyntheticsPatchTestOperation'
+          type: array
+      type: object
+    SyntheticsPatchTestOperation:
+      description: A single [JSON Patch](https://jsonpatch.com) operation to perform
+        on the test
+      properties:
+        op:
+          $ref: '#/components/schemas/SyntheticsPatchTestOperationName'
+        path:
+          description: The path to the value to modify
+          example: /name
+          type: string
+        value:
+          description: A value to use in a [JSON Patch](https://jsonpatch.com) operation
+          example: New Test Name
+      type: object
+    SyntheticsPatchTestOperationName:
+      description: The operation to perform
+      enum:
+      - add
+      - remove
+      - replace
+      - move
+      - copy
+      - test
+      example: replace
+      type: string
+      x-enum-varnames:
+      - ADD
+      - REMOVE
+      - REPLACE
+      - MOVE
+      - COPY
+      - TEST
     SyntheticsPlayingTab:
       description: Navigate between different tabs for your browser test.
       enum:
@@ -31295,7 +31344,7 @@ paths:
       description: Edit the configuration of a Synthetic browser test.
       operationId: UpdateBrowserTest
       parameters:
-      - description: The public ID of the test to get details from.
+      - description: The public ID of the test to edit.
         in: path
         name: public_id
         required: true
@@ -31662,6 +31711,63 @@ paths:
       x-menu-order: 27
       x-undo:
         type: safe
+    patch:
+      description: Patch the configuration of a Synthetic test with partial data.
+      operationId: PatchTest
+      parameters:
+      - description: The public ID of the test to patch.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsPatchTestBody'
+        description: '[JSON Patch](https://jsonpatch.com/) compliant list of operations'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsTestDetails'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Updating sub-type is forbidden'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic Monitoring is not activated for the user
+
+            - Test is not owned by the user
+
+            - Test can''t be found'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Patch a Synthetic test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 29
+      x-undo:
+        type: idempotent
     put:
       deprecated: true
       description: This endpoint is deprecated. To edit a test, use [Edit an API test](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test)

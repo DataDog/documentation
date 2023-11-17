@@ -7476,6 +7476,18 @@ api:
         - UpdateTest
       unstable: []
       order: 26
+  - name: Patch a Synthetic test
+    url: '#patch-a-synthetic-test'
+    identifier: synthetics-patch-a-synthetic-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - PatchTest
+      unstable: []
+      order: 29
   - name: Get a test configuration
     url: '#get-a-test-configuration'
     identifier: synthetics-get-a-test-configuration
