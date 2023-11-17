@@ -124,7 +124,7 @@ datadog:
 
 In order to collect processes, the Datadog Agent must be running as a container within the Task.
 
-To collect process information in ECS Fargate, add the `PidMode` term to the Task Definition and set it as follows:
+To collect process information in ECS Fargate, add the [`PidMode` parameter][3] to the Task Definition and set it to `task` as follows:
 
 ```text
 "pidMode": "task"
@@ -138,6 +138,7 @@ For more information about using Datadog Agent with AWS ECS Fargate, see the [EC
 
 [1]: https://app.datadoghq.com/process
 [2]: /integrations/ecs_fargate/
+[3]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#other_task_definition_params
 
 {{% /tab %}}
 {{< /tabs >}}
