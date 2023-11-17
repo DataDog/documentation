@@ -62,8 +62,8 @@ You can optionally add the following deployment attributes:
 
 See the [API docs][1] for the full spec and more examples with the API SDKs.
 
-For the following example, replace `<DD_SITE>` in the URL with {{< region-param key="dd_site" >}}:
-```bash
+For the following example, replace `<DD_SITE>` in the URL with {{< region-param key="dd_site" code="true" >}}:
+```shell
   curl -X POST "https://api.<DD_SITE>/api/v2/dora/deployment" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
@@ -93,8 +93,8 @@ EOF
 
 The [`datadog-ci`][1] CLI tool provides a shortcut to send the deployments within CI.
 
-For the following example, set the `DD_SITE` env var to {{< region-param key="dd_site" >}}:
-```bash
+For the following example, set the `DD_SITE` env var to {{< region-param key="dd_site" code="true" >}}:
+```shell
 export DD_BETA_COMMANDS_ENABLED=1
 export DD_SITE="DD_SITE"
 export DD_API_KEY="api-key"
@@ -152,7 +152,7 @@ You can upload your repository metadata with the [`datadog-ci git-metadata uploa
 
 When you run `datadog-ci git-metadata upload` within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths.
 
-Run this command in cI for every new commit.
+Run this command in CI for every new commit.
 
 ### Validation
 
@@ -170,13 +170,47 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 {{% /tab %}}
 {{< /tabs >}}
 
+#### Filter git commits in monorepos
+
+If you are using a monorepo (building several services from the same git repository), not every git commit affects the lead time of all services.
+
+To filter the commits measured to only the ones that affect the service, source code glob file path patterns can be specified within the [Service definition][6].
+
+If the Service definition contains a **full** GitHub URL to the application folder, a single path pattern will be automatically used:
+
+**Example (schema version v2.2):**
+
+```yaml
+links:
+  - name: shopist
+    type: repo
+    provider: github
+    url: https://github.com/organization/example-repository/tree/main/src/apps/shopist
+```
+
+Results in considering for the service `shopist` only the git commits that include changes within `src/apps/shopist/**`.
+
+More fine grained control of the filtering can be configured through `extensions.dora_metrics`.
+
+**Example (schema version v2.2):**
+
+```yaml
+extensions:
+  dora_metrics:
+    source_patterns:
+      - src/apps/shopist/**
+      - src/libs/utils/**
+```
+
+Results in considering for the service `shopist` only the git commits that include changes within `src/apps/shopist/**` or `src/libs/utils/**`.
+
 ### Change failure rate
 
 Change failure rate is calculated as the percentage of incident events out of the total number of deployments.
 
 Submit deployment events as described in [deployment frequency](#deployment-frequency).
 
-Additionally submit an incident with the [DORA Metrics API][6].
+Additionally submit an incident with the [DORA Metrics API][7].
 
 You are required to provide the following incident attributes:
 
@@ -192,11 +226,11 @@ You can optionally add the following incident attributes:
 - `repository_url`
 - `commit_sha`
 
-See the [API docs][6] for the full spec and more examples with the API SDKs.
+See the [API docs][7] for the full spec and more examples with the API SDKs.
 
 #### Example
 
-```bash
+```shell
 curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/dora/incident" \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
@@ -246,4 +280,5 @@ Events can be sent both when started and after resolution. The incident is count
 [3]: /tracing/service_catalog/setup
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
 [5]: /api/latest/dora-metrics/#send-a-deployment-event-for-dora-metrics
-[6]: /api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
+[6]: /tracing/service_catalog/adding_metadata
+[7]: /api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
