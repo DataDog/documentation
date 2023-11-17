@@ -10,14 +10,16 @@ further_reading:
   text: "Actions Catalog"
 ---
 
-You can create an app or edit existing apps from the App Builder [Explore][1] tab. The **Explore** tab lists information about existing apps, such as the author, status, the dates that each app was last modified, and whether the app is published or not.
+You can create an app or edit existing apps from the App Builder [Explore][1] tab. The **Explore** tab lists information about existing apps, including the author, status, the dates that each app was last modified, and whether the app is published or not.
 - Hover over an app for the options to edit, delete, view or clone the app.
 - Toggle **My apps** if you want to see only apps that you created.
+
+{{< img src="service_management/app_builder/app_builder_page.png" alt="The App Builder page" style="width:100%;" >}}
 
 ## Build an app from a blueprint
 
 1. Click the [**Blueprints**][2] tab.
-1. Find the blueprint you'd like to use, and select it.
+1. Find the blueprint you'd like to use and select it.
 1. Click **Use Blueprint** to open the app template.
 1. To change the app name and description, click the app name.
 1. Each blueprint template comes loaded with demo data. You can begin customizing the app immediately by editing the **Connection** for each query.
@@ -30,7 +32,6 @@ You can create an app or edit existing apps from the App Builder [Explore][1] ta
 
 ## Create a custom app
 
-To create an app:
 1. From [App Builder][1], click **New App**.
 1. To change the app name and description, click the app name.
 1. Drag [UI components](#app-canvas-and-components) into the app canvas.
@@ -42,7 +43,7 @@ To create an app:
 
 ## Build an app with JSON
 
-To build or edit a workflow in JSON, click the cog (**Settings**) icon, and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
+To build or edit a workflow in JSON, click the cog (settings) icon, and select **Switch to JSON**. The **Switch to GUI** option in the settings menu takes you back to the GUI editor.
 
 A typical workflow contains the following top-level keys:
 - `name`: The name of the app.
@@ -193,7 +194,7 @@ A typical workflow contains the following top-level keys:
 
 ## App canvas and components
 
-Tne app canvas represents the graphical interface that your users interact with. Build the interface by dragging and dropping UI components onto the canvas. To see all available components, click **All Components**.
+The app canvas represents the graphical interface that your users interact with. Build the interface by dragging and dropping UI components onto the canvas. To see all available components, click **All Components**.
 
 Each component features a list of corresponding configuration options that you can use to control how users interact with your app. For example, the **Text Input** component allows you to set a default value, placeholder text, and a label. The **Button** component allows for a label and an event to trigger when pressed. Components also feature an **Appearance** section that you can use to change the way the components look and act. For example, you can disable a button or control its visibility.
 
@@ -201,9 +202,9 @@ To delete or duplicate a component, select the component and click the three dot
 
 ### Dynamic table values
 
-Similar to [post query transformation](#post-query-transformation), the table UI component allows you to further configure the data source for the table. You can use the **Data Source** field to dynamically fill table values and constrain which objects are pulled into the table as columns.
+Similar to [post query transformation](#post-query-transformation), the table UI component allows you to customize the data source for the table. You can use the **Data Source** field to dynamically fill table values and constrain which objects are pulled into the table as columns.
 
-For example, the [GitHub PR Summarizer][4] template uses a series of GitHub queries to summarize a list of pull requests in a repository. It uses the data source entry below to constrain the table to 6 columns: `title`,`Summary`,`updated_at`,`user`,`html_url`, and `state`. The highlighted code dynamically populates the user column for each pull request with the author's avatar and GitHub username.
+For example, the [GitHub PR Summarizer][4] template uses a series of GitHub queries to summarize a list of pull requests in a repository. The query uses the data source entry below to constrain the table to 6 columns: `title`,`Summary`,`updated_at`,`user`,`html_url`, and `state`. The highlighted code dynamically populates the user column for each pull request with the author's avatar and GitHub username.
 
 {{< highlight js "hl_lines=17" >}}
 ${(() => {
@@ -229,11 +230,15 @@ ${(() => {
 })()}
 {{< /highlight >}}
 
+In the table, the **User** column is filled with an avatar and GitHub username for each PR author.
+
+{{< img src="service_management/app_builder/dynamic_tables.png" alt="The GitHub PR Summarizer" style="width:100%;" >}}
+
 ## Queries
 
 Queries form the logic behind your app and enable interactions with Datadog integrations. Queries can take inputs from other queries or from UI components, and return outputs for use in other queries or UI components. To add a query, click the plus (**+**) icon in the **Queries** section and search for a query to add to your app.
 
-After you add a query to your app, ensure that you've entered any required inputs. Input fields with the variable button (**{{**) can take [variables](#variables).
+After you add a query to your app, ensure that you've entered any required inputs. Input fields with the double braces button (**{{**) can take [variables](#variables).
 
 ### Debounce
 
@@ -241,7 +246,11 @@ Configuring debounce ensures that your query is only triggered once per user inp
 
 ### Conditional queries
 
-You can set a condition that must be met before a query can run. To set a query, enter an expression in the **Condition** field in the **Advanced** section of the query. The condition must evaluate to true before the query runs. For example, if you want a given query to run only if a UI component named `select0` exists and is not empty, you can use the expression `${select0.value && select0.value.length > 0}`.
+You can set a condition that must be met before a query can run. To set a query, enter an expression in the **Condition** field in the **Advanced** section of the query. The condition must evaluate to true before the query runs. For example, if you want a given query to run only if a UI component named `select0` exists and is not empty, you can use the expression:
+
+{{< code-block lang="js" >}}
+${select0.value && select0.value.length > 0}
+{{< /code-block >}}
 
 ### Post query transformation
 
@@ -272,13 +281,11 @@ To prompt a user for confirmation before the query runs, toggle the **Requires C
 
 ## Variables
 
-Use app variables to pass data from one part of your app to another. Additionally, you can use app variables to pass in data from your dashboard using dashboard template variables.
+Use app variables to pass data from one part of your app to another. Additionally, you can use app variables to pass in data from your dashboard using [dashboard template variables][3].
 
-Variables are enclosed in braces, proceeded by a dollar sign (`${}`). To use a variable, use the query or UI component name and access the child fields using dot notation. For example, if you have a select component named `select0` and you want to access its default value field in a query, use the syntax `${select0.defaultValue}`. If you're not sure what to enter as a variable, type `${` to open a suggestions menu with all available variables.
+Variables are enclosed in braces, proceeded by a dollar sign (`${}`). To use a variable, enter the query or UI component name and access the child fields using dot notation. For example, if you have a select component named `select0` and you want to access its default value field, use the syntax `${select0.defaultValue}`. If you're not sure what to enter as a variable, type `${` to open a suggestions menu with all available variables.
 
 {{< img src="service_management/app_builder/select-variable.mp4" alt="If you're not sure what to enter as a variable, type ${ to open a suggestions menu with all available variables" video=true >}}
-
-For more information using dashboard template variables, see [Embedding apps in dashboards][3].
 
 ## Preview an app
 
