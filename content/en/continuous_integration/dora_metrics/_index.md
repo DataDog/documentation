@@ -7,6 +7,9 @@ further_reading:
 - link: "/continuous_integration/pipelines"
   tag: "Documentation"
   text: "Learn about Pipeline Visibility"
+- link: "https://github.com/DataDog/datadog-ci"
+  tag: "Source Code"
+  text: "Learn about the `datadog-ci` CLI tool"
 ---
 
 {{< site-region region="gov" >}}
@@ -37,8 +40,7 @@ Defining and tracking DORA metrics can help you identify areas of improvement fo
 
 ## Set up DORA Metrics
 
-Services tracked for DORA Metrics must be registered in the [Service Catalog][2]. See [Adding Entries to Service catalog][3].
-The `team` ownership from Service Catalog is automatically associated with all metrics.
+Services tracked for DORA Metrics must be registered in the [Service Catalog][2]. For more information, see [Adding Entries to Service Catalog][3]. The `team` ownership from the Service Catalog is automatically associated with all metrics.
 
 ### Deployment frequency
 
@@ -58,9 +60,9 @@ You can optionally add the following deployment attributes:
 #### Example
 
 {{< tabs >}}
-{{% tab "API - Curl" %}}
+{{% tab "API - cURL" %}}
 
-See the [API docs][1] for the full spec and more examples with the API SDKs.
+See the [DORA Metrics API reference documentation][1] for the full spec and more examples with the API SDKs.
 
 For the following example, replace `<DD_SITE>` in the URL with {{< region-param key="dd_site" code="true" >}}:
 ```shell
@@ -93,7 +95,7 @@ EOF
 
 The [`datadog-ci`][1] CLI tool provides a shortcut to send the deployments within CI.
 
-For the following example, set the `DD_SITE` env var to {{< region-param key="dd_site" code="true" >}}:
+For the following example, set the `DD_SITE` environment variable to {{< region-param key="dd_site" code="true" >}}:
 ```shell
 export DD_BETA_COMMANDS_ENABLED=1
 export DD_SITE="DD_SITE"
@@ -107,11 +109,11 @@ datadog-ci dora deployment --service shopist --env prod \
     --git-commit-sha 66adc9350f2cc9b250b69abddab733dd55e1a588
 ```
 
-Optional parameters:
-  - `finished-at` will be automatically set to now if not provided.
+You can optionally add the following parameters:
+  - `finished-at` is automatically set to now if not provided.
   - `env`
-  - `git-repository-url` and `git-commit-sha` can be omitted if the deployment CI job is running on exactly the same git checkout that has been deployed.
-  - `skip-git` disables the git details ([change lead time](#lead-time-for-changes) will not be available).
+  - `git-repository-url` and `git-commit-sha` can be omitted if the deployment CI job is running on the exact same git checkout that has been deployed.
+  - `skip-git` disables the git details ([change lead time](#lead-time-for-changes) is not available).
 
 [1]: https://www.npmjs.com/package/@datadog/datadog-ci
 {{% /tab %}}
@@ -173,9 +175,9 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 
 If you are using a monorepo (building several services from the same git repository), not every git commit affects the lead time of all services.
 
-To filter the commits measured to only the ones that affect the service, source code glob file path patterns can be specified within the [Service definition][6].
+To filter the commits measured to only the ones that affect the service, specify the source code glob file path patterns in the [Service definition][6].
 
-If the Service definition contains a **full** GitHub URL to the application folder, a single path pattern will be automatically used:
+If the Service definition contains a **full** GitHub URL to the application folder, a single path pattern is automatically used.
 
 **Example (schema version v2.2):**
 
@@ -187,9 +189,7 @@ links:
     url: https://github.com/organization/example-repository/tree/main/src/apps/shopist
 ```
 
-DORA Metrics for the service `shopist` consider only the git commits that include changes within `src/apps/shopist/**`.
-
-More fine-grained control of the filtering can be configured through `extensions.dora_metrics`.
+DORA Metrics for the `shopist` service only consider the git commits that include changes within `src/apps/shopist/**`. You can configure more granular control of the filtering with `extensions.dora_metrics`.
 
 **Example (schema version v2.2):**
 
@@ -201,15 +201,13 @@ extensions:
       - src/libs/utils/**
 ```
 
-DORA Metrics for the service `shopist` consider only the git commits that include changes within `src/apps/shopist/**` or `src/libs/utils/**`.
+DORA Metrics for the service `shopist` only consider the git commits that include changes within `src/apps/shopist/**` or `src/libs/utils/**`.
 
 ### Change failure rate
 
 Change failure rate is calculated as the percentage of incident events out of the total number of deployments.
 
-Submit deployment events as described in [deployment frequency](#deployment-frequency).
-
-Additionally, submit an incident with the [DORA Metrics API][7].
+Submit deployment events as described in [deployment frequency](#deployment-frequency). Additionally, submit an incident with the [DORA Metrics API][7].
 
 You are required to provide the following incident attributes:
 
@@ -219,13 +217,13 @@ You are required to provide the following incident attributes:
 You can optionally add the following incident attributes:
 
 - `finished_at` for *resolved incidents*. Required for [time to restore service](#time-to-restore-service).
-- `name` to describe the incident
+- `name` to describe the incident.
 - `severity`
 - `env` to accurately filter your DORA metrics by environment.
 - `repository_url`
 - `commit_sha`
 
-See the [API docs][7] for the full spec and more examples with the API SDKs.
+See the [DORA Metrics API reference documentation][7] for the full spec and more examples with the API SDKs.
 
 #### Example
 
@@ -262,16 +260,15 @@ Mean time to restore (MTTR) is calculated as the duration distribution for *reso
 
 Follow the steps described in [change failure rate](#change-failure-rate) to send incident events.
 
-Events can be sent both at the start of and after incident resolution. Incident events are matched via `env`, `service`, and `started_at`.
+Events can be sent both at the start of and after incident resolution. Incident events are matched by the `env`, `service`, and `started_at` attributes.
 
 ## Use DORA Metrics
 
-In the DORA Metrics [page](8), you can visualize your DORA metrics and filter by team, service, repository, environment, and time period.
+You can access and visualize your DORA metrics and filter them by team, service, repository, environment, and time period on the [DORA Metrics page][8].
 
-You can identify improvements or regressions for each metric, as well as visualize and compare trends over time. DORA metrics can be exported to dashboards and alerted on via [metric monitors](9).
+Use the information on this page to identify improvements or regressions for each metric, visualize changes, and compare trends over time. DORA metrics can be exported to dashboards and alerted on using [metric monitors][9].
 
-
-## Limitations
+### Limitations
 
 - Deployment and incident events must be sent as soon as possible. Events for which the `started_at` timestamp is 1 hour older than the current time are not accepted.
 - Deployments or incidents of the same service cannot occur at the same second.
