@@ -17,7 +17,7 @@ Application Security Management (ASM) provides observability into application-le
 
 Filter by the **Qualification** facet in the ASM [Traces Explorer][1] to view the possible qualification results:
 
-{{< img src="security/application_security/threats/trace_qualification/trace-qualification-traces_2.png" alt="ASM trace list with the qualification facet showing the possible qualification results">}}
+{{< img src="security/application_security/threats/trace_qualification/trace-qualification-traces_3.png" alt="ASM trace list with the qualification facet showing the possible qualification results">}}
 
 ## Qualification outcomes
 

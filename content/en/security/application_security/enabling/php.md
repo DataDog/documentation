@@ -93,7 +93,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 {{% appsec-getstarted-2-canary %}}
 
-{{< img src="/security/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
+{{< img src="/security/application_security/application-security-signal-2.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 
 ## Further Reading
 
