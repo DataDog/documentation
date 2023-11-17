@@ -102,6 +102,7 @@ To enable single step instrumentation with Helm:
     site: <DATADOG_SITE>
     apm:
       instrumentation:
+         enabled: true
    ```
    Replace `<DATADOG_SITE>` with your [Datadog site][12]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the this page.)
 
@@ -133,8 +134,8 @@ To enable single step instrumentation with Helm:
 
 You can choose to selectively instrument specific namespaces or choose to not instrument them.
 
-To enable instrumentation for specific namespaces, add the `enabledNamespaces` configuration to your `datadog-values.yaml` file:
-\{{< highlight yaml "hl_lines=6-8" >}}
+To enable instrumentation for specific namespaces, replace `enabled: true` with `enabledNamespaces` configuration in your `datadog-values.yaml` file:
+{{< highlight yaml "hl_lines=6-8" >}}
       datadog:
         apiKeyExistingSecret: datadog-secret
         site: <DATADOG_SITE>
@@ -145,13 +146,16 @@ To enable instrumentation for specific namespaces, add the `enabledNamespaces` c
                - applications
  {{< /highlight >}}
 
+<div class="alert alert-info">The <code>enabled: true</code> option enables instrumentation for the entire cluster. You need to remove this to only enable instrumentation for specific namespaces.</a></div>
+
 To disable instrumentation for specific namespaces, add the `disabledNamespaces` configuration to your `datadog-values.yaml` file:
-{{< highlight yaml "hl_lines=6-8" >}}
+{{< highlight yaml "hl_lines=7-9" >}}
    datadog:
      apiKeyExistingSecret: datadog-secret
      site: <DATADOG_SITE>
      apm:
        instrumentation:
+         enabled: true
          disabledNamespaces: # Add namespaces to not instrument
             - default
             - applications
@@ -162,12 +166,13 @@ To disable instrumentation for specific namespaces, add the `disabledNamespaces`
 You can optionally set specific tracing library versions to use. If you don't set a specific version, it defaults to the latest version.
 
 To set specific tracing library versions, add the following configuration to your `datadog-values.yaml` file:
-{{< highlight yaml "hl_lines=6-11" >}}
+{{< highlight yaml "hl_lines=7-12" >}}
    datadog:
      apiKeyExistingSecret: datadog-secret
      site: <DATADOG_SITE>
      apm:
        instrumentation:
+         enabled: true
          libVersions: # Add any versions you want to set
                dotnet: v2.40.0
                python: v1.20.6
