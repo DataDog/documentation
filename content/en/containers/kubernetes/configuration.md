@@ -750,7 +750,7 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 [17]: /containers/kubernetes/log
 [18]: /network_monitoring/performance/
 [19]: /developers/dogstatsd
-[20]: https://app.datadoghq.com/orchestration/overview/
+[20]: https://app.datadoghq.com/orchestration/overview
 [21]: /infrastructure/containers/orchestrator_explorer
 [22]: /containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
 [23]: /infrastructure/process/ 

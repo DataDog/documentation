@@ -697,7 +697,7 @@ Vous pouvez ajouter d'autres écouteurs et fournisseurs de configuration à l'ai
 [17]: /fr/containers/kubernetes/log
 [18]: /fr/network_monitoring/performance/
 [19]: /fr/developers/dogstatsd
-[20]: https://app.datadoghq.com/orchestration/overview/
+[20]: https://app.datadoghq.com/orchestration/overview
 [21]: /fr/infrastructure/containers/orchestrator_explorer
 [22]: /fr/containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
 [23]: /fr/infrastructure/process/ 

@@ -251,6 +251,6 @@ You can see indexed logs that you have chosen to index and persist by selecting 
 [15]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
 [16]: /infrastructure/containers/configuration
 [17]: /infrastructure/faq/live-containers-legacy-configuration
-[18]: https://app.datadoghq.com/orchestration/overview/
+[18]: https://app.datadoghq.com/orchestration/overview
 [19]: /infrastructure/containers/orchestrator_explorer/
 [20]: /infrastructure/containers/kubernetes_resources

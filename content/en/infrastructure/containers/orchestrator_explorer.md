@@ -138,7 +138,7 @@ All of these columns support sorting, which helps you to pinpoint individual wor
 * Data is updated automatically in constant intervals. Update intervals may change during beta.
 * In clusters with 1000+ Deployments or ReplicaSets you may notice elevated CPU usage from the Cluster Agent. There is an option to disable container scrubbing in the Helm chart. See [the Helm Chart repo][15] for more details.
 
-[1]: https://app.datadoghq.com/orchestration/overview/
+[1]: https://app.datadoghq.com/orchestration/overview
 [2]: /infrastructure/containers/?tab=datadogoperator#setup
 
 [9]: /logs
