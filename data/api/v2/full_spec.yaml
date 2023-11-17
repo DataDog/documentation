@@ -710,6 +710,26 @@ components:
           items:
             $ref: '#/components/schemas/APIKeyResponseIncludedItem'
           type: array
+        meta:
+          $ref: '#/components/schemas/APIKeysResponseMeta'
+      type: object
+    APIKeysResponseMeta:
+      description: Additional information related to api keys response.
+      properties:
+        max_allowed:
+          description: Max allowed number of API keys.
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/APIKeysResponseMetaPage'
+      type: object
+    APIKeysResponseMetaPage:
+      description: Additional information related to the API keys response.
+      properties:
+        total_filtered_count:
+          description: Total filtered application key count.
+          format: int64
+          type: integer
       type: object
     APIKeysSort:
       default: name
@@ -854,6 +874,24 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/Role'
+    ApplicationKeyResponseMeta:
+      description: Additional information related to the application key response.
+      properties:
+        max_allowed_per_user:
+          description: Max allowed number of application keys per user.
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/ApplicationKeyResponseMetaPage'
+      type: object
+    ApplicationKeyResponseMetaPage:
+      description: Additional information related to the application key response.
+      properties:
+        total_filtered_count:
+          description: Total filtered application key count.
+          format: int64
+          type: integer
+      type: object
     ApplicationKeyUpdateAttributes:
       description: Attributes used to update an application Key.
       properties:
@@ -8692,6 +8730,8 @@ components:
           items:
             $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
           type: array
+        meta:
+          $ref: '#/components/schemas/ApplicationKeyResponseMeta'
       type: object
     ListDowntimesResponse:
       description: Response for retrieving all downtimes.
