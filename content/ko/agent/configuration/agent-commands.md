@@ -263,7 +263,7 @@ Agent v6의 명령줄 인터페이스는 하위 명령 기반입니다. 사용 �
 |-------------------|-----------------------------------------------------------------------------|
 | `check`           | 지정한 검사를 실행합니다.                                                    |
 | `config`          | [런타임 설정 관리][1].                                      |
-| `configcheck`     | 실행 중인 Agent의 로드되고 해결된 모든 설정을 인쇄합니다.              |
+| `configcheck`     | 실행 중인 Agent의 로드되고 해결된 모든 설정을 출력합니다.              |
 | `diagnose`        | 시스템에서 연결 진단을 실행합니다.                              |
 | `flare`           | [플레어를 모아 Datadog에게 보냅니다][2].                                |
 | `health`          | 현재 Agent 상태를 출력합니다.                                             |
@@ -276,7 +276,7 @@ Agent v6의 명령줄 인터페이스는 하위 명령 기반입니다. 사용 �
 | `start-service`   | 서비스 제어 관리자 내에서 Agent를 시작합니다. Windows 전용입니다.           |
 | `stream-logs`     | 실행 중인 에이전트가 처리 중인 로그를 스트리밍합니다.                         |
 | `stopservice`     | 서비스 제어 관리자 내에서 Agent를 중지합니다. Windows 전용입니다.            |
-| `version`         | 버전 정보를 인쇄합니다.                                                         |
+| `version`         | 버전 정보를 출력합니다.                                                         |
 
 [1]: /ko/agent/troubleshooting/config/
 [2]: /ko/agent/troubleshooting/send_a_flare/
