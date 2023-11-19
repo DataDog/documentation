@@ -94,7 +94,7 @@ clusterChecksRunner:
 {{% /tab %}}
 {{< /tabs >}}
 
-**참고**:Datadog Operator와 Helm 차트는 동일한 노드에 여러 개의 클러스터 검사 러너가 있지 않도록 `podAntiAffinity`를 사용합니다. Cluster Agent가 노드 이름으로 클러스터 검사 러너를 식별하기 때문에 이 점이 중요합니다. `podAntiAffinity`를 사용하면 이름 충돌이 발생하지 않습니다.
+**참고**: Datadog Operator와 Helm 차트는 동일한 노드에 여러 개의 클러스터 검사 러너가 있지 않도록 `podAntiAffinity`를 사용합니다. Cluster Agent가 노드 이름으로 클러스터 검사 러너를 식별하기 때문에 이 점이 중요합니다. `podAntiAffinity`를 사용하면 이름 충돌이 발생하지 않습니다.
 
 
 [1]: https://docs.datadoghq.com/ko/agent/cluster_agent/endpointschecks/
