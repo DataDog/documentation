@@ -14,9 +14,6 @@ Datadog uses a graph processing framework to map relationships between cloud res
 
 For more information on network reachability, see the [AWS documentation][34] and the [AWS Network Reachability Analyser][35]. Currently, the `Is Publicly Accessible` facet is only available for AWS resources.
 
-
-**Note:** Not all resources are able to be classified as publicly accessible or not publicly accessible through only their resource configuration. Such resources are not included here.
-
 ## Resource dependency graph
 
 The following diagrams show how related resources are used to determine whether other resources are publicly accessible. For example, an AWS CloudTrail Trail stored in a public Amazon S3 bucket is itself publicly accessible. If a resource is publicly accessible because of another resource, the relationship is shown in the Cloud Security Management Misconfigurations resource relationships graph.
@@ -232,7 +229,7 @@ For details on how Azure NSGs allow and deny Internet access for a resource, see
 
 A Virtual Machine Instance (`azure_virtual_machine_instance`) is considered publicly accessible if:
 
-* _Network Security Group allowing public access:_
+* _Attached to Network Security Group allowing public access:_
 
 | Criteria | Explanation |
 |----------|-------------|
@@ -241,7 +238,7 @@ A Virtual Machine Instance (`azure_virtual_machine_instance`) is considered publ
 
 ***OR***
 
-* _Public IP with SKU "Basic":_
+* _Has Public IP with SKU "Basic":_
 
 | Criteria | Explanation |
 |----------|-------------|
@@ -261,22 +258,13 @@ A Managed Disk (`azure_managed_disk`) is considered publicly accessible if:
 
 For more information about restricting import/export access for Azure Managed Disks, see [Network Security Groups][44].
 
-### Azure Storage Account
-
-A Storage Account (`azure_storage_account`) grants public access if:
-
-| Criteria | Explanation |
-|----------|-------------|
-|The storage account's `allow_blob_public_access` attribute is set to `true`, or is nonexistent. | This means that the account allows public Internet access to Azure Blob Storage. |
-
-To learn more about configuring anonymous read access with Azure Storage Accounts, see [Configure anonymous read access for containers and blobs][45].
-
 ### Azure Storage Blob Container
 
 A Storage Blob Container (`azure_storage_blob_container`) is considered publicly accessible if:
 
 | Criteria | Explanation |
 |----------|-------------|
+|The storage blob container's storage account has no `allow_blob_public_access` attribute, or has the attribute set to `true`. | This means that the account allows public Internet access to Azure Blob Storage. To learn more about configuring anonymous read access with Azure Storage Accounts, see [Configure anonymous read access for containers and blobs][45].|
 |The storage blob container's `public_access` attribute is not set to `None`. | This means that the account allows public Internet access to Azure Blob Storage. |
 |The storage blob container is part of a storage account that does not explicitly block public access. | When a Storage Account doesn't explicitly block public access, Storage Blob Containers inside it can be made public. |
 
