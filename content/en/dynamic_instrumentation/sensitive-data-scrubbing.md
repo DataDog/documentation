@@ -1,13 +1,17 @@
 ---
-title: Dynamic Instrumentation Senstive Data Scrubbing
+title: Dynamic Instrumentation Sensitive Data Scrubbing
 kind: documentation
-private: false
 ---
+
 ## Overview
 
-Dynamic Instrumentation allows users to craft arbitrary expressions that will be evaluated at runtime, where the result of that evaluation will be used as part of a log message, or added dynamically as a span tag. As such, there is a very serious risk of both intentional and unintentional leakage of data.
+With Dynamic Instrumentation (DI) you can craft arbitrary expressions that are evaluated at runtime, and the result of that evaluation is used as part of a log message, or added dynamically as a span tag. So there is a serious risk of data leakage. An automatic data scrubber redacts certain data in your own infrastructure, before the data is uploaded to Datadog.
 
-* Redact based on keys, not values Dynamic Instrumentation (DI) requires the ability to redact values based on keys in the json structure. 
-  * Redacts any value that is associated with the key “password” or “accessToken“
-* Redaction should happens in the customer’s infrastructure, before the data is uploaded to datadog.
+## Default data scrubbing configuration
+
+The default scrubber redacts values that are associated with the keys `password` or `accessToken`.
+
+## Extend data scrubbing rules
+
 * Redaction rules are customizable.
+* Redact based on keys, not values. 
