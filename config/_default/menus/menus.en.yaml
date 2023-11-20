@@ -2489,76 +2489,81 @@ main:
     parent: ci_explorer
     identifier: ci_explorer_saved_views
     weight: 402
+  - name: DORA Metrics
+    url: continuous_integration/dora_metrics/
+    parent: ci
+    identifier: ci_explorer_dora_metrics
+    weight: 5
   - name: Intelligent Test Runner
     url: continuous_integration/intelligent_test_runner/
     parent: ci
     identifier: ci_intelligent_test_runner
-    weight: 5
+    weight: 6
   - name: Setup
     url: continuous_integration/intelligent_test_runner/setup/
     parent: ci_intelligent_test_runner
     identifier: ci_intelligent_test_runner_setup
-    weight: 501
+    weight: 601
   - name: .NET
     url: continuous_integration/intelligent_test_runner/setup/dotnet/
     parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_dotnet
-    weight: 501
+    weight: 601
   - name: Java
     url: continuous_integration/intelligent_test_runner/setup/java/
     parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_java
-    weight: 502
+    weight: 602
   - name: JavaScript and TypeScript
     url: continuous_integration/intelligent_test_runner/setup/javascript/
     parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_javascript
-    weight: 503
+    weight: 603
   - name: Python
     url: continuous_integration/intelligent_test_runner/setup/python/
     parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_python
-    weight: 504
+    weight: 604
   - name: Swift
     url: continuous_integration/intelligent_test_runner/setup/swift/
     parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_swift
-    weight: 505
+    weight: 605
   - name: Static Analysis
     url: continuous_integration/static_analysis/
     parent: ci
     identifier: ci_static_analysis
-    weight: 6
+    weight: 7
   - name: Rules
     url: continuous_integration/static_analysis/rules
     parent: ci_static_analysis
     identifier: ci_static_analysis_rules
-    weight: 601
+    weight: 701
   - name: CircleCI Orbs
     url: continuous_integration/static_analysis/circleci_orbs
     parent: ci_static_analysis
     identifier: ci_static_analysis_circleci_orbs
-    weight: 602
+    weight: 702
   - name: GitHub Actions
     url: continuous_integration/static_analysis/github_actions
     parent: ci_static_analysis
     identifier: ci_static_analysis_github_actions
-    weight: 603
+    weight: 703
   - name: Quality Gates
     url: continuous_integration/quality_gates/
     parent: ci
     identifier: ci_quality_gates
-    weight: 7
+    weight: 8
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
     identifier: ci_guides
-    weight: 8
+    weight: 9
   - name: Troubleshooting
     url: continuous_integration/troubleshooting/
     parent: ci
     identifier: ci_troubleshooting
-    weight: 9
+    weight: 10
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2
