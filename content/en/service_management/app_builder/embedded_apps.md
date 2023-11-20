@@ -26,7 +26,7 @@ The App Editor modal appears, allowing you to select an app and provide with wit
 
 ## Sync your app with dashboard template variables
 
-To link your app with your dashboard template variables, configure any element with a `Default Value` field to search for a template variable value first, and also provide it with a default value. Use the following code snippet as an example, ensuring to replace the `<TEMPLATE_VARIABLE_NAME>` and `<DEFAULT_VALUE>` with the template variable name and default value, respectively.
+To link your app with your dashboard template variables, configure any element with a `Default Value` field to search for a template variable value first, and also provide it with a default value. Use the following code snippet as an example, ensuring to replace the `<TEMPLATE_VARIABLE_NAME>` and `<DEFAULT_VALUE>` with the template variable name and default value, respectively, and paste the snippet into the `Default Value` field of the element.
 
 {{< code-block lang="json" disable_copy="false" collapsible="false" >}}
 ${self.options?.find(o => o.includes(dashboard.templateVariables?.find(v => v.name === '<TEMPLATE_VARIABLE_NAME>')?.value)) || '<DEFAULT_VALUE>'}
