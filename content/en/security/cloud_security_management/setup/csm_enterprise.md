@@ -123,7 +123,6 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
 
 2. Restart the Agent.
 
-
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 
 {{% /tab %}}
@@ -593,6 +592,8 @@ sbom:
 {{< /tabs >}}
 
 ## Enable CloudTrail logs forwarding
+
+**Note**: Although not required, when you enable CloudTrail logs forwarding for CSM Identity Risks, you get additional insights based on the actual usage (or non-usage) of resources in your infrastructure, for example, users and roles with significant gaps between provisioned and used permissions.
 
 ### Set up the Datadog AWS integration
 
