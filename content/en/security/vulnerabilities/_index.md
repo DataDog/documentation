@@ -26,7 +26,7 @@ Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you proact
 **Note**: If you're looking for vulnerability management for your application libraries and custom application code, see [Application Vulnerability Management][5].
 
 ## Explore vulnerabilities
-The [Vulnerability Explorer][1] shows a complete list of vulnerabilities detected across your infrastructure, ordering them based on their severity, offering grouping, filtering, and triaging capabilities so you can investigate, assign, and remediate problems.
+The [Vulnerabilities Explorer][1] shows a complete list of vulnerabilities detected across your infrastructure, ordering them based on their severity, offering grouping, filtering, and triaging capabilities so you can investigate, assign, and remediate problems.
 
 {{< img src="security/vulnerabilities/CSM_Vulnerabilities_3.png" alt="The CSM Vulnerability page sorting by unique vulnerabilities" width="100%">}}
 
@@ -51,7 +51,7 @@ All vulnerabilities include a collection of links and references to websites or 
 
 ## Triage and remediate
 
-The [Vulnerability Explorer][1] also offers triaging options for detected vulnerabilities that enable you to change the status of a vulnerability, and assign it to individual members for remediation and tracking.
+The [Vulnerabilities Explorer][1] also offers triaging options for detected vulnerabilities that enable you to change the status of a vulnerability, and assign it to individual members for remediation and tracking.
 
 **Note**: To help you focus on the vulnerabilities that truly matter, vulnerabilities are auto-closed for infrastructure that is either no longer running, or contains the remediated fixed version of the previously-vulnerable package.
 
