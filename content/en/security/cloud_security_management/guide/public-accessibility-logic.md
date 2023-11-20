@@ -16,20 +16,24 @@ For more information on network reachability, see the [AWS documentation][34] an
 
 ## Resource dependency graph
 
-The following diagram shows how related resources are used to determine whether other resources are publicly accessible. For example, a CloudTrail Trail stored in a public S3 bucket is itself publicly accessible. If a resource is publicly accessible because of another resource, the relationship is shown in the Cloud Security Management Misconfigurations Resource relationships graph.
+The following diagrams show how related resources are used to determine whether other resources are publicly accessible. For example, an AWS CloudTrail Trail stored in a public Amazon S3 bucket is itself publicly accessible. If a resource is publicly accessible because of another resource, the relationship is shown in the Cloud Security Management Misconfigurations resource relationships graph.
 
-Use this diagram as a reference for how resources are correlated to determine public accessibility. 
 
-**Note**: Not all resources with the Publicly Accessible attribute are shown in this diagram.
+**Note**: Not all resources with the Publicly Accessible attribute are shown in these diagrams.
 
-{{< img src="security/cloud_security_management/guide/public_accessibility_relationships.png" alt="A graph diagram showing the relationships between resources that are used to determine public accessibility" width="100%">}}
+### AWS
 
-## Public accessibility logic by resource
+{{< img src="security/cloud_security_management/guide/public_accessibility_relationships_aws.png" alt="A graph diagram showing the relationships between resources that are used to determine public accessibility for AWS" width="100%">}}
 
-The following section details on a resource-by-resource basis the logic behind public accessibility determination for a resource.
+### Azure
 
-**Note:** Not all resources are able to be classified as publicly accessible or not publicly accessible through only their resource configuration. Such resources are not included here.
+{{< img src="security/cloud_security_management/guide/public_accessibility_relationships_azure.png" alt="A graph diagram showing the relationships between resources that are used to determine public accessibility for Azure" width="70%">}}
 
+### Google Cloud
+
+{{< img src="security/cloud_security_management/guide/public_accessibility_relationships_gcp.png" alt="A graph diagram showing the relationships between resources that are used to determine public accessibility for Google Cloud" width="50%">}}
+
+## AWS public accessibility logic by resource 
 
 ### Amazon S3 Bucket
 
@@ -205,6 +209,101 @@ An [SQS Queue][32] (`aws_sqs_queue`) is considered publicly accessible if:
 
 See [Amazon SQS security best practices][33] for more information about public SQS queues.
 
+## Azure public accessibility logic by resource
+
+### Azure Network Security Group (NSG)
+
+An Azure NSG (`azure_security_group`) grants public access if:
+
+| Criteria | Explanation |
+|----------|-------------|
+|The security group has rules with protocol `tcp`, `udp` or `*`. | These are the protocol values that are relevant for determining public access for Azure resources. |
+|The security group has `inbound` rules with access set to `Allow`. | These values indicates that the rule is allowing inbound traffic. |
+|The security group has rules with source_address_prefix equal to `*`, `0.0.0.0`, `/0`, `::/0`, `internet`, or `any`. | These CIDR prefixes allow access to the internet. |
+|The rules which match the above properties combine with any other `Deny` rules of higher priority to open at least one port to the Internet. | See [Security rules][39] to learn how Azure combines security group rules to calculate access. |
+
+For details on how Azure NSGs allow and deny Internet access for a resource, see [Network Security Groups][40].
+
+### Azure Virtual Machine Instance
+
+A Virtual Machine Instance (`azure_virtual_machine_instance`) is considered publicly accessible if:
+
+* _Attached to Network Security Group allowing public access:_
+
+| Criteria | Explanation |
+|----------|-------------|
+|The virtual machine instance has a public IP address attached to one of its network interfaces. | A public IP is required for Internet access to a virtual machine instance. |
+|The virtual machine instance has a network security group granting public access attached to one of its network interfaces. | To learn more about how a network can grant public access, see [Azure Network Security Group (NSG)](#azure-network-security-group-nsg). |
+
+***OR***
+
+* _Has Public IP with SKU "Basic":_
+
+| Criteria | Explanation |
+|----------|-------------|
+|The virtual machine instance has a public IP address with SKU Basic attached to its network interface. | A public IP address with SKU basic is open by default (see [Public IP addresses][41]). |
+|The virtual machine instance has no attached network security groups. | If no network security groups are attached, then there are no rules blocking access through the open public IP address. |
+
+To learn more about Azure Virtual Machine Instances and public access, see [Associate a public IP address to a virtual machine][42].
+
+### Azure Storage Blob Container
+
+A Storage Blob Container (`azure_storage_blob_container`) is considered publicly accessible if:
+
+| Criteria | Explanation |
+|----------|-------------|
+|The storage blob container's storage account has no `allow_blob_public_access` attribute, or has the attribute set to `true`. | This means that the account allows public Internet access to Azure Blob Storage. To learn more about configuring anonymous read access with Azure Storage Accounts, see [Configure anonymous read access for containers and blobs][45].|
+|The storage blob container's `public_access` attribute is set to `blob` or `container`. | This means that the account allows public Internet access to Azure Blob Storage. |
+|The storage blob container is part of a storage account that does not explicitly block public access. | When a Storage Account doesn't explicitly block public access, Storage Blob Containers inside it can be made public. |
+
+To learn more about disallowing blob public access on Azure Storage accounts, see [Choose to allow or disallow blob public access on Azure Storage accounts][46].
+
+## Google Cloud Public accessibility logic by resource
+
+### Google Cloud Compute Firewall
+
+A Compute Firewall (`gcp_compute_firewall`) grants public access if:
+
+| Criteria | Explanation |
+|----------|-------------|
+|The firewall has one or more rules whose protocol is TCP or all and which have `0.0.0.0/0` or `::/0` in their `source_ranges`. | These CIDR prefixes allow access from the Internet, and are the protocol values that are relevant for determining public access. |
+|The firewall's direction is `ingress`. | This means that the firewall is relevant for inbound access from the Internet. |
+
+For more information about using Compute Firewalls, [Choose to allow or disallow blob public access on Azure Storage accounts][47].
+
+### Google Cloud Compute Instance
+
+A Compute Instance (`gcp_compute_instance`) is considered publicly accessible if:
+
+| Criteria | Explanation |
+|----------|-------------|
+|The compute instance has a public IP address, meaning at least one of its network interfaces has a public IP address defined in its access configurations, | To learn more about adding an external IP to a compute instance, see [Reserve a static external IP address][48]. |
+|The compute instance has associated firewall rules that combine to open some range of ports to the internet. The firewall rules can be associated with the instance by:<br><p><ul><li>Having no `target_tags` or `target_service_accounts`, meaning the rule applies to the whole network.</li><li>Having `target_service_accounts` associated with one of the compute instance's `service_accounts`.</li><li>Having some `target_tags` that match the compute instance's network tags.</li></ul></p>The rules should grant public access (see [Google Cloud Compute Firewall](#google-cloud-compute-firewall)). | To learn how compute firewall rules are used to restrict port ranges for a compute instance, see [Firewall rule components][49]. |
+
+Learn more about how compute firewall rules are used to restrict port ranges for a compute instance [here][50].
+
+### Google Cloud BigQuery Dataset
+
+A BigQuery Dataset (`gcp_bigquery_dataset`) is considered publicly accessible if:
+
+| Criteria | Explanation |
+|----------|-------------|
+|The dataset has an IAM policy attached that has a `member` value of either `AllUsers` or `AllAuthenticatedUsers`. | These members allow anyone on the internet to access the database. See [IAM overview][51] for more information. |
+|The dataset has an IAM policy attached that binds it to one of the following roles: `roles/viewer`, `roles/owner`, `roles/editor`, `roles/bigquery.admin`, `roles/bigquery.metadataviewer`, `roles/bigquery.dataowner`, `roles/bigquery.dataeditor`, `roles/bigquery.dataviewer`, or `roles/bigquery.user`. | These roles allow the person who accesses the resource to perform dangerous operations on the database. See the [role reference][52] for more information. |
+
+Learn more about [BigQuery Datasets][53].
+
+### Google Cloud Storage Bucket
+
+A Storage Bucket (`gcp_storage_bucket`) is considered publicly accessible if:
+
+| Criteria | Explanation |
+|----------|-------------|
+|The bucket has an IAM policy attached that has a `member` value of either `AllUsers` or `AllAuthenticatedUsers`. | These members allow anyone on the Internet to access the database. See more [here][54]. |
+|The bucket has `public_access_prevention` set to `inherited` in its `iam_configuration`. | This setting block public access if set to `enforced`. For more information about the public access prevention setting, see [Public access prevention][55]. |
+|The bucket has an IAM policy attached that binds it to one of the following roles: <ul><li><code>roles/backupdr.cloudstorageoperator</code></li><li><code>roles/bigquerymigration.worker</code></li><li><code>roles/cloudbuild.builds.builder</code></li><li><code>roles/clouddeploy.jobrunner</code></li><li><code>roles/cloudmigration.storageaccess</code></li><li><code>roles/cloudtestservice.testadmin</code></li><li><code>roles/cloudtestservice.testviewer</code></li><li><code>roles/composer.environmentandstorageobjectadmin</code></li><li><code>roles/composer.environmentandstorageobjectuser</code></li><li><code>roles/composer.environmentandstorageobjectviewer</code></li><li><code>roles/composer.worker</code></li><li><code>roles/config.agent</code></li><li><code>roles/container.nodeserviceaccount</code></li><li><code>roles/dataflow.admin</code></li><li><code>roles/dataflow.worker</code></li><li><code>roles/dataplex.storagedataowner</code></li><li><code>roles/dataplex.storagedatareader</code></li><li><code>roles/dataproc.hubagent</code></li><li><code>roles/dataproc.worker</code></li><li><code>roles/firebase.admin</code></li><li><code>roles/firebase.developadmin</code></li><li><code>roles/firebase.developviewer</code></li><li><code>roles/firebase.viewer</code></li><li><code>roles/firebaserules.system</code></li><li><code>roles/managedidentities.domaincontrolleroperator</code></li><li><code>roles/storage.admin</code></li><li><code>roles/storage.legacyobjectowner</code></li><li><code>roles/storage.legacyobjectreader</code></li><li><code>roles/storage.objectadmin</code></li><li><code>roles/storage.objectuser</code></li><li><code>roles/storage.objectviewer</code></li></ul>|These roles allow the person who accesses the resource to perform dangerous operations on the bucket. See the [role reference][56] for more information.|
+
+Explore more information about making storage buckets public [here][57].
 
 ## Further Reading
 
@@ -248,3 +347,22 @@ See [Amazon SQS security best practices][33] for more information about public S
 [36]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-example-private-subnets-nat.html
 [37]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html
 [38]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html
+[39]: https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview#security-rules
+[40]: https://azure.microsoft.com/en-us/blog/network-security-groups/
+[41]: https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
+[42]: https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/associate-public-ip-address-vm?tabs=azure-portal
+[43]: https://learn.microsoft.com/en-us/rest/api/compute/disks/create-or-update?view=rest-compute-2023-04-02&tabs=HTTP
+[44]: https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-private-links-for-import-export-portal
+[45]: https://learn.microsoft.com/en-us/azure/storage/blobs/anonymous-read-access-configure?tabs=portal
+[46]: https://azure.microsoft.com/en-us/updates/choose-to-allow-or-disallow-blob-public-access-on-azure-storage-accounts/
+[47]: https://azure.microsoft.com/en-us/updates/choose-to-allow-or-disallow-blob-public-access-on-azure-storage-accounts/
+[48]: https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address
+[49]: https://cloud.google.com/firewall/docs/firewalls#firewall_rule_components
+[50]: https://cloud.google.com/compute/docs/instances
+[51]: https://cloud.google.com/iam/docs/overview
+[52]: https://cloud.google.com/iam/docs/understanding-roles#bigquery-roles
+[53]: https://cloud.google.com/bigquery?hl=en
+[54]: https://cloud.google.com/iam/docs/overview
+[55]: https://cloud.google.com/storage/docs/public-access-prevention
+[56]: https://cloud.google.com/iam/docs/understanding-roles#cloud-storage-roles
+[57]: https://cloud.google.com/storage/docs/access-control/making-data-public

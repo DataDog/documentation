@@ -45,8 +45,19 @@ To ensure the safety of your data, you must use a client token. For more informa
 First, ensure that you have your environment set up properly for each platform.
 
 <div class="alert alert-info">
-Datadog supports Flutter Monitoring for iOS and Android for Flutter 2.8+. Support for Flutter Web is in alpha.
+Datadog supports Flutter Monitoring for iOS and Android for Flutter 3.0+.
 </div>
+
+Datadog does not officially support Flutter Web, but the current Flutter SDK for mobile apps allows you to achieve some out-of-the-box monitoring. Here are known limitations:
+  * All Actions reported from Flutter are labeled with type `custom`.
+  * Long running actions (`startAction` / `stopAction`) are not supported.
+  * Manually reporting RUM resources (`startResource` / `stopResource`) is not supported.
+  * Event mappers are not currently supported.
+  * Tags on loggers are not currently supported.
+  * `addUserExtraInfo` is not supported.
+  * `stopSession` is not supported.
+
+No Flutter Web support is planned, but Datadog's priorities are often re-evaluated based on your feedback. If you have a Flutter Web app and would want to use Datadog RUM to monitor its performance, reach out to your customer support team and escalate this feature request.
 
 #### iOS
 
@@ -62,45 +73,45 @@ You can replace `11.0` with any minimum version of iOS you want to support that 
 
 #### Android
 
-For Android, your `minSdkVersion` version must be >= 19, and if you are using Kotlin, it should be a version >= 1.6.21. These constraints are usually held in your `android/app/build.gradle` file.
+For Android, your `minSdkVersion` version must be >= 21, and if you are using Kotlin, it should be a version >= 1.8.0. These constraints are usually held in your `android/app/build.gradle` file.
 
-#### Web
+### Web
 
 For Web, add the following to your `index.html` under the `head` tag, for **{{<region-param key="dd_site_name">}}** site:
 {{< site-region region="us" >}}
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v4/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum-slim.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum-slim.js"></script>
 ```
 {{</ site-region>}}
 {{< site-region region="ap1" >}}
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v4/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum-slim.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-rum-slim.js"></script>
 ```
 {{</ site-region>}}
 {{< site-region region="eu" >}}
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v4/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum-slim.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-rum-slim.js"></script>
 ```
 {{</ site-region>}}
 {{< site-region region="us3" >}}
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v4/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v4/datadog-rum-slim.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v5/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v5/datadog-rum-slim.js"></script>
 ```
 {{</ site-region>}}
 {{< site-region region="us5" >}}
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v4/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v4/datadog-rum-slim.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v5/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum-slim.js"></script>
 ```
 {{</ site-region>}}
 {{< site-region region="gov" >}}
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v4.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-rum-slim-v4.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v5.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-rum-slim-v5.js"></script>
 ```
 {{</ site-region>}}
 
@@ -112,30 +123,26 @@ This loads the CDN-delivered Datadog Browser SDKs for Logs and RUM. The synchron
 
    ```yaml
    dependencies:
-     datadog_flutter_plugin: ^1.3.0
+     datadog_flutter_plugin: ^2.0.0
    ```
 2. Create a configuration object for each Datadog feature (such as Logs or RUM) with the following snippet. If you do not pass a configuration for a given feature, that feature is disabled.
 
    ```dart
    // Determine the user's consent to be tracked
    final trackingConsent = ...
-   final configuration = DdSdkConfiguration(
+   final configuration = DatadogConfiguration(
      clientToken: '<CLIENT_TOKEN>',
      env: '<ENV_NAME>',
      site: DatadogSite.us1,
-     trackingConsent: trackingConsent,
      nativeCrashReportEnabled: true,
-     loggingConfiguration: LoggingConfiguration(
-       sendNetworkInfo: true,
-       printLogsToConsole: true,
-     ),
-     rumConfiguration: RumConfiguration(
+     loggingConfiguration: DatadogLoggingConfiguration(),
+     rumConfiguration: DatadogRumConfiguration(
        applicationId: '<RUM_APPLICATION_ID>',
      )
    );
    ```
 
-For more information on available configuration options, see the [DdSdkConfiguration object documentation][3].
+For more information on available configuration options, see the [DatadogConfiguration object documentation][3].
 
 To ensure the safety of your data, you must use a client token. You cannot use Datadog API keys to configure the Datadog Flutter Plugin.
 
@@ -151,7 +158,7 @@ You can initialize RUM using one of two methods in your `main.dart` file.
 1. Use `DatadogSdk.runApp` which automatically sets up [Error Tracking][4].
 
    ```dart
-   await DatadogSdk.runApp(configuration, () async {
+   await DatadogSdk.runApp(configuration, TrackingConsent.granted, () async {
      runApp(const MyApp());
    })
    ```
@@ -159,23 +166,23 @@ You can initialize RUM using one of two methods in your `main.dart` file.
 2. Alternatively, manually set up [Error Tracking][4] and resource tracking. `DatadogSdk.runApp` calls `WidgetsFlutterBinding.ensureInitialized`, so if you are not using `DatadogSdk.runApp`, you need to call this method prior to calling `DatadogSdk.instance.initialize`.
 
    ```dart
-   runZonedGuarded(() async {
-     WidgetsFlutterBinding.ensureInitialized();
-     final originalOnError = FlutterError.onError;
-     FlutterError.onError = (details) {
-       FlutterError.presentError(details);
-       DatadogSdk.instance.rum?.handleFlutterError(details);
-       originalOnError?.call(details);
-     };
-     await DatadogSdk.instance.initialize(configuration);
-     runApp(const MyApp());
-   }, (e, s) {
+   WidgetsFlutterBinding.ensureInitialized();
+   final originalOnError = FlutterError.onError;
+   FlutterError.onError = (details) {
+     DatadogSdk.instance.rum?.handleFlutterError(details);
+     originalOnError?.call(details);
+   };
+   final platformOriginalOnError = PlatformDispatcher.instance.onError;
+   PlatformDispatcher.instance.onError = (e, st) {
      DatadogSdk.instance.rum?.addErrorInfo(
        e.toString(),
        RumErrorSource.source,
-       stackTrace: s,
+       stackTrace: st,
      );
-   });
+     return platformOriginalOnError?.call(e, st) ?? false;
+   };
+   await DatadogSdk.instance.initialize(configuration, TrackingConsent.granted);
+   runApp(const MyApp());
    ```
 
 ### Sample RUM sessions
@@ -185,9 +192,9 @@ To control the data your application sends to Datadog RUM, you can specify a sam
 For example, to keep only 50% of sessions, use:
 
 ```dart
-final config = DdSdkConfiguration(
+final config = DatadogConfiguration(
     // other configuration...
-    rumConfiguration: RumConfiguration(
+    rumConfiguration: DatadogRumConfiguration(
         applicationId: '<YOUR_APPLICATION_ID>',
         sessionSamplingRate: 50.0,
     ),
@@ -232,7 +239,7 @@ If you are not using named routes, you can use `DatadogRouteAwareMixin` in conju
 
 ### Flutter Navigator v2
 
-If you are using Flutter Navigator v2.0, which uses the `MaterialApp.router` named constructor, the setup varies based on the routing middleware you are using, if any. Since [go_router][11], uses the same observer interface as Flutter Navigator v1, so the `DatadogNavigationObserver` can be added to other observers as a parameter to `GoRouter`.
+If you are using Flutter Navigator v2.0, which uses the `MaterialApp.router` named constructor, the setup varies based on the routing middleware you are using, if any. Since [`go_router`][11] uses the same observer interface as Flutter Navigator v1, `DatadogNavigationObserver` can be added to other observers as a parameter to `GoRouter`.
 
 ```dart
 final _router = GoRouter(
@@ -282,7 +289,7 @@ Use the [Datadog Tracking HTTP Client][5] package to enable automatic tracking o
 Add the package to your `pubspec.yaml` and add the following to your initialization file:
 
 ```dart
-final configuration = DdSdkConfiguration(
+final configuration = DatadogConfiguration(
   // configuration
   firstPartyHosts: ['example.com'],
 )..enableHttpTracking()
@@ -290,11 +297,11 @@ final configuration = DdSdkConfiguration(
 
 **Note**: The Datadog Tracking HTTP Client modifies [`HttpOverrides.global`][9]. If you are using your own custom `HttpOverrides`, you may need to inherit from [`DatadogHttpOverrides`][10]. In this case, you do not need to call `enableHttpTracking`. Versions of `datadog_tracking_http_client` >= 1.3 check the value of `HttpOverrides.current` and use this for client creation, so you only need to make sure to initialize `HttpOverrides.global` prior to initializing Datadog.
 
-In order to enable Datadog [Distributed Tracing][6], you must set the `DdSdkConfiguration.firstPartyHosts` property in your configuration object to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `tracingSamplingRate` on your `RumConfiguration`.
+In order to enable Datadog [Distributed Tracing][6], you must set the `DatadogConfiguration.firstPartyHosts` property in your configuration object to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `tracingSamplingRate` on your `DatadogRumConfiguration`.
 
 - `firstPartyHosts` does not allow wildcards, but matches any subdomains for a given domain. For example, `api.example.com` matches `staging.api.example.com` and `prod.api.example.com`, not `news.example.com`.
 
-- `RumConfiguration.tracingSamplingRate` sets a default sampling rate of 20%. If you want all resources requests to generate a full distributed trace, set this value to `100.0`.
+- `DatadogRumConfiguration.traceSampleRate` sets a default sampling rate of 20%. If you want all resources requests to generate a full distributed trace, set this value to `100.0`.
 
 
 ## Automatically track actions
@@ -317,7 +324,7 @@ RumUserActionDetector(
 
 For most Button types, the detector looks for a `Text` widget child, which it uses for the description of the action. In other cases it looks for a `Semantics` object child, or an `Icon` with its `Icon.semanticsLabel` property set.
 
-Alternatively, you can enclose any Widget tree with a [`RumUserActionAnnotation``][14], which uses the provided description when reporting user actions detected in the child tree, without changing the Semantics of the tree.
+Alternatively, you can enclose any Widget tree with a [`RumUserActionAnnotation`][14], which uses the provided description when reporting user actions detected in the child tree, without changing the Semantics of the tree.
 
 ```dart
 Container(
@@ -351,7 +358,7 @@ Container(
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /account_management/api-app-keys/#client-tokens
-[3]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DdSdkConfiguration-class.html
+[3]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
 [4]: /real_user_monitoring/error_tracking/flutter
 [5]: https://pub.dev/packages/datadog_tracking_http_client
 [6]: /serverless/distributed_tracing

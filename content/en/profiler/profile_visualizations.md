@@ -106,7 +106,7 @@ Compared to the flame graph, the timeline view can help you:
 
 Depending on the runtime and language, the timeline lanes vary:
 
-{{< programming-lang-wrapper langs="java,go,ruby,dotnet" >}}
+{{< programming-lang-wrapper langs="java,go,ruby,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
@@ -139,6 +139,15 @@ Each lane represents a **thread**. Threads from a common pool are grouped togeth
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
 Lanes on top are runtime activities that may impact performance.
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+See [prerequisites][1] to learn how to enable this feature for PHP.
+
+There is one lane for the PHP **thread**. Fibers that run in this **thread** are represented in separate lanes that are grouped together.
+
+Lanes on the top are runtime activities that may add extra latency to your request, due to file compilation and garbage collection.
+
+[1]: /profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
