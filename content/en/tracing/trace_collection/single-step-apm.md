@@ -28,7 +28,7 @@ For an Ubuntu host:
    ```
 
    Replace `<YOUR_DD_API_KEY>` with your [Datadog API][4].
-   Replace `<YOUR_DD_SITE>` with your [Datadog site][3]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct **DATADOG SITE** is selected on this page).
+   Replace `<YOUR_DD_SITE>` with your [Datadog site][3].
 2. Restart the services on the host or VM.
 3. [Explore the performance observability of your services in Datadog][5].
 
@@ -104,7 +104,7 @@ To enable single step instrumentation with Helm:
       instrumentation:
          enabled: true
    ```
-   Replace `<DATADOG_SITE>` with your [Datadog site][12]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the this page.)
+   Replace `<DATADOG_SITE>` with your [Datadog site][12].
 
    <div class="alert alert-info">
       Here you can also optionally configure the following:
@@ -142,8 +142,8 @@ To enable instrumentation for specific namespaces, replace `enabled: true` with 
         apm:
           instrumentation:
             enabledNamespaces: # Add namespaces to instrument
-               - default
-               - applications
+               - namespace_1
+               - namespace_2
  {{< /highlight >}}
 
 <div class="alert alert-info">The <code>enabled: true</code> option enables instrumentation for the entire cluster. You need to remove this to only enable instrumentation for specific namespaces.</a></div>
@@ -157,8 +157,8 @@ To disable instrumentation for specific namespaces, add the `disabledNamespaces`
        instrumentation:
          enabled: true
          disabledNamespaces: # Add namespaces to not instrument
-            - default
-            - applications
+            - namespace_1
+            - namespace_2
 {{< /highlight >}}
 
 ### Specifying tracing library versions
@@ -275,7 +275,7 @@ To stop producing traces, remove library injectors and restart the infrastructur
 
 {{% tab "Kubernetes" %}}
 
-1. Remove `instrumentation:` and all following configuration in `datadog-values.yaml`.
+1. Under `apm:`, remove `instrumentation:` and all following configuration in `datadog-values.yaml`.
 2. Run the following command:
    ```bash
    helm upgrade <RELEASE_NAME> \
