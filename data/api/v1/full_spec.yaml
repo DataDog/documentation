@@ -21184,6 +21184,8 @@ components:
       - 1mo
       - 3mo
       - 6mo
+      - week_to_date
+      - month_to_date
       - 1y
       - alert
       example: 5m
@@ -21202,6 +21204,8 @@ components:
       - PAST_ONE_MONTH
       - PAST_THREE_MONTHS
       - PAST_SIX_MONTHS
+      - WEEK_TO_DATE
+      - MONTH_TO_DATE
       - PAST_ONE_YEAR
       - ALERT
     WidgetMargin:
