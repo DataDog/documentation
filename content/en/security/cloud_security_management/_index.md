@@ -37,6 +37,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/"
     tag: "Blog"
     text: "Build sufficient security coverage for your cloud environment"
+  - link: "https://www.datadoghq.com/blog/cloud-security-study-learnings/"
+    tag: "Blog"
+    text: "Key learnings from the State of Cloud Security study"
 algolia:
   tags: ['inbox']
 ---
