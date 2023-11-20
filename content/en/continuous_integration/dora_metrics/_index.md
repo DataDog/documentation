@@ -4,6 +4,9 @@ kind: documentation
 description: Learn how to use DORA metrics to improve and measure software development.
 is_beta: true
 further_reading:
+- link: "/continuous_integration/tests"
+  tag: "Documentation"
+  text: "Learn about Test Visibility"
 - link: "/continuous_integration/pipelines"
   tag: "Documentation"
   text: "Learn about Pipeline Visibility"
