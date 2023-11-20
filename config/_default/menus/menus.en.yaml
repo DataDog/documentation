@@ -2409,56 +2409,61 @@ main:
     parent: ci
     identifier: pipeline_visibility
     weight: 2
+  - name: AWS CodePipeline
+    url: continuous_integration/pipelines/awscodepipeline/
+    parent: pipeline_visibility
+    identifier: ci_awscodepipeline
+    weight: 201
   - name: Azure
     url: continuous_integration/pipelines/azure/
     parent: pipeline_visibility
     identifier: ci_azure
-    weight: 201
+    weight: 202
   - name: Buildkite
     url: continuous_integration/pipelines/buildkite/
     parent: pipeline_visibility
     identifier: ci_buildkite
-    weight: 202
+    weight: 203
   - name: CircleCI
     url: continuous_integration/pipelines/circleci/
     parent: pipeline_visibility
     identifier: ci_circleci
-    weight: 203
+    weight: 204
   - name: Codefresh
     url: continuous_integration/pipelines/codefresh/
     parent: pipeline_visibility
     identifier: ci_codefresh
-    weight: 204
+    weight: 205
   - name: GitHub Actions
     url: continuous_integration/pipelines/github/
     parent: pipeline_visibility
     identifier: ci_github
-    weight: 205
+    weight: 206
   - name: GitLab
     url: continuous_integration/pipelines/gitlab/
     parent: pipeline_visibility
     identifier: ci_gitlab
-    weight: 206
+    weight: 207
   - name: Jenkins
     url: continuous_integration/pipelines/jenkins/
     parent: pipeline_visibility
     identifier: ci_jenkins
-    weight: 207
+    weight: 208
   - name: TeamCity
     url: continuous_integration/pipelines/teamcity/
     parent: pipeline_visibility
     identifier: ci_teamcity
-    weight: 208
+    weight: 209
   - name: Custom Commands
     url: continuous_integration/pipelines/custom_commands/
     parent: pipeline_visibility
     identifier: ci_custom_commands
-    weight: 209
+    weight: 210
   - name: Custom Tags and Metrics
     url: continuous_integration/pipelines/custom_tags_and_metrics/
     parent: pipeline_visibility
     identifier: ci_custom_tags_and_metrics
-    weight: 210
+    weight: 211
   - name: Search and Manage
     url: continuous_integration/search/
     parent: ci
@@ -3237,16 +3242,6 @@ main:
     parent: cloud_workload_security
     identifier: cws_security_signals
     weight: 204
-  - name: Security Profiles
-    url: security/threats/security_profiles
-    parent: cloud_workload_security
-    identifier: cws_workload_security_profiles
-    weight: 206
-  - name: Runtime Anomaly Detection
-    url: security/threats/runtime_anomaly_detection
-    parent: cloud_workload_security
-    identifier: cws_workload_anomaly_detection
-    weight: 208
   - name: Creating Custom Agent Rules
     url: security/threats/agent_expressions
     parent: cloud_workload_security
@@ -7486,6 +7481,18 @@ api:
         - UpdateTest
       unstable: []
       order: 26
+  - name: Patch a Synthetic test
+    url: '#patch-a-synthetic-test'
+    identifier: synthetics-patch-a-synthetic-test
+    parent: synthetics
+    generated: true
+    params:
+      versions:
+        - v1
+      operationids:
+        - PatchTest
+      unstable: []
+      order: 29
   - name: Get a test configuration
     url: '#get-a-test-configuration'
     identifier: synthetics-get-a-test-configuration
@@ -7810,6 +7817,18 @@ api:
     url: /api/latest/usage-metering/
     identifier: usage-metering
     generated: true
+  - name: Get projected cost across your account
+    url: '#get-projected-cost-across-your-account'
+    identifier: usage-metering-get-projected-cost-across-your-account
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetProjectedCost
+      unstable: []
+      order: 7
   - name: Get hourly usage for observability pipelines
     url: '#get-hourly-usage-for-observability-pipelines'
     identifier: usage-metering-get-hourly-usage-for-observability-pipelines
@@ -7894,6 +7913,32 @@ api:
         - GetUsageApplicationSecurityMonitoring
       unstable: []
       order: 38
+  - name: Get Monthly Cost Attribution
+    url: '#get-monthly-cost-attribution'
+    identifier: usage-metering-get-monthly-cost-attribution
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetMonthlyCostAttribution
+      unstable:
+        - v2
+      order: 5
+  - name: Get active billing dimensions for cost attribution
+    url: '#get-active-billing-dimensions-for-cost-attribution'
+    identifier: usage-metering-get-active-billing-dimensions-for-cost-attribution
+    parent: usage-metering
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetActiveBillingDimensions
+      unstable:
+        - v2
+      order: 5
   - name: Get all custom metrics by hourly average
     url: '#get-all-custom-metrics-by-hourly-average'
     identifier: usage-metering-get-all-custom-metrics-by-hourly-average
@@ -9126,6 +9171,36 @@ api:
       unstable:
         - v2
       order: 1
+  - name: DORA Metrics
+    url: /api/latest/dora-metrics/
+    identifier: dora-metrics
+    generated: true
+  - name: Send an incident event for DORA Metrics
+    url: '#send-an-incident-event-for-dora-metrics'
+    identifier: dora-metrics-send-an-incident-event-for-dora-metrics
+    parent: dora-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateDORAIncident
+      unstable:
+        - v2
+      order: 4
+  - name: Send a deployment event for DORA Metrics
+    url: '#send-a-deployment-event-for-dora-metrics'
+    identifier: dora-metrics-send-a-deployment-event-for-dora-metrics
+    parent: dora-metrics
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateDORADeployment
+      unstable:
+        - v2
+      order: 4
   - name: Fastly Integration
     url: /api/latest/fastly-integration/
     identifier: fastly-integration

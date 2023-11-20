@@ -39,6 +39,10 @@
     "name": "Containers",
     "description": "The Containers API allows you to query container data for your organization."
   },
+  "dora-metrics": {
+    "name": "DORA Metrics",
+    "description": "Send events for DORA Metrics to measure and improve software delivery."
+  },
   "dashboard-lists": {
     "name": "Dashboard Lists",
     "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."
