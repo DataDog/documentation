@@ -88,9 +88,25 @@ pip install -r requirements.txt
 
 Start the application by running:
 
-{{< code-block lang="shell" >}}
+{{% tabs %}}
+
+{{< tab "Poetry" >}}
+
+```shell
+poetry run python -m notes_app.app
+```
+
+{{< /tab >}}
+
+{{< tab "pip" >}}
+
+```shell
 python -m notes_app.app
-{{< /code-block >}}
+```
+
+{{< /tab >}}
+
+{{% /tabs %}}
 
 The sample `notes_app` application is a basic REST API that stores data in an in-memory database. Open another terminal and use `curl` to send a few API requests:
 
