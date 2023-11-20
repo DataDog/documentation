@@ -88,9 +88,11 @@ Use the [Issues page][7] to review and remediate your organization's security de
 
 ## Investigate resources
 
+<div class="alert alert-info">Resource Catalog is in beta.</div>
+
 Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. See [Resource Catalog][13] for more information.
 
-{{< img src="infrastructure/resource_catalog/Resource_Catalog_Infra.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and misconfigurations." style="width:100%;" >}}
+{{< img src="infrastructure/resource_catalog/Resource_Catalog_Infra_2.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and misconfigurations." style="width:100%;" >}}
 
 ## Subscribe to weekly digest reports
 

@@ -1,6 +1,7 @@
 ---
 title: Datadog Resource Catalog
 kind: documentation
+is_beta: true
 aliases:
   - /security_platform/cspm/resource_catalog
   - /security/cspm/resource_catalog
@@ -20,13 +21,15 @@ Resource Catalog is not available in this site.
 </div>
 {{< /site-region >}}
 
+<div class="alert alert-info">Resource Catalog is in beta.</div>
+
 ## Overview
 
 Datadog Resource Catalog provides a high-level overview of the hosts and resources in your cloud and hybrid environments. View information such as tags, configuration details, relationships between assets, misconfigurations, and threats. See what team is responsible for each resource, and what security misconfigurations have been reported. Access dashboards and Datadog views that receive and monitor telemetry and security data for each resource.
 
 Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to gather data from cloud resources such as databases, storage services, and hosts.
 
-{{< img src="/infrastructure/resource_catalog/Resource_Catalog_2.png" alt="The Resource Catalog page showing the Inventory and Security tabs, sorting by environment" width="100%">}}
+{{< img src="/infrastructure/resource_catalog/Resource_Catalog.png" alt="The Resource Catalog page showing the Inventory tab, sorting by service" width="100%">}}
 
 ## Setup
 
