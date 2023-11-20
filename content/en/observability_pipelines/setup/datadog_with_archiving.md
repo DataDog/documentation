@@ -429,7 +429,7 @@ Production-oriented setup is not included in the Docker instructions. Instead, r
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
 Use the load balancers provided by your cloud provider.
-They adjust based on autoscaling events that the default Helm setup is configured for. The load balancers are internal-facing,
+The load balancers adjust based on autoscaling events that the default Helm setup is configured for. The load balancers are internal-facing,
 so they are only accessible inside your network.
 
 Use the load balancer URL given to you by Helm when you configure the Datadog Agent.
