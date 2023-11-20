@@ -22,13 +22,13 @@ Actions can be authenticated in two ways:
 - Credentials and permissions configured in the integration tile
 - Connection credentials
 
-For more information on configuring credentials, see [Connections][2].
+For more information on configuring credentials, see [Connections][2]. The Action Catalog and the connection credentials for each integration are shared with [Datadog Workflow Automation][3].
 
 ## App permissions
 
 ### Coarse access to apps and connections
 
-Use [role-based access control (RBAC)][3] to control access to your apps and connections. 
+Use [role-based access control (RBAC)][4] to control access to your apps and connections. 
 
 The coarse permissions that apply to apps include **Write** and **Run**
 
@@ -55,7 +55,7 @@ Resolving a connection includes getting the connection object assigned to a step
 
 Use the following steps to modify the permissions on a specific connection:
 
-1. Navigate to the [App Builder page][4].
+1. Navigate to the [App Builder page][5].
 1. Click the **Connections** tab. A list of connections appears.
 1. Hover over the connection on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
 1. Click the padlock (**Permissions**) icon.
@@ -87,5 +87,6 @@ Restrict access while editing the app in the app canvas.
 
 [1]: /service_management/workflows/actions_catalog/
 [2]: /service_management/workflows/connections/
-[3]: /account_management/rbac/
-[4]: https://app.datadoghq.com/app-builder/
+[3]: /service_management/workflows/
+[4]: /account_management/rbac/
+[5]: https://app.datadoghq.com/app-builder/
