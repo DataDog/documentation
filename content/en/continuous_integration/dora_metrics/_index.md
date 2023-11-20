@@ -12,7 +12,7 @@ further_reading:
   text: "Learn about the Service Catalog"
 - link: "https://github.com/DataDog/datadog-ci"
   tag: "Source Code"
-  text: "Learn about the `datadog-ci` CLI tool"
+  text: "Learn about the datadog-ci CLI tool"
 ---
 
 {{< site-region region="gov" >}}
@@ -20,7 +20,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="https://forms.gle/Eqq6uXfGjYxmqpjDA" header="false" >}}
-DORA Metrics are in private beta for <a href="https://docs.datadoghq.com/continuous_integration/pipelines/">CI Pipeline Visibility</a>, <a href="https://docs.datadoghq.com/continuous_integration/tests/">Test Visibility</a> and/or <a href="https://docs.datadoghq.com/continuous_integration/static_analysis/">Static Analysis</a> customers. To request access, complete the form.
+DORA Metrics are in private beta for <a href="https://docs.datadoghq.com/continuous_integration/pipelines/">CI Pipeline Visibility</a>, <a href="https://docs.datadoghq.com/continuous_integration/tests/">Test Visibility</a> and <a href="https://docs.datadoghq.com/continuous_integration/static_analysis/">Static Analysis</a> customers. To request access, complete the form.
 {{< /callout >}}
 
 ## Overview
@@ -101,8 +101,8 @@ The [`datadog-ci`][1] CLI tool provides a shortcut to send the deployments withi
 For the following example, set the `DD_SITE` environment variable to {{< region-param key="dd_site" code="true" >}}:
 ```shell
 export DD_BETA_COMMANDS_ENABLED=1
-export DD_SITE="DD_SITE"
-export DD_API_KEY="api-key"
+export DD_SITE="<DD_SITE>"
+export DD_API_KEY="<API_KEY>"
 
 export deploy_start=`date +%s`
 ./your-deploy-script.sh
@@ -115,8 +115,8 @@ datadog-ci dora deployment --service shopist --env prod \
 You can optionally add the following parameters:
   - `finished-at` is automatically set to now if not provided.
   - `env`
-  - `git-repository-url` and `git-commit-sha` can be omitted if the deployment CI job is running on the exact same git checkout that has been deployed.
-  - `skip-git` disables the git details ([change lead time](#lead-time-for-changes) is not available).
+  - `git-repository-url` and `git-commit-sha` can be omitted if the deployment CI job is running on the exact same Git checkout that has been deployed.
+  - `skip-git` disables the Git details ([change lead time](#lead-time-for-changes) is not available).
 
 [1]: https://www.npmjs.com/package/@datadog/datadog-ci
 {{% /tab %}}
@@ -174,13 +174,13 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Filter git commits in monorepos
+#### Filter Git commits in monorepos
 
-If you are using a monorepo (building several services from the same git repository), not every git commit affects the lead time of all services.
+If you are using a monorepo (building several services from the same Git repository), not every Git commit affects the lead time of all services.
 
 To filter the commits measured to only the ones that affect the service, specify the source code glob file path patterns in the [Service definition][6].
 
-If the Service definition contains a **full** GitHub URL to the application folder, a single path pattern is automatically used.
+If the service definition contains a **full** GitHub URL to the application folder, a single path pattern is automatically used.
 
 **Example (schema version v2.2):**
 
@@ -204,7 +204,7 @@ extensions:
       - src/libs/utils/**
 ```
 
-DORA Metrics for the service `shopist` only consider the git commits that include changes within `src/apps/shopist/**` or `src/libs/utils/**`.
+DORA Metrics for the service `shopist` only consider the Git commits that include changes within `src/apps/shopist/**` or `src/libs/utils/**`.
 
 ### Change failure rate
 
@@ -275,7 +275,7 @@ Use the information on this page to identify improvements or regressions for eac
 
 - Deployment and incident events must be sent as soon as possible. Events for which the `started_at` timestamp is 1 hour older than the current time are not accepted.
 - Deployments or incidents of the same service cannot occur at the same second.
-- For [change lead time](#lead-time-for-changes), the retention of git metadata is 1 month. Commits older that 1 month are not accounted for.
+- For [change lead time](#lead-time-for-changes), the retention of Git metadata is 1 month. Commits older that 1 month are not accounted for.
 
 ## Further Reading
 
