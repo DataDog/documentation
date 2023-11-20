@@ -70,6 +70,8 @@ To successfully proxy request to Datadog:
 3. Forward the request to the Datadog intake URL using the POST method.
 4. Leave the request body unchanged.
 
+The request body can contain binary data and should not be converted to a string. Make sure your proxy implementation forwards the raw body without conversion.
+
 The site parameter is an SDK [initialization parameter][1]. Datadog intake origins for each site are listed below:
 
 | Site    | Site Parameter            | Datadog intake origin                      |
