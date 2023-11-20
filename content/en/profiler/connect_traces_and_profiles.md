@@ -120,11 +120,9 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 
 Requires `dd-trace-php` version 0.71+.
 
-To enable the new [timeline feature](#span-execution-timeline-view) (beta):
-- upgrade to `dd-trace-php` 0.89+
-- set the
-  - environment variable `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED=1`
-  - or INI setting `datadog.profiling.experimental_timeline_enabled=1`
+To enable the [timeline feature](#span-execution-timeline-view) (beta):
+- Upgrade to `dd-trace-php` version 0.89+.
+- Set the environment variable `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED=1` or INI setting `datadog.profiling.experimental_timeline_enabled=1`
 
 [1]: /profiler/enabling/php
 {{< /programming-lang >}}
@@ -219,7 +217,7 @@ See [prerequisites](#prerequisites) to learn how to enable this feature for PHP.
 
 There is one lane for the PHP **thread**. Fibers that run in this **thread** are represented in separate lanes that are grouped together.
 
-Lanes on the top are runtime activities that may add extra latency to your request, this can be file compilation as well as garbage collection.
+Lanes on the top are runtime activities that may add extra latency to your request, due to file compilation and garbage collection.
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 

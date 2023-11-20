@@ -145,7 +145,7 @@ See [prerequisites][1] to learn how to enable this feature for PHP.
 
 There is one lane for the PHP **thread**. Fibers that run in this **thread** are represented in separate lanes that are grouped together.
 
-Lanes on the top are runtime activities that may add extra latency to your request, this can be file compilation as well as garbage collection.
+Lanes on the top are runtime activities that may add extra latency to your request, due to file compilation and garbage collection.
 
 [1]: /profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
