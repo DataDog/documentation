@@ -239,5 +239,15 @@
 			"{{< vimeo url=\"VIMEO_URL\" poster=\"THUMBNAIL_URL\" >}}"
 		],
 		"description": "Vimeo short-code"
-	}
+	},
+
+  "Highlight": {
+		"prefix": ";;highlight",
+		"body": [
+			"{{< highlight py \"hl_lines=1-2\" >}}",
+			"a='Hello World!'",
+			"print(a)",
+			"{{< /highlight >}}"
+		]
+  }
 }

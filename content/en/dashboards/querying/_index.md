@@ -181,7 +181,15 @@ Here is an example using the `max` operator to find the maximum CPU usage betwee
 max(system.cpu.user{availability-zone:eastus-1}, system.cpu.user{availability-zone:eastus-2}) 
 ```
 
-{{< img src="dashboards/querying/arithmetic_7.png" alt="Formula example for 'max' showing max count value between two metric queries" style="width:75%;" >}}
+{{< img src="dashboards/querying/minmax_metrics_example.png" alt="Formula example for 'max' showing max count value between two metric queries" style="width:75%;" >}}
+
+Additionally, you can also calculate the maximum (or minimum) between two queries on different products. Here is another example using the `min` operator to find the minimum between logs with error statuses and warning statuses.
+
+```text
+min(status:error, status:warn)
+```
+
+{{< img src="dashboards/querying/minmax_logs_platform_example.png" alt="Formula example for 'min' showing min count value between two log queries" style="width:75%;" >}}
 
 ### Create an alias
 
