@@ -19,7 +19,7 @@ title: はじめに
 {{< nextlink href="/getting_started/application" >}}<u>Datadog</u>: Datadog UI の使用方法 (ダッシュボード、インフラストラクチャーリスト、マップなど) をご覧ください。{{< /nextlink >}}
 {{< nextlink href="/getting_started/site" >}}<u>Datadog サイト</u>: お住まいの地域とセキュリティ要件に適した Datadog サイトを選択します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/devsecops" >}}<u>DevSecOps バンドル</u>: APM DevSecOps とインフラストラクチャ DevSecOps バンドルを使い始めます。{{< /nextlink >}}
-{{< nextlink href="/getting_started/agent" >}}<u>Agent</u>: ホストから Datadog にメトリクスとイベントを送信します。{{< /nextlink >}}
+{{< nextlink href="/getting_startedagent" >}}<u>Agent</u>: ホストから Datadog にメトリクスとイベントを送信します。{{< /nextlink >}}
 {{< nextlink href="/getting_started/containers" >}}<u>コンテナ</u>: Agent オートディスカバリーと Datadog オペレーターの使用方法を学びます。{{< /nextlink >}}
 {{< nextlink href="/getting_started/serverless" >}}<u>Serverless for AWS Lambda</u>: サーバーレスインフラストラクチャーからメトリクス、ログ、トレースを収集する方法を学びます。{{< /nextlink >}}
 {{< nextlink href="/getting_started/integrations" >}}<u>インテグレーション</u>: Datadog インテグレーションでのメトリクス、トレース、ログの収集方法を学びます。{{< /nextlink >}}
