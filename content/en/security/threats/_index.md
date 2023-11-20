@@ -45,9 +45,9 @@ Use template variables and Markdown to [customize notification messages][5]. Edi
 
 ## Investigate and remediate security signals
 
-Investigate and triage security signals in the [Threats Explorer][8]. View detailed information about the impacted files or processes, related signals and logs, and remediation steps.
+Investigate and triage security signals in the [Signals Explorer][8]. View detailed information about the impacted files or processes, related signals and logs, and remediation steps.
 
-{{< img src="security/cws/threats_page_2.png" alt="CSM Threats page" width="100%">}}
+{{< img src="security/cws/threats_page_2.png" alt="CSM Threats Signals Explorer page" width="100%">}}
 
 ## Get started
 
