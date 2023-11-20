@@ -18,7 +18,6 @@ For more information on network reachability, see the [AWS documentation][34] an
 
 The following diagrams show how related resources are used to determine whether other resources are publicly accessible. For example, an AWS CloudTrail Trail stored in a public Amazon S3 bucket is itself publicly accessible. If a resource is publicly accessible because of another resource, the relationship is shown in the Cloud Security Management Misconfigurations resource relationships graph.
 
-Use this diagram as a reference for how resources are correlated to determine public accessibility. 
 
 **Note**: Not all resources with the Publicly Accessible attribute are shown in these diagrams.
 
@@ -279,7 +278,7 @@ A Compute Instance (`gcp_compute_instance`) is considered publicly accessible if
 | Criteria | Explanation |
 |----------|-------------|
 |The compute instance has a public IP address, meaning at least one of its network interfaces has a public IP address defined in its access configurations, | To learn more about adding an external IP to a compute instance, see [Reserve a static external IP address][48]. |
-|The compute instance has associated firewall rules that combine to open some range of ports to the internet. The firewall rules can be associated with the instance by:<br><p><ul><li>Having no `target_tags` or `target_service_accounts`, meaning the rule applies to the whole network.</li><li>Having `target_service_accounts` associated with one of the compute instance’s `service_accounts`.</li><li>Having some `target_tags` that match the compute instance’s network tags.</li></ul></p>The rules should grant public access (see [Google Cloud Compute Firewall](#google-cloud-compute-firewall)). | To learn how compute firewall rules are used to restrict port ranges for a compute instance, see [Firewall rule components][49]. |
+|The compute instance has associated firewall rules that combine to open some range of ports to the internet. The firewall rules can be associated with the instance by:<br><p><ul><li>Having no `target_tags` or `target_service_accounts`, meaning the rule applies to the whole network.</li><li>Having `target_service_accounts` associated with one of the compute instance's `service_accounts`.</li><li>Having some `target_tags` that match the compute instance's network tags.</li></ul></p>The rules should grant public access (see [Google Cloud Compute Firewall](#google-cloud-compute-firewall)). | To learn how compute firewall rules are used to restrict port ranges for a compute instance, see [Firewall rule components][49]. |
 
 Learn more about how compute firewall rules are used to restrict port ranges for a compute instance [here][50].
 
