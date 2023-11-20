@@ -12,7 +12,7 @@ further_reading:
 Datadog App Builder is in private beta. Complete the form to request access.
 {{< /callout >}}
 
-With Datadog Apps embedded into your dashboards, you can take direct actions on your vital resources with all of the relevant data and context immediately available. Link your app with the dashboard's timeframe and template variables to dynamically set the scope of the app's actions, allowing you to carry out actions in your environment at any needed scope.
+With Datadog App Builder apps embedded into your dashboards, you can take direct actions on your vital resources with all of the relevant data and context immediately available. Link your app with the dashboard's timeframe and template variables to dynamically set the scope of the app's actions, allowing you to carry out actions in your environment at any needed scope.
 
 ## Add apps to your dashboard
 
