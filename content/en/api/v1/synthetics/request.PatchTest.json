@@ -1,0 +1,13 @@
+{
+  "data": [
+    {
+      "op": "replace",
+      "path": "/name",
+      "value": "New test name"
+    },
+    {
+      "op": "remove",
+      "path": "/config/assertions/0"
+    }
+  ]
+}

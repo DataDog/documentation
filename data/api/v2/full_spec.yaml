@@ -710,6 +710,26 @@ components:
           items:
             $ref: '#/components/schemas/APIKeyResponseIncludedItem'
           type: array
+        meta:
+          $ref: '#/components/schemas/APIKeysResponseMeta'
+      type: object
+    APIKeysResponseMeta:
+      description: Additional information related to api keys response.
+      properties:
+        max_allowed:
+          description: Max allowed number of API keys.
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/APIKeysResponseMetaPage'
+      type: object
+    APIKeysResponseMetaPage:
+      description: Additional information related to the API keys response.
+      properties:
+        total_filtered_count:
+          description: Total filtered application key count.
+          format: int64
+          type: integer
       type: object
     APIKeysSort:
       default: name
@@ -854,6 +874,24 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/Role'
+    ApplicationKeyResponseMeta:
+      description: Additional information related to the application key response.
+      properties:
+        max_allowed_per_user:
+          description: Max allowed number of application keys per user.
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/ApplicationKeyResponseMetaPage'
+      type: object
+    ApplicationKeyResponseMetaPage:
+      description: Additional information related to the application key response.
+      properties:
+        total_filtered_count:
+          description: Total filtered application key count.
+          format: int64
+          type: integer
+      type: object
     ApplicationKeyUpdateAttributes:
       description: Attributes used to update an application Key.
       properties:
@@ -3025,6 +3063,11 @@ components:
           description: The SECL expression of the Agent rule.
           example: exec.file.name == \"sh\"
           type: string
+        filters:
+          description: The platforms the Agent rule is supported on.
+          items:
+            type: string
+          type: array
         name:
           description: The name of the Agent rule.
           example: my_agent_rule
@@ -4144,6 +4187,63 @@ components:
       - IDENTITY
       - GZIP
       - DEFLATE
+    CostAttributionAggregates:
+      description: An array of available aggregates.
+      items:
+        $ref: '#/components/schemas/CostAttributionAggregatesBody'
+      type: array
+    CostAttributionAggregatesBody:
+      description: The object containing the aggregates.
+      properties:
+        agg_type:
+          description: The aggregate type.
+          example: sum
+          type: string
+        field:
+          description: The field.
+          example: infra_host_committed_cost
+          type: string
+        value:
+          description: The value for a given field.
+          format: double
+          type: number
+      type: object
+    CostAttributionTagNames:
+      additionalProperties:
+        description: 'A list of values that are associated with each tag key.
+
+          - An empty list means the resource use wasn''t tagged with the respective
+          tag.
+
+          - Multiple values means the respective tag was applied multiple times on
+          the resource.
+
+          - An `<empty>` value means the resource was tagged with the respective tag
+          but did not have a value.'
+        items:
+          description: A given tag in a list.
+          example: datadog-integrations-lab
+          type: string
+        type: array
+      description: 'Tag keys and values.
+
+        A `null` value here means that the requested tag breakdown cannot be applied
+        because it does not match the [tags
+
+        configured for usage attribution](https://docs.datadoghq.com/account_management/billing/usage_attribution/#getting-started).
+
+        In this scenario the API returns the total cost, not broken down by tags.'
+      nullable: true
+      type: object
+    CostAttributionType:
+      default: cost_by_tag
+      description: Type of cost attribution data.
+      enum:
+      - cost_by_tag
+      example: cost_by_tag
+      type: string
+      x-enum-varnames:
+      - COST_BY_TAG
     CostByOrg:
       description: Cost data.
       properties:
@@ -4246,6 +4346,178 @@ components:
           nullable: true
           type: string
       type: object
+    DORADeploymentRequest:
+      description: Request to create a DORA deployment event.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORADeploymentRequestData'
+      required:
+      - data
+      type: object
+    DORADeploymentRequestAttributes:
+      description: Attributes to create a DORA deployment event.
+      properties:
+        finished_at:
+          description: Unix timestamp in nanoseconds when the deployment finished.
+            It should not be older than 3 hours.
+          example: 1693491984000000000
+          format: int64
+          type: integer
+        git:
+          $ref: '#/components/schemas/DORAGitInfo'
+        id:
+          description: Deployment ID.
+          type: string
+        service:
+          description: Service name from a service available in the Service Catalog.
+          example: shopist
+          type: string
+        started_at:
+          description: Unix timestamp in nanoseconds when the deployment started.
+          example: 1693491974000000000
+          format: int64
+          type: integer
+        version:
+          description: Version to correlate with [APM Deployment Tracking](https://docs.datadoghq.com/tracing/services/deployment_tracking/).
+          example: v1.12.07
+          type: string
+      required:
+      - service
+      - started_at
+      - finished_at
+      type: object
+    DORADeploymentRequestData:
+      description: The JSON:API data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DORADeploymentRequestAttributes'
+      required:
+      - attributes
+      type: object
+    DORADeploymentResponse:
+      description: Response after receiving a DORA deployment event.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORADeploymentResponseData'
+      required:
+      - data
+      type: object
+    DORADeploymentResponseData:
+      description: The JSON:API data.
+      properties:
+        id:
+          description: The ID of the received DORA deployment event.
+          example: 4242fcdd31586083
+          type: string
+        type:
+          $ref: '#/components/schemas/DORADeploymentType'
+      required:
+      - id
+      type: object
+    DORADeploymentType:
+      default: dora_deployment
+      description: JSON:API type for DORA deployment events.
+      enum:
+      - dora_deployment
+      example: dora_deployment
+      type: string
+      x-enum-varnames:
+      - DORA_DEPLOYMENT
+    DORAGitInfo:
+      description: Git info for DORA Metrics events.
+      properties:
+        commit_sha:
+          $ref: '#/components/schemas/GitCommitSHA'
+        repository_url:
+          $ref: '#/components/schemas/GitRepositoryURL'
+      required:
+      - repository_url
+      - commit_sha
+      type: object
+    DORAIncidentRequest:
+      description: Request to create a DORA incident event.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORAIncidentRequestData'
+      required:
+      - data
+      type: object
+    DORAIncidentRequestAttributes:
+      description: Attributes to create a DORA incident event.
+      properties:
+        finished_at:
+          description: Unix timestamp in nanoseconds when the deployment finished.
+            It should not be older than 3 hours.
+          example: 1693491984000000000
+          format: int64
+          type: integer
+        git:
+          $ref: '#/components/schemas/DORAGitInfo'
+        id:
+          description: Incident ID
+          type: string
+        name:
+          description: Incident name.
+          example: Webserver is down failing all requests
+          type: string
+        service:
+          description: Service name from a service available in the Service Catalog.
+          example: shopist
+          type: string
+        severity:
+          description: Incident severity.
+          example: High
+          type: string
+        started_at:
+          description: Unix timestamp in nanoseconds when the deployment started.
+          example: 1693491974000000000
+          format: int64
+          type: integer
+        version:
+          description: Version to correlate with [APM Deployment Tracking](https://docs.datadoghq.com/tracing/services/deployment_tracking/).
+          example: v1.12.07
+          type: string
+      required:
+      - service
+      - started_at
+      type: object
+    DORAIncidentRequestData:
+      description: The JSON:API data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DORAIncidentRequestAttributes'
+      required:
+      - attributes
+      type: object
+    DORAIncidentResponse:
+      description: Response after receiving a DORA incident event.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORAIncidentResponseData'
+      required:
+      - data
+      type: object
+    DORAIncidentResponseData:
+      description: Response after receiving a DORA incident event.
+      properties:
+        id:
+          description: The ID of the received DORA incident event.
+          example: 4242fcdd31586083
+          type: string
+        type:
+          $ref: '#/components/schemas/DORAIncidentType'
+      required:
+      - id
+      type: object
+    DORAIncidentType:
+      default: dora_incident
+      description: JSON:API type for DORA incident events.
+      enum:
+      - dora_incident
+      example: dora_incident
+      type: string
+      x-enum-varnames:
+      - DORA_INCIDENT
     DashboardListAddItemsRequest:
       description: Request containing a list of dashboards to add.
       properties:
@@ -6239,6 +6511,15 @@ components:
       - _HANDLE
       - EMAIL
       - _EMAIL
+    GitCommitSHA:
+      description: Git Commit SHA.
+      example: 66adc9350f2cc9b250b69abddab733dd55e1a588
+      pattern: ^[a-fA-F0-9]{40,}$
+      type: string
+    GitRepositoryURL:
+      description: Git Repository URL
+      example: https://github.com/organization/example-repository
+      type: string
     GroupScalarColumn:
       description: A column containing the tag keys and values in a group.
       properties:
@@ -8454,6 +8735,8 @@ components:
           items:
             $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
           type: array
+        meta:
+          $ref: '#/components/schemas/ApplicationKeyResponseMeta'
       type: object
     ListDowntimesResponse:
       description: Response for retrieving all downtimes.
@@ -10955,6 +11238,75 @@ components:
           description: The monitor type.
           type: string
       type: object
+    MonthlyCostAttributionAttributes:
+      description: Cost Attribution by Tag for a given organization.
+      properties:
+        month:
+          description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`.'
+          format: date-time
+          type: string
+        org_name:
+          description: The name of the organization.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        tag_config_source:
+          description: The source of the cost attribution tag configuration and the
+            selected tags in the format `<source_org_name>:::<selected tag 1>///<selected
+            tag 2>///<selected tag 3>`.
+          type: string
+        tags:
+          $ref: '#/components/schemas/CostAttributionTagNames'
+        updated_at:
+          description: Shows the most recent hour in the current months for all organizations
+            for which all costs were calculated.
+          type: string
+        values:
+          description: 'Fields in Cost Attribution by tag(s). Example: `infra_host_on_demand_cost`,
+            `infra_host_committed_cost`, `infra_host_total_cost`, `infra_host_percentage_in_org`,
+            `infra_host_percentage_in_account`.'
+          type: object
+      type: object
+    MonthlyCostAttributionBody:
+      description: Cost data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MonthlyCostAttributionAttributes'
+        id:
+          description: Unique ID of the response.
+          type: string
+        type:
+          $ref: '#/components/schemas/CostAttributionType'
+      type: object
+    MonthlyCostAttributionMeta:
+      description: The object containing document metadata.
+      properties:
+        aggregates:
+          $ref: '#/components/schemas/CostAttributionAggregates'
+        pagination:
+          $ref: '#/components/schemas/MonthlyCostAttributionPagination'
+      type: object
+    MonthlyCostAttributionPagination:
+      description: The metadata for the current pagination.
+      properties:
+        next_record_id:
+          description: The cursor to use to get the next results, if any. To make
+            the next request, use the same parameters with the addition of the `next_record_id`.
+          nullable: true
+          type: string
+      type: object
+    MonthlyCostAttributionResponse:
+      description: Response containing the monthly cost attribution by tag(s).
+      properties:
+        data:
+          description: Response containing cost attribution.
+          items:
+            $ref: '#/components/schemas/MonthlyCostAttributionBody'
+          type: array
+        meta:
+          $ref: '#/components/schemas/MonthlyCostAttributionMeta'
+      type: object
     NullableRelationshipToUser:
       description: Relationship to user.
       nullable: true
@@ -11768,7 +12120,7 @@ components:
       description: Powerpack relationship object.
       properties:
         author:
-          $ref: '#/components/schemas/Creator'
+          $ref: '#/components/schemas/RelationshipToUser'
       type: object
     PowerpackResponse:
       description: Response object which includes a single powerpack configuration.
@@ -11840,6 +12192,7 @@ components:
         last_offset:
           description: The last offset.
           format: int64
+          nullable: true
           type: integer
         limit:
           description: Pagination limit.
@@ -17293,6 +17646,16 @@ components:
       - channel_name
       - redirect_url
       type: object
+    SortDirection:
+      default: desc
+      description: The direction to sort by.
+      enum:
+      - desc
+      - asc
+      type: string
+      x-enum-varnames:
+      - DESC
+      - ASC
     Span:
       description: Object description of a spans after being processed and stored
         by Datadog.
@@ -21282,6 +21645,131 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/cost_by_tag/monthly_cost_attribution:
+    get:
+      description: "Get monthly cost attribution by tag across multi-org and single
+        root-org accounts.\nCost Attribution data for a given month becomes available
+        no later than the 17th of the following month.\nThis API endpoint is paginated.
+        To make sure you receive all records, check if the value of `next_record_id`
+        is\nset in the response. If it is, make another request and pass `next_record_id`
+        as a parameter.\nPseudo code example:\n```\nresponse := GetMonthlyCostAttribution(start_month,
+        end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor
+        != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response
+        := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n
+        \ cursor := response.metadata.pagination.next_record_id\nEND\n```"
+      operationId: GetMonthlyCostAttribution
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for cost beginning in this month.'
+        in: query
+        name: start_month
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for cost ending this month.'
+        in: query
+        name: end_month
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Comma-separated list specifying cost types (e.g., `<billing_dimension>_on_demand_cost`,
+          `<billing_dimension>_committed_cost`, `<billing_dimension>_total_cost`)
+          and the
+
+          proportions (`<billing_dimension>_percentage_in_org`, `<billing_dimension>_percentage_in_account`).
+          Use `*` to retrieve all fields.
+
+          Example: `infra_host_on_demand_cost,infra_host_percentage_in_account`
+
+          To obtain the complete list of active billing dimensions that can be used
+          to replace
+
+          `<billing_dimension>` in the field names, make a request to the [Get active
+          billing dimensions API](https://docs.datadoghq.com/api/latest/usage-metering/#get-active-billing-dimensions-for-cost-attribution).'
+        in: query
+        name: fields
+        required: true
+        schema:
+          type: string
+      - description: 'The direction to sort by: `[desc, asc]`.'
+        in: query
+        name: sort_direction
+        required: false
+        schema:
+          $ref: '#/components/schemas/SortDirection'
+      - description: 'The billing dimension to sort by. Always sorted by total cost.
+          Example: `infra_host`.'
+        in: query
+        name: sort_name
+        required: false
+        schema:
+          type: string
+      - description: 'Comma separated list of tag keys used to group cost. If no value
+          is provided the cost will not be broken down by tags.
+
+          To see which tags are available, look for the value of `tag_config_source`
+          in the API response.'
+        in: query
+        name: tag_breakdown_keys
+        required: false
+        schema:
+          type: string
+      - description: List following results with a next_record_id provided in the
+          previous query.
+        in: query
+        name: next_record_id
+        required: false
+        schema:
+          type: string
+      - description: Include child org cost in the response. Defaults to `true`.
+        in: query
+        name: include_descendants
+        required: false
+        schema:
+          default: true
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/MonthlyCostAttributionResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get Monthly Cost Attribution
+      tags:
+      - Usage Metering
+      x-menu-order: 5
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/current_user/application_keys:
     get:
       description: List all application keys available for current user
@@ -21698,6 +22186,116 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/dora/deployment:
+    post:
+      description: 'Use this API endpoint to provide data about deployments for DORA
+        metrics.
+
+
+        This is necessary for:
+
+        - Deployment Frequency
+
+        - Change Lead Time
+
+        - Change Failure Rate'
+      operationId: CreateDORADeployment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DORADeploymentRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORADeploymentResponse'
+          description: OK
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORADeploymentResponse'
+          description: OK - but delayed due to incident
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      summary: Send a deployment event for DORA Metrics
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in private beta for CI Pipeline Visibility
+        customers.
+
+        If you want to request access, complete the [form](https://forms.gle/Eqq6uXfGjYxmqpjDA).'
+  /api/v2/dora/incident:
+    post:
+      description: 'Use this API endpoint to provide data about incidents for DORA
+        metrics.
+
+
+        This is necessary for:
+
+        - Change Failure Rate
+
+        - Time to Restore'
+      operationId: CreateDORAIncident
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DORAIncidentRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAIncidentResponse'
+          description: OK
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAIncidentResponse'
+          description: OK - but delayed due to incident
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      summary: Send an incident event for DORA Metrics
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in private beta for CI Pipeline Visibility
+        customers.
+
+        If you want to request access, complete the [form](https://forms.gle/Eqq6uXfGjYxmqpjDA).'
   /api/v2/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -32960,6 +33558,8 @@ tags:
   name: Container Images
 - description: The Containers API allows you to query container data for your organization.
   name: Containers
+- description: Send events for DORA Metrics to measure and improve software delivery.
+  name: DORA Metrics
 - description: 'Interact with your dashboard lists through the API to
 
     organize, find, and share all of your dashboards with your team and
