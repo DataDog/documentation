@@ -36,11 +36,11 @@ Below are a few examples of apps you can build:
 
 {{< img src="/service_management/app_builder/app-builder-blueprints.png" alt="App blueprints" style="width:100%;" >}}
 
-## Get started faster with Bits AI
+## Get started faster with AI
 
-Ask Bits AI to create an app for you! You can query Bits AI in the Datadog web app, the Datadog mobile app, or in Slack.
+If you're not sure where to start, describe your app to the App Builder AI and let it create a starter app for you.
 
-Bits AI is in private beta. To sign up or find out more, see [Bits AI][1].
+{{< img src="/service_management/app_builder/app-builder-ai.png" alt="Generate a starter app with AI" style="width:100%;" >}}
 
 ## Take action directly from dashboards
 
