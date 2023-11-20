@@ -265,33 +265,33 @@ The sample project includes a second application called `calendar_app` that retu
 
 1. Start the calendar application by running:
 
-{{% tabs %}}
+   {{% tabs %}}
 
-{{< tab "Poetry" >}}
+   {{< tab "Poetry" >}}
 
-```shell
-DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
- poetry run ddtrace-run python -m calendar_app.app
+   ```shell
+   DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
+   poetry run ddtrace-run python -m calendar_app.app
 
-```
+   ```
 
-{{< /tab >}}
+   {{< /tab >}}
 
-{{< tab "pip" >}}
+   {{< tab "pip" >}}
 
-```shell
-DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \
- ddtrace-run python -m calendar_app.app
-```
+   ```shell
+   DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \
+   ddtrace-run python -m calendar_app.app
+   ```
 
-{{< /tab >}}
+   {{< /tab >}}
 
-{{% /tabs %}}
+   {{% /tabs %}}
 
 2. Send a POST request with the `add_date` parameter:
 
-`curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'`
-: `(2, hello_again with date 2022-11-06)`
+   `curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'`
+   : `(2, hello_again with date 2022-11-06)`
 
 
 3. In the Trace Explorer, click this latest trace to see a distributed trace between the two services:
@@ -303,7 +303,7 @@ DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \
 You can add custom instrumentation by using code. Suppose you want to further instrument the calendar service to better see the trace:
 
 1. Open `notes_app/notes_logic.py`.
-2. Add the following import
+2. Add the following import:
 
    ```python
    from ddtrace import tracer
