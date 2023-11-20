@@ -8,7 +8,7 @@ further_reading:
   text: "Actions Catalog"
 ---
 
-{{< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" d_toggle="modal" d_target="#signupModal" custom_class="sign-up-trigger" btn_hidden="false" header="Join the Beta!">}}
+{{< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" btn_hidden="false" header="Join the Beta!">}}
 Datadog App Builder is in private beta. Complete the form to request access.
 {{< /callout >}}
 
