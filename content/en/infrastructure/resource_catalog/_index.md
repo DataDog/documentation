@@ -7,10 +7,10 @@ aliases:
   - /security/cspm/resource_catalog
   - /security/misconfigurations/resource_catalog
 further_reading:
-- link: "security/misconfigurations/"
+- link: "/security/misconfigurations/"
   tag: "Documentation"
   text: "Cloud Security Management Misconfigurations"
-- link: "security/threats/"
+- link: "/security/threats/"
   tag: "Documentation"
   text: "Cloud Security Management Threats"
 ---
@@ -33,7 +33,7 @@ Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to g
 
 ## Setup
 
-By default, you can view all resources monitored by the Datadog Agent and other Cloud Integrations. To view additional cloud resources in the Resource Catalog, please enable resource collection from the [Resource Catalog][5] setup page. To gain insights into your security risks, enable [Cloud Security Management][1] for each cloud account.
+By default, you can view all resources monitored by the Datadog Agent and Cloud Integrations. To view additional cloud resources in the Resource Catalog, enable resource collection from the [Resource Catalog][5] setup page. To gain insights into your security risks, enable [Cloud Security Management][1] for each cloud account.
 
 **Note**: Enabling Cloud Security Management automatically enables resource collection for the Resource Catalog Inventory tab.
 Enabling resource collection for the resource catalog does _not_ enable the CSM product.
@@ -51,7 +51,7 @@ The Resource Catalog is useful for:
 On the [Resource Catalog page][2], explore the cloud resources in your Datadog organization. The catalog detects a resource either because it has an Agent installed on it, or because a cloud integration is configured on it. Information about the resources in your organization is shown in the ownership and security tabs, with two views: List and Map.
 
 **Inventory Tab**:
-The inventory tab allows you to understand the context for a resource such as team ownership and related service. This page allows you to proactively identify lack of ownership information and resolve it prior to an incident occurring. The Resource Catalog presents configuration information customized to the resource type being viewed. It also allows you to search resources by specific configuration attributes such as `instance_type` for a host, or a `version` for a database.
+The Inventory tab shows context for a resource, including team ownership and related services. It helps you proactively identify and provide missing ownership information before you need it in an incident. The Resource Catalog shows configuration information customized for each resource type. You can search resources by specific configuration attributes such as `instance_type` for a host, or a `version` for a database.
 
 **Security Tab**:
 The security tab allows you to gain a clear understanding of resources with security risk. By viewing misconfigurations and threats associated with resources, you can address the issue without needing to spend time and effort to gather security context. 
