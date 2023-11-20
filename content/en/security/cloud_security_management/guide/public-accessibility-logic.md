@@ -32,7 +32,7 @@ Use this diagram as a reference for how resources are correlated to determine pu
 
 ### Google Cloud
 
-{{< img src="security/cloud_security_management/guide/public_accessibility_relationships_gcp.png" alt="A graph diagram showing the relationships between resources that are used to determine public accessibility for GCP" width="50%">}}
+{{< img src="security/cloud_security_management/guide/public_accessibility_relationships_gcp.png" alt="A graph diagram showing the relationships between resources that are used to determine public accessibility for Google Cloud" width="50%">}}
 
 ## AWS public accessibility logic by resource 
 
@@ -247,17 +247,6 @@ A Virtual Machine Instance (`azure_virtual_machine_instance`) is considered publ
 
 To learn more about Azure Virtual Machine Instances and public access, see [Associate a public IP address to a virtual machine][42].
 
-### Azure Managed Disk
-
-A Managed Disk (`azure_managed_disk`) is considered publicly accessible if:
-
-| Criteria | Explanation |
-|----------|-------------|
-|The managed disk’s `network_access_policy` is set to `AllowAll`. | This setting means that the disk can be exported or uploaded to from any network (see [Disks - Create Or Update][43]). |
-|The managed disk's virtual machine instance is publicly accessible. | To learn how a virtual machine is considered publicly accessible, see [Azure Virtual Machine Instance](#azure-virtual-machine-instance).  |
-
-For more information about restricting import/export access for Azure Managed Disks, see [Network Security Groups][44].
-
 ### Azure Storage Blob Container
 
 A Storage Blob Container (`azure_storage_blob_container`) is considered publicly accessible if:
@@ -265,14 +254,14 @@ A Storage Blob Container (`azure_storage_blob_container`) is considered publicly
 | Criteria | Explanation |
 |----------|-------------|
 |The storage blob container's storage account has no `allow_blob_public_access` attribute, or has the attribute set to `true`. | This means that the account allows public Internet access to Azure Blob Storage. To learn more about configuring anonymous read access with Azure Storage Accounts, see [Configure anonymous read access for containers and blobs][45].|
-|The storage blob container's `public_access` attribute is not set to `None`. | This means that the account allows public Internet access to Azure Blob Storage. |
+|The storage blob container's `public_access` attribute is set to `blob` or `container`. | This means that the account allows public Internet access to Azure Blob Storage. |
 |The storage blob container is part of a storage account that does not explicitly block public access. | When a Storage Account doesn't explicitly block public access, Storage Blob Containers inside it can be made public. |
 
 To learn more about disallowing blob public access on Azure Storage accounts, see [Choose to allow or disallow blob public access on Azure Storage accounts][46].
 
-## GCP Public accessibility logic by resource
+## Google Cloud Public accessibility logic by resource
 
-### GCP Compute Firewall
+### Google Cloud Compute Firewall
 
 A Compute Firewall (`gcp_compute_firewall`) grants public access if:
 
@@ -283,18 +272,18 @@ A Compute Firewall (`gcp_compute_firewall`) grants public access if:
 
 For more information about using Compute Firewalls, [Choose to allow or disallow blob public access on Azure Storage accounts][47].
 
-### GCP Compute Instance
+### Google Cloud Compute Instance
 
 A Compute Instance (`gcp_compute_instance`) is considered publicly accessible if:
 
 | Criteria | Explanation |
 |----------|-------------|
 |The compute instance has a public IP address, meaning at least one of its network interfaces has a public IP address defined in its access configurations, | To learn more about adding an external IP to a compute instance, see [Reserve a static external IP address][48]. |
-|The compute instance has associated firewall rules that combine to open some range of ports to the internet. The firewall rules can be associated with the instance by:<br><p><ul><li>Having no `target_tags` or `target_service_accounts`, meaning the rule applies to the whole network.</li><li>Having `target_service_accounts` associated with one of the compute instance’s `service_accounts`.</li><li>Having some `target_tags` that match the compute instance’s network tags.</li></ul></p>The rules should grant public access (see [GCP Compute Firewall](#gcp-compute-firewall)). | To learn how compute firewall rules are used to restrict port ranges for a compute instance, see [Firewall rule components][49]. |
+|The compute instance has associated firewall rules that combine to open some range of ports to the internet. The firewall rules can be associated with the instance by:<br><p><ul><li>Having no `target_tags` or `target_service_accounts`, meaning the rule applies to the whole network.</li><li>Having `target_service_accounts` associated with one of the compute instance’s `service_accounts`.</li><li>Having some `target_tags` that match the compute instance’s network tags.</li></ul></p>The rules should grant public access (see [Google Cloud Compute Firewall](#google-cloud-compute-firewall)). | To learn how compute firewall rules are used to restrict port ranges for a compute instance, see [Firewall rule components][49]. |
 
 Learn more about how compute firewall rules are used to restrict port ranges for a compute instance [here][50].
 
-### GCP BigQuery Dataset
+### Google Cloud BigQuery Dataset
 
 A BigQuery Dataset (`gcp_bigquery_dataset`) is considered publicly accessible if:
 
@@ -305,7 +294,7 @@ A BigQuery Dataset (`gcp_bigquery_dataset`) is considered publicly accessible if
 
 Learn more about [BigQuery Datasets][53].
 
-### GCP Storage Bucket
+### Google Cloud Storage Bucket
 
 A Storage Bucket (`gcp_storage_bucket`) is considered publicly accessible if:
 
