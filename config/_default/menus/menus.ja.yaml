@@ -8984,11 +8984,6 @@ main:
   parent: cloud_workload_security
   url: security/cloud_workload_security/workload_security_rules
   weight: 202
-- identifier: cws_workload_security_profiles
-  name: Security Profiles
-  parent: cloud_workload_security
-  url: security/cloud_workload_security/security_profiles
-  weight: 203
 - identifier: cws_agent_expressions
   name: カスタム Agent ルールの作成
   parent: cloud_workload_security
