@@ -454,13 +454,13 @@ See [AWS Load Balancer Controller][3] for more details.
 {{% /tab %}}
 
 {{% tab "APT-based Linux" %}}
-No built-in support for load-balancing is provided, given the single-machine nature of the installation. You will need to provision your own load balancers using whatever your company's standard is.
+Given the single-machine nature of the installation, there is no built-in support for load-balancing. Provision your own load balancers using your company's standard.
 {{% /tab %}}
 {{% tab "RPM-based Linux" %}}
-No built-in support for load-balancing is provided, given the single-machine nature of the installation. You will need to provision your own load balancers using whatever your company's standard is.
+Given the single-machine nature of the installation, there is no built-in support for load-balancing. You need to provision your own load balancers based on your company's standard.
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
-An NLB is provisioned by the Terraform module, and provisioned to point at the instances. Its DNS address is returned in the `lb-dns` output in Terraform.
+The Terraform module provisions an NLB to point at the instances. The DNS address is returned in the `lb-dns` output in Terraform.
 {{% /tab %}}
 {{< /tabs >}}
 
