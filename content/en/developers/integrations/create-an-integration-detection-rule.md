@@ -102,7 +102,7 @@ When a rule contains a MITRE tag `tactic:<TAG_VALUE>`, the tag `security:attack`
 ```
 The MITRE tactic/technique tag=<TAG> for partnerRuleId=<RULE_ID> appears to be incorrect (i.e. it does not exist in the MITRE framework).
 ```
-The listed tactic/technique tag `<TAG>` does not follow the [MITRE framework](https://attack.mitre.org/). Please select a different tag.
+The listed tactic/technique tag `<TAG>` does not follow the [MITRE framework](https://attack.mitre.org/). Please select a valid MITRE tag.
 
 ### Cases
 ```
