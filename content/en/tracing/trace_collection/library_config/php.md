@@ -413,6 +413,11 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
   ```
   Regular expression used to obfuscate the query string included as part of the URL. This expression is also used in the redaction process for HTTP POST data. Added in version `0.76.0`.
 
+`DD_TRACE_OTEL_ENABLED`
+: Enables or disables OpenTelemetry based tracing, both for [custom][18] or [automatic][19] instrumentation. <br>
+Valid values are: `true` or `false`.<br>
+**Default**: `false`
+
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
 **Default**: `tracecontext,Datadog`<br>
@@ -586,4 +591,5 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 [15]: /tracing/guide/trace-php-cli-scripts/
 [16]: /tracing/configure_data_security#telemetry-collection
 [17]: /tracing/other_telemetry/connect_logs_and_traces/php
-
+[18]: /tracing/trace_collection/otel_instrumentation/php/
+[19]: /tracing/trace_collection/compatibility/php/

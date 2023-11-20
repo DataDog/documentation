@@ -1679,6 +1679,11 @@ main:
     parent: tracing_otel_inst
     identifier: tracing_otel_inst_nodejs
     weight: 105
+  - name: PHP
+    url: tracing/trace_collection/otel_instrumentation/php/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_php
+    weight: 106
   - name: .NET
     url: tracing/trace_collection/otel_instrumentation/dotnet/
     parent: tracing_otel_inst
