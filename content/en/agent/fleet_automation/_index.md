@@ -9,6 +9,9 @@ further_reading:
 - link: "/infrastructure/list/#agent-configuration"
   tag: "Documentation"
   text: "Learn about the Agent configuration view"
+- link: "https://www.datadoghq.com/blog/fleet-automation/"
+  tag: "Blog"
+  text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
 ---
 
 {{< callout btn_hidden="true" header="false">}}Fleet Automation is in private beta.{{< /callout >}}
