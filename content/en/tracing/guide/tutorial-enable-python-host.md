@@ -147,8 +147,28 @@ pip install ddtrace
 
 To start generating and collecting traces, restart the sample application in a slightly different way than previously. Run:
 
-{{< code-block lang="shell" >}}DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
- ddtrace-run python -m notes_app.app{{< /code-block >}}
+{{% tabs %}}
+
+{{< tab "Poetry" >}}
+
+```shell
+DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
+ poetry run ddtrace-run python -m notes_app.app
+
+```
+
+{{< /tab >}}
+
+{{< tab "pip" >}}
+
+```shell
+DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
+ ddtrace-run python -m notes_app.app
+```
+
+{{< /tab >}}
+
+{{% /tabs %}}
 
 That command sets the `DD_SERVICE`, `DD_VERSION`, and `DD_ENV` environment variables to enable [Unified Service Tagging][10], enabling data correlation across Datadog.
 
@@ -229,10 +249,28 @@ The sample project includes a second application called `calendar_app` that retu
 
 1. Start the calendar application by running:
 
-   {{< code-block lang="shell" >}}
-   DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \
-   ddtrace-run python -m calendar_app.app
-   {{< /code-block >}}
+{{% tabs %}}
+
+{{< tab "Poetry" >}}
+
+```shell
+DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
+ poetry run ddtrace-run python -m calendar_app.app
+
+```
+
+{{< /tab >}}
+
+{{< tab "pip" >}}
+
+```shell
+DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \
+ ddtrace-run python -m calendar_app.app
+```
+
+{{< /tab >}}
+
+{{% /tabs %}}
 
 2. Send a POST request with the `add_date` parameter:
 
