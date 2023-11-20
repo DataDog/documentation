@@ -150,7 +150,7 @@ See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage c
 You need to connect the S3 bucket you created earlier to Datadog Log Archives so that you can rehydrate the archives later on.
 
 1. Navigate to Datadog [Log Forwarding][5].
-1. Click **Add a new archive**.
+1. Click **+ New Archive**.
 1. Enter a descriptive archive name.
 1. Add a query that filters out all logs going through log pipelines so that those logs do not go into this archive. For example, add the query `observability_pipelines_read_only_archive`, assuming that no logs going through the pipeline have that tag added.
 1. Select **AWS S3**.
