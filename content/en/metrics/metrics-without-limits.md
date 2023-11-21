@@ -22,20 +22,42 @@ algolia:
 
 Metrics without Limits™ provides you flexibility and control over your custom metrics volumes by decoupling custom metric ingestion and indexing. You only pay for custom metric tags that are valuable to your organization.
 
-Metrics without Limits™ provides you with the ability to configure tags on all metric types in-app. You can also customize aggregations on counts, rates, and gauges without having to re-deploy or change any code. With Metrics without Limits™, you can configure an allowlist of tags in-app to remain queryable throughout the Datadog platform. This automatically excludes nonessential tags attached to application-level or business metrics (for example, `host`). This functionality is located in the [Metrics Summary][1] page.
+Metrics without Limits™ provides you with the ability to configure tags on all metric types in-app. You can also customize aggregations on counts, rates, and gauges without having to re-deploy or change any code. With Metrics without Limits™, you can configure an allowlist of tags in-app to remain queryable throughout the Datadog platform; this automatically drops nonessential tags attached to application-level or business metrics (for example, `host`). Alternatively, you can configure a blocklist of tags in-app to quickly drop and exclude tags; this automatically retains remaining essential tags that provide business value to your teams. These configuration functionalities are located in the [Metrics Summary][1] page.
 
 This page identifies key components of Metrics without Limits™ that can help you manage your custom metrics volumes within your observability budget.
 
 ### Configuration of tags
 
-Click on any metric name to open its details sidepanel. Then click **Manage Tags** -> **"Include Tags..."** to configure the tags you'd like to remain as queryable on dashboards and monitors. The tag configuration modal pre-populates by default with an allowlist of tags that have been actively queried on dashboards, notebooks, monitors, and through API in the past 30 days (colored in blue with an icon). You can also include your own additional tags. Before selecting **Save**, an estimated new volume of indexed custom metrics that results from this potential tag configuration is displayed.
+#### Allowlist of tags 
+1. Click any metric name to open its details side panel. 
+2. Click **Manage Tags** -> **"Include Tags..."** to configure the tags you'd like to remain as queryable in dashboards, notebooks, monitors, and other Datadog products.
+3. Define your allowlist of tags. 
+By default, the tag configuration modal pre-populates with a Datadog recommended allowlist of tags that have been actively queried on dashboards, notebooks, monitors, or through the API in the past 30 days. Recommended tags are distinguished with a graph line icon. 
+4. Review the *Estimated New Volume* of indexed custom metrics that results from this potential tag configuration.
+5. Click **Save**.
 
-{{< img src="metrics/mwl_tag_config.mp4" alt="Configuration of Tags" video=true >}}
+{{< img src="metrics/mwl_example_include_tags-compressed.mp4" alt="Configuration of Tags with Allowlist" video=true style="width:100%" >}}
 
+You can [create][2], [edit][3], [delete][4], and [estimate the impact][5] of your tag configuration through the Metrics APIs.
 
-There are also APIs available so you can [create][2], [edit][3], and [delete][4] a tag configuration. There is also an [API][5] for estimating the potential impact of your configuration.
+#### Blocklist of tags 
+1. Click on any metric name to open its details side panel.
+2. Click **Manage Tags** -> **"Exclude Tags…"** to drop tags you don't want to query. 
+3. Define your blocklist of tags. Tags defined in the blocklist are **not** queryable on dashboards and monitors. Tags that have been actively queried on dashboards, notebooks, monitors, and through the API in the past 30 days are distinguished with a graph line icon.
+5. Review the *Estimated New Volume* of indexed custom metrics that results from this potential tag configuration.
+6. Click **Save**.
+
+{{< img src="metrics/mwl_example_tag_exclusion-compressed.mp4" alt="Configuration of Tags with Tag Exclusion" video=true style="width:100%" >}}
+
+Set the parameter `exclude_tags_mode: true` on the Metrics API to [create][2] and [edit][3] a blocklist of tags.
 
 When configuring tags for counts, rates, and gauges, the most frequently queried time/space aggregation combination is available for query by default.
+
+### Configure multiple metrics at a time
+
+Optimize your custom metrics volumes by using the [bulk metric tag configuration feature][7]. To specify a namespace for your metrics, click **Configure Tags*** on Metrics Summary. You can configure all metrics matching that namespace prefix with the same allowlist of tags under ***Include tags...*** or the same blocklist of tags under ***Exclude tags...***.
+
+You can [configure][13] and [delete][14] tags for multiple metrics through the API. To [configure a blocklist of tags][13] for multiple metrics, set the parameter `exclude_tags_mode: true` on the API.
 
 ### Refine and optimize your aggregations
 
@@ -47,11 +69,6 @@ You can further adjust your custom metrics filters by opting in to more [metrics
 You can add or remove aggregations at any time with no required Agent or code-level changes. 
 
 The tag configuration modal pre-populates with an allowlist of aggregations that have been actively queried on dashboards, notebooks, monitors and through API in the past 30 days (colored in blue with an icon). You can also include your own additional aggregations.
-
-
-### Configure multiple metrics at a time
-
-Optimize your custom metrics volumes by using the [bulk metric tag configuration feature][7]. By clicking **Include Tags...** on Metrics Summary, you can specify a namespace for your metrics. You can then configure all metrics matching that namespace prefix with the same allowlist of tags.
 
 ## Metrics without Limits™ billing
 
@@ -109,3 +126,5 @@ Learn more about [Custom Metrics Billing][8].
 [10]: /account_management/billing/usage_metrics/
 [11]: /account_management/rbac/permissions/?tab=ui#metrics
 [12]: https://app.datadoghq.com/event/stream
+[13]: /api/latest/metrics/#configure-tags-for-multiple-metrics
+[14]: /api/latest/metrics/#delete-tags-for-multiple-metrics
