@@ -417,6 +417,24 @@ function doRiskyThing() {
 {{% /tab %}}
 {{< /tabs >}}
 
+## Adding span links (Beta)
+
+Span links associate one or more spans together that don't have a typical parent-child relationship. They may associate spans within the same trace or spans across different traces.
+
+Span links help trace operations in distributed systems, where workflows often deviate from linear execution patterns. Additionally, span links are useful to trace the flow of operations in systems that execute requests in batches or process events asynchronously.
+
+To add a link span from another span:
+
+```php
+$span->links[] = $otherSpanData->getLink(); 
+```
+
+To add a link span from distributed headers:
+```php
+$span->links[] = SpanLink::fromHeaders($distributedTracingHeaders);
+```
+
+
 ## Context propagation for distributed traces
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][9] for information.

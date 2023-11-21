@@ -250,6 +250,25 @@ class SomeClass {
     }
 }
 ```
+### Adding span links (Beta)
+
+<div class="alert alert-info">Support for span links is in beta and requires the <a href="https://github.com/DataDog/dd-trace-java/releases/tag/v1.24.1">Java tracer v.1.24.1+</a></div>
+
+Span links associate one or more spans together that don't have a typical parent-child relationship. They may associate spans within the same trace or spans across different traces.
+
+Span links help trace operations in distributed systems, where workflows often deviate from linear execution patterns. Additionally, span links are useful to trace the flow of operations in systems that execute requests in batches or process events asynchronously.
+
+To add a link span from another span:
+
+```java
+span.addLink(Link.fromSpanContext(otherSpanData));
+```
+
+To add a link span from distributed headers:
+```java
+SpanContext remoteSpanContext = extractContextFromHeaders(distributedTracingHeaders);
+span.addLink(Link.fromSpanContext(remoteSpanContext));
+```
 
 ### Extending tracers
 
