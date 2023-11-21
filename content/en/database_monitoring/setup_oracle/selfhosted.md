@@ -435,6 +435,10 @@ grant select on V_$SQL to datadog ;
 grant select on V_$PGASTAT to datadog ;
 grant select on dba_tablespace_usage_metrics to datadog ;
 grant select on dba_tablespaces to datadog ;
+grant select on v_$asm_diskgroup to datadog ;
+grant select on v_$rsrcmgrmetric to datadog ;
+grant select on v_$dataguard_config to datadog ;
+grant select on v_$dataguard_stats to datadog ;
 ```
 
 ### Create view
