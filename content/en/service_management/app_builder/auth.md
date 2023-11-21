@@ -10,10 +10,6 @@ Datadog App Builder is in private beta. Complete the form to request access.
 
 A few tools control access and authentication for apps and their components.
 
-## App identity
-
-Each app runs as the user that created it. Therefore, each app has the same permissions as the user that created the app.
-
 ## Action credentials
 
 Because app [actions][1] connect with external software systems, you may need to authenticate your Datadog account to the corresponding integration. An app can run successfully only if every action that requires authentication can verify the identity of your Datadog account.
@@ -22,7 +18,7 @@ Actions can be authenticated in two ways:
 - Credentials and permissions configured in the integration tile
 - Connection credentials
 
-For more information on configuring credentials, see [Connections][2]. The Action Catalog and the connection credentials for each integration are shared with [Datadog Workflow Automation][3].
+For more information on configuring credentials, see [Connections][2]. App Builder shares the Action Catalog and the connection credentials for each integration with [Datadog Workflow Automation][3].
 
 ## App permissions
 
@@ -30,12 +26,12 @@ For more information on configuring credentials, see [Connections][2]. The Actio
 
 Use [role-based access control (RBAC)][4] to control access to your apps and connections. 
 
-The coarse permissions that apply to apps include **Write** and **Run**
+The coarse permissions that apply to apps include `apps_run` and `apps_write`
 
-Write
+`apps_write`
 : Can create and edit new and existing apps. Datadog Standard and Admin roles have write access to App Builder by default.
 
-Run
+`apps_run`
 : Can interact with apps. Datadog Standard and Admin roles have run access to App Builder by default.
 
 ### Restrict access to a specific connection
