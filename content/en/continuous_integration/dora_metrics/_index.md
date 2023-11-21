@@ -198,13 +198,13 @@ links:
     url: https://github.com/organization/example-repository/tree/main/src/apps/shopist
 ```
 
-DORA Metrics for the `shopist` service only consider the git commits that include changes within `src/apps/shopist/**`. You can configure more granular control of the filtering with `extensions.dora_metrics`.
+DORA Metrics for the `shopist` service only consider the git commits that include changes within `src/apps/shopist/**`. You can configure more granular control of the filtering with `extensions[datadoghq.com/dora-metrics]`.
 
 **Example (schema version v2.2):**
 
 ```yaml
 extensions:
-  dora_metrics:
+  datadoghq.com/dora-metrics:
     source_patterns:
       - src/apps/shopist/**
       - src/libs/utils/**
