@@ -21,7 +21,7 @@ further_reading:
 
 **What is Historical Metric Ingestion?** If you emit metric points with timestamps that are older than an hour relative to the time of submission, Datadog will classify these points as Historical Metrics. 
 
-{{< img src="metrics/hmi_intro.png" alt="Historical Metrics" video=false >}}
+{{< img src="metrics/HMI/hmi_intro.png" alt="Historical Metrics" video=false >}}
 
 For example, if you emit a metric point at 1:00 PM EST, and the timestamp on that point reads 10:00 AM EST, it will be classified as a *Historical Metric*, as it is delayed by 3 hours relative to the time of submission.
 
@@ -37,13 +37,13 @@ You can start ingesting Late Metrics by configuring Late Metric Ingestion via th
 
 To enable the ingestion of late metrics for a specific metric within the [Metrics Summary Page][1], click on the name of the metric you want to enable late metrics for. The side panel will appear, under the Advanced section you will find an option for "Late Data". Click on "Edit" and select "Enable Late Data" and press "Save" to enable the ingestion of late metrics for that specific metric.
 
-{{< img src="metrics/ldi_enablement.mp4" alt="Late Metrics Configuration" video=true >}}
+{{< img src="metrics/HMI/ldi_enablement.mp4" alt="Late Metrics Configuration" video=true >}}
 
 ### Bulk Configuring Historical Metrics
 
 To optimize your Late Metrics enablement, take advantage of our Bulk Late Metric Enablement feature. By clicking on **Enable Late Data** on the Metrics Summary page, you can specify a namespace for your metrics. Then, you can configure all metrics that match that namespace to enable Late metrics ingestion. This allows you to quickly and easily enable Late Metrics ingestion for multiple metrics at once, rather than having to configure each one individually.
 
-{{< img src="metrics/bulk_ldi_enablement.mp4" alt="Bulk Late Metrics Configuration" video=true >}}
+{{< img src="metrics/HMI/bulk_ldi_enablement.mp4" alt="Bulk Late Metrics Configuration" video=true >}}
 
 
 ## Historical Metrics Submission
@@ -430,7 +430,7 @@ Ingesting Late Metrics will include some ingestion latencies, which depends on t
 | 12 hours - 30 days   | Up to 14 hour latency                 |
 | +30 days             | +14 hours latency                     |
 
-{{< img src="metrics/hmi_latency.png" alt="Historical Metrics Latency" video=false >}}
+{{< img src="metrics/HMI/hmi_latency.png" alt="Historical Metrics Latency" video=false >}}
 
 *Above mentioned ingestion latencies are not final and are subject to improvements with compliance to Datadog's committment to continuous growth.*
 
@@ -438,7 +438,7 @@ Ingesting Late Metrics will include some ingestion latencies, which depends on t
 
 Historical Metrics will be billed under the Custom Metrics billing SKU. 
 
-{{< img src="metrics/hmi_billing.png" alt="Historical Metrics Billing" video=false >}}
+{{< img src="metrics/HMI/hmi_billing.png" alt="Historical Metrics Billing" video=false >}}
 
 [1]: /metrics/summary/
 [2]: /metrics/#submit-metrics
