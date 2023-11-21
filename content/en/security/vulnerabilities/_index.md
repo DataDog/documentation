@@ -28,7 +28,7 @@ Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you proact
 ## Explore vulnerabilities
 The [Vulnerabilities Explorer][1] shows a complete list of vulnerabilities detected across your infrastructure, ordering them based on their severity, offering grouping, filtering, and triaging capabilities so you can investigate, assign, and remediate problems.
 
-{{< img src="security/vulnerabilities/CSM_Vulnerabilities_3.png" alt="The CSM Vulnerability page sorting by unique vulnerabilities" width="100%">}}
+{{< img src="security/vulnerabilities/csm_vulnerabilities.png" alt="The CSM Vulnerability page sorting by unique vulnerabilities" width="100%">}}
 
 Select a specific vulnerability to see its details, including which containers and hosts are affected, severity breakdown score, and recommended remediation steps.
 The severity of a vulnerability is modified from the base score to take into account the following:
@@ -41,11 +41,11 @@ The severity of a vulnerability is modified from the base score to take into acc
 
 You can also view vulnerabilities in your container images on the [container images][2] page. Observe the number of vulnerabilities that exist in your container images. Additionally sort by **source**, **image tag**, **repo digest**, and more. View additional details about any vulnerability by clicking the container image and reviewing the **Vulnerabilities** tab.
 
-{{< img src="security/vulnerabilities/container_images_2.png" alt="The Container Images tab highlighting vulnerabilities and container column sort feature" width="100%">}}
+{{< img src="security/vulnerabilities/container_images.png" alt="The Container Images tab highlighting vulnerabilities and container column sort feature" width="100%">}}
 
 On the details explorer, you can also view impacted resources in CSM to gain better insights to your overall risk.
 
-{{< img src="security/vulnerabilities/container_vulnerability.png" alt="The Container Images side panel details on the vulnerabilities tab" width="100%">}}
+{{< img src="security/vulnerabilities/container_vulnerability_side_panel.png" alt="The Container Images side panel details on the vulnerabilities tab" width="100%">}}
 
 All vulnerabilities include a collection of links and references to websites or information sources that help you understand the context behind each vulnerability.
 
@@ -55,7 +55,7 @@ The [Vulnerabilities Explorer][1] also offers triaging options for detected vuln
 
 **Note**: To help you focus on the vulnerabilities that truly matter, vulnerabilities are auto-closed for infrastructure that is either no longer running, or contains the remediated fixed version of the previously-vulnerable package.
 
-{{< img src="security/vulnerabilities/CSM_vulnerabilities_assign_team.png" alt="Details explorer of a specific vulnerability highlighting the ability to assign a team member" width="100%">}}
+{{< img src="security/vulnerabilities/csm_remediate.png" alt="Details explorer of a specific vulnerability highlighting the ability to remediate and assign to team member" width="100%">}}
 
 
 [1]: https://app.datadoghq.com/security/csm/vm
