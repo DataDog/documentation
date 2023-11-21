@@ -331,11 +331,18 @@ For mobile apps (Swift, Android):
 **Examples**: `iPhone 12 Pro Simulator`, `iPhone 13 (QA team)`
 
 ## Adding code owners
-To add [codeowners][11] information to your Junit XML tests, you will need three things:
+To add [codeowners][11] information to your Junit XML tests, you can either set it manually setting the tag
+`test.source.file` or you can use our Github integration to automatically add the codeowners information to your tests:
 1. A `CODEOWNERS` file in your repository.
 2. Provide the source file in your Junit XML report. This is currently done automatically with the following plugins:
-   phpunit, and most of python and ruby plugins (pytest, unittest, ruby minitest, ...). For the rest of the plugins,
-   you will need to provide the source file manually via the tag `test.source.file`.
+   phpunit, and most of python and ruby plugins (pytest, unittest, ruby minitest, ...). These plugins will add the
+   `file` attribute to the `<testcase>` or `<testsuite>` elements in the XML report. If the  does not have the `file`,
+   you will need to [provide the source file manually](#providing-the-testsourcefile-tag-manually). Example:
+  {{< code-block lang="xml" >}}<?xml version="1.0" encoding="UTF-8"?>
+  <testsuite name="suite">
+    <testcase name="test_with_file" file="src/commands/junit/hello" />
+  </testsuite>
+  {{< /code-block >}}
 3. Enable the Github app. To do this follow the steps in the next section. If you already have an app, make sure it has
    the `Contents: Read` permission.
 
@@ -352,6 +359,20 @@ The Junit XML uses a private [GitHub App][12] to read the `CODEOWNERS` file.
 5. Click **Create App in GitHub** to finish the app creation process GitHub.
 6. Give the app a name, for example, `Datadog CI Visibility`.
 7. Click **Install GitHub App** and follow the instructions on GitHub.
+
+### Providing the `test.source.file` tag manually
+For those plugins that do not provide the `file` attribute in the XML report, you can provide the `test.source.file` tag.
+There is no need to provide the exact path to a specific file, [you can use any syntax you would use in the CODEOWNERS file][14]
+such as `src/myTeamFolder` or `*.md`.
+
+There are multiple ways to provide us with this tag:
+1. Using the `--tags` parameter or the `DD_TAGS` environment variable.
+   {{< code-block lang="shell" >}}
+   datadog-ci junit upload --service service_name --tags test.source.file:src/myTeamFolder my_report.xml
+   {{< /code-block >}}
+   This will add the `test.source.file` tag to all the tests in the report and hence all the tests will have the same owner(s).
+2. If you want to provide different source files for the same XML report, you can use [property elements](#Providing-metadata-through-property-elements)
+   or even set the `file` attribute manually to individual `<testcase>` or `<testsuite>` elements.
 
 ## Providing metadata with XPath expressions
 
@@ -523,3 +544,4 @@ For more information, see [Code Coverage][10].
 [11]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 [12]: https://docs.github.com/developers/apps/getting-started-with-apps/about-apps
 [13]: https://app.datadoghq.com/integrations/github/
+[14]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-syntax
