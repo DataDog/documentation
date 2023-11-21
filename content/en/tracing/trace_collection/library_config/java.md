@@ -293,6 +293,11 @@ When `true`, user principal is collected. Available for versions 0.61+.
 **Default**: `true`<br>
 When `true`, the tracer collects [telemetry data][8]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
 
+`dd.trace.128.bit.traceid.generation.enabled`
+: **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
+**Default**: `true`<br>
+When `true`, the tracer will generate 128 bit Trace IDs and will encode Trace ID as 32 lower-case hexadecimal characters with zero-padding.
+
 **Note**:
 
 - If the same key type is set for both, the system property configuration takes priority.
