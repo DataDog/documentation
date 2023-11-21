@@ -281,7 +281,7 @@ To stop producing traces, remove library injectors and restart the infrastructur
 1. Under `apm:`, remove `instrumentation:` and all following configuration in `datadog-values.yaml`.
 2. Run the following command:
    ```bash
-   helm upgrade <RELEASE_NAME> -f datadog-values.yaml datadog/datadog
+   helm upgrade datadog-agent -f datadog-values.yaml datadog/datadog
    ```
 3. Restart your services.
 
