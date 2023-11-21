@@ -32,9 +32,10 @@ To disable trace context propagation, set the value of the environment variables
 If multiple environment variables are set, `DD_TRACE_PROPAGATION_STYLE_INJECT` and `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 override any value provided in `DD_TRACE_PROPAGATION_STYLE`.
 
-If multiple extraction styles are enabled, extraction attempts are made
-in the order that those styles are specified. The first successfully
-extracted value is used.
+When multiple extraction styles are enabled, the extraction attempt is done in the order those styles are configured
+using the first successful extracted value. If valid trace contexts are found later, they are terminated and appended
+as span links. Additionally, if the `tracecontext` style is enabled, W3C Tracestate is propagated if W3C Traceparent matches
+the extracted context.
 
 ## Further Reading
 
