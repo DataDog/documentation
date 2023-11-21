@@ -12,9 +12,9 @@ further_reading:
 
 When you create a RUM application, Datadog [collects data][1] and generates dashboards about your application's performance, errors, resources, and user sessions. 
 
-{{< img src="real_user_monitoring/dashboards/rum_application_overview_dashboard-3.png" alt="RUM Application Overview page" style="width:90%;" >}}
+{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Application Overview page" style="width:90%;" >}}
 
-Access your RUM dashboards by filtering for `RUM` in the search query of the [**Dashboard List**][2] or from your application summary pages (**Real User Monitoring > Performance Summary** and **Real User Monitoring > Analytics Summary**).
+Access your RUM dashboards by filtering for `RUM` in the search query of the [**Dashboard List**][2] or from your application summary pages (**Real User Monitoring > Performance Monitoring > Performance Summary** and **Real User Monitoring > Product Analytics > Analytics Summary**).
 
 {{< img src="real_user_monitoring/dashboards/available_rum_dashboards-2.png" alt="Out-of-the-box RUM Dashboards" style="width:90%;" >}}
 
