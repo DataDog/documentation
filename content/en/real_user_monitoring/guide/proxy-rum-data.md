@@ -16,12 +16,12 @@ When you set the `proxy` [initialization parameter][1], all RUM data is sent to 
 
 ## Prerequisites
 
-A request to datadog (ex: `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser&...`) is composed of three parts:
+A Datadog request URL (ex: `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser&...`) is composed of three parts:
 - The Datadog intake origin corresponding to your `site` [initialization parameter][1] (ex: `https://browser-intake-datadoghq.eu`)
 - The path containing the API version and the product (ex: `/api/v2/rum`)
 - The parameters (ex: `ddsource=browser&...`)
 
-The Datadog intake origin corresponding to your site parameter should be defined in your proxy implementation. The path and parameters should be attached to the requests to the proxy.
+The Datadog intake origin corresponding to your site parameter should be defined in your proxy implementation. The path and parameters should be appended to the requests sent to the proxy.
 Datadog intake origins for each site are listed below:
 
 | Site    | Site Parameter            | Datadog intake origin                      |
@@ -33,11 +33,11 @@ Datadog intake origins for each site are listed below:
 | US1-FED | `ddog-gov.com`            | `https://browser-intake-ddog-gov.com`      |
 | AP1     | `ap1.datadoghq.com`       | `https://browser-intake-ap1-datadoghq.com` |
 
-To successfully proxy request to Datadog:
+To successfully forward a request to Datadog:
 
 1. Build the final Datadog intake URL by using:
    - the Datadog intake origin corresponding to your site.
-   - the path and parameters from the request to the proxy.
+   - the path and parameters from the request sent to the proxy.
 2. Add a `X-Forwarded-For` header containing the request client IP address for accurate geoIP.
 3. Forward the request to the Datadog intake URL using the POST method.
 4. Leave the request body unchanged.
