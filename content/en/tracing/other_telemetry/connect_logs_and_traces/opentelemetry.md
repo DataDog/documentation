@@ -49,7 +49,8 @@ class CustomDatadogLogProcessor(object):
         if not current_span.is_recording():
             return eventDict
 
-        if context := current_span.get_span_context():
+        context = current_span.get_span_context() if current_span is not None else None
+        if context is not None:
             event_dict["dd.trace_id"] = str(context.trace_id & 0xFFFFFFFFFFFFFFFF)
             event_dict["dd.span_id"] = str(context.span_id)
 
