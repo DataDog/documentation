@@ -33,10 +33,10 @@ Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to g
 
 ## Setup
 
-By default, you can view all resources monitored by the Datadog Agent and Cloud Integrations. To view additional cloud resources in the Resource Catalog, enable resource collection from the [Resource Catalog][5] setup page. To gain insights into your security risks, enable [Cloud Security Management][1] for each cloud account.
+By default, when you navigate to the Resource Catalog, you are able to see Datadog Agent monitored hosts, as well as cloud resources crawled for other Datadog products such as NPM (Network Performance Monitoring), and DBM (Database Monitoring). To view additional cloud resources in the Resource Catalog, enable resource collection from the [Resource Catalog][5] setup page. To gain insights into your security risks, enable [Cloud Security Management][1] for each cloud account.
 
 **Note**: Enabling Cloud Security Management automatically enables resource collection for the Resource Catalog Inventory tab.
-Enabling resource collection for the resource catalog does _not_ enable the CSM product.
+Enabling resource collection for the Resource Catalog does _not_ enable the CSM product.
 
 The Resource Catalog is useful for:
 
