@@ -31788,6 +31788,11 @@ paths:
             - Test can''t be found'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
       summary: Patch a Synthetic test
       tags:
       - Synthetics
