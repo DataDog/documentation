@@ -29,6 +29,7 @@ CSM Misconfigurations is not available in the selected site.
 ## Overview
 
 To extend the rules being applied to your environment to evaluate your security posture, you can clone compliance rules and edit the copies, and you can create your own rules from scratch.
+To view the list of the available resource types for your custom rules, see [Cloud Resources Schema][8]. 
 
 ## Cloning rules
 
@@ -89,3 +90,4 @@ You can assign almost any key-value as a tag. The following table shows tags tha
 [5]: /security/misconfigurations/compliance_rules#set-notification-targets-for-compliance-rules
 [6]: /security/notifications/
 [7]: https://app.datadoghq.com/security/
+[8]: /infrastructure/resource_catalog/schema/

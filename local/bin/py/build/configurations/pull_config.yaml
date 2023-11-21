@@ -510,7 +510,7 @@
           globs:
             - "generated/md/external/*.md"
           options:
-            dest_dir: '/security/misconfigurations/custom_rules/'
+            dest_dir: '/infrastructure/resource_catalog/'
             path_to_remove: 'generated/md/external/'
             front_matters:
               disable_edit: true
