@@ -153,6 +153,50 @@ See [Metric Monitors][6] for more information.
 1. Optionally, you can set [renotifications][9], tags, teams, and a [priority][10] for your monitor. You can also define [permissions][11] and audit notifications.
 1. Click **Create**.
 
+## Route logs sent after the limit to datadog_archives
+
+The Observability Pipelines `datadog_archives` destination formats logs into a Datadog-rehydratable format and then routes it to [Log Archives][12].
+
+The example configuration below is similar to the previous [example configuration](#handling-data-sent-after-the-limit). The only difference is that the destination type is `datadog_archives` so that all the events sent to Observability Pipelines, after the quota has been reached, are routed to the archives.
+
+```yaml
+sources:
+ generate_syslog:
+   type: demo_logs
+   format: syslog
+   interval: 1
+
+
+transforms:
+ parse_syslog:
+   type: remap
+   inputs:
+     - generate_syslog
+   source: |
+     # Parse the message as syslog
+     . = parse_syslog!(.message)
+     .environment = "demo"
+     .application = "opw"
+ quota_archiving_example:
+   type:
+     quota
+   inputs:
+     - parse_syslog
+   limit:
+     type: bytes
+     bytes:
+       max: 200000
+   window:
+     1m
+sinks:
+ archive_dropped:
+   type: datadog_archives
+   inputs:
+     - quota_archiving_example.dropped
+    bucket: "X"
+    service: "X"
+```
+
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -167,3 +211,4 @@ See [Metric Monitors][6] for more information.
 [9]: /monitors/notify/#renotify
 [10]: /monitors/notify/#priority
 [11]: /monitors/notify/#permissions
+[12]: /logs/log_configuration/archives/
