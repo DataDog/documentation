@@ -43,7 +43,7 @@ To record your steps without logging out of your application, use the recorder's
 
 Opening a pop-up in incognito mode allows you to start your test's recording from the start URL set in your test configuration with a session completely isolated from your own browser's main session and user data. The freshly opened incognito pop-up ignores all your previous browser history including cookies and local data. You are automatically logged out from your account and can start recording your login steps as if you were visiting your website for the first time.
 
-Create [subtests][2] to group your login steps into a single subtest that you can then reuse across any other browser tests that require a login.
+**Note:** Create [subtests][2] to group your login steps into a single subtest that you can then reuse across any other browser tests that require a login.
 
 ### SSO login
 
