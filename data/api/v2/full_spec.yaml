@@ -6261,6 +6261,9 @@ components:
     FullAPIKeyAttributes:
       description: Attributes of a full API key.
       properties:
+        category:
+          description: The category of the API key.
+          type: string
         created_at:
           description: Creation date of the API key.
           example: '2020-11-23T10:00:00.000Z'
@@ -6288,6 +6291,9 @@ components:
           description: Name of the API key.
           example: API Key for submitting metrics
           type: string
+        remote_config_read_enabled:
+          description: The remote config read enabled status.
+          type: boolean
       type: object
     FullApplicationKey:
       description: Datadog application key.
@@ -11786,6 +11792,9 @@ components:
     PartialAPIKeyAttributes:
       description: Attributes of a partial API key.
       properties:
+        category:
+          description: The category of the API key.
+          type: string
         created_at:
           description: Creation date of the API key.
           example: '2020-11-23T10:00:00.000Z'
@@ -11808,6 +11817,9 @@ components:
           description: Name of the API key.
           example: API Key for submitting metrics
           type: string
+        remote_config_read_enabled:
+          description: The remote config read enabled status.
+          type: boolean
       type: object
     PartialApplicationKey:
       description: Partial Datadog application key.
