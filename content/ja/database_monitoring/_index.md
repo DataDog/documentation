@@ -36,7 +36,7 @@ Datadog Database Monitoring は、すべてのホストにわたるデータベ�
 
 ## はじめに
 
-Datadog Database Monitoring は、**Postgres**、**MySQL**、**SQL Server** のセルフホストおよびマネージドクラウドバージョンをサポートします。Datadog Database Monitoring の使用を開始するには、データベースを構成し、Datadog Agent をインストールします。セットアップ手順については、データベーステクノロジーを選択してください。
+Datadog Database Monitoring は、**Postgres**、**MySQL**、**Oracle**、**SQL Server** のセルフホストおよびマネージドクラウドバージョンをサポートします。Datadog Database Monitoring の使用を開始するには、データベースを構成し、Datadog Agent をインストールします。セットアップ手順については、ご利用のデータベーステクノロジーを選択してください。
 
 ### Postgres
 
@@ -46,6 +46,11 @@ Datadog Database Monitoring は、**Postgres**、**MySQL**、**SQL Server** の�
 ### MySQL
 
 {{< partial name="dbm/dbm-setup-mysql" >}}
+<p></p>
+
+### Oracle
+
+{{< partial name="dbm/dbm-setup-oracle" >}}
 <p></p>
 
 ### SQL Server
@@ -93,6 +98,12 @@ UI で **[APM > Databases][1]** をクリックして、Database Monitoring に�
 
 {{< img src="database_monitoring/dbm-dashboard-postgres.png" alt="Database Monitoring" style="width:100%;">}}
 
+### ホストの健全性とパフォーマンスを最適化する
+
+[Databases ページ][1]では、データベースホストの健全性とアクティビティにアクセスすることができます。トリガーされたアラートの有無、クエリ量の多さ、その他の条件でリストの並び替えやフィルタリングを行って、ホストの優先順位付けを行います。個々のホストをクリックすると、構成、共通のブロッキングクエリ、呼び出しサービスなどの詳細が表示されます。詳しくは、[データベースホストを調べる][5]を参照してください。
+
+{{< img src="database_monitoring/databases-list.png" alt="Datadog の Databases ページ" style="width:90%;" >}}
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -101,3 +112,4 @@ UI で **[APM > Databases][1]** をクリックして、Database Monitoring に�
 [2]: /ja/database_monitoring/query_metrics/
 [3]: /ja/database_monitoring/query_samples/
 [4]: /ja/database_monitoring/query_metrics/#explain-plans
+[5]: /ja/database_monitoring/database_hosts/
