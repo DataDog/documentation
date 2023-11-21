@@ -26,7 +26,7 @@ For more information on configuring credentials, see [Connections][2]. App Build
 
 Use [role-based access control (RBAC)][4] to control access to your apps and connections. 
 
-The coarse permissions that apply to apps include `apps_run` and `apps_write`
+The coarse permissions that apply to apps include `apps_run` and `apps_write`.
 
 `apps_write`
 : Can create and edit new and existing apps. Datadog Standard and Admin roles have write access to App Builder by default.
