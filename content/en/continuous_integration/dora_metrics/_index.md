@@ -26,7 +26,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="https://forms.gle/Eqq6uXfGjYxmqpjDA" header="false" >}}
-DORA Metrics are in private beta for <a href="https://docs.datadoghq.com/continuous_integration/pipelines/">CI Pipeline Visibility</a>, <a href="https://docs.datadoghq.com/continuous_integration/tests/">Test Visibility</a>, and <a href="https://docs.datadoghq.com/continuous_integration/static_analysis/">Static Analysis</a> customers. To request access, complete the form.
+DORA Metrics are in private beta. To request access, complete the form.
 {{< /callout >}}
 
 ## Overview
