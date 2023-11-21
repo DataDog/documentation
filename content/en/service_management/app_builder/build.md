@@ -14,7 +14,13 @@ further_reading:
 Datadog App Builder is in private beta. Complete the form to request access.
 {{< /callout >}}
 
-You can create an app or edit existing apps from the [App Builder][1] page. The page lists information about existing apps, including the author, status, the dates that each app was last modified, and whether the app is published or not.
+You can create an app or edit existing apps from the [App Builder][1] page. The page lists information about existing apps:
+- The author
+- The status
+- The dates that each app was last modified
+- Whether the app is published or not
+
+On the App Builder page, access and filter your apps:
 - Hover over an app for the options to edit, delete, view or clone the app.
 - Toggle **My apps** if you want to see only apps that you created.
 
@@ -24,16 +30,16 @@ You can create an app or edit existing apps from the [App Builder][1] page. The 
 
 ### Build an app from a blueprint
 
-Blueprints are helpful starter apps that cover common use cases and come loaded with demo data that you can use to familiarize yourself with the app.
+Blueprints are helpful starter apps. They cover common use cases and come loaded with demo data that you can use to familiarize yourself with the app.
 
 1. Click the [**Blueprints**][2] tab.
-1. Find the blueprint you'd like to use and click **Preview**.
+1. Find the blueprint you want to use, and click **Preview**.
 1. Click **Use Blueprint** to open the app blueprint.
 1. To change the app name and description, click the app name.
 1. Each blueprint template comes loaded with demo data. You can begin customizing the app immediately by editing the **Connection** for each query.
 1. To save the app, click **Save as New App**.
 1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
-1. When you're finished modifying the app, Click **Run** to test it.
+1. After you finish modifying the app, Click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 [1]: https://app.datadoghq.com/app-builder/
@@ -57,7 +63,7 @@ If you're not sure where to start, describe your app to the App Builder AI and l
 1. Use [queries](#queries) to populate or interact with your canvas.
 1. To save the app, click **Save as New App**.
 1. To [preview](#preview-an-app) the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
-1. When you're finished modifying the app, Click **Run** to test it.
+1. After you finish modifying the app, Click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
 ## Customize your app
@@ -65,7 +71,7 @@ If you're not sure where to start, describe your app to the App Builder AI and l
 Apps are made up of UI components and queries, which interact with each other to form the user experience and logic behind each app. The query list and editor appear on the left side of the page, while the app canvas and UI components make up the right side of the page.
 
 Basic customization:
-- To edit the **Name**, **Description**, or the **Canvas Color** of your app, click the app name on the top left.
+- To edit the **Name**, **Description**, or the **Canvas Color** of your app, click the app name at the top left.
 - Click the **Preview** button to preview your app. Preview mode allows you to view the app from the user's perspective. Use preview mode to interact with the app UI and test your queries. When you're done, click **Edit** to return to the app builder.
 - To save your app, click **Save**.
 - When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
@@ -74,33 +80,33 @@ Basic customization:
 
 The app canvas represents the graphical interface that your users interact with. Selecting a component adds it to the canvas. Alternatively, you can add components or move them around on the canvas by dragging and dropping. To see all available components, click **All Components**.
 
-Each component features a list of corresponding configuration options that you can use to control how users interact with your app. For example, the **Text Input** component allows you to set a default value, placeholder text, and a label. The **Button** component allows for a label and an event to trigger when pressed. Components also feature an **Appearance** section that you can use to change the way the components look and act. For example, you can disable a button or control its visibility.
+Each component features a list of corresponding configuration options that control how users interact with your app. For example, the **Text Input** component allows you to set a default value, placeholder text, and a label. The **Button** component includes a label and an event to trigger when pressed. Components also feature an **Appearance** section that changes the way the components look and act. For example, you can disable a button or control its visibility.
 
 To delete or duplicate a component, select the component and click the three dot ellipsis (*...*) to display the **Delete** or **Duplicate** options.
 
 Available UI components:
 - Button
-- Callout Value
+- Callout value
 - Checkbox
 - Container
-- Date Range Picker
-- JSON Input
+- Date range picker
+- JSON input
 - Modal
-- Number Input
+- Number input
 - Radio
 - Search
 - Select
 - Table
 - Text
-- Text Input
+- Text input
 
 #### Events
 
-UI Components can trigger reactions on an **Event**. The event trigger differs according to the component. For example, a button component can can trigger on a click event, and a table component event can trigger on a page change or table row click.
+UI Components can trigger reactions on an **Event**. The event triggers differ according to the component. For example, a button component can can trigger on a click event, and a table component event can trigger on a page change or table row click.
 
 An event can set a UI component state, open or close a modal, trigger another query, or even run custom JavaScript.
 
-For example, the [GitHub PR Summarizer][4] blueprint uses a **Summarize** button with an event that triggers on a click. The event uses the **Trigger Query** reaction which runs the `summarizePulls` query.
+For example, the [GitHub PR summarizer][4] blueprint uses a **Summarize** button with an event that triggers on a click. The event uses the **Trigger Query** reaction which runs the `summarizePulls` query.
 
 #### Dynamic table values
 
@@ -132,24 +138,24 @@ ${(() => {
 })()}
 {{< /highlight >}}
 
-In the table, the **User** column is filled with an avatar and GitHub username for each PR author.
+In the table, the **User** column fills with an avatar and GitHub username for each PR author.
 
 {{< img src="service_management/app_builder/dynamic_tables.png" alt="The GitHub PR Summarizer" style="width:100%;" >}}
 
 ### Queries
 
-Queries form the logic behind your app and enable interactions with Datadog integrations. Queries can take inputs from other queries or from UI components, and return outputs for use in other queries or UI components.
+Queries form the logic behind your app and enable interactions with Datadog integrations. Queries take inputs from other queries or from UI components, and return outputs for use in other queries or UI components.
 
-To add a query, click the plus (**+**) icon in the **Queries** section and search for a query to add to your app. After you've added a query, it appears in the query list above the query editor. You can click and drag queries to reorder them. Select a query to configure it.
+To add a query, click the plus (**+**) icon in the **Queries** section and search for a query to add to your app. After you've added a query, it appears in the query list above the query editor. Click and drag queries to reorder them. Select a query to configure it.
 
-Queries rely on [Connections][5] for authentication. Connections are shared with [Workflow Automation][6].
+Queries rely on [Connections][5] for authentication. App Builder shares connections with [Workflow Automation][6].
 
 #### Run settings
 
 **Run Settings** determine when a query is executed. There are two options:
 
 - **Auto**: The query runs when the app loads and whenever any query arguments change.
-- **Manual**: The query runs when it is manually triggered from elsewhere in the app. For example, use a manual trigger if you want a query to execute only when a user clicks a UI button component. For more information on event triggers, see [Events](#events).
+- **Manual**: The query runs when another portion of the app triggers it. For example, use a manual trigger if you want a query to execute only when a user clicks a UI button component. For more information on event triggers, see [Events](#events).
 
 #### Debounce
 
@@ -157,13 +163,13 @@ Configuring debounce ensures that your query is only triggered once per user inp
 
 #### Conditional queries
 
-You can set a condition that must be met before a query can run. To set a query, enter an expression in the **Condition** field in the **Advanced** section of the query. The condition must evaluate to true before the query runs. For example, if you want a given query to run only if a UI component named `select0` exists and is not empty, you can use the expression:
+You can set a condition that must be met before a query can run. To set a query, enter an expression in the **Condition** field in the **Advanced** section of the query. The condition must evaluate to true before the query runs. For example, if you want a given query to run only if a UI component named `select0` exists and is not empty, use the expression:
 
 {{< code-block lang="js" >}}${select0.value && select0.value.length > 0}{{< /code-block >}}
 
 #### Post-query transformation
 
-You can perform a post-query transformation to simplify or transform the output of a query. Add a post-query transformation in the **Advanced** section of a query.
+Perform a post-query transformation to simplify or transform the output of a query. Add a post-query transformation in the **Advanced** section of a query.
 
 For example, the Slack _List Channels_ action returns an array of dictionaries containing the ID and name for each channel. To discard the IDs and return only an array of names, add the following query transformation:
 
@@ -195,7 +201,7 @@ To prompt a user for confirmation before the query runs, toggle the **Requires C
 
 Use app variables to pass data from one part of your app to another. Additionally, you can use app variables to pass in data from your dashboard using [dashboard template variables][3].
 
-Variables are enclosed in braces, proceeded by a dollar sign (`${}`). To use a variable, enter the query or UI component name and access the child fields using dot notation. For example, if you have a select component named `select0` and you want to access its default value field, use the syntax `${select0.defaultValue}`. If you're not sure what to enter as a variable, type `${` to open a suggestions menu with all available variables.
+Variables are enclosed in braces, preceeded by a dollar sign (`${}`). To use a variable, enter the query or UI component name and access the child fields using dot notation. For example, if you have a select component named `select0` and you want to access its default value field, use the syntax `${select0.defaultValue}`. If you're not sure what to enter as a variable, type `${` to open a suggestions menu with all available variables.
 
 {{< img src="service_management/app_builder/app-builder-variable.mp4" alt="If you're not sure what to enter as a variable, type ${ to open a suggestions menu with all available variables" video=true >}}
 
