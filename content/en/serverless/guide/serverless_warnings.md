@@ -98,7 +98,7 @@ No invocation in the selected time range used more than 10% of the allocated mem
 
 Attack attempts were detected targeting the serverless application. 
 
-**Resolution:** Investigate the attack attempts in ASM by clicking the “Security Signals” button to determine how to respond. If immediate action is needed, you can block the attacking IP in your WAF through the [Workflows integration][11].
+**Resolution:** Investigate the attack attempts in ASM by clicking the **Security Signals** button to determine how to respond. If immediate action is needed, you can block the attacking IP in your WAF through the [Workflows integration][11].
 
 ## Further Reading
 
