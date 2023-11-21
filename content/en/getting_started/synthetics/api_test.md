@@ -31,7 +31,7 @@ further_reading:
 
 ## Overview
 
-API tests **proactively monitor** that your **most important services** are available at anytime and from anywhere. [Single API tests][1] come in eight subtypes that allow you to launch requests on the different network layers of your systems (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP`, and `gRPC`). [Multistep API tests][2] enable you to run HTTP or gRPC tests in sequence to monitor the uptime of key journeys at the API level.
+API tests **proactively monitor** that your **most important services** are available at anytime and from anywhere. [Single API tests][1] come in eight subtypes that allow you to launch requests on the different network layers of your systems (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP`, and `gRPC`). [Multistep API tests][2] enable you to run API tests in sequence to monitor the uptime of key journeys at the API level.
 
 ## Create a single API test
 
@@ -112,7 +112,7 @@ When you're ready to save your test configuration and monitor, click **Create**.
 
 {{< img src="getting_started/synthetics/multistep-api-test.png" alt="Overview of a Mulistep Synthetics API Test" style="width:100%;" >}}
 
-Similar to [HTTP tests][3] and [gRPC tests][15], multistep API tests alert you when your endpoints become too slow or fail to meet any conditions you defined. You can create variables from individual step responses and re-inject their values in subsequent steps, chaining steps together in a way that mimics the behavior of your application or service.
+Similar to [API tests][3], multistep API tests alert you when your endpoints become too slow or fail to meet any conditions you defined. You can create variables from individual step responses and re-inject their values in subsequent steps, chaining steps together in a way that mimics the behavior of your application or service.
 
 The example test below demonstrates the creation of a multistep API test that monitors the addition of an item to a cart. This test contains three steps: 
 
