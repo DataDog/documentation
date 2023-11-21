@@ -345,11 +345,14 @@ To automatically add the `test.codeowners` tag to your tests, you need to:
    `file` attribute to the `<testcase>` or `<testsuite>` elements in the XML report. If the XML does not have the `file` attribute,
    you will need not be able to use the Github integration so you will need to [provide the source file manually](#manually-providing-the-testsourcefile-tag).
    Example of valid report:
-  {{< code-block lang="xml" >}}<?xml version="1.0" encoding="UTF-8"?>
+
+  {{< code-block lang="xml" >}}
+  <?xml version="1.0" encoding="UTF-8"?>
   <testsuite name="suite">
     <testcase name="test_with_file" file="src/commands/junit/hello" />
   </testsuite>
   {{< /code-block >}}
+
 3. Enable the Github app. To do this follow the steps in the next section. If you already have an app, make sure it has
    the `Contents: Read` permission.
 
@@ -376,9 +379,11 @@ such as `src/myTeamFolder` or `*.md`.
 
 There are multiple ways to provide us with this tag:
 1. Using the `--tags` parameter or the `DD_TAGS` environment variable.
-   {{< code-block lang="shell" >}}
+
+   ```shell
    datadog-ci junit upload --service service_name --tags test.source.file:src/myTeamFolder my_report.xml
-   {{< /code-block >}}
+   ```
+
    This will add the `test.source.file` tag to all the tests in the report and hence all the tests will have the same owner(s).
 2. If you want to provide different source files for the same XML report, you can use [property elements](#Providing-metadata-through-property-elements)
    or even set the `file` attribute manually to individual `<testcase>` or `<testsuite>` elements.
