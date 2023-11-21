@@ -14,7 +14,7 @@ Datadog App Builder is in private beta. Complete the form to request access.
 
 Datadog App Builder is a low-code application building platform that streamlines the development of your internal tools with a user-friendly drag-and-drop interface and built-in support for JavaScript. App Builder makes use of integrations with popular services such as AWS and GitHub, allowing you to leverage data and seamlessly connect with external APIs and data stores. By integrating with Datadog's existing capabilities, App Builder provides a centralized context, empowering you to take preventive actions or respond to ongoing incidents, all within the same view you use for troubleshooting.
 
-{{< img src="/service_management/app_builder/app_builder2.png" alt="An app in the app builder" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/datadog-app-builder-1.png" alt="An app in the app builder" style="width:100%;" >}}
 
 ## Configure App Builder actions
 
@@ -34,9 +34,11 @@ Below are a few examples of apps you can build:
 - Use a PagerDuty integration to see who is on-call for each team in an organization.
 - Summarize the progress of each PR in a given repo.
 
-{{< img src="/service_management/app_builder/app-builder-blueprints.png" alt="App blueprints" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/app-builder-blueprints-1.png" alt="App blueprints" style="width:100%;" >}}
 
 ## Get started faster with AI
+
+<div class="alert alert-info">This feature is in active development and is opt-in.</div>
 
 If you're not sure where to start, describe your app to the App Builder AI and let it create a starter app for you.
 
@@ -46,7 +48,7 @@ If you're not sure where to start, describe your app to the App Builder AI and l
 
 Use your apps from the Apps page, or access them independently from dashboards. Datadog Apps function as native dashboard integrations, allowing you to customize and take action on your data straight from your Dashboard.
 
-{{< img src="/service_management/app_builder/app-builder-embedded-dashboard.png" alt="An app embedded in a dashboard" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/app-builder-embedded-dashboard-1.png" alt="An app embedded in a dashboard" style="width:100%;" >}}
 
 ## Further reading
 

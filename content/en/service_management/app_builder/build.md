@@ -62,7 +62,7 @@ If you're not sure where to start, describe your app to the App Builder AI and l
 1. To add a [UI component](#app-canvas-and-components) to the app canvas, select it or drag it onto the canvas.
 1. Use [queries](#queries) to populate or interact with your canvas.
 1. To save the app, click **Save as New App**.
-1. To [preview](#preview-an-app) the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
+1. To preview the app, click **Preview**. Click **Edit** from the preview screen to return to the configuration view.
 1. After you finish modifying the app, Click **Run** to test it.
 1. When you're ready to publish your app, click **Publish**. Publishing an app makes it available to your dashboards.
 
@@ -140,11 +140,9 @@ ${(() => {
 
 In the table, the **User** column fills with an avatar and GitHub username for each PR author.
 
-{{< img src="service_management/app_builder/dynamic_tables.png" alt="The GitHub PR Summarizer" style="width:100%;" >}}
-
 ### Queries
 
-Queries form the logic behind your app and enable interactions with Datadog integrations. Queries take inputs from other queries or from UI components, and return outputs for use in other queries or UI components.
+Queries allow you to populate your app with data from Datadog APIs or a supported integration. Queries take inputs from other queries or from UI components, and return outputs for use in other queries or UI components.
 
 To add a query, click the plus (**+**) icon in the **Queries** section and search for a query to add to your app. After you've added a query, it appears in the query list above the query editor. Click and drag queries to reorder them. Select a query to configure it.
 
@@ -182,7 +180,7 @@ for (var item in object) {
     arr.push(object[item].name);
 }
 
-return arr }
+return arr
 {{< /code-block >}}
 
 #### Post-query hooks
