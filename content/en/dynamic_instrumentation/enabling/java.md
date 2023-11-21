@@ -3,7 +3,7 @@ title: Enable Dynamic Instrumentation for Java
 kind: Documentation
 aliases:
     - /tracing/dynamic_instrumentation/enabling/java/
-is_beta: true
+is_beta: false
 private: false
 code_lang: java
 type: multi-code-lang
