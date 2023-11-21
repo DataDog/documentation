@@ -181,7 +181,7 @@ To set specific tracing library versions, add the following configuration to you
             ruby: v1.15.0 
 {{< /highlight >}}
 
-<div class="alert alert-info"><code>libVersions</code> supports .Net, Python, Java, Javascript, and Ruby.</div>
+<div class="alert alert-info">Supported languages include .Net (<code>dotnet</code>), Python (<code>python</code>), Java (<code>java</code>), Javascript (<code>js</code>), and Ruby (<code>ruby</code>).</div>
 
 [15]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
