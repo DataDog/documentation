@@ -16521,6 +16521,11 @@ components:
         description:
           description: Description of the standard pattern.
           type: string
+        included_keywords:
+          description: List of included keywords.
+          items:
+            type: string
+          type: array
         name:
           description: Name of the standard pattern.
           type: string
