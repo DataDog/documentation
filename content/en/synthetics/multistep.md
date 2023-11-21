@@ -63,6 +63,7 @@ By default, you can create up to 10 test steps. To increase this limit, contact 
 #### Define the request
 
 1. **Name** your step.
+2. Choose a request type: HTTP or gRPC.
 2. Choose the **HTTP Method** and specify the **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
 3. Enrich your HTTP request with **Advanced Options** (optional):
 
@@ -70,8 +71,8 @@ By default, you can create up to 10 test steps. To increase this limit, contact 
 
    {{% tab "Request Options" %}}
 
-   * **Follow redirects**: Tick to have your API test follow up to ten redirects when performing the request.
-   * **Ignore server certificate error**: Tick to have your API test go on with connection even if there are errors when validating the SSL certificate.
+   * **Follow redirects**: Tick to have your HTTP test follow up to ten redirects when performing the request.
+   * **Ignore server certificate error**: Tick to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
    * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
    * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
 
