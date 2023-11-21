@@ -118,7 +118,7 @@ To enable single step instrumentation with Helm:
 
 4. Run the following command:
    ```bash
-   helm install datadog-agent -f datadog-values.yaml --set datadog.apiKeyExistingSecret=datadog-secret datadog/datadog
+   helm install datadog-agent -f datadog-values.yaml
    ```
 
 [7]: https://v3.helm.sh/docs/intro/install/
@@ -163,7 +163,7 @@ To disable instrumentation for specific namespaces, add the `disabledNamespaces`
 
 ### Specifying tracing library versions
 
-You can optionally set specific tracing library versions to use. If you don't set a specific version, it defaults to the latest version.
+You can optionally set specific tracing library versions to use. If you don't specify a version, it defaults to the latest version. To find the latest version for a library, go to **Releases** in the dd-trace-&lt;language&gt; GitHub repo. For example, [dd-trace-dotnet releases][15].
 
 To set specific tracing library versions, add the following configuration to your `datadog-values.yaml` file:
 {{< highlight yaml "hl_lines=7-12" >}}
@@ -174,13 +174,16 @@ To set specific tracing library versions, add the following configuration to you
        instrumentation:
          enabled: true
          libVersions: # Add any versions you want to set
-               dotnet: v2.40.0
-               python: v1.20.6
-               java: v1.22.0
-               js: v4.17.0
-               ruby: v1.15.0 
+            dotnet: v2.40.0
+            python: v1.20.6
+            java: v1.22.0
+            js: v4.17.0
+            ruby: v1.15.0 
 {{< /highlight >}}
 
+<div class="alert alert-info"><code>libVersions</code> supports .Net, Python, Java, Javascript, and Ruby.</div>
+
+[15]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -278,9 +281,7 @@ To stop producing traces, remove library injectors and restart the infrastructur
 1. Under `apm:`, remove `instrumentation:` and all following configuration in `datadog-values.yaml`.
 2. Run the following command:
    ```bash
-   helm upgrade <RELEASE_NAME> \
-    -f datadog-values.yaml \
-    datadog/datadog
+   helm upgrade <RELEASE_NAME> -f datadog-values.yaml datadog/datadog
    ```
 3. Restart your services.
 
