@@ -252,7 +252,7 @@ class SomeClass {
 ```
 ### Adding span links (Beta)
 
-<div class="alert alert-info">Support for span links is in beta and requires the <a href="https://github.com/DataDog/dd-trace-java/releases/tag/v1.24.1">Java tracer v.1.24.1+</a></div>
+<div class="alert alert-info">Support for span links is in beta and requires the <a href="https://github.com/DataDog/dd-trace-java/releases/tag/v1.24.1">Java tracer v.1.24.1+</a>.</div>
 
 Span links associate one or more spans together that don't have a typical parent-child relationship. They may associate spans within the same trace or spans across different traces.
 
