@@ -3,7 +3,7 @@ title: Enable Dynamic Instrumentation for .NET
 kind: Documentation
 aliases:
     - /tracing/dynamic_instrumentation/enabling/dotnet/
-is_beta: true
+is_beta: false
 private: false
 code_lang: dotnet
 type: multi-code-lang
