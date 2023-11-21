@@ -3175,11 +3175,16 @@ main:
     parent: security_platform
     identifier: security_signal_management
     weight: 8
+  - name: Security Inbox
+    url: security/security_inbox
+    parent: security_platform
+    identifier: security_inbox
+    weight: 9
   - name: Audit Trail
     url: security/audit_trail
     parent: security_platform
     identifier: security_audit_trail
-    weight: 9
+    weight: 10
   - name: Cloud SIEM
     url: security/cloud_siem/
     pre: siem
