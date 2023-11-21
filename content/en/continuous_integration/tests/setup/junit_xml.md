@@ -353,9 +353,8 @@ To automatically add the `test.codeowners` tag to your tests, you need to:
   </testsuite>
   {{< /code-block >}}
 
-3. Enable the [Github app][12].
-  * If you do not have a Github app: follow the steps in the next section.
-  * If you already have an Github app: enable the `Contents: Read` permission so we can read the `CODEOWNERS` file.
+3. Enable the [Github app][12]. If you do not have a Github app: follow the steps in the next section. If you already have
+   a Github app: enable the `Contents: Read` permission so we can read the `CODEOWNERS` file.
 
 Note that Github is the only supported git provider for this feature at the moment.
 
