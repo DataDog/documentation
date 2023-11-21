@@ -662,6 +662,8 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 
 - **Custom Metrics:** You can submit custom metrics using a [DogStatsd client][4]. For monitoring Cloud Run and other serverless applications, use [distribution][9] metrics. Distributions provide `avg`, `sum`, `max`, `min`, and `count` aggregations by default. On the Metric Summary page, you can enable percentile aggregations (p50, p75, p90, p95, p99) and also manage tags. To monitor a distribution for a gauge metric type, use `avg` for both the [time and space aggregations][11]. To monitor a distribution for a count metric type, use `sum` for both the time and space aggregations.
 
+- **OpenTelemetry**: If your code is custom instrumented with the [OpenTelemetry API][26], or you want to write vendor-agnostic custom instrumentation code, you can configure it to generate Datadog-style spans and traces. You can then process these spans and traces with the Datadog tracing library for your language, and send the data to Datadog. After installation, set the feature flag `DD_TRACE_OTEL_ENABLED` to `true`. See [Custom instrumentation with the OpenTelemetry API][27] for more details.
+
 ### Environment Variables
 
 | Variable | Description |
@@ -676,6 +678,7 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 | `DD_ENV`          | See [Unified Service Tagging][6].                                  |
 | `DD_SOURCE`       | See [Unified Service Tagging][6].                                  |
 | `DD_TAGS`         | See [Unified Service Tagging][6].                                  |
+| `DD_TRACE_OTEL_ENABLED` | See [Custom instrumentation with the OpenTelemetry API][27]. |
 
 ## Troubleshooting
 
@@ -716,3 +719,5 @@ RUN apt-get update && apt-get install -y ca-certificates
 [23]: /tracing/other_telemetry/connect_logs_and_traces/python
 [24]: /tracing/other_telemetry/connect_logs_and_traces/go
 [25]: /tracing/other_telemetry/connect_logs_and_traces/ruby
+[26]: https://opentelemetry.io/docs/reference/specification/trace/api
+[27]: https://docs.datadoghq.com/tracing/trace_collection/otel_instrumentation/
