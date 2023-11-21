@@ -4,14 +4,14 @@ further_reading:
   tag: Documentation
   text: Log Detection Rules
 kind: documentation
-title: Create an Integration Detection Rule
-description: Learn how to create a detection rule for your integration.
+title: Create a Cloud SIEM Detection Rule
+description: Learn how to create a Cloud SIEM detection rule for your integration.
 ---
 ## Overview
 
 [Datadog Cloud SIEM (Security Information and Event Management)][1] unifies developer, operation, and security teams through one platform. Datadog provides a set of out-of-the-box detection rules for many features and integrations. View these rules in your [SIEM Detection Rules list][2].
 
-Create an out-of-the-box detection rule to help users find value in your Datadog integration. This guide provides steps for creating an integration-detection rule and best practices to follow during the creation process.
+Create an out-of-the-box detection rule to help users find security insights through your Datadog integration. This guide provides steps for creating an Cloud SIEM detection rule and best practices to follow during the creation process.
 
 To create a Datadog integration, see [Create a New Integration][3].
 
