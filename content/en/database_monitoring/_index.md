@@ -88,7 +88,7 @@ The [Query Samples view][3] helps you understand which queries are running at a 
 - Improve query efficiency and save on costly sequential scans on large tables.
 - See how a query's plan changes over time.
 
-{{< img src="database_monitoring/dbm-explain-plan2.png" alt="Database Monitoring" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-explain-plan-3.png" alt="Database Monitoring" style="width:100%;">}}
 
 ### Visualize everything on enriched dashboards
 
