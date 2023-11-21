@@ -9,9 +9,12 @@ With Dynamic Instrumentation (DI) you can craft arbitrary expressions that are e
 
 ## Default data scrubbing configuration
 
-The default scrubber redacts values that are associated with the keys `password` or `accessToken`.
+The default scrubber redacts values that are associated with the attributes like `password` or `accessToken`.
+* Review full list of automatically redacted [attributes][1]
 
 ## Extend data scrubbing rules
 
 * Redaction rules are customizable.
-* Redact based on keys, not values. 
+* Redact based on keys, not values.
+
+[1]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/agent-debugger/debugger-bootstrap/src/main/java/datadog/trace/bootstrap/debugger/util/Redaction.java
