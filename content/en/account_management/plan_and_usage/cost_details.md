@@ -59,8 +59,7 @@ To download the data as a comma separated value file, click **Download as CSV**.
 - **Estimated MTD**: Data is available from the first of the month to the current date. If historical cost data is not yet available for the prior month, estimated cost data also displays for the prior month.
 - **Historical**: Data is available after month close, which is approximately 16 days after the end of the month.
   
-See [Get estimated cost across your account][3] to query estimated cost data through the API. 
-See [Get projected cost across your account][6] to query projected cost data through the API.
+To query estimated cost data through the API, see [Get estimated cost across your account][3]. To query projected cost data through the API, see [Get projected cost across your account][6].
 
 ### Cost Summary (sub-organization)
 
