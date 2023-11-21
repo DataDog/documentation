@@ -44,9 +44,9 @@ Dynamic Instrumentation requires the following:
 
 - [Datadog Agent][1] 7.44.0 or higher is installed alongside your service.
 - [Remote Configuration][2] is enabled in that Agent.
-- For Java applications, tracing library [`dd-trace-java`][3] 1.20.0 or higher.
-- For Python applications, tracing library [`dd-trace-py`][4] 1.15.0 or higher.
-- For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.32.0 or higher.
+- For Java applications, tracing library [`dd-trace-java`][3] 1.24.0 or higher.
+- For Python applications, tracing library [`dd-trace-py`][4] 2.2.0 or higher.
+- For .NET applications, tracing library [`dd-trace-dotnet`][5] 2.42.0 or higher.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
 - Optionally, [Source Code Integration][7] is set up for your service.
 - The **Dynamic Instrumentation Read Configuration** (`debugger_read`) permission is required to access the Dynamic Instrumentation page
