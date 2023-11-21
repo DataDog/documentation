@@ -9156,8 +9156,7 @@ api:
         - v2
       operationids:
         - ListContainerImages
-      unstable:
-        - v2
+      unstable: []
       order: 1
   - name: Containers
     url: /api/latest/containers/
@@ -9173,8 +9172,7 @@ api:
         - v2
       operationids:
         - ListContainers
-      unstable:
-        - v2
+      unstable: []
       order: 1
   - name: DORA Metrics
     url: /api/latest/dora-metrics/
