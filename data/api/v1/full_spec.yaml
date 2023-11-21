@@ -24543,7 +24543,10 @@ paths:
       x-menu-order: 8
       x-undo:
         operationId: DeleteAWSAccount
-        parameters: []
+        parameters:
+        - name: body
+          origin: request
+          template: '{"account_id": "{{account_id}}", "role_name": "{{role_name}}"}'
         type: unsafe
     put:
       description: Update a Datadog-Amazon Web Services integration.
