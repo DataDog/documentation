@@ -15,7 +15,7 @@ further_reading:
 
 Security Inbox provides a consolidated, actionable list of your most important security findings. It automatically contextualizes and correlates insights from Datadog security products across vulnerabilities, signals, misconfigurations, and identity risks into a unified, prioritized view of actions to take to strengthen your environment.
 
-{{< img src="security/csm/security_inbox_2.png" alt="The Security Inbox shows prioritized security issues for remediation" width="100%">}}
+{{< img src="security/security_inbox_3.png" alt="The Security Inbox shows prioritized security issues for remediation" width="100%">}}
 
 ## Types of findings in Security Inbox
 
