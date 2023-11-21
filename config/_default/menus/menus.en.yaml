@@ -3175,11 +3175,16 @@ main:
     parent: security_platform
     identifier: security_signal_management
     weight: 8
+  - name: Security Inbox
+    url: security/security_inbox
+    parent: security_platform
+    identifier: security_inbox
+    weight: 9
   - name: Audit Trail
     url: security/audit_trail
     parent: security_platform
     identifier: security_audit_trail
-    weight: 9
+    weight: 10
   - name: Cloud SIEM
     url: security/cloud_siem/
     pre: siem
@@ -4331,14 +4336,18 @@ main:
     url: developers/integrations/create-an-integration-recommended-monitor
     parent: dev_tools_integrations
     weight: 408
+  - name: Create a Cloud SIEM Detection Rule
+    url: developers/integrations/create-an-integration-detection-rule
+    parent: dev_tools_integrations
+    weight: 409
   - name: OAuth for Integrations
     url: developers/integrations/oauth_for_integrations
     parent: dev_tools_integrations
-    weight: 409
+    weight: 410
   - name: Install Agent Integration Developer Tool
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 410
+    weight: 411
   - name: UI Extensions
     url: developers/ui_extensions
     parent: dev_tools
@@ -9156,8 +9165,7 @@ api:
         - v2
       operationids:
         - ListContainerImages
-      unstable:
-        - v2
+      unstable: []
       order: 1
   - name: Containers
     url: /api/latest/containers/
@@ -9173,8 +9181,7 @@ api:
         - v2
       operationids:
         - ListContainers
-      unstable:
-        - v2
+      unstable: []
       order: 1
   - name: DORA Metrics
     url: /api/latest/dora-metrics/
