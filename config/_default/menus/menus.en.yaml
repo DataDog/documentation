@@ -1032,6 +1032,16 @@ main:
     url: infrastructure/process/increase_process_retention/
     parent: infrastructure_process
     weight: 401
+  - name: Resource Catalog
+    url: infrastructure/resource_catalog/
+    parent: infrastructure
+    identifier: infrastructure_resource_catalog
+    weight: 5
+  - name: Cloud Resources Schema
+    url: infrastructure/resource_catalog/schema/
+    parent: infrastructure_resource_catalog
+    identifier: infrastructure_resource_catalog_schema
+    weight: 501
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
@@ -3270,13 +3280,8 @@ main:
   - name: Custom Rules
     url: security/misconfigurations/custom_rules
     parent: cspm
-    identifier: custom_rules
+    identifier: cspm_custom_rules
     weight: 103
-  - name: Cloud Resources Schema
-    url: security/misconfigurations/custom_rules/schema/
-    parent: cspm
-    identifier: cspm_schema_gcp_test
-    weight: 104
   - name: Compliance Reports
     url: security/misconfigurations/frameworks_and_benchmarks
     parent: cspm
@@ -3297,11 +3302,6 @@ main:
     parent: cspm
     identifier: signals
     weight: 112
-  - name: Resource Catalog
-    url: /security/misconfigurations/resource_catalog
-    parent: cspm
-    identifier: resource_catalog
-    weight: 114
   - name: Identity Risks
     url: security/identity_risks/
     parent: csm
