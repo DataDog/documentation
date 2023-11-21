@@ -378,10 +378,10 @@ There is no need to provide the exact path to a specific file, [you can use any 
 such as `src/myTeamFolder` or `*.md`.
 
 There are multiple ways to provide us with this tag:
-1. Using the `--tags` parameter or the `DD_TAGS` environment variable.
+1. Using the [`--tags` parameter or the `DD_TAGS` environment variable](#configuration-settings).
 
    ```shell
-   datadog-ci junit upload --service service_name --tags test.source.file:src/myTeamFolder my_report.xml
+   datadog-ci junit upload --service service-name --tags test.source.file:src/myTeamFolder my_report.xml
    ```
 
    This will add the `test.source.file` tag to all the tests in the report and hence all the tests will have the same owner(s).
