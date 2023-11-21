@@ -258,17 +258,19 @@ Span links associate one or more spans together that don't have a typical parent
 
 Span links help trace operations in distributed systems, where workflows often deviate from linear execution patterns. Additionally, span links are useful to trace the flow of operations in systems that execute requests in batches or process events asynchronously.
 
-To add a link span from another span:
+To add a span link from an existing span:
 
 ```java
 span.addLink(Link.fromSpanContext(otherSpanData));
 ```
+To link a span using distributed tracing headers:
 
-To add a link span from distributed headers:
 ```java
 SpanContext remoteSpanContext = extractContextFromHeaders(distributedTracingHeaders);
 span.addLink(Link.fromSpanContext(remoteSpanContext));
 ```
+
+You can view span links from the [Trace View][11] in APM.
 
 ### Extending tracers
 
@@ -367,3 +369,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [8]: /tracing/trace_collection/trace_context_propagation/java/
 [9]: /tracing/security
 [10]: /tracing/guide/ignoring_apm_resources/
+[11]: /tracing/trace_explorer/trace_view

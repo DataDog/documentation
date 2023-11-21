@@ -123,16 +123,15 @@ Click on a span in the flame graph to display spans connected with span links.
 
 {{< img src="tracing/span_links/span_links_tab.png" alt="Span Links tab" style="width:90%;">}}
 
-If you see a message that says **Linked spans were not ingested**, make sure the linked spans are part of a [retention filter][2].
+If you see a message that says **Linked spans were not ingested**, make sure the linked spans are part of a [retention filter][1].
 
-To add custom instrumentation for span links, read the Datadog libraries documentation for your application's language:
-* [PHP][3]
-* [Java][4]
+To add custom instrumentation for span links, read the Datadog library documentation for your application's language:
+* [PHP][2]
+* [Java][3]
 
-[1]: /tracing/trace_collection/custom_instrumentation/
-[2]: /tracing/trace_pipeline/trace_retention/
-[3]: /tracing/trace_collection/custom_instrumentation/php
-[4]: /tracing/trace_collection/custom_instrumentation/java
+[1]: /tracing/trace_pipeline/trace_retention/
+[2]: /tracing/trace_collection/custom_instrumentation/php
+[3]: /tracing/trace_collection/custom_instrumentation/java
 
 {{% /tab %}}
 {{< /tabs >}}
