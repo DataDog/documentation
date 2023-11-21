@@ -42,8 +42,9 @@ To successfully forward a request to Datadog:
 3. Forward the request to the Datadog intake URL using the POST method.
 4. Leave the request body unchanged.
 
+<blockquote class="alert alert-info">
 The request body can contain binary data and should not be converted to a string. Make sure your proxy implementation forwards the raw body without conversion.
-
+</blockquote>
 
 ## Recommended setup
 
@@ -141,8 +142,9 @@ window.DD_RUM &&
 
 For example, with a `site` set to `datadoghq.eu` and the `proxy` configuration from the example, the RUM Browser SDK sends requests to an URL that looks this: `https://www.proxy.com/foo/api/v2/rum/bar?ddsource=browser`. The proxy will need to forward the request to the URL `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser`.
 
-**Note:** Some privacy blockers already target the intake [url patterns][2], so you may want to take that into account when building your proxy URL.
-**Note:** The `proxy` function is called for each request, so it should avoid any heavy computation.
+**Note:**
+- Some privacy blockers already target the intake [url patterns][2], so you may want to take that into account when building your proxy URL.
+- The `proxy` function is called for each request, so it should avoid any heavy computation.
 
 ## Legacy proxy setups
 
