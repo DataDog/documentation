@@ -55,6 +55,14 @@ service:
     ## to keep things within the availability zone, which kube-proxy might change.
     service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
 
+## This service account allows the Worker to write to Amazon S3 for the `datadog_archives` sink.
+## You need to create the service account yourself, see the instructions for more details:
+##
+## https://docs.datadoghq.com/observability_pipelines/setup/archives/
+serviceAccount:
+  create: false
+  name: ${DD_ARCHIVES_SERVICE_ACCOUNT}
+
 ## Buffering
 ## This creates an EBS drive that can be used for buffers, which
 ## must then be configured in the sinks themselves.
@@ -74,7 +82,7 @@ persistence:
 ## for your own processing steps.
 pipelineConfig:
   ## SOURCES: Data sources that Observability Pipelines Worker collects data from.
-  ## For a Datadog use case, we will receive data from the Datadog agent.
+  ## For a Datadog use case, the Worker receives data from the Datadog agent.
   sources:
     datadog_agent:
       address: 0.0.0.0:8282
@@ -102,8 +110,8 @@ pipelineConfig:
       source: |
         del(.status)
 
-    ## This is a placeholder for your own remap (or other transform)
-    ## steps with tags set up. Datadog recommends these tag assignments.
+    ## This is a placeholder for your own remap (or other transforms)
+    ## steps with tags. Datadog recommends these tag assignments.
     ## They show which data has been moved over to OP and what still needs
     ## to be moved.
     logs_enrich:
@@ -163,3 +171,16 @@ pipelineConfig:
       buffer:
         type: disk
         max_size: 42949672959
+    ## This sink writes logs in a Datadog-rehydratable format to an S3 bucket.
+    ## Replace ${DD_ARCHIVES_BUCKET} with the name of the S3 bucket
+    ## storing your logs and ${DD_ARCHIVES_REGION} with the AWS region of the target
+    ## service.
+    datadog_archives:
+      type: datadog_archives
+      inputs:
+        - logs_finish_ddtags
+      service: aws_s3
+      bucket: ${DD_ARCHIVES_BUCKET}
+      aws_s3:
+        storage_class: "STANDARD"
+        region: "${DD_ARCHIVES_REGION}"
