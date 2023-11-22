@@ -52,6 +52,8 @@ The **Reliability** tab contains information about the stability of your service
 
 Click the Settings icon on the right hand corner to hide columns from the list.
 
+{{< img src="tracing/service_catalog/svc-cat-reliability.png" alt="Service Catalog Reliability view showing several services and their associated MTTR, deployment metrics, issues, incidents, SLOs, and monitor statuses." style="width:100%;" >}}
+
 ### Performance view
 
 The **Performance** tab provides several ways to view how your services are performing and what needs the most attention. 
@@ -97,6 +99,8 @@ The **Costs tab** provides several ways to understand the costs associated with 
 - Show a significant change in the rate of cloud spending over time 
 
 For more information on a service's cost changes, click on the service row to open a detailed side panel. To see this information on the Cloud Costs page, click the **View in Analytics** button. 
+
+{{< img src="tracing/service_catalog/svc-cat-costs-view.png" alt="Service Catalog Costs view showing several services and their associated cloud cost and monthly change details." style="width:100%;" >}}
 
 This information is only available for Cloud Cost Management customers who have configured the necessary [AWS Integration][10] and [Tag Pipelines][11]. 
 
