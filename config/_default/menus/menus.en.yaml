@@ -1485,7 +1485,7 @@ main:
     weight: 5
   - name: App Builder
     url: service_management/app_builder/
-    pre: AppBuilder
+    pre: app-builder
     identifier: app_builder
     parent: service_management_heading
     weight: 80000
