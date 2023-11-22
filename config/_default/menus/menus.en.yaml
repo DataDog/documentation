@@ -1499,11 +1499,6 @@ main:
     parent: app_builder
     identifier: app_builder_access
     weight: 2
-  - name: Connections
-    url: service_management/app_builder/connections/
-    parent: app_builder
-    identifier: app_builder_connections
-    weight: 3
   - name: Embedded Apps
     url: service_management/app_builder/embedded_apps/
     parent: app_builder
