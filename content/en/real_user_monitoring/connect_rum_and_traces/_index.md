@@ -151,7 +151,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 **Note**:
 * `traceSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
-* If you defined custom tracing header types in Datadog configuration and you are using a tracer registered with `GlobalTracer`, it's necessary to ensure the same tracing header types are set for the tracer in use.
+* If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
 
 [1]: /real_user_monitoring/android/
 [2]: /tracing/trace_collection/dd_libraries/android/?tab=kotlin

@@ -748,7 +748,7 @@ Request request = OkHttpRequestExtKt
 
 **Note**:
 * If you use multiple Interceptors, this one must be called first.
-* If you defined custom tracing header types in Datadog configuration and you are using a tracer registered with `GlobalTracer`, it's necessary to ensure the same tracing header types are set for the tracer in use.
+* If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
 
 ### RxJava
 
