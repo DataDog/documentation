@@ -39,7 +39,7 @@
                       <p> {{ delimit .type ", " | default "" }}</p>
                   </div>
                   <div class="col-3 column">
-                      <p> {{ .description | default "" | markdownify }}</p>
+                      <p> {{ (replaceRE $regexToFixMdLinks "$1" (.description | default "")) | markdownify }}</p>
                   </div>
                   <div class="col-2 column text-center">
                       <p>
