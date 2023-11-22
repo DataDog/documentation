@@ -1,5 +1,5 @@
 ---
-title: Route Logs in Datadog-Rehydratable format to Amazon S3
+title: Route Logs in Datadog-Rehydratable Format to Amazon S3
 kind: documentation
 disable_toc: false
 further_reading:
