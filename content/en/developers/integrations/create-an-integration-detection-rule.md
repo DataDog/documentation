@@ -95,7 +95,7 @@ Each rule name must be unique. The current name is already being used. Update th
 
 ### MITRE tags
 ```
-The rule with partnerRuleId=<RULE_ID> contains a MITRE tag tactic but it does not contain the tag `security:attack` is not present in, please add it
+The rule with partnerRuleId=<RULE_ID> contains a MITRE tag tactic but it does not contain the tag `security:attack`, please add it
 ```
 When a rule contains a MITRE tag `tactic:<TAG_VALUE>`, the tag `security:attack` must be added to the list of tags.
 
