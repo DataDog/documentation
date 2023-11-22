@@ -746,7 +746,9 @@ Request request = OkHttpRequestExtKt
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: If you use multiple Interceptors, this one must be called first.
+**Note**:
+* If you use multiple Interceptors, this one must be called first.
+* If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
 
 ### RxJava
 
