@@ -29,9 +29,8 @@ The Pipeline Scanner samples and annotates logs matching the search query with t
 
 1. Navigate to [Log Explorer][1].
 1. Click on a log where you want to find out which pipelines and processors are modifying it.
-1. Click on the three dots in the upper right corner of the panel.
-1. Select **Live pipeline debugging**.   
-    Alternatively, click on an attribute in the log panel and select **Pipeline Scanner**. 
+1. Click the Pipeline Scanner icon in the upper right corner of the panel. If you hover over the icon, it says `View pipelines for similar logs`.
+    Alternatively, click on an attribute in the log panel and select **Scan pipelines for**. 
 1. You can further refine your query in the Pipeline Scanner page. This query cannot be changed once a session is started.
 1. Click **Launch this session**.   
     For the next 15 minutes, logs matching your query are tagged with information about which pipelines and processors are modifying those logs. The Live Tail in the scanner shows which pipelines and how many pipelines match each of the logs.
@@ -39,7 +38,11 @@ The Pipeline Scanner samples and annotates logs matching the search query with t
 
 You can modify the pipelines and processors in the right side panel. The modifications you make do not affect the logs that have already been processed. Click **Play** to view the new logs that have been modified by the updated pipelines and processors.
 
-You can also access Pipeline Scanner in the [Log Pipelines][2] page and then define the query for the logs you want to inspect.
+You can also access Pipeline Scanner from the Log Pipelines page:
+
+1. Navigate to [Log Pipelines][2]. 
+2. Click **Pipeline Scanner**.
+3. Define the query for the logs you want to inspect.
 
 ### Limitations
 
