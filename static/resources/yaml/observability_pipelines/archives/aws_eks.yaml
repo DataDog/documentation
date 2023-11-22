@@ -171,9 +171,10 @@ pipelineConfig:
       buffer:
         type: disk
         max_size: 42949672959
-    ## This sink writes logs to an S3 bucket that you specify, in a format that Datadog
-    ## can rehydrate from. You need to fill in the ${DD_ARCHIVES_BUCKET}
-    ## and ${DD_ARCHIVES_REGION} parameters to fit your S3 configuration.
+    ## This sink writes logs in a Datadog-rehydratable format to an S3 bucket.
+    ## Replace ${DD_ARCHIVES_BUCKET} with the name of the S3 bucket
+    ## storing your logs and ${DD_ARCHIVES_REGION} with the AWS region of the target
+    ## service.
     datadog_archives:
       type: datadog_archives
       inputs:
