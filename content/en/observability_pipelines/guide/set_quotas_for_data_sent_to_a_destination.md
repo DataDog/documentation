@@ -22,12 +22,12 @@ The <code>quota</code> transform is in private beta.
 
 ## Overview
 
-The Observability Pipelines `quota` transform allows you to set a limit on the volume of data sent to a destination within a specific timeframe. This can safeguard you from unexpected data surges that might impact your operating costs. With the transform, you can set up different ways of handling the data when the quota has been reached. For example, you can:
+The Observability Pipelines `quota` transform allows you to set a limit on the volume of data or number of events sent to a destination within a specific timeframe. This can safeguard you from unexpected data surges that might impact your operating costs. With the transform, you can set up different ways of handling the data when the quota has been reached. For example, you can:
 
+- Set a soft limit by setting up a monitor to alert you when the quota has been reached.
 - Reroute the data sent after the quota limit to another destination, such as a cold storage.
 - Sample the data sent after the quota limit so that less data is sent to the destination.
 - Drop the data sent after the quota limit.
-- Set up a monitor to alert you that the quota has been reached.
 
 You can also use multiple `quota` transforms to set different warning and alert limits. For example, use the first `quota` transform to set a limit at a warning level and send a warning notification when the limit is reached. Then, use a second `quota` transform to set a hard limit. When the hard limit is reached, you can send out an alert notification and start sampling the data sent after the limit or reroute that data to another destination.
 
@@ -35,7 +35,7 @@ This guide walks you through how to:
 
 - [Set up the quota transform](#set-up-the-quota-transform)
 - [Set up a monitor to alert when the quota is reached](#set-up-a-metric-monitor)
-- Route logs sent after the limit to `datadog_archives`
+- [Route logs sent after the limit to `datadog_archives`](#route-logs-sent-after-the-limit-to-datadog_archives)
 
 ## Set up the quota transform
 
@@ -48,7 +48,7 @@ This guide walks you through how to:
 1. Enter a name for the component.
 1. Select the input(s) for the transform.
 1. In the **Limits** section:  
-    a. Select the unit type.  
+    a. Select the unit type. The unit of the quota limit can be the number of events or volume of data.  
     b. Enter the limit in the **Max** field.
 1. Enter the timeframe in the **Window** field.  
     For example, if you set:
@@ -57,6 +57,7 @@ This guide walks you through how to:
     - `24h` in the **Window** field  
     Then the transform is configured to send up to 2GB of logs per day to the destination.
 1. Click **Save**.
+1. For each destination or transform that is ingesting logs from the `quota` transform, click the component's tile and add `<quota.id>.dropped` for the input ID for the data sent after the limit is met. `<quota.id>` is the name of your `quota` transform.
 
 ### Handling data sent after the limit
 
@@ -96,13 +97,12 @@ sinks:
      - quota_1
    encoding:
      codec: json
-
-print_dropped:
-   type: console
-   inputs:
-     - quota_example.dropped
-   encoding:
-     codec: json
+  print_dropped:
+    type: console
+    inputs:
+      - quota_example.dropped
+    encoding:
+      codec: json
 
 ```
 
@@ -118,7 +118,7 @@ The following `quota` transform metrics are available:
 - `quota_limit_bytes` (gauge)
 - `component_errors_total` (counter)
 
-For the [example configuration](#handling-data-sent-after-the-limit) above, the following metric and tag combination shows all events that were sent after the limit and that were dropped.
+For the previous [example configuration](#handling-data-sent-after-the-limit), the following metric and tag combination shows all events that were sent after the limit and that were dropped.
 
 - `vector.component_sent_event_bytes_total` (metric)
     - `component_id:quota_example` (tag)
@@ -155,9 +155,9 @@ See [Metric Monitors][6] for more information.
 
 ## Route logs sent after the limit to datadog_archives
 
-The Observability Pipelines `datadog_archives` destination formats logs into a Datadog-rehydratable format and then routes it to [Log Archives][12].
+The Observability Pipelines `datadog_archives` destination formats logs into a Datadog-rehydratable format and then routes it to [Log Archives][12]. See [Route Logs in Datadog-Rehydratable Format to Amazon S3][13] to set up `datadog_archives`.
 
-The example configuration below is similar to the previous [example configuration](#handling-data-sent-after-the-limit). The only difference is that the destination type is `datadog_archives` so that all the events sent to Observability Pipelines, after the quota has been reached, are routed to the archives.
+The example configuration below is similar to the previous [example configuration](#handling-data-sent-after-the-limit). The only difference is that in the example below, the destination type is `datadog_archives` so that all logs sent to Observability Pipelines, after the quota has been reached, are routed to the archives.
 
 ```yaml
 sources:
@@ -165,8 +165,6 @@ sources:
    type: demo_logs
    format: syslog
    interval: 1
-
-
 transforms:
  parse_syslog:
    type: remap
@@ -193,8 +191,8 @@ sinks:
    type: datadog_archives
    inputs:
      - quota_archiving_example.dropped
-    bucket: "X"
-    service: "X"
+    bucket: "<DD_ARCHIVES_BUCKET>"
+    service: "<STORAGE_SERVICE>"
 ```
 
 ## Further Reading
@@ -212,3 +210,4 @@ sinks:
 [10]: /monitors/notify/#priority
 [11]: /monitors/notify/#permissions
 [12]: /logs/log_configuration/archives/
+[13]: /observability_pipelines/guide/route_logs_in_datadog_rehydratable_format_to_amazon_s3/
