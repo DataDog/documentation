@@ -105,7 +105,8 @@ The following table shows what Datadog container metric names are associated wit
 [4]: /opentelemetry/guide/semantic_mapping/
 [5]: https://app.datadoghq.com/infrastructure/map?fillby=avg%3Acpuutilization&groupby=availability-zone
 [6]: https://app.datadoghq.com/infrastructure
-[7]: https://app.datadoghq.com/dashboard/lists/preset/2
-[8]: /tracing/trace_explorer/trace_view/?tab=hostinfo#more-information
+[7]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#out-of-the-box-dashboards
+[8]: /tracing/trace_explorer/trace_view/?tab=hostinfo
 [9]: https://app.datadoghq.com/dashboard/lists?q=containers%20-%20overview
 [10]: /tracing/trace_explorer/trace_view/
+
