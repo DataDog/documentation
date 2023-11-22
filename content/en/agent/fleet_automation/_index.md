@@ -14,7 +14,7 @@ further_reading:
   text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
 ---
 
-{{< callout btn_hidden="true" header="false">}}Fleet Automation is in private beta.{{< /callout >}}
+{{< callout btn_hidden="true">}}Fleet Automation is in beta.{{< /callout >}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Fleet Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
