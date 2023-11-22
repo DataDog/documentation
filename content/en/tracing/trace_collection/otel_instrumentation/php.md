@@ -50,4 +50,5 @@ Datadog combines these OpenTelemetry spans with other Datadog APM spans into a s
 [5]: https://opentelemetry.io/docs/instrumentation/php/manual/
 [6]: /tracing/trace_collection/dd_libraries/php#getting-started
 [7]: https://opentelemetry.io/docs/specs/otel/metrics/
+[9]: /tracing/trace_collection/trace_context_propagation/php/
 [12]: /opentelemetry/guide/otel_api_tracing_interoperability/
