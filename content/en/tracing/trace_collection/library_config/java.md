@@ -296,7 +296,12 @@ When `true`, the tracer collects [telemetry data][8]. Available for versions 0.1
 `dd.trace.128.bit.traceid.generation.enabled`
 : **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
 **Default**: `true`<br>
-When `true`, the tracer generates 128 bit Trace IDs and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
+When `true`, the tracer generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
+
+`dd.trace.128.bit.traceid.logging.enabled`
+: **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`<br>
+**Default**: `false`<br>
+When `true`, the tracer will inject 128 bit Trace IDs as 32 lowercase hexadecimal characters with zero padding, and 64 bit Trace IDs as decimal numbers. Otherwise, the tracer always injects Trace IDs as decimal numbers.
 
 **Note**:
 
