@@ -1,12 +1,15 @@
 ---
+title: Create a Cloud SIEM Detection Rule
+kind: Documentation
+description: Learn how to create a Cloud SIEM detection rule for your integration.
+aliases:
+- /developers/integrations/create-an-integration-detection-rule
 further_reading:
 - link: https://docs.datadoghq.com/security/cloud_siem/log_detection_rules
   tag: Documentation
   text: Log Detection Rules
-kind: documentation
-title: Create a Cloud SIEM Detection Rule
-description: Learn how to create a Cloud SIEM detection rule for your integration.
 ---
+
 ## Overview
 
 [Datadog Cloud SIEM (Security Information and Event Management)][1] unifies developer, operation, and security teams through one platform. Datadog provides a set of out-of-the-box detection rules for many features and integrations. View these rules in your [SIEM Detection Rules list][2].
@@ -95,7 +98,7 @@ Each rule name must be unique. The current name is already being used. Update th
 
 ### MITRE tags
 ```
-The rule with partnerRuleId=<RULE_ID> contains a MITRE tag tactic but it does not contain the tag `security:attack` is not present in, please add it
+The rule with partnerRuleId=<RULE_ID> contains a MITRE tag tactic but it does not contain the tag `security:attack`, please add it
 ```
 When a rule contains a MITRE tag `tactic:<TAG_VALUE>`, the tag `security:attack` must be added to the list of tags.
 
