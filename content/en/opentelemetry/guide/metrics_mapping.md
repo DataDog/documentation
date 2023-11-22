@@ -107,6 +107,6 @@ The following table shows what Datadog container metric names are associated wit
 [6]: https://app.datadoghq.com/infrastructure
 [7]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#out-of-the-box-dashboards
 [8]: /tracing/trace_explorer/trace_view/?tab=hostinfo
-[9]: https://app.datadoghq.com/dashboard/lists?q=containers%20-%20overview
+[9]: /opentelemetry/otel_collector_datadog_exporter/?tab=onahost#containers-overview-dashboard
 [10]: /tracing/trace_explorer/trace_view/
 
