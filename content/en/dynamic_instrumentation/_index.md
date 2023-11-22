@@ -51,7 +51,9 @@ Dynamic Instrumentation requires the following:
 - Optionally, [Source Code Integration][7] is set up for your service.
 - The **Dynamic Instrumentation Read Configuration** (`debugger_read`) permission is required to access the Dynamic Instrumentation page
 - The **Dynamic Instrumentation Write Configuration** (`debugger_write`) permission is required to create or modify instrumentations. 
-- The **Dynamic Instrumentation Read Configuration** (`debugger_capture_variables`) permissionis required to use the <code>Capture method parameters and local variables</code> option. For more information about roles and on how to assign roles to users, see [Role Based Access Control][8].
+- The **Dynamic Instrumentation Read Configuration** (`debugger_capture_variables`) permission is required to use the <code>Capture method parameters and local variables</code> option.
+
+ For more information about roles and on how to assign roles to users, see [Role Based Access Control][8].
 
 ### Create a logs index
 
@@ -126,7 +128,8 @@ You can also set a condition on a log probe using the [expression language][15].
 
 <div class="alert alert-warning"><p><strong>Warning: The captured data may contain sensitive information, including personal data, passwords, and secrets such as AWS keys.</strong></p><p>To ensure this information is properly redacted:<ul>
 <li>Datadog Dynamic Instrumentation employs several techniques to redact sensitive information. To learn more about the default mechanisms or how to extend the it to meet your needs, read <a href="/dynamic_instrumentation/sensitive-data-scrubbing/">Sensitive Data Scrubbing</a>.</li>
-<li>Turn off the <code>Capture method parameters and local variables</code> option and explicitly select the variables you want to include in the log message template. Doing so ensures that log probes contain only data related to the variables that you specifically identify,, thus reducing the risk of unintentional leakage of sensitive data. If you are the Adminstrator of your Datadog account and would like to prevent other users from being able to use the <code>Capture method parameters and local variables</code> option, you can revoke their **Dynamic Instrumentation Read Configuration** (`debugger_capture_variables`) permission. </li></ul></p><p>Alternatively, if you need to log this data but want to mitigate the risk associated with it being accessible in the Datadog product, you can limit which users in your organization can view the captured data by setting up a <a href="/logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs">Restriction query</a> on <code>source:dd_debugger</code>.</p></div>
+<li>Turn off the <code>Capture method parameters and local variables</code> option and explicitly select the variables you want to include in the log message template. Doing so ensures that log probes contain only data related to the variables that you specifically identify, thus reducing the risk of unintentional leakage of sensitive data. </li>
+<li>If you are the Adminstrator of your Datadog account and would like to prevent other users from being able to use the <code>Capture method parameters and local variables</code> option, you can revoke their **Dynamic Instrumentation Read Configuration** (`debugger_capture_variables`) permission. </li></ul></p><p>Alternatively, if you need to log this data but want to mitigate the risk associated with it being accessible in the Datadog product, you can limit which users in your organization can view the captured data by setting up a <a href="/logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs">Restriction query</a> on <code>source:dd_debugger</code>.</p></div>
 
 
 To create a log probe:
