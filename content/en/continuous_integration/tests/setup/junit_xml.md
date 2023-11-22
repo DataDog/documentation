@@ -349,7 +349,7 @@ To automatically add the `test.codeowners` tag to your tests, you need to:
   {{< code-block lang="xml" >}}
   <?xml version="1.0" encoding="UTF-8"?>
   <testsuite name="suite">
-    <testcase name="test_with_file" file="src/commands/junit/hello" />
+    <testcase name="test_with_file" file="src/commands/junit" />
   </testsuite>
   {{< /code-block >}}
 
