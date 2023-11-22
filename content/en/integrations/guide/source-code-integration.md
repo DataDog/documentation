@@ -342,12 +342,14 @@ To link your telemetry with source code, your repository metadata must be synchr
 
 The source code integration supports the following Git providers:
 
-| Provider | Support |
-|---|---|
-| GitHub | * On-premises (without code snippets)<br>* GitHub.com |
-| GitLab | * GitLab.com |
-| Bitbucket |  |
-| Azure DevOps Server |  |
+| Provider | Context Links Support | Code Snippets Support |
+|---|---|---|
+| GitHub SaaS (github.com) | Yes | Yes |
+| GitHub Enterprise Server | Yes | Yes |
+| GitLab SaaS (gitlab.com) | Yes | Yes |
+| GitLab self-managed | Yes | No |
+| Bitbucket | Yes | No |
+| Azure DevOps Server | Yes | No |
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
