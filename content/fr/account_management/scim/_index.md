@@ -50,7 +50,7 @@ Pour éviter de perdre l'accès à vos données, Datadog vous conseille fortemen
 
 ## Vérification de l'adresse e-mail
 
-Lorsque vous créez un utilisateur avec SCIM, un e-mail est envoyé à cet utilisateur. Pour son premier accès, ce dernier doit se connecter via le lien d'invitation envoyé par e-mail. Ce lien est actif pendant 30 jours. S'il expire, accédez à la [pages des paramètres utilisateur][7] et sélectionner un utilisateur pour lui renvoyer un lien d'invitation.
+Lorsque vous créez un utilisateur avec SCIM, un e-mail est envoyé à cet utilisateur. Pour son premier accès, ce dernier doit se connecter via le lien d'invitation envoyé par e-mail. Ce lien est actif pendant 30 jours. S'il expire, accédez à la [pages des paramètres utilisateur][7] et sélectionnez un utilisateur pour lui renvoyer un lien d'invitation.
 
 ## Pour aller plus loin
 
