@@ -14,7 +14,7 @@ Datadog App Builder is in private beta. Complete the form to request access.
 
 Datadog App Builder is a low-code application building platform that streamlines the development of your internal tools with a user-friendly drag-and-drop interface and built-in support for JavaScript. App Builder makes use of integrations with popular services such as AWS and GitHub, allowing you to leverage data and seamlessly connect with external APIs and data stores. By integrating with Datadog's existing capabilities, App Builder provides a centralized context, empowering you to take preventive actions or respond to ongoing incidents, all within the same view you use for troubleshooting.
 
-{{< img src="/service_management/app_builder/datadog-app-builder-1.png" alt="An app in the app builder" style="width:100%;" >}}
+{{< img src="/service_management/app_builder/datadog-app-builder-1.png" alt="An app in App Builder" style="width:100%;" >}}
 
 ## Configure App Builder actions
 
@@ -24,9 +24,9 @@ Datadog App Builder provides an [Action Catalog][1] of over 300 actions across s
 
 ## Start with blueprints
 
-Datadog provides you with preconfigured flows in the form of out of the box [blueprints][3] to help you get started.
+Datadog provides you with preconfigured flows in the form of out-of-the-box [blueprints][3] to help you get started.
 
-Below are a few examples of apps you can build:
+Below are a few examples of what App Builder apps can do:
 - Identify the most likely causes of a regression given a text description of an incident and the most recent 150 commits to a repo.
 - Monitor your PagerDuty service status to get complete context while working on incidents.
 - Allow users to manage their EC2 instances directly from a dashboard.

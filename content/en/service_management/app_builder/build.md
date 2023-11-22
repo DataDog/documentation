@@ -18,10 +18,10 @@ You can create an app or edit existing apps from the [App Builder][1] page. The 
 - The author
 - The status
 - The dates that each app was last modified
-- Whether the app is published or not
+- Whether the app is published
 
 On the App Builder page, access and filter your apps:
-- Hover over an app for the options to edit, delete, view or clone the app.
+- Hover over an app for the options to edit, delete, view, or clone the app.
 - Toggle **My apps** if you want to see only apps that you created.
 
 {{< img src="service_management/app_builder/app_builder_page.png" alt="The App Builder page" style="width:100%;" >}}
@@ -102,7 +102,7 @@ Available UI components:
 
 #### Events
 
-UI Components can trigger reactions on an **Event**. The event triggers differ according to the component. For example, a button component can can trigger on a click event, and a table component event can trigger on a page change or table row click.
+UI components can trigger reactions on an **Event**. The event triggers differ according to the component. For example, a button component can trigger on a click event, and a table component event can trigger on a page change or table row click.
 
 An event can set a UI component state, open or close a modal, trigger another query, or even run custom JavaScript.
 
@@ -185,11 +185,11 @@ return arr
 
 #### Post-query hooks
 
-Similar to UI component events, you can configure a reaction to trigger after a query executes. A **Post-query Hook** can set a UI component state, open or close a modal, trigger another query, or even run custom JavaScript. For example, the [ECS Task Manager][7] blueprint's `scaleService` query uses a post-query hook to rerun the `describeService` query after it executes.
+Similar to UI component events, you can configure a reaction to trigger after a query executes. A **post-query hook** can set a UI component state, open or close a modal, trigger another query, or even run custom JavaScript. For example, the [ECS Task Manager][7] blueprint's `scaleService` query uses a post-query hook to rerun the `describeService` query after it executes.
 
 #### Error notifications
 
-To display a toast to the user when the system returns an error, toggle **Show Toast on Errors** in the **Advanced** section of a query.
+To display a toast (a brief message notification) to the user when the system returns an error, toggle **Show Toast on Errors** in the **Advanced** section of a query.
 
 #### Confirmation prompts
 
@@ -199,7 +199,7 @@ To prompt a user for confirmation before the query runs, toggle the **Requires C
 
 Use app variables to pass data from one part of your app to another. Additionally, you can use app variables to pass in data from your dashboard using [dashboard template variables][3].
 
-Variables are enclosed in braces, preceeded by a dollar sign (`${}`). To use a variable, enter the query or UI component name and access the child fields using dot notation. For example, if you have a select component named `select0` and you want to access its default value field, use the syntax `${select0.defaultValue}`. If you're not sure what to enter as a variable, type `${` to open a suggestions menu with all available variables.
+Variables are enclosed in braces, preceded by a dollar sign (`${}`). To use a variable, enter the query or UI component name and access the child fields using dot notation. For example, if you have a select component named `select0` and you want to access its default value field, use the syntax `${select0.defaultValue}`. If you're not sure what to enter as a variable, type `${` to open a suggestions menu with all available variables.
 
 {{< img src="service_management/app_builder/app-builder-variable.mp4" alt="If you're not sure what to enter as a variable, type ${ to open a suggestions menu with all available variables" video=true >}}
 

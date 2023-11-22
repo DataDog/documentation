@@ -12,7 +12,7 @@ A few tools control access and authentication for apps and their components.
 
 ## Action credentials
 
-Because app [actions][1] connect with external software systems, you may need to authenticate your Datadog account to the corresponding integration. An app can run successfully only if every action that requires authentication can verify the identity of your Datadog account.
+Because app [actions][1] connect with external software systems, you may need to authenticate your Datadog account to a corresponding integration. An app can run successfully only if every action that requires authentication can verify the identity of your Datadog account.
 
 Actions can be authenticated in two ways:
 - Credentials and permissions configured in the integration tile

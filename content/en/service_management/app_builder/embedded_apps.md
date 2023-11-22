@@ -28,7 +28,7 @@ The App Editor modal appears, allowing you to select an app and provide it with 
 
 You can link your app to template variables anywhere that supports template expressions in your queries or app elements. Use the following code snippet as an example, ensuring to replace the `<TEMPLATE_VARIABLE_NAME>` and `<DEFAULT_VALUE>` with the template variable name and default value, respectively. Paste the snippet into your template expression.
 
-**Note**: If you want to leave an element blank by default (such as a search field), you can set the default value as an empty string `""` or `undefined`.
+**Note**: If you want to leave an element (such as a search field) blank by default, you can set the default value as an empty string `""` or `undefined`.
 
 {{< code-block lang="json" disable_copy="false" collapsible="false" >}}
 ${self.options?.find(o => o.includes(dashboard.templateVariables?.find(v => v.name === '<TEMPLATE_VARIABLE_NAME>')?.value)) || '<DEFAULT_VALUE>'}
