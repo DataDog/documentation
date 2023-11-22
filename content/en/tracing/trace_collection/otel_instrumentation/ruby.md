@@ -9,6 +9,9 @@ further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
+    - link: '/opentelemetry/guide/otel_api_tracing_interoperability'
+      tag: 'Documentation'
+      text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
 {{% otel-custom-instrumentation %}}
@@ -23,11 +26,11 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 | Feature                               | Support notes                       |
 |---------------------------------------|--------------------------------------|
-| [OpenTelemetry Context propagation][1]         | [Datadog distributed header format][9] is used instead. | 
+| [OpenTelemetry Context propagation][1]         | [Datadog and W3C header formats][9] are used. | 
 | [Span processors][2]                  | Unsupported                                          | 
 | [Span Exporters][3]                   | Unsupported                                            |
 | `OpenTelemetry.logger`                | `OpenTelemetry.logger` is set to the same object as `Datadog.logger`. Configure through [custom logging][10]. |
-| Trace/span [ID generators][4]         | ID generation is performed by `ddtrace`.           |
+| Trace/span [ID generators][4]         | [128-bit ID generation][12] is performed by `ddtrace`.           |
 
 
 ## Configuring OpenTelemetry to use the Datadog tracing library
@@ -77,3 +80,4 @@ Datadog combines these OpenTelemetry spans with other Datadog APM spans into a s
 [8]: https://opentelemetry.io/docs/instrumentation/ruby/automatic/
 [9]: /tracing/trace_collection/trace_context_propagation/ruby/
 [10]: /tracing/trace_collection/dd_libraries/ruby/#custom-logging
+[12]: /opentelemetry/guide/otel_api_tracing_interoperability/

@@ -9,6 +9,9 @@ further_reading:
   - link: 'tracing/glossary/'
     tag: 'Documentation'
     text: 'Explore your services, resources, and traces'
+  - link: '/opentelemetry/guide/otel_api_tracing_interoperability'
+    tag: 'Documentation'
+    text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
 {{% otel-custom-instrumentation %}}
@@ -21,10 +24,10 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 | Feature                                | Support notes                                           |
 |----------------------------------------|---------------------------------------------------------|
-| [OpenTelemetry Context propagation][1] | [Datadog distributed header format][4] is used instead. |
+| [OpenTelemetry Context propagation][1] | [W3C and Datadog header formats][9] are used. |
 | [Span limits][2]                       | Unsupported                                             |
-| Trace/span [ID generators][3]          | ID generation is performed by `ddtrace`.                |
 | [Metrics API][7]                       | Unsupported                                             |
+| Trace/span [ID generators][3]          | [128-bit ID generation][12] is performed by `ddtrace`.                |
 
 ## Configuring OpenTelemetry to use the Datadog tracing library
 
@@ -47,4 +50,4 @@ Datadog combines these OpenTelemetry spans with other Datadog APM spans into a s
 [5]: https://opentelemetry.io/docs/instrumentation/php/manual/
 [6]: /tracing/trace_collection/dd_libraries/php#getting-started
 [7]: https://opentelemetry.io/docs/specs/otel/metrics/
-
+[12]: /opentelemetry/guide/otel_api_tracing_interoperability/

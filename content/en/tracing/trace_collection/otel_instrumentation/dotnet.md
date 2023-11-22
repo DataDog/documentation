@@ -9,6 +9,9 @@ further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
+    - link: '/opentelemetry/guide/otel_api_tracing_interoperability'
+      tag: 'Documentation'
+      text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
 {{% otel-custom-instrumentation %}}
@@ -21,10 +24,10 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 | Feature                               | Support notes                                           |
 |---------------------------------------|---------------------------------------------------------|
-| OpenTelemetry Context propagation     | [Datadog distributed header format][9] is used instead. |
+| OpenTelemetry Context propagation     | [W3C and Datadog header formats][9] are used.  |
 | [Span processors][2]                  | Unsupported                                             |
 | [Span Exporters][3]                   | Unsupported                                             |
-| Trace/span [ID generators][4]         | ID generation is performed by `ddtrace`.                |
+| Trace/span [ID generators][4]         | [128-bit ID generation][12] is performed by `ddtrace`.        |
 
 
 ## Configuring OpenTelemetry to use the Datadog trace provider
@@ -48,3 +51,4 @@ Datadog combines these OpenTelemetry spans with other Datadog APM spans into a s
 [9]: /tracing/trace_collection/trace_context_propagation/dotnet/
 [10]: /tracing/trace_collection/dd_libraries/dotnet-framework/#installation-and-getting-started
 [11]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
+[12]: /opentelemetry/guide/otel_api_tracing_interoperability/
