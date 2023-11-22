@@ -93,7 +93,7 @@ Log on as `sysdba`, create a new `view` in the `sysdba` schema, and give the Age
 
 ```SQL
 CREATE OR REPLACE VIEW dd_session AS
-SELECT
+SELECT /*+ push_pred(sq) push_pred(sq_prev) */
   s.indx as sid,
   s.ksuseser as serial#,
   s.ksuudlna as username,
@@ -274,7 +274,7 @@ Log on as `sysdba`, create a new `view` in the `sysdba` schema, and give the Age
 
 ```SQL
 CREATE OR REPLACE VIEW dd_session AS
-SELECT
+SELECT /*+ push_pred(sq) push_pred(sq_prev) */
   s.indx as sid,
   s.ksuseser as serial#,
   s.ksuudlna as username,
@@ -447,7 +447,7 @@ Log on as `sysdba`, create a new `view` in the `sysdba` schema, and give the Age
 
 ```SQL
 CREATE OR REPLACE VIEW dd_session AS
-SELECT
+SELECT /*+ push_pred(sq) push_pred(sq_prev) */
   s.indx as sid,
   s.ksuseser as serial#,
   s.ksuudlna as username,
