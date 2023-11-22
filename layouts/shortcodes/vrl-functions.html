@@ -1,4 +1,6 @@
 {{ $functions := $.Site.Data.reference.functions | default (dict) }}
+{{/* we want to convert links like [foo][https://foo.bar] into [foo](https://foo.bar) */}}
+{{ $regexToConvertMdLinks := `\[([^\[]+)\]\[([^\]]+)\]` }}
 {{/* we want to remove relative links that no longer work e.g [enrichment table](/docs/reference/glossary/#enrichment-tables) */}}
 {{ $regexToFixMdLinks := `\[([^\[]+)\](\(/[^\)]+\))` }}
 {{ range $category, $arrayOfFunctionObjs := $functions}}
@@ -6,7 +8,8 @@
   {{ range $obj := $arrayOfFunctionObjs }}
   <div class="py-3" style="border-bottom:2px solid #DADADA">
     <h3 id="{{ $obj.name | anchorize }}">{{ $obj.name }}</h3>
-    <p>{{ replace (replaceRE $regexToFixMdLinks "$1" $obj.description) "VRL" "DPL" | markdownify }}</p>
+    {{ $desc := (replaceRE $regexToConvertMdLinks "[$1]($2)" $obj.description) }}
+    <p>{{ replace (replaceRE $regexToFixMdLinks "$1" $desc) "VRL" "DPL" | markdownify }}</p>
     {{ with $obj.arguments }}
       <div class="schema-table row">
         <div class="col-12">
