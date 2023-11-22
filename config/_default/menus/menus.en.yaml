@@ -2027,41 +2027,51 @@ main:
     parent: tracing
     identifier: service_catalog
     weight: 7
+  - name: Browsing
+    url: tracing/service_catalog/browsing
+    parent: service_catalog
+    identifier: service_catalog_browse
+    weight: 701
+  - name: Investigating a Service
+    url: tracing/service_catalog/investigating
+    parent: service_catalog
+    identifier: service_investigate
+    weight: 702
   - name: Adding Entries to Service Catalog
     url: tracing/service_catalog/setup
     parent: service_catalog
     identifier: service_catalog_setup
-    weight: 701
+    weight: 703
   - name: Adding Metadata
     url: tracing/service_catalog/adding_metadata
     parent: service_catalog
     identifier: service_metadata
-    weight: 702
+    weight: 704
   - name: Service Catalog API
     url: tracing/service_catalog/service_definition_api
     parent: service_catalog
     identifier: service_catalog_api
-    weight: 703
+    weight: 705
   - name: Service Scorecards
     url: tracing/service_catalog/scorecards
     parent: service_catalog
     identifier: service_catalog_scorecards
-    weight: 704
+    weight: 706
   - name: Integrations
     url: tracing/service_catalog/integrations
     parent: service_catalog
     identifier: service_catalog_integrations
-    weight: 705
+    weight: 707
   - name: Troubleshooting
     url: tracing/service_catalog/troubleshooting
     parent: service_catalog
     identifier: service_catalog_troubleshooting
-    weight: 706
+    weight: 708
   - name: Guides
     url: tracing/service_catalog/guides
     parent: service_catalog
     identifier: service_catalog_guides
-    weight: 707
+    weight: 709
   - name: Service Observability
     url: tracing/services/
     parent: tracing
