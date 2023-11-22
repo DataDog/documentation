@@ -232,11 +232,11 @@ def prepare_content(self, configuration, github_token, extract_dir):
 
 def download_and_extract_cached_files_from_s3():
     s3_url = f'https://origin-static-assets.s3.amazonaws.com/build_artifacts/master/latest-cached.tar.gz'
-    artifact_download_response = requests.get(s3_url, stream=True)
-
-    with tarfile.open(mode='r|gz', fileobj=artifact_download_response.raw) as artifact_tarfile:
+    r = requests.get(s3_url)
+    with open('./latest-cached.tar.gz', 'wb') as f:
+        f.write(r.content)
+    with tarfile.open("./latest-cached.tar.gz", "r:gz") as artifact_tarfile:
         artifact_tarfile.extractall('temp')
-        artifact_tarfile.close()
 
 
 def download_cached_content_into_repo(self):

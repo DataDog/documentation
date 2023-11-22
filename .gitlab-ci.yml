@@ -174,6 +174,7 @@ build_preview:
       - ./logs
       - ./public/redirects.txt
       - $PREVIEW_ERROR_LOG
+      - ./latest-cached.tar.gz
   after_script:
     - |
       if [ -s $PREVIEW_ERROR_LOG && $CI_JOB_STATUS != 'success' ]; then
