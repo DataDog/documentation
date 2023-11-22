@@ -74,18 +74,20 @@ GRANT rds_iam TO <YOUR_IAM_ROLE>;
 5. [Attach the role][5] with each EC2 instance that is running the agent. Note, this can be done at EC2 launch time.
 
 
-6. Update your Postgres instance config with an `aws` block specifying the `region` of the RDS instance:
+6. Update your Postgres instance config with an `aws` block specifying the `region` of the RDS instance, and set `managed_authentication.enabled` to `true`:
 
 
 ```yaml
 instances:
 - dbm: true
- host: example-endpoint.us-east-2.rds.amazonaws.com
- port: 5432
- username: datadog
- aws:
-   instance_endpoint: example-endpoint.us-east-2.rds.amazonaws.com
-   region: us-east-2
+  host: example-endpoint.us-east-2.rds.amazonaws.com
+  port: 5432
+  username: datadog
+  aws:
+    instance_endpoint: example-endpoint.us-east-2.rds.amazonaws.com
+    region: us-east-2
+    managed_authentication:
+      enabled: true
 ```
 
 
@@ -151,23 +153,26 @@ SECURITY DEFINER
 ```
 
 
-5. Configure your instance config with the `managed_identity` YAML block, where the `CLIENT_ID` is the Client ID of the Managed Identity:
+5. Configure your instance config with the `azure.managed_authentication` YAML block, where the `CLIENT_ID` is the Client ID of the Managed Identity:
 
 
 ```yaml
 instances:
- - host: example-flex-server.postgres.database.azure.com
-   dbm: true
-   username: "<IDENTITY_NAME>"
-   ssl: "require"
-   managed_identity:
-     client_id: "<CLIENT_ID>"
-     # Optionally set the scope from where to request the identity token
-     identity_scope: "https://ossrdbms-aad.database.windows.net/.default"
-   azure:
-     deployment_type: flexible_server
-     fully_qualified_domain_name: example-flex-server.postgres.database.azure.com
+  - host: example-flex-server.postgres.database.azure.com
+    dbm: true
+    username: "<IDENTITY_NAME>"
+    ssl: "require"
+    azure:
+      deployment_type: flexible_server
+      fully_qualified_domain_name: example-flex-server.postgres.database.azure.com
+      managed_authentication:
+        enabled: true
+        client_id: "<CLIENT_ID>"
+        # Optionally set the scope from where to request the identity token
+        identity_scope: "https://ossrdbms-aad.database.windows.net/.default"
 ```
+
+DEPRECATED: `managed_identity` is deprecated in favor of `azure.managed_authentication`.
 
 
 ### Connect to SQL Server
@@ -215,7 +220,7 @@ CREATE USER <DBM_DATADOG_TEST_IDENTITY> FOR LOGIN <DBM_DATADOG_TEST_IDENTITY>;
 ```
 
 
-5. Update your instance config with the `managed_identity` config block:
+5. Update your instance config with the `azure.managed_authentication` config block:
 
 
 **Note**: [ODBC Driver 17 for SQL Server][18] or greater is required to use this feature.
@@ -223,16 +228,17 @@ CREATE USER <DBM_DATADOG_TEST_IDENTITY> FOR LOGIN <DBM_DATADOG_TEST_IDENTITY>;
 
 ```yaml
 instances:
- - host: "example.cfcc2366ab90.database.windows.net,1433"
-   connector: "odbc"
-   driver: "{ODBC Driver 18 for SQL Server}"
-   dbm: true
-   connection_string: "TrustServerCertificate=no;Encrypt=yes;"
-   managed_identity:
-     client_id: "CLIENT_ID"
-   azure:
-     deployment_type: managed_instance
-     fully_qualified_domain_name: example.cfcc2366ab90.database.windows.net
+  - host: "example.cfcc2366ab90.database.windows.net,1433"
+    connector: "odbc"
+    driver: "{ODBC Driver 18 for SQL Server}"
+    dbm: true
+    connection_string: "TrustServerCertificate=no;Encrypt=yes;"
+    azure:
+      deployment_type: managed_instance
+      fully_qualified_domain_name: example.cfcc2366ab90.database.windows.net
+      managed_authentication:
+        enabled: true
+        client_id: "<CLIENT_ID>"
 ```
 
 
