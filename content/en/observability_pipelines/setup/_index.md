@@ -32,7 +32,8 @@ There are several ways to get started with the Observability Pipelines Worker.
 
 - [Quickstart](#quickstart): Install the Worker with a simple pipeline that emits demo data to get started quickly.
 - [Datadog setup guide][2]: Install the Worker with an out-of-the-box pipeline for receiving and routing data from your Datadog Agents to Datadog.
-- [Splunk setup guide][3]: Install the Worker with an out-of-the-box pipeline for receiving and routing data from Splunk HEC to both Splunk and Datadog.
+- [Datadog archiving setup guide][3]: Install the Worker with an out-of-the-box pipeline for receiving and routing data from your Datadog Agents to Datadog and S3.
+- [Splunk setup guide][4]: Install the Worker with an out-of-the-box pipeline for receiving and routing data from Splunk HEC to both Splunk and Datadog.
 
 This document walks you through the quickstart installation steps and then provides resources for next steps.
 
@@ -40,12 +41,12 @@ This document walks you through the quickstart installation steps and then provi
 
 To install the Observability Pipelines Worker, you need the following:
 
-- A valid [Datadog API key][4].
+- A valid [Datadog API key][5].
 - A pipeline ID.
 
 To generate a new API key and pipeline:
 
-1. Navigate to [Observability Pipelines][5].
+1. Navigate to [Observability Pipelines][6].
 2. Click **New Pipeline**.
 3. Enter a name for your pipeline.
 4. Click **Next**.
@@ -384,7 +385,7 @@ EOT
 {{% /tab %}}
 {{< /tabs >}}
 
-See [Working with Data][6] for more information on transforming your data.
+See [Working with Data][7] for more information on transforming your data.
 
 ## Next steps
 
@@ -394,8 +395,8 @@ The quickstart walked you through installing the Worker and deploying a sample p
 
 For recommendations on deploying and scaling multiple Workers:
 
-- See [Deployment Design and Principles][7] for information on what to consider when designing your Observability Pipelines architecture.
-- See [Best Practices for OP Worker Aggregator Architecture][8].
+- See [Deployment Design and Principles][8] for information on what to consider when designing your Observability Pipelines architecture.
+- See [Best Practices for OP Worker Aggregator Architecture][9].
 
 ## Deployment Modes
 
@@ -403,7 +404,7 @@ For recommendations on deploying and scaling multiple Workers:
   Remote configuration for Observability Pipelines is in private beta. Contact <a href="https://docs.datadoghq.com/help/">Datadog support</a> or your Customer Success Manager for access.
 </div>
 
-If you are enrolled in the private beta of [Remote Configuration][9], you can remotely roll out changes to your Workers from the Datadog UI, rather than make updates to your pipeline configuration in a text editor and then manually rolling out your changes. Choose your deployment method when you create a pipeline and install your Workers.
+If you are enrolled in the private beta of [Remote Configuration][10], you can remotely roll out changes to your Workers from the Datadog UI, rather than make updates to your pipeline configuration in a text editor and then manually rolling out your changes. Choose your deployment method when you create a pipeline and install your Workers.
 
 After deploying a pipeline, you can also switch deployment methods, such as going from a manually managed pipeline to a remote configuration enabled pipeline or vice versa. 
 
@@ -427,10 +428,11 @@ If you want to switch from manually managed deployment to a remote configuration
 
 [1]: /observability_pipelines/#what-is-observability-pipelines-and-the-observability-pipelines-worker
 [2]: /observability_pipelines/setup/datadog/
-[3]: /observability_pipelines/setup/splunk/
-[4]: https://app.datadoghq.com/observability-pipelines
-[5]: /account_management/api-app-keys/#api-keys
-[6]: /observability_pipelines/working_with_data/
-[7]: /observability_pipelines/production_deployment_overview/
-[8]: /observability_pipelines/architecture/
-[9]: /agent/remote_config
+[3]: /observability_pipelines/setup/datadog_with_archiving/
+[4]: /observability_pipelines/setup/splunk/
+[5]: https://app.datadoghq.com/observability-pipelines
+[6]: /account_management/api-app-keys/#api-keys
+[7]: /observability_pipelines/working_with_data/
+[8]: /observability_pipelines/production_deployment_overview/
+[9]: /observability_pipelines/architecture/
+[10]: /agent/remote_config
