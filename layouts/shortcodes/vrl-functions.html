@@ -46,7 +46,7 @@
                   </div>
                   <div class="col-2 column text-center">
                       <p>
-                        {{ with .default }}
+                        {{ with (strings.TrimLeft " " .default) }}
                           {{ print "`" . "`" | markdownify }}
                         {{ else }}
                           N/A
