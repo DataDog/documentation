@@ -419,7 +419,7 @@ function doRiskyThing() {
 
 ## Adding span links (Beta)
 
-<div class="alert alert-info">Support for span links is in beta and requires the <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.87.2">PHP tracer v0.87.2+</a></div>
+<div class="alert alert-info">Support for span links is in beta and requires the <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.87.2">PHP tracer v0.87.2+</a>.</div>
 
 Span links associate one or more spans together that don't have a typical parent-child relationship. They may associate spans within the same trace or spans across different traces.
 
@@ -430,12 +430,12 @@ To add a span link from an existing span:
 ```php
 $spanA = \DDTrace\start_trace_span();
 $spanA->name = 'spanA';
-$distributedTracingHeaders = \DDTrace\generate_distributed_tracing_headers();
 \DDTrace\close_span();
 
 $spanB = \DDTrace\start_trace_span();
 $spanB->name = 'spanB';
-$spanB->links[] = \DDTrace\SpanLink::fromHeaders($distributedTracingHeaders);
+// Link spanB to spanA
+$spanB->links[] = $spanA->getLink();
 \DDTrace\close_span();
 ```
 
@@ -449,7 +449,8 @@ $distributedTracingHeaders = \DDTrace\generate_distributed_tracing_headers();
 
 $spanB = \DDTrace\start_trace_span();
 $spanB->name = 'spanB';
-$spanB->links[] = $spanA->getLink();
+// Link spanB to spanA using distributed tracing headers
+$spanB->links[] = \DDTrace\SpanLink::fromHeaders($distributedTracingHeaders);
 \DDTrace\close_span();
 ```
 
