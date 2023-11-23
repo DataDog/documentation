@@ -101,7 +101,7 @@ See [APM Data Security][3] for information about other mechanisms in the Datadog
 To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration. Once it's removed, restart your service.
 
 If no `DD_APPSEC_ENABLED=true` environment variable is set for your service:
-* If it's a PHP service: explicitely set the environment variable to `DD_APPSEC_ENABLED=false` and restart your service
+* If it's a PHP service: explicitly set the environment variable to `DD_APPSEC_ENABLED=false` and restart your service
 * If ASM was activated in one-click: go to [ASM service configuration][8], click on your service and press 'Deactivate'
 
 If you need additional help, contact [Datadog support][6].
