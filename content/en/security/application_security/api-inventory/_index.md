@@ -18,7 +18,7 @@ API Security Inventory monitors your API traffic to provide visibility into the 
 
 Using the API Security Inventory you can:
 
-- see at a glance your publicly exposed endpoints, which are not requiring authenticated requests
+- See at a glance your publicly exposed endpoints that are not requiring authenticated requests.
 - see at a glance your publicly exposed endpoints, which are handling sensitive data, such as payment card numbers
 - see which endpoints are at risk, and pivot directly into the [Threat Monitoring and Protection](/security/application_security/threats/) service for further investigation or response
 
