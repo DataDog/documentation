@@ -33,7 +33,7 @@ are compatible without any additional configuration.
 |----------|----------|
 |Python    | v2.1.6   |
 
-## How Does it Work?
+## How it works
 
 API Inventory leverages the datadog tracing library with [ASM enabled](/security/application_security/enabling/) to gather security metadata about API traffic, including the API schema, types of sensitive data processed and the authentication scheme.
 
