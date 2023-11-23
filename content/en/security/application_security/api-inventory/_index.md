@@ -3,6 +3,8 @@ title: API Security Inventory
 kind: documentation
 ---
 
+<div class="alert alert-info">API Security Inventory is in beta.</div>
+
 ## Overview
 
 API Security Inventory monitors your API traffic to provide visibility into the security posture of your APIs, including:
