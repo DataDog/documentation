@@ -77,7 +77,7 @@ You can add processors within your pipelines to restructure your data and genera
 - Use a status remapper to remap the `status` of a log or a [category processor][19] for status mapped to a range (Like HTTP status codes)
 - Use the attribute [remapper][5] to remap attribute keys to standard [Datadog attributes][6]. For example, an attribute key that contains the client IP must be remapped to `network.client.ip` so Datadog can display Technology Partner logs in out-of-the-box dashboards. Remove original attributes when remapping by using `preserveSource:false` to avoid duplicates.
 - Use the [service remapper][7] to remap the `service` attribute or set it to the same value as the `source` attribute.
-- Use the [grok processor][8] to extract values in the logs for better searching and analytics. To keep optimal performances, Grok parser must be specific (e.g. Avoid wildcard matches).
+- Use the [grok processor][8] to extract values in the logs for better searching and analytics. To keep optimal performances, Grok parser must be specific (Avoid wildcard matches).
 - Use the [message remapper][9] to define the official message of the log and make certain attributes searchable by full text.
 
 For a list of all log processors, see [Processors][10].
@@ -124,8 +124,6 @@ Datadog reviews the log integration based on the guidelines and requirements doc
 To start a review process, contact us through the [Datadog Partner Portal][] with your finalized pipeline, processors, and facets definition. 
 
 Be sure to include sample raw logs with all the attributes you expect to be sent into Datadog by your integration. Raw logs comprise the raw messages generated directly from the source before they have been ingested by Datadog.
-
-A Datadog Ecosystems team member will review your log pipeline and facets, and may have feedback. Once approved, Datadog will merge your log assets as part of your overall integration.
 
 Once reviews are complete, Datadog creates and deploys the new log integration assets.
 
