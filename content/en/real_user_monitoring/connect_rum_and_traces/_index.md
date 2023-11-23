@@ -160,29 +160,23 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 1. Set up [RUM iOS Monitoring][1].
 
-2. Call the `trackURLSession(firstPartyHosts:)` builder function with the list of internal, first-party origins called by your iOS application.
+2. Enable `Trace`:
     ```swift
-    Datadog.initialize(
-        appContext: .init(),
-        configuration: Datadog.Configuration
-            .builderUsing(
-                rumApplicationID: "<RUM_APP_ID>",
-                clientToken: "<CLIENT_TOKEN>",
-                environment: "<ENV_NAME>"
+    Trace.enable(
+        with: .init(
+            urlSessionTracking: .init(
+                firstPartyHostsTracing: .trace(
+                    hosts: [
+                        "example.com",
+                        "api.yourdomain.com"
+                    ]
+                )
             )
-            .trackURLSession(firstPartyHosts: ["example.com", "api.yourdomain.com"])
-            .build()
+        )
     )
     ```
 
-3. Initialize the global `Tracer`:
-    ```swift
-    Global.sharedTracer = Tracer.initialize(
-        configuration: Tracer.Configuration(...)
-    )
-    ```
-
-4. Enable URLSession instrumentation for your `SessionDelegate` type, which conforms to `URLSessionDataDelegate` protocol:
+3. Enable URLSession instrumentation for your `SessionDelegate` type, which conforms to `URLSessionDataDelegate` protocol:
     ```swift
     URLSessionInstrumentation.enable(
         with: .init(
@@ -191,7 +185,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     )
     ```
 
-5. Initialize URLSession as stated in [Setup][1]:
+4. Initialize URLSession as stated in [Setup][1]:
     ```swift
     let session =  URLSession(
         configuration: ...,
@@ -204,19 +198,25 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
    Trace ID injection works when you are providing a `URLRequest` to the `URLSession`. Distributed tracing does not work when you are using a `URL` object.
 
-5. _(Optional)_ Set the `tracingSamplingRate` initialization parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
+5. _(Optional)_ Set the `sampleRate` parameter to keep a defined percentage of the backend traces. If not set, 20% of the traces coming from application requests are sent to Datadog.
 
      To keep 100% of backend traces:
     ```swift
-    Datadog.initialize(
-        appContext: .init(),
-        configuration: Datadog.Configuration
-            .builderUsing(rumApplicationID: "<rum_app_id>", clientToken: "<client_token>", environment: "<env_name>")
-            .set(tracingSamplingRate: 100)
-            .build()
+    Trace.enable(
+        with: .init(
+            urlSessionTracking: .init(
+                firstPartyHostsTracing: .trace(
+                    hosts: [
+                        "example.com",
+                        "api.yourdomain.com"
+                    ],
+                    sampleRate: 100
+                )
+            )
+        )
     )
     ```
-**Note**: `tracingSamplingRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
+**Note**: `sampleRate` **does not** impact RUM sessions sampling. Only backend traces are sampled out.
 
 [1]: /real_user_monitoring/ios/
 {{% /tab %}}
@@ -406,25 +406,22 @@ RUM supports several propagator types to connect resources with backends that ar
 
 1. Set up RUM to connect with APM as described above.
 
-2. Use `trackURLSession(firstPartyHostsWithHeaderTypes:)` instead of `trackURLSession(firstPartyHosts:)` as follows:
+2. Use `.traceWithHeaders(hostsWithHeaders:sampleRate:)` instead of `.trace(hostsWithHeaders:sampleRate:)` as follows:
     ```swift
-    Datadog.initialize(
-        appContext: .init(),
-        configuration: Datadog.Configuration
-            .builderUsing(
-                rumApplicationID: "<RUM_APP_ID>",
-                clientToken: "<CLIENT_TOKEN>",
-                environment: "<ENV_NAME>"
-            )
-            .trackURLSession(
-                firstPartyHostsWithHeaderTypes: [
-                    "api.example.com": [.tracecontext]
-                ]
-            )
-            .build()
-        )
+      Trace.enable(
+          with: .init(
+              urlSessionTracking: .init(
+                  firstPartyHostsTracing: .traceWithHeaders(
+                      hostsWithHeaders: [
+                          "api.example.com": [.tracecontext]
+                      ],
+                      sampleRate: 100
+                  )
+              )
+          )
+      )
     ```
-    `trackURLSession(firstPartyHostsWithHeaderTypes:)` takes `Dictionary<String, Set<TracingHeaderType>>` as a parameter, where the key is a host and the value is a list of supported tracing header types.
+    `.traceWithHeaders(hostsWithHeaders:sampleRate:)` takes `Dictionary<String, Set<TracingHeaderType>>` as a parameter, where the key is a host and the value is a list of supported tracing header types.
 
     `TracingHeaderType` in an enum representing the following tracing header types:
       - `.datadog`: Datadog's propagator (`x-datadog-*`)
