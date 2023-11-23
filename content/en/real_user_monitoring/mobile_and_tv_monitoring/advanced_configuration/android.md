@@ -215,10 +215,10 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 
 ```kotlin
     // Adds an attribute to all future RUM events
-    GlobalRumMonitor.addAttribute(key, value)
+    GlobalRumMonitor.get().addAttribute(key, value)
 
     // Removes an attribute to all future RUM events
-    GlobalRumMonitor.removeAttribute(key)
+    GlobalRumMonitor.get().removeAttribute(key)
 ```
 
 ## Track widgets
