@@ -30,6 +30,8 @@ further_reading:
 
 - **Manual steps**: View manually triggered pipelines
 
+- **In-progress pipelines**: View pipeline executions thar are in progress
+
 - **Queue time**: View amount of time pipeline jobs wait in the queue before processing
 
 - **Logs correlation**: Correlate pipeline spans to logs and [enable job log collection][12]
