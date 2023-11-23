@@ -93,7 +93,7 @@ Authentication is determined by:
 - the presence of a user id within the trace (i.e. the `@usr.id` APM attribute)
 - the request has responded with the 401 or 403 status code
 
-### Contains Exploitable Vulnerabilities
+### Contains exploitable vulnerabilities
 
 This risk is determined by [Vulnerability Management](/security/application_security/vulnerability_management/) for the service hosting the endpoint.
 
