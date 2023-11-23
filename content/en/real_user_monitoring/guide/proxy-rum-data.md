@@ -70,7 +70,7 @@ To successfully proxy your RUM requests to Datadog:
 3. Forward the request to the Datadog intake URL using the POST method.
 4. Leave the request body unchanged.
 
-<div class="alert alert-info">For security reasons, remove any HTTP headers potentially containing sensitive information, e.g. the `cookie` or `referer` headers.</div>
+<div class="alert alert-info">For security reasons, remove any HTTP headers potentially containing sensitive information, e.g. the `cookie` header.</div>
 
 The site parameter is an SDK [initialization parameter][1]. Datadog intake origins for each site are listed below:
 
