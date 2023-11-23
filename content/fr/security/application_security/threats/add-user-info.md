@@ -260,7 +260,7 @@ function handle () {
     role: 'admin', // Rôle sous lequel l'utilisateur effectue la requête.
     scope: 'read:message, write:files', // Portées ou autorisations actuellement accordées à l'utilisateur.
 
-    // Des champs personnalisés sont également acceptés pour associer des données personalisées à l'utilisateur (RBAC, Oauth, etc.)
+    // Des champs personnalisés sont également acceptés pour associer des données personnalisées à l'utilisateur (RBAC, Oauth, etc.)
     tag_personnalisé: 'données personnalisées'
   })
 
