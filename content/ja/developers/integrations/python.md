@@ -104,7 +104,7 @@ Linux においては、システムの Python を変更することは避けて
 
 {{< tabs >}}
 {{% tab "MacOS" %}}
-1. `curl` コマンドを使ってファイルをダウンロードします。`-o` オプションは、ダウンロードしたパッケージが書き込まれるファイル名を指定するためのものです。この例では、カレントディレクトリの `ddev-{{< sdk-version "integrations-core" >}}.pkg` にファイルが書き込まれます。
+1. `curl` コマンドを使ってファイルをダウンロードします。`-o` オプションは、ダウンロードしたパッケージが書き込まれるファイル名を指定するためのものです。この例では、ファイルはカレントディレクトリの `ddev-{{< sdk-version "integrations-core" >}}.pkg` として書き込まれます。
    ```shell
    curl -o ddev-{{< sdk-version "integrations-core" >}}.pkg https://github.com/DataDog/integrations-core/releases/download/ddev-v{{< sdk-version "integrations-core" >}}/ddev-{{< sdk-version "integrations-core" >}}.pkg
    ```
