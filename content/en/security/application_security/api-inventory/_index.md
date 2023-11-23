@@ -90,7 +90,7 @@ See [Configuring a client IP header](/security/application_security/threats/libr
 Authentication is determined by:
 
 - the presence of `Authorization`, `Token` or `X-Api-Key` headers
-- the presence of a user id within the trace (i.e. the `@usr.id` APM attribute)
+- The presence of a user id within the trace (example, the `@usr.id` APM attribute).
 - The request has responded with a 401 or 403 status code.
 
 ### Contains exploitable vulnerabilities
