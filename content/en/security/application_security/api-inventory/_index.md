@@ -26,7 +26,7 @@ Using the API Security Inventory you can:
 
 ## How to Enable
 
-If your library is configured to use [remote configuration][1], then the following tracer versions
+If your library is configured to use [Remote Configuration][1], the following tracer versions
 are compatible without any additional configuration.
 
 |Technology|Minimum version|
