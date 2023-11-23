@@ -27,7 +27,7 @@ Two release branches are supported:
 
 And the library supports the following runtimes:
 
-| OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions  |
+| OS      | CPU                   | Runtime | Runtime version | Supported ddtrace versions  |
 |---------|-----------------------|---------|-----------------|---------------------------|
 | Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                      |
 | MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                      |
