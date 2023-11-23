@@ -47,7 +47,7 @@ The following risks are calculated for each endpoint:
 
 ### Service in production
 
-The `env` tag is checked for patterns that frequently represent non-production environments. For example, detecting `dev`, `alpha`, `beta`, `sandbox`, and similar values, will mark the environment as a non-production one.
+The `env` tag is checked for patterns that frequently represent non-production environments. For example, detecting `dev`, `alpha`, `beta`, `sandbox`, and similar values will mark the environment as non-production. All other environments are marked as production.
 
 All other environments are marked as production.
 
