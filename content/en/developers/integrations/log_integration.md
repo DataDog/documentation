@@ -55,7 +55,7 @@ Do not use Datadog application keys.
 
 ## Set up the log integration assets in your Datadog partner account 
 
-To become a Datadog Technology Partner, and gain access to integration development sandbox, see our [Build an Integration documentation][18].
+For information about becoming a Datadog Technology Partner, and gaining access to an integration development sandbox, read [Build an Integration][18].
 
 ### Log pipeline requirements
 
@@ -74,15 +74,15 @@ You can add processors within your pipelines to restructure your data and genera
 **Requirements:**
 
 - Use the [date remapper][4] to define the official timestamp for logs.
-- Use a status remapper to remap the `status` of a log or a [category processor][19] for status mapped to a range (Like HTTP status codes)
+- Use a status remapper to remap the `status` of a log, or a [category processor][19] for statuses mapped to a range (as with HTTP status codes).
 - Use the attribute [remapper][5] to remap attribute keys to standard [Datadog attributes][6]. For example, an attribute key that contains the client IP must be remapped to `network.client.ip` so Datadog can display Technology Partner logs in out-of-the-box dashboards. Remove original attributes when remapping by using `preserveSource:false` to avoid duplicates.
 - Use the [service remapper][7] to remap the `service` attribute or set it to the same value as the `source` attribute.
-- Use the [grok processor][8] to extract values in the logs for better searching and analytics. To keep optimal performances, Grok parser must be specific (Avoid wildcard matches).
+- Use the [grok processor][8] to extract values in the logs for better searching and analytics. To maintain optimal performance, the grok parser must be specific. Avoid wildcard matches.
 - Use the [message remapper][9] to define the official message of the log and make certain attributes searchable by full text.
 
 For a list of all log processors, see [Processors][10].
 
-**Tip:** This [free course][20] provides a great overview on how to write processors and leverage standard attributes. 
+**Tip**: Take the free course [Going Deeper with Logs Processing][20] for an overview on writing processors and leveraging standard attributes. 
 
 ### Facet requirements
 
@@ -110,18 +110,18 @@ To easily navigate the facet list, facets are grouped together. For fields speci
 5. Click **Update**.
 
 **Requirements:**
-- Use standard attributes as much as possible. Otherwise, use a specific namespace (such as the integration name) to avoid conflict as facets are shared across Datadog.
-- A facet has a source, it can be `log` for attributes or `tag` for tags.
-- A facet has a type (String, Boolean, Double or Integer) which matches the type of the attribute. If the type of the value of the attribute does not match the one of the facet, the attribute will not be indexed with the facet.
-- Double and Integer facets can have a unit. It is composed of a family (time, bytes, …) and of a name (millisecond, gibibyte, …).
+- Use standard attributes as much as possible. Otherwise, use a specific namespace (such as the integration name) to avoid conflict, because facets are shared across Datadog.
+- A facet has a source. It can be `log` for attributes or `tag` for tags.
+- A facet has a type (String, Boolean, Double or Integer) which matches the type of the attribute. If the type of the value of the attribute does not match the one of the facet, the attribute is not indexed with the facet.
+- Double and Integer facets can have a unit. Units are composed of a family (such as time or bytes) and of a name (such as millisecond or gibibyte).
 - A facet is stored in groups and has a description.
-- If you remapped an attribute and kept both, define a facet on a single one.
+- If you remap an attribute and keep both, define a facet on a single one.
 
 ## Review and deploy the integration
 
 Datadog reviews the log integration based on the guidelines and requirements documented on this page and provides feedback to the Technology Partner. In turn, the Technology Partner reviews and makes changes accordingly.
 
-To start a review process, contact us through the [Datadog Partner Portal][] with your finalized pipeline, processors, and facets definition. 
+To start a review process, contact Datadog through the [Datadog Partner Portal][21] with your finalized pipeline, processors, and facets definition. 
 
 Be sure to include sample raw logs with all the attributes you expect to be sent into Datadog by your integration. Raw logs comprise the raw messages generated directly from the source before they have been ingested by Datadog.
 
