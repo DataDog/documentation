@@ -52,7 +52,7 @@ The `env` tag is checked for patterns that frequently represent non-production e
 
 ### Service under attack
 
-This risk is detected for API endpoints that have experienced [attacks](/security/application_security/threats/) in the last week.
+This risk is detected for API endpoints that have experienced [attacks](/security/application_security/threats/) within the last week.
 
 ### Processing Sensitive Data
 
