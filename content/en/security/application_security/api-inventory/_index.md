@@ -41,7 +41,7 @@ API Inventory leverages the Datadog tracing library with [ASM enabled](/security
 - [Threat Monitoring and Protection](/security/application_security/threats/), and
 - [Vulnerability Management](/security/application_security/vulnerability_management/)
 
-API Inventory Security leverages [remote configuration][1] to manage and configure scanning rules detecting sensitive data and authentication.
+API Inventory Security leverages [Remote Configuration][4] to manage and configure scanning rules detecting sensitive data and authentication.
 
 For each endpoint we calculate the risks outlined below.
 
