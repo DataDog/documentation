@@ -91,7 +91,7 @@ Authentication is determined by:
 
 - the presence of `Authorization`, `Token` or `X-Api-Key` headers
 - the presence of a user id within the trace (i.e. the `@usr.id` APM attribute)
-- the request has responded with the 401 or 403 status code
+- The request has responded with a 401 or 403 status code.
 
 ### Contains exploitable vulnerabilities
 
