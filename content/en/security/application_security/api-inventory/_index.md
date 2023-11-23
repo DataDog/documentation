@@ -11,7 +11,7 @@ API Security Inventory monitors your API traffic to provide visibility into the 
 - **Public Exposure**: Whether the API is processing traffic from the internet.
 - **Production status**: If the API is running in a production environment.
 - **Sensitive data flows**: Sensitive data handled by the API and flows between APIs.
-- **Attack Exposure**: if the endpoint is targeted by attacks (powered by [Application Threat Management][2])
+- **Attack Exposure**: If the endpoint is targeted by attacks (powered by [Application Threat Management][2]).
 - **Vulnerabilities**:  if the endpoint contains vulnerability (powered by [Application Vulnerability Management][3])
 
 Using the API Security Inventory you can:
