@@ -54,7 +54,7 @@ The `env` tag is checked for patterns that frequently represent non-production e
 
 This risk is detected for API endpoints that have experienced [attacks](/security/application_security/threats/) within the last week.
 
-### Processing Sensitive Data
+### Processing sensitive data
 
 [ASM](/security/application_security/threats/) matches known patterns for sensitive data in API requests. If anything matches, that endpoint is tagged with the type of sensitive data processed.
 
