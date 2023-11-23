@@ -45,7 +45,7 @@ API Inventory Security leverages [Remote Configuration][4] to manage and configu
 
 For each endpoint we calculate the risks outlined below.
 
-### Service in Production
+### Service in production
 
 The `env` tag is checked for patterns that frequently represent non-production environments. For example, detecting `dev`, `alpha`, `beta`, `sandbox`, and similar values, will mark the environment as a non-production one.
 
