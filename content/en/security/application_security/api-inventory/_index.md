@@ -35,7 +35,7 @@ are compatible without any additional configuration.
 
 ## How it works
 
-API Inventory leverages the datadog tracing library with [ASM enabled](/security/application_security/enabling/) to gather security metadata about API traffic, including the API schema, types of sensitive data processed and the authentication scheme.
+API Inventory leverages the Datadog tracing library with [ASM enabled](/security/application_security/enabling/) to gather security metadata about API traffic, including the API schema, types of sensitive data processed, and the authentication scheme.
 
 
 - [Threat Monitoring and Protection](/security/application_security/threats/), and
