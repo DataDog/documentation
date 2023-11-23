@@ -36,12 +36,12 @@ datadogRum.setGlobalContextProperty('department', 'marketing');
 
 To set tags for **mobile sessions**, use the [`addAttribute`][5] method. Here's an example:
 
-```javascript
+```
 //Android
-GlobalRumMonitor.addAttribute('department', 'marketing')
+GlobalRumMonitor.get().addAttribute("department", "marketing")
 
 //iOS
-Global.rum.addAttribute(forKey: 'department', value: 'marketing')
+RumMonitor.shared().addAttribute(forKey: "department", value: "marketing")
 ```
 
 **Note**: A few tags are included by default (`service`, `env`, `version`, `application.id`, and `application.name`). For anything else, set the global context using the method above.

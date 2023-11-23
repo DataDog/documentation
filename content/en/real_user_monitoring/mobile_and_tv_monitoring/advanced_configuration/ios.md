@@ -193,7 +193,7 @@ Find more details and available options in the [`DDRUMMonitor` class][9].
 
 ### Custom Errors
 
-To track specific errors, notify `Global.rum` when an error occurs with the message, source, exception, and additional attributes. Refer to the [Error Attributes documentation][5].
+To track specific errors, notify `RUMMonitor` when an error occurs with the message, source, exception, and additional attributes. Refer to the [Error Attributes documentation][5].
 
 {{< tabs >}}
 {{% tab "Swift" %}}
