@@ -56,15 +56,15 @@ This risk is detected for API endpoints that have experienced [attacks](/securit
 
 ### Processing sensitive data
 
-[ASM](/security/application_security/threats/) matches known patterns for sensitive data in API requests. If anything matches, that endpoint is tagged with the type of sensitive data processed.
+[ASM](/security/application_security/threats/) matches known patterns for sensitive data in API requests. If it finds a match, the endpoint is tagged with the type of sensitive data processed.
 
 <div class="alert alert-info">
 Sensitive data scanning in API responses is planned, but is not currently available.
 </div>
 
-The matching happens entirely in your application, and none of the sensitive data is sent to Datadog.
+The matching occurs within your application, and none of the sensitive data is sent to Datadog.
 
-The currently supported sensitive data categories are:
+The supported sensitive data categories are:
 
 - `pii` (Personally Identifiable Information), detecting:
   - Canadian social insurance numbers
@@ -75,16 +75,16 @@ The currently supported sensitive data categories are:
 - `payments`:
   - Credit card numbers
  
-### Publicly Accessible
+### Publicly accessible
 
-We mark an endpoint as public if the client IP address is not within one of these ranges:
+Datadog marks an endpoint as public if the client IP address is not within one of these ranges:
 
 - 10.0.0.0/8
 - 172.16.0.0/12
 - 192.168.0.0/16
 - 169.254.1.0/16
 
-See [Configuring a client IP header](/security/application_security/threats/library_configuration/#configuring-a-client-ip-header) for more information on the required library configuration.
+See [configuring a client IP header](/security/application_security/threats/library_configuration/#configuring-a-client-ip-header) for more information on the required library configuration.
 
 ### Unauthenticated endpoint
 
@@ -102,6 +102,7 @@ This risk is determined by [Vulnerability Management](/security/application_secu
 
 By default, API Security Inventory will evaluate every 10th request (10% sample rate).
 
-[1]: /agent/remote_config/
+[1]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [2]: /security/application_security/threats/
 [3]: /security/application_security/vulnerability_management/
+[4]: /agent/remote_config/
