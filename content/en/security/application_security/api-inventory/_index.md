@@ -58,22 +58,27 @@ This risk is detected for API endpoints that have experienced [attacks](/securit
 
 [ASM](/security/application_security/threats/) matches known patterns for sensitive data in API requests. If it finds a match, the endpoint is tagged with the type of sensitive data processed.
 
-<div class="alert alert-info">
-Sensitive data scanning in API responses is planned, but is not currently available.
-</div>
-
 The matching occurs within your application, and none of the sensitive data is sent to Datadog.
 
-The supported sensitive data categories are:
+#### Supported data types
 
-- `pii` (Personally Identifiable Information), detecting:
-  - Canadian social insurance numbers
-  - United States social security numbers
-  - UK national insurance numbers
-  - US vehicle identification numbers
-  - Passport numbers
-- `payments`:
-  - Credit card numbers
+| Category                                          | Category facet   | Type facet        |
+|---------------------------------------------------|------------------|-------------------|
+| Canadian social insurance numbers                 | `pii`            | `canadian_sin`    |
+| United States social security numbers             | `pii`            | `us_ssn`          |
+| UK national insurance numbers                     | `pii`            | `uk_nin`          |
+| US vehicle identification numbers                 | `pii`            | `vin`             |
+| Passport numbers                                  | `pii`            | `passport_number` |
+| E-mail addresses                                  | `pii`            | `email`           |
+| JSON Web Token (JWT)                              | `credentials`    | `json_web_token`  |
+| Bearer tokens (found in `Authorization` headers)  | `credentials`    | `bearer_token`    |
+| American Express card number                      | `payment`        | `card`            |
+| Diners Club card number                           | `payment`        | `card`            |
+| JCB card number                                   | `payment`        | `card`            |
+| Maestro card number                               | `payment`        | `card`            |
+| Mastercard card number                            | `payment`        | `card`            |
+| VISA card number                                  | `payment`        | `card`            |
+| IBAN bank account number                          | `payment`        | `iban`            |
  
 ### Publicly accessible
 
