@@ -160,7 +160,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 
 1. Set up [RUM iOS Monitoring][1].
 
-2. Enable Trace
+2. Enable `Trace`:
     ```swift
     Trace.enable(
         with: .init(
