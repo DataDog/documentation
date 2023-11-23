@@ -29,9 +29,9 @@ Using the API Security Inventory you can:
 If your library is configured to use [Remote Configuration][1], the following tracer versions
 are compatible without any additional configuration.
 
-|Technology|Minimum version|
-|----------|----------|
-|Python    | v2.1.6   |
+|Technology|Minimum version| Support for sensitive data scanning |
+|----------|----------|----------|
+|Python    | v2.1.6   | Requests and responses
 
 ## How it works
 
