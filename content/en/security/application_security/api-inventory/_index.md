@@ -85,7 +85,7 @@ We mark an endpoint as public if the client IP address is not within one of thes
 
 See [Configuring a client IP header](/security/application_security/threats/library_configuration/#configuring-a-client-ip-header) for more information on the required library configuration.
 
-### Unauthenticated Endpoint
+### Unauthenticated endpoint
 
 Authentication is determined by:
 
