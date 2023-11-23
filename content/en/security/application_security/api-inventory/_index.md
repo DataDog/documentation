@@ -24,7 +24,7 @@ Using the API Security Inventory you can:
 
 {{< img src="security/application_security/api/welcome.png" alt="API Security Inventory main page">}}
 
-## How to Enable
+## Configuration
 
 If your library is configured to use [Remote Configuration][1], the following tracer versions
 are compatible without any additional configuration.
