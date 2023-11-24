@@ -17,20 +17,6 @@ If you've configured the profiler and don't see profiles in the profile search p
 - Operating system type and version (for example, Linux Ubuntu 20.04)
 - Runtime type, version, and vendor (for example, Ruby 2.7.3)
 
-## Application triggers "stack level too deep (SystemStackError)" errors
-
-This issue is not expected to happen since [`dd-trace-rb` version `0.54.0`][3].
-If you're still running into it, [open a support ticket][2] taking care to include the full backtrace leading to the error.
-
-Prior to version `0.54.0`, the profiler needed to instrument the Ruby VM to track thread creation, which clashed
-with similar instrumentation from other gems.
-
-If you're using any of the below gems:
-
-* `rollbar`: Ensure you're using version 3.1.2 or newer.
-* `logging`: Disable `logging`'s thread context inheritance by setting the `LOGGING_INHERIT_CONTEXT` environment
-  variable to `false`.
-
 ## Missing profiles for Resque jobs
 
 When profiling [Resque][4] jobs, you should set the `RUN_AT_EXIT_HOOKS` environment
