@@ -120,6 +120,10 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 
 Requires `dd-trace-php` version 0.71+.
 
+To enable the [timeline feature](#span-execution-timeline-view) (beta):
+- Upgrade to `dd-trace-php` version 0.89+.
+- Set the environment variable `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED=1` or INI setting `datadog.profiling.experimental_timeline_enabled=1`
+
 [1]: /profiler/enabling/php
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
@@ -179,7 +183,7 @@ With the span **Timeline** view, you can:
 
 Depending on the runtime and language, the lanes vary:
 
-{{< programming-lang-wrapper langs="java,go,ruby,dotnet" >}}
+{{< programming-lang-wrapper langs="java,go,ruby,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
@@ -207,6 +211,13 @@ Each lane represents a **thread**. Threads from a common pool are grouped togeth
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
 Lanes on top are runtime activities that may add extra latency. They can be unrelated to the request itself.
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+See [prerequisites](#prerequisites) to learn how to enable this feature for PHP.
+
+There is one lane for the PHP **thread**. Fibers that run in this **thread** are represented in separate lanes that are grouped together.
+
+Lanes on the top are runtime activities that may add extra latency to your request, due to file compilation and garbage collection.
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -266,12 +277,9 @@ Endpoint profiling (beta) is NOT enabled by default when you [turn on profiling 
 export DD_PROFILING_ENDPOINT_COLLECTION_ENABLED=true
 ```
 
-Setting this environment variable also turns on [Code Hotspots (beta)][2] which is needed for endpoint profiling.
-
 Requires `dd-trace-js` version 4.17.0+ or 3.38.0+.
 
 [1]: /profiler/enabling/nodejs
-[2]: /profiler/connect_traces_and_profiles/?code-lang=nodejs#identify-code-hotspots-in-slow-traces
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 

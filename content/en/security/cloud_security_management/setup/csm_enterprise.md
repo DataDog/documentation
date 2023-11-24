@@ -73,7 +73,7 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
 
 #### Follow the in-app instructions (recommended)
 
-To enable CSM on the Agent, navigate to the [**Cloud Security Management Setup** page][8] and click **Hosts and containers**.
+To enable CSM on the Agent, navigate to the [**Cloud Security Management Setup** page][5] and click **Hosts and containers**.
 
 {{< img src="security/csm/hosts_containers_setup.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
 
@@ -97,20 +97,7 @@ Alternatively, use the following examples to enable CSM Enterprise:
         compliance:
           enabled: true
     ```
-2. **Optional**: To enable [Runtime Anomaly Detection][1], add the following to the `values.yaml` file:
-
-    ```yaml
-    # values.yaml file
-    datadog:
-      securityAgent:
-        runtime:
-          securityProfile:
-            enabled: true
-    ```
-
-3. Restart the Agent.
-
-[1]: /security/threats/runtime_anomaly_detection
+2. Restart the Agent.
 
 {{% /tab %}}
 
@@ -133,7 +120,6 @@ Alternatively, use the following examples to enable CSM Enterprise:
 2. Restart the Agent.
 
 
-[1]: /security/threats/runtime_anomaly_detection
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 
 {{% /tab %}}
@@ -266,19 +252,6 @@ runtime_security_config:
     ## @param enabled - boolean - optional - default: false
     enabled: true
 ```
-
-**Optional**: To enable [Runtime Anomaly Detection][1], add the following to the `system-probe.yaml` file:
-
-```bash
-# /etc/datadog-agent/system-probe.yaml file
-runtime_security_config:
-  security_profile:
-    ## @param enabled - boolean - optional - default: false
-    ## Set to true to enable Runtime Anomaly Detection.
-    enabled: true
-```
-
-[1]: /security/threats/runtime_anomaly_detection
 
 {{% /tab %}}
 

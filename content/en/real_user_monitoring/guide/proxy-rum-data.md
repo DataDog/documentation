@@ -61,7 +61,7 @@ window.DD_RUM &&
 
 When your proxy receives data from the RUM Browser SDK, it must be forwarded to Datadog. The RUM Browser SDK adds the `ddforward` query parameter to all POST requests to your proxy. This query parameter contains the URL path and parameters that all data must be forwarded to.
 
-To successfully proxy request to Datadog:
+To successfully proxy your RUM requests to Datadog:
 
 1. Build the final Datadog intake URL by using:
     - the Datadog intake origin corresponding to your site. See table below.
@@ -70,15 +70,18 @@ To successfully proxy request to Datadog:
 3. Forward the request to the Datadog intake URL using the POST method.
 4. Leave the request body unchanged.
 
+<div class="alert alert-warning">For security reasons, remove any HTTP headers that potentially contain sensitive information, such as the <code>cookie</code> header.</div>
+
 The site parameter is an SDK [initialization parameter][1]. Datadog intake origins for each site are listed below:
 
 | Site    | Site Parameter            | Datadog intake origin                      |
-| ------- | ------------------------- | ------------------------------------------ |
+|---------|---------------------------|--------------------------------------------|
 | US1     | `datadoghq.com` (default) | `https://browser-intake-datadoghq.com`     |
 | US3     | `us3.datadoghq.com`       | `https://browser-intake-us3-datadoghq.com` |
 | US5     | `us5.datadoghq.com`       | `https://browser-intake-us5-datadoghq.com` |
 | EU1     | `datadoghq.eu`            | `https://browser-intake-datadoghq.eu`      |
 | US1-FED | `ddog-gov.com`            | `https://browser-intake-ddog-gov.com`      |
+| AP1     | `ap1.datadoghq.com`       | `https://browser-intake-ap1-datadoghq.com` |
 
 The Datadog intake origin corresponding to your site parameter should be defined in your proxy implementation.
 

@@ -183,9 +183,18 @@ Possible options:
 
 **Note**: Pod-specific mode takes precedence over the global mode defined at the Admission Controller level.
 
-#### Notes
+## Troubleshooting
 
 - The Admission Controller needs to be deployed and configured before the creation of new application Pods. It cannot update Pods that already exist.
+
+  View the Cluster Agent logs to ensure the Admission Controller has started successfully. Observe the following `INFO` logs:
+
+```
+  <date/time> | CLUSTER | INFO | (pkg/clusteragent/admission/api_discovery.go:122 in useAdmissionV1) | Group version 'admissionregistration.k8s.io/v1' is available, using it
+  <date/time> | CLUSTER | INFO | (pkg/clusteragent/admission/controllers/secret/controller.go:74 in Run) | Starting secrets controller for <namespace>/webhook-certificate
+  <date/time> | CLUSTER | INFO | (pkg/clusteragent/admission/controllers/webhook/controller_v1.go:76 in Run) | Starting webhook
+```
+
 - To disable the Admission Controller injection feature, use the Cluster Agent configuration: `DD_ADMISSION_CONTROLLER_INJECT_CONFIG_ENABLED=false`
 - By using the Datadog Admission Controller, users can skip configuring the application Pods using downward API ([step 2 in Kubernetes Trace Collection setup][3]).
 - Private clusters need specific networking rules because Datadog's Admission Controller webhook receives requests on port `443` and directs to a service on port `8000`:
