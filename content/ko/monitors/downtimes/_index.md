@@ -15,7 +15,7 @@ further_reading:
 - link: /monitors/notify/
   tag: 설명서
   text: 모니터 알림
-kind: 도움말
+kind: documentation
 title: 다운타임
 ---
 
