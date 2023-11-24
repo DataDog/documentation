@@ -133,12 +133,20 @@ See [prerequisites][1] to learn how to enable this feature for Ruby.
 
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
+The thread id is shown as "native thread id (ruby object id)" with the native thread id being the same as `Thread#native_thread_id` (when available) and the ruby object id being `Thread#object_id.`
+
+**Note:** The Ruby VM/your OS may reuse native thread ids.
+
 [1]: /profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
 Lanes on top are runtime activities that may impact performance.
+
+The thread id is shown as "\<unique id\> [#OS thread id]".
+
+**Note:** Your OS may reuse thread ids.
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 See [prerequisites][1] to learn how to enable this feature for PHP.
@@ -148,46 +156,6 @@ There is one lane for the PHP **thread**. Fibers that run in this **thread** are
 Lanes on the top are runtime activities that may add extra latency to your request, due to file compilation and garbage collection.
 
 [1]: /profiler/connect_traces_and_profiles/#prerequisites
-{{< /programming-lang >}}
-{{< /programming-lang-wrapper >}}
-
-## Per-thread information
-
-Depending on the runtime and language, you may be able to see per-thread information in the flame graph view (using the right sidebar), as well as in the timeline view:
-
-{{< programming-lang-wrapper langs="java,ruby,dotnet,python,ddprof" >}}
-{{< programming-lang lang="java" >}}
-
-You can see and filter by the thread name.
-
-{{< /programming-lang >}}
-{{< programming-lang lang="ruby" >}}
-
-You can see and filter by the thread name, as well as the thread id.
-
-The thread id is shown as "native thread id (ruby object id)" with the native thread id being the same as `Thread#native_thread_id` (when available) and the ruby object id being `Thread#object_id.`
-
-**Note:** The Ruby VM/your OS may reuse native thread ids.
-
-{{< /programming-lang >}}
-{{< programming-lang lang="dotnet" >}}
-
-You can see and filter by the thread name, as well as the thread id.
-
-The thread id is shown as "\<unique id\> [#OS thread id]"; the OS thread id is also shown as part of the thread name.
-
-**Note:** Your OS may reuse thread ids.
-
-{{< /programming-lang >}}
-{{< programming-lang lang="python" >}}
-
-You can see and filter by the thread name, as well as the thread id.
-
-{{< /programming-lang >}}
-{{< programming-lang lang="ddprof" >}}
-
-You can see and filter by the OS thread id.
-
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
