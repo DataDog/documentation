@@ -66,6 +66,7 @@ Example:
 ./service_hooks.py \
     --dd-api-key ******************** \
     --circle-token ********************** \
+    --dd-site {{< region-param key="dd_site" code="true" >}} \
     --threads 4
 ```
 
