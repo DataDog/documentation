@@ -31,11 +31,12 @@ Ensure that [Test Visibility][1] is already set up for your language.
 * `jest>=24.8.0`, only when run with `jest-circus`.
 * `mocha>=5.2.0`.
 * `cucumber-js>=7.0.0`.
+* Only [`Istanbul`][1] code coverage is supported.
 
-When tests are instrumented with [Istanbul][1], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically.
 
-To instrument tests with Istanbul, you can use [`nyc`][2].
+When tests are instrumented with [Istanbul][1], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically. To instrument tests with Istanbul, you can use [`nyc`][2].
 
+To report total code coverage from your test sessions, follow these steps:
 
 1. Install `nyc`:
 ```
