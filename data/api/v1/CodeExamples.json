@@ -728,6 +728,13 @@
       "description": "Create an API test with multi subtype returns \"OK - Returns the created test details.\" response"
     }
   ],
+  "EditGlobalVariable": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Edit a global variable returns \"OK\" response"
+    }
+  ],
   "UpdateAPITest": [
     {
       "group": "synthetics",
