@@ -167,7 +167,7 @@ You can see and filter by the thread name, as well as the thread id.
 
 The thread id is shown as "native thread id (ruby object id)" with the native thread id being the same as `Thread#native_thread_id` (when available) and the ruby object id being `Thread#object_id.`
 
-Note that the Ruby VM/your OS may reuse native thread ids.
+**Note:** The Ruby VM/your OS may reuse native thread ids.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
@@ -176,7 +176,7 @@ You can see and filter by the thread name, as well as the thread id.
 
 The thread id is shown as "\<unique id\> [#OS thread id]"; the OS thread id is also shown as part of the thread name.
 
-Note that your OS may reuse thread ids.
+**Note:** Your OS may reuse thread ids.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
