@@ -13,7 +13,7 @@ title: 컨테이너 가이드
     {{< nextlink href="/containers/guide/ad_identifiers" >}}ad_identifiers 파라미터를 사용하여 지정된 컨테이너에 자동탐지 설정 파일 템플릿 적용{{< /nextlink >}}
     {{< nextlink href="/containers/guide/operator-advanced" >}}Datadog Operator 고급 설정{{< /nextlink >}}
     {{< nextlink href="/containers/guide/container-images-for-docker-environments" >}}Docker 환경을 위한 컨테이너 이미지{{< /nextlink >}}
-    {{< nextlink href="/containers/guide/compose-and-the-datadog-agent" >}}컴포즈 및 Datadog Agent{{< /nextlink >}}{{< /nextlink >}}
+    {{< nextlink href="/containers/guide/compose-and-the-datadog-agent" >}}컴포즈 및 Datadog Agent{{< /nextlink >}}
     {{< nextlink href="/containers/guide/docker-deprecation" >}}Kubernetes에서 Docker 사용 중지{{< /nextlink >}}
     {{< nextlink href="/containers/guide/podman-support-with-docker-integration" >}}Podman 컨테이너 런타임으로 Docker 통합 사용{{< /nextlink >}}
     {{< nextlink href="/containers/guide/changing_container_registry" >}}컨테이너 레지스트리 변경{{< /nextlink >}}
