@@ -168,14 +168,13 @@ test('landing page', async ({ page }) => {
 });
 ```
 
-The format of the annotations is the following
+The format of the annotations is the following, where `$TAG_NAME` and `$TAG_VALUE` are *strings* representing tag name and value respectively:
+
 ```json
 {
   "type": "DD_TAGS[$TAG_NAME]",
   "description": "$TAG_VALUE"
 }
-```
-where `$TAG_NAME` and `$TAG_VALUE` are **strings** representing tag name and value respectively.
 
 ### Adding custom metrics to tests
 
@@ -185,22 +184,23 @@ Custom metrics also use custom annotations:
 test('user profile', async ({ page }) => {
   test.info().annotations.push({
     type: 'DD_TAGS[test.memory.allocations]', // DD_TAGS is mandatory and case sensitive
-    description: 16, // this is a number now
+    description: 16, // this is a number
   });
 });
 ```
 
-The format of the annotations is the following
+The format of the annotations is the following, where `$TAG_NAME` is a *string* representing the tag name and `$TAG_VALUE` is a *number* representing the tag value:
+
 ```json
 {
   "type": "DD_TAGS[$TAG_NAME]",
   "description": $TAG_VALUE
 }
 ```
-where `$TAG_NAME` is a **string** representing the tag name and `$TAG_VALUE` is a **number** representing the tag value. **Note**: `description` in annotations are [typed as strings][2]. Numbers will work, but you may need to disable the typing error with `// @ts-expect-error`.
+**Note**: `description` values in annotations are [typed as strings][2]. Numbers also work, but you may need to disable the typing error with `// @ts-expect-error`.
 
 <div class="alert alert-warning">
-  <strong>Important</strong>: the <code>DD_TAGS</code> prefix is mandatory and case sensitive.
+  <strong>Important</strong>: The <code>DD_TAGS</code> prefix is mandatory and case sensitive.
 </div>
 
 [1]: https://playwright.dev/docs/test-annotations#custom-annotations
