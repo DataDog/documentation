@@ -151,6 +151,46 @@ Lanes on the top are runtime activities that may add extra latency to your reque
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
+## Per-thread information
+
+Depending on the runtime and language, you may be able to see per-thread information in the flame graph view (using the right sidebar), as well as in the timeline view:
+
+{{< programming-lang-wrapper langs="java,ruby,dotnet,python,ddprof" >}}
+{{< programming-lang lang="java" >}}
+
+You can see and filter by the thread name.
+
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+
+You can see and filter by the thread name, as well as the thread id.
+
+The thread id is shown as "native thread id (ruby object id)" with the native thread id being the same as `Thread#native_thread_id` (when available) and the ruby object id being `Thread#object_id.`
+
+Note that the Ruby VM/your OS may reuse native thread ids.
+
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+
+You can see and filter by the thread name, as well as the thread id.
+
+The thread id is shown as "\<unique id\> [#OS thread id]"; the OS thread id is also shown as part of the thread name.
+
+Note that your OS may reuse thread ids.
+
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+
+You can see and filter by the thread name, as well as the thread id.
+
+{{< /programming-lang >}}
+{{< programming-lang lang="ddprof" >}}
+
+You can see and filter by the OS thread id.
+
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
