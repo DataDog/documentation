@@ -9,13 +9,13 @@ further_reading:
   text: Datadog 클러스터 에이전트 소개
 - link: https://www.datadoghq.com/blog/autoscale-kubernetes-datadog/
   tag: 블로그
-  text: Datadog 메트릭으로 쿠버네티스(Kubernetes) 워크로드 자동 확장
+  text: 모든 Datadog 메트릭으로 Kubernetes 워크로드 오토스케일링
 - link: /agent/cluster_agent/clusterchecks/
   tag: 설명서
-  text: 자동탐지로 클러스터 점검 실행
+  text: 자동탐지로 클러스터 검사 실행
 - link: /agent/kubernetes/daemonset_setup/
   tag: 설명서
-  text: 쿠버네티스 DaemonSet 설정
+  text: Kubernetes DaemonSet 설정
 - link: /agent/cluster_agent/troubleshooting/
   tag: 설명서
   text: Datadog 클러스터 에이전트 트러블슈팅
