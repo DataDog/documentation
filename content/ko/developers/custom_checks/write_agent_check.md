@@ -40,15 +40,15 @@ class HelloCheck(AgentCheck):
   def check(self, instance):
     self.gauge('hello.world', 1)
 {{< /code-block >}}
-6. [에이전트를 재시작하세요][3]. 1분 이내에`hello.world`라는 [메트릭 요약][4]에서 새 메트릭이 표시됩니다.
+6. [Agent를 재시작하세요][3]. 1분 이내에`hello.world`라는 [메트릭 요약][4]에서 새 메트릭이 표시됩니다.
 
-**참고**: 설정과 점검 파일의 이름이 일치해야 합니다. 검사 이름이 `custom_checkvalue.py`일 경우 설정 파일의 이름을 *반드시* `custom_checkvalue.yaml`로 지정해야 합니다.
+**참고**: 설정과 검사 파일의 이름이 일치해야 합니다. 검사 이름이 `custom_checkvalue.py`인 경우 설정 파일의 이름을 *반드시* `custom_checkvalue.yaml`로 지정해야 합니다.
 
 ### 결과
 
 1분 이내에 `1` 값을 전송하는 `hello.world`라는 [메트릭 요약][4]에 새 메트릭이 표시됩니다.
 
-**참고**: 커스텀 검사 이름을 선택할 때 기존 Datadog 에이전트 통합의 이름과 겹치지 않도록 `custom_`를 접두사로 추가해야 합니다. 예를 들어 커스텀 Postfix 검사가 있는 경우 검사 파일의 이름을 `postfix.py` 및 `postfix.yaml` 대신 `custom_postfix.py`및 `custom_postfix.yaml`로 지정합니다.
+**참고**: 커스텀 검사 이름을 선택할 때 기존 Datadog Agent 통합의 이름과 겹치지 않도록 `custom_`를 접두사로 추가해야 합니다. 예를 들어 커스텀 Postfix 검사가 있는 경우 검사 파일의 이름을 `postfix.py` 및 `postfix.yaml` 대신 `custom_postfix.py`및 `custom_postfix.yaml`로 지정합니다.
 
 ### 수집 간격 업데이트
 
