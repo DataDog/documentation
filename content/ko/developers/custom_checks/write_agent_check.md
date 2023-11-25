@@ -52,7 +52,7 @@ class HelloCheck(AgentCheck):
 
 ### 수집 간격 업데이트
 
-검사의 수집 간격을 변경하려면 `custom_checkvalue.yaml` 파일에서 `min_collection_interval`을 사용합니다. 기본값은 `15`입니다. 에이전트 v6의 경우 인스턴스 레벨에서 `min_collection_interval`를 추가하고 인스턴스 당 개별적으로 설정해야 합니다. 예:
+검사의 수집 간격을 변경하려면 `custom_checkvalue.yaml` 파일에서 `min_collection_interval`을 사용합니다. 기본값은 `15`입니다. Agent v6의 경우 인스턴스 레벨에서 `min_collection_interval`를 추가하고 인스턴스 당 개별적으로 설정해야 합니다. 예:
 
 {{< code-block lang="yaml" filename="conf.d/custom_checkvalue.yaml" >}}
 init_config:
@@ -61,17 +61,17 @@ instances:
   - min_collection_interval: 30
 {{< /code-block >}}
 
-**참고**: `min_collection_interval`이 `30`로 설정되어 있으면 메트릭이 30초마다 수집되는 것이 아니라 30초마다 가능한 자주 수집되는 것입니다. 컬렉터는 30초마다 검사를 실행하나 동일한 에이전트에 활성화되어 있는 통합과 검사 수에 따라 대기해야 할 수도 있습니다.  또한 `check` 방식이 완료되는 데 30초 이상 걸릴 경우 에이전트는 검사가 실행 중임을 인지하고 다음 간격까지 실행을 건너뜁니다.
+**참고**: `min_collection_interval`이 `30`로 설정되어 있으면 메트릭이 30초마다 수집되는 것이 아니라 30초마다 가능한 자주 수집되는 것입니다. 컬렉터는 30초마다 검사를 실행하나 동일한 Agent에 활성화되어 있는 통합과 검사 수에 따라 대기해야 할 수도 있습니다.  또한 `check` 방식이 완료되는 데 30초 이상 걸릴 경우 Agent는 검사가 실행 중임을 인지하고 다음 간격까지 실행을 건너뜁니다.
 
-### 점검 확인하기
+### 검사 확인하기
 
-점검이 실행 중인지 확인하려면 다음 명령어를 사용하세요.
+검사가 실행 중인지 확인하려면 다음 명령어를 사용하세요.
 
 {{< code-block lang="shell" >}}
 sudo -u dd-agent -- datadog-agent check <CHECK_NAME>
 {{< /code-block >}}
 
-검사가 실행 중인 것을 확인하면 [에이전트를 다시 시작][3]하여 검사를 포함시키고 데이터를 Datadog에 보고하기 시작합니다.
+검사가 실행 중인 것을 확인하면 [Agent를 다시 시작][3]하여 검사를 포함시키고 데이터를 Datadog에 보고하기 시작합니다.
 
 ## 명령줄 프로그램을 실행하는 검사 작성
 
@@ -143,16 +143,16 @@ instances:
   - ipaddress: 1.2.3.4
 {{< /code-block >}}
 
-1. [에이전트를 다시 시작합니다][3]. 1분 이내에 로드 밸런서에서 메트릭을 전송하는`coreapp.update.value` [메트릭 요약][4]에 새 메트릭이 표시됩니다.
+1. [Agent를 다시 시작합니다][3]. 1분 이내에 로드 밸런서에서 메트릭을 전송하는`coreapp.update.value` [메트릭 요약][4]에 새 메트릭이 표시됩니다.
 1. 이 메트릭에 대한 [대시보드를 생성][6]합니다.
 
-## 에이전트 버전 지정
+## Agent 버전 지정
 
 다음 try/except 블록을 사용하여 커스텀 검사가 모든 에이전트 버전과 호환되도록 설정합니다:
 
 {{< code-block lang="python" >}}
 try:
-    # 먼저 새 버전의  Agent에서 기본 클래스를 가져옵니다.
+    # 먼저 새 버전의 Agent에서 기본 클래스를 가져옵니다.
     from datadog_checks.base import AgentCheck
 except ImportError:
     # 위에서 실패한 경우 Agent 버전 6.6.0 미만에서 검사가 실행 중입니다.
