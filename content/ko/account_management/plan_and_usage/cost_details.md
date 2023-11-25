@@ -2,13 +2,13 @@
 further_reading:
 - link: https://docs.datadoghq.com/account_management/billing/
   tag: 설명서
-  text: 빌링
+  text: 청구
 - link: https://docs.datadoghq.com/account_management/billing/usage_details/
   tag: 설명서
   text: 사용량 상세 정보
 - link: https://docs.datadoghq.com/account_management/multi_organization/
   tag: 설명서
-  text: 다수-조직 계정 관리
+  text: 다수 조직 계정 관리
 kind: 도움말
 title: 비용 상세 정보
 ---
@@ -54,7 +54,7 @@ Cost Summary 및 Cost Chargebacks 데이터를 보려면 Datadog 어드민 사�
 
 #### 다운로드
 
-쉼표로 구분된 값의 파일로 데이터를 다운로드하려면 **Download as CSV**을 클릭합니다. 데이터는 현재 월과 미리 정의된 이전 월에 사용할 수 있습니다. `Cost Type` 필드를 사용하여 기록을 구분합니다:
+쉼표로 구분된 값의 파일로 데이터를 다운로드하려면 **Download as CSV**를 클릭합니다. 데이터는 이번 달과 미리 정의된 이전 달에 사용할 수 있습니다. `Cost Type` 필드를 사용하여 기록을 구분합니다:
 - **Projected**: 이번 달의 데이터를 사용할 수 있습니다.
 - **Estimated MTD**: 데이터는 매월 1일부터 현재 날짜까지 사용할 수 있습니다. 이전 달의 과거 비용 데이터를 아직 사용할 수 없는 경우 이전 달의 예상 비용 데이터도 표시됩니다.
 - **Historical**: 데이터는 월 마감 후, 즉 월말로부터 약 16일 후에 사용할 수 있습니다.
