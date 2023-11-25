@@ -80,7 +80,7 @@ title: 모니터 경고 트러블슈팅
 #### Opsgenie 다중 알림
 
 모니터에서 여러 개의 `@opsgenie-[...]` 알림을 사용하는 경우 동일한 별칭을 가진 알림을 Opsgenie로 보냅니다.
-[Opsgenie 기능][19]으로 인해 Opsgenie는 중복으로 표시된 것을 삭제합니다.
+[Opsgenie 기능][19]을 통해 중복으로 표시되는 것은 Opsgenie가 삭제합니다. 
 
 ## 참고 자료
 
