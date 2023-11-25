@@ -3,7 +3,7 @@ kind: 도움말
 title: Orchestrator Explorer
 ---
 
-{{< img src="infrastructure/livecontainers/orch_ex.png" alt="쿠버네티스(Kubernetes) 파드를 보여주는 Orchestrator 탐색기." style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/orch_ex.png" alt="Kubernetes 파드를 보여주는 Orchestrator Explorer." style="width:80%;">}}
 
 ## 개요
 
