@@ -11,7 +11,7 @@ further_reading:
   text: Datadog API에 대해 알아보기
 - link: https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices
   tag: 모범 사례
-  text: 우수한 통합 대시보드 생성
+  text: 뛰어난 통합 대시보드 생성
 - link: https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/
   tag: 블로그
   text: DRUIDS, Datadog를 지원하는 설계 시스템
