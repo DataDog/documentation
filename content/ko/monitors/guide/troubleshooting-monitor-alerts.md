@@ -1,14 +1,14 @@
 ---
 further_reading:
 - link: https://docs.datadoghq.com/monitors/guide/alert-on-no-change-in-value/
-  tag: 길라잡이
-  text: 값 변경 없음 경고
+  tag: 가이드
+  text: 값에 변화가 없을 때 경고
 - link: https://docs.datadoghq.com/monitors/guide/set-up-an-alert-for-when-a-specific-tag-stops-reporting/
-  tag: 길라잡이
-  text: 특정 태그가 보고를 멈출 때 경고가 울리도록 설정하기
+  tag: \u0008가이드
+  text: 특정 태그가 보고를 멈출 때 경고하도록 설정
 - link: https://docs.datadoghq.com/monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime/
-  tag: 길라잡이
-  text: 다운타임 중인 모니터에서 알림 방지
+  tag: 가이드
+  text: 다운타임 중인 모니터에서 경고 억제
 - link: https://www.datadoghq.com/blog/datadog-recommended-monitors/
   tag: 블로그
   text: 권장 모니터로 미리 설정된 경고 사용
