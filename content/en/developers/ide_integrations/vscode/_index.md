@@ -27,6 +27,11 @@ The **Code Insights** view keeps you informed about:
 - [Flaky tests][12] detected by CI Visibility
 - Profiling insights from [Watchdog Insights][13]
 
+The **Static Analysis** feature improves code quality and security by:
+- Highlighting issues in code, color-coded by severity
+- Suggesting fixes
+- Automatically applying fixes through [Code Actions][17]
+
 The **Synthetic Tests** feature allows you to:
 - Run Synthetic tests on your local environments
 - Set custom parameters without altering the original test definition
@@ -54,6 +59,13 @@ Code Insights include a detailed description for each issue, and links to:
 - The Datadog platform for additional information
 
 You can dismiss individual insights and set filters to view the categories of insights that you are most interested to see.
+
+## Static Analysis
+<div class="alert alert-warning">
+  Static Analysis is only supported in Python.
+</div>
+
+[**Static Analysis**][14] improves the quality and security of code by enforcing [rules][15] such as "do not use insecure encryption protocols". If Static Analysis is [set up in the repository][16], the Datadog extension will highlight rule violations and suggest fixes.
 
 ## Synthetic Tests
 The Datadog extension enables you to [run Synthetic HTTP tests and browser tests on local environments][1] directly in the IDE. You can identify and address potential issues resulting from code changes before they are deployed into production and impact your end users.
@@ -105,3 +117,7 @@ To share your feedback, email [team-ide-integration@datadoghq.com][9].
 [11]: /security/application_security/vulnerability_management/
 [12]: /continuous_integration/guides/flaky_test_management/
 [13]: /watchdog/insights
+[14]: /continuous_integration/static_analysis/?tab=circleciorbs
+[15]: /continuous_integration/static_analysis/rules
+[16]: /continuous_integration/static_analysis/?tab=circleciorbs#setup
+[17]: https://code.visualstudio.com/docs/editor/refactoring#_code-actions-quick-fixes-and-refactorings
