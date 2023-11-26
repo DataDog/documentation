@@ -106,7 +106,7 @@ To get started setting up CSM, navigate to the [**Security** > **Setup**][4] sec
 
 [1]: /security/cloud_security_management/setup/csm_enterprise
 [2]: /security/cloud_security_management/setup/csm_pro
-[3]: /security/cloud_security_management/setup/csm_workload_security
+[3]: /security/cloud_security_management/setup/csm_workload_security/
 [4]: https://app.datadoghq.com/security/configuration/csm/setup
 [5]: /security/identity_risks/#setup
 [6]: /security/infrastructure_vulnerabilities/setup
