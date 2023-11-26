@@ -1,8 +1,8 @@
 ---
 algolia:
   tags:
-  - SCIM
-  - ID 공급자
+  - scim
+  - identity provider
   - IdP
 further_reading:
 - link: /account_management/scim/azure/
@@ -11,7 +11,7 @@ further_reading:
 - link: account_management/scim/okta
   tag: 설명서
   text: Okta로 SCIM 설정
-kind: 설명서
+kind: documentation
 title: SCIM을 이용한 사용자 프로비저닝
 ---
 
@@ -24,7 +24,7 @@ title: SCIM을 이용한 사용자 프로비저닝
 - Datadog에서 사용자 생성 (첫 로그인을 위해서는 이메일 인증이 필요합니다, [이메일 인증][1] 참조)
 - 더 이상 액세스가 필요하지 않은 경우 Datadog에서 사용자 제거
 - ID 공급자와 Datadog 간에 사용자 속성 동기화 유지
-- Datadog에 통합 인증 (recommended)
+- Datadog에 통합 인증 (권장)
 
 Datadog은 Azure Active Directory (Azure AD) 및 Okta ID 공급자와 함께 SCIM 사용을 지원합니다. SCIM을 구성하려면 해당 IdP의 설명서를 참조하세요:
 - [Azure AD][2]
@@ -48,7 +48,7 @@ SCIM을 활성화하려면 [애플리케이션 키][5]를 사용하여 ID 공급
 
 데이터에 대한 액세스 권한을 잃지 않으려면 SCIM 전용 [서비스 계정][6]을 생성할 것을 강력히 권장합니다. 해당 서비스 계정 내에서 SCIM 통합에 사용할 애플리케이션 키를 생성합니다.
 
-## 이메일 확인
+## 이메일 인증
 
 SCIM으로 새 사용자를 만들면 해당 사용자에게 이메일이 전송됩니다. 처음 액세스하려면 이메일로 공유된 초대 링크를 통해 로그인해야 합니다. 이 링크는 30일 동안 유효합니다. 링크가 만료되면 [사용자 설정 페이지][7]로 이동하여 초대 링크를 다시 보낼 사용자를 선택합니다.
 
