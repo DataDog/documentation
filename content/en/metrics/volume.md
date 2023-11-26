@@ -16,9 +16,7 @@ further_reading:
 
 ## Overview
 
-The [Metrics Summary page][1] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. 
-
-Search your metrics by metric name or tag using the **Metric** or **Tag** search fields:
+The [Metrics Volume page][1] displays a list of your top metrics by cardinality and change in volume. Search your top metrics by metric name or tag using the **Metric** or **Tag** search fields:
 
 {{< img src="metrics/summary/tag_advancedfiltering.mp4" alt="The metrics summary page with NOT team:* entered in the Tag search bar" video=true style="width:75%;">}}
 
@@ -172,7 +170,7 @@ More aggregations are available should they be valuable to you. You can add or r
 {{< partial name="whats-next/whats-next.html" >}}
 
 [10]: /metrics/metrics-without-limits
-[1]: https://app.datadoghq.com/metric/summary
+[1]: https://app.datadoghq.com/metric/volume
 [2]: /metrics/explorer/
 [3]: /dashboards/
 [4]: /metrics/custom_metrics/
