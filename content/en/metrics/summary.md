@@ -30,11 +30,15 @@ Tag filtering supports boolean and wildcard syntax so that you can quickly ident
 ## Facet panel
 
 The search bars provide the most comprehensive set of actions to filter the list of metrics. But facets can also quickly filter your metrics by:
-* **Configuration** : Quickly identify metrics with tag configurations or additional percentile aggregations
+* **Configuration** : Quickly identify metrics with tag configurations
+* **Percentiles** : Quickly identify metrics with additional percentile aggregations
+* **Historical Metrics** : Quickly identify metrics that are disabled historical metrics
+* **Query Activity** : Quickly identify metrics that have not been queried on Datadog products in the past 30 days
 * **Metric Type** : Quickly identify distributions vs non-distributions (counts, gauges, rates)
-* **Distribution Metric Origin**: Quickly identify which product the distribution metrics have originated from (for example, Generate Metrics from Logs, Generate Metrics from Spans, etc.) 
+* **Distribution Metric Origin**: Quickly identify which product the distribution metrics have originated from (for example, Generate Metrics from Logs, Generate Metrics from Spans, etc.)
+* **
 
-{{< img src="metrics/summary/facets2.jpg" alt="Metrics Facet Panel" style="width:75%;">}}
+{{< img src="metrics/summary/facets3.jpg" alt="Metrics Facet Panel" style="width:75%;">}}
 
 
 ## Configuration of multiple metrics 
