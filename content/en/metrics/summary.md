@@ -44,7 +44,7 @@ The search bars provide the most comprehensive set of actions to filter the list
 ## Configuration of multiple metrics 
 There are two buttons that allow you to configure multiple metrics at a time: 
 
-{{< img src="metrics/summary/configurationbuttons.jpg" alt="Bulk Configuration Buttons" style="width:75%;">}}
+{{< img src="metrics/summary/configurationbuttons2.jpg" alt="Bulk Configuration Buttons" style="width:75%;">}}
 
 * **Calculate Percentiles**: Add percentile aggregations to multiple distribution metrics.
 
