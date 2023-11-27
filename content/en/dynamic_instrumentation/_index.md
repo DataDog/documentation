@@ -147,11 +147,11 @@ A *metric probe* emits a metric when it executes.
 
 Metric probes are automatically enabled on all service instances that match the configured environment and version. Metric probes are not rate limited and execute every time the method or line is invoked.
 
-Dynamic Instrumentation metric probes support the following [metric types][17]:
+Dynamic Instrumentation metric probes support the following metric types:
 
-- **Count**: Counts how many times a given method or line is executed. Can be combined with [metric expressions][15] to use the value of a variable to increment the count.
-- **Gauge**: Generates a gauge based on the last value of a variable. This metric requires a [metric expression][15].
-- **Histogram**: Generates a statistical distribution of a variable. This metric requires a [metric expression][15].
+- [**Count**][1]: Counts how many times a given method or line is executed. Can be combined with [metric expressions][15] to use the value of a variable to increment the count.
+- [**Gauge**][2]: Generates a gauge based on the last value of a variable. This metric requires a [metric expression][15].
+- [**Histogram**][3]: Generates a statistical distribution of a variable. This metric requires a [metric expression][15].
 
 To create a metric probe:
 
@@ -216,4 +216,3 @@ To create a span tag probe:
 [14]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
 [15]: /dynamic_instrumentation/expression-language
 [16]: https://app.datadoghq.com/dynamic-instrumentation/setup
-[17]: /metrics/types/
