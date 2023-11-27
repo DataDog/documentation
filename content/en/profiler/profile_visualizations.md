@@ -133,12 +133,21 @@ See [prerequisites][1] to learn how to enable this feature for Ruby.
 
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
+The thread ID is shown as `native-thread-id (ruby-object-id)` where the native thread ID is `Thread#native_thread_id` (when available) and the Ruby object ID is `Thread#object_id`.
+
+**Note**: The Ruby VM or your operating system might reuse native thread IDs.
+
 [1]: /profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
 Lanes on top are runtime activities that may impact performance.
+
+The thread ID is shown as `<unique-id> [#OS-thread-id]`.
+
+**Note**: Your operating system might reuse thread IDs.
+
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 See [prerequisites][1] to learn how to enable this feature for PHP.

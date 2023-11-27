@@ -1,30 +1,42 @@
 ---
 title: Datadog Resource Catalog
 kind: documentation
+is_beta: true
 aliases:
   - /security_platform/cspm/resource_catalog
   - /security/cspm/resource_catalog
+  - /security/misconfigurations/resource_catalog
 further_reading:
-- link: "/security/misconfigurations/custom_rules/schema/"
+- link: "/security/misconfigurations/"
   tag: "Documentation"
-  text: "Cloud Resource Schema"
+  text: "Cloud Security Management Misconfigurations"
+- link: "/security/threats/"
+  tag: "Documentation"
+  text: "Cloud Security Management Threats"
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">
-Resource Catalog is not currently available in this site.
+Resource Catalog is not available in this site.
 </div>
 {{< /site-region >}}
+
+<div class="alert alert-info">Resource Catalog is in beta.</div>
+
+## Overview
 
 Datadog Resource Catalog provides a high-level overview of the hosts and resources in your cloud and hybrid environments. View information such as tags, configuration details, relationships between assets, misconfigurations, and threats. See what team is responsible for each resource, and what security misconfigurations have been reported. Access dashboards and Datadog views that receive and monitor telemetry and security data for each resource.
 
 Resource Catalog leverages Datadog cloud integrations and the Datadog Agent to gather data from cloud resources such as databases, storage services, and hosts.
 
-{{< img src="security/cspm/resource_catalog/resource_catalog2.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and region." style="width:100%;" >}}
+{{< img src="/infrastructure/resource_catalog/resource_catalog_2.png" alt="The Resource Catalog page showing the Inventory tab, sorting by service" width="100%">}}
 
-## Adding resources to Resource Catalog
+## Setup
 
-For cloud resources to appear in the Resource Catalog, enable [Cloud Security Management][1] for each cloud account.
+By default, when you navigate to the Resource Catalog, you are able to see Datadog Agent monitored hosts, as well as cloud resources crawled for other Datadog products such as NPM (Network Performance Monitoring), and DBM (Database Monitoring). To view additional cloud resources in the Resource Catalog, enable resource collection from the [Resource Catalog][5] setup page. To gain insights into your security risks, enable [Cloud Security Management][1] for each cloud account.
+
+**Note**: Enabling Cloud Security Management automatically enables resource collection for the Resource Catalog Inventory tab.
+Enabling resource collection for the Resource Catalog does _not_ enable the CSM product.
 
 The Resource Catalog is useful for:
 
@@ -38,8 +50,8 @@ The Resource Catalog is useful for:
 
 On the [Resource Catalog page][2], explore the cloud resources in your Datadog organization. The catalog detects a resource either because it has an Agent installed on it, or because a cloud integration is configured on it. Information about the resources in your organization is shown in the ownership and security tabs, with two views: List and Map.
 
-**Ownership Tab**:
-The ownership tab allows you to understand the resource ownership information such as team, service, on-call, and contact. This page allows users to proactively identify lack of ownership information and resolve it prior to an incident occurring. 
+**Inventory Tab**:
+The Inventory tab shows context for a resource, including team ownership and related services. It helps you proactively identify and provide missing ownership information before you need it in an incident. The Resource Catalog shows configuration information customized for each resource type. You can search resources by specific configuration attributes such as `instance_type` for a host, or a `version` for a database.
 
 **Security Tab**:
 The security tab allows you to gain a clear understanding of resources with security risk. By viewing misconfigurations and threats associated with resources, you can address the issue without needing to spend time and effort to gather security context. 
@@ -82,7 +94,12 @@ Click the **Share** button and select **Share event** to share a link to the cur
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management
+[1]: /security/cloud_security_management/setup
 [2]: https://app.datadoghq.com/infrastructure/catalog
 [3]: /integrations/#cat-notification
 [4]: /account_management/teams
+[5]: https://app.datadoghq.com/infrastructure/catalog/configuration
+
+
+
+
