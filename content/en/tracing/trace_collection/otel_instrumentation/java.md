@@ -21,7 +21,7 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 | Feature                               | Support notes                       |
 |---------------------------------------|-------------------------------------------|
-| [OpenTelemetry Context propagation][1]         | [Datadog distributed header format][9] is used instead. | 
+| [OpenTelemetry Context propagation][1]  | Requires `dd-trace-java` version 1.24.0 or greater. Otherwise, use [Datadog distributed header format][9]. | 
 | [Span processors][2]                  | Unsupported                                          | 
 | [Span Exporters][3]                   | Unsupported                                            |
 | Trace/span [ID generators][4]         | ID generation is performed by `ddtrace`.           |
