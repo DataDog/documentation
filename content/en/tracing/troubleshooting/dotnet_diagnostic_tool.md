@@ -46,18 +46,6 @@ For most applications, use the process diagnostics to find the problem.
 
 Example output with no issues:
 ```bash
-$ dd-dotnet check process 16436
-
-Running checks on process 16436
-Target process is running with .NET Framework
-Detected agent url: http://127.0.0.1:8126/. Note: this url may be incorrect if you configured the application through a configuration file.
-Connecting to Agent at endpoint http://127.0.0.1:8126/ using HTTP
-Detected agent version 7.32.4
-No issue found with the target process.
-```
-
-Example output with issues:
-```bash
 $ dd-dotnet check process 35888
 
 Running checks on process 35888
@@ -94,6 +82,41 @@ configuration file.
 Connecting to Agent at endpoint http://127.0.0.1:8126/ using HTTP
 Detected agent version 7.48.0
  [SUCCESS]: No issue found with the target process.
+```
+
+Example output with issues:
+```bash
+$ dd-dotnet check process 4464
+
+Running checks on process 4464
+Process name: SimpleApp
+
+---- STARTING TRACER SETUP CHECKS -----
+Target process is running with .NET Core
+1. Checking Modules Needed so the Tracer Loads:
+ [WARNING]: The native loader library is not loaded into the process
+ [WARNING]: The native tracer library is not loaded into the process
+ [WARNING]: Tracer is not loaded into the process
+2. Checking DD_DOTNET_TRACER_HOME and related configuration value:
+ [WARNING]: DD_DOTNET_TRACER_HOME is set to 'C:\Program Files\Datadog\.NET Tracer\' but the directory does not exist.
+3. Checking CORECLR_PROFILER_PATH and related configuration value:
+ [FAILURE]: The environment variable CORECLR_PROFILER_PATH_32 is set to C:\Program Files\Datadog\.NET
+Tracer\win-x86\Datadog.Trace.ClrProfiler.Native.dll but the file is missing or you don't have sufficient permission.
+ [FAILURE]: The environment variable CORECLR_PROFILER_PATH_64 is set to C:\Program Files\Datadog\.NET
+Tracer\win-x64\Datadog.Trace.ClrProfiler.Native.dll but the file is missing or you don't have sufficient permission.
+4. Checking CORECLR_PROFILER and related configuration value:
+ [SUCCESS]: The environment variable CORECLR_PROFILER is set to the correct value of
+{846F5F1C-F9AE-4B07-969E-05C26BC060D8}.
+5. Checking CORECLR_ENABLE_PROFILING and related configuration value:
+ [FAILURE]: The environment variable CORECLR_ENABLE_PROFILING should be set to '1' (current value: not set)
+6. Checking if process tracing configuration matches Installer or Bundler:
+Installer/MSI related documentation:
+https://docs.datadoghq.com/tracing/trace_collection/dd_libraries/dotnet-core/?tab=windows#install-the-tracer
+ [FAILURE]: Unable to find Datadog .NET Tracer program, make sure the tracer has been properly installed with the MSI.
+ [WARNING]: The registry key SOFTWARE\Classes\CLSID\{846F5F1C-F9AE-4B07-969E-05C26BC060D8}\InprocServer32 is missing. If
+using the MSI, make sure the installation was completed correctly try to repair/reinstall it.
+ [WARNING]: The registry key SOFTWARE\Classes\Wow6432Node\CLSID\{846F5F1C-F9AE-4B07-969E-05C26BC060D8}\InprocServer32 is
+missing. If using the MSI, make sure the installation was completed correctly try to repair/reinstall it.
  ```
 
 
