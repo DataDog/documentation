@@ -1483,6 +1483,27 @@ main:
     parent: workflows
     identifier: workflows_connections
     weight: 5
+  - name: App Builder
+    url: service_management/app_builder/
+    pre: app-builder
+    identifier: app_builder
+    parent: service_management_heading
+    weight: 80000
+  - name: Build Apps
+    url: service_management/app_builder/build/
+    parent: app_builder
+    identifier: app_builder_build
+    weight: 1
+  - name: Authentication
+    url: service_management/app_builder/auth/
+    parent: app_builder
+    identifier: app_builder_access
+    weight: 2
+  - name: Embedded Apps
+    url: service_management/app_builder/embedded_apps/
+    parent: app_builder
+    identifier: app_builder_embedded_apps
+    weight: 4
   - name: APM
     url: tracing/
     pre: apm
@@ -3055,6 +3076,10 @@ main:
     url: observability_pipelines/setup/datadog
     parent: observability_pipelines_setup
     weight: 101
+  - name: Datadog with Archiving
+    url: observability_pipelines/setup/datadog_with_archiving
+    parent: observability_pipelines_setup
+    weight: 102
   - name: Splunk
     url: observability_pipelines/setup/splunk
     parent: observability_pipelines_setup
@@ -3104,6 +3129,21 @@ main:
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_sinks
     weight: 503
+  - name: Datadog Processing Language
+    url: observability_pipelines/reference/processing_language/
+    parent: observability_pipelines_reference
+    identifier: observability_pipelines_reference_processing_language
+    weight: 3
+  - name: Functions
+    url: observability_pipelines/reference/processing_language/functions/
+    parent: observability_pipelines_reference_processing_language
+    identifier: observability_pipelines_reference_processing_language_functions
+    weight: 1
+  - name: Errors
+    url: observability_pipelines/reference/processing_language/errors/
+    parent: observability_pipelines_reference_processing_language
+    identifier: observability_pipelines_reference_processing_language_errors
+    weight: 2
   - name: Guides
     url: observability_pipelines/guide/
     parent: observability_pipelines
