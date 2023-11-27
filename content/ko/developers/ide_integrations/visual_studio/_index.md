@@ -1,5 +1,5 @@
 ---
-description: .NET 개발자를 위한 Datadog 확장
+description: .NET 개발자를 위한 Datadog 확장 기능
 disable_toc: false
 further_reading:
 - link: /getting_started/profiler/
@@ -7,11 +7,11 @@ further_reading:
   text: 지속적인 프로파일러 시작하기
 is_beta: true
 kind: documentation
-title: Visual Studio를 위한 Datadog 확장
+title: Visual Studio를 위한 Datadog 확장 기능
 ---
 
 {{< callout url="#" btn_hidden="true">}}
-  Visual Studio용 Datadog 확장 프로그램은 공개 베타 버전입니다. 이 프로그램은 .NET 서비스에서 <a href="https://docs.datadoghq.com/profiler/#pagetitle">지속적인 프로파일러</a>를 사용하는 .NET 개발자를 대상으로 합니다. 예기치 않게 플러그인이 작동을 멈추면 업데이트를 확인하거나 <a href=#feedback>관련 팀에 문의하세요</a>.
+  Visual Studio용 Datadog 확장 기능은 공개 베타 버전입니다. 이 프로그램은 .NET 서비스에서 <a href="https://docs.datadoghq.com/profiler/#pagetitle">지속적인 프로파일러</a>를 사용하는 .NET 개발자를 대상으로 합니다. 예기치 않게 플러그인이 작동을 멈추면 업데이트를 확인하거나 <a href=#feedback>관련 팀에 문의하세요</a>.
 {{< /callout >}}
 
 ## 개요
@@ -40,14 +40,14 @@ Visual Studio용 Datadog 확장 기능은 실시간 통합 가시성 데이터�
 
 ## 시작하기
 
-### 확장 프로그램 다운로드 및 설치
+### 확장 기능 다운로드 및 설치
 
 1. Visual Studio에서 **Extensions** > **Manage Extensions**로 이동합니다.
 2. `Datadog`를 검색합니다. 
 3. **Download**를 클릭합니다.
 4. Visual Studio를 재시작합니다.
 
-또는 공식 [Visual Studio Marketplace][4]에서 확장 프로그램을 다운로드 받을 수 있습니다.
+또는 공식 [Visual Studio Marketplace][4]에서 확장 기능을 다운로드 받을 수 있습니다.
 
 ### Datadog 계정으로 로그인합니다.
 
