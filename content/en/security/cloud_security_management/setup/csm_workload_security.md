@@ -17,7 +17,7 @@ The Cloud Security Management (CSM) Workload Security package includes [CSM Thre
 
 ## Prerequisites
 
-{{% csm-prereqs-enterprise-ws %}}
+{{% csm-prereqs-workload-security %}}
 
 ## Installation
 
@@ -41,7 +41,7 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
 
 To enable CSM Workload Security on the Agent, navigate to the [**Cloud Security Management Setup** page][6] and click **Hosts and containers**.
 
-{{< img src="security/csm/hosts_containers_setup.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
+{{< img src="security/csm/hosts_containers_setup_2.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
 
 For each version of the Agent that is installed, click **Enable** and follow the step-by-step instructions to enable CSM Workload Security.
 
@@ -352,3 +352,5 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 [4]: /agent/remote_config
 [5]: /agent/remote_config/?tab=environmentvariable#enabling-remote-configuration
 [6]: https://app.datadoghq.com/security/configuration/csm/setup
+[15]: /security/cloud_security_management/troubleshooting
+[14]: /agent

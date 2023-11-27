@@ -30,12 +30,12 @@ This guide walks you through best practices for getting your team up and running
 
 ## Phase 1: Deployment
 
-1. Install the [Datadog Agent (version 7.44 or above)][4].
+1. Install the [Datadog Agent (version 7.46 or above)][4].
 2. Enable CSM for for your cloud resources and infrastructure:
     - **CSM Threats**: [Kubernetes][5], [Docker][6], and [host-based][7] installations.
     - **CSM Misconfigurations**: [AWS][10], [Azure][11], [GCP][12], [Kubernetes][8], and [Docker][9] instructions.
     - **CSM Identity Risks**: Enable [AWS resource collection][26] and [Cloudtrail logs forwarding][27].
-    - **CSM Infrastructure Vulnerabilities**: [Container image scanning][23] and [host scanning][24] instructions for Kubernetes, ECS EC2 instances, and host-based installations.
+    - **CSM Vulnerabilities**: [Container image scanning][23] and [host scanning][24] instructions for Kubernetes, ECS EC2 instances, and host-based installations.
 3. Check out the [CSM homepage][13] to get an overview of your organization's risks and threats.
 4. Review [500+ out-of-the-box Threats and Misconfigurations detection rules][14].
 5. Explore [security signals][15] and review [CSM Misconfigurations findings][16].
@@ -80,8 +80,8 @@ This guide walks you through best practices for getting your team up and running
 [20]: /security/threats/agent_expressions
 [21]: /security/misconfigurations/frameworks_and_benchmarks
 [22]: /dashboards/#overview
-[23]: /security/infrastructure_vulnerabilities/setup?tab=kubernetes#setup-for-container-image-scanning
-[24]: /security/infrastructure_vulnerabilities/setup?tab=kubernetes#setup-for-host-vulnerability-scanning
+[23]: /security/cloud_security_management/setup/csm_pro?tab=aws#configure-csm-for-container-vulnerabilities
+[24]: /security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-csm-for-vulnerabilities
 [25]: https://app.datadoghq.com/containers/images
 [26]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
 [27]: /integrations/amazon_cloudtrail/#send-logs-to-datadog
