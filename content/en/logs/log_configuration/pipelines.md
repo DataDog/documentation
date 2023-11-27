@@ -209,7 +209,9 @@ It's also possible to copy an integration pipeline using the clone button.
 
 ### Processors
 
-A processor executes within a pipeline to complete a data-structuring action. See the [Processors docs][3] to learn how to add and configure a processor by processor type, within the app or with the API.
+A processor executes within a pipeline to complete a data-structuring action. See the [Processors docs][3] to learn how to add and configure a processor by processor type, within the app or with the API. 
+
+See [Parsing dates][11] on how to parse a custom date and time format and for information on the `timezone` parameter, which is needed if your timestamps are not in UTC.
 
 ### Nested pipelines
 
@@ -256,3 +258,4 @@ Estimated usage metrics are displayed per pipeline - specifically, the volume an
 [8]: https://app.datadoghq.com/logs/pipelines/remapping
 [9]: /integrations/#cat-log-collection
 [10]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
+[11]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
