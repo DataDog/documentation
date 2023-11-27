@@ -26,6 +26,8 @@ For a suspect commit to be displayed on an issue, at least one candidate commit 
 
 ## Setup
 
+Once the setup requirements are met, suspect commits automatically appear on issues where available. Commits made before the setup requirements were met are not displayed.
+
 ### Enable Source Code Integration
 
 The Suspect Commits feature requires [Source Code Integration][3]. To enable Source Code Integration:
