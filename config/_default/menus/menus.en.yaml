@@ -1483,6 +1483,27 @@ main:
     parent: workflows
     identifier: workflows_connections
     weight: 5
+  - name: App Builder
+    url: service_management/app_builder/
+    pre: app-builder
+    identifier: app_builder
+    parent: service_management_heading
+    weight: 80000
+  - name: Build Apps
+    url: service_management/app_builder/build/
+    parent: app_builder
+    identifier: app_builder_build
+    weight: 1
+  - name: Authentication
+    url: service_management/app_builder/auth/
+    parent: app_builder
+    identifier: app_builder_access
+    weight: 2
+  - name: Embedded Apps
+    url: service_management/app_builder/embedded_apps/
+    parent: app_builder
+    identifier: app_builder_embedded_apps
+    weight: 4
   - name: APM
     url: tracing/
     pre: apm
