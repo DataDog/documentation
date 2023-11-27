@@ -37,7 +37,7 @@ To create a Datadog integration, see [Create a New Integration][3].
 
 1. Save the monitor JSON file to your integration's `assets/monitors` folder.  Add the asset to your `manifest.json` file. See [Integrations Assets Reference][5] for more information about your integration's file structure and manifest file.
 
-2. Open a pull request (PR) to add your recommended monitor JSON file and updated manifest file to the corresponding integration folder in the [`integrations-extras` GitHub repository][6]. 
+2. Open a pull request (PR) to add your recommended monitor JSON file and updated manifest file to the corresponding integration folder either in the [`integrations-extras` GitHub repository][6] or [`Marketplace` GitHub repository][9]. 
 
 3. After it's approved, Datadog merges the PR and your integration-recommended monitor is pushed to production.
 
@@ -53,8 +53,8 @@ In addition to the monitor definition, the Title, Description, and Tags fields a
 
 |      | Description    | Examples |
 | ---  | ----------- | ----------- |
-|Title | Allows users to quickly understand the underlying failure mode the alert is covering.| - New flaky tests<br> - High CPU usage on hosts<br> - New Error Tracking issues</br> - Too many opened connections on databases|
-|Description | Provides extra context around the failure mode and also about the impact this mode can have on the system. It should be concise and allow users to understand at a glance whether it is relevant or not for them to create a monitor out of it.| **Title**: Too many opened connections on databases<br> **Description**: Get notified whenever the number of connections to the database is too high. When too many connections are opened, new clients might not be able to open new connections and thus to execute the queries serving end-users.|
+|Title | Allows users to quickly understand the underlying failure mode the alert is covering. The rule for the title is starting with an object and following with a verb. Do not use template variables.| - Pods are failing<br> - Cache usage is high <br> - Error rate is high <br> - Disk space is low|
+|Description | Provides extra context around the failure mode and also about the impact this mode can have on the system. It should be concise and allow users to understand at a glance whether it is relevant or not for them to create a monitor out of it.| **Title**: Unacknowledged Messages are higher than usual<br> **Description**: Unacked messages are those that have been delivered to a consumer but have not been acknowledged as processed or handled. This monitor tracks the ratio of unacked messages to avoid potential bottlenecks which could lead to delays in message processing.|
 |Tags | Set to "integration:<app_id>".| See other available monitor tags [here][8].|
 
 Below is an example of a well-defined monitor:
@@ -73,3 +73,4 @@ Below is an example of a well-defined monitor:
 [6]: https://github.com/DataDog/integrations-extras
 [7]: https://docs.datadoghq.com/monitors/configuration/
 [8]: https://docs.datadoghq.com/monitors/manage/#monitor-tags
+[9]: https://github.com/DataDog/marketplace

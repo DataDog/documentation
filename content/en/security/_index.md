@@ -40,6 +40,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/securing-data-in-cloud-native-infrastructure/"
     tag: "Blog"
     text: "Best practices for data security in cloud-native infrastructure"
+  - link: "https://www.datadoghq.com/blog/chaos-engineering-for-security/"
+    tag: "Blog"
+    text: "Security-focused chaos engineering experiments for the cloud"
 cascade:
     algolia:
         rank: 70
@@ -90,4 +93,4 @@ To get started with Datadog Security, navigate to the [**Security** > **Setup**]
 [13]: https://www.datadoghq.com/guided-tour/security/cloud-security-management/
 [14]: https://www.datadoghq.com/guided-tour/security/
 [15]: /security/identity_risks/
-[16]: /security/infrastructure_vulnerabilities/
+[16]: /security/vulnerabilities/

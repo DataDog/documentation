@@ -28,7 +28,8 @@ You can monitor application security for Node.js apps running in Docker, Kuberne
 
 {{% appsec-getstarted-with-rc %}}
 
-## Get started
+## Enabling threat detection
+### Get started
 
 1. **Update your Datadog Node.js library package** to at least version 2.23.0 (for NodeJS 12+) or 3.10.0 (for NodeJS 14+), by running one of these commands:
    ```shell
@@ -186,7 +187,7 @@ docker run [...] -e DD_IAST_ENABLED=true [...]
 Add the following environment variable value to your container Dockerfile:
 
 ```Dockerfile
-ENV DD_IAST_ENABLED=true=true
+ENV DD_IAST_ENABLED=true
 ```
 
 {{% /tab %}}

@@ -227,9 +227,6 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        port: 5432
        username: datadog
        password: '<PASSWORD>'
-       aws:
-         instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
-         region: '<REGION>'
        tags:
          - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
        ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
@@ -245,11 +242,37 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
    ssl: allow
    ```
 
+   If you want to authenticate with IAM, set the `region` and `instance_endpoint` parameters. 
+   
+   **Note**: only set the `region` parameter if you want to use IAM authentication. IAM authentication takes precedence over the `password` field.
+
+   ```yaml
+   init_config:
+   instances:
+     - dbm: true
+       host: '<AWS_INSTANCE_ENDPOINT>'
+       port: 5432
+       username: datadog
+       aws:
+         instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
+         region: '<REGION>'
+       tags:
+         - "dbinstanceidentifier:<DB_INSTANCE_NAME>"
+       ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
+       # pg_stat_statements_view: datadog.pg_stat_statements()
+       # pg_stat_activity_view: datadog.pg_stat_activity()
+       ## Optional: Connect to a different database if needed for `custom_queries`
+       # dbname: '<DB_NAME>'
+   ```
+
+   For information on configuring IAM authentication on your RDS instance, see [Connecting with Managed Authentication][3].
+
 2. [Restart the Agent][2].
 
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[3]: /database_monitoring/guide/managed_authentication
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -310,7 +333,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 
 [1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/guide/secrets-management
+[2]: /agent/configuration/secrets-management
 [3]: /agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -422,7 +445,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /agent/guide/secrets-management
+[4]: /agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -456,7 +479,7 @@ If you have installed and configured the integrations and Agent as described and
 [8]: https://www.postgresql.org/docs/current/app-psql.html
 [9]: /database_monitoring/guide/managed_authentication
 [10]: https://app.datadoghq.com/account/settings/agent/latest
-[11]: /agent/guide/agent-commands/#agent-status-and-information
+[11]: /agent/configuration/agent-commands/#agent-status-and-information
 [12]: https://app.datadoghq.com/databases
 [13]: /integrations/amazon_rds
 [14]: /database_monitoring/troubleshooting/?tab=postgres

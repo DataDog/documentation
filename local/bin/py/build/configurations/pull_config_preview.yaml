@@ -264,14 +264,14 @@
       - repo_name: serverless-plugin-datadog
         contents:
         - action: pull-and-push-file
-          branch: master
+          branch: main
           globs:
           - 'README.md'
           options:
             dest_path: '/serverless/libraries_integrations/'
             file_name: 'plugin.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md"]
+              dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/main/README.md"]
               title: Datadog Serverless Framework Plugin
               kind: documentation
               aliases:
@@ -280,14 +280,14 @@
       - repo_name: datadog-cloudformation-macro
         contents:
         - action: pull-and-push-file
-          branch: master
+          branch: main
           globs:
           - 'serverless/README.md'
           options:
             dest_path: '/serverless/libraries_integrations/'
             file_name: 'macro.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-cloudformation-macro/blob/master/serverless/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-cloudformation-macro/blob/main/serverless/README.md"]
               title: Datadog Serverless Macro
               kind: documentation
               aliases:
@@ -378,7 +378,7 @@
             path_to_remove: 'rulesets/'
             front_matters:
               disable_edit: true
-              
+
       - repo_name: datadog-cdk-constructs
         contents:
         - action: pull-and-push-file
@@ -511,7 +511,7 @@
           globs:
             - "generated/md/external/*.md"
           options:
-            dest_dir: '/security/misconfigurations/custom_rules/'
+            dest_dir: '/infrastructure/resource_catalog/'
             path_to_remove: 'generated/md/external/'
             front_matters:
               disable_edit: true
@@ -524,9 +524,10 @@
             - "docs/en/getting-started.md"
           options:
             dest_path: "/developers/"
-            file_name: "datadog_apps.md"
+            file_name: "ui_extensions.md"
             front_matters:
               dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"]
+              aliases: ["/developers/datadog_apps/"]
 
       - repo_name: datadog-agent
         contents:
