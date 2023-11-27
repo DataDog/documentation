@@ -16,6 +16,19 @@ further_reading:
       text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
+W3C trace propagation and 128 bit headers is available for all supported languages. The default trace propagation style for each language is:
+
+| Language | Default inject and extract setting |
+| -------- | ---------------------------------- |
+| Java     | `datadog,tracecontext`             |
+| Python   | `tracecontext,datadog`             |
+| Ruby     | `datadog,tracecontext`             |
+| Go       | `tracecontext,datadog`             |
+| Node.js  | `datadog,tracecontext`             |
+| PHP      | `tracecontext,datadog`             |
+| .NET     | `tracecontext,datadog`             |
+| C++      | `datadog,tracecontext` or with Envoy or nginx proxies: `tracecontext,Datadog` |
+
 
 {{< partial name="apm/apm-context-propagation" >}}
 
