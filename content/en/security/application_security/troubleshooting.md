@@ -27,7 +27,7 @@ If you experience unexpected behavior with Datadog Application Security Manageme
 
 ASM traces are rate-limited to 100 traces per second. Traces sent after the limit are not reported. Contact [Datadog support][1] if you need to change the limit.
 
-## No Security Traces detected by ASM
+## No security traces detected by ASM
 
 There are a series of steps that must run successfully for threat information to appear in the ASM [Trace and Signals Explorer][2]. It is important to check each step when investigating this issue. Additional troubleshooting steps for specific languages are in the language tab at the end.
 
