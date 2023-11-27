@@ -128,7 +128,7 @@ You can also set a condition on a log probe using the [expression language][15].
 
 {{< img src="dynamic_instrumentation/log_probe.png" alt="Creating a Dynamic Instrumentation log probe" >}}
 
-**Beta**: If you enable **Capture method parameters and local variables** on the log probe, all executional context will be added the log event:
+**Beta**: If you enable **Capture method parameters and local variables** on the log probe, all execution context is added the log event:
   - **Method arguments**, **local variables**, and **fields**, with the following default limits:
     - Follow references three levels deep (configurable in the UI).
     - The first 100 items inside collections.
