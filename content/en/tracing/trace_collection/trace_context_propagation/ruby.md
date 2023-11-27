@@ -39,7 +39,7 @@ The value of the environment variable is a comma-separated list of header styles
 
 If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
-The default extraction styles are, in order, `Datadog`, `tracecontext`, `b3multi`, and `b3`.
+The default extraction styles are, in order, `Datadog`, `b3multi`, `b3`, and `tracecontext`.
 
 You can also enable or disable the use of these formats in code by using `Datadog.configure`:
 
