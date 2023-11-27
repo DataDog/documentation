@@ -29,6 +29,7 @@ W3C trace propagation and 128 bit headers is available for all supported languag
 | .NET     | `tracecontext,datadog`             |
 | C++      | `datadog,tracecontext` or with Envoy or nginx proxies: `tracecontext,Datadog` |
 
+For more information about each language's configuration options for trace propagation, see the following pages:
 
 {{< partial name="apm/apm-context-propagation" >}}
 
