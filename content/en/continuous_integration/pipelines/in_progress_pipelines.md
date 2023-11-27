@@ -29,7 +29,17 @@ In-progress pipelines work with the following CI providers:
 
 - GitLab (SaaS or self-hosted >= 14.1)
 
-## Limits
+## Limitations
+
+### Webhook events deliver is not ensured by CI Providers
+
+This feature depends on CI Providers sending the webhook events indicating if pipelines are running or have finished correctly.
+
+You can see pipeline executions marked as `Running` in Datadog that have already finished if the CI Provider could not send all the webhooks events properly. This might lead to have false positives on monitors tracking in-progress pipelines.
+
+Notice that the webhook events deliver is not ensured by CI Providers.
+
+### Maximum duration for a pipeline
 
 The maximum duration that a pipeline execution can be in progress is 3 days. After that time, the pipeline execution will not be tracked as "in-progress" anymore in CI Visibility. 
 
