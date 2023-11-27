@@ -14,6 +14,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/secure-serverless-applications-with-datadog-asm/
   tag: GitHub
   text: Datadog の ASM でサーバーレスアプリケーションのセキュリティを強化する
+- link: https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/
+  tag: ブログ
+  text: Datadog Cloud SIEM で 1Password を監視
+- link: https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/
+  tag: ブログ
+  text: クラウド環境に対する十分なセキュリティカバレッジの構築
 kind: documentation
 title: セキュリティシグナルエクスプローラー
 ---
@@ -39,9 +45,9 @@ title: セキュリティシグナルエクスプローラー
   - シグナルのルール設定にアクセスします。
   - シグナルを共有したり、チームメイトに割り当てたりします。
 
-{{< img src="security/security_monitoring/explorer/security_signals_table_v2.png" alt="AWS S3 Public アクセスブロック削除のクリティカルシグナルを示す Security Signal パネル" style="width:90%;" >}}
+{{< img src="security/security_monitoring/explorer/security_signals_table_v2.png" alt="Amazon S3 Public アクセスブロック削除のクリティカルシグナルを示す Security Signal パネル" style="width:90%;" >}}
 
-過去の新しいデータが利用可能になった場合、または攻撃が継続している場合、最初に見た日付と最後に見た日付が更新されます。Cloud SIEM と CSM Threats のシグナルの場合、Overview タブに "What Happened" セクションが表示され、検出ルールに関連する構成済みのグループ化やルールカスタマイズも表示されます。この検出ルールの例では、グループ化が `usr.name` で構成されています。最後に、検出ルールに設定されたタグは、CSM Misconfigurations の調査結果ではヘッダーのグループ化の下に、Cloud SIEM および CSM Threats のシグナルでは Context セクションに表示されます。
+過去の新しいデータが利用可能になった場合、または攻撃が継続している場合、最初に検出された日付と最後に検出された日付が更新されます。Cloud SIEM と CSM Threats のシグナルの場合、Overview タブに "What Happened" セクションが表示され、検出ルールに関連する構成済みの group by やルールのカスタマイズも表示されます。この検出ルールの例では、group by が `usr.name` で構成されています。最後に、検出ルールに設定されたタグは、CSM Misconfigurations の誤構成ではヘッダーのグループ化の下に、Cloud SIEM および CSM Threats のシグナルでは Context セクションに表示されます。
 
 アクティビティをよりよく理解するために、セキュリティシグナルパネルは、シグナルをトリガーするすべてのログのタグと属性を要約するため、ログエクスプローラーにピボットすることなくトラブルシューティングを行うことができます。たとえば、Context セクションで、ユーザーアカウントにログインしようとしている IP のリスト、または認証サービスを実行している AWS アカウントとアベイラビリティーゾーンを一目で判断できます。
 
@@ -58,9 +64,9 @@ CSM Misconfigurations シグナルのヘッダーの下には、シグナルに�
 - `Findings` には、ルールによって評価された各リソースのリストが含まれます。
 - `Related Issues` には、シグナルのトリアージを支援するために同じグループ化値を含む他のシグナルのリストが含まれています。
 
-### Case Management
+### ケース管理
 
-Cloud SIEM のセキュリティシグナルからケースを作成し、シグナルの追跡、トリアージ、および調査を行うことができます。**Escalate** をクリックすると、ドロップダウンメニューが表示されます。セキュリティ調査を開始するには、**Create a case** をクリックします。さらに調査した結果、重要であると判断した場合は、ケース内の **Declare Incident** をクリックし、インシデントにエスカレートさせます。詳しくは、[Case Management][6] を参照してください。
+Cloud SIEM のセキュリティシグナルからケースを作成し、シグナルの追跡、トリアージ、および調査を行うことができます。**Escalate Investigation** をクリックすると、ドロップダウンメニューが表示されます。セキュリティ調査を開始するには、**Create a case** をクリックします。さらに調査した結果、重要であると判断した場合は、ケース内の **Declare Incident** をクリックし、インシデントにエスカレートさせます。詳しくは、[Case Management][6] を参照してください。
 
 ### ワークフローの自動化
 
@@ -74,7 +80,7 @@ Datadog Cloud SIEM では、脅威インテリジェンスパートナーがキ�
 
 Datadog は、関連する属性を持つすべての取り込みログを分析することで、脅威インテリジェンスを自動的に実装します。ログに危険な兆候 (VPN、プロキシ、または Tor の出口ノードに匿名化された IP が関連付けられているなど) が含まれている場合、`threat_intel` 属性がログイベントに追加され、利用可能なインテリジェンスに基づいて追加のインサイトを提供します。
 
-セキュリティシグナルエクスプローラーで一致するすべての脅威インテリジェンスを見るためのクエリは `@threat_intel.indicators_matched:*` です。脅威インテリジェンスを照会するためのその他の属性は次の通りです。
+セキュリティシグナルエクスプローラーですべての脅威インテリジェンスのマッチを見るためのクエリは `@threat_intel.indicators_matched:*` です。脅威インテリジェンスをクエリするためのその他の属性は次の通りです。
 
 * `@threat_intel.results.category "anonymizer", "scanner"`
 * `@threat_intel.results.intention "malicious", "unknown"`

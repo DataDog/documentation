@@ -70,6 +70,8 @@ You can disable some files from uploading by setting the `iosDsyms`, `iosSourcem
 }
 ```
 
+If you want to disable **all file uploads**, remove the `expo-datadog` from the list of plugins.
+
 ### Setting the Datadog site
 
 Run `eas secret:create` to set `DATADOG_SITE` to the host of your Datadog site, for example: `datadoghq.eu`. By default, `datadoghq.com` is used.

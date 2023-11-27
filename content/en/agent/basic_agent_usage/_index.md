@@ -9,10 +9,10 @@ further_reading:
 - link: "/agent/faq/how-datadog-agent-determines-the-hostname/"
   tag: "FAQ"
   text: "How does Datadog determine the Agent hostname?"
-- link: "/agent/guide/agent-commands/"
+- link: "/agent/configuration/agent-commands/"
   tag: "FAQ"
   text: "List of all Agent commands"
-- link: "/agent/guide/agent-configuration-files/"
+- link: "/agent/configuration/agent-configuration-files/"
   tag: "FAQ"
   text: "Location of all Agent configuration files"
 - link: "https://www.datadoghq.com/blog/engineering/performance-improvements-in-the-datadog-agent-metrics-pipeline/"
@@ -70,8 +70,8 @@ In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][6] metric aggrega
 
 [1]: /metrics/custom_metrics/dogstatsd_metrics_submission/#metrics
 [2]: /tracing/guide/terminology/
-[3]: /agent/guide/network/#open-ports
-[4]: /agent/guide/network#configure-ports
+[3]: /agent/configuration/network/#open-ports
+[4]: /agent/configuration/network#configure-ports
 [5]: /developers/custom_checks/write_agent_check/
 [6]: https://github.com/etsy/statsd
 [7]: /metrics/custom_metrics/dogstatsd_metrics_submission/
@@ -112,8 +112,8 @@ minfds = 100  # Your hard limit
 
 [1]: /integrations/
 [2]: /metrics/custom_metrics/
-[3]: /agent/guide/network/?tab=agentv5v4#open-ports
-[4]: /agent/proxy/?tab=agentv5
+[3]: /agent/configuration/network/?tab=agentv5v4#open-ports
+[4]: /agent/configuration/proxy/?tab=agentv5
 [5]: /agent/faq/network/
 {{% /tab %}}
 {{< /tabs >}}
@@ -133,100 +133,6 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 2. To start the GUI, the user must have the required permissions. If you are able to open `datadog.yaml`, you are able to use the GUI.
 
 3. For security reasons, the GUI can **only** be accessed from the local network interface (`localhost`/`127.0.0.1`), therefore you must be on the same host that the Agent is running. That is, you can't run the Agent on a VM or a container and access it from the host machine.
-
-## Supported platforms
-
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
-
-| Platform (64-bit x86)                    | Supported versions                                        |
-|------------------------------------------|-----------------------------------------------------------|
-| [Amazon Linux][1]                        | Amazon Linux 2                                            |
-| [Debian][2] with systemd                 | Debian 7 (wheezy)+ in Agent < 6.36.0/7.36.0, Debian 8 (jessie)+ in Agent 6.36.0+/7.36.0+ |
-| [Debian][2] with SysVinit                | Debian 7 (wheezy)+ in Agent 6.6.0 - 6.36.0/7.36.0, Debian 8 (jessie)+ in Agent 6.36.0+/7.36.0+ |
-| [Ubuntu][3]                              | Ubuntu 14.04+                                             |
-| [RedHat/CentOS/AlmaLinux/Rocky][4]       | RedHat/CentOS 6+, AlmaLinux/Rocky 8+ in Agent 6.33.0+/7.33.0+ |
-| [Docker][5]                              | Version 1.12+                                             |
-| [Kubernetes][6]                          | Version 1.3+                                              |
-| [SUSE Enterprise Linux][7] with systemd  | SUSE 11 SP4+ in Agent < 6.33.0/7.33.0, SUSE 12+ in Agent 6.33.0+/7.33.0+                     |
-| [SUSE Enterprise Linux][7] with SysVinit | SUSE 11 SP4 in Agent 6.16.0/7.16.0 - 6.33.0/7.33.0        |
-| [OpenSUSE][7] with systemd               | OpenSUSE 15+ in Agent 6.33.0+/7.33.0+                     |
-| [Fedora][8]                              | Fedora 26+                                                |
-| [macOS][9]                               | macOS 10.12+ in Agent < 6.35.0/7.35.0, macOS 10.13+ in Agent < 7.39.0, macOS 10.14+ in Agent 7.39.0+ |
-| [Windows Server][10]                     | Windows Server 2012+ (including Server Core)              |
-| [Windows][10]                            | Windows 8.1+                                              |
-| [Azure Stack HCI OS][10]                 | All Versions                                              |
-
-| Platform (64-bit Arm v8)                 | Supported versions                                        |
-|------------------------------------------|-----------------------------------------------------------|
-| [Amazon Linux][1]                        | Amazon Linux 2                                            |
-| [Debian][2] with systemd                 | Debian 9 (stretch)+                                       |
-| [Ubuntu][3]                              | Ubuntu 16.04+                                             |
-| [RedHat/CentOS/AlmaLinux/Rocky][4]       | RedHat/CentOS 8+, AlmaLinux/Rocky 8+ in Agent 6.33.0+/7.33.0+ |
-| [Docker][5]                              | Version 1.12+                                             |
-| [Kubernetes][6]                          | Version 1.3+                                              |
-| [Fedora][8]                              | Fedora 27+                                                |
-| [macOS][9]                               | macOS 11.0+                                               |
-
-
-**Notes**:
-- [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
-- Datadog Agent versions previous to 6.46.0 and 7.46.0 support Windows Server 2008 R2 with the most recent Windows updates installed. There is also a [known issue with clock drift and Go][12] that affects Windows Server 2008 R2.
-
-[1]: /agent/basic_agent_usage/amazonlinux/
-[2]: /agent/basic_agent_usage/deb/
-[3]: /agent/basic_agent_usage/ubuntu/
-[4]: /agent/basic_agent_usage/redhat/
-[5]: /agent/docker/
-[6]: /agent/basic_agent_usage/kubernetes/
-[7]: /agent/basic_agent_usage/suse/
-[8]: /agent/basic_agent_usage/fedora/
-[9]: /agent/basic_agent_usage/osx/
-[10]: /agent/basic_agent_usage/windows/
-[11]: /agent/basic_agent_usage/source/
-[12]: https://github.com/golang/go/issues/24489
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-| Platform                   | Supported versions     |
-|----------------------------|------------------------|
-| [Amazon Linux][1]          | Amazon Linux 2         |
-| [Debian][2]                | Debian 7 (wheezy)+     |
-| [Ubuntu][3]                | Ubuntu 12.04+          |
-| [RedHat/CentOS][4]         | RedHat/CentOS 5+       |
-| [Docker][5]                | Version 1.12+          |
-| [Kubernetes][6]            | Version 1.3 to 1.8     |
-| [SUSE Enterprise Linux][7] | SUSE 11 SP4+           |
-| [Fedora][8]                | Fedora 26+             |
-| [macOS][9]                 | macOS 10.10+           |
-| [Windows Server][10]       | Windows Server 2008+   |
-| [Windows][10]              | Windows 7+             |
-
-**Notes**:
-
-- [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
-
-[1]: /agent/basic_agent_usage/amazonlinux/?tab=agentv5
-[2]: /agent/basic_agent_usage/deb/
-[3]: /agent/basic_agent_usage/ubuntu/
-[4]: /agent/basic_agent_usage/redhat/
-[5]: /agent/docker/
-[6]: /agent/basic_agent_usage/kubernetes/
-[7]: /agent/basic_agent_usage/suse/
-[8]: /agent/basic_agent_usage/fedora/
-[9]: /agent/basic_agent_usage/osx/
-[10]: /agent/basic_agent_usage/windows/
-[11]: /agent/basic_agent_usage/source/
-{{% /tab %}}
-{{% tab "Unix Agent" %}}
-
-| Platform | Supported versions                        |
-|----------|-------------------------------------------|
-| [AIX][1] | AIX 6.1 TL9 SP6, 7.1 TL5 SP3, 7.2 TL3 SP0 |
-
-[1]: /agent/basic_agent_usage/aix/
-{{% /tab %}}
-{{< /tabs >}}
 
 ## CLI
 
@@ -265,7 +171,7 @@ With Agent v6+, the command line interface is based on subcommands. To run a sub
 
 ## Agent overhead
 
-An example of the Datadog Agent resource consumption is below. Tests were made on an AWS EC2 machine `c5.xlarge` instance (4 VCPU/ 8GB RAM) and comparable performance was seen for ARM64-based instances with similar resourcing. The vanilla `datadog-agent` was running with a process check to monitor the Agent itself. Enabling more integrations may increase Agent resource consumption.
+An example of the Datadog Agent resource consumption is below. Tests were made on an Amazon EC2 machine `c5.xlarge` instance (4 VCPU/ 8GB RAM) and comparable performance was seen for ARM64-based instances with similar resourcing. The vanilla `datadog-agent` was running with a process check to monitor the Agent itself. Enabling more integrations may increase Agent resource consumption.
 Enabling JMX Checks forces the Agent to use more memory depending on the number of beans exposed by the monitored JVMs. Enabling the trace and process Agents increases the resource consumption as well.
 
 * Agent Test version: 7.34.0
@@ -338,14 +244,14 @@ See the [Agent log files documentation][12].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/troubleshooting/send_a_flare/
-[2]: /agent/guide/agent-commands/#restart-the-agent
-[3]: /agent/guide/agent-commands/#start-the-agent
-[4]: /agent/guide/agent-commands/#service-status
-[5]: /agent/guide/agent-commands/#stop-the-agent
+[2]: /agent/configuration/agent-commands/#restart-the-agent
+[3]: /agent/configuration/agent-commands/#start-the-agent
+[4]: /agent/configuration/agent-commands/#service-status
+[5]: /agent/configuration/agent-commands/#stop-the-agent
 [6]: /agent/logs/log_transport/?tab=https#enforce-a-specific-transport
 [7]: https://app.datadoghq.com/account/settings/agent/latest
 [8]: /agent/guide/integration-management/
-[9]: /agent/guide/agent-configuration-files/
-[10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[9]: /agent/configuration/agent-configuration-files/
+[10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [11]: /getting_started/site/
-[12]: /agent/guide/agent-log-files/
+[12]: /agent/configuration/agent-log-files/

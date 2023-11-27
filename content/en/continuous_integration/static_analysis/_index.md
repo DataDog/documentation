@@ -16,7 +16,7 @@ further_reading:
 
 {{% site-region region="us,us3,us5,eu,ap1" %}}
 <div class="alert alert-warning">
-  Static Analysis is in private beta. Python is the only supported language. To request access, <a href="/help">contact Support</a>.
+  Static Analysis is in private beta. Python, JavaScript, TypeScript, and Docker are the only supported languages. To request access, <a href="/help">contact Support</a>.
 </div>
 {{% /site-region %}}
 
@@ -55,8 +55,8 @@ rulesets:
   - python-code-style
   - python-inclusive
 ignore-paths:
-  - path/to/ignore
-  - **.js
+  - "path/to/ignore"
+  - "**.js"
 ```
 
 A `static-analysis.datadog.yml` file supports the following:
@@ -90,7 +90,7 @@ If you don't use CircleCI Orbs or GitHub Actions, you can run the Datadog CLI di
 
 Prerequisites:
 
-- UnZip
+- unzip
 - Node.js 14 or later
 
 Configure the following environment variables:
@@ -103,11 +103,12 @@ Configure the following environment variables:
 
 Provide the following inputs:
 
-| Name        | Description                                                                                                                | Required | Default         |
-|-------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `service`   | The name of the service to tag the results with.                                                                           | Yes      |                 |
-| `env`       | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
-| `cpu_count` | Set the number of CPUs used by the analyzer. Defaults to the number of CPUs available.                                     | No       |                 |
+| Name           | Description                                                                                                                | Required | Default         |
+|----------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
+| `service`      | The name of the service to tag the results with.                                                                           | Yes      |                 |
+| `env`          | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
+| `cpu_count`    | Set the number of CPUs used by the analyzer. Defaults to the number of CPUs available.                                     | No       |                 |
+| `subdirectory` | The subdirectory path the analysis should be limited to. The path is relative to the root directory of the repository.                  | No       |                 |
 
 <div class="alert alert-info">
   Add a `--performance-statistics` flag to your static analysis command to get execution time statistics for analyzed files.

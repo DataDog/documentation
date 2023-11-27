@@ -1,6 +1,8 @@
 ---
 title: Kubernetes Resource Utilization
 kind: documentation
+aliases:
+- /infrastructure/containers/kubernetes_resources
 further_reading:
 - link: "https://www.datadoghq.com/blog/rightsize-kubernetes-workloads/"
   tag: "Blog"

@@ -1,4 +1,4 @@
-{{- if ne hugo.Environment "development" -}}
+{{- if (or (eq hugo.Environment "live") (eq (os.Getenv "CI_JOB_NAME" | default "" ) "algolia_sync_preview:manual")) -}}
     {{ $.Scratch.Add "algoliaindex" slice }}
     {{ $section := $.Site.GetPage "section" .Section }}
     {{ $hugo_context := . }}
@@ -7,7 +7,10 @@
     {{ range (where (where (where .Site.AllPages "Kind" "!=" "home") "Type" "!=" "api") "File.Path" "not in" $apiPagesWithoutTypeAPI) }}
         {{ $page := . }}
         {{ if and ($page.IsDescendant $section) (ne $page.Params.private true) (ne $page.Params.kind "faq") (not $page.Draft) (not (isset .Params "external_redirect")) }}
-            {{ $rel_path := (print $page.File.Lang "/" $page.File.Path) }}
+            {{ $rel_path := "" }}
+            {{ with $page.File }}
+              {{ $rel_path = (print .Lang "/" .Path) }}
+            {{ end }}
             {{ $object_id := md5 $rel_path }}
             {{ $title := $page.Params.integration_title | default $page.Title }}
             {{ $content := $page.Plain | htmlUnescape | safeHTML | truncate 10000 }}

@@ -35,66 +35,9 @@ The latest PHP Tracer supports versions >= 5.4.x.
 
 For a full list of Datadog's PHP version and framework support (including legacy and maintenance versions), see the [Compatibility Requirements][1] page.
 
-## Installation and getting started
+## Getting started
 
-### Configure the Datadog Agent for APM
-
-Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace traffic at `localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
-
-{{< tabs >}}
-{{% tab "Containers" %}}
-
-1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
-
-2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
-
-{{< partial name="apm/apm-containers.html" >}}
-</br>
-
-3. After having instrumented your application, the tracing client sends traces to Unix domain socket `/var/run/datadog/apm.socket` by default. If the socket does not exist, traces are sent to `http://localhost:8126`. If this is not the correct host and port change it by setting `DD_TRACE_AGENT_URL`, for example:
-
-   ```
-   DD_TRACE_AGENT_URL=unix:///path/to/custom.socket
-   DD_TRACE_AGENT_URL=http://localhost:9442
-   ```
-
-   Similarly, where `DD_TRACE_HEALTH_METRICS_ENABLED` is set true, the trace client attempts to send stats to the `/var/run/datadog/dsd.socket` Unix domain socket. If the socket does not exist then stats are sent to `http://localhost:8125`.
-
-   If a different configuration is required, use the `DD_DOGSTATSD_URL` environment variable. Some examples:
-   ```
-   DD_DOGSTATSD_URL=http://custom-hostname:1234
-   DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket
-   ```
-
-{{< site-region region="us3,us5,eu,gov,ap1" >}}
-
-4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
-
-{{< /site-region >}}
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "AWS Lambda" %}}
-
-To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
-
-
-[1]: /tracing/serverless_functions/
-{{% /tab %}}
-{{% tab "Other Environments" %}}
-
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], and [AWS Elastic Beanstalk][3].
-
-For other environments, refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
-
-[1]: /agent/basic_agent_usage/heroku/#installation
-[2]: /integrations/cloud_foundry/#trace-collection
-[3]: /integrations/amazon_elasticbeanstalk/
-[5]: /integrations/
-[6]: /help/
-{{% /tab %}}
-{{< /tabs >}}
-
+Before you begin, make sure you've already [installed and configured the Agent][14].
 
 ### Install the extension
 
@@ -128,7 +71,7 @@ php datadog-setup.php --php-bin=all --enable-profiling
 
 This command installs the extension to all the PHP binaries found in the host or container. If `--php-bin` is omitted, the installer runs in interactive mode and asks the user to select the binaries for installation. The value of `--php-bin` can be a path to a specific binary in case `dd-trace-php` should be installed only to such binary.
 
-Restart PHP (PHP-FPM or the Apache SAPI) and visit a tracing-enabled endpoint of your application. For traces, see the [APM Service List][5].
+Restart PHP (PHP-FPM or the Apache SAPI) and visit a tracing-enabled endpoint of your application. To see the generated traces, go to the [APM Traces page][4].
 
 When you do not specify `--enable-appsec`, the AppSec extension loads shortly at startup, and is not enabled by default. It immediately short-circuits, causing negligible performance overhead.
 
@@ -142,6 +85,13 @@ It may take a few minutes before traces appear in the UI. If traces still do not
 If the PHP CLI binary is built as NTS (non thread-safe), while Apache uses a ZTS (Zend thread-safe) version of PHP, you need to manually change the extension load for the ZTS binary. Run <code>/path/to/php-zts --ini</code> to find where Datadog's <code>.ini</code> file is located, then add the <code>-zts</code> suffix from the file name. For example, from <code>extension=ddtrace-20210902.so</code> to <code>extension=ddtrace-20210902-zts.so</code>.
 </div>
 
+<div class="alert alert-warning">
+<strong>SELinux:</strong>
+If the httpd SELinux policies are configured on the host, functionality of the tracer may be limited, unless writing and executing temporary files is explicitly allowed in SELinux configuration:
+
+`allow httpd_t httpd_tmpfs_t:file { execute execute_no_trans };`
+
+</div>
 
 ## Automatic instrumentation
 
@@ -410,6 +360,25 @@ If no core dump was generated, check the following configurations and change the
 1. Ensure you have a suitable `ulimit` set in your system. You can set it to unlimited: `ulimit -c unlimited`.
 1. If your application runs in a Docker container, changes to `/proc/sys/*` have to be done to the host machine. Contact your system administrator to know the options available to you. If you are able to, try recreating the issue in your testing or staging environments.
 
+### Obtaining a core dump from within a Docker container
+
+Use the information below to assist with obtaining a core dump in a Docker container:
+
+1. The Docker container needs to run as a privileged container, and the `ulimit` value for core files needs to be set to its maximum as shown in the examples below.
+   - If you use the `docker run` command, add the `--privileged` and the `--ulimit core=99999999999` arguments
+   - If you use `docker compose`, add the following to the `docker-compose.yml` file:
+```yaml
+privileged: true
+ulimits:
+  core: 99999999999
+```
+2. When running the container (and before starting the PHP application) you need to run the following commands:
+```
+ulimit -c unlimited
+echo '/tmp/core' > /proc/sys/kernel/core_pattern
+echo 1 > /proc/sys/fs/suid_dumpable
+```
+
 ### Obtaining a Valgrind trace
 
 To gain more details about the crash, run the application with Valgrind. Unlike core dumps, this approach always works in an unprivileged container.
@@ -506,7 +475,8 @@ For Apache, run:
 [1]: /tracing/compatibility_requirements/php
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: /tracing/glossary/
-[5]: https://app.datadoghq.com/apm/services
+[4]: https://app.datadoghq.com/apm/traces
+[5]: https://github.com/DataDog/dd-trace-php/releases
 [6]: /tracing/trace_collection/library_config/php/
 [7]: /tracing/guide/trace-php-cli-scripts/
 [8]: https://packages.sury.org/php/
@@ -515,3 +485,4 @@ For Apache, run:
 [11]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
 [12]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
 [13]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
+[14]: /tracing/trace_collection#install-and-configure-the-agent

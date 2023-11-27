@@ -15,4 +15,8 @@ const truncateString = (string, characterMax, addEllipsis) => {
   return trimmed;
 };
 
-export { stringToTitleCase, truncateString };
+const replaceSpecialCharacters = (string) => {
+  return string.replace(/[^a-zA-Z0-9 ]/, '')    
+}
+
+export { stringToTitleCase, truncateString, replaceSpecialCharacters };

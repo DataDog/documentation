@@ -84,14 +84,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 
 ### Application Security Management
 
-| Name | Description of audit event                                          | Query in audit explorer                           |
-| ---- | ------------------------------------------------------------------- | --------------------------------------------------|
-| [One-click Activation][24] | A user activated or de-activated ASM on a service. | `@evt.name:"Application Security" @asset.type:compatible_services` |
-| [Protection][23] | A user enabled or disabled the ASM protection. | `@evt.name:"Application Security" @asset.type:blocking_configuration` |
-| [Denylist][22] | A user blocked, unblocked, or extended the blocking duration of an IP address or a user ID. | `@evt.name:"Application Security" @asset.type:ip_user_denylist` |
-| [Passlist][81] | A user added, modified, or deleted an entry to the passlist. | `@evt.name:"Application Security" @asset.type:passlist_entry` |
-| [In-App WAF Policy][82] | A user created, modified, or deleted an In-App WAF policy. | `@evt.name:"Application Security" @asset.type:policy_entry` |
-| [In-App WAF Custom Rule][83] | A user validated, created, modified, or deleted an In-App WAF custom rule. | `@evt.name:"Application Security" @asset.type:waf_custom_rule` |
+{{% audit-trail-asm %}}
 
 ### Audit Trail events
 
@@ -118,12 +111,8 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Quality gates rule][96]        | A user has created, modified or deleted a quality gate rule. | `@evt.name:"CI Visibility" @asset.type:ci_app_quality_gates (@action:created OR @action:modified OR @action:deleted)` |
 
 ### Cloud Security Platform events
-| Name | Description of audit event                                          | Query in audit explorer                           |
-| ---- | ------------------------------------------------------------------- | --------------------------------------------------|
-| [CWS agent rule][31] | A user accessed (fetched) a CWS agent rule in the Cloud Security Platform.| `@evt.name:"Cloud Security Platform" @asset.type:cws_agent_rule @action:accessed` |
-| [Notification profile][32] | A user created, updated, or deleted a notification profile in the Cloud Security Platform. | `@evt.name:"Cloud Security Platform" @asset.type:notification_profile` |
-| [Security rule][33] | A user validated, updated, deleted, or created a security rule and the previous and new values for the rule. | `@evt.name:"Cloud Security Platform" @asset.type:security_rule` |
-| [Security signal][34] | A user modified the state of a signal or assigned the signal to a user, and the previous and new values for the signal. | `@evt.name:"Cloud Security Platform" @asset.type:security_signal @action:modified` |
+
+{{% audit-trail-security-platform %}}
 
 ### Dashboard events
 
@@ -155,6 +144,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Index configuration][50] | A user created, modified, or deleted the configuration of an index and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:index` |
 | [Log pipeline][51] | A user created, modified, or deleted a log pipeline or nested pipeline and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:pipeline` |
 | [Processor][52] | A user created, modified, or deleted a processor within a pipeline and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:pipeline_processor` |
+| [Query][97] (Public Beta)| A user ran a Log Management List query either in log explorer, Dashboards or through the Public API. | `@evt.name:"Log Management" @asset.type:logs_query` |
 | [Restriction query configuration][53] | A user created, modified, or deleted the configuration of a restriction query in logs and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:restriction_query` |
 | [Standard attribute configuration][54] | A user created, modified, or deleted the configuration of a standard attribute in logs and the previous and new values for the configuration. | `@evt.name:"Log Management" @asset.type:standard_attribute` |
 | [Download as CSV][55] | A user exports list of logs as CSV | `@evt.name:"Log Management" @asset.type:logs_csv` |
@@ -346,3 +336,4 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [94]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Agithub_opt_ins%20%28%40action%3Amodified%20OR%20%40action%3Adeleted%29
 [95]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Aci_app_exclusion_filters%20%40action%3Amodified
 [96]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Aci_app_quality_gates%20%28%40action%3Acreated%20OR%20%40action%3Amodified%20OR%20%40action%3Adeleted%29
+[97]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40asset.type%3Alogs_query

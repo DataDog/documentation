@@ -2,6 +2,9 @@ platforms:
   - name: aix
     link: "agent/basic_agent_usage/aix/"
     image: "platform_aix.png"
+  - name: almalinux
+    link: "agent/basic_agent_usage/centos/"
+    image: "platform_almalinux.png"
   - name: amazonlinux
     link: "agent/basic_agent_usage/amazonlinux/"
     image: "platform_amazonlinux.png"
@@ -38,6 +41,9 @@ platforms:
   - name: redhat
     link: "agent/basic_agent_usage/redhat/"
     image: "platform_redhat.png"
+  - name: rockylinux
+    link: "agent/basic_agent_usage/centos/"
+    image: "platform_rockylinux.png"
   - name: salt
     link: "agent/basic_agent_usage/saltstack/"
     image: "platform_saltstack.png"
@@ -75,6 +81,12 @@ gs:
   - name: redhat
     link: "https://app.datadoghq.com/account/settings/agent/latest?platform=centos"
     image: "platform_redhat.png"
+  - name: rockylinux
+    link: "https://app.datadoghq.com/account/settings/agent/latest?platform=centos"
+    image: "platform_rockylinux.png"
+  - name: almalinux
+    link: "https://app.datadoghq.com/account/settings/agent/latest?platform=centos"
+    image: "platform_almalinux.png"
   - name: fedora
     link: "https://app.datadoghq.com/account/settings/agent/latest?platform=fedora"
     image: "platform_fedora.png"

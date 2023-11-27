@@ -12,7 +12,7 @@ title: Azure Database for PostgreSQL のデータベースモニタリングの�
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
-データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Postgres データベースを詳細に可視化します。
+データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Postgres データベースを詳細に視覚化します。
 
 Agent は、読み取り専用のユーザーとしてログインすることでデータベースから直接テレメトリを収集します。Postgres データベースでデータベースモニタリングを有効にするには、以下の設定を行ってください。
 
@@ -24,7 +24,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 ## はじめに
 
 サポート対象の PostgreSQL バージョン
-: 9.6, 10, 11, 12, 13, 14
+: 9.6、10、11、12、13、14
 
 サポート対象の Azure PostgreSQL のデプロイメントタイプ
 : Azure VM、Single Server、Flexible Server の PostgreSQL
@@ -33,7 +33,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 : 7.36.1+
 
 パフォーマンスへの影響
-: データベースモニタリングのデフォルトの Agent コンフィギュレーションは保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、CPU の 1 % 未満を占めています。<br/><br/>
+: データベースモニタリングのデフォルトの Agent 構成は保守的ですが、収集間隔やクエリのサンプリングレートなどの設定を調整することで、よりニーズに合ったものにすることができます。ワークロードの大半において、Agent はデータベース上のクエリ実行時間の 1 % 未満、CPU の 1 % 未満を占めています。<br/><br/>
 データベースモニタリングは、ベースとなる Agent 上のインテグレーションとして動作します ([ベンチマークを参照][1]してください)。
 
 プロキシ、ロードバランサー、コネクションプーラー
@@ -75,9 +75,9 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 
 ## Agent にアクセスを付与する
 
-Datadog Agent は、統計やクエリを収集するためにデータベース サーバーへの読み取り専用のアクセスを必要とします。
+Datadog Agent は、統計やクエリを収集するためにデータベースサーバーへの読み取り専用のアクセスを必要とします。
 
-Postgres がレプリケーションされている場合、以下の SQL コマンドはクラスター内の**プライマリ**データベースサーバー (ライター) で実行する必要があります。Agent が接続するデータベースサーバー上の PostgreSQL データベースを選択します。Agent は、どのデータベースに接続してもデータベースサーバー上のすべてのデータベースからテレメトリーを収集することができるため、デフォルトの `postgres` データベースを使用することをお勧めします。[そのデータベースに対して、固有のデータに対するカスタムクエリ]を Agentで実行する必要がある場合のみ別のデータベースを選択してください[5]。
+Postgres がレプリケーションされている場合、以下の SQL コマンドはクラスター内の**プライマリ**データベースサーバー (ライター) で実行する必要があります。Agent が接続するデータベースサーバー上の PostgreSQL データベースを選択します。Agent は、どのデータベースに接続してもデータベースサーバー上のすべてのデータベースからテレメトリーを収集することができるため、デフォルトの `postgres` データベースを使用することをお勧めします。[そのデータベースに対して、固有のデータに対するカスタムクエリ]を Agent で実行する必要がある場合のみ別のデータベースを選択してください[5]。
 
 選択したデータベースに、スーパーユーザー (または十分な権限を持つ他のユーザー) として接続します。例えば、選択したデータベースが `postgres` である場合は、次のように実行して [psql][6] を使用する `postgres` ユーザーとして接続します。
 
@@ -90,6 +90,8 @@ Postgres がレプリケーションされている場合、以下の SQL コマ
 ```SQL
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
+
+**注:** Azure マネージド ID 認証もサポートされています。Azure インスタンスでのこれの構成方法については、[ガイド][12]を参照してください。
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
@@ -115,7 +117,7 @@ GRANT USAGE ON SCHEMA public TO datadog;
 GRANT SELECT ON pg_stat_database TO datadog;
 ```
 
-**すべてのデータベース**に関数を作成して、Agent が `pg_stat_activity` および `pg_stat_statements` の全コンテンツを読み込めるようにします。
+**すべてのデータベース**に関数を作成して、Agent が `pg_stat_activity` および `pg_stat_statements` の内容を完全に読み取ることができるようにします。
 
 ```SQL
 CREATE OR REPLACE FUNCTION datadog.pg_stat_activity() RETURNS SETOF pg_stat_activity AS
@@ -229,7 +231,7 @@ Azure Postgres データベースを監視するには、インフラストラ�
        # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
        azure:
         deployment_type: '<DEPLOYMENT_TYPE>'
-        name: '<AZURE_INSTANCE_ENDPOINT>'
+        fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
    ```
 2. [Agent を再起動します][2]。
 
@@ -337,7 +339,7 @@ instances:
     ssl: true
     azure:
       deployment_type: "<DEPLOYMENT_TYPE>"
-      name: "<AZURE_INSTANCE_ENDPOINT>"' \
+      fully_qualified_domain_name: "<AZURE_INSTANCE_ENDPOINT>"' \
   datadog/datadog
 ```
 
@@ -365,7 +367,7 @@ instances:
     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<AZURE_INSTANCE_ENDPOINT>'
+      fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 
     ## 必須。Postgres 9.6 の場合、セットアップで作成した関数を使用するため、以下の行をコメント解除します
     # pg_stat_statements_view: datadog.pg_stat_statements()
@@ -399,7 +401,7 @@ metadata:
           "ssl": true,
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
-            "name": "<AZURE_INSTANCE_ENDPOINT>"
+            "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"
           }
         }
       ]
@@ -456,8 +458,9 @@ Azure からより包括的なデータベースメトリクスを収集する�
 [4]: https://docs.microsoft.com/en-us/azure/postgresql/howto-configure-server-parameters-using-portal
 [5]: /ja/integrations/faq/postgres-custom-metric-collection-explained/
 [6]: https://www.postgresql.org/docs/current/app-psql.html
-[7]: https://app.datadoghq.com/account/settings#agent
+[7]: https://app.datadoghq.com/account/settings/agent/latest
 [8]: /ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://app.datadoghq.com/databases
 [10]: /ja/integrations/azure_db_for_postgresql/
 [11]: /ja/database_monitoring/setup_postgres/troubleshooting/
+[12]: /ja/database_monitoring/guide/managed_authentication

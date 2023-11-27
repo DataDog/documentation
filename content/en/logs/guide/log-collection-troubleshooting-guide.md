@@ -253,7 +253,15 @@ See the [Lambda Log Collection Troubleshooting Guide][10]
 
 ## Unexpectedly dropping logs
 
-Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][12] that could match your logs.
+Check if logs appear in the [Datadog Live Tail][11].
+
+If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][12] that could match your logs.
+If they do not appear in the Live Tail, they might have been dropped if their timestamp was further than 18 hours in the past. You can check which `service` and `source` may be impacted with the `datadog.estimated_usage.logs.drop_count` metric.
+
+## Truncated logs
+
+Logs above 1MB are truncated. You can check which `service` and `source` are impacted with the `datadog.estimated_usage.logs.truncated_count` and `datadog.estimated_usage.logs.truncated_bytes` metrics.
+
 
 ## Further Reading
 
@@ -261,9 +269,9 @@ Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live 
 
 [1]: /logs/
 [2]: /help/
-[3]: /agent/guide/agent-commands/#restart-the-agent
+[3]: /agent/configuration/agent-commands/#restart-the-agent
 [4]: /agent/logs/log_transport?tab=https#enforce-a-specific-transport
-[5]: /agent/guide/agent-commands/#agent-status-and-information
+[5]: /agent/configuration/agent-commands/#agent-status-and-information
 [7]: /integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
 [9]: /logs/guide/docker-logs-collection-troubleshooting-guide/

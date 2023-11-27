@@ -489,6 +489,16 @@ logs:
     auto_multi_line_detection: true
 ```
 
+Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file:
+
+```yaml
+logs_config:
+  auto_multi_line_detection: true
+  auto_multi_line_extra_patterns:
+   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
+```
+
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -537,16 +547,6 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file:
-
-```yaml
-logs_config:
-  auto_multi_line_detection: true
-  auto_multi_line_extra_patterns:
-   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
-```
-
 With this feature enabled, when a new log file is opened the Agent tries to detect a pattern. During this process the logs are sent as single lines. After the detection threshold is met, all future logs for that source are aggregated with the detected pattern, or as single lines if no pattern is found. Detection takes at most 30 seconds or the first 500 logs (whichever comes first).
 
 **Note**: If you can control the naming pattern of the rotated log, ensure that the rotated file replaces the previously active file with the same name. The Agent reuses a previously detected pattern on the newly rotated file to avoid re-running detection.
@@ -570,7 +570,7 @@ If your log files are labeled by date or all stored in the same directory, confi
   * Matches `/var/log/myapp/errorLog/myerrorfile.log`
   * Doesn't match `/var/log/myapp/mylogfile.log`.
 
-Configuration example:
+Configuration example for Linux:
 
 ```yaml
 logs:
@@ -585,7 +585,22 @@ logs:
 
 The example above matches `/var/log/myapp/log/myfile.log` and excludes `/var/log/myapp/log/debug.log` and `/var/log/myapp/log/trace.log`.
 
+Configuration example for Windows:
+
+```yaml
+logs:
+  - type: file
+    path: C:\\MyApp\\*.log
+    exclude_paths:
+      - C:\\MyApp\\MyLog.*.log
+    service: mywebapp
+    source: csharp
+```
+
+The example above matches `C:\\MyApp\\MyLog.log` and excludes `C:\\MyApp\\MyLog.20230101.log` and `C:\\MyApp\\MyLog.20230102.log`.
+
 **Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
+**Note2**: The path and exclude_paths values are case sensitive.
 
 ## Tail most recently modified files first
 
@@ -677,5 +692,5 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 [1]: https://golang.org/pkg/regexp/syntax/
 [2]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
 [3]: /agent/faq/commonly-used-log-processing-rules
-[4]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[5]: /agent/guide/agent-commands/#agent-information
+[4]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[5]: /agent/configuration/agent-commands/#agent-information

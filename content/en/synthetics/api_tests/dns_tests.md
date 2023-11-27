@@ -45,7 +45,7 @@ After choosing to create a `DNS` test, define your test's request.
 3. Specify your DNS Server **Port** (optional). If not specified, the DNS Server port defaults to 53.
 4. Specify the amount of time in seconds before the test times out (optional).
 5. **Name** your DNS test.
-6. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][3].
+6. Add `env` **Tags** as well as any other tag to your DNS test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
 
 {{< img src="synthetics/api_tests/dns_test_config_new.png" alt="Define DNS query" style="width:90%;" >}}
 

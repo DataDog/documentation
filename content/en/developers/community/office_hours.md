@@ -3,6 +3,10 @@ title: Community Office Hours
 type: documentation
 aliases:
    - /developers/office_hours/
+further_reading:
+- link: "https://www.datadoghq.com/blog/introducing-open-source-hub/"
+  tag: "Blog"
+  text: "Introducing the Datadog Open Source Hub"
 ---
 
 Datadog runs twice monthly code reviews and office hours to assist community members who are contributing to Datadog [open source projects](#list-of-open-source-projects).
@@ -29,6 +33,10 @@ Office hours are held in #integrations in the [Datadog Community Slack][1] ([get
 ### List of open source projects
 
 Discover the full list of [Datadog open-source projects at GitHub][5].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://datadoghq.slack.com
 [2]: http://chat.datadoghq.com
