@@ -10,8 +10,7 @@ short_description: "Capture any RSS feed inside your Datadog event explorer"
 dependencies:
     ['https://github.com/DataDog/documentation/blob/master/content/en/integrations/rss.md']
 categories:
-    - notification
-    - web
+    - notifications
 integration_id: "feed"
 ---
 

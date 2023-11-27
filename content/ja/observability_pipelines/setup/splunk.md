@@ -122,7 +122,7 @@ AWS アカウントで Worker を実行するには、そのアカウントの�
 
 ## Splunk インデックスの設定
 
-<div class="alert alert-info">入力の <strong>Enable Indexer Acknowledgements</strong> 設定を有効にすると、Observability Pipelines は確認応答をサポートします。</div>
+<div class="alert alert-info">入力で <strong>Enable Indexer Acknowledgments</strong> 設定を有効にすると、Observability Pipelines は確認応答をサポートします。</div>
 
 Observability Pipelines Worker からログを受信するには、インデックスに HEC 入力と HEC トークンを準備する必要があります。
 
