@@ -33,7 +33,7 @@ In-progress pipelines work with the following CI providers:
 
 ### Webhook events deliver is not ensured by CI Providers
 
-This feature depends on CI Providers sending the webhook events indicating if pipelines are running or have finished correctly.
+This feature depends on CI Providers sending the webhook events properly indicating if pipelines are running or have finished.
 
 You can see pipeline executions marked as `Running` in Datadog that have already finished if the CI Provider could not send all the webhooks events properly. This might lead to have false positives on monitors tracking in-progress pipelines.
 
