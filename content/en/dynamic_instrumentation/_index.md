@@ -112,9 +112,23 @@ Error Tracking
 
 A *log probe* emits a log when it executes. 
 
+To create a log probe:
+
+1. Select **Log** as the probe type.
+1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location).
+1. Define a log message template. You can use the Dynamic Instrumentation expression language to reference values from the execution context.
+1. Optionally enable extra data capturing from the probe. (Beta)
+1. Optionally define a condition using the Dynamic Instrumentation expression language. The log is emitted when the expression evaluates to true.
+
 Log probes are enabled by default on all service instances that match the specified environment and version. They are rate-limited to execute at most 5000 times per second, on each instance of your service.
 
-**Beta**: If you enable **Capture method parameters and local variables** on the log probe, the following debugging data is captured and added to the log event:
+You must set a log message template on every log probe. The template supports embedding [expressions][15] inside curly brackets. For example: `User {user.id} purchased {count(products)} products`.
+
+You can also set a condition on a log probe using the [expression language][15]. The expression must evaluate to a Boolean. The probe executes if the expression is true, and does not capture or emit any data if the expression is false.
+
+{{< img src="dynamic_instrumentation/log_probe.png" alt="Creating a Dynamic Instrumentation log probe" >}}
+
+**Beta**: If you enable **Capture method parameters and local variables** on the log probe, all executional context will be added the log event:
   - **Method arguments**, **local variables**, and **fields**, with the following default limits:
     - Follow references three levels deep (configurable in the UI).
     - The first 100 items inside collections.
@@ -123,39 +137,16 @@ Log probes are enabled by default on all service instances that match the specif
   - Call **stack trace**.
   - Caught and uncaught **exceptions**.
 
-Because capturing the execution context is performance-intensive, by default it is enabled on only one instance of your service that matches the specified environment and version. Probes with this setting enabled are rate-limited to one hit per second.
-
-You must set a log message template on every log probe. The template supports embedding [expressions][15] inside curly brackets. For example: `User {user.id} purchased {count(products)} products`.
-
-You can also set a condition on a log probe using the [expression language][15]. The expression must evaluate to a Boolean. The probe executes if the expression is true, and does not capture or emit any data if the expression is false.
+Probes with this setting enabled are rate-limited to one hit per second.
 
 <div class="alert alert-warning"><p><strong>Warning: The captured data may contain sensitive information, including personal data, passwords, and secrets such as AWS keys.</strong></p><p>To ensure this information is properly redacted:<ul>
 <li>Datadog Dynamic Instrumentation employs several techniques to redact sensitive information. To learn more about the default mechanisms or how to extend the it to meet your needs, read <a href="/dynamic_instrumentation/sensitive-data-scrubbing/">Sensitive Data Scrubbing</a>.</li>
 <li>Turn off the <strong>Capture method parameters and local variables</strong> option and explicitly select the variables you want to include in the log message template. Doing so ensures that log probes contain only data related to the variables that you specifically identify, thus reducing the risk of unintentional sensitive data leaks. </li>
 <li>If you are the Administrator of your Datadog account and would like to prevent other users from being able to use the <strong>Capture method parameters and local variables</strong> option, you can revoke their Dynamic Instrumentation Capture Variables (<code>debugger_capture_variables</code>) permission. </li></ul></p><p>Alternatively, if you need to log this data but want to mitigate the risk associated with it being accessible in the Datadog product, you can limit which users in your organization can view the captured data by setting up a <a href="/logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs">Restriction query</a> on <code>source:dd_debugger</code>.</p></div>
 
-
-To create a log probe:
-
-1. Select **Log** as the probe type.
-1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location).
-1. Define a log message template. You can use the Dynamic Instrumentation expression language to reference values from the execution context.
-1. Optionally enable extra data capturing from the probe.
-1. Optionally define a condition using the Dynamic Instrumentation expression language. The log is emitted when the expression evaluates to true.
-
-{{< img src="dynamic_instrumentation/log_probe.png" alt="Creating a Dynamic Instrumentation log probe" >}}
-
 ### Creating metric probes
 
 A *metric probe* emits a metric when it executes. 
-
-Metric probes are automatically enabled on all service instances that match the configured environment and version. Metric probes are not rate limited and execute every time the method or line is invoked.
-
-Dynamic Instrumentation metric probes support the following metric types:
-
-- [**Count**][1]: Counts how many times a given method or line is executed. Can be combined with [metric expressions][15] to use the value of a variable to increment the count.
-- [**Gauge**][2]: Generates a gauge based on the last value of a variable. This metric requires a [metric expression][15].
-- [**Histogram**][3]: Generates a statistical distribution of a variable. This metric requires a [metric expression][15].
 
 To create a metric probe:
 
@@ -167,11 +158,17 @@ To create a metric probe:
 
 {{< img src="dynamic_instrumentation/metric_probe.png" alt="Creating a Dynamic Instrumentation metric probe" >}}
 
+Metric probes are automatically enabled on all service instances that match the configured environment and version. Metric probes are not rate limited and execute every time the method or line is invoked.
+
+Dynamic Instrumentation metric probes support the following metric types:
+
+- [**Count**][1]: Counts how many times a given method or line is executed. Can be combined with [metric expressions][15] to use the value of a variable to increment the count.
+- [**Gauge**][2]: Generates a gauge based on the last value of a variable. This metric requires a [metric expression][15].
+- [**Histogram**][3]: Generates a statistical distribution of a variable. This metric requires a [metric expression][15].
+
 ### Creating span probes
 
 A *span probe* emits a span when a method is executed. 
-
-You can use a *span probe* as a more efficient alternative to [creating new spans with Custom Instrumentation][13]. If the method throws an exception, the details of the exception are associated with the newly created span's `error` tag.
 
 To create a span probe:
 
@@ -180,13 +177,12 @@ To create a span probe:
 
 {{< img src="dynamic_instrumentation/span_probe.png" alt="Creating a Dynamic Instrumentation span probe" >}}
 
+You can use a *span probe* as an alternative to [creating new spans with Custom Instrumentation][13]. If the method throws an exception, the details of the exception are associated with the newly created span's `error` tag.
 
 ### Creating span tag probes
 
 A *span tag* probe adds a tag value to an existing span. You can add a tag either to the _active_ span or to the _service entry_ span.
 Keep in mind that internal spans are not indexed by default and so might not be searchable in APM.  
-
-You can use a *span tag probe* as a more efficient alternative to [using Custom Instrumentation to add tags in code][14].
 
 To create a span tag probe:
 
@@ -199,6 +195,9 @@ To create a span tag probe:
 
 
 {{< img src="dynamic_instrumentation/span_tag_probe.png" alt="Creating a Dynamic Instrumentation span tag probe" >}}
+
+You can use a *span tag probe* as an alternative to [using Custom Instrumentation to add tags in code][14].
+
  
 ## Further Reading
 
