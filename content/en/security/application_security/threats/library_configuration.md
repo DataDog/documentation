@@ -100,6 +100,10 @@ See [APM Data Security][3] for information about other mechanisms in the Datadog
 
 To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration. Once it's removed, restart your service.
 
+If no `DD_APPSEC_ENABLED=true` environment variable is set for your service:
+* If it's a PHP service: explicitly set the environment variable to `DD_APPSEC_ENABLED=false` and restart your service
+* If ASM was activated in one-click: go to [ASM service configuration][8], click on your service and then click **Deactivate**.
+
 If you need additional help, contact [Datadog support][6].
 
 ## Configure a custom blocking page or payload
@@ -119,3 +123,4 @@ If you need additional help, contact [Datadog support][6].
 [5]: https://app.datadoghq.com/security/configuration/asm/passlist
 [6]: /help/
 [7]: /security/application_security/threats/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking
+[8]: https://app.datadoghq.com/security/configuration/asm/services-config
