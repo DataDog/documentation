@@ -211,7 +211,7 @@ It's also possible to copy an integration pipeline using the clone button.
 
 A processor executes within a pipeline to complete a data-structuring action. See the [Processors docs][3] to learn how to add and configure a processor by processor type, within the app or with the API. 
 
-See [Parsing dates][11] on how to parse a custom date and time format and for information on the `timezone` parameter, which is needed if your timestamps are not in UTC.
+See [Parsing dates][10] on how to parse a custom date and time format and for information on the `timezone` parameter, which is needed if your timestamps are not in UTC.
 
 ### Nested pipelines
 
@@ -237,7 +237,7 @@ Reorder pipelines precisely with the `Move to` option in the sliding option pane
 
 ## Estimated usage metrics
 
-Estimated usage metrics are displayed per pipeline - specifically, the volume and count of logs being ingested and modified by each pipeline. There is also a link to the out-of-the-box [Logs Estimated Usage Dashboard][10] from every pipeline where you can view that pipeline's usage metrics in more detailed charts.
+Estimated usage metrics are displayed per pipeline - specifically, the volume and count of logs being ingested and modified by each pipeline. There is also a link to the out-of-the-box [Logs Estimated Usage Dashboard][11] from every pipeline where you can view that pipeline's usage metrics in more detailed charts.
 
 {{< img src="logs/processing/pipelines/log_pipeline_statistics.png" alt="How to get a quick view of your pipelines' usage metrics" style="width:50%;">}}
 
@@ -257,5 +257,5 @@ Estimated usage metrics are displayed per pipeline - specifically, the volume an
 [7]: https://app.datadoghq.com/logs/pipelines/pipeline/library
 [8]: https://app.datadoghq.com/logs/pipelines/remapping
 [9]: /integrations/#cat-log-collection
-[10]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
-[11]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
+[10]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
+[11]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
