@@ -34,7 +34,7 @@ The following OpenTelemetry features are implemented in the Datadog library as n
 
 ## Configuring OpenTelemetry to use the Datadog trace provider
 
-1. Add your desired manual OpenTelemetry instrumentation to your Go code following the [OpenTelemetry Go Manual Instrumentation documentation][5].
+1. Add your desired manual OpenTelemetry instrumentation to your Go code following the [OpenTelemetry Go Manual Instrumentation documentation][5]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
 
 2. Install the OpenTelemetry package `go.opentelemetry.io/otel` using the command:
 

@@ -32,8 +32,10 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 ## Configuring OpenTelemetry to use the Datadog tracing library
 
-1. Add your desired manual OpenTelemetry instrumentation to your Java code following the [OpenTelemetry Java Manual Instrumentation documentation][5].
-1. Add the [Datadog tracing library to the JVM][11].
+1. Add your desired manual OpenTelemetry instrumentation to your Java code following the [OpenTelemetry Java Manual Instrumentation documentation][5]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
+
+1. Add the [Datadog tracing library to the JVM][11]. **Beta:** You can optionally do this with [One-Step APM Instrumentation][13].
+
 1. Set the `dd.trace.otel.enabled` system property to `true`.
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application.
@@ -51,3 +53,4 @@ Datadog combines these OpenTelemetry spans with other Datadog APM spans into a s
 [9]: /tracing/trace_collection/trace_context_propagation/java/
 [11]: /tracing/trace_collection/dd_libraries/java/?tab=springboot#add-the-java-tracer-to-the-jvm
 [12]: /opentelemetry/guide/otel_api_tracing_interoperability/
+[13]: /tracing/trace_collection/single-step-apm/

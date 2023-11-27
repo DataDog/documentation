@@ -33,7 +33,8 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 ## Configuring OpenTelemetry to use the Datadog Tracer Provider
 
-1. Add your desired manual OpenTelemetry instrumentation to your Python code following the [OpenTelemetry Python Manual Instrumentation documentation][5].
+1. Add your desired manual OpenTelemetry instrumentation to your Python code following the [OpenTelemetry Python Manual Instrumentation documentation][5]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
+
 2. Install the python tracer:
 
     ```
@@ -41,6 +42,7 @@ The following OpenTelemetry features implemented in the Datadog library as noted
     ```
 
 3. Set `DD_TRACE_OTEL_ENABLED` environment variable to `True`.
+
 4. Run your application with `ddtrace-run`. This automatically configures the `Datadog Tracer Provider`. If your application cannot use `ddtrace-run` read [the `dd-trace-py` OpenTelemetry API docs][11] for additional configurations.
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It supports [OpenTelemetry Automatic instrumentation][8] also.

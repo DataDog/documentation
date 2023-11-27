@@ -35,7 +35,8 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 ## Configuring OpenTelemetry to use the Datadog tracing library
 
-1. Add your desired manual OpenTelemetry instrumentation to your Ruby code following the [OpenTelemetry Ruby Manual Instrumentation documentation][5].
+1. Add your desired manual OpenTelemetry instrumentation to your Ruby code following the [OpenTelemetry Ruby Manual Instrumentation documentation][5]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
+
 1. Add the `ddtrace` gem to your Gemfile:
 
     ```ruby

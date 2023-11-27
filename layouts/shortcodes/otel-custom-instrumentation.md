@@ -7,7 +7,8 @@ By instrumenting your code with OpenTelemetry API:
 - Your code remains free of vendor-specific API calls.
 - Your code does not depend on Datadog tracing libraries at compile time (only runtime).
 - Your code does not use the deprecated OpenTracing API.
-- The traces produced by your running code can be processed, analyzed, and monitored alongside Datadog traces and in Datadog proprietary products
+
+Replace the OpenTelemetry SDK with the Datadog tracing library in the instrumented application, and the traces produced by your running code can be processed, analyzed, and monitored alongside Datadog traces and in Datadog proprietary products
 
 For more information, read [Interoperability of OpenTelemetry API and Datadog instrumented traces][103].
 
