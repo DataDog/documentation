@@ -1,15 +1,15 @@
 ---
 aliases:
-- /ko/guides/basic_agent_usage/centos/
+- /ko/guides/basic_agent_usage/redhat/
 further_reading:
 - link: /logs/
-  tag: 설명서
+  tag: Documentation
   text: 로그 수집
 - link: /infrastructure/process/
-  tag: 설명서
+  tag: Documentation
   text: 프로세스 수집
 - link: /tracing/
-  tag: 설명서
+  tag: Documentation
   text: 트레이스 수집
 - link: /agent/basic_agent_usage/#agent-architecture
   tag: 설명서
@@ -17,18 +17,20 @@ further_reading:
 - link: /agent/configuration/network#configure-ports
   tag: 설명서
   text: 인바운드 포트 구성
-kind: documentation
-platform: CentOS
-title: CentOS(Rocky/Alma Linux 포함)를 위한 기본 Agent 사용법
+kind: 설명서
+platform: Red Hat
+title: Red Hat의 기본 Agent 사용법
 ---
 
 ## 개요
 
-이 페이지에서는 CentOS 및 그 파생 버전인 Rocky Linux, Alma Linux를 위한 Datadog Agent의 기본 기능에 대해 설명합니다. Datadog Agent를 설치하려면 CentOS용 [Agent 설치 지침][1]을 따르세요.
+이 페이지에서는 Red Hat을 위한 Datadog Agent의 기본 기능에 대해 간략하게 설명합니다. 아직 Agent를 설치하지 않은 경우, [Datadog Agent 통합][1] 설명서에서 지침을 확인할 수 있습니다.
 
 패키지는 64-bit x86 및 Arm v8 아키텍처로 이용하실 수 있습니다. 다른 아키텍처의 경우에는 소스 설치를 활용하세요.
 
-**참고**: CentOS 6 이상은 64비트 x86 아키텍처에서 지원됩니다. CentOS/Rocky/Alma 8 이상은 64비트 Arm v8 아키텍처에서 지원됩니다.
+**참조**:
+- 64비트 x86 아키텍처에서는 RedHat/CentOS 6 이상이 지원됩니다. Agent 6.33.0/7.33.0부터는 AlmaLinux/Rocky 8 이상이 지원됩니다.
+- 64비트 Arm v8 아키텍처에서는 RedHat/CentOS 8 이상이 지원됩니다. Agent 6.33.0/7.33.0부터는 AlmaLinux/Rocky 8 이상이 지원됩니다.
 
 ## 명령어
 
@@ -37,7 +39,7 @@ Agent v6과 v7에서 운영 체제에서 지원하는 서비스 관리자가 Age
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-### CentOS 7 이상
+### Red Hat 7 또는 이상
 
 | 설명                        | 명령어                                                |
 |------------------------------------|--------------------------------------------------------|
@@ -50,7 +52,7 @@ Agent v6과 v7에서 운영 체제에서 지원하는 서비스 관리자가 Age
 | 명령어 사용법 표시              | `sudo datadog-agent --help`                            |
 | 점검 실행                        | `sudo -u dd-agent -- datadog-agent check <CHECK_NAME>` |
 
-### CentOS 6
+### Red Hat 6
 
 | 설명                        | 명령어                                                |
 |------------------------------------|--------------------------------------------------------|
@@ -77,15 +79,20 @@ Agent v6과 v7에서 운영 체제에서 지원하는 서비스 관리자가 Age
 | 명령어 사용법 표시              | `sudo service datadog-agent`                      |
 | 점검 실행                        | `sudo -u dd-agent -- dd-agent check <CHECK_NAME>` |
 
+{{< /tabs >}}
+
+{{< /tabs >}}
+
 **참조**: `service` 래퍼를 시스템에서 이용할 수 없다면 다음을 사용하세요.
 
 * `upstart` 기반 시스템의 경우: `sudo start/stop/restart/status datadog-agent`
 * `systemd` 기반 시스템의 경우: `sudo systemctl start/stop/restart/status datadog-agent`
+* `initctl` 기반 시스템의 경우:`sudo initctl start/stop/restart/status datadog-agent`
 
 [서비스 라이프사이클 명령어에 대해 더 자세히 알아보세요][2].
 
-{{% /tab %}}
-{{< /tabs >}}
+
+
 
 
 ## 설정
