@@ -15,9 +15,9 @@ further_reading:
 
 ## Overview
 
-The Log Pipelines Scanner allows you to scan log pipelines in real time, tracing specific logs and quickly identifying which pipelines and processing rules have made changes to its fields. Organizations rely on log pipelines to process extensive log volumes, each team restructuring and enriching logs differently for their specific use cases, such as security monitoring, compliance audits, and DevOps.
+Log Pipelines Scanner allows you to scan log pipelines in real time, trace specific logs, and identify which pipelines and processing rules made changes to its fields. Organizations rely on log pipelines to process extensive log volumes, each team restructuring and enriching logs differently for their specific use cases, such as security monitoring, compliance audits, and DevOps.
 
-This lets you and your team:
+Use Pipeline Scanner to:
 
 - Troubleshoot log processing issues, such as unparsed logs, missing tags, or unexpected changes to the log structure.
 - Determine and remove conflicting or redundant processing rules.
@@ -31,7 +31,7 @@ The Pipeline Scanner samples and annotates logs matching the search query with t
 1. Click on a log where you want to find out which pipelines and processors are modifying it.
 1. Click the Pipeline Scanner icon in the upper right corner of the panel. If you hover over the icon, it says `View pipelines for similar logs`.
     Alternatively, click on an attribute in the log panel and select **Scan pipelines for**. 
-1. You can further refine your query in the Pipeline Scanner page. This query cannot be changed once a session is started.
+1. You can further refine your query in the [Pipeline Scanner][2] page. This query cannot be changed after a session is started.
 1. Click **Launch this session**.   
     For the next 15 minutes, logs matching your query are tagged with information about which pipelines and processors are modifying those logs. The Live Tail in the scanner shows which pipelines and how many pipelines match each of the logs.
 1. Click a log to see the list of pipelines and processors matched to that log. Live Tail is paused at this point.
@@ -40,13 +40,13 @@ You can modify the pipelines and processors in the right side panel. The modific
 
 You can also access Pipeline Scanner from the Log Pipelines page:
 
-1. Navigate to [Log Pipelines][2]. 
+1. Navigate to [Log Pipelines][3]. 
 2. Click **Pipeline Scanner**.
 3. Define the query for the logs you want to inspect.
 
 ### Limitations
 
-The `logs_write_pipelines` permission is required to use the Pipeline Scanner. See [Log Management RBAC permissions][3] for more information.
+The `logs_write_pipelines` permission is required to use the Pipeline Scanner. See [Log Management RBAC permissions][4] for more information.
 
 The number of sessions you can launch is limited to:
 
@@ -58,5 +58,6 @@ The number of sessions you can launch is limited to:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs
-[2]: https://app.datadoghq.com/logs/pipelines
-[3]: /account_management/rbac/permissions/#log-management
+[2]: https://app.datadoghq.com/logs/pipelines?query=source:*
+[3]: https://app.datadoghq.com/logs/pipelines
+[4]: /account_management/rbac/permissions/#log-management
