@@ -3,7 +3,7 @@ title: Enable Dynamic Instrumentation for Java
 kind: Documentation
 aliases:
     - /tracing/dynamic_instrumentation/enabling/java/
-is_beta: true
+is_beta: false
 private: false
 code_lang: java
 type: multi-code-lang
@@ -30,7 +30,7 @@ The Datadog Dynamic Instrumentation library is supported in JDK version 8 and ab
    ```shell
    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
-   **Note**: Dynamic Instrumentation is available in the `dd-java-agent.jar` library in versions 1.15.0 and later.
+   **Note**: Dynamic Instrumentation is available in the `dd-java-agent.jar` library in versions 1.24.0 and later.
 
 3. Run your service with Dynamic Instrumentation enabled by setting `-Ddd.dynamic.instrumentation.enabled` flag or `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` Unified Service Tags so you can filter and group your probes and target active clients across these dimensions.
    {{< tabs >}}
