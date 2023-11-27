@@ -13,6 +13,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/csm-vulnerability-management/"
   tag: "Blog"
   text: "Mitigate infrastructure vulnerabilities with Datadog Cloud Security Management"
+- link: "https://www.datadoghq.com/blog/datadog-container-image-view/"
+  tag: "Blog"
+  text: "Enhance your troubleshooting workflow with Container Images in Datadog Container Monitoring"
 ---
 
 {{< site-region region="gov" >}}
