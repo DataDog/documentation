@@ -94,7 +94,7 @@ Datadog에서 태그를 지정할 때  통합 서비스 태깅을 사용하는 �
 
 ## 시스템 단위에서 환경 변수 사용
 
-systemd를 사용하여 서비스를 관리하는 운영 체제에서는 일반적으로 글로벌(예: `/etc/environment`) 또는 세션 기반(예: `export VAR=value`)과 같은 환경 변수를 서비스에서 사용할 수 있도록 구성하지 않는 한 사용할 수 없습니다. 자세한 내용은 [systemd Exec 매뉴얼 페이지][8]를 참조하세요.
+systemd를 사용하여 서비스를 관리하는 운영 체제에서는 일반적으로 글로벌(예: `/etc/environment`) 또는 세션 기반(예: `export VAR=value`)과 같은 환경 변수를 서비스에서 사용할 수 있도록 설정하지 않는 한 사용할 수 없습니다. 자세한 내용은 [systemd Exec 매뉴얼 페이지][8]를 참조하세요.
 
 Datadog Agent 7.45에서 Datadog Agent 서비스(`datadog-agent.service` 유닛)는 필요 시 환경 변수 할당을 파일(`<ETC_DIR>/environment`)에서 로드할 수 있습니다.
 
