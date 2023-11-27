@@ -501,87 +501,11 @@ If you are using a runtime or custom logger that isn't supported, follow these s
 
 ## Link errors to your source code
 
-<div class="alert alert-info">This feature supports Go, Java, Python, and JavaScript.</div>
+[Datadog source code integration][26] allows you to link your telemetry (such as stack traces) to the source code of your Lambda functions in your Git repositories. 
 
-[Datadog source code integration][26] allows you to link your telemetry (such as stack traces) to the source code of your Lambda functions in GitHub. Follow the instructions below to enable the feature. **Note**: You must deploy from a local Git repository that is neither dirty nor ahead of remote.
+For instructions on setting up the source code integration on your serverless applications, see the [Embed Git information in your build artifacts section][101].
 
-{{< tabs >}}
-{{% tab "Datadog CLI" %}}
-
-Run `datadog-ci lambda instrument` with `--source-code-integration=true` to automatically send Git metadata in the current local directory and add the required tags to your Lambda functions.
-
-**Note**: You must set environment variable `DATADOG_API_KEY` for `datadog-ci` to upload Git metadata. `DATADOG_API_KEY` is also set on your Lambda functions to send telemetry unless you also have `DATADOG_API_KEY_SECRET_ARN` defined, which takes precedence over `DATADOG_API_KEY`.
-
-
-```sh
-# ... other required environment variables, such as DATADOG_SITE
-
-# required, to upload git metadata
-export DATADOG_API_KEY=<DATADOG_API_KEY>
-
-# optional, DATADOG_API_KEY is used if undefined
-export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
-
-datadog-ci lambda instrument \
-    --source-code-integration=true
-    # ... other required arguments, such as function names
-```
-{{% /tab %}}
-{{% tab "Serverless Framework" %}}
-
-With `enableSourceCodeIntegration` set to `true`, the Datadog serverless plugin automatically sends Git metadata in the current local directory and adds the required tags to your Lambda functions.
-
-**Note**: You must set the `apiKey` parameter for the plugin to upload Git metadata. `apiKey` is also set on your Lambda functions to send telemetry unless you also have `apiKeySecretArn` defined, which takes precedence over `apiKey`.
-
-```yaml
-custom:
-  datadog:
-    # ... other required parameters, such as the Datadog site
-    apiKey: <apiKey> # required, to upload git metadata
-    apiKeySecretArn: <apiKeySecretArn> # optional, apiKey will be used if undefined
-    enableSourceCodeIntegration: true # default is true
-```
-
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
-
-Change your initialization function as follows to pass the gitHash value to the CDK stack:
-
-```typescript
-async function main() {
-  // Make sure to add @datadog/datadog-ci via your package manager
-  const datadogCi = require("@datadog/datadog-ci");
-  const gitHash = await datadogCi.gitMetadata.uploadGitCommitHash('{Datadog_API_Key}', '<SITE>')
-
-  const app = new cdk.App();
-  // Pass in the hash to the ExampleStack constructor
-  new ExampleStack(app, "ExampleStack", {}, gitHash);
-}
-```
-
-In your stack constructor, add an optional `gitHash` parameter, and call `addGitCommitMetadata()`:
-
-```typescript
-export class ExampleStack extends cdk.Stack {
-  constructor(scope: cdk.App, id: string, props?: cdk.StackProps, gitHash?: string) {
-    ...
-    ...
-    datadog.addGitCommitMetadata([<YOUR_FUNCTIONS>], gitHash)
-  }
-}
-```
-
-{{% /tab %}}
-{{% tab "Others" %}}
-
-1. Set the environment variable `DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA>,git.repository_url=<REPOSITORY_URL>"` on your Lambda functions
-2. Run [datadog-ci git-metadata upload][1] in your CI pipeline to upload Git metadata
-3. Optionally, [install a GitHub App][2] to display inline source code snippets
-
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
-[2]: https://app.datadoghq.com/integrations/github/
-{{% /tab %}}
-{{< /tabs >}}
+[101]: /integrations/guide/source-code-integration/?tab=go#serverless
 
 ## Collect Profiling data (public beta)
 
