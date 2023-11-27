@@ -27,8 +27,6 @@ See [compatibility requirements][4] for information about what ASM features are 
 
 ## AWS Lambda
 
-<div class="alert alert-info">ASM support for AWS Lambda is in beta. Application Security Threat detection is done by using the Datadog's AWS Lambda Extension along with APM Tracing.</div>
-
 Configuring ASM for AWS Lambda involves:
 
 1. Identifying functions that are vulnerable or are under attack, which would most benefit from ASM. Find them on [the Security tab of your Service Catalog][1].

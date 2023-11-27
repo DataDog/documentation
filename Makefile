@@ -2,7 +2,7 @@
 SHELL = /bin/bash
 MAKEFLAGS := --jobs=$(shell nproc)
 MAKEFLAGS += --output-sync --no-print-directory
-.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source
+.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source vector_data
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -113,6 +113,14 @@ data/workflows/%.json : integrations_data/extracted/dd-source/domains/workflow/a
 # Always run if PULL_RBAC_PERMISSIONS or we are running in gitlab e.g CI_COMMIT_REF_NAME exists
 data/permissions.json: hugpython
 	@. hugpython/bin/activate && ./local/bin/py/build/pull_rbac.py "$(DATADOG_API_KEY)" "$(DATADOG_APP_KEY)"
+
+integrations_data/extracted/vector:
+	$(call source_repo,vector,https://github.com/vectordotdev/vector.git,master,true,website/)
+
+# builds cue.json for vector
+vector_data: integrations_data/extracted/vector
+	@cue export $(shell find integrations_data/extracted/vector -type f -name "*.cue") > integrations_data/extracted/vector/cue.json; \
+	node ./assets/scripts/reference-process.js
 
 # only build placeholders in ci
 placeholders: hugpython update_pre_build

@@ -1032,6 +1032,16 @@ main:
     url: infrastructure/process/increase_process_retention/
     parent: infrastructure_process
     weight: 401
+  - name: Resource Catalog
+    url: infrastructure/resource_catalog/
+    parent: infrastructure
+    identifier: infrastructure_resource_catalog
+    weight: 5
+  - name: Cloud Resources Schema
+    url: infrastructure/resource_catalog/schema/
+    parent: infrastructure_resource_catalog
+    identifier: infrastructure_resource_catalog_schema
+    weight: 501
   - name: Metrics
     url: metrics/
     identifier: metrics_top_level
@@ -1473,6 +1483,27 @@ main:
     parent: workflows
     identifier: workflows_connections
     weight: 5
+  - name: App Builder
+    url: service_management/app_builder/
+    pre: app-builder
+    identifier: app_builder
+    parent: service_management_heading
+    weight: 80000
+  - name: Build Apps
+    url: service_management/app_builder/build/
+    parent: app_builder
+    identifier: app_builder_build
+    weight: 1
+  - name: Authentication
+    url: service_management/app_builder/auth/
+    parent: app_builder
+    identifier: app_builder_access
+    weight: 2
+  - name: Embedded Apps
+    url: service_management/app_builder/embedded_apps/
+    parent: app_builder
+    identifier: app_builder_embedded_apps
+    weight: 4
   - name: APM
     url: tracing/
     pre: apm
@@ -2017,41 +2048,51 @@ main:
     parent: tracing
     identifier: service_catalog
     weight: 7
+  - name: Browsing
+    url: tracing/service_catalog/browsing
+    parent: service_catalog
+    identifier: service_catalog_browse
+    weight: 701
+  - name: Investigating a Service
+    url: tracing/service_catalog/investigating
+    parent: service_catalog
+    identifier: service_investigate
+    weight: 702
   - name: Adding Entries to Service Catalog
     url: tracing/service_catalog/setup
     parent: service_catalog
     identifier: service_catalog_setup
-    weight: 701
+    weight: 703
   - name: Adding Metadata
     url: tracing/service_catalog/adding_metadata
     parent: service_catalog
     identifier: service_metadata
-    weight: 702
+    weight: 704
   - name: Service Catalog API
     url: tracing/service_catalog/service_definition_api
     parent: service_catalog
     identifier: service_catalog_api
-    weight: 703
+    weight: 705
   - name: Service Scorecards
     url: tracing/service_catalog/scorecards
     parent: service_catalog
     identifier: service_catalog_scorecards
-    weight: 704
+    weight: 706
   - name: Integrations
     url: tracing/service_catalog/integrations
     parent: service_catalog
     identifier: service_catalog_integrations
-    weight: 705
+    weight: 707
   - name: Troubleshooting
     url: tracing/service_catalog/troubleshooting
     parent: service_catalog
     identifier: service_catalog_troubleshooting
-    weight: 706
+    weight: 708
   - name: Guides
     url: tracing/service_catalog/guides
     parent: service_catalog
     identifier: service_catalog_guides
-    weight: 707
+    weight: 709
   - name: Service Observability
     url: tracing/services/
     parent: tracing
@@ -3035,6 +3076,10 @@ main:
     url: observability_pipelines/setup/datadog
     parent: observability_pipelines_setup
     weight: 101
+  - name: Datadog with Archiving
+    url: observability_pipelines/setup/datadog_with_archiving
+    parent: observability_pipelines_setup
+    weight: 102
   - name: Splunk
     url: observability_pipelines/setup/splunk
     parent: observability_pipelines_setup
@@ -3084,6 +3129,21 @@ main:
     parent: observability_pipelines_vector_configuration
     identifier: observability_pipelines_reference_sinks
     weight: 503
+  - name: Datadog Processing Language
+    url: observability_pipelines/reference/processing_language/
+    parent: observability_pipelines_reference
+    identifier: observability_pipelines_reference_processing_language
+    weight: 3
+  - name: Functions
+    url: observability_pipelines/reference/processing_language/functions/
+    parent: observability_pipelines_reference_processing_language
+    identifier: observability_pipelines_reference_processing_language_functions
+    weight: 1
+  - name: Errors
+    url: observability_pipelines/reference/processing_language/errors/
+    parent: observability_pipelines_reference_processing_language
+    identifier: observability_pipelines_reference_processing_language_errors
+    weight: 2
   - name: Guides
     url: observability_pipelines/guide/
     parent: observability_pipelines
@@ -3165,11 +3225,16 @@ main:
     parent: security_platform
     identifier: security_signal_management
     weight: 8
+  - name: Security Inbox
+    url: security/security_inbox
+    parent: security_platform
+    identifier: security_inbox
+    weight: 9
   - name: Audit Trail
     url: security/audit_trail
     parent: security_platform
     identifier: security_audit_trail
-    weight: 9
+    weight: 10
   - name: Cloud SIEM
     url: security/cloud_siem/
     pre: siem
@@ -3270,13 +3335,8 @@ main:
   - name: Custom Rules
     url: security/misconfigurations/custom_rules
     parent: cspm
-    identifier: custom_rules
+    identifier: cspm_custom_rules
     weight: 103
-  - name: Cloud Resources Schema
-    url: security/misconfigurations/custom_rules/schema/
-    parent: cspm
-    identifier: cspm_schema_gcp_test
-    weight: 104
   - name: Compliance Reports
     url: security/misconfigurations/frameworks_and_benchmarks
     parent: cspm
@@ -3297,11 +3357,6 @@ main:
     parent: cspm
     identifier: signals
     weight: 112
-  - name: Resource Catalog
-    url: /security/misconfigurations/resource_catalog
-    parent: cspm
-    identifier: resource_catalog
-    weight: 114
   - name: Identity Risks
     url: security/identity_risks/
     parent: csm
@@ -3312,11 +3367,6 @@ main:
     parent: csm
     identifier: vulnerabilities
     weight: 18
-  - name: Setup
-    url: security/vulnerabilities/setup
-    parent: vulnerabilities
-    identifier: vulnerabilities_setup
-    weight: 201
   - name: Default Detection Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm
@@ -4331,14 +4381,18 @@ main:
     url: developers/integrations/create-an-integration-recommended-monitor
     parent: dev_tools_integrations
     weight: 408
+  - name: Create a Cloud SIEM Detection Rule
+    url: developers/integrations/create-a-cloud-siem-detection-rule
+    parent: dev_tools_integrations
+    weight: 409
   - name: OAuth for Integrations
     url: developers/integrations/oauth_for_integrations
     parent: dev_tools_integrations
-    weight: 409
+    weight: 410
   - name: Install Agent Integration Developer Tool
     url: developers/integrations/python/
     parent: dev_tools_integrations
-    weight: 410
+    weight: 411
   - name: UI Extensions
     url: developers/ui_extensions
     parent: dev_tools
@@ -9156,8 +9210,7 @@ api:
         - v2
       operationids:
         - ListContainerImages
-      unstable:
-        - v2
+      unstable: []
       order: 1
   - name: Containers
     url: /api/latest/containers/
@@ -9173,8 +9226,7 @@ api:
         - v2
       operationids:
         - ListContainers
-      unstable:
-        - v2
+      unstable: []
       order: 1
   - name: DORA Metrics
     url: /api/latest/dora-metrics/
