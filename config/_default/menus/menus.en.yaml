@@ -959,6 +959,11 @@ main:
     identifier: cloudcraft_faq
     parent: cloudcraft
     weight: 7
+  - name: Api
+    url: cloudcraft/api
+    identifier: cloudcraft_api
+    parent: cloudcraft
+    weight: 8
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level

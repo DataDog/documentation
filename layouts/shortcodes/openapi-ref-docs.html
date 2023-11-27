@@ -1,0 +1,44 @@
+<!-- openapi-ref-docs.htmlhugo OpenAPI reference documentation generatorParams:
+  url: the public URL of the OpenAPI .json specificationGenerates reference documentation based on the provided OpenAPI specification. Use with: {{/*  {{< openapi-ref-docs url="your-.json-file-url" >}}  */}}  Example: {{/*  {{< openapi-ref-docs url="https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json" >}}  */}}If your OpenAPI spec is not hosted at an accessible url endpoint, you can
+store a copy of your OpenAPI specification in the root-level site /data folder.
+Then delete the first and last lines of the code block below, and replace the
+$openapi variable declaration at the beginning with: {{/*{{ $openapi := .Site.Data.fileName }}*/}}where fileName is the file's name with `.json` removed from the end
+ -->
+ {{ with $.Params.url }}
+  {{ $openapi := $.Site.Data.cloudcraft }}
+  <div class="$openapi-spec-content">
+    <h2>{{ $openapi.info.title }} version {{ $openapi.info.version }}</h2>
+    <div class="description">
+      <p>{{ $openapi.info.description | markdownify }}</p>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: stretch; width: 80%;">
+      {{ range $path, $pathMethods := $openapi.paths }}
+        {{ range $pathMethod, $pathDetails := $pathMethods }}
+
+          <h2 class="mb-2" id="{{ $pathDetails.summary | anchorize }}">
+              <a href="#{{ $pathDetails.summary | anchorize }}">
+                {{- $pathDetails.summary -}}
+              </a>
+          </h2>
+
+          <div class="row endpoint">
+            <div class="col-12">
+              <div class="endpoint-content">
+
+                <p class="mb-0"><span style="padding: 3px" class="font-semibold text-api-{{ $pathMethod }} bg-bg-api-{{ $pathMethod }}">{{ $pathMethod | upper }}</span>&nbsp;
+                  <span>{{ $path }}</span>
+                </p>
+
+                <h3 class="mt-2">Overview</h3>
+                {{ $pathDetails.description | markdownify }}
+
+                {{ partial "api/response.html" (dict "responses" $pathDetails.responses "operationid" $pathDetails.operationId "version" "v1") }}
+
+              </div>
+            </div>
+          </div>
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+{{ end }}
