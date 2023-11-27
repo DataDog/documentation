@@ -76,7 +76,7 @@ To address this issue, you can use Observability Pipelines to do one of the foll
 
 To drop a specific tag on custom metrics before they get ingested into Datadog, you can use Observability Pipelines' [`remap` transform][7], which comes with a domain-specific language to manipulate metrics. 
 
-For the basic use case of dropping a single metric tag, you can use the `del()` function in VRL. For example, the following component drops the `tag_to_drop` tag.
+For the basic use case of dropping a single metric tag, you can use the `del()` function in DPL. For example, the following component drops the `tag_to_drop` tag.
 
 ```yaml
 transforms:
@@ -210,8 +210,8 @@ transforms:
 [2]: /account_management/billing/usage_attribution/
 [3]: /metrics/metrics-without-limits/
 [4]: /observability_pipelines/setup/
-[5]: https://vector.dev/docs/reference/vrl/
+[5]: /observability_pipelines/reference/processing_language/
 [6]: /account_management/billing/usage_attribution/
-[7]: https://vector.dev/docs/reference/vrl/
+[7]: /observability_pipelines/reference/transforms/#remap
 [8]: /account_management/billing/custom_metrics/?tab=countrategauge
 [9]: /observability_pipelines/reference/transforms/#tagcardinalitylimit

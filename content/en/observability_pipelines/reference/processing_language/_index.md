@@ -18,6 +18,8 @@ Remap transforms act on a single event and can be used to transform them or spec
 - [Parse][11] values with custom rules (for example, grok, regex, and so on) and out-of-the-box functions (for example, syslog, apache, VPC flow logs, and so on).
 - Manipulate event [metadata][12] and [paths][13].
 
+See [DPL Functions Reference][14] for a full list of DPL built-in functions.
+
 [1]: /observability_pipelines/reference/processing_language/functions/
 [2]: /observability_pipelines/reference/processing_language/functions/#array
 [3]: /observability_pipelines/reference/processing_language/functions/#string
@@ -31,3 +33,4 @@ Remap transforms act on a single event and can be used to transform them or spec
 [11]: /observability_pipelines/reference/processing_language/functions/#parse
 [12]: /observability_pipelines/reference/processing_language/functions/#event
 [13]: /observability_pipelines/reference/processing_language/functions/#path
+[14]: /observability_pipelines/reference/processing_language/functions/

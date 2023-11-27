@@ -35,30 +35,11 @@ further_reading:
 
 Observability Pipelines enables you to shape and transform observability data. Similar to Logging without Limits™ pipelines, you can configure pipelines for Observability Pipelines that are composed of a series of `transform` components. These transforms allow you to parse, structure, and enrich data with built-in type safety.
 
-## Remap data with VRL
+## Remap data with DPL
 
-Vector Remap Language (VRL) is an expression-oriented, domain specific language designed for transforming observability data (logs and metrics). It features a simple syntax and [built-in functions][1] tailored to observability use cases.
+The `remap` transform acts on a single event and can transform the event or specify conditions for routing and filtering the event. Use Datadog Processing Language (DPL) in the `remap` transform to manipulate arrays and strings, encode and decode vlaues, encrypt and decrypt values, and more. See [Datadog Processing Language][1] for more information and the [DPL Functions reference][10] for a full list of DPL built-in functions.
 
-Vector Remap Language is supported in the `remap` transform. 
-
-Remap transforms act on a single event and can be used to transform them or specify conditions for routing and filtering. You can use VRL in the following ways:
-
-- Manipulate [arrays][2], [strings][3], and other data types.
-- Encode and decode values using [Codec][4].
-- [Encrypt][5] and [decrypt][6] values.
-- [Coerce][7] one datatype to another datatype (for example, from an integer to a string).
-- [Convert syslog values][8] to read-able values.
-- Enrich values by using [enrichment tables][9].
-- [Manipulate IP values][10].
-- [Parse][11] values with custom rules (for example, grok, regex, and so on) and out-of-the-box functions (for example, syslog, apache, VPC flow logs, and so on).
-- Manipulate event [metadata][12] and [paths][13].
-
-See [VRL Function Reference][1] for a full list of VRL built-in functions.
-
-To get started, see the following example for a basic remap transform that contains a VRL program in the `source` field:
-
-{{< tabs >}}
-{{% tab "YAML" %}}
+To get started, see the following example for a basic remap transform that contains a DPL program in the `source` field:
 
 ```yaml
 transforms:
@@ -71,54 +52,19 @@ transforms:
         .timestamp = now()
 ```
 
-{{% /tab %}}
-{{% tab "TOML" %}}
-
-```toml
-[transforms.modify]
-type = "remap"
-inputs = ["previous_component_id"]
-source = '''
-  del(.user_info)
-  .timestamp = now()
-'''
-```
-
-{{% /tab %}}
-{{% tab "JSON" %}}
-
-```json
-{
-  "transforms": {
-    "modify": {
-      "type": "remap",
-      "inputs": [
-        "previous_component_id"
-      ],
-      "source": "  del(.user_info)\n  .timestamp = now()\n"
-    }
-  }
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
 In this example, the `type` field is set to a `remap` transform. The `inputs` field defines where it receives events from the previously defined `previous_component_id` source. The first line in the `source` field deletes the `.user_info` field. At scale, dropping fields is particularly useful for reducing the payload of your events and cutting down on spend for your downstream services. 
 
 The second line adds the `.timestamp` field and the value to the event, changing the content of every event that passes through this transform.
 
-See [VRL References][14] and [Configurations][15] for more information.
-
 ## Parse data
 
-Parsing showcases more advanced use cases of VRL. The below snippet is an HTTP log event in JSON format:
+Parsing showcases more advanced use cases of DPL. The below snippet is an HTTP log event in JSON format:
 
 ```
 "{\"status\":200,\"timestamp\":\"2021-03-01T19:19:24.646170Z\",\"message\":\"SUCCESS\",\"username\":\"ub40fan4life\"}"
 ```
 
-The configuration below uses VRL to modify the log event by: 
+The configuration below uses DPL to modify the log event by: 
 
 - Parsing the raw string into JSON. 
 - Reformatting the time into a UNIX timestamp. 
@@ -190,15 +136,15 @@ This configuration returns the following:
 
 Sampling, reducing, filtering, and aggregating are common transforms to reduce the volume of observability data delivered to downstream services. Observability Pipelines offers a variety of ways to control your data volume:
 
-- [Sample events][16] based on supplied criteria and at a configurable rate.
-- [Reduce and collapse][17] multiple events into a single event.
+- [Sample events][2] based on supplied criteria and at a configurable rate.
+- [Reduce and collapse][3] multiple events into a single event.
 - Remove unnecessary fields.
-- [Deduplicate][18] events. 
-- [Filter events][19] based on a set of conditions.
-- [Aggregate multiple metric events][20] into a single metric event based on a defined interval window.
-- [Convert metrics to logs][21].
+- [Deduplicate][4] events. 
+- [Filter events][5] based on a set of conditions.
+- [Aggregate multiple metric events][6] into a single metric event based on a defined interval window.
+- [Convert metrics to logs][7].
 
-See [Control Log Volume and Size][22] for examples on how to use these transforms.
+See [Control Log Volume and Size][8] for examples on how to use these transforms.
 
 ## Route data
 
@@ -327,7 +273,7 @@ compression = "gzip"
 {{% /tab %}}
 {{< /tabs >}}
 
-See the [Route Transform documentation][23] for more information.
+See the [Route Transform documentation][9] for more information.
 
 ## Throttle data
 
@@ -386,26 +332,13 @@ The `threshold` field defines the number of events allowed for a given bucket. `
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://vector.dev/docs/reference/vrl/functions/
-[2]: https://vector.dev/docs/reference/vrl/functions/#array-functions
-[3]: https://vector.dev/docs/reference/vrl/functions/#string-functions
-[4]: https://vector.dev/docs/reference/vrl/functions/#codec-functions
-[5]: https://vector.dev/docs/reference/vrl/functions/#encrypt
-[6]: https://vector.dev/docs/reference/vrl/functions/#decrypt
-[7]: https://vector.dev/docs/reference/vrl/functions/#coerce-functions
-[8]: https://vector.dev/docs/reference/vrl/functions/#convert-functions
-[9]: https://vector.dev/docs/reference/vrl/functions/#enrichment-functions
-[10]: https://vector.dev/docs/reference/vrl/functions/#ip-functions
-[11]: https://vector.dev/docs/reference/vrl/functions/#parse-functions
-[12]: https://vector.dev/docs/reference/vrl/functions/#event-functions
-[13]: https://vector.dev/docs/reference/vrl/functions/#path-functions
-[14]: https://vector.dev/docs/reference/vrl/#reference
-[15]: /observability_pipelines/configurations/
-[16]: /observability_pipelines/reference/transforms/#sample
-[17]: /observability_pipelines/reference/transforms/#reduce
-[18]: /observability_pipelines/reference/transforms/#dedupe
-[19]: /observability_pipelines/reference/transforms/#filter
-[20]: /observability_pipelines/reference/transforms/#aggregate
-[21]: /observability_pipelines/reference/transforms/#metrictolog
-[22]: /observability_pipelines/guide/control_log_volume_and_size/
-[23]: /observability_pipelines/reference/transforms/#route
+[1]: /observability_pipelines/reference/processing_language/
+[2]: /observability_pipelines/reference/transforms/#sample
+[3]: /observability_pipelines/reference/transforms/#reduce
+[4]: /observability_pipelines/reference/transforms/#dedupe
+[5]: /observability_pipelines/reference/transforms/#filter
+[6]: /observability_pipelines/reference/transforms/#aggregate
+[7]: /observability_pipelines/reference/transforms/#metrictolog
+[8]: /observability_pipelines/guide/control_log_volume_and_size/
+[9]: /observability_pipelines/reference/transforms/#route
+[10]: /observability_pipelines/reference/processing_language/functions/
