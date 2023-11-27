@@ -158,9 +158,9 @@ Vous devez connecter le compartiment S3 créé précédemment aux archives de l
 1. Sélectionnez **AWS S3**.
 1. Sélectionnez le compte AWS dans lequel se trouve votre compartiment.
 1. Saisissez le nom du compartiment S3.
-1. Si vous le souhaitez, saisissez un chemin.
+1. Si besoin, saisissez un chemin.
 1. Vérifiez la déclaration de confirmation.
-1. Si vous le souhaitez, ajoutez des tags et définissez la taille d'analyse maximale pour la réintégration. Consultez la rubrique [Paramètres avancés][6] pour en savoir plus.
+1. Si besoin, ajoutez des tags et définissez la taille d'analyse maximale pour la réintégration. Consultez la rubrique [Paramètres avancés][6] pour en savoir plus.
 1. Cliquez sur **Save**.
 
 Consultez la [documentation relative aux archives de logs][7] pour en savoir plus.
@@ -540,7 +540,7 @@ Pour les installations Terraform, la sortie `lb-dns` fournit la valeur requise.
 
 ## Réintégrer vos archives
 
-Consultez la rubrique [Réintégration à partir des archives][4] pour savoir comment réintégrer votre archive dans Datadog afin de pouvoir commencer à analyser et étudier ces logs
+Consultez la rubrique [Réintégration à partir des archives][4] pour savoir comment réintégrer votre archive dans Datadog afin de pouvoir commencer à analyser et étudier ces logs.
 
 ## Pour aller plus loin
 {{< partial name="whats-next/whats-next.html" >}}
