@@ -162,9 +162,9 @@ Metric probes are automatically enabled on all service instances that match the 
 
 Dynamic Instrumentation metric probes support the following metric types:
 
-- [**Count**][1]: Counts how many times a given method or line is executed. Can be combined with [metric expressions][15] to use the value of a variable to increment the count.
-- [**Gauge**][2]: Generates a gauge based on the last value of a variable. This metric requires a [metric expression][15].
-- [**Histogram**][3]: Generates a statistical distribution of a variable. This metric requires a [metric expression][15].
+- **Count**: Counts how many times a given method or line is executed. Can be combined with [metric expressions][15] to use the value of a variable to increment the count.
+- **Gauge**: Generates a gauge based on the last value of a variable. This metric requires a [metric expression][15].
+- **Histogram**: Generates a statistical distribution of a variable. This metric requires a [metric expression][15].
 
 ### Creating span probes
 
