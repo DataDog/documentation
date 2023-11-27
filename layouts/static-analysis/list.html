@@ -31,18 +31,14 @@
         searchValue: '',
         openedFilterForm: null,
         filteredRulesets: new Set(),
-        updateFilterValue (filter, value) {
-            // Setter on filter
-            this.filterValue[filter].push(value)
-        },
         resetFilteredRulesets () {
             // Setter on filter
             this.filteredRulesets = new Set()
         },
         shouldShowRuleSet (ruleset, shouldShowRule) {
             // Manage visibility of ruleset group
-
             const rulesetID = ruleset.dataset.groupId
+
             if(shouldShowRule){
                 this.filteredRulesets.add(rulesetID)
                 ruleset.classList.remove('d-none')
@@ -50,16 +46,17 @@
                 ruleset.classList.add('d-none')
             }
         },
-        shouldShowRule (ruleEl, dataSet) {
+        shouldShowRule (ruleEl) {
             // Determines ruleset display
             // Compares search values and filter values against ruleset info (dataSet)
-
+            const dataSet = ruleEl.dataset.info
             const datasetArr = dataSet.split(';')
-            const filterValues = Object.values(this.filterValue).flat()
-            const searchValues = this.searchValue.split(' ')
-            const containsFilteredValue = filterValues.every(value => datasetArr[0].toLowerCase().includes(value.toLowerCase())) // checks every filter attrs matches selected filters
-            const containsSearchValues = searchValues.some(word => datasetArr.slice(1).join(' ').includes(word.toLowerCase())) // checks search attrs match a typed search word
+            const filterValues = Object.values(this.filterValue).flat().map(v => v.split(',')[0] )
 
+            const searchValues = this.searchValue.split(' ')
+            const containsFilteredValue = filterValues.every(value => datasetArr[0].toLowerCase().split(',').includes(value.toLowerCase())) // checks every filter attr matches selected filters
+            const containsSearchValues = searchValues.some(word => datasetArr.slice(1).join(' ').includes(word.toLowerCase())) // checks search attrs match a typed search word
+            
             this.shouldShowRuleSet(ruleEl.closest('.ruleset'), containsSearchValues && containsFilteredValue)
 
             if(containsSearchValues && containsFilteredValue){
@@ -100,10 +97,12 @@
             
             const url = new URL(window.location.href)
             Array.from(url.searchParams.entries()).forEach(([key, value]) => {
-                if(key === 'search'){
+                if (key === 'search'){
                     this.searchValue = value
-                }else{
+                } else if (key === 'languages'){
                     this.filterValue[key].push(`${value},https://static.datadoghq.com/static/images/logos/${value.toLowerCase()}_avatar.svg`)
+                } else {
+                    this.filterValue[key].push(value)
                 }
             })
         },
@@ -180,7 +179,9 @@
                             {{ $ruleset_info := (replaceRE "(`|')" "" (delimit (slice $filter_info ($ruleset_id|lower) ($ruleset_description|lower) $ruleset_title .Params.group_id .Title ) ";")) }}
                             <div 
                             class="rule d-flex justify-content-between border p-1 position-relative"
-                            x-cloak x-show.important="shouldShowRule($el,'{{ $ruleset_info }}')"
+                            data-info="{{ $ruleset_info }}"
+                            data-name="{{ .Title }}"
+                            x-cloak x-show.important="shouldShowRule($el)"
                             >
                                 <div class="rule-name-container d-flex align-items-center">
                                     {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" .Params.meta.language "variant" "avatar") }}
@@ -275,16 +276,18 @@
                                             <img :src="filter.split(',')[1]" height="14" alt="filter.split(',')[0]"/>
                                         </template>
                                         <span class="selection-name" x-text="filter.split(',')[0]"></span>
-                                        <div class="close-light-wrapper" @click.stop="deleteOneSelection('{{ $filter_type }}', filter )">
+                                        <div class="close-light-wrapper" @click.stop="resetFilteredRulesets; deleteOneSelection('{{ $filter_type }}', filter )">
                                             {{ partial "icon" (dict "name" "close-light_x" "title" "delete" "size" "14px") }}
                                         </div>
                                     </div>
                                 </template>
                             </div>
                             <div class="overflow-gradient h-100 position-absolute top-0 end-0 rounded-end">
-                                <span class="cancel-circle-wrapper" @click.stop="deleteAllSelections('{{ $filter_type }}')">
-                                    {{ partial "icon" (dict "name" "cancel-circle" "title" "delete all" ) }}
-                                </span>
+                                <template x-if="filterValue['{{$filter_type}}'].length">
+                                    <span class="cancel-circle-wrapper" @click.stop="resetFilteredRulesets; deleteAllSelections('{{ $filter_type }}')">
+                                        {{ partial "icon" (dict "name" "cancel-circle" "title" "delete all" ) }}
+                                    </span>
+                                </template>
                                 <span class="chevron-wrapper d-flex align-items-center justify-content-center position-relative h-100">
                                     <div class="chevron chevron-down"></div>
                                 </span>
@@ -309,8 +312,10 @@
                                 type="checkbox" 
                                 value='{{ cond ($int_logo | not ) . (printf "%s,%s" . $int_logo) }}' 
                                 x-model="filterValue['{{$filter_type}}']"
-                                @input="resetFilteredRulesets"
-                                @input.debounce="pushState('{{ $filter_type }}', '{{ . }}')">
+                                @change="resetFilteredRulesets"
+                                @change.debounce="pushState('{{ $filter_type }}', '{{ . }}')"
+                                >  
+                                
                                 <label for="{{ . | anchorize }}" class="d-flex align-items-center">
                                     {{ if $int_logo }}
                                     <img src="{{ $int_logo }}" height="16" alt="{{ . }}"/>
