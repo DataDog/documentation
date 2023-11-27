@@ -10,9 +10,9 @@ further_reading:
 - link: "/security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities"
   tag: "Documentation"
   text: "Setting up host vulnerabilities"
-- link: "https://www.datadoghq.com/blog/mitigate-identity-risks-and-infrastructure-vulnerabilities-with-datadog/"
+- link: "https://www.datadoghq.com/blog/csm-vulnerability-management/"
   tag: "Blog"
-  text: "Mitigate identity risks and infrastructure vulnerabilities with Datadog Cloud Security Management"
+  text: "Mitigate infrastructure vulnerabilities with Datadog Cloud Security Management"
 ---
 
 {{< site-region region="gov" >}}
