@@ -31,7 +31,7 @@ You can use the following environment variables to configure the PHP tracing lib
 
 The environment variable values are comma-separated lists of header styles enabled for injection or extraction. The default style setting is `tracecontext,Datadog`.
 
-If multiple extraction styles are enabled, the extraction attempt is completed with the following priorities: `tracecontext` has priority, then `Datadog`, then `B3`.
+If multiple extraction styles are enabled, the extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
 When a new PHP script is launched, the tracer automatically checks for the presence of Datadog headers for distributed tracing:
 - `x-datadog-trace-id` (environment variable: `HTTP_X_DATADOG_TRACE_ID`)
