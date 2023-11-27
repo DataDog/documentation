@@ -1,6 +1,6 @@
 If you are using [Microsoft SourceLink][101], Datadog can extract the git commit SHA and repository URL from your .NET assembly. 
 
-1. Open your project's file (`.csproj`) in an IDE and add a reference to one of the following nuget packages, depending on where your git repository is hosted:
+1. Open your project's file (`.csproj`) in an IDE and add a reference to one of the following NuGet packages, depending on where your git repository is hosted:
    
    | Provider | Microsoft SourceLink |
    |---|---|

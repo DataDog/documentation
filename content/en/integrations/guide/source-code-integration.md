@@ -314,7 +314,7 @@ If you are using a host, configure your application with `DD_GIT_*` environment 
 
 ### Build inside a Docker container
 
-If your build process is executed in CI within a Docker container, perform the following steps to ensure that the build can access git information:
+If your build process is executed in CI within a Docker container, perform the following steps to ensure that the build can access Git information:
 
 1. Add the following text to your `.dockerignore` file. This ensures that the build process is able to access a subset of the `.git` folder, enabling it to determine the git commit hash and repository URL.
 
@@ -336,7 +336,7 @@ For unsupported languages, use the `git.commit.sha` and `git.repository_url` tag
 
 ## Synchronize your repository metadata
 
-To link your telemetry with source code, your repository metadata must be synchronized to Datadog. Datadog doesn't store the actual content of files in your repository, only Git commit and tree objects.
+To link your telemetry with source code, your repository metadata must be synchronized to Datadog. Datadog doesn't store the actual content of files in your repository, only the Git commit and tree objects.
 
 ### Git providers
 
