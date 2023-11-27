@@ -31,7 +31,7 @@ In-progress pipelines work with the following CI providers:
 
 ## Limitations
 
-### Webhook events deliver is not ensured by CI Providers
+### Webhook Events Deliver Is Not Ensured by CI Providers
 
 This feature depends on CI Providers sending the webhook events properly indicating if pipelines are running or have finished.
 
@@ -39,13 +39,13 @@ You can see pipeline executions marked as `Running` in Datadog that have already
 
 Notice that the webhook events deliver is not ensured by CI Providers.
 
-### Maximum duration for a pipeline
+### Maximum Duration for a Pipeline Execution
 
 The maximum duration that a pipeline execution can be in progress is 3 days. After that time, the pipeline execution will not be tracked as "in-progress" anymore in CI Visibility. 
 
 If the pipeline execution finishes after +3 days, you can visualize the finished pipeline execution in CI Visibility as usual, even if the pipeline execution was not being tracked as "in-progress" anymore.
 
-## Further reading
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
