@@ -82,7 +82,7 @@ Use the [filter transform][4] when you want only certain logs that meet a specif
 
 In those cases, insert a component that contains a [filter transform][4] to filter logs that uses the [Datadog Processing Language (DPL)][5] or [Datadog Log Search syntax][6] to set the conditions. Logs that don't match the conditions are dropped. 
 
-The example below uses the filter transform and Vector Remap Language to send only logs with a `status` of `500`.
+The example below uses the filter transform and Datadog Processing Language to send only logs with a `status` of `500`.
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -439,7 +439,7 @@ The following logs are generated:
 
 Logs can contain fields that are unnecessary. When processing terabytes of data a day, dropping fields that are superfluous can significantly reduce the total number of logs your destination ingests and indexes. 
 
-To remove unnecessary fields, use the [Vector Remap Language][5] to remap your log data. The following example removes unnecessary tags using `del`. 
+To remove unnecessary fields, use the [Datadog Processing Language][5] to remap your log data. The following example removes unnecessary tags using `del`. 
 
 {{< tabs >}}
 {{% tab "YAML" %}}
