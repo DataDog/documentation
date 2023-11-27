@@ -149,8 +149,6 @@ After you install the Agent, configure CSM Pro for your environment.
 
 - [Cloud Security Management Pro][6]
 
-<div class="alert alert-info"><strong>Note</strong>: The CSM Vulnerabilities capabilities of CSM Pro are in beta. For setup instructions, see <a href="/security/infrastructure_vulnerabilities/setup/">Setting up Cloud Security Management Vulnerabilities</a>.</div>
-
 ### Next steps
 
 Learn more about the features included with Infrastructure DevSecOps Pro:
@@ -191,8 +189,6 @@ To get started with Infrastructure DevSecOps Enterprise, [install and configure 
 After you install the Agent, configure CSM Enterprise for your environment.
 
 - [Cloud Security Management Enterprise][8]
-
-<div class="alert alert-info"><strong>Note</strong>: The CSM Identity Risks and CSM Vulnerabilities capabilities of CSM Enterprise are in beta. For setup instructions, see <a href="/security/identity_risks/#setup">Cloud Security Management Identity Risks</a> and <a href="/security/infrastructure_vulnerabilities/setup/">Setting up Cloud Security Management Vulnerabilities</a>.</div>
 
 ### Next steps
 

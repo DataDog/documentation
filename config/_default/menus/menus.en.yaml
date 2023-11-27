@@ -3367,11 +3367,6 @@ main:
     parent: csm
     identifier: vulnerabilities
     weight: 18
-  - name: Setup
-    url: security/vulnerabilities/setup
-    parent: vulnerabilities
-    identifier: vulnerabilities_setup
-    weight: 201
   - name: Default Detection Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm

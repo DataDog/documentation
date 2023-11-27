@@ -4,9 +4,12 @@ kind: documentation
 aliases:
     - /security/infrastructure_vulnerabilities
 further_reading:
-- link: "/security/infrastructure_vulnerabilities/setup"
+- link: "/security/cloud_security_management/setup/csm_pro?tab=aws#configure-the-agent-for-hosts-and-containers"
   tag: "Documentation"
-  text: "Setting up CSM Vulnerabilities"
+  text: "Setting up container vulnerabilities"
+- link: "/security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities"
+  tag: "Documentation"
+  text: "Setting up host vulnerabilities"
 - link: "https://www.datadoghq.com/blog/mitigate-identity-risks-and-infrastructure-vulnerabilities-with-datadog/"
   tag: "Blog"
   text: "Mitigate identity risks and infrastructure vulnerabilities with Datadog Cloud Security Management"
@@ -16,48 +19,53 @@ further_reading:
 <div class="alert alert-warning">Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">CSM Vulnerabilities is in beta.</div>
-
 ## Overview
 
-Cloud Security Management Vulnerabilities (CSM Vulnerabilities) combines infrastructure observability with security insights to detect, prioritize, and manage vulnerabilities in your organization. It scans for vulnerabilities in the [container images][2] and [hosts][4] in your infrastructure.
+Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you proactively secure your cloud infrastructure by detecting, prioritizing, and managing vulnerabilities across your container images and hosts. It leverages deep [observability context][6] and industry insights to help you remediate vulnerabilities that are most important to you at a given point in time. 
 
-## Review the health of your container images
-CSM Vulnerabilities offers vulnerabilities in the container images on your hosts.
+**Note**: If you're looking for vulnerability management for your application libraries and custom application code, see [Application Vulnerability Management][5].
 
-- View your container images on the [container images][2] page. 
-- Observe the number of vulnerabilities that exist in the container images (column name `VULNERABILITIES`).
+## Explore vulnerabilities
+The [Vulnerabilities Explorer][1] shows a complete list of vulnerabilities detected across your infrastructure, ordering them based on their severity, offering grouping, filtering, and triaging capabilities so you can investigate, assign, and remediate problems.
 
-{{< img src="security/infrastructure_vulnerabilities/container_images_tab.png" alt="The Container Images tab highlighting vulnerabilities and container column sort feature" width="100%">}}
+{{< img src="security/vulnerabilities/csm_vulnerabilities_2.png" alt="The CSM Vulnerability page sorting by unique vulnerabilities with side panel" width="100%">}}
 
-View additional details about any vulnerability by clicking the container image and reviewing the **Vulnerabilities** tab:
+Select a specific vulnerability to see its details, including which containers and hosts are affected, severity breakdown score, and recommended remediation steps.
+The severity of a vulnerability is modified from the base score to take into account the following:
 
-{{< img src="security/infrastructure_vulnerabilities/container_vulnerability.png" alt="Container Images overview page highlighting the vulnerabilities tab" width="100%">}}
+- Whether the underlying infrastructure is running and how wide-spread the impact is.
+- The environment in which the underlying infrastructure is running. For example, if the environment is not production, the severity is downgraded.
+- Whether there is an active exploit for a given vulnerability from sources such as [CISA KEV catalog][9].
 
-## Identify impacted infrastructure
+{{< img src="security/vulnerabilities/container_vulnerability_3.png" alt="Details of a specific vulnerability, highlighting next steps and severity breakdown" width="100%">}}
 
-- Click any vulnerability to see more information. 
-- Click **View Vulnerability in CSM** to view all related infrastructure impacted by this vulnerability.
+You can also view vulnerabilities in your container images on the [container images][2] page. Sort by **source**, **image tag**, **repo digest**, and more. View additional details about any vulnerability by clicking the container image and reviewing the **Vulnerabilities** tab.
 
-This opens the CSM [Vulnerabilities][1] page which includes information about: 
+{{< img src="security/vulnerabilities/container_images.png" alt="The Container Images tab highlighting vulnerabilities and container column sort feature" width="100%">}}
 
-- A description of the vulnerability.
-- The date on which the vulnerability was last detected.
-- Recommended remediation steps.
-- Affected container images and hosts.
+On the details explorer, you can also view impacted resources in CSM to gain better insights to your overall risk.
 
-{{< img src="security/infrastructure_vulnerabilities/vulnerabilities_side_panel.png" alt="CSM Vulnerabilities side panel showing details of a vulnerability" width="100%">}}
+{{< img src="security/vulnerabilities/container_vulnerability_side_panel.png" alt="The Container Images side panel details on the vulnerabilities tab" width="100%">}}
 
-## Review and remediate
+All vulnerabilities include a collection of links and references to websites or information sources that help you understand the context behind each vulnerability.
 
-View a consolidated list of vulnerabilities on the [Vulnerabilities][1] page in [Cloud Security Management][3]. Prioritize them for remediation using available facets, such as context-based **severity**, **resource type**, and **library**.
+## Triage and remediate
 
-{{< img src="security/infrastructure_vulnerabilities/vulnerabilities_page.png" alt="A list of high severity vulnerabilities on the CSM Vulnerabilities page" width="100%">}}
+The [Vulnerabilities Explorer][1] also offers triaging options for detected vulnerabilities that enable you to change the status of a vulnerability, and assign it to individual members for remediation and tracking.
 
-[1]: https://app.datadoghq.com/security/infra-vulnerability
+**Note**: To help you focus on the vulnerabilities that truly matter, vulnerabilities are auto-closed for infrastructure that is either no longer running, or contains the remediated fixed version of the previously-vulnerable package.
+
+{{< img src="security/vulnerabilities/csm_remediate.png" alt="Details explorer of a specific vulnerability highlighting the ability to remediate and assign to team member" width="100%">}}
+
+
+[1]: https://app.datadoghq.com/security/csm/vm
 [2]: https://app.datadoghq.com/containers/images
 [3]: https://app.datadoghq.com/security/csm
 [4]: https://app.datadoghq.com/security/infra-vulnerability?query=asset_type%3AHost&group=none
+[5]: /security/application_security/vulnerability_management/
+[6]: https://www.datadoghq.com/product/infrastructure-monitoring/
+[9]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
+
 
 ## Further reading
 
