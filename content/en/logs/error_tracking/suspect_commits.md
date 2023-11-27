@@ -5,11 +5,11 @@ disable_toc: false
 ---
 ## Overview
 
-For some issues, Error Tracking can identify a suspect commit, helping you determine the root cause and resolve the issue. This feature is automatically enabled when its [prerequisites](#prerequisites) are met.
+For some issues, Error Tracking can identify a suspect commit, helping you determine the root cause and resolve the issue. This feature is automatically enabled when its [setup requirements](#setup) are met.
 
 {{< img src="logs/error_tracking/suspect_commit.png" alt="A suspect commit as it is displayed in the Datadog UI" style="width:100%" >}}
 
-If a suspect commit has been associated with an issue, it will be displayed on the issue panel, as shown in the highlighted area of the image below.
+If a suspect commit is associated with an issue, it is displayed on the issue panel, as shown in the highlighted area of the image below.
 
 {{< img src="logs/error_tracking/suspect_commit_in_context.png" alt="A suspect commit shown in the context of the issue panel" style="width:90%" >}}
 
@@ -30,7 +30,7 @@ Once the setup requirements are met, suspect commits automatically appear on iss
 
 ### Enable Source Code Integration
 
-The Suspect Commits feature requires [Source Code Integration][3]. To enable Source Code Integration:
+The Suspect Commits feature requires [Source Code Integration][1]. To enable Source Code Integration:
 
 1. Go to **Integrations** and choose **Link Source Code** in the top navbar.
 2. Follow the steps to associate a commit with your telemetry and configure your GitHub repository.
@@ -38,7 +38,7 @@ The Suspect Commits feature requires [Source Code Integration][3]. To enable Sou
 {{< img src="tracing/error_tracking/apm_source_code_integration.png" alt="APM Source Code Integration Set Up" style="width:80%" >}}
 
 ### Install the GitHub integration
-Install [the GitHub integration][2], and enable read permissions for pull requests and contents.
+Install [the GitHub integration][2], enabling read permissions for pull requests and contents.
 
 [1]: /integrations/guide/source-code-integration
 [2]: /integrations/github/
