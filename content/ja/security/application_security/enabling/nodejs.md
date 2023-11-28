@@ -187,7 +187,7 @@ docker run [...] -e DD_IAST_ENABLED=true [...]
 コンテナの Dockerfile に以下の環境変数の値を追加します。
 
 ```Dockerfile
-ENV DD_IAST_ENABLED=true=true
+ENV DD_IAST_ENABLED=true
 ```
 
 {{% /tab %}}

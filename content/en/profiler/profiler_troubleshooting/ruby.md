@@ -17,20 +17,6 @@ If you've configured the profiler and don't see profiles in the profile search p
 - Operating system type and version (for example, Linux Ubuntu 20.04)
 - Runtime type, version, and vendor (for example, Ruby 2.7.3)
 
-## Application triggers "stack level too deep (SystemStackError)" errors
-
-This issue is not expected to happen since [`dd-trace-rb` version `0.54.0`][3].
-If you're still running into it, [open a support ticket][2] taking care to include the full backtrace leading to the error.
-
-Prior to version `0.54.0`, the profiler needed to instrument the Ruby VM to track thread creation, which clashed
-with similar instrumentation from other gems.
-
-If you're using any of the below gems:
-
-* `rollbar`: Ensure you're using version 3.1.2 or newer.
-* `logging`: Disable `logging`'s thread context inheritance by setting the `LOGGING_INHERIT_CONTEXT` environment
-  variable to `false`.
-
 ## Missing profiles for Resque jobs
 
 When profiling [Resque][4] jobs, you should set the `RUN_AT_EXIT_HOOKS` environment
@@ -69,9 +55,9 @@ Rarely, native extensions or libraries called by them may have missing or incorr
 The following incompatibilities are known:
 * Using the `mysql2` gem together with versions of `libmysqlclient` [older than 8.0.0][9]. The affected `libmysqlclient` version is known to be present on Ubuntu 18.04, but not 20.04 or later releases.
 * [Using the `rugged` gem.][10]
-* [Using the `passenger` gem/Phusion Passenger web server][11] (Auto-detected starting from 1.13.0 or later).
+* Using the `passenger` gem/Phusion Passenger web server [older than 6.0.19][11]
 
-In these cases, the profiler automatically detects the incompatibility and applies a workaround.
+In these cases, the latest version of the profiler automatically detects the incompatibility and applies a workaround.
 
 If you encounter failures or errors from Ruby gems that use native extensions other than those listed above, you can manually enable the "no signals" workaround, which avoids the use of `SIGPROF` signals.
 To enable this workaround, set the `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED` environment variable to `true`, or in code:

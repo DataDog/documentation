@@ -65,7 +65,6 @@ The following products and features are supported with Remote Configuration:
 
 
 ### Dynamic Instrumentation
-<div class="alert alert-info">This feature is in beta.</div>
 
 - Send critical metrics, traces, and logs from your live applications with no code changes.
 
