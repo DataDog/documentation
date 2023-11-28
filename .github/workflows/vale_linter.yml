@@ -12,6 +12,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - run: jq --version 
+
     - name: Clone Datadog Vale
       uses: actions/checkout@v3
       with:
