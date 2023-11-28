@@ -1483,6 +1483,27 @@ main:
     parent: workflows
     identifier: workflows_connections
     weight: 5
+  - name: App Builder
+    url: service_management/app_builder/
+    pre: app-builder
+    identifier: app_builder
+    parent: service_management_heading
+    weight: 80000
+  - name: Build Apps
+    url: service_management/app_builder/build/
+    parent: app_builder
+    identifier: app_builder_build
+    weight: 1
+  - name: Authentication
+    url: service_management/app_builder/auth/
+    parent: app_builder
+    identifier: app_builder_access
+    weight: 2
+  - name: Embedded Apps
+    url: service_management/app_builder/embedded_apps/
+    parent: app_builder
+    identifier: app_builder_embedded_apps
+    weight: 4
   - name: APM
     url: tracing/
     pre: apm
@@ -3055,6 +3076,10 @@ main:
     url: observability_pipelines/setup/datadog
     parent: observability_pipelines_setup
     weight: 101
+  - name: Datadog with Archiving
+    url: observability_pipelines/setup/datadog_with_archiving
+    parent: observability_pipelines_setup
+    weight: 102
   - name: Splunk
     url: observability_pipelines/setup/splunk
     parent: observability_pipelines_setup
@@ -3342,11 +3367,6 @@ main:
     parent: csm
     identifier: vulnerabilities
     weight: 18
-  - name: Setup
-    url: security/vulnerabilities/setup
-    parent: vulnerabilities
-    identifier: vulnerabilities_setup
-    weight: 201
   - name: Default Detection Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm
