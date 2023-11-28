@@ -23,10 +23,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/pcf-monitoring-with-datadog/"
   tag: "Blog"
   text: "Pivotal Platform Monitoring with Datadog"
-- link: "https://www.datadoghq.com/integrations/guide/application-monitoring-vmware-tanzu/"
+- link: "/integrations/guide/application-monitoring-vmware-tanzu/"
   tag: "documentation"
   text: "Datadog Application Monitoring for VMware Tanzu"
-- link: "https://www.datadoghq.com/integrations/guide/cluster-monitoring-vmware-tanzu/"
+- link: "/integrations/guide/cluster-monitoring-vmware-tanzu/"
   tag: "documentation"
   text: "Datadog Cluster Monitoring for VMware Tanzu"
 

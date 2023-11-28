@@ -9,6 +9,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/pcf-monitoring-with-datadog/"
   tag: "Blog"
   text: Pivotal Platform Monitoring with Datadog
+- link: "/integrations/guide/application-monitoring-vmware-tanzu/"
+  tag: "documentation"
+  text: "Datadog Application Monitoring for VMware Tanzu"
 ---
 
 
@@ -81,6 +84,20 @@ Datadog Cluster Monitoring for VMware Tanzu includes the following key features:
 
 13. Return to the Tanzu Ops Manager Installation Dashboard and click **Apply Changes** to install Datadog Cluster Monitoring for the VMware Tanzu tile.
 
+## View Metrics and Dashboards
+
+1. Review the Cloud Foundry [Overview][18] Dashboard.
+
+ {{< img src="/integrations/guide/vmware_tanzu/cloud-foundry-dashboard.png" alt="The Cloud Foundry Overview dashboard" >}}
+
+2. Explore individual metrics on the [Metrics explorer][19] page, search for metrics beginning with `cloudfoundry.nozzle`:
+
+ {{< img src="/integrations/guide/vmware_tanzu/metrics-explorer-cloud-foundry.png" alt="Cloud foundry metrics that start with cloudfoundry.nozzle" >}}
+
+3. Additionally, [create alerts][16] for your Cloud Foundry metrics.
+
+4. See the [Datadog Cloud Foundry Integration][17] for troubleshooting steps.
+
 ## Feedback
 Provide any bugs, feature requests, or questions to the [VMware Tanzu Feedback][1] list or contact [Datadog Support][2].
 
@@ -102,3 +119,7 @@ Provide any bugs, feature requests, or questions to the [VMware Tanzu Feedback][
 [13]: https://network.pivotal.io/products/stemcells-ubuntu-xenial/#/releases/721399
 [14]: https://www.datadoghq.com/blog/pivotal-cloud-foundry-architecture/#loggregator
 [15]: https://github.com/DataDog/datadog-cluster-agent-boshrelease#datadog-cluster-agent-bosh-release
+[16]: /guides/monitors/
+[17]: /integrations/cloud_foundry/
+[18]: https://app.datadoghq.com/screen/integration/cloudfoundry
+[19]: https://app.datadoghq.com/metric/explorer
