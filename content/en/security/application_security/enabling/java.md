@@ -34,12 +34,12 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 
 1. **Update your [Datadog Java library][1]** to at least version 0.94.0 (at least version 1.1.4 for Application Vulnerability Management vulnerability detection features):
    {{< tabs >}}
-   {{% tab "cURL" %}}
+   {{% tab "Wget" %}}
    ```shell
    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 {{% /tab %}}
-{{% tab "Wget" %}}
+{{% tab "cURL" %}}
    ```shell
    curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
