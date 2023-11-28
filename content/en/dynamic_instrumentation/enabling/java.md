@@ -27,12 +27,12 @@ The Datadog Dynamic Instrumentation library is supported in JDK version 8 and ab
 
 3. Download `dd-java-agent.jar`:
  {{< tabs >}}
- {{% tab "curl" %}}
+ {{% tab "cURL" %}}
    ```shell
    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 {{% /tab %}}
-{{% tab "wget" %}}
+{{% tab "Wget" %}}
    ```shell
    curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```

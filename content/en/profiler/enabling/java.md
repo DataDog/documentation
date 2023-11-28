@@ -77,12 +77,12 @@ To begin profiling applications:
 2. Download `dd-java-agent.jar`, which contains the Java Agent class files:
 
 {{< tabs >}}
-{{% tab "curl" %}}
+{{% tab "cURL" %}}
    ```shell
    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
 {{% /tab %}}
-{{% tab "wget" %}}
+{{% tab "Wget" %}}
    ```shell
    curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```

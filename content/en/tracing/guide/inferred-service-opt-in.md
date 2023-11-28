@@ -98,7 +98,7 @@ For example, if you're using environment variables and you need to rename the pe
 DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
 ```
 
-[1]: 'https://dtdg.co/latest-java-tracer'
+[1]: https://dtdg.co/latest-java-tracer
 
 {{% /tab %}}
 
