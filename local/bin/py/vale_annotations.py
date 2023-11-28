@@ -27,11 +27,17 @@ def parse_log(filename_log, log_data):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--git_data', help="array of dictionaries: [{filename:[changed_lines]]", type=str)
-    parser.add_argument('--vale_data', help="Vale log data", type=str)
+    # parser.add_argument('--vale_data', help="Vale log data", type=str)
     args = parser.parse_args()
     
     git_data = json.loads(args.git_data)
-    vale_data = json.loads(args.vale_data)
+    # vale_data = json.loads(args.vale_data)
+    
+    with open('vale_output.json') as f:
+        vale_data = json.load(f)
+    
+    # print(f'\n{vale_data}\n')
+    # print(f'\n{git_data}\n')
     
     if vale_data:
         for vale_filename, vale_output in vale_data.items():
@@ -43,7 +49,8 @@ if __name__ == '__main__':
                             log_list.append(annotation)
                         except:
                             raise Exception(f'Failed to parse log entry for {git_filename}')
-
+                    else:
+                        error_present = False
     for entry in log_list:
         print(entry)
 
