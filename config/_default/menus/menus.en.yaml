@@ -14,8 +14,8 @@ main:
   - name: Application Performance
     identifier: apm_heading
     weight: 5000000
-  - name: Continuous Integration
-    identifier: ci_visibility_heading
+  - name: Software Delivery
+    identifier: software_delivery_heading
     weight: 6000000
   - name: Log Management
     identifier: log_management_heading
@@ -2333,7 +2333,7 @@ main:
     url: continuous_integration/
     pre: ci
     identifier: ci
-    parent: ci_visibility_heading
+    parent: software_delivery_heading
     weight: 1
   - name: Test Visibility
     url: continuous_integration/tests/
