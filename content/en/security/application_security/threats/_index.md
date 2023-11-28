@@ -1,5 +1,5 @@
 ---
-title: Application Threat Monitoring and Protection
+title: Application Threat Management
 kind: documentation
 further_reading:
 - link: "/security/application_security/threats/add-user-info/"
@@ -20,7 +20,7 @@ further_reading:
 <div class="alert alert-warning">Application Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-ASM Threat Monitoring and Protection uses trace telemetry from your APM-instrumented applications to identify threats and attacks on your running services by comparing the observed behavior against known attack patterns, or by identifying business logic abuse.
+ASM Threat Management uses trace telemetry from your APM-instrumented applications to identify threats and attacks on your running services by comparing the observed behavior against known attack patterns, or by identifying business logic abuse.
 
 Security signals raised by Threat Monitoring are summarized and surfaced in views you already commonly visit to monitor service health and performance. The [Service Catalog][1] and individual Service Pages in APM provide insights into application threat signals, allowing you to investigate vulnerabilities, block attackers, and review attack exposures.
 
