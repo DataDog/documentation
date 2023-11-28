@@ -36,21 +36,21 @@ cascade:
     {{< nextlink href="synthetics/guide/testing-file-upload-and-download/" >}}Upload and download test files{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/popup/" >}}Handle pop-ups in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/recording-custom-user-agent/" >}}Record steps with a custom User-Agent{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}Manually add the browser test Chrome extension{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/browser-tests-using-shadow-dom/" >}}Use a shadow DOM in browser tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}Manually add the Chrome extension for your browser tests{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/browser-tests-using-shadow-dom/" >}}Run tests on applications using a shadow DOM{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Datadog Integrations:" >}}
     {{< nextlink href="logs/guide/ease-troubleshooting-with-cross-product-correlation" >}}Ease troubleshooting with cross-product correlation{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/explore-rum-through-synthetics/" >}}Explore a preview of the RUM Explorer in Synthetics{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/rum-to-synthetics" >}}Generate Synthetic browser tests out of RUM Session Replays{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/explore-rum-through-synthetics/" >}}Explore a preview of RUM features in Synthetics{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/rum-to-synthetics" >}}Generate Synthetic browser tests from RUM Session Replays{{< /nextlink >}}
 
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Metrics:" >}}
-    {{< nextlink href="synthetics/guide/monitor-usage/" >}}Use estimated usage metrics for Synthetic Monitoring{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/monitor-usage/" >}}Use estimated usage metrics{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/using-synthetic-metrics/" >}}Use Synthetic metrics in monitors{{< /nextlink >}}
-    {{< nextlink href="synthetics/guide/api_test_timing_variations/" >}}Understand API test timings and troubleshooting variations{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/api_test_timing_variations/" >}}Understand API test timings and troubleshoot variations{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Data Security:" >}}
