@@ -23,7 +23,7 @@
     <div 
     class="static-analysis-main w-100 d-flex flex-column"
     x-data="{
-        filterValue: {
+        filterTypes: {
             languages: [],
             categories: [],
             severities: []
@@ -32,7 +32,7 @@
         openedFilterForm: null,
         filteredRulesets: new Set(),
         resetFilteredRulesets () {
-            // Setter on filter
+            // Empty filtered rulesets
             this.filteredRulesets = new Set()
         },
         shouldShowRuleSet (ruleset, shouldShowRule) {
@@ -48,23 +48,27 @@
         },
         shouldShowRule (ruleEl) {
             // Determines ruleset display
-            // Compares search values and filter values against rule info (dataset)
+            // Compares search values and filter values against ruleInfo
 
-            const datasetArr = ruleEl.dataset.info.split(';')
-            const filterValues = Object.entries(this.filterValue).map(v => v[1])
+            const ruleInfo = ruleEl.dataset.info.split(';')
+            const ruleFilterInfo = ruleInfo[0].toLowerCase().split(',')
+            const ruleSearchInfo = ruleInfo.slice(1).join(' ').toLowerCase()
+
+            const filterValues = Object.values(this.filterTypes)
             const searchValues = this.searchValue.split(' ')
-            const ruleFilterInfo = datasetArr[0].toLowerCase().split(',')
-            const ruleSearchInfo = datasetArr.slice(1).join(' ').toLowerCase()
 
-            // filter logic truthy value:
-            // -- if a filter type is populated,
-            // -- at least one filter value of the same type must be included in rule info
-            // -- filter values of different types in combination with eachother  must be included in rule info
-            // -- ex: if ruleEl dataset includes 'Javascript' OR 'Docker' AND Security AND Warning
-            // --   this would render ruleEls that are javascript, security, warning and docker, security, warning
+            /**
+            *   FILTER LOGIC (containsFilteredValue) e.g.
+            *   {
+            *      languages: [javascript, docker],
+            *      categories: [severity],
+            *      severities: [warning]
+            *   }
+            *   show ruleEl if condition met ('Javascript' OR 'Docker') AND Security AND Warning
+            */
 
-            const containsFilteredValue = filterValues.every(t => t.length ? t.some(f => ruleFilterInfo.includes(f.split(',')[0].toLowerCase())) : true )
-            const containsSearchValues = searchValues.some(word => ruleSearchInfo.includes(word.toLowerCase())) // checks search attrs match a typed search word
+            const containsFilteredValue = filterValues.every(t => t.length ? t.some(f => ruleFilterInfo.includes(f.split(',')[0].toLowerCase())) : true ) // checks filter attrs match at least one filter value. allows for multiple selection of a filter type.
+            const containsSearchValues = searchValues.some(word => ruleSearchInfo.includes(word.toLowerCase())) // checks search attrs match a typed query
 
             this.shouldShowRuleSet(ruleEl.closest('.ruleset'), containsSearchValues && containsFilteredValue)
 
@@ -89,7 +93,7 @@
                     const regex = new RegExp(`([\\&\\?])${filterType}=${filterOption.replace(' ', '\\+')}`, 'g');
                     newURL = url.toString().replaceAll(regex, '').replace('/&', '/?')
                 }
-                if(!this.filterValue[filterType].length) {
+                if(!this.filterTypes[filterType].length) {
                     url.searchParams.delete(filterType)
                 }
             }else {
@@ -109,9 +113,9 @@
                 if (key === 'search'){
                     this.searchValue = value
                 } else if (key === 'languages'){
-                    this.filterValue[key].push(`${value},https://static.datadoghq.com/static/images/logos/${value.toLowerCase()}_avatar.svg`)
+                    this.filterTypes[key].push(`${value},https://static.datadoghq.com/static/images/logos/${value.toLowerCase()}_avatar.svg`)
                 } else {
-                    this.filterValue[key].push(value)
+                    this.filterTypes[key].push(value)
                 }
             })
         },
@@ -148,12 +152,12 @@
         },
         deleteOneSelection (filterType, filterOption) {
             // delete one filterOption at a time
-            this.filterValue[filterType] = this.filterValue[filterType].filter(s => s !== filterOption)
-            this.pushState(filterType, filterOption)
+            this.filterTypes[filterType] = this.filterTypes[filterType].filter(s => s !== filterOption)
+            this.pushState(filterType, filterOption.split(',')[0])
         },
         deleteAllSelections (filterType) {
             // delete all selections and url params of a filter type
-            this.filterValue[filterType] = []
+            this.filterTypes[filterType] = []
             this.openedFilterForm = null
             const url = new URL(window.location.href)
             url.searchParams.delete(filterType)
@@ -272,14 +276,14 @@
                         >
                             <div class="selections d-flex">
                                 {{/*  All  */}}
-                                <template x-if="!filterValue['{{$filter_type}}'].length">
+                                <template x-if="!filterTypes['{{$filter_type}}'].length">
                                     <span class="all fw-semibold">All</span>
                                 </template>
                                 {{/*  
                                     Render filter selections from `filterValue` data.
                                     [filter value, integration logo] = filter 
                                 */}}
-                                <template x-for="(filter, idx) in filterValue['{{$filter_type}}']" :key="idx">
+                                <template x-for="(filter, idx) in filterTypes['{{$filter_type}}']" :key="idx">
                                     <div class="selection-container rounded d-flex align-items-center">
                                         <template x-if="filter.split(',')[1]">
                                             <img :src="filter.split(',')[1]" height="14" alt="filter.split(',')[0]"/>
@@ -292,7 +296,7 @@
                                 </template>
                             </div>
                             <div class="overflow-gradient h-100 position-absolute top-0 end-0 rounded-end">
-                                <template x-if="filterValue['{{$filter_type}}'].length">
+                                <template x-if="filterTypes['{{$filter_type}}'].length">
                                     <span class="cancel-circle-wrapper" @click.stop="resetFilteredRulesets; deleteAllSelections('{{ $filter_type }}')">
                                         {{ partial "icon" (dict "name" "x-circle-solid" "title" "delete all" ) }}
                                     </span>
@@ -321,7 +325,7 @@
                                 id="{{ . | anchorize }}" 
                                 type="checkbox" 
                                 value='{{ cond ($int_logo | not ) . (printf "%s,%s" . $int_logo) }}' 
-                                x-model="filterValue['{{$filter_type}}']"
+                                x-model="filterTypes['{{$filter_type}}']"
                                 @change="resetFilteredRulesets"
                                 @change.debounce="pushState('{{ $filter_type }}', '{{ . }}')"
                                 >  

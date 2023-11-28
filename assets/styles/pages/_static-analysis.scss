@@ -1,5 +1,7 @@
 .static-analysis-main {
-
+    [x-cloak] {
+        display: none !important;
+    }
     #static-analysis-nav {
         // position: sticky;
         // top: 95px;
@@ -70,7 +72,7 @@
                             position: relative;
                             top: 3px;
                             grid-column: 2/span 1;
-                            i.icon-cancel-circle {
+                            i.icon-x-circle-solid {
                                 color: $brand-primary;
                             }
                         }
