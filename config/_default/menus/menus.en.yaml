@@ -1765,46 +1765,6 @@ main:
     parent: tracing_custom_inst
     identifier: tracing_custom_inst_dotnet
     weight: 108
-  - name: Custom Instrumentation with OpenTracing
-    url: tracing/trace_collection/opentracing/
-    parent: tracing_trace_collection
-    identifier: tracing_open_standards
-    weight: 107
-  - name: Java
-    url: tracing/trace_collection/opentracing/java/
-    parent: tracing_open_standards
-    identifier: tracing_open_standards_java
-    weight: 101
-  - name: Python
-    url: tracing/trace_collection/opentracing/python/
-    parent: tracing_open_standards
-    identifier: tracing_open_standards_python
-    weight: 102
-  - name: Ruby
-    url: tracing/trace_collection/opentracing/ruby/
-    parent: tracing_open_standards
-    identifier: tracing_open_standards_ruby
-    weight: 108
-  - name: Go
-    url: tracing/trace_collection/opentracing/go/
-    parent: tracing_open_standards
-    identifier: tracing_open_standards_go
-    weight: 104
-  - name: NodeJS
-    url: tracing/trace_collection/opentracing/nodejs/
-    parent: tracing_open_standards
-    identifier: tracing_open_standards_nodejs
-    weight: 105
-  - name: PHP
-    url: tracing/trace_collection/opentracing/php/
-    parent: tracing_open_standards
-    identifier: tracing_open_standards_php
-    weight: 106
-  - name: .NET
-    url: tracing/trace_collection/opentracing/dotnet/
-    parent: tracing_open_standards
-    identifier: tracing_open_standards_dotnet
-    weight: 108
   - name: Propagating Trace Context
     url: tracing/trace_collection/trace_context_propagation/
     parent: tracing_trace_collection
