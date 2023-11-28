@@ -10455,19 +10455,25 @@ components:
       properties:
         metric_type:
           default: 0
-          description: The origin metric type code
+          description: The origin metric type code.
+          format: int32
+          maximum: 1000
+          type: integer
+        origin_product:
+          default: 0
+          description: The origin product code.
           format: int32
           maximum: 1000
           type: integer
         product:
           default: 0
-          description: The origin product code
+          description: The product code.
           format: int32
           maximum: 1000
           type: integer
         service:
           default: 0
-          description: The origin service code
+          description: The service code.
           format: int32
           maximum: 1000
           type: integer
