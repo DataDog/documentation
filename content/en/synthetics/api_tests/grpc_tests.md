@@ -53,7 +53,7 @@ After choosing to create a `gRPC` test, define your test's request.
 
    For a behavior check, specify the **Server Reflection** or [upload a **Proto File**][101] that defines your gRPC server. Select a method and include a request message. Datadog does not support streaming methods.
    
-   {{< img src="synthetics/api_tests/behavior_check_test.png" alt="Define gRPC request" style="width:90%;" >}}
+   {{< img src="synthetics/api_tests/grpc_behavior_check_test.png" alt="Define gRPC request" style="width:90%;" >}}
    
    [101]: https://grpc.io/docs/what-is-grpc/introduction/#working-with-protocol-buffers
 
@@ -117,7 +117,7 @@ Assertions define what an expected test result is. After you click **Send**, an 
 
 You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 
-{{< img src="synthetics/api_tests/behavior_check_blur.png" alt="Define assertions for your gRPC test to succeed or fail on" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions_grpc_behavior_check_blur.png" alt="Define assertions for your gRPC test to succeed or fail on" style="width:90%;" >}}
 
 [1]: https://restfulapi.net/json-jsonpath/
 [2]: https://www.w3schools.com/xml/xpath_syntax.asp
