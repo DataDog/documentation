@@ -189,7 +189,24 @@ See [Customize code coverage analysis][102] in the Microsoft documentation for a
 [101]: https://github.com/coverlet-coverage/coverlet
 [102]: https://learn.microsoft.com/en-us/visualstudio/test/customizing-code-coverage-analysis?view=vs-2022
 {{% /tab %}}
+{{% tab "Java" %}}
 
+### Compatibility
+* `dd-trace-java >= 1.24.2`.
+
+When code coverage is available, the Datadog Tracer reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
+
+Currently, [Jacoco][201] is the only supported code coverage library.
+
+If your project already has Jacoco configured, the tracer will automatically instrument it and will report the coverage data to Datadog.
+
+Otherwise, you can configure the tracer to add Jacoco to your test runs at runtime.
+Use `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` environment variable to specify which [version][202] of Jacoco you want to have injected (e.g. `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION=0.8.11`).
+
+[201]: https://www.eclemma.org/jacoco/
+[202]: https://mvnrepository.com/artifact/org.jacoco/org.jacoco.agent
+
+{{% /tab %}}
 {{% tab "JUnit Report Uploads" %}}
 
 ### Compatibility
