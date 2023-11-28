@@ -19,12 +19,6 @@ You can use this approach if, for example, your code has already been instrument
 
 To instrument AWS Lambda with the OpenTelemetry API, set the environment variable `DD_TRACE_OTEL_ENABLED` to `true`. See [Custom instrumentation with the OpenTelemetry API][3] for more details.
 
-### Azure
-After installation, set the feature flag `DD_TRACE_OTEL_ENABLED` to `true`. See [Custom instrumentation with the OpenTelemetry API][3] for more details.
-
-### Google Cloud Run
-After installation, set the feature flag `DD_TRACE_OTEL_ENABLED` to `true`. See [Custom instrumentation with the OpenTelemetry API][3] for more details.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
