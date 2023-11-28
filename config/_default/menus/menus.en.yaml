@@ -14,8 +14,8 @@ main:
   - name: Application Performance
     identifier: apm_heading
     weight: 5000000
-  - name: Continuous Integration
-    identifier: ci_visibility_heading
+  - name: Software Delivery
+    identifier: software_delivery_heading
     weight: 6000000
   - name: Log Management
     identifier: log_management_heading
@@ -2373,8 +2373,8 @@ main:
     url: continuous_integration/
     pre: ci
     identifier: ci
-    parent: ci_visibility_heading
-    weight: 1
+    parent: software_delivery_heading
+    weight: 150000
   - name: Test Visibility
     url: continuous_integration/tests/
     parent: ci
@@ -2605,12 +2605,84 @@ main:
     parent: ci
     identifier: ci_troubleshooting
     weight: 10
+  - name: CD Visibility
+    url: continuous_delivery/
+    pre: ci
+    identifier: cd
+    parent: ci_visibility_heading
+    weight: 160000
+  - name: Pipeline Visibility
+    url: continuous_delivery/pipelines
+    identifier: cd_pipelines
+    parent: cd
+    weight: 1
+  - name: ArgoCD
+    url: continuous_delivery/pipelines/argocd
+    identifier: cd_pipelines_argocd
+    parent: cd_pipelines
+    weight: 101
+  - name: Search and Manage
+    url: continuous_delivery/search
+    identifier: cd_search
+    parent: cd
+    weight: 2
+  - name: Explorer
+    url: continuous_delivery/explorer
+    identifier: cd_explorer
+    parent: cd
+    weight: 3
+  - name: Search Syntax
+    url: continuous_delivery/explorer/search_syntax
+    identifier: cd_explorer_search_syntax
+    parent: cd_explorer
+    weight: 301
+  - name: Facets
+    url: continuous_delivery/explorer/facets
+    identifier: cd_explorer_facets
+    parent: cd_explorer
+    weight: 302
+  - name: CD Visibility
+    url: continuous_delivery/
+    pre: ci
+    identifier: cd
+    parent: software_delivery_heading
+    weight: 160000
+  - name: Pipeline Visibility
+    url: continuous_delivery/pipelines
+    identifier: cd_pipelines
+    parent: cd
+    weight: 1
+  - name: ArgoCD
+    url: continuous_delivery/pipelines/argocd
+    identifier: cd_pipelines_argocd
+    parent: cd_pipelines
+    weight: 101
+  - name: Search and Manage
+    url: continuous_delivery/search
+    identifier: cd_search
+    parent: cd
+    weight: 2
+  - name: Explorer
+    url: continuous_delivery/explorer
+    identifier: cd_explorer
+    parent: cd
+    weight: 3
+  - name: Search Syntax
+    url: continuous_delivery/explorer/search_syntax
+    identifier: cd_explorer_search_syntax
+    parent: cd_explorer
+    weight: 301
+  - name: Facets
+    url: continuous_delivery/explorer/facets
+    identifier: cd_explorer_facets
+    parent: cd_explorer
+    weight: 302
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2
     identifier: dbm
     parent: apm_heading
-    weight: 160000
+    weight: 170000
   - name: Setup Architectures
     url: database_monitoring/architecture/
     parent: dbm
@@ -2801,7 +2873,7 @@ main:
     pre: usm
     identifier: usm_parent
     parent: apm_heading
-    weight: 165000
+    weight: 175000
   - name: Setup
     url: universal_service_monitoring/setup/
     parent: usm_parent
@@ -2817,7 +2889,7 @@ main:
     pre: datastreams-monitoring
     identifier: data_streams
     parent: apm_heading
-    weight: 166000
+    weight: 176000
   - name: Troubleshooting
     url: data_streams/troubleshooting
     identifier: data_streams_troubleshooting
@@ -2828,7 +2900,7 @@ main:
     pre: log
     identifier: log_management
     parent: log_management_heading
-    weight: 170000
+    weight: 180000
   - name: Log Collection & Integrations
     url: logs/log_collection/
     parent: log_management
@@ -3189,7 +3261,7 @@ main:
     pre: security-platform
     identifier: security_platform
     parent: security_platform_heading
-    weight: 180000
+    weight: 190000
   - name: Detection Rules
     url: security/detection_rules/
     parent: security_platform
@@ -3240,7 +3312,7 @@ main:
     pre: siem
     parent: security_platform_heading
     identifier: cloud_siem
-    weight: 181000
+    weight: 191000
   - name: Log Detection Rules
     url: security/cloud_siem/log_detection_rules
     parent: cloud_siem
@@ -3276,7 +3348,7 @@ main:
     parent: security_platform_heading
     pre: cloud-security-management
     identifier: csm
-    weight: 181500
+    weight: 191500
   - name: Setup
     url: security/cloud_security_management/setup
     parent: csm
@@ -3397,7 +3469,7 @@ main:
     parent: security_platform_heading
     pre: app-sec
     identifier: application_security
-    weight: 184000
+    weight: 194000
   - name: Terms and Concepts
     url: security/application_security/terms/
     parent: application_security
@@ -3563,7 +3635,7 @@ main:
     pre: synthetics
     identifier: synthetics
     parent: ux_monitoring_heading
-    weight: 190000
+    weight: 200000
   - name: API Tests
     url: synthetics/api_tests/
     parent: synthetics
@@ -3735,7 +3807,7 @@ main:
     pre: continuous-testing
     identifier: continuous_testing
     parent: ux_monitoring_heading
-    weight: 200000
+    weight: 210000
   - name: CI/CD Integrations
     url: continuous_testing/cicd_integrations
     parent: continuous_testing
@@ -3801,7 +3873,7 @@ main:
     parent: ux_monitoring_heading
     identifier: mobile_app_testing
     pre: mobile
-    weight: 210000
+    weight: 220000
   - name: Mobile App Tests
     url: /mobile_app_testing/mobile_app_tests
     parent: mobile_app_testing
@@ -3832,7 +3904,7 @@ main:
     pre: rum
     identifier: rum
     parent: ux_monitoring_heading
-    weight: 220000
+    weight: 230000
   - name: Browser Monitoring
     url: real_user_monitoring/browser/
     parent: rum
@@ -4202,7 +4274,7 @@ main:
     pre: network
     identifier: nm_parent
     parent: infrastructure_heading
-    weight: 230000
+    weight: 240000
   - name: Network Performance Monitoring
     url: network_monitoring/performance/
     parent: nm_parent
@@ -4461,13 +4533,13 @@ main:
     pre: api
     identifier: api
     parent: essentials_heading
-    weight: 240000
+    weight: 250000
   - name: CoScreen
     url: coscreen/
     pre: coscreen
     identifier: coscreen
     parent: essentials_heading
-    weight: 250000
+    weight: 260000
   - name: Troubleshooting
     url: coscreen/troubleshooting
     identifier: coscreen_troubleshooting
@@ -4478,7 +4550,7 @@ main:
     pre: cog-2
     identifier: account_management
     parent: administration_heading
-    weight: 260000
+    weight: 270000
   - name: Switching Between Orgs
     url: account_management/org_switching/
     parent: account_management
@@ -4674,13 +4746,13 @@ main:
     pre: sensitive-data-scanner
     identifier: sds_top_level
     parent: administration_heading
-    weight: 240000
+    weight: 280000
   - name: Help
     url: help/
     pre: info-fill
     identifier: help_top_level
     parent: administration_heading
-    weight: 250000
+    weight: 290000
 api:
   - name: Overview
     url: /api/latest/
