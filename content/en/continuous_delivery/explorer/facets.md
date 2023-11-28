@@ -38,4 +38,4 @@ Navigate to [**CD** > **Executions**][101] to access the list of facets left of 
 [3]: /notebooks/ 
 [4]: /continuous_delivery/explorer
 [5]: /continuous_delivery/search
-[6]: /continuous_delivery/explorer/search_syntax/
+[6]: /continuous_delivery/explorer/search_syntax
