@@ -98,7 +98,7 @@ For example, if you're using environment variables and you need to rename the pe
 DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
 ```
 
-[1]: https://dtdg.co/latest-java-tracer
+[1]: 'https://dtdg.co/latest-java-tracer'
 
 {{% /tab %}}
 
@@ -283,7 +283,7 @@ For example, to set the `peer.service` value for all Dalli spans, use
 
 ### Global default service naming migration
 
-When you enable the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` environment variable, it improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations. 
+When you enable the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` environment variable, it improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations.
 
 Previously, some tracing libraries included the name of the associated integration in service name tagging. For example, .NET tagged gRCP calls as `service:<DD_SERVICE>-grpc-client` while Python tagged them as `service:grpc-client`. With this option enabled, all supported tracing libraries tag spans from the downstream services with the calling service's name, `service:<DD_SERVICE>`, thereby providing a _global default service name_.
 
