@@ -25,32 +25,32 @@ further_reading:
 
 For example, if you emit a metric point at 1:00 PM EST, and the timestamp on that point reads 10:00 AM EST, it will be classified as a *Historical Metric*, as it is delayed by 3 hours relative to the time of submission.
 
-**Why is this important for the average Datadog Metrics user?** Previously, Datadog did not support Late Metrics. With the introduction of Late Metric Ingestion, you can now monitor a variety of new use cases with your Datadog Metrics, such as Outage Recovery, Overwriting Invalid Metrics, and Managing IoT Delays.
+**Why is this important for the average Datadog Metrics user?** With the introduction of Historical Metric Ingestion, you can now monitor a variety of new use cases with your metrics, such as outage recovery, overwriting invalid metrics, and Mmnaging IoT delays.
 
-Late Metric Ingestion allows you to collect metric points with outdated timestamps that are older than one hour from the time of submission, but no older than your total metric retention period (which defaults to 15 months for all metrics). 
+Historical metric ingestion allows you to collect metric points with outdated timestamps, that are older than one hour from the time of submission, but no older than your total metric retention period (which defaults to 15 months for all metrics). 
 
-It's important to note that resending metric points with the same timestamp and tag combination within Datadog will be replaced with a *"last point wins"* ingestion rule.
+It's important to note that resending metric points with the same timestamp and tag-value combination within Datadog will be replaced with a *"last point wins"* ingestion rule.
 
-You can start ingesting Late Metrics by configuring Late Metric Ingestion via the [Metrics Summary Page][1] for counts, rates, and gauges.
+You can start ingesting historical metrics by configuring Historical Metrics Ingestion via the [Metrics Summary Page][1] for *counts, rates, and gauges*.
 
 ## Configuring Historical Metrics Ingestion
 
-To enable the ingestion of late metrics for a specific metric within the [Metrics Summary Page][1], click on the name of the metric you want to enable late metrics for. The side panel will appear, under the Advanced section you will find an option for "Late Data". Click on "Edit" and select "Enable Late Data" and press "Save" to enable the ingestion of late metrics for that specific metric.
+To enable the ingestion of historical metrics for a specific metric within the [Metrics Summary Page][1], click on the name of the metric you want to enable historical metrics for. The side panel will appear, under the *Advanced section* you will find an option for "Historical Data". Click on "Edit" and select "Enable Historical Data" and press "Save" to enable the ingestion of historical metrics for that specific metric.
 
-{{< img src="metrics/hmi-assets/ldi_enablement.mp4" alt="Late Metrics Configuration" video=true >}}
+{{< img src="metrics/hmi-assets/ldi_enablement.mp4" alt="Historical Metrics Configuration" video=true >}}
 
 ### Bulk Configuring Historical Metrics
 
-To optimize your Late Metrics enablement, take advantage of our Bulk Late Metric Enablement feature. By clicking on **Enable Late Data** on the Metrics Summary page, you can specify a namespace for your metrics. Then, you can configure all metrics that match that namespace to enable Late metrics ingestion. This allows you to quickly and easily enable Late Metrics ingestion for multiple metrics at once, rather than having to configure each one individually.
+To optimize your historical metrics enablement, take advantage of our Bulk Historical Metric Enablement feature. By clicking on **Enable Historical Data** on the Metrics Summary page, you can specify a namespace for your metrics. Then, you can configure all metrics that match that namespace to enable historical metrics ingestion. This allows you to quickly and easily enable historical metrics ingestion for multiple metrics at once, rather than having to configure each one individually.
 
-{{< img src="metrics/hmi-assets/bulk_ldi_enablement.mp4" alt="Bulk Late Metrics Configuration" video=true >}}
+{{< img src="metrics/hmi-assets/bulk_ldi_enablement.mp4" alt="Bulk Historical Metrics Configuration" video=true >}}
 
 
 ## Historical Metrics Submission
 
-Late metrics can be submitted to Datadog via our API or the Agent. 
+Historical metrics can be submitted to Datadog via our API or the Agent. 
 
-**If you plan to submit Historical Metrics through the API**, you can include metric points with old timestamps in the payload, as long as the metric name for the point has been configured to accept Late Metrics via the user interface.
+**If you plan to submit Historical Metrics through the API**, you can include metric points with old timestamps in the payload, as long as the metric name for the point has been configured to accept Historical Metrics via the user interface.
 
 {{< programming-lang-wrapper langs="python,java,go,ruby,typescript,curl" collapsible="true">}}
 
@@ -77,7 +77,7 @@ body = MetricPayload(
             points=[
                 MetricPoint(
 
-                    """ Add late timestamp here """
+                    """ Add historical timestamp here """
                     timestamp=int(datetime.now().timestamp()),
                     """ *********************** """
 
@@ -134,7 +134,7 @@ public class Example {
                             Collections.singletonList(
                                 new MetricPoint()
                             
-                                    //Add late timestamp here
+                                    //Add historical timestamp here
                                     .timestamp(OffsetDateTime.now().toInstant().getEpochSecond())
                                     //***********************
 
@@ -183,7 +183,7 @@ func main() {
 				Type:   datadogV2.METRICINTAKETYPE_UNSPECIFIED.Ptr(),
 				Points: []datadogV2.MetricPoint{
 					{   
-                        //Add late timestamp here
+                        //Add historical timestamp here
 						Timestamp: datadog.PtrInt64(time.Now().Unix()),
                         //***********************
 
@@ -231,7 +231,7 @@ body = DatadogAPIClient::V2::MetricPayload.new({
       points: [
         DatadogAPIClient::V2::MetricPoint.new({
 
-          #Add late timestamp here  
+          #Add historical timestamp here  
           timestamp: Time.now.to_i,
           #***********************  
 
@@ -270,7 +270,7 @@ const params: v2.MetricsApiSubmitMetricsRequest = {
         type: 0,
         points: [
           {
-            //Add late timestamp here
+            //Add historical timestamp here
             timestamp: Math.round(new Date().getTime() / 1000),
             //***********************
 
@@ -318,7 +318,7 @@ curl -X POST "https://api.datadoghq.com/api/v2/series" \
       "type": 0,
       "points": [
         {
-            # Add late timestamp here
+            # Add historical timestamp here
           "timestamp": 1636629071,
             # ***********************
 
@@ -422,7 +422,7 @@ public class DogStatsdClient
 
 ## Historical Metrics Ingestion: Latency
 
-Ingesting Late Metrics will include some ingestion latencies, which depends on the delay associated with the metric timestamp.
+Ingesting Historical Metrics will include some ingestion latencies, which depends on the delay associated with the metric timestamp.
 
 | Metric Delayed by:   | Ingestion Latency                     |
 |----------------------|---------------------------------------|
