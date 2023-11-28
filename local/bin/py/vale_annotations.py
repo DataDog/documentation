@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 
 import json
-import subprocess
+import sys
+import argparse
 import sys
 
 log_list = []
 
-# TODO: Only check modified lines
-
-def parse_log(log_filename, log_data):
+def parse_log(filename_log, log_data):
     severity = log_data.get('Severity')
     line = log_data.get('Line')
     col = log_data.get('Span'[0])
@@ -19,30 +18,34 @@ def parse_log(log_filename, log_data):
         case 'warning': level = 'warning'
         case 'error': level = 'error'
     if level == 'notice':
-        message = 'Suggestion: ' + message    
-    # echo syntax required by GitHub Actions. See https://bit.ly/44kNyPt
-    command = f"echo '::{level} file={log_filename},line={line},col={col},title={title}::{message}'"
+        message = 'Suggestion: ' + message
+    # echo syntax for GitHub annotations. See https://bit.ly/44kNyPt
+    command = f"::{level} file={filename_log},line={line},col={col},title={title}::{message}"
     error_present = True if level == 'error' else False
     return command, error_present
 
 if __name__ == '__main__':
-    with open('vale_output.json', 'r') as file:
-        try:
-            log_entries = json.loads(file.read())
-        except:
-            raise Exception('Error parsing log file.')
-
-    if log_entries:
-        for file_name, data in log_entries.items():
-            for item in data:
-                try:
-                    annotation, error_present = parse_log(file_name, item)
-                    log_list.append(annotation)
-                except:
-                    raise Exception(f'Failed to parse log entry for {file_name}')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--git_data', help="array of dictionaries: [{filename:[changed_lines]]", type=str)
+    parser.add_argument('--vale_data', help="Vale log data", type=str)
+    args = parser.parse_args()
+    
+    git_data = json.loads(args.git_data)
+    vale_data = json.loads(args.vale_data)
+    
+    if vale_data:
+        for vale_filename, vale_output in vale_data.items():
+            for item in vale_output:
+                for git_filename, git_line_data in git_data.items():
+                    if vale_filename == git_filename and item['Line'] in git_line_data:
+                        try:
+                            annotation, error_present = parse_log(git_filename, item)
+                            log_list.append(annotation)
+                        except:
+                            raise Exception(f'Failed to parse log entry for {git_filename}')
 
     for entry in log_list:
-        subprocess.call(entry, shell=True)
+        print(entry)
 
     if error_present:
         print("\nYour PR contains a Vale style error. Check the annotations in your PR and address the error.")
