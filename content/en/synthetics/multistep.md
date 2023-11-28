@@ -54,7 +54,7 @@ Select the **Locations** for your Multistep API test. Multistep API tests can ru
 
 ### Define steps
 
-To create an HTTP request step, click **Create Your First Step**.
+To create an API request step, click **Create Your First Step**.
 
 {{< img src="synthetics/api_tests/ms_create_request.png" alt="Create your Multistep API test requests" style="width:90%;" >}}
 
