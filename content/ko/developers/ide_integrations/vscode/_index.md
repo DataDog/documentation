@@ -3,7 +3,7 @@ description: VS 코드의 로컬 환경에서 Synthetic 테스트를 직접 실�
 further_reading:
 - link: /getting_started/synthetics/
   tag: 설명서
-  text: 신서틱(Synthetic) 모니터링 시작하기
+  text: Synthetic 모니터링 시작하기
 - link: /continuous_testing/testing_tunnel/
   tag: 설명서
   text: Continuous Testing Tunnel에 대해 알아보세요.
@@ -11,19 +11,19 @@ further_reading:
   tag: 설명서
   text: 소스 코드 통합에 대해 알아봅니다.
 is_beta: true
-kind: 설명서
-title: Visual Studio Code를 위한 Datadog 확장 프로그램
+kind: documentation
+title: Visual Studio Code를 위한 Datadog 확장 기능
 ---
 
 ## 개요
 
- Visual Studio Code (VS 코드)용 Datadog 확장 기능은 Datadog과 통합되어 개발을 촉진합니다.
+ Visual Studio Code (VS Code)용 Datadog 확장 기능은 Datadog과 통합되어 개발을 촉진합니다.
 
 {{< img src="/developers/ide_integrations/vscode/datadog-vscode.png" alt="VS 코드 확장을 위한 Datadog" style="width:100%;" >}}
 
 **Code Insights** 보기를 통해 다음과 같은 정보를 얻을 수 있습니다:
-- [오류 추적][10] 문제
-- 애플리케이션 보안 관리에 의한 [취약성][11] 보고서
+- [Error Tracking][10]에서 발생하는 문제
+- 애플리케이션 보안 관리에 의한 [Vulnerability][11] 보고서
 - CI Visibility에 의해 감지된 [불안정한 테스트][12] 
 - [Watchdog Insights][13]의 프로파일링 인사이트
 
@@ -44,12 +44,12 @@ title: Visual Studio Code를 위한 Datadog 확장 프로그램
 
 Visual Studio Marketplace에서 [Datadog 확장][6]을 설치합니다.
 
-## 코드 인사이트
+## Code Insights
 **Code Insights** 트리는 코드 기반과 관련된 Datadog 플랫폼에서 생성한 인사이트를 표시합니다. 인사이트는 성능, 안정성, 보안의 세 가지 카테고리로 분류됩니다.
 
 {{< img src="/developers/ide_integrations/vscode/code-insights.png" alt="Code Insights 보기." style="width:100%;" >}}
 
-코드 인사이트에는 각 문제에 대한 상세한 설명과 다음 링크가 포함됩니다:
+Code Insights에는 각 문제에 대한 상세한 설명과 다음 링크가 포함됩니다:
 - 관련 소스 코드 위치
 - 추가 정보를 위한 Datadog 플랫폼
 
