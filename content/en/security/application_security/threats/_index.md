@@ -26,7 +26,7 @@ Security signals raised by Threat Monitoring are summarized and surfaced in view
 
 {{< img src="security/application_security/threats/threats-on-svc-cat_2.png" alt="Service Catalog with services showing threat signals" style="width:100%;" >}}
 
-For additional information about how threat monitoring and protection works, read [How ASM Works][4].
+For additional information about how Threat Management works, read [How ASM Works][4].
 
 
 ## Explore threat signals
@@ -42,7 +42,7 @@ Additionally, you can block attacking users and IPs, or investigate what infrast
 
 ## Create In-App WAF rules for identifying attack patterns
 
-You can [create In-App WAF rules][5] that define what suspicious behavior looks like in your application, augmenting the default rules that come with ASM. Then [specify custom rules][6] to generate security signals from the attack attempts triggered from these rules, raising them in the Threat Monitoring views for your investigation. 
+You can [create In-App WAF rules][5] that define what suspicious behavior looks like in your application, augmenting the default rules that come with ASM. Then [specify custom rules][6] to generate security signals from the attack attempts triggered from these rules, raising them in the Threat Monitoring views for your investigation.
 
 ## Slow down attacks and attackers with ASM Protect
 
