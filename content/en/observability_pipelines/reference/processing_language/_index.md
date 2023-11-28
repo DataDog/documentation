@@ -2,35 +2,33 @@
 title: Datadog Processing Language
 ---
 
-Datadog Processing Language (DPL) is an expression-oriented, domain specific language designed for transforming observability data (logs and metrics). It features a simple syntax and [built-in functions][1] tailored to observability use cases.
+The Datadog Processing Language (DPL) is an expression-oriented, domain-specific language designed for transforming data (logs and metrics (beta)) sent to Observability Pipelines. It features a simple syntax and [built-in functions][1].
 
-Datadog Processing Language is supported in the `remap` transform.
+You can use DPL in the [`remap` transform][2] to:
 
-Remap transforms act on a single event and can be used to transform them or specify conditions for routing and filtering. You can use DPL in the following ways:
+- Manipulate [arrays][3], [strings][4], and other data types.
+- Encode and decode values using [Codec][5].
+- [Encrypt][6] and [decrypt][7] values.
+- [Coerce][8] one datatype to another datatype (for example, from an integer to a string).
+- [Convert syslog values][9] to read-able values.
+- Enrich values by using [enrichment tables][10].
+- [Manipulate IP values][11].
+- [Parse][12] values with custom rules (for example, grok, regex, and so on) and out-of-the-box functions (for example, syslog, apache, VPC flow logs, and so on).
+- Manipulate event [metadata][13] and [paths][14].
 
-- Manipulate [arrays][2], [strings][3], and other data types.
-- Encode and decode values using [Codec][4].
-- [Encrypt][5] and [decrypt][6] values.
-- [Coerce][7] one datatype to another datatype (for example, from an integer to a string).
-- [Convert syslog values][8] to read-able values.
-- Enrich values by using [enrichment tables][9].
-- [Manipulate IP values][10].
-- [Parse][11] values with custom rules (for example, grok, regex, and so on) and out-of-the-box functions (for example, syslog, apache, VPC flow logs, and so on).
-- Manipulate event [metadata][12] and [paths][13].
-
-See [DPL Functions Reference][14] for a full list of DPL built-in functions.
+See [DPL Functions Reference][1] for a full list of DPL built-in functions.
 
 [1]: /observability_pipelines/reference/processing_language/functions/
-[2]: /observability_pipelines/reference/processing_language/functions/#array
-[3]: /observability_pipelines/reference/processing_language/functions/#string
-[4]: /observability_pipelines/reference/processing_language/functions/#codec
-[5]: /observability_pipelines/reference/processing_language/functions/#encrypt
-[6]: /observability_pipelines/reference/processing_language/functions/#decrypt
-[7]: /observability_pipelines/reference/processing_language/functions/#coerce
-[8]: /observability_pipelines/reference/processing_language/functions/#convert
-[9]: /observability_pipelines/reference/processing_language/functions/#enrichment
-[10]: /observability_pipelines/reference/processing_language/functions/#ip
-[11]: /observability_pipelines/reference/processing_language/functions/#parse
-[12]: /observability_pipelines/reference/processing_language/functions/#event
-[13]: /observability_pipelines/reference/processing_language/functions/#path
-[14]: /observability_pipelines/reference/processing_language/functions/
+[2]: /observability_pipelines/reference/transforms/#remap
+[3]: /observability_pipelines/reference/processing_language/functions/#array
+[4]: /observability_pipelines/reference/processing_language/functions/#string
+[5]: /observability_pipelines/reference/processing_language/functions/#codec
+[6]: /observability_pipelines/reference/processing_language/functions/#encrypt
+[7]: /observability_pipelines/reference/processing_language/functions/#decrypt
+[8]: /observability_pipelines/reference/processing_language/functions/#coerce
+[9]: /observability_pipelines/reference/processing_language/functions/#convert
+[10]: /observability_pipelines/reference/processing_language/functions/#enrichment
+[11]: /observability_pipelines/reference/processing_language/functions/#ip
+[12]: /observability_pipelines/reference/processing_language/functions/#parse
+[13]: /observability_pipelines/reference/processing_language/functions/#event
+[14]: /observability_pipelines/reference/processing_language/functions/#path
