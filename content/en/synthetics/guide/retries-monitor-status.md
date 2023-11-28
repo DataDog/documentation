@@ -1,0 +1,54 @@
+---
+title: Understanding How Synthetic Test Retries Determine Monitor Status
+kind: guide
+description: Learn how a Synthetic test retry affects the associated monitor status.
+further_reading:
+- link: "/synthetics/guide/synthetic-test-monitors/"
+  tag: "Documentation"
+  text: "Learn about Synthetic test monitors"
+- link: "/continuous_testing/explorer/search_runs/"
+  tag: "Documentation"
+  text: "Learn about Synthetic test runs"
+---
+
+## Overview
+
+To reduce alert fatigue, Synthetic tests can be retried when, or if, a test run fails. If you have configured a test to be retried on failures, this is a _fast retry_.
+
+<!-- TODO change image to a test details page with fast retries-->
+{{< img src="synthetics/guide/synthetics_test_retries/failed_test_runs.png" alt="Failed test runs in the Synthetic Monitoring & Continuous Testing Explorer" style="width:100%;">}}
+
+
+By having a retry on the test, Datadog will run it multiple times before transitioning the test's monitor to alert and sending you an notification ([more information about monitors associated with your Synthetic tests][3]).
+
+Fast retry results are used in the local group evaluation, however only the final retry is taken into account in the total group evaluation (the original run and all intermediate retries are discarded from the evaluation).
+
+Local Group Evaluation
+: Evaluation of the location status
+
+Total Group Evaluation
+: Evaluation of the test status
+
+A run that is still failing after it has reached the maximum number of retries is considered final, and this final result is taken into account in the total group evaluation. 
+
+### Retries that overlap with other test runs
+
+In this example, a Synthetic test is scheduled to run every three minutes, and has a retry configured to a maximum of two times with a delay of two minutes.  
+
+{{< img src="synthetics/guide/synthetics_test_retries/diagram_tobereplaced.png" alt="A test run which was retried twice and failed on all retries, evaluated as a local group and as a total group" style="width:100%;">}}
+
+The evaluation only takes the final retry into account for the total group evaluation. 
+
+**Note:** Depending on what you set for the `minFailureDuration` and `minLocationsFailed` parameters, you may see a different behavior.
+
+### Timestamps
+
+The timestamp for a final result is when the test was retried at, not the time the test was originally scheduled. Results are considered at the timestamp when the test was started. Due to the test's execution time, there may be a small delay before the results become available for the evaluation.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /continuous_testing/explorer/search_runs/
+[2]: https://app.datadoghq.com/synthetics/explorer
+[3]: /synthetics/guide/synthetic-test-monitors/
