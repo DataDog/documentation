@@ -8,7 +8,7 @@ further_reading:
   text: "How Application Security Works"
 - link: "/security/application_security/threats/"
   tag: "Documentation"
-  text: "Threat Monitoring and Protection"
+  text: "Threat Management"
 - link: "/security/application_security/risk_management/"
   tag: "Documentation"
   text: "Application Vulnerability Management"
@@ -30,7 +30,7 @@ attack attempt
 
 Datadog library
 : _also_ tracer, tracing library
-: A programming language-specific library embedded in web applications. ASM uses the library to monitor and protect. APM uses the same library to instrument code for tracing telemetry. 
+: A programming language-specific library embedded in web applications. ASM uses the library to monitor and protect. APM uses the same library to instrument code for tracing telemetry.
 
 detection rule
 : A conditional logic definition that is applied to ingested data and cloud configurations. When at least one case defined in a rule is matched over a given period of time, Datadog generates a _security signal_.
@@ -64,11 +64,11 @@ software composition analysis (SCA)
 severity
 : An indicator of how quickly an attack attempt should be triaged and addressed. Based on a combination of factors, including the attack's potential impact and risk. Values are Critical, High, Medium, Low, Info.
 
-suspicious request 
-: A distributed trace for which security activity has been flagged by In-App WAF rules. The underlying trace is shared with APM, allowing deeper and faster investigations. 
+suspicious request
+: A distributed trace for which security activity has been flagged by In-App WAF rules. The underlying trace is shared with APM, allowing deeper and faster investigations.
 
 user attribution
-: A mechanism that maps suspicious requests to known users in your systems. 
+: A mechanism that maps suspicious requests to known users in your systems.
 : See [Tracking User Activity][14].
 
 vulnerability
@@ -81,7 +81,7 @@ them as `Harmful Safe or Unknown`.
 
 threat intelligence
 : A set of rules executed in the Datadog libraries to detect threats. These include Web Application Firewall (WAF) patterns that monitor for attempts to exploit known vulnerabilities.
-: See [Threat Intelligence][16] 
+: See [Threat Intelligence][16]
 
 ## Attacks and known vulnerabilities terms
 
@@ -89,12 +89,12 @@ Open Web Application Security Project (OWASP)
 : A nonprofit foundation with several projects to enhance web application security. OWASP is best known for the [OWASP Top 10][2], a broad consensus about the most critical security risks to web applications.
 
 Cross-Site Scripting (XSS)
-: A type of injection attack in which malicious scripts are injected into otherwise benign and trusted websites. 
+: A type of injection attack in which malicious scripts are injected into otherwise benign and trusted websites.
 : See [XSS on OWASP][3].
 
 Structured Query Language Injection (SQLi, SQL Injection)
 : A type of injection attack in which a SQL query is executed via the input data from the client to the application. SQL commands are injected into data-plane input in order to affect the execution of predefined SQL commands. A successful SQL injection exploit can read sensitive data from the database, modify database data (Insert/Update/Delete), execute administration operations on the database (such as shutdown the DBMS), recover the content of a given file present on the DBMS file system, and in some cases issue commands to the operating system.
-: **Related**: Cassandra Query Language Injection (CQLi), NoSQL Injection (NoSQLi) - Similar to SQLi but for the Cassandra Query Language and NoSQL. 
+: **Related**: Cassandra Query Language Injection (CQLi), NoSQL Injection (NoSQLi) - Similar to SQLi but for the Cassandra Query Language and NoSQL.
 : See [SQL Injection on OWASP][4].
 
 Server-Side Request Forgery (SSRF)
@@ -102,7 +102,7 @@ Server-Side Request Forgery (SSRF)
 : See [Server-Side Request Forgery on OWASP][5].
 
 Local File Inclusion (LFI)
-: A vulnerability that allows an attacker to include a file locally present on the server during the processing of the request. In most cases this allows the attacker to read sensitive information stored in files on the server. In more severe cases exploitation can lead to cross-site scripting or remote code execution. 
+: A vulnerability that allows an attacker to include a file locally present on the server during the processing of the request. In most cases this allows the attacker to read sensitive information stored in files on the server. In more severe cases exploitation can lead to cross-site scripting or remote code execution.
 : See [Testing for LFI on OWASP][6].
 
 Remote File Inclusion (RFI)

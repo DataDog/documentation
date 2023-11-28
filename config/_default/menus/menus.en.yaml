@@ -3463,7 +3463,7 @@ main:
     parent: application_security
     identifier: application_risk_management
     weight: 4
-  - name: Threat Monitoring and Protection
+  - name: Threat Management
     url: security/application_security/threats/
     parent: application_security
     identifier: appsec_threats
