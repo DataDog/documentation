@@ -774,4 +774,4 @@ While this [has been deprecated][7] if you are using PHP 7.x, you still may use 
 [7]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
 [8]: /tracing/trace_collection/opentracing/php#opentracing
 [9]: /tracing/trace_collection/trace_context_propagation/php
-[10]: /tracing/trace_explorer/trace_view
+[10]: /tracing/trace_explorer/trace_view?tab=spanlinksbeta#more-information

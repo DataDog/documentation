@@ -348,4 +348,3 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [8]: /tracing/trace_collection/trace_context_propagation/java/
 [9]: /tracing/security
 [10]: /tracing/guide/ignoring_apm_resources/
-[11]: /tracing/trace_explorer/trace_view
