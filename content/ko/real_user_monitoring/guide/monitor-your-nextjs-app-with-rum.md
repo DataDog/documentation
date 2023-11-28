@@ -18,7 +18,7 @@ Datadog RUM 브라우저 모니터링을 설정하려면 다음 단계를 수행
 
 ### 애플리케이션 만들기
 
-1. **[UX Monitoring > Real User Monitoring][2]**으로 이동합니다.
+1. [**UX Monitoring > Real User Monitoring**][2]으로 이동합니다.
 2. **New Application** 버튼을 클릭합니다.
 3. JS가 선택되어 있는지 확인한 다음, 애플리케이션의 이름을 입력하고 **Create New RUM Application**을 클릭합니다. `clientToken` 및 `applicationId`는 애플리케이션에 대해 자동으로 생성됩니다.
 
