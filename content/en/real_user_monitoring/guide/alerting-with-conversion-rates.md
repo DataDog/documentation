@@ -16,9 +16,9 @@ Conversion rates are crucial in monitoring the success of a user workflow. This 
 
 In Datadog, navigate to [UX Monitoring > Product Analytics > Funnels][1].
 
-<!-- RUM FUNNEL CREATION SCREENSHOT -->
+{{< img src="real_user_monitoring/funnel_analysis/rum-funnel-creation-2.png" alt="The funnel creation page with key actions highlighted" style="width:100%;" >}}
 
-In the **Define steps for measuring conversion** section, create some steps from your views and actions. You can click on the bar graphs to see a side panel with analytics about user conversions and dropoffs. To add a subsequent view or action in the funnel, click **+** and select from frequent next steps. 
+In the **Define steps for measuring conversion** section, create some steps from your views and actions. You can click on the bar graphs to see a side panel with analytics about user conversions and dropoffs. To add a subsequent view or action in the funnel, click **+** and select from frequent next steps.
 
 ## Export the conversion rate graph
 
