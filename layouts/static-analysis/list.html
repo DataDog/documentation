@@ -233,7 +233,7 @@
                         </div>
                     </div>
 
-                    {{/* group header - Keep here. need to build header language logo   */}}
+                    {{/* group header - Keep here. need to build languageByRuleSet first  */}}
                     <button
                     data-header-id="{{ $group_id }}" 
                     class="group-header w-100 border mb-1 d-flex align-items-center justify-content-between"
@@ -261,7 +261,7 @@
             </div>
         </div>
 
-        {{/*  NAV - Keep here. filters scratch pad needs to form first */}}
+        {{/*  NAV - Keep here. scratch pad for filters need to form first */}}
         <nav id="static-analysis-nav" class="container px-0">
             {{ $filter_types := (slice "Languages" "Categories" "Severities") }}
             <div class="filters-static-analysis row">
@@ -270,6 +270,7 @@
                 <div class='filter-type flex-column col col-md-{{cond (eq $filter_type "languages") "12" "6" }}' data-id="{{$filter_type}}" >
                     <p class="filter-type-name fw-semibold">{{ . }}</p>
                     <div class="filter-component position-relative">
+                        {{/*  FILTER TOGGLER  */}}
                         <button 
                         class="toggler w-100 rounded position-relative"
                         @click="toggleFilterForm($el)"
@@ -279,10 +280,7 @@
                                 <template x-if="!filterTypes['{{$filter_type}}'].length">
                                     <span class="all fw-semibold">All</span>
                                 </template>
-                                {{/*  
-                                    Render filter selections from `filterValue` data.
-                                    [filter value, integration logo] = filter 
-                                */}}
+                                {{/*  Show filter selections from `filterValue` data in the toggler */}}
                                 <template x-for="(filter, idx) in filterTypes['{{$filter_type}}']" :key="idx">
                                     <div class="selection-container rounded d-flex align-items-center">
                                         <template x-if="filter.split(',')[1]">
@@ -306,21 +304,19 @@
                                 </span>
                             </div>
                         </button>
-                        {{/*  
-                            Form     
-                        */}}
+                        {{/*  FILTER FORM  */}}
                         <form 
                         class="d-flex flex-column bg-white rounded position-absolute w-100"
                         x-cloak x-show.important="openedFilterForm === '{{$filter_type}}'"
                         @click.outside="openedFilterForm = null"
                         >
-                            <div class="filter-category-container">
+                            <div class="filter-selection-container">
                                 <span>All</span>
                             </div>
                             {{ range index ($pad.Get "filters") . }}
-                            <div class="filter-category-container">
+                            <div class="filter-selection-container">
                                 {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" . "variant" "avatar") }}
-                                {{/*  store int_logo with filter value if int_logo is present */}}
+                                {{/*  store int_logo with filter value if int_logo is present e.g. "int_logo url,Javascript" */}}
                                 <input 
                                 id="{{ . | anchorize }}" 
                                 type="checkbox" 
@@ -344,7 +340,7 @@
                 </div>
                 {{ end }}
             </div>
-            {{/*  SEARCH  */}}
+            {{/*  SEARCH FORM */}}
             <form class="search-static-analysis">
                 <input type="text" placeholder="Search here" class="w-100 px-1" x-model="searchValue" @input="resetFilteredRulesets" @input.debounce="pushState()">
             </form>
