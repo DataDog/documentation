@@ -116,14 +116,15 @@ host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com,1433
 
 This error is common after upgrading to the latest [MSOLEDBSQL][6] driver due to [breaking changes][7] that were introduced. In the latest version of the driver, all connections to the SQL instance are encrypted by default.
 
+#### Latest version of the Microsoft OLE DB Driver
+
 If you are using the latest version of the Microsoft OLE DB Driver for SQL Server, and trying to connect to a SQL Server instance which requires encrypted connections, you can use the following workarounds:
 
 1. If you are using a self-signed certificate and the Force Encryption setting on the server (`rds.force_ssl=1` on AWS) to ensure clients connect with encryption:
 
    - Change to a certificate that is trusted as part of the client's trust chain.
    - Add the self-signed certificate as a trusted certificate on the client.
-   - If you're using Microsoft OLE DB Driver 19, add `Trust Server Certificate=True` to the connection string, including the spaces.
-   - If you're not using Microsoft OLE DB Driver 19, add `TrustServerCertificate=yes;` to the connection string.
+   - Add `TrustServerCertificate=yes;` to the connection string.
 
 This is described in more detail [in the Microsoft documentation][7]
 
@@ -148,6 +149,11 @@ This is described in more detail [in the Microsoft documentation][7]
       connector: adodbapi
       adoprovider: MSOLEDBSQL
   ```
+#### Microsoft OLE DB Driver 2019
+
+If you're using Microsoft OLE DB Driver 19, add `Trust Server Certificate=True` to the connection string, including the spaces.
+
+#### Other Microsoft OLE DB Driver versions
 
 If you are using a driver **other than `MSOLEDBSQL` 2019**, this error can be resolved by setting `TrustServerCertificate=yes` in the connection string. For example, for the 2017 `ODBC` driver:
 
