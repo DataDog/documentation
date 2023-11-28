@@ -1,5 +1,5 @@
 ---
-title: Processing Language
+title: Datadog Processing Language
 ---
 
 Datadog Processing Language (DPL) is an expression-oriented, domain specific language designed for transforming observability data (logs and metrics). It features a simple syntax and [built-in functions][1] tailored to observability use cases.
