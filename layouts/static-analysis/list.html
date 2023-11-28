@@ -48,15 +48,24 @@
         },
         shouldShowRule (ruleEl) {
             // Determines ruleset display
-            // Compares search values and filter values against ruleset info (dataSet)
-            const dataSet = ruleEl.dataset.info
-            const datasetArr = dataSet.split(';')
-            const filterValues = Object.values(this.filterValue).flat().map(v => v.split(',')[0] )
+            // Compares search values and filter values against rule info (dataset)
 
+            const datasetArr = ruleEl.dataset.info.split(';')
+            const filterValues = Object.entries(this.filterValue).map(v => v[1])
             const searchValues = this.searchValue.split(' ')
-            const containsFilteredValue = filterValues.every(value => datasetArr[0].toLowerCase().split(',').includes(value.toLowerCase())) // checks every filter attr matches selected filters
-            const containsSearchValues = searchValues.some(word => datasetArr.slice(1).join(' ').includes(word.toLowerCase())) // checks search attrs match a typed search word
-            
+            const ruleFilterInfo = datasetArr[0].toLowerCase().split(',')
+            const ruleSearchInfo = datasetArr.slice(1).join(' ').toLowerCase()
+
+            // filter logic truthy value:
+            // -- if a filter type is populated,
+            // -- at least one filter value of the same type must be included in rule info
+            // -- filter values of different types in combination with eachother  must be included in rule info
+            // -- ex: if ruleEl dataset includes 'Javascript' OR 'Docker' AND Security AND Warning
+            // --   this would render ruleEls that are javascript, security, warning and docker, security, warning
+
+            const containsFilteredValue = filterValues.every(t => t.length ? t.some(f => ruleFilterInfo.includes(f.split(',')[0].toLowerCase())) : true )
+            const containsSearchValues = searchValues.some(word => ruleSearchInfo.includes(word.toLowerCase())) // checks search attrs match a typed search word
+
             this.shouldShowRuleSet(ruleEl.closest('.ruleset'), containsSearchValues && containsFilteredValue)
 
             if(containsSearchValues && containsFilteredValue){
@@ -285,7 +294,7 @@
                             <div class="overflow-gradient h-100 position-absolute top-0 end-0 rounded-end">
                                 <template x-if="filterValue['{{$filter_type}}'].length">
                                     <span class="cancel-circle-wrapper" @click.stop="resetFilteredRulesets; deleteAllSelections('{{ $filter_type }}')">
-                                        {{ partial "icon" (dict "name" "cancel-circle" "title" "delete all" ) }}
+                                        {{ partial "icon" (dict "name" "x-circle-solid" "title" "delete all" ) }}
                                     </span>
                                 </template>
                                 <span class="chevron-wrapper d-flex align-items-center justify-content-center position-relative h-100">
@@ -299,6 +308,7 @@
                         <form 
                         class="d-flex flex-column bg-white rounded position-absolute w-100"
                         x-cloak x-show.important="openedFilterForm === '{{$filter_type}}'"
+                        @click.outside="openedFilterForm = null"
                         >
                             <div class="filter-category-container">
                                 <span>All</span>
