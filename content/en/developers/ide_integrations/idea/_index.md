@@ -182,7 +182,7 @@ The **View in IntelliJ/GoLand/PyCharm** feature provides a link from the Datadog
 ## Static Analysis
 The Datadog plugin runs [Static Analysis][13] rules on your source files as you edit them. The goal is to detect and fix problems such as maintainability issues, bugs, or security vulnerabilities in your code before you commit your changes. 
 
-Static Analysis supports scanning multiple programming languages, the full list can be found [here][14]. For file types belonging to supported languages, issues are shown in the source code editor with the JetBrains inspection system, and suggested fixes can be applied directly:
+Static Analysis supports scanning for many programming languages. For a complete list, see [Static Analysis Rules][14]. For file types belonging to supported languages, issues are shown in the source code editor with the JetBrains inspection system, and suggested fixes can be applied directly:
 
 {{< img src="/developers/ide_integrations/idea/static-analysis-issue.png" alt="A static analysis rule violation and recommended fix." style="width:100%;" >}}
 
