@@ -82,7 +82,7 @@ Use the [filter transform][4] when you want only certain logs that meet a specif
 
 In those cases, insert a component that contains a [filter transform][4] to filter logs that uses the [Datadog Processing Language (DPL)][5] or [Datadog Log Search syntax][6] to set the conditions. Logs that don't match the conditions are dropped. 
 
-The example below uses the filter transform and DPL to send only logs with a `status` of `500`. **Note**: DPL was previously VRL which is why the `type` is set to `vrl`.
+The example below uses the filter transform and DPL to send only logs with a `status` of `500`. **Note**: DPL was previously called VRL which is why the `type` is set to `vrl`.
 
 {{< tabs >}}
 {{% tab "YAML" %}}
