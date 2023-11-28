@@ -277,12 +277,9 @@ Endpoint profiling (beta) is NOT enabled by default when you [turn on profiling 
 export DD_PROFILING_ENDPOINT_COLLECTION_ENABLED=true
 ```
 
-Setting this environment variable also turns on [Code Hotspots (beta)][2] which is needed for endpoint profiling.
-
 Requires `dd-trace-js` version 4.17.0+ or 3.38.0+.
 
 [1]: /profiler/enabling/nodejs
-[2]: /profiler/connect_traces_and_profiles/?code-lang=nodejs#identify-code-hotspots-in-slow-traces
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 

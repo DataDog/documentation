@@ -65,19 +65,41 @@ datadogRum.init({
   //  env: 'production',
   //  version: '1.0.0',
   sessionSampleRate: 100,
-  sessionReplaySampleRate: 100, // 포함되지 않은 경우 기본값은 100입니다.
+  sessionReplaySampleRate: 100,
   trackResources: true,
   trackLongTasks: true,
   trackUserInteractions: true,
-  });
-datadogRum.startSessionReplayRecording();
-
+});
 ```
 
 </details>
 
 <details>
-  <summary>이전 <code>v4.30.0</code></summary>
+  <summary><code>v5.0.0</code> 이전</summary>
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum'
+
+datadogRum.init({
+  applicationId: '<DATADOG_APPLICATION_ID>',
+  clientToken: '<DATADOG_CLIENT_TOKEN>',
+  site: '<DATADOG_SITE>',
+  //  service: 'my-web-application',
+  //  env: 'production',
+  //  version: '1.0.0',
+  sessionSampleRate: 100,
+  sessionReplaySampleRate: 100, // 포함되지 않은 경우 기본값은 100입니다.
+  trackResources: true,
+  trackLongTasks: true,
+  trackUserInteractions: true,
+});
+datadogRum.startSessionReplayRecording();
+```
+
+</details>
+
+<details>
+  <summary><code>v4.30.0</code> 이전</summary>
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'
@@ -94,15 +116,14 @@ datadogRum.init({
   trackResources: true,
   trackLongTasks: true,
   trackInteractions: true,
-  });
+});
 datadogRum.startSessionReplayRecording();
-
 ```
 
 </details>
 
 <details>
-  <summary><code>v4.20.0</code>이전 </summary>
+  <summary><code>v4.20.0</code> 이전</summary>
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'
@@ -117,15 +138,14 @@ datadogRum.init({
   sampleRate: 100,
   premiumSampleRate: 100, // 포함되지 않은 경우 기본값은 100입니다.
   trackInteractions: true,
-  });
+});
 datadogRum.startSessionReplayRecording();
-
 ```
 
 </details>
 
 <details>
-  <summary><code>v4.10.2</code>이전</summary>
+  <summary><code>v4.10.2</code> 이전</summary>
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum'
@@ -140,14 +160,13 @@ datadogRum.init({
   sampleRate: 100,
   replaySampleRate: 100, // 포함되지 않은 경우 기본값은 100입니다.
   trackInteractions: true,
-  });
+});
 datadogRum.startSessionReplayRecording();
-
 ```
 
 </details>
 
-`trackUserInteractions` 및 `trackFrustrations` 파라미터를 사용하면 애플리케이션에서 사용자 클릭을 자동으로 수집할 수 있습니다. 페이지에 포함된 **민감하고 사적인 데이터**는 상호 작용하는 요소를 식별하기 위해 포함될 수 있습니다.
+ `trackUserInteractions` 파라미터를 사용하면 애플리케이션에서 사용자 클릭 정보를 자동으로 수집할 수 있습니다. 이는 사용자가 상호작용한 요소를 확인할 목적으로 페이지의  **민감한 개인정보 데이터**가 포함될 수 있음을 의미합니다.
 
 ### CDN async
 
@@ -155,6 +174,168 @@ datadogRum.startSessionReplayRecording();
 
 <details open>
   <summary>최신 버전</summary>
+
+{{< site-region region="us" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="ap1" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v5/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'ap1.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="eu" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v5/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'datadoghq.eu',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="us3" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v5/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'us3.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="us5" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'us5.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="gov" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v5.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'ddog-gov.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+
+</details>
+
+<details>
+  <summary><code>v5.0.0</code> 이전</summary>
 
 {{< site-region region="us" >}}
 ```html
@@ -801,7 +982,7 @@ datadogRum.startSessionReplayRecording();
 
 </details>
 
-`trackUserInteractions` 및 `trackFrustrations` 파라미터를 사용하면 애플리케이션에서 사용자 클릭을 자동으로 수집할 수 있습니다. 페이지에 포함된 **민감하고 사적인 데이터**는 상호 작용하는 요소를 식별하기 위해 포함될 수 있습니다.
+ `trackUserInteractions` 파라미터를 사용하면 애플리케이션에서 사용자 클릭 정보를 자동으로 수집할 수 있습니다. 이는 사용자가 상호작용한 요소를 확인할 목적으로 페이지의  **민감한 개인정보 데이터**가 포함될 수 있음을 의미합니다.
 
 초기 RUM API 호출은 `window.DD_RUM.onReady()` 콜백으로 래핑해야 합니다. 이렇게 하면 SDK가 제대로 로드된 후에만 코드가 실행됩니다.
 
@@ -811,6 +992,138 @@ datadogRum.startSessionReplayRecording();
 
 <details open>
   <summary>최신 버전</summary>
+
+{{< site-region region="us" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="ap1" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'ap1.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="eu" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'datadoghq.eu',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="us3" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/us3/v5/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'us3.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="us5" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'us5.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="gov" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/datadog-rum-v5.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'ddog-gov.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+</script>
+```
+{{</ site-region>}}
+
+</details>
+
+<details>
+  <summary><code>v5.0.0</code> 이전</summary>
 
 {{< site-region region="us" >}}
 ```html
@@ -1361,7 +1674,7 @@ datadogRum.startSessionReplayRecording();
 
 </details>
 
-`trackUserInteractions` 및 `trackFrustrations` 파라미터는 애플리케이션에서 사용자 클릭 자동 수집을 지원합니다. 페이지에 포함된 **민감하고 사적인 데이터**가 상호 작용하는 요소 파악을 위해 포함될 수 있습니다.
+ `trackUserInteractions` 파라미터를 사용하면 애플리케이션에서 사용자 클릭 정보를 자동으로 수집할 수 있습니다. 이는 사용자가 상호작용한 요소를 확인할 목적으로 페이지의  **민감한 개인정보 데이터**가 포함될 수 있음을 의미합니다.
 
 `window.DD_RUM` 검사는 RUM 브라우저 SDK에서 로딩 실패가 발생할 경우 문제를 방지하는 데 사용됩니다.
 
@@ -1376,14 +1689,11 @@ window.DD_RUM.init({
   applicationId: 'XXX',
   clientToken: 'XXX',
   site: 'datadoghq.com',
-  sessionSampleRate: 100,
-  sessionReplaySampleRate: 100, // 포함되지 않은 경우 기본값은 100입니다.
-  trackResources: true,
-  trackLongTasks: true,
+  ...
 })
 ```
 
-## 설정
+## 그룹
 
 ### 초기화 파라미터
 
@@ -1422,56 +1732,38 @@ RUM 애플리케이션 ID.
 
 `trackViewsManually`
 : 선택 사항<br/>
-**유형**: 부울<br/>
+**유형**: 불리언(Boolean)<br/>
 **기본값**: `false` <br/>
 RUM 보기 생성을 제어할 수 있도록 함. [기본 RUM 보기 이름 덮어쓰기][10] 참조.
 
-`trackInteractions`
-: 선택 사항 - **더 이상 사용되지 않음**<br/>
-**유형**: 부울<br/>
-**기본값**: `false` <br/>
-`trackUserInteractions` 참조.
-
 `trackUserInteractions`
 : 선택 사항<br/>
-**유형**: 부울<br/>
+**유형**: 불리언(Boolean)<br/>
 **기본값**: `false` <br/>
 [사용자 작업 자동 수집][6] 활성화.
 
-`trackFrustrations`
-: 선택 사항<br/>
-**유형**: 부울<br/>
-**기본값**: `false` <br/>
-[사용자 불만 사항 자동 수집][20] 활성화. `trackUserInteractions: true`를 의미함.
-
 `trackResources`
 : 선택 사항<br/>
-**유형**: 부울<br/>
+**유형**: 불리언(Boolean)<br/>
 **기본값**: `false` <br/>
 리소스 이벤트 수집 활성화.
 
 `trackLongTasks`
 : 선택 사항<br/>
-**유형**: 부울<br/>
+**유형**: 불리언(Boolean)<br/>
 **기본값**: `false` <br/>
 긴 작업 이벤트 수집 활성화.
 
 `defaultPrivacyLevel`
 : 선택 사항<br/>
 **유형**: 문자열<br/>
-**기본값**: `mask-user-input` <br/>
-[세션 재생 개인정보 보호 옵션][13] 참조.
+**기본값**: `mask` <br/>
+[세션 재생 개인정보 보호 옵션][13]을 참조하세요.
 
 `actionNameAttribute`
 : 선택 사항<br/>
 **유형**: 문자열<br/>
 [작업 이름][9]에 사용할 고유 속성 지정.
-
-`sampleRate`
-: 선택 사항 - **더 이상 사용되지 않음**<br/>
-**유형**: 숫자<br/>
-**기본값**: `100`<br/>
-``sessionSampleRate` 참조.
 
 `sessionSampleRate`
 : 선택 사항 <br/>
@@ -1479,50 +1771,27 @@ RUM 보기 생성을 제어할 수 있도록 함. [기본 RUM 보기 이름 덮�
 **기본값**: `100`<br/>
 추적할 세션 비율: `100`: 전체, `0`: 없음. 추적된 세션만 RUM 이벤트를 전송함.  `sessionSampleRate`에 대한 자세한 내용은 [샘플링 설정][21]을 참조하세요.
 
-`replaySampleRate`
-: 선택 사항 - **더 이상 사용되지 않음**<br/>
-**유형**: 숫자<br/>
-**기본값**: `100`<br/>
-`sessionReplaySampleRate`참조.
-
-`premiumSampleRate`
-: 선택 사항 - **더 이상 사용되지 않음**<br/>
-**유형**: 숫자<br/>
-**기본값**: `100`<br/>
-`sessionReplaySampleRate` 참조.
-
 `sessionReplaySampleRate`
-: 선택 사항 <br/>
+: 선택 사항<br/>
 **유형**: 숫자<br/>
-**기본값**: `100`<br/>
-[브라우저 RUM 및 세션 재생 가격 책정][11] 기능을 사용해 추적된 세션 비율: `100`: 전체, `0`: 없음 . `sessionReplaySampleRate`에 대한 자세한 내용은 [샘플링 설정][21]을 참조하세요.
+**기본값**: `0`<br/>
+[브라우저 RUM 및 세션 재생 가격 책정][11] 기능을 사용해 추적된 세션 비율: `100` 전체, `0` 없음. `sessionReplaySampleRate`에 대한 자세한 내용을 확인하려면 [샘플링 설정][21]을 참조하세요.
 
 `silentMultipleInit`
 : 선택 사항<br/>
-**유형**: 부울<br/>
+**유형**: 불리언(Boolean)<br/>
 **기본값**: `false`<br/>
 페이지에서 RUM 브라우저 SDK가 이미 초기화되어 있는 경우 초기화가 자동으로 실패합니다.
 
-`proxyUrl`
+`proxy`
 : 선택 사항<br/>
 **유형**: 문자열<br/>
-선택 사항인 프록시 URL (예: https://www.proxy.com/path). 자세한 내용은 전체 [프록시 설정 가이드][7]를 참조하세요.
-
-`allowedTracingOrigins`
-: 선택 사항 - **더 이상 사용되지 않음**<br/>
-**유형**: 목록<br/>
-추적 헤더를 삽입하는 데 사용되는 요청 발신지 목록. 자세한 내용은 [RUM과 트레이스 연결][12]을 참조하세요.
+선택 사항인 프록시 URL (예: https://www.proxy.com/path). 자세한 내용을 확인하려면 전체 [프록시 설정 지침][7]을 참조하세요.
 
 `allowedTracingUrls`
 : 선택 사항<br/>
 **유형**: 목록<br/>
 추적 헤더를 삽입하는 데 사용되는 요청 URL 목록. 자세한 내용은 [RUM과 트레이스 연결][12]을 참조하세요.
-
-`tracingSampleRate`
-: 선택 사항 - **더 이상 사용되지 않음**<br/>
-**유형**: 숫자<br/>
-**기본값**: `100`<br/>
-`traceSampleRate` 참조.
 
 `traceSampleRate`
 : 선택 사항<br/>
@@ -1552,29 +1821,35 @@ Datadog 브라우저 SDK 워커 JavaScript 파일을 가리키는 URL입니다. 
 **기본값**: `false`<br/>
 `localStorage`에서 글로벌 컨텍스트와 사용자 컨텍스트를 저장하여 사용자 탐색에 따라 보존합니다. 자세한 내용과 구체적인 제한 사항은 [컨텍스트 수명 주기][24]를 참조하세요.
 
+`allowUntrustedEvents`
+: 선택 사항<br/>
+**유형**: 불리언(Boolean)<br/>
+**기본값**: `false`<br/>
+예를 들어, 자동화 UI 테스트에서 [신뢰할 수 없는 이벤트][25]의 캡처를 허용합니다.
+
 Logs Browser SDK를 사용하는 경우 일치하는 구성이 필요한 옵션 :
 
 `trackSessionAcrossSubdomains`
 : 선택 사항<br/>
-**유형**: 부울<br/>
+**유형**: 불리언(Boolean)<br/>
 **기본값**: `false`<br/>
 동일한 사이트의 하위 도메인 전체에서 세션을 보존합니다.
 
 `useSecureSessionCookie`
 : 선택 사항 <br/>
-**유형**: 부울<br/>
+**유형**: 불리언(Boolean)<br/>
 **기본값**: `false`<br/>
 보안 세션 쿠키를 사용합니다. 이는 안전하지 않은 (비-HTTPS) 연결에 전송된 RUM 이벤트를 비활성화합니다.
 
 `useCrossSiteSessionCookie`
 : 선택 사항<br/>
-**유형**: 부울<br/>
+**유형**: 불리언(Boolean)<br/>
 **기본값**:`false`<br/>
 안전한 사이트 간 세션 쿠키를 사용합니다. 이렇게 하면 사이트가 다른 사이트(iframe)에서 로드될 때 RUM 브라우저 SDK가 실행될 수 있습니다. `useSecureSessionCookie`를 나타냅니다.
 
 `allowFallbackToLocalStorage`
 : 선택 사항<br/>
-**유형**: 부울<br/>
+**유형**: 불리언(Boolean)<br/>
 **기본값**: `false`<br/>
 쿠키를 설정할 수 없는 경우 `localStorage`를 사용할 수 있도록 허용합니다. 이를 통해 쿠키를 지원하지 않는 환경에서도 RUM Browser SDK를 실행할 수 있습니다. 일반적인 사용 사례는 [Browser SDK를 사용하여 전자 애플리케이션 모니터링][23]을 참조하세요.
 
@@ -1678,3 +1953,4 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [22]: /ko/integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [23]: /ko/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
 [24]: https://docs.datadoghq.com/ko/real_user_monitoring/browser/modifying_data_and_context#contexts-life-cycle
+[25]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted

@@ -26,7 +26,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="https://forms.gle/Eqq6uXfGjYxmqpjDA" header="false" >}}
-DORA Metrics are in private beta for <a href="https://docs.datadoghq.com/continuous_integration/pipelines/">CI Pipeline Visibility</a>, <a href="https://docs.datadoghq.com/continuous_integration/tests/">Test Visibility</a>, and <a href="https://docs.datadoghq.com/continuous_integration/static_analysis/">Static Analysis</a> customers. To request access, complete the form.
+DORA Metrics are in private beta. To request access, complete the form.
 {{< /callout >}}
 
 ## Overview
@@ -198,13 +198,13 @@ links:
     url: https://github.com/organization/example-repository/tree/main/src/apps/shopist
 ```
 
-DORA Metrics for the `shopist` service only consider the git commits that include changes within `src/apps/shopist/**`. You can configure more granular control of the filtering with `extensions.dora_metrics`.
+DORA Metrics for the `shopist` service only consider the git commits that include changes within `src/apps/shopist/**`. You can configure more granular control of the filtering with `extensions[datadoghq.com/dora-metrics]`.
 
 **Example (schema version v2.2):**
 
 ```yaml
 extensions:
-  dora_metrics:
+  datadoghq.com/dora-metrics:
     source_patterns:
       - src/apps/shopist/**
       - src/libs/utils/**

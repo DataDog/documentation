@@ -56,6 +56,7 @@ title: インテグレーションガイド
     {{< nextlink href="integrations/guide/azure-vms-appear-in-app-without-metrics" tag=" Azure" >}}メトリクスなしでアプリに表示される Azure VM{{< /nextlink >}}
     {{< nextlink href="integrations/guide/powered-down-azure-vm-on-infrastructure-list" tag=" Azure" >}}インフラストラクチャーリスト上のパワーダウンした Azure VM{{< /nextlink >}}
     {{< nextlink href="integrations/guide/powershell-command-to-install-azure-datadog-extension" tag=" Azure" >}}Azure Datadog 拡張機能をインストールするコマンド{{< /nextlink >}}
+{{< nextlink href="integrations/guide/azure-graph-api-permissions" tag=" Azure" >}}Azure を監視するための Microsoft Graph API 権限{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="JMX ガイド" >}}
