@@ -419,7 +419,7 @@ val inputStream = context.getRawResAsRumResource(id)
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /account_management/api-app-keys/#client-tokens
 [5]: /real_user_monitoring/android/advanced_configuration/#automatically-track-views
-[6]: /real_user_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/#set-tracking-consent-gdpr-compliance
 [7]: /real_user_monitoring/android/advanced_configuration/#initialization-parameters
 [8]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file
 [9]: https://square.github.io/okhttp/interceptors/
