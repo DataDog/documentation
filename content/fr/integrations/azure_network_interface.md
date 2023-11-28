@@ -1,10 +1,10 @@
 ---
 aliases:
-  - /fr/integrations/azure_networkinterface
+- /fr/integrations/azure_networkinterface
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- cloud
+- network
 dependencies: []
 description: Surveillez des métriques clés d'Azure Network Interface.
 doc_link: https://docs.datadoghq.com/integrations/azure_network_interface/
@@ -22,13 +22,14 @@ public_title: Intégration Datadog/Microsoft Azure Network Interface
 short_description: Surveillez des métriques clés d'Azure Network Interface.
 version: '1.0'
 ---
+
 ## Présentation
 
 Azure Network Interface permet à une machine virtuelle Azure de communiquer avec Internet, Azure et des ressources sur site.
 
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques d'Azure Network Interface.
 
-## Configuration
+## Implémentation
 
 ### Installation
 

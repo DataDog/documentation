@@ -15,11 +15,10 @@ assets:
     source_type_name: Neutrona
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Neutrona
   sales_email: david@neutrona.com
   support_email: david@neutrona.com
 categories:
-- azure
 - クラウド
 - ネットワーク
 dependencies:
@@ -39,17 +38,16 @@ public_title: Neutrona
 short_description: Neutrona Telemetry
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Azure
   - Category::Cloud
   - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Neutrona Telemetry
   media: []

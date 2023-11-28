@@ -25,7 +25,7 @@ Datadog Java トレーサーのデバッグモードを有効にするには、J
 ```
 
 
-[1]: https://www.slf4j.org/api/org/slf4j/impl/SimpleLogger.html
+[1]: https://www.slf4j.org/api/org/slf4j/simple/SimpleLogger.html
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
@@ -167,23 +167,24 @@ GlobalSettings.SetDebugEnabled(true);
 
 ログファイルは、デフォルトで以下のディレクトリに保存されます。`DD_TRACE_LOG_DIRECTORY` 設定を使用してこれらのパスを変更できます。
 
-| プラットフォーム | パス                                      |
-|----------|-------------------------------------------|
-| Windows  | `%ProgramData%\Datadog .NET Tracer\logs\` |
-| Linux    | `/var/log/datadog/dotnet/`                |
-| Azure App Service | `%AzureAppServiceHomeDirectory%\LogFiles\datadog`|
+| プラットフォーム                                             | パス                                             |
+|------------------------------------------------------|--------------------------------------------------|
+| Windows                                              | `%ProgramData%\Datadog .NET Tracer\logs\`        |
+| Linux                                                | `/var/log/datadog/dotnet/`                       |
+| Linux ([Kubernetes ライブラリの挿入][1]を使用する場合) | `/datadog-lib/logs`                              |
+| Azure App Service                                    | `%AzureAppServiceHomeDirectory%\LogFiles\datadog`|
 
 **注**: Linux では、デバッグモードを有効にする前にログディレクトリを作成する必要があります。
 
-.NET Tracer の構成方法の詳細については、[構成][1]セクションを参照してください。
+.NET Tracer の構成方法の詳細については、[構成][2]セクションを参照してください。
 
 これらのパスで作成されるログには、次の 2 つのタイプがあります。
 1. **ネイティブコードからのログ:** 1.26.0 以降では、これらのログは `dotnet-tracer-native-<processname>-<processid>.log` として保存されます。バージョン 1.21.0〜1.25.x では、これらのログは `dotnet-tracer-native.log` として保存されていました。1.20.x 以前のバージョンでは、これは `dotnet-profiler.log` として保存されていました。
 2. **マネージコードからのログ:** 1.21.0 以降では、これらのログは `dotnet-tracer-managed-<processname>-<date>.log` に保存されます。1.20.x 以前のバージョンでは、これは `dotnet-tracer-<processname>-<date>.log` として保存されていました。
 
 
-
-[1]: /ja/tracing/setup/dotnet/#configuration
+[1]: /ja/tracing/trace_collection/library_injection/?tab=kubernetes
+[2]: /ja/tracing/setup/dotnet/#configuration
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
@@ -253,7 +254,7 @@ Python トレーサーが生成するログは、ロギングハンドラ名 `dd
 
 **トレースが生成されました:**
 
-```shell
+```text
 <YYYY-MM-DD> 19:51:22,262 DEBUG [ddtrace.internal.processor.trace] [trace.py:211] - trace <TRACE ID> has 8 spans, 7 finished
 ```
 
@@ -282,19 +283,19 @@ Python トレーサーが生成するログは、ロギングハンドラ名 `dd
 
 **スパンが生成されます:**
 
-```shell
+```text
 D, [<YYYY-MM-DD>T16:42:51.147563 #476] DEBUG -- ddtrace: [ddtrace] (/usr/local/bundle/gems/ddtrace-<version>/lib/ddtrace/tracer.rb:371:in `write') Writing 4 spans (enabled: true)
 
  Name: rack.request
-Span ID: <スパン id>
+Span ID: <span id>
 Parent ID: 0
-Trace ID: <トレース id>
+Trace ID: <trace id>
 Type: web
 Service: todo
 Resource: NotesController#index
 Error: 0
-Start: <開始時間>
-End: <終了時間>
+Start: <start time>
+End: <end time>
 Duration: 11985000
 Allocations: 1202
 Tags: [
@@ -305,7 +306,7 @@ Tags: [
    http.url => /notes,
    http.base_url => http://0.0.0.0:3000,
    http.status_code => 304,
-   http.response.headers.x_request_id => <ヘッダー値>]
+   http.response.headers.x_request_id => <header value>]
 Metrics: [
    ..],
 
@@ -319,15 +320,15 @@ Metrics: [
 
 **Agent へのトレース送信試行:**
 
-```shell
-YYYY/MM/DD 16:06:35 Datadog Tracer <バージョン> DEBUG: Sending payload: size: <トレースのサイズ> traces: <トレースの数>.
+```text
+YYYY/MM/DD 16:06:35 Datadog Tracer <version> DEBUG: Sending payload: size: <size of traces> traces: <number of traces>.
 ```
 
 
 **トレースを Agent に送信できませんでした:**
 
-```shell
-2019/08/07 16:12:27 Datadog Tracer <バージョン> ERROR: lost <トレースの数> traces: Post http://localhost:8126/v0.4/traces: dial tcp 127.0.0.1:8126: connect: connection refused, 4 additional messages skipped (first occurrence: DD MM YY 16:11 UTC)
+```text
+2019/08/07 16:12:27 Datadog Tracer <version> ERROR: lost <number of traces> traces: Post http://localhost:8126/v0.4/traces: dial tcp 127.0.0.1:8126: connect: connection refused, 4 additional messages skipped (first occurrence: DD MM YY 16:11 UTC)
 ```
 
 
@@ -361,24 +362,24 @@ YYYY/MM/DD 16:06:35 Datadog Tracer <バージョン> DEBUG: Sending payload: siz
 
 **ネイティブコードからのログ:**
 
-```shell
-[dotnet] 19861: [debug] JITCompilationStarted: function_id=<関数 id> token=<トークン id> name=System.Net.Http.Headers.HttpHeaders.RemoveParsedValue()
+```text
+[dotnet] 19861: [debug] JITCompilationStarted: function_id=<function id> token=<token id> name=System.Net.Http.Headers.HttpHeaders.RemoveParsedValue()
 ```
 
 
 **スパンを示すマネージコードからのログが生成されました:**
 
-```shell
-{ MachineName: ".", ProcessName: "dotnet", PID: <プロセス id>, AppDomainName: "test-webapi" }
-YYYY-MM-DD HH:MM:SS.<integer> +00:00 [DBG] Span started: [s_id: <スパン id>, p_id: <親スパン id>, t_id: <トレース id>]
-{ MachineName: ".", ProcessName: "dotnet", PID: <プロセス id>, AppDomainName: "test-webapi" }
-YYYY-MM-DD HH:MM:SS.<integer> +00:00 [DBG] Span closed: [s_id: <スパン id>, p_id: <親スパン id>, t_id: <トレース id>] for (Service: test-webapi, Resource: custom, Operation: custom.function, Tags: [<スパンタグ>])
+```text
+{ MachineName: ".", ProcessName: "dotnet", PID: <process id>, AppDomainName: "test-webapi" }
+YYYY-MM-DD HH:MM:SS.<integer> +00:00 [DBG] Span started: [s_id: <span id>, p_id: <parent span id>, t_id: <trace id>]
+{ MachineName: ".", ProcessName: "dotnet", PID: <process id>, AppDomainName: "test-webapi" }
+YYYY-MM-DD HH:MM:SS.<integer> +00:00 [DBG] Span closed: [s_id: <span id>, p_id: <parent span id>, t_id: <trace id>] for (Service: test-webapi, Resource: custom, Operation: custom.function, Tags: [<span tags>])
 ```
 
 **トレースを示すマネージコードからのログを Datadog Agent に送信できませんでした:**
 
-```shell
-YYYY-MM-DD HH:MM:SS.<整数> +00:00 [ERR] An error occurred while sending traces to the agent at System.Net.Http.HttpRequestException: Connection refused ---> System.Net.Sockets.SocketException: Connection refused
+```text
+YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending traces to the agent at System.Net.Http.HttpRequestException: Connection refused ---> System.Net.Sockets.SocketException: Connection refused
    at System.Net.Http.ConnectHelper.ConnectAsync(String host, Int32 port, CancellationToken cancellationToken)
    --- End of inner exception stack trace ---
 ```
@@ -391,22 +392,22 @@ YYYY-MM-DD HH:MM:SS.<整数> +00:00 [ERR] An error occurred while sending traces
 
 **スパンの生成:**
 
-```shell
-[Mon MM  DD 19:41:13 YYYY] [YYYY-MM-DDT19:41:13+00:00] [ddtrace] [debug] - Encoding span <スパン id> op: 'laravel.request' serv: 'Sample_Laravel_App' res: 'Closure unnamed_route' type 'web'
+```text
+[Mon MM  DD 19:41:13 YYYY] [YYYY-MM-DDT19:41:13+00:00] [ddtrace] [debug] - Encoding span <span id> op: 'laravel.request' serv: 'Sample_Laravel_App' res: 'Closure unnamed_route' type 'web'
 ```
 
 
 
 **Agent へのトレース送信試行:**
 
-```shell
+```text
 [Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - About to send trace(s) to the agent
 ```
 
 
 **トレースが Agent に正常に送信されました:**
 
-```shell
+```text
 [Mon MM  DD 19:56:23 2019] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Traces successfully sent to the agent
 ```
 

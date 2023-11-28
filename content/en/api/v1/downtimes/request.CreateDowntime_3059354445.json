@@ -1,5 +1,5 @@
 {
-  "message": "Example-Schedule_a_downtime_once_a_year",
+  "message": "Example-Downtime",
   "recurrence": {
     "period": 1,
     "type": "years"
@@ -13,5 +13,12 @@
   "mute_first_recovery_notification": true,
   "monitor_tags": [
     "tag0"
+  ],
+  "notify_end_states": [
+    "alert",
+    "warn"
+  ],
+  "notify_end_types": [
+    "expired"
   ]
 }

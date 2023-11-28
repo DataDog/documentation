@@ -9,13 +9,17 @@ further_reading:
 - link: https://www.datadoghq.com/blog/database-performance-monitoring-datadog/
   tag: Blog
   text: Surveillance des performances des bases de données avec Datadog
+- link: https://dtdg.co/fe
+  tag: Validation des bases
+  text: Prenez part à une session interactive pour améliorer la surveillance de vos
+    bases de données avec Database Monitoring
 kind: documentation
 title: Prise en main de la solution Database Monitoring
 ---
 
-{{< site-region region="gov" >}}
+{{% site-region region="gov" %}}
 <div class="alert alert-warning">La solution Database Monitoring n'est pas disponible pour le site Datadog que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Présentation
 
@@ -24,12 +28,12 @@ La solution Database Monitoring de Datadog vous aide à mieux comprendre la sant
 Vous pouvez visualiser depuis une interface unique :
 
 * Des métriques au niveau des hosts
-* Des plans d'exécution
+* Plans d'exécution
 * Des métriques sur les performances des requêtes historiques
 
 Poursuivez votre lecture pour configurer la solution Database Monitoring Datadog à partir d'un exemple de base de données PostgreSQL. Vous pourrez ensuite identifier une requête coûteuse, diagnostiquer une requête lente et créer un dashboard pour visualiser l'évolution du volume de requêtes.
 
-## Configuration
+## Implémentation
 
 ### Prérequis
 

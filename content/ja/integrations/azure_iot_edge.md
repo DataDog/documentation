@@ -30,7 +30,9 @@ author:
   support_email: help@datadoghq.com
 categories:
 - azure
+- iot
 - ログの収集
+- ネットワーク
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/azure_iot_edge/README.md
 display_on_public_website: true
@@ -38,7 +40,7 @@ draft: false
 git_integration_title: azure_iot_edge
 integration_id: azure-iot-edge
 integration_title: Azure IoT Edge
-integration_version: 3.3.0
+integration_version: 3.3.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -48,16 +50,18 @@ public_title: Azure IoT Edge
 short_description: Azure IoT Edge デバイスとモジュールの健全性とパフォーマンスを監視。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Azure
+  - Category::IOT
   - Category::Log Collection
+  - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Azure IoT Edge デバイスとモジュールの健全性とパフォーマンスを監視。
   media: []
@@ -104,15 +108,8 @@ IoT Edge メトリクスの収集を開始するには、下記の手順で IoT 
         }
         ```
 
-    - "Environment Variables" で、以下の環境変数 (アンダースコアが 2 回続けて使用されていることに注意) を追加して試験的メトリクスを有効にします。
-        - `ExperimentalFeatures__Enabled`: `true`
-        - `ExperimentalFeatures__EnableMetrics`: `true`
-
 2. **Edge Hub** ランタイムモジュールを以下のように構成します。
     - イメージバージョンは `1.0.10` 以上である必要があります。
-    - "Environment Variables" で、以下の環境変数 (アンダースコアが 2 回続けて使用されていることに注意) を追加して試験的メトリクスを有効にします。
-        - `ExperimentalFeatures__Enabled`: `true`
-        - `ExperimentalFeatures__EnableMetrics`: `true`
 
 3. Datadog Agent を**カスタムモジュール**としてインストールし、構成します。
     - モジュール名を設定します。(例: `datadog-agent`)

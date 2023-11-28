@@ -15,7 +15,7 @@ assets:
       prefix: fastly.
     service_checks:
       metadata_path: assets/service_checks.json
-    source_type_name: fastly
+    source_type_name: Fastly
   monitors:
     '[Fastly] 5xx Errors higher than usual for service: {{service.name}}': assets/monitors/rec_monitor_5xx_errors.json
     '[Fastly] Abnormal bandwidth being sent for service: {{service.name}}': assets/monitors/rec_monitor_bandwidth.json
@@ -27,8 +27,10 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
+- caching
 - log collection
+- metrics
+- web
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -45,10 +47,12 @@ public_title: Fastly
 short_description: ファイルをキャッシュすることで、Web ページの読み込みを早くするコンテンツ配信ネットワーク
 supported_os: []
 tile:
-  changelog: ''
+  changelog: CHANGELOG.md
   classifier_tags:
-  - Category::Web
+  - Category::キャッシュ
   - Category::ログの収集
+  - Category::Metrics
+  - Category::Web
   configuration: README.md#Setup
   description: ファイルをキャッシュすることで、Web ページの読み込みを早くするコンテンツ配信ネットワーク
   media: []
@@ -65,7 +69,7 @@ Fastly に接続して、Fastly のキーメトリクス (キャッシュカバ�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 必要なインストール手順はありません。
 

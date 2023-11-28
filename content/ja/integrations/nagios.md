@@ -26,9 +26,8 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- monitoring
-- notification
 - log collection
+- notification
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nagios/README.md
 display_on_public_website: true
@@ -46,17 +45,16 @@ public_title: Nagios
 short_description: Nagios からサービスフラップやホストアラートなどを Datadog イベントストリームに送信。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::モニタリング
-  - Category::通知
   - Category::ログの収集
+  - Category::通知
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Nagios からサービスフラップやホストアラートなどを Datadog イベントストリームに送信。
   media: []

@@ -1,48 +1,63 @@
 ---
-title: API テストの概要
-kind: documentation
 further_reading:
-  - link: 'https://learn.datadoghq.com/course/view.php?id=39'
-    tag: ラーニングセンター
-    text: Synthetic テストの紹介
-  - link: /synthetics/api_tests
-    tag: ドキュメント
-    text: API テストについて
-  - link: /getting_started/synthetics/private_location
-    tag: ドキュメント
-    text: プライベートロケーションの詳細
-  - link: /synthetics/ci
-    tag: Documentation
-    text: CI/CD パイプラインから Synthetic テストをトリガーする方法を学ぶ
-  - link: /synthetics/identify_synthetics_bots
-    tag: ドキュメント
-    text: API テスト用の Synthetic ボットを特定する方法を学ぶ
-  - link: '/api/v1/synthetics/#create-a-test'
-    tag: API ドキュメント
-    text: Synthetic テストをプログラムで作成
+- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
+  tag: ラーニングセンター
+  text: Synthetic テストの紹介
+- link: /api/latest/synthetics/#create-an-api-test
+  tag: API
+  text: プログラムによる API テストの作成
+- link: /synthetics/api_tests
+  tag: ドキュメント
+  text: シングル API テストの詳細
+- link: /synthetics/multistep
+  tag: Documentation
+  text: マルチステップ API テストの詳細
+- link: /getting_started/synthetics/private_location
+  tag: ドキュメント
+  text: プライベートロケーションの詳細
+- link: /continuous_testing/cicd_integrations/
+  tag: ドキュメント
+  text: CI/CD パイプラインから Synthetic テストをトリガーする方法を学ぶ
+- link: /synthetics/guide/identify_synthetics_bots
+  tag: ドキュメント
+  text: API テスト用の Synthetic ボットを特定する方法を学ぶ
+- link: /synthetics/guide/synthetic-test-monitors
+  tag: ドキュメント
+  text: Synthetic テストモニターについて
+kind: documentation
+title: API テストの概要
 ---
+
+## 概要
+
+API テストは、**最も重要なサービス**がいつでもどこからでも利用できることを**プロアクティブに監視**します。[シングル API テスト][1]には、システムのさまざまなネットワーク層 (`HTTP`、`SSL`、`DNS`、`WebSocket`、`TCP`、`UDP`、`ICMP`、`gRPC`) でリクエストを起動できる 8 つのサブタイプがあります。[マルチステップ API テスト][2]では、HTTP テストを順番に実行して、API レベルで主要なジャーニーのアップタイムを監視できます。
+
 ## 単一の API テストを作成する
 
-[API テスト][1]は、いつでもどこからでも最も重要なサービスが利用可能であることを**プロアクティブに監視**します。API テストには、システムの**さまざまなネットワークレイヤー**でリクエストを起動できる 5 つの異なるサブタイプがあります。
+HTTP テストは、API エンドポイントを監視し、レスポンス遅延が大きい場合や、期待される HTTP ステータスコード、レスポンスヘッダー、レスポンス本文の内容など、定義した条件を満たさない場合に警告を発します。
 
-以下の例は、[API テスト][1]のサブタイプである [HTTP テスト][2]の作成を示しています。[HTTP テスト][1]を作成すると、**API エンドポイントを監視** して、失敗や遅延が起きた場合に**アラートを受け取る**ことができます。このチェックによって、アプリケーションがリクエストに応答していることや、予想される**応答時間**、**HTTP ステータスコード**、**ヘッダー**、**本文の内容**などの定義された条件をすべて満たしていることを検証できます。
+{{< img src="getting_started/synthetics/api-test.png" alt="Synthetics HTTP テストの概要" style="width:100%;" >}}
+
+以下の例では、[シングル API テスト][1]のサブタイプである [HTTP テスト][3]を作成する方法を示しています。
 
 ### リクエストを定義する
 
-1. Datadog アプリケーションで、左側のメニューにある **[UX Monitoring][3]** にカーソルを合わせ、**[Synthetic Tests][3]** を選択します。
-2. 右上の **New Test** ボタンをクリックします。
-3. **[New API test][4]** を選択します。
-4. `HTTP` リクエストタイプを選択します。
-5. リクエストを定義します。
+1. Datadog サイトで、**UX Monitoring** にカーソルを合わせ、**[Synthetic Tests][4]** を選択します。
+2. **New Test** > **[New API test][5]** をクリックします。
+3. `HTTP` リクエストタイプを選択します。
+4. リクエストを定義します。
 
-    - 監視するエンドポイントの URL を追加します。何から始めればよいかわからない場合は、テストウェブアプリケーションである `https://www.shopist.io/` を使用できます。テストするエンドポイントを定義すると、テストの名前が `Test on www.shopist.io` に自動的に入力されます。必要に応じて、テスト名を別の名前に変更できます。
-    - カスタムリクエストヘッダー、認証資格情報、本文コンテンツ、cookie を使用するには、**Advanced Options** を選択します。
+    - 監視するエンドポイントの URL を追加します。何から始めればよいかわからない場合は、テスト用の e コマースウェブアプリケーションである `https://www.shopist.io/` を使用できます。テストするエンドポイントを定義すると、テストの名前が `Test on www.shopist.io` に自動的に入力されます。
+    - **Advanced Options** を選択すると、カスタムリクエストオプション、証明書、認証情報などを設定することができます。
+
+      **注:** 資格情報を保存するための安全な[グローバル変数][6]を作成し、リクエストペイロードで使用する動的タイムスタンプを生成するための[ローカル変数][7]を作成できます。これらの変数を作成した後、関連するフィールドに `{{` と入力し、変数を選択して、テストオプションにその値を挿入します。
+
+      この例では、特定の詳細オプションは必要ありません。
     - テストでは、`env:prod` や `app:shopist` などのタグを設定できます。タグを使用すると、テストスイートを整理し、ホームページで興味のあるテストをすばやく見つけることができます。
-    - API 呼び出しの任意の資格情報に安全な[グローバル変数][5]を使用できます。[ローカル変数][6]を作成して、動的に定義されたタイムスタンプをリクエストペイロードに挿入することもできます。これらの変数を作成した後、`{{` と入力し、変数を選択して、テストオプションに変数を挿入します。
 
-6. **Test URL** をクリックして、サンプルのテスト実行をトリガーします。
+5. **Test URL** をクリックして、サンプルのテスト実行をトリガーします。
 
-{{< img src="getting_started/synthetics/api-test-config-3.png" alt="API テストコンフィギュレーション"  style="width:100%;">}}
+{{< img src="getting_started/synthetics/api-test-config-3.png" alt="API テストコンフィギュレーション" style="width:100%;">}}
 
 ### アサーションを定義する
 
@@ -50,28 +65,23 @@ further_reading:
 
 この例では、サンプルのテスト実行をトリガーした後、3 つのデフォルトのアサーションが設定されます。
 
-{{< img src="getting_started/synthetics/assertions-example-2.png" alt="デフォルトアサーション"  style="width:100%;">}}
+{{< img src="getting_started/synthetics/assertions-example-2.png" alt="デフォルトアサーション" style="width:100%;">}}
 
-アサーションは完全にカスタマイズ可能です。カスタムアサーションを追加するには、応答プレビューの要素をクリックするか、**New Assertion** をクリックします。
+アサーションは完全にカスタマイズ可能です。カスタムアサーションを追加するには、ヘッダーなどの応答プレビューの要素をクリックするか、**New Assertion** をクリックして新しいアサーションを最初から定義します。
 
-{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="API テストのコンフィギュレーション例"  video="true"  >}}
-
-**注**: アサーションで[グローバル][7]変数と[ローカル][8]変数を活用することもできます。
+{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="API テストのコンフィギュレーション例" video="true" >}}
 
 ### ロケーションを選択する
 
-テストを実行する 1 つ以上の **Managed Locations** または **Private Locations** を選択します。
+テストを実行する 1 つ以上の **Managed Locations** または **Private Locations** を選択します。{{% managed-locations %}}
 
-管理ロケーションでは、公開されている Web サイトとエンドポイントをテストすることができます。内部アプリケーションをテストしたり、個別の地理的領域でユーザーの行動をシミュレートしたりするには、代わりに **Private Locations** を 1 つ選択します。
-
-プライベートロケーションの設定方法の詳細については、[プライベートロケーション入門][9]を参照してください。
+Shopist アプリケーションは `https://www.shopist.io/` で公開されているので、管理された任意の場所からテストを実行することができます。内部アプリケーションのテストや、地理的に離れた場所でのユーザーの行動をシミュレートするには、代わりに[プライベートロケーション][8]を使ってください。
 
 ### テストの頻度を指定する
 
-テストを実行する頻度を選択します。
+テストを実行する頻度を選択します。デフォルトの頻度である 1 分のままでも構いません。
 
-スケジュールに従って Synthetic テストを実行することに加えて、CI/CD パイプラインから手動または直接トリガーすることができます。詳細については、[Synthetic CI/CD テスト][10]を参照してください。
-
+スケジュールに従って Synthetic テストを実行することに加えて、[CI/CD パイプライン][9]から手動または直接トリガーすることができます。
 
 ### アラート条件を定義する
 
@@ -89,67 +99,124 @@ Retry test 2 times after 300 ms in case of failure
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
 ```
 
-### チームへの通知
+### テストモニターを構成する
 
-**Monitor Name** フィールドにアラート名を追加し、アラートのメッセージを書き込みます。Slack、PagerDuty、Microsoft Teams、Webhook などの[インテグレーション][11]を使用して、アラートを特定のサービスやチームにルーティングできます。
+アラートメッセージを設計し、テストでアラートを送信するメールアドレスを追加します。Slack、PagerDuty、Microsoft Teams、Webhook などの[通知インテグレーション][10]を使用することもできます。これらの通知ツールへの Synthetic アラートをトリガーするには、最初に対応する[インテグレーション][11]を設定する必要があります。
 
-アラートが解決されていない場合にアラート通知が再通知する時間を設定し、**P5 (Info)** から **P1 (Critical)** の範囲でアラートの優先度を定義できます。
-
-テストを実行する準備ができたら、**Save Test** をクリックします。
+テストの構成とモニターを保存する準備ができたら、**Create** をクリックします。
 
 ## マルチステップ API テストを作成する
 
-[マルチステップ API テスト][12]は、HTTP リクエストを順番に実行し、複雑なバックエンドシステムで [HTTP テスト][2]を構成できるようにします。
+[マルチステップ API テスト][2]では、主要なビジネストランザクションを API レベルで監視することができます。
 
-### テストを構成する
+{{< img src="getting_started/synthetics/multistep-api-test.png" alt="マルチステップ Synthetics API テストの概要" style="width:100%;" >}}
 
-[マルチステップ API テスト][12]を作成すると、HTTP リクエストの順番を定義し、応答データから変数を作成して、後続のステップでそれらの値を再注入できます。
+[HTTP テスト][3]と同様に、マルチステップ API テストは、エンドポイントが遅くなりすぎたり、定義した条件を満たせなくなったりしたときに警告を発します。個々のステップ応答から変数を作成し、後続のステップでそれらの値を再注入して、アプリケーションまたはサービスの動作を模倣する方法でステップをチェーン化することもできます。
 
-1. Datadog アプリケーションで、左側のメニューにある **[UX Monitoring][3]** にカーソルを合わせ、**[Synthetic Tests][3]** を選択します。
-2. 右上の **New Test** ボタンをクリックします。
-3. **[Multistep API test][5]** を選択します。
-4. 単一の [API テスト][1]の場合と同じように、[マルチステップ API テスト][5]のロケーションに名前を付け、タグを付け、ロケーションを選択します。
-5. **Define steps** で、**Create Your First Step** をクリックします。
+以下のテスト例は、カートへのアイテムの追加を監視するマルチステップ API テストの作成を示しています。このテストには、次の 3 つのステップが含まれます。
 
-    - ステップに名前を追加します。
-    - クエリする URL を指定します。
-    - カスタムリクエストヘッダー、認証資格情報、本文コンテンツ、cookie を追加するには、**Advanced Options** を選択します。
-    - **Test URL** をクリックします。
-    - オプションで、新しいアサーションを追加し、実行パラメーターを定義して、応答コンテンツから変数を抽出します。
-    - 変数の名前を入力し、**Response Body** でパースされた値をクリックして、変数の値を設定します。
-    - **Save Step** をクリックします。
+- カートを取得する
+- 商品を取得する
+- カートに商品を追加する
 
-6. **Add Another Step** をクリックして、別のステップを追加します。デフォルトで、最大 10 個のステップを作成できます。
-7. オプションで、**URL** に `{{` と入力すると、抽出されたグローバル変数のリストが表示されます。
-    - テストステップで注入する抽出変数を選択します。抽出した変数は、**Step URL**、または **Advanced Options** > **Request Options** のリクエストヘッダー、Cookie、HTTP 認証フィールドに追加できます。
+マルチステップ API テストを作成する API エンドポイントがわからない場合は、以下のエンドポイントの例を使用してください。
 
-8. テスト頻度、アラート条件、アラートメッセージなど、残りのテスト条件を構成します。
+新しいマルチステップ API テストを作成するには、**New Test** > **[Multistep API test][12]** をクリックします。`カートに商品を追加する` などのテスト名を追加し、タグを含め、ロケーションを選択します。
 
-テストを作成する準備ができたら、**Save Test** をクリックします。
+### カートを取得する
 
-## テスト結果
+1. **Define steps** で、**Create Your First Step** をクリックします。
+2. ステップに名前を追加します。例: `カートを取得する`
+3. クエリする HTTP メソッドと URL を指定します。`POST` と `https://api.shopist.io/carts` を入力できます。
+4. **Test URL** をクリックします。これにより、Shopist アプリケーションのバックエンドにカートアイテムが作成されます。
+5. デフォルトのアサーションのままにするか、変更します。
+6. オプションで、実行パラメーターを定義します。
 
-API テストとマルチステップ API テストの詳細ページには、テストコンフィギュレーションの概要、ロケーションごとにテストされたエンドポイントに関連付けられたグローバル稼働時間、応答時間とネットワークタイミングに関するグラフ、およびテスト結果とイベントのリストが表示されます。
+   **Continue with test if this step fails** (このステップが失敗した場合はテストを続行) を選択すると、前のステップの成功または失敗に関係なく、エンドポイントコレクション全体がテストされていること、または最後のクリーンアップステップが実行されていることを確認できます。**Retry** ステップ機能は、API エンドポイントが応答するまでに時間がかかることがわかっている場合に便利です。
+
+   この例では、特定の実行パラメーターは必要ありません。
+
+7. `location` ヘッダーの最後にあるカート ID の値から変数を作成するには
+    - **Extract a variable from response content** (応答コンテンツから変数を抽出する) をクリックします。
+    - 変数に `CART_ID` という名前を付けます。
+    - **Response Header** で、`location` を選択します。
+    - **Parsing Regex** フィールドに、`(?:[^\\/](?!(\\|/)))+$` などの正規表現を追加します。
+
+   {{< img src="getting_started/synthetics/multistep-test-extract-variables.png" alt="応答コンテンツから抽出された変数" style="width:100%;" >}}
+
+8. **Save Variable** をクリックします。
+9. このテストステップの作成が完了したら、**Save Step** をクリックします。
+
+### 商品を取得する
+
+1. **Define another step** (別のステップを定義する) で、**Add Another Step** (別のステップを追加する) をクリックします。デフォルトでは、最大 10 個のステップを作成できます。
+2. ステップに名前を追加します。例: `商品を取得する`
+3. クエリする HTTP メソッドと URL を指定します。 ここでは、`GET` と `https://api.shopist.io/products.json` を追加できます。
+4. **Test URL** をクリックします。これにより、Shopist アプリケーションで購入できる商品のリストが取得されます。
+5. デフォルトのアサーションのままにするか、変更します。
+6. オプションで、実行パラメーターを定義します。この例では、特定の実行パラメーターは必要ありません。
+7. 応答本文にある商品 ID から変数を作成するには、次のようにします。
+    - **Extract a variable from response content** (応答コンテンツから変数を抽出する) をクリックします。
+    - 変数に `PRODUCT_ID` という名前を付けます。
+    - **Response Body** タブをクリックします。
+    - 商品の `$oid` キーをクリックして、`$[0].id['$oid']` などの JSON パスを生成します。
+8. **Save Variable** をクリックします。
+9. このテストステップの作成が完了したら、**Save Step** をクリックします。
+
+### カートに商品を追加する
+
+1. **Add Another Step** をクリックして、商品のカートへの追加という最後のステップを追加します。
+2. ステップに名前を追加します。例: `カートに商品を追加する`
+3. クエリする HTTP メソッドと URL を指定します。 ここでは、`POST` と `https://api.shopist.io/add_item.json` を追加できます。
+4. **Request Body** タブで、`application/json` 本文タイプを選択し、以下を挿入します。
+
+    {{< code-block lang="java" disable_copy="true" collapsible="true" >}}
+    {
+      "cart_item": {
+        "product_id": "{{ PRODUCT_ID }}",
+        "amount_paid": 500,
+        "quantity": 1
+      },
+      "cart_id": "{{ CART_ID }}"
+    } 
+    {{< /code-block >}}
+
+5. **Test URL** をクリックします。これにより、ステップ 2 で抽出した商品が、ステップ 1 で作成したカートに追加され、チェックアウト URL が返されます。
+6. **Add assertions (optional)** で、**Response Body** をクリックし、`url` キーをクリックして、チェックアウト URL を含む応答でジャーニーが終了したことをテストにアサートさせます。
+7. この最後のステップでは、実行パラメーターや変数の抽出は必要ありません。
+10. このテストステップの作成が完了したら、**Save Step** をクリックします。
+
+{{< img src="getting_started/synthetics/defined-steps.png" alt="作成されたテストステップ" style="width:100%;" >}}
+
+その後、テスト頻度やアラート条件など、残りのテスト条件やテストモニターを構成します。テストの構成とモニターを保存する準備ができたら、**Create** をクリックします。
+
+詳しくは、[Synthetic テストモニターの使用][13]をご覧ください。
+
+## テスト結果を確認する
+
+**API test** と **Multistep API test detail** ページには、テストコンフィギュレーションの概要、ロケーションごとにテストされたエンドポイントに関連付けられたグローバル稼働時間、応答時間とネットワークタイミングに関するグラフ、およびテスト結果とイベントのリストが表示されます。
 
 失敗したテストのトラブルシューティングを行うには、**Test Results** まで下にスクロールして、失敗したテスト結果をクリックします。失敗したアサーションと、ステータスコード、応答時間、関連するヘッダーと本文などの応答の詳細を確認して、問題を診断します。
 
-{{< img src="getting_started/synthetics/api-test-failure-4.png" alt="API テストの失敗"  style="width:100%;">}}
+{{< img src="getting_started/synthetics/api-test-failure-5.png" alt="API テストの失敗" style="width:100%;">}}
 
-Datadog の [APM と Synthetic モニタリングのインテグレーション][6]を使用して、**Traces** タブでテスト実行から生成されたトレースを確認して、失敗したテスト実行の根本原因にアクセスします。
+Datadog の [APM と Synthetic モニタリングのインテグレーション][14]を使用して、**Traces** タブでテスト実行から生成されたトレースを確認して、失敗したテスト実行の根本原因にアクセスします。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/synthetics/api_tests/
-[2]: /ja/synthetics/api_tests/http_tests
-[3]: https://app.datadoghq.com/synthetics/list
-[4]: https://app.datadoghq.com/synthetics/create
-[5]: https://app.datadoghq.com/synthetics/multi-step/create
-[6]: /ja/synthetics/apm/
-[7]: /ja/synthetics/settings/#global-variables
-[8]: /ja/synthetics/api_tests/http_tests#variables
-[9]: /ja/getting_started/synthetics/private_location
-[10]: /ja/synthetics/ci
-[11]: /ja/integrations/#cat-notification
-[12]: /ja/synthetics/multistep
+[2]: /ja/synthetics/multistep
+[3]: /ja/synthetics/api_tests/http_tests
+[4]: https://app.datadoghq.com/synthetics/list
+[5]: https://app.datadoghq.com/synthetics/create
+[6]: /ja/synthetics/settings/#global-variables
+[7]: /ja/synthetics/api_tests/http_tests#variables
+[8]: /ja/getting_started/synthetics/private_location
+[9]: /ja/synthetics/ci
+[10]: /ja/integrations/#cat-notification
+[11]: https://app.datadoghq.com/account/settings
+[12]: https://app.datadoghq.com/synthetics/multi-step/create
+[13]: /ja/synthetics/guide/synthetic-test-monitors
+[14]: /ja/synthetics/apm/

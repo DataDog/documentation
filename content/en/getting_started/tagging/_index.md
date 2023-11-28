@@ -19,6 +19,9 @@ further_reading:
     - link: '/getting_started/tagging/using_tags/'
       tag: 'Documentation'
       text: 'Learn how to use tags'
+    - link: "https://dtdg.co/fe"
+      tag: "Foundation Enablement"
+      text: "Join an interactive session on effective tagging with Datadog"
 ---
 
 ## Overview
@@ -55,7 +58,7 @@ Below are Datadog's tagging requirements:
 
     Other special characters are converted to underscores.
 
-2. Tags can be **up to 200 characters** long and support Unicode (which includes most character sets, including languages such as Japanese).
+2. Tags can be **up to 200 characters** long and support Unicode letters (which includes most character sets, including languages such as Japanese).
 3. Tags are converted to lowercase. Therefore, `CamelCase` tags are not recommended. Authentication (crawler) based integrations convert camel case tags to underscores, for example `TestTag` --> `test_tag`.
 4. A tag can be in the format `value` or `<KEY>:<VALUE>`. Commonly used tag keys are `env`, `instance`, and `name`. The key always precedes the first colon of the global tag definition, for example:
 

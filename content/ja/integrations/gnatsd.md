@@ -16,7 +16,7 @@ assets:
     source_type_name: Gnatsd
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Community
   sales_email: dev@goldstar.com
   support_email: dev@goldstar.com
 categories:

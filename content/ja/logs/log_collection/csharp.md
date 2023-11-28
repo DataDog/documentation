@@ -23,6 +23,9 @@ further_reading:
 - link: /logs/faq/log-collection-troubleshooting-guide/
   tag: よくあるご質問
   text: ログ収集のトラブルシューティングガイド
+- link: /glossary/#tail
+  tag: 用語集
+  text: 用語集 "テール" の項目
 kind: documentation
 title: C# ログ収集
 ---
@@ -37,7 +40,7 @@ C# のログを Datadog に送信するには、次のいずれかの方法を�
 
 ## Datadog Agent によるファイルテールロギング
 
-C# ログ収集の推奨アプローチは、ログをファイルに出力し、そのファイルを Datadog Agent でテールすることです。これにより、Datadog Agent が追加のメタデータでログをリッチ化することができます。
+C# ログ収集の推奨アプローチは、ログをファイルに出力し、そのファイルを Datadog Agent で[テール][20]することです。これにより、Datadog Agent が追加のメタデータでログをリッチ化することができます。
 
 Datadog は、[カスタムパース規則][1]の使用を避け、ログを JSON 形式で生成するようにロギングライブラリをセットアップすることを強くお勧めします。
 
@@ -314,6 +317,11 @@ APM が有効になっているアプリケーションの場合は、[APM .NET 
 
 アプリケーションのコードを修正したり、アプリケーションに依存するものを追加でインストールする必要はありません。
 
+<div class="alert alert-warning">
+  <strong>注:</strong> log4net または NLog を使用する場合、エージェントレスロギングを有効にするには、アペンダー (log4net) またはロガー (NLog) が構成されている必要があります。これらの場合、これらの追加の依存関係を追加するか、代わりに <a href="/logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink">Serilog シンクを使用してエージェントレスロギング</a>を使用することができます。
+</div>
+
+
 ### APM ライブラリの構成
 
 エージェントレスロギングは、APM を自動インスツルメンテーションで使用する場合にのみ利用できます。まず、以下のドキュメントで説明されているように、アプリケーションをインスツルメントしてください。
@@ -364,7 +372,7 @@ Tracer バージョン 2.7.0 からエージェントレスロギングを使用
 
 `DD_LOGS_DIRECT_SUBMISSION_TAGS`
 : 指定された場合、生成されたすべてのスパンに指定されたすべてのタグを追加します。指定されない場合は、代わりに `DD_TAGS` を使用します。<br>
-**例**: `layer:api, team:intake` 
+**例**: `layer:api, team:intake`
 デリミタはコンマと空白: `, ` であることに注意してください。
 
 以下の構成値は、基本的に変更すべきではありませんが、必要であれば設定しても構いません。
@@ -393,6 +401,14 @@ Tracer バージョン 2.7.0 からエージェントレスロギングを使用
 
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+
+`DD_LOGS_DIRECT_SUBMISSION_URL`
+: ログを送信するための URL を設定します。デフォルトでは `DD_SITE` で指定されたドメインを使用します。<br>
+**デフォルト**: `https://http-intake.logs.ap1.datadoghq.com:443` (`DD_SITE` に基づく)
+
+{{< /site-region >}}
+
 {{< site-region region="eu" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
@@ -401,7 +417,7 @@ Tracer バージョン 2.7.0 からエージェントレスロギングを使用
 
 {{< /site-region >}}
 
-{{< site-region region="us1-fed" >}}
+{{< site-region region="gov" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
 : ログを送信するための URL を設定します。デフォルトでは `DD_SITE` で指定されたドメインを使用します。<br>
@@ -424,6 +440,20 @@ Tracer バージョン 2.7.0 からエージェントレスロギングを使用
 `DD_LOGS_DIRECT_SUBMISSION_BATCH_PERIOD_SECONDS`
 : 送信する新しいログを確認するまでの待ち時間を設定します (秒)。<br>
 **デフォルト**: `1`
+
+`Microsoft.Extensions.Logging` のインテグレーションを使用している場合、`ILogger` に組み込まれた標準機能を使用して Datadog に送信されるログをフィルタリングすることができます。直接送信するプロバイダを特定するために `"Datadog"` というキーを使用し、各ネームスペースに最小限のログレベルを設定します。例えば、`appSettings.json` に以下を追加すると、`Warning` 以下のレベルのログを Datadog に送信しないようにすることができます。.NET トレーサーライブラリ v2.20.0 で導入されました。
+
+```json
+{
+  "Logging": {
+    "Datadog": {
+      "LogLevel": {
+        "Microsoft.AspNetCore": "Warning"
+      },
+    }
+  }
+}
+```
 
 ## Serilog シンクによるエージェントレスロギング
 
@@ -464,6 +494,19 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+
+```csharp
+using (var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ap1.datadoghq.com" })
+    .CreateLogger())
+{
+    // コード
+}
+```
+
+{{< /site-region >}}
+
 {{< site-region region="us5" >}}
 
 ```csharp
@@ -490,7 +533,7 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
-{{< site-region region="us1-fed" >}}
+{{< site-region region="gov" >}}
 
 ```csharp
 using (var log = new LoggerConfiguration()
@@ -503,10 +546,9 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
-
-デフォルトの動作を上書きして、ログを TCP で転送することもできます。それには、必須プロパティ `url`、`port`、`useSSL`、および `useTCP` を手動で指定します。また、オプションで、[`source`、`service`、`host`、およびカスタムタグを指定][20]できます。
-
 {{< site-region region="us" >}}
+
+デフォルトの動作を上書きして、ログを TCP で転送することもできます。それには、必須プロパティ `url`、`port`、`useSSL`、および `useTCP` を手動で指定します。また、オプションで、[`source`、`service`、`host`、およびカスタムタグを指定][1]できます。
 
 たとえば、Datadog US リージョンに TCP でログを転送する場合は、次のようなシンクコンフィギュレーションを使用します。
 
@@ -527,8 +569,12 @@ using (var log = new LoggerConfiguration()
 }
 ```
 
+[1]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
+
 {{< /site-region >}}
 {{< site-region region="eu" >}}
+
+デフォルトの動作を上書きして、ログを TCP で転送することもできます。それには、必須プロパティ `url`、`port`、`useSSL`、および `useTCP` を手動で指定します。また、オプションで、[`source`、`service`、`host`、およびカスタムタグを指定][1]できます。
 
 たとえば、Datadog EU リージョンに TCP でログを転送する場合は、次のようなシンクコンフィギュレーションを使用します。
 
@@ -548,6 +594,7 @@ using (var log = new LoggerConfiguration()
     // コード
 }
 ```
+[1]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
 
 {{< /site-region >}}
 
@@ -595,7 +642,7 @@ using (var log = new LoggerConfiguration()
 [9]: /ja/tracing/other_telemetry/connect_logs_and_traces/dotnet/
 [10]: /ja/agent/logs/advanced_log_collection
 [11]: /ja/serverless/azure_app_services
-[12]: /ja/account_management/org_settings/sensitive_data_detection/#overview
+[12]: /ja/sensitive_data_scanner/
 [13]: /ja/tracing/trace_collection/dd_libraries/dotnet-core
 [14]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework
 [15]: https://app.datadoghq.com/organization-settings/api-keys
@@ -603,4 +650,4 @@ using (var log = new LoggerConfiguration()
 [17]: /ja/logs/log_configuration/pipelines/?tab=source
 [18]: /ja/api/latest/logs/#send-logs
 [19]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
-[20]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[20]: /ja/glossary/#tail

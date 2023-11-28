@@ -1,10 +1,10 @@
 ---
 aliases:
-  - /fr/integrations/azure_filestorage
+- /fr/integrations/azure_filestorage
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- cloud
+- data store
 dependencies: []
 description: Surveillez des métriques clés de Stockage Fichier Azure.
 doc_link: https://docs.datadoghq.com/integrations/azure_file_storage/
@@ -22,13 +22,14 @@ public_title: Intégration Datadog/Stockage Fichier Microsoft Azure
 short_description: Surveillez des métriques clés de Stockage Fichier Azure.
 version: '1.0'
 ---
+
 ## Présentation
 
 Stockage Fichier Azure offre des partages de fichiers managés dans le cloud, accessibles via le protocole SMB (Server Message Block) standard.
 
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques de Stockage Fichier Azure.
 
-## Configuration
+## Implémentation
 
 ### Installation
 

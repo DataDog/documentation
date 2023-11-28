@@ -13,7 +13,7 @@ These are the instructions created to install and configure Datadog on the KP JB
 
 To install Datadog and integrate it with the JBoss EAP 7, ensure the following conditions have been met:
 
-* KP’s JBoss EAP 7/RHEL7.5 bundle image (C2C or BTO) has been installed.
+* KP's JBoss EAP 7/RHEL7.5 bundle image (C2C or BTO) has been installed.
 * JBoss EAP 7 has been configured and is functioning.
 * NTPD has been installed and configured, and is running on each of the systems to be used.
 
@@ -116,6 +116,6 @@ JMXFetch
  no checks
 ```
 
-[1]: https://app.datadoghq.com/account/settings#agent/centos
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=centos
 [2]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [3]: /agent/guide/agent-commands/#agent-status-and-information

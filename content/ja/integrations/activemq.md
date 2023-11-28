@@ -35,9 +35,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - log collection
-- processing
 - messaging
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/activemq/README.md
 display_on_public_website: true
@@ -55,18 +53,16 @@ public_title: ActiveMQ
 short_description: ブローカーとキュー、プロデューサーとコンシューマーなどのメトリクスを収集。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::ログの収集
-  - Category::処理
   - Category::メッセージング
-  - Category::オートディスカバリー
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: ブローカーとキュー、プロデューサーとコンシューマーなどのメトリクスを収集。
   media: []

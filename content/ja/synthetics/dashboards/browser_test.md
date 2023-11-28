@@ -1,11 +1,11 @@
 ---
-description: すぐに使える Synthetics ブラウザテストパフォーマンスダッシュボードについてご紹介します。
+description: すぐに使える Synthetic ブラウザテストパフォーマンスダッシュボードについてご紹介します。
 further_reading:
 - link: /synthetics/ci_results_explorer
   tag: ドキュメント
   text: CI Results Explorer について学ぶ
 kind: documentation
-title: Synthetics ブラウザテストパフォーマンスダッシュボード
+title: Synthetic ブラウザテストパフォーマンスダッシュボード
 ---
 
 ## 概要

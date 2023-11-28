@@ -21,7 +21,7 @@ While StatsD accepts only metrics, DogStatsD accepts all three of the major Data
 
 [COUNT](#count), [GAUGE](#gauge), and [SET](#set) metric types are familiar to StatsD users. `TIMER` from StatsD is a sub-set of `HISTOGRAM` in DogStatsD. Additionally, you can submit [HISTOGRAM](#histogram) and [DISTRIBUTION](#distribution) metric types using DogStatsD.
 
-**Note**: Depending on the submission method used, the actual metric type stored within Datadog might differ from the submission metric type.
+**Note**: Depending on the submission method used, the actual metric type stored within Datadog might differ from the submission metric type. When submitting a RATE metric type through DogStatsD, the metric appears as a GAUGE in-app to ensure relevant comparison across different Agents.
 
 ## Functions
 
@@ -43,7 +43,7 @@ After you [install DogStatsD][1], the following functions are available for subm
 : Used to decrement a COUNT metric. Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period.
 
 `count(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>)`
-: Used to increment a COUNT metric from an arbitrary `Value`. Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period. 
+: Used to increment a COUNT metric from an arbitrary `Value`. Stored as a `RATE` type in Datadog. Each value in the stored timeseries is a time-normalized delta of the metric's value over the StatsD flush period.
 : **Note:** `count` is not supported in Python.
 
 **Note**: `COUNT` type metrics can show a decimal value within Datadog since they are normalized over the flush interval to report per-second units.
@@ -54,7 +54,7 @@ Emit a `COUNT` metric-stored as a `RATE` metric-to Datadog. Learn more about the
 
 Run the following code to submit a DogStatsD `COUNT` metric to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -164,7 +164,8 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())
         {
-            dogStatsdService.Configure(dogstatsdConfig);
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
             for (int i = 0; i < 10; i--)
@@ -202,6 +203,16 @@ while (TRUE) {
 ```
 {{< /programming-lang >}}
 
+{{< programming-lang lang="nodejs" >}}
+```javascript
+const tracer = require('dd-trace');
+tracer.init();
+
+tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev' });
+tracer.dogstatsd.decrement('example_metric.decrement', 1, { environment: 'dev' });
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 After running the code above, your metrics data is available to graph in Datadog:
@@ -225,7 +236,7 @@ Run the following code to submit a DogStatsD `GAUGE` metric to Datadog. Remember
 
 **Note:** Metrics submission calls are asynchronous. If you want to ensure metrics are submitted, call `flush` before the program exits.
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -331,7 +342,8 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())
         {
-            dogStatsdService.Configure(dogstatsdConfig);
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
             for (int i = 0; i < 10; i--)
@@ -367,6 +379,20 @@ while (TRUE) {
 }
 ```
 {{< /programming-lang >}}
+
+{{< programming-lang lang="nodejs" >}}
+```javascript
+const tracer = require('dd-trace');
+tracer.init();
+
+let i = 0;
+while(true) {
+  i++;
+  tracer.dogstatsd.gauge('example_metric.gauge', i, { environment: 'dev' });
+}
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 After running the code above, your metric data is available to graph in Datadog:
@@ -490,7 +516,8 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())
         {
-            dogStatsdService.Configure(dogstatsdConfig);
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
             for (int i = 0; i < 10; i--)
@@ -651,7 +678,8 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())
         {
-            dogStatsdService.Configure(dogstatsdConfig);
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
             for (int i = 0; i < 10; i--)
@@ -818,7 +846,7 @@ The `DISTRIBUTION` metric type is specific to DogStatsD. Emit a `DISTRIBUTION` m
 
 Run the following code to submit a DogStatsD `DISTRIBUTION` metric to Datadog. Remember to `flush`/`close` the client when it is no longer needed.
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -919,7 +947,8 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())
         {
-            dogStatsdService.Configure(dogstatsdConfig);
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
             for (int i = 0; i < 10; i--)
@@ -954,6 +983,18 @@ while (TRUE) {
 ```
 {{< /programming-lang >}}
 
+{{< programming-lang lang="nodejs" >}}
+```javascript
+const tracer = require('dd-trace');
+tracer.init();
+
+while(true) {
+  tracer.dogstatsd.distribution('example_metric.distribution', Math.random() * 20, { environment: 'dev' });
+  await new Promise(r => setTimeout(r, 2000));
+}
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 The above instrumentation calculates the `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (median), `75th percentile`, `90th percentile`, `95th percentile` and `99th percentile`. Distributions can be used to measure the distribution of *any* type of value, such as the size of uploaded files, or classroom test scores.
@@ -968,12 +1009,13 @@ A sample rate of `1` sends metrics 100% of the time, while a sample rate of `0` 
 
 Before sending a metric to Datadog, DogStatsD uses the `<SAMPLE_RATE>` to correct the metric value depending on the metric type (to estimate the value without sampling):
 
-| Metric Type | Sample rate correction                                                                                                                                                         |
-|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `COUNT`     | Values received are multiplied by (`1/<SAMPLE_RATE>`). It's reasonable to assume that for one datapoint received, `1/<SAMPLE_RATE>` were actually sampled with the same value. |
-| `GAUGE`     | No correction. The value received is kept as is.                                                                                                                               |
-| `SET`       | No correction. The value received is kept as is.                                                                                                                               |
-| `HISTOGRAM` | The `histogram.count` statistic is a COUNT metric, and receives the correction outlined above. Other statistics are gauge metrics and aren't "corrected".                      |
+| Metric Type    | Sample rate correction                                                                                                                                                         |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `COUNT`        | Values received are multiplied by (`1/<SAMPLE_RATE>`). It's reasonable to assume that for one datapoint received, `1/<SAMPLE_RATE>` were actually sampled with the same value. |
+| `GAUGE`        | No correction. The value received is kept as is.                                                                                                                               |
+| `SET`          | No correction. The value received is kept as is.                                                                                                                               |
+| `HISTOGRAM`    | The `histogram.count` statistic is a COUNT metric, and receives the correction outlined above. Other statistics are gauge metrics and aren't "corrected".                      |
+| `DISTRIBUTION` | Values received are counted (`1/<SAMPLE_RATE>`) times. It's reasonable to assume that for one datapoint received, `1/<SAMPLE_RATE>` were actually sampled with the same value. |
 
 #### Code examples
 
@@ -1028,7 +1070,7 @@ Add tags to any metric you send to DogStatsD with the `tags` parameter.
 
 The following code only adds the `environment:dev` and `account:local` tags to the `example_metric.increment` metric:
 
-{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
+{{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
 {{< programming-lang lang="python" >}}
 ```python
@@ -1074,6 +1116,12 @@ $statsd->increment('example_metric.increment', array('environment' => 'dev', 'ac
 ```
 {{< /programming-lang >}}
 
+{{< programming-lang lang="nodejs" >}}
+```javascript
+tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev', account: 'local' });
+```
+{{< /programming-lang >}}
+
 {{< /programming-lang-wrapper >}}
 
 #### Host tag
@@ -1090,6 +1138,6 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 [4]: /dashboards/functions/arithmetic/#integral
 [5]: /metrics/types/?tab=gauge#definition
 [6]: /metrics/types/?tab=histogram#definition
-[7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[7]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [8]: /metrics/distributions/
 [9]: /metrics/types/?tab=distribution#definition

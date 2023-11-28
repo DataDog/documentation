@@ -2,7 +2,6 @@
 title: Online Archives
 kind: documentation
 description: Cost effective live query capabilities over long term retention of Logs
-is_beta: true
 private: true
 further_reading:
 - link: "/logs/log_configuration/indexes/#indexes-filters"
@@ -14,15 +13,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/online-archives-datadog/"
   tag: "Blog"
   text: "Historical log analysis and investigation with Online Archives"
+algolia:
+  tags: ['online archives']
 ---
-
-{{< site-region region="us3,us5,eu,gov" >}}
-
-Online Archives is only available for AWS hosted Datadog customers (US1) site.
-
-{{< /site-region >}}
-
-{{< site-region region="us" >}}
 
 <div class="alert alert-warning">
 Online Archives is in limited availability. To request access, contact <a href="/help/">Datadog Support</a>.
@@ -40,7 +33,7 @@ Online Archives allows you to retain and search all of your log data for 15 mont
 
 Online Archives are set up per Log index. [Index filters][1] that apply to that index also apply to Online Archives.
 
-**Note**: However, that index's [exclusion filters][2] and daily quotas don’t apply to Online Archives. For instance you may only choose to Index error logs while retaining all  logs in Online Archives by excluding non error logs from Indexes.
+**Note**: However, that index's [exclusion filters][2] and daily quotas don't apply to Online Archives. For instance you may only choose to Index error logs while retaining all logs in Online Archives by excluding non error logs from Indexes.
 
 Configure Online Archives in the [Logs Index Configuration][3] page:
 
@@ -73,7 +66,7 @@ Setting the storage type to **Online Archives** lets you query Online Archives i
 
 You can configure the setup to send certain logs to Online Archives while others go to an index based on log attributes and tags. Mix and match logs between storage types depending upon your logging use cases and retention strategy.
 
-To configure storage types, use index filters that apply to Online Archives, and use index exclusion filters that don’t apply to Online Archives.
+To configure storage types, use index filters that apply to Online Archives, and use index exclusion filters that don't apply to Online Archives.
 
 Here are examples of different log retention strategies and how to implement them:
 
@@ -103,4 +96,3 @@ Select the index where you want to turn off Online Archives and then switch the 
 [3]: https://app.datadoghq.com/logs/pipelines/indexes
 [4]: https://app.datadoghq.com/logs
 
-{{< /site-region >}}

@@ -2,6 +2,7 @@
 categories:
 - cloud
 - google cloud
+- iot
 - ログの収集
 dependencies: []
 description: Google Cloud IoT のキーメトリクスを追跡

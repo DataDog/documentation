@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: performetriks-composer
 app_uuid: b1b4d663-f81a-4892-8aef-5dd67b40a37f
 assets: {}
@@ -30,17 +32,17 @@ pricing:
   product_id: composer
   short_description: Performetriks Composer の月額定額制
   unit_price: 99
-public_title: Composer インテグレーション
+public_title: Composer によるインストール
 short_description: Datadog 環境のコンフィギュレーション管理
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Offering::Integration
@@ -63,7 +65,8 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Composer インテグレーション
+  title: Composer によるインストール
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -98,10 +101,19 @@ Composer では、モニタリングのコンフィギュレーションをコ�
 
 
 ## サポート
-サポートや機能のご要望は、以下のチャンネルで Performetriks にご連絡ください。
-メール [composer@performetriks.com](mailto:composer@performetriks.com)
 
-[1]:https://www.performetriks.com/composer-datadog-product-guide
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Performetriks にお問い合わせください。
 
+- メール: [composer@performetriks.com][3]
+
+### その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog Marketplace の Performetriks の製品を使って Datadog の構成をコードとして保存・管理する][3]
+
+[1]: https://www.performetriks.com/composer-datadog-product-guide
+[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[3]: https://www.datadoghq.com/blog/manage-datadog-configurations-as-code-with-performetriks/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/performetriks-composer" target="_blank">こちらをクリック</a>してください。

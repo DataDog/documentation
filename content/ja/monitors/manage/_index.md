@@ -3,19 +3,22 @@ aliases:
 - /ja/monitors/manage_monitor/
 description: モニターがアラートをトリガーしたときにチームに通知を送信する
 further_reading:
-- link: /monitors/create/
+- link: /monitors/
   tag: ドキュメント
   text: モニターの作成
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知
+- link: https://www.datadoghq.com/blog/tagging-best-practices-monitors/
+  tag: ブログ
+  text: モニターのタグ付けのベストプラクティス
 kind: documentation
 title: モニターの管理
 ---
 
 [モニターの管理][1]ページではモニターの一括検索、削除、ミュート、解決、およびモニタータグの編集が可能です。検索結果に含まれるモニターを個別に複製したり、編集することもできます。
 
-{{< img src="monitors/manage_monitor/monitor_page.jpg" alt="モニターの管理ページ"  >}}
+{{< img src="monitors/manage_monitor/monitor_page.jpg" alt="モニターの管理ページ" >}}
 
 ## 検索
 
@@ -25,21 +28,22 @@ title: モニターの管理
 
 検索が完了したら、各結果の隣にあるチェックボックスを使用して更新するモニターを選択します。*STATUS* 列の見出しの隣にある一番上のチェックボックスを選択すると、すべての結果を一度に選択できます。その上で、検索結果の右上にあるボタンを使用して一括操作が可能です。
 
-| オプション    | 説明                                                                |
-|-----------|----------------------------------------------------------------------------|
-| ミュート      | 選択したモニターを `1h`、`4h`、`12h`、`1d`、`1w`、または `Forever` の間[ミュート][3]にします。 |
-| ミュート解除    | 選択されたモニターがミュート状態の場合、ミュートを解除します。                           |
-| 解決   | 選択されたモニターのアラートを[解決][4]します。                          |
-| 削除    | 選択したモニターを永久に削除します。                                  |
-| タグを編集 | 選択したモニターのタグを編集します。                           |
+| オプション     | 説明                                                                      |
+|------------|----------------------------------------------------------------------------------|
+| ミュート       | 選択したモニターを `1h`、`4h`、`12h`、`1d`、`1w`、または `Forever` の間[ミュート][3]にします。 |
+| ミュート解除     | 選択されたモニターがミュート状態の場合、ミュートを解除します。                                 |
+| 解決    | 選択されたモニターのアラートを[解決][4]します。                                |
+| 削除     | 選択したモニターを削除します。                                                    |
+| タグを編集  | 選択したモニターのタグを編集します。                                 |
+| チームの編集 | 選択したモニターの[チーム][5]を編集します。                                  |
 
 個別のモニターを編集するには、該当する行にカーソルを合わせて右端にある Edit、Clone、Mute、Delete の各ボタンを選択します。モニターの詳細を表示するには、名前をクリックしてステータスページを参照します。
 
-**注**: [Apple App Store][9] および [Google Play Store][10] で入手できる [Datadog モバイルアプリ][5]をダウンロードすると、モバイルデバイスのホーム画面からモニター保存表示を表示したり、モニターの表示やミュートを行ったりすることができます。
+**注**: [Apple App Store][7] および [Google Play Store][8] で入手できる [Datadog モバイルアプリ][6]をダウンロードすると、モバイルデバイスのホーム画面からモニター保存表示を表示したり、モニターの表示やミュートを行ったりすることができます。
 
 ### トリガー構成済のモニター
 
-[トリガー構成済のモニター][6]ページから、トリガーされたモニターを一括で[ミュート][3]または[解決][4]できます。このページにはトリガー済のステータス (Alert、Warn、No Data) にあるモニターのみが表示されます。
+[トリガー構成済のモニター][9]ページから、トリガーされたモニターを一括で[ミュート][3]または[解決][4]できます。このページにはトリガー済のステータス (Alert、Warn、No Data) にあるモニターのみが表示されます。
 
 #### グループ結果
 
@@ -55,7 +59,7 @@ title: モニターの管理
 
 ### モニタータグ
 
-モニタータグは Agent またはインテグレーションから送信されたタグとは別の独立したタグです。モニターに最大 80 個のタグを直接追加して、[モニターの管理][1]、[トリガー構成済のモニター][6]、[ダウンタイムの管理][7]ページのフィルタリングが可能です。モニタータグについての詳細は、[UI へのタグの割り当て][8]をご参照ください。
+モニタータグは Agent またはインテグレーションから送信されたタグとは別の独立したタグです。モニターに最大 80 個のタグを直接追加して、[モニターの管理][1]、[トリガー構成済のモニター][9]、[ダウンタイムの管理][10]ページのフィルタリングが可能です。モニタータグについての詳細は、[UI へのタグの割り当て][11]をご参照ください。
 
 **注**: モニタータグは、モニターにより生成されたアラートイベントに追加されます。
 
@@ -67,9 +71,10 @@ title: モニターの管理
 [2]: /ja/monitors/manage/search/
 [3]: /ja/monitors/manage/status/#mute
 [4]: /ja/monitors/manage/status/#resolve
-[5]: /ja/mobile/#monitors
-[6]: https://app.datadoghq.com/monitors/triggered
-[7]: https://app.datadoghq.com/monitors#downtime
-[8]: /ja/getting_started/tagging/assigning_tags/?tab=monitors#ui
-[9]: https://apps.apple.com/app/datadog/id1391380318
-[10]: https://play.google.com/store/apps/details?id=com.datadog.app
+[5]: /ja/account_management/teams/
+[6]: /ja/service_management/mobile/#monitors
+[7]: https://apps.apple.com/app/datadog/id1391380318
+[8]: https://play.google.com/store/apps/details?id=com.datadog.app
+[9]: https://app.datadoghq.com/monitors/triggered
+[10]: https://app.datadoghq.com/monitors#downtime
+[11]: /ja/getting_started/tagging/assigning_tags/?tab=monitors#ui

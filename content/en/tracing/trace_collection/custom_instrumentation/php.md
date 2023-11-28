@@ -1,5 +1,5 @@
 ---
-title: PHP Custom Instrumentation
+title: PHP Custom Instrumentation with Datadog Library
 kind: documentation
 aliases:
     - /tracing/manual_instrumentation/php
@@ -25,6 +25,33 @@ further_reading:
 <div class="alert alert-info">
 If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="/tracing/setup/php/">PHP Setup Instructions</a>. Even if Datadog does not officially support your web framework, you may not need to perform any manual instrumentation. See <a href="/tracing/setup/php/#automatic-instrumentation">automatic instrumentation</a> for more details.
 </div>
+
+## Annotations
+
+If you are using PHP 8, as of v0.84 of the tracer, you can add attributes to your code to instrument it. It is a lighter alternative to [custom instrumentation written in code](#writing-custom-instrumentation). For example, add the `#[DDTrace\Trace]` attribute to methods for Datadog to trace them.
+
+```php
+<?php
+class Server {
+    #[DDTrace\Trace(name: "spanName", resource: "resourceName", type: "Custom", service: "myService", tags: ["aTag" => "aValue"])]
+    static function process($arg) {}
+
+    #[DDTrace\Trace]
+    function get() {
+      Foo::simple(1);
+    }
+}
+```
+
+You can provide the following arguments:
+
+- `$name`: The operation name to be assigned to the span. Defaults to the function name.
+- `$resource`: The resource to be assigned to the span.
+- `$type`: The type to be assigned to the span.
+- `$service`: The service to be assigned to the span. Defaults to default or inherited service name.
+- `$tags`: The tags to be assigned to the span.
+- `$recurse`: Whether recursive calls shall be traced.
+- `$run_if_limited`: Whether the function shall be traced in limited mode. (For example, when span limit exceeded)
 
 ## Writing custom instrumentation
 
@@ -107,9 +134,13 @@ class SampleRegistry
 To write custom instrumentation, you do not need any additional composer package.
 </div>
 
+<div class="alert alert-info">
+    The Datadog APM PHP Api is fully documented <strong><a href="https://github.com/DataDog/dd-trace-php/blob/master/ext/ddtrace.stub.php">in stubs</a></strong>. This allows you to have automated documentation in PHPStorm. You can still go through the stub file for more info about Datadog APM PHP API.
+</div>
+
 To avoid mixing application or service business logic with instrumentation code, write the required code in a separate file.
 
-1. Create a file `datadog/instrumentation.php` and add it to the composer autoloader. 
+1. Create a file `datadog/instrumentation.php` and add it to the composer autoloader.
 
    {{< code-block lang="json" filename="composer.json" >}}
 {
@@ -125,7 +156,7 @@ To avoid mixing application or service business logic with instrumentation code,
 }
    {{< /code-block >}}
 
-2. Dump the autoloader, for example by running `composer update`.
+2. Dump the autoloader, for example by running `composer dump`.
 
    <div class="alert alert-info">
    <strong>Note</strong>: The file that contains the custom instrumentation code and the actual classes that are instrumented are not required to be in the same code base and package. By separating them, you can publish an open source composer package, for example to GitHub, containing only your instrumentation code, which others might find useful. Registering the instrumentation entry point in the <code>composer.json</code>'s <code>autoload.files</code> array ensures that the file is always executed when the composer autoloader is required.
@@ -273,7 +304,7 @@ For example, the following snippet traces the `CustomDriver::doWork` method and 
 
 ## Accessing active spans
 
-The built-in instrumentation and your own custom instrumentation will create spans around meaningful operations. You can access the active span in order to include meaningful data.
+The built-in instrumentation and your own custom instrumentation creates spans around meaningful operations. You can access the active span in order to include meaningful data.
 
 {{< tabs >}}
 {{% tab "Current span" %}}
@@ -315,7 +346,7 @@ When you set tags, to avoid overwriting existing tags automatically added by the
 {{< tabs >}}
 {{% tab "Locally" %}}
 
-Add tags to a span via the `DDTrace\SpanData::$meta` array.
+Add tags to a span by using the `DDTrace\SpanData::$meta` array.
 
 ```php
 <?php
@@ -386,36 +417,19 @@ function doRiskyThing() {
 {{% /tab %}}
 {{< /tabs >}}
 
-## Distributed tracing
+## Context propagation for distributed traces
 
-When a new PHP script is launched, the tracer automatically checks for the presence of datadog headers for distributed tracing:
-- `x-datadog-trace-id` (environment variable: `HTTP_X_DATADOG_TRACE_ID`)
-- `x-datadog-parent-id` (environment variable: `HTTP_X_DATADOG_PARENT_ID`)
-- `x-datadog-origin` (environment variable: `HTTP_X_DATADOG_ORIGIN`)
-- `x-datadog-tags` (environment variable: `HTTP_X_DATADOG_TAGS`)
-
-To manually set this information in a CLI script on new traces or an existing trace a function `DDTrace\set_distributed_tracing_context(string $trace_id, string $parent_id, ?string $origin = null, ?array $tags = null)` is provided.
-
-```php
-<?php
-
-function processIncomingQueueMessage($message) {
-}
-
-\DDTrace\trace_function(
-    'processIncomingQueueMessage',
-    function(\DDTrace\SpanData $span, $args) {
-        $message = $args[0];
-        \DDTrace\set_distributed_tracing_context($message->trace_id, $message->parent_id);
-    }
-);
-```
+You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][9] for information.
 
 ## Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][3] page.
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][3] page.
 
 ## API reference
+
+<div class="alert alert-info">
+    The Datadog APM PHP Api is fully documented <strong><a href="https://github.com/DataDog/dd-trace-php/blob/master/ext/ddtrace.stub.php">in stubs</a></strong>. This allows you to have automated documentation in PHPStorm. You can still go through the stub file for more info about Datadog APM PHP API.
+</div>
 
 ### Parameters of the tracing closure
 
@@ -506,7 +520,7 @@ var_dump(argsByRef($foo));
 // int(11)
 ```
 
-On PHP 7, the tracing closure has access to the same arguments passed to the instrumented call. If the instrumented call mutates an argument, including arguments passed by value, the `posthook` tracing closure will receive the mutated argument.
+On PHP 7, the tracing closure has access to the same arguments passed to the instrumented call. If the instrumented call mutates an argument, including arguments passed by value, the `posthook` tracing closure receives the mutated argument.
 
 This is the expected behavior of arguments in PHP 7 as illustrated in the following example:
 
@@ -555,7 +569,7 @@ If an argument needs to be accessed before mutation, the tracing closure [can be
 
 #### Parameter 3: `mixed $retval`
 
-The third parameter of the tracing closure is the return value of the instrumented call. Functions or methods that declare a `void` return type or ones that do not return a value will have a value of `null`.
+The third parameter of the tracing closure is the return value of the instrumented call. Functions or methods that declare a `void` return type or ones that do not return a value have a value of `null`.
 
 ```php
 <?php
@@ -637,11 +651,13 @@ To manually remove an exception from a span, use `unset`, for example: `unset($s
 
 ### Tracing internal functions and methods
 
-An optimization was added starting in **0.46.0** to ignore all internal functions and methods for instrumentation. Internal functions and methods can still be instrumented by setting the `DD_TRACE_TRACED_INTERNAL_FUNCTIONS` environment variable. This takes a CSV of functions or methods that is to be instrumented. For example, `DD_TRACE_TRACED_INTERNAL_FUNCTIONS=array_sum,mt_rand,DateTime::add`. Once a function or method has been added to the list, it can be instrumented using `DDTrace\trace_function()` and `DDTrace\trace_method()` respectively.
+As of version 0.76.0, all internal functions can unconditionally be traced.
+
+On older versions, tracing internal functions and methods requires setting the `DD_TRACE_TRACED_INTERNAL_FUNCTIONS` environment variable, which takes a CSV of functions or methods that is to be instrumented. For example, `DD_TRACE_TRACED_INTERNAL_FUNCTIONS=array_sum,mt_rand,DateTime::add`. Once a function or method has been added to the list, it can be instrumented using `DDTrace\trace_function()` and `DDTrace\trace_method()` respectively. The `DD_TRACE_TRACED_INTERNAL_FUNCTIONS` environment variable is obsolete as of version 0.76.0.
 
 ### Running the tracing closure before the instrumented call
 
-By default, tracing closures are treated as `posthook` closures meaning they will be executed _after_ the instrumented call. Some cases require running the tracing closure _before_ the instrumented call. In that case, tracing closures are marked as `prehook` using an associative configuration array.
+By default, tracing closures are treated as `posthook` closures meaning they are executed _after_ the instrumented call. Some cases require running the tracing closure _before_ the instrumented call. In that case, tracing closures are marked as `prehook` using an associative configuration array.
 
 ```php
 \DDTrace\trace_function('foo', [
@@ -717,4 +733,5 @@ While this [has been deprecated][7] if you are using PHP 7.x, you still may use 
 [5]: https://www.php.net/func_get_args
 [6]: https://github.com/DataDog/dd-trace-php/releases/latest
 [7]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
-[8]: /tracing/trace_collection/open_standards/php#opentracing
+[8]: /tracing/trace_collection/opentracing/php#opentracing
+[9]: /tracing/trace_collection/trace_context_propagation/php

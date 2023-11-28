@@ -31,7 +31,6 @@ categories:
 - configuration & deployment
 - containers
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/marathon/README.md
 display_on_public_website: true
@@ -58,7 +57,6 @@ tile:
   - Category::構成 & デプロイ
   - Category::コンテナ
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: 必要なメモリとディスク、インスタンス数などのアプリケーションメトリクスを追跡。
   media: []

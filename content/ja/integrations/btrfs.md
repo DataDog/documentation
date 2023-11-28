@@ -12,7 +12,7 @@ assets:
     metrics:
       check: system.disk.btrfs.total
       metadata_path: metadata.csv
-      prefix: btrfs.
+      prefix: system.disk.btrfs.
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: Btrfs

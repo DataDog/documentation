@@ -33,7 +33,6 @@ author:
 categories:
 - data store
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pgbouncer/README.md
 display_on_public_website: true
@@ -41,7 +40,7 @@ draft: false
 git_integration_title: pgbouncer
 integration_id: pgbouncer
 integration_title: PGBouncer
-integration_version: 4.3.0
+integration_version: 4.4.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -59,7 +58,6 @@ tile:
   - Supported OS::macOS
   - Category::データストア
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: 接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視
   media: []

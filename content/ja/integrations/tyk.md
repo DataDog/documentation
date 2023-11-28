@@ -22,16 +22,11 @@ assets:
     source_type_name: Tyk
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Tyk
   sales_email: yaara@tyk.io
   support_email: yaara@tyk.io
 categories:
-- アラート設定
-- 自動化
-- AWS
-- cloud
-- 構成 & デプロイ
-- web
+- メトリクス
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/tyk/README.md
 display_on_public_website: true
@@ -49,20 +44,15 @@ public_title: Tyk
 short_description: resp-code、api、path、oauth などで細分化された、時間に関する統計付きでリクエストを追跡
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Alerting
-  - Category::Automation
-  - Category::AWS
-  - Category::Cloud
-  - Category::Configuration & Deployment
-  - Category::Web
+  - Category::Metrics
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: resp-code、api、path、oauth などで細分化された、時間に関する統計付きでリクエストを追跡
   media: []

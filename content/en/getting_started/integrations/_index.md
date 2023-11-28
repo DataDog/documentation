@@ -1,18 +1,18 @@
 ---
 title: Introduction to Integrations
 kind: documentation
-aliases:
-    - '/getting_started/integrations'
 further_reading:
-    - link: 'https://learn.datadoghq.com/'
-      tag: 'Learning Center'
-      text: 'Introduction to Datadog'
-    - link: '/integrations/'
-      tag: 'Integrations'
-      text: "Datadog's full list of integrations"
+  - link: 'https://learn.datadoghq.com/courses/intro-to-integrations'
+    tag: 'Learning Center'
+    text: 'Introduction to Integrations'
+  - link: '/integrations/'
+    tag: 'Documentation'
+    text: 'See a list of Datadog integrations'
 ---
 
-This is a guide for using integrations, if you are looking for information about building a new integration, see the [Create a new integration][1] page.
+## Overview
+
+This is a guide for using integrations. If you are looking for information about building a new integration, see the [Create a new integration][1] page.
 
 An integration, at the highest level, is when you assemble a unified system from units that are usually considered separately. At Datadog, you can use integrations to bring together all of the metrics and logs from your infrastructure and gain insight into the unified system as a whole—you can see pieces individually and also how individual pieces are impacting the whole.
 
@@ -28,7 +28,7 @@ You can also build a [custom check][10] to define and send metrics to Datadog fr
 
 ## Setting up an integration
 
-The Datadog Agent package includes integrations officially supported by Datadog, in [integrations core][11]. To use those integrations, download the Datadog Agent. Community-based integrations are in [integrations extras][12], and to use those, you need to download the [developer toolkit][13]. For more information on installing or managing these integrations, see the [integrations management guide][14].
+The Datadog Agent package includes integrations officially supported by Datadog, in [integrations core][11]. To use those integrations, download the Datadog Agent. Community-based integrations are in [integrations extras][12]. For more information on installing or managing these integrations, see the [integrations management guide][14].
 
 ### API and application keys
 
@@ -70,7 +70,7 @@ logs:
       sourcecategory: http_web_access
 ```
 
-To create multiple instances in the same Agent check to monitor two Apache services, create a new instance with a `-` in the `instances` section:
+To monitor multiple Apache instances in the same Agent check, add additional instances to the `instances` section:
 
 ```yaml
 init_config:
@@ -118,14 +118,13 @@ Installing more than one integration is a matter of adding the configuration inf
 
 If you set up [process collection][29], Datadog autodetects technologies running on your hosts. This identifies Datadog integrations that can help you monitor these technologies. These auto-detected integrations are displayed in the [Integrations search][2]:
 
-{{< img src="getting_started/integrations/ad_integrations.png" alt="Autodetected integrations" >}}
+{{< img src="getting_started/integrations/ad_integrations_1.png" alt="Autodetected integrations" >}}
 
-Each integration has one of two status types:
+Each integration has one of three status types:
 
-- **+ Detected**: This integration is not enabled on any host(s) running it.
-- **✓ Partial Visibility**: This integration is enabled on some, but not all relevant hosts are running it.
-
-Hosts that are running the integration, but where the integration is not enabled, can be found in the **Hosts** tab of the integrations tile.
+- **Detected**: The technology is running on a host, but the integration has not been installed or configured and only partial metrics are being collected. Configure the integration for full coverage. To find a list of hosts that are running an autodetected technology, open the integrations tile and select the **Hosts** tab.
+- **Installed**: This integration is installed and configured on a host.
+- **Available**: All integrations that do not fall into the **Installed** and **Detected** categories.
 
 ## Security practices
 
@@ -170,7 +169,7 @@ logging
 : The file that lists and stores the metrics collected by each integration.
 
 metrics
-: The list of what is collected from your system by each integration. You can find the metrics for each integration in that integrations `metadata.csv` file. For more information about metrics, see the [Metrics][42] developer page. You can also set up [custom metrics][43], so if the integration doesn't offer a metric out of the box, you can usually add it.
+: The list of what is collected from your system by each integration. You can find the metrics for each integration in that integration's `metadata.csv` file. For more information about metrics, see the [Metrics][42] developer page. You can also set up [custom metrics][43], so if the integration doesn't offer a metric out of the box, you can usually add it.
 
 parameters
 : Use the parameters in the `conf.yaml` file to control accesses between your integration data source and the Agent. The individual integrations `conf.yaml.example` file has all of the required and not required parameters listed.
@@ -185,7 +184,7 @@ tagging
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/integrations/new_check_howto/
+[1]: /developers/integrations/agent_integration/
 [2]: https://app.datadoghq.com/account/settings
 [3]: /integrations/slack/
 [4]: /integrations/amazon_web_services/
@@ -197,14 +196,13 @@ tagging
 [10]: /developers/custom_checks/write_agent_check/
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
-[13]: /developers/integrations/new_check_howto/#developer-toolkit
 [14]: /agent/guide/integration-management/
-[15]: https://app.datadoghq.com/account/settings#agent
+[15]: https://app.datadoghq.com/account/settings/agent/latest
 [16]: /account_management/api-app-keys/
 [17]: https://app.datadoghq.com/organization-settings/api-keys
 [18]: /integrations/
-[19]: https://app.datadoghq.com/account/settings#agent/docker
-[20]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[19]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
+[20]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [21]: /agent/guide/agent-commands/#restart-the-agent
 [22]: /developers/integrations/check_references/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
@@ -214,7 +212,7 @@ tagging
 [27]: /getting_started/tagging/unified_service_tagging/
 [28]: /agent/guide/agent-commands/#agent-status-and-information
 [29]: /infrastructure/process/
-[30]: /security/
+[30]: /data_security/
 [31]: /metrics/explorer/
 [32]: /dashboards/
 [33]: /monitors/

@@ -29,7 +29,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- collaboration
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/postfix/README.md
@@ -52,10 +51,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::ログの収集
   - Supported OS::Linux
   - Supported OS::macOS
-  - Category::コラボレーション
-  - Category::ログの収集
   configuration: README.md#Setup
   description: すべての Postfix キューのサイズを監視する。
   media: []

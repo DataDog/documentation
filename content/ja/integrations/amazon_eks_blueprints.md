@@ -16,6 +16,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - AWS
+- 構成 & デプロイ
 - コンテナ
 - orchestration
 dependencies:
@@ -35,17 +36,18 @@ public_title: Datadog Blueprints アドオン
 short_description: Amazon EKS Blueprints は、クラスター構成とデプロイツールを統合します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::AWS
+  - Category::Configuration & Deployment
   - Category::Containers
   - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Amazon EKS Blueprints は、クラスター構成とデプロイツールを統合します。
   media: []

@@ -1,29 +1,32 @@
 ---
 aliases:
-  - /ja/integrations/akamai/
+- /ja/integrations/akamai/
 categories:
-  - cloud
-ddtype: crawler
+- キャッシュ
+- クラウド
 dependencies: []
 description: Akamai DataStream を Datadog と統合
-doc_link: 'https://docs.datadoghq.com/integrations/akamai_datastream/'
+doc_link: https://docs.datadoghq.com/integrations/akamai_datastream/
 draft: false
 further_reading:
-  - link: 'https://www.datadoghq.com/blog/akamai-cdn-performance/'
-    tag: ブログ
-    text: Akamai を Datadog と統合して CDN のパフォーマンスを監視
+- link: https://www.datadoghq.com/blog/akamai-cdn-performance/
+  tag: ブログ
+  text: Akamai を Datadog と統合して CDN のパフォーマンスを監視
 git_integration_title: akamai_datastream
 has_logo: true
 integration_id: ''
 integration_title: Akamai DataStream
+integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: akamai_datastream
 public_title: Datadog-Akamai DataStream
 short_description: Akamai DataStream を Datadog と統合
+team: web-integrations
 version: '1.0'
 ---
+
 ## 概要
 
 Datadog を Akamai DataStream と接続すると、CDN の健全性、レイテンシー、オフロード、エラーなどのメトリクスを表示できます。
@@ -34,7 +37,7 @@ Datadog を Akamai DataStream と接続すると、CDN の健全性、レイテ�
 
 Datadog の [Akamai インテグレーションタイル][1]を使用して、インテグレーションをインストールします。
 
-### コンフィグレーション
+### コンフィギュレーション
 
 #### メトリクスの収集
 
@@ -55,11 +58,19 @@ Datadog の [Akamai インテグレーションタイル][1]を使用して、�
 
 #### ログの収集
 
+{{< site-region region="us3" >}}
+
+ログ収集は、このサイトではサポートされていません。
+
+{{< /site-region >}}
+
+{{< site-region region="us,eu,gov" >}}
+
 Akamai DataStream 1.0 および 2.0 では、HTTP(s) エンドポイントを介して gzip 形式のログを Datadog に送信できます。Datadog へログをストリームするには、Akamai 内で以下のフィールドに入力します。
 
 1. **Name**: エンドポイントのわかりやすい説明を入力します。
 
-2. **Endpoint**: ログを送信および保存するための Datadog エンドポイントを入力します: `{{< region-param key="http_endpoint" code="true" >}}/v1/input`
+2. **Endpoint**: ログを送信および保存するための Datadog エンドポイントを入力します: {{< region-param key="http_endpoint" code="true" >}}`/v1/input`
 
 3. **Tags** (任意): Datadogでログのフィルタリングおよびグループ化に使用する、カンマ区切りのタグ一覧（例: `env:staging,team:web`）を入力します。
 
@@ -67,11 +78,15 @@ Akamai DataStream 1.0 および 2.0 では、HTTP(s) エンドポイントを介
 
 5. **Service** (任意): Datadog アカウントに関連付けられたログイベントを生成するアプリケーション名またはサービス名を入力します。
 
-6. **API key**: [Datadog API キー][2]を入力します。
+6. **API key**: [Datadog API キー][1]を入力します。
 
 7. **Send compressed data** (任意): 宛先に送信されたログを gzip 形式で圧縮するにはこのチェックボックスを選択します。
 
 8. **Validate & Save**: 宛先への接続を検証し詳細を保存するには、これをクリックします。
+
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+
+{{< /site-region >}}
 
 ## 収集データ
 
@@ -89,9 +104,8 @@ Akamai インテグレーションには、サービスのチェック機能は�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://app.datadoghq.com/account/settings#integrations/akamai-datastream
-[2]: https://app.datadoghq.com/account/settings#api
-[3]: https://github.com/DataDog/dogweb/blob/prod/integration/akamai_datastream/akamai_datastream_metadata.csv
-[4]: https://docs.datadoghq.com/ja/help/
+[2]: https://github.com/DataDog/dogweb/blob/prod/integration/akamai_datastream/akamai_datastream_metadata.csv
+[3]: https://docs.datadoghq.com/ja/help/

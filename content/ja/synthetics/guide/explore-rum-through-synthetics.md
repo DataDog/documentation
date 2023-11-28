@@ -9,12 +9,12 @@ further_reading:
   tag: ドキュメント
   text: Synthetic モニタリングの設定
 kind: documentation
-title: Synthetics で RUM とセッションリプレイを確認する
+title: Synthetic の RUM 機能のプレビューを見る
 ---
 
 ## 概要
 
-<div class="alert alert-info">Real User Monitoring を導入していない場合、Synthetic ブラウザテストの実行から RUM のプレビュー、セッションリプレイ、エラートラッキング、追加パフォーマンスデータにアクセスできます。</div>
+<div class="alert alert-info">Real User Monitoring を導入している場合、Synthetic ブラウザテストの実行を通じて RUM、セッションリプレイ、エラートラッキング、および追加のパフォーマンスデータのプレビューにアクセスできます。</div>
 
 Synthetic ブラウザテストは、Real User Monitoring SDK を組み込み、以下の確認を可能にします。
 
@@ -24,6 +24,9 @@ Synthetic ブラウザテストは、Real User Monitoring SDK を組み込み、
 - RUM の追加リソースとタイミング情報 (検索とモニター機能の追加を含む)。
 
 ## RUM アプリケーションでの Synthetic データの許可
+
+<div class="alert alert-warning">
+</div>ターゲットアプリケーションがすでに RUM でインスツルメンテーションされている場合、予期せぬ動作を引き起こす可能性があるため、Synthetic テストの構成内で RUM データ収集を有効にするべきではありません。
 
 ブラウザテストの記録で、**Start Recording** ボタンの上にある **Collect RUM Data on** をクリックし、データを収集するアプリケーションを選択します。記録とテスト構成を保存すると、RUM はテストデータを収集し、ブラウザテスト実行からセッション記録を生成します。
 

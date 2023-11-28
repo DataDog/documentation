@@ -3,6 +3,10 @@ title: Rate
 kind: documentation
 aliases:
     - /graphing/functions/rate/
+further_reading:
+- link: "/monitors/guide/alert-on-no-change-in-value/"
+  tag: "Documentation"
+  text: "Alert on no change in value"
 ---
 
 ## Per second
@@ -23,19 +27,23 @@ aliases:
 |:-------------|:---------------------------------------------------------|:-----------------------------|
 | `per_hour()` | Graph the rate at which the metric is changing per hour. | `per_hour(<METRIC_NAME>{*})` |
 
-## Delta time
+## Time difference
 
 | Function | Description                                                    | Example                |
 |:---------|:---------------------------------------------------------------|:-----------------------|
 | `dt()`   | Graph the time difference in seconds between submitted points. | `dt(<METRIC_NAME>{*})` |
 
-## Delta value
+The dt() function returns only one timeseries regardless of how many groups are involved. Within that one timeseries, it considers the time difference of all the submitted points across the various groups.
+
+## Value difference
 
 | Function | Description                    | Example                  |
 |:---------|:-------------------------------|:-------------------------|
 | `diff()` | Graph the delta of the metric. | `diff(<METRIC_NAME>{*})` |
 
-## Monotonic delta value
+Calculates the difference between each interval on a per interval basis. For example, a metric submits data points with a 15 second interval, the `diff()` modifier would show it over 15 second rate. **Note:** The calculation is done after applying time aggregation and before space aggregation takes place.
+
+## Monotonic difference
 
 | Function           | Description                                                                     | Example                            |
 |:-------------------|:--------------------------------------------------------------------------------|:-----------------------------------|
@@ -61,3 +69,7 @@ aliases:
     {{< nextlink href="/dashboards/functions/smoothing" >}}Smoothing: Smooth your metric variations.{{< /nextlink >}}
     {{< nextlink href="/dashboards/functions/timeshift" >}}Timeshift: Shift your metric data point along the timeline. {{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}

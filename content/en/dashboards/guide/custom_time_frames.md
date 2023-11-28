@@ -19,6 +19,8 @@ Both fixed and relative custom time frames are supported:
 
 {{< img src="dashboards/guide/custom_time_frames/custom_relative_time_frame.mp4" alt="Type custom relative time frame" video="true" width="500" >}}
 
+**Note**: Queries are run in UTC time, but the query time range is selected according to your browser. Additionally, you can toggle between displaying the default time zone or UTC from the [dashboard settings][1].
+
 ## Supported syntaxes
 
 ### Fixed dates
@@ -59,4 +61,20 @@ Both fixed and relative custom time frames are supported:
   * Days: `d`, `day`, `days`
   * Weeks: `w`, `week`, `weeks`
   * Months: `mo`, `mos`, `mon`, `mons`, `month`, `months`
-* `today`, `yesterday`, `this month`, `this year`, and `last year` are calculated when entered. They won’t continue to update as time passes.
+* `today`, `yesterday`, `this month`, `this year`, and `last year` are calculated when entered. They won't continue to update as time passes.
+
+## URLs
+
+You can manipulate time queries in the URL of a dashboard.
+
+Consider the following dashboard URL:
+
+```
+https://app.datadoghq.com/dash/host/<DASHBOARD_ID>?from_ts=<QUERY_START>&to_ts=<QUERY_END>&live=true
+```
+
+* The `from_ts` parameter is the Unix milliseconds timestamp of the query starting time. For example, `1683518770980`.
+* The `to_ts` parameter is the Unix milliseconds timestamp of the query ending time. For example, `1683605233205`.
+* `live=true` indicates that relative time specifications are retained when a query is saved or shared. You can also use `live=false`.
+
+[1]: /dashboards/#display-utc-time

@@ -1,4 +1,6 @@
 ---
+app_id: federatorai
+app_uuid: c9192d7c-101d-44b2-8ddf-c5fcbe5c5306
 assets:
   dashboards:
     ProphetStor Federator.ai Application Overview: assets/dashboards/application-overview.json
@@ -8,37 +10,59 @@ assets:
     ProphetStor Federator.ai Cost Management - Namespace: assets/dashboards/cost-management-namespace-overview.json
     ProphetStor Federator.ai Cost Management - Node: assets/dashboards/cost-management-node-overview.json
     ProphetStor Federator.ai Kafka Overview: assets/dashboards/overview.json
-  metrics_metadata: metadata.csv
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: federatorai.integration.status
+      metadata_path: metadata.csv
+      prefix: federatorai.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Federator.ai
   monitors:
     Node CPU Load Prediction in Next 24 Hours is High: assets/recommended_monitors/federatorai_node_cpu_prediction.json
     Node Memory Usage Prediction in Next 24 Hours is High: assets/recommended_monitors/federatorai_node_mem_prediction.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: ProphetStor
+  sales_email: support@prophetstor.com
+  support_email: support@prophetstor.com
 categories:
 - コンテナ
+- kubernetes
 - orchestration
-creates_events: false
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/federatorai/README.md
-display_name: Federator.ai
+display_on_public_website: true
 draft: false
 git_integration_title: federatorai
-guid: ec0fd93a-ee4c-4652-9996-cc68cb5a4d45
 integration_id: federatorai
 integration_title: Federator.ai
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: support@prophetstor.com
-manifest_version: 1.0.0
-metric_prefix: federatorai.
-metric_to_check: federatorai.integration.status
+manifest_version: 2.0.0
 name: federatorai
+oauth: {}
 public_title: Federator.ai
 short_description: ProphetStor Federator.ai とのインテグレーションでアプリケーションのパフォーマンスを最適化します
-support: contrib
 supported_os:
 - linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Containers
+  - Category::Kubernetes
+  - Category::Orchestration
+  - Supported OS::Linux
+  configuration: README.md#Setup
+  description: ProphetStor Federator.ai とのインテグレーションでアプリケーションのパフォーマンスを最適化します
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Federator.ai
 ---
 
 

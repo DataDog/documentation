@@ -28,14 +28,16 @@ further_reading:
       text: 'Compare and optimize your code with Datadog Profile Comparison.'
     - link: 'https://www.datadoghq.com/blog/engineering/how-we-optimized-our-akka-application-using-datadogs-continuous-profiler/'
       tag: 'Blog'
-      text: 'How we optimized our Akka application using Datadog’s Continuous Profiler'
+      text: "How we optimized our Akka application using Datadog's Continuous Profiler"
     - link: 'https://www.datadoghq.com/blog/ruby-profiling-datadog-continuous-profiler/'
       tag: 'Blog'
       text: 'Analyze Ruby code performance with Datadog Continuous Profiler'
-
+cascade:
+    algolia:
+        rank: 70
 ---
 
-{{< vimeo 441865141 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/441865141/rendition/1080p/file.mp4?loc=external&signature=ebc774b892f062e45922dcae82f4ebff0a906c8ec30f34b9d77494b0051748ad" poster="/images/poster/profiler.png" >}}
 
 </br>
 
@@ -59,13 +61,21 @@ The [Getting Started with Profiler][1] guide takes a sample service with a perfo
 
 ## Explore Datadog profiler
 
-After you've configured your application to send profiles to Datadog, start getting insights into your code performance. By default, profiles are retained for 7 days, and metrics generated from profile data are retained for 1 month.
+After you configure your application to send profiles to Datadog, start getting insights into your code performance.  
+
+By default, profiles are retained for seven days, and metrics generated from profile data are retained for one month.
+
+### Profile types
+
+See [Profile Types][6] for descriptions of the kinds of profile data collected for each supported language.
+
+{{< img src="profiler/profile-types.png" alt="The list of profile types collected for Java applications" style="width:100%;" >}}
 
 ### Search profiles by tags
 
-[Use tags to search profiles][2] across any dimension—whether it’s a specific host, service, version, or any combination.
+[Use tags to search profiles][2] across any dimension—whether it's a specific host, service, version, or any combination.
 
-{{< img src="profiler/search_profiles.mp4" alt="Search profiles by tags" video=true >}}
+{{< img src="profiler/search_profiles2.mp4" alt="Search profiles by tags" video=true >}}
 
 ### Track function performance over deployments
 
@@ -92,3 +102,4 @@ Comparing similar profiles from different times, environments, or deployments ca
 [3]: /tracing/
 [4]: /profiler/connect_traces_and_profiles/
 [5]: /profiler/compare_profiles/
+[6]: /profiler/profile_types/

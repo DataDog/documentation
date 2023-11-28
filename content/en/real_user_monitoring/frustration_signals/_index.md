@@ -5,7 +5,7 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/'
   tag: 'Blog'
   text: 'Detect user pain points with Datadog Frustration Signals'
-- link: '/real_user_monitoring/dashboards/frustration_signals_dashboard/'
+- link: '/real_user_monitoring/dashboards/usage#frustration-signals'
   tag: 'Documentation'
   text: 'Frustration Signals Dashboard'
 - link: '/real_user_monitoring/explorer'
@@ -37,22 +37,33 @@ First, you need the Browser RUM SDK version >= 4.14.0.
 
 To start collecting frustration signals, add the following to your SDK configuration:
 
+<details open>
+  <summary>Latest version</summary>
 ```
-DD_RUM.init({
-  trackInteractions: true,
+window.DD_RUM.init({
+  trackUserInteractions: true,
+})
+```
+</details>
+<details>
+  <summary>Before <code>v5.0.0</code></summary>
+```
+window.DD_RUM.init({
+  trackUserInteractions: true,
   trackFrustrations: true
 })
 ```
 
-Frustration signals require actions. Enabling `trackFrustrations` automatically enables `trackInteractions`.
+Frustration signals require actions. Enabling `trackFrustrations` automatically enables `trackUserInteractions`.
+</details>
 
 ## Usage
 
-Frustration signals appear as high-level data points representing sources of user frustration on the [**RUM Applications** page][1]. To display a list of frustration counts in the [RUM Explorer][2], click the **Options** button and add a column for `@session.frustration.count`. 
+Frustration signals appear as high-level data points representing sources of user frustration on the [**RUM Applications** page][1]. To display a list of frustration counts in the [RUM Explorer][2], click the **Options** button and add a column for `@session.frustration.count`.
 
 ### Application list
 
-Hover over the list of browser sessions and click on a session to observe a user's frustrated click behavior. Or, click **Frustrated Sessions** to access sessions with a frustration signal. 
+Hover over the list of browser sessions and click on a session to observe a user's frustrated click behavior. Or, click **Frustrated Sessions** to access sessions with a frustration signal.
 
 ### Explore the frustration signals dashboard
 
@@ -124,7 +135,7 @@ For more information, see the [Real User Monitoring Monitor documentation][9].
 
 ### Why is a rage click not created when a user presses a key (like Delete) on the keyboard?
 
-Frustration signals are generated from mouse clicks, not keyboard strokes. 
+Frustration signals are generated from mouse clicks, not keyboard strokes.
 
 ### Why does the side panel show that a session has a different number of frustration signals than in the event timeline?
 
@@ -144,11 +155,11 @@ To provide feedback or submit a feature request, contact <a href="/help/">Datado
 
 [1]: https://app.datadoghq.com/rum/list
 [2]: /real_user_monitoring/explorer/
-[3]: /real_user_monitoring/dashboards/frustration_signals_dashboard/
+[3]: /real_user_monitoring/dashboards/usage#frustration-signals
 [4]: https://app.datadoghq.com/rum/explorer
 [5]: /dashboards/
-[6]: /monitors/create/
+[6]: /monitors/
 [7]: https://app.datadoghq.com/rum/replay/sessions/
 [8]: /real_user_monitoring/session_replay/
-[9]: /monitors/create/types/real_user_monitoring/
+[9]: /monitors/types/real_user_monitoring/
 [10]: mailto:success@datadoghq.com

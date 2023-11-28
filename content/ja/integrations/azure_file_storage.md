@@ -2,8 +2,9 @@
 aliases:
 - /ja/integrations/azure_filestorage
 categories:
-- cloud
 - azure
+- クラウド
+- data store
 dependencies: []
 description: Azure File Storage のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_file_storage/

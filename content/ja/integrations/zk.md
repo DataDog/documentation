@@ -32,7 +32,6 @@ categories:
 - orchestration
 - notification
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/zk/README.md
 display_on_public_website: true
@@ -40,7 +39,7 @@ draft: false
 git_integration_title: zk
 integration_id: zookeeper
 integration_title: ZooKeeper
-integration_version: 4.2.0
+integration_version: 4.2.3
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -59,7 +58,6 @@ tile:
   - Category::オーケストレーション
   - Category::通知
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: クライアント接続とレイテンシーを追跡し、リクエストの遅延状況を把握。
   media: []

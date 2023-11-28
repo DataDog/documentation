@@ -50,11 +50,20 @@ Amazon ECS Datadog インテグレーションを利用し、CloudWatch から E
 ### メトリクスの収集
 
 1. AWS インテグレーションの [ロールの委任設定][1] に関する手順に従います。
-2. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `ECS` が有効になっていることを確認します。
+2. Amazon ECS メトリクスを収集するため、[Datadog IAM ポリシー][2]で次のアクセス許可が設定されていることを確認します。ECS ポリシーの詳細については、AWS ドキュメントの [Amazon Elastic Container Service のアクション、リソース、条件キー][3]を参照してください。
+
+| AWS アクセス許可                   | 説明                                                   |
+| -------------------------------- | ------------------------------------------------------------- |
+| `ecs:ListClusters`               | 既存のクラスターのリストを返します。                          |
+| `ecs:ListContainerInstances`     | 指定されたクラスター内のコンテナインスタンスのリストを返します。 |
+| `ecs:ListServices`               | 指定したクラスターで実行されているサービスを一覧表示します。   |
+| `ecs:DescribeContainerInstances` | Amazon ECS コンテナインスタンスについて説明します。                     |
+
+3. [AWS インテグレーションページ][4]で、`Metric Collection` タブの下にある `ECS` が有効になっていることを確認します。
 
     {{< img src="integrations/amazon_ecs/aws_tile.png" alt="AWS ECS コンフィギュレーション" >}}
 
-メトリクスの収集が有効な場合、ECS メトリクスの詳細を提供する[ダッシュボード][3]をこのインテグレーションで利用できます。詳細は、[Datadog で ECS をモニタリング][4]をご覧ください。
+メトリクスの収集が有効な場合、ECS メトリクスの詳細を提供する[既定のダッシュボード][5]をこのインテグレーションで利用できます。詳細は、[Datadog で ECS をモニタリング][6]をご覧ください。
 
 ## 収集データ
 
@@ -64,7 +73,7 @@ Amazon ECS Datadog インテグレーションを利用し、CloudWatch から E
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-**注**: [AWS インテグレーションページ][2]の `Metric Collection` タブで `Collect custom metrics` を有効にすることで、プレフィックスに `ecs.containerinsights.*` を持つメトリクスを収集することができます。
+**注**: [AWS インテグレーションページ][4]の `Metric Collection` タブで `Collect custom metrics` を有効にすることで、プレフィックスに `ecs.containerinsights.*` を持つメトリクスを収集することができます。
 
 ### イベント
 
@@ -72,7 +81,7 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 {{< img src="integrations/amazon_ecs/aws_ecs_events.png" alt="AWS ECS イベント" >}}
 
-包含リストを削除し、Datadog Amazon ECS インテグレーションからすべてのイベントを取得できるようにするには、[Datadog のサポートチーム][6]までお問い合わせください。
+包含リストを削除し、Datadog Amazon ECS インテグレーションからすべてのイベントを取得できるようにするには、[Datadog のサポートチーム][8]までお問い合わせください。
 
 ### サービスのチェック
 {{< get-service-checks-from-git "amazon_ecs" >}}
@@ -80,12 +89,16 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+
+
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=automaticcloudformation#setup
-[2]: https://app.datadoghq.com/integrations/amazon-web-services
-[3]: https://app.datadoghq.com/screen/integration/82/aws-ecs
-[4]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/#get-comprehensive-visibility-with-datadog-dashboards
-[5]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ecs/amazon_ecs_metadata.csv
-[6]: https://docs.datadoghq.com/ja/help/
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ecs/service_checks.json
+[2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#datadog-aws-iam-policy
+[3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonelasticcontainerservice.html
+[4]: https://app.datadoghq.com/integrations/amazon-web-services
+[5]: https://app.datadoghq.com/screen/integration/82/aws-ecs
+[6]: https://www.datadoghq.com/blog/monitoring-ecs-with-datadog/#get-comprehensive-visibility-with-datadog-dashboards
+[7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ecs/amazon_ecs_metadata.csv
+[8]: https://docs.datadoghq.com/ja/help/
+[9]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_ecs/service_checks.json

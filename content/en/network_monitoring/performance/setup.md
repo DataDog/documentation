@@ -48,7 +48,7 @@ Data collection is done using eBPF, so Datadog minimally requires platforms that
 
 #### Windows OS
 
-Data collection is done using a device driver. Support is available as of Datadog Agent version 7.27.1, for Windows versions 2012 R2 (and equivalent desktop OSs, including Windows 10) and up.
+Data collection is done using a network kernel device driver. Support is available as of Datadog Agent version 7.27.1, for Windows versions 2012 R2 (and equivalent desktop OSs, including Windows 10) and up.
 
 #### macOS
 
@@ -56,7 +56,9 @@ Datadog Network Performance Monitoring does not support macOS platforms.
 
 ### Containers
 
-NPM helps you visualize the architecture and performance of your containerized and orchestrated environments, with support for [Docker][5], [Kubernetes][6], [ECS][7], and other container technologies. Datadog’s container integrations enable you to aggregate traffic by meaningful entities--such as containers, tasks, pods, clusters, and deployments--with out-of-the-box tags such as `container_name`, `task_name`, and `kube_service`.
+NPM helps you visualize the architecture and performance of your containerized and orchestrated environments, with support for [Docker][5], [Kubernetes][6], [ECS][7], and other container technologies. Datadog's container integrations enable you to aggregate traffic by meaningful entities--such as containers, tasks, pods, clusters, and deployments--with out-of-the-box tags such as `container_name`, `task_name`, and `kube_service`.
+
+NPM is not supported for Google Kubernetes Engine (GKE) Autopilot.
 
 ### Network routing tools
 
@@ -90,7 +92,7 @@ Network Performance Monitoring supports use of the following provisioning system
 
 ## Setup
 
-Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value. 
+Given this tool's focus and strength is in analyzing traffic _between_ network endpoints and mapping network dependencies, it is recommended to install it on a meaningful subset of your infrastructure and a **_minimum of 2 hosts_** to maximize value.
 
 {{< tabs >}}
 {{% tab "Agent (Linux)" %}}
@@ -102,7 +104,7 @@ To enable network performance monitoring with the Datadog Agent, use the followi
 2. Copy the system-probe example configuration:
 
     ```shell
-    sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
+    sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
     ```
 
 3. Edit `/etc/datadog-agent/system-probe.yaml` to set the enable flag to `true`:
@@ -171,7 +173,7 @@ If these utilities do not exist in your distribution, follow the same procedure 
 
 
 [1]: /infrastructure/process/?tab=linuxwindows#installation
-[2]: /agent/guide/agent-commands/#restart-the-agent
+[2]: /agent/configuration/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 {{% /tab %}}
 {{% tab "Agent (Windows)" %}}
@@ -182,7 +184,7 @@ To enable Network Performance Monitoring for Windows hosts:
 
 1. Install the [Datadog Agent][1] (version 7.27.1 or above) with the network driver component enabled.
 
-   During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the agent installation through the GUI.
+   [DEPRECATED] _(version 7.44 or below)_ During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the Agent installation through the GUI.
 
 1. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 
@@ -200,11 +202,11 @@ To enable Network Performance Monitoring for Windows hosts:
     ```shell
     net /y stop datadogagent && net start datadogagent
     ```
-**Note**: Network Performance Monitoring monitors Windows hosts only, and not Windows containers. 
+**Note**: Network Performance Monitoring monitors Windows hosts only, and not Windows containers.
 
 
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
-[2]: /agent/guide/agent-commands/#restart-the-agent
+[2]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -352,22 +354,21 @@ If you already have the [Agent running with a manifest][4]:
 [4]: /agent/kubernetes/
 {{% /tab %}}
 {{% tab "Operator" %}}
-<div class="alert alert-warning">The Datadog Operator is in public beta. If you have any feedback or questions, contact <a href="/help">Datadog support</a>.</div>
+<div class="alert alert-warning">The Datadog Operator is Generally Available with the `1.0.0` version, and it reconciles the version `v2alpha1` of the DatadogAgent Custom Resource. </div>
 
 [The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
 
 To enable Network Performance Monitoring in Operator, use the following configuration:
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: placeholder
   namespace: placeholder
 spec:
-  # (...)
   features:
-    networkMonitoring:
+    npm:
       enabled: true
 ```
 
@@ -378,10 +379,10 @@ spec:
 To enable Network Performance Monitoring in Docker, use the following configuration when starting the container Agent:
 
 ```shell
-$ docker run --cgroupns host \
+docker run --cgroupns host \
 --pid host \
 -e DD_API_KEY="<DATADOG_API_KEY>" \
--e DD_SYSTEM_PROBE_ENABLED=true \
+-e DD_SYSTEM_PROBE_NETWORK_ENABLED=true \
 -e DD_PROCESS_AGENT_ENABLED=true \
 -v /var/run/docker.sock:/var/run/docker.sock:ro \
 -v /proc/:/host/proc/:ro \
@@ -410,9 +411,9 @@ services:
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_ENABLED: 'true'
-       DD_PROCESS_AGENT_ENABLED: 'true'
-       DD_API_KEY: '<DATADOG_API_KEY>'
+       DD_SYSTEM_PROBE_NETWORK_ENABLED=true
+       DD_PROCESS_AGENT_ENABLED=true
+       DD_API_KEY=<DATADOG_API_KEY>
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock:ro
     - /proc/:/host/proc/:ro
@@ -434,17 +435,32 @@ services:
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "ECS" %}}
-To set up on AWS ECS, see the [AWS ECS][1] documentation page.
+To set up on Amazon ECS, see the [Amazon ECS][1] documentation page.
 
 
 [1]: /agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
 {{% /tab %}}
 {{< /tabs >}}
 
+{{< site-region region="us,us3,us5,eu" >}}
+### Enhanced resolution
+
+Optionally, enable resource collection for cloud integrations to allow Network Performance Monitoring to discover cloud-managed entities.
+- Install the [Azure integration][1] for visibility into Azure load balancers and application gateways.
+- Install the [AWS Integration][2] for visibility into AWS Load Balancer. **you must enable ENI and EC2 metric collection**
+
+For additional information around these capabilities, see [Cloud service enhanced resolution][3].
+
+  [1]: /integrations/azure
+  [2]: /integrations/amazon_web_services/#resource-collection
+  [3]: /network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
+
+{{< /site-region >}}
+
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/network_monitoring/dns/#setup
 [3]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
 [4]: /network_monitoring/dns/

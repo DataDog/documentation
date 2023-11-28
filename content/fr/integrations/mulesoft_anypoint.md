@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Intégrations du Marketplace
 app_id: ioconnect-mulesoft-anypoint
 app_uuid: fdb057e7-9be6-459f-ab3e-e745766e9158
 assets:
@@ -36,17 +38,9 @@ author:
   support_email: support_ddp@ioconnectservices.com
   vendor_id: ioconnect
 categories:
-  - marketplace
-  - cloud
-  - collaboration
-classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Marketplace
-  - Category::Cloud
-  - Category::Collaboration
-  - Offering::Integration
+- cloud
+- marketplace
+- network
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -62,50 +56,64 @@ manifest_version: 2.0.0
 name: mulesoft_anypoint
 oauth: {}
 pricing:
-  - billing_type: tag_count
-    includes_assets: true
-    metric: datadog.marketplace.ioconnect.mulesoft_anypoint
-    product_id: mulesoft-anypoint
-    short_description: Prix unitaire par Production vCore
-    tag: vcoreid
-    unit_label: production vCore
-    unit_price: 200
-public_title: Intégration Mule®
-short_description: Recueillez des métriques à partir de vos produits MuleSoft et envoyez-les à Datadog
+- billing_type: tag_count
+  includes_assets: true
+  metric: datadog.marketplace.ioconnect.mulesoft_anypoint
+  product_id: mulesoft-anypoint
+  short_description: Prix unitaire par Production vCore
+  tag: vcoreid
+  unit_label: production vCore
+  unit_price: 200
+public_title: Mule®
+short_description: Recueillez des métriques à partir de vos produits MuleSoft et envoyez-les
+  à Datadog
 supported_os:
-  - linux
-  - mac os
-  - windows
+- linux
+- windows
+- macos
 tile:
   changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Marketplace
+  - Category::Network
+  - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
-  description: Recueillez des métriques à partir de vos produits MuleSoft et envoyez-les à Datadog
+  description: Recueillez des métriques à partir de vos produits MuleSoft et envoyez-les
+    à Datadog
   media:
-    - caption: 'Dashboard Operations: APIs'
-      image_url: images/dmi_ops_apis.png
-      media_type: image
-    - caption: 'Dashboard Operations: Infrastructure'
-      image_url: images/dmi_ops_infra.png
-      media_type: image
-    - caption: 'Dashboard Operations: Resources allocation and usage'
-      image_url: images/dmi_ops_allocation.png
-      media_type: image
-    - caption: 'Dashboard Development: Optimizations'
-      image_url: images/dmi_dev_optimization.png
-      media_type: image
-    - caption: 'Dashboard Executives: Cost optimization'
-      image_url: images/dmi_exec_cost_optimization.png
-      media_type: image
-    - caption: "Connecteur Datadog pour Mule\_4"
-      image_url: images/dmi_mule_connector.png
-      media_type: image
-    - caption: APM Datadog
-      image_url: images/dmi_apm_traces.png
-      media_type: image
+  - caption: 'Dashboard Operations: APIs'
+    image_url: images/dmi_ops_apis.png
+    media_type: image
+  - caption: 'Dashboard Operations: Infrastructure'
+    image_url: images/dmi_ops_infra.png
+    media_type: image
+  - caption: 'Dashboard Operations: Resources allocation and usage'
+    image_url: images/dmi_ops_allocation.png
+    media_type: image
+  - caption: 'Dashboard Development: Optimizations'
+    image_url: images/dmi_dev_optimization.png
+    media_type: image
+  - caption: 'Dashboard Executives: Cost optimization'
+    image_url: images/dmi_exec_cost_optimization.png
+    media_type: image
+  - caption: Connecteur Datadog pour Mule 4
+    image_url: images/dmi_mule_connector.png
+    media_type: image
+  - caption: APM Datadog
+    image_url: images/dmi_apm_traces.png
+    media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Intégration Mule®
+  title: Mule®
+  uninstallation: README.md#Uninstallation
 ---
+
+
+
 ## Présentation
 
 L'intégration Datadog/Mule® utilise l'Agent pour recueillir des métriques à partir de vos produits MuleSoft et les envoyer à Datadog.
@@ -188,10 +196,6 @@ L'intégration Datadog/Mule® n'inclut aucun événement.
 
 Pour toute demande d'assistance, contactez l'assistance IO Connect Services à l'adresse [support_ddp@ioconnectservices.com][9].
 
----
-
-Cette application est disponible sur le Marketplace et développée par un partenaire de Datadog. [Cliquez ici][11] pour l'acheter.
-
 ## À propos de IO Connect Services
 
 IO Connect Services est une société spécialisée dans les services de conseil en technologies de l'information. Nos domaines d'expertise comprennent les technologies cloud, l'intégration système, le big data, la cybersécurité et le génie logiciel. Nous assurons nos services dans toute l'Amérique du Nord, l'Europe et l'Amérique latine. Notre siège social est situé à New York, et nous avons également des bureaux à Guadalajara, au Mexique, et à Madrid, en Espagne.
@@ -208,4 +212,6 @@ Rendez-vous sur [https://www.ioconnectservices.com][10]
 [8]: https://docs.datadoghq.com/fr/developers/guide/custom-python-package/?tab=linux
 [9]: mailto:support_ddp@ioconnectservices.com
 [10]: https://www.ioconnectservices.com
-[11]: https://app.datadoghq.com/marketplace/app/ioconnect-mulesoft-anypoint/pricing
+
+---
+Cette application est disponible sur le Marketplace et développée par un partenaire technologique de Datadog. <a href="https://app.datadoghq.com/marketplace/app/ioconnect-mulesoft-anypoint" target="_blank">Cliquez ici</a> pour l'acheter.

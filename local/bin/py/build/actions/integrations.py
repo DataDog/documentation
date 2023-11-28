@@ -6,6 +6,9 @@ import json
 import linecache
 import re
 import shutil
+import sys
+from collections import defaultdict
+
 import yaml
 import markdown2
 
@@ -23,7 +26,25 @@ from os.path import (
 )
 
 from actions.format_link import format_link_file
+from actions.comment_conversion import replace_comments
 
+try:
+    from assetlib.classifiers import get_all_classifier_names, get_non_deprecated_classifiers
+    CLASSIFIER_TAGS = get_all_classifier_names()
+except ImportError:
+    CLASSIFIER_TAGS = []
+    if getenv("CI_COMMIT_REF_NAME"):
+        print('\x1b[31mERROR\x1b[0m: CLASSIFIER_TAGS validation unavailable, Aborting')
+        sys.exit(1)
+finally:
+    if not CLASSIFIER_TAGS:
+        print(f'\x1b[33mWARNING\x1b[0m: CLASSIFIER_TAGS empty - continuing without validation')
+    else:
+        file_content = ['| Name | Description |\n| --- | --- |\n']
+        with open('layouts/shortcodes/integration_categories.md', 'w') as file:
+            for tag in get_non_deprecated_classifiers():
+                file_content.append(f'| {tag["name"]} | {tag["description"]} |\n')
+            file.write(''.join(file_content) + '\n')
 
 class Integrations:
     def __init__(self, source_file, temp_directory, integration_mutations):
@@ -65,27 +86,6 @@ class Integrations:
         self.regex_h1_replace = re.compile(
             r"^(#{1})(?!#)(.*)", re.MULTILINE
         )
-        self.regex_tabs_open = re.compile(
-            r"<!-- xxx tabs xxx -->", re.MULTILINE
-        )
-        self.regex_tabs_close = re.compile(
-            r"<!-- xxz tabs xxx -->", re.MULTILINE
-        )
-        self.regex_tab_open = re.compile(
-            r"<!-- xxx tab", re.MULTILINE
-        )
-        self.regex_tab_close = re.compile(
-            r"<!-- xxz tab xxx -->", re.MULTILINE
-        )
-        self.regex_tab_end = re.compile(
-            r" xxx -->", re.MULTILINE
-        )
-        self.regex_partial_open = re.compile(
-            r"<!-- partial", re.MULTILINE
-        )
-        self.regex_partial_close = re.compile(
-            r"partial -->", re.MULTILINE
-        )
         self.regex_metrics = re.compile(
             r"(#{3} Metrics\n)([\s\S]*this integration.|[\s\S]*this check.)([\s\S]*)(#{3} Events\n)",
             re.DOTALL,
@@ -100,6 +100,9 @@ class Integrations:
         self.regex_source = re.compile(
             r"(\S*FROM_DISPLAY_NAME\s*=\s*\{)(.*?)\}",
             re.DOTALL,
+        )
+        self.regex_site_region = re.compile(
+            r"\{\{< ([\/]?site-region.*) >\}\}", re.MULTILINE
         )
         self.datafile_json = []
         self.integration_mutations = integration_mutations
@@ -238,7 +241,7 @@ class Integrations:
                 self.process_service_checks(file_name)
 
             elif file_name.endswith(".md"):
-                self.process_integration_readme(file_name, marketplace)
+                self.process_integration_readme(file_name, marketplace, content)
 
             elif file_name.endswith((".png", ".svg", ".jpg", ".jpeg", ".gif")) and marketplace:
                 self.process_images(file_name)
@@ -366,6 +369,12 @@ class Integrations:
         new_file_name = "{}{}.yaml".format(
             self.data_integrations_dir, key_name
         )
+        # if md already exists likely collision
+        if exists("{}{}.md".format(self.content_integrations_dir, key_name)):
+            collision_name = self.get_collision_alternate_name(file_name)
+            new_file_name = "{}{}.yaml".format(
+                self.data_integrations_dir, collision_name
+            )
         self.metric_csv_to_yaml(key_name, file_name, new_file_name)
 
     def process_integration_manifest(self, file_name):
@@ -424,10 +433,16 @@ class Integrations:
             key_name = basename(
                 dirname(normpath(file_name))
             )
-
         new_file_name = "{}{}.json".format(
             self.data_service_checks_dir, key_name
         )
+
+        # if md already exists likely collision
+        if exists("{}{}.md".format(self.content_integrations_dir, key_name)):
+            collision_name = self.get_collision_alternate_name(file_name)
+            new_file_name = "{}{}.json".format(
+                self.data_service_checks_dir, collision_name
+            )
 
         shutil.copy(
             file_name,
@@ -456,7 +471,7 @@ class Integrations:
 
             new_file_name = "{}aws.json".format(self.data_npm_dir)
 
-        elif file_name.endswith("gcp_services.go"):
+        elif file_name.endswith("gcp_services.go") or file_name.endswith("azure_services.go"):
 
             with open(file_name) as fh:
 
@@ -467,7 +482,10 @@ class Integrations:
                         integration = line.split('"')[3]
                         dict_npm[integration] = {"name": integration}
 
-            new_file_name = "{}gcp.json".format(self.data_npm_dir)
+            if file_name.endswith("gcp_services.go"):
+                new_file_name = "{}gcp.json".format(self.data_npm_dir)
+            elif file_name.endswith("azure_services.go"):
+                new_file_name = "{}azure.json".format(self.data_npm_dir)
 
         if new_file_name != "":
             with open(
@@ -603,11 +621,27 @@ class Integrations:
         The build should fail if we found any sections that should not be displayed in Docs.
         Current exclude list: ["Setup", "Pricing", "Tiered Pricing"]
         """
-        setup_header_markdown_regex = r"(#{1,6})(\s*)(Setup|Pricing|Tiered Pricing)"
+        setup_header_markdown_regex = r"(#{1,6})(\s*)(Setup|Pricing|Tiered Pricing|Uninstallation)"
         matches = re.search(setup_header_markdown_regex, markdown_string, re.MULTILINE | re.IGNORECASE)
         return matches == None
 
-    def process_integration_readme(self, file_name, marketplace=False):
+    def get_collision_alternate_name(self, file_name):
+        dir_path = dirname(normpath(file_name))
+        dir_name = basename(dir_path)
+        dir_path = dir_path.replace('/assets', '') if dir_path.endswith('assets') else dir_path
+        collision_name = dir_name
+        manifest_json_path = f'{dir_path}/manifest.json'
+        manifest_json = {}
+
+        if exists(manifest_json_path):
+            with open(manifest_json_path) as fp:
+                manifest_json = json.load(fp)
+                integration_id = manifest_json.get("integration_id", "") or manifest_json.get('app_id', "") or ""
+                collision_name = integration_id.replace('-', '_') or manifest_json.get("name", "") or dir_name
+
+        return collision_name
+
+    def process_integration_readme(self, file_name, marketplace=False, content=None):
         """
         Take a single README.md file and
         1. extract the first h1, if this isn't a merge item
@@ -619,6 +653,8 @@ class Integrations:
         7. write out file to content/integrations with filename changed to integrationname.md
         :param file_name: path to a readme md file
         """
+        if content is None:
+            content = {}
         no_integration_issue = True
         tab_logic = False
         metrics = glob.glob(
@@ -680,12 +716,22 @@ class Integrations:
         ## Formating all link as reference to avoid any corner cases
         ## Replace image filenames in markdown for marketplace iterations
         result = ''
-        if not marketplace:
+        display_on_public = True
+        source_comment = f"<!--  SOURCED FROM https://github.com/DataDog/{content['repo_name']} -->\n"
+
+        # Don't try to build markdown if display_on_public_website is False
+        if manifest_json and "/dogweb/" not in file_name:
+            if not manifest_json["display_on_public_website"]:
+                display_on_public = False
+        
+        if not marketplace and display_on_public:
             try:
-                result = format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
+                result = source_comment + format_link_file(file_name,regex_skip_sections_start,regex_skip_sections_end)
             except Exception as e:
                 print(e)
-        else:
+                print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
+                sys.exit(1)
+        elif marketplace:
             with open(file_name, 'r+') as f:
                 markdown_string = f.read()
                 # Add static copy with link to the in-app tile, link converters called later will ensure the `site` flag is respected
@@ -695,13 +741,16 @@ class Integrations:
                 markdown_string = f"{markdown_string}\n{purchase_copy}"
                 markdown_with_replaced_images = self.replace_image_src(markdown_string, basename(dirname(file_name)))
                 markdown_setup_removed = self.remove_markdown_section(markdown_with_replaced_images, '## Setup')
-                updated_markdown = self.remove_h3_markdown_section(markdown_setup_removed, '### Pricing')
+                markdown_uninstall_removed = self.remove_markdown_section(markdown_setup_removed, '## Uninstallation')
+                updated_markdown = self.remove_h3_markdown_section(markdown_uninstall_removed, '### Pricing')
                 is_marketplace_integration_markdown_valid = self.validate_marketplace_integration_markdown(updated_markdown)
 
                 if not is_marketplace_integration_markdown_valid:
                     raise Exception('Potential setup or pricing information included in Marketplace Integration markdown.  Check {} for Setup or Pricing sections.'.format(file_name))
                 else:
-                    result = updated_markdown
+                    result = source_comment + updated_markdown
+        else:
+            print(f'Skipping markdown for: {file_name}')            
 
         ## Check if there is a integration tab logic in the integration file:
         if "<!-- xxx tabs xxx -->" in result:
@@ -720,44 +769,10 @@ class Integrations:
             result = re.sub(
                 self.regex_h1, "", result, 1
             )
-            result = re.sub(
-                self.regex_tabs_open, "{{< tabs >}}", result, 0
-            )
-            result = re.sub(
-                self.regex_tabs_close, "{{< /tabs >}}", result, 0
-            )
-            result = re.sub(
-                self.regex_tab_open, "{{% tab", result, 0
-            )
-            result = re.sub(
-                self.regex_tab_close, "{{% /tab %}}", result, 0
-            )
-            result = re.sub(
-                self.regex_tab_end, " %}}", result, 0
-            )
-            result = re.sub(
-                self.regex_partial_open, "", result, 0
-            )
-            result = re.sub(
-                self.regex_partial_close, "", result, 0
-            )
-
-        if metrics_exist:
-            result = re.sub(
-                self.regex_metrics,
-                r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'
-                % format(title),
-                result,
-                0,
-            )
-        if service_check_exist:
-            result = re.sub(
-                self.regex_service_check,
-                r'\1{{< get-service-checks-from-git "%s" >}}\n\3\4'
-                % format(title),
-                result,
-                0,
-            )
+            result = replace_comments(result)
+            # result = re.sub(
+            #     self.regex_site_region, r"{{% \1 %}}", result, 0
+            # )
 
         # if __init__.py exists lets grab the integration id
         integration_id = manifest_json.get("integration_id", "") or ""
@@ -781,10 +796,32 @@ class Integrations:
                 if matches:
                     integration_version = matches.group(1)
 
+        # determine new name is collision
+        if exist_collision:
+            collision_name = self.get_collision_alternate_name(file_name)
+            print(f"{file_name} {collision_name}")
+
+        if metrics_exist:
+            result = re.sub(
+                self.regex_metrics,
+                r'\1{{< get-metrics-from-git "%s" >}}\n\3\4'
+                % format(title if not exist_collision else collision_name),
+                result,
+                0,
+            )
+        if service_check_exist:
+            result = re.sub(
+                self.regex_service_check,
+                r'\1{{< get-service-checks-from-git "%s" >}}\n\3\4'
+                % format(title if not exist_collision else collision_name),
+                result,
+                0,
+            )
+
         if not exist_already and no_integration_issue:
+            out_name = self.content_integrations_dir + new_file_name
             # let's only write out file.md if it's going to be public
             if manifest_json.get("is_public", False):
-                out_name = self.content_integrations_dir + new_file_name
 
                 # let's make relative app links to integrations tile absolute
                 regex = r"(?<!https://app.datadoghq.com)(/account/settings#integrations[^.)\s]*)"
@@ -795,31 +832,40 @@ class Integrations:
                 # if the same integration exists in multiple locations try name md file differently
                 # integration_id.md -> name.md -> original_collision_name.md
                 if exist_collision:
-                    f_name = integration_id.replace('-', '_') or manifest_json.get("name", "") or new_file_name
-                    manifest_json["name"] = f_name
-                    f_name = f_name if f_name.endswith('.md') else f_name + ".md"
-                    out_name = self.content_integrations_dir + f_name
+                    manifest_json["name"] = collision_name
+                    collision_name = collision_name if collision_name.endswith('.md') else collision_name + ".md"
+                    out_name = self.content_integrations_dir + collision_name
                     print("\x1b[33mWARNING\x1b[0m: Collision, duplicate integration {} trying as {}".format(
-                        new_file_name, f_name))
+                        new_file_name, collision_name))
                     result = self.add_integration_frontmatter(
-                        f_name, result, dependencies, integration_id, integration_version, manifest_json
+                        collision_name, result, dependencies, integration_id, integration_version, manifest_json, extra_fm=content.get("options", {}).get("front_matters", {})
                     )
                 else:
                     result = self.add_integration_frontmatter(
-                        new_file_name, result, dependencies, integration_id, integration_version
+                        new_file_name, result, dependencies, integration_id, integration_version, extra_fm=content.get("options", {}).get("front_matters", {})
                     )
 
+                # write to content file
                 with open(out_name, "w", ) as out:
                     out.write(result)
 
                 ## Reformating all links now that all processing is done
                 if tab_logic:
-                    final_text = format_link_file(out_name, regex_skip_sections_start, regex_skip_sections_end)
-                    with open(out_name, 'w') as final_file:
-                        final_file.write(final_text)
+                    try:
+                        final_text = format_link_file(out_name, regex_skip_sections_start, regex_skip_sections_end)
+                        with open(out_name, 'w') as final_file:
+                            final_file.write(final_text)
+                    except Exception as e:
+                        print(e)
+                        print('An error occurred formatting markdown links from integration readme file(s), exiting the build now...')
+                        sys.exit(1)
+            # else:
+            #     if exists(out_name):
+            #         print(f"removing {integration_name} due to is_public/display_on_public_websites flag, {out_name}")
+            #         remove(out_name)
 
     def add_integration_frontmatter(
-        self, file_name, content, dependencies=[], integration_id="", integration_version="", manifest_json=None
+        self, file_name, content, dependencies=[], integration_id="", integration_version="", manifest_json=None, extra_fm=None
     ):
         """
         Takes an integration README.md and injects front matter yaml based on manifest.json data of the same integration
@@ -827,6 +873,8 @@ class Integrations:
         :param content: string of markdown content
         :return: formatted string
         """
+        if extra_fm is None:
+            extra_fm = {}
         fm = {}
         template = "---\n{front_matter}\n---\n\n{content}\n"
         if file_name not in self.initial_integration_files:
@@ -857,6 +905,20 @@ class Integrations:
                 item["draft"] = not item.get("is_public", False)
                 item["integration_id"] = item.get("integration_id", integration_id)
                 item["integration_version"] = item.get("integration_version", integration_version)
+                # remove aliases that point to the page they're located on
+                # get the current slug from the doc_link
+                if item.get('name'):
+                    current_slug = 'integrations/{}'.format(item.get('name'))
+                # If there are aliases and the current slug value, check to see if they match and if they do, remove it
+                if (item.get('aliases')) and current_slug:
+                    # loop over the aliases
+                    for single_alias in item['aliases']:
+                        # strip any tailing and leading / and see if the alias matches the page slug
+                        if current_slug == single_alias.strip('/'):
+                            # add the alias from the list
+                            item['aliases'].remove(single_alias)
+                            print(f"\033[94mALIAS REMOVAL\x1b[0m: Removed redundant alias: {single_alias}")
+                item.update(extra_fm)
                 fm = yaml.safe_dump(
                     item, width=float("inf"), default_style='"', default_flow_style=False, allow_unicode=True
                 ).rstrip()
@@ -864,7 +926,7 @@ class Integrations:
                 fm = fm.replace('!!bool "false"', 'false')
                 fm = fm.replace('!!bool "true"', 'true')
             else:
-                fm = yaml.safe_dump({"kind": "integration"}, width=float("inf"), default_style='"', default_flow_style=False,
+                fm = yaml.safe_dump({"kind": "integration", **extra_fm}, width=float("inf"), default_style='"', default_flow_style=False,
                                     allow_unicode=True).rstrip()
         return template.format(
             front_matter=fm, content=content
@@ -907,6 +969,23 @@ class Integrations:
 
         return dependencies
 
+    def validate_classifier(self, key, value):
+        """
+        creates a structure like this so we can easily lookup
+        {
+            "category": ["os system", "metrics"],
+            "supported os": []
+        }
+        @param key: classifier key e.g category
+        @param value: classifier value e.g marketplace
+        """
+        # build a lookup
+        data = defaultdict(list)
+        for tag in CLASSIFIER_TAGS:
+            tag_key, tag_val = tag.lower().split("::")
+            data[tag_key].append(tag_val)
+        return value in data[key]
+
     def process_manifest(self, manifest_json, name):
         """ Takes manifest and converts v2 and above to v1 expected formats for now """
         manifest_version = (manifest_json.get("manifest_version", '1.0.0') or '1.0.0').split('.')
@@ -916,19 +995,26 @@ class Integrations:
             manifest_json["integration_id"] = manifest_json.get("app_id", "")
             categories = []
             supported_os = []
-            classifier_tags = manifest_json.get("tile", {}).get("classifier_tags", [])
-            for tag in classifier_tags:
+            manifest_classifier_tags = manifest_json.get("tile", {}).get("classifier_tags", [])
+            skipped_tags = []
+            for tag in manifest_classifier_tags:
                 # in some cases tag was null/None
                 if tag:
-                    key, value = tag.split("::")
-                    if key.lower() == "category":
-                        categories.append(value.lower())
-                    if key.lower() == "supported os":
-                        supported_os.append(value.lower())
+                    key, value = tag.lower().split("::")
+                    if key == "category":
+                        # if it validates or we have no classifiers (e.g
+                        if self.validate_classifier(key, value) or not CLASSIFIER_TAGS:
+                            categories.append(value)
+                        else:
+                            skipped_tags.append(value)
+                    if key == "supported os":
+                        supported_os.append(value)
             manifest_json["categories"] = categories
             manifest_json["supported_os"] = supported_os
             manifest_json["public_title"] = manifest_json.get("tile", {}).get("title", '')
             manifest_json["is_public"] = manifest_json.get("display_on_public_website", False)
             manifest_json["short_description"] = manifest_json.get("tile", {}).get("description", '')
             manifest_json["name"] = manifest_json.get("name", name)
+            if skipped_tags:
+                print(f'\x1b[33mWARNING\x1b[0m: Categories skipped on integration {manifest_json["name"]}, {skipped_tags}')
         return manifest_json

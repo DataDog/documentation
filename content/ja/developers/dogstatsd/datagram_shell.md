@@ -27,11 +27,11 @@ title: データグラム形式とシェルの使用方法
 
 | パラメーター                           | 必須 | 説明                                                                                                                                                    |
 | ----------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<METRIC_NAME>`                     | 〇      | ASCII 英数字、アンダースコア、およびピリオドのみを含む文字列。[メトリクス命名ポリシー][1]を参照してください。                                                  |
+| `<METRIC_NAME>`                     | 〇      | ASCII 英数字、アンダースコア、およびピリオドのみを含む文字列。[メトリクス命名ポリシー][101]を参照してください。                                                  |
 | `<VALUE>`                           | 〇      | 整数または浮動小数点数。                                                                                                                                           |
-| `<TYPE>`                            | 〇      | COUNT の場合は `c`、GAUGE の場合は `g`、TIMER の場合は `ms`、HISTOGRAM の場合は `h`、SET の場合は `s`、DISTRIBUTION の場合は `d`。詳細は[メトリクスタイプ][2]を参照してください。                    |
+| `<TYPE>`                            | 〇      | COUNT の場合は `c`、GAUGE の場合は `g`、TIMER の場合は `ms`、HISTOGRAM の場合は `h`、SET の場合は `s`、DISTRIBUTION の場合は `d`。詳細は[メトリクスタイプ][102]を参照してください。                    |
 | `<SAMPLE_RATE>`                     | ✕       | `0` から `1` までの浮動小数点数。COUNT、HISTOGRAM、DISTRIBUTION、TIMER メトリクスでのみ機能します。デフォルトは `1` で、100% の時間をサンプリングします。 |
-| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | ✕       | 文字列のカンマ区切りリスト。キー/値タグにはコロンを使用します（`env:prod`）。タグの定義に関するガイダンスについては、[タグの概要][3]を参照してください。              |
+| `<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | ✕       | 文字列のカンマ区切りリスト。キー/値タグにはコロンを使用します（`env:prod`）。タグの定義に関するガイダンスについては、[タグの概要][103]を参照してください。              |
 
 以下に、データグラムの例を示します。
 
@@ -70,13 +70,29 @@ Datadog Agent は、コンテナ ID の値を使用して、追加のコンテ�
 
 - `page.views:1|g|#env:dev|c:83c0a99c0a54c0c187f461c7980e9b57f3f6a8b0c918c8d93df19a9de6f3fe1d`: Datadog Agent は、`image_name` や `image_tag` などのコンテナタグを `page.views` メトリクスに追加します。
 
-コンテナタグについては、[Kubernetes][4] と [Docker][5] のタグ付けのドキュメントをご覧ください。
+コンテナタグについては、[Kubernetes][104] と [Docker][105] のタグ付けのドキュメントをご覧ください。
 
-[1]: /ja/metrics/#naming-metrics
-[2]: /ja/metrics/types/
-[3]: /ja/getting_started/tagging/
-[4]: /ja/agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
-[5]: /ja/agent/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
+### DogStatsD プロトコル v1.3
+
+Agent v6.40.0+ および v7.40.0+ は、オプションで Unix タイムスタンプフィールドをサポートしています。
+
+このフィールドを指定すると、Datadog Agent は、タグでメトリクスをリッチ化する以外、メトリクスの処理を行いません (集計を行いません)。これは、アプリケーションで既にメトリクスを集計しており、余分な処理なしで Datadog に送信したい場合に便利です。
+
+Unix のタイムスタンプは、過去の有効な正の数である必要があります。GAUGE と COUNT メトリクスのみサポートされています。
+
+値は Unix タイムスタンプ (UTC) であり、プレフィックスとして `T` を付ける必要があります。例:
+
+`<METRIC_NAME>:<VALUE>|<TYPE>|#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>|T<METRIC_TIMESTAMP>`
+
+### データグラムの例
+
+- `page.views:15|c|#env:dev|T1656581400`: 2022 年 6 月 30 日午前 9 時 30 分 (UTC) に 15 ページビューが発生したことを示す COUNT
+
+[101]: /ja/metrics/#metric-name
+[102]: /ja/metrics/types/
+[103]: /ja/getting_started/tagging/
+[104]: /ja/containers/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
+[105]: /ja/containers/docker/tag/?tab=containerizedagent#out-of-the-box-tagging
 {{% /tab %}}
 {{% tab "Events" %}}
 
@@ -120,7 +136,7 @@ _e{21,42}:An exception occurred|Cannot parse JSON request:\\n{"foo: "bar"}|p:low
 | `d:<TIMESTAMP>`                      | ✕       | チェックにタイムスタンプを追加します。デフォルトは、現在の Unix Epoch タイムスタンプです。                                                          |
 | `h:<HOSTNAME>`                       | ✕       | イベントにホスト名を追加します（デフォルトはありません）。                                                                                               |
 | `#<TAG_KEY_1>:<TAG_VALUE_1>,<TAG_2>` | ✕       | イベントのタグを設定します。カンマで区切られた文字列のリスト（デフォルトはありません）。                                                           |
-| `m:<SERVICE_CHECK_MESSAGE>`          | ✕       | サービスチェックの現在の状態を説明するメッセージ。このフィールドは、メタデータフィールドの最後に置く必要があります（デフォルトはありません）。 |
+| `m:<SERVICE_CHECK_MESSAGE>`          | ✕       | サービスチェックの現在の状態を説明するメッセージ。このフィールドは、メタデータフィールドの最後に置く必要があります (デフォルトはありません)。 |
 
 以下に、データグラムの例を示します。
 

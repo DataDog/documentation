@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: zebrium-zebrium
 app_uuid: 3e2a6d39-2057-4cb5-bc0e-5610a43afaf7
 assets: {}
@@ -11,6 +13,7 @@ author:
 categories:
 - notification
 - 自動化
+- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -38,16 +41,17 @@ public_title: Zebrium Root Cause as a Service
 short_description: Zebrium は、問題の根本原因をダッシュボードに直接表示します
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Notification
   - Category::Automation
+  - Category::Marketplace
   - Offering::Software License
   configuration: README.md#Setup
   description: Zebrium は、問題の根本原因をダッシュボードに直接表示します
@@ -68,6 +72,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Zebrium Root Cause as a Service
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -83,12 +88,21 @@ Zebrium の使用方法は簡単です。トラブルシューティングを行
 Zebrium のお客様になると、Zebrium と Datadog の 2 点のインテグレーションを使い始めることができます。1) カスタムダッシュボードウィジェットを持つ Zebrium Datadog アプリと、2) Zebrium からイベントやメトリクスを送信するデータインテグレーションです。インストールは、[インテグレーションページ][4]から Zebrium を検索してください。
 
 ## サポート
-製品に関するお問い合わせや価格に関するご質問は [Zebrium サポート][2]にお問い合わせください。
+
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Zebrium にお問い合わせください。
+
+- メール: [support@zebrium.com][2]
+
+### その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog と Zebrium で根本原因を迅速に発見][5]
 
 [1]: https://www.zebrium.com
 [2]: mailto:support@zebrium.com
 [3]: https://cloud.zebrium.com
-[4]: https://app.datadoghq.com/account/settings
-
+[4]: https://app.datadoghq.com/integrations
+[5]: https://www.datadoghq.com/blog/find-the-root-cause-faster-with-zebrium/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/zebrium-zebrium" target="_blank">こちらをクリック</a>してください。

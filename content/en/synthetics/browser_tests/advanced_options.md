@@ -6,6 +6,9 @@ aliases:
   - /synthetics/guide/browser-tests-switch-tabs/
   - /synthetics/guide/browser-test-self-maintenance/
 further_reading:
+- link: "https://www.datadoghq.com/blog/browser-tests/"
+  tag: "Blog"
+  text: "User experience monitoring with Synthetic browser tests"
 - link: "/synthetics/browser_tests/actions/"
   tag: "Documentation"
   text: "Learn more about Browser Test Steps"
@@ -13,15 +16,22 @@ further_reading:
 
 ## Overview
 
+This page describes advanced options for Synthetic browser tests. 
+
+
+## Locate an element
+
+### Datadog algorithm
+
 Flakiness is a pain point in end-to-end testing because tests occasionally fail when a frontend team implements changes, causing an identifier in your test to alert instead of an actual application issue.
 
 To prevent flaky tests, Datadog uses an algorithm that leverages a set of locators to target elements in browser tests. A small change in the UI may modify an element (for example, moving it to another location). The browser test automatically locates the element again based on points of reference that were not affected by the change. 
 
 When the test runs successfully, the browser test recomputes (or "self heals") any broken locators with updated values, ensuring your tests do not break from simple UI updates and that your tests are automatically adapting to your application's UI. 
 
-To ensure that your browser test does not validate an unexpected change, use assertions in your test creation. Assertions allow you to define what is and what is not expected behavior associated with the test step journey. 
+To ensure that your browser test does not validate an unexpected change, use [assertions][5] in your test creation. Assertions allow you to define what is and what is not expected behavior associated with the test step journey. 
 
-## User specified locator
+### User specified locator
 
 By default, browser tests use the Datadog locator system. When a test searches for a specific element to interact with (for example, a checkout button), instead of looking at an element with a specific XPath or a specific CSS selector, the test uses several different points of reference to locate the element (for example, XPath, text, classes, and nearby elements). 
 
@@ -68,15 +78,27 @@ You can prevent a step screenshot from being captured at test execution. This is
 
 ## Subtests
 
-[Subtests][4] advanced options also allow you to choose where you want your subtest to be played:
+The advanced options for [subtests][4] allow you to choose where you want your subtest to be played and set the behavior of your browser test if the subtest fails.
+
+{{< img src="synthetics/browser_tests/advanced_options/subtest_advanced.png" alt="Advanced options for subtests in browser tests" style="width:60%">}}
+
+### Set the subtest window
 
 * **Main (default)**: Subtest is played in your main window, in sequence with other steps.
 * **New**: Subtest is played in a new window, which is closed at the end of the subtest. This means the window cannot be reused.
 * **Specific window**: Subtest is played in a numbered window, which can be reused by other subtests.
 
-{{< img src="synthetics/browser_tests/advanced_options/subtest.png" alt="Subtests" style="width:60%">}}
-
 Opening your subtest in the main window means that your subtest is the continuation of your main test as it uses the URL from the previous step. Opening your subtest in a new window, or in a specific window, means that the test starts running from the subtest start URL.
+
+### Set failure behavior
+
+Click **Continue with test if this step fails** and **Consider entire test as failed if this step fails** to ensure your browser test continues if the subtest fails, or fails entirely if the subtest fails.
+
+### Override variables in subtests
+
+To override a variable value in a browser test subtest, name the variable in the subtest and use the same variable name in the parent test, and the browser test overrides the subtest value.
+
+For more information, see [Browser Test Steps][4].
 
 ## Further Reading
 
@@ -86,3 +108,4 @@ Opening your subtest in the main window means that your subtest is the continuat
 [2]: /data_security/synthetics/
 [3]: /synthetics/browser_tests/?tab=privacy#test-configuration
 [4]: /synthetics/browser_tests/actions/#subtests
+[5]: /synthetics/browser_tests/actions/#assertion

@@ -37,9 +37,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/apache/README.md
 display_on_public_website: true
@@ -47,7 +45,7 @@ draft: false
 git_integration_title: apache
 integration_id: apache
 integration_title: Apache
-integration_version: 4.2.0
+integration_version: 4.2.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -57,17 +55,15 @@ public_title: Apache
 short_description: 毎秒のリクエスト数、処理バイト数、ワーカースレッド数、アップタイムなどを追跡
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
   - Category::ログの収集
-  - Category::オートディスカバリー
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 毎秒のリクエスト数、処理バイト数、ワーカースレッド数、アップタイムなどを追跡
   media: []

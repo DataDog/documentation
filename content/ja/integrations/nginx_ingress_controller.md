@@ -29,11 +29,11 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- オーケストレーション
 - コンテナ
+- kubernetes
 - ログの収集
-- web
 - ネットワーク
+- orchestration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/README.md
 display_on_public_website: true
@@ -41,7 +41,7 @@ draft: false
 git_integration_title: nginx_ingress_controller
 integration_id: nginx-ingress-controller
 integration_title: nginx-ingress-controller
-integration_version: 2.3.0
+integration_version: 2.4.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -51,19 +51,19 @@ public_title: nginx-ingress-controller
 short_description: NGINX Ingress Controller と埋め込み NGINX に関するメトリクスを監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Orchestration
   - Category::Containers
+  - Category::Kubernetes
   - Category::Log Collection
-  - Category::Web
   - Category::Network
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: NGINX Ingress Controller と埋め込み NGINX に関するメトリクスを監視
   media: []
@@ -177,7 +177,7 @@ NGINX Ingress Controller には、サービスのチェック機能は含まれ�
 [1]: https://kubernetes.github.io/ingress-nginx
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/prometheus/
 [3]: https://github.com/nginxinc/nginx-prometheus-exporter#exported-metrics
-[4]: https://app.datadoghq.com/account/settings#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/datadog_checks/nginx_ingress_controller/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

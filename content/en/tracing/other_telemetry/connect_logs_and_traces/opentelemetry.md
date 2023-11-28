@@ -8,7 +8,7 @@ code_lang_weight: 80
 aliases:
   - /tracing/connect_logs_and_traces/opentelemetry
 further_reading:
-- link: "/tracing/trace_collection/open_standards/"
+- link: "/opentelemetry/otel_tracing/"
   tag: "Documentation"
   text: "Send OpenTelemetry Traces to Datadog"
 - link: "https://opentelemetry.io/docs/collector/"
@@ -78,9 +78,9 @@ log.info("Example log line with trace correlation info")
 [3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/python-microservice/ddlogging/injection.py#L3
 {{% /tab %}}
 
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
-To manually correlate your traces with your logs, patch the logging module you are using with a processor that translates OpenTelemetry formatted `trace_id` and `span_id` into the Datadog format. The following example uses the [winston logging library][1]. For other logging libraries, it may be more appropriate to [modify the Datadog SDK examples][2]. You can also find [an example OpenTelemetry instrumented NodeJS application with trace and log correlation][3] in the `trace-examples` GitHub repository.
+To manually correlate your traces with your logs, patch the logging module you are using with a processor that translates OpenTelemetry formatted `trace_id` and `span_id` into the Datadog format. The following example uses the [winston logging library][1]. For other logging libraries, it may be more appropriate to [modify the Datadog SDK examples][2]. You can also find [an example OpenTelemetry instrumented Node.js application with trace and log correlation][3] in the `trace-examples` GitHub repository.
 
 ```js
 // ########## logger.js
@@ -89,95 +89,15 @@ To manually correlate your traces with your logs, patch the logging module you a
 // https://github.com/DataDog/dd-trace-js/blob/master/packages/dd-trace/src/id.js
 const opentelemetry = require('@opentelemetry/api');
 const winston = require('winston')
-const UINT_MAX = 4294967296
-
-// Convert a buffer to a numerical string.
-function toNumberString (buffer, radix) {
-  let high = readInt32(buffer, 0)
-  let low = readInt32(buffer, 4)
-  let str = ''
-
-  radix = radix || 10
-
-  while (1) {
-    const mod = (high % radix) * UINT_MAX + low
-
-    high = Math.floor(high / radix)
-    low = Math.floor(mod / radix)
-    str = (mod % radix).toString(radix) + str
-
-    if (!high && !low) break
-  }
-
-  return str
-}
-
-// Convert a numerical string to a buffer using the specified radix.
-function fromString (str, raddix) {
-  const buffer = new Uint8Array(8)
-  const len = str.length
-
-  let pos = 0
-  let high = 0
-  let low = 0
-
-  if (str[0] === '-') pos++
-
-  const sign = pos
-
-  while (pos < len) {
-    const chr = parseInt(str[pos++], raddix)
-
-    if (!(chr >= 0)) break // NaN
-
-    low = low * raddix + chr
-    high = high * raddix + Math.floor(low / UINT_MAX)
-    low %= UINT_MAX
-  }
-
-  if (sign) {
-    high = ~high
-
-    if (low) {
-      low = UINT_MAX - low
-    } else {
-      high++
-    }
-  }
-
-  writeUInt32BE(buffer, high, 0)
-  writeUInt32BE(buffer, low, 4)
-
-  return buffer
-}
-
-// Write unsigned integer bytes to a buffer.
-function writeUInt32BE (buffer, value, offset) {
-  buffer[3 + offset] = value & 255
-  value = value >> 8
-  buffer[2 + offset] = value & 255
-  value = value >> 8
-  buffer[1 + offset] = value & 255
-  value = value >> 8
-  buffer[0 + offset] = value & 255
-}
-
-// Read a buffer to unsigned integer bytes.
-function readInt32 (buffer, offset) {
-  return (buffer[offset + 0] * 16777216) +
-    (buffer[offset + 1] << 16) +
-    (buffer[offset + 2] << 8) +
-    buffer[offset + 3]
-}
 
 const tracingFormat = function () {
   return winston.format(info => {
     const span = opentelemetry.trace.getSpan(opentelemetry.context.active());
     if (span) {
-      const context = span.context();
-      const traceIdEnd = context.traceId.slice(context.traceId.length / 2)
-      info['dd.trace_id'] = toNumberString(fromString(traceIdEnd,16))
-      info['dd.span_id'] = toNumberString(fromString(context.spanId,16))
+      const { spanId, traceId } = span.spanContext();
+      const traceIdEnd = traceId.slice(traceId.length / 2);
+      info['dd.trace_id'] = BigInt(`0x${traceIdEnd}`).toString();
+      info['dd.span_id'] = BigInt(`0x${spanId}`).toString();
     }
     return info;
   })();
@@ -251,8 +171,7 @@ String traceIdHexString = traceIdValue.substring(traceIdValue.length() - 16 );
 long datadogTraceId = Long.parseUnsignedLong(traceIdHexString, 16);
 String datadogTraceIdString = Long.toUnsignedString(datadogTraceId);
 
-String spanIdValue = Span.current().getSpanContext().getSpanId();
-String spanIdHexString = spanIdValue.substring(spanIdValue.length() - 16 );
+String spanIdHexString = Span.current().getSpanContext().getSpanId();
 long datadogSpanId = Long.parseUnsignedLong(spanIdHexString, 16);
 String datadogSpanIdString = Long.toUnsignedString(datadogSpanId);
 
@@ -338,7 +257,7 @@ func convertTraceID(id string) string {
 
 {{% tab ".NET" %}}
 
-To manually correlate traces with logs, convert the OpenTelemetry `TraceId` and `SpanId` into the format used by Datadog. Add those IDs to your logs under the `dd.trace_id` and `dd.span_id` attributes. The following example uses the [Serilog library][1], and shows how to convert the OTel (`System.DiagnosticSource.Activity`) trace and span IDs into Datadog's required format:
+To manually correlate traces with logs, convert the OpenTelemetry `TraceId` and `SpanId` into the format used by Datadog. Add those IDs to your logs under the `dd.trace_id` and `dd.span_id` attributes. The following example uses the [Serilog library][1], and shows how to convert the OpenTelemetry (`System.DiagnosticSource.Activity`) trace and span IDs into Datadog's required format:
 
 ```csharp
 var stringTraceId = Activity.Current.TraceId.ToString();

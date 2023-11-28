@@ -1,20 +1,27 @@
 ---
-title: Amazon Linux 用 Agent の基本的な使用方法
+aliases:
+- /ja/guides/basic_agent_usage/amazonlinux/
+further_reading:
+- link: /logs/
+  tag: Documentation
+  text: ログの収集
+- link: /infrastructure/process/
+  tag: Documentation
+  text: プロセスの収集
+- link: /tracing/
+  tag: Documentation
+  text: トレースの収集
+- link: /agent/basic_agent_usage/#agent-architecture
+  tag: Documentation
+  text: Agent のアーキテクチャを詳しく見る
+- link: /agent/guide/network#configure-ports
+  tag: Documentation
+  text: インバウンドポートの構成
 kind: documentation
 platform: Amazon Linux
-aliases:
-  - /ja/guides/basic_agent_usage/amazonlinux/
-further_reading:
-  - link: /logs/
-    tag: Documentation
-    text: ログの収集
-  - link: /infrastructure/process/
-    tag: Documentation
-    text: プロセスの収集
-  - link: /tracing/
-    tag: Documentation
-    text: トレースの収集
+title: Amazon Linux 用 Agent の基本的な使用方法
 ---
+
 ## 概要
 
 このページでは、Amazon Linux 用 Datadog Agent の基本的な機能について説明します。Agent をまだインストールしていない場合は、[Datadog Agent インテグレーションに関するドキュメント][1]で手順を参照してください。
@@ -28,7 +35,9 @@ Agent v6 & v7 では、オペレーティングシステムから提供される
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-### Amazon Linux 2
+### Amazon Linux 2、Amazon Linux 2022/2023
+
+<div class="alert alert-info">Amazon Linux 2022/2023 を Agent バージョン <= 6.39/7.39 でインストールする場合、<code>libxcrypt-compat</code> パッケージが必要です。このパッケージをインストールするには、<pre><code>dnf install -y libxcrypt-compat</code></pre> を実行してください。</div>
 
 | 説明                        | コマンド                                                |
 |------------------------------------|--------------------------------------------------------|
@@ -108,7 +117,7 @@ Agent の構成ファイルおよびフォルダーの場所
 
 ## トラブルシューティング
 
-[Agent のトラブルシューティングドキュメントは、こちらを参照してください][2]。
+[Agent のトラブルシューティングに関するドキュメント][2]を参照してください。
 
 ## 埋め込み Agent の使用
 

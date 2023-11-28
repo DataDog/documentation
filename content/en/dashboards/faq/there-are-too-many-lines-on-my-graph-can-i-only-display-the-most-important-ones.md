@@ -9,7 +9,7 @@ aliases:
 
 When using a grouped query there are sometimes too many lines displayed on the graph, and you might end up with something complicated to read, for example:
 
-{{< img src="dashboards/faq/too_many_metrics_1.png" alt="too_many_metrics_1"  >}}
+{{< img src="dashboards/faq/too_many_metrics_1.png" alt="too_many_metrics_1" >}}
 
 ... where you only need to focus on the hosts with high load values here.
 
@@ -17,7 +17,7 @@ When using a grouped query there are sometimes too many lines displayed on the g
 
 The top function is a good fit to display only the few relevant lines on the graph:
 
-{{< img src="dashboards/faq/too_many_metrics_2.png" alt="too_many_metrics_2"  >}}
+{{< img src="dashboards/faq/too_many_metrics_2.png" alt="too_many_metrics_2" >}}
 
 See the [Top function documentation][1] for more details.
 

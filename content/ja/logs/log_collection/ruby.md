@@ -17,15 +17,18 @@ further_reading:
 - link: https://www.datadoghq.com/blog/log-file-control-with-logrotate/
   tag: ブログ
   text: logrotate を使ったログファイルの管理方法
+- link: /glossary/#tail
+  tag: 用語集
+  text: 用語集 "テール" の項目
 kind: documentation
 title: Ruby on Rails ログ収集
 ---
 
 ## 概要
 
-Datadog にログを送信する際は、[`lograge`][1] を適用したファイルにログを記録し、Datadog Agent でそのファイルを追跡します。Ruby でロギングのセットアップを行う際は、[予約済み属性][2]に注意してください。
+Datadog にログを送信する際は、[`Lograge`][1] を適用したファイルにログを記録し、Datadog Agent でそのファイルを[テール][11]します。Ruby でロギングのセットアップを行う際は、[予約済み属性][2]に注意してください。
 
-次のような Rails ログ出力があったとします。
+Lograge を使えば、この例のように、テキストベースの標準的なログ形式を、
 
 ```text
 Started GET "/" for 127.0.0.1 at 2012-03-10 14:28:14 +0100
@@ -38,7 +41,7 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 79ms (Views: 78.8ms | ActiveRecord: 0.0ms)
 ```
 
-以下の情報が JSON 形式でログラインに表示されることが期待できます。
+より多くの構造を提供する以下の JSON 形式のログに変換することができます。
 
 ```json
 {
@@ -57,18 +60,16 @@ Completed 200 OK in 79ms (Views: 78.8ms | ActiveRecord: 0.0ms)
 }
 ```
 
-## セットアップ
+## ロガーのインストールと構成
 
-このセクションでは、Rails アプリケーションのログを Datadog に転送する際に必要となる最低限のセットアップについて説明します。このセットアップに関するさらに詳しいサンプルは、「[Rails アプリケーションログを収集、カスタマイズ、管理する方法][3]」を参照してください。
+{{< tabs >}}
+{{% tab "Lograge" %}}
 
-1. プロジェクトに Lograge gem を追加します。
-
+1. プロジェクトに `lograge` gem を追加します。
     ```ruby
     gem 'lograge'
     ```
-
-2. Lograge を構成します。コンフィギュレーションファイルで以下のように記述してください。
-
+2. コンフィギュレーションファイルで、以下を設定し、Lograge を構成します。
     ```ruby
     # Lograge config
     config.lograge.enabled = true
@@ -80,7 +81,7 @@ Completed 200 OK in 79ms (Views: 78.8ms | ActiveRecord: 0.0ms)
     config.colorize_logging = false
 
     # Log to a dedicated file
-    config.lograge.logger = ActiveSupport::Logger.new(File.join(Rails.root, 'log', "#{Rails.env}.log"))
+    config.lograge.logger = ActiveSupport::Logger.new(Rails.root.join('log', "#{Rails.env}.log"))
 
     # This is useful if you want to log query parameters
     config.lograge.custom_options = lambda do |event|
@@ -89,67 +90,13 @@ Completed 200 OK in 79ms (Views: 78.8ms | ActiveRecord: 0.0ms)
         }
     end
     ```
+   **注**: Lograge はコンテキスト情報をログに追加することも可能です。詳細は [Lograge ドキュメント][1]を参照してください。
 
-   **注**: コンテキスト情報をログに追加するよう Lograge で設定を行うことも可能です。詳細は [Lograge ドキュメント][4]を参照してください。
+この設定の詳細な例については、[Rails アプリケーションのログを収集、カスタマイズ、管理する方法][2]を参照してください。
 
-3. Datadog Agent を構成します。`conf.d/` フォルダーに、次の内容を含む `ruby.d/conf.yaml` ファイルを作成します。
+### RocketPants
 
-    ```yaml
-      logs:
-        - type: file
-          path: "<RUBY_LOG_FILE_PATH>.log"
-          service: ruby
-          source: ruby
-          sourcecategory: sourcecode
-          ## Uncomment the following processing rule for multiline logs if they
-          ## start by the date with the format yyyy-mm-dd
-          #log_processing_rules:
-          #  - type: multi_line
-          #    name: new_log_start_with_date
-          #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-    ```
-
-   [Agent のログ収集][5] の詳細もご確認ください。
-
-4. [Agent を再起動します][6]。
-
-## 補足説明
-
-### ログとトレースの接続
-
-このアプリケーションで APM が有効になっている場合、[APM Ruby のロギング手順に従う][7]ことでアプリケーションログとトレースの関連性を高め、ログにトレースとスパン ID を自動的に追加することが可能です。
-
-### アプリケーションで推奨されるログの例
-
-これで、適切な JSON を送信するログ構成になりました。できるだけこれを使用してください。
-
-ログを取る際には、できるだけ多くのコンテキスト (ユーザー、セッション、アクション、メトリクス) を追加します。
-
-単純な文字列メッセージのログの代わりに、次の例に示すようにログのハッシュを使用することができます。
-
-```ruby
-my_hash = {'user' => '1234', 'button_name'=>'save','message' => 'User 1234 clicked on button saved'};
-logger.info(my_hash);
-```
-
-ハッシュは JSON に変換されます。そして、`user` と `button_name` に対して Analytics を持つことができるようになります。
-
-```json
-{
-  "timestamp": "2016-01-12T19:15:18.683575+01:00",
-  "level": "INFO",
-  "logger": "WelcomeController",
-  "message": {
-    "user": "1234",
-    "button_name": "save",
-    "message": "User 1234 clicked on button saved"
-  }
-}
-```
-
-### RocketPants の推奨ログコンフィギュレーション
-
-`config/initializers/lograge_rocketpants.rb` ファイル (プロジェクトによって異なります) で、Lograge が `rocket_pants` コントローラと連動するように構成します。
+Lograge を `rocket_pants` コントローラに構成するには、`config/initializers/lograge_rocketpants.rb` ファイル (場所はプロジェクトによって異なる場合があります) を作成します。
 
 ```ruby
 # 参照:
@@ -166,41 +113,102 @@ if app.config.lograge.enabled
 end
 ```
 
-### Grape の推奨ログ構成
+[1]: https://github.com/roidrage/lograge#installation
+[2]: https://www.datadoghq.com/blog/managing-rails-application-logs
+{{% /tab %}}
+{{% tab "Grape" %}}
 
-`grape_logging` を追加します。
+1. プロジェクトに `grape_logging` gem を追加します。
+
+    ```ruby
+    gem 'grape_logging'
+    ```
+2. 追加の構成を Grape に追加します。
+
+    ```ruby
+    use GrapeLogging::Middleware::RequestLogger,
+          instrumentation_key: 'grape',
+          include: [ GrapeLogging::Loggers::Response.new,
+                    GrapeLogging::Loggers::FilterParameters.new ]
+    ```
+3. `config/initializers/instrumentation.rb` ファイルを作成し、次の構成を追加します。
+
+    ```ruby
+    # Subscribe to grape request and log with a logger dedicated to Grape
+    grape_logger = Logging.logger['Grape']
+    ActiveSupport::Notifications.subscribe('grape') do |name, starts, ends, notification_id, payload|
+        grape_logger.info payload
+    end
+    ```
+
+{{% /tab %}}
+{{< /tabs >}}
+## Datadog Agent の構成
+
+[ログ収集が有効][3]になったら、以下を行ってログファイルを追跡して Datadog に送信する[カスタムログ収集][4]を設定します。
+
+1. `ruby.d/` フォルダーを `conf.d/` [Agent 構成ディレクトリ][5]に作成します。
+2. `ruby.d/` に以下の内容で `conf.yaml` ファイルを作成します。
+    ```yaml
+      logs:
+        - type: file
+          path: "<RUBY_LOG_FILE_PATH>.log"
+          service: ruby
+          source: ruby
+          sourcecategory: sourcecode
+          ## Uncomment the following processing rule for multiline logs if they
+          ## start by the date with the format yyyy-mm-dd
+          #log_processing_rules:
+          #  - type: multi_line
+          #    name: new_log_start_with_date
+          #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+    ```
+4. [Agent を再起動します][6]。
+5. [Agent の status サブコマンド][8]を実行し、`Checks` セクションで `ruby` を探し、ログが Datadog に正常に送信されることを確認します。
+
+ログが JSON 形式の場合、Datadog は自動的にログメッセージを[パース][9]し、ログ属性を抽出します。[ログエクスプローラー][10]を使用して、ログを表示し、トラブルシューティングを行うことができます。
+
+## ログとトレースの接続
+
+このアプリケーションで APM が有効になっている場合、[APM Ruby のロギング手順][7]に従うことでアプリケーションログとトレースの関連性を高め、ログにトレースとスパン ID を自動的に追加することが可能です。
+
+## ベストプラクティス
+
+可能な限り、ログに追加のコンテキスト (ユーザー、セッション、アクション、メトリクス) を追加します。
+
+単純な文字列メッセージのログの代わりに、次の例に示すようにログのハッシュを使用することができます。
 
 ```ruby
-gem 'grape_logging'
+my_hash = {'user' => '1234', 'button_name'=>'save','message' => 'User 1234 clicked on button saved'};
+logger.info(my_hash);
 ```
 
-追加の構成を Grape に渡します。
+ハッシュは JSON に変換され、`user` と `button_name` の分析を実行することができます。
 
-```ruby
-use GrapeLogging::Middleware::RequestLogger,
-      instrumentation_key: 'grape',
-      include: [ GrapeLogging::Loggers::Response.new,
-                 GrapeLogging::Loggers::FilterParameters.new ]
+```json
+{
+  "timestamp": "2016-01-12T19:15:18.683575+01:00",
+  "level": "INFO",
+  "logger": "WelcomeController",
+  "message": {
+    "user": "1234",
+    "button_name": "save",
+    "message": "User 1234 clicked on button saved"
+  }
+}
 ```
-
-`config/initializers/instrumentation.rb` ファイルを作成し、次の構成を追加します。
-
-```ruby
-# grape リクエストをサブスクライブし、Grape 専用のロガーでログを記録します
-grape_logger = Logging.logger['Grape']
-ActiveSupport::Notifications.subscribe('grape') do |name, starts, ends, notification_id, payload|
-    grape_logger.info payload
-end
-```
-
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/roidrage/lograge
 [2]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
-[3]: https://www.datadoghq.com/blog/managing-rails-application-logs
-[4]: https://github.com/roidrage/lograge#installation
-[5]: /ja/agent/logs/
+[3]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
+[4]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
+[5]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
 [6]: /ja/agent/guide/agent-commands/#restart-the-agent
-[7]: /ja/tracing/connect_logs_and_traces/ruby/
+[7]: /ja/tracing/other_telemetry/connect_logs_and_traces/ruby/
+[8]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[9]: /ja/logs/log_configuration/parsing
+[10]: /ja/logs/explorer/
+[11]: /ja/glossary/#tail

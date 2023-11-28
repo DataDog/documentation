@@ -3,11 +3,12 @@ aliases:
 - /ja/integrations/awsautoscaling/
 - /ja/integrations/faq/get-your-autoscaling-group-events-and-metrics/
 categories:
-- cloud
-- provisioning
-- configuration & deployment
+- automation
 - aws
+- cloud
+- configuration & deployment
 - log collection
+- provisioning
 dependencies: []
 description: Auto Scaling グループ内のインスタンスのステータスとカウントを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_auto_scaling/
@@ -67,7 +68,7 @@ S3 バケットまたは CloudWatch のいずれかにログを送信するよ�
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログ コレクション AWS Lambda 関数][7]をまだ実行していない場合は、セットアップします。
+1. [Datadog Forwarder Lambda 関数][7]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールで、AWS Auto Scaling ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動でトリガーを追加][8]
@@ -103,7 +104,7 @@ ASG メトリクスを Datadog に表示するには、まず、それらのメ�
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [5]: https://docs.aws.amazon.com/autoscaling/plans/userguide/auth-and-access-control.html
 [6]: https://app.datadoghq.com/integrations/amazon-auto-scaling
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[7]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [9]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [10]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_auto_scaling/amazon_auto_scaling_metadata.csv

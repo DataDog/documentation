@@ -17,12 +17,13 @@ assets:
     source_type_name: InsightFinder
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: InsightFinder
   sales_email: support@insightfinder.com
   support_email: support@insightfinder.com
 categories:
+- アラート設定
 - 自動化
-- モニタリング
+- インシデント
 - notification
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/insightfinder/README.md
@@ -41,17 +42,18 @@ public_title: InsightFinder
 short_description: InsightFinder で DataDog からデータを統合して分析
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Alerting
   - Category::Automation
-  - Category::Monitoring
+  - Category::Incidents
   - Category::Notification
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: InsightFinder で DataDog からデータを統合して分析
   media: []

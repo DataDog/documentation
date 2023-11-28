@@ -2,8 +2,9 @@
 aliases:
 - /ja/integrations/azure_dbformysql
 categories:
-- cloud
 - azure
+- クラウド
+- data store
 dependencies: []
 description: Azure DB for MySQL のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_db_for_mysql/

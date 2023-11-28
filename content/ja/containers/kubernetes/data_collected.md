@@ -25,11 +25,11 @@ kind: documentation
 title: 収集された Kubernetes データ
 ---
 
+このページでは、Kubernetes クラスターにデプロイした際に Datadog Agent が収集したデータを一覧表示します。
+
+収集されるメトリクスのセットは、使用している Kubernetes のバージョンによって異なる場合があります。
+
 ## メトリクス
-
-Kubernetes クラスターにデプロイされた Agent が収集するメトリクス:
-
-**注**: Datadog Kubernetes インテグレーションで収集されるメトリクスは、使用中の Kubernetes のバージョンにより異なる場合があります。
 
 ### Kubernetes
 
@@ -37,11 +37,19 @@ Kubernetes クラスターにデプロイされた Agent が収集するメト�
 
 ### Kubelet
 
+詳しくは、[Kubelet][1] インテグレーションのドキュメントをご覧ください。
+
 {{< get-metrics-from-git "kubelet" >}}
+
+### Kubernetes state metrics core
+
+詳細については、[Kubernetes state metrics core][6] インテグレーションのドキュメントを参照してください。このチェックには、Datadog Cluster Agent v1.12 またはそれ以降が必要です。
+
+{{< get-metrics-from-git "kubernetes_state_core" >}}
 
 ### Kubernetes State
 
-`kubernetes_state.*` メトリクスは `kube-state-metrics` API から収集されます。
+**注**: `kubernetes_state.*` メトリクスは `kube-state-metrics` API から収集されます。`kubernetes_state` チェックはレガシーチェックです。代替案としては、[Kubernetes state metrics core][6] を参照してください。Datadog では、両方のチェックを同時に有効にしないことを推奨しています。
 
 {{< get-metrics-from-git "kubernetes_state" >}}
 
@@ -53,16 +61,39 @@ Kubernetes クラスターにデプロイされた Agent が収集するメト�
 
 {{< get-metrics-from-git "kube_proxy" >}}
 
-## イベント
+### Kubernetes API server
 
-Datadog Agent の 5.17.0 リリース版では、Kubernetes イベントコレクター用に組み込みの[leader election オプション][9]をサポートしています。これを有効にした後は、クラスターに追加のイベントコレクションコンテナをデプロイする必要はありません。代わりに、Agent が一度に 1 つの Agent インスタンスのみがイベントを収集するように調整します。使用できるイベントは以下のとおりです。
+詳しくは、[Kubernetes API server][3] インテグレーションのドキュメントをご覧ください。
+
+{{< get-metrics-from-git "kube_apiserver_metrics" >}}
+
+### Kubernetes controller manager
+
+詳しくは、[Kubernetes controller manager][2] インテグレーションのドキュメントをご覧ください。
+
+{{< get-metrics-from-git "kube_controller_manager" >}}
+
+### Kubernetes metrics server
+
+詳しくは、[Kubernetes metrics server][4] インテグレーションのドキュメントをご覧ください。
+
+{{< get-metrics-from-git "kube_metrics_server" >}}
+
+### Kubernetes scheduler
+
+詳しくは、[Kubernetes scheduler][5] インテグレーションのドキュメントをご覧ください。
+
+{{< get-metrics-from-git "kube_scheduler" >}}
+
+
+## イベント
 
 - Backoff
 - Conflict
 - 削除
 - DeletingAllPods
 - Didn't have enough resource
-- エラー
+- Error
 - Failed
 - FailedCreate
 - FailedDelete
@@ -88,12 +119,63 @@ Datadog Agent の 5.17.0 リリース版では、Kubernetes イベントコレ�
 
 ### Kubelet
 
+詳しくは、[Kubelet][1] インテグレーションのドキュメントをご覧ください。
+
 {{< get-service-checks-from-git "kubelet" >}}
 
-### Kubernetes State
+### Kubernetes controller manager
 
-{{< get-service-checks-from-git "kubernetes_state" >}}
+詳しくは、[Kubernetes controller manager][2] インテグレーションのドキュメントをご覧ください。
+
+{{< get-service-checks-from-git "kube_controller_manager" >}}
+
+### Kubernetes metrics server
+
+詳しくは、[Kubernetes metrics server][4] インテグレーションのドキュメントをご覧ください。
+
+{{< get-service-checks-from-git "kube_metrics_server" >}}
+
+### Kubernetes scheduler
+
+詳しくは、[Kubernetes scheduler][5] インテグレーションのドキュメントをご覧ください。
+
+{{< get-service-checks-from-git "kube_scheduler" >}}
+
+### Kubernetes state metrics core
+
+詳しくは、[Kubernetes state metrics core][6] インテグレーションのドキュメントをご覧ください。
+
+`kubernetes_state.cronjob.complete`
+: cronjob の最後のジョブが失敗したかどうか。タグ:`kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+
+`kubernetes_state.cronjob.on_schedule_check`
+: cronjob の次のスケジュールが過去である場合に警告します。タグ: `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+
+`kubernetes_state.job.complete`
+: ジョブが失敗したかどうか。タグ: `kube_job` または `kube_cronjob` `kube_namespace` (標準ラベルの `env` `service` `version`)。
+
+`kubernetes_state.node.ready`
+: ノードの準備ができているかどうか。タグ: `node` `condition` `status`。
+
+`kubernetes_state.node.out_of_disk`
+: ノードの準備ができているかどうか。タグ: `node` `condition` `status`。
+
+`kubernetes_state.node.disk_pressure`
+: ノードにディスクプレッシャーがかかっているかどうか。タグ: `node` `condition` `status`。
+
+`kubernetes_state.node.network_unavailable`
+: ノードネットワークが利用できないかどうか。タグ: `node` `condition` `status`。
+
+`kubernetes_state.node.memory_pressure`
+: ノードネットワークにメモリプレッシャーがかかっているかどうか。タグ: `node` `condition` `status`。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /ja/integrations/kubelet/
+[2]: /ja/integrations/kube_controller_manager/
+[3]: /ja/integrations/kube_apiserver_metrics/
+[4]: /ja/integrations/kube_metrics_server
+[5]: /ja/integrations/kube_scheduler
+[6]: /ja/integrations/kubernetes_state_core/

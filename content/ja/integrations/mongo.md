@@ -36,7 +36,6 @@ author:
 categories:
 - data store
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mongo/README.md
 display_on_public_website: true
@@ -44,7 +43,7 @@ draft: false
 git_integration_title: mongo
 integration_id: mongodb
 integration_title: MongoDB
-integration_version: 4.0.3
+integration_version: 6.0.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -64,7 +63,6 @@ tile:
   - Supported OS::Windows
   - Category::データストア
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: 読み取り/書き込みのパフォーマンス、最も使用されたレプリカ、収集メトリクスなどを追跡。
   media: []
@@ -110,15 +108,12 @@ Mongo シェルで、`admin` データベースに Datadog Agent 用の読み取
 ```shell
 # 管理者ユーザーとして認証します。
 use admin
-db.auth("admin", "<MongoDB_管理者パスワード>")
+db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
 
-# MongoDB 2.x では、addUser コマンドを使用します。
-db.addUser("datadog", "<一意のパスワード>", true)
-
-# MongoDB 3.x 以降では、createUser コマンドを使用します。
+# Datadog Agent のユーザーを作成します。
 db.createUser({
   "user": "datadog",
-  "pwd": "<一意のパスワード>",
+  "pwd": "<UNIQUEPASSWORD>",
   "roles": [
     { role: "read", db: "admin" },
     { role: "clusterMonitor", db: "admin" },
@@ -130,8 +125,8 @@ db.createUser({
 ##### Agent の構成
 使用可能なすべての mongo メトリクスを収集するには、できれば同じノードで実行している単一の Agent だけが必要です。コンフィギュレーションオプションについては、以下を参照してください。
 {{% /tab %}}
-{{% tab "ReplicaSet" %}}
-#### ReplicaSet
+{{% tab "レプリカセット" %}}
+#### レプリカセット
 
 このインテグレーションを MongoDB レプリカセット用に構成するには
 
@@ -141,15 +136,12 @@ Mongo シェルで、プライマリに対して認証し、`admin` データベ
 ```shell
 # 管理者ユーザーとして認証します。
 use admin
-db.auth("admin", "<MongoDB_管理者パスワード>")
+db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
 
-# MongoDB 2.x では、addUser コマンドを使用します。
-db.addUser("datadog", "<一意のパスワード>", true)
-
-# MongoDB 3.x 以降では、createUser コマンドを使用します。
+# Datadog Agent のユーザーを作成します。
 db.createUser({
   "user": "datadog",
-  "pwd": "<一意のパスワード>",
+  "pwd": "<UNIQUEPASSWORD>",
   "roles": [
     { role: "read", db: "admin" },
     { role: "clusterMonitor", db: "admin" },
@@ -159,10 +151,36 @@ db.createUser({
 ```
 
 ##### Agent の構成
-メンバーごとに 1 つのチェックインスタンスを構成する必要があります。コンフィギュレーションオプションについては、以下を参照してください。
-**注**: [MongoDB ドキュメント][1]に記載されているように、アービターノードのモニタリングはリモートではサポートされていません。ただし、アービターノードのステータス変更は、プライマリに接続されている Agent によって報告されます。
 
-[1]: https://docs.mongodb.com/manual/core/replica-set-arbiter/#authentication
+MongoDB レプリカセットの各ホストに Datadog Agent をインストールし、そのホスト (`localhost`) 上のレプリカに接続するように Agent を構成します。各ホストで Agent を実行することで、レイテンシーと実行時間が短縮され、ホストに障害が発生した場合でもデータが接続されるようになります。
+
+例えば、プライマリノードで、
+
+```yaml
+init_config:
+instances:
+  - hosts:
+      - mongo-primary:27017
+```
+
+セカンダリノードで、
+
+```yaml
+init_config:
+instances:
+  - hosts:
+      - mongo-secondary:27017
+```
+
+ターシャリノードで、
+
+```yaml
+init_config:
+instances:
+  - hosts:
+      - mongo-tertiary:27017
+```
+
 {{% /tab %}}
 {{% tab "シャード" %}}
 #### シャード
@@ -175,15 +193,12 @@ db.createUser({
 ```shell
 # 管理者ユーザーとして認証します。
 use admin
-db.auth("admin", "<MongoDB_管理者パスワード>")
+db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
 
-# MongoDB 2.x では、addUser コマンドを使用します。
-db.addUser("datadog", "<一意のパスワード>", true)
-
-# MongoDB 3.x 以降では、createUser コマンドを使用します。
+# Datadog Agent のユーザーを作成します。
 db.createUser({
   "user": "datadog",
-  "pwd": "<一意のパスワード>",
+  "pwd": "<UNIQUEPASSWORD>",
   "roles": [
     { role: "read", db: "admin" },
     { role: "clusterMonitor", db: "admin" },
@@ -533,7 +548,9 @@ Agent コンテナで必要な環境変数
 
 メトリクスの詳細については、[MongoDB 3.0 マニュアル][4]を参照してください。
 
-**注**: 次のメトリクスは、デフォルトでは収集されません。これらを収集するには、`mongo.d/conf.yaml` ファイルで `additional_metrics` パラメーターを使用してください。
+#### 追加のメトリクス
+
+次のメトリクスは、デフォルトでは収集**されません**。これらを収集するには、`mongo.d/conf.yaml` ファイルで `additional_metrics` パラメーターを使用してください。
 
 | メトリクスのプレフィックス            | 収集するために `additional_metrics` に追加する項目 |
 | ------------------------ | ------------------------------------------------- |
@@ -573,7 +590,7 @@ Agent コンテナで必要な環境変数
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mongo/images/mongo_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.mongodb.org/manual/reference/command/dbStats
 [5]: https://docs.datadoghq.com/ja/help/

@@ -18,6 +18,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - azure
+- クラウド
 - ログの収集
 - セキュリティ
 dependencies:
@@ -37,17 +38,18 @@ public_title: Azure Active Directory
 short_description: Azure Active Directory アクティビティログを分析
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Azure
+  - Category::Cloud
   - Category::Log Collection
   - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Azure Active Directory アクティビティログを分析
   media: []
@@ -71,7 +73,7 @@ Azure Active Directory は、Microsoft Azure によるクラウドホスト型 A
 
 ### コンフィギュレーション
 
-1. [ログ収集のドキュメント][2]に従い、Event Hubs 使用して Azure から Datadog へのログ転送パイプラインを設定します。
+1. [Azure ログを Datadog に送信][2]のガイドに従い、Event Hubs 使用して Azure から Datadog へのログ転送パイプラインを設定します。
 
 2. Azure ポータルで、 _Azure Active Directory > Monitoring > Audit logs_ を選択します。
 
@@ -119,6 +121,6 @@ Azure Active Directory には、メトリクスは含まれません。
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://docs.microsoft.com/en-us/azure/active-directory/reports-monitoring/overview-reports#activity-reports
-[2]: https://docs.datadoghq.com/ja/integrations/azure/?tab=eventhub#log-collection
+[2]: https://docs.datadoghq.com/ja/logs/guide/azure-logging-guide/
 [3]: https://docs.microsoft.com/en-us/azure/active-directory/reports-monitoring/tutorial-azure-monitor-stream-logs-to-event-hub
 [4]: https://docs.datadoghq.com/ja/help

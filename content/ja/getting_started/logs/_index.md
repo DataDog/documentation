@@ -12,6 +12,9 @@ further_reading:
 - link: /getting_started/tagging/unified_service_tagging
   tag: ドキュメント
   text: 統合サービスタグ付けの構成方法を学ぶ
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: ログ管理を最適化するためのインタラクティブなセッションに参加できます
 kind: documentation
 title: ログの使用を開始する
 ---
@@ -69,7 +72,7 @@ Datadog Agent v6 では、Agent がコンテナからログを収集すること
 
 ### クラウド
 
-AWS、Azure、GCP など、複数のクラウドプロバイダーのログを Datadog に転送することができます。各クラウドプロバイダーにより、それぞれコンフィギュレーション手順が異なります。
+AWS、Azure、Google Cloud など、複数のクラウドプロバイダーのログを Datadog に転送することができます。各クラウドプロバイダーにより、それぞれコンフィギュレーション手順が異なります。
 
 例えば、AWS サービスのログは通常、S3 バケットや CloudWatch ロググループに保存されています。これらのログを購読し、Amazon Kinesis ストリームに転送して、1 つまたは複数の宛先に転送することができます。Datadog は、Amazon Kinesis 配信ストリームのデフォルトの転送先の1つです。
 
@@ -79,7 +82,7 @@ AWS、Azure、GCP など、複数のクラウドプロバイダーのログを D
 
 Datadog では、SDK やライブラリを使ってクライアントからログを収集することができます。たとえば、`datadog-logs` SDKを使用して、JavaScript クライアントから Datadog にログを送信します。
 
-クラウドサービスからのログ収集を開始するには、[アプリ内の手順][14]に従ってください。
+クライアントからのログ収集を開始するには、[アプリ内の手順][14]に従ってください。
 
 ### その他
 
@@ -118,8 +121,9 @@ rsyslog、FluentD、Logstash などの既存のログサービスやユーティ
 
 ### ガイド
 
-* [Logging without Limits*][22] の詳細
-* [RBAC 設定][23]による機密ログデータの管理
+* [ログ管理のベストプラクティス][22]
+* [Logging without Limits*][23] の詳細
+* [RBAC 設定][24]による機密ログデータの管理
 
 ## その他の参考資料
 
@@ -131,7 +135,7 @@ rsyslog、FluentD、Logstash などの既存のログサービスやユーティ
 [1]: https://www.datadoghq.com
 [2]: /ja/tracing/other_telemetry/connect_logs_and_traces/
 [3]: /ja/logs/guide/correlate-logs-with-metrics/
-[4]: /ja/security_platform/cloud_siem/
+[4]: /ja/security/cloud_siem/
 [5]: /ja/getting_started/integrations/
 [6]: /ja/agent/
 [7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli
@@ -149,5 +153,6 @@ rsyslog、FluentD、Logstash などの既存のログサービスやユーティ
 [19]: /ja/logs/log_configuration/pipelines/
 [20]: /ja/logs/log_configuration/processors/
 [21]: /ja/logs/log_configuration/
-[22]: /ja/logs/guide/getting-started-lwl/
-[23]: /ja/logs/guide/logs-rbac/
+[22]: /ja/logs/guide/best-practices-for-log-management/
+[23]: /ja/logs/guide/getting-started-lwl/
+[24]: /ja/logs/guide/logs-rbac/

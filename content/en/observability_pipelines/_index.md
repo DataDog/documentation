@@ -6,77 +6,84 @@ aliases:
 further_reading:
   - link: /observability_pipelines/setup/
     tag: Documentation
-    text: Set up Observability Pipelines 
+    text: Set up Observability Pipelines
   - link: https://www.datadoghq.com/blog/datadog-observability-pipelines/
     tag: Blog
     text: Take control of your telemetry data with Observability Pipelines
-  - link: /observability_pipelines/vector_configurations/
+  - link: /observability_pipelines/configurations/
     tag: Documentation
-    text: Learn more about Vector configurations
-  - link: https://vector.dev/docs/setup/going-to-prod/
-    tag: Documentation
-    text: Take Observability Pipelines to production with capacity planning
-  - link: https://vector.dev/releases/ 
-    tag: Documentation
-    text: Check out the new release for Vector
-  - link: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
-    tag: Documentation
-    text: Datadog Agent as a source for Vector
-  - link: /observability_pipelines/integrations/integrate_vector_with_datadog/ 
-    tag: Documentation
-    text: Configure Datadog Agents to send data to Vector
+    text: Learn more about Observability Pipelines configurations
+cascade:
+    algolia:
+        rank: 70
 ---
 
-{{< img src="observability_pipelines/obs_pipelines_overview.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
 
-## What is Observability Pipelines?
 
-Observability Pipelines is a monitoring solution built on [Vector][1], an open source tool that enables you to monitor and manage all of your telemetry pipelines at scale. Vector is deployed as an aggregator within your infrastructure to collect, transform, and route all of your logs, metrics, and traces to any destination.
+{{< img src="observability_pipelines/obs_pipelines.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
 
-Add your Datadog API key to your Vector configuration to connect it to Observability Pipelines. Use Observability Pipelines to monitor your Vector pipelines and identify bottlenecks and latencies, fine-tune performance, monitor data delivery, and more. 
+## Overview
 
-With Observability Pipelines, you can also:
+Observability Pipelines allow you to collect, process, and route observability data (logs and metrics (beta)) from any source to any destination in infrastructure that you own or manage. With Observability Pipelines, you can:
 
 - Control your data volume before routing to manage costs.
 - Route data anywhere to reduce vendor lock-in and simplify migrations.
-- Meet residency requirements and redact sensitive data to stay more compliant.
-- Enrich, structure, and transform your events to make them more useful.
+- Transform logs and metrics by adding, parsing, enriching, and removing fields and tags.
+- Redact sensitive data from your telemetry data.
 
-Build performant and reliable data pipelines with complete visibility and simplified management using Observability Pipelines. 
+The Observability Pipelines Worker is the software that runs in your infrastructure. It aggregates and centrally processes and routes your data. More specifically, the Worker can:
+
+- Receive or pull all your observability data collected by your agents, collectors, or forwarders.
+- Transform ingested data (for example: parse, filter, sample, enrich, and more).
+- Route the processed data to any destination.
+
+The Datadog UI provides a control plane to manage your Observability Pipelines Workers. You can monitor your pipelines to understand the health of your pipelines, identify bottlenecks and latencies, fine-tune performance, validate data delivery, and investigate your largest volume contributors. You can build or edit pipelines, whether it be routing a subset of data to a new destination or introducing a new sensitive data redaction rule, and roll out these changes to your active pipelines from the Datadog UI.
 
 ## Get started
 
-1. [Install Vector][2] using the quick start method, your preferred package manager, or based on your specific platform or operating system.
-2. [Set up Vector configurations][3] to collect, transform and route your data.
-3. [Connect Vector to Observability Pipelines][4] with your Datadog API.
+1. [Set up the Observability Pipelines Worker][1].
+2. [Create pipelines to collect, transform and route your data][2].
+3. Discover how to deploy Observability Pipelines at production scale:
+    - See [Deployment Design and Principles][3] for information on what to consider when designing your Observability Pipelines architecture.
+    - See [Best Practices for OP Worker Aggregator Architecture][4].
 
 ## Explore Observability Pipelines
 
-Now that you are sending configuration data to Observability Pipelines, start getting insights into your Vector pipelines:
+Start getting insights into your Observability Pipelines:
 
-### Monitor the health of your Vector pipelines
+###  Collect data from any source and route data to any destination
 
-Get a holistic view of all of your pipelines' topologies and monitor key performance indicators, such as average load, error rate, and throughput for each of your flows. 
+Collect logs and metrics (beta) from any source and route them to any destination to reduce vendor lock-in and simplify migrations.
 
-{{< img src="observability_pipelines/config-map.png" alt="The configuration map showing data coming from http, splunk_hec, and datadog, and flowing into different transforms and then sent to different destinations" style="width:80%;" >}}
 
-### Quickly identify bottlenecks and optimize performance
+{{< img src="observability_pipelines/component_panel.png" alt="The Datadog Logs component side panel showing a line graph of events in/out per second and a link graph of bytes in/out per second" style="width:100%;" >}}
 
-Dive into specific Vector components to understand how observability data is flowing into your pipeline to troubleshoot and pinpoint performance bottlenecks and to optimize your pipeline. 
+### Control your data volume before it gets routed
 
-{{< img src="observability_pipelines/config-map-side-panel.png" alt="The S3 source configuration side panel showing graphs for events in and out per second, percentage of errors, and load average percentage" style="width:85%;" >}}
+Optimize volume and reduce the size of your observability data by sampling, filtering, deduplicating, and aggregating your logs and metrics. Govern your telemetry by enforcing data standards and controlling tags for metrics.
 
-### Ensure data delivery and reduce latency. 
+{{< img src="observability_pipelines/transforms.png" alt="The list of transforms side panel showing the transforms available such as aggregate, Amazon EC2 Metadata, dedupe and more." style="width:100%;" >}}
 
-Find out if data is reaching its destination and get full visibility into any latency issues to meet SLIs and SLOs.
+### Redact sensitive data from your telemetry data
 
-{{< img src="observability_pipelines/configuration-list.png" alt="The Observability Pipelines page showing a list of active and inactive pipelines with columns for created date, number of hosts, version, events in, bytes in, and error rate" style="width:85%;" >}}
+Redact sensitive data before they are routed outside of your infrastructure, using out-of-the-box patterns to scan for PII, PCI, private keys, and more.
+
+{{< img src="observability_pipelines/scanning_rules.png" alt="The sensitive data scanner rules library panel showing the available rules for personal identifiable information and network and device information" style="width:85%;" >}}
+
+### Monitor the health of your pipelines
+
+Get a holistic view of all of your pipelines' topologies and monitor key performance indicators, such as average load, error rate, and throughput for each of your flows.
+
+{{< img src="observability_pipelines/pipeline_health.png" alt="The pipeline configuration page showing a warning because components are experiencing errors and an event ingestion delay was detected" style="width:90%;" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://vector.dev/
-[2]: /observability_pipelines/setup/#install-vector
-[3]: /observability_pipelines/setup/#set-up-vector-configurations
-[4]: /observability_pipelines/setup/#connect-vector-to-observability-pipelines
+[1]: /observability_pipelines/setup/
+[2]: /observability_pipelines/configurations/
+[3]: /observability_pipelines/production_deployment_overview/
+[4]: /observability_pipelines/architecture/

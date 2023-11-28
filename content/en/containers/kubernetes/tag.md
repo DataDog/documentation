@@ -113,19 +113,19 @@ Starting with Agent v6.0+, the Agent can collect labels for a given node and use
 
 To extract a given node label `<NODE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
-```shell
+```bash
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"<NODE_LABEL>": "<TAG_KEY>"}'
 ```
 
 For example, you could set up:
 
-```shell
+```bash
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
 For Agent v7.24.0+, use the following environment variable configuration to add all node labels as tags to your metrics. In this example, the tags names are prefixed by `<PREFIX>_`:
 
-```shell
+```bash
 DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 ```
 
@@ -149,7 +149,7 @@ kubernetes_node_labels_as_tags:
   app: kube_app
 ```
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -162,19 +162,19 @@ Starting with Agent v6.0+, the Agent can collect labels for a given pod and use 
 
 To extract a given pod label `<POD_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
-```shell
+```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"<POD_LABEL>": "<TAG_KEY>"}'
 ```
 
 For example, you could set up:
 
-```shell
+```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
 For Agent v6.8.0+, use the following environment variable configuration to add all pod labels as tags to your metrics. In this example, the tags names are prefixed by `<PREFIX>_`:
 
-```shell
+```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 ```
 
@@ -207,7 +207,7 @@ kubernetes_pod_labels_as_tags:
 
 **Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -220,19 +220,19 @@ Starting with Agent v6.0+, the Agent can collect annotations for a given pod and
 
 To extract a given pod label `<POD_ANNOTATION>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
-```shell
+```bash
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"<POD_ANNOTATION>": "<TAG_KEY>"}'
 ```
 
 For example, you could set up:
 
-```shell
+```bash
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"app":"kube_app"}'
 ```
 
 For Agent v7.24.0+, use the following environment variable configuration to add all pod annotations as tags to your metrics. In this example, the tags names are prefixed by `<PREFIX>_`:
 
-```shell
+```bash
 DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
 ```
 
@@ -256,7 +256,7 @@ kubernetes_pod_annotations_as_tags:
   app: kube_app
 ```
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -269,19 +269,19 @@ Starting with Agent v7.27+, the Agent can collect labels for a given namespace a
 
 To extract a given namespace label `<NAMESPACE_LABEL>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
-```shell
+```bash
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"<NAMESPACE_LABEL>": "<TAG_KEY>"}'
 ```
 
 For example, you could set up:
 
-```shell
+```bash
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
 Use the following environment variable configuration to add all namespace labels as tags to your metrics. In this example, the tag names are prefixed by `<PREFIX>_`:
 
-```shell
+```bash
 DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 ```
 
@@ -305,7 +305,7 @@ kubernetes_namespace_labels_as_tags:
   app: kube_app
 ```
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -318,13 +318,13 @@ Starting with Agent v7.32+, the Agent can collect container environment variable
 
 To extract a given environment variable `<ENV_VAR>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
-```shell
+```bash
 DD_CONTAINER_ENV_AS_TAGS='{"<ENV_VAR>": "<TAG_KEY>"}'
 ```
 
 For example:
 
-```shell
+```bash
 DD_CONTAINER_ENV_AS_TAGS='{"app":"kube_app"}'
 ```
 
@@ -348,13 +348,13 @@ container_env_as_tags:
   app: kube_app
 ```
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Container labels as tags
 
-Starting with Agent v7.33+, the Agent can collect container labels and use them as tags.  The agent attaches the tags to all metrics associated with the container.
+Starting with Agent v7.33+, the Agent can collect container labels and use them as tags. The agent attaches the tags to all metrics associated with the container.
 The Agent can generate tags from container labels for both `docker` and `containerd` containers. In the case of `containerd`, the minimum supported version is v1.5.6, because previous releases do not propagate labels correctly.
 
 {{< tabs >}}
@@ -362,13 +362,13 @@ The Agent can generate tags from container labels for both `docker` and `contain
 
 To extract a given container label `<CONTAINER_LABEL>` and transform it to a tag key `<TAG_KEY>`, add the following environment variable to the Datadog Agent:
 
-```shell
+```bash
 DD_CONTAINER_LABELS_AS_TAGS='{"<CONTAINER_LABEL>":"<TAG_KEY>"}'
 ```
 
 For example:
 
-```shell
+```bash
 DD_CONTAINER_LABELS_AS_TAGS='{"app":"kube_app"}'
 ```
 
@@ -392,7 +392,7 @@ container_labels_as_tags:
   app: kube_app
 ```
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 

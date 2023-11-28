@@ -7,7 +7,7 @@ further_reading:
   text: "Alert on anomalous p99 latency of a database service"
 - link: "/tracing/guide/week_over_week_p50_comparison/"
   tag: "2 mins"
-  text: "Compare a service’s latency to the previous week"
+  text: "Compare a service's latency to the previous week"
 - link: "/tracing/guide/apm_dashboard/"
   tag: "4 mins"
   text: "Create a Dashboard to track and correlate APM metrics"
@@ -21,7 +21,7 @@ further_reading:
 
 _7 minutes to complete_
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="Analytics View" video="true"  style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="Analytics View" video="true" style="width:90%;">}}
 
 Datadog APM allows you to customize your [traces][1] to include any additional information you might need to maintain observability into your business. You can use this to identify a spike in the throughput of a certain enterprise customer, or the user suffering the highest latency, or to pinpoint the database shard generating the most errors.
 
@@ -31,7 +31,7 @@ In this example, a customer ID is added to traces allowing the customers that ha
 
 1) **Follow the example to get your code instrumented**.
 
-Depending on the programming language you are you using, you’ll need to set the [tags][3] to add to your spans differently.
+Depending on the programming language you are you using, you'll need to set the [tags][3] to add to your spans differently.
 
 **Note**: take note of the service and [resource names][4] you are working on, these will come in handy later. In this example, the service is the Ruby server `web-store` and the resource (endpoint) is `ShoppingCartController#checkout`.
 
@@ -194,7 +194,7 @@ public class ShoppingCartController : Controller
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-The Datadog UI uses tags to set span level metadata. Custom tags may be set for auto-instrumentation by grabbing the active span from the global tracer and setting a tag with `setTag` method.
+The Datadog UI uses tags to set span level metadata. Custom tags may be set for auto-instrumentation by grabbing the active span from the global tracer and setting a tag in the `meta` array.
 
 ```php
 <?php
@@ -223,15 +223,15 @@ The Datadog UI uses tags to set span level metadata. Custom tags may be set for 
 
 ## Leverage the Datadog UI to search for your custom span tags
 
-2) **Go to the Services page** and click on the [service][5] that you added tags to. **Scroll down and click on the specific resource** where the tag was added in the [Resource][4] table. **Scroll down to the Traces table**
+2) **Go to the Service Catalog** and click the [service][5] that you added tags to. **Scroll down and click on the specific resource** where the tag was added in the [Resource][4] table. **Scroll down to the Traces table**
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="Resource Page"  style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="Resource Page" style="width:90%;">}}
 
 The Trace table shows you both the overall latency distribution of all traces in the current scope (service, resource, and timeframe) and links to individual traces. You can sort this table by duration or error code to identify erroneous operation or opportunities for optimization.
 
 3) **Click into one of your traces**
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_4.png" alt="Flame graph"  style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_4.png" alt="Flame graph" style="width:90%;">}}
 
 In this view you can see the **flame graph** on top and the additional information windows beneath it. The Datadog flame graph allows you to have an at a glance view of the duration and status of every logical unit (span) that impacts a request. The flame graph is fully interactive and you can pan it (by dragging) or zoom in and out (by scrolling). Clicking on any span provides more information about that span in particular in the bottom part of the view.
 
@@ -249,11 +249,11 @@ The Trace Search page allows you to identify specific [Traces][1] and Indexed Sp
 
 6) **Find the new tag that you added to the trace**. Click on it and select **Create facet** for `@[your facet name]` (remember, this is customer_id in our example)
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_5.png" alt="Create Facet Menu"  style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_5.png" alt="Create Facet Menu" style="width:90%;">}}
 
 You can now determine the displayed name of your facet and where to place it in the facet explorer.
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_8.png" alt="Create Facet Modal"  style="width:60%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_8.png" alt="Create Facet Modal" style="width:60%;">}}
 
 You should now be able to see the facet you created in the Facet Explorer. The fastest way to find it is by using the `Search facets` box.
 
@@ -261,19 +261,19 @@ You should now be able to see the facet you created in the Facet Explorer. The f
 
 The Analytics page is a visual query building tool that allows you to conduct an investigation into your traces with infinite cardinality. It relies on facets to filter and scope the query, read more in the [Trace Explorer overview][9].
 
-7) **Choose the service** you’ve been working on from the service facet list, **choose Error** from the status facet and **select `customer_id`** (or any other tags you added to your spans) from the group by field.
+7) **Choose the service** you've been working on from the service facet list, **choose Error** from the status facet and **select `customer_id`** (or any other tags you added to your spans) from the group by field.
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt=" span md 6"  video="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt=" span md 6" video="true" style="width:90%;">}}
 
 8) **Remove Error** from the query, **change the `count *` measure to `Duration`** and **change the graph type to `Top List`**.
 
-You can now see the customers that have the slowest average requests. **Note**: If you’d like to make sure your customers never pass a certain threshold of performance, you can [export this query to a monitor][10], alternatively, you can save this visualization to a dashboard and keep an eye over it over time.
+You can now see the customers that have the slowest average requests. **Note**: If you'd like to make sure your customers never pass a certain threshold of performance, you can [export this query to a monitor][10], alternatively, you can save this visualization to a dashboard and keep an eye over it over time.
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.mp4" alt="span md 7" video="true"  style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.mp4" alt="span md 7" video="true" style="width:90%;">}}
 
 Finally, you can also see all the traces relevant to your query by clicking the visualization and selecting `View traces`.
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_9.mp4" alt="span md 9" video="true"  style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_9.mp4" alt="span md 9" video="true" style="width:90%;">}}
 
 ## Further Reading
 
@@ -284,8 +284,8 @@ Finally, you can also see all the traces relevant to your query by clicking the 
 [3]: /tracing/glossary/#span-tags
 [4]: /tracing/glossary/#resources
 [5]: /tracing/glossary/#services
-[6]: https://app.datadoghq.com/apm/search
+[6]: https://app.datadoghq.com/apm/traces
 [7]: /tracing/trace_explorer/#live-search-for-15-minutes
-[8]: https://app.datadoghq.com/apm/analytics
+[8]: https://app.datadoghq.com/apm/traces?viz=timeseries
 [9]: /tracing/trace_explorer/query_syntax/
 [10]: /tracing/guide/alert_anomalies_p99_database/

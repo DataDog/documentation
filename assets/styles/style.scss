@@ -1,6 +1,7 @@
 // bootstrap customization & font setup
 @import 'bootstrap-custom';
 @import 'webfonts';
+@import 'dropdown';
 
 // jqmath
 @import 'jqmath-vanilla/jqmath-0.4.3';
@@ -14,12 +15,13 @@
 @import 'base/typography';
 @import 'base/spacing';
 @import 'base/helpers';
+$baseImgURL: '{{.Site.Params.img_url}}';
 
 // vendor
 @import 'vendor/chroma-styles';
 
-// docsearch
-@import 'main_docsearch';
+// instantsearch
+@import 'algolia_instantsearch';
 
 // global to all pages
 @import 'pages/global';
@@ -31,21 +33,22 @@
 // partial css lives with partial
 
 @import "pages/api";
-@import "pages/search";
 @import "pages/404";
 @import "pages/home";
 @import "pages/glossary";
+@import "pages/standard-attributes";
+@import "pages/reference";
 
 // Components
 @import 'base/iconfont'; // imported from websites-modules
 @import 'components/announcement-banner'; // imported from websites-modules
 @import 'components/badge';
 @import 'components/cards';
-@import 'components/footer';
+@import 'components/footer'; // imported from websites-modules
 @import 'components/global-modals';
 @import 'components/header';
 @import 'components/integration-labels';
-@import 'components/integration-breadcrumbs';
+@import 'components/breadcrumbs';
 @import 'components/integrations';
 @import 'components/platforms';
 @import 'components/preview_banner';
@@ -63,6 +66,8 @@
 @import 'components/main-nav'; // imported from websites-modules
 @import 'components/mobile-nav'; // imported from websites-modules
 @import 'components/dd-navbar'; // for body-noscroll
+@import 'components/demo-request-modal'; // imported from websites-modules
+
 
 // for now just include ie fixes
 @import 'ie';

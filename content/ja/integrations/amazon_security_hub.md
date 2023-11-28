@@ -1,30 +1,31 @@
 ---
 categories:
-  - cloud
-  - AWS
-  - ログの収集
+- cloud
+- AWS
+- ログの収集
 dependencies: []
-description: Amazon Security Hub イベントをログとして取り込みます。
+description: AWS Security Hub イベントをログとして取り込みます。
 doc_link: ''
 draft: false
 git_integration_title: amazon_security_hub
 has_logo: true
 integration_id: amazon-security-hub
-integration_title: Amazon Security Hub
+integration_title: AWS Security Hub
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_security_hub
-public_title: Datadog-Amazon Security Hub インテグレーション
-short_description: Amazon Security Hub イベントをログとして取り込みます。
+public_title: Datadog-AWS Security Hub インテグレーション
+short_description: AWS Security Hub イベントをログとして取り込みます。
 version: '1.0'
 ---
+
 ## 概要
 
 AWS Security Hub は、AWS のセキュリティ状態の包括的なビューを提供し、セキュリティ業界の標準とベストプラクティスに照らして環境をチェックするのに役立ちます。
 
-このインテグレーションにより、Datadog ですべての Security Hub ログを表示できます。
+このインテグレーションにより、Datadog ですべての AWS Security Hub ログを表示できます。
 
 ## セットアップ
 

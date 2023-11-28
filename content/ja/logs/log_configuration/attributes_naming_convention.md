@@ -15,6 +15,9 @@ further_reading:
 - link: logs/explorer
   tag: ドキュメント
   text: ログの調査方法
+- link: https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/
+  tag: ブログ
+  text: CIDR 表記クエリを使用して、ネットワークトラフィックログをフィルターする
 kind: documentation
 title: 属性とエイリアス設定
 ---
@@ -61,11 +64,11 @@ title: 属性とエイリアス設定
 - [ログエクスプローラー][1]から、既存の属性を標準属性に**格上げ**できます。
 - 標準属性の[コンフィギュレーションページ][3]から、新しい標準属性を**作成**します。
 
-{{< img src="logs/processing/attribute_naming_convention/standard_attribute_config.png" alt="標準属性"  style="width:60%;">}}
+{{< img src="logs/processing/attribute_naming_convention/standard_attribute_config.png" alt="標準属性" style="width:60%;">}}
 
 標準属性テーブルには、[定義済み標準属性セット](#default-standard-attribute-list)が付属しています。このリストに独自の属性を追加したり、既存の標準属性を編集または削除することができます。
 
-{{< img src="logs/processing/attribute_naming_convention/edit_standard_attributes.png" alt="標準属性を編集"  style="width:80%;">}}
+{{< img src="logs/processing/attribute_naming_convention/edit_standard_attributes.png" alt="標準属性を編集" style="width:80%;">}}
 
 標準属性は以下によって定義されます。
 
@@ -76,7 +79,7 @@ title: 属性とエイリアス設定
 
 新しい標準属性を追加したり、既存の標準属性を編集する際は、標準属性パネルが表示されます。
 
-{{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="標準属性を定義"  style="width:80%;">}}
+{{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="標準属性を定義" style="width:80%;">}}
 
 ### デフォルトの標準属性リスト
 
@@ -106,7 +109,7 @@ title: 属性とエイリアス設定
 | `network.bytes_read`       | `number` | ログの送信時にクライアントからサーバーに転送された合計バイト数。 |
 | `network.bytes_written`    | `number` | ログの送信時にサーバーからクライアントに転送された合計バイト数。 |
 
-これらの属性に依存する代表的なインテグレーションには、[Apache][4]、[Varnish][9]、[AWS ELB][10]、[Nginx][11]、[HAProxy][12] などがあります。
+これらの属性に依存する代表的なインテグレーションには、[Apache][4]、[Varnish][9]、[Amazon ELB][10]、[Nginx][11]、[HAProxy][12] などがあります。
 
 #### 位置情報
 

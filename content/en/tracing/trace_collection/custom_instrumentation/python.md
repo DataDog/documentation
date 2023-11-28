@@ -1,5 +1,5 @@
 ---
-title: Python Custom Instrumentation
+title: Python Custom Instrumentation with Datadog Library
 kind: documentation
 aliases:
     - /tracing/opentracing/python
@@ -60,10 +60,10 @@ def make_sandwich_request(request):
       return
 ```
 
-API details for the decorator can be found for `ddtrace.Tracer.wrap()` [here][1].
+To learn more, read [API details for the decorator for `ddtrace.Tracer.wrap()`][1].
 
 
-[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.wrap
+[1]: https://ddtrace.readthedocs.io/en/stable/api.html#ddtrace.Tracer.wrap
 {{% /tab %}}
 {{% tab "Context Manager" %}}
 
@@ -89,7 +89,7 @@ def make_sandwich_request(request):
             sandwich = assemble_sandwich(ingredients)
 ```
 
-Full API details for `ddtrace.Tracer()` can be found [here][2]
+To learn more, read the full [API details for `ddtrace.Tracer()`][2]
 
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span
 [2]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#tracer
@@ -107,7 +107,7 @@ def make_sandwich_request(request):
     span.finish()  # remember to finish the span
 ```
 
-API details of the decorator can be found in the `ddtrace.Tracer.trace` [documentation][2] or the `ddtrace.Span.finish`[documentation][3].
+For more API details of the decorator, read the [`ddtrace.Tracer.trace` documentation][2] or the [`ddtrace.Span.finish` documentation][3].
 
 
 
@@ -175,7 +175,7 @@ def make_sandwich_request(request):
 {{% /tab %}}
 {{% tab "Globally" %}}
 
-Tags can be globally set on the tracer. These tags will be applied to every span that is created.
+Tags can be globally set on the tracer. These tags are be applied to every span that is created.
 
 ```python
 from ddtrace import tracer
@@ -208,17 +208,38 @@ span = tracer.trace("operation")
 span.error = 1
 span.finish()
 ```
+
+In the event you want to flag the local root span with the error raised:
+
+```python
+import os
+from ddtrace import tracer
+
+try:
+    raise TypeError
+except TypeError as e:
+    root_span = tracer.current_root_span()
+    (exc_type, exc_val, exc_tb) = sys.exc_info()
+    # this sets the error type, marks the span as an error, and adds the traceback
+    root_span.set_exc_info(exc_type, exc_val, exc_tb)
+```
 {{% /tab %}}
 {{< /tabs >}}
 
+
+## Propagating context with headers extraction and injection
+
+You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][2] for information.
+
 ## Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][2] page or in [Ignoring Unwanted Resources][3].
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][4] page or in [Ignoring Unwanted Resources][5].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/python
-[2]: /tracing/security
-[3]: /tracing/guide/ignoring_apm_resources/
+[2]: /tracing/trace_collection/trace_context_propagation/python/
+[4]: /tracing/security
+[5]: /tracing/guide/ignoring_apm_resources/

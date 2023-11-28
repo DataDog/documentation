@@ -36,7 +36,7 @@ author:
 categories:
 - data store
 - log collection
-- autodiscovery
+- tracing
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/elastic/README.md
 display_on_public_website: true
@@ -44,7 +44,7 @@ draft: false
 git_integration_title: elastic
 integration_id: elasticsearch
 integration_title: ElasticSearch
-integration_version: 5.3.0
+integration_version: 5.5.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -54,17 +54,17 @@ public_title: ElasticSearch
 short_description: クラスター全体のステータスから JVM のヒープ使用量まで、すべてを監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::データストア
   - Category::ログの収集
-  - Category::オートディスカバリー
+  - Category::Tracing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: クラスター全体のステータスから JVM のヒープ使用量まで、すべてを監視
   media: []
@@ -134,7 +134,9 @@ Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれて�
       - AWS Elasticsearch サービスに Agent の Elasticsearch インテグレーションを使用するには、`url` パラメーターを AWS Elasticsearch stats の URL に設定します。
       - Amazon ES コンフィギュレーション API へのすべてのリクエストには、署名が必要です。詳細は、[OpenSearch サービスリクエストの作成と署名][4]を参照してください。
       - `aws` の認証タイプは、[boto3][5] に依存して `.aws/credentials` から自動的に AWS 認証情報を収集します。`conf.yaml` で `auth_type: basic` を使用して、認証情報を `username: <USERNAME>`、`password: <PASSWORD>` で定義します。
-      - 監視するためには、適切な権限を持つユーザーとロール (まだ持っていない場合) を Elasticsearch で作成する必要があります。これは、Elasticsearch が提供する REST API、または Kibana UI を通じて行うことができます。作成したロールに以下のプロパティを含めます。
+      - 監視するためには、適切な権限を持つユーザーとロール (まだ持っていない場合) を Elasticsearch で作成する必要があります。これは、Elasticsearch が提供する REST API、または Kibana UI を通じて行うことができます。
+      - Elastic Search のセキュリティ機能を有効にしている場合、API を使用して Elastic Search のインデックスを呼び出す際に、`monitor` または `manage` 権限を使用することができます。
+      - 作成したロールに以下のプロパティを含めます。
         ```json
         name = "datadog"
         indices {
@@ -177,6 +179,20 @@ custom_queries:
    - custom_tag:1
 ```
 カスタムクエリは `GET` リクエストとして送信されます。オプションの `payload` パラメーターを使用すると、`POST` リクエストとして送信されます。
+
+`value_path` には文字列キーまたはリストインデックスを指定します。例:
+```json
+{
+  "foo": {
+    "bar": [
+      "result0",
+      "result1"
+    ]
+  }
+}
+```
+
+`value_path: foo.bar.1` は値 `result1` を返します。
 
 ##### トレースの収集
 
@@ -500,6 +516,7 @@ Agent コンテナで必要な環境変数
 - `pshard_stats` は、**elasticsearch.primaries.\*** および **elasticsearch.indices.count** メトリクスを送信します。
 - `index_stats` は、**elasticsearch.index.\*** メトリクスを送信します。
 - `pending_task_stats` は、**elasticsearch.pending\_\*** メトリクスを送信します。
+- `slm_stats` は、**elasticsearch.slm.\*** メトリクスを送信します
 
 ### メトリクス
 {{< get-metrics-from-git "elastic" >}}
@@ -525,7 +542,7 @@ Elasticsearch チェックは、Elasticsearch クラスターの全体的なス�
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/elastic/images/elasticsearch-dash.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/integrations/faq/elastic-agent-can-t-connect/
 [5]: https://docs.datadoghq.com/ja/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/

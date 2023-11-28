@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
+- 自動化
 - aws
+- クラウド
 - ログの収集
 dependencies: []
 description: Amazon SageMaker のキーメトリクスを追跡

@@ -24,7 +24,6 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- 処理
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/flink/README.md
@@ -43,16 +42,15 @@ public_title: Flink
 short_description: Flink ジョブのメトリクスを追跡する。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Processing
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Flink ジョブのメトリクスを追跡する。
   media: []
@@ -80,10 +78,10 @@ Flink チェックは [Datadog Agent][4] パッケージに含まれています
 
 1. Flink で [Datadog HTTP Reporter][2] を構成します。
 
-     `<FLINK_HOME>/opt/flink-metrics-datadog-<DATADOG_REPORTER_VERSION>.jar` を `<FLINK_HOME>/lib` フォルダーにコピーします。`<FLINK_HOME>/conf/flink-conf.yaml` に以下の行を追加し、`<DATADOG_API_KEY>` に Datadog [API キー][5]を入力してください。
+   `<FLINK_HOME>/conf/flink-conf.yaml` に以下の行を追加し、`<DATADOG_API_KEY>` を Datadog [API キー][5]と置き換えます。
 
     ```yaml
-    metrics.reporter.dghttp.class: org.apache.flink.metrics.datadog.DatadogHttpReporter
+    metrics.reporter.dghttp.factory.class: org.apache.flink.metrics.datadog.DatadogHttpReporterFactory
     metrics.reporter.dghttp.apikey: <DATADOG_API_KEY>
     metrics.reporter.dghttp.dataCenter: {{< region-param key="dd_datacenter" >}}
     ```
@@ -104,7 +102,7 @@ Flink チェックは [Datadog Agent][4] パッケージに含まれています
 3. `<FLINK_HOME>/conf/flink-conf.yaml` に、たとえば以下のカスタムタグのような[タグ][2]を追加します。
 
     ```yaml
-    metrics.reporter.dghttp.tags: <KEY1>:<VALUE1>, <KEY1>:<VALUE2>
+    metrics.reporter.dghttp.scope.variables.additional: <KEY1>:<VALUE1>, <KEY1>:<VALUE2>
     ```
 
      **注**: デフォルトでは、メトリクスの名前はタグとして送信され、識別されるため、`job_id` や `task_id` などのカスタムタグを追加する必要はありません。
@@ -115,17 +113,9 @@ Flink チェックは [Datadog Agent][4] パッケージに含まれています
 
 _Agent バージョン 6.0 以降で利用可能_
 
-1. Flink はデフォルトで `log4j` ロガーを使用します。ファイルへのログ記録をアクティブにし、フォーマットをカスタマイズするには、`log4j.properties`、`log4j-cli.properties`、`log4j-yarn-session.properties`、または `log4j-console.properties` ファイルを編集します。デフォルトのコンフィギュレーションについては、[Flink のリポジトリ][6]を参照してください。たとえば、`log4j.properties` にはデフォルトで以下のコンフィギュレーションが含まれます。
+1. Flink はデフォルトで `log4j` ロガーを使用します。ファイルへのロギングを有効にするには、Flink ディストリビューションの `conf/` ディレクトリにある `log4j*.properties` コンフィギュレーションファイルを編集して、フォーマットをカスタマイズします。どのコンフィギュレーションファイルがあなたのセットアップに関連するかについては、[Flink のロギングに関するドキュメント][6]を参照してください。デフォルトの構成については、[Flink のリポジトリ][7]を参照してください。
 
-   ```conf
-   log4j.appender.file=org.apache.log4j.FileAppender
-   log4j.appender.file.file=${log.file}
-   log4j.appender.file.append=false
-   log4j.appender.file.layout=org.apache.log4j.PatternLayout
-   log4j.appender.file.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %-60c %x - %m%n
-   ```
-
-2. インテグレーションパイプラインは、デフォルトで、次の変換パターンをサポートします。
+2. インテグレーションパイプラインは、デフォルトで、次のレイアウトパターンをサポートします。
 
     ```text
     %d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %-60c %x - %m%n
@@ -133,7 +123,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
    タイムスタンプの部分には、たとえば `2020-02-03 18:43:12,251` などが入ります。
 
-     フォーマットが異なる場合は、[インテグレーションパイプライン][7]を複製して編集してください。
+     フォーマットが異なる場合は、[インテグレーションパイプライン][8]を複製して編集してください。
 
 3. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -141,7 +131,7 @@ _Agent バージョン 6.0 以降で利用可能_
    logs_enabled: true
    ```
 
-4. `flink.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、`path` パラメーターと `service` パラメーターの値を変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[flink.d/conf.yaml のサンプル][8]を参照してください。
+4. `flink.d/conf.yaml` ファイルのコメントを解除して、ログコンフィギュレーションブロックを編集します。環境に基づいて、`path` パラメーターと `service` パラメーターの値を変更してください。使用可能なすべてのコンフィギュレーションオプションの詳細については、[flink.d/conf.yaml のサンプル][9]を参照してください。
 
    ```yaml
    logs:
@@ -156,11 +146,11 @@ _Agent バージョン 6.0 以降で利用可能_
        #    name: new_log_start_with_date
    ```
 
-5. [Agent を再起動します][9]。
+5. [Agent を再起動します][10]。
 
 ### 検証
 
-[Agent の status サブコマンドを実行][10]し、Checks セクションで `flink` を探します。
+[Agent の status サブコマンドを実行][11]し、Checks セクションで `flink` を探します。
 
 ## 収集データ
 
@@ -178,18 +168,19 @@ Flink には、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][12]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][13]までお問合せください。
 
 
 [1]: https://flink.apache.org/
-[2]: https://ci.apache.org/projects/flink/flink-docs-release-1.9/monitoring/metrics.html#datadog-orgapacheflinkmetricsdatadogdatadoghttpreporter
+[2]: https://nightlies.apache.org/flink/flink-docs-release-1.16/docs/deployment/metric_reporters/#datadog
 [3]: https://docs.datadoghq.com/ja/api/?lang=bash#api-reference
 [4]: https://app.datadoghq.com/account/settings#agent
 [5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: https://github.com/apache/flink/tree/master/flink-dist/src/main/flink-bin/conf
-[7]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines
-[8]: https://github.com/DataDog/integrations-core/blob/master/flink/datadog_checks/flink/data/conf.yaml.example
-[9]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[11]: https://github.com/DataDog/integrations-core/blob/master/flink/metadata.csv
-[12]: https://docs.datadoghq.com/ja/help/
+[6]: https://nightlies.apache.org/flink/flink-docs-release-1.16/docs/deployment/advanced/logging/
+[7]: https://github.com/apache/flink/tree/release-1.16/flink-dist/src/main/flink-bin/conf
+[8]: https://docs.datadoghq.com/ja/logs/processing/#integration-pipelines
+[9]: https://github.com/DataDog/integrations-core/blob/master/flink/datadog_checks/flink/data/conf.yaml.example
+[10]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[12]: https://github.com/DataDog/integrations-core/blob/master/flink/metadata.csv
+[13]: https://docs.datadoghq.com/ja/help/

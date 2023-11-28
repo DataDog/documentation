@@ -8,10 +8,9 @@ author:
   sales_email: sales@docontrol.io
   support_email: support@docontrol.io
 categories:
-- security
-- インシデント
 - 自動化
-- アラート設定
+- ログの収集
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/docontrol/README.md
 display_on_public_website: true
@@ -29,18 +28,17 @@ public_title: DoControl
 short_description: SaaS データセキュリティ - DLP と CASB の最新化による SaaS データの安全性確保
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Security
-  - Category::Incidents
   - Category::Automation
-  - Category::Alerting
+  - Category::Log Collection
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: SaaS データセキュリティ - DLP と CASB の最新化による SaaS データの安全性確保
   media:

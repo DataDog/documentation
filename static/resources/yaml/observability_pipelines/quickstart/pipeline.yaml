@@ -1,0 +1,44 @@
+## SOURCES: Data sources that Observability Pipelines Worker collects data from.
+## For a Quickstart use case, we are using generate_syslog to generate sample data.
+sources:
+  generate_syslog:
+    type: demo_logs
+    format: syslog
+    interval: 1
+
+## TRANSFORMS: Data processing
+## parse_syslog: Parse syslog-formatted logs into structured data
+transforms:
+  parse_syslog:
+    type: remap
+    inputs:
+      - generate_syslog
+    source: |
+      # Parse the message as syslog
+      . = parse_syslog!(.message)
+      .environment = "demo"
+      .application = "observability-pipelines-quickstart"
+
+## SINKS: Data output destinations
+## console: Print JSON-formatted events to the console
+## datadog: Ship logs to Datadog Logs
+sinks:
+  print_syslog:
+    type: console
+    inputs:
+      - parse_syslog
+    encoding:
+      codec: json
+  datadog_logs:
+    type: datadog_logs
+    inputs:
+      - parse_syslog
+    default_api_key: "${DD_API_KEY}"
+    site: "${DD_SITE}"
+    compression: gzip
+    ## We've omitted the buffer here to reduce friction when testing locally.
+    ## Consider re-enabling and configuring before deploying to production environments.
+    ## The max_size is currently set to 288GB.
+    # buffer:
+    #       type: disk
+    #       max_size: 309237645312

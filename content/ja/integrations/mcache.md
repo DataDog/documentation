@@ -29,10 +29,9 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
 - caching
-- autodiscovery
 - log collection
+- tracing
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mcache/README.md
 display_on_public_website: true
@@ -40,7 +39,7 @@ draft: false
 git_integration_title: mcache
 integration_id: memcached
 integration_title: Memcache
-integration_version: 3.3.0
+integration_version: 3.3.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -54,12 +53,11 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::キャッシュ
+  - Category::ログの収集
+  - Category::Tracing
   - Supported OS::Linux
   - Supported OS::macOS
-  - Category::Web
-  - Category::キャッシュ
-  - Category::オートディスカバリー
-  - Category::ログの収集
   configuration: README.md#Setup
   description: メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。
   media: []
@@ -83,6 +81,8 @@ Memcache チェックは [Datadog Agent][1] パッケージに含まれていま
 ### コンフィギュレーション
 
 ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+
+Memcache サーバーを起動する際に、バインディングプロトコル `-B` を `binary` または `auto` に設定します。自動 (auto) がデフォルトです。
 
 #### メトリクスの収集
 

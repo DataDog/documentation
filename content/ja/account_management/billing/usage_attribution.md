@@ -1,4 +1,8 @@
 ---
+algolia:
+  tags:
+  - 使用属性
+  - コスト属性
 aliases:
 - /ja/account_management/billing/advanced_usage_reporting/
 - /ja/account_management/billing/custom_usage_reporitng/
@@ -23,16 +27,20 @@ Usage Attribution は、Enterprise プランに含まれる高度な機能です
 - 毎月月末に使用方法を要約します。
 - UI および TSV ダウンロードとしてデータを表示します。
 
-以下の使用タイプはこのツールではサポートされません。
+このツールでは、以下のような多くの使用タイプがサポートされていません。
 
 - Analyzed Logs (Security)
 - インシデント管理
+- Network Flows
+- CI Spans
+
+Datadog は、以下の製品の Estimated Usage Attribution 値を提供しています。
+
 - インデックス化されたログイベント
 - 収集されたログ
 - Indexed Span
 - Ingested Span
-- Network Flows
-- リアルユーザーモニタリング (RUM)
+- リアルユーザーモニタリングの総セッション数
 
 ## はじめに
 
@@ -70,25 +78,13 @@ Usage Attribution は、Enterprise プランに含まれる高度な機能です
 - マルチオーガニゼーションを有効にすると、使用方法は親アカウントの全 Datadog オーガニゼーションが要約されます。
 - 前の月のレポートには、タイムセレクターからアクセスできます。
 - 月次レポートはその月が終わるまで生成されません。月次レポートは、翌月の 2 日には閲覧できます。
-- レポートは TSV フォーマットでダウンロードできます。この TSV レポートには、使用数と使用率の両方が含まれるため、割り当てとチャージバックをシンプルに行うことができます。
+- レポートは TSV フォーマットでダウンロードできます。この TSV レポートには、使用数と使用率の両方が含まれるため、割り当てとチャージバックをシンプルに行うことができます。率は組織単位で計算されます。
 
 月次データはツールのパブリック API を使いプルすることもできます。詳細は、[API エンドポイントドキュメント][1]を参照してください。
 
+### 1 時間ごとの使用量属性
 
-{{< site-region region="us,eu" >}}
-### 日次使用属性
-
-このセクションでは、日次レポートを時間の粒度で表示し時間枠を丁寧に調べます。また指定した月のすべてのレポートを連結することもできます。
-
-- 特定の期間をクリックすると、右側でビューが展開され、そこから TSV ファイルのレポートをダウンロードできます。
-- データは毎日または月末にダウンロードできます。
-
-{{< img src="account_management/billing/usage_attribution/daily-usage-attribution.png" alt="日次使用量属性データ" style="width:100%;" >}}
-
-日次データはツールのパブリック API を使いプルすることもできます。詳細は、[API エンドポイントドキュメント][2]を参照してください。
-
-[2]: https://docs.datadoghq.com/ja/api/v1/usage-metering/#get-hourly-usage-attribution
-{{< /site-region >}}
+時間単位のデータはツールのパブリック API を使いプルすることができます。詳細は、[API エンドポイントドキュメント][2]を参照してください。
 
 ### データの解釈
 
@@ -107,7 +103,7 @@ Usage Attribution は、Enterprise プランに含まれる高度な機能です
 
 #### 詳細なデータ分析
 
-複数のタグを使用する場合、日次および月次使用属性レポートにはタグの全通りの組み合わデータが含まれるため、詳細なデータ分析タスクのベースデータセットとして使用することができます。たとえば、グループ化やピボットでタグのサブセットに注目したビューを表示したり、任意の日付範囲の中で集計を行うことができます。
+複数のタグを使用する場合、時間単位および月次使用属性レポートにはタグの全通りの組み合わデータが含まれるため、詳細なデータ分析タスクのベースデータセットとして使用することができます。たとえば、グループ化やピボットでタグのサブセットに注目したビューを表示したり、任意の日付範囲の中で集計を行うことができます。
 
 ## 使用量の追跡
 
@@ -131,4 +127,5 @@ Usage Attribution は、Enterprise プランに含まれる高度な機能です
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/ja/api/v1/usage-metering/#get-monthly-usage-attribution
+[2]: https://docs.datadoghq.com/ja/api/v1/usage-metering/#get-hourly-usage-attribution
 [3]: https://docs.datadoghq.com/ja/getting_started/tagging/#defining-tags

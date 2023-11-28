@@ -30,7 +30,7 @@ To get even more complete, end-to-end visibility into requests as they move acro
 
 See [Connect RUM and Traces][2] for information about setting up this feature.
 
-{{< img src="real_user_monitoring/browser/resource_performance_graph.png" alt="APM Trace information for a RUM Resource"  >}}
+{{< img src="real_user_monitoring/browser/resource_performance_graph.png" alt="APM Trace information for a RUM Resource" >}}
 
 ## Resource timing and metrics
 

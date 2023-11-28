@@ -31,6 +31,8 @@ As of Agent 6.0.0, the Trace Agent is enabled by default. If it has been turned 
 
 The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
 
+<div class="alert alert-info">If you are collecting traces from a containerized app (your Agent and app running in separate containers), as an alternative to the following instructions, you can automatically inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection_local/?tab=agentandappinseparatecontainers">Injecting Libraries</a> for instructions.</div>
+
 ## Tracing from the host
 
 Tracing is available on port `8126/tcp` from _your host only_ by adding the option `-p 127.0.0.1:8126:8126/tcp` to the `docker run` command.
@@ -79,7 +81,7 @@ List of all environment variables available for tracing within the Docker Agent:
 | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DD_API_KEY`               | [Datadog API Key][1]                                                                                                                                                                                                                                                                                                                                 |
 | `DD_PROXY_HTTPS`           | Set up the URL for the proxy to use.                                                                                                                                                                                                                                                                                                                 |
-| `DD_APM_REPLACE_TAGS`      | [Scrub sensitive data from your span’s tags][2].                                                                                                                                                                                                                                                                                                     |
+| `DD_APM_REPLACE_TAGS`      | [Scrub sensitive data from your span's tags][2].                                                                                                                                                                                                                                                                                                     |
 | `DD_APM_FILTER_TAGS_REQUIRE`      | Defines required tags that traces must have in order to be sent to Datadog.                                                                                                                                                                                                                                                                                                     |
 | `DD_APM_FILTER_TAGS_REJECT`      | Defines rejection tags. The Agent drops traces that have these tags.       |
 | `DD_HOSTNAME`              | Manually set the hostname to use for metrics if autodetection fails, or when running the Datadog Cluster Agent.                                                                                                                                                                                                                                        |
@@ -289,9 +291,40 @@ from ddtrace import tracer
 tracer.configure(hostname='172.17.0.1', port=8126)
 ```
 
+### Unix Domain Socket (UDS)
+To submit traces via socket, the socket should be mounted to the Agent container and your application container.
+
+```bash
+# Datadog Agent
+docker run -d --name datadog-agent \
+              --network <NETWORK_NAME> \
+              --cgroupns host \
+              --pid host \
+              -v /var/run/docker.sock:/var/run/docker.sock:ro \
+              -v /proc/:/host/proc/:ro \
+              -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+              -v /var/run/datadog/:/var/run/datadog/ \
+              -e DD_API_KEY=<DATADOG_API_KEY> \
+              -e DD_APM_ENABLED=true \
+              -e DD_SITE=<DATADOG_SITE> \
+              -e DD_APM_NON_LOCAL_TRAFFIC=true \
+              -e DD_APM_RECEIVER_SOCKET=/var/run/datadog/apm.socket \
+              gcr.io/datadoghq/agent:latest
+# Application
+docker run -d --name app \
+              --network <NETWORK_NAME> \
+              -v /var/run/datadog/:/var/run/datadog/ \
+              -e DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket \
+              company/app:latest
+```
+
+Refer to the [language-specific APM instrumentation docs][3] for tracer settings.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: /tracing/guide/security/#replace-rules
+[3]: /tracing/setup/

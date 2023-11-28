@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/agent/tagging
-- /ja/getting_started/tagging/assigning_tags
 - /ja/tagging/assigning_tags/
 description: Datadog でタグを割り当てる方法について説明します。
 further_reading:
@@ -174,7 +173,7 @@ Datadog は [Docker、Kubernetes、ECS、Swarm、Mesos、Nomad、Rancher][6] か
 
 **例:**
 
-```shell
+```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
@@ -189,8 +188,8 @@ DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 
 Docker Swarm `docker-compose.yaml` ファイル内で `DD_CONTAINER_LABELS_AS_TAGS` 変数を使用する場合は、次の例のように、アポストロフィーを削除します。
 
-```shell
-DD_CONTAINER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
+```yaml
+- DD_CONTAINER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
 ```
 
 Docker コンテナにラベルを追加する際は、`docker-compose.yaml` ファイル内で `labels:` キーワードをどこに配置するかが重要となります。スムーズに設定が進むよう、[Docker の統合サービスタグ付け][2]に関するドキュメントを参照してください。
@@ -280,15 +279,14 @@ Datadog トレーサーは環境変数、システムプロパティ、または
 {{% /tab %}}
 {{% tab "Monitors" %}}
 
-[Manage Monitors][1] ページで、各モニターの隣にあるチェックボックスをオンにしてタグを追加します (1 つ以上のモニターを選択します)。**Edit Tags** ボタンをクリックします。タグを入力するか、以前に使用したタグを選択します。次に **Add Tag `tag:name`** または **Apply Changes** をクリックします。以前にタグを追加してある場合は、タグ チェックボックスを使用して一度に複数のタグを割り当てることができます。
+[Manage Monitors][1] ページで、各モニターの隣にあるチェックボックスをオンにしてタグを追加します (1 つ以上のモニターを選択します)。**Edit Tags** ボタンをクリックします。タグを入力するか、以前に使用したタグを選択します。次に **Add Tag `tag:name`** または **Apply Changes** をクリックします。以前にタグを追加してある場合は、タグチェックボックスを使用して一度に複数のタグを割り当てることができます。詳しくは、[モニターの管理ドキュメント][2]を参照してください。
 
-{{< img src="tagging/assigning_tags/monitortags.png" alt="モニタータグを管理" style="width:80%;">}}
+モニターを作成する場合は、ステップ 4 *Say what's happening* または *Notify your Team* でモニタータグを割り当てます。
 
-モニターを作成する場合は、ステップ 4 *Say what's happening* でモニタータグを割り当てます。
+{{< img src="monitors/notifications/notifications_add_required_tags.png" alt="ポリシータグ構成の表示。'Policy tags' の下には、'Select value' のドロップダウンの横に、cost_center、product_id、env の 3 つのタグの例が示されています。" style="width:80%;" >}}
 
-{{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="モニタータグを作成" style="width:80%;">}}
-
-[1]: /ja/monitors/manage/
+[1]: https://app.datadoghq.com/monitors/manage
+[2]: /ja/monitors/manage/
 {{% /tab %}}
 {{% tab "Distribution Metrics" %}}
 

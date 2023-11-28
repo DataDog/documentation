@@ -22,8 +22,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- orchestration
 - コンテナ
+- kubernetes
+- orchestration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_metrics_server/README.md
 display_on_public_website: true
@@ -31,7 +32,7 @@ draft: false
 git_integration_title: kube_metrics_server
 integration_id: kube-metrics-server
 integration_title: Kubernetes Metrics Server
-integration_version: 2.3.0
+integration_version: 3.0.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -41,16 +42,17 @@ public_title: Kubernetes Metrics Server
 short_description: Kubernetes Metrics Server の監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Orchestration
   - Category::Containers
+  - Category::Kubernetes
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Kubernetes Metrics Server の監視
   media: []

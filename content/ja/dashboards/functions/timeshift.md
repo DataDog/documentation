@@ -1,13 +1,14 @@
 ---
-title: タイムシフト
-kind: documentation
 aliases:
-  - /ja/graphing/functions/timeshift/
+- /ja/graphing/functions/timeshift/
 further_reading:
-  - link: /dashboards/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value/
-    tag: よくあるご質問
-    text: 以前の値から現在の値への変化率をグラフ化する
+- link: /dashboards/faq/how-can-i-graph-the-percentage-change-between-an-earlier-value-and-a-current-value/
+  tag: よくあるご質問
+  text: 以前の値から現在の値への変化率をグラフ化する
+kind: documentation
+title: タイムシフト
 ---
+
 ここでは、`<TIMEPERIOD>_before()` という形式の関数について説明します。これらの関数は、対応する期間の値をグラフに表示します。この値自体に大きな意味はありませんが、現在値と組み合わせることで、アプリケーションのパフォーマンスについて有益なインサイトを得られることがあります。
 
 ## タイムシフト
@@ -77,7 +78,6 @@ timeshift(avg:system.load.1{*}, -1209600)
     {{< nextlink href="/dashboards/functions/smoothing" >}}スムーシング: メトリクスの変動を滑らかにします。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-<br>
-## その他の参考資料
+
 
 {{< partial name="whats-next/whats-next.html" >}}

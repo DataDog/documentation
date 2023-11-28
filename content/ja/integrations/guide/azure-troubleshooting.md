@@ -13,11 +13,7 @@ title: Azure のトラブルシューティング
 
 1. [portal.azure.com][1] に移動します。
 2. 左側のサイドバーで、**Azure Active Directory** を選択します。
-3. **Properties** で、テナント名が **Directory ID** の値になっています。
-
-テナント名は、[クラシックポータル][2]を使用している場合にも URL から確認できます。これは、`@` と `#` の記号の間 (**含まない**) のテキストです。
-
-{{< img src="integrations/guide/azure_troubleshooting/azure_tenant_url.png" alt="azure テナントの URL で、@ と # の間に yourcompanyname.onmicrosoft.com というテキストが強調表示されています" style="width:70%">}}
+3. **Basic information** の下にある、**Name** の値を探します。
 
 ## ログインできない
 
@@ -56,7 +52,7 @@ Azure Monitor からメトリクスのグラフが表示されるスクリーン
 
 デフォルトパラメーターの 1 つと同じリソース名を持つ Azure リソースがあると、名前の競合が発生する可能性があります。Azure では、リソースが個々のサブスクリプション内でリソース名を共有することは許可されていません。Datadog では、環境内にまだ存在しない一意の名前でデフォルトパラメーターの名前を変更することをお勧めします。
 
-たとえば、'datadog-eventhub' という名前の eventhub を既に所有している場合は、-EventhubName フラグを使用して eventhub リソースのデフォルト名を変更します。
+たとえば、`datadog-eventhub` という名前の Eventhub を既に所有している場合は、-EventhubName フラグを使用して Eventhub リソースのデフォルト名を変更します。
 
 {{< code-block lang="powershell" filename="例" >}}
 
@@ -70,7 +66,7 @@ Azure Monitor からメトリクスのグラフが表示されるスクリーン
 
 ### 未登録のリソースプロバイダー
 
-エラー **The subscription is not registered to use namespace ‘Microsoft.EventHub’** が原因でスクリプトの実行が失敗した場合:
+エラー **The subscription is not registered to use namespace 'Microsoft.EventHub'** が原因でスクリプトの実行が失敗した場合:
 
 Azure には、各サービスのリソースプロバイダーがあります。たとえば、Azure EventHub の場合は `Microsoft.EventHub` です。Azure サブスクリプションが必要なリソースプロバイダーに登録されていない場合、スクリプトは失敗します。この問題は、リソースプロバイダーに登録することで修正できます。CloudShell でこのコマンドを実行します。
 

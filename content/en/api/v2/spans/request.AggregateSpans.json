@@ -1,0 +1,19 @@
+{
+  "data": {
+    "attributes": {
+      "compute": [
+        {
+          "aggregation": "count",
+          "interval": "5m",
+          "type": "timeseries"
+        }
+      ],
+      "filter": {
+        "from": "now-15m",
+        "query": "*",
+        "to": "now"
+      }
+    },
+    "type": "aggregate_request"
+  }
+}

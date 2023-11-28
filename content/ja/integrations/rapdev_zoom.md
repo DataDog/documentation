@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-zoom
 app_uuid: a79217b7-6499-4de5-8ebd-73a91d227644
 assets:
@@ -6,6 +8,7 @@ assets:
     RapDev Zoom Call Quality: assets/dashboards/rapdev_zoom_meeting_quality.json
     RapDev Zoom Geolocation Overview: assets/dashboards/rapdev_zoom_geo_overview.json
     RapDev Zoom Overview: assets/dashboards/rapdev_zoom_overview.json
+    RapDev Zoom Phones Overview: assets/dashboards/rapdev_zoom_phones_overview.json
     RapDev Zoom Rooms Dashboard: assets/dashboards/rapdev_zoom_rooms_dashboard.json
     RapDev Zoom User Details: assets/dashboards/rapdev_zoom_user_details.json
   integration:
@@ -28,15 +31,13 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
 - マーケットプレイス
-- cloud
+- クラウド
 - コラボレーション
-- メッセージング
-- モニタリング
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -56,27 +57,25 @@ pricing:
   includes_assets: true
   metric: datadog.marketplace.rapdev.zoom
   product_id: zoom
-  short_description: ユーザー 1 人あたりの単価
+  short_description: ユーザー 1 人またはデバイス 1 台あたりの単価
   tag: zoom_user_email
-  unit_label: Zoom 登録ユーザー
+  unit_label: Zoom 登録ユーザーと電話デバイス
   unit_price: 1
-public_title: Zoom インテグレーション
+public_title: Zoom
 short_description: Zoom アカウントを監視し、ライセンスを最適化します
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Category::Cloud
   - Category::Collaboration
-  - Category::Messaging
-  - Category::Monitoring
   - Offering::Integration
   configuration: README.md#Setup
   description: Zoom アカウントを監視し、ライセンスを最適化します
@@ -98,7 +97,8 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Zoom インテグレーション
+  title: Zoom
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -107,7 +107,7 @@ tile:
 
 Zoom インテグレーションにより、ミーティング、Rooms、ユーザー、ネットワーク分析、そしてジオロケーションの概要を監視することで、世界中のあらゆる場所で勤務する従業員に最適な利用体験を提供することができます。インテグレーションには、完全カスタマイズが可能な 4 つのダッシュボードが事前構築されており、重要な情報を表面化できます。さらに、エンジニア、IT責任者、マネージャー、そして管理職レベルのすべてのユーザーに普遍的に利用価値のあるビジュアルを提供するよう設計されています。
 
-### モニター
+### アラート設定
 
 1. Zoom Room に問題があります
 2. Zoom Room のコンポーネントに問題があります
@@ -119,6 +119,7 @@ Zoom インテグレーションにより、ミーティング、Rooms、ユー�
 3. RapDev Zoom ミーティング品質
 4. RapDev Zoom ユーザー詳細
 5. RapDev Zoom ジオ概要
+6. RapDev Zoom 電話概要
 
 ## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。

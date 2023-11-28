@@ -2,6 +2,15 @@
 title: Container Monitoring
 kind: documentation
 description: Install & configure the Agent to collect data on containerized infrastructures
+further_reading:
+    - link: "https://www.datadoghq.com/container-report/"
+      tag: "Datadog Research"
+      text: "Datadog's Annual State of Containers Report"
+algolia:
+  tags: ['containers']
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview
@@ -15,3 +24,7 @@ Container Monitoring provides real-time visibility into the health and performan
   {{< nextlink href="/containers/amazon_ecs">}}<u>Amazon ECS</u>: Install and configure the Datadog Agent on Amazon ECS.{{< /nextlink >}}
   {{< nextlink href="integrations/ecs_fargate/">}}<u>AWS Fargate</u>: Install and configure the Datadog Agent with Amazon ECS on AWS Fargate{{< /nextlink >}}
 {{< /whatsnext >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

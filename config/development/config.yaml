@@ -1,4 +1,4 @@
-baseURL: "http://localhost:1313/"
+baseURL: 'http://localhost:1313/'
 timeout: 100000
 enableGitInfo: true
 
@@ -6,3 +6,4 @@ enableGitInfo: true
 disableLanguages:
   - fr
   - ja
+  - ko

@@ -29,34 +29,40 @@ If you would like to be added to the Windows Private Location beta, reach out to
 
 ## Overview
 
-Private locations allow you to **monitor internal-facing applications or any private endpoints** that aren’t accessible from the public internet. They can also be used to:
+Private locations allow you to **monitor internal-facing applications or any private endpoints** that aren't accessible from the public internet. They can also be used to:
 
 * **Create custom Synthetic locations** in areas that are mission-critical to your business.
 * **Verify application performance in your internal CI environment** before you release new features to production with [Continuous Testing and CI/CD][1].
 * **Compare application performance** from both inside and outside your internal network.
 
-Private locations come as Docker containers that you can install wherever makes sense inside of your private network. Once created and installed, you can assign [Synthetic tests][2] to your private location just like you would with any regular managed location.
+{{< img src="synthetics/private_locations/private_locations_worker.png" alt="Architecture diagram of how a private location works in Synthetic Monitoring" style="width:100%;">}}
 
-Your private location worker pulls your test configurations from Datadog’s servers using HTTPS, executes the test on a schedule or on-demand, and returns the test results to Datadog’s servers. You can then visualize your private locations test results in a completely identical manner to how you would visualize tests running from managed locations:
+Private locations come as Docker containers that you can install wherever makes sense inside of your private network. Once created and installed, you can assign [Synthetic tests][2] to your private location just like you would with any managed location.
+
+Your private location worker pulls your test configurations from Datadog's servers using HTTPS, executes the test on a schedule or on-demand, and returns the test results to Datadog's servers. You can then visualize your private locations test results in a completely identical manner to how you would visualize tests running from managed locations:
 
 {{< img src="synthetics/private_locations/test_results_pl.png" alt="Assign a Synthetic test to a private location" style="width:100%;">}}
 
 ## Prerequisites
 
+### Continuous Testing
+
+In order to use private locations for [Continuous Testing tests][23], you need v1.27.0 or later.
+
 ### Docker
 
-Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][3] on Google Container Registry. It can run on a Linux based OS or Windows OS if the [Docker engine][4] is available on your host and can run in Linux containers mode.
+Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][3] on Google Container Registry. It can run on a Linux-based OS or Windows OS if the [Docker engine][4] is available on your host and can run in Linux containers mode.
 
 ### Datadog private locations endpoints
 
-To pull test configurations and push test results, the private location worker needs access to the below Datadog API endpoints.
+To pull test configurations and push test results, the private location worker needs access to the following Datadog API endpoints.
 
 {{< site-region region="us" >}}
 
-| Port | Endpoint                                                                                             | Description                                                                                                                             |
-| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443  | `intake.synthetics.datadoghq.com` for version >=0.1.6, `api.datadoghq.com` for versions <=0.1.5   | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
-| 443  | `intake-v2.synthetics.datadoghq.com` for versions >=0.2.0 and <=1.4.0                                            | Used by the private location to push browser test artifacts such as screenshots, errors, and resources.                                                                         |
+| Port | Endpoint                               | Description                                                   |
+| ---- | -------------------------------------- | ------------------------------------------------------------- |
+| 443  | `intake.synthetics.datadoghq.com`      | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
+| 443  | `intake-v2.synthetics.datadoghq.com` for versions >=0.2.0 and <=1.4.0   | Used by the private location to push browser test artifacts such as screenshots, errors, and resources.       |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -64,10 +70,9 @@ To pull test configurations and push test results, the private location worker n
 
 {{< site-region region="eu" >}}
 
-| Port | Endpoint                                               | Description                                                                                   |
-| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443  | `intake.synthetics.datadoghq.eu` for versions >=1.11.0 and `api.datadoghq.eu` for <=1.10.0                                | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
-| 443  | `intake-v2.synthetics.datadoghq.eu` for versions >=0.2.0 and <=1.5.0 | Used by the private location to push browser test artifacts (screenshots, errors, resources).                                                                            |
+| Port | Endpoint                           | Description                                                    |
+| ---- | ---------------------------------- | -------------------------------------------------------------- |
+| 443  | `intake.synthetics.datadoghq.eu`   | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
 
 **Note**: These domains are pointing to a set of static IP addresses. These addresses can be found at https://ip-ranges.datadoghq.eu, specifically at https://ip-ranges.datadoghq.eu/api.json for `api.datadoghq.eu` and at https://ip-ranges.datadoghq.eu/synthetics-private-locations.json for `intake-v2.synthetics.datadoghq.eu`.
 
@@ -77,9 +82,29 @@ To pull test configurations and push test results, the private location worker n
 
 {{< site-region region="us3" >}}
 
-| Port | Endpoint                                                                                             | Description                                                                                                                             |
-| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443  | `intake.synthetics.us3.datadoghq.com` | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
+| Port | Endpoint                                | Description                                                                        |
+| ---- | --------------------------------------- | ---------------------------------------------------------------------------------- |
+| 443  | `intake.synthetics.us3.datadoghq.com`  | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
+
+[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+
+{{< /site-region >}}
+
+{{< site-region region="ap1" >}}
+
+| Port | Endpoint                                | Description                                                                        |
+| ---- | --------------------------------------- | ---------------------------------------------------------------------------------- |
+| 443  | `intake.synthetics.ap1.datadoghq.com`  | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
+
+[1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+
+{{< /site-region >}}
+
+{{< site-region region="us5" >}}
+
+| Port | Endpoint                              | Description                                                    |
+| ---- | ------------------------------------- | -------------------------------------------------------------- |
+| 443  | `intake.synthetics.us5.datadoghq.com` | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -87,9 +112,9 @@ To pull test configurations and push test results, the private location worker n
 
 {{< site-region region="gov" >}}
 
-| Port | Endpoint                                                                                             | Description                                                                                                                             |
-| ---- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| 443  | `intake.synthetics.ddog-gov.com` | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
+| Port | Endpoint                         | Description                                                                                                                                                                                                                                                                       |
+|------|----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 443  | `intake.synthetics.ddog-gov.com` | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. For versions 1.32.0 and later, these requests are Federal Information Processing Standards (FIPS) compliant. |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -103,29 +128,28 @@ Only users with the **Admin** role can create private locations. For more inform
 
 Navigate to [**Synthetic Monitoring** > **Settings** > **Private Locations**][22] and click **Add Private Location**.
 
-{{< img src="synthetics/private_locations/synthetics_pl_add.png" alt="Create a private location" style="width:90%;">}}
+{{< img src="synthetics/private_locations/synthetics_pl_add_1.png" alt="Create a private location" style="width:90%;">}}
 
-Fill out your private location details: 
+Fill out your private location details:
 
 1. Specify your private location's **Name** and **Description**.
-2. Add any **Tags** you would like to associate with your private location. If you are configuring a private location for Windows, select **This is a Windows Private Location**.
+2. Add any **Tags** you would like to associate with your private location.
 3. Choose one of your existing **API Keys**. Selecting an API key allows communication between your private location and Datadog. If you don't have an existing API key, click **Generate API key** to create one on the dedicated page. Only `Name` and `API key` fields are mandatory.
 4. Set access for your private location and click **Save Location and Generate Configuration File**. Datadog creates your private location and generates the associated configuration file.
 
-{{< img src="synthetics/private_locations/pl_creation_1.png" alt="Add details to private location" style="width:85%;">}}
+{{< img src="synthetics/private_locations/pl_creation_1.png" alt="Add details to private location" style="width:85%;">}} 
+
 ### Configure your private location
 
-Configure your private location by customizing the generated configuration file. When you add initial configuration parameters such as [proxies](#proxy-configuration) and [blocked reserved IPs](#blocking-reserved-ips) in **Step 3**, your generated configuration file updates automatically in **Step 4**. 
+Configure your private location by customizing the generated configuration file. When you add initial configuration parameters such as [proxies](#proxy-configuration) and [blocked reserved IPs](#blocking-reserved-ips) in **Step 3**, your generated configuration file updates automatically in **Step 4**.
 
-Depending on your internal network setup, you may want to configure your private location with [advanced options](#advanced-configuration).
+You can access advanced options to adjust the configuration based on your internal network setup. For more information about the `help` command, see [Configuration][5].
 
 #### Proxy configuration
 
 If the traffic between your private location and Datadog has to go through a proxy, specify your proxy URL as `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>` to add the associated `proxyDatadog` parameter to your generated configuration file.
 
 {{<img src="synthetics/private_locations/pl_proxy_1.png" alt="Add a proxy to your private location configuration file" style="width:90%;">}}
-
-[Advanced proxy configuration options][5] are available.
 
 #### Blocking reserved IPs
 
@@ -135,23 +159,13 @@ If some of the endpoints you are willing to test are located within one or sever
 
 {{< img src="synthetics/private_locations/pl_reserved_ips_1.png" alt="Configure reserved IPs" style="width:90%;">}}
 
-[Advanced reserved IPs configuration options][8] are available.
-
-#### Advanced configuration
-
-[Advanced configuration options][9] are available and can be found by running the below `help` command:
-
-```shell
-docker run --rm datadog/synthetics-private-location-worker --help
-```
-
 ### View your configuration file
 
-After adding the appropriate options to your private location configuration file, you can copy and paste this file into your working directory. The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. 
+After adding the appropriate options to your private location configuration file, you can copy and paste this file into your working directory. The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption.
 
 {{< img src="synthetics/private_locations/pl_view_file_1.png" alt="Configure reserved IPs" style="width:90%;">}}
 
-Datadog does not store your secrets, so store them locally before clicking **View Installation Instructions**. 
+Datadog does not store your secrets, so store them locally before clicking **View Installation Instructions**.
 
 **Note:** You need to be able to reference these secrets again if you decide to add more workers or install workers on another host.
 
@@ -168,14 +182,23 @@ Launch your private location on:
 Run this command to boot your private location worker by mounting your configuration file to the container. Ensure that your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is in `/etc/docker`, not the root home folder:
 
 ```shell
-docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
+docker run --rm -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
 ```
 
 **Note:** If you have blocked reserved IPs, add the `NET_ADMIN` [Linux capabilities][1] to your private location container.
 
 This command starts a Docker container and makes your private location ready to run tests. **Datadog recommends running the container in detached mode with proper restart policy.**
 
+#### Root certificates
+
+You can upload custom root certificates to your private locations to have your API and browser tests perform the SSL handshake using your own `.pem` files.
+
+When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime.
+
+For more information about private locations parameters for admins, see [Configuration][2].
+
 [1]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
+[2]: https://docs.datadoghq.com/synthetics/private_locations/configuration/#private-locations-admin
 
 {{% /tab %}}
 
@@ -199,7 +222,34 @@ This command starts a Docker container and makes your private location ready to 
     docker-compose -f docker-compose.yml up
     ```
 
+#### Root certificates
+
+You can upload custom root certificates to your private locations to have your API and browser tests perform the SSL handshake using your own `.pem` files.
+
+When spinning up your private location containers, mount the relevant certificate `.pem` files to `/etc/datadog/certs` in the same way you mount your private location configuration file. These certificates are considered trusted CA and are used at test runtime.
+
+For more information about private locations parameters for admins, see [Configuration][2].
+
 [1]: https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities
+[2]: https://docs.datadoghq.com/synthetics/private_locations/configuration/#private-locations-admin
+
+{{% /tab %}}
+
+{{% tab "Podman" %}}
+
+The Podman configuration is very similar to Docker, however, you must set `NET_RAW` as an additional capability to support ICMP tests.
+
+1. Run `sysctl -w "net.ipv4.ping_group_range = 0 2147483647"` from the host where the container runs.
+2. Run this command to boot your private location worker by mounting your configuration file to the container. Ensure that your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is accessible to mount to the container:
+
+   ```shell
+   podman run --cap-add=NET_RAW --rm -it -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json gcr.io/datadoghq/synthetics-private-location-worker:latest
+   ```
+
+   If you have configured blocked reserved IP addresses, add the `NET_ADMIN` Linux capabilities to your private location container.
+
+This command starts a Podman container and makes your private location ready to run tests. Datadog recommends running the container in detached mode with proper restart policy.
+
 
 {{% /tab %}}
 
@@ -260,14 +310,14 @@ For OpenShift, run the private location with the `anyuid` SCC. This is required 
 
 {{% tab "Helm Chart" %}}
 
-You can set environment variables in your configuration parameters that point to secrets you have already configured. To create environment variables with secrets, see the [Kubernetes documentation][3]. 
+You can set environment variables in your configuration parameters that point to secrets you have already configured. To create environment variables with secrets, see the [Kubernetes documentation][3].
 
 Alternatively:
 
 1. Add the [Datadog Synthetics Private Location][1] to your Helm repositories:
 
     ```shell
-    helm repo add datadog https://helm.datadoghq.com 
+    helm repo add datadog https://helm.datadoghq.com
     helm repo update
     ```
 
@@ -317,7 +367,10 @@ Create a new EC2 task definition that matches the following. Replace each parame
 }
 ```
 
-**Note:** If you have blocked reserved IPs, configure a [linuxParameters][1] to grant `NET_ADMIN` capabilities to your private location containers.
+**Notes:**
+
+- If you have blocked reserved IPs, configure a [linuxParameters][1] to grant `NET_ADMIN` capabilities to your private location containers.
+- If you use the `DATADOG_API_KEY`, `DATADOG_ACCESS_KEY`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_PUBLIC_KEY_PEM` and `DATADOG_PRIVATE_KEY` environment variables, you do not need to include them in the `"command": [ ]` section.
 
 [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_LinuxParameters.html
 
@@ -419,7 +472,7 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 
 Add a liveness or readiness probe so your orchestrator can ensure the workers are running correctly.
 
-For readiness probes, you need to enable private location status probes on port `8080` in your private location deployment. For more information, see [Advanced configuration][15].
+For readiness probes, you need to enable private location status probes on port `8080` in your private location deployment. For more information, see [Private Locations Configuration][5].
 
 {{< tabs >}}
 
@@ -645,15 +698,24 @@ livenessProbe:
 
 {{< /tabs >}}
 
+### Upgrade a private location image
+
+To upgrade an existing private location, click the **Gear** icon on the private location side panel and click **Installation instructions**.
+
+{{< img src="synthetics/private_locations/pl_edit_config.png" alt="Access the setup workflow for a private location" style="width:90%;" >}}
+
+Then, run the [configuration command based on your environment](#install-your-private-location
+) to get the latest version of the private location image. 
+
 ### Test your internal endpoint
 
-Once at least one private location container starts reporting to Datadog, the private location status displays green:
+Once at least one private location container starts reporting to Datadog, the private location status displays green.
 
 {{< img src="synthetics/private_locations/pl_reporting.png" alt="Private location reporting" style="width:90%;">}}
 
-You can also see a `REPORTING` health status displayed on the Private Locations list in the **Settings** page:
+You can see a `REPORTING` health status and an associated monitor status displayed on the Private Locations list in the **Settings** page.
 
-{{< img src="synthetics/private_locations/pl_monitoring_table_reporting.png" alt="Private location health" style="width:95%;">}}
+{{< img src="synthetics/private_locations/pl_monitoring_table_reporting_1.png" alt="Private location health and monitor status" style="width:100%;">}}
 
 Start testing your first internal endpoint by launching a fast test on one of your internal endpoints to see if you get the expected response:
 
@@ -675,23 +737,23 @@ Because you can run several containers for one single private location with a si
 
 You can also **vertically scale** your private locations by increasing the load your private location containers can handle. Similarly, you should use the `concurrency` parameter to adjust the maximum number of test your workers allowed to run and update the resources allocated to your workers.
 
-For more information, see [Dimensioning Private Locations][18]. 
+For more information, see [Dimensioning Private Locations][18].
 
-In order to use private locations for continuous testing, set a value in the `concurrency` parameter to control your parallelization. For more information, see [Continuous Testing][23].
+In order to use private locations for Continuous Testing, set a value in the `concurrency` parameter to control your parallelization. For more information, see [Continuous Testing][23].
 
 ## Monitor your private location
 
-While you initially add resources that are consistent with the number and type of tests to execute from your private location, the easiest way to know if you should downscale or upscale your private location is to closely monitor them. [Private Location Monitoring][19] provides insight about the performance and state of your private location as well as out-of-the-box metrics and monitors. 
+While you initially add resources that are consistent with the number and type of tests to execute from your private location, the easiest way to know if you should downscale or upscale your private location is to closely monitor them. [Private Location Monitoring][19] provides insight about the performance and state of your private location as well as out-of-the-box metrics and monitors.
 
 For more information, see [Private Location Monitoring][19].
 
 ## Permissions
 
-By default, only users with the Datadog Admin Role can create private locations, delete private locations, and access private location installation guidelines. 
+By default, only users with the Datadog Admin Role can create private locations, delete private locations, and access private location installation guidelines.
 
-Users with the [Datadog Admin and Datadog Standard roles][20] can view private locations, search for private locations, and assign Synthetic tests to private locations. Grant access to the [**Private Locations** page][22] by upgrading your user to one of these two [default roles][19]. 
+Users with the [Datadog Admin and Datadog Standard roles][20] can view private locations, search for private locations, and assign Synthetic tests to private locations. Grant access to the [**Private Locations** page][22] by upgrading your user to one of these two [default roles][19].
 
-If you are using the [custom role feature][21], add your user to a custom role that includes `synthetics_private_location_read` and `synthetics_private_location_write` permissions. 
+If you are using the [custom role feature][21], add your user to a custom role that includes `synthetics_private_location_read` and `synthetics_private_location_write` permissions.
 
 ## Further Reading
 
@@ -701,17 +763,14 @@ If you are using the [custom role feature][21], add your user to a custom role t
 [2]: /synthetics/
 [3]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [4]: https://docs.docker.com/engine/install/
-[5]: /synthetics/private_locations/configuration/#proxy-configuration
+[5]: /synthetics/private_locations/configuration/
 [6]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
 [7]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
-[8]: /synthetics/private_locations/configuration/#reserved-ips-configuration
-[9]: /synthetics/private_locations/configuration/
 [10]: https://docs.docker.com/engine/reference/builder/#healthcheck
 [11]: /synthetics/metrics
 [12]: /synthetics/api_tests/
 [13]: /synthetics/multistep?tab=requestoptions
 [14]: /synthetics/browser_tests/?tab=requestoptions
-[15]: /synthetics/private_locations/configuration#advanced-configuration
 [16]: /agent/
 [17]: /synthetics/metrics/
 [18]: /synthetics/private_locations/dimensioning

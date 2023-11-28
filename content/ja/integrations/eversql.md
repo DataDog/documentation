@@ -8,16 +8,9 @@ author:
   sales_email: sales@eversql.com
   support_email: support@eversql.com
 categories:
-- モニタリング
 - 自動化
-- 言語
-classifier_tags:
-- Supported OS::Linux
-- Supported OS::Mac OS
-- Supported OS::Windows
-- Category::Monitoring
-- Category::Automation
-- Category::Languages
+- data store
+- developer tools
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/eversql/README.md
 display_on_public_website: true
@@ -35,10 +28,17 @@ public_title: 'EverSQL: データベースのチューニング'
 short_description: MySQL、PostgreSQL、Aurora のための自動 SQL およびデータベースチューニング
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - Category::Data Store
+  - Category::Developer Tools
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: MySQL、PostgreSQL、Aurora のための自動 SQL およびデータベースチューニング
   media:

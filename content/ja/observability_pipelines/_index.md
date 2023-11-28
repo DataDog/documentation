@@ -1,82 +1,89 @@
 ---
 aliases:
 - /ja/integrations/observability_pipelines/
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: /observability_pipelines/setup/
   tag: ドキュメント
   text: 観測可能性パイプラインを設定する
 - link: https://www.datadoghq.com/blog/datadog-observability-pipelines/
-  tag: GitHub
+  tag: ブログ
   text: 観測可能性パイプラインでテレメトリーデータを管理する
-- link: /observability_pipelines/vector_configurations/
-  tag: ドキュメント
-  text: Vector の構成の詳細
-- link: https://vector.dev/docs/setup/going-to-prod/
-  tag: ドキュメント
-  text: 観測可能性パイプラインのキャパシティプランニングを行い、本番に移行する
-- link: https://vector.dev/releases/
-  tag: ドキュメント
-  text: Vector の新リリースをチェックする
-- link: https://vector.dev/docs/reference/configuration/sources/datadog_agent/
-  tag: ドキュメント
-  text: Vector のソースとなる Datadog Agent
-- link: /observability_pipelines/integrations/integrate_vector_with_datadog/
-  tag: ドキュメント
-  text: Vector にデータを送信するための Datadog Agent の構成
+- link: /observability_pipelines/configurations/
+  tag: Documentation
+  text: 観測可能性パイプラインの構成の詳細
 kind: ドキュメント
 title: Observability Pipelines（観測データの制御）
 ---
 
-{{< img src="observability_pipelines/obs_pipelines_overview.png" alt="左側の異なるデータソースが、transform、reduce、route という 3 つの六角形に流れ、矢印が修正されたデータの異なる宛先を指しているグラフィック" style="width:100%;" >}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines は、US1-FED Datadog サイトではご利用いただけません。</div>
+{{< /site-region >}}
 
-## 可観測性パイプラインとは？
 
-観測可能性パイプラインは、テレメトリーパイプラインを大規模に監視・管理できるオープンソースツールである [Vector][1] をベースに構築された監視ソリューションです。Vector は、インフラストラクチャー内にアグリゲーターとしてデプロイされ、すべてのログ、メトリクス、トレースを収集し、変換し、任意の宛先にルーティングします。
+{{< img src="observability_pipelines/obs_pipelines.png" alt="左側の異なるデータソースが、transform、reduce、route という 3 つの六角形に流れ、矢印が修正されたデータの異なる宛先を指しているグラフィック" style="width:100%;" >}}
 
-Vector の構成に Datadog API キーを追加して、観測可能性パイプラインに接続します。観測可能性パイプラインを使用して、Vector のパイプラインを監視し、ボトルネックやレイテンシーの特定、パフォーマンスの微調整、データ配信の監視などを行います。
+## 概要
 
-観測可能性パイプラインを使えば、以下のようなことも可能です。
+Observability Pipelines を使用すると、所有または管理するインフラストラクチャー内の観測可能性データ (ログとメトリクス (ベータ版)) を任意のソースから任意の宛先に収集、処理、およびルーティングすることができます。Observability Pipelines を使用すると、次のことが可能になります。
 
 - ルーティングの前にデータ量をコントロールし、コスト管理を行うことができます。
 - データをどこにでも転送できるため、ベンダーロックインを減らし、マイグレーションを簡素化できます。
-- 居住地に関する必須条件を満たし、機密データを編集することで、よりコンプライアンスを維持することができます。
-- イベントを充実させ、構造化し、より有用なものに変換することができます。
+- フィールドやタグを追加、パース、リッチ化、削除することで、ログやメトリクスを変換する。
+- テレメトリーデータから機密データを編集する。
 
-観測可能性パイプラインを使用して、完全な可視化と簡素化された管理で、パフォーマンスと信頼性の高いデータパイプラインを構築します。
+観測可能性パイプラインワーカーは、インフラストラクチャーで実行されるソフトウェアです。データを集計し、一元的に処理し、ルーティングします。より具体的には、ワーカーは以下のことが可能です。
 
-## はじめましょう
+- Agent、コレクター、フォワーダーによって収集されたすべての観測可能性データを受信またはプルします。
+- 取り込んだデータを変換します (例: パース、フィルター、サンプル、リッチ化など )。
+- 処理したデータを任意の宛先にルーティングします。
 
-1. [Vector のインストール][2]は、クイックスタートの方法、お好みのパッケージマネージャー、または特定のプラットフォームやオペレーティングシステムに基づいて行ってください。
-2. [Vector の構成を設定][3]し、データの収集、変換、ルーティングを行います。
-3. Vector を Datadog API で観測可能性パイプラインに接続します。
+Datadog UI は、観測可能性パイプラインワーカーを管理するためのコントロールプレーンを提供します。パイプラインを監視して、パイプラインの健全性を理解し、ボトルネックやレイテンシーを特定し、パフォーマンスを微調整し、データ配信を検証し、最大のボリューム貢献者を調査することができます。データのサブセットを新しい宛先にルーティングしたり、新しい機密データの再編集ルールを導入するなど、パイプラインを構築または編集し、Datadog UI からアクティブなパイプラインにこれらの変更をロールアウトすることができます。
 
-## 観測可能性パイプラインの確認
+## 詳細はこちら
 
-観測可能性パイプラインに構成データを送信できるようになったので、Vector パイプラインのインサイトを取得することを開始します。
+1. [観測可能性パイプラインワーカーを設定します][1]。
+2. [データを収集、変換、ルーティングするパイプラインを作成します][2]。
+3. Observability Pipelines を本番環境のスケールでデプロイする方法を確認します。
+    - Observability Pipelines のアーキテクチャを設計する際に考慮すべき点については、[デプロイメントの設計と原則][3]を参照してください。
+    - [OP ワーカーのアグリゲーターアーキテクチャのベストプラクティス][4]を参照してください。
 
-### Vector パイプラインの健全性の監視
+## Observability Pipelines の確認
 
-パイプラインのトポロジーを全体的に把握し、各フローの平均負荷、エラー率、スループットなどの主要なパフォーマンス指標を監視することができます。
+Observability Pipelines のインサイトの取得を開始します。
 
-{{< img src="observability_pipelines/config-map.png" alt="http、splunk_hec、datadog から来たデータが、異なる変換に流れ、異なる宛先に送られる様子を示した構成図" style="width:80%;" >}}
+### あらゆるソースからデータを収集し、あらゆる宛先にデータをルーティングする
 
-### ボトルネックの早期特定とパフォーマンスの最適化
+あらゆるソースからログとメトリクス (ベータ版) を収集し、あらゆる宛先にルーティングすることで、ベンダーのロックインを減らし、移行を簡素化することができます。
 
-Vector の特定のコンポーネントに潜り込み、観測可能性データがどのようにパイプラインに流れ込んでいるかを理解し、トラブルシューティングやパフォーマンスのボトルネックの特定、パイプラインの最適化に役立てることができます。
 
-{{< img src="observability_pipelines/config-map-side-panel.png" alt="S3 ソース構成のサイドパネルに、1 秒あたりのイベントの出入り、エラーの割合、ロードアベレージの割合のグラフが表示される" style="width:85%;" >}}
+{{< img src="observability_pipelines/component_panel.png" alt="Datadog Logs コンポーネントのサイドパネルに、1 秒あたりのイベントのイン/アウトの折れ線グラフと 1 秒あたりのバイトのイン/アウトのリンクグラフが表示されます" style="width:100%;" >}}
 
-### データ配信を確実に行い、レイテンシーを低減します。
+### ルーティングされる前にデータ量を制御する
 
-データが宛先に届いているかどうかを確認し、レイテンシーの問題を完全に視覚化して、SLI と SLO を満たすことができます。
+ログとメトリクスをサンプリング、フィルタリング、重複排除、および集約することにより、観測可能性データのボリュームを最適化し、サイズを縮小します。データ標準を適用し、メトリクスのタグを制御することで、テレメトリーを管理します。
 
-{{< img src="observability_pipelines/configuration-list.png" alt="観測可能性パイプラインのページには、アクティブなパイプラインと非アクティブなパイプラインのリストが表示され、作成日、ホスト数、バージョン、イベント数、バイト数、エラー率などの列が表示される" style="width:85%;" >}}
+{{< img src="observability_pipelines/transforms.png" alt="集計、Amazon EC2 Metadata、重複除去 (dedupe) など、利用可能な変換を表示する変換の一覧サイドパネル。" style="width:100%;" >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+### テレメトリーデータから機密データを編集する
+
+すぐに使えるパターンで PII、PCI、秘密キーなどをスキャンし、インフラストラクチャーの外側にルーティングされる前に機密データを削除します。
+
+{{< img src="observability_pipelines/scanning_rules.png" alt="機密データスキャナー ルールライブラリ パネルでは、個人を特定できる情報、ネットワークおよびデバイス情報に対して利用可能なルールが表示されます" style="width:85%;" >}}
+
+### パイプラインの健全性の監視
+
+すべてのパイプラインのトポロジーを全体的に把握し、各フローに対する平均負荷、エラー率、スループットなどの主要なパフォーマンス指標を監視します。
+
+{{< img src="observability_pipelines/pipeline_health.png" alt="コンポーネントにエラーが発生し、イベント取り込みの遅延が検出されたため、警告が表示されたパイプライン構成ページ" style="width:90%;" >}}
+
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://vector.dev/
-[2]: /ja/observability_pipelines/setup/#install-vector
-[3]: /ja/observability_pipelines/setup/#set-up-vector-configurations
-[4]: /ja/observability_pipelines/setup/#connect-vector-to-observability-pipelines
+[1]: /ja/observability_pipelines/setup/
+[2]: /ja/observability_pipelines/configurations/
+[3]: /ja/observability_pipelines/production_deployment_overview/
+[4]: /ja/observability_pipelines/architecture/

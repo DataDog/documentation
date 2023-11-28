@@ -1,17 +1,21 @@
 ---
-title: Agent フレア
-kind: documentation
+algolia:
+  tags:
+  - Agent フレア
 aliases:
-  - /ja/agent/faq/send-logs-and-configs-to-datadog-via-flare-command
+- /ja/agent/faq/send-logs-and-configs-to-datadog-via-flare-command
 further_reading:
-  - link: /agent/troubleshooting/debug_mode/
-    tag: Agent のトラブルシューティング
-    text: Agent デバッグモード
-  - link: /agent/troubleshooting/agent_check_status/
-    tag: Agent のトラブルシューティング
-    text: Agent チェックのステータスを確認
+- link: /agent/troubleshooting/debug_mode/
+  tag: Agent のトラブルシューティング
+  text: Agent デバッグモード
+- link: /agent/troubleshooting/agent_check_status/
+  tag: Agent のトラブルシューティング
+  text: Agent チェックのステータスを確認
+kind: documentation
+title: Agent フレア
 ---
-Agent 5.3 以上を実行している場合は、必要なトラブルシューティング情報を 1 つのフレアコマンドで Datadog のサポートチームに送信できます。
+
+必要なトラブルシューティング情報を 1 つのフレアコマンドで Datadog のサポートチームに送信できます。
 
 `flare` は Agent のすべての構成ファイルを収集し、1 つのアーカイブファイルに記録します。パスワード、API キー、プロキシ資格情報、SNMP コミュニティ文字列などの機密情報は削除されます。**アーカイブのアップロードを確認すると、アーカイブが直ちに Datadog のサポートチームに送信されます**。
 
@@ -27,7 +31,7 @@ Datadog Agent は完全にオープンソースなので、[コードの動作�
 | プラットフォーム   | コマンド                                                 |
 |------------|---------------------------------------------------------|
 | AIX        | `datadog-agent flare <CASE_ID>`                         |
-| Docker     | `docker exec -it datadog-agent agent flare <CASE_ID>`   |
+| Docker     | `docker exec -it dd-agent agent flare <CASE_ID>`        |
 | macOS      | `datadog-agent flare <CASE_ID>` または [Web GUI][1] を使用 |
 | CentOS     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Debian     | `sudo datadog-agent flare <CASE_ID>`                    |
@@ -38,6 +42,7 @@ Datadog Agent は完全にオープンソースなので、[コードの動作�
 | ソース     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Windows    | [Windows][2]に関する個別のドキュメントをご参照ください。        |
 | Heroku     | [Heroku][3]に関する個別のドキュメントをご参照ください。         |
+| PCF     | `sudo /var/vcap/jobs/dd-agent/packages/dd-agent/bin/agent/agent flare <CASE_ID>`             |
 
 ## 専用コンテナ
 
@@ -66,6 +71,12 @@ kubectl exec -it <AGENT_POD_NAME> -c process-agent -- agent flare <CASE_ID> --lo
 
 ```bash
 kubectl exec -it <AGENT_POD_NAME> -c trace-agent -- agent flare <CASE_ID> --local
+```
+
+### Security Agent
+
+```bash
+kubectl exec -it <AGENT_POD_NAME> -c security-agent -- security-agent flare <CASE_ID>
 ```
 
 ### システムプローブ
@@ -119,9 +130,10 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 {{% tab "Cluster Agent" %}}
 
-| プラットフォーム   | コマンド                                                             |
-|------------|---------------------------------------------------------------------|
-| Kubernetes | `kubectl exec <ポッド名> -it datadog-cluster-agent flare <ケース_ID>` |
+| プラットフォーム      | コマンド                                                                     |
+|---------------|-----------------------------------------------------------------------------|
+| Kubernetes    | `kubectl exec -n <NAMESPACE> -it <CLUSTER_POD_NAME> -- datadog-cluster-agent flare <CASE_ID>` |
+| Cloud Foundry | `/var/vcap/packages/datadog-cluster-agent/datadog-cluster-agent-cloudfoundry flare -c /var/vcap/jobs/datadog-cluster-agent/config <CASE_ID>` |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -134,11 +146,11 @@ Agent のデータ収集に問題がある場合は、このファイルを手�
 ### Kubernetes
 Kubernetes でアーカイブファイルを取得するには、kubectl コマンドを使用します。
 ```
-kubectl cp datadog-<pod-name>:/tmp/datadog-agent-<date-of-the-flare>.zip flare.zip
+kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zip -c agent
 ```
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
+[1]: https://github.com/DataDog/datadog-agent/tree/main/pkg/flare

@@ -50,9 +50,6 @@ Google Cloud Dataflow のログは Google Cloud Logging により収集され、
 1. [Google Cloud Logging のページ][3]に移動し、Google Cloud Dataflow のログを絞り込みます。
 2. **シンクを作成**し、シンクに適宜名前を付けます。
 3. エクスポート先として「Cloud Pub/Sub」を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
-
-    {{< img src="integrations/google_cloud_pubsub/creating_sink.png" alt="Google Cloud Pub/Sub ログを Pub Sub へエクスポート" >}}
-
 4. **作成**をクリックし、確認メッセージが表示されるまで待ちます。
 
 ## 収集データ

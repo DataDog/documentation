@@ -1,16 +1,16 @@
 ---
-aliases:
-- /ja/getting_started/integrations
 further_reading:
-- link: https://learn.datadoghq.com/
+- link: https://learn.datadoghq.com/courses/intro-to-integrations
   tag: ラーニングセンター
-  text: Datadog 入門
+  text: インテグレーション入門
 - link: /integrations/
-  tag: インテグレーション
-  text: Datadog の全インテグレーション一覧
+  tag: ドキュメント
+  text: Datadog インテグレーションの一覧を見る
 kind: documentation
 title: インテグレーション入門
 ---
+
+## 概要
 
 ここでは、インテグレーションの使用方法について説明します。新しいインテグレーションの構築方法については、[新しいインテグレーションの作成][1]ページをご参照ください。
 
@@ -28,7 +28,7 @@ Datadog では、主に次の 3 種類のインテグレーションが提供さ
 
 ## インテグレーションの設定
 
-Datadog Agent パッケージには、Datadog が公式にサポートしている[インテグレーションコア][11]が含まれています。これらのインテグレーションを使用するには、Datadog Agent をダウンロードします。コミュニティベースのインテグレーションは、[インテグレーションエクストラ][12]にあります。これを使用するには、[開発ツールキット][13]をダウンロードする必要があります。これらのインテグレーションのインストールおよび管理についての詳細は、[インテグレーション管理ガイド][14]をご参照ください。
+Datadog Agent パッケージには、Datadog が公式にサポートしている[インテグレーションコア][11]が含まれています。これらのインテグレーションを使用するには、Datadog Agent をダウンロードします。コミュニティベースのインテグレーションは、[インテグレーションエクストラ][12]にあります。これらのインテグレーションのインストールおよび管理についての詳細は、[インテグレーション管理ガイド][14]をご参照ください。
 
 ### API キーとアプリケーションキー
 
@@ -70,7 +70,7 @@ logs:
       sourcecategory: http_web_access
 ```
 
-2 つの Apache サービスを監視するために、同じ Agent チェック内に複数のインスタンスを作成する場合は、`instances` セクションで `-` を使用して新しいインスタンスを作成します。
+同じ Agent チェックで複数の Apache インスタンスを監視するには、`instances` セクションに追加のインスタンスを追加します。
 
 ```yaml
 init_config:
@@ -118,14 +118,13 @@ Agent とインテグレーションのコンフィギュレーションを検�
 
 [プロセス収集][29]を設定すると、Datadog はホストで実行されているテクノロジーを自動検出します。これにより、こうしたテクノロジーの監視に役立つ Datadog インテグレーションが識別されます。この自動検出されたインテグレーションは、[インテグレーション検索][2]に表示されます。
 
-{{< img src="getting_started/integrations/ad_integrations.png" alt="自動検出されたインテグレーション" >}}
+{{< img src="getting_started/integrations/ad_integrations_1.png" alt="自動検出されたインテグレーション" >}}
 
-各インテグレーションには、次の 2 つのステータスタイプのいずれかがあります。
+各インテグレーションには、次の 3 つのステータスタイプのいずれかがあります。
 
-- **+ Detected**: このインテグレーションは、それを実行しているホストでは有効になっていません。
-- **✓ Partial Visibility**: このインテグレーションは、一部で有効になっていますが、すべての関連ホストで実行されているわけではありません。
-
-インテグレーションを実行しているが、インテグレーションが有効になっていないホストは、インテグレーションタイルの **Hosts** タブにあります。
+- **Detected**: ホスト上でテクノロジーが実行されていますが、インテグレーションのインストールまたは構成が行われておらず、部分的なメトリクスのみが収集されています。完全にカバーできるようインテグレーションを構成してください。自動検出されたテクノロジーが実行されているホストの一覧を確認するには、インテグレーションタイルを開き、**Hosts** タブを選択します。
+- **Detected**: このインテグレーションはホスト上にインストールされ、構成が完了しています。
+- **Available**: *Installed** と **Detected** のカテゴリーに該当しないすべてのインテグレーション。
 
 ## セキュリティ対策
 
@@ -197,7 +196,6 @@ tagging
 [10]: /ja/developers/custom_checks/write_agent_check/
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
-[13]: /ja/developers/integrations/new_check_howto/#developer-toolkit
 [14]: /ja/agent/guide/integration-management/
 [15]: https://app.datadoghq.com/account/settings#agent
 [16]: /ja/account_management/api-app-keys/
@@ -214,7 +212,7 @@ tagging
 [27]: /ja/getting_started/tagging/unified_service_tagging/
 [28]: /ja/agent/guide/agent-commands/#agent-status-and-information
 [29]: /ja/infrastructure/process/
-[30]: /ja/security/
+[30]: /ja/data_security/
 [31]: /ja/metrics/explorer/
 [32]: /ja/dashboards/
 [33]: /ja/monitors/

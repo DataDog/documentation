@@ -1,8 +1,8 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- クラウド
+- ネットワーク
 dependencies: []
 description: Azure Firewall のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_firewall/
@@ -20,6 +20,7 @@ public_title: Datadog-Microsoft Azure Firewall インテグレーション
 short_description: Azure Firewall のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Firewall は、Azure Virtual Network のリソースを保護するクラウドネイティブのネットワークセキュリティです。
@@ -30,7 +31,7 @@ Datadog Azure インテグレーションを使用して、Firewall からメト
 
 ### インストール
 
-[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外のインストール手順はありません。
+[Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
 ## 収集データ
 

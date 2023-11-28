@@ -1,9 +1,7 @@
 ---
 categories:
-- イベント管理
-- アラート設定
-- モニタリング
-ddtype: webhook
+- event management
+- 通知
 dependencies: []
 description: SolarWinds Orion から Datadog イベントストリームにアラートを取り込みます。
 doc_link: https://docs.datadoghq.com/integrations/solarwinds/

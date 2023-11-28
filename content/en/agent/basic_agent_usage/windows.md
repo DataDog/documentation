@@ -15,6 +15,12 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
+- link: "/agent/basic_agent_usage/#agent-architecture"
+  tag: "Documentation"
+  text: "Find out more about the Agent's architecture"
+- link: "/agent/configuration/network#configure-ports"
+  tag: "Documentation"
+  text: "Configure inbound ports"
 ---
 
 ## Setup
@@ -25,7 +31,7 @@ For installation and configuration to the Datadog EU site, use the `SITE=` param
 
 ### Installation
 
-Starting with **Agent v6.11.0**, the core and APM/trace components of the Windows Agent run under the `ddagentuser` account created at install time instead of the `LOCAL_SYSTEM` account. The Live Process component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
+Starting with **Agent v6.11.0**, the core and APM/trace components of the Windows Agent run under the `ddagentuser` account created at install time instead of the `LOCAL_SYSTEM` account. The Live Processes component, if enabled, runs under the `LOCAL_SYSTEM` account. Learn more about the [Datadog Windows Agent User][3].
 
 If installing the Datadog Agent on a domain environment, see the [installation requirements for the Agent][4].
 
@@ -34,13 +40,17 @@ If installing the Datadog Agent on a domain environment, see the [installation r
 {{< tabs >}}
 {{% tab "GUI" %}}
 
-1. Download the [Datadog Agent installer][1].
+1. Download the [Datadog Agent installer][1] to install the latest version of the Agent.
+
+   <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json">installer list</a>.</div>
+
 2. Run the installer (as **Administrator**) by opening `datadog-agent-7-latest.amd64.msi`.
 3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
 4. When the install finishes, you are given the option to launch the Datadog Agent Manager.
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
 [2]: https://app.datadoghq.com/organization-settings/api-keys
+
 {{% /tab %}}
 {{% tab "Command line" %}}
 
@@ -65,6 +75,7 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.m
 
 - The `/qn` option runs a quiet install. To see the GUI prompts, remove it.
 - Some Agent versions may cause a forced reboot. To prevent this, add the parameter: `REBOOT=ReallySuppress`.
+- Some Agent components require a kernel driver to collect data. To know if a kernel driver is required for your component, see its documentation page or search for `kernel driver` in the associated Agent configuration files.
 
 ### Configuration
 
@@ -89,19 +100,19 @@ Each configuration item is added as a property to the command line. The followin
 | `DDAGENTUSER_PASSWORD`                      | String  | Override the cryptographically secure password generated for the `ddagentuser` user during Agent installation _(v6.11.0+)_. Must be provided for installs on domain servers. [Learn more about the Datadog Windows Agent User][3].  |
 | `APPLICATIONDATADIRECTORY`                  | Path    | Override the directory to use for the configuration file directory tree. May only be provided on initial install; not valid for upgrades. Default: `C:\ProgramData\Datadog`. _(v6.11.0+)_                                           |
 | `PROJECTLOCATION`                           | Path    | Override the directory to use for the binary file directory tree. May only be provided on initial install; not valid for upgrades. Default: `%ProgramFiles%\Datadog\Datadog Agent`. _(v6.11.0+)_                                    |
-| `ADDLOCAL`                                  | String  | Enable additional agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Network Performance Monitoring][4] to be installed.                                                                          |
+| [DEPRECATED] `ADDLOCAL` | String | Enable additional agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Network Performance Monitoring][4] to be installed. _(version 7.44.0 and previous)_ |
 | `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Boolean | Use the EC2 instance id for Windows hosts on EC2. _(v7.28.0+)_                                                                                                                                                                      |
 
 **Note**: If a valid `datadog.yaml` is found and has an API key configured, that file takes precedence over all specified command line options.
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
-[2]: /agent/proxy/
+[2]: /agent/configuration/proxy/
 [3]: /agent/faq/windows-agent-ddagent-user/
 [4]: /network_monitoring/performance
 {{% /tab %}}
 {{% tab "Upgrading" %}}
 
-Agent 7 only supports Python 3. Before upgrading, confirm that your custom checks are compatible with Python 3. See the [Python 3 Custom Check Migration][1] guide for more information. If you’re not using custom checks or have already confirmed their compatibility, upgrade using the [GUI](?tab=gui) or [Command line](?tab=commandline) instructions.
+Agent 7 only supports Python 3. Before upgrading, confirm that your custom checks are compatible with Python 3. See the [Python 3 Custom Check Migration][1] guide for more information. If you're not using custom checks or have already confirmed their compatibility, upgrade using the [GUI](?tab=gui) or [Command line](?tab=commandline) instructions.
 
 If you're upgrading from a Datadog Agent version < 5.12.0, first upgrade to a more recent version of Agent 5 (>= 5.12.0 but < 6.0.0) using the [EXE installer][2] and then upgrade to Datadog Agent version >= 6.
 
@@ -140,10 +151,7 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 | help            | Gets help about any command.                                                     |
 | hostname        | Prints the hostname used by the Agent.                                           |
 | import          | Imports and converts configuration files from previous versions of the Agent.    |
-| installservice  | Installs the Agent within the service control manager.                           |
 | launch-gui      | Starts the Datadog Agent Manager.                                                |
-| regimport       | Import the registry settings into `datadog.yaml`.                                |
-| remove-service  | Removes the Agent from the service control manager.                              |
 | restart-service | Restarts the Agent within the service control manager.                           |
 | run             | Starts the Agent.                                                                |
 | start           | Starts the Agent. (Being deprecated, but accepted. Use `run` as an alternative.) |
@@ -425,7 +433,7 @@ After configuration is complete, [restart the Agent][11].
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/windows
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: /agent/basic_agent_usage/?tab=agentv6v7#supported-platforms
 [3]: /agent/faq/windows-agent-ddagent-user/
 [4]: /agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
@@ -434,5 +442,5 @@ After configuration is complete, [restart the Agent][11].
 [7]: /integrations/wmi_check/
 [8]: https://app.datadoghq.com/monitors#create/integration
 [9]: /infrastructure/process/?tab=linuxwindows#installation
-[10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[11]: /agent/guide/agent-commands/#restart-the-agent
+[10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[11]: /agent/configuration/agent-commands/#restart-the-agent

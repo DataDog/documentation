@@ -3,7 +3,7 @@ aliases:
 - /fr/monitors/monitor_status/
 description: Visualiser l'évolution du statut de votre monitor au fil du temps
 further_reading:
-- link: /monitors/create/
+- link: /monitors/
   tag: Documentation
   text: Créer des monitors
 - link: /monitors/notify/
@@ -95,7 +95,7 @@ Le graphique Evaluation Graph illustre le comportement précis de la requête du
 
 Pour obtenir encore plus de détails sur l'évolution de vos métriques, cliquez sur l'option **Open in a notebook** en regard du graphique de statut. Cela génère un [notebook][6] d'analyse, avec un graphique mis en forme représentant la requête du monitor.
 
-{{< img src="monitors/monitor_status/notebook-button.png" alt="Bouton Open in a notebook" style="width:60%;">}}
+{{< img src="monitors/monitor_status/notebook-button2.png" alt="Bouton Open in a notebook" style="width:60%;">}}
 
 Le notebook utilise l'intervalle d'évaluation du monitor et propose des logs associés, lorsque cela s'avère pertinent.
 
@@ -129,7 +129,7 @@ Pour [importer un monitor][9] dans Datadog au format JSON, utilisez la navigatio
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/monitors/create/
+[1]: /fr/monitors/
 [2]: /fr/monitors/notify/downtimes/
 [3]: /fr/api/v1/monitors/
 [4]: /fr/dashboards/querying/

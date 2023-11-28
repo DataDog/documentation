@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-hpux-agent
 app_uuid: 5e611b0d-a099-4823-a4ba-e42b1012b3b5
 assets:
@@ -16,7 +18,7 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
@@ -67,6 +69,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: HP-UX Agent
+  uninstallation: README.md#Uninstallation
 ---
 
 

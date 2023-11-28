@@ -9,6 +9,8 @@ aliases:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
+## Overview
+
 If you run your tests inside a container that you launch yourself within the build (for example, using [`docker run`][1] or [`docker-compose`][2]), forward the following environment variables to the container depending on your CI provider. This enables the Datadog tracer to autodetect the build information.
 
 Additionally, you need to pass in the environment variables required to configure the tracer as described in the [per-language test instrumentation instructions][3] (such as `DD_SERVICE`, `DD_ENV`, and a valid `DD_TRACE_AGENT_URL` that is accessible from within the container).
@@ -79,6 +81,33 @@ Additionally, you need to pass in the environment variables required to configur
 
 [1]: https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/
 {{% /tab %}}
+{{% tab "Bitrise" %}}
+
+- `BITRISE_BUILD_SLUG`
+- `BITRISE_TRIGGERED_WORKFLOW_ID`
+- `BITRISE_BUILD_NUMBER`
+- `BITRISE_BUILD_URL`
+- `BITRISE_SOURCE_DIR`
+- `GIT_REPOSITORY_URL`
+- `BITRISE_GIT_COMMIT`
+- `GIT_CLONE_COMMIT_HASH`
+- `BITRISEIO_GIT_BRANCH_DEST`
+- `BITRISE_GIT_BRANCH`
+- `BITRISE_GIT_TAG`
+- `BITRISE_GIT_MESSAGE`
+- `BITRISE_APP_TITLE`
+- `GIT_CLONE_COMMIT_MESSAGE_SUBJECT`
+- `GIT_CLONE_COMMIT_MESSAGE_BODY`
+- `GIT_CLONE_COMMIT_AUTHOR_NAME`
+- `GIT_CLONE_COMMIT_AUTHOR_EMAIL`
+- `GIT_CLONE_COMMIT_COMMITER_NAME`
+- `GIT_CLONE_COMMIT_COMMITER_EMAIL`
+
+[Full list of build environment variables provided by Bitrise][1]
+
+
+[1]: https://devcenter.bitrise.io/en/references/available-environment-variables.html
+{{% /tab %}}
 {{% tab "Buildkite" %}}
 
 - `BUILDKITE`
@@ -97,6 +126,8 @@ Additionally, you need to pass in the environment variables required to configur
 - `BUILDKITE_BUILD_AUTHOR_EMAIL`
 - `BUILDKITE_BUILD_CREATOR`
 - `BUILDKITE_BUILD_CREATOR_EMAIL`
+- `BUILDKITE_AGENT_ID`
+- `BUILDKITE_AGENT_META_DATA_*`
 
 [Full list of build environment variables provided by Buildkite][1]
 
@@ -122,6 +153,20 @@ Additionally, you need to pass in the environment variables required to configur
 
 [1]: https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
 {{% /tab %}}
+{{% tab "Codefresh" %}}
+
+- `CF_BUILD_ID`
+- `CF_PIPELINE_NAME`
+- `CF_BUILD_URL`
+- `CF_STEP_NAME`
+- `CF_BRANCH`
+- `CF_REVISION`
+
+[Full list of build environment variables provided by Codefresh][1]
+
+
+[1]: https://codefresh.io/docs/docs/pipelines/variables/
+{{% /tab %}}
 {{% tab "GitHub Actions" %}}
 
 - `GITHUB_ACTION`
@@ -135,6 +180,7 @@ Additionally, you need to pass in the environment variables required to configur
 - `GITHUB_SHA`
 - `GITHUB_HEAD_REF`
 - `GITHUB_REF`
+- `GITHUB_JOB`
 
 [Full list of build environment variables provided by GitHub Actions][1]
 
@@ -152,6 +198,9 @@ Additionally, you need to pass in the environment variables required to configur
 - `CI_JOB_STAGE`
 - `CI_JOB_NAME`
 - `CI_JOB_URL`
+- `CI_JOB_ID`
+- `CI_RUNNER_ID`
+- `CI_RUNNER_TAGS`
 - `CI_REPOSITORY_URL`
 - `CI_COMMIT_SHA`
 - `CI_COMMIT_REF_NAME`
@@ -179,28 +228,29 @@ Additionally, you need to pass in the environment variables required to configur
 - `GIT_URL_1`
 - `GIT_COMMIT`
 - `GIT_BRANCH`
+- `NODE_NAME`
+- `NODE_LABELS`
+- `DD_CUSTOM_TRACE_ID` (custom variable set by the [Jenkins Datadog Plugin][2])
+- `DD_CUSTOM_PARENT_ID` (idem)
 
 [Full list of build environment variables provided by Jenkins][1]
 
 
 [1]: https://wiki.jenkins.io/display/JENKINS/Building+a+software+project
+[2]: https://github.com/jenkinsci/datadog-plugin
 {{% /tab %}}
-
 {{% tab "TeamCity" %}}
 
 - `TEAMCITY_VERSION`
-- `BUILD_VCS_NUMBER`
-- `BUILD_VCS_URL`
-- `BUILD_ID`
-- `BUILD_NUMBER`
-- `SERVER_URL`
-- `BUILD_ID`
-- `BUILD_CHECKOUTDIR`
+- `TEAMCITY_BUILDCONF_NAME`
+- `BUILD_URL`
+- `DATADOG_BUILD_ID` (custom variable set by the [Datadog TeamCity Integration][2])
 
 [Full list of build environment variables provided by TeamCity][1]
 
 
 [1]: https://www.jetbrains.com/help/teamcity/predefined-build-parameters.html
+[2]: https://plugins.jetbrains.com/plugin/20852-datadog-ci-integration
 {{% /tab %}}
 {{% tab "Travis CI" %}}
 
@@ -223,31 +273,25 @@ Additionally, you need to pass in the environment variables required to configur
 
 [1]: https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
 {{% /tab %}}
-{{% tab "Bitrise" %}}
+{{% tab "Buddy CI" %}}
 
-- `BITRISE_BUILD_SLUG`
-- `BITRISE_TRIGGERED_WORKFLOW_ID`
-- `BITRISE_BUILD_NUMBER`
-- `BITRISE_BUILD_URL`
-- `BITRISE_SOURCE_DIR`
-- `GIT_REPOSITORY_URL`
-- `BITRISE_GIT_COMMIT`
-- `GIT_CLONE_COMMIT_HASH`
-- `BITRISEIO_GIT_BRANCH_DEST`
-- `BITRISE_GIT_BRANCH`
-- `BITRISE_GIT_TAG`
-- `BITRISE_GIT_MESSAGE`
-- `GIT_CLONE_COMMIT_MESSAGE_SUBJECT`
-- `GIT_CLONE_COMMIT_MESSAGE_BODY`
-- `GIT_CLONE_COMMIT_AUTHOR_NAME`
-- `GIT_CLONE_COMMIT_AUTHOR_EMAIL`
-- `GIT_CLONE_COMMIT_COMMITER_NAME`
-- `GIT_CLONE_COMMIT_COMMITER_EMAIL`
+- `BUDDY`
+- `BUDDY_SCM_URL`
+- `BUDDY_EXECUTION_REVISION`
+- `BUDDY_EXECUTION_BRANCH`
+- `BUDDY_EXECUTION_TAG`
+- `BUDDY_PIPELINE_ID`
+- `BUDDY_EXECUTION_ID`
+- `BUDDY_PIPELINE_NAME`
+- `BUDDY_EXECUTION_URL`
+- `BUDDY_EXECUTION_REVISION_MESSAGE`
+- `BUDDY_EXECUTION_REVISION_COMMITTER_NAME`
+- `BUDDY_EXECUTION_REVISION_COMMITTER_EMAIL`
 
-[Full list of build environment variables provided by Bitrise][1]
+[Full list of build environment variables provided by Buddy CI][1]
 
 
-[1]: https://devcenter.bitrise.io/en/references/available-environment-variables.html
+[1]: https://buddy.works/docs/pipelines/environment-variables#default-environment-variables
 {{% /tab %}}
 {{< /tabs >}}
 

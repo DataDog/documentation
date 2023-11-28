@@ -22,8 +22,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- オーケストレーション
 - コンテナ
+- kubernetes
+- orchestration
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/README.md
 display_on_public_website: true
@@ -41,16 +42,17 @@ public_title: Kubernetes Controller Manager
 short_description: Kubernetes Controller Manager の監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Orchestration
   - Category::Containers
+  - Category::Kubernetes
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Kubernetes Controller Manager の監視
   media: []

@@ -1,20 +1,26 @@
 ---
-title: Logging Without Limits™ ガイド
-kind: ガイド
+algolia:
+  tags:
+  - logging without limits
 further_reading:
-  - link: /logs/explorer/
-    tag: ドキュメント
-    text: ログエクスプローラーの詳細
-  - link: '/logs/explorer/#patterns'
-    tag: ドキュメント
-    text: ログパターンビューの概要
-  - link: /logs/live_tail/
-    tag: ドキュメント
-    text: Live Tail のご紹介
-  - link: /logs/logs_to_metrics/
-    tag: ドキュメント
-    text: 収集されたログからメトリクスを生成する方法
+- link: /logs/explorer/
+  tag: ドキュメント
+  text: ログエクスプローラーの詳細
+- link: /logs/explorer/#patterns
+  tag: ドキュメント
+  text: ログパターンビューの概要
+- link: /logs/live_tail/
+  tag: ドキュメント
+  text: Live Tail のご紹介
+- link: /logs/logs_to_metrics/
+  tag: ドキュメント
+  text: 収集されたログからメトリクスを生成する方法
+kind: ガイド
+title: Logging Without Limits™ ガイド
 ---
+
+{{< img src="logs/guide/lwl_marketecture_230424.jpeg" alt="Logging without LimitsTM" >}}
+
 ## 概要
 
 クラウドベースのアプリケーションは、毎分数百万というペースでログを生成できますが。すべてのログに価値があるわけではなく、またその重要度もマチマチです。そこで、Datadog の [Logging without Limits™][1] は、[ログの取り込みとインデックス化][2]を切り離すことで柔軟に対応します。
@@ -25,7 +31,7 @@ further_reading:
 
 最多ログサービスの中にはさまざまなログがあり、トラブルシューティングに関係のないものもあります。たとえば、大規模な障害時やイベントの際に、400 番台や 500 番台の応答コードログのみを調べる場合、ログエクスポローラーから 200 番台のものを除外することでトラブルシューティングを円滑に進めることができます。最初に対応するサービスを特定することで、最も多くのログを生み出すサービスステータスを特定し、[ログエクスポローラービュー][3]から除外すべきものを判断することができます。
 
-{{< img src="logs/guide/getting-started-lwl/identify_logging_service.gif" alt="最多ログのサービスステータスを特定" style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/identify_logging_service.mp4" alt="最多ログのサービスステータスを特定" video=true style="width:100%;">}}
 
 **最多ログのサービスステータスを特定するには**:
 
@@ -46,6 +52,8 @@ further_reading:
 
 除外するログパターンをクリックし、そこに含まれるログのサンプルを表示。
 
+{{< img src="logs/guide/getting-started-lwl/patterns_context_panel.jpg" alt="パターンコンテキスト" style="width:100%;">}}
+
 パターンビューは、ノイズの多いパターンを特定しフィルタリングする際に役立ちます。パターンに一致するログ数を、サービスとステータスに分けて表示します。一番上のパターンをクリックすると、ステータスに関連するイベントの詳細なログが表示されます。コンテキストパネルには、最もノイズの多いステータスパターンに関する情報が表示されます。
 
 ## 3. 除外フィルターログパターンを作成
@@ -55,20 +63,17 @@ further_reading:
 **除外フィルターを作成するには**:
 
 1. パターンビューリストにあるパターンをクリック。
-2. 右上にある **View All** ボタンをクリックし、そのパターンに関連する検索クエリを自動生成する。
-3. 検索クエリ横の `</>` オプションを選択し、検索クエリをコピー。
+2. 右上の **Add Exclusion Filter** ボタンをクリックします。このパターンのログの半分以下が 1 つのインデックスに該当する場合、このボタンは無効になります。
+3. Log Index Configuration ページが新しいタブで開き、そのパターンのログの大部分が表示されるインデックスの除外フィルターがあらかじめ入力されています。
+4. 除外フィルターには、パターンに関連する自動生成された検索クエリが入力されます。フィルター名を入力し、除外率を設定し、新しい除外フィルターを保存します。
 
-{{< img src="logs/guide/getting-started-lwl/pattern_view.gif" alt="パターンビュー" style="width:100%;">}}
-
-4. メインメニューでログの下にある **Configuration** ページに移動。**indexes** を選択し、関連するインデックスをクリック。これにより、除外フィルターを追加するオプションが表示されます。
-5. **Add an Exclusion Filter** を選択。
-6. フィルター名を入力し、コピーした検索クエリを貼り付け除外クエリを定義し、除外の割合を設定します。
-
-{{< img src="logs/guide/getting-started-lwl/exclusion_filter.gif" alt="除外フィルター" style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/exclusion_filter_new.mp4" alt="除外フィルター" video=true style="width:100%;">}}
 
 **注**: ログが複数の除外フィルターに一致した場合は、最初の除外フィルター規則だけが適用されます。複数の除外フィルターによってログが何度もサンプリングされたり除外されることはありません。
 
-ここでは、サービスステータス `INFO` パターン `Updating recommendations with customer_id=* & url=shops/*/*` が除外フィルターで絞り込まれます。これに似た大量のログパターンをログエクスポローラーから除外することで、問題を素早く見つけ特定するのに役立ちます。ただし、これらのログはログエクスポローラービューから**のみ**削除されるだけなので、収集し、[ライブテイル][5]での表示、[ログアーカイブ][6]への送信、[メトリクスの生成][7]に使用することができます。
+この例では、サービス `email-api-py`、ステータス `INFO` パターン `response code from ses 200` が除外フィルターでフィルタリングされています。このような大量のログパターンをログエクスプローラーから削除することで、ノイズを減らし、問題をより早く特定することができます。しかし、これらのログは、インデックス作成から**除外されるだけです**。これらはまだ取り込まれ、[Live Tail][5] で見ることができ、[ログアーカイブ][6]に送ることができ、または[メトリクスの生成][7]に使用することができます。
+
+{{< img src="logs/guide/getting-started-lwl/live_tail.png" alt="ログのリストと時間枠のドロップダウンを表示した Live Tail のページ" style="width:100%;">}}
 
 除外フィルターは、フィルターの右にある [無効] オプションを切り替えることで無効にできます。修正または削除するには、フィルターの上にカーソルを合わせ、[編集] または [削除] オプションを選択します。
 
@@ -86,7 +91,7 @@ further_reading:
 4. グループにディメンションを追加。生成されたログベースのメトリクスに適用するログ属性またはタグキーを選択し、 `<KEY>:<VALUE>` 形式に従いタグに変換します。ログベースのメトリクスは、カスタムメトリクスと見なされます。タイムスタンプ、ユーザー ID、リクエスト ID、セッション IDなど、無制限または極めてカーディナリティの高い属性を使うグループ化は避け、請求に影響を与えないようにします。
 5. メトリクスに名前を付ける。ログベースのメトリクスの名前は、メトリクスの命名規則に従う必要があります。
 
-{{< img src="logs/guide/getting-started-lwl/custom_metric.gif" alt="カスタムメトリクスを生成" style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/custom_metric.mp4" alt="カスタムメトリクスを生成" video=true style="width:100%;">}}
 
 ### 異常検知モニターの作成
 
@@ -99,13 +104,13 @@ further_reading:
 3. アラート条件を設定し、ユーザーやユーザーのグループに現状を通知する際に必要な情報を追加します。
 4. モニターを保存。
 
-{{< img src="logs/guide/getting-started-lwl/anomaly_monitor.gif" alt="異常検知モニター" style="width:100%;">}}
+{{< img src="logs/guide/getting-started-lwl/anomaly_monitor.mp4" alt="異常検知モニター" video=true style="width:100%;">}}
 
 異常が検出されると、タグ付けされている全員にアラートが送信されます。このアラートは、[Monitors -> Triggered Monitors][10] でも確認できます。
 
 ## まとめ
 
-ここでは、Logging without Limits™ を以下に適用する方法について説明しました：
+ここでは、Logging without Limits™ を以下に適用する方法について説明しました。
 
 1. [最多ログのサービスステータスを特定](#1-identify-your-most-logged-service-status)
 2. [大量のログパターンを特定](#2-identify-high-volume-logging-patterns)
@@ -128,5 +133,5 @@ Logging Without Limits™ の詳細やログエクスポローラー、Live Tail
 [6]: /ja/logs/archives/
 [7]: /ja/metrics/
 [8]: /ja/logs/logs_to_metrics/
-[9]: /ja/monitors/monitor_types/anomaly/
+[9]: /ja/monitors/types/anomaly/
 [10]: https://app.datadoghq.com/monitors#/triggered

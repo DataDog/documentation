@@ -1,13 +1,17 @@
 ---
 aliases:
 - /fr/integrations/faq/what-standard-integrations-emit-custom-metrics/
+further_reading:
+- link: /observability_pipelines/guide/custom-metrics-governance
+  tag: Documentation
+  text: Utiliser des pipelines d'observabilité pour contrôler vos métriques custom
 kind: documentation
 title: Facturation des métriques custom
 ---
 
 Si une métrique n'est pas envoyée depuis l'une des [plus de {{< translate key="integration_count" >}} intégrations Datadog][1], elle est considérée comme une [métrique custom][2]<sup>[(1)](#integrations-standard)</sup>.
 
-**Les métrique custom se distinguent par une combinaison unique de nom de métrique et de valeurs de tag (tag host inclus)**.
+**Une métrique custom correspond à une combinaison unique de nom de métrique et de valeurs de tag (y compris le tag du host)**. En général, les métriques envoyées par [DogStatsD][25] ou via un [check d'Agent custom][26] sont des métriques custom.
 
 Le nombre de métriques custom mensuelles facturables (qui est indiqué sur la page Usage) est calculé à partir de la formule suivante : Total de métriques custom distinctes pour chaque heure d'un mois donné / nombre d'heures du mois. Cette formule permet d'obtenir une moyenne mensuelle.
 
@@ -90,10 +94,10 @@ Pour les métriques non configurées avec Metrics without Limits™, vous payez 
 
 Pour les métriques configurées avec Metrics without Limits™ (des tags/agrégations sont configurés), vous payez pour les métriques custom ingérées et les métriques custom indexées.
 
-|                                      | Métriques custom ingérées                                                                           | Métriques custom indexées                                                                                                        |
+|                                      | Métriques custom ingérées                                                                           | Indexed Custom Metrics                                                                                                        |
 |--------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | Quota de l'abonnement                    | - Pro : 100 métriques custom ingérées par host<br>- Enterprise : 200 métriques custom ingérées par host | - Pro : 100 métriques custom indexées par host<br>- Enterprise : 200 métriques custom indexées par host                               |
-| Utilisation supérieure au quota du compte | Si vous dépassez le quota de votre abonnement, chaque palier de 100 métriques custom ingérées supplémentaires vous est facturé 0,10 $.                   | Si vous dépassez le quota de votre abonnement, chaque palier de 100 métriques custom indexées supplémentaires vous est facturé le montant indiqué dans votre contrat actuel. |
+| Dépassement du quota | Si vous dépassez le quota de votre abonnement, chaque palier de 100 métriques custom ingérées supplémentaires vous est facturé 0,10 $.                   | Si vous dépassez le quota de votre abonnement, chaque palier de 100 métriques custom indexées supplémentaires vous est facturé le montant indiqué dans votre contrat actuel. |
 
 Imaginons que vous souhaitiez utiliser Metrics without Limits™ pour réduire le volume de votre métrique `request.Latency` en conservant uniquement les tags `endpoint` et `status`. Vous obtenez les trois combinaisons de tags uniques suivantes :
 
@@ -158,27 +162,27 @@ Pour connaître la température en Floride, vous pouvez combiner les métriques 
 
 ### Configurer des tags et des agrégations avec Metrics without Limits™
 
-La configuration de tags et d'agrégations à l'aide de [Metrics without Limits™][4] peut avoir une incidence sur les volumes de métriques custom. Metrics without Limits™ dissocie les coûts d'ingestion des coûts d'indexation. Ainsi, vous pouvez continuer à envoyer toutes vos données à Datadog (toutes les informations sont ingérées) et ajouter des tags à une liste d'autorisation afin que seuls ces tags puissent être interrogés sur la plateforme Datadog. Comme le volume de données ingérées par Datadog pour les métriques que vous avez configurées est maintenant différent du volume de données indexées, qui est plus petit, deux volumes distincts s'affichent sur votre page Usage et sur la page Metrics Summary. 
+La configuration de tags et d'agrégations à l'aide de [Metrics without Limits™][3] peut avoir une incidence sur les volumes de métriques custom. Metrics without Limits™ dissocie les coûts d'ingestion des coûts d'indexation. Ainsi, vous pouvez continuer à envoyer toutes vos données à Datadog (toutes les informations sont ingérées) et ajouter des tags à une liste d'autorisation afin que seuls ces tags puissent être interrogés sur la plateforme Datadog. Comme le volume de données ingérées par Datadog pour les métriques que vous avez configurées est maintenant différent du volume de données indexées, qui est plus petit, deux volumes distincts s'affichent sur votre page Usage et sur la page Metrics Summary. 
 
 - **Ingested Custom Metrics** : le volume initial de métriques custom basé sur tous les tags ingérés (qui ont été envoyés par le code).
 - **Indexed Custom Metrics** : le volume de métriques custom pouvant être interrogées sur la plateforme Datadog (en fonction des configurations Metrics without Limits™).
 
 **Remarque : seules les métriques configurées rentrent en compte dans le calcul du volume des métriques custom.** Si vous n'avez pas configuré Metrics without Limits™ pour une métrique, seul le volume des métriques custom indexées vous est facturé.
 
-#### Dans quels cas des métriques custom ingérées ou indexées vous sont-elles facturées ?
+#### Dans quels cas les métriques custom ingérées ou indexées vous sont-elles facturées ?
 Pour les métriques non configurées avec Metrics without Limits™, vous payez pour les métriques custom indexées.
 
-|                                      | Métriques custom indexées<br>(basées sur le nombre moyen mensuel de métriques custom par heure)                                        |
+|                                      | Métriques custom indexées<br>(en fonction du nombre moyen mensuel de métriques custom par heure)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Quota du compte                    | - Pro : 100 métriques custom indexées par host <br>- Enterprise : 200 métriques custom indexées par host                             |
-| Utilisation supérieure au quota du compte | Si vous dépassez le quota de votre abonnement, chaque palier de 100 métriques custom indexées supplémentaires vous est facturé le montant indiqué dans votre contrat actuel. |
+| Quota de l'abonnement                    | - Pro : 100 métriques custom indexées par host <br>- Enterprise : 200 métriques custom indexées par host                             |
+| Dépassement du quota | Si vous dépassez le quota de votre abonnement, chaque palier de 100 métriques custom indexées supplémentaires vous est facturé le montant indiqué dans votre contrat actuel. |
 
 Pour les métriques configurées avec Metrics without Limits™ (des tags/agrégations sont configurés), vous payez pour les métriques custom ingérées et les métriques custom indexées.
 
-|                                      | Métriques custom ingérées                                                                           | Métriques custom indexées                                                                                                        |
+|                                      | Métriques custom ingérées                                                                           | Indexed Custom Metrics                                                                                                        |
 |--------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Quota du compte                    | - Pro : 100 métriques custom ingérées par host<br>- Enterprise : 200 métriques custom ingérées par host | - Pro : 100 métriques custom indexées par host<br>- Enterprise : 200 métriques custom indexées par host                               |
-| Utilisation supérieure au quota du compte | Si vous dépassez le quota de votre abonnement, chaque palier de 100 métriques custom ingérées supplémentaires vous est facturé 0,10 $.                   | Si vous dépassez le quota de votre abonnement, chaque palier de 100 métriques custom indexées supplémentaires vous est facturé le montant indiqué dans votre contrat actuel. |
+| Quota de l'abonnement                    | - Pro : 100 métriques custom ingérées par host<br>- Enterprise : 200 métriques custom ingérées par host | - Pro : 100 métriques custom indexées par host<br>- Enterprise : 200 métriques custom indexées par host                               |
+| Dépassement du quota | Si vous dépassez le quota de votre abonnement, chaque palier de 100 métriques custom ingérées supplémentaires vous est facturé 0,10 $.                   | Si vous dépassez le quota de votre abonnement, chaque palier de 100 métriques custom indexées supplémentaires vous est facturé le montant indiqué dans votre contrat actuel. |
 
 Par défaut, Datadog stocke de la façon suivante la combinaison des agrégations les plus souvent interrogées en fonction du type de métrique afin d'assurer la précision mathématique de la requête associée à la métrique que vous avez configurée :
 
@@ -240,27 +244,27 @@ Le tableau ci-dessous résume l'impact de l'ajout d'agrégations par centile pou
 
 ### Configurer des tags avec Metrics without Limits™
 
-La configuration de tags et d'agrégations à l'aide de [Metrics without Limits™][2] peut avoir une incidence sur les volumes de métriques custom. Metrics without Limits™ dissocie les coûts d'ingestion des coûts d'indexation. Ainsi, vous pouvez continuer à envoyer toutes vos données à Datadog (toutes les informations sont ingérées) et ajouter des tags à une liste d'autorisation afin que seuls ces tags puissent être interrogés sur la plateforme Datadog. Comme le volume de données ingérées par Datadog pour les métriques que vous avez configurées est maintenant différent du volume de données indexées, qui est plus petit, deux volumes distincts s'affichent sur votre page Usage et sur la page Metrics Summary. 
+La configuration de tags et d'agrégations à l'aide de [Metrics without Limits™][3] peut avoir une incidence sur les volumes de métriques custom. Metrics without Limits™ dissocie les coûts d'ingestion des coûts d'indexation. Ainsi, vous pouvez continuer à envoyer toutes vos données à Datadog (toutes les informations sont ingérées) et ajouter des tags à une liste d'autorisation afin que seuls ces tags puissent être interrogés sur la plateforme Datadog. Comme le volume de données ingérées par Datadog pour les métriques que vous avez configurées est maintenant différent du volume de données indexées, qui est plus petit, deux volumes distincts s'affichent sur votre page Usage et sur la page Metrics Summary. 
 
 - **Ingested Custom Metrics** : le volume initial de métriques custom basé sur tous les tags ingérés (qui ont été envoyés par le code).
 - **Indexed Custom Metrics** : le volume de métriques custom pouvant être interrogées sur la plateforme Datadog (en fonction des configurations Metrics without Limits™).
 
 **Remarque : seules les métriques configurées rentrent en compte dans le calcul du volume des métriques custom.** Si vous n'avez pas configuré Metrics without Limits™ pour une métrique, seul le volume des métriques custom indexées vous est facturé.
 
-#### Dans quels cas des métriques custom ingérées ou indexées vous sont-elles facturées ?
+#### Dans quels cas les métriques custom ingérées ou indexées vous sont-elles facturées ?
 Pour les métriques non configurées avec Metrics without Limits™, vous payez pour les métriques custom indexées.
 
-|                                      | Métriques custom indexées<br>(basées sur le nombre moyen mensuel de métriques custom par heure)                                        |
+|                                      | Métriques custom indexées<br>(en fonction du nombre moyen mensuel de métriques custom par heure)                                        |
 |--------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Quota du compte                    | - Pro : 100 métriques custom indexées par host <br>- Enterprise : 200 métriques custom indexées par host                             |
-| Utilisation supérieure au quota du compte | Si vous dépassez le quota de votre abonnement, chaque palier de 100 métriques custom indexées supplémentaires vous est facturé le montant indiqué dans votre contrat actuel. |
+| Quota de l'abonnement                    | - Pro : 100 métriques custom indexées par host <br>- Enterprise : 200 métriques custom indexées par host                             |
+| Dépassement du quota | Si vous dépassez le quota de votre abonnement, chaque palier de 100 métriques custom indexées supplémentaires vous est facturé le montant indiqué dans votre contrat actuel. |
 
 Pour les métriques configurées avec Metrics without Limits™ (des tags/agrégations sont configurés), vous payez pour les métriques custom ingérées et les métriques custom indexées.
 
-|                                      | Métriques custom ingérées                                                                           | Métriques custom indexées                                                                                                        |
+|                                      | Métriques custom ingérées                                                                           | Indexed Custom Metrics                                                                                                        |
 |--------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| Quota du compte                    | - Pro : 100 métriques custom ingérées par host<br>- Enterprise : 200 métriques custom ingérées par host | - Pro : 100 métriques custom indexées par host<br>- Enterprise : 200 métriques custom indexées par host                               |
-| Utilisation supérieure au quota du compte | Si vous dépassez le quota de votre abonnement, chaque palier de 100 métriques custom ingérées supplémentaires vous est facturé 0,10 $.                   | Si vous dépassez le quota de votre abonnement, chaque palier de 100 métriques custom indexées supplémentaires vous est facturé le montant indiqué dans votre contrat actuel. |
+| Quota de l'abonnement                    | - Pro : 100 métriques custom ingérées par host<br>- Enterprise : 200 métriques custom ingérées par host | - Pro : 100 métriques custom indexées par host<br>- Enterprise : 200 métriques custom indexées par host                               |
+| Dépassement du quota | Si vous dépassez le quota de votre abonnement, chaque palier de 100 métriques custom ingérées supplémentaires vous est facturé 0,10 $.                   | Si vous dépassez le quota de votre abonnement, chaque palier de 100 métriques custom indexées supplémentaires vous est facturé le montant indiqué dans votre contrat actuel. |
 
 Imaginons que vous souhaitiez conserver uniquement les tags `endpoint` et `status` associés à la métrique `request.Latency`. Vous obtenez alors les trois combinaisons de tags uniques suivantes :
 
@@ -305,7 +309,7 @@ Les intégrations standard suivantes peuvent potentiellement générer des métr
 | Types d'intégrations                           | Intégrations                                                                       |
 |------------------------------------------------|------------------------------------------------------------------------------------|
 | Limitées à 350 métriques custom par défaut.      | [ActiveMQ XML][11] / [Go-Expvar][12] / [Java-JMX][13]                              |
-| Aucune limite appliquée à la collecte de métriques custom par défaut. | [Nagios][14] / [Check PDH][15] / [Prometheus][16] / [Windows Services][17] / [WMI][18] |
+| Aucune limite appliquée à la collecte de métriques custom par défaut. | [Nagios][14] / [Check PDH][15] / [OpenMetrics][16] / [Windows Services][17] / [WMI][18] / [Prometheus][27] |
 | Peuvent être configurées pour collecter des métriques custom.   | [MySQL][19] / [Oracle][20] / [Postgres][21] / [SQL Server][22]                        |
 | Métriques custom envoyées depuis des intégrations cloud    | [AWS][23]                                                                          |
 
@@ -315,6 +319,9 @@ Pour toute question technique, contactez [l'assistance Datadog][24].
 
 Pour toute question concernant la facturation, contactez votre [chargé de compte][10].
 
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/integrations/
 [2]: /fr/metrics/custom_metrics/
@@ -331,7 +338,7 @@ Pour toute question concernant la facturation, contactez votre [chargé de compt
 [13]: /fr/integrations/java/
 [14]: /fr/integrations/nagios/
 [15]: /fr/integrations/pdh_check/
-[16]: /fr/integrations/prometheus/
+[16]: /fr/integrations/openmetrics/
 [17]: /fr/integrations/windows_service/
 [18]: /fr/integrations/wmi_check/
 [19]: /fr/integrations/mysql/
@@ -340,3 +347,6 @@ Pour toute question concernant la facturation, contactez votre [chargé de compt
 [22]: /fr/integrations/sqlserver/
 [23]: /fr/integrations/amazon_web_services/
 [24]: /fr/help/
+[25]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/
+[26]: /fr/metrics/custom_metrics/agent_metrics_submission/
+[27]: /fr/integrations/prometheus

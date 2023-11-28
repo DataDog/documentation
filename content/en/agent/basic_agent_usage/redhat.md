@@ -14,6 +14,12 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
+- link: "/agent/basic_agent_usage/#agent-architecture"
+  tag: "Documentation"
+  text: "Find out more about the Agent's architecture"
+- link: "/agent/configuration/network#configure-ports"
+  tag: "Documentation"
+  text: "Configure inbound ports"
 ---
 
 ## Overview
@@ -22,7 +28,9 @@ This page outlines the basic features of the Datadog Agent for Red Hat. If you h
 
 Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
-**Note**: RedHat/CentOS 6 and above are supported. Since Agent 6.33.0/7.33.0, AlmaLinux/Rocky 8 and above are supported. 
+**Notes**:
+- On the 64-bit x86 architecture, RedHat/CentOS 6 and above are supported. Since Agent 6.33.0/7.33.0, AlmaLinux/Rocky 8 and above are supported.
+- On the 64-bit Arm v8 architecture, RedHat/CentOS 8 and above are supported. Since Agent 6.33.0/7.33.0, AlmaLinux/Rocky 8 and above are supported.
 
 ## Commands
 
@@ -129,6 +137,6 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/centos
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=centos
 [2]: /agent/troubleshooting/
 [3]: /developers/guide/custom-python-package/

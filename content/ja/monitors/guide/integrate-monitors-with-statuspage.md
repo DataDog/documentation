@@ -60,10 +60,10 @@ Statuspage アラートでトリガーする[メトリクスモニター][8]を�
 
 [1]: https://www.atlassian.com/software/statuspage
 [2]: /ja/integrations/statuspage
-[3]: /ja/events/explorer/
+[3]: /ja/service_management/events/explorer/
 [4]: https://app.datadoghq.com/integrations
 [5]: https://app.datadoghq.com/event/explorer
 [6]: /ja/dashboards/guide/custom_time_frames/
 [7]: https://support.atlassian.com/statuspage/docs/get-started-with-email-automation/
-[8]: /ja/monitors/create/types/metric/
+[8]: /ja/monitors/types/metric/
 [9]: https://app.datadoghq.com/monitors/create/metric

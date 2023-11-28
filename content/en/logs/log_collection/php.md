@@ -1,5 +1,5 @@
 ---
-title: PHP log collection
+title: PHP Log Collection
 kind: documentation
 aliases:
   - /logs/languages/php
@@ -20,13 +20,16 @@ further_reading:
   tag: "Documentation"
   text: "Perform Log Analytics"
 - link: /logs/faq/log-collection-troubleshooting-guide
-  tag: "FAQ"
+  tag: "Documentation"
   text: "Log Collection Troubleshooting Guide"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'  
 ---
 
 ## Overview
 
-Write your PHP logs into a file, then [use the Agent][1] to forward them to Datadog, choose between the Monolog, Zend-Log, or Symfony logging libraries.
+To send your PHP logs to Datadog, log to a file and then [tail][14] that file with your Datadog Agent. This page details setup examples for the [Monolog][8], [Zend-Log][9], and [Symfony][10] logging libraries.
 
 ## Setup
 
@@ -35,16 +38,16 @@ Write your PHP logs into a file, then [use the Agent][1] to forward them to Data
 {{< tabs >}}
 {{% tab "PHP Monolog" %}}
 
-Use Composer to add Monolog as a dependency:
+Run this command to use [Composer][1] to add Monolog as a dependency:
 
 ```text
 composer require "monolog/monolog"
 ```
 
-Alternatively, install it manually:
+Alternatively, install Monolog manually by doing the following:
 
-1. Download Monolog from the repository and include it to the libraries
-2. Initialize the instance in the application's bootstrap
+1. Download Monolog from the repository and include it in the libraries.
+2. Add the following in the application's bootstrap to initialize the instance:
 
     ```php
     <?php
@@ -56,19 +59,20 @@ Alternatively, install it manually:
       use Monolog\Formatter\JsonFormatter;
     ```
 
+[1]: https://getcomposer.org
 {{% /tab %}}
 {{% tab "PHP Zend-Log" %}}
 
-Zend-log is a part of the Zend framework. Use [Composer][1] to add Zend-Log:
+Zend-Log is a part of the Zend framework. Run this command to use [Composer][1] to add Zend-Log:
 
 ```text
 composer require "zendframework/zend-log"
 ```
 
-Alternatively, install it manually:
+Alternatively, install Zend-Log manually by doing the following:
 
-1. Download the source from the repository and include it to the libraries
-2. Initialize the instance in the application's bootstrap
+1. Download the source from the repository and include it in the libraries.
+2. Add the following the application's bootstrap to initialize the instance:
 
 ```php
 <?php
@@ -83,7 +87,7 @@ Alternatively, install it manually:
 {{% /tab %}}
 {{% tab "PHP Symfony" %}}
 
-Declare a Monolog JSON formatter as a service:
+Add the following to declare a Monolog JSON formatter as a service:
 
 ```yaml
 services:
@@ -94,12 +98,12 @@ services:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Logger configuration
+### Configure your logger
 
 {{< tabs >}}
 {{% tab "PHP Monolog" %}}
 
-The following configuration enables the JSON formatting and writes the logs and events into the `application-json.log` file. Edit your code, right after the initialization of the Monolog instance and add a new handler:
+The following configuration enables JSON formatting and writes the logs and events into the `application-json.log` file. In your code, add a new handler after the initialization of the Monolog instance:
 
 ```php
  <?php
@@ -130,7 +134,7 @@ The following configuration enables the JSON formatting and writes the logs and 
 {{% /tab %}}
 {{% tab "PHP Zend-Log" %}}
 
-The following configuration enables the JSON formatting and writes the logs and events into the `application-json.log` file. Edit your code, right after the initialization of the Zend-Log instance and add a new handler.
+The following configuration enables the JSON formatting and writes the logs and events into the `application-json.log` file. In your code, add a new handler after the initialization of the Zend-Log instance.
 
 ```php
 <?php
@@ -153,13 +157,10 @@ The following configuration enables the JSON formatting and writes the logs and 
   Zend\Log\Logger::registerErrorHandler($logger);
 ```
 
-Then [Stream your log files to Datadog][1]
-
-[1]: /logs/log_collection/
 {{% /tab %}}
 {{% tab "PHP Symfony" %}}
 
-Configure the formatter in your Monolog configuration: declare the formatter field as follows:
+To configure the formatter in your Monolog configuration, declare the formatter field as follows:
 
 ```yaml
  monolog:
@@ -174,13 +175,12 @@ Configure the formatter in your Monolog configuration: declare the formatter fie
 {{% /tab %}}
 {{< /tabs >}}
 
-**Connect Logs and Traces**
+### Configure the Datadog Agent
 
-If APM is enabled for this application, the correlation between application logs and traces can be improved by [following APM PHP logging instructions][2] to automatically add trace and span IDs in your logs.
+Once [log collection is enabled][11], do the following to set up [custom log collection][12] to tail your log files and send new logs to Datadog.
 
-### Agent configuration
-
-Create a `php.d/conf.yaml` file in your `conf.d/` folder with the following content:
+1. Create a `php.d/` folder in the `conf.d/` [Agent configuration directory][13].
+2. Create a `conf.yaml` file in `php.d/` with the following content:
 
 ```yaml
 init_config:
@@ -191,25 +191,29 @@ instances:
 logs:
 
   - type: file
-    path: "/path/to/your/php/application-json.log"
-    service: "<SERVICE_NAME>"
+    path: "<path_to_your_php_application_json>.log"
+    service: "<service_name>"
     source: php
     sourcecategory: sourcecode
 ```
 
-## Adding more context
+## Connect your services across logs and traces
+
+If APM is enabled for this application, the correlation between application logs and traces can be improved by following the [APM PHP logging instructions][2] to automatically add trace and span IDs in your logs.
+
+## Add more context to logs
 
 {{< tabs >}}
 {{% tab "PHP Monolog" %}}
 
-It's useful to add additional context data to your logs and events. Monolog makes this convenient by providing methods for setting thread-local context data that is then submitted automatically with all events. At any moment, log an event with contextual data:
+It can be useful to add additional context to your logs and events. Monolog provides methods for setting thread-local context that is then submitted automatically with all events. For example, to log an event with contextual data:
 
 ```php
 <?php
   $logger->info('Adding a new user', array('username' => 'Seldaek'));
 ```
 
-Monolog comes with a pre-processor feature. It's a simple callback that enriches your events with metadata you can set (for example, the session ID, or the request id):
+Monolog's pre-processor has a feature that is a simple callback and enriches your events with metadata you can set (for example, the session ID, or the request id):
 
 ```php
  <?php
@@ -236,41 +240,23 @@ Monolog comes with a pre-processor feature. It's a simple callback that enriches
 {{% /tab %}}
 {{% tab "PHP Zend-Log" %}}
 
-Useful logging information comes from additional context data that you can add to your logs and events. Zend-Log makes this convenient by providing methods to set thread local context data that is then submitted automatically with all events. At any moment, log an event with contextual data:
+It can be useful to add additional context to your logs and events. Zend-Log provides methods to set thread-local context that is then submitted automatically with all events. For example, to log an event with contextual data:
 
 ```php
 <?php
   $logger->info('Adding a new user', array('username' => 'Seldaek'));
 ```
 
-But, most importantly, the library comes with a Processor feature. Processors allow you to provide additional information to logs in an automated fashion. They are called from the logger before the event is passed to the writers; they receive the event array, and return an event array on completion.
-
-Use cases include:
-
-* Providing exception backtrace information.
-* Injecting substitutions into the message.
-* Injecting a request identifier (in order to later inspect logs for a specific identifier).
-
-Take a peek to this code if you want to use it:
-
-```php
-<?php
-  $logger->addProcessor(new Zend\Log\Processor\Backtrace());
-  $logger->addProcessor(new Zend\Log\Processor\PsrPlaceholder());
-  $logger->addProcessor(new Zend\Log\Processor\ReferenceId());
-  $logger->addProcessor(new Zend\Log\Processor\RequestId());
-```
-
-If you want to develop yours, [refer the Zend documentation][1].
+See [Zend's Processor documentation][1] for more information on providing additional information to your logs.
 
 [1]: https://docs.zendframework.com/zend-log/processors
 {{% /tab %}}
 {{% tab "PHP Symfony" %}}
 
-Add a session Processor to add variable context within your logs:
+Follow these steps to add variable context in your logs using a session processor.
 
-1. Implement your session Processor:
-  This is an example of such a Processor. It knows the current session and it enriches the content of the log record with valuable information such as the `requestId`, `sessionId`, ...
+1. Implement your session processor:
+  In the following example, the processor knows the current session and enriches the content of the log record with information such as the `requestId`, `sessionId`, and so on.
 
     ```php
     <?php
@@ -341,34 +327,33 @@ Add a session Processor to add variable context within your logs:
       }
     ```
 
-2. Wire the Processor with Symfony:
+2. Integrate the processor with Symfony by adding the following:
 
-  ```yaml
-   services:
-      monolog.processor.session_request:
-          class: Acme\Bundle\MonologBundle\Log\SessionRequestProcessor
-          arguments:  [ @session ]
-          tags:
-              - { name: monolog.processor, method: processRecord }
-  ```
+    ```yaml
+      services:
+          monolog.processor.session_request:
+              class: Acme\Bundle\MonologBundle\Log\SessionRequestProcessor
+              arguments:  [ @session ]
+              tags:
+                  - { name: monolog.processor, method: processRecord }
+    ``` 
 
-3. [Stream generated JSON file to Datadog][1].
+3. [Stream](#configure-the-datadog-agent) the generated JSON file to Datadog.
 
-[1]: /logs/log_collection/
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Monolog framework integration
 
-Monolog is a part of the following frameworks:
+Monolog can be used with the following frameworks:
 
-* [Symfony2, Symfony3][3]
+* [Symfony v2+/v3+][3]
 * [PPI][4]
 * [Laravel][5]
 * [Silex][6]
 * [Lumen][7]
 
-Integrate Monolog with your framework then configure your logger:
+To integrate Monolog with your framework, add the following:
 
 ```php
  <?php
@@ -390,9 +375,12 @@ Integrate Monolog with your framework then configure your logger:
   return $r;
 ```
 
-### Symfony (v2+, v3+)
+Then, configure your logger for Monolog.
 
-In your configuration directory `/path/to/config/directory/`, edit the `config_dev.yml` and `config_prod.yml` to configure log management to suit your needs for development and production environments.
+{{< tabs >}}
+{{% tab "Symfony v2+/v3+" %}}
+
+In your configuration directory `/path/to/config/directory/`, add the following to the `config_dev.yml` and `config_prod.yml`. Modify the example to configure it for your development and production environments.
 
 ```yaml
 # app/config/config.yml
@@ -416,17 +404,18 @@ monolog:
             # log to var/logs/(environment).log
             type: stream
             path: "%kernel.logs_dir%/%kernel.environment%.log"
-            # inclues all channels (doctrine, errors, etc.)
+            # includes all channels (doctrine, errors, and so on)
             channels: ~
             # use json formatter
             formatter: monolog.json_formatter
-            # logs alls events (debug trought fatal)
+            # set the log level (for example: debug, error, or alert)
             level: debug
 ```
 
-### PPI
+{{% /tab %}}
+{{% tab "PPI" %}}
 
-In your configuration directory `/path/to/config/directory/`, edit the `config_dev.yml` and `config_prod.yml` to configure log management to suit your needs for development and production environments.
+In your configuration directory `/path/to/config/directory/`, add the following to the `config_dev.yml` and `config_prod.yml`. Modify the example to configure it for your development and production environments.
 
 ```yaml
 monolog:
@@ -439,15 +428,18 @@ monolog:
             path: "%kernel.logs_dir%/%kernel.environment%.log"
             # use json formatter
             formatter: monolog.json_formatter
-            # logs alls events (debug trought fatal)
+            # set the log level (for example: debug, error, or alert)
             level: debug
 ```
 
-### Laravel
+{{% /tab %}}
+{{% tab "Laravel" %}}
 
 <div class="alert alert-warning">
-Note that the function <code>\DDTrace\current_context()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a>.
+The function <code>\DDTrace\current_context()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a>.
 </div>
+
+Add the following:
 
 ```php
 <?php
@@ -484,7 +476,7 @@ class AppServiceProvider extends ServiceProvider
         $monolog->pushProcessor(function ($record) use ($useJson) {
             $context = \DDTrace\current_context();
             if ($useJson === true) {
-                $record['dd'] = [
+                $record['extra']['dd'] = [
                     'trace_id' => $context['trace_id'],
                     'span_id'  => $context['span_id'],
                 ];
@@ -511,7 +503,10 @@ class AppServiceProvider extends ServiceProvider
 }
 ```
 
-### Silex
+{{% /tab %}}
+{{% tab "Silex" %}}
+
+Add the following: 
 
 ```php
 <?php
@@ -523,7 +518,10 @@ class AppServiceProvider extends ServiceProvider
   });
 ```
 
-### Lumen
+{{% /tab %}}
+{{% tab "Lumen" %}}
+
+Add the following: 
 
 ```php
 <?php
@@ -536,14 +534,23 @@ class AppServiceProvider extends ServiceProvider
   return $app;
 ```
 
+{{< /tabs >}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/logs/
 [2]: /tracing/other_telemetry/connect_logs_and_traces/php/
-[3]: /logs/log_collection/php/#symfony-v2-v3
-[4]: /logs/log_collection/php/#ppi
-[5]: /logs/log_collection/php/#laravel
-[6]: /logs/log_collection/php/#silex
-[7]: /logs/log_collection/php/#lumen
+[3]: https://symfony.com/doc/current/logging.html#monolog
+[4]: https://github.com/ppi/ppi-monolog-module
+[5]: https://laravel.com/docs/9.x/logging#introduction
+[6]: https://github.com/silexphp/Silex
+[7]: https://lumen.laravel.com/docs/9.x
+[8]: https://seldaek.github.io/monolog/
+[9]: https://framework.zend.com/
+[10]: https://symfony.com/
+[11]: /agent/logs/?tab=tailfiles#activate-log-collection
+[12]: /agent/logs/?tab=tailfiles#custom-log-collection
+[13]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[14]: /glossary/#tail

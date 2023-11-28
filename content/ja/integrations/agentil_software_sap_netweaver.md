@@ -1,10 +1,17 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: agentil-software-sap-netweaver
 app_uuid: 5b070928-c509-4826-93db-8b5e9206c355
 assets:
   dashboards:
+    ABAP transactions response times: assets/dashboards/agentil_software_abap_transactions_response_times.json
+    SAP ABAP Transactions Details: assets/dashboards/agentil_software_abap_transactions_details.json
     SAP Netweaver overview: assets/dashboards/agentil_software_sap_global_overview.json
     SAP Netweaver system dashboard: assets/dashboards/agentil_software_sap_netweaver_system.json
+    SAP System IDOCS: assets/dashboards/agentil_software_system_idocs.json
+    SAP System Shortdumps: assets/dashboards/agentil_software_system_shortdumps.json
+    SAP jobs details: assets/dashboards/agentil_software_sap_jobs_details.json
   integration:
     configuration: {}
     events:
@@ -24,8 +31,6 @@ author:
   vendor_id: agentil-software
 categories:
 - マーケットプレイス
-- cloud
-- モニタリング
 - sap
 dependencies: []
 display_on_public_website: true
@@ -57,12 +62,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
   - Category::Marketplace
-  - Category::Cloud
-  - Category::Monitoring
   - Category::SAP
   - Offering::Integration
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: S/4HANA と NetWeaver システムの ABAP および J2EE スタックを監視する
   media:
@@ -75,9 +78,22 @@ tile:
   - caption: SAP NetWeaver のジョブログ
     image_url: images/logs_example_jobs.png
     media_type: image
+  - caption: SAP ABAP トランザクション時間
+    image_url: images/abap_transaction_response_time.png
+    media_type: image
+  - caption: SAP ABAP トランザクションの詳細
+    image_url: images/abap_transaction_details.png
+    media_type: image
+  - caption: SAP IDOC メッセージ
+    image_url: images/abap_idocs.png
+    media_type: image
+  - caption: SAP バックグラウンドジョブ
+    image_url: images/abap_background_jobs.png
+    media_type: image
   overview: README.md#Overview
   support: README.md#Support
   title: SAP S/4HANA & NetWeaver
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -85,9 +101,9 @@ tile:
 ## 概要
 SAP NetWeaver インテグレーションは、SAP **NetWeaver** および **S/4HANA** アプリケーションプラットフォームの ABAP および J2EE スタックを監視します。
 
-リモート**エージェントレス**接続と事前設定された監視テンプレートを使用することで、このインテグレーションはわずか**数分**で本稼働することができます
+リモート**エージェントレス**接続と事前設定された監視テンプレートを使用することで、このインテグレーションはわずか**数分**で本稼働することができます。
 
-モニタリングには、AGENTIL Software の [Pro.Monitor](https://www.agentil-software.com) プラットフォームが使用されています。SAP システムの最も関連性の高いモジュールとトランザクションをカバーするように、すぐに設定することができます (**ショートダンプ、SAP ジョブ、トランザクション応答時間、ワークプロセスなど**)。
+モニタリングには、AGENTIL Software の [Pro.Monitor][1] プラットフォームが使用されています。SAP システムの最も関連性の高いモジュールとトランザクションをカバーするように、すぐに設定することができます (**ショートダンプ、SAP ジョブ、トランザクション応答時間、ワークプロセスなど**)。
 
 このインテグレーションは、システムからデータをリアルタイムに収集・分析し、メトリクスとアクション可能なイベントを生成します。Pro.Monitor の設定によりアラートを細かく調整し、メトリクスに直接 Datadog モニターを作成することができます。
 
@@ -129,13 +145,26 @@ SAP NetWeaver インテグレーションは、SAP **NetWeaver** および **S/4
 - ワークプロセス
 
 ## サポート
-サポートや機能のリクエストについては、AGENTIL Software (support@agentil-software.com) までお問い合わせください。
+
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから AGENTIL Software にお問い合わせください。
+
+- メール: [support@agentil-software.com][2]
+
+### その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog Marketplace の Agentil の製品を使って SAP NetWeaver を監視する][5]
 
 *SAP や他のプラットフォームとの特定のインテグレーションのための信頼できるパートナーをお探しなら、ぜひ当社にご連絡ください。*
 
 ---
 この製品は、スイスのジュネーブで設計・開発されています。
 
-
+[1]: https://www.agentil-software.com
+[2]: mailto:support@agentil-software.com
+[3]: https://softwaredownloads.sap.com/file/0020000000507122021
+[4]: https://wiki.agentil-software.com/doku.php?id=products:promonitor:6.8:userguide:configuration
+[5]: https://www.datadoghq.com/blog/sap-netweaver-monitoring-agentil-datadog-marketplace/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/agentil-software-sap-netweaver" target="_blank">こちらをクリック</a>してください。

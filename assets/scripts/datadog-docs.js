@@ -4,8 +4,8 @@ import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/t
 import initCodeTabs from './components/codetabs';
 import configDocs from './config/config-docs';
 import { loadPage } from './components/async-loading';
+import { loadInstantSearch } from './components/algolia';
 import { updateMainContentAnchors, gtag } from './helpers/helpers';
-import { getQueryParameterByName } from './helpers/browser';
 import {setMobileNav, closeMobileNav} from './components/mobile-nav'
 
 const { env } = document.documentElement.dataset;
@@ -47,13 +47,8 @@ $(document).ready(function () {
         }
     });
 
-    // algolia
-    $('.ds-hint').css('background', 'transparent');
-
-    const searchParam = getQueryParameterByName('s');
-    if (searchParam) {
-        $('.sidenav-search input[name="s"]').val(searchParam);
-    }
+    // load algolia instant search for the first time
+    loadInstantSearch(asyncLoad=false);
 
     if (!document.body.classList.contains('api')){
         $(window).on('resize scroll', function() {
@@ -72,7 +67,8 @@ $(document).ready(function () {
     const newLinks = document.getElementsByTagName('a');
     for (let i = 0; i < newLinks.length; i++) {
         if (
-            !newLinks[i].href.includes('datadoghq.com') &&
+            !newLinks[i].href.includes('docs.datadoghq.com') &&
+            !newLinks[i].href.includes('docs-staging.datadoghq.com') &&
             !newLinks[i].href.includes('localhost:1313')
         ) {
             $(`a[href='${newLinks[i].href}']`).attr('target', '_blank');
@@ -162,15 +158,6 @@ function getPathElement(event = null) {
         );
     }
 
-    // redirect support. if agent/aggregating agents is selected, highlight `observability_pipelines/integrations/integrate_vector_with_datadog` in the sidenav.
-    if (path.includes('observability_pipelines/integrations/integrate_vector_with_datadog')) {
-        const observabilityPipelineEl = document.querySelector('.side .nav-top-level > [data-path*="observability_pipelines"]');
-        sideNavPathElement = observabilityPipelineEl.nextElementSibling.querySelector(
-            '[data-path*="observability_pipelines/integrations/integrate_vector_with_datadog"]'
-        );
-        mobileNavPathElement = sideNavPathElement;
-    }
-
     // if on a detailed integration page then make sure integrations is highlighted in nav
     if (document.getElementsByClassName('integration-labels').length) {
         sideNavPathElement = document.querySelector(
@@ -182,7 +169,7 @@ function getPathElement(event = null) {
     }
 
     // if security rules section that has links to hashes, #cat-workload-security etc. try and highlight correct sidenav
-    if (path.includes('security_platform/default_rules')) {
+    if (path.includes('security/default_rules')) {
         const ref = ((event) ? event.target.href : window.location.hash) || window.location.hash;
         if(ref) {
           sideNavPathElement = document.querySelector(
@@ -214,7 +201,7 @@ function getPathElement(event = null) {
     }
 }
 
-// remove open class from li elements and active class from a elements
+// remove open class from li elements and active class from <a> elements
 function closeNav(){
     const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
     const openMenus = document.querySelectorAll('.side .sidenav-nav-main .open, header .sidenav-nav-main .open');
@@ -416,6 +403,7 @@ function replaceURL(inputUrl) {
 window.addEventListener(
     'popstate',
     function (event) {
+        setMobileNav()
         const domain = replaceURL(window.location.origin);
         if (event.state) {
             loadPage(window.location.href);

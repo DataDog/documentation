@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: speedscale-speedscale
 app_uuid: beb5efb1-63d5-4030-840d-7dbf6a92a4d6
 assets: {}
@@ -9,9 +11,9 @@ author:
   support_email: support@speedscale.com
   vendor_id: speedscale
 categories:
-- マーケットプレイス
-- 自動化
 - コンテナ
+- kubernetes
+- マーケットプレイス
 - テスト
 dependencies: []
 display_on_public_website: true
@@ -37,19 +39,19 @@ public_title: Speedscale
 short_description: Kubernetes の負荷テスト用トラフィックリプレイプラットフォーム
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Marketplace
-  - Category::Automation
   - Category::Containers
+  - Category::Kubernetes
+  - Category::Marketplace
   - Category::Testing
   - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Kubernetes の負荷テスト用トラフィックリプレイプラットフォーム
   media:
@@ -65,6 +67,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Speedscale
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -75,13 +78,23 @@ tile:
 Speedscale のトラフィックリプレイ結果を Datadog に公開するには、[Speedscale インテグレーション][1]をインストールします。このインテグレーションにより、Datadog の観測可能性データと Speedscale の特定のリプレイ結果を組み合わせて、パフォーマンス低下の根本原因を調査することができます。
 
 ## サポート
-Speedscale は、お客様が成功するために必要なツールや情報を提供することに全力を注いでいます。必要なときに必要な支援を得るための複数の方法を提供し、すべての[製品ドキュメント][3]はオンラインで一般公開されています。また、私たちの [Community Slack][4] に参加するか、[support@speedscale.com][5] に直接メールを送ることもできます。
 
-[1]: https://app.datadoghq.com/integrations/speedscale
-[2]: https://app.datadoghq.com/account/settings#integrations/speedscale
+サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Speedscale にお問い合わせください。
+
+- メール: [support@speedscale.com][5]
+- Slack: [Community][4]
+
+### その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog Marketplace で Speedscale の製品を使って Kubernetes アプリケーションのストレステストを実行する][6]
+- [Speedscale ドキュメント][3]
+
+[1]: /ja/integrations/speedscale
 [3]: https://docs.speedscale.com/
 [4]: https://slack.speedscale.com/
 [5]: mailto:support@speedscale.com
-
+[6]: https://www.datadoghq.com/blog/stress-test-kubernetes-with-speedscale/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/speedscale-speedscale" target="_blank">こちらをクリック</a>してください。

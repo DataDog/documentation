@@ -10,9 +10,15 @@ further_reading:
 - link: "/agent/troubleshooting/agent_check_status/"
   tag: "Agent Troubleshooting"
   text: "Get the Status of an Agent Check"
+algolia:
+  tags: ['agent flare']
 ---
 
-If you are running Agent 5.3+, you can send necessary troubleshooting information to the Datadog support team with one flare command.
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Sending an Agent Flare is not supported for this site.</div>
+{{< /site-region >}}
+
+You can send necessary troubleshooting information to the Datadog support team with one flare command.
 
 `flare` gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings. **Confirm the upload of the archive to immediately send it to Datadog support**.
 
@@ -32,7 +38,7 @@ If you don't have a case ID, just enter your email address used to login in Data
 | macOS      | `datadog-agent flare <CASE_ID>` or via the [web GUI][1] |
 | CentOS     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Debian     | `sudo datadog-agent flare <CASE_ID>`                    |
-| Kubernetes | `kubectl exec <POD_NAME> -it agent flare <CASE_ID>`     |
+| Kubernetes | `kubectl exec -it <POD_NAME> -- agent flare <CASE_ID>`  |
 | Fedora     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Redhat     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Suse       | `sudo datadog-agent flare <CASE_ID>`                    |
@@ -127,9 +133,10 @@ aws ecs execute-command --cluster <CLUSTER_NAME> \
 
 {{% tab "Cluster Agent" %}}
 
-| Platform   | Command                                                             |
-|------------|---------------------------------------------------------------------|
-| Kubernetes | `kubectl exec <POD_NAME> -it datadog-cluster-agent flare <CASE_ID>` |
+| Platform      | Command                                                                     |
+|---------------|-----------------------------------------------------------------------------|
+| Kubernetes    | `kubectl exec -n <NAMESPACE> -it <CLUSTER_POD_NAME> -- datadog-cluster-agent flare <CASE_ID>` |
+| Cloud Foundry | `/var/vcap/packages/datadog-cluster-agent/datadog-cluster-agent-cloudfoundry flare -c /var/vcap/jobs/datadog-cluster-agent/config <CASE_ID>` |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -142,11 +149,11 @@ Manually obtain this file and provide it to support if there are any issues with
 ### Kubernetes
 To obtain the archive file in Kubernetes, use the kubectl command:
 ```
-kubectl cp datadog-<pod-name>:/tmp/datadog-agent-<date-of-the-flare>.zip flare.zip
+kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zip -c agent
 ```
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
+[1]: https://github.com/DataDog/datadog-agent/tree/main/pkg/flare

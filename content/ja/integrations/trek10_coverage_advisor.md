@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: trek10-coverage-advisor
 app_uuid: 2faacd70-a192-4a28-8b36-e55298d7b3b4
 assets:
@@ -49,13 +51,13 @@ public_title: Trek10 AWS Coverage Advisor
 short_description: 120 種類の AWS メトリクスをチェックしてカバレッジのギャップを確認
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Category::AWS
@@ -69,6 +71,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Trek10 AWS Coverage Advisor
+  uninstallation: README.md#Uninstallation
 ---
 
 

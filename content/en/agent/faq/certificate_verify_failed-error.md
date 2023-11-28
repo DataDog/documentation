@@ -11,7 +11,7 @@ On Saturday May 30th, 2020, at 10:48 UTC, an SSL root certificate used to cross-
 
 Agent versions spanning 3.6.x to 5.32.6 embed the expired certificate and are affected.
 
-Agent versions 6.x and 7.x are fine and don’t need to be updated.
+Agent versions 6.x and 7.x are fine and don't need to be updated.
 
 ### Fixing by upgrading to Agent 5.32.7
 
@@ -111,6 +111,6 @@ restart-service -Force datadogagent
 
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi
-[2]: https://app.datadoghq.com/account/settings?agent_version=5#agent
+[2]: https://app.datadoghq.com/account/settings/agent/5?platform=overview
 [3]: /agent/versions/upgrade_to_agent_v7/?tab=linux#from-agent-v5-to-agent-v7
 [4]: /agent/versions/upgrade_to_agent_v6/?tab=linux

@@ -8,10 +8,10 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'profiler/search_profiles'
+    - link: 'profiler/profile_visualizations'
       tag: 'Documentation'
-      text: 'Learn more about available profile types'
-    - link: 'profiler/profiler_troubleshooting'
+      text: 'Learn more about available profile visualizations'
+    - link: 'profiler/profiler_troubleshooting/php'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
 aliases:
@@ -42,8 +42,21 @@ Datadog recommends running an OS version that is not EOL.
 
 Version 3.13 or newer of Alpine Linux is required because the profiler is built against musl v1.2.
 
+Additionally you need to install `libgcc_s` with:
+
+```shell
+apk add libgcc
+```
+
 {{% /tab %}}
 {{< /tabs >}}
+
+The following profiling features are available in the following minimum versions of the `dd-trace-php` library:
+
+|      Feature         | Required `dd-trace-php` version          |
+|----------------------|-----------------------------------------|
+| [Code Hotspots][12]        | 0.71+                       |
+| [Endpoint Profiling][13]            | 0.79.0+                       |
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
@@ -57,15 +70,15 @@ To begin profiling applications:
 
 3. Run the installer to install both the tracer and profiler, for example `php datadog-setup.php --enable-profiling`. This script is interactive and asks which of the detected PHP locations it should install to. At the end of the script, it outputs the non-interactive version of the command arguments for future use.
 
-4. Configure the profiler with environment variables. Unlike the tracer the profiler does not support INI settings.
-
    {{< tabs >}}
 {{% tab "CLI" %}}
 
 Set the environment variables before calling PHP, for example:
 
 ```
+# DD_PROFILING_ENABLED is not required for v0.82.0+.
 export DD_PROFILING_ENABLED=true
+
 export DD_SERVICE=app-name
 export DD_ENV=prod
 export DD_VERSION=1.3.2
@@ -76,10 +89,12 @@ php hello.php
 {{% /tab %}}
 {{% tab "PHP-FPM" %}}
 
-Use the `env` directive in the php-fpm’s `www.conf` file, for example:
+Use the `env` directive in the php-fpm's `www.conf` file, for example:
 
 ```
+; DD_PROFILING_ENABLED is not required for v0.82.0+
 env[DD_PROFILING_ENABLED] = true
+
 env[DD_SERVICE] = app-name
 env[DD_ENV] = prod
 env[DD_VERSION] = 1.3.2
@@ -91,7 +106,9 @@ env[DD_VERSION] = 1.3.2
 Use `SetEnv` from the server config, virtual host, directory, or `.htaccess` file:
 
 ```
+# DD_PROFILING_ENABLED is not required for v0.82.0+.
 SetEnv DD_PROFILING_ENABLED true
+
 SetEnv DD_SERVICE app-name
 SetEnv DD_ENV prod
 SetEnv DD_VERSION 1.3.2
@@ -102,7 +119,7 @@ SetEnv DD_VERSION 1.3.2
 
    See the [configuration docs][4] for more environment variables.
 
-5. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
+4. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
 
 ## Not sure what to do next?
 
@@ -112,9 +129,11 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[2]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [3]: https://github.com/DataDog/dd-trace-php/releases
 [4]: /tracing/trace_collection/library_config/php/#environment-variable-configuration
 [5]: https://app.datadoghq.com/profiling
 [6]: /getting_started/profiler/
+[12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints

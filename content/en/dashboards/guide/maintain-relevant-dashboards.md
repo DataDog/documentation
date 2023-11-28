@@ -34,17 +34,17 @@ Click the **Popularity** column to reverse sort by popularity. The list automati
 #### 2. Search for default titles
 
 Search for terms like:
-- “’s timeboard”
-- “'s screenboard”
-- “’s dashboard”
+- "'s timeboard"
+- "'s screenboard"
+- "'s dashboard"
 
-Many dashboards containing these strings have default titles (for example, “Stephanie's Dashboard Thu, Jun 3, 1:41:44 pm”). Default titles can indicate a test dashboard that was created quickly and never renamed. It may be safe to delete these dashboards, especially if they are old or low-popularity. For example, the image below shows a search filtered to **All Custom** with a search for “’s screenboard”, reverse sorted by popularity.
+Many dashboards containing these strings have default titles (for example, "Stephanie's Dashboard Thu, Jun 3, 1:41:44 pm"). Default titles can indicate a test dashboard that was created quickly and never renamed. It may be safe to delete these dashboards, especially if they are old or low-popularity. For example, the image below shows a search filtered to **All Custom** with a search for "'s screenboard", reverse sorted by popularity.
 
 **Note:** Datadog Miscellany, an unofficial public repo, has a [script to delete dashboards based on title][4].
 
 {{< img src="dashboards/guide/screenboard_search.jpeg" alt="Search for ''s screenboard'" style="width:80%;">}}
 
-#### 3. Search for keywords like “test”
+#### 3. Search for keywords like "test"
 
 Search for terms that indicate a dashboard was only used temporarily, like `test` or `cloned`. These words can be used to label actively-used dashboards, so delete with caution, or look at dashboard age and popularity alongside title.
 
@@ -54,7 +54,7 @@ Periodic cleans reduce dashboard clutter; good practices for maintaining dashboa
 
 - Use custom lists to find what you need. Search for a keyword like a service name, and select multiple dashboards to add them to a list
 - Save one-off explorations for Notebooks or Quick Graphs. When exploring an individual metric or graph, try [Notebooks][5], which are unsaved by default, or [Quick Graphs][6] rather than creating a new dashboard that needs to be deleted
-- Use [dashboard details][7] to describe what a dashboard is for and how to use it. This helps teammates understand a dashboard’s intended purpose and makes a dashboard useful to more people
+- Use [dashboard details][7] to describe what a dashboard is for and how to use it. This helps teammates understand a dashboard's intended purpose and makes a dashboard useful to more people
 
 You can also manage dashboards programmatically with the Dashboards API, which includes endpoints to [bulk delete][8] and [bulk restore][2] dashboards.
 

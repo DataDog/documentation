@@ -56,7 +56,7 @@ title: ログ用に RBAC を設定する方法
 
 ACME の受信ログに `team:acme` タグを付けます。これは、ログが Datadog を通過するときにログをトリアージするのに役立ちます。
 
-{{< img src="logs/guide/rbac/team_tag.png" alt="ログにチームタグを適用する"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/team_tag.png" alt="ログにチームタグを適用する" style="width:60%;">}}
 
 たとえば、Docker ログコレクションのコンテキストでは、[タグとしての Docker ラベル][2]を持つそのコンテナから流れるログに `team:acme` タグをアタッチします。より一般的な概要については、[タグ付けセクション][3]を参照してください。
 
@@ -79,7 +79,7 @@ API キーとアプリキーは、[Datadog アカウント API キーページ][
 
 使用するアプリキーが、自分のユーザーまたは同様のアクセス許可を持つユーザーにアタッチされていることを確認してください。
 
-{{< img src="logs/guide/rbac/app-api_keys.png" alt="API キーとアプリキーを確認"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/app-api_keys.png" alt="API キーとアプリキーを確認" style="width:60%;">}}
 
 このガイドをとおして、`<DATADOG_API_KEY>` および `<DATADOG_APP_KEY>` はそれぞれご使用中の Datadog API キーおよび Datadog アプリケーションキーに置き換えて進めてください。このガイドでは、`CURL` を備えた端末があることも前提としています。
 
@@ -203,8 +203,8 @@ curl -X DELETE "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H
 
 Datadog の [Team Section][1] で、User タブに移動します。ユーザーを選択し、すでに割り当てられている可能性のあるロールに加えて、`ACME Admin` または `ACME User` のロールを割り当てます。ユーザー管理の詳細については、[アカウントの管理][2]セクションをご覧ください。
 
-{{< img src="logs/guide/rbac/assign_user.png" alt="グリッドビューで招待を削除"  style="width:60%;">}}
-{{< img src="logs/guide/rbac/assign_user2.png" alt="グリッドビューで招待を削除"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/assign_user.png" alt="グリッドビューで招待を削除" style="width:60%;">}}
+{{< img src="logs/guide/rbac/assign_user2.png" alt="グリッドビューで招待を削除" style="width:60%;">}}
 
 [1]: https://app.datadoghq.com/access/users
 [2]: /ja/account_management/users/
@@ -271,7 +271,7 @@ Datadog アプリで [Data Access ページ][1]を使用して、以下を実行
 * `team:acme` 制限クエリを作成する。
 * `ACME Admin` および `ACME User` ロールを制限クエリに割り当てます。
 
-{{< img src="logs/guide/rbac/restriction_queries.png" alt="ログへのアクセスを制限"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/restriction_queries.png" alt="ログへのアクセスを制限" style="width:60%;">}}
 
 詳細については、[`logs_read_data` アクセス許可セクション][1]を参照してください。
 
@@ -345,13 +345,13 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "
 
 `team:acme` ログ用に 1 つの[パイプライン][13]を作成します。[Write Processor][14] アクセス許可を `ACME Admin` のメンバーに割り当てますが、そのアクセス許可をこの ACME「ルート」パイプラインに**スコープ**します。
 
-{{< img src="logs/guide/rbac/pipelines.png" alt="ACME パイプライン"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/pipelines.png" alt="ACME パイプライン" style="width:60%;">}}
 
 ### ログインデックス
 
 `team:acme` ログ用に 1 つまたは複数の[インデックス][15]を作成します。ACME チームがきめ細かい予算管理を必要とする場合、複数のインデックスが役立つ場合があります (たとえば、保持が異なるインデックス、またはクオータが異なるインデックス)。[Write Exclusion Filters][16] アクセス許可を `ACME Admin` のメンバーに割り当てますが、そのアクセス許可をこれらの ACME インデックスに**スコープ**します。
 
-{{< img src="logs/guide/rbac/indexes.png" alt="ACME インデックス"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/indexes.png" alt="ACME インデックス" style="width:60%;">}}
 
 ### ログアーカイブ
 
@@ -359,7 +359,7 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "
 
 `team:acme` ログ用に 1 つまたは複数の[アーカイブ][17]を作成します。[Read Archives][18] アクセス許可を `ACME Admin` のメンバーに割り当てますが、その ACME アーカイブに**スコープ**します。
 
-{{< img src="logs/guide/rbac/archives.png" alt="ACME アーカイブ"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/archives.png" alt="ACME アーカイブ" style="width:60%;">}}
 
 ログに応じてライフサイクルポリシーが異なる場合、複数のアーカイブが役立つ場合があります (たとえば、本番ログとステージングログ)。一度に複数のアーカイブで複数のリハイドレートをトリガーできますが、リハイドレートは一度に 1 つのアーカイブに対してのみ機能することを目的としていることに注意してください。
 
@@ -369,11 +369,11 @@ curl -X POST "https://app.datadoghq.com/api/v2/roles/<ROLE_ID>/permissions" -H "
 
 **オプションで**、ログアーカイブを設定して、そのアーカイブからリハイドレートされたすべてのログに、アーカイブにタグがあるかどうかに関係なく、最終的に `team:acme` タグが付けられるようにします。[このオプション][20]を使用すると、既存の制限ポリシーとの整合性を確保できるだけでなく、Datadog に流れないログや Datadog でインデックス付けされていないログに対応する非推奨の制限を安全に削除できます。
 
-{{< img src="logs/guide/rbac/archives.png" alt="リハイドレートの ACME タグ"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/archives.png" alt="リハイドレートの ACME タグ" style="width:60%;">}}
 
 **注**: [Legacy Read Index Data Permission][21] を使用する**場合**、`ACME Admin` ロールと一緒に `ACME User` ロールを ACME アーカイブに追加してください。`ACME User` ロールメンバーにはリハイドレートを実行するアクセス許可がないため、これによって機密性の高いアクセス許可が付与されることはありません。ただし、これにより、Read Index Data アクセス許可が結果の履歴ビューに自動的にスコープされるため、コンテンツにアクセスできます。
 
-{{< img src="logs/guide/rbac/rehydration_index.png" alt="リハイドレートインデックスアクセス許可"  style="width:60%;">}}
+{{< img src="logs/guide/rbac/rehydration_index.png" alt="リハイドレートインデックスアクセス許可" style="width:60%;">}}
 
 ## その他の参考資料
 

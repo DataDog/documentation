@@ -14,20 +14,25 @@ further_reading:
 - link: /logs/explorer/#visualiser-les-donnees
   tag: Documentation
   text: Effectuer des analyses de logs
-- link: /tracing/connect_logs_and_traces/java/
+- link: /tracing/other_telemetry/connect_logs_and_traces/java/
   tag: Documentation
   text: Associer vos logs à vos traces
 - link: /logs/faq/log-collection-troubleshooting-guide/
   tag: FAQ
-  text: Dépannage pour la collecte de logs
+  text: Guide de dépannage pour la collecte de logs
 - link: https://www.datadoghq.com/blog/java-logging-guide/
   tag: Blog
   text: Comment recueillir, personnaliser et standardiser des logs Java
+- link: /glossary/#tail
+  tag: Glossaire
+  text: Entrée du glossaire pour le terme « tail » (suivi)
 kind: documentation
 title: Collecte de logs avec Java
 ---
 
-Les stack traces liées aux logs Java types sont divisées en plusieurs lignes, ce qui les rend difficiles à associer à l'événement de log d'origine :
+Pour envoyer vos logs à Datadog, activez la journalisation au sein d'un fichier et [suivez][14] ce fichier avec l'Agent Datadog.
+
+Les stack traces liées aux logs Java types sont divisées en plusieurs lignes, ce qui les rend difficiles à associer à l'événement de log d'origine. Par exemple :
 
 ```java
 //4 events generated when only one is expected!
@@ -37,14 +42,12 @@ Exception in thread "main" java.lang.NullPointerException
         at com.example.myproject.Bootstrap.main(Bootstrap.java:14)
 ```
 
-Pour remédier à ce problème, configurez votre bibliothèque de journalisation de façon à ce que vos logs soient générés au format JSON. L'enregistrement des logs au format JSON offre les avantages suivants :
+Pour résoudre ce problème, configurez votre bibliothèque de journalisation de façon à ce que vos logs soient générés au format JSON. L'enregistrement des logs au format JSON offre les avantages suivants :
 
 * La stack trace est correctement associée à l'événement de log.
 * Tous les attributs d'un événement de log (gravité, nom du logger, nom du thread, etc.) sont correctement extraits.
 * Vous avez accès aux attributs du [MDC (Mapped Diagnostic Context)][1], que vous pouvez associer à n'importe quel événement de log.
 * Vous n'avez pas besoin de créer de [règles de parsing personnalisées][2].
-
-**Pour envoyer vos logs à Datadog, activez la journalisation au sein d'un fichier et suivez ce fichier avec l'Agent Datadog.**
 
 Les instructions suivantes montrent des exemples de configuration pour les bibliothèques de journalisation Log4j, Log4j 2 et Logback.
 
@@ -118,7 +121,7 @@ Log4j 2 intègre une structure JSON.
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
-        <version>2.17.0</version>
+        <version>2.17.1</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
@@ -140,7 +143,7 @@ Log4j 2 intègre une structure JSON.
 {{% /tab %}}
 {{% tab "Logback" %}}
 
-Utilisez la bibliothèque [logstash-logback-encoder][1] pour les logs au format JSON dans Logback. 
+Utilisez la bibliothèque [logstash-logback-encoder][1] pour les logs au format JSON dans Logback.
 
 1. Configurez un file appender en utilisant la structure JSON dans `logback.xml` :
 
@@ -178,7 +181,7 @@ Utilisez la bibliothèque [logstash-logback-encoder][1] pour les logs au format 
 
 #### Ajouter des identifiants de trace à vos logs
 
-Si l'APM est activé pour cette application, vous pouvez corréler des logs et des traces en activant l'injection d'ID de trace. Consultez la section [Associer vos logs Java à vos traces][3] pour en savoir plus.
+Si APM est activé pour cette application, vous pouvez corréler vos logs et vos traces en activant l'injection des ID de trace. Consultez la section [Associer vos logs Java à vos traces][3] pour en savoir plus.
 
 ### Format brut
 
@@ -244,7 +247,7 @@ Configurez un file appender dans `logback.xml` :
     <immediateFlush>true</immediateFlush>
 
     <encoder>
-      <pattern>Logback %d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n</pattern>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %X{dd.trace_id} %X{dd.span_id} - %m%n</pattern>
     </encoder>
   </appender>
 
@@ -259,30 +262,38 @@ Configurez un file appender dans `logback.xml` :
 
 #### Ajouter des identifiants de trace à vos logs
 
-Si l'APM est activé pour cette application, vous pouvez corréler des logs et des traces en activant l'injection d'ID de trace. Consultez la section [Associer vos logs Java à vos traces][3].
+Si APM est activé pour cette application, vous pouvez corréler vos logs et vos traces en activant l'injection des ID de trace. Consultez la section [Associer vos logs Java à vos traces][3].
 
 Si vous ne souhaitez _pas_ corréler vos logs et vos traces, vous pouvez supprimer les paramètres fictifs MDC (`%X{dd.trace_id} %X{dd.span_id}`) des logs patterns inclus dans les exemples de configuration ci-dessus.
 
 
 ## Configurer l'Agent Datadog
 
-Créez un fichier `java.yaml` dans le répertoire `conf.d/` de l'Agent avec le contenu suivant :
+Une fois la [collecte de logs activée][4], configurez la [collecte de logs personnalisée][5] pour suivre vos fichiers de logs et les transmettre à Datadog.
 
-```yaml
-#Section Logs
-logs:
+1. Créez un dossier `java.d/` dans le [répertoire de configuration de l'Agent][6] `conf.d/`.
+2. Créez un fichier `conf.yaml` dans votre dossier `java.d/` avec le contenu suivant :
 
-  - type: file
-    path: "/chemin/vers/votre/java/log.log"
-    service: java
-    source: java
-    sourcecategory: sourcecode
-    # Si des logs multiligne commencent par la date au format aaaa-mm-jj, supprimer la mise en commentaire de la règle de traitement suivante
-    #log_processing_rules:
-    #  - type: multi_line
-    #    name: new_log_start_with_date
-    #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-```
+    ```yaml
+    #Log section
+    logs:
+
+      - type: file
+        path: "/path/to/your/java/log.log"
+        service: java
+        source: java
+        sourcecategory: sourcecode
+        # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
+        #log_processing_rules:
+        #  - type: multi_line
+        #    name: new_log_start_with_date
+        #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+    ```
+
+3. [Redémarrez l'Agent][7].
+4. Lancez la [sous-commande status de l'Agent][8] et cherchez `java` dans la section `Checks` pour vérifier que les logs sont bien transmis à Datadog.
+
+Si les logs sont au format JSON, Datadog [parse automatiquement les messages de log][9] pour extraire les attributs. Utilisez le [Log Explorer][10] pour visualiser et dépanner vos logs.
 
 ## Logging sans Agent
 
@@ -338,7 +349,7 @@ Log4j 2 permet la journalisation sur un host à distance, mais n'offre pas la p
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-to-slf4j</artifactId>
-        <version>2.17.0</version>
+        <version>2.17.1</version>
     </dependency>
     <dependency>
         <groupId>ch.qos.logback</groupId>
@@ -367,11 +378,11 @@ Log4j 2 permet la journalisation sur un host à distance, mais n'offre pas la p
 
 ### Configurer Logback
 
-Utilisez la bibliothèque de journalisation [logstash-logback-encoder][4] avec Logback pour envoyer directement vos logs à Datadog.
+Utilisez la bibliothèque de journalisation [logstash-logback-encoder][11] avec Logback pour envoyer directement vos logs à Datadog.
 
 1. Configurez un TCP appender dans votre fichier `logback.xml`. Votre clé d'API sera ainsi récupérée depuis la variable d'environnement `DD_API_KEY`. Vous pouvez également ajouter votre clé d'API directement dans le fichier de configuration :
 
-    {{< site-region region="us,us3,us5" >}}
+    {{< site-region region="us,us3,us5,ap1" >}}
 
   ```xml
   <configuration>
@@ -435,7 +446,7 @@ Utilisez la bibliothèque de journalisation [logstash-logback-encoder][4] avec L
   Non pris en charge.
     {{< /site-region >}}
 
-    **Remarque** : `%mdc{keyThatDoesNotExist}` est utilisé car la configuration XML supprime les espaces. Pour en savoir plus sur le paramètre de préfixe, consultez la [documentation Logback][5].
+    **Remarque** : `%mdc{keyThatDoesNotExist}` est utilisé car la configuration XML supprime les espaces. Pour en savoir plus sur le paramètre de préfixe, consultez la [documentation Logback][12].
 
 2. Ajoutez la dépendance d'encodeur Logstash dans votre fichier `pom.xml` :
 
@@ -458,11 +469,11 @@ Enrichissez vos événements de log avec des attributs contextuels.
 
 ### Utilisation du parser key/value
 
-Le [parser key/value][6] extrait n'importe quelle expression `<KEY>=<VALUE>` identifiée dans un événement de log.
+Le [parser key/value][13] extrait n'importe quelle expression `<KEY>=<VALUE>` identifiée dans un événement de log.
 
 Pour enrichir vos événements de log dans Java, vous pouvez réécrire les messages dans votre code et y ajouter des séquences `<KEY>=<VALUE>`.
 
-Par exemple, si vous avez :
+Par exemple, si vous avez l'événement suivant :
 
 ```java
 logger.info("Emitted 1001 messages during the last 93 seconds for customer scope prod30");
@@ -517,7 +528,15 @@ Pour générer ce JSON :
 
 [1]: http://logback.qos.ch/manual/mdc.html
 [2]: /fr/logs/log_configuration/parsing
-[3]: /fr/tracing/connect_logs_and_traces/java/
-[4]: https://github.com/logstash/logstash-logback-encoder
-[5]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
-[6]: /fr/logs/log_configuration/parsing/#key-value-or-logfmt
+[3]: /fr/tracing/other_telemetry/connect_logs_and_traces/java/
+[4]: /fr/agent/logs/?tab=tailfiles#activate-log-collection
+[5]: /fr/agent/logs/?tab=tailfiles#custom-log-collection
+[6]: /fr/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[7]: /fr/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[8]: /fr/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information]
+[9]: /fr/logs/log_configuration/parsing/?tab=matchers
+[10]: /fr/logs/explorer/#overview
+[11]: https://github.com/logstash/logstash-logback-encoder
+[12]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
+[13]: /fr/logs/log_configuration/parsing/#key-value-or-logfmt
+[14]: /fr/glossary/#tail

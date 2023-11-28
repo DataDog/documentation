@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-snmp-trap-logs
 app_uuid: 754df420-1cf8-4742-b98c-9d3a76f83c41
 assets:
@@ -6,12 +8,13 @@ assets:
     RapDev SNMP Trap Logs: assets/dashboards/rapdev_snmp_trap_logs_dashboard.json
 author:
   homepage: https://www.rapdev.io
-  name: RapDev.io
-  sales_email: sales@rapdev.io
+  name: RapDev
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
 - マーケットプレイス
+- ネットワーク
 - snmp
 dependencies: []
 display_on_public_website: true
@@ -33,16 +36,17 @@ pricing:
   product_id: snmp-trap-logs
   short_description: このインテグレーションの定額料金
   unit_price: 1000
-public_title: SNMP Trap Logs インテグレーション
+public_title: SNMP Trap Logs
 short_description: SNMP トラップメッセージの Datadog ログへの変換
 supported_os:
 - linux
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
   - Category::Marketplace
+  - Category::Network
   - Category::SNMP
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: SNMP トラップメッセージの Datadog ログへの変換
   media:
@@ -60,7 +64,8 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: SNMP Trap Logs インテグレーション
+  title: SNMP Trap Logs
+  uninstallation: README.md#Uninstallation
 ---
 
 ## 概要
@@ -68,14 +73,21 @@ RapDev SNMP Trap Logs パッケージは、何千もの異なる SNMP デバイ�
 
 このパッケージには、Logstash を SNMP トラップレシーバーとして設定するためのインストールスクリプトが付属しており、適切な構成と MIB ファイルを使用してメッセージを翻訳し、Datadog 内のネットワークイベントにアラートすることができます。
 
-本パッケージに含まれる全 MIB の一覧は、[こちら][4]をご参照ください。
+本パッケージに含まれる全 MIB の一覧は、[mib_yamls.txt ファイル][4]をご参照ください。
 
 ## サポート
+
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。
 
-- メール: support@rapdev.io
+- メール: [support@rapdev.io][7]
 - チャット: [rapdev.io][3]
 - 電話: 855-857-0222
+
+### その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [SNMP トラップによるネットワークパフォーマンスの問題の監視と診断][8]
 
 ---
 ボストンより ❤️ を込めて
@@ -86,6 +98,9 @@ RapDev SNMP Trap Logs パッケージは、何千もの異なる SNMP デバイ�
 [2]: https://docs.datadoghq.com/ja/logs/log_configuration/processors/?tab=ui#log-message-remapper
 [3]: https://www.rapdev.io/#Get-in-touch
 [4]: https://files.rapdev.io/datadog/configs/mib_yamls.txt
-
+[5]: mailto:sales@rapdev.io
+[6]: https://mibs.observium.org
+[7]: mailto:support@rapdev.io
+[8]: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rapdev-snmp-trap-logs" target="_blank">こちらをクリック</a>してください。

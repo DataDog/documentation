@@ -25,6 +25,9 @@ further_reading:
 - link: "/logs/faq/log-collection-troubleshooting-guide/"
   tag: "FAQ"
   text: "Log Collection Troubleshooting Guide"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'
 ---
 
 To send your C# logs to Datadog, use one of the following approaches:
@@ -37,7 +40,7 @@ This page details setup examples for the `Serilog`, `NLog`, `log4net`, and `Micr
 
 ## File-tail logging with the Datadog Agent
 
-The recommended approach for C# log collection is to output your logs to a file and then tail that file with your Datadog Agent. This enables the Datadog Agent to enrich the logs with additional metadata.
+The recommended approach for C# log collection is to output your logs to a file and then [tail][20] that file with your Datadog Agent. This enables the Datadog Agent to enrich the logs with additional metadata.
 
 Datadog strongly encourages setting up your logging library to produce your logs in JSON format to avoid the need for [custom parsing rules][1].
 
@@ -280,8 +283,8 @@ Once [log collection is enabled][2], set up [custom log collection][3] to tail y
     logs:
 
       - type: file
-        path: "/path/to/your/csharp/log.log"
-        service: csharp
+        path: "<path_to_your_csharp_log>.log"
+        service: <service_name>
         source: csharp
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
@@ -292,7 +295,7 @@ Once [log collection is enabled][2], set up [custom log collection][3] to tail y
     ```
 
 3. [Restart the Agent][5].
-4. Run the [Agent’s status subcommand][6] and look for `csharp` under the `Checks` section to confirm logs are successfully submitted to Datadog.
+4. Run the [Agent's status subcommand][6] and look for `csharp` under the `Checks` section to confirm logs are successfully submitted to Datadog.
 
 If logs are in JSON format, Datadog automatically [parses the log messages][7] to extract log attributes. Use the [Log Explorer][8] to view and troubleshoot your logs.
 
@@ -314,6 +317,11 @@ Agentless logging (also known as "direct log submission") supports the following
 - Microsoft.Extensions.Logging (2.0+)
 
 It does not require modifying your application code, or installing additional dependencies into your application.
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> If you use log4net or NLog, an appender (log4net) or a logger (NLog) must be configured for Agentless logging to be enabled. In those cases, you can either add these extra dependencies, or use <a href="/logs/log_collection/csharp/?tab=log4net#agentless-logging-with-serilog-sink">agentless logging with the Serilog sink</a> instead.
+</div>
+
 
 ### Configure the APM library
 
@@ -365,7 +373,7 @@ You can further customize some aspects of Agentless log collection using the fol
 
 `DD_LOGS_DIRECT_SUBMISSION_TAGS`
 : If specified, adds all of the specified tags to all generated spans. If not provided, will use `DD_TAGS` instead.<br>
-**Example**: `layer:api, team:intake` 
+**Example**: `layer:api, team:intake`
 Note that the delimiter is a comma and a whitespace: `, `.
 
 The following configuration values should generally not be modified, but may be set if required.
@@ -394,6 +402,14 @@ The following configuration values should generally not be modified, but may be 
 
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+
+`DD_LOGS_DIRECT_SUBMISSION_URL`
+: Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
+**Default**: `https://http-intake.logs.ap1.datadoghq.com:443` (based on `DD_SITE`)
+
+{{< /site-region >}}
+
 {{< site-region region="eu" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
@@ -402,7 +418,7 @@ The following configuration values should generally not be modified, but may be 
 
 {{< /site-region >}}
 
-{{< site-region region="us1-fed" >}}
+{{< site-region region="gov" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
 : Sets the URL where logs should be submitted. Uses the domain provided in `DD_SITE` by default.<br>
@@ -425,6 +441,20 @@ The following configuration values should generally not be modified, but may be 
 `DD_LOGS_DIRECT_SUBMISSION_BATCH_PERIOD_SECONDS`
 : Sets the time to wait (in seconds) before checking for new logs to send.<br>
 **Default**: `1`
+
+If you are using the `Microsoft.Extensions.Logging` integration, you can filter the logs sent to Datadog using the standard capabilities built-into `ILogger`. Use the key `"Datadog"` to identify the direct-submission provider, and set the minimum log levels for each namespace. For example, adding the following to your `appSettings.json` would prevent sending any logs with a level below `Warning` to Datadog. Introduced in the .NET tracer library v2.20.0.
+
+```json
+{
+  "Logging": {
+    "Datadog": {
+      "LogLevel": {
+        "Microsoft.AspNetCore": "Warning"
+      },
+    }
+  }
+}
+```
 
 ## Agentless logging with Serilog sink
 
@@ -465,6 +495,19 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+
+```csharp
+using (var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ap1.datadoghq.com" })
+    .CreateLogger())
+{
+    // Some code
+}
+```
+
+{{< /site-region >}}
+
 {{< site-region region="us5" >}}
 
 ```csharp
@@ -491,7 +534,7 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
-{{< site-region region="us1-fed" >}}
+{{< site-region region="gov" >}}
 
 ```csharp
 using (var log = new LoggerConfiguration()
@@ -504,10 +547,9 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
-
-You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][20]
-
 {{< site-region region="us" >}}
+
+You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][1]
 
 For instance to forward logs to the Datadog US region in TCP you would use the following sink configuration:
 
@@ -528,8 +570,12 @@ using (var log = new LoggerConfiguration()
 }
 ```
 
+[1]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
+
 {{< /site-region >}}
 {{< site-region region="eu" >}}
+
+You can also override the default behavior and forward logs in TCP by manually specifying the following required properties: `url`, `port`, `useSSL`, and `useTCP`. Optionally, [specify the `source`, `service`, `host`, and custom tags.][1]
 
 For instance to forward logs to the Datadog EU region in TCP you would use the following sink configuration:
 
@@ -549,6 +595,7 @@ using (var log = new LoggerConfiguration()
     // Some code
 }
 ```
+[1]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 
 {{< /site-region >}}
 
@@ -588,15 +635,15 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 [1]: /logs/log_configuration/parsing
 [2]: /agent/logs/?tab=tailfiles#activate-log-collection
 [3]: /agent/logs/?tab=tailfiles#custom-log-collection
-[4]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[5]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[6]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[5]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[6]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [7]: /logs/log_configuration/parsing/?tab=matchers
 [8]: /logs/explorer/#overview
 [9]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
 [10]: /agent/logs/advanced_log_collection
 [11]: /serverless/azure_app_services
-[12]: /account_management/org_settings/sensitive_data_detection/#overview
+[12]: /sensitive_data_scanner/
 [13]: /tracing/trace_collection/dd_libraries/dotnet-core
 [14]: /tracing/trace_collection/dd_libraries/dotnet-framework
 [15]: https://app.datadoghq.com/organization-settings/api-keys
@@ -604,4 +651,4 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 [17]: /logs/log_configuration/pipelines/?tab=source
 [18]: /api/latest/logs/#send-logs
 [19]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
-[20]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[20]: /glossary/#tail

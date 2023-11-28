@@ -1,39 +1,43 @@
 ---
-title: 関数
-kind: documentation
 aliases:
-  - /ja/examples/
-  - /ja/examples/aws-metrics/
-  - /ja/examples/month_before/
-  - /ja/examples/graphing-functions/
-  - /ja/examples/day_before/
-  - /ja/examples/json-editing/
-  - /ja/examples/nginx-metrics/
-  - /ja/examples/dashboards/
-  - /ja/examples/hour_before/
-  - /ja/examples/os-metrics/
-  - /ja/examples/week_before/
-  - /ja/examples/cassandra-metrics/
-  - /ja/graphing/miscellaneous/functions
-  - /ja/graphing/miscellaneous/
-  - /ja/getting_started/from_the_query_to_the_graph
-  - /ja/graphing/miscellaneous/from_the_query_to_the_graph
-  - /ja/graphing/functions/
+- /ja/examples/
+- /ja/examples/aws-metrics/
+- /ja/examples/month_before/
+- /ja/examples/graphing-functions/
+- /ja/examples/day_before/
+- /ja/examples/json-editing/
+- /ja/examples/nginx-metrics/
+- /ja/examples/dashboards/
+- /ja/examples/hour_before/
+- /ja/examples/os-metrics/
+- /ja/examples/week_before/
+- /ja/examples/cassandra-metrics/
+- /ja/graphing/miscellaneous/functions
+- /ja/graphing/miscellaneous/
+- /ja/getting_started/from_the_query_to_the_graph
+- /ja/graphing/miscellaneous/from_the_query_to_the_graph
+- /ja/graphing/functions/
+further_reading:
+- link: /metrics/#querying-metrics
+  tag: ドキュメント
+  text: メトリクスのクエリ
+kind: documentation
+title: 関数
 ---
+
 ## 概要
 
-グラフエディターの `+` アイコンをクリックして関数をクエリに適用することができます。ほとんどの関数は最終段階 ([時間][1]および[空間集計][2]後) で適用されます。
+関数は、メトリッククエリの結果が視覚化するためにどのように返されるかを変更することができます。ほとんどの関数は、メトリクスクエリの結果が返された後に適用されますが、関数はクエリが行われる前にパラメーターを変更することもできます。
 
-{{< img src="dashboards/functions/addingfunctions.png" alt="関数の追加" style="width:75%;" >}}
+例えば、ロールアップ関数は、結果が返される前にクエリの時間集計を変更します。また、算術関数は、メトリクスクエリの返される結果に変更を加えます。メトリクスのクエリについて詳しくは、[メトリクス][3] ページを参照してください。さまざまな関数の詳細については、[関数の種類](#function-types)を参照してください。
 
-これは、除外関数を適用してメトリクスの特定の値を除外する方法の例です。
+## 関数を追加する
 
-{{< img src="dashboards/functions/exclusion_example.png" alt="上位リストを使用した除外例" style="width:75%;" >}}
+グラフエディターの Add Function `Σ` アイコンをクリックして関数をクエリに適用することができます。ほとんどの関数は[時間][1]および[空間集計][2]後に適用されます。
 
-エラーログにタイムシフト関数を適用して、現在のデータを 1 週間前のデータと比較する方法の例を次に示します。
+{{< img src="dashboards/functions/sigmaaddingfunctions.png" alt="Add Function の Capital Sigma シンボル" style="width:100%;" >}}
 
-{{< img src="dashboards/functions/timeshift_example.png" alt="ログを使用したタイムシフトの例" style="width:75%;" >}}
-
+## 関数の種類
 
 {{< whatsnext desc="関数の種類を選択します。" >}}
     {{< nextlink href="/dashboards/functions/algorithms" >}}アルゴリズム: 異常値や外れ値の検出機能を実装します。{{< /nextlink >}}
@@ -51,5 +55,9 @@ aliases:
 {{< /whatsnext >}}
 
 
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /ja/metrics/#time-aggregation
 [2]: /ja/metrics/#space-aggregation
+[3]: /ja/metrics/#anatomy-of-a-metric-query

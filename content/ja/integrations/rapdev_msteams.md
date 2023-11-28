@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-msteams
 app_uuid: 38da0072-43b5-44e8-a303-1e504bcc0879
 assets:
@@ -31,12 +33,12 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
+- コラボレーション
 - マーケットプレイス
-- モニタリング
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -59,22 +61,22 @@ pricing:
   short_description: 会議参加者 1 人あたりの単価
   tag: meeting_participant
   unit_label: 会議参加者
-  unit_price: 1.0
-public_title: Microsoft Teams インテグレーション
+  unit_price: 0.1
+public_title: Microsoft Teams
 short_description: ユーザーとデバイスの Microsoft Teams 通話品質を監視する
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
+  - Category::Collaboration
   - Category::Marketplace
-  - Category::Monitoring
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: ユーザーとデバイスの Microsoft Teams 通話品質を監視する
   media:
@@ -98,7 +100,8 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Microsoft Teams インテグレーション
+  title: Microsoft Teams
+  uninstallation: README.md#Uninstallation
 ---
 
 ## 概要

@@ -1,19 +1,23 @@
 ---
-title: トレースの概要
-kind: documentation
 aliases:
-  - /ja/getting_started/tracing/distributed-tracing
+- /ja/getting_started/tracing/distributed-tracing
 further_reading:
-  - link: /tracing/setup/
-    tag: ドキュメント
-    text: アプリケーション言語の選択
-  - link: /tracing/visualization/
-    tag: ドキュメント
-    text: APM の UI を利用する
-  - link: https://learn.datadoghq.com/enrol/index.php?id=4
-    tag: ラーニングセンター
-    text: Docker を使用したアプリケーションパフォーマンス監視
+- link: /tracing/trace_collection/
+  tag: ドキュメント
+  text: アプリケーション言語の選択
+- link: /tracing/glossary/
+  tag: ドキュメント
+  text: APM の UI を利用する
+- link: https://learn.datadoghq.com/courses/intro-to-apm
+  tag: ラーニングセンター
+  text: Application Performance Monitoring の紹介
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: APM の理解を深めるためのインタラクティブなセッションに参加できます
+kind: documentation
+title: トレースの概要
 ---
+
 ## 概要
 
 Datadog の APM (アプリケーションパフォーマンス監視機能、またはトレース) を使用して、バックエンドアプリケーションコードから[トレース][1]を収集できます。このビギナーガイドでは、トレースを Datadog に取り込む方法をご説明します。
@@ -26,47 +30,19 @@ Datadog の APM (アプリケーションパフォーマンス監視機能、ま
 
 ## Datadog Agent
 
-Datadog Agent をインストールする前に、以下のコマンドを使用して [Vagrant Ubuntu 16.04 仮想マシン][4]を設定します。Vagrant の詳細については、[はじめに][5]ページをご参照ください。
+Datadog Agent をインストールする前に、以下のコマンドを使用して [Vagrant Ubuntu 22.04 仮想マシン][4]を設定します。Vagrant の詳細については、[はじめに][5]ページをご参照ください。
 
 ```text
-vagrant init ubuntu/xenial64
+vagrant init ubuntu/jammy64
 vagrant up
 vagrant ssh
 ```
 
 [Datadog API キー][7]を付加した [1 行のインストールコマンド][6]を使用して、Datadog Host Agent をインストールします。
 
-{{< site-region region="us" >}}
-
 ```shell
-DD_API_KEY=<DATADOG_API_KEY>  bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datadoghq.eu" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-```
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="ddog-gov.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-```
-
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-
-```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="us3.datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"
-```
-
-{{< /site-region >}}
 
 ### 検証
 
@@ -101,9 +77,9 @@ sudo datadog-agent status
 
 `trace-agent.log` でも確認できます。
 
-```shell
+```bash
 # /var/log/datadog/trace-agent.log:
-2019-03-25 20:33:18 INFO (run.go:136) - trace-agent running on host ubuntu-xenial
+2019-03-25 20:33:18 INFO (run.go:136) - trace-agent running on host ubuntu-jammy
 2019-03-25 20:33:18 INFO (api.go:144) - listening for traces at http://localhost:8126
 2019-03-25 20:33:28 INFO (api.go:341) - no data received
 2019-03-25 20:34:18 INFO (service.go:63) - total number of tracked services: 0
@@ -156,7 +132,7 @@ ddtrace-run python hello.py
 
 次のような出力が表示されます。
 
-```shell
+```bash
 * Serving Flask app "hello" (lazy loading)
   ...
 * Running on http://0.0.0.0:5050/ (Press CTRL+C to quit)
@@ -188,13 +164,13 @@ hello world
 [1]: /ja/tracing/#terminology
 [2]: https://docs.datadoghq.com/ja/tracing/setup/
 [3]: https://www.datadoghq.com
-[4]: https://app.vagrantup.com/ubuntu/boxes/xenial64
+[4]: https://app.vagrantup.com/ubuntu/boxes/jammy64
 [5]: https://www.vagrantup.com/intro/getting-started
-[6]: https://app.datadoghq.com/account/settings#agent/ubuntu
-[7]: https://app.datadoghq.com/account/settings#api
+[6]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu
+[7]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: /ja/agent/guide/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure
-[10]: https://app.datadoghq.com/apm/docs
+[10]: https://app.datadoghq.com/apm/service-setup
 [11]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [12]: /ja/getting_started/tagging/unified_service_tagging
 [13]: /ja/tracing/guide/setting_primary_tags_to_scope/

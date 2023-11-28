@@ -1,54 +1,98 @@
 ---
+app_id: cloudflare
+app_uuid: e48a0b64-d3ad-436f-95d3-e0c81e6d51d1
+assets:
+  dashboards:
+    Cloudflare-Overview: assets/dashboards/cloudflare_overview.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check: cloudflare.requests.all
+      metadata_path: metadata.csv
+      prefix: cloudflare
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Cloudflare
+  monitors:
+    '[Cloudflare] Abnormal bandwidth being sent for zone': assets/monitors/bandwidth.json
+    '[Cloudflare] Error Rate is higher than normal in zone': assets/monitors/error_rate.json
+    '[Cloudflare] Error count is unusually high for worker script': assets/monitors/worker_error.json
+    '[Cloudflare] High number of detected threats for zone': assets/monitors/threats.json
+    '[Cloudflare] Hit Ratio is abnormally low for zone': assets/monitors/hit_ratio.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - web
+- メトリクス
+- ログの収集
 dependencies: []
-description: Cloudflare Web トラフィックおよび DNS メトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/cloudflare/
+display_on_public_website: true
 draft: false
 git_integration_title: cloudflare
-has_logo: true
 integration_id: cloudflare
 integration_title: Cloudflare
 integration_version: ''
 is_public: true
 kind: インテグレーション
-manifest_version: '1.0'
-monitors:
-  '[Cloudflare] Abnormal bandwidth being sent for zone: {{zone_name.name}}': assets/monitors/bandwidth.json
-  '[Cloudflare] Error Rate is higher than normal in zone: {{zone_name.name}}': assets/monitors/error_rate.json
-  '[Cloudflare] Error count is unusually high for worker script: {{worker_script.name}}': assets/monitors/worker_error.json
-  '[Cloudflare] High number of detected threats for zone: {{zone_name.name}}': assets/monitors/threats.json
-  '[Cloudflare] Hit Ratio is abnormally low for zone: {{zone_name.name}}': assets/monitors/hit_ratio.json
+manifest_version: 2.0.0
 name: cloudflare
-public_title: Datadog-Cloudflare インテグレーション
+oauth: {}
+public_title: Cloudflare
 short_description: Cloudflare Web トラフィックおよび DNS メトリクスを追跡
-team: web-integrations
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Web
+  - Category::Metrics
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Cloudflare Web トラフィックおよび DNS メトリクスを追跡
+  media:
+  - caption: Cloudflare 概要ダッシュボード
+    image_url: images/overview-dashboard.png
+    media_type: image
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Cloudflare
 ---
 
 ## 概要
 
-Datadog を Cloudflare アカウントに接続して、Web トラフィックと DNS のメトリクスを表示します。
+Cloudflare と統合することで、Web トラフィック、DNS クエリ、脅威に関するインサイトなど、ゾーンのメトリクスを取得できます。インテグレーションは、[Cloudflare の分析 API][1] を通じて行われます。
+
 
 ## セットアップ
 
-始める前に、[Datadog アカウント][1]と [API キー][2]、そして [Cloudflare Logpush][3] へのアクセスが必要です (Enterprise アカウントプランのご契約が必要です)。
+作業を開始するには、[Datadog アカウント][2]のほか、[API キー][3]と [Cloudflare Logpush][4] へのアクセス権が必要です。なお、Logpush へのアクセスには、Enterprise アカウントプランの購入が必要です。
 
 Cloudflare API トークンを使用する場合は、**Zone** > **Zone** > **Read** および **Zone** > **Analytics** > **Read** の権限を保有していることを確認してください。
 
 ### インストール
 
-Datadog の [Cloudflare インテグレーションタイル][4]を使用して、インテグレーションをインストールします。
+Datadog の [Cloudflare インテグレーションタイル][5]を使用して、インテグレーションをインストールします。
 
 ### コンフィギュレーション
 
-1. Datadog [Cloudflare インテグレーションタイル][4]内の **Configuration** タブに移動します。
+1. Datadog [Cloudflare インテグレーションタイル][5]内の **Configuration** タブに移動します。
 2. 監視するアカウントの電子メールアドレスと、API キーまたはトークンを入力します。Cloudflare API キーと API トークンは、Cloudflare アカウントの **My profile** > **Api Tokens** の下にあります。
 3. アカウントの名前を追加します。この名前は任意で、メトリクスの `account` タグ内で使用されます。
 
 ### ログの収集
 
 Cloudflareでは、Cloudflare Logpush を使用してログを直接 Datadog にプッシュすることができます。Logpush のジョブは [Cloudflare API](#cloudflare-api) または [Cloudflare ダッシュボード](#cloudflare-dashboard)で管理できます。
+
+Cloudflare インテグレーションパイプラインをインストールすると、特定の属性が自動的にリマップされます。どの属性がリマップされるかを確認するには
+
+1. [ログパイプライン][6]に移動します。
+2. 右上の **Browse Pipeline Library** をクリックします。
+3. 検索バーに `Cloudflare` と入力します。
+4. **Cloudflare** をクリックすると、インストールされているリマッパーなどのプロセッサーのリストが表示されます。
 
 #### Cloudflare API
 
@@ -61,8 +105,8 @@ Cloudflareでは、Cloudflare Logpush を使用してログを直接 Datadog に
         * `service` (任意): サービス名を指定。
         * `host` (任意): ホスト名を指定。
         * `ddtags` (任意): タグを指定。
-    * `dataset`: 受信するログのカテゴリー。サポートされるデータセットについては、[Cloudflare のログフィールド][5]を参照。
-    * `logpull_options` (任意): フィールド、サンプルレート、タイムスタンプの形式を構成するには、[Logpush API オプション][6]を参照。
+    * `dataset`: 受信するログのカテゴリー。サポートされるデータセットについては、[Cloudflare のログフィールド][7]を参照。
+    * `logpull_options` (オプション): フィールド、サンプルレート、タイムスタンプの形式を構成するには、[Logpush API オプション][8]を参照。
 
     **リクエスト例**:
 
@@ -135,7 +179,7 @@ Cloudflareでは、Cloudflare Logpush を使用してログを直接 Datadog に
 #### Cloudflare ダッシュボード
 
 1. Cloudflare ダッシュボードの Logpush セクションでサービスを接続したら、データセットとデータフィールドを選択し、宛先として Datadog を選択します。
-2. **Enter destination information** 下で Datadog の URL エンドポイントを入力します。
+2. **Enter destination information** の下で Datadog の URL エンドポイントを入力します。
 
     ```
     http-intake.logs.{{< region-param key="dd_site" >}}/v1/input?ddsource=cloudflare
@@ -149,8 +193,8 @@ Cloudflareでは、Cloudflare Logpush を使用してログを直接 Datadog に
     http-intake.logs.{{< region-param key="dd_site" >}}/v1/input?service=<SERVICE>&host=<HOST>&ddsource=cloudflare
     ```
 
-3. Datadog Cloudflare インテグレーションタイルのセットアップに使用したDatadog API キーを入力します。
-4. アクセスを確認すると、**Prove ownership** 下に「Ready to push! 」と表示されます。`Push` をクリックして完了します。
+3. Datadog Cloudflare インテグレーションタイルのセットアップに使用した Datadog API キーを入力します。
+4. アクセスを確認すると、**Prove ownership** の下に "Ready to push!" と表示されます。`Push` をクリックして完了します。
 
 ## 収集データ
 
@@ -181,13 +225,15 @@ Cloudflare インテグレーションには、サービスのチェック機能
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
-[1]: https://www.datadoghq.com/free-datadog-trial/
-[2]: /ja/account_management/api-app-keys/#api-keys
-[3]: https://developers.cloudflare.com/logs/about
-[4]: https://app.datadoghq.com/account/settings#integrations/cloudflare
-[5]: https://developers.cloudflare.com/logs/log-fields
-[6]: https://developers.cloudflare.com/logs/logpush/logpush-configuration-api/understanding-logpush-api#options
-[7]: https://github.com/DataDog/dogweb/blob/prod/integration/cloudflare/cloudflare_metadata.csv
-[8]: https://docs.datadoghq.com/ja/help/
+[1]: https://api.cloudflare.com/#zone-analytics-dashboard
+[2]: https://www.datadoghq.com/free-datadog-trial/
+[3]: /ja/account_management/api-app-keys/#api-keys
+[4]: https://developers.cloudflare.com/logs/about
+[5]: https://app.datadoghq.com/account/settings#integrations/cloudflare
+[6]: https://app.datadoghq.com/logs/pipelines
+[7]: https://developers.cloudflare.com/logs/log-fields
+[8]: https://developers.cloudflare.com/logs/logpush/logpush-configuration-api/understanding-logpush-api#options
+[9]: https://github.com/DataDog/dogweb/blob/prod/integration/cloudflare/cloudflare_metadata.csv
+[10]: https://docs.datadoghq.com/ja/help/

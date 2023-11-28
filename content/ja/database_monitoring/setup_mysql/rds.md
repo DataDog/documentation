@@ -8,7 +8,7 @@ kind: documentation
 title: Amazon RDS マネージド MySQL のデータベースモニタリングの設定
 ---
 
-{{< site-region region="us5,gov" >}}
+{{< site-region region="gov" >}}
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
@@ -79,7 +79,7 @@ Datadog Agent が統計やクエリを収集するためには、データベー
 `datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
 
 ```sql
-CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
+CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
 GRANT PROCESS ON *.* TO datadog@'%';
@@ -176,7 +176,12 @@ instances:
     host: '<AWS_INSTANCE_ENDPOINT>'
     port: 3306
     username: datadog
-    password: '<YOUR_CHOSEN_PASSWORD>' # 前の CREATE USER ステップから
+    password: '<YOUR_CHOSEN_PASSWORD>' # 先ほどの CREATE USER のステップから
+
+
+     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog AWS インテグレーションを構成します。
+    aws:
+      instance_endpoint: '<AWS_INSTANCE_ENDPOINT>'
 ```
 
 **注**: パスワードに特殊文字が含まれる場合は、単一引用符で囲んでください。
@@ -252,14 +257,14 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
-  --set "clusterAgent.confd.mysql\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.mysql\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
     host: <INSTANCE_ADDRESS>
     port: 3306
     username: datadog
-    password: <UNIQUEPASSWORD" \
+    password: "<UNIQUEPASSWORD>"' \
   datadog/datadog
 ```
 
@@ -326,6 +331,9 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 ### 検証
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `mysql` を探します。または、[データベース][7]のページを参照してください。
+
+## Agent の構成例
+{{% dbm-mysql-agent-config-examples %}}
 
 ## RDS インテグレーションをインストール
 

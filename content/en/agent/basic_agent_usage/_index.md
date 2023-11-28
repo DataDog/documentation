@@ -9,12 +9,15 @@ further_reading:
 - link: "/agent/faq/how-datadog-agent-determines-the-hostname/"
   tag: "FAQ"
   text: "How does Datadog determine the Agent hostname?"
-- link: "/agent/guide/agent-commands/"
+- link: "/agent/configuration/agent-commands/"
   tag: "FAQ"
   text: "List of all Agent commands"
-- link: "/agent/guide/agent-configuration-files/"
+- link: "/agent/configuration/agent-configuration-files/"
   tag: "FAQ"
   text: "Location of all Agent configuration files"
+- link: "https://www.datadoghq.com/blog/engineering/performance-improvements-in-the-datadog-agent-metrics-pipeline/"
+  tag: "Blog"
+  text: "Performance Improvements in the Datadog Agent Metrics Pipeline"
 ---
 
 {{< partial name="platforms/platforms.html" links="platforms" >}}
@@ -36,11 +39,11 @@ Two optional processes are spawned by the Agent if enabled in the `datadog.yaml`
 
 On Windows the services are listed as:
 
-| Service               | Description             |
-|-----------------------|-------------------------|
-| DatadogAgent          | “Datadog Agent”         |
-| datadog-trace-agent   | “Datadog Trace Agent”   |
-| datadog-process-agent | "Datadog Process Agent” |
+| Service               | Description           |
+|-----------------------|-----------------------|
+| DatadogAgent          | Datadog Agent         |
+| datadog-trace-agent   | Datadog Trace Agent   |
+| datadog-process-agent | Datadog Process Agent |
 
 By default the Agent binds 3 [ports][3] on Linux and 4 on Windows and OSX:
 
@@ -51,9 +54,11 @@ By default the Agent binds 3 [ports][3] on Linux and 4 on Windows and OSX:
 | 5002 | Serves the GUI server on Windows and OSX.                                                   |
 | 8125 | Used for the DogStatsD server to receive external metrics.                                  |
 
+For information on configuring the ports, see [Network Traffic][4].
+
 ### Collector
 
-The collector gathers all standard metrics every 15 seconds. Agent v6 embeds a Python 2.7 interpreter to run integrations and [custom checks][4].
+The collector gathers all standard metrics every 15 seconds. Agent v6 embeds a Python 2.7 interpreter to run integrations and [custom checks][5].
 
 ### Forwarder
 
@@ -61,14 +66,15 @@ The Agent forwarder send metrics over HTTPS to Datadog. Buffering prevents netwo
 
 ### DogStatsD
 
-In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][5] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or Unix socket, thus allowing custom code to be instrumented without adding latency. Learn more about [DogStatsD][6].
+In v6, DogStatsD is a Golang implementation of [Etsy's StatsD][6] metric aggregation daemon. It is used to receive and roll up arbitrary metrics over UDP or Unix socket, thus allowing custom code to be instrumented without adding latency. Learn more about [DogStatsD][7].
 
 [1]: /metrics/custom_metrics/dogstatsd_metrics_submission/#metrics
 [2]: /tracing/guide/terminology/
-[3]: /agent/guide/network/#open-ports
-[4]: /developers/custom_checks/write_agent_check/
-[5]: https://github.com/etsy/statsd
-[6]: /metrics/custom_metrics/dogstatsd_metrics_submission/
+[3]: /agent/configuration/network/#open-ports
+[4]: /agent/configuration/network#configure-ports
+[5]: /developers/custom_checks/write_agent_check/
+[6]: https://github.com/etsy/statsd
+[7]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -81,7 +87,7 @@ Agent v5 is composed of four major components, each written in Python running as
 * **Forwarder** (`ddagent.py`): The forwarder retrieves data from both DogStatsD and the collector, queues it up, and then sends it to Datadog.
 * **SupervisorD**: This is all controlled by a single supervisor process. It is kept separate to limit the overhead of each application if you aren't running all parts. However, it is generally recommended to run all parts.
 
-**Note**: For Windows users, all four Agent processes appear as instances of `ddagent.exe` with the description `DevOps’ best friend`.
+**Note**: For Windows users, all four Agent processes appear as instances of `ddagent.exe` with the description `DevOps' best friend`.
 
 ### Supervision, privileges, and network ports
 
@@ -106,8 +112,8 @@ minfds = 100  # Your hard limit
 
 [1]: /integrations/
 [2]: /metrics/custom_metrics/
-[3]: /agent/guide/network/?tab=agentv5v4#open-ports
-[4]: /agent/proxy/?tab=agentv5
+[3]: /agent/configuration/network/?tab=agentv5v4#open-ports
+[4]: /agent/configuration/proxy/?tab=agentv5
 [5]: /agent/faq/network/
 {{% /tab %}}
 {{< /tabs >}}
@@ -128,89 +134,6 @@ When the Agent is running, use the `datadog-agent launch-gui` command to open th
 
 3. For security reasons, the GUI can **only** be accessed from the local network interface (`localhost`/`127.0.0.1`), therefore you must be on the same host that the Agent is running. That is, you can't run the Agent on a VM or a container and access it from the host machine.
 
-## Supported platforms
-
-{{< tabs >}}
-{{% tab "Agent v6 & v7" %}}
-
-| Platform                                 | Supported versions                                        |
-|------------------------------------------|-----------------------------------------------------------|
-| [Amazon Linux][1]                        | Amazon Linux 2                                            |
-| [Debian][2] with systemd                 | Debian 7 (wheezy)+ in Agent < 6.36.0/7.36.0, Debian 8 (jessie)+ in Agent 6.36.0+/7.36.0+ |
-| [Debian][2] with SysVinit                | Debian 7 (wheezy)+ in Agent 6.6.0 - 6.36.0/7.36.0, Debian 8 (jessie)+ in Agent 6.36.0+/7.36.0+ |
-| [Ubuntu][3]                              | Ubuntu 14.04+                                             |
-| [RedHat/CentOS/AlmaLinux/Rocky][4]       | RedHat/CentOS 6+, AlmaLinux/Rocky 8+ in Agent 6.33.0+/7.33.0+ |
-| [Docker][5]                              | Version 1.12+                                             |
-| [Kubernetes][6]                          | Version 1.3+                                              |
-| [SUSE Enterprise Linux][7] with systemd  | SUSE 11 SP4+ in Agent < 6.33.0/7.33.0, SUSE 12+ in Agent 6.33.0+/7.33.0+                     |
-| [SUSE Enterprise Linux][7] with SysVinit | SUSE 11 SP4 in Agent 6.16.0/7.16.0 - 6.33.0/7.33.0        |
-| [OpenSUSE][7] with systemd               | OpenSUSE 15+ in Agent 6.33.0+/7.33.0+                     |
-| [Fedora][8]                              | Fedora 26+                                                |
-| [macOS][9]                               | macOS 10.12+ in Agent < 6.35.0/7.35.0, macOS 10.13+ in Agent < 7.39.0, macOS 10.14+ in Agent 7.39.0+ |
-| [Windows Server][10]                     | Windows Server 2008 R2+ (including Server Core)           |
-| [Windows][10]                            | Windows 7+                                                |
-| [Windows Azure Stack HCI OS][10]         | All Versions                                              |
-
-**Notes**: 
-- 64-bit x86 packages are available for all platforms on the list. Arm v8 packages are available for all platforms except Windows and MacOS.
-- [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
-- Datadog Agent v6+ supports Windows Server 2008 R2 with the most recent Windows updates installed. There is also a [known issue with clock drift and Go][12] that affects Windows Server 2008 R2.
-
-[1]: /agent/basic_agent_usage/amazonlinux/
-[2]: /agent/basic_agent_usage/deb/
-[3]: /agent/basic_agent_usage/ubuntu/
-[4]: /agent/basic_agent_usage/redhat/
-[5]: /agent/docker/
-[6]: /agent/basic_agent_usage/kubernetes/
-[7]: /agent/basic_agent_usage/suse/
-[8]: /agent/basic_agent_usage/fedora/
-[9]: /agent/basic_agent_usage/osx/
-[10]: /agent/basic_agent_usage/windows/
-[11]: /agent/basic_agent_usage/source/
-[12]: https://github.com/golang/go/issues/24489
-{{% /tab %}}
-{{% tab "Agent v5" %}}
-
-| Platform                   | Supported versions     |
-|----------------------------|------------------------|
-| [Amazon Linux][1]          | Amazon Linux 2         |
-| [Debian][2]                | Debian 7 (wheezy)+     |
-| [Ubuntu][3]                | Ubuntu 12.04+          |
-| [RedHat/CentOS][4]         | RedHat/CentOS 5+       |
-| [Docker][5]                | Version 1.12+          |
-| [Kubernetes][6]            | Version 1.3 to 1.8     |
-| [SUSE Enterprise Linux][7] | SUSE 11 SP4+           |
-| [Fedora][8]                | Fedora 26+             |
-| [macOS][9]                 | macOS 10.10+           |
-| [Windows Server][10]       | Windows Server 2008+   |
-| [Windows][10]              | Windows 7+             |
-
-**Notes**:
-
-- [Source][11] install may work on operating systems not listed here and is supported on a best effort basis.
-
-[1]: /agent/basic_agent_usage/amazonlinux/?tab=agentv5
-[2]: /agent/basic_agent_usage/deb/
-[3]: /agent/basic_agent_usage/ubuntu/
-[4]: /agent/basic_agent_usage/redhat/
-[5]: /agent/docker/
-[6]: /agent/basic_agent_usage/kubernetes/
-[7]: /agent/basic_agent_usage/suse/
-[8]: /agent/basic_agent_usage/fedora/
-[9]: /agent/basic_agent_usage/osx/
-[10]: /agent/basic_agent_usage/windows/
-[11]: /agent/basic_agent_usage/source/
-{{% /tab %}}
-{{% tab "Unix Agent" %}}
-
-| Platform | Supported versions                        |
-|----------|-------------------------------------------|
-| [AIX][1] | AIX 6.1 TL9 SP6, 7.1 TL5 SP3, 7.2 TL3 SP0 |
-
-[1]: /agent/basic_agent_usage/aix/
-{{% /tab %}}
-{{< /tabs >}}
-
 ## CLI
 
 With Agent v6+, the command line interface is based on subcommands. To run a subcommand, first invoke the Agent binary:
@@ -229,10 +152,7 @@ With Agent v6+, the command line interface is based on subcommands. To run a sub
 | `help`            | Help about any command.                                                     |
 | `hostname`        | Print the hostname used by the Agent.                                       |
 | `import`          | Import and convert configuration files from previous versions of the Agent. |
-| `installservice`  | Install the Agent within the service control manager.                       |
 | `launch-gui`      | Start the Datadog Agent GUI.                                                |
-| `regimport`       | Import the registry settings into `datadog.yaml`.                           |
-| `remove-service`  | Remove the Agent from the service control manager.                          |
 | `restart`         | [Restart the Agent][2].                                                     |
 | `restart-service` | Restart the Agent within the service control manager.                       |
 | `start`           | [Start the Agent][3].                                                       |
@@ -251,7 +171,7 @@ With Agent v6+, the command line interface is based on subcommands. To run a sub
 
 ## Agent overhead
 
-An example of the Datadog Agent resource consumption is below. Tests were made on an AWS EC2 machine `c5.xlarge` instance (4 VCPU/ 8GB RAM) and comparable performance was seen for ARM64-based instances with similar resourcing. The vanilla `datadog-agent` was running with a process check to monitor the Agent itself. Enabling more integrations may increase Agent resource consumption.
+An example of the Datadog Agent resource consumption is below. Tests were made on an Amazon EC2 machine `c5.xlarge` instance (4 VCPU/ 8GB RAM) and comparable performance was seen for ARM64-based instances with similar resourcing. The vanilla `datadog-agent` was running with a process check to monitor the Agent itself. Enabling more integrations may increase Agent resource consumption.
 Enabling JMX Checks forces the Agent to use more memory depending on the number of beans exposed by the monitored JVMs. Enabling the trace and process Agents increases the resource consumption as well.
 
 * Agent Test version: 7.34.0
@@ -299,7 +219,7 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 
 To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding install command for your platform][7].
 
-Note: If you want to manually update one specific Agent integration see the [Integration Management guide][8].
+**Note**: If you want to manually update one specific Agent integration see the [Integration Management guide][8].
 
 ### Configuration files
 
@@ -313,22 +233,25 @@ Edit the [Agent's main configuration file][10], `datadog.yaml`, to set the `site
 site: {{< region-param key="dd_site" >}}
 ```
 
+**Note**: See the [Getting Started with Datadog Sites documentation][11] for further details on the `site` parameter.
+
 ### Log location
 
-See the [Agent log files documentation][11].
+See the [Agent log files documentation][12].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/troubleshooting/send_a_flare/
-[2]: /agent/guide/agent-commands/#restart-the-agent
-[3]: /agent/guide/agent-commands/#start-the-agent
-[4]: /agent/guide/agent-commands/#service-status
-[5]: /agent/guide/agent-commands/#stop-the-agent
+[2]: /agent/configuration/agent-commands/#restart-the-agent
+[3]: /agent/configuration/agent-commands/#start-the-agent
+[4]: /agent/configuration/agent-commands/#service-status
+[5]: /agent/configuration/agent-commands/#stop-the-agent
 [6]: /agent/logs/log_transport/?tab=https#enforce-a-specific-transport
-[7]: https://app.datadoghq.com/account/settings#agent
+[7]: https://app.datadoghq.com/account/settings/agent/latest
 [8]: /agent/guide/integration-management/
-[9]: /agent/guide/agent-configuration-files/
-[10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[11]: /agent/guide/agent-log-files/
+[9]: /agent/configuration/agent-configuration-files/
+[10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[11]: /getting_started/site/
+[12]: /agent/configuration/agent-log-files/

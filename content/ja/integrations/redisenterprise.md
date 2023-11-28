@@ -21,7 +21,7 @@ assets:
     source_type_name: Redis Enterprise
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Redis
   sales_email: github@mague.com
   support_email: github@mague.com
 categories:
@@ -34,7 +34,7 @@ draft: false
 git_integration_title: redisenterprise
 integration_id: redisenterprise
 integration_title: RedisEnterprise
-integration_version: 1.1.1
+integration_version: 1.2.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0

@@ -16,10 +16,10 @@ Agent v7 only supports Python 3 custom checks. <a href="/agent/guide/python-3">C
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-Run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=7` in order to upgrade your Agent from version 6 to version 7:
+Run the following Agent installation command in order to upgrade your Agent from version 6 to version 7:
 
 The following command works on Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ubuntu, and SUSE:
-: `DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+: `DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"`
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -33,7 +33,7 @@ The following command works on Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ub
 
 [1]: https://ddagent-windows-stable.s3.amazonaws.com/datadog-agent-7-latest.amd64.msi
 [2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://s3.amazonaws.com/ddagent-windows-stable/installers.json
+[3]: https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json
 {{% /tab %}}
 {{% tab "MacOS" %}}
 
@@ -51,10 +51,10 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY="<DATADOG_API_KEY>" bash -c "$(curl -L https
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-Run the Agent installation command with the environment variable `DD_AGENT_MAJOR_VERSION=7` and `DD_UPGRADE="true"` in order to upgrade your Agent from version 5 to version 7. The Agent v7 installer can automatically convert v5 configurations during the upgrade:
+Run the Agent installation command with the environment variable `DD_UPGRADE="true"` in order to upgrade your Agent from version 5 to version 7. The Agent v7 installer can automatically convert v5 configurations during the upgrade:
 
 The following command works on Amazon Linux, CentOS, Debian, Fedora, Red Hat, Ubuntu, and SUSE:
-: `DD_AGENT_MAJOR_VERSION=7 DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script.sh)"`
+: `DD_UPGRADE="true" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"`
 
 {{% /tab %}}
 {{% tab "Windows" %}}

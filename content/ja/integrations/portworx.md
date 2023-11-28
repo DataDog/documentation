@@ -15,11 +15,12 @@ assets:
     source_type_name: Portworx
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Portworx
   sales_email: paul@portworx.com
   support_email: paul@portworx.com
 categories:
-- モニター
+- kubernetes
+- data store
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/portworx/README.md
 display_on_public_website: true
@@ -40,8 +41,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Kubernetes
+  - Category::Data Store
   - Supported OS::Linux
-  - Category::Monitoring
   configuration: README.md#Setup
   description: Portworx インスタンスからランタイムメトリクスを収集
   media: []

@@ -19,10 +19,10 @@ If you can't see any RUM data or if data is missing for some users:
 | Common causes                                                                                               | Recommended fix                                                                                                                                                                                          |
 | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Ad blockers prevent the RUM Browser SDK from being downloaded or sending data to Datadog.     | Some ad blockers extend their restrictions to performance and marketing tracking tools. See the [Install the RUM Browser SDK with npm][3] and [forward the collected data through a proxy][4] docs. |
-| Network rules or VPNs prevent the RUM Browser SDK from being downloaded or sending data to Datadog. | Grant access to the endpoints required to download the RUM Browser SDK or to send data. The list of endpoints is available in the [Content Security Policy documentation][5].                                        |
+| Network rules, VPNs, or antivirus software can prevent the RUM Browser SDK from being downloaded or sending data to Datadog. | Grant access to the endpoints required to download the RUM Browser SDK or to send data. The list of endpoints is available in the [Content Security Policy documentation][5].                                        |
 | Scripts, packages, and clients initialized before the RUM Browser SDK can lead to missed logs, resources, and user actions. For example, initializing ApolloClient before the RUM Browser SDK may result in `graphql` requests not being logged as XHR resources in the RUM Explorer. | Check where the RUM Browser SDK is initialized and consider moving this step earlier in the execution of your application code.                                             |
 
-Read the [Content Security Policy guidelines][6] and ensure your website grants access to the RUM Browser SDK CDN and the intake endpoint.
+Read the [Content Security Policy guidelines][5] and ensure your website grants access to the RUM Browser SDK CDN and the intake endpoint.
 
 ### The RUM Browser SDK is initialized
 
@@ -35,6 +35,8 @@ If the RUM Browser SDK is not installed, or if it is not successfully initialize
 {{< img src="real_user_monitoring/browser/troubleshooting/error_rum_internal_context.png" alt="Error get internal context command">}}
 
 You can also check your browser developer tools console or network tab if you notice any errors related to the loading of the RUM Browser SDK.
+
+**Note**: To ensure accurate results, set `sessionSampleRate` to 100. For more information, see [Configure Your Setup For Browser RUM and Browser RUM & Session Replay Sampling][8].
 
 ### Data to the Datadog intake
 
@@ -65,7 +67,7 @@ Each event sent by the RUM Browser SDK is built with the following:
 Example:
 
 ```javascript
-window.DD_RUM && window.DD_RUM.addRumGlobalContext('global', {'foo': 'bar'})
+window.DD_RUM && window.DD_RUM.setGlobalContextProperty('global', {'foo': 'bar'})
 window.DD_RUM && window.DD_RUM.addAction('hello', {'action': 'qux'})
 ```
 
@@ -100,6 +102,14 @@ If an event or a request goes beyond any of the following limitations, it is rej
 | Maximum event size                       | 256 KB       |
 | Maximum intake payload size              | 5 MB         |
 
+## Customer data exceeds the recommended 3KiB warning
+
+The RUM browser SDK allows you to set [global context][9], [user information][10] and [feature flags][11] which are then included with the collected events.
+
+To minimize the user bandwidth impact, the RUM browser SDK throttles the data sent to the Datadog intake. However, sending large volumes of data can still impact the performance for users on slow internet connections.
+
+For the best user experience, Datadog recommends keeping the size of the global context, user information, and feature flags below 3KiB. If the data exceeds this limit, a warning is displayed: `The data exceeds the recommended 3KiB threshold.`
+
 ## Cross origin read blocking warning
 
 On Chromium-based browsers, when the RUM Browser SDK sends data to the Datadog intake, a CORB warning is printed in the console: `Cross-Origin Read Blocking (CORB) blocked cross-origin response`.
@@ -117,3 +127,7 @@ The warning is shown because the intake returns a non-empty JSON object. This be
 [5]: /real_user_monitoring/faq/content_security_policy/
 [6]: /real_user_monitoring/browser/data_collected/?tab=session
 [7]: https://bugs.chromium.org/p/chromium/issues/detail?id=1255707
+[8]: /real_user_monitoring/guide/sampling-browser-plans/
+[9]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#global-context
+[10]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
+[11]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser

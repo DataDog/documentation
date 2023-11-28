@@ -1,19 +1,25 @@
 ---
-title: Source Installation 用 Agent の基本的な使用方法
+aliases:
+- /ja/guides/basic_agent_usage/source/
+further_reading:
+- link: /logs/
+  tag: Documentation
+  text: ログの収集
+- link: /infrastructure/process/
+  tag: Documentation
+  text: プロセスの収集
+- link: /tracing/
+  tag: Documentation
+  text: トレースの収集
+- link: /agent/basic_agent_usage/#agent-architecture
+  tag: Documentation
+  text: Agent のアーキテクチャを詳しく見る
+- link: /agent/guide/network#configure-ports
+  tag: Documentation
+  text: インバウンドポートの構成
 kind: documentation
 platform: Source
-aliases:
-  - /ja/guides/basic_agent_usage/source/
-further_reading:
-  - link: /logs/
-    tag: Documentation
-    text: ログの収集
-  - link: /infrastructure/process/
-    tag: Documentation
-    text: プロセスの収集
-  - link: /tracing/
-    tag: Documentation
-    text: トレースの収集
+title: Source Installation 用 Agent の基本的な使用方法
 ---
 ## 概要
 
@@ -50,7 +56,7 @@ Datadog Agent に含まれるコマンドのうち、`start`/`stop`/`restart`/`s
 {{% /tab %}}
 {{< /tabs >}}
 
-## コンフィグレーション
+## コンフィギュレーション
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -82,7 +88,7 @@ Agent の構成ファイルおよびフォルダーの場所
 
 [Agent のトラブルシューティングに関するドキュメント][2]を参照してください。
 
-## その他の参考資料
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

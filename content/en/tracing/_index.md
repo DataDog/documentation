@@ -1,5 +1,4 @@
 ---
-
 title: APM
 kind: documentation
 description: Instrument your code to improve performance
@@ -25,6 +24,19 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/span-based-metrics/"
     tag: "Blog"
     text: "Generate span-based metrics to track historical trends in application performance"
+  - link: "https://www.datadoghq.com/blog/apm-security-view/"
+    tag: "Blog"
+    text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
+  - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
+    tag: "Blog"
+    text: "Monitor your Linux web apps on Azure App Service with Datadog"
+  - link: "https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/"
+    tag: "Blog"
+    text: "Manage API performance, security, and ownership with Datadog API Catalog"
+  - link: "https://dtdg.co/fe"
+    tag: "Foundation Enablement"
+    text: "Join an interactive session to boost your APM understanding"  
+
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology
@@ -32,9 +44,14 @@ aliases:
   - /tracing/advanced/
   - /tracing/api
   - /tracing/faq/distributed-tracing/
+algolia:
+  tags: ['apm', 'application performance monitoring', 'distributed tracing']
+cascade:
+    algolia:
+        rank: 70
 ---
 
-{{< vimeo 381554158 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/381554158/rendition/1080p/file.mp4?loc=external&signature=e19b4e64632c3b1a42b11cb27fca2682dfadecd4690774c005ba2f5079b6a416" poster="/images/poster/tracing.png" >}}
 
 </br>
 
@@ -44,13 +61,15 @@ For an introduction to terminology used in Datadog APM, see [APM Terms and Conce
 
 ## Send traces to Datadog
 
-As you transition from monoliths to microservices, setting up Datadog APM across hosts, containers or serverless functions takes just minutes.
+As you transition from monoliths to microservices, setting up Datadog APM across hosts, containers, or serverless functions takes just minutes.
 
-[Add the Datadog Tracing Library][2] for your environment and language, whether you are [tracing a proxy][3] or tracing across [AWS Lambda functions][4] and hosts, using automatic instrumentation, dd-trace-api, or [OpenTelemetry][5].
+<div class="alert alert-info">
+<strong>Beta: Single Step APM Instrumentation</strong> - Enable APM instrumentation when you install the Datadog Agent to get started quickly with application performance monitoring. This option automatically instruments your services without you needing to modify the code. For more information, read <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation</a>.
+</div>
 
-{{< partial name="apm/apm-compatibility.html" >}}
+**Read [Sending Traces to Datadog][2] to get started.**
 
-<br>
+Add the Datadog Tracing Library for your environment and language, including [tracing a proxy][3], tracing [AWS Lambda functions][4], using automatic or custom instrumentation, or instrumenting with [OpenTelemetry][5].
 
 ## Control and manage data flowing into and being kept by Datadog
 
@@ -58,19 +77,19 @@ As you transition from monoliths to microservices, setting up Datadog APM across
 
 Traces start in your instrumented applications and flow into Datadog. For high-throughput services, you can view and control ingestion using [Ingestion Controls][6]. All ingested traces are available for live search and analytics for 15 minutes. You can use custom tag-based [retention filters][7] to keep exactly the traces that matter for your business for 15 days for search and analytics.
 
-{{< img src="tracing/index/RetentionFilterTracingPage.png" alt="Trace Retention and Ingestion"  style="width:100%;">}}
+{{< img src="tracing/index/RetentionFilterTracingPage.png" alt="Trace Retention and Ingestion" style="width:100%;">}}
 
 ## Generate custom metrics from spans
 
 [Generate metrics][8] with 15-month retention from all ingested spans to create and monitor key business and performance indicators over time.
 
-{{< img src="tracing/index/SpantoMetricsPreview.png" alt="Generate Custom Metrics from ingested spans"  style="width:100%;">}}
+{{< img src="tracing/index/SpantoMetricsPreview.png" alt="Generate Custom Metrics from ingested spans" style="width:100%;">}}
 
 ## Connect traces with other telemetry
 
 [View your application logs][9] side-by-side with the trace for a single distributed request with automatic trace-id injection. [Link between real user sessions][10] and traces to see the exact traces that correspond to user experiences and reported issues. [Link simulated tests][11] to traces to find the root cause of failures across frontend, network and backend requests.
 
-{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces"  style="width:100%;">}}
+{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces" style="width:100%;">}}
 
 ## Explore live and indexed traces
 
@@ -90,13 +109,13 @@ Traces start in your instrumented applications and flow into Datadog. For high-t
 
 [Monitor service performance][15] and compare between versions for rolling, blue/green, shadow, or canary deployments.
 
-{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versions on the Service Page"  style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versions on the Service Page" style="width:100%;">}}
 
 ## Profile your production code
 
 [Improve application latency][16] and optimize compute resources with always-on production profiling to pinpoint the lines of code consuming the most CPU, memory, or I/O.
 
-{{< img src="tracing/index/Profiling.png" alt="Profiling"  style="width:100%;">}}
+{{< img src="tracing/index/Profiling.png" alt="Profiling" style="width:100%;">}}
 
 
 ## Further Reading
@@ -104,10 +123,10 @@ Traces start in your instrumented applications and flow into Datadog. For high-t
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/glossary/
-[2]: /tracing/trace_collection/dd_libraries/java
+[2]: /tracing/trace_collection/
 [3]: /tracing/trace_collection/proxy_setup/
 [4]: /serverless/distributed_tracing
-[5]: /tracing/trace_collection/open_standards/
+[5]: /tracing/trace_collection/otel_instrumentation/
 [6]: /tracing/trace_pipeline/ingestion_controls/
 [7]: /tracing/trace_pipeline/trace_retention/#retention-filters
 [8]: /tracing/trace_pipeline/generate_metrics/

@@ -34,7 +34,7 @@ draft: false
 git_integration_title: proxysql
 integration_id: proxysql
 integration_title: ProxySQL
-integration_version: 4.0.0
+integration_version: 4.0.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

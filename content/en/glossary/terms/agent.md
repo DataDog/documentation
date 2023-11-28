@@ -1,7 +1,9 @@
 ---
 title: Agent
-related_terms:
-    - APM
-    - Check
+synonyms:
+  - Datadog Agent
+core_product:
+  - datadog agent
 ---
-The Agent is a small application that runs on hosts. It executes checks and manages the flow of information from the host to the Datadog platform. The Agent is open source and compiled binaries are made available for Windows, macOS, and many flavors of Linux.  See the Agent documentation for more information.
+The Datadog Agent is an open source software that runs on a host. It collects metrics and events from the host and sends them to Datadog. It can run on your local hosts (Windows, macOS), containerized environments (Docker, Kubernetes), and in on-premises data centers.
+For more information, <a href="/getting_started/agent/">see the documentation</a>.

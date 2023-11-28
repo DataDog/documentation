@@ -1,10 +1,10 @@
 ---
-aliases:
-- /ja/integrations/amazon_vpc/
+aliases: []
 categories:
-- cloud
-- aws
+- AWS
+- クラウド
 - ログの収集
+- ネットワーク
 dependencies: []
 description: AWS VPC ログを収集
 doc_link: https://docs.datadoghq.com/integrations/amazon_vpc/
@@ -33,7 +33,7 @@ Amazon Virtual Private Cloud (Amazon VPC) を使用すると、仮想ネット�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 

@@ -1,8 +1,9 @@
 ---
 categories:
-  - cloud
-  - 構成 & デプロイ
-ddtype: crawler
+- 自動化
+- クラウド
+- 構成 & デプロイ
+- developer tools
 dependencies: []
 description: Travis CI に接続して、ビルド時間、ビルドステータス、ジョブなどに関するメトリクスを表示
 doc_link: https://docs.datadoghq.com/integrations/travis_ci/
@@ -18,11 +19,13 @@ manifest_version: '1.0'
 name: travis_ci
 public_title: Datadog-Travis CI インテグレーション
 short_description: Travis CI に接続して、ビルド時間、ビルドステータス、ジョブなどに関するメトリクスを表示
+team: web-integrations
 version: '1.0'
 ---
+
 ## 概要
 
-Travis CI に接続して、ビルド時間、ビルドステータス、ジョブなどに関するメトリクスを表示します。
+Travis CI に接続して、ビルド時間、ビルドステータス、ジョブなどに関するメトリクスを表示
 
 ## セットアップ
 
@@ -30,7 +33,7 @@ Travis CI に接続して、ビルド時間、ビルドステータス、ジョ�
 
 Travis CI インテグレーションは、[インテグレーションタイル][1]からインストールできます。
 
-### 構成
+### コンフィギュレーション
 
 1. アカウント名、API トークン (Travis CI の Profile タブにあります)、プロジェクトタイプを追加します。プロジェクトタイプは以下のように決定されます。
 
@@ -45,7 +48,7 @@ Travis CI インテグレーションは、[インテグレーションタイル
 6. オーガニゼーションに属するすべてのリポジトリのメトリクスを収集する場合は、プロジェクトで `<オーガニゼーション名>/*` と入力します。
 7. 'Update Configuration' をクリックします。
 
-## 収集されたデータ
+## 収集データ
 
 ### メトリクス
 {{< get-metrics-from-git "travis_ci" >}}
@@ -55,7 +58,7 @@ Travis CI インテグレーションは、[インテグレーションタイル
 
 Travis CI インテグレーションには、イベントは含まれません。
 
-### サービスチェック
+### サービスのチェック
 
 Travis CI インテグレーションには、サービスのチェック機能は含まれません。
 

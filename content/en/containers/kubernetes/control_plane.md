@@ -55,7 +55,7 @@ By providing read access to the Etcd certificates located on the host, the Datad
 
 Custom `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -93,43 +93,47 @@ agents:
 
 DatadogAgent Kubernetes Resource:
 
-```
-apiVersion: datadoghq.com/v1alpha1
+```yaml
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <DATADOG_API_KEY>
-    appKey: <DATADOG_APP_KEY>
-  clusterName: <CLUSTER_NAME>
-  agent:
-    image:
-      name: "gcr.io/datadoghq/agent:latest"
-    config:
-      confd:
-        configMapName: datadog-checks
-      kubelet:
-        tlsVerify: false
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+    clusterName: <CLUSTER_NAME>
+    kubelet:
+      tlsVerify: false
+  override:
+    clusterAgent:
+      image:
+        name: gcr.io/datadoghq/cluster-agent:latest
+    nodeAgent:
+      image:
+        name: gcr.io/datadoghq/agent:latest
+      extraConfd:
+        configMap:
+          name: datadog-checks
+      containers:
+        agent:
+          volumeMounts:
+            - name: etcd-certs
+              readOnly: true
+              mountPath: /host/etc/kubernetes/pki/etcd
+            - name: disable-etcd-autoconf
+              mountPath: /etc/datadog-agent/conf.d/etcd.d
       volumes:
-        - hostPath:
+        - name: etcd-certs
+          hostPath:
             path: /etc/kubernetes/pki/etcd
-          name: etcd-certs
         - name: disable-etcd-autoconf
           emptyDir: {}
-      volumeMounts:
-        - name: etcd-certs
-          mountPath: /host/etc/kubernetes/pki/etcd
-          readOnly: true
-        - name: disable-etcd-autoconf
-          mountPath: /etc/datadog-agent/conf.d/etcd.d
       tolerations:
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/master
-        operator: Exists
-  clusterAgent:
-    image:
-      name: "gcr.io/datadoghq/cluster-agent:latest"
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+          effect: NoSchedule
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -165,7 +169,7 @@ Secure ports allow authentication and authorization to protect your Control Plan
 
 Custom `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -219,51 +223,55 @@ agents:
 
 DatadogAgent Kubernetes Resource:
 
-```
-apiVersion: datadoghq.com/v1alpha1
+```yaml
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <DATADOG_API_KEY>
-    appKey: <DATADOG_APP_KEY>
-  clusterName: <CLUSTER_NAME>
-  agent:
-    image:
-      name: "gcr.io/datadoghq/agent:latest"
-    config:
-      confd:
-        configMapName: datadog-checks
-      kubelet:
-        tlsVerify: false
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+    clusterName: <CLUSTER_NAME>
+    kubelet:
+      tlsVerify: false
+  override:
+    clusterAgent:
+      image:
+        name: gcr.io/datadoghq/cluster-agent:latest
+    nodeAgent:
+      image:
+        name: gcr.io/datadoghq/agent:latest
+      extraConfd:
+        configMap:
+          name: datadog-checks
+      containers:
+        agent:
+          volumeMounts:
+            - name: etcd-certs
+              readOnly: true
+              mountPath: /host/etc/kubernetes/pki/etcd
+            - name: disable-etcd-autoconf
+              mountPath: /etc/datadog-agent/conf.d/etcd.d
+            - name: disable-scheduler-autoconf
+              mountPath: /etc/datadog-agent/conf.d/kube_scheduler.d
+            - name: disable-controller-manager-autoconf
+              mountPath: /etc/datadog-agent/conf.d/kube_controller_manager.d
       volumes:
-        - hostPath:
-            path: /etc/kubernetes/pki/etcd
-          name: etcd-certs
-        - name: disable-etcd-autoconf
-          emptyDir: {}
-        - name: disable-scheduler-autoconf
-          emptyDir: {}
-        - name: disable-controller-manager-autoconf
-          emptyDir: {}
-      volumeMounts:
         - name: etcd-certs
-          mountPath: /host/etc/kubernetes/pki/etcd
-          readOnly: true
+          hostPath:
+            path: /etc/kubernetes/pki/etcd
         - name: disable-etcd-autoconf
-          mountPath: /etc/datadog-agent/conf.d/etcd.d
+          emptyDir: {}
         - name: disable-scheduler-autoconf
-          mountPath: /etc/datadog-agent/conf.d/kube_scheduler.d
+          emptyDir: {}
         - name: disable-controller-manager-autoconf
-          mountPath: /etc/datadog-agent/conf.d/kube_controller_manager.d
+          emptyDir: {}
       tolerations:
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/master
-        operator: Exists
-  clusterAgent:
-    image:
-      name: "gcr.io/datadoghq/cluster-agent:latest"
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+          effect: NoSchedule
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -303,7 +311,7 @@ data:
 - The `ssl_verify` field in the `kube_controller_manager` and `kube_scheduler` configuration needs to be set to `false` when using self-signed certificates.
 - When targeting secure ports, the `bind-address` option in your Controller Manager and Scheduler configuration must be reachable by the Datadog Agent. Example:
 
-```
+```yaml
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: ClusterConfiguration
 controllerManager:
@@ -397,25 +405,27 @@ clusterChecksRunner:
 {{% tab "Operator" %}}
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
-...
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
 spec:
-  agent:
+  override:
     clusterChecksRunner:
-      config:
-        volumes:
+      containers:
+        agent:
+          volumeMounts:
+            - name: etcd-certs
+              readOnly: true
+              mountPath: /etc/etcd-certs
+            - name: disable-etcd-autoconf
+              mountPath: /etc/datadog-agent/conf.d/etcd.d
+      volumes:
         - name: etcd-certs
           secret:
             secretName: kube-etcd-client-certs
         - name: disable-etcd-autoconf
           emptyDir: {}
-        volumeMounts:
-        - name: etcd-certs
-          mountPath: /etc/etcd-certs
-          readOnly: true
-        - name: disable-etcd-autoconf
-          mountPath: /etc/datadog-agent/conf.d/etcd.d
 ```
 
 {{% /tab %}}
@@ -529,25 +539,27 @@ clusterChecksRunner:
 {{% tab "Operator" %}}
 
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
-...
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
 spec:
-  agent:
+  override:
     clusterChecksRunner:
-      config:
-        volumes:
-          - name: etcd-certs
-            hostPath:
-              path: /etc/etcd
-          - name: disable-etcd-autoconf
-            emptyDir: {}
-        volumeMounts:
-          - name: etcd-certs
-            mountPath: /host/etc/etcd
-            readOnly: true
-          - name: disable-etcd-autoconf
-            mountPath: /etc/datadog-agent/conf.d/etcd.d
+      containers:
+        agent:
+          volumeMounts:
+            - name: etcd-certs
+              readOnly: true
+              mountPath: /host/etc/etcd
+            - name: disable-etcd-autoconf
+              mountPath: /etc/datadog-agent/conf.d/etcd.d
+      volumes:
+        - name: etcd-certs
+          hostPath:
+            path: /etc/etcd
+        - name: disable-etcd-autoconf
+          emptyDir: {}
 ```
 
 {{% /tab %}}
@@ -703,7 +715,7 @@ Deploy the Datadog Agent with manifests based on the following configurations:
 
 Custom `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -733,38 +745,41 @@ agents:
 
 DatadogAgent Kubernetes Resource:
 
-```
-apiVersion: datadoghq.com/v1alpha1
+```yaml
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <DATADOG_API_KEY>
-    appKey: <DATADOG_APP_KEY>
-  clusterName: <CLUSTER_NAME>
-  agent:
-    config:
-      kubelet:
-        tlsVerify: false
+  features:
+    clusterChecks:
+      enabled: true
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+    clusterName: <CLUSTER_NAME>
+    kubelet:
+      tlsVerify: false
+  override:
+    nodeAgent:
+      containers:
+        agent:
+          volumeMounts:
+            - name: etcd-certs
+              readOnly: true
+              mountPath: /host/opt/rke/etc/kubernetes/ssl
       volumes:
-        - hostPath:
-            path: /opt/rke/etc/kubernetes/ssl
-          name: etcd-certs
-      volumeMounts:
         - name: etcd-certs
-          mountPath: /host/opt/rke/etc/kubernetes/ssl
-          readOnly: true
+          hostPath:
+            path: /opt/rke/etc/kubernetes/ssl
       tolerations:
-        - effect: NoSchedule
-          key: node-role.kubernetes.io/controlplane
+        - key: node-role.kubernetes.io/controlplane
           operator: Exists
-        - effect: NoExecute
-          key: node-role.kubernetes.io/etcd
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/etcd
           operator: Exists
-  clusterAgent:
-    config:
-      clusterChecksEnabled: true
+          effect: NoExecute
 ```
 
 {{% /tab %}}
@@ -820,7 +835,7 @@ The following are examples of how to configure the Datadog Agent with Helm and t
 
 Custom `values.yaml`:
 
-```
+```yaml
 datadog:
   apiKey: <DATADOG_API_KEY>
   appKey: <DATADOG_APP_KEY>
@@ -850,38 +865,41 @@ agents:
 
 DatadogAgent Kubernetes Resource:
 
-```
-apiVersion: datadoghq.com/v1alpha1
+```yaml
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  credentials:
-    apiKey: <DATADOG_API_KEY>
-    appKey: <DATADOG_APP_KEY>
-  clusterName: <CLUSTER_NAME>
-  agent:
-    config:
-      kubelet:
-        tlsVerify: false
+  features:
+    clusterChecks:
+      enabled: true
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+      appKey: <DATADOG_APP_KEY>
+    clusterName: <CLUSTER_NAME>
+    kubelet:
+      tlsVerify: false
+  override:
+    nodeAgent:
+      containers:
+        agent:
+          volumeMounts:
+            - name: etcd-certs
+              readOnly: true
+              mountPath: /host/opt/rke/etc/kubernetes/ssl
       volumes:
-        - hostPath:
-            path: /opt/rke/etc/kubernetes/ssl
-          name: etcd-certs
-      volumeMounts:
         - name: etcd-certs
-          mountPath: /host/opt/rke/etc/kubernetes/ssl
-          readOnly: true
+          hostPath:
+            path: /opt/rke/etc/kubernetes/ssl
       tolerations:
-        - effect: NoSchedule
-          key: node-role.kubernetes.io/controlplane
+        - key: node-role.kubernetes.io/controlplane
           operator: Exists
-        - effect: NoExecute
-          key: node-role.kubernetes.io/etcd
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/etcd
           operator: Exists
-  clusterAgent:
-    config:
-      clusterChecksEnabled: true
+          effect: NoExecute
 ```
 
 {{% /tab %}}

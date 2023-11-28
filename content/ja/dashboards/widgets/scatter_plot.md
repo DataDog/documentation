@@ -1,52 +1,44 @@
 ---
-title: 散布図ウィジェット
-kind: documentation
-description: 2 つのメトリクスとそれぞれの集計を使用して、選択したスコープをグラフ化する
-widget_type: scatterplot
 aliases:
-  - /ja/graphing/widgets/scatter_plot/
+- /ja/graphing/widgets/scatter_plot/
+description: 2 つのメトリクスとそれぞれの集計を使用して、選択したスコープをグラフ化する
 further_reading:
-  - link: /dashboards/timeboards/
-    tag: ドキュメント
-    text: Timeboards
-  - link: /dashboards/graphing_json/
-    tag: ドキュメント
-    text: JSON を使用したダッシュボードの構築
+- link: /ja/dashboards/graphing_json/
+  tag: ドキュメント
+  text: JSON を使用したダッシュボードの構築
+kind: documentation
+title: 散布図ウィジェット
+widget_type: scatterplot
 ---
+
 散布図可視化機能では、2 つのメトリクスに対し、それぞれの集計を使用して、選択したスコープをグラフ化できます。
 
 {{< img src="dashboards/widgets/scatterplot/scatterplot.png" alt="散布図" >}}
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/scatterplot/scatterplot_setup.png" alt="散布図のセットアップ"  style="width:80%;">}}
-
 ### コンフィギュレーション
 
-1. X 軸と Y 軸それぞれのメトリクスと集計を選択します。
-2. 散布図の各ポイントのスコープ (`host`、`service`、`app`、`region` など) を定義します。
-3. オプション: color-by タグを有効にします。
-4. オプション: X 軸および Y 軸コントロールを設定します。
+1. X 軸と Y 軸それぞれのメトリクスまたはその他のデータセットと、集計を選択します。
+1. 散布図の各ポイントのスコープ (`host`、`service`、`app`、または `region` など) を定義します。
+1. オプション: color-by タグを有効にします。
+1. オプション: X 軸および Y 軸コントロールを設定します。
+1. ウィジェットにカスタムタイムフレームがあるか、ダッシュボードのグローバルタイムフレームがあるかを選択します。
+1. グラフにタイトルを付けるか、提案されたタイトルを使用するにはボックスを空白のままにします。
 
-## オプション
+### オプション
+
+#### コンテキストリンク
+
+[コンテキストリンク][4]は、デフォルトで有効になっており、オンまたはオフに切り替えることができます。コンテキストリンクは、ダッシュボードウィジェットと Datadog またはサードパーティアプリケーションの他のページの橋渡しをします。
 
 #### グローバルタイム
 
-スクリーンボードの場合にのみ、ウィジェットがカスタムタイムフレームを持つか、スクリーンボードのグローバルタイムフレームを持つかを選択します。
-
-#### タイトル
-
-`Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
-
-{{< img src="dashboards/widgets/options/title.png" alt="ウィジェットのタイトル"  style="width:80%;">}}
-
-オプションで、サイズと配置を定義できます。
+ウィジェットにカスタムタイムフレームがあるか、ダッシュボードのグローバルタイムフレームがあるかを選択します。
 
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][1] ドキュメントをご参照ください。
-
-散布図ウィジェットの[ウィジェット JSON スキーマ定義][2]は次のとおりです。
+このウィジェットは **[Dashboards API][2]** で使用できます。[ウィジェット JSON スキーマ定義][3]については、以下の表を参照してください。
 
 {{< dashboards-widgets-api >}}
 
@@ -54,5 +46,6 @@ further_reading:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/api/v1/dashboards/
-[2]: /ja/dashboards/graphing_json/widget_json/
+[1]: /ja/dashboards/guide/context-links/
+[2]: /ja/api/latest/dashboards/
+[3]: /ja/dashboards/graphing_json/widget_json/

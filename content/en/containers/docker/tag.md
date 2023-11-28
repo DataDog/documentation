@@ -64,13 +64,13 @@ Starting with Agent v6.0+, the Agent can collect labels for a given container an
 
 To extract a given container label `<LABEL_NAME>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
-```shell
+```bash
 DD_CONTAINER_LABELS_AS_TAGS='{"<LABEL_NAME>": "<TAG_KEY>"}'
 ```
 
 For example, you could set up:
 
-```shell
+```bash
 DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
 
@@ -96,7 +96,7 @@ container_labels_as_tags:
 ```
 
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -127,13 +127,13 @@ With Agent v6.0+, the Agent can collect environment variables for a given contai
 
 To extract a given container environment variable `<ENVVAR_NAME>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following environment variable to the Datadog Agent:
 
-```shell
+```bash
 DD_CONTAINER_ENV_AS_TAGS='{"<ENVVAR_NAME>": "<TAG_KEY>"}'
 ```
 
 For example, you could set up:
 
-```shell
+```bash
 DD_CONTAINER_ENV_AS_TAGS='{"ENVIRONMENT":"env"}'
 ```
 
@@ -154,7 +154,7 @@ container_env_as_tags:
   ENVIRONMENT: env
 ```
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{< /tabs >}}
 

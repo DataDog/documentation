@@ -38,7 +38,7 @@ title: ノート &amp; リンクウィジェット
 
 {{< dashboards-widgets-api >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -55,7 +55,7 @@ title: メトリクスタイプのモディファイアー
 
 **注**: 間隔が短くて時間集計が発生しない場合、正規化は行われず、未加工のメトリクス値カウントが戻されます。
 
-[1]: /ja/dashboards/faq/interpolation-the-fill-modifier-explained/
+[1]: /ja/metrics/guide/interpolation-the-fill-modifier-explained/
 {{% /tab %}}
 {{% tab "RATE" %}}
 
@@ -67,7 +67,7 @@ title: メトリクスタイプのモディファイアー
   * [補間][1]を無効にします。
   * 時間集計関数を `SUM` に設定します。
 
-[1]: /ja/dashboards/faq/interpolation-the-fill-modifier-explained/
+[1]: /ja/metrics/guide/interpolation-the-fill-modifier-explained/
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
@@ -77,21 +77,23 @@ title: メトリクスタイプのモディファイアー
 {{< /tabs >}}
 
 ### 修飾子 `weighted()`
-`pod name` や `container_name` のようなタグは、特にコスト管理、キャパシティプランニング、コンテナ型アプリケーションのオートスケーリングなどのクエリを作成する際に、高いタグ破棄率が発生します。タグ破棄率に関係なく、ゲージのクエリの数学的な正確さを保証するために、`.weighted()` というアプリケーション内修飾子が存在します。修飾子 `.weighted()` は、Datadog がこれらの頻繁に破棄されるタグの寿命に基づいて、メトリクス値を適切に重み付けすることを保証します。
 
-以下の両方の条件を満たす場合のみ、ゲージのクエリに修飾子 `.weighted()` が自動的に付加されます。
+`pod name` や `container_name` などのタグは、コスト管理、キャパシティプランニング、コンテナ型アプリケーションのオートスケーリングなどのクエリを作成する際に、特に高いタグ破棄率を引き起こします。タグ破棄率に関係なく、ゲージのクエリの数学的な正確さを保証するために、`.weighted()` というアプリケーション内修飾子を使用できます。修飾子 `.weighted()` により、Datadog はこれらの頻繁に破棄されるタグの寿命に基づいて、メトリクス値を適切に重み付けすることができるようになります。
+
+以下の 2 つの条件が共に満たされる場合に限り、ゲージのクエリに `.weighted()` 修飾子が自動的に追加されます。
+
 - 隙間なく補間することができるように、ゲージメトリクスが定期的に送信されている。
 - 送信間隔が正しく定義され、設定されている。
 
 Datadog Agent またはインテグレーションのいずれかが、取り込み時にメトリクスの送信間隔を設定します。[Metrics Summary ページ][4]で送信間隔を変更します。
 
-## Datadog 内でメトリクスタイプを変更する
+## Datadog 内でメトリクスのタイプを変更する
 
 通常は必要ありませんが、[Metrics Summary ページ][4]でメトリクスのタイプを変更することができます。
 
 {{< img src="metrics/custom_metrics/type_modifiers/metric_type.png" alt="メトリクスタイプ" style="width:70%;">}}
 
-使用例：
+使用例:
 
 1. 処理されたリクエスト数をカウントする `app.requests.served` というメトリクスを、誤って StatsD から `GAUGE` として送信しました。そのため、そのメトリクスの Datadog タイプは `GAUGE` になっています。
 

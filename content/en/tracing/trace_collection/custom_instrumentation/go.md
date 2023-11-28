@@ -1,12 +1,12 @@
 ---
-title: Go Custom Instrumentation
+title: Go Custom Instrumentation with Datadog Library
 kind: documentation
 aliases:
     - /tracing/opentracing/go
     - /tracing/manual_instrumentation/go
     - /tracing/custom_instrumentation/go
     - /tracing/setup_overview/custom_instrumentation/go
-description: 'Implement the OpenTracing standard with the Datadog Go APM tracer.'
+description: 'Instrument your code with the Datadog Go APM tracer.'
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30
@@ -112,6 +112,10 @@ span.Finish(tracer.WithError(err))
 
 If you aren't using supported library instrumentation (see [Library compatibility][3]), you may want to to manually instrument your code.
 
+<div class="alert alert-info">
+Unlike other Datadog tracing libraries, when tracing Go applications, it's recommended that you explicitly manage and pass the Go context of your spans. This approach ensures accurate span relationships and meaningful tracing. For more information, see the <a href="https://pkg.go.dev/context">Go context library documentation</a> or documentation for any third-party libraries integrated with your application.
+</div>
+
 ### Manually creating a new span
 
 To make use of manual instrumentation, use the `tracer` package which is documented on Datadog's [godoc page][4]:
@@ -197,31 +201,14 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as excluding specific resources from sending traces to Datadog in the event these traces are not wanted in metrics calculated, such as Health Checks.
 
-### B3 headers extraction and injection
 
-The Datadog APM tracer supports [B3 headers extraction][8] and injection for distributed tracing.
+### Propagating context with headers extraction and injection
 
-Distributed headers injection and extraction is controlled by
-configuring injection/extraction styles. Two styles are
-supported: `Datadog` and `B3`.
-
-Configure injection styles using the environment variable:
-`DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
-
-Configure extraction styles using the environment variable:
-`DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
-
-The values of these environment variables are comma separated lists of
-header styles that are enabled for injection or extraction. By default,
-the `Datadog` extraction style is enabled.
-
-If multiple extraction styles are enabled, extraction attempts are made
-in the order that those styles are specified. The first successfully
-extracted value is used.
+You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][11] for information.
 
 ### Resource filtering
 
-Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog.  This and other security and fine-tuning configurations can be found on the [Security][9] page.
+Traces can be excluded based on their resource name, to remove synthetic traffic such as health checks from reporting traces to Datadog. This and other security and fine-tuning configurations can be found on the [Security][9] page.
 
 ## Further Reading
 
@@ -230,9 +217,9 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [1]: /tracing/glossary/#span-tags
 [2]: /tracing/glossary/#spans
 [3]: /tracing/setup/go/#compatibility
-[4]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
-[5]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpan
-[6]: https://godoc.org/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
+[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
+[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpan
+[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer#StartSpanFromContext
 [7]: /tracing/glossary/#trace
-[8]: https://github.com/openzipkin/b3-propagation
 [9]: /tracing/security
+[11]: /tracing/trace_collection/trace_context_propagation/go/

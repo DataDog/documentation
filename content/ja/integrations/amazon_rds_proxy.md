@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
 - AWS
+- クラウド
+- data store
 - ログの収集
 dependencies: []
 description: Amazon RDS Proxy のキーメトリクスを追跡

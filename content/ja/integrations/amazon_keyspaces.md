@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
 - AWS
+- クラウド
+- 構成 & デプロイ
 - ログの収集
 dependencies: []
 description: Amazon Keyspaces の主要なメトリクスを追跡します。

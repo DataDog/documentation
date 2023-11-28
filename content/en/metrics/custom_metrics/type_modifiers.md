@@ -55,7 +55,7 @@ Depending on the metric type you applied them to, the behavior differs:
 
 **Note**: There is no normalization on tiny intervals (when no time aggregation occurs), thus the raw metric value counts are returned.
 
-[1]: /dashboards/faq/interpolation-the-fill-modifier-explained/
+[1]: /metrics/guide/interpolation-the-fill-modifier-explained/
 {{% /tab %}}
 {{% tab "RATE" %}}
 
@@ -67,7 +67,7 @@ Depending on the metric type you applied them to, the behavior differs:
   * Disables any [interpolation][1].
   * Sets the time aggregator to `SUM`.
 
-[1]: /dashboards/faq/interpolation-the-fill-modifier-explained/
+[1]: /metrics/guide/interpolation-the-fill-modifier-explained/
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
@@ -77,9 +77,11 @@ Depending on the metric type you applied them to, the behavior differs:
 {{< /tabs >}}
 
 ### The `weighted()` modifier
-Tags like `pod name` or `container_name` cause high tag churn, especially when creating queries for cost management, capacity planning or autoscaling for containerized applications. To ensure mathematical accuracy of queries on gauges regardless of tag churn, there exists a `.weighted()` in-application modifier. The `.weighted()` modifier ensures that Datadog properly weights metric values based on the lifespan of these frequently churning tags. 
+
+Tags such as `pod name` or `container_name` cause high tag churn, especially when creating queries for cost management, capacity planning, or autoscaling for containerized applications. To ensure mathematical accuracy of queries on gauges regardless of tag churn, you can use a `.weighted()` in-application modifier. The `.weighted()` modifier enables Datadog to properly weight metric values based on the lifespan of these frequently churning tags. 
 
 The `.weighted()` modifier is automatically appended to queries on gauges only if both of the following conditions are met:
+
 - The gauge metric is submitted regularly, such that there is no interpolation over gaps.
 - The submission interval is correctly defined and set. 
 

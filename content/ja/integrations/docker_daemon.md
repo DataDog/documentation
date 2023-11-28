@@ -27,6 +27,7 @@ author:
 categories:
 - containers
 - ログの収集
+- ネットワーク
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/docker_daemon/README.md
 display_on_public_website: true
@@ -52,6 +53,7 @@ tile:
   - Supported OS::macOS
   - Category::Containers
   - Category::Log Collection
+  - Category::Network
   configuration: README.md#Setup
   description: コンテナのパフォーマンスをその内部で実行中のサービスのパフォーマンスと関連付けます。
   media: []
@@ -197,7 +199,7 @@ Docker インテグレーションは以下のイベントを生成します。
 
 * Delete Image
 * Die
-* エラー
+* Error
 * Fail
 * Kill
 * Out of memory (oom)

@@ -1,13 +1,19 @@
 ---
 categories:
 - azure
-- ソースコントロール
 - コラボレーション
+- developer tools
 - 問題追跡
+- プロビジョニング
+- ソースコントロール
 dependencies: []
 description: 主要な Azure DevOps メトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/azure_devops
 draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/
+  tag: ブログ
+  text: Datadog CI Visibility で Azure Pipelines を監視する
 git_integration_title: azure_devops
 has_logo: true
 integration_id: azuredevops
@@ -42,7 +48,7 @@ Datadog で、[Azure DevOps インテグレーションタイル][1]のインス
 
 サービスフックを使用して、Azure DevOps サービスからのイベントに応じて Datadog でイベントとメトリクスを作成します。
 
-{{< img src="integrations/azure_devops/configure-service-hook.gif" alt="サービスフックの構成" >}}
+{{< img src="integrations/azure_devops/configure-service-hook.mp4" alt="サービスフックの構成" video="true" >}}
 
 1. Azure で、プロジェクトのサービスフックページに移動します。
 2. **Create subscription** をクリックします。
@@ -71,7 +77,7 @@ Datadog モニターを、Azure Pipelines の[リリースデプロイをコン�
 
 1. [Datadog Monitors as Deployment Gates][6] 拡張機能を Azure DevOps 組織に追加します。
 
-    {{< img src="integrations/azure_devops/extension-service-connection.gif" alt="拡張サービス接続" >}}
+    {{< img src="integrations/azure_devops/extension-service-connection.mp4" alt="拡張サービス接続" video="true" >}}
 
 2. Azure DevOps で、プロジェクト設定の下の **Service Connections** に移動し、**New Service Connection** を選択します。
 3. リストから Datadog を選択し、**Next** を押します。
@@ -80,7 +86,7 @@ Datadog モニターを、Azure Pipelines の[リリースデプロイをコン�
 6. **Add** をクリックし、**Query Datadog monitors** オプションを選択します。
 7. Datadog サービス接続を選択し、使用するモニター ID と重大度しきい値を入力します。重大度しきい値は、タスクが失敗したモニターの状態（`Alert` または `Warning`）です。
 
-    {{< img src="integrations/azure_devops/datadog-monitor-gate.gif" alt="Datadog モニターゲート" >}}
+    {{< img src="integrations/azure_devops/datadog-monitor-gate.mp4" alt="Datadog モニターゲート" video="true" >}}
 
 8. ステップ 5〜7 を繰り返して、デプロイパイプラインの必要に応じてゲートを追加します。
 
@@ -134,6 +140,10 @@ Azure DevOps インテグレーションには、サービスのチェック機�
 
 #### サービスフックサブスクリプションのテストで、成功メッセージが返されましたが、イベントが Datadog に到達しないのはなぜですか？
 サービスフックサブスクリプションテストは、Azure DevOps が Datadog へイベントを送信できるかどうかのみをチェックします。API キーまたは Datadog オーガニゼーションサイト (US または EU) は検証されません。API キーおよびサイトが正しいことをご確認ください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azuredevops
 [2]: https://app.datadoghq.com/organization-settings/api-keys

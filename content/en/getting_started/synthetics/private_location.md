@@ -22,7 +22,7 @@ If you would like to be added to the Windows Private Location beta, reach out to
 
 ## Overview
 
-Private locations allow you to **monitor internal-facing applications** or private URLs that aren’t accessible from the public internet. 
+Private locations allow you to **monitor internal-facing applications** or private URLs that aren't accessible from the public internet. 
 
 {{< img src="getting_started/synthetics/pl-list.png" alt="List of Private Locations in your Settings page" style="width:100%;">}}
 
@@ -42,28 +42,34 @@ Your private locations test results display identically to your managed location
 
 ## Create your private location
 
-1. Install [Docker][4] on a machine. To get started quickly, you can install Docker on a virtual machine such as [Vagrant Ubuntu 16.04][2].
+1. Install [Docker][4] on a Unix-like machine, or use another container runtime such as [Podman][10].
+
+   To get started quickly, you can install Docker on a virtual machine such as [Vagrant Ubuntu 22.04][11].
+
 2. In the Datadog site, hover over **[UX Monitoring][5]** and select **Settings** > **Private Locations**. 
 3. Click **Add Private Location**.
-4. Fill out your private location details. Only `Name` and `API key` fields are mandatory. If you are configuring a private location for Windows, select **This is a Windows Private Location**.
-5. Click **Save Location and Generate Configuration File** to generate the configuration file associated with your private location on your worker.
+4. Fill out your private location details. Only `Name` and `API key` fields are mandatory. 
+5. Click **Save Location and Generate Configuration File** to generate the configuration file associated with your private location on your worker. 
 6. Depending on where you installed your private location, you may need to input additional parameters to your configuration file: 
     - If you are using a proxy, input the URL as `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`. 
     - If you want to block reserved IPs, toggle **Block reserved IPs** and enter the IP ranges. 
-    
-   For more information, see [Private Locations Configuration Options][6] and [Run Synthetic Tests from Private Locations][7]. 
+
+    For more information, see [Private Locations Configuration Options][6] and [Run Synthetic Tests from Private Locations][7]. 
+
 7. Copy and paste your private location configuration file to your working directory.
 
     **Note**: The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. Datadog does not store the secrets, so store them locally before leaving the **Private Locations** creation form. **You need to be able to reference the secrets again in order to add more workers to your private location**. 
 8. When you are ready, click **View Installation Instructions**.
 9. Follow the installation instructions based on the environment you want to run the Private Location worker in.
-10. If you use Docker for example, launch your worker as a standalone container using the Docker `run` command and your configuration file:
+10. If you are using Docker, launch your worker as a standalone container using the Docker `run` command and your configuration file:
 
     ```shell
     docker run --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
     ```
     
     This command starts a Docker container and prepares your private location to run tests. Datadog recommends running the container in detached mode with proper restart policy.
+
+    <div class="alert alert-info">You can use another container runtime such as Podman. For more information, see the <a href="https://docs.datadoghq.com/synthetics/private_locations/?tab=podman#install-your-private-location">Private Locations documentation</a>.</div>
     
 11. If your private location reports correctly to Datadog, an `OK` health status displays under **Private Location Status** and on the **Private Locations** list in the **Settings** page:
 
@@ -77,6 +83,9 @@ Your private locations test results display identically to your managed location
     2022-02-28 16:20:04 [info]: Fetching 10 messages from queue - 10 slots available
     ```
 12. Once you're done testing your internal endpoint, click **OK**.
+
+
+
 ## Run Synthetic tests with your private location
 
 Use your new private location just like a managed location in your Synthetic tests.
@@ -101,3 +110,5 @@ Use your new private location just like a managed location in your Synthetic tes
 [7]: /synthetics/private_locations/?tab=docker#blocking-reserved-ips
 [8]: /getting_started/synthetics/api_test#create-a-multistep-api-test
 [9]: /getting_started/synthetics/browser_test
+[10]: https://podman.io/
+[11]: https://app.vagrantup.com/ubuntu/boxes/jammy64

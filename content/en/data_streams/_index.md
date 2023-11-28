@@ -1,182 +1,96 @@
 ---
 title: Data Streams Monitoring
 kind: documentation
+further_reading:
+    - link: '/integrations/kafka/'
+      tag: 'Documentation'
+      text: 'Kafka Integration'
+    - link: '/integrations/amazon_sqs/'
+      tag: 'Documentation'
+      text: 'Amazon SQS Integration'
+    - link: '/tracing/service_catalog/'
+      tag: 'Documentation'
+      text: 'Service Catalog'
+    - link: 'https://www.datadoghq.com/blog/data-streams-monitoring/'
+      tag: 'Blog'
+      text: 'Track and improve the performance of streaming data pipelines with Datadog Data Streams Monitoring'
+cascade:
+    algolia:
+        rank: 70
 ---
 
-{{< img src="data_streams/data_streams_hero.png" alt="Datadog Data Streams Monitoring"  style="width:100%;" >}}
 
-## Overview
+{{% site-region region="gov,ap1" %}}
+<div class="alert alert-warning">
+    Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
+</div>
+{{% /site-region %}}
+
+{{< img src="data_streams/data_streams_hero_feature.jpg" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
 Data Streams Monitoring provides a standardized method for teams to understand and manage pipelines at scale by making it easy to:
-
 * Measure pipeline health with end-to-end latencies for events traversing across your system.
 * Pinpoint faulty producers, consumers or queues, then pivot to related logs or clusters to troubleshoot faster.
 * Prevent cascading delays by equipping service owners to stop backed up events from overwhelming downstream services.
 
 ## Setup
 
-{{< programming-lang-wrapper langs="java,go,dotnet" >}}
+To get started, follow the installation instructions to configure services with Data Streams Monitoring:
 
-{{< programming-lang lang="java" >}}
+{{< partial name="data_streams/setup-languages.html" >}}
 
-### Prerequisites
+<br/>
 
-To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and Java libraries:
-* [Datadog Agent v7.34.0+][1]
-* [APM enabled with the Java Agent v0.105+][2]
+| Runtime | Supported technologies |
+|---|----|
+| Java/Scala | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, HTTP, gRPC, Amazon SQS |
+| Python | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), Amazon SQS, Amazon Kinesis |
+| .NET | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ |
+| Node.js | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform) |
+| Go | All (with [manual instrumentation][1]) |
+  
 
-### Installation
+## Explore Data Streams Monitoring
 
-Java uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the environment variable `DD_DATA_STREAMS_ENABLED` to `true` on services sending messages to (or consuming messages from) Kafka or RabbitMQ.
+### Measure end-to-end pipeline health with new metrics
 
-For example:
-```yaml
-environment:
-  - DD_DATA_STREAMS_ENABLED: "true"
-```
+Once Data Streams Monitoring is configured, you can measure the time it usually takes for events to traverse between any two points in your asynchronous system:
 
-As an alternative, you can instead set the system property `-Ddd.data.streams.enabled=true` by running the following when you start your Java application:
+| Metric Name | Notable Tags | Description |
+|---|---|-----|
+| data_streams.latency | `start`, `end`, `env` | End to end latency of a pathway from a specified source to destination service |
+| data_streams.kafka.lag_seconds | `consumer_group`, `partition`, `topic`, `env` | Lag in seconds between producer and consumer. Requires Java Agent v1.9.0 or later. |
 
-```bash
-java -javaagent:/path/to/dd-java-agent.jar -Ddd.data.streams.enabled=true -jar path/to/your/app.jar
-```
+You can also graph and visualize these metrics on any dashboard or notebook:
 
+{{< img src="data_streams/data_streams_monitor.jpg" alt="Datadog Data Streams Monitoring monitor" style="width:100%;" >}}
 
-[1]: /agent
-[2]: /tracing/trace_collection/dd_libraries/java/
-{{< /programming-lang >}}
+### Monitor end-to-end latency of any pathway
 
-{{< programming-lang lang="dotnet" >}}
+Depending on how events traverse through your system, different paths can lead to increased latency. With the **Pathways** tab, you can view latency between any two points throughout your pipelines, including queues, producers, and consumers to identify bottlenecks and optimize performance. Easily create a monitor for a pathway, or export to a dashboard.
 
-### Prerequisites
+{{< img src="data_streams/data_streams_pathway.jpg" alt="Datadog Data Streams Monitoring Pathway tab" style="width:100%;" >}}
 
-To start with Data Streams Monitoring, you need recent versions of the Datadog Agent and .NET libraries:
-* [Datadog Agent v7.34.0+][1]
-* .NET Tracer v2.17.0+ ([.NET Core][2], [.NET Framework][3])
+### Attribute incoming messages to any queue, service, or cluster
 
-### Installation
+High lag on a consuming service, increased resource use on a Kafka broker, and increased RabbitMQ or Amazon SQS queue size are frequently explained by changes in the way adjacent services are producing to or consuming from these entities.
 
-.NET uses auto-instrumentation to inject and extract additional metadata required by Data Streams Monitoring for measuring end-to-end latencies and the relationship between queues and services. To enable Data Streams Monitoring, set the environment variable `DD_DATA_STREAMS_ENABLED` to `true` on services sending messages to (or consuming messages from) Kafka.
+Click on the **Throughput** tab on any service or queue in Data Streams Monitoring to quickly detect changes in throughput, and which upstream or downstream service these changes originate from. Once the [Service Catalog][2] is configured, you can immediately pivot to the corresponding team's Slack channel or on-call engineer.
 
-For example:
-```yaml
-environment:
-  - DD_DATA_STREAMS_ENABLED: "true"
-```
+By filtering to a single Kafka, RabbitMQ, or Amazon SQS cluster, you can detect changes in incoming or outgoing traffic for all detected topics or queues running on that cluster:
 
+{{< img src="data_streams/data_streams_throughput.jpg" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 
-[1]: /agent
-[2]: /tracing/trace_collection/dd_libraries/dotnet-core
-[3]: /tracing/trace_collection/dd_libraries/dotnet-framework
-{{< /programming-lang >}}
+### Quickly pivot to identify root causes in infrastructure, logs, or traces 
 
-{{< programming-lang lang="go" >}}
+Datadog automatically links the infrastructure powering your services and related logs through [Unified Service Tagging][3], so you can easily localize bottlenecks. Click the **Infra** or **Logs** tabs to further troubleshoot why pathway latency or consumer lag has increased. To view traces within your pathways, click the **Processing Latency** tab.
+  
+{{< img src="data_streams/data_streams_infra.jpg" alt="Datadog Data Streams Monitoring Infra tab" style="width:100%;" >}}
 
-### Prerequisites
+## Further Reading
 
-To start with Data Streams Monitoring, you will require recent versions of the Datadog Agent and Data Streams Monitoring libraries:
-* [Datadog Agent v7.34.0+][1]
-* [Data Streams Library v0.2+][2]
+{{< partial name="whats-next/whats-next.html" >}}
 
-### Installation
-
-Initiate a Data Streams pathway with `datastreams.Start()` at the start of your pipeline. Then, two types of instrumentation are available:
-- Instrumentation for Kafka-based workloads
-- Custom instrumentation for any other queuing technology or protocol
-
-<div class="alert alert-info">The default Trace Agent URL is <code>localhost:8126</code>. If this is different for your application, use the option <code>datastreams.Start(datastreams.WithAgentAddr("notlocalhost:8126"))</code>.</div>
-
-### Kafka instrumentation
-
-1. Configure producers to call `TraceKafkaProduce()` before sending out a Kafka message:
-
-```go
-import (ddkafka "github.com/DataDog/data-streams-go/integrations/kafka")
-...
-ctx = ddkafka.TraceKafkaProduce(ctx, &kafkaMsg)
-```
-
-This function adds a new checkpoint onto any existing pathway in the provided Go context, or creates a new pathway if none are found. It then adds the pathway into your Kafka message headers.
-
-2. Configure consumers to call `TraceKafkaConsume()`:
-
-```go
-import ddkafka "github.com/DataDog/data-streams-go/integrations/kafka"
-...
-ctx = ddkafka.TraceKafkaConsume(ctx, &kafkaMsg, consumer_group)
-```
-
-This function extracts the pathway that a Kafka message has gone through so far. It sets a new checkpoint on the pathway to record the successful consumption of a message and stores the pathway into the provided Go context.
-
-**Note**: The output `ctx` from `TraceKafkaProduce()` and the output `ctx` from `TraceKafkaConsume()` both contain information about the updated pathway. 
-
-For `TraceKafkaProduce()`, if you are sending multiple Kafka messages at once (fan-out), do not reuse the output `ctx` across calls.
-
-For `TraceKafkaConsume()`, if you are aggregating multiple messages to create a smaller number of payloads (fan-in), call `MergeContext()` to merge the contexts into one context that can be passed into the next `TraceKafkaProduce()` call:
-
-```go
-import (
-    datastreams "github.com/DataDog/data-streams-go"
-    ddkafka "github.com/DataDog/data-streams-go/integrations/kafka"
-)
-
-...
-
-contexts := []Context{}
-for (...) {
-    contexts.append(contexts, ddkafka.TraceKafkaConsume(ctx, &consumedMsg, consumer_group))
-}
-mergedContext = datastreams.MergeContexts(contexts...)
-
-...
-
-ddkafka.TraceKafkaProduce(mergedContext, &producedMsg)
-```
-
-### Manual instrumentation
-
-You can also use manual instrumentation.
-
-For example, in HTTP, you can propagate the pathway with HTTP headers.
-
-To inject a pathway:
-
-```go
-req, err := http.NewRequest(...)
-...
-p, ok := datastreams.PathwayFromContext(ctx)
-if ok {
-   req.Headers.Set(datastreams.PropagationKeyBase64, p.EncodeStr())
-}
-```
-
-To extract a pathway:
-
-```go
-func extractPathwayToContext(req *http.Request) context.Context {
-	ctx := req.Context()
-	p, err := datastreams.DecodeStr(req.Header.Get(datastreams.PropagationKeyBase64))
-	if err != nil {
-		return ctx
-	}
-	ctx = datastreams.ContextWithPathway(ctx, p)
-	_, ctx = datastreams.SetCheckpoint(ctx, "type:http")
-}
-```
-
-### Add a dimension
-
-You can add an additional dimension to end-to-end latency metrics with the `event_type` tag:
-
-```go
-_, ctx = datastreams.SetCheckpoint(ctx, "type:internal", "event_type:sell")
-```
-
-You only need to add the `event_type` tag for the first service in each pathway. High-cardinality data (such as request IDs or hosts) are not supported as values for the `event_type` tag.
-
-
-[1]: /agent
-[2]: https://github.com/DataDog/data-streams-go
-{{< /programming-lang >}}
-
-{{< /programming-lang-wrapper >}}
+[1]: /data_streams/go#manual-instrumentation
+[2]: /tracing/service_catalog/
+[3]: /getting_started/tagging/unified_service_tagging

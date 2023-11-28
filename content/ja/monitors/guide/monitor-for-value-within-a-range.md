@@ -20,7 +20,7 @@ title: 監視範囲
 - 値が範囲外にある場合に通知を受けるには、モニター条件は `abs(6-a) - 2 > 0` である必要があります。
 - 値が範囲内にある場合に通知を受けるには、モニター条件は `2 - abs(6-a) > 0` である必要があります。
 
-{{< img src="monitors/faq/monitor_range.png" alt="範囲のメトリクスモニター"  >}}
+{{< img src="monitors/faq/monitor_range.png" alt="範囲のメトリクスモニター" >}}
 
 ### 理論
 

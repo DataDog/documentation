@@ -37,6 +37,8 @@ title: Docker インテグレーションオートディスカバリー
 | `<初期コンフィギュレーション>`      | 〇      | `特定の Datadog-`<INTEGRATION_NAME>` の init_config:` セクションの構成           |
 | `<インスタンスコンフィギュレーション>`  | 〇      | `特定の Datadog-`<INTEGRATION_NAME>` の instances:` セクションの構成             |
 
+**注**: Datadog Agent 7.36 で導入されたオートディスカバリー v2 では、`<INIT_CONFIG>` は必要ありません。
+
 [**オートディスカバリー対応の Agent インテグレーションの完全なリストとそれらのパラメーターの例をご覧ください**][3]
 
 以下の各セクションのタブで、特定のコンテナにインテグレーションテンプレートを適用するそれぞれの方法を示します。次の方法があります。
@@ -45,12 +47,64 @@ title: Docker インテグレーションオートディスカバリー
 * [Agent 内にマウントされたコンフィギュレーションファイル](?tab=file#configuration)
 * [Key-Value ストア](?tab=keyvaluestore#configuration)
 
-**注**: サポートされているインテグレーションの一部 ([Ceph][4]、[Varnish][5]、[Postfix][6]、[Cassandra Nodetools][7]、[Gunicorn][8]) は、プロセスツリーデータまたはファイルシステムへのアクセスを必要とするため、標準のオートディスカバリーに対応していません。これらのインテグレーションでオートディスカバリーを有効にするには、ポッドで公式の Prometheus エクスポーターを使用し、次に Agent でオートディスカバリーを使用してポッドを見つけ、エンドポイントをクエリします。
+**注**: サポートされているインテグレーションの一部 ([Ceph][4]、[Varnish][5]、[Postfix][6]、[Cassandra Nodetools][7]、[Gunicorn][8]) は、プロセスツリーデータまたはファイルシステムへのアクセスを必要とするため、標準のオートディスカバリーに対応していません。これらのインテグレーションでオートディスカバリーを有効にするには、コンテナで公式の Prometheus エクスポーターを使用し、次に Agent でオートディスカバリーを使用してコンテナを見つけ、エンドポイントをクエリします。
 
 ## コンフィギュレーション
 
 {{< tabs >}}
-{{% tab "Docker" %}}
+{{% tab "Docker (AD v2)" %}}
+
+**注**: AD Annotations v2 は、インテグレーション構成を簡素化するために、Datadog Agent 7.36 で導入されました。Datadog Agent の以前のバージョンでは、AD Annotations v1 を使用してください。
+
+Docker コンテナに対してオートディスカバリーを自動的に有効にするには、`/var/run/docker.sock` をコンテナ化 Agent にマウントします。Windows では、`\\.\pipe\docker_engine` をマウントします。
+
+インテグレーションテンプレートは、Docker ラベルとして格納できます。オートディスカバリーを使用して、Agent は自身が Docker 上で実行されているかどうかを検出し、すべてのラベルでインテグレーションテンプレートを自動的に探します。オートディスカバリーは、以下の例のようなラベルを前提としています。
+
+**Dockerfile**:
+
+```yaml
+LABEL "com.datadoghq.ad.checks"='{"<INTEGRATION_NAME>": {"instances": [<INSTANCE_CONFIG>]}}'
+```
+
+**docker-compose.yaml**:
+
+```yaml
+labels:
+  com.datadoghq.ad.checks: '{"<INTEGRATION_NAME>": {"instances": [<INSTANCE_CONFIG>]}}'
+```
+
+**`docker run`、`nerdctl run`、または `podman run` コマンドを使用**:
+
+```shell
+-l com.datadoghq.ad.checks="{\"<INTEGRATION_NAME>\": {\"instances\": [<INSTANCE_CONFIG>]}}"
+```
+
+**注**: これらのラベルを構成する際に、JSON をエスケープすることができます。例:
+```shell
+docker run --label "com.datadoghq.ad.checks="{\"apache\": {\"instances\": [{\"apache_status_url\":\"http://%%host%%/server-status?auto2\"}]}}"
+```
+
+**Docker Swarm**:
+
+Docker Cloud の Swarm モードを使用する場合は、以下のようにラベルをイメージに適用する必要があります。
+
+```yaml
+version: "1.0"
+services:
+...
+  project:
+    image: '<IMAGE_NAME>'
+    labels:
+      com.datadoghq.ad.checks: '{"<INTEGRATION_NAME>": {"instances": [<INSTANCE_CONFIG>]}}'
+
+```
+
+**注**: Datadog はオートディスカバリーを構成する際に、コンテナ化環境で Docker を使用してテレメトリを統一することをお勧めします。詳細は、[統合サービスタグ付け][1]のドキュメントを参照してください。
+
+
+[1]: /ja/getting_started/tagging/unified_service_tagging/?tab=docker
+{{% /tab %}}
+{{% tab "Docker (AD v1)" %}}
 
 Docker コンテナに対してオートディスカバリーを自動的に有効にするには、`/var/run/docker.sock` をコンテナ化 Agent にマウントします。Windows では、`\\.\pipe\docker_engine` をマウントします。
 
@@ -73,10 +127,15 @@ labels:
   com.datadoghq.ad.instances: '[<インスタンスコンフィギュレーション>]'
 ```
 
-**`docker run`、`nerdctl run`、または `podman run` コマンド**:
+**`docker run`、`nerdctl run`、または `podman run` コマンドを使用**:
 
 ```shell
 -l com.datadoghq.ad.check_names='[<インテグレーション名>]' -l com.datadoghq.ad.init_configs='[<初期コンフィギュレーション>]' -l com.datadoghq.ad.instances='[<インスタンスコンフィギュレーション>]'
+```
+
+**注**: これらのラベルを構成する際に、JSON をエスケープすることができます。例:
+```shell
+docker run --label "com.datadoghq.ad.check_names=[\"redisdb\"]" --label "com.datadoghq.ad.init_configs=[{}]" --label "com.datadoghq.ad.instances=[{\"host\":\"%%host%%\",\"port\":6379}]" --label "com.datadoghq.ad.logs=[{\"source\":\"redis\"}]" --name redis redis
 ```
 
 **Docker Swarm**:

@@ -17,6 +17,9 @@ further_reading:
     - link: 'logs/explorer'
       tag: 'Documentation'
       text: 'Learn how to explore your logs'
+    - link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
+      tag: "Blog"
+      text: "Use CIDR notation queries to filter your network traffic logs"
 ---
 
 ## Overview
@@ -61,11 +64,11 @@ Admin users in your organization can curate the list:
 - From the [Log Explorer][1]: **Promote** existing attributes as standard attributes.
 - From the standard attribute [configuration page][3]: **Create** new standard attributes.
 
-{{< img src="logs/processing/attribute_naming_convention/standard_attribute_config.png" alt="Standard Attributes"  style="width:60%;">}}
+{{< img src="logs/processing/attribute_naming_convention/standard_attribute_config.png" alt="Standard Attributes" style="width:60%;">}}
 
 The standard attribute table comes with a set of [predefined standard attributes](#default-standard-attribute-list). You can append that list with your own attributes, and edit or delete existing standard attributes:
 
-{{< img src="logs/processing/attribute_naming_convention/edit_standard_attributes.png" alt="Edit standard attributes"  style="width:80%;">}}
+{{< img src="logs/processing/attribute_naming_convention/edit_standard_attributes.png" alt="Edit standard attributes" style="width:80%;">}}
 
 A standard attribute is defined by its:
 
@@ -76,7 +79,7 @@ A standard attribute is defined by its:
 
 The standard attribute panel appears when you add a new standard attribute or edit an existing one:
 
-{{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Define Standard attribute"  style="width:80%;">}}
+{{< img src="logs/processing/attribute_naming_convention/define_standard_attribute.png" alt="Define Standard attribute" style="width:80%;">}}
 
 ### Default standard attribute list
 
@@ -106,7 +109,7 @@ The following attributes are related to the data used in network communication. 
 | `network.bytes_read`       | `number` | Total number of bytes transmitted from the client to the server when the log is emitted. |
 | `network.bytes_written`    | `number` | Total number of bytes transmitted from the server to the client when the log is emitted. |
 
-Typical integrations relying on these attributes include [Apache][4], [Varnish][9], [AWS ELB][10], [Nginx][11], [HAProxy][12], etc.
+Typical integrations relying on these attributes include [Apache][4], [Varnish][9], [Amazon ELB][10], [Nginx][11], [HAProxy][12], etc.
 
 #### Geolocation
 

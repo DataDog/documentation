@@ -2,6 +2,12 @@
 title: Basic Agent Usage for AIX
 kind: documentation
 further_reading:
+- link: "/agent/basic_agent_usage/#agent-architecture"
+  tag: "Documentation"
+  text: "Find out more about the Agent's architecture"
+- link: "/agent/configuration/network#configure-ports"
+  tag: "Documentation"
+  text: "Configure inbound ports"
 - link: "https://www.datadoghq.com/blog/announcing-ibm-aix-agent/"
   tag: "Blog"
   text: "Monitor AIX with the Datadog Unix Agent"
@@ -36,7 +42,7 @@ Alternatively, download links for the latest releases can be found on [this page
 
 The installer may be executed as follows (as root):
 
-{{< code-block lang="bash" wrap="true" >}}
+{{< code-block lang="shell" wrap="true" >}}
 installp -aXYgd ./datadog-unix-agent-<VERSION>.bff -e dd-aix-install.log datadog-unix-agent
 {{< /code-block >}}
 
@@ -73,7 +79,7 @@ Occasionally a proxy configuration must be specified depending on your network s
 ## Integrations
 
 The Unix Agent collects system metrics for:
-  
+
 * cpu
 * filesystem
 * iostat
@@ -92,7 +98,7 @@ Additionally, the following integrations can be enabled to collect further metri
 Enable the above integrations by copying and editing the sample configuration files provided. These are found in `/etc/datadog-agent/conf.d`. The name of the YAML configuration file should match that of the integration: `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml` enables the integration `<INTEGRATION_NAME>`, and set its configuration. Example configuration files can be found at `/etc/datadog-agent/conf.d/<INTEGRATION_NAME>.d/conf.yaml.example`
 
 **Note**: Some of the available metrics differ between the integrations for the Unix Agent and the integrations for Linux, Windows and MacOS. Although it is possible to monitor processes and network metrics with the Unix Agent, the Live Process Monitoring and Network Performance Monitoring capabilities aren't available. Log Management is also not available with the Unix Agent.
-  
+
 <div class="alert alert-info">The Unix Agent has no trace-agent component, so APM tracing and profiling is not supported.</div>
 
 ## Running DogStatsD
@@ -119,7 +125,7 @@ There are also facilities to run the Agent with the known Python supervisor. Thi
 
 To remove an installed Agent, run the following `installp` command:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 installp -e dd-aix-uninstall.log -uv datadog-unix-agent
 {{< /code-block >}}
 
@@ -129,6 +135,6 @@ Note: Agent uninstallation logs can be found in the `dd-aix-install.log` file. T
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/aix
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=aix
 [2]: https://github.com/DataDog/datadog-unix-agent/releases
 [3]: https://github.com/DataDog/datadog-unix-agent/blob/master/checks/bundled/ibm_was/README.md

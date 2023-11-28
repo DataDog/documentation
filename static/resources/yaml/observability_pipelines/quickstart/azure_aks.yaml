@@ -1,0 +1,121 @@
+datadog:
+  apiKey: "<datadog_api_key>"
+  pipelineId: "<observability_pipelines_configuration_id>"
+  site: "datadoghq.com"
+
+## Autoscaling
+##
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  targetCPUUtilizationPercentage: 80
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+## HorizontalPodAutoscaler (HPA) requires resource requests to function,
+## so this example configures several default values. Datadog recommends
+## that you change the values to match the actual size of instances that
+## you are using.
+resources:
+  requests:
+    cpu: 1000m
+    memory: 512Mi
+
+affinity:
+  ## To prevent a single datacenter from causing a complete system failure,
+  ## this example defaults to running pods in different availability zones.
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - observability-pipelines-worker
+          topologyKey: topology.kubernetes.io/zone
+
+
+## Load Balancing
+## This example configuration avoids cross-availability-zone costs where possible.
+## NOTE: If using the Quickstart use case, this load balancer will not be receiving
+## inbound traffic because our Quickstart data source is a sample syslog generator.
+## However, we will still provision this load balancer so that it can be used 
+## once you update your configuration with a real data source. 
+## 
+## In the meantime, beware of cost implications of running this LB!
+service:
+  enabled: true
+  type: "LoadBalancer"
+  externalTrafficPolicy: "Local"
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+
+
+## Buffering
+## This creates an EBS drive that can be used for buffers, which
+## must then be configured in the sinks themselves.
+persistence:
+  enabled: true
+  storageClassName: "managed-csi"
+  accessModes:
+    - ReadWriteOnce
+  size: 288Gi
+
+
+## Observability Pipelines (OP) Configuration
+## This is a sample configuration that Datadog recommends for
+## getting started with OP. It sets up data proxying and provides hooks
+## for your own processing steps.
+pipelineConfig:
+  ## SOURCES: Data sources that Observability Pipelines Worker collects data from.
+  ## For a QuickStart use case, we are using generate_syslog to generate sample data.
+  sources:
+    generate_syslog:
+      type: demo_logs
+      format: syslog
+      interval: 1
+
+  ## TRANSFORMS: Data processing
+  ## parse_syslog: Parse syslog-formatted logs into structured data
+  transforms:
+    parse_syslog:
+      type: remap
+      inputs:
+        - generate_syslog
+      source: |
+        # Parse the message as syslog
+        . = parse_syslog!(.message)
+        .environment = "demo"
+        .application = "observability-pipelines-quickstart"
+
+  ## SINKS: Data output destinations
+  ## console: Print JSON-formatted events to the console
+  ## datadog: Ship logs to Datadog Logs
+  ##
+  ## This buffer configuration is split into 144GB buffers for both of the console and Datadog sinks.
+  ##
+  ## This should work for the vast majority of OP Worker deployments and should rarely
+  ## need to be adjusted. If you do change it, be sure to update the size of the persistence
+  ## block above.
+  sinks:
+    print_syslog:
+      type: console
+      inputs:
+        - parse_syslog
+      encoding:
+        codec: json
+    datadog_logs:
+      type: datadog_logs
+      inputs:
+        - parse_syslog
+      default_api_key: "${DD_API_KEY}"
+      site: "${DD_SITE}"
+      compression: gzip
+      buffer:
+          type: disk
+          max_size: 154618822656
+          

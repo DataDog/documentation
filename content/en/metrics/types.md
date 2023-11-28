@@ -18,11 +18,13 @@ further_reading:
     - link: 'developers/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
+algolia:
+  tags: ['metric types']
 ---
 
 ## Overview
 
-Each metric submitted to Datadog should have a type. A metric’s type affects how the metric values are displayed when queried, as well as the associated graphing possibilities within Datadog using additional [modifiers][1] and [functions][2]. A metric’s type is displayed on the details side panel for the given metric on the [Metrics Summary page][3].
+Each metric submitted to Datadog should have a type. A metric's type affects how the metric values are displayed when queried, as well as the associated graphing possibilities within Datadog using additional [modifiers][1] and [functions][2]. A metric's type is displayed on the details side panel for the given metric on the [Metrics Summary page][3].
 
 **Note**: Changing the metric type in this details side panel can change metric behavior in all existing visualizations and monitors, potentially rendering historical data as nonsensical.
 
@@ -50,9 +52,9 @@ Metrics are submitted to Datadog in three main ways:
 
 - [Agent check][5]
 - [DogStatsD][6]
-- [Datadog’s HTTP API][7]
+- [Datadog's HTTP API][7]
 
-The majority of data that Datadog receives is submitted by the Agent, either through an Agent check or DogStatsD. For these submission methods, a metric’s type determines how multiple values collected on an Agent in [a flush time interval][8] are aggregated. The Agent combines these values into a single representative metric value for that interval. This combined value is stored with a single timestamp in Datadog.
+The majority of data that Datadog receives is submitted by the Agent, either through an Agent check or DogStatsD. For these submission methods, a metric's type determines how multiple values collected on an Agent in [a flush time interval][8] are aggregated. The Agent combines these values into a single representative metric value for that interval. This combined value is stored with a single timestamp in Datadog.
 
 Data submitted directly to the Datadog API is not aggregated by Datadog, with the exception of distribution metrics. The raw values sent to Datadog are stored as-is.
 
@@ -84,7 +86,7 @@ The GAUGE metric submission type represents a snapshot of events in one time int
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
 
-The HISTOGRAM metric submission type represents the statistical distribution of a set of values calculated Agent-side in one time interval. Datadog’s HISTOGRAM metric type is an extension of the StatsD timing metric type. The Agent aggregates the values that are sent in a defined time interval and produces different metrics which represent the set of values.
+The HISTOGRAM metric submission type represents the statistical distribution of a set of values calculated Agent-side in one time interval. Datadog's HISTOGRAM metric type is an extension of the StatsD timing metric type. The Agent aggregates the values that are sent in a defined time interval and produces different metrics which represent the set of values.
 
 If you send `X` values for a HISTOGRAM metric `<METRIC_NAME>` in a given time interval, the following metrics are produced by the Agent by default:
 
@@ -158,21 +160,21 @@ If you send `X` values for a DISTRIBUTION metric `<METRIC_NAME>` in a given time
 
 Suppose you are submitting a COUNT metric, `activeusers.basket_size`, from a single host running the Datadog Agent. This host emits the following values in a flush time interval: `[1,1,1,2,2,2,3,3]`.
 
-The Agent adds all of the values received in one time interval. Then, it submits the total number, in this case `15`, as the COUNT metric’s value.
+The Agent adds all of the values received in one time interval. Then, it submits the total number, in this case `15`, as the COUNT metric's value.
 
 {{% /tab %}}
 {{% tab "RATE" %}}
 
 Suppose you are submitting a RATE metric, `queue_messages.rate`, from a single host running the Datadog Agent. This host emits the following values in a flush time interval: `[1,1,1,2,2,2,3,3]`.
 
-The Agent adds all of the values received in one time interval. Then, it submits the total number divided by the total number of seconds in this time interval. In this case, if the flush interval is 10 seconds, the value submitted would be `1.5` as the RATE metric’s value.
+The Agent adds all of the values received in one time interval. Then, it submits the total number divided by the total number of seconds in this time interval. In this case, if the flush interval is 10 seconds, the value submitted would be `1.5` as the RATE metric's value.
 
 {{% /tab %}}
 {{% tab "GAUGE" %}}
 
 Suppose you are submitting a GAUGE metric, `temperature`, from a single host running the Datadog Agent. This host emits the following values in a flush time interval: `[71,71,71,71,71,71,71.5]`.
 
-The Agent submits the last reported number, in this case `71.5`, as the GAUGE metric’s value.
+The Agent submits the last reported number, in this case `71.5`, as the GAUGE metric's value.
 
 {{% /tab %}}
 {{% tab "HISTOGRAM" %}}
@@ -338,7 +340,7 @@ Below is a summary of all available metric submission sources and methods. This 
 [1]: /metrics/custom_metrics/type_modifiers/
 [2]: /dashboards/functions/
 [3]: /metrics/summary/
-[4]: https://statsd.readthedocs.io/en/v3.2.2/types.html#sets
+[4]: https://statsd.readthedocs.io/en/v3.3/types.html#sets
 [5]: /metrics/custom_metrics/agent_metrics_submission/
 [6]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [7]: /api/v1/metrics/#submit-metrics

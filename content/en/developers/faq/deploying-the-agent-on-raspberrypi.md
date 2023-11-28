@@ -27,7 +27,8 @@ kind: faq
 **Note**: The installation process may take up to 30 minutes on some models of Raspberry PI.
 
 Example output after successful installation:
-{{< img src="developers/faq/rasberypi_install.png" alt="rasberypi_install" >}}
+
+![RaspberryPI Install](https://raw.githubusercontent.com/DataDog/documentation/master/static/images/developers/faq/rasberypi_install.png)
 
 The Agent runs in the foreground. Some users find benefit in creating a `systemd` service for the Agent like this:
 
@@ -52,11 +53,12 @@ sudo systemctl enable datadog
 systemctl start datadog
 ```
 
-The Datadog Agent is installed in the working directory where you ran the installation command, for example: `/home/pi/.datadog-agent/`. 
+The Datadog Agent is installed in the working directory where you ran the installation command, for example: `/home/pi/.datadog-agent/`.
 
 Example of metrics being ingested from your Raspberry PI device:
-{{< img src="developers/faq/rasberry_dashboard.png" alt="raspberry_dashboard" >}}
+
+![RaspberryPI Dashboard](https://raw.githubusercontent.com/DataDog/documentation/master/static/images/developers/faq/rasberry_dashboard.png)
 
 **Note**: Datadog does not officially support Raspbian.
 
-[1]: https://app.datadoghq.com/account/settings#agent/source
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=source

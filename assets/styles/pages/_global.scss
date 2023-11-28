@@ -53,6 +53,10 @@ body {
     @media (max-width: 991px) {
         padding-top: 65px;
     }
+    // Restores previous positioning setting for bootstrap columns from bootstrap 4
+    div[class*='col-'] {
+        position: relative;
+    }
 }
 
 .greyside {
@@ -146,7 +150,7 @@ pre {
         font-size: 14px;
         line-height: 27px;
         color: #555555;
-        white-space: pre-wrap;
+        white-space: pre;
         background-color: transparent;
         border-radius: 0;
         border: none;
@@ -171,6 +175,19 @@ code {
     white-space: normal;
     /*font-family: 'Source Code Pro', monospace;*/
     font-family: $font-family-monospace;
+  &.language-shell {
+    .line {
+      &:before {
+        content: '$ ';
+        display: inline;
+      }
+    }
+    .line ~ .line {
+      &:before {
+        content: '  ';
+      }
+    }
+  }
 }
 
 h2 code {
@@ -255,6 +272,51 @@ details {
         }
     }
 }
+
+.code-snippet.js-appended-copy-btn {
+    position: relative;
+    padding-right: 0 !important;
+    pre {
+        padding: 30px 10px;
+    }
+    code {
+        white-space: pre;
+    }
+    &.wrap {
+        code {
+            white-space: normal !important;
+        }
+    }
+    &:hover {
+        .code-button-wrapper {
+            opacity: 1;
+        }
+    }
+    .code-button-wrapper {
+        opacity: 0;
+        right: 0;
+        top: 0;
+        padding: 1rem 1rem 0 0;
+        transition: opacity 0.2s ease-in-out;
+        z-index: 1;
+        button {
+            background-color: $white;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+            border-radius: 4px;
+            padding: 8px 25px;
+            transition: box-shadow 0.2s ease-in-out;
+            &:hover {
+                box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.45);
+            }
+            &:active,
+            &:focus {
+                box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.45) !important;
+            }
+        }
+    }
+}
+
+
 .code-filename-wrapper {
     background-color: $codesnippet-filename-bg;
     min-height: 5px;
@@ -351,6 +413,9 @@ p {
 h1 {
     line-height: 42px;
     padding-bottom: 15.5px;
+    &#pagetitle {
+      margin-top: 30px;
+    }
 }
 
 h2 {
@@ -358,7 +423,6 @@ h2 {
     line-height: 36px;
 }
 h4 {
-    text-transform: uppercase;
     margin-top: 14px;
 }
 
@@ -376,6 +440,7 @@ h5 {
         h3,
         h4,
         h5 {
+            pointer-events: none;
             &:before {
                 margin-top: -110px;
                 height: 110px;
@@ -551,7 +616,7 @@ h5 {
     & > ul {
         list-style-type: none;
         padding-top: 6px;
-        
+
         li {
             padding-bottom: 6px;
 
@@ -725,6 +790,10 @@ video {
 }
 
 // Tables
+.table-wrapper {
+    overflow-x: auto;
+}
+
 table,
 .table {
     width: 100%;

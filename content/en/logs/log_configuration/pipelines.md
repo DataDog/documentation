@@ -14,14 +14,23 @@ further_reading:
 - link: "/logs/explorer/"
   tag: "Documentation"
   text: "Learn how to explore your logs"
-- link: "https://learn.datadoghq.com/course/view.php?id=10"
+- link: "/logs/troubleshooting/"
+  tag: "Documentation"
+  text: "Logs troubleshooting"
+- link: "https://learn.datadoghq.com/courses/going-deeper-with-logs-processing"
   tag: "Learning Center"
-  text: "Going Deeper with Logs: Parsing"
+  text: "Going Deeper with Logs Processing"
+- link: "https://www.datadoghq.com/blog/monitor-cloudflare-zero-trust/"
+  tag: "Blog"
+  text: "Monitor Cloudflare Zero Trust with Datadog Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
+  tag: "Blog"
+  text: "Monitor 1Password with Datadog Cloud SIEM"
 ---
 
 ## Overview
 
-Datadog automatically [parses][1] JSON-formatted logs. When logs are not JSON-formatted, you can add value to your raw logs by sending them through a processing pipeline. Pipelines take logs from a wide variety of formats and translate them into a common format in Datadog. Implementing a log pipelines and processing strategy is beneficial as it introduces an [attribute naming convention][2] for your organization.
+Datadog automatically [parses][1] JSON-formatted logs. You can then add value to all your logs (raw and JSON) by sending them through a processing pipeline. Pipelines take logs from a wide variety of formats and translate them into a common format in Datadog. Implementing a log pipelines and processing strategy is beneficial as it introduces an [attribute naming convention][2] for your organization.
 
 With pipelines, logs are parsed and enriched by chaining them sequentially through [processors][3]. This extracts meaningful information or attributes from semi-structured text to reuse as [facets][4]. Each log that comes through the pipelines is tested against every pipeline filter. If it matches a filter, then all the processors are applied sequentially before moving to the next pipeline.
 
@@ -115,7 +124,7 @@ Each log entry may specify a status level which is made available for faceted se
 * `level`
 * `syslog.severity`
 
-To remap a status existing in the `status` attribute, use the [log status remapper][1].
+Specify alternate attributes to use as the source of a log's status by setting a [log status remapper processor][1].
 
 [1]: /logs/log_configuration/processors/#log-status-remapper
 {{% /tab %}}
@@ -160,8 +169,8 @@ Specify alternate attributes to use as the source of a log's trace ID by setting
 
 4. Name your pipeline.
 5. (Optional) Grant editing access to processors in the pipeline.
-6. (Optional) Add tags and a description to the pipeline. The description can be used to state the pipeline's purpose and which team owns it.
-7. Press **Save**.
+6. (Optional) Add tags and a description to the pipeline. The description and tags can be used to state the pipeline's purpose and which team owns it.
+7. Press **Create**.
 
 An example of a log transformed by a pipeline:
 
@@ -177,11 +186,11 @@ Integration processing pipelines are available for certain sources when they are
 
 To view an integration pipeline, navigate to the [Pipelines][5] page. To edit an integration pipeline, clone it and then edit the clone:
 
-{{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="Cloning pipeline"  style="width:80%;">}}
+{{< img src="logs/processing/pipelines/cloning_pipeline.png" alt="Cloning pipeline" style="width:80%;">}}
 
 See the ELB logs example below:
 
-{{< img src="logs/processing/elb_log_post_processing.png" alt="ELB log post processing"  style="width:70%;">}}
+{{< img src="logs/processing/elb_log_post_processing.png" alt="ELB log post processing" style="width:70%;">}}
 
 ### Integration pipeline library
 
@@ -203,7 +212,9 @@ It's also possible to copy an integration pipeline using the clone button.
 
 ### Processors
 
-A processor executes within a pipeline to complete a data-structuring action. See the [Processors docs][3] to learn how to add and configure a processor by processor type, within the app or with the API.
+A processor executes within a pipeline to complete a data-structuring action. See the [Processors docs][3] to learn how to add and configure a processor by processor type, within the app or with the API. 
+
+See [Parsing dates][10] for more information about parsing a custom date and time format and for information on the `timezone` parameter, which is needed if your timestamps are not in UTC.
 
 ### Nested pipelines
 
@@ -215,7 +226,7 @@ A pipeline can contain nested pipelines and processors whereas a nested pipeline
 
 It is possible to move a pipeline into another pipeline to transform it into a nested pipeline:
 
-{{< img src="logs/processing/pipelines/move_to_pipeline.mp4" alt="Drag and drop nested pipelines" video="true"  width="80%" >}}
+{{< img src="logs/processing/pipelines/move_to_pipeline.mp4" alt="Drag and drop nested pipelines" video="true" width="80%" >}}
 
 ## Manage your pipelines
 
@@ -229,7 +240,7 @@ Reorder pipelines precisely with the `Move to` option in the sliding option pane
 
 ## Estimated usage metrics
 
-Estimated usage metrics are displayed per pipeline - specifically, the volume and count of logs being ingested and modified by each pipeline. There is also a link to the out-of-the-box [Logs Estimated Usage Dashboard][10] from every pipeline where you can view that pipeline's usage metrics in more detailed charts.
+Estimated usage metrics are displayed per pipeline - specifically, the volume and count of logs being ingested and modified by each pipeline. There is also a link to the out-of-the-box [Logs Estimated Usage Dashboard][11] from every pipeline where you can view that pipeline's usage metrics in more detailed charts.
 
 {{< img src="logs/processing/pipelines/log_pipeline_statistics.png" alt="How to get a quick view of your pipelines' usage metrics" style="width:50%;">}}
 
@@ -249,4 +260,5 @@ Estimated usage metrics are displayed per pipeline - specifically, the volume an
 [7]: https://app.datadoghq.com/logs/pipelines/pipeline/library
 [8]: https://app.datadoghq.com/logs/pipelines/remapping
 [9]: /integrations/#cat-log-collection
-[10]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
+[10]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
+[11]: https://app.datadoghq.com/dash/integration/logs_estimated_usage

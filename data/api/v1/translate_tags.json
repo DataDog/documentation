@@ -117,7 +117,7 @@
   },
   "synthetics": {
     "name": "Synthetics",
-    "description": "Datadog Synthetics uses simulated user requests and browser rendering to help you ensure uptime,\nidentify regional issues, and track your application performance. Datadog Synthetics tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\nand [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog’s API to\nmanage both test types programmatically.\n\nFor more information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
+    "description": "Datadog Synthetic Monitoring uses simulated user requests and browser rendering to help you ensure uptime,\nidentify regional issues, and track your application performance. Synthetic tests come in\ntwo different flavors, [API tests](https://docs.datadoghq.com/synthetics/api_tests/?tab=httptest)\nand [browser tests](https://docs.datadoghq.com/synthetics/browser_tests). You can use Datadog’s API to\nmanage both test types programmatically.\n\nFor more information, see the [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/)."
   },
   "tags": {
     "name": "Tags",

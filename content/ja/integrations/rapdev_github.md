@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-github
 app_uuid: 37a265a0-fb4a-463b-aaea-653f5d950c2c
 assets:
@@ -19,12 +21,13 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
-- マーケットプレイス
 - クラウド
+- コラボレーション
+- マーケットプレイス
 - メトリクス
 dependencies: []
 display_on_public_website: true
@@ -49,22 +52,23 @@ pricing:
   tag: repo_name
   unit_label: GitHub リポジトリ
   unit_price: 1
-public_title: GitHub インテグレーション
+public_title: GitHub
 short_description: GitHub の組織やエンタープライズを監視する
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Cloud
+  - Category::Collaboration
+  - Category::Marketplace
   - Category::Metrics
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: GitHub の組織やエンタープライズを監視する
   media:
@@ -79,7 +83,8 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: GitHub インテグレーション
+  title: GitHub
+  uninstallation: README.md#Uninstallation
 ---
 
 

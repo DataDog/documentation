@@ -1,15 +1,14 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: check
+- cloud
+- azure
 dependencies: []
 description: Azure Service Fabric からメトリクスを追跡する
 doc_link: https://docs.datadoghq.com/integrations/azure_service_fabric/
 draft: false
 git_integration_title: azure_service_fabric
 has_logo: true
-integration_id: ''
+integration_id: azure-service-fabric
 integration_title: Microsoft Azure Service Fabric
 integration_version: ''
 is_public: true
@@ -20,6 +19,7 @@ public_title: Datadog-Microsoft Azure Service Fabric インテグレーション
 short_description: Azure Service Fabric からメトリクスを追跡する
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Service Fabric は、スケーラブルで信頼性の高いマイクロサービスとコンテナをパッケージ化、デプロイ、管理するために使用される分散型システムプラットフォームです。

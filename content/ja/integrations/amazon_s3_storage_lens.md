@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
 - AWS
+- クラウド
+- data store
 - ログの収集
 dependencies: []
 description: Amazon S3 Storage Lens の主要なメトリクスを追跡します。

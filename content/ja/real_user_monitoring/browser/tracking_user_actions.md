@@ -28,7 +28,7 @@ title: ユーザーアクションの追跡
 
 ## 収集する情報の管理
 
-初期化パラメーター `trackInteractions` は、アプリケーション内のユーザークリックの収集を有効にします。つまり、ページに含まれている機密データと非公開データは、ユーザーによってやり取りされた要素を特定するために含まれる場合があります。
+初期化パラメーター `trackUserInteractions` は、アプリケーション内のユーザークリックの収集を有効にします。つまり、ページに含まれている機密データと非公開データは、ユーザーによってやり取りされた要素を特定するために含まれる場合があります。
 
 Datadog に送信する情報を制御するには、[アクション名を手動で設定する](#declare-a-name-for-click-actions)か、[Datadog Browser SDK for RUM でグローバルスクラビングルールを実装する][1]必要があります。
 
@@ -74,21 +74,21 @@ Datadog Browser SDK for RUM は、クリックアクションの命名にさま�
 <a class="btn btn-default" href="#" role="button" data-dd-action-name="Login button">Try it out!</a>
 
 <div class="alert alert-danger" role="alert" data-dd-action-name="Dismiss alert">
-  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span>
-  Enter a valid email address
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="visually-hidden">Error:</span>
+    Enter a valid email address
 </div>
 ```
 
-[バージョン 2.16.0][4] 以降、`actionNameAttribute` 初期化パラメーターを使用して、アクションに名前を付けるために使用される独自の属性を指定できます。
+[バージョン 2.16.0][4] 以降、`actionNameAttribute` 初期化パラメーターを使用して、アクションに名前を付けるために使用されるカスタム属性を指定できます。
 
 例:
 
 ```html
 <script>
-  DD_RUM.init({
+  window.DD_RUM.init({
     ...
-    trackInteractions: true,
+    trackUserInteractions: true,
     actionNameAttribute: 'data-custom-name',
   ...
   })

@@ -1,8 +1,10 @@
 ---
 categories:
-- cloud
 - AWS
+- クラウド
+- 構成 & デプロイ
 - ログの収集
+- プロビジョニング
 dependencies: []
 description: 主要な AWS App Runner メトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_app_runner/
@@ -43,7 +45,7 @@ AWS App Runner によって管理されるアプリケーションから Datadog
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
+1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数をインストールしたら、AWS コンソールで App Runner サービスまたはアプリケーション CloudWatch ロググループにトリガーを手動で追加します。
    {{< img src="integrations/amazon_cloudwatch/cloudwatch_log_collection_1.png" alt="CloudWatch Logs グループ" popup="true" style="width:70%;">}}
    対応する CloudWatch ロググループを選択し、フィルター名を追加して (空にすることも可能)、トリガーを追加します。
@@ -79,7 +81,7 @@ AWS App Runner  インテグレーションには、サービスのチェック�
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-app-runner
-[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [5]: https://app.datadoghq.com/logs
 [6]: https://app.datadoghq.com/event/stream
 [7]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destination-partners.html#eb-api-destination-datadog

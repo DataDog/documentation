@@ -27,6 +27,7 @@ categories:
 - キャッシュ
 - data store
 - ログの収集
+- ネットワーク
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ignite/README.md
 display_on_public_website: true
@@ -44,17 +45,18 @@ public_title: ignite
 short_description: Ignite サーバーからメトリクスを収集します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Caching
   - Category::Data Store
   - Category::Log Collection
+  - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Ignite サーバーからメトリクスを収集します。
   media: []

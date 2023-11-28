@@ -24,6 +24,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
+- キャッシュ
 - data store
 - ログの収集
 dependencies:
@@ -33,7 +34,7 @@ draft: false
 git_integration_title: clickhouse
 integration_id: clickhouse
 integration_title: ClickHouse
-integration_version: 2.8.0
+integration_version: 2.8.3
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -43,16 +44,17 @@ public_title: ClickHouse
 short_description: ClickHouse クラスターの健全性とパフォーマンスを監視。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Caching
   - Category::Data Store
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: ClickHouse クラスターの健全性とパフォーマンスを監視。
   media: []

@@ -25,9 +25,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/java-logging-guide/"
   tag: "Blog"
   text: "How to collect, customize, and standardize Java logs"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'
 ---
 
-To send your logs to Datadog, log to a file and tail that file with your Datadog Agent.
+To send your logs to Datadog, log to a file and [tail][14] that file with your Datadog Agent.
 
 Stack traces from typical Java logs are split into multiple lines, which makes them difficult to associate to the original log event. For example:
 
@@ -94,7 +97,7 @@ For Log4j, log in JSON format by using the SLF4J module [log4j-over-slf4j][1] co
 {{% /tab %}}
 {{% tab "Log4j 2" %}}
 
-Log4j 2 includes a JSON layout. 
+Log4j 2 includes a JSON layout.
 
 1. Configure a file appender using the JSON layout in `log4j2.xml`:
     ```xml
@@ -118,7 +121,7 @@ Log4j 2 includes a JSON layout.
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-core</artifactId>
-        <version>2.17.0</version>
+        <version>2.17.1</version>
     </dependency>
     <dependency>
         <groupId>com.fasterxml.jackson.core</groupId>
@@ -140,7 +143,7 @@ Log4j 2 includes a JSON layout.
 {{% /tab %}}
 {{% tab "Logback" %}}
 
-Use the [logstash-logback-encoder][1] for JSON formatted logs in Logback. 
+Use the [logstash-logback-encoder][1] for JSON formatted logs in Logback.
 
 1. Configure a file appender using the JSON layout in `logback.xml`:
 
@@ -276,8 +279,8 @@ Once [log collection is enabled][4], set up [custom log collection][5] to tail y
     logs:
 
       - type: file
-        path: "/path/to/your/java/log.log"
-        service: java
+        path: "<path_to_your_java_log>.log"
+        service: <service_name>
         source: java
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
@@ -288,7 +291,7 @@ Once [log collection is enabled][4], set up [custom log collection][5] to tail y
     ```
 
 3. [Restart the Agent][7].
-4. Run the [Agent’s status subcommand][8] and look for `java` under the `Checks` section to confirm logs are successfully submitted to Datadog.
+4. Run the [Agent's status subcommand][8] and look for `java` under the `Checks` section to confirm logs are successfully submitted to Datadog.
 
 If logs are in JSON format, Datadog automatically [parses the log messages][9] to extract log attributes. Use the [Log Explorer][10] to view and troubleshoot your logs.
 
@@ -308,7 +311,7 @@ If you are not already using Logback, most common logging libraries can be bridg
 {{< tabs >}}
 {{% tab "Log4j" %}}
 
-Use the SLF4J module [log4j-over-slf4j][1] with Logback to send logs to another server. `log4j-over-slf4j` cleanly replaces Log4j in your application so that you do not have to make any code changes.  To use it:
+Use the SLF4J module [log4j-over-slf4j][1] with Logback to send logs to another server. `log4j-over-slf4j` cleanly replaces Log4j in your application so that you do not have to make any code changes. To use it:
 
 1. In your `pom.xml` file, replace the `log4j.jar` dependency with a `log4j-over-slf4j.jar` dependency, and add the Logback dependencies:
     ```xml
@@ -346,7 +349,7 @@ Log4j 2 allows logging to a remote host, but it does not offer the ability to pr
     <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-to-slf4j</artifactId>
-        <version>2.17.0</version>
+        <version>2.17.1</version>
     </dependency>
     <dependency>
         <groupId>ch.qos.logback</groupId>
@@ -379,7 +382,7 @@ Use the [logstash-logback-encoder][11] logging library along with Logback to str
 
 1. Configure a TCP appender in your `logback.xml` file. With this configuration, your api key is retrieved from the `DD_API_KEY` environment variable. Alternatively, you can insert your api key directly into the configuration file:
 
-    {{< site-region region="us,us3,us5" >}}
+    {{< site-region region="us,us3,us5,ap1" >}}
 
   ```xml
   <configuration>
@@ -528,11 +531,12 @@ To generate this JSON:
 [3]: /tracing/other_telemetry/connect_logs_and_traces/java/
 [4]: /agent/logs/?tab=tailfiles#activate-log-collection
 [5]: /agent/logs/?tab=tailfiles#custom-log-collection
-[6]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[7]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[8]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information]
+[6]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[7]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[8]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information]
 [9]: /logs/log_configuration/parsing/?tab=matchers
 [10]: /logs/explorer/#overview
 [11]: https://github.com/logstash/logstash-logback-encoder
 [12]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
 [13]: /logs/log_configuration/parsing/#key-value-or-logfmt
+[14]: /glossary/#tail

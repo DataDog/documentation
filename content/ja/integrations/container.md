@@ -22,6 +22,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - containers
+- kubernetes
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/container/README.md
 display_on_public_website: true
@@ -43,9 +44,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Containers
+  - Category::Kubernetes
   - Supported OS::Linux
   - Supported OS::Windows
-  - Category::Containers
   configuration: README.md#Setup
   description: コンテナのメトリクスを Datadog で追跡
   media: []

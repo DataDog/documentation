@@ -2,67 +2,33 @@
 title: Getting Started with the Datadog Operator
 kind: documentation
 further_reading:
-- link: "/agent/kubernetes/integrations/"
-  tag: "Documentation"
-  text: "Create and load an Autodiscovery Integration Template"
-- link: "/agent/guide/ad_identifiers/"
-  tag: "Documentation"
-  text: "Match a container with the corresponding Integration Template"
-- link: "/agent/guide/autodiscovery-management/"
-  tag: "Documentation"
-  text: "Manage which Container to include in the Agent Autodiscovery"
-- link: "/agent/kubernetes/tag/"
-  tag: "Documentation"
-  text: "Dynamically assign and collect tags from your application"
-- link: "/integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui"
-  tag: "faq"
-  text: "Integration Setup for ECS Fargate"
-- link: "/agent/guide/secrets-management/"
-  tag: "Documentation"
-  text: "Secrets Management"
+  - link: '/containers/datadog_operator'
+    tag: 'documentation'
+    text: 'Datadog Operator'
+  - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md'
+    tag: 'GitHub'
+    text: 'Datadog Operator: Advanced Installation'
+  - link: 'https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md'
+    tag: 'GitHub'
+    text: 'Datadog Operator: Configuration'
 ---
 
-This guide describes the Datadog Operator, how to install it, and how to use it to install the Datadog Agent on Kubernetes.
-
-## What is the Datadog Operator? 
-
-The Datadog Operator is an open source [Kubernetes Operator][1] that enables you to deploy and configure the Datadog Agent in a Kubernetes environment. By using the Operator, you can use a single Custom Resource Definition (CRD) to deploy the node-based Agent, Cluster Agent, and Cluster Checks Runner. The Operator reports deployment status, health, and errors in the Operator's CRD status. Because the Operator uses higher-level configuration options, it limits the risk of misconfiguration.
-
-Once you have deployed the Agent, the Datadog Operator provides the following benefits:
-
-- Validation for your Agent configurations
-- Keeping all Agents up to date with your configuration
-- Orchestration for creating and updating Agent resources
-- Reporting of Agent configuration status in the Operator's CRD status
-- Optionally, use of an advanced DaemonSet deployment by using Datadog's [ExtendedDaemonSet][2].
-
-<div class="alert alert-warning">The Datadog Operator is in beta.</div>
-
-## Why use the Datadog Operator instead of a Helm chart or DaemonSet?
-
-You can also use a Helm chart or a DaemonSet to install the Datadog Agent on Kubernetes. However, using the Datadog Operator offers the following advantages:
-
-- The Operator has built-in defaults based on Datadog best practices.
-- Operator configuration is more flexible for future enhancements.
-- As a [Kubernetes Operator][1], the Datadog Operator is treated as a first-class resource by the Kubernetes API.
-- Unlike the Helm chart, the Operator is included in the Kubernetes reconciliation loop.
-
-Datadog fully supports using a DaemonSet to deploy the Agent, but manual DaemonSet configuration leaves significant room for error. Therefore, using a DaemonSet is not highly recommended.
+The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enables you to deploy and configure the Datadog Agent in a Kubernetes environment. This guide describes how to use the Operator to deploy the Datadog Agent.
 
 ## Prerequisites
 
-- Kubernetes v1.14.X+
+- Kubernetes v1.20.X+
 - [Helm][3] for deploying the Datadog Operator
 - The Kubernetes command-line tool, [kubectl][4], for installing the Datadog Agent
 
-## Deployment
+## Installation and deployment
 
 1. Install the Datadog Operator with Helm:
   ```bash
   helm repo add datadog https://helm.datadoghq.com
   helm install my-datadog-operator datadog/datadog-operator
   ```
-2. Create a Kubernetes secret with your API and app keys:
+2. Create a Kubernetes secret with your API and application keys:
   ```bash
   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
   ```
@@ -70,24 +36,26 @@ Datadog fully supports using a DaemonSet to deploy the Agent, but manual DaemonS
 
 3. Create a `datadog-agent.yaml` file with the spec of your `DatadogAgent` deployment configuration. The following sample configuration enables metrics, logs, and APM:
   ```yaml
-  apiVersion: datadoghq.com/v1alpha1
+  apiVersion: datadoghq.com/v2alpha1
   kind: DatadogAgent
   metadata:
     name: datadog
   spec:
-    credentials:
-      apiSecret:
-        secretName: datadog-secret
-        keyName: api-key
-      appSecret:
-        secretName: datadog-secret
-        keyName: app-key
-    agent:
+    global:
+      credentials:
+        apiSecret:
+          secretName: datadog-secret
+          keyName: api-key
+        appSecret:
+          secretName: datadog-secret
+          keyName: app-key
+    features:
       apm:
         enabled: true
-      log:
+      logCollection:
         enabled: true
   ```
+  For all configuration options, see the [Operator configuration spec][6].
 
 4. Deploy the Datadog Agent:
   ```bash
@@ -121,8 +89,13 @@ kubectl delete datadogagent datadog
 helm delete my-datadog-operator
 ```
 
-[1]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
-[2]: https://github.com/DataDog/extendeddaemonset
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /containers/datadog_operator
+[2]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [3]: https://helm.sh/
 [4]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [5]: https://app.datadoghq.com/account/settings#api
+[6]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md

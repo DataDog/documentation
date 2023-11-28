@@ -5,9 +5,10 @@
       "tags": [
         "myTag",
         "myTag2:myValue"
-      ]
+      ],
+      "enable_custom_metrics": false
     },
-    "id": "exampleaddresourcetoconfluentaccountreturnsokresponse",
+    "id": "exampleconfluentcloud",
     "type": "confluent-cloud-resources"
   }
 }

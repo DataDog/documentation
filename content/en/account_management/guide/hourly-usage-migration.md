@@ -33,8 +33,8 @@ The families and usage types:
     * `analyzed_logs`
 - **application_security**
     * `app_sec_host_count`
-- **audit_logs**
-    * `lines_indexed`
+- **audit_trail**
+    * `enabled`
 - **serverless**
     * `func_count`
     * `invocations_sum`
@@ -43,6 +43,20 @@ The families and usage types:
     * `ci_test_indexed_spans`
     * `ci_visibility_pipeline_committers`
     * `ci_visibility_test_committers`
+- **cloud_cost_management**
+    * `host_count`
+- **csm_container_enterprise**
+    * `cws_count`
+    * `compliance_count`
+    * `total_count`
+- **csm_host_enterprise**
+    * `total_host_count`
+    * `compliance_hosts`
+    * `cws_hosts`
+    * `aas_host_count`
+    * `azure_host_count`
+    * `aws_host_count`
+    * `gcp_host_count`
 - **cspm**
     * `aas_host_count`
     * `azure_host_count`
@@ -117,6 +131,7 @@ The families and usage types:
     * `billable_ingested_bytes`
     * `indexed_events_count`
     * `ingested_events_bytes`
+    * `logs_forwarding_events_bytes`
     * `logs_live_indexed_count`
     * `logs_live_ingested_bytes`
     * `logs_rehydrated_indexed_count`
@@ -144,6 +159,7 @@ The families and usage types:
     * `session_count_android`
     * `session_count_ios`
     * `session_count_reactnative`
+    * `session_count_flutter`
 - **sds**
     * `logs_scanned_bytes`
     * `total_scanned_bytes`
@@ -153,6 +169,8 @@ The families and usage types:
     * `check_calls_count`
 - **synthetics_browser**
     * `browser_check_calls_count`
+- **synthetics_mobile**
+    * `test_runs`
 - **timeseries**
     * `num_custom_input_timeseries`
     * `num_custom_output_timeseries`

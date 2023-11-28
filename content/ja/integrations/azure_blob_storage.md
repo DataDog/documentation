@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
 - azure
+- クラウド
+- data store
 dependencies: []
 description: Azure Blob Storage のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_blob_storage/

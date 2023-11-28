@@ -1,10 +1,10 @@
 ---
 aliases:
-  - /fr/integrations/azure_datafactory
+- /fr/integrations/azure_datafactory
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- cloud
+- data store
 dependencies: []
 description: Surveillez des métriques clés d'Azure Data Factory.
 doc_link: https://docs.datadoghq.com/integrations/azure_data_factory/
@@ -22,13 +22,14 @@ public_title: Intégration Datadog/Microsoft Azure Data Factory
 short_description: Surveillez des métriques Azure Data Factory.
 version: '1.0'
 ---
+
 ## Présentation
 
 Azure Data Factory est un service d'intégration des données cloud, pour composer des services de stockage, de déplacement et de traitement des données au sein de pipelines de données automatisés.
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques de Data Factory.
 
-## Configuration
+## Implémentation
 
 ### Installation
 

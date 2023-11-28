@@ -3,13 +3,13 @@ aliases:
 - /ja/tracing/trace_retention/
 description: 保持フィルターでトレース保持を制御する方法について説明します。
 further_reading:
-- link: /tracing/trace_ingestion/mechanisms
+- link: /tracing/trace_pipeline/ingestion_mechanisms
   tag: ドキュメント
   text: 取り込みのメカニズム
-- link: /tracing/trace_ingestion/ingestion_controls/
+- link: /tracing/trace_pipeline/ingestion_controls/
   tag: ドキュメント
   text: Ingestion Controls
-- link: /tracing/trace_retention/usage_metrics/
+- link: /tracing/trace_pipeline/metrics/
   tag: ドキュメント
   text: 使用量メトリクス
 kind: documentation
@@ -18,34 +18,35 @@ title: トレースの保持
 
 {{< img src="tracing/apm_lifecycle/retention_filters.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="保持フィルター" >}}
 
-APM を使用すると、トレースの[取り込み][1]とそのトレースの 15 日間の**保存**の両方を完全にカスタマイズできます。
+Datadog APM では、[トレースの取り込みと 15 日間の保持][1]を完全にカスタマイズすることができます。
 
 取り込まれたデータとインデックス化されたデータの量を追跡または監視するには、[使用量メトリクス][2]のドキュメントを参照してください。
 
 ## Retention Filters
 
-スパンが Datadog に取り込まれた後、アカウントに設定された保持フィルターに従って、一部は 15 日間保持されます。
+スパンが取り込まれた後、アカウントに設定された保持フィルターに従って、一部は 15 日間保持されます。
 
-デフォルトでは、アカウントに対して 2 つの保持フィルターが有効になっています。
+以下の保持フィルターはデフォルトで有効になっており、すべてのサービスやエンドポイント、エラーや高レイテンシーのトレースを確実に可視化することができます。
+- [インテリジェント保持フィルター](#datadog-intelligent-retention-filter)は、環境、サービス、オペレーション、リソースごとに異なるレイテンシー分布のスパンを保持します。
 - `Error Default` 保持フィルターは `status:error` を持つエラースパンをインデックス化します。保持率とクエリは構成することができます。例えば、本番環境のエラーを取得するには、クエリを `status:error, env:production` に設定します。デフォルトでエラーを捕捉したくない場合は、保持フィルターを無効にしてください。
-- [インテリジェント保持フィルター](#datadog-intelligent-retention-filter)は、多様なエラートレースや異なるレイテンシー分布のトレースを保持することができます。
+- Application Security Management を使用している場合、`Application Security` 保持フィルターが有効になります。このフィルタは、アプリケーションセキュリティの影響 (攻撃の試み) があると識別されたトレース内のすべてのスパンの保持を保証します。
 
-また、サービスに追加の[タグベースの保持フィルター](#create-your-own-retention-filter)をいくつでも作成できます。
+これらに加えて、サービスのための[カスタムタグベースの保持フィルター](#create-your-own-retention-filter)をいくつでも追加作成し、ビジネスにとって最も重要なデータをキャプチャすることが可能です。
 
-**注**: 保持フィルターを作成、変更、または無効にするには、管理者権限が必要です。
+**注**: 保持フィルターの作成、削除、変更、有効化、無効化には `apm_retention_filter_write` 権限が必要です。
 
-{{< img src="tracing/trace_indexing_and_ingestion/retention_filters/retention_filter_page.png" style="width:100%;" alt="保持フィルターページ" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/retention_filters/retention_filters.png" style="width:100%;" alt="保持フィルターページ" >}}
 
 Datadog では、[Retention Filters タブ][3]で、すべての保持フィルターのリストを見ることができます。
 
 Filter Name
-: スパンをインデックス化するために使用される各フィルターの名前。
+: スパンをインデックス化するために使用される各保持フィルターの名前。
 
 Filter Query
 : 各フィルターのタグベースのクエリ。
 
 Retention Rate
-: インデックス化される一致するスパンの数の割合 (0〜100%)。
+: インデックス化されるマッチングスパンの数の 0～100% のパーセンテージを指定します。保持されるスパンは、フィルタークエリに一致するスパンの中から一律に選ばれます。
 
 Spans Indexed
 : 選択した期間中にフィルターによってインデックス化されたスパンの数。
@@ -56,7 +57,7 @@ Last Updated
 Enabled toggle
 : フィルターのオンとオフを切り替えることができます。
 
-保持フィルターリストの順序は、インデックスの動作を変更します。スパンがリストの早い段階で保持フィルタに一致した場合、そのスパンは保持されるか削除されるかのどちらかです。リストの下位にある一致する保持フィルターは、すでに処理されたスパンを捕らえません。
+**注**: 保持フィルターリストの順序は、インデックスの動作を変更します。スパンがリストの早い段階で保持フィルタに一致した場合、そのスパンは保持されるか削除されるかのどちらかです。リストの下位にある一致する保持フィルターは、すでに処理されたスパンを捕らえません。
 
 各保持フィルターの `Spans Indexed` 列は、 `datadog.estimated_usage.apm.indexed_spans` メトリクスによって提供され、これを使用してインデックス化されたスパンの使用量を追跡することが可能です。詳細については、[使用量メトリクス][2]を読むか、アカウントで利用できる[ダッシュボード][4]を参照してください。
 
@@ -64,20 +65,17 @@ Enabled toggle
 
 ### Datadog インテリジェント保持フィルター
 
-インテリジェント保持フィルターは、サービスに対して常にアクティブであり、アプリケーションの健全性を監視するのに役立つトレースの割合を保持します。すべての[サービスエントリスパン][5]は、インテリジェント保持フィルターによって保持されるトレースに対してインデックス化されます。
+Datadog のインテリジェント保持フィルターは、サービスに対して常にアクティブであり、何十ものカスタム保持フィルターを作成する必要なく、代表的なトレースの選択を保持します。
 
-30 日間にわたり、Intelligent Retention は以下を保持します。
+**サービスエントリースパン**をスキャンして、以下を 30 日間保持します。
 
- - エラーの代表的な選択であり、エラーの多様性を保証します (たとえば、応答コード 400、500)。
- - `p75`、`p90`、`p95` パーセンタイルでレイテンシーが高い。
- - 任意のタイムウィンドウ選択の過去のトレースが関連付けられている任意のトラフィックを持つすべてのリソース。
- - 各タイムウィンドウの真の最大期間トレース。
+- 環境、サービス、オペレーション、リソースの各組み合わせについて、最大 15 分ごとに少なくとも 1 つのスパン (および関連するトレース)。これにより、トラフィックの少ないエンドポイントでも、[サービス][9]と[リソース][10]のページに常にトレース例を見つけることができるようになっています。
+- 環境、サービス、オペレーション、リソースの組み合わせごとに、`p75`、`p90`、`p95` のパーセンタイルスパン (および関連するトレース) の高レイテンシースパン。
+- エラーの代表的な選択。これにより、エラーの多様性を保証します (たとえば、応答ステータスコード 400、500)。
 
-**注**: インテリジェント保持はスパンをランダムではなく意図的に選択するため、インテリジェントフィルターによってのみ保持されるスパンは、[トレースエクスプローラー時系列ビュー][6]には**含まれません**。集計されたビュー (時系列、トップリスト、テーブル) は、[カスタム保持フィルター](#create-your-own-retention-filter)によって保持されたスパンのみ利用可能です。
+**注**: インテリジェント保持フィルターによってインデックス化されたスパンは、インデックス化されたスパンの**使用量にカウントされない**ため、**請求に影響を与えません**。
 
-インテリジェント保持フィルターによってインデックス化されたスパンは、インデックス化されたスパンの**使用量にカウントされない**ため、**請求に影響を与えません**。
-
-インテリジェント保持が保持するスパンよりも多く保持したい特定のタグや属性がある場合、[独自の保持フィルターを作成する](#create-your-own-retention-filter)ことで、保持できます。
+ダイバーシティサンプリングが保持するスパンよりも多くのスパンをインデックス化したい特定のタグや属性がある場合は、[独自の保持フィルターを作成](#create-your-own-retention-filter)してください。
 
 ### 独自の Retention Filter を作成
 
@@ -102,15 +100,35 @@ Enabled toggle
 - SaaS ソリューションのミッションクリティカルな機能を使用中の最重要顧客。
 - オンラインのデリバリーサービスアプリケーションの特定バージョン。
 
+## インデックス化されたスパンのトレース検索と分析
+
+### トレースエクスプローラーで
+
+デフォルトでは、カスタム保持フィルター**および**インテリジェント保持フィルターによってインデックス化されたスパンは、トレースエクスプローラーの[集計ビュー][6] (時系列、トップリスト、テーブル) に含まれます。
+
+しかし、ダイバーシティサンプリングされたデータセットは、**一様にサンプリングされていない** (つまり、全トラフィックを比例して代表していない) ため、エラーや高レイテンシーのトレースに偏っているので、クエリに `-retained_by:diversity_sampling` クエリパラメーターを追加すれば、これらのスパンをこれらの表示から除外することができます。
+
+`retained_by` 属性は、すべての保持されたスパンに存在します。その値は次の通りです。
+- スパンがダイバーシティサンプリング (つまり[インテリジェント保持フィルター](#datadog-intelligent-retention-filter)) によってキャプチャされた場合は `retained_by:diversity_sampling`。
+- スパンが、`Error Default` や `Application Security Default` などの[タグベースの保持フィルター](#create-your-own-retention-filter)によってキャプチャされていた場合は、`retained_by:retention_filter`。
+
+{{< img src="tracing/trace_indexing_and_ingestion/retention_filters/trace_analytics.png" style="width:100%;" alt="ファセットで保持" >}}
+
+### ダッシュボード、ノートブック、モニターで
+
+上記の理由により、インテリジェント保持フィルターによってインデックス化されたスパンは、ダッシュボードやノートブックに表示される APM クエリから**除外**され、トレース分析モニター評価から**除外**されます。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/trace_ingestion
-[2]: /ja/tracing/trace_retention/usage_metrics
+[1]: /ja/tracing/trace_pipeline/
+[2]: /ja/tracing/trace_pipeline/metrics
 [3]: https://app.datadoghq.com/apm/traces/retention-filters
 [4]: https://app.datadoghq.com/dash/integration/30337/app-analytics-usage
-[5]: /ja/tracing/visualization/#service-entry-span
+[5]: /ja/tracing/glossary/#service-entry-span
 [6]: /ja/tracing/trace_explorer/?tab=timeseriesview#indexed-spans-search-with-15-day-retention
 [7]: /ja/tracing/trace_explorer/?tab=listview#indexed-spans-search-with-15-day-retention
-[8]: /ja/tracing/visualization/#trace-root-span
+[8]: /ja/tracing/glossary/#trace-root-span
+[9]: /ja/tracing/services/service_page/
+[10]: /ja/tracing/services/resource_page/

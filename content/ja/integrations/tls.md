@@ -22,9 +22,8 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
+- developer tools
 - ネットワーク
-- web
-- オートディスカバリー
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/tls/README.md
 display_on_public_website: true
@@ -32,7 +31,7 @@ draft: false
 git_integration_title: tls
 integration_id: tls
 integration_title: TLS
-integration_version: 2.9.0
+integration_version: 2.12.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -42,17 +41,16 @@ public_title: TLS
 short_description: プロトコルバージョン、証明書の有効期限と有効性などについて TLS を監視します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Developer Tools
   - Category::Network
-  - Category::Web
-  - Category::Autodiscovery
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: プロトコルバージョン、証明書の有効期限と有効性などについて TLS を監視します。
   media: []
@@ -138,6 +136,6 @@ TLS には、イベントは含まれません。
 
 
 [1]: https://en.wikipedia.org/wiki/Transport_Layer_Security
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

@@ -13,6 +13,8 @@ assets:
       check: cockroachdb.sys.uptime
       metadata_path: metadata.csv
       prefix: cockroachdb.
+    process_signatures:
+    - cockroach
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: CockroachDB
@@ -24,9 +26,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- cloud
+- キャッシュ
+- クラウド
 - data store
-- オートディスカバリー
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cockroachdb/README.md
@@ -35,7 +37,7 @@ draft: false
 git_integration_title: cockroachdb
 integration_id: cockroachdb
 integration_title: CockroachDB
-integration_version: 2.4.0
+integration_version: 2.7.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -45,18 +47,18 @@ public_title: CockroachDB
 short_description: CockroachDB クラスターの全体的な健全性とパフォーマンスを監視
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Caching
   - Category::Cloud
   - Category::Data Store
-  - Category::Autodiscovery
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: CockroachDB クラスターの全体的な健全性とパフォーマンスを監視
   media: []
@@ -89,7 +91,7 @@ CockroachDB チェックは [Datadog Agent][2] パッケージに含まれてい
 
 ##### メトリクスの収集
 
-1. CockroachDB のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `cockroachdb.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル cockroachdb.d/conf.yaml][2] を参照してください。
+1. CockroachDB のパフォーマンスデータの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `cockroachdb.d/conf.yaml` ファイルを編集します。マルチノードクラスターの場合、各ノードに対して個別のチェックインスタンスを構成します。使用可能なすべてのコンフィギュレーションオプションについては、[サンプル cockroachdb.d/conf.yaml][2] を参照してください。
 
    ```yaml
    init_config:
@@ -149,7 +151,7 @@ _Agent バージョン 6.0 以降で利用可能_
 | -------------------- | -------------------------------------------------------- |
 | `<インテグレーション名>` | `cockroachdb`                                            |
 | `<初期コンフィギュレーション>`      | 空白または `{}`                                            |
-| `<インスタンスコンフィギュレーション>`  | `{"prometheus_url":"http://%%host%%:8080/_status/vars"}` |
+| `<インスタンスコンフィギュレーション>`  | `{"openmetrics_endpoint":"http://%%host%%:8080/_status/vars"}` |
 
 ##### ログの収集
 

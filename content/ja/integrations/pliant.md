@@ -1,41 +1,69 @@
 ---
+app_id: pliant
+app_uuid: 28fb0874-e3be-4171-819d-142f1c9dd3cc
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  saved_views: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: []
+      metadata_path: metadata.csv
+      prefix: pliant.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Pliant
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Pliant
+  sales_email: hello@pliant.io
+  support_email: hello@pliant.io
 categories:
-  - orchestration
-  - notification
-  - コンプライアンス
-  - 自動化
-creates_events: false
-ddtype: crawler
+- 自動化
+- コンプライアンス
+- notification
+- orchestration
+- プロビジョニング
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md
-display_name: Pliant
+- https://github.com/DataDog/integrations-extras/blob/master/pliant/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: pliant
-guid: 3beeb950-4020-4e0e-914e-35281dad9719
 integration_id: pliant
 integration_title: Pliant
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: hello@pliant.io
-manifest_version: 1.0.0
-metric_prefix: pliant.
-metric_to_check: ''
+manifest_version: 2.0.0
 name: pliant
-public_title: Datadog-Pliant インテグレーション
+oauth: {}
+public_title: Pliant
 short_description: Pliant.io で IT プロセスを自動化
-support: contrib
 supported_os:
-  - linux
-  - mac_os
-  - windows
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Automation
+  - カテゴリ::コンプライアンス
+  - Category::Notification
+  - Category::Orchestration
+  - Category::Provisioning
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Pliant.io で IT プロセスを自動化
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Pliant
 ---
+
+
+
 ## 概要
 
 Pliant.io により、Datadog の通知をローコードの自動ワークフローで強化し、真のクローズドループ自動化ソリューションを実現できます。トラブルシューティングや診断、自動修復などに便利です。
@@ -63,7 +91,7 @@ Datadog の通知からトリガーするワークフローを作成します。
 
 ![API キー メニューステップ 1][2]
 
-2. API キー画面で、右上の "+ Create" をクリックして新しい API キーに名前を付けます。"Save" をクリックして、API キーが票に追加されたことを確認します。
+2. API キー画面で、右上の "+ Create" をクリックして新しい API キーに名前を付けます。"Save" をクリックして、テーブルに追加される API キーについて注意書きを作成します。
 
 ![API キーの作成ステップ 2][3]
 
@@ -77,16 +105,18 @@ Datadog の通知からトリガーするワークフローを作成します。
 
 この "RestartHost" というタイトルのサンプルワークフローは、Datadog がこのワークフローにトリガーしたデータからホストを再起動します。
 
-このワークフローはトリガーしたリクエスト本文をもとに初期に割り当てられた入力変数を実行します。また、入力された情報を使用して、このワークフローで希望するインフラストラクチャーの自動化アクションをトリガー/実施することもできます。この例では、Datadog が特定のパラメーターで自動化ワークフローをトリガーした状況下において、SSH 経由でホストを再起動します。
+このワークフローはトリガーしたリクエスト本文をもとに初期に割り当てられた入力変数を実行します。また、入力された情報を使用して、このワークフローで希望するインフラストラクチャーの自動化アクションをトリガー/実施することもできます。この例では、Datadog が特定のパラメーターで自動化ワークフローをトリガーした状況下において、SSH でホストを再起動します。
 
   - Datadog から送信されたデータで生成される入力変数を追加するには、ワークフローの "Start" にある "Expand" アイコンをクリックして変数パネルを開きます。一致する **Input** 変数を作成するには、すべての入力変数を同等の空要素 `""` に設定します。Datadog では、デフォルトで以下のデータを送信します。
-`body`
-`last_updated`
-`event_type`
-`title`
-`date`
-`org`
-`id`
+    ```
+    body
+    last_updated
+    event_type
+    title
+    date
+    org
+    id
+    ```
 
 また、初期化されたその他の出力変数 (`host`、`meta`、`ip`) も存在します。ワークフローはこれらの出力変数を割り当て、完了時に結果値を出力します。入力でも出力でもない変数を特定し、ワークフローのロジック内部で使用することもできます。
 
@@ -117,9 +147,11 @@ Datadog の通知からトリガーするワークフローを作成します。
 3. "webhooks" までスクロールします。**New** をクリックして、Pliant ワークフローにリンクする新しい Webhook を追加します。まず、"name" フィールドで Webhook に名前を付けます。この例では *RestartHost* という名前を使用します。
 ![webhook コンフィグ2][11]
 
-次に、ステップ 4 でコピーした URL を貼り付けます。例: 
+ステップ 4 でコピーした URL を貼り付けます。例: 
 
-***https://<YOUR_PLIANT_INSTANCE>/api/v1/trigger/<YOUR_PLIANT_USERNAME>/User/<PATH_TO_WORKFLOW>/<WORKFLOW_NOW>?sync=true&api_key=<YOUR_API_KEY>***
+```
+https://<YOUR_PLIANT_INSTANCE>/api/v1/trigger/<YOUR_PLIANT_USERNAME>/User/<PATH_TO_WORKFLOW>/<WORKFLOW_NOW>?sync=true&api_key=<YOUR_API_KEY>
+```
 
 これを、Webhook フォームの ***URL*** フィールドに貼り付けます。
 

@@ -2,8 +2,9 @@
 aliases:
 - /ja/integrations/azure_datafactory
 categories:
-- cloud
 - azure
+- クラウド
+- data store
 dependencies: []
 description: Azure Data Factory のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_data_factory/

@@ -26,114 +26,27 @@ further_reading:
       text: 'Advanced Usage'
 ---
 ## Compatibility requirements
-The latest Python Tracer supports CPython versions 2.7 and 3.5-3.10.
+The latest Python Tracer supports CPython versions 2.7 and 3.5-3.11.
 
-For a full list of Datadog’s Python version and framework support (including legacy and maintenance versions), read the [Compatibility Requirements][1] page.
+For a full list of Datadog's Python version and framework support (including legacy and maintenance versions), read the [Compatibility Requirements][1] page.
 
-## Installation and getting started
+## Getting started
 
-### Follow the in-app documentation (recommended)
+Before you begin, make sure you've already [installed and configured the Agent][13].
 
-Follow the [Quickstart instructions][2] within the Datadog app for the best experience, including:
+### Choose your instrumentation method
 
-- Step-by-step instructions scoped to your deployment configuration (hosts, Docker, Kubernetes, or Amazon ECS).
-- Dynamically set `service`, `env`, and `version` tags.
-- Enable the Continuous Profiler, ingesting 100% of traces, and Trace ID injection into logs during setup.
+After you deploy or install and configure your Datadog Agent, the next step is to instrument your application. You can do this in the following ways, depending on the infrastructure your app runs on, the language it's written in, and the level of configuration you require.
 
-### Configure the Datadog Agent for APM
+See the following pages for supported deployment scenarios and languages:
 
-Install and configure the Datadog Agent to receive traces from your now instrumented application. By default the Datadog Agent is enabled in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data by default at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+- [Inject the instrumentation library locally][11] (at the Agent);
+- [Inject the instrumentation library from the Datadog UI][12] (beta); or
+- Add the tracing library directly in the application, as described in the [Install the tracer](#install-the-tracer) section. Read more about [compatibility information][1].
 
-{{< tabs >}}
-{{% tab "Containers" %}}
+### Instrument your application
 
-1. Set `apm_non_local_traffic: true` in the `apm_config` section of your main [`datadog.yaml` configuration file][1].
-
-2. See the specific setup instructions to ensure that the Agent is configured to receive traces in a containerized environment:
-
-{{< partial name="apm/apm-containers.html" >}}
-</br>
-
-3. After the application is instrumented, the trace client attempts to send traces to the Unix domain socket `/var/run/datadog/apm.socket` by default. If the socket does not exist, traces are sent to `http://localhost:8126`.
-
-   If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable. Some examples:
-
-   ```
-   DD_TRACE_AGENT_URL=http://custom-hostname:1234
-   DD_TRACE_AGENT_URL=unix:///var/run/datadog/apm.socket
-   ```
-
-   The connection for traces can also be configured in code:
-
-   ```python
-   from ddtrace import tracer
-
-   # Network sockets
-   tracer.configure(
-       https=False,
-       hostname="custom-hostname",
-       port="1234",
-   )
-
-   # Unix domain socket configuration
-   tracer.configure(
-       uds_path="/var/run/datadog/apm.socket",
-   )
-   ```
-
-   Similarly, the trace client attempts to send stats to the `/var/run/datadog/dsd.socket` Unix domain socket. If the socket does not exist then stats are sent to `http://localhost:8125`.
-
-   If a different configuration is required, the `DD_DOGSTATSD_URL` environment variable can be used. Some examples:
-   ```
-   DD_DOGSTATSD_URL=udp://custom-hostname:1234
-   DD_DOGSTATSD_URL=unix:///var/run/datadog/dsd.socket
-   ```
-   The connection for stats can also be configured in code:
-
-   ```python
-   from ddtrace import tracer
-
-   # Network socket
-   tracer.configure(
-     dogstatsd_url="udp://localhost:8125",
-   )
-
-   # Unix domain socket configuration
-   tracer.configure(
-     dogstatsd_url="unix:///var/run/datadog/dsd.socket",
-   )
-   ```
-{{< site-region region="us3,us5,eu,gov" >}}
-
-4. Set `DD_SITE` in the Datadog Agent to {{< region-param key="dd_site" code="true" >}} to ensure the Agent sends data to the right Datadog location.
-
-{{< /site-region >}}
-
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-{{% /tab %}}
-{{% tab "AWS Lambda" %}}
-
-To set up Datadog APM in AWS Lambda, see the [Tracing Serverless Functions][1] documentation.
-
-
-[1]: /tracing/serverless_functions/
-{{% /tab %}}
-{{% tab "Other Environments" %}}
-
-Tracing is available for a number of other environments, such as  [Heroku][1], [Cloud Foundry][2], [AWS Elastic Beanstalk][3], and [Azure App Service][4].
-
-For other environments, please refer to the [Integrations][5] documentation for that environment and [contact support][6] if you are encountering any setup issues.
-
-[1]: /agent/basic_agent_usage/heroku/#installation
-[2]: /integrations/cloud_foundry/#trace-collection
-[3]: /integrations/amazon_elasticbeanstalk/
-[4]: /infrastructure/serverless/azure_app_services/#overview
-[5]: /integrations/
-[6]: /help/
-{{% /tab %}}
-{{< /tabs >}}
-
-### Instrument Your Application
+<div class="alert alert-info">If you are collecting traces from a Kubernetes application, as an alternative to the following instructions, you can inject the tracing library into your application using the Cluster Agent Admission Controller. Read <a href="/tracing/trace_collection/library_injection_local">Injecting Libraries Using Admission Controller</a> for instructions.</div>
 
 Once the agent is installed, to begin tracing applications written in Python, install the Datadog Tracing library, `ddtrace`, using pip:
 
@@ -141,7 +54,7 @@ Once the agent is installed, to begin tracing applications written in Python, in
 pip install ddtrace
 ```
 
-**Note:** This command requires pip version `18.0.0` or greater.  For Ubuntu, Debian, or another package manager, update your pip version with the following command:
+**Note:** This command requires pip version `18.0.0` or greater. For Ubuntu, Debian, or another package manager, update your pip version with the following command:
 
 ```python
 pip install --upgrade pip
@@ -161,16 +74,53 @@ Once you've finished setup and are running the tracer with your application, you
 
 If needed, configure the tracing library to send application performance telemetry data as you require, including setting up Unified Service Tagging. Read [Library Configuration][3] for details.
 
+The connection for traces can also be configured in code:
+
+```python
+from ddtrace import tracer
+
+# Network sockets
+tracer.configure(
+    https=False,
+    hostname="custom-hostname",
+    port="1234",
+)
+
+# Unix domain socket configuration
+tracer.configure(
+    uds_path="/var/run/datadog/apm.socket",
+)
+```
+
+The connection for stats can also be configured in code:
+
+```python
+from ddtrace import tracer
+
+# Network socket
+tracer.configure(
+  dogstatsd_url="udp://localhost:8125",
+)
+
+# Unix domain socket configuration
+tracer.configure(
+  dogstatsd_url="unix:///var/run/datadog/dsd.socket",
+)
+```
+
 ### Upgrading to v1
 
 If you are upgrading to ddtrace v1, review the [upgrade guide][4] and the [release notes][5] in the library documentation for full details.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/compatibility_requirements/python
-[2]: https://app.datadoghq.com/apm/docs
+[2]: https://app.datadoghq.com/apm/service-setup
 [3]: /tracing/trace_collection/library_config/python/
 [4]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
 [5]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
+[11]: /tracing/trace_collection/library_injection_local/
+[12]: /tracing/trace_collection/library_injection_remote/
+[13]: /tracing/trace_collection#install-and-configure-the-agent

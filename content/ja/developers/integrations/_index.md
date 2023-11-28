@@ -1,34 +1,131 @@
 ---
-title: Agent ベースのインテグレーション入門
-kind: documentation
 aliases:
-  - /ja/guides/agent_checks/
-  - /ja/agent/agent_checks
-  - /ja/developers/agent_checks/
+- /ja/guides/agent_checks/
+- /ja/agent/agent_checks
+- /ja/developers/agent_checks/
+dependencies:
+- https://github.com/DataDog/integrations-core/blob/master/docs/dev/README.md
+description: Integrations ページで製品開発を行い、公開する方法について説明します。
+further_reading:
+- link: /developers/integrations/agent_integration/
+  tag: Documentation
+  text: Agent インテグレーションの作成
+- link: /developers/integrations/api_integration/
+  tag: Documentation
+  text: API インテグレーションの作成
+- link: /developers/integrations/marketplace_offering/
+  tag: Documentation
+  text: Datadog Marketplace でインテグレーションを販売する方法について
+- link: /developers/
+  tag: Documentation
+  text: Datadog プラットフォームで開発する方法について
+kind: documentation
+title: インテグレーションの構築
 ---
-## インテグレーション作成のメリット
+## 概要
 
-不定期にレポートを作成したい場合、またデータソースが特殊または非常に限られているなどの場合は[カスタムチェック][1]が有用です。アプリケーションのフレームワーク、オープンソースプロジェクト、一般的に使用されるソフトウェアなど、これよりも汎用的なユースケースに関してはインテグレーションを作成することをお勧めします。
+このページでは、テクノロジーパートナーが [Datadog Agent][11] や [Datadog API][12] を使用して[インテグレーションを構築](#create-a-datadog-integration)し、**Integrations** または **Marketplace** ページにその製品を出品する方法について説明します。
 
-許容されたインテグレーションから報告されるメトリクスは、カスタムメトリクスとしてはカウントされません、そのため、これがカスタムメトリクスの割り当てに影響することはありません。(ほぼ無制限にメトリクスを生成するインテグレーションは「カスタム」とみなされる場合があります。) Datadog によるネイティブサポートを実施することで、適応時の問題を緩和し、自社製品、サービス、プロジェクトのユーザー利用を促進することができます。また、Datadog エコシステムの一員として取り上げられることで認知度の飛躍的な向上も期待できます。
+{{< tabs >}}
+{{% tab "インテグレーション" %}}
 
-### プロセスの概要
+[Integrations ページ][101]には、Datadog とテクノロジーパートナーによって構築されたインテグレーションがあり、Datadog のお客様は_無料_で利用できます。
 
-初期目標は、小規模なコードを生成して信頼できる方法で希望するメトリクスを収集し、基本的なインテグレーションフレームワークを構築することです。カスタムチェックとして基本機能のコードを記述し、[インテグレーションドキュメントの作成][2]からフレームワークの詳細を入力してください。
+{{< img src="developers/integrations/integrations_overview.png" alt="Datadog Integrations ページ" style="width:100%;" >}}
 
-次に、[integrations-extras リポジトリ][3]にプルリクエストを送信します。これにより、コードレビューの準備が整ったことが Datadog に通知されます。テストや Datadog 内部の仕組み、その他の点について不明点がある場合は、インテグレーションチームがサポートしますのでご安心ください。プルリクエストを通じて効率的に懸念点を振り返ることができます。[Community Office Hours][4]も有効活用してください。
+[101]: https://app.datadoghq.com/integrations
 
-インテグレーションの検証 (機能性、フレームワークのコンプライアンス、一般的なコードの品質など) が無事終了したら、内容が Extras にマージされます。これで Datadog エコシステムへの登録は完了です。お疲れさまでした！
+{{% /tab %}}
+{{% tab "Marketplace" %}}
 
-### 事後メンテナンス
+[Marketplace ページ][101]は、テクノロジーパートナーが、インテグレーション、ソフトウェアライセンス、プロフェッショナルサービスなど、さまざまな製品を Datadog のお客様に_販売_するための商業プラットフォームです。
 
-この後はコードの作成者として、インテグレーションのメンテナンスを率先して行ってください。責任を持って、コードの品質およびインテグレーションの機能性を維持していただくことを推奨します。時間的な制約は設けられていませんが、メンテナンス担当者として、将来的に最低限のコードの品質維持に関わっていただくようお願いしています。Datadog は Extras に関してもベストエフォートベースでのサポートを提供していますので、ご不明点がありましたらお気軽にお問い合わせください。
+{{< img src="developers/marketplace/marketplace_updated_overview.png" alt="Datadog Marketplace ページ" style="width:100%" >}}
 
-## さあ、はじめましょう！
+[101]: https://app.datadoghq.com/marketplace
 
-前提条件やサンプルコードなどの詳細については[新しいインテグレーションの設定][2]ドキュメントを参照してください。
+{{% /tab %}}
+{{< /tabs >}}
 
-[1]: https://docs.datadoghq.com/ja/developers/write_agent_check/
-[2]: /ja/developers/integrations/new_check_howto
-[3]: https://github.com/DataDog/integrations-extras
-[4]: https://docs.datadoghq.com/ja/developers/office_hours/
+## Datadog パートナーネットワークに参加する
+
+Datadog にインテグレーションを出品する前に、まず [Datadog パートナーネットワーク][5]の**テクノロジーパートナー**トラックに申請してください。申請が承認されると、インテグレーション開発を開始することができます。
+
+## Datadog インテグレーションの作成
+
+### Agent ベースのインテグレーション
+
+Agent ベースのインテグレーションは、[Datadog Agent][11] を使用して、テクノロジーパートナーが記述したチェックを通してデータを送信します。これらのインテグレーションの実装コードは、Datadog がホストしています。
+
+Agent インテグレーションは、ローカルエリアネットワーク (LAN) や仮想プライベートクラウド (VPC) に存在するシステムまたはアプリケーションからデータを収集するのに最適な方法です。[Agent インテグレーションの作成][2]では、ソリューションを Python ホイール (`.whl`) として公開およびデプロイする必要があります。
+
+### API ベースのインテグレーション
+
+API ベースのインテグレーションでは、[Datadog API][12] を使用して外部プラットフォームからメトリクス、トレース、ログなどのテレメトリを送信することができます。お客様は、このデータをスタックの残りの部分からのデータと一緒に可視化および相関させることができ、問題を迅速に分析および修正することができます。また、API ベースのインテグレーションでは、お客様が [OAuth を使用してアクセスを認可][13]すると、Datadog からデータを読み出すことができます。
+
+テクノロジーパートナーは、インテグレーションを構成する実装コードを書き、ホストします。[API インテグレーションの作成][1]は、Datadog と他の SaaS プラットフォーム間のコネクタを構築するテクノロジーパートナーに有効です。
+
+### 利益
+
+インテグレーションを作成することで、以下のような利益を得ることができます。
+
+ユーザー観測可能性データとの相関付けを行う
+: Datadog を活用することで、お客様がプラットフォームからのデータを他のテクノロジースタックと一緒に確認できるようになり、プラットフォームの価値を高めることができます。
+
+お客様の平均解決時間 (MTTR) を短縮する
+: お客様のアカウントがインテグレーションからのデータでリッチ化されると、お客様はスタック全体をより広く見ることができるようになり、問題のデバッグと修正をより迅速に行うことができるようになります。
+
+採用率・視認性を向上させる
+: Datadog のネイティブ機能を確保することで、採用への摩擦を減らし、[Integrations ページ][10]や [Marketplace ページ][17]にタイルを表示することで、Datadog のすべてのお客様に対して重要な視認性を提供します。
+
+### 責任
+
+インテグレーションの作成者は、コードを維持し、すべての [Datadog サイト][15]でインテグレーションが適切に機能するようにする責任を負います。セットアップの問題が発生した場合は、[サポートに連絡][16]してください。
+
+## 始める
+
+### サンドボックスアカウントのリクエスト
+
+すべてのテクノロジーパートナーは、インテグレーション開発に役立つ Datadog の専用サンドボックスアカウントをリクエストすることができます。このサンドボックスアカウントには、データの送信、ダッシュボードの構築などに使用できる無料ライセンスがあります。
+
+<div class="alert alert-info">すでに Datadog 組織 (トライアル組織を含む) のメンバーである場合、新しく作成したサンドボックスに切り替える必要がある場合があります。詳細については、<a href="https://docs.datadoghq.com/account_management/org_switching/">アカウント管理のドキュメント</a>を参照してください。</div>
+
+サンドボックスアカウントをリクエストするには
+
+1. [Datadog パートナーポータル][5]にログインします。
+2. 個人のホームページで、**Sandbox Access** の下にある **Learn More** ボタンをクリックします。
+3. **Request Sandbox Upgrade** を選択します。
+
+開発者用サンドボックスの作成には、最大で 1〜2 営業日かかる場合があります。サンドボックスが作成されると、[組織から新しいメンバーを招待する][6]ことができ、共同作業を行うことができます。
+
+### 学習リソースを探す
+
+**テクノロジーパートナー**トラックに参加し、サンドボックスアカウントをリクエストすると、次の方法で製品の開発について詳しく知ることができます。
+
+* [Datadog ラーニングセンター][8]のオンデマンドコース [**Introduction to Datadog Integrations**][7] を修了する。
+* [API ベースのインテグレーション][1]の作成と [API ベースのインテグレーションのための OAuth 2.0 クライアント][9]のセットアップに関するドキュメントを読む。
+* [Agent ベースのインテグレーション][2]の作成に関するドキュメントを読む。
+
+Datadog インテグレーションやその他のタイプの製品の販売については、[マーケットプレイス製品の構築][4]を参照してください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://docs.datadoghq.com/ja/developers/integrations/api_integration/
+[2]: https://docs.datadoghq.com/ja/developers/integrations/agent_integration/
+[3]: https://docs.datadoghq.com/ja/integrations/
+[4]: https://docs.datadoghq.com/ja/developers/integrations/marketplace_offering/
+[5]: https://partners.datadoghq.com/
+[6]: https://docs.datadoghq.com/ja/account_management/users/#add-new-members-and-manage-invites
+[7]: https://learn.datadoghq.com/courses/intro-to-integrations
+[8]: https://learn.datadoghq.com/
+[9]: https://docs.datadoghq.com/ja/developers/authorization/
+[10]: https://app.datadoghq.com/integrations
+[11]: https://docs.datadoghq.com/ja/agent/
+[12]: https://docs.datadoghq.com/ja/api/latest/
+[13]: https://docs.datadoghq.com/ja/developers/authorization/
+[14]: https://docs.datadoghq.com/ja/metrics/custom_metrics/
+[15]: https://docs.datadoghq.com/ja/getting_started/site/
+[16]: https://docs.datadoghq.com/ja/help/
+[17]: https://app.datadoghq.com/marketplace

@@ -51,8 +51,8 @@ Amazon SWF から S3 バケットまたは CloudWatch のいずれかにログ�
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
-2. lambda 関数がインストールされたら、AWS コンソールから、Amazon SWF ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
+2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon SWF ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
@@ -80,7 +80,7 @@ AWS SWF インテグレーションには、サービスのチェック機能は
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-swf
-[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_swf/amazon_swf_metadata.csv

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-terraform
 app_uuid: d7240832-9c24-4fc0-9a02-916bc57882c1
 assets:
@@ -20,10 +22,12 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
+- 構成 & デプロイ
+- developer tools
 - マーケットプレイス
 dependencies: []
 display_on_public_website: true
@@ -45,20 +49,22 @@ pricing:
   product_id: terraform
   short_description: このインテグレーションの定額料金
   unit_price: 100
-public_title: Terraform インテグレーション
+public_title: Terraform
 short_description: terraform アカウントと失敗した実行を監視する
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
+  - Category::Configuration & Deployment
+  - Category::Developer Tools
   - Category::Marketplace
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: terraform アカウントと失敗した実行を監視する
   media:
@@ -67,7 +73,8 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Terraform インテグレーション
+  title: Terraform
+  uninstallation: README.md#Uninstallation
 ---
 
 

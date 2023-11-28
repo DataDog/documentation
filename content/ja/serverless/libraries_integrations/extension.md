@@ -1,7 +1,6 @@
 ---
 aliases:
 - /ja/serverless/datadog_lambda_library/extension
-- /ja/serverless/libraries_integrations/extension
 dependencies:
 - https://github.com/DataDog/datadog-lambda-extension/blob/main/README.md
 kind: documentation

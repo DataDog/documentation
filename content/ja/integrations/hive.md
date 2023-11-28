@@ -26,7 +26,6 @@ author:
 categories:
 - web
 - ログの収集
-- オートディスカバリー
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hive/README.md
 display_on_public_website: true
@@ -54,7 +53,6 @@ tile:
   - Supported OS::Windows
   - Category::Web
   - Category::Log Collection
-  - Category::Autodiscovery
   configuration: README.md#Setup
   description: HiveServer2 と Hive MetaStore から、さまざまな JMX メトリクスを収集
   media: []

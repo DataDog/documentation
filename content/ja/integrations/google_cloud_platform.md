@@ -4,7 +4,9 @@ aliases:
 categories:
 - cloud
 - google cloud
+- iot
 - log collection
+- network
 dependencies: []
 description: 豊富な GCP メトリクスを収集してホストマップ内のインスタンスを視覚化。
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_platform/
@@ -28,7 +30,7 @@ version: '1.0'
 Google Cloud Platform に接続して、すべての Google Compute Engine (GCE) ホストを Datadog に表示できます。GCE ホストタグと追加した GCE ラベルがホストに自動的にタグ付けされるため、Datadog のインフラストラクチャー概要にホストを表示し、分類することができます。
 
 <div class="alert alert-warning">
-Datadog の GCP インテグレーションは、<a href="https://cloud.google.com/monitoring/api/metrics_gcp">Google Cloud Logging からすべてのメトリクス</a>を収集するように構築されています。Datadog では継続的にドキュメントを更新してすべてのサブインテグレーションを表示できるように努めていますが、新しいメトリクスやサービスがクラウドサービスから次々にリリースされるため、インテグレーション一覧が追い付かないことがあります。
+Datadog の GCP インテグレーションは、<a href="https://cloud.google.com/monitoring/api/metrics_gcp">すべての Google Cloud メトリクス</a>を収集するように構築されています。Datadog では継続的にドキュメントを更新してすべてのサブインテグレーションを表示できるように努めていますが、新しいメトリクスやサービスがクラウドサービスから次々にリリースされるため、インテグレーション一覧が追い付かないことがあります。
 </div>
 
 | インテグレーション                       | 説明                                                             |
@@ -69,32 +71,89 @@ Datadog の GCP インテグレーションは、<a href="https://cloud.google.c
 
 #### インストール
 
-Datadog <> Google Cloud インテグレーションは、サービスアカウントを使用して Google Cloud と Datadog の間の API 接続を作成します。以下では、サービスアカウントを作成し、Datadog にサービスアカウント認証情報を提供して、自動的に API 呼び出しを開始するための手順を説明します。
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+    サービスアカウントのなりすましは、{{< region-param key="dd_site_name" >}} サイトでは使用できません。
+</div>
+{{% /site-region %}}
 
-**注**: 監視するプロジェクトで、[Google Cloud の課金][30]、[Cloud Monitoring API][31]、[Compute Engine API][32]、[Cloud Asset API][33] がすべて有効になっている必要があります。
+[サービスアカウントのなりすまし][30]やプロジェクトの自動検出を利用して、Datadog と [Google Cloud][31] をインテグレーションすることが可能です。
 
-1. Datadog インテグレーションをセットアップする Google Cloud プロジェクトの [Google Cloud 認証情報ページ][34]に移動します。
-2. _Create credentials_ (画面上付近) をクリックし、_Service account_ を選択します。
+この方法では、関連するプロジェクトに IAM ロールを割り当てることで、サービスアカウントに見えるすべてのプロジェクトを監視することができます。これらのロールをプロジェクトに個別に割り当てることもできますし、組織やフォルダレベルでこれらのロールを割り当てることで、プロジェクトのグループを監視するように Datadog を構成することもできます。このようにロールを割り当てることで、Datadog は、将来的にグループに追加される可能性のある新しいプロジェクトを含め、与えられたスコープ内のすべてのプロジェクトを自動的に発見し監視することができます。
 
-    {{< img src="integrations/google_cloud_platform/SelectServiceAccount2.png" alt="設定" popup="true" style="width:80%;">}}
+##### 前提条件
 
-3. サービスアカウントに一意の名前を付け、_Create_ をクリックします。
-4. 役割に Compute 閲覧者、モニタリング閲覧者、Cloud Asset 閲覧者を追加し、_Done_ をクリックします。
+* 組織でドメインによるアイデンティティを制限している場合、Datadog の顧客アイデンティティをポリシーで許可値として追加する必要があります。Datadog の顧客アイデンティティ: `C0147pk0i`
 
-   **注**: Compute Engine と Cloud Asset の役割を選択するには、サービスアカウントキー管理者である必要があります。選択されたすべての役割により、Datadog はユーザーに代わってメトリクス、タグ、イベント、ユーザーラベルを収集できます。
+* サービスアカウントのなりすましとプロジェクトの自動検出は、プロジェクトを監視するために特定のロールと API が有効になっていることに依存しています。開始する前に、監視するプロジェクトで以下の API が有効になっていることを確認してください。
+  * [Cloud Resource Manager API][32]
+  * [Google Cloud Billing API][33]
+  * [Cloud Monitoring API][34]
+  * [Compute Engine API][35]
+  * [Cloud Asset API][36]
+  * [IAM API][37]
 
-5. ページ下部に表示されるサービスアカウントの中から、先ほど作成したものを選択します。_Add Key_ -> _Create new key_ の順にクリックし、種類として _JSON_ を選択します。その後 _Create_　および _Save_ をクリックします。インストールの完了に必要となるため、このファイルの保存場所をメモしておいてください。
-6. [Datadog Google Cloud インテグレーションタイル][35]に移動します。
-7. **Configuration** タブで、_Upload Key File_ を選択して、このプロジェクトを Datadog と統合します。
-8. オプションで、タグを使用して、このインテグレーションから特定のホストを除外することもできます。この手順の詳細については、[下記](#configuration)を参照してください。
+##### 1. Google Cloud サービスのアカウントを作成する
 
-    {{< img src="integrations/google_cloud_platform/ServiceAccountAdded.png" alt="設定" popup="true" style="width:80%;">}}
+1. [Google Cloud コンソール][38]を開きます。
+2. **IAM & Admin** > **Service Accounts** に移動します。
+3. 上部の **Create service account** をクリックします。
+4. サービスアカウントに一意の名前を付け、それから **Create and continue** をクリックします。
+5. サービスアカウントに以下のロールを追加します。
+   * Monitoring Viewer
+   * Compute Viewer
+   * Cloud Asset Viewer
+   * Browser
+6. **Continue**、**Done** の順にクリックすると、サービスアカウントの作成が完了します。
 
-9. _Install/Update_ を押します。
-10. 複数のプロジェクトを監視する場合は、次の方法のいずれかを使用します。
+{{< img src="integrations/google_cloud_platform/create-service-account.png" alt="Google Cloud コンソールのインターフェイスで、'Create service account' フローを表示しています。'Grant this service account access to project' の下に、説明にある 4 つのロールが追加されています。" style="width:70%;">}}
 
-    - 複数のサービスアカウントを使用する場合は、上のプロセスを繰り返します。
-    - 同じサービスアカウントを使用する場合は、手順 6 でダウンロードした JSON ファイルで `project_id` を更新します。次に、手順 7 ～ 10 の説明に従って、このファイルを Datadog にアップロードします。
+##### 2. サービスアカウントに Datadog プリンシパルを追加する
+
+1. Datadog で、[**Integrations** > **Google Cloud Platform**][39] に移動します。
+2. **Add GCP Account** をクリックします。構成されたプロジェクトがない場合、自動的にこのページにリダイレクトされます。
+3. Datadog プリンシパルを生成していない場合は、**Generate Principal** ボタンをクリックします。
+4. Datadog プリンシパルをコピーして、次のセクションのために保管しておきます。
+   {{< img src="integrations/google_cloud_platform/principal-2.png" alt="Datadog のインターフェイスで、'Add New GCP Account' フローを表示しています。最初のステップである 'Add Datadog Principal to Google' では、ユーザーが Datadog プリンシパルを生成してクリップボードにコピーするためのテキストボックスが表示されます。2 番目のステップである 'Add Service Account Email’ では、ユーザーがセクション 3 で入力するテキストボックスがあります。" style="width:70%;">}}
+   [次のセクション](#3-complete-the-integration-setup-in-datadog)では、このウィンドウを開いたままにしておきます。
+5. [Google Cloud コンソール][38]の **Service Acounts** メニューから、[最初のセクション](#1-create-your-google-cloud-service-account)で作成したサービスアカウントを見つけてください。
+6. **Permissions** タブを開き、**Grant Access** をクリックします。
+   {{< img src="integrations/google_cloud_platform/grant-access.png" alt="Google Cloud コンソールインターフェイスで、Service Accounts の下にある Permissions タブを表示しています。" style="width:70%;">}}
+7. Datadog プリンシパルを **New principals** テキストボックスに貼り付けます。
+8. **Service Account Token Creator** のロールを割り当て、**Save** をクリックします。
+   {{< img src="integrations/google_cloud_platform/add-principals-blurred.png" alt="Google Cloud コンソールのインターフェイスで、'Add principals' ボックスと 'Assign roles' インターフェイスを表示しています。" style="width:70%;">}}
+
+**注**: 以前に Datadog の共有プリンシパルを使用してアクセスを構成した場合、これらの手順を完了した後、そのプリンシパルの権限を取り消すことができます。
+
+##### 3. Datadog でインテグレーション設定を完了する
+
+1. Google Cloud コンソールで、**Service Account** > **Details** タブに移動します。そこには、この Google サービスアカウントに関連するメールが記載されています。これは、`<sa-name>@datadog-sandbox.iam.gserviceaccount.com` に似ています。
+2. このメールをコピーします。
+3. Datadog のインテグレーション構成タイル ([前セクション](#2-add-the-datadog-principal-to-your-service-account)で Datadog プリンシパルをコピーしたところ) に戻ります。
+4. **Add Service Account Email** の下にあるボックスに、以前コピーしたメールを貼り付けます。
+5. **Verify and Save Account** をクリックします。
+
+約 15 分で、Datadog にメトリクスが表示されます。
+
+##### 4. 他のプロジェクトにロールを割り当てる (オプション)
+
+プロジェクトの自動検出により、監視対象のプロジェクトを追加するプロセスが簡素化されます。サービスアカウントに他のプロジェクト、フォルダ、または組織へのアクセスを許可すると、Datadog はこれらのプロジェクト (およびフォルダや組織にネストされたプロジェクト) を検出し、自動的にインテグレーションタイルに追加します。
+
+1. 希望するスコープでロールを割り当てるための適切な権限があることを確認してください。
+   * Project IAM Admin (またはそれ以上)
+   * Folder Admin
+   * Organization Admin
+2. Google Cloud コンソールで、**IAM** ページに移動します。
+3. プロジェクト、フォルダ、または組織を選択します。
+4. リソースに対して他のロールをまだ持っていないプリンシパルにロールを付与するには、**Grant Access** をクリックし、先に作成したサービスアカウントのメールを入力します。
+5. 以下のロールを割り当てます。
+   * Compute Viewer
+   * Monitoring Viewer
+   * Cloud Asset Viewer
+
+
+   **注**: Browser ロールは、サービスアカウントのデフォルトプロジェクトにのみ必要です。
+6. **保存**をクリックします。
 
 #### コンフィギュレーション
 
@@ -104,7 +163,7 @@ Datadog <> Google Cloud インテグレーションは、サービスアカウ�
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ```
 
-詳細については、[ラベルの作成と管理][36]に関する Google のドキュメントを参照してください。
+詳細については、[ラベルの作成と管理][40]に関する Google のドキュメントを参照してください。
 
 ### ログの収集
 
@@ -115,11 +174,11 @@ GCE または GKE で実行されているアプリケーションの場合は�
 3. [ログを Datadog へ転送する Pub/Sub をセットアップ](#forward-logs-to-datadog)します。
 4. [Google Cloud から Pub/Sub へのログのエクスポート](#export-logs-from-google-cloud)を構成します。
 
-**警告**: Pub/Sub は、[Google Cloud の割り当てと制限][37]の対象となります。Datadog では、ログ数がこの制限を上回る場合は、ログを複数のトピックに分割することをお勧めしています。この制限に近づいたときに自動的に通知されるようにモニターを設定する方法については、[ログの転送を監視する](#ログの転送を監視する)セクションを参照してください。
+**警告**: Pub/Sub は、[Google Cloud の割り当てと制限][37]の対象となります。Datadog では、ログ数がこの制限を上回る場合は、ログを複数のトピックに分割することをお勧めしています。この制限に近づいたときに自動的に通知されるようにモニターを設定する方法については、[ログの転送を監視する](#monitor-the-log-forwarding)セクションを参照してください。
 
 #### Cloud Pub/Sub を作成する
 
-1. [Cloud Pub/Sub コンソール][38]に移動し、新しいトピックを作成します。
+1. [Cloud Pub/Sub コンソール][42]に移動し、新しいトピックを作成します。
 
     {{< img src="integrations/google_cloud_platform/create_a_topic.png" alt="トピックを作成する" style="width:80%;">}}
 
@@ -131,18 +190,19 @@ GCE または GKE で実行されているアプリケーションの場合は�
 2. サブスクリプション ID を作成し、先に作成したトピックを選択します。
 3. `Push` メソッドを選択し、以下を入力します: `https://gcp-intake.logs.{{< region-param key="dd_site" code="true" >}}/api/v2/logs?dd-api-key=<DATADOG_API_KEY>&dd-protocol=gcp`
 
-   [API キー][39]を作成または [Datadog オーガニゼーションの設定 -> API キー][40]で既存の API キーを選択できます。
+   [API キー][43]を作成または [Datadog Organization Settings -> API Keys][44] で既存の API キーを選択できます。
 
 
 4. **サブスクリプションの有効期限**、**承認期限**、**メッセージの保存期間**、**デッドレター** など、他のオプションを構成します。
-5. 最下部にある `作成` を押します。
+5. **Retry policy** で、`Retry after exponential backoff delay` を選択します。
+6. 最下部にある `作成` を押します。
 
 Pub/Sub が Google Cloud Logging からログを受け取り、Datadog へ転送する準備ができました。
 
 #### Google Cloud からログをエクスポート
 
-1. [ログエクスプローラーページ][41]に移動し、エクスポートするログを絞り込みます。
-2. **Actions** メニューから **Create Sink** を選択します。
+1. [ログエクスプローラーページ][45]に移動し、エクスポートするログを絞り込みます。
+2. **Log Router** タブより、**Create Sink** を選択します。
 3. シンクに名前を設定します。
 4. エクスポート先として _Cloud Pub/Sub_ を選択し、エクスポート用に作成された Pub/Sub を選択します。**注**: この Pub/Sub は別のプロジェクト内に配置することもできます。
 
@@ -152,15 +212,19 @@ Pub/Sub が Google Cloud Logging からログを受け取り、Datadog へ転送
 
 **注**: 異なるシンクを使用して、Google Cloud Logging から同じ Pub/Sub への複数のエクスポートを作成することができます。
 
-**警告**: Pub/Sub は、[Google Cloud の割り当てと制限][37]の対象となります。Datadog では、ログ数がこの制限を上回る場合は、ログを複数のトピックに分割することをお勧めしています。この制限に近づいたときに自動的に通知されるようにモニターを設定する方法については、[ログの転送を監視する](#ログの転送を監視する)セクションを参照してください。
+**警告**: Pub/Sub は、[Google Cloud の割り当てと制限][37]の対象となります。Datadog では、ログ数がこの制限を上回る場合は、ログを複数のトピックに分割することをお勧めしています。この制限に近づいたときに自動的に通知されるようにモニターを設定する方法については、[ログの転送を監視する](#monitor-the-log-forwarding)セクションを参照してください。
 
 #### ログの転送を監視する
 
-Pub/Sub は、[Google Cloud の割り当てと制限][37]の対象となります。Datadog では、ログ数がこの制限を上回る場合は、複数のフィルターでログをトピック毎に分割することをお勧めしています。
+Pub/Sub は、[Google Cloud の割り当てと制限][41]の対象となります。Datadog では、ログ数がこの制限を上回る場合は、複数のフィルターでログをトピック毎に分割することをお勧めしています。
 
 この割り当てに達したときに自動的に通知されるようにするには、[Pub/Sub メトリクスインテグレーション][25]を有効にし、メトリクス `gcp.pubsub.subscription.num_outstanding_messages` でモニターをセットアップします。Datadog へログをエクスポートするサブスクリプションでこのモニター絞り込み、このメトリクスが 1000 を超えないようにします。以下に例を示します。
 
 {{< img src="integrations/google_cloud_platform/log_pubsub_monitoring-v2.png" alt="Pub Sub 監視" style="width:80%;">}}
+
+#### ログのサンプリング
+
+オプションとして、[sample 関数][46]を使用することで、クエリ中にログをサンプリングすることができます。例えば、ログの 10% だけを取り込むには、`sample(insertId, 0.1)` を使用します。
 
 ## 収集データ
 
@@ -170,7 +234,7 @@ Pub/Sub は、[Google Cloud の割り当てと制限][37]の対象となりま�
 
 ### イベント
 
-Google Cloud Platform によって生成されたすべてのサービスイベントが [Datadog のイベントストリーム][42]に転送されます。
+Google Cloud Platform によって生成されたすべてのサービスイベントが [Datadog のイベントストリーム][47]に転送されます。
 
 ### サービスのチェック
 
@@ -178,16 +242,7 @@ Google Cloud Platform インテグレーションには、サービスのチェ�
 
 ### タグ
 
-タグは、Google Cloud Platform および Google Compute Engine に関するさまざまな構成オプションに基づいて、自動的に割り当てられます。自動的に割り当てられるタグを以下に示します。
-
-- Zone
-- Instance-type
-- Instance-id
-- Automatic-restart
-- On-host-maintenance
-- Project
-- Numeric_project_id
-- 名前
+タグは、Google Cloud Platform と Google Compute Engine の様々な構成オプションに基づいて自動的に割り当てられます。`project_id` タグは、すべてのメトリクスに追加されます。追加のタグは、利用可能な場合に Google Cloud Platform から収集され、メトリクスの種類に応じて異なります。
 
 また、Datadog は以下をタグとして収集します。
 
@@ -198,11 +253,11 @@ Google Cloud Platform インテグレーションには、サービスのチェ�
 
 ### ユーザー定義の _gcp.logging_ メトリクスに不正なメタデータが適用される
 
-非標準の _gcp.logging_ メトリクス ([Datadog に付属するログメトリクス以外のメトリクス][43]) に適用されるメタデータが Google Cloud Logging と一致しない場合があります。
+非標準の _gcp.logging_ メトリクス ([Datadog に付属するログメトリクス以外のメトリクス][48]など) に適用されるメタデータが Google Cloud Logging と一致しない場合があります。
 
-このような場合は、メタデータを手動で設定する必要があります。それには、[メトリクスサマリーページ][44]に移動し、問題となっているメトリクスを検索して選択し、メタデータの横にある鉛筆アイコンをクリックします。
+このような場合は、メタデータを手動で設定する必要があります。それには、[メトリクスサマリーページ][49]に移動し、問題となっているメトリクスを検索して選択し、メタデータの横にある鉛筆アイコンをクリックします。
 
-ご不明な点は、[Datadog のサポートチーム][45]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][50]までお問い合わせください。
 
 
 [1]: https://docs.datadoghq.com/ja/integrations/google_app_engine/
@@ -234,19 +289,24 @@ Google Cloud Platform インテグレーションには、サービスのチェ�
 [27]: https://docs.datadoghq.com/ja/integrations/google_stackdriver_logging/
 [28]: https://docs.datadoghq.com/ja/integrations/google_cloud_storage/
 [29]: https://docs.datadoghq.com/ja/integrations/google_cloud_vpn/
-[30]: https://support.google.com/cloud/answer/6293499?hl=en
-[31]: https://console.cloud.google.com/apis/library/monitoring.googleapis.com
-[32]: https://console.cloud.google.com/apis/library/compute.googleapis.com
-[33]: https://console.cloud.google.com/apis/api/cloudasset.googleapis.com/overview
-[34]: https://console.cloud.google.com/apis/credentials
-[35]: https://app.datadoghq.com/account/settings#integrations/google_cloud_platform
-[36]: https://cloud.google.com/compute/docs/labeling-resources
-[37]: https://cloud.google.com/pubsub/quotas#quotas
-[38]: https://console.cloud.google.com/cloudpubsub/topicList
-[39]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
-[40]: https://app.datadoghq.com/organization-settings/api-keys
-[41]: https://console.cloud.google.com/logs/viewer
-[42]: https://app.datadoghq.com/event/stream
-[43]: https://docs.datadoghq.com/ja/integrations/google_stackdriver_logging/#metrics
-[44]: https://app.datadoghq.com/metric/summary
-[45]: https://docs.datadoghq.com/ja/help/
+[30]: https://cloud.google.com/iam/docs/service-account-overview#impersonation
+[31]: /ja/integrations/google_cloud_platform/
+[32]: https://console.cloud.google.com/apis/library/cloudresourcemanager.googleapis.com
+[33]: https://console.cloud.google.com/apis/library/cloudbilling.googleapis.com
+[34]: https://console.cloud.google.com/apis/library/monitoring.googleapis.com
+[35]: https://console.cloud.google.com/apis/library/compute.googleapis.com
+[36]: https://console.cloud.google.com/apis/library/cloudasset.googleapis.com
+[37]: https://console.cloud.google.com/apis/library/iam.googleapis.com
+[38]: https://console.cloud.google.com/
+[39]: https://app.datadoghq.com/integrations/google-cloud-platform
+[40]: https://cloud.google.com/compute/docs/labeling-resources
+[41]: https://cloud.google.com/pubsub/quotas#quotas
+[42]: https://console.cloud.google.com/cloudpubsub/topicList
+[43]: https://docs.datadoghq.com/ja/account_management/api-app-keys/
+[44]: https://app.datadoghq.com/organization-settings/api-keys
+[45]: https://console.cloud.google.com/logs/viewer
+[46]: https://cloud.google.com/logging/docs/view/logging-query-language#sample
+[47]: https://app.datadoghq.com/event/stream
+[48]: https://docs.datadoghq.com/ja/integrations/google_stackdriver_logging/#metrics
+[49]: https://app.datadoghq.com/metric/summary
+[50]: https://docs.datadoghq.com/ja/help/

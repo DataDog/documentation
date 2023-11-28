@@ -1,20 +1,20 @@
 ---
+aliases:
+- /ja/integrations/tcprtt
+categories:
+- network
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcp_rtt.md
+integration_id: tcp-rtt
 integration_title: TCP RTT
-name: tcp_rtt
-kind: integration
-newhlevel: true
 is_public: true
+kind: integration
+name: tcp_rtt
+newhlevel: true
 public_title: Datadog-TCP RTT インテグレーション
 short_description: リモートホストへの TCP 接続を監視
-categories:
-  - network
-ddtype: check
-dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/tcp_rtt.md
-integration_id: tcp-rtt
-aliases:
-  - /ja/integrations/tcprtt
 ---
+
 ## 概要
 
 TCP RTT チェックは、Agent のホストと Agent の通信相手のホストの間のラウンドトリップ回数を報告します。このチェックは受動的で、チェックの外部から送信されて受信したパケットの RTT 回数のみを報告します。チェック自身はパケットを送信しません。
@@ -77,7 +77,7 @@ instances:
 
 チェックが正しく実行されているかを検証するには、Datadog インターフェイスに表示される `system.net.tcp.rtt` メトリクスを確認します。また、`sudo /etc/init.d/datadog-agent status` を実行した場合は、以下のような結果が表示されます。
 
-```shell
+```bash
 datadog-agent.service - "Datadog Agent"
   Loaded: loaded (/lib/...datadog-agent.service; enabled; vendor preset: enabled)
   Active: active (running) since Thu 2016-03-31 20:35:27 UTC; 42min ago

@@ -10,10 +10,11 @@ sync_dry_run_enabled: false
 # These files will be ignored or deleted when syncing with Transifex.
 ignores:
   - "content/en/**/faq/!(agent_v6_changes|certificate_verify_failed-error).md"
-  - "content/en/security_platform/default_rules/*.md"
-  - "content/en/security_monitoring/default_rules/*.md"
+  - "content/en/security/default_rules/*.md"
   - "content/en/integrations/rapdev_services.md"
   - "content/en/workflows/actions_catalog/*.md"
+  - "content/en/api/v1/**/*.md"
+  - "content/en/api/v2/**/*.md"
   - "**/*.fr.md"
   - "**/*.fr.yaml"
   - "**/*.fr.json"
@@ -22,15 +23,6 @@ ignores:
   - "**/*.ja.yaml"
   - "**/*.ja.json"
   - "**/ja.json"
-  - "content/en/api/latest/service-level-objective-corrections/*.md"
-  - "content/en/integrations/observability_pipelines/guide/*.md"
-  - "content/en/real_user_monitoring/connect_rum_and_traces/*.md"
-  - "content/en/security_platform/application_security/**/*.md"
-  - "content/en/security_platform/security_signal_management/*.md"
-  - "content/en/tracing/dynamic_instrumentation/**/*.md"
-  - "content/en/tracing/other_telemetry/**/*.md"
-  - "content/en/tracing/setup_overview/**/*.md"
-  - "content/en/tracing/trace_collection/**/*.md"
 
 # These files will be uploaded to Transifex for translation when syncing.
 sources:
@@ -44,6 +36,8 @@ sources:
   dst: "data/partials/*.{lang}.yaml"
 - src: "i18n/en.json"
   dst: "i18n/{lang}.json"
+- src: "layouts/shortcodes/*.md"
+  dst: "layouts/shortcodes/*.{lang}.md"
 - src: "config/_default/params.en.yaml"
   dst: "config/_default/params.{lang}.yaml"
 - src: "config/_default/menus/menus.en.yaml"
@@ -56,3 +50,4 @@ sources:
   dst: "content/{lang}/workflows/actions_catalog/_index.md"
 - src: "content/en/workflows/actions_catalog/generic_actions.md"
   dst: "content/{lang}/workflows/actions_catalog/generic_actions.md"
+

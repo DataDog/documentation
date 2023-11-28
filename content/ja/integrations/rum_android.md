@@ -7,12 +7,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- モニタリング
-- ネットワーク
-- 例外
 - メトリクス
-- アラート設定
-- 問題追跡
+- モバイル
+- トレーシング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_android/README.md
 display_on_public_website: true
@@ -33,13 +30,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Android
-  - Category::Monitoring
-  - Category::Network
-  - Category::Exceptions
   - Category::Metrics
-  - Category::Alerting
-  - Category::Issue Tracking
+  - Category::Mobile
+  - Category::Tracing
+  - Supported OS::Android
   configuration: README.md#Setup
   description: Datadog RUM を使用した Android アプリケーションの監視とメトリクス生成
   media: []
@@ -78,21 +72,21 @@ Datadog [Android インテグレーション][1]を利用することで、問�
 
 ### トレースの収集
 
-Android アプリケーションのトレースを Datadog に送信し始めるには、[RUM とトレースの接続][3]をご覧ください。
+Android アプリケーションのトレースを Datadog に送信し始めるには、[Android トレース収集][3]をご覧ください。また、[RUM とトレースの接続][4]することもできます。
 
 ### ログの収集
 
-Android アプリケーションのログを Datadog に転送し始めるには、[Android ログ収集][4]をご覧ください。
+Android アプリケーションのログを Datadog に転送し始めるには、[Android ログ収集][5]をご覧ください。
 
 ## 収集データ
 
 ### メトリクス
 
-Android インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][5]を参照してください。
+Android インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][6]を参照してください。
 
 ### イベント
 
-イベントや属性の詳細については、[RUM Android データ収集][6]を参照してください。
+イベントや属性の詳細については、[RUM Android データ収集][7]を参照してください。
 
 ### サービスのチェック
 
@@ -100,19 +94,20 @@ Android インテグレーションには、サービスのチェック機能は
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 
 お役に立つドキュメント、リンクや記事:
 
-- [Android および Android TV のモニタリング][8]
+- [Android および Android TV のモニタリング][9]
 
 [1]: https://app.datadoghq.com/integrations/rum-android
 [2]: https://docs.datadoghq.com/ja/real_user_monitoring/android/?tabs=kotlin#setup
-[3]: https://docs.datadoghq.com/ja/real_user_monitoring/connect_rum_and_traces?tab=androidrum#setup-rum
-[4]: https://docs.datadoghq.com/ja/logs/log_collection/android/?tab=kotlin
-[5]: https://docs.datadoghq.com/ja/real_user_monitoring/generate_metrics
-[6]: https://docs.datadoghq.com/ja/real_user_monitoring/android/data_collected/
-[7]: https://docs.datadoghq.com/ja/help/
-[8]: https://docs.datadoghq.com/ja/real_user_monitoring/android/
+[3]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/android
+[4]: https://docs.datadoghq.com/ja/real_user_monitoring/connect_rum_and_traces/?tab=androidrum#setup-rum
+[5]: https://docs.datadoghq.com/ja/logs/log_collection/android/?tab=kotlin
+[6]: https://docs.datadoghq.com/ja/real_user_monitoring/generate_metrics
+[7]: https://docs.datadoghq.com/ja/real_user_monitoring/android/data_collected/
+[8]: https://docs.datadoghq.com/ja/help/
+[9]: https://docs.datadoghq.com/ja/real_user_monitoring/android/

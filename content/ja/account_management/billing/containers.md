@@ -9,19 +9,17 @@ title: コンテナの請求
 
 コンテナを追加した場合は、コンテナごとに 1 時間単位の[追加コスト][1]が課金されます。コンテナは事前に購入することも可能です。コンテナの詳細については、[営業担当者][2]または[カスタマーサクセス][3]マネージャーまでお問い合わせください。
 
-**注**: Agent はデフォルトで監視されています。これは請求にカウントされます。Agent コンテナ、またはその他のコンテナを除外するには、[コンテナの除外][4]を参照してください。
-
 ### Kubernetes
 
 Kubernetes は、ポッドの IP アドレスを取得し、そのポッドに加わる他のコンテナに使用されるネットワークネームスペースを設定するために、pause コンテナを作成します (Agent v5.8 以降が必要)。すべての pause コンテナはクオータから除外され、pause コンテナに対する課金はありません (AWS EKS pause コンテナの除外には Agent v7.20 以降が必要)。
 
 ### Fargate
 
-Fargate は同時に発生するタスクの数に基づいて課金されます。料金の詳細は、料金ページの[インフラストラクチャー][5]セクションを参照してください。
+Fargate は同時に発生するタスクの数に基づいて課金されます。料金の詳細は、料金ページの[インフラストラクチャー][4]セクションを参照してください。
 
 ### GKE Autopilot
 
-[GKE Autopilot][6] 環境の課金は、[GKE Standard][7] と同じです。
+[GKE Autopilot][5] 環境の課金は、[GKE Standard][6] と同じです。
 
 ## よくある質問
 
@@ -43,7 +41,7 @@ Fargate は同時に発生するタスクの数に基づいて課金されます
 
 **Datadog Agent コンテナは割り当てに対してカウントされますか？**
 
-はい、必要です。
+いいえ。Datadog Agent コンテナは、5 (Pro ティア) または 10 (Enterprise ティア) の割り当てにはカウントされません。
 
 **`CrashLoopBackoff` が常時発生しているポッドに属するコンテナはカウントされるのでしょうか？**
 
@@ -52,15 +50,14 @@ Fargate は同時に発生するタスクの数に基づいて課金されます
 
 ## トラブルシューティング
 
-技術的な質問については、[Datadog のサポートチーム][8]にお問い合わせください。
+技術的な質問については、[Datadog サポートチーム][7]にお問い合わせください。
 
 課金に関するご質問は、[カスタマーサクセス][3]マネージャーにお問い合わせください。
 
 [1]: https://www.datadoghq.com/pricing/#tab-faq-infrastructure
 [2]: mailto:sales@datadoghq.com
 [3]: mailto:success@datadoghq.com
-[4]: /ja/agent/guide/autodiscovery-management/?tab=containerizedagent#exclude-containers
-[5]: https://www.datadoghq.com/pricing/#section-infra
-[6]: /ja/agent/kubernetes/distributions/?tab=helm#autopilot
-[7]: /ja/integrations/google_kubernetes_engine/
-[8]: /ja/help/
+[4]: https://www.datadoghq.com/pricing/#section-infra
+[5]: /ja/agent/kubernetes/distributions/?tab=helm#autopilot
+[6]: /ja/integrations/google_kubernetes_engine/
+[7]: /ja/help/

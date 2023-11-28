@@ -54,13 +54,13 @@ The following environment variables are supported:
 : Enables cluster level metadata mapping. Defaults to `true`.
 
 `DD_COLLECT_KUBERNETES_EVENTS`                
-: Configures the Agent to collect Kubernetes events. Defaults to `false`. See the [Cluster Agent Event Collection documentation][2] for more details.
+: Configures the Agent to collect Kubernetes events. Defaults to `false`.
 
 `DD_LEADER_ELECTION`                          
 : Activates leader election. Set `DD_COLLECT_KUBERNETES_EVENTS` to `true` to activate this feature. Defaults to `false`.
 
 `DD_LEADER_LEASE_DURATION`                    
-: Used only if leader election is activated. See the details about leader election [in the Cluster Agent Event Collection documentation][2]. Value in seconds, 60 by default.
+: Used only if leader election is activated. Value in seconds, 60 by default.
 
 `DD_CLUSTER_AGENT_AUTH_TOKEN`                 
 : 32 characters long token that needs to be shared between the node Agent and the Datadog Cluster Agent.
@@ -77,8 +77,8 @@ The following environment variables are supported:
 `DD_KUBERNETES_INFORMERS_RESTCLIENT_TIMEOUT`  
 : Timeout (in seconds) of the client communicating with the API server. Defaults to `60` seconds.
 
-`DD_EXPVAR_PORT`                              
-: Port for fetching [expvar][3] public variables from the Datadog Cluster Agent. Defaults to port `5000`.
+`DD_METRICS_PORT`                              
+: Port to expose Datadog Cluster Agent metrics. Defaults to port `5000`.
 
 `DD_EXTERNAL_METRICS_PROVIDER_BATCH_WINDOW`   
 : Time waited (in seconds) to process a batch of metrics from multiple autoscalers. Defaults to `10` seconds.
@@ -119,10 +119,24 @@ The following environment variables are supported:
 `DD_CLUSTER_CHECKS_EXTRA_TAGS`                
 : Adds extra tags to cluster checks metrics.
 
+`DD_PROXY_HTTPS`                
+: Sets a proxy server for HTTPS requests.
+
+`DD_PROXY_HTTP`                
+: Sets a proxy server for HTTP requests.
+
+`DD_PROXY_NO_PROXY`                
+: Sets a list of hosts that should bypass the proxy. The list is space-separated.
+
+`DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_CPU`
+: Configures the CPU request and limit for the init containers.
+
+`DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_INIT_RESOURCES_MEMORY`
+: Configures the memory request and limit for the init containers.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: /agent/cluster_agent/event_collection/
-[3]: https://golang.org/pkg/expvar
+[2]: https://golang.org/pkg/expvar

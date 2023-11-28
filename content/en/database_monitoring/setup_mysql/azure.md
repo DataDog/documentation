@@ -65,7 +65,7 @@ The Datadog Agent requires read-only access to the database in order to collect 
 Create the `datadog` user and grant basic permissions:
 
 ```sql
-CREATE USER datadog@'%' IDENTIFIED WITH mysql_native_password by '<UNIQUEPASSWORD>';
+CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
 GRANT PROCESS ON *.* TO datadog@'%';
@@ -95,7 +95,7 @@ GRANT EXECUTE ON datadog.* to datadog@'%';
 GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
-Create the the `explain_statement` procedure to enable the Agent to collect explain plans:
+Create the `explain_statement` procedure to enable the Agent to collect explain plans:
 
 ```sql
 DELIMITER $$
@@ -149,10 +149,10 @@ instances:
     username: datadog
     password: '<YOUR_CHOSEN_PASSWORD>' # from the CREATE USER step earlier
 
-     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
+    # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU and Memory.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<YOUR_INSTANCE_NAME>'
+      fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 ```
 
 See the [MySQL integration spec][4] for additional information on setting `deployment_type` and `name` fields.
@@ -162,9 +162,9 @@ See the [MySQL integration spec][4] for additional information on setting `deplo
 [Restart the Agent][3] to start sending MySQL metrics to Datadog.
 
 
-[1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[3]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[3]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552
 {{% /tab %}}
 {{% tab "Docker" %}}
@@ -193,10 +193,10 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "password": "<UNIQUEPASSWORD>",
     "azure": {
       "deployment_type": "<DEPLOYMENT_TYPE>",
-      "name": "<YOUR_INSTANCE_NAME>"
+      "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"
     }
   }]' \
-  datadog/agent:${DD_AGENT_VERSION}
+  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
 ### Dockerfile
@@ -208,7 +208,7 @@ FROM datadog/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<YOUR_INSTANCE_NAME>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog","password": "<UNIQUEPASSWORD>", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
 ```
 
 See the [MySQL integration spec][4] for additional information on setting `deployment_type` and `name` fields.
@@ -217,7 +217,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 
 
 [1]: /agent/docker/integrations/?tab=docker
-[2]: /agent/guide/secrets-management
+[2]: /agent/configuration/secrets-management
 [3]: /agent/faq/template_variables/
 [4]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552
 {{% /tab %}}
@@ -238,7 +238,7 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
-  --set "clusterAgent.confd.mysql\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.mysql\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
@@ -248,7 +248,7 @@ instances:
     password: "<UNIQUEPASSWORD>"
     azure:
       deployment_type: "<DEPLOYMENT_TYPE>"
-      name: "<YOUR_INSTANCE_NAME>" \
+      fully_qualified_domain_name: "<AZURE_INSTANCE_ENDPOINT>"' \
   datadog/datadog
 ```
 
@@ -268,7 +268,7 @@ instances:
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
-      name: '<YOUR_INSTANCE_NAME>'
+      fully_qualified_domain_name: '<AZURE_INSTANCE_ENDPOINT>'
 ```
 
 ### Configure with Kubernetes service annotations
@@ -297,7 +297,7 @@ metadata:
           "password": "<UNIQUEPASSWORD>",
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
-            "name": "<YOUR_INSTANCE_NAME>"
+            "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"
           }
         }
       ]
@@ -318,7 +318,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /agent/guide/secrets-management
+[4]: /agent/configuration/secrets-management
 [5]: https://github.com/DataDog/integrations-core/blob/master/mysql/assets/configuration/spec.yaml#L523-L552
 {{% /tab %}}
 {{< /tabs >}}
@@ -326,6 +326,9 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 ### Validate
 
 [Run the Agent's status subcommand][6] and look for `mysql` under the **Checks** section. Or visit the [Databases][7] page to get started.
+
+## Example Agent Configurations
+{{% dbm-mysql-agent-config-examples %}}
 
 ## Install the Azure MySQL Integration
 
@@ -343,8 +346,8 @@ If you have installed and configured the integrations and Agent as described, an
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.microsoft.com/en-us/azure/mysql/howto-server-parameters
 [4]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
-[5]: https://app.datadoghq.com/account/settings#agent
-[6]: /agent/guide/agent-commands/#agent-status-and-information
+[5]: https://app.datadoghq.com/account/settings/agent/latest
+[6]: /agent/configuration/agent-commands/#agent-status-and-information
 [7]: https://app.datadoghq.com/databases
 [8]: /integrations/azure_db_for_mysql
 [9]: /database_monitoring/setup_mysql/troubleshooting

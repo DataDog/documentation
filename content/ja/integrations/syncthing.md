@@ -1,45 +1,69 @@
 ---
+app_id: syncthing
+app_uuid: a61c3428-6898-45be-8a20-89f4c039a56d
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Syncthing Overview: assets/dashboards/syncthing_overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: syncthing.connections.count
+      metadata_path: metadata.csv
+      prefix: syncthing.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Syncthing
   monitors:
+    '[Syncthing] Device not connected': assets/monitors/syncthing_device_not_connected.json
     '[Syncthing] Disconnected': assets/monitors/syncthing_disconnected.json
     '[Syncthing] Folder error': assets/monitors/syncthing_folder_error.json
     '[Syncthing] Out of sync': assets/monitors/syncthing_out_of_sync.json
+    '[Syncthing] Service error': assets/monitors/syncthing_service_error.json
     '[Syncthing] System error': assets/monitors/syncthing_system_error.json
-  saved_views: {}
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: コミュニティ
+  sales_email: Alexander@Bushnev.pro
+  support_email: Alexander@Bushnev.pro
 categories:
 - コラボレーション
-creates_events: false
-ddtype: check
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/syncthing/README.md
-display_name: Syncthing
+display_on_public_website: true
 draft: false
 git_integration_title: syncthing
-guid: 1e29ccc9-cec4-4cf5-b566-2f71021ad315
 integration_id: syncthing
 integration_title: Syncthing
-integration_version: 1.0.0
+integration_version: 1.1.0
 is_public: true
 kind: integration
-maintainer: Alexander@Bushnev.ru
-manifest_version: 1.0.0
-metric_prefix: syncthing.
-metric_to_check: syncthing.connections.count
+manifest_version: 2.0.0
 name: syncthing
-public_title: Datadog-Syncthing インテグレーション
+oauth: {}
+public_title: Syncthing
 short_description: Syncthing インスタンスからの全体的な統計情報を追跡
-support: contrib
 supported_os:
 - linux
-- mac_os
 - windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Category::Collaboration
+  - Category::Security
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: Syncthing インスタンスからの全体的な統計情報を追跡
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Syncthing
 ---
 
 

@@ -67,7 +67,7 @@ Dans la plupart des cas, les règles suivantes doivent être respectées :
   - **Agent de trace APM**
 
       - [Variables d'environnement de l'Agent APM Docker][5]
-      - [trace-agent env.go][6]
+      - [trace-agent config/apm.go][6]
       - Exemple
 
           ```yaml
@@ -80,7 +80,7 @@ Dans la plupart des cas, les règles suivantes doivent être respectées :
 
   - **Agent Live Process**
 
-      - [process-agent config.go][7]
+      - [process-agent config/process.go][7]
       - Exemple
 
           ```yaml
@@ -98,7 +98,7 @@ Dans la plupart des cas, les règles suivantes doivent être respectées :
 [1]: /fr/agent/guide/agent-configuration-files/#agent-main-configuration-file
 [2]: /fr/getting_started/tagging/unified_service_tagging
 [3]: /fr/agent/proxy/#environment-variables
-[4]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config.go
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config.go
 [5]: https://docs.datadoghq.com/fr/agent/docker/apm/#docker-apm-agent-environment-variables
-[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/trace/config/env_test.go
-[7]: https://github.com/DataDog/datadog-agent/blob/master/pkg/process/config/config.go
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/apm.go
+[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/process.go

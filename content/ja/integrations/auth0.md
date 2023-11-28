@@ -15,10 +15,11 @@ assets:
     source_type_name: Auth0
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Auth0
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
+- インシデント
 - ログの収集
 - セキュリティ
 dependencies:
@@ -38,16 +39,17 @@ public_title: Auth0
 short_description: Auth0 イベントを表示し、分析します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Incidents
   - Category::Log Collection
   - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Auth0 イベントを表示し、分析します。
   media: []

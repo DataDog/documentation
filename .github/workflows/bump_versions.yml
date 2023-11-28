@@ -14,7 +14,7 @@ jobs:
     steps:
       - id: set-versions
         name: Load latest SDK versions
-        uses: actions/github-script@v4
+        uses: actions/github-script@v6
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           result-encoding: string
@@ -24,10 +24,11 @@ jobs:
               'datadog-api-client-java',
               'datadog-api-client-python',
               'datadog-api-client-ruby',
-              'datadog-api-client-typescript'
+              'datadog-api-client-typescript',
+              'integrations-core'
             ]
             const versions = await Promise.all(clients.map(async (repo) => {
-              const releases = await github.repos.listReleases({
+              const releases = await github.rest.repos.listReleases({
                 owner: 'DataDog',
                 repo: repo
               })
@@ -35,7 +36,7 @@ jobs:
             }))
             console.log(versions)
             return JSON.stringify(versions)
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Write version
         run: |-
           echo '${{steps.set-versions.outputs.result}}' | jq > ./data/sdk_versions.json
@@ -45,13 +46,13 @@ jobs:
           git add .
           git commit -m "Bump SDK"
           git push -f origin HEAD:refs/heads/sdk/versions
-      - uses: actions/github-script@v4
+      - uses: actions/github-script@v6
         name: Propose change with latest versions
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           result-encoding: string
           script: |
-            await github.pulls.create({
+            await github.rest.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: "[SDK] new versions are available",

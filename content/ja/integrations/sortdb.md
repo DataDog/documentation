@@ -15,7 +15,7 @@ assets:
     source_type_name: Sortdb
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: namrata.deshpande4@gmail.com
   support_email: namrata.deshpande4@gmail.com
 categories:

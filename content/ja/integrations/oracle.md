@@ -3,6 +3,7 @@ app_id: oracle
 app_uuid: 34835d2b-a812-4aac-8cc2-d298db851b80
 assets:
   dashboards:
+    DBM Oracle Database Overview: assets/dashboards/dbm_oracle_database_overview.json
     oracle: assets/dashboards/oracle_overview.json
   integration:
     configuration:
@@ -23,7 +24,8 @@ author:
   support_email: help@datadoghq.com
 categories:
 - data store
-- autodiscovery
+- network
+- oracle
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/oracle/README.md
 display_on_public_website: true
@@ -31,7 +33,7 @@ draft: false
 git_integration_title: oracle
 integration_id: oracle
 integration_title: Oracle
-integration_version: 3.9.5
+integration_version: 4.1.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -41,16 +43,17 @@ public_title: Oracle
 short_description: エンタープライズグリッドコンピューティング向け Oracle リレーショナルデータベースシステム
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::データストア
-  - Category::オートディスカバリー
+  - Category::ネットワーク
+  - Category::Oracle
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: エンタープライズグリッドコンピューティング向け Oracle リレーショナルデータベースシステム
   media: []
@@ -73,8 +76,10 @@ Oracle Database サーバーからメトリクスをリアルタイムに取得�
 
 #### 前提条件
 
-Oracle インテグレーションを使用するには、Oracle Instant Client ライブラリをインストールするか、Oracle JDBC ドライバーをダウンロードする必要があります (Linux のみ)。
-ライセンスの制約により、これらのライブラリは Datadog Agent に含まれていませんが、Oracle から直接ダウンロードできます。
+Oracle インテグレーションを使用するには、ネイティブクライアント Oracle Instant Client を使用するか (追加のインストール手順は必要ありません)、Oracle JDBC ドライバーをダウンロードします (Linux のみ)。JDBC による Oracle インテグレーションを使用するには、Oracle JDBC ドライバーをダウンロードしてください。JDBC 方式を使用しない場合、最小の[サポートされるバージョン][2]は Oracle 12c です。
+ライセンスの制限により、JDBC ライブラリは Datadog Agent に含まれていませんが、Oracle から直接ダウンロードすることができます。
+
+*注*: v7.42.x から、Oracle インテグレーションは Python 3 のみをサポートします。
 
 ##### Oracle Instant Client
 
@@ -137,8 +142,8 @@ Java 8 以降は、JDBC Driver を使用するときに Agent が使用するラ
 
 インストールしたら、次の手順を実行します。
 
-1. [JDBC Driver JAR ファイルをダウンロード][2]します。
-2. ダウンロードしたファイルのパスを `$CLASSPATH` に追加するか、チェック構成ファイルの `jdbc_driver_path` の下に追加します ([サンプル oracle.yaml][3] を参照)。
+1. [JDBC Driver JAR ファイルをダウンロード][3]します。
+2. ダウンロードしたファイルのパスを `$CLASSPATH` に追加するか、チェック構成ファイルの `jdbc_driver_path` の下に追加します ([サンプル oracle.yaml][4] を参照)。
 
 #### Datadog ユーザーの作成
 
@@ -203,26 +208,26 @@ GRANT SELECT ON gv_$sysmetric TO c##datadog CONTAINER=ALL;
    init_config:
 
    instances:
-     ## @param server - string - required
-     ## The IP address or hostname of the Oracle Database Server.
-     #
-     - server: localhost:1521
-
-      ## @param service_name - string - required
-      ## The Oracle Database service name. To view the services available on your server,
-      ## run the following query: `SELECT value FROM v$parameter WHERE name='service_names'`
+      ## @param server - string - required
+      ## The IP address or hostname of the Oracle Database Server.
       #
-      service_name: <SERVICE_NAME>
+      - server: localhost:1521
 
-      ## @param username - string - required
-      ## The username for the Datadog user account.
-      #
-      username: <USERNAME>
+        ## @param service_name - string - required
+        ## The Oracle Database service name. To view the services available on your server,
+        ## run the following query: `SELECT value FROM v$parameter WHERE name='service_names'`
+        #
+        service_name: <SERVICE_NAME>
 
-      ## @param password - string - required
-      ## The password for the Datadog user account.
-      #
-      password: <PASSWORD>
+        ## @param username - string - required
+        ## The username for the Datadog user account.
+        #
+        username: <USERNAME>
+
+        ## @param password - string - required
+        ## The password for the Datadog user account.
+        #
+        password: <PASSWORD>
    ```
 
 2. [Agent を再起動します][3]。
@@ -308,13 +313,18 @@ instances:
 
 2. Oracle Database で TCPS 接続を許可するために、`sqlnet.ora`、`listener.ora`、`tnsnames.ora` を更新します。
 
-##### Oracle Instant Client による TCPS
+##### JDBC を使用しない Oracle 経由の TCPS
 
-Oracle Instant Client を使用して Oracle Database に接続している場合、Datadog Agent がデータベースに接続できることを確認します。構成オプションに入力された情報を使って、`sqlplus` コマンドラインツールを使用します。
+JDBC を使用していない場合、Datadog Agent がデータベースに接続できることを確認します。構成オプションに入力された情報を使って、`sqlplus` コマンドラインツールを使用します。
 
 ```shell
 sqlplus <USER>/<PASSWORD>@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCPS)(HOST=<HOST>)(PORT=<PORT>))(SERVICE_NAME=<SERVICE_NAME>)))
 ```
+
+[Oracle Instant Client][4] による接続を使用する際は、アプリケーションによって使用されるクライアントライブラリの `network/admin` ディレクトリに 3 つのファイルを移動します。
+  * `tnsnames.ora`: アプリケーションの接続文字列で使用されるネットサービス名をデータベースサービスにマッピングします。
+  * `sqlnet.ora`: Oracle Network の設定を構成します。
+  * `cwallet.sso`: SSL または TLS 接続を有効にします。このファイルの安全性を確保するようにしてください。
 
 ##### JDBC による TCPS
 
@@ -342,14 +352,15 @@ JDBC を使用して Oracle Database に接続している場合は、`jdbc_trus
     # jdbc_truststore_password: <JDBC_TRUSTSTORE_PASSWORD>
 ```
 
-TCPS on JDBC による Oracle Database への接続の詳細については、公式の [Oracle ホワイトペーパー][4]を参照してください。
+TCPS on JDBC による Oracle Database への接続の詳細については、公式の [Oracle ホワイトペーパー][5]を参照してください。
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[4]: https://www.oracle.com/technetwork/topics/wp-oracle-jdbc-thin-ssl-130128.pdf
+[4]: https://python-oracledb.readthedocs.io/en/latest/user_guide/connection_handling.html#install-the-wallet-and-network-configuration-files
+[5]: https://www.oracle.com/technetwork/topics/wp-oracle-jdbc-thin-ssl-130128.pdf
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -368,17 +379,16 @@ TCPS on JDBC による Oracle Database への接続の詳細については、�
 
 ### 検証
 
-[Agent の status サブコマンドを実行][4]し、Checks セクションで `oracle` を探します。
+[Agent の status サブコマンドを実行][5]し、Checks セクションで `oracle` を探します。
 
 ## カスタムクエリ
 
-カスタムクエリの指定もサポートされています。各クエリには、次の 3 つのパラメーターを含める必要があります。
+カスタムクエリの指定もサポートされています。各クエリには、次の 2 つのパラメーターを含める必要があります。
 
 | パラメーター       | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `metric_prefix` | 各メトリクスのプレフィックス。                                                                                                                                                                                                                                                                                                                                                                                                         |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |                                                                                                                                                                
 | `query`         | 実行する SQL です。簡単なステートメントにすることも、複数行のスクリプトにすることもできます。結果のすべての行が評価されます。                                                                                                                                                                                                                                                                                                                        |
-| `columns`       | 列を表すリストです。左から右の順に並べられます。次の 2 つの必須データがあります。<br> a. `type` - 送信方法 (`gauge`、`count` など)。<br> b. name - メトリクス名のサフィックス。これが `metric_prefix` に付加されて完全な名前になります。`type` が `tag` の場合、この列は、このクエリによって収集されるすべてのメトリクスに適用されるタグと見なされます。 |
+| `columns`       | 列を表すリストです。左から右の順に並べられます。次の 2 つの必須データがあります。<br> a. `type` - 送信方法 (`gauge`、`count` など)。<br> b. name - メトリクス名のサフィックス。これは、完全なメトリクス名を形成するために使用されるサフィックスです。`type` が `tag` の場合、この列は、このクエリによって収集されるすべてのメトリクスに適用されるタグと見なされます。 |
 
 オプションで、`tags` パラメーターを使用して、収集される各メトリクスにタグのリストを適用できます。
 
@@ -392,25 +402,24 @@ self.count('oracle.custom_query.metric2', value, tags=['tester:oracle', 'tag1:va
 以下の構成例から作成されます。
 
 ```yaml
-- metric_prefix: oracle.custom_query
-  query: |  # 複数行のスクリプトが必要な場合は、パイプを使用します。
-   SELECT columns
-   FROM tester.test_table
-   WHERE conditions
+- query: | # 複数行のスクリプトが必要な場合は、パイプを使用します。
+    SELECT columns
+    FROM tester.test_table
+    WHERE conditions
   columns:
-  # スキップする列にはこれを入れます。
-  - {}
-  - name: metric1
-    type: gauge
-  - name: tag1
-    type: tag
-  - name: metric2
-    type: count
+    # スキップする列にはこれを入れます。
+    - {}
+    - name: metric1
+      type: gauge
+    - name: tag1
+      type: tag
+    - name: metric2
+      type: count
   tags:
-  - tester:oracle
+    - tester:oracle
 ```
 
-使用可能なすべての構成オプションの詳細については、[サンプル oracle.d/conf.yaml][3] を参照してください。
+使用可能なすべてのコンフィギュレーションオプションの詳細については、[oracle.d/conf.yaml のサンプル][4]を参照してください。
 
 ### 例
 
@@ -429,8 +438,7 @@ self.count('oracle.custom_query.metric2', value, tags=['tester:oracle', 'tag1:va
         tags:
           - db:oracle
         custom_queries:
-          - metric_prefix: oracle.custom_query.locks
-            query: |
+          - query: |
               select blocking_session, username, osuser, sid, serial# as serial, wait_class, seconds_in_wait
               from v_$session
               where blocking_session is not NULL order by blocking_session
@@ -474,7 +482,7 @@ SQL> select blocking_session,username,osuser, sid, serial#, wait_class, seconds_
 where blocking_session is not NULL order by blocking_session;
 ```
 
-3. 構成が完了すると、`oracle.custom_query.locks` メトリクスに基づいて[モニター][5]を作成できます。
+3. 構成が完了すると、`oracle.custom_query.locks` メトリクスに基づいて[モニター][6]を作成できます。
 
 ## 収集データ
 
@@ -493,50 +501,55 @@ Oracle Database チェックには、イベントは含まれません。
 ## トラブルシューティング
 
 ### 一般的な問題
+
+#### Oracle Native Client
+- `DPY-6000: cannot connect to database` のエラーが発生した場合
+  ```text
+  Failed to connect to Oracle DB, error: DPY-6000: cannot connect to database. Listener refused connection. (Similar to ORA-12660)
+  ```
+ - Native Network Encryption または Checksumming が有効になっていないことを確認してください。有効になっている場合は、`use_instant_client: true` を設定して Instant Client 方式を使用する必要があります。
+
+Oracle Instant Client のセットアップについて、詳しくは [Oracle インテグレーションに関するドキュメント][7]を参照してください。
+
 #### Oracle Instant Client
 - Oracle Instant Client ファイルと SDK ファイルの両方が同じディレクトリにあることを確認します。
 ディレクトリの構造は次のようになります。
-
-```text
-|____sdk/
-|____network/
-|____libociei.dylib
-|____libocci.dylib
-|____libocci.dylib.10.1
-|____adrci
-|____uidrvci
-|____libclntsh.dylib.19.1
-|____ojdbc8.jar
-|____BASIC_README
-|____liboramysql19.dylib
-|____libocijdbc19.dylib
-|____libocci.dylib.19.1
-|____libclntsh.dylib
-|____xstreams.jar
-|____libclntsh.dylib.10.1
-|____libnnz19.dylib
-|____libclntshcore.dylib.19.1
-|____libocci.dylib.12.1
-|____libocci.dylib.18.1
-|____libclntsh.dylib.11.1
-|____BASIC_LICENSE
-|____SDK_LICENSE
-|____libocci.dylib.11.1
-|____libclntsh.dylib.12.1
-|____libclntsh.dylib.18.1
-|____ucp.jar
-|____genezi
-|____SDK_README
-
-```
-
-##### Linux
-- [Oracle][6] の Linux インストールドキュメントを参照してください。
-
-##### Windows
-- ご使用のバージョンで Microsoft Visual Studio `<YEAR>` 再頒布可能パッケージの要件が満たされていることを確認します。詳細については、[Windows ダウンロードページ][7]を参照してください。
-- [Oracle][8] の詳細な Windows インストールドキュメントを参照してください。
-
+  ```text
+  |___ BASIC_LITE_LICENSE
+  |___ BASIC_LITE_README
+  |___ adrci
+  |___ genezi
+  |___ libclntsh.so -> libclntsh.so.19.1
+  |___ libclntsh.so.10.1 -> libclntsh.so.19.1
+  |___ libclntsh.so.11.1 -> libclntsh.so.19.1
+  |___ libclntsh.so.12.1 -> libclntsh.so.19.1
+  |___ libclntsh.so.18.1 -> libclntsh.so.19.1
+  |___ libclntsh.so.19.1
+  |___ libclntshcore.so.19.1
+  |___ libipc1.so
+  |___ libmql1.so
+  |___ libnnz19.so
+  |___ libocci.so -> libocci.so.19.1
+  |___ libocci.so.10.1 -> libocci.so.19.1
+  |___ libocci.so.11.1 -> libocci.so.19.1
+  |___ libocci.so.12.1 -> libocci.so.19.1
+  |___ libocci.so.18.1 -> libocci.so.19.1
+  |___ libocci.so.19.1
+  |___ libociicus.so
+  |___ libocijdbc19.so
+  |___ liboramysql19.so
+  |___ listener.ora
+  |___ network
+  |   `___ admin
+  |       |___ README
+  |       |___ cwallet.sso
+  |       |___ sqlnet.ora
+  |       `___ tnsnames.ora
+  |___ ojdbc8.jar
+  |___ ucp.jar
+  |___ uidrvci
+  `___ xstreams.jar
+  ```
 
 #### JDBC Driver (Linux のみ)
 - `JVMNotFoundException` が発生した場合:
@@ -563,15 +576,14 @@ Oracle Database チェックには、イベントは含まれません。
       sudo -u dd-agent -- /opt/datadog-agent/embedded/bin/python -c "import os; print(\"JAVA_HOME:{}\".format(os.environ.get(\"JAVA_HOME\")))"
     ```
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/oracle/images/oracle_dashboard.png
-[2]: https://www.oracle.com/technetwork/database/application-development/jdbc/downloads/index.html
-[3]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
-[4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[5]: https://docs.datadoghq.com/ja/monitors/monitor_types/metric/?tab=threshold
-[6]: https://docs.oracle.com/en/database/oracle/oracle-database/21/lacli/install-instant-client-using-zip.html
-[7]: https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html
-[8]: https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html#ic_winx64_inst
-[9]: https://docs.datadoghq.com/ja/help/
+[2]: https://oracle.github.io/python-oracledb/
+[3]: https://www.oracle.com/technetwork/database/application-development/jdbc/downloads/index.html
+[4]: https://github.com/DataDog/integrations-core/blob/master/oracle/datadog_checks/oracle/data/conf.yaml.example
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://docs.datadoghq.com/ja/monitors/monitor_types/metric/?tab=threshold
+[7]: https://github.com/DataDog/integrations-core/tree/7.41.x/oracle#oracle-instant-client
+[8]: https://docs.datadoghq.com/ja/help/

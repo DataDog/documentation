@@ -21,9 +21,10 @@ Containerized Windows Applications Monitoring には、Datadog Agent 7.19+ が�
 
 対応する OS のバージョンは以下の通りです。
 - Windows Server 2019 (LTSC / 1809)
-- Windows Server 2019 1909
-- Windows Server 2019 2004 / 20H1
-- Windows Server 2019 20H2 (Agent 7.33+)
+- Windows Server 2019 1909 (Agent 7.39 まで、Microsoft がサポートしなくなったため)
+- Windows Server 2019 2004 または 20H1 (Agent 7.39 まで、Microsoft がサポートしなくなったため)
+- Windows Server 2019 20H2 (Agent 7.33〜7.39、Microsoft がサポートしなくなったため)
+- Windows Server 2022 LTSC (Agent >=7.34)
 
 Hyper-V 分離モードはサポートされていません。
 

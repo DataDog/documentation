@@ -12,6 +12,12 @@ further_reading:
 - link: /tracing/
   tag: Documentation
   text: トレースの収集
+- link: /agent/basic_agent_usage/#agent-architecture
+  tag: Documentation
+  text: Agent のアーキテクチャを詳しく見る
+- link: /agent/guide/network#configure-ports
+  tag: Documentation
+  text: インバウンドポートの構成
 kind: documentation
 platform: Windows
 title: Windows 用 Agent の基本的な使用方法
@@ -34,13 +40,17 @@ Datadog Agent をドメイン環境にインストールするには、[Agent �
 {{< tabs >}}
 {{% tab "GUI" %}}
 
-1. [Datadog Agent インストーラー][1]をダウンロードします。
+1. [Datadog Agent インストーラー][1]をダウンロードし、最新バージョンの Agent をインストールします。
+
+   <div class="alert alert-info">特定のバージョンの Agent をインストールする必要がある場合は、<a href="https://s3.amazonaws.com/ddagent-windows-stable/installers.json">インストーラーリスト</a>を参照してください。</div>
+
 2. `datadog-agent-7-latest.amd64.msi` を開き、インストーラーを (**管理者**として) 実行します。
 3. プロンプトに従ってライセンス契約に同意し、[Datadog API キー][2]を入力します。
 4. インストールが終了したら、オプションから Datadog Agent Manager を起動できます。
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
 [2]: https://app.datadoghq.com/organization-settings/api-keys
+
 {{% /tab %}}
 {{% tab "コマンドライン" %}}
 
@@ -65,8 +75,9 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.m
 
 - `/qn` オプションはバックグラウンドインストールを実行します。GUI プロンプトを表示する場合は、削除してください。
 - Agent のバージョンによっては、強制的に再起動する場合があります。これを防ぐには、パラメーター `REBOOT=ReallySuppress` を追加します。
+- Agent コンポーネントの中には、データを収集するためにカーネルドライバーを必要とするものがあります。お使いのコンポーネントにカーネルドライバーが必要かどうかは、そのコンポーネントのドキュメントページを参照するか、関連する Agent コンフィギュレーションファイルで `kernel driver` を検索してください。
 
-### コンフィギュレーション
+### 構成
 
 各構成項目は、コマンドラインにプロパティとして追加します。Agent を Windows にインストールする場合は、以下の構成コマンドラインオプションを使用できます。
 
@@ -89,7 +100,7 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.m
 | `DDAGENTUSER_PASSWORD`                      | 文字列  | Agent インストール時に `ddagentuser` ユーザー用に生成された暗号論的に安全なパスワードを上書きします _(v6.11.0 以降)_。ドメインサーバー上のインストールにはこれを提供する必要があります。[Datadog Windows Agent ユーザーについては、こちらを参照してください][3]。  |
 | `APPLICATIONDATADIRECTORY`                  | パス    | 構成ファイルのディレクトリツリーに使用するディレクトリを上書きします。初期インストール時にのみ提供でき、アップグレードでは無効です。デフォルト: `C:\ProgramData\Datadog` _(v6.11.0 以降)_                                           |
 | `PROJECTLOCATION`                           | パス    | バイナリファイルのディレクトリツリーに使用するディレクトリを上書きします。初期インストール時にのみ提供でき、アップグレードでは無効です。デフォルト: `%ProgramFiles%\Datadog\Datadog Agent` _(v6.11.0 以降)_                                    |
-| `ADDLOCAL`                                  | 文字列  | 追加の Agent コンポーネントを有効にします。`"MainApplication,NPM"` に設定すると、[ネットワークパフォーマンスモニタリング][4]のドライバーコンポーネントがインストールされます。                                                                          |
+| [非推奨] `ADDLOCAL` | 文字列 | 追加の Agent コンポーネントを有効にします。`"MainApplication,NPM"` に設定すると、[ネットワークパフォーマンスモニタリング][4]のドライバーコンポーネントがインストールされます。_(バージョン 7.44.0 以前)_ |
 | `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Boolean | EC2 上の Windows ホストの EC2 インスタンス ID を使用します。_(v7.28.0+)_                                                                                                                                                                      |
 
 **注**: 有効な `datadog.yaml` が見つかり、API キーが設定されている場合は、そのファイルが、指定されているすべてのコマンドラインオプションより優先されます。
@@ -140,10 +151,7 @@ Agent の実行は、Windows サービスコントロールマネージャーに
 | help            | コマンドのヘルプを表示します。                                                     |
 | hostname        | Agent が使用するホスト名を出力します。                                           |
 | import          | 以前のバージョンの Agent から構成ファイルをインポートして変換します。    |
-| installservice  | サービスコントロールマネージャー内で Agent をインストールします。                           |
 | launch-gui      | Datadog Agent Manager を起動します。                                                |
-| regimport       | レジストリ設定を `datadog.yaml` にインポートします。                                |
-| remove-service  | サービスコントロールマネージャーから Agent を削除します。                              |
 | restart-service | サービスコントロールマネージャー内で Agent を再起動します。                           |
 | run             | Agent を起動します。                                                                |
 | start           | Agent を起動します。(非推奨ですが、受け付けられます。代わりに `run` を使用してください。) |
@@ -186,7 +194,7 @@ Windows PowerShell で、次のコマンドを使用することもできます�
 {{% /tab %}}
 {{< /tabs >}}
 
-## コンフィギュレーション
+## 構成
 
 [Datadog Agent Manager][6] を使ってチェックを有効化、無効化、および構成します。Agent を再起動して変更内容を適用します。
 

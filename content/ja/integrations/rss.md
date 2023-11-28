@@ -15,7 +15,7 @@ public_title: Datadog-RSS インテグレーション
 short_description: Datadog イベントエクスプローラーで RSS フィードをキャプチャ
 ---
 
-{{< img src="integrations/rss/rss.png" alt="RSS イベント"  >}}
+{{< img src="integrations/rss/rss.png" alt="RSS イベント" >}}
 
 ## 概要
 
@@ -35,7 +35,7 @@ Datadog で RSS フィードのアクティビティをキャプチャして、�
 
 **オプション**: RSS フィードにアクセスするためのユーザー名とパスワードを入力します。
 
-{{< img src="integrations/rss/rss_setup.png" alt="RSS セットアップ"  >}}
+{{< img src="integrations/rss/rss_setup.png" alt="RSS セットアップ" >}}
 
 ### 検証
 

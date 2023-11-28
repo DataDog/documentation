@@ -11,6 +11,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/docker-logging/
   tag: ブログ
   text: Docker ロギングのベストプラクティス
+- link: /glossary/#tail
+  tag: 用語集
+  text: 用語集 "テール" の項目
 kind: ガイド
 title: コンテナ Agent を使用してホストからログを追跡する
 ---

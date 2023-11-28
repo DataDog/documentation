@@ -1,33 +1,35 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - log collection
-ddtype: crawler
+- cloud
+- data store
+- google cloud
+- log collection
 dependencies: []
-description: "Surveillez des métriques clés de Google\_Cloud\_Memorystore pour Redis."
+description: Surveillez des métriques clés de Google Cloud Memorystore pour Redis.
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_redis/
 draft: false
 git_integration_title: google_cloud_redis
 has_logo: true
 integration_id: google-cloud-redis
-integration_title: "Google\_Cloud\_Memorystore pour Redis"
+integration_title: Google Cloud Memorystore pour Redis
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: google_cloud_redis
-public_title: "Intégration Datadog/Google\_Cloud\_Memorystore pour Redis"
-short_description: "Surveillez des métriques clés de Google\_Cloud\_Memorystore pour Redis."
+public_title: Intégration Datadog/Google Cloud Memorystore pour Redis
+short_description: Surveillez des métriques clés de Google Cloud Memorystore pour
+  Redis.
 version: '1.0'
 ---
+
 ## Présentation
 
 Google Cloud Memorystore pour Redis est un service de stockage de données en mémoire entièrement géré basé sur une infrastructure évolutive, sécurisée et hautement disponible.
 
 Utilisez l'intégration Datadog/Google Cloud Platform pour recueillir des métriques de Google Cloud Memorystore pour Redis.
 
-## Configuration
+## Implémentation
 
 ### Installation
 

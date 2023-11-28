@@ -33,14 +33,20 @@ Here's a two-minute video walkthrough:
 
 ### Create
 
-1. After the feature is enabled, see the [New Account Page][3].
-2. Enter the name of the child-organization you wish to create and click the **Create** button. **The child-organization name cannot exceed 32 characters.**
+1. After the feature is enabled, see the [New Organization Page][3].
+2. Enter the name of the child-organization you wish to create. **The child-organization name cannot exceed 32 characters.**
+3. Optionally, invite admin users to your child-organization:
+    - Enter one or more email addresses.
+    - Invited users are assigned the [Datadog Admin role][4]. You can invite more users in
+Organization Settings after creating your organization.
+    - If the user does not have a password, Datadog sends an email invitation with a link to set a password and join the new child-organization.
+4. Click **Create**.
 
-The new child-organization inherits the parent-organization's plan and is added to the parent-organization's billing account. If you want to update the child-organization's billing, [contact your sales representative][4].
+The new child-organization inherits the parent-organization's plan and is added to the parent-organization's billing account. If you want to update the child-organization's billing, [contact your sales representative][5].
 
 ### Content
 
-Onboarding a new sub-organization with a set of baseline dashboards and monitors can be done programmatically with the [Datadog API][5] and tools such as Terraform, see [Managing Datadog with Terraform][6]. Additionally, scripts can be used to backup existing dashboards and [monitors][7] as code.
+Onboarding a new sub-organization with a set of baseline dashboards and monitors can be done programmatically with the [Datadog API][6] and tools such as Terraform, see [Managing Datadog with Terraform][7]. Additionally, scripts can be used to backup existing dashboards and [monitors][8] as code.
 
 ### Custom sub-domains
 
@@ -58,9 +64,9 @@ SAML setup is _not_ inherited by child-organizations from the parent-organizatio
 
 To configure SAML for multi-organizations:
 
-1. Create a new organization as a different user, with a different username/password.
+1. Create a new organization.
 2. Invite SAML users.
-3. Login as a SAML user and set SAML.
+3. Login as a SAML user and [set up SAML][9].
 
 ### SAML strict parent organizations
 
@@ -91,13 +97,13 @@ The Usage page shows the aggregate usage of the parent-organization and all its 
 
 This tab contains a Month-to-Date Total Usage section and an Overall Usage section.
 
-The Month-to-Date Total Usage section summarizes your month-to-date usage of hosts, containers, custom metrics, and any other part of the platform you’ve used during the month, across your parent-organization and all its child-organizations.
+The Month-to-Date Total Usage section summarizes your month-to-date usage of hosts, containers, custom metrics, and any other part of the platform you've used during the month, across your parent-organization and all its child-organizations.
 
 {{< img src="account_management/multi-org-v2.png" alt="Month-to-Date Usage" >}}
 
 Most accounts by default can view "Billable" usage, which shows usage that contributes to your final bill. This view also breaks out on-demand usage above your commitments and allocations. The "All" view shows you all usage, including non-billable usage such as product trials.
 
-The Overall Usage section shows the monthly aggregate usage across all organizations over the past 6 months. The usage shown here is “All” usage not “Billable” usage, which means it does not adjust for trial periods or other billing changes used to calculate your final bill. This information can be downloaded as a CSV file.
+The Overall Usage section shows the monthly aggregate usage across all organizations over the past 6 months. The usage shown here is "All" usage not "Billable" usage, which means it does not adjust for trial periods or other billing changes used to calculate your final bill. This information can be downloaded as a CSV file.
 
 {{< img src="account_management/multi-org-v2-trends.png" alt="Overall Usage Long-term trends" >}}
 
@@ -121,11 +127,11 @@ On the **Individual Organizations** usage tab, you can view the usage of your ch
 
 The default view is the "Billable" view, which shows usage that contributes to your final bill. This view removes child organizations that are not billable such as trial organizations, and other adjustments that provide a more accurate summary of what drives your bill. Switch to the "All" view to see the unadjusted, raw usage of your parent-organization and all child-organizations. Both views can be downloaded as a CSV file.
 
-To view the [Usage Details][8] of a child-organization, you can click on the child-organization's name.
+To view the [Usage Details][10] of a child-organization, you can click on the child-organization's name.
 
 ## Usage attribution
 
-The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][9] page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
+The parent-organization can view the usage of child-organizations by existing tag keys in the [Usage Attribution][11] page. Admins can hover over their username at the bottom left, then navigate to: `Plan & Usage`--> `Usage Attribution`.
 
 When enabled at the parent-organization level, usage attribution shows usage aggregated across all organizations. This can be useful if you would like to attribute the usage of your child-organizations to certain projects, teams, or other groupings.
 
@@ -154,9 +160,11 @@ Usage Attribution is an advanced feature included in the Enterprise plan. For al
 [1]: /account_management/#managing-your-organizations
 [2]: /help/
 [3]: https://app.datadoghq.com/account/new_org
-[4]: mailto:success@datadoghq.com
-[5]: /api/
-[6]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
-[7]: /monitors/manage/
-[8]: /account_management/billing/usage_details/
-[9]: /account_management/billing/usage_attribution/
+[4]: /account_management/rbac/permissions/#advanced-permissions
+[5]: mailto:success@datadoghq.com
+[6]: /api/
+[7]: https://www.datadoghq.com/blog/managing-datadog-with-terraform
+[8]: /monitors/manage/
+[9]: /account_management/saml/
+[10]: /account_management/plan_and_usage/usage_details/
+[11]: /account_management/billing/usage_attribution/

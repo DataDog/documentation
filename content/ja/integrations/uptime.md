@@ -1,35 +1,59 @@
 ---
+app_id: uptime
+app_uuid: 937f96ea-644f-4903-9f74-cdc5e8b46dd8
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: uptime.response_time
+      metadata_path: metadata.csv
+      prefix: uptime
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Uptime
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Uptime
+  sales_email: help@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
+- notification
 - os & system
-creates_events: true
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/uptime/README.md
-display_name: Uptime
+display_on_public_website: true
 draft: false
 git_integration_title: uptime
-guid: 5da2ddb8-ecf7-4971-a3ee-e42752efc1f5
 integration_id: uptime
-integration_title: Uptime
+integration_title: Uptime.com
 integration_version: ''
 is_public: true
 kind: インテグレーション
-maintainer: jeremy-lq
-manifest_version: 1.0.0
-metric_prefix: uptime
-metric_to_check: uptime.response_time
+manifest_version: 2.0.0
 name: uptime
-public_title: Uptime
+oauth: {}
+public_title: Uptime.com
 short_description: アップタイムとパフォーマンスの監視を容易に実行
-support: contrib
 supported_os:
 - linux
-- mac_os
 - windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::通知
+  - Category::OS とシステム
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: アップタイムとパフォーマンスの監視を容易に実行
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Uptime.com
 ---
 
 

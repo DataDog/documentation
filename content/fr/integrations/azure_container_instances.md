@@ -1,13 +1,13 @@
 ---
 aliases:
-  - /fr/integrations/azure_containerinstances
+- /fr/integrations/azure_containerinstances
 categories:
-  - cloud
-  - containers
-  - azure
-ddtype: crawler
+- azure
+- cloud
+- containers
+- provisioning
 dependencies: []
-description: "Surveillez des métriques clés d'Azure\_Container\_Instances."
+description: Surveillez des métriques clés d'Azure Container Instances.
 doc_link: https://docs.datadoghq.com/integrations/azure_container_instances/
 draft: false
 git_integration_title: azure_container_instances
@@ -19,17 +19,18 @@ is_public: true
 kind: integration
 manifest_version: '1.0'
 name: azure_container_instances
-public_title: "Intégration Datadog/Microsoft Azure\_Container\_Instances"
-short_description: "Surveillez des métriques clés d'Azure\_Container\_Instances."
+public_title: Intégration Datadog/Microsoft Azure Container Instances
+short_description: Surveillez des métriques clés d'Azure Container Instances.
 version: '1.0'
 ---
+
 ## Présentation
 
 Azure Container Instances est un service qui permet aux développeurs de déployer des conteneurs sans avoir à provisionner ou gérer l'infrastructure sous-jacente.
 
 Utilisez l'intégration Datadog/Azure pour recueillir des métriques d'Azure Container Instances.
 
-## Configuration
+## Implémentation
 
 ### Installation
 

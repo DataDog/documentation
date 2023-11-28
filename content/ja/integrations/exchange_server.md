@@ -33,7 +33,7 @@ draft: false
 git_integration_title: exchange_server
 integration_id: exchange-server
 integration_title: Microsoft Exchange Server
-integration_version: 1.14.0
+integration_version: 1.15.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

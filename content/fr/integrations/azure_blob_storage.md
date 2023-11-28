@@ -1,8 +1,8 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- cloud
+- data store
 dependencies: []
 description: Surveillez des métriques clés de Stockage Blob Azure.
 doc_link: https://docs.datadoghq.com/integrations/azure_blob_storage/
@@ -20,6 +20,7 @@ public_title: Intégration Datadog/Stockage Blob Microsoft Azure
 short_description: Surveillez des métriques clés de Stockage Blob Azure.
 version: '1.0'
 ---
+
 ## Présentation
 
 Stockage Blob Azure est une solution de stockage d'objets conçue par Microsoft pour le cloud. Le stockage de blobs est optimisé pour d'importants volumes de données non structurées. Recueillez des métriques de Stockage Blob Azure pour :
@@ -27,7 +28,7 @@ Stockage Blob Azure est une solution de stockage d'objets conçue par Microsof
 - Visualiser les performances de Stockage Blob
 - Corréler les performances de Stockage Blob avec vos applications
 
-## Configuration
+## Implémentation
 
 ### Installation
 

@@ -3,7 +3,7 @@
     {{ $dot := . }}
 
     {{ with .Content}}
-       <div class="col-12 {{if ne $dot.RelPermalink "/api/latest/scopes/"}}col-lg-9{{ end }} pl-0">
+       <div class="col-12 {{if ne $dot.RelPermalink "/api/latest/scopes/"}}col-lg-9{{ end }} ps-0">
         {{ . }}
        </div>
     {{ end }}
@@ -31,8 +31,13 @@
     {{ $d := index $dot.Site.Data.api.v1 "full_spec_deref" }}
     {{ $d2 := index $dot.Site.Data.api.v2 "full_spec_deref" }}
 
+    {{ $baseDir := "" }}
+    {{ with .File }}
+      {{ $baseDir = path.Base .Dir }}
+    {{ end }}
+
     <!-- get lang specific data file -->
-    {{ $tagSlug := path.Base .File.Dir }}
+    {{ $tagSlug := $baseDir }}
     {{ $.Scratch.Set "translate_tags" (dict) }}
     {{ $.Scratch.Set "translate_actions" (dict) }}
     {{ if ne $.Page.Lang "en"}}
@@ -83,7 +88,7 @@
               {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $menuChild.Params.operationids "spec" $adat "generalRegions" $generalRegions ) }}
               {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $endpoint) }}
               <li class="nav-item">
-                <a class="nav-link mr-1 {{ with $endpointVisibility.label }}{{ else }}px-3{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (gt (len $menuChild.Params.versions) 1) }}active{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (eq (len $menuChild.Params.versions) 1) }}disabled{{ end }}" {{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}data-toggle="collapse"{{- else -}}data-toggle="tab"{{- end -}} href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} {{ with $endpointVisibility.label }}({{ . }}){{ end }}</a>
+                <a class="nav-link me-1 {{ with $endpointVisibility.label }}{{ else }}px-3{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (gt (len $menuChild.Params.versions) 1) }}active{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (eq (len $menuChild.Params.versions) 1) }}disabled{{ end }}" {{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}data-bs-toggle="collapse"{{- else -}}data-bs-toggle="tab" data-bs-target="#{{ (print $anchorStr "-" $versionNum) | anchorize }}"{{- end -}} href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} {{ with $endpointVisibility.label }}({{ . }}){{ end }}</a>
               </li>
             {{ end }}
           </ul>
@@ -106,7 +111,7 @@
       <div id="{{ (print $anchorStr "-" $versionNum) | anchorize }}" class="{{- if and (eq (len $menuChild.Params.versions) 1) ($endpoint.action.deprecated | default false) -}}collapse{{- else -}}tab-pane{{- end -}} {{ if $endpointVisibility.isVisibleVersion }} active{{ end }}" role="tabpanel">
 
       <!-- for accessing v1/v2 resources from latest -->
-      {{ $resourcePage := $dot.Site.GetPage (print "/api/" $versionNum "/" (path.Base $dot.File.Dir) "") }}
+      {{ $resourcePage := $dot.Site.GetPage (print "/api/" $versionNum "/" $baseDir "") }}
 
       {{ range $tag := (first 1 (where $adat.tags ".name" "==" $ParamTitleEn)) }}
         <!-- get action strings from params, why? because they are translated here -->
@@ -137,7 +142,7 @@
                     {{ if (and $endpointVisibility.isVisibleVersion (eq $versionNum "v1") (gt $versionCount 1)) }}
                       {{ $collapsedAnchorStr := (print $endpoint.action.summary " " (replace $versionNum "1" "2")) }}
                       <div class="alert alert-warning mb-2 unstable-newer">
-                        <p class="alert-warning">Note: For the "v2" version of this endpoint, which is in public beta, see <a class="toggle-version-tab" href="#{{ $collapsedAnchorStr | anchorize }}">{{- $collapsedAnchorStr -}}.</a></p>
+                        <p class="alert-warning">Note: For the "v2" version of this endpoint, which is in beta, see <a class="toggle-version-tab" href="#{{ $collapsedAnchorStr | anchorize }}">{{- $collapsedAnchorStr -}}.</a></p>
                       </div>
                     {{ end }}
 
@@ -154,7 +159,7 @@
 
                     <h3 class="mt-2">{{ i18n "overview" }}</h3>
                     <p>
-                      {{ $translate_action.description | default $endpoint.action.description | markdownify }}
+                     {{ $translate_action.description | default $endpoint.action.description | $dot.Page.RenderString }}
                       <!-- required scopes -->
                       {{ partial "api/scopes.html" (dict "context" $dot "endpoint" $endpoint "securitySchemes" $adat.components.securitySchemes "tag" $tag) }}
                     </p>

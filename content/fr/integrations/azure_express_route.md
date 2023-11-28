@@ -1,34 +1,35 @@
 ---
 aliases:
-  - /fr/integrations/azure_expressroute
+- /fr/integrations/azure_expressroute
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- cloud
+- network
 dependencies: []
-description: "Surveillez les métriques clés de Azure\_ExpressRoute."
+description: Surveillez les métriques clés de Azure ExpressRoute.
 doc_link: https://docs.datadoghq.com/integrations/azure_express_route/
 draft: false
 git_integration_title: azure_express_route
 has_logo: true
 integration_id: azure-expressroute
-integration_title: "Microsoft\_Azure\_ExpressRoute"
+integration_title: Microsoft Azure ExpressRoute
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: azure_express_route
-public_title: "Intégration Datadog/Microsoft\_Azure\_ExpressRoute"
-short_description: "Surveillez les métriques clés de Azure\_ExpressRoute."
+public_title: Intégration Datadog/Microsoft Azure ExpressRoute
+short_description: Surveillez les métriques clés de Azure ExpressRoute.
 version: '1.0'
 ---
+
 ## Présentation
 
 Utilisez le service Azure ExpressRoute pour étendre vos réseaux locaux à Microsoft Cloud via une connexion privée facilitée par un fournisseur de connectivité.
 
 Utilisez l'intégration Datadog/Azure pour recueillir les métriques d'Azure ExpressRoute.
 
-## Configuration
+## Implémentation
 
 ### Installation
 

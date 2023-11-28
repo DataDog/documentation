@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
 - azure
+- クラウド
+- ネットワーク
 dependencies: []
 description: Azure Data Explorer のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_data_explorer/

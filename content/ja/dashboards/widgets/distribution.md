@@ -1,61 +1,73 @@
 ---
-title: 分布ウィジェット
-kind: documentation
-description: 1 つ以上のタグに対して集計されたメトリクスの分布をグラフ化する
 aliases:
-  - /ja/graphing/widgets/distribution/
+- /ja/graphing/widgets/distribution/
+description: 1 つ以上のタグに対して集計されたメトリクスの分布をグラフ化する
 further_reading:
-  - link: /dashboards/timeboards/
-    tag: ドキュメント
-    text: Timeboards
-  - link: /dashboards/graphing_json/
-    tag: ドキュメント
-    text: JSON を使用したダッシュボードの構築
+- link: /metrics/distributions/
+  tag: ドキュメント
+  text: ディストリビューション
+- link: /ja/dashboards/graphing_json/
+  tag: Documentation
+  text: JSON を使用したダッシュボードの構築
+- link: /dashboards/graphing_json/widget_json/
+  tag: Documentation
+  text: ウィジェット JSON スキーマ
+- link: /dashboards/graphing_json/request_json/
+  tag: Documentation
+  text: リクエスト JSON スキーマ
+- link: /dashboards/querying/
+  tag: Documentation
+  text: クエリ
+kind: documentation
+title: 分布ウィジェット
 ---
-分布の可視化は、1 つまたは複数のタグ (hosts など) に対して集計されたメトリクスを表示する方法の 1 つです。[ヒートマップ][1]と異なり、分布グラフの x 軸は時間ではなく数量を表します。
 
-この可視化機能は、1 つのメトリクスクエリのみを表示します。追加のクエリは無視されます。
+分布を可視化することで、1 つまたは複数のタグ (*hosts* など) に対して集計されたメトリクスを表示します。[ヒートマップ][1]と異なり、分布グラフの x 軸は時間ではなく数量を表します。
+
+この可視化機能は、1 つのクエリのみを表示します。追加のクエリは無視されます。
 
 **注**: この可視化で外れ値の検出を行うことはできません。
 
-{{< img src="dashboards/widgets/distribution/distribution.png" alt="Distribution"  >}}
+{{< img src="/dashboards/widgets/distribution/distribution_fullscreen.png" alt="JVM ヒープ平均のホスト別分布グラフ">}}
 
 ## セットアップ
 
-{{< img src="dashboards/widgets/distribution/distribution_setup.png" alt="ディストリビューション"  style="width:80%;">}}
-
 ### コンフィギュレーション
 
-通常どおりにメトリクスクエリを構成します。この可視化タイプは、メトリクスが `host` ごとなどの複数のタグキーに対して集計される場合にのみ有用です。
-`avg`/`max`/`min`/`sum by` のコントロールで選択を行い、関連付けられているタグのデータを表示します。
+1. グラフ化するデータを選択します。ディストリビューションの視覚化は、メトリクス、ライブプロセス、APM リクエストレイテンシー、ログイベント、および RUM イベントをサポートしています。
+**注**: この可視化タイプは、データが `host` ごとなどの複数のタグキーに対して集計される場合にのみ有用です。
+1. `avg`/`max`/`min`/`sum by` のコントロールで選択を行い、関連付けられているタグのデータを表示します。
+1. オプションを使用して、グラフをカスタマイズします。
 
 ### オプション
 
-#### 表示設定
+#### パーセンタイルマーカー
 
-{{< img src="dashboards/widgets/options/display_preferences.png" alt="表示設定"  style="width:80%;">}}
+APM リクエスト分布で、X 軸にパーセンタイルマーカーを追加できます。
 
-##### グローバルタイム
+{{< img src="dashboards/widgets/options/distribution_marker_controls.jpg" alt="マーカーコントロール環境設定" style="width:80%;">}}
 
-スクリーンボードの場合にのみ、ウィジェットがカスタムタイムフレームを持つか、スクリーンボードのグローバルタイムフレームを持つかを選択します。
+#### X 軸と Y 軸の制御
 
-##### 凡例
+グラフ軸の制御は、UI または JSON エディターから使用できます。
 
-Show legend on graph を使用して、ウィジェットの凡例の表示/非表示を切り替えます。オプションで、表示するエントリ数を選択できます。
+以下を実行できます。
 
-#### タイトル
+* X 軸および Y 軸を特定の範囲にカット。
+* パーセンタイルしきい値または絶対しきい値に基づいて X 軸の境界を自動的に変更します。このしきい値をグラフの両端 (下側と上側) または一方に適用することで、「外れ値」のビンを除外できます。
+* Y 軸の目盛を線形目盛から対数に変更します。
 
-`Show a Title` チェックボックスをオンにして、ウィジェットのカスタムタイトルを表示します。
+{{< img src="dashboards/widgets/options/distribution_axis_controls.jpg" alt="ディストリビューション軸のコントロール環境設定" style="width:80%;">}}
 
-{{< img src="dashboards/widgets/options/title.png" alt="ウィジェットのタイトル"  style="width:80%;">}}
+### 全画面
 
-オプションで、サイズと配置を定義できます。
+[標準の全画面オプション][2]のほかに、X 軸のコントロールを使用して特定のパーセンタイルにズームインすることができます。
 
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] ドキュメントをご参照ください。
+このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][3] ドキュメントをご参照ください。
 
-分布ウィジェット専用の[ウィジェット JSON スキーマ定義][3]は次のとおりです。
+分布ウィジェット専用の[ウィジェット JSON スキーマ定義][4]は次のとおりです。
 
 {{< dashboards-widgets-api >}}
 
@@ -63,6 +75,7 @@ Show legend on graph を使用して、ウィジェットの凡例の表示/非�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/dashboards/widgets/heat_map/
-[2]: /ja/api/v1/dashboards/
-[3]: /ja/dashboards/graphing_json/widget_json/
+[1]: /ja/dashboards/widgets/heatmap/
+[2]: /ja/dashboards/widgets/#full-screen
+[3]: /ja/api/latest/dashboards/
+[4]: /ja/dashboards/graphing_json/widget_json/

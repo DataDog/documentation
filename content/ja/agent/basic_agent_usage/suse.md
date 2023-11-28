@@ -1,27 +1,34 @@
 ---
-title: SUSE 用 Agent の基本的な使用方法
+aliases:
+- /ja/guides/basic_agent_usage/suse/
+further_reading:
+- link: /logs/
+  tag: Documentation
+  text: ログの収集
+- link: /infrastructure/process/
+  tag: Documentation
+  text: プロセスの収集
+- link: /tracing/
+  tag: Documentation
+  text: トレースの収集
+- link: /agent/basic_agent_usage/#agent-architecture
+  tag: Documentation
+  text: Agent のアーキテクチャを詳しく見る
+- link: /agent/configuration/network#configure-ports
+  tag: Documentation
+  text: インバウンドポートの構成
 kind: documentation
 platform: SUSE
-aliases:
-  - /ja/guides/basic_agent_usage/suse/
-further_reading:
-  - link: /logs/
-    tag: Documentation
-    text: ログの収集
-  - link: /infrastructure/process/
-    tag: Documentation
-    text: プロセスの収集
-  - link: /tracing/
-    tag: Documentation
-    text: トレースの収集
+title: SUSE 用 Agent の基本的な使用方法
 ---
+
 ## 概要
 
 このページでは、SUSE 用 Datadog Agent の基本的な機能について説明します。Agent をまだインストールしていない場合は、[Datadog Agent インテグレーションに関するドキュメント][1]で手順を参照してください。
 
 64-bit x86 アーキテクチャ用のパッケージをご用意しています。その他のアーキテクチャについては、ソースインストールをご利用ください。
 
-**注**: SUSE 11 SP4 以降がサポートされます。
+**注**: SUSE 11 SP4 以降は、Agent < 6.33.0/7.33.0 でサポートされています。SLES 12 以降および OpenSUSE 15 以降では、Agent >= 6.33.0/7.33.0 がサポートされています。
 
 ## コマンド
 
@@ -110,7 +117,7 @@ Agent の構成ファイルおよびフォルダーの場所
 
 ## トラブルシューティング
 
-[Agent のトラブルシューティングドキュメントは、こちらを参照してください][3]。
+[Agent のトラブルシューティングに関するドキュメント][3]を参照してください。
 
 ## 埋め込み Agent の使用
 
@@ -122,7 +129,7 @@ Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/suse
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=suse
 [2]: /ja/agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
 [3]: /ja/agent/troubleshooting/
 [4]: /ja/developers/guide/custom-python-package/

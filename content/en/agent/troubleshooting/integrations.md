@@ -3,27 +3,43 @@ title: Getting Integrations Working
 kind: documentation
 aliases:
     - /integrations/faq/issues-getting-integrations-working
+further_reading:
+- link: "/agent/troubleshooting/debug_mode/"
+  tag: "Agent Troubleshooting"
+  text: "Agent debug mode"
+- link: "/agent/troubleshooting/send_a_flare/"
+  tag: "Agent Troubleshooting"
+  text: "Send an Agent flare"
+- link: "/agent/troubleshooting/agent_check_status/"
+  tag: "Agent Troubleshooting"
+  text: "Get the status of an Agent check"
 ---
 
-Datadog has a [few integrations][1] that are set up through YAML files in the Agent.
+Datadog integrations are configured through the Datadog Agent using YAML configuration files. For the path to the configuration directory for your operating system, consult the [Agent Configuration Files][1] documentation.
 
-Here is a quick guide for troubleshooting getting integrations installed:
+If an integration that you've configured is not showing up in Datadog, run the [`status` CLI command][2] and look for the integration under the *Running Checks* heading.
 
-1. Run the [info command][2].
-2. Is the integration showing up in the [info command][2]?
+If the integration is listed under **Running Checks**, but is not visible in the Datadog app:
+1. Make sure there are no errors or warnings listed under the integration's entry in the `status` output.
+1. Check the [Metrics Explorer][3] to see if system metrics are showing up from the host. For example, on the host where you configured the integration, look for `system.cpu.user`.
+1. If there are still no metrics, check the [Datadog logs][4] for errors and send them along with the `status` command output to [Datadog support][5].
 
-    **No, it's not**:
+If the integration is not listed under **Running Checks**:
+1. Make sure that the configuration file for the integration is in the right location and named correctly.
+1. [Consult the documentation][6] for the integration to check that you've configured it correctly.
+1. Check the configuration file using a [YAML parser][7] to make sure the YAML is valid.
+1. Each time you move or change the file, [restart the Agent][8] and run the `status` command again to check for changes.
+1. If you still can't get the integration to appear in the `status` output, check the [Datadog Logs][4] for errors and send them to [Datadog support][5].
 
-      1. Check the configuration file, make sure it is in the right location and named correctly.
-      2. Check it in a YAML parser to make sure it has the correct syntax. Example files can be found here.
-      3. If you moved or changed the file, [restart the Agent][3] and then rerun the info command to see if it is now showing up.
+## Further Reading
 
-    **Yes, it's there**:
+{{< partial name="whats-next/whats-next.html" >}}
 
-      1. Check the Metrics Explorer to see if system metrics are showing up from the host. For example, look for `system.cpu.user` from the host that is running the Agent and has that integration setup.
-      2. If there are still no metrics, check the logs for errors and send them along with the info command output to [Datadog support][4].
-
-[1]: /integrations/
-[2]: /agent/guide/agent-commands/#agent-status-and-information
-[3]: /agent/guide/agent-commands/#start-stop-restart-the-agent
-[4]: /help/
+[1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
+[2]: /agent/configuration/agent-commands/#agent-information
+[3]: https://app.datadoghq.com/metric/explorer
+[4]: /agent/configuration/agent-log-files/
+[5]: /help/
+[6]: /integrations/
+[7]: https://codebeautify.org/yaml-parser-online
+[8]: /agent/configuration/agent-commands/#start-stop-restart-the-agent

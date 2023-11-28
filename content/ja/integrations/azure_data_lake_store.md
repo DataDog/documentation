@@ -2,8 +2,9 @@
 aliases:
 - /ja/integrations/azure_datalakestore
 categories:
-- cloud
 - azure
+- クラウド
+- data store
 dependencies: []
 description: Azure Data Lake Store のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_data_lake_store/

@@ -1,8 +1,6 @@
 ---
 title: Unified Service Tagging
 kind: documentation
-aliases:
-- /getting_started/tagging/unified_service_tagging
 further_reading:
 - link: "/getting_started/tagging/using_tags"
   tag: "Documentation"
@@ -13,11 +11,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/autodiscovery-docker-monitoring/"
   tag: "Blog"
   text: "Learn more about Autodiscovery"
+algolia:
+  tags: ['unified service tags','unified','unified service','service tags']
 ---
 
 ## Overview
 
-Unified service tagging ties Datadog telemetry together through using three [reserved tags][1]: `env`, `service`, and `version`.
+Unified service tagging ties Datadog telemetry together by using three [reserved tags][1]: `env`, `service`, and `version`.
 
 With these three tags, you can:
 
@@ -31,7 +31,7 @@ With these three tags, you can:
 
 ### Requirements
 
-- Unified service tagging requires setup of a [Datadog Agent][3] that is 6.19.x/7.19.x or higher.
+- Unified service tagging requires the setup of a [Datadog Agent][3] that is 6.19.x/7.19.x or higher.
 
 - Unified service tagging requires a tracer version that supports new configurations of the [reserved tags][1]. More information can be found per language in the [setup instructions][4].
 
@@ -66,7 +66,7 @@ To setup unified service tagging in a containerized environment:
 
 2. If you are using [Docker][2], make sure the Agent can access your container's [Docker socket][7]. This allows the Agent detect the environment variables and map them to the standard tags.
 
-4. Configure your environment based on either full configuration or partial configuration detailed below.
+3. Configure your environment that corresponds to your container orchestration service based on either full configuration or partial configuration as detailed below.
 
 #### Configuration
 
@@ -395,7 +395,7 @@ instances:
 
 **Note**: If you already have a `service` tag set globally in your Agent's main configuration file, the process metrics are tagged with two services. Since this can cause confusion with interpreting the metrics, it is recommended to configure the `service` tag only in the configuration of the process check.
 
-[1]: /agent/guide/agent-configuration-files
+[1]: /agent/configuration/agent-configuration-files
 [2]: /integrations/process
     {{% /tab %}}
     {{< /tabs >}}

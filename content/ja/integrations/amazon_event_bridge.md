@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
-- aws
+- AWS
+- クラウド
+- 通知
 dependencies: []
 description: Amazon EventBridge のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_event_bridge/
@@ -44,7 +45,7 @@ Amazon EventBridge と Datadog のインテグレーションは、以下の機�
 
 ### コンフィギュレーション
 
-イベントバスにアラート通知を送信するには、`events:CreateEventBus` アクセス許可が必要です。このアクセス許可が設定されていない場合は、[Datadog IAM アクセス許可のドキュメント][2]を参照して、さらに構成を行う前にアクセス許可を有効にしてください。
+イベントバスにアラート通知を送信するには、`events:CreateEventBus` と `events:PutPartnerEvents` のアクセス許可が必要です。このアクセス許可が設定されていない場合は、[Datadog IAM アクセス許可のドキュメント][2]を参照して、さらに構成を行う前にアクセス許可を有効にしてください。
 
 1. [Datadog - Amazon EventBridge インテグレーション][3]タイルに移動し、Datadog に統合された AWS アカウントのリストを確認します。ここで、イベントブリッジを作成します。
 2. 選択した AWS アカウントで、イベントバスの名前を指定し、そのイベントバスを置くリージョンを選択して、新しいイベントバスを作成します。
@@ -56,6 +57,8 @@ Amazon EventBridge と Datadog のインテグレーションは、以下の機�
 7. **Define Pattern** で `Event Pattern` を選択します。**イベントマッチングパターン**として `Predefined by service` を選択します。**サービスプロバイダー**では、`Service partners` を選択します。**サービス名**では、`Datadog` を選択します。これにより、Datadog にあるイベントバスが入力されます。ルールの追加情報を追加してから、ルールを**保存**します。
 8. Datadog でイベントバスの接続を解除するには、該当するイベントバスの上にマウスポインターを合わせ、ゴミ箱アイコンをクリックします。
    **注**: このアクションにより イベントバスの接続が AWS から解除されますが、AWS 内でイベントバスそのものが削除されるわけではありません。
+
+**注**: EventBridge ルールは、ルールがアクティブでトリガーされない限り、Datadog にインポートされません。
 
 ### 自動化されたアクション
 
@@ -95,7 +98,7 @@ Amazon EventBridge インテグレーションには、サービスのチェッ�
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#datadog-aws-iam-policy
-[3]: https://app.datadoghq.com/account/settings#integrations/amazon-event-bridge
+[3]: https://app.datadoghq.com/integrations/amazon-event-bridge
 [4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/WhatIsCloudWatchEvents.html
 [5]: https://console.aws.amazon.com/events/home#/partners/datadoghq.com?page=overview
 [6]: https://console.aws.amazon.com/events/

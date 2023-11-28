@@ -1,8 +1,9 @@
 ---
 categories:
-- cloud
-- コスト管理
 - azure
+- クラウド
+- コスト管理
+- ネットワーク
 dependencies: []
 description: Azure の各サブスクリプションリソース (コンピューティング、ネットワーク、ストレージ) について、事前に構成された上限に照らして使用状況を追跡します
 doc_link: https://docs.datadoghq.com/integrations/azure_usage_and_quotas/

@@ -47,13 +47,15 @@ To generate metrics from spans, on the [APM Setup and Configuration][8] page sel
 
 1. **Define the field you want to track:** Select `*` to generate a count of all spans matching your query or enter an attribute (for example, `@cassandra_row_count`) to aggregate a numeric value and create its corresponding count, minimum, maximum, sum, and average aggregated metrics. If the attribute type is a measure, the value of the metric is the value of the span attribute.
 
+   **Note**: Span attributes that are not numerical values cannot be used for aggregation. To generate a metric that counts the distinct values of a span attribute (for instance count the number of user IDs hitting a specific endpoint), add this dimension to the `group by` selector, and use the `count_nonzero` function to count the number of tag values.
+
 1. **Specify the group-by dimension:** By default, metrics generated from spans will not have any tags unless explicitly added. Any attribute or tag that exists in your spans can be used to create metric tags.
 
 1. **Check the Live Analytics and Search Query preview:** You can view the impact of your query in real-time on the data visualization, and the matching spans considered for your query in a live preview.
 
 1. **Name your metric:** Metric names must follow the [metric naming convention][11]. Metric names that start with `trace.*` are not permitted and will not be saved.
 
-**Important Note**: Span-based metrics are considered custom metrics and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.
+<div class="alert alert-warning"> Span-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
 
 ## Updating existing span-based metrics
 
@@ -76,10 +78,10 @@ After a metric is created, only two fields can be updated:
 [1]: /tracing/trace_pipeline/trace_retention
 [2]: /account_management/billing/custom_metrics/
 [3]: https://docs.datadoghq.com/metrics/#overview
-[4]: /monitors/create/types/anomaly/#overview
+[4]: /monitors/types/anomaly/#overview
 [5]: /tracing/trace_explorer/
 [6]: /tracing/trace_explorer/query_syntax/#analytics-query
-[7]: /monitors/create/types/forecasts/
+[7]: /monitors/types/forecasts/
 [8]: https://app.datadoghq.com/apm/getting-started
 [9]: https://app.datadoghq.com/apm/traces/generate-metrics
 [10]: /tracing/trace_explorer/query_syntax/

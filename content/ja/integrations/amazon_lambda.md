@@ -3,9 +3,10 @@ aliases:
 - /ja/integrations/awslambda/
 - /ja/serverless/real-time-enhanced-metrics/
 categories:
-- cloud
 - aws
+- cloud
 - log collection
+- tracing
 dependencies: []
 description: Lambda の実行、エラー、呼び出しの回数などを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_lambda/
@@ -23,13 +24,18 @@ further_reading:
 git_integration_title: amazon_lambda
 has_logo: true
 integration_id: amazon-lambda
-integration_title: Amazon Lambda
+integration_title: AWS Lambda
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
+monitors:
+  lambda_high_error_rate: assets/monitors/lambda_high_error_rate.json
+  lambda_high_iterator_rate: assets/monitors/lambda_high_iterator_rate.json
+  lambda_high_throttles: assets/monitors/lambda_high_throttles.json
+  lambda_timeout: assets/monitors/lambda_timeout.json
 name: amazon_lambda
-public_title: Datadog-Amazon Lambda インテグレーション
+public_title: Datadog-AWS Lambda インテグレーション
 short_description: Lambda の実行、エラー、呼び出しの回数などを追跡
 version: '1.0'
 ---
@@ -38,7 +44,7 @@ version: '1.0'
 
 ## 概要
 
-Amazon Lambda は、イベントに応答してコードを実行し、そのコードが必要とするコンピューティングリソースを自動的に管理するコンピューティングサービスです。
+AWS Lambda は、イベントに応答してコードを実行し、そのコードが必要とするコンピューティングリソースを自動的に管理するコンピューティングサービスです。
 
 このインテグレーションを有効にすると、CloudWatch メトリクスが収集されるようになります。このページでは、Lambda 関数のカスタムメトリクス、ログ、トレースを設定する方法についても説明します。
 
@@ -53,7 +59,7 @@ Amazon Lambda は、イベントに応答してコードを実行し、そのコ
 #### AWS Lambda メトリクス
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Lambda` が有効になっていることを確認します。
-2. Amazon Lambda のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。詳細については、AWS ウェブサイト上の [Lambda ポリシー][4]を参照してください。
+2. AWS Lambda のメトリクスを収集するには、次のアクセス許可を [Datadog IAM ポリシー][3]に追加します。詳細については、AWS ウェブサイト上の [Lambda ポリシー][4]を参照してください。
 
     | AWS アクセス許可     | 説明                                  |
     | ------------------ | -------------------------------------------- |
@@ -67,11 +73,13 @@ Amazon Lambda は、イベントに応答してコードを実行し、そのコ
 
 ## 収集データ
 
+<div class="alert alert-warning">AWS Lambda 拡張機能を使用する場合、AWS が報告する <em>duration</em> メトリクスには、<a href="https://aws.amazon.com/blogs/compute/performance-and-functionality-improvements-for-aws-lambda-extensions/">関数の応答が返された後にアクティビティを実行する</a> Lambda 拡張機能によって消費される <em>post_runtime_extensions_duration</em> が含まれています。関数の実際のパフォーマンスをモニターするには、<em>duration - post_runtime_extensions_duration</em> または <a href="https://docs.datadoghq.com/serverless/enhanced_lambda_metrics/">Datadog の拡張メトリクス</a> <em>aws.lambda.enhanced.runtime_duration</em> を使用します。</div>
+
+AWS から取得される各メトリクスには、関数名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
+
 ### メトリクス
 {{< get-metrics-from-git "amazon_lambda" >}}
 
-
-AWS から取得される各メトリクスには、関数名やセキュリティグループなど、AWS コンソールに表示されるタグと同じタグが割り当てられます。
 
 ### イベント
 
@@ -103,9 +111,16 @@ Datadog は、Lambda のメトリクスに `at_edge`、`edge_master_name`、`edg
 
 Lambda@Edge 関数では、分散型トレーシングは_サポートされていません_。
 
+## すぐに使えるモニタリング
+
+AWS Lambda インテグレーションは、パフォーマンスを監視し最適化するために、すぐに使える監視機能を提供します。
+
+- AWS Lambda ダッシュボード: すぐに使える [AWS Lambda ダッシュボード][14]を使用して、Lambda 関数の包括的な概要を得ることができます。
+- 推奨モニター: [AWS Lambda の推奨モニター][15]を有効にすると、問題をプロアクティブに検出し、タイムリーなアラートを受信することができます。
+
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][14]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][16]までお問合せください。
 
 ## その他の参考資料
 
@@ -126,4 +141,6 @@ Lambda@Edge 関数では、分散型トレーシングは_サポートされて�
 [11]: /ja/serverless/custom_metrics/#custom-metrics
 [12]: /ja/serverless/forwarder/
 [13]: /ja/serverless/distributed_tracing/
-[14]: /ja/help/
+[14]: https://app.datadoghq.com/screen/integration/98/aws-lambda
+[15]: https://app.datadoghq.com/monitors/recommended
+[16]: /ja/help/

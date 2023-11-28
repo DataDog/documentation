@@ -15,11 +15,12 @@ assets:
     source_type_name: Unbound
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: david.byron@avast.com
   support_email: david.byron@avast.com
 categories:
-- network
+- キャッシュ
+- ネットワーク
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/unbound/README.md
 display_on_public_website: true
@@ -37,15 +38,16 @@ public_title: Unbound
 short_description: unbound メトリクスを収集する Datadog インテグレーション
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Caching
   - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: unbound メトリクスを収集する Datadog インテグレーション
   media: []

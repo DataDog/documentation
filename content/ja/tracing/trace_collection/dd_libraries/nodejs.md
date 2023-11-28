@@ -41,9 +41,9 @@ Datadog の[クイックスタート手順][2]に従って、最高のエクス�
 - `service`、`env`、`version` タグを動的に設定します。
 - セットアップ中に Continuous Profiler、トレースの 100% の取り込み、およびトレース ID 挿入を有効にします。
 
-### APM に Datadog Agent を構成する
+### APM 用に Datadog Agent を構成する
 
-インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
+インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`http://localhost:8126` でトレースデータをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
 
 {{< tabs >}}
 {{% tab "コンテナ" %}}
@@ -55,19 +55,23 @@ Datadog の[クイックスタート手順][2]に従って、最高のエクス�
 {{< partial name="apm/apm-containers.html" >}}
 </br>
 
-3. トレースクライアントは、デフォルトでは `localhost:8126` にトレースを送信します。これが Agent の正しいホストとポートでない場合、以下を実行して `DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` 環境変数を設定してください。
+3. トレースクライアントは、デフォルトでは `localhost:8126` にトレースを送信します。これが Agent の正しいホストとポートでない場合、以下を実行して `DD_TRACE_AGENT_HOSTNAME` と `DD_TRACE_AGENT_PORT` 環境変数を設定してください。
 
     ```sh
-    DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
+    DD_TRACE_AGENT_HOSTNAME=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
     ```
 
    Unix ドメインソケットを使用するには、URL 全体を一つの環境変数 `DD_TRACE_AGENT_URL` として指定します。
 
-    ```sh
-    DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
-    ```
+   別のソケット、ホスト、ポートが必要な場合は、`DD_TRACE_AGENT_URL` 環境変数または `DD_TRACE_AGENT_HOST` と `DD_TRACE_AGENT_PORT` 環境変数を使用します。いくつかの例を挙げます。
 
-{{< site-region region="us3,us5,eu,gov" >}}
+   ```sh
+   DD_AGENT_HOST=<HOSTNAME> DD_TRACE_AGENT_PORT=<PORT> node server
+   DD_TRACE_AGENT_URL=http://<HOSTNAME>:<PORT> node server
+   DD_TRACE_AGENT_URL=unix:<SOCKET_PATH> node server
+   ```
+
+{{< site-region region="us3,us5,eu,gov,ap1" >}}
 
 4. Datadog Agent の `DD_SITE` を {{< region-param key="dd_site" code="true" >}} に設定して、Agent が正しい Datadog の場所にデータを送信するようにします。
 
@@ -84,14 +88,13 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 {{% /tab %}}
 {{% tab "その他の環境" %}}
 
-トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3]、[Azure App Service][4] など、他の環境で利用できます。
+トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3] など、他の環境で利用できます。
 
 その他の環境については、その環境の[インテグレーション][5]のドキュメントを参照し、セットアップの問題が発生した場合は[サポートにお問い合わせ][6]ください。
 
 [1]: /ja/agent/basic_agent_usage/heroku/#installation
 [2]: /ja/integrations/cloud_foundry/#trace-collection
 [3]: /ja/integrations/amazon_elasticbeanstalk/
-[4]: /ja/infrastructure/serverless/azure_app_services/#overview
 [5]: /ja/integrations/
 [6]: /ja/help/
 {{% /tab %}}
@@ -101,6 +104,8 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 初期化のオプションについては、[トレーサー設定][3]をお読みください。
 
 ### アプリケーションをインスツルメントする
+
+<div class="alert alert-info">Kubernetes アプリケーション、または Linux ホストやコンテナ上のアプリケーションからトレースを収集する場合、以下の説明の代わりに、アプリケーションにトレーシングライブラリを挿入することができます。手順については、<a href="/tracing/trace_collection/library_injection_local">ライブラリの挿入</a>をお読みください。</div>
 
 Agent のインストールが完了したら、以下の手順で Datadog のトレーシングライブラリを Node.js アプリケーションに追加します。
 
@@ -114,6 +119,7 @@ Agent のインストールが完了したら、以下の手順で Datadog の�
     npm install dd-trace@latest-node12
     ```
    ディストリビューションタグおよび Node.js のランタイムばージョンサポートについて詳しくは、[互換性要件][1] ページを参照してください。
+   ライブラリの以前のメジャーバージョン (0.x、1.x、2.x) から別のメジャーバージョン (2.x、3.x) にアップグレードする場合は、[移行ガイド][5]を読み、変更点を評価するようにしてください。
 
 2. コードまたはコマンドライン引数を使用して、トレーサーをインポートして初期化します。Node.js トレースライブラリは、他のモジュールの**前**にインポートして初期化する必要があります。
 
@@ -125,8 +131,8 @@ Agent のインストールが完了したら、以下の手順で Datadog の�
 
 #### JavaScript
 
-```js
-// この行は、インスツルメントされたいずれのモジュールのインポートより前である必要があります。
+```javascript
+// の行は、インスツルメントされたいずれのモジュールのインポートより前である必要があります。
 const tracer = require('dd-trace').init();
 ```
 
@@ -160,6 +166,45 @@ node --require dd-trace/init app.js
 
 **注:** このアプローチでは、トレーサーのすべてのコンフィギュレーションに環境変数を使用する必要があります。
 
+### バンドル
+
+`dd-trace` は、Node.js アプリケーションがモジュールをロードするときに行う `require()` 呼び出しを傍受することで動作します。これには、ファイルシステムにアクセスするための `fs` モジュールのように Node.js に組み込まれているモジュールと、`pg` データベースモジュールのように NPM レジストリからインストールされたモジュールが含まれます。
+
+バンドラーは、アプリケーションがディスク上のファイルに対して行うすべての `require()` 呼び出しをクロールします。そして、`require()` 呼び出しをカスタムコードに置き換え、その結果得られたすべての JavaScript を 1 つの「バンドル」されたファイルに結合させます。`require('fs')` のような組み込みモジュールがロードされたとき、その呼び出しは結果のバンドルで同じままであることができます。
+
+`dd-trace` のような APM ツールは、この時点で機能しなくなります。組み込みモジュールの呼び出しは引き続き傍受できますが、サードパーティライブラリの呼び出しは傍受できません。つまり、`dd-trace` アプリをバンドルすると、ディスクアクセス (`fs` を通して) とアウトバウンド HTTP リクエスト (`http` を通して) の情報をキャプチャできますが、サードパーティライブラリの呼び出しは省略される可能性があります。例:
+- `express` フレームワークの受信リクエストのルート情報を抽出する。
+- データベースクライアント `mysql` に対して、どのクエリを実行するかを表示する。
+
+一般的な回避策として、APM がインスツルメンテーションを必要とするすべてのサードパーティモジュールを、バンドラーの「外部」として扱います。この設定では、インスツルメンテーションされたモジュールはディスク上に残り、 `require()` でロードされ続け、インスツルメンテーションされないモジュールはバンドルされます。しかし、この場合、多くの余計なファイルを含むビルドになり、バンドルすることの目的が失われ始めます。
+
+Datadog では、カスタムビルドのバンドラープラグインを用意することを推奨しています。これらのプラグインは、バンドラーに動作を指示したり、中間コードを挿入したり、「翻訳された」 `require() ` 呼び出しを傍受したりすることができます。その結果、より多くのパッケージがバンドルされた JavaScript ファイルに含まれるようになります。
+
+**注**: アプリケーションによっては、100% のモジュールをバンドルすることができますが、ネイティブモジュールはバンドルの外部にしておく必要があります。
+
+#### Esbuild のサポート
+
+このライブラリは、esbuild プラグインの形で実験的な esbuild サポートを提供し、少なくとも Node.js v16.17 または v18.7 が必要です。プラグインを使用するには、`dd-trace@3+` がインストールされていることを確認し、バンドルをビルドする際に `dd-trace/esbuild` モジュールを要求します。
+
+ここでは、esbuild で `dd-trace` をどのように使うかの例を示します。
+
+```javascript
+const ddPlugin = require('dd-trace/esbuild')
+const esbuild = require('esbuild')
+
+esbuild.build({
+  entryPoints: ['app.js'],
+  bundle: true,
+  outfile: 'out.js',
+  plugins: [ddPlugin],
+  platform: 'node', // ビルトインモジュールを必須とすることを許可する
+  target: ['node16']
+}).catch((err) => {
+  console.error(err)
+  process.exit(1)
+})
+```
+
 ## コンフィギュレーション
 
 必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][4]を参照してください。
@@ -169,6 +214,7 @@ node --require dd-trace/init app.js
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/compatibility_requirements/nodejs
-[2]: https://app.datadoghq.com/apm/docs
+[2]: https://app.datadoghq.com/apm/service-setup
 [3]: https://datadog.github.io/dd-trace-js/#tracer-settings
 [4]: /ja/tracing/trace_collection/library_config/nodejs/
+[5]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md

@@ -26,12 +26,19 @@ Changes in the configuration of the `datadog-agent` won't be taken into account 
 
 ## Outbound traffic on port 10516 is blocked
 
-The Datadog Agent sends its logs to Datadog over tcp via port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
+The Datadog Agent sends its logs to Datadog over TCP using port 10516. If that connection is not available, logs fail to be sent and an error is recorded in the `agent.log` file to that effect.
 
-Test manually your connection by running a telnet or openssl command like so (port 10514 would work too, but is less secure):
+You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For OpenSSL, run the following command:
 
-* `openssl s_client -connect intake.logs.datadoghq.com:10516`
-* `telnet intake.logs.datadoghq.com 10514`
+```shell
+openssl s_client -connect intake.logs.datadoghq.com:10516
+```
+
+For GnuTLS, run the following command:
+
+```shell
+gnutls-cli intake.logs.datadoghq.com:10516
+```
 
 And then by sending a log like the following:
 
@@ -39,7 +46,7 @@ And then by sending a log like the following:
 <API_KEY> this is a test message
 ```
 
-- If opening the port 10514 or 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by adding the following in `datadog.yaml`:
+- If opening the port 10516 is not an option, it is possible to configure the Datadog Agent to send logs through HTTPS by adding the following in `datadog.yaml`:
 
 ```yaml
 logs_config:
@@ -58,41 +65,157 @@ The Datadog Agent only collects logs that have been written after it has started
 
 ## Permission issues tailing log files
 
-The `datadog-agent` does not run as root (and running as root is not recommended, as a general best-practice). For this reason, when you configure your `datadog-agent` to tail log files (for custom logs or for integrations) you need to take special care to ensure the `datadog-agent` user has read access to tail the log files you want to collect from.
+The Datadog Agent does not run as root (and running as root is not recommended, as a general best practice). When you configure your Agent to tail log files for custom logs or for integrations, you need to take special care to ensure the Agent user has the correct access to the log files.
 
-In that case, you should see an error message when checking the [Agent status][5]:
+The default Agent user per operating system:
+| Operating system | Default Agent user |
+| ---------------  | ------------------ |
+| Linux | `datadog-agent` |
+| MacOS | `datadog-agent` |
+| Windows | `ddagentuser` |
 
-```text
-==========
-Logs Agent
-==========
+If the Agent does not have the correct permissions, you might see one of the following error messages when checking the [Agent status][5]:
+- The file does not exist.
+- Access is denied.
+- Could not find any file matching pattern `<path/to/filename>`, check that all its subdirectories are executable.
 
-  test
-  ----
-    Type: file
-    Path: /var/log/application/error.log
-    Status: Error: file /var/log/application/error.log does not exist
-```
+To fix the error, give the Datadog Agent user read, write, and execute permissions to the log file and subdirectories.
 
-Run the `namei` command to obtain more information about the file permissions:
+{{< tabs >}}
+{{% tab "Linux" %}}
+1. Run the `namei` command to obtain more information about the file permissions:
+   ```
+   > namei -m /path/to/log/file
+   ```
 
-```text
-> namei -m /var/log/application/error.log
-> f: /var/log/application/error.log
- drwxr-xr-x /
- drwxr-xr-x var
- drwxrwxr-x log
- drw-r--r-- application
- -rw-r----- error.log
-```
+   In the following example, the Agent user does not have `execute` permissions on the `application` directory or read permissions on the `error.log` file.
 
-In this example, the `application` directory is not executable by the Agent, therefore the Agent cannot list its files. Furthermore, the Agent does not have read permissions on the `error.log` file.
-Add the missing permissions via the [chmod command][6].
+   ```
+   > namei -m /var/log/application/error.log
+   > f: /var/log/application/
+   drwxr-xr-x /
+   drwxr-xr-x var
+   drwxrwxr-x log
+   drw-r--r-- application
+   -rw-r----- error.log
+   ```
 
-{{< img src="logs/agent-log-permission-ok.png" alt="Permission OK"  style="width:70%;">}}
+1. Make the logs folder and its children readable:
 
-**Note**: When adding the appropriate read permissions, make sure that these permissions are correctly set in your log rotation configuration. Otherwise, on the next log rotate, the Datadog Agent may lose its read permissions.
-Set permissions as `644` in the log rotation configuration to make sure the Agent has read access to the files.
+   ```bash
+   sudo chmod o+rx /path/to/logs
+   ```
+
+**Note**: Make sure that these permissions are correctly set in your log rotation configuration. Otherwise, on the next log rotate, the Datadog Agent might lose its read permissions. Set permissions as `644` in the log rotation configuration to make sure the Agent has read access to the files.
+
+{{% /tab %}}
+
+{{% tab "Windows (cmd)" %}}
+1. Use the `icacls` command on the log folder to obtain more information about the file permissions:
+   ```
+   icacls path/to/logs/file /t
+   ```
+   The `/t` flag runs the command recursively on files and sub-folders.
+
+   In the following example, the `test` directory and its children are not accessible to `ddagentuser`:
+
+   ```powershell
+   PS C:\Users\Administrator> icacls C:\test\ /t
+   C:\test\ NT AUTHORITY\SYSTEM:(OI)(CI)(F)
+          BUILTIN\Administrators:(OI)(CI)(F)
+          CREATOR OWNER:(OI)(CI)(IO)(F)
+
+   C:\test\file.log NT AUTHORITY\SYSTEM:(F)
+          BUILTIN\Administrators:(F)
+
+   C:\test\file2.log NT AUTHORITY\SYSTEM:(F)
+          BUILTIN\Administrators:(F)
+   ```
+
+1. Use the `icacls` command to grant `ddagentuser` the required permissions (include the quotes):
+   ```
+   icacls "path\to\folder" /grant "ddagentuser:(OI)(CI)(RX)" /t
+   ```
+
+   In case the application uses log rotation, `(OI)` and `(CI)` inheritance rights ensure that any future log files created in the directory inherit the parent folder permissions.
+
+1. Run `icacls` again to check that `ddagentuser` has the correct permissions:
+   ```powershell
+   icacls path/to/logs/file /t
+   ```
+
+   In the following example, `ddagentuser` is listed in the file permissions:
+   ```powershell
+   PS C:\Users\Administrator> icacls C:\test\ /t
+   C:\test\ EC2-ABCD\ddagentuser:(OI)(CI)(RX)
+          NT AUTHORITY\SYSTEM:(OI)(CI)(F)
+          BUILTIN\Administrators:(OI)(CI)(F)
+          CREATOR OWNER:(OI)(CI)(IO)(F)
+
+   C:\test\file.log NT AUTHORITY\SYSTEM:(F)
+                  BUILTIN\Administrators:(F)
+                  EC2-ABCD\ddagentuser:(RX)
+
+   C:\test\file2.log NT AUTHORITY\SYSTEM:(F)
+                  BUILTIN\Administrators:(F)
+                  EC2-ABCD\ddagentuser:(RX)
+   Successfully processed 3 files; Failed processing 0 files
+   ```
+
+1. Restart the Agent service and check the status to see if the problem is resolved:
+
+   ```powershell
+   & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" restart-service
+   & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
+   ```
+
+{{% /tab %}}
+
+{{% tab "Windows (PowerShell)" %}}
+
+1. Retrieve the ACL permissions for the file:
+   ```powershell
+   PS C:\Users\Administrator> get-acl C:\app\logs | fl
+
+   Path   : Microsoft.PowerShell.Core\FileSystem::C:\app\logs
+   Owner  : BUILTIN\Administrators
+   Group  : EC2-ABCD\None
+   Access : NT AUTHORITY\SYSTEM Allow  FullControl
+            BUILTIN\Administrators Allow  FullControl
+   ...
+   ```
+   In this example, the `application` directory is not executable by the Agent.
+
+1. Run this PowerShell script to give read and execute privileges to `ddagentuser`:
+   ```powershell
+   $acl = Get-Acl <path\to\logs\folder>
+   $AccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule("ddagentuser","ReadAndExecute","Allow")
+   $acl.SetAccessRule($AccessRule)
+   $acl | Set-Acl <path\to\logs\folder>
+   ```
+
+1. Retrieve the ACL permissions for the file again to check if `ddagentuser` has the correct permissions:
+   ```powershell
+   PS C:\Users\Administrator> get-acl C:\app\logs | fl
+   Path   : Microsoft.PowerShell.Core\FileSystem::C:\app\logs
+   Owner  : BUILTIN\Administrators
+   Group  : EC2-ABCD\None
+   Access : EC2-ABCD\ddagentuser Allow  ReadAndExecute, Synchronize
+            NT AUTHORITY\SYSTEM Allow  FullControl
+            BUILTIN\Administrators Allow  FullControl
+   ...
+   ```
+
+1. Restart the Agent service and check the status to see if the problem is resolved:
+   ```powershell
+   & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" restart-service
+   & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
+   ```
+
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Permission issue and Journald
 
@@ -130,7 +253,15 @@ See the [Lambda Log Collection Troubleshooting Guide][10]
 
 ## Unexpectedly dropping logs
 
-Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][12] that could match your logs.
+Check if logs appear in the [Datadog Live Tail][11].
+
+If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][12] that could match your logs.
+If they do not appear in the Live Tail, they might have been dropped if their timestamp was further than 18 hours in the past. You can check which `service` and `source` may be impacted with the `datadog.estimated_usage.logs.drop_count` metric.
+
+## Truncated logs
+
+Logs above 1MB are truncated. You can check which `service` and `source` are impacted with the `datadog.estimated_usage.logs.truncated_count` and `datadog.estimated_usage.logs.truncated_bytes` metrics.
+
 
 ## Further Reading
 
@@ -138,10 +269,9 @@ Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live 
 
 [1]: /logs/
 [2]: /help/
-[3]: /agent/guide/agent-commands/#restart-the-agent
+[3]: /agent/configuration/agent-commands/#restart-the-agent
 [4]: /agent/logs/log_transport?tab=https#enforce-a-specific-transport
-[5]: /agent/guide/agent-commands/#agent-status-and-information
-[6]: https://en.wikipedia.org/wiki/Chmod
+[5]: /agent/configuration/agent-commands/#agent-status-and-information
 [7]: /integrations/journald/
 [8]: https://codebeautify.org/yaml-validator
 [9]: /logs/guide/docker-logs-collection-troubleshooting-guide/

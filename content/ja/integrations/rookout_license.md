@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rookout-license
 app_uuid: db9216cf-1ab9-43f4-8c16-ccc7dd0f4f72
 assets: {}
@@ -34,13 +36,13 @@ public_title: Rookout
 short_description: 痛みのないクラウドネイティブデバッグ
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Offering::Software License
@@ -59,13 +61,14 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Rookout
+  uninstallation: README.md#Uninstallation
 ---
 
 
 
 ## 概要
 
-[Rookout](https://rookout.com) は、クラウドネイティブのデバッグとライブデータ収集のための破壊的なデベロッパーソリューションです。Rookout の Non-Breaking Breakpoints は、余分なコーディング、再デプロイ、再起動の必要がなく、あらゆるタイプのデータをその場で収集することができます。
+[Rookout][1] は、Cloud Native のデバッグとライブデータ収集のための破壊的なデベロッパーソリューションです。Rookout の Non-Breaking Breakpoints は、余分なコーディング、再デプロイ、再起動の必要がなく、あらゆるタイプのデータをその場で収集することができます。
 
 Rookout は、Kubernetes、マイクロサービス、サーバーレス、サービスメッシュベースのアプリケーションなど、実稼働環境とモダンアーキテクチャのデバッグのためにゼロから設計されています。
 
@@ -97,6 +100,12 @@ SSH、デバッガー、新しいバージョンのデプロイを必要とせ�
 ライブデバッグデータから、ログ、メトリクス、トレースという観測性の 3 本柱をオンザフライで作成します。お気に入りのコラボレーションツールや観測可能なツールにパイプラインし、既存の情報と並べて分析することができます。
 
 ## サポート
-ご質問・お問い合わせは、[こちら](https://www.rookout.com/company/contact)までお気軽にどうぞ。
+
+ご質問・お問い合わせは、[こちら][4]までお気軽にどうぞ。
+
+[1]: https://rookout.com
+[2]: https://app.rookout.com
+[3]: https://docs.rookout.com
+[4]: https://www.rookout.com/company/contact
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/rookout-license" target="_blank">こちらをクリック</a>してください。

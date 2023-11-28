@@ -1,9 +1,14 @@
 ---
-title: アルゴリズム
-kind: documentation
+algolia:
+  tags:
+  - 異常値
+  - 異常グラフ
 aliases:
-  - /ja/graphing/functions/algorithms/
+- /ja/graphing/functions/algorithms/
+kind: documentation
+title: アルゴリズム
 ---
+
 ## 異常値
 
 | 関数      | 説明                                                                                | 例                                                    |
@@ -19,7 +24,9 @@ aliases:
 
 次は 2 分間の説明ビデオです。
 
-{{< vimeo 188833506 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/188833506/rendition/1080p/file.mp4?loc=external&signature=96eacc46a18438ce0f45d5b57952cd924482f8f18e011ceb7b76b6ce1b4587a2" poster="/images/poster/algorithms.png" >}}
+
+**季節性**: デフォルトでは、`robust` と `agile` アルゴリズムは[週ごとの季節性][4]を使用します。これは、ベースラインを計算するために 3 週間の履歴データを必要とします。
 
 詳細については、[異常値モニター][1]のページを参照してください。
 
@@ -50,10 +57,6 @@ aliases:
 * `ALGORITHM`: 使用する予測アルゴリズム。`linear` または `seasonal` を選択します。これらのアルゴリズムの詳細については、[予測値アルゴリズム][3]のセクションを参照してください。
 * `DEVIATIONS`: 予測値の範囲の幅。この値を 1 ～ 2 にすると、大半の「正常」ポイントを正確に予測できます。
 
-予測値は独自に視覚化されるため、複数のグラフ作成オプションは非表示になります。**予測値**が正常に追加されると、エディターは以下のように表示されます。
-
-{{< img src="dashboards/functions/algorithms/forecast_query.png" alt="クエリエディター" style="width:80%;">}}
-
 ## その他の関数
 
 {{< whatsnext desc="他に利用できる関数を参照します。" >}}
@@ -69,6 +72,7 @@ aliases:
     {{< nextlink href="/dashboards/functions/timeshift" >}}タイムシフト: メトリクスのデータポイントをタイムラインに沿って移動させます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /ja/monitors/create/types/anomaly/
-[2]: /ja/monitors/create/types/outlier/
-[3]: /ja/monitors/create/types/forecasts/#forecast-algorithms
+[1]: /ja/monitors/types/anomaly/
+[2]: /ja/monitors/types/outlier/
+[3]: /ja/monitors/types/forecasts/#forecast-algorithms
+[4]: /ja/monitors/types/anomaly/?s=anomaly%20algorithm#seasonality

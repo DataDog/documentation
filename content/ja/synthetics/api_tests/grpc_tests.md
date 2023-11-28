@@ -1,5 +1,13 @@
 ---
-description: gRPC リクエストをシミュレートして、パブリックおよび内部 API エンドポイントを監視します
+algolia:
+  category: Documentation
+  rank: 70
+  subcategory: Synthetic API テスト
+  tags:
+  - grpc
+  - grpc テスト
+  - grpc テスト
+description: gRPC リクエストをシミュレートして、パブリックおよび内部 API エンドポイントを監視します。
 further_reading:
 - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
   tag: ブログ
@@ -7,55 +15,117 @@ further_reading:
 - link: https://www.datadoghq.com/blog/grpc-health-check-datadog-synthetic-monitoring/
   tag: ブログ
   text: Datadog で gRPC API を監視する
-- link: https://learn.datadoghq.com/course/view.php?id=39
+- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
   tag: ラーニングセンター
   text: Synthetic テストの紹介
 - link: /synthetics/private_locations
   tag: ドキュメント
-  text: 内部エンドポイントで gRPC ヘルスチェックを実行する
-- link: https://www.datadoghq.com/blog/grpc-health-check-datadog-synthetic-monitoring/
-  tag: ブログ
-  text: Datadog Synthetic モニタリングによる gRPC API の監視
+  text: 内部エンドポイントで gRPC テストを実行する
+- link: /synthetics/guide/synthetic-test-monitors
+  tag: ドキュメント
+  text: Synthetic テストモニターについて
 kind: documentation
-title: GRPC ヘルスチェック
+title: GRPC テスト
 ---
 ## 概要
 
-gRPC ヘルスチェックは、gRPC サービスの健全性を報告するための規格です。これにより、gRPC サーバーやサービスが応答し、実行され、リモートプロシージャコール (RPC) を処理する能力があるかどうかを判断することができます。
+gRPC テストは、gRPC サービスやサーバーをプロアクティブに監視することができます。2 つのタイプから選択することができます。
 
-ヘルスチェックのメカニズムは、gRPC サーバー上の gRPC サービスとして実装することができます。gRPC コミュニティで共有されているヘルスチェックのプロトファイル例にアクセスするには、[オープンソースの gRPC リポジトリ][1]を参照してください。
+Unary Calls
+: アプリケーションの API エンドポイントに gRPC リクエストを送信し、応答時間、ヘッダー、本文のコンテンツなど、定義された条件と応答を検証します。
 
-gRPC ヘルスチェックテストは、ネットワークの外部または内部からのテストの実行の好みに応じて、[管理ロケーション][2]と[プライベートロケーション][3]の両方から実行することができます。gRPC テストは、スケジュール、オンデマンド、または [CI/CD パイプライン][4]内で直接実行することができます。
+Health Checks 
+: gRPC ヘルスチェックは、gRPC サービスの健全性を報告するための標準的なものです。gRPC サーバーとサービスが応答し、実行され、リモートプロシージャコール (RPC) を処理できるかを判断します。<br>gRPC ヘルスチェックを実装することで、Datadog に `.proto` ファイルを提供しなくても、gRPC ヘルスチェックテストを実行することができるようになります。詳細については、gRPC コミュニティで共有されている[ヘルスチェックの例 `.proto` ファイル][1]を参照してください。
 
-<div class="alert alert-warning">
-Synthetic テストの gRPC のユースケースについて、<a href="https://docs.datadoghq.com/help/">サポート</a>チームにフィードバックをお送りください。
-</div>
+gRPC テストは、ネットワークの外部または内部からのテストの実行の好みに応じて、[管理ロケーション](#select-locations)と[プライベートロケーション][2]の両方から実行することができます。gRPC テストは、スケジュール、オンデマンド、または [CI/CD パイプライン][3]内で直接実行することができます。
 
 ## コンフィギュレーション
 
-`gRPC` ヘルスチェックテストの作成を選択した後、テストのリクエストを定義します。
+`gRPC` テストの作成を選択した後、テストのリクエストを定義します。
 
 ### リクエストを定義する
 
-1. ヘルスチェックテストを実行する **Host** と **Port** を指定します。デフォルトでは、ポートは `50051` に設定されています。
+1. テストを実行する **Host** と **Port** を指定します。デフォルトでは、ポートは `50051` に設定されています。
+
+{{< tabs >}}
+{{% tab "Unary Call" %}}
+
+2. gRPC サーバーを定義した [`.proto` ファイル][1]をアップロードします。
+
+   - ドロップダウンメニューから gRPC メッセージの送信先となるサービスやメソッドを選択します。
+     Datadog はストリーミングメソッドをサポートしていないため、アプリ内でグレーアウトしています。
+   - リクエストメッセージを追加します。
+
+
+[1]: https://grpc.io/docs/what-is-grpc/introduction/#working-with-protocol-buffers
+{{% /tab %}}
+{{% tab "Health Check" %}}
 2. ヘルスチェックを送信したいサービスを入力します。gRPC サーバーのヘルスチェックを送信する場合は、このフィールドを空白にします。
 
-3. gRPC ヘルスチェックテストの名前を入力します。
+{{% /tab %}}
+{{< /tabs >}}
 
-4. gRPC ヘルスチェックテストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][5]で Synthetic テストをすばやくフィルタリングできます。
+3. **Advanced Options** (オプション) をテストに追加します。
 
-{{< img src="synthetics/api_tests/grpc_test_config.png" alt="gRPC リクエストを定義する" style="width:90%;" >}}
+   {{< tabs >}}
+
+   {{% tab "リクエストオプション" %}}
+
+   * **Timeout**: テストがタイムアウトするまでの時間を秒単位で指定します。
+   * **Ignore server certificate error**: 選択すると、SSL 証明書の検証時にエラーが発生した場合でも、gRPC テストが接続を続行します。
+   * **gRPC メタデータ**: サービス間でメタデータを受け渡すために、gRPC リクエストにメタデータを追加・定義します。
+
+   {{% /tab %}}
+
+   {{% tab "認証" %}}
+
+   * **Client certificate**: クライアント証明書 (`.crt`) と `PEM` 形式の関連する秘密キー (`.key`) をアップロードして、mTLS を介して認証します。
+
+     <br/> 
+
+     `openssl` ライブラリを使用して、証明書を変換することができます。例えば、`PKCS12` 形式の証明書を `PEM` 形式の秘密キーや証明書に変換することができます。
+
+      ```
+      openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
+      openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
+      ```
+
+   {{% /tab %}}
+
+   {{< /tabs >}}
+
+3. gRPC テストに**名前**を付けます。
+
+4. gRPC テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][4]で Synthetic テストをすばやくフィルタリングできます。
+
+   {{< img src="synthetics/api_tests/grpc_test_config.png" alt="gRPC リクエストを定義する" style="width:90%;" >}}
 
 **Test Service** をクリックして、リクエストのコンフィギュレーションをテストします。画面の右側に応答プレビューが表示されます。
 
 ### アサーションを定義する
 
-アサーションは、期待されるテスト結果が何であるかを定義します。**Test Service** をクリックすると、取得したレスポンスに基づいて `response time` と `healthcheck status` に関するアサーションが追加されます。モニターするテストには、少なくとも 1 つのアサーションを定義する必要があります。
+アサーションは、期待されるテスト結果が何であるかを定義します。**Test Service** をクリックすると、取得したレスポンスに基づいて `response time` に関するアサーションが追加されます。モニターするテストには、少なくとも 1 つのアサーションを定義する必要があります。
 
-| タイプ                    | 演算子                                        | 値の型                           |
+{{< tabs >}}
+{{% tab "Unary Call" %}}
+| タイプ                    | 演算子                                        | 値のタイプ                           |
 |-------------------------|-------------------------------------------------|--------------------------------------|
-| response time           | `is less than`                                  | 整数 (ms)                       |
-| ヘルスチェックのステータス      | `is`、`is not`                                  | 整数 (ms)                       |
+| 応答時間           | `is less than`                                  | _整数 (ms)_                       |
+| gRPC 応答           | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`、<br> [`jsonpath`][1]、[`xpath`][2] | _文字列_ <br> _[Regex][3]_ |
+
+
+[1]: https://restfulapi.net/json-jsonpath/
+[2]: https://www.w3schools.com/xml/xpath_syntax.asp
+[3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+{{% /tab %}}
+{{% tab "Health Check" %}}
+| タイプ                    | 演算子                                        | 値のタイプ                           |
+|-------------------------|-------------------------------------------------|--------------------------------------|
+| 応答時間           | `is less than`                                  | _整数 (ms)_                       |
+| ヘルスチェックステータス      | `is`、`is not`                                  | _整数 (ms)_                       |
+
+{{% /tab %}}
+{{< /tabs >}}
 
 **New Assertion** をクリックするか、応答プレビューを直接クリックすることで、API テストごとに最大 20 個のアサーションを作成できます。
 
@@ -67,19 +137,21 @@ Synthetic テストの gRPC のユースケースについて、<a href="https:/
 
 ### ロケーションを選択する
 
-gRPC ヘルスチェックテストを実行する **Locations** を選択します。gRPC ヘルスチェックテストは、ヘルスチェックテストをネットワークの外部から実行するか内部から実行するかに応じて、[管理ロケーション][2]と[プライベートロケーション][3]の両方から実行することができます。
+gRPC テストを実行する**ロケーション**を選択します。gRPC テストは、ネットワークの外部または内部のどちらからテストを実行するかの好みによって、管理ロケーションと[プライベートロケーション][2]の両方から実行できます。
+
+{{% managed-locations %}} 
 
 ### テストの頻度を指定する
 
-gRPC ヘルスチェックテストは次の頻度で実行できます。
+gRPC テストは次の頻度で実行できます。
 
 * **On a schedule**: 最も重要なサービスにユーザーが常にアクセスできるようにします。Datadog で gRPC テストを実行する頻度を選択します。
-* [**Within your CI/CD pipelines**][4]: 欠陥のあるコードがカスタマーエクスペリエンスに影響を与える可能性があることを恐れずに出荷を開始します。
+* [**Within your CI/CD pipelines**][3]: 欠陥のあるコードがカスタマーエクスペリエンスに影響を与える可能性があることを恐れずに出荷を開始します。
 * **On-demand**: チームにとって最も意味のあるときにいつでもテストを実行します。
 
 ### アラート条件を定義する
 
-アラート条件で、ヘルスチェックテストが失敗しアラートをトリガーする状況を設定します。
+アラート条件で、テストが失敗しアラートをトリガーする状況を設定します。
 
 #### アラート設定規則
 
@@ -90,17 +162,17 @@ gRPC ヘルスチェックテストは次の頻度で実行できます。
 
 #### 高速再試行
 
-ヘルスチェックテストが失敗した場合、`Y` ミリ秒後に `X` 回再試行することができます。再試行の間隔は、警告の感性に合うようにカスタマイズしてください。
+テストが失敗した場合、`Y` ミリ秒後に `X` 回再試行することができます。再試行の間隔は、警告の感性に合うようにカスタマイズしてください。
 
 ロケーションのアップタイムは、評価ごとに計算されます (評価前の最後のテスト結果がアップかダウンか)。合計アップタイムは、構成されたアラート条件に基づいて計算されます。送信される通知は、合計アップタイムに基づきます。
 
-### チームへの通知
+### テストモニターを構成する
 
 以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
 
-1. [モニターの構成方法と同様][6]、メッセージに `@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
+1. [モニターの構成方法と同様][5]、メッセージに `@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
 
-2. ヘルスチェックテストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][7]のほか、以下の[条件付き変数][8]を使用できます。
+2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][6]のほか、以下の[条件付き変数][7]を使用できます。
 
     | 条件付き変数       | 説明                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -113,42 +185,23 @@ gRPC ヘルスチェックテストは次の頻度で実行できます。
     | `{{#is_priority}}`         | モニターが優先順位 (P1～P5) に一致したときに表示します。                  |
     | `{{^is_priority}}`         | モニターが優先順位 (P1～P5) に一致しない限り表示します。                |
 
-3. テストが失敗した場合に、ヘルスチェックテストで**通知メッセージを再送信する**頻度を指定します。ヘルスチェックテストの失敗を再通知しない場合は、`Never renotify if the monitor has not been resolved` オプションを使用してください。
+3. テストが失敗した場合に、テストで**通知メッセージを再送信する**頻度を指定します。テストの失敗を再通知しない場合は、`Never renotify if the monitor has not been resolved` オプションを使用してください。
 
-**Save** をクリックすると、保存され、ヘルスチェックテストが開始されます。
+4. **Create** をクリックすると、テストの構成とモニターが保存されます。
 
-## 変数
+詳しくは、[Synthetic テストモニターの使用][8]をご覧ください。
 
-### ローカル変数を作成する
-
-ヘルスチェックテストコンフィギュレーションフォームの右上隅にある **Create Local Variable** をクリックすると、ローカル変数を作成できます。以下の利用可能なビルトインのいずれかから値を定義できます。
-
-`{{ numeric(n) }}`
-: `n` 桁の数字列を生成します。
-
-`{{ alphabetic(n) }}`
-: `n` 文字のアルファベット文字列を生成します。
-
-`{{ alphanumeric(n) }}`
-: `n` 文字の英数字文字列を生成します。
-
-`{{ date(n, format) }}`
-: テストが開始された日付 + `n` 日の値を使用して、許容される形式のいずれかで日付を生成します。
-
-`{{ timestamp(n, unit) }}`
-: テストが +/- `n` 選択単位で開始されたタイムスタンプの値を使用して、許容される単位のいずれかでタイムスタンプを生成します。
+{{% synthetics-variables %}}
 
 ### 変数を使用する
 
-gRPC テストの URL、高度なオプション、アサーションで、[`Settings`で定義されたグローバル変数][9]を使用することができます。
+gRPC テストの URL、高度なオプション、アサーションで、[**Settings** ページで定義されたグローバル変数][9]を使用することができます。
 
 変数のリストを表示するには、目的のフィールドに `{{` と入力します。
 
-{{< img src="synthetics/api_tests/use_variable.mp4" alt="API テストでの変数の使用" video="true" width="90%" >}}
-
 ## テストの失敗
 
-ヘルスチェックテストが 1 つ以上のアサーションを満たさない場合、またはリクエストが時期尚早に失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対してアサーションをテストすることなくヘルスチェックテストが実際に失敗することがあります。
+テストが 1 つ以上のアサーションを満たさない場合、またはリクエストが時期尚早に失敗した場合、テストは `FAILED` と見なされます。場合によっては、エンドポイントに対してアサーションをテストすることなくテストが実際に失敗することがあります。
 
 これらの理由には以下が含まれます。
 
@@ -169,13 +222,13 @@ gRPC テストの URL、高度なオプション、アサーションで、[`Set
 
 `TIMEOUT`
 : リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.`  は、リクエストの持続時間がテスト定義のタイムアウト (デフォルトは 60 秒に設定されています) に当たったことを示します。
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.`  は、リクエストの持続時間がテスト定義のタイムアウト (デフォルトは 60 秒に設定されています) に当たったことを示します。
   各リクエストについて、ネットワークウォーターフォールに表示されるのは、リクエストの完了したステージのみです。例えば、`Total response time` だけが表示されている場合、DNS の解決中にタイムアウトが発生したことになります。
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.`  は、テスト時間 (リクエストとアサーション) が最大時間 (60.5 秒) に達したことを示しています。
 
 ## アクセス許可
 
-デフォルトでは、[Datadog 管理者および Datadog 標準ロール][12]を持つユーザーのみが、Synthetic gRPC ヘルスチェックテストを作成、編集、削除できます。Synthetic gRPC ヘルスチェックテストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][12]のいずれかにアップグレードします。
+デフォルトでは、[Datadog 管理者および Datadog 標準ロール][12]を持つユーザーのみが、Synthetic gRPC テストを作成、編集、削除できます。Synthetic gRPC テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][12]のいずれかにアップグレードします。
 
 [カスタムロール機能][13]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
 
@@ -185,21 +238,22 @@ gRPC テストの URL、高度なオプション、アサーションで、[`Set
 
 組織内の役割に基づいて、ブラウザテストへのアクセスを制限することができます。ブラウザテストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
 
-{{< img src="synthetics/settings/restrict_access.png" alt="テストのアクセス許可の設定" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access.png" alt="テストの権限の設定" style="width:70%;" >}}
 
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
 [1]: https://github.com/grpc/grpc/blob/master/doc/health-checking.md
-[2]: /ja/api/v1/synthetics/#get-all-locations-public-and-private
-[3]: /ja/synthetics/private_locations
-[4]: /ja/synthetics/cicd_testing
-[5]: /ja/synthetics/search/#search
-[6]: /ja/monitors/notify/#notify-your-team
-[7]: https://www.markdownguide.org/basic-syntax/
-[8]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[2]: /ja/synthetics/private_locations
+[3]: /ja/synthetics/cicd_testing
+[4]: /ja/synthetics/search/#search
+[5]: /ja/monitors/notify/#notify-your-team
+[6]: https://www.markdownguide.org/basic-syntax/
+[7]: /ja/monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
+[8]: /ja/synthetics/guide/synthetic-test-monitors
 [9]: /ja/synthetics/settings/#global-variables
 [10]: https://grpc.github.io/grpc/core/md_doc_statuscodes.html
 [11]: /ja/synthetics/api_tests/errors/#ssl-errors

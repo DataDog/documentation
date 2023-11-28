@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-reporter
 app_uuid: debb66b8-6675-4273-85a2-55d806e68e1b
 assets:
@@ -18,7 +20,7 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
@@ -42,7 +44,7 @@ pricing:
   includes_assets: true
   product_id: reporter
   short_description: このインテグレーションの定額料金
-  unit_price: 1000
+  unit_price: 299
 public_title: Reporter
 short_description: Datadog ダッシュボードのメールレポートを生成する
 supported_os:
@@ -71,6 +73,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Reporter
+  uninstallation: README.md#Uninstallation
 ---
 
 

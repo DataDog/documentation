@@ -64,7 +64,7 @@ If your custom log parser is not working, the first thing to check are the Agent
 * If all goes well you should see `dogstream: parsing {filename} with {function name} (requested {config option text})`.
 
 <div class="alert alert-warning">
-To test that dogstreams are working, append a line-don't edit an existing one-to any log file you've configured the Agent to watch. The Agent only tails the end of each log file, so it doesn't notice any changes you make elsewhere in the file.
+To test that dogstreams are working, append a line-don't edit an existing one-to any log file you've configured the Agent to watch. The Agent only <a href="/glossary/#tail">tails</a> the end of each log file, so it doesn't notice any changes you make elsewhere in the file.
 </div>
 
 ### Writing parsing functions
@@ -249,9 +249,9 @@ If you suspect there is some error occurring beyond the scope of your custom log
 [3]: https://github.com/DataDog/dd-agent/blob/master/dogstream/cassandra.py
 [4]: /events/
 [5]: https://github.com/DataDog/dd-agent/blob/5.13.x/checks/datadog.py#L210
-[6]: /agent/guide/agent-log-files/
+[6]: /agent/configuration/agent-log-files/
 [7]: https://github.com/DataDog/dd-agent/blob/5.7.x/datadog.conf.example#L211
-[8]: /agent/guide/agent-commands/
+[8]: /agent/configuration/agent-commands/
 [9]: https://github.com/DataDog/dd-agent/blob/5.7.x/checks/datadog.py#L278
 [10]: /help/
 [11]: /agent/troubleshooting/send_a_flare/

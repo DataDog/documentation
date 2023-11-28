@@ -15,7 +15,7 @@ RUM ブラウザ SDK は、プロキシ経由でリクエストを送信する�
 
 ## SDK の初期化
 
-`proxyUrl` [初期化パラメーター][1]を設定すると、すべての RUM データは指定した URL に POST メソッド (例: `https://www.proxy.com/foo`) で送信されます。
+`proxy` [初期化パラメーター][1]を設定すると、すべての RUM データは指定した URL に POST メソッド (例: `https://www.proxy.com/foo`) で送信されます。
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -27,27 +27,20 @@ datadogRum.init({
     applicationId: '<DATADOG_APPLICATION_ID>',
     clientToken: '<DATADOG_CLIENT_TOKEN>',
     site: '<DATADOG_SITE>',
-    proxyUrl: '<YOUR_PROXY_URL>',
+    proxy: '<YOUR_PROXY_URL>',
 });
 ```
 
 {{% /tab %}}
 {{% tab "CDN async" %}}
-```html
-<script>
- (function(h,o,u,n,d) {
-   h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
-   d=o.createElement(u);d.async=1;d.src=n
-   n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-})(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v4.js','DD_RUM')
-  DD_RUM.onReady(function() {
-    DD_RUM.init({
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
-        proxyUrl: '<YOUR_PROXY_URL>',
+        proxy: '<YOUR_PROXY_URL>',
     })
-  })
-</script>
+})
 ```
 {{% /tab %}}
 {{% tab "CDN sync" %}}
@@ -57,7 +50,7 @@ window.DD_RUM &&
     window.DD_RUM.init({
         clientToken: '<CLIENT_TOKEN>',
         applicationId: '<APPLICATION_ID>',
-        proxyUrl: '<YOUR_PROXY_URL>',
+        proxy: '<YOUR_PROXY_URL>'
     });
 ```
 
@@ -66,46 +59,39 @@ window.DD_RUM &&
 
 ## プロキシ設定
 
-プロキシが RUM ブラウザ SDK からデータを受信すると、それを Datadog に転送する必要があります。RUM ブラウザ SDK は、プロキシへのすべての POST リクエストに、`ddforward` クエリパラメーターを追加します。このクエリパラメーターには、すべてのデータの転送先となる URL が含まれています。
+プロキシが RUM ブラウザ SDK からデータを受信すると、それを Datadog に転送する必要があります。RUM ブラウザ SDK は、プロキシへのすべての POST リクエストに、`ddforward` クエリパラメーターを追加します。このクエリパラメーターには、すべてのデータの転送先となる URL パスとパラメーターが含まれています。
 
 Datadog へのプロキシリクエストを成功させるには
 
-1. 正確な geoIP のために、リクエストクライアント IP アドレスを含む `X-Forwarded-For` ヘッダーを追加します。
-2. クエリパラメーター `ddforward` で指定した URL に、POST メソッドでリクエストを転送します。
-4. リクエスト本文は変更されないままでなければなりません。
+1. 以下を使用して最終的な Datadog インテーク URL を構築します。
+    - サイトに対応する Datadog のインテークオリジン。以下の表を参照してください。
+    - `ddforward` が提供するパスとパラメーター。
+2. 正確な geoIP のために、リクエストクライアント IP アドレスを含む `X-Forwarded-For` ヘッダーを追加します。
+3. POST メソッドで Datadog インテーク URL にリクエストを転送します。
+4. リクエスト本文は変更しないでください。
 
-`ddforward` 属性が [Datadog サイト][2]の有効な Datadog エンドポイントを指していることを確認してください。これを行わないと、安全でない構成になる可能性があります。
+サイトパラメータは、SDK の[初期化パラメータ][1]です。各サイトの Datadog インテークオリジンは以下の通りです。
 
-サイトパラメータは、SDK の[初期化パラメータ][1]です。各サイトで有効な取り込み URL のパターンは以下の通りです。
+| サイト    | サイトパラメーター            | Datadog インテークオリジン                      |
+| ------- | ------------------------- | ------------------------------------------ |
+| US1     | `datadoghq.com` (デフォルト) | `https://browser-intake-datadoghq.com`     |
+| US3     | `us3.datadoghq.com`       | `https://browser-intake-us3-datadoghq.com` |
+| US5     | `us5.datadoghq.com`       | `https://browser-intake-us5-datadoghq.com` |
+| EU1     | `datadoghq.eu`            | `https://browser-intake-datadoghq.eu`      |
+| US1-FED | `ddog-gov.com`            | `https://browser-intake-ddog-gov.com`      |
 
-{{< tabs >}}
-{{% tab "最新バージョン" %}}
+サイトパラメーターに対応する Datadog インテークオリジンは、プロキシ実装で定義する必要があります。
 
-| サイト    | 有効な取り込み URL パターン                       | サイトパラメーター      |
-|---------|------------------------------------------------|---------------------|
-| US1     | `https://*.browser-intake-datadoghq.com/*`     | `datadoghq.com`     |
-| US3     | `https://*.browser-intake-us3-datadoghq.com/*` | `us3.datadoghq.com` |
-| US5     | `https://*.browser-intake-us5-datadoghq.com/*` | `us5.datadoghq.com` |
-| EU1     | `https://*.browser-intake-datadoghq.eu/*`      | `datadoghq.eu`      |
-| US1-FED | `https://*.browser-intake-ddog-gov.com/*`      | `ddog-gov.com`      |
+## レガシーなプロキシ設定
 
-{{% /tab %}}
-{{% tab "`v4` より前" %}}
+Browser SDK v4.34.0 以前では、`proxyUrl` 初期化パラメーターが使用され、Datadog インテークオリジンが <code>ddforward</code> 属性に含まれていました。プロキシ実装はこのホストの検証を担当し、これに失敗すると様々な脆弱性が発生しました。
 
-| サイト    | 有効な取り込み URL パターン             | サイトパラメーター      |
-|---------|--------------------------------------|---------------------|
-| US1     | `https://*.logs.datadoghq.com/*`     | `datadoghq.com`     |
-| US3     | `https://*.logs.us3-datadoghq.com/*` | `us3.datadoghq.com` |
-| EU1     | `https://*.logs.datadoghq.eu/*`      | `datadoghq.eu`      |
-| US1-FED | `https://*.logs.ddog-gov.com/*`      | `ddog-gov.com`      |
+Datadog インテークオリジンは、セキュリティを確保するために、プロキシ実装で定義する必要があります。
 
-{{% /tab %}}
-{{< /tabs >}}
-
+<strong>古いバージョンの Browser SDK でプロキシを使用している場合、新しいバージョンの Browser SDK にアップグレードすることをお勧めします。</strong>
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/real_user_monitoring/browser/#initialization-parameters
-[2]: /ja/getting_started/site/

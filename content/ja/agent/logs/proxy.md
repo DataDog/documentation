@@ -1,17 +1,18 @@
 ---
-title: TCP Agent のログ用プロキシ
-kind: documentation
 further_reading:
-  - link: /logs/
-    tag: ドキュメント
-    text: ログの収集
-  - link: /infrastructure/process/
-    tag: ドキュメント
-    text: プロセスの収集
-  - link: /tracing/
-    tag: ドキュメント
-    text: トレースの収集
+- link: /logs/
+  tag: ドキュメント
+  text: ログの収集
+- link: /infrastructure/process/
+  tag: ドキュメント
+  text: プロセスの収集
+- link: /tracing/
+  tag: ドキュメント
+  text: トレースの収集
+kind: documentation
+title: TCP Agent のログ用プロキシ
 ---
+
 ## 概要
 
 ログの収集には、Datadog Agent v6.0 以上が必要です。古いバージョンの Agent には、`log collection` インターフェイスが含まれていません。
@@ -91,7 +92,7 @@ logs_config:
 
 Datadog への接続があるホストに HAProxy をインストールする必要があります。次の構成ファイルを使用します (まだ構成していない場合)。
 
-{{< site-region region="us" >}}
+{{% site-region region="us" %}}
 
 ```conf
 # 基本的なコンフィギュレーション
@@ -107,7 +108,7 @@ defaults
     option  redispatch
     timeout client 5s
     timeout server 5s
-    timeout connect 5
+    timeout connect 5s
 # ポート 3833 で HAProxy 統計情報の表示を宣言します
 # このページを表示するための資格情報は不要です
 # 一度セットアップを行うとオフにできます。
@@ -146,14 +147,16 @@ backend datadog-logs
 ```
 
 **注**: 次のコマンドで証明書をダウンロードしてください:
-        * `sudo apt-get install ca-certificates` (Debian、Ubuntu)
-        * `yum install ca-certificates` (CentOS、Redhat)
+
+* `sudo apt-get install ca-certificates` (Debian、Ubuntu)
+* `yum install ca-certificates` (CentOS、Redhat)
+
 成功した場合、CentOS、Redhat の場合、ファイルは `/etc/ssl/certs/ca-bundle.crt` にあります。
 
 HAProxy コンフィギュレーションが完成したら、リロードするか、HAProxy を再起動できます。`app.datadoghq.com` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みする**ことで (例: `service haproxy reload`)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
+{{% /site-region %}}
+{{% site-region region="eu" %}}
 
 ```conf
 # 基本的なコンフィギュレーション
@@ -206,11 +209,16 @@ backend datadog-logs
     server datadog agent-intake.logs.datadoghq.eu:443 ssl verify required ca-file /etc/ssl/certs/ca-bundle.crt check port 443
 ```
 
-コマンド `sudo apt-get install ca-certificates` (Debian、Ubuntu) または `yum install ca-certificates` (CentOS、Redhat) を使用して証明書をダウンロードします。成功すると、ファイルは CentOS、Redhat の `/etc/ssl/certs/ca-bundle.crt` に配置されます。
+次のコマンドで証明書をダウンロードしてください:
+
+* `sudo apt-get install ca-certificates` (Debian、Ubuntu)
+* `yum install ca-certificates` (CentOS、Redhat) 
+
+成功した場合、CentOS、Redhat の場合、ファイルは `/etc/ssl/certs/ca-bundle.crt` にあります。
 
 HAProxy コンフィギュレーションが完成したら、リロードするか、HAProxy を再起動できます。`app.datadoghq.eu` が別の IP にフェールオーバーした場合のために、**`cron` ジョブで 10 分ごとに HAProxy を再読み込みする**ことで (例: `service haproxy reload`)、HAProxy の DNS キャッシュを強制的に更新することをお勧めします。
 
-{{< /site-region >}}
+{{% /site-region %}}
 
 {{% /tab %}}
 
@@ -233,7 +241,7 @@ logs_config:
 
 この例では、`nginx.conf` を使用して、Agent のトラフィックを Datadog にプロキシ転送できます。このコンフィギュレーションにおける最後のサーバーブロックで TLS ラップを行うことで、プロキシと Datadog のログインテーク API エンドポイントとの間で内部的なプレーンテキストログを暗号化します。
 
-{{< site-region region="us" >}}
+{{% site-region region="us" %}}
 
 ```conf
 user nginx;
@@ -253,8 +261,8 @@ stream {
 }
 ```
 
-{{< /site-region >}}
-{{< site-region region="eu" >}}
+{{% /site-region %}}
+{{% site-region region="eu" %}}
 
 ```conf
 user nginx;
@@ -274,7 +282,7 @@ stream {
 }
 ```
 
-{{< /site-region >}}
+{{% /site-region %}}
 {{% /tab %}}
 {{< /tabs >}}
 

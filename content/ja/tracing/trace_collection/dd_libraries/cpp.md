@@ -34,7 +34,7 @@ Datadog アプリ内の[クイックスタート手順][4]に従って、最高�
 - `service`、`env`、`version` タグを動的に設定します。
 - セットアップ中にトレースの 100% の取り込み、およびトレース ID 挿入などの機能を有効にします。
 
-## APM に Datadog Agent を構成する
+## APM 用に Datadog Agent を構成する
 
 インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`localhost:8126` でトレーストラフィックをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
 
@@ -64,14 +64,13 @@ AWS Lambda で Datadog APM を設定するには、[サーバーレス関数の�
 {{% /tab %}}
 {{% tab "その他の環境" %}}
 
-トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3]、[Azure App Service][4] など、他の環境で利用できます。
+トレースは、[Heroku][1]、[Cloud Foundry][2]、[AWS Elastic Beanstalk][3] など、他の環境で利用できます。
 
 その他の環境については、その環境の[インテグレーション][5]のドキュメントを参照し、セットアップの問題が発生した場合は[サポートにお問い合わせ][6]ください。
 
 [1]: /ja/agent/basic_agent_usage/heroku/#installation
 [2]: /ja/integrations/cloud_foundry/#trace-collection
 [3]: /ja/integrations/amazon_elasticbeanstalk/
-[4]: /ja/infrastructure/serverless/azure_app_services/#overview
 [5]: /ja/integrations/
 [6]: /ja/help/
 {{% /tab %}}
@@ -87,23 +86,29 @@ Agent のインストールが完了したら、以下の 2 つの手順のい�
 ### dd-opentracing-cpp に対してコンパイルする
 
 ```bash
-# GitHub から最新のリリースバージョン番号を取得します。
-get_latest_release() {
-  wget -qO- "https://api.github.com/repos/$1/releases/latest" |
-    grep '"tag_name":' |
-    sed -E 's/.*"([^"]+)".*/\1/';
-}
-DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
-# dd-opentracing-cpp ライブラリをダウンロードし、インストールします。
-wget https://github.com/DataDog/dd-opentracing-cpp/archive/${DD_OPENTRACING_CPP_VERSION}.tar.gz -O dd-opentracing-cpp.tar.gz
-mkdir -p dd-opentracing-cpp/.build
-tar zxvf dd-opentracing-cpp.tar.gz -C ./dd-opentracing-cpp/ --strip-components=1
-cd dd-opentracing-cpp/.build
-# 正しいバージョンの opentracing-cpp およびその他の deps をダウンロードし、インストールします。
-../scripts/install_dependencies.sh
-cmake ..
-make
-make install
+# "jq" コマンドが必要です。
+# "apt install jq"、"apk add jq"、"yum install jq" などの
+# パッケージマネージャーでインストールできます。
+if ! command -v jq >/dev/null 2>&1; then
+  >&2 echo "jq command not found. Install using the local package manager."
+else
+  # GitHub から最新のリリースバージョン番号を取得します。
+  get_latest_release() {
+    curl --silent "https://api.github.com/repos/$1/releases/latest" | jq --raw-output .tag_name
+  }
+  DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
+  # dd-opentracing-cpp ライブラリをダウンロードし、インストールします。
+  wget https://github.com/DataDog/dd-opentracing-cpp/archive/${DD_OPENTRACING_CPP_VERSION}.tar.gz -O dd-opentracing-cpp.tar.gz
+  mkdir -p dd-opentracing-cpp/.build
+  tar zxvf dd-opentracing-cpp.tar.gz -C ./dd-opentracing-cpp/ --strip-components=1
+  cd dd-opentracing-cpp/.build
+  # 正しいバージョンの opentracing-cpp、およびその他の依存関係をダウンロードし、インストールします。
+  ../scripts/install_dependencies.sh
+  # プロジェクトの構成、ビルド、インストールを行います。
+  cmake ..
+  make -j
+  make install
+fi
 ```
 
 `<datadog/opentracing.h>` を含めてトレーサーを作成します。
@@ -228,5 +233,5 @@ g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
 [1]: /ja/tracing/setup/envoy/
 [2]: /ja/tracing/setup/nginx/
 [3]: /ja/tracing/compatibility_requirements/cpp
-[4]: https://app.datadoghq.com/apm/docs
+[4]: https://app.datadoghq.com/apm/service-setup
 [5]: /ja/tracing/trace_collection/library_config/cpp/

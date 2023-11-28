@@ -24,9 +24,11 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- security
+- コンプライアンス
+- コンテナ
 - ログの収集
-- オートディスカバリー
+- ネットワーク
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/twistlock/README.md
 display_on_public_website: true
@@ -44,17 +46,19 @@ public_title: Prisma Cloud Compute Edition
 short_description: Twistlock はコンテナセキュリティスキャナ
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Security
+  - カテゴリ::コンプライアンス
+  - Category::Containers
   - Category::Log Collection
-  - Category::Autodiscovery
+  - Category::Network
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Twistlock はコンテナセキュリティスキャナ
   media: []

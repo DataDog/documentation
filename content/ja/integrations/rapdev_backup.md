@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-backup
 app_uuid: f0a2c15e-9c53-4645-aedc-5a28af130308
 assets:
@@ -17,13 +19,11 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
 - マーケットプレイス
-- cloud
-- コラボレーション
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -48,24 +48,23 @@ public_title: Backup Automator
 short_description: Datadog ダッシュボード、Synthetic、モニター、ノートブックをバックアップします
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
   - Category::Marketplace
-  - Category::Cloud
-  - Category::Collaboration
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Datadog ダッシュボード、Synthetic、モニター、ノートブックをバックアップします
   media: []
   overview: README.md#Overview
   support: README.md#Support
   title: Backup Automator
+  uninstallation: README.md#Uninstallation
 ---
 
 

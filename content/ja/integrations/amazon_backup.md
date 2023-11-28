@@ -4,20 +4,20 @@ categories:
 - AWS
 - ログの収集
 dependencies: []
-description: Amazon Backup のキーメトリクスを追跡します。
+description: AWS Backup のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_backup/
 draft: false
 git_integration_title: amazon_backup
 has_logo: true
 integration_id: amazon-backup
-integration_title: Amazon Backup
+integration_title: AWS Backup
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: amazon_backup
-public_title: Datadog-Amazon Backup インテグレーション
-short_description: Amazon Backup のキーメトリクスを追跡します。
+public_title: Datadog-AWS Backup インテグレーション
+short_description: AWS Backup のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
@@ -36,7 +36,7 @@ AWS Backup は、AWS サービスやハイブリッドワークロードのデ�
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Backup` が有効になっていることを確認します。
-2. [Datadog - Amazon Backup インテグレーション][3]をインストールします。
+2. [Datadog - AWS Backup インテグレーション][3]をインストールします。
 
 ## 収集データ
 
@@ -46,11 +46,11 @@ AWS Backup は、AWS サービスやハイブリッドワークロードのデ�
 
 ### イベント
 
-Amazon Backup インテグレーションには、イベントは含まれません。
+AWS Backup インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-Amazon Backup インテグレーションには、サービスのチェック機能は含まれません。
+AWS Backup インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 

@@ -1,10 +1,10 @@
 ---
 aliases:
-  - /ja/integrations/azure_expressroute
+- /ja/integrations/azure_expressroute
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- クラウド
+- ネットワーク
 dependencies: []
 description: Azure ExpressRoute のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_express_route/
@@ -22,6 +22,7 @@ public_title: Datadog-Microsoft Azure ExpressRoute インテグレーション
 short_description: Azure ExpressRoute のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure ExpressRoute サービスを使用すると、接続プロバイダーから提供されるプライベート接続を介して、オンプレミスネットワークを Microsoft クラウドまで拡張できます。

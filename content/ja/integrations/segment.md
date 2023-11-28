@@ -1,9 +1,7 @@
 ---
 categories:
-  - モニター
-  - notification
-  - cloud
-ddtype: crawler
+- クラウド
+- notification
 dependencies: []
 description: Segment インテグレーションは、配信先ワークスペースのイベント配信メトリクスを収集
 doc_link: https://docs.datadoghq.com/integrations/segment/
@@ -19,8 +17,10 @@ manifest_version: '1.0'
 name: segment
 public_title: Datadog-Segment インテグレーション
 short_description: Segment のイベント配信メトリクスを収集
+team: web-integrations
 version: '1.0'
 ---
+
 ## 概要
 
 Segment と接続して、以下のことができます。

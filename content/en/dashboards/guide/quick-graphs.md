@@ -66,18 +66,18 @@ If you do not enter a title, one is automatically generated based on your select
 
 Click **Export** to save your work to a Dashboard or Notebook. You can always come back to the editor to change the graph. If want to share a link directly to your graph without a Dashboard or Notebook, click **Copy to Clipboard**.
 
-[1]: /dashboards/querying/#choose-the-metric-to-graph
+[1]: /dashboards/querying/#define-the-metric
 [2]: /dashboards/querying/#filter
 [3]: /dashboards/querying/#aggregate-and-rollup
 [4]: /dashboards/querying/#advanced-graphing
 [5]: /logs/explorer/
 [6]: /tracing/trace_explorer/
 [7]: /real_user_monitoring/explorer/search/
-[8]: /security_platform/explorer/
+[8]: /security/explorer/
 [9]: /events/
 [10]: /continuous_integration/pipelines/
 [11]: /continuous_integration/tests/
-[12]: /security_platform/cspm/findings/
+[12]: /security/misconfigurations/findings/
 [13]: /dashboards/widgets/timeseries/
 [14]: /dashboards/widgets/top_list/
 [15]: /dashboards/widgets/query_value/

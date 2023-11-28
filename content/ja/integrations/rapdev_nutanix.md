@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-nutanix
 app_uuid: 53711ca7-b5f8-4472-b921-e70a3103ede4
 assets:
@@ -29,13 +31,11 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
 - マーケットプレイス
-- cloud
-- data store
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -59,22 +59,20 @@ pricing:
   tag: コア
   unit_label: Nutanix ホストコア
   unit_price: 5
-public_title: Nutanix インテグレーション
+public_title: Nutanix
 short_description: Nutanix リソースの使用量を監視して、お使いの環境をより良く理解しましょう。
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
   - Category::Marketplace
-  - Category::Cloud
-  - Category::Data Store
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Nutanix リソースの使用量を監視して、お使いの環境をより良く理解しましょう。
   media:
@@ -92,7 +90,8 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Nutanix インテグレーション
+  title: Nutanix
+  uninstallation: README.md#Uninstallation
 ---
 
 

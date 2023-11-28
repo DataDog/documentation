@@ -42,7 +42,8 @@ author:
 categories:
 - data store
 - log collection
-- autodiscovery
+- notification
+- tracing
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/postgres/README.md
 display_on_public_website: true
@@ -50,7 +51,7 @@ draft: false
 git_integration_title: postgres
 integration_id: postgres
 integration_title: Postgres
-integration_version: 12.5.1
+integration_version: 14.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -60,17 +61,18 @@ public_title: Postgres
 short_description: データベースパフォーマンスと健全性のメトリクスを豊富に収集
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::データストア
   - Category::ログの収集
-  - Category::オートディスカバリー
+  - Category::通知
+  - Category::Tracing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: データベースパフォーマンスと健全性のメトリクスを豊富に収集
   media: []
@@ -85,24 +87,27 @@ tile:
 
 ## 概要
 
-PostgreSQL からメトリクスをリアルタイムに取得して、以下のことができます。
+Postgres インテグレーションは、Postgres データベースの健全性とパフォーマンスに関するメトリクスをほぼリアルタイムで提供します。提供されるダッシュボードでこれらのメトリクスを可視化するとともに、モニターを作成して PostgreSQL の状態についてチームに警告を発することができます。
 
-- PostgreSQL の状態を視覚化および監視できます。
-- PostgreSQL のフェイルオーバーとイベントの通知を受けることができます。
+[データベースモニタリング][2] (DBM) を有効にすると、クエリのパフォーマンスとデータベースの健全性について詳細なインサイトを取得できます。標準のインテグレーションに加え、Datadog DBM では、クエリレベルのメトリクス、リアルタイムおよび過去のクエリスナップショット、待機イベントの分析情報、データベースの負荷、クエリ実行計画、ブロッキングを引き起こしているクエリについてのインサイトが提供されます。
 
 ## セットアップ
 
-<div class="alert alert-info">このページでは、Postgres Agent のインテグレーションについて説明します。Postgres のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
+<div class="alert alert-info">このページでは、標準的な Postgres Agent のインテグレーションについて説明します。Postgres のデータベースモニタリング製品をお求めの場合は、<a href="https://docs.datadoghq.com/database_monitoring" target="_blank">Datadog データベースモニタリング</a>をご覧ください。</div>
 
 ### インストール
 
-PostgreSQL チェックは Agent にパッケージ化されています。PostgreSQL メトリクスとログの収集を開始するには、[Agent をインストールします][2]。
+PostgreSQL チェックは Agent にパッケージ化されています。PostgreSQL メトリクスとログの収集を開始するには、[Agent をインストールします][3]。
 
 ### コンフィギュレーション
 
+**注**: PostgreSQL 用のデータベースモニタリングをインストールするには、[データベースモニタリングドキュメント][4]でご利用のホスティングソリューションを選択して、手順を確認してください。
+
+標準のインテグレーションを単体でインストールする場合のみ、このガイドの下記の手順に進んでください。
+
 #### Postgres の準備
 
-PostgreSQL インテグレーションを開始するには、PostgreSQL サーバーへの適切なアクセス権を持つ読み取り専用 `datadog` ユーザーを作成します。PostgreSQL データベースで `psql` を起動します。
+標準の PostgreSQL インテグレーションを開始するには、PostgreSQL サーバーへの適切なアクセス権を持つ読み取り専用 `datadog` ユーザーを作成します。PostgreSQL データベースで `psql` を起動します。
 
 PostgreSQL バージョン 10 以上の場合、次を実行します。
 
@@ -490,11 +495,11 @@ Agent コンテナで必要な環境変数
 
 ### 検証
 
-[Agent の status サブコマンドを実行][3]し、Checks セクションで `postgres` を探します。
+[Agent の status サブコマンドを実行][5]し、Checks セクションで `postgres` を探します。
 
 ## 収集データ
 
-以下に記載されているメトリクスのいくつかには、追加の構成が必要です。すべてのコンフィギュレーションオプションについては、[サンプル postgres.d/conf.yaml][4] を参照してください。
+以下に記載されているメトリクスのいくつかには、追加の構成が必要です。すべての構成オプションについては、[サンプル postgres.d/conf.yaml][6] を参照してください。
 
 ### メトリクス
 {{< get-metrics-from-git "postgres" >}}
@@ -512,7 +517,7 @@ PostgreSQL チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
 
 ## その他の参考資料
 
@@ -520,23 +525,25 @@ PostgreSQL チェックには、イベントは含まれません。
 
 ### よくあるご質問
 
-- [PostgreSQL カスタムメトリクスの収集の説明][6]
+- [PostgreSQL カスタムメトリクスの収集の説明][8]
 
 ### ブログ記事
 
-- [1 行の変更で Postgres のパフォーマンスを 100 倍高速化][7]
-- [PostgreSQL モニタリングのキーメトリクス][8]
-- [PostgreSQL モニタリングツールでメトリクスを収集][9]
-- [Datadog で PostgreSQL データを収集および監視する方法][10]
+- [1 行の変更で Postgres のパフォーマンスを 100 倍高速化][9]
+- [PostgreSQL 監視のキーメトリクス][10]
+- [PostgreSQL 監視ツールでメトリクスを収集][11]
+- [Datadog で PostgreSQL データを収集および監視する方法][12]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/postgres/images/postgresql_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
-[3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[4]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[5]: https://docs.datadoghq.com/ja/help
-[6]: https://docs.datadoghq.com/ja/integrations/faq/postgres-custom-metric-collection-explained/
-[7]: https://www.datadoghq.com/blog/100x-faster-postgres-performance-by-changing-1-line
-[8]: https://www.datadoghq.com/blog/postgresql-monitoring
-[9]: https://www.datadoghq.com/blog/postgresql-monitoring-tools
-[10]: https://www.datadoghq.com/blog/collect-postgresql-data-with-datadog
+[2]: https://docs.datadoghq.com/ja/database_monitoring/
+[3]: https://app.datadoghq.com/account/settings/agent/latest
+[4]: https://docs.datadoghq.com/ja/database_monitoring/#postgres
+[5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
+[6]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
+[7]: https://docs.datadoghq.com/ja/help
+[8]: https://docs.datadoghq.com/ja/integrations/faq/postgres-custom-metric-collection-explained/
+[9]: https://www.datadoghq.com/blog/100x-faster-postgres-performance-by-changing-1-line
+[10]: https://www.datadoghq.com/blog/postgresql-monitoring
+[11]: https://www.datadoghq.com/blog/postgresql-monitoring-tools
+[12]: https://www.datadoghq.com/blog/collect-postgresql-data-with-datadog

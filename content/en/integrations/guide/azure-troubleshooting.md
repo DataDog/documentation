@@ -13,11 +13,7 @@ further_reading:
 
 1. Navigate to [portal.azure.com][1].
 2. In the left sidebar, select **Azure Active Directory**.
-3. Under **Properties**, your tenant name is the **Directory ID** value.
-
-Your tenant name is also available from the URL when using the [classic portal][2]. It is the text in between (**not including**) the `@` and `#` symbol:
-
-{{< img src="integrations/guide/azure_troubleshooting/azure_tenant_url.png" alt="The azure tenant url with the text yourcompanyname.onmicrosoft.com highlighted between the @ and # symbols" style="width:70%">}}
+3. Under **Basic information**, find the **Name** value.
 
 ## Unable to login
 
@@ -56,7 +52,7 @@ Turning on Diagnostics allows ARM deployed VMs to collect logging information wh
 
 If you have Azure resources with the same resource name as one of the default parameters, it can lead to naming conflicts. Azure does not allow resources to share resource names within an individual subscription. Datadog recommends renaming the default parameter with a unique name that does not already exist within your environment.
 
-For example, use the -EventhubName flag to change the default name of the eventhub resource, if you already possess an eventhub named 'datadog-eventhub'. 
+For example, use the -EventhubName flag to change the default name of the Eventhub resource, if you already possess an Eventhub named `datadog-eventhub`. 
 
 {{< code-block lang="powershell" filename="Example" >}}
 
@@ -70,7 +66,7 @@ For example, use the -EventhubName flag to change the default name of the eventh
 
 ### Unregistered resource provider
 
-If your script execution is failing due to the error **The subscription is not registered to use namespace ‘Microsoft.EventHub’**:
+If your script execution is failing due to the error **The subscription is not registered to use namespace 'Microsoft.EventHub'**:
 
 Azure has resource providers for each of its services, for example: `Microsoft.EventHub` for the Azure EventHub. If your Azure subscription is not registered to a required resource provider the script fails. You can fix this issue by registering with the resource provider. Run this command in CloudShell. 
 

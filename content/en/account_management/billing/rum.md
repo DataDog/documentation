@@ -17,7 +17,11 @@ A session is a user journey on your web or mobile application. A session usually
 
 ## When does a session expire?
 
-A session expires after 15 minutes of inactivity, and its duration is limited to 4 hours. After 4 hours, a new session is automatically created. 
+A session expires after 15 minutes of inactivity, and its duration is limited to 4 hours. After 4 hours, a new session is automatically created.
+
+## How long are Session Replay recordings?
+
+Session Replay recordings can vary based on the session length. For example, if you're observing short, 5-8 second Session Replays, that means the user ended their session after 5-8 seconds.
 
 ## What data does Datadog RUM & Session Replay collect?
 
@@ -39,17 +43,16 @@ Browser logs are automatically tied to the corresponding RUM session, enabling y
 
 Yes. Datadog uses cookies to stitch together the various steps of your users into a session. This process does not use cross-domain cookies, and it does not track the actions of your users outside your applications.
 
-## My Usage page shows RUM sessions billed under the Replay Plan, but I have not configured capturing session recordings for my application.
+## My Usage page shows RUM sessions billed under the Browser RUM & Session Replay Plan, but I have not configured capturing session recordings for my application.
 
-The Session Replay Plan includes session recordings (replays), resources, and long tasks. 
+The **Browser RUM & Session Replay** Plan unlocks session recordings (replays).
 
-- If you are collecting any of the three in your sessions, you are billed for the sessions under the Replay Plan.
+- If you are collecting replays, you are billed for the sessions under the Replay Plan.
+
 - If you want to disable session recordings from being captured, see the [Session Replay documentation][1].
-- If you want to disable resources and long tasks from being captured, see the [Browser Monitoring documentation][2].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/session_replay/#how-do-you-disable-session-replay
-[2]: /real_user_monitoring/browser/#browser-and-session-replay-sampling-configuration

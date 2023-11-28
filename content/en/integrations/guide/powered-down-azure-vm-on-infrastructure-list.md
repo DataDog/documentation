@@ -7,7 +7,7 @@ further_reading:
 - link: "/account_management/billing/azure/"
   tag: "FAQ"
   text: "Azure integration billing"
-- link: "/integrations/azure/#configuration"
+- link: "/account_management/billing/azure/#azure-vm-exclusion"
   tag: "Documentation"
   text: "Filter Azure VMs by tag"
 ---

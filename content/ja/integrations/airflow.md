@@ -13,6 +13,8 @@ assets:
       check: airflow.dagbag_size
       metadata_path: metadata.csv
       prefix: airflow。
+    process_signatures:
+    - airflow
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: Airflow
@@ -24,7 +26,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- 処理
+- 自動化
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/airflow/README.md
@@ -43,16 +45,16 @@ public_title: Airflow
 short_description: DAG、タスク、プール、エグゼキューターなどに関するメトリクスを追跡
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Processing
+  - Category::Automation
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: DAG、タスク、プール、エグゼキューターなどに関するメトリクスを追跡
   media: []

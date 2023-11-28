@@ -1,10 +1,10 @@
 ---
 aliases:
-  - /ja/integrations/azure_networkinterface
+- /ja/integrations/azure_networkinterface
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- クラウド
+- ネットワーク
 dependencies: []
 description: Azure Network Interface のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_network_interface/
@@ -22,6 +22,7 @@ public_title: Datadog-Microsoft Azure Network Interface インテグレーショ
 short_description: Azure Network Interface のキーメトリクスを追跡
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Network Interface によって、Azure 仮想マシンがインターネット、Azure、オンプレミスリソースなどと通信できるようになります。

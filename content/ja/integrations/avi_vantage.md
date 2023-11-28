@@ -28,7 +28,8 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- network
+- クラウド
+- ネットワーク
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/avi_vantage/README.md
 display_on_public_website: true
@@ -36,7 +37,7 @@ draft: false
 git_integration_title: avi_vantage
 integration_id: avi-vantage
 integration_title: Avi Vantage
-integration_version: 3.2.0
+integration_version: 3.3.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -46,15 +47,16 @@ public_title: Avi Vantage
 short_description: Avi Vantage インスタンスの健全性とパフォーマンスを監視。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Cloud
   - Category::Network
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Avi Vantage インスタンスの健全性とパフォーマンスを監視。
   media: []

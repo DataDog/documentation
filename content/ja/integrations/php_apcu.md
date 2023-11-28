@@ -19,10 +19,11 @@ assets:
     '[php_apcu] Detected High Cache Usage': assets/monitors/php-apcu_high_usage.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: noname@withgod.jp
   support_email: noname@withgod.jp
-categories: []
+categories:
+- キャッシュ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/php_apcu/README.md
 display_on_public_website: true
@@ -40,14 +41,15 @@ public_title: PHP APCu
 short_description: PHP APCu のメモリ内データキャッシュを監視します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Caching
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: PHP APCu のメモリ内データキャッシュを監視します。
   media: []

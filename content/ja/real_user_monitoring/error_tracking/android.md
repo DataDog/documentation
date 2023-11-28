@@ -1,6 +1,5 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-android-gradle-plugin/blob/main/docs/upload_mapping_file.md
+description: Android アプリケーションにエラー追跡を設定します。
 further_reading:
 - link: /real_user_monitoring/error_tracking/
   tag: Error Tracking
@@ -11,11 +10,12 @@ further_reading:
 kind: documentation
 title: Android のクラッシュレポートとエラー追跡
 ---
+
 ## 概要
 
 エラー追跡は、RUM Android SDK から収集されたエラーを処理します。
 
-Android のクラッシュとエラー追跡を有効にすると、リアルユーザーモニタリングで包括的なクラッシュレポートとエラートレンドを取得できます。この機能により、以下にアクセスが可能になります。
+Android のクラッシュレポートとエラー追跡を有効にすると、リアルユーザーモニタリングで包括的なクラッシュレポートとエラートレンドを取得できます。この機能により、以下にアクセスが可能になります。
 
 - 集計済みの Android クラッシュダッシュボードおよび属性
 - 難読化された Android クラッシュレポート
@@ -35,6 +35,8 @@ Android のクラッシュとエラー追跡を有効にすると、リアルユ
 
 ## マッピングファイルのアップロード
 
+**注**: バージョンに変更がない場合、ソースマップを再アップロードしても既存のものはオーバーライドされません。
+
 {{< tabs >}}
 {{% tab "US" %}}
 
@@ -50,7 +52,7 @@ Android のクラッシュとエラー追跡を有効にすると、リアルユ
 2. [Datadog 専用の API キーを作成][2]し、環境変数として `DD_API_KEY` または `DATADOG_API_KEY` という名前でエクスポートします。また、プロジェクトのルートに `datadog-ci.json` ファイルがあれば、その中の `apiKey` プロパティから取得することも可能です。
 3. オプションとして、`build.gradle` スクリプトでプラグインを構成して、EU リージョンにファイルをアップロードするように構成します。
 
-   ```
+   ```groovy
    datadog {
        site = "EU1"
    }
@@ -133,7 +135,7 @@ datadog {
 |----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `versionName`              | アプリケーションのバージョン名 (デフォルトでは `build.gradle` スクリプトの `android` ブロックで宣言されたバージョン)。                                                                                                               |
 | `serviceName`              | アプリケーションのサービス名 (デフォルトでは `build.gradle` スクリプトの `android` ブロックで宣言されたアプリケーションのパッケージ名)。                                                                                                                          |
-| `site`                     | データをアップロードする Datadog サイト (US1、US3、US5、EU1、または US1_FED)。                                                                                                                                       |
+| `site`                     | データをアップロードする Datadog サイト (US1、US3、US5、EU1、US1_FED、または AP1)。                                                                                                                                       |
 | `remoteRepositoryUrl`      | ソースコードがデプロイされたリモートリポジトリの URL。これを指定しない場合、この値はタスクの実行時に Git コンフィギュレーションから解決されます。                     |
 | `checkProjectDependencies` | このプロパティは、Datadog Android SDK が依存関係に含まれているかどうかをプラグインがチェックするかどうかを制御します。チェックしない場合、"none" は無視され、"warn" は警告をログに記録し、"fail" はエラーでビルドに失敗します (デフォルト)。 |
 
@@ -149,12 +151,36 @@ CI/CD パイプラインでこのタスクを実行し、ビルドグラフの�
 tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 ```
 
+## 制限
+
+{{< site-region region="us,us3,us5,eu" >}}
+マッピングファイルの容量は **300** MB に制限されています。これより大きなマッピングファイルがあるプロジェクトでは、次のいずれかのオプションを使用してファイルサイズを小さくしてください。
+{{< /site-region >}}
+{{< site-region region="ap1,gov" >}}
+マッピングファイルの容量は **50** MB に制限されています。これより大きなマッピングファイルがあるプロジェクトでは、次のいずれかのオプションを使用してファイルサイズを小さくしてください。
+{{< /site-region >}}
+
+- `mappingFileTrimIndents` オプションを `true` に設定します。これにより、ファイルサイズが平均で 5% 小さくなります。
+- `mappingFilePackagesAliases` のマップを設定します。これは、パッケージ名をより短いエイリアスで置き換えるものです。**注**: Datadog のスタックトレースは元のパッケージ名の代わりに同じエイリアスを使うので、サードパーティの依存関係にはこのオプションを使うのがよいでしょう。
+
+```groovy
+datadog {
+    mappingFileTrimIndents = true
+    mappingFilePackageAliases = mapOf(
+        "kotlinx.coroutines" to "kx.cor",
+        "com.google.android.material" to "material",
+        "com.google.gson" to "gson",
+        "com.squareup.picasso" to "picasso"
+    )
+}
+```
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/ja/real_user_monitoring/android/#setup
-[4]: https://github.com/DataDog/dd-sdk-android
-[5]: https://docs.datadoghq.com/ja/real_user_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters
+[3]: /ja/real_user_monitoring/android/#setup
+[4]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
+[5]: /ja/real_user_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters

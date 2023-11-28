@@ -22,7 +22,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- monitoring
+- developer tools
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/cacti/README.md
@@ -44,9 +44,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Developer Tools
+  - Category::ログの収集
   - Supported OS::Linux
-  - Category::Monitoring
-  - Category::Log Collection
   configuration: README.md#Setup
   description: Cacti RRD を Datadog に転送して豊富なアラート機能や美しいグラフを活用。
   media: []

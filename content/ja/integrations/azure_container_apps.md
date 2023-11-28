@@ -1,9 +1,9 @@
 ---
-aliases:
-- /ja/integrations/azure_container_apps
+aliases: []
 categories:
-- クラウド
 - azure
+- クラウド
+- コンテナ
 dependencies: []
 description: Azure Container Apps からメトリクスを取得します。
 doc_link: https://docs.datadoghq.com/integrations/azure_container_apps/
@@ -28,7 +28,7 @@ Azure Container Apps を使用すると、サーバーレスコンテナを使�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Microsoft Azure インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
 

@@ -1,4 +1,12 @@
 ---
+algolia:
+  tags:
+  - api
+cascade:
+  algolia:
+    category: API
+    rank: 10
+    subcategory: API リファレンス
 further_reading:
 - link: /api/latest/using-the-api/
   tag: Documentation
@@ -10,7 +18,7 @@ further_reading:
   tag: ドキュメント
   text: レート制限
 title: API リファレンス
-type: api
+type: documentation
 ---
 
 {{< h2 >}}API リファレンス{{< /h2 >}}
@@ -21,7 +29,7 @@ Datadog では HTTP REST API を採用しており、リソース指向 URL を�
 
 API への認証は、ヘッダー `DD-API-KEY` を用いて [API キー][1]で行います。エンドポイントによっては、ヘッダー `DD-APPLICATION-KEY` を使用した[アプリケーションキー][2]も必要です。
 
-API を実行するには、[![Postman で実行][3]](https://god.gw.postman.com/run-collection/20651290-b051b74a-bbe6-433a-8670-7ec450e80199?action=collection%2Ffork&collection-url=entityId%3D20651290-b051b74a-bbe6-433a-8670-7ec450e80199%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa#?env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0=)
+API を実行するには、[![Postman で実行][3]](https://god.gw.postman.com/run-collection/20651290-809b13c1-4ada-46c1-af65-ab276c434068?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D20651290-809b13c1-4ada-46c1-af65-ab276c434068%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa#?env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0=)
 
 [API の使用][4]でエンドポイントについて説明しています。
 

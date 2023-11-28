@@ -18,12 +18,13 @@ assets:
     source_type_name: speedtest
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: cody.lee@datadoghq.com
   support_email: cody.lee@datadoghq.com
 categories:
-- isp
+- developer tools
 - ネットワーク
+- テスト
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/speedtest/README.md
 display_on_public_website: true
@@ -41,16 +42,17 @@ public_title: speedtest
 short_description: speedtest-cli を使用して Speedtest の結果を実行します
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - カテゴリ::ISP
+  - Category::Developer Tools
   - Category::Network
+  - Category::Testing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: speedtest-cli を使用して Speedtest の結果を実行します
   media: []

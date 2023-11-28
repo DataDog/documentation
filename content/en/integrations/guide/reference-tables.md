@@ -8,10 +8,16 @@ aliases:
 further_reading:
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
-  text: "Discover how to process your logs"
-- link: "/logs/log_configuration/parsing"
+  text: "Use the lookup processor to enrich logs from a Reference Table"
+- link: "/logs/explorer/analytics/#filter-logs-based-on-reference-tables"
   tag: "Documentation"
-  text: "Learn more about parsing"
+  text: "Filter logs based on Reference Tables"
+- link: "/cloud_cost_management/tag_pipelines/#map-multiple-tags"
+  tag: "Documentation"
+  text: "Use Reference Tables to add multiple tags to cost data"
+- link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables/'
+  tag: 'Blog'
+  text: 'Add more context to your logs with Reference Tables'
 ---
 
 <div class="alert alert-warning">
@@ -21,7 +27,7 @@ During the beta, there is a limit of 100 Reference Tables per account.
 
 ## Overview
 
-Reference Tables allow you to combine metadata with information already in Datadog. You can define new entities like customer details, service names and information, or IP addresses by uploading a CSV file containing a table of information. The entities are represented by a primary key in an Reference Table and the associated metadata. 
+Reference Tables allow you to combine metadata with information already in Datadog. You can define new entities like customer details, service names and information, or IP addresses by uploading a CSV file containing a table of information. The entities are represented by a primary key in a Reference Table and the associated metadata. 
 
 {{< img src="integrations/guide/reference-tables/reference-table.png" alt="A reference table with data populated in the columns for org id, org name, parent org, account owner, and csm" style="width:100%;">}}
 
@@ -45,18 +51,19 @@ Reference Table names and column headers are validated using the following namin
 
 Click **New Reference Table +**, then upload a CSV file, name the appropriate columns, and define the primary key for lookups.
 
-{{< img src="integrations/guide/reference-tables/configure-enrichment-table.png" alt="The Define the Schema section showing a table with org_id marked as the primary key and columns with data for org id, org name, parent org, account owner, and csm " style="width:100%;">}}
+{{< img src="integrations/guide/reference-tables/enrichment-table-setup.png" alt="The Define the Schema section showing a table with org_id marked as the primary key and columns with data for org id, org name, parent org, account owner, and csm " style="width:100%;">}}
 
 **Note**: The manual CSV upload method supports files up to 4MB.
 
 {{% /tab %}}
 
-{{% tab "AWS S3 upload" %}}
+{{% tab "Amazon S3" %}}
 
-Reference Tables can automatically pull a CSV file from an AWS S3 bucket to keep your data up to date. The integration looks for changes to the CSV file in S3, and when the file is updated it replaces the Reference Table with the new data. This also enables API updating with the S3 API once the initial Reference Table is configured.
+Reference Tables can automatically pull a CSV file from an Amazon S3 bucket to keep your data up to date. The integration looks for changes to the CSV file in S3, and when the file is updated it replaces the Reference Table with the new data. This also enables API updating with the S3 API once the initial Reference Table is configured.
 
 To update Reference Tables from S3, Datadog uses the IAM role in your AWS account that you configured for the [AWS integration][1]. If you have not yet created that role, [follow these steps][2] to do so. To allow that role to update your Reference Tables, add the following permission statement to its IAM policies. Be sure to edit the bucket names to match your environment.
 
+**Note**: If using server-side encryption, you can only upload Reference Tables encrypted with Amazon S3-managed keys (SSE-S3).
 
 ```json
 {
@@ -79,14 +86,65 @@ To update Reference Tables from S3, Datadog uses the IAM role in your AWS accoun
 ```
 ### Define the table
 
-Click **New Reference Table +**, then add a name, select AWS S3, fill out all fields, click import, and define the primary key for lookups.
+Click **New Reference Table +**, then add a name, select Amazon S3, fill out all fields, click import, and define the primary key for lookups.
 
-{{< img src="integrations/guide/reference-tables/configure-s3-reference-table.png" alt="The upload your data section with the AWS S3 tile selected and data filled in for AWS Account, Bucket, and Path" style="width:100%;">}}
+{{< img src="integrations/guide/reference-tables/configure-s3-reference-table.png" alt="The upload your data section with the Amazon S3 tile selected and data filled in for AWS Account, Bucket, and Path" style="width:100%;">}}
 
 **Note**: The upload from an S3 bucket method supports files up to 200MB.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: https://docs.datadoghq.com/integrations/amazon_web_services/?tab=automaticcloudformation#installation
+{{% /tab %}}
+
+{{% tab "Azure storage" %}}
+
+1. If you haven't already, set up the [Azure integration][1] within the subscription that holds the storage account from which you want to import your Reference Table. This involves [creating an app registration that Datadog can][2] integrate with.
+2. In the Azure Portal, select the storage account that stores your Reference Table files.
+3. Within your storage account, navigate to **Access Control (IAM)** and select **Add** > **Add Role Assignment**.
+4. Input and select the **Storage Blob Data Reader** Role. The [Storage Blob Data Reader role][3] allows Datadog to read and list storage containers and blobs.
+5. In the **Members** tab, click **+ Select members**. Select the app registration you created in Step 1.
+   
+   {{< img src="integrations/guide/reference-tables/add_members.png" alt="The Members section in the Azure Portal where a member is selected and data filled in for the Name, Object ID, and Type" style="width:85%;">}}
+
+After reviewing and assigning the role, you can import into Reference Tables from Azure. It may take a few minutes for your Azure configuration to update in Datadog.
+
+{{< img src="integrations/guide/reference-tables/azure_storage.png" alt="An Azure Storage tile in the Upload or import data section of a new reference table workflow" style="width:80%;">}}
+
+For more information, see the [Azure integration documentation][4]. 
+
+**Note**: The upload from cloud object storage supports files up to 200MB.
+
+[1]: https://app.datadoghq.com/integrations/azure
+[2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
+[3]: https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-reader
+[4]: /integrations/azure/
+
+{{% /tab %}}
+
+{{% tab "Google Cloud storage" %}}
+
+1. If you have not set up a Google Cloud integration with Datadog or you are using legacy Google project ID files (legacy projects are indicated in your GCP integration tile), follow the instructions for setting up the [Google Cloud Platform integration][1]. This involves creating a [Google Cloud service account][2].
+
+1. From the Google Cloud console, navigate to the **Cloud Storage** page.
+
+1. Find the bucket you'd like to grant access to and click on it.
+
+1. Click on the **Permissions** tab. Under "View By Principals", click the **Grant Access** button.
+
+1. In the window that appears, under the "New principals" field, enter the service account email that you created and added to the GCP tile in Step 1. Under "Assign roles", select the **Storage Object Viewer** role. Click **Save**.
+
+
+{{< img src="integrations/guide/reference-tables/grant_access.png" alt="Google Cloud console showing the configuration to grant access" style="width:100%;" >}}
+
+After reviewing and assigning the role, you can import into Reference Tables from Google Cloud. It may take a few minutes for your configuration to update in Datadog.
+
+{{< img src="integrations/guide/reference-tables/gcp_upload_import_ui.png" alt="Select GCP Storage in Upload or import data when creating a new reference table" style="width:100%;" >}}
+
+**Note**: The upload from cloud object storage supports files up to 200MB.
+
+[1]: /integrations/google_cloud_platform/#setup
+[2]: /integrations/google_cloud_platform/#1-create-your-google-cloud-service-account
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -139,4 +197,4 @@ You can create monitors from the **Monitors** tab, or click on the Settings icon
 [1]: /logs/log_configuration/processors/#lookup-processor
 [2]: /account_management/audit_trail/
 [3]: /events/
-[4]: /monitors/create/types/event/
+[4]: /monitors/types/event/

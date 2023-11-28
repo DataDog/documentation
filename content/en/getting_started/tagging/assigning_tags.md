@@ -4,7 +4,6 @@ kind: documentation
 description: 'Learn how to assign tags in Datadog.'
 aliases:
     - /agent/tagging
-    - /getting_started/tagging/assigning_tags
     - /tagging/assigning_tags/
 further_reading:
 - link: "/getting_started/tagging/"
@@ -96,8 +95,8 @@ hostname: mymachine.mydomain
 
 
 [1]: /getting_started/integrations/
-[2]: /agent/guide/agent-configuration-files/
-[3]: /getting_started/tagging/#defining-tags
+[2]: /agent/configuration/agent-configuration-files/
+[3]: /getting_started/tagging/#define-tags
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
@@ -138,8 +137,8 @@ hostname: mymachine.mydomain
 
 
 [1]: /getting_started/integrations/
-[2]: /agent/guide/agent-configuration-files/
-[3]: /getting_started/tagging/#defining-tags
+[2]: /agent/configuration/agent-configuration-files/
+[3]: /getting_started/tagging/#define-tags
 [4]: /metrics/custom_metrics/dogstatsd_metrics_submission/#host-tag-key
 [5]: /dashboards/querying/#arithmetic-between-two-metrics
 {{% /tab %}}
@@ -175,7 +174,7 @@ Datadog automatically collects common tags from [Docker, Kubernetes, ECS, Swarm,
 
 **Examples:**
 
-```shell
+```bash
 DD_KUBERNETES_POD_LABELS_AS_TAGS='{"app":"kube_app","release":"helm_release"}'
 DD_CONTAINER_LABELS_AS_TAGS='{"com.docker.compose.service":"service_name"}'
 ```
@@ -190,8 +189,8 @@ For example, `{"app*": "kube_%%label%%"}` resolves to the tag name `kube_applica
 
 When using the `DD_CONTAINER_LABELS_AS_TAGS` variable within a Docker Swarm `docker-compose.yaml` file, remove the apostrophes, for example:
 
-```shell
-DD_CONTAINER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
+```yaml
+- DD_CONTAINER_LABELS_AS_TAGS={"com.docker.compose.service":"service_name"}
 ```
 
 When adding labels to Docker containers, the placement of the `labels:` keyword inside the `docker-compose.yaml` file is important. To avoid issues, follow the [Docker unified service tagging][2] documentation.
@@ -281,15 +280,14 @@ Assign host tags in the UI using the [Infrastructure List page][1]. Click on any
 {{% /tab %}}
 {{% tab "Monitors" %}}
 
-From the [Manage Monitors][1] page, select the checkbox next to each monitor to add tags (select one or multiple monitors). Click the **Edit Tags** button. Enter a tag or select one used previously. Then click **Add Tag `tag:name`** or **Apply Changes**. If tags were added previously, multiple tags can be assigned at once using the tag checkboxes.
+From the [Manage Monitors][1] page, select the checkbox next to each monitor to add tags (select one or multiple monitors). Click the **Edit Tags** button. Enter a tag or select one used previously. Then click **Add Tag `tag:name`** or **Apply Changes**. If tags were added previously, multiple tags can be assigned at once using the tag checkboxes. For more information, see the [Manage Monitors documentation][2].
 
-{{< img src="tagging/assigning_tags/monitortags.png" alt="Manage Monitors Tags" style="width:80%;">}}
+When creating a monitor, assign monitor tags under step 4 *Say what's happening* or *Notify your Team*:
 
-When creating a monitor, assign monitor tags under step 4 *Say what's happening*:
+{{< img src="monitors/notifications/notifications_add_required_tags.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:80%;" >}}
 
-{{< img src="tagging/assigning_tags/monitorindivdualtags.png" alt="Create Monitor Tags" style="width:80%;">}}
-
-[1]: /monitors/manage/
+[1]: https://app.datadoghq.com/monitors/manage
+[2]: /monitors/manage/
 {{% /tab %}}
 {{% tab "Distribution Metrics" %}}
 
@@ -401,7 +399,7 @@ Special consideration is necessary when assigning the `host` tag to DogStatsD me
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/tagging/#defining-tags
+[1]: /getting_started/tagging/#define-tags
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /integrations/#cat-cloud
 [4]: /getting_started/agent/#setup

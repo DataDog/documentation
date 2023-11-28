@@ -22,9 +22,7 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- azure
-- cloud
-- モニター
+- クラウド
 - OS & システム
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hyperv/README.md
@@ -46,11 +44,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Windows
-  - Category::Azure
   - Category::Cloud
-  - Category::Monitoring
   - Category::OS & System
+  - Supported OS::Windows
   configuration: README.md#Setup
   description: Microsoft の Hyper-V 仮想化テクノロジーを監視
   media: []

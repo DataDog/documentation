@@ -6,7 +6,9 @@ import os
 import re
 import logging
 import sys
-
+from functools import partial
+from multiprocessing import cpu_count
+from multiprocessing.pool import Pool
 import yaml
 
 DEFAULT_LANGUAGE = "en"
@@ -48,8 +50,12 @@ def get_languages(config_location):
         return d
 
 
-def create_glob(files_location, lang, disclaimer="", lang_as_dir=False):
-    all_files = [f for f in glob(files_location + '**/*.md', recursive=True)]
+def create_glob(files_location, lang, disclaimer="", lang_as_dir=False, ignores=None):
+    if ignores is None:
+        ignores = []
+    print(f'Ignores are: {ignores}')
+    all_files = [f for f in glob(files_location + '**/*.md', recursive=True) if
+                 all([not os.path.dirname(f).startswith(ignore) for ignore in ignores])]
     if lang == 'en':
         g = [f for f in all_files if len(f.split('.')) == 2]
     else:
@@ -71,7 +77,7 @@ def md_update_links(this_lang_code, content):
     """ Update footer links in markdown to be language relative """
     result = content
     try:
-        common_lang_codes = ["en/", "es/", "de/", "fr/", "es/", "ja/", "resources/"]
+        common_lang_codes = ["en/", "es/", "de/", "fr/", "es/", "ja/", "ko/", "resources/"]
         exclude_common_langs = "|".join(list(map(lambda code: f"{code}",common_lang_codes)))
         relative_regex = re.compile("^(\\[[0-9]+]\:\\s*)(\/(?!" + exclude_common_langs + ").*)$", re.MULTILINE | re.IGNORECASE)
         substitute = "\g<1>/" + this_lang_code.lower() + "\g<2>"
@@ -141,12 +147,15 @@ def main():
     parser.add_option("-c", "--config_location", help="location of site config")
     parser.add_option("-f", "--files_location", help="location of site content files", default="")
     parser.add_option("-d", "--lang_as_dir", help="use dir lang instead of suffix", default=True)
+    parser.add_option("-i", "--ignore", help="paths to ignore", default=["content/en/meta"])
+
+    pool_size = cpu_count()
 
     (options, args) = parser.parse_args()
     options = vars(options)
 
     lang = get_languages(options["config_location"])
-    default_glob = create_glob(options["files_location"] or "content/en/", DEFAULT_LANGUAGE, lang_as_dir=options["lang_as_dir"])
+    default_glob = create_glob(options["files_location"] or "content/en/", DEFAULT_LANGUAGE, lang_as_dir=options["lang_as_dir"], ignores=options["ignore"])
     del lang[DEFAULT_LANGUAGE]
     for l in lang:
         info = lang[l]
@@ -155,11 +164,12 @@ def main():
         else:
             files_location = info.get('contentDir', 'content/{lang_code}/'.format(lang_code=l))
             files_location = files_location if files_location.endswith('/') else files_location + '/'
-        lang_glob = create_glob(files_location=files_location, lang=l, disclaimer=info["disclaimer"], lang_as_dir=options["lang_as_dir"])
+        lang_glob = create_glob(files_location=files_location, lang=l, disclaimer=info["disclaimer"], lang_as_dir=options["lang_as_dir"], ignores=options["ignore"])
         diff = diff_globs(base=default_glob, compare=lang_glob, lang_as_dir=options["lang_as_dir"])
         print("\x1b[32mINFO\x1b[0m: building {0} placeholder pages for {1} ".format(len(diff), l))
-        for f in diff:
-            create_placeholder_file(template=f, new_glob=lang_glob, lang_as_dir=options["lang_as_dir"], files_location=files_location)
+        with Pool(processes=pool_size) as pool:
+            # call the function for each item in parallel
+            pool.map(partial(create_placeholder_file, new_glob=lang_glob, lang_as_dir=options["lang_as_dir"], files_location=files_location), diff)
 
 
 if __name__ == "__main__":

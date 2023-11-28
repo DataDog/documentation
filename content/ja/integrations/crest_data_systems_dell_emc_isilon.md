@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: crest-data-systems-dell-emc-isilon
 app_uuid: 1c1b7c48-0c7c-46f2-9f0c-f68c74419244
 assets:
@@ -29,13 +31,13 @@ assets:
 author:
   homepage: https://www.crestdatasys.com
   name: Crest Data Systems
-  sales_email: sales@crestdatasys.com
+  sales_email: datadog-sales@crestdatasys.com
   support_email: datadog.integrations@crestdatasys.com
   vendor_id: crest-data-systems
 categories:
-- マーケットプレイス
+- キャッシュ
 - data store
-- モニタリング
+- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -63,18 +65,18 @@ public_title: Dell EMC Isilon
 short_description: Dell EMC Isilon クラスターのパフォーマンスと使用量の監視
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Marketplace
+  - Category::Caching
   - Category::Data Store
-  - Category::Monitoring
+  - Category::Marketplace
   - Offering::Integration
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
   configuration: README.md#Setup
   description: Dell EMC Isilon クラスターのパフォーマンスと使用量の監視
   media:
@@ -99,27 +101,29 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Dell EMC Isilon
+  uninstallation: README.md#Uninstallation
 ---
 
 ## 概要
 
 このインテグレーションは、Dell EMC Isilon クラスターとノードのパフォーマンスと使用量を監視します。重要なメトリクスを取得し、Dell EMC Isilon クラスターの健全性と運用に関する洞察を提供します。このインテグレーションは、各ノードおよびクラスターの CPU、メモリ、およびディスクの使用量を警告するモニターもサポートします。
 
-ダッシュボード名 | 説明
----------------|------------
-クラスター情報 | このダッシュボードでは、クラスターレベルの情報を提供します。
-ノードの詳細 | このダッシュボードでは、ノードレベルの情報を提供します。
-プロトコルの詳細 | このダッシュボードでは、クラスター全体のプロトコルの詳細を提供します。
-ファイルシステム | このダッシュボードでは、ノードレベルのファイルシステムの詳細を提供します。
-クォータ情報 | このダッシュボードでは、クォータ情報を提供します。
-モニター概要 | このダッシュボードでは、このインテグレーションでサポートされるモニターの概要を提供します。
+| ダッシュボード名      | 説明                                                                             |
+| ------------------- | --------------------------------------------------------------------------------------- |
+| クラスター情報 | このダッシュボードでは、クラスターレベルの情報を提供します。                                      |
+| ノードの詳細        | このダッシュボードでは、ノードレベルの情報を提供します。                                         |
+| プロトコルの詳細    | このダッシュボードでは、クラスター全体のプロトコルの詳細を提供します。                                  |
+| ファイルシステム         | このダッシュボードでは、ノードレベルのファイルシステムの詳細を提供します。                          |
+| クォータ情報   | このダッシュボードでは、クォータ情報を提供します。                                              |
+| モニター概要    | このダッシュボードでは、このインテグレーションでサポートされるモニターの概要を提供します。 |
 
 ## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
 
- - メール: datadog.integrations@crestdatasys.com
- - Web サイト: [crestdatasys.com](https://www.crestdatasys.com/)
+- サポートメール: datadog.integrations@crestdatasys.com
+- 営業メール: datadog-sales@crestdatasys.com
+- Web サイト: [crestdatasys.com][3]
 
 ### その他の参考資料
 
@@ -130,6 +134,8 @@ tile:
 
 [1]: https://www.datadoghq.com/blog/dell-emc-isilon-monitoring-crest-data-systems-datadog-marketplace/
 [2]: https://www.crestdatasys.com/data_sheet/datadog-setup-monitor/
+[3]: https://www.crestdatasys.com/
+[4]: https://www.dell.com/support/manuals/en-in/isilon-onefs/ifs_pub_administration_guide_cli/administrative-roles-and-privileges
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-dell-emc-isilon" target="_blank">こちらをクリック</a>してください。

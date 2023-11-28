@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-syntheticemail
 app_uuid: c3b29bd1-fb32-44ed-aaf5-34d6b8d84bbb
 assets:
@@ -22,7 +24,7 @@ assets:
 author:
   homepage: https://www.rapdev.io
   name: RapDev
-  sales_email: sales@rapdev.io
+  sales_email: ddsales@rapdev.io
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
@@ -50,17 +52,17 @@ pricing:
   tag: mailbox
   unit_label: Mailbox
   unit_price: 250
-public_title: Synthetic Email インテグレーション
+public_title: Synthetic Email
 short_description: 世界中からのメールメールボックスのラウンドトリップパフォーマンスを監視する
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Category::Marketplace
   - Offering::Integration
@@ -76,7 +78,8 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Synthetic Email インテグレーション
+  title: Synthetic Email
+  uninstallation: README.md#Uninstallation
 ---
 
 ## 概要

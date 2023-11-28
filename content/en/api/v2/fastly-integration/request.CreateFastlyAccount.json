@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "api_key": "ExampleFastlyIntegration",
+      "name": "Example-Fastly-Integration",
+      "services": []
+    },
+    "type": "fastly-accounts"
+  }
+}

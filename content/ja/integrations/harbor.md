@@ -26,7 +26,6 @@ author:
 categories:
 - コンテナ
 - ログの収集
-- オートディスカバリー
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/harbor/README.md
 display_on_public_website: true
@@ -54,7 +53,6 @@ tile:
   - Supported OS::Windows
   - Category::Containers
   - Category::Log Collection
-  - Category::Autodiscovery
   configuration: README.md#Setup
   description: Harbor コンテナレジストリの健全性を監視
   media: []

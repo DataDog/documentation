@@ -14,6 +14,12 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
+- link: "/agent/basic_agent_usage/#agent-architecture"
+  tag: "Documentation"
+  text: "Find out more about the Agent's architecture"
+- link: "/agent/configuration/network#configure-ports"
+  tag: "Documentation"
+  text: "Configure inbound ports"
 ---
 ## Overview
 
@@ -86,5 +92,5 @@ See the [Agent Troubleshooting documentation][2].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/source
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=source
 [2]: /agent/troubleshooting/

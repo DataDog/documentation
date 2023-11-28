@@ -29,15 +29,19 @@ If you can programmatically identify a set of traces that you know you don't wan
 
 The filter tags option requires an exact string match. If your use case requires ignoring by regex, see [Ignoring based on resources](#ignoring-based-on-resources).
 
-You can specify span tags to require or reject by using a comma-separated list of keys and values in environment variables:
+You can specify span tags to require or reject by using a list of keys and values separated by spaces in environment variables:
 
 `DD_APM_FILTER_TAGS_REQUIRE`
-: Collects only traces that have root spans with an exact match for the specified span tags and values. If it does not match this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REQUIRE=key1:value1,key2:value2`.
+: Collects only traces that have root spans with an exact match for the specified span tags and values. If it does not match this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REQUIRE="key1:value1 key2:value2"`.
 
 `DD_APM_FILTER_TAGS_REJECT`
-: Rejects traces that have root spans with an exact match for the specified span tags and values. If it matches this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT=key1:value1,key2:value2`.
+: Rejects traces that have root spans with an exact match for the specified span tags and values. If it matches this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"`.
 
-Or you can set them in the Agent configuration file:
+
+{{< tabs >}}
+{{% tab "datadog.yaml" %}}
+
+Alternatively, you can set them in the Agent configuration with a comma-separated list:
 
 {{< code-block lang="yaml" filename="datadog.yaml" >}}
 apm_config:
@@ -53,6 +57,24 @@ apm_config:
   filter_tags:
     reject: ["http.url:http://localhost:5050/healthcheck"]
 {{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Kubernetes Helm" %}}
+
+In the `traceAgent` section of the `values.yaml` file, add `DD_APM_FILTER_TAGS_REJECT` in the `env` section, then [spin up helm as usual][1]. For multiple tags, separate each key:value with a space.
+
+{{< code-block lang="yaml" filename="values.yaml" >}}
+traceAgent:
+  # agents.containers.traceAgent.env -- Additional environment variables for the trace-agent container
+    env:
+      - name: DD_APM_FILTER_TAGS_REJECT
+        value: tag_key1:tag_val2 tag_key2:tag_val2
+
+{{< /code-block >}}
+
+[1]: /agent/kubernetes/?tab=helm#installation
+{{% /tab %}}
+{{< /tabs >}}
 
 Filtering traces this way removes these requests from [trace metrics][3]. For more information on how to reduce ingestion without affecting the trace metrics, see [Ingestion Controls][4].
 
@@ -79,7 +101,8 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | **Name**                   | **Remap from**                                      |
 |----------------------------|-----------------------------------------------------|
 | `network.host.ip`          | `tcp.local.address` - Node.js                       |
-| `network.destination.port` | `grpc.port` - Python<br>`tcp.remote.port` - Node.js |
+| `network.destination.ip`   | `out.host` - All languages  |
+| `network.destination.port` | `grpc.port` - Python<br>`tcp.remote.port` - Node.js<br>`out.port` - All languages  |
 
 #### HTTP requests
 
@@ -94,7 +117,7 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | **Name**                         | **Remap from**                                                                                                                                                                                                                  |
 |----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `db.system`                      | `db.type` - Java, Python, Node.js, Go<br>`active_record.db.vendor` - Ruby<br>`sequel.db.vendor` - Ruby                                                                                                                          |
-| `db.instance`                    | `mongodb.db` - Python, sql.db - Python                                                                                                                                                                                          |
+| `db.instance`                    | `mongodb.db` - Python<br> `sql.db` - Python<br> `db.name` - All languages                                           |
 | `db.statement`                   | `cassandra.query` - Go<br>`consul.command` - Python<br>`memcached.query` - Python<br>`mongodb.query` - Python, .NET, Go<br>`redis.command` - Python<br>`redis.raw_command` - Python<br>`sql.query` - Python, PHP, Node.js, Java |
 | `db.row_count`                   | `cassandra.row_count` - Python<br>`db.rowcount` - Python, PHP<br>`mongodb.rows` - Python<br>`sql.rows` - Python                                                                                                                 |
 | `db.cassandra.cluster`           | `cassandra.cluster` - Python, Go                                                                                                                                                                                                |
@@ -135,8 +158,13 @@ On the backend, Datadog creates and adds the following span tags to spans after 
 | `rpc.grpc.kind`                | `grpc.method.kind` - Python, Node.js, Go, .NET                                                          |
 | `rpc.grpc.path`                | `rpc.grpc.path` - Python, Node.js, Go, .NET                                                             |
 | `rpc.grpc.request.metadata.*`  | `grpc.request.metadata.*` - Python, Node.js<br>`rpc.grpc.request.metadata` - Go                         |
-| `rpc.grpc.response.metadata.*` | `grpc.response.metadata.*` - Python, Node.js        
+| `rpc.grpc.response.metadata.*` | `grpc.response.metadata.*` - Python, Node.js
 
+#### Errors
+
+| **Name**                       | **Remap from**                                                                                          |
+|--------------------------------|---------------------------------------------------------------------------------------------------------|
+| `error.message`                  | `error.msg` - All languages                      |
 
 ### Ignoring based on resources
 
@@ -154,13 +182,13 @@ apm_config:
 {{< /code-block >}}
 
 **Notes**:
-- The regex syntax that the Trace Agent accepts is evaluated by Go’s [regexp][6].
+- The regex syntax that the Trace Agent accepts is evaluated by Go's [regexp][6].
 - Depending on your deployment strategy, you may have to adjust the regex by escaping special characters.
 - If you use dedicated containers with Kubernetes, make sure that the environment variable for the ignore resource option is being applied to the **trace-agent** container.
 
 #### Example
 
-Consider a trace that contains calls to `/api/healthcheck` that you don’t want traces from:
+Consider a trace that contains calls to `/api/healthcheck` that you don't want traces from:
 
 {{< img src="tracing/guide/ignoring_apm_resources/ignoreresources.png" alt="Flame graph of a resource you want the tracer to ignore" style="width:90%;">}}
 
@@ -192,7 +220,7 @@ apm_config:
 {{% /tab %}}
 {{% tab "Docker compose" %}}
 
-In the Datadog Agent container’s list of environment variables, add `DD_APM_IGNORE_RESOURCES` with a pattern like the example below. Docker Compose has its own [variable substitution][1] to consider when you use special characters like `$`.
+In the Datadog Agent container's list of environment variables, add `DD_APM_IGNORE_RESOURCES` with a pattern like the example below. Docker Compose has its own [variable substitution][1] to consider when you use special characters like `$`.
 
 {{< code-block lang="yaml" >}}
     environment:
@@ -214,7 +242,7 @@ For multiple values:
 
 In your docker run command to spin up the Datadog Agent, add `DD_APM_IGNORE_RESOURCES`:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 docker run -d --name datadog-agent \
               --cgroupns host \
               --pid host \
@@ -282,7 +310,7 @@ For multiple values:
 
 {{< code-block lang="yaml" >}}
         - name: DD_APM_IGNORE_RESOURCES
-          value: ["value1","Api::HealthchecksController#index$"]
+          value: '"value1","Api::HealthchecksController#index$"'
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -308,7 +336,7 @@ For multiple values:
 
 Alternatively, you can set `agents.containers.traceAgent.env` in the `helm install` command:
 
-{{< code-block lang="bash" >}}
+{{< code-block lang="shell" >}}
 helm install dd-agent -f values.yaml \
   --set datadog.apiKeyExistingSecret="datadog-secret" \
   --set agents.containers.traceAgent.env[0].name=DD_APM_IGNORE_RESOURCES, \
@@ -318,9 +346,9 @@ helm install dd-agent -f values.yaml \
 
 [1]: /agent/kubernetes/?tab=helm#installation
 {{% /tab %}}
-{{% tab "AWS ECS Task Definition" %}}
+{{% tab "Amazon ECS Task Definition" %}}
 
-If you use AWS ECS (such as on EC2), in your Datadog Agent container definition, add the environment variable `DD_APM_IGNORE_RESOURCES` with the values such that the JSON evaluates to something like this:
+If you use Amazon ECS (such as on EC2), in your Datadog Agent container definition, add the environment variable `DD_APM_IGNORE_RESOURCES` with the values such that the JSON evaluates to something like this:
 
 {{< code-block lang="json" >}}
     "environment": [
@@ -366,7 +394,7 @@ Datadog::Tracing.before_flush(
 
 The Python tracer has a `FilterRequestsOnUrl` filter you can configure to remove traces from certain endpoints. Alternatively, you can write a custom filter. See [Trace Filtering][1] for more information.
 
-Suppose the root span’s `http.url` span tag has a value of `http://<domain>/healthcheck`. Use the following regex to match against any endpoint ending in `healthcheck`:
+Suppose the root span's `http.url` span tag has a value of `http://<domain>/healthcheck`. Use the following regex to match against any endpoint ending in `healthcheck`:
 
 ```
 from ddtrace import tracer
@@ -383,7 +411,7 @@ tracer.configure(settings={
 
 {{< programming-lang lang="nodeJS" >}}
 
-Configure a blocklist on the [Http][1] plugin. Take note of what the blocklist matches on from the API docs. For example, Http matches on URLs, so if the trace’s `http.url` span tag is `http://<domain>/healthcheck`, write a rule that matches the `healthcheck` URL:
+Configure a blocklist on the [Http][1] plugin. Take note of what the blocklist matches on from the API docs. For example, Http matches on URLs, so if the trace's `http.url` span tag is `http://<domain>/healthcheck`, write a rule that matches the `healthcheck` URL:
 
 
 ```

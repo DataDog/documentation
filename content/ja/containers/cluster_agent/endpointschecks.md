@@ -4,33 +4,37 @@ aliases:
 - /ja/agent/autodiscovery/endpointschecks
 - /ja/agent/cluster_agent/endpointschecks
 further_reading:
-- link: /agent/cluster_agent/clusterchecks/
-  tag: ドキュメント
-  text: クラスターチェックのドキュメント
 - link: agent/kubernetes/host_setup
   tag: ドキュメント
-  text: Cluster Agent のドキュメント
+  text: Cluster Agent
+- link: /containers/cluster_agent/clusterchecks/
+  tag: ドキュメント
+  text: クラスターチェック
+- link: /containers/cluster_agent/troubleshooting#endpoint-checks
+  tag: ドキュメント
+  text: エンドチェックのトラブルシューティング
 kind: documentation
-title: Autodiscovery によるエンドポイントチェックの実行
+title: オートディスカバリーによるエンドポイントチェック
 ---
 
 ## 概要
 
-クラスターチェック機能は、Kubernetes サービスなど、負荷分散されたクラスターサービスを自動検出してチェックを実行する機能を提供します。[サービスベースのクラスターチェック][1]は、サービスとその IP アドレスに関して、希望するチェックの 1 つのインスタンスをスケジュールするために使用されます。 エンドポイントチェックは、このメカニズムを拡張して、Kubernetes サービスによって管理される*各*エンドポイントを監視します。
+クラスターチェック機能は、Kubernetes サービスなど、負荷分散型のクラスターサービスを[自動検出][1]してチェックを実行する機能を提供します。_エンドポイントチェック_はこのメカニズムを拡張し、Kubernetes サービスによって管理される各エンドポイントを監視します。
 
-[Cluster Agent][2] は、Kubernetes サービス上のオートディスカバリーアノテーションに基づいてエンドポイントチェック構成を検出します。その後、Cluster Agent はこれらの構成をノードベースの Agent にディスパッチし、個別に実行させます。エンドポイントチェックは、監視対象の Kubernetes サービスのエンドポイントをバックアップするポッドと同じノード上で実行される Agent にディスパッチされます。このディスパッチロジックにより、Agent は、それぞれのポッドに対して既に自動的に収集したポッドおよびコンテナタグを追加することができます。
+[Cluster Agent][2] は、Kubernetes サービス上の[オートディスカバリー][1]アノテーションに基づいてエンドポイントチェック構成を検出します。その後、Cluster Agent はこれらの構成をノードベースの Agent にディスパッチし、個別に実行させます。エンドポイントチェックは、監視対象の Kubernetes サービスのエンドポイントの背後にあるポッドと同じノード上で実行される Agent にディスパッチされます。このディスパッチロジックにより、Agent は、それぞれのポッドに対して既に収集したポッドおよびコンテナタグを追加することができます。
 
-Agents は 10 秒ごとに Cluster Agent に接続し、実行するチェックの構成を取得します。エンドポイントチェックから来るメトリクスは、サービスタグ、[Kubernetes タグ][3]、ホストタグ、そして評価された IP アドレスに基づく `kube_endpoint_ip` タグで送信されます。
+ノートベースの Agent は 10 秒ごとに Cluster Agent に接続し、実行するチェックの構成を取得します。エンドポイントチェックで取得したメトリクスは、サービスタグ、[Kubernetes タグ][3]、ホストタグ、そして評価対象の IP アドレスに応じた `kube_endpoint_ip` タグを付けて送信されます。
 
-この機能は、Kubernetes for Agent v6.12.0+ および Cluster Agent v1.3.0+ でサポートされています。v1.4.0 以降、Cluster Agent は、非ポッドバックアップエンドポイントのすべてのエンドポイントチェックを通常のクラスターチェックに変換します。この機能を利用するには、エンドポイントチェックと一緒に[クラスターチェック][4]機能を有効にしてください。
+**バージョニング**:
+この機能は、Kubernetes for Datadog Agent v6.12.0 以上および Datadog Cluster Agent v1.3.0 以上でサポートされています。v1.4.0 以上の Cluster Agent では、配下にポッドを持たないエンドポイントに対するエンドポイントチェックが、すべて通常のクラスターチェックに変換されます。この機能を利用するには、(エンドポイントチェック機能に加えて) [クラスターチェック][4]機能を有効にしてください。
 
-**注:** サービスの背後にあるポッドが静的ポッドである場合、アノテーション `ad.datadoghq.com/endpoints.resolve` を追加する必要があります。Datadog Cluster Agent は、エンドポイントチェックとしてチェックをスケジュールし、Cluster Check Runners にディスパッチします。Kubernetes API サーバーでアノテーションを使用した[この例][5]を参照してください。
+**注:** サービスの背後にあるポッドが静的なものである場合、アノテーション `ad.datadoghq.com/endpoints.resolve` を追加する必要があります。Datadog Cluster Agent は、エンドポイントチェックとしてチェックをスケジュールし、[クラスターチェックランナー][5]にディスパッチします。Kubernetes API サーバーでこのアノテーションを使用した[例を参照][6]してください。
 
 ### 例: エンドポイントを持つサービス
 以下の例では、NGINX 用の Kubernetes デプロイメントが 3 つのポッドで作成されています。
 
 ```shell
-# kubectl get pods --selector app=nginx -o wide
+kubectl get pods --selector app=nginx -o wide
 NAME                     READY   STATUS    RESTARTS   AGE   IP           NODE
 nginx-66d557f4cf-m4c7t   1/1     Running   0          3d    10.0.0.117   gke-cluster-default-pool-4658d5d4-k2sn
 nginx-66d557f4cf-smsxv   1/1     Running   0          3d    10.0.1.209   gke-cluster-default-pool-4658d5d4-p39c
@@ -40,13 +44,13 @@ nginx-66d557f4cf-x2wzq   1/1     Running   0          3d    10.0.1.210   gke-clu
 サービスも作成されました。この 3 つのエンドポイントを通じてポッドにリンクしています。
 
 ```shell
-# kubectl get service nginx -o wide
+kubectl get service nginx -o wide
 NAME    TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE   SELECTOR
 nginx   ClusterIP   10.3.253.165   <none>        80/TCP    1h    app=nginx
 ```
 
 ```shell
-# kubectl get endpoints nginx -o yaml
+kubectl get endpoints nginx -o yaml
 ...
 - addresses:
   - ip: 10.0.0.117
@@ -69,34 +73,33 @@ nginx   ClusterIP   10.3.253.165   <none>        80/TCP    1h    app=nginx
       ...
 ```
 
-サービスベースのクラスターチェックでは、サービスの単一の IP アドレスをテストしますが、エンドポイントチェックは、このサービスに関連する 3 つのエンドポイントの*各々*に対してスケジュールされます。
+サービスベースのクラスターチェックでは、サービスの単一の IP アドレスをテストしますが、エンドポイントチェックは、このサービスと関連付けられた 3 つのエンドポイントの**各々**に対してスケジュールされます。
 
-設計上、エンドポイントチェックは `nginx` サービスのエンドポイントをバックアップするポッドと同じノードで動作する Agent にディスパッチされます。この例では、 `gke-cluster-default-pool-4658d5d4-k2sn` と `gke-cluster-default-pool-4658d5d4-p39c` というノード上で動作する Agent は、これらの `nginx` ポッドに対してチェックを実行します。
+設計上、エンドポイントチェックは、この `nginx` サービスのエンドポイントの背後にあるポッドと同じノードで動作する Agent にディスパッチされます。この例では、 `gke-cluster-default-pool-4658d5d4-k2sn` と `gke-cluster-default-pool-4658d5d4-p39c` というノード上で動作する Agent が、これらの `nginx` ポッドに対してチェックを実行します。
 
 ## エンドポイントチェックのディスパッチを設定する
 
 {{< tabs >}}
 {{% tab "Operator" %}}
 
-クラスターチェックのディスパッチは、Cluster Agent の Operator デプロイメントで `clusterAgent.config.clusterChecksEnabled` 構成キーを使用して有効にします。
+エンドポイントチェックのディスパッチは、Cluster Agent の Operator デプロイメントで `features.clusterChecks.enabled` 構成キーを使用して有効にします。
 ```yaml
-apiVersion: datadoghq.com/v1alpha1
 kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
 metadata:
   name: datadog
 spec:
-  # (...)
-  clusterAgent:
-    config:
-      clusterChecksEnabled: true
+  features:
+    clusterChecks:
+      enabled: true
 ```
 
-この構成では、Cluster Agent と Agent の間で、クラスターチェックとエンドポイントチェックの両方のディスパッチが可能です。
+この構成では、Cluster Agent と ノードベースの Agent との間で、クラスターチェックとエンドポイントチェックの両方のディスパッチが可能です。
 
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Cluster Agent の Helm デプロイメントでは、`datadog.clusterChecks.enabled` 構成キーによりこれがデフォルトで有効になっています。
+Cluster Agent の Helm デプロイメントでは、`datadog.clusterChecks.enabled` 構成キーにより、エンドポイントチェックのディスパッチがデフォルトで有効になっています。
 ```yaml
 datadog:
   clusterChecks:
@@ -107,21 +110,21 @@ clusterAgent:
   # (...)
 ```
 
-この構成では、Cluster Agent と Agent の間で、クラスターチェックとエンドポイントチェックの両方のディスパッチが可能です。
+この構成では、Cluster Agent と Agent との間で、クラスターチェックとエンドポイントチェックの両方のディスパッチが可能です。
 
 {{< /tabs >}}
 
-{{% tab "Daemonset" %}}
-### Cluster Agent のドキュメント
+{{% tab "DaemonSet" %}}
+### Cluster Agent の設定
 
-Datadog **クラスター** Agent で、`kube_endpoints` コンフィギュレーションのプロバイダーとリスナーを有効にします。それには `DD_EXTRA_CONFIG_PROVIDERS` と `DD_EXTRA_LISTENERS` の環境変数を設定します。
+Datadog Cluster Agent で、`kube_endpoints` コンフィギュレーションプロバイダーとリスナーを有効にします。環境変数 `DD_EXTRA_CONFIG_PROVIDERS` と `DD_EXTRA_LISTENERS` を設定します。
 
 ```shell
 DD_EXTRA_CONFIG_PROVIDERS="kube_endpoints"
 DD_EXTRA_LISTENERS="kube_endpoints"
 ```
 
-**注**: ポッドにホストされないエンドポイントを監視する場合は、[クラスターチェックを有効にする][1]必要があります。それには `kube_services` コンフィギュレーションのプロバイダーとリスナーを追加します。
+**注**: 監視するエンドポイントの配下にポッドが存在しない場合は、[クラスターチェックを有効にする][1]必要があります。`kube_services` コンフィギュレーションプロバイダーとリスナーを追加します。
 
 ```shell
 DD_EXTRA_CONFIG_PROVIDERS="kube_endpoints kube_services"
@@ -130,11 +133,11 @@ DD_EXTRA_LISTENERS="kube_endpoints kube_services"
 
 [Agent を再起動][2]して、構成の変更を適用します。
 
-### Cluster Agent のドキュメント
+### Agent の設定
 
-Datadog **ノード** Agent の `endpointschecks` コンフィギュレーションプロバイダーを有効にします。それには 2 つの方法があります。
+ノードベースの Agent で `endpointschecks` コンフィギュレーションプロバイダーを有効にします。これには 2 つの方法があります。
 
-- `DD_EXTRA_CONFIG_PROVIDERS` の環境変数を設定します。複数の値がある場合には、スペースで区切られたストリングになります。
+- 環境変数 `DD_EXTRA_CONFIG_PROVIDERS` を設定します。複数の値がある場合は、スペース区切りの文字列で指定します。
 
     ```shell
     DD_EXTRA_CONFIG_PROVIDERS="endpointschecks"
@@ -148,7 +151,7 @@ Datadog **ノード** Agent の `endpointschecks` コンフィギュレーショ
           polling: true
     ```
 
-**注**: ポッドにホストされないエンドポイントを監視する場合は、[クラスターチェックを有効にする][1]必要があります。それには `clusterchecks` コンフィギュレーションプロバイダーを追加します。
+**注**: 監視するエンドポイントの配下にポッドが存在しない場合は、[クラスターチェックを有効にする][1]必要があります。それには `clusterchecks` コンフィギュレーションプロバイダーを追加します。
 
 ```shell
 DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
@@ -166,13 +169,15 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 
 ### 静的なコンフィギュレーションファイルからの構成
 
-Datadog Agent 1.18.0 からは、Kubernetes エンドポイントを対象としたチェック構成で、`advanced_ad_identifiers` と[オートディスカバリーテンプレート変数][6]を使用できます ([例をご参照ください][7])。
+Cluster Agent v1.18.0 からは、Kubernetes エンドポイントを対象としたチェック構成で、`advanced_ad_identifiers` と[オートディスカバリーテンプレート変数][7]を使用できます ([例をご参照ください][8])。
 
-#### 例: Kubernetes エンドポイントでの HTTP_Check
+#### 例: Kubernetes エンドポイントでの HTTP チェック
+
+Kubernetes サービスのエンドポイントに対して [HTTP チェック][9]を実行する場合
 
 {{< tabs >}}
 {{% tab "Helm" %}}
-そのエンドポイントに対して  [HTTP チェック][1]を行いたい Kubernetes サービスがある場合は、`clusterAgent.confd` フィールドを使ってチェック構成を定義してください。
+`clusterAgent.confd` フィールドを使用して、チェックの構成を定義します。
 
 ```yaml
 #(...)
@@ -190,10 +195,9 @@ clusterAgent:
           name: "<EXAMPLE_NAME>"
 ```
 
-[1]: /ja/integrations/http_check/
 {{% /tab %}}
-{{% tab "Daemonset" %}}
-そのエンドポイントに対して [HTTP チェック][1]を行いたい Kubernetes サービスがある場合は、Cluster Agent コンテナに以下の内容で `/conf.d/http_check.yaml` ファイルをマウントしてください。
+{{% tab "DaemonSet" %}}
+Cluster Agent コンテナに以下の内容で `/conf.d/http_check.yaml` ファイルをマウントします。
 
 ```yaml
 advanced_ad_identifiers:
@@ -207,42 +211,116 @@ instances:
     name: "<EXAMPLE_NAME>"
 ```
 
-[1]: /ja/integrations/http_check/
 {{% /tab %}}
 {{< /tabs >}}
 
-**注:** フィールド `advanced_ad_identifiers` は、Datadog Cluster Agent 1.18+ からサポートされるようになりました。
-
 ### Kubernetes のサービスアノテーションからの構成
 
-[Kubernetes ポッド][8]のアノテーション方法と同様に、サービスにも以下のような構文でアノテーションを付けることができます。
+{{< tabs >}}
+{{% tab "Kubernetes (AD v2)" %}}
+
+**注:** AD Annotations v2 は、インテグレーション構成を簡素化するために、Datadog Agent 7.36 で導入されました。Datadog Agent の以前のバージョンでは、AD Annotations v1 を使用してください。
+
+サービスにアノテーションするための構文は、[Kubernetes ポッドにアノテーションする][1]のと同様です。
 
 ```yaml
-ad.datadoghq.com/endpoints.check_names: '[<インテグレーション名>]'
-ad.datadoghq.com/endpoints.init_configs: '[<初期コンフィギュレーション>]'
-ad.datadoghq.com/endpoints.instances: '[<インスタンスコンフィギュレーション>]'
-ad.datadoghq.com/endpoints.logs: '[<ログコンフィギュレーション>]'
+ad.datadoghq.com/endpoints.checks: |
+  {
+    "<INTEGRATION_NAME>": {
+      "init_config": <INIT_CONFIG>,
+      "instances": [<INSTANCE_CONFIG>]
+    }
+  }
+ad.datadoghq.com/endpoints.logs: '[<LOGS_CONFIG>]'
 ```
 
-`%%host%%` の[テンプレート変数][9]がサポートされ、これがエンドポイントの IP に置き換えられます。`kube_namespace`、`kube_service`、`kube_endpoint_ip` のタグは、自動的にインスタンスに追加されます。
+この構文は `%%host%%` [テンプレート変数][11]をサポートしており、この変数が各エンドポイントの IP に置き換えられます。インスタンスには `kube_namespace`、 `kube_service`、`kube_endpoint_ip` のタグが自動的に追加されます。
 
 **注**: カスタムエンドポイントのログ構成は、Docker ソケットのログ収集時のみサポートされ、Kubernetes のログファイル収集はサポートされません。
 
-### 統合サービスタグ付け
-オプションとして、[統合サービスタグ付け][10]を活用するために、これらのチェックで生成されたデータに `env`、`service`、`version` タグを設定することができます。
+#### 例: NGINX を使ったサービスに対する HTTP チェックと、サービスのエンドポイントに対する NGINX チェック
+
+このサービスは `nginx` デプロイメントのポッドに関連付けられています。この構成に基づき:
+
+- このサービスの背後にある各 NGINX ポッドに対して、[`nginx`][12] ベースのエンドポイントチェックがディスパッチされます。このチェックは、NGINX ポッドと同じそれぞれのノード上の Agent によって実行されます (ポッドの IP を `%%host%%` として使用します)。
+- [`http_check`][9] ベースのクラスターチェックは、クラスター内の 1 つの Agent にディスパッチされます。このチェックはサービスの IP を `%%host%%` として使用し、自動的にそれぞれのエンドポイントに負荷が分散されます。
+- チェックは、[統合サービスタグ付け][13]ラベルに対応する `env:prod`、`service:my-nginx`、`version:1.19.0` のタグでディスパッチされます。
+
 ```yaml
-tags.datadoghq.com/env: "<ENV>"
-tags.datadoghq.com/service: "<SERVICE>"
-tags.datadoghq.com/version: "<VERSION>"
+apiVersion: v1
+kind: Service
+metadata:
+    name: nginx
+    labels:
+        app: nginx
+        tags.datadoghq.com/env: "prod"
+        tags.datadoghq.com/service: "my-nginx"
+        tags.datadoghq.com/version: "1.19.0"
+    annotations:
+      ad.datadoghq.com/service.checks: |
+        {
+          "http_check": {
+            "init_config": {},
+            "instances": [
+              {
+                "url": "http://%%host%%",
+                "name": "My Nginx",
+                "timeout": 1
+              }
+            ]
+          }
+        }
+      ad.datadoghq.com/endpoints.checks: |
+        {
+          "nginx": {
+            "init_config": {},
+            "instances": [
+              {
+                "name": "My Nginx Service Endpoints",
+                "nginx_status_url": "http://%%host%%:%%port%%/status/"
+              }
+            ]
+          }
+        }
+      ad.datadoghq.com/endpoints.logs: '[{"source":"nginx","service":"webapp"}]'
+spec:
+    ports:
+        - port: 80
+          protocol: TCP
+    selector:
+        app: nginx
 ```
 
-#### 例: NGINX によってホストされるサービスの、NGINX チェックによるエンドポイントの HTTP チェック
+[1]: /ja/containers/kubernetes/integrations/?tab=kubernetesadv2
+[9]: /ja/integrations/http_check/
+[11]: /ja/agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
+[12]: /ja/integrations/nginx/
+[13]: /ja/getting_started/tagging/unified_service_tagging
 
-以下の例では、これらのオプションをすべて利用しています。このサービスは `nginx` デプロイのポッドに関連付けられます。この構成に基づき:
+{{% /tab %}}
 
-- このサービスをバックアップする各 NGINX ポッドに対して、[`nginx`][11] ベースのエンドポイントチェックがディスパッチされます。このチェックは、NGINX ポッドと同じそれぞれのノード上の Agent によって実行されます (ポッドの IP を `%%host%%` として使用します)。
-- [`http_check`][12] ベースのクラスターチェックは、クラスターの 1 つの Agent にディスパッチされます。このチェックはサービスの IP を `%%host%%` として使用し、自動的にそれぞれのエンドポイントに負荷が分散されます。
-- チェックは、統合サービスタグ付けラベルに対応する `env:prod`、`service:my-nginx`、`version:1.19.0` のタグでディスパッチされます。
+{{% tab "Kubernetes (AD v1)" %}}
+
+サービスにアノテーションするための構文は、[Kubernetes ポッドにアノテーションする][10]のと同様です。
+
+```yaml
+ad.datadoghq.com/endpoints.check_names: '[<INTEGRATION_NAME>]'
+ad.datadoghq.com/endpoints.init_configs: '[<INIT_CONFIG>]'
+ad.datadoghq.com/endpoints.instances: '[<INSTANCE_CONFIG>]'
+ad.datadoghq.com/endpoints.logs: '[<LOGS_CONFIG>]'
+```
+
+この構文は `%%host%%` [テンプレート変数][11]をサポートしており、この変数が各エンドポイントの IP に置き換えられます。インスタンスには `kube_namespace`、 `kube_service`、`kube_endpoint_ip` のタグが自動的に追加されます。
+
+**注**: カスタムエンドポイントのログ構成は、Docker ソケットのログ収集時のみサポートされ、Kubernetes のログファイル収集はサポートされません。
+
+#### 例: NGINX を使ったサービスに対する HTTP チェックと、サービスのエンドポイントに対する NGINX チェック
+
+このサービスは `nginx` デプロイメントのポッドに関連付けられています。この構成に基づき:
+
+- このサービスの背後にある各 NGINX ポッドに対して、[`nginx`][12] ベースのエンドポイントチェックがディスパッチされます。このチェックは、NGINX ポッドと同じそれぞれのノード上の Agent によって実行されます (ポッドの IP を `%%host%%` として使用します)。
+- [`http_check`][9] ベースのクラスターチェックは、クラスター内の 1 つの Agent にディスパッチされます。このチェックはサービスの IP を `%%host%%` として使用し、自動的にそれぞれのエンドポイントに負荷が分散されます。
+- チェックは、[統合サービスタグ付け][13]ラベルに対応する `env:prod`、`service:my-nginx`、`version:1.19.0` のタグでディスパッチされます。
 
 ```yaml
 apiVersion: v1
@@ -282,104 +360,28 @@ spec:
         app: nginx
 ```
 
-## トラブルシューティング
+[9]: /ja/integrations/http_check/
+[10]: /ja/agent/kubernetes/integrations/?tab=kubernetes#template-source-kubernetes-pod-annotations
+[11]: /ja/agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
+[12]: /ja/integrations/nginx/
+[13]: /ja/getting_started/tagging/unified_service_tagging
+{{% /tab %}}
+{{< /tabs >}}
 
-エンドポイントチェックのトラブルシューティングは、[クラスターチェックのトラブルシューティング][13]と似ています。唯一の違いは、クラスターチェックと同時にエンドポイントチェックをスケジューリングするノードベースの Agent に対して行われる点です。
-
-**注**: エンドポイントチェックは、監視されるサービスのエンドポイントをホストするポッドと同じノードで動作している Agent によってスケジューリングされます。エンドポイントがポッドをホストしない場合は、クラスター Agent がエンドポイントチェックをクラスター チェックに変換します。このクラスターチェックは、どのノードの Agent でも実行できます。
-
-### ノードベースの Agent 内のオートディスカバリー
-
-Agent の `configcheck` コマンドは、`endpoints-checks` ソースを付けてインスタンスを表示します。
-
-```shell
-# kubectl exec <NODE_AGENT_POD_NAME> agent configcheck
-...
-=== nginx check ===
-Configuration provider: endpoints-checks
-Configuration source: kube_endpoints:kube_endpoint_uid://default/nginx/
-Instance ID: nginx:956741d8796d940c
-nginx_status_url: http://10.0.0.75/nginx_status/
-tags:
-- pod_phase:running
-- kube_deployment:nginx
-- kube_service:nginx
-- kube_namespace:default
-- kube_endpoint_ip:10.0.0.75
-- cluster_name:cluster
-~
-Init Config:
-{}
-Auto-discovery IDs:
-* kube_endpoint_uid://default/nginx/10.0.0.75
-* kubernetes_pod://4e733448-f57e-11e9-8123-42010af001ed
-State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
-===
-```
-
-### Agent のステータス
-
-Agent の `status` コマンドは、正しく実行されて報告を行っているチェックインスタンスを表示します。
-
-```shell
-# kubectl exec <NODE_AGENT_POD_NAME> agent status
-...
-    nginx (4.0.0)
-    -------------
-      Instance ID: nginx:956741d8796d940c [OK]
-      Configuration Source: kube_endpoints:kube_endpoint_uid://default/nginx/
-      Total Runs: 443
-      Metric Samples: Last Run: 7, Total: 3,101
-      Events: Last Run: 0, Total: 0
-      Service Checks: Last Run: 1, Total: 443
-      Average Execution Time : 5ms
-```
-
-### Cluster Agent 内のオートディスカバリー
-
-Cluster Agent の `clusterchecks` コマンドは、`kubernetes-endpoints` ソースを付けてインスタンスを表示します。
-
-```shell
-# kubectl exec <クラスター AGENT のポッド名> agent clusterchecks
-...
-===== 3 Pod-backed Endpoints-Checks scheduled =====
-
-=== nginx check ===
-Configuration provider: kubernetes-endpoints
-Configuration source: kube_endpoints:kube_endpoint_uid://default/nginx/
-Instance ID: nginx:My Nginx Service Endpoints:f139adc46c81828e
-name: My Nginx Endpoints
-nginx_status_url: http://10.0.0.75/nginx_status/
-tags:
-- kube_service:nginx
-- kube_namespace:default
-- kube_endpoint_ip:10.0.0.75
-- cluster_name:cluster
-~
-Init Config:
-{}
-Auto-discovery IDs:
-* kube_endpoint_uid://default/nginx/10.0.0.75
-* kubernetes_pod://4e733448-f57e-11e9-8123-42010af001ed
-State: dispatched to gke-cluster-default-pool-4658d5d4-qfnt
-===
-...
-```
-
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/agent/cluster_agent/clusterchecks/?tab=helm#configuration-from-kubernetes-service-annotations
+[1]: /ja/containers/kubernetes/integrations/?tab=kubernetesadv2
 [2]: /ja/agent/cluster_agent
 [3]: /ja/agent/kubernetes/tag/?tab=containerizedagent#out-of-the-box-tags
 [4]: /ja/agent/cluster_agent/clusterchecks/
-[5]: /ja/containers/kubernetes/control_plane/?tab=helm#api-server-2
-[6]: /ja/agent/guide/template_variables/
-[7]: /ja/agent/cluster_agent/endpointschecks/#example-http_check-on-kubernetes-endpoints
-[8]: /ja/agent/kubernetes/integrations/?tab=kubernetes#template-source-kubernetes-pod-annotations
-[9]: /ja/agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
-[10]: /ja/getting_started/tagging/unified_service_tagging
-[11]: /ja/integrations/nginx/
-[12]: /ja/integrations/http_check/
-[13]: /ja/agent/cluster_agent/troubleshooting/
+[5]: /ja/containers/guide/clustercheckrunners
+[6]: /ja/containers/kubernetes/control_plane/?tab=helm#api-server-2
+[7]: /ja/agent/guide/template_variables/
+[8]: /ja/agent/cluster_agent/endpointschecks/#example-http_check-on-kubernetes-endpoints
+[9]: /ja/integrations/http_check/
+[10]: /ja/agent/kubernetes/integrations/?tab=kubernetes#template-source-kubernetes-pod-annotations
+[11]: /ja/agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
+[12]: /ja/integrations/nginx/
+[13]: /ja/getting_started/tagging/unified_service_tagging

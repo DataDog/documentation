@@ -23,13 +23,15 @@ further_reading:
 ---
 ## Before you begin
 
-Ensure log collection is configured.  See [Java Log Collection][1] for Log4j, Log4j 2, or Logback instructions.
+Ensure log collection is configured. See [Java Log Collection][1] for Log4j, Log4j 2, or Logback instructions.
 
 ## Automatic injection
 
-Starting in version 0.74.0, the Java tracer automatically injects trace correlation identifiers into logs.  For earlier versions, enable automatic injection in the Java tracer by adding `dd.logs.injection=true` as a system property, or through the environment variable `DD_LOGS_INJECTION=true`.  Full configuration details can be found on the [Java tracer configuration][2] page.
+Starting in version 0.74.0, the Java tracer automatically injects trace correlation identifiers into JSON formatted logs. For earlier versions, enable automatic injection in the Java tracer by adding `dd.logs.injection=true` as a system property, or through the environment variable `DD_LOGS_INJECTION=true`. Full configuration details can be found on the [Java tracer configuration][2] page.
 
 **Note**: If the `attribute.path` for your trace ID is *not* `dd.trace_id`, ensure that your trace ID reserved attribute settings account for the `attribute.path`. For more information, see [Correlated Logs Not Showing Up in the Trace ID Panel][3].
+
+<div class="alert alert-info"><strong>Beta</strong>: Starting in version 1.18.3, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where the service runs, you can set <code>DD_LOGS_INJECTION</code> in the <a href="/tracing/service_catalog">Service Catalog</a> UI.</div>
 
 ## Manual injection
 

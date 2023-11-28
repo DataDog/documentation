@@ -10,7 +10,9 @@ assets:
     events:
       creates_events: false
     metrics:
-      check: kafka.net.bytes_out.rate
+      check:
+      - kafka.net.bytes_out
+      - kafka.net.bytes_out.rate
       metadata_path: metadata.csv
       prefix: kafka.
     process_signatures:
@@ -35,10 +37,8 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- processing
-- messaging
 - log collection
-- autodiscovery
+- messaging
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/kafka/README.md
 display_on_public_website: true
@@ -46,7 +46,7 @@ draft: false
 git_integration_title: kafka
 integration_id: kafka
 integration_title: Kafka
-integration_version: 2.13.0
+integration_version: 2.13.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -56,18 +56,16 @@ public_title: Kafka
 short_description: プロデューサーとコンシューマー、レプリケーション、最大ラグなどのメトリクスを収集
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::処理
-  - Category::メッセージング
   - Category::ログの収集
-  - Category::オートディスカバリー
+  - Category::メッセージング
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: プロデューサーとコンシューマー、レプリケーション、最大ラグなどのメトリクスを収集
   media: []
@@ -237,13 +235,14 @@ Kafka チェックには、イベントは含まれません。
 - [Kafka パフォーマンスメトリクスの監視][11]
 - [Kafka パフォーマンスメトリクスの収集][12]
 - [Datadog を使用した Kafka の監視][13]
+- [ナレッジセンターの Kafka 概要][14]
 
 
 
 
 ## Kafka Consumer インテグレーション
 
-![Kafka ダッシュボード][14]
+![Kafka ダッシュボード][15]
 
 ## 概要
 
@@ -270,20 +269,20 @@ Agent の Kafka コンシューマーは [Datadog Agent][5] パッケージに�
 
 ##### メトリクスの収集
 
-1. [Agent のコンフィギュレーションディレクトリ][15]のルートにある `conf.d/` フォルダーの `kafka_consumer.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル kafka_consumer.d/conf.yaml][16] を参照してください。
+1. [Agent のコンフィギュレーションディレクトリ][16]のルートにある `conf.d/` フォルダーの `kafka_consumer.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル kafka_consumer.d/conf.yaml][17] を参照してください。
 
-2. [Agent を再起動します][17]。
+2. [Agent を再起動します][18]。
 
 ##### ログの収集
 
-このチェックは、その他のログを収集しません。Kafka ブローカーからログを収集するには、[Kafka のログコレクション手順][18]をご参照ください。
+このチェックは、その他のログを収集しません。Kafka ブローカーからログを収集するには、[Kafka のログコレクション手順][19]をご参照ください。
 
 <!-- xxz tab xxx -->
 <!-- xxx tab "コンテナ化" xxx -->
 
 #### コンテナ化
 
-コンテナ環境の場合は、[JMX を使用したオートディスカバリー][19]のガイドを参照してください。
+コンテナ環境の場合は、[JMX を使用したオートディスカバリー][20]のガイドを参照してください。
 
 <!-- xxz tab xxx -->
 <!-- xxz tabs xxx -->
@@ -371,9 +370,10 @@ sudo service datadog-agent restart
 [11]: https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics
 [12]: https://www.datadoghq.com/blog/collecting-kafka-performance-metrics
 [13]: https://www.datadoghq.com/blog/monitor-kafka-with-datadog
-[14]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kafka_consumer/images/kafka_dashboard.png
-[15]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
-[16]: https://github.com/DataDog/integrations-core/blob/master/kafka_consumer/datadog_checks/kafka_consumer/data/conf.yaml.example
-[17]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[18]: https://docs.datadoghq.com/ja/integrations/kafka/#log-collection
-[19]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent
+[14]: https://www.datadoghq.com/knowledge-center/apache-kafka/
+[15]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kafka_consumer/images/kafka_dashboard.png
+[16]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
+[17]: https://github.com/DataDog/integrations-core/blob/master/kafka_consumer/datadog_checks/kafka_consumer/data/conf.yaml.example
+[18]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[19]: https://docs.datadoghq.com/ja/integrations/kafka/#log-collection
+[20]: https://docs.datadoghq.com/ja/agent/guide/autodiscovery-with-jmx/?tab=containerizedagent

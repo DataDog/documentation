@@ -25,7 +25,7 @@ Complete the following steps to enable Database Monitoring with your database:
 ## Before you begin
 
 Supported SQL Server versions
-: 2012, 2014, 2016, 2017, 2019
+: 2012, 2014, 2016, 2017, 2019, 2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
@@ -53,7 +53,7 @@ This is required because Google Cloud SQL does not permit granting `CONNECT ANY 
 
 ## Install the Agent
 
-GCP does not grant direct host access, meaning the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
+Google Cloud does not grant direct host access, meaning the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
 
 {{< tabs >}}
 {{% tab "Windows Host" %}}
@@ -70,10 +70,10 @@ instances:
     password: '<PASSWORD>'
     connector: adodbapi
     provider: MSOLEDBSQL
-    tags:  # optional
+    tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-    # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
+    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -92,7 +92,7 @@ Use the `service` and `env` tags to link your database telemetry to other teleme
 The recommended [ADO][6] provider is [Microsoft OLE DB Driver][7]. Ensure the driver is installed on the host where the agent is running.
 ```yaml
 connector: adodbapi
-provider: MSOLEDBSQL
+adoprovider: MSOLEDBSQL19  # Replace with MSOLEDBSQL for versions 18 and lower
 ```
 
 The other two providers, `SQLOLEDB` and `SQLNCLI`, are considered deprecated by Microsoft and should no longer be used.
@@ -113,7 +113,7 @@ Once all Agent configuration is complete, [restart the Datadog Agent][9].
 [Run the Agent's status subcommand][10] and look for `sqlserver` under the **Checks** section. Navigate to the [Databases][11] page in Datadog to get started.
 
 
-[1]: https://app.datadoghq.com/account/settings#agent/windows
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
 [4]: https://docs.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode
@@ -121,8 +121,8 @@ Once all Agent configuration is complete, [restart the Datadog Agent][9].
 [6]: https://docs.microsoft.com/en-us/sql/ado/microsoft-activex-data-objects-ado
 [7]: https://docs.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server
 [8]: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
-[9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: /agent/guide/agent-commands/#agent-status-and-information
+[9]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[10]: /agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Linux Host" %}}
@@ -143,11 +143,10 @@ instances:
     password: '<PASSWORD>'
     connector: odbc
     driver: '<Driver from the `odbcinst.ini` file>'
-    tags:  # optional
+    tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
-
-    # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
+    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -164,13 +163,13 @@ Once all Agent configuration is complete, [restart the Datadog Agent][6].
 [Run the Agent's status subcommand][7] and look for `sqlserver` under the **Checks** section. Navigate to the [Databases][8] page in Datadog to get started.
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
 [5]: /getting_started/tagging/unified_service_tagging
-[6]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: /agent/guide/agent-commands/#agent-status-and-information
+[6]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[7]: /agent/configuration/agent-commands/#agent-status-and-information
 [8]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Docker" %}}
@@ -205,7 +204,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
       "instance_id": "<INSTANCE_ID>"
     }
   }]' \
-  datadoghq/agent:${DD_AGENT_VERSION}
+  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
 ```
 
 See the [SQL Server integration spec][3] for additional information on setting `project_id` and `instance_id` fields.
@@ -220,7 +219,7 @@ Use the `service` and `env` tags to link your database telemetry to other teleme
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
 [4]: /getting_started/tagging/unified_service_tagging
-[5]: /agent/guide/agent-commands/#agent-status-and-information
+[5]: /agent/configuration/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -239,20 +238,23 @@ helm repo update
 helm install <RELEASE_NAME> \
   --set 'datadog.apiKey=<DATADOG_API_KEY>' \
   --set 'clusterAgent.enabled=true' \
-  --set "clusterAgent.confd.sqlserver\.yaml=cluster_check: true
+  --set 'clusterAgent.confd.sqlserver\.yaml=cluster_check: true
 init_config:
 instances:
   - dbm: true
     host: <HOSTNAME>
     port: 1433
     username: datadog
-    password: '<PASSWORD>'
-    connector: 'odbc'
-    driver: 'FreeTDS'
+    password: "<PASSWORD>"
+    connector: "odbc"
+    driver: "FreeTDS"
+    tags:  # Optional
+      - "service:<CUSTOM_SERVICE>"
+      - "env:<CUSTOM_ENV>"
     gcp:
-      project_id: '<PROJECT_ID>'
-      instance_id: '<INSTANCE_ID>' \
-  datadog/datadog"
+      project_id: "<PROJECT_ID>"
+      instance_id: "<INSTANCE_ID>"' \
+  datadog/datadog
 ```
 
 ### Configure with mounted files
@@ -270,7 +272,10 @@ instances:
     password: '<PASSWORD>'
     connector: "odbc"
     driver: "FreeTDS"
-    # After adding your project and instance, configure the Datadog GCP integration to pull additional cloud data such as CPU, Memory, etc.
+    tags:  # Optional
+      - 'service:<CUSTOM_SERVICE>'
+      - 'env:<CUSTOM_ENV>'
+    # After adding your project and instance, configure the Datadog Google Cloud (GCP) integration to pull additional cloud data such as CPU, Memory, etc.
     gcp:
       project_id: '<PROJECT_ID>'
       instance_id: '<INSTANCE_ID>'
@@ -299,6 +304,7 @@ metadata:
           "password": "<PASSWORD>",
           "connector": "odbc",
           "driver": "FreeTDS",
+          "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
           "gcp": {
             "project_id": "<PROJECT_ID>",
             "instance_id": "<INSTANCE_ID>"
@@ -323,9 +329,12 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
-[5]: /agent/guide/secrets-management
+[5]: /agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
+
+## Example Agent Configurations
+{{% dbm-sqlserver-agent-config-examples %}}
 
 ## Install the Google Cloud SQL integration
 

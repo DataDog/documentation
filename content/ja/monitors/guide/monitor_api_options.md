@@ -91,4 +91,4 @@ _これらのオプションはログアラートにのみ適用されます。_
 
 [1]: /ja/api/latest/roles/
 [2]: /ja/monitors/guide/how-to-set-up-rbac-for-monitors/
-[3]: ../../faq/what-are-recovery-thresholds/
+[3]: /ja/monitors/guide/recovery-thresholds/

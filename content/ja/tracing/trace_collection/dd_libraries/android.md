@@ -2,8 +2,6 @@
 aliases:
 - /ja/tracing/setup_overview/setup/android
 - /ja/tracing/setup/android
-dependencies:
-- https://github.com/DataDog/dd-sdk-android/blob/master/docs/trace_collection.md
 description: Android アプリケーションからトレースを収集する。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
@@ -31,7 +29,7 @@ dependencies {
 }
 ```
 
-3. アプリケーションコンテキストと追跡に関する同意、[Datadog クライアントトークン][4]、そして Datadog UI で新しい RUM アプリケーションを作成したときに生成されたアプリケーション ID で、ライブラリを初期化します（詳細は、[Android の RUM データを収集][7]を参照）。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の Android アプリケーションの APK バイトコードで公開されてしまうため、[Datadog API キー][5]を使用して `dd-sdk-android` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][4]を参照してください。
+2. アプリケーションコンテキストと追跡に関する同意、[Datadog クライアントトークン][4]、そして Datadog UI で新しい RUM アプリケーションを作成したときに生成されたアプリケーション ID で、ライブラリを初期化します（詳細は、[Android の RUM データを収集][7]を参照）。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の Android アプリケーションの APK バイトコードで公開されてしまうため、[Datadog API キー][5]を使用して `dd-sdk-android` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][4]を参照してください。
 
 **US** 
 
@@ -401,7 +399,7 @@ final Span serverSpan = tracer.buildSpan("<SERVER_SPAN_NAME>").asChildOf(extract
 span.setTag("http.url", url)
 ```
 
-11. (任意) スパンをエラーがあるとマークし、OpenTracing タグを使用してログに記録する:
+10. (任意) スパンをエラーがあるとマークし、OpenTracing タグを使用してログに記録する:
 
 ```kotlin
 span.log(mapOf(Fields.ERROR_OBJECT to throwable))
@@ -418,7 +416,7 @@ AndroidTracer.logThrowable(span, throwable)
 AndroidTracer.logErrorMessage(span, message)
 ```
 
-12. バッチ処理前にスパンのイベントで属性を変更する必要がある場合は、SDK の初期化時に `SpanEventMapper` を実装することで上記の処理を行えます。
+11. バッチ処理前にスパンのイベントで属性を変更する必要がある場合は、SDK の初期化時に `SpanEventMapper` を実装することで上記の処理を行えます。
 
 {{< tabs >}} 
 {{% tab "Kotlin" %}}
@@ -704,12 +702,12 @@ remoteDataSource.getData(query)
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/ja/tracing/visualization/#trace
+[1]: /ja/tracing/visualization/#trace
 [2]: https://github.com/DataDog/dd-sdk-android
-[3]: https://docs.datadoghq.com/ja/tracing/visualization/#spans
-[4]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
-[5]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
+[3]: /ja/tracing/visualization/#spans
+[4]: /ja/account_management/api-app-keys/#client-tokens
+[5]: /ja/account_management/api-app-keys/#api-keys
 [6]: https://square.github.io/okhttp/interceptors/
-[7]: https://docs.datadoghq.com/ja/real_user_monitoring/android/?tab=us
+[7]: /ja/real_user_monitoring/android/?tab=us
 [8]: https://github.com/opentracing-contrib/java-rxjava
 [9]: https://github.com/square/retrofit/tree/master/retrofit-adapters/rxjava3

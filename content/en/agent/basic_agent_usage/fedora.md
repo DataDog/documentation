@@ -14,6 +14,12 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
+- link: "/agent/basic_agent_usage/#agent-architecture"
+  tag: "Documentation"
+  text: "Find out more about the Agent's architecture"
+- link: "/agent/configuration/network#configure-ports"
+  tag: "Documentation"
+  text: "Configure inbound ports"
 ---
 
 ## Overview
@@ -22,7 +28,7 @@ This page outlines the basic features of the Datadog Agent for Fedora. If you ha
 
 Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
-**Note**: Fedora 26 and above are supported.
+**Note**: Fedora 26 and above are supported on the 64-bit x86 architecture. Fedora 27 and above are supported on the 64-bit Arm v8 architecture.
 
 ## Commands
 
@@ -108,6 +114,6 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/fedora
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=fedora
 [2]: /agent/troubleshooting/
 [3]: /developers/guide/custom-python-package/

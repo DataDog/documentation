@@ -40,11 +40,11 @@ If you are interested in learning what buttons your users click on the most, you
 
 This example displays the top actions on Shopist's `/cart` page.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_in_cart_page.png" alt="Search query for actions on Shopist's Cart page" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_in_cart_page-2.png" alt="Search query for actions on Shopist's Cart page" style="width:90%;">}}
 
 To investigate which users are clicking on these buttons, modify the search query by selecting the **Table** visualization type and clicking **+** to add another `group` field for `@user.name`.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_by_user_name_in_cart_page.png" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/actions_by_user_name_in_cart_page-3.png" alt="Search query for actions grouped by user name on Shopist's Cart page" style="width:90%;">}}
 
 ## Analyze the conversion rate of core workflows
 
@@ -80,7 +80,7 @@ The side panel contains detailed information about the load time of an individua
 
 This query searches for top pages where at least two frustration signals have occurred.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/frustration_signal_query.png" alt="Search query for views containing more than two frustration signals in the RUM Explorer" style="width:90%;" >}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/frustration_signal_query-1.png" alt="Search query for views containing more than two frustration signals in the RUM Explorer" style="width:90%;" >}}
 
 In addition to analyzing top views, you also want to investigate the buttons and elements that users are expressing frustration with. 
 
@@ -91,7 +91,7 @@ In addition to analyzing top views, you also want to investigate the buttons and
 
 This query lists anytime a user expresses any type of frustration signal and counts the unique actions where frustration occurred.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/multi_group_frustration_type_search.png" alt="Search query that lists and counts actions where a user expressed three types of frustration signals on Shopist's Cart page" style="width:90%;">}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/multi_group_frustration_type_search-3.png" alt="Search query that lists and counts actions where a user expressed three types of frustration signals on Shopist's Cart page" style="width:90%;">}}
 
 ## Watch the user experience in Session Replay
 
@@ -99,7 +99,7 @@ You can visually watch the impact that poor user experiences have on your users.
 
 In a funnel visualization, you can access the **Funnel Analysis** side panel and click **Sample Replay Session** on sessions where users continued onto another step or dropped off.
 
-{{< img src="real_user_monitoring/guide/rum-for-product-analytics/funnel_sample_session_replay.mp4" alt="The Funnel Analysis side panel contains links to Session Replay" width=90%; video="true" >}}
+{{< img src="real_user_monitoring/guide/rum-for-product-analytics/funnel_sample_session_replay-2.mp4" alt="The Funnel Analysis side panel contains links to Session Replay" width=90%; video="true" >}}
 
 With Session Replay, you can identify what parts of your product are confusing to users and need improving in order to drive up conversion. 
 
@@ -127,7 +127,7 @@ This powerpack provides graphs about usage by country, actions on a view, and ac
 [3]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#enrich-user-sessions
 [4]: /real_user_monitoring/android/advanced_configuration/?tab=kotlin#enrich-user-sessions
 [5]: https://app.datadoghq.com/rum/explorer
-[6]: /real_user_monitoring/explorer/visualize#funnel
+[6]: /real_user_monitoring/funnel_analysis/
 [7]: /real_user_monitoring/explorer/saved_views/
 [8]: /real_user_monitoring/explorer/export/
 [9]: /real_user_monitoring/error_tracking/

@@ -17,11 +17,12 @@ assets:
     source_type_name: PerimeterX
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: PerimeterX
   sales_email: support@perimeterx.com
   support_email: support@perimeterx.com
 categories:
-- security
+- ログの収集
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/perimeterx/README.md
 display_on_public_website: true
@@ -39,15 +40,16 @@ public_title: PerimeterX
 short_description: PerimeterX のログとメトリクスを Datadog と統合
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Log Collection
   - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: PerimeterX のログとメトリクスを Datadog と統合
   media: []

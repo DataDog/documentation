@@ -15,13 +15,16 @@ assets:
     source_type_name: Amixr
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Amixr
   sales_email: ildar@amixr.io
   support_email: ildar@amixr.io
 categories:
-- 監視
+- アラート設定
+- 自動化
 - コラボレーション
+- インシデント
 - notification
+- orchestration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/amixr/README.md
 display_on_public_website: true
@@ -39,17 +42,20 @@ public_title: Amixr
 short_description: Slack とのスムーズなインテグレーションで、開発者が使いやすいアラートマネジメントを実現
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Monitoring
+  - Category::Alerting
+  - Category::Automation
   - Category::Collaboration
+  - Category::Incidents
   - Category::Notification
+  - Category::Orchestration
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Slack とのスムーズなインテグレーションで、開発者が使いやすいアラートマネジメントを実現
   media: []

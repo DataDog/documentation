@@ -11,6 +11,8 @@ assets:
       check: pulsar.active_connections
       metadata_path: metadata.csv
       prefix: pulsar.
+    process_signatures:
+    - java org.apache.pulsar.PulsarStandaloneStarter
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: pulsar
@@ -22,9 +24,8 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- 処理
-- メッセージング
 - ログの収集
+- メッセージング
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/pulsar/README.md
 display_on_public_website: true
@@ -32,7 +33,7 @@ draft: false
 git_integration_title: pulsar
 integration_id: pulsar
 integration_title: Pulsar
-integration_version: 1.2.0
+integration_version: 1.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -42,17 +43,16 @@ public_title: Pulsar
 short_description: Pulsar クラスターを監視します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Processing
-  - Category::Messaging
   - Category::Log Collection
+  - Category::Messaging
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Pulsar クラスターを監視します。
   media: []

@@ -25,7 +25,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - data store
-- autodiscovery
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/aerospike/README.md
@@ -34,7 +33,7 @@ draft: false
 git_integration_title: aerospike
 integration_id: aerospike
 integration_title: Aerospike
-integration_version: 1.17.1
+integration_version: 1.18.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -49,8 +48,7 @@ tile:
   classifier_tags:
   - Supported OS::Linux
   - Category::データストア
-  - Category::オートディスカバリー
-  - Category::Log Collection
+  - Category::ログの収集
   configuration: README.md#Setup
   description: Aerospike データベースからクラスターやネームスペースの統計を収集
   media: []
@@ -180,6 +178,6 @@ Aerospike には、イベントは含まれません。
 
 
 [1]: https://download.aerospike.com/download/client/python/notes.html#5.0.0
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

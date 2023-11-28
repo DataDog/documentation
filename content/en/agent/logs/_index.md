@@ -12,7 +12,7 @@ further_reading:
 - link: "agent/logs/advanced_log_collection/#multi-line-aggregation"
   tag: "Documentation"
   text: "Multi-line log aggregation"
-- link: "agent/logs/advanced_log_collection/#tail-directories-by-using-wildcards"
+- link: "agent/logs/advanced_log_collection/#tail-directories-using-wildcards"
   tag: "Documentation"
   text: "Tail directories by using wildcards"
 - link: "agent/logs/advanced_log_collection/#global-processing-rules"
@@ -42,11 +42,13 @@ After activating log collection, the Agent is ready to forward logs to Datadog. 
 
 Datadog Agent v6 can collect logs and forward them to Datadog from files, the network (TCP or UDP), journald, and Windows channels:
 
-1. Create a new `<CUSTOM_LOG_SOURCE>.d/` folder in the `conf.d/` directory at the root of your [Agent's configuration directory][4].
+1. In the `conf.d/` directory at the root of your [Agent's configuration directory][4], create a new `<CUSTOM_LOG_SOURCE>.d/` folder that is accessible by the Datadog user.
 2. Create a new `conf.yaml` file in this new folder.
 3. Add a custom log collection configuration group with the parameters below.
 4. [Restart your Agent][6] to take into account this new configuration.
 5. Run the [Agent's status subcommand][7] and look for `<CUSTOM_LOG_SOURCE>` under the Checks section.
+
+If there are permission errors, see [Permission issues tailing log files][12] to troubleshoot.
 
 Below are examples of custom log collection setup:
 
@@ -63,9 +65,9 @@ logs:
     source: "<SOURCE>"
 ```
 
-On Windows, use the path `"<DRIVE_LETTER>:\\<PATH_LOG_FILE>\\<LOG_FILE_NAME>.log"`, and verify that the user `ddagentuser` has read and write access to the log file.
+On **Windows**, use the path `<DRIVE_LETTER>:\<PATH_LOG_FILE>\<LOG_FILE_NAME>.log`, and verify that the user `ddagentuser` has read and write access to the log file.
 
-[1]: /agent/guide/agent-configuration-files/
+[1]: /agent/configuration/agent-configuration-files/
 {{% /tab %}}
 
 {{% tab "TCP/UDP" %}}
@@ -86,7 +88,7 @@ In the Agent version 7.31.0+, the TCP connection stays open indefinitely even wh
 
 **Note**: The Agent supports raw string, JSON, and Syslog formatted logs. If you are sending logs in batch, use line break characters to separate your logs.
 
-[1]: /agent/guide/agent-configuration-files/
+[1]: /agent/configuration/agent-configuration-files/
 {{% /tab %}}
 {{% tab "journald" %}}
 
@@ -100,7 +102,7 @@ logs:
 
 Refer to the [journald integration][2] documentation for more details regarding the setup for containerized environments and units filtering.
 
-[1]: /agent/guide/agent-configuration-files/
+[1]: /agent/configuration/agent-configuration-files/
 [2]: /integrations/journald/
 {{% /tab %}}
 {{% tab "Windows Events" %}}
@@ -160,7 +162,7 @@ List of all available parameters for log collection:
 | `exclude_paths`  | No       | If `type` is **file**, and `path` contains a wildcard character, list the matching file or files to exclude from log collection. This is available for Agent version >= 6.18.                                                                                                                                                                            |
 | `exclude_units`  | No       | If `type` is **journald**, list of the specific journald units to exclude.                                                                                                                                                                                                                                                                               |
 | `sourcecategory` | No       | The attribute used to define the category a source attribute belongs to, for example: `source:postgres, sourcecategory:database` or `source: apache, sourcecategory: http_web_access`.                                                                                                                                                                                                                              |
-| `start_position` | No       | If `type` is **file**, set the position for the Agent to start reading the file. Valid values are `beginning` and `end` (default: `end`). If `path` contains a wildcard character, `beginning` is not supported. _Added in Agent v6.19/v7.19_                                                                                                            |
+| `start_position` | No       | If `type` is **file**, set the position for the Agent to start reading the file. Valid values are `beginning` and `end` (default: `end`). If `path` contains a wildcard character, `beginning` is not supported. _Added in Agent v6.19/v7.19_ <br/><br/>If `type` is **journald**, set the position for the Agent to start reading the journal. Valid values are `beginning`, `end`, `forceBeginning`, and `forceEnd` (default: `end`). With `force` options, the Agent ignores the cursor stored on disk and always reads from the beginning or the end of the journal when it starts. _Added in Agent v7.38_                                                                                                          |
 | `encoding`       | No       | If `type` is **file**, set the encoding for the Agent to read the file. Set it to `utf-16-le` for UTF-16 little-endian, `utf-16-be` for UTF-16 big-endian, or `shift-jis` for Shift JIS. If set to any other value, the Agent reads the file as UTF-8.  _Added `utf-16-le` and `utf-16be` in Agent v6.23/v7.23, `shift-jis` in Agent v6.34/v7.34_                                                                                      |
 | `tags`           | No       | A list of tags added to each log collected ([learn more about tagging][11]).                                                                                                                                                                                                                                                                             |
 
@@ -168,14 +170,15 @@ List of all available parameters for log collection:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/kubernetes/log/
 [3]: /agent/docker/log/
-[4]: /agent/guide/agent-configuration-files/
+[4]: /agent/configuration/agent-configuration-files/
 [5]: /agent/logs/log_transport/
-[6]: /agent/guide/agent-commands/#restart-the-agent
-[7]: /agent/guide/agent-commands/#agent-status-and-information
+[6]: /agent/configuration/agent-commands/#restart-the-agent
+[7]: /agent/configuration/agent-commands/#agent-status-and-information
 [8]: /tracing/
 [9]: /getting_started/tagging/unified_service_tagging
 [10]: /metrics/custom_metrics/#overview
 [11]: /getting_started/tagging/
+[12]: /logs/guide/log-collection-troubleshooting-guide/#permission-issues-tailing-log-files

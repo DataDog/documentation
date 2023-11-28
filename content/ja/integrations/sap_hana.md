@@ -23,6 +23,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - data store
+- sap
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sap_hana/README.md
 display_on_public_website: true
@@ -40,15 +41,16 @@ public_title: SAP HANA
 short_description: SAP HANA システムのメモリ、ネットワーク、ボリューム、およびその他のメトリクスを監視します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Data Store
+  - Category::SAP
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: SAP HANA システムのメモリ、ネットワーク、ボリューム、およびその他のメトリクスを監視します。
   media: []

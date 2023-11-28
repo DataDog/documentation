@@ -14,6 +14,9 @@ further_reading:
     - link: /getting_started/tagging/unified_service_tagging
       tag: 'Documentation'
       text: 'Learn how to configure unified service tagging'
+    - link: 'https://dtdg.co/fe'
+      tag: 'Foundation Enablement'
+      text: 'Join an interactive session to optimize your Log Management'
 ---
 
 ## Overview
@@ -30,7 +33,7 @@ With Log Management, you can analyze and explore data in the Log Explorer, conne
 
 ### Server
 
-There are several [integrations][5] available to forward logs from your server to Datadog. Integrations use a log configuration block in their `conf.yaml` file, which is available in the `conf.d/` folder at the root of your Agent’s configuration directory, to forward logs to Datadog from your server.
+There are several [integrations][5] available to forward logs from your server to Datadog. Integrations use a log configuration block in their `conf.yaml` file, which is available in the `conf.d/` folder at the root of your Agent's configuration directory, to forward logs to Datadog from your server.
 
 ```yaml
 logs:
@@ -69,7 +72,7 @@ To begin collecting logs from a container service, follow the [in-app instructio
 
 ### Cloud
 
-You can forward logs from multiple cloud providers, such as AWS, Azure, and GCP, to Datadog. Each cloud provider has its own set of configuration instructions.
+You can forward logs from multiple cloud providers, such as AWS, Azure, and Google Cloud, to Datadog. Each cloud provider has its own set of configuration instructions.
 
 For example, ​AWS service logs are usually stored in S3 buckets or CloudWatch Log groups. You can subscribe to these logs and forward them to an Amazon Kinesis stream to then forward them to one or multiple destinations. Datadog is one of the default destinations for Amazon Kinesis Delivery streams.​
 
@@ -79,7 +82,7 @@ To begin collecting logs from a cloud service, follow the [in-app instructions][
 
 Datadog permits log collection from clients through SDKs or libraries. For example, use the `datadog-logs` SDK to send logs to Datadog from JavaScript clients.
 
-To begin collecting logs from a cloud service, follow the [in-app instructions][14].
+To begin collecting logs from a client, follow the [in-app instructions][14].
 
 ### Other
 
@@ -118,8 +121,9 @@ Once a logging source is configured, and your logs are available in the Log Expl
 
 ### Guides
 
-* Dive further into [Logging without Limits*][22]
-* Manage sensitive log data with [RBAC settings][23]
+* [Best practices for Log Management][22]
+* Dive further into [Logging without Limits*][23]
+* Manage sensitive log data with [RBAC settings][24]
 
 ## Further reading
 
@@ -131,7 +135,7 @@ Once a logging source is configured, and your logs are available in the Log Expl
 [1]: https://www.datadoghq.com
 [2]: /tracing/other_telemetry/connect_logs_and_traces/
 [3]: /logs/guide/correlate-logs-with-metrics/
-[4]: /security_platform/cloud_siem/
+[4]: /security/cloud_siem/
 [5]: /getting_started/integrations/
 [6]: /agent/
 [7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli
@@ -149,5 +153,6 @@ Once a logging source is configured, and your logs are available in the Log Expl
 [19]: /logs/log_configuration/pipelines/
 [20]: /logs/log_configuration/processors/
 [21]: /logs/log_configuration/
-[22]: /logs/guide/getting-started-lwl/
-[23]: /logs/guide/logs-rbac/
+[22]: /logs/guide/best-practices-for-log-management/
+[23]: /logs/guide/getting-started-lwl/
+[24]: /logs/guide/logs-rbac/

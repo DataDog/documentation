@@ -1,4 +1,12 @@
 ---
+algolia:
+  category: Documentation
+  rank: 70
+  subcategory: Synthetic API テスト
+  tags:
+  - udp
+  - udp テスト
+  - udp テスト
 description: ホストで UDP 接続をシミュレートする
 further_reading:
 - link: https://www.datadoghq.com/blog/introducing-synthetic-monitoring/
@@ -20,11 +28,9 @@ title: UDP テスト
 
 UDP テストでは、指定したホストのポートに低レベルの UDP 接続が確立されていることを監視し、UDP ポートに存在するあらゆるサービスの可用性を確保することが可能です。応答時間データを内蔵しているため、ネットワークアプリケーションのパフォーマンスを追跡し、予期しない速度低下が発生した場合に警告を受けることができます。
 
-通常の UDP トラフィックでは、送信元から送信先への情報の送信は、確認応答を求めずに行われます。
+通常の UDP トラフィックでは、確認応答を求めることなく、送信元から宛先へ情報を送信します。UDP サービスを監視するために、Datadog では UDP ポートをリッスンし、応答を返すプロセスを受信側のホストに置くことを推奨しています。このプロセスをセットアップした後、UDP テストを作成し、期待される応答についてアサーションを設定することができます。
 
-UDP サービスを監視するために、Datadog では UDP ポートをリッスンし、応答を返すプロセスを受信側のホストに置くことを推奨しています。このプロセスをセットアップした後、Synthetics テストを作成し、期待される応答についてアサーションを設定することができます。
-
-UDP テストは、ネットワークの外部または内部からのテストの実行の好みに応じて、[管理ロケーション][1]と[プライベートロケーション][2]の両方から実行することができます。UDP テストは、スケジュール、オンデマンド、または [CI/CD パイプライン][3]内で直接実行することができます。
+UDP テストは、ネットワークの外部または内部からのテストの実行の好みに応じて、[管理ロケーション](#select-locations)と[プライベートロケーション][1]の両方から実行することができます。UDP テストは、スケジュール、オンデマンド、または [CI/CD パイプライン][2]内で直接実行することができます。
 
 ## コンフィギュレーション
 
@@ -36,7 +42,7 @@ UDP テストは、ネットワークの外部または内部からのテスト�
 2. テストで送信したい文字列を入力します。
 3. テストがタイムアウトするまでの時間を秒単位で指定します (オプション)。
 4. UDP テストに**名前**を付けます。
-5. UDP テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][4]で Synthetic テストをすばやくフィルタリングできます。
+5. UDP テストに `env` **タグ**とその他のタグを追加します。次に、これらのタグを使用して、[Synthetic Monitoring ホームページ][3]で Synthetic テストをすばやくフィルタリングできます。
 
 {{< img src="synthetics/api_tests/udp_test_config.png" alt="UDP リクエストを定義する" style="width:90%;" >}}
 
@@ -49,7 +55,7 @@ UDP テストは、ネットワークの外部または内部からのテスト�
 | タイプ            | 演算子                                                                        | 値の型                        |
 |-----------------|---------------------------------------------------------------------------------|-----------------------------------|
 | response time   | `is less than`                                                                  | *整数 (ms)*                    |
-| 文字列応答 | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`| *文字列* <br> *[Regex][5]*        |
+| 文字列応答 | `contains`、`does not contain`、`is`、`is not`、<br> `matches`、`does not match`| *文字列* <br> *[Regex][4]*        |
 
 応答プレビューを直接選択するか、**New Assertion** をクリックしてアサーションを作成します。UDP テストごとに最大 20 個のアサーションを作成することができます。
 
@@ -63,14 +69,16 @@ UDP テストは、ネットワークの外部または内部からのテスト�
 
 ### ロケーションを選択する
 
-UDP テストを実行する**ロケーション**を選択します。UDP テストは、ネットワークの外部または内部のどちらからテストを実行するかの好みによって、[管理ロケーション][1]と[プライベートロケーション][2]の両方から実行できます。
+UDP テストを実行する**ロケーション**を選択します。UDP テストは、ネットワークの外部または内部のどちらからテストを実行するかの好みによって、管理ロケーションと[プライベートロケーション][1]の両方から実行できます。
+
+{{% managed-locations %}} 
 
 ### テストの頻度を指定する
 
 UDP テストは次の頻度で実行できます。
 
 - **On a schedule**: 最も重要なサービスにユーザーが常にアクセスできるようにします。Datadog で UDP テストを実行する頻度を選択します。
-- [**Within your CI/CD pipelines**][3]。
+- [**Within your CI/CD pipelines**][2]。
 - **On-demand**: チームにとって最も意味のあるときにいつでもテストを実行します。
 
 ### アラート条件を定義する
@@ -94,9 +102,9 @@ UDP テストは次の頻度で実行できます。
 
 以前に定義された[アラート条件](#define-alert-conditions)に基づいて、テストによって通知が送信されます。このセクションを使用して、チームに送信するメッセージの方法と内容を定義します。
 
-1. [モニターの構成方法と同様][6]、メッセージに `@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
+1. [モニターの構成方法と同様][5]、メッセージに `@notification` を追加するか、ドロップダウンボックスでチームメンバーと接続されたインテグレーションを検索して、通知を受信する**ユーザーやサービス**を選択します。
 
-2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][7]のほか、以下の[条件付き変数][8]を使用できます。
+2. テストの通知**メッセージ**を入力します。このフィールドでは、標準の[マークダウン形式][6]のほか、以下の[条件付き変数][7]を使用できます。
 
     | 条件付き変数       | 説明                                                         |
     |----------------------------|---------------------------------------------------------------------|
@@ -113,38 +121,15 @@ UDP テストは次の頻度で実行できます。
 
 4. **Create** をクリックすると、テストの構成とモニターが保存されます。
 
-詳しくは、[Synthetic テストモニターの使用][9]をご覧ください。
+詳しくは、[Synthetic テストモニターの使用][8]をご覧ください。
 
-## 変数
-
-### ローカル変数を作成する
-
-ローカル変数を作成するには、右上の **Create Local Variable** をクリックします。以下の利用可能なビルトインのいずれかから選択することができます。
-
-`{{ numeric(n) }}`
-: `n` 桁の数字列を生成します。
-
-`{{ alphabetic(n) }}`
-: `n` 文字のアルファベット文字列を生成します。
-
-`{{ alphanumeric(n) }}`
-: `n` 文字の英数字文字列を生成します。
-
-`{{ date(n unit, format) }}` 
-: テストが + または - `n` 単位で開始された UTC 日付に対応する値を使用して、Datadog の許容される形式のいずれかで日付を生成します。
-
-`{{ timestamp(n, unit) }}` 
-: テストが +/- `n` 単位で開始された UTC タイムスタンプに対応する値を使用して、Datadog の許容される単位のいずれかでタイムスタンプを生成します。
-
-テスト結果のローカル変数値を難読化するには、**Hide and obfuscate variable value** を選択します。変数文字列を定義したら、**Add Variable** をクリックします。
+{{% synthetics-variables %}}
 
 ### 変数を使用する
 
-UDP テストの URL およびアサーションで、[`Settings` で定義されたグローバル変数][8]を使用できます。
+UDP テストの URL およびアサーションで、[**Settings** ページで定義されたグローバル変数][7]を使用できます。
 
 変数のリストを表示するには、目的のフィールドに `{{` と入力します。
-
-{{< img src="synthetics/api_tests/use_variable.mp4" alt="API テストでの変数の使用" video="true" width="90%" >}}
 
 ## テストの失敗
 
@@ -163,19 +148,19 @@ UDP テストの URL およびアサーションで、[`Settings` で定義さ�
 
 `TIMEOUT`
 : リクエストを一定時間内に完了できなかったことを示します。`TIMEOUT` には 2 種類あります。
-  - `TIMEOUT: The request couldn’t be completed in a reasonable time.`  は、リクエストの持続時間がテスト定義のタイムアウト (デフォルトは 60 秒に設定されています) に当たったことを示します。
+  - `TIMEOUT: The request couldn't be completed in a reasonable time.` は、リクエストの持続時間がテスト定義のタイムアウト (デフォルトは 60 秒に設定されています) に当たったことを示します。
   各リクエストについて、ネットワークウォーターフォールに表示されるのは、リクエストの完了したステージのみです。例えば、`Total response time` だけが表示されている場合、DNS の解決中にタイムアウトが発生したことになります。
   - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.`  は、テスト時間 (リクエスト＋アサーション) が最大時間 (60.5s) に達したことを示しています。
 
 ## アクセス許可
 
-デフォルトでは、Datadog 管理者および Datadog 標準ロールを持つユーザーのみが、Synthetic UDP テストを作成、編集、削除できます。Synthetic UDP テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][10]のいずれかにアップグレードします。
+デフォルトでは、Datadog 管理者および Datadog 標準ロールを持つユーザーのみが、Synthetic UDP テストを作成、編集、削除できます。Synthetic UDP テストの作成、編集、削除アクセスを取得するには、ユーザーをこれら 2 つの[デフォルトのロール][9]のいずれかにアップグレードします。
 
-[カスタムロール機能][11]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
+[カスタムロール機能][10]を使用している場合は、`synthetics_read` および `synthetics_write` 権限を含むカスタムロールにユーザーを追加します。
 
 ### アクセス制限
 
-アカウントに[カスタムロール][12]を使用しているお客様は、アクセス制限が利用可能です。
+アカウントに[カスタムロール][11]を使用しているお客様は、アクセス制限が利用可能です。
 
 組織内の役割に基づいて、UDP テストへのアクセスを制限することができます。UDP テストを作成する際に、(ユーザーのほかに) どのロールがテストの読み取りと書き込みを行えるかを選択します。
 
@@ -185,15 +170,14 @@ UDP テストの URL およびアサーションで、[`Settings` で定義さ�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/api/latest/synthetics/#get-all-locations-public-and-private
-[2]: /ja/synthetics/private_locations/
-[3]: /ja/synthetics/cicd_integrations
-[4]: /ja/synthetics/search/#search
-[5]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[6]: /ja/monitors/notify/#notify-your-team
-[7]: https://www.markdownguide.org/basic-syntax/
-[8]: /ja/synthetics/settings/#global-variables
-[9]: /ja/synthetics/guide/synthetic-test-monitors
-[10]: /ja/account_management/rbac/
-[11]: /ja/account_management/rbac#custom-roles
-[12]: /ja/account_management/rbac/#create-a-custom-role
+[1]: /ja/synthetics/private_locations/
+[2]: /ja/synthetics/cicd_integrations
+[3]: /ja/synthetics/search/#search
+[4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[5]: /ja/monitors/notify/#notify-your-team
+[6]: https://www.markdownguide.org/basic-syntax/
+[7]: /ja/synthetics/settings/#global-variables
+[8]: /ja/synthetics/guide/synthetic-test-monitors
+[9]: /ja/account_management/rbac/
+[10]: /ja/account_management/rbac#custom-roles
+[11]: /ja/account_management/rbac/#create-a-custom-role

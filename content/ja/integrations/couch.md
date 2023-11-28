@@ -15,7 +15,7 @@ assets:
       - couchdb.couchdb.request_time.n
       - couchdb.couchdb.request_time
       metadata_path: metadata.csv
-      prefix: couch.
+      prefix: couchdb.
     process_signatures:
     - couchjs
     service_checks:
@@ -31,9 +31,9 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
+- caching
 - data store
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/couch/README.md
 display_on_public_website: true
@@ -51,17 +51,17 @@ public_title: CouchDB
 short_description: CouchDB のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::キャッシュ
   - Category::データストア
   - Category::ログの収集
-  - Category::オートディスカバリー
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: CouchDB のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
   media: []

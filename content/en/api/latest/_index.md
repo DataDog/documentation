@@ -1,6 +1,6 @@
 ---
 title: API Reference
-type: api
+type: documentation
 further_reading:
   - link: /api/latest/using-the-api/
     tag: Documentation
@@ -11,6 +11,13 @@ further_reading:
   - link: /api/latest/rate-limits/
     tag: Documentation
     text: Rate Limits
+cascade:
+    algolia:
+        rank: 10
+        category: API
+        subcategory: API Reference
+algolia:
+  tags: ['api']
 ---
 
 {{< h2 >}}API Reference{{< /h2 >}}
@@ -21,7 +28,7 @@ The Datadog API is an HTTP REST API. The API uses resource-oriented URLs to call
 
 Authenticate to the API with an [API key][1] using the header `DD-API-KEY`. For some endpoints, you also need an [Application key][2], which uses the header `DD-APPLICATION-KEY`.
 
-To try out the API [![Run in Postman][3]](https://god.gw.postman.com/run-collection/20651290-b051b74a-bbe6-433a-8670-7ec450e80199?action=collection%2Ffork&collection-url=entityId%3D20651290-b051b74a-bbe6-433a-8670-7ec450e80199%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa#?env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0=)
+To try out the API [![Run in Postman][3]](https://god.gw.postman.com/run-collection/20651290-809b13c1-4ada-46c1-af65-ab276c434068?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D20651290-809b13c1-4ada-46c1-af65-ab276c434068%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa#?env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0=)
 
 [Using the API][4] is a guide to the endpoints.
 

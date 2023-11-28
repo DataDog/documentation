@@ -18,9 +18,14 @@ further_reading:
 
 The [Metrics Summary page][1] displays a list of your metrics reported to Datadog under a specified time frame: the past hour, day, or week. 
 
-Search your metrics by name or tag using the **Metric** or **Tag** search fields:
+Search your metrics by metric name or tag using the **Metric** or **Tag** search fields:
 
-{{< img src="metrics/summary/tagexplorer2.mp4" alt="Filter by Tag" video=true style="width:75%;">}}
+{{< img src="metrics/summary/tag_advancedfiltering.mp4" alt="The metrics summary page with NOT team:* entered in the Tag search bar" video=true style="width:75%;">}}
+
+Tag filtering supports boolean and wildcard syntax so that you can quickly identify: 
+* Metrics that are tagged with a particular tag key, for example, `team`: `team:*`
+* Metrics that are missing a particular tag key, for example, `team`: `NOT team:*`
+
 
 ## Facet panel
 
@@ -43,11 +48,12 @@ There are two buttons that allow you to configure multiple metrics at a time:
 
 * **Configure Tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™
 
-{{< img src="metrics/summary/bulkconfig.mp4" alt="Bulk Metric Tag Configuration" video=true style="width:75%;">}} 
+{{< img src="metrics/summary/bulkconfig_new-compressed.mp4" alt="Bulk Metric Tag Configuration" video="true" style="width:100%;" >}}
+
 
 ## Metric details sidepanel
 
-Click on any metric name to display its details sidepanel for more information regarding the metric’s metadata and tags: 
+Click on any metric name to display its details sidepanel for more information regarding the metric's metadata and tags: 
 
 {{< img src="metrics/summary/mwl_sidepanel.jpg" alt="Metric panel" style="width:75%;">}}
 
@@ -107,7 +113,7 @@ The metric description helps you understand what a metric does. Descriptions are
 
 ### Tags table
 
-The tags table offers multiple ways to explore all of the tag keys and tag values that are actively reporting in your metric’s data.
+The tags table offers multiple ways to explore all of the tag keys and tag values that are actively reporting in your metric's data.
 
 Use the tags table to:
 
@@ -127,10 +133,10 @@ For any particular tag key, you can:
 
 [Learn more about tagging][5].
 
-## Metrics without Limits\*
-Metrics without Limits\* provides you control over the size of your custom metrics without requiring any agent or code-level changes. 
+## Metrics without Limits™
+Metrics without Limits™ provides you control over the size of your custom metrics without requiring any agent or code-level changes. 
 
-**Note:** Metrics without Limits\* is only available for custom metrics.
+**Note:** Metrics without Limits™ is only available for custom metrics.
 
 You can configure tags using the bulk metric tag configuration button or the **Manage Tags** button in a metric's details side panel. 
 
@@ -138,18 +144,19 @@ You can configure tags using the bulk metric tag configuration button or the **M
 
 1. Click on your custom distribution metric name in the **Metrics Summary** table to open the metrics details side panel.
 2. Click the **Manage Tags** button to open the tag configuration modal.
-3. Click the **Custom...** tab to customize the tags you'd like to keep available for query. Tag configurations are _allowlists_ of the tags you'd like to keep. 
-4. Preview the effects of your proposed allowlist with the cardinality estimator before selecting **Save**.
 
-**Note**: The exclusion of tags is not supported in the allowlist-based customization of tags. Adding tags starting with `!` is not accepted. Also, the cardinality estimator requires the metric to be older than 48 hours.
+3. Select **Include tags...** or **Exclude tags...** to customize the tags you do or don't want to query for. For more information on tag configuration, see the [Metrics without Limits][10] documentation.
+4. Preview the effects of your proposed tag configuration with the cardinality estimator before selecting **Save**.
+
+**Note**: The cardinality estimator requires the metric to be older than 48 hours.
 
 ### Queryable tags 
 
-Once your metric has been configured with Metrics without Limits\*, you can view which tags remain Queryable -- ultimately those that contribute to _Indexed Custom Metrics_ volume. And you can toggle back to all originally submitted and ingested tags that contribute to your _Ingested Custom Metrics_ volume. 
+Once your metric has been configured with Metrics without Limits™, you can view which tags remain Queryable -- ultimately those that contribute to _Indexed Custom Metrics_ volume. And you can toggle back to all originally submitted and ingested tags that contribute to your _Ingested Custom Metrics_ volume. 
 
 ### Optimize your metric with aggregations in Advanced Mode
 
-For custom metrics of the count, gauge, or rate metric type, you can further refine your metric's configurations by optionally including additional aggregations with the advanced mode of Metrics without Limits\*. By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
+For custom metrics of the count, gauge, or rate metric type, you can further refine your metric's configurations by optionally including additional aggregations with the advanced mode of Metrics without Limits™. By default, Datadog stores the most frequently queried aggregation combination depending on the metric's type to preserve the mathematical accuracy of your configured metric's query as listed below: 
 
 - Configured counts/rates are queryable with time/space aggregations of `SUM`
 - Configured gauges are queryable in time/space aggregations of `AVG`
@@ -164,7 +171,7 @@ More aggregations are available should they be valuable to you. You can add or r
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[10]:/metrics/metrics-without-limits
+[10]: /metrics/metrics-without-limits
 [1]: https://app.datadoghq.com/metric/summary
 [2]: /metrics/explorer/
 [3]: /dashboards/

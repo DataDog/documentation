@@ -12,13 +12,13 @@ draft: false
 git_integration_title: amazon_workspaces
 has_logo: true
 integration_id: amazon-workspaces
-integration_title: AWS Workspaces
+integration_title: Amazon WorkSpaces
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_workspaces
-public_title: Datadog-AWS Workspaces インテグレーション
+public_title: Datadog-Amazon WorkSpaces インテグレーション
 short_description: 失敗した接続、セッションのレイテンシー、正常に動作していないワークスペースなどを追跡。
 version: '1.0'
 ---
@@ -27,7 +27,7 @@ version: '1.0'
 
 Amazon WorkSpaces は、AWS クラウド上で実行されるフルマネージド型のセキュアなデスクトップコンピューティングサービスです。
 
-このインテグレーションを有効にすると、Datadog にすべての Workspaces メトリクスを表示できます。
+このインテグレーションを有効にすると、Datadog にすべての Amazon WorkSpaces メトリクスを表示できます。
 
 ## セットアップ
 
@@ -50,8 +50,8 @@ Amazon WorkSpaces から S3 バケットまたは CloudWatch のいずれかに�
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
-2. lambda 関数がインストールされたら、AWS コンソールから、Amazon WorkSpaces ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
+2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon WorkSpaces ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
@@ -66,11 +66,11 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 ### イベント
 
-AWS WorkSpaces インテグレーションには、イベントは含まれません。
+Amazon WorkSpaces インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-AWS WorkSpaces インテグレーションには、サービスのチェック機能は含まれません。
+Amazon WorkSpaces インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
@@ -79,7 +79,7 @@ AWS WorkSpaces インテグレーションには、サービスのチェック�
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-workspaces
-[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_workspaces/amazon_workspaces_metadata.csv

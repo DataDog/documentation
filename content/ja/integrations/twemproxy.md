@@ -25,7 +25,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - web
-- autodiscovery
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/twemproxy/README.md
@@ -53,7 +52,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Web
-  - Category::オートディスカバリー
   - Category::ログの収集
   configuration: README.md#Setup
   description: twemproxy のパフォーマンスを視覚化し、他のアプリケーションと関連付け

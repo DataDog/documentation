@@ -1,12 +1,12 @@
 ---
 aliases:
-- /ja/tracing/opentracing/ruby
-- /ja/tracing/manual_instrumentation/ruby
-- /ja/tracing/custom_instrumentation/ruby
-- /ja/tracing/setup_overview/custom_instrumentation/ruby
-code_lang: ruby
-code_lang_weight: 20
-description: Ruby アプリケーションを手動でインスツルメントしてカスタムトレースを Datadog に送信します。
+- /ja/tracing/opentracing/java
+- /ja/tracing/manual_instrumentation/java
+- /ja/tracing/custom_instrumentation/java
+- /ja/tracing/setup_overview/custom_instrumentation/java
+code_lang: java
+code_lang_weight: 0
+description: Datadog Java APM トレーサーを使用してコードをインスツルメンテーションします。
 further_reading:
 - link: tracing/other_telemetry/connect_logs_and_traces
   tag: ドキュメント
@@ -15,11 +15,11 @@ further_reading:
   tag: ドキュメント
   text: サービス、リソース、トレースの詳細
 kind: documentation
-title: Ruby カスタムインスツルメンテーション
+title: Datadog ライブラリを使った Java カスタムインスツルメンテーション
 type: multi-code-lang
 ---
 <div class="alert alert-info">
-自動インスツルメンテーションとセットアップの手順をまだ読んでいない場合は、 <a href="https://docs.datadoghq.com/tracing/setup/python/">Pythonセットアップ手順</a>からご覧ください。
+自動インスツルメンテーションとセットアップの手順をまだ読んでいない場合は、<a href="https://docs.datadoghq.com/tracing/setup/java/">Java セットアップ手順</a>からご覧ください。
 </div>
 
 このページでは、Datadog APM を使用して可観測性を追加およびカスタマイズする一般的な使用例について説明します。
@@ -32,264 +32,319 @@ type: multi-code-lang
 
 `customer.id` などのアプリケーションコード内の動的な値に対応するカスタムタグをスパンに追加します。
 
-{{< tabs >}}
-{{% tab "Active Span" %}}
-コード内の任意のメソッドから現在アクティブな[スパン][1]にアクセスします。**注**: メソッドが呼び出され、現在アクティブなスパンがない場合、`active_span` は `nil` です。
+```java
+import org.apache.cxf.transport.servlet.AbstractHTTPServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-```ruby
-require 'ddtrace'
+import io.opentracing.Tracer;
+import io.opentracing.util.GlobalTracer;
 
-# get '/shopping_cart/:customer_id', to: 'shopping_cart#index'
-class ShoppingCartController < ApplicationController
-  # GET /shopping_cart
-  def index
-    #アクティブスパンを取得し、customer_id -> 254889 を設定します
-    Datadog::Tracing.active_span&.set_tag('customer.id', params.permit([:customer_id]))
-
-    # [...]
-  end
-
-  # POST /shopping_cart
-  def create
-    # [...]
-  end
-end
+@WebServlet
+class ShoppingCartServlet extends AbstractHttpServlet {
+    @Override
+    void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        // アクティブスパンを取得
+        final Span span = GlobalTracer.get().activeSpan();
+        if (span != null) {
+          // customer_id -> 254889
+          // customer_tier -> platinum
+          // cart_value -> 867
+          span.setTag("customer.id", customer_id);
+          span.setTag("customer.tier", customer_tier);
+          span.setTag("cart.value", cart_value);
+        }
+        // [...]
+    }
+}
 ```
-
-[1]: /ja/tracing/glossary/#spans
-{{< /tabs >}}
-
-{{% tab "Manually Instrumented Spans" %}}
-
-`#set_tag` を呼び出して、`Datadog::Span` オブジェクトに[タグ][1]を直接追加します。
-
-```ruby
-# Sinatra エンドポイントの例。
-# Datadog がリクエストをトレースします。
-get '/posts' do
-  Datadog::Tracing.trace('web.request') do |span|
-    span.set_tag('http.url', request.path)
-    span.set_tag('<TAG_KEY>', '<TAG_VALUE>')
-  end
-end
-```
-
-
-[1]: /ja/tracing/glossary/#span-tags
-{{% /tab %}}
-{{< /tabs >}}
 
 ### すべてのスパンにグローバルにタグを追加する
 
-`tags` オプションでトレーサーを構成して、すべての[スパン][2]に[タグ][1]を追加します。
+`dd.tags` プロパティを使用すると、アプリケーションに対して生成されたすべてのスパンにタグを設定できます。これは、アプリケーション、データセンター、または Datadog UI 内に表示したいその他のタグの統計をグループ化するのに役立ちます。
 
-```ruby
-Datadog.configure do |c|
-  c.tags = { 'team' => 'qa' }
-end
+```text
+java -javaagent:<DD-JAVA-エージェントパス>.jar \
+     -Ddd.tags=datacenter:njc,<タグキー>:<タグ値> \
+     -jar <アプリケーションパス>.jar
 ```
-
-環境変数 `DD_TAGS` を使用してアプリケーションのすべてのスパンにタグを設定することも可能です。Ruby の環境変数に関する詳細は、[セットアップドキュメント][3]を参照してください。
 
 ### スパンにエラーを設定する
 
-スパンにエラーを設定する方法には 2 つあります
+スパンの 1 つに関連するエラーをカスタマイズするには、スパンにエラータグを設定し、`Span.log()` を使用して「エラーイベント」を設定します。エラーイベントは、`Fields.ERROR_OBJECT->Throwable` エントリ、`Fields.MESSAGE->String`、またはその両方を含む `Map<String,Object>` です。
 
-- まず、`span.set_error` を呼び出し、Exception オブジェクトを渡します。これにより、エラーの種類、メッセージ、バックトレースが自動的に抽出されます。
-
-```ruby
-require 'ddtrace'
-require 'timeout'
-
-def example_method
-  span = Datadog::Tracing.trace('example.trace')
-  puts 'some work'
-  sleep(1)
-  raise StandardError, "This is an exception"
-rescue StandardError => error
-  Datadog::Tracing.active_span&.set_error(error)
-  raise
-ensure
-  span.finish
-end
-
-example_method()
+```java
+import io.opentracing.Span;
+import io.opentracing.tag.Tags;
+import io.opentracing.util.GlobalTracer;
+import io.opentracing.log.Fields;
+...
+    // 現在のメソッドで使用できない場合、アクティブなスパンを取得します
+    final Span span = GlobalTracer.get().activeSpan();
+    if (span != null) {
+      span.setTag(Tags.ERROR, true);
+      span.log(Collections.singletonMap(Fields.ERROR_OBJECT, ex));
+    }
 ```
 
-- 2 つ目は、デフォルトでエラータイプ、メッセージ、バックトレースを設定する `tracer.trace` を使用する方法。
-- この動作を構成するには、`on_error` オプションを使用します。これは、ブロックが `trace` に提供されブロックがエラーを発生すると呼び出されるハンドラーです。
-- `span` および `error` を引数として Proc が提供されます。
-- デフォルトで、`on_error` がスパンにエラーを設定します。
+**注**: `Span.log()` は、イベントを現在のタイムスタンプに関連付けるための一般的な OpenTracing メカニズムです。Java Tracer はエラーイベントのロギングのみをサポートします。
+または、`log()` を使用せずにスパンに直接エラータグを設定することもできます。
 
-デフォルトの動作: `on_error`
+```java
+import io.opentracing.Span;
+import io.opentracing.tag.Tags;
+import io.opentracing.util.GlobalTracer;
+import datadog.trace.api.DDTags;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
-{{% tab "ルートスパン" %}}
+...
+    final Span span = GlobalTracer.get().activeSpan();
+    if (span != null) {
+      span.setTag(Tags.ERROR, true);
+      span.setTag(DDTags.ERROR_MSG, ex.getMessage());
+      span.setTag(DDTags.ERROR_TYPE, ex.getClass().getName());
 
-カスタムの動作: `on_error`
-
-```ruby
-require 'ddtrace'
-require 'timeout'
-
-def example_method
-  puts 'some work'
-  sleep(1)
-  raise StandardError.new "This is a special exception"
-end
-
-custom_error_handler = proc do |span, error|
-  span.set_tag('custom_tag', 'custom_value')
-  span.set_error(error) unless error.message.include?("a special exception")
-end
-
-Datadog::Tracing.trace('example.trace', on_error: custom_error_handler) do |span|
-  example_method()
-end
+      final StringWriter errorString = new StringWriter();
+      ex.printStackTrace(new PrintWriter(errorString));
+      span.setTag(DDTags.ERROR_STACK, errorString.toString());
+    }
 ```
+
+**注**: [トレースビューのドキュメント][3]にリストされている関連するエラーメタデータを追加できます。現在のスパンがルートスパンではない場合、`dd-trace-api` ライブラリを使用してエラーとしてマークし、`MutableSpan` でルートスパンを取得してから、`setError(true)` を使用します。詳細については、[ルートスパンでのタグとエラーの設定][4]セクションを参照してください。
+
+### 子スパンからルートスパンにタグとエラーを設定する
+
+イベントまたは条件がダウンストリームで発生した場合、その動作または値をトップレベルまたはルートスパンのタグとして反映させることができます。これは、エラーをカウントしたり、パフォーマンスを測定したり、可観測性のためにダイナミックタグを設定したりするのに役立ちます。
+
+```java
+import java.util.Collections;
+import io.opentracing.Span;
+import io.opentracing.Scope;
+import datadog.trace.api.interceptor.MutableSpan;
+import io.opentracing.log.Fields;
+import io.opentracing.util.GlobalTracer;
+import io.opentracing.util.Tracer;
+
+Tracer tracer = GlobalTracer.get();
+final Span span = tracer.buildSpan("<OPERATION_NAME>").start();
+// 注: 下の try with resource ブロック内のスコープは
+// コードブロックの最後に自動的に閉じられます。
+// try with resource 句を使用しない場合は、
+// scope.close() をコールする必要があります。
+try (final Scope scope = tracer.activateSpan(span)) {
+    // ここで例外をスロー
+} catch (final Exception e) {
+    // スパンにエラータグを通常どおり設定します
+    span.log(Collections.singletonMap(Fields.ERROR_OBJECT, e));
+
+    // ルートスパンにエラーを設定します
+    if (span instanceof MutableSpan) {
+        MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
+        localRootSpan.setError(true);
+        localRootSpan.setTag("some.other.tag", "value");
+    }
+} finally {
+    // finally ブロックのスパンを閉じます
+    span.finish();
+}
+```
+
+スパンを手動で作成していない場合でも、 `GlobalTracer` を介してルートスパンにアクセスできます。
+
+```java
+import io.opentracing.Span;
+import io.opentracing.util.GlobalTracer;
+import datadog.trace.api.interceptor.MutableSpan;
+
+...
+
+final Span span = GlobalTracer.get().activeSpan();
+if (span != null && (span instanceof MutableSpan)) {
+    MutableSpan localRootSpan = ((MutableSpan) span).getLocalRootSpan();
+    // ルートスパンを活用
+}
+```
+
+**注**: `MutableSpan` と `Span` は多くの類似したメソッドを共有していますが、これらは異なる型です。`MutableSpan` は Datadog に固有のもので、OpenTracing API の一部ではありません。
+
+<br>
 
 ## タグの追加
 
-対応するライブラリインスツルメンテーションを使用しない場合（ [ライブラリの互換性][4]参照）、手動でコードをインスツルメントすることができます。`Datadog::Tracing.trace` メソッドを使ってコードにトレーシングを追加します。これは、Ruby コードにラップできます。
+[対応するフレームワークインスツルメンテーション][5]を使用しない場合や、より深いアプリケーションの[トレース][3]をする場合、完全なフレームグラフのため、またはコードの断片の実行時間を測定するために、コードにカスタムインスツルメンテーションを追加できます。
 
-Ruby コードをトレースするには、`Datadog::Tracing.trace` メソッドを使用できます。
+アプリケーションコードの変更が不可能な場合は、環境変数 `dd.trace.methods` を使用してこれらのメソッドの詳細を記述します。
 
-```ruby
-Datadog::Tracing.trace(name, resource: resource, **options) do |span|
-  # このブロックを、インスツルメントするコードでラップします
-  # さらに、ここでスパンを変更できます。
-  # 例: リソース名の変更、タグの設定
-end
+既存の `@Trace` または同様のアノテーションがある場合、またはアノテーションを使用して Datadog 内の不完全なトレースを完了する場合は、トレースアノテーションを使用します。
+
+
+### Datadog のトレース方法
+
+`dd.trace.methods` システムプロパティを使用すると、アプリケーションコードを変更せずに、サポートされていないフレームワークを可視化できます。
+
+```text
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=prod -Ddd.service.name=db-app -Ddd.trace.methods=store.db.SessionManager[saveSession] -jar path/to/application.jar
 ```
 
-ここで、`name` は、実行されている一般的な種類の操作を説明する `String` です（例: `'web.request'` または `'request.parse'`）。
+このアプローチと `@Trace` アノテーションの使用の唯一の違いは、オペレーション名とリソース名のカスタマイズオプションです。DD Trace Methods では、`operationName` は `trace.annotation` で、`resourceName` は `SessionManager.saveSession` です。
 
-`resource` は操作するアクションの名前を表す `String` です。同じリソースの値を持つトレースは、メトリクスの目的のために一緒にグループ化されます。リソースは通常、URL、クエリ、リクエストなど、ドメイン固有のものです (例: 'Article#submit’、http://example.com/articles/list.)。
+### トレースアノテーション
 
-利用可能なすべての `**options` については、[リファレンスガイド][5]を参照してください。
+`@Trace` をメソッドに追加して、`dd-java-agent.jar` での実行時にメソッドがトレースされるようにします。Agent が添付されていない場合は、このアノテーションはアプリケーションに影響しません。
+
+Datadog のトレースアノテーションは、[dd-trace-api 依存関係][6]が提供します。
+
+`@Trace` アノテーションには、デフォルトのオペレーション名 `trace.annotation` とトレースされるメソッドのリソース名があります。これらは `@Trace` アノテーションの引数として設定でき、インスツルメンテーション対象をより適切に反映します。これらは、`@Trace` アノテーションに設定できる唯一の引数です。
+
+```java
+import datadog.trace.api.Trace;
+
+public class SessionManager {
+
+    @Trace(operationName = "database.persist", resourceName = "SessionManager.saveSession")
+    public static void saveSession() {
+        // ここにメソッドを実装
+    }
+}
+```
+`dd.trace.annotations` システムプロパティを通じて、他のトレースメソッドアノテーションが Datadog によって `@Trace` として認識されることに注意してください。以前にコードを装飾したことがある場合は、[こちら][7]で一覧を確認できます。
 
 ### 新しいスパンを手動で作成する
 
-プログラムで、コードのブロックの周囲にスパンを作成します。この方法で作成されたスパンは、他のトレースメカニズムと自動的に統合されます。つまり、トレースがすでに開始されている場合、手動スパンはその親スパンとして呼び出し元を持ちます。同様に、コードのラップされたブロックから呼び出されたトレースメソッドは、その親として手動スパンを持ちます。
+自動インスツルメンテーション、`@Trace` アノテーション、`dd.trace.methods` コンフィギュレーションに加えて、プログラムで任意のコードブロックの周囲にスパンを作成することで、可観測性をカスタマイズできます。この方法で作成されたスパンは、他のトレースメカニズムと自動的に統合されます。つまり、トレースがすでに開始されている場合、手動スパンはその親スパンとして呼び出し元を持ちます。同様に、ラップされたコードブロックから呼び出されたトレースメソッドは、その親として手動スパンを持ちます。
 
-```ruby
-# Sinatra エンドポイントの例、
-# Datadog でリクエスト周りをトレーシング
-# データベースクエリ、およびレンダリング手順。
-get '/posts' do
-  Datadog::Tracing.trace('web.request', service: '<サービス名>', resource: 'GET /posts') do |span|
-    # activerecord 呼び出しをトレース
-    Datadog::Tracing.trace('posts.fetch') do
-      @posts = Posts.order(created_at: :desc).limit(10)
-    end
+```java
+import datadog.trace.api.DDTags;
+import io.opentracing.Scope;
+import io.opentracing.Span;
+import io.opentracing.Tracer;
+import io.opentracing.util.GlobalTracer;
 
-    # APM タグを追加
-    span.set_tag('http.method', request.request_method)
-    span.set_tag('posts.count', @posts.length)
+class SomeClass {
+    void someMethod() {
+        Tracer tracer = GlobalTracer.get();
 
-    # テンプレートレンダリングをトレース
-    Datadog::Tracing.trace('template.render') do
-      erb :index
-    end
-  end
-end
+        // サービス名とリソース名のタグが必要です。
+        // サービス名とリソース名のタグが必要です。
+        Span span = tracer.buildSpan("<OPERATION_NAME>")
+            .withTag(DDTags.SERVICE_NAME, "<SERVICE_NAME>")
+            .withTag(DDTags.RESOURCE_NAME, "<RESOURCE_NAME>")
+            .start();
+        // 注: 下の try with resource ブロック内のスコープは
+        // コードブロックの最後に自動的に閉じられます。
+        // try with resource 句を使用しない場合は、
+        // scope.close() をコールする必要があります。
+        try (Scope scope = tracer.activateSpan(span)) {
+            // タグは作成後に設定することもできます
+            span.setTag("my.tag", "value");
+
+            // トレースしているコード
+
+        } catch (Exception e) {
+            // スパンにエラーを設定します
+        } finally {
+            // finally ブロックのスパンを閉じます
+            span.finish();
+        }
+    }
+}
 ```
 
-### トレースの後処理
+### トレーサーの拡張
 
-一部のアプリケーションでは、トレースを Datadog に送信する前に、トレースを変更またはフィルタリングする必要がある場合があります。処理パイプラインを使用すると、このような動作を定義する*プロセッサー*を作成できます。
+トレーシングライブラリは拡張できるように設計されています。`TraceInterceptor` と呼ばれるカスタムポストプロセッサーを作成してスパンをインターセプトし、適宜 (例えば、正規表現を使用して) 調整または破棄することが可能です。次の例では、2 つのインターセプターを実装して、複雑な後処理ロジックを実現しています。
 
-#### フィルタリング
+```java
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+import datadog.trace.api.interceptor.TraceInterceptor;
+import datadog.trace.api.interceptor.MutableSpan;
 
-ブロックが真と評価された場合、`Datadog::Tracing::Pipeline::SpanFilter` プロセッサーを使用してスパンを削除できます。
+class FilteringInterceptor implements TraceInterceptor {
+    @Override
+    public Collection<? extends MutableSpan> onTraceComplete(
+            Collection<? extends MutableSpan> trace) {
 
-```ruby
-Datadog::Tracing.before_flush(
-  # 特定のリソースに一致するスパンを削除します
-  Datadog::Tracing::Pipeline::SpanFilter.new { |span| span.resource =~ /PingController/ },
-  # localhost に送られたスパンを削除します
-  Datadog::Tracing::Pipeline::SpanFilter.new { |span| span.get_tag('host') == 'localhost' }
-)
+        List<MutableSpan> filteredTrace = new ArrayList<>();
+        for (final MutableSpan span : trace) {
+          String orderId = (String) span.getTags().get("order.id");
+
+          // オーダー ID が "TEST-" で始まる場合はスパンをドロップします
+          if (orderId == null || !orderId.startsWith("TEST-")) {
+            filteredTrace.add(span);
+          }
+        }
+
+        return filteredTrace;
+    }
+
+    @Override
+    public int priority() {
+        // 番号の一意性が高いため、このインターセプターが最後になります
+        return 100;
+    }
+}
+
+class PricingInterceptor implements TraceInterceptor {
+    @Override
+    public Collection<? extends MutableSpan> onTraceComplete(
+            Collection<? extends MutableSpan> trace) {
+
+        for (final MutableSpan span : trace) {
+          Map<String, Object> tags = span.getTags();
+          Double originalPrice = (Double) tags.get("order.price");
+          Double discount = (Double) tags.get("order.discount");
+
+          // 他のタグの計算からタグを設定します
+          if (originalPrice != null && discount != null) {
+            span.setTag("order.value", originalPrice - discount);
+          }
+        }
+
+        return trace;
+    }
+
+    @Override
+    public int priority() {
+        return 20; // ある一意の番号
+    }
+}
 ```
 
-#### 処理
-
-`Datadog::Tracing::Pipeline::SpanProcessor` プロセッサーを使用してスパンを変更できます。
-
-```ruby
-Datadog::Tracing.before_flush(
-  # リソースフィールドから一致するテキストを削除します
-  Datadog::Tracing::Pipeline::SpanProcessor.new { |span| span.resource.gsub!(/password=.*/, '') }
-)
+アプリケーションの開始近くに、インターセプターを以下で登録します。
+```java
+datadog.trace.api.GlobalTracer.get().addTraceInterceptor(new FilteringInterceptor());
+datadog.trace.api.GlobalTracer.get().addTraceInterceptor(new PricingInterceptor());
 ```
 
-#### カスタムプロセッサー
-
-プロセッサーは、`trace` を引数として受け入れる `#call` に応答する任意のオブジェクトです（これは、`Datadog::Span` の `Array` です）。
-
-例えば、ショートハンドのブロック構文を使用する場合:
-
-```ruby
-Datadog::Tracing.before_flush do |trace|
-   # 処理ロジック...
-   trace
-end
-```
-
-カスタムプロセッサーのクラスの場合:
-
-```ruby
-class MyCustomProcessor
-  def call(trace)
-    # 処理ロジック...
-    trace
-  end
-end
-
-Datadog::Tracing.before_flush(MyCustomProcessor.new)
-```
-
-どちらの場合も、プロセッサーのメソッドは `trace` オブジェクトを返す必要があります。この戻り値は、パイプラインの次のプロセッサーに渡されます。
-
+<br>
 
 ## トレースクライアントと Agent コンフィギュレーション
 
-トレーシングクライアントと Datadog Agent の両方で、コンフィギュレーションを追加することで、B3 ヘッダーを使用したコンテキスト伝播や、ヘルスチェックなどの計算されたメトリクスでこれらのトレースがカウントされないように、特定のリソースがトレースを Datadog に送信しないように除外することができます。
+トレーシングクライアントと Datadog Agent の両方で、コンフィギュレーションを追加することで、コンテキスト伝播のための構成を行ったり、特定のリソースがトレースを Datadog に送信しないように除外して、ヘルスチェックなどのメトリクスの算出でこれらのトレースがカウントされないようにすることができます。
 
-### B3 ヘッダーの抽出と挿入
+### ヘッダー抽出と挿入によるコンテキストの伝搬
 
-Datadog APM トレーサーは、分散型トレーシングの [B3 ヘッダーの抽出][6]と挿入をサポートしています。
-
-分散したヘッダーの挿入と抽出は、挿入/抽出スタイルを構成することで制御されます。現在、次の 2 つのスタイルがサポートされています:
-
-- Datadog: `Datadog`
-- B3: `B3`
-
-挿入スタイルは次を使って構成できます:
-
-- 環境変数: `DD_PROPAGATION_STYLE_INJECT=Datadog,B3`
-
-環境変数の値は、挿入が有効になっているヘッダースタイルのカンマ区切りリストです。デフォルトでは、Datadog 挿入スタイルのみが有効になっています。
-
-抽出スタイルは次を使って構成できます:
-
-- 環境変数: `DD_PROPAGATION_STYLE_EXTRACT=Datadog,B3`
-
-環境変数の値は、抽出が有効になっているヘッダースタイルのカンマ区切りリストです。デフォルトでは、Datadog と B3 の抽出スタイルが有効になっています。
-
-複数の抽出スタイルが有効になっている場合、抽出試行はスタイルの構成順で実行され、最初に成功した抽出値が使われます。
+分散型トレーシングのコンテキストの伝搬は、ヘッダーの挿入と抽出で構成できます。詳しくは[トレースコンテキストの伝播][8]をお読みください。
 
 ### リソースのフィルター
 
-トレースはそれぞれのリソース名に基づいて除外可能で、これによりヘルスチェックなどの外形監視トラフィックが Datadog にレポートされるトレースから削除されます。この設定およびその他のセキュリティ/微調整に関するコンフィギュレーションについては[セキュリティ][7]ページを参照してください。
+トレースはそれぞれのリソース名に基づいて除外可能で、これによりヘルスチェックなどの外形監視トラフィックが Datadog にレポートされるトレースから削除されます。この設定およびその他のセキュリティ/微調整に関するコンフィギュレーションについては[セキュリティ][9]ページまたは[不要なリソースを無視する][10]を参照してください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/tracing/glossary/#span-tags
 [2]: /ja/tracing/glossary/#spans
-[3]: /ja/tracing/setup/ruby/#environment-and-tags
-[4]: /ja/tracing/compatibility_requirements/ruby/
-[5]: /ja/tracing/trace_collection/dd_libraries/ruby/#manual-instrumentation
-[6]: https://github.com/openzipkin/b3-propagation
-[7]: /ja/tracing/security
+[3]: /ja/tracing/glossary/#trace
+[4]: /ja/tracing/custom_instrumentation/java/#set-tags-errors-on-a-root-span-from-a-child-span
+[5]: /ja/tracing/setup/java/#compatibility
+[6]: https://mvnrepository.com/artifact/com.datadoghq/dd-trace-api
+[7]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/instrumentation/trace-annotation/src/main/java/datadog/trace/instrumentation/trace_annotation/TraceAnnotationsInstrumentation.java#L37
+[8]: /ja/tracing/trace_collection/trace_context_propagation/java/
+[9]: /ja/tracing/security
+[10]: /ja/tracing/guide/ignoring_apm_resources/

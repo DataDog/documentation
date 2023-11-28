@@ -1,8 +1,8 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- クラウド
+- プロビジョニング
 dependencies: []
 description: Azure Functions のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_functions/
@@ -20,6 +20,7 @@ public_title: Datadog-Microsoft Azure Functions インテグレーション
 short_description: Azure Functions のキーメトリクスを追跡。
 version: '1.0'
 ---
+
 ## 概要
 
 Azure Functions は、イベント駆動型のサーバーレスコンピューティングプラットフォームです。複雑なオーケストレーション問題も解決します。追加のセットアップなしでローカルでビルドおよびデバッグし、クラウドで大規模にデプロイおよび運用が可能なうえ、トリガーとバインドによりサービスを統合します。

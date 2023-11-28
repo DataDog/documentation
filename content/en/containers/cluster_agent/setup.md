@@ -1,8 +1,10 @@
 ---
-title: Cluster Agent Setup
+title: Set Up the Datadog Cluster Agent
 kind: documentation
 aliases:
 - /agent/cluster_agent/setup
+- /agent/cluster_agent/event_collection
+- /containers/cluster_agent/event_collection
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-cluster-agent/"
   tag: "Blog"
@@ -13,22 +15,21 @@ further_reading:
 - link: "/agent/cluster_agent/clusterchecks/"
   tag: "Documentation"
   text: "Running Cluster Checks with Autodiscovery"
-- link: "/agent/kubernetes/daemonset_setup/"
-  tag: "Documentation"
-  text: "Kubernetes DaemonSet Setup"
 - link: "/agent/cluster_agent/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting the Datadog Cluster Agent"
+algolia:
+  tags: ['cluster agent']
 ---
 
-To set up the Datadog Cluster Agent on your Kubernetes cluster, follow these steps:
+If you deploy the Datadog Agent using Helm chart v2.7.0+ or Datadog Operator v0.7.0+, the Cluster Agent is enabled by default.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-The Cluster Agent is enabled by default since Helm Chart `2.7.0`.
+The Cluster Agent is enabled by default since Helm chart v2.7.0.
 
-To activate it on older versions or if you use a custom [datadog-values.yaml][1] overriding the `clusterAgent` key, update your [datadog-values.yaml][1] file with the following Cluster Agent configuration, then upgrade your Datadog Helm chart:
+To activate it on older versions, or if you use a custom [datadog-values.yaml][1] that overrides the `clusterAgent` key, update your [datadog-values.yaml][1] file with the following Cluster Agent configuration:
 
   ```yaml
   clusterAgent:
@@ -36,40 +37,49 @@ To activate it on older versions or if you use a custom [datadog-values.yaml][1]
     enabled: true
   ```
 
+Then, upgrade your Datadog Helm chart.
+
 This automatically updates the necessary RBAC files for the Cluster Agent and Datadog Agent. Both Agents use the same API key.
 
-This also automatically generates a random token in a `Secret` shared between both the Cluster Agent and the Datadog Agent. You can manually set this by specifying a token in the `clusterAgent.token` configuration. You can also manually set this by specifying an existing `Secret` name containing a `token` value through the `clusterAgent.tokenExistingSecret` configuration.
+This also automatically generates a random token in a `Secret` shared by both the Cluster Agent and the Datadog Agent to secure communication. You can manually specify this token using the `clusterAgent.token` configuration. You can alternatively set this by referencing the name of an existing `Secret` containing a `token` value through the `clusterAgent.tokenExistingSecret` configuration.
 
-When set manually this token must be 32 alphanumeric characters.
+When set manually, this token must be 32 alphanumeric characters.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-The Cluster Agent is enabled by default since Datadog Operator `v0.7.0`.
+The Cluster Agent is enabled by default since Datadog Operator v1.0.0. The Operator creates the necessary RBACs, deploys the Cluster Agent, and modifies the Agent DaemonSet configuration.
 
-To activate it explicitly, update your `DatadogAgent` object with the following configuration:
+This also automatically generates a random token in a `Secret` shared by both the Cluster Agent and the Datadog Agent to secure communication. You can manually specify this token by setting the `global.clusterAgentToken` field. You can alternatively set this by referencing the name of an existing `Secret` and the data key containing this token.
 
   ```yaml
-spec:
-  clusterAgent:
-    # clusterAgent.enabled -- Set this to false to disable Datadog Cluster Agent
-    enabled: true
+  apiVersion: datadoghq.com/v2alpha1
+  kind: DatadogAgent
+  metadata:
+    name: datadog
+  spec:
+    global:
+      credentials:
+        apiKey: <DATADOG_API_KEY>
+      clusterAgentTokenSecret:
+        secretName: <SECRET_NAME>
+        keyName: <KEY_NAME>
   ```
 
-The Operator then creates the necessary RBACs, deploys the Cluster Agent and modifies the Agent DaemonSet configuration to use a randomly generated token (to secure communication between Agent and Cluster Agent). You can manually specify this token by setting the `credentials.token` field.
+When set manually, this token must be 32 alphanumeric characters.
 
-When set manually this token must be 32 alphanumeric characters.
-
+[1]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
 {{% /tab %}}
-{{% tab "Daemonset" %}}
+{{% tab "Manual (DaemonSet)" %}}
 
-1. [Set up the Datadog Cluster Agent](#configure-the-datadog-cluster-agent).
-2. [Configure your Agent to communicate with the Datadog Cluster Agent](#configure-the-datadog-agent)
+To set up the Datadog Cluster Agent using a DaemonSet:
+1. [Configure Cluster Agent RBAC permissions](#configure-cluster-agent-rbac-permissions).
+2. [Secure Cluster Agent to Agent communication](#secure-cluster-agent-to-agent-communication).
+3. [Create the Cluster Agent and its service](#create-the-cluster-agent-and-its-service).
+4. [Configure the node Agent to communicate with the Cluster Agent](#configure-datadog-agent-communication).
 
-## Configure the Datadog Cluster Agent
-
-### Configure RBAC permissions
+### Configure Cluster Agent RBAC permissions
 
 The Datadog Cluster Agent needs a proper RBAC to be up and running:
 
@@ -143,33 +153,33 @@ This environment variable must be configured (using the same setup) when [Config
 At this point, you should see:
 
 ```shell
-$ kubectl get deploy
+kubectl get deploy
 
 NAME                    DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 datadog-cluster-agent   1         1         1            1           1d
 
-$ kubectl get secret
+kubectl get secret
 
 NAME                    TYPE                                  DATA      AGE
 datadog-cluster-agent   Opaque                                1         1d
 
-$ kubectl get pods -l app=datadog-cluster-agent
+kubectl get pods -l app=datadog-cluster-agent
 
 datadog-cluster-agent-8568545574-x9tc9   1/1       Running   0          2h
 
-$ kubectl get service -l app=datadog-cluster-agent
+kubectl get service -l app=datadog-cluster-agent
 
 NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(S)          AGE
 datadog-cluster-agent   ClusterIP      10.100.202.234   none               5005/TCP         1d
 ```
 
-**Note**: If you already have the Datadog Agent running, you may need to apply the [Agent's rbac.yaml manifest][12] before the Cluster Agent can start running.
+**Note**: If you already have the Datadog Agent running, you may need to apply the [Agent's `rbac.yaml` manifest][12] before the Cluster Agent can start running.
 
-## Configure the Datadog Agent
+## Configure Datadog Agent communication
 
-After having set up the Datadog Cluster Agent, modify your Datadog Agent configuration to communicate with the Datadog Cluster Agent. You can reference the provided [daemonset.yaml manifest][13] for a full example.
+Modify your Datadog Agent configuration to communicate with the Datadog Cluster Agent.
 
-In your existing `Daemonset` [manifest file][2] set the environment variable `DD_CLUSTER_AGENT_ENABLED` to `true`. Then, set the `DD_CLUSTER_AGENT_AUTH_TOKEN` using the same syntax used in [Secure Cluster-Agent-to-Agent Communication][14].
+In your existing DaemonSet [manifest file][2], set the environment variable `DD_CLUSTER_AGENT_ENABLED` to `true`. Then, set the `DD_CLUSTER_AGENT_AUTH_TOKEN` using the same syntax used in [Secure Cluster-Agent-to-Agent Communication][13].
 
   ```yaml
   - name: DD_CLUSTER_AGENT_ENABLED
@@ -181,7 +191,7 @@ In your existing `Daemonset` [manifest file][2] set the environment variable `DD
         key: token
   ```
 
-After redeploying your `Daemonset` with these configurations in place, the Datadog Agent is able to communicate with the Cluster Agent.
+After redeploying your DaemonSet with these configurations in place, the Datadog Agent is able to communicate with the Cluster Agent. You can reference the provided Cluster Agent [`daemonset.yaml` manifest][14] for a full example.
 
 [1]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/manifests/cluster-agent
 [2]: /agent/kubernetes/?tab=daemonset
@@ -195,14 +205,14 @@ After redeploying your `Daemonset` with these configurations in place, the Datad
 [10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: https://app.datadoghq.com/access/application-keys
 [12]: /agent/cluster_agent/setup/?tab=daemonset#configure-rbac-permissions
-[13]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/daemonset.yaml
-[14]: /agent/cluster_agent/setup/?tab=daemonset#secure-cluster-agent-to-agent-communication
+[13]: /agent/cluster_agent/setup/?tab=daemonset#secure-cluster-agent-to-agent-communication
+[14]: https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/cluster-agent/daemonset.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Verification
 
-You can verify your Datadog Agent pods and Cluster Agent pods are running by executing the command:
+You can verify your Datadog Agent Pods and Cluster Agent Pods are running by executing the command:
 
 ```shell
 kubectl get pods | grep agent
@@ -238,7 +248,7 @@ Datadog Cluster Agent
 
 Kubernetes events are beginning to flow into your Datadog account, and relevant metrics collected by your Agents are tagged with their corresponding cluster level metadata.
 
-### Windows containers
+## Windows containers
 
 The Datadog Cluster Agent can only be deployed on Linux nodes.
 
@@ -264,9 +274,9 @@ datadog:
 
 For more information, see [Troubleshooting Windows Container Issues][2].
 
-#### Monitoring AWS managed services
+## Monitoring AWS managed services
 
-To monitor an AWS managed service like MSK, ElastiCache, or RDS, set `clusterChecksRunner` to create a pod with an IAM role assigned through the serviceAccountAnnotation in the Helm chart. Then, set the integration configurations under `clusterAgent.confd`.
+To monitor an AWS managed service like MSK, ElastiCache, or RDS, set `clusterChecksRunner` to create a Pod with an IAM role assigned through the serviceAccountAnnotation in the Helm chart. Then, set the integration configurations under `clusterAgent.confd`.
 
 {{< code-block lang="yaml" >}}
 clusterChecksRunner:
@@ -286,11 +296,9 @@ clusterAgent:
           region_name: us-west-2
 {{< /code-block >}}
 
-
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/agent/guide/agent-commands/?tab=agentv6v7#agent-information
+[1]: https://docs.datadoghq.com/agent/configuration/agent-commands/?tab=agentv6v7#agent-information
 [2]: https://docs.datadoghq.com/agent/troubleshooting/windows_containers/#mixed-clusters-linux--windows

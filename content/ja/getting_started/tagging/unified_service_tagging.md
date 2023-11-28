@@ -1,6 +1,10 @@
 ---
-aliases:
-- /ja/getting_started/tagging/unified_service_tagging
+algolia:
+  tags:
+  - 統合サービスタグ
+  - 統合
+  - 統合サービス
+  - サービスタグ
 further_reading:
 - link: /getting_started/tagging/using_tags
   tag: Documentation
@@ -66,7 +70,7 @@ title: 統合サービスタグ付け
 
 2. [Docker][2] を使用している場合は、Agent がコンテナの [Docker ソケット][7]にアクセスできることを確認してください。これにより、Agent は環境変数を検出し、それを標準タグにマッピングできます。
 
-4. 以下に詳述する完全なコンフィギュレーションまたは部分的なコンフィギュレーションのいずれかに基づいて環境を構成します。
+3. コンテナオーケストレーションサービスに対応する環境は、以下のように完全構成または部分構成のいずれかに基づいて構成します。
 
 #### コンフィギュレーション
 

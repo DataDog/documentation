@@ -13,16 +13,9 @@ further_reading:
   text: Étude et analyse des logs historiques avec Online Archives
 is_beta: true
 kind: documentation
+private: true
 title: Online Archives
 ---
-
-{{< site-region region="us3,us5,eu,gov" >}}
-
-La fonctionnalité Online Archives est uniquement disponible pour les clients Datadog utilisant le site Datadog hébergé sur AWS (US1).
-
-{{< /site-region >}}
-
-{{< site-region region="us" >}}
 
 <div class="alert alert-warning">
 L'accès à la solution Online Archives est actuellement limité. Pour utiliser cette fonctionnalité, contactez l'<a href="/help/">assistance Datadog</a>.
@@ -93,11 +86,12 @@ Vous trouverez ci-dessous quelques exemples de stratégies de rétention de logs
 
 {{< img src="logs/log_configuration/online_archives/exclusion.png" alt="Comment exclure des logs de l'index" style="width:100%;">}}
 
+### Désactivation d'Online Archives
+Sélectionnez l'index pour lequel vous souhaitez désactiver Online Archives, puis désactivez l'option Online Archives.
+
 **Remarque** : l'ordre des index est important. En effet, si plusieurs index correspondent au filtre d'index, les logs `team:security` sont envoyés vers le premier index.
 
 [1]: /fr/logs/log_configuration/indexes/#indexes-filters
 [2]: /fr/logs/log_configuration/indexes/#exclusion-filters
 [3]: https://app.datadoghq.com/logs/pipelines/indexes
 [4]: https://app.datadoghq.com/logs
-
-{{< /site-region >}}

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: moogsoft
 app_uuid: db3d32c6-1127-4bd5-b270-01aa573616b7
 assets:
@@ -22,10 +24,10 @@ author:
   support_email: support@moogsoft.com
   vendor_id: moogsoft
 categories:
-- マーケットプレイス
 - 自動化
+- インシデント
+- マーケットプレイス
 - notification
-- モニタリング
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -53,18 +55,20 @@ public_title: Moogsoft
 short_description: 高度なセルフサービス AI 駆動の可観測性プラットフォーム
 supported_os:
 - linux
-- mac os
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Mac OS
-  - Supported OS::Windows
-  - Category::Marketplace
   - Category::Automation
+  - Category::Incidents
+  - Category::Marketplace
   - Category::Notification
-  - Category::Monitoring
+  - Offering::Integration
+  - Offering::Software License
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: 高度なセルフサービス AI 駆動の可観測性プラットフォーム
   media:
@@ -80,6 +84,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Moogsoft
+  uninstallation: README.md#Uninstallation
 ---
 
 

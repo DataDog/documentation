@@ -143,27 +143,25 @@ For more information, see [Watchdog][50].
 
 Find out how to monitor individual client and aggregate usage of the Datadog platform in multi-organization account setups with [Billing and Usage Reporting][51].
 
-
-
 [1]: /monitors
 [2]: https://www.datadoghq.com/blog/monitoring-101-alerting/
-[3]: https://learn.datadoghq.com/courses/intro-to-monitoring
-[4]: /monitors/create/types/anomaly/
+[3]: https://learn.datadoghq.com/courses/introduction-to-observability
+[4]: /monitors/types/anomaly/
 [5]: /monitors/guide/monitor-arithmetic-and-sparse-metrics/
-[6]: /monitors/create/types/metric/?tab=change
-[7]: /monitors/create/types/forecasts/?tab=linear
-[8]: /monitors/create/types/outlier/?tab=dbscan
-[9]: /monitors/create/types/composite/
+[6]: /monitors/types/metric/?tab=change
+[7]: /monitors/types/forecasts/?tab=linear
+[8]: /monitors/types/outlier/?tab=dbscan
+[9]: /monitors/types/composite/
 [10]: /api/latest/monitors/
 [11]: https://www.youtube.com/watch?v=Ell_kU4gEGI
 [12]: https://learn.hashicorp.com/tutorials/terraform/datadog-provider
 [13]: https://www.datadoghq.com/blog/tagging-best-practices-monitors/
 [14]: https://www.datadoghq.com/blog/datadog-recommended-monitors/
 [15]: /monitors/manage/
-[16]: /monitors/create/
+[16]: /monitors/
 [17]: https://www.youtube.com/watch?v=Ma5pr-u9bjk
 [18]: /monitors/guide/why-did-my-monitor-settings-change-not-take-effect/
-[19]: /monitors/notify/downtimes/
+[19]: /monitors/downtimes/
 [20]: https://www.datadoghq.com/blog/mute-datadog-alerts-planned-downtime/
 [21]: https://www.datadoghq.com/blog/managing-datadog-with-terraform/
 [22]: /api/latest/downtimes/
@@ -190,9 +188,9 @@ Find out how to monitor individual client and aggregate usage of the Datadog pla
 [43]: /api/latest/embeddable-graphs/
 [44]: /dashboards/guide/embeddable-graphs-with-template-variables/
 [45]: https://www.datadoghq.com/blog/establishing-service-level-objectives/
-[46]: /monitors/guide/slo-checklist/
+[46]: /service_management/service_level_objectives/guide/slo-checklist
 [47]: https://www.datadoghq.com/blog/define-and-manage-slos/
 [48]: https://www.datadoghq.com/blog/slo-monitoring-tracking/
 [49]: /api/latest/service-level-objectives/
-[50]: /monitors/create/types/watchdog/
+[50]: /monitors/types/watchdog/
 [51]: /partners/billing-and-usage-reporting/

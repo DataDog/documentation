@@ -25,7 +25,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - processing
-- autodiscovery
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mapreduce/README.md
@@ -53,7 +52,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::処理
-  - Category::オートディスカバリー
   - Category::ログの収集
   configuration: README.md#Setup
   description: マップのステータスと期間を監視し、タスクを削減。

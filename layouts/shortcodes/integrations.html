@@ -11,20 +11,6 @@
 
 <!-- build filters -->
 {{ $.Scratch.Set "filters" (slice)}}
-{{ range $index, $element := $integration_list }}
-    {{ $urlname := $element.File.TranslationBaseName }}
-    {{ $src := (print "images/integrations_logos/" ($urlname | lower) ".png")}}
-    {{ $indx :=  $src }}
-    {{ range $e := $element.Params.categories }}
-        {{ if and $indx (fileExists (print "static/" $src)) }}
-          {{ with $e }}
-            {{ if not (in ($.Scratch.Get "filters") (. | lower)) }}
-                {{ $.Scratch.Add "filters" (. | lower) }}
-            {{ end }}
-          {{ end }}
-        {{ end }}
-    {{ end }}
-{{ end }}
 
 <!-- build tiles -->
 {{- $s := newScratch -}}
@@ -49,6 +35,7 @@
   {{- $curr_categories := slice -}}
   {{- range $i, $e := $v.Params.categories -}}
     {{- $curr_categories = $curr_categories | append (print "cat-" (replace $e "/" "" | urlize)) -}}
+
   {{- end -}}
   {{- $s.SetInMap $path "tags" ($curr_categories | default slice) -}}
   {{- $basename := $v.Params.integration_id | default ($v.Params.name | lower) | default ($v.File.TranslationBaseName | lower) }}
@@ -56,10 +43,16 @@
   {{- if in (slice "system" "network") $v.Params.integration_id  -}}
     {{- $basename = ($v.Params.name | lower) | default ($v.File.TranslationBaseName | lower) -}}
   {{- end -}}
-  {{- $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" $basename "variant" "large") -}}
+  {{- $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" $basename "variant" "large") $basename "large" -}}
   {{- $s.SetInMap $path "int_logo" $int_logo -}}
   {{ if $int_logo }}
     {{- $s.SetInMap "hits" $path ($s.Get $path) -}}
+    <!-- add to filters, only if image exists (aka tile exists) -->
+    {{- range $i, $e := $v.Params.categories -}}
+      {{ if not (in ($.Scratch.Get "filters") (. | lower)) }}
+        {{ $.Scratch.Add "filters" (. | lower) }}
+      {{ end }}
+    {{- end -}}
   {{ end }}
 {{- end -}}
 {{- $integrationData := ($s.GetSortedMapValues "hits") -}}
@@ -76,14 +69,14 @@
     <div id="integration-popper" class="dropdown-menu" style="display:none;" data-ref="mobilecontrols">
         <a data-ref="filter" data-filter="all" href="#all" class="dropdown-item sort-time">{{ i18n "all" }}</a>
         {{ range $i, $e := (sort ($.Scratch.Get "filters") "value" "asc") }}
-            <a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="dropdown-item sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>
+            <a id="cat-{{ replace $e "/" "" | urlize }}" data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="dropdown-item sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>
         {{ end }}
     </div>
 </div>
 
 <div class="filters controls d-none d-sm-block" data-ref="controls">
-    <a data-ref="filter" data-filter="all" href="#all" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-reset">{{ i18n "all" }}</a>
-    {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}<a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 mr-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>{{ end }}
+    <a data-ref="filter" data-filter="all" href="#all" class="mb-1 me-1 btn btn-sm-tag btn-outline-secondary sort-reset">{{ i18n "all" }}</a>
+    {{ range $i, $e := (sort ($.Scratch.Get "filters")) }}<a data-ref="filter" data-filter=".cat-{{ replace $e "/" "" | urlize }}" href="#cat-{{ replace $e "/" "" | urlize }}" class="mb-1 me-1 btn btn-sm-tag btn-outline-secondary sort-time sort-{{ replace $e "/" "" | urlize }}">{{ $e | upper }}</a>{{ end }}
 </div>
 
 <div class="input-group mt-4 mb-4">
@@ -107,7 +100,7 @@
                   <div class="integration {{ if $v.is_marketplace }}integration-marketplace{{ end }}">
                     {{ if $v.is_marketplace }}
                         <div class="card-banner">
-                            <p class="font-primary font-weight-bold text-uppercase text-center">Marketplace</p>
+                            <p class="font-primary fw-bold text-uppercase text-center">Marketplace</p>
                         </div>
                     {{ end }}
                     <div id="{{ $v.name }}" class="card-content">

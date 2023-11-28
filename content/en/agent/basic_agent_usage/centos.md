@@ -1,5 +1,5 @@
 ---
-title: Basic Agent Usage for CentOS
+title: Basic Agent Usage for CentOS (and Rocky/Alma Linux)
 kind: documentation
 platform: CentOS
 aliases:
@@ -14,15 +14,21 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
+- link: "/agent/basic_agent_usage/#agent-architecture"
+  tag: "Documentation"
+  text: "Find out more about the Agent's architecture"
+- link: "/agent/configuration/network#configure-ports"
+  tag: "Documentation"
+  text: "Configure inbound ports"
 ---
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for CentOS. To install the Datadog Agent, follow the [Agent Installation Instructions][1] for CentOs.
+This page outlines the basic features of the Datadog Agent for CentOS and its derivatives, Rocky Linux and Alma Linux. To install the Datadog Agent, follow the [Agent Installation Instructions][1] for CentOs.
 
 Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
-**Note**: CentOS 6 and above are supported.
+**Note**: CentOS 6 and above are supported on the 64-bit x86 architecture. CentOS/Rocky/Alma 8 and above are supported on the 64-bit Arm v8 architecture.
 
 ## Commands
 
@@ -124,6 +130,6 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/centos
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=centos
 [2]: /agent/troubleshooting/
 [3]: /developers/guide/custom-python-package/

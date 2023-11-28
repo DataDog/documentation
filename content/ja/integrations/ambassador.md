@@ -15,13 +15,14 @@ assets:
     source_type_name: Ambassador
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: Ambassador
   sales_email: hello@datawire.io
   support_email: hello@datawire.io
 categories:
 - cloud
-- orchestration
 - containers
+- kubernetes
+- orchestration
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/ambassador/README.md
 display_on_public_website: true
@@ -39,17 +40,18 @@ public_title: Ambassador API Gateway
 short_description: Ambassador は、Envoy 上に構築された Kubernetes ネイティブのオープンソース API ゲートウェイです
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::クラウド
-  - Category::オーケストレーション
   - Category::コンテナ
+  - Category::Kubernetes
+  - Category::オーケストレーション
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Ambassador は、Envoy 上に構築された Kubernetes ネイティブのオープンソース API ゲートウェイです
   media: []

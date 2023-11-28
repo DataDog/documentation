@@ -19,12 +19,13 @@ author:
   homepage: https://www.rapdev.io
   name: RapDev
   sales_email: ddsales@rapdev.io
-  support_email: datadog-engineering@rapdev.io
+  support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
+- caching
+- data store
 - marketplace
 - oracle
-- data store
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -48,18 +49,19 @@ pricing:
   tag: host
   unit_label: Base de données Oracle TimesTen
   unit_price: 500
-public_title: Intégration Oracle TimesTen
+public_title: Oracle TimesTen
 short_description: Surveillez les performances de vos bases de données Oracle TimesTen
 supported_os:
 - linux
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
+  - Category::Caching
+  - Category::Data Store
   - Category::Marketplace
   - Category::Oracle
-  - Category::Data Store
   - Offering::Integration
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: Surveillez les performances de vos bases de données Oracle TimesTen
   media:
@@ -81,7 +83,8 @@ tile:
     media_type: image
   overview: README.md#Overview
   support: README.md#Support
-  title: Intégration Oracle TimesTen
+  title: Oracle TimesTen
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -96,14 +99,14 @@ L'intégration inclut un dashboard prêt à l'emploi qui fournit une vue d'ensem
 
 Pour obtenir de l'aide ou demander l'ajout d'une fonctionnalité, contactez RapDev.io aux coordonnées suivantes :
 
- - E-mail :  datadog-engineering@rapdev.io
+ - E-mail : support@rapdev.io
  - Chat : [rapdev.io](https://www.rapdev.io/#Get-in-touch)
  - Téléphone : 855-857-0222
 
 ---
 Développé avec ❤️  à Boston
 
-*Ce n'est pas l'intégration que vous recherchez ? Une fonctionnalité importante pour votre organisation est manquante ? [Écrivez-nous](mailto:datadog-engineering@rapdev.io) et nous l'ajouterons !*
+*Ce n'est pas l'intégration que vous recherchez ? Une fonctionnalité importante pour votre organisation est manquante ? [Écrivez-nous](mailto:support@rapdev.io) et nous l'ajouterons !*
 
 ---
 Cette application est disponible sur le Marketplace et développée par un partenaire technologique de Datadog. <a href="https://app.datadoghq.com/marketplace/app/rapdev-oracle-timesten" target="_blank">Cliquez ici</a> pour l'acheter.

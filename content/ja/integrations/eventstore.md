@@ -16,10 +16,11 @@ assets:
     source_type_name: Eventstore
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
+- キャッシュ
 - data store
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/eventstore/README.md
@@ -38,15 +39,16 @@ public_title: Eventstore
 short_description: Eventstore のメトリクスを収集
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::Caching
   - Category::Data Store
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Eventstore のメトリクスを収集
   media: []

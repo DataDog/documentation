@@ -150,12 +150,6 @@ $ddpurple: #632ca6;
             top: 94px;
             height: 65px;
         }
-
-        #breadcrumbs {
-            &:lang(ja) {
-                font-size: 15px;
-            }
-        }
     }
 
     .api-content {
@@ -234,10 +228,18 @@ $ddpurple: #632ca6;
     .code-snippet-wrapper button[disabled] {
       font-weight: bold;
       color: #632ca6;
+      width: 100%;
+      justify-content: space-between;
+      display: flex;
+      text-align: left;
+      gap: 35px;
     }
     #accordion .btn.collapsed,
     .example-accordion .btn.collapsed {
       color: #666;
+      & i {
+        transform: rotate(180deg);
+      }
     }
     #accordion pre,
     .example-accordion pre {
@@ -248,4 +250,21 @@ $ddpurple: #632ca6;
       opacity:1;
     }
 
+
+    // Style api tables from markdown to be purple similar to generated api examples
+    table,
+    .table {
+        background-color: #fdfcff;
+        border: 1px solid #ebebeb;
+        & > thead > tr > th {
+            background: #f3edff;
+        }
+        & > thead > tr > th,
+        & > tbody > tr > td {
+            border-left: 1px solid #ebebeb !important;
+        }
+        & > tbody tr:nth-child(2n) {
+            background: #fdfcff;
+        }
+    }
 }

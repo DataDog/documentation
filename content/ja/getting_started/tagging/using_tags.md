@@ -132,45 +132,22 @@ title: タグの使用方法
 
 ## アラート設定
 
-{{< tabs >}}
-{{% tab "Manage Monitors" %}}
+[割り当てられたタグ][32]によってモニターや[モニターのダウンタイム][31]を絞り込むには、検索バーかファセットのチェックボックスを使用します。検索バーの形式は `tag:<キー>:<値>` で、`tag:service:coffee-house` などです。特定のタグを持つモニターを検索から除外するには、 `-` を使用して、`tag:-service:coffee-house` とします。
 
-[割り当てられたタグ][1]によってモニターを絞り込むには、検索バーかファセットのチェックボックスを使用します。検索バーの形式は `tag:<キー>:<値>` で、`tag:service:coffee-house` などです。特定のタグを持つモニターを検索から除外するには、 `-` を使用して、`tag:-service:coffee-house` とします。
+{{< img src="/tagging/using_tags/manage_monitor_tags.png" alt="検索バーのモニターをタグでフィルター" style="width:80%;">}}
 
-{{< img src="tagging/using_tags/managemonitorstags.png" alt="モニターの管理タグ" style="width:80%;">}}
+**注**: モニタータグは、メトリクスタグとは異なり、独立しています。詳しくは、[モニタータグ][30]のドキュメントをご覧ください。
 
-モニタータグは、メトリクスタグとは異なる別のものです。
-
-[1]: /ja/getting_started/tagging/assigning_tags/
-{{% /tab %}}
-
-{{% tab "New Monitor" %}}
-
-[モニター][1]を作成する場合は、以下の場所でメトリクス タグを使用します。
-
+新しいモニターを作成する場合は、以下の場所で*メトリクス タグ*を使用します。
 * これらのタグがあるメトリクスのみにモニター範囲を制限する **from** テキストボックス。
-
 * 対応するメトリクスをモニター範囲から削除する **excluding** テキストボックス。
-
-* モニターを各タグ値で複数警告モニターに変換する **avg by** テキストボックス。
-
-[1]: /ja/monitors/create/#monitor-types
-{{% /tab %}}
-{{% tab "Manage Downtime" %}}
-
-モニター タグ別に[ダウンタイム][1]を絞り込むには、検索バーに `service:coffee-house` などのタグ名を入力します。
-
-{{< img src="tagging/using_tags/managedowntimetags.png" alt="モニターの管理タグ" style="width:80%;">}}
-
-[1]: /ja/monitors/notify/downtimes/
-{{% /tab %}}
-{{< /tabs >}}
+* 各タグ値に対するマルチアラートモニターに変換する **avg by** テキストボックス。
 
 ## メトリクス
 
-[Metrics Explorer][8] でタグを使用して、複数のタグでメトリクスを絞り込むか、タグ キー別に複数のグラフを表示します。以下の例は、`service:coffee-house` のメトリクスのグラフを作成し、`host` ごとに 1 つのグラフを表示します。
+[Metrics Explorer][8] でタグを使用して、複数のタグでメトリクスを絞り込むか、タグ キー別に複数のグラフを表示します。以下の例は、`service:web-store` のメトリクスのグラフを作成します。
 
-{{< img src="tagging/using_tags/metricsexplorertags.png" alt="モニターの管理タグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/metrics_explorer.png" alt="個々のタグにスコープされたメトリクスグラフ" style="width:80%;">}}
 
 ## インテグレーション
 
@@ -237,14 +214,14 @@ datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ## APM
 
 {{< tabs >}}
-{{% tab "Analytics" %}}
+{{% tab "トレースエクスプローラー" %}}
 
-[トレース検索][1]では、検索バーまたはファセットのチェックボックスを使用して、タグでトレースを絞り込みます。検索バーの形式は `<KEY>:<VALUE>` で、`service:coffee-house` などです。高度な検索については、[トレース検索][2]のページを参照してください。
+[トレースエクスプローラー][1]では、検索バーやファセットチェックボックスを使用して、タグでトレースをフィルターすることができます。検索バーのフォーマットは `<KEY>:<VALUE>` で、例えば `service:coffee-house` のようになります。高度な検索については、[クエリ構文][2]を参照してください。
 
-{{< img src="tagging/using_tags/tracesearchtags.png" alt="トレース検索タグ" style="width:80%;">}}
+{{< img src="tagging/using_tags/trace_explorer.png" alt="トレースエクスプローラータグ" style="width:80%;">}}
 
-[1]: /ja/tracing/app_analytics/search/
-[2]: /ja/tracing/app_analytics/search/#search-bar
+[1]: /ja/tracing/trace_explorer/search/
+[2]: /ja/tracing/trace_explorer/query_syntax/
 {{% /tab %}}
 {{% tab "Service Map" %}}
 
@@ -325,18 +302,18 @@ RUM のイベントデータをタグでフィルターするには、検索バ�
 [1]: https://app.datadoghq.com/synthetics/tests
 [2]: /ja/synthetics/search/
 {{% /tab %}}
-{{% tab "CI Results Explorer" %}}
+{{% tab "エクスプローラー" %}}
 
-[CI Results Explorer][1] は、[CI パイプライン][2]で実行されているブラウザテスト結果を表示します。
+[Synthetic Monitoring & Continuous Testing Explorer][1] は、[CI パイプライン][2]内のテスト実行や実行のバッチを表示します。
 
-テスト実行をタグでフィルターするには、検索バーまたはファセットチェックボックスを使用します。検索バーのフォーマットは `<KEY>:<VALUE>` で、例えば `@ci.provider.name:github` のようになります。詳細な検索については、[Synthetic テストの検索と管理][3]を参照してください。
+テスト実行をタグでフィルターするには、検索バーまたはファセットチェックボックスを使用します。検索バーのフォーマットは `<KEY>:<VALUE>` で、例えば `@ci.provider.name:github` のようになります。詳細な検索については、[テストバッチを検索する][3]を参照してください。
 
 {{< img src="tagging/using_tags/syntheticscitags.png" alt="Synthetics と CI タグ" style="width:80%;">}}
 
 
-[1]: https://app.datadoghq.com/synthetics/explorer/ci
-[2]: /ja/synthetics/cicd_integrations
-[3]: /ja/synthetics/search/
+[1]: https://app.datadoghq.com/synthetics/explorer/
+[2]: /ja/continuous_testing/cicd_integrations
+[3]: /ja/continuous_testing/explorer/search/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -363,7 +340,7 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 
 {{< img src="tagging/using_tags/metric_based_slo_tags.png" alt="メトリクスベースの SLO タグ" style="width:80%;">}}
 
-[1]: /ja/monitors/service_level_objectives/metric/
+[1]: /ja/service_management/service_level_objectives/metric/
 {{% /tab %}}
 {{% tab "Monitor-based SLOs" %}}
 
@@ -371,7 +348,7 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 
 {{< img src="tagging/using_tags/monitor_based_slo_tags.png" alt="モニターベースの SLO タグ" style="width:80%;">}}
 
-[1]: /ja/monitors/service_level_objectives/monitor/
+[1]: /ja/service_management/service_level_objectives/monitor/
 [2]: /ja/getting_started/tagging/using_tags/?tab=newmonitor#monitors
 {{% /tab %}}
 {{< /tabs >}}
@@ -402,7 +379,7 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/getting_started/tagging/assigning_tags/
-[2]: /ja/events/explorer
+[2]: /ja/service_management/events/explorer
 [3]: /ja/integrations/
 [4]: /ja/infrastructure/hostmap/
 [5]: /ja/infrastructure/
@@ -430,3 +407,6 @@ SLO タグは、SLO の基礎となるメトリクスまたはモニターで使
 [27]: /ja/api/v1/service-level-objectives/#create-a-slo-object
 [28]: /ja/api/v1/service-level-objectives/#get-a-slos-details
 [29]: /ja/api/v1/service-level-objectives/#update-a-slo
+[30]: /ja/monitors/manage/#monitor-tags
+[31]: /ja/monitors/downtimes/
+[32]: /ja/getting_started/tagging/assigning_tags?tab=monitors

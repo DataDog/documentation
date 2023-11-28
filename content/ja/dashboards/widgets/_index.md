@@ -13,44 +13,92 @@ title: ウィジェット
 
 ## 概要
 
-ウィジェットは、ダッシュボードを構成するブロックです。ウィジェットは 3 つのタイプに分類されます。
+ウィジェットは、ダッシュボードの構成要素です。ウィジェットによって、インフラストラクチャー全体のデータを視覚化し、相関させることができます。
 
+### グラフ
 {{< whatsnext desc="Datadog 製品のデータをグラフ化する汎用ウィジェット: ">}}
-    {{< nextlink href="/dashboards/widgets/change" >}}変更{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/distribution" >}}分布{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/event_stream" >}}イベントストリーム{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/event_timeline" >}}イベントタイムライン{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/geomap" >}}ジオマップ{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/heat_map" >}}ヒートマップ{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/hostmap" >}}ホストマップ{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/list" >}}リスト{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/log_stream" >}}ログストリーム{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/pie_chart" >}}円グラフ{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/query_value" >}}クエリ値{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/scatter_plot" >}}散布図{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/table" >}}テーブル{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/treemap" >}}ツリーマップ{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/timeseries" >}}時系列{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/top_list" >}}トップリスト{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/change" 
+        img="dashboards/widgets/icons/change_light_large.png">}} 変化 {{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/distribution"
+        img="dashboards/widgets/icons/distribution_light_large.png">}} ディストリビューション{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/funnel"
+        img="dashboards/widgets/icons/funnel_light_large.png">}} ファネル{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/geomap" 
+        img="dashboards/widgets/icons/geomap_light_large.png">}} ジオマップ{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/heat_map"
+        img="dashboards/widgets/icons/heatmap_light_large.png">}} ヒートマップ{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/pie_chart"
+        img="dashboards/widgets/icons/pie_light_large.png">}} 円グラフ{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/query_value"
+        img="dashboards/widgets/icons/query-value_light_large.png">}} クエリ値{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/scatter_plot"
+        img="dashboards/widgets/icons/scatter-plot_light_large.png">}} 散布図{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/table"
+        img="dashboards/widgets/icons/table_light_large.png">}} テーブル{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/treemap"
+        img="dashboards/widgets/icons/treemap_light_large.png">}} ツリーマップ{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/timeseries"
+        img="dashboards/widgets/icons/timeseries_light_large.png">}} Timeseries{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/top_list"
+        img="dashboards/widgets/icons/top-list_light_large.png">}} トップリスト{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Synthetic Monitoring の情報を表示するサマリーウィジェット: ">}}
-    {{< nextlink href="/dashboards/widgets/alert_graph" >}}アラートグラフ{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/alert_value" >}}アラート値{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/check_status" >}}ステータス確認{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/monitor_summary" >}}モニター概要{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo" >}}サービスレベル目標 (SLO) 概要{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo_list" >}}サービスレベル目標 (SLO) リスト{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/service_map" >}}サービスマップ{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/service_summary" >}}サービス概要{{< /nextlink >}}
+### グループ
+{{< whatsnext desc="グループの下にウィジェットを表示: ">}}
+    {{< nextlink href="/dashboards/widgets/group"
+        img="dashboards/widgets/icons/group_default_light_large.svg">}} グループ{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/powerpack"
+        img="dashboards/widgets/icons/group_powerpack_light_large.svg">}} パワーパック{{< /nextlink >}}
 {{< /whatsnext >}}
 
+### アノテーションと埋め込み
 {{< whatsnext desc="ダッシュボードを視覚的に構成し、注釈を付けるための装飾ウィジェット: ">}}
-    {{< nextlink href="/dashboards/widgets/free_text" >}}フリーテキスト{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/group" >}}グループ{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/image" >}}画像{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/iframe" >}}Iframe{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/note" >}}注意事項とリンク{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/free_text" 
+        img="dashboards/widgets/icons/free-text_light_large.png">}} フリーテキスト{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/iframe" 
+        img="dashboards/widgets/icons/iframe_light_large.png">}} Iframe{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/image" 
+        img="dashboards/widgets/icons/image_light_large.png">}} 画像{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/note" 
+        img="dashboards/widgets/icons/notes_light_large.png">}} 注意事項とリンク{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### リストとストリーム
+{{< whatsnext desc="さまざまなソースからのイベントや問題のリストを表示します。 ">}}
+    {{< nextlink href="/dashboards/widgets/list"
+        img="dashboards/widgets/icons/change_light_large.png">}} リスト{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### アラートと対応
+{{< whatsnext desc="モニタリング情報を表示するサマリーウィジェット: ">}}
+    {{< nextlink href="/dashboards/widgets/alert_graph" 
+        img="dashboards/widgets/icons/alert-graph_light_large.png">}} アラートグラフ{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/alert_value" 
+        img="dashboards/widgets/icons/alert-value_light_large.png">}}アラート値{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/check_status" 
+        img="dashboards/widgets/icons/check-status_light_large.png">}} チェックステータス{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/monitor_summary" 
+        img="dashboards/widgets/icons/monitor-summary_light_large.png">}} モニターサマリー{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/run_workflow" 
+img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Run Workflow{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### アーキテクチャ
+{{< whatsnext desc="インフラストラクチャーとアーキテクチャーのデータを視覚化します。 ">}}
+    {{< nextlink href="/dashboards/widgets/hostmap" 
+        img="dashboards/widgets/icons/host-map_light_large.png">}} ホストマップ{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/topology_map" 
+        img="dashboards/widgets/icons/service-map_light_large.png">}} トポロジーマップ{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/service_summary" 
+        img="dashboards/widgets/icons/service-summary_light_large.png">}} サービスサマリー{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### パフォーマンスと信頼性
+{{< whatsnext desc="サイトの信頼性の視覚化: ">}}
+    {{< nextlink href="/dashboards/widgets/slo" 
+        img="dashboards/widgets/icons/slo-summary_light_large.png">}} サービスレベル目標 (SLO) サマリー{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/slo_list" 
+        img="dashboards/widgets/icons/slo-list_light_large.png">}} サービスレベル目標 (SLO) リスト{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 全画面
@@ -99,11 +147,11 @@ title: ウィジェット
 
 ### PNG
 
-ウィジェットを PNG 形式でダウンロードするには、ウィジェットの右上にあるエクスポートボタンをクリックし、“Download as PNG” を選択します。
+ウィジェットを PNG 形式でダウンロードするには、ウィジェットの右上にあるエクスポートボタンをクリックし、**Download as PNG** を選択します。
 
 ### CSV
 
-時系列、テーブル、またはトップリストウィジェットからデータを CSV 形式でダウンロードするには、ウィジェットの右上にあるエクスポートボタンをクリックし、“Download as CSV” を選択します。
+時系列、テーブル、またはトップリストウィジェットからデータを CSV 形式でダウンロードするには、ウィジェットの右上にあるエクスポートボタンをクリックし、**Download as CSV** を選択します。
 
 ## その他の参考資料
 

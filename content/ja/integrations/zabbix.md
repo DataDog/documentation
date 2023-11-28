@@ -16,12 +16,11 @@ assets:
     source_type_name: Zabbix
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: KosukeKamiya@users.noreply.github.com
   support_email: KosukeKamiya@users.noreply.github.com
 categories:
 - ネットワーク
-- モニタリング
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/zabbix/README.md
 display_on_public_website: true
@@ -29,7 +28,7 @@ draft: false
 git_integration_title: zabbix
 integration_id: zabbix
 integration_title: zabbix
-integration_version: 1.1.0
+integration_version: 1.1.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -39,16 +38,15 @@ public_title: zabbix
 short_description: Zabbix API によりアイテムの履歴を収集し、メトリクスとして Datadog にレポート。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::Network
-  - Category::Monitoring
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Zabbix API によりアイテムの履歴を収集し、メトリクスとして Datadog にレポート。
   media: []

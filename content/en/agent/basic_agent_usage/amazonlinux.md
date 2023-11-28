@@ -14,6 +14,12 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
+- link: "/agent/basic_agent_usage/#agent-architecture"
+  tag: "Documentation"
+  text: "Find out more about the Agent's architecture"
+- link: "/agent/configuration/network#configure-ports"
+  tag: "Documentation"
+  text: "Configure inbound ports"
 ---
 
 ## Overview
@@ -29,7 +35,9 @@ In Agent v6 and v7, the service manager provided by the operating system is resp
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
 
-### Amazon Linux 2
+### Amazon Linux 2, Amazon Linux 2022/2023
+
+<div class="alert alert-info">Amazon Linux 2022/2023 installations on Agent versions <= 6.39/7.39 require the <code>libxcrypt-compat</code> package. To install the package, run:<br/><pre><code>dnf install -y libxcrypt-compat</code></pre></div>
 
 | Description                        | Command                                                |
 |------------------------------------|--------------------------------------------------------|
@@ -121,6 +129,6 @@ See the instructions on how to [add packages to the embedded Agent][3] for more 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/aws
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=aws
 [2]: /agent/troubleshooting/
 [3]: /developers/guide/custom-python-package/

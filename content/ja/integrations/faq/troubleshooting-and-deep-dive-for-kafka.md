@@ -54,7 +54,7 @@ instance #kafka-localhost-<PORT_NUM> [ERROR]: 'Cannot connect to instance localh
 
 デフォルトでは、Datadog はブローカーベースのメトリクスのみを収集します。
 
-Java ベースのプロデューサーとコンシューマーの場合は、`conf.yaml` に以下を追加し、必要に応じて設定を更新してください。 利用可能なすべての構成オプションについては、[サンプル kafka.d/conf.yaml][9] を参照してください。
+Java ベースのプロデューサーとコンシューマーの場合は、`conf.yaml` に以下を追加し、必要に応じて設定を更新してください。利用可能なすべての構成オプションについては、[サンプル kafka.d/conf.yaml][9] を参照してください。
 ```yaml
 - host: remotehost
   port: 9998 # プロデューサー

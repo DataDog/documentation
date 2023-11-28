@@ -1,5 +1,5 @@
 ---
-title: Advanced Log Collection
+title: Advanced Log Collection Configurations
 kind: documentation
 description: Use the Datadog Agent to collect your logs and send them to Datadog
 further_reading:
@@ -18,6 +18,11 @@ further_reading:
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging without Limits*"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'
+algolia:
+  tags: ['advanced log filter']
 ---
 
 Customize your log collection configuration:
@@ -25,7 +30,7 @@ Customize your log collection configuration:
 * [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
 * [Aggregate multi-line logs](#multi-line-aggregation)
 * [Copy commonly used examples](#commonly-used-log-processing-rules)
-* [Use wildcards to monitor directories](#tail-directories-by-using-wildcards)
+* [Use wildcards to monitor directories](#tail-directories-using-wildcards)
 * [Specify log file encodings](#log-file-encodings)
 * [Define global processing rules](#global-processing-rules)
 
@@ -66,7 +71,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
+In a Docker environment, use the label `com.datadoghq.ad.logs` on the **container sending the logs you want to filter** in order to specify the `log_processing_rules`, for example:
 
 ```yaml
  labels:
@@ -84,10 +89,12 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 
 **Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
 
+**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
+To apply a specific configuration to a given container, Autodiscovery identifies containers by name, NOT image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image.` To configure using Autodiscovery to collect container logs on a given `<CONTAINER_IDENTIFIER>` within your pod, add the following annotations to your pod's `log_processing_rules`:
 
 ```yaml
 apiVersion: apps/v1
@@ -101,7 +108,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -116,11 +123,13 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: cardpayment
+        - name: '<CONTAINER_IDENTIFIER>'
           image: cardpayment:latest
 ```
 
 **Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+
+**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -183,7 +192,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
+In a Docker environment, use the label `com.datadoghq.ad.logs` on the **container sending the logs you want to filter** in order to specify the `log_processing_rules`, for example:
 
 ```yaml
  labels:
@@ -200,6 +209,8 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 ```
 
 **Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+
+**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -218,7 +229,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -233,11 +244,13 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: cardpayment
+        - name: '<CONTAINER_IDENTIFIER>'
           image: cardpayment:latest
 ```
 
 **Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+
+**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -289,6 +302,8 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 
 **Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
 
+**Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
+
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -306,7 +321,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -322,11 +337,13 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: cardpayment
+        - name: '<CONTAINER_IDENTIFIER>'
           image: cardpayment:latest
 ```
 
 **Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+
+**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -407,7 +424,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/postgres.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "postgresql",
             "service": "database",
@@ -422,11 +439,13 @@ spec:
       name: postgres
     spec:
       containers:
-        - name: postgres
+        - name: '<CONTAINER_IDENTIFIER>'
           image: postgres:latest
 ```
 
 **Note**: Escape regex characters in your patterns when performing multi-line aggregation with pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+
+**Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -435,14 +454,14 @@ spec:
 
 More examples:
 
-| **Raw string**           | **Pattern**                                   |
-|--------------------------|-----------------------------------------------|
-| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                           |
-| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                         |
-| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}`    |
-| 20180228                 | `\d{8}`                                       |
-| 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
-| {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
+| **Raw string**           | **Pattern**                                       |
+|--------------------------|---------------------------------------------------|
+| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                               |
+| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                             |
+| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}\s\d{4}` |
+| 20180228                 | `\d{8}`                                           |
+| 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}`     |
+| {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
 ### Automatic multi-line aggregation
 With Agent 7.37+, `auto_multi_line_detection` can be enabled, which allows the Agent to detect [common multi-line patterns][2] automatically. 
@@ -468,6 +487,16 @@ logs:
     service: testApp
     source: java
     auto_multi_line_detection: true
+```
+
+Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file:
+
+```yaml
+logs_config:
+  auto_multi_line_detection: true
+  auto_multi_line_extra_patterns:
+   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
 ```
 
 {{% /tab %}}
@@ -500,7 +529,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/testApp.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "testApp",
@@ -511,22 +540,12 @@ spec:
       name: testApp
     spec:
       containers:
-        - name: testApp
+        - name: '<CONTAINER_IDENTIFIER>'
           image: testApp:latest
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
-
-Automatic multi-line detection uses a list of common regular expressions to attempt to match logs. If the built-in list is not sufficient, you can also add custom patterns in the `datadog.yaml` file:
-
-```yaml
-logs_config:
-  auto_multi_line_detection: true
-  auto_multi_line_extra_patterns:
-   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-   - [A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)
-```
 
 With this feature enabled, when a new log file is opened the Agent tries to detect a pattern. During this process the logs are sent as single lines. After the detection threshold is met, all future logs for that source are aggregated with the detected pattern, or as single lines if no pattern is found. Detection takes at most 30 seconds or the first 500 logs (whichever comes first).
 
@@ -538,9 +557,9 @@ Automatic multi-line detection detects logs that begin and comply with the follo
 
 See the dedicated [Commonly Used Log Processing Rules FAQ][3] to see a list of examples.
 
-## Tail directories by using wildcards
+## Tail directories using wildcards
 
-If your log files are labeled by date or all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones by using wildcards in the `path` attribute. If you want to exclude some files matching the chosen `path`, list them in the `exclude_paths` attribute.
+If your log files are labeled by date or all stored in the same directory, configure your Datadog Agent to monitor them all and automatically detect new ones using wildcards in the `path` attribute. If you want to exclude some files matching the chosen `path`, list them in the `exclude_paths` attribute.
 
 * Using `path: /var/log/myapp/*.log`:
   * Matches all `.log` file contained in the `/var/log/myapp/` directory.
@@ -551,7 +570,7 @@ If your log files are labeled by date or all stored in the same directory, confi
   * Matches `/var/log/myapp/errorLog/myerrorfile.log`
   * Doesn't match `/var/log/myapp/mylogfile.log`.
 
-Configuration example:
+Configuration example for Linux:
 
 ```yaml
 logs:
@@ -566,7 +585,32 @@ logs:
 
 The example above matches `/var/log/myapp/log/myfile.log` and excludes `/var/log/myapp/log/debug.log` and `/var/log/myapp/log/trace.log`.
 
+Configuration example for Windows:
+
+```yaml
+logs:
+  - type: file
+    path: C:\\MyApp\\*.log
+    exclude_paths:
+      - C:\\MyApp\\MyLog.*.log
+    service: mywebapp
+    source: csharp
+```
+
+The example above matches `C:\\MyApp\\MyLog.log` and excludes `C:\\MyApp\\MyLog.20230101.log` and `C:\\MyApp\\MyLog.20230102.log`.
+
 **Note**: The Agent requires read and execute permissions on a directory to list all the available files in it.
+**Note2**: The path and exclude_paths values are case sensitive.
+
+## Tail most recently modified files first
+
+When prioritizing files to tail, the Datadog Agent sorts the filenames in the directory path by reverse lexicographic order. To sort files based on file modification time, set the configuration option `logs_config.file_wildcard_selection_mode` to the value `by_modification_time`.
+
+This option is helpful when the number of total log file matches exceeds `logs_config.open_files_limit`. Using `by_modification_time` ensures that the most recently updated files are tailed first in the defined directory path.
+
+To restore default behavior, set the configuration option `logs_config.file_wildcard_selection_mode` to the value`by_name`.
+
+This feature requires Agent version 7.40.0 or above.
 
 ## Log file encodings
 
@@ -648,5 +692,5 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 [1]: https://golang.org/pkg/regexp/syntax/
 [2]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
 [3]: /agent/faq/commonly-used-log-processing-rules
-[4]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[5]: /agent/guide/agent-commands/#agent-information
+[4]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[5]: /agent/configuration/agent-commands/#agent-information

@@ -2,6 +2,8 @@
 app_id: apache-apisix
 app_uuid: b842d639-caf6-4b3a-8115-52458b9a0753
 assets:
+  dashboards:
+    Apache APISIX Dashboard: assets/dashboards/apache-apisix_overview.json
   integration:
     configuration: {}
     events:
@@ -21,14 +23,11 @@ assets:
     source_type_name: Apache APISIX
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: コミュニティ
   sales_email: dev@apisix.apache.org
   support_email: dev@apisix.apache.org
 categories:
-- モニタリング
-- web
-- cloud
-- autodiscovery
+- クラウド
 - メトリクス
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/apache-apisix/README.md
@@ -46,20 +45,17 @@ oauth: {}
 public_title: Apache APISIX
 short_description: Datadog-APISIX インテグレーション
 supported_os:
+- linux
 - windows
 - macos
-- linux
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Cloud
+  - Category::Metrics
+  - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
-  - Supported OS::Linux
-  - Category::Monitoring
-  - Category::Web
-  - Category::Cloud
-  - Category::Autodiscovery
-  - Category::Metrics
   configuration: README.md#Setup
   description: Datadog-APISIX インテグレーション
   media: []
@@ -82,7 +78,7 @@ Apache APISIX は動的でリアルタイムな高性能 API ゲートウェイ�
 
 以下の構成方法に従ってください。
 
-### コンフィギュレーション
+### 構成
 
 1. すでに Datadog を使用していて、Datadog Agent がインストールされている場合は、ポート 8125/UDP がファイアウォールで許可されていることを確認してください。例えば、Apache APISIX Agent は、Datadog Agent のポート 8125 に到達することができます。すでにこれを構成している場合は、ステップ 3 までスキップできます。
 

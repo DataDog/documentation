@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
 - azure
+- クラウド
+- ネットワーク
 dependencies: []
 description: Azure Relay のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_relay/

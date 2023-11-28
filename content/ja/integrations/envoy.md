@@ -13,6 +13,8 @@ assets:
       check: envoy.server.uptime
       metadata_path: metadata.csv
       prefix: envoy.
+    process_signatures:
+    - envoy
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: Envoy
@@ -25,9 +27,7 @@ author:
   support_email: help@datadoghq.com
 categories:
 - cloud
-- web
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/envoy/README.md
 display_on_public_website: true
@@ -35,7 +35,7 @@ draft: false
 git_integration_title: envoy
 integration_id: envoy
 integration_title: Envoy
-integration_version: 2.4.0
+integration_version: 2.6.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -45,18 +45,16 @@ public_title: Envoy
 short_description: Envoy はオープンソースのエッジ/サービスプロキシを提供
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
   - Category::クラウド
-  - Category::Web
   - Category::ログの収集
-  - Category::オートディスカバリー
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Envoy はオープンソースのエッジ/サービスプロキシを提供
   media: []

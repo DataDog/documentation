@@ -35,7 +35,6 @@ categories:
 - orchestration
 - containers
 - configuration & deployment
-- autodiscovery
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/etcd/README.md
@@ -44,7 +43,7 @@ draft: false
 git_integration_title: etcd
 integration_id: etcd
 integration_title: etcd
-integration_version: 3.3.0
+integration_version: 4.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -65,7 +64,6 @@ tile:
   - Category::オーケストレーション
   - Category::コンテナ
   - Category::構成 & デプロイ
-  - Category::オートディスカバリー
   - Category::ログの収集
   configuration: README.md#Setup
   description: 書き込み、更新、削除、ノード間レイテンシー、さまざまな Etcd メトリクスを追跡。

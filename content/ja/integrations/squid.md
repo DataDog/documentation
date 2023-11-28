@@ -25,7 +25,6 @@ categories:
 - web
 - caching
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/squid/README.md
 display_on_public_website: true
@@ -54,7 +53,6 @@ tile:
   - Category::Web
   - Category::キャッシュ
   - Category::ログの収集
-  - Category::オートディスカバリー
   configuration: README.md#Setup
   description: Datadog を使用した Squid キャッシュサーバーのメトリクスの追跡
   media: []

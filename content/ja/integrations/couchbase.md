@@ -29,7 +29,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - data store
-- autodiscovery
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/couchbase/README.md
@@ -57,7 +56,6 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::データストア
-  - Category::オートディスカバリー
   - Category::ログの収集
   configuration: README.md#Setup
   description: Couchbase のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化

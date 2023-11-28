@@ -1,23 +1,27 @@
 ---
-title: Agent バージョンの違い
-kind: documentation
 further_reading:
-  - link: agent/versions/upgrade_to_agent_v7
-    tag: ドキュメント
-    text: Agent バージョン7へアップグレード
-  - link: agent/versions/upgrade_to_agent_v6
-    tag: ドキュメント
-    text: Agent v6 へのアップグレード
-  - link: agent/faq/agent_v6_changes
-    tag: よくあるご質問
-    text: Agent v6 の変更点
+- link: agent/versions/upgrade_to_agent_v7
+  tag: ドキュメント
+  text: Agent バージョン7へアップグレード
+- link: agent/versions/upgrade_to_agent_v6
+  tag: ドキュメント
+  text: Agent v6 へのアップグレード
+- link: agent/versions/upgrade_between_agent_minor_versions
+  tag: ドキュメント
+  text: Agent マイナーバージョン間でのアップグレード
+- link: agent/faq/agent_v6_changes
+  tag: よくあるご質問
+  text: Agent v6 の変更点
+kind: documentation
+title: Agent バージョンの違い
 ---
+
 <div class="alert alert-info"><p>
 Datadog は、Datadog Agent をマイナーリリースとパッチリリースごとに、または少なくとも毎月更新することをお勧めします。</p>
 <p>
 Datadog Agent のメジャーバージョンにアップグレードして最新の状態に保つことが、最新の Agent 機能と修正を入手するためにサポートされている唯一の方法です。ただし、Agent は頻繁にアップデートをリリースしており、エンタープライズ規模でアップデートを管理することは困難な場合があります。これは、メジャーリリースまで更新を待つべきであるあるという意味ではありません。組織に適した更新の頻度は、インフラストラクチャーと構成管理の方法によって異なりますが、毎月が目標です。</p>
 <p>
-特定のホストの 2 つのマイナーバージョン間で Datadog Agent コアを更新するには、<a href="https://app.datadoghq.com/account/settings#agent">プラットフォームに対応するインストールコマンド</a>を実行します。</p>
+特定のホストの 2 つのマイナーバージョン間で Datadog Agent コアを更新するには、<a href="/agent/versions/upgrade_between_agent_minor_versions">プラットフォームに対応するインストールコマンド</a>を実行します。</p>
 <p>
 Datadog Agent のリリース番号は、<a href="https://semver.org/">SemVer</a> の規則に従います。</p>
 </div>
@@ -64,7 +68,7 @@ Agent 5 と Agent 6 の大きな違いは、Agent 6 のコア Agent が Golang �
 
 Agent v5 から Agent v6 へのすべての変更内容については、[Datadog Agent の変更点に関するドキュメント][4]を参照してください。以下は、主な違いです。
 
-- [ディストリビューションメトリクス][5]をサーバー上で直接実行して、実効的なグローバルパーセンタイルを計算できます。(注: この機能は現在ベータ版です。ご使用のアカウントで有効にする方法については、サポートへお問い合わせください。)
+- [ディストリビューションメトリクス][5]をサーバー上で直接実行することで、実際に有効なグローバルパーセンタイルを算出することができます。
 - [DogStatsD][3] を UDP ではなく UNIX ソケット経由で使用できます。
 - [Windows でライブプロセスモニタリングを使用できます][6]。
 - [Prometheus OpenMetrics をネイティブにサポートします][7]。

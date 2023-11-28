@@ -25,8 +25,6 @@ author:
   support_email: help@datadoghq.com
 categories:
 - data store
-- OS & システム
-- 処理
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mapr/README.md
@@ -35,7 +33,7 @@ draft: false
 git_integration_title: mapr
 integration_id: mapr
 integration_title: MapR
-integration_version: 1.9.1
+integration_version: 1.9.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -48,11 +46,9 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
   - Category::Data Store
-  - Category::OS & System
-  - Category::Processing
   - Category::Log Collection
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: MapR で利用可能な作成済みのモニタリングメトリクスを収集します。
   media: []
@@ -175,7 +171,7 @@ MapR チェックには、イベントは含まれません。
 
 
 [1]: https://mapr.com
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://mapr.com/docs/61/AdministratorGuide/Monitoring.html
 [4]: https://mapr.com/docs/61/AdministratorGuide/c-managing-users-and-groups.html
 [5]: https://docs.datafabric.hpe.com/52/SecurityGuide/t_config_impersonation_notsecure.html?hl=secure%2Ccluster

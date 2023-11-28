@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
 - azure
+- クラウド
+- ネットワーク
 dependencies: []
 description: Azure Virtual Network のキーメトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_virtual_networks/

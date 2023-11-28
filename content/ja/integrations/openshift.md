@@ -22,8 +22,11 @@ author:
   support_email: help@datadoghq.com
 categories:
 - コンテナ
-- オーケストレーション
+- kubernetes
 - ログの収集
+- ネットワーク
+- orchestration
+- プロビジョニング
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/openshift/README.md
 display_on_public_website: true
@@ -44,10 +47,13 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
   - Category::Containers
-  - Category::Orchestration
+  - Category::Kubernetes
   - Category::Log Collection
+  - Category::Network
+  - Category::Orchestration
+  - Category::Provisioning
+  - Supported OS::Linux
   configuration: README.md#Setup
   description: ビッグアイデア用の Kubernetes プラットフォーム
   media: []

@@ -32,7 +32,7 @@ RUM モニターを作成するには、まず [RUM モニターのドキュメ�
 
 [RUM エクスプローラー][2]の検索クエリをモニターにエクスポートすることで、クエリのすべてのコンテキストを保持することができます。
 
-{{< img src="real_user_monitoring/guide/alerting-with-rum/export-to-monitor.mp4" alt="RUM エクスプローラーの右端にあるエクスポートボタン" video="true" style="width:100%;" >}}
+{{< img src="real_user_monitoring/guide/alerting-with-rum/export-to-monitor-3.mp4" alt="RUM エクスプローラーの右端にあるエクスポートボタン" video="true" style="width:100%;" >}}
 
 上の例は、1Mb を超える画像用に設定された RUM モニターの検索クエリです。大きな画像は、アプリケーションのパフォーマンスを低下させる可能性があります。
 
@@ -80,7 +80,7 @@ Real User Monitoring では、アプリケーションのパフォーマンス�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/monitors/create/types/real_user_monitoring/#create-a-rum-monitor
+[1]: /ja/monitors/types/real_user_monitoring/#create-a-rum-monitor
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /ja/real_user_monitoring/guide/send-rum-custom-actions/#create-facets-and-measures-on-your-new-attributes
 [4]: /ja/real_user_monitoring/explorer/export/

@@ -18,6 +18,9 @@ assets:
       - istio.galley.endpoint_no_pod
       metadata_path: metadata.csv
       prefix: istio.
+    process_signatures:
+    - pilot-agent proxy router
+    - envoy envoy-rev0.json
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: Istio
@@ -31,8 +34,9 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- data store
 - log collection
+- network
+- tracing
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/istio/README.md
 display_on_public_website: true
@@ -40,7 +44,7 @@ draft: false
 git_integration_title: istio
 integration_id: istio
 integration_title: Istio
-integration_version: 4.3.0
+integration_version: 4.4.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -50,16 +54,17 @@ public_title: Istio
 short_description: パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::データストア
   - Category::ログの収集
+  - Category::ネットワーク
+  - Category::Tracing
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。
   media: []

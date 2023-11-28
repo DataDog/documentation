@@ -14,6 +14,12 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Collect your traces"
+- link: "/agent/basic_agent_usage/#agent-architecture"
+  tag: "Documentation"
+  text: "Find out more about the Agent's architecture"
+- link: "/agent/configuration/network#configure-ports"
+  tag: "Documentation"
+  text: "Configure inbound ports"
 ---
 
 ## Overview
@@ -22,7 +28,7 @@ This page outlines the basic features of the Datadog Agent for Ubuntu. If you ha
 
 Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
-**Note**: Ubuntu 14.04 and above are supported.
+**Note**: Ubuntu 14.04 and above are supported on the 64-bit x86 architecture. Ubuntu 16.04 and above are supported on the 64-bit Arm v8 architecture.
 
 ## Commands
 
@@ -108,7 +114,7 @@ See the instructions on how to [add packages to the embedded Agent][4] for more 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/ubuntu
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu
 [2]: /agent/faq/agent-v6-changes/?tab=linux#service-lifecycle-commands
 [3]: /agent/troubleshooting/
 [4]: /developers/guide/custom-python-package/

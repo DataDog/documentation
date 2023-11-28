@@ -1,8 +1,8 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- azure
+- cloud
+- provisioning
 dependencies: []
 description: Surveillez des métriques clés d'Azure Functions.
 doc_link: https://docs.datadoghq.com/integrations/azure_functions/
@@ -16,10 +16,11 @@ is_public: true
 kind: integration
 manifest_version: '1.0'
 name: azure_functions
-public_title: "Intégration Datadog/Microsoft\_Azure Functions"
+public_title: Intégration Datadog/Microsoft Azure Functions
 short_description: Surveillez des métriques clés d'Azure Functions.
 version: '1.0'
 ---
+
 ## Présentation
 
 Azure Functions est une plateforme de calcul sans serveur basée sur les événements qui peut aussi résoudre des problèmes d’orchestration complexes. Créez et débuguez localement sans configuration supplémentaire, procédez au déploiement et opérez à l’échelle dans le cloud, et intégrez des services à l’aide de déclencheurs et de liaisons.

@@ -4,7 +4,9 @@ aliases:
 - /fr/metrics/introduction/
 - /fr/graphing/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph/
 - /fr/dashboards/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph/
-disable_sidebar: true
+cascade:
+  algolia:
+    rank: 70
 kind: documentation
 title: Métriques
 ---
@@ -52,13 +54,24 @@ Les métriques vous aident également à ajuster la taille de votre environnemen
 
 Vous pouvez visualiser vos métriques et créer des graphiques dans Datadog depuis le [Metrics Explorer][3], les [dashboards][4] ou les [notebooks][5].
 
-Voici un exemple de visualisation représentant une série temporelle : 
+Voici un exemple de visualisation représentant une série temporelle :
 
 {{< img src="metrics/introduction/timeseries_example.png" alt="Un graphique de série temporelle avec une métrique de latence représentée par une ligne bleue avec plusieurs pics" >}}
 
 Ce graphique linéaire affiche la latence (en millisecondes) des utilisateurs (en ordonnée) en fonction de l'heure (en abscisse).
 
-Datadog propose de nombreux autres types de graphiques et de widgets pour visualiser vos données. Pour en savoir plus, consultez notre [série d'articles de blog sur la représentation graphique des métriques][6] (en anglais).
+#### Visualisations supplémentaires
+
+Datadog fournit différents types de visualisations, afin que chacun puisse représenter et visualiser facilement ses métriques.
+
+Une requête de métrique suit systématiquement deux étapes préliminaires d'évaluation, à savoir une agrégation temporelle, puis une agrégation spatiale. Consultez la rubrique [Anatomie d'une requête de métrique][6] pour en savoir plus.
+
+{{< whatsnext desc="Deux types de visualisations particulièrement utiles pour représenter des métriques :">}}
+    {{< nextlink href="dashboards/widgets/query_value/" >}}<u>Widget Valeur de requête</u> : rassemblez les résultats des deux étapes d'évaluation au sein d'une valeur unique.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/top_list/" >}}<u>Top list</u> : obtenez une seule valeur par groupe.{{< /nextlink >}}
+{{< /whatsnext >}}
+
+En outre, Datadog propose de nombreux autres types de graphiques et de widgets pour les visualisations. Pour en savoir plus, consultez notre [série d'articles de blog sur la représentation graphique des métriques][7] (en anglais).
 
 ### Envoyer des métriques à Datadog
 
@@ -86,7 +99,7 @@ Voici à quoi ressemble une requête de métrique dans Datadog :
 
 Cette requête peut être divisée en plusieurs parties :
 
-#### Nom de la métrique
+#### Metric name
 
 Commencez par choisir la métrique à représenter en la recherchant ou en la sélectionnant dans le menu déroulant en regard de **Metric**. Si vous ne savez pas quelle métrique utiliser, consultez au préalable le Metrics Explorer ou un notebook. Vous pouvez également consulter la liste des métriques transmettant des données sur la page Metrics Summary.
 
@@ -163,7 +176,8 @@ Consultez la [section Metrics Summary][21] pour en savoir plus.
 {{< whatsnext desc="Pour approfondir vos connaissances sur les métriques, consultez les ressources suivantes :">}}
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>Filtrage avancé</u> : filtrez vos données afin de restreindre le contexte des métriques renvoyées.{{< /nextlink >}}
     {{< nextlink href="/metrics/distributions" >}}<u>Métriques de distribution</u> : calculez les centiles globaux pour l'intégralité de votre ensemble de données.{{< /nextlink >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> : découvrez comment contrôler vos volumes de métriques custom avec des configurations de tag et d'agrégations grâce à Metrics without Limits™.{{< /nextlink >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> : découvrez comment contrôler vos volumes de métriques custom avec des configurations de tags et d'agrégations grâce à Metrics without Limits™.{{< /nextlink >}}
+    {{< nextlink href="https://dtdg.co/fe" >}}<u>Validation des bases</u> : participez à une session interactive pour tirer pleinement profit des métriques.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /fr/logs
@@ -171,19 +185,20 @@ Consultez la [section Metrics Summary][21] pour en savoir plus.
 [3]: /fr/metrics/explorer/
 [4]: /fr/dashboards/
 [5]: /fr/notebooks/
-[6]: https://www.datadoghq.com/blog/timeseries-metric-graphs-101/
-[7]: /fr/integrations/
-[8]: /fr/integrations/amazon_ec2/
-[9]: /fr/logs/logs_to_metrics/
-[10]: /fr/metrics/custom_metrics/
-[11]: /fr/agent/
-[12]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/
-[13]: /fr/api/
-[14]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/
-[15]: /fr/metrics/types/
-[16]: /fr/getting_started/tagging/using_tags/
-[17]: /fr/dashboards/functions/
-[18]: /fr/metrics/distributions/
-[19]: https://app.datadoghq.com/metric/summary
-[20]: /fr/account_management/billing/usage_details/
-[21]: /fr/metrics/summary/
+[6]: https://docs.datadoghq.com/fr/metrics/#anatomy-of-a-metric-query
+[7]: https://www.datadoghq.com/blog/timeseries-metric-graphs-101/
+[8]: /fr/integrations/
+[9]: /fr/integrations/amazon_ec2/
+[10]: /fr/logs/logs_to_metrics/
+[11]: /fr/metrics/custom_metrics/
+[12]: /fr/agent/
+[13]: /fr/metrics/custom_metrics/dogstatsd_metrics_submission/
+[14]: /fr/api/
+[15]: https://docs.datadoghq.com/fr/agent/basic_agent_usage/
+[16]: /fr/metrics/types/
+[17]: /fr/getting_started/tagging/using_tags/
+[18]: /fr/dashboards/functions/
+[19]: /fr/metrics/distributions/
+[20]: https://app.datadoghq.com/metric/summary
+[21]: /fr/account_management/plan_and_usage/usage_details/
+[22]: /fr/metrics/summary/

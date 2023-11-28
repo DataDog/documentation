@@ -1,68 +1,34 @@
 ---
 further_reading:
-- link: /agent/kubernetes/integrations/
-  tag: ドキュメント
-  text: オートディスカバリーのインテグレーションテンプレートの作成とロード
-- link: /agent/guide/ad_identifiers/
-  tag: ドキュメント
-  text: コンテナと該当するインテグレーションテンプレートとの対応
-- link: /agent/guide/autodiscovery-management/
-  tag: ドキュメント
-  text: Agent オートディスカバリーに含めるコンテナの管理
-- link: /agent/kubernetes/tag/
-  tag: ドキュメント
-  text: アプリケーションのタグの動的割り当てと収集
-- link: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
-  tag: faq
-  text: ECS Fargate のインテグレーションセットアップ
-- link: /agent/guide/secrets-management/
-  tag: ドキュメント
-  text: 機密情報管理
+- link: /containers/datadog_operator
+  tag: documentation
+  text: Datadog Operator
+- link: https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md
+  tag: GitHub
+  text: 'Datadog Operator: 高度なインストール'
+- link: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+  tag: GitHub
+  text: 'Datadog Operator: 構成'
 kind: documentation
 title: Datadog Operator の概要
 ---
 
-このガイドでは、Datadog Operator の説明、インストール方法、Datadog Agent を Kubernetes にインストールするための使用方法について説明します。
-
-## Datadog Operator とは？
-
-Datadog Operator は、Kubernetes 環境に Datadog Agent をデプロイし、構成することができるオープンソースの [Kubernetes Operator][1] です。Operator を使用することで、単一の Custom Resource Definition (CRD) を使用して、ノードベースの Agent、Cluster Agent、Cluster Checks Runner をデプロイすることができます。Operator は、デプロイのステータス、健全性、およびエラーを Operator の CRD のステータスで報告します。Operator はより高度な構成オプションを使用するため、誤構成のリスクを制限できます。
-
-Agent をデプロイすると、Datadog Operator は次のようなメリットをもたらします。
-
-- Agent 構成の検証
-- すべての Agent が構成を常に把握できるようにする
-- Agent リソースの作成と更新のためのオーケストレーション
-- Operator の CRD ステータスに Agent の構成ステータスを報告する
-- オプションとして、Datadog の [ExtendedDaemonSet][2] を使用した高度な DaemonSet のデプロイメントを使用することができます。
-
-<div class="alert alert-warning">Datadog Operator はベータ版です。</div>
-
-## Helm チャートや DaemonSet ではなく、Datadog Operator を使用する理由は何ですか？
-
-Kubernetes に Datadog Agent をインストールするために、Helm チャートまたは DaemonSet を使用することも可能です。しかし、Datadog Operator を使用することで、以下のような利点があります。
-
-- Operator には、Datadog のベストプラクティスに基づくデフォルトが組み込まれています。
-- Operator の構成は、将来の機能拡張に対応できるよう、より柔軟になっています。
-- [Kubernetes Operator][1] として、Datadog Operator は Kubernetes API でファーストクラスのリソースとして扱われます。
-- Helm チャートとは異なり、Operator は Kubernetes の Reconciliation Loop に含まれます。
-
-Datadog は、DaemonSet を使用して Agent をデプロイすることを完全にサポートしていますが、手動で DaemonSet を構成すると、エラーが発生する可能性が高くなります。そのため、DaemonSet の使用はあまり推奨されません。
+[Datadog Operator][1] は、Kubernetes 環境に Datadog Agent をデプロイし、構成することができるオープンソースの [Kubernetes Operator][2] です。このガイドでは、Datadog Agent をデプロイするために Operator を使用する方法について説明します。
 
 ## 前提条件
 
-- Kubernetes v1.14.X+
+- Kubernetes v1.20.X+
 - Datadog Operator をデプロイするための [Helm][3]
 - Datadog Agent をインストールするための Kubernetes コマンドラインツール、[kubectl][4]
 
-## デプロイ
+## インストールとデプロイメント
 
 1. Helm で Datadog Operator をインストールします。
   ```bash
   helm repo add datadog https://helm.datadoghq.com
   helm install my-datadog-operator datadog/datadog-operator
   ```
-2. お使いの API とアプリキーで Kubernetes シークレットを作成します。
+2. お使いの API とアプリケーションキーで Kubernetes シークレットを作成します。
   ```bash
   kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
   ```
@@ -70,22 +36,23 @@ Datadog は、DaemonSet を使用して Agent をデプロイすることを完�
 
 3. `DatadogAgent` のデプロイメント構成の仕様を記述した `datadog-agent.yaml` ファイルを作成します。以下のサンプル構成では、メトリクス、ログ、APM を有効にしています。
   ```yaml
-  apiVersion: datadoghq.com/v1alpha1
+  apiVersion: datadoghq.com/v2alpha1
   kind: DatadogAgent
   metadata:
     name: datadog
   spec:
-    credentials:
-      apiSecret:
-        secretName: datadog-secret
-        keyName: api-key
-      appSecret:
-        secretName: datadog-secret
-        keyName: app-key
-    agent:
+    global:
+      credentials:
+        apiSecret:
+          secretName: datadog-secret
+          keyName: api-key
+        appSecret:
+          secretName: datadog-secret
+          keyName: app-key
+    features:
       apm:
         enabled: true
-      log:
+      logCollection:
         enabled: true
   ```
 
@@ -121,8 +88,12 @@ kubectl delete datadogagent datadog
 helm delete my-datadog-operator
 ```
 
-[1]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
-[2]: https://github.com/DataDog/extendeddaemonset
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /ja/containers/datadog_operator
+[2]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [3]: https://helm.sh/
 [4]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [5]: https://app.datadoghq.com/account/settings#api

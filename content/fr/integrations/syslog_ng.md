@@ -1,25 +1,28 @@
 ---
-title: Syslog-ng
-name: syslog_ng
-kind: integration
-description: Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs et de vos services.
-short_description: Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs et de vos services.
-categories:
-  - log collection
-doc_link: /integrations/syslog_ng/
 aliases:
-  - /fr/logs/log_collection/syslog_ng
+- /fr/logs/log_collection/syslog_ng
+categories:
+- log collection
+dependencies:
+- https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md
+description: Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs
+  et de vos services.
+doc_link: /integrations/syslog_ng/
 has_logo: true
+integration_id: syslog_ng
 integration_title: syslog_ng
 is_public: true
+kind: integration
+name: syslog_ng
 public_title: Intégration Datadog/Syslog-ng
-dependencies:
-  - https://github.com/DataDog/documentation/blob/master/content/en/integrations/syslog_ng.md
+short_description: Configurez Syslog-ng pour rassembler les logs de votre host, de
+  vos conteneurs et de vos services.
 supported_os:
-  - linux
-  - windows
-integration_id: syslog_ng
+- linux
+- windows
+title: Syslog-ng
 ---
+
 ## Présentation
 
 Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs et de vos services.
@@ -27,10 +30,6 @@ Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs e
 ## Configuration
 
 ### Collecte de logs
-
-{{< site-region region="us3" >}}
-**La collecte de logs n'est pas prise en charge pour le site {{< region-param key="dd_site_name" >}} Datadog**.
-{{< /site-region >}}
 
 1. Pour recueillir des logs système et des fichiers de log dans `/etc/syslog-ng/syslog-ng.conf`, assurez-vous que la source est correctement définie :
 
@@ -68,8 +67,14 @@ Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs e
     ...
 
     # For Datadog platform:
-    template DatadogFormat { template("YOURAPIKEY <${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} ${SDATA:--} $MSG\n"); };
-    destination d_datadog { tcp("intake.logs.datadoghq.com" port(10514) template(DatadogFormat)); };
+    destination d_datadog {
+      http(
+          url("https://http-intake.logs.{{< region-param key="dd_site" code="true" >}}/api/v2/logs?ddsource=<SOURCE>&ddtags=<TAG_1:VALUE_1,TAG_2:VALUE_2>")
+          method("POST")
+          headers("Content-Type: application/json", "Accept: application/json", "DD-API-KEY: <DATADOG_API_KEY>")
+          body("<${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} ${SDATA:--} $MSG\n")
+      );
+    };
     ```
 
 3. Définissez la sortie dans la section Log Path :
@@ -84,35 +89,7 @@ Configurez Syslog-ng pour rassembler les logs de votre host, de vos conteneurs e
     log { source(s_src); source(s_files); destination(d_datadog); };
     ```
 
-4. (Facultatif) Chiffrement TLS :
-
-    - Téléchargez le certificat d'autorité de certification :
-
-        ```shell
-        sudo apt-get install ca-certificates
-        ```
-
-    - Modifiez la destination comme suit :
-
-        ```conf
-        destination d_datadog { tcp("intake.logs.datadoghq.com" port(10516)     tls(peer-verify(required-trusted)) template(DatadogFormat)); };
-        ```
-
-    Pour en savoir plus sur les paramètres et les fonctionnalités de TLS, consultez le [guide sur l'administration de syslog-ng Open Source Edition][1] (en anglais).
-
-5. (Facultatif) Définissez la source de vos logs. Pour ce faire, utilisez le format suivant (si vous avez plusieurs sources, changez le nom du format dans chaque fichier) :
-
-    ```conf
-    template DatadogFormat { template("<API_KEY> <${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} [metas@0 ddsource=\"test\"] $MSG\n"); };
-    ```
-
-    Vous pouvez également ajouter des tags personnalisés avec l'attribut `ddtags` :
-
-    ```conf
-    template DatadogFormat { template("<API_KEY> <${PRI}>1 ${ISODATE} ${HOST:--} ${PROGRAM:--} ${PID:--} ${MSGID:--} [metas@0 ddsource=\"test\" ddtags=\"env:test,user:test_user,<KEY:VALUE>\"] $MSG\n"); };
-    ```
-
-6. Redémarrez Syslog-ng.
+4. Redémarrez Syslog-ng.
 
 ## Dépannage
 

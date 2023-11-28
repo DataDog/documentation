@@ -1,33 +1,34 @@
 ---
 categories:
-  - cloud
-  - google cloud
-  - log collection
-ddtype: crawler
+- cloud
+- configuration & deployment
+- google cloud
+- log collection
 dependencies: []
-description: "Surveillez des métriques clés de Google\_Cloud\_Composer."
+description: Surveillez des métriques clés de Google Cloud Composer.
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_composer/
 draft: false
 git_integration_title: google_cloud_composer
 has_logo: true
 integration_id: google-cloud-composer
-integration_title: "Google\_Cloud\_Composer"
+integration_title: Google Cloud Composer
 integration_version: ''
 is_public: true
 kind: integration
 manifest_version: '1.0'
 name: google_cloud_composer
-public_title: "Intégration Datadog/Google\_Cloud\_Composer"
-short_description: "Surveillez des métriques clés de Google\_Cloud\_Composer."
+public_title: Intégration Datadog/Google Cloud Composer
+short_description: Surveillez des métriques clés de Google Cloud Composer.
 version: '1.0'
 ---
+
 ## Présentation
 
 Google Cloud Composer est un service d'orchestration de workflows entièrement géré qui vous permet de créer, de planifier et de surveiller vos pipelines dans plusieurs clouds ou des centres de données sur site.
 
 Utilisez l'intégration Datadog/Google Cloud Platform pour recueillir des métriques de Google Composer.
 
-## Configuration
+## Implémentation
 
 ### Installation
 

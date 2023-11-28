@@ -31,7 +31,7 @@ title: API ソース属性
 | Amazon Auto Scaling           | amazon auto scaling           | autoscaling                |
 | Bigpanda                      | bigpanda                      | bigpanda                   |
 | Amazon App Runner             | amazon app runner             | awsapprunner               |
-| Amazon Backup                 | amazon backup                 | awsbackup                  |
+| AWS Backup                    | amazon backup                 | awsbackup                  |
 | Amazon Billing                | amazon billing                | billing                    |
 | Amazon Certificate Manager    | amazon certificate manager    | awscertificatemanager      |
 | Amazon Cloudfront             | amazon cloudfront             | cloudfront                 |
@@ -41,22 +41,28 @@ title: API ソース属性
 | Amazon Codebuild              | amazon codebuild              | codebuild                  |
 | Amazon Codedeploy             | amazon codedeploy             | codedeploy                 |
 | Amazon Cognito                | amazon cognito                | cognito                    |
+| Amazon Compute Optimizer      | amazon compute optimizer      | amazoncomputeoptimizer     |
+| Amazon Security Lake          | amazon security lake          | amazonsecuritylake         |
 | Amazon Connect                | amazon connect                | awsconnect                 |
 | Amazon Directconnect          | amazon directconnect          | directconnect              |
 | Amazon Dms                    | amazon dms                    | awsdms                     |
 | Amazon Documentdb             | amazon documentdb             | documentdb                 |
 | Amazon Dynamodb               | amazon dynamodb               | dynamodb                   |
+| Amazon Dynamodb Accelerator   | amazon dynamodb accelerator   | dynamodbaccelerator        |
 | Amazon Ebs                    | amazon ebs                    | ebs                        |
 | Amazon Ec2                    | amazon ec2                    | ec2                        |
 | Amazon Ec2 Spot               | amazon ec2 spot               | ec2spot                    |
+| Amazon Ecr                    | amazon ecr                    | ecr                        |
 | Amazon Ecs                    | amazon ecs                    | ecs                        |
 | Amazon Efs                    | amazon efs                    | efs                        |
 | Amazon Elasticache            | amazon elasticache            | elasticache                |
-| Amazon Elasticbeanstalk       | amazon elasticbeanstalk       | elasticbeanstalk           |
+| AWS Elastic Beanstalk         | amazon elasticbeanstalk       | elasticbeanstalk           |
 | Amazon Elastic Transcoder     | amazon elastic transcoder     | elastictranscoder          |
 | Amazon Mediaconnect           | amazon mediaconnect           | mediaconnect               |
 | Amazon Mediaconvert           | amazon mediaconvert           | mediaconvert               |
+| Amazon Medialive              | amazon medialive              | medialive                  |
 | Amazon Mediapackage           | amazon mediapackage           | mediapackage               |
+| Amazon Mediastore             | amazon mediastore             | mediastore                 |
 | Amazon Mediatailor            | amazon mediatailor            | mediatailor                |
 | Amazon Elb                    | amazon elb                    | elb                        |
 | Amazon Emr                    | amazon emr                    | emr                        |
@@ -73,7 +79,7 @@ title: API ソース属性
 | Amazon Kinesis Data Analytics | amazon kinesis data analytics | kinesisanalytics           |
 | Amazon Kinesis                | amazon kinesis                | kinesis                    |
 | Amazon Kms                    | amazon kms                    | kms                        |
-| Amazon Lambda                 | amazon lambda                 | lambda                     |
+| AWS Lambda                    | amazon lambda                 | lambda                     |
 | Amazon Lex                    | amazon lex                    | awslex                     |
 | Amazon App Mesh               | amazon app mesh               | amazonappmesh              |
 | Amazon Machine Learning       | amazon machine learning       | machinelearning            |
@@ -84,6 +90,7 @@ title: API ソース属性
 | Amazon Neptune                | amazon neptune                | neptune                    |
 | Amazon Ops Works              | amazon ops works              | opsworks                   |
 | Amazon Polly                  | amazon polly                  | polly                      |
+| Amazon Privatelink            | amazon privatelink            | privatelink                |
 | Amazon Rds                    | amazon rds                    | rds                        |
 | Amazon Rds Proxy              | amazon rds proxy              | rdsproxy                   |
 | Amazon Redshift               | amazon redshift               | redshift                   |
@@ -92,7 +99,7 @@ title: API ソース属性
 | Amazon S3                     | amazon s3                     | s3                         |
 | Amazon S3 Storage Lens        | amazon s3 storage lens        | s3storagelens              |
 | Amazon Sagemaker              | amazon sagemaker              | sagemaker                  |
-| Amazon Security Hub           | amazon security hub           | awssecurityhub             |
+| Amazon Security Hub           | amazon security hub           | amazon_security_hub        |
 | Amazon Ses                    | amazon ses                    | ses                        |
 | Amazon Shield                 | amazon shield                 | shield                     |
 | Amazon Sns                    | amazon sns                    | sns                        |
@@ -100,6 +107,8 @@ title: API ソース属性
 | Amazon Step Functions         | amazon step functions         | stepfunctions              |
 | Amazon Storage Gateway        | amazon storage gateway        | storagegateway             |
 | Amazon Swf                    | amazon swf                    | swf                        |
+| Amazon Textract               | amazon textract               | awstextract                |
+| Amazon Transit Gateway        | amazon transit gateway        | awstransitgateway          |
 | Amazon Translate              | amazon translate              | translate                  |
 | Amazon Trusted Advisor        | amazon trusted advisor        | trustedadvisor             |
 | Amazon Waf                    | amazon waf                    | waf                        |
@@ -108,7 +117,7 @@ title: API ソース属性
 | アマゾン ウェブ サービス (AWS)           | amazon web services           | cloudwatch                 |
 | Amazon Workspaces             | amazon workspaces             | workspaces                 |
 | Amazon Xray                   | amazon xray                   | awsxray                    |
-| Ansible                       | Ansible                       | Ansible                    |
+| Ansible                       | ansible                       | ansible                    |
 | Apache                        | apache                        | apache                     |
 | Azure Analysis Services       | azure analysis services       | azureanalysisservices      |
 | Azure Api Management          | azure api management          | azureapimanagement         |
@@ -116,10 +125,12 @@ title: API ソース属性
 | Azure App Service Plan        | azure app service plan        | azureappserviceplan        |
 | Azure App Service            | azure app services            | azureappservices           |
 | Azure Application Gateway     | azure application gateway     | azureapplicationgateway    |
+| Azure Arc                     | azure arc                     | azurearc                   |
 | Azure Automation              | azure automation              | azureautomation            |
 | Azure Batch                   | azure batch                   | azurebatch                 |
 | Azure Blob Storage            | azure blob storage            | azureblobstorage           |
 | Azure Cognitive Services      | azure cognitive services      | azurecognitiveservices     |
+| Azure Container Apps          | azure container apps          | azurecontainerapps         |
 | Azure Container Instances     | azure container instances     | azurecontainerinstances    |
 | Azure Container Service       | azure container service       | azurecontainerservice      |
 | Azure Cosmosdb                | azure cosmosdb                | azurecosmosdb              |
@@ -130,6 +141,7 @@ title: API ソース属性
 | Azure Db For Mariadb          | azure db for mariadb          | azuredbformariadb          |
 | Azure Db For Mysql            | azure db for mysql            | azuredbformysql            |
 | Azure Db For Postgresql       | azure db for postgresql       | azuredbforpostgresql       |
+| Azure Cosmosdb For Postgresql | azure cosmosdb for postgresql | azurecosmosdbforpostgresql |
 | Azure Devops                  | azure devops                  | azuredevops                |
 | Azure Event Grid              | azure event grid              | azureeventgrid             |
 | Azure Event Hub               | azure event hub               | azureeventhub              |
@@ -199,6 +211,7 @@ title: API ソース属性
 | Go                            | go                            | go                         |
 | Go Expvar                     | go expvar                     | goexpvar                   |
 | Google App Engine             | google app engine             | gae                        |
+| Google Cloud Alloydb          | google cloud alloydb          | gcpalloydb                 |
 | Google Cloud Apis             | google cloud apis             | gcpapis                    |
 | Google Cloud Audit Logs       | google cloud audit logs       | gcpauditlogs               |
 | Google Cloud Big Query        | google cloud big query        | gcpbigquery                |
@@ -230,6 +243,7 @@ title: API ソース属性
 | Google Cloudsql               | google cloudsql               | gcpcloudsql                |
 | Google Compute Engine         | google compute engine         | gcpcompute                 |
 | Google Container Engine       | google container engine       | gcpcontainer               |
+| Google Eventarc               | google eventarc               | gcpeventarc                |
 | Google Hangouts Chat          | google hangouts chat          | hangouts                   |
 | Google Kubernetes Engine      | google kubernetes engine      | gke                        |
 | Google Workspace Alert Center | google workspace alert center | googleworkspacealertcenter |
@@ -245,6 +259,7 @@ title: API ソース属性
 | Jira                          | jira                          | jira                       |
 | Jumpcloud                     | jumpcloud                     | jumpcloud                  |
 | Kafka                         | kafka                         | kafka                      |
+| Knative For Anthos            | knative for anthos            | knativeforanthos           |
 | Kong                          | kong                          | kong                       |
 | Kubernetes                    | kubernetes                    | kubernetes                 |
 | Kyoto Tycoon                  | kyoto tycoon                  | kyototycoon                |
@@ -284,7 +299,7 @@ title: API ソース属性
 | Powerdns Recursor             | powerdns recursor             | powerdnsrecursor           |
 | Puppet                        | puppet                        | puppet                     |
 | Pusher                        | pusher                        | pusher                     |
-| Python                        | python                        | python                     |
+| Python                        | php                        | php                     |
 | Rabbitmq                      | rabbitmq                      | rabbitmq                   |
 | Redis                         | redis                         | redis                      |
 | Redmine                       | redmine                       | redmine                    |
@@ -293,7 +308,11 @@ title: API ソース属性
 | Rollbar                       | rollbar                       | rollbar                    |
 | Ruby                          | ruby                          | ruby                       |
 | セールスフォース・ドットコム                    | salesforce                    | salesforce                 |
+| Salesforce Commerce Cloud     | salesforce commerce cloud     | salesforcecommercecloud    |
+| Salesforce Marketing Cloud    | salesforce marketing cloud    | salesforcemarketingcloud   |
+| Salesforce Incidents          | salesforce incidents          | salesforceincidents        |
 | セグメント                       | セグメント                       | セグメント                    |
+| Sendgrid                      | sendgrid                      | sendgrid                   |
 | Sentry                        | sentry                        | sentry                     |
 | Servicenow                    | servicenow                    | servicenow                 |
 | Slack                         | slack                         | slack                      |
@@ -301,13 +320,14 @@ title: API ソース属性
 | Solarwinds                    | solarwinds                    | solarwinds                 |
 | Solr                          | Solr                          | Solr                       |
 | Spark                         | spark                         | spark                      |
+| Split.io                      | splitio                       | splitio                    |
 | Splunk                        | splunk                        | splunk                     |
 | Sql Server                    | sql server                    | sqlserver                  |
 | Ssh                           | ssh                           | ssh                        |
 | Statuspage                    | statuspage                    | statuspage                 |
 | Sumo Logic                    | sumo logic                    | sumologic                  |
 | Supervisord                   | supervisord                   | supervisord                |
-| システム                        | system                        | system                     |
+| System                        | system                        | system                     |
 | Teamcity                      | teamcity                      | teamcity                   |
 | Tokumx                        | tokumx                        | tokumx                     |
 | Tomcat                        | tomcat                        | tomcat                     |
@@ -324,6 +344,7 @@ title: API ソース属性
 | Zabbix                        | zabbix                        | zabbix                     |
 | Zendesk                       | zendesk                       | zendesk                    |
 | Zookeeper                     | zookeeper                     | zookeeper                  |
+| Zscaler                       | zscaler                       | zscaler                    |
 
 
 [1]: /ja/api/latest/events/

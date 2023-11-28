@@ -34,7 +34,7 @@ draft: false
 git_integration_title: silk
 integration_id: silk
 integration_title: Silk
-integration_version: 1.2.0
+integration_version: 1.2.3
 is_public: true
 kind: integration
 manifest_version: 2.0.0

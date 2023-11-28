@@ -1,6 +1,12 @@
 ---
+algolia:
+  tags:
+  - watchdog
 aliases:
 - /ja/tracing/watchdog
+cascade:
+  algolia:
+    rank: 70
 description: アプリケーションとインフラストラクチャーの潜在的な問題を自動的に検出
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Watchdog
@@ -22,19 +28,23 @@ further_reading:
   tag: ブログ
   text: Watchdog Impact Analysis によるユーザーインパクト範囲の把握
 kind: ドキュメント
-title: Watchdog
+title: Datadog WatchdogTM
 ---
 
-{{< img src="watchdog/watchdog.png" alt="エラーレートに関する 2 つの継続的な重要アラートを表示する Watchdog Alerts ページ" >}}
+{{< img src="watchdog/watchdog.png" alt="Watchdog Alerts ページには、エラーログの進行中のログ異常アラートが 1 つ、エラーログの解決済みログ異常アラートが 1 つ、根本原因分析によって解決されたエラーレートアラートが 1 つ表示されています" >}}
 
 ## 概要
 
-Watchdog は、アプリケーションやインフラストラクチャーの潜在的な問題を自動的に検出する APM パファーマンスおよびインフラストラクチャーメトリクスのアルゴリズム機能です。Watchdog は以下の傾向やパターンを監視します。異常検知やダッシュボードを起動するのと同様の季節アルゴリズムを活用します。Watchdog は以下の傾向やパターンを監視します。
+Watchdog は、アプリケーションやインフラストラクチャーの潜在的な問題を自動的に検出する APM パファーマンス、インフラストラクチャーメトリクス、およびログのアルゴリズム機能です。Watchdog は以下の傾向やパターンを監視します。異常検知やダッシュボードを起動するのと同様の季節アルゴリズムを活用します。Watchdog は以下の傾向やパターンを監視します。
 
 * APM メトリクス:
   * ヒット数（リクエスト率）
   * エラー率
   * レイテンシー
+
+* ログ管理
+  * 新しいエラーログ
+  * 既存のエラーログの増加
 
 * インテグレーションによるインフラストラクチャーメトリクス
   * [システム][1]、ホストレベルのメモリ使用量（メモリリーク）、TCP 再送率。
@@ -71,7 +81,7 @@ Watchdog のアイコンは、メトリクスグラフにも表示されます�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/integrations/system/
-[2]: /ja/integrations/redis/
+[2]: /ja/integrations/redisdb/
 [3]: /ja/integrations/postgres/
 [4]: /ja/integrations/nginx/
 [5]: /ja/integrations/amazon_web_services/

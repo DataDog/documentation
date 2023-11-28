@@ -1,7 +1,8 @@
 ---
 categories:
-- クラウド
+- 自動化
 - AWS
+- クラウド
 - ログの収集
 dependencies: []
 description: Amazon Textract の主要なメトリクスを追跡します。

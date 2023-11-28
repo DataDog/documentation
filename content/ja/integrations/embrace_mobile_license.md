@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: embrace-mobile-license
 app_uuid: 2996b6e0-1aed-46cc-9fe5-4ea72aeae636
 assets: {}
@@ -11,6 +13,7 @@ author:
 categories:
 - マーケットプレイス
 - モバイル
+- ネットワーク
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -38,16 +41,17 @@ pricing:
 public_title: Embrace モバイルライセンス
 short_description: iOS、Android、React Native、Unity のためのモバイル可観測性
 supported_os:
-- ios
 - android
+- ios
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::iOS
-  - Supported OS::Android
-  - Offering::Software License
   - Category::Marketplace
   - Category::Mobile
+  - Category::Network
+  - Offering::Software License
+  - Supported OS::Android
+  - Supported OS::iOS
   configuration: README.md#Setup
   description: iOS、Android、React Native、Unity のためのモバイル可観測性
   media:
@@ -74,6 +78,7 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Embrace モバイルライセンス
+  uninstallation: README.md#Uninstallation
 ---
 
 
@@ -123,15 +128,22 @@ Datadog から、Embrace プラットフォーム内のモバイル体験を最�
 機能やリリースのパフォーマンスや安定性の低下について、いち早くお知らせします。不具合の原因がコードにあるのか、バックエンドにあるのか、サードパーティの SDK やベンダーにあるのか、Embrace がリアルタイムで通知するので、ユーザーから苦情が来る前に対策を講じることができます。
 
 ## サポート
-サポートやご質問は、下記より Embrace にご連絡ください。
+サポートやご質問は、以下のチャンネルから Embrace にお問い合わせください。
 
-メール: datadogsupport@embrace.io 
+メール: [datadogsupport@embrace.io][4] 
 
-ドキュメントは[こちら][2]をご覧ください。
+### その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog Marketplace の Embrace の製品を使ってモバイルアプリを監視する][6]
+- [Embrace ドキュメント][2]
 
 [1]: https://embrace.io
 [2]: https://embrace.io/docs/
 [3]: https://dash.embrace.io
-
+[4]: mailto:datadogsupport@embrace.io
+[5]: https://app.datadoghq.com/integrations/embrace-mobile
+[6]: https://www.datadoghq.com/blog/mobile-application-monitoring-embrace-datadog/
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/embrace-mobile-license" target="_blank">こちらをクリック</a>してください。

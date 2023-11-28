@@ -1,4 +1,11 @@
 ---
+algolia:
+  tags:
+  - database monitoring
+  - dbm
+cascade:
+  algolia:
+    rank: 70
 description: En savoir plus sur la solution Database Monitoring et se lancer
 further_reading:
 - link: https://www.datadoghq.com/blog/database-performance-monitoring-datadog
@@ -13,9 +20,16 @@ further_reading:
 - link: /database_monitoring/troubleshooting/
   tag: Documentation
   text: Dépannage
+- link: https://dtdg.co/fe
+  tag: Validation des bases
+  text: Prenez part à une session interactive pour améliorer la solution Database
+    Monitoring
 kind: documentation
 title: Database Monitoring
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">La solution Database Monitoring n'est pas prise en charge pour ce site.</div>
+{{< /site-region >}}
 
 {{< img src="database_monitoring/dbm-main.png" alt="Database Monitoring" style="width:100%;">}}
 
@@ -35,7 +49,12 @@ La solution Database Monitoring de Datadog prend en charge la surveillance des v
 {{< partial name="dbm/dbm-setup-mysql" >}}
 <p></p>
 
-### SQL Server
+### Oracle
+
+{{< partial name="dbm/dbm-setup-oracle" >}}
+<p></p>
+
+### SQL Server
 
 {{< partial name="dbm/dbm-setup-sql-server" >}}
 <p></p>
@@ -72,7 +91,7 @@ Les [plans d'exécution][4] vous aident à comprendre comment la base de donnée
 - Améliorez l'efficacité de vos requêtes et limitez les analyses séquentielles de vastes tables pour réduire vos coûts.
 - Consultez l'évolution du plan d'une requête en fonction du temps.
 
-{{< img src="database_monitoring/dbm-explain-plan.png" alt="Surveillance de base données" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-explain-plan2.png" alt="Database Monitoring" style="width:100%;">}}
 
 ### Visualisez toutes vos données sur des dashboards enrichis
 

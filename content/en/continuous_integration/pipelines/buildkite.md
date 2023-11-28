@@ -19,6 +19,18 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
+## Compatibility
+
+- **Partial pipelines**: View [partially retried][5] and downstream pipeline executions
+
+- **Infrastructure metric correlation**: Correlate jobs to [infrastructure host metrics][8] for Buildkite agents
+
+- **Manual steps**: View manually triggered pipelines
+
+- **Queue time**: View amount of time pipeline jobs sit in the queue before processing
+
+- **Custom tags and metrics at runtime**: Configure [custom tags][6] and metrics at runtime
+
 ## Configure the Datadog integration
 
 The steps to activate the Datadog integration for [Buildkite][1] are:
@@ -32,7 +44,7 @@ The steps to activate the Datadog integration for [Buildkite][1] are:
    * **Branch filtering**: Leave empty to trace all branches or select the subset of branches you want to trace.
 3. Click **Add Datadog Pipeline Visibility Notification** to save the integration.
 
-### Setting custom tags
+### Set custom tags
 
 Custom tags can be added to Buildkite traces by using the `buildkite-agent meta-data set` command.
 Any metadata tags with a key starting with `dd_tags.` are added to the job and pipeline spans. These
@@ -83,6 +95,29 @@ The [Pipelines][3] and [Pipeline Executions][4] pages populate with data after t
 
 **Note**: The Pipelines page shows data for only the default branch of each repository.
 
+### Correlate infrastructure metrics to jobs
+
+If you are using Buildkite agents, you can correlate jobs with the infrastructure that is running them.
+For this feature to work, install the [Datadog Agent][7] in the hosts running the Buildkite agents.
+
+### View partial and downstream pipelines
+
+In the **Pipeline Executions** page, you can use the filters below in the search bar:
+
+`Downstream Pipeline`
+: Possible values: `true`, `false`
+
+`Manually Triggered`
+: Possible values: `true`, `false`
+
+`Partial Pipeline`
+: Possible values: `retry`, `paused`, `resumed`
+
+{{< img src="ci/partial_retries_search_tags.png" alt="The Pipeline executions page with Partial Pipeline:retry entered in the search query" style="width:100%;">}}
+
+These filters can also be applied through the facet panel on the left hand side of the page.
+{{< img src="ci/partial_retries_facet_panel.png" alt="The facet panel with Partial Pipeline facet expanded and the value Retry selected, the Partial Retry facet expanded and the value true selected" style="width:40%;">}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -91,3 +126,7 @@ The [Pipelines][3] and [Pipeline Executions][4] pages populate with data after t
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/ci/pipelines
 [4]: https://app.datadoghq.com/ci/pipeline-executions
+[5]: https://docs.datadoghq.com/continuous_integration/pipelines/buildkite/#view-partial-and-downstream-pipelines
+[6]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[7]: /agent/
+[8]: /continuous_integration/pipelines/buildkite/#correlate-infrastructure-metrics-to-jobs

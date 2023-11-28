@@ -1,7 +1,8 @@
 ---
 categories:
-- cloud
+- 自動化
 - azure
+- クラウド
 dependencies: []
 description: Azure Automation のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/azure_automation/

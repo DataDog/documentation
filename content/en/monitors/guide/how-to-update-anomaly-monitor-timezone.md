@@ -2,7 +2,7 @@
 title: How to update an anomaly detection monitor to account for local time zone
 kind: guide
 further_reading:
-- link: "/monitors/create/types/anomaly/"
+- link: "/monitors/types/anomaly/"
   tag: "Documentation"
   text: "Create an anomaly monitor"
 - link: "/monitors/notify/"
@@ -32,7 +32,7 @@ To update an anomaly detection monitor to account for a local timezone in the UI
 
 ## API
 
-1.  You need the following information to make the update request through the monitor API:
+1. You need the following information to make the update request through the monitor API:
   - Your [Datadog API key and application key][3] for authentication
   - The monitor ID and query from your anomaly detection monitor:
     {{< img src="monitors/guide/anomaly_monitor_timezone.png" alt="Monitor ID and Query" >}}

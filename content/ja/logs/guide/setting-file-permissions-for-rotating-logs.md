@@ -1,19 +1,20 @@
 ---
-title: ログローテーションのためのファイルアクセス許可の設定 (Linux)
-kind: ガイド
 aliases:
-  - /ja/logs/faq/setting-file-permissions-for-rotating-logs
+- /ja/logs/faq/setting-file-permissions-for-rotating-logs
 further_reading:
-  - link: /logs/guide/log-parsing-best-practice/
-    tag: FAQ
-    text: ログのパース - ベストプラクティス
-  - link: /logs/log_configuration/processors
-    tag: Documentation
-    text: ログの処理方法
-  - link: /logs/log_configuration/parsing
-    tag: Documentation
-    text: パースの詳細
+- link: /logs/guide/log-parsing-best-practice/
+  tag: FAQ
+  text: ログのパース - ベストプラクティス
+- link: /logs/log_configuration/processors
+  tag: Documentation
+  text: ログの処理方法
+- link: /logs/log_configuration/parsing
+  tag: Documentation
+  text: パースの詳細
+kind: ガイド
+title: ログローテーションのためのファイルアクセス許可の設定 (Linux)
 ---
+
 Datadog Agent は、`dd-agent` ユーザーおよび `dd-agent` グループの下で実行されるため、`/var/log` 内のログにアクセスできません。デフォルトでは、これらのファイルにはルート (または sudo 管理者) しかアクセスできないからです。
 
 ## ACL を使用したアクセス許可の設定
@@ -33,7 +34,7 @@ getfacl /var/log/test-dir/
 
 ACL が有効になっている場合は、`datadog-agent` に設定されたアクセス許可が getfacl の出力に表示されます。
 
-{{< img src="logs/faq/setting_file_permission.png" alt="ファイルアクセス許可の設定"  >}}
+{{< img src="logs/faq/setting_file_permission.png" alt="ファイルアクセス許可の設定" >}}
 
 ### ログディレクトリに対する読み取りおよび実行アクセス許可を dd-agent に付与する
 

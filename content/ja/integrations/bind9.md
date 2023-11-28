@@ -1,35 +1,57 @@
 ---
+app_id: bind9
+app_uuid: b37533b0-6f0e-4259-9971-083f08086fac
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: bind9.nsstat_AuthQryRej
+      metadata_path: metadata.csv
+      prefix: bind9.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: BIND 9
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: コミュニティ
+  sales_email: ashuvyas45@gmail.com
+  support_email: ashuvyas45@gmail.com
 categories:
-- モニター
-creates_events: false
+- ネットワーク
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bind9/README.md
-display_name: BIND 9
+display_on_public_website: true
 draft: false
 git_integration_title: bind9
-guid: bce6961c-4312-11e9-b210-d663bd873d93
 integration_id: bind9
 integration_title: bind9
 integration_version: 1.0.0
 is_public: true
 kind: インテグレーション
-maintainer: ashuvyas45@gmail.com
-manifest_version: 1.0.0
-metric_prefix: bind9.
-metric_to_check: bind9.nsstat_AuthQryRej
+manifest_version: 2.0.0
 name: bind9
+oauth: {}
 public_title: bind9
 short_description: bind9 サーバーのメトリクスを収集する Datadog インテグレーション
-support: contrib
 supported_os:
 - linux
-- mac_os
 - windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Category::Network
+  - Supported OS::macOS
+  configuration: README.md#Setup
+  description: bind9 サーバーのメトリクスを収集する Datadog インテグレーション
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: bind9
 ---
 
 

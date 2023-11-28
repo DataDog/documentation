@@ -1,7 +1,7 @@
 ---
-title: Understanding API Test Timings And Troubleshooting Variations
+title: Understand API Test Timings And Troubleshoot Variations
 kind: documentation
-description: Understanding API test timings and troubleshooting their variations
+description: Understand API test timings and troubleshoot their variations.
 aliases:
 - /synthetics/api_test_timing_variations
 further_reading:
@@ -54,7 +54,7 @@ The `synthetics.http.ssl.time` and the `synthetics.ssl.hanshake.time` metrics me
 
 These metrics are only collected if the request goes over HTTPS, and not HTTP. 
 
-In case of any redirection, the SSL handshake timing only corresponds to  the last request.
+In case of any redirection, the SSL handshake timing only corresponds to the last request.
 
 
 ### Time to first byte

@@ -2,12 +2,12 @@
 title: Getting Started with API Tests
 kind: documentation
 further_reading:
-- link: '/api/v1/synthetics/#create-a-test'
-  tag: 'API'
-  text: 'Create a Synthetic test programmatically'
 - link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
   tag: 'Learning Center'
   text: 'Introduction to Synthetic Tests'
+- link: '/api/latest/synthetics/#create-an-api-test'
+  tag: 'API'
+  text: 'Create an API test programmatically'
 - link: '/synthetics/api_tests'
   tag: 'Documentation'
   text: 'Learn more about single API tests'
@@ -48,7 +48,7 @@ The example below demonstrates how to create an [HTTP test][3], a subtype of [si
 3. Select the `HTTP` request type.
 4. Define your request:
 
-    - Add the URL of the endpoint you want to monitor. If you don’t know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. 
+    - Add the URL of the endpoint you want to monitor. If you don't know what to start with, you can use `https://www.shopist.io/`, a test e-commerce web application. Defining the endpoint to test automatically populates the name of your test to `Test on www.shopist.io`. 
     - You can select **Advanced Options** to set custom request options, certificates, authentication credentials, and more.  
     
       **Note:** You can create secure [global variables][6] to store credentials and create [local variables][7] to generate dynamic timestamps to use in your request payload. After creating these variables, type `{{` in any relevant field and select the variable to inject its value in your test options.  
@@ -70,15 +70,13 @@ In this example, three default assertions populate after triggering the sample t
 
 Assertions are fully customizable. To add a custom assertion, click on elements of the response preview such as the headers or click **New Assertion** to define a new assertion from scratch. 
 
-{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="Example API test configuration" video="true"  >}}
+{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="Example API test configuration" video="true" >}}
 
 ### Select locations 
 
-Select one or more **Managed Locations** or **Private Locations** to run your test from.
+Select one or more **Managed Locations** or **Private Locations** to run your test from. {{% managed-locations %}}
 
-Managed locations allow you to test public-facing websites and endpoints. To test internal applications or simulate user behavior in discrete geographic regions, use [private locations][8] instead.
-
-The Shopist application is publicly available at `https://www.shopist.io/`, so you can pick any managed locations to execute your test from.
+The Shopist application is publicly available at `https://www.shopist.io/`, so you can pick any managed locations to execute your test from. To test internal applications or simulate user behavior in discrete geographic regions, use [private locations][8] instead.
 
 ### Specify test frequency
 

@@ -27,9 +27,6 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- 処理
-- メッセージング
-- オートディスカバリー
 - ログの収集
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/confluent_platform/README.md
@@ -38,7 +35,7 @@ draft: false
 git_integration_title: confluent_platform
 integration_id: confluent-platform
 integration_title: Confluent Platform
-integration_version: 1.8.1
+integration_version: 1.8.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -48,18 +45,15 @@ public_title: Confluent Platform
 short_description: Confluent Platform のコンポーネントを監視する。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Processing
-  - Category::Messaging
-  - Category::Autodiscovery
   - Category::Log Collection
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Confluent Platform のコンポーネントを監視する。
   media: []

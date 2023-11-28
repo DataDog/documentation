@@ -1,24 +1,26 @@
 ---
-title: Agent によるログの転送
-kind: ドキュメント
 description: Datadog Agent を使用してログを収集し、Datadog に送信
 further_reading:
-  - link: agent/logs/advanced_log_collection/#filter-logs
-    tag: ドキュメント
-    text: Datadog に送信されるログの絞り込み
-  - link: agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
-    tag: ドキュメント
-    text: ログの機密データのスクラビング
-  - link: agent/logs/advanced_log_collection/#multi-line-aggregation
-    tag: ドキュメント
-    text: 複数行のログの集約
-  - link: agent/logs/advanced_log_collection/#tail-directories-by-using-wildcards
-    tag: ドキュメント
-    text: ワイルドカードを使用したディレクトリの追跡
-  - link: agent/logs/advanced_log_collection/#global-processing-rules
-    tag: ドキュメント
-    text: グローバルな処理ルール
+- link: agent/logs/advanced_log_collection/#filter-logs
+  tag: ドキュメント
+  text: Datadog に送信されるログの絞り込み
+- link: agent/logs/advanced_log_collection/#scrub-sensitive-data-from-your-logs
+  tag: ドキュメント
+  text: ログの機密データのスクラビング
+- link: agent/logs/advanced_log_collection/#multi-line-aggregation
+  tag: ドキュメント
+  text: 複数行のログの集約
+- link: agent/logs/advanced_log_collection/#tail-directories-using-wildcards
+  tag: ドキュメント
+  text: ワイルドカードを使用したディレクトリの追跡
+- link: agent/logs/advanced_log_collection/#global-processing-rules
+  tag: ドキュメント
+  text: グローバルな処理ルール
+kind: ドキュメント
+title: Logs の Agent 転送
 ---
+
+
 ## Agent のデフォルトの動作
 
 v6.19 以降/v7.19 以降の Agent は、デフォルトで、旧バージョンに合わせて TCP ではなく HTTPS で圧縮してログを転送します。
@@ -28,7 +30,7 @@ v6.19 以降/v7.19 以降の Agent は、デフォルトで、旧バージョン
 
 Agent が使用している転送を確認するには、[Agent status コマンド][1]を実行します。
 
-{{< img src="agent/logs/agent-status.png" alt="Agent のステータス"  style="width:70%;">}}
+{{< img src="agent/logs/agent-status.png" alt="Agent のステータス" style="width:70%;">}}
 
 **注**:
 
@@ -57,37 +59,11 @@ logs_config:
 
 デフォルトで、Datadog Agent はポート `443` を使用して HTTPS 経由でログを Datadog に送信します。
 
-[1]: /ja/agent/guide/agent-configuration-files/
-{{% /tab %}}
-{{% tab "TCP" %}}
-
-TCP 転送を実行するには、Agent の[メインコンフィギュレーションファイル][1] (`datadog.yaml`) を次のように更新します。
-
-```yaml
-logs_enabled: true
-logs_config:
-  use_tcp: true
-```
-環境変数を伴った形でログを送信するには、以下の構成を行ってください。
-
-* `DD_LOGS_ENABLED=true`
-* `DD_LOGS_CONFIG_USE_TCP=true`
-
-デフォルトでは、Datadog Agent は TLS で暗号化された TCP を介して、ログを Datadog に送信します。これを実施するには、外部へ送信できる通信 (Datadog US サイトではポート `10516`、Datadog EU サイトではポート `443`) が必要です 。
-
-
-
-[1]: /ja/agent/guide/agent-configuration-files/
-{{% /tab %}}
-{{< /tabs >}}
-
-**注**:  SOCKS5 プロキシは 圧縮 HTTPS でまだサポートされていないため、[SOCKS5 プロキシ][2]サーバーのセットアップでは TCP 転送が実行されます。
-
 ## HTTPS 転送
 
 `200` ステータスコードが Datadog ストレージシステムから返されるため、最も信頼性の高いログ収集を行うには、**HTTPS ログ転送コンフィギュレーションを推奨します**。
 
-{{< img src="agent/HTTPS_intake_reliability_schema.png" alt="HTTPS インテークスキーマ"  style="width:80%;">}}
+{{< img src="agent/HTTPS_intake_reliability_schema.png" alt="HTTPS インテークスキーマ" style="width:80%;">}}
 
 HTTP を使用して、次を上限として Agent がログのバッチを送信します。
 
@@ -99,7 +75,7 @@ HTTP を使用して、次を上限として Agent がログのバッチを送�
 
 `compression_level` パラメーター (または `DD_LOGS_CONFIG_COMPRESSION_LEVEL`) には `0` (圧縮なし) から `9` (最大圧縮、リソース使用率: 高) までの値を設定できます。デフォルト値は `6` です。
 
-圧縮を有効化した場合の Agent リソースの使用状況については、[Datadog Agent のオーバーヘッド][3]で詳細をご確認ください。
+圧縮を有効化した場合の Agent リソースの使用状況については、[Datadog Agent のオーバーヘッド][2]で詳細をご確認ください。
 
 6.19 / 7.19 以前のバージョンの Agent の場合、次のようにAgent の[メインコンフィギュレーションファイル][1] (`datadog.yaml`) 更新して圧縮を行う必要があります。
 
@@ -126,10 +102,34 @@ logs_config:
 
 ### HTTPS プロキシのコンフィギュレーション
 
-ログを HTTPS 経由で送信する場合は、他のデータタイプと同じ[プロキシ設定セット][4]を使用して、ログを Web プロキシ経由で送信します。
-
+ログを HTTPS 経由で送信する場合は、他のデータタイプと同じ[プロキシ設定セット][3]を使用して、ログを Web プロキシ経由で送信します。
 
 [1]: /ja/agent/guide/agent-configuration-files/
+[2]: /ja/agent/basic_agent_usage/#agent-overhead
+[3]: /ja/agent/proxy/
+{{% /tab %}}
+{{% tab "TCP" %}}
+
+TCP 転送を実行するには、Agent の[メインコンフィギュレーションファイル][1] (`datadog.yaml`) を次のように更新します。
+
+```yaml
+logs_enabled: true
+logs_config:
+  use_tcp: true
+```
+環境変数を伴った形でログを送信するには、以下の構成を行ってください。
+
+* `DD_LOGS_ENABLED=true`
+* `DD_LOGS_CONFIG_USE_TCP=true`
+
+デフォルトでは、Datadog Agent は TLS で暗号化された TCP を介して、ログを Datadog に送信します。これを実施するには、外部へ送信できる通信 (Datadog US サイトではポート `10516`、Datadog EU サイトではポート `443`) が必要です 。
+
+[1]: /ja/agent/guide/agent-configuration-files/
+{{% /tab %}}
+{{< /tabs >}}
+
+**注**:  SOCKS5 プロキシは 圧縮 HTTPS でまだサポートされていないため、[SOCKS5 プロキシ][2]サーバーのセットアップでは TCP 転送が実行されます。
+
+
+[1]: /ja/agent/guide/agent-commands/?tab=agentv6v7#service-status
 [2]: /ja/agent/logs/proxy/?tab=socks5
-[3]: /ja/agent/basic_agent_usage/#agent-overhead
-[4]: /ja/agent/proxy/

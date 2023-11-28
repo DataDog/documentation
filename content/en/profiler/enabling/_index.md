@@ -1,16 +1,17 @@
 ---
 title: Enabling the Profiler
 kind: Documentation
-aliases: 
+type: multi-code-lang
+aliases:
   - /tracing/faq/profiling_migration/
   - /tracing/profiler/enabling/
 further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'profiler/search_profiles'
+    - link: 'profiler/profile_visualizations'
       tag: 'Documentation'
-      text: 'Learn more about available profile types'
+      text: 'Learn more about available profile visualizations'
     - link: 'profiler/profiler_troubleshooting'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'

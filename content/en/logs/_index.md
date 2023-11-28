@@ -5,6 +5,7 @@ description: "Configure your Datadog Agent to gather logs from your host, contai
 disable_sidebar: true
 aliases:
   - /guides/logs/
+  - /en/logs
   - /logs/logging_without_limits
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Log%20Management"
@@ -12,16 +13,31 @@ further_reading:
     text: "Check out the latest Datadog Log Management releases (App login required)"
   - link: "/logs/log_collection/"
     tag: "Documentation"
-    text: "Starting collecting your logs"
-  - link: "https://learn.datadoghq.com"
+    text: "Start collecting your logs"
+  - link: "https://learn.datadoghq.com/courses/intro-to-log-management"
     tag: "Learning Center"
-    text: "Learn more about Datadog Log Management"
+    text: "Introduction to Log Management"
+  - link: 'https://dtdg.co/fe'
+    tag: 'Foundation Enablement'
+    text: 'Join an interactive session to optimize your Log Management'
   - link: "https://www.datadoghq.com/blog/accelerate-incident-investigations-with-log-anomaly-detection/"
     tag: "Blog"
     text: "Accelerate Incident Investigations with Log Anomaly Detection"
   - link: "https://www.datadoghq.com/blog/monitor-iot-devices-at-scale-with-log-management/"
     tag: "Blog"
     text: "Monitor your IoT devices at scale with Datadog Log Management"
+  - link: "https://www.datadoghq.com/blog/monitoring-firewall-logs-datadog/"
+    tag: "Blog"
+    text: "Monitor your firewall logs with Datadog"
+  - link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
+    tag: "Blog"
+    text: "Use CIDR notation queries to filter your network traffic logs"
+  - link: "https://www.datadoghq.com/blog/monitor-1password-datadog-cloud-siem/"
+    tag: "Blog"
+    text: "Monitor 1Password with Datadog Cloud SIEM"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview
@@ -32,7 +48,7 @@ Datadog Log Management, also referred to as Datadog logs or logging, removes the
 
 Logging without Limits\* enables a streamlined troubleshooting experience in the [Log Explorer][1], which empowers you and your teams to quickly assess and fix your infrastructure issues. It provides intuitive archiving to support your security and IT teams during audits and assessments. Logging without Limits* also powers [Datadog Cloud SIEM][2], which detects security threats in your environment, without requiring you to index logs.
 
-{{< vimeo 293195142 >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/293195142/rendition/1080p/file.mp4?loc=external&signature=8a45230b500688315ef9c8991ce462f20ed1660f3edff3d2904832e681bd6000" poster="/images/poster/logs.png" >}}
 
 </br>
 
@@ -42,7 +58,7 @@ Begin [ingesting logs][3] from your hosts, containers, cloud providers, and othe
 
 ## Configure
 
-{{< img src="/logs/configure.png" alt="Configure your logs all in one place" style="width:80%;">}}
+{{< img src="logs/lwl_marketecture_20231030.png" alt="Configure your logs all in one place" >}}
 
 Once your logs are ingested, process and enrich all your logs with pipelines and processors, provide control of your log management budget with indexes, generate metrics from ingested logs, or manage your logs within storage-optimized archives with [Log Configuration options][4].
 
@@ -53,13 +69,13 @@ Once your logs are ingested, process and enrich all your logs with pipelines and
 Leverage the pillars of observability by connecting your logs to metrics and traces:
 
 - [Connect your logs and traces][5] to gain observability into your applications.
-- [Correlate logs and metrics][6] to gain context of an issue and map it throughout your service.
+- [Correlate your logs and metrics][6] to gain context of an issue and map it throughout your service.
 
 ## Explore
 
 Start exploring your ingested logs in the [Log Explorer][1].
 
-{{< img src="/logs/explore.jpg" alt="Explore your ingested logs" style="width:80%;">}}
+{{< img src="/logs/explore.png" alt="Explore your ingested logs" style="width:80%;">}}
 
 - [Search][7]: Search through all of your logs.
 - [Live Tail][8]: See your ingested logs in real time across all your environments.
@@ -74,7 +90,7 @@ Start exploring your ingested logs in the [Log Explorer][1].
 \*Logging without Limits is a trademark of Datadog, Inc.
 
 [1]: /logs/explorer/
-[2]: /security_platform/cloud_siem/
+[2]: /security/cloud_siem/
 [3]: /logs/log_collection/
 [4]: /logs/log_configuration/
 [5]: /tracing/other_telemetry/connect_logs_and_traces/

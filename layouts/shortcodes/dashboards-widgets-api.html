@@ -31,10 +31,10 @@
 
     <ul class="nav nav-tabs border-none response-toggle">
         <li class="nav-item">
-            <a class="nav-link mr-1 js-model-link active" href="#" data-toggle="tab">{{ i18n "model" }}</a>
+            <a class="nav-link me-1 js-model-link active" href="#" data-bs-toggle="tab">{{ i18n "model" }}</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link mr-1 js-example-link" href="#" data-toggle="tab">{{ i18n "example" }}</a>
+            <a class="nav-link me-1 js-example-link" href="#" data-bs-toggle="tab">{{ i18n "example" }}</a>
         </li>
     </ul>
 
@@ -42,7 +42,7 @@
 
       <div role="tabpanel" class="tab-pane active js-tab-model" id="-model">
         <div class="table-request schema-table row {{ if not (in $html "js-collapse-trigger") }}has-no-expands{{ end }} {{ if (in $html "hide-table") }}d-none{{ end }}">
-          <p class="expand-all js-expand-all text-primary">Expand All</p>
+          <p class="expand-all js-expand-all text-primary text-end">Expand All</p>
           <div class="col-12">
             <div class="row table-header">
               <div class="col-4 column">
@@ -62,10 +62,7 @@
 
       <div role="tabpanel" class="tab-pane js-tab-example" id="example">
         <div class="code-snippet-wrapper">
-          <div class="code-snippet">
-            <div class="code-button-wrapper position-absolute">
-              <button class="btn text-primary js-copy-button">{{ i18n "copy" }}</button>
-            </div>
+          <div class="code-snippet append-copy-btn">
             {{ print $json | safeHTML }}
           </div>
         </div>

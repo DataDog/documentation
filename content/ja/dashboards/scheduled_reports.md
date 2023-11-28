@@ -25,7 +25,7 @@ title: スケジュールされたレポート
 
 ## レポートのスケジュール
 
-グリッドベースまたは自動レイアウトの任意のダッシュボードから新しいレポートを作成します。ダッシュボードの歯車アイコンをクリックし、**Schedule a Report** を選択します。
+グリッドベースまたは自動レイアウトのダッシュボードからレポートを作成します。**Share** ボタンをクリックし、**Schedule a Report** を選択します。
 
 以下のウィジェットタイプに対応しています。
 
@@ -33,9 +33,10 @@ title: スケジュールされたレポート
 - [Distribution][2]
 - [Geomap][3]
 - [Group][4]
-- [Heat Map][5]
+- [ヒートマップ][5]
 - [Monitor Summary][6]
 - [Notes and Links][7]
+- [円グラフ][16]
 - [Query Value][8]
 - [Scatter Plot][9]
 - [SLO サマリー][10]
@@ -65,9 +66,9 @@ title: スケジュールされたレポート
 スケジュールを保存する前にレポートを確認するには、**Send Preview** をクリックします。レポートスケジュールはいつでも一時停止することができます。
 
 ## レポートの管理
-同じダッシュボードに関心を持つ異なるグループの関係者をサポートするためなどに、1 つのダッシュボードに異なる設定で複数のスケジュールレポートを設定することができます。既存のダッシュボードのレポートを確認するには、ダッシュボードの歯車メニューを開き、**Configure Reports** を選択します。
+同じダッシュボードに関心を持つ異なるグループの関係者をサポートするためなどに、1 つのダッシュボードに異なる設定で複数のスケジュールレポートを設定することができます。既存のダッシュボードのレポートを確認するには、**Share** メニューを開き、**Configure Reports** を選択します。
 
-{{< img src="dashboards/scheduled_reports/dashboard_cog_menu.png" alt="ダッシュボードで歯車のアイコンにカーソルを合わせたときに表示されるメニューに、レポートを構成するオプションが表示された様子" style="width:50%;" >}}
+{{< img src="dashboards/scheduled_reports/configure_reports.png" alt="ダッシュボードの Share メニューでレポートを構成するオプションの様子" style="width:50%;" >}}
 
 開いた構成モーダルから、既存のレポートを一時停止したり、新しいレポートを作成したりすることができます。既存のレポートの詳細を確認・編集したり、レポートを削除するには、**Edit** をクリックします。
 
@@ -77,15 +78,15 @@ title: スケジュールされたレポート
 
 レポートを作成できるのは、**Dashboard Report Write** 権限を持つユーザーのみです。この権限は、Admins ではデフォルトでオンに、その他のすべてのロールではオフに設定されています。
 
-レポートで生成される画像は、粒度の細かい読み取り制限に関係なく、すべてのデータを表示します。Datadog では、レポートの権限は、データの詳細な読み取り制限を持たないユーザーに限定することをお勧めします。ユーザーに **Dashboard Report Write** 権限を付与するには、**Dashboards Report Write** 権限をオンにした新しいロールを作成し、そのユーザーをこのロールに割り当てます。または、このユーザーに **Admin** ロールを割り当ててください。ロールと権限の管理については、[ユーザー管理][13]を参照してください。
+レポートで生成される画像は、粒度の細かい読み取り制限に関係なく、すべてのデータを表示します。Datadog では、レポートの権限は、データの詳細な読み取り制限を持たないユーザーに限定することをお勧めします。ユーザーに **Dashboard Report Write** 権限を付与するには、**Dashboards Report Write** 権限をオンにした新しいロールを作成し、そのユーザーをこのロールに割り当てます。または、このユーザーに **Admin** ロールを割り当ててください。ロールと権限の管理については、[ユーザー管理][17]を参照してください。
 
 {{< img src="dashboards/scheduled_reports/dashboard_permissions.png" alt="組織の設定ページ内にある個々のユーザーの権限のスクリーンショット。ダッシュボードセクションの下にあるダッシュボードレポートの書き込み権限が強調表示されている" style="width:100%;" >}}
 
-Admin ロールまたは **Org Management** 権限を持つユーザーは、**Organization Settings** の [Public Sharing][16] にある **Settings** タブから、アカウントのスケジュールレポート機能を有効または無効にすることができます。
+Admin ロールまたは **Org Management** 権限を持つユーザーは、**Organization Settings** の [Public Sharing][15] にある **Settings** タブから、アカウントのスケジュールレポート機能を有効または無効にすることができます。
 
 {{< img src="dashboards/scheduled_reports/report_management.png" alt="Datadog の Organization Settings 内の Public Sharing の Settings タブにある Report Management 設定が Enabled になっている" style="width:100%;" >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -93,7 +94,7 @@ Admin ロールまたは **Org Management** 権限を持つユーザーは、**O
 [2]: /ja/dashboards/widgets/distribution/
 [3]: /ja/dashboards/widgets/geomap/
 [4]: /ja/dashboards/widgets/group/
-[5]: /ja/dashboards/widgets/heat_map/
+[5]: /ja/dashboards/widgets/heatmap/
 [6]: /ja/dashboards/widgets/monitor_summary/
 [7]: /ja/dashboards/widgets/note/
 [8]: /ja/dashboards/widgets/query_value/
@@ -103,5 +104,6 @@ Admin ロールまたは **Org Management** 権限を持つユーザーは、**O
 [12]: /ja/dashboards/widgets/table/
 [13]: /ja/dashboards/widgets/timeseries/
 [14]: /ja/dashboards/widgets/top_list/
-[15]: /ja/account_management/users/#edit-a-users-roles
-[16]: /ja/account_management/org_settings/#public-sharing
+[15]: /ja/account_management/org_settings/#public-sharing
+[16]: /ja/dashboards/widgets/pie_chart/
+[17]: /ja/account_management/users

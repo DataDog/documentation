@@ -1,24 +1,57 @@
 ---
+app_id: amazon-mediaconvert
+app_uuid: 9ec40305-4c25-41ee-afd8-cc6cc820dc36
+assets:
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check:
+      - aws.mediaconvert.hdoutput_duration
+      metadata_path: metadata.csv
+      prefix: aws.mediaconvert.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Amazon MediaConvert
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
-- cloud
-- aws
+- AWS
+- メトリクス
 - ログの収集
+- クラウド
 dependencies: []
-description: Amazon Elemental MediaConvert のキーメトリクスを追跡
-doc_link: https://docs.datadoghq.com/integrations/amazon_mediaconvert/
+display_on_public_website: true
 draft: false
 git_integration_title: amazon_mediaconvert
-has_logo: true
 integration_id: amazon-mediaconvert
-integration_title: Amazon Elemental MediaConvert
+integration_title: Amazon MediaConvert
 integration_version: ''
 is_public: true
 kind: インテグレーション
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: amazon_mediaconvert
-public_title: Datadog-Amazon Elemental MediaConvert インテグレーション
-short_description: Amazon Elemental MediaConvert のキーメトリクスを追跡
-version: '1.0'
+oauth: {}
+public_title: Amazon MediaConvert
+short_description: テレビ、コネクテッドデバイス向けビデオコンテンツのフォーマットと圧縮
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::AWS
+  - Category::Metrics
+  - Category::Log Collection
+  - Category::Cloud
+  configuration: README.md#Setup
+  description: テレビ、コネクテッドデバイス向けビデオコンテンツのフォーマットと圧縮
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Amazon MediaConvert
 ---
 
 ## 概要
@@ -48,8 +81,8 @@ Amazon Elemental MediaConvert から S3 バケットまたは CloudWatch のい�
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
-2. lambda 関数がインストールされたら、AWS コンソールで、Amazon Elemental MediaConvert ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
+2. Lambda 関数がインストールされたら、AWS コンソールで、Amazon Elemental MediaConvert ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
@@ -75,8 +108,8 @@ Amazon Elemental MediaConvert インテグレーションには、サービス�
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-mediaconvert
-[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_mediaconvert/amazon_mediaconvert_metadata.csv
 [8]: https://docs.datadoghq.com/ja/help/

@@ -11,7 +11,7 @@ When attempting to reset your password, check if you previously changed your ema
 
 Confirm this from the team page as shown here:
 
-{{< img src="account_management/faq/handle_image.png" alt="handle image"  >}}
+{{< img src="account_management/faq/handle_image.png" alt="handle image" >}}
 
 Enter your email address using the password reset link:
 

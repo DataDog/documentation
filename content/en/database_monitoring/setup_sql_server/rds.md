@@ -21,16 +21,21 @@ Database Monitoring provides deep visibility into your Microsoft SQL Server data
 
 Do the following steps to enable Database Monitoring with your database:
 
+1. [Configure the AWS integration](#configure-the-aws-integration)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
-2. [Install the Agent](#install-the-agent)
-3. [Install the RDS integration](#install-the-rds-integration)
+1. [Install the Agent](#install-the-agent)
+1. [Install the RDS integration](#install-the-rds-integration)
 
 ## Before you begin
 
 Supported SQL Server versions
-: 2014, 2016, 2017, 2019
+: 2014, 2016, 2017, 2019, 2022
 
 {{% dbm-sqlserver-before-you-begin %}}
+
+## Configure the AWS integration
+
+Enable **Standard Collection** in the **Resource Collection** section of your [Amazon Web Services integration tile][2].
 
 ## Grant the Agent access
 
@@ -65,6 +70,8 @@ This is required because RDS does not permit granting `CONNECT ANY DATABASE`. Th
 
 Since AWS does not grant direct host access, the Datadog Agent must be installed on a separate host where it is able to talk to the SQL Server host. There are several options for installing and running the Agent.
 
+**For AlwaysOn users**, the Agent must be installed on a separate server and connected to the cluster through the listener endpoint, as information about Availability Group (AG) secondary replicas is collected from the primary replica. Additionally, installing the Agent in this way helps keep it up and running in the event of a failover.
+
 {{< tabs >}}
 {{% tab "Windows Host" %}}
 {{% dbm-sqlserver-agent-setup-windows %}}
@@ -80,6 +87,9 @@ Since AWS does not grant direct host access, the Datadog Agent must be installed
 {{% /tab %}}
 {{< /tabs >}}
 
+## Example Agent Configurations
+{{% dbm-sqlserver-agent-config-examples %}}
+
 ## Install the RDS integration
 
 To collect more comprehensive database metrics and logs from AWS, install the [RDS integration][1].
@@ -89,3 +99,4 @@ To collect more comprehensive database metrics and logs from AWS, install the [R
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/amazon_rds
+[2]: https://app.datadoghq.com/integrations/amazon-web-services

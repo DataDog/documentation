@@ -29,7 +29,7 @@ The Datadog Agent Manager GUI is browser-based. The port the GUI runs on can be 
 | Firefox       | 38                           |                         |
 | Chrome        | 60                           |                         |
 | Safari        | 8                            |                         |
-| IOS           | 12                           |  Mobile Safari          |
+| iOS           | 12                           |  Mobile Safari          |
 
 ### Start the Datadog Agent Manager
 
@@ -123,7 +123,7 @@ See the [sample config_template.yaml][2] for all available configuration options
 
 The manage checks page displays the contents of enabled check configuration files. You can edit these files directly from the Datadog Agent Manager. After making a change, click **Save** in the upper right then [restart the Agent](#restart-agent).
 
-To add a check, select **Add a Check** in the drop-down. This displays a list of available checks to install. Reference the specific check's [integration][3] page for configuration details.
+To add a check, select **Add a Check** in the dropdown menu. This displays a list of available checks to install. Reference the specific check's [integration][3] page for configuration details.
 
 #### Checks summary
 

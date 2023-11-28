@@ -1,6 +1,6 @@
 ---
 categories:
-- web
+- キャッシュ
 dependencies: []
 description: Datadog メトリクスを使用して Edgecast の Web トラフィックを監視します。
 doc_link: https://docs.datadoghq.com/integrations/edgecast_cdn/
