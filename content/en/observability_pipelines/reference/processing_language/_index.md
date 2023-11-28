@@ -9,8 +9,8 @@ You can use DPL in the [`remap` transform][2] to:
 - Manipulate [arrays][3], [strings][4], and other data types.
 - Encode and decode values using [Codec][5].
 - [Encrypt][6] and [decrypt][7] values.
-- [Coerce][8] one datatype to another datatype (for example, from an integer to a string).
-- [Convert syslog values][9] to read-able values.
+- [Coerce][8] one data type to another data type (for example, from an integer to a string).
+- [Convert syslog values][9] to readable values.
 - Enrich values by using [enrichment tables][10].
 - [Manipulate IP values][11].
 - [Parse][12] values with custom rules (for example, grok, regex, and so on) and out-of-the-box functions (for example, syslog, apache, VPC flow logs, and so on).
