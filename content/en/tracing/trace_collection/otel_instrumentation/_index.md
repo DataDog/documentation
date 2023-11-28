@@ -11,10 +11,14 @@ further_reading:
     - link: '/tracing/glossary/'
       tag: 'Documentation'
       text: 'Understand APM terminology'
+    - link: '/opentelemetry/guide/otel_api_tracing_interoperability'
+      tag: 'Documentation'
+      text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
     - link: 'https://www.datadoghq.com/blog/opentelemetry-instrumentation/'
       tag: 'Blog'
       text: 'Learn More about Datadog and the OpenTelemetry initiative'
 ---
+
 
 
 {{% otel-custom-instrumentation %}}

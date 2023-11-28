@@ -9,6 +9,9 @@ further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
+    - link: '/opentelemetry/guide/otel_api_tracing_interoperability'
+      tag: 'Documentation'
+      text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
 {{% otel-custom-instrumentation %}}
@@ -23,15 +26,16 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 | Feature                               | Support notes                       |
 |---------------------------------------|--------------------------------------|
-| [OpenTelemetry Context propagation][1]         | [Datadog distributed header format][9] is used instead. | 
+| [OpenTelemetry Context propagation][1]         | [Datadog and W3C Trace Context header formats][9] are enabled by default. | 
 | [Span processors][2]                  | Unsupported                                          | 
 | [Span Exporters][3]                   | Unsupported                                            |
-| Trace/span [ID generators][4]         | ID generation is performed by `ddtrace`.           |
+| Trace/span [ID generators][4]         | ID generation is performed by the tracing library, with support for [128-bit trace IDs][12].   |
 
 
 ## Configuring OpenTelemetry to use the Datadog tracing library
 
-1. Add your desired manual OpenTelemetry instrumentation to your Node.js code following the [OpenTelemetry Node.js Manual Instrumentation documentation][5].
+1. Add your desired manual OpenTelemetry instrumentation to your Node.js code following the [OpenTelemetry Node.js Manual Instrumentation documentation][5]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
+
 2. Add the `dd-trace` module to your package.json:
 
     ```sh
@@ -77,3 +81,4 @@ Datadog combines these OpenTelemetry spans with other Datadog APM spans into a s
 [8]: https://opentelemetry.io/docs/instrumentation/js/automatic/
 [9]: /tracing/trace_collection/trace_context_propagation/nodejs/
 [10]: /tracing/trace_collection/dd_libraries/nodejs/#custom-logging
+[12]: /opentelemetry/guide/otel_api_tracing_interoperability/
