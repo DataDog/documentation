@@ -118,7 +118,7 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 
 ## Explore Datadog RUM
 
-Access RUM by navigating to [**UX Monitoring > Real User Monitoring**][1].
+Access RUM by navigating to [**UX Monitoring > Performance Monitoring**][1].
 
 ### Out-of-the-box dashboards
 
