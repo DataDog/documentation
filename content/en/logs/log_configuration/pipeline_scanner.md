@@ -23,7 +23,7 @@ Use Pipeline Scanner to:
 - Determine and remove conflicting or redundant processing rules.
 - Ensure that logs going through log pipelines are meeting security and compliance requirements.
 
-{{< img src="logs/log_configuration/pipeline_scanner/pipeline_scanner.png" alt="The Pipeline Scanner showing two logs matched to the query, log details for the selected log, and the two pipelines modifying the queried logs" style="width:80%;" >}}
+{{< img src="logs/log_configuration/pipeline_scanner/pipeline_scanner.png" alt="The Pipeline Scanner showing two logs that match the query, log details for the selected log, and the two pipelines modifying the queried logs" style="width:80%;" >}}
 
 ## Identify pipelines and processors modifying a log
 
