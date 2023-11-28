@@ -62,7 +62,7 @@ After choosing to create a `gRPC` test, define your test's request.
 
    For a health check, enter the name of the service. Leave this field blank if you want to send a health check on the gRPC server.
 
-   {{< img src="synthetics/api_tests/health_check_test.png" alt="Define gRPC request" style="width:90%;" >}}
+   {{< img src="synthetics/api_tests/grpc_health_check_test.png" alt="Define gRPC request" style="width:90%;" >}}
    
    {{% /tab %}}
    {{< /tabs >}}
@@ -134,7 +134,7 @@ You can create up to 20 assertions per API test by clicking **New Assertion** or
 
 You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 
-{{< img src="synthetics/api_tests/health_check.png" alt="Define assertions for your gRPC test to succeed or fail on" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions_grpc_health_check.png" alt="Define assertions for your gRPC test to succeed or fail on" style="width:90%;" >}}
 
 {{% /tab %}}
 {{< /tabs >}}
