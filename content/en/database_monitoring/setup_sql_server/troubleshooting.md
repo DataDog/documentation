@@ -120,9 +120,10 @@ If you are using the latest version of the Microsoft OLE DB Driver for SQL Serve
 
 1. If you are using a self-signed certificate and the Force Encryption setting on the server (`rds.force_ssl=1` on AWS) to ensure clients connect with encryption:
 
-   - Change to a certificate that is trusted as part of the client's trust chain
-   - Add the self-signed certificate as a trusted certificate on the client
-   - Add `TrustServerCertificate=yes;` to the connection string
+   - Change to a certificate that is trusted as part of the client's trust chain.
+   - Add the self-signed certificate as a trusted certificate on the client.
+   - If you're using Microsoft OLE DB Driver 19, add `Trust Server Certificate=True` to the connection string, including the spaces.
+   - If you're not using Microsoft OLE DB Driver 19, add `TrustServerCertificate=yes;` to the connection string.
 
 This is described in more detail [in the Microsoft documentation][7]
 
