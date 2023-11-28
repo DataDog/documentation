@@ -4,7 +4,7 @@ kind: documentation
 description: 'Instrument your PHP application with OpenTelemetry API to send traces to Datadog.'
 code_lang: php
 type: multi-code-lang
-code_lang_weight: 0
+code_lang_weight: 50
 further_reading:
   - link: 'tracing/glossary/'
     tag: 'Documentation'
