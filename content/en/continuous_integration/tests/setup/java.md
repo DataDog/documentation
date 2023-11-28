@@ -349,7 +349,7 @@ Always call ``datadog.trace.api.civisibility.DDTestSession#end`` at the end so t
 Verify that the tracer is injected into your build process.
 Examine your build's logs: if the injection is successful, you will see a line containing `DATADOG TRACER CONFIGURATION`.
 If the line is not there, make sure that the environment variables used to inject and configure the tracer are available to the build process.
-A common mistake is to set the variables in a build step and run the build in another build step: this approach may not work if the variables are not propagated between build steps.
+A common mistake is to set the variables in a build step and run the tests in another build step: this approach may not work if the variables are not propagated between build steps.
 
 Ensure that you are using the latest version of the tracer.
 
