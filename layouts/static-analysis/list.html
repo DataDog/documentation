@@ -267,7 +267,7 @@
             <div class="filters-static-analysis row">
                 {{ range $filter_types }}
                 {{ $filter_type := . | lower}}
-                <div class='filter-type flex-column col col-md-{{cond (eq $filter_type "languages") "12" "6" }}' data-id="{{$filter_type}}" >
+                <div class='filter-type flex-column col-12 col-md-{{cond (eq $filter_type "languages") "12" "6" }}' data-id="{{$filter_type}}" >
                     <p class="filter-type-name fw-semibold">{{ . }}</p>
                     <div class="filter-component position-relative">
                         {{/*  FILTER TOGGLER  */}}

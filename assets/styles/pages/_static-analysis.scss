@@ -30,7 +30,9 @@
                             column-gap: 7px;
                             background-color: #E6D6F9;
                             padding: 0 4px;
+                            height: 23px;
                             .selection-name {
+                                white-space: nowrap;
                                 position: relative;
                                 top: -1px
                             }
@@ -42,6 +44,9 @@
                                     color: $brand-primary
                                 }
                             }
+                        }
+                        .selection-container:last-child{
+                            z-index: 1;
                         }
                         .all {
                             color: $brand-primary
@@ -88,7 +93,7 @@
                     padding: 8px;
                     margin-top: 8px;
                     box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.10), 0px 4px 16px 0px rgba(0, 0, 0, 0.32);
-                    z-index: 1;
+                    z-index: 2;
 
                     .filter-selection-container {
                         display: flex;
