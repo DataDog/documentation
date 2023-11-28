@@ -440,5 +440,9 @@ Historical Metrics will be billed under the Custom Metrics billing SKU.
 
 {{< img src="metrics/hmi-assets/hmi_billing.png" alt="Historical Metrics Billing" video=false >}}
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /metrics/summary/
 [2]: /metrics/#submit-metrics
