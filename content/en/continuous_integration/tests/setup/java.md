@@ -61,6 +61,8 @@ To set up Test Visibility for Java, you need to perform the following steps:
 2. Download tracer library to the hosts where your tests are executed.
 3. Run your tests with the tracer attached.
 
+You may follow interactive setup steps available in the [Datadog App][0] or the detailed instructions below.
+
 ### Configuring reporting method
 
 This step involves configuring how Datadog Java Tracer reports data to Datadog.
@@ -387,6 +389,7 @@ To disable all integrations, augment the list of `-javaagent` arguments with `dd
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[0]: https://app.datadoghq.com/ci/setup/test?language=java
 [1]: #using-manual-testing-api
 [2]: ?tab=other#running-your-tests
 [3]: /tracing/trace_collection/library_config/java/?tab=containers#configuration
