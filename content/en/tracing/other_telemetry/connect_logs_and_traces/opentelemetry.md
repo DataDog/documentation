@@ -47,7 +47,7 @@ class CustomDatadogLogProcessor(object):
         # from: https://github.com/open-telemetry/opentelemetry-python-contrib/blob/b53b9a012f76c4fc883c3c245fddc29142706d0d/exporter/opentelemetry-exporter-datadog/src/opentelemetry/exporter/datadog/propagator.py#L122-L129 
         current_span = trace.get_current_span()
         if not current_span.is_recording():
-            return eventDict
+            return event_dict
 
         context = current_span.get_span_context() if current_span is not None else None
         if context is not None:
