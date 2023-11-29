@@ -31,6 +31,14 @@
         searchValue: '',
         openedFilterForm: null,
         filteredRulesets: new Set(),
+        emptyResultsMsg () {
+            const filterValues = Object.values(this.filterTypes).flat().map(item => item.split(',')[0]).join(', ')
+            if((filterValues.length > 1) && this.searchValue){
+                return `No results found for query on search: '${this.searchValue}' and filter: '${filterValues}'`
+            }else{
+                return `No results found for query '${this.searchValue || filterValues}'`
+            }
+        },
         resetFilteredRulesets () {
             // Empty filtered rulesets
             this.filteredRulesets = new Set()
@@ -115,7 +123,7 @@
                 } else if (key === 'languages'){
                     this.filterTypes[key].push(`${value},https://static.datadoghq.com/static/images/logos/${value.toLowerCase()}_avatar.svg`)
                 } else {
-                    this.filterTypes[key].push(value)
+                    this.filterTypes[key]?.push(value)
                 }
             })
         },
@@ -258,6 +266,9 @@
                     </button>
                 </div>
                 {{ end }}
+                <template x-if="!filteredRulesets.size">
+                    <span class="fw-semibold" x-text="emptyResultsMsg"></span>
+                </template>
             </div>
         </div>
 
