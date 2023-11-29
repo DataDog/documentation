@@ -48,6 +48,7 @@
         "content" $section_content
         "type" $type
         "relpermalink" $relpermalink
+        "distinct_base_url" $page.RelPermalink
         "full_url" $full_url
         "language" $lang
         "rank" $rank
