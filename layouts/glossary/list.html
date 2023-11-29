@@ -98,8 +98,8 @@
                         </h4>
                         <div>
                             {{ range .Params.core_product }}
-                                <div class="btn btn-outline-secondary text-primary me-1 pe-none">
-                                    <span>{{. | upper}}</span>
+                                <div class="core-product-label btn btn-outline-secondary text-primary me-1 pe-none">
+                                    {{. | upper}}
                                 </div>
                             {{ end }}
                         </div>
