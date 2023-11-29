@@ -4,7 +4,7 @@
 
     <!-- From imported files -->
     {{ $list := sort .Pages }}
-
+    
 
     <div class="row">
         <div class="col-12 order-1">
@@ -20,8 +20,18 @@
 
     {{ $products := slice }}
     {{ $ruleset_params := .Params }}
+    {{ $pad := newScratch }}
+
+    <!-- Build slice of unique languages to validate against url param `languages` -->
+    {{ range ($list.GroupByParam "group_id") }}
+        {{ range .Pages }}
+            {{ $pad.Set "languages" (union ($pad.Get "languages") (slice (.Params.meta.language | lower) ) ) }}
+        {{ end }}
+    {{ end }}
+
+    {{ $valid_langs := $pad.Get "languages" }}
     <div 
-    class="static-analysis-main w-100 d-flex flex-column"
+    class="static-analysis-main w-100 min-vh-100 d-flex flex-column"
     x-data="{
         filterTypes: {
             languages: [],
@@ -32,6 +42,8 @@
         openedFilterForm: null,
         filteredRulesets: new Set(),
         emptyResultsMsg () {
+            // Determine and return the appropriate empty results message
+
             const filterValues = Object.values(this.filterTypes).flat().map(item => item.split(',')[0]).join(', ')
             if((filterValues.length > 1) && this.searchValue){
                 return `No results found for query on search: '${this.searchValue}' and filter: '${filterValues}'`
@@ -41,10 +53,12 @@
         },
         resetFilteredRulesets () {
             // Empty filtered rulesets
+
             this.filteredRulesets = new Set()
         },
         shouldShowRuleSet (ruleset, shouldShowRule) {
             // Manage visibility of ruleset group
+
             const rulesetID = ruleset.dataset.groupId
 
             if(shouldShowRule){
@@ -113,14 +127,16 @@
       
             window.history.pushState(null,'', newURL || url.toString())
         },
-        updateWithURLParams () {
+        updateWithURLParams (validLangs) {
             // Updates x-data properties with url param values
             
+            const validLangsArr = validLangs.replaceAll(/[\[\]]/g, '').split(' ')
             const url = new URL(window.location.href)
+
             Array.from(url.searchParams.entries()).forEach(([key, value]) => {
                 if (key === 'search'){
                     this.searchValue = value
-                } else if (key === 'languages'){
+                } else if ((key === 'languages') && validLangsArr.includes(value.toLowerCase())){
                     this.filterTypes[key].push(`${value},https://static.datadoghq.com/static/images/logos/${value.toLowerCase()}_avatar.svg`)
                 } else {
                     this.filterTypes[key]?.push(value)
@@ -172,8 +188,7 @@
             window.history.pushState(null,'', url.toString())
         }
     }"
-    x-init="updateWithURLParams()">
-        {{ $pad := newScratch }}
+    x-init="updateWithURLParams('{{$valid_langs}}')">
         <div class="col-12 order-1">
             <div class="ps-0">
                 {{ range $list.GroupByParam "group_id" }}
