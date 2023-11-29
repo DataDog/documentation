@@ -19,7 +19,7 @@
     {{ .Content }}
 
     {{ $products := slice }}
-    {{ $rulset_params := .Params }}
+    {{ $ruleset_params := .Params }}
     <div 
     class="static-analysis-main w-100 d-flex flex-column"
     x-data="{
@@ -170,8 +170,8 @@
             <div class="ps-0">
                 {{ range $list.GroupByParam "group_id" }}
                 {{ $group_id := .Key }}
-                {{ $ruleset_title := index (index $rulset_params.rulesets .Key) "title"}}
-                {{ $ruleset_description := index (index $rulset_params.rulesets .Key) "description"}}
+                {{ $ruleset_title := index (index $ruleset_params.rulesets .Key) "title"}}
+                {{ $ruleset_description := index (index $ruleset_params.rulesets .Key) "description"}}
                 <div
                 data-group-id="{{ $group_id }}" 
                 class="ruleset d-flex flex-column"
@@ -210,7 +210,7 @@
                             </div>
                             
                             {{/*  
-                                build an object of arrays with unique values for filter btns
+                                build object of arrays with unique values for filter dropdowns (.filter-selection-container)
                                 e.g:
                                 filters: {
                                     Language: [],
@@ -222,7 +222,7 @@
                             {{ $pad.SetInMap "filters" "Categories" (union (index ($pad.Get "filters") "Categories") (slice .Params.meta.category)) }}
                             {{ $pad.SetInMap "filters" "Severities" (union (index ($pad.Get "filters") "Severities") (slice .Params.meta.severity)) }}
                             {{/*  
-                                build object of arrays with unique languages for each group-header (ruleset header)
+                                build object of arrays with unique languages for each ruleset header (.group-header )
                                 languagesByRuleset: {
                                     rulesetID: [<languages>],
                                     ...
@@ -233,7 +233,7 @@
                         </div>
                     </div>
 
-                    {{/* group header - Keep here. need to build languageByRuleSet first  */}}
+                    {{/* GROUP-HEADER - Keep here. scratch pad for languageByRuleSet needs to build first */}}
                     <button
                     data-header-id="{{ $group_id }}" 
                     class="group-header w-100 border mb-1 d-flex align-items-center justify-content-between"
@@ -280,7 +280,7 @@
                                 <template x-if="!filterTypes['{{$filter_type}}'].length">
                                     <span class="all fw-semibold">All</span>
                                 </template>
-                                {{/*  Show filter selections from `filterValue` data in the toggler */}}
+                                {{/*  Show filter selections from `filterTypes` data */}}
                                 <template x-for="(filter, idx) in filterTypes['{{$filter_type}}']" :key="idx">
                                     <div class="selection-container rounded d-flex align-items-center">
                                         <template x-if="filter.split(',')[1]">
