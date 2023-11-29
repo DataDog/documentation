@@ -53,7 +53,7 @@ cascade:
         rank: 70
 ---
 
-{{< img src="real_user_monitoring/rum-performance-summary-1.png" alt="RUM Dashboard" >}}
+{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Dashboard" >}}
 
 ## What is Real User Monitoring?
 
