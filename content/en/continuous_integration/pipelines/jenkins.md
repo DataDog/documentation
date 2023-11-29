@@ -539,15 +539,15 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 This is an optional step that enables the collection of tests data using [Test Visibility][16].
 
-Consult Test Visibility [documentation][17] for your language to make sure that the testing framework that you use is supported.
+See the [Test Visibility documentation][17] for your language to make sure that the testing framework that you use is supported.
 
 ### Enable with the Jenkins configuration UI
 
 1. In your Jenkins instance web interface, go to the job or pipeline that you want to instrument and choose the **Configure** option.
-2. In the **General** configuration section activate the **Enable Datadog Test Visibility** checkbox.
+2. In the **General** configuration section, tick the **Enable Datadog Test Visibility** checkbox.
 3. Enter the name of the service or library being tested into the **Service Name** input. You can choose any value that makes sense to you.
-4. Choose the languages for which you want to enable tests instrumentation. Some of the languages do not support configuration through the UI. To configure Test Visibility for those languages follow the manual [configuration instructions][18].
-5. Optionally provide [additional configuration][18] settings.
+4. Choose the languages for which you want to enable tests instrumentation. Some of the languages do not support configuration through the UI. To configure Test Visibility for these languages, follow the manual [configuration instructions][18].
+5. Optionally, provide [additional configuration settings][18].
 6. Click **Save**.
 
 {{< img src="ci/ci-jenkins-plugin-tests-config.png" alt="Datadog Test Visibility configuration for Jenkins" style="width:100%;">}}

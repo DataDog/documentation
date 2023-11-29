@@ -26,7 +26,7 @@ The selected Datadog site ({{< region-param key="dd_site_name" >}}) is not suppo
   <strong>Note</strong>: Datadog recommends the native instrumentation of tests over uploading JUnit XML files,
   as the native instrumentation provides more accurate time results, supports distributed traces on integration tests
   and other features that are not available with JUnit XML uploads.
-  See <a href="/continuous_integration/tests/#supported-features">Supported Features</a> table for more details.
+  See the <a href="/continuous_integration/tests/#supported-features">Supported Features</a> table for more details.
 </div>
 
 ## Overview

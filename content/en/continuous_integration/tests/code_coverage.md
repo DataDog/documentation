@@ -196,15 +196,15 @@ See [Customize code coverage analysis][102] in the Microsoft documentation for a
 
 When code coverage is available, the Datadog Tracer reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
-Currently, [Jacoco][201] is the only supported code coverage library.
+[Jacoco][101] is supported as a code coverage library.
 
-If your project already has Jacoco configured, the tracer will automatically instrument it and will report the coverage data to Datadog.
+If your project already has Jacoco configured, the Datadog Tracer instruments it and reports the coverage data to Datadog automatically.
 
 Otherwise, you can configure the tracer to add Jacoco to your test runs at runtime.
-Use `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` environment variable to specify which [version][202] of Jacoco you want to have injected (e.g. `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION=0.8.11`).
+Use `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION` environment variable to specify which [version of Jacoco][102] you want to have injected (for example: `DD_CIVISIBILITY_JACOCO_PLUGIN_VERSION=0.8.11`).
 
-[201]: https://www.eclemma.org/jacoco/
-[202]: https://mvnrepository.com/artifact/org.jacoco/org.jacoco.agent
+[101]: https://www.eclemma.org/jacoco/
+[102]: https://mvnrepository.com/artifact/org.jacoco/org.jacoco.agent
 
 {{% /tab %}}
 {{% tab "JUnit Report Uploads" %}}

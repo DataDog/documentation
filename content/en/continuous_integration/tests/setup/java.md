@@ -51,8 +51,8 @@ Supported build systems:
 | Maven | >= 3.2.1 |
 
 Other build systems, such as Ant or Bazel, are supported with the following limitations:
-- automatic coverage configuration and reporting is not supported.
-- when building a multi-module project, every module is reported in a separate trace.
+- Automatic coverage configuration and reporting is not supported.
+- When building a multi-module project, every module is reported in a separate trace.
 
 ## Setup
 
@@ -61,7 +61,7 @@ To set up Test Visibility for Java, you need to perform the following steps:
 2. Download tracer library to the hosts where your tests are executed.
 3. Run your tests with the tracer attached.
 
-You may follow interactive setup steps available in the [Datadog App][0] or the detailed instructions below.
+You may follow interactive setup steps on the [Datadog site][8] or with the instructions below.
 
 ### Configuring reporting method
 
@@ -108,21 +108,21 @@ You can run the `java -jar $DD_TRACER_FOLDER/dd-java-agent.jar` command to check
 Set the following environment variables to configure the tracer:
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables CI Visibility product.
+: Enables the CI Visibility product.
 
 `DD_ENV` (Required)
-: Environment where the tests are being run (for example `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
+: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
 `DD_SERVICE` (Required)
 : Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
-: Path to the folder where the downloaded Java tracer is located.
+: Path to the folder where the downloaded Java Tracer is located.
 
 `MAVEN_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
 : Injects the tracer into the Maven build process.
 
-Run your tests as you normally do (e.g. `mvn test` or `mvn verify`).
+Run your tests as you normally do (for example: `mvn test` or `mvn verify`).
 
 {{% /tab %}}
 {{% tab "Gradle" %}}
@@ -134,7 +134,7 @@ Run your tests using the `org.gradle.jvmargs` system property to specify the pat
 When specifying tracer arguments, include the following:
 
 * Enable CI visibility by setting the `dd.civisibility.enabled` property to `true`.
-* Define the environment where the tests are being run using the `dd.env` property (for example `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
+* Define the environment where the tests are being run using the `dd.env` property (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 * Define the name of the service or library being tested in the `dd.service` property.
 
 For example:
@@ -158,18 +158,18 @@ Set the following environment variables to configure the tracer:
 : Enables Test Visibility.
 
 `DD_ENV` (Required)
-: Environment where the tests are being run (for example `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
+: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
 `DD_SERVICE` (Required)
 : Name of the service or library being tested.
 
 `DD_TRACER_FOLDER` (Required)
-: Path to the folder where the downloaded Java tracer is located.
+: Path to the folder where the downloaded Java Tracer is located.
 
 `JAVA_TOOL_OPTIONS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
 : Injects the tracer into the JVMs that execute your tests.
 
-Run your tests as you normally do .
+Run your tests as you normally do.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -349,9 +349,9 @@ Always call ``datadog.trace.api.civisibility.DDTestSession#end`` at the end so t
 ### The tests are not appearing in Datadog after enabling CI Visibility in the tracer
 
 Verify that the tracer is injected into your build process.
-Examine your build's logs: if the injection is successful, you will see a line containing `DATADOG TRACER CONFIGURATION`.
+Examine your build's logs. If the injection is successful, you will see a line containing `DATADOG TRACER CONFIGURATION`.
 If the line is not there, make sure that the environment variables used to inject and configure the tracer are available to the build process.
-A common mistake is to set the variables in a build step and run the tests in another build step: this approach may not work if the variables are not propagated between build steps.
+A common mistake is to set the variables in a build step and run the tests in another build step. This approach may not work if the variables are not propagated between build steps.
 
 Ensure that you are using the latest version of the tracer.
 
@@ -389,7 +389,7 @@ To disable all integrations, augment the list of `-javaagent` arguments with `dd
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[0]: https://app.datadoghq.com/ci/setup/test?language=java
+[8]: https://app.datadoghq.com/ci/setup/test?language=java
 [1]: #using-manual-testing-api
 [2]: ?tab=other#running-your-tests
 [3]: /tracing/trace_collection/library_config/java/?tab=containers#configuration
