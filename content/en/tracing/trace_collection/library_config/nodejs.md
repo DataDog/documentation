@@ -48,6 +48,15 @@ The version number of the application.
 **Default**: `{}`<br>
 Set global tags that are applied to all spans and runtime metrics. When passed as an environment variable, the format is `key:value,key:value`. When setting this programmatically, the format is `tracer.init({ tags: { foo: 'bar' } })`.
 
+`DD_TRACE_HEADER_TAGS`
+: **Configuration**: `headerTags` <br>
+Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>` and `http.response.headers.<header-name>` respectively.<br><br>
+**Example** (with specified tag names): `User-ID:userId`<br>
+If the **Request** has a header `User-ID`, its value is applied as tag `userId` to the spans produced by the service.<br><br>
+**Example** (without specified tag names): `User-ID`<br>
+If the **Request** has a header `User-ID`, its value is applied as tag `http.request.headers.User-ID`.<br>
+If the **Response** has a header `User-ID`, its value is applied as tag `http.response.headers.User-ID`.<br><br>
+
 It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, `service`, and `version` for your services. Review the [Unified Service Tagging][1] documentation for recommendations on configuring these environment variables.
 
 ### Instrumentation
