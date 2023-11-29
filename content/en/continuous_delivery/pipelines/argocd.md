@@ -1,20 +1,128 @@
 ---
-title: Set up Tracing on an ArgoCD Pipeline
+title: Monitor ArgoCD Deployments
 kind: documentation
-further_reading:
-- link: "/continuous_delivery/pipelines"
-  tag: "Documentation"
-  text: "Explore Pipeline Execution Results and Performance"
 ---
 
 {{< callout url="http://dtdg.co/to-be-updated" header="false" >}}
-CD Visibility for ArgoCD is in private beta. To request access, complete the form.
+CD Visibility for ArgoCD is in private beta. To request access, complete the form (link to be inserted).
 {{< /callout >}}
 
 ## Overview
 
-This page contains instructions on setting up tracing for an ArgoCD pipeline.
+[Argo CD][1] is a declarative, GitOps continuous delivery tool for Kubernetes. It follows the GitOps pattern, using Git
+repositories to define the desired application state, and it automates the deployment of applications in the specified target environments.
 
-## Further reading
+The integration between Argo CD and Datadog CD Visibility is provided through [Argo CD Notifications][2]. In short, Argo CD notifications
+consists of two main things:
+1. [Triggers][3]: they define **when** to send a notification.
+2. [Templates][4]: they define **what** to send in a notification.
 
-{{< partial name="whats-next/whats-next.html" >}}
+## Configure the Datadog Integration
+
+For a more general guide on how to set up Argo CD notifications using webhooks, see the [Argo CD guide][5].
+
+The first thing to create is the service, containing the Datadog intake URL and the API Key. First, add your API Key in the
+`argocd-notifications-secret` secret with the `dd-api-key` key. See [this guide][2] for information on modifying the `argocd-notifications-secret`.
+Then, create a new service in the `argocd-notifications-cm` config map with the following format:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-notifications-cm
+data:
+  service.webhook.cd-visibility-webhook: |
+    url: https://webhook-intake.{{< region-param key="dd_site" code="true" >}}/api/v2/webhook
+    headers:
+    - name: "DD-CD-PROVIDER-ARGOCD"
+      value: "true"
+    - name: "DD-API-KEY"
+      value: $dd-api-key
+    - name: "Content-Type"
+      value: "application/json"
+```
+
+`cd-visibility-webhook` is the name of the service, and `$dd-api-key` is a reference to the API Key stored in the `argocd-notifications-secret` secret.
+
+The second step is to create the template in the same `argocd-notifications-cm` config map:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-notifications-cm
+data:
+  template.cd-visibility-template: |
+    webhook:
+      cd-visibility-webhook:
+        method: POST
+        body: |
+            {
+              "app": {{toJson .app}},
+              "context": {{toJson .context}},
+              "service_type": {{toJson .serviceType}},
+              "recipient": {{toJson .recipient}},
+              "commit_metadata": {{toJson (call .repo.GetCommitMetadata .app.status.operationState.syncResult.revision)}}
+            }
+```
+
+<div class="alert alert-warning">
+The call to populate the <code>commit_metadata</code> field is not required, and it's used to enrich the payload with Git information.
+In case you are using Helm repositories as the source of your Argo CD application, adjust the body by removing that line.
+</div>
+
+`cd-visibility-template` is the name of the template, and `cd-visibility-webhook` is a reference to the service created above.
+
+The third step is to create the trigger, again in the same `argocd-notifications-cm` config map:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-notifications-cm
+data:
+  trigger.cd-visibility-trigger: |
+    - when: app.status.operationState.phase in ['Succeeded', 'Failed', 'Error', 'Running'] and app.status.health.status in ['Healthy', 'Degraded']
+      send: [cd-visibility-template]
+```
+
+`cd-visibility-trigger` is the name of the trigger, and `cd-visibility-template` is a reference to the template created above.
+
+After the service, trigger and template have been created, you can subscribe any of your Argo CD application to the integration.
+This is done via modifying the annotations of the application, either via the Argo CD UI or via modifying the application definition:
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    notifications.argoproj.io/subscribe.cd-visibility-trigger.cd-visibility-webhook: ""
+    dd_env: <YOUR_ENV>
+```
+
+There are two annotations:
+1. The notifications annotation subscribes the application to the notification setup created above.
+2. The `dd_env` annotation configures the environment of the application. Replace `YOUR_ENV` above with the environment
+   to which this application is deploying (for example: `staging`, `prod`). If you don't set this annotation,
+   the environment will be defaulted to `none`.
+
+Once this final step is completed, the integration is done, and you can monitor your Argo CD deployments in Datadog.
+
+## Visualize deployments in Datadog
+
+The [Deployments][6] and [Deployment Executions][7] pages populate with data after a deployment is executed.
+
+## Troubleshooting
+
+In case the notifications are not sent, a good starting point are the logs of the `argocd-notification-controller` pod.
+The controller logs when it's sending a notification (`Sending notification ...`) and when it fails to notify a recipient
+(`Failed to notify recipient ...`). For additional troubleshooting scenarios, see the [Argo CD docs][8].
+
+[1]: https://argo-cd.readthedocs.io/en/stable/
+[2]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/
+[3]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/triggers/
+[4]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/templates/
+[5]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/services/webhook/
+[6]: https://app.datadoghq.com/ci/deployments
+[7]: https://app.datadoghq.com/ci/deployments/executions
+[8]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/troubleshooting/
