@@ -12,8 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - run: jq --version 
-
     - name: Clone Datadog Vale
       uses: actions/checkout@v3
       with:
@@ -31,17 +29,13 @@ jobs:
     - name: Find changed lines
       id: changed_lines
       uses: hestonhoffman/changed-lines@v1
-    
-    - name: Print changed lines for debugging
-      run: echo '${{ steps.changed_lines.outputs.changed_lines }}'
       
     - name: Run vale on changed files
-      id: vale_run
-      run: | 
+      run: |
         vale ${{ steps.changed_lines.outputs.changed_files }} \
-          --output=JSON --no-exit | jq -c >> vale_output.json
+          --output=local/bin/py/vale/vale_template.tmpl --no-exit > vale_output.log
     
     - name: Parse Vale output
       run: |
-        python local/bin/py/vale_annotations.py \
+        python local/bin/py/vale/vale_annotations.py \
           --git_data='${{ steps.changed_lines.outputs.changed_lines }}'
