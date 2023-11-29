@@ -721,7 +721,7 @@ If you have trouble configuring your installations, set the environment variable
 [24]: /tracing/other_telemetry/connect_logs_and_traces/
 [25]: /logs/log_configuration/parsing/
 [26]: /integrations/guide/source-code-integration
-[27]: /serverless/custom_metrics
+[27]: /serverless/aws_lambda/metrics/#submit-custom-metrics
 [28]: /agent/guide/private-link/
 [29]: /getting_started/site/
 [30]: /agent/proxy/
