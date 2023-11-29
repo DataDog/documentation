@@ -30,7 +30,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Enable/disable trace collection](#enabledisable-trace-collection)
 - [Connect logs and traces](#connect-logs-and-traces)
 - [Link errors to your source code](#link-errors-to-your-source-code)
-- [Submit custom metrics](#submit-custom-metrics)
+- [Submit custom metrics][27]
 - [Collect Profiling data (public beta)](#collect-profiling-data-public-beta)
 - [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
 - [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
