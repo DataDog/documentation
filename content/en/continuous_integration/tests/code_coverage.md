@@ -82,7 +82,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service np
 
 When code coverage is available, the Datadog Tracer (v2.31.0 or later) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
-If you are using [Coverlet][1] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer's built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` env variable.
+If you are using [Coverlet][101] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer's built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` environment variable.
 
 ### Advanced options
 
@@ -148,7 +148,7 @@ Filters provide fine-grained control over what gets excluded using **filter expr
 #### VS code coverage options
 
 
-See [Customize code coverage analysis][2] in the Microsoft documentation for additional information.
+See [Customize code coverage analysis][102] in the Microsoft documentation for additional information.
 
 | Option                   | Summary                                                                                                                                                         |
 |:-------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -188,8 +188,8 @@ See [Customize code coverage analysis][2] in the Microsoft documentation for add
 </RunSettings>
 ```
 
-[1]: https://github.com/coverlet-coverage/coverlet
-[2]: https://learn.microsoft.com/en-us/visualstudio/test/customizing-code-coverage-analysis?view=vs-2022
+[101]: https://github.com/coverlet-coverage/coverlet
+[102]: https://learn.microsoft.com/en-us/visualstudio/test/customizing-code-coverage-analysis?view=vs-2022
 {{% /tab %}}
 
 {{% tab "JUnit Report Uploads" %}}
@@ -213,7 +213,7 @@ The code coverage report needs to be generated in a different process, otherwise
 
 ## Graph code coverage
 
-Reported code coverage is reported as `@test.code_coverage.lines_pct` (Total percentage in the facet) and can be plotted as any other measure facet:
+Reported code coverage is reported as `@test.code_coverage.lines_pct`, which represents the total percentage in the facet, and can be plotted as any other measure facet in the CI Visibility Explorer.
 
 {{< img src="/continuous_integration/graph_code_coverage.png" text="Graph code coverage" style="width:100%" >}}
 
@@ -239,7 +239,7 @@ Get alerted whenever code coverage for your service drops below a certain thresh
 
 ## See your branch's code coverage evolution
 
-You can also see the code coverage's evolution in the [Branch Overview][6] and check whether it's improving or worsening:
+You can also see the code coverage's evolution on the [Branch Overview page][6] and check whether it's improving or worsening:
 
 {{< img src="/continuous_integration/code_coverage_branch_view.png" text="Branch view's code coverage" style="width:100%" >}}
 
