@@ -45,7 +45,7 @@ The maximum duration that a pipeline execution can be in progress is 3 days. Aft
 
 If the pipeline execution finishes after +3 days, you can visualize the finished pipeline execution in CI Visibility as usual, even if the pipeline execution was not being tracked as "in-progress" anymore.
 
-### Trace view only shows pipeline level
+### Trace View Only Shows Pipeline Level
 
 The trace view only shows the pipeline level while the pipeline execution is running.
 
