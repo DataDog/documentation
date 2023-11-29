@@ -24543,7 +24543,10 @@ paths:
       x-menu-order: 8
       x-undo:
         operationId: DeleteAWSAccount
-        parameters: []
+        parameters:
+        - name: body
+          origin: request
+          template: '{"account_id": "{{account_id}}", "role_name": "{{role_name}}"}'
         type: unsafe
     put:
       description: Update a Datadog-Amazon Web Services integration.
@@ -31785,6 +31788,11 @@ paths:
             - Test can''t be found'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
       summary: Patch a Synthetic test
       tags:
       - Synthetics

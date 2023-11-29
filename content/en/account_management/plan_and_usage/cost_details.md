@@ -54,9 +54,12 @@ Use the search facets at the left to filter the cost by **Products** or by **Sub
 
 #### Download
 
-- To download the data as a comma separated value file, click **Download as CSV**.
-- See [Get estimated cost across your account][3] to query estimated cost data through the API.
-- See [Get projected cost across your account][6] to query projected cost data through the API.
+To download the data as a comma separated value file, click **Download as CSV**. Data is available for the current month and pre-defined prior months. Use the `Cost Type` field to distinguish between the records:
+- **Projected**: Data is available for the current month.
+- **Estimated MTD**: Data is available from the first of the month to the current date. If historical cost data is not yet available for the prior month, estimated cost data also displays for the prior month.
+- **Historical**: Data is available after month close, which is approximately 16 days after the end of the month.
+  
+To query estimated cost data through the API, see [Get estimated cost across your account][3]. To query projected cost data through the API, see [Get projected cost across your account][6].
 
 ### Cost Summary (sub-organization)
 
