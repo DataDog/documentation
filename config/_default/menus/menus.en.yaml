@@ -1090,26 +1090,31 @@ main:
     parent: metrics_custom_metrics
     identifier: metrics_modifiers
     weight: 701
+  - name: Historical Metrics Ingestion
+    url: metrics/custom_metrics/historical_metrics/
+    parent: metrics_custom_metrics
+    identifier: metrics_historical_metrics
+    weight: 702
   - name: 'Submission - Agent Check '
     url: metrics/custom_metrics/agent_metrics_submission/
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_agent
-    weight: 702
+    weight: 703
   - name: Submission - DogStatsD
     url: metrics/custom_metrics/dogstatsd_metrics_submission/
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_dogstatsd
-    weight: 703
+    weight: 704
   - name: Submission - Powershell
     url: metrics/custom_metrics/powershell_metrics_submission
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_powershell
-    weight: 704
+    weight: 705
   - name: 'Submission - API '
     url: api/latest/metrics/#submit-metrics
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_api
-    weight: 705
+    weight: 706
   - name: Send OpenTelemetry Metrics to Datadog
     url: opentelemetry/otel_metrics/
     parent: metrics_top_level
