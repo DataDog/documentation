@@ -181,7 +181,7 @@ public class Application {
 }
 ```
 
-**Note:** Prepared statements are not supported in `full` mode, and all JDBC API calls that use prepared statements will automatically be downgraded to `service` mode. Since the vast majority of java SQL libraries use prepared statements by default, this means that **most** java applications will only be able to take advantage of `service` mode.
+**Note**: Prepared statements are not supported in `full` mode, and all JDBC API calls that use prepared statements are automatically downgraded to `service` mode. Since most Java SQL libraries use prepared statements by default, this means that **most** Java applications are only able to use `service` mode.
 
 [1]: /tracing/trace_collection/dd_libraries/java/
 [2]: /tracing/trace_collection/compatibility/java/#data-store-compatibility
