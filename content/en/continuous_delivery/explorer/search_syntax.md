@@ -1,11 +1,11 @@
 ---
 title: CD Visibility Explorer Search Syntax
 kind: documentation
-description: Search all of your pipeline executions.
+description: Search all of your deployment executions.
 further_reading:
 - link: "/continuous_delivery/search"
   tag: "Documentation"
-  text: "Filter and group pipelines"
+  text: "Filter and group deployments"
 - link: "/continuous_delivery/explorer/facets"
   tag: "Documentation"
   text: "Learn about facets"

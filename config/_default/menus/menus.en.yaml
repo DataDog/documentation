@@ -2445,7 +2445,7 @@ main:
     parent: ci_tests
     identifier: ci_tests_swift_tests
     weight: 107
-  - name: Pipeline Visibility
+  - name: Deployment Visibility
     url: continuous_integration/pipelines/
     parent: ci
     identifier: pipeline_visibility
@@ -2611,15 +2611,15 @@ main:
     identifier: cd
     parent: ci_visibility_heading
     weight: 160000
-  - name: Pipeline Visibility
-    url: continuous_delivery/pipelines
-    identifier: cd_pipelines
+  - name: Deployment Visibility
+    url: continuous_delivery/deployments
+    identifier: cd_deployments
     parent: cd
     weight: 1
   - name: ArgoCD
-    url: continuous_delivery/pipelines/argocd
-    identifier: cd_pipelines_argocd
-    parent: cd_pipelines
+    url: continuous_delivery/deployments/argocd
+    identifier: cd_deployments_argocd
+    parent: cd_deployments
     weight: 101
   - name: Search and Manage
     url: continuous_delivery/search
@@ -2641,21 +2641,26 @@ main:
     identifier: cd_explorer_facets
     parent: cd_explorer
     weight: 302
+  - name: Saved Views
+    url: continuous_delivery/explorer/saved_views
+    identifier: cd_explorer_saved_views
+    parent: cd_explorer
+    weight: 303
   - name: CD Visibility
     url: continuous_delivery/
     pre: ci
     identifier: cd
     parent: ci_visibility_heading
     weight: 160000
-  - name: Pipeline Visibility
-    url: continuous_delivery/pipelines
-    identifier: cd_pipelines
+  - name: Deployment Visibility
+    url: continuous_delivery/deployments
+    identifier: cd_deployments
     parent: cd
     weight: 1
   - name: ArgoCD
-    url: continuous_delivery/pipelines/argocd
-    identifier: cd_pipelines_argocd
-    parent: cd_pipelines
+    url: continuous_delivery/deployments/argocd
+    identifier: cd_deployments_argocd
+    parent: cd_deployments
     weight: 101
   - name: Search and Manage
     url: continuous_delivery/search

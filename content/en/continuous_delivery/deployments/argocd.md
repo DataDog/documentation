@@ -1,6 +1,15 @@
 ---
 title: Monitor ArgoCD Deployments
 kind: documentation
+description: Learn how to monitor deployments from ArgoCD in Datadog Deployment Visibility.
+is_beta: true
+further_reading:
+- link: "/continuous_delivery/deployments"
+  tag: "Documentation"
+  text: "Learn about Deployment Visibility"
+- link: "/continuous_delivery/explorer"
+  tag: "Documentation"
+  text: "Learn how to query and visualize deployment executions"
 ---
 
 {{< callout url="http://dtdg.co/to-be-updated" header="false" >}}
@@ -117,6 +126,10 @@ The [Deployments][6] and [Deployment Executions][7] pages populate with data aft
 In case the notifications are not sent, a good starting point are the logs of the `argocd-notification-controller` pod.
 The controller logs when it's sending a notification (`Sending notification ...`) and when it fails to notify a recipient
 (`Failed to notify recipient ...`). For additional troubleshooting scenarios, see the [Argo CD docs][8].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://argo-cd.readthedocs.io/en/stable/
 [2]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/

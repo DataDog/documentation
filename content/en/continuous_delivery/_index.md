@@ -2,9 +2,18 @@
 title: Continuous Delivery Visibility
 kind: documentation
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=CD%20Visibility"
-    tag: "Release Notes"
-    text: "Check out the latest CI/CD Visibility releases! (App login required)"
+- link: "https://app.datadoghq.com/release-notes?category=CI%20Visibility"
+  tag: "Release Notes"
+  text: "Check out the latest CI/CD Visibility releases! (App login required)"
+- link: "continuous_delivery/deployments"
+  tag: "Documentation"
+  text: "Learn how to set up Deployment Visibility"
+- link: "continuous_delivery/search"
+  tag: "Documentation"
+  text: "Learn how to search and manage your deployment results"
+- link: "/continuous_delivery/explorer"
+  tag: "Documentation"
+  text: "Learn about the CD Visibility Explorer"
 cascade:
     algolia:
         rank: 70
@@ -13,19 +22,19 @@ cascade:
 
 ## Overview
 
-Datadog Continuous Delivery (CD) Visibility unifies information about CD providers in addition to data about CD providers. CD Visibility brings software delivery metrics and data into Datadog dashboards and notebooks so you can communicate the health of your CD provider and focus your efforts in improving your team's ability to deliver quality code every time.
+Datadog Continuous Delivery (CD) Visibility unifies information about deployments in your CD providers in addition to data about your environments. CD Visibility brings deployment metrics and data into Datadog dashboards and notebooks so you can communicate the health of your deployments and environments, and focus your efforts in improving your team's ability to deliver quality code every time.
 
 // Vimeo link to CD Visibility demo
 
 CD Visibility enables developers to x, y, and z. Further, it also provides build engineers with visibility into this and that. 
 
-## Improve pipeline reliability
+## Improve deployment reliability
 
-CD Visibility contains Software Delivery Insights and DORA metrics that enable to [do X].
+Use Deployment Visibility to [do X].
 
 ## Increase efficiency through seamless integrations
 
-Datadog integrates with the following CD providers to gather pipeline metrics which track the performance and results from the moment a commit enters the pipeline until it is ready to be deployed. Use the data aggregated over time to track trends in the performance of tests and builds, and identify what is most important to fix.
+Datadog integrates with the following CD providers to gather deployment metrics which track the performance and results from a deployment execution. Use the data aggregated over time to track trends in the performance of deployments.
 
 {{< partial name="continuous_delivery/cd-pipelines-getting-started.html" >}}
 
@@ -33,12 +42,12 @@ Datadog integrates with the following CD providers to gather pipeline metrics wh
 
 ## Ready to start?
 
-See [Pipeline Visibility][1] for instructions on setting up CD Visibility with your CD providers, information about compatibility requirements, and steps for instrumenting and configuring data collection. Then, start exploring details about your pipeline executions in the [CI/CD Visibility Explorer][2] and export your search query into a [CD Pipeline Monitor][3].
+See [Deployment Visibility][1] for instructions on setting up CD Visibility with your CD providers, information about compatibility requirements, and steps for instrumenting and configuring data collection. Then, start exploring details about your deployment executions in the [CD Visibility Explorer][2] and export your search query into a [saved view][3].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_delivery/pipelines
+[1]: /continuous_delivery/deployments
 [2]: /continuous_delivery/explorer
-[3]: /monitors/types/ci
+[3]: /continuous_delivery/explorer/saved_views
