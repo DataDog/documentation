@@ -341,7 +341,7 @@
                 {{ end }}
             </div>
             {{/*  SEARCH FORM */}}
-            <form class="search-static-analysis">
+            <form class="search-static-analysis" @submit.prevent="">
                 <input type="text" placeholder="Search here" class="w-100 px-1" x-model="searchValue" @input="resetFilteredRulesets" @input.debounce="pushState()">
             </form>
           </nav>
