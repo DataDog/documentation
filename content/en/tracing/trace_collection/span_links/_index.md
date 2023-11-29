@@ -21,7 +21,7 @@ You can use span links if your application is instrumented with:
 
 ## Overview
 
-Span links associate one or more spans together that are causally related but don't have a typical parent-child relationship. These links may correlate spans within the same trace or across different traces.
+Span links correlate one or more spans together that are causally related but don't have a typical parent-child relationship. These links may correlate spans within the same trace or across different traces.
 
 Span links help trace operations in distributed systems, where workflows often deviate from linear execution patterns. They are useful to trace the flow of operations in systems that execute requests in batches or process events asynchronously.
 

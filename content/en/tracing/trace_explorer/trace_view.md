@@ -113,25 +113,22 @@ Click **View in ASM** to investigate further using [Datadog Application Security
 {{% /tab %}}
 {{% tab "Span Links (Beta)" %}}
 
-<div class="alert alert-info"><strong>Beta</strong>: Span link are automatically supported if you use the <a href="https://docs.datadoghq.com/opentelemetry/otel_collector_datadog_exporter/?tab=onahost">OpenTelemetry Collector Datadog Exporter</a>, <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.87.2">PHP tracer v0.87.2+</a>, or <a href="https://github.com/DataDog/dd-trace-java/releases/tag/v1.24.0">Java tracer v.1.24.0+</a>.</div>
+<div class="alert alert-info">Span link support is in beta.</div>
 
-Span links associate one or more spans together that don't have a typical parent-child relationship. They may associate spans within the same trace or spans across different traces.
+Span links correlate one or more spans together that are causally related but don't have a typical parent-child relationship.
 
-Span links help trace operations in distributed systems, where workflows often deviate from linear execution patterns. Additionally, span links are useful to trace the flow of operations in systems that execute requests in batches or process events asynchronously.
-
-Click on a span in the flame graph to display spans connected with span links.
+Click a span in the flame graph to display spans connected with span links.
 
 {{< img src="tracing/span_links/span_links_tab.png" alt="Span Links tab" style="width:90%;">}}
 
-If you see a message that says **Linked spans were not ingested**, make sure the linked spans are part of a [retention filter][1].
+**Note**: Span links only display when the corresponding spans are ingested and indexed, for example, with a [retention filter][1].
 
-To add custom instrumentation for span links, read the following documentation for your application's language:
-* [PHP][2]
-* [Java][3]
+To learn more about span links and how to add them with custom instrumentation, read [Span Links][4].
 
 [1]: /tracing/trace_pipeline/trace_retention/
 [2]: /tracing/trace_collection/custom_instrumentation/php#adding-span-links-beta
 [3]: /tracing/trace_collection/otel_instrumentation/java#requirements-and-limitations
+[4]: /tracing/trace_collection/span_links/
 
 {{% /tab %}}
 {{< /tabs >}}
