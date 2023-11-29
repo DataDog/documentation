@@ -1,7 +1,7 @@
 ---
 title: Connect Database Monitoring and Traces
 kind: documentation
-aliases: 
+aliases:
 - /database_monitoring/guide/connect_dbm_and_apm/
 further_reading:
   - link: 'https://www.datadoghq.com/blog/link-dbm-and-apm/'
@@ -180,6 +180,8 @@ public class Application {
     }
 }
 ```
+
+**Note:** Prepared statements are not supported in `full` mode, and all JDBC API calls that use prepared statements will automatically be downgraded to `service` mode. Since the vast majority of java SQL libraries use prepared statements by default, this means that **most** java applications will only be able to take advantage of `service` mode.
 
 [1]: /tracing/trace_collection/dd_libraries/java/
 [2]: /tracing/trace_collection/compatibility/java/#data-store-compatibility
