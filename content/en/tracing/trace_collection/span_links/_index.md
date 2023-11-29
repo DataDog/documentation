@@ -5,16 +5,19 @@ further_reading:
     - link: 'https://opentelemetry.io/docs/concepts/signals/traces/#span-links'
       tag: 'Documentation'
       text: 'OpenTelemetry Span Links'
+    - link: '/tracing/trace_collection/otel_instrumentation/'
+      tag: 'Documentation'
+      text: 'Custom Instrumentation with the OpenTelemetry API'
 ---
-
-## Requirements
 
 <div class="alert alert-info">Span link support is in beta.</a></div>
 
-You can use span links:
+## Requirements
 
-- For any application instrumented with OpenTelemetry SDKs.
-- In the Datadog PHP native library.
+You can use span links if your application is instrumented with:
+
+- The [PHP Datadog library][1].
+- The [OpenTelemetry API][2]. 
 
 ## Overview
 
@@ -22,7 +25,7 @@ Span links associate one or more spans together that are causally related but do
 
 Span links help trace operations in distributed systems, where workflows often deviate from linear execution patterns. They are useful to trace the flow of operations in systems that execute requests in batches or process events asynchronously.
 
-## Use cases
+### Use cases
 
 Span links are most applicable in fan-in scenarios, where multiple operations converge into a single span. The single span links back to multiple converging operations.
 
@@ -40,16 +43,30 @@ Span links are also applicable in fan-out scenarios, where a single operation in
 
 For example:
 
-- **Batch System Feeding Processing Pipeline**: In large batch processing systems, span links divide the trace into more manageable segments, connecting each segment of the processing pipeline back to the initial batch intake.
+- **Batch System Sending Data to Processing Pipeline**: In large batch processing systems, span links divide the trace into more manageable segments, connecting each segment of the processing pipeline back to the initial batch intake.
 
 - **Multiple Receivers and Event Logging**: In transaction systems with primary and secondary processing paths, such as analytics or summarization, span links separate secondary pathways and reconnect them to the main transaction pathway.
+
+## Using span links
+
+### Adding span links
+
+If your application is instrumented with:
+
+- The PHP Datadog library, follow the [Adding span links][1] examples.
+- The OpenTelemetry API, follow the OpenTelemetry manual instrumentation documentation for your language. For example, [Create spans with links for Java][3].
+
+### Viewing span links in Datadog APM
+
+You can view span links from the [Trace Explorer][4] in Datadog.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/setup_overview/
-[2]: /tracing/visualization/#span-tags
-[3]: https://opentelemetry.io/docs/reference/specification/trace/api/#spankind
-[4]: /tracing/setup_overview/configure_data_security/
-[5]: /tracing/trace_collection/library_config/
+[1]: /tracing/trace_collection/custom_instrumentation/php/#adding-span-links-beta
+[2]: https://opentelemetry.io/docs/specs/otel/trace/api/
+[3]: https://opentelemetry.io/docs/instrumentation/java/manual/#create-spans-with-links
+[4]: /tracing/trace_explorer/trace_view/?tab=spanlinksbeta#more-information
+
+
