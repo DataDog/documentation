@@ -80,6 +80,8 @@ Increase adoption and visibility
 
 As the author of the integration, you are responsible for maintaining the code and ensuring the integration functions properly across all [Datadog sites][15]. If you encounter any setup issues, [contact Support][16].
 
+## Get started
+
 ### Request a sandbox account
 
 All Technology Partners can request a dedicated Datadog sandbox account to help develop their integration. This sandbox account has a free license that you can use to send in data, build out dashboards, and more. 
