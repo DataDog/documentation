@@ -1,40 +1,7 @@
-function scrollTop(el, value) {
-    var win;
-    if (el.window === el) {
-        win = el;
-    } else if (el.nodeType === 9) {
-        win = el.defaultView;
-    }
-
-    if (value === undefined) {
-        return win ? win.pageYOffset : el.scrollTop;
-    }
-
-    if (win) {
-        win.scrollTo(win.pageXOffset, value);
-    } else {
-        el.scrollTop = value;
-    }
-}
+import { DOMReady } from '../helpers/documentReady';
+import { scrollTop } from '../helpers/scrollTop';
 
 let sidenavMapping = [];
-
-// Fixes Chrome issue where pages with hash params are not scrolling to anchor
-window.addEventListener(
-    'load',
-    function () {
-        const isChrome = /Chrome/.test(navigator.userAgent);
-        if (window.location.hash && isChrome) {
-            setTimeout(function () {
-                const hash = window.location.hash;
-                window.location.hash = '';
-                window.location.hash = hash;
-            }, 300);
-        }
-    },
-    false
-);
-
 let tocContainer = document.querySelector('.js-toc-container');
 let tocMobileToggle = document.querySelector('.js-mobile-toc-toggle');
 const tocMobileBackdrop = document.querySelector('.js-mobile-toc-bg');
@@ -42,13 +9,63 @@ const tocCloseIcon = document.querySelector('.js-mobile-toc-toggle .icon-small-x
 const tocBookIcon = document.querySelector('.js-mobile-toc-toggle .icon-small-bookmark');
 const tocEditBtn = document.querySelector('.js-toc-edit-btn');
 
-window.addEventListener('resize', () => {
-    onScroll();
-});
+// Fixes Chrome issue where pages with hash params are not scrolling to anchor
+const chromeHashScroll = () => {
+    const isChrome = /Chrome/.test(navigator.userAgent);
+    if (window.location.hash && isChrome) {
+        setTimeout(function () {
+            const hash = window.location.hash;
+            window.location.hash = '';
+            window.location.hash = hash;
+        }, 300);
+    }
+};
 
-window.addEventListener('scroll', () => {
-    onScroll();
-});
+function isTOCDisabled() {
+    const toc = document.querySelector('#TableOfContents');
+    if (!toc) {
+        return true;
+    }
+
+    return false;
+}
+
+function onLoadTOCHandler() {
+    tocContainer = document.querySelector('.js-toc-container');
+    tocMobileToggle = document.querySelector('.js-mobile-toc-toggle');
+
+    if (isTOCDisabled() && tocContainer) {
+        document.querySelector('.js-toc-title').classList.add('d-none');
+        document.querySelector('.js-toc').classList.add('d-none');
+        if (tocMobileToggle) {
+            tocMobileToggle.classList.add('d-none');
+        }
+    } else if (window.innerWidth < 991 && tocContainer) {
+        tocContainer.classList.remove('toc-container');
+        tocContainer.classList.add('toc-container-mobile');
+        if (tocMobileToggle) {
+            tocMobileToggle.classList.remove('d-none');
+        }
+    }
+}
+
+export function closeMobileTOC() {
+    if (!isTOCDisabled()) {
+        tocContainer = document.querySelector('.js-toc-container');
+        if (tocContainer) {
+            tocContainer.classList.remove('mobile-open');
+        }
+        if (tocMobileBackdrop) {
+            tocMobileBackdrop.classList.remove('mobile-toc-bg-open');
+        }
+        if (tocCloseIcon) {
+            tocCloseIcon.classList.add('d-none');
+        }
+        if (tocBookIcon) {
+            tocBookIcon.classList.remove('d-none');
+        }
+    }
+}
 
 export function updateTOC() {
     onLoadTOCHandler();
@@ -154,66 +171,7 @@ export function onScroll() {
     }
 }
 
-if (tocMobileToggle) {
-    tocMobileToggle.addEventListener('click', toggleMobileTOC);
-}
-
-if (tocEditBtn) {
-    tocEditBtn.addEventListener('click', tocEditBtnHandler);
-}
-
-window.addEventListener('load', function () {
-    if (!document.body.classList.contains('api')) {
-        onLoadTOCHandler();
-    }
-});
-
-function tocEditBtnHandler(event) {
-    if (event.target.tagName === 'A') {
-        // If element is anchor tag
-        window.DD_LOGS.logger.log(
-            'Edit btn clicked',
-            {
-                edit_btn: {
-                    target: event.target.href
-                }
-            },
-            'info'
-        );
-    }
-
-    event.stopPropagation();
-}
-
-function isTOCDisabled() {
-    const toc = document.querySelector('#TableOfContents');
-    if (!toc) {
-        return true;
-    }
-
-    return false;
-}
-
-function onLoadTOCHandler() {
-    tocContainer = document.querySelector('.js-toc-container');
-    tocMobileToggle = document.querySelector('.js-mobile-toc-toggle');
-
-    if (isTOCDisabled() && tocContainer) {
-        document.querySelector('.js-toc-title').classList.add('d-none');
-        document.querySelector('.js-toc').classList.add('d-none');
-        if (tocMobileToggle) {
-            tocMobileToggle.classList.add('d-none');
-        }
-    } else if (window.innerWidth < 991 && tocContainer) {
-        tocContainer.classList.remove('toc-container');
-        tocContainer.classList.add('toc-container-mobile');
-        if (tocMobileToggle) {
-            tocMobileToggle.classList.remove('d-none');
-        }
-    }
-}
-
-window.addEventListener('resize', function () {
+function onResize() {
     tocContainer = document.querySelector('.js-toc-container');
     tocMobileToggle = document.querySelector('.js-mobile-toc-toggle');
 
@@ -236,24 +194,23 @@ window.addEventListener('resize', function () {
         tocContainer.classList.add('toc-container');
         tocContainer.classList.remove('toc-container-mobile');
     }
-});
+}
 
-export function closeMobileTOC() {
-    if (!isTOCDisabled()) {
-        tocContainer = document.querySelector('.js-toc-container');
-        if (tocContainer) {
-            tocContainer.classList.remove('mobile-open');
-        }
-        if (tocMobileBackdrop) {
-            tocMobileBackdrop.classList.remove('mobile-toc-bg-open');
-        }
-        if (tocCloseIcon) {
-            tocCloseIcon.classList.add('d-none');
-        }
-        if (tocBookIcon) {
-            tocBookIcon.classList.remove('d-none');
-        }
+function tocEditBtnHandler(event) {
+    if (event.target.tagName === 'A') {
+        // If element is anchor tag
+        window.DD_LOGS.logger.log(
+            'Edit btn clicked',
+            {
+                edit_btn: {
+                    target: event.target.href
+                }
+            },
+            'info'
+        );
     }
+
+    event.stopPropagation();
 }
 
 function toggleMobileTOC() {
@@ -266,3 +223,29 @@ function toggleMobileTOC() {
         document.querySelector('.js-mobile-toc-bg').classList.toggle('mobile-toc-bg-open');
     }
 }
+
+function handleAPIPage() {
+    if (!document.body.classList.contains('api')) {
+        onLoadTOCHandler();
+    }
+}
+
+DOMReady(chromeHashScroll);
+DOMReady(handleAPIPage);
+
+if (tocMobileToggle) {
+    tocMobileToggle.addEventListener('click', toggleMobileTOC);
+}
+
+if (tocEditBtn) {
+    tocEditBtn.addEventListener('click', tocEditBtnHandler);
+}
+
+window.addEventListener('resize', () => {
+    onScroll();
+    onResize();
+});
+
+window.addEventListener('scroll', () => {
+    onScroll();
+});
