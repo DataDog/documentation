@@ -8,7 +8,7 @@ import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/t
 import initCodeTabs from './components/codetabs';
 import { loadPage } from './components/async-loading';
 import { loadInstantSearch } from './components/algolia';
-import {setMobileNav, closeMobileNav} from './components/mobile-nav'
+import { setMobileNav, closeMobileNav } from './components/mobile-nav';
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -17,37 +17,38 @@ const { gaTag } = configDocs[env];
 gtag('js', new Date());
 gtag('config', gaTag);
 
+const setSidenavMaxHeight = () => {
+    const headerHeight = document.querySelector('body .main-nav')?.getBoundingClientRect().height;
+    const padding = 200;
+    const sidenavNav = document.querySelector('.sidenav-nav');
+
+    if (sidenavNav && headerHeight) {
+        sidenavNav.style.maxHeight = `${document.documentElement.clientHeight - headerHeight - padding}px`;
+    }
+};
+
 const doOnLoad = () => {
     window.history.replaceState({}, '', window.location.href);
 
-    // ie
-    document.createElement('picture');
-
-    // bring back size() for jquery pajinate
-    // The number of elements contained in the matched element set
-    jQuery.fn.size = function () {
-        return this.length;
-    };
-
-    const responsiveTableElements = document.querySelectorAll(".table-responsive-container table");
+    const responsiveTableElements = document.querySelectorAll('.table-responsive-container table');
 
     if (responsiveTableElements.length) {
-        responsiveTableElements.forEach(table => {
-            if (!table.classList.contains("table-responsive")) {
-                table.classList.add("table-responsive");
+        responsiveTableElements.forEach((table) => {
+            if (!table.classList.contains('table-responsive')) {
+                table.classList.add('table-responsive');
             }
-        })
+        });
     }
 
-    const tableElements = document.querySelectorAll("table");
+    const tableElements = document.querySelectorAll('table');
 
     if (tableElements.length) {
-        tableElements.forEach(table => {
+        tableElements.forEach((table) => {
             let emptyThead = true;
-            const tableHeadElements = table.querySelectorAll("thead th");
+            const tableHeadElements = table.querySelectorAll('thead th');
 
             if (tableHeadElements.length) {
-                tableHeadElements.forEach(head => {
+                tableHeadElements.forEach((head) => {
                     if (head.hasChildNodes) {
                         emptyThead = false;
                     }
@@ -63,24 +64,14 @@ const doOnLoad = () => {
     }
 
     // Load algolia instant search for the first time
-    loadInstantSearch(asyncLoad=false);
+    loadInstantSearch((asyncLoad = false));
 
-    if (!bodyClassContains('api')){
-        const setSidenavMaxHeight = () => {
-            const headerHeight = document.querySelector("body .main-nav")?.getBoundingClientRect().height;
-            const padding = 200;
-            const sidenavNav = document.querySelector(".sidenav-nav");
-
-            if (sidenavNav && headerHeight) {
-                sidenavNav.style.maxHeight = document.documentElement.clientHeight - headerHeight - padding;
-            }
-        }
-
-        window.addEventListener("scroll", () => {
+    if (!bodyClassContains('api')) {
+        window.addEventListener('scroll', () => {
             setSidenavMaxHeight();
-        })
+        });
 
-        window.addEventListener("resize", () => {
+        window.addEventListener('resize', () => {
             setSidenavMaxHeight();
         });
     }
@@ -95,7 +86,7 @@ const doOnLoad = () => {
             !newLinks[i].href.includes('docs-staging.datadoghq.com') &&
             !newLinks[i].href.includes('localhost:1313')
         ) {
-            newLinks[i].setAttribute("target", "_blank");
+            newLinks[i].setAttribute('target', '_blank');
         }
     }
 
@@ -122,27 +113,18 @@ DOMReady(doOnLoad);
 function hasParentLi(el) {
     const els = [];
     while (el) {
-        if(el.classList){
-
-            if(el.classList.contains('sidenav-nav-main')){
-            break;
+        if (el.classList) {
+            if (el.classList.contains('sidenav-nav-main')) {
+                break;
             }
 
             // Add open class to li if the li has a child ul
-            if (
-                el.closest('li') &&
-                el.closest('li').querySelectorAll('ul').length !== 0
-            ) {
+            if (el.closest('li') && el.closest('li').querySelectorAll('ul').length !== 0) {
                 el.closest('li').classList.add('open');
             }
 
-            if (
-                el.closest('.sub-menu') &&
-                el.closest('.sub-menu').previousElementSibling
-            ) {
-                el.closest('.sub-menu').previousElementSibling.classList.add(
-                    'active'
-                );
+            if (el.closest('.sub-menu') && el.closest('.sub-menu').previousElementSibling) {
+                el.closest('.sub-menu').previousElementSibling.classList.add('active');
             }
         }
 
@@ -152,12 +134,11 @@ function hasParentLi(el) {
 }
 
 function getPathElement(event = null) {
-    const domain = window.location.origin;
     let path = window.location.pathname;
     const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
 
     for (let i = 0; i < activeMenus.length; i++) {
-        activeMenus[i].classList.remove('active');
+        activeMenus[i]?.classList.remove('active');
     }
 
     path = path.replace(/^\//, '');
@@ -176,49 +157,35 @@ function getPathElement(event = null) {
     }
 
     if (path.includes('account_management/billing')) {
-        sideNavPathElement = document.querySelector(
-            '.side [data-path*="account_management/billing"]'
-        );
-        mobileNavPathElement = document.querySelector(
-            'header [data-path*="account_management/billing"]'
-        );
+        sideNavPathElement = document.querySelector('.side [data-path*="account_management/billing"]');
+        mobileNavPathElement = document.querySelector('header [data-path*="account_management/billing"]');
     }
 
     // if on a detailed integration page then make sure integrations is highlighted in nav
     if (document.getElementsByClassName('integration-labels').length) {
-        sideNavPathElement = document.querySelector(
-            '.side .nav-top-level > [data-path*="integrations"]'
-        );
-        mobileNavPathElement = document.querySelector(
-            'header .nav-top-level > [data-path*="integrations"]'
-        );
+        sideNavPathElement = document.querySelector('.side .nav-top-level > [data-path*="integrations"]');
+        mobileNavPathElement = document.querySelector('header .nav-top-level > [data-path*="integrations"]');
     }
 
     // if security rules section that has links to hashes, #cat-workload-security etc. try and highlight correct sidenav
     if (path.includes('security/default_rules')) {
-        const ref = ((event) ? event.target.href : window.location.hash) || window.location.hash;
-        if(ref) {
-          sideNavPathElement = document.querySelector(
-            `.side [href*="${ref}"]`
-          );
-          mobileNavPathElement = document.querySelector(
-            `header [href*="${ref}"]`
-          );
+        const ref = (event ? event.target.href : window.location.hash) || window.location.hash;
+        if (ref) {
+            sideNavPathElement = document.querySelector(`.side [href*="${ref}"]`);
+            mobileNavPathElement = document.querySelector(`header [href*="${ref}"]`);
         }
     }
 
     if (path.includes('workflows/actions_catalog')) {
-      const workflowsEl = document.querySelector('.side .nav-top-level > [data-path*="workflows"]');
-      sideNavPathElement = workflowsEl.nextElementSibling.querySelector(
-          '[data-path*="workflows/actions_catalog"]'
-      );
-      mobileNavPathElement = sideNavPathElement;
+        const workflowsEl = document.querySelector('.side .nav-top-level > [data-path*="workflows"]');
+        sideNavPathElement = workflowsEl.nextElementSibling.querySelector('[data-path*="workflows/actions_catalog"]');
+        mobileNavPathElement = sideNavPathElement;
     }
 
     if (sideNavPathElement) {
         sideNavPathElement.classList.add('active');
         hasParentLi(sideNavPathElement);
-        scrollActiveNavItemToTop()
+        scrollActiveNavItemToTop();
     }
 
     if (mobileNavPathElement) {
@@ -228,11 +195,11 @@ function getPathElement(event = null) {
 }
 
 // remove open class from li elements and active class from <a> elements
-function closeNav(){
+function closeNav() {
     const activeMenus = document.querySelectorAll('.side .sidenav-nav-main .active, header .sidenav-nav-main .active');
     const openMenus = document.querySelectorAll('.side .sidenav-nav-main .open, header .sidenav-nav-main .open');
 
-    for(let i = 0; i < activeMenus.length; i++){
+    for (let i = 0; i < activeMenus.length; i++) {
         activeMenus[i].classList.remove('active');
     }
 
@@ -253,10 +220,7 @@ function updateSidebar(event) {
             event.target.querySelector('a').classList.add('active');
         }
 
-        if (
-            event.target.closest('li').querySelector('ul') &&
-            event.target.closest('li')
-        ) {
+        if (event.target.closest('li').querySelector('ul') && event.target.closest('li')) {
             event.target.closest('li').classList.add('open');
         }
     } else if (event.target.matches('#rules .list-group .js-group a.js-page')) {
@@ -266,7 +230,7 @@ function updateSidebar(event) {
         const currentLocation = window.location;
         const navMenuMatch = currentLocation.pathname;
 
-        navMenuItems.forEach(element => {
+        navMenuItems.forEach((element) => {
             // Find anchor that has a data-path attr that matches current pathName
             if (navMenuMatch.includes(element.getAttribute('data-path'))) {
                 element.classList.add('active');
@@ -276,14 +240,10 @@ function updateSidebar(event) {
                     element.closest('.nav-top-level').firstElementChild.classList.add('active');
                 }
             }
-        })
-
+        });
     } else {
         if (event.target.closest('li').querySelector('a')) {
-            event.target
-                .closest('li')
-                .querySelector('a')
-                .classList.add('active');
+            event.target.closest('li').querySelector('a').classList.add('active');
         }
 
         if (event.target.closest('li').querySelector('ul')) {
@@ -319,8 +279,8 @@ function navClickEventHandler(event) {
     }
 
     // Hide mobile nav after clicking nav element
-    if (document.querySelector(".navbar-collapse")?.classList.contains("show")) {
-        document.querySelector(".navbar-collapse").style.display = "none";
+    if (document.querySelector('.navbar-collapse')?.classList.contains('show')) {
+        document.querySelector('.navbar-collapse').style.display = 'none';
         closeMobileTOC();
     }
 
@@ -355,9 +315,7 @@ function loadViaAjax(element) {
     }
 
     if (element.parentElement) {
-        parentHasClassOpen = !!element.parentElement.classList.contains(
-            'js-load'
-        );
+        parentHasClassOpen = !!element.parentElement.classList.contains('js-load');
     }
 
     if (hasClassLoad) {
@@ -383,11 +341,11 @@ function rulesListClickHandler(event, pathString) {
     // if security rules section that has links to hashes, #cat-workload-security etc. try and highlight correct sidenav
     // by passing the relevant sidenav target to updateSidebar()
     if (event.target.matches('.controls a')) {
-        const split = event.target.href.split('#')
-        const targetURL = (split.length > 1) ? `#${split[1]}` : event.target.href;
+        const split = event.target.href.split('#');
+        const targetURL = split.length > 1 ? `#${split[1]}` : event.target.href;
         const target = document.querySelector(`.side [href*="${targetURL}"]`);
         if (target) {
-          updateSidebar({target: target});
+            updateSidebar({ target: target });
         }
     }
 }
@@ -400,17 +358,6 @@ window.onload = function () {
     getPathElement();
     setMobileNav();
 };
-
-// remove branch name from path
-function replacePath(inputPath) {
-    const thisurl = `${window.location.protocol}//${window.location.host}`;
-    if (thisurl.indexOf('docs-staging') > -1) {
-        const path = inputPath.split('/').slice(2, 4).join('/');
-
-        return path;
-    }
-    return inputPath;
-}
 
 function replaceURL(inputUrl) {
     let thisurl = `${window.location.protocol}//${window.location.host}`;
@@ -425,8 +372,7 @@ function replaceURL(inputUrl) {
 window.addEventListener(
     'popstate',
     function (event) {
-        setMobileNav()
-        const domain = replaceURL(window.location.origin);
+        setMobileNav();
         if (event.state) {
             loadPage(window.location.href);
             closeNav();
@@ -436,17 +382,10 @@ window.addEventListener(
     false
 );
 
-
-
-function scrollActiveNavItemToTop(){
+function scrollActiveNavItemToTop() {
     // Scroll the open top level left nav item into view below Docs search input
     if (document.querySelector('.sidenav:not(.sidenav-api)')) {
-        const headerHeight = document.querySelector('body .main-nav').style.height;
-        const padding = 200;
-        const maxHeight = document.documentElement.clientHeight - headerHeight - padding
-
-        // set max height of side nav.
-        document.querySelector('.sidenav-nav').style.maxHeight = `${maxHeight}px`
+        setSidenavMaxHeight();
 
         const leftSideNav = document.querySelector('.sidenav:not(.sidenav-api) .sidenav-nav');
         const sideNavActiveMenuItem = leftSideNav.querySelector('li.open');
