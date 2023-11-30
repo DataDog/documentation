@@ -488,13 +488,13 @@ L'équilibrage de charge n'est pas pris en charge par défaut en raison de la na
 L'équilibrage de charge n'est pas pris en charge par défaut en raison de la nature de l'installation (une seule machine). Il vous faudra provisionner vos propres équilibreurs de charge en suivant les normes de votre entreprise.
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
-Un équilibreur de charge réseau est provisionné par le module Terraform ; il est configuré pour pointer vers les instances. Son adresse DNS est renvoyée dans la sortie de la commande `lb-dns` dans Terraform.
+Un équilibreur de charge réseau est provisionné par le module Terraform ; il est configuré pour pointer vers les instances. Son adresse DNS est renvoyée dans la sortie `lb-dns` dans Terraform.
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
 <div class="alert alert-danger">Les installations CloudFormation ne doivent pas être utilisées pour les charges de travail de production.</div>
 
-Un équilibreur de charge réseau est provisionné par le modèle CloudFormation ; il est configuré pour pointer vers le groupe de mise à l'échelle automatique. Son adresse DNS est renvoyée dans la sortie de la commande `LoadBalancerDNS` dans CloudFormation.
+Un équilibreur de charge réseau est provisionné par le modèle CloudFormation ; il est configuré pour pointer vers le groupe de mise à l'échelle automatique. Son adresse DNS est renvoyée dans la sortie `LoadBalancerDNS` de CloudFormation.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -555,7 +555,7 @@ observability_pipelines_worker:
 kubectl get svc opw-observability-pipelines-worker
 ```
 
-Pour les installations Terraform, la sortie de la commande `lb-dns` fournit la valeur requise. Pour les installations CloudFormation, l'URL à utiliser est fournie dans la sortie de la commande `LoadBalancerDNS`.
+Pour les installations Terraform, la sortie `lb-dns` fournit la valeur requise. Pour les installations CloudFormation, l'URL à utiliser est fournie dans la sortie `LoadBalancerDNS`.
 
 À ce stade, vos données d'observabilité devraient être transmises au worker et prêtes à être traitées. La rubrique suivante présente les étapes de traitement incluses par défaut ainsi que les options supplémentaires qui s'offrent à vous.
 
