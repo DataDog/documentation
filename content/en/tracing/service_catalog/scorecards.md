@@ -14,7 +14,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-custom-scorecards/"
   tag: "Blog"
   text: "Formalize best practices with custom Scorecards"
-- link: /continuous_integration/dora_metrics/
+- link: "/continuous_integration/dora_metrics/"
   tag: "Documentation"
   text: "Track DORA Metrics with CI Visibility" 
 ---
