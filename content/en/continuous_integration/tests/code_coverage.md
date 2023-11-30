@@ -31,11 +31,19 @@ Ensure that [Test Visibility][1] is already set up for your language.
 * `jest>=24.8.0`, only when run with `jest-circus`.
 * `mocha>=5.2.0`.
 * `cucumber-js>=7.0.0`.
+* Only [`Istanbul`][1] code coverage is supported.
 
-When tests are instrumented with [Istanbul][1], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically.
 
-To instrument tests with Istanbul, you can use [`nyc`][2]:
+When tests are instrumented with [Istanbul][1], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically. To instrument tests with Istanbul, you can use [`nyc`][2].
 
+To report total code coverage from your test sessions, follow these steps:
+
+1. Install `nyc`:
+```
+npm install --save-dev nyc
+```
+
+2. Wrap your test command with `nyc`:
 ```json
 {
   "scripts": {
@@ -45,28 +53,22 @@ To instrument tests with Istanbul, you can use [`nyc`][2]:
 }
 ```
 
-Then, use:
-
-```
-NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service npm run coverage
-```
-
-Jest includes Istanbul by default, so you can do:
+<div class="alert alert-warning">
+  <strong>Note</strong>: Jest includes Istanbul by default, so you don't need to install <code>nyc</code>. Simply pass <code>--coverage</code>.
+</div>
 
 ```json
 {
   "scripts": {
-    "test:coverage": "jest --coverage"
+    "coverage": "jest --coverage"
   }
 }
 ```
 
-Then, use:
-
+3. Run your test with the new `coverage` command:
 ```
-NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service npm run test:coverage
+NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service npm run coverage
 ```
-
 
 
 [1]: https://istanbul.js.org/
@@ -80,7 +82,7 @@ NODE_OPTIONS="-r dd-trace/ci/init" DD_ENV=ci DD_SERVICE=my-javascript-service np
 
 When code coverage is available, the Datadog Tracer (v2.31.0 or later) reports it under the `test.code_coverage.lines_pct` tag for your test sessions.
 
-If you are using [Coverlet][101] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer’s built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` env variable.
+If you are using [Coverlet][101] to compute your code coverage, indicate the path to the report file in the `DD_CIVISIBILITY_EXTERNAL_CODE_COVERAGE_PATH` environment variable when running `dd-trace`. The report file must be in the OpenCover or Cobertura formats. Alternatively, you can enable the Datadog Tracer's built-in code coverage calculation with the `DD_CIVISIBILITY_CODE_COVERAGE_ENABLED=true` environment variable.
 
 ### Advanced options
 
@@ -211,7 +213,13 @@ The code coverage report needs to be generated in a different process, otherwise
 
 ## Graph code coverage
 
-Reported code coverage appears on the **Coverage** tab in a test session's details page:
+Reported code coverage is reported as `@test.code_coverage.lines_pct`, which represents the total percentage in the facet, and can be plotted as any other measure facet in the CI Visibility Explorer.
+
+{{< img src="/continuous_integration/graph_code_coverage.png" text="Graph code coverage" style="width:100%" >}}
+
+## Test Session coverage tab
+
+Reported code coverage also appears on the **Coverage** tab in a test session's details page:
 
 {{< img src="/continuous_integration/code_coverage_tab.png" text="Test sessions code coverage tab" style="width:100%" >}}
 
@@ -227,7 +235,18 @@ You can export your graph to a [dashboard][2] or a [notebook][3], and create a [
 
 Get alerted whenever code coverage for your service drops below a certain threshold by creating a [CI Test Monitor][5]:
 
-{{< img src="/continuous_integration/code_coverage_monitor.png" text="Test sessions code coverage tab" style="width:100%" >}}
+{{< img src="/continuous_integration/code_coverage_monitor.png" text="Code coverage monitor" style="width:100%" >}}
+
+## See your branch's code coverage evolution
+
+You can also see the code coverage's evolution on the [Branch Overview page][6] and check whether it's improving or worsening:
+
+{{< img src="/continuous_integration/code_coverage_branch_view.png" text="Branch view's code coverage" style="width:100%" >}}
+
+
+## Intelligent Test Runner and total code coverage
+
+[Intelligent Test Runner][7] will **not** automatically provide total code coverage measurements, even though it requires _per test_ code coverage to function.
 
 ## Further reading
 
@@ -239,3 +258,5 @@ Get alerted whenever code coverage for your service drops below a certain thresh
 [3]: /notebooks
 [4]: /monitors
 [5]: /monitors/types/ci/#maintain-code-coverage-percentage
+[6]: /continuous_integration/tests/developer_workflows#branch-overview
+[7]: /continuous_integration/intelligent_test_runner/
