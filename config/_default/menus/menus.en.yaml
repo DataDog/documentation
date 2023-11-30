@@ -2445,166 +2445,136 @@ main:
     parent: ci_tests
     identifier: ci_tests_swift_tests
     weight: 107
-  - name: Pipeline Visibility
-    url: continuous_integration/pipelines/
-    parent: ci
-    identifier: pipeline_visibility
-    weight: 2
-  - name: AWS CodePipeline
-    url: continuous_integration/pipelines/awscodepipeline/
-    parent: pipeline_visibility
-    identifier: ci_awscodepipeline
-    weight: 201
-  - name: Azure
-    url: continuous_integration/pipelines/azure/
-    parent: pipeline_visibility
-    identifier: ci_azure
-    weight: 202
-  - name: Buildkite
-    url: continuous_integration/pipelines/buildkite/
-    parent: pipeline_visibility
-    identifier: ci_buildkite
-    weight: 203
-  - name: CircleCI
-    url: continuous_integration/pipelines/circleci/
-    parent: pipeline_visibility
-    identifier: ci_circleci
-    weight: 204
-  - name: Codefresh
-    url: continuous_integration/pipelines/codefresh/
-    parent: pipeline_visibility
-    identifier: ci_codefresh
-    weight: 205
-  - name: GitHub Actions
-    url: continuous_integration/pipelines/github/
-    parent: pipeline_visibility
-    identifier: ci_github
-    weight: 206
-  - name: GitLab
-    url: continuous_integration/pipelines/gitlab/
-    parent: pipeline_visibility
-    identifier: ci_gitlab
-    weight: 207
-  - name: Jenkins
-    url: continuous_integration/pipelines/jenkins/
-    parent: pipeline_visibility
-    identifier: ci_jenkins
-    weight: 208
-  - name: TeamCity
-    url: continuous_integration/pipelines/teamcity/
-    parent: pipeline_visibility
-    identifier: ci_teamcity
-    weight: 209
-  - name: Custom Commands
-    url: continuous_integration/pipelines/custom_commands/
-    parent: pipeline_visibility
-    identifier: ci_custom_commands
-    weight: 210
-  - name: Custom Tags and Metrics
-    url: continuous_integration/pipelines/custom_tags_and_metrics/
-    parent: pipeline_visibility
-    identifier: ci_custom_tags_and_metrics
-    weight: 211
-  - name: Search and Manage
-    url: continuous_integration/search/
-    parent: ci
-    identifier: ci_search
-    weight: 3
-  - name: Explorer
-    url: continuous_integration/explorer/
-    parent: ci
-    identifier: ci_explorer
-    weight: 4
-  - name: Search Syntax
-    url: continuous_integration/explorer/search_syntax/
-    parent: ci_explorer
-    identifier: ci_explorer_search_syntax
-    weight: 401
-  - name: Facets
-    url: continuous_integration/explorer/facets/
-    parent: ci_explorer
-    identifier: ci_explorer_facets
-    weight: 402
-  - name: Saved Views
-    url: continuous_integration/explorer/saved_views/
-    parent: ci_explorer
-    identifier: ci_explorer_saved_views
-    weight: 402
-  - name: DORA Metrics
-    url: continuous_integration/dora_metrics/
-    parent: ci
-    identifier: ci_explorer_dora_metrics
-    weight: 5
   - name: Intelligent Test Runner
     url: continuous_integration/intelligent_test_runner/
     parent: ci
     identifier: ci_intelligent_test_runner
-    weight: 6
+    weight: 2
   - name: Setup
     url: continuous_integration/intelligent_test_runner/setup/
     parent: ci_intelligent_test_runner
     identifier: ci_intelligent_test_runner_setup
-    weight: 601
+    weight: 201
   - name: .NET
     url: continuous_integration/intelligent_test_runner/setup/dotnet/
     parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_dotnet
-    weight: 601
+    weight: 201
   - name: Java
     url: continuous_integration/intelligent_test_runner/setup/java/
     parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_java
-    weight: 602
+    weight: 202
   - name: JavaScript and TypeScript
     url: continuous_integration/intelligent_test_runner/setup/javascript/
     parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_javascript
-    weight: 603
+    weight: 203
   - name: Python
     url: continuous_integration/intelligent_test_runner/setup/python/
     parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_python
-    weight: 604
+    weight: 204
   - name: Swift
     url: continuous_integration/intelligent_test_runner/setup/swift/
     parent: ci_intelligent_test_runner_setup
     identifier: ci_itr_swift
-    weight: 605
-  - name: Static Analysis
-    url: continuous_integration/static_analysis/
+    weight: 205
+  - name: Pipeline Visibility
+    url: continuous_integration/pipelines/
     parent: ci
-    identifier: ci_static_analysis
-    weight: 7
-  - name: Rules
-    url: continuous_integration/static_analysis/rules
-    parent: ci_static_analysis
-    identifier: ci_static_analysis_rules
-    weight: 701
-  - name: CircleCI Orbs
-    url: continuous_integration/static_analysis/circleci_orbs
-    parent: ci_static_analysis
-    identifier: ci_static_analysis_circleci_orbs
-    weight: 702
+    identifier: pipeline_visibility
+    weight: 3
+  - name: AWS CodePipeline
+    url: continuous_integration/pipelines/awscodepipeline/
+    parent: pipeline_visibility
+    identifier: ci_awscodepipeline
+    weight: 301
+  - name: Azure
+    url: continuous_integration/pipelines/azure/
+    parent: pipeline_visibility
+    identifier: ci_azure
+    weight: 302
+  - name: Buildkite
+    url: continuous_integration/pipelines/buildkite/
+    parent: pipeline_visibility
+    identifier: ci_buildkite
+    weight: 303
+  - name: CircleCI
+    url: continuous_integration/pipelines/circleci/
+    parent: pipeline_visibility
+    identifier: ci_circleci
+    weight: 304
+  - name: Codefresh
+    url: continuous_integration/pipelines/codefresh/
+    parent: pipeline_visibility
+    identifier: ci_codefresh
+    weight: 305
   - name: GitHub Actions
-    url: continuous_integration/static_analysis/github_actions
-    parent: ci_static_analysis
-    identifier: ci_static_analysis_github_actions
-    weight: 703
-  - name: Quality Gates
-    url: continuous_integration/quality_gates/
+    url: continuous_integration/pipelines/github/
+    parent: pipeline_visibility
+    identifier: ci_github
+    weight: 306
+  - name: GitLab
+    url: continuous_integration/pipelines/gitlab/
+    parent: pipeline_visibility
+    identifier: ci_gitlab
+    weight: 307
+  - name: Jenkins
+    url: continuous_integration/pipelines/jenkins/
+    parent: pipeline_visibility
+    identifier: ci_jenkins
+    weight: 308
+  - name: TeamCity
+    url: continuous_integration/pipelines/teamcity/
+    parent: pipeline_visibility
+    identifier: ci_teamcity
+    weight: 309
+  - name: Custom Commands
+    url: continuous_integration/pipelines/custom_commands/
+    parent: pipeline_visibility
+    identifier: ci_custom_commands
+    weight: 310
+  - name: Custom Tags and Metrics
+    url: continuous_integration/pipelines/custom_tags_and_metrics/
+    parent: pipeline_visibility
+    identifier: ci_custom_tags_and_metrics
+    weight: 311
+  - name: Search and Manage
+    url: continuous_integration/search/
     parent: ci
-    identifier: ci_quality_gates
-    weight: 8
+    identifier: ci_search
+    weight: 4
+  - name: Explorer
+    url: continuous_integration/explorer/
+    parent: ci
+    identifier: ci_explorer
+    weight: 5
+  - name: Search Syntax
+    url: continuous_integration/explorer/search_syntax/
+    parent: ci_explorer
+    identifier: ci_explorer_search_syntax
+    weight: 501
+  - name: Facets
+    url: continuous_integration/explorer/facets/
+    parent: ci_explorer
+    identifier: ci_explorer_facets
+    weight: 502
+  - name: Saved Views
+    url: continuous_integration/explorer/saved_views/
+    parent: ci_explorer
+    identifier: ci_explorer_saved_views
+    weight: 502
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
     identifier: ci_guides
-    weight: 9
+    weight: 6
   - name: Troubleshooting
     url: continuous_integration/troubleshooting/
     parent: ci
     identifier: ci_troubleshooting
-    weight: 10
+    weight: 7
   - name: CD Visibility
     url: continuous_delivery/
     pre: ci
@@ -2641,42 +2611,39 @@ main:
     identifier: cd_explorer_facets
     parent: cd_explorer
     weight: 302
-  - name: CD Visibility
-    url: continuous_delivery/
+  - name: DORA Metrics
+    url: continuous_integration/dora_metrics/
     pre: ci
-    identifier: cd
     parent: software_delivery_heading
-    weight: 160000
-  - name: Pipeline Visibility
-    url: continuous_delivery/pipelines
-    identifier: cd_pipelines
-    parent: cd
-    weight: 1
-  - name: ArgoCD
-    url: continuous_delivery/pipelines/argocd
-    identifier: cd_pipelines_argocd
-    parent: cd_pipelines
+    identifier: ci_explorer_dora_metrics
+    weight: 170000
+  - name: Static Analysis
+    url: continuous_integration/static_analysis/
+    pre: ci
+    parent: software_delivery_heading
+    identifier: ci_static_analysis
+    weight: 180000
+  - name: Rules
+    url: continuous_integration/static_analysis/rules
+    parent: ci_static_analysis
+    identifier: ci_static_analysis_rules
     weight: 101
-  - name: Search and Manage
-    url: continuous_delivery/search
-    identifier: cd_search
-    parent: cd
-    weight: 2
-  - name: Explorer
-    url: continuous_delivery/explorer
-    identifier: cd_explorer
-    parent: cd
-    weight: 3
-  - name: Search Syntax
-    url: continuous_delivery/explorer/search_syntax
-    identifier: cd_explorer_search_syntax
-    parent: cd_explorer
-    weight: 301
-  - name: Facets
-    url: continuous_delivery/explorer/facets
-    identifier: cd_explorer_facets
-    parent: cd_explorer
-    weight: 302
+  - name: CircleCI Orbs
+    url: continuous_integration/static_analysis/circleci_orbs
+    parent: ci_static_analysis
+    identifier: ci_static_analysis_circleci_orbs
+    weight: 102
+  - name: GitHub Actions
+    url: continuous_integration/static_analysis/github_actions
+    parent: ci_static_analysis
+    identifier: ci_static_analysis_github_actions
+    weight: 103
+  - name: Quality Gates
+    url: continuous_integration/quality_gates/
+    pre: ci
+    parent: software_delivery_heading
+    identifier: ci_quality_gates
+    weight: 190000
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2
