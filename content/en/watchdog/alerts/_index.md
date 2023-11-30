@@ -47,13 +47,12 @@ Available facets:
 | Alert Type          | Select alerts using metrics from APM or infrastructure integrations.            |
 | Alert Status        | Select alerts based on their status (`ongoing` or `resolved` or `expired`).     |
 | APM Primary Tag     | The [defined APM primary tag][6] to display alerts from.                        |
-| Environment         | The environment to display alerts from. See [Unified Service Tagging][5] for more information about the `env` tag.                                                                                              |
-| Service             | The service to display alerts from. See [Unified Service Tagging][5] for more information about the `service` tag.                                                                                          |
-| End User Impacted   | If Watchdog found any end users impacted (requires RUM) - see [Impact Analysis][4] for more information
-                                                                                                        |
-| Root Cause          | If Watchdog found the root cause of the anomaly or the critical failure (requires APM) - see [Root Cause Analysis][9] for more information                                                                      |
+| Environment         | The environment to display alerts from. See [Unified Service Tagging][5] for more information about the `env` tag.|
+| Service             | The service to display alerts from. See [Unified Service Tagging][5] for more information about the `service` tag.|
+| End User Impacted   | If Watchdog found any end users impacted (requires RUM) - see [Impact Analysis][4] for more information|
+| Root Cause          | If Watchdog found the root cause of the anomaly or the critical failure (requires APM) - see [Root Cause Analysis][9] for more information|
 | Team                | The team owning the impacted services. Enriched from the [Service Catalog][7]  |
-| Log Anomaly Type    | Only display log anomalies of this type. The supported types are new log patterns and increases in existing log patterns.                                                                                  |
+| Log Anomaly Type    | Only display log anomalies of this type. The supported types are new log patterns and increases in existing log patterns.|
 | Log Source          | Only display alerts containing logs from this source.                           |
 | Log Status          | Only display alerts containing logs of this log status.                         |
 
@@ -64,9 +63,23 @@ Watchdog Alerts cover multiple products as well as key application and infrastru
 {{< tabs >}}
 {{% tab "Log Management" %}}
 
-  * New error logs
-  * Increases in existing error logs
+Ingested logs are analyzed at the intake level where Watchdog performs aggregations on detected patterns as well as `environment`, `service`, `source` and `status` tags.
+These aggregated logs are scanned for anomalous behaviors, such as the following:
 
+* An emergence of logs with a warning or error status.
+* A sudden increase of logs with a warning or error status.
+
+All log anomalies are surfaced as [Insights][3] in the Log Explorer, matching the search context and any restrictions applied to your role.
+Log anomalies that Watchdog determines to be particularly `severe` are surfaced in the [Watchdog Alerts explorer][1] and can be alerted on by setting up a [Watchdog logs monitor][2].
+A `severe` anomaly is defined as:
+
+* containing error logs
+* lasting at least 10 minutes (to avoid transient errors)
+* having a significant increase (to avoid small increases)
+
+[1]: https://app.datadoghq.com/watchdog
+[2]: /monitors/types/watchdog/
+[3]: /watchdog/insights?tab=logmanagement#explore-insights
 {{% /tab %}}
 {{% tab "APM" %}}
 
@@ -132,7 +145,6 @@ Watchdog leverages the same seasonal algorithms that power monitors and dashboar
 Watchdog alerts appear in three places within the Datadog site:
 
 * The [Watchdog Alerts explorer][1]
-* The [APM home page][2]
 * On any individual [APM Service Page][3]
 * In the [Service Catalog][7]
 * In the [Watchdog insight panel][8] available on all explorers 
@@ -160,7 +172,6 @@ To see archived alerts, select the checkbox option to "Show N archived alerts" i
 **Note**: Archiving does not prevent Watchdog from flagging future issues related to the service or resource.
 
 [1]: /watchdog
-[2]: /apm/home
 [3]: /tracing/services/service_page/
 [4]: /watchdog/impact_analysis/
 [5]: /getting_started/tagging/unified_service_tagging/
