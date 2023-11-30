@@ -99,24 +99,22 @@ Click on the three dot menu, next to the rule toggle, and select any of the prov
 - The delete option is **only** available for custom rules. You cannot delete an out-of-the-box (OOTB) rule as they are native to the platform. To permanently delete a custom rule, click **Delete**. To disable an OOTB rule, click the disable toggle.
 - Click **View generated signals** to pivot to the [Signals Explorer][6] and query by a rule's ID. This is useful when correlating signals across multiple sources by rule, or when completing an audit of rules.
 
-#### Limit edit access
+### Restrict edit permissions
 
-By default, all users have full access to security rules.
+By default, all users have full access to the detection rules. To use granular access controls to limit the [roles][10] that may edit a single rule:
 
-Use granular access controls to limit the [roles][10] that may edit a single rule:
-1. Click on the three dot menu for the rule.
-1. Select **Permissions**.
+1. Click the vertical three-dot menu for the rule and select **Permissions**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the dropdown to select one or more roles, teams, or users that may edit the security rule.
+1. Use the dropdown menu to select one or more roles, teams, or users that may edit the security rule.
 1. Click **Add**.
-1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**
+
 **Note:** To maintain your edit access to the rule, the system requires you to include at least one role that you are a member of before saving. 
 
 To restore general access to a rule with restricted access, follow the steps below:
-1. Click on the three dot menu on the right of the rule.
-1. Select **Permissions**.
+
+1. Click the vertical three-dot menu for the rule and select **Permissions**.
 1. Click **Restore Full Access**.
 1. Click **Save**.
 
