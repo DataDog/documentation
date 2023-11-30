@@ -1,5 +1,6 @@
-import { DOMReady } from '../helpers/documentReady';
 import { scrollTop } from '../helpers/scrollTop';
+import { bodyClassContains } from '../helpers/helpers';
+import { DOMReady } from '../helpers/documentReady';
 
 let sidenavMapping = [];
 let tocContainer = document.querySelector('.js-toc-container');
@@ -225,7 +226,7 @@ function toggleMobileTOC() {
 }
 
 function handleAPIPage() {
-    if (!document.body.classList.contains('api')) {
+    if (!bodyClassContains('api')) {
         onLoadTOCHandler();
     }
 }

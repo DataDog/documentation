@@ -1,11 +1,13 @@
+import configDocs from './config/config-docs';
+import { updateMainContentAnchors, gtag } from './helpers/helpers';
+import { bodyClassContains } from './helpers/helpers';
+import { DOMReady } from './helpers/documentReady';
 import { initializeIntegrations } from './components/integrations';
 import { initializeGroupedListings } from './components/grouped-item-listings';
 import { updateTOC, buildTOCMap, onScroll, closeMobileTOC } from './components/table-of-contents';
 import initCodeTabs from './components/codetabs';
-import configDocs from './config/config-docs';
 import { loadPage } from './components/async-loading';
 import { loadInstantSearch } from './components/algolia';
-import { updateMainContentAnchors, gtag } from './helpers/helpers';
 import {setMobileNav, closeMobileNav} from './components/mobile-nav'
 
 const { env } = document.documentElement.dataset;
@@ -15,7 +17,7 @@ const { gaTag } = configDocs[env];
 gtag('js', new Date());
 gtag('config', gaTag);
 
-$(document).ready(function () {
+const doOnLoad = () => {
     window.history.replaceState({}, '', window.location.href);
 
     // ie
@@ -27,43 +29,65 @@ $(document).ready(function () {
         return this.length;
     };
 
-    $('.table-responsive-container table').each(function () {
-        if (!$(this).hasClass('table-responsive')) {
-            $(this).addClass('table-responsive');
-        }
-    });
+    const responsiveTableElements = document.querySelectorAll(".table-responsive-container table");
 
-    $('table').each(function () {
-        let emptyThead = true;
-        $(this)
-            .find('thead th')
-            .each(function () {
-                if (!$(this).is(':empty')) {
-                    emptyThead = false;
+    if (responsiveTableElements.length) {
+        responsiveTableElements.forEach(table => {
+            if (!table.classList.contains("table-responsive")) {
+                table.classList.add("table-responsive");
+            }
+        })
+    }
+
+    const tableElements = document.querySelectorAll("table");
+
+    if (tableElements.length) {
+        tableElements.forEach(table => {
+            let emptyThead = true;
+            const tableHeadElements = table.querySelectorAll("thead th");
+
+            if (tableHeadElements.length) {
+                tableHeadElements.forEach(head => {
+                    if (head.hasChildNodes) {
+                        emptyThead = false;
+                    }
+                });
+            }
+
+            if (emptyThead) {
+                for (const el of table.querySelectorAll(':scope thead')) {
+                    el.remove();
                 }
-            });
-        if (emptyThead) {
-            $(this).find('thead').remove();
-        }
-    });
+            }
+        });
+    }
 
-    // load algolia instant search for the first time
+    // Load algolia instant search for the first time
     loadInstantSearch(asyncLoad=false);
 
-    if (!document.body.classList.contains('api')){
-        $(window).on('resize scroll', function() {
-            const headerHeight = $('body .main-nav').height();
+    if (!bodyClassContains('api')){
+        const setSidenavMaxHeight = () => {
+            const headerHeight = document.querySelector("body .main-nav")?.getBoundingClientRect().height;
             const padding = 200;
-            $('.sidenav-nav').css(
-                'maxHeight',
-                document.documentElement.clientHeight - headerHeight - padding
-            );
+            const sidenavNav = document.querySelector(".sidenav-nav");
+
+            if (sidenavNav && headerHeight) {
+                sidenavNav.style.maxHeight = document.documentElement.clientHeight - headerHeight - padding;
+            }
+        }
+
+        window.addEventListener("scroll", () => {
+            setSidenavMaxHeight();
+        })
+
+        window.addEventListener("resize", () => {
+            setSidenavMaxHeight();
         });
     }
 
     updateMainContentAnchors();
 
-    // add targer-blank to external links
+    // Add target=_blank to external links
     const newLinks = document.getElementsByTagName('a');
     for (let i = 0; i < newLinks.length; i++) {
         if (
@@ -71,7 +95,7 @@ $(document).ready(function () {
             !newLinks[i].href.includes('docs-staging.datadoghq.com') &&
             !newLinks[i].href.includes('localhost:1313')
         ) {
-            $(`a[href='${newLinks[i].href}']`).attr('target', '_blank');
+            newLinks[i].setAttribute("target", "_blank");
         }
     }
 
@@ -83,14 +107,16 @@ $(document).ready(function () {
         initializeGroupedListings();
     }
 
-    if (document.body.classList.value.includes('integrations')) {
+    if (bodyClassContains('integrations')) {
         initializeIntegrations();
     }
 
     if (document.querySelector('.code-tabs')) {
         initCodeTabs();
     }
-});
+};
+
+DOMReady(doOnLoad);
 
 // Get sidebar
 function hasParentLi(el) {
@@ -293,14 +319,10 @@ function navClickEventHandler(event) {
     }
 
     // Hide mobile nav after clicking nav element
-    if ($('.navbar-collapse').hasClass('show')) {
-        $('.navbar-collapse').collapse('hide');
+    if (document.querySelector(".navbar-collapse")?.classList.contains("show")) {
+        document.querySelector(".navbar-collapse").style.display = "none";
         closeMobileTOC();
     }
-
-    // TODO: How to fall back to normal behavior?
-    // if (event.target.tagName !== "A")
-    //     return;
 
     // History API needed to make sure back and forward still work
     if (window.history === null) return;

@@ -1,5 +1,6 @@
-$(document).ready(function () {
+import { DOMReady } from "../helpers/documentReady";
 
+const doOnLoad = () => {
     const signupModal = document.getElementById('signupModal')
     signupModal.addEventListener('show.bs.modal', function(e) {
         //$('body').css('overflow', 'hidden');
@@ -139,4 +140,6 @@ $(document).ready(function () {
         }
     });
 
-});
+};
+
+DOMReady(doOnLoad);
