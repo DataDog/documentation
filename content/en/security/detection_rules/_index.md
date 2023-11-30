@@ -7,32 +7,27 @@ aliases:
   - /security_platform/detection_rules/
   - /security/security_monitoring/log_detection_rules/
 further_reading:
-- link: "/cloud_siem/default_rules"
+- link: "/security/default_rules/#all"
   tag: "Documentation"
   text: "Explore default detection rules"
 - link: "/security/notifications/"
   tag: "Documentation"
-  text: "Learn more about Security notifications"
+  text: "Learn more about security notifications"
 - link: "https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/"
   tag: "Blog"
-  text: "Detect Abuse of Functionality with Datadog"
+  text: "Detect abuse of functionality with Datadog"
 - link: "https://www.datadoghq.com/blog/impossible-travel-detection-rules/"
   tag: "Blog"
   text: "Detect suspicious login activity with impossible travel detection rules"
 ---
 
-## Overview
-
-Detection Rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a rule that is matched over a given period of time, Datadog generates a Security Signal.
+Detection Rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a rule that is matched over a given period of time, Datadog generates a security signal.
 
 For each monitoring option, there are [default detection rules][1] that work out-of-the-box with integration configuration.
 
 - [Cloud SIEM][2] uses log detection to analyze ingested logs in real-time. You can also create [custom detection rules][3] to tailor to your environment.
-
 - [Cloud Security Management Misconfigurations][4] uses cloud configuration and infrastructure configuration detection rules to scan the state of your cloud environment.
-
 - With [Cloud Security Management Threats][5], the Datadog Agent actively monitors system activity and evaluates it against a set of detection rules.
-
 - [Application Security Management][6] (ASM) leverages Datadog [APM][7], the [Datadog Agent][8], and detection rules to detect threats in your application environment.
 
 ## Creating and managing detection rules
@@ -57,16 +52,42 @@ You can also filter by facets such as `source` and `severity` to help when inves
 
 Rules are displayed in the detection rules table. You can sort the table by clicking on the **Sort by** option in the top right corner of the table. For example, sort by **Highest Severity** to triage high-impact misconfigurations and threats.
 
-#### Enable or disable rules
+## Manage detection rules
 
-To enable or disable a single rule, toggle the switch to the right of the rule.
+### Enable or disable rules
+
+To enable or disable a rule, toggle the switch to the right of the rule name.
 
 You can also bulk enable or disable rules:
 
 1. Click **Select Rules**.
 1. Select the rules you want to enable or disable.
-1. Click the **Edit Rules** dropdown.
+1. Click the **Edit Rules** dropdown menu.
 1. Select **Enable Rules** or **Disable Rules**.
+
+### Edit a rule
+
+For default rules, you can only edit the suppression query.
+
+To edit a default rule, click the vertical three-dot menu and select **Edit default rule**.
+
+To edit a custom rule, click the vertical three-dot menu and select **Edit rule**.
+
+### Clone a rule
+
+To clone a rule, click the vertical three-dot menu and select **Clone rule**.
+
+### Delete a rule
+
+Rule deletion is only available for custom rules. To remove a default rule, you must [disable it](#enable-or-disable-rules).
+
+To delete a custom rule, click the vertical three-dot menu and select **Delete rule**.
+
+### View generated signals
+
+To view the security signals for a rule in the [Signals Explorer][6], click the vertical three-dot menu and select **View generated signals**. This is useful when correlating signals across multiple sources by rule, or when completing an audit of rules.
+
+To view the security signals for a rule by querying the rule's ID in the [Signals Explorer][6], click the vertical three-dot menu and select **View generated signals**. This is useful when correlating signals across multiple sources by rule, or when completing an audit of rules.
 
 #### Rule and generated signal options
 
@@ -76,7 +97,7 @@ Click on the three dot menu, next to the rule toggle, and select any of the prov
   -  **Note**: You can only edit an out-of-the-box (OOTB) rule by first cloning the rule, and then modifying the rule. To edit a default rule, click **Edit** and scroll to the bottom of the rule configuration page. Click **Clone**, and then modify the rule.
 - Cloning a rule is helpful if you wish to duplicate an existing rule and lightly modify settings to cover other areas of detection. For example, you could duplicate a log detection rule and modify it from **Threshold** to **Anomaly** to add new dimension to threat detection using the same queries and triggers.
 - The delete option is **only** available for custom rules. You cannot delete an out-of-the-box (OOTB) rule as they are native to the platform. To permanently delete a custom rule, click **Delete**. To disable an OOTB rule, click the disable toggle.
-- Click **View generated signals** to pivot to the [Signals Explorer][6] and query by a rule's ID. This is useful when correlating signals across multiple sources by rule, or when completing an audit of rules. 
+- Click **View generated signals** to pivot to the [Signals Explorer][6] and query by a rule's ID. This is useful when correlating signals across multiple sources by rule, or when completing an audit of rules.
 
 #### Limit edit access
 
