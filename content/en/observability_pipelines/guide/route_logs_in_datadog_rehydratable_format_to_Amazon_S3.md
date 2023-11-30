@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The Observability Pipelines `datadog_archives` destination formats logs into a Datadog-rehydratable format and then routes it to [Log Archives][1]. These logs are not ingested into Datadog, but are routed directly to the archive. You can then rehydrate the archive in Datadog when you need to analyze and investigate them.
+The Observability Pipelines `datadog_archives` destination formats logs into a Datadog-rehydratable format and then routes them to [Log Archives][1]. These logs are not ingested into Datadog, but are routed directly to the archive. You can then rehydrate the archive in Datadog when you need to analyze and investigate them.
 
 For example in this first diagram, some logs are sent to a cloud storage for archiving and others to Datadog for analysis and investigation. However, the logs sent directly to cloud storage cannot be rehydrated in Datadog when you need to investigate them.
 
@@ -30,9 +30,9 @@ In this second diagram, all logs are going to the Datadog Agent, including the l
 
 This guide walks you through how to:
 
-- [Configure a Log Archives](#configure-a-log-archive)
+- [Configure a Log Archive](#configure-a-log-archive)
 - [Configure the `datadog_archives` destination](#configure-the-datadog_archives-destination)
-- [Rehyrdate your archive](#rehydrate-your-archive)
+- [Rehydrate your archive](#rehydrate-your-archive)
 
 `datadog_archives` is available for Observability Pipelines Worker version 1.5 and later.
 
