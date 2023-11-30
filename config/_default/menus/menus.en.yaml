@@ -2581,15 +2581,15 @@ main:
     identifier: cd
     parent: software_delivery_heading
     weight: 160000
-  - name: Pipeline Visibility
-    url: continuous_delivery/pipelines
-    identifier: cd_pipelines
+  - name: Deployment Visibility
+    url: continuous_delivery/deployments
+    identifier: cd_deployments
     parent: cd
     weight: 1
   - name: ArgoCD
-    url: continuous_delivery/pipelines/argocd
-    identifier: cd_pipelines_argocd
-    parent: cd_pipelines
+    url: continuous_delivery/deployments/argocd
+    identifier: cd_deployments_argocd
+    parent: cd_deployments
     weight: 101
   - name: Search and Manage
     url: continuous_delivery/search
@@ -2611,6 +2611,11 @@ main:
     identifier: cd_explorer_facets
     parent: cd_explorer
     weight: 302
+    - name: Saved Views
+    url: continuous_delivery/explorer/saved_views
+    identifier: cd_explorer_saved_views
+    parent: cd_explorer
+    weight: 303
   - name: DORA Metrics
     url: continuous_integration/dora_metrics/
     pre: ci
