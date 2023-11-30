@@ -2445,7 +2445,7 @@ main:
     parent: ci_tests
     identifier: ci_tests_swift_tests
     weight: 107
-  - name: Deployment Visibility
+  - name: Pipeline Visibility
     url: continuous_integration/pipelines/
     parent: ci
     identifier: pipeline_visibility
