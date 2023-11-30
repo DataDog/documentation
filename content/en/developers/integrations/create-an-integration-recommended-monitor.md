@@ -74,10 +74,6 @@ Provides extra context around the failure mode and also about the impact this mo
 | -----------                                          | -----------                                  | -----------                             |
 |Notify your team when unacked message are high. | Unacked messages are those that have been delivered to a consumer but have not been acknowledged as processed or handled. This monitor tracks the ratio of unacked messages.|Unacked messages are those that have been delivered to a consumer but have not been acknowledged as processed or handled. This monitor tracks the ratio of unacked messages to avoid potential bottlenecks which could lead to delays in message processing.| 
 
-Below is an example of a well-defined monitor:
-
-{{< img src="developers/integrations/example_recommended_monitor_config.png" alt="An example of a Recommended Monitor configuration" width="100%">}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
