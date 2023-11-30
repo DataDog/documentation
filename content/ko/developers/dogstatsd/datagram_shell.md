@@ -9,9 +9,6 @@ further_reading:
 - link: developers/libraries
   tag: 설명서
   text: 공식적으로 커뮤니티에서 만든 API 및 DogStatsD 클라이언트 라이브러리
-- link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
-  tag: GitHub
-  text: DogStatsD 소스 코드
 kind: 설명서
 title: 데이터그램 형식 및 쉘 사용
 ---
