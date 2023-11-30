@@ -2611,7 +2611,7 @@ main:
     identifier: cd_explorer_facets
     parent: cd_explorer
     weight: 302
-    - name: Saved Views
+  - name: Saved Views
     url: continuous_delivery/explorer/saved_views
     identifier: cd_explorer_saved_views
     parent: cd_explorer
