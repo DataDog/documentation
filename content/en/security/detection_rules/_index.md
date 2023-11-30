@@ -67,6 +67,9 @@ You can also bulk enable or disable rules:
 
 ### Edit a rule
 
+- Click **Edit** to update queries, adjust triggers, manage notifications, or adjust rule configuration.
+  -  **Note**: You can only edit an out-of-the-box (OOTB) rule by first cloning the rule, and then modifying the rule. To edit a default rule, click **Edit** and scroll to the bottom of the rule configuration page. Click **Clone**, and then modify the rule.
+
 For default rules, you can only edit the suppression query.
 
 To edit a default rule, click the vertical three-dot menu and select **Edit default rule**.
@@ -75,29 +78,15 @@ To edit a custom rule, click the vertical three-dot menu and select **Edit rule*
 
 ### Clone a rule
 
+Cloning a rule is helpful if you wish to duplicate an existing rule and lightly modify settings to cover other areas of detection. For example, you could duplicate a log detection rule and modify it from **Threshold** to **Anomaly** to add a new dimension to threat detection using the same queries and triggers.
+
 To clone a rule, click the vertical three-dot menu and select **Clone rule**.
 
 ### Delete a rule
 
-Rule deletion is only available for custom rules. To remove a default rule, you must [disable it](#enable-or-disable-rules).
+Rule deletion is only available for custom rules. To delete a custom rule, click the vertical three-dot menu and select **Delete rule**.
 
-To delete a custom rule, click the vertical three-dot menu and select **Delete rule**.
-
-### View generated signals
-
-To view the security signals for a rule in the [Signals Explorer][6], click the vertical three-dot menu and select **View generated signals**. This is useful when correlating signals across multiple sources by rule, or when completing an audit of rules.
-
-To view the security signals for a rule by querying the rule's ID in the [Signals Explorer][6], click the vertical three-dot menu and select **View generated signals**. This is useful when correlating signals across multiple sources by rule, or when completing an audit of rules.
-
-#### Rule and generated signal options
-
-Click on the three dot menu, next to the rule toggle, and select any of the provided options: Edit, Clone, Delete, or View generated signals.
-
-- Click **Edit** to update queries, adjust triggers, manage notifications, or adjust rule configuration.
-  -  **Note**: You can only edit an out-of-the-box (OOTB) rule by first cloning the rule, and then modifying the rule. To edit a default rule, click **Edit** and scroll to the bottom of the rule configuration page. Click **Clone**, and then modify the rule.
-- Cloning a rule is helpful if you wish to duplicate an existing rule and lightly modify settings to cover other areas of detection. For example, you could duplicate a log detection rule and modify it from **Threshold** to **Anomaly** to add new dimension to threat detection using the same queries and triggers.
-- The delete option is **only** available for custom rules. You cannot delete an out-of-the-box (OOTB) rule as they are native to the platform. To permanently delete a custom rule, click **Delete**. To disable an OOTB rule, click the disable toggle.
-- Click **View generated signals** to pivot to the [Signals Explorer][6] and query by a rule's ID. This is useful when correlating signals across multiple sources by rule, or when completing an audit of rules.
+**Note**: To remove a default rule, you must [disable it](#enable-or-disable-rules).
 
 ### Restrict edit permissions
 
@@ -110,13 +99,21 @@ By default, all users have full access to the detection rules. To use granular a
 1. Click **Add**.
 1. Click **Save**
 
-**Note:** To maintain your edit access to the rule, the system requires you to include at least one role that you are a member of before saving. 
+**Note:** To maintain your edit access to the rule, the system requires you to include at least one role that you are a member of before saving.
 
-To restore general access to a rule with restricted access, follow the steps below:
+To restore access to a rule:
 
 1. Click the vertical three-dot menu for the rule and select **Permissions**.
 1. Click **Restore Full Access**.
 1. Click **Save**.
+
+### View generated signals
+
+To view the security signals for a rule in the [Signals Explorer][6], click the vertical three-dot menu and select **View generated signals**. This is useful when correlating signals across multiple sources by rule, or when completing an audit of rules.
+
+### Export a rule as JSON
+
+To export a copy of a rule as JSON, click the vertical three-dot menu for the rule and select **Export as JSON**. 
 
 ## Rule deprecation
 
