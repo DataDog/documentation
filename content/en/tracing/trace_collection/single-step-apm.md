@@ -8,39 +8,42 @@ is_beta: true
 
 Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64` architectures.
 
-{{<  callout header="false" url="http://dtdg.co/apm-onboarding" >}}
-For Kubernetes deployments, a private beta is available for tracing Java, Python, Ruby, Node.js, and .NET Core.
-{{< /callout >}}
-
 ## Enable APM on your services in one step
 
-If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation (beta)** option selected, the Agent is installed and configured to enable APM (with the `DD_APM_INSTRUMENTATION_ENABLED` parameter) and to inject the Datadog tracing library into your code for automatic instrumentation, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
+If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation (beta)** option selected, the Agent is installed and configured to enable APM. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
 
 The following examples show how it works on each infrastructure type. 
 
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 
-For example, on an Ubuntu host:
+In one command, you can install, configure, and start the Agent with APM and [Remote Configuration][2] enabled, and set up automatic instrumentation of your services.
+
+For an Ubuntu host:
 
 1. Run the one-line install command:
 
    ```shell
-   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE=”<YOUR_DD_SITE>” DD_APM_INSTRUMENTATION_ENABLED=host bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)”
+   DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
    ```
-   This installs, configures, and starts the Agent with APM and [Remote Configuration][1] enabled, and sets up library injection for automatic instrumentation of all services on the host or VM.
-   <div class="alert alert-info">You can optionally set an environment for your services and other telemetry that pass through the Agent. Read <a href="#tagging-observability-data-by-environment">tagging observability data by environment</a> to learn how. </div>
-2. Restart the services on the host or VM.
-3. [Explore the performance observability of your services in Datadog][2].
 
-[1]: /agent/remote_config
-[2]: /tracing/service_catalog/
+   Replace `<YOUR_DD_API_KEY>` with your [Datadog API][4].
+   Replace `<YOUR_DD_SITE>` with your [Datadog site][3].
+2. Restart the services on the host or VM.
+3. [Explore the performance observability of your services in Datadog][5].
+
+   <div class="alert alert-info">You can optionally set an environment for your services and other telemetry that pass through the Agent. Read <a href="#tagging-observability-data-by-environment">tagging observability data by environment</a> to learn how. </div>
+
+[2]: /agent/remote_config
+[3]: /getting_started/site/
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+[5]: /tracing/service_catalog/
 
 {{% /tab %}}
 
 {{% tab "Docker" %}}
 
-For example, for a Docker Linux container:
+For a Docker Linux container:
 
 1. Install the library injector:
    ```shell
@@ -49,7 +52,7 @@ For example, for a Docker Linux container:
 2. Configure the Agent in Docker:
    ```shell
    docker run -d --name dd-agent \  
-     -e DD_API_KEY=${DD_API_KEY} \
+     -e DD_API_KEY=${YOUR_DD_API_KEY} \
      -e DD_APM_ENABLED=true \
      -e DD_APM_NON_LOCAL_TRAFFIC=true \
      -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
@@ -59,29 +62,151 @@ For example, for a Docker Linux container:
      -v /var/run/docker.sock:/var/run/docker.sock:ro \
      gcr.io/datadoghq/agent:7
    ```
-   <div class="alert alert-info">You can optionally set an environment for your services and other telemetry that pass through the Agent. Read <a href="#tagging-observability-data-by-environment">tagging observability data by environment</a> to learn how. </div>
-3. Restart the Docker containers.
-4. [Explore the performance observability of your services in Datadog][2].
+   Replace `<YOUR_DD_API_KEY>` with your [Datadog API][5].
 
-[1]: /agent/remote_config
-[2]: /tracing/service_catalog/
+3. Restart the Docker containers.
+4. [Explore the performance observability of your services in Datadog][6].
+
+   <div class="alert alert-info">You can optionally set an environment for your services and other telemetry that pass through the Agent. Read <a href="#tagging-observability-data-by-environment">tagging observability data by environment</a> to learn how. </div>
+
+[5]: https://app.datadoghq.com/organization-settings/api-keys
+[6]: /tracing/service_catalog/
 
 {{% /tab %}}
 
+{{% tab "Kubernetes" %}}
+
+You can enable APM by installing the Agent with the Datadog Helm chart. This deploys the Datadog Agent across all nodes in your Linux-based Kubernetes cluster with a DaemonSet.
+
+### Requirements
+
+- Make sure you have [Helm][13] installed.
+
+### Installation
+
+To enable single step instrumentation with Helm:
+
+1. Add the Helm Datadog repo:
+   ```bash
+    helm repo add datadog https://helm.datadoghq.com
+    helm repo update
+    ```
+2. Create a Kubernetes secret to store your Datadog [API key][10]:
+   ```bash
+   kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
+   ```
+3. Create `datadog-values.yaml` and add the following configuration:
+   ```
+   datadog:
+    apiKeyExistingSecret: datadog-secret
+    site: <DATADOG_SITE>
+    apm:
+      instrumentation:
+         enabled: true
+   ```
+   Replace `<DATADOG_SITE>` with your [Datadog site][12].
+
+   <div class="alert alert-info">
+      Here you can also optionally configure the following:
+      <ul>
+         <li><a href="#enabling-or-disabling-instrumentation-for-namespaces">Enabling or disabling instrumentation for namespaces.</a></li>
+         <li><a href="#specifying-tracing-library-versions">Specifying tracing library versions.</a></li>
+         <li><a href="#tagging-observability-data-by-environment">Tagging observability data by environment.</a></li>
+      </ul>
+   </div>
+
+
+4. Run the following command:
+   ```bash
+   helm install datadog-agent -f datadog-values.yaml
+   ```
+
+[7]: https://v3.helm.sh/docs/intro/install/
+[8]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+[9]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
+[10]: https://app.datadoghq.com/organization-settings/api-keys
+[11]: https://app.datadoghq.com/organization-settings/application-keys
+[12]: /getting_started/site
+[13]: https://v3.helm.sh/docs/intro/install/
+[14]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+
+### Enabling or disabling instrumentation for namespaces
+
+You can choose to selectively instrument specific namespaces or choose to not instrument them.
+
+To enable instrumentation for specific namespaces, replace `enabled: true` with `enabledNamespaces` configuration in your `datadog-values.yaml` file:
+{{< highlight yaml "hl_lines=6-8" >}}
+      datadog:
+        apiKeyExistingSecret: datadog-secret
+        site: <DATADOG_SITE>
+        apm:
+          instrumentation:
+            enabledNamespaces: # Add namespaces to instrument
+               - namespace_1
+               - namespace_2
+ {{< /highlight >}}
+
+<div class="alert alert-info">The <code>enabled: true</code> option enables instrumentation for the entire cluster. You need to remove this to only enable instrumentation for specific namespaces.</a></div>
+
+To disable instrumentation for specific namespaces, add the `disabledNamespaces` configuration to your `datadog-values.yaml` file:
+{{< highlight yaml "hl_lines=7-9" >}}
+   datadog:
+     apiKeyExistingSecret: datadog-secret
+     site: <DATADOG_SITE>
+     apm:
+       instrumentation:
+         enabled: true
+         disabledNamespaces: # Add namespaces to not instrument
+            - namespace_1
+            - namespace_2
+{{< /highlight >}}
+
+### Specifying tracing library versions
+
+You can optionally set specific tracing library versions to use. If you don't specify a version, it defaults to the latest version. To find the latest version for a library, go to **Releases** in the dd-trace-&lt;language&gt; GitHub repo. For example, [dd-trace-dotnet releases][15].
+
+To set specific tracing library versions, add the following configuration to your `datadog-values.yaml` file:
+{{< highlight yaml "hl_lines=7-12" >}}
+   datadog:
+     apiKeyExistingSecret: datadog-secret
+     site: <DATADOG_SITE>
+     apm:
+       instrumentation:
+         enabled: true
+         libVersions: # Add any versions you want to set
+            dotnet: v2.40.0
+            python: v1.20.6
+            java: v1.22.0
+            js: v4.17.0
+            ruby: v1.15.0 
+{{< /highlight >}}
+
+<div class="alert alert-info">Supported languages include .Net (<code>dotnet</code>), Python (<code>python</code>), Java (<code>java</code>), Javascript (<code>js</code>), and Ruby (<code>ruby</code>).</div>
+
+[15]: https://github.com/DataDog/dd-trace-dotnet/releases
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Tagging observability data by environment
 
 Set `DD_ENV` in your one-line install command for Linux and the library injector installation command for Docker to automatically tag instrumented services and other telemetry that pass through the Agent with a specific environment. For example, if the Agent is installed in your staging environment, set `DD_ENV=staging` to associate your observability data with `staging`.
 
+For Kubernetes, you can add this to your configuration file:
+
+Add a `- env:<env-name>` tag to `datadog-values.yaml`:
+   ```yaml
+   datadog:
+      tags:
+         - env:staging
+   ```
+
 ## Removing Single Step APM instrumentation from your Agent
 
-If you don't want to collect trace data for a particular service, or for all services on a particular host, VM, or container, run one of the following commands directly on the relevant infrastructure to remove APM instrumentation.
+If you don't want to collect trace data for a particular service, host, VM, or container, complete the follow steps:
 
 ### Removing instrumentation for specific services
 
 Run the following commands and restart the service to stop injecting the library into the service and stop producing traces from that service.
-
 
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
@@ -99,9 +224,25 @@ Run the following commands and restart the service to stop injecting the library
 
 1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command: 
    ```shell
-   docker run -e DD_INSTRUMENT_SERVICE_WITH_APM=false
+   docker run -e DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
    ```
 2. Restart the service.
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+
+1. Add the `admission.datadoghq.com/enabled=false` label to the pod spec:
+   ```yaml
+   metadata:
+      annotations:
+         admission.datadoghq.com/enabled: "false"
+   ```
+2. Apply the configuration:
+   ```bash
+   kubectl apply -f /path/to/your/deployment.yaml
+   ```
+3. Restart the services you want to remove instrumentation for.
+
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -109,7 +250,6 @@ Run the following commands and restart the service to stop injecting the library
 ### Removing APM for all services on the infrastructure
 
 To stop producing traces, remove library injectors and restart the infrastructure:
-
 
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
@@ -136,10 +276,19 @@ To stop producing traces, remove library injectors and restart the infrastructur
 
 {{% /tab %}}
 
+{{% tab "Kubernetes" %}}
+
+1. Under `apm:`, remove `instrumentation:` and all following configuration in `datadog-values.yaml`.
+2. Run the following command:
+   ```bash
+   helm upgrade datadog-agent -f datadog-values.yaml datadog/datadog
+   ```
+3. Restart your services.
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
-
-
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /tracing/services/
-
+[2]: /agent/remote_config
+[3]: /tracing/service_catalog/

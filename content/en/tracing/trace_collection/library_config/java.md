@@ -293,6 +293,16 @@ When `true`, user principal is collected. Available for versions 0.61+.
 **Default**: `true`<br>
 When `true`, the tracer collects [telemetry data][8]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
 
+`dd.trace.128.bit.traceid.generation.enabled`
+: **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
+**Default**: `true`<br>
+When `true`, the tracer generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
+
+`dd.trace.128.bit.traceid.logging.enabled`
+: **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`<br>
+**Default**: `false`<br>
+When `true`, the tracer will inject 128 bit Trace IDs as 32 lowercase hexadecimal characters with zero padding, and 64 bit Trace IDs as decimal numbers. Otherwise, the tracer always injects Trace IDs as decimal numbers.
+
 **Note**:
 
 - If the same key type is set for both, the system property configuration takes priority.
@@ -431,21 +441,26 @@ For information about valid values and using the following configuration options
 
 `dd.trace.propagation.style.inject`
 : **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_INJECT`<br>
-**Default**: `datadog`<br>
+**Default**: `datadog,tracecontext`<br>
 A comma-separated list of header formats to include to propagate distributed traces between services.<br>
 Available since version 1.9.0
 
 `dd.trace.propagation.style.extract`
 : **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE_EXTRACT`<br>
-**Default**: `datadog`<br>
+**Default**: `datadog,tracecontext`<br>
 A comma-separated list of header formats from which to attempt to extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue.<br>
 Available since version 1.9.0
 
 `dd.trace.propagation.style`
 : **Environment Variable**: `DD_TRACE_PROPAGATION_STYLE`<br>
-**Default**: `datadog`<br>
+**Default**: `datadog,tracecontext`<br>
 A comma-separated list of header formats from which to attempt to inject and extract distributed tracing propagation data. The first format found with complete and valid headers is used to define the trace to continue. The more specific `dd.trace.propagation.style.inject` and `dd.trace.propagation.style.extract` configuration settings take priority when present.<br>
 Available since version 1.9.0
+
+`trace.propagation.extract.first`
+: **Environment Variable**: `DD_TRACE_PROPAGATION_EXTRACT_FIRST`<br>
+**Default**: `false`<br>
+When set to `true`, stop extracting trace context when a valid one is found.
 
 #### Deprecated extraction and injection settings
 
