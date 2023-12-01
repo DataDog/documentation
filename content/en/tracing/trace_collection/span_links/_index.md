@@ -27,7 +27,7 @@ Span links correlate one or more spans together that are causally related but do
 
 Span links help trace operations in distributed systems, where workflows often deviate from linear execution patterns. They are useful to trace the flow of operations in systems that execute requests in batches or process events asynchronously.
 
-### Use cases
+## Common use cases
 
 Span links are most applicable in fan-in scenarios, where multiple operations converge into a single span. The single span links back to multiple converging operations.
 
@@ -49,16 +49,14 @@ For example:
 
 - **Multiple Receivers and Event Logging**: In transaction systems with primary and secondary processing paths, such as analytics or summarization, span links separate secondary pathways and reconnect them to the main transaction pathway.
 
-## Using span links
-
-### Adding span links
+## Creating span links
 
 If your application is instrumented with:
 
 - The OpenTelemetry SDK, follow the OpenTelemetry manual instrumentation documentation for your language. For example, [Create spans with links for Java][3].
 - The PHP Datadog library, follow the [Adding span links][1] examples.
 
-### Viewing span links in Datadog APM
+## Viewing span links
 
 You can view span links from the [Trace Explorer][4] in Datadog.
 
