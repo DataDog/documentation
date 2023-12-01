@@ -1,7 +1,7 @@
 ---
-title: Monitor ArgoCD Deployments
+title: Monitor Argo CD Deployments
 kind: documentation
-description: Learn how to monitor deployments from ArgoCD in Datadog Deployment Visibility.
+description: Learn how to monitor deployments from Argo CD in Datadog Deployment Visibility.
 is_beta: true
 further_reading:
 - link: "/continuous_delivery/deployments"
@@ -13,7 +13,7 @@ further_reading:
 ---
 
 {{< callout url="http://dtdg.co/to-be-updated" header="false" >}}
-CD Visibility for ArgoCD is in private beta. To request access, complete the form (link to be inserted).
+CD Visibility for Argo CD is in private beta. To request access, complete the form (link to be inserted).
 {{< /callout >}}
 
 ## Overview
@@ -31,7 +31,7 @@ For a more general guide on how to set up Argo CD notifications using webhooks, 
 
 The first thing to create is the service, containing the Datadog intake URL and the API Key. First, add your API Key in the
 `argocd-notifications-secret` secret with the `dd-api-key` key. See [the Argo CD guide][2] for information on modifying the `argocd-notifications-secret`.
-Then, create a service in the `argocd-notifications-cm` config map with the following format:
+Then, add a service in the `argocd-notifications-cm` config map with the following format:
 
 ```yaml
 apiVersion: v1
@@ -52,7 +52,7 @@ data:
 
 `cd-visibility-webhook` is the name of the service, and `$dd-api-key` is a reference to the API Key stored in the `argocd-notifications-secret` secret.
 
-The second step is to create the template in the same `argocd-notifications-cm` config map:
+The second step is to add the template in the same `argocd-notifications-cm` config map:
 
 ```yaml
 apiVersion: v1
@@ -76,12 +76,12 @@ data:
 
 <div class="alert alert-warning">
 The call to populate the <code>commit_metadata</code> field is not required, and it's used to enrich the payload with Git information.
-In case you are using Helm repositories as the source of your Argo CD application, adjust the body by removing that line.
+In case you are using Helm repositories as the source of your Argo CD application, adjust the body by removing that line and the comma in the previous line.
 </div>
 
 `cd-visibility-template` is the name of the template, and `cd-visibility-webhook` is a reference to the service created above.
 
-The third step is to create the trigger, again in the same `argocd-notifications-cm` config map:
+The third step is to add the trigger, again in the same `argocd-notifications-cm` config map:
 
 ```yaml
 apiVersion: v1
@@ -96,7 +96,7 @@ data:
 
 `cd-visibility-trigger` is the name of the trigger, and `cd-visibility-template` is a reference to the template created above.
 
-After the service, trigger, and template have been created, you can subscribe any of your Argo CD applications to the integration.
+After the service, trigger, and template have been added to the config map, you can subscribe any of your Argo CD applications to the integration.
 
 Modify the annotations of the application by either using the Argo CD UI or modifying the application definition with the following:
 
