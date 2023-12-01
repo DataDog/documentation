@@ -75,18 +75,18 @@ You can also bulk enable or disable rules:
 
 For out-of-the-box rules, you can only add or edit a suppression query. To update the query, adjust triggers, or manage notifications, you can [clone the default rule](#clone-a-rule) and use it as a template for a custom rule. You can then [disable the default rule](#enable-or-disable-rules).
 
-- To edit a default rule, click the vertical three-dot menu and select **Edit default rule**.
-- To edit a custom rule, click the vertical three-dot menu and select **Edit rule**.
+- To edit a default rule, click the vertical three-dot menu for the rule and select **Edit default rule**.
+- To edit a custom rule, click the vertical three-dot menu for the rule and select **Edit rule**.
 
 ### Clone a rule
 
-To clone a rule, click the vertical three-dot menu and select **Clone rule**.
+To clone a rule, click the vertical three-dot menu for the rule and select **Clone rule**.
 
 Cloning a rule is helpful if you wish to duplicate an existing rule and lightly modify settings to cover other areas of detection. For example, you could duplicate a log detection rule and modify it from **Threshold** to **Anomaly** to add a new dimension to threat detection using the same queries and triggers.
 
 ### Delete a rule
 
-To delete a custom rule, click the vertical three-dot menu and select **Delete rule**.
+To delete a custom rule, click the vertical three-dot menu for the rule and select **Delete rule**.
 
 **Note**: You can only delete custom rules. To remove a default rule, you must [disable it](#enable-or-disable-rules).
 
@@ -98,7 +98,7 @@ By default, all users have full access to the detection rules. To use granular a
 1. Click **Restrict Access**. The dialog box updates to show that members of your organization have **Viewer** access by default.
 1. Use the dropdown menu to select one or more roles, teams, or users that may edit the security rule.
 1. Click **Add**.
-1. Click **Save**
+1. Click **Save**.
 
 **Note:** To maintain your edit access to the rule, the system requires you to include at least one role that you are a member of before saving.
 
