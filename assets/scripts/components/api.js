@@ -1,10 +1,7 @@
 import Tab from 'bootstrap/js/dist/tab';
 
 const versionSelect = document.querySelector('.js-api-version-select');
-
-if (versionSelect) {
-    versionSelect.addEventListener('change', versionSelectHandler);
-}
+const expandAllToggles = document.querySelectorAll(".js-expand-all");
 
 function versionSelectHandler(event) {
     let previewPath = '';
@@ -71,20 +68,50 @@ function versionSelectHandler(event) {
     }
 }
 
-$('.js-expand-all').click(function () {
-    $(this).toggleClass('expanded');
-    const schemaTable = $(this).closest('.schema-table');
+if (versionSelect) {
+    versionSelect.addEventListener('change', versionSelectHandler);
+}
 
-    if ($(this).hasClass('expanded')) {
-        $(this).text('Collapse All');
-        schemaTable.find('.isNested').removeClass('d-none');
-        schemaTable.find('.toggle-arrow').addClass('expanded');
-    } else {
-        $(this).text('Expand All');
-        schemaTable.find('.isNested').addClass('d-none');
-        schemaTable.find('.toggle-arrow').removeClass('expanded');
-    }
-});
+if (expandAllToggles.length) {
+    expandAllToggles.forEach((cta) => {
+        cta.addEventListener("click", () => {
+            cta.classList.toggle("expanded");
+
+            const schemaTable = cta.closest(".schema-table");
+            const nestedElements = schemaTable?.querySelectorAll(".isNested");
+            const toggleElements = schemaTable?.querySelectorAll(".toggle-arrow");
+            
+            if (schemaTable && cta.classList.contains("expanded")) {
+                cta.textContent = "Collapse All";
+
+                if (nestedElements.length) {
+                    nestedElements.forEach((element) => {
+                        element.classList.remove("d-none");
+                    })
+                }
+
+                if (toggleElements.length) {
+                    toggleElements.forEach((element) => {
+                        element.classList.add("expanded");
+                    })
+                }
+                cta.textContent = "Expand All";
+
+                if (nestedElements.length) {
+                    nestedElements.forEach((element) => {
+                        element.classList.add("d-none");
+                    })
+                }
+
+                if (toggleElements.length) {
+                    toggleElements.forEach((element) => {
+                        element.classList.remove("expanded");
+                    })
+                }
+            }
+        })
+    })
+}
 
 $('.js-model-link').click(function () {
     $(this)
