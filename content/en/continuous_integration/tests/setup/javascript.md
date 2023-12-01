@@ -26,6 +26,10 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
+<div class="alert alert-info">
+  If your CI provider is Jenkins, you can use <a href="/continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1">UI-based configuration</a> to enable Test Visibility for your jobs and pipelines.
+</div>
+
 ## Compatibility
 
 Supported test frameworks:
@@ -45,18 +49,16 @@ The instrumentation works at runtime, so any transpilers such as TypeScript, Web
 To report test results to Datadog, you need to configure the Datadog JavaScript library:
 
 {{< tabs >}}
-
-{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-
-{{% ci-agent %}}
-
-{{% /tab %}}
-
 {{% tab "Cloud CI provider (Agentless)" %}}
 
 <div class="alert alert-info">Agentless mode is available in Datadog JavaScript library versions >= 2.5.0</div>
 
 {{% ci-agentless %}}
+
+{{% /tab %}}
+{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
+
+{{% ci-agent %}}
 
 {{% /tab %}}
 {{< /tabs >}}

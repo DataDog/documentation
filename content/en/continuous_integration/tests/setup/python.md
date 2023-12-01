@@ -23,6 +23,10 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
+<div class="alert alert-info">
+  If your CI provider is Jenkins, you can use <a href="/continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1">UI-based configuration</a> to enable Test Visibility for your jobs and pipelines.
+</div>
+
 ## Compatibility
 
 Supported languages:
@@ -36,7 +40,7 @@ Supported test frameworks:
 
 | Test Framework | Version |
 |---|---|
-| `pytest` | >= 3.0.0 | 
+| `pytest` | >= 3.0.0 |
 | `pytest-benchmark` | >= 3.1.0 |
 | `unittest` | >= 3.7 |
 
@@ -45,16 +49,14 @@ Supported test frameworks:
 To report test results to Datadog, you need to configure the Datadog Python library:
 
 {{< tabs >}}
-
-{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-
-{{% ci-agent %}}
-
-{{% /tab %}}
-
 {{% tab "Cloud CI provider (Agentless)" %}}
 
 {{% ci-agentless %}}
+
+{{% /tab %}}
+{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
+
+{{% ci-agent %}}
 
 {{% /tab %}}
 {{< /tabs >}}
