@@ -1,5 +1,5 @@
 ---
-title: Sending Traces to Datadog
+title: Instrumenting Your Applications
 kind: documentation
 description: "Get Started with Datadog APM"
 aliases:
