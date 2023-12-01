@@ -18,21 +18,20 @@ CD Visibility for ArgoCD is in private beta. To request access, complete the for
 
 ## Overview
 
-[Argo CD][1] is a declarative, GitOps continuous delivery tool for Kubernetes. It follows the GitOps pattern, using Git
-repositories to define the desired application state, and it automates the deployment of applications in the specified target environments.
+[Argo CD][1] is a declarative GitOps continuous delivery (CD) tool for Kubernetes. It follows the GitOps pattern by using Git repositories to define the desired application state, and automates the deployment of applications in specified target environments.
 
-The integration between Argo CD and Datadog CD Visibility is provided through [Argo CD Notifications][2]. In short, Argo CD notifications
-consists of two main things:
-1. [Triggers][3]: they define **when** to send a notification.
-2. [Templates][4]: they define **what** to send in a notification.
+Datadog CD Visibility integrates with Argo CD by using [Argo CD Notifications][2].
+Argo CD notifications consists of two main components:
+1. [Triggers][3], which define _when_ to send a notification.
+2. [Templates][4], which define _what_ to send in a notification.
 
-## Configure the Datadog Integration
+## Setup
 
-For a more general guide on how to set up Argo CD notifications using webhooks, see the [Argo CD guide][5].
+For a more general guide on how to set up Argo CD notifications using webhooks, see the [official Argo CD guide][5].
 
 The first thing to create is the service, containing the Datadog intake URL and the API Key. First, add your API Key in the
-`argocd-notifications-secret` secret with the `dd-api-key` key. See [this guide][2] for information on modifying the `argocd-notifications-secret`.
-Then, create a new service in the `argocd-notifications-cm` config map with the following format:
+`argocd-notifications-secret` secret with the `dd-api-key` key. See [the Argo CD guide][2] for information on modifying the `argocd-notifications-secret`.
+Then, create a service in the `argocd-notifications-cm` config map with the following format:
 
 ```yaml
 apiVersion: v1
@@ -97,8 +96,9 @@ data:
 
 `cd-visibility-trigger` is the name of the trigger, and `cd-visibility-template` is a reference to the template created above.
 
-After the service, trigger and template have been created, you can subscribe any of your Argo CD application to the integration.
-This is done via modifying the annotations of the application, either via the Argo CD UI or via modifying the application definition:
+After the service, trigger, and template have been created, you can subscribe any of your Argo CD applications to the integration.
+
+Modify the annotations of the application by either using the Argo CD UI or modifying the application definition with the following:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -112,20 +112,19 @@ metadata:
 There are two annotations:
 1. The notifications annotation subscribes the application to the notification setup created above.
 2. The `dd_env` annotation configures the environment of the application. Replace `YOUR_ENV` above with the environment
-   to which this application is deploying (for example: `staging`, `prod`). If you don't set this annotation,
-   the environment will be defaulted to `none`.
+   to which this application is deploying (for example: `staging` or `prod`). If you don't set this annotation,
+   the environment defaults to `none`.
 
-Once this final step is completed, the integration is done, and you can monitor your Argo CD deployments in Datadog.
+Once this final step is completed, you can start monitoring your Argo CD deployments in Datadog.
 
 ## Visualize deployments in Datadog
 
-The [Deployments][6] and [Deployment Executions][7] pages populate with data after a deployment is executed.
+The [**Deployments**][6] and [**Deployment Executions**][7] pages populate with data after a deployment is executed. For more information, see [Search and Manage][9] and [CD Visibility Explorer][10].
 
 ## Troubleshooting
 
-In case the notifications are not sent, a good starting point are the logs of the `argocd-notification-controller` pod.
-The controller logs when it's sending a notification (`Sending notification ...`) and when it fails to notify a recipient
-(`Failed to notify recipient ...`). For additional troubleshooting scenarios, see the [Argo CD docs][8].
+In case the notifications are not sent, examine the logs of the `argocd-notification-controller` pod. The controller logs when it is sending a notification (for example: `Sending notification ...`) and when it fails to notify a recipient
+(for example: `Failed to notify recipient ...`). For additional troubleshooting scenarios, see the [official Argo CD documentation][8].
 
 ## Further reading
 
@@ -139,3 +138,5 @@ The controller logs when it's sending a notification (`Sending notification ...`
 [6]: https://app.datadoghq.com/ci/deployments
 [7]: https://app.datadoghq.com/ci/deployments/executions
 [8]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/troubleshooting/
+[9]: /continuous_delivery/search
+[10]: /continuous_delivery/explorer
