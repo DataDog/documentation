@@ -327,7 +327,6 @@ As long as your command to run is passed as an argument to `datadog-init`, you w
 
 **Note**: You can also use [Orchestrion][2], a tool for automatically instrumenting Go code. Orchestrion is in private beta. For more information, open a GitHub issue in the Orchestrion repo, or [contact Support][3].
 
-
 [1]: /tracing/trace_collection/library_config/go/
 [2]: https://github.com/DataDog/orchestrion
 [3]: /help
