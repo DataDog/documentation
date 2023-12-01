@@ -30,13 +30,16 @@ For each monitoring option, there are [default detection rules][1] that work out
 - With [Cloud Security Management Threats][5], the Datadog Agent actively monitors system activity and evaluates it against a set of detection rules.
 - [Application Security Management][6] (ASM) leverages Datadog [APM][7], the [Datadog Agent][8], and detection rules to detect threats in your application environment.
 
-## Creating and managing detection rules
+## Create and manage detection rules
+
+Creating and managing detection rules
 
 The [Detection Rules][9] page lets you search all detection rules by rule type. Quickly enable, disable, edit, delete, and clone rules. To create a custom [detection rule][3], click on the **New Rule** button in the top right corner of the page.
 
-### Finding detection rules
-
-The free text search filters Detection Rules by text in the rule name or query. Query results update in real-time when the query is edited—there is no "Search" button to click.
+- Cloud SIEM: Log Detection Rules
+- ASM: Custom Detection Rules
+- CSM Misconfigurations: Custom Rules
+- CSM Threats: Managing CSM Threats Detection Rules
 
 #### Filter by facet
 
@@ -48,11 +51,9 @@ You can also filter by facets such as `source` and `severity` to help when inves
 
 **Note**: By default, all facets are selected.
 
-### Rules table
-
-Rules are displayed in the detection rules table. You can sort the table by clicking on the **Sort by** option in the top right corner of the table. For example, sort by **Highest Severity** to triage high-impact misconfigurations and threats.
-
 ## Manage detection rules
+
+For default out-of-the-box rules, you can only add or edit a 
 
 ### Enable or disable rules
 
@@ -67,6 +68,8 @@ You can also bulk enable or disable rules:
 
 ### Edit a rule
 
+For out-of-the-box rules, you can only add or edit a suppression query. To update the query, adjust triggers, or manage notifications, you must clone the default rule.
+
 - Click **Edit** to update queries, adjust triggers, manage notifications, or adjust rule configuration.
   -  **Note**: You can only edit an out-of-the-box (OOTB) rule by first cloning the rule, and then modifying the rule. To edit a default rule, click **Edit** and scroll to the bottom of the rule configuration page. Click **Clone**, and then modify the rule.
 
@@ -78,23 +81,22 @@ To edit a custom rule, click the vertical three-dot menu and select **Edit rule*
 
 ### Clone a rule
 
-Cloning a rule is helpful if you wish to duplicate an existing rule and lightly modify settings to cover other areas of detection. For example, you could duplicate a log detection rule and modify it from **Threshold** to **Anomaly** to add a new dimension to threat detection using the same queries and triggers.
-
 To clone a rule, click the vertical three-dot menu and select **Clone rule**.
+
+Cloning a rule is helpful if you wish to duplicate an existing rule and lightly modify settings to cover other areas of detection. For example, you could duplicate a log detection rule and modify it from **Threshold** to **Anomaly** to add a new dimension to threat detection using the same queries and triggers.
 
 ### Delete a rule
 
-Rule deletion is only available for custom rules. To delete a custom rule, click the vertical three-dot menu and select **Delete rule**.
+To delete a custom rule, click the vertical three-dot menu and select **Delete rule**.
 
-**Note**: To remove a default rule, you must [disable it](#enable-or-disable-rules).
+**Note**: You can only delete custom rules. To remove a default rule, you must [disable it](#enable-or-disable-rules).
 
 ### Restrict edit permissions
 
 By default, all users have full access to the detection rules. To use granular access controls to limit the [roles][10] that may edit a single rule:
 
 1. Click the vertical three-dot menu for the rule and select **Permissions**.
-1. Click **Restrict Access**.
-1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. Click **Restrict Access**. The dialog box updates to show that members of your organization have **Viewer** access by default.
 1. Use the dropdown menu to select one or more roles, teams, or users that may edit the security rule.
 1. Click **Add**.
 1. Click **Save**
@@ -113,7 +115,7 @@ To view the security signals for a rule in the [Signals Explorer][6], click the 
 
 ### Export a rule as JSON
 
-To export a copy of a rule as JSON, click the vertical three-dot menu for the rule and select **Export as JSON**. 
+To export a copy of a rule as JSON, click the vertical three-dot menu for the rule and select **Export as JSON**.
 
 ## Rule deprecation
 
@@ -121,14 +123,15 @@ Regular audits of all detection rules are performed to maintain high fidelity si
 
 The rule deprecation process is as follows:
 
-1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the: 
+1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
     - Signal side panel's **Rule Details > Playbook** section
     - Misconfigurations side panel (CSM Misconfigurations only)
     - [Rule editor](#rule-and-generated-signal-options) for that specific rule 
 2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule](#rule-and-generated-signal-options) in the UI.
 3. Once the rule is deleted, you can no longer clone and re-enable it.
 
-## Further Reading
+## Further reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/default_rules/
