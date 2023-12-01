@@ -37,11 +37,6 @@ Images are tagged based on semantic versioning, with each new version receiving 
 
 * `1`, `1-alpine`: use these to track the latest minor releases, without breaking chagnes
 * `1.x.x`, `1.x.x-alpine`: use these to pin to a precise version of the library
-
-<div class="alert alert-info">
-The latest tag of /serverless-init will be applied to Beta9 through 9/1/2023 to provide additional time for Beta users to adjust and include the additional required `DD_AZURE_SUBSCRIPTION_ID` and `DD_RESOURCE_GROUP` variables
-</div>
-
 * `latest`, `latest-apline`: use these to follow the latest version release, which may include breaking changes
 
 {{< programming-lang-wrapper langs="nodejs,python,java,go,dotnet,ruby,php" >}}
