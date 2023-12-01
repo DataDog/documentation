@@ -2,9 +2,8 @@
 
 import json
 import argparse
+import sys
 
-# Couldn't get the Vale JSON output to work in the GitHub action,
-# so I'm using the log line output instead. Hacky, but it works.
 def munge_logs(file_contents):
     log_array = []
     for line in file_contents.splitlines():
