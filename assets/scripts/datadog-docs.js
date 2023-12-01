@@ -17,13 +17,28 @@ const { gaTag } = configDocs[env];
 gtag('js', new Date());
 gtag('config', gaTag);
 
-const setSidenavMaxHeight = () => {
+export const setSidenavMaxHeight = () => {
     const headerHeight = document.querySelector('body .main-nav')?.getBoundingClientRect().height;
     const padding = 200;
     const sidenavNav = document.querySelector('.sidenav-nav');
 
     if (sidenavNav && headerHeight) {
         sidenavNav.style.maxHeight = `${document.documentElement.clientHeight - headerHeight - padding}px`;
+    }
+};
+
+const scrollActiveNavItemToTop = () => {
+    // Scroll the open top level left nav item into view below Docs search input
+    if (document.querySelector('.sidenav:not(.sidenav-api)')) {
+        setSidenavMaxHeight();
+
+        const leftSideNav = document.querySelector('.sidenav:not(.sidenav-api) .sidenav-nav');
+        const sideNavActiveMenuItem = leftSideNav.querySelector('li.open');
+
+        if (sideNavActiveMenuItem) {
+            const distanceToTop = sideNavActiveMenuItem.offsetTop;
+            leftSideNav.scrollTop = distanceToTop - 100;
+        }
     }
 };
 
@@ -381,18 +396,3 @@ window.addEventListener(
     },
     false
 );
-
-function scrollActiveNavItemToTop() {
-    // Scroll the open top level left nav item into view below Docs search input
-    if (document.querySelector('.sidenav:not(.sidenav-api)')) {
-        setSidenavMaxHeight();
-
-        const leftSideNav = document.querySelector('.sidenav:not(.sidenav-api) .sidenav-nav');
-        const sideNavActiveMenuItem = leftSideNav.querySelector('li.open');
-
-        if (sideNavActiveMenuItem) {
-            const distanceToTop = sideNavActiveMenuItem.offsetTop;
-            leftSideNav.scrollTop = distanceToTop - 100;
-        }
-    }
-}
