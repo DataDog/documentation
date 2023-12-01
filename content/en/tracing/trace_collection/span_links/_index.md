@@ -8,18 +8,20 @@ further_reading:
     - link: '/tracing/trace_collection/otel_instrumentation/'
       tag: 'Documentation'
       text: 'Custom Instrumentation with the OpenTelemetry API'
+    - link: '/tracing/trace_collection/custom_instrumentation/'
+      tag: 'Documentation'
+      text: 'Custom Instrumentation with Datadog Libraries'
 ---
 
 <div class="alert alert-info">Span link support is in beta.</a></div>
 
-## Requirements
-
-You can use span links if your application is instrumented with:
-
-- The [PHP Datadog library][1].
-- The [OpenTelemetry API][2]. 
-
 ## Overview
+
+Span links are an [OpenTelemetry concept][5] and a part of the [OpenTelemetry Tracing API][2]. Datadog supports span links for:
+
+- Applications instrumented with [OpenTelemetry SDKs][6].
+- Applications instrumented with Datadog client libraries using the OpenTelemetry API.  
+  **Note**: This beta release only supports the [PHP client library][1].
 
 Span links correlate one or more spans together that are causally related but don't have a typical parent-child relationship. These links may correlate spans within the same trace or across different traces.
 
@@ -53,8 +55,8 @@ For example:
 
 If your application is instrumented with:
 
+- The OpenTelemetry SDK, follow the OpenTelemetry manual instrumentation documentation for your language. For example, [Create spans with links for Java][3].
 - The PHP Datadog library, follow the [Adding span links][1] examples.
-- The OpenTelemetry API, follow the OpenTelemetry manual instrumentation documentation for your language. For example, [Create spans with links for Java][3].
 
 ### Viewing span links in Datadog APM
 
@@ -65,8 +67,10 @@ You can view span links from the [Trace Explorer][4] in Datadog.
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/custom_instrumentation/php/#adding-span-links-beta
-[2]: https://opentelemetry.io/docs/specs/otel/trace/api/
+[2]: https://opentelemetry.io/docs/specs/otel/trace/api/#link
 [3]: https://opentelemetry.io/docs/instrumentation/java/manual/#create-spans-with-links
 [4]: /tracing/trace_explorer/trace_view/?tab=spanlinksbeta#more-information
+[5]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
+[6]: https://opentelemetry.io/docs/specs/otel/trace/sdk/
 
 

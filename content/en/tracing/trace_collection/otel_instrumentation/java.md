@@ -28,7 +28,7 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 | [Span processors][2]                  | Unsupported                                          | 
 | [Span Exporters][3]                   | Unsupported                                            |
 | Trace/span [ID generators][4]         | ID generation is performed by `ddtrace`.           |
-| [Span links][14]                      | Requires `dd-trace-java` version 1.24.0 or greater. |
+| [Span links ][14] (Beta)                    | Requires `dd-trace-java` version 1.24.0 or greater. |
 
 
 

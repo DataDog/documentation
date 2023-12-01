@@ -115,9 +115,9 @@ Click **View in ASM** to investigate further using [Datadog Application Security
 
 <div class="alert alert-info">Span link support is in beta.</div>
 
-Span links correlate one or more spans together that are causally related but don't have a typical parent-child relationship.
+[Span links][4] correlate one or more spans together that are causally related but don't have a typical parent-child relationship.
 
-Click a span in the flame graph to display spans connected with span links.
+Click a span in the flame graph to display spans connected with span links:
 
 {{< img src="tracing/span_links/span_links_tab.png" alt="Span Links tab" style="width:90%;">}}
 
