@@ -172,16 +172,16 @@ function mainNavHandle() {
 }
 
 window.addEventListener('scroll', () => {
-  handleNavClasses();
-  mainNavHandle();
+    handleNavClasses();
+    mainNavHandle();
 });
 window.addEventListener('load', () => {
-  handleNavClasses();
-  mainNavHandle();
+    handleNavClasses();
+    mainNavHandle();
 });
 window.addEventListener('resize', () => {
-  handleNavClasses();
-  mainNavHandle();
+    handleNavClasses();
+    mainNavHandle();
 });
 
 if (!$('.navbar').hasClass('navbar-small')) {
