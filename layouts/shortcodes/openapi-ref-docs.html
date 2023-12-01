@@ -12,8 +12,19 @@ $openapi variable declaration at the beginning with: {{/*{{ $openapi := .Site.Da
       <p>{{ $openapi.info.description | markdownify }}</p>
     </div>
     <div style="display: flex; flex-direction: column; align-items: stretch; width: 80%;">
+      {{ $prevTag := "" }}
+      {{ $currentTag := "" }}
       {{ range $path, $pathMethods := $openapi.paths }}
         {{ range $pathMethod, $pathDetails := $pathMethods }}
+
+          {{ $currentTag = (index $pathDetails.tags 0) }}
+          {{ if ne $prevTag $currentTag }}
+            <h1 id="{{ $currentTag | anchorize }}" style="margin-top: -175px;padding-top: 175px;">
+              <a href="#{{ $currentTag | anchorize }}">
+                {{ $currentTag }}
+              </a>
+            </h1>
+          {{ end }}
 
           <h2 class="mb-2" id="{{ $pathDetails.summary | anchorize }}">
               <a href="#{{ $pathDetails.summary | anchorize }}">
@@ -25,7 +36,8 @@ $openapi variable declaration at the beginning with: {{/*{{ $openapi := .Site.Da
             <div class="col-12">
               <div class="endpoint-content">
 
-                <p class="mb-0"><span style="padding: 3px" class="font-semibold text-api-{{ $pathMethod }} bg-bg-api-{{ $pathMethod }}">{{ $pathMethod | upper }}</span>&nbsp;
+                <p class="mb-0">
+                  <span style="padding: 3px" class="font-semibold text-api-{{ $pathMethod }} bg-bg-api-{{ $pathMethod }}">{{ $pathMethod | upper }}</span>&nbsp;
                   <span>{{ $path }}</span>
                 </p>
 
@@ -37,6 +49,10 @@ $openapi variable declaration at the beginning with: {{/*{{ $openapi := .Site.Da
               </div>
             </div>
           </div>
+          <div class="row divider"><div class="col-12"><hr class="mt-0 mb-2" style="border-top:2px solid#DADADA"></div></div>
+
+          {{ $prevTag = $currentTag }}
+
         {{ end }}
       {{ end }}
     </div>

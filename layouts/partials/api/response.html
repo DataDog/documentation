@@ -66,7 +66,10 @@
                             {{ $json := ($s.Get "json") }}
                             {{ $html := ($s.Get "html") }}
 
-                            {{/* If we are missing json/html lets build from an examples entry if it exists */}}
+                            {{/*
+                                If we are missing json/html lets build from an examples entry in data if it exists
+                                This is mostly for cloudcraft api usage
+                            */}}
                             {{ with $json }}
                               {{/* we have json */}}
                             {{ else }}
