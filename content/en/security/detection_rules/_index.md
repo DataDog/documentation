@@ -53,8 +53,6 @@ You can also filter by facets such as `source` and `severity` to help when inves
 
 ## Manage detection rules
 
-For default out-of-the-box rules, you can only add or edit a 
-
 ### Enable or disable rules
 
 To enable or disable a rule, toggle the switch to the right of the rule name.
@@ -68,16 +66,10 @@ You can also bulk enable or disable rules:
 
 ### Edit a rule
 
-For out-of-the-box rules, you can only add or edit a suppression query. To update the query, adjust triggers, or manage notifications, you must clone the default rule.
+For out-of-the-box rules, you can only add or edit a suppression query. To update the query, adjust triggers, or manage notifications, you can [clone the default rule](#clone-a-rule) and use it as a template for a custom rule. You can then [disable the default rule](#enable-or-disable-rules).
 
-- Click **Edit** to update queries, adjust triggers, manage notifications, or adjust rule configuration.
-  -  **Note**: You can only edit an out-of-the-box (OOTB) rule by first cloning the rule, and then modifying the rule. To edit a default rule, click **Edit** and scroll to the bottom of the rule configuration page. Click **Clone**, and then modify the rule.
-
-For default rules, you can only edit the suppression query.
-
-To edit a default rule, click the vertical three-dot menu and select **Edit default rule**.
-
-To edit a custom rule, click the vertical three-dot menu and select **Edit rule**.
+- To edit a default rule, click the vertical three-dot menu and select **Edit default rule**.
+- To edit a custom rule, click the vertical three-dot menu and select **Edit rule**.
 
 ### Clone a rule
 
