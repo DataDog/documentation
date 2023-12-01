@@ -3,7 +3,9 @@ title: Docker Hub
 kind: faq
 ---
 
-<div class="alert alert-warning">Docker Hub is subject to image pull rate limits etc. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+<div class="alert alert-warning">Docker Hub is subject to image pull rate limits etc. If he is not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit Vestibulum tincidunt sem at blandit rhoncus Donec in malesuada ex Donec eget elit in elit pharetra accumsan Aliquam fringilla est at risus pellentesque, sit amet viverra velit auctor Integer et aliquet ligula, quis fringilla mauris Vivamus eu lacus sollicitudin, consectetur eros vitae, bibendum est Etiam vitae elit urna Ut volutpat ex sit amet tortor iaculis euismod Suspendisse in libero suscipit, eleifend lorem id, faucibus leo Integer fringilla ante at odio tincidunt cursus Vivamus quis convallis nulla, a dapibus mauris Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
 
 If you are using Docker, there are several container images available through [GCR][11], and [ECR][12]. If you need to use Docker Hub:
 
