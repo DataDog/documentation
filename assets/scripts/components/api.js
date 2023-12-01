@@ -95,6 +95,7 @@ if (expandAllToggles.length) {
                         element.classList.add("expanded");
                     })
                 }
+            } else if (schemaTable) {
                 cta.textContent = "Expand All";
 
                 if (nestedElements.length) {
