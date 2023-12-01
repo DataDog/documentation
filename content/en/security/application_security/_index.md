@@ -85,6 +85,6 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 [3]: /security/application_security/how-appsec-works/
 [4]: /security/default_rules/#cat-application-security
 [5]: /security/application_security/enabling/
-[6]: /security/explorer/
+[6]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&product=appsec&viz=stream&start=1701379225470&end=1701465625470&paused=false
 [7]: https://dashcon.io/appsec
-[8]: /security/application_security/risk_management/
+[8]: /security/application_security/vulnerability_management/
