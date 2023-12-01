@@ -21,7 +21,11 @@ further_reading:
   text: "Detect suspicious login activity with impossible travel detection rules"
 ---
 
-Detection Rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a rule that is matched over a given period of time, Datadog generates a security signal.
+Detection rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a rule is matched over a given period of time, a security signal is generated. You can view these signals in the [Signals Explorer][1].
+
+## Out-of-the-box detection rules
+
+Datadog provides out-of-the-box (OOTB) [detection rules][1] to flag attacker techniques and potential misconfigurations. When new rules are released, they are automatically imported into your account, your Application Security Management library, and the Agent, depending on your configuration.
 
 For each monitoring option, there are [default detection rules][1] that work out-of-the-box with integration configuration.
 
@@ -31,8 +35,6 @@ For each monitoring option, there are [default detection rules][1] that work out
 - [Application Security Management][6] (ASM) leverages Datadog [APM][7], the [Datadog Agent][8], and detection rules to detect threats in your application environment.
 
 ## Create and manage detection rules
-
-Creating and managing detection rules
 
 The detection rules pages...
 
