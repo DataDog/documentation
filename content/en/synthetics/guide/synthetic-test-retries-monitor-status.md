@@ -17,8 +17,7 @@ To reduce alert fatigue, Synthetic tests can be retried when, or if, a test run 
 
 With a fast retry, Datadog runs a Synthetic test multiple times before transitioning the test's monitor to alert and sending you an notification. For more information about monitors associated with your Synthetic tests, see [Use Synthetic Test Monitors][3].
 
-<!-- TODO change image to a test details page with fast retries-->
-{{< img src="synthetics/guide/synthetics_test_retries/failed_test_runs.png" alt="Failed test runs in the Synthetic Monitoring & Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="synthetics/guide/synthetics_test_retries/fast_retries.png" alt="Failed test runs with fast retries" style="width:100%;">}}
 
 
 ## Group evaluations
@@ -39,7 +38,11 @@ In this example, a Synthetic test is scheduled to run every three minutes, and h
 
 The evaluation only takes the final retry into account for the total group evaluation. 
 
+When all retries fails:
+
 {{< img src="synthetics/guide/synthetics_test_retries/diagram_1.png" alt="A test run which was retried twice and failed on all retries, evaluated as a local group and as a total group" style="width:100%;">}}
+
+or  when a retry is successful:
 
 {{< img src="synthetics/guide/synthetics_test_retries/diagram_2.png" alt="A test run which was retried twice and failed on all retries, evaluated as a local group and as a total group" style="width:100%;">}}
 
