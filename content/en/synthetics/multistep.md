@@ -65,135 +65,22 @@ By default, you can create up to 10 test steps. To increase this limit, contact 
 1. **Name** your step.
 2. Choose a request type: HTTP or gRPC.
    
-{{< tabs >}}
-{{% tab "HTTP" %}}
+   {{< tabs >}}
+   {{% tab "HTTP" %}}
 
-3. Choose the **HTTP Method** and specify the **URL** to query. Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
-4. Enrich your HTTP request with **Advanced Options** (optional):
+   See the [HTTP Tests documentation][101] to create an HTTP request and add assertions. Assertions are optional in multistep API tests.
 
-   Request Options
-   : - **HTTP version**: Select `HTTP/1.1 only`, `HTTP/2 only`, or `HTTP/2 fallback to HTTP/1.1 only`.<b></b>
-     - **Follow redirects**: Tick to have your HTTP test follow up to ten redirects when performing the request.<b></b>
-     - **Ignore server certificate error**: Tick to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.<b></b>
-     - **Timeout**: Specify the amount of time in seconds before the test times out.<b></b>
-     - **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).<b></b>
-     - **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format: `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.<b></b>
+   [101]: /synthetics/multistep#define-the-request
 
-   Authentication
-   : - **Client certificate**: Authenticate through mTLS by uploading your client certificate and the associated private key.<b></b>
-     - **HTTP Basic Auth**: Add HTTP basic authentication credentials.<b></b>
-     - **Digest Auth**: Add Digest authentication credentials. <b></b>
-     - **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.<b></b>
-     - **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as Amazon S3 are not supported out-of-the box.</br></br>For "Single Chunk" transfer requests to Amazon S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header (for an empty body: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).</br></br><b></b>
-     - **OAuth 2.0**: Choose between granting client credentials or a resource owner password and enter an access token URL.</br></br>Depending on your selection, enter a client ID and secret, or a username and password. From the dropdown menu, select an option to either send the API token as a basic authentication header, or send the client credentials in the body. Optionally, you can provide additional information such as the audience, resource, and scope (as well as the client ID and secret, if you selected **Resource Owner Password**).</br><b></b>
+   {{% /tab %}}
+   {{% tab "gRPC" %}}
 
-   Query Parameters
-   : - **Encode parameters**: Add the name and value of query parameters that require encoding.<b></b> 
+   See the [gRPC Tests documentation][101] to create a gRPC request and add assertions for a behavior check or a health check. Assertions are optional in multistep API tests.
 
-   Request Body
-   : - **Body type**: Select the type of the request body (`application/json`, `application/octet-stream`,`application/x-www-form-urlencoded`, `multipart/form-data`, `text/plain`, `text/xml`, `text/html`, `GraphQL`, or `None`) you want to add to your HTTP request.<b></b>
-     - **Request body**: Add the content of your HTTP request body. The request body is limited to a maximum size of 50 kilobytes.<b></b>
+   [101]: /synthetics/api_tests/grpc_tests#define-the-request
 
-   Proxy
-   : - **Proxy URL**: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).<b></b>
-     - **Proxy Header**: Add headers to include in the HTTP request to the proxy.<b></b>
-
-   Privacy
-   : - **Do not save response body**: Select this option to prevent the response body from being saved at runtime. This is helpful to ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult.</br></br>For information about security recommendations, see [Synthetic Monitoring Data Security][101].</br></br><b></b>
-
-Click **Send** to try out the request configuration. A response preview appears.
-
-{{< img src="synthetics/api_tests/ms_define_request.png" alt="Define request for your Multistep API test" style="width:90%;" >}}
-
-#### Add assertions
-
-Assertions define what an expected test result is. After you click **Send**, basic assertions on `response time`, `status code`, and `header` `content-type` are added based on the response that was obtained. Assertions are optional in multistep API tests.
-
-| Type          | Operator                                                                                               | Value type                                                      |
-|---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][7], [`xpath`][8] | _String_ <br> _[Regex][9]_ <br> _String_, _[Regex][9]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][9]_                                      |
-| response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
-| status code   | `is`, `is not`                                                                                         | _Integer_                                                      |
-
-API tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
-
-- If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
-
-- If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
-
-{{< img src="synthetics/api_tests/ms_assertions.png" alt="Define assertions for your Multistep API test to succeed or fail on" style="width:90%;" >}}
-
-You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
-
-[101]: /data_security/synthetics
-
-{{% /tab %}}
-{{% tab "gRPC" %}}
-
-3. Specify the **Host** and **Port** to run your test on. 
-4. Select **Behavior Check** to perform a unary call or **Health Check** to perform a health check. 
-   
-   For a behavior check, specify the **Server Reflection** or upload a **Proto File**. Select a method and include a message. 
-
-   For a health check, enter the name of the service.
-   
-5. Enrich your gRPC request with **Advanced Options** (optional):
-
-   Request Options
-   : - **Timeout**: Specify the amount of time in seconds before the test times out.
-     - **Ignore server certificate error**: Tick to have your gRPC test go on with connection even if there are errors when validating the SSL certificate.<b></b>
-     - **gRPC metadata**: Add and define metadata to your gRPC request to pass metadata between services.<b></b>
-
-   Authentication
-   : - **Client certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. 
-
-     <br/> 
-   
-     You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
-
-      ```
-      openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
-      openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
-      ```
-
-Click **Send** to try out the request configuration. A response preview appears.
-
-#### Add assertions
-
-Assertions define what an expected test result is. After you click **Send**, an assertion on the `response time` is added based on the response that was obtained. Assertions are optional in multistep API tests.
-
-The following assertions are available for behavior checks.
-
-| Type | Operator | Value type |
-|---|---|---|
-| response time | `is less than` | _Integer (ms)_ |
-| gRPC response | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][102], [`xpath`][103] | _String_ <br> _[Regex][104]_ |
-| gRPC metadata | `is`, `is not`, `contains`, `does not contain`, `matches regex`, `does not match regex`, `does not exist` | _Integer (ms)_ <br> _[Regex][104]_ |
-
-The following assertions are available for health checks.
-
-| Type | Operator | Value type |
-|---|---|---|
-| response time | `is less than` | _Integer (ms)_ |
-| healthcheck status | `is`, `is not` | _Integer (ms)_ |
-| gRPC metadata | `is`, `is not`, `contains`, `does not contain`, `matches regex`, `does not match regex`, `does not exist` | _Integer (ms)_ |
-
-API tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
-
-- If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
-
-- If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
-
-You can create up to 20 assertions per step by clicking **New Assertion** or by clicking directly on the response preview.
-
-[101]: /data_security/synthetics
-[102]: https://restfulapi.net/json-jsonpath/
-[103]: https://www.w3schools.com/xml/xpath_syntax.asp
-[104]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-
-{{% /tab %}}
-{{< /tabs >}}
+   {{% /tab %}}
+   {{< /tabs >}}
 
 #### Add execution parameters
 
