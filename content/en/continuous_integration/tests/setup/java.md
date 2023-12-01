@@ -23,6 +23,10 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
+<div class="alert alert-info">
+  If your CI provider is Jenkins, you can use <a href="/continuous_integration/pipelines/jenkins/#enable-with-the-jenkins-configuration-ui-1">UI-based configuration</a> to enable Test Visibility for your jobs and pipelines.
+</div>
+
 ## Compatibility
 
 Supported test frameworks:
@@ -46,7 +50,9 @@ Supported build systems:
 | Gradle | >= 2.0 |
 | Maven | >= 3.2.1 |
 
-If your build system is not supported, you can try [configuring tracer injection manually][2].
+Other build systems, such as Ant or Bazel, are supported with the following limitations:
+- Automatic coverage configuration and reporting is not supported.
+- When building a multi-module project, every module is reported in a separate trace.
 
 ## Setup
 
@@ -55,28 +61,22 @@ To set up Test Visibility for Java, you need to perform the following steps:
 2. Download tracer library to the hosts where your tests are executed.
 3. Run your tests with the tracer attached.
 
+You may follow interactive setup steps on the [Datadog site][8] or with the instructions below.
+
 ### Configuring reporting method
 
-This step involves configuring how Datadog Java Tracer injected into your tests reports data to Datadog.
+This step involves configuring how Datadog Java Tracer reports data to Datadog.
 There are two main options:
 * Reporting the data to Datadog Agent, which will forward it to Datadog.
 * Reporting the data directly to Datadog.
 
 {{< tabs >}}
-
-{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-
-{{% ci-agent %}}
-
+{{% tab "Cloud CI provider (Agentless)" %}}
+{{% ci-agentless %}}
 {{% /tab %}}
 
-{{% tab "Cloud CI provider (Agentless)" %}}
-
-<div class="alert alert-info">Agentless mode is available in Datadog Java library versions >= 0.101.0</div>
-
-{{% ci-agentless %}}
-
-
+{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
+{{% ci-agent %}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -105,27 +105,24 @@ You can run the `java -jar $DD_TRACER_FOLDER/dd-java-agent.jar` command to check
 {{< tabs >}}
 {{% tab "Maven" %}}
 
-Make sure to set the `DD_TRACER_FOLDER` variable to the path where you have downloaded the tracer.
+Set the following environment variables to configure the tracer:
 
-Run your tests using the `MAVEN_OPTS` environment variable to specify the path to the Datadog Java Tracer JAR.
+`DD_CIVISIBILITY_ENABLED=true` (Required)
+: Enables the CI Visibility product.
 
-When specifying tracer arguments, include the following:
+`DD_ENV` (Required)
+: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
-* Enable CI visibility by setting the `dd.civisibility.enabled` property to `true`.
-* Define the environment where the tests are being run using the `dd.env property` (for example `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
-* Define the name of the service or library being tested in the `dd.service property`.
+`DD_SERVICE` (Required)
+: Name of the service or library being tested.
 
-For example:
+`DD_TRACER_FOLDER` (Required)
+: Path to the folder where the downloaded Java Tracer is located.
 
-{{< code-block lang="shell" >}}
-MAVEN_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar=\
-dd.civisibility.enabled=true,\
-dd.env=ci,\
-dd.service=my-java-app \
-mvn clean verify
-{{< /code-block >}}
+`MAVEN_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
+: Injects the tracer into the Maven build process.
 
-Either `mvn verify` or `mvn test` goals are fine, depending on whether you want to execute Maven Failsafe plugin to run integration tests (if you have any) or not.
+Run your tests as you normally do (for example: `mvn test` or `mvn verify`).
 
 {{% /tab %}}
 {{% tab "Gradle" %}}
@@ -137,8 +134,8 @@ Run your tests using the `org.gradle.jvmargs` system property to specify the pat
 When specifying tracer arguments, include the following:
 
 * Enable CI visibility by setting the `dd.civisibility.enabled` property to `true`.
-* Define the environment where the tests are being run using the `dd.env property` (for example `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
-* Define the name of the service or library being tested in the `dd.service property`.
+* Define the environment where the tests are being run using the `dd.env` property (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
+* Define the name of the service or library being tested in the `dd.service` property.
 
 For example:
 
@@ -152,42 +149,27 @@ dd.service=my-java-app
 
 Specifying `org.gradle.jvmargs` in the command line overrides the value specified elsewhere. If you have this property specified in a `gradle.properties` file, be sure to replicate the necessary settings in the command line invocation.
 
-**Note:** CI Visibility is not compatible with [Gradle Configuration Cache][1], so do not enable the cache when running your tests with the tracer.
-
-[1]: https://docs.gradle.org/current/userguide/configuration_cache.html
-
 {{% /tab %}}
 {{% tab "Other" %}}
 
-Make sure to set the `DD_TRACER_FOLDER` variable to the path where you have downloaded the tracer.
+Set the following environment variables to configure the tracer:
 
-Ensure that your build system supplies `-javaagent` argument to the JVMs that are forked to execute the tests.
+`DD_CIVISIBILITY_ENABLED=true` (Required)
+: Enables Test Visibility.
 
-When specifying `javaagent` arguments, include the following:
+`DD_ENV` (Required)
+: Environment where the tests are being run (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
 
-* Enable CI Visibility by setting the `dd.civisibility.enabled` property to `true`.
-* Define the environment where the tests are being run using the `dd.env property` (for example: `local` when running tests on a developer workstation or `ci` when running them on a CI provider).
-* Define the name of the service or library being tested in the `dd.service property`.
+`DD_SERVICE` (Required)
+: Name of the service or library being tested.
 
-For example, the `build.xml` file in an Ant project would have to be modified in the following way:
-{{< code-block lang="xml" >}}
-<project name="my-project" default="test" xmlns:if="ant:if">
-  <!-- ... -->
-  <property environment="env"/>
+`DD_TRACER_FOLDER` (Required)
+: Path to the folder where the downloaded Java Tracer is located.
 
-  <target name="test" depends="compile-tests">
-    <junit printsummary="on" fork="true">
-      <jvmarg if:set="ci-visibility" value="-javaagent:${env.DD_TRACER_FOLDER}/dd-java-agent.jar=dd.civisibility.enabled=true,dd.env=ci,dd.service=my-java-app"/>
-      <!-- ... -->
-    </junit>
-  </target>
-</project>
-{{< /code-block >}}
+`JAVA_TOOL_OPTIONS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
+: Injects the tracer into the JVMs that execute your tests.
 
-Then, the tests can be executed with:
-{{< code-block lang="shell" >}}
-ant test -Dci-visibility=true
-{{< /code-block >}}
+Run your tests as you normally do.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -366,6 +348,11 @@ Always call ``datadog.trace.api.civisibility.DDTestSession#end`` at the end so t
 
 ### The tests are not appearing in Datadog after enabling CI Visibility in the tracer
 
+Verify that the tracer is injected into your build process.
+Examine your build's logs. If the injection is successful, you will see a line containing `DATADOG TRACER CONFIGURATION`.
+If the line is not there, make sure that the environment variables used to inject and configure the tracer are available to the build process.
+A common mistake is to set the variables in a build step and run the tests in another build step. This approach may not work if the variables are not propagated between build steps.
+
 Ensure that you are using the latest version of the tracer.
 
 Verify that your build system and testing framework are supported by CI Visibility. See the list of [supported build systems and test frameworks](#compatibility).
@@ -402,6 +389,7 @@ To disable all integrations, augment the list of `-javaagent` arguments with `dd
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[8]: https://app.datadoghq.com/ci/setup/test?language=java
 [1]: #using-manual-testing-api
 [2]: ?tab=other#running-your-tests
 [3]: /tracing/trace_collection/library_config/java/?tab=containers#configuration

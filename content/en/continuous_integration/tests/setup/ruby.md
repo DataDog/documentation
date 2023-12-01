@@ -48,18 +48,16 @@ Supported test frameworks:
 To report test results to Datadog, you need to configure the `ddtrace` gem:
 
 {{< tabs >}}
-
-{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
-
-{{% ci-agent %}}
-
-{{% /tab %}}
-
 {{% tab "Cloud CI provider (Agentless)" %}}
 
 <div class="alert alert-info">Agentless mode is available in `ddtrace` gem versions >= 1.15.0</div>
 
 {{% ci-agentless %}}
+
+{{% /tab %}}
+{{% tab "On-Premises CI Provider (Datadog Agent)" %}}
+
+{{% ci-agent %}}
 
 {{% /tab %}}
 {{< /tabs >}}

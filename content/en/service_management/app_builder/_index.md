@@ -6,6 +6,9 @@ further_reading:
 - link: "/service_management/workflows/actions_catalog/"
   tag: "Documentation"
   text: "Actions Catalog"
+- link: "https://www.datadoghq.com/blog/datadog-app-builder-low-code-internal-tools/"
+  tag: "Blog"
+  text: "Build custom monitoring and remediation tools with the Datadog App Builder"
 ---
 
 {{< callout url="https://www.datadoghq.com/dg/datadog-app-builder/" btn_hidden="false" header="Join the Beta!">}}
@@ -57,4 +60,3 @@ Use your apps from the Apps page, or access them independently from dashboards. 
 [1]: /service_management/workflows/actions_catalog/
 [2]: /service_management/workflows/
 [3]: https://app.datadoghq.com/app-builder/blueprints
-[4]: /bits_ai
