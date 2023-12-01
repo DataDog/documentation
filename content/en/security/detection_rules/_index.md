@@ -34,6 +34,8 @@ For each monitoring option, there are [default detection rules][1] that work out
 
 Creating and managing detection rules
 
+The detection rules pages...
+
 The [Detection Rules][9] page lets you search all detection rules by rule type. Quickly enable, disable, edit, delete, and clone rules. To create a custom [detection rule][3], click on the **New Rule** button in the top right corner of the page.
 
 - Cloud SIEM: Log Detection Rules
@@ -45,11 +47,16 @@ The [Detection Rules][9] page lets you search all detection rules by rule type. 
 
 Use facets in the left panel to scope a search query by value. For example, if you have several rule types, such as `log detection` or `cloud configuration`, filter by `only` to see rules by rule type.
 
+| Product               | Rule Types                                        |
+|-----------------------|---------------------------------------------------|
+| ASM                   | Application Security                              |
+| Cloud SIEM            | Log Detection, Signal Correlation                 |
+| CSM Misconfigurations | Infrastructure Configuration, Cloud Configuration |
+| CSM Threats           | Workload Security                                 |
+
 {{< img src="security/security_monitoring/detection_rules/rule_type_filter.png" alt="Filtering by rule type, such as a log detection or cloud configuration, in Datadog" style="width:80%;" >}}
 
 You can also filter by facets such as `source` and `severity` to help when investigating and triaging incoming issues. To include all facets within a category in search again, hover your mouse over a value in the panel and click **all**.
-
-**Note**: By default, all facets are selected.
 
 ## Manage detection rules
 
