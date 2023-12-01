@@ -93,7 +93,7 @@ Deployment tracking is active
 : For services monitored by APM or USM. [Ensure smooth rollouts by implementing a version tag with Unified Service Tagging][4]. As you roll out new versions of your functionality, Datadog captures and alerts on differences between the versions in error rates, number of requests, and more. This can help you understand when to roll back to previous versions to improve end user experience. 
 
 Logs correlation is active
-: For APM services. [Correlation between APM and Logs][5] improves the speed of troubleshooting for end users, saving you time during incidents and outages. 
+: For APM services, evaluated based on the past hour of logs detected. [Correlation between APM and Logs][5] improves the speed of troubleshooting for end users, saving you time during incidents and outages.
 
 ### Ownership and documentation
 
