@@ -33,9 +33,23 @@ You can monitor application security for Java apps running in Docker, Kubernetes
 ### Get started
 
 1. **Update your [Datadog Java library][1]** to at least version 0.94.0 (at least version 1.1.4 for Application Vulnerability Management vulnerability detection features):
+   {{< tabs >}}
+   {{% tab "Wget" %}}
    ```shell
-   wget -O dd-java-agent.jar 'https://github.com/DataDog/dd-trace-java/releases/latest/download/dd-java-agent.jar'
+   wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
+{{% /tab %}}
+{{% tab "cURL" %}}
+   ```shell
+   curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
+{{% /tab %}}
+{{% tab "Dockerfile" %}}
+   ```dockerfile
+   ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
    To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][2].
 

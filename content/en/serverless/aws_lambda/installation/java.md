@@ -125,7 +125,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 
 <div class="alert alert-info">Instrumenting Java functions through the Datadog CDK construct is only available for AWS CDK apps written in Node.js and Python.</div>
 
-The [Datadog CDK construct][1] automatically installs Datadog on your functions using Lambda layers. It configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension. 
+The [Datadog CDK construct][1] automatically installs Datadog on your functions using Lambda layers. It configures your functions to send metrics, traces, and logs to Datadog through the Datadog Lambda Extension.
 
 1. Install the Datadog CDK constructs library
 
@@ -206,7 +206,7 @@ The [Datadog CDK construct][1] automatically installs Datadog on your functions 
 
     ```dockerfile
     RUN yum -y install tar wget gzip
-    RUN wget -O /opt/java/lib/dd-java-agent.jar https://dtdg.co/latest-java-tracer
+    RUN wget -O /opt/java/lib/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
     ```
 
 3. Set the required environment variables

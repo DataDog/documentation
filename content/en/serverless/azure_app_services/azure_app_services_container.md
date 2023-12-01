@@ -67,7 +67,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Copy the Datadog Node.JS tracer into your Docker image. 
+2. Copy the Datadog Node.JS tracer into your Docker image.
 
    ```
    COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
@@ -116,7 +116,7 @@ CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Install the Datadog Python tracer. 
+2. Install the Datadog Python tracer.
    ```
    RUN pip install --target /dd_tracer/python/ ddtrace
    ```
@@ -147,7 +147,7 @@ Add the following instructions and arguments to your Dockerfile.
 
 ```
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-ADD https://dtdg.co/latest-java-tracer /dd_tracer/java/dd-java-agent.jar
+ADD 'https://dtdg.co/latest-java-tracer' /dd_tracer/java/dd-java-agent.jar
 ENV DD_SERVICE=datadog-demo-run-java
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
@@ -162,9 +162,9 @@ CMD ["./mvnw", "spring-boot:run"]
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Add the Datadog Java tracer to your Docker image. 
+2. Add the Datadog Java tracer to your Docker image.
    ```
-   ADD https://dtdg.co/latest-java-tracer /dd_tracer/java/dd-java-agent.jar
+   ADD 'https://dtdg.co/latest-java-tracer' /dd_tracer/java/dd-java-agent.jar
    ```
    If you install the Datadog tracer library directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
 
@@ -226,7 +226,7 @@ CMD ["/path/to/your-go-binary"]
 
 #### Orchestrion
 
-**Note**: [Orchestrion][2] is a tool for automatically instrumenting Go code, which is currently in Private Beta. With Orchestrion, it is possible to instrument your Go applications through Dockerfile. If you are interested in participating in the Beta or providing feedback on Orchestrion, please open a Github issue or reach out to support. 
+**Note**: [Orchestrion][2] is a tool for automatically instrumenting Go code, which is currently in Private Beta. With Orchestrion, it is possible to instrument your Go applications through Dockerfile. If you are interested in participating in the Beta or providing feedback on Orchestrion, please open a Github issue or reach out to support.
 
 ```
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
@@ -240,7 +240,7 @@ ENV DD_VERSION=1
 CMD ["/path/to/your-go-binary"]
 ```
 
-[1]: /tracing/trace_collection/library_config/go/ 
+[1]: /tracing/trace_collection/library_config/go/
 [2]: https://github.com/DataDog/orchestrion
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
@@ -352,7 +352,7 @@ ENV DD_VERSION=1
 ENTRYPOINT ["/app/datadog-init"]
 
 # use the following for an apache and mod_php based image
-RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf 
+RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf
 EXPOSE 8080
 CMD ["apache2-foreground"]
 
@@ -392,10 +392,10 @@ CMD php-fpm; nginx -g daemon off;
    ```
 
 5. Execute your application.
-   
+
    Use the following for an apache and mod_php based image:
    ```
-   RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf 
+   RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf
    EXPOSE 8080
    CMD ["apache2-foreground"]
    ```

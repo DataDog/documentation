@@ -95,7 +95,7 @@ export DD_TRACER_FOLDER=... // e.g. ~/.datadog
 Run the command below to download the tracer JAR to the specified folder:
 
 {{< code-block lang="shell" >}}
-wget -O $DD_TRACER_FOLDER/dd-java-agent.jar https://dtdg.co/latest-java-tracer
+wget -O $DD_TRACER_FOLDER/dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
 {{< /code-block >}}
 
 You can run the `java -jar $DD_TRACER_FOLDER/dd-java-agent.jar` command to check the version of the tracer library.

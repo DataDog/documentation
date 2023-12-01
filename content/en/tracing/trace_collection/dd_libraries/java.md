@@ -47,9 +47,23 @@ After the Agent is installed, to begin tracing your applications:
 
 1. Download `dd-java-agent.jar` that contains the latest tracer class files, to a folder that is accessible by your Datadog user:
 
+{{< tabs >}}
+{{% tab "Wget" %}}
    ```shell
-   wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
+{{% /tab %}}
+{{% tab "cURL" %}}
+   ```shell
+   curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
+{{% /tab %}}
+{{% tab "Dockerfile" %}}
+   ```dockerfile
+   ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
    **Note:** To download the latest build of a specific **major** version, use the `https://dtdg.co/java-tracer-vX` link instead, where `X` is the desired major version.
    For example, use `https://dtdg.co/java-tracer-v1` for the latest version 1 build. Minor version numbers must not be included. Alternatively, see Datadog's [Maven repository][3] for any specific version.
