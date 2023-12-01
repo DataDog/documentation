@@ -42,7 +42,7 @@ When all retries fails:
 
 {{< img src="synthetics/guide/synthetics_test_retries/diagram_1.png" alt="A test run which was retried twice and failed on all retries, evaluated as a local group and as a total group" style="width:100%;">}}
 
-or  when a retry is successful:
+Or when a retry is successful:
 
 {{< img src="synthetics/guide/synthetics_test_retries/diagram_2.png" alt="A test run which was retried twice and failed on all retries, evaluated as a local group and as a total group" style="width:100%;">}}
 
