@@ -7,7 +7,7 @@ further_reading:
   tag: Documentation
   text: ブラウザテストを作成する
 kind: ガイド
-title: ブラウザテスト Chrome 拡張機能を内部アプリケーションストアに手動で追加する
+title: ブラウザテスト用の Chrome 拡張機能を手動で追加する
 ---
 
 ## 概要
