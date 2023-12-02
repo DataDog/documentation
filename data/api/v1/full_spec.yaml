@@ -850,6 +850,70 @@ components:
       items:
         $ref: '#/components/schemas/AzureAccount'
       type: array
+    CalendarInterval:
+      description: 'Calendar interval options for compute.
+
+        Fields `interval` (numeric interval) and `rollup` (calendar interval) are
+        mutually exclusive.
+
+
+        For instance:
+
+        - { type: ''day'', alignment: ''1pm'', timezone: ''Europe/Paris'' }
+
+        - { type: ''week'', alignment: ''tuesday'', quantity: 2 }
+
+        - { type: ''month'', alignment: ''15th'' }
+
+        - { type: ''year'', alignment: ''april'' }'
+      properties:
+        alignment:
+          $ref: '#/components/schemas/CalendarIntervalAlignment'
+        quantity:
+          default: 1
+          description: Optional integer to specify how many units to group together.
+          example: 3
+          format: int64
+          type: integer
+        timezone:
+          default: UTC
+          description: Optional timezone to define the calendar interval.
+          example: Europe/Paris, America/New_York, Asia/Tokyo
+          type: string
+        type:
+          $ref: '#/components/schemas/CalendarIntervalType'
+      required:
+      - type
+      type: object
+    CalendarIntervalAlignment:
+      description: 'Optional alignment to define period start.
+
+        Its possible values depend on the type field:
+
+
+        - day: start hour of day as 12 or 24-hr format (for instance: 11pm, 3am, 15)
+
+        - week: first day of the week (for instance: tuesday, note the lowercase)
+
+        - month: first day of month (for instance: 1th, 2nd, 23th)
+
+        - year: first month of the year (for instance: april, note the lowercase)'
+      example: tuesday
+      type: string
+    CalendarIntervalType:
+      description: Type of calendar interval (day, week, etc.).
+      enum:
+      - day
+      - week
+      - month
+      - year
+      example: day
+      type: string
+      x-enum-varnames:
+      - day
+      - week
+      - month
+      - year
     CancelDowntimesByScopeRequest:
       description: Cancel downtimes according to scope.
       properties:
@@ -2833,14 +2897,13 @@ components:
         aggregation:
           $ref: '#/components/schemas/FormulaAndFunctionEventAggregation'
         interval:
-          description: A time interval in milliseconds.
-          example: 60000
-          format: int64
-          type: integer
+          $ref: '#/components/schemas/NumericInterval'
         metric:
           description: Measurable attribute to compute.
           example: '@duration'
           type: string
+        rollup:
+          $ref: '#/components/schemas/CalendarInterval'
       required:
       - aggregation
       type: object
@@ -5920,10 +5983,9 @@ components:
           example: '@duration'
           type: string
         interval:
-          description: Define a time interval in seconds.
-          example: 5000
-          format: int64
-          type: integer
+          $ref: '#/components/schemas/NumericInterval'
+        rollup:
+          $ref: '#/components/schemas/CalendarInterval'
       required:
       - aggregation
       type: object
@@ -9392,6 +9454,14 @@ components:
       items:
         $ref: '#/components/schemas/NotifyEndType'
       type: array
+    NumericInterval:
+      description: 'Fixed numeric interval for compute (in milliseconds).
+
+        Fields `interval` (numeric interval) and `rollup` (calendar interval) are
+        mutually exclusive.'
+      example: 60000
+      format: int64
+      type: integer
     OnMissingDataOption:
       description: 'Controls how groups or monitors are treated if an evaluation does
         not return any data points.
