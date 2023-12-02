@@ -32011,6 +32011,8 @@ paths:
       x-given:
         team_membership:
           parameters:
+          - name: team_id
+            source: dd_team.data.id
           - name: body
             value: "{\n  \"data\": {\n    \"attributes\": {\n      \"role\": \"admin\"\n
               \   },\n    \"relationships\": {\n      \"user\": {\n        \"data\":
@@ -32019,13 +32021,7 @@ paths:
           step: there is a valid "team_membership" in the system
       x-menu-order: 7
       x-undo:
-        operationId: DeleteTeamMembership
-        parameters:
-        - name: team_id
-          template: '{{team.data.id}}'
-        - name: user_id
-          source: data.relationships.user.data.id
-        type: unsafe
+        type: safe
   /api/v2/team/{team_id}/memberships/{user_id}:
     delete:
       description: Remove a user from a team.
