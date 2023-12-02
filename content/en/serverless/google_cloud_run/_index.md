@@ -325,26 +325,11 @@ CMD ["your_entrypoint.sh", "/path/to/your-go-binary"]
 
 As long as your command to run is passed as an argument to `datadog-init`, you will receive full instrumentation.
 
-#### Orchestrion
-
-<div class="alert alert-warning">Orchestrion is in Private Beta. If you are interested in participating in the Beta or providing feedback on Orchestrion, <a href="https://github.com/DataDog/orchestrion/issues">open a GitHub issue</a> or <a href="/help">contact Datadog Support</a>.</div>
-
-[Orchestrion][2] is a tool for automatically instrumenting Go code. With Orchestrion, it is possible to instrument your Go applications through Dockerfile.
-
-```dockerfile
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-RUN go install github.com/datadog/orchestrion@latest
-RUN orchestrion -w ./
-RUN go mod tidy
-ENTRYPOINT ["/app/datadog-init"]
-ENV DD_SERVICE=datadog-demo-run-go
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-CMD ["/path/to/your-go-binary"]
-```
+**Note**: You can also use [Orchestrion][2], a tool for automatically instrumenting Go code. Orchestrion is in private beta. For more information, open a GitHub issue in the Orchestrion repo, or [contact Support][3].
 
 [1]: /tracing/trace_collection/library_config/go/
 [2]: https://github.com/DataDog/orchestrion
+[3]: /help
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
