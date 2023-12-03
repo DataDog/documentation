@@ -85,7 +85,7 @@ Flutter でアプリの[フレーバー][7]を使用している場合、フレ�
 datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symbols-location <location_of_dart_symbols> --android-mapping --ios-dsyms --flavor my_flavor
 ```
 
-Datadog SDK は、`pubspec.yaml` で指定したアプリケーションのバージョン番号から、ビルド番号までを自動的に検出します (ビルド番号は含まれません)。もし、アプリケーションのバージョンの一部としてビルド番号を使用していて、ビルドごとにシンボルをアップロードする必要がある場合は、バージョンを [DatadogConfiguration.version][9] に追加する必要があります。そして、これを `datadog-ci` コマンドの `--version` パラメーターに渡すことができます。
+Datadog SDK は、`pubspec.yaml` で指定されたアプリケーションのバージョン番号を自動的に検出しますが、これにはビルド番号は含まれません。もし、アプリケーションのバージョンの一部としてビルド番号を使用していて、ビルドごとにシンボルをアップロードする必要がある場合は、バージョンを [DatadogConfiguration.version][9] に追加する必要があります。そして、これを `datadog-ci` コマンドの `--version` パラメーターに渡すことができます。
 
 ```sh
 datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symbols-location <location_of_dart_symbols> --android-mapping --ios-dsyms --version 1.2.3+22
