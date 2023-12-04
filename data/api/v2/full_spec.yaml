@@ -4446,8 +4446,8 @@ components:
       description: Attributes to create a DORA incident event.
       properties:
         finished_at:
-          description: Unix timestamp in nanoseconds when the deployment finished.
-            It should not be older than 3 hours.
+          description: Unix timestamp in nanoseconds when the incident finished. It
+            should not be older than 3 hours.
           example: 1693491984000000000
           format: int64
           type: integer
@@ -4469,7 +4469,7 @@ components:
           example: High
           type: string
         started_at:
-          description: Unix timestamp in nanoseconds when the deployment started.
+          description: Unix timestamp in nanoseconds when the incident started.
           example: 1693491974000000000
           format: int64
           type: integer
