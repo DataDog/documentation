@@ -37,7 +37,8 @@ Follow the steps below to set up Datadog RUM browser monitoring.
    - If your Next.js application relies on the **older** Next.js [Page Router][3], you can paste the initialization snippet into the custom [`_app.tsx`][4] file without the `"use client"` directive and without a separate `<DatadogInit />` component.
 
    {{< code-block lang="javascript" filename="datadog-init.tsx" disable_copy="false" collapsible="true" >}}
-    "use client";
+   // Necessary if using App Router to ensure this file runs on the client
+   "use client";
     
     import { datadogRum } from "@datadog/browser-rum";
     
