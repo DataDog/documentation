@@ -279,7 +279,7 @@ Use the information on this page to identify improvements or regressions for eac
 
 ### Limitations
 
-- Deployment and incident events must be sent as soon as possible. Events for which the `started_at` timestamp is 1 hour older than the current time are not accepted.
+- Deployment and incident events must be sent as soon as possible. Events for which the `finished_at` timestamp is 1 hour older than the current time are not accepted.
 - Deployments or incidents of the same service cannot occur at the same second.
 - For [change lead time](#lead-time-for-changes), the retention of Git metadata is 1 month. Commits older that 1 month are not accounted for.
 
