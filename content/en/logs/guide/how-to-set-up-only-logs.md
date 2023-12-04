@@ -5,10 +5,6 @@ aliases:
 kind: documentation
 ---
 
-<div class="alert alert-danger">
-To setup log collection without infrastructure metrics, you have to disable certain payloads. This results in the potential loss of metadata and tags on the logs you are collecting. Datadog does not recommend this. For more information about the impact of this configuration, contact <a href="/help/">Datadog Support</a>.
-</div>
-
 To disable payloads, you must be running Agent v6.4+. This disables metric data submission so that hosts stop showing up in Datadog. Follow these steps:
 
 {{< tabs >}}

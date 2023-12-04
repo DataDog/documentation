@@ -76,5 +76,6 @@ title: トレースガイド
     {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Datadog APM と AWS X-Ray の使用タイミングを決定する{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}C++ による APM の設定{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/leveraging_diversity_sampling/" >}}Datadog トレース保持ポリシーの理解{{< /nextlink >}}
-    {{< nextlink href="/tracing/guide/setting_up_apm_with_kubernetes_service/" >}}Kubernetes Service を使用して APM をセットアップする{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/agent_tracer_hostnames" >}}Agent ホストとトレーサーホストの違いを理解する{{< /nextlink >}}
+{{< nextlink href="/tracing/guide/setting_up_apm_with_kubernetes_service/" >}}Kubernetes Service を使用して APM をセットアップする{{< /nextlink >}}
 {{< /whatsnext >}}
