@@ -147,7 +147,7 @@
                     {{ end }}
                 {{ end }}
             {{ else }}
-                <p class="mb-2">{{ $response.description }}</p>
+                <p class="mb-2">{{ $response.description | default "No response content" }}</p>
             {{ end}}
         </div>
         {{ $count = add $count 1 }}

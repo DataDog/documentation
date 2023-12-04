@@ -6,7 +6,17 @@ $openapi variable declaration at the beginning with: {{/*{{ $openapi := .Site.Da
  -->
  {{ with $.Params.url }}
   {{ $openapi := $.Site.Data.cloudcraft }}
-  <div class="$openapi-spec-content">
+  <style>
+    .openapi-spec-content img {
+      max-width:100%;
+    }
+    .openapi-spec-content h1 a:hover,
+    .openapi-spec-content h2 a:hover {
+      color: #000;
+      border-bottom: 1px solid #000;
+    }
+  </style>
+  <div class="openapi-spec-content">
     <h2>{{ $openapi.info.title }} version {{ $openapi.info.version }}</h2>
     <div class="description">
       <p>{{ $openapi.info.description | markdownify }}</p>
