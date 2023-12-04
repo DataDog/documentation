@@ -289,7 +289,7 @@ title: 커스텀 메트릭 빌링
 관리 사용자([데이터독 관리자 역할][7] 포함)는 시간당 **수집되고** **인덱싱된** 커스텀 메트릭의 월평균 수를 확인할 수 있습니다. 상위 커스텀 메트릭 표에는 [사용 세부 정보 페이지][8]에서 **인덱싱된** 커스텀 메트릭의 평균 수도 나와 있습니다. 자세한 내용은 [사용 세부 정보][9] 문서를 참고하세요.
 
 특정 메트릭 이름의 커스텀 메트릭 수를 보다 실시간으로 추적하려면 [Metrics Summary] 페이지[10]에서 메트릭 이름을 클릭하세요. 메트릭의 세부 정보 측면 패널에서 **수집된** 커스텀 메트릭 및 **인덱싱된** 커스텀 메트릭 수를 볼 수 있습니다. 
-{{< img src=account_management/billing/custom_metrics/mwl_sidepanel_ingested.jpg" alt="Metrics Summary 측면 패널" style="width:80%;">}
+{{< img src=account_management/billing/custom_metrics/mwl_sidepanel_ingested.jpg" alt="Metrics Summary 측면 패널" style="width:80%;">}}
 
 
 ## 할당
