@@ -6,17 +6,15 @@ is_beta: true
 ---
 
 {{< callout url="#" header="false" btn_hidden="true">}}
-  Cross-organization visibility is in <b>private beta</b> for customers with Enterprise plans. If you're interested in the feature, reach out to your customer service manager.
+  Cross-organization visibility is in <b>private beta</b> for customers with Enterprise plans. If you're interested in the feature, reach out to your Technical Account Manager or Customer Success Manager.
 {{< /callout >}} 
 
 
 ## Overview
 
-Some companies rely on multiple Datadog [organizations][1] to gather their observability data.
+Some companies rely on multiple Datadog [organizations][1]  to isolate data for compliance or other reasons.
 
-Companies may use multiple organizations to deliberately isolate different parts of themselves. For example, managed service providers may use a separate Datadog organization for each customer. In another example, company A and company B both use Datadog. After company A acquires company B, they continue to use separate Datadog organizations.
-
-When company data exists in multiple organizations, some insights require aggregating or comparing data across different Datadog organizations. With cross-organization visibility, a single Datadog organization can gather data from other Datadog organizations.
+Cross-organization visibility allows customers to share data between different organizations in the same account, and thus show insights from multiple organizations in one place. Cross-organization visibility works with the **Dashboard** and **Notebook** products.
 
 This document explains: 
 - What cross-organization visibility [enables](#capabilities) 
