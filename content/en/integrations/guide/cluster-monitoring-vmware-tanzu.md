@@ -77,7 +77,7 @@ Datadog Cluster Monitoring for VMware Tanzu includes the following key features:
 
 1. Review the Cloud Foundry [Overview][18] Dashboard.
 
- {{< img src="/integrations/guide/vmware_tanzu/cloud-foundry-dashboard.png" alt="The Cloud Foundry Overview dashboard" >}}
+ {{< img src="/integrations/guide/vmware_tanzu/cloud-foundry-dashboard_2.png" alt="The Cloud Foundry Overview dashboard" >}}
 
 2. Explore individual metrics on the [Metrics explorer][19] page, search for metrics beginning with `cloudfoundry.nozzle`:
 
