@@ -20,6 +20,10 @@ The [Observability Pipelines Worker][1] can collect, process, and route logs and
 
 This guide walks you through deploying the Worker in your common tools cluster and configuring it to send logs in a Datadog-rehydratable format to a cloud storage for archiving.
 
+## Deployment Modes
+
+{{% op-deployment-modes %}}
+
 ## Assumptions
 * You are already using Datadog and want to use Observability Pipelines.
 * You have administrative access to the clusters where the Observability Pipelines Worker is going to be deployed, as well as to the workloads that are going to be aggregated.
@@ -532,6 +536,10 @@ kubectl get svc opw-observability-pipelines-worker
 For Terraform installs, the `lb-dns` output provides the necessary value.
 
 At this point, your observability data should be going to the Worker and then sent along to your S3 archive.
+
+## Updating deployment modes
+
+{{% op-updating-deployment-modes %}}
 
 ## Rehydrate your archives
 
