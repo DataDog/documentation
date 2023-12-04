@@ -6,6 +6,13 @@
       "description": "Create an AWS integration returns \"OK\" response"
     }
   ],
+  "DeleteAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Delete an AWS integration returns \"OK\" response"
+    }
+  ],
   "UpdateAWSAccount": [
     {
       "group": "aws_integration",
