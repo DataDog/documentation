@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Datadog Application Monitoring for VMWare Tanzu enables VMware Tanzu users the ability to monitor the health and performance of their applications.
+Datadog Application Monitoring for VMWare Tanzu enables VMware Tanzu users to monitor the health and performance of their applications.
 It consists of the following three components:
 
 * DogStatsD
@@ -33,7 +33,7 @@ The Trace Agent is a service that collects application traces from various sourc
 
 The Puppy Agent is a smaller version of the [Datadog Agent][6] that can forward metrics and logs to Datadog. See the [logs][8] documentation for more information. When enabled, the default behavior is for all logs from `stdout` and `stderr` to be collected and forwarded by TCP to the Puppy Agent.
 
-## Key Features
+## Key features
 Datadog Application Monitoring for VMware Tanzu includes the following key features:
 
 * Application performance monitoring
@@ -48,21 +48,15 @@ Datadog Application Monitoring for VMware Tanzu has the following requirements:
 ## Installation
 
 1. Download the product file for **Datadog Application Monitoring for VMware Tanzu** from the [Tanzu Network][10].
-
 2. Go to the Tanzu Ops Manager Installation Dashboard and click **Import a Product** to upload the product file.
-
 3. Select the product file downloaded in step **1**. This adds the tile to your staging area.
-
 4. Click the newly added **Datadog Application Monitoring for VMware Tanzu** tile.
-
 5. Enter your [Datadog API key][3] in the **Datadog Config** section.
-
 6. Click **Save**.
-
 7. Return to the Tanzu Ops Manager Installation Dashboard, and click **Apply changes** to install the Datadog Application Monitoring for the VMware Tanzu tile.
 
 ## Feedback
-Provide any bugs, feature requests, or questions to the [VMware Tanzu Feedback][1] list or contact [Datadog Support][2].
+Provide any bugs, feature requests, or questions to the [VMware Tanzu Feedback][1] email or contact [Datadog Support][2].
 
 ## Further reading
 

@@ -35,56 +35,45 @@ Datadog Cluster Monitoring for VMware Tanzu has the following requirements:
 * Install the Datadog Agent BOSH release as outlined in Datadog's [Pivotal Platform documentation][5].
 * Install the [Datadog Cluster Agent][15] BOSH release.
 
-## Key Features
+## Key features
 
 Datadog Cluster Monitoring for VMware Tanzu includes the following key features:
 
-* Visualization of all cluster-level operational metrics and KPIs
-* Alerting on VMware Tanzu cluster and component health
-* Monitoring of jobs
-* Tracking and reporting of BOSH events
-* Autodiscovery of integrations
+* Visualization of all cluster-level operational metrics and KPIs.
+* Alerting on VMware Tanzu cluster and component health.
+* Monitoring of jobs.
+* Tracking and reporting of BOSH events.
+* Autodiscovery of integrations.
 
 ## Installation
 
 1. Install the [BOSH Health Monitor][10].
-
 2. Download the **Datadog Cluster Monitoring for VMware Tanzu** product file from [Pivotal Network][11].
-
 3. Go to the Tanzu Ops Manager installation dashboard and click **Import a Product** to upload the product file.
-
 4. Click **Import a Product** to upload the product file.
-
 5. Select the product file downloaded in step **2**. This adds the tile to your staging area.
-
 6. Click the newly added **Datadog Cluster Monitoring for VMware Tanzu** tile.
-
 7. Enter your [Datadog API key][3] in the **Datadog Config** section. Leave the Datadog API URL unchanged, unless directed otherwise by [Datadog Support][2].
-
 8. Create a UAA client account for Datadog using the [UAA CLI][12]. The Firehose Nozzle requires access to the Loggregator Firehose.
-
-```sh
-  $ uaac client add datadog-firehose-nozzle \
-        --name datadog-firehose-nozzle \
-        --scope doppler.firehose,cloud_controller.admin_read_only,oauth.login \
-        --authorities doppler.firehose,cloud_controller.admin_read_only,openid,oauth.approvals \
-        --authorized_grant_types client_credentials,refresh_token \
-        --access_token_validity 1209600 \
-        -s $CLIENT_SECRET
-```
+    ```sh
+    $ uaac client add datadog-firehose-nozzle \
+         --name datadog-firehose-nozzle \
+         --scope doppler.firehose,cloud_controller.admin_read_only,oauth.login \
+         --authorities doppler.firehose,cloud_controller.admin_read_only,openid,oauth.approvals \
+         --authorized_grant_types client_credentials,refresh_token \
+         --access_token_validity 1209600 \
+         -s $CLIENT_SECRET
+    ```
 
 9. In the **Cloud Foundry Settings** section, specify a UAA Client and UAA Secret from the previous step.
-
 10. If Ops Manager requires you to upload a stemcell, [download a stemcell][13] from the 621 line of releases. Upload it to Ops Manager with the **Import Stemcell** button.
-
 11. The **Datadog Firehose Nozzle Config** section contains optional configurations for the Nozzle, and the **Datadog Agent Config** section contains optional configurations for the Agent. You do not need to configure anything in either section.
-<p class='note'><strong>Note:</strong> If you are using a single Datadog account to monitor multiple foundations, you must check the <strong>Use UUID Hostname</strong> checkbox.</p>
-
+    <p class='note'><strong>Note:</strong> If you are using a single Datadog account to monitor multiple foundations, you must check the <strong>Use UUID Hostname</strong> checkbox.</p>
 12. The **Datadog Cluster Agent Settings** section contains configurations for the [Datadog Cluster Agent][15] that provides autodiscovery of integrations and application container features.
 
 13. Return to the Tanzu Ops Manager Installation Dashboard and click **Apply Changes** to install Datadog Cluster Monitoring for the VMware Tanzu tile.
 
-## View Metrics and Dashboards
+## View metrics and dashboards
 
 1. Review the Cloud Foundry [Overview][18] Dashboard.
 
@@ -94,12 +83,11 @@ Datadog Cluster Monitoring for VMware Tanzu includes the following key features:
 
  {{< img src="/integrations/guide/vmware_tanzu/metrics-explorer-cloud-foundry.png" alt="Cloud foundry metrics that start with cloudfoundry.nozzle" >}}
 
-3. Additionally, [create alerts][16] for your Cloud Foundry metrics.
-
+3. [Create alerts][16] for your Cloud Foundry metrics.
 4. See the [Datadog Cloud Foundry Integration][17] for troubleshooting steps.
 
 ## Feedback
-Provide any bugs, feature requests, or questions to the [VMware Tanzu Feedback][1] list or contact [Datadog Support][2].
+Provide any bugs, feature requests, or questions to the [VMware Tanzu Feedback][1] email or contact [Datadog Support][2].
 
 ## Further reading
 
