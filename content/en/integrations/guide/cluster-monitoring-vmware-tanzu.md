@@ -86,14 +86,10 @@ Datadog Cluster Monitoring for VMware Tanzu includes the following key features:
 3. [Create alerts][16] for your Cloud Foundry metrics.
 4. See the [Datadog Cloud Foundry Integration][17] for troubleshooting steps.
 
-## Feedback
-Provide any bugs, feature requests, or questions to the [VMware Tanzu Feedback][1] email or contact [Datadog Support][2].
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: pivotal-cf-feedback@pivotal.io
 [2]: /help/
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://app.datadoghq.com/signup

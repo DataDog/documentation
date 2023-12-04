@@ -55,14 +55,10 @@ Datadog Application Monitoring for VMware Tanzu has the following requirements:
 6. Click **Save**.
 7. Return to the Tanzu Ops Manager Installation Dashboard, and click **Apply changes** to install the Datadog Application Monitoring for the VMware Tanzu tile.
 
-## Feedback
-Provide any bugs, feature requests, or questions to the [VMware Tanzu Feedback][1] email or contact [Datadog Support][2].
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: pivotal-cf-feedback@pivotal.io
 [2]: /help
 [3]: https://app.datadoghq.com/account/settings#api
 [4]: https://app.datadoghq.com/signup
