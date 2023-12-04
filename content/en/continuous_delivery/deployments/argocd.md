@@ -97,6 +97,7 @@ data:
 `cd-visibility-trigger` is the name of the trigger, and `cd-visibility-template` is a reference to the template created above.
 
 After the service, trigger, and template have been added to the config map, you can subscribe any of your Argo CD applications to the integration.
+See the [Argo CD official guide][12] for more details on applications subscriptions.
 
 Modify the annotations of the application by either using the Argo CD UI or modifying the application definition with the following annotations:
 
@@ -141,3 +142,4 @@ In case the notifications are not sent, examine the logs of the `argocd-notifica
 [9]: /continuous_delivery/search
 [10]: /continuous_delivery/explorer
 [11]: https://app.datadoghq.com/organization-settings/api-keys
+[12]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/subscriptions/
