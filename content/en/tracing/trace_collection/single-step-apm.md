@@ -293,4 +293,3 @@ To stop producing traces, remove library injectors and restart the infrastructur
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/remote_config
-[3]: /tracing/service_catalog/
