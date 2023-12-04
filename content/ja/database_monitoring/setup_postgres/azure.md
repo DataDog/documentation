@@ -221,7 +221,7 @@ Azure Postgres データベースを監視するには、インフラストラ�
        port: 5432
        username: 'datadog@<AZURE_INSTANCE_ENDPOINT>'
        password: '<PASSWORD>'
-       ssl: true
+       ssl: 'require'
        ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
        # pg_stat_statements_view: datadog.pg_stat_statements()
        # pg_stat_activity_view: datadog.pg_stat_activity()
@@ -238,7 +238,7 @@ Azure Postgres データベースを監視するには、インフラストラ�
 `deployment_type` と `name` フィールドの設定に関する追加情報は、[Postgres インテグレーション仕様][3]を参照してください。
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[2]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[2]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
 {{% /tab %}}
 {{% tab "Docker" %}}
@@ -265,7 +265,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "port": 5432,
     "username": "datadog@<AZURE_INSTANCE_ENDPOINT>",
     "password": "<UNIQUEPASSWORD>",
-    "ssl": true,
+    "ssl": "require",
     "azure": {
       "deployment_type": "<DEPLOYMENT_TYPE>",
       "name": "<AZURE_INSTANCE_ENDPOINT>"
@@ -290,7 +290,7 @@ FROM datadog/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog@<AZURE_INSTANCE_ENDPOINT>","password": "<UNIQUEPASSWORD>", "ssl": true, "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog@<AZURE_INSTANCE_ENDPOINT>","password": "<UNIQUEPASSWORD>", "ssl": "require", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
 ```
 
 Postgres 9.6 の場合、ホストとポートが指定されているインスタンスの config に以下の設定を追加します。
@@ -307,7 +307,7 @@ pg_stat_activity_view: datadog.pg_stat_activity()
 
 [1]: /ja/agent/docker/integrations/?tab=docker
 [2]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
-[3]: /ja/agent/guide/secrets-management
+[3]: /ja/agent/configuration/secrets-management
 [4]: /ja/agent/faq/template_variables/
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -336,7 +336,7 @@ instances:
     port: 5432
     username: "datadog@<AZURE_INSTANCE_ENDPOINT>"
     password: "<UNIQUEPASSWORD>"
-    ssl: true
+    ssl: "require"
     azure:
       deployment_type: "<DEPLOYMENT_TYPE>"
       fully_qualified_domain_name: "<AZURE_INSTANCE_ENDPOINT>"' \
@@ -363,7 +363,7 @@ instances:
     port: 5432
     username: 'datadog@<AZURE_INSTANCE_ENDPOINT>'
     password: '<PASSWORD>'
-    ssl: true
+    ssl: "require"
     # プロジェクトとインスタンスを追加した後、CPU、メモリなどの追加のクラウドデータをプルするために Datadog Azure インテグレーションを構成します。
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
@@ -398,7 +398,7 @@ metadata:
           "port": 5432,
           "username": "datadog@<AZURE_INSTANCE_ENDPOINT>",
           "password": "<UNIQUEPASSWORD>",
-          "ssl": true,
+          "ssl": "require",
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
             "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"
@@ -430,7 +430,7 @@ Cluster Agent は自動的にこのコンフィギュレーションを登録し
 [2]: /ja/agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/postgres/assets/configuration/spec.yaml#L446-L474
-[5]: /ja/agent/guide/secrets-management
+[5]: /ja/agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -459,7 +459,7 @@ Azure からより包括的なデータベースメトリクスを収集する�
 [5]: /ja/integrations/faq/postgres-custom-metric-collection-explained/
 [6]: https://www.postgresql.org/docs/current/app-psql.html
 [7]: https://app.datadoghq.com/account/settings/agent/latest
-[8]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[8]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [9]: https://app.datadoghq.com/databases
 [10]: /ja/integrations/azure_db_for_postgresql/
 [11]: /ja/database_monitoring/setup_postgres/troubleshooting/

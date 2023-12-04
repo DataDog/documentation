@@ -14,9 +14,10 @@ title: サーバーレスモニタリングガイド
 
 {{< whatsnext desc="サーバーレスアプリケーションを監視するためのベストプラクティス" >}}
     {{< nextlink href="/serverless/guide/connect_invoking_resources" >}}Lambda 関数を呼び出すリソースの詳細な視覚化{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/serverless_warnings" >}}Serverless Warnings{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/serverless_tagging" >}}Serverless Tagging{{< /nextlink >}}
-    {{< nextlink href="/serverless/guide/agent_configuration" >}}Agent Configuration{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_warnings" >}}サーバーレスの警告{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/serverless_tagging" >}}サーバーレスのタグ付け{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/agent_configuration" >}}Agent 構成{{< /nextlink >}}
+    {{< nextlink href="/serverless/guide/opentelemetry" >}}サーバーレスと OpenTelemetry{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Datadog Forwarder を使ったインストール
