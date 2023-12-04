@@ -12,7 +12,7 @@ kind: 설명서
 title: 커스텀 메트릭 빌링
 ---
 
-메트릭이 [{{< translate key="integration_count" >}개 이상의 Datadog 통합][1] 중 하나에서 제출되지 않은 경우 [커스텀 메트릭][2]<sup>[(1)](#standard-integrations)</sup>으로 간주됩니다.
+메트릭이 [{{< translate key="integration_count" >}}개 이상의 Datadog 통합][1] 중 하나에서 제출되지 않은 경우 [커스텀 메트릭][2]<sup>[(1)](#standard-integrations)</sup>으로 간주됩니다.
 
 **커스텀 메트릭은 (호스트 태그를 포함해) 메트릭 이름과 태그 값의 조합으로 고유하게 인식됩니다.** 일반적으로 [DogStatsD][3]을 사용하거나 [커스텀 에이전트 점검][4]을 통해 전송하는 모든 메트릭은 커스텀 메트릭입니다.
 
