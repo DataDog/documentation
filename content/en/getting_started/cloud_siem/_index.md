@@ -60,6 +60,12 @@ This guide walks you through best practices for getting started with Cloud SIEM.
     - Third-party security integrations (for example, Amazon GuardDuty)
 
 2. Enable [Cloud SIEM][8].
+3. Select and configure [Content Packs][22], which provide out-of-the-box content for critical security log sources.
+4. Select and configure [additional log sources][23] you want Cloud SIEM to analyze.
+5. Click **Activate**. A new Cloud SIEM log index is created.
+6. Navigate to the [Logs Indexes configuration][24] page.
+7. Move the Cloud SIEM index to the top of the index list.
+8. All logs in the Cloud SIEM index are analyzed by Cloud SIEM. You can configure the index to filter for specific log events, See the [Log Index documentation][25] for more information.
 
 ## Phase 2: Signal exploration
 
@@ -104,3 +110,7 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 [19]: /security/cloud_siem/log_detection_rules/?tab=threshold#advanced-options
 [20]: /security/cloud_siem/log_detection_rules/
 [21]: https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/
+[22]: https://app.datadoghq.com/security/content-packs
+[23]: https://app.datadoghq.com/security/onboarding?contentPacks=&logSources=&step=1
+[24]: https://app.datadoghq.com/logs/pipelines/indexes
+[25]: /docs.datadoghq.com/logs/log_configuration/indexes/
