@@ -64,17 +64,15 @@ git clone https://github.com/DataDog/apm-tutorial-python.git
 
 Setup, configure, and install Python dependencies for the sample using either Poetry or pip. Run one of the following:
 
-{{% tabs %}}
-
-{{< tab "Poetry" >}}
+{{< tabs >}}
+{{% tab "Poetry" %}}
 
 ```shell
 poetry install
 ```
 
-{{< /tab >}}
-
-{{< tab "pip" >}}
+{{% /tab %}}
+{{% tab "pip" %}}
 
 ```shell
 python -m venv .venv
@@ -82,31 +80,28 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-{{< /tab >}}
-
-{{% /tabs %}}
+{{% /tab %}}
+{{< /tabs >}}
 
 Start the application by running:
 
 {{% tabs %}}
-
-{{< tab "Poetry" >}}
+{{% tab "Poetry" %}}
 
 ```shell
 poetry run python -m notes_app.app
 ```
 
-{{< /tab >}}
+{{% /tab %}}
 
-{{< tab "pip" >}}
+{{% tab "pip" %}}
 
 ```shell
 python -m notes_app.app
 ```
 
-{{< /tab >}}
-
-{{% /tabs %}}
+{{% /tab %}}
+{{< /tabs >}}
 
 The sample `notes_app` application is a basic REST API that stores data in an in-memory database. Open another terminal and use `curl` to send a few API requests:
 
@@ -137,9 +132,8 @@ Run more API calls to see the application in action. When you're done, type Ctrl
 
 Next, install the tracing library by using Poetry or pip (minimum version 18). From your `apm-tutorial-python` directory, run:
 
-{{% tabs %}}
-
-{{< tab "Poetry" >}}
+{{< tabs >}}
+{{% tab "Poetry" %}}
 
 ```shell
 poetry add ddtrace
@@ -147,25 +141,22 @@ poetry install
 
 ```
 
-{{< /tab >}}
-
-{{< tab "pip" >}}
+{{% /tab %}}
+{{% tab "pip" %}}
 
 ```shell
 pip install ddtrace
 ```
 
-{{< /tab >}}
-
-{{% /tabs %}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Launch the Python application with automatic instrumentation
 
 To start generating and collecting traces, restart the sample application in a slightly different way than previously. Run:
 
-{{% tabs %}}
-
-{{< tab "Poetry" >}}
+{{< tabs >}}
+{{% tab "Poetry" %}}
 
 ```shell
 DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
@@ -173,18 +164,16 @@ DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
 
 ```
 
-{{< /tab >}}
-
-{{< tab "pip" >}}
+{{% /tab %}}
+{{% tab "pip" %}}
 
 ```shell
 DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
  ddtrace-run python -m notes_app.app
 ```
 
-{{< /tab >}}
-
-{{% /tabs %}}
+{{% /tab %}}
+{{< /tabs >}}
 
 That command sets the `DD_SERVICE`, `DD_VERSION`, and `DD_ENV` environment variables to enable [Unified Service Tagging][10], enabling data correlation across Datadog.
 
@@ -265,9 +254,8 @@ The sample project includes a second application called `calendar_app` that retu
 
 1. Start the calendar application by running:
 
-   {{% tabs %}}
-
-   {{< tab "Poetry" >}}
+   {{< tabs >}}
+   {{% tab "Poetry" %}}
 
    ```shell
    DD_SERVICE=notes DD_ENV=dev DD_VERSION=0.1.0 \
@@ -275,18 +263,16 @@ The sample project includes a second application called `calendar_app` that retu
 
    ```
 
-   {{< /tab >}}
-
-   {{< tab "pip" >}}
+   {{% /tab %}}
+   {{% tab "pip" %}}
 
    ```shell
    DD_SERVICE=calendar DD_ENV=dev DD_VERSION=0.1.0 \
    ddtrace-run python -m calendar_app.app
    ```
-
-   {{< /tab >}}
-
-   {{% /tabs %}}
+   
+   {{% /tab %}}
+   {{< /tabs >}}
 
 2. Send a POST request with the `add_date` parameter:
 
