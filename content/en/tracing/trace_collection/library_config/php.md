@@ -136,8 +136,8 @@ Enable the experimental CPU profile type. Added in version `0.69.0`. For version
 
 `DD_PROFILING_EXCEPTION_ENABLED`
 : **INI**: `datadog.profiling.exception_enabled`. INI available since `0.95.0`.<br>
-**Default**: `0`<br>
-Enable the experimental exception profile type. Added in version `0.92.0` and GA
+**Default**: `1`<br>
+Enable the exception profile type. Added in version `0.92.0` and GA
 in version `0.95.0`.
 **Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_EXCEPTION_ENABLED` environment variable (`datadog.profiling.experimental_exception_enabled` INI setting), which was available since `0.92`. If both are set, this one takes precedence.
 
