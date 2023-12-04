@@ -18,6 +18,9 @@ hugo defaults to environment development with hugo server
   <script type="module">
     import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
     mermaid.initialize({ startOnLoad: true });
+    setTimeout(() => {
+      document.querySelectorAll('.mermaid').forEach(m => m.classList.remove('invisible'))
+    }, 1000)
   </script>
 {{- end -}}
 
