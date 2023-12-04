@@ -1814,6 +1814,12 @@ A list of request origins ignored when computing the page activity. See [How pag
 **Type**: String<br/>
 URL pointing to the Datadog Browser SDK Worker JavaScript file. The URL can be relative or absolute, but is required to have the same origin as the web application. See [Content Security Policy guidelines][22] for more information.
 
+`compressIntakeRequests`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false`<br/>
+Compress requests sent to the Datadog intake to reduce bandwidth usage when sending large amounts of data. The compression is done in a Worker thread. See [Content Security Policy guidelines][22] for more information.
+
 `storeContextsAcrossPages`
 : Optional<br/>
 **Type**: String<br/>
