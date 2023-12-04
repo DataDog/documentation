@@ -4,6 +4,7 @@ store a copy of your OpenAPI specification in the root-level site /data folder.
 Then delete the first and last lines of the code block below, and replace the
 $openapi variable declaration at the beginning with: {{/*{{ $openapi := .Site.Data.fileName }}*/}}where fileName is the file's name with `.json` removed from the end
  -->
+{{ $dot := . }}
  {{ with $.Params.url }}
   {{ $openapi := $.Site.Data.cloudcraft }}
   <style>
@@ -54,8 +55,11 @@ $openapi variable declaration at the beginning with: {{/*{{ $openapi := .Site.Da
                 <h3 class="mt-2">Overview</h3>
                 {{ $pathDetails.description | markdownify }}
 
+                <!-- response -->
                 {{ partial "api/response.html" (dict "responses" $pathDetails.responses "operationid" $pathDetails.operationId "version" "v1") }}
 
+                <!-- code example -->
+                {{ partial "api/code-example.html" (dict "context" $dot "resourcePage" nil "operationid" $pathDetails.operationId "securitySchemes" (dict) "endpoint" (dict "action" (dict "summary" "")) "version" "v1") }}
               </div>
             </div>
           </div>
