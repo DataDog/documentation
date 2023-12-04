@@ -1,5 +1,5 @@
 ---
-title: Rules
+title: Notification Rules
 kind: documentation
 description: "Create notification rules to automatically notify your team and integrations when security detection rules trigger."
 aliases:
@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Security Notification Rules play a key role in keeping your team informed of issues without you having to manually edit notification preferences for individual security detection rules.
+Security notification rules play a key role in keeping your team informed of issues without you having to manually edit notification preferences for individual security detection rules.
 
 Create and modify notification preferences within a notification rule to span across multiple security detection rules and signals based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags.
 
@@ -47,29 +47,27 @@ If the notification rule is associated with a Security Detection Rule, you can v
 
 If the notification rule matches set conditions, the resulting notification includes details about the matched notification rule in the notification footer.
 
-## Manage a notification rule
+## Manage notification rules
 
-### Search
+### Enable or disable a notification rule
 
-The free text search filters notification rules by text in the **Notification Rule** page. Select a tag within a rule type, rule tags, signal attributes, or signal tags to add the tag in the search, which displays notification rules matching the value.
+To enable or disable a notification rule, toggle the switch on the notification rule card.
 
-When you edit the search query, search results update in real-time. There is no **Search** button.
+### Edit a notification rule
 
-### Enable or disable
+To edit a notification rule, click the notification rule card.
 
-Use the toggle switch in the top right corner of the notification rule card to enable or disable a notification rule.
+1. Click the notification rule card.
+2. Make changes.
+3. Click **Save and Activate**.
 
-### Edit
+### Clone a notification rule
 
-To edit a notification rule, hover over the notification rule card and click on it.
+To clone a notification rule, click the vertical three-dot menu on the notification rule card and select **Clone**.
 
-### Clone
+### Delete a notification rule
 
-To clone a notification rule, click the kebab menu in the top right corner of the notification rule card and select the **Clone Notification Rule** option from the menu.
-
-### Delete
-
-To delete a notification rule, click the kebab menu in the top right corner of the notification rule card and select the **Delete Notification Rule** option from the menu.
+To delete a notification rule, click the vertical three-dot menu on the notification rule card and select **Delete**.
 
 ## Further Reading
 
