@@ -56,13 +56,15 @@ Follow the steps below to set up Datadog RUM browser monitoring.
       trackResources: true,
       trackLongTasks: true,
       defaultPrivacyLevel: "mask-user-input",
+      // Specify URLs to propagate trace headers for connection between RUM and backend trace
       allowedTracingUrls: [
-        { match: () => true, propagatorTypes: ["tracecontext"] },
+        { match: "https://example.com/api/", propagatorTypes: ["tracecontext"] },
       ],
     });
     
     export default function DatadogInit() {
-      // Render nothing - this component is only included so that the init code above will run client-side
+      // Render nothing - this component is only included so that the init code
+      // above will run client-side
       return null;
     }
    {{< /code-block >}}
