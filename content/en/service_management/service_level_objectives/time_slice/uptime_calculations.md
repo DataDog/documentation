@@ -23,7 +23,7 @@ Time-Slice SLOs allows you to track uptime for individual groups, where groups a
 
 [INSERT IMAGES]
 
-When groups are present, uptime is calculated for each individual group. However, overall uptime works very differently. In order to match existing monitor SLO functionality, time-slice SLOs use the same definition of overall uptime. When **all** groups have uptime, it is considered overall uptime. Conversely, if **any** group has downtime, it is considered overall downtime. Overall uptime is always less than the uptime for any individual group.
+When groups are present, uptime is calculated for each individual group. However, overall uptime works differently. In order to match existing monitor SLO functionality, time-slice SLOs use the same definition of overall uptime. When **all** groups have uptime, it is considered overall uptime. Conversely, if **any** group has downtime, it is considered overall downtime. Overall uptime is always less than the uptime for any individual group.
 
 In the example above, environment "staging" has 5 minutes of downtime over a 24-hour period, resulting in approximately 99.652% of uptime.
 
