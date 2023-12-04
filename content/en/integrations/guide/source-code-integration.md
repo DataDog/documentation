@@ -244,6 +244,8 @@ If you are using a host, configure your application with `DD_GIT_*` environment 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
+<div class="alert alert-info">The Ruby client library version 1.6.0 or later is required.</div>
+
 #### Containers
 
 If you are using Docker containers, you have two options: using Docker or configuring your application with the `DD_TAGS` environment variable.
