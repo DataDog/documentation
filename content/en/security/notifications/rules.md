@@ -20,13 +20,9 @@ Security notification rules play a key role in keeping your team informed of iss
 
 Create and modify notification preferences within a notification rule to span across multiple security detection rules and signals based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags.
 
-View and search through all created Notification Rules on the **Notification Rules** page. Create, edit, clone, enable, disable, delete, or view Notification Rules created by users in your organization.
+{{< img src="security/notification-profiles-overview3.png" alt="Notification Rules" style="width:100%;" >}}
 
-{{< img src="security/notification-profiles-overview2.png" alt="Notification Rules" style="width:100%;" >}}
-
-## Create a notification rule
-
-To create a new notification rule, follow the instructions below.
+## Create notification rules
 
 1. In Datadog, navigate to the [Notification Rules][1] tab.
 2. Click on the **+ New Notification Rule** button in the top right corner of the page.
