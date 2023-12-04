@@ -18,7 +18,7 @@ further_reading:
 
 <div class="alert alert-info">In-progress pipelines is a beta feature.</div>
 
-In-progress pipelines provide a way to visualize CI Visibility pipeline tracers are still in progress in the CI provider.
+In-progress pipelines provides a way to visualize CI Visibility pipeline traces that are still in progress in the CI provider.
 This feature tracks the duration of a pipeline that is in progress in the CI provider. The duration of the pipeline can then be used to have observability of those pipelines that are taking too much time to finish in the CI Provider. Facets and measures that belong to the pipelines in progress can be used to search, graph, or monitor the pipelines.
 
 {{< img src="ci/ci-in-progress-pipelines.png" alt="Details for a single pipeline in progress" style="width:100%;">}}

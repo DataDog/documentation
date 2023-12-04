@@ -30,7 +30,7 @@ further_reading:
 
 - **Manual steps**: View manually triggered pipelines
 
-- **In-progress pipelines**: View pipeline executions thar are in progress
+- **In-progress pipelines**: View pipeline executions that are in progress
 
 - **Queue time**: View amount of time pipeline jobs wait in the queue before processing
 
