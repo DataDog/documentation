@@ -231,7 +231,7 @@ Run the following commands and restart the service to stop injecting the library
 
 {{% tab "Kubernetes" %}}
 
-1. Set the `admission.datadoghq.com/enabled:` label to `"false"` the pod spec:
+1. Set the `admission.datadoghq.com/enabled:` label to `"false"` for the pod spec:
    ```yaml
    spec:
      template:
