@@ -1,4 +1,11 @@
 {
+  "CreateApmRetentionFilter": [
+    {
+      "group": "apm_retention_filters",
+      "suffix": "",
+      "description": "Create a retention filter returns \"OK\" response"
+    }
+  ],
   "ReorderApmRetentionFilters": [
     {
       "group": "apm_retention_filters",
@@ -131,6 +138,20 @@
       "description": "Update Confluent account returns \"OK\" response"
     }
   ],
+  "CreateDORADeployment": [
+    {
+      "group": "dora_metrics",
+      "suffix": "",
+      "description": "Send a deployment event for DORA Metrics returns \"OK\" response"
+    }
+  ],
+  "CreateDORAIncident": [
+    {
+      "group": "dora_metrics",
+      "suffix": "",
+      "description": "Send an incident event for DORA Metrics returns \"OK\" response"
+    }
+  ],
   "CreateDashboardListItems": [
     {
       "group": "dashboard_lists",
@@ -214,6 +235,11 @@
       "group": "gcp_integration",
       "suffix": "",
       "description": "Create a new entry for your service account returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_109518525",
+      "description": "Create a new entry for your service account with account_tags returns \"OK\" response"
     }
   ],
   "UpdateGCPSTSAccount": [
@@ -327,13 +353,13 @@
   "CreateCurrentUserApplicationKey": [
     {
       "group": "key_management",
-      "suffix": "_1999509896",
-      "description": "Create an Application key for current user returns \"Created\" response"
+      "suffix": "_3383369233",
+      "description": "Create an Application key with scopes for current user returns \"Created\" response"
     },
     {
       "group": "key_management",
-      "suffix": "_3383369233",
-      "description": "Create an Application key with scopes for current user returns \"Created\" response"
+      "suffix": "",
+      "description": "Create an application key for current user returns \"Created\" response"
     }
   ],
   "UpdateAPIKey": [
@@ -497,6 +523,20 @@
       "description": "Update a single service object returns \"OK\" response"
     }
   ],
+  "CreatePowerpack": [
+    {
+      "group": "powerpack",
+      "suffix": "",
+      "description": "Create a new powerpack returns \"OK\" response"
+    }
+  ],
+  "UpdatePowerpack": [
+    {
+      "group": "powerpack",
+      "suffix": "",
+      "description": "Update a powerpack returns \"OK\" response"
+    }
+  ],
   "AggregateRUMEvents": [
     {
       "group": "rum",
@@ -648,11 +688,11 @@
       "description": "Modify the triage assignee of a security signal returns \"OK\" response"
     }
   ],
-  "UpdateFinding": [
+  "MuteFindings": [
     {
       "group": "security_monitoring",
       "suffix": "",
-      "description": "Mute or unmute a finding returns \"OK\" response"
+      "description": "Mute or unmute a batch of findings returns \"OK\" response"
     }
   ],
   "UpdateSecurityMonitoringRule": [
@@ -733,8 +773,8 @@
   "CreateServiceAccountApplicationKey": [
     {
       "group": "service_accounts",
-      "suffix": "_1761876297",
-      "description": "Create an app key for this service account returns \"Created\" response"
+      "suffix": "",
+      "description": "Create an application key for this service account returns \"Created\" response"
     },
     {
       "group": "service_accounts",
@@ -745,8 +785,8 @@
   "UpdateServiceAccountApplicationKey": [
     {
       "group": "service_accounts",
-      "suffix": "_768415790",
-      "description": "Edit an app key owned by this service account returns \"OK\" response"
+      "suffix": "",
+      "description": "Edit an application key for this service account returns \"OK\" response"
     }
   ],
   "CreateOrUpdateServiceDefinitions": [
@@ -759,6 +799,25 @@
       "group": "service_definition",
       "suffix": "_2619874414",
       "description": "Create or update service definition using schema v2-1 returns \"CREATED\" response"
+    },
+    {
+      "group": "service_definition",
+      "suffix": "_2621709423",
+      "description": "Create or update service definition using schema v2-2 returns \"CREATED\" response"
+    }
+  ],
+  "CreateScorecardRule": [
+    {
+      "group": "service_scorecards",
+      "suffix": "",
+      "description": "Create a new rule returns \"Created\" response"
+    }
+  ],
+  "CreateScorecardOutcomesBatch": [
+    {
+      "group": "service_scorecards",
+      "suffix": "",
+      "description": "Create outcomes batch returns \"OK\" response"
     }
   ],
   "AggregateSpans": [
@@ -797,8 +856,8 @@
   "SetOnDemandConcurrencyCap": [
     {
       "group": "synthetics",
-      "suffix": "_2850884405",
-      "description": "Save on demand concurrency cap"
+      "suffix": "",
+      "description": "Save new value for on-demand concurrency cap returns \"OK\" response"
     }
   ],
   "CreateTeamLink": [

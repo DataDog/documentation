@@ -13,6 +13,7 @@ This page details database agnostic common issues with setting up and using Data
 For specific database setup troubleshooting, use the corresponding troubleshooting page:
 
 * [Troubleshooting MySQL Setup][2]
+* [Troubleshooting Oracle Setup][8]
 * [Troubleshooting Postgres Setup][3]
 * [Troubleshooting SQL Server Setup][4]
 
@@ -71,4 +72,5 @@ If you are still experiencing problems, contact [Datadog Support][5] for help.
 [3]: /database_monitoring/setup_postgres/troubleshooting/
 [4]: /database_monitoring/setup_sql_server/troubleshooting/
 [5]: /help/
-[7]: /agent/proxy/?tab=linux
+[7]: /agent/configuration/proxy/?tab=linux
+[8]: /database_monitoring/setup_oracle/troubleshooting/

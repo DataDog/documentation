@@ -16,5 +16,6 @@ cascade:
     {{< nextlink href="/observability_pipelines/setup/splunk" >}}Set Up Observability Pipelines in your Splunk Environment{{< /nextlink >}}
     {{< nextlink href="/observability_pipelines/guide/custom-metrics-governance" >}}Custom Metrics Governance{{< /nextlink >}}
     {{< nextlink href="/observability_pipelines/guide/control_log_volume_and_size" >}}Control Log Volume and Size{{< /nextlink >}}
-    {{< nextlink href="/observability_pipelines/guide/ingest_aws_s3_logs_with_the_observability_pipelines_worker" >}}Ingest AWS S3 Logs with the Observability Pipelines Worker{{< /nextlink >}}
+    {{< nextlink href="/observability_pipelines/guide/ingest_aws_s3_logs_with_the_observability_pipelines_worker" >}}Ingest Amazon S3 Logs with the Observability Pipelines Worker{{< /nextlink >}}
+    {{< nextlink href="/observability_pipelines/guide/route_logs_in_datadog_rehydratable_format_to_amazon_s3/" >}}Route Logs in Datadog-Rehydratable Format to Amazon S3 {{< /nextlink >}}
 {{< /whatsnext >}}

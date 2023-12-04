@@ -3,24 +3,24 @@ description: 체인 요청을 통해 주요 서비스에 대한 정교한 트랜
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-apis-with-datadog/
   tag: 블로그
-  text: Monitor your workflows with Datadog SSL, TCP, and multistep API tests
+  text: Datadog 다단계 API 테스트로 워크플로 모니터링
 - link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
   tag: 학습 센터
   text: 신서틱(Synthetic) 테스트 소개
 - link: /getting_started/synthetics/api_test
   tag: 설명서
-  text: Getting Started with API Tests
+  text: API 테스트 시작하기
 - link: /synthetics/private_locations
   tag: 설명서
-  text: Run multistep API tests on internal endpoints
+  text: 내부 엔드포인트에서 다단계 API 테스트 실행
 - link: /synthetics/guide/synthetic-test-monitors
   tag: 설명서
   text: Synthetic 테스트 모니터에 대해 알아보기
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: 테라폼
-  text: Create and manage Synthetic multistep API tests with Terraform
+  text: Terraform으로 Synthetic 다단계 API 테스트 생성 및 관리
 kind: 설명서
-title: Multistep API Tests
+title: 다단계 API 테스트
 ---
 
 ## 개요
@@ -56,7 +56,7 @@ title: Multistep API Tests
 
 HTTP 요청 단계를 생성하려면 **Create Your First Step**을 클릭합니다.
 
-{{< img src="synthetics/api_tests/ms_create_request.png" alt=Multistep API 테스트 요청 생성" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_create_request.png" alt="Multistep API 테스트 요청 생성" style="width:90%;" >}}
 
 기본적으로 테스트 단계는 최대 10개까지 생성할 수 있습니다. 이 제한을 늘리려면 <a href="https://docs.datadoghq.com/help/">Datadog 지원팀</a>에 문의하세요.
 

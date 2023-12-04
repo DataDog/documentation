@@ -37,15 +37,15 @@ title: トレースガイド
     {{< nextlink href="tracing/guide/tutorial-enable-java-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Datadog Agent と同じホスト上の Java アプリケーションでトレースを有効にする{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-java-containers" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> コンテナ内の Java アプリケーションと Datadog Agent でトレースを有効にする{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-java-container-agent-host" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> <img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> コンテナ内の Java アプリケーションとホスト上の Agent でトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-gke" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-gke-icon.png" /> GKE で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-eks" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-eks-icon.png" /> AWS EKS で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-ec2" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> AWS ECS with EC2 で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-fargate" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> AWS ECS with Fargate で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-java-admission-controller" >}}<img src="/images/integrations_logos/java-avatar.png" /> Admission Controller で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-gke" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-gke-icon.png" /> GKE 上で Java アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-eks" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-eks-icon.png" /> Java アプリケーション用の AWS EKS のトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-ec2" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> Java アプリケーション用の Amazon ECS with EC2 のトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-aws-ecs-fargate" >}}<img src="/images/integrations_logos/java-avatar.png" /> <img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Java アプリケーション用の Amazon ECS with Fargate のトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-java-admission-controller" >}}<img src="/images/integrations_logos/java-avatar.png" /> Admission Controller を使用して Java アプリケーションのトレースを有効にする{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-go-host" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-host-icon.png" /> Datadog Agent と同じホストの Go アプリケーションでトレースを有効にする{{< /nextlink >}}
     {{< nextlink href="tracing/guide/tutorial-enable-go-containers" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-container-icon.png" /> Go アプリケーションとコンテナ内の Datadog Agent でトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-ec2" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> EC2 で AWS ECS の Go アプリケーションのトレースを有効にする{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-fargate" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Fargate で AWS ECS の Go アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-ec2" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-ec2-icon.png" /> EC2 で Amazon ECS の Go アプリケーションのトレースを有効にする{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/tutorial-enable-go-aws-ecs-fargate" >}}<img src="/images/integrations_logos/golang-avatar.png" /><img src="/images/tracing/guide/tutorials/tutorial-fargate-icon.png" /> Fargate で Amazon ECS の Go アプリケーションのトレースを有効にする{{< /nextlink >}}
 
 {{< /whatsnext >}}
 <br>
@@ -64,6 +64,7 @@ title: トレースガイド
 <br>
 
 {{< whatsnext desc="トレーシングガイド" >}}
+    {{< nextlink href="/opentelemetry/guide/otel_api_tracing_interoperability/" >}}OpenTelemetry API と Datadog インスツルメンテーショントレースの相互運用性{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}サービスごとに Apdex スコアを構成する{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configuring-primary-operation" >}}サービスのプライマリオペレーション {{< /nextlink >}}
     {{< nextlink href="tracing/guide/ignoring_apm_resources" >}}リソースを無視してヘルスチェックやその他の不要なスパンを破棄する{{< /nextlink >}}
@@ -72,8 +73,10 @@ title: トレースガイド
     {{< nextlink href="tracing/guide/span_and_trace_id_format" >}}スパン ID、トレース ID の有効なフォーマット{{< /nextlink >}}
     {{< nextlink href="tracing/guide/trace-agent-from-source" >}}トレース Agent をソースからインストールする{{< /nextlink >}}
     {{< nextlink href="/developers/community/libraries/#apm-distributed-tracing-client-libraries" >}}トレーシングクライアントライブラリ{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}スコープへのプライマリタグの設定{{< /nextlink >}}
-    {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Datadog APM と AWS X-Ray をいつ使用するかの決定{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/setting_primary_tags_to_scope/" >}}スコープにプライマリタグを設定する{{< /nextlink >}}
+    {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Datadog APM と AWS X-Ray の使用タイミングを決定する{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}C++ による APM の設定{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/leveraging_diversity_sampling/" >}}Datadog トレース保持ポリシーの理解{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/agent_tracer_hostnames" >}}Agent ホストとトレーサーホストの違いを理解する{{< /nextlink >}}
+{{< nextlink href="/tracing/guide/setting_up_apm_with_kubernetes_service/" >}}Kubernetes Service を使用して APM をセットアップする{{< /nextlink >}}
 {{< /whatsnext >}}

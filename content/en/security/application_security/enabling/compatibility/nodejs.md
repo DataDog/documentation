@@ -1,12 +1,12 @@
 ---
-title: Node.js Compatibility Requirements 
+title: Node.js Compatibility Requirements
 kind: documentation
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 50
 ---
 
-## ASM capabilities 
+## ASM capabilities
 
 The following ASM capabilities are supported in the Node.js library, for the specified tracer version:
 
@@ -14,6 +14,7 @@ The following ASM capabilities are supported in the Node.js library, for the spe
 | -------------------------------- | ----------------------------|
 | Threat Detection  | 3.13.1|
 | Threat Protection  | 3.19.0  |
+| Customize response to blocked requests | 4.1.0 |
 | Vulnerability Management for Open Source Software (OSS) |  2.23.0 for NodeJS 12+, or 3.10.0 for NodeJS 14+ |
 | Vulnerability Management for Code-level (beta)  | 2.32.0 for NodeJS 12+, or 3.19.0 for NodeJS 14+ |
 | Automatic user activity event tracking | 2.38.0 for NodeJS 12+, or 3.25.0 for NodeJS 14+, or 4.4.0 for NodeJS 16+ |
@@ -21,17 +22,17 @@ The following ASM capabilities are supported in the Node.js library, for the spe
 The minimum tracer version to get all supported ASM capabilities for Node.js is 3.19.0.
 
 
-**Note**: 
+**Note**:
 - Threat Protection requires enabling [Remote Configuration][2], which is included in the listed minimum tracer version.
 
 ### Supported deployment types
 |Type | Threat Detection support | Vulnerability Management for OSS support |
 | ---           |   ---             |           ----            |
 | Docker        | {{< X >}}         | {{< X >}}                 |
-| Kubernetes    | {{< X >}}         | {{< X >}}                 | 
-| AWS ECS       | {{< X >}}         | {{< X >}}                 |
+| Kubernetes    | {{< X >}}         | {{< X >}}                 |
+| Amazon ECS    | {{< X >}}         | {{< X >}}                 |
 | AWS Fargate   | {{< X >}}         | {{< X >}}                 |
-| AWS Lambda    | {{< X >}}         | beta                      |   
+| AWS Lambda    | {{< X >}}         | beta                      |
 
 ## Language and framework compatibility
 

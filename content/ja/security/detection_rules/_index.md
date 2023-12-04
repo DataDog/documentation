@@ -3,6 +3,7 @@ aliases:
 - /ja/security_monitoring/detection_rules/
 - /ja/cloud_siem/detection_rules/
 - /ja/security_platform/detection_rules/
+- /ja/security/security_monitoring/log_detection_rules/
 further_reading:
 - link: /cloud_siem/default_rules
   tag: Documentation
@@ -30,7 +31,7 @@ title: 検出ルール
 
 - [Cloud Security Management Misconfigurations][4] では、クラウド構成およびインフラストラクチャー構成検出ルールを使用して、クラウド環境の状態をスキャンします。
 
-- [Cloud Security Management Threats][5] を使用して、Datadog Agent はアクティブにシステムのアクティビティを監視し、検出ルールに対して評価を行います。
+- [Cloud Security Management Threats][5] において、Datadog Agent はシステムのアクティビティを積極的に監視し、それを一連の検出ルールと照らし合わせて評価します。
 
 - [Application Security Management][6] (ASM) は、Datadog [APM][7]、[Datadog Agent][8]、検出ルールを活用し、アプリケーション環境における脅威を検出します。
 
@@ -86,7 +87,7 @@ title: 検出ルール
 1. **Permissions** を選択します。
 1. **Restrict Access** をクリックします。
 1. ダイアログボックスが更新され、組織のメンバーはデフォルトで **Viewer** アクセス権を持っていることが表示されます。
-1. ドロップダウンを使用して、セキュリティルールを編集できる 1 つまたは複数のロール、チーム (ベータ版)、またはユーザー (ベータ版) を選択します。
+1. ドロップダウンを使用して、セキュリティルールを編集できるロール、チーム、またはユーザーを 1 つ以上選択します。
 1. **Add** をクリックします。
 1. ダイアログボックスが更新され、選択したロールに **Editor** 権限があることが表示されます。
 1. **Save** をクリックします。
@@ -96,17 +97,17 @@ title: 検出ルール
 1. ルールの右側にある 3 つのドットメニューをクリックします。
 1. **Permissions** を選択します。
 1. **Restore Full Access** をクリックします。
-1. **保存**をクリックします。
+1. **Save** をクリックします。
 
 ## ルール非推奨
 
-すべての検出ルールの定期的な監査を行い、忠実なシグナル品質を維持します。非推奨のルールは、改良されたルールに置き換えられます。
+すべての検出ルールに対して定期的な監査が実施され、高いシグナル品質が維持されます。非推奨となったルールは、改善されたルールに置き換えられます。
 
 ルール非推奨のプロセスは以下の通りです。
 
 1. ルールに非推奨の日付が書かれた警告が表示されています。UI では、警告が以下に表示されます。
     - シグナルサイドパネルの **Rule Details > Playbook** セクション
-    - Findings サイドパネル (CSM Misconfigurations のみ)
+    - Misconfigurations サイドパネル (CSM Misconfigurations のみ)
     - その特定のルールの[ルールエディター](#rule-and-generated-signal-options)
 2. ルールが非推奨になると、ルールが削除されるまでに 15 か月の期間があります。これは、シグナルの保持期間が 15 か月であるためです。この間、UI で[ルールの複製](#rule-and-generated-signal-options)を行うと、ルールを再び有効にすることができます。
 3. 一度削除されたルールは、複製して再度有効にすることはできません。
@@ -117,8 +118,8 @@ title: 検出ルール
 [1]: /ja/security/default_rules/
 [2]: /ja/security/cloud_siem/
 [3]: /ja/security/cloud_siem/log_detection_rules/
-[4]: /ja/security/cspm/
-[5]: /ja/security/cloud_workload_security/
+[4]: /ja/security/misconfigurations/
+[5]: /ja/security/threats/
 [6]: /ja/security/application_security/
 [7]: /ja/tracing/
 [8]: /ja/agent/

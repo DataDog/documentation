@@ -90,7 +90,7 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
 Once the IDs are properly injected and remapped to your logs, you can see the logs correlated to the trace in the trace panel.
 
-{{< img src="tracing/troubleshooting/trace_id_injection.png" alt="A trace page showing the the logs section with correlated logs" style="width:90%;">}}
+{{< img src="tracing/troubleshooting/trace_id_injection.png" alt="A trace page showing the logs section with correlated logs" style="width:90%;">}}
 
 ## Further Reading
 

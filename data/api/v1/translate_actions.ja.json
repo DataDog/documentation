@@ -1007,8 +1007,8 @@
     "summary": "CI Visibility の 1 時間ごとの使用量を取得する"
   },
   "GetUsageCloudSecurityPostureManagement": {
-    "description": "クラウドセキュリティポスチャ管理 (CSPM) の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
-    "summary": "CSPM の 1 時間あたり使用量の取得"
+    "description": "Cloud Security Management (CSM) Pro の 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[製品ファミリー別に毎時使用量を取得する API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
+    "summary": "CSM Pro の 1 時間あたり使用量の取得"
   },
   "GetUsageCWS": {
     "description": "クラウドワークロードセキュリティの 1 時間ごとの使用量を取得します。\n**注:** 全製品の毎時使用量データは、[Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family) で取得できるようになりました。関連する移行ガイドについては、[V1 Hourly Usage API から V2 への移行](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/)を参照してください。",
