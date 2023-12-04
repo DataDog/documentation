@@ -11,9 +11,9 @@ Watchdog pro-actively looks for anomalies on your systems and applications. Each
 
 ## Watchdog Alert details
 
-{{< img src="watchdog/alerts/alerts_overview.png" alt="Screenshot of a Watchdog alert card, showing an elevated error rate on the send-sms endpoint in sms-service" style="width:100%;">}}
-
 An alert overview card contains the sections below:
+
+{{< img src="watchdog/alerts/alerts_overview.png" alt="Screenshot of a Watchdog alert card, showing an elevated error rate on the send-sms endpoint in sms-service" style="width:100%;">}}
 
 1. Status: The anomaly can be **ongoing** or **resolved** or **expired** (an expired story
 3. Timeline: Describes over what time period the anomaly occurs.
@@ -25,6 +25,7 @@ An alert overview card contains the sections below:
 Clicking anywhere on an alert overview card opens the alerts details pane.
 
 In addition to repeating the information in the alert overview card, the **Overview** tab may contain one or more of the following fields:
+
 * **Expected Bounds**: Click the **Show expected bounds** checkbox. The graph changes color to differentiate between expected and anomalous behavior.
 * **Suggested Next Steps**: Describes steps for investigation and triage of the anomalous behavior.
 * **Monitors** tab lists monitors associated with your alert. Each monitor displayed has the metric of the current alert and its associated tags included in its scope.
@@ -77,21 +78,35 @@ A `severe` anomaly is defined as:
 * lasting at least 10 minutes (to avoid transient errors)
 * having a significant increase (to avoid small increases)
 
+**Required data history**
+
+Watchdog requires some data to establish a baseline of expected behaviour. For Log anomalies, the minimum history is 24h. 
+Watchdog starts finding anomalies once the minimum required history is available and then keeps improving as history grows. Best performances are obtained with 6 weeks of history. 
+
 [1]: https://app.datadoghq.com/watchdog
 [2]: /monitors/types/watchdog/
 [3]: /watchdog/insights?tab=logmanagement#explore-insights
 {{% /tab %}}
 {{% tab "APM" %}}
 
-* APM metrics:
-  * Hits (request rate)
+Watchdog scans all services and resources to look for anomalies on the following metrics:
+
   * Error rate
   * Latency
+  * Hits (request rate)
+
+Watchdog filters out barely used endpoints or services to reduce noise and avoid anomalies on little amount of traffic. Additionally, if an anomaly on hit rate is detected but has no impact on latency or error rate, it is then ignored. 
+
+**Required data history**
+
+Watchdog requires some data to establish a baseline of expected behaviour. For metric anomalies, the minimum history is 2 weeks. 
+Watchdog starts finding anomalies once the minimum required history is available and then keeps improving as history grows. Best performances are obtained with 6 weeks of history. 
 
 {{% /tab %}}
 {{% tab "Infrastructure" %}}
 
-* Infrastructure metrics from integrations:
+Infrastructure metrics from integrations:
+
   * [System][1], for the Host-level memory usage (memory leaks) and TCP retransmit rate.
   * [Redis][2]
   * [PostgreSQL][3]
@@ -106,6 +121,11 @@ A `severe` anomaly is defined as:
     * [RDS][10]
     * [ECS][11]
     * [Lambda][12]
+   
+**Required data history**
+
+Watchdog requires some data to establish a baseline of expected behaviour. For metric anomalies, the minimum history is 2 weeks. 
+Watchdog starts finding anomalies once the minimum required history is available and then keeps improving as history grows. Best performances are obtained with 6 weeks of history.
 
 [1]: /integrations/system/
 [2]: /integrations/redisdb/
@@ -123,14 +143,6 @@ A `severe` anomaly is defined as:
 [14]: /containers/kubernetes/installation/?tab=operator
 {{% /tab %}}
 {{< /tabs >}}
- 
-### Required data history
-
-Watchdog requires some data to establish a baseline of expected behaviour. It starts finding anomalies once the minimum required history is available and then keeps improving as history grows. Best performances are obtained with 6 weeks of history. 
-The minimum amount of required data history to establish a baseline of expected behaviour differs based on the source:
-
-* For **Metric** based anomalies: 2 weeks
-* For **Log** based anomalies: 24h
 
 ### Custom Anomaly detection
 
