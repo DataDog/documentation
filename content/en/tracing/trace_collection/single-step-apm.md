@@ -233,19 +233,11 @@ Run the following commands and restart the service to stop injecting the library
 
 1. Set the `admission.datadoghq.com/enabled:` label to `"false"` the pod spec:
    ```yaml
-   apiVersion: apps/v1
-   kind: Deployment
-   metadata:
-     labels:
-       # (...)
    spec:
      template:
        metadata:
          labels:
            admission.datadoghq.com/enabled: "false"
-   spec:
-     containers:
-       - # (...)
    ```
 2. Apply the configuration:
    ```bash
