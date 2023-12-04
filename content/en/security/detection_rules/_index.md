@@ -25,27 +25,16 @@ Detection rules define conditional logic that is applied to all ingested logs an
 
 ## Out-of-the-box detection rules
 
-Datadog provides out-of-the-box (OOTB) [detection rules][1] to flag attacker techniques and potential misconfigurations. When new rules are released, they are automatically imported into your account, your Application Security Management library, and the Agent, depending on your configuration.
+Datadog provides [out-of-the-box detection rules][1] to flag attacker techniques and potential misconfigurations. When new detection rules are released, they are automatically imported into your account, your Application Security Management library, and the Agent, depending on your configuration.
 
-For each monitoring option, there are [default detection rules][1] that work out-of-the-box with integration configuration.
+Out-of-the box rules are available for the following security products:
 
 - [Cloud SIEM][2] uses log detection to analyze ingested logs in real-time. You can also create [custom detection rules][3] to tailor to your environment.
 - [Cloud Security Management Misconfigurations][4] uses cloud configuration and infrastructure configuration detection rules to scan the state of your cloud environment.
 - With [Cloud Security Management Threats][5], the Datadog Agent actively monitors system activity and evaluates it against a set of detection rules.
 - [Application Security Management][6] (ASM) leverages Datadog [APM][7], the [Datadog Agent][8], and detection rules to detect threats in your application environment.
 
-## Create and manage detection rules
-
-The detection rules pages...
-
-The [Detection Rules][9] page lets you search all detection rules by rule type. Quickly enable, disable, edit, delete, and clone rules. To create a custom [detection rule][3], click on the **New Rule** button in the top right corner of the page.
-
-- Cloud SIEM: Log Detection Rules
-- ASM: Custom Detection Rules
-- CSM Misconfigurations: Custom Rules
-- CSM Threats: Managing CSM Threats Detection Rules
-
-#### Filter by facet
+### Search and filter detection rules
 
 Use facets in the left panel to scope a search query by value. For example, if you have several rule types, such as `log detection` or `cloud configuration`, filter by `only` to see rules by rule type.
 
@@ -59,6 +48,17 @@ Use facets in the left panel to scope a search query by value. For example, if y
 {{< img src="security/security_monitoring/detection_rules/rule_type_filter.png" alt="Filtering by rule type, such as a log detection or cloud configuration, in Datadog" style="width:80%;" >}}
 
 You can also filter by facets such as `source` and `severity` to help when investigating and triaging incoming issues. To include all facets within a category in search again, hover your mouse over a value in the panel and click **all**.
+
+## Create detection rules
+
+To create a custom detection rule, click the **New Rule** button in the upper-right corner of the Detection Rules page. You can also [clone an out-of-the-box rule](#clone-a-rule) and use it as a template.
+
+For detailed instructions, see the following articles:
+
+- [Cloud SIEM][3]
+- [ASM][11]
+- [CSM Misconfigurations][12]
+- [CSM Threats][13]
 
 ## Manage detection rules
 
@@ -145,3 +145,6 @@ The rule deprecation process is as follows:
 [8]: /agent/
 [9]: https://app.datadoghq.com/security/configuration/rules
 [10]: /account_management/rbac/
+[11]: /security/application_security/threats/custom_rules/
+[12]: /security/misconfigurations/custom_rules
+[13]: /security/threats/workload_security_rules?tab=host#create-custom-rules
