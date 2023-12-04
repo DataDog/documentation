@@ -25,7 +25,7 @@ further_reading:
 
 ## Overview
 
-Multistep API tests allow you to chain several [HTTP requests][1] or [gRPC requests][19] at once to proactively monitor and ensure that the sophisticated journeys on your key services are available at anytime, and from anywhere. If you want to perform single requests to your services, use [API tests][2].
+Multistep API tests allow you to chain several [HTTP requests][1] or [gRPC requests][20] at once to proactively monitor and ensure that the sophisticated journeys on your key services are available at anytime, and from anywhere. If you want to perform single requests to your services, use [API tests][2].
 
 You can accomplish the following:
 
@@ -92,17 +92,17 @@ The test generates an alert if an endpoint does not answer as expected. Your tes
 
 #### Extract variables from the response
 
-Optionally, extract variables from the response of your HTTP request by parsing its response headers or body. The value of the variable updates each time the HTTP request step runs.
+Optionally, extract variables from the response of your API request by parsing its response headers or body. The value of the variable updates each time the API request step runs.
 
 To start parsing a variable, click **Extract a variable from response content**:
 
 1. Enter a **Variable Name**. Your variable name can only use uppercase letters, numbers, and underscores and must have at least three characters.
 2. Decide whether to extract your variable from the response headers or from the response body.
 
-   * Extract the value from **response header**: use the full response header of your HTTP request as the variable value, or parse it with a [`regex`][9].
-   * Extract the value from **response body**: use the full response body of your HTTP request as the variable value or parse it with a [`regex`][9], a [`JSONPath`][7], or a [`XPath`][8].
+   * Extract the value from **response header**: use the full response header of your API request as the variable value, or parse it with a [`regex`][9].
+   * Extract the value from **response body**: use the full response body of your API request as the variable value or parse it with a [`regex`][9], a [`JSONPath`][7], or a [`XPath`][8].
 
-{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from HTTP requests in Multistep API test" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/ms_extract_variable.png" alt="Extract variables from API requests in Multistep API test" style="width:90%;" >}}
 
 You can extract up to ten variables per test step. Once created, this variable can be used in the following steps of your multistep API test. For more information, see [Use variables](#use-variables).
 
@@ -134,39 +134,19 @@ To display your list of variables, type `{{` in your desired field.
 
 A test is considered `FAILED` if a step does not satisfy one or several assertions or if a step's request prematurely failed. In some cases, the test can indeed fail without being able to test the assertions against the endpoint, these reasons include:
 
-`CONNREFUSED`
-: No connection could be made because the target machine actively refused it.
+- For HTTP steps: [common HTTP step failures][15]
+- For gRPC steps: [common gRPC step failures][16]
 
-`CONNRESET`
-: The connection was abruptly closed by the remote server. Possible causes include the webserver encountering an error or crashing while responding, or loss of connectivity of the webserver.
-
-`DNS`
-: DNS entry not found for the test URL. Possible causes include a misconfigured test URL or a wrong configuration in your DNS entries.
-
-`INVALID_REQUEST` 
-: The configuration of the test is invalid (for example, a typo in the URL).
-
-`SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][15].
-
-`TIMEOUT`
-: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s). 
-  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the request and assertions duration hit the maximum duration (60.5s).
-
-`MALFORMED_RESPONSE` 
-: The remote server responded with a payload that does not comply with HTTP specifications.
 
 ## Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][16] can create, edit, and delete Synthetic multistep API tests. To get create, edit, and delete access to Synthetic multistep API tests, upgrade your user to one of those two [default roles][16].
+By default, only users with the [Datadog Admin and Datadog Standard roles][17] can create, edit, and delete Synthetic multistep API tests. To get create, edit, and delete access to Synthetic multistep API tests, upgrade your user to one of those two [default roles][17].
 
-If you are using the [custom role feature][17], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
+If you are using the [custom role feature][18], add your user to any custom role that includes `synthetics_read` and `synthetics_write` permissions for Synthetic Monitoring.
 
 ### Restrict access
 
-Access restriction is available for customers using [custom roles][18] on their accounts.
+Access restriction is available for customers using [custom roles][19] on their accounts.
 
 You can restrict access to a multistep API test based on the roles in your organization. When creating a multistep API test, choose which roles (in addition to your user) can read and write your test. 
 
@@ -190,8 +170,9 @@ You can restrict access to a multistep API test based on the roles in your organ
 [12]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [13]: /synthetics/guide/synthetic-test-monitors
 [14]: /synthetics/settings/#global-variables
-[15]: /synthetics/api_tests/errors/#ssl-errors
-[16]: /account_management/rbac/
-[17]: /account_management/rbac#custom-roles
-[18]: /account_management/rbac/#create-a-custom-role
-[19]: /synthetics/api_tests/grpc_tests
+[15]: /synthetics/api_tests/http_tests?tab=requestoptions#test-failure
+[16]: /synthetics/api_tests/grpc_tests?tab=unarycall#test-failure
+[17]: /account_management/rbac/
+[18]: /account_management/rbac#custom-roles
+[19]: /account_management/rbac/#create-a-custom-role
+[20]: /synthetics/api_tests/grpc_tests
