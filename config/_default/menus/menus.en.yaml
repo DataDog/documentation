@@ -1328,6 +1328,11 @@ main:
     parent: slos
     identifier: slos_time_slice
     weight: 3
+  - name: Uptime Calculations
+    url: service_management/service_level_objectives/time_slice/uptime_calculations/
+    parent: slos_time_slice
+    identifier: slos_time_slice_uptime_calculations
+    weight: 301
   - name: Error Budget Alerts
     url: service_management/service_level_objectives/error_budget/
     parent: slos
