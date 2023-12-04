@@ -16,9 +16,7 @@ further_reading:
   text: "Check your monitor status"
 ---
 
-{{< callout btn_hidden="true">}}
-The Network Performance monitor is in beta.
-{{< /callout >}}
+<div class="alert alert-warning">The Network Performance monitor is in beta. </div>
 
 ## Overview
 
@@ -48,7 +46,7 @@ For more information, see the [Functions][3] documentation.
 
 ## Metric definitions
 
-The table below lists the different NPM metrics that you can create monitors on. 
+The following tables list the different NPM metrics you can create monitors on. 
 
 ### Volume
 | Metric name    | Definition                 | 
@@ -83,25 +81,6 @@ Configure monitors to trigger if the query value crosses a threshold and customi
 
 ## Notifications
 For detailed instructions on the Notify your team section, see the [Notifications][4] page.
-
-## Recommended monitors
-
-You can start creating monitors on NPM data with the following recommended monitors.
-
-### Throughput monitor
-A throughput monitor alerts you if the throughput between two endpoints specified in the query surpasses a threshold. 
-
-{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
-
-### Percent retransmit
-A percent retransmits monitor alerts you if the percentage of total sent packages resulting in retransmits passes a threshold. 
-
-{{< img src="monitors/monitor_types/network_performance/npm_formulas_functions.png" alt="Example NPM monitor configuration showing percent of retransmits from a client to server" style="width:100%;" >}}
-
-### DNS failures
-DNS failure monitor alerts you if the sum of DNS failures passes a threshold. 
-
-{{< img src="static/images/monitors/monitor_types/network_performance/example_dns_failures.png" alt="Your image description" style="width:100%;" >}}
 
 ## Further Reading
 
