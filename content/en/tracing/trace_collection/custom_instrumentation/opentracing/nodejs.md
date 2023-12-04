@@ -4,6 +4,7 @@ kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/nodejs
 - /tracing/trace_collection/open_standards/nodejs
+- /tracing/trace_collection/opentracing/nodejs/
 description: 'OpenTracing instrumentation for Node.js'
 code_lang: nodejs
 type: multi-code-lang

@@ -4,6 +4,7 @@ kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/ruby
 - /tracing/trace_collection/open_standards/ruby
+- /tracing/trace_collection/opentracing/ruby
 description: 'OpenTracing instrumentation for Ruby'
 code_lang: ruby
 type: multi-code-lang

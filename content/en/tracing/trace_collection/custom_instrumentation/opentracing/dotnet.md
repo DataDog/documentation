@@ -4,6 +4,7 @@ kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/dotnet
 - /tracing/trace_collection/open_standards/dotnet
+- /tracing/trace_collection/opentracing/dotnet/
 code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 70

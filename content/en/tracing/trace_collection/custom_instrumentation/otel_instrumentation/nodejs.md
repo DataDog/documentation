@@ -5,6 +5,8 @@ description: 'Instrument your Node.js application with OpenTelemetry API to send
 code_lang: nodejs
 type: multi-code-lang
 code_lang_weight: 40
+aliases:
+- /tracing/trace_collection/otel_instrumentation/nodejs/
 further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'

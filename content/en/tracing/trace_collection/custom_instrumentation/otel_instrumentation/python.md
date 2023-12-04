@@ -5,6 +5,8 @@ description: 'Instrument your Python application with OpenTelemetry API to send 
 code_lang: python
 type: multi-code-lang
 code_lang_weight: 10
+aliases:
+- /tracing/trace_collection/otel_instrumentation/python/
 further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'

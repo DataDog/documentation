@@ -5,6 +5,8 @@ code_lang: dotnet
 type: multi-code-lang
 code_lang_weight: 80
 description: 'Instrument your .NET application with OpenTelemetry API, to send traces to Datadog.'
+aliases:
+- /tracing/trace_collection/otel_instrumentation/dotnet/
 further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'

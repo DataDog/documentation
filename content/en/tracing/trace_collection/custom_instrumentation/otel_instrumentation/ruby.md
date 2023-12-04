@@ -5,6 +5,8 @@ description: 'Instrument your Ruby application with OpenTelemetry API to send tr
 code_lang: ruby
 type: multi-code-lang
 code_lang_weight: 20
+aliases:
+- /tracing/trace_collection/otel_instrumentation/ruby/
 further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'

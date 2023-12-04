@@ -5,6 +5,8 @@ description: 'Instrument your Go application with OpenTelemetry API to send trac
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 30
+aliases:
+- /tracing/trace_collection/otel_instrumentation/go/
 further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'

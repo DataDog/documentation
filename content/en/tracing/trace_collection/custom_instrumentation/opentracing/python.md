@@ -4,6 +4,7 @@ kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/python
 - /tracing/trace_collection/open_standards/python
+- /tracing/trace_collection/opentracing/python/
 description: 'OpenTracing instrumentation for Python'
 code_lang: python
 type: multi-code-lang

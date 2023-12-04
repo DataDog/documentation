@@ -4,6 +4,7 @@ kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/go
 - /tracing/trace_collection/open_standards/go
+- /tracing/trace_collection/opentracing/go/
 description: 'OpenTracing Instrumentation for Go'
 code_lang: go
 type: multi-code-lang

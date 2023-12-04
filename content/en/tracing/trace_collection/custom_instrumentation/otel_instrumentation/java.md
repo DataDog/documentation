@@ -5,6 +5,8 @@ description: 'Instrument your Java application with OpenTelemetry API to send tr
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
+aliases:
+- /tracing/trace_collection/otel_instrumentation/java/
 further_reading:
     - link: 'tracing/glossary/'
       tag: 'Documentation'

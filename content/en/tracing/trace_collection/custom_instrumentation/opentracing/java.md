@@ -4,6 +4,7 @@ kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/java
 - /tracing/trace_collection/open_standards/java
+- /tracing/trace_collection/opentracing/go/
 description: 'OpenTracing instrumentation for Java'
 code_lang: java
 type: multi-code-lang

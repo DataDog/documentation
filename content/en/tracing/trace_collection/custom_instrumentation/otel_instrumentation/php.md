@@ -5,6 +5,8 @@ description: 'Instrument your PHP application with OpenTelemetry API to send tra
 code_lang: php
 type: multi-code-lang
 code_lang_weight: 50
+aliases:
+- /tracing/trace_collection/otel_instrumentation/php/
 further_reading:
   - link: 'tracing/glossary/'
     tag: 'Documentation'

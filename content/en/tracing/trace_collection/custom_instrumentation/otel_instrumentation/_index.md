@@ -4,6 +4,7 @@ kind: documentation
 type: multi-code-lang
 description: 'Sending spans from custom instrumentation through the OpenTelemetry API to the Datadog tracing libraries.'
 aliases:
+- /tracing/trace_collection/otel_instrumentation/
 further_reading:
     - link: '/opentelemetry/'
       tag: 'Documentation'
