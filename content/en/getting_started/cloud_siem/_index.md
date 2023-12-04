@@ -62,7 +62,7 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 2. Enable [Cloud SIEM][8].
 3. Select and configure [Content Packs][9], which provide out-of-the-box content for critical security log sources.
 4. Select and configure [additional log sources][10] you want Cloud SIEM to analyze.
-5. Click **Activate**. A Cloud SIEM log index is created.
+5. Click **Activate**. A custom Cloud SIEM log index (`cloud-siem-xxxx`) is created.
 6. Navigate to the [Logs Indexes configuration][11] page.
 7. Move the Cloud SIEM index to the top of the index list. Cloud SIEM analyzes all logs going into the Cloud SIEM index. You can configure the index to filter for specific log events. See the [Log Index documentation][12] for more information.
 
