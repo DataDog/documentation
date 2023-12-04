@@ -23,6 +23,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/pcf-monitoring-with-datadog/"
   tag: "Blog"
   text: "Pivotal Platform Monitoring with Datadog"
+- link: "/integrations/guide/application-monitoring-vmware-tanzu/"
+  tag: "documentation"
+  text: "Datadog Application Monitoring for VMware Tanzu"
+- link: "/integrations/guide/cluster-monitoring-vmware-tanzu/"
+  tag: "documentation"
+  text: "Datadog Cluster Monitoring for VMware Tanzu"
 
 ---
 
@@ -151,7 +157,7 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 [1]: https://tanzu.vmware.com/pivotal#:~:text=Pivotal%20Cloud%20Foundry%20%28PCF%29%20is%20now%20VMware%20Tanzu%20Application%20Service
 [2]: /integrations/guide/pivotal-cloud-foundry-manual-setup
 [3]: /integrations/faq/pivotal_architecture
-[4]: https://docs.pivotal.io/partners/datadog-application-monitoring/installing.html
+[4]: /integrations/guide/application-monitoring-vmware-tanzu/
 [5]: /integrations/guide/pivotal-cloud-foundry-manual-setup#monitor-your-applications
 [6]: /tracing/setup/
 [7]: /profiler/enabling/
@@ -160,8 +166,8 @@ Your specific list of metrics may vary based on the PCF version and the deployme
 [10]: /developers/dogstatsd/
 [11]: /metrics/custom_metrics/dogstatsd_metrics_submission/
 [12]: /libraries/
-[13]: https://docs.pivotal.io/partners/datadog/installing.html
-[14]: /integrations/guide/pivotal-cloud-foundry-manual-setup#monitor-your-pivotal-cloud-foundry-cluster
+[13]: /integrations/guide/cluster-monitoring-vmware-tanzu/#installation
+[14]: /integrations/guide/cloud-foundry-setup/#monitor-your-cloud-foundry-cluster
 [15]: /integrations/system/#metrics
 [16]: /integrations/network/#metrics
 [17]: /integrations/disk/#metrics
