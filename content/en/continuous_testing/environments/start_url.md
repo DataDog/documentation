@@ -11,13 +11,49 @@ further_reading:
   text: "Test internal applications with Datadog's testing tunnel and private locations"
 ---
 
+<!-- TODO: rename the file -->
+
 ## Overview
 
-This is how we do a resource URL substitution.
+<!-- This is how we do a resource URL substitution.
 
 - Information about proxies
 - Information about firewalls
-- Information about VPNs
+- Information about VPNs -->
+
+## Overriding the Start URL
+
+## Regex substitution
+
+### Start URL Substitution Regex
+
+only for the entrypoint
+
+### Resource URL Substitution Regex
+
+for most advanced usage
+
+{{< tabs >}}
+
+{{% tab "Sed-based syntax" %}}
+```json
+[
+  "s/hello-world.com/hell0-w0rld.com/",
+  "s/(my-cdn.com/)prod//$1staging//"
+]
+```
+{{% /tab %}}
+
+{{% tab "Pipe-based syntax" %}}
+```json
+[
+  "hello-world.com|hell0-w0rld.com",
+  "(my-cdn.com/)prod/|$1staging/"
+]
+```
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Further reading
 
@@ -25,5 +61,5 @@ This is how we do a resource URL substitution.
 
 [1]: /synthetics/private_locations
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: https://github.com/DataDog/datadog-ci/releases/tag/v0.11.0
+<!-- [3]: https://github.com/DataDog/datadog-ci/releases/tag/v0.11.0 -->
 [4]: /continuous_testing/cicd_integrations#use-the-cli
