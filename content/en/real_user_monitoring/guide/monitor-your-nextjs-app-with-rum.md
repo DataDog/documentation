@@ -46,7 +46,7 @@ Follow the steps below to set up Datadog RUM browser monitoring.
       applicationId: "<YOUR_APPLICATION_ID>",
       clientToken: "<CLIENT_TOKEN>",
       site: "datadoghq.com",
-      service: "next-app-router-rum-npm",
+      service: "<SERVICE_NAME>",
       env: "<ENV_NAME>",
       // Specify a version number to identify the deployed version of your application in Datadog
       // version: '1.0.0',
