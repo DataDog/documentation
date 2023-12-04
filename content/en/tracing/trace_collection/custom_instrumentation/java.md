@@ -187,7 +187,7 @@ Using the `dd.trace.methods` system property, you can get visibility into unsupp
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=prod -Ddd.service.name=db-app -Ddd.trace.methods=store.db.SessionManager[saveSession] -jar path/to/application.jar
 ```
 
-For tracing several functions within the same class, you should use the following syntax:
+To trace several functions within the same class, use the following syntax:
 
 ```text
 java -javaagent:/path/to/dd-java-agent.jar -Ddd.env=prod -Ddd.service.name=db-app -Ddd.trace.methods=store.db.SessionManager[saveSession,loadSession] -jar path/to/application.jar
