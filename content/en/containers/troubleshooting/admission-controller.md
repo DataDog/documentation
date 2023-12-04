@@ -87,7 +87,7 @@ Admission Controller
 ...
 ```
 
-The above output is relative to the Cluster Agent deployed in the `default` namespace. The Service and Secret should match your corresponding namespace.
+The above output is relative to the Cluster Agent deployed in the `default` namespace. The Service and Secret should match your corresponding namespace used.
 
 ### Admission controller logs
 
@@ -123,24 +123,207 @@ If you are not seeing that the `datadog-webhook` has been reconciled successfull
 
 The Cluster Agent will print debug logs when it is working with a given pod. If you are seeing errors with the injection for a given pod reach out to Datadog support with your Datadog configuration as well as your pod configuration. 
 
-If you are not seeing the injection attempts for *any pod* first double check your `mutateUnlabelled` settings and that your pod labels match up with the expected value. If these match up the issue is more likely with the networking between the Control Plane, Webhook, and Service.
+If you are not seeing the injection attempts for *any pod* first double check your `mutateUnlabelled` settings and that your pod labels match up with the expected value. If these match up the issue is more likely with the networking between the control plane, webhook, and service.
 
 ## Networking
 
+When a pod is creating the Kubernetes cluster will send a request from the control plane, to the datadog-webhook, through the service, and finally to the Cluster Agent pod. This request requires inbound connectivity from the control plane to the node that the Cluster Agent is on, over its Admission Controller port (`8000`). Once resolved the Cluster Agent will mutate your pod to configure the connection for the Datadog tracer.
+
+Depending on your Kubernetes distribution this may have some additional requirements for your security rules and Admission Controller settings.
+
 ### Network policies
+
+Kubernetes has the optional feature of [Network Policies][4]. These can take a few different forms between using the out-of-box resource (`NetworkPolicy`) or custom ones like [Cilium][5] (`CiliumNetworkPolicy`). These help control different Ingress (Inbound) and Egress (Outbound) flows of traffic to your pods.
+
+If you are using these features we recommend to create the corresponding policies for the Cluster Agent to ensure the connectivity to the pod over this port. This can be configured with the configurations below. When setting the below option you can also specify a flavor. The default is `kubernetes` and corresponds to the creation of `NetworkPolicy` resources, alternatively set the flavor to `cilium` to create the corresponding `CiliumNetworkPolicy` for Cilium based environments.
+
+{{< tabs >}}
+{{% tab "Operator" %}}
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    #(...)
+    networkPolicy:
+      create: true
+      flavor: kubernetes
+```
+{{% /tab %}}
+{{% tab "Helm" %}}
+```yaml
+datadog:
+  #(...)
+  networkPolicy:
+    create: true
+    flavor: kubernetes
+```
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Kubernetes distributions
 
 #### EKS
+In EKS clusters the Cluster Agent pod can be deployed on any of your Linux based nodes by default. These nodes and their EC2 instances need to have a [Security Group which has an Inbound Rule][6] that allows access over the `TCP` protocol, port `8000`, and the "Source" matching *either* the Cluster Security Group or one of the Additional Security Groups of the EKS cluster. These security groups can be found on the EKS cluster's "Networking" page. This gives access for the Control Plane to access the node and the downstream Cluster Agent over its port `8000`.
+
+You can use a "Port Range" as long as this covers the `8000` port and required "Source" Security Group. If you have multiple Managed Node Groups with distinct Security Groups in each, ensure this inbound connectivity is added to each.
+
+Within EKS you can additionally turn on the [EKS Control Plane Logging for the “API server”][7].
+
+Once this is enabled the delete one of your pods to re-trigger a request through the Admission Controller. If the request fail from the networking perspective you should see logs in your AWS CloudWatch log group and log stream(s) for this cluster like:
+
+```
+W0908 <TIMESTAMP> 10 dispatcher.go:202] Failed calling webhook, failing open datadog.webhook.auto.instrumentation: failed calling webhook "datadog.webhook.auto.instrumentation": failed to call webhook: Post "https://datadog-cluster-agent-admission-controller.default.svc:443/injectlib?timeout=10s": context deadline exceeded
+E0908 <TIMESTAMP> 10 dispatcher.go:206] failed calling webhook "datadog.webhook.auto.instrumentation": failed to call webhook: Post "https://datadog-cluster-agent-admission-controller.default.svc:443/injectlib?timeout=10s": context deadline exceeded
+```
+
+These failures were relative to a Cluster Agent deployed in the `default` namespace, the DNS name would adjust relative to your namespace used.
+
+You would see failures for the other the other Admission Controller webhooks such as as well such as `datadog.webhook.tags` and `datadodg.webhook.config`. **Note:** EKS often generates two log streams within the CloudWatch log group for the cluster. Be sure to check both for these types of logs.
 
 #### AKS
+When creating the `datadog-webhook` for the `MutatingWebhookConfiguration` AKS will adjust the [format slightly to ensure you avoid the control-plane pods][8]. Provide the Cluster Agent the configuration below to ensure it can create and reconcile this format accordingly.
+
+{{< tabs >}}
+{{% tab "Operator" %}}
+
+```yaml
+kind: DatadogAgent
+apiVersion: datadoghq.com/v2alpha1
+metadata:
+  name: datadog
+spec:
+  #(...)
+  override:
+    clusterAgent:
+      containers:
+        cluster-agent:
+          env:
+            - name: DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS
+              value: "true"
+```
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+```yaml
+datadog:
+  #(...)
+
+providers:
+  aks:
+    enabled: true
+```
+
+The `providers.aks.enabled` option sets the necessary environment variable `DD_ADMISSION_CONTROLLER_ADD_AKS_SELECTORS="true"` for you.
+{{% /tab %}}
+{{< /tabs >}}
 
 #### GKE
-
-#### OpenShift
+If you are using a [GKE *Private* Cluster this restricts the flow of data][9] to the pod by default. You will need to add a firewal rule to allow the inbound access from the control plane to this port. By default, the network for the cluster should have a firewall rule named `gke-<CLUSTER_NAME>-master`. This rule’s source filters should match the cluster’s "Control plane address range" found in the "Networking" section. Edit this firewall rule to allow ingress to the `TCP` protocol and port `8000`.
 
 #### Rancher
+
+There can be issues with Rancher depending on the underlying environment used. You can consult the [Rancher documentation][10] for a similar issue with the Rancher-Webhook (another Mutating Admission Controller) within GKE Private Clusters or EKS Clusters using the Calico CNI.
+
+In GKE Private clusters you can consult the [GKE steps above][#GKE] to add the corresponding firewall rule.
+
+In EKS clusters you can similarly deploy the Cluster Agent pod with the `hostNetwork: true` setting to allow this connectivity.
+
+{{< tabs >}}
+{{% tab "Operator" %}}
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  #(...)
+  override:
+    clusterAgent:
+      hostNetwork: true
+```
+{{% /tab %}}
+{{% tab "Helm" %}}
+```yaml
+datadog:
+  #(...)
+
+clusterAgent:
+  useHostNetwork: true
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+## Application pods blocked
+The Helm and Operator setups by default will match Admission Controller's injection config mode (`socket`, `hostip`, `service`) relative to the APM receivers enabled. In other words if you have the (UDS) socket mode enabled in your Agent and the Host Port disabled, the Admission Controller should use the `socket` mode. Preferring `socket` over `hostip`. The default APM receiver in the Agent is the `socket` mode, so by default the default Admission Controller mode is also `socket`.
+
+This injection mode may need to be tailored depending on your environment.
+
+### GKE Autopilot
+GKE Autopilot restricts the use of any `volumes` with a `hostPath`. So if the Admission Controller is injecting the (UDS) `socket` the pods will be blocked from scheduling by the GKE Warden.
+
+This setup is typically blocked when setting your Helm configuration in to GKE Autopilot mode (`providers.gke.autpilot=true`). However, be sure you are not explicitly attempting to override the configuration to use the `socket` mode when in GKE Autopilot. Instead use the `hostip` mode (the default) or `service` mode.
+
+### OpenShift
+In OpenShift there are `SecurityContextConstraints` (SCC) that are required to deploy pods with extra permissions, such as a `volume` using a `hostPath`. As we deploy our Datadog components we deploy SCCs to allow this activity specific to the Datadog pods, however we do not create SCCs for other pods. This can cause issues if the `socket` mode is used, as it will inject a `volume` with a `hostPath` into these other pods, which will make them forbidden from being deployed as they are unable to validate against any security context constraint.
+
+With this in mind in OpenShift you can use either:
+
+#### Port option
+The port option enables the `hostPort` in your Agent pod and injects the `hostip` configuration into your appliction pods. This is a "safe" configuration and should not be forbidden within your security contexts.
+
+{{< tabs >}}
+{{% tab "Operator" %}}
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  features:
+    apm:
+      enabled: true
+      hostPortConfig:
+        enabled: true
+      unixDomainSocketConfig:
+        enabled: false
+```
+{{% /tab %}}
+{{% tab "Helm" %}}
+```yaml
+datadog:
+  apm:
+    portEnabled: true
+    socketEnabled: false
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Socket option
+If you would like to use the (UDS) `socket` option for connectivity, you will need to [create a custom SCC][11] for your application pods and the Service Accounts that they are using. This SCC needs to allow the `volumes` of the type `hostPath`. For example:
+
+```yaml
+kind: SecurityContextConstraints
+apiVersion: security.openshift.io/v1
+metadata:
+  name: <NAME>
+users:
+- system:serviceaccount:<NAMESPACE>:<SERVICE_ACCOUNT>
+priority: <PRIORITY>
+volumes:
+- hostPath
+```
 
 [1]: /containers/cluster_agent/admission_controller
 [2]: /tracing/trace_collection/library_injection_local/?tab=kubernetes
 [3]: /agent/troubleshooting/debug_mode/
+[4]: https://kubernetes.io/docs/concepts/services-networking/network-policies/#networkpolicy-resource
+[5]: https://docs.cilium.io/en/latest/security/policy/language/
+[6]: https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html#security-group-rule-components
+[7]: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
+[8]: https://docs.microsoft.com/en-us/azure/aks/faq#can-i-use-admission-controller-webhooks-on-aks
+[9]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules
+[10]: https://ranchermanager.docs.rancher.com/reference-guides/rancher-webhook#common-issues
+[11]: https://docs.openshift.com/container-platform/4.14/rest_api/security_apis/securitycontextconstraints-security-openshift-io-v1.html
