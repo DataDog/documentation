@@ -28,6 +28,8 @@ To create an NPM monitor in Datadog, use the main navigation: **Monitors** --> *
 
 ## Define the search query
 
+{{< img src="monitors/monitor_types/network_performance/example_dns_failures.png" alt="Example configuration with auto-grouped  client and server, hidden N/A values, measures the sum of DNS failures metric with limit of 100" style="width:100%;" >}}
+
 1. Construct a search query using the same logic as the [NPM analytics][2] search bar. 
 1. Select the tags you want to group your client and server by.
 1. Choose if you want to show or hide N/A traffic.
