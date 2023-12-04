@@ -808,8 +808,9 @@ components:
           example: key:value,filter:example
           type: string
         cspm_enabled:
-          description: Enable Cloud Security Management Misconfigurations for your
-            organization.
+          description: "When enabled, Datadog\u2019s Cloud Security Management product
+            will scan resource configurations monitored by this app registration.\nNote:
+            This requires resource_collection_enabled to be set to true."
           example: true
           type: boolean
         custom_metrics_enabled:
@@ -840,6 +841,12 @@ components:
           description: Your New Azure Active Directory ID.
           example: new1c44-1234-5678-9101-cc00736ftest
           type: string
+        resource_collection_enabled:
+          description: When enabled, Datadog collects metadata and configuration info
+            from cloud resources (compute instances, databases, load balancers, etc.)
+            monitored by this app registration.
+          example: true
+          type: boolean
         tenant_name:
           description: Your Azure Active Directory ID.
           example: testc44-1234-5678-9101-cc00736ftest
