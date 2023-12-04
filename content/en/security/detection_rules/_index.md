@@ -34,9 +34,11 @@ Out-of-the box rules are available for the following security products:
 - With [Cloud Security Management Threats][5], the Datadog Agent actively monitors system activity and evaluates it against a set of detection rules.
 - [Application Security Management][6] (ASM) leverages Datadog [APM][7], the [Datadog Agent][8], and detection rules to detect threats in your application environment.
 
-### Search and filter detection rules
+To view the out-of-the-box detection rules in Datadog, navigate to the **Security** > **Configuration** page. Rules are listed by product.
 
-Use facets in the left panel to scope a search query by value. For example, if you have several rule types, such as `log detection` or `cloud configuration`, filter by `only` to see rules by rule type.
+To search and filter the rules, use the search box. You can also use the facets to scope a search query by value. For example, if you have several rule types, such as `log detection` or `cloud configuration`, filter by `only` to see rules by rule type.
+
+You can also filter by facets such as `source` and `severity` to help when investigating and triaging incoming issues. To include all facets within a category in search again, hover your mouse over a value in the panel and click **all**.
 
 | Product               | Rule Types                                        |
 |-----------------------|---------------------------------------------------|
@@ -44,10 +46,7 @@ Use facets in the left panel to scope a search query by value. For example, if y
 | Cloud SIEM            | Log Detection, Signal Correlation                 |
 | CSM Misconfigurations | Infrastructure Configuration, Cloud Configuration |
 | CSM Threats           | Workload Security                                 |
-
-{{< img src="security/security_monitoring/detection_rules/rule_type_filter.png" alt="Filtering by rule type, such as a log detection or cloud configuration, in Datadog" style="width:80%;" >}}
-
-You can also filter by facets such as `source` and `severity` to help when investigating and triaging incoming issues. To include all facets within a category in search again, hover your mouse over a value in the panel and click **all**.
+| CSM Identity Risks    | Cloud Configuration                               |
 
 ## Create detection rules
 
