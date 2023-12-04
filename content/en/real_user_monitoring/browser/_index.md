@@ -1818,7 +1818,7 @@ URL pointing to the Datadog Browser SDK Worker JavaScript file. The URL can be r
 : Optional<br/>
 **Type**: Boolean<br/>
 **Default**: `false`<br/>
-Compress requests sent to the Datadog intake to reduce bandwidth usage when sending large amount of data. The compression is done in a Worker thread, see [Content Security Policy guidelines][22] for more information.
+Compress requests sent to the Datadog intake to reduce bandwidth usage when sending large amounts of data. The compression is done in a Worker thread. See [Content Security Policy guidelines][22] for more information.
 
 `storeContextsAcrossPages`
 : Optional<br/>
