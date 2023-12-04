@@ -229,7 +229,7 @@ instances:
    dbm: true
    connection_string: "TrustServerCertificate=no;Encrypt=yes;"
    managed_identity:
-     client_id: "CLIENT_ID"
+     client_id: "<CLIENT_ID>"
    azure:
      deployment_type: managed_instance
      fully_qualified_domain_name: example.cfcc2366ab90.database.windows.net
