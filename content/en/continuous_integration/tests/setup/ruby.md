@@ -269,7 +269,7 @@ All other [Datadog Tracer configuration][6] options can also be used.
 It can be useful to have rich tracing information about your tests that includes time spent performing database operations
 or other external calls like here:
 
-![Test trace with redis instrumented](./docs/screenshots/test-trace-with-redis.png)
+![Test trace with redis instrumented](/images/ci/ci-ruby-test-trace-with-redis.png)
 
 In order to achieve this you can configure additional instrumentations in your configure block:
 
