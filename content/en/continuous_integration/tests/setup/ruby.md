@@ -68,7 +68,7 @@ To install the Ruby tracer:
 
 1. Add the `ddtrace` gem to your `Gemfile`:
 
-    {{< code-block lang="ruby" filename="Gemfile" >}}
+{{< code-block lang="ruby" filename="Gemfile" >}}
 source '<https://rubygems.org>'
 gem 'ddtrace', "~> 1.0"
 {{< /code-block >}}
@@ -264,6 +264,36 @@ The following environment variable can be used to configure the location of the 
 
 All other [Datadog Tracer configuration][6] options can also be used.
 
+## Using additional instrumentations
+
+It can be useful to have rich tracing information about your tests that includes time spent performing database operations
+or other external calls like here:
+
+![Test trace with redis instrumented](./docs/screenshots/test-trace-with-redis.png)
+
+In order to achieve this you can configure additional instrumentations in your configure block:
+
+```ruby
+if ENV["DD_ENV"] == "ci"
+  Datadog.configure do |c|
+    #  ... ci configs and instrumentation here ...
+    c.tracing.instrument :redis
+    c.tracing.instrument :pg
+    # ... any other instrumentations supported by ddtrace gem ...
+  end
+end
+```
+
+...or enable auto instrumentation in your test_helper/spec_helper:
+
+```ruby
+require "ddtrace/auto_instrument" if ENV["DD_ENV"] == "ci"
+```
+
+Note: in CI mode these traces are going to be submitted to CI Visibility, they will **not** show up in Datadog APM.
+
+For the full list of available instrumentations see [ddtrace documentation][8]
+
 ## Collecting Git metadata
 
 {{% ci-git-metadata %}}
@@ -276,3 +306,4 @@ All other [Datadog Tracer configuration][6] options can also be used.
 [5]: /tracing/trace_collection/custom_instrumentation/ruby?tab=locally#adding-tags
 [6]: /tracing/trace_collection/library_config/ruby/?tab=containers#configuration
 [7]: /continuous_integration/guides/add_custom_metrics/?tab=ruby
+[8]: /tracing/trace_collection/dd_libraries/ruby/#integration-instrumentation
