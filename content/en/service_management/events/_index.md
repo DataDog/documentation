@@ -22,7 +22,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Event Management is not supported for this site.</div>
+<div class="alert alert-warning">Event Management beta is not supported for this site.</div>
 {{< /site-region >}}
 
 {{< callout url="https://app.datadoghq.com/event/configuration/quick-start" btn_hidden="false" header="Join the Beta!">}}
