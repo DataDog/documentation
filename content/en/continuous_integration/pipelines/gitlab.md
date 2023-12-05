@@ -196,6 +196,7 @@ view. In the drawer, a new tab named **Infrastructure** appears which contains t
 
 <div class="alert alert-info"><strong>Note</strong>: Infrastructure metrics are not supported with autoscaler GitLab runner executors.</div>
 
+
 ### View error messages for pipeline failures
 
 Error messages are supported for GitLab versions 15.2.0 and above.
@@ -247,18 +248,42 @@ See the table below for the message and domain correlated with each error type. 
 The following GitLab versions support collecting job logs:
 
 * GitLab.com (SaaS)
-* GitLab >= 14.8 (self-hosted) only if you are using [object storage to store job logs][7]
-
-To enable collection of job logs:
-
-1. Enable the `datadog_integration_logs_collection` [feature flag][8] in your GitLab self-hosted or GitLab.com account. This allows you to see the **Enable job logs collection** checkbox on the [Pipeline Setup page][17].
-2. Click **Enable job logs collection** and click **Save changes**.
-
-Job logs are collected in [Log Management][9] and are automatically correlated with the GitLab pipeline in CI Visibility. Log files larger than one GiB are truncated.
+* GitLab >= 15.3 (self-hosted) only if you are using [object storage to store job logs][7]
+* GitLab >= 14.8 (self-hosted) by enabling the `datadog_integration_logs_collection` feature flag
 
 <div class="alert alert-info"><strong>Note</strong>: Logs are billed separately from CI Visibility.</div>
 
-For more information about processing job logs collected from the GitLab integration, see the [Processors documentation][18].
+Job logs are collected in [Log Management][9] and are automatically correlated with the GitLab pipeline in CI Visibility. Log files larger than one GiB are truncated.
+
+For more information about processing job logs collected from the GitLab integration, see the [Processors documentation][17].
+
+To enable collection of job logs:
+
+{{< tabs >}}
+{{% tab "GitLab.com" %}}
+1. Click **Enable job logs collection** checkbox in the GitLab integration **Settings > Integrations > Datadog**.
+2. Click **Save changes**.
+{{% /tab %}}
+
+{{% tab "GitLab &gt;&equals; 15.3" %}}
+<div class="alert alert-info"><strong>Note</strong>: Datadog downloads log files directly from your GitLab logs [object storage][1] with temporary pre-signed URLs.
+The storage must not have network restrictions such as IP range whitelist.</div>
+
+1. Click **Enable job logs collection** checkbox in the GitLab integration **Settings > Integrations > Datadog**.
+2. Click **Save changes**.
+
+[1]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
+{{% /tab %}}
+
+{{% tab "GitLab &gt;&equals; 14.8" %}}
+1. Enable the `datadog_integration_logs_collection` [feature flag][1] in your GitLab. This allows you to see the **Enable job logs collection** checkbox in the GitLab integration **Settings > Integrations > Datadog**.
+2. Click **Enable job logs collection**.
+3. Click **Save changes**.
+
+[1]: https://docs.gitlab.com/ee/administration/feature_flags.html
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Further reading
 
@@ -280,5 +305,4 @@ For more information about processing job logs collected from the GitLab integra
 [14]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
 [15]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
 [16]: /account_management/teams/
-[17]: https://app.datadoghq.com/ci/setup/pipeline?provider=gitlab
-[18]: /logs/log_configuration/processors/
+[17]: /logs/log_configuration/processors/
