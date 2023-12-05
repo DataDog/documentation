@@ -15167,10 +15167,12 @@ components:
     SecurityMonitoringRuleTypeCreate:
       description: The rule type.
       enum:
+      - application_security
       - log_detection
       - workload_security
       type: string
       x-enum-varnames:
+      - APPLICATION_SECURITY
       - LOG_DETECTION
       - WORKLOAD_SECURITY
     SecurityMonitoringRuleTypeRead:
