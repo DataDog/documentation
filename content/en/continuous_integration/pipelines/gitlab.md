@@ -100,9 +100,9 @@ Then, configure the integration on a [project][3] by going to **Settings > Integ
 
 {{% tab "GitLab &lt; 13.7" %}}
 
-For versions older than when the native Datadog integration, you can use [webhooks][1] to send pipeline data to Datadog.
+For older versions of GitLab, you can use [webhooks][1] to send pipeline data to Datadog.
 
-<div class="alert alert-info"><strong>Note</strong>: Support directly with webhooks is not actively under development. Unexpected issues could happen. Updating the GitLab version is recommended instead.</div>
+<div class="alert alert-info"><strong>Note</strong>: Direct support with webhooks is not under development. Unexpected issues could happen. Datadog recommends that you update GitLab instead.</div>
 
 Go to **Settings > Webhooks** in your repository (or GitLab instance settings), and add a new webhook:
 
@@ -261,22 +261,21 @@ To enable collection of job logs:
 
 {{< tabs >}}
 {{% tab "GitLab.com" %}}
-1. Click **Enable job logs collection** checkbox in the GitLab integration **Settings > Integrations > Datadog**.
+1. Click the **Enable job logs collection** checkbox in the GitLab integration **Settings > Integrations > Datadog**.
 2. Click **Save changes**.
 {{% /tab %}}
 
 {{% tab "GitLab &gt;&equals; 15.3" %}}
-<div class="alert alert-info"><strong>Note</strong>: Datadog downloads log files directly from your GitLab logs [object storage][1] with temporary pre-signed URLs.
-The storage must not have network restrictions such as IP range whitelist.</div>
+<div class="alert alert-info"><strong>Note</strong>: Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
+The storage must not have network restrictions, such as an IP range allowlist.</div>
 
 1. Click **Enable job logs collection** checkbox in the GitLab integration **Settings > Integrations > Datadog**.
 2. Click **Save changes**.
 
-[1]: https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage
 {{% /tab %}}
 
 {{% tab "GitLab &gt;&equals; 14.8" %}}
-1. Enable the `datadog_integration_logs_collection` [feature flag][1] in your GitLab. This allows you to see the **Enable job logs collection** checkbox in the GitLab integration **Settings > Integrations > Datadog**.
+1. Enable the `datadog_integration_logs_collection` [feature flag][1] in your GitLab. This allows you to see the **Enable job logs collection** checkbox in the GitLab integration under **Settings > Integrations > Datadog**.
 2. Click **Enable job logs collection**.
 3. Click **Save changes**.
 
