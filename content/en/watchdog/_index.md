@@ -8,12 +8,12 @@ further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Watchdog"
     tag: "Release Notes"
     text: "Check out the latest Datadog Watchdog releases! (App login required)."
+  - link: "https://www.datadoghq.com/blog/datadog-bits-generative-ai/"
+    tag: "Blog"
+    text: "Introducing Bits AI, your new DevOps copilot"
   - link: "/logs/"
     tag: "Documentation"
     text: "Collect your logs"
-  - link: "/infrastructure/process/"
-    tag: "Documentation"
-    text: "Collect your processes"
   - link: "/tracing/"
     tag: "Documentation"
     text: "Collect your traces"
@@ -29,68 +29,45 @@ cascade:
     algolia:
         rank: 70
 ---
-
-{{< img src="watchdog/watchdog.png" alt="The Watchdog Alerts page with one ongoing log anomaly alert for error logs, one resolved log anomaly alert for error logs, and one resolved error rate alert resolved through root cause analysis" >}}
-
 ## Overview
 
-Watchdog is an algorithmic feature for APM performance, infrastructure metrics, and logs that automatically detects potential application and infrastructure issues. It leverages the same seasonal algorithms that power anomalies and dashboards. Watchdog observes trends and patterns in:
+Watchdog is Datadog’s AI engine, providing you with automated alerts, insights, and root cause analyses that draw from observability data across the entire Datadog platform. Watchdog continuously monitors your infrastructure and surfaces the signals that matter most, helping you quickly detect, troubleshoot, and resolve issues. Plus, all Watchdog features come built in—no setup required
 
-* APM metrics:
-  * Hits (request rate)
-  * Error rate
-  * Latency
+{{< youtube url="https://www.youtube.com/watch?v=UMNXdrI0J8A" >}}
 
-* Logs
-  * New error logs
-  * Increases in existing error logs
+### Proactive alerts
 
-* Infrastructure metrics from integrations:
-  * [System][1], for the Host-level memory usage (memory leaks) and TCP retransmit rate.
-  * [Redis][2]
-  * [PostgreSQL][3]
-  * [NGINX][4]
-  * [Amazon Web Services][5], for the [S3][6], [ELB/ALB/NLB][7], [CloudFront][8], and [DynamoDB][9] Amazon services.
-  * [Alerting][10]
+Watchdog proactively computes a baseline of expected behaviour for your systems, applications, and deployments to then detect anomalous behaviours:
 
-Watchdog looks for irregularities in metrics, like a sudden spike in the hit rate. For each irregularity, the [Watchdog page][11] displays a Watchdog alert. Each alert includes a graph of the detected metric irregularity and gives more information about the relevant time frame and endpoint or endpoints. Watchdog automatically monitors data sent by the Datadog Agent or by integrations.
+* [Watchdog alerts][2]
+* [Faulty deployments][3]
+* Customise Watchdog algorithms for your needs:
+  * [Anomaly Algorithm][7]
+  * [Forecast Algorithm][8]
+  * [Outlier Algorithm][9]
 
-For any new source of metrics, logs, or other data, Watchdog requires two weeks of data to establish a baseline of expected behavior. Anomalies detected by Watchdog based on less than two weeks of data may contain inaccuracies.
+### Investigation assistance
 
-## Watchdog in the Service Catalog
+To help investigation, Watchdog shows context based insights in all explorers as well as searching for the root cause and the user impact on identified anomalies:
 
-When Watchdog detects an irregularity in an APM metric, the pink Watchdog binoculars icon appears next to the impacted service in the [APM Service Catalog][12].
-
-{{< img src="watchdog/service_list.png" alt="Screenshot of the Service Catalog, showing 5 services. A pink binoculars icon follows the name of the web-store service." style="width:75%;" >}}
-
-You can see greater detail about a metric anomaly by navigating to the [Service page][13]. On the top of the page is the Watchdog Insights box. Watchdog Insights helps you discover tag values that are associated with anomalous behaviors, such as higher error rate or latency. 
-
-You can also find the Watchdog icon on metric graphs.
-
-{{< img src="watchdog/latency_graph.png" alt="A graph showing service latency, in seconds, on the y-axis and the time of day on the x-axis. The entire graph is highlighted in pink, and the words May 2: 13:31 Ongoing appear at the top" style="width:75%;" >}}
-
-Click on the binoculars icon to see a [Watchdog alert][14] card with more details.
+* [Watchdog insights][4]
+* [Root cause Analysis][5]
+* [Impact analysis][6]
 
 ## Troubleshooting
 
-Need help? Contact [Datadog support][15].
+Need help? Contact [Datadog support][1].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /integrations/system/
-[2]: /integrations/redisdb/
-[3]: /integrations/postgres/
-[4]: /integrations/nginx/
-[5]: /integrations/amazon_web_services/
-[6]: /integrations/amazon_s3/
-[7]: /integrations/amazon_elb/
-[8]: /integrations/amazon_cloudfront/
-[9]: /integrations/amazon_dynamodb/
-[10]: /monitors/
-[11]: https://app.datadoghq.com/watchdog
-[12]: /tracing/service_catalog/
-[13]: /tracing/services/service_page/#overview
-[14]: /watchdog/alerts#alert-details
-[15]: /help/
+[1]: /help/
+[2]: /watchdog/alerts
+[3]: /watchdog/faulty_deployment_detection/
+[4]: /watchdog/insights?tab=logmanagement
+[5]: /watchdog/rca/
+[6]: /watchdog/impact_analysis/
+[7]: /monitors/types/anomaly/#anomaly-detection-algorithms
+[8]: /monitors/types/forecasts/?tab=linear#algorithms
+[9]: /monitors/types/outlier/?tab=dbscan#algorithms
