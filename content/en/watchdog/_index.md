@@ -31,28 +31,36 @@ cascade:
 ---
 ## Overview
 
-Watchdog is Datadog’s AI engine, providing you with automated alerts, insights, and root cause analyses that draw from observability data across the entire Datadog platform. Watchdog continuously monitors your infrastructure and surfaces the signals that matter most, helping you quickly detect, troubleshoot, and resolve issues. Plus, all Watchdog features come built in—no setup required
+Watchdog is Datadog’s AI engine, providing you with automated alerts, insights, and root cause analyses that draw from observability data across the entire Datadog platform. Watchdog continuously monitors your infrastructure and calls attention to the signals that matter most, helping you quickly detect, troubleshoot, and resolve issues. 
+
+All Watchdog features come built-in, and do not require setup.
 
 {{< youtube url="https://www.youtube.com/watch?v=UMNXdrI0J8A" >}}
 
+
 ### Proactive alerts
 
-Watchdog proactively computes a baseline of expected behaviour for your systems, applications, and deployments to then detect anomalous behaviours:
+Watchdog proactively computes a baseline of expected behavior for your systems, applications, and deployments. This baseline is then used to detect anomalous behavior.
 
-* [Watchdog alerts][2]
-* [Faulty deployments][3]
-* Customise Watchdog algorithms for your needs:
+{{< whatsnext desc="The following pages provide more information:">}}
+  {{< nextlink href="/watchdog/alerts">}}<u>Watchdog Alerts</u>: Learn how to view and interpret Watchdog Alerts: the information provided by each alert, what alerts cover, and where to find Watchdog alerts throughout Datadog.{{< /nextlink >}}
+  {{< nextlink href="/watchdog/faulty_deployment_detection">}}<u>Faulty Deployment Detection</u>: Learn about Automatic Faulty Deployment Detection, a Watchdog capability that finds faulty code deployments.{{< /nextlink >}}
+{{< /whatsnext >}}
+
+To customize Watchdog algorithms:
   * [Anomaly Algorithm][7]
   * [Forecast Algorithm][8]
   * [Outlier Algorithm][9]
 
 ### Investigation assistance
 
-To help investigation, Watchdog shows context based insights in all explorers as well as searching for the root cause and the user impact on identified anomalies:
+To help investigation, Watchdog shows context-based insights in all explorers, searches for root causes, and determines user impact.
 
-* [Watchdog insights][4]
-* [Root cause Analysis][5]
-* [Impact analysis][6]
+{{< whatsnext desc="The following pages provide more information">}}
+  {{< nextlink href="/watchdog/insights">}}<u>Watchdog Insights</u>: Learn about Watchdog Insights, a recommendation engine that helps users quickly identify and resolve issues.{{< /nextlink >}}
+  {{< nextlink href="/watchdog/rca">}}<u>Root Cause Analysis</u>: Learn about how Watchdog finds the root cause of an anomaly, and how to use the information provided by Watchdog Root Cause Analysis (RCA).{{< /nextlink >}}
+  {{< nextlink href="/watchdog/impact_analysis">}}<u>Impact Analysis</u>: Learn about how Watchdog identifies when an anomaly adversely impacts users.{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Troubleshooting
 
