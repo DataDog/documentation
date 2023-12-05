@@ -185,13 +185,9 @@ Missing stages or jobs in the _Pipeline Details_ page might be due to a wrong co
 
 ### Limitations on Running Pipelines
 
-#### Webhook Events Deliver Is Not Ensured by CI Providers
+#### Delivery of webhook events is not ensured by CI providers
 
-This feature depends on CI Providers sending the webhook events properly indicating if pipelines are running or have finished.
-
-You can see pipeline executions marked as `Running` in Datadog that have already finished if the CI Provider could not send all the webhooks events properly. This might lead to have false positives on monitors tracking running pipelines.
-
-Notice that the webhook events deliver is not ensured by CI Providers.
+Running pipelines support relies on data sent from CI providers indicating execution status. If this data is not available, executions marked as `Running` in Datadog may have already finished. 
 
 #### Maximum Duration for a Pipeline Execution
 
