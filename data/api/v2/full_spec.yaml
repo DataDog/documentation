@@ -6269,6 +6269,11 @@ components:
           example: '2020-11-23T10:00:00.000Z'
           readOnly: true
           type: string
+        date_last_used:
+          description: The date and time the API key was last used.
+          example: '2020-11-23T10:00:00.000Z'
+          nullable: true
+          type: string
         key:
           description: The API key.
           readOnly: true
@@ -6282,6 +6287,8 @@ components:
           readOnly: true
           type: string
           x-secret: true
+        last_used_date:
+          $ref: '#/components/schemas/FullAPIKeyLastUsedDate'
         modified_at:
           description: Date the API key was last modified.
           example: '2020-11-23T10:00:00.000Z'
@@ -6294,6 +6301,21 @@ components:
         remote_config_read_enabled:
           description: The remote config read enabled status.
           type: boolean
+        used_in_last_24_hours:
+          description: If the API key was used within the last 24 hours.
+          type: boolean
+      type: object
+    FullAPIKeyLastUsedDate:
+      description: Attributes for the last time the specific API key was used.
+      properties:
+        description:
+          description: The description of the what the API key was used for.
+          type: string
+        timestamp:
+          description: The data and time of when the API key was last used.
+          example: '2020-11-23T10:00:00.000Z'
+          nullable: true
+          type: string
       type: object
     FullApplicationKey:
       description: Datadog application key.
