@@ -24,20 +24,20 @@ Create and modify notification preferences within a notification rule to span ac
 
 ## Create notification rules
 
-1. In Datadog, navigate to the [Notification Rules][1] tab.
-2. Click on the **+ New Notification Rule** button in the top right corner of the page.
-3. Input a name for your notification rule in the **Name** field.
-4. Define the logic for when this notification rule is triggered by conditions matching to security detection rule and/or security signal.
-    - For security detection rules, notification rules can be made with the following conditions: severity, rule type, or rule tags.
-    - For security signals, notification rules can be made for any matching signal attribute and signal tag.
+To create a notification rule, you define the logic for when the notification rule is triggered based on conditions such as severity, detection rule type, tags, and attributes.
 
-    For example, severity set as `Medium` means a signal triggers an enabled notification rule as long as the security signal rule condition set in Step 4 is met at least once.
+When you configure the rule, a preview of issues matching the notification rule conditions appears on the **Example of matching issues** panel. This can be useful in determining if the notification rule is too specific or broad.
 
-5. Select all relevant parties you want to notify in the **Recipients** field. For example, notify individuals, teams, lists, or handles.
-6. A panel with a preview of rules matching the notification rule appears to the right, which helps indicate if the notification rule is too specific or broad.
-7. Click **Save and Activate** to save the notification rule. This automatically activates the notification rule and navigates you back to the main **Notification Rules** page.
+1. On the [**Notification Rules**][1] page, click **New Notification Rule**.
+2. Under **Source Types**, select one or more detection rule types to include in the notification rule.
+3. (Optional) For ASM, select the **Include Application level vulnerabilities** checkbox.
+4. Under **Rule Criteria**, select the severities to include in the notification rule.
+5. Specify the tags and attributes to include in the notification rule.
+6. Under **Notification Details**, specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, lists, or handles.
+7. Enter a name for the notification rule.
+8. Click **Save and Activate**.
 
-{{< img src="security/notification-profiles-setup2.png" alt="Setup of a notification rule" style="width:100%;" >}}
+{{< img src="security/notification-profiles-setup3.png" alt="Setup of a notification rule" style="width:100%;" >}}
 
 If the notification rule is associated with a Security Detection Rule, you can view the rule's trigger conditions in the **Set severity and notifications** section in your rules.
 
@@ -69,4 +69,4 @@ To delete a notification rule, click the vertical three-dot menu on the notifica
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/configuration/notification-profiles
+[1]: https://app.datadoghq.com/security/configuration/notification-rules
