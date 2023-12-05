@@ -1,4 +1,18 @@
 {
+  "CreateAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Create an AWS integration returns \"OK\" response"
+    }
+  ],
+  "DeleteAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Delete an AWS integration returns \"OK\" response"
+    }
+  ],
   "UpdateAWSAccount": [
     {
       "group": "aws_integration",
@@ -240,6 +254,11 @@
       "group": "dashboards",
       "suffix": "_417992286",
       "description": "Create a new dashboard with note widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_1754992756",
+      "description": "Create a new dashboard with powerpack widget"
     },
     {
       "group": "dashboards",
@@ -533,6 +552,11 @@
     },
     {
       "group": "monitors",
+      "suffix": "_1539578087",
+      "description": "Create a metric monitor with a custom schedule returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "",
       "description": "Create a monitor returns \"OK\" response"
     },
@@ -716,6 +740,13 @@
       "group": "synthetics",
       "suffix": "",
       "description": "Edit an API test returns \"OK\" response"
+    }
+  ],
+  "PatchTest": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Patch a Synthetic test returns \"OK\" response"
     }
   ],
   "TriggerTests": [

@@ -64,7 +64,9 @@ datadog:
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-DatadogAgent Kubernetes Resource:
+In an EKS cluster, you can install the Operator using [Helm][5] or as an [EKS add-on][6].
+
+The configuration below is meant to work with either setup (Helm or EKS add-on) when the Agent is installed in the same namespace as the Datadog Operator.
 
 ```yaml
 kind: DatadogAgent
@@ -288,6 +290,7 @@ providers:
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**: Network Performance Monitoring is not supported for GKE Autopilot.
 
 ## Red Hat OpenShift {#Openshift}
 
@@ -622,3 +625,5 @@ spec:
 [2]: https://github.com/Azure/AKS/releases/tag/2022-10-30
 [3]: https://github.com/DataDog/helm-charts/tree/main/examples/datadog
 [4]: https://github.com/DataDog/datadog-operator/tree/main/examples/datadogagent/v2alpha1
+[5]: /getting_started/containers/datadog_operator
+[6]: /agent/guide/operator-eks-addon

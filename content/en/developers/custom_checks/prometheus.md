@@ -277,6 +277,6 @@ exposed metrics from which to share labels, and the values are mappings that con
 [6]: https://github.com/DataDog/integrations-core/tree/master/datadog_checks_base/datadog_checks/base/checks/openmetrics/v2/base.py
 [7]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example#L65-L104
 [8]: https://github.com/DataDog/integrations-core/blob/459e8c12a9c828a0b3faff59df69c2e1f083309c/datadog_checks_base/datadog_checks/base/checks/openmetrics/v2/base.py#L86-L87
-[9]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[9]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [10]: https://datadoghq.dev/integrations-core/base/openmetrics/
 [11]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example

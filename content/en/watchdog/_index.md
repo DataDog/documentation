@@ -57,13 +57,13 @@ Watchdog looks for irregularities in metrics, like a sudden spike in the hit rat
 
 For any new source of metrics, logs, or other data, Watchdog requires two weeks of data to establish a baseline of expected behavior. Anomalies detected by Watchdog based on less than two weeks of data may contain inaccuracies.
 
-## Watchdog in the services list
+## Watchdog in the Service Catalog
 
-When Watchdog detects an irregularity in an APM metric, the pink Watchdog binoculars icon appears next to the impacted service in the [APM services list][12]. The number next to the binoculars indicates the number of issues Watchdog has detected within that service.
+When Watchdog detects an irregularity in an APM metric, the pink Watchdog binoculars icon appears next to the impacted service in the [APM Service Catalog][12].
 
-{{< img src="watchdog/service_list.png" alt="Screenshot of the APM services list page, showing 5 services. A pink binoculars icon follows the name of the web-store service." style="width:75%;" >}}
+{{< img src="watchdog/service_list.png" alt="Screenshot of the Service Catalog, showing 5 services. A pink binoculars icon follows the name of the web-store service." style="width:75%;" >}}
 
-You can see greater detail about a metric anomaly by navigating to the [Services page][13]. On the top of the page is the Watchdog Insights box. Watchdog Insights helps you discover tag values that are associated with anomalous behaviors, such as higher error rate or latency. 
+You can see greater detail about a metric anomaly by navigating to the [Service page][13]. On the top of the page is the Watchdog Insights box. Watchdog Insights helps you discover tag values that are associated with anomalous behaviors, such as higher error rate or latency. 
 
 You can also find the Watchdog icon on metric graphs.
 
@@ -90,7 +90,7 @@ Need help? Contact [Datadog support][15].
 [9]: /integrations/amazon_dynamodb/
 [10]: /monitors/
 [11]: https://app.datadoghq.com/watchdog
-[12]: /tracing/services/services_list/
+[12]: /tracing/service_catalog/
 [13]: /tracing/services/service_page/#overview
 [14]: /watchdog/alerts#alert-details
 [15]: /help/

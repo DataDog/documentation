@@ -30,7 +30,7 @@ When a security signal alerts on suspicious activity by a user or a resource, so
 - What are all the actions taken on a resource by the user?
 - What users have interacted with this resource?
 
-For example, suppose you receive a security signal that someone changed the configuration of an AWS S3 bucket so that it is accessible by everyone, but the action was taken by an assumed role. To investigate, look into who took the action and what other activities they did recently, as that could indicate compromised credentials.
+For example, suppose you receive a security signal that someone changed the configuration of an Amazon S3 bucket so that it is accessible by everyone, but the action was taken by an assumed role. To investigate, look into who took the action and what other activities they did recently, as that could indicate compromised credentials.
 
 The Cloud SIEM Investigator provides a graphical interface for you to pivot from one affected entity to another, so that you can see user behavior and its impact on your environment.
 

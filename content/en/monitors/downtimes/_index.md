@@ -29,8 +29,6 @@ To schedule a [monitor downtime][1] in Datadog navigate to _Monitors > Manage Do
 
 To mute an individual monitor, click the **Mute** button at the top of the monitor status page. This creates a downtime schedule for that particular monitor.
 
-{{< img src="/monitors/downtimes/downtime_fm_monitor.png" alt="Add a downtime schedule from an individual monitor with Mute" style="width:100%;" >}}
-
 ## Choose what to silence
 
 Apply downtime schedules to specific monitors by [name](#by-monitor-name) or to a broad range of monitors by monitor [tags](#by-monitor-tags). Apply additional filters through the [*Group scope*](#downtime-scope). Click **Preview affected monitors** to see the monitors included. For more examples and use cases see  [Scoping downtimes schedules][2].
@@ -175,7 +173,7 @@ All alerted states are included on the [weekly monitor report][15] even if the m
 
 Datadog can proactively mute monitors related to the manual shutdown of certain cloud workloads. The following scenarios of auto-muting for shutdown are supported:
 
-- **[AWS EC2 instances][16]** and instance termination by AWS autoscaling based on host statuses from the CloudWatch API.
+- **[Amazon EC2 instances][16]** and instance termination by AWS autoscaling based on host statuses from the CloudWatch API.
 - **[Google Compute Engine (GCE)][17]** instances and instance termination triggered by GCE autoscaling based on host statuses from the GCE API.
 - **[Azure VMs][18]**, whether the shutdown was triggered manually or by Azure autoscaling, based on health statuses available through the Azure Resource Health API.
 

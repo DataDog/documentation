@@ -48,7 +48,8 @@ There are two buttons that allow you to configure multiple metrics at a time:
 
 * **Configure Tags**: Configure tags on multiple custom metrics matching a namespace using Metrics without Limits™
 
-{{< img src="metrics/summary/bulkconfig.mp4" alt="Bulk Metric Tag Configuration" video=true style="width:75%;">}} 
+{{< img src="metrics/summary/bulkconfig_new-compressed.mp4" alt="Bulk Metric Tag Configuration" video="true" style="width:100%;" >}}
+
 
 ## Metric details sidepanel
 
@@ -143,10 +144,11 @@ You can configure tags using the bulk metric tag configuration button or the **M
 
 1. Click on your custom distribution metric name in the **Metrics Summary** table to open the metrics details side panel.
 2. Click the **Manage Tags** button to open the tag configuration modal.
-3. Click the **Custom...** tab to customize the tags you'd like to keep available for query. Tag configurations are _allowlists_ of the tags you'd like to keep. 
-4. Preview the effects of your proposed allowlist with the cardinality estimator before selecting **Save**.
 
-**Note**: The exclusion of tags is not supported in the allowlist-based customization of tags. Adding tags starting with `!` is not accepted. Also, the cardinality estimator requires the metric to be older than 48 hours.
+3. Select **Include tags...** or **Exclude tags...** to customize the tags you do or don't want to query for. For more information on tag configuration, see the [Metrics without Limits][10] documentation.
+4. Preview the effects of your proposed tag configuration with the cardinality estimator before selecting **Save**.
+
+**Note**: The cardinality estimator requires the metric to be older than 48 hours.
 
 ### Queryable tags 
 
@@ -169,7 +171,7 @@ More aggregations are available should they be valuable to you. You can add or r
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[10]:/metrics/metrics-without-limits
+[10]: /metrics/metrics-without-limits
 [1]: https://app.datadoghq.com/metric/summary
 [2]: /metrics/explorer/
 [3]: /dashboards/

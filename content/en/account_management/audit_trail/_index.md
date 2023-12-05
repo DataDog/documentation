@@ -54,6 +54,9 @@ To see who enabled Audit Trail:
 ## Configuration
 
 
+### Permissions
+Only users with `Audit Trail Write` permission can enable or disable Audit Trail. Additionally, users need `Audit Trail Read` permission to view audit events using Audit Explorer. 
+
 ### Archiving
 
 Archiving is an optional feature for Audit Trail. You can use archiving to write to Amazon S3, Google Cloud Storage, or Azure Storage and have your SIEM system read events from it. After creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. Events are uploaded to the archive every 15 minutes, so check back on your storage bucket in 15 minutes to make sure the archives are successfully being uploaded from your Datadog account.
@@ -176,10 +179,10 @@ To export an audit analytics query as a report, create a timeseries, top list, o
 
 ## Download Audit Events as CSV
 
-Datadog Audit Trail allows you to download upto 100k audit events as a CSV file locally. These events can then be analyzed locally, uploaded to a different tool for further analytics or shared with approporte team members as part of security/compliance exercise.
+Datadog Audit Trail allows you to download up to 100K audit events as a CSV file locally. These events can then be analyzed locally, uploaded to a different tool for further analytics, or shared with appropriate team members as part of a security and compliance exercise.
 
-To export audit events as CSV 
-1. Run the appropriate search query that captures the events you are interested in.
+To export audit events as CSV:
+1. Run the appropriate search query that captures the events you are interested in
 2. Add event fields as columns in the view that you want as part of CSV
 3. Click on Download as CSV
 4. Select the number of events to export and export as CSV

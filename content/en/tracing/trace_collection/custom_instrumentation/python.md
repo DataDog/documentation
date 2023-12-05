@@ -208,6 +208,21 @@ span = tracer.trace("operation")
 span.error = 1
 span.finish()
 ```
+
+In the event you want to flag the local root span with the error raised:
+
+```python
+import os
+from ddtrace import tracer
+
+try:
+    raise TypeError
+except TypeError as e:
+    root_span = tracer.current_root_span()
+    (exc_type, exc_val, exc_tb) = sys.exc_info()
+    # this sets the error type, marks the span as an error, and adds the traceback
+    root_span.set_exc_info(exc_type, exc_val, exc_tb)
+```
 {{% /tab %}}
 {{< /tabs >}}
 

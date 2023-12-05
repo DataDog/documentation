@@ -20,6 +20,10 @@ further_reading:
     text: "Safe and Secure Local Processing with Observability Pipelines"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
+
 ## Overview
 
 The [Observability Pipelines Worker][1] can collect, process, and route logs and metrics from any source to any destination. Using Datadog, you can build and manage all of your Observability Pipelines Worker deployments at scale.
@@ -28,20 +32,25 @@ There are several ways to get started with the Observability Pipelines Worker.
 
 - [Quickstart](#quickstart): Install the Worker with a simple pipeline that emits demo data to get started quickly.
 - [Datadog setup guide][2]: Install the Worker with an out-of-the-box pipeline for receiving and routing data from your Datadog Agents to Datadog.
-- [Splunk setup guide][3]: Install the Worker with an out-of-the-box pipeline for receiving and routing data from Splunk HEC to both Splunk and Datadog.
+- [Datadog archiving setup guide][3]: Install the Worker with an out-of-the-box pipeline for receiving and routing data from your Datadog Agents to Datadog and S3.
+- [Splunk setup guide][4]: Install the Worker with an out-of-the-box pipeline for receiving and routing data from Splunk HEC to both Splunk and Datadog.
 
 This document walks you through the quickstart installation steps and then provides resources for next steps.
+
+## Deployment Modes
+
+{{% op-deployment-modes %}}
 
 ## Prerequisites
 
 To install the Observability Pipelines Worker, you need the following:
 
-- A valid [Datadog API key][4].
+- A valid [Datadog API key][5].
 - A pipeline ID.
 
 To generate a new API key and pipeline:
 
-1. Navigate to [Observability Pipelines][5].
+1. Navigate to [Observability Pipelines][6].
 2. Click **New Pipeline**.
 3. Enter a name for your pipeline.
 4. Click **Next**.
@@ -380,7 +389,11 @@ EOT
 {{% /tab %}}
 {{< /tabs >}}
 
-See [Working with Data][6] for more information on transforming your data.
+See [Working with Data][7] for more information on transforming your data.
+
+## Updating deployment modes
+
+{{% op-updating-deployment-modes %}}
 
 ## Next steps
 
@@ -388,10 +401,10 @@ The quickstart walked you through installing the Worker and deploying a sample p
 
 {{< partial name="observability_pipelines/use_cases.html" >}}
 
-For a deeper dive into recommendations for deploying and scaling multiple Workers:
+For recommendations on deploying and scaling multiple Workers:
 
-- See [Deployment Design and Principles][7] for information on what to consider when designing your Observability Pipelines architecture.
-- See [Best Practices for OPW Aggregator Architecture][8] for details on the recommended Observability Pipelines aggregator architecture, which is optimized for scaling.
+- See [Deployment Design and Principles][8] for information on what to consider when designing your Observability Pipelines architecture.
+- See [Best Practices for OP Worker Aggregator Architecture][9].
 
 ## Further reading
 
@@ -399,9 +412,10 @@ For a deeper dive into recommendations for deploying and scaling multiple Worker
 
 [1]: /observability_pipelines/#what-is-observability-pipelines-and-the-observability-pipelines-worker
 [2]: /observability_pipelines/setup/datadog/
-[3]: /observability_pipelines/setup/splunk/
-[4]: https://app.datadoghq.com/observability-pipelines
-[5]: /account_management/api-app-keys/#api-keys
-[6]: /observability_pipelines/working_with_data/
-[7]: /observability_pipelines/production_deployment_overview/
-[8]: /observability_pipelines/architecture/
+[3]: /observability_pipelines/setup/datadog_with_archiving/
+[4]: /observability_pipelines/setup/splunk/
+[5]: https://app.datadoghq.com/observability-pipelines
+[6]: /account_management/api-app-keys/#api-keys
+[7]: /observability_pipelines/working_with_data/
+[8]: /observability_pipelines/production_deployment_overview/
+[9]: /observability_pipelines/architecture/

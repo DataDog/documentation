@@ -11,9 +11,6 @@ further_reading:
     - link: 'developers/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
-    - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd'
-      tag: 'GitHub'
-      text: 'DogStatsD source code'
 ---
 
 This section specifies the raw datagram format for metrics, events, and service checks that DogStatsD accepts. The raw datagrams are encoded in UTF-8. This isn't required reading if you're using any of [the DogStatsD client libraries][1]; however, if you want to write your own library, or use the shell to send metrics, then read on.
@@ -202,7 +199,7 @@ sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```python
 import socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # UDP
-sock.sendto(b"custom_metric:60|g|#shell", ("localhost", 8125))
+sock.sendto("custom_metric:60|g|#shell", ("localhost", 8125))
 ```
 
 {{% /tab %}}
