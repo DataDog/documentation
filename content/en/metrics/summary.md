@@ -133,6 +133,12 @@ For any particular tag key, you can:
 
 [Learn more about tagging][5].
 
+### Metrics Related Assets
+
+ Metrics related assets refers to any dashboard, notebook, monitor or SLO that queries a particular metric. 
+1. Scroll down to the bottom of the metric’s details sidepanel, landing on the ‘Related Assets’ section.
+2. Click the dropdown button to view the type of related asset you’re interested in (i.e. dashboards, monitors, notebooks, SLOs). You can additionally leverage the search bar to quickly validate specific assets.
+
 ## Metrics without Limits™
 Metrics without Limits™ provides you control over the size of your custom metrics without requiring any agent or code-level changes. 
 
