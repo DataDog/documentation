@@ -23,7 +23,7 @@ You can create workflows or edit existing workflows from the Workflow Automation
 
 ## Build a workflow from a blueprint
 
-1. Click the **Blueprints** tab.
+1. Click the [**Blueprints**][5] tab.
 1. If desired, use the search bar to narrow the list of blueprints by name, category, or integration.
 1. Find the blueprint you'd like to use, and click on it. The workflow canvas appears.
 1. Click **Create From Blueprint**. The workflow canvas updates to show your newly created workflow.
@@ -34,18 +34,20 @@ You can create workflows or edit existing workflows from the Workflow Automation
 
 ## Create a custom workflow
 
-To create a workflow:
-1. Click **New workflow**.
-1. Enter a name and description for the workflow.
-1. Select a trigger for the workflow.
-1. Click **Create**.
-1. Click **Add a step to get started** to start adding steps to your workflow. Alternatively, click **Edit JSON Spec** if you want to build a workflow using the JSON editor.
+To create a workflow, click **New workflow** on the [Workflow Automation][1] page.
+
+To configure your workflow:
+1. In the workflow configuration panel, enter a **Name** for your workflow.
+1. Select relevant **Tags**, **Services**, or **Teams**.
+1. Enter input or output parameters if your workflow uses them.
+
+If you're not sure about your workflow configuration, you can return to the panel later by clicking anywhere on the workflow canvas.
 
 ### Build a workflow with the workflow builder
 
-1. Click **Add a step to get started** to add the first step to your workflow.
+1. If your workflow requires a trigger, click **Add Trigger**. For more information, see [Trigger a Workflow][3].
+1. Click **Add Step** to start adding steps to your workflow.
 1. Search for an action using the search bar or browse through the integrations and their related actions to find the action you're looking for. Click an action to add it as a step on your workflow canvas.
-{{< img src="service_management/workflows/workflow-builder2.mp4" alt="Drag a step onto the workflow canvas" video="true" >}}
 1. Click on the step in the workflow canvas to configure it or view its outputs or context variables. For more information on outputs and context variables, see [Context variables](#context-variables).
 1. After you've configured the step, click the plus (`+`) icon to add another step, or save the workflow if you're done.
 1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
@@ -105,6 +107,18 @@ An example of a workflow with a single step that sends a message to a Slack chan
 {{< /code-block >}}
 
 When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
+
+## Test a step
+
+To ensure a step functions as desired without having to run the entire workflow, you can test the step independently.
+
+To test a workflow step:
+1. Click **Test** in the step **Inputs** section.
+1. Optionally, adjust the step configuration. If your step uses output variables from a previous step, enter some hardcoded test data for the step to use.
+1. Click **Test** to test the action.
+1. When you're finished testing the step, click **Use in configuration** to use your new configuration in the workflow, or close the screen to return to the workflow without saving your test configuration.
+
+Testing is not available for branching and logic actions. To test a JavaScript function or expression action that uses output variables from a previous step, comment out the variables in your code and replace them with test data. For more information, see [Testing expressions and functions][6].
 
 ## Publish a workflow
 
@@ -219,3 +233,6 @@ To get back to the main workflow canvas, click **Main** above the fallback tree.
 [2]: https://handlebarsjs.com/guide/expressions.html#expressions
 [3]: /service_management/workflows/trigger
 [4]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
+[5]: https://app.datadoghq.com/workflow/blueprints
+[6]: /service_management/workflows/actions_catalog/generic_actions/#testing-expressions-and-functions
+

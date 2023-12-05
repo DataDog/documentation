@@ -32,7 +32,7 @@ init_config:
 instances:
   [{}]
 {{< /code-block >}}
-4. `checks.d` ディレクトリに新しいチェックファイルを作成します。ファイルに `custom_checkvalue.py` という名前を付けます。
+4. `checks.d` ディレクトリにチェックファイルを作成します。ファイルに `custom_checkvalue.py` という名前を付けます。
 5. ファイルを編集して、以下を含めます。
    {{< code-block lang="python" filename="checks.d/custom_checkvalue.py" >}}
 from checks import AgentCheck
@@ -93,7 +93,7 @@ vgs -o vg_free
 out, err, retcode = get_subprocess_output(["vgs", "-o", "vg_free"], self.log, raise_on_empty_output=True)
 {{< /code-block >}}
 
- **注**: チェックを実行する Python インタープリターは、マルチスレッド Go ランタイムに埋め込まれるため、Python 標準ライブラリにある `subprocess` または `multithreading` モジュールの使用は、Agent バージョン 6 以降ではサポートされていません。
+**注**: チェックを実行する Python インタープリターは、マルチスレッド Go ランタイムに埋め込まれるため、Python 標準ライブラリにある `subprocess` または `multithreading` モジュールの使用は、Agent バージョン 6 以降ではサポートされていません。
 
 ### 結果
 
@@ -174,5 +174,5 @@ class HelloCheck(AgentCheck):
 [2]: /ja/agent/guide/agent-configuration-files#agent-configuration-directory
 [3]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
 [4]: https://app.datadoghq.com/metric/summary
-[5]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.utils.html#module-datadog_checks.base.utils.subprocess_output
+[5]: https://github.com/DataDog/integrations-core/blob/9414403b361e583e8f1ebcdee2f006c384c61045/datadog_checks_base/datadog_checks/base/utils/subprocess_output.py#L22
 [6]: /ja/dashboards/

@@ -20,6 +20,8 @@ _8 minutes to complete_
 
 {{< img src="tracing/guide/custom_span/custom_span_1.png" alt="Analytics View" style="width:90%;">}}
 
+<div class="alert alert-warning"><strong>Note</strong>: This page describes using OpenTracing to custom instrument applications. OpenTracing is deprecated. The concepts presented here still apply, but follow the <a href="/tracing/trace_collection/otel_instrumentation/">Custom Instrumentation with OpenTelemetry</a> instructions and examples for your language instead. </div>
+
 To provide you with deep visibility into your business logic, Datadog APM allows you to customize the spans that make up your traces based on your needs and implementation. This empowers you to trace any method in your codebase and even specific components within methods. You can use this to optimize and monitor critical areas of your application at the granularity that works for you.
 
 Datadog instruments many frameworks out-of-the-box, such as web services, databases, and caches, and enables you to instrument your own business logic to have the exact visibility you need. By creating spans for methods, you can optimize timing and track errors using the APM flame graph and monitors.
@@ -351,11 +353,9 @@ This example adds child spans to the `BackupLedger.write` span created above. Th
 
 Now that you have instrumented your business logic, it's time to see the results in the Datadog APM UI.
 
-1. Go to the **[Service List][1]**, identify the service you added custom spans to, and then go to the **Service Page**. On the service page, click on the **specific resource** you added, change the time filter to `The past 15 minutes`, and scroll down to the span summary table:
+1. Go to the **[Service Catalog][1]**, and click the service you added custom spans to, to open its service page. On the service page, click on the **specific resource** you added, change the time filter to `The past 15 minutes`, and scroll down to the span summary table:
 
     {{< img src="tracing/guide/custom_span/custom_span_3.png" alt="Span Summary Table" style="width:90%;">}}
-
-    *You should now be able to find the new spans you've added*
 
 The span summary table provides aggregate information about the spans that make up your traces. Here you can identify spans that repeat an abnormal amount of times indicating some looping or database access inefficiency (like the [`n+1` issue][2]).
 
@@ -369,7 +369,7 @@ You've now successfully added custom spans to your codebase, making them availab
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/services
+[1]: https://app.datadoghq.com/services
 [2]: https://bojanv91.github.io/posts/2018/06/select-n-1-problem
 [3]: https://app.datadoghq.com/apm/traces?viz=timeseries
 [4]: /tracing/guide/add_span_md_and_graph_it/

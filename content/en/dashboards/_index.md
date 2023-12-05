@@ -163,6 +163,8 @@ To limit the search to a specific dashboard, include the dashboard's name in the
 
 #### Permissions
 
+<div class="alert alert-info"><em>View</em> restrictions on individual dashboards are available to anyone on an <strong>Enterprise</strong> tier plan. Reach out to your account team or <a href="/help/">Datadog support</a> to enable this feature. </div>
+
 {{< img src="dashboards/access_popup.png" alt="Dialog box with dropdown menu allowing users to choose a role to access the dashboard." style="width:70%;">}}
 
 Use granular access controls to limit the [roles][15] that may edit a particular dashboard:
@@ -170,7 +172,7 @@ Use granular access controls to limit the [roles][15] that may edit a particular
 1. Select **Permissions**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the dropdown to select one or more roles, teams (beta), or users (beta) that may edit the dashboard.
+1. Use the dropdown to select one or more roles, teams, or users that may edit the dashboard.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**
@@ -187,7 +189,7 @@ If the dashboard was created with the deprecated "read only" setting, the access
 
 If you manage your dashboards with Terraform, you can use the latest version of the Datadog Terraform provider to control which roles can edit your dashboards. For more information, see the [Terraform Dashboard role restriction guide][16].
 
-**Note:** View restrictions on individual dashboards are available to anyone on an Enterprise tier plan. Reach out to your account team or [Datadog support][17] to enable this feature. 
+The access indicator appears at the top right of each edit-restricted dashboard. Depending on your permissions, it may say **Gain Edit Access** or **Request Edit Access**. Click the access indicator to understand your access permissions and what steps to take to edit the dashboard.
 
 #### High-density mode
 
@@ -233,7 +235,7 @@ To add a suggested dashboards list, add `[[suggested_dashboards]]` inside the da
 
 ### Edit details
 
-Update Markdown-supported dashboard descriptions or associate [teams][18] with a dashboard:
+Update Markdown-supported dashboard descriptions or associate [teams][17] with a dashboard:
 
 1. Open the dashboard you wish to edit.
 1. Hover the dashboard title. A dropdown panel opens.
@@ -248,7 +250,7 @@ Search, view, or create dashboards and lists on the [Dashboard List][4] page.
 
 ### Teams
 
-Use the **My Teams** toggle to switch between viewing all dashboards and only dashboards owned by your [teams][18].
+Use the **My Teams** toggle to switch between viewing all dashboards and only dashboards owned by your [teams][17].
 
 To edit the teams associated with one or more dashboards, take the following steps:
 1. Select the checkbox next to each dashboard you wish to modify.
@@ -321,7 +323,7 @@ An organization's most popular dashboard displays five popularity bars. All othe
 
 The [Datadog Mobile App][1], available on the [Apple App Store][2] and [Google Play Store][3], enables you to view your dashboards in a mobile-friendly format.
 
-On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][19]. Click on an individual dashboard to view it.
+On the Dashboards page, you can view and search all of your dashboards, and filter them using the same template variables you have set up in the Datadog web app. Quickly filter your dashboards using template variable saved views. For more information about template variable saved views, see [Dashboard Saved Views][18]. Click on an individual dashboard to view it.
 
 **Note**: To set up or edit a dashboard, you must log in to the Datadog browser UI.
 
@@ -356,6 +358,5 @@ You can add SLOs, Monitors, and Open Incidents widgets to your mobile home scree
 [14]: /events/
 [15]: /account_management/rbac/
 [16]: /dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
-[17]: /help/
-[18]: /account_management/teams/
-[19]: /dashboards/template_variables/#saved-views
+[17]: /account_management/teams/
+[18]: /dashboards/template_variables/#saved-views

@@ -158,7 +158,7 @@ If you send `X` values for a DISTRIBUTION metric `<METRIC_NAME>` in a given time
 {{< tabs >}}
 {{% tab "COUNT" %}}
 
-Suppose you are submitting a COUNT metric, `activeusers.basket_size`, from a single host running the Datadog Agent. This host emits the following values in a flush time interval: `[1,1,1,2,2,2,3,3]`.
+Suppose you are submitting a COUNT metric, `notifications.sent`, from a single host running the Datadog Agent. This host emits the following values in a flush time interval: `[1,1,1,2,2,2,3,3]`.
 
 The Agent adds all of the values received in one time interval. Then, it submits the total number, in this case `15`, as the COUNT metric's value.
 

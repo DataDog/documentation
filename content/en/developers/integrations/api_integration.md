@@ -62,6 +62,32 @@ The process to build an API-based integration looks like the following:
 
 Start building your API integration by [creating a tile][24].
 
+## Update your integration
+You can update your integration at any time by editing the relevant files and opening a new pull request to your integration's directory in the [`integrations-extras`][21] repository. 
+
+For API-based integrations, it's recommended to bump the version of an integration when new functionality is added, such as new data is being sent in, or when major bugs have been fixed. 
+
+If an integration version is bumped, ensure that you add an entry to the `CHANGELOG.md` file that adheres to the following format:
+
+   ```
+   ## Version Number / Date
+
+   ***Added***: 
+
+   * New feature
+   * New feature
+
+   ***Fixed***:
+
+   * Bug fix
+   * Bug fix
+   ```
+
+If editing or adding new README content, manifest information, or assets such as dashboards and recommended monitors, a version bump is not needed. 
+
+Updates to assets such as dashboards and recommended monitors are available to customers after the corresponding pull requests are merged and the assets are published. Updates to `README.md`, `manifest.json`, or any other non-code files are also immediately available to customers after publishing. 
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -150,5 +150,5 @@ The [APM environment name][7] may be configured [in the Agent][8] or using the [
 [7]: /tracing/advanced/setting_primary_tags_to_scope/#environment
 [8]: /getting_started/tracing/#environment-name
 [9]: https://github.com/openzipkin/b3-propagation
-[13]: /agent/guide/network/#configure-ports
+[13]: /agent/configuration/network/#configure-ports
 [14]: https://github.com/w3c/trace-context

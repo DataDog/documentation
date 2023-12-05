@@ -4,6 +4,7 @@ kind: documentation
 aliases:
   - /continuous_integration/explore_tests/
   - /continuous_integration/guides/test_configurations/
+  - /continuous_integration/integrate_tests/
 further_reading:
     - link: "/monitors/types/ci/"
       tag: "Documentation"
@@ -34,35 +35,39 @@ cascade:
 
 [Test Visibility][1] provides a test-first view into your CI health by displaying important metrics and results from your tests. It can help you investigate performance problems and test failures that concern you the most because you work on the related code, not because you maintain the pipelines they are run in.
 
-### Supported features
-|                                                                                                                                                                                                                  |   .NET  |   Java  |      Javascript      |  Python |   Ruby  |  Swift  |       JUnit Xml      |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------:|:-------:|:--------------------:|:-------:|:-------:|:-------:|:--------------------:|
-| {{< ci-details title="Accurate time/durations results" >}}Microseconds resolution in test start time and duration.{{< /ci-details >}}                                                                            | {{< X >}} | {{< X >}} |        {{< X >}}       | {{< X >}} | {{< X >}} | {{< X >}} |                      |
-| {{< ci-details title="Distributed traces on integration tests" >}}Tests that make calls to external services instrumented with Datadog show the full distributed trace in their test details.{{< /ci-details >}} | {{< X >}} | {{< X >}} |        {{< X >}}       |         | {{< X >}} | {{< X >}} |                      |
-| {{< ci-details title="Agent-based reporting" >}}Ability to report test information through the Datadog Agent.{{< /ci-details >}}                                                                                 | {{< X >}} | {{< X >}} |        {{< X >}}       | {{< X >}} | {{< X >}} | {{< X >}} |                      |
-| {{< ci-details title="Agentless reporting" >}}Ability to report test information without the Datadog Agent.{{< /ci-details >}}                                                                                   | {{< X >}} | {{< X >}} |        {{< X >}}       | {{< X >}} |         | {{< X >}} |        {{< X >}}       |
-| {{< ci-details title="Test suite level visibility" >}}Visibility over the whole testing process, including session, module, suites and tests. Read more in Test suite level visibility.{{< /ci-details >}}       | {{< X >}} | {{< X >}} |        {{< X >}}       | {{< X >}} |         | {{< X >}} |        {{< X >}}       |
-| {{< ci-details title="Manual API" >}}Ability to programmatically create CI Visibility events for test frameworks that are not supported by Datadog's automatic instrumentation.{{< /ci-details >}}               | {{< X >}} | {{< X >}} |        {{< X >}}       |         |         | {{< X >}} |                      |
-| {{< ci-details title="Codeowner by test" >}}Automatic detection of the owner of a test based on the CODEOWNERS file.{{< /ci-details >}}                                                                          | {{< X >}} | {{< X >}} |        {{< X >}}       |         |         | {{< X >}} |                      |
-| {{< ci-details title="Source code start/end" >}}Automatic report of the start and end lines of a test.{{< /ci-details >}}                                                                                        | {{< X >}} | {{< X >}} | {{< X >}} (only start) |         |         | {{< X >}} | {{< X >}} (only start) |
-| {{< ci-details title="CI and git info" >}}Automatic collection of git and CI environment metadata, such as CI provider, git commit SHA or pipeline URL.{{< /ci-details >}}                                       | {{< X >}} | {{< X >}} |        {{< X >}}       | {{< X >}} | {{< X >}} | {{< X >}} |        {{< X >}}       |
-| {{< ci-details title="Git metadata upload" >}}Automatic upload of git tree information used for Intelligent Test Runner.{{< /ci-details >}}                                                                      | {{< X >}} | {{< X >}} |        {{< X >}}       | {{< X >}} |         | {{< X >}} |        {{< X >}}       |
-| {{< ci-details title="Intelligent Test Runner" >}}Capability to enable Intelligent Test Runner, which intelligently skips tests based on code coverage and git metadata.{{< /ci-details >}}                      | {{< X >}} | {{< X >}} |        {{< X >}}       | {{< X >}} |         | {{< X >}} |                      |
-| {{< ci-details title="Code coverage support" >}}Ability to report total code coverage metrics.{{< /ci-details >}}                                                                                                | {{< X >}} | {{< X >}} |        {{< X >}}       |         |         | {{< X >}} |   {{< X >}} (manual)   |
-| {{< ci-details title="Benchmark tests support" >}}Automatic detection of performance statistics for benchmark tests.{{< /ci-details >}}                                                                          | {{< X >}} |         |                      | {{< X >}} |         | {{< X >}} |                      |
-| {{< ci-details title="Parameterized tests" >}}Automatic detection of parameterized tests.{{< /ci-details >}}                                                                                                     | {{< X >}} | {{< X >}} |        {{< X >}}       | {{< X >}} |         | {{< X >}} |                      |
-
 ## Setup
 
 {{< whatsnext desc="Choose a language to set up Test Visibility in Datadog:" >}}
-    {{< nextlink href="continuous_integration/tests/dotnet" >}}.NET{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/java" >}}Java{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/javascript" >}}JavaScript{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/python" >}}Python{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/ruby" >}}Ruby{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/swift" >}}Swift{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/dotnet" >}}.NET{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/java" >}}Java{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/javascript" >}}JavaScript{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/ruby" >}}Ruby{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/setup/swift" >}}Swift{{< /nextlink >}}
     {{< nextlink href="continuous_integration/tests/junit_upload" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/tests/containers" >}}Tests running in containers{{< /nextlink >}}
 {{< /whatsnext >}}
+
+In addition to tests, CI Visibility provides visibility over the whole testing phase of your project (except for Ruby).
+
+### Supported features
+
+|                                                                                                                                                                                                                  |   .NET  |   Java  |      Javascript      |     Python      |   Ruby  |  Swift  |       JUnit Xml      |
+|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------:|:---------:|:----------------------:|:---------------:|:--------:|:-------:|:--------------------:|
+| {{< ci-details title="Accurate time/durations results" >}}Microseconds resolution in test start time and duration.{{< /ci-details >}}                                                                            | {{< X >}} | {{< X >}} |        {{< X >}}       |    {{< X >}}    | {{< X >}} | {{< X >}} |                      |
+| {{< ci-details title="Distributed traces on integration tests" >}}Tests that make calls to external services instrumented with Datadog show the full distributed trace in their test details.{{< /ci-details >}} | {{< X >}} | {{< X >}} |        {{< X >}}       |                 | {{< X >}} | {{< X >}} |                      |
+| {{< ci-details title="Agent-based reporting" >}}Ability to report test information through the Datadog Agent.{{< /ci-details >}}                                                                                 | {{< X >}} | {{< X >}} |        {{< X >}}       |    {{< X >}}    | {{< X >}} | {{< X >}} |                      |
+| {{< ci-details title="Agentless reporting" >}}Ability to report test information without the Datadog Agent.{{< /ci-details >}}                                                                                   | {{< X >}} | {{< X >}} |        {{< X >}}       |    {{< X >}}    | {{< X >}} | {{< X >}} |        {{< X >}}       |
+| {{< ci-details title="Test suite level visibility" >}}Visibility over the whole testing process, including session, module, suites, and tests.{{< /ci-details >}}       | {{< X >}} | {{< X >}} |        {{< X >}}       |    {{< X >}}    |           | {{< X >}} |        {{< X >}}       |
+| {{< ci-details title="Manual API" >}}Ability to programmatically create CI Visibility events for test frameworks that are not supported by Datadog's automatic instrumentation.{{< /ci-details >}}               | {{< X >}} | {{< X >}} |        {{< X >}}       |                 |           | {{< X >}} |                      |
+| {{< ci-details title="Codeowner by test" >}}Automatic detection of the owner of a test file based on the CODEOWNERS file.{{< /ci-details >}}                                                                     | {{< X >}} | {{< X >}} |        {{< X >}}       |    {{< X >}}    |           | {{< X >}} |                      |
+| {{< ci-details title="Source code start/end" >}}Automatic report of the start and end lines of a test.{{< /ci-details >}}                                                                                        | {{< X >}} | {{< X >}} | {{< X >}} (only start) |    {{< X >}}    |           | {{< X >}} | {{< X >}} (only start) |
+| {{< ci-details title="CI and git info" >}}Automatic collection of git and CI environment metadata, such as CI provider, git commit SHA or pipeline URL.{{< /ci-details >}}                                       | {{< X >}} | {{< X >}} |        {{< X >}}       |    {{< X >}}    | {{< X >}} | {{< X >}} |        {{< X >}}       |
+| {{< ci-details title="Git metadata upload" >}}Automatic upload of git tree information used for Intelligent Test Runner.{{< /ci-details >}}                                                                      | {{< X >}} | {{< X >}} |        {{< X >}}       |    {{< X >}}    |           | {{< X >}} |        {{< X >}}       |
+| {{< ci-details title="Intelligent Test Runner" >}}Capability to enable Intelligent Test Runner, which intelligently skips tests based on code coverage and git metadata.{{< /ci-details >}}                      | {{< X >}} | {{< X >}} |        {{< X >}}       |    {{< X >}}    |           | {{< X >}} |                      |
+| {{< ci-details title="Code coverage support" >}}Ability to report total code coverage metrics.{{< /ci-details >}}                                                                                                | {{< X >}} | {{< X >}} |        {{< X >}}       |                 |           | {{< X >}} |   {{< X >}} (manual)   |
+| {{< ci-details title="Benchmark tests support" >}}Automatic detection of performance statistics for benchmark tests.{{< /ci-details >}}                                                                          | {{< X >}} |           |                        |    {{< X >}}    |           | {{< X >}} |                      |
+| {{< ci-details title="Parameterized tests" >}}Automatic detection of parameterized tests.{{< /ci-details >}}                                                                                                     | {{< X >}} | {{< X >}} |        {{< X >}}       |    {{< X >}}    |           | {{< X >}} |                      |
 
 ## Default configurations
 
@@ -110,42 +115,35 @@ All tags with the `test.configuration` prefix are used as configuration tags, in
 
 In order to filter using these configurations tags, [you must create facets for these tags][2].
 
-## Test suite level visibility
-
-In addition to tests, CI Visibility provides visibility over the whole testing phase of your project.
-
-### Compatibility
-
-Not every language supported by CI Visibility has support for test suite level visibility:
-
-* [Swift][3] has complete support since `dd-sdk-swift-testing>=2.1.0`.
-* [.NET][4] has complete support since `dd-trace-dotnet>2.16.0`.
-* [JavaScript][5] has limited support since `dd-trace-js>=3.3.0`.
-* [Java][6] has complete support since `dd-trace-java>=1.12.0`.
-* [JUnit report uploads][7] has complete support since `datadog-ci>=2.17.0`.
-* [Python][8] has complete support since `dd-trace-py>=1.14.0`
-
 ## Use CI tests data
 
-When creating a [dashboard][9] or a [notebook][10], you can use test execution data in your search query, which updates the visualization widget options.
+{{% ci-information-collected %}}
+
+### Integrations
+
+{{< whatsnext desc="Learn about the following integrations with Test Visibility:" >}}
+{{< nextlink href="/continuous_integration/tests/developer_workflows" >}}Enhancing Developer Workflows with Datadog{{< /nextlink >}}
+{{< nextlink href="/continuous_integration/tests/code_coverage" >}}Code Coverage{{< /nextlink >}}
+{{< nextlink href="/continuous_integration/tests/browser_tests" >}}Instrument Cypress Browser Tests with Browser RUM{{< /nextlink >}}
+{{< nextlink href="/continuous_integration/tests/swift_tests" >}}Instrument Swift Tests with Browser RUM{{< /nextlink >}}
+{{< /whatsnext >}}
+
+If [Intelligent Test Runner][12] is enabled for .NET, Java, JavaScript, or Swift, per test code coverage information, including file names and line numbers covered by each test, are collected from your projects.
+
+When creating a [dashboard][8] or a [notebook][9], you can use test execution data in your search query, which updates the visualization widget options.
 
 ## Alert on test data
 
-When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][11], click **Create Monitor** to create a [CI Test monitor][12].
+When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][10], click **Create Monitor** to create a [CI Test monitor][11].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/test-services
-[2]: /continuous_integration/explorer/facets/#creating-facets
-[3]: /continuous_integration/tests/swift/#test-suite-level-visibility-compatibility
-[4]: /continuous_integration/tests/dotnet/#test-suite-level-visibility-compatibility
-[5]: /continuous_integration/tests/javascript/#test-suite-level-visibility-compatibility
-[6]: /continuous_integration/tests/java/#compatibility
-[7]: /continuous_integration/tests/junit_upload#test-suite-level-visibility-compatibility
-[8]: /continuous_integration/tests/python/#compatibility
-[9]: https://app.datadoghq.com/dashboard/lists
-[10]: https://app.datadoghq.com/notebook/list
-[11]: https://app.datadoghq.com/ci/test-runs
-[12]: /monitors/types/ci/
+[2]: /continuous_integration/explorer/facets/
+[8]: https://app.datadoghq.com/dashboard/lists
+[9]: https://app.datadoghq.com/notebook/list
+[10]: https://app.datadoghq.com/ci/test-runs
+[11]: /monitors/types/ci/
+[12]: /continuous_integration/intelligent_test_runner/
