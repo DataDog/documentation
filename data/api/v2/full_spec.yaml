@@ -11336,6 +11336,141 @@ components:
       - id
       - type
       type: object
+    OktaAccount:
+      description: Schema for an Okta account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OktaAccountAttributes'
+        id:
+          description: The ID of the Okta account, a UUID hash of the account name.
+          example: f749daaf-682e-4208-a38d-c9b43162c609
+          type: string
+        type:
+          $ref: '#/components/schemas/OktaAccountType'
+      required:
+      - attributes
+      - type
+      type: object
+    OktaAccountAttributes:
+      description: Attributes object for an Okta account.
+      properties:
+        api_key:
+          description: The API key of the Okta account.
+          type: string
+          writeOnly: true
+        auth_method:
+          description: The authorization method for an Okta account.
+          example: oauth
+          type: string
+        client_id:
+          description: The Client ID of an Okta app integration.
+          type: string
+        client_secret:
+          description: The client secret of an Okta app integration.
+          type: string
+          writeOnly: true
+        domain:
+          description: The domain of the Okta account.
+          example: https://example.okta.com/
+          type: string
+        name:
+          description: The name of the Okta account.
+          example: Okta-Prod
+          type: string
+      required:
+      - auth_method
+      - domain
+      - name
+      type: object
+    OktaAccountRequest:
+      description: Request object for an Okta account.
+      properties:
+        data:
+          $ref: '#/components/schemas/OktaAccount'
+      required:
+      - data
+      type: object
+    OktaAccountResponse:
+      description: Response object for an Okta account.
+      properties:
+        data:
+          $ref: '#/components/schemas/OktaAccount'
+      type: object
+    OktaAccountResponseData:
+      description: Data object of an Okta account
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OktaAccountAttributes'
+        id:
+          description: The ID of the Okta account, a UUID hash of the account name.
+          example: f749daaf-682e-4208-a38d-c9b43162c609
+          type: string
+        type:
+          $ref: '#/components/schemas/OktaAccountType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    OktaAccountType:
+      default: okta-accounts
+      description: Account type for an Okta account.
+      enum:
+      - okta-accounts
+      example: okta-accounts
+      type: string
+      x-enum-varnames:
+      - OKTA_ACCOUNTS
+    OktaAccountUpdateRequest:
+      description: Payload schema when updating an Okta account.
+      properties:
+        data:
+          $ref: '#/components/schemas/OktaAccountUpdateRequestData'
+      required:
+      - data
+      type: object
+    OktaAccountUpdateRequestAttributes:
+      description: Attributes object for updating an Okta account.
+      properties:
+        api_key:
+          description: The API key of the Okta account.
+          type: string
+          writeOnly: true
+        auth_method:
+          description: The authorization method for an Okta account.
+          example: oauth
+          type: string
+        client_id:
+          description: The Client ID of an Okta app integration.
+          type: string
+        client_secret:
+          description: The client secret of an Okta app integration.
+          type: string
+          writeOnly: true
+        domain:
+          description: The domain associated with an Okta account.
+          example: https://dev-test.okta.com/
+          type: string
+      required:
+      - auth_method
+      - domain
+      type: object
+    OktaAccountUpdateRequestData:
+      description: Data object for updating an Okta account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OktaAccountUpdateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/OktaAccountType'
+    OktaAccountsResponse:
+      description: The expected response schema when getting Okta accounts.
+      properties:
+        data:
+          description: List of Okta accounts.
+          items:
+            $ref: '#/components/schemas/OktaAccountResponseData'
+          type: array
+      type: object
     OnDemandConcurrencyCap:
       description: On-demand concurrency cap.
       properties:
@@ -24604,6 +24739,185 @@ paths:
       x-menu-order: 9
       x-undo:
         type: safe
+  /api/v2/integrations/okta/accounts:
+    get:
+      description: List Okta accounts.
+      operationId: ListOktaAccounts
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OktaAccountsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Okta accounts
+      tags:
+      - Okta Integration
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: Create an Okta account.
+      operationId: CreateOktaAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OktaAccountRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OktaAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Add Okta account
+      tags:
+      - Okta Integration
+      x-codegen-request-body-name: body
+      x-given:
+        okta_account:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"okta-accounts\",\n    \"attributes\":
+              {\n      \"auth_method\": \"oauth\",\n      \"name\": \"{{ unique_lower_alnum
+              }}\",\n      \"domain\": \"https://dev-test.okta.com/\",\n      \"client_id\":
+              \"fakeclientid\",\n      \"client_secret\": \"fakeclientsecret\"\n    }\n
+              \ }\n}"
+          step: there is a valid "okta_account" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteOktaAccount
+        parameters:
+        - name: account_id
+          source: data.id
+        type: unsafe
+  /api/v2/integrations/okta/accounts/{account_id}:
+    delete:
+      description: Delete an Okta account.
+      operationId: DeleteOktaAccount
+      parameters:
+      - description: None
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Delete Okta account
+      tags:
+      - Okta Integration
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+    get:
+      description: Get an Okta account.
+      operationId: GetOktaAccount
+      parameters:
+      - description: None
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OktaAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Get Okta account
+      tags:
+      - Okta Integration
+      x-menu-order: 3
+      x-undo:
+        type: safe
+    patch:
+      description: Update an Okta account.
+      operationId: UpdateOktaAccount
+      parameters:
+      - description: None
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OktaAccountUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OktaAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Update Okta account
+      tags:
+      - Okta Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
   /api/v2/ip_allowlist:
     get:
       description: Returns the IP allowlist and its enabled or disabled state.
@@ -33701,6 +34015,9 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/monitors/create/types/
   name: Monitors
+- description: Configure your Datadog Okta integration directly through the Datadog
+    API.
+  name: Okta Integration
 - description: 'Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
 
     directly through the Datadog API.'
