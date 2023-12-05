@@ -15,7 +15,7 @@ An alert overview card contains the sections below:
 
 {{< img src="watchdog/alerts/alerts_overview.png" alt="Screenshot of a Watchdog alert card, showing an elevated error rate on the send-sms endpoint in sms-service" style="width:100%;">}}
 
-1. Status: The anomaly can be **ongoing** or **resolved** or **expired** (an expired story
+1. Status: The anomaly can be **ongoing** or **resolved** or **expired** (a story gets `expired` if it has been ongoing for more than 48h)
 3. Timeline: Describes over what time period the anomaly occurs.
 4. Message: Describes the anomaly.
 5. Graph: Visually represents the anomaly.
