@@ -2617,37 +2617,37 @@ main:
     parent: cd_explorer
     weight: 303
   - name: DORA Metrics
-    url: continuous_integration/dora_metrics/
+    url: dora_metrics/
     pre: ci
     parent: software_delivery_heading
-    identifier: ci_explorer_dora_metrics
+    identifier: dora_metrics
     weight: 170000
   - name: Static Analysis
-    url: continuous_integration/static_analysis/
+    url: static_analysis/
     pre: ci
     parent: software_delivery_heading
-    identifier: ci_static_analysis
+    identifier: static_analysis
     weight: 180000
   - name: Rules
-    url: continuous_integration/static_analysis/rules
-    parent: ci_static_analysis
-    identifier: ci_static_analysis_rules
+    url: static_analysis/rules
+    parent: static_analysis
+    identifier: static_analysis_rules
     weight: 101
   - name: CircleCI Orbs
-    url: continuous_integration/static_analysis/circleci_orbs
-    parent: ci_static_analysis
-    identifier: ci_static_analysis_circleci_orbs
+    url: static_analysis/circleci_orbs
+    parent: static_analysis
+    identifier: static_analysis_circleci_orbs
     weight: 102
   - name: GitHub Actions
-    url: continuous_integration/static_analysis/github_actions
-    parent: ci_static_analysis
-    identifier: ci_static_analysis_github_actions
+    url: static_analysis/github_actions
+    parent: static_analysis
+    identifier: static_analysis_github_actions
     weight: 103
   - name: Quality Gates
-    url: continuous_integration/quality_gates/
+    url: quality_gates/
     pre: ci
     parent: software_delivery_heading
-    identifier: ci_quality_gates
+    identifier: quality_gates
     weight: 190000
   - name: Database Monitoring
     url: database_monitoring/

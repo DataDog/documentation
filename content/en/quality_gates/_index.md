@@ -2,6 +2,8 @@
 title: Quality Gates
 kind: documentation
 description: Learn how to use Quality Gates in your pipeline.
+aliases:
+- /continuous_integration/quality_gates
 is_beta: true
 further_reading:
 - link: "/continuous_integration/tests"

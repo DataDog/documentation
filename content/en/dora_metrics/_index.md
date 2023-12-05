@@ -2,6 +2,8 @@
 title: DORA Metrics
 kind: documentation
 description: Learn how to use DORA metrics to improve and measure software development.
+aliases:
+- /continuous_integration/dora_metrics
 is_beta: true
 further_reading:
 - link: "/continuous_integration/tests"
