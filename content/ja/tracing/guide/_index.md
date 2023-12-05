@@ -64,6 +64,7 @@ title: トレースガイド
 <br>
 
 {{< whatsnext desc="トレーシングガイド" >}}
+    {{< nextlink href="/opentelemetry/guide/otel_api_tracing_interoperability/" >}}OpenTelemetry API と Datadog インスツルメンテーショントレースの相互運用性{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}サービスごとに Apdex スコアを構成する{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configuring-primary-operation" >}}サービスのプライマリオペレーション {{< /nextlink >}}
     {{< nextlink href="tracing/guide/ignoring_apm_resources" >}}リソースを無視してヘルスチェックやその他の不要なスパンを破棄する{{< /nextlink >}}
@@ -76,5 +77,6 @@ title: トレースガイド
     {{< nextlink href="tracing/guide/serverless_enable_aws_xray/" >}}Datadog APM と AWS X-Ray の使用タイミングを決定する{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/setting_up_apm_with_cpp/" >}}C++ による APM の設定{{< /nextlink >}}
     {{< nextlink href="/tracing/guide/leveraging_diversity_sampling/" >}}Datadog トレース保持ポリシーの理解{{< /nextlink >}}
-    {{< nextlink href="/tracing/guide/setting_up_apm_with_kubernetes_service/" >}}Kubernetes Service を使用して APM をセットアップする{{< /nextlink >}}
+    {{< nextlink href="/tracing/guide/agent_tracer_hostnames" >}}Agent ホストとトレーサーホストの違いを理解する{{< /nextlink >}}
+{{< nextlink href="/tracing/guide/setting_up_apm_with_kubernetes_service/" >}}Kubernetes Service を使用して APM をセットアップする{{< /nextlink >}}
 {{< /whatsnext >}}

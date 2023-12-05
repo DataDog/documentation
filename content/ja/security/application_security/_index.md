@@ -8,7 +8,7 @@ further_reading:
   text: Application Security Management の仕組み
 - link: /security/application_security/threats/
   tag: ドキュメント
-  text: Threat Monitoring and Protection
+  text: Threat Management
 - link: /security/application_security/risk_management/
   tag: ドキュメント
   text: Application Vulnerability Management

@@ -53,7 +53,7 @@ const tracer = require('dd-trace').init({
 {{% /tab %}}
 {{< /tabs >}}
 
-Runtime metrics can be viewed in correlation with your Node services. See the [Service page][1] in Datadog.
+Runtime metrics can be viewed in correlation with your Node services. See the [Service Catalog][1] in Datadog.
 
 By default, runtime metrics from your application are sent to the Datadog Agent with DogStatsD over port `8125`. Make sure that [DogStatsD is enabled for the Agent][2].
 If you are running the Agent as a container, ensure that `DD_DOGSTATSD_NON_LOCAL_TRAFFIC` [is set to true][3], and that port `8125` is open on the Agent.
@@ -71,7 +71,7 @@ Along with displaying these metrics in your APM Service Page, Datadog provides a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/services
+[1]: https://app.datadoghq.com/services
 [2]: /metrics/custom_metrics/dogstatsd_metrics_submission/#setup
 [3]: /agent/docker/#dogstatsd-custom-metrics
 [4]: /developers/dogstatsd/?tab=kubernetes#agent

@@ -20,7 +20,7 @@
         <!-- e.g gcp.project use source -->
         {{ $basename = .Params.source }}
     {{ end }}
-		{{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" $basename "variant" "avatar") }}
+		{{ $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" $basename "variant" "avatar") $basename "avatar" }}
 		{{ if $int_logo }}
 			<div class="col-3 col-lg-2 d-flex justify-content-center">
 				<img src="{{ $int_logo }}?auto=format&width=120" width="80px" max-height="100px" alt="{{ htmlEscape .Params.Source }}" />
@@ -58,9 +58,9 @@
 		</div>
 	</div>
 
-	{{ if isset .Params "source" }}
-		{{ with .Site.GetPage (print "/integrations/" .Params.source ) }}
-			<p>Set up the <a href="{{ (strings.TrimLeft "/" .RelPermalink) | absLangURL }}">{{ $dot.Params.source }}</a> integration.</p>
+	{{ with $dot.Params.source }}
+    {{ if (fileExists (print "content/en/integrations/" . ".md")) }}
+			<p>Set up the <a href="{{ (print "integrations/" .) | absLangURL }}">{{ . }}</a> integration.</p>
 		{{ end }}
 	{{ end }}
 

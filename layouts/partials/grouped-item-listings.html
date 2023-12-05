@@ -25,7 +25,7 @@
       <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2">
         {{ range last 1 $v.Pages }}
           {{ $basename := .Params.integration_id | default .Params.icon.integration_id | default .Params.source }}
-          {{ $int_logo := partial "integrations-logo.html" (dict "context" $ctx "basename" $basename "variant" "avatar" "fallback" "cloud") }}
+          {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $ctx "basename" $basename "variant" "avatar" "fallback" "cloud") $basename "avatar" }}
           {{ if $int_logo }}
             <img src="{{ $int_logo }}" height="17" alt="{{ htmlEscape .Params.Source }}"/>
           {{ else }}
@@ -65,7 +65,7 @@
             <!-- e.g gcp.project use source -->
             {{ $basename = .Params.source }}
           {{ end }}
-          {{ $int_logo := partial "integrations-logo.html" (dict "context" $ctx "basename" $basename "variant" "avatar" "fallback" "cloud") }}
+          {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $ctx "basename" $basename "variant" "avatar" "fallback" "cloud") $basename "avatar" }}
           {{ if $int_logo }}
             <img src="{{ $int_logo }}" height="17" alt="{{ htmlEscape .Params.Source }}"/>
           {{ else }}

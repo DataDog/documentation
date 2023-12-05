@@ -170,6 +170,12 @@ filelog:
     - `json_parser`: Parses JSON logs. By default, the filelog receiver converts each log line into a log record, which is the `body` of the logs' [data model][15]. Then, the `json_parser` converts the JSON body into attributes in the data model.
     - `trace_parser`: Extract the `trace_id` and `span_id` from the log to correlate logs and traces in Datadog. 
 
+#### Remap OTel's `service.name` attribute to `service` for logs
+
+For Datadog Exporter versions 0.83.0 and later, the `service` field of OTel logs is populated as [OTel semantic convention][25] `service.name`. However, `service.name` is not one of the default [service attributes][26] in Datadog's log preprocessing.
+
+To get the `service` field correctly populated in your logs, you can specify `service.name` to be the source of a log's service by setting a [log service remapper processor][27].
+
 <details>
 <summary><strong>Optional: Using Kubernetes</strong></summary>
 
@@ -729,3 +735,6 @@ The minimum required OpenTelemetry Collector version that supports this feature 
 [22]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/hostmetricsreceiver
 [23]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver
 [24]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/dockerstatsreceiver
+[25]: https://opentelemetry.io/docs/specs/semconv/resource/#service
+[26]: https://docs.datadoghq.com/logs/log_configuration/pipelines/?tab=service#service-attribute
+[27]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#service-remapper

@@ -7,9 +7,9 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/services/services_list/"
+- link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Discover the list of services reporting to Datadog"
+  text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
@@ -19,6 +19,8 @@ further_reading:
 - link: "/tracing/trace_explorer/trace_view/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
+algolia:
+  tags: ['trace view']
 ---
 
 View an individual [trace][1] to see all of its [spans][2] and associated metadata. Each trace can be viewed either as a flame graph or as a list (grouped by [service][3] or host).
