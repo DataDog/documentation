@@ -225,7 +225,7 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 ### Adding custom metrics to tests
 
-<div class="alert alert-info">`Datadog::CI` public API is available in `ddtrace` gem versions >= 1.17.0</div>
+<div class="alert alert-info">The <code>Datadog::CI</code> public API is available in <code>ddtrace</code> gem versions >= 1.17.0</div>
 
 Like tags, you can add custom metrics to your tests by using the current active test:
 
@@ -264,14 +264,13 @@ The following environment variable can be used to configure the location of the 
 
 All other [Datadog Tracer configuration][6] options can also be used.
 
-## Using additional instrumentations
+## Using additional instrumentation
 
-It can be useful to have rich tracing information about your tests that includes time spent performing database operations
-or other external calls like here:
+It can be useful to have rich tracing information about your tests that includes time spent performing database operations or other external calls, as seen in the following flame graph:
 
-{{< img src="continuous_integration/tests/setup/ci-ruby-test-trace-with-redis.png" alt="Test trace with redis instrumented" >}}
+{{< img src="continuous_integration/tests/setup/ci-ruby-test-trace-with-redis.png" alt="Test trace with Redis instrumented" >}}
 
-In order to achieve this you can configure additional instrumentations in your configure block:
+To achieve this, configure additional instrumentation in your `configure` block:
 
 ```ruby
 if ENV["DD_ENV"] == "ci"
@@ -284,15 +283,15 @@ if ENV["DD_ENV"] == "ci"
 end
 ```
 
-...or enable auto instrumentation in your test_helper/spec_helper:
+Alternatively, you can enable automatic instrumentation in `test_helper/spec_helper`:
 
 ```ruby
 require "ddtrace/auto_instrument" if ENV["DD_ENV"] == "ci"
 ```
 
-Note: in CI mode these traces are submitted to CI Visibility, they do **not** show up in Datadog APM.
+**Note**: In CI mode, these traces are submitted to CI Visibility, and they do **not** show up in Datadog APM.
 
-For the full list of available instrumentations see [ddtrace documentation][8]
+For the full list of available instrumentation methods, see the [`ddtrace` documentation][8]
 
 ## Collecting Git metadata
 
