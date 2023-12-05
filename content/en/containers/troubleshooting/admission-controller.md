@@ -316,6 +316,10 @@ volumes:
 - hostPath
 ```
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /containers/cluster_agent/admission_controller
 [2]: /tracing/trace_collection/library_injection_local/?tab=kubernetes
 [3]: /agent/troubleshooting/debug_mode/
