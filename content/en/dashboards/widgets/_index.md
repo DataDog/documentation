@@ -142,6 +142,8 @@ This is not an alternative for assigning units to your data.
 
 ## Copy and paste widgets
 
+<div class="alert alert-warning">You must have <code>dashboard_public_share</code> permissions to use this feature. For more information, see the <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#dashboards">Dashboard permissions</a> list.</div>
+
 Widgets can be copied on [Dashboards][4], [Notebooks][5], [APM Service][6], and the [APM resource][7] page by using `Ctrl + C` (`Cmd + C` for Mac), or by selecting the share icon and choosing "Copy".
 
 The copied widgets can be pasted within Datadog by using `Ctrl + V` (`Cmd + V` for Mac) on:
