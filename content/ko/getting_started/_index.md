@@ -16,13 +16,13 @@ title: 시작하기
 ---
 
 {{< whatsnext desc="이 섹션에는 다음 항목이 포함되어 있습니다:">}}
-{{< nextlink href="/getting_started/application" >}}<u>Datadog</u>: Datadog UI를 사용하는 방법: 대시보드, 인프라스트럭처 목록, 맵 등.{{< /nextlink >}}
-{{< nextlink href="/getting_started/site" >}}<u>Datadog 사이트</u>: 해당 지역 및 보안 요구사항에 맞는 Datadog 사이트 선택.{{< /nextlink >}}
-{{< nextlink href="/getting_started/devsecops" >}}<u>DevSecOps 번들</u>: 애플리케이션 성능 모니터링(APM) DevSecOps 및 인프라스트럭처 DevSecOps 번들 사용 방법.{{< /nextlink >}}
-{{< nextlink href="/getting_started/agent" >}}<u>Agent</u>: 호스트에서 Datadog으로 메트릭 및 이벤트 전송.{{< /nextlink >}}
-{{< nextlink href="/getting_started/containers" >}}<u>컨테이너</u>: Agent 자동 탐지 및 Datadog 관리자 사용 방법.{{< /nextlink >}}
-{{< nextlink href="/getting_started/serverless" >}}<u>AWS Lambda용 서버리스</u>: 서버리스 인프라스트럭처에서 메트릭, 로그 및 트레이스를 수집하는 방법.{{< /nextlink >}}
-{{< nextlink href="/getting_started/integrations" >}}<u>통합</u>: DataDog 통합으로 메트릭, 트레이스 및 로그를 수집하는 방법.{{< /nextlink >}}
+{{< nextlink href="/getting_started/application" >}}<u>Datadog</u>: Datadog UI 사용 방법: 대시보드, 인프라스트럭처 목록, 맵 등.{{< /nextlink >}}
+{{< nextlink href="/getting_started/site" >}}<u>Datadog 사이트</u>: 해당 지역 및 보안 요구사항에 맞는 Datadog 사이트 선택하기.{{< /nextlink >}}
+{{< nextlink href="/getting_started/devsecops" >}}<u>DevSecOps 번들</u>: 애플리케이션 성능 모니터링(APM) DevSecOps 및 인프라스트럭처 DevSecOps 번들 사용하기.{{< /nextlink >}}
+{{< nextlink href="/getting_started/agent" >}}<u>Agent</u>: 호스트에서 Datadog으로 메트릭 및 이벤트 전송하기.{{< /nextlink >}}
+{{< nextlink href="/getting_started/containers" >}}<u>컨테이너</u>: Agent 자동 탐지 및 Datadog 관리자 사용하기.{{< /nextlink >}}
+{{< nextlink href="/getting_started/serverless" >}}<u>AWS Lambda용 서버리스</u>: 서버리스 인프라스트럭처에서 메트릭, 로그 및 트레이스 수집하기.{{< /nextlink >}}
+{{< nextlink href="/getting_started/integrations" >}}<u>통합</u>: DataDog 통합으로 메트릭, 트레이스 및 로그를 수집하기.{{< /nextlink >}}
 {{< nextlink href="/getting_started/dashboards" >}}<u>대시보드</u>: 중요한 업무 질문에 답변할 수 있도록 대시보드를 생성, 공유 및 유지 관리.{{< /nextlink >}}
 {{< nextlink href="/getting_started/monitors" >}}<u>모니터</u>: 중요한 변경 사항 발생 시 팀에 알릴 수 있도록 경고 및 알림 설정.{{< /nextlink >}}
 {{< nextlink href="/getting_started/logs" >}}<u>로그</u>: 첫 로그를 발송하고 이를 강화하기 위해 로그 처리 사용.{{< /nextlink >}}
