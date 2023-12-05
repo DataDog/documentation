@@ -19,7 +19,7 @@ title: Amazon ECS 데이터 수집
 
 ### 메트릭
 
-EC2 상의 Amazon ECS는 EC2 인스턴스를 실행하는 Docker(Docker) 컨테이너용 컨테이너 관리 서비스입니다. Amazon ECS용 에이전트에서 수집하는 메트릭은 다음과 같습니다.
+EC2 상의 Amazon ECS는 EC2 인스턴스를 실행하는 Docker 컨테이너용 컨테이너 관리 서비스입니다. Amazon ECS용 에이전트에서 수집하는 메트릭은 다음과 같습니다.
 
 {{< get-metrics-from-git "amazon_ecs" >}}
 
