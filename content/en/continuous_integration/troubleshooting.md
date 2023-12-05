@@ -173,7 +173,7 @@ If you have admin access, you can update it from the [Repository Settings Page][
 
 ### Pipeline not found
 
-A "Pipeline not found" message is shown when you click on incomplete data coming from an in-progress pipeline. Data is received progressively for stages, jobs, or custom commands. Wait until the pipeline has finished and try again.
+A "Pipeline not found" message is shown when you click on incomplete data coming from a running pipeline. Data is received progressively for stages, jobs, or custom commands. Wait until the pipeline has finished and try again.
 
 ### Missing pipelines on the Pipelines page
 
@@ -182,6 +182,26 @@ The pipeline page only displays pipelines with no Git information, or pipelines 
 ### Missing stages or jobs in summary tables
 
 Missing stages or jobs in the _Pipeline Details_ page might be due to a wrong configuration. Make sure that the pipeline name stored in the stage or job executions matches the **same** name of their parent pipeline. If you are using custom pipelines, refer to the [public API endpoint specification][15].
+
+### Limitations on Running Pipelines
+
+#### Webhook Events Deliver Is Not Ensured by CI Providers
+
+This feature depends on CI Providers sending the webhook events properly indicating if pipelines are running or have finished.
+
+You can see pipeline executions marked as `Running` in Datadog that have already finished if the CI Provider could not send all the webhooks events properly. This might lead to have false positives on monitors tracking running pipelines.
+
+Notice that the webhook events deliver is not ensured by CI Providers.
+
+#### Maximum Duration for a Pipeline Execution
+
+The maximum duration that a pipeline execution can be tracked as `Running` is 3 days. After that time, the pipeline execution will not be tracked as `Running` anymore in CI Visibility. 
+
+If the pipeline execution finishes after +3 days, you can visualize the finished pipeline execution in CI Visibility as usual, even if the pipeline execution was not being tracked as `Running` anymore.
+
+#### Trace View Only Shows Pipeline Level
+
+The trace view only shows the pipeline level while the pipeline execution is running.
 
 ## Intelligent Test Runner
 
