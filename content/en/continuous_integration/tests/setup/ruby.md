@@ -208,13 +208,15 @@ DD_ENV=ci bundle exec rake cucumber
 
 ### Adding custom tags to tests
 
-You can add custom tags to your tests by using the current active span:
+<div class="alert alert-info">`Datadog::CI` public API is available in `ddtrace` gem versions >= 1.17.0</div>
+
+You can add custom tags to your tests by using the current active test:
 
 ```ruby
-require 'ddtrace'
+require 'datadog/ci'
 
 # inside your test
-Datadog::Tracing.active_span&.set_tag('test_owner', 'my_team')
+Datadog::CI.active_test&.set_tag('test_owner', 'my_team')
 # test continues normally
 # ...
 ```
@@ -223,13 +225,15 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 ### Adding custom metrics to tests
 
-Like tags, you can add custom metrics to your tests by using the current active span:
+<div class="alert alert-info">`Datadog::CI` public API is available in `ddtrace` gem versions >= 1.17.0</div>
+
+Like tags, you can add custom metrics to your tests by using the current active test:
 
 ```ruby
-require 'ddtrace'
+require 'datadog/ci'
 
 # inside your test
-Datadog::Tracing.active_span&.set_metric('memory_allocations', 16)
+Datadog::CI.active_test&.set_metric('memory_allocations', 16)
 # test continues normally
 # ...
 ```
