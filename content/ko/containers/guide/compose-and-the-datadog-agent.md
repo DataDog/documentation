@@ -94,7 +94,7 @@ services:
      - /var/lib/docker/containers:/var/lib/docker/containers:ro
 ```
 
-**참고**: 위의 구성은 `Redis` 컨테이너에서 로그만 수집합니다. 유사한 `com.datadoghq.ad.logs` 라벨을 추가하여 Datadog Agent에서 로그를 수집할 수 있습니다. 환경 변수 `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL`를 `true`로 설정하여 모든 컨테이너에 대해 로그 수집을 명시적으로 활성화할 수도 있습니다. 자세한 내용은 [Docker 로그 수집 설명서][4]를 참조하세요.
+**참고**: 위의 구성은 `Redis` 컨테이너에서 로그만 수집합니다. 유사한 `com.datadoghq.ad.logs` 라벨을 추가하여 Datadog Agent에서 로그를 수집할 수 있습니다. 또한, 환경 변수 `DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL`를 `true`로 설정하여 모든 컨테이너에 대해 로그 수집을 명시적으로 활성화할 수도 있습니다. 자세한 내용은 [Docker 로그 수집 설명서][4]를 참조하세요.
 
 
 ## 참고 자료
