@@ -43,6 +43,8 @@ spec:
       #(...)
 ```
 
+This sets the [label for APM configuration][11] as well as the [annotation for library injection][2].
+
 ## Review cluster agent logs and status
 
 ### Admission controller status
@@ -135,7 +137,7 @@ Depending on your Kubernetes distribution this may have some additional requirem
 
 Kubernetes has the optional feature of [Network Policies][4]. These can take a few different forms between using the out-of-box resource (`NetworkPolicy`) or custom ones like [Cilium][5] (`CiliumNetworkPolicy`). These help control different Ingress (Inbound) and Egress (Outbound) flows of traffic to your pods.
 
-If you are using these features we recommend creating the corresponding policies for the Cluster Agent to ensure the connectivity to the pod over this port. This can be configured with the configurations below. When setting the below option you can also specify a flavor. The default is `kubernetes` and corresponds to the creation of `NetworkPolicy` resources, alternatively set the flavor to `cilium` to create the corresponding `CiliumNetworkPolicy` for Cilium based environments.
+If you are using network policies we recommend creating the corresponding policies for the Cluster Agent to ensure the connectivity to the pod over this port. This can be configured with the configurations below. When setting the below option you can also specify a flavor. The default is `kubernetes` and corresponds to the creation of `NetworkPolicy` resources, alternatively set the flavor to `cilium` to create the corresponding `CiliumNetworkPolicy` for Cilium based environments.
 
 {{< tabs >}}
 {{% tab "Operator" %}}
@@ -181,7 +183,7 @@ E0908 <TIMESTAMP> 10 dispatcher.go:206] failed calling webhook "datadog.webhook.
 
 These failures were relative to a Cluster Agent deployed in the `default` namespace, the DNS name would adjust relative to your namespace used.
 
-You would see failures for the other Admission Controller webhooks such as as well such as `datadog.webhook.tags` and `datadodg.webhook.config`. **Note:** EKS often generates two log streams within the CloudWatch log group for the cluster. Be sure to check both for these types of logs.
+You would generally also see failures for the other Admission Controller webhooks, such as `datadog.webhook.tags` and `datadodg.webhook.config`. **Note:** EKS often generates two log streams within the CloudWatch log group for the cluster. Be sure to check both for these types of logs.
 
 #### AKS
 When creating the `datadog-webhook` for the `MutatingWebhookConfiguration` AKS adjusts the [format slightly to ensure you avoid the control-plane pods][8]. Provide the Cluster Agent the configuration below to ensure it can create and reconcile this format accordingly.
@@ -269,10 +271,7 @@ This setup is typically blocked when setting your Helm configuration into GKE Au
 ### OpenShift
 In OpenShift there are `SecurityContextConstraints` (SCC) that are required to deploy pods with extra permissions, such as a `volume` using a `hostPath`. We deploy our Datadog components with SCCs to allow this activity specific to the Datadog pods, however we do not create SCCs for other pods. This can cause issues if the `socket` mode is used, as it injects a `volume` with a `hostPath` into these other pods. This makes them forbidden from being deployed as they are unable to validate against any security context constraint.
 
-With this in mind in OpenShift you can use either:
-
-#### Port option
-The port option enables the `hostPort` in your Agent pod and injects the `hostip` configuration into your application pods. This is a "safe" configuration and should not be forbidden within your security contexts.
+With this in mind in OpenShift you should use the `hostip` configuration.This option enables the `hostPort` in your Agent pod and injects the `hostip` configuration into your application pods. This is a "safe" configuration and should not be forbidden within your security contexts.
 
 {{< tabs >}}
 {{% tab "Operator" %}}
@@ -301,21 +300,6 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Socket option
-If you would like to use the (UDS) `socket` option for connectivity, you need to [create a custom SCC][11] for your application pods and the Service Accounts that they are using. This SCC needs to allow the `volumes` of the type `hostPath`. For example:
-
-```yaml
-kind: SecurityContextConstraints
-apiVersion: security.openshift.io/v1
-metadata:
-  name: <NAME>
-users:
-- system:serviceaccount:<NAMESPACE>:<SERVICE_ACCOUNT>
-priority: <PRIORITY>
-volumes:
-- hostPath
-```
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -330,4 +314,4 @@ volumes:
 [8]: https://docs.microsoft.com/en-us/azure/aks/faq#can-i-use-admission-controller-webhooks-on-aks
 [9]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules
 [10]: https://ranchermanager.docs.rancher.com/reference-guides/rancher-webhook#common-issues
-[11]: https://docs.openshift.com/container-platform/4.14/rest_api/security_apis/securitycontextconstraints-security-openshift-io-v1.html
+[11]: /containers/cluster_agent/admission_controller/#apm-and-dogstatsd
