@@ -1,0 +1,41 @@
+---
+dependencies: []
+disable_edit: true
+kind: documentation
+meta:
+  category: Error Prone
+  id: tsx-react/tsx-no-duplicate-key
+  language: TypeScript
+  severity: Error
+title: Ensures unique key prop
+---
+## Metadata
+**ID:** `tsx-react/tsx-no-duplicate-key`
+
+**Language:** TypeScript
+
+**Severity:** Error
+
+**Category:** Error Prone
+
+## Description
+Duplicate JSX element keys can lead to unexpected behavior. Keys are meant to be always unique.
+
+## Non-Compliant Code Examples
+```typescript
+[<Hello key="one" />, <Hello key="one">foo</Hello>, <Hello key="one" />];
+[<Hello key={"foo"} />, <Hello key={`foo`}>foo</Hello>];
+[<Hello key={a} />, <Hello key={a} />];
+data.map(x => <Hello key="a" />);
+data.map(x => <Hello key={1}>{x}</Hello>);
+data.map(x => <Hello key={"1" + "2"}>{x}</Hello>);
+data.map(x => { return <Hello key={true}>{x}</Hello>});
+data.map(function(x) { return <Hello key={[]}>{x}</Hello>});
+Array.from([1, 2, 3], (x) => <Hello key={{}}>{x}</Hello>);
+```
+
+## Compliant Code Examples
+```typescript
+[<Hello key="first" />, <Hello key="second">foo</Hello>, <Hello key="thrid" />];
+data.map(x => { return <Hello key={`prefix-${x}`}>{x}</Hello>});
+```
