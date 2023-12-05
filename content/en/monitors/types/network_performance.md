@@ -24,13 +24,13 @@ Datadog [Network Performance Monitoring][1] (NPM) gives you visibility into your
 
 ## Monitor creation
 
-To create an NPM monitor in Datadog, use the main navigation: **Monitors** --> **New Monitor** --> **Network Performance**. 
+To create an NPM monitor in Datadog, use the main navigation: [**Monitors** --> **New Monitor** --> **Network Performance**][2]. 
 
 ## Define the search query
 
 {{< img src="monitors/monitor_types/network_performance/example_dns_failures.png" alt="Example configuration with auto-grouped  client and server, hidden N/A values, measures the sum of DNS failures metric with limit of 100" style="width:100%;" >}}
 
-1. Construct a search query using the same logic as the [NPM analytics][2] search bar. 
+1. Construct a search query using the same logic as the [NPM analytics][3] search bar. 
 1. Select the tags you want to group your client and server by.
 1. Choose if you want to show or hide N/A traffic.
 1. Select a metric you want to measure from the dropdown list. The NPM monitor only measures the sum of the metric values. See which metrics are available for NPM monitors in the [metric definitions](#metric-definitions).
@@ -44,7 +44,7 @@ The following example shows using a formula to calculate percent retransmits fro
 
 {{< img src="monitors/monitor_types/network_performance/npm_formulas_functions.png" alt="Example NPM monitor configuration showing percent of retransmits from a client to server" style="width:100%;" >}}
 
-For more information, see the [Functions][3] documentation.
+For more information, see the [Functions][4] documentation.
 
 ## Metric definitions
 
@@ -82,14 +82,15 @@ The following tables list the different NPM metrics you can create monitors on.
 Configure monitors to trigger if the query value crosses a threshold and customize advanced alert options for recovery thresholds and evaluations delays. For more information, see [Configure Monitors][5].
 
 ## Notifications
-For detailed instructions on the Notify your team section, see the [Notifications][4] page.
+For detailed instructions on the Notify your team section, see the [Notifications][6] page.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /network_monitoring/performance/
-[2]: /network_monitoring/performance/network_analytics/
-[3]: /dashboards/functions/
-[4]: /monitors/notify/
+[2]: https://app.datadoghq.com/monitors/create/network-performance
+[3]: /network_monitoring/performance/network_analytics/
+[4]: /dashboards/functions/
 [5]: /monitors/configuration/
+[6]: /monitors/notify/
