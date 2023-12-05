@@ -11,6 +11,8 @@ sync_dry_run_enabled: false
 ignores:
   - "content/en/**/faq/!(agent_v6_changes|certificate_verify_failed-error).md"
   - "content/en/security/default_rules/*.md"
+  - "content/en/security/cspm/custom_rules/*.md"
+  - "content/en/infrastructure/resource_catalog/*.md"
   - "content/en/integrations/rapdev_services.md"
   - "content/en/workflows/actions_catalog/*.md"
   - "content/en/api/v1/**/*.md"
