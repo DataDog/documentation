@@ -224,5 +224,5 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 [11]: mailto:team-ide-integration@datadoghq.com
 [12]: /continuous_integration/explorer/?tab=testruns
 [13]: /static_analysis/?tab=githubactions
-[14]: /rules/#python-rules
-[15]: /rules/#docker-rules
+[14]: /static_analysis/rules/#python-rules
+[15]: /static_analysis/rules/#docker-rules
