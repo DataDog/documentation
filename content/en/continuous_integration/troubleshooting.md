@@ -193,9 +193,9 @@ Running pipelines support relies on data sent from CI providers indicating execu
 
 The maximum duration that a pipeline execution can maintain `Running` status is 3 days. If a pipeline execution finishes after 3 days, you can visualize the finished pipeline execution in CI Visibility.
 
-#### Trace View Only Shows Pipeline Level
+#### Pipeline trace view only shows pipeline level
 
-The trace view only shows the pipeline level while the pipeline execution is running.
+While a pipeline is running, the flame graph representation of the pipeline only shows the pipeline-level span.
 
 ## Intelligent Test Runner
 
