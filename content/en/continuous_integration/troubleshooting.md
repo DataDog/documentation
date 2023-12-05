@@ -189,11 +189,9 @@ Missing stages or jobs in the _Pipeline Details_ page might be due to a wrong co
 
 Running pipelines support relies on data sent from CI providers indicating execution status. If this data is not available, executions marked as `Running` in Datadog may have already finished. 
 
-#### Maximum Duration for a Pipeline Execution
+#### Maximum duration for a pipeline execution
 
-The maximum duration that a pipeline execution can be tracked as `Running` is 3 days. After that time, the pipeline execution will not be tracked as `Running` anymore in CI Visibility. 
-
-If the pipeline execution finishes after +3 days, you can visualize the finished pipeline execution in CI Visibility as usual, even if the pipeline execution was not being tracked as `Running` anymore.
+The maximum duration that a pipeline execution can maintain `Running` status is 3 days. If a pipeline execution finishes after 3 days, you can visualize the finished pipeline execution in CI Visibility.
 
 #### Trace View Only Shows Pipeline Level
 
