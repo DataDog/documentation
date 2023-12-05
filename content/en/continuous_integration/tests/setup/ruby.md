@@ -290,7 +290,7 @@ end
 require "ddtrace/auto_instrument" if ENV["DD_ENV"] == "ci"
 ```
 
-Note: in CI mode these traces are going to be submitted to CI Visibility, they will **not** show up in Datadog APM.
+Note: in CI mode these traces are submitted to CI Visibility, they do **not** show up in Datadog APM.
 
 For the full list of available instrumentations see [ddtrace documentation][8]
 
