@@ -47,7 +47,7 @@ Agent는 이 버전에 도입된 기능과 엔드포인트를 사용하므로 �
   * `DD_KUBERNETES_KUBELET_HOST`가 설정되지 않은 경우 Agent는 docker에서 노드 호스트 이름을 검색하고 거기에 연결을 시도합니다. 이름을 확인하고 연결할 수 있는지 확인하려면 `docker info | grep "Name:"`을 사용하세요.
   * Docker 기본 게이트웨이의 IP가 클러스터 전체에서 일정한 경우 해당 IP를 `DD_KUBERNETES_KUBELET_HOST`envvar에 전달합니다. `ip addr show | grep docker0` 명령어를 사용하여 IP를 검색할 수 있습니다.
 
-- 기본 설정은 API 서버 및 kubelet에 대한 [bearer 토큰 인증][4]을 사용합니다. 1.3에서 kubelet은 bearer 토큰 인증을 지원하지 않으며, `datadog-agent`서비스 계정에 대한 클라이언트 인증서를 설정하고 이를 에이전트에 전달합니다.
+- 기본 설정은 API 서버 및 kubelet에 대한 [bearer 토큰 인증][4]을 사용합니다. 1.3에서 kubelet은 bearer 토큰 인증을 지원하지 않으며, `datadog-agent` 서비스 계정에 대한 클라이언트 인증서를 설정하고 이를 에이전트에 전달합니다.
 
 ## 참고 자료
 
