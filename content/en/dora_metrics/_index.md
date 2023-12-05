@@ -12,7 +12,7 @@ further_reading:
 - link: "/continuous_integration/pipelines"
   tag: "Documentation"
   text: "Learn about Pipeline Visibility"
-- link: "/continuous_integration/static_analysis"
+- link: "/static_analysis"
   tag: "Documentation"
   text: "Learn about Static Analysis"
 - link: "/tracing/service_catalog"
