@@ -5,7 +5,7 @@ kind: documentation
 
 ## Overview
 
-Watchdog pro-actively looks for anomalies on your systems and applications. Each anomaly is then surfaced in the [Watchdog Alert Explorer][1] with more information about what happened and when possible the impact on other systems and the root cause.
+Watchdog proactively looks for anomalies on your systems and applications. Each anomaly is then displayed in the [Watchdog Alert Explorer][1] with more information about what happened, the possible impact on other systems, and the root cause.
 
 {{< img src="watchdog/watchdog.png" alt="The Watchdog Alerts page with one ongoing log anomaly alert for error logs, one resolved log anomaly alert for error logs, and one resolved error rate alert resolved through root cause analysis" >}}
 
@@ -15,12 +15,12 @@ An alert overview card contains the sections below:
 
 {{< img src="watchdog/alerts/alerts_overview.png" alt="Screenshot of a Watchdog alert card, showing an elevated error rate on the send-sms endpoint in sms-service" style="width:100%;">}}
 
-1. Status: The anomaly can be **ongoing** or **resolved** or **expired** (a story gets `expired` if it has been ongoing for more than 48h)
-3. Timeline: Describes over what time period the anomaly occurs.
-4. Message: Describes the anomaly.
-5. Graph: Visually represents the anomaly.
-6. Tags: Shows the scope of the anomaly.
-7. [Impact][4] (when available): Describes which users, views, or services the anomaly affects.
+1. **Status**: The anomaly can be `ongoing`, `resolved`, or `expired`. (An anomaly is `expired` if it has been ongoing for over 48 hours.)
+3. **Timeline**: Describes the time period over which the anomaly occurs.
+4. **Message**: Describes the anomaly.
+5. **Graph**: Visually represents the anomaly.
+6. **Tags**: Shows the scope of the anomaly.
+7. [**Impact**][4] (when available): Describes which users, views, or services the anomaly affects.
 
 Clicking anywhere on an alert overview card opens the alerts details pane.
 
@@ -28,11 +28,11 @@ In addition to repeating the information in the alert overview card, the **Overv
 
 * **Expected Bounds**: Click the **Show expected bounds** checkbox. The graph changes color to differentiate between expected and anomalous behavior.
 * **Suggested Next Steps**: Describes steps for investigation and triage of the anomalous behavior.
-* **Monitors** tab lists monitors associated with your alert. Each monitor displayed has the metric of the current alert and its associated tags included in its scope.
+* **Monitors**: Lists monitors associated with your alert. Each monitor displayed has the metric of the current alert and its associated tags included in its scope.
 
 Additionally, Watchdog suggests one or more monitors you can create to notify you if the anomaly happens again. These monitors do not exist yet, so the table lists their status as **suggested**. Click **Enable Monitor** to enable the suggested monitor for your organization. A series of icons pops up allowing you to open, edit, clone, mute, or delete the new monitor.
  
-### Watchdog alert explorer
+## Watchdog Alert Explorer
 
 You can use the time range, search bar, or facets to filter your Watchdog alerts feed.
 
@@ -46,13 +46,13 @@ Available facets:
 |---------------------|---------------------------------------------------------------------------------|
 | Alert Category      | Display all `apm`, `infrastructure`, or `logs` alerts.                          |
 | Alert Type          | Select alerts using metrics from APM or infrastructure integrations.            |
-| Alert Status        | Select alerts based on their status (`ongoing` or `resolved` or `expired`).     |
+| Alert Status        | Select alerts based on their status (`ongoing`, `resolved`, or `expired`).     |
 | APM Primary Tag     | The [defined APM primary tag][6] to display alerts from.                        |
 | Environment         | The environment to display alerts from. See [Unified Service Tagging][5] for more information about the `env` tag.|
 | Service             | The service to display alerts from. See [Unified Service Tagging][5] for more information about the `service` tag.|
-| End User Impacted   | If Watchdog found any end users impacted (requires RUM) - see [Impact Analysis][4] for more information|
-| Root Cause          | If Watchdog found the root cause of the anomaly or the critical failure (requires APM) - see [Root Cause Analysis][9] for more information|
-| Team                | The team owning the impacted services. Enriched from the [Service Catalog][7]  |
+| End User Impacted   | (Requires RUM). If Watchdog found any end users impacted. See [Impact Analysis][4] for more information. |
+| Root Cause          | (Requires APM). If Watchdog found the root cause of the anomaly or the critical failure. See [Root Cause Analysis][9] for more information. |
+| Team                | The team owning the impacted services. Enriched from the [Service Catalog][7].  |
 | Log Anomaly Type    | Only display log anomalies of this type. The supported types are new log patterns and increases in existing log patterns.|
 | Log Source          | Only display alerts containing logs from this source.                           |
 | Log Status          | Only display alerts containing logs of this log status.                         |
@@ -64,24 +64,24 @@ Watchdog Alerts cover multiple products as well as key application and infrastru
 {{< tabs >}}
 {{% tab "Log Management" %}}
 
-Ingested logs are analyzed at the intake level where Watchdog performs aggregations on detected patterns as well as `environment`, `service`, `source` and `status` tags.
+Ingested logs are analyzed at the intake level where Watchdog performs aggregations on detected patterns as well as `environment`, `service`, `source`, and `status` tags.
 These aggregated logs are scanned for anomalous behaviors, such as the following:
 
 * An emergence of logs with a warning or error status.
 * A sudden increase of logs with a warning or error status.
 
 All log anomalies are surfaced as [Insights][3] in the Log Explorer, matching the search context and any restrictions applied to your role.
-Log anomalies that Watchdog determines to be particularly `severe` are surfaced in the [Watchdog Alerts explorer][1] and can be alerted on by setting up a [Watchdog logs monitor][2].
+Log anomalies that Watchdog determines to be particularly `severe` are surfaced in the [Watchdog Alert Explorer][1] and can be alerted on by setting up a [Watchdog logs monitor][2].
 A `severe` anomaly is defined as:
 
 * containing error logs
 * lasting at least 10 minutes (to avoid transient errors)
 * having a significant increase (to avoid small increases)
 
-**Required data history**
+#### Required data history
 
-Watchdog requires some data to establish a baseline of expected behaviour. For Log anomalies, the minimum history is 24h. 
-Watchdog starts finding anomalies once the minimum required history is available and then keeps improving as history grows. Best performances are obtained with 6 weeks of history. 
+Watchdog requires some data to establish a baseline of expected behavior. For log anomalies, the minimum history is 24 hours. 
+Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history. 
 
 [1]: https://app.datadoghq.com/watchdog
 [2]: /monitors/types/watchdog/
@@ -95,19 +95,19 @@ Watchdog scans all services and resources to look for anomalies on the following
   * Latency
   * Hits (request rate)
 
-Watchdog filters out barely used endpoints or services to reduce noise and avoid anomalies on little amount of traffic. Additionally, if an anomaly on hit rate is detected but has no impact on latency or error rate, it is then ignored. 
+Watchdog filters out barely-used endpoints or services to reduce noise and avoid anomalies on small amounts of traffic. Additionally, if an anomaly on hit rate is detected but has no impact on latency or error rate, the anomaly is then ignored. 
 
-**Required data history**
+#### Required data history
 
-Watchdog requires some data to establish a baseline of expected behaviour. For metric anomalies, the minimum history is 2 weeks. 
-Watchdog starts finding anomalies once the minimum required history is available and then keeps improving as history grows. Best performances are obtained with 6 weeks of history. 
+Watchdog requires some data to establish a baseline of expected behavior. For metric anomalies, the minimum history is two weeks. 
+Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history.
 
 {{% /tab %}}
 {{% tab "Infrastructure" %}}
 
-Infrastructure metrics from integrations:
+Watchdog looks at infrastructure metrics from the following integrations:
 
-  * [System][1], for the Host-level memory usage (memory leaks) and TCP retransmit rate.
+  * [System][1], for host-level memory usage (memory leaks) and TCP retransmit rate.
   * [Redis][2]
   * [PostgreSQL][3]
   * [NGINX][4]
@@ -122,10 +122,10 @@ Infrastructure metrics from integrations:
     * [ECS][11]
     * [Lambda][12]
    
-**Required data history**
+#### Required data history
 
-Watchdog requires some data to establish a baseline of expected behaviour. For metric anomalies, the minimum history is 2 weeks. 
-Watchdog starts finding anomalies once the minimum required history is available and then keeps improving as history grows. Best performances are obtained with 6 weeks of history.
+Watchdog requires some data to establish a baseline of expected behavior. For metric anomalies, the minimum history is two weeks. 
+Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history.
 
 [1]: /integrations/system/
 [2]: /integrations/redisdb/
@@ -144,42 +144,42 @@ Watchdog starts finding anomalies once the minimum required history is available
 {{% /tab %}}
 {{< /tabs >}}
 
-### Custom Anomaly detection
+### Custom anomaly detection
 
-Watchdog leverages the same seasonal algorithms that power monitors and dashboards. To look for anomalies on other metrics or to fine tune the sensitivity the following algorithms are available:
+Watchdog uses the same seasonal algorithms that power monitors and dashboards. To look for anomalies on other metrics or to customize the sensitivity, the following algorithms are available:
 
 * [Anomaly monitors][10]
 * [Forecast monitors][11]
 * [Outlier monitors][12]
 
-## Where to find Watchdog alerts
+## Where to find Watchdog Alerts
 
-Watchdog alerts appear in three places within the Datadog site:
+Watchdog Alerts appear in three places within Datadog:
 
-* The [Watchdog Alerts explorer][1]
+* The [Watchdog Alert Explorer][1]
 * On any individual [APM Service Page][3]
 * In the [Service Catalog][7]
-* In the [Watchdog insight panel][8] available on all explorers 
+* In the [Watchdog Insights panel][8], available on all explorers 
 
-### Watchdog Binoculars in APM pages
+### Watchdog binoculars on APM pages
 
 When Watchdog detects an irregularity in an APM metric, the pink Watchdog binoculars icon appears next to the impacted service in the [APM Service Catalog][7].
 
 {{< img src="watchdog/service_list.png" alt="Screenshot of the Service Catalog, showing 5 services. A pink binoculars icon follows the name of the web-store service." style="width:75%;" >}}
 
-You can see greater detail about a metric anomaly by navigating to the top of the [Service page][3] with the [Watchdog Insights][8] carousel.
+You can see greater detail about a metric anomaly by navigating to the top of a [Service Page][3] with the [Watchdog Insights][8] carousel.
 
 You can also find the Watchdog icon on metric graphs.
 
 {{< img src="watchdog/latency_graph.png" alt="A graph showing service latency, in seconds, on the y-axis and the time of day on the x-axis. The entire graph is highlighted in pink, and the words May 2: 13:31 Ongoing appear at the top" style="width:75%;" >}}
 
-Click on the binoculars icon to see a Watchdog alert card with more details.
+Click on the binoculars icon to see a Watchdog Alert card with more details.
 
 ## Manage archived alerts
 
-In a Watchdog alert's side panel, click the folder icon in the upper-right corner to archive it. Archiving hides the alert from the explorer, as well as other places in the Datadog site, like the home page. If an alert is archived, the pink Watchdog binoculars icon does not show up next to the relevant service or resource.
+To archive a Watchdog Alert, open the side panel and click the folder icon in the upper-right corner. Archiving hides the alert from the explorer, as well as other places in Datadog, like the home page. If an alert is archived, the pink Watchdog binoculars icon does not show up next to the relevant service or resource.
 
-To see archived alerts, select the checkbox option to "Show N archived alerts" in the top left of the [Watchdog Alerts explorer][1]. The option is only available if there is at least one alert archived. You can also see who archived each alert and when it was archived, and restore archived alerts to your feed.
+To see archived alerts, select the checkbox option to **Show _N_ archived alerts** in the top left of the [Watchdog Alert Explorer][1]. The option is only available if at least one alert is archived. You can see who archived each alert and when it was archived, and restore archived alerts to your feed.
 
 **Note**: Archiving does not prevent Watchdog from flagging future issues related to the service or resource.
 
