@@ -269,7 +269,7 @@ To enable collection of job logs:
 <div class="alert alert-info"><strong>Note</strong>: Datadog downloads log files directly from your GitLab logs <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">object storage</a> with temporary pre-signed URLs.
 The storage must not have network restrictions, such as an IP range allowlist.</div>
 
-1. Click **Enable job logs collection** checkbox in the GitLab integration **Settings > Integrations > Datadog**.
+1. Click **Enable job logs collection** checkbox in the GitLab integration under **Settings > Integrations > Datadog**.
 2. Click **Save changes**.
 
 {{% /tab %}}
