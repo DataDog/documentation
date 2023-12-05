@@ -68,7 +68,7 @@ To install the Ruby tracer:
 
 1. Add the `ddtrace` gem to your `Gemfile`:
 
-    {{< code-block lang="ruby" filename="Gemfile" >}}
+{{< code-block lang="ruby" filename="Gemfile" >}}
 source '<https://rubygems.org>'
 gem 'ddtrace', "~> 1.0"
 {{< /code-block >}}
@@ -90,18 +90,18 @@ To activate your integration, add this to the `spec_helper.rb` file:
 require 'rspec'
 require 'datadog/ci'
 
-Datadog.configure do |c|
-  # Only activates test instrumentation on CI
-  c.tracing.enabled = (ENV["DD_ENV"] == "ci")
+# Only activates test instrumentation on CI
+if ENV["DD_ENV"] == "ci"
+  Datadog.configure do |c|
+    # Configures the tracer to ensure results delivery
+    c.ci.enabled = true
 
-  # Configures the tracer to ensure results delivery
-  c.ci.enabled = true
+    # The name of the service or library under test
+    c.service = 'my-ruby-app'
 
-  # The name of the service or library under test
-  c.service = 'my-ruby-app'
-
-  # Enables the RSpec instrumentation
-  c.ci.instrument :rspec
+    # Enables the RSpec instrumentation
+    c.ci.instrument :rspec
+  end
 end
 ```
 
@@ -130,17 +130,17 @@ To activate your integration, add this to the `test_helper.rb` file:
 require 'minitest'
 require 'datadog/ci'
 
-Datadog.configure do |c|
-  # Only activates test instrumentation on CI
-  c.tracing.enabled = (ENV["DD_ENV"] == "ci")
+# Only activates test instrumentation on CI
+if ENV["DD_ENV"] == "ci"
+  Datadog.configure do |c|
+    # Configures the tracer to ensure results delivery
+    c.ci.enabled = true
 
-  # Configures the tracer to ensure results delivery
-  c.ci.enabled = true
+    # The name of the service or library under test
+    c.service = 'my-ruby-app'
 
-  # The name of the service or library under test
-  c.service = 'my-ruby-app'
-
-  c.ci.instrument :minitest
+    c.ci.instrument :minitest
+  end
 end
 ```
 
@@ -176,18 +176,18 @@ This affects all code snippets in this file.
 require 'cucumber'
 require 'datadog/ci'
 
-Datadog.configure do |c|
-  # Only activates test instrumentation on CI
-  c.tracing.enabled = (ENV["DD_ENV"] == "ci")
+# Only activates test instrumentation on CI
+if ENV["DD_ENV"] == "ci"
+  Datadog.configure do |c|
+    # Configures the tracer to ensure results delivery
+    c.ci.enabled = true
 
-  # Configures the tracer to ensure results delivery
-  c.ci.enabled = true
+    # The name of the service or library under test
+    c.service = 'my-ruby-app'
 
-  # The name of the service or library under test
-  c.service = 'my-ruby-app'
-
-  # Enables the Cucumber instrumentation
-  c.ci.instrument :cucumber
+    # Enables the Cucumber instrumentation
+    c.ci.instrument :cucumber
+  end
 end
 ```
 
@@ -208,13 +208,15 @@ DD_ENV=ci bundle exec rake cucumber
 
 ### Adding custom tags to tests
 
-You can add custom tags to your tests by using the current active span:
+<div class="alert alert-info">`Datadog::CI` public API is available in `ddtrace` gem versions >= 1.17.0</div>
+
+You can add custom tags to your tests by using the current active test:
 
 ```ruby
-require 'ddtrace'
+require 'datadog/ci'
 
 # inside your test
-Datadog::Tracing.active_span&.set_tag('test_owner', 'my_team')
+Datadog::CI.active_test&.set_tag('test_owner', 'my_team')
 # test continues normally
 # ...
 ```
@@ -223,13 +225,15 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 ### Adding custom metrics to tests
 
-Like tags, you can add custom metrics to your tests by using the current active span:
+<div class="alert alert-info">The <code>Datadog::CI</code> public API is available in <code>ddtrace</code> gem versions >= 1.17.0</div>
+
+Like tags, you can add custom metrics to your tests by using the current active test:
 
 ```ruby
-require 'ddtrace'
+require 'datadog/ci'
 
 # inside your test
-Datadog::Tracing.active_span&.set_metric('memory_allocations', 16)
+Datadog::CI.active_test&.set_metric('memory_allocations', 16)
 # test continues normally
 # ...
 ```
@@ -260,6 +264,35 @@ The following environment variable can be used to configure the location of the 
 
 All other [Datadog Tracer configuration][6] options can also be used.
 
+## Using additional instrumentation
+
+It can be useful to have rich tracing information about your tests that includes time spent performing database operations or other external calls, as seen in the following flame graph:
+
+{{< img src="continuous_integration/tests/setup/ci-ruby-test-trace-with-redis.png" alt="Test trace with Redis instrumented" >}}
+
+To achieve this, configure additional instrumentation in your `configure` block:
+
+```ruby
+if ENV["DD_ENV"] == "ci"
+  Datadog.configure do |c|
+    #  ... ci configs and instrumentation here ...
+    c.tracing.instrument :redis
+    c.tracing.instrument :pg
+    # ... any other instrumentations supported by ddtrace gem ...
+  end
+end
+```
+
+Alternatively, you can enable automatic instrumentation in `test_helper/spec_helper`:
+
+```ruby
+require "ddtrace/auto_instrument" if ENV["DD_ENV"] == "ci"
+```
+
+**Note**: In CI mode, these traces are submitted to CI Visibility, and they do **not** show up in Datadog APM.
+
+For the full list of available instrumentation methods, see the [`ddtrace` documentation][8]
+
 ## Collecting Git metadata
 
 {{% ci-git-metadata %}}
@@ -272,3 +305,4 @@ All other [Datadog Tracer configuration][6] options can also be used.
 [5]: /tracing/trace_collection/custom_instrumentation/ruby?tab=locally#adding-tags
 [6]: /tracing/trace_collection/library_config/ruby/?tab=containers#configuration
 [7]: /continuous_integration/guides/add_custom_metrics/?tab=ruby
+[8]: /tracing/trace_collection/dd_libraries/ruby/#integration-instrumentation
