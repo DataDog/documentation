@@ -34,7 +34,7 @@ type: multi-code-lang
 
 `DD_RUNTIME_METRICS_ENABLED=true` 環境変数を使用して、.NET Tracer 1.23.0+ でランタイムメトリクス収集を有効にします。
 
-ランタイムメトリクスを .NET サービスと相関して表示します。Datadog の[サービス詳細画面][1]を参照してください。
+ランタイムメトリクスを .NET サービスと相関して表示します。Datadog の[サービスカタログ][1]を参照してください。
 
 初期設定では、アプリケーションからのランタイムメトリクスは、ポート `8125` を介して DogStatsD と共に Datadog Agent に送信されます。[DogStatsD が Agent に対して有効になっていること][2]を確認してください。
 
@@ -63,11 +63,11 @@ IIS アプリケーションプールは、ユーザーのリストに表示さ�
 net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 ```
 
-
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/services
+[1]: https://app.datadoghq.com/services
 [2]: /ja/developers/dogstatsd/#setup
 [3]: /ja/agent/docker/#dogstatsd-custom-metrics
 [4]: /ja/developers/dogstatsd/?tab=kubernetes#agent
