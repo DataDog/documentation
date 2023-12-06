@@ -76,7 +76,7 @@ password::::== <MY_PASSWORD>
 
 However, the scrubber does not scrub paths that contain sensitive words. For example, it does not overwrite `/etc/vaultd/secret/haproxy-crt.pem` with `/etc/vaultd/******/haproxy-crt.pem` even though `secret` is a sensitive word.
 
-## Configure Container Images View
+## Configure container images view
 
 ### Image collection
 
