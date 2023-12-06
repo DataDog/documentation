@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-You can use Terraform to interact with the Datadog API and manage your Datadog organization, child organizations, credentials, users, permissions, and more. This guide provides an overview of the available account management resources and common use cases.
+You can use Terraform to interact with the Datadog API and manage your Datadog organization, child organizations, credentials, users, permissions, and more. This guide provides example use cases for managing Datadog with Terraform, with links to commonly used Datadog resources in the Terraform registry.
 
 ## Setup
 
@@ -28,12 +28,11 @@ Configure account access and widget sharing capabilities for any of your account
 
 <div class="alert alert-info">The Multi-organization Account feature is not enabled by default. Contact <a href="https://docs.datadoghq.com/help/" target="_blank">Datadog support</a> to have it enabled.</div>
 
-If you need to maintain separate, isolated environments, you can create [child orgs][1] under a main parent org. From the parent account, you can track the usage of any associated accounts, and users with access to multiple orgs can easily switch between them.
+If you need to maintain separate, isolated environments, you can create [child orgs][1] under a main parent org. From the parent account, you can track the usage of any associated accounts, and users with access to multiple orgs can switch between them.
 
 See [Managing Multiple-Organization Accounts][3] for more information.
 
 **Note**: Child orgs do not inherit the SAML configurations of the parent org.
-
 
 ## Users, roles, teams, and service accounts
 
