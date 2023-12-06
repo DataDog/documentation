@@ -5432,8 +5432,7 @@ api:
         - v2
       operationids:
         - SearchEvents
-      unstable:
-        - v2
+      unstable: []
       order: 2
   - name: Get an event
     url: '#get-an-event'
@@ -5470,8 +5469,7 @@ api:
         - v2
       operationids:
         - ListEvents
-      unstable:
-        - v2
+      unstable: []
       order: 1
   - name: GCP Integration
     url: /api/latest/gcp-integration/
