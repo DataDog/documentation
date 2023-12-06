@@ -22,7 +22,7 @@ The Network Performance monitor is in private beta. Reach out to your Datadog re
 
 ## Overview
 
-Datadog [Network Performance Monitoring][1] (NPM) gives you visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog. After you enable NPM, you can create an NPM monitor and get alerted if a TCP network metric crosses a threshold that you've set. For example, you can monitor network throughput between a specific client/server and get alerted if that throughput crosses a threshold. 
+Datadog [Network Performance Monitoring][1] (NPM) provides visibility into your network traffic between services, containers, availability zones, and any other tag in Datadog. After you enable NPM, you can create an NPM monitor and get alerted if a TCP network metric crosses a threshold that you have set. For example, you can monitor network throughput between a specific client/server and get alerted if that throughput crosses a threshold. 
 
 ## Monitor creation
 
@@ -30,7 +30,7 @@ To create an NPM monitor in Datadog, use the main navigation: [**Monitors** --> 
 
 ## Define the search query
 
-{{< img src="monitors/monitor_types/network_performance/example_dns_failures.png" alt="Example configuration with auto-grouped  client and server, hidden N/A values, measures the sum of DNS failures metric with limit of 100" style="width:100%;" >}}
+{{< img src="monitors/monitor_types/network_performance/example_dns_failures.png" alt="Example configuration with auto-grouped client and server traffic, hidden N/A values, measured as the sum of DNS failures metric with a limit of 100" style="width:100%;" >}}
 
 1. Construct a search query using the same logic as the [NPM analytics][3] search bar. 
 1. Select the tags you want to group your client and server by.
@@ -55,29 +55,29 @@ The following tables list the different NPM metrics you can create monitors on.
 ### Volume
 | Metric name    | Definition                 | 
 | -------------- | -------------------------  | 
-| Bytes Received | Bytes received from client |
-| Bytes Sent     | Bytes sent from client     |
-| Packets Sent   | Packets sent from client   |
+| Bytes Received | Bytes received from client. |
+| Bytes Sent     | Bytes sent from client.     |
+| Packets Sent   | Packets sent from client.   |
 
 ### TCP
 | Metric name             | Definition                                    | 
 | ----------------------  | --------------------------------------------- | 
-| Retransmits             |Retransmits between client/server              |
-| Established Connections | Establishes connections between client/server |
-| Closed Connections      | Closed connections between client/server      |
+| Retransmits             |Retransmits between client/server.              |
+| Established Connections | Establishes connections between client/server. |
+| Closed Connections      | Closed connections between client/server.      |
 
 ### DNS
 | Metric name              | Definition                               |
 | -----------------------  | ---------------------------------------  |
-| DNS Requests             | Total number of DNS requests             |
-| DNS Timeouts             | Total number of DNS failures             |
-| DNS Failed Responses     | Total number of DNS timeouts             |
-| DNS Successful Responses | Total number of DNS failed responses     |
-| DNS Failure Latency      | Total number of DNS successful responses |
-| DNS Success Latency      | Average DNS failure latency              |
-| NXDOMAIN Errors          | Average DNS success latency              |
-| SERVFAIL Errors          | Total number of NXDOMAIN errors          |
-| Other Errors             | Total number of SERVAIL errors           |
+| DNS Requests             | Total number of DNS requests.             |
+| DNS Timeouts             | Total number of DNS timeouts.             |
+| DNS Failed Responses     | Total number of DNS failed responses.             |
+| DNS Successful Responses | Total number of DNS successful responses.     |
+| DNS Failure Latency      | Average DNS failure latency. |
+| DNS Success Latency      | Average DNS success latency.              |
+| NXDOMAIN Errors          | Total number of NXDOMAIN errors.              |
+| SERVFAIL Errors          | Total number of SERVFAIL errors.          |
+| Other Errors             | Total number of other errors.           |
 
 ## Set alert conditions
 
