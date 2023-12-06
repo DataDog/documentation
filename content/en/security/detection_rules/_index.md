@@ -30,23 +30,21 @@ Datadog provides [out-of-the-box detection rules][1] to flag attacker techniques
 Out-of-the box rules are available for the following security products:
 
 - [Cloud SIEM][2] uses log detection to analyze ingested logs in real-time. You can also create [custom detection rules][3] to tailor to your environment.
-- [Cloud Security Management Misconfigurations][4] uses cloud configuration and infrastructure configuration detection rules to scan the state of your cloud environment.
-- With [Cloud Security Management Threats][5], the Datadog Agent actively monitors system activity and evaluates it against a set of detection rules.
+- Cloud Security Management (CSM):
+    - [CSM Misconfigurations][4] uses cloud configuration and infrastructure configuration detection rules to scan the state of your cloud environment.
+    - With [CSM Threats][5], the Datadog Agent actively monitors system activity and evaluates it against a set of detection rules.
+    - [CSM Identity Risks][14] [**PLACEHOLDER**]...
 - [Application Security Management][6] (ASM) leverages Datadog [APM][7], the [Datadog Agent][8], and detection rules to detect threats in your application environment.
 
-To view the out-of-the-box detection rules in Datadog, navigate to the **Security** > **Configuration** page. Rules are listed by product.
+## Custom detection rules
 
-To search and filter the rules, use the search box. You can also use the facets to scope a search query by value. For example, if you have several rule types, such as `log detection` or `cloud configuration`, filter by `only` to see rules by rule type.
+## Search and filter detection rules
 
-You can also filter by facets such as `source` and `severity` to help when investigating and triaging incoming issues. To include all facets within a category in search again, hover your mouse over a value in the panel and click **all**.
+To view out-of-the-box and custom detection rules in Datadog, navigate to the [**Security** > **Configuration**][15] page. Rules are listed by product (Application Security, Cloud Security Management, and Cloud SIEM).
 
-| Product               | Rule Types                                        |
-|-----------------------|---------------------------------------------------|
-| ASM                   | Application Security                              |
-| Cloud SIEM            | Log Detection, Signal Correlation                 |
-| CSM Misconfigurations | Infrastructure Configuration, Cloud Configuration |
-| CSM Threats           | Workload Security                                 |
-| CSM Identity Risks    | Cloud Configuration                               |
+To search and filter the rules, use the search box and facets to query by value. For example, if you have several rule types, such as `log detection` or `cloud configuration`, filter by `only` to see rules by rule type. You can also filter by facets such as `source` and `severity` to help when investigating and triaging incoming issues.
+
+{{< img src="security/default_detection_rules.png" alt="The Configuration page shows default and custom Cloud SIEM detection rules" width="100%">}}
 
 ## Create detection rules
 
@@ -147,3 +145,5 @@ The rule deprecation process is as follows:
 [11]: /security/application_security/threats/custom_rules/
 [12]: /security/misconfigurations/custom_rules
 [13]: /security/threats/workload_security_rules?tab=host#create-custom-rules
+[14]: /security/identity_risks/
+[15]: https://app.datadoghq.com/security/configuration/
