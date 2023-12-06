@@ -35,7 +35,7 @@ To create an NPM monitor in Datadog, use the main navigation: [**Monitors** --> 
 1. Construct a search query using the same logic as the [NPM analytics][3] search bar. 
 1. Select the tags you want to group your client and server by.
 1. Choose if you want to show or hide N/A traffic.
-1. Select a metric you want to measure from the dropdown list. The NPM monitor only measures the sum of the metric values. See which metrics are available for NPM monitors in the [metric definitions](#metric-definitions).
+1. Select a metric you want to measure from the dropdown list. By default, the monitor measures the sum of the metric selected. See which metrics are available for NPM monitors in the [metric definitions](#metric-definitions).
 1. Set the limit on how many results you want to be included in the query.
 
 ### Using formulas and functions
