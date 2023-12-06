@@ -17,15 +17,15 @@ further_reading:
 
 ## Overview
 
-A security signal is generated when a threat is detected in Datadog Security. You can send notifications to keep your team informed when these signals are generated.
+When at least one case defined in a [detection rule][2] is matched over a given period of time, a security signal is generated. Notifications allow you to keep your team informed when these signals are generated.
 
 ## Notification types
 
-Notifications can be set up for specific [detection rules](#detection-rule-notifications) and also more broadly with [notification rules](#notification-rules).
+Notifications can be set up for individual [detection rules](#detection-rules) and also more broadly with [notification rules](#notification-rules).
 
 ### Detection rules
 
-When you [create or modify a new detection rule][2], you can use the **Set rule case** and **Say what's happening** section to define the notifications that are sent. See [Notification Variables][1] to learn how to customize the notifications based on the signal's severity and specific context on the threat.
+When you [create or modify a detection rule][2], you can use the **Set rule case** and **Say what's happening** section to define the notifications that are sent. See [Notification Variables][1] to learn how to customize the notifications based on the signal's severity and specific context on the threat.
 
 #### Set rule case
 
@@ -33,25 +33,21 @@ In the **Set rule case** section, add rule cases to determine when a detection r
 
 #### Say what's happening
 
-Use the **Say what's happening** section to determine the content that is sent when a signal is generated. 
+Use the **Say what's happening** section to determine the content that is sent when a signal is generated.
 
-##### Rule name
-
-Add a rule name for your detection rule. The rule name appears in the **Detection Rules** list view, as well as the title of the signal. 
-
-##### Message
-
-Use standard Markdown and [notification variables][1] to provide specific details about the signal by referencing its tags and event attributes.
-
-##### Tags
-
-Use the **Tag resulting signals** dropdown to tag your signals with different tags. For example, `attack:sql-injection-attempt`. 
+- **Rule name**: Add a rule name for your detection rule. The rule name appears in the **Detection Rules** list view, as well as the title of the signal. 
+- **Message**: Use standard Markdown and [notification variables][1] to provide specific details about the signal by referencing its tags and event attributes.
+- **Tags**: Use the **Tag resulting signals** dropdown to tag your signals with different tags. For example, `attack:sql-injection-attempt`.
 
 ### Notification rules
 
-Notification rules allow you to set general alerting preferences so that you don't have to set up notification preferences for individual detection rules. For example, you can set up a notification rule to send a notification if any `CRITICAL` or `HIGH` severity signal is triggered. See [Notification Rules][3] for more information on setup and configuration.
+Notification rules allow you to set general alerting preferences that span across multiple detection rules and signals instead of having to set up notification preferences for individual detection rules. For example, you can set up a notification rule to send a notification if any `CRITICAL` or `HIGH` severity signal is triggered. See [Notification Rules][3] for more information on setup and configuration.
 
 ## Notification channels
+
+Notifications can be sent to individuals, teams, create Jira issues, and more. 
+
+Datadog also provides 
 
 Send notifications through email, Slack, Jira, PagerDuty, or a webhook. 
 
