@@ -321,13 +321,25 @@ get_architecture() {
     arm64)
       echo "arm64"
       ;;
-    *)
+    x86_64)
       echo "amd64"
+      ;;
+    amd64)
+      echo "amd64"
+      ;;
+    *)
+      echo ""
       ;;
   esac
 }
 
 ARCH=$(get_architecture)
+
+if [ -z "$ARCH" ]; then
+    echo 1>&2 "ERROR: Architecture ${ARCH} is not supported."
+    exit 1
+fi
+
 BASE_IMAGE=nginx:1.23.2-alpine
 BASE_IMAGE_WITHOUT_COLONS=$(echo "$BASE_IMAGE" | tr ':' '_')
 RELEASE_TAG=$(get_latest_release DataDog/nginx-datadog)
