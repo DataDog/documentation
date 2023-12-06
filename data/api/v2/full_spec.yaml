@@ -11902,6 +11902,10 @@ components:
     Pagination:
       description: Pagination object.
       properties:
+        max_page_size:
+          description: The maximum element count allowed per page.
+          format: int64
+          type: integer
         total_count:
           description: Total count.
           format: int64
@@ -19597,6 +19601,9 @@ components:
         icon:
           description: URL of the user's icon.
           type: string
+        mfa_enabled:
+          description: Whether the user has MFA enabled.
+          type: boolean
         modified_at:
           description: Time that the user was last modified.
           format: date-time
