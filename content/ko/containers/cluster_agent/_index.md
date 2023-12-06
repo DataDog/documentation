@@ -50,7 +50,7 @@ Docker를 사용하는 경우 Docker 허브 및 GCR에서 Datadog 클러스터 �
 {{< whatsnext desc="이 섹션에는 다음 주제를 포함합니다">}}
     {{< nextlink href="/agent/cluster_agent/setup" >}}<u>설정</u>: Kubernetes 클러스터에서 Datadog 클러스터 에이전트를 설정합니다.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/commands" >}}<u>명령 및 옵션</u>: 클러스터 에이전트에서 사용할 수 있는 모든 명령과 옵션 목록입니다.{{< /nextlink >}}
-    {{< nextlink href="/agent/cluster_agent/clusterchecks" >}}<u>클러스터 점검</u>: 클러스터 점검은 Kubernetes 서비스와 마찬가지로 로드 밸런스 클러스터 서비스에 자동감지와 점검을 기능을 제공합니다.{{< /nextlink >}}
+    {{< nextlink href="/agent/cluster_agent/clusterchecks" >}}<u>클러스터 점검</u>: 클러스터 점검은 Kubernetes 서비스와 마찬가지로 로드 밸런스 클러스터 서비스에 자동탐지와 점검을 기능을 제공합니다.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/endpointschecks" >}}<u>엔드포인트 점검</u>: 엔드포인트 점검은 클러스터 점검이 확장되어 클러스터 서비스 뒤에 있는 엔드포인트를 모니터링합니다.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/admission_controller" >}}<u>Admission Controller</u>: 단순화된 애플리케이션 Pod 구성을 위해 Admission Controller를 구성합니다.{{< /nextlink >}}
     {{< nextlink href="/agent/cluster_agent/troubleshooting" >}}<u>클러스터 에이전트 트러블슈팅</u>: Datadog 클러스터 에이전트의 트러블슈팅 정보를 찾습니다.{{< /nextlink >}}
