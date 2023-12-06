@@ -19,7 +19,7 @@ title: React Native 충돌 보고 및 오류 추적
 React Native 충돌 보고 및 오류 추적을 활성화하고 실제 사용자 모니터링을 사용하여 종합적인 충돌 보고와 오류 동향을 확보할 수 있습니다. 이 기능을 사용하면 다음에 액세스할 수 있습니다.
 
 -   총 React Native 충돌 대시보드 및 속성
--   심볼하된 React Native(자바스크립트(Javascript) 및 네이티브 iOS 또는 Android) 충돌 보고서
+-   심볼화된 React Native(자바스크립트(Javascript) 및 네이티브 iOS 또는 Android) 충돌 보고서
 -   React Native 오류 추적을 사용한 동향 분석
 
 스택 트레이스를 심볼화하려면 매핑 파일을 수동으로 Datadog에 업로드하세요.
