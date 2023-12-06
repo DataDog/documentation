@@ -1,5 +1,5 @@
 ---
-description: ブラウザテストのステップでメールとその内容を検証
+description: ブラウザテストのステップでメールとその内容を検証します。
 further_reading:
 - link: /synthetics/browser_tests/actions
   tag: Documentation
@@ -8,7 +8,7 @@ further_reading:
   tag: Documentation
   text: ステップに高度なオプションを構成する
 kind: documentation
-title: ブラウザテストのメール検証
+title: ブラウザテストでメール検証を使用する
 ---
 
 ## 概要

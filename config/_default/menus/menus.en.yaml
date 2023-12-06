@@ -10068,6 +10068,70 @@ api:
       unstable:
         - v2
       order: 1
+  - name: Okta Integration
+    url: /api/latest/okta-integration/
+    identifier: okta-integration
+    generated: true
+  - name: Update Okta account
+    url: '#update-okta-account'
+    identifier: okta-integration-update-okta-account
+    parent: okta-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateOktaAccount
+      unstable: []
+      order: 4
+  - name: Get Okta account
+    url: '#get-okta-account'
+    identifier: okta-integration-get-okta-account
+    parent: okta-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetOktaAccount
+      unstable: []
+      order: 3
+  - name: Delete Okta account
+    url: '#delete-okta-account'
+    identifier: okta-integration-delete-okta-account
+    parent: okta-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteOktaAccount
+      unstable: []
+      order: 5
+  - name: Add Okta account
+    url: '#add-okta-account'
+    identifier: okta-integration-add-okta-account
+    parent: okta-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateOktaAccount
+      unstable: []
+      order: 2
+  - name: List Okta accounts
+    url: '#list-okta-accounts'
+    identifier: okta-integration-list-okta-accounts
+    parent: okta-integration
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListOktaAccounts
+      unstable: []
+      order: 1
   - name: Opsgenie Integration
     url: /api/latest/opsgenie-integration/
     identifier: opsgenie-integration
