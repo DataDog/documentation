@@ -1,5 +1,17 @@
 {{ $dot := . }}
 {{ $.Scratch.Add "meta_image" "" }}
+{{ $hash := .File.UniqueID }}
+{{ if $dot.Params.meta_image }}
+    {{ $.Scratch.Set "meta_image" $dot.Params.meta_image }}
+{{ else if $hash }}
+    {{ $numsonly := replaceRE `[A-Za-z]` "" $hash }}
+    {{ $lastnum := int (substr $numsonly 0 1) }}
+    {{ $defaults := slice "og-thumbnails-generic.png" "og-thumbnails-generic2.png" "og-thumbnails-generic3.png" "og-thumbnails-generic4.png" "og-thumbnails-generic5.png" "og-thumbnails-generic.png" "og-thumbnails-generic2.png" "og-thumbnails-generic3.png" "og-thumbnails-generic4.png" "og-thumbnails-generic5.png" }}
+    {{ $ogimage := index $defaults $lastnum }}
+    {{ $.Scratch.Set "meta_image" (print "og-default/" $ogimage)  }}
+{{ else }}
+    {{ $.Scratch.Set "meta_image" "og-default/og-thumbnails-generic5.png" }}
+{{ end }}
 {{ $meta_image := $.Scratch.Get "meta_image" }}
 
 {{ if $.Title }}
@@ -26,19 +38,19 @@
 <meta itemprop="description" content="{{ $meta_desc | safeHTML }}">
 
 <!-- Twitter Card data -->
-{{ if $meta_image}}<meta name="twitter:card" content="{{.Site.Params.img_url}}images{{ $meta_image }}">{{ end }}
+<meta name="twitter:card" content="{{.Site.Params.img_url}}images/{{ $meta_image }}">
 <meta name="twitter:site" content="@datadoghq">
 <meta name="twitter:title" content="{{ $meta_title | safeHTML }}">
 <meta name="twitter:description" content="{{ $meta_desc | safeHTML }}">
 <meta name="twitter:creator" content="@datadoghq">
 <!-- Twitter summary card with large image must be at least 280x150px -->
-{{ if $meta_image}}<meta name="twitter:image:src" content="{{.Site.Params.img_url}}images{{ $meta_image }}">{{ end }}
+<meta name="twitter:image:src" content="{{.Site.Params.img_url}}images/{{ $meta_image }}">
 
 <!-- Open Graph data -->
 <meta property="og:title" content="{{ $meta_title }}"/>
 <meta property="og:type" content="article"/>
 <meta property="og:url" content="{{ $.Permalink }}"/>
-{{ if $meta_image}}<meta property="og:image" content="{{.Site.Params.img_url}}images{{ $meta_image }}"/>{{ else }}<meta property="og:image" content="{{.Site.Params.img_url}}{{- partial "imgurl.html" (dict "root" $dot "src" "dd-docs-meta-image.png" ) -}}"/>{{ end }}
+<meta property="og:image" content="{{.Site.Params.img_url}}images/{{ $meta_image }}"/>
 <meta property="og:description" content="{{ $meta_desc }}"/>
 <meta property="og:site_name" content="{{ .Site.Params.site_name }}"/>
 <meta property="article:author" content="Datadog"/>
