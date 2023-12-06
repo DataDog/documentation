@@ -20,16 +20,14 @@ Security notification rules play a key role in keeping your team informed of iss
 
 Create and modify notification preferences within a notification rule to span across multiple security detection rules and signals based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags.
 
-{{< img src="security/notification-profiles-overview3.png" alt="Notification Rules" style="width:100%;" >}}
-
 ## Create notification rules
 
 To create a notification rule, you define the logic for when the notification rule is triggered based on conditions such as severity, detection rule type, tags, and attributes.
 
-When you configure the rule, a preview of issues matching the notification rule conditions appears on the **Example of matching issues** panel. This can be useful in determining if the notification rule is too specific or broad.
+As you configure the rule, a preview of issues matching the notification rule conditions appears on the **Example of matching issues** panel. This can be useful in determining if the notification rule is too specific or broad.
 
 1. On the [**Notification Rules**][1] page, click **New Notification Rule**.
-2. Under **Source Types**, select one or more detection rule types to include in the notification rule.
+2. Under **Source Types**, select the detection rule types you want to include in the notification rule.
 3. (Optional) For ASM, select the **Include Application level vulnerabilities** checkbox.
 4. Under **Rule Criteria**, select the severities to include in the notification rule.
 5. Specify the tags and attributes to include in the notification rule.
@@ -64,6 +62,8 @@ To clone a notification rule, click the vertical three-dot menu on the notificat
 ### Delete a notification rule
 
 To delete a notification rule, click the vertical three-dot menu on the notification rule card and select **Delete**.
+
+{{< img src="security/notification-profiles-overview3.png" alt="Notification Rules" style="width:100%;" >}}
 
 ## Further Reading
 
