@@ -16,7 +16,9 @@ further_reading:
   text: "Check your monitor status"
 ---
 
-<div class="alert alert-warning">The Network Performance monitor is in beta. </div>
+{{< callout btn_hidden="true" header="Join the Beta!">}}
+The Network Performance monitor is in private beta. Reach out to your Datadog representative to sign up for access.
+{{< /callout >}}
 
 ## Overview
 
