@@ -45,11 +45,7 @@ Notification rules allow you to set general alerting preferences that span acros
 
 ## Notification channels
 
-Notifications can be sent to individuals, teams, create Jira issues, and more. 
-
-Datadog also provides 
-
-Send notifications through email, Slack, Jira, PagerDuty, or a webhook. 
+Notifications can be sent to individuals and teams through email, Slack, Jira, PagerDuty, webhooks, and more.
 
 ### Email
 
