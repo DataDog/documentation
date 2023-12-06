@@ -185,7 +185,7 @@ container_image:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Container Registries
+#### Container registries
 
 ##### AWS Elastic Container Registry
 Set up the [AWS integration][5] to begin crawling Container Image metadata from AWS Elastic Container Registry
