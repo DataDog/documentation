@@ -78,7 +78,7 @@ Once enabled, ASM immediately identifies application vulnerabilities and detects
 2. **Validate attacks**: Send attack patterns to trigger a test detection rule. From your terminal, run the following script:
 
   {{< code-block lang="sh" >}}
-  for ((i=1;i<=200;i++)); do
+  for ((i=1;i<=250;i++)); do
   # Target existing service's routes
   curl https://your-application-url/<EXISTING ROUTE> -A
   'dd-test-scanner-log';

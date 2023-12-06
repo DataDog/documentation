@@ -10,6 +10,9 @@ further_reading:
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
+    - link: "https://www.datadoghq.com/blog/aws-codepipeline-ci-visibility/"
+      tag: "Blog"
+      text: "Monitor and improve your CI/CD on AWS CodePipeline with Datadog CI Visibility"
 ---
 
 {{< site-region region="gov" >}}
@@ -106,6 +109,8 @@ View your data on the [Pipelines][11] and [Pipeline Executions][12] pages after 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+
+
 [1]: https://aws.amazon.com/codepipeline/
 [2]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-api-destinations.html
 [3]: https://aws.amazon.com/eventbridge/
@@ -119,5 +124,3 @@ View your data on the [Pipelines][11] and [Pipeline Executions][12] pages after 
 [11]: https://app.datadoghq.com/ci/pipelines
 [12]: https://app.datadoghq.com/ci/pipeline-executions
 [13]: https://docs.datadoghq.com/continuous_integration/troubleshooting/#the-default-branch-is-not-correct
-
-

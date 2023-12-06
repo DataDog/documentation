@@ -150,7 +150,7 @@ For more information about initializing Amplitude's SDK, see Amplitude's [iOS SD
     func track(exposure: Exposure) {
       // Send the feature flag when Amplitude reports the exposure
       if let variant = exposure.variant {
-        Global.rum.addFeatureFlagEvaluation(name: exposure.flagKey, value: variant)
+        RUMMonitor.shared().addFeatureFlagEvaluation(name: exposure.flagKey, value: variant)
       }
     }
   }
@@ -217,7 +217,7 @@ datadogRum.addFeatureFlagEvaluation(key, value);
 Each time a feature flag is evaluated, add the following function to send the feature flag information to RUM:
 
    ```swift
-   Global.rum.addFeatureFlagEvaluation(key, value);
+   RUMMonitor.shared().addFeatureFlagEvaluation(key, value);
    ```
 
 {{% /tab %}}
@@ -454,7 +454,7 @@ For more information about initializing Split's SDK, see Split's [iOS SDK docume
   config.impressionListener = { impression in
       if let feature = impression.feature,
           let treatment = impression.treatment {
-          Global.rum.addFeatureFlagEvaluation(name: feature, value: treatment)
+          RUMMonitor.shared().addFeatureFlagEvaluation(name: feature, value: treatment)
       }
   }
 ```
