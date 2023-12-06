@@ -84,6 +84,24 @@ Configure monitors to trigger if the query value crosses a threshold and customi
 ## Notifications
 For detailed instructions on the Notify your team section, see the [Notifications][6] page.
 
+## Common monitors
+You can start creating monitors on NPM with the following common monitors. These provide a good starting point to track your network and get alerted if your network is experiencing unusual traffic and potentially experiencing unexpected network behavior. 
+
+### Throughput monitor
+The throughput monitor alerts you if throughput between two endpoints specified in the query surpasses a threshold. Monitoring throughput can help you determine if your network is nearing capacity given your network bandwidth. Knowing this can give you enough time to make adjustments to your network to avoid bottlenecks and other effects downstream. 
+
+{{< img src="monitors/monitor_types/network_performance/common_monitors_throughput.png" alt="Example configuration for a throughput monitor, set Query A to measure Bytes Sent and add a formula of throughput(a)" style="width:100%;" >}}
+
+### Percent retransmits
+Retransmission occurs when packets are either damaged or lost and indicate an unreliable network. The percent retransmits monitor alerts you if the percentage of total packets sent that are resulting in retransmits passes a threshold. 
+
+{{< img src="monitors/monitor_types/network_performance/common_monitors_retransmits.png" alt="Example configuration for a percent transmits monitor, set Query A to measure Retransmits, Query B to measure Packets Sent, and add a formula to calculate the percentage with (a/b)*100" style="width:100%;" >}}
+
+### DNS failures
+DNS failure monitor tracks DNS server performance to help you identify server-side and client-side DNS issues. Use this monitor to alert you if the sum of DNS failures passes a threshold. 
+
+{{< img src="monitors/monitor_types/network_performance/common_monitors_dns_failure.png" alt="Example configuration for DNS failure, set Query A to measure DNS Failures" style="width:100%;" >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
