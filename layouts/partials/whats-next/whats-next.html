@@ -2,36 +2,44 @@
 <div class="whatsnext">
   <p>{{- i18n "additional_sentence" -}}:</p>
   <div class="list-group">
+
+    <!-- Iterate over items in the 'further_reading' parameter of the page -->
     {{- range $dot.Page.Params.further_reading -}}
-      {{- if eq (substr .link 0 4) "http" -}}
-          {{- $.Scratch.Set "link" .link -}}
-      {{- else -}}
-          {{- if eq (substr .link 0 1) "/" -}}
-              {{- if in .link "#" -}}
-                  {{- $.Scratch.Set "link" ((substr .link 1) | relLangURL) -}}
-              {{- else -}}
-                  {{- $.Scratch.Set "link" ((substr .link 1) | absLangURL) -}}
-              {{- end -}}
+      <!-- Retrieve the link and page for each item -->
+      {{- $link := .link -}}
+      {{- $linkedPage := $.Site.GetPage (printf "/%s" (trim .link "/")) -}}
+
+      <!-- Fallback logic if the linked page is not directly found -->
+      {{- if not $linkedPage -}} 
+        {{- range $.Site.Pages -}}
+          {{- if in .Aliases $link -}}
+            {{- $linkedPage = . -}}
+            {{- break -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+
+      <!-- Set the display text for the item -->
+      {{- $displayText := .text | default "" -}}
+      {{- if eq $displayText "" -}}
+          {{- if $linkedPage -}}
+              {{- $displayText = $linkedPage.Title -}}
+              {{- $link = $linkedPage.RelPermalink -}} <!-- Update link to the correct permalink -->
           {{- else -}}
-              {{- $.Scratch.Set "link" (.link | absLangURL) -}}
-              {{- if in .link "#" -}}
-                  {{- $.Scratch.Set "link" (.link | relLangURL) -}}
-              {{- else -}}
-                  {{- $.Scratch.Set "link" (.link | absLangURL) -}}
-              {{- end -}}
+              {{- $displayText = "Title not found" -}} <!-- Fallback text -->
           {{- end -}}
       {{- end -}}
-      {{- $link := $.Scratch.Get "link" -}}
-      <a class="list-group-item list-group-item-action list-group-item-white  d-flex justify-content-between align-items-center" href="{{- $link -}}">
+
+      <a class="list-group-item list-group-item-action list-group-item-white d-flex justify-content-between align-items-center" href="{{- $link -}}">
         <span class="w-100 d-flex justify-content-between">
-            <span class="text">{{- .text -}}</span>
-            {{- if .tag -}}
-                <span class="badge badge-white pe-2 border-0">{{- .tag | upper -}}</span>
-            {{- end -}}
+          <span class="text">{{- $displayText -}}</span>
+          {{- if .tag -}}
+            <span class="badge badge-white pe-2 border-0">{{- .tag | upper -}}</span>
+          {{- end -}}
         </span>
         {{- partial "img.html" (dict "root" $dot "src" "icons/list-group-whats-next-arrow-1.png" "class" "img-fluid static" "alt" "more") -}}
         {{- partial "img.html" (dict "root" $dot "src" "icons/list-group-whats-next-arrow-2.png" "class" "img-fluid hover" "alt" "more" "disable_lazy" "true") -}}
       </a>
     {{- end -}}
-    </div>
+  </div>
 </div>
