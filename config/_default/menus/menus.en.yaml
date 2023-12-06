@@ -1232,6 +1232,11 @@ main:
     parent: monitor_types
     identifier: monitor_types_network
     weight: 225
+  - name: Network Performance
+    url: monitors/types/network_performance/
+    parent: monitor_types
+    identifier: monitor_types_network_performance
+    weight: 226
   - name: Outlier
     url: monitors/types/outlier/
     parent: monitor_types
