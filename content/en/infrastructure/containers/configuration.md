@@ -187,7 +187,7 @@ container_image:
 
 #### Container registries
 
-##### AWS Elastic Container Registry
+##### Amazon Elastic Container Registry (Amazon ECR)
 Set up the [AWS integration][5] to begin crawling Container Image metadata from AWS Elastic Container Registry
 
 
