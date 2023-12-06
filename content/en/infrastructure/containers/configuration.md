@@ -88,7 +88,7 @@ Datadog collects container image metadata to provide enhanced debugging context.
 {{% tab "Kubernetes (Helm)" %}}
 
 If you are using helm version `>= 3.46.0`, image collection is [enabled by default][3].</br>
-Or, add the following to your `values.yaml` helm configuration file:
+Or, add the following to your `values.yaml` Helm configuration file:
 
 ```yaml
 datadog:
