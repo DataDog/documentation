@@ -22797,9 +22797,6 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in beta.
-
-        For access, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/events/search:
     post:
       description: 'List endpoint returns events that match an events search query.
@@ -22845,9 +22842,6 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in beta.
-
-        For access, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents:
     get:
       description: Get all incidents for the user's organization.
