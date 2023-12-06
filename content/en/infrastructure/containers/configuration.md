@@ -78,7 +78,7 @@ However, the scrubber does not scrub paths that contain sensitive words. For exa
 
 ## Configure Container Images View
 
-### Image Collection
+### Image collection
 
 Datadog collects container image metadata to provide enhanced debugging context. 
 
