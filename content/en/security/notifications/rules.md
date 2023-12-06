@@ -16,9 +16,9 @@ further_reading:
 
 ## Overview
 
-Security notification rules play a key role in keeping your team informed of issues without you having to manually edit notification preferences for individual security detection rules.
+Security notification rules play a key role in keeping your team informed of issues without you having to manually edit notification preferences for individual detection rules. Each notification rule spans across multiple detection rules and signals based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags.
 
-Create and modify notification preferences within a notification rule to span across multiple security detection rules and signals based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags.
+{{< img src="security/notification-profiles-overview3.png" alt="Notification Rules" style="width:100%;" >}}
 
 ## Create notification rules
 
@@ -29,9 +29,9 @@ As you configure the rule, a preview of issues matching the notification rule co
 1. On the [**Notification Rules**][1] page, click **New Notification Rule**.
 2. Under **Source Types**, select the detection rule types you want to include in the notification rule.
 3. (Optional) For ASM, select the **Include Application level vulnerabilities** checkbox.
-4. Under **Rule Criteria**, select the severities to include in the notification rule.
-5. Specify the tags and attributes to include in the notification rule.
-6. Under **Notification Details**, specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, lists, or handles.
+4. Under **Rule Criteria**, select one or more severity levels.
+5. Specify the tags and attributes that must be present in order for the notification rule to be triggered.
+6. Under **Notification Details**, specify the recipients you want to notify when the notification rule is triggered. You can notify individuals, teams, create Jira issues, and more. See [Notifications][2] for more information.
 7. Enter a name for the notification rule.
 8. Click **Save and Activate**.
 
@@ -63,10 +63,9 @@ To clone a notification rule, click the vertical three-dot menu on the notificat
 
 To delete a notification rule, click the vertical three-dot menu on the notification rule card and select **Delete**.
 
-{{< img src="security/notification-profiles-overview3.png" alt="Notification Rules" style="width:100%;" >}}
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/notification-rules
+[2]: /security/notifications/#notification-channels
