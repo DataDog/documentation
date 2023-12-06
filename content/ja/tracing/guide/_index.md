@@ -64,6 +64,7 @@ title: トレースガイド
 <br>
 
 {{< whatsnext desc="トレーシングガイド" >}}
+    {{< nextlink href="/opentelemetry/guide/otel_api_tracing_interoperability/" >}}OpenTelemetry API と Datadog インスツルメンテーショントレースの相互運用性{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm" >}}サービスごとに Apdex スコアを構成する{{< /nextlink >}}
     {{< nextlink href="tracing/guide/configuring-primary-operation" >}}サービスのプライマリオペレーション {{< /nextlink >}}
     {{< nextlink href="tracing/guide/ignoring_apm_resources" >}}リソースを無視してヘルスチェックやその他の不要なスパンを破棄する{{< /nextlink >}}

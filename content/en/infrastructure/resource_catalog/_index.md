@@ -13,6 +13,9 @@ further_reading:
 - link: "/security/threats/"
   tag: "Documentation"
   text: "Cloud Security Management Threats"
+- link: "https://www.datadoghq.com/blog/datadog-resource-catalog/"
+  tag: "Blog"
+  text: "Govern your infrastructure resources with the Datadog Resource Catalog"
 ---
 
 {{< site-region region="gov" >}}
