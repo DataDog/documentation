@@ -28,7 +28,7 @@ Datadog [Network Performance Monitoring][1] (NPM) provides visibility into your 
 
 To create an NPM monitor in Datadog, use the main navigation: [**Monitors** --> **New Monitor** --> **Network Performance**][2]. 
 
-## Define the search query
+### Define the search query
 
 {{< img src="monitors/monitor_types/network_performance/example_dns_failures.png" alt="Example configuration with auto-grouped client and server traffic, hidden N/A values, measured as the sum of DNS failures metric with a limit of 100" style="width:100%;" >}}
 
@@ -79,11 +79,11 @@ The following tables list the different NPM metrics you can create monitors on.
 | SERVFAIL Errors          | Total number of SERVFAIL errors.          |
 | Other Errors             | Total number of other errors.           |
 
-## Set alert conditions
+### Set alert conditions
 
 Configure monitors to trigger if the query value crosses a threshold and customize advanced alert options for recovery thresholds and evaluations delays. For more information, see [Configure Monitors][5].
 
-## Notifications
+### Notifications
 For detailed instructions on the Notify your team section, see the [Notifications][6] page.
 
 ## Common monitors
