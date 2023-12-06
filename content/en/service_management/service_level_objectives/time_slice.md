@@ -34,7 +34,7 @@ To create a new Time Slice SLO:
 
 <div class="alert alert-info">Only metric monitor SLOs can be exported. Non-metric monitors or multi-monitor SLOs cannot be exported</div>
 
-Create a time-slice SLO by exporting an existing monitor SLO. From a monitor SLO click **Export to Time Slice SLO**.
+Create a Time Slice SLO by exporting an existing monitor SLO. From a monitor SLO click **Export to Time Slice SLO**.
 
 {{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
 
@@ -44,8 +44,8 @@ Create a time-slice SLO by exporting an existing monitor SLO. From a monitor SLO
 
 From the Create or Edit SLO page, under *Define your SLI*, click **Import from Monitor** and select from the dropdown or search in the monitor selector.
 
-**Note**: Not every aspect of the monitor makes sense (or is supported) in an uptime condition for a time-slice SLO. The rolling time period used in a monitor query is not respected because time-slice SLOs do not allow rolling periods.
+**Note**: Not every aspect of the monitor makes sense (or is supported) in an uptime condition for a Time Slice SLO. The rolling time period used in a monitor query is not respected because Time Slice SLOs do not allow rolling periods.
 
-## Further reading
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
