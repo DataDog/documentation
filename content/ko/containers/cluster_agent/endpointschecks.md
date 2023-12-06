@@ -236,7 +236,7 @@ ad.datadoghq.com/endpoints.logs: '[<LOGS_CONFIG>]'
 
 이 구문은 각 엔드포인트의 IP로 대체되는 `%%host%%` [템플릿 변수][11]를 지원합니다. `kube_namespace`,`kube_service` 그리고 `kube_endpoint_ip` 태그가 인스턴스에 자동으로 추가됩니다.
 
-**참고**: 커스텀 엔드포인트 로그 설정은 Kubernetes 로그 파일 수집이 아닌 도커(Docker) 소켓 로그 수집 중에만 지원됩니다.
+**참고**: 커스텀 엔드포인트 로그 설정은 Kubernetes 로그 파일 수집이 아닌 Docker 소켓 로그 수집 중에만 지원됩니다.
 
 #### 예: 서비스의 엔드포인트 NGINX 점검으로 NGINX 지원 서비스 HTTP 점검
 
@@ -312,7 +312,7 @@ ad.datadoghq.com/endpoints.logs: '[<LOGS_CONFIG>]'
 
 이 구문은 각 엔드포인트의 IP로 대체되는 `%%host%%` [템플릿 변수][11]를 지원합니다. `kube_namespace`,`kube_service` 그리고 `kube_endpoint_ip` 태그가 인스턴스에 자동으로 추가됩니다.
 
-**참고**: 커스텀 엔드포인트 로그 설정은 Kubernetes 로그 파일 수집이 아닌 도커(Docker) 소켓 로그 수집 중에만 지원됩니다.
+**참고**: 커스텀 엔드포인트 로그 설정은 Kubernetes 로그 파일 수집이 아닌 Docker 소켓 로그 수집 중에만 지원됩니다.
 
 #### 예: 서비스의 엔드포인트 NGINX 점검으로 NGINX 지원 서비스 HTTP 점검
 
