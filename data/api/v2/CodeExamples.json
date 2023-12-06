@@ -509,6 +509,20 @@
       "description": "Edit a monitor configuration policy returns \"OK\" response"
     }
   ],
+  "CreateOktaAccount": [
+    {
+      "group": "okta_integration",
+      "suffix": "",
+      "description": "Add Okta account returns \"OK\" response"
+    }
+  ],
+  "UpdateOktaAccount": [
+    {
+      "group": "okta_integration",
+      "suffix": "",
+      "description": "Update Okta account returns \"OK\" response"
+    }
+  ],
   "CreateOpsgenieService": [
     {
       "group": "opsgenie_integration",
