@@ -46,6 +46,7 @@ Using Static Analysis provides organizations with the following benefits:
 ### IDEs
 {{< whatsnext desc="With Static Analysis, you can get real-time feedback as you edit a file in your Integrated Development Environment (IDE). See the documentation for information about the following integrations:">}}
     {{< nextlink href="developers/ide_integrations/idea/" >}}Datadog Plugin for IntelliJ IDEA{{< /nextlink >}}
+    {{< nextlink href="developers/ide_integrations/vscode/" >}}Datadog Extension for Visual Studio Code{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Setup
