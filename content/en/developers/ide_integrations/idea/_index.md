@@ -189,7 +189,7 @@ Static Analysis supports scanning for many programming languages. For a complete
 Additionally, all issues detected by this feature are listed in the standard **Problems** view.
 
 ### Getting started
-When you start editing a source file (Python and Docker files are supported), the plugin checks for `static-analysis.datadog.yml` at your source repository's root. It prompts you to create it if necessary:
+When you start editing a source file supported by Static Analysis, the plugin checks for `static-analysis.datadog.yml` at your source repository's root. It prompts you to create the file if necessary:
 
 {{< img src="/developers/ide_integrations/idea/static-analysis-onboard.png" alt="A banner for onboarding." style="width:100%;" >}}
 
