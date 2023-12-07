@@ -96,13 +96,13 @@ Static Analysis supports scanning for many programming languages. For a complete
 Additionally, all issues detected by this feature are listed in the standard **Problems** view.
 
 ### Getting started
-When you start editing a source file supported by Static Analysis, the extension checks for `static-analysis.datadog.yml` at your source repository's root. It prompts you to create it if necessary:
+When you start editing a source file supported by Static Analysis, the extension checks for `static-analysis.datadog.yml` at your source repository's root. It prompts you to create the file if necessary:
 
 {{< img src="/developers/ide_integrations/vscode/static-analysis-onboard.png" alt="A banner for onboarding." style="width:100%;" >}}
 
 Once the configuration file is created, the static analyzer runs automatically in the background.
 
-<div class="alert alert-info">The Static Analysis feature does not require a Datadog account as source files are analyzed locally.</div>
+<div class="alert alert-info">The Static Analysis feature does not require a Datadog account, as source files are analyzed locally.</div>
 
 ## Feedback
 
