@@ -362,11 +362,11 @@ Container(
 [4]: /real_user_monitoring/error_tracking/flutter
 [5]: https://pub.dev/packages/datadog_tracking_http_client
 [6]: /serverless/distributed_tracing
-[7]: /real_user_monitoring/flutter/data_collected/
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/data_collected/
 [8]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
 [9]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
 [10]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
 [11]: https://pub.dev/packages/go_router
-[12]: /real_user_monitoring/flutter/advanced_configuration/#automatic-view-tracking
+[12]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/advanced_configuration/#automatic-view-tracking
 [13]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionDetector-class.html
 [14]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionAnnotation-class.html

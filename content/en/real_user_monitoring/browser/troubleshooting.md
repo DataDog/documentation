@@ -128,6 +128,6 @@ The warning is shown because the intake returns a non-empty JSON object. This be
 [6]: /real_user_monitoring/browser/data_collected/?tab=session
 [7]: https://bugs.chromium.org/p/chromium/issues/detail?id=1255707
 [8]: /real_user_monitoring/guide/sampling-browser-plans/
-[9]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#global-context
-[10]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
+[9]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
+[10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [11]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser
