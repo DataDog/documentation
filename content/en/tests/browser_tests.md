@@ -53,6 +53,6 @@ The RUM session has all the data that [RUM normally collects][3] so you can debu
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/tests/javascript/?tab=cypress#instrument-your-tests
+[1]: /tests/javascript/?tab=cypress#instrument-your-tests
 [2]: /real_user_monitoring/browser/
 [3]: /real_user_monitoring/browser/data_collected/
