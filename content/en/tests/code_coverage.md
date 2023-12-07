@@ -5,6 +5,7 @@ description: Learn how to report and use code coverage in Datadog.
 aliases:
 - /continuous_integration/guides/code_coverage/
 - /continuous_integration/integrate_tests/code_coverage/
+- continuous_integration/tests/code_coverage/
 further_reading:
 - link: "/continuous_integration/tests"
   tag: "Documentation"

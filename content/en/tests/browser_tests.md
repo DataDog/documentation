@@ -5,6 +5,7 @@ description: Learn how to use CI Visibility and RUM to connect your test results
 aliases:
 - /continuous_integration/guides/rum_integration
 - /continuous_integration/integrate_tests/browser_tests
+- continuous_integration/tests/browser_tests
 further_reading:
 - link: "/continuous_integration/tests"
   tag: "Documentation"

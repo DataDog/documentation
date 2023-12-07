@@ -5,6 +5,7 @@ aliases:
   - /continuous_integration/explore_tests/
   - /continuous_integration/guides/test_configurations/
   - /continuous_integration/integrate_tests/
+  - continuous_integration/tests/
 further_reading:
     - link: "/monitors/types/ci/"
       tag: "Documentation"

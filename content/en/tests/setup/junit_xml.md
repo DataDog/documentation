@@ -7,6 +7,7 @@ code_lang_weight: 60
 aliases:
   - /continuous_integration/setup_tests/junit_upload
   - /continuous_integration/tests/junit_upload
+  - continuous_integration/tests/setup/junit_xml
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
