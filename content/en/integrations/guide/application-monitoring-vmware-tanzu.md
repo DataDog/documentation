@@ -31,7 +31,7 @@ You can use DogStatsD to get your custom application metrics into Datadog. DogSt
 
 The Trace Agent is a service that collects application traces from various sources and forwards them to Datadog APM. For more information, see the [tracing][7] documentation.
 
-The Container Agent is a smaller, ligtweight version of the [Datadog Agent][6] that can forward metrics and logs to Datadog. See the [logs][8] documentation for more information. When enabled, the default behavior is for all logs from `stdout` and `stderr` to be collected and forwarded by TCP to the Container Agent.
+The Container Agent is a smaller, lightweight version of the [Datadog Agent][6] that can forward metrics and logs to Datadog. See the [logs][8] documentation for more information. When enabled, the default behavior is for all logs from `stdout` and `stderr` to be collected and forwarded by TCP to the Container Agent.
 
 ## Key features
 Datadog Application Monitoring for VMware Tanzu includes the following key features:
