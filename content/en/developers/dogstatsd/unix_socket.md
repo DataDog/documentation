@@ -11,9 +11,6 @@ further_reading:
     - link: 'developers/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
-    - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd'
-      tag: 'GitHub'
-      text: 'DogStatsD source code'
 ---
 
 Starting with version 6.0, the Agent can ingest metrics with a Unix Domain Socket (UDS) as an alternative to UDP transport.
@@ -55,8 +52,8 @@ To enable the Agent DogStatsD UDS:
 2. [Restart your Agent][2].
 
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /agent/guide/agent-commands/
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/configuration/agent-commands/
 {{% /tab %}}
 {{% tab "Docker" %}}
 
@@ -189,9 +186,9 @@ Origin detection allows DogStatsD to detect where the container metrics come fro
 3. [Restart your Agent][3].
 
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /getting_started/tagging/assigning_tags/#environment-variables
-[3]: /agent/guide/agent-commands/
+[3]: /agent/configuration/agent-commands/
 {{% /tab %}}
 {{% tab "Docker" %}}
 

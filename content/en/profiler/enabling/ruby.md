@@ -46,12 +46,13 @@ To begin profiling applications:
 
 1. If you are already using Datadog, upgrade your agent to version [7.20.2][2]+ or [6.20.2][3]+.
 
-2. Add the `ddtrace` and `google-protobuf` gems to your `Gemfile` or `gems.rb` file:
+2. Add the `ddtrace` gem to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'ddtrace', '~> 1.0'
-    gem 'google-protobuf', '~> 3.0'
+    gem 'ddtrace', '~> 1.15'
     ```
+
+    If you're running a version of `ddtrace` older than 1.15.0, add the `google-protobuf` gem (version ~> 3.0) as a dependency.
 
 2. Install the gems with `bundle install`.
 

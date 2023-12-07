@@ -150,7 +150,7 @@ The Agent's [main configuration file][13] is `datadog.yaml`. For the Docker Agen
 | `DD_DD_URL`          | Optional setting to override the URL for metric submission.                                                                                                                                                                                                                                                                                      |
 | `DD_URL` (6.36+/7.36+)            | Alias for `DD_DD_URL`. Ignored if `DD_DD_URL` is already set.                                                                                                                                                                                                                                                                                    |
 | `DD_CHECK_RUNNERS`   | The Agent runs all checks concurrently by default (default value = `4` runners). To run the checks sequentially, set the value to `1`. If you need to run a high number of checks (or slow checks), the `collector-queue` component may fall behind and fail the health check. You can increase the number of runners to run checks in parallel. |
-| `DD_APM_ENABLED`             | Enables trace collection. Defaults to `true`. Fore more information about additional trace collection environment variables, see [Tracing Docker Applications][14].   |
+| `DD_APM_ENABLED`             | Enables trace collection. Defaults to `true`. For more information about additional trace collection environment variables, see [Tracing Docker Applications][14].   |
 | `DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION` | In some environments, the initial logs from hosts might not include the correct tags. If you're missing tags on new hosts in your logs, include this environment variable and set it to `"10m"`.|
 
 ### Proxy settings
@@ -293,13 +293,13 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/docker-dd-agent?gcrImageListsize=30
 [7]: https://gallery.ecr.aws/datadog/docker-dd-agent
 [8]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
-[9]: /agent/basic_agent_usage/#supported-os-versions
+[9]: /agent/supported_platforms/?tab=cloudandcontainers
 [10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: /agent/guide/compose-and-the-datadog-agent/
 [12]: /agent/docker/integrations/
-[13]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[13]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [14]: /agent/docker/apm/
-[15]: /agent/proxy/#agent-v6
+[15]: /agent/configuration/proxy/#agent-v6
 [16]: /agent/docker/apm/#tracing-from-other-containers
 [17]: /agent/docker/log/
 [18]: /infrastructure/process/
@@ -308,9 +308,9 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [21]: /developers/dogstatsd/unix_socket/
 [22]: /getting_started/tagging/unified_service_tagging/
 [23]: /agent/docker/tag/
-[24]: /agent/guide/secrets-management/?tab=linux
+[24]: /agent/configuration/secrets-management/?tab=linux
 [25]: /agent/guide/autodiscovery-management/
-[26]: /agent/guide/agent-commands/
+[26]: /agent/configuration/agent-commands/
 [27]: /integrations/container/
 [28]: /integrations/system/#metrics
 [29]: /integrations/disk/#metrics

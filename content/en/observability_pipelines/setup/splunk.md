@@ -16,6 +16,10 @@ further_reading:
     text: "Safe and Secure Local Processing with Observability Pipelines"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
+
 <div class="alert alert-info">Observability Pipelines only supports Splunk's HTTP Event Collector (HEC) protocol.</div>
 
 ## Overview
@@ -49,20 +53,48 @@ Ensure that your machine is configured to run Docker.
 {{% tab "AWS EKS" %}}
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
 
-* The [AWS Load Balancer controller][1] is required. To see if it is installed, run the following command and look for `aws-load-balancer-controller` in the list:
+* The [EBS CSI driver][1] is required. To see if it is installed, run the following command and look for `ebs-csi-controller` in the list:
+
+  ```shell
+  kubectl get pods -n kube-system
+  ```
+
+* A `StorageClass` is required for the Workers to provision the correct EBS drives. To see if it is installed already, run the following command and look for `io2` in the list:
+
+  ```shell
+  kubectl get storageclass
+  ```
+
+  If `io2` is not present, download [the StorageClass YAML][2] and `kubectl apply` it.
+
+* The [AWS Load Balancer controller][3] is required. To see if it is installed, run the following command and look for `aws-load-balancer-controller` in the list:
 
   ```shell
   helm list -A
   ```
 * Datadog recommends using Amazon EKS >= 1.16.
 
-[1]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
+See [Best Practices for OPW Aggregator Architecture][4] for production-level requirements.
+
+[1]: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
+[2]: /resources/yaml/observability_pipelines/helm/storageclass.yaml
+[3]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
+[4]: /observability_pipelines/architecture/
+
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
+
+See [Best Practices for OPW Aggregator Architecture][1] for production-level requirements.
+
+[1]: /observability_pipelines/architecture/
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 To run the Worker on your Kubernetes nodes, you need a minimum of two nodes with one CPU and 512MB RAM available. Datadog recommends creating a separate node pool for the Workers, which is also the recommended configuration for production deployments.
+
+See [Best Practices for OPW Aggregator Architecture][1] for production-level requirements.
+
+[1]: /observability_pipelines/architecture/
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
 There are no provider-specific requirements for APT-based Linux.
@@ -76,11 +108,21 @@ In order to run the Worker in your AWS account, you need administrative access t
 * The subnet IDs your instances will run in.
 * The AWS region your VPC is located in.
 {{% /tab %}}
+{{% tab "CloudFormation" %}}
+
+<div class="alert alert-warning">CloudFormation installs only support Remote Configuration at this time.</div>
+<div class="alert alert-danger">Only use CloudFormation installs for non-production-level workloads.</div>
+
+In order to run the Worker in your AWS account, you need administrative access to that account. Collect the following pieces of information to run the Worker instances:
+* The VPC ID your instances will run in.
+* The subnet IDs your instances will run in.
+* The AWS region your VPC is located in.
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Setting up the Splunk index
 
-<div class="alert alert-info">Observability Pipelines supports acknowledgements when you enable the <strong>Enable Indexer Acknowledgements</strong> setting on the input.</div>
+<div class="alert alert-info">Observability Pipelines supports acknowledgments when you enable the <strong>Enable Indexer Acknowledgments</strong> setting on the input.</div>
 
 To receive logs from the Observability Pipelines Worker, you must provision a HEC input and HEC token on the index.
 
@@ -382,6 +424,38 @@ EOT
 }
 ```
 {{% /tab %}}
+{{% tab "CloudFormation" %}}
+
+<div class="alert alert-danger">Only use CloudFormation installs for non-production-level workloads.</div>
+
+To install the Worker in your AWS Account, use the CloudFormation template to create a Stack:
+
+  1. Download the [CloudFormation template][1] for the Worker.
+
+  2. In the **CloudFormation console**, click **Create stack**, and select the **With new resources (standard)** option.
+
+  3. Make sure that the **Template is ready** option is selected. Click **Choose file** and add the CloudFormation template file you downloaded earlier. Click **Next**.
+
+  4. Enter a name for the stack in **Specify stack details**.
+
+  5. Fill in the parameters for the CloudFormation template. A few require special attention:
+
+      * For `APIKey` and `PipelineID`, provide the key and ID that you gathered earlier in the Prerequisites section.
+
+      * For the `SplunkToken`, provide the token you created earlier on your Splunk index.
+    
+     * For the `VPCID` and `SubnetIDs`, provide the subnets and VPC you chose earlier.
+
+      * All other parameters are set to reasonable defaults for a Worker deployment but you can adjust them for your use case as needed.
+  
+  6. Click **Next**.
+
+  7. Review and make sure the parameters are as expected. Click the necessary permissions checkboxes for IAM, and click **Submit** to create the Stack.
+
+CloudFormation handles the installation at this point; the Worker instances are launched and they automatically download the necessary software and start running.
+
+[1]: /resources/yaml/observability_pipelines/cloudformation/splunk.yaml
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Load balancing
@@ -399,6 +473,9 @@ Use the load balancer URL given to you by Helm when you configure your existing 
 
 NLBs provisioned by the [AWS Load Balancer Controller][1] are used.
 
+
+See [Capacity Planning and Scaling][2] for load balancer recommendations when scaling the Worker.
+
 #### Cross-availability-zone load balancing
 The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen.
 
@@ -408,10 +485,11 @@ The sample configurations do not enable the cross-zone load balancing feature av
 service.beta.kubernetes.io/aws-load-balancer-attributes: load_balancing.cross_zone.enabled=true
 ```
 
-See [AWS Load Balancer Controller][2] for more details.
+See [AWS Load Balancer Controller][3] for more details.
 
 [1]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/
-[2]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/annotations/#load-balancer-attributes
+[2]: /observability_pipelines/architecture/capacity_planning_scaling/
+[3]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/annotations/#load-balancer-attributes
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 Use the load balancers provided by your cloud provider.
@@ -420,8 +498,12 @@ so they are only accessible inside your network.
 
 Use the load balancer URL given to you by Helm when you configure your existing collectors.
 
+See [Capacity Planning and Scaling][1] for load balancer recommendations when scaling the Worker.
+
 #### Cross-availability-zone load balancing
 The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen.
+
+[1]: /observability_pipelines/architecture/capacity_planning_scaling/
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 Use the load balancers provided by your cloud provider.
@@ -430,10 +512,14 @@ so they are only accessible inside your network.
 
 Use the load balancer URL given to you by Helm when you configure your existing collectors.
 
+See [Capacity Planning and Scaling][1] for load balancer recommendations when scaling the Worker.
+
 #### Cross-availability-zone load balancing
 The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen.
 
 Global Access is enabled by default since that is likely required for use in a shared tools cluster.
+
+[1]: /observability_pipelines/architecture/capacity_planning_scaling/
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
 No built-in support for load-balancing is provided, given the single-machine nature of the installation. You will need to provision your own load balancers using whatever your company's standard is.
@@ -443,6 +529,12 @@ No built-in support for load-balancing is provided, given the single-machine nat
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
 An NLB is provisioned by the Terraform module, and provisioned to point at the instances. Its DNS address is returned in the `lb-dns` output in Terraform.
+{{% /tab %}}
+{{% tab "CloudFormation" %}}
+
+<div class="alert alert-danger">Only use CloudFormation installs for non-production-level workloads.</div>
+
+An NLB is provisioned by the CloudFormation template, and is configured to point at the AutoScaling Group. Its DNS address is returned in the `LoadBalancerDNS` CloudFormation output.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -475,6 +567,12 @@ Where possible, it is recommended to have a separate SSD mounted at that locatio
 {{% tab "Terraform (AWS)" %}}
 By default, a 288GB EBS drive is allocated to each instance, and the sample configuration above is set to use that for buffering.
 {{% /tab %}}
+{{% tab "CloudFormation" %}}
+
+<div class="alert alert-danger">EBS drives created by this CloudFormation template have their lifecycle tied to the instance they are created with. <strong>This leads to data loss if an instance is terminated, for example by the AutoScaling Group.</strong> For this reason, only use CloudFormation installs for non-production-level workloads.</div>
+
+By default, a 288GB EBS drive is allocated to each instance, and is auto-mounted and formatted upon instance boot.
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Connect Splunk forwarders to the Observability Pipelines Worker
@@ -482,7 +580,7 @@ After you install and configure the Observability Pipelines Worker to send logs 
 
 You can update most Splunk collectors with the IP/URL of the host (or load balancer) associated with the Observability Pipelines Worker.
 
-For Terraform installs, the `lb-dns` output provides the necessary value.
+For Terraform installs, the `lb-dns` output provides the necessary value. For CloudFormation installs, the `LoadBalancerDNS` CloudFormation output has the correct URL to use.
 
 Additionally, you must update the Splunk collector with the HEC token you wish to use for authentication, so it matches the one specified in the Observability Pipelines Worker's list of `valid_tokens` in `pipeline.yaml`.
 

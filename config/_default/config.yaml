@@ -21,6 +21,11 @@ defaultContentLanguageInSubdir: false
 # set this as a default otherwise we get "Error: found overlapping content dirs"
 # contentDir: "content/en"
 
+caches:
+    getjson:
+        dir: :cacheDir/:project
+        maxAge: '1h'
+
 # gitinfo vars
 enableGitInfo: true
 
@@ -116,7 +121,7 @@ security:
   funcs:
     getenv:
       # allow os.Getenv to read gitlab CI_ prefixed os environment vars
-      - ^(HUGO_|CI_)
+      - ^(HUGO_|CI_|IA_SUBDOMAIN)
   exec:
     osEnv:
       # as suggested here https://github.com/gohugoio/hugo/issues/9333#issuecomment-1022435616
@@ -134,4 +139,7 @@ outputFormats:
     mediaType: "text/plain"
     notAlternative: true
 
-timeout: "45s"
+timeout: "90s"
+
+minify:
+  disableSVG: true
