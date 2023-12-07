@@ -36,7 +36,7 @@ The **Synthetic Tests** feature allows you to:
 
 The **View in VS Code** feature provides a link from Datadog directly to your source files. 
 
-The Static Analysis integration analyzes your code (locally) against predefined rules to detect and fix problems before you commit changes.
+The **Static Analysis** integration analyzes your code (locally) against predefined rules to detect and fix problems before you commit changes.
 
 ## Requirements
 
