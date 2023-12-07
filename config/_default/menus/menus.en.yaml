@@ -2441,7 +2441,7 @@ main:
     identifier: ci_search
     weight: 2
   - name: Explorer
-    url: continuous_integration/explorer/
+    url: continuous_integration/explorer
     parent: ci
     identifier: ci_explorer
     weight: 3
@@ -2520,27 +2520,47 @@ main:
     url: tests/containers/
     parent: tests
     identifier: tests_containers
+    weight: 2
+  - name: Search and Manage
+    url: tests/search/
+    parent: tests
+    identifier: tests_search
     weight: 3
+  - name: Explorer
+    url: continuous_integration/explorer
+    parent: tests
+    identifier: tests_explorer
+    weight: 4
   - name: Developer Workflows
     url: tests/developer_workflows
     parent: tests
     identifier: tests_developer_workflows
-    weight: 4
+    weight: 5
   - name: Code Coverage
     url: tests/code_coverage
     parent: tests
     identifier: tests_code_coverage
-    weight: 5
+    weight: 6
   - name: Instrument Browser Tests with RUM
     url: tests/browser_tests
     parent: tests
     identifier: tests_browser_tests
-    weight: 6
+    weight: 7
   - name: Instrument Swift Tests with RUM
     url: tests/swift_tests
     parent: tests
     identifier: tests_swift_tests
-    weight: 7
+    weight: 8
+  - name: Guides
+    url: tests/guides/
+    parent: tests
+    identifier: tests_guides
+    weight: 9
+  - name: Troubleshooting
+    url: tests/troubleshooting/
+    parent: tests
+    identifier: tests_troubleshooting
+    weight: 10
   - name: Intelligent Test Runner
     url: intelligent_test_runner/
     pre: ci
@@ -2555,28 +2575,33 @@ main:
   - name: .NET
     url: intelligent_test_runner/setup/dotnet/
     parent: intelligent_test_runner_setup
-    identifier: ci_itr_dotnet
+    identifier: intelligent_test_runner_setup_dotnet
     weight: 101
   - name: Java
     url: intelligent_test_runner/setup/java/
     parent: intelligent_test_runner_setup
-    identifier: ci_itr_java
+    identifier: intelligent_test_runner_setup_java
     weight: 202
   - name: JavaScript and TypeScript
     url: intelligent_test_runner/setup/javascript/
     parent: intelligent_test_runner_setup
-    identifier: ci_itr_javascript
+    identifier: intelligent_test_runner_setup_javascript
     weight: 103
   - name: Python
     url: intelligent_test_runner/setup/python/
     parent: intelligent_test_runner_setup
-    identifier: ci_itr_python
+    identifier: intelligent_test_runner_setup_python
     weight: 104
   - name: Swift
     url: intelligent_test_runner/setup/swift/
     parent: intelligent_test_runner_setup
-    identifier: ci_itr_swift
+    identifier: intelligent_test_runner_setup_swift
     weight: 105
+  - name: Troubleshooting
+    url: intelligent_test_runner/troubleshooting/
+    parent: intelligent_test_runner
+    identifier: intelligent_test_runner_troubleshooting
+    weight: 2
   - name: CD Visibility
     url: continuous_delivery/
     pre: ci
