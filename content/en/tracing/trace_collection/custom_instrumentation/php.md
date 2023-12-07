@@ -54,7 +54,7 @@ You can provide the following arguments:
 - `$run_if_limited`: Whether the function shall be traced in limited mode. (For example, when span limit exceeded)
 
 <div class="alert alert-warning">
-if a namespace is present, you <strong>must</strong> use the fully qualified name of the attribute <code>#[\DDTrace\Trace]</code>. Alternatively, you can import the namespace with <code>use DDTrace\Trace;</code> and use <code>#[Trace]</code>.
+If a namespace is present, you <strong>must</strong> use the fully qualified name of the attribute <code>#[\DDTrace\Trace]</code>. Alternatively, you can import the namespace with <code>use DDTrace\Trace;</code> and use <code>#[Trace]</code>.
 </div>
 
 ## Writing custom instrumentation
