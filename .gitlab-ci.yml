@@ -241,7 +241,7 @@ algolia_sync_preview:manual:
     - yarn run prebuild
     - build_site
     # end build
-    - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/brian.deutsch/dup-objects/atomic-algolia-v1.0.3.tgz
+    - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v1.0.2.tgz
     - >
       ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id')
       ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key')
