@@ -26664,7 +26664,9 @@ paths:
         operationId: DeleteBulkTagsMetricsConfiguration
         parameters:
         - name: body
-          source: ''
+          template: "{\n  \"data\": {\n    \"id\":\"{{ data.id }}\",\n    \"type\":\"metric_bulk_configure_tags\",\n
+            \   \"attributes\": {\n      \"emails\": [\"{{ data.attributes.emails[0]
+            }}\"]\n    }\n  }\n}"
         type: unsafe
   /api/v2/metrics/{metric_name}/active-configurations:
     get:
