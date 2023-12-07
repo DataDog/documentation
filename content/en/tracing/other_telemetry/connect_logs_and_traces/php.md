@@ -95,7 +95,7 @@ The PHP tracer replaces the placeholders with the corresponding values. For exam
 ## Manual injection
 
 <div class="alert alert-warning">
-Note that the function <code>\DDTrace\current_context()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> and returns decimal trace identifiers.
+**Note**: The function <code>\DDTrace\current_context()</code> has been introduced in version <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.61.0">0.61.0</a> and returns decimal trace identifiers.
 </div>
 
 To connect your logs and traces together, your logs must contain the `dd.trace_id` and `dd.span_id` attributes that respectively contain your trace ID and your span ID.
