@@ -3,7 +3,7 @@ disable_toc: false
 further_reading:
 - link: /getting_started/profiler/
   tag: 설명서
-  text: Continuous Profiler 시작하기
+  text: 지속적인 프로파일러 시작하기
 - link: /integrations/guide/source-code-integration/
   tag: 설명서
   text: 소스 코드 통합에 대해 알아보기
@@ -12,7 +12,7 @@ further_reading:
   text: 정적 분석에 대해 알아보기
 - link: https://www.jetbrains.com/lp/toolbox/
   tag: 외부 사이트
-  text: JetBrains 도구 상자에 대해 알아보기
+  text: JetBrains Toolbox에 대해 알아보기
 is_beta: true
 kind: 설명서
 title: IntelliJ 플랫폼용 Datadog 플러그인
@@ -28,7 +28,7 @@ IntelliJ 플랫폼용 Datadog 플러그인은 IDEA, GoLand, PyCharm에서 사용
 - [오류 추적][6]에서 발생하는 문제
 - 애플리케이션 보안 관리의 [취약성][8] 보고서
 - CI 가시성이 감지한 [불안정한 테스트][9]
-- [Watchdog 인사이트][10]의 프로파일링 인사이트
+- [Watchdog Insights][10]의 프로파일링 인사이트
 
 **지속적인 프로파일러**는 다음과 같은 코드라인을 강조 표시하여 지연 시간을 줄이고 클라우드 비용을 절감할 수 있도록 도와줍니다:
 - CPU 사용량이 가장 많음
@@ -146,7 +146,7 @@ Code Insights에는 각 문제에 대한 상세한 설명과 다음 링크가 �
 
 {{< img src="/developers/ide_integrations/idea/separate-flamegraph-by.png" alt="툴팁 버튼을 사용하여 메서드 또는 줄 번호별로 프레임을 구분" style="width:40%;" >}}
 
-### 소스 강조하기
+### 소스 하이라이팅
 
 Continuous Profiler 탭이 활성화되면 플러그인은 소스 코드 편집기 여백에 코드 하이라이트를 추가합니다. Top Methods의 경우 편집기 여백에 아이콘이 나타나고, 활성 프로파일링 데이터를 기반으로 코드에 라인 레벨의 하이라이트가 나타납니다.
 - 아이콘에 마우스 커서를 올리면 더 자세한 정보가 표시됩니다.
