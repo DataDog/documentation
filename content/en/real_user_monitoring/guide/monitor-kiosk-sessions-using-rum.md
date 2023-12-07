@@ -94,7 +94,7 @@ This feature requires RUM Flutter SDK version >= 1.4.0. See installation instruc
 DatadogSdk.instance.rum?.stopSession();
 ```
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/setup/
+[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
 
 {{% /tab %}}
 {{% tab "React Native" %}}
