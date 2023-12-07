@@ -51,6 +51,36 @@ Investigate details using the [Misconfigurations Explorer][10]. View detailed in
 
 {{< img src="security/cspm/misconfigurations_explorer.png" alt="CSM Misconfigurations Explorer page" width="100%">}}
 
+## Severity score framework
+
+Starting in early 2024, all CSM Misconfigurations and Identity Risk rules will use our severity score framework. This framework is designed to compare the likelihood that an adversary will take advantage of a misconfiguration to the risk posed to your environment. The matrix below shows how these two factors are computed.
+
+### Likelihood
+
+Likelihood is computed as a factor of an attack vector and the resource's accessibility.
+
+|               |                     | Accessibility |          |
+|---------------|---------------------|---------------|----------|
+|               |                     | Private       | Public   |
+| Attack Vector | Required Privileges | Low           | Medium   |
+|               | Vulnerability       | Medium        | High     |
+|               | No Authorization    | High          | Critical |
+
+The attack vector is determined by the following criteria:
+
+|    Attack Vector    |                                                 Definition                                                |
+|:-------------------:|:---------------------------------------------------------------------------------------------------------:|
+| Required Privileges | Requires specific privileges or access to abuse.                                                          |
+| Vulnerability       | Requires a vulnerable component to abuse, such as a software vulnerability or leaked password/access key. |
+| No Authorization    | Requires no authorization/authentication to abuse.                                                        |
+
+The accessibility is determined by the following criteria:
+
+| Accessibility |                             Definition                             |
+|:-------------:|:------------------------------------------------------------------:|
+| Private       | The vulnerable component/resource is in a private network.         |
+| Public        | The vulnerable component/resource is accessible from the internet. |
+
 ## Get started
 
 {{< whatsnext >}}
