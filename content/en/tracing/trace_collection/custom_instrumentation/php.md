@@ -53,6 +53,10 @@ You can provide the following arguments:
 - `$recurse`: Whether recursive calls shall be traced.
 - `$run_if_limited`: Whether the function shall be traced in limited mode. (For example, when span limit exceeded)
 
+<div class="alert alert-warning">
+if a namespace is present, you <strong>must</strong> use the fully qualified name of the attribute, for example `#[\DDTrace\Trace]`, or import the namespace with `use DDTrace\Trace;` and use `#[Trace]`.
+</div>
+
 ## Writing custom instrumentation
 
 If you do need to write your own custom instrumentation, consider the following sample application and walk through the coding examples.
