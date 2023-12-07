@@ -223,9 +223,9 @@ Whenever you perform an operation that might throw an exception, you can forward
 [1]: https://github.com/rokucommunity/ropm
 [2]: https://github.com/DataDog/dd-sdk-roku
 [3]: https://app.datadoghq.com/rum/application/create
-[4]: /real_user_monitoring/mobile_and_tv_monitoring/setup/roku/data_collected/
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
 [5]: /account_management/api-app-keys/#api-keys
 [6]: /account_management/api-app-keys/#client-tokens
 [7]: /getting_started/tagging/using_tags/#rum--session-replay
-[8]: /real_user_monitoring/mobile_and_tv_monitoring/setup/roku/advanced_configuration/#track-rum-resources
-[9]: /real_user_monitoring/mobile_and_tv_monitoring/setup/roku/advanced_configuration/#enrich-user-sessions
+[8]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#track-rum-resources
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#enrich-user-sessions
