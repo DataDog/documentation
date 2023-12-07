@@ -39,7 +39,7 @@ As you expand your search filters, the graph above the search bar updates.
     * **Monitor over a facet**: If you select a [facet][4], the monitor alerts over the `Unique value count` of the facet.
     * **Monitor over measure**: If you select a [measure][5], the monitor alerts over the numerical value of the RUM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 3. Group RUM events by multiple dimensions (optional):
-  All RUM events matching the query are aggregated into groups based on the value of up to four facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimension:
+  All RUM events matching the query are aggregated into groups based on the value of up to four facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. Dimensions limit depends on the total number of dimensions:
    * **1 facet**: 1000 top values
    * **2 facets**: 30 top values per facet (at most 900 groups)
    * **3 facets**: 10 top values per facet (at most 1000 groups)
