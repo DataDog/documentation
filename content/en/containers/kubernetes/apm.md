@@ -21,7 +21,7 @@ further_reading:
   text: "Assign tags to all data emitted by a container"
 ---
 
-This page describes how to setup and configure [Application Performance Monitoring (APM)][10] for your Kubernetes application.
+This page describes how to set up and configure [Application Performance Monitoring (APM)][10] for your Kubernetes application.
 
 {{< img src="tracing/visualization/troubleshooting_pipeline_kubernetes.png" alt="The APM troubleshooting pipeline: The tracer sends traces and metrics data from the application pod to the Agent pod, which sends it to the Datadog backend to be shown in the Datadog UI.">}}
 
@@ -38,7 +38,7 @@ The instructions in this section configure the Datadog Agent to receive traces o
 
 {{< tabs >}}
 {{% tab "Operator" %}}
-After you [use Operator to install the Datadog Agent][1], edit your `datadog-agent.yaml` to set `features.apm.enabled` to `true`.
+After you [use the Operator to install the Datadog Agent][1], edit your `datadog-agent.yaml` to set `features.apm.enabled` to `true`.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1

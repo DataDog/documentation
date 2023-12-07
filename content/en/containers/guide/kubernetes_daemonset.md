@@ -99,7 +99,7 @@ To enable APM trace collection over TCP, open the DaemonSet configuration file a
       # (...)
     ```
 
-- **If using an old agent version (7.17 or lower)**, in addition to the steps above, set the `DD_APM_NON_LOCAL_TRAFFIC` and `DD_APM_ENABLED` variable to `true` in your `env` section of the `datadog.yaml` trace Agent manifest:
+- **If using Agent version 7.17 or previous**, in addition to the steps above, set the `DD_APM_NON_LOCAL_TRAFFIC` and `DD_APM_ENABLED` variables to `true` in your `env` section of the `datadog.yaml` trace Agent manifest:
 
   ```yaml
     # (...)
