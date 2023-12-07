@@ -123,8 +123,8 @@ This powerpack provides graphs about usage by country, actions on a view, and ac
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/
-[2]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#enrich-and-control-rum-data
-[3]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#enrich-user-sessions
+[2]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/ios/?tab=swift#enrich-user-sessions
 [4]: /real_user_monitoring/android/advanced_configuration/?tab=kotlin#enrich-user-sessions
 [5]: https://app.datadoghq.com/rum/explorer
 [6]: /real_user_monitoring/funnel_analysis/

@@ -12,7 +12,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
   tag: "Blog"
   text: "Introducing Datadog Real User Monitoring"
-- link: "/real_user_monitoring/browser/modifying_data_and_context"
+- link: "/real_user_monitoring/browser/advanced_configuration"
   tag: "Documentation"
   text: "Modifying RUM data and adding context"
 - link: "/real_user_monitoring/explorer/"
@@ -243,7 +243,7 @@ Source errors include code-level information about the error. For more informati
 
 | Metric    | Type   | Description              |
 |--------------|--------|--------------------------|
-| `action.loading_time` | number (ns) | The loading time of the action. See how it is calculated in the [User Action documentation][16]. |
+| `action.loading_time` | number (ns) | The loading time of the action. See how it is calculated in the [Tracking User Actions documentation][16]. |
 | `action.long_task.count`        | number      | Count of all long tasks collected for this action. |
 | `action.resource.count`         | number      | Count of all resources collected for this action. |
 | `action.error.count`      | number      | Count of all errors collected for this action.|
@@ -281,11 +281,11 @@ Source errors include code-level information about the error. For more informati
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
+[1]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [2]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
 [3]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
 [4]: /data_security/real_user_monitoring/#ip-address
-[5]: /real_user_monitoring/browser/modifying_data_and_context/#identify-user-sessions
+[5]: /real_user_monitoring/browser/advanced_configuration/#user-sessions
 [6]: /real_user_monitoring/guide/setup-feature-flag-data-collection
 [7]: /data_security/real_user_monitoring/#ip-address
 [8]: /synthetics/browser_tests/
@@ -296,5 +296,5 @@ Source errors include code-level information about the error. For more informati
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[16]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#how-action-loading-time-is-calculated
+[16]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-metrics
 [17]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions
