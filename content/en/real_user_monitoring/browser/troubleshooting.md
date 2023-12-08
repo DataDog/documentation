@@ -5,7 +5,7 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
   tag: 'Blog'
   text: 'Real User Monitoring'
-- link: '/real_user_monitoring/faq/content_security_policy/'
+- link: '/integrations/content_security_policy_logs/'
   tag: 'Documentation'
   text: 'Content Security Policy'
 ---
@@ -124,7 +124,7 @@ The warning is shown because the intake returns a non-empty JSON object. This be
 [2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md
 [3]: /real_user_monitoring/browser/#npm
 [4]: /real_user_monitoring/guide/proxy-rum-data/
-[5]: /real_user_monitoring/faq/content_security_policy/
+[5]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [6]: /real_user_monitoring/browser/data_collected/?tab=session
 [7]: https://bugs.chromium.org/p/chromium/issues/detail?id=1255707
 [8]: /real_user_monitoring/guide/sampling-browser-plans/
