@@ -61,10 +61,10 @@ The likelihood component is made up of two subcomponents; The attack vector, the
 
 |               |                     | Accessibility |          |
 |---------------|---------------------|---------------|----------|
-|               |                     | Private       | Public   |
-| **Attack Vector** | Required Privileges | Low           | Medium   |
-|               | Vulnerability       | Medium        | High     |
-|               | No Authorization    | High          | Critical |
+|               |                     | **Private**       | **Public**   |
+| **Attack Vector** | **Required Privileges** | Low           | Medium   |
+|               | **Vulnerability**       | Medium        | High     |
+|               | **No Authorization**    | High          | Critical |
 
 The attack vector is determined by the following criteria:
 
@@ -87,7 +87,7 @@ The impact component is how damaging the exploitation of the misconfiguration wo
 
 |  Impact  |                                                                                                                 Definition                                                                                                                |
 |:--------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-|    Low   | This misconfiguration is related to security hardening, hygiene, resource metadata, or industry best practice configurations.                                                                                                             |
+|    Low   | This misconfiguration is related to security hardening, hygiene, resource metadata, or industry best practice configurations. By itself, this misconfiguration represents little to no impact to the environment.                                                                                                             |
 |  Medium  | Abusing this misconfiguration results in an impact to the confidentiality, integrity, or availability of the vulnerable component or its directly associated resources.                                                                   |
 |   High   | Abusing this misconfiguration results in an impact to the following: confidentiality, integrity or availability of the vulnerable component and impacts a significant number of other resources (E.G. S3FullAccess, EC2FullAccess, etc.). |
 | Critical | Abusing this misconfiguration results in complete control of all resources in the account (E.G. AdministratorAccess)                                                                                                                      |
@@ -98,11 +98,11 @@ These two subcomponent scores combined compute the overall severity score for a 
 
 |            |          | Impact |        |          |          |
 |------------|----------|--------|--------|----------|----------|
-|            |          | Low    | Medium | High     | Critical |
-| **Likelihood** | Low      | Low    | Low    | Medium   | Medium   |
-|            | Medium   | Low    | Medium | High     | High     |
-|            | High     | Medium | High   | High     | Critical |
-|            | Critical | Medium | High   | Critical | Critical |
+|            |          | **Low**    | **Medium** | **High**     | **Critical** |
+| **Likelihood** | **Low**      | Low    | Low    | Medium   | Medium   |
+|            | **Medium**   | Low    | Medium | High     | High     |
+|            | **High**     | Medium | High   | High     | Critical |
+|            | **Critical** | Medium | High   | Critical | Critical |
 
 ## Get started
 
