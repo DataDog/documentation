@@ -30,15 +30,15 @@ In addition to repeating the information in the alert overview card, the **Overv
 * **Suggested Next Steps**: Describes steps for investigation and triage of the anomalous behavior.
 * **Monitors**: Lists monitors associated with your alert. Each monitor displayed has the metric of the current alert and its associated tags included in its scope.
 
-Additionally, Watchdog suggests one or more monitors you can create to notify you if the anomaly happens again. These monitors do not exist yet, so the table lists their status as **suggested**. Click **Enable Monitor** to enable the suggested monitor for your organization. A series of icons pops up allowing you to open, edit, clone, mute, or delete the new monitor.
+Additionally, Watchdog suggests one or more monitors you can create to notify you if the anomaly happens again. These monitors do not exist yet, so the table lists their status as `suggested`. Click **Enable Monitor** to enable the suggested monitor for your organization. A series of icons pops up allowing you to open, edit, clone, mute, or delete the new monitor.
  
 ## Watchdog Alert Explorer
 
-You can use the time range, search bar, or facets to filter your Watchdog alerts feed.
+You can use the time range, search bar, or facets to filter your Watchdog Alerts feed.
 
 * **Time range**: Use the time range selector in the upper right to view alerts detected in a specific time range. You can view any alert that happened in the last 6 months.
-* **Search bar**: Enter text in the **Filter alerts** search box to search over your alert `titles`.
-* **Facets**: The left side of the Watchdog alerts feed contains the search facets below. Check the corresponding boxes to filter your alerts by facet.
+* **Search bar**: Enter text in the **Filter alerts** search box to search over alert titles.
+* **Facets**: The left side of the Watchdog Alerts feed contains the search facets below. Check the corresponding boxes to filter your alerts by facet.
 
 Available facets: 
 
@@ -59,7 +59,7 @@ Available facets:
 
 ## Watchdog Alerts coverage
 
-Watchdog Alerts cover multiple products as well as key application and infrastructure metrics:
+Watchdog Alerts cover multiple application and infrastructure metrics:
 
 {{< tabs >}}
 {{% tab "Log Management" %}}
