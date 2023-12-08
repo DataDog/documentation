@@ -34,7 +34,7 @@ Once you have set up the Datadog RUM SDK, enrich your [browser][2] or mobile ([i
 
 If you are interested in learning what buttons your users click on the most, you can track page traffic and the usage of buttons in your application. 
 
-1. Navigate to the [RUM Explorer][5] and select **Actions** from the dropdown menu next to the search query. 
+1. In the [RUM Explorer][5], select **Actions** from the dropdown menu next to the search query. 
 2. Enter `@view.name:/cart` in the search query and select the **Top List** visualization type.
 3. In the `by` field of the `Group into fields` section above, select **Action Name** from the group dropdown.
 
