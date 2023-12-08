@@ -69,7 +69,7 @@
             }
         },
         shouldShowRule (ruleEl) {
-            // Determines ruleset display
+            // Determines rule display
             // Compares search values and filter values against ruleInfo
 
             const ruleInfo = ruleEl.dataset.info.split(';')
@@ -210,12 +210,12 @@
                             {{/*  
                                 build a string with rule's lookup info for filtering and searching against
                             */}}
-                            {{ $ruleset_id := index (split .Params.meta.id "/") 1}}
+                            {{ $rule_id := index (split .Params.meta.id "/") 1}}
                             {{ $filter_info := printf "%s,%s,%s" .Params.meta.language .Params.meta.category .Params.meta.severity }}
-                            {{ $ruleset_info := (replaceRE "(`|')" "" (delimit (slice $filter_info ($ruleset_id|lower) ($ruleset_description|lower) $ruleset_title .Params.group_id .Title ) ";")) }}
+                            {{ $rule_info := (replaceRE "(`|')" "" (delimit (slice $filter_info ($rule_id|lower) ($ruleset_description|lower) $ruleset_title .Params.group_id .Title ) ";")) }}
                             <div 
                             class="rule d-flex justify-content-between border p-1 position-relative"
-                            data-info="{{ $ruleset_info }}"
+                            data-info="{{ $rule_info }}"
                             data-name="{{ .Title }}"
                             x-cloak x-show.important="shouldShowRule($el)"
                             >
@@ -227,7 +227,7 @@
                                     <a href="{{.Permalink}}" class="stretched-link">{{.Title}}</a>
                                 </div>
                                 <div class="d-flex justify-content-end">
-                                    <span class="d-none d-md-block">{{ $ruleset_id }}</span>
+                                    <span class="d-none d-md-block">{{ $rule_id }}</span>
                                     <div class="group-header__arrow fw-semibold ms-1">></div>
                                 </div>
                             </div>
@@ -243,7 +243,7 @@
                             */}}
                             {{ $pad.SetInMap "filters" "Languages" (union (index ($pad.Get "filters") "Languages") (slice .Params.meta.language)) }}
                             {{ $pad.SetInMap "filters" "Categories" (union (index ($pad.Get "filters") "Categories") (slice .Params.meta.category)) }}
-                            {{ $pad.SetInMap "filters" "Severities" (union (index ($pad.Get "filters") "Severities") (slice .Params.meta.severity)) }}
+                            {{ $pad.SetInMap "filters" "Severities" (slice "Error" "Warning" "Notice" "None") }}
                             {{/*  
                                 build object of arrays with unique languages for each ruleset header (.group-header )
                                 languagesByRuleset: {
