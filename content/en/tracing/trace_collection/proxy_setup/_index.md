@@ -336,7 +336,7 @@ get_architecture() {
 ARCH=$(get_architecture)
 
 if [ -z "$ARCH" ]; then
-    echo 1>&2 "ERROR: Architecture ${ARCH} is not supported."
+    echo 1>&2 "ERROR: Architecture $(uname -m) is not supported."
     exit 1
 fi
 
