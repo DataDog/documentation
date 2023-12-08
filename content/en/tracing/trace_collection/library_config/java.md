@@ -22,8 +22,17 @@ All configuration options below have system property and environment variable eq
 If the same key type is set for both, the system property configuration takes priority.
 System properties can be set as JVM flags.
 
-Note: When using the Java tracer's system properties, make sure that they are listed before `-jar` so they get read in as JVM options.
+### Converting between system properties and environment variables
+Unless otherwise stated, you can convert between system properties and environment variables with the following transformations:
 
+- To set a system property as an environment variable, uppercase the property name and replace `.` or `-` with `_`.
+  For example, `dd.service` becomes `DD_SERVICE`.
+- To set an environment variable as a system property, lowercase the variable name and replace `_` with `.`
+  For example, `DD_TAGS` becomes `dd.tags`.
+
+**Note**: When using the Java tracer's system properties, list the properties before `-jar`. This ensures the properties are read in as JVM options.
+
+## Configuration options
 
 `dd.service`
 : **Environment Variable**: `DD_SERVICE`<br>
@@ -292,6 +301,16 @@ When `true`, user principal is collected. Available for versions 0.61+.
 : **Environment Variable**: `DD_INSTRUMENTATION_TELEMETRY_ENABLED`<br>
 **Default**: `true`<br>
 When `true`, the tracer collects [telemetry data][8]. Available for versions 0.104+. Defaults to `true` for versions 0.115+.
+
+`dd.trace.128.bit.traceid.generation.enabled`
+: **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`<br>
+**Default**: `true`<br>
+When `true`, the tracer generates 128 bit Trace IDs, and encodes Trace IDs as 32 lowercase hexadecimal characters with zero padding.
+
+`dd.trace.128.bit.traceid.logging.enabled`
+: **Environment Variable**: `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`<br>
+**Default**: `false`<br>
+When `true`, the tracer will inject 128 bit Trace IDs as 32 lowercase hexadecimal characters with zero padding, and 64 bit Trace IDs as decimal numbers. Otherwise, the tracer always injects Trace IDs as decimal numbers.
 
 **Note**:
 

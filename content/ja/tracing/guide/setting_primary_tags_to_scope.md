@@ -150,7 +150,7 @@ DD_APM_FEATURES=enable_cid_stats
 
 Agent を再起動します。[APM 設定][6]ページに移動し、使用する第 2 プライマリタグを選択します。この設定の変更が反映されるまで、最大で 2 時間かかることがあります。
 
-これで、[Service List][7] で、コンテナ化されたサービスから送信されるタグによって、サービスをフィルターすることができます。ダッシュボードやモニターで使用されるトレースメトリクスも、コンテナのプライマリタグで集計することができます。
+これで、[サービスカタログ][7]で、コンテナ化されたサービスから送信されるタグによって、サービスをフィルターすることができます。ダッシュボードやモニターで使用されるトレースメトリクスも、コンテナのプライマリタグで集計することができます。
 
 ### タグとしてのカスタムラベル
 
@@ -173,6 +173,6 @@ Agent を再起動します。[APM 設定][6]ページに移動し、使用す�
 [4]: /ja/getting_started/tagging/assigning_tags/#traces
 [5]: /ja/tracing/metrics/metrics_namespace/
 [6]: https://app.datadoghq.com/apm/settings
-[7]: https://app.datadoghq.com/apm/services
+[7]: https://app.datadoghq.com/services
 [8]: /ja/getting_started/tagging/assigning_tags
 [9]: /ja/tracing/troubleshooting/#data-volume-guidelines

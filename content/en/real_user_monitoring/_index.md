@@ -174,7 +174,7 @@ Access triggered logs, errors, and performance information when troubleshooting 
 [4]: /monitors/types/real_user_monitoring/
 [5]: /real_user_monitoring/connect_rum_and_traces/
 [6]: /real_user_monitoring/error_tracking/
-[7]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
+[7]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [8]: /real_user_monitoring/ios/mobile_vitals/
 [9]: /real_user_monitoring/android/mobile_vitals/
 [10]: /real_user_monitoring/ios/web_view_tracking/
