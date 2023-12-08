@@ -37,14 +37,14 @@ All Watchdog features come built-in, and do not require setup.
 
 {{< youtube UMNXdrI0J8A >}}
 
-
+<br/>
 ### Proactive alerts
 
 Watchdog proactively computes a baseline of expected behavior for your systems, applications, and deployments. This baseline is then used to detect anomalous behavior.
 
-{{< whatsnext desc="The following pages provide more information:">}}
-  {{< nextlink href="/watchdog/alerts">}}<u>Watchdog Alerts</u>: Learn how to view and interpret Watchdog Alerts: the information provided by each alert, what alerts cover, and where to find Watchdog alerts throughout Datadog.{{< /nextlink >}}
-  {{< nextlink href="/watchdog/faulty_deployment_detection">}}<u>Faulty Deployment Detection</u>: Learn about Automatic Faulty Deployment Detection, a Watchdog capability that finds faulty code deployments.{{< /nextlink >}}
+{{< whatsnext desc="">}}
+  {{< nextlink href="/watchdog/alerts">}}<u>Watchdog Alerts</u>: How to view and interpret Watchdog Alerts: what information is provided by each alert, what alerts cover, and where to find Watchdog alerts throughout Datadog.{{< /nextlink >}}
+  {{< nextlink href="/watchdog/faulty_deployment_detection">}}<u>Faulty Deployment Detection</u>: How Watchdog finds faulty code deployments.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 To customize Watchdog algorithms:
@@ -56,10 +56,10 @@ To customize Watchdog algorithms:
 
 To help investigation, Watchdog shows context-based insights in all explorers, searches for root causes, and determines user impact.
 
-{{< whatsnext desc="The following pages provide more information">}}
-  {{< nextlink href="/watchdog/insights">}}<u>Watchdog Insights</u>: Learn about Watchdog Insights, a recommendation engine that helps users identify and resolve issues.{{< /nextlink >}}
-  {{< nextlink href="/watchdog/rca">}}<u>Root Cause Analysis</u>: Learn about how Watchdog finds the root cause of an anomaly, and how to use the information provided by Watchdog Root Cause Analysis (RCA).{{< /nextlink >}}
-  {{< nextlink href="/watchdog/impact_analysis">}}<u>Impact Analysis</u>: Learn about how Watchdog identifies when an anomaly adversely impacts users.{{< /nextlink >}}
+{{< whatsnext desc="">}}
+  {{< nextlink href="/watchdog/insights">}}<u>Watchdog Insights</u>: Watchdog Insights is a recommendation engine that helps you identify and resolve issues.{{< /nextlink >}}
+  {{< nextlink href="/watchdog/rca">}}<u>Root Cause Analysis</u>: How Watchdog Root Cause Analysis (RCA) finds the root cause of an anomaly, and how to use the information provided.{{< /nextlink >}}
+  {{< nextlink href="/watchdog/impact_analysis">}}<u>Impact Analysis</u>: How Watchdog identifies when an anomaly adversely impacts users.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Troubleshooting
