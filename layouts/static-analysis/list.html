@@ -315,7 +315,9 @@
                                             <img :src="filter.split(',')[1]" height="14" alt="filter.split(',')[0]"/>
                                         </template>
                                         <span class="selection-name" x-text="filter.split(',')[0]"></span>
-                                        <div class="close-light-wrapper" @click.stop="resetFilteredRulesets; deleteOneSelection('{{ $filter_type }}', filter )">
+                                        <div 
+                                        :data-id="filter.split(',')[0].toLowerCase().replaceAll(' ', '-')" 
+                                        class="close-light-wrapper" @click.stop="resetFilteredRulesets; deleteOneSelection('{{ $filter_type }}', filter )">
                                             {{ partial "icon" (dict "name" "close-light_x" "title" "delete" "size" "14px") }}
                                         </div>
                                     </div>
