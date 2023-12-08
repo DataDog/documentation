@@ -164,6 +164,32 @@ This might mean your private location is unable to reach the endpoint your API t
 
 This occurs when you attempt to mount a single file in a Windows-based container, which is not supported. For more information, see the [Docker mount volume documentation][16]. Ensure that the source of the bind mount is a local directory.
 
+### Restart the Worker Service without a reboot
+
+The following instructions work if you have configured the Windows Service, meaning that you installed the private location with a configuration specified at installation time. 
+
+### GUI
+
+1. Open the MSI Installer and search for **Services** in the **Start** menu.
+1. Start **Services** on any user account you want.
+1. Click **Services (Local)** and find the **Service** called `Datadog Synthetics Private Location`.
+1. Right-click on the service found in Step 2 and choose **Restart**.
+
+The Synthetics Private Location Worker now runs under the **Local Service** account. To confirm this, launch Task Manager and look for the `synthetics-pl-worker` process on the **Details** tab.
+
+### Powershell
+
+1. Start **Windows Powershell** on any Windows account that has the rights to execute Powershell scripts.
+1. Run the following command: `Restart-Service -Name “Datadog Synthetics Private Location”`.
+
+### Keep the Synthetics Private Location Worker running
+
+The following instructions work if you are logged onto the machine where the Synthetics Private Location Windows Service is installed, and you have the permissions to create scheduled tasks on the machine.
+
+If the Synthetics Private Location Worker crashes, add a Scheduled Task in Windows which runs a Powershell script to restart the application if it stops running. This ensures that a private location is restarted after a crash. 
+
+If you have provided a configuration file when installing the application, a Windows Service called `Datadog Synthetics Private Location` starts automatically after installation. To verify this, you can see the service running in the **Services** tool. This Windows Service takes care of restarting the private location automatically.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
