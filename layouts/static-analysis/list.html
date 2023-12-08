@@ -300,8 +300,7 @@
                         <button 
                         data-id="{{$filter_type}}"
                         class="toggler w-100 rounded position-relative"
-                        @click.stop="toggleFilterForm($el)"
-                        >
+                        @click.stop="toggleFilterForm($el)">
                             <div class="selections d-flex">
                                 {{/*  All  */}}
                                 <template x-if="!filterTypes['{{$filter_type}}'].length">
@@ -309,7 +308,9 @@
                                 </template>
                                 {{/*  Show filter selections from `filterTypes` data */}}
                                 <template x-for="(filter, idx) in filterTypes['{{$filter_type}}']" :key="idx">
-                                    <div class="selection-container rounded d-flex align-items-center">
+                                    <div 
+                                    :data-id="filter.split(',')[0].toLowerCase().replaceAll(' ', '-')" 
+                                    class="selection-container rounded d-flex align-items-center">
                                         <template x-if="filter.split(',')[1]">
                                             <img :src="filter.split(',')[1]" height="14" alt="filter.split(',')[0]"/>
                                         </template>
