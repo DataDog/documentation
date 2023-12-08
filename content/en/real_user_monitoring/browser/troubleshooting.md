@@ -5,7 +5,7 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
   tag: 'Blog'
   text: 'Real User Monitoring'
-- link: '/real_user_monitoring/faq/content_security_policy/'
+- link: '/integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay'
   tag: 'Documentation'
   text: 'Content Security Policy'
 ---
