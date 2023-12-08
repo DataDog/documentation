@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-When at least one case defined in a [detection rule][2] is matched over a given period of time, a security signal is generated. Notifications allow you to keep your team informed when these signals are generated.
+Notifications allow you to keep your team informed when a security signal is generated. A security signal is generated when at least one case defined in a [detection rule][2] is matched over a given period of time.
 
 ## Notification types
 
@@ -29,7 +29,7 @@ When you [create or modify a detection rule][2], you can use the **Set rule case
 
 #### Set rule case
 
-In the **Set rule case** section, add rule cases to determine when a detection rule triggers a security signal and the severity of the signal. Use the **Notify** dropdown to send signal notifications generated from that case to the [selected recipient(s)](#notification-channels).
+In the **Set rule case** section, add rule cases to determine when a detection rule triggers a security signal and the severity of the signal. Use the **Notify** dropdown to send signal notifications generated from that case to the [selected recipients](#notification-channels).
 
 #### Say what's happening
 
