@@ -39,6 +39,10 @@
     "name": "Containers",
     "description": "The Containers API allows you to query container data for your organization."
   },
+  "dora-metrics": {
+    "name": "DORA Metrics",
+    "description": "Send events for DORA Metrics to measure and improve software delivery."
+  },
   "dashboard-lists": {
     "name": "Dashboard Lists",
     "description": "Interact with your dashboard lists through the API to\norganize, find, and share all of your dashboards with your team and\norganization."
@@ -103,6 +107,10 @@
     "name": "Monitors",
     "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and\nnotifies your team when a defined threshold has exceeded.\n\nFor more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/) and\n[Tag Policies](https://docs.datadoghq.com/monitors/settings/)."
   },
+  "okta-integration": {
+    "name": "Okta Integration",
+    "description": "Configure your Datadog Okta integration directly through the Datadog API."
+  },
   "opsgenie-integration": {
     "name": "Opsgenie Integration",
     "description": "Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)\ndirectly through the Datadog API."
@@ -146,6 +154,10 @@
   "service-definition": {
     "name": "Service Definition",
     "description": "API to create, update, retrieve and delete service definitions."
+  },
+  "service-scorecards": {
+    "name": "Service Scorecards",
+    "description": "API to create, update scorecard rules and outcomes.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
   },
   "spans": {
     "name": "Spans",

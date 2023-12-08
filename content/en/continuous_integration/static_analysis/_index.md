@@ -37,9 +37,16 @@ Using Static Analysis provides organizations with the following benefits:
 
 ## Integrations
 
+### CI Providers
 {{< whatsnext desc="With Static Analysis, you can integrate feedback on code reviews for various languages in any CI platform provider of choice. See the documentation for information about the following integrations:">}}
     {{< nextlink href="continuous_integration/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
     {{< nextlink href="continuous_integration/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### IDEs
+{{< whatsnext desc="With Static Analysis, you can get real-time feedback as you edit a file in your Integrated Development Environment (IDE). See the documentation for information about the following integrations:">}}
+    {{< nextlink href="developers/ide_integrations/idea/" >}}Datadog Plugin for IntelliJ IDEA{{< /nextlink >}}
+    {{< nextlink href="developers/ide_integrations/vscode/" >}}Datadog Extension for Visual Studio Code{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Setup
@@ -103,11 +110,12 @@ Configure the following environment variables:
 
 Provide the following inputs:
 
-| Name        | Description                                                                                                                | Required | Default         |
-|-------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `service`   | The name of the service to tag the results with.                                                                           | Yes      |                 |
-| `env`       | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
-| `cpu_count` | Set the number of CPUs used by the analyzer. Defaults to the number of CPUs available.                                     | No       |                 |
+| Name           | Description                                                                                                                | Required | Default         |
+|----------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
+| `service`      | The name of the service to tag the results with.                                                                           | Yes      |                 |
+| `env`          | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
+| `cpu_count`    | Set the number of CPUs used by the analyzer. Defaults to the number of CPUs available.                                     | No       |                 |
+| `subdirectory` | The subdirectory path the analysis should be limited to. The path is relative to the root directory of the repository.                  | No       |                 |
 
 <div class="alert alert-info">
   Add a `--performance-statistics` flag to your static analysis command to get execution time statistics for analyzed files.
