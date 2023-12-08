@@ -53,16 +53,16 @@ Investigate details using the [Misconfigurations Explorer][10]. View detailed in
 
 ## Severity score framework
 
-Starting in early 2024, all CSM Misconfigurations and Identity Risk rules will use our severity score framework. This framework is designed to compare the likelihood that an adversary will take advantage of a misconfiguration to the risk posed to your environment. The matrix below shows how these two factors are computed.
+Starting in early 2024, all CSM Misconfigurations and Identity Risk rules will migrate to our severity score framework. This framework is designed to compare the likelihood that an adversary will take advantage of a misconfiguration to the risk posed to your environment. By weighting both of these aspects, findings can be prioritized more accurately by their real-world risks. The matrices below show how to compute a misconfiguration's severity score depending on certain criteria.
 
 ### Likelihood
 
-Likelihood is computed as a factor of an attack vector and the resource's accessibility.
+The likelihood component is made up of two subcomponents; The attack vector, the means through which a misconfiguration can be exploited, and the accessibility, if the resource is publicly accessible or not.
 
 |               |                     | Accessibility |          |
 |---------------|---------------------|---------------|----------|
 |               |                     | Private       | Public   |
-| Attack Vector | Required Privileges | Low           | Medium   |
+| **Attack Vector** | Required Privileges | Low           | Medium   |
 |               | Vulnerability       | Medium        | High     |
 |               | No Authorization    | High          | Critical |
 
@@ -71,7 +71,7 @@ The attack vector is determined by the following criteria:
 |    Attack Vector    |                                                 Definition                                                |
 |:-------------------:|:---------------------------------------------------------------------------------------------------------:|
 | Required Privileges | Requires specific privileges or access to abuse.                                                          |
-| Vulnerability       | Requires a vulnerable component to abuse, such as a software vulnerability or leaked password/access key. |
+| Vulnerability       | Requires a vulnerable component to abuse, such as a software vulnerability on a compute instance or a leaked password/access key. |
 | No Authorization    | Requires no authorization/authentication to abuse.                                                        |
 
 The accessibility is determined by the following criteria:
@@ -80,6 +80,29 @@ The accessibility is determined by the following criteria:
 |:-------------:|:------------------------------------------------------------------:|
 | Private       | The vulnerable component/resource is in a private network.         |
 | Public        | The vulnerable component/resource is accessible from the internet. |
+
+### Impact
+
+The impact component is how damaging the exploitation of the misconfiguration would be to the environment.
+
+|  Impact  |                                                                                                                 Definition                                                                                                                |
+|:--------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+|    Low   | This misconfiguration is related to security hardening, hygiene, resource metadata, or industry best practice configurations.                                                                                                             |
+|  Medium  | Abusing this misconfiguration results in an impact to the confidentiality, integrity, or availability of the vulnerable component or its directly associated resources.                                                                   |
+|   High   | Abusing this misconfiguration results in an impact to the following: confidentiality, integrity or availability of the vulnerable component and impacts a significant number of other resources (E.G. S3FullAccess, EC2FullAccess, etc.). |
+| Critical | Abusing this misconfiguration results in complete control of all resources in the account (E.G. AdministratorAccess)                                                                                                                      |
+
+### Severity Matrix
+
+These two subcomponent scores combined compute the overall severity score for a misconfiguration.
+
+|            |          | Impact |        |          |          |
+|------------|----------|--------|--------|----------|----------|
+|            |          | Low    | Medium | High     | Critical |
+| **Likelihood** | Low      | Low    | Low    | Medium   | Medium   |
+|            | Medium   | Low    | Medium | High     | High     |
+|            | High     | Medium | High   | High     | Critical |
+|            | Critical | Medium | High   | Critical | Critical |
 
 ## Get started
 
