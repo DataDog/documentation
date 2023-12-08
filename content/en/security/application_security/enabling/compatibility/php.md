@@ -74,8 +74,8 @@ PHP ASM supports the following architectures:
 
 The Datadog PHP library supports PHP version 7.0 and above on the following architectures:
 
-- Linux (GNU) x86-64
-- Alpine Linux (musl) x86-64
+- Linux (GNU) x86-64 and arm64
+- Alpine Linux (musl) x86-64 and arm64
 
 The library supports the use of all PHP frameworks, and also the use of no framework.
 
