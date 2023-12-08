@@ -368,6 +368,13 @@ clusterAgent:
 ```
 
 {{% /tab %}}
+{{% tab "Azure Native" %}}
+
+AKS clusters can be extended with the Datadog Agent natively within Azure. To do so, within one’s Azure developer account,
+go to the Marketplace. From there, search for the tile “Datadog AKS Cluster Extension”. Finally, follow the instructions
+laid out within the tile.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 For more information, see the [Datadog Cluster Agent documentation][2].
