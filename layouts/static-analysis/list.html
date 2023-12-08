@@ -333,6 +333,7 @@
                         </button>
                         {{/*  FILTER FORM  */}}
                         <form 
+                        data-id="{{$filter_type}}"
                         class="d-flex flex-column bg-white rounded position-absolute w-100"
                         x-cloak x-show.important="openedFilterForm === '{{$filter_type}}'"
                         @click.outside="openedFilterForm = null"
