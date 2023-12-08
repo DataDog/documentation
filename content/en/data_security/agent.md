@@ -33,7 +33,7 @@ On Debian and Ubuntu, the `datadog-agent` package has a soft dependency on the `
 
 ### Windows MSI
 
-To verify the signature of a Datadog Agent installer file on Windows, use the `Get-AuthenticodeSignature` PowerShell command with the full output (`fl`) flag and make sure:
+To verify the signature of a Datadog Agent installer file on Windows, pipe the output of `Get-AuthenticodeSignature` through `FormatList` (`fl`) and make sure:
 - the status is valid
 - the certificate is signed by `Datadog, Inc`
 - the issuer is `DigiCert`
