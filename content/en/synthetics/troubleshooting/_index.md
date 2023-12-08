@@ -8,10 +8,13 @@ further_reading:
   text: "Manage your Synthetic tests"
 - link: "/synthetics/browser_tests/"
   tag: "Documentation"
-  text: "Configure a Browser Test"
+  text: "Configure a browser test"
 - link: "/synthetics/api_tests/"
   tag: "Documentation"
-  text: "Configure an API Test"
+  text: "Configure an API test"
+- link: "/synthetics/private_locations/"
+  tag: "Documentation"
+  text: "Create a private location"
 ---
 
 ## Overview
