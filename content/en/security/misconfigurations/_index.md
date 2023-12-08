@@ -104,6 +104,43 @@ These two subcomponent scores combined compute the overall severity score for a 
 |            | **High**     | Medium | High   | High     | Critical |
 |            | **Critical** | Medium | High   | Critical | Critical |
 
+### Examples
+
+To explain how the framework is used here are a few examples.
+
+#### Example 1: SNS Topic should have access restrictions set for subscription
+
+The detection rule for [SNS Topic should have access restrictions set for subscription][14] checks if the SNS topic has a resource-based policy that contains a `Principal` of `*`, and an `Action` with the `sns:Subscribe` permission. This combination would allow anyone the ability to subscribe to the SNS topic and receive its notifications. We score this rule as follows:
+
+- Likelihood: Critical
+  - Attack Vector: No Authorization
+    - The Attack Vector is marked as "No Authorization" because the resource-based policy contains a `*`. This wildcard permits anyone the ability to act on the resource. No authentication/authorization is required to exploit the misconfiguration.
+  - Accessibility: Public
+    - The Accessibility is marked as "Public" because the misconfiguration can be exploited over the internet. No specific network access is required.
+
+- Impact: Medium
+  - Impact is marked as "Medium" due to the fact that the confidentiality of the resource is impacted. An adversary who has exploited this misconfiguration can receive messages as they are sent by the SNS topic.
+
+- Severity Score: Critical x Medium = High
+  - The final severity score is High. This is because a Critical likelihood mixed with a Medium impact results in an overall score of High.
+
+#### Example 2: EC2 instances should enforce IMDSv2
+
+The detection rule for [EC2 instances should enforce IMDSv2][15] checks if an EC2 instance is using the instance metadata service version 1 ([IMDSv1][16]), which is vulnerable to common web application attacks. If exploited, an adversary would be able to access the IAM credentials stored in the IMDS and use them to access resources in the AWS account. We score this rule as follows:
+
+- Likelihood: Medium
+  - Attack Vector: Vulnerability
+    - The Attack Vector is marked as "Vulnerability". This is because the exploitation of this misconfiguration requires the resource to contain a vulnerable component, such as vulnerable software running on the EC2 instance that can be abused to perform [server side request forgery][17].
+  - Accessibility: Private
+    - The Accessibility is marked as "Private" because the EC2 instance has not explicitly been made public.
+
+- Impact: Medium
+  - Impact is marked as "Medium" due to the impacts to the confidentiality of the EC2 instance. An adversary would be able to access the IMDS and potentially pull IAM credentials associated with the resource.
+
+- Severity Score: Medium x Medium = Medium
+  - The final severity score is Medium. This is because a Medium likelihood mixed with a Medium impact results in an overall score of Medium.
+
+
 ## Get started
 
 {{< whatsnext >}}
@@ -130,3 +167,7 @@ These two subcomponent scores combined compute the overall severity score for a 
 [11]: /security/default_rules/#cat-posture-management-infra
 [12]: https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security
 [13]: /security/cloud_security_management/mute_issues
+[14]: https://docs.datadoghq.com/security/default_rules/aws-sns-subscription/
+[15]: https://docs.datadoghq.com/security/default_rules/aws-ec2-imdsv2/
+[16]: https://hackingthe.cloud/aws/general-knowledge/intro_metadata_service/
+[17]: https://hackingthe.cloud/aws/exploitation/ec2-metadata-ssrf/
