@@ -38,6 +38,7 @@ All Watchdog features come built-in, and do not require setup.
 {{< youtube UMNXdrI0J8A >}}
 
 <br/>
+
 ### Proactive alerts
 
 Watchdog proactively computes a baseline of expected behavior for your systems, applications, and deployments. This baseline is then used to detect anomalous behavior.
