@@ -20,7 +20,7 @@ further_reading:
       text: 'API Docs'
     - link: 'tracing/glossary/'
       tag: 'Documentation'
-      text: 'Explore your services, resources and traces'
+      text: 'Explore your services, resources, and traces'
     - link: 'tracing/'
       tag: 'Advanced Usage'
       text: 'Advanced Usage'
@@ -42,7 +42,7 @@ See the following pages for supported deployment scenarios and languages:
 
 - [Inject the instrumentation library locally][11] (at the Agent);
 - [Inject the instrumentation library from the Datadog UI][12] (beta); or
-- Add the tracing library directly in the application, as described in the [Install the tracer](#install-the-tracer) section. Read more about [compatibility information][1].
+- Add the tracing library directly in the application, as described in the [Instrument your application](#instrument-your-application) section. Read more about [compatibility information][1].
 
 ### Instrument your application
 

@@ -808,8 +808,9 @@ components:
           example: key:value,filter:example
           type: string
         cspm_enabled:
-          description: Enable Cloud Security Management Misconfigurations for your
-            organization.
+          description: "When enabled, Datadog\u2019s Cloud Security Management product
+            will scan resource configurations monitored by this app registration.\nNote:
+            This requires resource_collection_enabled to be set to true."
           example: true
           type: boolean
         custom_metrics_enabled:
@@ -840,6 +841,12 @@ components:
           description: Your New Azure Active Directory ID.
           example: new1c44-1234-5678-9101-cc00736ftest
           type: string
+        resource_collection_enabled:
+          description: When enabled, Datadog collects metadata and configuration info
+            from cloud resources (compute instances, databases, load balancers, etc.)
+            monitored by this app registration.
+          example: true
+          type: boolean
         tenant_name:
           description: Your Azure Active Directory ID.
           example: testc44-1234-5678-9101-cc00736ftest
@@ -14934,6 +14941,55 @@ components:
         type:
           $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
       type: object
+    SyntheticsPatchTestBody:
+      description: Wrapper around an array of [JSON Patch](https://jsonpatch.com)
+        operations to perform on the test
+      properties:
+        data:
+          description: Array of [JSON Patch](https://jsonpatch.com) operations to
+            perform on the test
+          example:
+          - op: replace
+            path: /name
+            value: New test name
+          - op: remove
+            path: /config/assertions/0
+          items:
+            $ref: '#/components/schemas/SyntheticsPatchTestOperation'
+          type: array
+      type: object
+    SyntheticsPatchTestOperation:
+      description: A single [JSON Patch](https://jsonpatch.com) operation to perform
+        on the test
+      properties:
+        op:
+          $ref: '#/components/schemas/SyntheticsPatchTestOperationName'
+        path:
+          description: The path to the value to modify
+          example: /name
+          type: string
+        value:
+          description: A value to use in a [JSON Patch](https://jsonpatch.com) operation
+          example: New Test Name
+      type: object
+    SyntheticsPatchTestOperationName:
+      description: The operation to perform
+      enum:
+      - add
+      - remove
+      - replace
+      - move
+      - copy
+      - test
+      example: replace
+      type: string
+      x-enum-varnames:
+      - ADD
+      - REMOVE
+      - REPLACE
+      - MOVE
+      - COPY
+      - TEST
     SyntheticsPlayingTab:
       description: Navigate between different tabs for your browser test.
       enum:
@@ -19406,6 +19462,16 @@ components:
             Pro hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        custom_historical_ts_avg:
+          description: Shows the average number of distinct historical custom metrics
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        custom_live_ts_avg:
+          description: Shows the average number of distinct live custom metrics over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
         custom_ts_avg:
           description: Shows the average number of distinct custom metrics over all
             hours in the current date for the given org.
@@ -19935,6 +20001,16 @@ components:
         cspm_host_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management
             Pro hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        custom_historical_ts_sum:
+          description: Shows the average number of distinct historical custom metrics
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        custom_live_ts_sum:
+          description: Shows the average number of distinct live custom metrics over
+            all hours in the current months for all organizations.
           format: int64
           type: integer
         custom_ts_sum:
@@ -21115,6 +21191,8 @@ components:
       - 1mo
       - 3mo
       - 6mo
+      - week_to_date
+      - month_to_date
       - 1y
       - alert
       example: 5m
@@ -21133,6 +21211,8 @@ components:
       - PAST_ONE_MONTH
       - PAST_THREE_MONTHS
       - PAST_SIX_MONTHS
+      - WEEK_TO_DATE
+      - MONTH_TO_DATE
       - PAST_ONE_YEAR
       - ALERT
     WidgetMargin:
@@ -21478,7 +21558,7 @@ components:
               an organization. Mute and unmute hosts. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
-            monitors_write: Edit, mute, and delete individual monitors.
+            monitors_write: Edit and delete individual monitors.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View CSPM Findings.
@@ -24097,7 +24177,8 @@ paths:
         type: safe
   /api/v1/host/{host_name}/mute:
     post:
-      description: Mute a host.
+      description: Mute a host. **Note:** This creates a [Downtime V2](https://docs.datadoghq.com/api/latest/downtimes/#schedule-a-downtime)
+        for the host.
       operationId: MuteHost
       parameters:
       - description: Name of the host to mute.
@@ -24466,10 +24547,25 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-given:
+        aws_account:
+          parameters:
+          - name: body
+            origin: request
+            value: "{\n  \"account_id\": \"{{ timestamp(\"now\") }}00\",\n  \"account_specific_namespace_rules\":
+              {\n      \"auto_scaling\": false\n  },\n  \"cspm_resource_collection_enabled\":
+              true,\n  \"excluded_regions\": [\n      \"us-east-1\",\n      \"us-west-2\"\n
+              \ ],\n  \"filter_tags\": [\n      \"$KEY:$VALUE\"\n  ],\n  \"host_tags\":
+              [\n      \"$KEY:$VALUE\"\n  ],\n  \"metrics_collection_enabled\": false,\n
+              \ \"resource_collection_enabled\": true,\n  \"role_name\": \"DatadogAWSIntegrationRole\"\n}"
+          step: there is a valid "aws_account" in the system
       x-menu-order: 8
       x-undo:
         operationId: DeleteAWSAccount
-        parameters: []
+        parameters:
+        - name: body
+          origin: request
+          template: '{"account_id": "{{account_id}}", "role_name": "{{role_name}}"}'
         type: unsafe
     put:
       description: Update a Datadog-Amazon Web Services integration.
@@ -31294,7 +31390,7 @@ paths:
       description: Edit the configuration of a Synthetic browser test.
       operationId: UpdateBrowserTest
       parameters:
-      - description: The public ID of the test to get details from.
+      - description: The public ID of the test to edit.
         in: path
         name: public_id
         required: true
@@ -31661,6 +31757,68 @@ paths:
       x-menu-order: 27
       x-undo:
         type: safe
+    patch:
+      description: Patch the configuration of a Synthetic test with partial data.
+      operationId: PatchTest
+      parameters:
+      - description: The public ID of the test to patch.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsPatchTestBody'
+        description: '[JSON Patch](https://jsonpatch.com/) compliant list of operations'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsTestDetails'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Updating sub-type is forbidden'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic Monitoring is not activated for the user
+
+            - Test is not owned by the user
+
+            - Test can''t be found'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: Patch a Synthetic test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 29
+      x-undo:
+        type: idempotent
     put:
       deprecated: true
       description: This endpoint is deprecated. To edit a test, use [Edit an API test](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test)

@@ -434,7 +434,7 @@ After configuration is complete, [restart the Agent][11].
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
-[2]: /agent/basic_agent_usage/?tab=agentv6v7#supported-platforms
+[2]: /agent/supported_platforms/?tab=windows
 [3]: /agent/faq/windows-agent-ddagent-user/
 [4]: /agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
 [5]: /agent/faq/windows-agent-ddagent-user/#domain-controllers

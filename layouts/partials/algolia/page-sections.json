@@ -56,6 +56,7 @@
                       "content" $c
                       "type" $page.Type
                       "relpermalink" $relpermalink
+                      "distinct_base_url" $page.RelPermalink
                       "full_url" $full_url
                       "language" $page.Language.Lang
                       "category" $category
