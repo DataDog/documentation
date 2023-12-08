@@ -171,7 +171,7 @@
         },
         toggleFilterForm (selectedFilterFormEl) {
             // manage filter form accordian
-            const filterTypeID = selectedFilterFormEl.closest('.filter-type').dataset.id
+            const filterTypeID = selectedFilterFormEl.dataset.id
             this.openedFilterForm = (this.openedFilterForm === filterTypeID) ? null : filterTypeID
         },
         deleteOneSelection (filterType, filterOption) {
@@ -298,8 +298,9 @@
                     <div class="filter-component position-relative">
                         {{/*  FILTER TOGGLER  */}}
                         <button 
+                        data-id="{{$filter_type}}"
                         class="toggler w-100 rounded position-relative"
-                        @click="toggleFilterForm($el)"
+                        @click.stop="toggleFilterForm($el)"
                         >
                             <div class="selections d-flex">
                                 {{/*  All  */}}
