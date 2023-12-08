@@ -215,10 +215,10 @@ Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 
 ```kotlin
     // Adds an attribute to all future RUM events
-    GlobalRumMonitor.addAttribute(key, value)
+    GlobalRumMonitor.get().addAttribute(key, value)
 
     // Removes an attribute to all future RUM events
-    GlobalRumMonitor.removeAttribute(key)
+    GlobalRumMonitor.get().removeAttribute(key)
 ```
 
 ## Track widgets
@@ -231,7 +231,7 @@ Widgets are not automatically tracked with the SDK. To send UI interactions from
 You can use the following methods in `Configuration.Builder` when creating the Datadog configuration to initialize the library:
 
 `setFirstPartyHosts()` 
-: Defines hosts that have tracing enabled and have RUM resources categorized as `first-party`.
+: Defines hosts that have tracing enabled and have RUM resources categorized as `first-party`. **Note**: If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
 
 `useSite(DatadogSite)` 
 : Switches target data to EU1, US1, US3, US5, US1_FED and AP1 sites.
@@ -503,9 +503,9 @@ Rum.enable(rumConfig)
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/android
 [3]: /real_user_monitoring/android/data_collected
-[4]: /real_user_monitoring/android/advanced_configuration/#automatically-track-views
-[5]: /real_user_monitoring/android/advanced_configuration/#initialization-parameters
-[6]: /real_user_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-network-requests
 [7]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
 [8]: https://square.github.io/okhttp/features/events/
 [9]: /real_user_monitoring/android/data_collected/#event-specific-attributes

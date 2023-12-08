@@ -1,0 +1,21 @@
+{{- $btn_hidden := (.Get "btn_hidden") | default "false" -}}
+{{- $header := .Get "header" -}}
+<div class="card callout-card mb-4">
+
+    <div class="card-body d-flex flex-column">
+        {{ if not (eq $header "false")  }}
+        <h5 class="card-title text-black mt-0 mb-1">{{$header | default "Join the Private Beta"}}</h5>
+        {{ end }}
+        <p class="card-text">{{.Inner}}</p>
+        {{- if not (eq $btn_hidden "true") -}}
+        <a href="{{.Get `url`}}"
+            target="_blank"
+            class="{{.Get `custom_class`}} btn btn-outline-primary pb-1 align-self-end d-flex flex-column justify-content-center"
+            {{with .Get `d_toggle`}}data-bs-toggle="{{.}}"{{end}}
+            {{with .Get `d_target`}}data-bs-target="{{.}}"{{end}}
+        >
+            Request Access
+        </a>
+        {{- end -}}
+    </div>
+</div>

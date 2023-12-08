@@ -11,6 +11,9 @@ further_reading:
     - link: "/logs/explorer/"
       tag: "Documentation"
       text: "Log Explorer"
+    - link: "https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/"
+      tag: "Blog"
+      text: "Discover, triage, and remediate sensitive data issues at scale with Sensitive Data Scanner"
     - link: "https://www.datadoghq.com/blog/sensitive-data-scanner/"
       tag: "Blog"
       text: "Build a modern data compliance strategy with Datadog's Sensitive Data Scanner"
@@ -36,7 +39,9 @@ Sensitive Data Scanner can be found under [Organization Settings][1].
 ### Setup
 
 - **Define Scanning Groups:** A scanning group determines what data to scan. It consists of a query filter and a set of toggles to enable scanning for Logs, APM, RUM, and/or Events. See the [Log Search Syntax][2] documentation to learn more about query filters.
+  - For Terraform, see the [datadog_sensitive_data_scanner_group][3] resource.
 - **Define Scanning Rules:** A scanning rule determines what sensitive information to match within the data. Within a scanning group, add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules from scratch to scan using custom regex patterns.
+  - For Terraform, see the [datadog_sensitive_data_scanner_rule][4] resource.
 
 Sensitive Data Scanner supports Perl Compatible RegEx (PCRE), but the following patterns are not supported:
   - Backreferences and capturing sub-expressions (lookarounds)
@@ -67,11 +72,11 @@ Sensitive Data Scanner supports Perl Compatible RegEx (PCRE), but the following 
 
 ### Redact sensitive data in tags
 
-To redact sensitive data contained in tags, you must [remap][3] the tag to an attribute and then redact the attribute. Uncheck `Preserve source attribute` in the remapper processor so that the tag is not preserved during the remapping.
+To redact sensitive data contained in tags, you must [remap][5] the tag to an attribute and then redact the attribute. Uncheck `Preserve source attribute` in the remapper processor so that the tag is not preserved during the remapping.
 
 To remap the tag to an attribute:
 
-1. Navigate to your [log pipeline][4].
+1. Navigate to your [log pipeline][6].
 2. Click **Add Processor**.
 3. Select **Remapper** in the processor type dropdown menu.
 4. Name the processor.
@@ -83,7 +88,7 @@ To remap the tag to an attribute:
 
 To redact the attribute:
 
-1. Navigate to your [scanning group][5].
+1. Navigate to your [scanning group][1].
 2. Click **Add Scanning Rule**.
 3. Check the library rules you want to use.
 4. Select **Specific Attributes** for **Scan entire event or portion of it**.
@@ -99,7 +104,7 @@ The Scanning Rule Library contains an evergrowing collection of predefined rules
 
 ### Permissions
 
-By default, users with the Datadog Admin role have access to view and define the scanning rules. To allow other user access, grant read or write permissions for Data Scanner under **Compliance**. See the [Custom RBAC documentation][6] for details on Roles and Permissions.
+By default, users with the Datadog Admin role have access to view and define the scanning rules. To allow other user access, grant read or write permissions for Data Scanner under **Compliance**. See the [Custom RBAC documentation][7] for details on Roles and Permissions.
 
 {{< img src="sensitive_data_scanner/scanner_permission.png" alt="Permissions for Sensitive Data Scanner" style="width:90%;">}}
 
@@ -109,7 +114,7 @@ Control who can access events containing sensitive data. Use tags added by Sensi
 
 ### Out-of-the-box dashboard
 
-When Sensitive Data Scanner is enabled, an out-of-the-box [dashboard][7] summarizing sensitive data findings is automatically installed in your account.
+When Sensitive Data Scanner is enabled, an out-of-the-box [dashboard][8] summarizing sensitive data findings is automatically installed in your account.
 
 {{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:70%;">}}
 
@@ -122,8 +127,9 @@ To access this dashboard, go to **Dashboards > Dashboards List** and search for 
 
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
 [2]: /logs/explorer/search_syntax/
-[3]: /logs/log_configuration/processors/?tab=ui#remapper
-[4]: https://app.datadoghq.com/logs/pipelines
-[5]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
-[6]: /logs/guide/logs-rbac-permissions/?tab=ui#overview
-[7]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
+[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_group
+[4]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
+[5]: /logs/log_configuration/processors/?tab=ui#remapper
+[6]: https://app.datadoghq.com/logs/pipelines
+[7]: /logs/guide/logs-rbac-permissions/?tab=ui#overview
+[8]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner

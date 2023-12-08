@@ -124,7 +124,7 @@ User information is not collected by default. Heatmaps use the user information 
 [3]: https://app.datadoghq.com/rum/heatmap/view
 [4]: /real_user_monitoring/explorer/
 [5]: /real_user_monitoring/guide/alerting-with-conversion-rates/
-[6]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
+[6]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [7]: /real_user_monitoring/browser/tracking_user_actions/#manage-information-being-collected
-[8]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
+[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [9]: https://app.datadoghq.com/rum/heatmap
