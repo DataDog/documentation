@@ -203,7 +203,7 @@
                     <div class="mb-3 order-1">
                         <div class="d-flex flex-column">
                             <span class="m-0">{{printf "Ruleset ID: %s" .Key}}</span>
-                            <span class="m-0">{{$ruleset_description}}</span>
+                            <span class="ruleset-description m-0">{{$ruleset_description | markdownify}}</span>
                         </div>
                         <div class="ps-0 mt-1">
                             {{ range .Pages }}
