@@ -31,11 +31,11 @@ cascade:
 ---
 ## Overview
 
-Watchdog is Datadog’s AI engine, providing you with automated alerts, insights, and root cause analyses that draw from observability data across the entire Datadog platform. Watchdog continuously monitors your infrastructure and calls attention to the signals that matter most, helping you quickly detect, troubleshoot, and resolve issues. 
+Watchdog is Datadog's AI engine, providing you with automated alerts, insights, and root cause analyses that draw from observability data across the entire Datadog platform. Watchdog continuously monitors your infrastructure and calls attention to the signals that matter most, helping you to detect, troubleshoot, and resolve issues. 
 
 All Watchdog features come built-in, and do not require setup.
 
-{{< youtube url="https://www.youtube.com/watch?v=UMNXdrI0J8A" >}}
+{{< youtube UMNXdrI0J8A >}}
 
 
 ### Proactive alerts
@@ -57,7 +57,7 @@ To customize Watchdog algorithms:
 To help investigation, Watchdog shows context-based insights in all explorers, searches for root causes, and determines user impact.
 
 {{< whatsnext desc="The following pages provide more information">}}
-  {{< nextlink href="/watchdog/insights">}}<u>Watchdog Insights</u>: Learn about Watchdog Insights, a recommendation engine that helps users quickly identify and resolve issues.{{< /nextlink >}}
+  {{< nextlink href="/watchdog/insights">}}<u>Watchdog Insights</u>: Learn about Watchdog Insights, a recommendation engine that helps users identify and resolve issues.{{< /nextlink >}}
   {{< nextlink href="/watchdog/rca">}}<u>Root Cause Analysis</u>: Learn about how Watchdog finds the root cause of an anomaly, and how to use the information provided by Watchdog Root Cause Analysis (RCA).{{< /nextlink >}}
   {{< nextlink href="/watchdog/impact_analysis">}}<u>Impact Analysis</u>: Learn about how Watchdog identifies when an anomaly adversely impacts users.{{< /nextlink >}}
 {{< /whatsnext >}}
