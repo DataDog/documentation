@@ -23,10 +23,6 @@ further_reading:
       text: 'Create and manage Synthetic Private Locations with Terraform'
 ---
 
-<div class="alert alert-info">
-If you would like to be added to the Windows Private Location beta, reach out to <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
-</div>
-
 ## Overview
 
 Private locations allow you to **monitor internal-facing applications or any private endpoints** that aren't accessible from the public internet. They can also be used to:
@@ -37,7 +33,7 @@ Private locations allow you to **monitor internal-facing applications or any pri
 
 {{< img src="synthetics/private_locations/private_locations_worker.png" alt="Architecture diagram of how a private location works in Synthetic Monitoring" style="width:100%;">}}
 
-Private locations come as Docker containers that you can install wherever makes sense inside of your private network. Once created and installed, you can assign [Synthetic tests][2] to your private location just like you would with any managed location.
+Private locations come as Docker containers or Windows services that you can install wherever makes sense inside of your private network. Once created and installed, you can assign [Synthetic tests][2] to your private location just like you would with any managed location.
 
 Your private location worker pulls your test configurations from Datadog's servers using HTTPS, executes the test on a schedule or on-demand, and returns the test results to Datadog's servers. You can then visualize your private locations test results in a completely identical manner to how you would visualize tests running from managed locations:
 
@@ -49,9 +45,33 @@ Your private location worker pulls your test configurations from Datadog's serve
 
 In order to use private locations for [Continuous Testing tests][23], you need v1.27.0 or later.
 
-### Docker
+{{< tabs >}}
+{{% tab "Docker" %}}
 
-Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][3] on Google Container Registry. It can run on a Linux-based OS or Windows OS if the [Docker engine][4] is available on your host and can run in Linux containers mode.
+Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][101] on Google Container Registry. It can run on a Linux-based OS or Windows OS if the [Docker engine][102] is available on your host and can run in Linux containers mode.
+
+[101]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
+[102]: https://docs.docker.com/engine/install/
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+Private locations are Windows services that you can install anywhere inside your private network using an [MSI file][101]. Run this file from the virtual or physical machine that you would like to install the private location on, and in a cloud provider VM matching the following requirements. Datadog recommends running the private location worker on a virtual machine or Windows container.
+
+| System | Requirements |
+|---|---|
+| OS | Windows Server 2016, Windows Server 2019, or Windows 10. |
+| RAM | 4GB minimum. 8GB recommended. |
+| CPU | Intel or AMD processor with 64-bit support. 2.8 GHz or faster processor recommended. |
+
+You must have .NET version 4.7.2 or later installed on your computer before using the MSI installer.
+
+PowerShell scripting must be enabled on the machine where you are installing the private location worker.
+
+[101]: TBD
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Datadog private locations endpoints
 
@@ -133,7 +153,7 @@ Navigate to [**Synthetic Monitoring** > **Settings** > **Private Locations**][22
 Fill out your private location details:
 
 1. Specify your private location's **Name** and **Description**.
-2. Add any **Tags** you would like to associate with your private location.
+2. Add any **Tags** you would like to associate with your private location. To set up a private location on a Windows service, tick the **This is a Windows Private Locations** checkbox.
 3. Choose one of your existing **API Keys**. Selecting an API key allows communication between your private location and Datadog. If you don't have an existing API key, click **Generate API key** to create one on the dedicated page. Only `Name` and `API key` fields are mandatory.
 4. Set access for your private location and click **Save Location and Generate Configuration File**. Datadog creates your private location and generates the associated configuration file.
 
@@ -465,7 +485,70 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
 {{% /tab %}}
+{{% tab "Windows" %}}
 
+1. Download the [`datadog-synthetics-worker-<version>.amd64.msi` file][101] and run this file from the machine you want to install the private location on. 
+1. Click **Next** on the welcome page, read the EULA, and accept the terms and conditions. Click **Next**.
+1. Modify where where the application will be installed, or leave the default settings. Click **Next**.
+1. To configure your Windows private location, you can either:
+
+   - Paste and enter a JSON configuration for your Datadog Synthetics Private Location Worker. This file is generated by Datadog when you [create a private location][102].
+
+   add 1.1 image
+
+   - Browse or type a file path to a file containing a JSON configuration for your Datadog Synthetics Private Location Worker. You can type the file path or leave it blank and run `synthetics-pl-worker.exe --config=<PathToYourConfiguration>` in the Windows command-line prompt after the installation is completed.
+  
+   add 1.2 image
+
+1. You can apply the following configuration options:
+   
+   Apply firewall rules needed by this program to Windows Firewall
+   : Enable to allow the installer to apply firewall rules on install and remove them on uninstall.
+
+   Apply rules to block reserved IPs in Windows Firewall
+   : Enable to configure blocking rules for Chrome, Firefox, and Edge (if they are installed) and add rules to block reserved IP address ranges outbound in Windows Firewall.
+
+   Enable File Logging
+   : Enable to allow the Synthetics Private Location Worker to log files in the installation directory.
+
+   Log Rotation Days
+   : Specifies how many days logs should be kept before being deleted from the local system.
+
+   Logging Verbosity
+   : Specifies the verbosity of the console and file logging for the Synthetics Private Location Worker. Options for verbosity when performing an unattended `msiexec` installation include `-v` for error, `-vv` for information, and `-vvv` for debug.
+
+1. Click **Next** and **Install** to start the installation process. 
+
+   add 1.3 image: settings page
+
+Once the process is complete, click **Finish** on the installation completion page.
+
+<div class="alert alert-warning">If you have entered your JSON configuration, the Windows Service starts running using that configuration. If you did not enter your configuration, run <code>synthetics-pl-worker.exe --config=<PathToYourConfiguration></code> from a command prompt or use the <code>start menu</code> shortcut to start the Synthetics Private Location Worker.</div>
+
+To install the Synthetics Private Location Worker on the command line, use `msiexec` and include parameters as needed. 
+
+| Optional Parameter | Definition | Value | Default Value | Type |
+|---|---|---|---|---|
+| APPLYDEFAULTFIREWALLRULES | Applies firewall rules needed for the program. | 1 | N/A | 0: Disabled<br>1: Enabled |
+| APPLYFIREWALLDEFAULTBLOCKRULES | Blocks reserved IP addresses for each browser you have installed (Chrome, Edge, and Firefox). Blocking loopback connections is not possible in Windows Firewall. | 0 | N/A | 0: Disabled<br>1: Enabled |
+| LOGGING_ENABLED | When enabled, this configures file logging. These logs are stored in the installation directory under the logs folder. | 0 | `--enableFileLogging` | 0: Disabled<br>1: Enabled |
+| LOGGING_VERBOSITY | Configures the logging verbosity for the program. This affects console and file logs. | This affects console and file logs. | `-vvv` | `-v`: Error<br>`-vv`: Info<br>`-vvv`: Debug |
+| LOGGING_MAXDAYS | Number of days to keep file logs on the system before deleting them. Can be any number when running an unattended installation. | 7 | `--logFileMaxDays` | Integer |
+| WORKERCONFIG_FILEPATH | This should be changed to the path to your Synthetics Private Location Worker JSON configuration file. Wrap this path in quotes if your path contains spaces. | <None> | `--config` | String |
+
+For example, this command applies the default firewall rules needed by the program to configure the Windows service: 
+
+```shell
+msiexec /i datadog-synthetics-worker-<version>.amd64.msi /quiet /qn APPLYDEFAULTFIREWALLRULES=1 APPLYFIREWALLDEFAULTBLOCKRULES=1 LOGGING_ENABLED=1 LOGGING_VERBOSITY=”-vv” LOGGING_MAXDAYS=7 WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
+```
+
+
+To uninstall the Synthetics Private Location Worker on the command line, use `msiexec`. For example, you can run `msiexec /uninstall datadog-synthetics-worker-<version>.amd64.msi /passive`.
+
+[101]: TBD
+[102]: https://app.datadoghq.com/synthetics/settings/private-locations
+
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Set up liveness and readiness probes
