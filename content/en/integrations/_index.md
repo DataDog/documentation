@@ -9,6 +9,7 @@ aliases:
     - /integrations/mainstorconcept_ziris/
 description: Gather data from all of your systems, apps, & services
 cascade:
+- default_algolia_rank: 60
 - _target:
     path: /integrations/akamai_datastream_2.md
   aliases:

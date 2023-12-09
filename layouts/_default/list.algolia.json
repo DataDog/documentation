@@ -17,7 +17,8 @@
             {{ $tags := $page.Params.algolia.tags }}
             {{ $category := $page.Params.algolia.category | default "Documentation" }}
             {{ $subcategory := $page.Params.algolia.subcategory | default $page.Title }}
-            {{ $rank := $page.Params.algolia.rank | default 70 }}
+            {{- /* Temporary: Fallback to a default_algolia_rank param if it exists (intended for integration pages) */ -}}
+            {{ $rank := $page.Params.algolia.rank | default $page.Params.default_algolia_rank | default 70 }}
 
             {{- /* record for each individual section (split by h2 header) */ -}}
             {{ partial "algolia/page-sections.json" (dict "context" $hugo_context "page" $page "title" $title "category" $category "subcategory" $subcategory "rank" $rank) }}

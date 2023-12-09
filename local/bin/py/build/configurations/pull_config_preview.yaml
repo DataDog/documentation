@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -193,6 +193,9 @@
               dependencies: ["https://github.com/DataDog/heroku-buildpack-datadog/blob/master/README.md"]
               aliases:
               - /developers/faq/how-do-i-collect-metrics-from-heroku-with-datadog
+              algolia:
+                tags: ["heroku", "heroku buildpack"]
+                rank: 80
 
       - repo_name: puppet-datadog-agent
         contents:
