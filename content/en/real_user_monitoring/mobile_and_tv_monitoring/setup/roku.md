@@ -62,7 +62,7 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
 
 ### Specify application details in Datadog
 
-1. Navigate to [**UX Monitoring** > **RUM Applications** > **New Application**][3].
+1. Navigate to [**UX Monitoring** > **Setup & Configurations** > **New Application**][3].
 2. Select **Roku** as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Roku Data Collected][4].
 
@@ -227,9 +227,9 @@ Whenever you perform an operation that might throw an exception, you can forward
 [1]: https://github.com/rokucommunity/ropm
 [2]: https://github.com/DataDog/dd-sdk-roku
 [3]: https://app.datadoghq.com/rum/application/create
-[4]: /real_user_monitoring/roku/data_collected/
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/roku
 [5]: /account_management/api-app-keys/#api-keys
 [6]: /account_management/api-app-keys/#client-tokens
 [7]: /getting_started/tagging/using_tags/#rum--session-replay
-[8]: /real_user_monitoring/roku/advanced_configuration/#track-rum-resources
-[9]: /real_user_monitoring/roku/advanced_configuration/#enrich-user-sessions
+[8]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#track-rum-resources
+[9]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#enrich-user-sessions

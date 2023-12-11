@@ -31,9 +31,9 @@ On the [Service Catalog page][1], see the list of services in your Datadog organ
 
 The Service Catalog list is sortable by service type, service name, and many of the other columns. You can find missing ownership by sorting by team in the Ownership view and looking for blanks. Or you can sort by urgency in the Reliability view and see services with the most triggered monitors.
 
-Information about the service provided by the service definition or by Datadog products collecting observability data is organized into views: Ownership, Reliability, Performance, and Security.
+Information about the service provided by the service definition or by Datadog products collecting observability data is organized into views: Ownership, Reliability, Performance, Security, and more.
 
-### Ownership view
+## Ownership view
 
 In the **Ownership** tab, you can click the icons in the **Contact** and **Repo** columns and be directed to the tools and projects specified in the service definition. For example, you can access the owning team's Slack channel or GitHub repository containing the service code.
 
@@ -41,7 +41,7 @@ The **Telemetry** column displays what types of telemetry data Datadog is collec
 
 Sort the table by **Team** or **On Call** columns to see which services each team is responsible for, and identify services where ownership and responsibility are not specified yet.
 
-### Reliability view
+## Reliability view
 
 The **Reliability** tab contains information about the stability of your services. Sort the table by clicking on columns in the list to reveal:
 
@@ -54,7 +54,7 @@ Click the Settings icon on the right hand corner to hide columns from the list.
 
 {{< img src="tracing/service_catalog/svc-cat-reliability.png" alt="Service Catalog Reliability view showing several services and their associated MTTR, deployment metrics, issues, incidents, SLOs, and monitor statuses." style="width:100%;" >}}
 
-### Performance view
+## Performance view
 
 The **Performance** tab provides several ways to view how your services are performing and what needs the most attention. 
 
@@ -79,7 +79,7 @@ Sort the table by clicking columns to reveal services that:
 
 Click the Settings icon on the right hand corner to hide metric columns from the list.
 
-### Security view
+## Security view
 The **Security tab** provides several ways to assess and improve the security posture of your services. This includes understanding the number and severity of known security vulnerabilities in the open source libraries, and viewing how your services are targeted by attackers. Sort the table by clicking columns to reveal services that:
 
 - Expose known security vulnerabilities, including the individual severities.
@@ -92,7 +92,7 @@ To access additional details describing security vulnerabilities and signals, cl
 
 Click the Settings icon on the right hand corner to hide metric columns from the list.
 
-### Costs view
+## Costs view
 The **Costs tab** provides several ways to understand the costs associated with your services.  Powered by [Cloud Cost Management][9], you can identify potential inefficiencies, saving opportunities, and change over time. Positioning costs data alongside metrics available in Service Catalog can improve visibility into how engineering changes affect overall cloud spend. Sort the table by clicking columns to reveal services that:
 
 - Have the highest amortized AWS costs in the last month
@@ -106,7 +106,7 @@ This information is only available for Cloud Cost Management customers who have 
 
 Click the Settings icon on the right hand corner to hide metric columns from the list.
 
-### Software Delivery View
+## Software Delivery View
 The **Software Delivery tab** provides several ways to assess and improve the pre-production status of your services. This includes understanding the status of your CI pipelines and viewing your static analysis violations. You can:
 
 - View performance of the [CI pipelines][12] related to your services.
