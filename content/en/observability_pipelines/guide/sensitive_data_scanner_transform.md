@@ -2,6 +2,8 @@
 title: Sensitive Data Scanner Transform
 kind: documentation
 disable_toc: false
+private: true
+is_beta: true
 further_reading:
 - link: "/observability_pipelines/setup/"
   tag: "Documentation"
