@@ -2460,16 +2460,21 @@ main:
     parent: pipeline_visibility
     identifier: ci_teamcity
     weight: 209
+  - name: Custom Pipelines
+    url: continuous_integration/pipelines/custom/
+    parent: pipeline_visibility
+    identifier: ci_custom
+    weight: 210
   - name: Custom Commands
     url: continuous_integration/pipelines/custom_commands/
     parent: pipeline_visibility
     identifier: ci_custom_commands
-    weight: 210
+    weight: 211
   - name: Custom Tags and Metrics
     url: continuous_integration/pipelines/custom_tags_and_metrics/
     parent: pipeline_visibility
     identifier: ci_custom_tags_and_metrics
-    weight: 211
+    weight: 212
   - name: Search and Manage
     url: continuous_integration/search/
     parent: ci
