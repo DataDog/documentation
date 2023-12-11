@@ -63,8 +63,30 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 3. Select and configure [Content Packs][9], which provide out-of-the-box content for critical security log sources.
 4. Select and configure [additional log sources][10] you want Cloud SIEM to analyze.
 5. Click **Activate**. A custom Cloud SIEM log index (`cloud-siem-xxxx`) is created.
-6. Navigate to the [Logs Indexes configuration][11] page.
-7. Move the Cloud SIEM index to the top of the index list. Cloud SIEM analyzes all logs going into the Cloud SIEM index. You can configure the index to filter for specific log events. See the [Log Index documentation][12] for more information.
+
+### Reorder the Cloud SIEM Index
+
+{{< img src="getting_started/cloud_siem/cloud-siem-setup-warning.png" alt="A yellow warning box saying Index Configuration needs attention" style="width:80%;">}}
+
+If the Cloud SIEM setup page shows the warning "The Cloud SIEM index is not in the first position", do the following:
+
+1. Click **Reorder index in Logs Configuration**.
+
+2. Confirm the modal title says "Move cloud-siem-xxxx to..." and that the `cloud-siem-xxxx` text in the index column is light purple.
+
+{{< img src="getting_started/cloud_siem/move-index-modal.png" alt="The Move cloud-siem-xxxx modal showing the cloud-siem-xxxx index in the last position in the list of indexes" style="width:60%;">}}
+
+3. To select the new placement of your index, click the top line of the index where you want `cloud-siem-xxxx` to go. For example, if you want to make the `cloud-siem-xxxx` index the first index, click on the line above the current first index. The new position is highlighted with a thick blue line.
+
+{{< img src="getting_started/cloud_siem/move-index-highlight.png" alt="The Move cloud-siem-xxxx modal showing a blue line at the tope of the first index" style="width:65%;">}}
+
+4. The text confirms the position selected: "Select the new placement of your index: Position 1". Click **Move**.
+
+5. Review the warning text and if you confirm the change, click **Reorder**.
+
+6. Review the index order and confirm that the `cloud-siem-xxxx` index is where you want it. If you want to move the index, click the **Move to** icon and follow steps 3 to 5.
+
+7. Navigate back to Cloud SIEM setup page.
 
 ## Phase 2: Signal exploration
 
