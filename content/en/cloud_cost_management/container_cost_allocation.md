@@ -20,6 +20,8 @@ Datadog Cloud Cost Management (CCM) automatically allocates EC2 compute cost in 
 
 {{< img src="cloud_cost/container_cost_allocation/cost_allocation_table.png" alt="Cloud cost allocation table showing requests and idle costs over the past week" style="width:100%;" >}}
 
+Additionally, CCM allocates the cost of non-local EBS Volumes used as Persistent Volumes in Kubernetes to individual pods that claim those volumes.
+
 ## Prerequisites
 
 1. Set up and configure [AWS Cloud Cost integration][1].
@@ -30,15 +32,26 @@ Datadog Cloud Cost Management (CCM) automatically allocates EC2 compute cost in 
 
 ## Cost allocation
 
-Cost allocation divides EC2 compute costs in the [Cost and Usage Report][4] (CUR) into individual costs for each pod or task running on the instance. These divided costs are then enriched with tags from the nodes, pods, and tasks, which allows you to break down costs by any associated dimensions.
+Cost allocation divides EC2 and EBS volume costs in the [Cost and Usage Report][4] (CUR) into associated individual tasks or pods. These divided costs are then enriched with tags from nodes, pods, tasks, and volumes. This lets you break down costs by any associated dimensions.
+
 
 ### Kubernetes
 
-For Kubernetes allocation, a Kubernetes node is joined with its associated EC2 instance costs. The node's cluster name and all node tags are added to the entire EC2 compute cost for the node. This allows you to associate cluster-level dimensions with the cost of the instance, without considering the pods scheduled to the node.
+#### Compute
+
+For Kubernetes compute allocation, a Kubernetes node is joined with its associated EC2 instance costs. The node's cluster name and all node tags are added to the entire EC2 compute cost for the node. This allows you to associate cluster-level dimensions with the cost of the instance, without considering the pods scheduled to the node.
 
 Next, Datadog looks at all of the pods running on that node for the day. The cost of the node is allocated to the pod based on the resources it has used and the length of time it ran. This calculated cost is enriched with all of the pod's tags.
 
 **Note**: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [nodes][7] and [pods][8].
+
+#### Persistent Volume Storage
+
+For Kubernetes Persistent Volume storage allocation, Persistent Volumes (PV), Persistent Volume Claims (PVC), nodes, and pods are joined with their associated EBS volume costs. All associated PV, PVC, node, and pod tags are added to the EBS volume cost line items. 
+
+Next, Datadog looks at all of the pods that claimed the volume on that day. The cost of the volume is allocated to the pod based on the resources it has used and the length of time it ran. These resources 
+include the provisioned capacity for Storage, IOPS, and Throughput. This allocated cost is enriched with all of the pod's tags.
+
 
 ### ECS on EC2
 
@@ -56,11 +69,19 @@ Any cost other than EC2, computed for instances hosting Kubernetes pods or ECS t
 
 ## Understanding spend
 
-Using the `allocated_spend_type` tag, you can visualize the spend category associated with your cost at the Kubernetes node, ECS host, or cluster level. Costs are allocated into three spend types:
+Using the `allocated_spend_type` tag, you can visualize the spend category associated with your cost at the Kubernetes node, ECS host, EBS volume, or cluster level. Costs are allocated into three spend types:
+
+### Compute
 
 - Usage: Cost of memory and cpu being used or reserved by workloads.
 - Workload idle: Cost of memory and cpu that is being reserved and allocated but not used by workloads.
 - Cluster idle: Cost of memory and cpu not reserved by workloads in a cluster.
+
+### Persistent Volumes
+
+- Usage: Cost of provisioned IOPS, Throughput, or Storage being used by workloads. For Storage, this is based on the maximum amount of volume storage used that day. For IOPS and Throughput, this is based on the average amount used that day.
+- Workload idle: Cost of provisioned IOPS, Throughput, or Storage not being used by workloads. For Storage, this is based on the maximum amount of storage used that day. For IOPS and Throughput, this is based on the average amount used that day.
+- Cluster idle: Cost of provisioned IOPS, Throughput, or Storage for volumes not claimed by any pods that day.
 
 ## Cost metrics
 
