@@ -17,7 +17,7 @@ The <code>sensitive_data_scanner</code> transform is in private beta.
 
 ## Overview
 
-Sensitive data, such as credit card numbers, bank routing numbers, and API keys are often exposed unintentionally in your logs, which can expose your organization to financial and privacy risks. Use the Observability Pipelines `sensitive_data_scanner` transform to identify, tag, and optionally redact or hash sensitive information before routing data to different destinations. You can use out-of-the-box scanning rules to detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. Or, create custom scanning rules using regex patterns to match sensitive information.
+Sensitive data, such as credit card numbers, bank routing numbers, and API keys, are often exposed unintentionally in your logs, which can expose your organization to financial and privacy risks. Use the Observability Pipelines `sensitive_data_scanner` transform to identify, tag, and optionally redact or hash sensitive information before routing data to different destinations. You can use out-of-the-box scanning rules to detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. Or, create custom scanning rules using regex patterns to match sensitive information.
 
 ## Set up the `sensitive_data_scanner` transform
 
