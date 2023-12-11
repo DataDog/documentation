@@ -1,15 +1,19 @@
 ---
 title: Severity Scoring
 kind: documentation
-aliases:
-  - /security/serverity_scoring
+further_reading:
+- link: "/security/misconfigurations/"
+  tag: "Documentation"
+  text: "Learn more about CSM Misconfigurations"
 ---
 
-## CSM Misconfigurations and Identity Risks
+## Cloud Security Management
+
+### Misconfigurations and Identity Risks
 
 Starting in early 2024, all CSM Misconfigurations and Identity Risk rules will migrate to our severity score framework. This framework is designed to compare the likelihood that an adversary will take advantage of a misconfiguration to the risk posed to your environment. By weighting both of these aspects, findings can be prioritized more accurately by their real-world risks. The matrices below show how to compute a misconfiguration's severity score depending on certain criteria.
 
-### Likelihood
+#### Likelihood
 
 The likelihood component is made up of two subcomponents; The attack vector, the means through which a misconfiguration can be exploited, and the accessibility, if the resource is publicly accessible or not.
 
@@ -35,7 +39,7 @@ The accessibility is determined by the following criteria:
 | Private       | The vulnerable component/resource is in a private network.         |
 | Public        | The vulnerable component/resource is accessible from the internet. |
 
-### Impact
+#### Impact
 
 The impact component is how damaging the exploitation of the misconfiguration would be to the environment.
 
@@ -46,7 +50,7 @@ The impact component is how damaging the exploitation of the misconfiguration wo
 |   High   | Abusing this misconfiguration results in an impact to the following: confidentiality, integrity or availability of the vulnerable component and impacts a significant number of other resources (E.G. S3FullAccess, EC2FullAccess, etc.). |
 | Critical | Abusing this misconfiguration results in complete control of all resources in the account (E.G. AdministratorAccess)                                                                                                                      |
 
-### Severity Matrix
+#### Severity Matrix
 
 These two subcomponent scores combined compute the overall severity score for a misconfiguration.
 
@@ -58,11 +62,11 @@ These two subcomponent scores combined compute the overall severity score for a 
 |            | **High**     | Medium | High   | High     | Critical |
 |            | **Critical** | Medium | High   | Critical | Critical |
 
-### Examples
+#### Examples
 
 To explain how the framework is used here are a few examples.
 
-#### Example 1: SNS Topic should have access restrictions set for subscription
+##### Example 1: SNS Topic should have access restrictions set for subscription
 
 The detection rule for [SNS Topic should have access restrictions set for subscription][1] checks if the SNS topic has a resource-based policy that contains a `Principal` of `*`, and an `Action` with the `sns:Subscribe` permission. This combination would allow anyone the ability to subscribe to the SNS topic and receive its notifications. We score this rule as follows:
 
@@ -78,7 +82,7 @@ The detection rule for [SNS Topic should have access restrictions set for subscr
 - Severity Score: Critical x Medium = High
   - The final severity score is High. This is because a Critical likelihood mixed with a Medium impact results in an overall score of High.
 
-#### Example 2: EC2 instances should enforce IMDSv2
+##### Example 2: EC2 instances should enforce IMDSv2
 
 The detection rule for [EC2 instances should enforce IMDSv2][2] checks if an EC2 instance is using the instance metadata service version 1 ([IMDSv1][3]), which is vulnerable to common web application attacks. If exploited, an adversary would be able to access the IAM credentials stored in the IMDS and use them to access resources in the AWS account. We score this rule as follows:
 
@@ -93,6 +97,26 @@ The detection rule for [EC2 instances should enforce IMDSv2][2] checks if an EC2
 
 - Severity Score: Medium x Medium = Medium
   - The final severity score is Medium. This is because a Medium likelihood mixed with a Medium impact results in an overall score of Medium.
+
+### Threats
+
+**threats goes here**
+
+### Vulnerabilities
+
+**vulns go here**
+
+## Cloud SIEM
+
+**cloud siem goes here**
+
+## Application Security Management
+
+**ASM goes here**
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/security/default_rules/aws-sns-subscription/
 [2]: https://docs.datadoghq.com/security/default_rules/aws-ec2-imdsv2/
