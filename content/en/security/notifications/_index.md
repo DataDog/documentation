@@ -25,19 +25,7 @@ Notifications can be set up for individual [detection rules](#detection-rules) a
 
 ### Detection rules
 
-When you [create or modify a detection rule][2], you can use the **Set rule case** and **Say what's happening** section to define the notifications that are sent. See [Notification Variables][1] to learn how to customize the notifications based on the signal's severity and specific context on the threat.
-
-#### Set rule case
-
-In the **Set rule case** section, add rule cases to determine when a detection rule triggers a security signal and the severity of the signal. Use the **Notify** dropdown to send signal notifications generated from that case to the [selected recipients](#notification-channels).
-
-#### Say what's happening
-
-Use the **Say what's happening** section to determine the content that is sent when a signal is generated.
-
-- **Rule name**: Add a rule name for your detection rule. The rule name appears in the **Detection Rules** list view, as well as the title of the signal. 
-- **Message**: Use standard Markdown and [notification variables][1] to provide specific details about the signal by referencing its tags and event attributes.
-- **Tags**: Use the **Tag resulting signals** dropdown to tag your signals with different tags. For example, `attack:sql-injection-attempt`.
+When you [create or modify a detection rule][2], you can define the notifications that are sent. For example, add rule cases to determine when a detection rule triggers a security signal. You can also customize the notification message using Markdown and [notification variables][1]. This enables you to provide additional details about the signal by referencing its tags and event attributes, as well as add tags to the generated signal, for example, `attack:sql-injection-attempt`.
 
 ### Notification rules
 
