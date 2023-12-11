@@ -77,6 +77,25 @@ try {
 }
 ```
 {{% /tab %}}
+{{% tab "Tinylog" %}}
+
+```java
+import org.tinylog.ThreadContext;
+import datadog.trace.api.CorrelationIdentifier;
+
+// There must be spans started and active before this block.
+try {
+    ThreadContext.put("dd.trace_id", CorrelationIdentifier.getTraceId());
+    ThreadContext.put("dd.span_id", CorrelationIdentifier.getSpanId());
+
+// Log something
+
+} finally {
+    ThreadContext.remove("dd.trace_id");
+    ThreadContext.remove("dd.span_id");
+}
+```
+{{% /tab %}}
 {{< /tabs >}}
 
 **Note**: If you are [not using a Datadog Log Integration][4] to parse your logs, custom log parsing rules need to ensure that `dd.trace_id` and `dd.span_id` are being parsed as strings. For more information, see [Correlated Logs Not Showing Up in the Trace ID Panel][5].
