@@ -33,7 +33,7 @@ Supported operating systems:
 Minimum JDK versions:
 - OpenJDK 8u352+, 11.0.17+, 17.0.5+ (including builds on top of it: Amazon Corretto, Azul Zulu, and others)
 - Oracle JDK 8u352+, 11.0.17+, 17.0.5+
-- OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+ (used on Eclipse OpenJ9, IBM JDK, IBM Semeru Runtime)
+- OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+ (used on Eclipse OpenJ9, IBM JDK, IBM Semeru Runtime). The profiler is disabled by default for OpenJ9 due to the possibility of crashing JVM caused by a subtle bug in JVTMI implementation. If you are not experiencing any crashes, you can enable the profiler by adding `-Ddd.profiling.ddprof.enabled=true`.
 - Azul Platform Prime 23.05.0.0+ (formerly Azul Zing)
 
 The Datadog Profiler uses the JVMTI `AsyncGetCallTrace` function, in which there is a [known issue][1] prior to JDK release 17.0.5. This fix was backported to 11.0.17 and 8u352. The Datadog Profiler is not enabled unless the JVM the profiler is deployed into has this fix. Upgrade to at least 8u352, 11.0.17, 17.0.5, or the latest non-LTS JVM version to use the Datadog Profiler.
@@ -76,9 +76,23 @@ To begin profiling applications:
 
 2. Download `dd-java-agent.jar`, which contains the Java Agent class files:
 
-    ```shell
-    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
-    ```
+{{< tabs >}}
+{{% tab "Wget" %}}
+   ```shell
+   wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
+{{% /tab %}}
+{{% tab "cURL" %}}
+   ```shell
+   curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
+{{% /tab %}}
+{{% tab "Dockerfile" %}}
+   ```dockerfile
+   ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
      **Note**: Profiler is available in the `dd-java-agent.jar` library in versions 0.55+.
 
@@ -204,12 +218,31 @@ For JMC users, the `datadog.MethodSample` event is emitted for wallclock samples
 
 The wallclock engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
-### Datadog profiler allocation engine
+### Profiler allocation engine
 
+{{< tabs >}}
+{{% tab "JFR" %}}
+The JFR based allocation profiling engine is enabled by default since JDK 16.
+The reason it's not enabled by default for JDK 8 and 11, is that an allocation intensive
+application can lead to high overhead and large recording sizes.
+To enable it for JDK 8 and 11, add the following:
+
+```
+export DD_PROFILING_ENABLED_EVENTS=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB
+```
+
+or:
+
+```
+-Ddd.profiling.enabled.events=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB
+```
+{{% /tab %}}
+
+{{% tab "Datadog Profiler" %}}
 _Requires JDK 11+._
 
 The Datadog allocation profiling engine contextualizes allocation profiles, which supports allocation profiles filtered by endpoint.
-In dd-java-agent earlier than v1.17.0 it is disabled by default, but you can enable it with:
+In dd-java-agent earlier than v1.17.0 it is **disabled** by default. Enable it with:
 
 ```
 export DD_PROFILING_DDPROF_ENABLED=true # this is the default in v1.7.0+
@@ -226,6 +259,9 @@ or:
 For JMC users, the Datadog allocation events are `datadog.ObjectAllocationInNewTLAB` and `datadog.ObjectAllocationOutsideTLAB`.
 
 The allocation profiler engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### Live-heap profiler engine
 

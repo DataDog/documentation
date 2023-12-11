@@ -45,17 +45,34 @@ To install with Yarn, run:
 yarn add @datadog/mobile-react-native
 ```
 
+### iOS
+
 Install the added pod:
 
 ```sh
 (cd ios && pod install)
 ```
 
-Versions `1.0.0-rc5` and higher require you to have `compileSdkVersion = 31` in the Android application setup, which implies that you should use Build Tools version 31, Android Gradle Plugin version 7, and Gradle version 7 or higher. To modify the versions, change the values in the `buildscript.ext` block of your application's top-level `build.gradle` file. Datadog recommends using React Native version 0.67 or higher.
+### Android
+
+If you use a React Native version strictly over 0.67, make sure to use Java version 17. If you use React Native version equal or below ot 0.67, make sure to use Java version 11.
+
+In your `android/build.gradle` file, specify the `kotlinVersion` to avoid clashes among kotlin dependencies:
+
+```groovy
+buildscript {
+    ext {
+        // targetSdkVersion = ...
+        kotlinVersion = "1.8.21"
+    }
+}
+```
+
+The Datadog React Native SDK requires you to have `compileSdkVersion = 31` or higher in the Android application setup, which implies that you should use Build Tools version 31 or higher, Android Gradle Plugin version 7, and Gradle version 7 or higher. To modify the versions, change the values in the `buildscript.ext` block of your application's top-level `build.gradle` file. Datadog recommends using a React Native version that's actively supported.
 
 ### Specify application details in the UI
 
-1. In the [Datadog app][1], navigate to **UX Monitoring** > **RUM Applications** > **New Application**.
+1. In Datadog, navigate to [**UX Monitoring** > **Setup & Configurations** > **New Application**][1].
 2. Choose `react-native` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
 4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings.
@@ -362,7 +379,7 @@ configuration.trackBackgroundEvents = true;
 
 ### Android
 
-Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][10], meaning that on most devices this data can't be read by other applications. However, if the mobile device is rooted, or someone tempers with the Linux kernel, the stored data might become readable.
+Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][10], meaning that on most devices this data can't be read by other applications. However, if the mobile device is rooted, or someone tampers with the Linux kernel, the stored data might become readable.
 
 ### iOS
 

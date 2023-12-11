@@ -133,7 +133,7 @@ Click on a branch to explore the test details page, which includes information a
 
 #### Test regressions
 
-Test regressions are evaluated per commit in an effort to tie performance regressions to specific code changes.
+[Test regressions][106] are evaluated per commit in an effort to tie performance regressions to specific code changes.
 
 #### Investigate for more details
 
