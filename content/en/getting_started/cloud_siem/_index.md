@@ -64,11 +64,11 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 4. Select and configure [additional log sources][10] you want Cloud SIEM to analyze.
 5. Click **Activate**. A custom Cloud SIEM log index (`cloud-siem-xxxx`) is created.
 
-### Reorder the Cloud SIEM Index
+If the Cloud SIEM setup page shows the warning "The Cloud SIEM index is not in the first position", follow the steps in the [Reorder the Cloud SIEM index](#reorder-the-cloud-siem-index) section.
+
+### Reorder the Cloud SIEM index
 
 {{< img src="getting_started/cloud_siem/cloud-siem-setup-warning.png" alt="A yellow warning box saying Index Configuration needs attention" style="width:80%;">}}
-
-If the Cloud SIEM setup page shows the warning "The Cloud SIEM index is not in the first position", do the following:
 
 1. Click **Reorder index in Logs Configuration**.
 
@@ -76,7 +76,7 @@ If the Cloud SIEM setup page shows the warning "The Cloud SIEM index is not in t
 
 {{< img src="getting_started/cloud_siem/move-index-modal.png" alt="The Move cloud-siem-xxxx modal showing the cloud-siem-xxxx index in the last position in the list of indexes" style="width:60%;">}}
 
-3. To select the new placement of your index, click the top line of the index where you want `cloud-siem-xxxx` to go. For example, if you want to make the `cloud-siem-xxxx` index the first index, click on the line above the current first index. The new position is highlighted with a thick blue line.
+3. To select the new placement of your index, click the top line of the index where you want `cloud-siem-xxxx` to go. For example, if you want to make the `cloud-siem-xxxx` index the first index, click on the line *above* the current first index. The new position is highlighted with a thick blue line.
 
 {{< img src="getting_started/cloud_siem/move-index-highlight.png" alt="The Move cloud-siem-xxxx modal showing a blue line at the tope of the first index" style="width:65%;">}}
 
