@@ -38,7 +38,7 @@ cascade:
     {{< nextlink href="continuous_integration/pipelines/gitlab" >}}GitLab{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/jenkins" >}}Jenkins{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/teamcity" >}}TeamCity{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/custom" >}}Custom{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/pipelines/custom" >}}Other CI Providers{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/custom_commands" >}}Custom Commands{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/custom_tags_and_metrics" >}}Custom Tags and Metrics{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -130,9 +130,9 @@ While the concept of a CI pipeline may vary depending on your provider, see how 
 
 {{% /tab %}}
 
-{{% tab "Custom" %}}
+{{% tab "Other CI Providers" %}}
 
-| Datadog | Custom |
+| Datadog | Other CI Providers |
 |---|---|
 | Pipeline | Pipeline |
 | Stage | Stage |
@@ -146,7 +146,7 @@ If your CI provider is not supported, you can try setting up Pipeline Visibility
 
 ### Supported features
 
-|  | Jenkins | GitLab | CircleCI | Buildkite | GitHub Actions | Azure Pipelines | Codefresh | TeamCity | AWS Code Pipeline | Custom |
+|  | Jenkins | GitLab | CircleCI | Buildkite | GitHub Actions | Azure Pipelines | Codefresh | TeamCity | AWS Code Pipeline | Other CI Providers |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | {{< ci-details title="Pipeline trace visualization" >}}Visualization of pipeline executions with associated tracing.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | {{< ci-details title="Partial retries" >}}Identification of partial retries (for example, when only a subset of jobs were retried).{{< /ci-details >}} |  | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  {{< X >}} |
