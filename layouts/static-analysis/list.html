@@ -39,6 +39,7 @@
         },
         searchValue: '',
         openedFilterForm: null,
+        showEmptyResultsMsg: false,
         filteredRulesets: new Set(),
         resetFilteredRulesets () {
             // Empty filtered rulesets
@@ -60,7 +61,7 @@
         shouldShowRule (ruleEl) {
             // Determines rule display
             // Compares search values and filter values against ruleInfo
-
+            
             const ruleInfo = ruleEl.dataset.info.split(';')
             const ruleFilterInfo = ruleInfo[0].toLowerCase().split(',')
             const ruleSearchInfo = ruleInfo.slice(1).join(' ').toLowerCase()
@@ -183,7 +184,7 @@
             // Determine and return the appropriate empty results message
 
             const filterValues = Object.values(this.filterTypes).flat().map(item => item.split(',')[0]).join(', ')
-            if((filterValues.length > 1) && this.searchValue){
+            if(filterValues.length && this.searchValue){
                 return `No results found for query on search: '${this.searchValue}' and filter: '${filterValues}'`
             }else{
                 return `No results found for query '${this.searchValue || filterValues}'`
@@ -283,9 +284,12 @@
                     </button>
                 </div>
                 {{ end }}
-                <template x-if="!filteredRulesets.size">
-                    <span class="fw-semibold" x-text="emptyResultsMsg"></span>
-                </template>
+                {{/*  hook into the app lifecycle. $watch for 'filteredRulesets' to change and update the 'showEmptyResultsMsg' property  */}}
+                <div x-init="showEmptyResultsMsg = !filteredRulesets.size; $watch('filteredRulesets', value => showEmptyResultsMsg = !value.size)">
+                    <template x-if="showEmptyResultsMsg">
+                        <span class="fw-semibold" x-text="emptyResultsMsg"></span>
+                    </template>
+                </div>
             </div>
         </div>
         {{/*  NAV - Keep here. scratch pad for filters need to form first */}}
