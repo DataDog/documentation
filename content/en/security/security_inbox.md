@@ -11,6 +11,9 @@ further_reading:
 - link: "/security/default_rules/#all"
   tag: "Documentation"
   text: "Out-of-the-box Detection Rules"
+- link: "https://www.datadoghq.com/blog/security-inbox/"
+  tag: "Blog"
+  text: "Easily identify and prioritize your top security risks with Datadog Security Inbox"
 ---
 
 Security Inbox provides a consolidated, actionable list of your most important security findings. It automatically contextualizes and correlates insights from Datadog security products across vulnerabilities, signals, misconfigurations, and identity risks into a unified, prioritized view of actions to take to strengthen your environment.
