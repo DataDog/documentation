@@ -40,16 +40,6 @@
         searchValue: '',
         openedFilterForm: null,
         filteredRulesets: new Set(),
-        emptyResultsMsg () {
-            // Determine and return the appropriate empty results message
-
-            const filterValues = Object.values(this.filterTypes).flat().map(item => item.split(',')[0]).join(', ')
-            if((filterValues.length > 1) && this.searchValue){
-                return `No results found for query on search: '${this.searchValue}' and filter: '${filterValues}'`
-            }else{
-                return `No results found for query '${this.searchValue || filterValues}'`
-            }
-        },
         resetFilteredRulesets () {
             // Empty filtered rulesets
 
@@ -148,6 +138,12 @@
             selectedRulesetEl.classList.toggle('active')
             selectedRulesetEl.previousElementSibling.classList.toggle('d-none')
         },
+        toggleFilterForm (selectedFilterFormEl) {
+            // manage filter form accordian
+
+            const filterTypeID = selectedFilterFormEl.dataset.id
+            this.openedFilterForm = (this.openedFilterForm === filterTypeID) ? null : filterTypeID
+        },
         copyHref (selectedRuleEl) {
             // Copy href
 
@@ -168,23 +164,30 @@
                 }, 1000)
             })
         },
-        toggleFilterForm (selectedFilterFormEl) {
-            // manage filter form accordian
-            const filterTypeID = selectedFilterFormEl.dataset.id
-            this.openedFilterForm = (this.openedFilterForm === filterTypeID) ? null : filterTypeID
-        },
         deleteOneSelection (filterType, filterOption) {
             // delete one filterOption at a time
+
             this.filterTypes[filterType] = this.filterTypes[filterType].filter(s => s !== filterOption)
             this.pushState(filterType, filterOption.split(',')[0])
         },
         deleteAllSelections (filterType) {
             // delete all selections and url params of a filter type
+
             this.filterTypes[filterType] = []
             this.openedFilterForm = null
             const url = new URL(window.location.href)
             url.searchParams.delete(filterType)
             window.history.pushState(null,'', url.toString())
+        },
+        emptyResultsMsg () {
+            // Determine and return the appropriate empty results message
+
+            const filterValues = Object.values(this.filterTypes).flat().map(item => item.split(',')[0]).join(', ')
+            if((filterValues.length > 1) && this.searchValue){
+                return `No results found for query on search: '${this.searchValue}' and filter: '${filterValues}'`
+            }else{
+                return `No results found for query '${this.searchValue || filterValues}'`
+            }
         }
     }"
     x-init="updateWithURLParams('{{$valid_langs}}')">
@@ -232,17 +235,17 @@
                             </div>
                             
                             {{/*  
-                                build object of arrays with unique values for filter dropdowns (.filter-selection-container)
+                                build object with unique values for filter dropdowns (.filter-selection-container)
                                 e.g:
                                 filters: {
                                     Language: [],
                                     Category: [],
-                                    Severity: []
+                                    Severity: {}
                                 }
                             */}}
                             {{ $pad.SetInMap "filters" "Languages" (union (index ($pad.Get "filters") "Languages") (slice .Params.meta.language)) }}
                             {{ $pad.SetInMap "filters" "Categories" (union (index ($pad.Get "filters") "Categories") (slice .Params.meta.category)) }}
-                            {{ $pad.SetInMap "filters" "Severities" (slice "Error" "Warning" "Notice" "None") }}
+                            {{ $pad.SetInMap "filters" "Severities" (merge (index ($pad.Get "filters") "Severities") (dict (string .Params.meta.severity_rank) .Params.meta.severity)) }}
                             {{/*  
                                 build object of arrays with unique languages for each ruleset header (.group-header )
                                 languagesByRuleset: {
@@ -285,7 +288,6 @@
                 </template>
             </div>
         </div>
-
         {{/*  NAV - Keep here. scratch pad for filters need to form first */}}
         <nav id="static-analysis-nav" class="container px-0">
             {{ $filter_types := (slice "Languages" "Categories" "Severities") }}
