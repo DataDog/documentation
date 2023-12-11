@@ -118,7 +118,7 @@ You can use the following `quota` transform metrics to set up monitors:
 - `quota_limit_bytes` (gauge)
 - `component_errors_total` (counter)
 
-For the previous [example configuration](#handling-data-sent-after-the-limit), the use following metric and tag combination to find all events sent after the limit and dropped.
+For the previous [example configuration](#handling-data-sent-after-the-limit), use following metric and tag combination to find all events sent after the limit and dropped.
 
 - Metric: `vector.component_sent_event_bytes_total`
     - Tags: `component_id:quota_example` and `output:dropped`
@@ -155,7 +155,7 @@ See [Metric Monitors][6] for more information.
 
 The Observability Pipelines `datadog_archives` destination formats logs into a Datadog-rehydratable format and then routes it to [Log Archives][12]. See [Route Logs in Datadog-Rehydratable Format to Amazon S3][13] to set up `datadog_archives`.
 
-The example configuration below is similar to the previous [example configuration](#handling-data-sent-after-the-limit), except the destination type is `datadog_archives`. All logs sent to Observability Pipelines after the quota is reached routed to the archives.
+The example configuration below is similar to the previous [example configuration](#handling-data-sent-after-the-limit), except the destination type is `datadog_archives`. All logs sent to Observability Pipelines after the quota is reached are routed to the archives.
 
 ```yaml
 sources:

@@ -15,7 +15,7 @@ further_reading:
   text: Application Security Management のトラブルシューティング
 - link: /security/application_security/threats/
   tag: Documentation
-  text: Application Threat Monitoring and Protection
+  text: Application Threat Management
 is_beta: true
 kind: documentation
 title: AWS Lambda の ASM を有効にする
@@ -77,7 +77,7 @@ Datadog Serverless Framework プラグインをインストールして構成す
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
 1. Datadog トレーサーをインストールします。
-   - **Python** 
+   - **Python**
        ```sh
        # Use this format for x86-based Lambda deployed in AWS commercial regions
           arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:72
@@ -93,14 +93,14 @@ Datadog Serverless Framework プラグインをインストールして構成す
           ```
           `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。`RUNTIME` オプションは、`Python37`、`Python38` または `Python39` が利用可能です。
 
-   - **Node**   
+   - **Node**
        ``` sh
        # Use this format for AWS commercial regions
          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:91
 
          # Use this format for AWS GovCloud regions
          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
-         ```  
+         ```
          `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。RUNTIME オプションは、`Node12-x`、`Node14-x`、`Node16-x`、`Node18-x` が利用可能です。
 
    - **Java**: Lambda がデプロイされている場所に応じて、以下のいずれかの形式の ARN を使用して Lambda 関数の[レイヤーを構成します][1]。`<AWS_REGION>` は `us-east-1` などの有効な AWS リージョンに置き換えてください。
@@ -141,7 +141,7 @@ Datadog Serverless Framework プラグインをインストールして構成す
 
 {{< site-region region="ap1" >}}
 1. Datadog トレーサーをインストールします。
-   - **Python** 
+   - **Python**
        ```sh
        # Use this format for x86-based Lambda deployed in AWS commercial regions
           arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:72
@@ -157,14 +157,14 @@ Datadog Serverless Framework プラグインをインストールして構成す
           ```
 `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えます。`RUNTIME` オプションは、`Python37`、`Python38`、`Python39`、`Python310`、`Python311` が利用可能です。
 
-   - **Node**   
+   - **Node**
        ``` sh
        # Use this format for AWS commercial regions
          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:91
 
          # Use this format for AWS GovCloud regions
          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
-         ```  
+         ```
          `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。RUNTIME オプションは、`Node12-x`、`Node14-x`、`Node16-x`、`Node18-x` が利用可能です。
 
 

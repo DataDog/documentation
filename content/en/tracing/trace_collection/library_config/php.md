@@ -172,9 +172,9 @@ Change the default name of an APM integration. Rename one or more integrations a
 `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
 : **INI**: `datadog.trace.128_bit_traceid_logging_enabled`<br>
 **Default**: `0`<br>
-Enable printing of the full 128-bit ID when formatting trace IDs for logs correlation.
+Enable printing of the full 128-bit trace ID when formatting trace IDs for logs correlation.
 When false (default), only the low 64-bits of the trace ID are printed, formatted as an integer. This means if the trace ID is only 64 bits, the full ID is printed.
-When true, the trace ID is printed as a full 128-bit ID in hexadecimal format. This is the case even if the ID itself is only 64 bits.
+When true, the trace ID is printed as a full 128-bit trace ID in hexadecimal format. This is the case even if the ID itself is only 64 bits.
 
 `DD_TRACE_HEALTH_METRICS_ENABLED`
 : **INI**: `datadog.trace_health_metrics_enabled`<br>

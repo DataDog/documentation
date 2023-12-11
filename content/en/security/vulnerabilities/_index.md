@@ -10,9 +10,12 @@ further_reading:
 - link: "/security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities"
   tag: "Documentation"
   text: "Setting up host vulnerabilities"
-- link: "https://www.datadoghq.com/blog/mitigate-identity-risks-and-infrastructure-vulnerabilities-with-datadog/"
+- link: "https://www.datadoghq.com/blog/csm-vulnerability-management/"
   tag: "Blog"
-  text: "Mitigate identity risks and infrastructure vulnerabilities with Datadog Cloud Security Management"
+  text: "Mitigate infrastructure vulnerabilities with Datadog Cloud Security Management"
+- link: "https://www.datadoghq.com/blog/datadog-container-image-view/"
+  tag: "Blog"
+  text: "Enhance your troubleshooting workflow with Container Images in Datadog Container Monitoring"
 ---
 
 {{< site-region region="gov" >}}
@@ -28,7 +31,7 @@ Cloud Security Management Vulnerabilities (CSM Vulnerabilities) helps you proact
 ## Explore vulnerabilities
 The [Vulnerabilities Explorer][1] shows a complete list of vulnerabilities detected across your infrastructure, ordering them based on their severity, offering grouping, filtering, and triaging capabilities so you can investigate, assign, and remediate problems.
 
-{{< img src="security/vulnerabilities/csm_vulnerabilities_2.png" alt="The CSM Vulnerability page sorting by unique vulnerabilities with side panel" width="100%">}}
+{{< img src="security/vulnerabilities/csm_vulnerabilities_3.png" alt="The CSM Vulnerability page sorting by unique vulnerabilities with side panel" width="100%">}}
 
 Select a specific vulnerability to see its details, including which containers and hosts are affected, severity breakdown score, and recommended remediation steps.
 The severity of a vulnerability is modified from the base score to take into account the following:

@@ -808,8 +808,9 @@ components:
           example: key:value,filter:example
           type: string
         cspm_enabled:
-          description: Enable Cloud Security Management Misconfigurations for your
-            organization.
+          description: "When enabled, Datadog\u2019s Cloud Security Management product
+            scans resource configurations monitored by this app registration.\nNote:
+            This requires resource_collection_enabled to be set to true."
           example: true
           type: boolean
         custom_metrics_enabled:
@@ -840,6 +841,12 @@ components:
           description: Your New Azure Active Directory ID.
           example: new1c44-1234-5678-9101-cc00736ftest
           type: string
+        resource_collection_enabled:
+          description: When enabled, Datadog collects metadata and configuration info
+            from cloud resources (compute instances, databases, load balancers, etc.)
+            monitored by this app registration.
+          example: true
+          type: boolean
         tenant_name:
           description: Your Azure Active Directory ID.
           example: testc44-1234-5678-9101-cc00736ftest
@@ -24540,6 +24547,18 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-given:
+        aws_account:
+          parameters:
+          - name: body
+            origin: request
+            value: "{\n  \"account_id\": \"{{ timestamp(\"now\") }}00\",\n  \"account_specific_namespace_rules\":
+              {\n      \"auto_scaling\": false\n  },\n  \"cspm_resource_collection_enabled\":
+              true,\n  \"excluded_regions\": [\n      \"us-east-1\",\n      \"us-west-2\"\n
+              \ ],\n  \"filter_tags\": [\n      \"$KEY:$VALUE\"\n  ],\n  \"host_tags\":
+              [\n      \"$KEY:$VALUE\"\n  ],\n  \"metrics_collection_enabled\": false,\n
+              \ \"resource_collection_enabled\": true,\n  \"role_name\": \"DatadogAWSIntegrationRole\"\n}"
+          step: there is a valid "aws_account" in the system
       x-menu-order: 8
       x-undo:
         operationId: DeleteAWSAccount
