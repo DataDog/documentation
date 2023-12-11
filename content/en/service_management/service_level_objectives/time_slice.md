@@ -54,7 +54,7 @@ From the Create or Edit SLO page, under *Define your SLI*, click **Import from M
 
 ## Uptime calculations
 
-To calculate the uptime percentage for a Time Slice SLOs, Datadog cuts the timeseries into equal-duration intervals, called "slices". The length of the interval is 5 minutes and not configurable. The space and time aggregation are determined by the metric query. For more information on space and time aggregation, see the [metrics][1] documentation for. 
+To calculate the uptime percentage for a Time Slice SLOs, Datadog cuts the timeseries into equal-duration intervals, called "slices". The length of the interval is 5 minutes and not configurable. The space and time aggregation are determined by the metric query. For more information on time and space aggregation, see the [metrics][1] documentation. 
 
 For each slice, there is a single value for the timeseries, and the uptime condition (such as `value < 1`) is evaluated for each slice. If the condition is met, the slice is considered uptime, otherwise it is considered downtime.
 
@@ -88,10 +88,10 @@ The effects on error budget can be unusual. Removing time from an uptime SLO cau
 
 ### Missing data
 
-In Time Slice SLOs, missing data is always treated as uptime. If missing data is counted as downtime, the SLO product team would like to understand your use case better. Please contact the SLO product team. 
-
-**Note**: While missing data is treated as uptime, it is gray on the timeline visualization.
+In Time Slice SLOs, missing data is always treated as uptime. While missing data is treated as uptime, it is gray on the timeline visualization.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /metrics/#time-and-space-aggregation
