@@ -73,19 +73,19 @@ datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symb
 
 **注**: バージョンに変更がない場合、ソースマップを再アップロードしても既存のものはオーバーライドされません。
 
-オプションの完全なリストは、`datadog-ci` [Flutter Symbols のドキュメント][6]を参照してください。
+オプションの完全なリストは、`datadog-ci` [Flutter Symbols のドキュメント][5]を参照してください。
 
 ## 高度な構成 - フレーバーとビルド番号
 
-Datadog は、`service-name`、`version`、`flavor` の組み合わせで難読化のための正しいシンボルを探すので、`datadog-ci` コマンドに送るパラメーターと [DatadogConfiguration][7] で設定するパラメーター
+Datadog は `service-name`、`version`、`flavor` の組み合わせを使用して、難読化解除のための正しいシンボルを探します。クラッシュレポートが完全な情報を持つためには、`datadog-ci` コマンドに送られるパラメーターと [DatadogConfiguration][6] で設定されたパラメーターが完全に一致する必要があります。
 
-Flutter でアプリの[フレーバー][8]を使用している場合、フレーバーを自動検出できないため、[DatadogConfiguration.flavor][9] でフレーバーの名前を設定する必要があります。そして、これを `datadog-ci` コマンドの `--flavor` パラメーターに渡すことができます。
+Flutter でアプリの[フレーバー][7]を使用している場合、フレーバーを自動検出できないため、[DatadogConfiguration.flavor][8] でフレーバーの名前を設定する必要があります。そして、これを `datadog-ci` コマンドの `--flavor` パラメーターに渡すことができます。
 
 ```sh
 datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symbols-location <location_of_dart_symbols> --android-mapping --ios-dsyms --flavor my_flavor
 ```
 
-Datadog SDK は、`pubspec.yaml` で指定したアプリケーションのバージョン番号から、ビルド番号までを自動的に検出します (ビルド番号は含まれません)。もし、アプリケーションのバージョンの一部としてビルド番号を使用していて、ビルドごとにシンボルをアップロードする必要がある場合は、バージョンを [DatadogConfiguration.version][10] に追加する必要があります。そして、これを `datadog-ci` コマンドの `--version` パラメーターに渡すことができます。
+Datadog SDK は、`pubspec.yaml` で指定されたアプリケーションのバージョン番号を自動的に検出しますが、これにはビルド番号は含まれません。もし、アプリケーションのバージョンの一部としてビルド番号を使用していて、ビルドごとにシンボルをアップロードする必要がある場合は、バージョンを [DatadogConfiguration.version][9] に追加する必要があります。そして、これを `datadog-ci` コマンドの `--version` パラメーターに渡すことができます。
 
 ```sh
 datadog-ci flutter-symbols upload --service-name <your_service_name> --dart-symbols-location <location_of_dart_symbols> --android-mapping --ios-dsyms --version 1.2.3+22
@@ -101,8 +101,8 @@ Datadog は `+` を許さないバージョンのタグを使用することに�
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: https://docs.datadoghq.com/ja/real_user_monitoring/flutter/#setup
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
-[6]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/flutter-symbols
-[7]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
-[8]: https://docs.flutter.dev/deployment/flavors
-[9]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration/flavor.html
-[10]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration/version.html
+[5]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/flutter-symbols
+[6]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
+[7]: https://docs.flutter.dev/deployment/flavors
+[8]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration/flavor.html
+[9]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration/version.html

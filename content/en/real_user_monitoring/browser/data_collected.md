@@ -12,7 +12,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
   tag: "Blog"
   text: "Introducing Datadog Real User Monitoring"
-- link: "/real_user_monitoring/browser/modifying_data_and_context"
+- link: "/real_user_monitoring/browser/advanced_configuration"
   tag: "Documentation"
   text: "Modifying RUM data and adding context"
 - link: "/real_user_monitoring/explorer/"
@@ -44,7 +44,6 @@ There are additional [metrics and attributes specific to a given event type](#ev
 The following diagram illustrates the RUM event hierarchy:
 
 {{< img src="real_user_monitoring/data_collected/event-hierarchy.png" alt="RUM Event hierarchy" style="width:50%;border:none" >}}
-
 
 ## Default attributes
 
@@ -122,7 +121,7 @@ In addition to default attributes, you can add user-related data to all RUM even
 <a href="/real_user_monitoring/guide/setup-feature-flag-data-collection/">Set up your data collection</a> to join the Feature Flag Tracking beta.
 {{< /callout >}}
 
-You can [enrich your RUM event data with feature flags][6] to get additional context and visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance. 
+You can [enrich your RUM event data with feature flags][6] to get additional context and visibility into performance monitoring. This lets you determine which users are shown a specific user experience and if it is negatively affecting the user's performance.
 
 ## Event-specific metrics and attributes
 
@@ -160,6 +159,7 @@ You can [enrich your RUM event data with feature flags][6] to get additional con
 | `session.last_view.url_scheme` | object | The scheme part of the URL. |
 
 ### View timing metrics
+
 **Note**: View timing metrics include time that a page is open in the background.
 
 | Attribute                       | Type        | Description                                                                                                                                                                                                           |
@@ -167,8 +167,13 @@ You can [enrich your RUM event data with feature flags][6] to get additional con
 | `view.time_spent`               | number (ns) | Time spent on the current view.                                                                                                                                                                                       |
 | `view.first_byte`               | number (ns) | Time elapsed until the first byte of the view has been received.                                                                                                |
 | `view.largest_contentful_paint` | number (ns) | Time in the page load where the largest DOM object in the viewport (visible on screen) is rendered.                                                                                                |
+| `view.largest_contentful_paint_target_selector` | string (CSS selector) | CSS Selector of the element corresponding to the largest contentful paint.                                                                                     |
 | `view.first_input_delay`        | number (ns) | Time elapsed between a user's first interaction with the page and the browser's response.                                                                                                                             |
+| `view.first_input_delay_target_selector`      | string (CSS selector) | CSS selector of the first element the user interacted with.                                                                                                                |
+| `view.interaction_to_next_paint`| number (ns) | Longest duration between a user's interaction with the page and the next paint.                                                                                                                              |
+| `view.interaction_to_next_paint_target_selector`| string (CSS selector) | CSS selector of the element associated with the longest interaction to the next paint.                                                                                                          |
 | `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where `0` means that no shifts are happening.                                                                               |
+| `view.cumulative_layout_shift_target_selector`  | string (CSS selector) | CSS selector of the most shifted element contributing to the page CLS.                                           |
 | `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently occurring. [More info from Monitoring Page Performance][9].                                                                             |
 | `view.first_contentful_paint`   | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3c definition][10].                               |
 | `view.dom_interactive`          | number (ns) | Time until the parser finishes its work on the main document. [More info from the MDN documentation][11].                                                                                                         |
@@ -211,13 +216,11 @@ Detailed network timing data for the loading of an application's resources are c
 | `resource.provider.domain`      | string | The resource provider domain.                                            |
 | `resource.provider.type`      | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).                                            |
 
-
 ### Long task timing metrics
 
 | Metric  | Type   | Description                |
 |------------|--------|----------------------------|
 | `long_task.duration` | number | Duration of the long task. |
-
 
 ### Error attributes
 
@@ -228,7 +231,6 @@ Detailed network timing data for the loading of an application's resources are c
 | `error.message` | string | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
 
-
 #### Source errors
 
 Source errors include code-level information about the error. For more information about different error types, see the [MDN documentation][15].
@@ -237,13 +239,11 @@ Source errors include code-level information about the error. For more informati
 |-----------------|--------|-------------------------------------------------------------------|
 | `error.type`    | string | The error type (or error code in some cases).                   |
 
-
-
 ### Action timing metrics
 
 | Metric    | Type   | Description              |
 |--------------|--------|--------------------------|
-| `action.loading_time` | number (ns) | The loading time of the action. See how it is calculated in the [User Action documentation][16]. |
+| `action.loading_time` | number (ns) | The loading time of the action. See how it is calculated in the [Tracking User Actions documentation][16]. |
 | `action.long_task.count`        | number      | Count of all long tasks collected for this action. |
 | `action.resource.count`         | number      | Count of all resources collected for this action. |
 | `action.error.count`      | number      | Count of all errors collected for this action.|
@@ -281,11 +281,11 @@ Source errors include code-level information about the error. For more informati
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
+[1]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [2]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
 [3]: https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
 [4]: /data_security/real_user_monitoring/#ip-address
-[5]: /real_user_monitoring/browser/modifying_data_and_context/#identify-user-sessions
+[5]: /real_user_monitoring/browser/advanced_configuration/#user-sessions
 [6]: /real_user_monitoring/guide/setup-feature-flag-data-collection
 [7]: /data_security/real_user_monitoring/#ip-address
 [8]: /synthetics/browser_tests/
@@ -296,5 +296,5 @@ Source errors include code-level information about the error. For more informati
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Window/DOMContentLoaded_event
 [14]: https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
-[16]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#how-action-loading-time-is-calculated
+[16]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-metrics
 [17]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions
