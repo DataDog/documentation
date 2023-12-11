@@ -55,13 +55,13 @@ You can access performance metrics for your views in:
 
 ### Core web vitals target elements
 
-Identifying what element triggered a high Core Web Vitals metrics is the first step in understanding the root cause and being able to improve performance.
+Identifying what element triggered a high Core Web Vitals metric is the first step in understanding the root cause and being able to improve performance.
 RUM reports the element that is associated with each Core Web Vital instance:
 
-- For Largest Contentful Paint, we report the CSS Selector of the element corresponding to the largest contentful paint.
-- For Interaction to Next Paint, we report the CSS selector of the element associated to the longest interaction to the next paint.
-- For First Input Delay, we report the CSS selector of the first element the user interacted with.
-- For Cumulative Layout Shift, we report the CSS selector of the most shifted element contributing to the CLS.
+- For Largest Contentful Paint, RUM reports the CSS Selector of the element corresponding to the largest contentful paint.
+- For Interaction to Next Paint, RUM reports the CSS selector of the element associated with the longest interaction to the next paint.
+- For First Input Delay, RUM reports the CSS selector of the first element the user interacted with.
+- For Cumulative Layout Shift, RUM reports the CSS selector of the most shifted element contributing to the CLS.
 
 ## All performance metrics
 
@@ -74,7 +74,7 @@ RUM reports the element that is associated with each Core Web Vital instance:
 | `view.first_input_delay`        | number (ns) | Time elapsed between a user's first interaction with the page and the browser's response.                                                                                                                                        |
 | `view.first_input_delay_target_selector`      | string (CSS selector) | CSS selector of the first element the user interacted with.                                                                                                                |
 | `view.interaction_to_next_paint`| number (ns) | Longest duration between a user's interaction with the page and the next paint.                                                                                                                              |
-| `view.interaction_to_next_paint_target_selector`| string (CSS selector) | CSS selector of the element associated to the longest interaction to the next paint.                                                                                                          |
+| `view.interaction_to_next_paint_target_selector`| string (CSS selector) | CSS selector of the element associated with the longest interaction to the next paint.                                                                                                          |
 | `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means no shifts are happening.                                                                                      |
 | `view.cumulative_layout_shift_target_selector`  | string (CSS selector) | CSS selector of the most shifted element contributing to the page CLS.                                           |
 | `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently happening. For more information, see [Monitoring Page Performance][10].                                                                          |
