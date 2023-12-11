@@ -24,7 +24,7 @@ L'assistant de suivi des erreurs pour le suivi des erreurs APM fournit une synth
 
 {{< img src="tracing/error_tracking/error_tracking_assistant.mp4" video="true" alt="Contexte d'exécution dans l'Explorer du suivi des erreurs" style="width:100%" >}}
 
-## Exigences et configuration
+## Prérequis et configuration
 Langages pris en charge
 : Python, Java
 
