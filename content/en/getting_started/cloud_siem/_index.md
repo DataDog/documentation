@@ -89,7 +89,7 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 
 The Cloud SIEM index should be in the first index position now. If the setup page still displays a warning about the index position, wait a few minutes and refresh the browser.
 
-After the index is moved to the first index position, review the settings and statuses for the [Content Packs][9] and [other log sources][10]. For each integration that shows a warning error, click on the integration and follow the instructions to fix it.
+After the index is moved to the first index position, review the settings and statuses for the [Content Packs][11] and [other log sources][11]. For each integration that shows a warning error, click on the integration and follow the instructions to fix it.
 
 ## Phase 2: Signal exploration
 
