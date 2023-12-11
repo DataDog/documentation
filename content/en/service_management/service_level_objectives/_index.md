@@ -248,6 +248,7 @@ Status corrections allow you to exclude specific time periods from SLO status an
 When you apply a correction, the time period you specify is dropped from the SLO's calculation.
 - For monitor-based SLOs, the correction time window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
+- For Time Slice SLOs, the correction time window is treated as uptime.
 
 You have the option to create one-time corrections for ad hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][23]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely. 
 
