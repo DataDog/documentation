@@ -21,7 +21,7 @@ To create a Datadog integration, see [Create a New Integration][3].
 ## Create a detection rule
 ### Build a detection rule JSON schema
 
-1. Navigate to **[Security > Cloud SIEM > Detection Rules > New Rule][4]** and create a new rule. Note: Only threshold based rules are currently supported.
+1. Navigate to **[Security > Cloud SIEM > Detection Rules > New Rule][4]** and create a new rule. Note: Only log detection based rules are currently supported.
 
 2. Follow the [best practices](#configuration-best-practices) in this guide to configure your detection rule.
  
