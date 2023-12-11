@@ -28,7 +28,7 @@ To set up Cloud Cost Management in Datadog, you should:
 
 ### Prerequisite: generate a Cost and Usage Report
 
-[Create a Cost and Usage Report][1] in AWS under the **Legacy Pages** section. At this time, there is no support for creating a Cost and Usage Report data exports.
+[Create a Cost and Usage Report][1] in AWS under the **Legacy Pages** section. At this time, there is no support for creating Cost and Usage Report data exports.
 
 Select the following content options:
 
