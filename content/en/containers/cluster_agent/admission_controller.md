@@ -188,7 +188,7 @@ Possible options:
 
 ## Troubleshooting
 
-There are a few common problems with the configuration aspects and networking rules with the Admission Controller. See the dedicated [Admission Controller Troubleshooting guide][6] for more details.
+See [Admission Controller Troubleshooting][6].
 
 ## Further Reading
 

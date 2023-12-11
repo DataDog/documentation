@@ -172,7 +172,7 @@ In EKS clusters the Cluster Agent pod can be deployed on any of your Linux based
 
 You can use a "Port Range" as long as this covers the `8000` port and required "Source" Security Group. If you have multiple Managed Node Groups with distinct Security Groups in each, ensure this inbound connectivity is added to each.
 
-Within EKS you can additionally turn on the [EKS Control Plane Logging for the “API server”][7].
+Within EKS you can additionally turn on the [EKS Control Plane Logging for the "API server"][7].
 
 Once this is enabled delete one of your pods to re-trigger a request through the Admission Controller. If the request fails from the networking perspective you should see logs in your AWS CloudWatch log group and log stream(s) for this cluster like:
 
@@ -223,7 +223,7 @@ The `providers.aks.enabled` option sets the necessary environment variable `DD_A
 {{< /tabs >}}
 
 #### GKE
-If you are using a [GKE *Private* Cluster this restricts the request][9] to Cluster Agent pod by default. You need to add a firewall rule to allow the inbound access from the control plane to this port. By default, the network for the cluster should have a firewall rule named `gke-<CLUSTER_NAME>-master`. This rule’s source filters should match the cluster’s "Control plane address range" found in the "Networking" section. Edit this firewall rule to allow ingress to the `TCP` protocol and port `8000`.
+If you are using a [GKE *Private* Cluster this restricts the request][9] to Cluster Agent pod by default. You need to add a firewall rule to allow the inbound access from the control plane to this port. By default, the network for the cluster should have a firewall rule named `gke-<CLUSTER_NAME>-master`. This rule's source filters should match the cluster's "Control plane address range" found in the "Networking" section. Edit this firewall rule to allow ingress to the `TCP` protocol and port `8000`.
 
 #### Rancher
 
