@@ -28,7 +28,7 @@ further_reading:
 
 - **Parameters**: Set custom parameters to pipelines
 
-- **Partial pipelines**: View partially retried and downstream pipeline executions
+- **Partial pipelines**: View partially retried pipelines
 
 - **Pipeline failure reasons**: Identify pipeline failure reasons from error messages
 
