@@ -151,7 +151,7 @@ function loadPage(newUrl) {
             document.documentElement.dataset.currentSection =
             newDocument.documentElement.dataset.currentSection;
 
-            // check if loaded page has inline JS. if so, we want to return as script will not execute
+            // check if loaded page has inline JS. if so, script will not execute. we need to reload
             const hasScript = newContent.getElementsByTagName('script').length;
 
             // if there is error finding the element, reload page at requested url
