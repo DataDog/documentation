@@ -27,6 +27,11 @@ For more information, see [Unified Service Tagging][2].
 | `container.name` | `container_name` |
 | `container.image.name` | `image_name` |
 | `container.image.tag` | `image_tag` |
+| `container.runtime` | `runtime` |
+
+[Semantic conventions: containers](https://opentelemetry.io/docs/specs/semconv/resource/container/)
+
+Additional cloud provider specific attributes are also mapped.
 
 ### Cloud
 
@@ -60,8 +65,16 @@ For more information, see [Unified Service Tagging][2].
 | `k8s.cronjob.name` | `kube_cronjob` |
 | `k8s.namespace.name` | `kube_namespace` |
 | `k8s.pod.name` | `pod_name` |
+| `app.kubernetes.io/name` | `kube_app_name` |
+| `app.kubernetes.io/instance` | `kube_app_instance` |
+| `app.kubernetes.io/version` | `kube_app_version` |
+| `app.kuberenetes.io/component` | `kube_app_component` |
+| `app.kubernetes.io/part-of` | `kube_app_part_of` |
+| `app.kubernetes.io/managed-by` | `kube_app_managed_by` |
 
 ## Further reading
+
+[Implementation of these mappings](https://github.com/DataDog/opentelemetry-mapping-go/blob/main/pkg/otlp/attributes/attributes.go)
 
 {{< partial name="whats-next/whats-next.html" >}}
 
