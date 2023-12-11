@@ -63,7 +63,7 @@ To explain how the framework is used here are a few examples.
 
 #### Example 1: SNS Topic should have access restrictions set for subscription
 
-The detection rule for [SNS Topic should have access restrictions set for subscription][14] checks if the SNS topic has a resource-based policy that contains a `Principal` of `*`, and an `Action` with the `sns:Subscribe` permission. This combination would allow anyone the ability to subscribe to the SNS topic and receive its notifications. We score this rule as follows:
+The detection rule for [SNS Topic should have access restrictions set for subscription][1] checks if the SNS topic has a resource-based policy that contains a `Principal` of `*`, and an `Action` with the `sns:Subscribe` permission. This combination would allow anyone the ability to subscribe to the SNS topic and receive its notifications. We score this rule as follows:
 
 - Likelihood: Critical
   - Attack Vector: No Authorization
@@ -79,11 +79,11 @@ The detection rule for [SNS Topic should have access restrictions set for subscr
 
 #### Example 2: EC2 instances should enforce IMDSv2
 
-The detection rule for [EC2 instances should enforce IMDSv2][15] checks if an EC2 instance is using the instance metadata service version 1 ([IMDSv1][16]), which is vulnerable to common web application attacks. If exploited, an adversary would be able to access the IAM credentials stored in the IMDS and use them to access resources in the AWS account. We score this rule as follows:
+The detection rule for [EC2 instances should enforce IMDSv2][2] checks if an EC2 instance is using the instance metadata service version 1 ([IMDSv1][3]), which is vulnerable to common web application attacks. If exploited, an adversary would be able to access the IAM credentials stored in the IMDS and use them to access resources in the AWS account. We score this rule as follows:
 
 - Likelihood: Medium
   - Attack Vector: Vulnerability
-    - The Attack Vector is marked as "Vulnerability". This is because the exploitation of this misconfiguration requires the resource to contain a vulnerable component, such as vulnerable software running on the EC2 instance that can be abused to perform [server side request forgery][17].
+    - The Attack Vector is marked as "Vulnerability". This is because the exploitation of this misconfiguration requires the resource to contain a vulnerable component, such as vulnerable software running on the EC2 instance that can be abused to perform [server side request forgery][4].
   - Accessibility: Private
     - The Accessibility is marked as "Private" because the EC2 instance has not explicitly been made public.
 
@@ -92,3 +92,8 @@ The detection rule for [EC2 instances should enforce IMDSv2][15] checks if an EC
 
 - Severity Score: Medium x Medium = Medium
   - The final severity score is Medium. This is because a Medium likelihood mixed with a Medium impact results in an overall score of Medium.
+
+[1]: https://docs.datadoghq.com/security/default_rules/aws-sns-subscription/
+[2]: https://docs.datadoghq.com/security/default_rules/aws-ec2-imdsv2/
+[3]: https://hackingthe.cloud/aws/general-knowledge/intro_metadata_service/
+[4]: https://hackingthe.cloud/aws/exploitation/ec2-metadata-ssrf/
