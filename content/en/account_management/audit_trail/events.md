@@ -66,7 +66,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 
 | Name                                    | Description of audit event                          | Query in audit explorer                                             |
 |-----------------------------------------| --------------------------------------------------  | ------------------------------------------------------------------- |
-| [Agent created][100]                    | A new Datadog Agent was enabled.                    | `@evt.name:"Datadog Agent" @action:created`                         |
+| [Agent enabled][100]                    | A new Datadog Agent was enabled.                    | `@evt.name:"Datadog Agent" @action:created`                         |
 | [Agent flare created][87]               | Datadog Agent flare is created for support tickets. | `@evt.name:"Datadog Agent" @action:created @asset.type:agent_flare` |
 | [Agent configuration updated][101]      | A Datadog Agent configuration was updated.          | `@evt.name:"Datadog Agent" @action:modified`                        |
 
