@@ -39,8 +39,7 @@ APM はアプリケーションのトラフィックのサンプルを収集す�
 
 Datadog Threat Monitoring and Detection は、すべてのリクエストでクライアントの IP アドレスと手動で追加したユーザータグを収集することで、悪質な行為者を特定します。
 
-<div class="alert alert-info"><strong>ベータ版: 1 クリック有効化</strong><br>
- サービスが<a href="/agent/remote_config/#enabling-remote-configuration">リモート構成を有効にした Agent とそれをサポートするトレーシングライブラリのバージョン</a>で実行されている場合、Agent やトレーシングライブラリの追加構成なしで Datadog UI から <a href="/security/application_security/enabling/">ASM を有効にする</a>ことができます。</div>
+<div class="alert alert-info"><strong>ベータ版: 1 クリック有効化</strong><br> サービスが<a href="/agent/remote_config/#enabling-remote-configuration">リモート構成を有効にした Agent とそれをサポートするトレーシングライブラリのバージョン</a>で実行されている場合、Agent やトレーシングライブラリの追加構成なしで Datadog UI から <a href="/security/application_security/enabling/">ASM を有効にする</a>ことができます。</div>
 
 ### 脆弱なサービスの特定
 
@@ -103,8 +102,8 @@ Datadog は、[OWASP ModSecurity Core Rule Set][12] を含む複数のパター�
 
 ## 攻撃試行の分類
 
-分散トレーシング情報を利用して、攻撃の試みは安全、不明、または有害として評価されます。
-* 例えば、Java で書かれたサービスを対象とする PHP インジェクション攻撃の場合、安全と分類された攻撃試行はアプリケーションを侵害することはできません。
+分散トレーシング情報を活用して、攻撃試行は安全、不明、または有害として分類されます。
+* 例えば、Java で書かれたサービスを対象とした PHP インジェクション攻撃のように、安全と分類される攻撃試行はアプリケーションに侵入することはできません。
 * 未知の評価は、攻撃が成功する確率について確定的な判断を下すのに十分な情報がない場合に与えられます。
 * コードレベルの脆弱性が攻撃者によって発見された証拠がある場合、有害の評価がハイライトされます。
 

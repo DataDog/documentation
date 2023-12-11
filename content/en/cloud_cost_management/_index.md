@@ -19,8 +19,9 @@ further_reading:
     text: "Standardize tags across Cloud Cost with Tag Pipelines"
 cascade:
     algolia:
-        rank: 70
-        tags: ['cloud cost', 'cloud cost management', 'cloud cost aws', 'cloud cost azure', 'cloud cost google cloud', 'cloud cost gcp']
+      subcategory: 'Cloud Cost Management'
+      rank: 70
+      tags: ['cloud cost', 'cloud cost management', 'cloud cost aws', 'cloud cost azure', 'cloud cost google cloud', 'cloud cost gcp']
 ---
 
 {{< site-region region="gov" >}}
