@@ -87,6 +87,10 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 
 7. Navigate back to the [Cloud SIEM setup page][11].
 
+The Cloud SIEM index should be in the first index position now. If the setup page still displays a warning about the index position, wait a few minutes and refresh the browser.
+
+After the index is moved to the first index position, review the settings and statuses for the Content Packs and other log sources. For each integration that shows a warning error, click on the integration and follow the instructions to fix it.
+
 ## Phase 2: Signal exploration
 
 1. Review the [out-of-the-box detection rules][12] that begin detecting threats in your environment immediately. Detection rules apply to all processed logs to maximize detection coverage. See the [detection rules][13] documentation for more information.
