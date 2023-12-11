@@ -1,10 +1,8 @@
 ---
 title: Severity Scoring
 kind: documentation
-further_reading:
-- link: "/security/misconfigurations/"
-  tag: "Documentation"
-  text: "Learn more about CSM Misconfigurations"
+aliases:
+  - /security/serverity_scoring
 ---
 
 ## CSM Misconfigurations and Identity Risks
@@ -95,10 +93,6 @@ The detection rule for [EC2 instances should enforce IMDSv2][2] checks if an EC2
 
 - Severity Score: Medium x Medium = Medium
   - The final severity score is Medium. This is because a Medium likelihood mixed with a Medium impact results in an overall score of Medium.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/security/default_rules/aws-sns-subscription/
 [2]: https://docs.datadoghq.com/security/default_rules/aws-ec2-imdsv2/
