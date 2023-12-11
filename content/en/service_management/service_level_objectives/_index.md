@@ -51,15 +51,15 @@ Service Level Agreement (SLA)
 Error Budget
 : The allowed amount of unreliability derived from an SLO's target percentage (100% - target percentage) that is meant to be invested into product development.
 
-## SLO Types
+## SLO types
 
 When creating SLOs, you can choose from the following types:
 
 **Metric-based SLOs**: can be used for count-based data streams, the SLI is based on the sum of good events divided by the sum of total events.
 
-**Time Slice SLOs or Monitor-based SLOs**: can be be used for time-based data sets, the SLI is based on the amount of time your system exhibits good behavior divided by the total time.
-  - Time Slice SLOs: do not require a Datadog monitor
-  - Monitor-based SLOs: must be based on a new or existing Datadog monitor
+**Time Slice SLOs** or **Monitor-based SLOs**: can be be used for time-based data sets, the SLI is based on the amount of time your system exhibits good behavior divided by the total time.
+  - Time Slice SLOs: do not require a Datadog monitor, you can try out different metric filters and thresholds and instantly explore downtime during SLO creation.
+  - Monitor-based SLOs: must be based on a new or existing Datadog monitor, any adjustments must be made to the underlying monitor (cannot be done through SLO creation).
 
 For a summary of the key differences between the available SLO types, see the [comparison chart][1].
 
@@ -71,7 +71,7 @@ Use Datadog's [Service Level Objectives status page][2] to create new SLOs or to
 ### Configuration
 
 1. On the [SLO status page][2], select **New SLO +**.
-2. Define the source for your SLO. You can create an SLO from [metrics][3] or [monitors][4].
+2. Select the SLO type. You can create an SLO with any of the following types: [Metric-based][3], [Monitor-based][4], or [Time Slices][50].
 3. Set a target and a rolling time window (past 7, 30, or 90 days) for the SLO. Datadog recommends you make the target stricter than your stipulated SLAs. If you configure more than one time window, select one to be the primary time window. This time window is displayed on SLO lists. By default, the shortest time window is selected. 
 4. Finally, give the SLO a title, describe it in more detail or add links in the description, add tags, and save it.
 
@@ -313,3 +313,4 @@ To view, edit, and delete existing status corrections, click on the **Correction
 [23]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [24]: /api/latest/service-level-objective-corrections/
 [25]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
+[50]: /service_management/service_level_objectives/time_slice/
