@@ -74,9 +74,13 @@ Additional cloud provider specific attributes are also mapped.
 
 ## Further reading
 
-[Implementation of these mappings](https://github.com/DataDog/opentelemetry-mapping-go/blob/main/pkg/otlp/attributes/attributes.go)
+* [Datadog: OpenTelemetry metric types][3]
+* [Datadog: OpenTelemetry Metric mappings][4]
+* [Implementation of these mappings in the exporter](https://github.com/DataDog/opentelemetry-mapping-go/blob/main/pkg/otlp/attributes/attributes.go)
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/concepts/semantic-conventions/
 [2]: /getting_started/tagging/unified_service_tagging
+[3]: /metrics/open_telemetry/otlp_metric_types
+[4]: /guide/metrics_mapping
