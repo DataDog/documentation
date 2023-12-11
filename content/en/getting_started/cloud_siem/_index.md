@@ -86,7 +86,7 @@ If the Cloud SIEM setup page shows the warning "The Cloud SIEM index is not in t
 
 6. Review the index order and confirm that the `cloud-siem-xxxx` index is where you want it. If you want to move the index, click the **Move to** icon and follow steps 3 to 5.
 
-7. Navigate back to Cloud SIEM setup page.
+7. Navigate back to the Cloud SIEM setup page.
 
 ## Phase 2: Signal exploration
 
