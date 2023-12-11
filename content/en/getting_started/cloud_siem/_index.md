@@ -67,17 +67,17 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 
 ### Reorder the Cloud SIEM index
 
-{{< img src="getting_started/cloud_siem/cloud-siem-setup-warning.png" alt="A yellow warning box saying Index Configuration needs attention" style="width:80%;">}}
+{{< img src="getting_started/cloud_siem/cloud-siem-setup-warning.png" alt="A yellow warning box saying that the index configuration needs attention" style="width:80%;">}}
 
 1. Click **Reorder index in Logs Configuration**.
 
 2. Confirm the modal title says "Move cloud-siem-xxxx to..." and that the `cloud-siem-xxxx` text in the index column is light purple.
 
-{{< img src="getting_started/cloud_siem/move-index-modal.png" alt="The Move cloud-siem-xxxx modal showing the cloud-siem-xxxx index in the last position in the list of indexes" style="width:60%;">}}
+{{< img src="getting_started/cloud_siem/move-index-modal.png" alt="The Move cloud-siem-xxxx modal showing the list of indexes with cloud-siem-xxxx index as the last index" style="width:60%;">}}
 
 3. To select the new placement of your index, click the top line of the index where you want `cloud-siem-xxxx` to go. For example, if you want to make the `cloud-siem-xxxx` index the first index, click on the line *above* the current first index. The new position is highlighted with a thick blue line.
 
-{{< img src="getting_started/cloud_siem/move-index-highlight.png" alt="The Move cloud-siem-xxxx modal showing a blue line at the tope of the first index" style="width:65%;">}}
+{{< img src="getting_started/cloud_siem/move-index-highlight.png" alt="The Move cloud-siem-xxxx modal showing a blue line at the top of the first index" style="width:65%;">}}
 
 4. The text confirms the position selected: "Select the new placement of your index: Position 1". Click **Move**.
 
