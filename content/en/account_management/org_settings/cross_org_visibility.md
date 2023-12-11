@@ -100,7 +100,12 @@ Each query in a widget can display data from a single organization. You can comb
 
 ### In the UI
 
-While configuring a dashboard widget in the UI, click the building icon to specify the organization from which to pull data.
+Dashboard widgets allow you to create cross-organization queries when the following conditions are met:
+
+- You have cross-organization visibility enabled in your organization
+- At least one connection exists where the current organization is the destination
+
+If the previous conditions are true, an organization drop-down selector appears between the drop-down menus for data type and metric name. Use the organization drop-down selector to chose a source organization for your query.
 
 The following screenshot shows an example of a cross-organization formula query. The widget graphs the number of ingested events per service. To get the total number of events, the cross-organization formula query sums the data from organization A (in the query **a**) and organization B (in the query **b**).
 
