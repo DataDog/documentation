@@ -77,7 +77,3 @@ Investigate details using the [Misconfigurations Explorer][10]. View detailed in
 [11]: /security/default_rules/#cat-posture-management-infra
 [12]: https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security
 [13]: /security/cloud_security_management/mute_issues
-[14]: https://docs.datadoghq.com/security/default_rules/aws-sns-subscription/
-[15]: https://docs.datadoghq.com/security/default_rules/aws-ec2-imdsv2/
-[16]: https://hackingthe.cloud/aws/general-knowledge/intro_metadata_service/
-[17]: https://hackingthe.cloud/aws/exploitation/ec2-metadata-ssrf/
