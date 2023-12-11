@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Security notification rules play a key role in keeping your team informed of issues without you having to manually edit notification preferences for individual detection rules. Each notification rule spans across multiple detection rules and signals based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags.
+Security notification rules play a key role in keeping your team informed of issues without you having to manually edit notification preferences for individual detection rules. Notification rules can span across multiple detection rules and signals based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags.
 
 {{< img src="security/notification-profiles-overview3.png" alt="Notification Rules" style="width:100%;" >}}
 
@@ -37,9 +37,7 @@ As you configure the rule, a preview of issues matching the notification rule co
 
 {{< img src="security/notification-profiles-setup3.png" alt="Setup of a notification rule" style="width:100%;" >}}
 
-If the notification rule is associated with a Security Detection Rule, you can view the rule's trigger conditions in the **Set severity and notifications** section in your rules.
-
-If the notification rule matches set conditions, the resulting notification includes details about the matched notification rule in the notification footer.
+If the notification rule matches the specified conditions, the resulting notification includes details about the matched notification rule in the notification footer.
 
 ## Manage notification rules
 
@@ -49,11 +47,7 @@ To enable or disable a notification rule, toggle the switch on the notification 
 
 ### Edit a notification rule
 
-To edit a notification rule, click the notification rule card.
-
-1. Click the notification rule card.
-2. Make changes.
-3. Click **Save and Activate**.
+To edit a notification rule, click the notification rule card. After you finish making your changes, click **Save and Activate**.
 
 ### Clone a notification rule
 
