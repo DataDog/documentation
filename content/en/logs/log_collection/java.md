@@ -179,10 +179,10 @@ Use the [logstash-logback-encoder][1] for JSON formatted logs in Logback.
 {{% /tab %}}
 {{% tab "Tinylog" %}}
 
-Create a JSON writer configuration outputting to a file based on the [Tinylog docs][1]
+Create a JSON writer configuration outputting to a file based on the [official Tinylog documentation][1].
 
 
-The format goes in a `tinylog.properties` file:
+Use the following format in a `tinylog.properties` file:
 
 ```properties
 writer                     = json
@@ -284,10 +284,10 @@ Configure a file appender in `logback.xml`:
 {{% /tab %}}
 {{% tab "Tinylog" %}}
 
-Create a writer configuration outputting to a file based on the [Tinylog docs][1]
+Create a writer configuration outputting to a file based on the [official Tinylog documentation][1].
 
 
-The format goes in a `tinylog.properties` file:
+Use the following format in a `tinylog.properties` file:
 
 ```properties
 writer          = file
