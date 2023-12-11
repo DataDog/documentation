@@ -29,26 +29,30 @@ Datadog provides [out-of-the-box detection rules][1] to flag attacker techniques
 
 Out-of-the box rules are available for the following security products:
 
-- [Cloud SIEM][2] uses log detection to analyze ingested logs in real-time. You can also create [custom detection rules][3] to tailor to your environment.
+- [Cloud SIEM][2] uses log detection to analyze ingested logs in real-time.
 - Cloud Security Management (CSM):
     - [CSM Misconfigurations][4] uses cloud configuration and infrastructure configuration detection rules to scan the state of your cloud environment.
-    - With [CSM Threats][5], the Datadog Agent actively monitors system activity and evaluates it against a set of detection rules.
-    - [CSM Identity Risks][14] [**PLACEHOLDER**]...
+    - [CSM Threats][5] uses the Datadog Agent and detection rules to actively monitor and evaluate system activity.
+    - [CSM Identity Risks][14] uses detection rules to detect IAM-based risks in your cloud infrastructure.
 - [Application Security Management][6] (ASM) leverages Datadog [APM][7], the [Datadog Agent][8], and detection rules to detect threats in your application environment.
 
 ## Custom detection rules
 
+There may be situations where you need to customize a rule based on your environment or workload. For example, if you're using ASM, you may want to customize a detection rule that detects users performing sensitive actions from a geolocation where your business doesn't operate.
+
+To [create custom rules](#create-detection-rules), you can clone the default rules and edit the copies, or create your own rules from scratch.
+
 ## Search and filter detection rules
 
-To view out-of-the-box and custom detection rules in Datadog, navigate to the [**Security** > **Configuration**][15] page. Rules are listed by product (Application Security, Cloud Security Management, and Cloud SIEM).
+To view out-of-the-box and custom detection rules in Datadog, navigate to the [**Security** > **Configuration**][15] page. Rules are listed on separate pages for each product (Application Security, Cloud Security Management, and Cloud SIEM).
 
-To search and filter the rules, use the search box and facets to query by value. For example, if you have several rule types, such as `log detection` or `cloud configuration`, filter by `only` to see rules by rule type. You can also filter by facets such as `source` and `severity` to help when investigating and triaging incoming issues.
+To search and filter the rules, use the search box and facets to query by value. For example, if you have several rule types, such as `log detection` or `cloud configuration`, filter by `only` to show only rules for the selected rule type. You can also filter by facets such as `source` and `severity` when investigating and triaging incoming issues.
 
 {{< img src="security/default_detection_rules.png" alt="The Configuration page shows default and custom Cloud SIEM detection rules" width="100%">}}
 
 ## Create detection rules
 
-To create a custom detection rule, click the **New Rule** button in the upper-right corner of the Detection Rules page. You can also [clone an out-of-the-box rule](#clone-a-rule) and use it as a template.
+To create a custom detection rule, click the **New Rule** button in the upper-right corner of the Detection Rules page. You can also [clone an existing default or custom rule](#clone-a-rule) and use it as a template.
 
 For detailed instructions, see the following articles:
 
@@ -72,7 +76,7 @@ You can also bulk enable or disable rules:
 
 ### Edit a rule
 
-For out-of-the-box rules, you can only add or edit a suppression query. To update the query, adjust triggers, or manage notifications, you can [clone the default rule](#clone-a-rule) and use it as a template for a custom rule. You can then [disable the default rule](#enable-or-disable-rules).
+For out-of-the-box detection rules, you can only add or edit a suppression query. To update the query, adjust triggers, or manage notifications, you can [clone the default rule](#clone-a-rule) and use it as a template for a custom rule. You can then [disable the default rule](#enable-or-disable-rules).
 
 - To edit a default rule, click the vertical three-dot menu for the rule and select **Edit default rule**.
 - To edit a custom rule, click the vertical three-dot menu for the rule and select **Edit rule**.
