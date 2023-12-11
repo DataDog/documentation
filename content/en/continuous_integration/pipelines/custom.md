@@ -36,7 +36,7 @@ further_reading:
 
 ## Send pipelines to Datadog
 
-Send custom pipelines via HTTP using the [public API endpoint][1]. For details about how pipeline executions are modeled, refer to [Pipeline Data Model and Execution Types][2].
+Send custom pipelines through HTTP using the [public API endpoint][1]. For details about how pipeline executions are modeled, see [Pipeline Data Model and Execution Types][2].
 
 ## Visualize pipeline data in Datadog
 
