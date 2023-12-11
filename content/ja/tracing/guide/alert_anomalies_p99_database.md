@@ -61,7 +61,7 @@ Datadog では、ユーザー自身で継続的にサービスの健全性を監
 
     このタブでは、モニターの現在の状況の確認やミュート設定、トリガーされたアラートの詳細調査をします。
 
-8. **[サービス詳細画面][8]に戻り**、今、モニターを設定したサービスの **サービス詳細画面をクリックして開きます**。開いた画面でヘッダーの **Monitor バー** をクリックします。
+8. **[サービスカタログ][8]に戻り**、モニターを設定したサービスを見つけ、**サービスページを開いて**、そこでヘッダーの下にある **Monitor バーをクリック**します。
 
     このウィンドウでは、サービスに設定された他のモニターや推奨設定の提案モニターに加え、**新しいモニターが表示されます**。
 
@@ -85,5 +85,5 @@ Datadog では、ユーザー自身で継続的にサービスの健全性を監
 [5]: /ja/tracing/glossary/#services
 [6]: /ja/monitors/types/anomaly/#faq
 [7]: /ja/monitors/notify/?tab=is_alertis_warning
-[8]: https://app.datadoghq.com/apm/services
+[8]: https://app.datadoghq.com/services
 [9]: https://app.datadoghq.com/service/map

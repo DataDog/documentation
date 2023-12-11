@@ -76,9 +76,23 @@ To begin profiling applications:
 
 2. Download `dd-java-agent.jar`, which contains the Java Agent class files:
 
-    ```shell
-    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
-    ```
+{{< tabs >}}
+{{% tab "Wget" %}}
+   ```shell
+   wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
+{{% /tab %}}
+{{% tab "cURL" %}}
+   ```shell
+   curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
+{{% /tab %}}
+{{% tab "Dockerfile" %}}
+   ```dockerfile
+   ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
      **Note**: Profiler is available in the `dd-java-agent.jar` library in versions 0.55+.
 
