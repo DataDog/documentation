@@ -3,7 +3,8 @@ description: En savoir plus sur l'assistant de suivi des erreurs.
 further_reading:
 - link: /monitors/types/error_tracking
   tag: Documentation
-  text: En savoir plus sur le contexte d'exécution pour le suivi des erreurs
+  text: En savoir plus sur l'utilisation du contexte d'exécution pour le suivi des
+    erreurs
 - link: /tracing/error_tracking
   tag: Documentation
   text: En savoir plus sur le suivi des erreurs pour les services backend
