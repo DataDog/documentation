@@ -1943,7 +1943,7 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [7]: /real_user_monitoring/guide/proxy-rum-data/
 [8]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
 [9]: /real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
-[10]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
+[10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
 [12]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum
 [13]: /real_user_monitoring/session_replay/privacy_options?tab=maskuserinput
@@ -1957,5 +1957,5 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [21]: /real_user_monitoring/guide/sampling-browser-plans/
 [22]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [23]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
-[24]: https://docs.datadoghq.com/real_user_monitoring/browser/modifying_data_and_context#contexts-life-cycle
+[24]: https://docs.datadoghq.com/real_user_monitoring/browser/advanced_configuration#contexts-life-cycle
 [25]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
