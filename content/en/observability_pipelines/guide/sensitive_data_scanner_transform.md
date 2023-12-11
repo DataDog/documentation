@@ -17,7 +17,7 @@ The <code>sensitive_data_scanner</code> transform is in private beta.
 
 ## Overview
 
-Sensitive data, such as credit card numbers, bank routing numbers, and API keys are often exposed unintentionally in your logs, which can expose your organization to financial and privacy risks. Use the Observability Pipelines `sensitive_data_scanner` transform to identify, tag, and optionally redact or hash sensitive information before routing your logs to different destinations. You can use out-of-the-box scanning rules to detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. Or, create custom scanning rules using regex patterns to match sensitive information.
+Sensitive data, such as credit card numbers, bank routing numbers, and API keys are often exposed unintentionally in your logs, which can expose your organization to financial and privacy risks. Use the Observability Pipelines `sensitive_data_scanner` transform to identify, tag, and optionally redact or hash sensitive information before routing data to different destinations. You can use out-of-the-box scanning rules to detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. Or, create custom scanning rules using regex patterns to match sensitive information.
 
 ## Set up the `sensitive_data_scanner` transform
 
@@ -25,13 +25,13 @@ Sensitive data, such as credit card numbers, bank routing numbers, and API keys 
 1. Click on your pipeline.
 1. Click **Edit draft**.
 1. Click **+ Add Component**.
-1. Click the **Transforms** tab.
+1. Select the **Transforms** tab.
 1. Click the **Sensitive Data Scanner** tile.
 1. Enter a name for the component.
 1. Select one or more inputs for the transform.
-1. Click **Add a New Item**.
+1. Click **Add a New Item** to add a scanning rule, which determines what sensitive information to match within the data.
 1. Enter a name for the rule.
-1. In the **Define action on match** section, select what action you want to take for the matched information. Redaction, partial redaction, and hashing are all irreversible actions.  
+1. In the **Define action on match** section, select the action you want to take for the matched information. Redaction, partial redaction, and hashing are all irreversible actions.  
     - If you are redacting the information, specify the text to replace the matched data.  
     - If you are partially redacting the information, specify the number of characters you want to redact and which part of the matched data to redact.
 1. In the **Pattern** section:  
@@ -45,10 +45,13 @@ Sensitive data, such as credit card numbers, bank routing numbers, and API keys 
     a. Select if you want to scan the **Entire Event** or **Specific Attributes** in the **Target** dropdown.
     - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned.
     - If you are scanning specific attributes, specify which attributes you want to scan.
-1. If you want to add another rule, click **Add a New Item** and follow steps 10 to 13.
+1. Optionally, add one or more tags to associate with the matched events.
+1. If you want to add another rule, click **Add a New Item** and follow steps 10 to 14.
 1. Click **Save**.
 
-Sensitive Data Scanner supports Perl Compatible RegEx (PCRE), but the following patterns are not supported:
+**Note**: Any rules that you add or update only affect data coming into Observability Pipelines after the rule was defined.
+
+The `sensitive_data_scanner` transform supports Perl Compatible RegEx (PCRE), but the following patterns are not supported:
   - Backreferences and capturing sub-expressions (lookarounds)
   - Arbitrary zero-width assertions
   - Subroutine references and recursive patterns
@@ -59,8 +62,6 @@ Sensitive Data Scanner supports Perl Compatible RegEx (PCRE), but the following 
   - The \K start of match reset directive
   - Callouts and embedded code
   - Atomic grouping and possessive quantifiers
-
-**Note**: Any rules that you add or update only affect data coming into Observability Pipelines after the rule was defined.
 
 ## Further reading
 
