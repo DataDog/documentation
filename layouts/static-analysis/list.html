@@ -1,6 +1,5 @@
 {{ define "main" }}
     {{ $dot := . }}
-    {{ $scratch := .Scratch }}
 
     <!-- From imported files -->
     {{ $list := sort .Pages }}
@@ -22,7 +21,7 @@
     {{ $ruleset_params := .Params }}
     {{ $pad := newScratch }}
 
-    <!-- Build slice of unique languages to validate against url param `languages` -->
+    <!-- Build slice of unique languages to validate against url param `languages` on page load -->
     {{ range ($list.GroupByParam "group_id") }}
         {{ range .Pages }}
             {{ $pad.Set "languages" (union ($pad.Get "languages") (slice (.Params.meta.language | lower) ) ) }}
