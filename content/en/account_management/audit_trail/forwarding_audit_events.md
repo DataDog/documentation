@@ -14,7 +14,9 @@ Audit Event Forwarding is not available in the US1-FED site.
 </div>
 {{% /site-region %}}
 
+{{% site-region region="US, US3, US5, EU,AP1" %}}
 <div class="alert alert-warning">Audit Event Forwarding is in beta. </div>
+{{% /site-region %}}
 
 ## Overview
 
