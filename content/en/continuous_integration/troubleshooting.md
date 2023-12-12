@@ -171,6 +171,10 @@ If you have admin access, you can update it from the [Repository Settings Page][
 2. Make sure the Datadog Agent host is properly configured and is reachable by the Datadog Plugin. You can test connectivity by clicking on the **Check connectivity with the Datadog Agent** button on the Jenkins plugin configuration UI.
 3. Check for any errors in the Jenkins logs. You can enable debug-level logs for the Datadog plugin by [creating a `logging.properties` file][1] and adding the line: `org.datadog.level = ALL`.
 
+### Pipeline not found
+
+A "Pipeline not found" message is shown when you click on incomplete data coming from an in-progress pipeline for those [CI providers that do not support `running` pipelines][]. Data is received progressively for stages, jobs, or custom commands. Wait until the pipeline has finished and try again.
+
 ### Missing pipelines on the Pipelines page
 
 The pipeline page only displays pipelines with no Git information, or pipelines with Git information which belong to the default branch of the Git repository.
@@ -239,3 +243,4 @@ If you are authoring a commit that includes any of those cases, you can force-di
 [13]: https://developer.harness.io/kb/continuous-integration/articles/using_git_credentials_from_codebase_connector_in_ci_pipelines_run_step/
 [14]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui
 [15]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
+[16]: /continuous_integration/pipelines#supported-features
