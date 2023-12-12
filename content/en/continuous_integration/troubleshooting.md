@@ -243,4 +243,4 @@ If you are authoring a commit that includes any of those cases, you can force-di
 [13]: https://developer.harness.io/kb/continuous-integration/articles/using_git_credentials_from_codebase_connector_in_ci_pipelines_run_step/
 [14]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui
 [15]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
-[16]: /continuous_integration/pipelines#supported-features
+[16]: /continuous_integration/pipelines/#supported-features
