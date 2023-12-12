@@ -25,7 +25,7 @@ This document explains:
 
 ### Organization connection
 
-A _source_ Datadog organization exposes data to a _destination_ Datadog organization through an _organization connection_. The source and destination Datadog organizations must be in the same [account][1]. A source organization can have multiple destinations, and a destination organization can have multiple sources.
+A _source_ organization exposes data to a _destination_ organization through an _organization connection_. The source and destination Datadog organizations must be in the same [account][1]. A source organization can have multiple destinations, and a destination organization can have multiple sources.
 
 After you set up an organization connection, the exposed data still lives in the source organization and does not move to the destination. Instead, the destination organization queries the data from the source. Connections do not duplicate the data, and do not incur extra charges. The destination organization can query source data from any time range supported by the source data, including prior to the date of the creation of the connection. If you remove the connection, the destination can no longer access any data from the source.
 
@@ -113,14 +113,16 @@ The following screenshot shows an example of a cross-organization formula query.
 
 ### In the API
 
+<div class="alert alert-info">
+The <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs">Datadog Terraform Provider</a> does not support cross-organization queries.
+</div>
+
 You can define cross-organization queries in the following endpoint:
 - [Timeseries][8]
 
 When you define dashboard widgets in the dashboard API, use the `cross_org_uuids` parameter in the JSON widget definition payload to identify the source organization in a cross-organization query.
 
 The `cross_org_uuids` parameter is optional. If you omit `cross_org_uuids`, the query runs on the same organization in which you defined the widget.
-
-The [Datadog Terraform Provider][9] does not support cross-organization queries.
 
 ### Example JSON widget definition
 
@@ -173,4 +175,3 @@ Note the `cross_org_uuids` parameter in the JSON widget definition payload.
 [6]: /account_management/rbac/permissions/#access-management
 [7]: /api/latest/organizations/#list-your-managed-organizations
 [8]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
-[9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
