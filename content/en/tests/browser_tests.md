@@ -5,7 +5,7 @@ description: Learn how to use CI Visibility and RUM to connect your test results
 aliases:
 - /continuous_integration/guides/rum_integration
 - /continuous_integration/integrate_tests/browser_tests
-- continuous_integration/tests/browser_tests
+- /continuous_integration/tests/browser_tests
 further_reading:
 - link: "/continuous_integration/tests"
   tag: "Documentation"
@@ -53,6 +53,6 @@ The RUM session has all the data that [RUM normally collects][3] so you can debu
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tests/javascript/?tab=cypress#instrument-your-tests
+[1]: /tests/setup/javascript/?tab=cypress#instrument-your-tests
 [2]: /real_user_monitoring/browser/
 [3]: /real_user_monitoring/browser/data_collected/

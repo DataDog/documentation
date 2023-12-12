@@ -5,7 +5,7 @@ aliases:
   - /continuous_integration/explore_tests/
   - /continuous_integration/guides/test_configurations/
   - /continuous_integration/integrate_tests/
-  - continuous_integration/tests/
+  - /continuous_integration/tests/
 further_reading:
     - link: "/monitors/types/ci/"
       tag: "Documentation"
@@ -45,7 +45,7 @@ cascade:
     {{< nextlink href="tests/setup/python" >}}Python{{< /nextlink >}}
     {{< nextlink href="tests/setup/ruby" >}}Ruby{{< /nextlink >}}
     {{< nextlink href="tests/setup/swift" >}}Swift{{< /nextlink >}}
-    {{< nextlink href="tests/junit_upload" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
+    {{< nextlink href="tests/junit_xml" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
     {{< nextlink href="tests/containers" >}}Tests running in containers{{< /nextlink >}}
 {{< /whatsnext >}}
 

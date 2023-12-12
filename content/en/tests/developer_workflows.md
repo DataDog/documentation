@@ -6,7 +6,7 @@ aliases:
 - /continuous_integration/guides/developer_workflows
 - /continuous_integration/guides/pull_request_comments
 - /continuous_integration/integrate_tests/developer_workflows
-- continuous_integration/tests/developer_workflows
+- /continuous_integration/tests/developer_workflows
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/"
   tag: "Blog"

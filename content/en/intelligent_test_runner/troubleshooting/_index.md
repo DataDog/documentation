@@ -17,7 +17,7 @@ This page provides information to help you troubleshot issues with Intelligent T
 
 ## Intelligent Test Runner is not working
 
-[Intelligent Test Runner][12] works by analyzing your commit history along with code coverage information about past test runs to determine which tests need to be run and which ones can be safely skipped. A minimum amount of information needs to exist in order for the Intelligent Test Runner to work correctly:
+[Intelligent Test Runner][12] works by analyzing your commit history along with code coverage information about past test runs to determine which tests need to be run and which ones can be safely skipped. A minimum amount of information needs to exist in order for Intelligent Test Runner to work correctly:
 
 - Your repository needs to have a commit history of at least two commits in the past month.
 - You need to have collected test code coverage in past commits, which happens on test runs where Intelligent Test Runner was enabled.

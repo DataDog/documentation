@@ -3,7 +3,7 @@ title: Tests in Containers
 kind: documentation
 aliases:
   - /continuous_integration/setup_tests/containers
-  - continuous_integration/tests/containers
+  - /continuous_integration/tests/containers
 further_reading:
 - link: "/tests"
   tag: "Documentation"
