@@ -13,8 +13,8 @@ further_reading:
 - link: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#upgrading
   tag: GitHub
   text: Datadog Helm 업그레이드하기
-kind: 설명서
-title: 쿠버네티스에 Datadog 에이전트 설치하기
+kind: documentation
+title: 쿠버네티스에 Datadog Agent 설치하기
 ---
 
 ## 개요
@@ -27,9 +27,9 @@ AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kub
 
 ### 최소 Kubernetes 및 Datadog Agent 버전
 
-최신 쿠버네티스 버전과 관련된 일부 기능에는 최소 Datadog 에이전트 버전이 필요합니다.
+최신 Kubernetes 버전과 관련된 일부 기능에는 최소 Datadog Agent 버전이 필요합니다.
 
-| 쿠버네티스 버전  | 에이전트 버전  | 이유                                |
+| Kubernetes 버전  | Agent 버전  | 이유                                |
 |--------------------|----------------|---------------------------------------|
 | 1.16.0+            | 7.19.0+        | Kubelet 메트릭 사용 중단           |
 | 1.21.0+            | 7.36.0+        |  쿠버네티스 리소스 사용 중단       |
