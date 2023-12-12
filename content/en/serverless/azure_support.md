@@ -66,7 +66,7 @@ description: "Datadog support for Azure App Services"
             Standard + Premium
         </td>
         <td>IM, IL, T, CM, P</td>
-        <td>IM, IL, T+, CM+</td>
+        <td>IM, IL</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
         <td>IM, IL</td>
