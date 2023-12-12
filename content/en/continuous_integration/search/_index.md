@@ -102,7 +102,7 @@ You can access low-level and immediate insights:
 
 - See what tests are failing and why.
 - See your last commit's test results.
-- View the wall time of your tests in your feature branch and compare it to the default branch, to identify if you're about to introduce a performance regression.
+- View the total duration of your tests in your feature branch.
 - Find out if your commit introduces a new [flaky test][105] that wasn't flaky before, indicating that your code change is what's making it flaky. This gives you the opportunity to fix the problem before proceeding rather than contributing to the number of flaky tests in your CI.
 
 You can also access high-level accumulation and trends:
@@ -123,17 +123,13 @@ In this page, you can filter the list by name, test service, or commit SHA, or t
 
 #### Test results
 
-For each branch, you can see the test service, the number of failed, passed, and skipped tests, test regressions, wall time, the percentage of change compared to the default branch, when the commit was last updated, and the avatar of the author of the commit.
+For each branch, you can see the test service, the number of failed, passed, and skipped tests, test regressions, total test time, when the commit was last updated, and the avatar of the author of the commit.
+
+Hovering over the commit author's avatar shows detailed information about the latest commit.
 
 Click on a branch to explore the test details page, which includes information about the branch's latest commits, flaky tests, test performance, common error types, and all test runs.
 
 {{< img src="continuous_integration/test_details.png" alt="Test Details page for a single branch" style="width:100%;">}}
-
-#### Test suite performance
-
-There is also information about the [wall time][104] of the most recent test suite run, and a comparison to the average wall time of the default branch. The comparison of your branch's wall time to the default branch's wall time can help you determine if your commit is introducing performance [regressions][106] to your test suite.
-
-Hovering over the commit author avatar shows detailed information about the latest commit.
 
 #### Test regressions
 
@@ -153,7 +149,7 @@ Click the CI provider link to examine the Resource, Service, or Analytics page f
 
 The [Default Branches][107] view of the Tests page shows aggregated health metrics for the _default_ branch of each test service. This view is useful for teams to understand the overall health of the service over time.
 
-The Default Branches view shows similar information to the Branches view, but applied to the default branch. It compares the current wall time with the average default branch wall time to give you an indication of how your test suite performance is trending over time.
+The Default Branches view shows similar information to the Branches view, but applied to the default branch.
 
 [101]: https://app.datadoghq.com/ci/test-services
 [102]: https://app.datadoghq.com/ci/test-services?view=branches
