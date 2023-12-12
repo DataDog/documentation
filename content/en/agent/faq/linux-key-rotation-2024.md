@@ -6,10 +6,10 @@ aliases:
   - /agent/guide/linux-key-rotation-2024
 ---
 
-As a common best practice, Datadog periodically rotates the keys and certificates used to sign Datadog's Agent packages. The Agent packages includes:
+As a common best practice, Datadog periodically rotates the keys and certificates used to sign Datadog's Agent packages. Datadog packages includes:
 
-- the different flavours of agent (datadog-agent, datadog-iot-agent, datadog-heroku-agent, datadog-dogstatsd, datadog-fips-proxy and datadog-agent-dbg).
-- additional agent-related packages: observability pipeline worker and the APM tracer libraries (java, python, .Net, ruby and js).
+- the different flavours of Agent (`datadog-agent`, `datadog-iot-agent`, `datadog-heroku-agent` and `datadog-dogstatsd`).
+- additional packages: Observability Pipelines Worker (`observability-pipelines-worker`), FIPS proxy (`datadog-fips-proxy`) and the APM injection and tracer libraries for Java, Python, .NET, Ruby and Node.js (all `datadog-apm-*` packages) 
 
 The following GPG keys, used to sign the above RPM and DEB packages, reach their end-of-life in September 2024. The rotation is planned for June 2024:
 
