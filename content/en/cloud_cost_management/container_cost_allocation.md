@@ -152,7 +152,6 @@ In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the
 | `storage_class_name`                    | The Kubernetes Storage Class used to instantiate the Persistent Volume.                                                                     |
 | `volume_mode`                           | The Volume Mode of the Persistent Volume.                                                                                                   |
 | `ebs_volume_type`                       | The type of the AWS EBS volume. *Can be `gp3`, `gp2`, and more.*                                                                            |
-| `is_cluster_idle`                       | The cost of unreserved CPU or memory on EC2 instances running ECS tasks. *Only available for `.cpu.allocated` or `.mem.allocated` metrics.* |
 
 ## Further reading
 
