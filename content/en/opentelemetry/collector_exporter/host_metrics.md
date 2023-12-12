@@ -142,5 +142,5 @@ Value: 1153183744
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/hostmetricsreceiver/README.md
-[2]: https://docs.datadoghq.com/opentelemetry/guide/metrics_mapping/#host-metrics
+[2]: /opentelemetry/guide/metrics_mapping/#host-metrics
 [3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/host-metrics.yaml
