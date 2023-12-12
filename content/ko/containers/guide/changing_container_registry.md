@@ -21,7 +21,7 @@ GCR 또는 ECR 레지스트리에서 가져오는 것은 Docker Hub에서 가져
 
 레지스트리를 업데이트하려면 배포 중인 컨테이너 환경 유형에 따라 레지스트리 값을 업데이트해야 합니다.
 
-## 도커(Docker)
+## Docker
 
 ### 레지스트리 업데이트하기
 
@@ -122,7 +122,7 @@ Datadog Cluster Agent에 대한 자세한 내용은 [Cluster Agent 문서][9] �
 
 ## Datadog Private Location 작업자를 위한 Kubernetes Helm
 
-Private Location 작업자를 위한 레지스트리를 업데이트하려면: `datadog/synthetics-private-location-worker` 이미지를 `public.ecr.aws/datadog/synthetics-private-location-worker` 또는 `gcr.io/datadoghq/synthetics-private-location-worker` 이미지로 변경하세요.
+Private Location 작업자를 위한 레지스트리를 업데이트하려면 `datadog/synthetics-private-location-worker` 이미지를 `public.ecr.aws/datadog/synthetics-private-location-worker` 또는 `gcr.io/datadoghq/synthetics-private-location-worker` 이미지로 변경하세요.
 
 기본 리포지토리(`gcr.io/datadoghq`)를 변경하려면 `values.yaml`을 새 이미지로 업데이트하세요.
 
