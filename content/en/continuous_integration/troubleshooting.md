@@ -171,10 +171,6 @@ If you have admin access, you can update it from the [Repository Settings Page][
 2. Make sure the Datadog Agent host is properly configured and is reachable by the Datadog Plugin. You can test connectivity by clicking on the **Check connectivity with the Datadog Agent** button on the Jenkins plugin configuration UI.
 3. Check for any errors in the Jenkins logs. You can enable debug-level logs for the Datadog plugin by [creating a `logging.properties` file][1] and adding the line: `org.datadog.level = ALL`.
 
-### Pipeline execution view not found
-
-If you click on a pipeline execution with running status, a "Pipeline execution was running more than 3 days" message is shown. Data is received progressively for stages, jobs, or custom commands. Wait until the pipeline has finished and try again.
-
 ### Missing pipelines on the Pipelines page
 
 The pipeline page only displays pipelines with no Git information, or pipelines with Git information which belong to the default branch of the Git repository.
