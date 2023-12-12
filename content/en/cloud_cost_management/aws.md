@@ -19,13 +19,18 @@ further_reading:
 
 ## Overview
 
-To use AWS Cloud Cost Management, you must have an AWS account with access to Cost and Usage Reports (CURs), and have the AWS integration installed in Datadog. To set up Cloud Cost Management in Datadog, you need to generate a Cost and Usage report.
+To set up Cloud Cost Management in Datadog, you should:
+1. Have an AWS account with billing access
+2. Have the AWS integration installed in Datadog
+3. Follow the steps below to create a Cost and Usage report
 
 ## Setup
 
 ### Prerequisite: generate a Cost and Usage Report
 
-Follow AWS instructions for [Creating Cost and Usage Reports][1], and select the following content options for use with Datadog Cloud Cost Management:
+[Create a Cost and Usage Report][1] in AWS under the **Legacy Pages** section. At this time, there is no support for creating Cost and Usage Report data exports.
+
+Select the following content options:
 
 * **Include resource IDs**
 * **Split cost allocation data** (Enables ECS Cost Allocation. You must also opt in to [AWS Split Cost Allocation][10] in Cost Explorer preferences).
