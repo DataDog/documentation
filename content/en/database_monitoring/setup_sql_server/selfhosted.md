@@ -26,11 +26,8 @@ Database Monitoring provides deep visibility into your Microsoft SQL Server data
 
 Do the following steps to enable Database Monitoring with your database:
 
-- [Before you begin](#before-you-begin)
-- [Grant the Agent access](#grant-the-agent-access)
-- [Install the Agent](#install-the-agent)
-- [Example Agent Configurations](#example-agent-configurations)
-- [Further reading](#further-reading)
+1. [Grant the Agent access](#grant-the-agent-access)
+1. [Install the Agent](#install-the-agent)
 
 ## Before you begin
 
