@@ -105,7 +105,7 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- If you intend on using monitoring log shipping (availably in agent v7.50+), proceed with the following:
+-- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
 -- USE msdb;
 -- CREATE USER datadog FOR LOGIN datadog;
 -- GRANT SELECT to datadog;
@@ -118,7 +118,7 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
--- If you intend on using monitoring log shipping (availably in agent v7.50+), proceed with the following:
+-- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
 -- USE msdb;
 -- CREATE USER datadog FOR LOGIN datadog;
 -- GRANT SELECT to datadog;
