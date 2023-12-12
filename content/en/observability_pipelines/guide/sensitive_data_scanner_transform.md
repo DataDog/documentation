@@ -25,7 +25,7 @@ Sensitive data, such as credit card numbers, bank routing numbers, and API keys,
 
 1. Navigate to [Observability Pipelines][1].
 1. Click on your pipeline.
-1. Click **Edit draft**.
+1. Click **Edit as Draft**.
 1. Click **+ Add Component**.
 1. Select the **Transforms** tab.
 1. Click the **Sensitive Data Scanner** tile.
