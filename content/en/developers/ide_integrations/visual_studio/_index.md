@@ -111,7 +111,7 @@ Right-click on a method in the call tree to navigate to the source editor.
 
 The **View in Visual Studio** feature provides a link from Datadog directly to your source files. Look for the button next to frames in stack traces displayed in the UI (for example, in [Error Tracking][10]):
 
-{{< img src="/developers/ide_integrations/visual_studio/view-in-vscode.png" alt="A stack trace on the Datadog platform showing the View in Visual Studio button." style="width:100%;" >}}
+{{< img src="/developers/ide_integrations/visual_studio/view-in-visual-studio.png" alt="A stack trace on the Datadog platform showing the View in Visual Studio button." style="width:100%;" >}}
 
 <div class="alert alert-info">To use this feature, first configure <a href="/integrations/guide/source-code-integration/">source code integration</a> for your service.</div>
 
