@@ -112,6 +112,53 @@ By default, users with the Datadog Admin role have access to view and define the
 
 Control who can access events containing sensitive data. Use tags added by Sensitive Data Scanner to build queries with RBAC and restrict access to specific individuals or teams until the data ages out after the retention period.
 
+### Summary page
+
+Use the [Summary][11] page to see a count of all sensitive data issues within the selected timeframe and start investigating issues.
+
+In the **Sensitive Data Issues** section, click on a priority level to see only issues with that priority level in the **Issues Overview** section. Click on the priority level again to see the full list of issues.
+
+In the **Cases** section, click on a case status to see issues associated to cases with that status in the **Issues Overview** section. Click on the case status again to see the full list of issues.
+
+To investigate an issue:
+
+1. Click on the issue in the **Issues Overview**.
+1. In the issue panel, click **View Recent Changes** to go to Audit Trail and see if there are any recent configuration changes that caused the sensitive data issue.
+1. Click **View All Logs** to see in Log Explorer all logs matching the query.
+1. In the **Blast Radius** section:  
+    a. Click on a service to see more information about the service in the Service Catalog.  
+    b. Click **Host** to see the top 10 impacted hosts. Click on a host to see more information about the host in the Infrastructure page.  
+    c. Click **Environment** to see the top 10 impacted environments.  
+
+#### Create a case
+
+Use [Case Management][9] to track, triage, and investigate an issue.
+
+1. Click **Create Case** at the top of the panel.
+1. Enter a title for the case.
+1. Optionally, add a description.
+1. Click **Create Case**.
+
+#### Declare an incident
+
+Use [Incident Management][10] to add the issue to an existing incident or declare a new incident.
+
+To add the issue to an existing incident:
+
+1. Click the **Declare Incident** dropdown arrow.
+1. In **Add to an existing incident**, enter the name of the incident or click on the dropdown menu to search for the incident.
+1. Click **Confirm**.
+
+To declare a new incident:
+
+1. Click **Declare Incident**.
+1. Edit the incident title if needed.
+1. Select the severity level.
+1. Select the **Incident Commander** in the dropdown menu.
+1. Optionally, add attributes, notification information, and additional notes and links.
+1. Optionally, enable **Make Private** if there is sensitive data that you do not want visible to everyone in your organization. This limits access to only its responders and creates a private slack channel. This action is permanent.
+1. Click **Declare Incident**.
+
 ### Out-of-the-box dashboard
 
 When Sensitive Data Scanner is enabled, an out-of-the-box [dashboard][8] summarizing sensitive data findings is automatically installed in your account.
@@ -133,3 +180,6 @@ To access this dashboard, go to **Dashboards > Dashboards List** and search for 
 [6]: https://app.datadoghq.com/logs/pipelines
 [7]: /logs/guide/logs-rbac-permissions/?tab=ui#overview
 [8]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
+[9]: /service_management/case_management/
+[10]: /service_management/incident_management/
+[11]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
