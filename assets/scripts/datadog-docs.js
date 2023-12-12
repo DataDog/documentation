@@ -31,6 +31,9 @@ $(document).ready(function () {
         if (!$(this).hasClass('table-responsive')) {
             $(this).addClass('table-responsive');
         }
+        if (!$(this).parent().hasClass('table-scroll')) {
+            $(this).wrap('<div class="table-scroll"></div>')
+        }
     });
 
     $('table').each(function () {
