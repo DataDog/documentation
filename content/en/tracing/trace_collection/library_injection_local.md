@@ -14,7 +14,6 @@ aliases:
 To instrument your application, you can:
 * Auto-instrument your application, as described on this page.
 * [Manually instrument your application][1].
-* [Auto-instrument your application from the Datadog UI][5] (beta).
 
 How to inject the library locally, without touching the application code at all, varies depending on where and how your Agent and application are installed. Select the scenario that represents your environment:
 
@@ -1106,4 +1105,3 @@ For example, you can turn on [Application Security Monitoring][3] or [Continuous
 [2]: /tracing/trace_collection/library_config/
 [3]: /security/application_security/enabling/java/?tab=kubernetes#get-started
 [4]: /profiler/enabling/java/?tab=environmentvariables#installation
-[5]: /tracing/trace_collection/library_injection_remote/
