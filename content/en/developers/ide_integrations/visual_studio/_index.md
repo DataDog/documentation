@@ -80,6 +80,33 @@ Code Insights include a detailed description for each issue, and links to:
 
 You can dismiss individual insights that you do not want to see in the list.
 
+## Continuous Profiler
+
+The **Continuous Profiler** editor shows profiling information for a service in a selected environment, aggregated over a specific time frame.
+
+You can specify the following parameters for the profiling data:
+- The profile type to be displayed
+- The environment in which the service is running
+- The time frame for the profile samples to be aggregated
+
+The available profiling types usually include options like **CPU Time** and **Allocated Memory**, but are determined by the platform and vary by language.
+
+### Top functions
+
+The **Top Functions** table shows the methods that consume the most resources based on the aggregated profile data loaded from the Datadog servers. **Top Functions** is designed to show a summary of the methods that are most likely to be interesting from a resource consumption point of view.
+
+{{< img src="/developers/ide_integrations/visual_studio/top-list.png" alt="The Top-list view" style="width:100%;" >}}
+
+Double-clicking an item in the list (or selecting **Go To Source** from the context menu) opens a source code editor showing where the method is defined.
+
+#### Call tree
+
+The call tree to the right of the **Top Functions** shows the paths that lead to (and from) the selected method.
+
+The default **Caller Hierarchy** view shows the callers (or predecessors) of the target method and the frequency with which they appear in the call stack. To view the callees (or successors), click the **Callee Hierarchy** button on the toolbar.
+
+Right-click on a method in the call tree to navigate to the source editor.
+
 ## View in Visual Studio
 
 The **View in Visual Studio** feature provides a link from Datadog directly to your source files. Look for the button next to frames in stack traces displayed in the UI (for example, in [Error Tracking][10]):
