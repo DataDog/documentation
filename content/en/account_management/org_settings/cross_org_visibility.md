@@ -19,7 +19,7 @@ Cross-organization visibility allows customers to share data between different o
 This document explains: 
 - What cross-organization visibility [enables](#capabilities) 
 - How to [expose](#create-a-connection) data across organizations
-- How to create a [Dashboard widget](#create-a-widget-with-cross-organization-data) with data from other organizations
+- How to create a [Dashboard and Notebook widget](#create-a-widget-with-cross-organization-data) with data from other organizations
 
 ## Capabilities
 
@@ -94,7 +94,7 @@ Deletes a connection. Perform this operation either from the source organization
 
 ## Create a widget with cross-organization data
 
-Cross-organization [dashboard widgets][2] are available for Datadog organizations that exist as a _destination_ organization for at least one [connection](#configure-connections).
+Cross-organization [dashboard and notebook widgets][2] are available for Datadog organizations that exist as a _destination_ organization for at least one [connection](#configure-connections).
 
 Each query in a widget can display data from a single organization. You can combine queries into a cross-organization formula query.
 
