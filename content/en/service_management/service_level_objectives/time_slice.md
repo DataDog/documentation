@@ -13,7 +13,7 @@ further_reading:
 
 Time Slice SLOs allow you to measure reliability using a custom definition of uptime. You define uptime as a condition over a metric timeseries. For example, you can create a latency SLO by defining uptime as whenever p95 latency is less than 1 second.
 
-Time Slice SLOs are a convenient alternative to Monitor-based SLOs. You can create an uptime SLO without going through a monitor so you don't have to create and maintain both a monitor and an SLO. 
+Time Slice SLOs are a convenient alternative to Monitor-based SLOs. You can create an uptime SLO without going through a monitor, so you don't have to create and maintain both a monitor and an SLO. 
 
 ## Create a Time Slice SLO
 
@@ -26,19 +26,19 @@ You can create a Time Slice SLO through the following ways:
 
 {{< img src="service_management/service_level_objectives/time_slice/create_and_configuration.png" alt="Configuration options to create a Time Slice SLO" style="width:100%;" >}}
 
-1. Navigate to Service Management > SLOs
-1. Click **+ New SLO** to open up the Create SLO page.
-1. Select **By Time Slices** to define your SLo measurement. 
-1. Define your uptime condition by choosing a metric query, comparator and threshold. For example, to define uptime as whenever p95 latency is less than 1s. Alternatively, you can [import the uptime from a monitor](#import-from-a-monitor).
-1. Choose your timeframe and target
+1. Navigate to **Service Management > SLOs**.
+1. Click **+ New SLO** to open the Create SLO page.
+1. Select **By Time Slices** to define your SLO measurement. 
+1. Define your uptime condition by choosing a metric query, comparator, and threshold. For example, you might define uptime as whenever p95 latency is less than 1s. Alternatively, you can [import the uptime from a monitor](#import-from-a-monitor).
+1. Choose your timeframe and target.
 1. Name and tag your SLO.
 1. Click **Create**.
 
 ### Export an existing monitor SLO
 
-<div class="alert alert-info">Only metric monitor SLOs can be exported. Non-metric monitors or multi-monitor SLOs cannot be exported</div>
+<div class="alert alert-info">Only metric monitor SLOs can be exported. Non-metric monitors or multi-monitor SLOs cannot be exported.</div>
 
-Create a Time Slice SLO by exporting an existing Monitor-based SLO. From a monitor SLO click **Export to Time Slice SLO**.
+Create a Time Slice SLO by exporting an existing Monitor-based SLO. From a monitor SLO, click **Export to Time Slice SLO**.
 
 {{< img src="service_management/service_level_objectives/time_slice/export_monitor_slo.png" alt="On a Monitor-based SLO detail side panel, the button to Export to Time Slice is highlighted" style="width:90%;" >}}
 
@@ -46,7 +46,7 @@ Create a Time Slice SLO by exporting an existing Monitor-based SLO. From a monit
 
 <div class="alert alert-info">Only metric monitor SLOs appear in the monitor selection for import. </div>
 
-From the Create or Edit SLO page, under *Define your SLI*, click **Import from Monitor** and select from the dropdown or search in the monitor selector.
+From the **Create or Edit SLO** page, under **Define your SLI**, click **Import from Monitor** and select from the dropdown or search in the monitor selector.
 
 **Note**: Time Slice SLOs do not support rolling periods. Rolling periods do not transfer from a monitor query to a Time Slice query. 
 
@@ -60,7 +60,7 @@ For each slice, there is a single value for the timeseries, and the uptime condi
 
 ### Groups and overall uptime
 
-Time Slice SLOs allows you to track uptime for individual groups, where groups are defined in the "group by" portion of the metric query. 
+Time Slice SLOs allow you to track uptime for individual groups, where groups are defined in the "group by" portion of the metric query. 
 
 When groups are present, uptime is calculated for each individual group. However, overall uptime works differently. In order to match existing monitor SLO functionality, Time Slice SLOs use the same definition of overall uptime. When **all** groups have uptime, it is considered overall uptime. Conversely, if **any** group has downtime, it is considered overall downtime. Overall uptime is always less than the uptime for any individual group.
 
@@ -76,7 +76,7 @@ $$ (1440-10)/1440 *100 = ~99.652% $$ -->
 
 Time Slice SLOs count correction periods as uptime in all calculations. Since the total time remains constant, the error budget is always a fixed amount of time as well. This is a significant simplification and improvement over how corrections are handled for monitor-based SLOs.
 
-For monitor-based SLOs, corrections are periods that are removed from the calculation. If a one-day-long correction is added to a 7-day SLO, 1 hour of downtime counts as 0.7% instead of 0.6%
+For monitor-based SLOs, corrections are periods that are removed from the calculation. If a one-day-long correction is added to a 7-day SLO, 1 hour of downtime counts as 0.7% instead of 0.6%:
 
 $$ 60/8640 *100 = ~0.7% $$
 
