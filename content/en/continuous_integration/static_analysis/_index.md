@@ -43,7 +43,7 @@ Using Static Analysis provides organizations with the following benefits:
     {{< nextlink href="continuous_integration/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### GitHub pull requests
+### Source code management
 {{< whatsnext desc="The GitHub integration checks for Static Analysis violations in pull requests to repos that have at least one ruleset applied. Violations are flagged with a comment on the relevant line of code. The comment includes the name, ID, severity, and description of the violation." >}}
     {{< nextlink href="integrations/github/" >}}GitHub integration{{< /nextlink >}}
 {{< /whatsnext >}}
