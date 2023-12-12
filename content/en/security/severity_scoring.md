@@ -4,7 +4,13 @@ kind: documentation
 further_reading:
 - link: "/security/misconfigurations/"
   tag: "Documentation"
-  text: "Learn more about CSM Misconfigurations"
+  text: "Start tracking misconfigurations with CSM Misconfigurations"
+- link: "/security/identity_risks/"
+  tag: "Documentation"
+  text: "Understand your identity landscape with CSM Identity Risks"
+- link: "/security/vulnerabilities/"
+  tag: "Documentation"
+  text: "Learn more about CSM Vulnerabilities"
 ---
 
 ## Cloud Security Management
