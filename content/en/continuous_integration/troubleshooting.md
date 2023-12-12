@@ -173,7 +173,7 @@ If you have admin access, you can update it from the [Repository Settings Page][
 
 ### Pipeline execution view not found
 
-If you click on a pipeline execution with running status, a "Pipeline execution was running more than 3 days" message is shown. Data is received progressively for stages, jobs, or custom commands. Please wait until the pipeline has finished and try again.
+If you click on a pipeline execution with running status, a "Pipeline execution was running more than 3 days" message is shown. Data is received progressively for stages, jobs, or custom commands. Wait until the pipeline has finished and try again.
 
 ### Missing pipelines on the Pipelines page
 
@@ -183,7 +183,7 @@ The pipeline page only displays pipelines with no Git information, or pipelines 
 
 Missing stages or jobs in the _Pipeline Details_ page might be due to a wrong configuration. Make sure that the pipeline name stored in the stage or job executions matches the **same** name of their parent pipeline. If you are using custom pipelines, refer to the [public API endpoint specification][15].
 
-### Limitations on Running Pipelines
+### Limitations on running pipelines
 
 #### Delivery of webhook events is not ensured by CI providers
 
@@ -191,7 +191,7 @@ Running pipelines support relies on data sent from CI providers indicating execu
 
 #### Maximum duration for a pipeline execution
 
-The maximum duration that a pipeline execution can maintain `Running` status is 3 days. If a pipeline execution finishes after 3 days, you can visualize the finished pipeline execution as usual in CI Visibility with its correspondent final status (`Success`, `Error`, `Canceled`, `Skipped`, etc).
+The maximum duration that a pipeline execution can maintain `Running` status is 3 days. If a pipeline execution finishes after 3 days, you can visualize the finished pipeline execution as usual in CI Visibility with its correspondent final status (`Success`, `Error`, `Canceled`, `Skipped`, or more).
 
 #### Pipeline trace view only shows pipeline level
 
