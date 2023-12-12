@@ -45,11 +45,11 @@ Next, Datadog looks at all of the pods running on that node for the day. The cos
 
 **Note**: Only _tags_ from pods and nodes are added to cost metrics. To include labels, enable labels as tags for [nodes][7] and [pods][8].
 
-#### Persistent Volume Storage
+#### Persistent volume storage
 
-For Kubernetes Persistent Volume storage allocation, Persistent Volumes (PV), Persistent Volume Claims (PVC), nodes, and pods are joined with their associated EBS volume costs. All associated PV, PVC, node, and pod tags are added to the EBS volume cost line items. 
+For Kubernetes Persistent Volume storage allocation, Persistent Volumes (PV), Persistent Volume Claims (PVC), nodes, and pods are joined with their associated EBS volume costs. All associated PV, PVC, node, and pod tags are added to the EBS volume cost line items.
 
-Next, Datadog looks at all of the pods that claimed the volume on that day. The cost of the volume is allocated to the pod based on the resources it has used and the length of time it ran. These resources 
+Next, Datadog looks at all of the pods that claimed the volume on that day. The cost of the volume is allocated to the pod based on the resources it has used and the length of time it ran. These resources
 include the provisioned capacity for Storage, IOPS, and Throughput. This allocated cost is enriched with all of the pod's tags.
 
 
@@ -65,7 +65,8 @@ ECS tasks that run on Fargate are already fully allocated in the CUR. CCM enrich
 
 ### Everything else
 
-Any cost other than EC2, computed for instances hosting Kubernetes pods or ECS tasks, and EBS volumes, is given the same value and tags as the source metric, `aws.cost.amortized`.
+Any cost other than EC2/EBS, computed for instances hosting Kubernetes pods or ECS tasks, is given the same value and tags as the source metric, `aws.cost.amortized`.
+
 
 ## Understanding spend
 
@@ -77,7 +78,7 @@ Using the `allocated_spend_type` tag, you can visualize the spend category assoc
 - Workload idle: Cost of memory and cpu that is being reserved and allocated but not used by workloads.
 - Cluster idle: Cost of memory and cpu not reserved by workloads in a cluster.
 
-### Persistent Volumes
+### Persistent volumes
 
 - Usage: Cost of provisioned IOPS, Throughput, or Storage being used by workloads. For Storage, this is based on the maximum amount of volume storage used that day. For IOPS and Throughput, this is based on the average amount used that day.
 - Workload idle: Cost of provisioned IOPS, Throughput, or Storage not being used by workloads. For Storage, this is based on the maximum amount of storage used that day. For IOPS and Throughput, this is based on the average amount used that day.
@@ -141,17 +142,17 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 | `is_aws_ecs_on_fargate` | All costs associated with running ECS on Fargate. |
 | `is_cluster_idle`       | The cost of unreserved CPU or memory on EC2 instances running ECS tasks. *Only available for `.cpu.allocated` or `.mem.allocated` metrics.*|
 
-### Persistent Volumes
+### Persistent volumes
 
 In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the-box tags are applied to cost metrics.
 
-| Out-of-the-box tag                      |  Description |
-| ---                                     | ------------ |
-| `persistent_volume_reclaim_policy`      | The Kubernetes Reclaim Policy on the Persistent Volume. |
-| `storage_class_name`                    | The Kubernetes Storage Class used to instantiate the Persistent Volume. |
-| `volume_mode`                           | The Volume Mode of the Persistent Volume. |
-| `ebs_volume_type`                       | The type of the AWS EBS volume. *Can be `gp3`, `gp2`, etc.*|
-| `is_cluster_idle`                       | The cost of unreserved CPU or memory on EC2 instances running ECS tasks. *Only available for `.cpu.allocated` or `.mem.allocated` metrics.*|
+| Out-of-the-box tag                      | Description                                                                                                                                 |
+| ---                                     |---------------------------------------------------------------------------------------------------------------------------------------------|
+| `persistent_volume_reclaim_policy`      | The Kubernetes Reclaim Policy on the Persistent Volume.                                                                                     |
+| `storage_class_name`                    | The Kubernetes Storage Class used to instantiate the Persistent Volume.                                                                     |
+| `volume_mode`                           | The Volume Mode of the Persistent Volume.                                                                                                   |
+| `ebs_volume_type`                       | The type of the AWS EBS volume. *Can be `gp3`, `gp2`, and more.*                                                                            |
+| `is_cluster_idle`                       | The cost of unreserved CPU or memory on EC2 instances running ECS tasks. *Only available for `.cpu.allocated` or `.mem.allocated` metrics.* |
 
 ## Further reading
 
