@@ -462,7 +462,7 @@ The host name that OpenTelemetry signals are tagged with is obtained based on th
 
 ## Deployment-based limitations
 
-The OpenTelemetry Collector has [two primary deployment methods][20]: Agent and Gateway. Depending on your deployment method, some components are not available.
+The OpenTelemetry Collector has [two primary deployment methods][20]: Agent and Gateway. Depending on your deployment method, the following components are available:
 
 | Deployment mode | Host metrics | Kubernetes orchestration metrics | Traces | Logs auto-ingestion |
 | --- | --- | --- | --- | --- |
