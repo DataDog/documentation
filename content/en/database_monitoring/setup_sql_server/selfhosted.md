@@ -26,8 +26,11 @@ Database Monitoring provides deep visibility into your Microsoft SQL Server data
 
 Do the following steps to enable Database Monitoring with your database:
 
-1. [Grant the Agent access to the database](#grant-the-agent-access)
-2. [Install the Agent](#install-the-agent)
+- [Before you begin](#before-you-begin)
+- [Grant the Agent access](#grant-the-agent-access)
+- [Install the Agent](#install-the-agent)
+- [Example Agent Configurations](#example-agent-configurations)
+- [Further reading](#further-reading)
 
 ## Before you begin
 
@@ -51,6 +54,10 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
+-- If you intend on using monitoring log shipping (availably in agent v7.50+), proceed with the following:
+-- USE msdb;
+-- CREATE USER datadog FOR LOGIN datadog;
+-- GRANT SELECT to datadog;
 ```
 {{% /tab %}}
 {{% tab "SQL Server 2012" %}}
@@ -60,6 +67,10 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
+-- If you intend on using monitoring log shipping (availably in agent v7.50+), proceed with the following:
+-- USE msdb;
+-- CREATE USER datadog FOR LOGIN datadog;
+-- GRANT SELECT to datadog;
 ```
 
 Create the `datadog` user in each additional application database:
