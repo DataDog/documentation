@@ -43,7 +43,7 @@ Sensitive Data Scanner can be found under [Organization Settings][1].
 - **Define Scanning Rules:** A scanning rule determines what sensitive information to match within the data. Within a scanning group, add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules from scratch to scan using custom regex patterns.
   - For Terraform, see the [datadog_sensitive_data_scanner_rule][4] resource.
 - **Create keyword dictionary**: Add keywords to provide additional context when matching regex conditions. For example, if you are scanning for a nine-digit credit card number, you can add keywords like `account number`, `bank card`, and `cc #` to refine the match.
-- **Set priority level**: Set the priority level for the issues created when a match is made against this rule.
+- **Set priority level**: Set the priority level for the issue created when a match is made against this rule.
 
 **Note:**
 - Any rules that you add or update only affect data coming into Datadog after the rule was defined.
