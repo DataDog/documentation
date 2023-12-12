@@ -97,8 +97,6 @@ data:
 `cd-visibility-trigger` is the name of the trigger, and `cd-visibility-template` is a reference to the template created above.
 
 After the service, trigger, and template have been added to the config map, you can subscribe any of your Argo CD applications to the integration.
-See the [Argo CD official guide][12] for more details on applications subscriptions.
-
 Modify the annotations of the application by either using the Argo CD UI or modifying the application definition with the following annotations:
 
 ```yaml
@@ -116,6 +114,7 @@ There are two annotations:
    to which this application is deploying (for example: `staging` or `prod`). If you don't set this annotation,
    the environment defaults to `none`.
 
+See the [Argo CD official guide][12] for more details on applications subscriptions.
 Once this final step is completed, you can start monitoring your Argo CD deployments in Datadog.
 
 ## Visualize deployments in Datadog
