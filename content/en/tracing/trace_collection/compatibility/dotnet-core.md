@@ -94,9 +94,14 @@ Don't see your desired libraries? You can check whether the library emits Open T
 
 Some libraries provide built in [Activity based tracing][13]. This is the same mechanism the OpenTelemetry project relies on. By setting `DD_TRACE_OTEL_ENABLED` to `true`, the .NET tracer will automatically resurface traces provided by the libraries themselves. This is possible since [version 2.21.0][4]. Here are a list of libraries that are tested with this setup (more libraries provide such tracing though, they aren't yet expliciitly tested).
 
-| Framework or library            | NuGet package                                                                                        | Integration Name     |
-| ------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------- |
-| Azure Service Bus               | Azure.Messaging.ServiceBus                                                                           | `AzureServiceBus`    |
+| Framework or library            | NuGet package                                                                 | Integration Name     | Specific instructions         |
+| ------------------------------- | ----------------------------------------------------------------------------- | -------------------- | ----------------------------- |
+| Azure Service Bus               | `Azure.Messaging.ServiceBus` 7.14.0+                                          | `AzureServiceBus`    | See `Azure SDK` section below |
+
+### Azure SDK
+
+Azure SDK provides built in OpenTelemety support. It requires to be enabled by setting `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` environment variable to true or by setting the `Azure.Experimental.EnableActivitySource` context switch to true in your application code. See [Azuze SDK documentation][14] for more details.
+
 
 ## End of life .NET Core versions
 
@@ -155,3 +160,4 @@ Version updates imply the following changes to runtime support:
 [11]: https://semver.org/
 [12]: https://www.nuget.org/packages/Datadog.Trace.Trimming/
 [13]: https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing
+[14]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#enabling-experimental-tracing-features
