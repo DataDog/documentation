@@ -8,6 +8,8 @@ further_reading:
 
 ## Overview
 
+{{< img src="/opentelemetry/collector_exporter/collector_health_metrics.png" alt="OpenTelemetry collector health metrics dashboard" style="width:100%;" >}}
+
 The `prometheus` receiver enables collecting health metrics from the collector itself.
 
 For more information, see the OpenTelemetry project documentation for the [Prometheus Receiver][1].
