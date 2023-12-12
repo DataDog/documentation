@@ -14,16 +14,16 @@ further_reading:
   tag: GitHub
   text: Datadog Helm 업그레이드하기
 kind: documentation
-title: 쿠버네티스에 Datadog Agent 설치하기
+title: Kubernetes에 Datadog Agent 설치하기
 ---
 
 ## 개요
 
 이 페이지에서는 Kubernetes 환경에 Datadog Agent를 설치하는 방법에 대한 지침을 제공합니다. 기본적으로 Datadog Agent는 DaemonSet에서 실행됩니다.
 
-AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher, Oracle Container Engine for Kubernetes (OKE) 등 주요 쿠버네티스 배포에 대한 전용 설명서 및 예제는 [쿠버네티스 배포][1]를 참조하세요.
+AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher, Oracle Container Engine for Kubernetes (OKE) 등 주요 Kubernetes 배포에 대한 전용 설명서 및 예제는 [Kubernetes 배포][1]를 참조하세요.
 
-쿠버네티스 컨트롤 플레인 모니터링에 대한 전용 설명서와 예제는 [쿠버네티스 컨트롤 플레인 모니터링][2]을 참조하세요.
+Kubernetes 컨트롤 플레인 모니터링에 대한 전용 설명서와 예제는 [Kubernetes 컨트롤 플레인 모니터링][2]을 참조하세요.
 
 ### 최소 Kubernetes 및 Datadog Agent 버전
 
@@ -32,7 +32,7 @@ AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kub
 | Kubernetes 버전  | Agent 버전  | 이유                                |
 |--------------------|----------------|---------------------------------------|
 | 1.16.0+            | 7.19.0+        | Kubelet 메트릭 사용 중단           |
-| 1.21.0+            | 7.36.0+        |  쿠버네티스 리소스 사용 중단       |
+| 1.21.0+            | 7.36.0+        |  Kubernetes 리소스 사용 중단       |
 | 1.22.0+            | 7.37.0+        |  동적 서비스 계정 토큰 지원 |
 
 [최소 Kubernetes 및 Cluster Agent 버전][8]도 참조하세요.
