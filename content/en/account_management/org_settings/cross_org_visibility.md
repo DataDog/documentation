@@ -6,7 +6,7 @@ is_beta: true
 ---
 
 {{< callout url="#" header="false" btn_hidden="true">}}
-  Cross-organization visibility is in <b>private beta</b> for customers with Enterprise plans. If you're interested in the feature, reach out to your Technical Account Manager or Customer Success Manager.
+  Cross-organization visibility is in <strong>private beta</strong> for customers with Enterprise plans. If you're interested in the feature, reach out to your Technical Account Manager or Customer Success Manager.
 {{< /callout >}} 
 
 
@@ -14,7 +14,7 @@ is_beta: true
 
 Some companies rely on multiple Datadog [organizations][1]  to isolate data for compliance or other reasons.
 
-Cross-organization visibility allows customers to share data between different organizations in the same account, and thus show insights from multiple organizations in one place. Cross-organization visibility works with the **Dashboard** and **Notebook** products.
+Cross-organization visibility allows customers to share data between different organizations in the same account, and show insights from multiple organizations in one place.
 
 This document explains: 
 - What cross-organization visibility [enables](#capabilities) 
@@ -27,7 +27,7 @@ This document explains:
 
 A _source_ Datadog organization exposes data to a _destination_ Datadog organization through an _organization connection_. The source and destination Datadog organizations must be in the same [account][1]. A source organization can have multiple destinations, and a destination organization can have multiple sources.
 
-After you set up an organization connection, the data the source organization exposes still lives in the source organization and does not move to the destination. Instead, the destination organization queries the data from the source. Connections do not duplicate the data, and do not incur extra charges. The destination organization can query source data from any time range supported by the source data, including prior to the date of the creation of the connection. If you remove the connection, the destination can no longer access any data from the source.
+After you set up an organization connection, the exposed data still lives in the source organization and does not move to the destination. Instead, the destination organization queries the data from the source. Connections do not duplicate the data, and do not incur extra charges. The destination organization can query source data from any time range supported by the source data, including prior to the date of the creation of the connection. If you remove the connection, the destination can no longer access any data from the source.
 
 ### Scope
 
