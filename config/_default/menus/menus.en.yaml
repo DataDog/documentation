@@ -684,7 +684,7 @@ main:
     parent: essentials_heading
     weight: 46000
   - name: OpenTelemetry Collector Datadog Exporter
-    url: opentelemetry/otel_collector_datadog_exporter/
+    url: opentelemetry/collector_exporter/
     identifier: otel_dd_exporter
     parent: opentelemetry_top_level
     weight: 1
