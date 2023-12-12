@@ -35,7 +35,7 @@ title: 클라우드 보안 관리 시작하기
     - **CSM Threats**: [Kubernetes][5], [Docker][6], [호스팅 기반][7] 설치.
     - **CSM Misconfigurations**: [AWS][10], [Azure][11], [GCP][12], [Kubernetes][8], [Docker][9] 지침.
     - **CSM Identity Risks**: [AWS 리소스 수집][26] 및 [Cloudtrail 로그 포워딩][27] 활성화.
-    - **CSM 취약성**: Kubernetes, ECS EC2 인스턴스 및 호스트 기반 설치에 대한 [컨테이너 이미지 스캐닝][23] 및 [호스트 스캐닝][24] 지침.
+    - **CSM Vulnerabilities**: Kubernetes, ECS EC2 인스턴스 및 호스트 기반 설치에 대한 [컨테이너 이미지 스캐닝][23] 및 [호스트 스캐닝][24] 지침.
 3. 조직의 위험과 위협에 대한 개요를 확인하려면 [CSM 홈페이지][13]를 참조하세요.
 4. [500개 이상의 즉시 사용 가능한 위협 및 잘못된 구성 탐지 규칙][14]을 검토하세요.
 5. [보안 신호][15]를 살펴보고 [CSM 잘못된 구성 발견 사항][16]을 검토하세요.
