@@ -98,17 +98,9 @@ The detection rule for [EC2 instances should enforce IMDSv2][2] checks if an EC2
 - Severity Score: Medium x Medium = Medium
   - The final severity score is Medium. This is because a Medium likelihood mixed with a Medium impact results in an overall score of Medium.
 
-### Threats
-
-**threats goes here**
-
 ### Vulnerabilities
 
 **vulns go here**
-
-## Cloud SIEM
-
-**cloud siem goes here**
 
 ## Application Security Management
 
