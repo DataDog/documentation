@@ -21,8 +21,8 @@ Starting in early 2024, all CSM Misconfigurations and Identity Risk rules will m
 
 The likelihood component is made up of two subcomponents:
 
-* The attack vector, the means through which a misconfiguration can be exploited;
-* The accessibility, if the resource is publicly accessible or not.
+* Attack vector: The means through which a misconfiguration can be exploited.
+* Accessibility: If the resource is publicly accessible or not.
 
 The attack vector is determined by the following criteria:
 
