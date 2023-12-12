@@ -25,7 +25,7 @@ To build a funnel, navigate to **UX Monitoring > Product Analytics > Funnels**.
 
 {{< img src="real_user_monitoring/explorer/analytics/funnels-tab.png" alt="Navigate to the Funnel Analysis tab within RUM" style="width:100%;" >}}
 
-From this view, build your starting view or action and click on the plus icon to build additional steps. You can also use drag and drop functionality to move steps around.
+From this view, choose your starting view or action and click on the plus icon to build additional steps. You can also use drag and drop functionality to move steps around.
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-building-a-funnel-1.mp4" alt="Filtering network map with search" video=true >}}
 

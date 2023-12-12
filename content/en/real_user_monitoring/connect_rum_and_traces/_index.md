@@ -261,8 +261,8 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     )..enableHttpTracking()
     ```
 
-[1]: /real_user_monitoring/flutter/
-[2]: /real_user_monitoring/flutter/#automatic-resource-tracking
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/#automatic-resource-tracking
 
 {{% /tab %}}
 
@@ -287,7 +287,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
         result = ddUrlTransfer.GetToString()
     ```
 
-[1]: /real_user_monitoring/roku/
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/roku/
 {{< /site-region >}}
 
 {{% /tab %}}

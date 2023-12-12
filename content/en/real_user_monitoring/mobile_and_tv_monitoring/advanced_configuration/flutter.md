@@ -376,8 +376,8 @@ This information is merged with any hosts set on `DatadogConfiguration.firstPart
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/flutter/#setup
-[3]: /real_user_monitoring/flutter/data_collected
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter#setup
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
 [4]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
 [5]: https://github.com/DataDog/dd-sdk-flutter/tree/main/packages/datadog_tracking_http_client
 [6]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/
