@@ -127,7 +127,7 @@
         }
     }
     .ruleset {
-        .group-header {
+        .ruleset-header {
             transition: box-shadow 0.125s;
             box-shadow: 0 1px 3px rgba(0,0,0,0.25);
             border-radius: 4px;
@@ -141,14 +141,14 @@
                 top: 4px;
                 margin-left: 4px;
             }
-            .group-header__plus {
+            .ruleset-header__plus {
                 margin-left: 4px;
                 color: $gray-900;
             }
-            .group-header__text {
+            .ruleset-header__text {
                 margin: 0 8px
             }
-            .group-header__arrow {
+            .ruleset-header__arrow {
                 font-size: 18px;
                 transform: rotate(-90deg) !important;
             }
@@ -156,7 +156,7 @@
             box-shadow: 0 2px 3px rgba(0,0,0,0.3);
             }
             &.active {
-            .group-header__arrow {
+            .ruleset-header__arrow {
                 position: relative;
                 top: 2px;
                 transform: rotate(-180deg) !important;
