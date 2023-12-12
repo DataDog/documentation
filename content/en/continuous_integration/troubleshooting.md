@@ -173,7 +173,7 @@ If you have admin access, you can update it from the [Repository Settings Page][
 
 ### Pipeline not found
 
-A "Pipeline not found" message is shown when you click on incomplete data coming from an in-progress pipeline for those [CI providers that do not support `running` pipelines][]. Data is received progressively for stages, jobs, or custom commands. Wait until the pipeline has finished and try again.
+A "Pipeline not found" message is shown when you click on incomplete data coming from an in-progress pipeline for those [CI providers that do not support `running` pipelines][16]. Data is received progressively for stages, jobs, or custom commands. Wait until the pipeline has finished and try again.
 
 ### Missing pipelines on the Pipelines page
 
