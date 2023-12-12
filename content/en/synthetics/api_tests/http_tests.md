@@ -49,7 +49,7 @@ After choosing to create an `HTTP` test, define your test's request.
    {{< tabs >}}
 
    {{% tab "Request Options" %}}
-
+   * **HTTP version**: Select `HTTP/1.1 only`, `HTTP/2 only`, or `HTTP/2 fallback to HTTP/1.1`.
    * **Follow redirects**: Select to have your HTTP test follow up to ten redirects when performing the request.
    * **Ignore server certificate error**: Select to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
    * **Timeout**: Specify the amount of time in seconds before the test times out.
