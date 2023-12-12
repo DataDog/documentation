@@ -185,7 +185,7 @@ Missing stages or jobs in the _Pipeline Details_ page might be due to a wrong co
 
 ### Limitations on running pipelines
 
-#### Delivery of webhook events is not ensured by CI providers
+#### Delivery of webhook events is not guaranteed by CI providers
 
 Running pipelines support relies on data sent from CI providers indicating execution status. If this data is not available, executions marked as `Running` in Datadog may have already finished. 
 
