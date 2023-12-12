@@ -46,7 +46,7 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 ALTER SERVER ROLE ##MS_ServerStateReader## ADD MEMBER datadog;
 ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER datadog;
--- If you intend on using monitoring log shipping (availably in agent v7.50+), proceed with the following:
+-- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
 -- USE msdb;
 -- CREATE USER datadog FOR LOGIN datadog;
 -- GRANT SELECT to datadog;
