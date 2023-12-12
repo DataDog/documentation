@@ -113,10 +113,6 @@ The detection rule for [EC2 instances should enforce IMDSv2][2] checks if an EC2
 
 **vulns go here**
 
-## Application Security Management
-
-**ASM goes here**
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -3200,11 +3200,6 @@ main:
     parent: security_platform
     identifier: security_audit_trail
     weight: 10
-  - name: Severity Scoring
-    url: security/severity_scoring
-    parent: security_platform
-    identifier: security_severity_scoring
-    weight: 11
   - name: Cloud SIEM
     url: security/cloud_siem/
     pre: siem
@@ -3362,6 +3357,11 @@ main:
     parent: csm
     identifier: csm_troubleshooting
     weight: 30
+  - name: Severity Scoring
+    url: security/cloud_security_management/severity_scoring/
+    parent: csm
+    identifier: csm_severity_scoring
+    weight: 35
   - name: Application Security Management
     url: security/application_security/
     parent: security_platform_heading
