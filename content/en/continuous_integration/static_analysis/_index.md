@@ -37,10 +37,15 @@ Using Static Analysis provides organizations with the following benefits:
 
 ## Integrations
 
-### CI Providers
+### CI providers
 {{< whatsnext desc="With Static Analysis, you can integrate feedback on code reviews for various languages in any CI platform provider of choice. See the documentation for information about the following integrations:">}}
     {{< nextlink href="continuous_integration/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
     {{< nextlink href="continuous_integration/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
+{{< /whatsnext >}}
+
+### GitHub pull requests
+{{< whatsnext desc="The GitHub integration checks for Static Analysis violations in pull requests to repos that have at least one ruleset applied. Violations are flagged with a comment on the relevant line of code. The comment includes the name, ID, severity, and description of the violation." >}}
+    {{< nextlink href="integrations/github/" >}}GitHub integration{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### IDEs
