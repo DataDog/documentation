@@ -81,7 +81,7 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 
 4. The text confirms the position selected: "Select the new placement of your index: Position 1". Click **Move**.
 
-5. Review the warning text and if you confirm the change, click **Reorder**.
+5. Review the warning text. If you are satisfied with the change, click **Reorder**.
 
 6. Review the index order and confirm that the `cloud-siem-xxxx` index is where you want it. If you want to move the index, click the **Move to** icon and follow steps 3 to 5.
 
@@ -89,7 +89,7 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 
 The Cloud SIEM index should be in the first index position now. If the setup page still displays a warning about the index position, wait a few minutes and refresh the browser.
 
-After the index is moved to the first index position, review the settings and statuses for the [Content Packs][11] and [other log sources][11]. For each integration that shows a warning error, click on the integration and follow the instructions to fix it.
+After the index is moved to the first index position, review the settings and statuses for the [Content Packs][11] and [other log sources][11]. For each integration that shows a warning or an error, click on the integration and follow the instructions to fix it.
 
 ## Phase 2: Signal exploration
 
@@ -121,7 +121,7 @@ After the index is moved to the first index position, review the settings and st
 [6]: https://www.datadoghq.com/blog/monitoring-cloudtrail-logs/
 [7]: https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/
 [8]: https://app.datadoghq.com/security/landing
-[9]: https://app.datadoghq.com/security/content-packs
+[9]: https://app.datadoghq.com/security/onboarding?contentPacks=&logSources=&step=0
 [10]: https://app.datadoghq.com/security/onboarding?contentPacks=&logSources=&step=1
 [11]: https://app.datadoghq.com/security/configuration/siem/setup
 [12]: /security/default_rules/#cat-cloud-siem-log-detection
