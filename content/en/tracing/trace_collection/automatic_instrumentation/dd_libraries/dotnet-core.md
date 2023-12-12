@@ -9,6 +9,7 @@ aliases:
   - /tracing/setup/dotnet-core
   - /tracing/setup_overview/dotnet-core
   - /tracing/setup_overview/setup/dotnet-core
+  - /tracing/trace_collection/dd_libraries/dotnet-core
 code_lang: dotnet-core
 type: multi-code-lang
 code_lang_weight: 60

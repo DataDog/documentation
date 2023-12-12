@@ -1515,26 +1515,36 @@ main:
     parent: tracing
     identifier: tracing_glossary
     weight: 1
-  - name: Instrumenting Your Applications
+  - name: Getting Started
     url: tracing/trace_collection/
     parent: tracing
     identifier: tracing_trace_collection
     weight: 2
-  - name: Single Step Instrumentation
-    url: tracing/trace_collection/single-step-apm/
+  - name: Automatic Instrumentation
+    url: tracing/trace_collection/automatic_instrumentation/
     parent: tracing_trace_collection
+    identifier: automatic_instrumentation
+    weight: 100
+  - name: Single Step Instrumentation
+    url: tracing/trace_collection/automatic_instrumentation/single-step-apm/
+    parent: automatic_instrumentation
     identifier: single_step_apm
     weight: 101
+  - name: Datadog Tracing Libraries
+    url: tracing/trace_collection/automatic_instrumentation/dd_libraries/
+    parent: automatic_instrumentation
+    identifier: auto_dd_libraries
+    weight: 102        
   - name: Custom Instrumentation
     url: tracing/trace_collection/custom_instrumentation/
     parent: tracing_trace_collection
     identifier: custom_instrumentation
-    weight: 102
-  - name: OpenTelemetry
+    weight: 103
+  - name: Using OpenTelemetry APIs
     url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/
     parent: custom_instrumentation
     identifier: tracing_otel_inst
-    weight: 105
+    weight: 104
   - name: Java
     url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/java/
     parent: tracing_otel_inst
@@ -1565,7 +1575,7 @@ main:
     parent: tracing_otel_inst
     identifier: tracing_otel_inst_dotnet
     weight: 108
-  - name: Datadog Libraries
+  - name: Using Datadog Libraries
     url: tracing/trace_collection/custom_instrumentation/dd_libraries/
     parent: custom_instrumentation
     identifier: tracing_custom_inst

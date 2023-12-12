@@ -4,6 +4,7 @@ kind: documentation
 aliases:
 - /tracing/setup_overview/setup/ios/
 - /tracing/setup/ios/
+- /tracing/trace_collection/dd_libraries/ios
 description: Collect traces from your iOS applications.
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios

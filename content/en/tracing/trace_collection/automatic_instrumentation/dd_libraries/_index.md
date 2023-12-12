@@ -6,6 +6,7 @@ aliases:
     - /tracing/languages
     - /tracing/setup_overview/setup/undefined
     - /tracing/setup_overview/setup/
+    - /tracing/trace_collection/dd_libraries/
 ---
 
 Set up your application to send [traces][1] using one of the following official Datadog tracing libraries:

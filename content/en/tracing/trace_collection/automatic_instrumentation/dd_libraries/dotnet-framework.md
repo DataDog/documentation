@@ -14,6 +14,7 @@ aliases:
     - /tracing/setup_overview/dotnet-framework
     - /tracing/setup_overview/setup/dotnet
     - /tracing/setup_overview/setup/dotnet-framework
+    - /tracing/trace_collection/dd_libraries/dotnet-framework
 code_lang: dotnet-framework
 type: multi-code-lang
 code_lang_weight: 70

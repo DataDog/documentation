@@ -1,5 +1,5 @@
 ---
-title: Instrumenting Your Applications
+title: Getting Started With Datadog APM
 kind: documentation
 description: "Get Started with Datadog APM"
 aliases:
