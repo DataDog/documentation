@@ -13,13 +13,11 @@ further_reading:
   text: "Learn more about CSM Vulnerabilities"
 ---
 
-## Cloud Security Management
-
-### Misconfigurations and Identity Risks
+## Misconfigurations and Identity Risks
 
 Starting in early 2024, all CSM Misconfigurations and Identity Risk rules will migrate to the following severity score framework. This framework is designed to compare the likelihood that an adversary would take advantage of a misconfiguration to the risk posed to your environment. By weighting both of these aspects, findings can be prioritized more accurately by their real-world risks. The matrices below show how to compute a misconfiguration's severity score depending on certain criteria.
 
-#### Likelihood
+### Likelihood
 
 The likelihood component is made up of two subcomponents:
 
@@ -50,7 +48,7 @@ These subcomponents determine the Likelihood score:
 |               | **Vulnerability**       | Possible        | Probable     |
 |               | **No Authorization**    | Probable          | Highly Probable |
 
-#### Impact
+### Impact
 
 The impact component is how damaging the exploitation of the misconfiguration would be to the environment.
 
@@ -61,7 +59,7 @@ The impact component is how damaging the exploitation of the misconfiguration wo
 |   High   | Abusing this misconfiguration results in an impact to the confidentiality, integrity, or availability of the vulnerable component and impacts a significant number of other resources. For example, an identity with the `S3FullAccess` policy attached. |
 | Critical | Abusing this misconfiguration results in complete control of all resources in the account. For example, an identity with the `AdministratorAccess` policy attached. |
 
-#### Severity matrix
+### Severity matrix
 
 These two submatrices combined compute the overall severity score for a misconfiguration.
 
@@ -73,11 +71,11 @@ These two submatrices combined compute the overall severity score for a misconfi
 |            | **Probable**     | Medium | High   | High     | Critical |
 |            | **Highly Probable** | Medium | High   | Critical | Critical |
 
-#### Examples
+### Examples
 
 To explain how the framework is used here are a few examples.
 
-##### Example 1: SNS Topic should have access restrictions set for subscription
+#### Example 1: SNS Topic should have access restrictions set for subscription
 
 The detection rule for [SNS Topic should have access restrictions set for subscription][1] checks if the SNS topic has a resource-based policy that contains a `Principal` of `*`, and an `Action` with the `sns:Subscribe` permission. This combination would allow anyone the ability to subscribe to the SNS topic and receive its notifications. This rule would be scored as follows:
 
@@ -93,7 +91,7 @@ The detection rule for [SNS Topic should have access restrictions set for subscr
 - Severity Score: Highly Probable x Medium = High
   - The final severity score is High. This is because a Highly Probable likelihood mixed with a Medium impact results in an overall score of High.
 
-##### Example 2: EC2 instances should enforce IMDSv2
+#### Example 2: EC2 instances should enforce IMDSv2
 
 The detection rule for [EC2 instances should enforce IMDSv2][2] checks if an EC2 instance is using the instance metadata service version 1 ([IMDSv1][3]), which is vulnerable to common web application attacks. If exploited, an adversary would be able to access the IAM credentials stored in the IMDS and use them to access resources in the AWS account. This rule would be scored as follows:
 
@@ -109,7 +107,7 @@ The detection rule for [EC2 instances should enforce IMDSv2][2] checks if an EC2
 - Severity Score: Possible x Medium = Medium
   - The final severity score is Medium. This is because a Possible likelihood mixed with a Medium impact results in an overall score of Medium.
 
-### Vulnerabilities
+## Vulnerabilities
 
 **vulns go here**
 
