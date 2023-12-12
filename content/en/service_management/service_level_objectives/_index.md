@@ -58,6 +58,8 @@ When creating SLOs, you can choose from the following types:
 - **Monitor-based SLOs**: can be be used for time-based data sets, the SLI is based on the amount of time your system exhibits good behavior divided by the total time. Monitor-based SLOs must be based on a new or existing Datadog monitor, any adjustments must be made to the underlying monitor (cannot be done through SLO creation).
 - **Time Slice SLOs**: can be be used for time-based data sets, the SLI is based on the amount of time your system exhibits good behavior divided by the total time. Time Slice SLOs do not require a Datadog monitor, you can try out different metric filters and thresholds and instantly explore downtime during SLO creation.
 
+For a full comparison, see the [SLO Type Comparison][1] chart.
+
 ## Setup
 
 Use Datadog's [Service Level Objectives status page][2] to create new SLOs or to view and manage all your existing SLOs. 

@@ -11,6 +11,9 @@ further_reading:
 - link: "/service_management/service_level_objectives/monitor/"
   tag: "Documentation"
   text: "Monitor-based SLOs"
+- link: "/service_management/service_level_objectives/time_slice/"
+  tag: "Documentation"
+  text: "Time Slice SLOs"
 ---
 
 ## Overview
