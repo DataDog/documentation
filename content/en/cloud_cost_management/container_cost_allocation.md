@@ -65,7 +65,7 @@ ECS tasks that run on Fargate are already fully allocated in the CUR. CCM enrich
 
 ### Everything else
 
-Any cost other than EC2, computed for instances hosting Kubernetes pods or ECS tasks, is given the same value and tags as the source metric, `aws.cost.amortized`.
+Any cost other than EC2, computed for instances hosting Kubernetes pods or ECS tasks, and EBS volumes, is given the same value and tags as the source metric, `aws.cost.amortized`.
 
 ## Understanding spend
 
@@ -89,8 +89,8 @@ When the prerequisites are met, new AWS cost metrics automatically appear.
 
 | AWS Cost Metric                    | Description    |
 | ---                                | ----------- |
-| `aws.cost.amortized.shared.resources.allocated` | EC2 costs allocated by the CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively. <br> *Based on `aws.cost.amortized`* |
-| `aws.cost.net.amortized.shared.resources.allocated` | Net EC2 costs allocated by CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively. <br> *Based on `aws.cost.net.amortized`, if available* |
+| `aws.cost.amortized.shared.resources.allocated` | EC2 costs allocated by the CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively. Also includes allocated EBS costs. <br> *Based on `aws.cost.amortized`* |
+| `aws.cost.net.amortized.shared.resources.allocated` | Net EC2 costs allocated by CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively. Also includes allocated EBS costs. <br> *Based on `aws.cost.net.amortized`, if available* |
 | `aws.cost.amortized.mem.allocated`   | EC2 costs allocated by memory used by a pod or ECS task. <br> *Based on `aws.cost.amortized`* |
 | `aws.cost.net.amortized.mem.allocated` | Net EC2 costs allocated by memory used by a pod or ECS task <br> *Based on `aws.cost.net.amortized`, if available* |
 | `aws.cost.amortized.cpu.allocated` | EC2 costs allocated by CPU used by a pod or ECS task <br> *Based on `aws.cost.amortized`* |
@@ -117,6 +117,7 @@ Datadog consolidates and applies additional tags from various sources to cost me
 | `allocated_resource:cpu`                   | Cost of CPU resources. *Only available for `.shared.resources.allocated` metrics.*                                            |
 | `allocated_resource:memory`                | Cost of Memory resources. *Only available for `.shared.resources.allocated` metrics.*                                         |
 | `allocated_resource:managed_service_fee`   | Cost of cloud provider managed service fees. *Only available for `.shared.resources.allocated` metrics.*           |
+| `allocated_resource:persistent_volume`     | Cost of non-local EBS Volumes used as Persistent Volumes in Kubernetes. *Only available for `.shared.resources.allocated` metrics.*           |
 
 ### Kubernetes
 
@@ -139,6 +140,18 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 | `is_aws_ecs_on_ec2`     | All EC2 compute costs associated with running ECS on EC2. |
 | `is_aws_ecs_on_fargate` | All costs associated with running ECS on Fargate. |
 | `is_cluster_idle`       | The cost of unreserved CPU or memory on EC2 instances running ECS tasks. *Only available for `.cpu.allocated` or `.mem.allocated` metrics.*|
+
+### Persistent Volumes
+
+In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the-box tags are applied to cost metrics.
+
+| Out-of-the-box tag                      |  Description |
+| ---                                     | ------------ |
+| `persistent_volume_reclaim_policy`      | The Kubernetes Reclaim Policy on the Persistent Volume. |
+| `storage_class_name`                    | The Kubernetes Storage Class used to instantiate the Persistent Volume. |
+| `volume_mode`                           | The Volume Mode of the Persistent Volume. |
+| `ebs_volume_type`                       | The type of the AWS EBS volume. *Can be `gp3`, `gp2`, etc.*|
+| `is_cluster_idle`                       | The cost of unreserved CPU or memory on EC2 instances running ECS tasks. *Only available for `.cpu.allocated` or `.mem.allocated` metrics.*|
 
 ## Further reading
 
