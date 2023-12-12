@@ -22,15 +22,14 @@ cascade:
 
 ## Overview
 
-Datadog Continuous Delivery (CD) Visibility unifies information about deployments in your CD providers in addition to data about your environments. CD Visibility brings deployment metrics and data into Datadog dashboards and notebooks so you can communicate the health of your deployments and environments, and focus your efforts in improving your team's ability to deliver quality code every time.
+Datadog Continuous Delivery (CD) Visibility provides observability on your deployments. CD Visibility brings deployment metrics and data into Datadog so you can communicate the health of your deployments, and focus your efforts in improving your team's ability to deliver quality code every time.
 
 
-CD Visibility enables developers to x, y, and z. Further, it also provides build engineers with visibility into this and that. 
 
 
 ## Increase efficiency through seamless integrations
 
-Datadog integrates with the following CD providers to gather deployment metrics which track the performance and results from a deployment execution. Use the data aggregated over time to track trends in the performance of deployments.
+Datadog integrates with the following CD providers to gather deployment metrics and to track deployment execution performance and results. Use the data aggregated over time to track trends in the performance of deployments.
 
 {{< partial name="continuous_delivery/cd-pipelines-getting-started.html" >}}
 

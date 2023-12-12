@@ -2646,42 +2646,6 @@ main:
     identifier: cd_explorer_saved_views
     parent: cd_explorer
     weight: 303
-  - name: CD Visibility
-    url: continuous_delivery/
-    pre: ci
-    identifier: cd
-    parent: ci_visibility_heading
-    weight: 160000
-  - name: Deployment Visibility
-    url: continuous_delivery/deployments
-    identifier: cd_deployments
-    parent: cd
-    weight: 1
-  - name: ArgoCD
-    url: continuous_delivery/deployments/argocd
-    identifier: cd_deployments_argocd
-    parent: cd_deployments
-    weight: 101
-  - name: Search and Manage
-    url: continuous_delivery/search
-    identifier: cd_search
-    parent: cd
-    weight: 2
-  - name: Explorer
-    url: continuous_delivery/explorer
-    identifier: cd_explorer
-    parent: cd
-    weight: 3
-  - name: Search Syntax
-    url: continuous_delivery/explorer/search_syntax
-    identifier: cd_explorer_search_syntax
-    parent: cd_explorer
-    weight: 301
-  - name: Facets
-    url: continuous_delivery/explorer/facets
-    identifier: cd_explorer_facets
-    parent: cd_explorer
-    weight: 302
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2

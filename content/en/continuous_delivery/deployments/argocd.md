@@ -1,8 +1,9 @@
 ---
 title: Monitor Argo CD Deployments
 kind: documentation
-description: Learn how to monitor deployments from Argo CD in Datadog Deployment Visibility.
+description: Learn how to monitor deployments from Argo CD in Datadog CD Visibility.
 is_beta: true
+private: true
 further_reading:
 - link: "/continuous_delivery/deployments"
   tag: "Documentation"
@@ -12,8 +13,8 @@ further_reading:
   text: "Learn how to query and visualize deployment executions"
 ---
 
-{{< callout url="http://dtdg.co/to-be-updated" header="false" >}}
-CD Visibility for Argo CD is in private beta. To request access, complete the form (link to be inserted).
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" header="false" >}}
+CD Visibility for Argo CD is in private beta. To request access, complete the form.
 {{< /callout >}}
 
 ## Overview
@@ -27,11 +28,12 @@ Argo CD notifications consists of two main components:
 
 ## Setup
 
-For a more general guide on how to set up Argo CD notifications using webhooks, see the [official Argo CD guide][5].
+For more information on how to set up Argo CD notifications using webhooks, see the [official Argo CD guide][5].
 
-The first thing to create is the service, containing the Datadog intake URL and the Datadog API Key. First, add your [Datadog API Key][11] in the
+The first step is to create the service containing the Datadog intake URL and the Datadog API Key:
+1. Add your [Datadog API Key][11] in the
 `argocd-notifications-secret` secret with the `dd-api-key` key. See [the Argo CD guide][2] for information on modifying the `argocd-notifications-secret`.
-Then, add a service in the `argocd-notifications-cm` config map with the following format:
+1. Add a service in the `argocd-notifications-cm` config map with the following format:
 
 ```yaml
 apiVersion: v1
@@ -75,8 +77,8 @@ data:
 ```
 
 <div class="alert alert-warning">
-The call to populate the <code>commit_metadata</code> field is not required, and it's used to enrich the payload with Git information.
-In case you are using Helm repositories as the source of your Argo CD application, adjust the body by removing that line and the comma in the previous line.
+The call to populate the <code>commit_metadata</code> field is not required. The field is used to enrich the payload with Git information.
+If you are using Helm repositories as the source of your Argo CD application, adjust the body by removing that line and the comma in the previous line.
 </div>
 
 `cd-visibility-template` is the name of the template, and `cd-visibility-webhook` is a reference to the service created above.
@@ -115,7 +117,8 @@ There are two annotations:
    the environment defaults to `none`.
 
 See the [Argo CD official guide][12] for more details on applications subscriptions.
-Once this final step is completed, you can start monitoring your Argo CD deployments in Datadog.
+
+After this final step is completed, you can start monitoring your Argo CD deployments in Datadog.
 
 ## Visualize deployments in Datadog
 
@@ -123,7 +126,7 @@ The [**Deployments**][6] and [**Deployment Executions**][7] pages populate with 
 
 ## Troubleshooting
 
-In case the notifications are not sent, examine the logs of the `argocd-notification-controller` pod. The controller logs when it is sending a notification (for example: `Sending notification ...`) and when it fails to notify a recipient
+If notifications are not sent, examine the logs of the `argocd-notification-controller` pod. The controller logs when it is sending a notification (for example: `Sending notification ...`) and when it fails to notify a recipient
 (for example: `Failed to notify recipient ...`). For additional troubleshooting scenarios, see the [official Argo CD documentation][8].
 
 ## Further reading
