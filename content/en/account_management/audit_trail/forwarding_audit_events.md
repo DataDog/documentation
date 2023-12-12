@@ -10,7 +10,7 @@ further_reading:
 
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">
-Audit event forwarding is not available in the US1-FED site.
+Audit Event Forwarding is not available in the US1-FED site.
 </div>
 {{% /site-region %}}
 
