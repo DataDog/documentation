@@ -109,7 +109,12 @@ The detection rule for [EC2 instances should enforce IMDSv2][2] checks if an EC2
 
 ## Vulnerabilities
 
-**vulns go here**
+CSM Vulnerabilities uses [CVSS 3.0][5] to determine a base score and modifies it to take into account the following:
+
+- Whether the underlying infrastructure is running and how wide-spread the impact is.
+- The environment in which the underlying infrastructure is running. For example, if the environment is not production, the severity is downgraded.
+- Whether there is an active exploit for a given vulnerability from sources such as [CISA KEV catalog][6].
+- The exploitation probability, calculated and verified using [EPSS][7].
 
 ## Further Reading
 
@@ -119,3 +124,6 @@ The detection rule for [EC2 instances should enforce IMDSv2][2] checks if an EC2
 [2]: https://docs.datadoghq.com/security/default_rules/aws-ec2-imdsv2/
 [3]: https://hackingthe.cloud/aws/general-knowledge/intro_metadata_service/
 [4]: https://hackingthe.cloud/aws/exploitation/ec2-metadata-ssrf/
+[5]: https://www.first.org/cvss/v3-0/
+[6]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
+[7]: https://www.first.org/epss/
