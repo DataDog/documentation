@@ -37,6 +37,7 @@ When creating SLOs, you can choose from the following types:
 | **Handling missing data in the SLO calculation**                      | Missing data is ignored in SLO status and error budget calculations                                                                       | Missing data is handled based on the [underlying Monitor's configuration][6]                                                                                        | Missing data is treated as uptime in SLO status and error budget calculations        |
 | **Uptime Calculations**                                          |  N/A                                                                                  | [Uptime][7] is calculated by looking at discrete time chunks, not rolling time windows<br><br>If groups are present, overall uptime requires *all* groups to have uptime | Uptime calculations are based on the underlying Monitor <br><br>If groups are present, overall uptime requires *all* groups to have uptime|
 | **Calendar View on SLO Manage Page**                                   | Available for Metric-based SLOs                                                                                                                                 | Not available for Monitor-based SLOs                                                                                                                                                      | Available for Time Slice SLOs                                                                            |
+| **Public [APIs][8] and Terraform Support**                                   | Available for Metric-based SLOs                                                                                                                                 | Available for Monitor-based SLOs                                                                                                                                                      | Not available for Time Slice SLOs                                                                            |
 
 ## Further Reading
 
@@ -49,3 +50,4 @@ When creating SLOs, you can choose from the following types:
 [5]: https://docs.datadoghq.com/dashboards/guide/slo_data_source/
 [6]: https://docs.datadoghq.com/service_management/service_level_objectives/monitor/#missing-data
 [7]: /service_management/service_level_objectives/time_slice/#uptime-calculations
+[8]: https://docs.datadoghq.com/api/latest/service-level-objectives/
