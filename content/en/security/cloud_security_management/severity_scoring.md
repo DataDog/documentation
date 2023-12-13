@@ -13,9 +13,9 @@ further_reading:
   text: "Learn more about CSM Vulnerabilities"
 ---
 
-## Misconfigurations and Identity Risks
+## Misconfigurations, Identity Risks, and Security Inbox Misconfigurations
 
-Starting in early 2024, all CSM Misconfigurations and Identity Risk rules will migrate to the following severity score framework. This framework is designed to compare the likelihood that an adversary would take advantage of a misconfiguration to the risk posed to your environment. By weighting both of these aspects, findings can be prioritized more accurately by their real-world risks. The matrices below show how to compute a misconfiguration's severity score depending on certain criteria.
+This framework is designed to compare the likelihood that an adversary would take advantage of a misconfiguration to the risk posed to your environment. By weighting both of these aspects, findings can be prioritized more accurately by their real-world risks. The matrices below show how to compute a misconfiguration's severity score depending on certain criteria.
 
 ### Likelihood
 
