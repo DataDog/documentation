@@ -54,7 +54,7 @@ For any given error, you can access the file path, line number, and a code snipp
    
    ```groovy
    datadog {
-       site = "EU1"
+       site = "US1"
    }
    ```
 
