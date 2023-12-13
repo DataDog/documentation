@@ -114,6 +114,8 @@ To enable single step instrumentation with Helm:
          <li><a href="#enabling-or-disabling-instrumentation-for-namespaces">Enabling or disabling instrumentation for namespaces.</a></li>
          <li><a href="#specifying-tracing-library-versions">Specifying tracing library versions.</a></li>
          <li><a href="#tagging-observability-data-by-environment">Tagging observability data by environment.</a></li>
+         <li><a href="https://docs.datadoghq.com/tracing/trace_collection/library_injection_local/">Choosing specific pod specifications.</a></li>
+
       </ul>
    </div>
 

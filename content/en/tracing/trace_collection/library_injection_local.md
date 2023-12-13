@@ -9,6 +9,9 @@ aliases:
 
 ## Overview
 
+<div class="alert alert-warning">Support for local library injection will be deprecated. To automatically instrument your application, you can use <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation (Beta)</a> or <a href="/tracing/trace_collection/dd_libraries/">Datadog tracing libraries.</a></div>
+
+
 <div class="alert alert-info"><strong>Beta</strong>: You can enable APM when installing the Agent with  <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation</a>. Run a one-line install command to automatically enable APM and instrument all of your services on your Linux host, VM, or container.</div>
 
 To instrument your application, you can:

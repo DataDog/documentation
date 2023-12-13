@@ -16,7 +16,7 @@ algolia:
 
 ## Overview
 
-Custom instrumentation allows for precise monitoring of specific components in your application. It allows you to capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation. Automatic instrumentation includes [local library injection][6] or [single step instrumentation][5].
+Custom instrumentation allows for precise monitoring of specific components in your application. It allows you to capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation. Automatic instrumentation includes [Single Step Instrumentation][5] or using [Datadog tracing libraries][6].
 
 Custom instrumentation involves embedding tracing code directly into your application code. This allows for the programmatic creation, modification, or deletion of traces to send to Datadog. 
 
@@ -24,9 +24,41 @@ Custom instrumentation involves embedding tracing code directly into your applic
 
 Follow the relevant documentation for your custom instrumentation approach to learn more:
 
-- [Datadog libraries][2]
-- [OpenTelemetry][3]
-- [OpenTracing][4]
+{{< tabs >}}
+{{% tab "Datadog libraries" %}}
+
+Use Datadog tracing libraries to add custom instrumentation that allows you to programmatically create, modify, or delete traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation, removing unwanted spans from traces, and for providing deeper visibility and context into spans, including adding span tags.
+
+{{< partial name="apm/apm-manual-instrumentation.html" >}}
+
+<br>
+
+{{% /tab %}}
+
+{{% tab "OpenTelemetry API" %}}
+
+Datadog tracing libraries provide an implementation of the OpenTelemetry API for instrumenting your code. This means you can maintain vendor-neutral instrumentation of all your services, while still taking advantage of Datadog's native implementation, features, and products. You can configure it to generate Datadog-style spans and traces to be processed by the Datadog tracing library for your language, and send those to Datadog.
+
+{{< partial name="apm/apm-otel-instrumentation.html" >}}
+
+<br>
+
+{{% /tab %}}
+
+{{% tab "OpenTracing" %}}
+
+If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for you, each of the supported languages also has support for sending [OpenTracing][3] data to Datadog. OpenTracing is archived and the project is unsupported. 
+
+{{< partial name="apm/apm-opentracing.html" >}}
+
+<br>
+
+[1]: /tracing/trace_collection/otel_instrumentation/
+[2]: /tracing/trace_collection/custom_instrumentation/
+[3]: https://opentracing.io/docs/
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Use cases
 
@@ -46,6 +78,5 @@ Some situations when you might use custom instrumentation include:
 [3]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation
 [4]: /tracing/trace_collection/custom_instrumentation/opentracing/
 [5]: /tracing/trace_collection/single-step-apm
-[6]: /tracing/trace_collection/library_injection_local
-
+[6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
 
