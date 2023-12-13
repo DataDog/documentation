@@ -56,7 +56,7 @@ Sensitive data, such as credit card numbers, bank routing numbers, and API keys,
 
 ### Using regex for custom rules
 
-The `sensitive_data_scanner` transform supports Perl Compatible RegEx (PCRE), but the following patterns are not supported:
+The `sensitive_data_scanner` transform supports Perl Compatible RegEx (PCRE2), but the following patterns are not supported:
   - Backreferences and capturing sub-expressions (lookarounds)
   - Arbitrary zero-width assertions
   - Subroutine references and recursive patterns
