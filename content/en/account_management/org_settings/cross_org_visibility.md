@@ -31,7 +31,7 @@ After you set up an organization connection, the exposed data still lives in the
 
 ### Scope
 
-Cross-organization visibility supports Metrics telemetry in private [Dashboard widgets][2].
+Cross-organization visibility supports Metrics telemetry in private [Dashboard and Notebook widgets][2].
 
 All types of metrics are supported, including [custom metrics][3], [trace metrics][4], and [metrics generated from logs][5].
 
@@ -120,7 +120,7 @@ The <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs
 You can define cross-organization queries in the following endpoint:
 - [Timeseries][8]
 
-When you define dashboard widgets in the dashboard API, use the `cross_org_uuids` parameter in the JSON widget definition payload to identify the source organization in a cross-organization query.
+When you define a widget in the Dashboard API, use the `cross_org_uuids` parameter in the JSON widget definition payload to identify the source organization in a cross-organization query.
 
 The `cross_org_uuids` parameter is optional. If you omit `cross_org_uuids`, the query runs on the same organization in which you defined the widget.
 
