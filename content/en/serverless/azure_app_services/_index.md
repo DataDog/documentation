@@ -37,7 +37,7 @@ Datadog provides additional monitoring capabilities for the following Azure App 
 | OS | Runtime |App Type|Status|Documentation| 
 |----|---------|-----|----|--------------|
 |Windows|.NET|Function App & Web App|GA|[Windows .NET setup][7]|
-|Windows|Java|Web App|Beta|[Windows Java setup][8]|
+|Windows|Java|Web App|GA|[Windows Java setup][8]|
 |Linux|.NET|Web App|GA|[Linux .NET setup][9]|
 |Linux|Node|Web App|GA|[Linux Node setup][9]|
 |Linux|PHP|Web App|GA|[Linux PHP setup][9]|

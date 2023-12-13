@@ -124,11 +124,11 @@ See [privacy options specific to Session Replay][12].
 
 [1]: /real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#event-and-context-structure
 [2]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#modify-or-drop-rum-events
-[3]: /real_user_monitoring/android/advanced_configuration/?tab=kotlin#modify-or-drop-rum-events
-[4]: /real_user_monitoring/flutter/advanced_configuration/#modify-or-drop-rum-events
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#modify-or-drop-rum-events
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter/#modify-or-drop-rum-events
 [5]: /real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
-[6]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
-[7]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
+[6]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
+[7]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [8]: /help/
 [9]: /help/
 [10]: /account_management/rbac/permissions/#real-user-monitoring

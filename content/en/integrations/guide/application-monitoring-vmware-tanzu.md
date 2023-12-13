@@ -25,13 +25,13 @@ It consists of the following three components:
 
 * DogStatsD
 * Trace Agent
-* Puppy Agent
+* Container Agent
 
 You can use DogStatsD to get your custom application metrics into Datadog. DogStatsD is a metrics aggregation service that implements the StatsD protocol and adds a few Datadog-specific extensions. For more information, see the [DogStatsD][5] documentation. Additionally, Datadog provides a list of DogStatsD libraries you can use to find [libraries][9] compatible with your application.
 
-The Trace Agent is a service that collects application traces from various sources and forwards them to Datadog. For more information, see the [tracing][7] documentation.
+The Trace Agent is a service that collects application traces from various sources and forwards them to Datadog APM. For more information, see the [tracing][7] documentation.
 
-The Puppy Agent is a smaller version of the [Datadog Agent][6] that can forward metrics and logs to Datadog. See the [logs][8] documentation for more information. When enabled, the default behavior is for all logs from `stdout` and `stderr` to be collected and forwarded by TCP to the Puppy Agent.
+The Container Agent is a smaller, lightweight version of the [Datadog Agent][6] that can forward metrics and logs to Datadog. See the [logs][8] documentation for more information. When enabled, the default behavior is for all logs from `stdout` and `stderr` to be collected and forwarded by TCP to the Container Agent.
 
 ## Key features
 Datadog Application Monitoring for VMware Tanzu includes the following key features:
