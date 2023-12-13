@@ -12,7 +12,7 @@ algolia:
 This guide assumes that you have configured [Database Monitoring][1].
 
 
-[Datadog Database Monitoring (DBM)][8] allows you to view explain plans and query samples running on your database hosts. This guide shows you how to use cloud managed authentication features, such as IAM, to connect the agent to your database. This provides a more secure way to authenticate and saves you from having to manage database credentials across your agent hosts.
+[Datadog Database Monitoring (DBM)][8] allows you to view explain plans and query samples running on your database hosts. This guide shows you how to use cloud managed authentication features, such as IAM, to connect the Agent to your database. This provides a more secure way to authenticate and saves you from having to manage database credentials across your agent hosts.
 
 
 ## Before you begin
