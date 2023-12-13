@@ -22,41 +22,51 @@ further_reading:
 
 The following OpenTelemetry features implemented in the Datadog library as noted:
 
-| Feature                                           | Support notes                                                      |
-|---------------------------------------------------|--------------------------------------------------------------------|
-| [OpenTelemetry Context propagation][1]            | [Datadog distributed header format][9] is used instead by default. | 
-| [Span processors][2]                              | Unsupported                                                        | 
-| [Span Exporters][3]                               | Unsupported                                                        |
-| Trace/span [ID generators][4]                     | ID generation is performed by the tracing library, with support for [128-bit trace IDs][12].|
-| [Metrics][7], [Baggage][14] and [Context][10] API | Unsupported                                                        |
+| Feature                                           | Support notes                                                                               |
+|---------------------------------------------------|---------------------------------------------------------------------------------------------|
+| [OpenTelemetry Context propagation][1]            | [Datadog distributed header format][2] is used instead by default.                          |
+| [Span processors][3]                              | Unsupported                                                                                 |
+| [Span Exporters][4]                               | Unsupported                                                                                 |
+| Trace/span [ID generators][5]                     | ID generation is performed by the tracing library, with support for [128-bit trace IDs][6]. |
+| [Metrics][7], [Baggage][8] and [Context][9] API   | Unsupported                                                                                 |
 
 ## Configuring OpenTelemetry to use the Datadog tracing library
 
-1. Add your desired manual OpenTelemetry instrumentation to your Java code following the [OpenTelemetry Java Manual Instrumentation documentation][5]. **Important!** Where those instructions indicate that your code should call the OpenTelemetry SDK, call the Datadog tracing library instead.
+<div class="alert alert-info">
+If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="https://docs.datadoghq.com/tracing/setup/java/">Java Setup Instructions</a>.
+</div>
 
-1. Add the [Datadog tracing library to the JVM][11]. **Beta:** You can optionally do this with [One-Step APM Instrumentation][13].
+1. Add your desired manual OpenTelemetry instrumentation to your Java code following the [OpenTelemetry Java Manual Instrumentation documentation][10].
 
+1. Add the [Datadog tracing library to the JVM][11]. **Beta:** You can optionally do this with [One-Step APM Instrumentation][12].
 
-1. Make sure you only depend on the OpenTelemetry API (and not OpenTelemetry SDK).
+1. Make sure you only depend on the OpenTelemetry API (and not the OpenTelemetry SDK).
 
-    Using Maven:
-    ```xml
-      <!-- OpenTelemetry API -->
-      <dependency>
-              <groupId>io.opentelemetry</groupId>
-              <artifactId>opentelemetry-api</artifactId>
-              <version>${io.opentelemtry.version}</version>
-          </dependency>
-      <dependency>
-    ```
+{{< tabs >}}
+{{% tab "Gradle" %}}
 
-    Using Gradle:
-    ```groovy
-      // OpenTelemetry API
-      implementation "io.opentelemetry:opentelemetry-api:${opentelemetryVersion}"
-    ```
+{{< code-block lang="groovy" >}}
+// OpenTelemetry API
+implementation "io.opentelemetry:opentelemetry-api:${opentelemetryVersion}"
+{{< /code-block >}}
 
-1. Set the `dd.trace.otel.enabled` system property to `true`.
+{{% /tab %}}
+{{% tab "Maven" %}}
+
+{{< code-block lang="xml" >}}
+<!-- OpenTelemetry API -->
+<dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-api</artifactId>
+        <version>${io.opentelemtry.version}</version>
+    </dependency>
+<dependency>
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+1. Set the `dd.trace.otel.enabled` system property or the `DD_TRACE_OTEL_ENABLED` environment variable to `true`.
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application.
 
@@ -82,24 +92,31 @@ rootSpan.setAttributes("some-key", "some-value");
 
 First add a dependency to the `opentelemetry-instrumentation-annotations` library.
 
-Using Maven:
-```xml
-  <!-- OpenTelemetry instrumentation annotations -->
-  <dependency>
-          <groupId>io.opentelemetry.instrumentation</groupId>
-          <artifactId>opentelemetry-instrumentation-annotations</artifactId>
-          <version>${io.opentelemtry.version}</version>
-      </dependency>
-  <dependency>
-```
+{{< tabs >}}
+{{% tab "Gradle" %}}
 
-Using Gradle:
-```groovy
+{{< code-block lang="groovy" >}}
   // OpenTelemetry instrumentation annotations
   implementation "io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations:${opentelemetryVersion}"
-```
+{{< /code-block >}}
 
-Then annotate your methods with the `@WithSpan` annotation to create a new span each call, and its parameters with the `@SpanAttribute` annotation to capture the arguments as span attributes:
+{{% /tab %}}
+{{% tab "Maven" %}}
+
+{{< code-block lang="xml" >}}
+<!-- OpenTelemetry instrumentation annotations -->
+<dependency>
+        <groupId>io.opentelemetry.instrumentation</groupId>
+        <artifactId>opentelemetry-instrumentation-annotations</artifactId>
+        <version>${io.opentelemtry.version}</version>
+    </dependency>
+<dependency>
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Then annotate your methods with the `@WithSpan` annotation to create a new span each call. The parameters of the call can be annotated with the `@SpanAttribute` annotation to capture the arguments as span attributes:
 
 ```java
 @WithSpan
@@ -109,22 +126,21 @@ public void myMethod(@SpanAttribute("parameter1") String parameter1,
 }
 ```
 
-**Note:** Using the `@AddingSpanAttributes` method annotation instead of `@WithSpan` allows capturing method arguments using the `@SpanAttribute` annotation without creating a new span. The current span will be updated if any. 
+**Note:** Using the `@AddingSpanAttributes` method annotation instead of `@WithSpan` allows capturing method arguments using the `@SpanAttribute` annotation without creating a new span. The current span, if it exists, is going to be updated with the captured arguments.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/instrumentation/java/manual/#context-propagation
-[2]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-processor
-[3]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
-[4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#id-generators
-[5]: https://opentelemetry.io/docs/instrumentation/java/manual/
+[2]: /tracing/trace_collection/trace_context_propagation/java/
+[3]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-processor
+[4]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#span-exporter
+[5]: https://opentelemetry.io/docs/reference/specification/trace/sdk/#id-generators
+[6]: /opentelemetry/guide/otel_api_tracing_interoperability/
 [7]: https://opentelemetry.io/docs/specs/otel/metrics/api/
-[8]: https://opentelemetry.io/docs/instrumentation/java/automatic/
-[9]: /tracing/trace_collection/trace_context_propagation/java/
-[10]: https://opentelemetry.io/docs/specs/otel/context/
+[8]: https://opentelemetry.io/docs/specs/otel/baggage/api/
+[9]: https://opentelemetry.io/docs/specs/otel/context/
+[10]: https://opentelemetry.io/docs/instrumentation/java/manual/
 [11]: /tracing/trace_collection/dd_libraries/java/?tab=springboot#add-the-java-tracer-to-the-jvm
-[12]: /opentelemetry/guide/otel_api_tracing_interoperability/
-[13]: /tracing/trace_collection/single-step-apm/
-[14]: https://opentelemetry.io/docs/specs/otel/baggage/api/
+[12]: /tracing/trace_collection/single-step-apm/
