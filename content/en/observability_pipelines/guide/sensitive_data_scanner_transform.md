@@ -19,7 +19,7 @@ The <code>sensitive_data_scanner</code> transform is in private beta.
 
 ## Overview
 
-Sensitive data, such as credit card numbers, bank routing numbers, and API keys, are often exposed unintentionally in your logs, which can expose your organization to financial and privacy risks. Use the Observability Pipelines `sensitive_data_scanner` transform to identify, tag, and optionally redact or hash sensitive information before routing data to different destinations. You can use out-of-the-box scanning rules to detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. Or, create custom scanning rules using regex patterns to match sensitive information.
+Sensitive data, such as credit card numbers, bank routing numbers, and API keys, can be revealed unintentionally in your logs, which can expose your organization to financial and privacy risks. Use the Observability Pipelines `sensitive_data_scanner` transform to identify, tag, and optionally redact or hash sensitive information before routing data to different destinations. You can use out-of-the-box scanning rules to detect common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. Or, create custom scanning rules using regex patterns to match sensitive information.
 
 ## Set up the `sensitive_data_scanner` transform
 
@@ -39,7 +39,7 @@ Sensitive data, such as credit card numbers, bank routing numbers, and API keys,
 1. In the **Pattern** section:  
     - To create a custom scanning rule:  
         a. Select **Custom** in the **type** dropdown.  
-        b. In the **Define regex** field, enter the regex pattern to check against the data.  
+        b. In the **Define regex** field, enter the regex pattern to check against the data. See [Using regex for custom rules](#using-regex-for-custom-rules) for more information.  
     - To use an out-of-the-box scanning rule:  
         a. Select **Library** in the **type** dropdown.  
         b. Select the scanning rule you want to use in the **Name** dropdown.
@@ -52,6 +52,8 @@ Sensitive data, such as credit card numbers, bank routing numbers, and API keys,
 1. Click **Save**.
 
 **Note**: Any rules that you add or update only affect data coming into Observability Pipelines after the rule was defined.
+
+### Using regex for custom rules
 
 The `sensitive_data_scanner` transform supports Perl Compatible RegEx (PCRE), but the following patterns are not supported:
   - Backreferences and capturing sub-expressions (lookarounds)
