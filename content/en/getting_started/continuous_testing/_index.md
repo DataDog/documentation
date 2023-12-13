@@ -2,9 +2,9 @@
 title: Getting Started with Continuous Testing
 kind: documentation
 further_reading:
-- link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
+- link: 'https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline'
   tag: 'Learning Center'
-  text: 'Introduction to Synthetic Tests'
+  text: 'Introduction to Synthetic Tests in a CI/CD Pipeline'
 - link: '/synthetics/api_tests'
   tag: 'Documentation'
   text: 'Learn more about API tests'
@@ -14,18 +14,13 @@ further_reading:
 - link: '/synthetics/browser_tests'
   tag: 'Documentation'
   text: 'Learn more about browser tests'
-- link: '/synthetics/private_locations'
-  tag: 'Documentation'
-  text: 'Learn more about private locations'
 - link: '/continuous_testing/cicd_integrations'
   tag: 'Documentation'
   text: 'Learn about running Synthetic tests in a CI pipeline'
-- link: "https://dtdg.co/fe"
-  tag: "Foundation Enablement"
-  text: "Join an interactive session to enhance your synthetic testing capabilities"
 algolia:
-  tags: ["synthetics"]
+  tags: ["continuous testing"]
 ---
+{{< jqmath-vanilla >}}
 
 ## Overview
 
@@ -89,7 +84,7 @@ For more information about running the Synthetics command and using reporters, s
 
 Separately, you can use the [Datadog Synthetics VS Code Integration](https://docs.datadoghq.com/developers/ide_integrations/vscode/) to help you:
 
-* Run HTTP API Tests and Browser Tests within your local environments
+* Run HTTP API tests and browser tests within your local environments
 * See test results locally in VS Code
 * Test only what matters by executive relevant tests at the same time
 
@@ -103,9 +98,9 @@ Separately, you can use the [Datadog Synthetics VS Code Integration](https://doc
 4. Set a Start URL
 5. Run the test
 
-## Synthetics Explorer
+## Examine Results in the Synthetic Monitoring and Continuous Testing Explorer
 
-The **Synthetics Explorer** allows you to create visualizations and filter CI batches for your Continuous Testing tests. Navigate there by hovering over **UX Monitoring** within the left-hand menu of Datadog and selecting **Continuous Testing**.
+The **Synthetic Monitoring and Continuous Testing Explorer** allows you to create visualizations and filter CI batches and test runs for your Continuous Testing tests. Navigate there by hovering over **UX Monitoring** within the left-hand menu of Datadog and selecting **Continuous Testing**.
 
 Review your tests by clicking on either **CI Batches** or **Test Runs** on the left. Select any test within the Explorer to dive deeper into the results.
 
@@ -113,25 +108,25 @@ Review your tests by clicking on either **CI Batches** or **Test Runs** on the l
 
 ### Create a search query
 
+Click on one of the out-of-the-box search queries to get started with filtering through your CI Batches and Test Runs. These can filter:
+- [All failing tests](https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20-%40result.result.httpStatusCode%3A%5B100%20TO%20399%5D%20%40result.result.passed%3Afalse&agg_m=count&agg_q=%40result.result.httpStatusCode&cols=&index=%2A&top_n=100&track=synthetics&viz=timeseries)
+- [Tests which initially failed but are now passing](https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20%40result.result.initialResultID%3A%2A%20%40result.status%3A0&agg_m=count&agg_q=%40result.result.httpStatusCode&cols=&index=%2A&top_n=100&track=synthetics&viz=stream)
+- [Unused Tests](https://app.datadoghq.com/synthetics/explorer?query=%40ci.job.name%3A%2A&agg_m=count&agg_q=%40result.test_public_id&cols=&index=%2A&top_n=100&track=synbatch&viz=query_table)
+
 {{< img src="continuous_testing/example_search_queries.png" alt="example-search-queries" style="width:100%;" >}}
 
-Click on one of the out-of-the-box search queries to get started with filtering through your CI Batches and Test Runs. These can filter:
-- All failing tests
-- Tests which initially failed but are now passing
-- Unused Tests
-
-Optionally, you can create a query to [search your test runs](https://docs.datadoghq.com/continuous_testing/explorer/?tab=testruns#create-a-search-query). Using the Browser Test you created above, locate the Test ID and create a search query using the common test run facets. To find the ID of your Browser Test:
+Optionally, you can create a query to [search your test runs](https://docs.datadoghq.com/continuous_testing/explorer/?tab=testruns#create-a-search-query). Using the browser test you created above, locate the Test ID and create a search query using the common test run facets. To find the ID of your browser test:
 1. Navigate to the Synthetic Tests page
 2. Select a test
 3. Look for the Test ID within the **Properties** section
 
-{{< img src="continuous_testing/example_test_id.png" alt="example_test_id" style="width:100%;" >}}
+{{< img src="continuous_testing/example_test_id.png" alt="example_test_id" style="width:70%;" >}}
 
 To export your view of the Synthetics and CT Explorer, click **>Views** and click **Save**. For more information, see [Saved Views](https://docs.datadoghq.com/continuous_testing/explorer/saved_views/).
 
 For more information about using facets in your search query, see [Search Test Runs](https://docs.datadoghq.com/continuous_testing/explorer/search_runs/).
 
-## Set Parallelization Preferences
+## Set Parallelization preferences
 
 By default, tests are not parallelized. Parallelization allows you to run multiple tests in your CI/CD pipelines simultaneously. If you want to parallelize your tests, you can use the Estimate Parallelization calculator to determine your needs.
 
@@ -141,11 +136,13 @@ Find it by hovering over **UX Monitoring** on the Datadog site, selecting **Sett
 
 For instance, if you have 24 tests per CI batch, each taking 2 minutes to complete, and your target is for all tests to be completed within 4 minutes, you’d need to run 12 tests in parallel.
 
-{{Equation in LaTeX?}}
+$$\text"estimated parallelization" = {\text"24 tests per CI batch"* \text"2 minute duration"} / \text"4 minute expected duration in your CI pipeline"$$
 
 Once you’re done estimating your parallelization, input the number of test runs you want to execute at the same time in the Parallelization modal. Then click **Save Selection**.
 
 See the [Parallelization documentation](https://docs.datadoghq.com/continuous_testing/settings/#parallelization) for details.
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
