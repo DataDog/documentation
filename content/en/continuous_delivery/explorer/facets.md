@@ -15,7 +15,7 @@ further_reading:
 
 Facets are user-defined tags and attributes from your pipelines. They are useful for both [qualitative](#qualitative-facets) and [quantitative](#quantitative-measures) data analysis. Facets allow you to manipulate your deployments in the search queries that appear on [dashboards][2] and in [notebooks][3].
 
-[Creating facets](#creating-facets) is **not required** to [search deployment executions][5]. Autocomplete capabilities use existing facets, but also any input that matches incoming deployment executions applies. 
+[Creating facets](#creating-facets) is **not required** to [search deployment executions][5]. Autocomplete capabilities use existing facets, but also any input that matches incoming deployment executions applies.
 
 The [CD Visibility Explorer][4] includes out-of-the-box facets such as `Environment`, `Deployment Status`, and `Deployment Provider`. You can use facets in the CD Visibility Explorer to:
 
@@ -31,7 +31,7 @@ Navigate to [**CI** > **Deployment Executions**][7] to access the list of facets
 
 Use qualitative facets when you need to:
 
-- **Get relative insights** for values. 
+- **Get relative insights** for values.
 - **Count unique values**.
 - Frequently **filter** your deployment executions against particular values. For example, use the facet on the environment tag to scope troubleshooting down to development, staging, or production environments.<br>
 
@@ -41,7 +41,7 @@ Use qualitative facets when you need to:
 
 Use quantitative measures when you need to:
 
-- **Aggregate** values from multiple deployment executions. 
+- **Aggregate** values from multiple deployment executions.
 - **Range filter** your deployment executions.
 - **Sort** your deployment executions against that value.
 
@@ -53,7 +53,7 @@ Measures have either a long integer or double value for equivalent capabilities.
 
 Measures support units (**time** in seconds or **size** in bytes) to handle orders of magnitude at query time and display time. The unit is a property of the measure itself, not of the field.
 
-For example, consider a `duration` measure in nanoseconds. Suppose deployments from `env:staging` have `duration:1000`, meaning `1000 milliseconds`. Supposed test runs from `env:qa` have `duration:500`, meaning `500 microseconds`. Use `duration:>20ms` to consistently query deployment execution tags from both environments at once. For more information about search queries, see [Search Syntax][6].
+For example, consider a `duration` measure in nanoseconds. Suppose deployments from `env:staging` have `duration:10000000`, meaning `10 milliseconds`. Supposed deployments from `env:qa` have `duration:5000000`, meaning `5 milliseconds`. Use `duration:>2ms` to consistently query deployment execution tags from both environments at once. For more information about search queries, see [Search Syntax][6].
 
 ## Facet panel
 
@@ -78,12 +78,12 @@ Creating a facet on a deployment execution attribute or tag is not required to s
 
 ### Creating facets from the Deployment Details side panel
 
-Create a facet from the Deployment Details side panel so that most of the facet details are pre-filled. 
+Create a facet from the Deployment Details side panel so that most of the facet details are pre-filled.
 
 {{< img src="continuous_delivery/explorer/create_facet.png" alt="Create a facet from the Deployment Details side panel" style="width:100%;">}}
 
-1. Navigate to a deployment execution of interest in the [CD Visibility Explorer][4] that contains the field to create a facet on. 
-2. Open the Deployment Details side panel by selecting the deployment execution from the list. 
+1. Navigate to a deployment execution of interest in the [CD Visibility Explorer][4] that contains the field to create a facet on.
+2. Open the Deployment Details side panel by selecting the deployment execution from the list.
 3. Click on the desired field and create a facet from there:
 
    - If the field has a numerical value, you can create either a facet or a measure.
@@ -106,9 +106,9 @@ Autocomplete based on the content in deployment executions of the current views 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/types/ci 
-[2]: /dashboards/ 
-[3]: /notebooks/ 
+[1]: /monitors/types/ci
+[2]: /dashboards/
+[3]: /notebooks/
 [4]: /continuous_delivery/explorer
 [5]: /continuous_delivery/search
 [6]: /continuous_delivery/explorer/search_syntax
