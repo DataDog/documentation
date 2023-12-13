@@ -33,13 +33,13 @@ Your host automatically trusts the new key (no further action is required) if yo
 - [Puppet module][8] v3.21.0+ (released Jul 05, 2023)
 - [SaltStack formula][9] v3.6+ (released Aug 10, 2023)
 - [Heroku buildpack][10] v2.11+ (released Jun 15, 2023)
-- [Elastic Beanstalk][11] config templates updated as of Nov 11, 2022 or later (should contain `source: https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh`)
+- [Elastic Beanstalk][11] config templates updated as of Jun 27, 2023 or later (should contain `source: https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh`)
 - Containerized Agents (Docker/Kubernetes) for any version
 - Windows/MacOS Agents for any version
 
 Additionally, installing the DEB Agent v6.48.0+ or v7.48.0+ package through `apt` from the `apt.datadoghq.com` repository installs the [`datadog-signing-keys` package](#the-datadog-signing-keys-package) version 1.3.1. It automatically ensures that your host trusts the new key. If you have `datadog-signing-keys` version 1.3.1 or later installed, no further action is needed. Versions of `datadog-signing-keys` older than version 1.3.1 don't guarantee full preparedness for the key rotation.
 
-If you installed Observability Pipeline Worker or APM tracer libraries **using the above install methods**, they already come with the newest keys. No further action is required.
+If you installed Observability Pipelines Worker or APM tracer libraries **using the above install methods**, they already come with the newest keys. No further action is required.
 
 If you are installing the DEB Agent package from a different repository or you are not using `apt` (or a similar tool that checks repo metadata signatures), your system doesn't need to know the Datadog signing keys. No further action is needed. However, you may benefit from the [`datadog-signing-keys` package](#the-datadog-signing-keys-package).
 
@@ -73,7 +73,7 @@ Public key for datadog-agent-7.57.1-1.x86_64.rpm is not installed. Failing packa
 Error: GPG check FAILED
 ```
 
-For `apt`, this applies to both newly released and existing versions of the Agent. For `yum`, `dnf` or `zypper`, existing versions of the Agent can still be installed as long as `repo_gpgcheck=0` is set in the `datadog.repo` file.
+For `apt`, this applies to both newly released and existing versions of the Agent. For `yum`, `dnf` or `zypper`, existing versions of the Agent can still be installed as long as `repo_gpgcheck=0` is set in the `datadog.repo` or `datadog-observability-pipelines-worker.repo` file.
 
 This key rotation does not affect installations done by manually downloading the packages and installing them with `dpkg` or `rpm`. This may cause a warning for `rpm`.
 
@@ -87,11 +87,10 @@ Datadog encourages you to use one of the [install methods](#install-methods-that
 Run the following commands on the host:
 
 ```bash
-$ curl -o /tmp/DATADOG_APT_KEY_C0962C7D https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
-$ sudo apt-key add /tmp/DATADOG_APT_KEY_C0962C7D
 $ sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
-$ cat /tmp/DATADOG_APT_KEY_C0962C7D | sudo gpg --import --batch --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg
 $ sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
+$ curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+$ curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo apt-key add -
 ```
 
 {{% /tab %}}
@@ -100,8 +99,7 @@ $ sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
 Run the following commands on the host:
 
 ```
-$ curl -o /tmp/DATADOG_RPM_KEY_B01082D3 https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
-$ sudo rpm --import /tmp/DATADOG_RPM_KEY_B01082D3
+$ curl https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public | sudo rpm --import -
 ```
 
 {{% /tab %}}
@@ -114,7 +112,9 @@ $ sudo rpm --import /tmp/DATADOG_RPM_KEY_B01082D3
 
 A host correctly trusts the new key if either one of these conditions is true:
 
-- The file `/usr/share/keyrings/datadog-archive-keyring.gpg` exists and the Datadog source list file (usually `/etc/apt/sources.list.d/datadog.list`) contains the option `[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg]`.
+- The file `/usr/share/keyrings/datadog-archive-keyring.gpg` exists and the Datadog source list file contains the option `[signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg]`.
+  - For Agent installations, the source list file is usually `/etc/apt/sources.list.d/datadog.list`
+  - For Observability Pipelines Worker installations, the source list file is usually `/etc/apt/sources.list.d/datadog-observability-pipelines-worker.list`
 - The Datadog source list file doesn't contain the `signed-by` option, but `datadog-signing-keys` version 1.3.1 or later is installed, which results in the presence of a `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` file.
 
 Files `/usr/share/keyrings/datadog-archive-keyring.gpg` and, optionally, `/etc/apt/trusted.gpg.d/datadog-archive-keyring.gpg` are created either by a supported [installation method](#install-methods-that-automatically-trust-the-new-gpg-key) or by installing the [`datadog-signing-keys` package](#the-datadog-signing-keys-package). Ensure that `datadog-signing-keys` version 1.3.1 or later is installed unless using one of the [installation method versions listed above](#install-methods-that-automatically-trust-the-new-gpg-key).
@@ -136,7 +136,7 @@ gpg-pubkey-b01082d3-644161ac
 
 Otherwise, the command returns a non-0 exit code with no output.
 
-Alternatively, check if your `datadog.repo` file contains `https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public` as one of the `gpgkey` entries. This key file is updated with the new key as soon as it is in use.
+Alternatively, check if your repo file contains `https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public` as one of the `gpgkey` entries. Repo file is usually `datadog.repo` for Agent installations or `datadog-observability-pipelines-worker.repo` for Observability Pipelines Worker. The `CURRENT` key file is updated with the new key as soon as it is in use.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -148,7 +148,7 @@ Alternatively, check if your `datadog.repo` file contains `https://keys.datadogh
 Since Agent v6.31.0 and v7.31.0, all Datadog DEB packages have a soft dependency on the `datadog-signing-keys` package. The following versions of Agent packages have a soft dependency on the `datadog-signing-keys` package version `1.3.1`:
 - datadog-agent, datadog-iot-agent, datadog-heroku-agent, datadog-dogstatsd, datadog-agent-dbg v6.48.1+ & v7.48.1+
 - datadog-fips-proxy v0.5.4+
-- observability-pipeline-worker v1.3.1+
+- observability-pipelines-worker v1.3.1+
 - datadog-apm-inject v0.10.7+
 - datadog-apm-library-python v1.18.0+
 - datadog-apm-library-java v1.19.1+
