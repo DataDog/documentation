@@ -28,7 +28,14 @@ To configure inline code snippets in issues, set up the [source code integration
 
 #### Attributes for error tracking
 
-There are specific attributes that have a dedicated UI display within Datadog. To enable these functionalities for Error Tracking use the following attribute names:
+To enable Error Tracking, logs must include both of the following:
+
+- either an `error.type` or `error.stack` field
+- a status level of `ERROR` or `CRITICAL`
+
+The remaining attributes listed below are optional, but their presence improves error grouping.
+
+Specific attributes have a dedicated UI display within Datadog. To enable these functionalities for Error Tracking, use the following attribute names:
 
 | Attribute            | Description                                                             |
 |----------------------|-------------------------------------------------------------------------|
