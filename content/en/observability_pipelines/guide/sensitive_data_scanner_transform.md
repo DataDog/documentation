@@ -35,7 +35,8 @@ Sensitive data, such as credit card numbers, bank routing numbers, and API keys,
 1. Enter a name for the rule.
 1. In the **Define action on match** section, select the action you want to take for the matched information. Redaction, partial redaction, and hashing are all irreversible actions.  
     - If you are redacting the information, specify the text to replace the matched data.  
-    - If you are partially redacting the information, specify the number of characters you want to redact and which part of the matched data to redact.
+    - If you are partially redacting the information, specify the number of characters you want to redact and which part of the matched data to redact.  
+    - **Note:** If you select hashing, the UTF-8 bytes of the match is hashed with the 64-bit fingerprint of farmhash.
 1. In the **Pattern** section:  
     - To create a custom scanning rule:  
         a. Select **Custom** in the **type** dropdown.  
