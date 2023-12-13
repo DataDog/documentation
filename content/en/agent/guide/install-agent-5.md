@@ -55,7 +55,7 @@ Links to all available versions of the Windows installer are available in [JSON 
 #### Command line
 
 1. Download the Agent:
-   - For fresh installations, Download the [Datadog Agent installer][4].
+   - For fresh installations, download the [Datadog Agent installer][4].
    - If you're upgrading from a Datadog Agent version <5.12.0, use the [EXE installation method][7].
 1. In a `cmd.exe` shell in the directory where you downloaded the installer, run the following command. Replace `MY_API_KEY` with your Datadog API key:
    {{< code-block lang="shell" >}}
@@ -702,7 +702,7 @@ ansible-galaxy collection install community.general
 
 ## Specific Agent checks
 
-To use a specific Agent check or integration on one of your nodes,you can use the `datadog_checks` variable. Here is an example for the process check:
+To use a specific Agent check or integration on one of your nodes, you can use the `datadog_checks` variable. Here is an example for the process check:
 ```yaml
 - hosts: servers
   tasks:
@@ -741,7 +741,7 @@ To get metrics and events on Datadog after Ansible runs, see the Ansible callbac
 <div class="alert alert-info">The <code>datadog_agent</code> module only supports Linux nodes.<br>Requires Puppet Agent version 2.7 or higher.</a></div>
 
 1. Install the `datadog_agent` module from the [Puppet Forge][1] on your Puppet server:
-   - For fresh installs run the `module install command`:
+   - For fresh installs, run the `module install command`:
      ```shell
      puppet module install datadog-datadog_agent
      ```
@@ -817,7 +817,7 @@ node "elastic-node1.mydomain.com" {
       cookbook 'datadog'
       ```
 
-   - If you're not using Berkshelf,install the cookbook in to your repository using Knife:
+   - If you're not using Berkshelf, install the cookbook in to your repository using Knife:
      ```shell
      knife cookbook site install datadog 
      ```
