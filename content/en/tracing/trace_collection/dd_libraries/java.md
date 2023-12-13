@@ -36,7 +36,6 @@ After you deploy or install and configure your Datadog Agent, the next step is t
 See the following pages for supported deployment scenarios and languages:
 
 - [Inject the instrumentation library locally][11] (at the Agent);
-- [Inject the instrumentation library from the Datadog UI][12] (beta); or
 - Add the tracing library directly in the application, as described in the [Install the tracer](#install-the-tracer) section. Read more about [compatibility information][1].
 
 ### Instrument your application
@@ -232,7 +231,6 @@ If needed, configure the tracing library to send application performance telemet
 [9]: /tracing/trace_collection/library_config/java/
 [10]: /tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
 [11]: /tracing/trace_collection/library_injection_local/
-[12]: /tracing/trace_collection/library_injection_remote/
 [16]: /agent/remote_config/
 [17]: https://app.datadoghq.com/services
 [18]: /tracing/trace_collection#install-and-configure-the-agent

@@ -809,7 +809,7 @@ components:
           type: string
         cspm_enabled:
           description: "When enabled, Datadog\u2019s Cloud Security Management product
-            will scan resource configurations monitored by this app registration.\nNote:
+            scans resource configurations monitored by this app registration.\nNote:
             This requires resource_collection_enabled to be set to true."
           example: true
           type: boolean
@@ -9447,7 +9447,7 @@ components:
           example: some description
           type: string
         name:
-          description: The name of the new child-organization, limited to 32 characters.
+          description: The name of the child organization, limited to 32 characters.
           example: New child org
           maxLength: 32
           type: string
