@@ -3,7 +3,7 @@ title: Datadog Exporter Hostname and Tagging Configuration
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
-  text: "OpenTelemetry Collector Datadog Exporter"
+  text: "Getting Started with Collector"
 ---
 
 {{< img src="opentelemetry/collector_exporter/hostname_tagging.png" alt="Hostname information collected from OpenTelemetry" style="width:100%;" >}}
@@ -372,7 +372,7 @@ Resource attributes:
      -> cloud.provider: Str(aws)
      -> cloud.platform: Str(aws_ec2)
      -> cloud.region: Str(us-east-1)
-     -> cloud.account.id: Str(601427279990)
+     -> cloud.account.id: Str(XXXXXXXXXX)
      -> cloud.availability_zone: Str(us-east-1c)
      -> host.id: Str(i-09e82186d7d8d7c95)
      -> host.image.id: Str(ami-06f28e19c3ba73ef7)
@@ -388,7 +388,7 @@ Resource attributes:
      -> k8s.pod.start_time: Str(2023-11-13T15:03:46Z)
      -> k8s.pod.uid: Str(5f35cd94-1b9c-47ff-bf45-50ac4a998a6b)
      -> k8s.container.name: Str(cartservice)
-     -> container.image.name: Str(601427279990.dkr.ecr.us-east-1.amazonaws.com/otel-demo)
+     -> container.image.name: Str(XXXXXXXXX.dkr.ecr.us-east-1.amazonaws.com/otel-demo)
      -> container.image.tag: Str(v4615c8d7-cartservice)
 ScopeSpans #0
 ScopeSpans SchemaURL: 

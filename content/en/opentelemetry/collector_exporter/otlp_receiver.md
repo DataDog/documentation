@@ -3,7 +3,7 @@ title: Datadog Exporter OTLP Receiver
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
-  text: "OpenTelemetry Collector Datadog Exporter"
+  text: "Getting Started with Collector"
 ---
 
 ## Overview
@@ -52,7 +52,7 @@ Resource attributes:
      -> cloud.provider: Str(aws)
      -> cloud.platform: Str(aws_ec2)
      -> cloud.region: Str(us-east-1)
-     -> cloud.account.id: Str(601427279990)
+     -> cloud.account.id: Str(XXXXXXXXX)
      -> cloud.availability_zone: Str(us-east-1c)
      -> host.id: Str(i-0e0b580bbe11883dc)
      -> host.image.id: Str(ami-06f28e19c3ba73ef7)
@@ -105,7 +105,7 @@ Resource attributes:
      -> cloud.provider: Str(aws)
      -> cloud.platform: Str(aws_ec2)
      -> cloud.region: Str(us-east-1)
-     -> cloud.account.id: Str(601427279990)
+     -> cloud.account.id: Str(XXXXXXXXX)
      -> cloud.availability_zone: Str(us-east-1c)
      -> host.id: Str(i-0fb30793f89bd81ab)
      -> host.image.id: Str(ami-0cbbb5a8c6f670bb6)
@@ -152,7 +152,7 @@ Resource attributes:
      -> cloud.provider: Str(aws)
      -> cloud.platform: Str(aws_ec2)
      -> cloud.region: Str(us-east-1)
-     -> cloud.account.id: Str(601427279990)
+     -> cloud.account.id: Str(XXXXXXXXX)
      -> cloud.availability_zone: Str(us-east-1c)
      -> host.id: Str(i-0368add8e328c28f7)
      -> host.image.id: Str(ami-08a2e6a8e82737230)

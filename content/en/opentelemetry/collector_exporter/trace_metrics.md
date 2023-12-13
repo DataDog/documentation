@@ -3,7 +3,7 @@ title: Datadog Exporter Trace Metrics
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
-  text: "OpenTelemetry Collector Datadog Exporter"
+  text: "Getting Started with Collector"
 ---
 
 ## Overview
