@@ -23,7 +23,7 @@ cascade:
 {{< whatsnext desc="Select your CD provider to set up Deployment Visibility in Datadog:" >}}
     {{< nextlink href="continuous_delivery/deployments/argocd" >}}ArgoCD{{< /nextlink >}}
 {{< /whatsnext >}}
-If your CD provider is not supported, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeHpvshBu20v6qqMrAjMpUJrwYpRlaGai1mkAPsPU78hWZOKA/viewform?usp=sf_link">fill out this form</a>.
+<div class="alert alert-warning">If your CD provider is not supported, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeHpvshBu20v6qqMrAjMpUJrwYpRlaGai1mkAPsPU78hWZOKA/viewform?usp=sf_link">you can fill out this form to request support</a>.</div>
 
 ## Use deployment data
 

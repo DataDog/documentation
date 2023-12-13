@@ -2616,7 +2616,7 @@ main:
     identifier: cd_deployments
     parent: cd
     weight: 1
-  - name: ArgoCD
+  - name: Argo CD
     url: continuous_delivery/deployments/argocd
     identifier: cd_deployments_argocd
     parent: cd_deployments

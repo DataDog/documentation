@@ -3,7 +3,6 @@ title: Monitor Argo CD Deployments
 kind: documentation
 description: Learn how to monitor deployments from Argo CD in Datadog CD Visibility.
 is_beta: true
-private: true
 further_reading:
 - link: "/continuous_delivery/deployments"
   tag: "Documentation"
