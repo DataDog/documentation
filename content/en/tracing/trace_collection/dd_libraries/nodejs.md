@@ -42,7 +42,6 @@ After you deploy or install and configure your Datadog Agent, the next step is t
 See the following pages for supported deployment scenarios and languages:
 
 - [Inject the instrumentation library locally][11] (at the Agent);
-- [Inject the instrumentation library from the Datadog UI][12] (beta); or
 - Add the tracing library directly in the application, as described in the [Install the tracer](#install-the-tracer) section. Read more about [compatibility information][1].
 
 
@@ -167,5 +166,4 @@ Read [tracer settings][3] for a list of initialization options.
 [4]: /tracing/trace_collection/library_config/nodejs/
 [5]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
 [11]: /tracing/trace_collection/library_injection_local/
-[12]: /tracing/trace_collection/library_injection_remote/
 [13]: /tracing/trace_collection#install-and-configure-the-agent

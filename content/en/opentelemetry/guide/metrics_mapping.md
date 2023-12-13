@@ -16,7 +16,7 @@ Datadog products and visualizations are built on metrics and tags that adhere to
 
 The following diagram shows the process of mapping the metrics from OpenTelemetry into metrics that Datadog uses:
 
-{{< img src="opentelemetry/guide/metrics_mapping/mapping_process.png" alt="The decision process for mapping OpenTelemetry metric names to Datadog metric names. If an OTel metric is not used by any Datadog product, or if its semantics are the same as Datadog's, it is sent as-is to Datadog. Otherwise, a Datadog-style metric is created from the OTel metric and sent to Datadog." style="width:100%;" >}}
+{{< img src="opentelemetry/guide/metrics_mapping/otel-mapping-metrics.png" alt="The decision process for mapping OpenTelemetry metric names to Datadog metric names. If an OTel metric is not used by any Datadog product, or if its semantics are the same as Datadog's, it is sent as-is to Datadog. Otherwise, a Datadog-style metric is created from the OTel metric and sent to Datadog." style="width:100%;" >}}
 
 ## Use of the `otel` prefix
 

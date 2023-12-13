@@ -163,7 +163,7 @@ If you have admin access, you can update it from the [Repository Settings Page][
 
 ### Pipeline not found
 
-A "Pipeline not found" message is shown when you click on incomplete data coming from an in-progress pipeline. Data is received progressively for stages, jobs, or custom commands. Wait until the pipeline has finished and try again.
+A "Pipeline not found" message is shown when you click on incomplete data coming from an in-progress pipeline for those [CI providers that do not support `running` pipelines][15]. Data is received progressively for stages, jobs, or custom commands. Wait until the pipeline has finished and try again.
 
 ### Missing pipelines on the Pipelines page
 
@@ -172,6 +172,20 @@ The pipeline page only displays pipelines with no Git information, or pipelines 
 ### Missing stages or jobs in summary tables
 
 Missing stages or jobs in the _Pipeline Details_ page might be due to a wrong configuration. Make sure that the pipeline name stored in the stage or job executions matches the **same** name of their parent pipeline. If you are using custom pipelines, refer to the [public API endpoint specification][15].
+
+### Limitations on running pipelines
+
+#### Delivery of webhook events is not guaranteed by CI providers
+
+Running pipelines support relies on data sent from CI providers indicating execution status. If this data is not available, executions marked as `Running` in Datadog may have already finished. 
+
+#### Maximum duration for a pipeline execution
+
+A pipeline execution can maintain `Running` status for a maximum of three days. If it is still running after that time, the pipeline execution does not appear in CI Visibility. If a pipeline execution finishes after three days, the finished pipeline execution appears in CI Visibility with its correspondent final status (`Success`, `Error`, `Canceled`, `Skipped`) and with the correct duration.
+
+#### Pipeline trace view only shows pipeline level
+
+While a pipeline is running, the flame graph representation of the pipeline only shows the pipeline-level span.
 
 ## Intelligent Test Runner
 
@@ -218,3 +232,4 @@ If you are authoring a commit that includes any of those cases, you can force-di
 [12]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui
 [13]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
 [14]: /continuous_integration/tests/#supported-features
+[15]: /continuous_integration/pipelines/#supported-features

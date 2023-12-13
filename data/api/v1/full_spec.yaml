@@ -9447,7 +9447,7 @@ components:
           example: some description
           type: string
         name:
-          description: The name of the new child-organization, limited to 32 characters.
+          description: The name of the child organization, limited to 32 characters.
           example: New child org
           maxLength: 32
           type: string

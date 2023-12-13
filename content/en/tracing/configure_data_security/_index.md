@@ -213,7 +213,7 @@ Client URIs are obfuscated by the Datadog Agent.
 
 {{% /tabs %}}
 
-If you use Datadog Application Security Management (ASM), the tracing libraries collect HTTP request data to help you understand the nature of a suspicious request. Datadog ASM automatically redacts certain data, and you can configure your own detection rules. Learn more about these defaults and configuration options in the Datadog ASM [data privacy][13] documentation.
+If you use Datadog Application Security Management (ASM), the tracing libraries collect HTTP request data to help you understand the nature of a security trace. Datadog ASM automatically redacts certain data, and you can configure your own detection rules. Learn more about these defaults and configuration options in the Datadog ASM [data privacy][13] documentation.
 
 ## Agent
 
