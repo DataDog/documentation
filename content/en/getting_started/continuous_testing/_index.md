@@ -65,7 +65,7 @@ Browser tests simulate a user's journey through your web application beginning a
 
 ## Run your Continuous Testing tests
 
-To improve your developer workflow, you can either choose to run your Continuous Testing test using the CLI or your IDE.
+To improve your developer workflow, you can use **datadog-ci** in your CLI as a CI environment to configure your test and then run your test directly in your IDE.
 
 ### Running tests in the CLI
 
@@ -75,18 +75,18 @@ You can also use **datadog-ci** to only execute tests tagged with specific Team 
 
 1. Navigate to your command line
 2. Run:
-```
-yarn datadog-ci synthetics run-tests -search 'tag:team-checkout' --config global.config.json
-```
+   ```
+   yarn datadog-ci synthetics run-tests -search 'tag:team-checkout' --config global.config.json
+   ```
 For more information about running the Synthetics command and using reporters, see [Configuration Documentation](https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm#reporters)
 
 ### Running tests in your IDE
 
 Separately, you can use the [Datadog Synthetics VS Code Integration](https://docs.datadoghq.com/developers/ide_integrations/vscode/) to help you:
 
-* Run HTTP API tests and browser tests within your local environments
-* See test results locally in VS Code
-* Test only what matters by executive relevant tests at the same time
+* Use a [Private Location](https://docs.datadoghq.com/getting_started/synthetics/private_location/) or [Tunnel](https://docs.datadoghq.com/continuous_testing/testing_tunnel/) to accelerate development locally
+* Run HTTP API tests and browser tests and see their results within VS Code
+* Test only what matters by executing relevant tests at the same time
 
 {{< img src="developers/ide_integrations/vscode/vscode-extension-demo.png" alt="vscode-extension-demo" style="width:100%;" >}}
 
