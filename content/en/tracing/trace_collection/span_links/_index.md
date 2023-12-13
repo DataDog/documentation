@@ -41,14 +41,6 @@ For example:
 
 - **Event Sourcing**: Span links in event sourcing track how multiple change messages contribute to the current state of an entity.
 
-Span links are also applicable in fan-out scenarios, where a single operation initiates multiple parallel operations. The single span links to multiple diverging operations.
-
-For example:
-
-- **Batch System Sending Data to Processing Pipeline**: In large batch processing systems, span links divide the trace into more manageable segments, connecting each segment of the processing pipeline back to the initial batch intake.
-
-- **Multiple Receivers and Event Logging**: In transaction systems with primary and secondary processing paths, such as analytics or summarization, span links separate secondary pathways and reconnect them to the main transaction pathway.
-
 ## Creating span links
 
 If your application is instrumented with:
