@@ -33,7 +33,7 @@ Traditional Web Application Firewalls (WAFs) are usually deployed at the perimet
 
 ### Identify services exposed to application attacks
 
-Datadog ASM [Threat Monitoring and Protection][1] uses the information APM is already collecting, and flags traces containing attack attempts. Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Service Catalog][2], [Service Page][3], [Traces][4]).
+Datadog ASM [Threat Management][1] uses the information APM is already collecting, and flags traces containing attack attempts. Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Service Catalog][2], [Service Page][3], [Traces][4]).
 
 Because APM collects a sample of your application traffic, enabling ASM in the tracing library is necessary to effectively monitor and protect your services.
 
@@ -103,8 +103,8 @@ Security Signals are automatically created when Datadog detects meaningful attac
 
 ## Attack attempt qualification
 
-Leveraging distributed tracing information, attacks attempts are qualified as safe, unknown, or harmful. 
-* Attack attempts qualified as safe cannot breach your application, for example, when a PHP injection attack targets a service written in Java. 
+Leveraging distributed tracing information, attacks attempts are qualified as safe, unknown, or harmful.
+* Attack attempts qualified as safe cannot breach your application, for example, when a PHP injection attack targets a service written in Java.
 * An unknown qualification is decided when there is not enough information to make a definitive judgement about the attack's probability of success.
 * A harmful qualification is highlighted when there is evidence that a code level vulnerability has been found by the attacker.
 

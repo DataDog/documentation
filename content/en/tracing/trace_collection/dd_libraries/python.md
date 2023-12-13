@@ -20,7 +20,7 @@ further_reading:
       text: 'API Docs'
     - link: 'tracing/glossary/'
       tag: 'Documentation'
-      text: 'Explore your services, resources and traces'
+      text: 'Explore your services, resources, and traces'
     - link: 'tracing/'
       tag: 'Advanced Usage'
       text: 'Advanced Usage'
@@ -41,8 +41,7 @@ After you deploy or install and configure your Datadog Agent, the next step is t
 See the following pages for supported deployment scenarios and languages:
 
 - [Inject the instrumentation library locally][11] (at the Agent);
-- [Inject the instrumentation library from the Datadog UI][12] (beta); or
-- Add the tracing library directly in the application, as described in the [Install the tracer](#install-the-tracer) section. Read more about [compatibility information][1].
+- Add the tracing library directly in the application, as described in the [Instrument your application](#instrument-your-application) section. Read more about [compatibility information][1].
 
 ### Instrument your application
 
@@ -122,5 +121,4 @@ If you are upgrading to ddtrace v1, review the [upgrade guide][4] and the [relea
 [4]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
 [5]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
 [11]: /tracing/trace_collection/library_injection_local/
-[12]: /tracing/trace_collection/library_injection_remote/
 [13]: /tracing/trace_collection#install-and-configure-the-agent
