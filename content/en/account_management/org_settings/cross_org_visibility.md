@@ -94,13 +94,13 @@ Deletes a connection. Perform this operation either from the source organization
 
 ## Create a widget with cross-organization data
 
-Cross-organization [dashboard and notebook widgets][2] are available for Datadog organizations that exist as a _destination_ organization for at least one [connection](#configure-connections).
+Cross-organization [Dashboard and Notebook widgets][2] are available for Datadog organizations that exist as a _destination_ organization for at least one [connection](#configure-connections).
 
 Each query in a widget can display data from a single organization. You can combine queries into a cross-organization formula query.
 
 ### In the UI
 
-Dashboard widgets allow you to create cross-organization queries when the following conditions are met:
+Dashboard and Notebook widgets allow you to create cross-organization queries when the following conditions are met:
 
 - You have cross-organization visibility enabled in your organization
 - At least one connection exists where the current organization is the destination
