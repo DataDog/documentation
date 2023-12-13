@@ -38,9 +38,7 @@ When creating SLOs, you can choose from the following types:
 | [**Uptime Calculations**][7]                                          |  N/A                                                                                  | Uptime is calculated by looking at discrete time chunks, not rolling time windows<br><br>If groups are present, overall uptime requires *all* groups to have uptime | Uptime calculations are based on the underlying Monitor <br><br>If groups are present, overall uptime requires *all* groups to have uptime|
 | **Calendar View on SLO Manage Page**                                   | Available                                                                                                                                 | Not available                                                                                                                                                       | Available                                                                            |
 
-
-
-## Further reading
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
