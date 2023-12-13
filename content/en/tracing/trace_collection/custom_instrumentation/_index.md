@@ -29,7 +29,7 @@ Follow the relevant documentation for your custom instrumentation approach to le
 
 Use Datadog tracing libraries to add custom instrumentation that allows you to programmatically create, modify, or delete traces to send to Datadog. This is useful for tracing in-house code not captured by automatic instrumentation, removing unwanted spans from traces, and for providing deeper visibility and context into spans, including adding span tags.
 
-{{< partial name="apm/apm-manual-instrumentation.html" >}}
+{{< partial name="apm/apm-manual-instrumentation-custom.html" >}}
 
 <br>
 
@@ -39,7 +39,7 @@ Use Datadog tracing libraries to add custom instrumentation that allows you to p
 
 Datadog tracing libraries provide an implementation of the OpenTelemetry API for instrumenting your code. This means you can maintain vendor-neutral instrumentation of all your services, while still taking advantage of Datadog's native implementation, features, and products. You can configure it to generate Datadog-style spans and traces to be processed by the Datadog tracing library for your language, and send those to Datadog.
 
-{{< partial name="apm/apm-otel-instrumentation.html" >}}
+{{< partial name="apm/apm-otel-instrumentation-custom.html" >}}
 
 <br>
 
@@ -49,7 +49,7 @@ Datadog tracing libraries provide an implementation of the OpenTelemetry API for
 
 If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for you, each of the supported languages also has support for sending [OpenTracing][3] data to Datadog. OpenTracing is archived and the project is unsupported. 
 
-{{< partial name="apm/apm-opentracing.html" >}}
+{{< partial name="apm/apm-opentracing-custom.html" >}}
 
 <br>
 

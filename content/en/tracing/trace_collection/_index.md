@@ -1,5 +1,5 @@
 ---
-title: Getting Started With Datadog APM
+title: Getting Started with Datadog APM
 kind: documentation
 description: "Get Started with Datadog APM"
 aliases:
@@ -19,17 +19,43 @@ further_reading:
   text: "Compatibility requirements"
 ---
 
-To configure your application to send traces to Datadog:
+## Overview
 
-## Step 1 - Configure the Datadog Agent for APM
+To get started with Datadog APM, you need to install and configure the Datadog Agent, then instrument your application. If you use Single Step Instrumentation, you can enable APM when installing the Agent. Instrumenting your application allows observability data to be sent to the Agent, which then passes data to the Datadog backend to display in the UI.
 
-<div class="alert alert-info"><strong>Beta</strong>: You can enable APM when installing the Agent with  <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation</a>. Run a one-line install command to automatically enable APM and instrument all of your services on your Linux host, VM, or container.</div>
+{{< img src="tracing/visualization/troubleshooting_pipeline.png" alt="The APM pipeline">}}
+
+## Instrumentation types
+
+There are two main approaches to instrument your application: automatic or custom instrumentation:
+
+### Automatic instrumentation
+
+Create spans for your application with minimal manual steps. To automatically instrument your application, you can use either of these options:
+
+- [Single Step Instrumentation (Beta)][7]: Run a one-line install command to automatically enable APM and instrument all of your services on your Linux host, VM, or container.
+- [Datadog libraries][8]: Add Datadog tracing libraries to your application.
+
+To learn more, see [automatic instrumentation][5].
+
+### Custom instrumentation
+
+Capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation. To custom instrument your application, you can use either of these options:
+
+- [Datadog libraries][9]: Use Datadog tracing libraries to add and customize observability within Datadog.
+- [OpenTelemetry APIs][10]: Use OpenTelemetry instrumentation and call the Datadog tracing library.
+
+To learn more, see [custom instrumentation][6].
+
+## Configure the Datadog Agent for APM
 
 If you don't use Single Step APM Instrumentation, APM-specific configurations are required on both the Tracer and Agent to ensure that traces can be received from certain environment types, such as containerized or serverless. Ensure you have followed instructions for both components. 
 
 ### Install and configure the Agent
 
-Install and configure the Datadog Agent to receive traces from your instrumented application. By default, the Datadog Agent is configured to receive traces in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data at `http://localhost:8126`. For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
+Install and configure the Datadog Agent to receive traces from your instrumented application. By default, the Datadog Agent is configured to receive traces in your `datadog.yaml` file under `apm_config` with `enabled: true` and listens for trace data at `http://localhost:8126`.
+
+For containerized environments, follow the links below to enable trace collection within the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Containers" %}}
@@ -82,32 +108,6 @@ For other environments, see the [Integrations][5] documentation for that environ
 {{% /tab %}}
 {{< /tabs >}}
 
-## Step 2 - Instrument your application 
-
-When you add the Datadog tracing library to your code, it instruments the service and sends traces to the Datadog Agent. The Agent then sends the traces to the Datadog backend to be displayed in the UI.
-
-{{< img src="tracing/visualization/troubleshooting_pipeline.png" alt="The APM pipeline">}}
-
-Depending on the programming language and infrastructure you use, you have the following options to instrument your application:
-
-- [Auto-instrument your application](#option-1---auto-instrument-your-application)
-- [Manually instrument your application](#option-2---manually-instrument-your-application)
-
-### Option 1 - Auto-instrument your application
-
-For Kubernetes, hosts, and containers, you can auto-instrument your application by injecting the tracing library into your application. For more information and instructions, read [Injecting Libraries Locally][2].
-
-- For Kubernetes, you can inject the library into applications written in Java, Python, Ruby (Beta), Node.js, and .NET.
-- **Beta**: For Linux hosts and containers, you can inject the library into applications written in Java, Python, Node.js, and .NET.
-
-### Option 2 - Manually instrument your application
-
-For setup instructions, select your language:
-
-{{< partial name="apm/apm-languages.html" >}}
-
-To instrument an application written in a language that does not have official library support, see the list of [community tracing libraries][1].
-
 ## APM setup tutorials
 
 The following tutorials guide you through setting up distributed tracing for a sample application on various infrastructure scenarios, with both automatic and custom instrumentation, using the direct method ([Option 2](#option-2---manually-instrument-your-application)):
@@ -137,3 +137,9 @@ The following tutorials guide you through setting up distributed tracing for a s
 [1]: /developers/community/libraries/#apm-tracing-client-libraries
 [2]: /tracing/trace_collection/library_injection_local/
 [4]: /tracing/trace_collection/dd_libraries/
+[5]: /tracing/trace_collection/automatic_instrumentation/
+[6]: /tracing/trace_collection/custom_instrumentation/
+[7]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
+[8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
+[9]: /tracing/trace_collection/custom_instrumentation/dd_libraries/
+[10]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/

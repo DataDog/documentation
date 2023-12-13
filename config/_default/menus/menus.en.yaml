@@ -1725,7 +1725,7 @@ main:
     parent: tracing_library_config
     identifier: tracing_library_config_dotnet_framework
     weight: 109
-  - name: Propagating Trace Context
+  - name: Trace Context Propagation
     url: tracing/trace_collection/trace_context_propagation/
     parent: tracing_trace_collection
     identifier: tracing_context
@@ -1770,12 +1770,12 @@ main:
     parent: tracing_context
     identifier: tracing_context_dotnet
     weight: 107
-  - name: Tracing Serverless Applications
+  - name: Serverless Application Tracing
     url: serverless/distributed_tracing/
     parent: tracing_trace_collection
     identifier: tracing_serverless
     weight: 109
-  - name: Tracing Proxies
+  - name: Proxy Tracing
     url: tracing/trace_collection/proxy_setup/
     parent: tracing_trace_collection
     identifier: tracing_proxies
@@ -1915,17 +1915,17 @@ main:
     parent: tracing_connect_logs
     identifier: tracing_connect_logs_otel
     weight: 108
-  - name: Connect RUM and Traces
+  - name: Correlate RUM and Traces
     url: /real_user_monitoring/connect_rum_and_traces/
     parent: tracing_other_telemetry
     identifier: tracing_connect_rum
     weight: 402
-  - name: Connect Synthetics and Traces
+  - name: Correlate Synthetics and Traces
     url: /synthetics/apm/
     parent: tracing_other_telemetry
     identifier: tracing_connect_sythetics
     weight: 403
-  - name: Connect Profiles and Traces
+  - name: Correlate Profiles and Traces
     url: /profiler/connect_traces_and_profiles/
     parent: tracing_other_telemetry
     identifier: tracing_connect_profiles
