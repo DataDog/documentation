@@ -335,7 +335,7 @@ The following template variables are handled by the Agent:
   - `%%host_<NETWORK NAME>%%`: specify the network name to use when attached to multiple networks, for example `%%host_bridge%%`, `%%host_swarm%%`, etc; behaves like `%%host%%` if network name specified was not found.
 
 - Container port: `port`
-  - `%%port%%`: use the highest exposed port **sorted numerically and in ascending order** (eg. 8443 for a container that exposes ports 80, 443, and 8443)
+  - `%%port%%`: use the highest exposed port **sorted numerically and in ascending order** (For example, 8443 for a container that exposes ports 80, 443, and 8443)
   - `%%port_0%%`: use the first port **sorted numerically and in ascending order** (for the same container, `%%port_0%%` refers to port 80, `%%port_1%%` refers to 443
   - If your target port is constant, Datadog recommends you directly specify it, without using the `port` variable.
 
