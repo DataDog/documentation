@@ -52,6 +52,9 @@ const doOnLoad = () => {
             if (!table.classList.contains('table-responsive')) {
                 table.classList.add('table-responsive');
             }
+            if (!table.closest('.table-scroll')) {
+                table.outerHTML = `<div class="table-scroll">${table.outerHTML}</div>`;
+            }
         });
     }
 
