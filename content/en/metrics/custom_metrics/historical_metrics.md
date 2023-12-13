@@ -434,7 +434,7 @@ Ingesting Historical Metrics will include some ingestion latencies, which depend
 
 *Above mentioned ingestion latencies are not final and are subject to improvements with compliance to Datadog's committment to continuous growth.*
 
-## Historical Metrics Ingestion: Billing
+## Ingestion billing
 
 Historical Metrics will be billed under the Custom Metrics billing SKU. 
 
