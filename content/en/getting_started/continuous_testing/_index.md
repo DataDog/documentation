@@ -24,7 +24,7 @@ algolia:
 
 ## Overview
 
-Continuous Testing lets you automatically run and monitor the same [Synthetic tests][1] you’ve configured in your staging, QA, and pre-production environments to proactively alert your team and block your pipeline deployments should code changes cause testing failures. 
+Continuous Testing lets you automatically run and monitor the same [Synthetic tests][1] you've configured in your staging, QA, and pre-production environments to proactively alert your team and block your pipeline deployments should code changes cause testing failures. 
 
 Your codeless tests can:
 * [Launch API requests on your systems][2]
@@ -43,7 +43,7 @@ If you haven't already, create a [Datadog account][8].
 
 ## Create a Continuous Testing test
 
-To set up a Continuous Testing test, first create a Synthetics test in Datadog. In this example, you'll create a [Browser test][3] on the site https://www.shopist.io, a test e-commerce web application.
+To set up a Continuous Testing test, first create a Synthetics test in Datadog. In this example, create a [Browser test][3] on the site https://www.shopist.io, a test e-commerce web application.
 
 Browser tests simulate a user's journey through your web application beginning at your **Starting URL**. Ensuring your **Starting URL** is a resource in your staging environment will make it easier to test changes before moving them into production.
 
@@ -55,7 +55,7 @@ Browser tests simulate a user's journey through your web application beginning a
 
     - Add the URL of the website you want to monitor into the Starting URL field. For this example, enter https://www.shopist.io 
     - Select Advanced Options to set custom request options, certificates, authentication credentials, and more. In this example, no specific advanced option is needed.
-    - Name your test and set a Team Tag such as **team-checkout**. Tags allow you to keep your test suite organized and quickly find tests you’re interested in through the Synthetic Monitoring & Continuous Testing Explorer.
+    - Name your test and set a Team Tag such as **team-checkout**. Tags allow you to keep your test suite organized and find tests you're interested in through the Synthetic Monitoring & Continuous Testing Explorer.
     - Choose the browsers and devices to test.
 
 4. Continue [filling out your test details and your recording like you normally would][9].
@@ -134,11 +134,11 @@ Find it by hovering over **UX Monitoring** on the Datadog site, selecting **Sett
 
 {{< img src="continuous_testing/parallelization_estimate.png" alt="parallelization_estimate" style="width:100%;" >}}
 
-For instance, if you have 24 tests per CI batch, each taking 2 minutes to complete, and your target is for all tests to be completed within 4 minutes, you’d need to run 12 tests in parallel.
+For instance, if you have 24 tests per CI batch, each taking 2 minutes to complete, and your target is for all tests to be completed within 4 minutes, you'd need to run 12 tests in parallel.
 
 $$\text"estimated parallelization" = {\text"24 tests per CI batch"* \text"2 minute duration"} / \text"4 minute expected duration in your CI pipeline"$$
 
-Once you’re done estimating your parallelization, input the number of test runs you want to execute at the same time in the Parallelization modal. Then click **Save Selection**.
+Once you're done estimating your parallelization, input the number of test runs you want to execute at the same time in the Parallelization modal. Then click **Save Selection**.
 
 See the [Parallelization documentation][18] for details.
 
