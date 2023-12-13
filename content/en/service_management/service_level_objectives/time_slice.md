@@ -37,7 +37,7 @@ You can create a Time Slice SLO through the following ways:
 
 ### Export an existing monitor SLO
 
-<div class="alert alert-info">Only metric monitor SLOs can be exported. Non-metric monitors or multi-monitor SLOs cannot be exported.</div>
+<div class="alert alert-info">Only single metric monitor SLOs can be exported. Non-metric monitors or multi-monitor SLOs cannot be exported.</div>
 
 Create a Time Slice SLO by exporting an existing Monitor-based SLO. From a monitor SLO, click **Export to Time Slice SLO**.
 
