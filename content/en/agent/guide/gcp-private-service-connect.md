@@ -16,7 +16,7 @@ further_reading:
 
 {{% site-region region="us5" %}}
 
-[Private Service Connect][1] (PSC) allows you to connect directly to Datadog without using the public internet.
+[Private Service Connect][1] (PSC) allows you to send telemetry to Datadog without using the public internet.
 
 Datadog exposes some of its data intake services in Google Cloud Platform as PSC [_published services_][2], as seen in the [table of published services](#published-services). 
 
@@ -61,7 +61,7 @@ You can configure a GCP PSC endpoint to expose a private IP address for each Dat
 
 ### Additional required steps for metrics and traces
 
-To set up DNS for the metrics or traces endpoint (`metrics.agent5.us5.datadoghq.com` or `trace.agent.us5.datadoghq.com`), additional steps are required.
+To set up DNS for the metrics or traces endpoint (`metrics.agent5.us5.datadoghq.com` or `trace.agent.us5.datadoghq.com`), you must create additional `A` records.
 This is because Datadog Agents submit telemetry using a versioned endpoint of the form `<VERSION>-app.agent.us5.com`. 
 
 #### Metrics endpoint
