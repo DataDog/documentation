@@ -14,7 +14,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true">}}
-  The Datadog extension for Visual Studio is in public beta for developers who use Datadog products such as [Error Tracking][5] and the [Continuous Profiler][8] with their .NET services.
+  The Datadog extension for Visual Studio is in public beta for developers that use Datadog products such as <a href="https://docs.datadoghq.com/tracing/error_tracking/">Error Tracking</a> and the <a href="https://docs.datadoghq.com/profiler/">Continuous Profiler</a> with their .NET services.
 {{< /callout >}}
 
 ## Overview
@@ -36,6 +36,9 @@ The **Continuous Profiler** helps you to reduce latency and lower cloud costs by
 The **View in Visual Studio** feature provides a link from Datadog directly to your source files. 
 
 ## Getting Started
+
+### Requirements
+See the [Requirements](#requirements) section.
 
 ### Download and install the extension
 
@@ -99,13 +102,15 @@ The default **Caller Hierarchy** view shows the callers (or predecessors) of the
 
 ## View in Visual Studio
 
-The **View in Visual Studio** feature provides a link from Datadog directly to your source files. Look for the button next to frames in stack traces displayed in the UI (for example, in [Error Tracking][5]):
+The **View in Visual Studio** feature provides a link from Datadog directly to your source files. Look for the button next to frames in stack traces displayed in the UI - for example, in [Error Tracking][5]:
 
 {{< img src="/developers/ide_integrations/visual_studio/view-in-visual-studio.png" alt="A stack trace on the Datadog platform showing the View in Visual Studio button." style="width:100%;" >}}
 
 <div class="alert alert-info">To use this feature, first configure <a href="/integrations/guide/source-code-integration/">source code integration</a> for your service.</div>
 
 ## Requirements
+
+The Datadog extension for Visual Studio requires:
 
 - Windows 10 or higher
 - .NET Framework 4.7.2 or higher
