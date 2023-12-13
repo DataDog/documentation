@@ -130,34 +130,9 @@ To investigate an issue:
     b. Click **Host** to see the top 10 impacted hosts. Click on a host to see more information about the host in the Infrastructure page.  
     c. Click **Environment** to see the top 10 impacted environments.  
 
-#### Create a case
+If you want to use [Case Management][9] to track, triage, and investigate the issue, click **Create Case** at the top of the panel. These cases are summarized in the Summary page.
 
-Use [Case Management][9] to track, triage, and investigate an issue.
-
-1. Click **Create Case** at the top of the panel.
-1. Enter a title for the case.
-1. Optionally, add a description.
-1. Click **Create Case**.
-
-#### Declare an incident
-
-Use [Incident Management][10] to add the issue to an existing incident or declare a new incident.
-
-To add the issue to an existing incident:
-
-1. Click the **Declare Incident** dropdown arrow.
-1. In **Add to an existing incident**, enter the name of the incident or click on the dropdown menu to search for the incident.
-1. Click **Confirm**.
-
-To declare a new incident:
-
-1. Click **Declare Incident**.
-1. Edit the incident title if needed.
-1. Select the severity level.
-1. Select the **Incident Commander** in the dropdown menu.
-1. Optionally, add attributes, notification information, and additional notes and links.
-1. Optionally, enable **Make Private** if there is sensitive data that you do not want visible to everyone in your organization. This limits access to only its responders and creates a private slack channel. This action is permanent.
-1. Click **Declare Incident**.
+If you want to use [Incident Management][10] to create an incident, you can add the issue to an existing incident or declare a new incident. Click the **Declare Incident** dropdown menu to add the issue to an existing incident. Click **Declare Incident** to declare a new incident.
 
 ### Out-of-the-box dashboard
 
