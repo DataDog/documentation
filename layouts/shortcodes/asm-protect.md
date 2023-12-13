@@ -5,10 +5,10 @@ ASM Protect goes beyond Threat Detection and enables you to take blocking action
 
 ASM leverages the same [tracing libraries][107] as Application Performance Monitoring (APM) to protect your applications against:
 
-- **Attacks**: ASM’s In-App WAF inspects all incoming traffic and uses pattern-matching to detect and block malicious traffic (suspicious requests).
+- **Attacks**: ASM's In-App WAF inspects all incoming traffic and uses pattern-matching to detect and block malicious traffic (security traces).
 - **Attackers**: IP addresses and authenticated users that are launching attacks against your applications are detected from the insights collected by the libraries and flagged in Security Signals.
 
-Suspicious requests are blocked in real time by the Datadog tracing libraries. Blocks are saved in Datadog, automatically and securely fetched by the Datadog Agent, deployed in your infrastructure, and applied to your services. For details, read [How Remote Configuration Works][108]. 
+Security traces are blocked in real time by the Datadog tracing libraries. Blocks are saved in Datadog, automatically and securely fetched by the Datadog Agent, deployed in your infrastructure, and applied to your services. For details, read [How Remote Configuration Works][108]. 
 
 To start leveraging Protection capabilities---In-App WAF, IP blocking, User blocking and more---read [Protection][109]. 
 

@@ -21,13 +21,13 @@ further_reading:
 
 With Application Security Management (ASM) enabled, the Datadog tracing library actively monitors all web services and API requests for suspicious security activity.
 
-An _In-App WAF rule_ specifies conditions on the incoming request to define what the library considers suspicious. The Datadog tracing library includes hundreds of out-of-the-box ASM In-App WAF rules, which are used to display suspicious requests in the trace explorer and in the default signal rules. 
+An _In-App WAF rule_ specifies conditions on the incoming request to define what the library considers suspicious. The Datadog tracing library includes hundreds of out-of-the-box ASM In-App WAF rules, which are used to display security traces in the trace explorer and in the default signal rules. 
 
 You can add to the In-App WAF rules without upgrading the tracing library. 
 
 ## Structure of an ASM In-App WAF rule
 
-An In-App WAF rule is a JSON object composed of a category, a name, tags, and conditions. When a suspicious request is detected, tags from the rules are propagated onto the suspicious request, and can be used to build [detection rules][1].
+An In-App WAF rule is a JSON object composed of a category, a name, tags, and conditions. When a security trace is detected, tags from the rules are propagated onto the security trace, and can be used to build [detection rules][1].
 
 ### Conditions
 Conditions define when the rule tags an incoming request. The conditions are composed of _inputs_ and _operators_.
@@ -111,7 +111,7 @@ Custom in-app WAF rules enable users to log specific types of requests to their 
 
 ## What to do next
 
-Next, [configure detection rules to create security signals][1] based on those suspicious requests defined by the In-App WAF rules you created. You can modify the provided out-of-the-box ASM detection rules or create new ones. 
+Next, [configure detection rules to create security signals][1] based on those security traces defined by the In-App WAF rules you created. You can modify the provided out-of-the-box ASM detection rules or create new ones. 
 
 ## Further Reading
 
