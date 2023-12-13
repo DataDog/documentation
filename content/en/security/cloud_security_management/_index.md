@@ -37,6 +37,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/building-security-coverage-for-cloud-environments/"
     tag: "Blog"
     text: "Build sufficient security coverage for your cloud environment"
+  - link: "https://www.datadoghq.com/blog/cloud-security-study-learnings/"
+    tag: "Blog"
+    text: "Key learnings from the State of Cloud Security study"
 algolia:
   tags: ['inbox']
 ---
@@ -54,23 +57,7 @@ CSM leverages the Datadog Agent and platform-wide cloud integrations and include
 - [**Identity Risks**][8]: Provides in-depth visibility into your organization's AWS IAM risks and enables you to detect and resolve identity risks on an ongoing basis.
 - [**Vulnerabilities**][9]: Leverages infrastructure observability to detect, prioritize, and manage vulnerabilities in your organization's containers and hosts.
 
-{{< img src="security/csm/csm_overview.png" alt="Cloud Security Management in Datadog" width="100%">}}
-
-## Prioritize and remediate important security issues
-
-The **Security Inbox** on the [CSM Overview][4] shows a list of prioritized security issues that require immediate attention. Security issues are a consolidation of other security detections and resource attributes such as being publicly accessible, attached to privileged roles, and residing in production environments.
-
-The order in which security issues are prioritized is based on the following criteria:
-
-- Higher severity issues are listed first
-- Whether an issue has a threat attached to it
-- Number of related risks (publicly accessible, production environment, misconfiguration, vulnerability)
-- Number of resources impacted
-- Discovered date (newer issues are listed first)
-
-Remediating security issues can meaningfully improve your organization's security. Use the **Security Inbox** to prioritize which security issues to resolve, either by fixing the underlying issues or by muting the issue.
-
-{{< img src="security/csm/security_inbox.png" alt="The Security Inbox on the CSM overview shows prioritized issues for remediation" width="100%">}}
+{{< img src="security/csm/csm_overview_2.png" alt="Cloud Security Management in Datadog" width="100%">}}
 
 ## Track your organization's health
 
@@ -82,9 +69,17 @@ Improve your organization's score by remediating misconfigurations, either by re
 
 ## Explore and remediate issues
 
-Use the [Issues page][7] to review and remediate your organization's security detections. View detailed information about a detection, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
+Use the [Explorers][7] to review and remediate your organization's security detections. View detailed information about a detection, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
-{{< img src="security/cws/threats_page.png" alt="CSM Threats page" width="100%">}}
+{{< img src="security/csm/explorers_page.png" alt="CSM Explorers page" width="100%">}}
+
+## Investigate resources
+
+<div class="alert alert-info">Resource Catalog is in beta.</div>
+
+Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. See [Resource Catalog][13] for more information.
+
+{{< img src="infrastructure/resource_catalog/resource_catalog_infra.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and misconfigurations." style="width:100%;" >}}
 
 ## Subscribe to weekly digest reports
 
@@ -104,8 +99,10 @@ To get started with CSM, navigate to the [**Security** > **Setup**][3] section i
 [4]: https://app.datadoghq.com/security/csm
 [5]: /glossary/#posture-score
 [6]: /security/notifications/
-[7]: https://app.datadoghq.com/security?product=cws
+[7]: https://app.datadoghq.com/security/compliance
 [8]: /security/identity_risks/
-[9]: /security/infrastructure_vulnerabilities/
+[9]: /security/vulnerabilities/
 [10]: /security/cloud_security_management/setup/
 [11]: https://app.datadoghq.com/security/configuration/reports
+[12]: https://app.datadoghq.com/infrastructure/catalog
+[13]: /infrastructure/resource_catalog

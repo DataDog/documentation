@@ -36,7 +36,6 @@ After you deploy or install and configure your Datadog Agent, the next step is t
 See the following pages for supported deployment scenarios and languages:
 
 - [Inject the instrumentation library locally][11] (at the Agent);
-- [Inject the instrumentation library from the Datadog UI][12] (beta); or
 - Add the tracing library directly in the application, as described in the [Install the tracer](#install-the-tracer) section. Read more about [compatibility information][1].
 
 ### Instrument your application
@@ -47,9 +46,23 @@ After the Agent is installed, to begin tracing your applications:
 
 1. Download `dd-java-agent.jar` that contains the latest tracer class files, to a folder that is accessible by your Datadog user:
 
+{{< tabs >}}
+{{% tab "Wget" %}}
    ```shell
-   wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
+   wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
+{{% /tab %}}
+{{% tab "cURL" %}}
+   ```shell
+   curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
+{{% /tab %}}
+{{% tab "Dockerfile" %}}
+   ```dockerfile
+   ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
    **Note:** To download the latest build of a specific **major** version, use the `https://dtdg.co/java-tracer-vX` link instead, where `X` is the desired major version.
    For example, use `https://dtdg.co/java-tracer-v1` for the latest version 1 build. Minor version numbers must not be included. Alternatively, see Datadog's [Maven repository][3] for any specific version.
@@ -218,7 +231,6 @@ If needed, configure the tracing library to send application performance telemet
 [9]: /tracing/trace_collection/library_config/java/
 [10]: /tracing/trace_collection/compatibility/java/#supported-jvm-runtimes
 [11]: /tracing/trace_collection/library_injection_local/
-[12]: /tracing/trace_collection/library_injection_remote/
 [16]: /agent/remote_config/
 [17]: https://app.datadoghq.com/services
 [18]: /tracing/trace_collection#install-and-configure-the-agent

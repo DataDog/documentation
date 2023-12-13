@@ -3,7 +3,7 @@ title: Enable Dynamic Instrumentation for Python
 kind: Documentation
 aliases:
     - /tracing/dynamic_instrumentation/enabling/python/
-is_beta: true
+is_beta: false
 private: false
 code_lang: python
 type: multi-code-lang
@@ -28,7 +28,7 @@ Dynamic Instrumentation is a feature of supporting Datadog tracing libraries. If
    pip install ddtrace
    ```
 
-   **Note**: Dynamic Instrumentation is available in the `ddtrace` library version 1.15.0 and higher.
+   **Note**: Dynamic Instrumentation is available in the `ddtrace` library version 2.2.0 and higher.
 
 4. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your probes and target active clients across these dimensions.
 {{< tabs >}}

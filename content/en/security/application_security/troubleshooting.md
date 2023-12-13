@@ -51,7 +51,7 @@ ASM data is sent with APM traces. See [APM troubleshooting][4] to [confirm APM s
 {{< programming-lang lang="java" >}}
 
 ```bash
-for ((i=1;i<=200;i++));
+for ((i=1;i<=250;i++));
 do
 # Target existing service's routes
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -66,7 +66,7 @@ done
 {{< programming-lang lang=".NET" >}}
 
 ```bash
-for ((i=1;i<=200;i++));
+for ((i=1;i<=250;i++));
 do
 # Target existing service's routes
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -81,7 +81,7 @@ done
 {{< programming-lang lang="go" >}}
 
  ```bash
- for ((i=1;i<=200;i++));
+ for ((i=1;i<=250;i++));
 do
 # Target existing service's routes
 curl https://your-application-url/existing-route -A Arachni/v1.0;
@@ -94,7 +94,7 @@ done
 {{< programming-lang lang="ruby" >}}
 
  ```bash
- for ((i=1;i<=200;i++));
+ for ((i=1;i<=250;i++));
 do
 # Target existing service's routes
 curl https://your-application-url/existing-route -A Arachni/v1.0;
@@ -107,7 +107,7 @@ done
 {{< programming-lang lang="PHP" >}}
 
 ```bash
-for ((i=1;i<=200;i++));
+for ((i=1;i<=250;i++));
 do
 # Target existing service's routes
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -122,7 +122,7 @@ done
 {{< programming-lang lang="Node.js" >}}
 
 ```bash
-for ((i=1;i<=200;i++));
+for ((i=1;i<=250;i++));
 do
 # Target existing service's routes
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -136,7 +136,7 @@ done
 {{< programming-lang lang="python" >}}
 
 ```bash
-for ((i=1;i<=200;i++));
+for ((i=1;i<=250;i++));
 do
 # Target existing service's routes
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -150,7 +150,7 @@ done
 
 A few minutes after you enable your application and exercise it, and if it's successful, threat information appears in the [Trace and Signals Explorer][2].
 
-{{< img src="/security/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
+{{< img src="/security/security_monitoring/explorer/signal_panel_v2.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 
 ### Check if required tracer integrations are deactivated
 

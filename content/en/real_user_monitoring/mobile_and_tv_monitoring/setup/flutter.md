@@ -31,7 +31,7 @@ Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real
 
 ### Specify application details in the UI
 
-1. In the [Datadog app][1], navigate to **UX Monitoring** > **RUM Applications** > **New Application**.
+1. In Datadog, navigate to [**UX Monitoring** > **Setup & Configurations** > **New Application**][1].
 2. Choose `Flutter` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
 4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Flutter Data Collected][7].
@@ -45,8 +45,19 @@ To ensure the safety of your data, you must use a client token. For more informa
 First, ensure that you have your environment set up properly for each platform.
 
 <div class="alert alert-info">
-Datadog supports Flutter Monitoring for iOS and Android for Flutter 2.8+. Support for Flutter Web is in alpha.
+Datadog supports Flutter Monitoring for iOS and Android for Flutter 3.0+.
 </div>
+
+Datadog does not officially support Flutter Web, but the current Flutter SDK for mobile apps allows you to achieve some out-of-the-box monitoring. Here are known limitations:
+  * All Actions reported from Flutter are labeled with type `custom`.
+  * Long running actions (`startAction` / `stopAction`) are not supported.
+  * Manually reporting RUM resources (`startResource` / `stopResource`) is not supported.
+  * Event mappers are not currently supported.
+  * Tags on loggers are not currently supported.
+  * `addUserExtraInfo` is not supported.
+  * `stopSession` is not supported.
+
+No Flutter Web support is planned, but Datadog's priorities are often re-evaluated based on your feedback. If you have a Flutter Web app and would want to use Datadog RUM to monitor its performance, reach out to your customer support team and escalate this feature request.
 
 #### iOS
 
@@ -62,45 +73,45 @@ You can replace `11.0` with any minimum version of iOS you want to support that 
 
 #### Android
 
-For Android, your `minSdkVersion` version must be >= 19, and if you are using Kotlin, it should be a version >= 1.6.21. These constraints are usually held in your `android/app/build.gradle` file.
+For Android, your `minSdkVersion` version must be >= 21, and if you are using Kotlin, it should be a version >= 1.8.0. These constraints are usually held in your `android/app/build.gradle` file.
 
-#### Web
+### Web
 
 For Web, add the following to your `index.html` under the `head` tag, for **{{<region-param key="dd_site_name">}}** site:
 {{< site-region region="us" >}}
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v4/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v4/datadog-rum-slim.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum-slim.js"></script>
 ```
 {{</ site-region>}}
 {{< site-region region="ap1" >}}
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v4/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v4/datadog-rum-slim.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-rum-slim.js"></script>
 ```
 {{</ site-region>}}
 {{< site-region region="eu" >}}
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v4/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v4/datadog-rum-slim.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-rum-slim.js"></script>
 ```
 {{</ site-region>}}
 {{< site-region region="us3" >}}
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v4/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v4/datadog-rum-slim.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v5/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us3/v5/datadog-rum-slim.js"></script>
 ```
 {{</ site-region>}}
 {{< site-region region="us5" >}}
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v4/datadog-logs.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v4/datadog-rum-slim.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v5/datadog-logs.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum-slim.js"></script>
 ```
 {{</ site-region>}}
 {{< site-region region="gov" >}}
 ```html
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v4.js"></script>
-<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-rum-slim-v4.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v5.js"></script>
+<script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-rum-slim-v5.js"></script>
 ```
 {{</ site-region>}}
 
@@ -112,7 +123,7 @@ This loads the CDN-delivered Datadog Browser SDKs for Logs and RUM. The synchron
 
    ```yaml
    dependencies:
-     datadog_flutter_plugin: ^1.3.0
+     datadog_flutter_plugin: ^2.0.0
    ```
 2. Create a configuration object for each Datadog feature (such as Logs or RUM) with the following snippet. If you do not pass a configuration for a given feature, that feature is disabled.
 
@@ -351,11 +362,11 @@ Container(
 [4]: /real_user_monitoring/error_tracking/flutter
 [5]: https://pub.dev/packages/datadog_tracking_http_client
 [6]: /serverless/distributed_tracing
-[7]: /real_user_monitoring/flutter/data_collected/
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/data_collected/flutter
 [8]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
 [9]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
 [10]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
 [11]: https://pub.dev/packages/go_router
-[12]: /real_user_monitoring/flutter/advanced_configuration/#automatic-view-tracking
+[12]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter#automatic-view-tracking
 [13]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionDetector-class.html
 [14]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/RumUserActionAnnotation-class.html
