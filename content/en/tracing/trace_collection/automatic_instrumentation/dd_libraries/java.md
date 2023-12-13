@@ -8,6 +8,7 @@ aliases:
     - /tracing/setup/java
     - /tracing/setup_overview/java
     - /tracing/setup_overview/setup/java
+    - /tracing/trace_collection/dd_libraries/java/
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 0

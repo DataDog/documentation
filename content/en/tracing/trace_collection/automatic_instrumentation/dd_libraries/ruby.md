@@ -7,6 +7,7 @@ aliases:
 - /agent/apm/ruby/
 - /tracing/setup_overview/setup/ruby
 - /tracing/trace_collection/ruby
+- /tracing/trace_collection/dd_libraries/ruby/
 code_lang: ruby
 code_lang_weight: 15
 dependencies:

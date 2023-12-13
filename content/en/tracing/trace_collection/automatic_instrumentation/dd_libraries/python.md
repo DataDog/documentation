@@ -11,6 +11,7 @@ aliases:
     - /tracing/setup/python
     - /tracing/setup_overview/python
     - /tracing/setup_overview/setup/python
+    - /tracing/trace_collection/dd_libraries/python/
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-py'
       tag: 'GitHub'

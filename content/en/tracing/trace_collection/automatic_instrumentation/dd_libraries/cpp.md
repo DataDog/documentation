@@ -8,6 +8,7 @@ aliases:
 - /tracing/setup/cpp
 - /tracing/setup_overview/cpp
 - /tracing/setup_overview/setup/cpp
+- /tracing/trace_collection/dd_libraries/cpp
 code_lang: cpp
 type: multi-code-lang
 code_lang_weight: 50
