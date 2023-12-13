@@ -26,7 +26,7 @@ If you are already sending stack traces to Datadog but they are not in `error.st
 
 To configure inline code snippets in issues, set up the [source code integration][9]. Adding code snippets in Error Tracking for Logs does not require APM; the enrichment tags and linked repository is the same for both.
 
-#### Attributes for error tracking
+#### Attributes for Error Tracking
 
 To enable Error Tracking, logs must include both of the following:
 
