@@ -14,7 +14,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true">}}
-  The Datadog extension for Visual Studio is in public beta for developers that use Datadog products such as <a href="https://docs.datadoghq.com/tracing/error_tracking/">Error Tracking</a> and the <a href="https://docs.datadoghq.com/profiler/">Continuous Profiler</a> with their .NET services.
+  The Datadog extension for Visual Studio is in public beta for developers that use Datadog products, including <a href="https://docs.datadoghq.com/tracing/error_tracking/">Error Tracking</a> and the <a href="https://docs.datadoghq.com/profiler/">Continuous Profiler</a>, with their .NET services.
 {{< /callout >}}
 
 ## Overview
@@ -37,7 +37,7 @@ The **View in Visual Studio** feature provides a link from Datadog directly to y
 
 ## Getting Started
 
-### Requirements
+### Prerequisites
 See the [Requirements](#requirements) section.
 
 ### Download and install the extension
@@ -88,7 +88,7 @@ The available profiling types usually include options like **CPU Time** and **Al
 
 ### Top functions
 
-The **Top Functions** table shows the methods that consume the most resources based on the aggregated profile data loaded from the Datadog servers. **Top Functions** is designed to show a summary of the methods that are most likely to be interesting from a resource consumption point of view.
+The **Top Functions** view shows the methods that consume the most resources based on the aggregated profile data loaded from the Datadog servers. The **Top Functions** list shows the methods that are most likely to be interesting in terms of resource consumption.
 
 {{< img src="/developers/ide_integrations/visual_studio/top-list.png" alt="The Top-list view" style="width:100%;" >}}
 
