@@ -24,26 +24,26 @@ algolia:
 
 ## Overview
 
-Continuous Testing lets you automatically run and monitor the same [Synthetic tests](https://docs.datadoghq.com/synthetics/) you’ve configured in your staging, QA, and pre-production environments to proactively alert your team and block your pipeline deployments should code changes cause testing failures. 
+Continuous Testing lets you automatically run and monitor the same [Synthetic tests][1] you’ve configured in your staging, QA, and pre-production environments to proactively alert your team and block your pipeline deployments should code changes cause testing failures. 
 
 Your codeless tests can:
-* [Launch API requests on your systems](https://docs.datadoghq.com/getting_started/synthetics/api_test)
-* [Simulate browser scenarios within your web application](https://docs.datadoghq.com/getting_started/synthetics/browser_test/)
-* [Test functionality within your iOS and Android applications](https://docs.datadoghq.com/mobile_app_testing/)
+* [Launch API requests on your systems][2]
+* [Simulate browser scenarios within your web application][3]
+* [Test functionality within your iOS and Android applications][4]
 
-Once your tests run, examine test results and CI batches in the [Synthetic Monitoring & Continuous Testing Explorer.](https://app.datadoghq.com/synthetics/explorer?track=synbatch)
+Once your tests run, examine test results and CI batches in the [Synthetic Monitoring & Continuous Testing Explorer.][5]
 
-Improve your developer workflow with Continuous Testing by [leveraging the datadog-ci NPM Package](https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm) to run these tests directly in your CI pipeline and the [Datadog Synthetics VS Code Integration](https://docs.datadoghq.com/developers/ide_integrations/) to run tests in your IDE.
+Improve your developer workflow with Continuous Testing by [leveraging the datadog-ci NPM Package][6] to run these tests directly in your CI pipeline and the [Datadog Synthetics VS Code Integration][7] to run tests in your IDE.
 
 Datadog also offers Parallelization, allowing you to execute multiple tests in your CI/CD pipelines simultaneously rather than sequentially to help speed up your building, testing, and deployment processes.
 
 ## Prerequisites
 
-If you haven't already, create a [Datadog account][1].
+If you haven't already, create a [Datadog account][8].
 
 ## Create a Continuous Testing test
 
-To set up a Continuous Testing test, first create a Synthetics test in Datadog. In this example, you'll create a [Browser test](https://docs.datadoghq.com/getting_started/synthetics/browser_test) on the site https://www.shopist.io, a test e-commerce web application.
+To set up a Continuous Testing test, first create a Synthetics test in Datadog. In this example, you'll create a [Browser test][3] on the site https://www.shopist.io, a test e-commerce web application.
 
 Browser tests simulate a user's journey through your web application beginning at your **Starting URL**. Ensuring your **Starting URL** is a resource in your staging environment will make it easier to test changes before moving them into production.
 
@@ -58,7 +58,7 @@ Browser tests simulate a user's journey through your web application beginning a
     - Name your test and set a Team Tag such as **team-checkout**. Tags allow you to keep your test suite organized and quickly find tests you’re interested in through the Synthetic Monitoring & Continuous Testing Explorer.
     - Choose the browsers and devices to test.
 
-4. Continue [filling out your test details and your recording like you normally would](https://docs.datadoghq.com/getting_started/synthetics/browser_test/#create-a-browser-test).
+4. Continue [filling out your test details and your recording like you normally would][9].
 
 {{< img src="continuous_testing/new_browser_test.png" alt="new_browser_test" style="width:100%;" >}}
 
@@ -69,7 +69,7 @@ To improve your developer workflow, you can use **datadog-ci** in your CLI as a 
 
 ### Running tests in the CLI
 
-Extend your use of Continuous Testing by using the [datadog-ci NPM package](https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm). datadog-ci lets you execute commands from within your CI/CD scripts to test your application before deployment, allowing you to automate blocking and rolling back changes in case of any testing failures. Refer to the [datadog-ci Configuration page for installation and setup instructions](https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm#install-the-package).
+Extend your use of Continuous Testing by using the [datadog-ci NPM package][6]. datadog-ci lets you execute commands from within your CI/CD scripts to test your application before deployment, allowing you to automate blocking and rolling back changes in case of any testing failures. Refer to the [datadog-ci Configuration page for installation and setup instructions][10].
 
 You can also use **datadog-ci** to only execute tests tagged with specific Team tags. For example, to run all tests tagged as **team-checkout**, you can:
 
@@ -78,13 +78,13 @@ You can also use **datadog-ci** to only execute tests tagged with specific Team 
    ```
    yarn datadog-ci synthetics run-tests -search 'tag:team-checkout' --config global.config.json
    ```
-For more information about running the Synthetics command and using reporters, see [Configuration Documentation](https://docs.datadoghq.com/continuous_testing/cicd_integrations/configuration/?tab=npm#reporters)
+For more information about running the Synthetics command and using reporters, see [Configuration Documentation][11]
 
 ### Running tests in your IDE
 
-Separately, you can use the [Datadog Synthetics VS Code Integration](https://docs.datadoghq.com/developers/ide_integrations/vscode/) to help you:
+Separately, you can use the [Datadog Synthetics VS Code Integration][12] to help you:
 
-* Use a [Private Location](https://docs.datadoghq.com/getting_started/synthetics/private_location/) or [Tunnel](https://docs.datadoghq.com/continuous_testing/testing_tunnel/) to accelerate development locally
+* Use a [Private Location][13] or [Tunnel][14] to accelerate development locally
 * Run HTTP API tests and browser tests and see their results within VS Code
 * Test only what matters by executing relevant tests at the same time
 
@@ -109,22 +109,22 @@ Review your tests by clicking on either **CI Batches** or **Test Runs** on the l
 ### Create a search query
 
 Click on one of the out-of-the-box search queries to get started with filtering through your CI Batches and Test Runs. These can filter:
-- [All failing tests](https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20-%40result.result.httpStatusCode%3A%5B100%20TO%20399%5D%20%40result.result.passed%3Afalse&agg_m=count&agg_q=%40result.result.httpStatusCode&cols=&index=%2A&top_n=100&track=synthetics&viz=timeseries)
-- [Tests which initially failed but are now passing](https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20%40result.result.initialResultID%3A%2A%20%40result.status%3A0&agg_m=count&agg_q=%40result.result.httpStatusCode&cols=&index=%2A&top_n=100&track=synthetics&viz=stream)
-- [Unused Tests](https://app.datadoghq.com/synthetics/explorer?query=%40ci.job.name%3A%2A&agg_m=count&agg_q=%40result.test_public_id&cols=&index=%2A&top_n=100&track=synbatch&viz=query_table)
+- [All failing tests][19]
+- [Tests which initially failed but are now passing][20]
+- [Unused Tests][21]
 
 {{< img src="continuous_testing/example_search_queries.png" alt="example-search-queries" style="width:100%;" >}}
 
-Optionally, you can create a query to [search your test runs](https://docs.datadoghq.com/continuous_testing/explorer/?tab=testruns#create-a-search-query). Using the browser test you created above, locate the Test ID and create a search query using the common test run facets. To find the ID of your browser test:
+Optionally, you can create a query to [search your test runs][15]. Using the browser test you created above, locate the Test ID and create a search query using the common test run facets. To find the ID of your browser test:
 1. Navigate to the Synthetic Tests page
 2. Select a test
 3. Look for the Test ID within the **Properties** section
 
 {{< img src="continuous_testing/example_test_id.png" alt="example_test_id" style="width:70%;" >}}
 
-To export your view of the Synthetics and CT Explorer, click **>Views** and click **Save**. For more information, see [Saved Views](https://docs.datadoghq.com/continuous_testing/explorer/saved_views/).
+To export your view of the Synthetics and CT Explorer, click **>Views** and click **Save**. For more information, see [Saved Views][16].
 
-For more information about using facets in your search query, see [Search Test Runs](https://docs.datadoghq.com/continuous_testing/explorer/search_runs/).
+For more information about using facets in your search query, see [Search Test Runs][17].
 
 ## Set Parallelization preferences
 
@@ -140,14 +140,30 @@ $$\text"estimated parallelization" = {\text"24 tests per CI batch"* \text"2 minu
 
 Once you’re done estimating your parallelization, input the number of test runs you want to execute at the same time in the Parallelization modal. Then click **Save Selection**.
 
-See the [Parallelization documentation](https://docs.datadoghq.com/continuous_testing/settings/#parallelization) for details.
+See the [Parallelization documentation][18] for details.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.datadoghq.com/
+[1]: /synthetics/
 [2]: /getting_started/synthetics/api_test/
-[3]: /getting_started/synthetics/api_test/#create-a-multistep-api-test
-[4]: /getting_started/synthetics/browser_test/
-[5]: /getting_started/synthetics/private_location/
+[3]: /getting_started/synthetics/browser_test/
+[4]: /mobile_app_testing/
+[5]: /synthetics/explorer?track=synbatch
+[6]: /continuous_testing/cicd_integrations/configuration/?tab=npm
+[7]: /developers/ide_integrations/
+[8]: https://datadoghq.com 
+[9]: /getting_started/synthetics/browser_test/#create-a-browser-test
+[10]: /continuous_testing/cicd_integrations/configuration/?tab=npm#install-the-package
+[11]: /continuous_testing/cicd_integrations/configuration/?tab=npm#reporters
+[12]: /developers/ide_integrations/vscode/
+[13]: /getting_started/synthetics/private_location/
+[14]: /continuous_testing/testing_tunnel/
+[15]: /continuous_testing/explorer/?tab=testruns#create-a-search-query
+[16]: /continuous_testing/explorer/saved_views/
+[17]: /continuous_testing/explorer/search_runs/
+[18]: /continuous_testing/settings/#parallelization
+[19]: https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20-%40result.result.httpStatusCode%3A%5B100%20TO%20399%5D%20%40result.result.passed%3Afalse&agg_m=count&agg_q=%40result.result.httpStatusCode&cols=&index=%2A&top_n=100&track=synthetics&viz=timeseries
+[20]: https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20%40result.result.initialResultID%3A%2A%20%40result.status%3A0&agg_m=count&agg_q=%40result.result.httpStatusCode&cols=&index=%2A&top_n=100&track=synthetics&viz=stream 
+[21]: https://app.datadoghq.com/synthetics/explorer?query=%40ci.job.name%3A%2A&agg_m=count&agg_q=%40result.test_public_id&cols=&index=%2A&top_n=100&track=synbatch&viz=query_table
