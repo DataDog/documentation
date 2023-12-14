@@ -462,7 +462,7 @@ link_checks:on-schedule:
 
 # template for what runs in pa11y to avoid duplication
 .pa11y_live_template: &pa11y_live_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:pa11y-devin.ford_pally-update
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:pa11y-latest
   tags: ["runner:docker"]
   stage: post-deploy
   cache: []
