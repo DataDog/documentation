@@ -59,7 +59,7 @@ In addition to tests, Test Visibility provides visibility over the whole testing
 | {{< ci-details title="Distributed traces on integration tests" >}}Tests that make calls to external services instrumented with Datadog show the full distributed trace in their test details.{{< /ci-details >}} | {{< X >}} | {{< X >}} |        {{< X >}}       |                 | {{< X >}} | {{< X >}} |                      |
 | {{< ci-details title="Agent-based reporting" >}}Ability to report test information through the Datadog Agent.{{< /ci-details >}}                                                                                 | {{< X >}} | {{< X >}} |        {{< X >}}       |    {{< X >}}    | {{< X >}} | {{< X >}} |                      |
 | {{< ci-details title="Agentless reporting" >}}Ability to report test information without the Datadog Agent.{{< /ci-details >}}                                                                                   | {{< X >}} | {{< X >}} |        {{< X >}}       |    {{< X >}}    | {{< X >}} | {{< X >}} |        {{< X >}}       |
-| {{< ci-details title="Test suite level visibility" >}}Visibility over the whole testing process, including session, module, suites and tests. Read more in Test suite level visibility.{{< /ci-details >}}       | {{< X >}} | {{< X >}} |        {{< X >}}       |    {{< X >}}    |           | {{< X >}} |        {{< X >}}       |
+| {{< ci-details title="Test suite level visibility" >}}Visibility over the whole testing process, including session, module, suites, and tests.{{< /ci-details >}}       | {{< X >}} | {{< X >}} |        {{< X >}}       |    {{< X >}}    |           | {{< X >}} |        {{< X >}}       |
 | {{< ci-details title="Manual API" >}}Ability to programmatically create CI Visibility events for test frameworks that are not supported by Datadog's automatic instrumentation.{{< /ci-details >}}               | {{< X >}} | {{< X >}} |        {{< X >}}       |                 |           | {{< X >}} |                      |
 | {{< ci-details title="Codeowner by test" >}}Automatic detection of the owner of a test file based on the CODEOWNERS file.{{< /ci-details >}}                                                                     | {{< X >}} | {{< X >}} |        {{< X >}}       |    {{< X >}}    |           | {{< X >}} |                      |
 | {{< ci-details title="Source code start/end" >}}Automatic report of the start and end lines of a test.{{< /ci-details >}}                                                                                        | {{< X >}} | {{< X >}} | {{< X >}} (only start) |    {{< X >}}    |           | {{< X >}} | {{< X >}} (only start) |
@@ -129,13 +129,13 @@ In order to filter using these configurations tags, [you must create facets for 
 {{< nextlink href="/tests/swift_tests" >}}Instrument Swift Tests with Browser RUM{{< /nextlink >}}
 {{< /whatsnext >}}
 
-If [Intelligent Test Runner][13] is enabled for .NET, JavaScript, or Swift, [code coverage information][12], including file names and line numbers covered by each test, are collected from your projects.
+If [Intelligent Test Runner][12] is enabled for .NET, Java, JavaScript, or Swift, per test code coverage information, including file names and line numbers covered by each test, are collected from your projects.
 
 When creating a [dashboard][8] or a [notebook][9], you can use test execution data in your search query, which updates the visualization widget options.
 
 ## Alert on test data
 
-When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][11], click **Create Monitor** to create a [CI Test monitor][12].
+When you evaluate failed or flaky tests, or the performance of a CI test on the [**Test Runs** page][10], click **Create Monitor** to create a [CI Test monitor][11].
 
 ## Further reading
 
