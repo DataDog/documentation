@@ -6,7 +6,7 @@ is_beta: true
 
 ## Requirements
 
-Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64` architectures.
+Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64`  and `arm64` architectures.
 
 ## Enable APM on your services in one step
 
