@@ -1520,4 +1520,4 @@ Rules to identify potential security hotspots in Node. This may include false po
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_integration/static_analysis
+[1]: /static_analysis

@@ -76,14 +76,14 @@ Configure your [Datadog API and application keys][4] and run Static Analysis in 
 
 To run Static Analysis with CircleCI, [follow these instructions for setting up a CircleCI Orb][101].
 
-[101]: /continuous_integration/static_analysis/circleci_orbs
+[101]: /static_analysis/circleci_orbs
 
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
 
 To run Static Analysis with GitHub, [follow these instructions for setting up a GitHub Action][101].
 
-[101]: /continuous_integration/static_analysis/github_actions/
+[101]: /static_analysis/github_actions/
 
 {{% /tab %}}
 {{% tab "Other" %}}
@@ -235,5 +235,5 @@ bar = 2
 [3]: /integrations/github/
 [4]: /account_management/api-app-keys/
 [5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
-[6]: /continuous_integration/static_analysis/rules
+[6]: /static_analysis/rules
 [103]: /getting_started/site/
