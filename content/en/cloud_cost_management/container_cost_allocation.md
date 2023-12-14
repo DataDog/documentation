@@ -165,4 +165,4 @@ In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the
 [6]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
 [7]: /containers/kubernetes/tag/?tab=containerizedagent#node-labels-as-tags
 [8]: /containers/kubernetes/tag/?tab=containerizedagent#pod-labels-as-tags
-[9]: /integrations/amazon_web_services
+[9]: https://app.datadoghq.com/integrations/amazon-web-services
