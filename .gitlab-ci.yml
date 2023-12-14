@@ -470,7 +470,6 @@ link_checks:on-schedule:
     GIT_STRATEGY: none
   script:
     - unset NODE_OPTIONS
-    - ls -la
     - cp -r ${ARTIFACT_RESOURCE} /app # copy the artifact to the working diretory of this docker container
     - cd /app # go into working directory
     - export CI_PROJECT_DIR="." # override project dir so pa11y script can locate the generated csv and push to s3
