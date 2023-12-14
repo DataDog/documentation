@@ -404,8 +404,6 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 
 The following instructions enables the image metadata collection and [Software Bill of Materials (SBOM)][11] collection in the Datadog Agent. This allows you to scan the libraries in your container images and hosts to detect vulnerabilities. Vulnerabilities are evaluated and and scanned against your containers and hosts every hour.
 
-**Note**: CSM Vulnerabilities is not available for AWS Fargate or Windows environments.
-
 #### Containers
 
 {{< tabs >}}
