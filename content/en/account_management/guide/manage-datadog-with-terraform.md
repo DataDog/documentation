@@ -54,7 +54,7 @@ See [Service Accounts][16] for more information.
 
 ## Credentials
 
-### API and App keys
+### API and app keys
 
 [API keys][6] allow for the submission of data to your Datadog account, and [Application keys][7] allow resources to be created in your Datadog account. You can also import your existing credentials.
 
@@ -74,17 +74,17 @@ You can also import your existing organization settings into your Terraform conf
 
 <div class="alert alert-info">The Multi-organization Account feature is not enabled by default. Contact <a href="https://docs.datadoghq.com/help/" target="_blank">Datadog support</a> to have it enabled.</div>
 
-If you need to maintain separate, isolated environments, you can create [child orgs][1] under a main parent org. From the parent account, you can track the usage of any associated sub-accounts, and users with access to multiple orgs can easily switch between them.
+If you need to maintain separate, isolated environments, you can create [child orgs][1] under a main parent org. From the parent account, you can track the usage of any associated sub-accounts, and users with access to multiple orgs can switch between them with a single click.
 
 See [Managing Multiple-Organization Accounts][3] for more information.
 
 **Note**: Child orgs do not inherit the SAML configurations of the parent org.
 
-## Restriction Policies
+## Restriction policies
 
 Restriction policies are associated to a specific **resource**, and define the level of access provided to roles, teams, or users. Use the [restriction policy][19] resource to create and manage your restriction policies, or import your existing restriction policies into your Terraform configuration.
 
-### Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
