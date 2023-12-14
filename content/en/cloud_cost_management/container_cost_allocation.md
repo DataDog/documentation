@@ -118,7 +118,7 @@ Datadog consolidates and applies additional tags from various sources to cost me
 | `allocated_resource:cpu`                   | Cost of CPU resources. *Only available for `.shared.resources.allocated` metrics.*                                            |
 | `allocated_resource:memory`                | Cost of Memory resources. *Only available for `.shared.resources.allocated` metrics.*                                         |
 | `allocated_resource:managed_service_fee`   | Cost of cloud provider managed service fees. *Only available for `.shared.resources.allocated` metrics.*           |
-| `allocated_resource:persistent_volume`     | Cost of non-local EBS Volumes used as Persistent Volumes in Kubernetes. *Only available for `.shared.resources.allocated` metrics.*           |
+| `allocated_resource:persistent_volume`     | Cost of non-local EBS volumes used as Persistent Volumes in Kubernetes. *Only available for `.shared.resources.allocated` metrics.*           |
 
 ### Kubernetes
 
