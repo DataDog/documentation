@@ -34,11 +34,11 @@ Use different visualizations to investigate the threat activity in your environm
 
 {{< img src="security/security_monitoring/investigate_a_signal/signal_list.png" alt="The Signal Explorer showing signals categoraized by detection rules" style="width:80%;" >}}
 
-After you have filtered your signals to your use case, create a [saved view][9] so that you can reload your query later.
+After you have filtered your signals to your use case, create a [saved view][4] so that you can reload your query later.
 
 ## Triage a signal
 
-1. Navigate to [Cloud SIEM][4].
+1. Navigate to [Cloud SIEM][5].
 1. Click **Signals**.
 1. Click on a security signal from the table.
 1. To assign a signal to yourself or another Datadog user, click the user profile icon with the plus sign in the top left corner of the signal side panel.
@@ -60,7 +60,7 @@ To create a case from a security signal:
 
 ### Declare an incident
 
-Whether it is based on a single signal or after an investigation of a case, certain malicious activity demands a response. You can declare incidents in Datadog to bring together developers, operations, and security teams to address a critical security event. [Incident Management][5] provides a framework and workflow to help teams effectively identify and mitigate incidents.
+Whether it is based on a single signal or after an investigation of a case, certain malicious activity demands a response. You can declare incidents in Datadog to bring together developers, operations, and security teams to address a critical security event. [Incident Management][7] provides a framework and workflow to help teams effectively identify and mitigate incidents.
 
 To declare an incident in the signal panel:
 
@@ -70,7 +70,7 @@ To declare an incident in the signal panel:
 
 ### Workflow automation
 
-You can trigger a Workflow automatically for any Security Signal. You can also manually trigger a Workflow from a Cloud SIEM Security Signal. See [Trigger a Workflow from a Security Signal][7] and [Automate Security Workflows with Workflow Automation][8] for more information.
+You can trigger a Workflow automatically for any Security Signal. You can also manually trigger a Workflow from a Cloud SIEM Security Signal. See [Trigger a Workflow from a Security Signal][8] and [Automate Security Workflows with Workflow Automation][9] for more information.
 
 ### Threat intelligence
 
@@ -102,9 +102,9 @@ You can also launch this query directly from the signal panel:
 [1]: /security/notifications/rules/
 [2]: /account_management/audit_trail/events/#cloud-security-platform-events
 [3]: /account_management/rbac/
-[4]: https://app.datadoghq.com/security/home
-[5]: /service_management/incident_management/
+[4]: /logs/explorer/saved_views/
+[5]: https://app.datadoghq.com/security/home
 [6]: /service_management/case_management/
-[7]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-security-signal
-[8]: /security/cloud_security_management/workflows/
-[9]: /logs/explorer/saved_views/
+[7]: /service_management/incident_management/
+[8]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-security-signal
+[9]: /security/cloud_security_management/workflows/
