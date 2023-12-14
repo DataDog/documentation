@@ -81,7 +81,7 @@ Using the `allocated_spend_type` tag, you can visualize the spend category assoc
 ### Persistent volumes
 
 - Usage: Cost of provisioned IOPS, throughput, or storage being used by workloads. Storage cost is based on the maximum amount of volume storage used that day. IOPS and throughput costs are based on the average amount used that day.
-- Workload idle: Cost of provisioned IOPS, Throughput, or Storage not being used by workloads. For Storage, this is based on the maximum amount of storage used that day. For IOPS and Throughput, this is based on the average amount used that day.
+- Workload idle: Cost of provisioned IOPS, throughput, or storage not being used by workloads. Storage cost is based on the maximum amount of storage used that day. IOPS and throughput costs are based on the average amount used that day.
 - Cluster idle: Cost of provisioned IOPS, Throughput, or Storage for volumes not claimed by any pods that day.
 
 ## Cost metrics
