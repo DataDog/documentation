@@ -146,12 +146,12 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 
 In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the-box tags are applied to cost metrics.
 
-| Out-of-the-box tag                      | Description                                                                                                                                 |
-| ---                                     |---------------------------------------------------------------------------------------------------------------------------------------------|
-| `persistent_volume_reclaim_policy`      | The Kubernetes Reclaim Policy on the Persistent Volume.                                                                                     |
-| `storage_class_name`                    | The Kubernetes Storage Class used to instantiate the Persistent Volume.                                                                     |
-| `volume_mode`                           | The Volume Mode of the Persistent Volume.                                                                                                   |
-| `ebs_volume_type`                       | The type of the AWS EBS volume. Can be `gp3`, `gp2`, or others.                                                                            |
+| Out-of-the-box tag                      | Description                                                                                                                                  |
+| ---                                     |----------------------------------------------------------------------------------------------------------------------------------------------|
+| `persistent_volume_reclaim_policy`      | The Kubernetes Reclaim Policy on the Persistent Volume.                                                                                      |
+| `storage_class_name`                    | The Kubernetes Storage Class used to instantiate the Persistent Volume.                                                                      |
+| `volume_mode`                           | The Volume Mode of the Persistent Volume.                                                                                                    |
+| `ebs_volume_type`                       | The type of the AWS EBS volume. Can be `gp3`, `gp2`, or others.                                                                              |
 
 ## Further reading
 
@@ -165,4 +165,4 @@ In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the
 [6]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
 [7]: /containers/kubernetes/tag/?tab=containerizedagent#node-labels-as-tags
 [8]: /containers/kubernetes/tag/?tab=containerizedagent#pod-labels-as-tags
-[9]: /integrations/amazon_web_services/#resource-collection
+[9]: /integrations/amazon_web_services
