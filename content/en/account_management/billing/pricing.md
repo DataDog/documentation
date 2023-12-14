@@ -22,7 +22,7 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
 ## APM
 
 * If an application running on a host (defined in [Infrastructure monitoring](#infrastructure-monitoring)) generates traces and submits them to the Datadog SaaS application, Datadog counts that host as one **APM host**.
-  * On a high watermark plan (HWMP), the hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.
+  * On a high watermark plan (HWMP), the hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the ninth highest measurement.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
 * An **Indexed Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of spans indexed by [retention filters][3] within Datadog APM.
 * An **Ingested Span** is an individual request against an individual service in your stack. Datadog charges based on the total number of gigabytes of spans ingested into Datadog APM.
@@ -32,7 +32,7 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 ## Database Monitoring
 
 * Datadog records the number of unique database hosts you are monitoring with Datadog Database Monitoring each hour.
-  * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth highest measurement.
+  * On a high watermark plan (HWMP), these hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the eighth highest measurement.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
 * Datadog charges based on the total number of configured [normalized queries][6] being tracked at any given time.
 
