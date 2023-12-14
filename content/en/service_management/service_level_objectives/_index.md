@@ -25,6 +25,9 @@ further_reading:
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session on creating effective monitors and SLOs"
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_level_objective"
+  tag: "Terraform"
+  text: "Create and manage SLOs with Terraform"
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/382481078/rendition/1080p/file.mp4?loc=external&signature=f5a81ca1c44d9c1c2cfcbd23c2b6b4f89914027ff344fb0a9f8dc6b9a1d141aa" poster="/images/poster/slo.png" >}}
