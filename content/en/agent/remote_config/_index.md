@@ -60,7 +60,6 @@ The following products and features are supported with Remote Configuration:
 ### Application Performance Monitoring (APM)
 
 - **Configure tracing library settings in the UI** (Beta): Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the [Service Catalog][19] UI, without having to restart the service.
-- **Remotely instrument your Kubernetes services with APM** (Private Beta): Remotely instrument your services in Kubernetes with Datadog APM through Datadog Library Injection, and manage your deployments all within the Datadog UI. Available for Java, Node and Python applications. See [Setting up Remote instrumentation][2] for more information.
 - **Remotely set Agent sampling rate** (Public Beta): Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
 
@@ -152,7 +151,6 @@ remoteConfiguration:
 
 After you perform these steps, your Agent requests its configuration from Datadog, and the features that use remote configuration are enabled:
 - [CSM Threats default agent rules][9] update automatically as released.
-- [Datadog Remote instrumentation][2] is enabled.
 - [APM Agent-level sampling rates][10] are applied.  
 - [Dynamic Instrumentation][11] is enabled.
 - [ASM 1-Click enablement, IP blocking, and attack pattern updates][12] are enabled.
@@ -246,7 +244,6 @@ datadog:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/site/
-[2]: /tracing/trace_collection/library_injection_remote/
 [3]: /security/threats/setup
 [4]: /observability_pipelines/#observability-pipelines-worker
 [5]: /account_management/rbac/permissions#api-and-application-keys
