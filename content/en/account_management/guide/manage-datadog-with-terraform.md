@@ -12,7 +12,9 @@ further_reading:
 
 ## Overview
 
-You can use Terraform to interact with the Datadog API and manage your Datadog organization, child organizations, users, credentials, permissions, and more. This guide provides example use cases for managing Datadog with Terraform, with links to commonly used Datadog resources and data sources in the Terraform registry.
+You can use [Terraform][28] to interact with the Datadog API and manage your Datadog organization, child organizations, users, credentials, permissions, and more. This guide provides example use cases for managing Datadog with Terraform, with links to commonly used Datadog resources and data sources in the Terraform registry.
+
+You can also [import][29] your existing resources into your Terraform configuration for future management through Terraform, and reference existing resources as Terraform [data sources][30].
 
 ## Setup
 
@@ -113,3 +115,6 @@ Restriction policies are associated to a specific **resource**, and define the l
 [25]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/data-sources/service_account
 [26]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/data-sources/api_key
 [27]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/data-sources/application_key
+[28]: https://www.terraform.io/
+[29]: https://developer.hashicorp.com/terraform/cli/import
+[30]: https://developer.hashicorp.com/terraform/language/data-sources
