@@ -189,7 +189,7 @@ Agent v5 users on DEB-based systems (Debian/Ubuntu) are also required to trust t
 [2]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public 
 [3]: https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public
 [4]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
-[5]: https://s3.amazonaws.com/dd-agent/scripts/install_script.sh
+[5]: https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh
 [6]: https://github.com/DataDog/chef-datadog
 [7]: https://github.com/DataDog/ansible-datadog
 [8]: https://github.com/DataDog/puppet-datadog-agent
