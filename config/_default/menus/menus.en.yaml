@@ -14,8 +14,8 @@ main:
   - name: Application Performance
     identifier: apm_heading
     weight: 5000000
-  - name: Continuous Integration
-    identifier: ci_visibility_heading
+  - name: Software Delivery
+    identifier: software_delivery_heading
     weight: 6000000
   - name: Log Management
     identifier: log_management_heading
@@ -2373,244 +2373,241 @@ main:
     url: continuous_integration/
     pre: ci
     identifier: ci
-    parent: ci_visibility_heading
+    parent: software_delivery_heading
     weight: 150000
-  - name: Test Visibility
-    url: continuous_integration/tests/
-    parent: ci
-    identifier: ci_tests
-    weight: 1
-  - name: Setup
-    url: continuous_integration/tests/setup/
-    parent: ci_tests
-    identifier: ci_tests_setup
-    weight: 101
-  - name: .NET
-    url: continuous_integration/tests/setup/dotnet/
-    parent: ci_tests_setup
-    identifier: ci_tests_setup_dotnet
-    weight: 101
-  - name: Java
-    url: continuous_integration/tests/setup/java/
-    parent: ci_tests_setup
-    identifier: ci_tests_setup_java
-    weight: 102
-  - name: JavaScript and TypeScript
-    url: continuous_integration/tests/setup/javascript/
-    parent: ci_tests_setup
-    identifier: ci_tests_setup_javascript
-    weight: 103
-  - name: Python
-    url: continuous_integration/tests/setup/python/
-    parent: ci_tests_setup
-    identifier: ci_tests_setup_python
-    weight: 104
-  - name: Ruby
-    url: continuous_integration/tests/setup/ruby/
-    parent: ci_tests_setup
-    identifier: ci_tests_setup_ruby
-    weight: 105
-  - name: Swift
-    url: continuous_integration/tests/setup/swift/
-    parent: ci_tests_setup
-    identifier: ci_tests_setup_swift
-    weight: 106
-  - name: JUnit Report Uploads
-    url: continuous_integration/tests/setup/junit_xml/
-    parent: ci_tests_setup
-    identifier: ci_tests_setup_junit_xml
-    weight: 107
-  - name: Tests in Containers
-    url: continuous_integration/tests/containers/
-    parent: ci_tests
-    identifier: ci_tests_containers
-    weight: 103
-  - name: Developer Workflows
-    url: continuous_integration/tests/developer_workflows
-    parent: ci_tests
-    identifier: ci_tests_developer_workflows
-    weight: 104
-  - name: Code Coverage
-    url: continuous_integration/tests/code_coverage
-    parent: ci_tests
-    identifier: ci_tests_code_coverage
-    weight: 105
-  - name: Instrument Browser Tests with RUM
-    url: continuous_integration/tests/browser_tests
-    parent: ci_tests
-    identifier: ci_tests_browser_tests
-    weight: 106
-  - name: Instrument Swift Tests with RUM
-    url: continuous_integration/tests/swift_tests
-    parent: ci_tests
-    identifier: ci_tests_swift_tests
-    weight: 107
   - name: Pipeline Visibility
     url: continuous_integration/pipelines/
     parent: ci
     identifier: pipeline_visibility
-    weight: 2
+    weight: 1
   - name: AWS CodePipeline
     url: continuous_integration/pipelines/awscodepipeline/
     parent: pipeline_visibility
     identifier: ci_awscodepipeline
-    weight: 201
+    weight: 101
   - name: Azure
     url: continuous_integration/pipelines/azure/
     parent: pipeline_visibility
     identifier: ci_azure
-    weight: 202
+    weight: 102
   - name: Buildkite
     url: continuous_integration/pipelines/buildkite/
     parent: pipeline_visibility
     identifier: ci_buildkite
-    weight: 203
+    weight: 103
   - name: CircleCI
     url: continuous_integration/pipelines/circleci/
     parent: pipeline_visibility
     identifier: ci_circleci
-    weight: 204
+    weight: 104
   - name: Codefresh
     url: continuous_integration/pipelines/codefresh/
     parent: pipeline_visibility
     identifier: ci_codefresh
-    weight: 205
+    weight: 105
   - name: GitHub Actions
     url: continuous_integration/pipelines/github/
     parent: pipeline_visibility
     identifier: ci_github
-    weight: 206
+    weight: 106
   - name: GitLab
     url: continuous_integration/pipelines/gitlab/
     parent: pipeline_visibility
     identifier: ci_gitlab
-    weight: 207
+    weight: 107
   - name: Jenkins
     url: continuous_integration/pipelines/jenkins/
     parent: pipeline_visibility
     identifier: ci_jenkins
-    weight: 208
+    weight: 108
   - name: TeamCity
     url: continuous_integration/pipelines/teamcity/
     parent: pipeline_visibility
     identifier: ci_teamcity
-    weight: 209
+    weight: 109
   - name: Custom Commands
     url: continuous_integration/pipelines/custom_commands/
     parent: pipeline_visibility
     identifier: ci_custom_commands
-    weight: 210
+    weight: 110
   - name: Custom Tags and Metrics
     url: continuous_integration/pipelines/custom_tags_and_metrics/
     parent: pipeline_visibility
     identifier: ci_custom_tags_and_metrics
-    weight: 211
+    weight: 111
   - name: Search and Manage
     url: continuous_integration/search/
     parent: ci
     identifier: ci_search
-    weight: 3
+    weight: 2
   - name: Explorer
-    url: continuous_integration/explorer/
+    url: continuous_integration/explorer
     parent: ci
     identifier: ci_explorer
-    weight: 4
+    weight: 3
   - name: Search Syntax
     url: continuous_integration/explorer/search_syntax/
     parent: ci_explorer
     identifier: ci_explorer_search_syntax
-    weight: 401
+    weight: 301
   - name: Facets
     url: continuous_integration/explorer/facets/
     parent: ci_explorer
     identifier: ci_explorer_facets
-    weight: 402
+    weight: 302
   - name: Saved Views
     url: continuous_integration/explorer/saved_views/
     parent: ci_explorer
     identifier: ci_explorer_saved_views
-    weight: 402
-  - name: DORA Metrics
-    url: continuous_integration/dora_metrics/
-    parent: ci
-    identifier: ci_explorer_dora_metrics
-    weight: 5
-  - name: Intelligent Test Runner
-    url: continuous_integration/intelligent_test_runner/
-    parent: ci
-    identifier: ci_intelligent_test_runner
-    weight: 6
-  - name: Setup
-    url: continuous_integration/intelligent_test_runner/setup/
-    parent: ci_intelligent_test_runner
-    identifier: ci_intelligent_test_runner_setup
-    weight: 601
-  - name: .NET
-    url: continuous_integration/intelligent_test_runner/setup/dotnet/
-    parent: ci_intelligent_test_runner_setup
-    identifier: ci_itr_dotnet
-    weight: 601
-  - name: Java
-    url: continuous_integration/intelligent_test_runner/setup/java/
-    parent: ci_intelligent_test_runner_setup
-    identifier: ci_itr_java
-    weight: 602
-  - name: JavaScript and TypeScript
-    url: continuous_integration/intelligent_test_runner/setup/javascript/
-    parent: ci_intelligent_test_runner_setup
-    identifier: ci_itr_javascript
-    weight: 603
-  - name: Python
-    url: continuous_integration/intelligent_test_runner/setup/python/
-    parent: ci_intelligent_test_runner_setup
-    identifier: ci_itr_python
-    weight: 604
-  - name: Swift
-    url: continuous_integration/intelligent_test_runner/setup/swift/
-    parent: ci_intelligent_test_runner_setup
-    identifier: ci_itr_swift
-    weight: 605
-  - name: Static Analysis
-    url: continuous_integration/static_analysis/
-    parent: ci
-    identifier: ci_static_analysis
-    weight: 7
-  - name: Rules
-    url: continuous_integration/static_analysis/rules
-    parent: ci_static_analysis
-    identifier: ci_static_analysis_rules
-    weight: 701
-  - name: CircleCI Orbs
-    url: continuous_integration/static_analysis/circleci_orbs
-    parent: ci_static_analysis
-    identifier: ci_static_analysis_circleci_orbs
-    weight: 702
-  - name: GitHub Actions
-    url: continuous_integration/static_analysis/github_actions
-    parent: ci_static_analysis
-    identifier: ci_static_analysis_github_actions
-    weight: 703
-  - name: Quality Gates
-    url: continuous_integration/quality_gates/
-    parent: ci
-    identifier: ci_quality_gates
-    weight: 8
+    weight: 302
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
     identifier: ci_guides
-    weight: 9
+    weight: 4
   - name: Troubleshooting
     url: continuous_integration/troubleshooting/
     parent: ci
     identifier: ci_troubleshooting
+    weight: 5
+  - name: Test Visibility
+    url: tests/
+    pre: ci
+    parent: software_delivery_heading
+    identifier: tests
+    weight: 160000
+  - name: Setup
+    url: tests/setup/
+    parent: tests
+    identifier: tests_setup
+    weight: 1
+  - name: .NET
+    url: tests/setup/dotnet/
+    parent: tests_setup
+    identifier: tests_setup_dotnet
+    weight: 101
+  - name: Java
+    url: tests/setup/java/
+    parent: tests_setup
+    identifier: tests_setup_java
+    weight: 102
+  - name: JavaScript and TypeScript
+    url: tests/setup/javascript/
+    parent: tests_setup
+    identifier: tests_setup_javascript
+    weight: 103
+  - name: Python
+    url: tests/setup/python/
+    parent: tests_setup
+    identifier: tests_setup_python
+    weight: 104
+  - name: Ruby
+    url: tests/setup/ruby/
+    parent: tests_setup
+    identifier: tests_setup_ruby
+    weight: 105
+  - name: Swift
+    url: tests/setup/swift/
+    parent: tests_setup
+    identifier: tests_setup_swift
+    weight: 106
+  - name: JUnit Report Uploads
+    url: tests/setup/junit_xml/
+    parent: tests_setup
+    identifier: tests_setup_junit_xml
+    weight: 107
+  - name: Tests in Containers
+    url: tests/containers/
+    parent: tests
+    identifier: tests_containers
+    weight: 2
+  - name: Search and Manage
+    url: tests/search/
+    parent: tests
+    identifier: tests_search
+    weight: 3
+  - name: Explorer
+    url: continuous_integration/explorer
+    parent: tests
+    identifier: tests_explorer
+    weight: 4
+  - name: Developer Workflows
+    url: tests/developer_workflows
+    parent: tests
+    identifier: tests_developer_workflows
+    weight: 5
+  - name: Code Coverage
+    url: tests/code_coverage
+    parent: tests
+    identifier: tests_code_coverage
+    weight: 6
+  - name: Instrument Browser Tests with RUM
+    url: tests/browser_tests
+    parent: tests
+    identifier: tests_browser_tests
+    weight: 7
+  - name: Instrument Swift Tests with RUM
+    url: tests/swift_tests
+    parent: tests
+    identifier: tests_swift_tests
+    weight: 8
+  - name: Guides
+    url: tests/guides/
+    parent: tests
+    identifier: tests_guides
+    weight: 9
+  - name: Troubleshooting
+    url: tests/troubleshooting/
+    parent: tests
+    identifier: tests_troubleshooting
     weight: 10
+  - name: Intelligent Test Runner
+    url: intelligent_test_runner/
+    pre: ci
+    parent: software_delivery_heading
+    identifier: intelligent_test_runner
+    weight: 170000
+  - name: Setup
+    url: intelligent_test_runner/setup/
+    parent: intelligent_test_runner
+    identifier: intelligent_test_runner_setup
+    weight: 1
+  - name: .NET
+    url: intelligent_test_runner/setup/dotnet/
+    parent: intelligent_test_runner_setup
+    identifier: intelligent_test_runner_setup_dotnet
+    weight: 101
+  - name: Java
+    url: intelligent_test_runner/setup/java/
+    parent: intelligent_test_runner_setup
+    identifier: intelligent_test_runner_setup_java
+    weight: 202
+  - name: JavaScript and TypeScript
+    url: intelligent_test_runner/setup/javascript/
+    parent: intelligent_test_runner_setup
+    identifier: intelligent_test_runner_setup_javascript
+    weight: 103
+  - name: Python
+    url: intelligent_test_runner/setup/python/
+    parent: intelligent_test_runner_setup
+    identifier: intelligent_test_runner_setup_python
+    weight: 104
+  - name: Swift
+    url: intelligent_test_runner/setup/swift/
+    parent: intelligent_test_runner_setup
+    identifier: intelligent_test_runner_setup_swift
+    weight: 105
+  - name: Troubleshooting
+    url: intelligent_test_runner/troubleshooting/
+    parent: intelligent_test_runner
+    identifier: intelligent_test_runner_troubleshooting
+    weight: 2
   - name: CD Visibility
     url: continuous_delivery/
     pre: ci
     identifier: cd
-    parent: ci_visibility_heading
-    weight: 160000
+    parent: software_delivery_heading
+    weight: 180000
   - name: Deployment Visibility
     url: continuous_delivery/deployments
     identifier: cd_deployments
@@ -2646,6 +2643,39 @@ main:
     identifier: cd_explorer_saved_views
     parent: cd_explorer
     weight: 303
+  - name: DORA Metrics
+    url: dora_metrics/
+    pre: ci
+    parent: software_delivery_heading
+    identifier: dora_metrics
+    weight: 190000
+  - name: Static Analysis
+    url: static_analysis/
+    pre: ci
+    parent: software_delivery_heading
+    identifier: static_analysis
+    weight: 200000
+  - name: Rules
+    url: static_analysis/rules
+    parent: static_analysis
+    identifier: static_analysis_rules
+    weight: 101
+  - name: CircleCI Orbs
+    url: static_analysis/circleci_orbs
+    parent: static_analysis
+    identifier: static_analysis_circleci_orbs
+    weight: 102
+  - name: GitHub Actions
+    url: static_analysis/github_actions
+    parent: static_analysis
+    identifier: static_analysis_github_actions
+    weight: 103
+  - name: Quality Gates
+    url: quality_gates/
+    pre: ci
+    parent: software_delivery_heading
+    identifier: quality_gates
+    weight: 210000
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2

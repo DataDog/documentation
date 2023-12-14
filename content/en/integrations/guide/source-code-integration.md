@@ -15,7 +15,7 @@ further_reading:
 - link: "/serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code"
   tag: "Documentation"
   text: "Learn about Serverless Monitoring"
-- link: "/continuous_integration/tests/developer_workflows/"
+- link: "/tests/developer_workflows/"
   tag: "Documentation"
   text: "Learn about CI Visibility"
 - link: "/security/application_security/"
@@ -363,7 +363,7 @@ Setting up the GitHub integration also allows you to see inline code snippets in
 [103]: /logs/error_tracking/backend/?tab=serilog#setup
 [104]: /integrations/guide/source-code-integration/?tab=continuousprofiler#links-to-git-providers
 [105]: /serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
-[106]: /continuous_integration/tests/developer_workflows/#open-tests-in-github-and-your-ide
+[106]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
 [107]: /security/application_security/
 
 {{% /tab %}}
@@ -463,7 +463,7 @@ You can see links from failed test runs to their source repository in **CI Visib
 For more information, see [Enhancing Developer Workflows with Datadog][102].
 
 [101]: https://app.datadoghq.com/ci/test-runs
-[102]: /continuous_integration/tests/developer_workflows#open-tests-in-github-and-your-ide
+[102]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
 
 {{% /tab %}}
 {{% tab "Application Security Monitoring" %}}
