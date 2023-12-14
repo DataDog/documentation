@@ -26,14 +26,14 @@ You can narrow down, broaden, or shift your focus on a subset of deployment exec
 
 ## Analyze
 
-Group your queried deployment executions into higher-level entities such as fields, patterns, and transactions, in order to derive or consolidate information. By using [facets][3], which you do not need to create to search for attributes, you can accomplish the following actions:
+To derive or consolidate information, group your queried deployment executions into higher-level entities such as fields, patterns, and transactions. [Facets][3] are not required to search for attributes, but you can use facets to accomplish the following actions:
 
 - Search and keep track of the progress of deployments in your environments.
 - Investigate every deployment result to identify and troubleshoot failing deployments.
 
 ## Visualize
 
-Select a visualization type to visualize the outcomes of your filters and aggregations and better understand your deployment executions. For example, you can view your deployment results in a list to organize your deployment data into columns, or in a timeseries graph to measure your deployment data over time.
+Select a visualization type to display the outcomes of your filters and aggregations, and better understand your deployment executions. For example, you can view your deployment results in a list to organize your deployment data into columns. Or, view deployment results in a timeseries graph to measure your deployment data over time.
 
 ## Export
 

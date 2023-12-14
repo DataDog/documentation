@@ -27,6 +27,8 @@ To access your saved views, expand **> Views** to the left in the [CD Visibility
 
 All saved views except for the [default view](#default-views) are shared across the organization, including custom saved views created by users. These are editable by anyone in your organization and display the user's avatar who created the view. Click **Save** to create a custom saved view from the current content in your Explorer.
 
+<div class="alert alert-info">Update, rename, and delete actions are disabled for read-only users.</div>
+
 {{< img src="continuous_delivery/explorer/saved_view.png" alt="Default view in the CD Visibility Explorer" width="100%" >}}
 
 You can:
