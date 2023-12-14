@@ -81,7 +81,7 @@ Using the `allocated_spend_type` tag, you can visualize the spend category assoc
 ### Persistent volumes
 
 - Usage: Cost of provisioned IOPS, throughput, or storage being used by workloads. Storage cost is based on the maximum amount of volume storage used that day. IOPS and throughput costs are based on the average amount used that day.
-- Workload idle: Cost of provisioned IOPS, throughput, or storage not being used by workloads. Storage cost is based on the maximum amount of storage used that day. IOPS and throughput costs are based on the average amount used that day.
+- Workload idle: Cost of provisioned IOPS, throughput, or storage not being used by workloads. Storage cost is based on the maximum amount of storage used that day. IOPS and throughput costs are based on the average amount used that day. *Note: This tag is only available if you have enabled `Resource Collection` in your [**AWS Integration**][9]. To prevent being charged for `Cloud Security Posture Management`, ensure that during the `Resource Collection` setup, the `Cloud Security Posture Management` box is unchecked.*
 - Cluster idle: Cost of provisioned IOPS, throughput, or storage for volumes not claimed by any pods that day.
 
 ## Cost metrics
@@ -165,3 +165,4 @@ In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the
 [6]: /infrastructure/containers/orchestrator_explorer?tab=datadogoperator
 [7]: /containers/kubernetes/tag/?tab=containerizedagent#node-labels-as-tags
 [8]: /containers/kubernetes/tag/?tab=containerizedagent#pod-labels-as-tags
+[9]: /integrations/amazon_web_services/#resource-collection
