@@ -12,7 +12,8 @@
       "tags": [
         "sensitive_data:true"
       ],
-      "is_enabled": true
+      "is_enabled": true,
+      "priority": 5
     },
     "relationships": {
       "group": {
