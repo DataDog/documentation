@@ -501,6 +501,8 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
    {{< img src="synthetics/private_locations/configuration_selector_browse.png" alt="Browser for a JSON configuration in the MSI installer" style="width:80%;" >}}
 
 1. You can apply the following configuration options:
+   
+   {{< img src="synthetics/private_locations/settings.png" alt="Synthetics Private Location Worker wizard, MSI installer. Firewall and log settings are displayed." style="width:80%;" >}}
 
    Apply firewall rules needed by this program to Windows Firewall
    : Enable to allow the installer to apply firewall rules on install and remove them on uninstall.
@@ -518,8 +520,6 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
    : Specifies the verbosity of the console and file logging for the Synthetics Private Location Worker. Options for verbosity when performing an unattended `msiexec` installation include `-v` for error, `-vv` for information, and `-vvv` for debug.
 
 1. Click **Next** and **Install** to start the installation process. 
-   
-   {{< img src="synthetics/private_locations/settings.png" alt="Configuration options in the MSI installer" style="width:80%;" >}}
    
 Once the process is complete, click **Finish** on the installation completion page.
 
@@ -543,7 +543,11 @@ msiexec /i datadog-synthetics-worker-<version>.amd64.msi /quiet /qn APPLYDEFAULT
 ```
 
 
-To uninstall the Synthetics Private Location Worker on the command line, use `msiexec`. For example, you can run `msiexec /uninstall datadog-synthetics-worker-<version>.amd64.msi /passive`.
+To uninstall the Synthetics Private Location Worker on the command line, use `msiexec`. For example, run:
+
+```shell
+msiexec /uninstall datadog-synthetics-worker-<version>.amd64.msi /passive`
+```
 
 [101]: TBD
 [102]: https://app.datadoghq.com/synthetics/settings/private-locations
