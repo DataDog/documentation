@@ -101,7 +101,7 @@ If your integrated Service Account exists in a different Google Cloud Platform p
   * RESOURCE_TYPE: `project`
   * RESOURCE_ID: export dataset project
 
-  This creates a new service agent that looks like `service-<billing project id>@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com`.
+  This creates a new service agent that looks like `service-<billing project number>@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com`.
 
 Add the BigQuery Data Transfer Service Account role created by the trigger as a principal on your Service Account resource with the `roles/iam.serviceAccountTokenCreator` role.
 
