@@ -7415,7 +7415,7 @@ api:
       operationids:
         - EditGlobalVariable
       unstable: []
-      order: 20
+      order: 21
   - name: Get a global variable
     url: '#get-a-global-variable'
     identifier: synthetics-get-a-global-variable
@@ -7427,7 +7427,7 @@ api:
       operationids:
         - GetGlobalVariable
       unstable: []
-      order: 19
+      order: 20
   - name: Delete a global variable
     url: '#delete-a-global-variable'
     identifier: synthetics-delete-a-global-variable
@@ -7439,7 +7439,7 @@ api:
       operationids:
         - DeleteGlobalVariable
       unstable: []
-      order: 21
+      order: 22
   - name: Create a global variable
     url: '#create-a-global-variable'
     identifier: synthetics-create-a-global-variable
@@ -7451,7 +7451,7 @@ api:
       operationids:
         - CreateGlobalVariable
       unstable: []
-      order: 18
+      order: 19
   - name: Get all global variables
     url: '#get-all-global-variables'
     identifier: synthetics-get-all-global-variables
@@ -7463,7 +7463,7 @@ api:
       operationids:
         - ListGlobalVariables
       unstable: []
-      order: 17
+      order: 18
   - name: Pause or start a test
     url: '#pause-or-start-a-test'
     identifier: synthetics-pause-or-start-a-test
@@ -7475,7 +7475,7 @@ api:
       operationids:
         - UpdateTestPauseStatus
       unstable: []
-      order: 5
+      order: 6
   - name: Get an API test result
     url: '#get-an-api-test-result'
     identifier: synthetics-get-an-api-test-result
@@ -7487,7 +7487,7 @@ api:
       operationids:
         - GetAPITestResult
       unstable: []
-      order: 11
+      order: 12
   - name: Get an API test's latest results summaries
     url: '#get-an-api-tests-latest-results-summaries'
     identifier: synthetics-get-an-api-tests-latest-results-summaries
@@ -7499,7 +7499,7 @@ api:
       operationids:
         - GetAPITestLatestResults
       unstable: []
-      order: 13
+      order: 14
   - name: Edit a test
     url: '#edit-a-test'
     identifier: synthetics-edit-a-test
@@ -7511,7 +7511,7 @@ api:
       operationids:
         - UpdateTest
       unstable: []
-      order: 26
+      order: 30
   - name: Patch a Synthetic test
     url: '#patch-a-synthetic-test'
     identifier: synthetics-patch-a-synthetic-test
@@ -7523,7 +7523,7 @@ api:
       operationids:
         - PatchTest
       unstable: []
-      order: 29
+      order: 5
   - name: Get a test configuration
     url: '#get-a-test-configuration'
     identifier: synthetics-get-a-test-configuration
@@ -7535,7 +7535,7 @@ api:
       operationids:
         - GetTest
       unstable: []
-      order: 27
+      order: 28
   - name: Trigger tests from CI/CD pipelines
     url: '#trigger-tests-from-ci/cd-pipelines'
     identifier: synthetics-trigger-tests-from-ci/cd-pipelines
@@ -7547,7 +7547,7 @@ api:
       operationids:
         - TriggerCITests
       unstable: []
-      order: 6
+      order: 7
   - name: Trigger Synthetic tests
     url: '#trigger-synthetic-tests'
     identifier: synthetics-trigger-synthetic-tests
@@ -7559,7 +7559,7 @@ api:
       operationids:
         - TriggerTests
       unstable: []
-      order: 7
+      order: 8
   - name: Delete tests
     url: '#delete-tests'
     identifier: synthetics-delete-tests
@@ -7571,7 +7571,7 @@ api:
       operationids:
         - DeleteTests
       unstable: []
-      order: 16
+      order: 17
   - name: Get a browser test result
     url: '#get-a-browser-test-result'
     identifier: synthetics-get-a-browser-test-result
@@ -7583,7 +7583,7 @@ api:
       operationids:
         - GetBrowserTestResult
       unstable: []
-      order: 12
+      order: 13
   - name: Get a browser test's latest results summaries
     url: '#get-a-browser-tests-latest-results-summaries'
     identifier: synthetics-get-a-browser-tests-latest-results-summaries
@@ -7595,7 +7595,7 @@ api:
       operationids:
         - GetBrowserTestLatestResults
       unstable: []
-      order: 14
+      order: 15
   - name: Edit a browser test
     url: '#edit-a-browser-test'
     identifier: synthetics-edit-a-browser-test
@@ -7619,7 +7619,7 @@ api:
       operationids:
         - GetBrowserTest
       unstable: []
-      order: 9
+      order: 10
   - name: Create a browser test
     url: '#create-a-browser-test'
     identifier: synthetics-create-a-browser-test
@@ -7655,7 +7655,7 @@ api:
       operationids:
         - GetAPITest
       unstable: []
-      order: 8
+      order: 9
   - name: Create an API test
     url: '#create-an-api-test'
     identifier: synthetics-create-an-api-test
@@ -7679,7 +7679,7 @@ api:
       operationids:
         - CreateTest
       unstable: []
-      order: 27
+      order: 31
   - name: Get the list of all Synthetic tests
     url: '#get-the-list-of-all-synthetic-tests'
     identifier: synthetics-get-the-list-of-all-synthetic-tests
@@ -7691,7 +7691,7 @@ api:
       operationids:
         - ListTests
       unstable: []
-      order: 10
+      order: 11
   - name: Get the default locations
     url: '#get-the-default-locations'
     identifier: synthetics-get-the-default-locations
@@ -7703,7 +7703,7 @@ api:
       operationids:
         - GetSyntheticsDefaultLocations
       unstable: []
-      order: 28
+      order: 29
   - name: Edit a private location
     url: '#edit-a-private-location'
     identifier: synthetics-edit-a-private-location
@@ -7715,7 +7715,7 @@ api:
       operationids:
         - UpdatePrivateLocation
       unstable: []
-      order: 24
+      order: 25
   - name: Get a private location
     url: '#get-a-private-location'
     identifier: synthetics-get-a-private-location
@@ -7727,7 +7727,7 @@ api:
       operationids:
         - GetPrivateLocation
       unstable: []
-      order: 23
+      order: 24
   - name: Delete a private location
     url: '#delete-a-private-location'
     identifier: synthetics-delete-a-private-location
@@ -7739,7 +7739,7 @@ api:
       operationids:
         - DeletePrivateLocation
       unstable: []
-      order: 26
+      order: 27
   - name: Create a private location
     url: '#create-a-private-location'
     identifier: synthetics-create-a-private-location
@@ -7751,7 +7751,7 @@ api:
       operationids:
         - CreatePrivateLocation
       unstable: []
-      order: 22
+      order: 23
   - name: Get all locations (public and private)
     url: '#get-all-locations-public-and-private'
     identifier: synthetics-get-all-locations-public-and-private
@@ -7763,7 +7763,7 @@ api:
       operationids:
         - ListLocations
       unstable: []
-      order: 25
+      order: 26
   - name: Get details of batch
     url: '#get-details-of-batch'
     identifier: synthetics-get-details-of-batch
@@ -7775,7 +7775,7 @@ api:
       operationids:
         - GetSyntheticsCIBatch
       unstable: []
-      order: 15
+      order: 16
   - name: Tags
     url: /api/latest/tags/
     identifier: tags

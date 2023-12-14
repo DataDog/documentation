@@ -64,9 +64,12 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 
 ### Agent
 
-| Name  | Description of audit event                          | Query in audit explorer              |
-|-------------| --------------------------------------------------  | ------------------------------------ |
-| [Agent flare created][87] | Datadog Agent flare is created for support tickets| `@evt.name:Datadog Agent @action:created @asset.type:agent_flare` |
+| Name                                    | Description of audit event                          | Query in audit explorer                                             |
+|-----------------------------------------| --------------------------------------------------  | ------------------------------------------------------------------- |
+| [Agent enabled][100]                    | A new Datadog Agent was enabled.                    | `@evt.name:"Datadog Agent" @action:created`                         |
+| [Agent flare created][87]               | Datadog Agent flare is created for support tickets. | `@evt.name:"Datadog Agent" @action:created @asset.type:agent_flare` |
+| [Agent configuration updated][101]      | A Datadog Agent configuration was updated.          | `@evt.name:"Datadog Agent" @action:modified`                        |
+
 
 ### API request events
 
@@ -341,3 +344,5 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [97]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40asset.type%3Alogs_query
 [98]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Auser%20%40action%3Acreated%20
 [99]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Auser%20%40action%3Amodified%20
+[100]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40action%3Acreated%20
+[101]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40action%3Amodified%20
