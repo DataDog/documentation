@@ -151,7 +151,7 @@ In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the
 | `persistent_volume_reclaim_policy`      | The Kubernetes Reclaim Policy on the Persistent Volume.                                                                                     |
 | `storage_class_name`                    | The Kubernetes Storage Class used to instantiate the Persistent Volume.                                                                     |
 | `volume_mode`                           | The Volume Mode of the Persistent Volume.                                                                                                   |
-| `ebs_volume_type`                       | The type of the AWS EBS volume. *Can be `gp3`, `gp2`, and more.*                                                                            |
+| `ebs_volume_type`                       | The type of the AWS EBS volume. Can be `gp3`, `gp2`, or others.                                                                            |
 
 ## Further reading
 
