@@ -33,9 +33,9 @@ Your codeless tests can:
 
 Once your tests run, examine test results and CI batches in the [Synthetic Monitoring & Continuous Testing Explorer.][5]
 
-Improve your developer workflow with Continuous Testing by [leveraging the datadog-ci NPM Package][6] to run these tests directly in your CI pipeline and the [Datadog Synthetics VS Code Integration][7] to run tests in your IDE.
+Improve your developer workflow with Continuous Testing by [leveraging the `datadog-ci` NPM package][6] to run these tests directly in your CI pipeline and the [Datadog Synthetics VS Code Integration][7] to run tests in your IDE.
 
-Continuous Testing also offers Parallelization, which allows you to execute multiple tests in your CI/CD pipelines simultaneously rather than sequentially to help speed up your building, testing, and deployment processes.
+Continuous Testing also offers [parallelization][24], which allows you to execute multiple tests in your CI/CD pipelines simultaneously rather than sequentially to help speed up your building, testing, and deployment processes.
 
 ## Prerequisites
 
@@ -43,7 +43,7 @@ If you haven't already, create a [Datadog account][8].
 
 ## Create a Continuous Testing test
 
-To set up a Continuous Testing test, first create a Synthetics test in Datadog. In this example, create a [Browser test][3] on the site https://www.shopist.io, a test e-commerce web application.
+To set up a Continuous Testing test, first create a Synthetic test in Datadog. In this example, create a [browser test][3] on the site `https://www.shopist.io`, a test e-commerce web application.
 
 Browser tests simulate a user's journey through your web application beginning at your **Starting URL**. Ensuring your **Starting URL** is a resource in your staging environment makes it easier to test changes before moving them into production.
 
@@ -100,7 +100,7 @@ Separately, you can use the [Datadog Synthetics VS Code Integration][12] to help
 
 ## Examine results in the Synthetic Monitoring and Continuous Testing Explorer
 
-The Synthetic Monitoring and Continuous Testing Explorer allows you to create visualizations and filter CI batches and test runs for your Continuous Testing tests. Navigate to **UX Monitoring** > **Continuous Testing**.
+The Synthetic Monitoring and Continuous Testing Explorer allows you to create visualizations and filter [CI batches][22] and [test runs][23] for your Continuous Testing tests. Navigate to **UX Monitoring** > **Continuous Testing**.
 
 Select **CI Batches** or **Test Runs** to see results from your CI batches or test runs in the Explorer. Click on a CI batch or test from the list to get a more detailed view of the result.
 
@@ -122,7 +122,7 @@ Optionally, you can create a query to [search your test runs][15]. Using the bro
 
 {{< img src="continuous_testing/example_test_id.png" alt="example_test_id" style="width:70%;" >}}
 
-To export your view of the Synthetics and CT Explorer, click **>Views** and click **Save**. For more information, see [Saved Views][16].
+To export your view of the Synthetic Monitoring & Continuous Testing Explorer, click **>Views** and click **Save**. For more information, see [Saved Views][16].
 
 For more information about using facets in your search query, see [Search Test Runs][17].
 
@@ -138,9 +138,9 @@ For instance, if you have 24 tests per CI batch, each taking 2 minutes to comple
 
 $$\text"estimated parallelization" = {\text"24 tests per CI batch"* \text"2 minute duration"} / \text"4 minute expected duration in your CI pipeline"$$
 
-Once you're done estimating your parallelization, input the number of test runs you want to execute at the same time in the Parallelization modal. Then click **Save Selection**.
+Once you're done estimating your parallelization, input the number of test runs you want to execute at the same time in the Parallelization modal. Then, click **Save Selection**.
 
-See the [Parallelization documentation][18] for details.
+See the [Parallelization documentation][18] for more details.
 
 ## Further Reading
 
@@ -167,3 +167,6 @@ See the [Parallelization documentation][18] for details.
 [19]: https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20-%40result.result.httpStatusCode%3A%5B100%20TO%20399%5D%20%40result.result.passed%3Afalse&agg_m=count&agg_q=%40result.result.httpStatusCode&cols=&index=%2A&top_n=100&track=synthetics&viz=timeseries
 [20]: https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20%40result.result.initialResultID%3A%2A%20%40result.status%3A0&agg_m=count&agg_q=%40result.result.httpStatusCode&cols=&index=%2A&top_n=100&track=synthetics&viz=stream 
 [21]: https://app.datadoghq.com/synthetics/explorer?query=%40ci.job.name%3A%2A&agg_m=count&agg_q=%40result.test_public_id&cols=&index=%2A&top_n=100&track=synbatch&viz=query_table
+[22]: /glossary/?product=synthetic-monitoring#test-batch
+[23]: /glossary/?product=synthetic-monitoring#test-run
+[24]: /glossary/?product=synthetic-monitoring#parallelization
