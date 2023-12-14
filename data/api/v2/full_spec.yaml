@@ -6418,8 +6418,20 @@ components:
             type: string
           type: array
         is_cspm_enabled:
-          description: When enabled, Datadog performs configuration checks across
-            your Google Cloud environment by continuously scanning every resource.
+          description: 'When enabled, Datadog will activate the Cloud Security Monitoring
+            product for this service account. Note: This requires resource_collection_enabled
+            to be set to true.'
+          type: boolean
+        is_security_command_center_enabled:
+          default: false
+          description: 'When enabled, Datadog will attempt to collect Security Command
+            Center Findings. Note: This requires additional permissions on the service
+            account.'
+          example: true
+          type: boolean
+        resource_collection_enabled:
+          default: false
+          description: When enabled, Datadog scans for all resources in your GCP environment.
           type: boolean
       type: object
     GCPSTSServiceAccountCreateRequest:

@@ -240,6 +240,21 @@
       "group": "gcp_integration",
       "suffix": "_109518525",
       "description": "Create a new entry for your service account with account_tags returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_4235664992",
+      "description": "Create a new entry for your service account with cspm enabled returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_130557025",
+      "description": "Create a new entry for your service account with resource collection enabled returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_2597004741",
+      "description": "Create a new entry for your service account with security command center enabled returns \"OK\" response"
     }
   ],
   "UpdateGCPSTSAccount": [
@@ -247,6 +262,11 @@
       "group": "gcp_integration",
       "suffix": "",
       "description": "Update STS Service Account returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_3205636354",
+      "description": "Update STS Service Account returns \"OK\" response with enable resource collection turned on"
     }
   ],
   "UpdateIPAllowlist": [
