@@ -50,7 +50,7 @@ Next, Datadog looks at all of the pods running on that node for the day. The cos
 For Kubernetes Persistent Volume storage allocation, Persistent Volumes (PV), Persistent Volume Claims (PVC), nodes, and pods are joined with their associated EBS volume costs. All associated PV, PVC, node, and pod tags are added to the EBS volume cost line items.
 
 Next, Datadog looks at all of the pods that claimed the volume on that day. The cost of the volume is allocated to a pod based on the resources it used and the length of time it ran. These resources
-include the provisioned capacity for Storage, IOPS, and Throughput. This allocated cost is enriched with all of the pod's tags.
+include the provisioned capacity for storage, IOPS, and throughput. This allocated cost is enriched with all of the pod's tags.
 
 
 ### ECS on EC2
