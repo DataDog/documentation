@@ -466,8 +466,6 @@ link_checks:on-schedule:
   tags: ["runner:docker"]
   stage: post-deploy
   cache: []
-  dependencies:
-    - build_live
   variables:
     GIT_STRATEGY: none
   script:
@@ -481,6 +479,8 @@ link_checks:on-schedule:
 
 run_pa11y:schedule:
   <<: *pa11y_live_template
+  dependencies:
+    - build_live
   rules:
     - if: $CI_COMMIT_BRANCH == "master" && $CI_PIPELINE_SOURCE == "schedule"
       when: always
