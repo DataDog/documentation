@@ -29,6 +29,10 @@ Tag filtering supports boolean and wildcard syntax so that you can quickly ident
 
 ## Facet panel
 
+<div class="alert alert-warning">
+Query Activity are in public beta.
+</div>
+
 The search bars provide the most comprehensive set of actions to filter the list of metrics. But facets can also quickly filter your metrics by:
 * **Configuration** : Quickly identify metrics with tag configurations
 * **Percentiles** : Quickly identify metrics with additional percentile aggregations
