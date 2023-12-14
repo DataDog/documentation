@@ -91,7 +91,7 @@ Create the `datadog` user:
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
-**Note:** Azure managed identity authentication is also supported. Please see [the guide][12] on how to configure this for your Azure instance.
+**Note:** Microsoft Entra ID managed identity authentication is also supported. Please see [the guide][12] on how to configure this for your Azure instance.
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
