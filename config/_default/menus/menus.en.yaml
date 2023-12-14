@@ -145,34 +145,39 @@ main:
     url: getting_started/session_replay/
     parent: getting_started
     weight: 15
+  - name: Continuous Testing
+    identifier: getting_started_continuous_testing
+    url: getting_started/continuous_testing/
+    parent: getting_started
+    weight: 16
   - name: Synthetic Monitoring
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
-    weight: 16
+    weight: 17
   - name: Browser Tests
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
-    weight: 1602
+    weight: 1702
   - name: API Tests
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 1601
+    weight: 1701
   - name: Private Locations
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 1603
+    weight: 1703
   - name: Incident Management
     url: getting_started/incident_management/
     parent: getting_started
-    weight: 17
+    weight: 18
   - name: Database Monitoring
     url: getting_started/database_monitoring/
     parent: getting_started
-    weight: 18
+    weight: 19
   - name: Cloud Security Management
     url: getting_started/cloud_security_management/
     parent: getting_started
