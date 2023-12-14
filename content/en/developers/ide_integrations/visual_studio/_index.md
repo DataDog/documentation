@@ -11,7 +11,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true">}}
-  The Datadog extension for Visual Studio is in public beta. It is intended for .NET developers who use the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a> for their .NET services. If the plugin stops working unexpectedly, check for updates or <a href=#feedback>reach out to the team</a>.
+  The Datadog extension for Visual Studio is in public beta. It is intended for .NET developers who use the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a> for their .NET services. If the extension stops working unexpectedly, check for updates or <a href=#feedback>reach out to the team</a>.
 {{< /callout >}}
 
 ## Overview
@@ -35,8 +35,8 @@ The **Continuous Profiler** helps you to reduce latency and lower cloud costs by
 - Windows 10 or higher
 - .NET Framework 4.7.2 or higher
 - Visual Studio 2022 Community, Professional or Enterprise edition (64-bit)
-- **Datadog Account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
-- **Continuous Profiler**: To display profiling data and insights, the plugin requires the Continuous Profiler to be configured for your services. For more information, see [Getting Started with the Continuous Profiler][2]
+- **Datadog Account**: The extension requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
+- **Continuous Profiler**: To display profiling data and insights, the extension requires the Continuous Profiler to be configured for your services. For more information, see [Getting Started with the Continuous Profiler][2]
 
 ## Getting Started
 
