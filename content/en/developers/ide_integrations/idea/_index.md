@@ -10,7 +10,7 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about Source Code Integration."
-- link: "/continuous_integration/static_analysis/?tab=githubactions"
+- link: "/static_analysis/?tab=githubactions"
   tag: "Documentation"
   text: "Learn about Static Analysis."
 - link: "https://www.jetbrains.com/lp/toolbox/"
@@ -223,5 +223,5 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 [10]: /watchdog/insights
 [11]: mailto:team-ide-integration@datadoghq.com
 [12]: /continuous_integration/explorer/?tab=testruns
-[13]: /continuous_integration/static_analysis/?tab=githubactions
-[14]: /continuous_integration/static_analysis/rules/
+[13]: /static_analysis/?tab=githubactions
+[14]: /static_analysis/rules/#python-rules
