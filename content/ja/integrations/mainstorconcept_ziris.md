@@ -46,7 +46,7 @@ categories:
 - トレーシング
 dependencies: []
 display_on_public_website: true
-draft: false
+draft: true
 git_integration_title: mainstorconcept_ziris
 integration_id: mainstorconcept-ziris
 integration_title: z/IRIS
