@@ -37,7 +37,7 @@ You can export your search query to a [saved view][6] by clicking the **Export**
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/cd/pipelines
+[1]: https://app.datadoghq.com/ci/deployments
 [2]: https://app.datadoghq.com/dashboard/lists
 [3]: https://app.datadoghq.com/notebook/list
 [4]: /dashboards
