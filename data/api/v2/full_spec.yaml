@@ -16526,6 +16526,12 @@ components:
         pattern:
           description: Not included if there is a relationship to a standard pattern.
           type: string
+        priority:
+          description: Integer from 1 (high) to 5 (low) indicating rule issue severity.
+          format: int64
+          maximum: 5
+          minimum: 1
+          type: integer
         tags:
           description: List of tags.
           items:
@@ -16681,6 +16687,13 @@ components:
         pattern:
           description: Regex to match.
           type: string
+        priority:
+          description: Integer from 1 (high) to 5 (low) indicating standard pattern
+            issue severity.
+          format: int64
+          maximum: 5
+          minimum: 1
+          type: integer
         tags:
           description: List of tags.
           items:
