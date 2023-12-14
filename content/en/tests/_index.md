@@ -5,6 +5,7 @@ aliases:
   - /continuous_integration/explore_tests/
   - /continuous_integration/guides/test_configurations/
   - /continuous_integration/integrate_tests/
+  - /continuous_integration/tests/
 further_reading:
     - link: "/monitors/types/ci/"
       tag: "Documentation"
@@ -38,17 +39,17 @@ cascade:
 ## Setup
 
 {{< whatsnext desc="Choose a language to set up Test Visibility in Datadog:" >}}
-    {{< nextlink href="continuous_integration/tests/setup/dotnet" >}}.NET{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/setup/java" >}}Java{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/setup/javascript" >}}JavaScript{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/setup/python" >}}Python{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/setup/ruby" >}}Ruby{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/setup/swift" >}}Swift{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/junit_upload" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/tests/containers" >}}Tests running in containers{{< /nextlink >}}
+    {{< nextlink href="tests/setup/dotnet" >}}.NET{{< /nextlink >}}
+    {{< nextlink href="tests/setup/java" >}}Java{{< /nextlink >}}
+    {{< nextlink href="tests/setup/javascript" >}}JavaScript{{< /nextlink >}}
+    {{< nextlink href="tests/setup/python" >}}Python{{< /nextlink >}}
+    {{< nextlink href="tests/setup/ruby" >}}Ruby{{< /nextlink >}}
+    {{< nextlink href="tests/setup/swift" >}}Swift{{< /nextlink >}}
+    {{< nextlink href="tests/setup/junit_xml" >}}Uploading JUnit test report files to Datadog{{< /nextlink >}}
+    {{< nextlink href="tests/containers" >}}Tests running in containers{{< /nextlink >}}
 {{< /whatsnext >}}
 
-In addition to tests, CI Visibility provides visibility over the whole testing phase of your project (except for Ruby).
+In addition to tests, Test Visibility provides visibility over the whole testing phase of your project (except for Ruby).
 
 ### Supported features
 
@@ -73,13 +74,13 @@ In addition to tests, CI Visibility provides visibility over the whole testing p
 
 Tests evaluate the behavior of code for a set of given conditions. Some of those conditions are related to the environment where the tests are run, such as the operating system or the runtime used. The same code executed under different sets of conditions can behave differently, so developers usually configure their tests to run in different sets of conditions and validate that the behavior is the expected for all of them. This specific set of conditions is called a *configuration*.
 
-In CI Visibility, a test with multiple configurations is treated as multiple tests with a separate test for each configuration. In the case where one of the configurations fails but the others pass, only that specific test and configuration combination is marked as failed.
+In Test Visibility, a test with multiple configurations is treated as multiple tests with a separate test for each configuration. In the case where one of the configurations fails but the others pass, only that specific test and configuration combination is marked as failed.
 
 For example, suppose you're testing a single commit and you have a Python test that runs against three different Python versions. If the test fails for one of those versions, that specific test is marked as failed, while the other versions are marked as passed. If you retry the tests against the same commit and now the test for all three Python versions pass, the test with the version that previously failed is now marked as both passed and flaky, while the other two versions remain passed, with no flakiness detected.
 
 ### Test configuration attributes
 
-When you run your tests with CI Visibility, the library detects and reports information about the environment where tests are run as test tags. For example, the operating system name, such as `Windows` or `Linux`, and the architecture of the platform, such as `arm64` or `x86_64`, are added as tags on each test. These values are shown in the commit and on branch overview pages when a test fails or is flaky for a specific configuration but not others.
+When you run your tests with Test Visibility, the library detects and reports information about the environment where tests are run as test tags. For example, the operating system name, such as `Windows` or `Linux`, and the architecture of the platform, such as `arm64` or `x86_64`, are added as tags on each test. These values are shown in the commit and on branch overview pages when a test fails or is flaky for a specific configuration but not others.
 
 The following tags are automatically collected to identify test configurations, and some may only apply to specific platforms:
 
@@ -101,7 +102,7 @@ The following tags are automatically collected to identify test configurations, 
 
 ## Custom configurations
 
-There are some configurations that cannot be directly identified and reported automatically because they can depend on environment variables, test run arguments, or other approaches that developers use. For those cases, you must provide the configuration details to the library so CI Visibility can properly identify them.
+There are some configurations that cannot be directly identified and reported automatically because they can depend on environment variables, test run arguments, or other approaches that developers use. For those cases, you must provide the configuration details to the library so Test Visibility can properly identify them.
 
 Define these tags as part of the `DD_TAGS` environment variable using the `test.configuration` prefix.
 
@@ -122,10 +123,10 @@ In order to filter using these configurations tags, [you must create facets for 
 ### Integrations
 
 {{< whatsnext desc="Learn about the following integrations with Test Visibility:" >}}
-{{< nextlink href="/continuous_integration/tests/developer_workflows" >}}Enhancing Developer Workflows with Datadog{{< /nextlink >}}
-{{< nextlink href="/continuous_integration/tests/code_coverage" >}}Code Coverage{{< /nextlink >}}
-{{< nextlink href="/continuous_integration/tests/browser_tests" >}}Instrument Cypress Browser Tests with Browser RUM{{< /nextlink >}}
-{{< nextlink href="/continuous_integration/tests/swift_tests" >}}Instrument Swift Tests with Browser RUM{{< /nextlink >}}
+{{< nextlink href="/tests/developer_workflows/" >}}Enhancing Developer Workflows with Datadog{{< /nextlink >}}
+{{< nextlink href="/tests/code_coverage" >}}Code Coverage{{< /nextlink >}}
+{{< nextlink href="/tests/browser_tests" >}}Instrument Cypress Browser Tests with Browser RUM{{< /nextlink >}}
+{{< nextlink href="/tests/swift_tests" >}}Instrument Swift Tests with Browser RUM{{< /nextlink >}}
 {{< /whatsnext >}}
 
 If [Intelligent Test Runner][13] is enabled for .NET, JavaScript, or Swift, [code coverage information][12], including file names and line numbers covered by each test, are collected from your projects.
@@ -146,5 +147,5 @@ When you evaluate failed or flaky tests, or the performance of a CI test on the 
 [9]: https://app.datadoghq.com/notebook/list
 [10]: https://app.datadoghq.com/ci/test-runs
 [11]: /monitors/types/ci/
-[12]: /continuous_integration/guides/code_coverage/
-[13]: /continuous_integration/intelligent_test_runner/
+[12]: /tests/code_coverage/
+[13]: /intelligent_test_runner/

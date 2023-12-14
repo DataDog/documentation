@@ -1,6 +1,8 @@
 ---
 title: Intelligent Test Runner
 kind: documentation
+aliases:
+- /continuous_integration/intelligent_test_runner/
 further_reading:
   - link: "https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/"
     tag: "Blog"

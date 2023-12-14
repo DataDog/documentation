@@ -2,6 +2,8 @@
 title: Add Custom Metrics To Your Tests
 kind: guide
 description: Learn how to use custom metrics (measures) in your tests.
+aliases:
+- /continuous_integration/guides/add_custom_metrics/
 further_reading:
 - link: "/continuous_integration/tests"
   tag: "Documentation"

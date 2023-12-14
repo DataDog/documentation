@@ -5,8 +5,9 @@ description: Learn how to report and use code coverage in Datadog.
 aliases:
 - /continuous_integration/guides/code_coverage/
 - /continuous_integration/integrate_tests/code_coverage/
+- /continuous_integration/tests/code_coverage/
 further_reading:
-- link: "/continuous_integration/tests"
+- link: "/tests"
   tag: "Documentation"
   text: "Learn about Test Visibility"
 - link: "/monitors/types/ci"
@@ -234,7 +235,7 @@ Get alerted whenever code coverage for your service drops below a certain thresh
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: /continuous_integration/tests/
+[1]: /tests/
 [2]: /dashboards
 [3]: /notebooks
 [4]: /monitors

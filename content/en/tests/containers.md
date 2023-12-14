@@ -3,10 +3,15 @@ title: Tests in Containers
 kind: documentation
 aliases:
   - /continuous_integration/setup_tests/containers
+  - /continuous_integration/tests/containers
+further_reading:
+- link: "/tests"
+  tag: "Documentation"
+  text: "Learn about Test Visibility"
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">Test Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 ## Overview
@@ -295,6 +300,10 @@ Additionally, you need to pass in the environment variables required to configur
 {{% /tab %}}
 {{< /tabs >}}
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://docs.docker.com/engine/reference/run/
 [2]: https://docs.docker.com/compose/reference/
-[3]: /continuous_integration/tests/
+[3]: /tests/
