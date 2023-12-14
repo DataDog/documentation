@@ -53,7 +53,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
    $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
 
    ruleset(name="infiles") {
-   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10516" template="DatadogFormat")
+   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10514" template="DatadogFormat")
    }
    ```
 
@@ -188,7 +188,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
    $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
 
    ruleset(name="infiles") {
-   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10516" template="DatadogFormat")
+   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10514" template="DatadogFormat")
    }
    ```
 
@@ -325,7 +325,7 @@ Configure Rsyslog to gather logs from your host, containers, and services.
    $template DatadogFormat,"<DATADOG_API_KEY> <%pri%>%protocol-version% %timestamp:::date-rfc3339% %HOSTNAME% %app-name% - - - %msg%\n"
 
    ruleset(name="infiles") {
-   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10516" template="DatadogFormat")
+   action(type="omfwd" protocol="tcp" target="intake.logs.<site_url>" port="10514" template="DatadogFormat")
    }
    ```
 
