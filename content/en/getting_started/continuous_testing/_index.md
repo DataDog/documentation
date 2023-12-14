@@ -33,7 +33,9 @@ Your codeless tests can:
 
 Once your tests run, examine test results and CI batches in the [Synthetic Monitoring & Continuous Testing Explorer.][5]
 
-Improve your developer workflow with Continuous Testing by [leveraging the `datadog-ci` NPM package][6] to run these tests directly in your CI pipeline and the [Datadog Synthetics VS Code Integration][7] to run tests in your IDE.
+Improve your developer workflow with Continuous Testing: 
+* Use the [`datadog-ci` NPM package][6] to run these tests directly in your CI pipeline.
+* Use the [Datadog Synthetics VS Code Integration][7] to run tests in your IDE.
 
 Continuous Testing also offers [parallelization][24], which allows you to execute multiple tests in your CI/CD pipelines simultaneously rather than sequentially to help speed up your building, testing, and deployment processes.
 
@@ -65,13 +67,13 @@ Browser tests simulate a user's journey through your web application beginning a
 
 ## Run your Continuous Testing tests
 
-To improve your developer workflow, you can use `datadog-ci` in your CLI as a CI environment to configure your test and then run your test directly in your IDE as a developer environment.
+To improve your development workflow, you can use `datadog-ci` in your CLI as a CI environment to configure your test. Then run your test directly in your IDE as a developer environment.
 
 ### Running tests in the CLI
 
-Extend your use of Continuous Testing by using the [datadog-ci NPM package][6]. datadog-ci lets you execute commands from within your CI/CD scripts to test your application before deployment, allowing you to automate blocking and rolling back changes in case of any testing failures. Refer to the [datadog-ci Configuration page for installation and setup instructions][10].
+Extend your use of Continuous Testing by using the [`datadog-ci` NPM package][6]. `datadog-ci` lets you execute commands from within your CI/CD scripts to test your application before deployment. You can automate blocking and rolling back changes when tests fail. Read the [`datadog-ci` Configuration page for installation and setup instructions][10].
 
-You can also use **datadog-ci** to only execute tests tagged with specific [Team tags](https://docs.datadoghq.com/account_management/teams/). For example, to run all tests tagged as **team-checkout**, you can:
+You can use `datadog-ci` to execute only those tests tagged with specific [Team tags][25]. For example, to run all tests tagged as `team-checkout`:
 
 1. Navigate to your command line.
 2. Run the following:
@@ -84,9 +86,9 @@ For more information about running the Synthetics command and using reporters, s
 
 Separately, you can use the [Datadog Synthetics VS Code Integration][12] to help you:
 
-* Use a [Private Location][13] or [Tunnel][14] to accelerate development locally
-* Run HTTP API tests and browser tests and see their results within VS Code
-* Test only what matters by executing relevant tests at the same time
+* Use a [Private Location][13] or [Tunnel][14] to accelerate development locally.
+* Run HTTP API tests and browser tests and see their results within VS Code.
+* Test only what matters by executing relevant tests at the same time.
 
 {{< img src="developers/ide_integrations/vscode/vscode-extension-demo.png" alt="vscode-extension-demo" style="width:100%;" >}}
 
@@ -102,13 +104,13 @@ Separately, you can use the [Datadog Synthetics VS Code Integration][12] to help
 
 The Synthetic Monitoring and Continuous Testing Explorer allows you to create visualizations and filter [CI batches][22] and [test runs][23] for your Continuous Testing tests. Navigate to **UX Monitoring** > **Continuous Testing**.
 
-Select **CI Batches** or **Test Runs** to see results from your CI batches or test runs in the Explorer. Click on a CI batch or test from the list to get a more detailed view of the result.
+Select **CI Batches** or **Test Runs** to see results from your CI batches or test runs in the Explorer. Select a CI batch or test from the list to get a more detailed view of the result.
 
 {{< img src="continuous_testing/ci_explorer_test_results.png" alt="ci_explorer_test_results" style="width:100%;" >}}
 
 ### Create a search query
 
-Click on one of the following out-of-the-box search queries to start filtering your CI batches or test runs:
+Click one of the following out-of-the-box search queries to filter your CI batches or test runs:
 - [All failing tests][19]
 - [Tests which initially failed but are now passing][20]
 - [Unused Tests][21]
@@ -126,7 +128,7 @@ To export your view of the Synthetic Monitoring & Continuous Testing Explorer, c
 
 For more information about using facets in your search query, see [Search Test Runs][17].
 
-## Set Parallelization preferences
+## Set parallelization preferences
 
 By default, Synthetic tests are not parallelized. Parallelization allows you to run multiple tests in your CI/CD pipelines simultaneously. If you want to parallelize your tests, you can use the **Estimate Parallelization** calculator to determine your needs.
 
@@ -134,7 +136,7 @@ Navigate to **UX Monitoring** > **Settings** and click **Parallelization Setting
 
 {{< img src="continuous_testing/parallelization_estimate.png" alt="parallelization_estimate" style="width:100%;" >}}
 
-For instance, if you have 24 tests per CI batch, each taking 2 minutes to complete, and your target is for all tests to be completed within 4 minutes, you'd need to run 12 tests in parallel.
+For instance, if you have 24 tests per CI batch, each taking 2 minutes to complete, and your target is for all tests to be completed within 4 minutes, you need to run 12 tests in parallel.
 
 $$\text"estimated parallelization" = {\text"24 tests per CI batch"* \text"2 minute duration"} / \text"4 minute expected duration in your CI pipeline"$$
 
@@ -170,3 +172,4 @@ See the [Parallelization documentation][18] for more details.
 [22]: /glossary/?product=synthetic-monitoring#test-batch
 [23]: /glossary/?product=synthetic-monitoring#test-run
 [24]: /glossary/?product=synthetic-monitoring#parallelization
+[25]: /account_management/teams/
