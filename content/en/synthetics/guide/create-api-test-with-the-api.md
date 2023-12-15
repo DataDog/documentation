@@ -21,6 +21,8 @@ This guide contains examples of configuration files and links to [Terraform][2] 
    - If you're using the Python client, see the [Python client example](#python-client)
    - If you're using Terraform, see the [Terraform example](#terraform)
 
+For more information, see [Create an API test][1] in the API documentation.
+
 ## JSON configuration
 
 ### HTTP test
