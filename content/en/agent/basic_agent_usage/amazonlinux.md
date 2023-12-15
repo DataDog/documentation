@@ -30,7 +30,7 @@ Packages are available for 64-bit x86 and Arm v8 architectures. For other archit
 
 ## Commands
 
-In Agent v6 and v7, the service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run through the Agent binary directly. In Agent v5, almost everything is done through the service manager.
+In Agent v6 & v7, the service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run through the Agent binary directly. In Agent v5, almost everything is done through the service manager.
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -112,6 +112,55 @@ Configuration files for [Integrations][1]:
 * `/etc/dd-agent/conf.d/`
 
 [1]: /integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
+## Uninstall the Agent
+
+{{< tabs >}}
+{{% tab "Agent v6 & v7" %}}
+
+
+```shell
+sudo yum remove datadog-agent
+```
+
+> This command removes the Agent, but does not remove:
+* the `datadog.yaml` configuration file,
+* user-created files in the `/etc/datadog-agent` configuration folder,
+* user-created files in the `/opt/datadog-agent` folder,
+* the `dd-agent` user.
+
+> If you also want to remove these elements and your Datadog log files, run this command after removing the Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/datadog-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+{{% /tab %}}
+
+{{% tab "Agent v5" %}}
+```shell
+sudo yum remove datadog-agent
+```
+
+> This command removes the Agent, but does not remove:
+
+* the `datadog.yaml` configuration file,
+* user-created files in the `/etc/dd-agent` configuration folder,
+* user-created files in the `/opt/datadog-agent` folder,
+* the `dd-agent` user.
+
+> If you also want to remove these elements and your Datadog log files, run this command after removing the Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/dd-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
 {{% /tab %}}
 {{< /tabs >}}
 

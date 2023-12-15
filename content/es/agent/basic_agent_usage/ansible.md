@@ -406,7 +406,7 @@ El siguiente ejemplo envía datos al sitio de Datadog de EE. UU. (por defecto),
       log_level: INFO
       apm_config:
         enabled: true
-      logs_enabled: true  # available with Agent v6 and v7
+      logs_enabled: true  # available with Agent v6 & v7
     datadog_checks:
       process:
         init_config:
