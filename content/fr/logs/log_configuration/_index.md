@@ -17,7 +17,7 @@ title: Log Configuration
 
 La solution Logging without Limits* de Datadog dissocie l'ingestion des logs de leur indexation. Elle vous permet de choisir les logs que vous souhaitez indexer et conserver, ou archiver, et de gérer les paramètres et contrôles de façon globale depuis la page de configuration des logs, accessible depuis [**Logs > Configuration**][1].
 
-{{< img src="logs/log_configuration_overview.mp4" alt="La section de configuration des logs dans l'application Datadog" video=true >}}
+{{< img src="logs/log_configuration_overview1.mp4" alt="La section de configuration des logs dans l'application Datadog" video=true >}}
 
 ## Options de configuration
 
