@@ -44,7 +44,7 @@ Your private locations test results display identically to your managed location
 
 2. In the Datadog site, hover over **[UX Monitoring][5]** and select **Settings** > **Private Locations**. 
 3. Click **Add Private Location**.
-4. Fill out your private location details. Only `Name` and `API key` fields are mandatory. To set up a private location on a Windows service, tick the **This is a Windows Private Location** checkbox.
+4. Fill out your private location details. Only `Name` and `API key` fields are mandatory.
 5. Click **Save Location and Generate Configuration File** to generate the configuration file associated with your private location on your worker. 
 6. Depending on where you installed your private location, you may need to input additional parameters to your configuration file: 
     - If you are using a proxy, input the URL as `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`. 
