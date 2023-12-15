@@ -44,8 +44,8 @@ The Datadog extension for Visual Studio requires:
 - Windows 10 or higher
 - .NET Framework 4.7.2 or higher
 - Visual Studio 2022 Community, Professional, or Enterprise edition (64-bit)
-- **Datadog account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
-- **Continuous Profiler**: To display profiling data and insights, the plugin requires the Continuous Profiler to be configured for your services. For more information, see [Getting Started with the Continuous Profiler][2].
+- **Datadog account**: The extension requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
+- **Continuous Profiler**: To display profiling data and insights, the extension requires the Continuous Profiler to be configured for your services. For more information, see [Getting Started with the Continuous Profiler][2].
 
 ### Download and install the extension
 
