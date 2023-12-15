@@ -6,25 +6,32 @@ aliases:
   - /agent/guide/linux-key-rotation-2024
 ---
 
-As a common best practice, Datadog periodically rotates the keys and certificates used to sign Datadog's Agent packages. Datadog packages includes:
+As a common best practice, Datadog periodically rotates the keys and certificates used to sign Datadog's Agent packages. Datadog packages include:
 
-- the different flavours of Agent (`datadog-agent`, `datadog-iot-agent`, `datadog-heroku-agent` and `datadog-dogstatsd`).
-- additional packages: Observability Pipelines Worker (`observability-pipelines-worker`), FIPS proxy (`datadog-fips-proxy`) and the APM injection and tracer libraries for Java, Python, .NET, Ruby and Node.js (all `datadog-apm-*` packages) 
+- the different flavors of Agent (`datadog-agent`, `datadog-iot-agent`, `datadog-heroku-agent` and `datadog-dogstatsd`).
+- additional packages: Observability Pipelines Worker (`observability-pipelines-worker`), FIPS proxy (`datadog-fips-proxy`) and the APM injection and tracer libraries for Java, Python, .NET, Ruby and Node.js (all `datadog-apm-*` packages).
 
 The following GPG keys, used to sign the above RPM and DEB packages, reach their end-of-life in September 2024. The rotation is planned for June 2024:
 
-- The RPM signing key with hash [`C6559B690CA882F023BDF3F63F4D1729FD4BF915`][1] rotation is planned on June, 2024 (exact date & time to be communicated later) and replaced by the key with hash [`7408BFD56BC5BF0C361AAAE85D88EEA3B01082D3`][2]. The new trusted key needs to be installed prior installing any RPM release published after this date.
-- The DEB signing key with hash [`D75CEA17048B9ACBF186794B32637D44F14F620E`][3] rotation is planned on June, 2024 (exact date & time to be communicated later) and replaced by the key with hash [`5F1E256061D813B125E156E8E6266D4AC0962C7D`][4]. APT checks the repo metadata signature, so the new key needs to be trusted by this date to install any future or existing version of the Agent from `apt.datadoghq.com`.
+RPM
+: Old trusted key hash: [`C6559B690CA882F023BDF3F63F4D1729FD4BF915`][1]
+: New trusted key hash: [`7408BFD56BC5BF0C361AAAE85D88EEA3B01082D3`][2]
+: After June 2024, install the new trusted key prior to installing any RPM release published after June 2024.
 
-Customers using Datadog's RPM or DEB packages might require a manual action to import the new key on their systems to install or upgrade the Agent packages after the rotation takes place.
+DEB
+: Old trusted key hash: [`D75CEA17048B9ACBF186794B32637D44F14F620E`][3]
+: New trusted key hash: [`5F1E256061D813B125E156E8E6266D4AC0962C7D`][4]
+: APT checks the repo metadata signature. After June 2024, install the new trusted key prior to installing any APT release from `apt.datadoghq.com` published after June 2024.
+
+If you're using Datadog's RPM or DEB packages, you might need to manually import the new key on your systems to install or upgrade the Agent packages after the rotation takes place.
 
 <div class="alert alert-info">
-<strong>Note</strong>: This DOES NOT affect the functionality of already running Agents. It only limits the ability to install or upgrade to a newer version of the Agent. Also, this doesn't affect Dockerized Linux Agents, Windows, or macOS Agents.
+Key rotation does not affect the functionality of already running Agents. It only limits the ability to install or upgrade to a newer version of the Agent.<br><br>Dockerized Linux Agents, Windows, or macOS Agents are not affected.
 </div>
 
 ## Install methods that automatically trust the new GPG key
 
-Your host automatically trusts the new key (no further action is required) if you're using one of the following install methods:
+If you're using one of the following installation methods, your host automatically trusts the new key and no further action is required:
 
 - [Agent install script][5] v1.18.0+ (released Jun 27, 2023)
 - [Chef cookbook][6] v4.18.0+ (released Jul 26, 2023)
@@ -37,15 +44,15 @@ Your host automatically trusts the new key (no further action is required) if yo
 - Containerized Agents (Docker/Kubernetes) for any version
 - Windows/MacOS Agents for any version
 
-Additionally, installing the DEB Agent v6.48.0+ or v7.48.0+ package through `apt` from the `apt.datadoghq.com` repository installs the [`datadog-signing-keys` package](#the-datadog-signing-keys-package) version 1.3.1. It automatically ensures that your host trusts the new key. If you have `datadog-signing-keys` version 1.3.1 or later installed, no further action is needed. Versions of `datadog-signing-keys` older than version 1.3.1 don't guarantee full preparedness for the key rotation.
+Additionally, installing the DEB Agent v6.48.0+ or v7.48.0+ package through `apt` from the `apt.datadoghq.com` repository installs the [`datadog-signing-keys` package](#the-datadog-signing-keys-package) version 1.3.1. The `datadog-signing-keys` package automatically ensures that your host trusts the new key. If you have `datadog-signing-keys` version 1.3.1 or later installed, no further action is needed. Versions of `datadog-signing-keys` older than version 1.3.1 don't guarantee full preparedness for the key rotation.
 
 If you installed Observability Pipelines Worker or APM tracer libraries **using the above install methods**, they already come with the newest keys. No further action is required.
 
-If you are installing the DEB Agent package from a different repository or you are not using `apt` (or a similar tool that checks repo metadata signatures), your system doesn't need to know the Datadog signing keys. No further action is needed. However, you may benefit from the [`datadog-signing-keys` package](#the-datadog-signing-keys-package).
+If you're installing the DEB Agent package from a different repository or you are not using `apt` (or a similar tool that checks repo metadata signatures), your system doesn't need to know the Datadog signing keys. No further action is needed. However, you may benefit from the [`datadog-signing-keys` package](#the-datadog-signing-keys-package).
 
 If you're unsure if a host trusts the new signing key, you can [check](#check-if-a-host-trusts-the-new-gpg-key).
 
-For hosts running older versions of the install methods listed above or older versions of the DEB package, Datadog recommends updating the install method to the latest version. Alternatively Debian and Ubuntu users can update the Agent to version 7.48.0+. Otherwise, the key can be [manually updated](#manual-update).
+For hosts running older versions of the install methods listed above or older versions of the DEB package, Datadog recommends updating the install method to the latest version. Alternatively, Debian and Ubuntu users can update the Agent to version 7.48.0+. Otherwise, the key can be [manually updated](#manual-update).
 
 ## What happens if the new key is not trusted before it is rotated?
 
@@ -96,7 +103,7 @@ $ curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo apt-key
 {{% /tab %}}
 {{% tab "RedHat/CentOS/SUSE" %}}
 
-Run the following commands on the host:
+Run the following command on the host:
 
 ```
 $ curl https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public | sudo rpm --import -
@@ -143,7 +150,7 @@ Alternatively, check if your repo file contains `https://keys.datadoghq.com/DATA
 
 ## The `datadog-signing-keys` package
 
-<div class="alert alert-info"><strong>Note:</strong> This section only applies to DEB Agent package users.</div>
+<div class="alert alert-info">This section only applies to DEB Agent package users.</div>
 
 Since Agent v6.31.0 and v7.31.0, all Datadog DEB packages have a soft dependency on the `datadog-signing-keys` package. The following versions of Agent packages have a soft dependency on the `datadog-signing-keys` package version `1.3.1`:
 - datadog-agent, datadog-iot-agent, datadog-heroku-agent, datadog-dogstatsd, datadog-agent-dbg v6.48.1+ & v7.48.1+
@@ -167,7 +174,7 @@ For example, to verify that a locally downloaded DEB package was built and signe
   $ debsig-verify datadog-dogstatsd_7.51.0-1_amd64.deb
   ```
 
-If the verification is successful, `debsig-verify` exits with status `0` and prints a message: `debsig: Verified package from 'Datadog, Inc.' (Datadog).`. Datadog's DEB packages embed signatures since v6.26.0/7.26.0, so this verification does not work on earlier versions.
+If the verification is successful, `debsig-verify` exits with status `0` and prints a message: `debsig: Verified package from 'Datadog, Inc.' (Datadog).` Datadog's DEB packages embed signatures since v6.26.0/7.26.0, so this verification does not work on earlier versions.
 
 Because the Agent v6.48.0+/7.48.0+'s package dependency on `datadog-signing-keys` is optional, it may not install if:
 
