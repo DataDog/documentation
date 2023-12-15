@@ -36,17 +36,9 @@ The latest Node.js Tracer supports versions `>=14`. For a full list of Datadog's
 
 Before you begin, make sure you've already [installed and configured the Agent][13].
 
-### Choose your instrumentation method
-
-After you deploy or install and configure your Datadog Agent, the next step is to instrument your application. You can do this in the following ways, depending on the infrastructure your app runs on, the language it's written in, and the level of configuration you require.
-
-See the following pages for supported deployment scenarios and languages:
-
-- [Inject the instrumentation library locally][11] (at the Agent);
-- Add the tracing library directly in the application, as described in the [Install the tracer](#install-the-tracer) section. Read more about [compatibility information][1].
-
-
 ### Instrument your application
+
+After you install and configure your Datadog Agent, the next step is to add the tracing library directly in the application to instrument it. Read more about [compatibility information][1].
 
 After the Agent is installed, follow these steps to add the Datadog tracing library to your Node.js applications:
 
@@ -167,4 +159,4 @@ Read [tracer settings][3] for a list of initialization options.
 [4]: /tracing/trace_collection/library_config/nodejs/
 [5]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
 [11]: /tracing/trace_collection/library_injection_local/
-[13]: /tracing/trace_collection#install-and-configure-the-agent
+[13]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

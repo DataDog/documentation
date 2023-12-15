@@ -18,9 +18,20 @@ algolia:
 
 Custom instrumentation allows for precise monitoring of specific components in your application. It allows you to capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation. Automatic instrumentation includes [Single Step Instrumentation][5] or using [Datadog tracing libraries][6].
 
-Custom instrumentation involves embedding tracing code directly into your application code. This allows for the programmatic creation, modification, or deletion of traces to send to Datadog. 
+Custom instrumentation involves embedding tracing code directly into your application code. This allows for the programmatic creation, modification, or deletion of traces to send to Datadog.
+
+## Use cases
+
+Some situations when you might use custom instrumentation include:
+
+- Collecting observability data from custom code with unique or complex business logic.
+- Providing deeper visibility and context into spans, including adding [span tags][1].
+- Precisely monitoring specific sequences of operations or user interactions that require fine-grained control.
+- Removing unwanted spans from traces.
 
 ## Getting started
+
+Before you begin, make sure you've already [installed and configured the Agent][7].
 
 Follow the relevant documentation for your custom instrumentation approach to learn more:
 
@@ -60,15 +71,6 @@ If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Use cases
-
-Some situations when you might use custom instrumentation include:
-
-- Collecting observability data from custom code with unique or complex business logic.
-- Providing deeper visibility and context into spans, including adding [span tags][1].
-- Precisely monitoring specific sequences of operations or user interactions that require fine-grained control.
-- Removing unwanted spans from traces.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -79,4 +81,5 @@ Some situations when you might use custom instrumentation include:
 [4]: /tracing/trace_collection/custom_instrumentation/opentracing/
 [5]: /tracing/trace_collection/single-step-apm
 [6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
+[7]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
 

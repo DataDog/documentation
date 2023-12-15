@@ -486,4 +486,4 @@ For Apache, run:
 [11]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages
 [12]: https://wiki.ubuntu.com/Debug%20Symbol%20Packages#Getting_-dbgsym.ddeb_packages
 [13]: https://valgrind.org/docs/manual/manual-core.html#manual-core.comment
-[14]: /tracing/trace_collection#install-and-configure-the-agent
+[14]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

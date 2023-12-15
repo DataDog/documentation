@@ -50,4 +50,4 @@ For configuration instructions and details about using the API, see the Datadog 
 [2]: https://app.datadoghq.com/apm/service-setup
 [3]: /tracing/trace_collection/library_config/go/
 [4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/ddtrace
-[5]: /tracing/trace_collection#install-and-configure-the-agent
+[5]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

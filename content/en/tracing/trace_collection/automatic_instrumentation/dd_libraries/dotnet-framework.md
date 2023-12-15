@@ -72,24 +72,13 @@ For a full list of Datadog's .NET Framework library and processor architecture s
 
 Before you begin, make sure you've already [installed and configured the Agent][12].
 
-1. [Choose your instrumentation method](#choose-your-instrumentation-method)
-2. [Install the tracer.](#install-the-tracer)
+1. [Install the tracer.](#install-the-tracer)
 3. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
 4. [View your live data.](#view-your-live-data)
 
-### Choose your instrumentation method
-
-After you deploy or install and configure your Datadog Agent, the next step is to instrument your application. You can do this in the following ways, depending on the infrastructure your app runs on, the language it's written in, and the level of configuration you require.
-
-See the following pages for supported deployment scenarios and languages:
-
-- [Inject the instrumentation library locally][11] (at the Agent); or
-- Add the tracing library directly in the application, as described in the [Install the tracer](#install-the-tracer) section. Read more about [compatibility information][1].
-
-
 ### Install the tracer
 
-<div class="alert alert-info">If you are collecting traces from a Kubernetes application, or from an application on a Linux host or container, as an alternative to the following instructions, you can inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection_local">Injecting Libraries</a> for instructions.</div>
+After you install and configure your Datadog Agent, the next step is to add the tracing library directly in the application to instrument it. Read more about [compatibility information][1].
 
 Install the Datadog .NET Tracer machine-wide so that all services on the machine are instrumented or on a per-application basis, so developers can manage the instrumentation through the application's dependencies. To see machine-wide installation instructions, click the Windows tab. To see per-application installation instructions, click the NuGet tab.
 
@@ -307,4 +296,4 @@ dotnet.exe example.dll
 [4]: /tracing/trace_collection/library_config/dotnet-framework/
 [5]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [11]: /tracing/trace_collection/library_injection_local/
-[12]: /tracing/trace_collection#install-and-configure-the-agent
+[12]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

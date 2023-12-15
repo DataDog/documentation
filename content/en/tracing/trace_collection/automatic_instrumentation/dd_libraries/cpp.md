@@ -184,4 +184,4 @@ If needed, configure the tracing library to send application performance telemet
 [3]: /tracing/compatibility_requirements/cpp
 [4]: https://app.datadoghq.com/apm/service-setup
 [5]: /tracing/trace_collection/library_config/cpp/
-[6]: /tracing/trace_collection#install-and-configure-the-agent
+[6]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

@@ -35,20 +35,11 @@ For a full list of Datadog's Python version and framework support (including leg
 
 Before you begin, make sure you've already [installed and configured the Agent][13].
 
-### Choose your instrumentation method
-
-After you deploy or install and configure your Datadog Agent, the next step is to instrument your application. You can do this in the following ways, depending on the infrastructure your app runs on, the language it's written in, and the level of configuration you require.
-
-See the following pages for supported deployment scenarios and languages:
-
-- [Inject the instrumentation library locally][11] (at the Agent);
-- Add the tracing library directly in the application, as described in the [Instrument your application](#instrument-your-application) section. Read more about [compatibility information][1].
-
 ### Instrument your application
 
-<div class="alert alert-info">If you are collecting traces from a Kubernetes application, as an alternative to the following instructions, you can inject the tracing library into your application using the Cluster Agent Admission Controller. Read <a href="/tracing/trace_collection/library_injection_local">Injecting Libraries Using Admission Controller</a> for instructions.</div>
+After you install and configure your Datadog Agent, the next step is to add the tracing library directly in the application to instrument it. Read more about [compatibility information][1].
 
-Once the agent is installed, to begin tracing applications written in Python, install the Datadog Tracing library, `ddtrace`, using pip:
+To begin tracing applications written in Python, install the Datadog Tracing library, `ddtrace`, using pip:
 
 ```python
 pip install ddtrace
@@ -122,4 +113,4 @@ If you are upgrading to ddtrace v1, review the [upgrade guide][4] and the [relea
 [4]: https://ddtrace.readthedocs.io/en/stable/upgrading.html#upgrade-0-x
 [5]: https://ddtrace.readthedocs.io/en/stable/release_notes.html#v1-0-0
 [11]: /tracing/trace_collection/library_injection_local/
-[13]: /tracing/trace_collection#install-and-configure-the-agent
+[13]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

@@ -72,21 +72,13 @@ For a full list of Datadog's .NET Core library and processor architecture suppor
 
 Before you begin, make sure you've already [installed and configured the Agent][12].
 
-1. [Choose your instrumentation method](#choose-your-instrumentation-method)
-2. [Install the tracer.](#install-the-tracer)
-3. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
-4. [View your live data.](#view-your-live-data)
-
-### Choose your instrumentation method
-
-After you deploy or install and configure your Datadog Agent, the next step is to instrument your application. You can do this in the following ways, depending on the infrastructure your app runs on, the language it's written in, and the level of configuration you require.
-
-See the following pages for supported deployment scenarios and languages:
-
-- [Inject the instrumentation library locally][11] (at the Agent); or
-- Add the tracing library directly in the application, as described in the [Install the tracer](#install-the-tracer) section. Read more about [compatibility information][1].
+1. [Install the tracer.](#install-the-tracer)
+2. [Enable the tracer for your service.](#enable-the-tracer-for-your-service)
+3. [View your live data.](#view-your-live-data)
 
 ### Install the tracer
+
+After you install and configure your Datadog Agent, the next step is to add the tracing library directly in the application to instrument it. Read more about [compatibility information][1].
 
 You can install the Datadog .NET Tracer machine-wide so that all services on the machine are instrumented, or you can install it on a per-application basis to allow developers to manage the instrumentation through the application's dependencies. To see machine-wide installation instructions, click the Windows or Linux tab. To see per-application installation instructions, click the NuGet tab.
 
@@ -448,4 +440,4 @@ When using `systemctl` to run .NET applications as a service, you can also set e
 [5]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [6]: https://www.freedesktop.org/software/systemd/man/systemctl.html#set-environment%20VARIABLE=VALUE%E2%80%A6
 [11]: /tracing/trace_collection/library_injection_local/
-[12]: /tracing/trace_collection#install-and-configure-the-agent
+[12]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent

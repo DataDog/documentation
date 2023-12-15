@@ -30,20 +30,11 @@ For a full list of Datadog's Java version and framework support (including legac
 
 Before you begin, make sure you've already [installed and configured the Agent][18].
 
-### Choose your instrumentation method
-
-After you deploy or install and configure your Datadog Agent, the next step is to instrument your application. You can do this in the following ways, depending on the infrastructure your app runs on, the language it's written in, and the level of configuration you require.
-
-See the following pages for supported deployment scenarios and languages:
-
-- [Inject the instrumentation library locally][11] (at the Agent);
-- Add the tracing library directly in the application, as described in the [Install the tracer](#install-the-tracer) section. Read more about [compatibility information][1].
-
 ### Instrument your application
 
-If you are collecting traces from a Kubernetes application, or from an application on a Linux host or container, as an alternative to the following instructions, you can inject the tracing library into your application. Read [Injecting Libraries][11] for instructions.
+After you install and configure your Datadog Agent, the next step is to add the tracing library directly in the application to instrument it. Read more about [compatibility information][1].
 
-After the Agent is installed, to begin tracing your applications:
+To begin tracing your applications:
 
 1. Download `dd-java-agent.jar` that contains the latest tracer class files, to a folder that is accessible by your Datadog user:
 
@@ -234,5 +225,5 @@ If needed, configure the tracing library to send application performance telemet
 [11]: /tracing/trace_collection/library_injection_local/
 [16]: /agent/remote_config/
 [17]: https://app.datadoghq.com/services
-[18]: /tracing/trace_collection#install-and-configure-the-agent
+[18]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
 [19]: https://docs.oracle.com/en/java/javase/11/tools/jdeps.html
