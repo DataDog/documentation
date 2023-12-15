@@ -11,6 +11,14 @@ further_reading:
   text: 'Learn how to search and manage your deployment results'
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">CD Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" header="false" >}}
+CD Visibility is in private beta. To request access, complete the form.
+{{< /callout >}}
+
 ## Overview
 
 Facets are user-defined tags and attributes from your pipelines. They are useful for both [qualitative](#qualitative-facets) and [quantitative](#quantitative-measures) data analysis. Facets allow you to manipulate your deployments in the search queries that appear on [dashboards][2] and in [notebooks][3].

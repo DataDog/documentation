@@ -11,6 +11,14 @@ further_reading:
   text: "Learn about Saved Views"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">CD Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" header="false" >}}
+CD Visibility is in private beta. To request access, complete the form.
+{{< /callout >}}
+
 ## Overview
 
 The [CD Visibility Explorer][4] allows you to [search and filter](#search-and-filter), [analyze](#analyze), [visualize](#visualize), and [export](#export) deployment executions at multiple levels using any tag.
