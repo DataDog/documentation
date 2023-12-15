@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Monitoring your application end-to-end is crucial to understanding your users' experience. The [Datadog test recorder][1] allows you to simplify configuration for these complex testing workflows. However, you may want to manage your Synthetics resources programmatically and define browser tests with the API or through Terraform.
+Monitoring your application end-to-end is crucial to understanding your users' experience. The [Datadog test recorder][1] allows you to simplify configuration for these complex testing workflows. However, you may want to manage your Synthetics resources programmatically and define browser tests with the API or through [Terraform][14].
 
 ## Manage your browser tests with the API
 
@@ -65,3 +65,4 @@ The [synthetics concurrency cap resource][13] enables you to limit the number of
 [11]: /synthetics/private_locations
 [12]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
 [13]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_concurrency_cap
+[14]: https://www.terraform.io/
