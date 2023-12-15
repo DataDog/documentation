@@ -19,9 +19,9 @@ further_reading:
 ## Overview
 
 When creating SLOs, you can choose from the following types:
-- **Metric-based SLOs**: can be used for count-based data streams, the SLI is based on the sum of good events divided by the sum of total events.
-- **Monitor-based SLOs**: can be be used for time-based data sets, the SLI is based on the amount of time your system exhibits good behavior divided by the total time. Monitor-based SLOs must be based on a new or existing Datadog monitor, any adjustments must be made to the underlying monitor (cannot be done through SLO creation).
-- **Time Slice SLOs**: can be be used for time-based data sets, the SLI is based on the amount of time your system exhibits good behavior divided by the total time. Time Slice SLOs do not require a Datadog monitor, you can try out different metric filters and thresholds and instantly explore downtime during SLO creation.
+- **Metric-based SLOs**: can be used when you want the SLI calculation to be count-based, the SLI is calculated as the sum of good events divided by the sum of total events.
+- **Monitor-based SLOs**: can be used when you want the SLI calculation to be time-based, the SLI is based on the Monitor's uptime. Monitor-based SLOs must be based on a new or existing Datadog monitor, any adjustments must be made to the underlying monitor (cannot be done through SLO creation).
+- **Time Slice SLOs**: can be used when you want the SLI calculation to be time-based, the SLI is based on your custom uptime definition (amount of time your system exhibits good behavior divided by the total time). Time Slice SLOs do not require a Datadog monitor, you can try out different metric filters and thresholds and instantly explore downtime during SLO creation.
  
 ## Comparison chart
 
