@@ -11,11 +11,11 @@ further_reading:
       text: "Learn more about log processors"
 ---
 
-<div class="alert alert-warning">Log Pipelines Scanner is in private beta. <a href="/help">Contact Support</a> to request access. </div>
+<div class="alert alert-warning">Log Pipeline Scanner is in private beta. <a href="/help">Contact Support</a> to request access. </div>
 
 ## Overview
 
-Log Pipelines Scanner allows you to scan log pipelines in real time, trace specific logs, and identify which pipelines and processing rules made changes to its fields. Organizations rely on log pipelines to process extensive log volumes, each team restructuring and enriching logs differently for their specific use cases, such as security monitoring, compliance audits, and DevOps.
+Log Pipeline Scanner allows you to scan log pipelines in real time, trace specific logs, and identify which pipelines and processing rules made changes to its fields. Organizations rely on log pipelines to process extensive log volumes, each team restructuring and enriching logs differently for their specific use cases, such as security monitoring, compliance audits, and DevOps.
 
 Use Pipeline Scanner to:
 
