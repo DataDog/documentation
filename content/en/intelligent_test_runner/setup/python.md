@@ -70,6 +70,10 @@ After completing setup, run your tests as you normally do:
 DD_ENV=ci DD_SERVICE=my-python-app DD_CIVISIBILITY_ITR_ENABLED=true ddtrace-run python -m unittest
 {{< /code-block >}}
 
+### Known limitations
+
+In some cases, if your `unittest` test execution is run using the `coverage.py` library, this may affect total line code coverage.
+
 ## Disabling skipping for specific tests
 
 You can override the Intelligent Test Runner's behavior and prevent specific tests from being skipped. These tests are referred to as unskippable tests.
