@@ -27,6 +27,20 @@
       "description": "Create an Azure integration returns \"OK\" response"
     }
   ],
+  "DeleteAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Delete an Azure integration returns \"OK\" response"
+    }
+  ],
+  "UpdateAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Update an Azure integration returns \"OK\" response"
+    }
+  ],
   "CreateDashboardList": [
     {
       "group": "dashboard_lists",
