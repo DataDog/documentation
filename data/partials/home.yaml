@@ -108,6 +108,10 @@ nav_sections:
         link: continuous_integration/
         icon: ci
         desc: See test metrics, build results, and pipeline executions for your CI pipeline
+      - title: CD Visibility
+        link: continuous_delivery/
+        icon: ci
+        desc: See deployment metrics, results, and insights for your CD provider
       - title: Cloud Cost Management
         link: cloud_cost_management/
         icon: cloud-cost-management

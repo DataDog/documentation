@@ -48,8 +48,6 @@ To enable resource scanning for your cloud accounts for CSM Misconfigurations, y
 
 The following instructions enables the container image metadata collection and [Software Bill of Materials (SBOM)][10] collection in the Datadog Agent for CSM Vulnerabilities. This allows you to scan the libraries in container images to detect vulnerabilities. Vulnerabilities are evaluated and and scanned against your containers every hour.
 
-**Note**: CSM Vulnerabilities is not available for AWS Fargate or Windows environments.
-
 ### Follow the in-app instructions (recommended)
 
 To enable CSM Vulnerabilities on the Agent for your containers, navigate to the [**Cloud Security Management Setup** page][5] and click **Hosts and containers**.

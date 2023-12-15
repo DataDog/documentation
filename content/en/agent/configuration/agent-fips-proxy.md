@@ -8,6 +8,9 @@ further_reading:
 - link: "agent/configuration/proxy"
   tag: "Documentation"
   text: "Agent Proxy Configuration"
+- link: "https://www.datadoghq.com/blog/datadog-fips-enabled-agent/"
+  tag: "Blog"
+  text: "Monitor highly regulated workloads with Datadog's FIPS-enabled Agent"
 algolia:
   rank: 80
   tags: ["fips", "fips proxy", "compliance", "fedramp", "govcloud"]
