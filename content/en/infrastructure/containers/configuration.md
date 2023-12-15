@@ -87,7 +87,7 @@ Datadog collects container image metadata to provide enhanced debugging context.
 {{< tabs >}}
 {{% tab "Kubernetes (Helm)" %}}
 
-If you are using helm version `>= 3.46.0`, image collection is [enabled by default][3].</br>
+If you are using helm version `>= 3.46.0`, image collection is [enabled by default][1].</br>
 Or, add the following to your `values.yaml` Helm configuration file:
 
 ```yaml
@@ -123,7 +123,7 @@ spec:
 
 {{% tab "ECS EC2" %}}
 
-To enable container image vulnerability scanning on your [ECS EC2 instances][4], add the following environment variables to your `datadog-agent` container definition:
+To enable container image vulnerability scanning on your [ECS EC2 instances][1], add the following environment variables to your `datadog-agent` container definition:
 
 ```yaml
 {
@@ -182,13 +182,14 @@ container_image:
   enabled: true
 ```
 
+[1]: /containers/amazon_ecs/?tab=awscli#setup
 {{% /tab %}}
 {{< /tabs >}}
 
 #### Container registries
 
 ##### Amazon Elastic Container Registry (Amazon ECR)
-Set up the [AWS integration][5] to begin crawling Container Image metadata from AWS Elastic Container Registry
+Set up the [AWS integration][4] to begin crawling Container Image metadata from AWS Elastic Container Registry
 
 
 ## Configure Orchestrator Explorer
@@ -311,5 +312,4 @@ Set the environment variable on both the Process Agent and Cluster Agent contain
 [1]: https://app.datadoghq.com/containers
 [2]: /infrastructure/containers
 [3]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L651 
-[4]: /containers/amazon_ecs/?tab=awscli#setup
-[5]: /integrations/amazon_web_services/
+[4]: /integrations/amazon_web_services/
