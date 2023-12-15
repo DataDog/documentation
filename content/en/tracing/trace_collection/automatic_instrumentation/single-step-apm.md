@@ -34,9 +34,9 @@ For an Ubuntu host:
 2. Restart the services on the host or VM.
 3. [Explore the performance observability of your services in Datadog][5].
 
-   <div class="alert alert-info">You can optionally set an environment for your services and other telemetry that pass through the Agent. Read <a href="#tagging-observability-data-by-environment">tagging observability data by environment</a> to learn how. </div>
+   <div class="alert alert-info">You can optionally set an environment for your services and other telemetry that pass through the Agent. Read <a href="#env-linux">tagging observability data by environment</a> to learn how. </div>
 
-### Tagging observability data by environment
+### Tagging observability data by environment {#env-linux}
 
 Set `DD_ENV` in your one-line install command for Linux to automatically tag instrumented services and other telemetry that pass through the Agent with a specific environment. For example, if the Agent is installed in your staging environment, set `DD_ENV=staging` to associate your observability data with `staging`.
 
@@ -79,9 +79,9 @@ For a Docker Linux container:
 3. Restart the Docker containers.
 4. [Explore the performance observability of your services in Datadog][6].
 
-   <div class="alert alert-info">You can optionally set an environment for your services and other telemetry that pass through the Agent. Read <a href="#tagging-observability-data-by-environment">tagging observability data by environment</a> to learn how. </div>
+   <div class="alert alert-info">You can optionally set an environment for your services and other telemetry that pass through the Agent. Read <a href="#env-docker">tagging observability data by environment</a> to learn how. </div>
 
-### Tagging observability data by environment
+### Tagging observability data by environment {#env-docker}
 
 Set `DD_ENV` in the library injector installation command for Docker to automatically tag instrumented services and other telemetry that pass through the Agent with a specific environment. For example, if the Agent is installed in your staging environment, set `DD_ENV=staging` to associate your observability data with `staging`.
 
@@ -143,9 +143,8 @@ To enable single step instrumentation with Helm:
       <ul>
          <li><a href="#enabling-or-disabling-instrumentation-for-namespaces">Enabling or disabling instrumentation for namespaces.</a></li>
          <li><a href="#specifying-tracing-library-versions">Specifying tracing library versions.</a></li>
-         <li><a href="#tagging-observability-data-by-environment">Tagging observability data by environment.</a></li>
+         <li><a href="#env-k8">Tagging observability data by environment.</a></li>
          <li><a href="https://docs.datadoghq.com/tracing/trace_collection/library_injection_local/">Choosing specific pod specifications.</a></li>
-
       </ul>
    </div>
 
@@ -217,7 +216,7 @@ To set specific tracing library versions, add the following configuration to you
 
 <div class="alert alert-info">Supported languages include .Net (<code>dotnet</code>), Python (<code>python</code>), Java (<code>java</code>), Javascript (<code>js</code>), and Ruby (<code>ruby</code>).</div>
 
-### Tagging observability data by environment
+### Tagging observability data by environment {#env-k8}
 
 Automatically tag instrumented services and other telemetry that pass through the Agent with a specific environment. For example, if the Agent is installed in your staging environment, set `env:staging` to associate your observability data with `staging`.
 
