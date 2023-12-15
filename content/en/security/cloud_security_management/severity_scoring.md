@@ -13,9 +13,9 @@ further_reading:
   text: "Learn more about CSM Vulnerabilities"
 ---
 
-## Misconfigurations, Identity Risks, and Security Inbox Misconfigurations
+## CSM severity scoring framework
 
-This framework is designed to compare the likelihood that an adversary would take advantage of a misconfiguration to the risk posed to your environment. By weighting both of these aspects, findings can be prioritized more accurately by their real-world risks. The matrices below show how to compute a misconfiguration's severity score depending on certain criteria.
+CSM Misconfigurations, CSM Identity Risks, and Security Inbox misconfigurations use the CSM severity scoring framework to determine the severity of a finding. The framework compares the likelihood that an adversary would take advantage of a misconfiguration to the risk posed to your environment. By weighting both of these aspects, findings can be prioritized more accurately based on their real-world risks. The matrices below show how to compute a misconfiguration's severity score depending on certain criteria.
 
 ### Likelihood
 
@@ -24,29 +24,35 @@ The likelihood component is made up of two subcomponents:
 * Attack vector: The means through which a misconfiguration can be exploited.
 * Accessibility: If the resource is publicly accessible or not.
 
+#### Attack vector 
+
 The attack vector is determined by the following criteria:
 
-|    Attack Vector    |                                                 Definition                                                |
-|:-------------------:|:---------------------------------------------------------------------------------------------------------:|
-| Required Privileges | Requires specific privileges or access to abuse.                                                          |
-| Vulnerability       | Requires a vulnerable component to abuse, such as a software vulnerability on a compute instance or a leaked password/access key. |
-| No Authorization    | Requires no authorization/authentication to abuse.                                                        |
+|    Attack Vector    |                                                              Definition                                                              |
+|:-------------------:|:------------------------------------------------------------------------------------------------------------------------------------:|
+| Required Privileges |                                           Requires specific privileges or access to abuse.                                           |
+|    Vulnerability    | Requires a vulnerable component to abuse, such as a software vulnerability on a compute instance or a leaked password or access key. |
+|  No Authorization   |                                        Requires no authorization or authentication to abuse.                                         |
 
-The accessibility is determined by the following criteria:
+#### Accessibility
 
-| Accessibility |                             Definition                             |
-|:-------------:|:------------------------------------------------------------------:|
-| Private       | The vulnerable component/resource is in a private network.         |
-| Public        | The vulnerable component/resource is accessible from the internet. |
+Accessibility is determined by the following criteria:
 
-These subcomponents determine the Likelihood score:
+| Accessibility |                              Definition                               |
+|:-------------:|:---------------------------------------------------------------------:|
+|    Private    |     The vulnerable component or resource is in a private network.     |
+|    Public     | The vulnerable component or resource is accessible from the internet. |
 
-|               |                     | Accessibility |          |
-|---------------|---------------------|---------------|----------|
-|               |                     | **Private**       | **Public**   |
-| **Attack Vector** | **Required Privileges** | Improbable           | Possible   |
-|               | **Vulnerability**       | Possible        | Probable     |
-|               | **No Authorization**    | Probable          | Highly Probable |
+#### Likelihood score
+
+Together, the attack vector and accessibility subcomponents determine the Likelihood score:
+
+|                   |                         | Accessibility |                 |
+|-------------------|-------------------------|---------------|-----------------|
+|                   |                         | **Private**   | **Public**      |
+| **Attack Vector** | **Required Privileges** | Improbable    | Possible        |
+|                   | **Vulnerability**       | Possible      | Probable        |
+|                   | **No Authorization**    | Probable      | Highly Probable |
 
 ### Impact
 
@@ -59,17 +65,17 @@ The impact component is how damaging the exploitation of the misconfiguration wo
 |   High   | Abusing this misconfiguration results in an impact to the confidentiality, integrity, or availability of the vulnerable component and impacts a significant number of other resources. For example, an identity with the `S3FullAccess` policy attached. |
 | Critical | Abusing this misconfiguration results in complete control of all resources in the account. For example, an identity with the `AdministratorAccess` policy attached. |
 
-### Severity matrix
+### Severity scoring matrix
 
-These two submatrices combined compute the overall severity score for a misconfiguration.
+The likelihood and impact components are used to compute the overall severity score for a misconfiguration.
 
-|            |          | Impact |        |          |          |
-|------------|----------|--------|--------|----------|----------|
-|            |          | **Low**    | **Medium** | **High**     | **Critical** |
-| **Likelihood** | **Improbable**      | Low    | Low    | Medium   | Medium   |
-|            | **Possible**   | Low    | Medium | High     | High     |
-|            | **Probable**     | Medium | High   | High     | Critical |
-|            | **Highly Probable** | Medium | High   | Critical | Critical |
+|                |                     | Impact  |            |          |              |
+|----------------|---------------------|---------|------------|----------|--------------|
+|                |                     | **Low** | **Medium** | **High** | **Critical** |
+| **Likelihood** | **Improbable**      | Low     | Low        | Medium   | Medium       |
+|                | **Possible**        | Low     | Medium     | High     | High         |
+|                | **Probable**        | Medium  | High       | High     | Critical     |
+|                | **Highly Probable** | Medium  | High       | Critical | Critical     |
 
 ### Examples
 
@@ -77,7 +83,9 @@ To explain how the framework is used here are a few examples.
 
 #### Example 1: SNS Topic should have access restrictions set for subscription
 
-The detection rule for [SNS Topic should have access restrictions set for subscription][1] checks if the SNS topic has a resource-based policy that contains a `Principal` of `*`, and an `Action` with the `sns:Subscribe` permission. This combination would allow anyone the ability to subscribe to the SNS topic and receive its notifications. This rule would be scored as follows:
+The detection rule for [SNS Topic should have access restrictions set for subscription][1] checks if the SNS topic has a resource-based policy that contains a `Principal` of `*`, and an `Action` with the `sns:Subscribe` permission. This combination gives anyone the ability to subscribe to the SNS topic and receive its notifications. 
+
+Using the severity scoring framework, the rule would be scored as follows:
 
 - Likelihood: Highly Probable
   - Attack Vector: No Authorization
@@ -93,7 +101,9 @@ The detection rule for [SNS Topic should have access restrictions set for subscr
 
 #### Example 2: EC2 instances should enforce IMDSv2
 
-The detection rule for [EC2 instances should enforce IMDSv2][2] checks if an EC2 instance is using the instance metadata service version 1 ([IMDSv1][3]), which is vulnerable to common web application attacks. If exploited, an adversary would be able to access the IAM credentials stored in the IMDS and use them to access resources in the AWS account. This rule would be scored as follows:
+The detection rule for [EC2 instances should enforce IMDSv2][2] checks if an EC2 instance is using the Instance Metadata Service Version 1 ([IMDSv1][3]), which is vulnerable to common web application attacks. If exploited, an adversary would be able to access the IAM credentials stored in the IMDS and use them to access resources in the AWS account. 
+
+Using the severity scoring framework, the rule would be scored as follows:
 
 - Likelihood: Possible
   - Attack Vector: Vulnerability
@@ -107,9 +117,9 @@ The detection rule for [EC2 instances should enforce IMDSv2][2] checks if an EC2
 - Severity Score: Possible x Medium = Medium
   - The final severity score is Medium. This is because a Possible likelihood mixed with a Medium impact results in an overall score of Medium.
 
-## Vulnerabilities
+## CVSS 3.0
 
-CSM Vulnerabilities uses [CVSS 3.0][5] to determine a base score and modifies it to take into account the following:
+CSM Vulnerabilities uses Common Vulnerability Scoring System version 3.0 ([CVSS 3.0][5]) to determine a base score for a vulnerability. It then modifies the base score to take into account the following:
 
 - Whether the underlying infrastructure is running and how wide-spread the impact is.
 - The environment in which the underlying infrastructure is running. For example, if the environment is not production, the severity is downgraded.
