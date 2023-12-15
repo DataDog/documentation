@@ -35,10 +35,10 @@ The following enhanced Step Functions metrics are available.
 : Counts the total number of tasks that timed out.
 
 `aws.states.enhanced.state.run_duration`
-: Gauge for durations of a state’s runs.
+: Gauge for durations of a state's runs.
 
 `aws.states.enhanced.state.duration`
-: Gauge for duration of a state’s runs, including retries.
+: Gauge for duration of a state's runs, including retries.
 
 `aws.states.enhanced.state.invocation_count`
 : Count of the number of times a state is invoked.
