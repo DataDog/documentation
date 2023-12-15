@@ -1,74 +1,162 @@
 ---
-title: Continuous Integration Visibility
+title: Static Analysis Rules
 kind: documentation
-aliases:
-  - /ci
+description: View rules for multiple languages for Static Analysis.
+is_beta: true
+type: static-analysis
+
+rulesets:
+  docker-best-practices:
+    title: "Follow best practices with using Docker"
+    description: |
+      Best practices for using Docker.
+  java-best-practices:
+    title: "Follow best practices in Java"
+    description: |
+      Rules to enforce Java best practices.
+  java-code-style:
+    title: "Follow Java code style patterns"
+    description: |
+      Rules to enforce Java code style.
+  java-inclusive:
+    title: "Use inclusive language in Java"
+    description: |
+      Rules for Java to avoid inappropriate wording in the code and comments.
+  java-security:
+    title: "Ensure your Java code is secure"
+    description: |
+      Rules focused on finding security issues in Java code.
+  javascript-best-practices:
+    title: "Follow best practices for writing JavaScript code"
+    description: |
+      Rules to enforce JavaScript best practices.
+  javascript-browser-security:
+    title: "Security rules for JavaScript web applications"
+    description: |
+      Rules focused on finding security issues in your JavaScript web applications.
+  javascript-code-style:
+    title: "Enforce JavaScript code style"
+    description: |
+      Rules to enforce JavaScript code style.
+  javascript-common-security:
+    title: "Common security rules for JavaScript"
+    description: |
+      Rules focused on finding security issues in your JavaScript code.
+  javascript-express:
+    title: "Check for Express.js best practices and security"
+    description: |
+      Rules specifically for Express.js best practices and security.
+  javascript-inclusive:
+    title: "Check Python code for wording issues"
+    description: |
+      Rules for Python to avoid inappropriate wording in the code and comments.
+  javascript-node-security:
+    title: "Identify potential security hotspots in Node"
+    description: |
+      Rules to identify potential security hotspots in Node. This may include false positives that require further triage.
+  jsx-react:
+    title: "React specific linting rules"
+    description: |
+      This plugin exports a `recommended` configuration that enforces React good practices.
+  python-best-practices:
+    title: "Follow best practices for writing Python code"
+    description: |
+      Best practices for Python to write efficient and bug-free code.
+  python-code-style:
+    title: "Enforce Python code style"
+    description: |
+      Rules to enforce Python code style.
+  python-design:
+    title: "Check Python program structure"
+    description: |
+      Rules to check your Python program structure, including things like nested loops.
+  python-django:
+    title: "Check for Django best practices and security"
+    description: |
+      Rules specifically for Django best practices and security.
+  python-flask:
+    title: "Check for Flask best practices and security"
+    description: |
+      Rules specifically for Flask best practices and security.
+  python-inclusive:
+    title: "Check Python code for wording issues"
+    description: |
+      Rules for Python to avoid inappropriate wording in the code and comments.
+  python-pandas:
+    title: "Good practices for data science with pandas"
+    description: |
+      A set of rules to check that pandas code is used appropriately.
+      
+       - Ensures `import` declarations follow coding guidelines.
+       - Avoid deprecated code and methods.
+       - Avoid inefficient code whenever possible.
+  python-security:
+    title: "Ensure your Python code is safe and secure"
+    description: |
+      Rules focused on finding security and vulnerability issues in your Python code, including those found in the OWASP10 and SANS25.
+       
+       - Use of bad encryption and hashing protocols
+       - Lack of access control
+       - Security misconfiguration
+       - SQL injections
+       - Hardcoded credentials
+       - Shell injection
+       - Unsafe deserialization
+  tsx-react:
+    title: "TypeScript React code quality"
+    description: |
+      This plugin exports a `recommended` configuration that enforces React good practices.
+  typescript-best-practices:
+    title: "Follow best practices for writing TypeScript code"
+    description: |
+      Rules to enforce TypeScript best practices.
+  typescript-browser-security:
+    title: "Security rules for TypeScript web applications"
+    description: |
+      Rules focused on finding security issues in your TypeScript web applications.
+  typescript-code-style:
+    title: "TypeScript opinionated code patterns"
+    description: |
+      Rules considered to be best practice for modern TypeScript codebases, but that do not impact program logic. These rules are generally opinionated about enforcing simpler code patterns.
+  typescript-common-security:
+    title: "Common security rules for TypeScript"
+    description: |
+      Rules focused on finding security issues in your TypeScript code.
+  typescript-express:
+    title: "Check for Express.js TypeScript best practices and security"
+    description: |
+      Rules specifically for Express.js TypeScript best practices and security.
+  typescript-inclusive:
+    title: "Check Python code for wording issues"
+    description: |
+      Rules for Python to avoid inappropriate wording in the code and comments.
+  typescript-node-security:
+    title: "Identify potential security hotspots in Node"
+    description: |
+      Rules to identify potential security hotspots in Node. This may include false positives that require further triage.
+
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=CI%20Visibility"
-    tag: "Release Notes"
-    text: "Check out the latest CI Visibility releases! (App login required)"
-  - link: "https://www.datadoghq.com/blog/circleci-monitoring-datadog/"
-    tag: "Blog"
-    text: "Monitor your CircleCI environment with Datadog"
-  - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
-    tag: "Blog"
-    text: "Configure pipeline alerts with Datadog CI monitors"
-  - link: "/continuous_integration/pipelines/"
+  - link: "/continuous_integration/static_analysis/"
     tag: "Documentation"
-    text: "Explore pipeline data to resolve build problems"
-  - link: "/continuous_integration/tests/"
-    tag: "Documentation"
-    text: "Explore test data to find and fix problem tests"
-  - link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
-    tag: "Blog"
-    text: "Best practices for monitoring static web applications"
-cascade:
-    algolia:
-        rank: 70
-        tags: ['ci/cd', 'continuous integration']
+    text: "Learn about Datadog Static Analysis"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
-{{< /site-region >}}
-
-<div class="alert alert-info">This page is about bringing your continuous integration (CI) metrics and data into Datadog dashboards. If you want to run Continuous Testing tests in your CI pipelines, see the <a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing and CI/CD</a> section.</div>
 
 ## Overview
 
-Datadog Continuous Integration (CI) Visibility unifies information about CI test and pipeline results in addition to data about CI performance, trends, and reliability. CI Visibility brings CI metrics and data into Datadog dashboards and notebooks so you can communicate the health of your CI environment and focus your efforts in improving your team's ability to deliver quality code every time.
+{{% site-region region="us,us3,us5,eu,ap1" %}}
+<div class="alert alert-warning">
+  Static Analysis is in private beta. Python, JavaScript, TypeScript, and Docker are the only supported languages. To request access, <a href="/help">contact Support</a>.
+</div>
+{{% /site-region %}}
 
-{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/664357090/rendition/1080p/file.mp4?loc=external&signature=5ef9bc02bd8fb18c07a4a41ea3ac08b72bd0ab0b5d914429da049120d1e9e9b7" poster="/images/poster/ci.png" >}}
+{{% site-region region="gov" %}}
+<div class="alert alert-danger">
+    Static Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
+</div>
+{{% /site-region %}}
 
-CI Visibility enables developers to identify the reasons behind a test or pipeline failure, monitor trends in test suite execution times, and see the effect that a given commit has on the pipeline. Further, it also provides build engineers with visibility into cross-organization CI health and trends in pipeline performance over time. 
+Datadog Static Analysis provides out-of-the-box rules to help detect violations in your CI/CD pipelines in code reviews and identify bugs, security, and maintainability issues. For more information, see the [Static Analysis documentation][1].
 
-## Improve test reliability and create traces
 
-CI Visibility helps you troubleshoot test failures and broken builds by connecting the most important development outages to the commits that caused them. You can instrument your tests and generate traces from your testing frameworks as they execute in CI. 
 
-## Increase efficiency through seamless integrations
-
-Datadog integrates with the following CI providers to gather pipeline metrics which track the performance and results from the moment a commit enters the pipeline until it is ready to be deployed. Use the data aggregated over time to track trends in the performance of tests and builds, and identify what is most important to fix.
-
-{{< partial name="continuous_integration/ci-pipelines-getting-started.html" >}}
-
-</br>
-
-You can use the `datadog-ci` CLI to [trace commands][8] in your pipelines, as well as the [custom tags and metrics commands][9] to add user-defined text and numerical tags in your pipeline traces.
-
-## Ready to start?
-
-See [Pipeline Visibility][3] and [Test Visibility][4] for instructions on setting up CI Visibility with your CI providers, information about compatibility requirements, and steps for instrumenting and configuring data collection. Then, start exploring details about your test runs and pipeline executions in the [CI Visibility Explorer][7] and export your search query into a [CI Pipeline or Test Monitor][6].
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/dashboard/lists
-[2]: https://app.datadoghq.com/notebook/list
-[3]: /continuous_integration/pipelines/
-[4]: /continuous_integration/tests/
-[6]: /monitors/types/ci/
-[7]: /continuous_integration/explorer/
-[8]: /continuous_integration/pipelines/custom_commands/
-[9]: /continuous_integration/pipelines/custom_tags_and_metrics/
+[1]: /continuous_integration/static_analysis
