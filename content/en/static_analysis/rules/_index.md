@@ -2,6 +2,8 @@
 title: Static Analysis Rules
 kind: documentation
 description: View rules for multiple languages for Static Analysis.
+aliases:
+- /continuous_integration/static_analysis
 is_beta: true
 type: static-analysis
 
