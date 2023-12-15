@@ -1,5 +1,5 @@
 ---
-title: Datadog Exporter Collector Trace Metrics
+title: Trace Metrics
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"

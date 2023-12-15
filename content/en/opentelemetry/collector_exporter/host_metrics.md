@@ -1,5 +1,5 @@
 ---
-title: Datadog Exporter Collector Host Metrics
+title: Host Metrics
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"

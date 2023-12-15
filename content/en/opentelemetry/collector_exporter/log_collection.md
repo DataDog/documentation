@@ -1,5 +1,5 @@
 ---
-title: Datadog Exporter Collector Log Collection
+title: Log Collection
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"

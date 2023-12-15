@@ -1,5 +1,5 @@
 ---
-title: Datadog Exporter Collector Health Metrics
+title: Health Metrics
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"

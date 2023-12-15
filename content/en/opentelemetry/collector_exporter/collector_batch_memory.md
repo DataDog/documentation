@@ -1,5 +1,5 @@
 ---
-title: Datadog Exporter Collector Batch and Memory Settings
+title: Batch and Memory Settings
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"

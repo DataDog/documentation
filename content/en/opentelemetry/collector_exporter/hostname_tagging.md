@@ -1,5 +1,5 @@
 ---
-title: Datadog Exporter Collector Hostname and Tagging
+title: Hostname and Tagging
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"

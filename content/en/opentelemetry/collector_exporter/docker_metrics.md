@@ -1,5 +1,5 @@
 ---
-title: Datadog Exporter Collector Docker Metrics
+title: Docker Metrics
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"

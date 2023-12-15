@@ -1,5 +1,5 @@
 ---
-title: Datadog Exporter Collector OTLP Receiver
+title: OTLP Receiver
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
