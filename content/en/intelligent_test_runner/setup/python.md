@@ -72,7 +72,7 @@ DD_ENV=ci DD_SERVICE=my-python-app DD_CIVISIBILITY_ITR_ENABLED=true ddtrace-run 
 
 ### Known limitations
 
-In some cases, if your `unittest` test execution is run using the `coverage.py` library, this may affect total line code coverage.
+In some cases, if your `unittest` test execution is run using the `coverage.py` library, this may affect total line code coverage reported by the library.
 
 ## Disabling skipping for specific tests
 
