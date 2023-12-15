@@ -25395,7 +25395,16 @@ paths:
       x-menu-order: 2
       x-undo:
         operationId: DeleteAzureIntegration
-        parameters: []
+        parameters:
+        - name: body
+          origin: request
+          template: "{\n  \"app_service_plan_filters\": \"key:value,filter:example\",\n
+            \ \"automute\": true,\n  \"client_id\": \"{{client_id}}\",\n  \"client_secret\":
+            \"testingx./Sw*g/Y33t..R1cH+hScMDt\",\n  \"container_app_filters\": \"key:value,filter:example\",\n
+            \ \"cspm_enabled\": true,\n  \"custom_metrics_enabled\": true,\n  \"errors\":
+            [\"*\"],\n  \"host_filters\": \"key:value,filter:example\",\n  \"new_client_id\":
+            \"{{new_client_id}}\",\n  \"new_tenant_name\": \"{{new_tenant_name}}\",\n
+            \ \"resource_collection_enabled\": true,\n  \"tenant_name\": \"{{tenant_name}}\"\n}"
         type: unsafe
     put:
       description: 'Update a Datadog-Azure integration. Requires an existing `tenant_name`
