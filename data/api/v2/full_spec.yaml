@@ -22409,8 +22409,7 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta for CI Pipeline Visibility
-        customers.
+      x-unstable: '**Note**: This endpoint is in private beta.
 
         If you want to request access, complete the [form](https://forms.gle/Eqq6uXfGjYxmqpjDA).'
   /api/v2/dora/incident:
@@ -22463,8 +22462,7 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta for CI Pipeline Visibility
-        customers.
+      x-unstable: '**Note**: This endpoint is in private beta.
 
         If you want to request access, complete the [form](https://forms.gle/Eqq6uXfGjYxmqpjDA).'
   /api/v2/downtime:
