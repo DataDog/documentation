@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-A Cloud SIEM security signal is created when Datadog detects a threat while analyzing logs against detection rules. View, search, filter, and correlate security signals in the Signal Explorer without needing to learn a dedicated query language. You can also correlate, summarize, and assign security signals to yourself or another user in the Datadog platform. Additionally, configure [Notification Rules][1] to send signals to specific individuals or teams to keep them informed of issues.
+A Cloud SIEM security signal is created when Datadog detects a threat while analyzing logs against detection rules. View, search, filter, and correlate security signals in the Signal Explorer without needing to learn a dedicated query language. You can also assign security signals to yourself or another user in the Datadog platform. In addition to the Signal Explorer, you can configure [Notification Rules][1] to send signals to specific individuals or teams to keep them informed of issues.
 
 You must have the `Security Signals Write` permission to modify a security signal, such as change the state and view signal action history in [Audit Trail][2]. See [Role Based Access Control][3] for more information about Datadog's default roles and granular role-based access control permissions available for Datadog Security in the Cloud Security.
 
