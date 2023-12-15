@@ -25392,6 +25392,20 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-given:
+        aws_account:
+          parameters:
+          - name: body
+            origin: request
+            value: "{\n  \"app_service_plan_filters\": \"key:value,filter:example\",\n
+              \ \"automute\": true,\n  \"client_id\": \"{{ uuid }}\",\n  \"client_secret\":
+              \"testingx./Sw*g/Y33t..R1cH+hScMDt\",\n  \"container_app_filters\":
+              \"key:value,filter:example\",\n  \"cspm_enabled\": true,\n  \"custom_metrics_enabled\":
+              true,\n  \"errors\": [\"*\"],\n  \"host_filters\": \"key:value,filter:example\",\n
+              \ \"new_client_id\": \"{{ uuid }}\",\n  \"new_tenant_name\": \"{{ uuid
+              }}\",\n  \"resource_collection_enabled\": true,\n  \"tenant_name\":
+              \"{{ uuid }}\"\n}"
+          step: there is a valid "azure_account" in the system
       x-menu-order: 2
       x-undo:
         operationId: DeleteAzureIntegration
