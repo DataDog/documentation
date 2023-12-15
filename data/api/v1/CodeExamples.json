@@ -20,6 +20,13 @@
       "description": "Update an AWS integration returns \"OK\" response"
     }
   ],
+  "CreateAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Create an Azure integration returns \"OK\" response"
+    }
+  ],
   "CreateDashboardList": [
     {
       "group": "dashboard_lists",
