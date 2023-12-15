@@ -1,19 +1,13 @@
 ---
-title: Windows
+title: Setting Up Cloud Security Management On Windows
 kind: documentation
 is_beta: true
 private: true
 ---
 
-## Overview
+<div class="alert alert-warning">Cloud Security Management on Windows is in private beta and should only be installed on hosts that are not critical to production workloads.</div>
 
-Thank you for your interest in helping Datadog improve the Datadog Cloud Security product and customer experience. This process involves installation of the Datadog Windows Agent and configuration of the Cloud Security Management product. 
-
-## About the feature
-
-You will be testing Datadog Cloud Security Management on Windows. New features include built-in threat detection for Windows process and network events.
-
-The out of the box Windows ruleset includes the following default rules:
+Datadog [Cloud Security Management (CSM)][1] on Windows includes built-in threat detection for Windows process and network events. The out-of-the-box Windows ruleset includes the following default rules:
 
 - Certutil used to transmit or decode a file
 - Process memory was dumped using the minidump functions of comsvcs.dll
@@ -24,8 +18,6 @@ The out of the box Windows ruleset includes the following default rules:
 - Bitsadmin used to download or execute a file
 - WMI used to remotely execute content
 - Known pentesting tool crackmapexec executed
-
-As this feature is still in beta, please only install this version of the Agent on hosts that are not critical to production workloads.
 
 ## Prerequisites
 
@@ -53,60 +45,36 @@ It can take up to 15 minutes to complete the installation. In certain cases, Mic
 
 ## Configuration
 
-### Enable Cloud Security Management Enterprise
+### Enable CSM Enterprise
 
-To enable Cloud Security Management Enterprise (CSM Enterprise), you must have access to `C:\ProgramData`, which is a hidden folder.
-
-1. In **File Explorer**, click the **View** tab.
-2. Clear the **Hidden items** checkbox.
-
-The **ProgramData** folder should now be visible when navigating to the C: drive. The transparent icon indicates it is a hidden folder.
-
-Next, enable CSM Enterprise:
-
-1. In the `C:\ProgramData\Datadog\system-probe.yaml` file, set the `runtime_security_config` flag:
-
-```yaml
-runtime_security_config:
-  enabled: true
-```
-
-2. In the `C:\ProgramData\Datadog\security-agent.yaml` file, set the `runtime_security_config` flag:
-
-```yaml
-runtime_security_config:
-  enabled: true
-```
-
-3. [Restart the Datadog Agent][6] to enable CSM.
+1. Ensure you have access to `C:\ProgramData`, which is a hidden folder.
+    - In **File Explorer**, click the **View** tab, and clear the **Hidden items** checkbox. The **ProgramData** folder should now be visible when navigating to the C: drive. The transparent icon indicates it is a hidden folder.
+2. In `C:\ProgramData\Datadog\system-probe.yaml`, set the `runtime_security_config` flag:<br><br>
+    {{< code-block lang="yaml" filename="system-probe.yaml" disable_copy="true" collapsible="true" >}}
+    runtime_security_config:
+      enabled: true
+    {{< /code-block >}}
+3. In `C:\ProgramData\Datadog\security-agent.yaml`, set the `runtime_security_config` flag:<br><br>
+    {{< code-block lang="yaml" filename="security-agent.yaml" disable_copy="true" collapsible="true" >}}
+    runtime_security_config:
+      enabled: true
+    {{< /code-block >}}
+4. [Restart the Datadog Agent][6] to enable CSM.
 
 ### Verify that the Agent is sending events to CSM
 
-1. On the [**Logs**][7] page in Datadog, search for `@agent.rule_id:ruleset_loaded`.
+When you enable CSM, the Agent sends a log to Datadog to confirm that the Windows default ruleset has been successfully deployed. To view the log, navigate to the [**Logs**][7] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
 
-
-
-
-
-The Datadog agent will automatically create and send a log to confirm that the Windows default ruleset has been successfully deployed.
-
-To manually trigger a Windows Security Signal:
+Another method to verify that the Agent is sending events to CSM is to manually trigger a Windows security signal.
 
 1. In Windows, open a command prompt as Administrator and run the command `schtasks`.
-2. In Datadog, navigate to the CSM Signals Explorer to view the generated Windows signals.
-3. To view signals originating from configured Windows hosts, filter the signals by hostname using the Hosts > Hostnames facet.
-4. Filter by Windows rules using the Workflow > Rule Name facet.
+2. In Datadog, navigate to the [CSM Signals Explorer][8] to view the generated Windows signals.
+    - To view signals originating from configured Windows hosts, filter the signals by hostname using the **Hosts** > **Hostnames** facet.
+    - To filter by Windows rules, use the **Workflow** > **Rule Name** facet.
 
+To get alerts whenever a Windows signal is created, create a [Notification Rule][9] that focuses on the "host" tag specifically for configured Windows hosts.
 
-
-Visit Threats Explorer to see the generated Windows signals. 
-Filter these signals by the hostname using Hosts > Host facet to view signals originating from configured Windows hosts. 
-Filter by Windows rules using Workflow > Rule Name, and selecting any of the default Windows rules.
-
-
-To get alerts whenever a Windows signal is created, make a Notification Rule that focuses on the "host" tag specifically for configured Windows hosts.
-
-
+[1]: /security/cloud_security_management/
 [2]: /network_monitoring/performance/setup/?tab=agentwindows#setup
 [3]: https://s3.amazonaws.com/dd-agent-mstesting/builds/beta/ddagent-cli-7.50.0-rc.6.cwsbeta.msi
 [4]: https://s3.amazonaws.com/dd-agent-mstesting/builds/beta/ddagent-cli-7.50.0-rc.6.cwsbeta-2.msi
