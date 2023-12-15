@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Datadog APM
+title: Application Instrumentation
 kind: documentation
 description: "Get Started with Datadog APM"
 aliases:
@@ -27,7 +27,6 @@ To get started with Datadog APM, you need follow these key steps:
     **Note**: If you use [Single Step Instrumentation][7], you can enable APM when installing the Agent.
 2. Instrument your application.
 
-
 Instrumenting your application allows observability data to be sent to the Agent, which then passes data to the Datadog backend to display in the UI.
 
 {{< img src="tracing/visualization/troubleshooting_pipeline.png" alt="The APM pipeline">}}
@@ -50,8 +49,7 @@ To learn more, see [automatic instrumentation][5].
 Capture observability data from in-house code or complex functions that aren't captured by automatic instrumentation. To custom instrument your application, you can use either of these options:
 
 - [Datadog libraries][9]: Use Datadog tracing libraries to add and customize observability within Datadog.
-- [OpenTelemetry APIs][10]: Use OpenTelemetry instrumentation and call the Datadog tracing library.
-
+- [OpenTelemetry APIs][10]: Use OpenTelemetry API support in Datadog libraries to have vendor-neutral instrumentation of your code.
 To learn more, see [custom instrumentation][6].
 
 ## APM setup tutorials

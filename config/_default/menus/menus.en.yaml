@@ -1525,7 +1525,7 @@ main:
     parent: tracing
     identifier: tracing_glossary
     weight: 1
-  - name: Getting Started
+  - name: Application Instrumentation
     url: tracing/trace_collection/
     parent: tracing
     identifier: tracing_trace_collection

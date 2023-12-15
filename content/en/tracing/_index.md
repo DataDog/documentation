@@ -67,7 +67,7 @@ As you transition from monoliths to microservices, setting up Datadog APM across
 <strong>Beta: Single Step APM Instrumentation</strong> - Enable APM instrumentation when you install the Datadog Agent to get started quickly with application performance monitoring. This option automatically instruments your services without you needing to modify the code. For more information, read <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation</a>.
 </div>
 
-**Read [Getting Started][2] to start using Datadog APM.**
+**Read [Application Instrumentation][2] to start using Datadog APM.**
 
 Add the Datadog Tracing Library for your environment and language, including [tracing a proxy][3], tracing [AWS Lambda functions][4], or using [automatic][17] or [custom instrumentation][18].
 
