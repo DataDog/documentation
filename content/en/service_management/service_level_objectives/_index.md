@@ -281,6 +281,12 @@ To access SLO status corrections in the UI:
 
 To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO's detailed side panel view.
 
+## SLO Calendar View
+
+The SLO Calendar View is available on the [SLO status page][2]. On the top right corner, switch from the "Primary" view to the "Weekly" or "Monthly" view to see 12 months of historical SLO status data. The Calendar View is supported for Metric-based SLOs and Time Slice SLOs.
+
+{{< img src="service_management/service_level_objectives/calendar-view-slo.png" alt="SLO calendar view" >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
