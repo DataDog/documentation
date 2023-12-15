@@ -138,7 +138,7 @@ rulesets:
       Rules to identify potential security hotspots in Node. This may include false positives that require further triage.
 
 further_reading:
-  - link: "/continuous_integration/static_analysis/"
+  - link: "/static_analysis/"
     tag: "Documentation"
     text: "Learn about Datadog Static Analysis"
 ---
@@ -161,4 +161,4 @@ Datadog Static Analysis provides out-of-the-box rules to help detect violations 
 
 
 
-[1]: /continuous_integration/static_analysis
+[1]: /static_analysis
