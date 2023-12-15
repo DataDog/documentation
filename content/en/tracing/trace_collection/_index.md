@@ -24,8 +24,9 @@ further_reading:
 To get started with Datadog APM, you need follow these key steps:
 
 1. Install and configure the Datadog Agent.  
-    **Note**: If you use [Single Step Instrumentation][7], you can enable APM when installing the Agent.
 2. Instrument your application.
+
+<div class="alert alert-info"><strong>Simplify your setup!</strong> Install the Agent and instrument your application in one step with <a href="https://docs.datadoghq.com/tracing/trace_collection/single-step-apm/">Single Step Instrumentation</a>.</div>
 
 Instrumenting your application allows observability data to be sent to the Agent, which then passes data to the Datadog backend to display in the UI.
 

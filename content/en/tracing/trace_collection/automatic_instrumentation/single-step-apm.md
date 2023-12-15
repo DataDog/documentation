@@ -8,7 +8,7 @@ aliases:
 
 ## Requirements
 
-Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64`  and `arm64` architectures.
+Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
 
 ## Enable APM on your services in one step
 
@@ -35,6 +35,16 @@ For an Ubuntu host:
 3. [Explore the performance observability of your services in Datadog][5].
 
    <div class="alert alert-info">You can optionally set an environment for your services and other telemetry that pass through the Agent. Read <a href="#tagging-observability-data-by-environment">tagging observability data by environment</a> to learn how. </div>
+
+### Tagging observability data by environment
+
+Set `DD_ENV` in your one-line install command for Linux to automatically tag instrumented services and other telemetry that pass through the Agent with a specific environment. For example, if the Agent is installed in your staging environment, set `DD_ENV=staging` to associate your observability data with `staging`.
+
+For example:
+
+```shell
+DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=staging bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+```
 
 [2]: /agent/remote_config
 [3]: /getting_started/site/
@@ -70,6 +80,26 @@ For a Docker Linux container:
 4. [Explore the performance observability of your services in Datadog][6].
 
    <div class="alert alert-info">You can optionally set an environment for your services and other telemetry that pass through the Agent. Read <a href="#tagging-observability-data-by-environment">tagging observability data by environment</a> to learn how. </div>
+
+### Tagging observability data by environment
+
+Set `DD_ENV` in the library injector installation command for Docker to automatically tag instrumented services and other telemetry that pass through the Agent with a specific environment. For example, if the Agent is installed in your staging environment, set `DD_ENV=staging` to associate your observability data with `staging`.
+
+For example:
+
+{{< highlight shell "hl_lines=4" >}}
+docker run -d --name dd-agent \  
+  -e DD_API_KEY=${YOUR_DD_API_KEY} \
+  -e DD_APM_ENABLED=true \
+  -e DD_ENV=staging \
+  -e DD_APM_NON_LOCAL_TRAFFIC=true \
+  -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
+  -e DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket \
+  -e DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket \
+  -v /opt/datadog/apm:/opt/datadog/apm \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  gcr.io/datadoghq/agent:7
+{{< /highlight >}}
 
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: /tracing/service_catalog/
@@ -187,22 +217,25 @@ To set specific tracing library versions, add the following configuration to you
 
 <div class="alert alert-info">Supported languages include .Net (<code>dotnet</code>), Python (<code>python</code>), Java (<code>java</code>), Javascript (<code>js</code>), and Ruby (<code>ruby</code>).</div>
 
+### Tagging observability data by environment
+
+Automatically tag instrumented services and other telemetry that pass through the Agent with a specific environment. For example, if the Agent is installed in your staging environment, set `env:staging` to associate your observability data with `staging`.
+
+For example, add the following configuration to your `datadog-values.yaml` file:
+{{< highlight yaml "hl_lines=4-5" >}}
+   datadog:
+     apiKeyExistingSecret: datadog-secret
+     site: <DATADOG_SITE>
+     tags:
+         - env:staging
+     apm:
+       instrumentation:
+         enabled: true
+{{< /highlight >}}
+
 [15]: https://github.com/DataDog/dd-trace-dotnet/releases
 {{% /tab %}}
 {{< /tabs >}}
-
-### Tagging observability data by environment
-
-Set `DD_ENV` in your one-line install command for Linux and the library injector installation command for Docker to automatically tag instrumented services and other telemetry that pass through the Agent with a specific environment. For example, if the Agent is installed in your staging environment, set `DD_ENV=staging` to associate your observability data with `staging`.
-
-For Kubernetes, you can add this to your configuration file:
-
-Add a `- env:<env-name>` tag to `datadog-values.yaml`:
-   ```yaml
-   datadog:
-      tags:
-         - env:staging
-   ```
 
 ## Removing Single Step APM instrumentation from your Agent
 
