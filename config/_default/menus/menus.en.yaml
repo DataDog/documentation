@@ -4581,38 +4581,47 @@ main:
     weight: 4
   - name: User Group Mapping
     url: account_management/saml/mapping/
+    identifier: account_management_saml_mapping
     parent: account_management_saml
     weight: 401
   - name: Active Directory
     url: account_management/saml/activedirectory/
+    identifier: account_management_saml_activedirectory
     parent: account_management_saml
     weight: 402
   - name: Auth0
     url: account_management/saml/auth0/
+    identifier: account_management_saml_auth0
     parent: account_management_saml
     weight: 403
   - name: Azure
     url: account_management/saml/azure/
+    identifier: account_management_saml_azure
     parent: account_management_saml
     weight: 404
   - name: Google
     url: account_management/saml/google/
+    identifier: account_management_saml_google
     parent: account_management_saml
     weight: 405
   - name: NoPassword
     url: account_management/saml/lastpass/
+    identifier: account_management_saml_lastpass
     parent: account_management_saml
     weight: 406
   - name: Okta
     url: account_management/saml/okta/
+    identifier: account_management_saml_okta
     parent: account_management_saml
     weight: 407
   - name: SafeNet
     url: account_management/saml/safenet/
+    identifier: account_management_saml_safenet
     parent: account_management_saml
     weight: 408
   - name: Troubleshooting
     url: account_management/saml/troubleshooting/
+    identifier: account_management_samle_troubleshooting
     parent: account_management_saml
     weight: 409
   - name: SCIM
