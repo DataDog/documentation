@@ -8,9 +8,9 @@ further_reading:
 
 ## Overview
 
-You can configure the OpenTelemetry Collector batch and memory settings.
+To edit your OpenTelemetry Collector batch and memory settings, configure the [batch processor][1] in your Datadog Exporter.
 
-For more information, see the OpenTelemetry project documentation for the [Batch Processor][1].
+For more information, see the OpenTelemetry project documentation for the [batch processor][1].
 
 ## Setup
 
@@ -33,7 +33,7 @@ processors:
 
 {{% tab "Kubernetes" %}}
 
-In `values.yaml`:
+Add the following lines to `values.yaml`:
 
 ```yaml
 resources:
@@ -72,7 +72,7 @@ None.
 
 ## Full example configuration
 
-For a full working example, see the Datadog Exporter example in [`batch-memory.yaml`][2].
+For a full working example configuration for the Datadog Exporter, see [`batch-memory.yaml`][2].
 
 ## Example logging output
 

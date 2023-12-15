@@ -1,5 +1,5 @@
 ---
-title: Datadog Exporter Host Metrics Configuration
+title: Datadog Exporter Collector Host Metrics
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
@@ -10,9 +10,9 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/host_metrics.png" alt="OpenTelemetry host metrics dashboard" style="width:100%;" >}}
 
-The host metrics receiver enables collecting system metrics such as CPU, disk, and memory usage. 
+To collect system metrics such as CPU, disk, and memory usage, enable the [host metrics receiver][1] in your Datadog Exporter. 
 
-For more information, including supported operating systems, see the OpenTelemetry project documentation for [the Host Metrics Receiver][1].
+For more information, including supported operating systems, see the OpenTelemetry project documentation for the [host metrics receiver][1].
 
 
 ## Setup
@@ -48,7 +48,7 @@ receivers:
 
 {{% tab "Kubernetes" %}}
 
-Set up the host metrics receiver up on each node from which metrics need to be collected. This means that to collect host metrics from every node in your cluster, deploy the host metrics receiver as a daemonset collector:
+Set up the host metrics receiver on each node from which metrics need to be collected. To collect host metrics from every node in your cluster, deploy the host metrics receiver as a DaemonSet collector:
 
 ```yaml
 receivers:
@@ -92,7 +92,7 @@ See [OpenTelemetry Metrics Mapping][2] for information about collected host metr
 
 ## Full example configuration
 
-For a full working example, see the Datadog Exporter example in [`host-metrics.yaml`][3].
+For a full working example configuration for the Datadog Exporter, see [`host-metrics.yaml`][3].
 
 ## Example logging output
 

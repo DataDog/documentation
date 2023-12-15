@@ -1,5 +1,5 @@
 ---
-title: Datadog Exporter Trace Metrics
+title: Datadog Exporter Collector Trace Metrics
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
@@ -10,7 +10,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/trace_metrics.png" alt="APM metrics from OpenTelemetry" style="width:100%;" >}}
 
-To send APM stats such as hits, errors, and duration, set up the Datadog connector.
+To send APM stats such as hits, errors, and duration, set up the [Datadog Connector][1].
 
 For more information, see the OpenTelemetry project documentation for the [Datadog Connector][1].
 
@@ -49,7 +49,7 @@ See [Trace Metrics][2].
 
 ## Full example configuration
 
-For a full working example, see the Datadog Exporter example in [`trace-metrics.yaml`][3].
+For a full working example configuration for the Datadog Exporter, see [`trace-metrics.yaml`][3].
 
 
 

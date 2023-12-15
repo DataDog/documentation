@@ -1,5 +1,5 @@
 ---
-title: Datadog Exporter Hostname and Tagging Configuration
+title: Datadog Exporter Collector Hostname and Tagging
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
@@ -10,9 +10,9 @@ further_reading:
 
 ## Overview
 
-To extract the correct hostname and host tags, Datadog Exporter uses the Resource Detection and Kubernetes Attributes processors. These processors allow for extracting information from hosts and containers in the form of [resource semantic conventions][1], which is then used to build the hostname, host tags, and container tags. These tags enable automatic correlation among telemetry signals, and also tag-based navigation for filtering and grouping telemetry data within Datadog.
+To extract the correct hostname and host tags, Datadog Exporter uses the [resource detection processor][2] and the [Kubernetes attributes processor][3]. These processors allow for extracting information from hosts and containers in the form of [resource semantic conventions][1], which is then used to build the hostname, host tags, and container tags. These tags enable automatic correlation among telemetry signals and tag-based navigation for filtering and grouping telemetry data within Datadog.
 
-For more information, see the OpenTelemetry project documentation for [Resource Detection][2] and [Kubernetes Attributes][3] processors.
+For more information, see the OpenTelemetry project documentation for the [resource detection][2] and [Kubernetes attributes][3] processors.
 
 ## Setup
 
@@ -56,14 +56,14 @@ processors:
 
 {{% tab "Kubernetes Daemonset" %}}
 
-In `values.yaml`:
+Add the following lines to `values.yaml`:
 ```yaml
 presets:
   kubernetesAttributes:
     enabled: true
 ```
 
-Use the Helm `k8sattributes` preset, which sets up the service account necessary for  `k8sattributesprocessor` to extract metadata from pods. Read [Important Components for Kubernetes][1] for additional information about the required service account. 
+The Helm `kubernetesAttributes` preset sets up the service account necessary for the Kubernetes attributes processor to extract metadata from pods. Read [Important Components for Kubernetes][1] for additional information about the required service account. 
 
 Collector configuration: 
 ```yaml
@@ -128,9 +128,9 @@ processors:
 [1]: https://opentelemetry.io/docs/kubernetes/collector/components/#kubernetes-attributes-processor
 {{% /tab %}}
 
-{{% tab "Kubernetes Daemonset -> Gateway" %}}
+{{% tab "Kubernetes DaemonSet -> Gateway" %}}
 
-In `values.yaml`:
+Add the following lines to `values.yaml`:
 ```yaml
 presets:
   kubernetesAttributes:
@@ -139,7 +139,7 @@ presets:
 
 Use the Helm `k8sattributes` preset in both Daemonset and Gateway, to set up the service account necessary for  `k8sattributesprocessor` to extract metadata from pods. Read [Important Components for Kubernetes][1] for additional information about the required service account. 
 
-Daemonset:
+DaemonSet:
 
 ```yaml
 processors:
@@ -151,7 +151,7 @@ processors:
     timeout: 2s
     override: false
 ```
-Because the processor is in passthrough mode in the daemonset, it will add only the pod IP addresses. These will then be used by the Gateway processor to make Kubernetes API calls and extract metadata.
+Because the processor is in passthrough mode in the DaemonSet, it adds only the pod IP addresses. These addresses are then used by the Gateway processor to make Kubernetes API calls and extract metadata.
 
 Gateway:
 
@@ -213,14 +213,14 @@ processors:
 {{% /tab %}}
 {{% tab "Kubernetes Gateway" %}}
 
-In `values.yaml`:
+Add the following lines to `values.yaml`:
 
 ```yaml
 presets:
   kubernetesAttributes:
     enabled: true
 ```
-Use the Helm `k8sattributes` preset, which sets up the service account necessary for  `k8sattributesprocessor` to extract metadata from pods. Read [Important Components for Kubernetes][1] for additional information about the required service account.
+The Helm `kubernetesAttributes` preset sets up the service account necessary for the Kubernetes attributes processor to extract metadata from pods. Read [Important Components for Kubernetes][1] for additional information about the required service account. 
 
 Collector configuration:
 
@@ -349,7 +349,7 @@ processors:
 
 ## Full example configuration
 
-For a full working example for EKS, see the Datadog Exporter example in [`k8s-values.yaml`][4].
+For a full working example configuration for the Datadog Exporter, see [`k8s-values.yaml`][4]. This example is for Amazon EKS.
 
 ## Example logging output
 

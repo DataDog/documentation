@@ -1,5 +1,5 @@
 ---
-title: Datadog Exporter Docker Stats Receiver Configuration
+title: Datadog Exporter Collector Log Collection
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
@@ -10,9 +10,9 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/log_collection.png" alt="An information log sent from OpenTelemetry" style="width:100%;" >}}
 
-The File Log receiver enables collecting logs from files. 
+To collect logs from files, configure the [filelog receiver][1] in your Datadog Exporter.
 
-For more information, see the OpenTelemetry project documentation for [the Filelog Receiver][1].
+For more information, see the OpenTelemetry project documentation for the [filelog receiver][1].
 
 
 ## Setup
@@ -42,7 +42,7 @@ receivers:
 
 {{% tab "Kubernetes" %}}
 
-In `values.yaml`:
+Add the following lines to `values.yaml`:
 
 ```yaml
 presets:
@@ -51,7 +51,7 @@ presets:
     includeCollectorLogs: true
 ```
 
-The Filelog receiver needs access to the file paths. The preset mounts the necessary volumes to the collector container for `/var/log/pods` and collects all logs from `/var/log/pods/*/*/*.log`. See [Important components for Kubernetes][1] for a full list of settings set by the preset.
+The filelog receiver needs access to the file paths. The preset mounts the necessary volumes to the collector container for `/var/log/pods` and collects all logs from `/var/log/pods/*/*/*.log`. See [Important components for Kubernetes][1] for a full list of settings set by the preset.
 
 Collector configuration sets up a list of operators to parse the logs based on different formats:
 
@@ -87,7 +87,7 @@ Logs from the configured files.
 
 ## Full example configuration
 
-For a full working example, see the Datadog Exporter example in [`logs.yaml`][2].
+For a full working example configuration for the Datadog Exporter, see [`logs.yaml`][2].
 
 ## Example logging output
 

@@ -1,5 +1,5 @@
 ---
-title: Datadog Exporter Docker Stats Receiver Configuration
+title: Datadog Exporter Collector Docker Metrics
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
@@ -10,9 +10,9 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/docker_metrics.png" alt="OpenTelemetry Docker metrics in a Containers dashboard" style="width:100%;" >}}
 
-The Docker stats receiver enables collecting container metrics. 
+To collect container metrics, configure the [Docker stats receiver][1] in your Datadog Exporter.
 
-For more information, see the OpenTelemetry project documentation for [the Docker Stats Receiver][1].
+For more information, see the OpenTelemetry project documentation for [the Docker stats receiver][1].
 
 
 ## Setup
@@ -20,9 +20,9 @@ For more information, see the OpenTelemetry project documentation for [the Docke
 {{< tabs >}}
 {{% tab "Host" %}}
 
-The Docker Stats receiver needs access to the Docker socket. By default it looks for it at `unix:///var/run/docker.sock`. If this is not the Docker socket path, specify the path in the `endpoint` configuration line.
+The Docker stats receiver needs access to the Docker socket. By default, the receiver looks for the Docker socket at `unix:///var/run/docker.sock`. If this is not the Docker socket path, specify the path in the `endpoint` configuration line.
 
-**Note**: If you are using the collector image, you may need to [configure additional permissions for the collector to have access to the docker socket][1]. 
+**Note**: If you are using the collector image, you may need to [configure additional permissions for the collector to have access to the Docker socket][1]. 
 
 ```yaml
 receivers:
@@ -51,9 +51,9 @@ receivers:
 
 {{% tab "Kubernetes" %}}
 
-The Docker Stats receiver needs access to the Docker socket. In Kubernetes, if you are running Docker as a runtime, mount the Docker socket:
+The Docker stats receiver needs access to the Docker socket. In Kubernetes, if you are running Docker as a runtime, mount the Docker socket:
 
-In `values.yaml`:
+Add the following lines to `values.yaml`:
 ```yaml
 extraVolumes:
  - name: docker-sock
@@ -98,7 +98,7 @@ See [OpenTelemetry Metrics Mapping][2] for information about collected container
 
 ## Full example configuration
 
-For a full working example, see the Datadog Exporter example in [`docker-stats.yaml`][3].
+For a full working example configuration for the Datadog Exporter, see [`docker-stats.yaml`][3].
 
 ## Example logging output
 

@@ -5,7 +5,7 @@ aliases:
 - /tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
 - /tracing/trace_collection/open_standards/otel_collector_datadog_exporter/
 - /opentelemetry/otel_collector_datadog_exporter/
-description: 'Send OpenTelemetry data to the OpenTelemetry collector and Datadog exporter'
+description: 'Send OpenTelemetry data to the OpenTelemetry Collector and Datadog Exporter'
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/"
   tag: "OpenTelemetry"
@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-The OpenTelemetry Collector is a vendor-agnostic agent process for collecting and exporting telemetry data emitted by many processes. The [Datadog Exporter][1] for the OpenTelemetry Collector allows you to forward trace, metric, and logs data from OpenTelemetry SDKs on to Datadog (without the Datadog Agent). It works with all supported languages, and you can [connect those OpenTelemetry trace data with application logs][2].
+The OpenTelemetry Collector is a vendor-agnostic agent process for collecting and exporting telemetry data emitted by many processes. The [Datadog Exporter][1] for the OpenTelemetry Collector allows you to forward trace, metric, and logs data from OpenTelemetry SDKs to Datadog (without the Datadog Agent). It works with all supported languages, and you can [connect OpenTelemetry trace data with application logs][2].
 
 {{< img src="metrics/otel/datadog_exporter.png" alt="Application Instrumented Library, Cloud Integrations, and Other Monitoring Solutions (for example Prometheus) -> Datadog Exporter inside OpenTelemetry Collector -> Datadog" style="width:100%;">}}
 
@@ -36,8 +36,8 @@ To run the OpenTelemetry Collector along with the Datadog Exporter, download the
 
 In the `exporter/datadogexporter` folder is a working example of an out-of-the-box configuration for Datadog Exporter. See the full configuration example file, [`ootb-ec2.yaml`][4]. Configure each of the following components to suit your needs:
 
-{{< whatsnext desc="Exporter components" >}}
-    {{< nextlink href="/opentelemetry/collector_exporter/hostname_tagging/" >}}Hostname and tags{{< /nextlink >}}
+{{< whatsnext desc="" >}}
+    {{< nextlink href="/opentelemetry/collector_exporter/hostname_tagging/" >}}Hostname and Tags{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/collector_exporter/otlp_receiver/" >}}OTLP Receiver{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/collector_exporter/host_metrics/" >}}Host Metrics{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/collector_exporter/docker_metrics/" >}}Docker Metrics{{< /nextlink >}}
@@ -68,7 +68,7 @@ To run the OpenTelemetry Collector as a Docker image and receive traces from the
 
 2. Determine which ports to open on your container so that OpenTelemetry traces are sent to the OpenTelemetry Collector. By default, traces are sent over gRPC on port 4317. If you don't use gRPC, use port 4318.
 
-3. Run the container and expose the necessary port, using the previously defined `collector.yaml` file. For example, considering you are using port 4317:
+3. Run the container and expose the necessary port, using the `collector.yaml` file. For example, if you are using port 4317:
 
    ```
    $ docker run \
@@ -120,7 +120,7 @@ Using a DaemonSet is the most common and recommended way to configure OpenTeleme
 
 To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure, use this [full example of configuring the OpenTelemetry Collector using the Datadog Exporter as a DaemonSet][1], including the application configuration example.
 
-Note especially some [essential configuration options from the example][2], which ensure the essential ports of the DaemonSet are exposed and accessible to your application:
+[Some configuration options in the example][2] (repeated below) ensure that essential ports of the DaemonSet are exposed and accessible to your application:
 
 ```yaml
 # ...
@@ -133,7 +133,7 @@ Note especially some [essential configuration options from the example][2], whic
 # ...
 ```
 
-If you do not need both the standard HTTP and gRPC ports for your application, it is fine to remove them.
+If you do not need both the standard HTTP and gRPC ports for your application, you can remove the corresponding configuration options.
 
 
 
@@ -145,7 +145,7 @@ If you do not need both the standard HTTP and gRPC ports for your application, i
 
 To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gateway deployment, use this [full example of configuring the OpenTelemetry Collector using the Datadog Exporter as a DaemonSet][1], including the application configuration example.
 
-Note especially some [essential configuration options from the example][2], which ensure the essential ports of the DaemonSet are exposed and accessible to your application:
+[Some configuration options in the example][2] (repeated below) ensure that essential ports of the DaemonSet are exposed and accessible to your application:
 
 ```yaml
 # ...
@@ -158,7 +158,7 @@ Note especially some [essential configuration options from the example][2], whic
 # ...
 ```
 
-If you do not need both the standard HTTP and gRPC ports for your application, it is fine to remove them.
+If you do not need both the standard HTTP and gRPC ports for your application, you can remove the corresponding configuration options.
 
 
 
@@ -171,7 +171,7 @@ If you do not need both the standard HTTP and gRPC ports for your application, i
 To use the OpenTelemetry Operator, follow the [official documentation for deploying the OpenTelemetry Operator][1]. As described there, deploy the certificate manager in addition to the Operator.
 
 Configure the Operator using one of the OpenTelemetry Collector standard Kubernetes configurations:
-* [Daemonset deployment][2] - Use the DaemonSet deployment if you want to ensure you receive host metrics. 
+* [DaemonSet deployment][2] - Use the DaemonSet deployment if you want to ensure you receive host metrics. 
 * [Gateway deployment][3]
 
 
@@ -185,10 +185,10 @@ Configure the Operator using one of the OpenTelemetry Collector standard Kuberne
 
 ### Host name resolution
 
-The host name that OpenTelemetry signals are tagged with is obtained based on the following sources in order, falling back to the next one if the current one is unavailable or invalid:
+The host name that OpenTelemetry signals are tagged with is obtained based on the following sources, in order of decreasing precedence.
 
-1. From [resource attributes][19], for example `host.name` (many others are supported).
-2. The `hostname` field in the exporter configuration.
+1. [Resource attributes][19], for example `host.name` (many others are supported).
+2. The `hostname` field in the Datadog Exporter configuration.
 3. Cloud provider API.
 4. Kubernetes host name.
 5. Fully qualified domain name.

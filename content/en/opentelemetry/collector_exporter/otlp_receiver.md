@@ -1,5 +1,5 @@
 ---
-title: Datadog Exporter OTLP Receiver
+title: Datadog Exporter Collector OTLP Receiver
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
@@ -8,9 +8,9 @@ further_reading:
 
 ## Overview
 
-The OTLP Receiver enables receiving OTLP metrics, logs, and traces.
+To collect OTLP metrics, logs, and traces, configure the [OTLP receiver][1] in your Datadog Exporter.
 
-For more information, see the OpenTelemetry project documentation for the [OTLP Receiver][1].
+For more information, see the OpenTelemetry project documentation for the [OTLP receiver][1].
 
 ## Setup
 
@@ -30,7 +30,7 @@ Traces, metrics, and logs.
 
 ## Full example configuration
 
-For a full working example, see the Datadog Exporter example in [`otlp.yaml`][2].
+For a full working example configuration for the Datadog Exporter, see [`otlp.yaml`][2].
 
 ## Example logging output
 

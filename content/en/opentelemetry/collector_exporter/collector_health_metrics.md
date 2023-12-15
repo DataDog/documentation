@@ -8,11 +8,11 @@ further_reading:
 
 ## Overview
 
-{{< img src="/opentelemetry/collector_exporter/collector_health_metrics.png" alt="OpenTelemetry collector health metrics dashboard" style="width:100%;" >}}
+{{< img src="/opentelemetry/collector_exporter/collector_health_metrics.png" alt="OpenTelemetry Collector health metrics dashboard" style="width:100%;" >}}
 
-The `prometheus` receiver enables collecting health metrics from the collector itself.
+To collect health metrics from the OpenTelemetry Collector itself, configure the [Prometheus receiver][1] in your Datadog Exporter.
 
-For more information, see the OpenTelemetry project documentation for the [Prometheus Receiver][1].
+For more information, see the OpenTelemetry project documentation for the [Prometheus receiver][1].
 
 ## Setup
 
@@ -29,7 +29,7 @@ receivers:
 
 ## Data collected
 
-| OTel Metric | Description |
+| OpenTelemetry Metric | Description |
 |---|---|
 | `otelcol_process_uptime` | Uptime of the process |
 | `otelcol_process_memory_rss` | Total physical memory (resident set size) |
@@ -61,7 +61,7 @@ receivers:
 
 ## Full example configuration
 
-For a full working example, see the Datadog Exporter example in [`collector-metrics.yaml`][2].
+For a full working example configuration for the Datadog Exporter, see [`collector-metrics.yaml`][2].
 
 ## Example logging output
 
