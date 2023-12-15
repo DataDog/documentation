@@ -8,6 +8,14 @@ further_reading:
   text: "Learn how to create a search query"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">CD Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+{{< /site-region >}}
+
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLScNhFEUOndGHwBennvUp6-XoA9luTc27XBwtSgXhycBVFM9yA/viewform?usp=sf_link" header="false" >}}
+CD Visibility is in private beta. To request access, complete the form.
+{{< /callout >}}
+
 ## Overview
 
 Saved views allow you to save the state of the [CD Visibility Explorer][2] and enable effective troubleshooting by providing you with access to scoped queries, relevant facets, visualization options, and the time range. 
