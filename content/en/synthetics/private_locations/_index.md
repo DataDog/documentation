@@ -153,7 +153,7 @@ Navigate to [**Synthetic Monitoring** > **Settings** > **Private Locations**][22
 Fill out your private location details:
 
 1. Specify your private location's **Name** and **Description**.
-2. Add any **Tags** you would like to associate with your private location. To set up a private location on a Windows service, tick the **This is a Windows Private Location** checkbox.
+2. Add any **Tags** you would like to associate with your private location.
 3. Choose one of your existing **API Keys**. Selecting an API key allows communication between your private location and Datadog. If you don't have an existing API key, click **Generate API key** to create one on the dedicated page. Only `Name` and `API key` fields are mandatory.
 4. Set access for your private location and click **Save Location and Generate Configuration File**. Datadog creates your private location and generates the associated configuration file.
 
@@ -536,18 +536,6 @@ To install the Synthetics Private Location Worker on the command line, use `msie
 | LOGGING_MAXDAYS | Number of days to keep file logs on the system before deleting them. Can be any number when running an unattended installation. | 7 | `--logFileMaxDays` | Integer |
 | WORKERCONFIG_FILEPATH | This should be changed to the path to your Synthetics Private Location Worker JSON configuration file. Wrap this path in quotes if your path contains spaces. | <None> | `--config` | String |
 
-For example, this command applies the default firewall rules needed by the program to configure the Windows service: 
-
-```shell
-msiexec /i datadog-synthetics-worker-<version>.amd64.msi /quiet /qn APPLYDEFAULTFIREWALLRULES=1 APPLYFIREWALLDEFAULTBLOCKRULES=1 LOGGING_ENABLED=1 LOGGING_VERBOSITY=”-vv” LOGGING_MAXDAYS=7 WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
-```
-
-
-To uninstall the Synthetics Private Location Worker on the command line, use `msiexec`. For example, run:
-
-```shell
-msiexec /uninstall datadog-synthetics-worker-<version>.amd64.msi /passive`
-```
 
 [101]: TBD
 [102]: https://app.datadoghq.com/synthetics/settings/private-locations
