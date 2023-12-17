@@ -36,6 +36,7 @@ content/en/agent/guide/ansible_standalone_role.md
 # Tracing
 content/en/tracing/trace_collection/dd_libraries/ruby.md
 content/en/tracing/trace_collection/compatibility/ruby.md
+content/en/tracing/trace_collection/go_auto_instrumentation.md
 
 # Log collection
 content/en/logs/guide/forwarder.md

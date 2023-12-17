@@ -1590,6 +1590,11 @@ main:
     parent: tracing_trace_collection
     identifier: tracing_library_injection_local
     weight: 102
+  - name: Auto-Instrument Go Applications
+    url: tracing/trace_collection/go_auto_instrumentation
+    parent: tracing_trace_collection
+    identifier: go_auto_instrumentation
+    weight: 120
   - name: Library Compatibility
     url: tracing/trace_collection/compatibility/
     parent: tracing_trace_collection
