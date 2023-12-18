@@ -238,9 +238,9 @@ Before data is uploaded to Datadog, it is stored in cleartext in your channel's 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[2]: /real_user_monitoring/mobile_and_tv_monitoring/setup/roku/advanced_configuration/#enrich-user-sessions
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#enrich-user-sessions
 [4]: /getting_started/tagging/unified_service_tagging/
-[5]: /real_user_monitoring/mobile_and_tv_monitoring/setup/roku/advanced_configuration/#identifying-your-users
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/roku#identifying-your-users
 [6]: https://developer.roku.com/fr-fr/docs/developer-program/getting-started/architecture/file-system.md#cachefs
 [8]: /data_security/real_user_monitoring/#ip-address
 [9]: /data_security/real_user_monitoring/#geolocation

@@ -6418,8 +6418,20 @@ components:
             type: string
           type: array
         is_cspm_enabled:
-          description: When enabled, Datadog performs configuration checks across
-            your Google Cloud environment by continuously scanning every resource.
+          description: 'When enabled, Datadog will activate the Cloud Security Monitoring
+            product for this service account. Note: This requires resource_collection_enabled
+            to be set to true.'
+          type: boolean
+        is_security_command_center_enabled:
+          default: false
+          description: 'When enabled, Datadog will attempt to collect Security Command
+            Center Findings. Note: This requires additional permissions on the service
+            account.'
+          example: true
+          type: boolean
+        resource_collection_enabled:
+          default: false
+          description: When enabled, Datadog scans for all resources in your GCP environment.
           type: boolean
       type: object
     GCPSTSServiceAccountCreateRequest:
@@ -16526,6 +16538,12 @@ components:
         pattern:
           description: Not included if there is a relationship to a standard pattern.
           type: string
+        priority:
+          description: Integer from 1 (high) to 5 (low) indicating rule issue severity.
+          format: int64
+          maximum: 5
+          minimum: 1
+          type: integer
         tags:
           description: List of tags.
           items:
@@ -16681,6 +16699,13 @@ components:
         pattern:
           description: Regex to match.
           type: string
+        priority:
+          description: Integer from 1 (high) to 5 (low) indicating standard pattern
+            issue severity.
+          format: int64
+          maximum: 5
+          minimum: 1
+          type: integer
         tags:
           description: List of tags.
           items:
@@ -22384,8 +22409,7 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta for CI Pipeline Visibility
-        customers.
+      x-unstable: '**Note**: This endpoint is in private beta.
 
         If you want to request access, complete the [form](https://forms.gle/Eqq6uXfGjYxmqpjDA).'
   /api/v2/dora/incident:
@@ -22438,8 +22462,7 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta for CI Pipeline Visibility
-        customers.
+      x-unstable: '**Note**: This endpoint is in private beta.
 
         If you want to request access, complete the [form](https://forms.gle/Eqq6uXfGjYxmqpjDA).'
   /api/v2/downtime:
@@ -26970,7 +26993,9 @@ paths:
         queryable.
 
         Can only be used with application keys from users with the `Manage Tags for
-        Metrics` permission.'
+        Metrics` permission. This endpoint requires
+
+        a tag configuration to be created first.'
       operationId: UpdateTagConfiguration
       parameters:
       - $ref: '#/components/parameters/MetricName'
