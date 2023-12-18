@@ -144,7 +144,7 @@ azure role assignment create --objectId <OBJECT_ID> -o "Monitoring Reader" -c /s
 
 3. Click **Open Template**.
 
-{{< img src="integrations/guide/azure_manual_setup/azure_tile_arm_template" alt="The Azure tile in the Datadog integrations page with Using Azure Portal and Management Group selected" popup="true" style="width:80%;" >}}
+{{< img src="integrations/guide/azure_manual_setup/azure_tile_arm_template.png" alt="The Azure tile in the Datadog integrations page with Using Azure Portal and Management Group selected" popup="true" style="width:80%;" >}}
 
 4. Select the region, subscription, and resource group for the template to be deployed.
 
@@ -154,7 +154,7 @@ azure role assignment create --objectId <OBJECT_ID> -o "Monitoring Reader" -c /s
 
 6. Select the option to create a new service principal type, and click the **Change selection** link for service principal. A form to create a new app registration appears on the right.
 
-{{< img src="integrations/guide/azure_manual_setup/arm_template_service_principal" alt="The service principal page in the Azure ARM template with the option to Create New selected and the link to Change Selection highlighted" popup="true" style="width:80%;" >}}
+{{< img src="integrations/guide/azure_manual_setup/arm_template_service_principal.png" alt="The service principal page in the Azure ARM template with the option to Create New selected and the link to Change Selection highlighted" popup="true" style="width:80%;" >}}
 
 7. Enter a name for the app registration, select the supported account types, and click **Register**.
 
