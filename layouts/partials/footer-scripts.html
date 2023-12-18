@@ -5,7 +5,6 @@ hugo defaults to environment development with hugo server
 {{- $isProd := ne hugo.Environment "development" -}}
 {{- $defines := dict "process.env.NODE_ENV" `"development"` "process.env.RESET_APP_DATA_TIMER" "10" "global" "window" -}}
 {{- $sourcemap := cond $isProd "external" "inline" -}}
-{{- $inject := slice "scripts/injects/inject-jquery.js" -}}
 
 {{- if .HasShortcode "jqmath-vanilla" -}}
   {{- $opts := dict "targetPath" "static/jqmath.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd -}}
@@ -14,7 +13,7 @@ hugo defaults to environment development with hugo server
   <script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }}></script>
 {{- end -}}
 
-{{ $opts := dict "targetPath" "static/main-dd-js.js" "defines" $defines "inject" $inject "sourceMap" $sourcemap "minify" $isProd }}
+{{ $opts := dict "targetPath" "static/main-dd-js.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd }}
 {{ $js := resources.Get "scripts/main-dd-js.js" | js.Build $opts }}
 {{ if $isProd }}
   {{ $js = $js | fingerprint "sha512" }}
