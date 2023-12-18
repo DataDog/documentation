@@ -47,7 +47,7 @@ spec:
       #(...)
 ```
 
-### Application pods are blocked
+### Application pods are not created
 
 Admission Controller's injection mode (`socket`, `hostip`, `service`) is set by the configuration of your Cluster Agent. For example, if you have `socket` mode enabled in your Agent, Admission Controller also uses `socket` mode.
 
@@ -57,34 +57,24 @@ If you are using GKE Autopilot or OpenShift, you need to use a specific injectio
 
 GKE Autopilot restricts the use of any `volumes` with a `hostPath`. Therefore, if Admission Controller uses `socket` mode, the Pods are blocked from scheduling by the GKE Warden.
 
-If you are using GKE Autopilot, use `hostip` or `service` mode. The following configuration enables `hostip` mode:
+Enabling GKE Autopilot mode in the Helm chart disables the `socket` mode to prevent this from ocurring. To enable APM, enable the port and use the `hostip` or `service` method instead. The Admission Controller will default to `hostip` to match.
 
 {{< tabs >}}
-{{% tab "Datadog Operator" %}}
-```yaml
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  features:
-    apm:
-      enabled: true
-      hostPortConfig:
-        enabled: true
-      unixDomainSocketConfig:
-        enabled: false
-```
-{{% /tab %}}
 {{% tab "Helm" %}}
 ```yaml
 datadog:
   apm:
     portEnabled: true
-    socketEnabled: false
+  #(...)
+
+providers:
+  gke:
+    autopilot: true
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+Refer to the [Kubernetes Distributions][17] for more configuration details regarding Autopilot.
 
 #### OpenShift
 
@@ -118,6 +108,8 @@ datadog:
 ```
 {{% /tab %}}
 {{< /tabs >}}
+
+Refer to the [Kubernetes Distributions][18] for more configuration details regarding Autopilot.
 
 ## View Admission Controller status
 
@@ -416,3 +408,5 @@ To use Rancher in a private GKE cluster, edit your firewall rules to allow inbou
 [14]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#step_1_view_control_planes_cidr_block
 [15]: https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters#add_firewall_rules
 [16]: https://ranchermanager.docs.rancher.com/reference-guides/rancher-webhook#common-issues
+[17]: /containers/kubernetes/distributions/#autopilot
+[18]: /containers/kubernetes/distributions/#Openshift
