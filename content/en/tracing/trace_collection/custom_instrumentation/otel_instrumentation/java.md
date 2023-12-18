@@ -31,6 +31,7 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 | [Span Exporters][4]                               | Unsupported                                                                                 |
 | Trace/span [ID generators][5]                     | ID generation is performed by the tracing library, with support for [128-bit trace IDs][6]. |
 | [Metrics][7], [Baggage][8] and [Context][9] API   | Unsupported                                                                                 |
+| [Span links ][14] (Beta)                          | Requires `dd-trace-java` version 1.24.0 or greater.                                         |
 
 ## Configuring OpenTelemetry to use the Datadog tracing library
 
@@ -146,3 +147,5 @@ public void myMethod(@SpanAttribute("parameter1") String parameter1,
 [10]: https://opentelemetry.io/docs/instrumentation/java/manual/
 [11]: /tracing/trace_collection/dd_libraries/java/?tab=springboot#add-the-java-tracer-to-the-jvm
 [12]: /tracing/trace_collection/single-step-apm/
+[13]: /tracing/trace_collection/single-step-apm/
+[14]: https://opentelemetry.io/docs/instrumentation/java/manual/#create-spans-with-links
