@@ -68,4 +68,4 @@ At the top of the side panel, you can configure the rule or send a notification 
 [1]: /security/misconfigurations/findings/
 [2]: /security/cloud_siem/
 [3]: /security/threats/
-[4]: /security/explorer
+[4]: https://app.datadoghq.com/security
