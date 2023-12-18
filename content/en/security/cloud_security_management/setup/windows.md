@@ -24,7 +24,10 @@ Datadog [Cloud Security Management (CSM)][1] on Windows includes built-in threat
 - Access to hosts running Windows Server 2016 or newer.
 - (Optional) For network events, [NPM][2] must be enabled on the hosts.
 
-**Note**: Windows containerized workloads are not supported.
+**Notes**:
+
+- Windows containerized workloads are not supported.
+- Windows support is available for [CSM Enterprise and CSM Workload Security][10] only.
 
 ## Installation
 
@@ -45,7 +48,7 @@ It can take up to 15 minutes to complete the installation. In certain cases, Mic
 
 ## Configuration
 
-### Enable CSM Enterprise
+### Enable CSM
 
 1. Ensure you have access to `C:\ProgramData`, which is a hidden folder.
     - In **File Explorer**, click the **View** tab, and clear the **Hidden items** checkbox. The **ProgramData** folder should now be visible when navigating to the C: drive. The transparent icon indicates it is a hidden folder.
@@ -83,3 +86,4 @@ To get alerts whenever a Windows signal is created, create a [Notification Rule]
 [7]: https://app.datadoghq.com/logs
 [8]: https://app.datadoghq.com/security?product=cws&_gl=1*yokoae*_gcl_au*MTY0NDMyMDU4Mi4xNjk5Mjg1NDky*_ga*MTA2MDI5Mjg5My4xNzAwNTg2NjI0*_ga_KN80RDFSQK*MTcwMDU4NjYyNC42LjEuMTcwMDU4NzY3MC4wLjAuMA..*_fplc*Z3E3OTgzSExKaFZUcnBtQ0NXbFh2ZmYyQkZjclJjNXpacGZ3TnJiUDhyeG0ySHdwZDVUb0l1RXF2ZU4lMkZiQTV1Q0M3ZUxlN0pjQ3RRZ1V3b1hwd0taTDFPZlk5VDFzbzMyNDB3MUxzUEUyNiUyQlh2Q0FaQ1V5UGVRTmtXVG0lMkJRJTNEJTNE
 [9]: https://docs.datadoghq.com/security/notifications/rules/
+[10]: /security/cloud_security_management/setup
