@@ -1,5 +1,5 @@
 ---
-title: Connecting Ruby Logs and Traces
+title: Correlating Ruby Logs and Traces
 kind: documentation
 code_lang: ruby
 type: multi-code-lang
