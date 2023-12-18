@@ -13,9 +13,11 @@ further_reading:
   text: "Learn more about CSM Vulnerabilities"
 ---
 
+Accurate severity scores help security teams understand the risk vulnerabilities pose to their environment. Cloud Security Management (CSM) uses different measures of severity depending on the type of issue.
+
 ## CSM severity scoring framework
 
-CSM Misconfigurations, CSM Identity Risks, and Security Inbox misconfigurations use the CSM severity scoring framework to determine the severity of a finding. The framework compares the likelihood that an adversary would take advantage of a misconfiguration to the risk posed to your environment. By weighting both of these aspects, findings can be prioritized more accurately by real-world risks. The matrices below show how to a misconfiguration's severity score is computed based on certain criteria.
+CSM Misconfigurations, CSM Identity Risks, and Security Inbox misconfigurations use the CSM severity scoring framework to determine the severity of a finding. The framework compares the likelihood that an adversary would take advantage of a misconfiguration to the risk posed to your environment. By weighting both of these aspects, findings can be prioritized more accurately by real-world risks. The matrices below show how a misconfiguration's severity score is computed based on its likelihood of abuse and impact.
 
 ### Likelihood
 
