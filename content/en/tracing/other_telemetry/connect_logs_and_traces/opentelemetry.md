@@ -1,5 +1,5 @@
 ---
-title: Connect OpenTelemetry Traces and Logs
+title: Correlating OpenTelemetry Traces and Logs
 kind: documentation
 description: 'Connect your application logs and OpenTelemetry traces to correlate them in Datadog'
 code_lang: opentelemetry

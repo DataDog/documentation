@@ -1,5 +1,5 @@
 ---
-title: Connecting Go Logs and Traces
+title: Correlating Go Logs and Traces
 kind: documentation
 description: 'Connect your Go logs and traces to correlate them in Datadog.'
 aliases:
