@@ -61,6 +61,8 @@ The following APIs and permissions enable Datadog to access your Detailed Usage 
 #### **Enable necessary Google Service APIs**:
 [Enable BigQuery and BigQuery Data Transfer Service APIs][5] if not already enabled.
 
+**Note:** BigQuery Data Transfer API needs to be enabled on the Google Project that contains the service account.
+
 #### **Configure required bucket access**:
 [Add the service account as a principal on the GCS bucket resource][6] and assign a role with the following permissions:
    * `storage.buckets.get`
