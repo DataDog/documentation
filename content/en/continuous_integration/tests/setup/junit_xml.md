@@ -343,7 +343,7 @@ To automatically add the `test.codeowners` tag to your tests, you need to:
 2. Provide the tests source file in your Junit XML report. This is currently done automatically with the following plugins:
    phpunit, and most of python and ruby plugins (pytest, unittest, ruby minitest, ...). These plugins will add the
    `file` attribute to the `<testcase>` or `<testsuite>` elements in the XML report. If the XML does not have the `file` attribute,
-   you will need not be able to use the Github integration so you will need to [provide the source file manually](#manually-providing-the-testsourcefile-tag).
+   you will need to [provide the source file manually](#manually-providing-the-testsourcefile-tag).
    Example of valid report:
 
   {{< code-block lang="xml" >}}
