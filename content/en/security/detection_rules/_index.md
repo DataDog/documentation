@@ -113,7 +113,7 @@ To restore access to a rule:
 
 ### View generated signals
 
-To view the security signals for a rule in the [Signals Explorer][6], click the vertical three-dot menu and select **View generated signals**. This is useful when correlating signals across multiple sources by rule, or when completing an audit of rules.
+To view the security signals for a rule in the [Signals Explorer][16], click the vertical three-dot menu and select **View generated signals**. This is useful when correlating signals across multiple sources by rule, or when completing an audit of rules.
 
 ### Export a rule as JSON
 
@@ -128,8 +128,8 @@ The rule deprecation process is as follows:
 1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
     - Signal side panel's **Rule Details > Playbook** section
     - Misconfigurations side panel (CSM Misconfigurations only)
-    - [Rule editor](#rule-and-generated-signal-options) for that specific rule 
-2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule](#rule-and-generated-signal-options) in the UI.
+    - [Rule editor][15] for that specific rule 
+2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule](#clone-a-rule) in the UI.
 3. Once the rule is deleted, you can no longer clone and re-enable it.
 
 ## Further reading

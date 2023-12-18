@@ -340,4 +340,4 @@ The rule deprecation process is as follows:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/configuration/siem/rules
-[2]: /security/detection_rules/#rule-and-generated-signal-options
+[2]: /security/detection_rules/#clone-a-rule
