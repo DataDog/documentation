@@ -1,4 +1,4 @@
-{{- if ne hugo.Environment "development" -}}
+{{- if (or (eq hugo.Environment "live") (eq (os.Getenv "CI_JOB_NAME" | default "" ) "algolia_sync_preview:manual")) -}}
     {{ $.Scratch.Add "algoliaindex" slice }}
     {{ $section := $.Site.GetPage "section" .Section }}
     {{ $hugo_context := . }}
@@ -15,9 +15,18 @@
             {{ $title := $page.Params.integration_title | default $page.Title }}
             {{ $content := $page.Plain | htmlUnescape | safeHTML | truncate 10000 }}
             {{ $tags := $page.Params.algolia.tags }}
-            {{ $category := $page.Params.algolia.category | default "Documentation" }}
-            {{ $subcategory := $page.Params.algolia.subcategory | default $page.Title }}
             {{ $rank := $page.Params.algolia.rank | default 70 }}
+            {{ $category := $page.Params.algolia.category | default "Documentation" }}
+            {{ $subcategory := $page.Params.algolia.subcategory }}
+
+            {{- /* Fallback to page's ancestor if subcategory isnt set in Params. */ -}}
+            {{ if not $subcategory }}
+                {{ if eq (lower $page.FirstSection.Title) ("service_managements") }}
+                    {{ $subcategory = $page.CurrentSection.Title }}
+                {{ else }}
+                    {{ $subcategory = $page.FirstSection.Title }}
+                {{ end }}
+            {{ end }}
 
             {{- /* record for each individual section (split by h2 header) */ -}}
             {{ partial "algolia/page-sections.json" (dict "context" $hugo_context "page" $page "title" $title "category" $category "subcategory" $subcategory "rank" $rank) }}
@@ -29,6 +38,7 @@
                 "content" $content
                 "type" $page.Type
                 "relpermalink" $page.RelPermalink
+                "distinct_base_url" $page.RelPermalink
                 "full_url" $page.Permalink
                 "language" $page.Language.Lang
                 "category" $category

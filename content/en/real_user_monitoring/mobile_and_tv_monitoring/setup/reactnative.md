@@ -72,7 +72,7 @@ The Datadog React Native SDK requires you to have `compileSdkVersion = 31` or hi
 
 ### Specify application details in the UI
 
-1. In the [Datadog app][1], navigate to **UX Monitoring** > **RUM Applications** > **New Application**.
+1. In Datadog, navigate to [**UX Monitoring** > **Setup & Configurations** > **New Application**][1].
 2. Choose `react-native` as the application type.
 3. Provide an application name to generate a unique Datadog application ID and client token.
 4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings.
@@ -379,7 +379,7 @@ configuration.trackBackgroundEvents = true;
 
 ### Android
 
-Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][10], meaning that on most devices this data can't be read by other applications. However, if the mobile device is rooted, or someone tempers with the Linux kernel, the stored data might become readable.
+Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][10], meaning that on most devices this data can't be read by other applications. However, if the mobile device is rooted, or someone tampers with the Linux kernel, the stored data might become readable.
 
 ### iOS
 

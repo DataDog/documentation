@@ -5,9 +5,18 @@ further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
   text: "Service Catalog"
+- link: /api/latest/service-scorecards/
+  tag: "Documentation" 
+  text: "Service Scorecards API" 
 - link: "https://www.datadoghq.com/blog/service-scorecards/"
   tag: "Blog"
-  text: "Improve service health and performance with Service Scorecards"
+  text: "Prioritize and promote service observability best practices with Service Scorecards"
+- link: "https://www.datadoghq.com/blog/datadog-custom-scorecards/"
+  tag: "Blog"
+  text: "Formalize best practices with custom Scorecards"
+- link: "/continuous_integration/dora_metrics/"
+  tag: "Documentation"
+  text: "Track DORA Metrics with CI Visibility" 
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
@@ -84,7 +93,7 @@ Deployment tracking is active
 : For services monitored by APM or USM. [Ensure smooth rollouts by implementing a version tag with Unified Service Tagging][4]. As you roll out new versions of your functionality, Datadog captures and alerts on differences between the versions in error rates, number of requests, and more. This can help you understand when to roll back to previous versions to improve end user experience. 
 
 Logs correlation is active
-: For APM services. [Correlation between APM and Logs][5] improves the speed of troubleshooting for end users, saving you time during incidents and outages. 
+: For APM services, evaluated based on the past hour of logs detected. [Correlation between APM and Logs][5] improves the speed of troubleshooting for end users, saving you time during incidents and outages.
 
 ### Ownership and documentation
 

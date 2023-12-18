@@ -58,7 +58,7 @@ Begin [ingesting logs][3] from your hosts, containers, cloud providers, and othe
 
 ## Configure
 
-{{< img src="/logs/configure.png" alt="Configure your logs all in one place" style="width:80%;">}}
+{{< img src="logs/lwl_marketecture_20231030.png" alt="Configure your logs all in one place" >}}
 
 Once your logs are ingested, process and enrich all your logs with pipelines and processors, provide control of your log management budget with indexes, generate metrics from ingested logs, or manage your logs within storage-optimized archives with [Log Configuration options][4].
 

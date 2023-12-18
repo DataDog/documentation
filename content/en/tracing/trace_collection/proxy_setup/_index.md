@@ -312,10 +312,38 @@ the Docker image [amazonlinux:2.0.20230119.1][2] is included in each release as 
 get_latest_release() {
   curl --silent "https://api.github.com/repos/$1/releases/latest" | jq --raw-output .tag_name
 }
+
+get_architecture() {
+  case "$(uname -m)" in
+    aarch64)
+      echo "arm64"
+      ;;
+    arm64)
+      echo "arm64"
+      ;;
+    x86_64)
+      echo "amd64"
+      ;;
+    amd64)
+      echo "amd64"
+      ;;
+    *)
+      echo ""
+      ;;
+  esac
+}
+
+ARCH=$(get_architecture)
+
+if [ -z "$ARCH" ]; then
+    echo 1>&2 "ERROR: Architecture $(uname -m) is not supported."
+    exit 1
+fi
+
 BASE_IMAGE=nginx:1.23.2-alpine
 BASE_IMAGE_WITHOUT_COLONS=$(echo "$BASE_IMAGE" | tr ':' '_')
 RELEASE_TAG=$(get_latest_release DataDog/nginx-datadog)
-tarball="$BASE_IMAGE_WITHOUT_COLONS-ngx_http_datadog_module.so.tgz"
+tarball="$BASE_IMAGE_WITHOUT_COLONS-$ARCH-ngx_http_datadog_module.so.tgz"
 wget "https://github.com/DataDog/nginx-datadog/releases/download/$RELEASE_TAG/$tarball"
 tar -xzf "$tarball" -C /usr/lib/nginx/modules
 rm "$tarball"
@@ -541,17 +569,6 @@ spec:
       annotations:
         apm.datadoghq.com/env: '{ "DD_ENV": "prod", "DD_SERVICE": "my-service", "DD_VERSION": "v1.1"}'
 ```
-
-The available [environment variables][11] depend on the version of the C++ tracer embedded in the Istio sidecar's proxy.
-
-| Istio Version | C++ Tracer Version |
-|---------------|--------------------|
-| v1.9.x - v1.17.x | v1.2.1 |
-| v1.7.x - v1.8.x | v1.1.5 |
-| v1.6.x | v1.1.3 |
-| v1.3.x - v1.5.x | v1.1.1 |
-| v1.1.3 - v1.2.x | v0.4.2 |
-
 
 ## Deployment and service
 

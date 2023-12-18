@@ -9,10 +9,11 @@ aliases:
 
 ## Overview
 
+<div class="alert alert-info"><strong>Beta</strong>: You can enable APM when installing the Agent with  <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation</a>. Run a one-line install command to automatically enable APM and instrument all of your services on your Linux host, VM, or container.</div>
+
 To instrument your application, you can:
-* Inject the instrumentation library locally (at the Agent), as described on this page; or
-* [Inject the instrumentation library remotely from Datadog][5] (beta); or
-* [Manual adding the instrumentation library in the application][1].
+* Auto-instrument your application, as described on this page.
+* [Manually instrument your application][1].
 
 How to inject the library locally, without touching the application code at all, varies depending on where and how your Agent and application are installed. Select the scenario that represents your environment:
 
@@ -327,9 +328,9 @@ When an app that is written in a supported language is launched, it is automatic
 
 ## Configure the injection
 
-Configure host injection is configured in one the following ways:
+Configure host injection in one of the following ways:
 - Set environment variables on the process being launched.
-- Specify the configuration in the file `/etc/datadog-agent/inject/host_config.yaml`.
+- Specify host injection configuration in the `/etc/datadog-agent/inject/host_config.yaml` file.
 
 Values in environment variables override settings in the configuration file on a per-process basis.
 
@@ -1104,4 +1105,3 @@ For example, you can turn on [Application Security Monitoring][3] or [Continuous
 [2]: /tracing/trace_collection/library_config/
 [3]: /security/application_security/enabling/java/?tab=kubernetes#get-started
 [4]: /profiler/enabling/java/?tab=environmentvariables#installation
-[5]: /tracing/trace_collection/library_injection_remote/

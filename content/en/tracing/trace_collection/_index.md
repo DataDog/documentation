@@ -12,6 +12,7 @@ aliases:
     - /tracing/getting_further/first_class_dimensions/
     - /agent/apm/
     - /tracing/setup_overview/
+    - /tracing/trace_collection/library_injection_remote
 further_reading:
 - link: "tracing/trace_collection/compatibility"
   tag: "Documentation"
@@ -22,7 +23,7 @@ To configure your application to send traces to Datadog:
 
 ## Step 1 - Configure the Datadog Agent for APM
 
-<div class="alert alert-info"><strong>Beta</strong>: You can enable APM when installing the Agent with  <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation</a>. Run a one-line install command to automatically enable APM and instrument all of your services on the Linux host, VM, or container. After that, you're ready to <a href="/tracing/services">start exploring</a>!</div>
+<div class="alert alert-info"><strong>Beta</strong>: You can enable APM when installing the Agent with  <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation</a>. Run a one-line install command to automatically enable APM and instrument all of your services on your Linux host, VM, or container.</div>
 
 If you don't use Single Step APM Instrumentation, APM-specific configurations are required on both the Tracer and Agent to ensure that traces can be received from certain environment types, such as containerized or serverless. Ensure you have followed instructions for both components. 
 
@@ -91,7 +92,6 @@ Depending on the programming language and infrastructure you use, you have the f
 
 - [Auto-instrument your application](#option-1---auto-instrument-your-application)
 - [Manually instrument your application](#option-2---manually-instrument-your-application)
-- [Auto-instrument your application from the Datadog UI](#option-3---auto-instrument-your-application-from-the-datadog-ui)
 
 ### Option 1 - Auto-instrument your application
 
@@ -107,15 +107,6 @@ For setup instructions, select your language:
 {{< partial name="apm/apm-languages.html" >}}
 
 To instrument an application written in a language that does not have official library support, see the list of [community tracing libraries][1].
-
-
-### Option 3 - Auto-instrument your application from the Datadog UI
-
-<div class="alert alert-info">This feature is in private beta.</a></div>
-
-For Kubernetes, you can inject the Java, Python, and Node.js tracing libraries from the Datadog UI. 
-
-For more information and instructions, read [Injecting Libraries Remotely][3].
 
 ## APM setup tutorials
 
@@ -145,5 +136,4 @@ The following tutorials guide you through setting up distributed tracing for a s
 
 [1]: /developers/community/libraries/#apm-tracing-client-libraries
 [2]: /tracing/trace_collection/library_injection_local/
-[3]: /tracing/trace_collection/library_injection_remote/
 [4]: /tracing/trace_collection/dd_libraries/

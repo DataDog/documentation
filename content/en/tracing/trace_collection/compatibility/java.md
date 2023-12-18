@@ -122,6 +122,7 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Camel-OpenTelemetry      | 3.12.0+     | Beta            | [opentelemetry-1][5]                           |
 | Commons HTTP Client      | 2.0+        | Fully Supported | `commons-http-client`                          |
 | Google HTTP Client       | 1.19.0+     | Fully Supported | `google-http-client`                           |
+| Google Pub/Sub           | 1.116.0+    | Fully Supported | `google-pubsub`                                |
 | Grizzly HTTP Client      | 1.9+        | [Beta](#framework-integrations-disabled-by-default) | `grizzly-client`     |
 | gRPC                     | 1.5+        | Fully Supported | `grpc`, `grpc-client`, `grpc-server`           |
 | HttpURLConnection        | all         | Fully Supported | `httpurlconnection`, `urlconnection`           |
