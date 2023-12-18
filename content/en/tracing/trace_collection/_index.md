@@ -51,6 +51,7 @@ Capture observability data from in-house code or complex functions that aren't c
 
 - [Datadog libraries][9]: Use Datadog tracing libraries to add and customize observability within Datadog.
 - [OpenTelemetry APIs][10]: Use OpenTelemetry API support in Datadog libraries to have vendor-neutral instrumentation of your code.
+
 To learn more, see [custom instrumentation][6].
 
 ## APM setup tutorials
