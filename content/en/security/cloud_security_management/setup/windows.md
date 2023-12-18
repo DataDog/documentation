@@ -28,7 +28,7 @@ Datadog [Cloud Security Management (CSM)][1] on Windows includes built-in threat
 
 ## Installation
 
-<div class="alert alert-info"><strong>Important</strong>: You must use the installer linked in this document, and <strong>not</strong> the installer available on the <strong>Integrations</strong> &gt; <strong>Agent</strong> page in Datadog.</div>
+<div class="alert alert-info">You must use the installer linked in this document, and <strong>not</strong> the installer available on the <strong>Integrations</strong> &gt; <strong>Agent</strong> page in Datadog.</div>
 
 ### Installer
 
@@ -63,7 +63,7 @@ It can take up to 15 minutes to complete the installation. In certain cases, Mic
 
 ### Verify that the Agent is sending events to CSM
 
-When you enable CSM, the Agent sends a log to Datadog to confirm that the Windows default ruleset has been successfully deployed. To view the log, navigate to the [**Logs**][7] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
+When you enable CSM on Windows, the Agent sends a log to Datadog to confirm that the Windows default ruleset has been successfully deployed. To view the log, navigate to the [**Logs**][7] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
 
 Another method to verify that the Agent is sending events to CSM is to manually trigger a Windows security signal.
 
