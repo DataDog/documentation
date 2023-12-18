@@ -41,12 +41,12 @@ The accessibility is determined by the following criteria:
 
 These subcomponents determine the Likelihood score:
 
-|               |                     | Accessibility |          |
-|---------------|---------------------|---------------|----------|
-|               |                     | **Private**       | **Public**   |
-| **Attack Vector** | **Required Privileges** | Improbable           | Possible   |
-|               | **Vulnerability**       | Possible        | Probable     |
-|               | **No Authorization**    | Probable          | Highly Probable |
+| Attack Vector | Accessibility |          |
+|---------------------|---------------|----------|
+|                     | **Private**       | **Public**   |
+| **Required Privileges** | Improbable           | Possible   |
+| **Vulnerability**       | Possible        | Probable     |
+| **No Authorization**    | Probable          | Highly Probable |
 
 ### Impact
 
@@ -63,13 +63,13 @@ The impact component is how damaging the exploitation of the misconfiguration wo
 
 These two submatrices combined compute the overall severity score for a misconfiguration.
 
-|            |          | Impact |        |          |          |
-|------------|----------|--------|--------|----------|----------|
-|            |          | **Low**    | **Medium** | **High**     | **Critical** |
-| **Likelihood** | **Improbable**      | Low    | Low    | Medium   | Medium   |
-|            | **Possible**   | Low    | Medium | High     | High     |
-|            | **Probable**     | Medium | High   | High     | Critical |
-|            | **Highly Probable** | Medium | High   | Critical | Critical |
+| Likelihood | Impact |        |          |          |
+|----------|--------|--------|----------|----------|
+|          | **Low**    | **Medium** | **High**     | **Critical** |
+| **Improbable**      | Low    | Low    | Medium   | Medium   |
+| **Possible**   | Low    | Medium | High     | High     |
+| **Probable**     | Medium | High   | High     | Critical |
+| **Highly Probable** | Medium | High   | Critical | Critical |
 
 ### Examples
 
