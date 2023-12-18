@@ -31,7 +31,7 @@ Set up [Log Archives][13] if you want to store your logs for longer periods of t
 
 ### Generate metrics from ingested logs
 
-[Generate log-based metrics][15] to summarize log data from your ingested logs. For example, you can generate a count metric of logs that match a query or match a distribution metric of a numeric value contained in the logs, such as request duration. See [Generate Metrics from Ingested Logs[16]] for more information.
+[Generate log-based metrics][15] to summarize log data from your ingested logs. For example, you can generate a count metric of logs that match a query or match a distribution metric of a numeric value contained in the logs, such as request duration. See [Generate Metrics from Ingested Logs][16] for more information.
 
 ## Metric configuration
 
