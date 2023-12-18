@@ -20,7 +20,7 @@ algolia:
 
 A flare allows you to send necessary troubleshooting information to the Datadog support team. You can send a flare from the Datadog site or using the Datadog Agent command line.
 
-A flare gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings.
+A flare gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information, including passwords, API keys, Proxy credentials, and SNMP community strings.
 
 The Datadog Agent is completely open source, which allows you to [verify the code's behavior][1]. If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.
 
