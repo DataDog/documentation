@@ -1404,6 +1404,11 @@ main:
     identifier: event_explorer_analytics
     parent: events_explorer
     weight: 207
+  - name: Saved Views
+    url: service_management/events/explorer/saved_views
+    identifier: event_explorer_saved_views
+    parent: events_explorer
+    weight: 208
   - name: Using Events
     url: service_management/events/usage/
     identifier: event_usage
