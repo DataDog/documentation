@@ -35,7 +35,7 @@ This guide walks you through best practices for getting your team up and running
 
 **Identify services vulnerable or exposed to attacks** that would benefit from ASM. Navigate to the [ASM Setup page][1] and select the services recommended there.
 
-{{< img src="getting_started/appsec/ASM_activation_service_selection.png" alt="ASM Services page view, showing Vulnerabilities and sorted by Suspicious requests column." style="width:100%;" >}}
+{{< img src="getting_started/appsec/ASM_activation_service_selection_v2.png" alt="ASM Services page view, showing Vulnerabilities and sorted by Suspicious requests column." style="width:100%;" >}}
 
 These security insights are detected from data reported by APM. The insights help prioritize your security efforts. ASM identifies, prioritizes, and helps remediate all security risks on your services.
 

@@ -61,6 +61,8 @@ The following APIs and permissions enable Datadog to access your Detailed Usage 
 #### **Enable necessary Google Service APIs**:
 [Enable BigQuery and BigQuery Data Transfer Service APIs][5] if not already enabled.
 
+**Note:** BigQuery Data Transfer API needs to be enabled on the Google Project that contains the service account.
+
 #### **Configure required bucket access**:
 [Add the service account as a principal on the GCS bucket resource][6] and assign a role with the following permissions:
    * `storage.buckets.get`
@@ -101,7 +103,7 @@ If your integrated Service Account exists in a different Google Cloud Platform p
   * RESOURCE_TYPE: `project`
   * RESOURCE_ID: export dataset project
 
-  This creates a new service agent that looks like `service-<billing project id>@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com`.
+  This creates a new service agent that looks like `service-<billing project number>@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com`.
 
 Add the BigQuery Data Transfer Service Account role created by the trigger as a principal on your Service Account resource with the `roles/iam.serviceAccountTokenCreator` role.
 
