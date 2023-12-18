@@ -1790,6 +1790,11 @@ main:
     parent: tracing_trace_collection
     identifier: tracing_naming_convention
     weight: 111
+  - name: Span Links
+    url: tracing/trace_collection/span_links
+    parent: tracing_trace_collection
+    identifier: tracing_span_links
+    weight: 112
   - name: APM Metrics Collection
     url: tracing/metrics/
     parent: tracing

@@ -422,6 +422,45 @@ function doRiskyThing() {
 {{% /tab %}}
 {{< /tabs >}}
 
+## Adding span links (Beta)
+
+<div class="alert alert-info">Support for span links is in beta and requires the <a href="https://github.com/DataDog/dd-trace-php/releases/tag/0.87.2">PHP tracer v0.87.2+</a>.</div>
+
+Span links associate one or more spans together that don't have a typical parent-child relationship. They may associate spans within the same trace or spans across different traces.
+
+Span links help trace operations in distributed systems, where workflows often deviate from linear execution patterns. Additionally, span links are useful to trace the flow of operations in systems that execute requests in batches or process events asynchronously.
+
+To add a span link from an existing span:
+
+```php
+$spanA = \DDTrace\start_trace_span();
+$spanA->name = 'spanA';
+\DDTrace\close_span();
+
+$spanB = \DDTrace\start_trace_span();
+$spanB->name = 'spanB';
+// Link spanB to spanA
+$spanB->links[] = $spanA->getLink();
+\DDTrace\close_span();
+```
+
+To link a span using distributed tracing headers:
+
+```php
+$spanA = \DDTrace\start_trace_span();
+$spanA->name = 'spanA';
+$distributedTracingHeaders = \DDTrace\generate_distributed_tracing_headers();
+\DDTrace\close_span();
+
+$spanB = \DDTrace\start_trace_span();
+$spanB->name = 'spanB';
+// Link spanB to spanA using distributed tracing headers
+$spanB->links[] = \DDTrace\SpanLink::fromHeaders($distributedTracingHeaders);
+\DDTrace\close_span();
+```
+
+You can view span links from the [Trace View][10] in APM.
+
 ## Context propagation for distributed traces
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][9] for information.
@@ -740,3 +779,4 @@ While this [has been deprecated][7] if you are using PHP 7.x, you still may use 
 [7]: https://laravel-news.com/laravel-5-6-removes-artisan-optimize
 [8]: /tracing/trace_collection/opentracing/php#opentracing
 [9]: /tracing/trace_collection/trace_context_propagation/php
+[10]: /tracing/trace_explorer/trace_view?tab=spanlinksbeta#more-information
