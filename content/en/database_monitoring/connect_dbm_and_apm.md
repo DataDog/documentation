@@ -1,5 +1,5 @@
 ---
-title: Connect Database Monitoring and Traces
+title: Correlate Database Monitoring and Traces
 kind: documentation
 aliases:
 - /database_monitoring/guide/connect_dbm_and_apm/
