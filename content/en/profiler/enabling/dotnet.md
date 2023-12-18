@@ -25,6 +25,8 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
+To find the minimum and recommended versions for .NET runtimes and tracers, read [Language and Tracer Versions for Profiler Features][14].
+
 Supported operating systems for .NET Framework
 : Windows 10<br/>
 Windows Server starting from version 2012
@@ -50,20 +52,6 @@ Supported .NET runtimes (64-bit applications)
 
 Supported languages
 : Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
-
-The following profiling features are available in the following minimum versions of the `dd-trace-dotnet` library:
-
-| Feature                   | Required `dd-trace-dotnet` version | Required .NET Runtime versions                                                           |
-|---------------------------|------------------------------------|------------------------------------------------------------------------------------------|
-| Wall time profiling       | 2.7.0+                             | All supported runtime versions.                                                          |
-| CPU profiling             | 2.15.0+                            | All supported runtime versions.                                                          |
-| Exceptions profiling      | 2.31.0+                            | All supported runtime versions.                                                          |
-| Allocations profiling     | beta, 2.18.0+                      | .NET 6+                                                                                  |
-| Lock Contention profiling | 2.31.0+                            | .NET 5+                                                                                  |
-| Live heap profiling       | beta, 2.22.0+                      | .NET 7+                                                                                  |
-| [Code Hotspots][12]       | 2.7.0+                             | All supported runtime versions.                                                          |
-| [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
-| Timeline                  | 2.30.0+                            | All supported runtime versions (except .NET 5+ required for garbage collection details). |
 
 ## Installation
 
@@ -415,3 +403,4 @@ The [Getting Started with Profiler][4] guide takes a sample service with a perfo
 [5]: /tracing/trace_collection/
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /profiler/enabling/supported_versions/

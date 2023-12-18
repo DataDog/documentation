@@ -22,6 +22,8 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
+To find the minimum and recommended versions for Java runtimes and tracers, read [Language and Tracer Versions for Profiler Features][12].
+
 As of dd-trace-java 1.0.0, you have two options for the engine that generates profile data for Java applications: [Java Flight Recorder (JFR)][2] or the Datadog Profiler. As of dd-trace-java 1.7.0, Datadog Profiler is the default. Each profiler engine has different side effects, requirements, available configurations, and limitations, and this page describes each. You can enable either one or both engines. Enabling both captures both profile types at the same time.
 
 {{< tabs >}}
@@ -206,8 +208,6 @@ The wallclock engine does not depend on the `/proc/sys/kernel/perf_event_paranoi
 
 ### Datadog profiler allocation engine
 
-_Requires JDK 11+._
-
 The Datadog allocation profiling engine contextualizes allocation profiles, which supports allocation profiles filtered by endpoint.
 In dd-java-agent earlier than v1.17.0 it is disabled by default, but you can enable it with:
 
@@ -228,8 +228,6 @@ For JMC users, the Datadog allocation events are `datadog.ObjectAllocationInNewT
 The allocation profiler engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
 ### Live-heap profiler engine
-
-_Since: v1.17.0. Requires JDK 11+._
 
 The live-heap profiler engine is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 The engine samples allocations and keeps track of whether those samples survived the most recent garbage collection cycle. The number of surviving samples is used to estimate the number of live objects in the heap.
@@ -305,3 +303,4 @@ The [Getting Started with Profiler][10] guide takes a sample service with a perf
 [9]: /getting_started/tagging/unified_service_tagging
 [10]: /getting_started/profiler/
 [11]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[12]: /profiler/enabling/supported_versions/
