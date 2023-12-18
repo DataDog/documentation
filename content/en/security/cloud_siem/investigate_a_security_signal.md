@@ -36,16 +36,27 @@ Use different visualizations to investigate the threat activity in your environm
 
 After you have filtered your signals to your use case, create a [saved view][4] so that you can reload your query later.
 
-## Triage a signal
+## Triage a signal or multiple signals
 
 1. Navigate to [Cloud SIEM][5].
 1. Click **Signals**.
 1. Click on a security signal from the table.
 1. To assign a signal to yourself or another Datadog user, click the user profile icon with the plus sign in the top left corner of the signal side panel.
+{{< img src="security/security_monitoring/investigate_a_signal/profile_icon.png" alt="The profile icon next to the triage status" style="width:45%;" >}}
 1. To update the triage status of the security signal, navigate to the top left corner of the signal side panel and select the status you want from the dropdown menu. The default status is `OPEN`.
+{{< img src="security/security_monitoring/investigate_a_signal/triage_status.png" alt="The profile icon next to the triage status" style="width:35%;" >}}
     - **Open**: Datadog Security triggered a detection based on a rule, and the resulting signal is not yet resolved.
     - **Under Review**: During an active investigation, you can switch the signal state to **Under Review**. From the **Under Review** state, you can move the signal state to **Archived** or **Open** as needed.
     - **Archived**: When the detection that caused the signal has been resolved, you can transition it to the **Archived** state. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an **Open** state within 30 days of being created.
+
+Use bulk actions to triage multiple signals. To use bulk actions, first search and filter your signals in the Signal Explorer, then:
+
+1. Click on the checkbox to the left of the signals that you want to take a bulk action on. To select all signals in the Signal Explorer list, select the checkbox next to the **Status** column header.
+1. Click on the **Bulk Actions** dropdown menu above the signals table and select the action you want to take.
+
+**Note**: The Signals Explorer stops dynamically updating when performing a bulk action.
+
+{{< img src="security/security_monitoring/investigate_a_signal/bulk_actions.png" alt="The Signal Explorer showing the bulk action option" style="width:45%;" >}}
 
 ### Case Management
 
