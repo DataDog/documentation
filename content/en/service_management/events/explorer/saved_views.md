@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Events Saved Views makes it easier for you and your teammates to switch between different troubleshooting contexts. Save the state of the [**Events Explorer** page][1] and get access to:
+Events Saved Views make it easier for you and your teammates to switch between different troubleshooting contexts. Save the state of the [**Events Explorer** page][1] and get access to:
 - Scoped queries
 - Relevant facets
 - Time range
@@ -21,15 +21,15 @@ Events Saved Views makes it easier for you and your teammates to switch between 
 All saved views except for the [default view](#default-views) are shared across the organization, including custom saved views created by users. These are editable by anyone in your organization and display the avatar of the user who created the view. To create a saved view:
 1. Customize the Events query to scope down to the events you are troubleshooting. For more information, see the [Event Analytics][2] and [Search Syntax][3] documentation.
 1. Click **+ Save**.
-1. Enter a name and click **Save** to create a saved view..
+1. Enter a name and click **Save** to create a saved view.
 
-To access your saved views, expand **> Views** to the left of **Events Explorer**. From the saved view entry in the Views panel you can:
+To access your saved views, expand **> Views** to the left of **Events Explorer**. From the saved view entry in the Views panel, you can:
 
 * **Load** or **reload** a saved view.
 * **Update** a saved view with the configuration of the current view.
 * **Rename** or **delete** a saved view.
-* **Share** a saved view through a short-link.
-* **Star** (turn into a favorite) a saved view so that it appears on top of your saved view list, and is accessible directly from the navigation menu.
+* **Share** a saved view through a short link.
+* **Star** (favorite) a saved view so it appears on top of your saved view list, and is accessible directly from the navigation menu.
 
 ## Default views
 
