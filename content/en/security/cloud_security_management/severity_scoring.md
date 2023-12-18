@@ -15,14 +15,14 @@ further_reading:
 
 ## CSM severity scoring framework
 
-CSM Misconfigurations, CSM Identity Risks, and Security Inbox misconfigurations use the CSM severity scoring framework to determine the severity of a finding. The framework compares the likelihood that an adversary would take advantage of a misconfiguration to the risk posed to your environment. By weighting both of these aspects, findings can be prioritized more accurately based on their real-world risks. The matrices below show how to compute a misconfiguration's severity score depending on certain criteria.
+CSM Misconfigurations, CSM Identity Risks, and Security Inbox misconfigurations use the CSM severity scoring framework to determine the severity of a finding. The framework compares the likelihood that an adversary would take advantage of a misconfiguration to the risk posed to your environment. By weighting both of these aspects, findings can be prioritized more accurately by real-world risks. The matrices below show how to a misconfiguration's severity score is computed based on certain criteria.
 
 ### Likelihood
 
 The likelihood component is made up of two subcomponents:
 
-* Attack vector: The means through which a misconfiguration can be exploited.
-* Accessibility: If the resource is publicly accessible or not.
+* **Attack vector**: The means through which a misconfiguration can be exploited.
+* **Accessibility**: If the resource is publicly accessible or not.
 
 #### Attack vector 
 
@@ -42,6 +42,10 @@ Accessibility is determined by the following criteria:
 |:-------------:|:---------------------------------------------------------------------:|
 |    Private    |     The vulnerable component or resource is in a private network.     |
 |    Public     | The vulnerable component or resource is accessible from the internet. |
+
+#### Likelihood score
+
+Together, the attack vector and accessibility determine the Likelihood score:
 
 | Attack Vector           | Accessibility |                 |
 |-------------------------|---------------|-----------------|
@@ -81,37 +85,33 @@ To explain how the framework is used here are a few examples.
 
 The detection rule for [SNS Topic should have access restrictions set for subscription][1] checks if the SNS topic has a resource-based policy that contains a `Principal` of `*`, and an `Action` with the `sns:Subscribe` permission. This combination gives anyone the ability to subscribe to the SNS topic and receive its notifications. 
 
-Using the severity scoring framework, the rule would be scored as follows:
+Using the CSM severity scoring framework, the rule would be scored as follows:
 
-- Likelihood: Highly Probable
-  - Attack Vector: No Authorization
-    - The Attack Vector is marked as "No Authorization" because the resource-based policy contains a `*`. This wildcard permits anyone the ability to act on the resource. No authentication/authorization is required to exploit the misconfiguration.
-  - Accessibility: Public
-    - The Accessibility is marked as "Public" because the misconfiguration can be exploited over the internet through its resource-based policy. No specific network access is required.
-
-- Impact: Medium
-  - Impact is marked as "Medium" due to the fact that the confidentiality of the resource is impacted. An adversary who has exploited this misconfiguration can receive messages as they are sent by the SNS topic.
-
-- Severity Score: Highly Probable x Medium = High
+- **Likelihood score**: Highly Probable
+  - **Attack vector**: No Authorization
+    - The Attack Vector is marked as "No Authorization" because the resource-based policy contains a `*`. This wildcard grants anyone the ability to act on the resource. No authentication or authorization is required to exploit the misconfiguration.
+  - **Accessibility**: Public
+    - Accessibility is marked as "Public" because the misconfiguration can be exploited over the internet through its resource-based policy. No specific network access is required.
+- **Impact**: Medium
+  - Impact is marked as "Medium" due to the fact that the confidentiality of the resource is impacted. An adversary who exploits this misconfiguration can receive messages sent by the SNS topic.
+- **Severity score**: Highly Probable x Medium = High
   - The final severity score is High. This is because a Highly Probable likelihood mixed with a Medium impact results in an overall score of High.
 
 #### Example 2: EC2 instances should enforce IMDSv2
 
-The detection rule for [EC2 instances should enforce IMDSv2][2] checks if an EC2 instance is using the Instance Metadata Service Version 1 ([IMDSv1][3]), which is vulnerable to common web application attacks. If exploited, an adversary would be able to access the IAM credentials stored in the IMDS and use them to access resources in the AWS account. 
+The detection rule for [EC2 instances should enforce IMDSv2][2] checks if an EC2 instance is using the Instance Metadata Service Version 1 ([IMDSv1][3]), which is vulnerable to common web application attacks. If exploited, an adversary can obtain access to the IAM credentials stored in the IMDS and use them to access resources in the AWS account.
 
-Using the severity scoring framework, the rule would be scored as follows:
+Using the CSM severity scoring framework, the rule would be scored as follows:
 
-- Likelihood: Possible
-  - Attack Vector: Vulnerability
-    - The Attack Vector is marked as "Vulnerability". This is because the exploitation of this misconfiguration requires the resource to contain a vulnerable component, such as vulnerable software running on the EC2 instance that can be abused to perform [server side request forgery][4] attacks.
-  - Accessibility: Private
-    - The Accessibility is marked as "Private" because the EC2 instance has not explicitly been made public.
-
-- Impact: Medium
+- **Likelihood score**: Possible
+  - **Attack vector**: Vulnerability
+    - The attack vector is marked as "Vulnerability". This is because the exploitation of this misconfiguration requires the resource to contain a vulnerable component, such as vulnerable software running on the EC2 instance that can be abused to perform [server side request forgery][4] attacks.
+  - **Accessibility**: Private
+    - Accessibility is marked as "Private", because the EC2 instance has not explicitly been made public.
+- **Impact**: Medium
   - Impact is marked as "Medium" due to the impacts to the confidentiality of the EC2 instance. An adversary would be able to access the IMDS and potentially pull IAM credentials associated with the resource.
-
-- Severity Score: Possible x Medium = Medium
-  - The final severity score is Medium. This is because a Possible likelihood mixed with a Medium impact results in an overall score of Medium.
+- **Severity score**: Possible x Medium = Medium
+  - The final severity score is "Medium". This is because a possible likelihood mixed with a Medium impact results in an overall score of Medium.
 
 ## CVSS 3.0
 
