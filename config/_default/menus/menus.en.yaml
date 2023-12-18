@@ -3427,6 +3427,11 @@ main:
     parent: csm
     identifier: csm_workflow_automation
     weight: 23
+  - name: Severity Scoring
+    url: security/cloud_security_management/severity_scoring/
+    parent: csm
+    identifier: csm_severity_scoring
+    weight: 24
   - name: Guides
     url: security/cloud_security_management/guide/
     parent: csm
@@ -3437,11 +3442,6 @@ main:
     parent: csm
     identifier: csm_troubleshooting
     weight: 30
-  - name: Severity Scoring
-    url: security/cloud_security_management/severity_scoring/
-    parent: csm
-    identifier: csm_severity_scoring
-    weight: 35
   - name: Application Security Management
     url: security/application_security/
     parent: security_platform_heading
