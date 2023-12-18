@@ -41,7 +41,7 @@ attributes:
     type: string
     domain: Reserved
   - name: service
-    description: The [unified service name](/getting_started/tagging/unified_service_tagging/) for the application or service that is generating the data, used to correlate user sessions. It is used to switch from APM to other products, so make sure you define the same value when you use both products. In the RUM Browser SDK, a service denotes a set of pages built by a team that offers a specific functionality in your browser application. You can assign web pages to a service with [manual view tracking](/real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names).
+    description: The [unified service name](/getting_started/tagging/unified_service_tagging/) for the application or service that is generating the data, used to correlate user sessions. It is used to switch from APM to other products, so make sure you define the same value when you use both products. In the RUM Browser SDK, a service denotes a set of pages built by a team that offers a specific functionality in your browser application. You can assign web pages to a service with [manual view tracking](/real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names).
     product_source: 
       - icon-log
       - icon-rum

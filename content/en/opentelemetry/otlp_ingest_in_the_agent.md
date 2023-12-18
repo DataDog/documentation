@@ -89,7 +89,7 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
 1. Follow the [Datadog Docker Agent setup][1].
 
 2. For the Datadog Agent container, set the following endpoint environment variables and expose the corresponding port:
-   - For gPRC: Set `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` to `0.0.0.0:4317` and expose port `4317`.
+   - For gRPC: Set `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` to `0.0.0.0:4317` and expose port `4317`.
    - For HTTP: Set `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` to `0.0.0.0:4318` and expose port `4318`.
 
 3. If you want to enable OTLP logs ingestion, set the following endpoint environment variables in the Datadog Agent container:
@@ -104,7 +104,7 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
 
 2. Configure the following environment variables in both the trace Agent container and the core Agent container:
 
-   For gPRC:
+   For gRPC:
    ```
    name: DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT # enables gRPC receiver on port 4317
    value: "0.0.0.0:4317"
@@ -117,7 +117,7 @@ OTLP logs ingestion on the Datadog Agent is disabled by default so that you don'
    ```
 3. Map the container ports 4317 or 4318 to the host port for the core Agent container:
 
-   For gPRC:
+   For gRPC:
    ```
    ports:
      - containerPort: 4317
@@ -224,7 +224,7 @@ There are many other environment variables and settings supported in the Datadog
 {{% tab "Kubernetes" %}}
 1. In the application deployment file, configure the endpoint that the OpenTelemetry client sends traces to with the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable:
 
-   For gPRC:
+   For gRPC:
    ```
    env:
     - name: HOST_IP

@@ -10,7 +10,7 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about Source Code Integration."
-- link: "/continuous_integration/static_analysis/?tab=githubactions"
+- link: "/static_analysis/?tab=githubactions"
   tag: "Documentation"
   text: "Learn about Static Analysis."
 - link: "https://www.jetbrains.com/lp/toolbox/"
@@ -189,7 +189,7 @@ Static Analysis supports scanning for many programming languages. For a complete
 Additionally, all issues detected by this feature are listed in the standard **Problems** view.
 
 ### Getting started
-When you start editing a source file (Python and Docker files are supported), the plugin checks for `static-analysis.datadog.yml` at your source repository's root. It prompts you to create it if necessary:
+When you start editing a source file supported by Static Analysis, the plugin checks for `static-analysis.datadog.yml` at your source repository's root. It prompts you to create the file if necessary:
 
 {{< img src="/developers/ide_integrations/idea/static-analysis-onboard.png" alt="A banner for onboarding." style="width:100%;" >}}
 
@@ -223,5 +223,5 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 [10]: /watchdog/insights
 [11]: mailto:team-ide-integration@datadoghq.com
 [12]: /continuous_integration/explorer/?tab=testruns
-[13]: /continuous_integration/static_analysis/?tab=githubactions
-[14]: /continuous_integration/static_analysis/rules/
+[13]: /static_analysis/?tab=githubactions
+[14]: /static_analysis/rules/#python-rules

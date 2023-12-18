@@ -6,7 +6,7 @@ is_beta: true
 
 ## Requirements
 
-Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64` architectures.
+Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64`  and `arm64` architectures.
 
 ## Enable APM on your services in one step
 
@@ -231,11 +231,13 @@ Run the following commands and restart the service to stop injecting the library
 
 {{% tab "Kubernetes" %}}
 
-1. Add the `admission.datadoghq.com/enabled=false` label to the pod spec:
+1. Set the `admission.datadoghq.com/enabled:` label to `"false"` for the pod spec:
    ```yaml
-   metadata:
-      annotations:
-         admission.datadoghq.com/enabled: "false"
+   spec:
+     template:
+       metadata:
+         labels:
+           admission.datadoghq.com/enabled: "false"
    ```
 2. Apply the configuration:
    ```bash
@@ -291,4 +293,3 @@ To stop producing traces, remove library injectors and restart the infrastructur
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/remote_config
-[3]: /tracing/service_catalog/
