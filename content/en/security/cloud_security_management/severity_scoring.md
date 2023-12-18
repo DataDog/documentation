@@ -43,16 +43,12 @@ Accessibility is determined by the following criteria:
 |    Private    |     The vulnerable component or resource is in a private network.     |
 |    Public     | The vulnerable component or resource is accessible from the internet. |
 
-#### Likelihood score
-
-Together, the attack vector and accessibility subcomponents determine the Likelihood score:
-
-|                   |                         | Accessibility |                 |
-|-------------------|-------------------------|---------------|-----------------|
-|                   |                         | **Private**   | **Public**      |
-| **Attack Vector** | **Required Privileges** | Improbable    | Possible        |
-|                   | **Vulnerability**       | Possible      | Probable        |
-|                   | **No Authorization**    | Probable      | Highly Probable |
+| Attack Vector           | Accessibility |                 |
+|-------------------------|---------------|-----------------|
+|                         | **Private**   | **Public**      |
+| **Required Privileges** | Improbable    | Possible        |
+| **Vulnerability**       | Possible      | Probable        |
+| **No Authorization**    | Probable      | Highly Probable |
 
 ### Impact
 
@@ -69,13 +65,13 @@ The impact component is how damaging the exploitation of the misconfiguration wo
 
 The likelihood and impact components are used to compute the overall severity score for a misconfiguration.
 
-|                |                     | Impact  |            |          |              |
-|----------------|---------------------|---------|------------|----------|--------------|
-|                |                     | **Low** | **Medium** | **High** | **Critical** |
-| **Likelihood** | **Improbable**      | Low     | Low        | Medium   | Medium       |
-|                | **Possible**        | Low     | Medium     | High     | High         |
-|                | **Probable**        | Medium  | High       | High     | Critical     |
-|                | **Highly Probable** | Medium  | High       | Critical | Critical     |
+| Likelihood          | Impact  |            |          |              |
+|---------------------|---------|------------|----------|--------------|
+|                     | **Low** | **Medium** | **High** | **Critical** |
+| **Improbable**      | Low     | Low        | Medium   | Medium       |
+| **Possible**        | Low     | Medium     | High     | High         |
+| **Probable**        | Medium  | High       | High     | Critical     |
+| **Highly Probable** | Medium  | High       | Critical | Critical     |
 
 ### Examples
 
