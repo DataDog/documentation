@@ -6,6 +6,12 @@ aliases:
   - /cloud_siem
   - /security_platform
   - /security/security_monitoring
+  - /security_monitoring/explorer/
+  - /cloud_siem/explorer/
+  - /security_platform/explorer
+  - /security/explorer
+  - /security_platform/security_signal_management
+  - /security/security_signal_management
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
     tag: "Release Notes"
