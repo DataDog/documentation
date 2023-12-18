@@ -30,20 +30,22 @@ The [Quality Gates Explorer][4] includes out-of-the-box facets such as `Test Sta
 {{< tabs >}}
 {{% tab "Gates" %}}
 
-Navigate to [**CI** > **Test Runs**][101] to access the list of facets left of the test runs list.
+Navigate to [**CI** > **Quality Gate Executions**][101] and select **Gates** to access the list of [Quality Gates facets][102].
 
-{{< img src="/continuous_integration/facets-tests.png" text="Facets list on the Test Runs page of the Quality Gates Explorer" style="width:100%" >}}
+{{< img src="quality_gates/explorer/facets_gates.png" text="Facets list for gates on the Quality Gates Explorer" style="width:100%" >}}
 
-[101]: https://app.datadoghq.com/ci/test-runs
+[101]: https://app.datadoghq.com/ci/quality-gates/executions
+[102]: /quality_gates/explorer/?tab=gates
 
 {{% /tab %}}
 {{% tab "Rules" %}}
 
-Navigate to [**CI** > **Pipeline Executions**][101] to access the list of facets left of the pipeline executions list.
+Navigate to [**CI** > **Quality Gate Executions**][101] and select **Rules** to access the list of [Quality Gates facets][102].
 
-{{< img src="/continuous_integration/facets-pipelines.png" text="Facets list on the Pipeline Executions page of the Quality Gates Explorer" style="width:100%" >}}
+{{< img src="quality_gates/explorer/facets_rules.png" text="Facets list for rules on the Quality Gates Explorer" style="width:100%" >}}
 
-[101]: https://app.datadoghq.com/ci/pipeline-executions
+[101]: https://app.datadoghq.com/ci/quality-gates/executions
+[102]: /quality_gates/explorer/?tab=rules
 
 {{% /tab %}}
 {{< /tabs >}}
