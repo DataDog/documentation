@@ -1333,16 +1333,21 @@ main:
     parent: slos
     identifier: slos_metric
     weight: 2
+  - name: Time Slice SLOs
+    url: service_management/service_level_objectives/time_slice/
+    parent: slos
+    identifier: slos_time_slice
+    weight: 3
   - name: Error Budget Alerts
     url: service_management/service_level_objectives/error_budget/
     parent: slos
     identifier: error_budget
-    weight: 3
+    weight: 4
   - name: Burn Rate Alerts
     url: service_management/service_level_objectives/burn_rate/
     parent: slos
     identifier: burn_rate
-    weight: 4
+    weight: 5
   - name: Guides
     url: service_management/service_level_objectives/guide/
     parent: slos
