@@ -21,7 +21,7 @@ further_reading:
   text: "Detect suspicious login activity with impossible travel detection rules"
 ---
 
-Detection rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a rule is matched over a given period of time, a security signal is generated. You can view these signals in the [Signals Explorer][1].
+Detection rules define conditional logic that is applied to all ingested logs and cloud configurations. When at least one case defined in a rule is matched over a given period of time, a security signal is generated. You can view these signals in the [Signals Explorer][16].
 
 ## Out-of-the-box detection rules
 
@@ -151,3 +151,4 @@ The rule deprecation process is as follows:
 [13]: /security/threats/workload_security_rules?tab=host#create-custom-rules
 [14]: /security/identity_risks/
 [15]: https://app.datadoghq.com/security/configuration/
+[16]: https://app.datadoghq.com/security
