@@ -46,7 +46,7 @@ The **Quality Gates** panel on the left lists default facets you can use to sear
 
 Navigate to [**CI** > **Quality Gate Executions**][101] to see your Quality Gate rule executions.
 
-{{< img src="/quality_gates/explorer/rules.png" text="CI Pipeline Executions page" style="width:100%" >}}
+{{< img src="/quality_gates/explorer/rules.png" text="Quality Gates Rule Executions page" style="width:100%" >}}
 
 The **Quality Gates** panel on the left lists default facets you can use to search for your rule executions.
 
