@@ -34,6 +34,7 @@ content/en/agent/basic_agent_usage/saltstack.md
 content/en/agent/guide/ansible_standalone_role.md
 
 # Tracing
+content/en/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby.md
 content/en/tracing/trace_collection/dd_libraries/ruby.md
 content/en/tracing/trace_collection/compatibility/ruby.md
 
