@@ -100,7 +100,6 @@ export function buildTOCMap() {
         tocAnchors.forEach((anchor) => {
             const href = anchor.getAttribute('href');
             const id = href ? href.replace('#', '').replace(' ', '-') : null;
-            console.log(id);
             const header = id ? document.querySelector(`#${id}`) : null;
             const navParentLinks = Array.from(anchor.closest('#TableOfContents').querySelectorAll(':scope ul > li'))
                 .filter((node) => node.contains(anchor))
