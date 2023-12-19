@@ -51,7 +51,7 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 
 #### Evaluate monitoring coverage  
 - Detecting which services aren’t reporting observability data or having that data monitored.
-- Facilitating [tagging best practices][6] and checks for recommended setup configurations to optimize [cross-telemetry insights][7].
+- Facilitating [tagging best practices][6] and checking for recommended setup configurations to optimize [cross-telemetry insights][7].
 - Spotting issues like missing SLOs, monitors, or services without ownership.
 
 #### Streamline Collaboration During Incidents
