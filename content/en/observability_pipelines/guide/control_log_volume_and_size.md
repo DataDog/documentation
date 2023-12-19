@@ -22,7 +22,7 @@ Because your log volume grows as your organization scales, the cost of ingesting
 
 ## Use transforms to manage log volumes
 
-In Observability Pipelines, a transform performs an action that modifies events, where events are logs and metrics (beta) flowing through the pipeline. 
+In Observability Pipelines, a transform performs an action that modifies events, where events are logs flowing through the pipeline. 
 
 ### Deduplicate events 
 
