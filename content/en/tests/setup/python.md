@@ -74,7 +74,7 @@ For more information, see the [Python tracer installation documentation][4].
 
 ## Instrumenting your tests
 
-### Using pytest
+{{% tab "pytest" %}}
 
 To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`, specifying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
 
@@ -88,21 +88,9 @@ If you also want to enable the rest of the APM integrations to get more informat
 DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
 {{< /code-block >}}
 
-### Using pytest-benchmark
+{{% /tab %}}
 
-To instrument your benchmark tests with `pytest-benchmark`, run your benchmark tests with the `--ddtrace` option when running `pytest`, and Datadog detects metrics from `pytest-benchmark` automatically:
-
-```python
-def square_value(value):
-    return value * value
-
-
-def test_square_value(benchmark):
-    result = benchmark(square_value, 5)
-    assert result == 25
-```
-
-### Using unittest
+{{% tab "unittest" %}}
 
 To enable instrumentation of `unittest` tests, run your tests by appending `ddtrace-run` to the beginning of your `unittest` command.
 
@@ -121,8 +109,8 @@ import unittest
 patch(unittest=True)
 
 class MyTest(unittest.TestCase):
-    def test_will_pass(self):
-        assert True
+def test_will_pass(self):
+assert True
 {{< /code-block >}}
 
 #### Known limitations
@@ -130,6 +118,24 @@ class MyTest(unittest.TestCase):
 In some cases, if your `unittest` test execution is run in a parallel manner, this may break the instrumentation and affect test visibility.
 
 Datadog recommends you use up to one process at a time to prevent affecting test visibility.
+
+{{% /tab %}}
+
+{{% tab "pytest-benchmark" %}}
+
+To instrument your benchmark tests with `pytest-benchmark`, run your benchmark tests with the `--ddtrace` option when running `pytest`, and Datadog detects metrics from `pytest-benchmark` automatically:
+
+```python
+def square_value(value):
+    return value * value
+
+
+def test_square_value(benchmark):
+    result = benchmark(square_value, 5)
+    assert result == 25
+```
+
+{{% /tab %}}
 
 ### Adding custom tags to tests
 
