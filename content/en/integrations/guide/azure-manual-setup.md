@@ -148,7 +148,7 @@ azure role assignment create --objectId <OBJECT_ID> -o "Monitoring Reader" -c /s
 
 4. Select the region, subscription, and resource group for the template to be deployed.
 
-**Note**: The selection of region, subscription, and resource group only defines where this template is deployed. It has no impact on which subscriptions are monitored by Datadog.
+   **Note**: The selection of region, subscription, and resource group only defines where this template is deployed. It has no impact on which subscriptions are monitored by Datadog.
 
 5. Click **Next**.
 
@@ -166,7 +166,7 @@ azure role assignment create --objectId <OBJECT_ID> -o "Monitoring Reader" -c /s
 
 11. Provide a Datadog API key and Datadog Application key value in the corresponding fields. If you launched the template from the Azure integration page in Datadog, you can copy the keys provided there. Otherwise, you can find your API and App keys in the Access section of the Organization Settings.
 
-**Note** If you've selected to monitor individual subscriptions rather than a management group, select the subscriptions to monitor from the **Subscriptions to monitor** dropdown.
+   **Note**: If you've selected to monitor individual subscriptions rather than a management group, select the subscriptions to monitor from the **Subscriptions to monitor** dropdown. You must have the owner role in any subscriptions you wish to monitor.
 
 12. Select your Datadog site, as well as any other integration configuration options, such as host filters and whether to collect resources for [Cloud Security Management][17].
 
