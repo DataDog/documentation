@@ -59,10 +59,10 @@ To perform a multi-character wildcard search, use the `*` symbol as follows:
 * `web*` matches all log messages starting with `web`.
 * `*web` matches all log messages that end with `web`.
 
-Wildcard searches work within tags and attributes (faceted or not) with this syntax. This query returns all the services that end with the string `mongo`:
+Wildcard searches work within tags and attributes (faceted or not) with this syntax. This query returns all the branches that start with `feature-`:
 
 ```
-test.service:*mongo
+branch:feature-*
 ```
 
 ### Search wildcard

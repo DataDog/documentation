@@ -25,7 +25,7 @@ Facets are user-defined tags and attributes from your rules or executions. They 
 
 [Creating facets](#creating-facets) is **not required** for [searching quality gates][5]. Autocomplete capabilities use existing facets, but also any input that matches incoming quality gates applies.
 
-The [Quality Gates Explorer][4] includes out-of-the-box facets such as `Test Status`, `Test Service`, `CI Status`, and `CI Provider`. You can use facets in the Quality Gates Explorer to [search for and filter quality gates][5].
+The [Quality Gates Explorer][4] includes out-of-the-box facets such as `Status` and `Gate ID`. You can use facets in the Quality Gates Explorer to [search for and filter quality gates][5].
 
 {{< tabs >}}
 {{% tab "Gates" %}}
