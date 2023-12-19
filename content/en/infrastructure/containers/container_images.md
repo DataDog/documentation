@@ -21,25 +21,25 @@ further_reading:
 
 ## Overview
 
-The [Container Images][1] view in Datadog provides key insights into every image used in your environment, helping you detect and remediate security and performance issues that can affect multiple containers. You can view container image details alongside the rest of your container data, allowing you to troubleshoot image issues affecting infrastructure health. Additionally, you can view vulnerabilities found in your images by [Cloud Security Management][2] (CSM) to help you streamline your security efforts.
+The [Container Images][1] view in Datadog provides key insights into every image used in your environment, helping you detect and remediate security and performance issues that can affect multiple containers. You can view container image details alongside the rest of your container data, allowing you to troubleshoot image issues affecting infrastructure health. Additionally, you can view vulnerabilities found in your container images from [Cloud Security Management][2] (CSM) to help you streamline your security efforts.
 
 {{< img src="security/vulnerabilities/container_images.png" alt="The Container Images tab highlighting vulnerabilities and container column sort feature" width="100%">}}
 
 ## Configure container images view
 
-### Live Containers
+### Live containers
 
 To enable live container collection, see the [containers][3] documentation for information on enabling the Process Agent, and excluding and including containers.
 
 ### Image collection
 
-Datadog collects container image metadata to provide enhanced debugging context for related containers and [Cloud Security Management][2] (CSM) vulnerabilities.
+Datadog collects container image metadata to provide enhanced debugging context for related containers and [Cloud Security Management][8] (CSM) vulnerabilities.
 
 #### Configure the Agent
 
 The following instructions enables the container image metadata collection and [Software Bill of Materials][5] (SBOM) collection in the Datadog Agent for CSM Vulnerabilities. This allows you to scan the libraries in container images to detect vulnerabilities. Vulnerabilities are evaluated and and scanned against your containers every hour.
 
-Note: CSM Vulnerabilities is not available for AWS Fargate or Windows environments.
+**Note**: CSM Vulnerabilities is not available for AWS Fargate or Windows environments.
 
 {{< tabs >}}
 {{% tab "Kubernetes (Helm)" %}}
@@ -168,3 +168,4 @@ If you have a configuration for [Unified Service Tagging][7] in place, Datadog a
 [5]: https://www.cisa.gov/sbom
 [6]: /getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#host-tags
 [7]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
+[8]: /security/vulnerabilities
