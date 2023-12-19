@@ -266,7 +266,7 @@ python3 -m pip install pytest
 python3 -m pip install pytest-cov
 ```
 
-3. Run your test appending the `--cov` flag to your `pytest` command:
+3. Run your test by appending the `--cov` flag to your `pytest` command:
 ```
 DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
 ```
