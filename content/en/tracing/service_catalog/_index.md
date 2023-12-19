@@ -49,7 +49,7 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 - Reducing application risks by finding and fixing known security vulnerabilities in the dependencies of your services.
 - Understanding trends and identifying inefficiencies in the costs related to your services.
 
-#### Evaluate Monitoring Coverage  
+#### Evaluate monitoring coverage  
 - Detecting which services aren’t reporting observability data or having that data monitored.
 - Facilitating [tagging best practices][6] and checks for recommended setup configurations to optimize [cross-telemetry insights][7].
 - Spotting issues like missing SLOs, monitors, or services without ownership.
