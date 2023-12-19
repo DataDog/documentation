@@ -162,7 +162,7 @@ export function onScroll() {
                     if (href) {
                         const id = href.replace('#', '').replace(' ', '-');
                         const header = document.querySelector(`#${id}`);
-                        if (header.nodeName === 'H2') {
+                        if (header && header.nodeName === 'H2') {
                             link.classList.add('toc_open');
                         }
                     }

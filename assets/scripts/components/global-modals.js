@@ -1,7 +1,9 @@
 import { DOMReady } from '../helpers/documentReady';
+import { isMobile } from '../utils/isMobile';
 
 const doOnLoad = () => {
     const signupModal = document.getElementById('signupModal');
+
     signupModal.addEventListener('show.bs.modal', () => {
         var regURL = 'https://app.datadoghq.com/signup_corp';
         var mobileURL = 'https://app.datadoghq.com/signup_corp?mobile=true';
@@ -20,125 +22,116 @@ const doOnLoad = () => {
             lang_param = '';
         }
 
-        // Detect Mobile Devices
-        var isMobile = {
-            Android: function () {
-                return navigator.userAgent.match(/Android/i);
-            },
-            BlackBerry: function () {
-                return navigator.userAgent.match(/BlackBerry/i);
-            },
-            iOS: function () {
-                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-            },
-            Opera: function () {
-                return navigator.userAgent.match(/Opera Mini/i);
-            },
-            Windows: function () {
-                return navigator.userAgent.match(/IEMobile/i);
-            },
-            any: function () {
-                return (
-                    isMobile.Android() ||
-                    isMobile.BlackBerry() ||
-                    isMobile.iOS() ||
-                    isMobile.Opera() ||
-                    isMobile.Windows()
-                );
-            }
-        };
-
         // Trigger conditional URL
-        if (isMobile.any()) {
+        if (isMobile()) {
             document.querySelector('#signUpIframe').setAttribute('src', mobileURL);
         } else {
             document.querySelector('#signUpIframe').setAttribute('src', regURL + lang_param);
         }
     });
 
-    signupModal.addEventListener('hide.bs.modal', function () {
+    signupModal.addEventListener('hide.bs.modal', () => {
         document.querySelector('#signUpIframe').setAttribute('src', '');
     });
 
     const imageModal = document.getElementById('popupImageModal');
-    var naturalWidth = 0;
-    var naturalHeight = 0;
+    let modalContent, modalBody, modalDialog;
 
-    imageModal.addEventListener('show.bs.modal', function () {
-        $('#popupImageModal').on('show.bs.modal', function () {
-            $('#popupImageModal .modal-content').css({ background: 'transparent', border: 'none' });
-            $('#popupImageModal .modal-body, #popupImageModal .modal-dialog, #popupImageModal .modal-content').css(
-                'height',
-                '100%'
-            );
-            $('#popupImageModal .modal-body').html(
-                '<div class="loader" style="position:absolute;top:50%;margin:-50px 0 0 -50px;height:100px;width:100px;"></div>'
-            );
-        });
-    });
+    if (imageModal) {
+        modalContent = imageModal.querySelector('.modal-content');
+        modalBody = imageModal.querySelector('.modal-body');
+        modalDialog = imageModal.querySelector('.modal-dialog');
 
-    imageModal.addEventListener('shown.bs.modal', function (e) {
-        document.querySelector('body').classList.remove('modal-open');
-        var modal = imageModal;
-        var url = e.relatedTarget.href;
+        imageModal.addEventListener('show.bs.modal', (e) => {
+            const loaderElement = document.createElement('div');
+            const imageElement = document.createElement('img');
+            const url = `${e.relatedTarget.href}&w=${window.innerWidth}&h=${window.innerHeight}`;
+            const srcsetUrl = `${url}, ${url}&dpr=2 2x`;
 
-        // try set modal popup imgix to cap out at browser width/height
-        url += '&w=' + $(window).width() + '&h=' + $(window).height();
-        var img = new Image();
-        var srcseturl = url + ', ' + url + '&dpr=2 2x';
-        var imgEl = $('<img src="' + url + '" srcset="' + srcseturl + '" alt="" class="img-fluid" />');
-        img.onload = function () {
-            /* Store naturalWidth & height for IE8 */
-            naturalWidth = img.width;
-            naturalHeight = img.height;
-            $('#popupImageModal .modal-content').css({ background: '', border: '' });
-            $('#popupImageModal .modal-body').html(imgEl);
-            resize(naturalWidth, naturalHeight);
-            if ($('#popupImageModal').is(':visible')) {
-                modal.fadeIn();
+            loaderElement.setAttribute('class', 'loader');
+            loaderElement.style.position = 'absolute';
+            loaderElement.style.top = '50%';
+            loaderElement.style.margin = '-50px 0 0 -50px';
+            loaderElement.style.height = '100px';
+            loaderElement.style.width = '100px';
+
+            imageElement.setAttribute('src', url);
+            imageElement.setAttribute('srcset', srcsetUrl);
+            imageElement.setAttribute('class', 'img-fluid');
+            imageElement.style.display = 'none';
+            imageElement.addEventListener('load', (e) => {
+                resize(imageElement.naturalWidth, imageElement.naturalHeight);
+                loaderElement.style.display = 'none';
+                imageElement.style.display = 'block';
+            });
+
+            document.querySelector('body').classList.remove('modal-open');
+
+            if (modalContent) {
+                modalContent.style.background = 'transparent';
+                modalContent.style.border = 'none';
+                modalContent.style.height = '100%';
             }
-        };
-        img.src = url;
-    });
-    imageModal.addEventListener('hide.bs.modal', function (e) {
-        $('#popupImageModal .modal-body').empty();
-    });
+
+            if (modalBody) {
+                modalBody.style.height = '100%';
+                modalBody.appendChild(loaderElement);
+                modalBody.appendChild(imageElement);
+            }
+
+            if (modalDialog) {
+                modalDialog.style.height = '100%';
+            }
+        });
+
+        imageModal.addEventListener('hide.bs.modal', () => {
+            modalBody.replaceChildren();
+        });
+
+        window.addEventListener('resize', () => {
+            imageModalVisible = !!(
+                imageModal.offsetWidth ||
+                imageModal.offsetHeight ||
+                imageModal.getClientRects().length
+            );
+            if (imageModalVisible) {
+                const imageElement = imageModal.querySelector('img');
+                resize(imageElement.naturalWidth, imageElement.naturalHeight);
+            }
+        });
+    }
 
     function resize(w, h) {
-        var el = $('#popupImageModal .modal-body img');
-        var p = $('#popupImageModal .modal-dialog');
-        var parentW = (parseInt($(window).width()) / 100) * 90;
-        var parentH = (parseInt($(window).height()) / 100) * 90;
+        var el = document.querySelector('#popupImageModal .modal-body img');
+        var p = document.querySelector('#popupImageModal .modal-dialog');
+        var parentW = (parseInt(window.innerWidth) / 100) * 90;
+        var parentH = (parseInt(window.innerHeight) / 100) * 90;
+
         if (w && h) {
             /* Reset apparent image size first so container grows */
-            el.css('width', '').css('height', '');
-            p.css('width', '').css('height', '');
+            el.style.width = '';
+            el.style.height = '';
+            p.style.width = '';
+            p.style.height = '';
+
             /* Calculate the worst ratio so that dimensions fit */
             /* Note: -1 to avoid rounding errors */
             var ratio = Math.max(w / (parentW - 1), h / (parentH - 1));
             /* Resize content */
             if (ratio > 1) {
                 ratio = h / Math.floor(h / ratio); /* Round ratio down so height calc works */
-                el.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
-                p.css('width', '' + w / ratio + 'px').css('height', '' + h / ratio + 'px');
+                el.style.width = `${w / ratio}px`;
+                el.style.height = `${h / ratio}px`;
+                p.style.width = `${w / ratio}px`;
+                p.style.height = `${h / ratio}px`;
             } else {
-                el.css('width', '' + w + 'px').css('height', '' + h + 'px');
-                p.css('width', '' + w + 'px').css('height', '' + h + 'px');
+                el.style.width = `${w}px`;
+                el.style.height = `${h}px`;
+                p.style.width = `${w}px`;
+                p.style.height = `${h}px`;
             }
         }
     }
-
-    window.addEventListener('resize', () => {
-        if ($('#popupImageModal').is(':visible')) {
-            resize(naturalWidth, naturalHeight);
-        }
-    });
-
-    window.addEventListener('scroll', () => {
-        if ($('#popupImageModal').is(':visible')) {
-            $('#popupImageModal').modal('hide');
-        }
-    });
 };
 
 DOMReady(doOnLoad);
