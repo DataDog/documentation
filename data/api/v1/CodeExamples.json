@@ -1,9 +1,44 @@
 {
+  "CreateAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Create an AWS integration returns \"OK\" response"
+    }
+  ],
+  "DeleteAWSAccount": [
+    {
+      "group": "aws_integration",
+      "suffix": "",
+      "description": "Delete an AWS integration returns \"OK\" response"
+    }
+  ],
   "UpdateAWSAccount": [
     {
       "group": "aws_integration",
       "suffix": "",
       "description": "Update an AWS integration returns \"OK\" response"
+    }
+  ],
+  "CreateAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Create an Azure integration returns \"OK\" response"
+    }
+  ],
+  "DeleteAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Delete an Azure integration returns \"OK\" response"
+    }
+  ],
+  "UpdateAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Update an Azure integration returns \"OK\" response"
     }
   ],
   "CreateDashboardList": [
@@ -726,6 +761,13 @@
       "group": "synthetics",
       "suffix": "",
       "description": "Edit an API test returns \"OK\" response"
+    }
+  ],
+  "PatchTest": [
+    {
+      "group": "synthetics",
+      "suffix": "",
+      "description": "Patch a Synthetic test returns \"OK\" response"
     }
   ],
   "TriggerTests": [

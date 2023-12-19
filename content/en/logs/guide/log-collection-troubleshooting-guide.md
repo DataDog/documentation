@@ -79,7 +79,7 @@ If the Agent does not have the correct permissions, you might see one of the fol
 - Access is denied.
 - Could not find any file matching pattern `<path/to/filename>`, check that all its subdirectories are executable.
 
-To fix the error, give the Datadog Agent user read, write, and execute permissions to the log file and subdirectories.
+To fix the error, give the Datadog Agent user read and execute permissions to the log file and subdirectories.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -253,7 +253,15 @@ See the [Lambda Log Collection Troubleshooting Guide][10]
 
 ## Unexpectedly dropping logs
 
-Check if logs appear in the [Datadog Live Tail][11]. If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][12] that could match your logs.
+Check if logs appear in the [Datadog Live Tail][11].
+
+If they appear in the Live Tail, check the Indexes configuration page for any [exclusion filters][12] that could match your logs.
+If they do not appear in the Live Tail, they might have been dropped if their timestamp was further than 18 hours in the past. You can check which `service` and `source` may be impacted with the `datadog.estimated_usage.logs.drop_count` metric.
+
+## Truncated logs
+
+Logs above 1MB are truncated. You can check which `service` and `source` are impacted with the `datadog.estimated_usage.logs.truncated_count` and `datadog.estimated_usage.logs.truncated_bytes` metrics.
+
 
 ## Further Reading
 

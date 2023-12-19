@@ -1,5 +1,5 @@
 ---
-title: Running Tests On An Application That Requires Authentication
+title: Monitor An Application That Requires Authentication With Browser Tests
 kind: guide
 description: Learn how to ensure your Synthetic browser tests can log in to your applications. 
 further_reading:

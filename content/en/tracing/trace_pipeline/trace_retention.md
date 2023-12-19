@@ -116,7 +116,7 @@ The `retained_by` attribute is present on all retained spans. Its value is:
 
 ### In dashboards, notebooks, and monitors
 
-For the reasons explained above, spans indexed by the intelligent retention filter are **excluded** from APM queries that appear in dashboards and notebooks, and also **excluded** from trace analytics monitor evaluation.
+For the reasons explained above, spans indexed by the intelligent retention filter are **excluded** from APM queries that appear in dashboards and notebooks, and also **excluded** from trace analytics monitor evaluation. Pie charts are an exception as they only list spans retained by a retention filter.
 
 ## Further Reading
 

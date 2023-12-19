@@ -1,5 +1,5 @@
 ---
-title: Connecting Python Logs and Traces
+title: Correlating Python Logs and Traces
 kind: documentation
 description: "Connect your Python logs and traces to correlate them in Datadog."
 code_lang: python
