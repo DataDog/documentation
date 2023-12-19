@@ -231,7 +231,7 @@ function handleAPIPage() {
     }
 }
 
-DOMReady(chromeHashScroll);
+// DOMReady(chromeHashScroll);
 DOMReady(handleAPIPage);
 
 if (tocMobileToggle) {
