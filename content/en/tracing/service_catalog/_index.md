@@ -41,7 +41,7 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, coll
 
 #### Service discovery
 - Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries.
-- As you instrument more applications across your environments, they will automatically be added to the Service Catalog.
+- As you instrument more applications across your environments, they are automatically added to the Service Catalog.
 
 #### Governance 
 - Providing engineering leadership with a high-level view of reliability practices across teams and services.
