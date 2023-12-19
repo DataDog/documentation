@@ -75,13 +75,11 @@ Datadog enriches ports in NetFlow with IANA (Internet Assigned Numbers Authority
 
 #### Custom port enrichment
 
-You can also add your own custom enrichments to map specific ports to an application name (for example, if a custom service runs on a specific port). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
+You can also add your own custom enrichments to map ports and protocols to specific applications (for example, if a custom service runs on a specific port). This makes it easier for network engineers and their teams to interpret and query NetFlow data with human-readable names.
 
 From the **Configuration** tab in NetFlow, click **Add Enrichment** to upload the CSV file containing your custom enrichments.
 
 {{< img src="network_device_monitoring/netflow/new_enrichment.png" alt="The New Enrichment Mapping modal in the Netflow configuration tab" width="80%" >}}
-
-This means customers can see the service and region for IPv4 addresses that map to the public IP ranges from cloud providers and filter for flow records from a specific service and/or region.
 
 ## Visualization
 
