@@ -40,6 +40,7 @@ Supported test frameworks:
 | Spock | >= 2.0 |
 | Cucumber | >= 5.4.0 |
 | Karate | >= 1.0.0 |
+| Scalatest | >= 3.0.8 |
 | Scala MUnit | >= 0.7.28 |
 
 If your test framework is not supported, you can try instrumenting your tests using [Manual Testing API][1].
@@ -358,7 +359,7 @@ Ensure that you are using the latest version of the tracer.
 
 Verify that your build system and testing framework are supported by CI Visibility. See the list of [supported build systems and test frameworks](#compatibility).
 
-Ensure that the `dd.civisibility.enabled` property is set to `true` in the tracer arguments.
+Ensure that the `dd.civisibility.enabled` property (or `DD_CIVISIBILITY_ENABLED` environment variable) is set to `true` in the tracer arguments.
 
 Check the build output for any errors that indicate tracer misconfiguration, such as an unset `DD_API_KEY` environment variable.
 
@@ -370,7 +371,8 @@ The plugin is optional, as it only serves to reduce the performance overhead.
 
 Depending on the build configuration, adding the plugin can sometimes disrupt the compilation process.
 
-If the plugin interferes with the build, disable it by adding `dd.civisibility.compiler.plugin.auto.configuration.enabled=false` to the list of `-javaagent` arguments.
+If the plugin interferes with the build, disable it by adding `dd.civisibility.compiler.plugin.auto.configuration.enabled=false` to the list of `-javaagent` arguments
+(or by setting `DD_CIVISIBILITY_COMPILER_PLUGIN_AUTO_CONFIGURATION_ENABLED=false` environment variable).
 
 ### Tests fail when building a project with the tracer attached
 
@@ -384,7 +386,7 @@ They are enabled by default.
 To disable a specific integration, refer to the [Datadog Tracer Compatibility][7] table for the relevant configuration property names.
 For example, to disable `OkHttp3` client request integration, add `dd.integration.okhttp-3.enabled=false` to the list of `-javaagent` arguments.
 
-To disable all integrations, augment the list of `-javaagent` arguments with `dd.trace.enabled=false`.
+To disable all integrations, augment the list of `-javaagent` arguments with `dd.trace.enabled=false` (or set `DD_TRACE_ENABLED=false` environment variable).
 
 ## Further reading
 
