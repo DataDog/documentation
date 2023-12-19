@@ -179,6 +179,6 @@ if (bodyClassContains('api')) {
     const sideNavActiveMenuItem = apiSideNav.querySelector('li.active');
     if (sideNavActiveMenuItem) {
         const distanceToTop = sideNavActiveMenuItem.offsetTop;
-        apiSideNav.scrollTop = distanceToTop - 100;
+        apiSideNav.scrollTop = distanceToTop - 110;
     }
 }
