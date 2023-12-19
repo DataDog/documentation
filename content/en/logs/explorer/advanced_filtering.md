@@ -56,7 +56,7 @@ In this example, you are only interested in logs for orders that did not eventua
 1. Define a subquery for `status:success` logs.
 1. Select the **NOT IN** operator to exclude orders from the subquery result set.
 
-{{< img src="logs/explorer/advanced_filtering/filter_outdated_example.png" alt="" style="width:100%;" >}}
+{{< img src="logs/explorer/advanced_filtering/filter_outdated_example.png" alt="The query editor showing the setup for filtering out orders that ended up succeeding" style="width:100%;" >}}
 
 #### Narrow down dataset to the most relevant logs for your investigation
 
@@ -68,7 +68,7 @@ You are investigating an ongoing attack and there is a significant bump in API r
 
 To do that, use `service:network_directory` as your main query, and then define a subquery filter for your `device-manager` service to filter out results from recognized devices.
 
-{{< img src="logs/explorer/advanced_filtering/narrow_dataset_example.png" alt="" style="width:100%;" >}}
+{{< img src="logs/explorer/advanced_filtering/narrow_dataset_example.png" alt="The query editor showing the setup for filtering out the results for recognized devices" style="width:100%;" >}}
 
 ## Filter logs based on Reference Tables
 
