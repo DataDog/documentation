@@ -16,7 +16,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="#" btn_hidden="true" >}}
-Quality Gates are in public beta.
+Quality Gates is in public beta.
 {{< /callout >}}
 
 ## Overview
@@ -52,7 +52,7 @@ Navigate to [**CI** > **Quality Gate Executions**][101] and select **Rules** to 
 
 ### Qualitative facets
 
-Use qualitative facets when you need to:
+Use qualitative facets to:
 
 - **Get relative insights** for values.
 - **Count unique values**.
@@ -62,15 +62,15 @@ Use qualitative facets when you need to:
 
 ### Quantitative measures
 
-Use quantitative measures when you need to:
+Use quantitative measures to:
 
 - **Aggregate** values from multiple quality gates.
 - **Range filter** your quality gates.
-- **Sort** your quality gates against that value.
+- **Sort** your quality gates against a value.
 
 #### Types
 
-Measures have either a long integer or double value for equivalent capabilities.
+Measures support long integers and double values.
 
 #### Units
 
@@ -80,12 +80,12 @@ For example, consider a `duration` measure in nanoseconds. Suppose test runs fro
 
 ## Facet panel
 
-The search bar provides the most comprehensive set of interactions to filter and group your data. However, for many cases, the facet panel is a straightforward way to navigate into your data. Open a facet to see a summary of its content for the scope of the current query.
+The search bar provides a comprehensive set of interactions to filter and group your data. However, for many cases, the facet panel is a straightforward way to navigate into your data. Open a facet to see a summary of its content for the scope of the current query.
 
 The search bar and URL automatically reflect your selections from the facet panel.
 
-- **Facets (qualitative)** come with a top list of unique values, and a count of quality gates matching each of them.
-- **Measures (quantitative)** come with a slider indicating minimum and maximum values. Use the slider, or input numerical values, to scope the search query to different bounds.
+- **Facets (qualitative)** show a list of unique values, and a count of quality gates that match each facet.
+- **Measures (quantitative)** have a slider ranging between minimum and maximum values. Use the slider, or input numerical values, to scope the search query to different bounds.
 
 ### Grouping facets
 
@@ -93,7 +93,7 @@ Facets are grouped into meaningful themes in the facet list. Assigning or reassi
 
 ### Filtering facets
 
-Use the search facets box on the facet panel to scope the whole facet list and navigate to the facet you need to interact with. Search facets uses the facet display name and field name to scope results.
+Use the search facets field on the facet panel to filter the facet list and navigate to a particular facet. The search uses the facet display name and field name to scope results.
 
 ## Creating facets
 

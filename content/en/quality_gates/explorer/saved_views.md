@@ -12,12 +12,12 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="#" btn_hidden="true" >}}
-Quality Gates are in public beta.
+Quality Gates is in public beta.
 {{< /callout >}}
 
 ## Overview
 
-Saved views allow you to save the state of the [Quality Gates Explorer][2] on the [**Quality Gate Executions** page][1] and enable effective troubleshooting by providing you with quick access to scoped queries, relevant facets, visualization options, and the time range. 
+Saved views allow you to save the state of the [Quality Gates Explorer][2] on the [**Quality Gate Executions** page][1] and enable effective troubleshooting by providing you with access to scoped queries, relevant facets, visualization options, and the time range. 
 
 Saved views can keep track of your:
 
@@ -25,7 +25,7 @@ Saved views can keep track of your:
 - Search queries (such as failed jobs or flaky tests)
 - Column sort order
 - Live time range (such as the past hour or the past week)
-- Visualizations (such as a timeseries, toplist, table, or funnel graph)
+- Visualizations (such as a timeseries, top list, table, or funnel graph)
 - Subset of facets
 
 You can also use saved views to share common queries and configurations with your teammates.
@@ -34,7 +34,7 @@ You can also use saved views to share common queries and configurations with you
 
 To access your saved views, expand **> Views** to the left in the [Quality Gates Explorer][1].
 
-All saved views except for the [default view](#default-views) are shared across the organization, including custom saved views created by users. These are editable by anyone in your organization and display the user's avatar who created the view. Click **Save** to create a custom saved view from the current content in your Explorer.
+All saved views except for the [default view](#default-views) are shared across the organization, including custom saved views created by users. These are editable by anyone in your organization and display the avatar of the view's creator. Click **Save** to create a saved view from the current content in your Explorer.
 
 {{< img src="quality_gates/explorer/expand_view.png" text="Create a saved view in the Quality Gates Explorer" style="width:100%" >}}
 
@@ -50,17 +50,12 @@ You can:
 
 ## Default views
 
-You can set a saved view to be your default landing page in the [Quality Gates Explorer][2]. Default views are set per user and have no impact on your organization. 
+You can set a saved view to be your default landing page in the [Quality Gates Explorer][2]. Default views are set per-user and have no impact on your organization. 
 
 {{< img src="quality_gates/explorer/default_view.png" text="Set a default view in the Quality Gates Explorer" style="width:100%" >}}
 
-Temporarily override your default saved view by completing an action in the UI or opening links in the Explorer that embeds a different configuration.
+From your current default saved view, take actions to update the view to a different layout that you want as your default. In the **Views** panel, save the current view as your default saved view.
 
-In the default view entry in the **Views** panel, you can:
-
-- Click on the entry to reload your default view
-- Update your default view with the current parameters
-- Reset your default view back to the default setting for a fresh restart
 
 ## Further reading
 

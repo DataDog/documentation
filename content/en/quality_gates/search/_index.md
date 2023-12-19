@@ -12,7 +12,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="#" btn_hidden="true" >}}
-Quality Gates are in public beta.
+Quality Gates is in public beta.
 {{< /callout >}}
 
 ## Overview
@@ -25,9 +25,9 @@ The [Quality Gate Rules page][1] is useful for developers who want to keep an ey
 
 To see your quality gate rules, navigate to [**CI** > **Quality Gate Rules**][1].
 
-The [Quality Gate Rules page][1] shows aggregate stats for the default branch of each rule over the selected time frame, as well as the status of the latest rule execution. Use this page to see all your rules and get a quick view of their health.
+The [Quality Gate Rules page][1] shows all of the rules defined by the organization. Use this page to create a rule, edit an existing rule, or click on a rule to investigate its past executions.
 
-You can filter the page by rule name to see the rules you're most concerned with. Click on a rule to dig into details that show what commit might have introduced a performance regression or build error. 
+You can filter the page by rule name to see the rules you're most concerned with. Click on a rule to investigate details that show, for example, what commit might have introduced a performance regression or build error. 
 
 ## Explore rule executions
 
