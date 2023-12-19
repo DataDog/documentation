@@ -30,8 +30,6 @@ You can manage your Agent installation using the Datadog Agent Manager GUI or fr
 
 <div class="alert alert-info">The Agent GUI is not supported on 32-bit Windows platforms.</div>
 
-The Datadog Agent Manager GUI is enabled by default on Windows and macOS, and runs on port `5052`. Use the `datadog-agent launch-gui` command to open the GUI in your default web browser.
-
 Use the Datadog Agent Manager GUI to:
 - View the status information for your Agent
 - View all running checks
@@ -40,19 +38,44 @@ Use the Datadog Agent Manager GUI to:
 - Add or edit Agent checks
 - Send flares
 
+The Datadog Agent Manager GUI is enabled by default on Windows and macOS, and runs on port `5052`. Use the `datadog-agent launch-gui` command to open the GUI in your default web browser.
+
 You can change the GUIs default port in your `datadog.yaml` configuration file. To disable the GUI, set the port's value to `-1`. The GUI is disabled by default on Linux.
 
-#### Requirements
+GUI requirements:
+- Cookies must be enabled in your browser. The GUI generates and saves a token in your browser which is used for authenticating all communications with the GUI server.
+- To start the GUI, the user must have the required permissions. If you are able to open `datadog.yaml`, you are able to use the GUI.
+- For security reasons, the GUI can **only** be accessed from the local network interface (`localhost`/`127.0.0.1`), therefore you must be on the same host that the Agent is running. You can't run the Agent on a VM or a container and access it from the host machine.
 
-1. Cookies must be enabled in your browser. The GUI generates and saves a token in your browser which is used for authenticating all communications with the GUI server.
-
-2. To start the GUI, the user must have the required permissions. If you are able to open `datadog.yaml`, you are able to use the GUI.
-
-3. For security reasons, the GUI can **only** be accessed from the local network interface (`localhost`/`127.0.0.1`), therefore you must be on the same host that the Agent is running. You can't run the Agent on a VM or a container and access it from the host machine.
-
-## Command-line interface
+### Command-line interface
 
 From Agent 6 and later, the Agent command-line interface is based on subcommands. For a full list of Agent subcommands, see [Agent Commands][2].
+
+## Getting further with the Datadog Agent
+
+### Update the Agent
+
+To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding install command for your platform][7].
+
+**Note**: If you want to manually update one specific Agent integration see the [Integration Management guide][8].
+
+### Configuration files
+
+See the [Agent configuration files documentation][9].
+
+### Datadog site
+
+Edit the [Agent's main configuration file][10], `datadog.yaml`, to set the `site` parameter (defaults to `datadoghq.com`).
+
+```yaml
+site: {{< region-param key="dd_site" >}}
+```
+
+**Note**: See the [Getting Started with Datadog Sites documentation][11] for further details on the `site` parameter.
+
+### Log location
+
+See the [Agent log files documentation][12].
 
 ## Agent overhead
 
@@ -97,32 +120,6 @@ The results below are obtained from a collection of *110KB of logs per seconds* 
 
 {{% /tab %}}
 {{< /tabs >}}
-
-## Getting further with the Datadog Agent
-
-### Update the Agent
-
-To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding install command for your platform][7].
-
-**Note**: If you want to manually update one specific Agent integration see the [Integration Management guide][8].
-
-### Configuration files
-
-See the [Agent configuration files documentation][9].
-
-### Datadog site
-
-Edit the [Agent's main configuration file][10], `datadog.yaml`, to set the `site` parameter (defaults to `datadoghq.com`).
-
-```yaml
-site: {{< region-param key="dd_site" >}}
-```
-
-**Note**: See the [Getting Started with Datadog Sites documentation][11] for further details on the `site` parameter.
-
-### Log location
-
-See the [Agent log files documentation][12].
 
 ## Further Reading
 
