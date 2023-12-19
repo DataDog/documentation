@@ -22,7 +22,7 @@ You can instrument your application in one of two ways: [Dockerfile](#dockerfile
 
 Datadog publishes new releases of the serverless-init container image to Google’s gcr.io, AWS’ ECR, and on Docker Hub:
 
-| dockerhub.io | gcr.io | public.ecr.aws |
+| hub.docker.com | gcr.io | public.ecr.aws |
 | ---- | ---- | ---- |
 | datadog/serverless-init | gcr.io/datadoghq/serverless-init | public.ecr.aws/datadog/serverless-init |
 
@@ -61,7 +61,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Copy the Datadog Node.JS tracer into your Docker image. 
+2. Copy the Datadog Node.JS tracer into your Docker image.
 
    ```dockerfile
    COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
@@ -77,7 +77,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
    ENV DD_VERSION=1
    ```
 
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. 
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
    **Note**: If you already have an entrypoint defined inside your Dockerfile, see the [alternative configuration](#alt-node).
 
    ```dockerfile
@@ -137,7 +137,7 @@ CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Install the Datadog Python tracer. 
+2. Install the Datadog Python tracer.
    ```dockerfile
    RUN pip install --target /dd_tracer/python/ ddtrace
    ```
@@ -150,7 +150,7 @@ CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
    ENV DD_VERSION=1
    ```
 
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. 
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
    **Note**: If you already have an entrypoint defined inside your Dockerfile, see the [alternative configuration](#alt-python).
 
    ```dockerfile
@@ -196,7 +196,7 @@ Add the following instructions and arguments to your Dockerfile.
 
 ```dockerfile
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-ADD https://dtdg.co/latest-java-tracer /dd_tracer/java/dd-java-agent.jar
+ADD 'https://dtdg.co/latest-java-tracer' /dd_tracer/java/dd-java-agent.jar
 ENV DD_SERVICE=datadog-demo-run-java
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
@@ -211,9 +211,9 @@ CMD ["./mvnw", "spring-boot:run"]
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Add the Datadog Java tracer to your Docker image. 
+2. Add the Datadog Java tracer to your Docker image.
    ```dockerfile
-   ADD https://dtdg.co/latest-java-tracer /dd_tracer/java/dd-java-agent.jar
+   ADD 'https://dtdg.co/latest-java-tracer' /dd_tracer/java/dd-java-agent.jar
    ```
    If you install the Datadog tracer library directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
 
@@ -224,7 +224,7 @@ CMD ["./mvnw", "spring-boot:run"]
    ENV DD_VERSION=1
    ```
 
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. 
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
    **Note**: If you already have an entrypoint defined inside your Dockerfile, see the [alternative configuration](#alt-java).
    ```dockerfile
    ENTRYPOINT ["/app/datadog-init"]
@@ -240,7 +240,7 @@ If you already have an entrypoint defined inside your Dockerfile, you can instea
 
 {{< highlight dockerfile "hl_lines=6" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-ADD https://dtdg.co/latest-java-tracer /dd_tracer/java/dd-java-agent.jar
+ADD 'https://dtdg.co/latest-java-tracer' /dd_tracer/java/dd-java-agent.jar
 ENV DD_SERVICE=datadog-demo-run-java
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
@@ -251,7 +251,7 @@ If you require your entrypoint to be instrumented as well, you can swap your ent
 
 {{< highlight dockerfile "hl_lines=6-7" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-ADD https://dtdg.co/latest-java-tracer /dd_tracer/java/dd-java-agent.jar
+ADD 'https://dtdg.co/latest-java-tracer' /dd_tracer/java/dd-java-agent.jar
 ENV DD_SERVICE=datadog-demo-run-java
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
@@ -283,7 +283,7 @@ CMD ["/path/to/your-go-binary"]
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. 
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
    **Note**: If you already have an entrypoint defined inside your Dockerfile, see the [alternative configuration](#alt-go).
    ```dockerfile
    ENTRYPOINT ["/app/datadog-init"]
@@ -325,26 +325,11 @@ CMD ["your_entrypoint.sh", "/path/to/your-go-binary"]
 
 As long as your command to run is passed as an argument to `datadog-init`, you will receive full instrumentation.
 
-#### Orchestrion
+**Note**: You can also use [Orchestrion][2], a tool for automatically instrumenting Go code. Orchestrion is in private beta. For more information, open a GitHub issue in the Orchestrion repo, or [contact Support][3].
 
-<div class="alert alert-warning">Orchestrion is in Private Beta. If you are interested in participating in the Beta or providing feedback on Orchestrion, <a href="https://github.com/DataDog/orchestrion/issues">open a GitHub issue</a> or <a href="/help">contact Datadog Support</a>.</div>
-
-[Orchestrion][2] is a tool for automatically instrumenting Go code. With Orchestrion, it is possible to instrument your Go applications through Dockerfile.
-
-```dockerfile
-COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-RUN go install github.com/datadog/orchestrion@latest
-RUN orchestrion -w ./
-RUN go mod tidy
-ENTRYPOINT ["/app/datadog-init"]
-ENV DD_SERVICE=datadog-demo-run-go
-ENV DD_ENV=datadog-demo
-ENV DD_VERSION=1
-CMD ["/path/to/your-go-binary"]
-```
-
-[1]: /tracing/trace_collection/library_config/go/ 
+[1]: /tracing/trace_collection/library_config/go/
 [2]: https://github.com/DataDog/orchestrion
+[3]: /help
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
@@ -380,7 +365,7 @@ CMD ["dotnet", "helloworld.dll"]
    ENV DD_VERSION=1
    ```
 
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. 
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
    **Note**: If you already have an entrypoint defined inside your Dockerfile, see the [alternative configuration](#alt-dotnet).
    ```dockerfile
    ENTRYPOINT ["/app/datadog-init"]
@@ -507,7 +492,7 @@ ENV DD_VERSION=1
 ENTRYPOINT ["/app/datadog-init"]
 
 # use the following for an Apache and mod_php based image
-RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf 
+RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf
 EXPOSE 8080
 CMD ["apache2-foreground"]
 
@@ -541,17 +526,17 @@ CMD php-fpm; nginx -g daemon off;
    ENV DD_VERSION=1
    ```
 
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. 
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
    **Note**: If you already have an entrypoint defined inside your Dockerfile, see the [alternative configuration](#alt-php).
    ```dockerfile
    ENTRYPOINT ["/app/datadog-init"]
    ```
 
 5. Execute your application.
-   
+
    Use the following for an apache and mod_php based image:
    ```dockerfile
-   RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf 
+   RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf
    EXPOSE 8080
    CMD ["apache2-foreground"]
    ```
@@ -572,7 +557,7 @@ RUN php /datadog-setup.php --php-bin=all
 ENV DD_SERVICE=datadog-demo-run-php
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf 
+RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf
 EXPOSE 8080
 CMD ["/app/datadog-init", "apache2-foreground"]
 {{< /highlight >}}
@@ -589,7 +574,7 @@ ENV DD_VERSION=1
 ENTRYPOINT ["/app/datadog-init"]
 
 # use the following for an Apache and mod_php based image
-RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf 
+RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf
 EXPOSE 8080
 CMD ["your_entrypoint.sh", "apache2-foreground"]
 

@@ -24,11 +24,6 @@ Account settings, such as allow-listed IP addresses, are not inherited by child-
 
 The Multi-organization Account feature is not enabled by default. Contact [Datadog support][2] to have it enabled.
 
-Here's a two-minute video walkthrough:
-
-{{< wistia tg9ufqbin9>}}
-<br>
-
 ## Child organizations
 
 ### Create

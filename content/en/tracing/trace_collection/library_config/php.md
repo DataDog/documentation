@@ -172,9 +172,9 @@ Change the default name of an APM integration. Rename one or more integrations a
 `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
 : **INI**: `datadog.trace.128_bit_traceid_logging_enabled`<br>
 **Default**: `0`<br>
-Enable printing of the full 128-bit ID when formatting trace IDs for logs correlation.
+Enable printing of the full 128-bit trace ID when formatting trace IDs for logs correlation.
 When false (default), only the low 64-bits of the trace ID are printed, formatted as an integer. This means if the trace ID is only 64 bits, the full ID is printed.
-When true, the trace ID is printed as a full 128-bit ID in hexadecimal format. This is the case even if the ID itself is only 64 bits.
+When true, the trace ID is printed as a full 128-bit trace ID in hexadecimal format. This is the case even if the ID itself is only 64 bits.
 
 `DD_TRACE_HEALTH_METRICS_ENABLED`
 : **INI**: `datadog.trace_health_metrics_enabled`<br>
@@ -413,6 +413,11 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
   ```
   Regular expression used to obfuscate the query string included as part of the URL. This expression is also used in the redaction process for HTTP POST data. Added in version `0.76.0`.
 
+`DD_TRACE_OTEL_ENABLED`
+: Enables or disables OpenTelemetry based tracing, both for [custom][18] or [automatic][19] instrumentation. <br>
+Valid values are: `true` or `false`.<br>
+**Default**: `false`
+
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
 **Default**: `tracecontext,Datadog`<br>
@@ -586,4 +591,5 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 [15]: /tracing/guide/trace-php-cli-scripts/
 [16]: /tracing/configure_data_security#telemetry-collection
 [17]: /tracing/other_telemetry/connect_logs_and_traces/php
-
+[18]: /tracing/trace_collection/otel_instrumentation/php/
+[19]: /tracing/trace_collection/compatibility/php/

@@ -53,13 +53,15 @@ After the Postman collection is imported, a full list of available Datadog API c
 
 #### Authentication
 
-The collection includes a [Postman environment][6] called `Datadog Authentication`, where you add your Datadog API, and application keys for authentication.
+The collection includes a [Postman environment][6] called `Datadog Authentication` where you can add your Datadog API and application keys for authentication.
+
+{{< img src="getting_started/postman/authentication-blurred.png" alt="Datadog Authentication collection with API and Application Key fields completed" style="width:100%;">}}
 
 Follow these steps to set up your environment:
 
 1. Click the **Environments** dropdown in the upper right corner of Postman. If you don't currently have an environment selected, the **Environments** dropdown says `No Environment`.
 
-2. Select **Datadog Authentication**
+2. Select **Datadog Authentication**.
 
 3. Edit the **Datadog Authentication** environment to add in your Datadog [API key][2] as the initial value and current value for the `api_key` variable, and add your Datadog [application key][2] as the initial value and current value for the `application_key` variable.
 

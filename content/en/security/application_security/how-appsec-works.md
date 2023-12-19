@@ -27,13 +27,13 @@ Datadog Application Security Management (ASM) provides observability into applic
 
 In addition, ASM detects the risks built into your applications, for example through vulnerable libraries and dependencies the application uses at runtime.
 
-Datadog APM records information, called traces, about each application request. Datadog ASM uses the same tracing libraries as APM to monitor your traffic. ASM flags attack attempts based on suspicious requests that match known attack patterns, or [tags business logic information][25]. Security signals are automatically created when Datadog detects application attacks or business logic abuse impacting your services. The signals identify meaningful threats for your review instead of assessing each individual attack attempt. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
+Datadog APM records information, called traces, about each application request. Datadog ASM uses the same tracing libraries as APM to monitor your traffic. ASM flags attack attempts based on security traces that match known attack patterns, or [tags business logic information][25]. Security signals are automatically created when Datadog detects application attacks or business logic abuse impacting your services. The signals identify meaningful threats for your review instead of assessing each individual attack attempt. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
 
 Traditional Web Application Firewalls (WAFs) are usually deployed at the perimeter and have no context of the application behavior. Because ASM is embedded in the application, it has access to trace data, making it more effective at pinpointing and classifying threats. Datadog ASM leverages known attack patterns, similar to a Web Application Firewall (WAF) but with additional application context to increase the signal-to-noise ratio, lowering false positives.
 
 ### Identify services exposed to application attacks
 
-Datadog ASM [Threat Monitoring and Protection][1] uses the information APM is already collecting, and flags traces containing attack attempts. Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Service Catalog][2], [Service Page][3], [Traces][4]).
+Datadog ASM [Threat Management][1] uses the information APM is already collecting, and flags traces containing attack attempts. Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Service Catalog][2], [Service Page][3], [Traces][4]).
 
 Because APM collects a sample of your application traffic, enabling ASM in the tracing library is necessary to effectively monitor and protect your services.
 
@@ -68,11 +68,11 @@ Datadog ASM uses processes already contained in the Agent and APM, so there are 
 
 In the tracing library, Datadog ASM collects all traces that include security data. A default [retention filter][9] ensures the retention of all security-related traces in the Datadog platform.
 
-Data for suspicious requests is kept for 90 days. The underlying trace data is kept for 15 days.
+Data for security traces is kept for 90 days. The underlying trace data is kept for 15 days.
 
 ## Data privacy
 
-By default, ASM collects information from suspicious requests to help you understand why the request was flagged as suspicious. Before sending the data, ASM scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag. This indicates that the request was suspicious, but that the request data could not be collected because of data security concerns.
+By default, ASM collects information from security traces to help you understand why the request was flagged as suspicious. Before sending the data, ASM scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag. This indicates that the request was suspicious, but that the request data could not be collected because of data security concerns.
 
 Here are some examples of data that is flagged as sensitive by default:
 * `pwd`, `password`, `ipassword`, `pass_phrase`
@@ -103,8 +103,8 @@ Security Signals are automatically created when Datadog detects meaningful attac
 
 ## Attack attempt qualification
 
-Leveraging distributed tracing information, attacks attempts are qualified as safe, unknown, or harmful. 
-* Attack attempts qualified as safe cannot breach your application, for example, when a PHP injection attack targets a service written in Java. 
+Leveraging distributed tracing information, attacks attempts are qualified as safe, unknown, or harmful.
+* Attack attempts qualified as safe cannot breach your application, for example, when a PHP injection attack targets a service written in Java.
 * An unknown qualification is decided when there is not enough information to make a definitive judgement about the attack's probability of success.
 * A harmful qualification is highlighted when there is evidence that a code level vulnerability has been found by the attacker.
 
