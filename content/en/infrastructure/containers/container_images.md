@@ -21,20 +21,30 @@ further_reading:
 
 ## Overview
 
-This page lists configuration options for the [Containers Images][1] page in Datadog. 
+The [Container Images][1] view in Datadog provides key insights into every image used in your environment, helping you detect and remediate security and performance issues that can affect multiple containers. You can view container image details alongside the rest of your container data, allowing you to troubleshoot image issues affecting infrastructure health. Additionally, you can view vulnerabilities found in your images by [Cloud Security Management][2] (CSM) to help you streamline your security efforts.
+
+{{< img src="security/vulnerabilities/container_images.png" alt="The Container Images tab highlighting vulnerabilities and container column sort feature" width="100%">}}
 
 ## Configure container images view
 
+### Live Containers
+
+To enable live container collection, see the [containers][3] documentation for information on enabling the Process Agent, and excluding and including containers.
+
 ### Image collection
 
-Datadog collects container image metadata to provide enhanced debugging context. 
+Datadog collects container image metadata to provide enhanced debugging context for related containers and [Cloud Security Management][2] (CSM) vulnerabilities.
 
-#### Agent
+#### Configure the Agent
+
+The following instructions enables the container image metadata collection and [Software Bill of Materials][5] (SBOM) collection in the Datadog Agent for CSM Vulnerabilities. This allows you to scan the libraries in container images to detect vulnerabilities. Vulnerabilities are evaluated and and scanned against your containers every hour.
+
+Note: CSM Vulnerabilities is not available for AWS Fargate or Windows environments.
 
 {{< tabs >}}
 {{% tab "Kubernetes (Helm)" %}}
 
-If you are using helm version `>= 3.46.0`, image collection is [enabled by default][1].</br>
+If you are using Helm version `>= 3.46.0`, image collection is [enabled by default][1].</br>
 Or, add the following to your `values.yaml` Helm configuration file:
 
 ```yaml
@@ -134,14 +144,27 @@ container_image:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Container registries
+### Container registries
 
-##### Amazon Elastic Container Registry (Amazon ECR)
-Set up the [AWS integration][4] to begin crawling Container Image metadata from AWS Elastic Container Registry
+#### Amazon Elastic Container Registry (Amazon ECR)
+
+Set up the [AWS integration][4] to begin crawling Container Image metadata from Amazon ECR.
+
+## Container image tagging
+
+Containers are [tagged][6] with all existing host-level tags, as well as with metadata associated with individual containers. All containers are tagged by `image_name`, including integrations with popular orchestrators, such as ECS and Kubernetes, which provide further container-level tags. 
+If you have a configuration for [Unified Service Tagging][7] in place, Datadog automatically picks up `env`, `service`, and `version` tags. 
+
+{{< img src="infrastructure/livecontainers/container_images/container_images_tagging.png" alt="The details side panel of a specific container in the Container Images page highlighting container images tags" width="100%">}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/containers/images/
+[2]: /security/cloud_security_management
+[3]: /infrastructure/containers/?tab=docker#setup
 [4]: /integrations/amazon_web_services/
+[5]: https://www.cisa.gov/sbom
+[6]: /getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#host-tags
+[7]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
