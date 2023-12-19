@@ -140,7 +140,9 @@ azure role assignment create --objectId <OBJECT_ID> -o "Monitoring Reader" -c /s
 
 1. In the Azure integration tile, select **Configuration** > **New App Registration** > **Using Azure Portal**.
 
-2. Select Management Group (Auto-Discover) or Individual Subscriptions. If you select Management Group, Datadog automatically discovers and monitors any subscriptions within that selected scope, including any subscriptions created in the future. You must have the owner role in the Management Group selected. If you select to monitor individual subscriptions, you must have the owner role in any subscriptions you wish to monitor.
+2. Select **Management Group (Auto-Discover)** or **Individual Subscriptions**.
+   - If you select Management Group, Datadog automatically discovers and monitors any subscriptions within that selected scope, including any subscriptions created in the future. You must have the owner role in the Management Group selected.
+   - If you select Individual Subscriptions, you must have the owner role in any subscriptions you want to monitor.
 
 3. Click **Open Template**.
 
@@ -152,7 +154,9 @@ azure role assignment create --objectId <OBJECT_ID> -o "Monitoring Reader" -c /s
 
 5. Click **Next**.
 
-6. Select the option to create a new service principal type, and click the **Change selection** link for service principal. A form to create a new app registration appears on the right.
+6. Select the _Create new_ option in **Service principal type**. 
+7. Click the **Change selection** link in **Service principal**.
+A form to create a new app registration is displayed:
 
 {{< img src="integrations/guide/azure_manual_setup/arm_template_service_principal.png" alt="The service principal page in the Azure ARM template with the option to Create New selected and the link to Change Selection highlighted" popup="true" style="width:80%;" >}}
 
@@ -166,7 +170,7 @@ azure role assignment create --objectId <OBJECT_ID> -o "Monitoring Reader" -c /s
 
 12. Provide a Datadog API key and Datadog Application key value in the corresponding fields. If you launched the template from the Azure integration page in Datadog, you can copy the keys provided there. Otherwise, you can find your API and App keys in the Access section of the Organization Settings.
 
-   **Note**: If you've selected to monitor individual subscriptions rather than a management group, select the subscriptions to monitor from the **Subscriptions to monitor** dropdown.
+    **Note**: If you've selected to monitor individual subscriptions rather than a management group, select the subscriptions to monitor from the **Subscriptions to monitor** dropdown.
 
 13. Select your Datadog site, as well as any other integration configuration options, such as host filters and whether to collect resources for [Cloud Security Management][17].
 
