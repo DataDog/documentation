@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-If you experience issues with Cloud Security Management (CSM) Vulnerabilities, use the following troubleshooting guidelines. If need further assistance, contact [Datadog support][1].
+If you experience issues with Cloud Security Management (CSM) Vulnerabilities, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
 
 ## Confirm CSM Vulnerabilities is enabled
 
