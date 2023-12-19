@@ -91,11 +91,11 @@
           - integration/*/README.md
           - integration/*/__init__.py
 
-      - repo_name: jen.gilbert/DOCS-6805-pg-metrics-collection
+      - repo_name: integrations-core
         contents:
 
         - action: integrations
-          branch: master
+          branch: jen.gilbert/DOCS-6805-pg-metrics-collection
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
