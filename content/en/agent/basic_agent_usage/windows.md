@@ -94,7 +94,7 @@ Each of the following configuration options can be added as a property to the co
 - Some Agent components require a kernel driver to collect data. To know if a kernel driver is required for your component, see its documentation page or search for `kernel driver` in the associated Agent configuration files.
 - If a valid `datadog.yaml` is found, that file takes precedence over all specified command line options.
 
-### More Agent Configuration Options
+### More Agent configuration options
 
 Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows. 
 
