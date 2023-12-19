@@ -65,7 +65,7 @@ ECS tasks that run on Fargate are already fully allocated in the CUR. CCM enrich
 
 ### Everything else
 
-Cost other than EC2/EBS, computed for instances hosting Kubernetes pods or ECS tasks, is given the same value and tags as the source metric, `aws.cost.amortized`.
+The information on this page pertains to EC2 compute and EBS costs for EC2 instances hosting Kubernetes pods or ECS tasks. All other costs are given the same value and tags as the source metric, `aws.cost.amortized`.
 
 
 ## Understanding spend
