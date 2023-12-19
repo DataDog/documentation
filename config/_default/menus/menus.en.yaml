@@ -920,11 +920,16 @@ main:
     parent: serverless_step_functions
     identifier: serverless_step_functions_installation
     weight: 201
+  - name: Enhanced Metrics
+    url: serverless/step_functions/enhanced-metrics
+    parent: serverless_step_functions
+    identifier: serverless_step_functions_enhanced_metrics
+    weight: 202
   - name: Troubleshooting
     url: serverless/step_functions/troubleshooting
     parent: serverless_step_functions
     identifier: serverless_step_functions_troubleshooting
-    weight: 202
+    weight: 203
   - name: Azure App Service
     url: serverless/azure_app_services
     parent: serverless

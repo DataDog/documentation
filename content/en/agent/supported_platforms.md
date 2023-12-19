@@ -203,7 +203,6 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
 [7]: /agent/basic_agent_usage/fedora/
 
 {{% /tab %}}
-
 {{% tab "Windows" %}}
 
 <table>
@@ -262,6 +261,8 @@ A check mark ({{< X >}}) indicates support for all minor and patch versions.
 </table>
 
 A check mark ({{< X >}}) indicates support for all minor and patch versions.
+
+To install a specific version of the Windows Agent, see the [installer list][8].
 
 {{% /tab %}}
 {{% tab "macOS" %}}
@@ -329,3 +330,4 @@ Agent 6 and 7 support the following [AIX][1] versions:
 
 
 [1]: /agent/basic_agent_usage/source/
+[8]: https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json
