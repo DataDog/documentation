@@ -365,7 +365,7 @@ components:
         format: int64
         type: integer
     PageSize:
-      description: Size for a given page. The maximum allowed value is 100.
+      description: Size for a given page. The maximum allowed value is `1000`.
       in: query
       name: page[size]
       required: false
@@ -20119,7 +20119,7 @@ components:
       type: apiKey
       x-env-name: DD_API_KEY
     appKeyAuth:
-      description: Your Datadog APP Key.
+      description: Your Datadog App Key.
       in: header
       name: DD-APPLICATION-KEY
       type: apiKey
