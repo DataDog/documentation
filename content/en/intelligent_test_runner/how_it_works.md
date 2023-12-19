@@ -12,7 +12,7 @@ further_reading:
 
 ## What is Intelligent Test Runner?
 
-Intelligent Test Runner is Datadog's test impact analysis solution. Test impact analysis is a technique that has been gaining popularity over the past few decades. However, it's typically hard and time-consuming to implement. Intelligent Test Runner simplifies this complexity with an simpler setup process.
+Intelligent Test Runner is Datadog's test impact analysis solution. Test impact analysis is a technique that has gained popularity over the past few decades. However, it's typically hard and time-consuming to implement. Intelligent Test Runner simplifies this complexity.
 
 Test impact analysis maps each test to the set of code files in your repository that the test uses (code coverage). Its goal is to skip tests not affected by the code changes being introduced. This leads to a direct reduction in time spent testing in CI.
 
