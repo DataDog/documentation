@@ -146,7 +146,7 @@ azure role assignment create --objectId <OBJECT_ID> -o "Monitoring Reader" -c /s
 
 {{< img src="integrations/guide/azure_manual_setup/azure_tile_arm_template.png" alt="The Azure tile in the Datadog integrations page with Using Azure Portal and Management Group selected" popup="true" style="width:80%;" >}}
 
-4. Select the region, subscription, and resource group for the template to be deployed.
+4. Select the **Region**, **Subscription**, and **Resource Group** for the template to be deployed.
 
    **Note**: The selection of region, subscription, and resource group only defines where this template is deployed. It has no impact on which subscriptions are monitored by Datadog.
 
@@ -156,23 +156,23 @@ azure role assignment create --objectId <OBJECT_ID> -o "Monitoring Reader" -c /s
 
 {{< img src="integrations/guide/azure_manual_setup/arm_template_service_principal.png" alt="The service principal page in the Azure ARM template with the option to Create New selected and the link to Change Selection highlighted" popup="true" style="width:80%;" >}}
 
-7. Enter a name for the app registration, select the supported account types, and click **Register**.
+8. Enter a name for the app registration, select the supported account types, and click **Register**.
 
-8. A page opens to create a client secret. Click **+ New client secret** to add a client secret.
+9. A page opens to create a client secret. Click **+ New client secret** to add a client secret.
 
-9. Copy the value of the client secret, and click the close **(X)** button in the top-right corner of the screen.
+10. Copy the value of the client secret, and click the close **(X)** button in the top-right corner of the screen.
 
-10. Paste the value of the client secret in the corresponding field on the template, and click **Next**.
+11. Paste the value of the client secret in the corresponding field on the template, and click **Next**.
 
-11. Provide a Datadog API key and Datadog Application key value in the corresponding fields. If you launched the template from the Azure integration page in Datadog, you can copy the keys provided there. Otherwise, you can find your API and App keys in the Access section of the Organization Settings.
+12. Provide a Datadog API key and Datadog Application key value in the corresponding fields. If you launched the template from the Azure integration page in Datadog, you can copy the keys provided there. Otherwise, you can find your API and App keys in the Access section of the Organization Settings.
 
    **Note**: If you've selected to monitor individual subscriptions rather than a management group, select the subscriptions to monitor from the **Subscriptions to monitor** dropdown.
 
-12. Select your Datadog site, as well as any other integration configuration options, such as host filters and whether to collect resources for [Cloud Security Management][17].
+13. Select your Datadog site, as well as any other integration configuration options, such as host filters and whether to collect resources for [Cloud Security Management][17].
 
-13. Click **Next** or **Review + create**, then click **Create**.
+14. Click **Review + create**, then click **Create**.
 
-14. Once the deployment has completed, click **Done** in the Azure integration page in Datadog to refresh the list and review your newly added App Registration.
+15. Once the deployment has completed, click **Done** in the Azure integration page in Datadog to refresh the list and review your newly added App Registration.
 
 [17]: /security/cloud_security_management/
 {{% /tab %}}
