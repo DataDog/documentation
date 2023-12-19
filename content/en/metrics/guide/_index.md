@@ -19,6 +19,7 @@ cascade:
     {{< nextlink href="metrics/guide/interpolation-the-fill-modifier-explained/" >}}Interpolation and the fill modifier{{< /nextlink >}}
     {{< nextlink href="metrics/guide/why-does-zooming-out-a-timeframe-also-smooth-out-my-graphs" >}}Why does zooming out a timeframe also smooth out my graphs?{{< /nextlink >}}
     {{< nextlink href="metrics/guide/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph" >}}What is the granularity of my graphs? Am I seeing raw data or aggregates on my graph?{{< /nextlink >}}
+    {{< nextlink href="logs/guide/manage_logs_and_metrics_with_terraform" >}}Manage Logs and Metrics with Terraform{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Custom metrics guides:" >}}
