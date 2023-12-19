@@ -70,11 +70,6 @@ test.service:*mongo
 When searching for an attribute or tag value that contains special characters or requires escaping or double quotes, use the `?` wildcard to match a single special character or space. For example, to search for an attribute `my_attribute` with the value `hello world`, `hello-world`, or `hello_world`, use `@my_attribute:hello?world`.
 <p> </p>
 
-## Numerical values
-
-To search for a numerical attribute, first [add it as a facet][1]. You can then use numerical operators (`<`,`>`, `<=`, or `>=`) to perform a search on numerical facets.
-
-For example, to retrieve all test runs that have a duration of over one week, use: `@duration:>=7days`.
 
 
 ## Further reading

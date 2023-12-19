@@ -21,8 +21,8 @@ Saved views allow you to save the state of the [Quality Gates Explorer][2] on th
 
 Saved views can keep track of your:
 
-- Pipeline executions and test runs
-- Search queries (such as failed jobs or flaky tests)
+- Quality Gate executions and rule executions
+- Search queries 
 - Column sort order
 - Live time range (such as the past hour or the past week)
 - Visualizations (such as a timeseries, top list, table, or funnel graph)

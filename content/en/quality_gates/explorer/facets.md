@@ -72,11 +72,6 @@ Use quantitative measures to:
 
 Measures support long integers and double values.
 
-#### Units
-
-Measures support units (**time** in seconds or **size** in bytes) for handling of orders of magnitude at query time and display time. The unit is a property of the measure itself, not of the field.
-
-For example, consider a `duration` measure in nanoseconds. Suppose test runs from `service:A` have `duration:10000000`, meaning `10 milliseconds`. Supposed test runs from `service:B` have `duration:5000000`, meaning `5 milliseconds`. Use `duration:>2ms` to consistently query test run tags from both services at once. For more information about search queries, see [Search Syntax][6].
 
 ## Facet panel
 
@@ -97,7 +92,7 @@ Use the search facets field on the facet panel to filter the facet list and navi
 
 ## Creating facets
 
-Creating a facet on a test run or pipeline execution attribute or tag is not a mandatory step to search for quality gates. Facets are useful if you wish to add a meaningful description to a specific test run or pipeline execution attribute, or if you want the attribute values to appear on the Facets list.
+Creating a facet on a rule execution attribute is not a mandatory step to search for quality gates. Facets are useful if you wish to add a meaningful description to a specific rule execution attribute, or if you want the attribute values to appear on the Facets list.
 
 ### Creating facets from the facet list
 
@@ -107,7 +102,6 @@ You can create a facet directly from the facet panel by clicking **+ Add**.
 
 Define the underlying field (key) name for this facet:
 
-- Use tag key name for infrastructure tags.
 - Use the attribute path for quality gate attributes, with `@` prefix.
 
 Autocomplete based on the content in quality gates of the current views helps you to define the proper field name, but you can use virtually any value here.

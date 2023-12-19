@@ -101,6 +101,7 @@ With Quality Gates, you have control over what is merged into the default branch
 
 {{< img src="ci/rule_scope_always_evaluate.png" alt="Rule scope for rules always evaluated" style="width:90%;">}}
 
+
 You can:
 
 When the `datadog-ci gate evaluate` command is invoked, the rules having a scope matching the command context are evaluated.
