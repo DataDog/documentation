@@ -74,6 +74,7 @@ For more information, see the [Python tracer installation documentation][4].
 
 ## Instrumenting your tests
 
+{{< tabs >}}
 {{% tab "pytest" %}}
 
 To enable instrumentation of `pytest` tests, add the `--ddtrace` option when running `pytest`, specifying the name of the service or library under test in the `DD_SERVICE` environment variable, and the environment where tests are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable:
@@ -136,6 +137,7 @@ def test_square_value(benchmark):
 ```
 
 {{% /tab %}}
+{{< /tabs >}}
 
 ### Adding custom tags to tests
 
