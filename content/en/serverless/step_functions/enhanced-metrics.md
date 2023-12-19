@@ -46,4 +46,4 @@ The following enhanced Step Functions metrics are available.
 `aws.states.enhanced.state.retry_count`
 : Gauge of the number of retries for a state.
 
-[1]: /serverless/aws_lambda/metrics#enhanced-lambda-metr
+[1]: /serverless/aws_lambda/metrics#enhanced-lambda-metrics
