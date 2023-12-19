@@ -55,7 +55,7 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 - Spotting issues like missing SLOs, monitors, or services without ownership.
 
 #### Streamline collaboration during incidents
-- Improving the on-call experience for everyone by establishing correct ownership information and communication channels, alongside easy access to monitoring and troubleshooting details.
+- Improving the on-call experience for everyone by establishing correct ownership information and communication channels, alongside streamlined access to monitoring and troubleshooting details.
 - Training new developers and site reliability engineers by providing a clear view of all services, their structures, and links to more information.
 - Embedding links to solutions and troubleshooting tools such as runbooks and documentation directly in the observability tooling engineers are already using.
 - Speeding incident recovery by increasing confidence and simplifying locating owners of upstream and downstream services and dependencies.
