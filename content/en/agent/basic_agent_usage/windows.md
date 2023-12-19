@@ -73,7 +73,7 @@ Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.m
 
 #### Installation Configuration Options 
 
-Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows. For additional Agent configuration options, see [more Agent Configuration flags](#more-agent-configuration-options).  
+Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows. For additional Agent configuration options, see [more Agent configuration options](#more-agent-configuration-options).  
 
 
 | Variable                                    | Type    | Description                                                                                                                                                                                                                         |
