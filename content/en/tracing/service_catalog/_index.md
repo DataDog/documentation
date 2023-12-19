@@ -54,7 +54,7 @@ Datadog [Service Catalog][1] provides a consolidated view of your services, comb
 - Facilitating [tagging best practices][6] and checking for recommended setup configurations to optimize [cross-telemetry insights][7].
 - Spotting issues like missing SLOs, monitors, or services without ownership.
 
-#### Streamline Collaboration During Incidents
+#### Streamline collaboration during incidents
 - Improving the on-call experience for everyone by establishing correct ownership information and communication channels, alongside easy access to monitoring and troubleshooting details.
 - Training new developers and site reliability engineers by providing a clear view of all services, their structures, and links to more information.
 - Embedding links to solutions and troubleshooting tools such as runbooks and documentation directly in the observability tooling engineers are already using.
