@@ -51,7 +51,7 @@ Choose the source that aligns with your protocol. Each Observability Pipelines W
 
 ## Collecting data
 
-Your pipeline begins with data collection. Your services and systems generate logs and metrics (beta) that can be collected and sent downstream to your destinations. Data collection is achieved with agents, and understanding which agents to use ensures you are collecting the data you want.
+Your pipeline begins with data collection. Your services and systems generate data* that can be collected and sent downstream to your destinations. Data collection is achieved with agents, and understanding which agents to use ensures you are collecting the data you want.
 
 ### Choosing agents
 
@@ -73,7 +73,7 @@ If you want to design an efficient pipeline between your Observability Pipelines
 
 ### Choosing which data to process
 
-You can use Observability Pipelines Worker to process logs and metrics (beta). However, real-time, vendor-specific data, such as continuous profiling data, is not interoperable and typically does not benefit from processing.
+You can use Observability Pipelines Worker to process data*. However, real-time, vendor-specific data, such as continuous profiling data, is not interoperable and typically does not benefit from processing.
 
 #### Remote processing
 
@@ -138,6 +138,7 @@ Optimize your system of analysis for analysis while reducing costs by doing the 
 - Filter events not used for analysis
 - Consider sampling logs with `level` `info` or lower to reduce their volume
 
+*Observability Pipelines supports logs. Support for metrics is in beta.
 
 [1]: https://wiki.archlinux.org/title/Domain_name_resolution
 [2]: /observability_pipelines/reference/sources/

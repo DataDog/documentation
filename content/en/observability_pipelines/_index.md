@@ -27,7 +27,9 @@ cascade:
 
 ## Overview
 
-Observability Pipelines allow you to collect, process, and route observability data (logs and metrics (beta)) from any source to any destination in infrastructure that you own or manage. With Observability Pipelines, you can:
+Observability Pipelines allow you to collect, process, and route observability data* from any source to any destination in infrastructure that you own or manage.
+
+With Observability Pipelines, you can:
 
 - Control your data volume before routing to manage costs.
 - Route data anywhere to reduce vendor lock-in and simplify migrations.
@@ -56,7 +58,7 @@ Start getting insights into your Observability Pipelines:
 
 ###  Collect data from any source and route data to any destination
 
-Collect logs and metrics (beta) from any source and route them to any destination to reduce vendor lock-in and simplify migrations.
+Collect data* from any source and route them to any destination to reduce vendor lock-in and simplify migrations.
 
 
 {{< img src="observability_pipelines/component_panel.png" alt="The Datadog Logs component side panel showing a line graph of events in/out per second and a link graph of bytes in/out per second" style="width:100%;" >}}
@@ -78,6 +80,8 @@ Redact sensitive data before they are routed outside of your infrastructure, usi
 Get a holistic view of all of your pipelines' topologies and monitor key performance indicators, such as average load, error rate, and throughput for each of your flows.
 
 {{< img src="observability_pipelines/pipeline_health.png" alt="The pipeline configuration page showing a warning because components are experiencing errors and an event ingestion delay was detected" style="width:90%;" >}}
+
+*Observability Pipelines supports logs. Support for metrics is in beta.
 
 ## Further Reading
 
