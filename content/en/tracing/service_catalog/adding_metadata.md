@@ -251,7 +251,7 @@ This GitHub Action allows you to register your services with the Service Catalog
 
 ## Build custom extensions 
 
-The `extensions` field is supported in all versions including v2. You can incorporate this custom field into deployment process to standardize and codify best practices.
+The `extensions` field is supported in all versions including v2. You can incorporate this custom field into deployment processes to standardize and codify best practices.
 
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
 schema-version: v2.2
