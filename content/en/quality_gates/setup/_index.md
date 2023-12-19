@@ -69,13 +69,12 @@ Otherwise, the rules might have an incorrect behavior due to the absence of the 
 
 For example: 
 
-<pre>
-<code>
+```shell
 DD_BETA_COMMANDS_ENABLED=true DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=&lt;API_KEY&gt; DD_APP_KEY=&lt;APP_KEY&gt; datadog-ci gate evaluate
-</code>
-</pre>
+```
 
 Configure the behavior of the `datadog-ci gate evaluate` command using the following flags:
+
 - `--fail-on-empty`: The command fails if no matching rules are found.
 based on the current pipeline context. By default, the command succeeds.
 - `--fail-if-unavailable`: The command fails if one or more rules cannot be evaluated because of an internal issue.
@@ -86,9 +85,9 @@ The command typically completes within a few minutes, but it could take longer.
 
 Add [custom scopes](#custom-scope) to the command by using the `--scope` option one or more times:
 
-{{< code-block lang="shell" >}}
+```shell
 datadog-ci gate evaluate --scope team:backend --scope team:frontend
-{{< /code-block >}}
+```
 
 Check the command logs to see the overall gate evaluation status and information about the rules that were evaluated.
 
@@ -104,12 +103,13 @@ With Quality Gates, you have control over what is merged into the default branch
 {{< img src="ci/rule_scope_always_evaluate.png" alt="Rule scope for rules always evaluated" style="width:90%;">}}
 
 
-
 When the `datadog-ci gate evaluate` command is invoked, the rules having a scope matching the command context are evaluated.
 
 For each scope (for example, `branch`), you can select included or excluded values.
 When included values are selected, the rule is evaluated if one or more included values are part of the command context.
+
 When excluded values are selected, the rule is not evaluated if any of the excluded values are part of the command context.
+
 ## Create rules
 
 For example, to create a rule that is evaluated in all branches except `main` of the `example-repository` repository, define the following scope:
