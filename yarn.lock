@@ -4330,7 +4330,6 @@ __metadata:
     hugo-bin: 0.108.0
     instantsearch.js: ^4.53.0
     jest: ^25.3.0
-    jquery: 3.5.1
     js-cookie: ^2.2.1
     js-yaml: ^3.14.1
     jshint: 2.10.2
@@ -7170,13 +7169,6 @@ __metadata:
   version: 0.15.0
   resolution: "jmespath@npm:0.15.0"
   checksum: 353bb9e69cc4c1560be0a4df43cb4020abc246e1c60cb5b55dcc76d8c858383f1633faf22ccaf6a5e09568a2077d0f4f1e989e6fcfd496b5cef87964cc8cb9e7
-  languageName: node
-  linkType: hard
-
-"jquery@npm:3.5.1":
-  version: 3.5.1
-  resolution: "jquery@npm:3.5.1"
-  checksum: 813047b852511ca1ecfaa7b2568aba1d7270a92e5c74962b308792a401adf041869a3b2a6858b0b7a02f6684947fb93171e40cbb4460831977a937b40b0e15ce
   languageName: node
   linkType: hard
 

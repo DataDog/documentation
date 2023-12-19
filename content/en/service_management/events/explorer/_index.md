@@ -25,6 +25,7 @@ Use the Events Explorer to aggregate and view events coming into Datadog. Group 
     {{< nextlink href="/service_management/events/explorer/attributes" >}}Attributes{{< /nextlink >}}
     {{< nextlink href="/service_management/events/explorer/notifications" >}}Send notifications{{< /nextlink >}}
     {{< nextlink href="/service_management/events/explorer/analytics" >}}Analytics{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/explorer/saved_views" >}}Saved views{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

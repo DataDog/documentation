@@ -35,7 +35,7 @@ Watchdog is Datadog's AI engine, providing you with automated alerts, insights, 
 
 All Watchdog features come built-in, and do not require setup.
 
-{{< youtube UMNXdrI0J8A >}}
+{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/781921620/rendition/1080p/file.mp4?loc=external&signature=8889419b739e3398d03a72edca4f96909144567e045d30deeb8f9345c43a682d" poster="/images/poster/watchdog.png" >}}
 
 <br/>
 
