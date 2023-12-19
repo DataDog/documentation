@@ -279,7 +279,7 @@ export function initializeIntegrations() {
 
         if (currentCat && currentSelected) {
             if (currentCat !== currentSelected) {
-                document.querySelector(`a[href="${currentCat}"]`).click();
+                document.querySelector(`a[href="${currentCat}"]`)?.click();
             }
         }
         if (currentCat === '') {
