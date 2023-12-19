@@ -16,7 +16,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="#" btn_hidden="true" >}}
-Quality Gates are in public beta.
+Quality Gates is in public beta.
 {{< /callout >}}
 
 ## Overview
@@ -53,15 +53,15 @@ The **Quality Gates** panel on the left lists default facets you can use to sear
 | Facet           | Description                                                   |
 |-----------------|---------------------------------------------------------------|
 | Status       | The quality gate status: `Passed` or `Failed`.                   |
-| Rule Name    | The name of the quality gate.                                    |
-| Blocking Status | The blocking status of the quality gate: `true` or `false`.   |
-| Creator      | The creator of the quality gate.                                 |
-| Data Source  | The data source of the quality gate.                             |
+| Rule Name    | The user-given name to identify a particular rule.                                    |
+| Blocking Status | Determines whether or not the rule status will cause the CI workflow to fail: `true` or `false`.   |
+| Creator      | The user who created the quality gate rule.                                 |
+| Data Source  | The source of data being evaluated for the rule (tests, static analysis).                             |
 | Gate ID      | The ID of the quality gate.                                      |
 
 ## Rule executions details
 
-You can see aggregated data about rule executions over the selected time frame. Use the search field and facets to scope the list down to the executions you want to investigate. 
+You can see aggregated data about rule executions over the selected time frame. Use the search field and facets to filter the list to show the executions you want to investigate. 
 
 ### Rule execution data
 
@@ -76,21 +76,21 @@ Quality Gate rules data is available in [dashboards][102] and [notebooks][103], 
 
 ## Search and filter
 
-You can narrow down, broaden, or shift your focus on a subset of quality gates or rule executions by clicking on the facets to the left or writing your own custom query in the search bar. When you select and deselect facets, the search bar automatically reflects your changes. Similarly, you can modify the search bar query or write a query from scratch in the search bar to select and deselect the facets on the left.
+You can narrow down, broaden, or shift your focus on a subset of quality gates or rule executions by clicking on the facets to the left or writing your own custom query in the search bar. When you select and deselect facets, the search bar automatically reflects your changes. Similarly, you can modify the search bar query or write a query from scratch.
 
 - To learn how to search for quality gate rules, see [Search and Manage][1].
 - To learn how to create queries, see [Search Syntax][2].
 
 ## Analyze
 
-Group your queried quality gates or rule executions into higher-level entities such as fields, patterns, and transactions in order to derive or consolidate information. By using [facets][3], which you do not need to create to search for attributes, you can accomplish the following actions:
+Group quality gates or rule executions into higher-level fields, patterns, and transactions to derive or consolidate information. You do not need to create a facet in order to search for an attribute. Use [facets][3] to:
 
-- Search and keep track of the progress of tests running in a CI/CD pipeline.
-- Investigate every CI/CD job execution to identify and troubleshoot failing Quality Gate rules.
+- **Identify trends and patterns in Quality Gate executions**: Understand which repositories or pipelines are being blocked most often.
+- **Identify trends and patterns in Quality Gate Rule executions**: Understand which types of rules are failing most often across the organization.
 
 ## Visualize
 
-Select a visualization type to visualize the outcomes of your filters and aggregations and better understand your quality gates or rule executions. For example, you can view your gate results in a list to organize your gates data into columns, or in a timeseries graph to measure your gate execution data over time.
+Select a visualization type to visualize the outcomes of filters and aggregations and better understand your quality gates or rule executions. For example, you can view gate results in a list to organize gates data into columns, or in a timeseries graph to measure gate execution data over time.
 
 ## Export
 

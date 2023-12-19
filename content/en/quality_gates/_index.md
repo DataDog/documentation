@@ -20,7 +20,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="#" btn_hidden="true" >}}
-Quality Gates are in public beta.
+Quality Gates is in public beta.
 {{< /callout >}}
 
 ## Overview
@@ -28,11 +28,11 @@ Quality Gates are in public beta.
 Quality Gates allows you to gate your workflows based on signals in Datadog. 
 Use Quality Gates to:
 
-* Create rules that can block your workflows using data in Datadog.
+* Create rules that can block your workflows by using data in Datadog.
 * Give your teams control over what code makes it to production and what doesn't.
-* Continually raise the bar on code quality with precise and easy enforcement.
+* Continually improve code quality with precise enforcement.
 
-With Quality Gates, you have control over what is merged into the default branch, and ultimately on what is deployed. This allows you to ensure that the code running in production is meeting high quality standards, reducing incidents, and minimizing unwanted behaviors.
+With Quality Gates, you have control over what is merged into the default branch and deployed. You can ensure that the code running in production meets high quality standards, reducing incidents and minimizing unwanted behaviors.
 
 ## Create rules
 
