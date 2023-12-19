@@ -275,7 +275,8 @@ export function initializeIntegrations() {
         if (window.location.href.indexOf('#') > -1) {
             currentCat = window.location.href.substring(window.location.href.indexOf('#'));
         }
-        const currentSelected = document.querySelector('.controls .active').getAttribute('href');
+        const currentSelected = document.querySelector('.controls .active')?.getAttribute('href');
+        console.log(currentSelected)
 
         if (currentCat && currentSelected) {
             if (currentCat !== currentSelected) {
