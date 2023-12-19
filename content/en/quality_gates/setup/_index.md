@@ -64,8 +64,10 @@ Otherwise, the rules might have an incorrect behavior due to the absence of the 
 | `DD_APP_KEY` | Point to your [Datadog application key][6]. |
 | `DD_BETA_COMMANDS_ENABLED` | Set to `true`. |
 | `DD_SITE` | (Optional) Point to a specific [Datadog site][12] (default value is `datadoghq.com`). |
-| LOGGING_MAXDAYS | Number of days to keep file logs on the system before deleting them. Can be any number when running an unattended installation. |
-| WORKERCONFIG_FILEPATH | This should be changed to the path to your Synthetics Private Location Worker JSON configuration file. Wrap this path in quotes if your path contains spaces. |
+| `LOGGING_MAXDAYS` | Number of days to keep file logs on the system before deleting them. Can be any number when running an unattended installation. |
+| `WORKERCONFIG_FILEPATH` | Specify the path to your Synthetics Private Location Worker JSON configuration file. Wrap the value in quotes if it contains spaces. |
+
+For example: 
 
 <pre>
 <code>
@@ -102,7 +104,6 @@ With Quality Gates, you have control over what is merged into the default branch
 {{< img src="ci/rule_scope_always_evaluate.png" alt="Rule scope for rules always evaluated" style="width:90%;">}}
 
 
-You can:
 
 When the `datadog-ci gate evaluate` command is invoked, the rules having a scope matching the command context are evaluated.
 
