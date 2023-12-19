@@ -283,7 +283,7 @@ vector --config ./<configuration_filename>
 
 If successfully setup, the parsed demo logs are printed in JSON format.
 
-*Observability Pipelines supports logs. Support for metrics is in beta.
+*Observability Pipelines support logs. Support for metrics is in beta.
 
 ## Further Reading
 

@@ -81,7 +81,7 @@ Get a holistic view of all of your pipelines' topologies and monitor key perform
 
 {{< img src="observability_pipelines/pipeline_health.png" alt="The pipeline configuration page showing a warning because components are experiencing errors and an event ingestion delay was detected" style="width:90%;" >}}
 
-*Observability Pipelines supports logs. Support for metrics is in beta.
+*Observability Pipelines support logs. Support for metrics is in beta.
 
 ## Further Reading
 

@@ -138,7 +138,7 @@ Optimize your system of analysis for analysis while reducing costs by doing the 
 - Filter events not used for analysis
 - Consider sampling logs with `level` `info` or lower to reduce their volume
 
-*Observability Pipelines supports logs. Support for metrics is in beta.
+*Observability Pipelines support logs. Support for metrics is in beta.
 
 [1]: https://wiki.archlinux.org/title/Domain_name_resolution
 [2]: /observability_pipelines/reference/sources/
