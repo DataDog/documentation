@@ -316,6 +316,14 @@
   },
   "beta_check":{
     "other": "Bêta"
+  },
+  "configuration_management" : {
+    "other": "Configuration Management"
+  },
+  "cloud_and_container" : {
+    "other": "Cloud and Container"
+  },
+  "source" : {
+    "other": "Source"
   }
-
 }
