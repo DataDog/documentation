@@ -1,33 +1,32 @@
 ---
-title: Container Images
+title: Container Images View
 kind: documentation
 further_reading:
-- link: "/security/vulnerabilities"
-  tag: "Documentation"
-  text: "Cloud Security Management Vulnerabilities"
-- link: "/security/vulnerabilities/troubleshooting"
-  tag: "Documentation"
-  text: "Troubleshooting Cloud Security Management Vulnerabilities"
-- link: "/security/cloud_security_management/setup/csm_pro?tab=aws#configure-the-agent-for-hosts-and-containers"
-  tag: "Documentation"
-  text: "Setting up CSM container vulnerabilities"
-- link: "/security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities"
-  tag: "Documentation"
-  text: "Setting up CSM host vulnerabilities"
 - link: "https://www.datadoghq.com/blog/datadog-container-image-view/"
   tag: "Blog"
   text: "Enhance your troubleshooting workflow with Container Images in Datadog Container Monitoring"
+- link: "/security/vulnerabilities"
+  tag: "Documentation"
+  text: "Cloud Security Management Vulnerabilities"
+- link: "/security/cloud_security_management/setup/csm_pro?tab=aws#configure-the-agent-for-hosts-and-containers"
+  tag: "Documentation"
+  text: "Setting up CSM container vulnerabilities"
+- link: "/security/vulnerabilities/troubleshooting"
+  tag: "Documentation"
+  text: "Troubleshooting Cloud Security Management Vulnerabilities"
 ---
 
 ## Overview
 
-The [Container Images][1] view in Datadog provides key insights into every image used in your environment, helping you detect and remediate security and performance issues that can affect multiple containers. You can view container image details alongside the rest of your container data, allowing you to troubleshoot image issues affecting infrastructure health. Additionally, you can view vulnerabilities found in your container images from [Cloud Security Management][2] (CSM) to help you streamline your security efforts.
+The [Container Images View][1] in Datadog provides key insights into every image used in your environment, helping you assess their deployment footprint, as well as detect and remediate security and performance issues that can affect multiple containers. You can view container image details alongside the rest of your container data, allowing you to troubleshoot image issues affecting infrastructure health. Additionally, you can view vulnerabilities found in your container images from [Cloud Security Management][2] (CSM) to help you streamline your security efforts.
 
-{{< img src="security/vulnerabilities/container_images.png" alt="The Container Images tab highlighting vulnerabilities and container column sort feature" width="100%">}}
+{{< img src="security/vulnerabilities/container_images.png" alt="The Container Images view highlighting vulnerabilities and container column sort feature" width="100%">}}
 
-## Configure container images view
+## Configure Container Images View
 
-### Live containers
+Images on the container images view are collected from several different sources (Live Containers, Image Collection, and Amazon ECR). The following instructions describe how to enable images from each of these sources.
+
+### Live Containers
 
 To enable live container collection, see the [containers][3] documentation for information on enabling the Process Agent, and excluding and including containers.
 
@@ -152,8 +151,7 @@ Set up the [AWS integration][4] to begin crawling Container Image metadata from 
 
 ## Container image tagging
 
-Containers are [tagged][6] with all existing host-level tags, as well as with metadata associated with individual containers. All containers are tagged by `image_name`, including integrations with popular orchestrators, such as ECS and Kubernetes, which provide further container-level tags. 
-If you have a configuration for [Unified Service Tagging][7] in place, Datadog automatically picks up `env`, `service`, and `version` tags. 
+Tag your container images with arbitrary tags by using [extract labels as tags][6] configuration on the Agent. These tags will then be picked by the Container Image check.
 
 {{< img src="infrastructure/livecontainers/container_images/container_images_tagging.png" alt="The details side panel of a specific container in the Container Images page highlighting container images tags" width="100%">}}
 
@@ -166,6 +164,5 @@ If you have a configuration for [Unified Service Tagging][7] in place, Datadog a
 [3]: /infrastructure/containers/?tab=docker#setup
 [4]: /integrations/amazon_web_services/
 [5]: https://www.cisa.gov/sbom
-[6]: /getting_started/tagging/assigning_tags/?tab=noncontainerizedenvironments#host-tags
-[7]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes
+[6]: /containers/docker/tag/?tab=containerizedagent#extract-labels-as-tags
 [8]: /security/vulnerabilities

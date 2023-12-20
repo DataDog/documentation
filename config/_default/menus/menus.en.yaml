@@ -1013,7 +1013,7 @@ main:
     parent: infrastructure_livecontainers
     identifier: infrastructure_livecontainers_configuration
     weight: 301
-  - name: Container Images
+  - name: Container Images View
     url: infrastructure/containers/container_images
     parent: infrastructure_livecontainers
     identifier: infrastructure_livecontainers_container_images
