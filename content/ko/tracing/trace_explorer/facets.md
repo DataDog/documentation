@@ -4,7 +4,7 @@ further_reading:
 - link: tracing/trace_explorer/
   tag: 설명서
   text: 트레이스 탐색기에 대해 알아보기
-kind: 설명서
+kind: documentation
 title: 스팬 패싯
 ---
 
@@ -30,7 +30,7 @@ title: 스팬 패싯
 
 {{< /site-region >}}
 
-### 질적 패싯
+### 정성적 패싯
 
 다음과 같은 작업이 필요할 때 질적 패싯을 사용합니다:
 
