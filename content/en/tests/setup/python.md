@@ -122,6 +122,9 @@ def test_simple_case(ddspan):
 ```
 Read more about custom metrics in the [Add Custom Metrics Guide][7].
 
+[5]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
+[7]: /continuous_integration/guides/add_custom_metrics/?tab=python
+
 {{% /tab %}}
 
 {{% tab "pytest-benchmark" %}}
