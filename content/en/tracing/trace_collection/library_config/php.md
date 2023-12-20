@@ -133,7 +133,7 @@ Enable the allocation size and allocation bytes profile type. Added in version `
 : **INI**: `datadog.profiling.experimental_features_enabled`. INI available since `0.96.0`.<br>
 **Default**: `0`<br>
 Enable all experimental features.<br>
-**Note**: This setting overrides the more specific configurations and if enabled, toggling other experimental configuration settings will _not_ have an effect anymore.
+**Note**: This setting overrides the more specific configurations and if enabled, toggling other experimental configuration settings won't have an effect.
 
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
 : **INI**: `datadog.profiling.experimental_cpu_time_enabled`. INI available since `0.82.0`.<br>
