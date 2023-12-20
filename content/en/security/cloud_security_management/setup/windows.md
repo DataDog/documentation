@@ -1,5 +1,5 @@
 ---
-title: Setting Up Cloud Security Management On Windows
+title: Setting up Cloud Security Management on Windows
 kind: documentation
 is_beta: true
 private: true
@@ -51,7 +51,7 @@ It can take up to 15 minutes to complete the installation. In certain cases, Mic
 ### Enable CSM
 
 1. Ensure you have access to `C:\ProgramData`, which is a hidden folder.
-    - In **File Explorer**, click the **View** tab, and clear the **Hidden items** checkbox. The **ProgramData** folder should now be visible when navigating to the C: drive. The transparent icon indicates it is a hidden folder.
+    - In **File Explorer**, click the **View** tab, and clear the **Hidden items** checkbox. The **ProgramData** folder should now be visible when navigating to the `C:` drive. The transparent icon indicates it is a hidden folder.
 2. In `C:\ProgramData\Datadog\system-probe.yaml`, set the `runtime_security_config` flag:<br><br>
     {{< code-block lang="yaml" filename="system-probe.yaml" disable_copy="true" collapsible="true" >}}
     runtime_security_config:
@@ -75,7 +75,7 @@ Another method to verify that the Agent is sending events to CSM is to manually 
     - To view signals originating from configured Windows hosts, filter the signals by hostname using the **Hosts** > **Hostnames** facet.
     - To filter by Windows rules, use the **Workflow** > **Rule Name** facet.
 
-To get alerts whenever a Windows signal is created, create a [Notification Rule][9] that focuses on the "host" tag specifically for configured Windows hosts.
+To get alerts whenever a Windows signal is created, create a [Notification Rule][9] that focuses on the `host` tag specifically for configured Windows hosts.
 
 [1]: /security/cloud_security_management/
 [2]: /network_monitoring/performance/setup/?tab=agentwindows#setup
