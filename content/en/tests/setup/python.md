@@ -91,7 +91,7 @@ DD_SERVICE=my-python-app DD_ENV=ci pytest --ddtrace --ddtrace-patch-all
 
 ### Adding custom tags to tests
 
-You can add custom tags to your tests by using the declaring `ddspan` as argument to your test:
+To add custom tags to your tests, declare `ddspan` as an argument in your test:
 
 ```python
 from ddtrace import tracer
