@@ -13,36 +13,35 @@ further_reading:
 ## Overview
 
 Datadog understands the importance of maintaining a robust and up-to-date mobile development ecosystem for you. The following mobile deprecation policy ensures the continued improvement and stability of Datadog mobile SDKs.
+
 These deprecation practices align with industry best practices while ensuring a reasonable transition period for you.
 
 ## Versioning
-Datadog Mobile SDKs follow [Semantic Versioning][1]. A change in Major version signals a non-backwards compatible change to Public API or behaviour.
-When updating from one Major version to the next it's important to closely follow the [SDK Upgrade guidelines][2].
+Datadog Mobile SDKs follow [semantic versioning][1]. A change in major version signals a non-backward-compatible change to public API or behavior.
 
+When updating from one major version to the next, it's important to closely follow the [SDK upgrade guidelines][2].
 
+## Lifecycle of major SDK versions
 
-## SDK Lifecycle of Major Versions
+### General Availability (GA) release
 
-### General Availability (GA) Release
+* **Start date**: The GA release marks the moment when a major version of an SDK is officially launched and made available.
+* **Support level**: During the GA phase, the major version is fully supported, including the addition of new features and bug fixes.
 
-* **Start Date**: The GA release marks the moment when a major version of an SDK is officially launched and made available.
-* **Support Level**: During the GA phase, the major version is fully supported, including the addition of new features and bug fixes.
+### Deprecation phase
 
-
-### Deprecation Phase
-
-* **Start Date**: The deprecation phase commences immediately after the release of the subsequent major GA version.
-* **Support Level**: In this phase, the primary focus is addressing critical bug fixes and ensuring the stability of the deprecated major version. This means that while no new features will be planned, we will continue to provide support for critical issues.
+* **Start date**: The deprecation phase commences immediately after the release of the subsequent major GA version.
+* **Support level**: In this phase, the primary focus is addressing critical bug fixes and ensuring the stability of the deprecated major version. While no new features are planned, we continue to provide support for critical issues.
 
 ### End of Support (EOS)
 
-* **Start Date**: Six months after the release of the subsequent major GA version, the End of Support (EOS) phase begins.
-* **Support Level**: In this phase, we cease to provide any further support for the EOS major version. This means that no further bug fixes or updates will be released for the version.
+* **Start date**: Six months after the release of the subsequent major GA version, the End of Support (EOS) phase begins.
+* **Support level**: In this phase, we cease to provide support for the EOS major version. No bug fixes or updates are released for the version.
 
-## Minimum Support Duration
-To ensure a reasonable timeframe for migrations and allow for planning, we guarantee a minimum support duration for each major version. This means that every major version released will be fully supported for at least 6 months from its GA release.
+## Minimum support duration
+To ensure a reasonable time frame for migrations and allow for planning, we guarantee a minimum support duration for each major version. This means that every major version is fully supported for at least six months after its GA release.
 
-During this support period, we continue to provide new features and bug fixes, in addition to addressing critical issues.
+During this support period, we provide new features and bug fixes, in addition to addressing critical issues.
 
 ## Further Reading
 
