@@ -3306,10 +3306,10 @@ main:
     parent: cloud_siem
     identifier: cloud_siem_default_rules
     weight: 3
-  - name: Signals Explorer
-    url: /security/explorer
+  - name: Investigate a Security Signal
+    url: /security/cloud_siem/investigate_a_security_signal
     parent: cloud_siem
-    identifier: cloud_siem_signals_explorer
+    identifier: cloud_siem_investigate_a_security_signal
     weight: 4
   - name: Investigator
     url: security/cloud_siem/investigator
