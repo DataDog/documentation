@@ -62,7 +62,7 @@ The second line adds the `.timestamp` field and the value to the event, changing
 
 Parsing provides more advanced use cases of DPL/VRL.
 
-### Parsing configuration example
+### Parsing example
 
 #### Log event example
 
@@ -71,7 +71,7 @@ The below snippet is an HTTP log event in JSON format:
 ```
 "{\"status\":200,\"timestamp\":\"2021-03-01T19:19:24.646170Z\",\"message\":\"SUCCESS\",\"username\":\"ub40fan4life\"}"
 ```
-#### Parsing configuration example
+#### Configuration example
 
 The configuration below uses DPL/VRL to modify the log event by:
 
@@ -123,7 +123,7 @@ See [Control Log Volume and Size][10] for examples on how to use these transform
 
 Another commonly used transform is `route`, which allows you to split a stream of events into multiple substreams based on supplied conditions. This is useful when you need to send observability data to different destinations or operate differently on streams of data based on their use case.
 
-### Routing to different destinations configuration example
+### Routing to different destinations example
 
 #### Log example
 
@@ -141,7 +141,7 @@ The below snippet is an example log that you want to route to different destinat
 }
 ```
 
-#### Routing configuration examples
+#### Configuration examples
 
 To route based on the `level` value, see the below configuration example:
 
