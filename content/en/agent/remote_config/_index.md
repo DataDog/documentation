@@ -240,7 +240,7 @@ datadog:
 
 ## Supported environments
 
-Remote Configuration works in environments where Datadog Agent is deployed. For a Serverless Container service such as AWS Fargate, you will not see the underlying hosts in the Remote Configuration onboarding workflow. Remote Configuration is not supported for Serverless Container Managed Apps (AWS App Runner, Azure Container Apps, Google Cloud Run) and Functions deployed via Container Packaging (AWS Lambda, Azure Functions, Google Cloud Functions)
+Remote Configuration works in environments where the Datadog Agent is deployed. For a Serverless Container service like AWS Fargate, the underlying hosts do not appear in the Remote Configuration onboarding workflow. Remote Configuration does not support Serverless Container Managed Apps (AWS App Runner, Azure Container Apps, Google Cloud Run) and Functions deployed via Container Packaging (AWS Lambda, Azure Functions, Google Cloud Functions)
 .  
 ## Further Reading
 
