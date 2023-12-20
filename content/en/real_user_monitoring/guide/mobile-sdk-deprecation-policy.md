@@ -25,7 +25,7 @@ When updating from one Major version to the next it's important to closely follo
 
 ### General Availability (GA) Release
 
-* **Start Date**: The GA release marks the moment when a major version of our SDK is officially launched and made available.
+* **Start Date**: The GA release marks the moment when a major version of an SDK is officially launched and made available.
 * **Support Level**: During the GA phase, the major version is fully supported, including the addition of new features and bug fixes.
 
 
