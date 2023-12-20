@@ -2138,6 +2138,11 @@ main:
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_custom_grouping
     weight: 1202
+  - name: Identify Suspect Commits
+    url: logs/error_tracking/suspect_commits
+    parent: tracing_error_tracking
+    identifier: tracing_error_tracking_suspect_commits
+    weight: 1203
   - name: Data Security
     url: tracing/configure_data_security/
     parent: tracing
@@ -4222,7 +4227,7 @@ main:
     url: real_user_monitoring/error_tracking/android/
     parent: rum_error_tracking
     identifier: rum_error_tracking_android
-    weight: 1403
+    weight: 1203
   - name: Track iOS Errors
     url: real_user_monitoring/error_tracking/ios/
     parent: rum_error_tracking
@@ -4253,6 +4258,11 @@ main:
     parent: rum_error_tracking
     identifier: rum_error_tracking_custom_grouping
     weight: 1209
+  - name: Identify Suspect Commits
+    url: logs/error_tracking/suspect_commits
+    parent: rum_error_tracking
+    identifier: rum_error_tracking_suspect_commits
+    weight: 1210
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
