@@ -5,11 +5,11 @@ disable_toc: false
 ---
 ## Overview
 
-For some issues, Error Tracking can identify a suspect commit, helping you determine the root cause and resolve the issue. This feature is automatically enabled when its [setup requirements](#setup) are met.
+Error Tracking can identify suspect commits, helping you pinpoint the root cause of your errors and resolve the issue more quickly. This feature is automatically enabled on issues when the [setup requirements](#setup) are met.
 
 {{< img src="logs/error_tracking/suspect_commit.png" alt="A suspect commit as it is displayed in the Datadog UI" style="width:100%" >}}
 
-If a suspect commit is associated with an issue, it is displayed on the issue panel, as shown in the highlighted area of the image below.
+Once a suspect commit has been identified, it is displayed on the issue panel, as shown in the highlighted area of the image below.
 
 {{< img src="logs/error_tracking/suspect_commit_in_context.png" alt="A suspect commit shown in the context of the issue panel" style="width:90%" >}}
 
