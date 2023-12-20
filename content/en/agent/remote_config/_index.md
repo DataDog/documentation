@@ -213,7 +213,7 @@ The following table describes the meaning of each Tracing library status:
   | NOT CONNECTED       | The Tracing library cannot be found in the Remote Configuration service and is associated with an Agent that could have `remote_config.enabled` set to true or false in its `datadog.yaml` configuration file. Check your local Agent configuration or your proxy settings.| 
   | UNSUPPORTED AGENT   | The Tracing library is associated with an Agent which is not Remote Configuration capable. To fix this issue, update the associated Agent software to the latest available version. |
   | NOT DETECTED   | The Tracing library does not support Remote Configuration. To fix this issue, update the Tracing library software to the latest available version. |
-  | UNKNOWN   | The Tracing library status is unknown as we cannot determine if an Agent is associated with the Tracing library. This could be because the Agent is deployed on a fully managed serverless container service such as AWS Fargate or due to other reasons. |
+  | UNKNOWN   | The Tracing library status is unknown, and it can't be determined if an Agent is associated with the Tracing library. For example, this could be because the Agent is deployed on a fully managed serverless container service like AWS Fargate. |
 
 ## Opting out of Remote Configuration at the Agent level
 
