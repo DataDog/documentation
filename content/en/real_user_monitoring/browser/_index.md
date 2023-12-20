@@ -1846,11 +1846,17 @@ Preserve the session across subdomains for the same site.
 **Default**: `false`<br/>
 Use a secure session cookie. This disables RUM events sent on insecure (non-HTTPS) connections.
 
-`useCrossSiteSessionCookie`
+`usePartitionedCrossSiteSessionCookie`
 : Optional<br/>
 **Type**: Boolean<br/>
 **Default**:`false`<br/>
-Use a secure cross-site session cookie. This allows the RUM Browser SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`.
+Use a partitioned secure cross-site session cookie. This allows the RUM Browser SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`.
+
+`useCrossSiteSessionCookie`
+: Optional - **Deprecated**<br/>
+**Type**: Boolean<br/>
+**Default**:`false`<br/>
+See `usePartitionedCrossSiteSessionCookie`.
 
 `allowFallbackToLocalStorage`
 : Optional<br/>
