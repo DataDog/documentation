@@ -1,5 +1,5 @@
 ---
-title: Investigate a Security Signal
+title: Investigate Security Signals
 kind: documentation
 disable_toc: false
 further_reading:
