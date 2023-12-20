@@ -18,7 +18,7 @@ More details about runtime support and profile types is available on each langua
 |-----------------------------------|:-------:|:-------:|:------------:|:------:|:---------:|:-------:|:------:|:----------:|
 | Operating systems                 | | | | Linux only | | | CentOS&nbsp;7+ | Linux&nbsp;v4.17+ |
 | Minimum&nbsp;runtime&nbsp;version | JDK&nbsp;8+ | Python&nbsp;2.7+ | Go&nbsp;1.20+ | Ruby&nbsp;2.3+ | Node&nbsp;14+ | .NET&nbsp;Core&nbsp;2.1+, .NET&nbsp;5+, .NET&nbsp;Framework&nbsp;4.6.1+ | PHP&nbsp;7.1+ |  |
-| Recommended runtime version | JDK&nbsp;11+ | Python&nbsp;3.6+ | Go&nbsp;1.21+ | Ruby&nbsp;2.3+ | Node&nbsp;14+ | .NET&nbsp;6+ | PHP&nbsp;7.1+ | |
+| Recommended runtime version | JDK&nbsp;11+ | Python&nbsp;3.6+ | Go&nbsp;1.21+ | Ruby&nbsp;2.3+ | Node&nbsp;18+ | .NET&nbsp;6+ | PHP&nbsp;7.1+ | |
 | Minimum tracer version   | | 0.35.0 | 1.23.0 | 0.48.0 | 0.23.0 | 2.7.0| | |
 | Recommended tracer version |  [latest][9]  | [latest][10]  | [latest][11] | [latest][12] | [latest][13] | [latest][14]  | [latest][15] | [latest][16] |
 | **Profile types:** |
