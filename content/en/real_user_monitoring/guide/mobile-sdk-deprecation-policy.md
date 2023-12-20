@@ -13,7 +13,7 @@ further_reading:
 ## Overview
 
 Datadog understands the importance of maintaining a robust and up-to-date mobile development ecosystem for you. The following mobile deprecation policy ensures the continued improvement and stability of Datadog mobile SDKs.
-We aim to align our deprecation practices with industry best practices while ensuring a reasonable transition period for our clients.
+These deprecation practices align with industry best practices while ensuring a reasonable transition period for you.
 
 ## Versioning
 Datadog Mobile SDKs follow [Semantic Versioning][1]. A change in Major version signals a non-backwards compatible change to Public API or behaviour.
