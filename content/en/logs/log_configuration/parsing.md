@@ -106,7 +106,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 : Matches an integer number (with scientific notation support) and parses it as an integer number.
 
 `word`
-: Matches a _word_, which starts with a word boundary; contains characters from a-z, A-Z, 0-9, including the `_` (underscore) character; and ends with a word boundary. Equivalent to `\b\w*\b` in regex.
+: Matches a _word_, which starts with a word boundary; contains characters from a-z, A-Z, 0-9, including the `_` (underscore) character; and ends with a word boundary. Equivalent to `\b\w+\b` in regex.
 
 `doubleQuotedString`
 : Matches a double-quoted string.
