@@ -492,6 +492,27 @@
       "description": "Post an event with a long title returns \"OK\" response"
     }
   ],
+  "CreateGCPIntegration": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Create a GCP integration returns \"OK\" response"
+    }
+  ],
+  "DeleteGCPIntegration": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Delete a GCP integration returns \"OK\" response"
+    }
+  ],
+  "UpdateGCPIntegration": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Update a GCP integration returns \"OK\" response"
+    }
+  ],
   "ListLogs": [
     {
       "group": "logs",
