@@ -291,7 +291,7 @@ Feature: My Feature
 ```
 
 {{% /tab %}}
-{{% tab "Scalatest" %}}
+{{% tab "ScalaTest" %}}
 
 Create a `Tag` with the value `datadog_itr_unskippable` and tag your test case with it:
 
