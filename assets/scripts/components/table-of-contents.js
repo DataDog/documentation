@@ -18,7 +18,7 @@ const chromeHashScroll = () => {
             const hash = window.location.hash;
             window.location.hash = '';
             window.location.hash = hash;
-        }, 400);
+        }, 500);
     }
 };
 
