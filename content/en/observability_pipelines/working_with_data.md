@@ -60,7 +60,7 @@ The second line adds the `.timestamp` field and the value to the event, changing
 
 ## Parse data
 
-Parsing showcases more advanced use cases of DPL/VRL.
+Parsing provides more advanced use cases of DPL/VRL.
 
 ### Parsing configuration example
 
