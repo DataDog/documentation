@@ -1,6 +1,6 @@
 ---
 title: RUM Mobile SDKs Deprecation Policy
-kind: guide
+kind: documentation
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
