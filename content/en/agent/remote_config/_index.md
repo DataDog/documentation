@@ -187,9 +187,9 @@ To authenticate and authorize the Agent to receive configurations and security d
 
 **Note:** If you have [`api_keys_write`][5] RBAC permission, but are missing Remote Configuration [Organization][8] level permissions, you cannot enable Remote Configuration on a new or an existing API Key. You only have permission to disable Remote Configuration on an existing API Key.
 
-### Review Remote Configuration status of Agents and Tracing libraries
+### Review Remote Configuration status of Agents and tracing libraries
 
-Gain visibility into the Remote Configuration status of your Agent and Tracing library through the [Remote Configuration UI][8]. 
+Gain visibility into the Remote Configuration status of your Agent and tracing library through the [Remote Configuration UI][8]. 
 
 The following table describes the meaning of each Agent status:
 
@@ -202,18 +202,18 @@ The following table describes the meaning of each Agent status:
   | NOT CONNECTED       | The Agent cannot be found in the Remote Configuration service and could have `remote_config.enabled` set to true or false in its `datadog.yaml` configuration file. Check your local Agent configuration or your proxy settings. This status displays when the Agent version is higher than `7.41.1` but lower than `7.45.0`.            | 
   | UNSUPPORTED AGENT   | The Agent is on a version that is not Remote Configuration capable. To fix this issue, update the Agent to the latest available version. |
 
-The following table describes the meaning of each Tracing library status:
+The following table describes the meaning of each tracing library status:
 
   | Tracing library Status| Description                                      |
   |------------------|--------------------------------------------------|
-  | CONNECTED      | The Tracing library is successfully connected to the Remote Configuration service through the associated Agent. This is the optimal state you want your Tracing library to be in for Remote Configuration.                                               |    
-  | UNAUTHORIZED          | The Tracing library is associated with an Agent which doesn't have “Remote Config Read” permission on its API key. To fix the issue, you need to enable Remote Configuration capability on the API Key used by the Agent associated with the Tracing library.| 
-  | CONNECTION ERROR        |   The Tracing library deployed in your environment is associated with an Agent that has remote_config.enabled set to true in its `datadog.yaml` configuration file, however, the agent cannot be found in the Remote Configuration service. The most likely cause of this is that the associated Agent is unable to reach Remote Configuration [endpoints][17]. To fix the issue, you need to allow outbound HTTPS access to Remote Configuration endpoints from your environment.  
-  | DISABLED       |   The Tracing library deployed in your environment is associated with an Agent that has `remote_config.enabled` set to false in its `datadog.yaml` configuration file. This could be set deliberately or mistakenly. To enable Remote Configuration on the associated Agent, set `remote_config.enabled` to true.  | 
-  | NOT CONNECTED       | The Tracing library cannot be found in the Remote Configuration service and is associated with an Agent that could have `remote_config.enabled` set to true or false in its `datadog.yaml` configuration file. Check your local Agent configuration or your proxy settings.| 
-  | UNSUPPORTED AGENT   | The Tracing library is associated with an Agent which is not Remote Configuration capable. To fix this issue, update the associated Agent software to the latest available version. |
-  | NOT DETECTED   | The Tracing library does not support Remote Configuration. To fix this issue, update the Tracing library software to the latest available version. |
-  | UNKNOWN   | The Tracing library status is unknown, and it can't be determined if an Agent is associated with the Tracing library. For example, this could be because the Agent is deployed on a fully managed serverless container service like AWS Fargate. |
+  | CONNECTED      | The tracing library is successfully connected to the Remote Configuration service through the associated Agent. This is the optimal state you want your Tracing library to be in for Remote Configuration.                                               |    
+  | UNAUTHORIZED          | The tracing library is associated with an Agent which doesn't have `Remote Config Read` permission on its API key. To fix the issue, you need to enable Remote Configuration capability on the API Key used by the Agent associated with the tracing library.| 
+  | CONNECTION ERROR        |   The tracing library deployed in your environment is associated with an Agent that has remote_config.enabled set to true in its `datadog.yaml` configuration file, however, the agent cannot be found in the Remote Configuration service. The most likely cause of this is that the associated Agent is unable to reach Remote Configuration [endpoints][17]. To fix the issue, you need to allow outbound HTTPS access to Remote Configuration endpoints from your environment.  
+  | DISABLED       |   The tracing library deployed in your environment is associated with an Agent that has `remote_config.enabled` set to false in its `datadog.yaml` configuration file. This could be set deliberately or mistakenly. To enable Remote Configuration on the associated Agent, set `remote_config.enabled` to true.  | 
+  | NOT CONNECTED       | The tracing library cannot be found in the Remote Configuration service and is associated with an Agent that could have `remote_config.enabled` set to true or false in its `datadog.yaml` configuration file. Check your local Agent configuration or your proxy settings.| 
+  | UNSUPPORTED AGENT   | The tracing library is associated with an Agent which is not Remote Configuration capable. To fix this issue, update the associated Agent software to the latest available version. |
+  | NOT DETECTED   | The tracing library does not support Remote Configuration. To fix this issue, update the tracing library software to the latest available version. |
+  | UNKNOWN   | The tracing library status is unknown, and it can't be determined if an Agent is associated with the tracing library. For example, this could be because the Agent is deployed on a fully managed serverless container service like AWS Fargate. |
 
 ## Opting out of Remote Configuration at the Agent level
 
