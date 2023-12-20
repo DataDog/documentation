@@ -64,7 +64,7 @@ On domain joined machines, the Agent installer can use a user supplied account, 
 
 If a domain account is specified on the command line, it must exist prior to the installation since only domain controllers can create domain accounts.
 
-If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generate a random password.
+If a user account is specified on the command line, but this user account is not found on the system, the installer attempts to create it. If a password was specified, the installer uses that password, otherwise it generates a random password.
 
 To specify a username from a domain account, use the following form for the `DDAGENTUSER_NAME` property:
 

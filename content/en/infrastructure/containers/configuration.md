@@ -90,6 +90,7 @@ The following table presents the list of collected resources and the minimal Age
 | CronJobs | 7.27.0 | 7.40.0 | 2.15.5 | 1.16.0 |
 | DaemonSets | 7.27.0 | 1.14.0 | 2.16.3 | 1.16.0 |
 | Deployments | 7.27.0 | 1.11.0 | 2.10.0 | 1.16.0 |
+| HorizontalPodAutoscalers | 7.27.0 | 7.51.0 | 2.10.0 | 1.1.1 |
 | Ingresses | 7.27.0 | 1.22.0 | 2.30.7 | 1.21.0 |
 | Jobs | 7.27.0 | 1.13.1 | 2.15.5 | 1.16.0 |
 | Namespaces | 7.27.0 | 7.41.0 | 2.30.9 | 1.17.0 |

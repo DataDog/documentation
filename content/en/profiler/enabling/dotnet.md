@@ -42,7 +42,8 @@ Supported .NET runtimes (64-bit applications)
 .NET Core 2.1, 3.1<br/>
 .NET 5<br/>
 .NET 6<br/>
-.NET 7
+.NET 7<br/>
+.NET 8
 
 <div class="alert alert-warning">
   <strong>Note:</strong> For containers, <strong>at least one core</strong> is required. Read the <a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">Troubleshooting documentation</a> for more details.

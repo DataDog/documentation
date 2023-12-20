@@ -13,9 +13,6 @@ further_reading:
 - link: developers/libraries
   tag: 도움말
   text: 공식적으로 커뮤니티에서 만든 API 및 DogStatsD 클라이언트 라이브러리
-- link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
-  tag: GitHub
-  text: DogStatsD 소스 코드
 - link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
   tag: 블로그
   text: Datadog을 통해 Azure App Service에서 Linux 웹 앱을 모니터링하세요

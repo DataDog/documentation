@@ -15,6 +15,9 @@ further_reading:
 - link: "/infrastructure/process/"
   tag: "Documentation"
   text: "Understand what is going on at any level of your system"
+- link: "https://www.datadoghq.com/blog/kubernetes-cpu-requests-limits/"
+  tag: "Blog"
+  text: "A deep dive into CPU requests and limits in Kubernetes"
 - link: "https://www.datadoghq.com/blog/monitor-kubernetes-anomalies/"
   tag: "Blog"
   text: "Expedite infrastructure investigations with Kubernetes Anomalies"
@@ -251,6 +254,6 @@ You can see indexed logs that you have chosen to index and persist by selecting 
 [15]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
 [16]: /infrastructure/containers/configuration
 [17]: /infrastructure/faq/live-containers-legacy-configuration
-[18]: https://app.datadoghq.com/orchestration/overview/
+[18]: https://app.datadoghq.com/orchestration/overview
 [19]: /infrastructure/containers/orchestrator_explorer/
 [20]: /infrastructure/containers/kubernetes_resources

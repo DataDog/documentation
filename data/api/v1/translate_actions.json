@@ -238,7 +238,7 @@
     "summary": "Take graph snapshots"
   },
   "MuteHost": {
-    "description": "Mute a host.",
+    "description": "Mute a host. **Note:** This creates a [Downtime V2](https://docs.datadoghq.com/api/latest/downtimes/#schedule-a-downtime) for the host.",
     "summary": "Mute a host",
     "request_description": "Mute a host request body.",
     "request_schema_description": "Combination of settings to mute a host."
@@ -929,6 +929,12 @@
   "GetTest": {
     "description": "Get the detailed configuration associated with a Synthetic test.",
     "summary": "Get a test configuration"
+  },
+  "PatchTest": {
+    "description": "Patch the configuration of a Synthetic test with partial data.",
+    "summary": "Patch a Synthetic test",
+    "request_description": "[JSON Patch](https://jsonpatch.com/) compliant list of operations",
+    "request_schema_description": "Wrapper around an array of [JSON Patch](https://jsonpatch.com) operations to perform on the test"
   },
   "UpdateTest": {
     "description": "This endpoint is deprecated. To edit a test, use [Edit an API test](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test) or [Edit a browser test](https://docs.datadoghq.com/api/latest/synthetics/#edit-a-browser-test).",

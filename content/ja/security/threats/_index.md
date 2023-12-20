@@ -35,10 +35,6 @@ CSM Threats には、セキュリティ専門家チームによってメンテ�
 
 {{< img src="security/cws/threats_detection_rules.png" alt="Datadog アプリの CSM Threats 検出ルール" width="100%">}}
 
-## 予想されるワークロードの動作をモデル化する
-
-[Workload Security Profiles][10] を使用して、予想されるワークロード動作のベースラインを作成します。Workload Security Profiles は、動作学習モデルを使用して、脅威または誤構成を示す疑わしいアクティビティの特定を支援します。また、既知の許容可能なワークロードの動作に対する抑制提案も生成します。セキュリティアラートを調査し、以前は見られなかった異常な動作を特定するために、プロファイラーから得られた洞察を使用します。
-
 ## リアルタイム通知の設定
 
 環境内で脅威が検出されると[リアルタイムで通知を送信][3]し、チームはリスクを軽減するためのアクションを起こすことができます。通知は、[Slack、メール、PagerDuty、Webhook など][4]に送ることができます。
@@ -70,4 +66,3 @@ CSM Threats には、セキュリティ専門家チームによってメンテ�
 [7]: /ja/security/threats/setup
 [8]: /ja/security/threats/security_signals
 [9]: /ja/network_monitoring/performance/
-[10]: /ja/security/threats/security_profiles
