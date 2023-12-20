@@ -39,8 +39,17 @@ To enable the Agent DogStatsD UDS:
 {{< tabs >}}
 {{% tab "Host" %}}
 
-1. Edit the [Agent's main configuration file][1] to set `dogstatsd_socket` to the path where DogStatsD should create its listening socket:
-
+1. Create a socket file for DogStatsD to use as a listening socket. For example:
+   ```shell
+   sudo mkdir -p /var/run/datadog/
+   ```
+1. Ensure that the `dd-agent` user has read and write permissions to the socket file:
+   ```shell
+   sudo chown dd-agent:dd-agent /var/run/datadog/
+   ```
+1. Edit the [Agent's main configuration file][1]:
+   1. Set `use_dogstatsd` to `true`.
+   2. Set `dogstatsd_socket` to the path where DogStatsD should create its listening socket:
     ```yaml
     ## @param dogstatsd_socket - string - optional - default: ""
     ## Listen for Dogstatsd metrics on a Unix Socket (*nix only).
@@ -49,7 +58,7 @@ To enable the Agent DogStatsD UDS:
     dogstatsd_socket: '/var/run/datadog/dsd.socket'
     ```
 
-2. [Restart your Agent][2].
+3. [Restart your Agent][2].
 
 
 [1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
@@ -142,7 +151,7 @@ To enable the Agent DogStatsD UDS:
 To send metrics from shell scripts, or to test that DogStatsD is listening on the socket, use `netcat`. Most implementations of `netcat`, such as `netcat-openbsd` on Debian or `nmap-ncat` on RHEL, support Unix Socket traffic with the `-U` flag:
 
 ```shell
-echo -n "custom.metric.name:1|c" | nc -U -u -w1 /var/run/datadog/dsd.socket
+d
 ```
 
 ### Origin detection
