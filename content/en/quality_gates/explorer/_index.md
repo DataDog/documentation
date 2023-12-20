@@ -37,6 +37,14 @@ The **Quality Gates** panel on the left lists default facets you can use to sear
 | Status       | The quality gate status: `Passed` or `Failed`.                   |
 | Gate ID      | The ID of the quality gate.                                      |
 
+## Quality Gate details
+
+You can see aggregated data about quality gates over the selected time frame. Use the search field and facets to filter the list to show the gates you want to investigate.
+
+### Quality Gate data
+
+Quality Gate data is available in dashboards and notebooks, enabling build engineering teams to customize their communication about high-priority work and CI trends over time.
+
 [101]: https://app.datadoghq.com/ci/quality-gates/executions
 [102]: https://app.datadoghq.com/dashboard/lists
 [103]: https://app.datadoghq.com/notebook/list
