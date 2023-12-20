@@ -33,6 +33,7 @@ The search bars provide the most comprehensive set of actions to filter the list
 
 - **Configuration**: Metrics with tag configurations
 - **Percentiles**: Distribution metrics enabled by percentiles/advanced query capabilities
+- **Historical Metrics**: Metrics that have historical metrics ingestion enabled 
 - **Query Activity** (Beta): Metrics not queried in the app or by the API in the past 30 days
 - **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
 - **Distribution Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans)
