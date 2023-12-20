@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-At Datadog, we understand the importance of maintaining a robust and up-to-date mobile development ecosystem for our clients. To ensure the continued improvement and stability of our mobile SDKs, we have established a mobile deprecation policy.
+Datadog understands the importance of maintaining a robust and up-to-date mobile development ecosystem for you. The following mobile deprecation policy ensures the continued improvement and stability of Datadog mobile SDKs.
 We aim to align our deprecation practices with industry best practices while ensuring a reasonable transition period for our clients.
 
 ## Versioning
