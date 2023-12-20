@@ -80,9 +80,9 @@ Use the [filter transform][4] when you want only certain logs that meet a specif
 - A specific tag, such as `env`.
 - A specific field value, such as the `status` field must be `400`.
 
-In those cases, insert a component that contains a [filter transform][4] to filter logs that uses the [Vector Remap Language (VRL)][5] or [Datadog Log Search syntax][6] to set the conditions. Logs that don't match the conditions are dropped. 
+In those cases, insert a component that contains a [filter transform][4] to filter logs that uses the [Datadog Processing Language (DPL) / Vector Remap Language (VRL)][5] or [Datadog Log Search syntax][6] to set the conditions. Logs that don't match the conditions are dropped. 
 
-The example below uses the filter transform and Vector Remap Language to send only logs with a `status` of `500`.
+The example below uses the filter transform and DPL/VRL to send only logs with a `status` of `500`.
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -138,7 +138,7 @@ inputs = [ "my-source-or-transform-id" ]
 
 When analyzing data that comes in large volumes or contains a lot of noise, such as CDN logs, sending all the logs to a destination is unnecessary. Instead, use the [sample transform][7] to send only the logs necessary to perform analysis that is statistically significant.
 
-The `exclude` field excludes events from being sampled, and also supports VRL or Datadog Log Search syntax. The example below shows a configuration that samples every 10 events, which is set by the `rate`.
+The `exclude` field excludes events from being sampled, and also supports DPL/VRL or Datadog Log Search syntax. The example below shows a configuration that samples every 10 events, which is set by the `rate`.
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -439,7 +439,7 @@ The following logs are generated:
 
 Logs can contain fields that are unnecessary. When processing terabytes of data a day, dropping fields that are superfluous can significantly reduce the total number of logs your destination ingests and indexes. 
 
-To remove unnecessary fields, use the [Vector Remap Language][5] to remap your log data. The following example removes unnecessary tags using `del`. 
+To remove unnecessary fields, use the [DPL/VRL][5] to remap your log data. The following example removes unnecessary tags using `del`. 
 
 {{< tabs >}}
 {{% tab "YAML" %}}
@@ -497,7 +497,7 @@ del(.unecessary_tag_field)"""
 [2]: /observability_pipelines/configurations/
 [3]: /observability_pipelines/reference/transforms/#dedupe
 [4]: /observability_pipelines/reference/transforms/#filter
-[5]: https://vector.dev/docs/reference/vrl/
+[5]: /observability_pipelines/reference/processing_language/
 [6]: /logs/explorer/search_syntax/
 [7]: /observability_pipelines/reference/transforms/#sample
 [8]: /observability_pipelines/reference/transforms/#logtometric
