@@ -17,7 +17,7 @@ These deprecation practices align with industry best practices while ensuring a 
 
 ## Versioning
 Datadog Mobile SDKs follow [Semantic Versioning][1]. A change in Major version signals a non-backwards compatible change to Public API or behaviour.
-When updating from one Major version to the next it's importation to closely follow our [SDK Upgrade guidelines][2].
+When updating from one Major version to the next it's important to closely follow the [SDK Upgrade guidelines][2].
 
 
 
