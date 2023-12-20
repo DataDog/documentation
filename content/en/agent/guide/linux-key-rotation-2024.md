@@ -1,9 +1,6 @@
 ---
 title: 2024 Linux Key Rotation
 kind: guide
-private: true
-aliases:
-  - /agent/guide/linux-key-rotation-2024
 ---
 
 As a common best practice, Datadog periodically rotates the keys and certificates used to sign Datadog's Agent packages. Datadog packages include:
