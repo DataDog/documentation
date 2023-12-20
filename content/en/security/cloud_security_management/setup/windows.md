@@ -11,7 +11,7 @@ Datadog [Cloud Security Management (CSM)][1] on Windows includes built-in threat
 
 - Certutil used to transmit or decode a file
 - Process memory was dumped using the minidump functions of comsvcs.dll
-- NTDS file referenced in commandline
+- NTDS file referenced in command line
 - Suspicious ntdsutil usage
 - Procdump used to dump process memory
 - Scheduled task created
@@ -43,7 +43,7 @@ It can take up to 15 minutes to complete the installation. In certain cases, Mic
 
 ### Command line
 
-1. Download the [Datadog Agent installer][4].
+1. Download the [Datadog Agent installer][3].
 2. Follow the instructions for command line installation using command prompts or PowerShell.
 
 ## Configuration
@@ -79,8 +79,7 @@ To get alerts whenever a Windows signal is created, create a [Notification Rule]
 
 [1]: /security/cloud_security_management/
 [2]: /network_monitoring/performance/setup/?tab=agentwindows#setup
-[3]: https://s3.amazonaws.com/dd-agent-mstesting/builds/beta/ddagent-cli-7.50.0-rc.6.cwsbeta.msi
-[4]: https://s3.amazonaws.com/dd-agent-mstesting/builds/beta/ddagent-cli-7.50.0-rc.6.cwsbeta-2.msi
+[3]: https://s3.amazonaws.com/dd-agent-mstesting/builds/beta/ddagent-cli-7.50.0-rc.6.cwsbeta-2.msi
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://docs.datadoghq.com/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 [7]: https://app.datadoghq.com/logs
