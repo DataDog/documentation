@@ -50,6 +50,7 @@ To enable the Agent DogStatsD UDS:
 1. Edit the [Agent's main configuration file][1]:
    1. Set `use_dogstatsd` to `true`.
    1. Set `dogstatsd_socket` to the path where DogStatsD should create its listening socket:
+      
       ```yaml
       ## @param dogstatsd_socket - string - optional - default: ""
       ## Listen for Dogstatsd metrics on a Unix Socket (*nix only).
