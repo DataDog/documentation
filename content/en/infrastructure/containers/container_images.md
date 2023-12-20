@@ -36,7 +36,7 @@ Datadog collects container image metadata to provide enhanced debugging context 
 
 #### Configure the Agent
 
-The following instructions enables the container image metadata collection and [Software Bill of Materials][5] (SBOM) collection in the Datadog Agent for CSM Vulnerabilities. This allows you to scan the libraries in container images to detect vulnerabilities. Vulnerabilities are evaluated and and scanned against your containers every hour.
+The following instructions enable the container image metadata collection and [Software Bill of Materials][5] (SBOM) collection in the Datadog Agent for CSM Vulnerabilities. This allows you to scan the libraries in container images to detect vulnerabilities. Vulnerabilities are evaluated and and scanned against your containers every hour.
 
 **Note**: CSM Vulnerabilities is not available for AWS Fargate or Windows environments.
 
