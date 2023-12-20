@@ -1559,7 +1559,7 @@ main:
     url: tracing/trace_collection/automatic_instrumentation/dd_libraries/
     parent: automatic_instrumentation
     identifier: auto_dd_libraries
-    weight: 102        
+    weight: 102
   - name: Custom Instrumentation
     url: tracing/trace_collection/custom_instrumentation/
     parent: tracing_trace_collection
