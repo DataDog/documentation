@@ -32,7 +32,7 @@ When updating from one Major version to the next it's important to closely follo
 ### Deprecation Phase
 
 * **Start Date**: The deprecation phase commences immediately after the release of the subsequent major GA version.
-* **Support Level**: In this phase, our primary focus is addressing critical bug fixes and ensuring the stability of the deprecated major version. This means that while no new features will be planned, we will continue to provide support for critical issues.
+* **Support Level**: In this phase, the primary focus is addressing critical bug fixes and ensuring the stability of the deprecated major version. This means that while no new features will be planned, we will continue to provide support for critical issues.
 
 ### End of Support (EOS)
 
