@@ -12,6 +12,7 @@ html {
 }
 
 body {
+    overflow: visible;
     font-family: $font-family-sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-font-feature-settings: 'kern' 1;

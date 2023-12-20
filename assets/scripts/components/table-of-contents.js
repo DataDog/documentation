@@ -10,17 +10,6 @@ const tocCloseIcon = document.querySelector('.js-mobile-toc-toggle .icon-small-x
 const tocBookIcon = document.querySelector('.js-mobile-toc-toggle .icon-small-bookmark');
 const tocEditBtn = document.querySelector('.js-toc-edit-btn');
 
-// Fixes Chrome issue where pages with hash params are not scrolling to anchor
-const chromeHashScroll = () => {
-    const isChrome = /Chrome/.test(navigator.userAgent);
-    if (window.location.hash && isChrome) {
-        setTimeout(function () {
-            const hash = window.location.hash;
-            window.location.hash = '';
-            window.location.hash = hash;
-        }, 300);
-    }
-};
 
 function isTOCDisabled() {
     const toc = document.querySelector('#TableOfContents');
@@ -231,7 +220,6 @@ function handleAPIPage() {
     }
 }
 
-DOMReady(chromeHashScroll);
 DOMReady(handleAPIPage);
 
 if (tocMobileToggle) {
