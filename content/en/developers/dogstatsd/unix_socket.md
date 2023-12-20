@@ -58,7 +58,7 @@ To enable the Agent DogStatsD UDS:
     dogstatsd_socket: '/var/run/datadog/dsd.socket'
     ```
 
-3. [Restart your Agent][2].
+1. [Restart your Agent][2].
 
 
 [1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
