@@ -42,7 +42,7 @@ When updating from one Major version to the next it's important to closely follo
 ## Minimum Support Duration
 To ensure a reasonable timeframe for migrations and allow for planning, we guarantee a minimum support duration for each major version. This means that every major version released will be fully supported for at least 6 months from its GA release.
 
-During this support period, we will continue to provide new features and bug fixes, in addition to addressing critical issues.
+During this support period, we continue to provide new features and bug fixes, in addition to addressing critical issues.
 
 ## Further Reading
 
