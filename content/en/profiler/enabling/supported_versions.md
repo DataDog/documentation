@@ -20,7 +20,7 @@ More details about runtime support and profile types is available on each langua
 | Minimum&nbsp;runtime&nbsp;version | JDK&nbsp;8+ | Python&nbsp;2.7+ | Go&nbsp;1.20+ | Ruby&nbsp;2.3+ | Node&nbsp;14+ | .NET&nbsp;Core&nbsp;2.1+, .NET&nbsp;5+, .NET&nbsp;Framework&nbsp;4.6.1+ | PHP&nbsp;7.1+ |  |
 | Recommended runtime version | JDK&nbsp;11+ | Python&nbsp;3.6+ | Go&nbsp;1.21+ | Ruby&nbsp;2.3+ | Node&nbsp;14+ | .NET&nbsp;6+ | PHP&nbsp;7.1+ | |
 | Minimum tracer version   | | 0.35.0 | 1.23.0 | 0.48.0 | 0.23.0 | 2.7.0| | |
-| Recommended tracer version |    | 2.3.2  | 1.57.0 | 1.15.0 | 2.12.0 | 2.31.0  | 0.92.0 | |
+| Recommended tracer version |  [latest][9]  | [latest][10]  | [latest][11] | [latest][12] | [latest][13] | [latest][14]  | [latest][15] | [latest][16] |
 | **Profile types:** |
 | {{< ci-details title="CPU" >}}The time each function/method spent running on the CPU.{{< /ci-details >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |   | tracer&nbsp;2.15.0 | {{< X >}} | beta<br>ddprof&nbsp;0.1.0 |
 | {{< ci-details title="Allocation" >}}Number and sizes of memory allocations made by each function/method, including allocations which were subsequently freed.{{< /ci-details >}}   | JDK&nbsp;11+ | Python 3.6+<br>tracer&nbsp;0.50.0 | tracer&nbsp;1.47.0 |      |       | beta, .NET 6+<br>tracer&nbsp;2.18.0 | tracer&nbsp;0.88.0 | beta<br>ddprof&nbsp;0.9.3 |
@@ -46,3 +46,11 @@ More details about runtime support and profile types is available on each langua
 [6]: /profiler/enabling/dotnet/
 [7]: /profiler/enabling/php/
 [8]: /profiler/enabling/ddprof/
+[9]: https://github.com/DataDog/dd-trace-java/releases
+[10]: https://github.com/DataDog/dd-trace-python/releases
+[11]: https://github.com/DataDog/dd-trace-go/releases
+[12]: https://github.com/DataDog/dd-trace-rb/releases
+[13]: https://github.com/DataDog/dd-trace-js/releases
+[14]: https://github.com/DataDog/dd-trace-dotnet/releases
+[15]: https://github.com/DataDog/dd-trace-php/releases
+[16]: https://github.com/DataDog/ddprof/releases
