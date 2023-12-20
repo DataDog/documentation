@@ -22,7 +22,7 @@ further_reading:
 
 ## Compatibility
 
-Intelligent Test Runner is supported in `dd-java-agent >= 1.26.0`.
+Intelligent Test Runner is supported in `dd-java-agent >= 1.26.1`.
 
 The following test frameworks are supported:
 - JUnit >= 4.10 and >= 5.3
