@@ -666,6 +666,11 @@ main:
     parent: containers_troubleshooting
     identifier: containers_troubleshooting_hpa
     weight: 804
+  - name: Admission Controller
+    url: containers/troubleshooting/admission-controller
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_admission_controller
+    weight: 805
   - name: Guides
     url: containers/guide
     parent: containers
