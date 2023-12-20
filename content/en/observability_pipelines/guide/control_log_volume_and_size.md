@@ -80,7 +80,7 @@ Use the [filter transform][4] when you want only certain logs that meet a specif
 - A specific tag, such as `env`.
 - A specific field value, such as the `status` field must be `400`.
 
-In those cases, insert a component that contains a [filter transform][4] to filter logs that uses the [Datadog Processing Language (DPL)][5]/Vector Remap Language (VRL) or [Datadog Log Search syntax][6] to set the conditions. Logs that don't match the conditions are dropped. 
+In those cases, insert a component that contains a [filter transform][4] to filter logs that uses the [Datadog Processing Language (DPL) / Vector Remap Language (VRL)][5] or [Datadog Log Search syntax][6] to set the conditions. Logs that don't match the conditions are dropped. 
 
 The example below uses the filter transform and DPL/VRL to send only logs with a `status` of `500`.
 

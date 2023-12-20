@@ -22,7 +22,7 @@ This guide walks you through how to use Observability Pipelines to govern and co
 
 ## Prerequisites
 
-This guide assumes that you have already set up the Observability Pipelines Worker, a tool for collecting, processing, and routing telemetry data. If you're not familiar with Observability Pipelines, see the [Installation][4] documentation and [Datadog Processing Language (DPL)][5]/Vector Remap Language for more information.
+This guide assumes that you have already set up the Observability Pipelines Worker, a tool for collecting, processing, and routing telemetry data. If you're not familiar with Observability Pipelines, see the [Installation][4] documentation and [Datadog Processing Language (DPL) / Vector Remap Language (VRL)][5] for more information.
 
 ## Drop metrics missing specific tags or the metric's namespace
 
