@@ -1,5 +1,5 @@
 ---
-title: Setting Up CSM Enterprise
+title: Setting up CSM Enterprise
 kind: documentation
 further_reading:
   - link: "/security/cloud_security_management/setup"
