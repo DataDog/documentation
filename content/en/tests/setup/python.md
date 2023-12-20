@@ -108,7 +108,7 @@ To create filters or `group by` fields for these tags, you must first create fac
 
 ### Adding custom metrics to tests
 
-Just like tags, you can add custom metrics to your tests by using the current active span:
+Just like tags, to add custom metrics to your tests, use the current active span:
 
 ```python
 from ddtrace import tracer
