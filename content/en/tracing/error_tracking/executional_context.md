@@ -21,7 +21,7 @@ Executional Context for APM Error Tracking is in private beta. To request access
 
 Executional Context in APM Error Tracking automatically captures production variable values so you can reproduce exceptions from Error Tracking issues.
 
-{{< img src="tracing/error_tracking/error_tracking_executional_context.mp4" video="true" alt="Error Tracking Explorer Executional Context" style="width:100%" >}}
+{{< img src="tracing/error_tracking/error_tracking_executional_context-2.png" alt="Error Tracking Explorer Executional Context" style="width:90%" >}}
 
 ## Requirements
 Supported languages
@@ -47,8 +47,6 @@ To scrub variable data for PII, create a [Sensitive Data Scanner][1] rule and ap
 1. Navigate to [**APM** > **Error Tracking**][2].
 2. Click into any Python Error Tracking issue and scroll down to the stack trace component.
 3. Expand stack frames to examine captured variable values.
-
-{{< img src="tracing/error_tracking/error_tracking_executional_context.png" alt="Error Tracking Explorer Executional Context" style="width:80%" >}}
 
 ## Troubleshooting
 

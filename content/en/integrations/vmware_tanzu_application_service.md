@@ -111,9 +111,9 @@ cf set-env app01 LOGS_CONFIG '[{"type":"tcp","port":"10514","source":"java","ser
 
 ##### Notification in case of misconfigured proxy
 
-For Agent version 6.12 or greater, when using a [proxy configuration][8] with the buildpack, a verification is made to check if the connection can be established. Log collection is started depending on the result of this test.
+For Agent version 6.12 or greater, when using a [proxy configuration][101] with the buildpack, a verification is made to check if the connection can be established. Log collection is started depending on the result of this test.
 
-If the connection fails to establish and log collection does not start, an event like this appears in the [Events Explorer][9]. Set up a monitor to track these events and be notified when a misconfigured Buildpack is deployed:
+If the connection fails to establish and log collection does not start, an event like this appears in the [Events Explorer][102]. Set up a monitor to track these events and be notified when a misconfigured Buildpack is deployed:
 
 {{< img src="integrations/cloud_foundry/logs_misconfigured_proxy.png" alt="An event in Datadog with the title Log endpoint cannot be reached - Log collection not started and a message stating that a TCP connection could not be established" >}}
 
@@ -127,6 +127,9 @@ cf set-env <YOUR_APP> DD_TAGS key1=value1,key2=value2
 # restage the application to make it pick up the new environment variable and use the new tags
 cf restage <YOUR_APP>
 ```
+
+[101]: /agent/logs/proxy/
+[102]: /events/explorer/
 
 {{% /site-region %}}
 

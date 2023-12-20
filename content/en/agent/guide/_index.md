@@ -41,6 +41,7 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent 5 guides:" >}}
+    {{< nextlink href="agent/guide/install-agent-5" >}}Install Agent 5{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-autodiscovery" >}}Autodiscovery in Agent v5{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-kubernetes-basic-agent-usage" >}}Kubernetes Basic Agent Usage in Agent v5{{< /nextlink >}}
     {{< nextlink href="agent/guide/dogstream" >}}Dogstream{{< /nextlink >}}
