@@ -333,6 +333,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2888440510",
+      "description": "Create a new dashboard with split graph widget from distribution widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2705593938",
       "description": "Create a new dashboard with sunburst widget and metrics data"
     },

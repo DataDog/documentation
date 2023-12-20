@@ -1758,10 +1758,17 @@ components:
         q:
           description: Widget query.
           type: string
+        queries:
+          description: List of queries that can be returned directly or used in formulas.
+          items:
+            $ref: '#/components/schemas/FormulaAndFunctionQueryDefinition'
+          type: array
         query:
           $ref: '#/components/schemas/DistributionWidgetHistogramRequestQuery'
         request_type:
           $ref: '#/components/schemas/DistributionWidgetHistogramRequestType'
+        response_format:
+          $ref: '#/components/schemas/FormulaAndFunctionResponseFormat'
         rum_query:
           $ref: '#/components/schemas/LogQueryDefinition'
         security_query:
@@ -12969,6 +12976,7 @@ components:
       description: The original widget we are splitting on.
       oneOf:
       - $ref: '#/components/schemas/ChangeWidgetDefinition'
+      - $ref: '#/components/schemas/DistributionWidgetDefinition'
       - $ref: '#/components/schemas/GeomapWidgetDefinition'
       - $ref: '#/components/schemas/QueryValueWidgetDefinition'
       - $ref: '#/components/schemas/ScatterPlotWidgetDefinition'
