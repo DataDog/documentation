@@ -1017,7 +1017,7 @@ main:
     url: infrastructure/containers/container_images
     parent: infrastructure_livecontainers
     identifier: infrastructure_livecontainers_container_images
-    weight: 301
+    weight: 302
   - name: Orchestrator Explorer
     url: infrastructure/containers/orchestrator_explorer
     parent: infrastructure_livecontainers
