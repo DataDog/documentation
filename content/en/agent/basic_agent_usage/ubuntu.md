@@ -108,14 +108,15 @@ Configuration files for [Integrations][1]:
 sudo apt-get remove datadog-agent -y
 ```
 
-> This command removes the Agent, but does not remove:
+This command removes the Agent, but does not remove:
 
-* the `datadog.yaml` configuration file,
-* user-created files in the `/etc/datadog-agent` configuration folder,
-* user-created files in the `/opt/datadog-agent` folder,
-* the `dd-agent` user.
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/datadog-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+* Datadog log files
 
-> If you also want to remove these elements, use this command instead:
+If you also want to remove these elements, run this command after removing the Agent:
 
 ```shell
 sudo apt-get remove --purge datadog-agent -y
@@ -127,12 +128,14 @@ sudo apt-get remove --purge datadog-agent -y
 sudo apt-get remove datadog-agent -y
 ```
 
-> This command removes the Agent, but does not remove:
-* the `datadog.yaml` configuration file,
-* user-created files in the `/etc/dd-agent` configuration folder,
-* user-created files in the `/opt/datadog-agent` folder,
-* the `dd-agent` user.
-> If you also want to remove these elements, use this command instead:
+This command removes the Agent, but does not remove:
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/dd-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+* Datadog log files
+
+If you also want to remove these elements, run this command after removing the Agent:
 
 ```shell
 sudo apt-get --purge remove datadog-agent -y

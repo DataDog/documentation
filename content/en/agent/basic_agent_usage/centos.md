@@ -126,13 +126,14 @@ Configuration files for [Integrations][1]:
 sudo yum remove datadog-agent
 ```
 
-> This command removes the Agent, but does not remove:
-* the `datadog.yaml` configuration file,
-* user-created files in the `/etc/datadog-agent` configuration folder,
-* user-created files in the `/opt/datadog-agent` folder,
-* the `dd-agent` user.
+This command removes the Agent, but does not remove:
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/datadog-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+* Datadog log files
 
-> If you also want to remove these elements and your Datadog log files, run this command after removing the Agent:
+If you also want to remove these elements, run this command after removing the Agent:
 
 ```shell
 sudo userdel dd-agent \
@@ -147,14 +148,15 @@ sudo userdel dd-agent \
 sudo yum remove datadog-agent
 ```
 
-> This command removes the Agent, but does not remove:
+This command removes the Agent, but does not remove:
 
-* the `datadog.yaml` configuration file,
-* user-created files in the `/etc/dd-agent` configuration folder,
-* user-created files in the `/opt/datadog-agent` folder,
-* the `dd-agent` user.
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/dd-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+* Datadog log files
 
-> If you also want to remove these elements and your Datadog log files, run this command after removing the Agent:
+If you also want to remove these elements, run this command after removing the Agent:
 
 ```shell
 sudo userdel dd-agent \
