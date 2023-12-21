@@ -18,7 +18,7 @@ Suppressions are specific conditions for when a signal should not be generated, 
 
 ## Suppression routes
 
-You can set up suppressions within individual [detection rules](#detection-rules), or define a separate [suppression rule](#suppression-rules) to suppress signals more broadly across multiple detection rules.
+You can set up a suppression query within an individual [detection rule](#detection-rules), or define a separate [suppression rule](#suppression-rules) to suppress signals across one or more detection rules.
 
 ### Detection rules
 
