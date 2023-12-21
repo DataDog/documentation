@@ -26,9 +26,9 @@ When you [create][1] or [modify][2] a detection rule, you can define a suppressi
 
 ### Suppression rules
 
-Use suppression rules to set general suppression conditions across multiple detection rules instead of setting up suppression conditions for each individual detection rules. For example, you can set up a suppression rule to suppress any signal that contains a specific IP.
+Use suppression rules to set general suppression conditions across multiple detection rules instead of setting up suppression conditions for each individual detection rule. For example, you can set up a suppression rule to suppress any signal that contains a specific IP.
 
-## Supressions configuration
+## Suppressions configuration
 
 ### Suppression list
 
@@ -36,7 +36,7 @@ The [suppression list][3] provides a centralized and organized way for you to ma
 
 {{< img src="security/security_monitoring/suppressions/suppression_list.png" alt="The suppressions page showing a list of suppression rules" style="width:90%;" >}}
 
-## Create a suppression
+## Create a suppression rule
 
 1. Navigate to the [Suppressions][3] page.
 1. Click **+ New Suppression**.
