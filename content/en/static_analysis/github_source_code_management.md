@@ -1,5 +1,5 @@
 ---
-title: GitHub Source Code Management
+title: GitHub Pull Requests
 kind: documentation
 description: Feature overview and setup instructions for GitHub Source Code Management using Static Analysis.
 ---
