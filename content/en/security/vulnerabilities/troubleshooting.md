@@ -2,12 +2,15 @@
 title: Troubleshooting Cloud Security Management Vulnerabilities
 kind: documentation
 further_reading:
-- link: "/security/cloud_security_management/setup/csm_pro?tab=aws#configure-the-agent-for-hosts-and-containers"
+- link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
   tag: "Documentation"
-  text: "Setting up container vulnerabilities"
+  text: "Setting up container image vulnerabilities"
 - link: "/security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities"
   tag: "Documentation"
   text: "Setting up host vulnerabilities"
+- link: "https://www.datadoghq.com/blog/datadog-container-image-view/"
+  tag: "Blog"
+  text: "Enhance your troubleshooting workflow with Container Images in Datadog Container Monitoring"
 ---
 
 {{< site-region region="gov" >}}
