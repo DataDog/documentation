@@ -22,6 +22,8 @@ aliases:
 
 For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
 
+The Datadog Profiler requires at least PHP 7.1, on 64-bit Linux.
+
 The following are **not** supported:
 - PHP ZTS builds
 - PHP debug builds

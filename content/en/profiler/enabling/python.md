@@ -22,7 +22,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][12].
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
 
 The Datadog Profiler requires Python 2.7+ and Agent version [7.20.2][2]+ or [6.20.2][3]+.
 
