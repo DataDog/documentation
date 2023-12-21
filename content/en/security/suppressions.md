@@ -8,7 +8,9 @@ further_reading:
   text: "Learn more about detection rules"
 ---
 
-<div class="alert alert-warning">Suppressions are available for Cloud Workload Security and Cloud SIEM.</div>
+<div class="alert alert-warning">Suppressions are available for Cloud Security Management Threats and Cloud SIEM.</div>
+
+<div class="alert alert-warning">Suppression rules are replacing suppression queries in detection rules. The legacy suppression queries will be deprecated on April 1, 2024. See <a href="#migrate-legacy-suppression-queries-to-suppression-rules">Migrate legacy suppression queries to suppression rules</a> for more information. </div>
 
 ## Overview
 
@@ -16,7 +18,7 @@ Suppressions are specific conditions for when a signal should not be generated, 
 
 ## Suppression routes
 
-You can set up suppressions within individual detection rules, or define a separate suppression rule to suppress signals more broadly across multiple detection rules.
+You can set up suppressions within individual [detection rules](#detection-rules), or define a separate [suppression rule](#suppression-rules) to suppress signals more broadly across multiple detection rules.
 
 ### Detection rules
 
@@ -48,11 +50,15 @@ The [suppression list][3] provides a centralized and organized way for you to ma
 
 {{< img src="security/security_monitoring/suppressions/suppression_query.png" alt="The add suppression query with the query @user.username:john.doe" style="width:65%;" >}}
 
-## Migrate suppression queries to suppression rules
+## Migrate legacy suppression queries to suppression rules
 
-<div class="alert alert-warning">Suppression rules are replacing suppression queries in detection rules. The legacy suppression queries will be deprecated on April 1, 2024.</div>
+<div class="alert alert-warning">The legacy suppression queries will be deprecated on April 1, 2024.</div>
 
-Migrate your legacy suppression queries to suppression rules. To see a list of rules using the legacy suppression and to migrate them:
+Migrate your detection rules's legacy **Suppression Queries** to the new **Suppression Rules**. 
+
+{{< img src="security/security_monitoring/suppressions/detection_rule_migration.png" alt="The add suppression query with the query @user.username:john.doe" style="width:75%;" >}}
+
+To see a list of rules using the legacy suppression query and to migrate them:
 1. Navigate to the [detection rules list][4].
 1. Hover over **xx rules** in the yellow banner to see the list of rules that need to be migrated.
     {{< img src="security/security_monitoring/suppressions/migration.png" alt="A yellow banner saying that 28 rules with suppression queries need to be migrated to suppression rules" style="width:90%;" >}}
