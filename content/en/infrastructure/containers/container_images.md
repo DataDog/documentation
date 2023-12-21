@@ -8,9 +8,9 @@ further_reading:
 - link: "/security/vulnerabilities"
   tag: "Documentation"
   text: "Cloud Security Management Vulnerabilities"
-- link: "/security/cloud_security_management/setup/csm_pro?tab=aws#configure-the-agent-for-hosts-and-containers"
+- link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
   tag: "Documentation"
-  text: "Setting up CSM container vulnerabilities"
+  text: "Setting up container image vulnerabilities"
 - link: "/security/vulnerabilities/troubleshooting"
   tag: "Documentation"
   text: "Troubleshooting Cloud Security Management Vulnerabilities"
@@ -151,9 +151,7 @@ Set up the [AWS integration][4] to begin crawling Container Image metadata from 
 
 ## Container image tagging
 
-Tag your container images with arbitrary tags by using [extract labels as tags][6] configuration on the Agent. These tags will then be picked by the Container Image check.
-
-{{< img src="infrastructure/livecontainers/container_images/container_images_tagging.png" alt="The details side panel of a specific container in the Container Images page highlighting container images tags" width="100%">}}
+Tag and enrich your container images with arbitrary tags by using [extract labels as tags][6] configuration on the Agent. These tags are then picked by the Container Image check.
 
 ## Further reading
 
