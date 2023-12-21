@@ -10,8 +10,6 @@ further_reading:
 
 <div class="alert alert-warning">Suppressions are available for Cloud Security Management Threats and Cloud SIEM.</div>
 
-<div class="alert alert-warning">Suppression rules are replacing suppression queries in detection rules. The legacy suppression queries will be deprecated on April 1, 2024. See <a href="#migrate-legacy-suppression-queries-to-suppression-rules">Migrate legacy suppression queries to suppression rules</a> for more information. </div>
-
 ## Overview
 
 Suppressions are specific conditions for when a signal should not be generated, which can improve the accuracy and relevance of the signals that are generated.
@@ -21,6 +19,8 @@ Suppressions are specific conditions for when a signal should not be generated, 
 You can set up a suppression query within an individual [detection rule](#detection-rules), or define a separate [suppression rule](#suppression-rules) to suppress signals across one or more detection rules.
 
 ### Detection rules
+
+<div class="alert alert-warning">Suppression rules are replacing suppression queries in detection rules. The legacy suppression queries will be deprecated on April 1, 2024. See <a href="#migrate-legacy-suppression-queries-to-suppression-rules">Migrate legacy suppression queries to suppression rules</a> for more information. </div>
 
 When you [create][1] or [modify][2] a detection rule, you can define a suppression query to prevent a signal from getting generated. For example, add a rule query to determine when a detection rule triggers a security signal. You can also customize the suppression query to suppress signals for a specific attribute value.
 
