@@ -4,6 +4,6 @@ enableGitInfo: true
 
 # default to just building english on local dev for a faster build
 disableLanguages:
-  - fr
-  - ja
-  - ko
+  # - fr
+  # - ja
+  # - ko
