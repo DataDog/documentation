@@ -22,7 +22,7 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-To find the minimum and recommended versions for Java runtimes and tracers, read [Language and Tracer Versions for Profiler Features][12].
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][12].
 
 As of dd-trace-java 1.0.0, you have two options for the engine that generates profile data for Java applications: [Java Flight Recorder (JFR)][2] or the Datadog Profiler. As of dd-trace-java 1.7.0, Datadog Profiler is the default. Each profiler engine has different side effects, requirements, available configurations, and limitations, and this page describes each. You can enable either one or both engines. Enabling both captures both profile types at the same time.
 
@@ -153,6 +153,7 @@ The Datadog profiler consists of several profiling engines, including CPU, wallc
 
 {{< tabs >}}
 {{% tab "Datadog Profiler" %}}
+_Requires JDK 11+._
 
 The Datadog profiler is enabled by default in dd-trace-java versions 1.7.0+. Datadog CPU profiling is scheduled through perf events and is more accurate than JFR CPU profiling. To enable CPU profiling:
 
@@ -265,6 +266,8 @@ The allocation profiler engine does not depend on the `/proc/sys/kernel/perf_eve
 {{< /tabs >}}
 
 ### Live-heap profiler engine
+
+_Since: v1.17.0. Requires JDK 11+._
 
 The live-heap profiler engine is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
 The engine samples allocations and keeps track of whether those samples survived the most recent garbage collection cycle. The number of surviving samples is used to estimate the number of live objects in the heap.

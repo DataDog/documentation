@@ -25,7 +25,7 @@ Profiles sent from `ddprof` show up under the _native_ runtime in the Datadog we
 
 ## Requirements
 
-To find `ddprof` version requirements for specific profile types, read [Language and Tracer Versions for Profiler Features][7].
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][7].
 
 Supported operating systems
 : Linux (glibc or musl)
