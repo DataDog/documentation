@@ -18,7 +18,7 @@ The comment includes the name, ID, severity, and description of the violation. C
 
 ### Prerequisites
 
-The [GitHub integration][4] must be installed.
+The [GitHub integration][2] must be installed.
 
 ### Enable Static Analysis on Datadog
 
@@ -26,26 +26,37 @@ To use Datadog Static Analysis, add the appropriate configuration file to your r
 
 ### Configure a GitHub App
 
-Static Analysis on pull requests can be provided through any GitHub App that has the following permissions:
+To use Static Analysis on GitHub, you can update an existing GitHub App or create a new one.
 
-- Read and write pull requests
-- Comment on pull requests
+#### Create and install a new GitHub App
 
-To use Static Analysis on GitHub, you can [update the permissions of an existing GitHub App][3] or [create a new one][2].
+1. In Datadog, navigate to [**Integrations > GitHub Applications > Add New GitHub Application**][3].
+1. Fill out any required details, such as the GitHub organization name.
+1. Under **Select Features**, check the **Static Analysis: Pull Request Review Comments** box.
+1. Under **Edit Permissions**, verify that the **Pull Requests** permission is set to **Read & Write**.
+1. Click **Create App in GitHub**.
+1. Click **Install GitHub App**.
+1. TODO: Authorize for repositories.
 
-To enable the correct permissions from the settings page of a GitHub App:
+#### Update an existing GitHub App
 
-1. Under the **Permissions** heading, click **Repository permissions**.
+1. From the [**Integrations > GitHub Applications**][5] page, navigate to the GitHub App you want to use for Static Analysis.
+{{< img src="static-analysis-existing-github-app.png" alt="Example of a Static Analysis comment on a pull request" style="width:90%;" >}}
+1. On the **Features** tab, check the **CI Visibility: Collect pull request information** section to determine whether your GitHub App needs additional permissions. If so, click **Update permissions in GitHub**.
 1. Set the **Pull Requests** access to **Read and write**.
 {{< img src="ci/static-analysis-pr-read-write-permissions.png" alt="The dropdown for the pull request read and write permission" style="width:90%;" >}}
 1. Under the **Subscribe to events** heading, check the **Pull request review comment** box.
 {{< img src="ci/static-analysis-pr-review-comment.png" alt="The checkbox for the pull request review comment permission" style="width:90%;" >}}
 
-### Enable CI visibility
+### Enable CI visibility for your repositories
 
-TODO
+1. In Datadog, navigate to [CI Settings > Static Analysis][4].
+1. Click the toggle switch next to a given repository to enable **GitHub Comments**. In the example below, comments are enabled for the `demo-static-analysis-gates` repository.
+
+{{< img src="ci/static-analysis-github-comments.png" alt="Example of a Static Analysis comment on a pull request" style="width:100%;" >}}
 
 [1]: /static_analysis#setup
-[2]: https://docs.github.com/en/apps/creating-github-apps/about-creating-github-apps/about-creating-github-apps
-[3]: https://docs.github.com/en/apps/maintaining-github-apps/modifying-a-github-app-registration
-[4]: /integrations/github/
+[2]: /integrations/github/
+[3]: https://app.datadoghq.com/integrations/github/add
+[4]: https://app.datadoghq.com/ci/settings/static-analysis
+[5]: https://app.datadoghq.com/integrations/github/configuration
