@@ -666,6 +666,11 @@ main:
     parent: containers_troubleshooting
     identifier: containers_troubleshooting_hpa
     weight: 804
+  - name: Admission Controller
+    url: containers/troubleshooting/admission-controller
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_admission_controller
+    weight: 805
   - name: Guides
     url: containers/guide
     parent: containers
@@ -920,11 +925,16 @@ main:
     parent: serverless_step_functions
     identifier: serverless_step_functions_installation
     weight: 201
+  - name: Enhanced Metrics
+    url: serverless/step_functions/enhanced-metrics
+    parent: serverless_step_functions
+    identifier: serverless_step_functions_enhanced_metrics
+    weight: 202
   - name: Troubleshooting
     url: serverless/step_functions/troubleshooting
     parent: serverless_step_functions
     identifier: serverless_step_functions_troubleshooting
-    weight: 202
+    weight: 203
   - name: Azure App Service
     url: serverless/azure_app_services
     parent: serverless
@@ -1333,16 +1343,21 @@ main:
     parent: slos
     identifier: slos_metric
     weight: 2
+  - name: Time Slice SLOs
+    url: service_management/service_level_objectives/time_slice/
+    parent: slos
+    identifier: slos_time_slice
+    weight: 3
   - name: Error Budget Alerts
     url: service_management/service_level_objectives/error_budget/
     parent: slos
     identifier: error_budget
-    weight: 3
+    weight: 4
   - name: Burn Rate Alerts
     url: service_management/service_level_objectives/burn_rate/
     parent: slos
     identifier: burn_rate
-    weight: 4
+    weight: 5
   - name: Guides
     url: service_management/service_level_objectives/guide/
     parent: slos
@@ -1399,6 +1414,11 @@ main:
     identifier: event_explorer_analytics
     parent: events_explorer
     weight: 207
+  - name: Saved Views
+    url: service_management/events/explorer/saved_views
+    identifier: event_explorer_saved_views
+    parent: events_explorer
+    weight: 208
   - name: Using Events
     url: service_management/events/usage/
     identifier: event_usage
@@ -1525,71 +1545,111 @@ main:
     parent: tracing
     identifier: tracing_glossary
     weight: 1
-  - name: Sending Traces to Datadog
+  - name: Application Instrumentation
     url: tracing/trace_collection/
     parent: tracing
     identifier: tracing_trace_collection
     weight: 2
-  - name: Single Step APM Instrumentation
-    url: tracing/trace_collection/single-step-apm/
+  - name: Automatic Instrumentation
+    url: tracing/trace_collection/automatic_instrumentation/
     parent: tracing_trace_collection
-    identifier: single_step_apm
+    identifier: automatic_instrumentation
     weight: 100
-  - name: Instrumenting with Datadog Tracing Libraries
-    url: tracing/trace_collection/dd_libraries/
-    parent: tracing_trace_collection
-    identifier: tracing_dd_libraries
+  - name: Using Single Step Instrumentation
+    url: tracing/trace_collection/automatic_instrumentation/single-step-apm/
+    parent: automatic_instrumentation
+    identifier: single_step_apm
     weight: 101
+  - name: Using Datadog Tracing Libraries
+    url: tracing/trace_collection/automatic_instrumentation/dd_libraries/
+    parent: automatic_instrumentation
+    identifier: auto_dd_libraries
+    weight: 102
+  - name: Custom Instrumentation
+    url: tracing/trace_collection/custom_instrumentation/
+    parent: tracing_trace_collection
+    identifier: custom_instrumentation
+    weight: 103
+  - name: Using OpenTelemetry APIs
+    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+    parent: custom_instrumentation
+    identifier: tracing_otel_inst
+    weight: 106
   - name: Java
-    url: tracing/trace_collection/dd_libraries/java/
-    parent: tracing_dd_libraries
-    identifier: tracing_ddlib_java
+    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/java/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_java
     weight: 101
   - name: Python
-    url: tracing/trace_collection/dd_libraries/python/
-    parent: tracing_dd_libraries
-    identifier: tracing_ddlib_python
+    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/python/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_python
     weight: 102
   - name: Ruby
-    url: tracing/trace_collection/dd_libraries/ruby/
-    parent: tracing_dd_libraries
-    identifier: tracing_ddlib_ruby
+    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/ruby/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_ruby
     weight: 103
   - name: Go
-    url: tracing/trace_collection/dd_libraries/go/
-    parent: tracing_dd_libraries
-    identifier: tracing_ddlib_go
+    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/go/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_go
+    weight: 104
+  - name: Node.js
+    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/nodejs/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_nodejs
+    weight: 105
+  - name: .NET
+    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/dotnet/
+    parent: tracing_otel_inst
+    identifier: tracing_otel_inst_dotnet
+    weight: 108
+  - name: Using Datadog Libraries
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/
+    parent: custom_instrumentation
+    identifier: tracing_custom_inst
+    weight: 104
+  - name: Java
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/java/
+    parent: tracing_custom_inst
+    identifier: tracing_custom_inst_java
+    weight: 101
+  - name: Python
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/python/
+    parent: tracing_custom_inst
+    identifier: tracing_custom_inst_python
+    weight: 102
+  - name: Ruby
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/ruby/
+    parent: tracing_custom_inst
+    identifier: tracing_custom_inst_ruby
+    weight: 103
+  - name: Go
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/go/
+    parent: tracing_custom_inst
+    identifier: tracing_custom_inst_go
     weight: 104
   - name: NodeJS
-    url: tracing/trace_collection/dd_libraries/nodejs/
-    parent: tracing_dd_libraries
-    identifier: tracing_ddlib_nodejs
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/nodejs/
+    parent: tracing_custom_inst
+    identifier: tracing_custom_inst_nodejs
     weight: 105
   - name: PHP
-    url: tracing/trace_collection/dd_libraries/php/
-    parent: tracing_dd_libraries
-    identifier: tracing_ddlib_php
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/php/
+    parent: tracing_custom_inst
+    identifier: tracing_custom_inst_php
     weight: 106
   - name: C++
-    url: tracing/trace_collection/dd_libraries/cpp/
-    parent: tracing_dd_libraries
-    identifier: tracing_ddlib_cpp
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/cpp/
+    parent: tracing_custom_inst
+    identifier: tracing_custom_inst_cpp
     weight: 107
-  - name: .NET Core
-    url: tracing/trace_collection/dd_libraries/dotnet-core/
-    parent: tracing_dd_libraries
-    identifier: tracing_ddlib_dotnet_core
+  - name: .NET
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/dotnet/
+    parent: tracing_custom_inst
+    identifier: tracing_custom_inst_dotnet
     weight: 108
-  - name: .NET Framework
-    url: tracing/trace_collection/dd_libraries/dotnet-framework/
-    parent: tracing_dd_libraries
-    identifier: tracing_ddlib_dotnet_framework
-    weight: 109
-  - name: Injecting Libraries Locally
-    url: tracing/trace_collection/library_injection_local/
-    parent: tracing_trace_collection
-    identifier: tracing_library_injection_local
-    weight: 102
   - name: Library Compatibility
     url: tracing/trace_collection/compatibility/
     parent: tracing_trace_collection
@@ -1690,92 +1750,7 @@ main:
     parent: tracing_library_config
     identifier: tracing_library_config_dotnet_framework
     weight: 109
-  - name: Custom Instrumentation with OpenTelemetry
-    url: tracing/trace_collection/otel_instrumentation/
-    parent: tracing_trace_collection
-    identifier: tracing_otel_inst
-    weight: 105
-  - name: Java
-    url: tracing/trace_collection/otel_instrumentation/java/
-    parent: tracing_otel_inst
-    identifier: tracing_otel_inst_java
-    weight: 101
-  - name: Python
-    url: tracing/trace_collection/otel_instrumentation/python/
-    parent: tracing_otel_inst
-    identifier: tracing_otel_inst_python
-    weight: 102
-  - name: Ruby
-    url: tracing/trace_collection/otel_instrumentation/ruby/
-    parent: tracing_otel_inst
-    identifier: tracing_otel_inst_ruby
-    weight: 103
-  - name: Go
-    url: tracing/trace_collection/otel_instrumentation/go/
-    parent: tracing_otel_inst
-    identifier: tracing_otel_inst_go
-    weight: 104
-  - name: Node.js
-    url: tracing/trace_collection/otel_instrumentation/nodejs/
-    parent: tracing_otel_inst
-    identifier: tracing_otel_inst_nodejs
-    weight: 105
-  - name: PHP
-    url: tracing/trace_collection/otel_instrumentation/php/
-    parent: tracing_otel_inst
-    identifier: tracing_otel_inst_php
-    weight: 106
-  - name: .NET
-    url: tracing/trace_collection/otel_instrumentation/dotnet/
-    parent: tracing_otel_inst
-    identifier: tracing_otel_inst_dotnet
-    weight: 108
-  - name: Custom Instrumentation with Datadog Libraries
-    url: tracing/trace_collection/custom_instrumentation/
-    parent: tracing_trace_collection
-    identifier: tracing_custom_inst
-    weight: 106
-  - name: Java
-    url: tracing/trace_collection/custom_instrumentation/java/
-    parent: tracing_custom_inst
-    identifier: tracing_custom_inst_java
-    weight: 101
-  - name: Python
-    url: tracing/trace_collection/custom_instrumentation/python/
-    parent: tracing_custom_inst
-    identifier: tracing_custom_inst_python
-    weight: 102
-  - name: Ruby
-    url: tracing/trace_collection/custom_instrumentation/ruby/
-    parent: tracing_custom_inst
-    identifier: tracing_custom_inst_ruby
-    weight: 103
-  - name: Go
-    url: tracing/trace_collection/custom_instrumentation/go/
-    parent: tracing_custom_inst
-    identifier: tracing_custom_inst_go
-    weight: 104
-  - name: NodeJS
-    url: tracing/trace_collection/custom_instrumentation/nodejs/
-    parent: tracing_custom_inst
-    identifier: tracing_custom_inst_nodejs
-    weight: 105
-  - name: PHP
-    url: tracing/trace_collection/custom_instrumentation/php/
-    parent: tracing_custom_inst
-    identifier: tracing_custom_inst_php
-    weight: 106
-  - name: C++
-    url: tracing/trace_collection/custom_instrumentation/cpp/
-    parent: tracing_custom_inst
-    identifier: tracing_custom_inst_cpp
-    weight: 107
-  - name: .NET
-    url: tracing/trace_collection/custom_instrumentation/dotnet/
-    parent: tracing_custom_inst
-    identifier: tracing_custom_inst_dotnet
-    weight: 108
-  - name: Propagating Trace Context
+  - name: Trace Context Propagation
     url: tracing/trace_collection/trace_context_propagation/
     parent: tracing_trace_collection
     identifier: tracing_context
@@ -1820,12 +1795,12 @@ main:
     parent: tracing_context
     identifier: tracing_context_dotnet
     weight: 107
-  - name: Tracing Serverless Applications
+  - name: Serverless Application Tracing
     url: serverless/distributed_tracing/
     parent: tracing_trace_collection
     identifier: tracing_serverless
     weight: 109
-  - name: Tracing Proxies
+  - name: Proxy Tracing
     url: tracing/trace_collection/proxy_setup/
     parent: tracing_trace_collection
     identifier: tracing_proxies
@@ -1835,6 +1810,11 @@ main:
     parent: tracing_trace_collection
     identifier: tracing_naming_convention
     weight: 111
+  - name: Span Links
+    url: tracing/trace_collection/span_links
+    parent: tracing_trace_collection
+    identifier: tracing_span_links
+    weight: 112
   - name: APM Metrics Collection
     url: tracing/metrics/
     parent: tracing
@@ -1910,17 +1890,17 @@ main:
     parent: tracing_trace_pipeline
     identifier: tracing_pipeline_metrics
     weight: 305
-  - name: Connect Traces with Other Telemetry
+  - name: Correlate Traces with Other Telemetry
     url: tracing/other_telemetry/
     parent: tracing
     identifier: tracing_other_telemetry
     weight: 5
-  - name: Connect DBM and Traces
+  - name: Correlate DBM and Traces
     url: database_monitoring/connect_dbm_and_apm/
     parent: tracing_other_telemetry
     identifier: tracing_connect_dbm
     weight: 400
-  - name: Connect Logs and Traces
+  - name: Correlate Logs and Traces
     url: tracing/other_telemetry/connect_logs_and_traces/
     parent: tracing_other_telemetry
     identifier: tracing_connect_logs
@@ -1965,17 +1945,17 @@ main:
     parent: tracing_connect_logs
     identifier: tracing_connect_logs_otel
     weight: 108
-  - name: Connect RUM and Traces
+  - name: Correlate RUM and Traces
     url: /real_user_monitoring/connect_rum_and_traces/
     parent: tracing_other_telemetry
     identifier: tracing_connect_rum
     weight: 402
-  - name: Connect Synthetics and Traces
+  - name: Correlate Synthetics and Traces
     url: /synthetics/apm/
     parent: tracing_other_telemetry
     identifier: tracing_connect_sythetics
     weight: 403
-  - name: Connect Profiles and Traces
+  - name: Correlate Profiles and Traces
     url: /profiler/connect_traces_and_profiles/
     parent: tracing_other_telemetry
     identifier: tracing_connect_profiles
@@ -2651,6 +2631,36 @@ main:
     parent: software_delivery_heading
     identifier: quality_gates
     weight: 210000
+  - name: Setup
+    url: quality_gates/setup
+    parent: quality_gates
+    identifier: quality_gates_setup
+    weight: 1
+  - name: Search and Manage
+    url: quality_gates/search
+    parent: quality_gates
+    identifier: quality_gates_search
+    weight: 2
+  - name: Explorer
+    url: quality_gates/explorer
+    parent: quality_gates
+    identifier: quality_gates_explorer
+    weight: 3
+  - name: Search Syntax
+    url: quality_gates/explorer/search_syntax
+    parent: quality_gates_explorer
+    identifier: quality_gates_explorer_search_syntax
+    weight: 301
+  - name: Facets
+    url: quality_gates/explorer/facets
+    parent: quality_gates_explorer
+    identifier: quality_gates_explorer_facets
+    weight: 302
+  - name: Saved Views
+    url: quality_gates/explorer/saved_views
+    parent: quality_gates_explorer
+    identifier: quality_gates_explorer_saved_views
+    weight: 303
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2
@@ -3306,10 +3316,10 @@ main:
     parent: cloud_siem
     identifier: cloud_siem_default_rules
     weight: 3
-  - name: Signals Explorer
-    url: /security/explorer
+  - name: Security Signals
+    url: /security/cloud_siem/investigate_security_signals
     parent: cloud_siem
-    identifier: cloud_siem_signals_explorer
+    identifier: cloud_siem_investigate_security_signals
     weight: 4
   - name: Investigator
     url: security/cloud_siem/investigator
@@ -3432,6 +3442,11 @@ main:
     parent: csm
     identifier: csm_workflow_automation
     weight: 23
+  - name: Severity Scoring
+    url: security/cloud_security_management/severity_scoring/
+    parent: csm
+    identifier: csm_severity_scoring
+    weight: 24
   - name: Guides
     url: security/cloud_security_management/guide/
     parent: csm
