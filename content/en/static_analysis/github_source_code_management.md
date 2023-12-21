@@ -8,11 +8,17 @@ description: Feature overview and setup instructions for GitHub Source Code Mana
 
 Static Analysis can automatically flag rule violations in pull requests on GitHub. To configure the GitHub integration to include Static Analysis features, see [the setup instructions](#set-up-static-analysis-on-github).
 
-During code reviews on GitHub, the source code management (SCM) integration checks for Static Analysis violations in pull requests for repos that have at least one ruleset applied. Violations are flagged with a comment on the relevant line of code. 
+During code reviews on GitHub, the source code management (SCM) integration checks for Static Analysis violations in pull requests for repos that have at least one ruleset applied. Violations are flagged with a comment on the relevant line of code.
 
 The comment includes the name, ID, severity, and description of the violation. Certain violations also include suggested changes that can be applied directly in the GitHub UI.
 
+{{< img src="ci/static-analysis-pr-comment-example.png" alt="Example of a Static Analysis comment on a pull request" style="width:90%;" >}}
+
 ## Set up Static Analysis for GitHub source code
+
+### Prerequisites
+
+The [GitHub integration][4] must be installed.
 
 ### Enable Static Analysis on Datadog
 
@@ -31,10 +37,15 @@ To enable the correct permissions from the settings page of a GitHub App:
 
 1. Under the **Permissions** heading, click **Repository permissions**.
 1. Set the **Pull Requests** access to **Read and write**.
-{{< img src="ci/static-analysis-pr-read-write-permissions.png" alt="The checkbox for the pull request review comment permission" style="width:90%;" >}}
+{{< img src="ci/static-analysis-pr-read-write-permissions.png" alt="The dropdown for the pull request read and write permission" style="width:90%;" >}}
 1. Under the **Subscribe to events** heading, check the **Pull request review comment** box.
 {{< img src="ci/static-analysis-pr-review-comment.png" alt="The checkbox for the pull request review comment permission" style="width:90%;" >}}
+
+### Enable CI visibility
+
+TODO
 
 [1]: /static_analysis#setup
 [2]: https://docs.github.com/en/apps/creating-github-apps/about-creating-github-apps/about-creating-github-apps
 [3]: https://docs.github.com/en/apps/maintaining-github-apps/modifying-a-github-app-registration
+[4]: /integrations/github/
