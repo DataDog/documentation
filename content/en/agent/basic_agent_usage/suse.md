@@ -32,7 +32,7 @@ Packages are available for 64-bit x86 architectures. For other architectures, us
 
 ## Commands
 
-In Agent v6 & v7, the service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run through the Agent binary directly. In Agent v5, almost everything is done through the service manager.
+In Agent v6 and v7, the service manager provided by the operating system is responsible for the Agent lifecycle, while other commands must be run through the Agent binary directly. In Agent v5, almost everything is done through the service manager.
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
