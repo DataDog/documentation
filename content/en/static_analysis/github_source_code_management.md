@@ -12,5 +12,22 @@ During code reviews on GitHub, the source code management (SCM) integration chec
 
 The comment includes the name, ID, severity, and description of the violation. Certain violations also include suggested changes that can be applied directly in the GitHub UI.
 
-## Set up Static Analysis on GitHub
+## Set up Static Analysis for GitHub source code
+
+### Enable Static Analysis
+
+To use Datadog Static Analysis, add the appropriate configuration file to your repository, as described in the [Static Analysis setup instructions][1].
+
+### Create or update your GitHub application
+
+TODO
+
+- Check **Static Analysis: Pull request review comments**
+- Enable read/write permission for pull requests
+
+### Configure pull request comments
+
+TODO
+
+[1]: /static_analysis#setup
 
