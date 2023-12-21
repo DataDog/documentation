@@ -26,7 +26,7 @@ When you [create][1] or [modify][2] a detection rule, you can define a suppressi
 
 ### Suppression rules
 
-Use suppression rules to set general suppression conditions across multiple detection rules and signals instead of setting up suppression conditions for each individual detection rules. For example, you can set up a suppression rule to suppress any signal that contains a specific IP.
+Use suppression rules to set general suppression conditions across multiple detection rules instead of setting up suppression conditions for each individual detection rules. For example, you can set up a suppression rule to suppress any signal that contains a specific IP.
 
 ## Supressions configuration
 
@@ -50,7 +50,7 @@ The [suppression list][3] provides a centralized and organized way for you to ma
 
 ## Migrate suppression queries to suppression rules
 
-<div class="alert alert-warning">Suppression rules are replacing suppression queries. Suppression queries will be deprecated on April 1, 2024.</div>
+<div class="alert alert-warning">Suppression rules are replacing suppression queries in detection rules. The legacy suppression queries will be deprecated on April 1, 2024.</div>
 
 Migrate your legacy suppression queries to suppression rules. To see a list of rules using the legacy suppression and to migrate them:
 1. Navigate to the [detection rules list][4].
