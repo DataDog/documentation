@@ -666,6 +666,11 @@ main:
     parent: containers_troubleshooting
     identifier: containers_troubleshooting_hpa
     weight: 804
+  - name: Admission Controller
+    url: containers/troubleshooting/admission-controller
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_admission_controller
+    weight: 805
   - name: Guides
     url: containers/guide
     parent: containers
@@ -920,11 +925,16 @@ main:
     parent: serverless_step_functions
     identifier: serverless_step_functions_installation
     weight: 201
+  - name: Enhanced Metrics
+    url: serverless/step_functions/enhanced-metrics
+    parent: serverless_step_functions
+    identifier: serverless_step_functions_enhanced_metrics
+    weight: 202
   - name: Troubleshooting
     url: serverless/step_functions/troubleshooting
     parent: serverless_step_functions
     identifier: serverless_step_functions_troubleshooting
-    weight: 202
+    weight: 203
   - name: Azure App Service
     url: serverless/azure_app_services
     parent: serverless
@@ -1333,16 +1343,21 @@ main:
     parent: slos
     identifier: slos_metric
     weight: 2
+  - name: Time Slice SLOs
+    url: service_management/service_level_objectives/time_slice/
+    parent: slos
+    identifier: slos_time_slice
+    weight: 3
   - name: Error Budget Alerts
     url: service_management/service_level_objectives/error_budget/
     parent: slos
     identifier: error_budget
-    weight: 3
+    weight: 4
   - name: Burn Rate Alerts
     url: service_management/service_level_objectives/burn_rate/
     parent: slos
     identifier: burn_rate
-    weight: 4
+    weight: 5
   - name: Guides
     url: service_management/service_level_objectives/guide/
     parent: slos
@@ -1399,6 +1414,11 @@ main:
     identifier: event_explorer_analytics
     parent: events_explorer
     weight: 207
+  - name: Saved Views
+    url: service_management/events/explorer/saved_views
+    identifier: event_explorer_saved_views
+    parent: events_explorer
+    weight: 208
   - name: Using Events
     url: service_management/events/usage/
     identifier: event_usage
@@ -1544,7 +1564,7 @@ main:
     url: tracing/trace_collection/automatic_instrumentation/dd_libraries/
     parent: automatic_instrumentation
     identifier: auto_dd_libraries
-    weight: 102        
+    weight: 102
   - name: Custom Instrumentation
     url: tracing/trace_collection/custom_instrumentation/
     parent: tracing_trace_collection
@@ -2606,6 +2626,36 @@ main:
     parent: software_delivery_heading
     identifier: quality_gates
     weight: 210000
+  - name: Setup
+    url: quality_gates/setup
+    parent: quality_gates
+    identifier: quality_gates_setup
+    weight: 1
+  - name: Search and Manage
+    url: quality_gates/search
+    parent: quality_gates
+    identifier: quality_gates_search
+    weight: 2
+  - name: Explorer
+    url: quality_gates/explorer
+    parent: quality_gates
+    identifier: quality_gates_explorer
+    weight: 3
+  - name: Search Syntax
+    url: quality_gates/explorer/search_syntax
+    parent: quality_gates_explorer
+    identifier: quality_gates_explorer_search_syntax
+    weight: 301
+  - name: Facets
+    url: quality_gates/explorer/facets
+    parent: quality_gates_explorer
+    identifier: quality_gates_explorer_facets
+    weight: 302
+  - name: Saved Views
+    url: quality_gates/explorer/saved_views
+    parent: quality_gates_explorer
+    identifier: quality_gates_explorer_saved_views
+    weight: 303
   - name: Database Monitoring
     url: database_monitoring/
     pre: database-2
@@ -3261,10 +3311,10 @@ main:
     parent: cloud_siem
     identifier: cloud_siem_default_rules
     weight: 3
-  - name: Signals Explorer
-    url: /security/explorer
+  - name: Security Signals
+    url: /security/cloud_siem/investigate_security_signals
     parent: cloud_siem
-    identifier: cloud_siem_signals_explorer
+    identifier: cloud_siem_investigate_security_signals
     weight: 4
   - name: Investigator
     url: security/cloud_siem/investigator
@@ -3392,6 +3442,11 @@ main:
     parent: csm
     identifier: csm_workflow_automation
     weight: 23
+  - name: Severity Scoring
+    url: security/cloud_security_management/severity_scoring/
+    parent: csm
+    identifier: csm_severity_scoring
+    weight: 24
   - name: Guides
     url: security/cloud_security_management/guide/
     parent: csm
