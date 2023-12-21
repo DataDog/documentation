@@ -35,14 +35,17 @@ To use Static Analysis on GitHub, you can update an existing GitHub App or creat
 1. Under **Select Features**, check the **Static Analysis: Pull Request Review Comments** box.
 1. Under **Edit Permissions**, verify that the **Pull Requests** permission is set to **Read & Write**.
 1. Click **Create App in GitHub**.
+1. Enter a name for your app, and submit it.
 1. Click **Install GitHub App**.
-1. TODO: Authorize for repositories.
+1. Choose which repositories the app should be installed into, then click **Install & Authorize**.
+
+{{< img src="ci/static-analysis-install-github-app.png" alt="GitHub App installation screen" style="width:50%;" >}}
 
 #### Update an existing GitHub App
 
 1. From the [**Integrations > GitHub Applications**][5] page, navigate to the GitHub App you want to use for Static Analysis.
-{{< img src="static-analysis-existing-github-app.png" alt="Example of a Static Analysis comment on a pull request" style="width:90%;" >}}
-1. On the **Features** tab, check the **CI Visibility: Collect pull request information** section to determine whether your GitHub App needs additional permissions. If so, click **Update permissions in GitHub**.
+{{< img src="ci/static-analysis-existing-github-app.png" alt="Example of a Static Analysis comment on a pull request" style="width:90%;" >}}
+1. On the **Features** tab, check the **CI Visibility: Collect pull request information** section to determine whether your GitHub App needs additional permissions. If so, click **Update permissions in GitHub** to edit the app settings.
 1. Set the **Pull Requests** access to **Read and write**.
 {{< img src="ci/static-analysis-pr-read-write-permissions.png" alt="The dropdown for the pull request read and write permission" style="width:90%;" >}}
 1. Under the **Subscribe to events** heading, check the **Pull request review comment** box.
