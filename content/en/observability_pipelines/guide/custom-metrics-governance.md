@@ -15,14 +15,14 @@ further_reading:
 
 Custom metrics provide visibility into all facets of your business, from application performance, infrastructure health, to business KPIs. To govern your custom metric volumes, Datadog offers several tools for cost visibility and control after your metrics are ingested, such as [estimated real-time custom metric usage][1], [usage attribution][2], and [Metrics without Limits™][3].
 
-This guide walks you through how to use Observability Pipelines to govern and control your custom metrics before they are ingested. More specifically, how to do the following: 
+This guide walks you through how to use Observability Pipelines to govern and control your custom metrics before they are ingested. More specifically, how to do the following:
 - [Drop custom metrics missing specific tags or the metric's namespace](#drop-metrics-missing-specific-tags-or-the-metrics-namespace)
 - [Remove custom metric tags](#remove-custom-metric-tags)
 - [Set up rules to prevent tag cardinality spikes](#prevent-tag-cardinality-spikes)
 
 ## Prerequisites
 
-This guide assumes that you have already set up the Observability Pipelines Worker, a tool for collecting, processing, and routing telemetry data. If you're not familiar with Observability Pipelines, see the [Installation][4] documentation and [Vector Remap Language][5] for more information.
+This guide assumes that you have already set up the Observability Pipelines Worker, a tool for collecting, processing, and routing telemetry data. If you're not familiar with Observability Pipelines, see the [Installation][4] documentation and [Datadog Processing Language (DPL) / Vector Remap Language (VRL)][5] for more information.
 
 ## Drop metrics missing specific tags or the metric's namespace
 
@@ -32,7 +32,7 @@ It is useful to break down your overall metrics usage with the [Usage Attributio
 
 ### Solution
 
-To prevent that issue, use the Observability Pipelines Worker to drop metrics missing tags that are meaningful to you. This can be done prior to metric ingestion and therefore before metrics contribute to your account's custom metrics usage. 
+To prevent that issue, use the Observability Pipelines Worker to drop metrics missing tags that are meaningful to you. This can be done prior to metric ingestion and therefore before metrics contribute to your account's custom metrics usage.
 
 Observability Pipelines has a wide array of functions that can transform your metrics data before it is sent to Datadog. For example, use the `filter` transform to drop metrics that are missing specific tag keys. The following component filters out any metrics that do not have a `team_tag`, ensuring those metrics are dropped in your Observability Pipelines configuration.
 
@@ -55,13 +55,13 @@ transforms:
     inputs:
       - my-source-or-transform-id
     condition: |2
-       .namespace == "foo" 
+       .namespace == "foo"
 ```
 ## Remove custom metric tags
 
 ### Problem
 
-Metrics tags can provide better visibility into specific hosts, pods, applications, and services. However, some metrics may have tags that are rarely queried or useful for your visualizations or investigative workflows. While you can use Metrics without Limits™ to exclude potential superfluous tags automatically (after a metric has been ingested), you cannot drop tags on metrics (prior to metric ingestion) to prevent these tags from contributing towards your organization's ingested metrics usage. 
+Metrics tags can provide better visibility into specific hosts, pods, applications, and services. However, some metrics may have tags that are rarely queried or useful for your visualizations or investigative workflows. While you can use Metrics without Limits™ to exclude potential superfluous tags automatically (after a metric has been ingested), you cannot drop tags on metrics (prior to metric ingestion) to prevent these tags from contributing towards your organization's ingested metrics usage.
 
 **Note**: Removing tags on metrics prior to ingestion impacts the mathematical accuracy of your metrics' queries. Using Metrics without Limits™ allows you to define important tags at any time, without impacting the mathematical accuracy of your metrics' queries.
 
@@ -74,9 +74,9 @@ To address this issue, you can use Observability Pipelines to do one of the foll
 
 ### Solution 1: Drop one tag
 
-To drop a specific tag on custom metrics before they get ingested into Datadog, you can use Observability Pipelines' [`remap` transform][7], which comes with a domain-specific language to manipulate metrics. 
+To drop a specific tag on custom metrics before they get ingested into Datadog, you can use Observability Pipelines' [`remap` transform][7], which comes with a domain-specific language to manipulate metrics.
 
-For the basic use case of dropping a single metric tag, you can use the `del()` function in VRL. For example, the following component drops the `tag_to_drop` tag.
+For the basic use case of dropping a single metric tag, you can use the `del()` function in DPL/VRL. For example, the following component drops the `tag_to_drop` tag.
 
 ```yaml
 transforms:
@@ -86,7 +86,7 @@ transforms:
       - dd_agent.metrics
     source: |
       # Remove the `tag_to_drop` tag.
-      del(.tags.tag_to_drop) 
+      del(.tags.tag_to_drop)
 ```
 
 ### Solution 2: Define an allowlist array of tags to keep
@@ -127,7 +127,7 @@ transforms:
 
 ### Solution 4: Define an allowlist of valid tags in a Reference Table
 
-In cases when you have a specific list of valid tags, you can use Observability Pipelines' `get_enrichment_table_records` and `find_enrichment_table_records` functions. This allows you to reference an enrichment table in `csv` format in Observability Pipelines. `csv` is the only supported file format. 
+In cases when you have a specific list of valid tags, you can use Observability Pipelines' `get_enrichment_table_records` and `find_enrichment_table_records` functions. This allows you to reference an enrichment table in `csv` format in Observability Pipelines. `csv` is the only supported file format.
 
 For this example, a `csv` file named `valid_tags.csv` contains the following valid tags:
 
@@ -182,10 +182,10 @@ To avoid this situation, you can set up rules in Observability Pipelines to prev
 Use Observability Pipelines' [`tag_cardinality_limits` transform][9] to set cardinality limits on tag keys. It can drop the metric name entirely or any tag keys that exceeds the tag cardinality limit. You can set the following attributes in the transform:
 
 - `value_limit`: How many distinct values to accept for any given tag key.
-- `limit_exceeded_action`: Controls what should happen when a metric comes in with a tag that would exceed the configured limit on cardinality. You have the option to set it to: 
+- `limit_exceeded_action`: Controls what should happen when a metric comes in with a tag that would exceed the configured limit on cardinality. You have the option to set it to:
     - `drop_event`: Drop any metrics that contain tags that would exceed the configured limit.
     - `drop_tag`: Remove tags that exceed the configured limit from the incoming metric.
-- `mode`: Controls which approach is used internally to keep track of previously seen tags and determine when a tag on an incoming metric exceeds the limit. 
+- `mode`: Controls which approach is used internally to keep track of previously seen tags and determine when a tag on an incoming metric exceeds the limit.
     - `exact`: This mode has a higher memory requirement than `probabilistic`, but does not falsely output metrics with new tags after the limit has been hit.
     - `probabilistic`: This mode has a lower memory requirement than `exact`, but may occasionally allow metrics to pass through the transform even when they contain new tags that exceed the configured limit. The rate at which this happens can be controlled by changing the value of `cache_size_per_tag`.
 - `cache_size_per_tag`: An optional tag that enables you to define the size of the cache in bytes to use for detecting duplicate tags. The bigger the cache, the less likely it is to have a false positive or a case where a new value for a tag is allowed even after the configured limits are reached.
@@ -210,8 +210,8 @@ transforms:
 [2]: /account_management/billing/usage_attribution/
 [3]: /metrics/metrics-without-limits/
 [4]: /observability_pipelines/setup/
-[5]: https://vector.dev/docs/reference/vrl/
+[5]: /observability_pipelines/reference/processing_language/
 [6]: /account_management/billing/usage_attribution/
-[7]: https://vector.dev/docs/reference/vrl/
+[7]: /observability_pipelines/reference/transforms/#remap
 [8]: /account_management/billing/custom_metrics/?tab=countrategauge
 [9]: /observability_pipelines/reference/transforms/#tagcardinalitylimit

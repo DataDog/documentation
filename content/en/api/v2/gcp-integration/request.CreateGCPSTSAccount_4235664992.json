@@ -2,6 +2,7 @@
   "data": {
     "attributes": {
       "is_cspm_enabled": true,
+      "resource_collection_enabled": true,
       "client_email": "252bf553ef04b351@test-project.iam.gserviceaccount.com",
       "host_filters": []
     },

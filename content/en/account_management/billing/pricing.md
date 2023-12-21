@@ -54,7 +54,7 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 ## Network Performance Monitoring
 
 * Datadog records the number of **Network Performance Monitoring** (NPM) hosts you are concurrently monitoring with the Datadog NPM service once per hour.
-  * These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the eighth-highest measurement.
+  * These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the eighth highest measurement.
 * Additionally, Datadog measures the total number of flows used by all NPM hosts per month. A **flow** is a record of traffic sent and received between a source (IP:Port) and destination (IP:Port), as measured over a five-minute time period.
 
 ## Real User Monitoring
@@ -66,7 +66,7 @@ You can put controls in place for both Indexed and Ingested span volumes. For mo
 ## Continuous Profiler
 
 * Datadog records the number of unique Continuous Profiler hosts you are concurrently monitoring with the Datadog Continuous Profiler service once per hour.
-  * These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth-highest measurement (eighth-highest only in February).
+  * These hourly measurements are ordered from highest to lowest at the end of the month, and Datadog charges based on the ninth highest measurement. The month of February is an exception and Datadog charges based on the eighth highest measurement.
   * Each host is allowed up to four profiled containers for free. Containers over this are priced at $2 per container.
     **Note**: This allotment is aggregated across all hosts so if you have four containers on average across all your hosts, you are not charged as if you have more on a host-by-host basis.
 * Datadog measures the total number of containers that are being profiled. A container is a self-contained operating environment that includes application software and limited operating system libraries and settings. Once every five minutes, Datadog records the number of unique containers you are monitoring in the Datadog Continuous Profiler service. Datadog charges monthly based on the fractional hours of monitored containers. For Continuous Profiler, Datadog only counts the containers that are running the Continuous Profiler service towards the total monitored container count.

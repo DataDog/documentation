@@ -25392,10 +25392,27 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-given:
+        aws_account:
+          parameters:
+          - name: body
+            origin: request
+            value: "{\n  \"app_service_plan_filters\": \"key:value,filter:example\",\n
+              \ \"automute\": true,\n  \"client_id\": \"{{ uuid }}\",\n  \"client_secret\":
+              \"testingx./Sw*g/Y33t..R1cH+hScMDt\",\n  \"container_app_filters\":
+              \"key:value,filter:example\",\n  \"cspm_enabled\": true,\n  \"custom_metrics_enabled\":
+              true,\n  \"errors\": [\"*\"],\n  \"host_filters\": \"key:value,filter:example\",\n
+              \ \"new_client_id\": \"{{ uuid }}\",\n  \"new_tenant_name\": \"{{ uuid
+              }}\",\n  \"resource_collection_enabled\": true,\n  \"tenant_name\":
+              \"{{ uuid }}\"\n}"
+          step: there is a valid "azure_account" in the system
       x-menu-order: 2
       x-undo:
         operationId: DeleteAzureIntegration
-        parameters: []
+        parameters:
+        - name: body
+          origin: request
+          template: "{\n  \"client_id\": \"{{client_id}}\",\n  \"tenant_name\": \"{{tenant_name}}\"\n}"
         type: unsafe
     put:
       description: 'Update a Datadog-Azure integration. Requires an existing `tenant_name`
@@ -25596,10 +25613,30 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-given:
+        gcp_account:
+          parameters:
+          - name: body
+            origin: request
+            value: "{\n  \"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\n
+              \ \"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\n  \"client_email\":
+              \"{{unique_hash}}@example.com\",\n  \"client_id\": \"{{ timestamp(\"now\")
+              }}{{ timestamp(\"now\") }}0\",\n  \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL\",\n
+              \ \"host_filters\": \"key:value,filter:example\",\n  \"is_cspm_enabled\":
+              true,\n  \"is_security_command_center_enabled\": true,\n  \"private_key\":
+              \"private_key\",\n  \"private_key_id\": \"123456789abcdefghi123456789abcdefghijklm\",\n
+              \ \"project_id\": \"datadog-apitest\",\n  \"resource_collection_enabled\":
+              true,\n  \"token_uri\": \"https://accounts.google.com/o/oauth2/token\",\n
+              \ \"type\": \"service_account\"\n}"
+          step: there is a valid "gcp_account" in the system
       x-menu-order: 2
       x-undo:
         operationId: DeleteGCPIntegration
-        parameters: []
+        parameters:
+        - name: body
+          origin: request
+          template: '{"client_email": "{{ client_email }}", "client_id": "{{ client_id
+            }}", "project_id": "{{ project_id }}"}'
         type: unsafe
     put:
       deprecated: true
