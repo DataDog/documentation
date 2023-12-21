@@ -7,7 +7,7 @@ further_reading:
 - link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
   tag: "Documentation"
   text: "Setting up container image vulnerabilities"
-- link: "/security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities"
+- link: "/security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts"
   tag: "Documentation"
   text: "Setting up host vulnerabilities"
 - link: "/security/vulnerabilities/troubleshooting"

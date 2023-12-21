@@ -5,7 +5,7 @@ further_reading:
 - link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
   tag: "Documentation"
   text: "Setting up container image vulnerabilities"
-- link: "/security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities"
+- link: "/security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts"
   tag: "Documentation"
   text: "Setting up host vulnerabilities"
 - link: "https://www.datadoghq.com/blog/datadog-container-image-view/"
@@ -34,11 +34,24 @@ Ensure all the [prerequisites][5] are met for CSM Vulnerabilities:
 | [Helm Chart][6]            | v3.33.6 or later (Kubernetes only)      |
 | [containerd][7]              | v1.5.6 or later (Kubernetes and hosts only)|
 
-## Disk space requirements
+CSM Vulnerabilities is **not** available for the following environments:
+
+  - Windows
+  - AWS Fargate 
+  - CRI-O runtime
+
+## Error messages
+
+### Disk space requirements
 
 Ensure your free disk space is equal to the size of your largest container image. This space is needed for the Datadog Agent to scan the container image for vulnerabilities.
 
-## Uncompressed container image layers
+The resulting error appears as:
+```sh
+Error: failed to check current disk usage: not enough disk space to safely collect sbom, 192108482560 available, 1073741824000 required
+```
+
+### Uncompressed container image layers
 
 The SBOM scan only works with uncompressed container image layers. Certain Kubernetes distributions (such as AWS EKS, minikube, and kind), configure their container runtime to discard the uncompressed layers, causing the scan to fail.
 
@@ -57,16 +70,7 @@ The workaround for this issue is to set the configuration option `discard_unpack
     -  `datadog.agent.sbom_attempts`: Tracks sbom collection attempts by `source` and `type`.
     -  `datadog.agent.sbom_generation_duration`: Measures the time that it takes to generate SBOMs in seconds.
     -  `datadog.agent.sbom_errors`: Number of sbom failures by `source`, `type`, and `reason`.
--  `datadog.agent.export_size`: The size of the archive written on disk. 
-
-## Environments
-
-CSM Vulnerabilities is **not** available for the following environments:
-
-  - Windows
-  - AWS Fargate 
-  - CRI-O runtime
-
+    -  `datadog.agent.export_size`: The size of the archive written on disk. 
 
 ## Further Reading
 
