@@ -54,7 +54,7 @@ The [suppression list][3] provides a centralized and organized way for you to ma
 
 Migrate your legacy suppression queries to suppression rules. To see a list of rules using the legacy suppression and to migrate them:
 1. Navigate to the [detection rules list][4].
-1. Hover over the **xx rules** in the yellow banner to see the list of rules that need to be migrated.
+1. Hover over **xx rules** in the yellow banner to see the list of rules that need to be migrated.
     {{< img src="security/security_monitoring/suppressions/migration.png" alt="A yellow banner saying that 28 rules with suppression queries need to be migrated to suppression rules" style="width:90%;" >}}
 1. Click on a rule.
 1. In the detection rule editor, scroll down to the **Suppression Queries** section. Click **Move Your Suppression Queries** in the yellow banner to migrate the suppression queries to suppression rules.
