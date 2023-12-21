@@ -2620,6 +2620,11 @@ main:
     parent: static_analysis
     identifier: static_analysis_github_actions
     weight: 103
+  - name: GitHub Source Code Management
+    url: static_analysis/github_source_code_management
+    parent: static_analysis
+    identifier: static_analysis_github_scm
+    weight: 103
   - name: Quality Gates
     url: quality_gates/
     pre: ci
