@@ -78,7 +78,7 @@ based on the current pipeline context. By default, the command succeeds.
 By default, the command succeeds.
 - `--timeout`: The command stops its execution after the specified timeout in seconds. The default timeout is 10 minutes.
 The command typically completes within a few minutes, but it could take longer.
-- `--no-wait`: Skips the default time that the command waits for the events (e.g. tests, static analysis violations) to arrive to Datadog. The default wait time makes sure that the events are queryable in Datadog before the rules are executed, avoiding incorrect evaluations. If, in your pipeline, the job containing the `datadog-ci gate evaluate` command is called several minutes after the related events are sent to Datadog, you can opt to skip this waiting time by specifying the `--no-wait` flag. However, if used incorrectly, this flag may result in inaccurate rule evaluations.
+- `--no-wait`: Skips the default time that the command waits for the events (for example, tests, static analysis violations) to arrive to Datadog. The default wait time makes sure that the events are queryable in Datadog before the rules are executed, avoiding incorrect evaluations. If, in your pipeline, the job containing the `datadog-ci gate evaluate` command is called several minutes after the related events are sent to Datadog, you can opt to skip this waiting time by specifying the `--no-wait` flag. However, if used incorrectly, this flag may result in inaccurate rule evaluations.
 
 Add [custom scopes](#custom-scope) to the command by using the `--scope` option one or more times:
 
