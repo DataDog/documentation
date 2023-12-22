@@ -47,7 +47,7 @@ Using Static Analysis provides organizations with the following benefits:
 
 ### Source code management
 {{< whatsnext desc="During code reviews, source code management (SCM) integrations check for Static Analysis violations in pull requests for repos that have at least one ruleset applied. Violations are flagged with a comment on the relevant line of code. Certain violations also include suggested changes that can be applied directly in the UI of the SCM tool." >}}
-    {{< nextlink href="continuous_delivery/static_analysis/github_pull_requests" >}}GitHub Pull Requests{{< /nextlink >}}
+    {{< nextlink href="static_analysis/github_pull_requests" >}}GitHub Pull Requests{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### IDEs
