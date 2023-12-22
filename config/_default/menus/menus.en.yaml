@@ -1028,16 +1028,21 @@ main:
     parent: infrastructure_livecontainers
     identifier: infrastructure_livecontainers_configuration
     weight: 301
+  - name: Container Images View
+    url: infrastructure/containers/container_images
+    parent: infrastructure_livecontainers
+    identifier: infrastructure_livecontainers_container_images
+    weight: 302
   - name: Orchestrator Explorer
     url: infrastructure/containers/orchestrator_explorer
     parent: infrastructure_livecontainers
     identifier: infrastructure_livecontainers_explorer
-    weight: 302
+    weight: 303
   - name: Kubernetes Resource Utilization
     url: infrastructure/containers/kubernetes_resource_utilization
     parent: infrastructure_livecontainers
     identifier: infrastructure_livecontainers_resource_utilization
-    weight: 303
+    weight: 304
   - name: Processes View
     url: infrastructure/process/
     parent: infrastructure
