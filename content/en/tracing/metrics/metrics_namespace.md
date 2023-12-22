@@ -50,7 +50,7 @@ With the following definitions:
 
 `<TAGS>`
 : Trace metrics tags, possible tags are: `env`, `service`, `version`, `resource`, `http.status_code`, `http.status_class`, Datadog Agent tags (including the host and second primary tag). 
-**Note:** Tags set on spans are not available as tags on traces metrics.
+**Note:** Other tags set on spans are not available as tags on traces metrics.
 
 ## Metric suffix
 
