@@ -31,7 +31,7 @@ Ensure all the [prerequisites][5] are met for CSM Vulnerabilities:
 
 | Component                | Version/Requirement                     |
 | ------------------------ | ----------------------------------------|
-| [Helm Chart][6]            | v3.33.6 or later (Kubernetes only)      |
+| [Helm Chart][6]            | v3.49.6 or later (Kubernetes only)      |
 | [containerd][7]              | v1.5.6 or later (Kubernetes and hosts only)|
 
 CSM Vulnerabilities is **not** available for the following environments:
