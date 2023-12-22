@@ -3053,42 +3053,47 @@ main:
     url: logs/explorer/search_syntax/
     parent: log_explorer
     weight: 503
+  - name: Advanced Search
+    url: logs/explorer/advanced_search
+    parent: log_explorer
+    identifier: log_explorer_advanced_search
+    weight: 504
   - name: Facets
     url: logs/explorer/facets/
     parent: log_explorer
-    weight: 504
+    weight: 505
   - name: Analytics
     url: logs/explorer/analytics/
     parent: log_explorer
-    weight: 505
+    weight: 506
   - name: Patterns
     url: logs/explorer/analytics/patterns/
     parent: log_explorer
-    weight: 506
+    weight: 507
   - name: Transactions
     url: logs/explorer/analytics/transactions/
     parent: log_explorer
-    weight: 507
+    weight: 508
   - name: Visualize
     url: logs/explorer/visualize/
     parent: log_explorer
-    weight: 508
+    weight: 509
   - name: Log Side Panel
     url: logs/explorer/side_panel/
     parent: log_explorer
-    weight: 509
+    weight: 510
   - name: Export
     url: logs/explorer/export/
     parent: log_explorer
-    weight: 510
+    weight: 511
   - name: Watchdog Insights for Logs
     url: logs/explorer/watchdog_insights/
     parent: log_explorer
-    weight: 511
+    weight: 512
   - name: Saved Views
     url: logs/explorer/saved_views/
     parent: log_explorer
-    weight: 512
+    weight: 513
   - name: Error Tracking
     url: logs/error_tracking/
     parent: log_management
