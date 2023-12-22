@@ -35,7 +35,7 @@ To register endpoints:
 3. Select the API(s) you want to group the endpoints into.
 4. Click **Apply**.
 
-{{< img src="tracing/api_catalog/api-catalog-register.png" alt="Select endpoints in API Catalog and click Register Endpoints button." style="width:100%;" >}}
+{{< img src="tracing/api_catalog/api-catalog-register.png" alt="Select endpoints in API Catalog and click Register Endpoints button." style="width:65%;" >}}
 
 After endpoints are registered, Datadog starts collecting a new endpoint metric for better monitoring capabilities. It might take a few minutes for the data to display if you try to create a new monitor.
 
