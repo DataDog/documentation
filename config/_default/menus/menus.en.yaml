@@ -2998,10 +2998,10 @@ main:
     url: logs/explorer/search_syntax/
     parent: log_explorer
     weight: 503
-  - name: Advanced Filtering
-    url: logs/explorer/advanced_filtering/
+  - name: Advanced Search
+    url: logs/explorer/advanced_search
     parent: log_explorer
-    identifier: log_explorer_advanced_filtering
+    identifier: log_explorer_advanced_search
     weight: 504
   - name: Facets
     url: logs/explorer/facets/

@@ -1,5 +1,5 @@
 ---
-title: Advanced Filtering
+title: Advanced Search
 kind: documentation
 disable_toc: false
 further_reading:
@@ -32,7 +32,7 @@ To add a subquery filter:
 
 This introduces new elements to the query editor:
 
-{{< img src="logs/explorer/advanced_filtering/subquery.png" alt="The subquery editor under the main search query" style="width:95%;" >}}
+{{< img src="logs/explorer/advanced_search/subquery.png" alt="The subquery editor under the main search query" style="width:95%;" >}}
 
 1. In the **where** field, use the dropdown menu to select the attribute you want to correlate on. The available attributes are from the logs returned by your main query.
 1. Define your subquery filter in the **from** field.
@@ -57,7 +57,7 @@ In this example, you are only interested in logs for orders that did not eventua
 1. Define a subquery for `status:success` logs.
 1. Select the **NOT IN** operator to exclude orders from the subquery result set.
 
-{{< img src="logs/explorer/advanced_filtering/filter_outdated_example.png" alt="The query editor showing the setup for filtering out orders that ended up succeeding" style="width:100%;" >}}
+{{< img src="logs/explorer/advanced_search/filter_outdated_example.png" alt="The query editor showing the setup for filtering out orders that ended up succeeding" style="width:100%;" >}}
 
 #### Correlate across different log sources
 
@@ -69,7 +69,7 @@ You are investigating an ongoing attack and observe there is a significant incre
 
 In this example, use `service:network_directory` as your main query, and then define a subquery filter for your `device-manager` service to filter out results from recognized devices.
 
-{{< img src="logs/explorer/advanced_filtering/narrow_dataset_example.png" alt="The query editor showing the setup for filtering out the results for recognized devices" style="width:100%;" >}}
+{{< img src="logs/explorer/advanced_search/narrow_dataset_example.png" alt="The query editor showing the setup for filtering out the results for recognized devices" style="width:100%;" >}}
 
 ## Filter logs based on Reference Tables
 
@@ -79,7 +79,7 @@ Reference Tables allow you to combine metadata with logs, providing more informa
 
 To apply a query filter with Reference Tables, click on the `+ Add` button next to the query editor and select **Reference Table**. In the following example, the Reference Table query filter is used to search all recent logs that include a malicious IP address from a threat intel reference table:
 
-{{< img src="logs/explorer/advanced_filtering/reference_tables_logs.png" alt="The Datadog log explorer with reference table search options highlighted" border="true" popup="true" style="width:100%;" >}}
+{{< img src="logs/explorer/advanced_search/reference_tables_logs.png" alt="The Datadog log explorer with reference table search options highlighted" border="true" popup="true" style="width:100%;" >}}
 
 ## Further reading
 
