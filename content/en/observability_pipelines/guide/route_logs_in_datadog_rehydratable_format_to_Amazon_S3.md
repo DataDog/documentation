@@ -290,7 +290,7 @@ See [Rehydrating from Archives][10] for instructions on how to rehydrate your ar
 [4]: https://app.datadoghq.com/logs/pipelines/log-forwarding
 [5]: /logs/log_configuration/archives/#advanced-settings
 [6]: /logs/log_configuration/archives
-[7]: /observability_pipelines/setup/datadog#installing-the-observability-pipelines-worker
+[7]: /observability_pipelines/setup/datadog_with_archiving#install-the-observability-pipelines-worker
 [8]: https://app.datadoghq.com/observability-pipelines/
 [9]: /observability_pipelines/reference/sinks/#datadogarchivessink
 [10]: /logs/log_configuration/rehydrating/

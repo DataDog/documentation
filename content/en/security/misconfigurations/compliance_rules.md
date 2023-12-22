@@ -115,4 +115,4 @@ The rule deprecation process is as follows:
 [20]: /security/misconfigurations/custom_rules/
 [21]: /security/notifications/rules/
 [22]: /security/misconfigurations/signals_explorer/
-[23]: /security/detection_rules/#rule-and-generated-signal-options
+[23]: /security/detection_rules/#clone-a-rule

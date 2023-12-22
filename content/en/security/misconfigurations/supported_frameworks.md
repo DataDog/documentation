@@ -24,7 +24,7 @@ CSM Misconfigurations comes with more than 400 out-of-the-box compliance rules t
 | Framework                                   | Framework Tag     | Rule Type      |
 |---------------------------------------------|-------------------|----------------|
 | [CIS AWS Foundations Benchmark v1.5.0*][2]  | `cis-aws`         | Cloud          |
-| [CIS Azure Foundations Benchmark v1.3.0][3] | `cis-azure`       | Cloud          |
+| [CIS Azure Foundations Benchmark v2.0.0][3] | `cis-azure`       | Cloud          |
 | [CIS GCP Foundations Benchmark v1.3.0][22]  | `cis-gcp`         | Cloud          |
 | [CIS Docker Benchmark v1.2.0][4]            | `cis-docker `     | Infrastructure |
 | [CIS Kubernetes Benchmark v1.5.1**][5]      | `cis-kubernetes`  | Infrastructure |

@@ -28,6 +28,10 @@ This guide walks you through deploying the Worker in your common tools cluster a
 
 {{< img src="observability_pipelines/setup/opw-dd-pipeline.png" alt="A diagram of a couple of workload clusters sending their data through the Observability Pipelines aggregator." >}}
 
+## Deployment Modes
+
+{{% op-deployment-modes %}}
+
 ## Assumptions
 * You are already using Datadog and want to use Observability Pipelines.
 * You have administrative access to the clusters where the Observability Pipelines Worker is going to be deployed, as well as to the workloads that are going to be aggregated.
@@ -559,6 +563,10 @@ kubectl get svc opw-observability-pipelines-worker
 For Terraform installs, the `lb-dns` output provides the necessary value. For CloudFormation installs, the `LoadBalancerDNS` CloudFormation output has the correct URL to use.
 
 At this point, your observability data should be going to the Worker and is available for data processing. The next section goes through what processing is included by default and the additional options that are available.
+
+## Updating deployment modes
+
+{{% op-updating-deployment-modes %}}
 
 ## Working with data
 The sample configuration provided has example processing steps that demonstrate Observability Pipelines tools and ensures that data sent to Datadog is in the correct format.

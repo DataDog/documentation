@@ -15,7 +15,7 @@ further_reading:
 - link: "/serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code"
   tag: "Documentation"
   text: "Learn about Serverless Monitoring"
-- link: "/continuous_integration/tests/developer_workflows/"
+- link: "/tests/developer_workflows/"
   tag: "Documentation"
   text: "Learn about CI Visibility"
 - link: "/security/application_security/"
@@ -244,13 +244,15 @@ If you are using a host, configure your application with `DD_GIT_*` environment 
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
+<div class="alert alert-info">The Ruby client library version 1.6.0 or later is required.</div>
+
 #### Containers
 
 If you are using Docker containers, you have two options: using Docker or configuring your application with the `DD_TAGS` environment variable.
 
 ##### Option 1: Docker
 
-{{% sci-docker %}}
+{{% sci-docker-ddtags %}}
 
 ##### Option 2: `DD_TAGS` Environment Variable
 
@@ -361,7 +363,7 @@ Setting up the GitHub integration also allows you to see inline code snippets in
 [103]: /logs/error_tracking/backend/?tab=serilog#setup
 [104]: /integrations/guide/source-code-integration/?tab=continuousprofiler#links-to-git-providers
 [105]: /serverless/aws_lambda/configuration/?tab=datadogcli#link-errors-to-your-source-code
-[106]: /continuous_integration/tests/developer_workflows/#open-tests-in-github-and-your-ide
+[106]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
 [107]: /security/application_security/
 
 {{% /tab %}}
@@ -442,7 +444,7 @@ You can see links from errors in your Lambda functions' associated stack traces 
 2. Click on a Lambda function and click the **Open Trace** button for an invocation with an associated stack trace.
 3. Click **View Code** to open the error in its source code repository.
 
-If you're using the GitHub integration, click **Connect to preview** on error frames. You can see inline code snippets directly in the Lambda function's stack trace. 
+If you're using the GitHub integration, click **Connect to preview** on error frames. You can see inline code snippets directly in the Lambda function's stack trace.
 
 {{< img src="integrations/guide/source_code_integration/serverless-aws-function-errors.mp4" alt="Link to GitHub from Serverless Monitoring" video="true" >}}
 
@@ -461,7 +463,7 @@ You can see links from failed test runs to their source repository in **CI Visib
 For more information, see [Enhancing Developer Workflows with Datadog][102].
 
 [101]: https://app.datadoghq.com/ci/test-runs
-[102]: /continuous_integration/tests/developer_workflows#open-tests-in-github-and-your-ide
+[102]: /tests/developer_workflows/#open-tests-in-github-and-your-ide
 
 {{% /tab %}}
 {{% tab "Application Security Monitoring" %}}
@@ -472,7 +474,7 @@ You can see links from errors in your security signals' associated stack traces 
 2. Scroll down to the **Traces** section on the **Related Signals** tab and click on an associated stack trace.
 3. Click **View Code** to open the error in its source code repository.
 
-If you're using the GitHub integration, click **Connect to preview** on error frames. You can see inline code snippets directly in the security signal's stack trace. 
+If you're using the GitHub integration, click **Connect to preview** on error frames. You can see inline code snippets directly in the security signal's stack trace.
 
 {{< img src="integrations/guide/source_code_integration/asm-signal-trace-blur.png" alt="Link to GitHub from Application Security Monitoring" style="width:100%;">}}
 

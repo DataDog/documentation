@@ -8,9 +8,6 @@ further_reading:
 - link: "/security/cloud_security_management/setup"
   tag: "Documentation"
   text: "Setting Up Cloud Security Management"
-- link: "https://www.datadoghq.com/blog/mitigate-identity-risks-and-infrastructure-vulnerabilities-with-datadog/"
-  tag: "Blog"
-  text: "Mitigate identity risks and infrastructure vulnerabilities with Datadog Cloud Security Management"
 - link: "https://www.datadoghq.com/blog/datadog-ciem/"
   tag: "Blog"
   text: "Find and remediate identity risks with Datadog CIEM"
@@ -36,7 +33,7 @@ Review your organization's active identity risks on the [Identity Risks Explorer
 
 CSM Identity Risk detections include users, roles, groups, policies, EC2 instances, and Lambda functions.
 
-{{< img src="security/identity_risks/identity_risks_explorer_2.png" alt="CSM Identity Risks Explorers page" width="100%">}}
+{{< img src="security/identity_risks/identity_risks_explorer_3.png" alt="CSM Identity Risks Explorers page" width="100%">}}
 
 ## Remediate identity risks
 
