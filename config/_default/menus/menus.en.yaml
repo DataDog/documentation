@@ -2620,7 +2620,7 @@ main:
     parent: static_analysis
     identifier: static_analysis_github_actions
     weight: 103
-  - name: GitHub Source Code Management
+  - name: GitHub Pull Requests
     url: static_analysis/github_source_code_management
     parent: static_analysis
     identifier: static_analysis_github_scm
