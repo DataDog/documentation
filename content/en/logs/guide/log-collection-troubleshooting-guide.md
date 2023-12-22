@@ -79,7 +79,7 @@ If the Agent does not have the correct permissions, you might see one of the fol
 - Access is denied.
 - Could not find any file matching pattern `<path/to/filename>`, check that all its subdirectories are executable.
 
-To fix the error, give the Datadog Agent user read, write, and execute permissions to the log file and subdirectories.
+To fix the error, give the Datadog Agent user read and execute permissions to the log file and subdirectories.
 
 {{< tabs >}}
 {{% tab "Linux" %}}

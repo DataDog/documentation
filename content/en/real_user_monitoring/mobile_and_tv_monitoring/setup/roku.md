@@ -62,7 +62,7 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
 
 ### Specify application details in Datadog
 
-1. Navigate to [**UX Monitoring** > **RUM Applications** > **New Application**][3].
+1. Navigate to [**UX Monitoring** > **Setup & Configurations** > **New Application**][3].
 2. Select **Roku** as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Roku Data Collected][4].
 

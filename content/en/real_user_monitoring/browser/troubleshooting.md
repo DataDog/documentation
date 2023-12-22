@@ -5,7 +5,7 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
   tag: 'Blog'
   text: 'Real User Monitoring'
-- link: '/real_user_monitoring/faq/content_security_policy/'
+- link: '/integrations/content_security_policy_logs/'
   tag: 'Documentation'
   text: 'Content Security Policy'
 ---
@@ -102,13 +102,15 @@ If an event or a request goes beyond any of the following limitations, it is rej
 | Maximum event size                       | 256 KB       |
 | Maximum intake payload size              | 5 MB         |
 
-## Customer data exceeds the recommended 3KiB warning
+## "Customer data exceeds the recommended threshold" warning
 
 The RUM browser SDK allows you to set [global context][9], [user information][10] and [feature flags][11] which are then included with the collected events.
 
 To minimize the user bandwidth impact, the RUM browser SDK throttles the data sent to the Datadog intake. However, sending large volumes of data can still impact the performance for users on slow internet connections.
 
 For the best user experience, Datadog recommends keeping the size of the global context, user information, and feature flags below 3KiB. If the data exceeds this limit, a warning is displayed: `The data exceeds the recommended 3KiB threshold.`
+
+Since v5.3.0, the RUM Browser SDK supports data compression via the `compressIntakeRequest` [initialization parameter][12]. When enabled, this recommended limit is extended from 3KiB to 16KiB.
 
 ## Cross origin read blocking warning
 
@@ -124,10 +126,11 @@ The warning is shown because the intake returns a non-empty JSON object. This be
 [2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md
 [3]: /real_user_monitoring/browser/#npm
 [4]: /real_user_monitoring/guide/proxy-rum-data/
-[5]: /real_user_monitoring/faq/content_security_policy/
+[5]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
 [6]: /real_user_monitoring/browser/data_collected/?tab=session
 [7]: https://bugs.chromium.org/p/chromium/issues/detail?id=1255707
 [8]: /real_user_monitoring/guide/sampling-browser-plans/
 [9]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
 [10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [11]: /real_user_monitoring/guide/setup-feature-flag-data-collection/?tab=browser
+[12]: /real_user_monitoring/browser/#initialization-parameters

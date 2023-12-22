@@ -26,6 +26,8 @@ further_reading:
   - GitLab >= 14.1 (self-hosted)
   - GitLab >= 13.7.0 (self-hosted) by enabling the `datadog_ci_integration` feature flag
 
+- **Running pipelines**: View pipeline executions that are running
+
 - **Partial pipelines**: View [partially retried][11] and downstream pipeline executions
 
 - **Manual steps**: View manually triggered pipelines

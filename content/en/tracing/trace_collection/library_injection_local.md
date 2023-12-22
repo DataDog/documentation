@@ -9,12 +9,15 @@ aliases:
 
 ## Overview
 
-<div class="alert alert-info"><strong>Beta</strong>: You can enable APM when installing the Agent with  <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation</a>. Run a one-line install command to automatically enable APM and instrument all of your services on your Linux host, VM, or container.</div>
+<div class="alert alert-warning">Support for local library injection will be deprecated. To automatically instrument your application, you can use <a href="/tracing/trace_collection/single-step-apm">Single Step APM Instrumentation (Beta)</a> or <a href="/tracing/trace_collection/dd_libraries/">Datadog tracing libraries.</a></div>
 
-To instrument your application, you can:
-* Auto-instrument your application, as described on this page.
-* [Manually instrument your application][1].
-* [Auto-instrument your application from the Datadog UI][5] (beta).
+To automatically instrument your application, you can:
+
+- Use automatic instrumentation with local library injection, as described on this page.
+- Use [Single Step Instrumentation][6].
+- Use [Datadog libraries][7].
+
+For more information, see [Automatic Instrumentation][5].
 
 How to inject the library locally, without touching the application code at all, varies depending on where and how your Agent and application are installed. Select the scenario that represents your environment:
 
@@ -1106,4 +1109,6 @@ For example, you can turn on [Application Security Monitoring][3] or [Continuous
 [2]: /tracing/trace_collection/library_config/
 [3]: /security/application_security/enabling/java/?tab=kubernetes#get-started
 [4]: /profiler/enabling/java/?tab=environmentvariables#installation
-[5]: /tracing/trace_collection/library_injection_remote/
+[5]: /tracing/trace_collection/automatic_instrumentation/
+[6]: /tracing/trace_collection/single-step-apm
+[7]: /tracing/trace_collection/dd_libraries/
