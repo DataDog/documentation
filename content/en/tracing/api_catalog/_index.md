@@ -9,6 +9,12 @@ further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
   text: "Datadog Service Catalog"
+- link: "/synthetics/api_tests/http_tests/"
+  tag: "Documentation"
+  text: "Synthetic API Tests"
+- link: "/security/application_security/how-appsec-works/#api-security"
+  tag: "Documentation"
+  text: "ASM API Security"
 ---
 
 {{< site-region region="gov,ap1" >}}
@@ -45,7 +51,7 @@ API Catalog combines data from across Datadog to provide opinionated workflows s
 
 ## Getting started
 
-If you're already monitoring the performance of your services using APM, API Catalog automatically detects the APIs and endpoints in your instrumented services. 
+If you're already monitoring the performance of your services using APM, API Catalog automatically detects endpoints in your instrumented services. 
 
 See [Setting up API Catalog][3] for more information, including how to add APIs and endpoints for services that aren't auto-discovered.
 

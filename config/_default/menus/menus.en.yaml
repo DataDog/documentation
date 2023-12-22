@@ -2078,21 +2078,26 @@ main:
     identifier: api_catalog
     parent: tracing
     weight: 10
-  - name: Setting Up API Catalog
-    url: /tracing/api_catalog/get_started/
-    identifier: api_catalog_getstart
-    parent: api_catalog
-    weight: 1001
   - name: Exploring and Cataloging APIs
     url: /tracing/api_catalog/explore_and_catalog_apis/
     identifier: api_catalog_explore
     parent: api_catalog
-    weight: 1002
+    weight: 1001
   - name: Monitoring APIs
     url: /tracing/api_catalog/monitor_apis/
     identifier: api_catalog_monitor
     parent: api_catalog
+    weight: 1002
+  - name: Adding Entries to API Catalog
+    url: /tracing/api_catalog/get_started/
+    identifier: api_catalog_entries
+    parent: api_catalog
     weight: 1003
+  - name: Troubleshooting
+    url: /tracing/api_catalog/troubleshooting/
+    identifier: api_catalog_troubleshoot
+    parent: api_catalog
+    weight: 1004
   - name: Dynamic Instrumentation
     url: dynamic_instrumentation/
     identifier: dyninst

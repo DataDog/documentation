@@ -1,5 +1,5 @@
 ---
-title: Setting Up API Catalog
+title: Adding Entries to API Catalog
 kind: documentation
 is_beta: true
 further_reading:
@@ -20,40 +20,67 @@ further_reading:
 
 ## Overview
 
-API Catalog uses APM instrumentation for distributed tracing to automatically discover endpoints in all environments in your Datadog organization. Endpoints for instrumented services and supported libraries are automatically populated into API Explorer.
+API Catalog uses APM instrumentation for distributed tracing to automatically discover endpoints in all environments on your Datadog organization. For instrumented services and supported libraries, endpoints are automatically populated into API Catalog.
 
-## Setting up
+Register auto discovered endpoints, or upload an openAPI file to benefit the full value of the API Catalog.
 
-You can enable the API Catalog in a Datadog organization that is already consuming APM data without any additional setup. APM-instrumented services and supported libraries are automatically discovered. 
+## Register auto-discovered endpoints
 
-If you can't find one of your APIs or endpoints in the API Catalog, make sure it's instrumented. If necessary, follow the instructions on the [Setup page][1] to make a service discoverable.
+Choose endpoints that you would like to move into a managed process, and hit the “register endpoints” button.
 
-{{< img src="tracing/api_catalog/api-catalog-setup.png" alt="API Catalog Setup page showing instructions for instrumenting a Java service" style="width:80%;" >}}
+{{< img src="tracing/api_catalog/api-catalog-register.png" alt="Select endpoints in API Catalog and click Register Endpoints button." style="width:100%;" >}}
 
-Alternatively, you can add an API to the API Catalog by importing its OpenAPI definition. This approach is necessary if you don't want to instrument the API or if it's written in a framework that doesn't support instrumentation and auto-detection. To import the OpenAPI definition YAML or JSON file, click **Add an  API** on the [Catalog page][4]. 
+Once endpoints are registered, Datadog will start collecting a new endpoint metric for better monitoring capabilities. It might take a few minutes for the data to display on the **New Monitor** page.
 
-{{< img src="tracing/api_catalog/api-catalog-setup-import.png" alt="API Catalog Setup page for importing an OpenAPI definition file." style="width:100%;" >}}
+Auto discovery will not be available for some frameworks. Check compatibility status in the ‘learn more’ button on the app. If you still cannot find your endpoints, try uploading a definition file containing them, Datadog will automatically start to collect data on those endpoint definitions once uploaded.
 
-After you've set up the API Catalog with your APIs and endpoints, start exploring and adding catalog metadata on the [API Catalog Explorer page][5].
+## Upload openAPI file
 
-## Key terminology
+Upload API definitions that you already own to quickly understand what endpoints are seeing traffic, and what don’t, and to get performance and deployment information on top of your API definitions.
 
-API
-: A set of protocols and tools that allow two applications to communicate.
+Supported formats are openAPI 2 and 3.
 
-API endpoint
-: The address of a resource (URL) of a server or a service that implements the set of rules defined in the API, often through an HTTP, RESTful API interface. The API endpoint is responsible for making the API call response.<br /><br/>
-The API Catalog displays API endpoints as the HTTP method (for example, `GET`), the URL path (for example, `/payment/{shop_id}/purchase`), and the name of the service this resource serves (for example, `Payments`).<br /><br/>
-The API Catalog in **beta** supports only **HTTP** endpoints. 
+Datadog support custom openAPI tags to help manage metadata:
+dd_tags
+dd_team
 
-Public APIs
-: Customer-facing API endpoints that are accessible from the internet.
+```yaml
+openapi: 3.0.2
+info:
+ title: API Name
+ description: API Description
+ version: 1.0.0
+x-datadog:
+ teamHandle: dd-team
+paths:
+ /api/v2/customers/{id}:
+   get:
+     summary: get customer information
+     operationId: getCustomerInfo
+     parameters:
+       - in: path
+         name: id
+     responses:
+       '200':
+         description: Successful operation
+         content:
+           application/vnd.api+json:
+             schema:
+               type: object
+               properties:
+                 data:
+                   type: array
+                   description: Contains all customer information
+                   items:
+                     $ref: '#/components/schemas/customerInfo'
+       '400':
+         description: Invalid arguments
+       '401':
+         description: Unauthorized operation
+       '500':
+         description: An internal server error
+```
 
-Private APIs
-: Also called internal APIs. These are only for internal use in an organization and are used mainly for backend service communication. These are the most common type of APIs. 
-
-Partner APIs
-: Also called third-party APIs. These are another organization's public endpoints that your organization uses to provide your services (for example, Stripe, Google, and Facebook).
 
 ## Further reading
 

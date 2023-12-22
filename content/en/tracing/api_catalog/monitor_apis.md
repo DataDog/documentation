@@ -1,5 +1,5 @@
 ---
-title: Monitoring your APIs
+title: Monitoring APIs
 kind: documentation
 is_beta: true
 further_reading:
@@ -19,7 +19,7 @@ further_reading:
 
 ## Overview
 
-After you have set up your API Catalog with all your endpoints and assigned team ownership, you can start managing and improving them. Use the API Catalog to start activities such as:
+After you have [registered all your endpoints][1] and [assigned team ownership][2], you can start managing and improving them. Use the API Catalog to start activities such as:
 
  - Detecting and investigating APIs that are under-performing.
  - Creating alerts based on key performance metrics such as latency and error rate.
@@ -31,7 +31,7 @@ After you have set up your API Catalog with all your endpoints and assigned team
 
 When exploring an endpoint, getting a higher resolution view of the API endpoint details is helpful.
 
-Use the filtering, sorting, and searching options in the [API Catalog Explorer][2] to find endpoints of interest.
+Use the filtering, sorting, and searching options in the API Catalog to find endpoints of interest.
 Click an endpoint to view its details page. Here you can see performance, errors, issues, deployments, monitors, ownership, a dependency map, and metadata information in one central location. From the details page, you can also add custom tags to the endpoint. You can also investigate the various types of telemetry using links to other areas of Datadog. 
 
 In the details page, you can:
@@ -73,7 +73,7 @@ Powered by Datadog [Application Security Management (ASM)][4], the **SECURITY SI
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/
-[2]: /tracing/api_catalog/explore_and_catalog_apis/
+[1]: /tracing/api_catalog/get_started/#register-auto-discovered-endpoints
+[2]: /tracing/api_catalog/explore_and_catalog_apis/#establishing-ownership
 [3]: /synthetics/api_tests/http_tests/
 [4]: /security/application_security/threats/

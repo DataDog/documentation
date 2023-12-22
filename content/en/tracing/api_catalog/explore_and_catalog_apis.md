@@ -1,5 +1,5 @@
 ---
-title: Exploring and cataloging your endpoints
+title: Exploring and Cataloging APIs
 kind: documentation
 is_beta: true
 further_reading:
@@ -12,7 +12,7 @@ further_reading:
 
 ## Exploring endpoints
 
-The [API Catalog Explorer][1] page shows all endpoints in all environments in your Datadog organization. The performance data shown for each endpoint is scoped to the environment and time frame you select. You can browse and ask questions by querying different properties and metrics for more precise results, and you can filter using facets and tags.
+The [API Catalog][1] shows all endpoints in all environments in your Datadog organization. The performance data shown for each endpoint is scoped to the environment and time frame you select. You can browse and ask questions by querying different properties and metrics for more precise results, and you can filter using facets and tags.
 
 In the table, click a header to sort by its column. For example, click **P99** to see endpoints with the highest 99th percentile for latency. Note that the **P99** column may not be displayed by default.
 
@@ -26,7 +26,7 @@ To scope the data shown in the table, specify an environment, another primary ta
 
 
 <!-- image TKTK -->
-### Classify APIs to express a feature or business logic
+### Classify endpoints with shared expectations
 
 In addition to tagging an endpoint from its details page, you can add tags to multiple endpoints at once. To do this, select multiple endpoint check boxes, and click **Edit Tags**.  Use these labels to describe business logic, importance, or other useful grouping information. Applying these labels can help you view and access groups of endpoints defined by your own criteria. This is helpful to create assets such as monitors and dashboards for endpoint groups with common characteristics.
 
@@ -46,11 +46,9 @@ When you add a tag, it appears in the list of facets beside the catalog. Click a
 
 ## Establishing ownership 
 
-The **Team** column on the Explorer page and each endpoint details page shows the name of the team that owns the service that the endpoint is associated with. If ownership hasn't been assigned, click the **Register Endpoints** dropdown and choose an owner to assign one.
+The **Team** column on the Explorer page and each endpoint details page shows the name of the team that owns the API that the endpoint is associated with. If ownership hasn't been assigned, click the **Register Endpoints** dropdown and choose an owner to assign one.
 
 You can see which team owns each endpoint, and click a team name to see more details. For example, you can see more information about the team and their dashboards, the on-call engineer, and how to reach them (email, Slack, PagerDuty) to resolve incidents involving a specific API endpoint.
-
-The ownership information--team, on-call information, communication details--is derived from the service definition supplied from the Service Catalog. The service owner owns all of the endpoints connected to the service.
 
 {{< img src="tracing/api_catalog/api-catalog-endpoint-details.png" alt="The team details panel in the endpoint details page, showing the name and communication information for the team that owns the endpoint" style="width:100%;" >}}
 
