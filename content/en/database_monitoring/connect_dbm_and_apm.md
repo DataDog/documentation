@@ -1,7 +1,7 @@
 ---
-title: Connect Database Monitoring and Traces
+title: Correlate Database Monitoring and Traces
 kind: documentation
-aliases: 
+aliases:
 - /database_monitoring/guide/connect_dbm_and_apm/
 further_reading:
   - link: 'https://www.datadoghq.com/blog/link-dbm-and-apm/'
@@ -180,6 +180,8 @@ public class Application {
     }
 }
 ```
+
+**Note**: Prepared statements are not supported in `full` mode, and all JDBC API calls that use prepared statements are automatically downgraded to `service` mode. Since most Java SQL libraries use prepared statements by default, this means that **most** Java applications are only able to use `service` mode.
 
 [1]: /tracing/trace_collection/dd_libraries/java/
 [2]: /tracing/trace_collection/compatibility/java/#data-store-compatibility
@@ -389,7 +391,7 @@ When viewing a Query Sample in Database Monitoring, if the associated trace has 
 
 {{< img src="database_monitoring/dbm_apm_service_page_db_host_list.png" alt="Visualize the downstream database hosts that your APM Services depend on from the Service Page.">}}
 
-On the APM Service Page, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors.
+On the APM page for a given service, view the direct downstream database dependencies of the service as identified by Database Monitoring. Quickly determine if any hosts have disproportionate load that may be caused by noisy neighbors. To view a service's page, click on the service in the [Service Catalog][26] to open a details panel, then click **View Service Page** in the panel.
 
 ### Identify potential optimizations using explain plans for database queries in traces
 
@@ -426,3 +428,4 @@ View historical performance of similar queries to those executed in your trace, 
 [23]: https://github.com/DataDog/dd-trace-java
 [24]: https://learn.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-overview
 [25]: https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set
+[26]: https://app.datadoghq.com/services

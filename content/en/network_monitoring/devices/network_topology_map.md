@@ -1,5 +1,5 @@
 ---
-title: Network Topology Map
+title: Network Device Topology Map
 kind: documentation
 is_beta: true
 further_reading:
@@ -15,13 +15,13 @@ further_reading:
 <div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-<div class="alert alert-warning">The Network Topology Map for Datadog Network Device Monitoring is in public beta.</div>
+<div class="alert alert-warning">The Network Device Topology Map for Datadog Network Device Monitoring is in public beta.</div>
 
 ## Overview
 
-The [Network Topology Map][2] provides an overview of your network's physical connections, so you can more easily identify issues in your devices and understand their upstream and downstream impacts. 
+The [Network Device Topology Map][2] provides an overview of your network's physical connections, so you can more easily identify issues in your devices and understand their upstream and downstream impacts.
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_search.mp4" alt="The network topology map, with vendor:cisco added to the search bar, and then the Filter nodes box filtered by nyc. A node is selected and the inspect option chosen, showing its connected nodes. One of the connected nodes is then selected, and the inspect option is selected again, displaying additional connected nodes" video="true" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_search.mp4" alt="The network device topology map, with vendor:cisco added to the search bar, and then the Filter nodes box filtered by nyc. A node is selected and the inspect option chosen, showing its connected nodes. One of the connected nodes is then selected, and the inspect option is selected again, displaying additional connected nodes" video="true" >}}
 
 ## Setup
 
@@ -31,13 +31,13 @@ The Datadog Agent version 7.46 and later automatically collects topology data. N
 
 1. Devices have LLDP (Link Layer Discovery Protocol) and/or CDP (Cisco Discovery Protocol) enabled with SNMP.
 2. Datadog Agent version 7.46 or later is installed.
-3. If you're using [device autodiscovery][3], enable `snmp_listeners.collect_topology: true` in the `datadog.yaml` file.
+3. If you're using [device autodiscovery][3], enable `snmp_listener.collect_topology: true` in the `datadog.yaml` file.
 
 ## Investigating devices
 
 In addition to providing an overview of your network's physical connections, you can investigate individual devices to understand their connections, flows, and overall status. Hovering over a device displays its overall status and key metrics. You can also click on a device to see the following options:
 
-{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_detail_menu.png" alt="The network topology map with a device selected, displaying information about the device as well as the options to Inspect, View device details, and view flow details" style="width:80%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_detail_menu.png" alt="The network device topology map with a device selected, displaying information about the device as well as the options to Inspect, View device details, and view flow details" style="width:80%;" >}}
 
 ### Inspect
 
@@ -47,7 +47,7 @@ Choose **Inspect** to see the device's interface connections. Click on any of th
 
 ### View device details
 
-Choose **View device details** to see information such as the device's IP address and tags, as well as data related to throughput, CPU, and memory. 
+Choose **View device details** to see information such as the device's IP address and tags, as well as data related to throughput, CPU, and memory.
 
 {{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_details_tab.png" alt="The View device details tab of an individual device" style="width:80%;" >}}
 
@@ -61,7 +61,7 @@ Choose **View flow details** to open the NetFlow tab filtered by the device's `@
 
 ### Troubleshooting
 
-If you don't see your device, verify that it's exposing LLDP and CDP data with the following commands:
+If you don't see links or connections to your devices, verify that they are exposing LLDP and CDP data with the following commands:
 
 ```yaml
 sudo -u dd-agent datadog-agent snmp walk <DEVICE_IP> 1.0.8802

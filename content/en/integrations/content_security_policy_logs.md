@@ -174,9 +174,9 @@ Depending on the `site` option used to initialize [Real User Monitoring][4] or [
 connect-src https://{{< region-param key="browser_sdk_endpoint_domain" >}}
 ```
 
-### Session Replay worker
+### Web Worker
 
-If you are using Session Replay, make sure to allow workers with `blob:` URI schemes by adding the following `worker-src` entry:
+If you are using Session Replay or the RUM [`compressIntakeRequests` initialization parameter][4], make sure to allow workers with `blob:` URI schemes by adding the following `worker-src` entry:
 
 ```txt
 worker-src blob:;

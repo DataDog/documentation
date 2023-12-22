@@ -36,9 +36,11 @@ The **Synthetic Tests** feature allows you to:
 
 The **View in VS Code** feature provides a link from Datadog directly to your source files. 
 
+The **Static Analysis** integration analyzes your code (locally) against predefined rules to detect and fix problems before you commit changes.
+
 ## Requirements
 
-- **A Datadog account**: The extension requires a Datadog account. If you're new to Datadog, go to the [Datadog website][2] to learn more about Datadog's observability tools and sign up for a free trial.
+- **A Datadog account**: The extension requires a Datadog account (except when using [Static Analysis][14] features). If you're new to Datadog, go to the [Datadog website][2] to learn more about Datadog's observability tools and sign up for a free trial.
 
 ## Setup
 
@@ -84,6 +86,24 @@ The **View in VS Code** feature provides a link from Datadog directly to your so
 
 <div class="alert alert-info">To use this feature, first configure <a href="/integrations/guide/source-code-integration/">source code integration</a> for your service.</div>
 
+## Static Analysis
+The Datadog extension runs [Static Analysis][14] rules on the source files you have open in your Workspace. The goal is to detect and fix problems such as maintainability issues, bugs, or security vulnerabilities in your code before you commit your changes. 
+
+Static Analysis supports scanning for many programming languages. For a complete list, see [Static Analysis Rules][15]. For file types belonging to supported languages, issues are shown in the source code editor with the VS Code inspection system, and suggested fixes can be applied directly:
+
+{{< img src="/developers/ide_integrations/vscode/static-analysis-issue.png" alt="A static analysis rule violation and recommended fix." style="width:100%;" >}}
+
+Additionally, all issues detected by this feature are listed in the standard **Problems** view.
+
+### Getting started
+When you start editing a source file supported by Static Analysis, the extension checks for `static-analysis.datadog.yml` at your source repository's root. It prompts you to create the file if necessary:
+
+{{< img src="/developers/ide_integrations/vscode/static-analysis-onboard.png" alt="A banner for onboarding." style="width:100%;" >}}
+
+Once the configuration file is created, the static analyzer runs automatically in the background.
+
+<div class="alert alert-info">The Static Analysis feature does not require a Datadog account, as source files are analyzed locally.</div>
+
 ## Feedback
 
 To share your feedback, email [team-ide-integration@datadoghq.com][9].
@@ -105,3 +125,5 @@ To share your feedback, email [team-ide-integration@datadoghq.com][9].
 [11]: /security/application_security/vulnerability_management/
 [12]: /continuous_integration/guides/flaky_test_management/
 [13]: /watchdog/insights
+[14]: /continuous_integration/static_analysis/?tab=githubactions
+[15]: /continuous_integration/static_analysis/rules/

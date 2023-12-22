@@ -47,9 +47,15 @@ Use [Reference Tables][2] to add multiple tags to cost data without creating mul
 For example, if you want to add information about which VPs, organizations, and business_units different AWS and Azure accounts fall under, you can create a table and map the tags. Similar to Alias tag keys, the rule stops executing for each resource after a first match is found. For example, if an `aws_member_account_id` is found, then the rule no longer attempts to find a `subscriptionid`.
 {{< img src="cloud_cost/tags_mapmultiple.png" alt="Add account metadata like vp, organization, and businessunit using reference tables for tag pipelines" >}}
 
+## Reserved tags
+You cannot add the tags `service`, `env`, `version`, and `host` in Tag Pipelines because they are part of [Unified service Tagging][3].
+
+To correlate metrics, traces, and logs, tag your underlying infrastructure with these tags and take advantage of Unified Service Tagging across Datadog.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/cost/tag-pipelines
 [2]: https://docs.datadoghq.com/integrations/guide/reference-tables/?tab=manualupload
+[3]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/

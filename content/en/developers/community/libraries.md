@@ -121,7 +121,6 @@ A Moogsoft [listener][44] that ingests Datadog notifications.
 
 ### OpenVPN
 
-* Send OpenVPN [bandwidth usage][50] and the count of active connections to Datadog.
 * Send OpenVPN [licensing information][51] to Datadog.
 
 ### Phusion Passenger
@@ -210,7 +209,6 @@ If you've written a Datadog library and would like to add it to this page, send 
 [47]: https://github.com/dailymotion/lua-resty-dogstatsd
 [48]: http://www.mediba.jp
 [49]: https://www.dailymotion.com/us
-[50]: https://github.com/byronwolfman/dd-openvpn
 [51]: https://github.com/denniswebb/datadog-openvpn
 [52]: https://github.com/Sjeanpierre/passenger-datadog-monitor
 [53]: https://github.com/Sjeanpierre

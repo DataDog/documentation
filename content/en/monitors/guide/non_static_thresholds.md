@@ -35,7 +35,7 @@ Your website's traffic varies from night to day, and from weekday to weekend. Th
 
 ### Monitor
 
-The telemetry you use to proxy the number of connections on your website are integration `count` metrics captured from an NGINX web server:[`nginx.requests.total_count`][3].
+Your team measures the number of connections on your NGINX web server using the [`nginx.requests.total_count`][3] metric.
 
 The **request** consists of 3 parts: 
 1. A query to get the current number of requests.

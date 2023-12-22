@@ -138,6 +138,20 @@
       "description": "Update Confluent account returns \"OK\" response"
     }
   ],
+  "CreateDORADeployment": [
+    {
+      "group": "dora_metrics",
+      "suffix": "",
+      "description": "Send a deployment event for DORA Metrics returns \"OK\" response"
+    }
+  ],
+  "CreateDORAIncident": [
+    {
+      "group": "dora_metrics",
+      "suffix": "",
+      "description": "Send an incident event for DORA Metrics returns \"OK\" response"
+    }
+  ],
   "CreateDashboardListItems": [
     {
       "group": "dashboard_lists",
@@ -226,6 +240,21 @@
       "group": "gcp_integration",
       "suffix": "_109518525",
       "description": "Create a new entry for your service account with account_tags returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_4235664992",
+      "description": "Create a new entry for your service account with cspm enabled returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_130557025",
+      "description": "Create a new entry for your service account with resource collection enabled returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_2597004741",
+      "description": "Create a new entry for your service account with security command center enabled returns \"OK\" response"
     }
   ],
   "UpdateGCPSTSAccount": [
@@ -233,6 +262,11 @@
       "group": "gcp_integration",
       "suffix": "",
       "description": "Update STS Service Account returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_3205636354",
+      "description": "Update STS Service Account returns \"OK\" response with enable resource collection turned on"
     }
   ],
   "UpdateIPAllowlist": [
@@ -493,6 +527,20 @@
       "group": "monitors",
       "suffix": "",
       "description": "Edit a monitor configuration policy returns \"OK\" response"
+    }
+  ],
+  "CreateOktaAccount": [
+    {
+      "group": "okta_integration",
+      "suffix": "",
+      "description": "Add Okta account returns \"OK\" response"
+    }
+  ],
+  "UpdateOktaAccount": [
+    {
+      "group": "okta_integration",
+      "suffix": "",
+      "description": "Update Okta account returns \"OK\" response"
     }
   ],
   "CreateOpsgenieService": [
@@ -790,6 +838,20 @@
       "group": "service_definition",
       "suffix": "_2621709423",
       "description": "Create or update service definition using schema v2-2 returns \"CREATED\" response"
+    }
+  ],
+  "CreateScorecardRule": [
+    {
+      "group": "service_scorecards",
+      "suffix": "",
+      "description": "Create a new rule returns \"Created\" response"
+    }
+  ],
+  "CreateScorecardOutcomesBatch": [
+    {
+      "group": "service_scorecards",
+      "suffix": "",
+      "description": "Create outcomes batch returns \"OK\" response"
     }
   ],
   "AggregateSpans": [

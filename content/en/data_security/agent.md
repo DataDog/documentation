@@ -26,12 +26,22 @@ The official repositories and binary packages of the Agent are signed. Verify th
   - [7408BFD56BC5BF0C361AAAE85D88EEA3B01082D3][20]
   - [C6559B690CA882F023BDF3F63F4D1729FD4BF915][5]
   - [A4C0B90D7443CF6E4E8AA341F1068E14E09422B3][6]
-- Windows MSI:
-  - DigiCert certificate fingerprint `720FE30A376658011C45FF1BE04BDAC071F0DEA2`
 - MacOS PKG:
   - Apple certificate fingerprint `FDD2ADF623EA75E62C6DC6DBFBA7520CA549AB7314E660D78B0E3DCCF15B2FBA`
 
 On Debian and Ubuntu, the `datadog-agent` package has a soft dependency on the `datadog-signing-keys` package, which makes the above keys trusted by APT. Keeping the package updated ensures the latest signing keys are present on your system.
+
+### Windows MSI
+
+To verify the signature of a Datadog Agent installer file on Windows, pipe the output of `Get-AuthenticodeSignature` through `FormatList` (`fl`) and make sure:
+- the status is valid
+- the certificate is signed by `Datadog, Inc`
+- the issuer is `DigiCert`
+
+For example, to verify an .msi file named `ddagent-cli-7.49.1.msi`:
+{{< code-block lang="powershell" >}}
+Get-AuthenticodeSignature ddagent-cli-7.49.1.msi | fl
+{{< /code-block >}}
 
 ## Information security
 

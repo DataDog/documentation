@@ -15,7 +15,7 @@ further_reading:
 
 Facets are user-defined tags and attributes from your tests or pipelines. They are useful for both [qualitative](#qualitative-facets) and [quantitative](#quantitative-measures) data analysis. Facets allow you to manipulate your tests or pipelines in your [CI Tests or Pipelines monitors][1], and in search queries that appear on [dashboards][2] and in [notebooks][3].
 
-[Creating facets](#creating-facets) is **not required** for [searching test runs or pipeline executions][5]. Autocomplete capabilities use existing facets, but also any input that matches incoming test runs or pipeline executions applies. 
+[Creating facets](#creating-facets) is **not required** for [searching test runs or pipeline executions][5]. Autocomplete capabilities use existing facets, but also any input that matches incoming test runs or pipeline executions applies.
 
 The [CI Visibility Explorer][4] includes out-of-the-box facets such as `Test Status`, `Test Service`, `CI Status`, and `CI Provider`. You can use facets in the CI Visibility Explorer to:
 
@@ -48,7 +48,7 @@ Navigate to [**CI** > **Pipeline Executions**][101] to access the list of facets
 
 Use qualitative facets when you need to:
 
-- **Get relative insights** for values. 
+- **Get relative insights** for values.
 - **Count unique values**.
 - Frequently **filter** your test runs or pipeline executions against particular values. For example, create a facet on an environment tag to scope troubleshooting down to development, staging, or production environments.<br>
 
@@ -58,7 +58,7 @@ Use qualitative facets when you need to:
 
 Use quantitative measures when you need to:
 
-- **Aggregate** values from multiple test runs or pipeline executions. 
+- **Aggregate** values from multiple test runs or pipeline executions.
 - **Range filter** your test runs or pipeline executions.
 - **Sort** your test runs or pipeline executions against that value.
 
@@ -70,7 +70,7 @@ Measures have either a long integer or double value for equivalent capabilities.
 
 Measures support units (**time** in seconds or **size** in bytes) for handling of orders of magnitude at query time and display time. The unit is a property of the measure itself, not of the field.
 
-For example, consider a `duration` measure in nanoseconds. Suppose test runs from `service:A` have `duration:1000`, meaning `1000 milliseconds`. Supposed test runs from `service:B` have `duration:500`, meaning `500 microseconds`. Use `duration:>20ms` to consistently query test run tags from both services at once. For more information about search queries, see [Search Syntax][6].
+For example, consider a `duration` measure in nanoseconds. Suppose test runs from `service:A` have `duration:10000000`, meaning `10 milliseconds`. Supposed test runs from `service:B` have `duration:5000000`, meaning `5 milliseconds`. Use `duration:>2ms` to consistently query test run tags from both services at once. For more information about search queries, see [Search Syntax][6].
 
 ## Facet panel
 
@@ -96,12 +96,12 @@ Creating a facet on a test run or pipeline execution attribute or tag is not a m
 
 ### Creating facets from the Runs or Executions side panels
 
-The easiest way to create a facet is to add it from the Runs or Executions side panel so that most of the facet details are pre-filled. 
+The easiest way to create a facet is to add it from the Runs or Executions side panel so that most of the facet details are pre-filled.
 
 {{< img src="continuous_integration/create_facet.png" alt="Create a facet from the CI Pipeline Execution side panel" style="width:100%;">}}
 
-1. Navigate to a test run or pipeline execution of interest in the [CI Visibility Explorer][4] that contains the field to create a facet on. 
-2. Open the Runs or Executions side panel by selecting the test run or pipeline execution from the list. 
+1. Navigate to a test run or pipeline execution of interest in the [CI Visibility Explorer][4] that contains the field to create a facet on.
+2. Open the Runs or Executions side panel by selecting the test run or pipeline execution from the list.
 3. Click on the desired field (either in the **Other tags** section for a test run or the **Info** tab for a pipeline execution's span) and create a facet from there:
 
    - If the field has a numerical value, you can create either a facet or a measure.
@@ -124,9 +124,9 @@ Autocomplete based on the content in test runs or pipeline executions of the cur
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /monitors/types/ci 
-[2]: /dashboards/ 
-[3]: /notebooks/ 
+[1]: /monitors/types/ci
+[2]: /dashboards/
+[3]: /notebooks/
 [4]: /continuous_integration/explorer
 [5]: /continuous_integration/search
 [6]: /continuous_integration/explorer/search_syntax/

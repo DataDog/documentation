@@ -5,6 +5,9 @@ further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the Explorer'
+- link: '/real_user_monitoring/guide/mobile-sdk-deprecation-policy'
+  tag: 'Documentation'
+  text: 'Deprecation Policy for Datadog Mobile SDKs'
 ---
 
 ## Overview
@@ -12,6 +15,8 @@ further_reading:
 Follow this guide to migrate between major versions of the Mobile RUM, Logs, and Trace SDKs. See each SDK's documentation for details on its features and capabilities.
 
 ## From v1 to v2
+{{< tabs >}}
+{{% tab "Android" %}}
 
 The migration from v1 to v2 represents a migration from a monolith SDK into a modular architecture. RUM, Trace, Logs, Session Replay, and so on each have individual modules, allowing you to integrate only what is needed into your application.
 
@@ -19,6 +24,22 @@ SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the
 
 SDK v2 enables the usage of [Mobile Session Replay][1] on Android and iOS applications.
 
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+The migration from v1 to v2 represents a migration from a monolith SDK into a modular architecture. RUM, Trace, Logs, Session Replay, and so on each have individual modules, allowing you to integrate only what is needed into your application.
+
+SDK v2 offers a unified API layout and naming alignment between the iOS SDK, the Android SDK, and other Datadog products.
+
+SDK v2 enables the usage of [Mobile Session Replay][1] on Android and iOS applications.
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+The migration from v1 to v2 comes with improved performance.
+
+{{% /tab %}}
+{{< /tabs >}}
 ### Modules
 {{< tabs >}}
 {{% tab "Android" %}}
@@ -127,7 +148,7 @@ let package = Package(
 <details>
   <summary>Carthage</summary>
 
-  The `Cartfile` stays the same: 
+  The `Cartfile` stays the same:
   ```
   github "DataDog/dd-sdk-ios"
   ```
@@ -154,9 +175,138 @@ let package = Package(
 
 {{% /tab %}}
 
+{{% tab "React Native" %}}
+
+Update `@datadog/mobile-react-native` in your package.json:
+
+```json
+"@datadog/mobile-react-native": "2.0.0"
+```
+
+Update your iOS pods:
+
+```bash
+(cd ios && bundle exec pod update)
+```
+
+If you use a React Native version strictly over `0.67`, use Java version 17. If you use React Native version equal or below ot `0.67`, use Java version 11. To check your Java version, run the following in a terminal:
+
+```bash
+java --version
+```
+
+### For React Native < 0.73
+
+In your `android/build.gradle` file, specify the `kotlinVersion` to avoid clashes among Kotlin dependencies:
+
+```groovy
+buildscript {
+    ext {
+        // targetSdkVersion = ...
+        kotlinVersion = "1.8.21"
+    }
+}
+```
+
+### For React Native < 0.68
+
+In your `android/build.gradle` file, specify the `kotlinVersion` to avoid clashes among Kotlin dependencies:
+
+```groovy
+buildscript {
+    ext {
+        // targetSdkVersion = ...
+        kotlinVersion = "1.8.21"
+    }
+}
+```
+
+If you are using a version of `com.android.tools.build:gradle` below `5.0` in your `android/build.gradle`, add in your `android/gradle.properties` file:
+
+```properties
+android.jetifier.ignorelist=dd-sdk-android-core
+```
+
+### Troubleshooting
+
+#### Android build fails with `Unable to make field private final java.lang.String java.io.File.path accessible`
+
+If your Android build fails with an error like:
+
+```
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:processReleaseMainManifest'.
+> Unable to make field private final java.lang.String java.io.File.path accessible: module java.base does not "opens java.io" to unnamed module @1bbf7f0e
+```
+
+You are using Java 17, which is not compatible with your React Native version. Switch to Java 11 to solve the issue.
+
+#### Android build fails with `Unsupported class file major version 61`
+
+If your Android build fails with an error like:
+
+```
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Could not determine the dependencies of task ':app:lintVitalRelease'.
+> Could not resolve all artifacts for configuration ':app:debugRuntimeClasspath'.
+   > Failed to transform dd-sdk-android-core-2.0.0.aar (com.datadoghq:dd-sdk-android-core:2.0.0) to match attributes {artifactType=android-manifest, org.gradle.category=library, org.gradle.dependency.bundling=external, org.gradle.libraryelements=aar, org.gradle.status=release, org.gradle.usage=java-runtime}.
+      > Execution failed for JetifyTransform: /Users/me/.gradle/caches/modules-2/files-2.1/com.datadoghq/dd-sdk-android-core/2.0.0/a97f8a1537da1de99a86adf32c307198b477971f/dd-sdk-android-core-2.0.0.aar.
+         > Failed to transform '/Users/me/.gradle/caches/modules-2/files-2.1/com.datadoghq/dd-sdk-android-core/2.0.0/a97f8a1537da1de99a86adf32c307198b477971f/dd-sdk-android-core-2.0.0.aar' using Jetifier. Reason: IllegalArgumentException, message: Unsupported class file major version 61. (Run with --stacktrace for more details.)
+```
+
+You use a version of Android Gradle Plugin below `5.0`. To fix the issue, add in your `android/gradle.properties` file:
+
+```properties
+android.jetifier.ignorelist=dd-sdk-android-core
+```
+
+#### Android build fails with `Duplicate class kotlin.collections.jdk8.*`
+
+If your Android build fails with an error like:
+
+```
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:checkReleaseDuplicateClasses'.
+> A failure occurred while executing com.android.build.gradle.internal.tasks.CheckDuplicatesRunnable
+   > Duplicate class kotlin.collections.jdk8.CollectionsJDK8Kt found in modules jetified-kotlin-stdlib-1.8.10 (org.jetbrains.kotlin:kotlin-stdlib:1.8.10) and jetified-kotlin-stdlib-jdk8-1.7.20 (org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20)
+     Duplicate class kotlin.internal.jdk7.JDK7PlatformImplementations found in modules jetified-kotlin-stdlib-1.8.10 (org.jetbrains.kotlin:kotlin-stdlib:1.8.10) and jetified-kotlin-stdlib-jdk7-1.7.20 (org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20)
+```
+
+You need to set a Kotlin version for your project to avoid clashes among Kotlin dependencies. In your `android/build.gradle` file, specify the `kotlinVersion`:
+
+```groovy
+buildscript {
+    ext {
+        // targetSdkVersion = ...
+        kotlinVersion = "1.8.21"
+    }
+}
+```
+
+Alternatively, you can add the following rules to your build script in your `android/app/build.gradle` file:
+
+```groovy
+dependencies {
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.10") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
+}
+```
+
+{{% /tab %}}
+
 {{< /tabs >}}
-
-
 
 ### SDK initialization
 {{< tabs >}}
@@ -211,7 +361,7 @@ API changes:
 |`com.datadog.android.log.Logger.Builder.setServiceName`|`com.datadog.android.log.Logger.Builder.setService`|
 |`com.datadog.android.log.Logger.Builder.setDatadogLogsMinPriority`|`com.datadog.android.log.Logger.Builder.setRemoteLogThreshold`|
 
-### Trace 
+### Trace
 
 All the classes related to the Trace product are strictly contained in the `com.datadog.android.trace` package (this means that all classes residing in `com.datadog.android.tracing` before have moved).
 
@@ -293,7 +443,7 @@ API changes:
 |`com.datadog.android.rum.GlobalRum.addAttribute`|`com.datadog.android.rum.RumMonitor.addAttribute`|
 |`com.datadog.android.rum.GlobalRum.removeAttribute`|`com.datadog.android.rum.RumMonitor.removeAttribute`|
 
-### NDK Crash Reporting 
+### NDK Crash Reporting
 
 The artifact name stays the same as before: `com.datadoghq:dd-sdk-android-ndk:x.x.x`.
 
@@ -337,7 +487,7 @@ implementation("com.datadoghq:dd-sdk-android-okhttp:x.x.x")
 
 OkHttp instrumentation supports the initialization of the Datadog SDK after the OkHttp client, allowing you to create `com.datadog.android.okhttp.DatadogEventListener`, `com.datadog.android.okhttp.DatadogInterceptor`, and `com.datadog.android.okhttp.trace.TracingInterceptor` before the Datadog SDK. OkHttp instrumentation starts reporting events to Datadog once the Datadog SDK is initialized.
 
-Both `com.datadog.android.okhttp.DatadogInterceptor` and `com.datadog.android.okhttp.trace.TracingInterceptor` allow you to control sampling dynamically through integration with a remote configuration system. 
+Both `com.datadog.android.okhttp.DatadogInterceptor` and `com.datadog.android.okhttp.trace.TracingInterceptor` allow you to control sampling dynamically through integration with a remote configuration system.
 
 To dynamically adjust sampling, provide your own implementation of the `com.datadog.android.core.sampling.Sampler` interface in the `com.datadog.android.okhttp.DatadogInterceptor`/`com.datadog.android.okhttp.trace.TracingInterceptor` constructor. It is queried for each request to make the sampling decision.
 
@@ -402,7 +552,7 @@ Datadog.initialize(
         clientToken: "<client token>",
         env: "<environment>",
         service: "<service name>"
-    ), 
+    ),
     trackingConsent: .granted
 )
 ```
@@ -542,7 +692,7 @@ CrashReporting.enable()
 |---|---|
 |`Datadog.Configuration.Builder.enableCrashReporting()`|`CrashReporting.enable()`|
 
-### WebView Tracking 
+### WebView Tracking
 
 To enable WebViewTracking, make sure to also enable RUM and Logs to report to those products respectively.
 
@@ -563,6 +713,11 @@ WebViewTracking.enable(webView: webView)
 For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][5].
 
 [5]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=ios
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+No change in the SDK initialization is needed.
 
 {{% /tab %}}
 {{< /tabs >}}
