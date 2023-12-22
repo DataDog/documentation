@@ -2621,7 +2621,7 @@ main:
     identifier: static_analysis_github_actions
     weight: 103
   - name: GitHub Pull Requests
-    url: static_analysis/github_source_code_management
+    url: static_analysis/github_pull_requests
     parent: static_analysis
     identifier: static_analysis_github_scm
     weight: 103
