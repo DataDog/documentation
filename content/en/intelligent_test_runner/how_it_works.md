@@ -1,5 +1,5 @@
 ---
-title: How It Works
+title: How Intelligent Test Runner Works in Datadog
 kind: documentation
 further_reading:
   - link: "https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/"
@@ -10,21 +10,21 @@ further_reading:
     text: "Monitor all your CI pipelines with Datadog"
 ---
 
-## What is Intelligent Test Runner?
+## Overview
 
 Intelligent Test Runner is Datadog's test impact analysis solution. Test impact analysis is a technique that has gained popularity over the past few decades. However, it's typically hard and time-consuming to implement. Intelligent Test Runner simplifies this complexity.
 
 Test impact analysis maps each test to the set of code files in your repository that the test uses (per test code coverage). Its goal is to skip tests not affected by the code changes. This leads to a direct reduction in time spent testing in CI.
 
-An extreme example is a Pull Request that only changes a typo on a README file. For that PR, running all tests doesn't provide any value. On the contrary, flaky tests might make your CI fail, forcing you to retry the pipeline, potentially multiple times, before merging. This is a waste of both developer and CI time. With Intelligent Test Runner, a PR changing a README file would skip all tests.
+An extreme example is a pull request that only changes a typo in a README file. For that PR, running all tests doesn't provide any value. On the contrary, flaky tests might make your CI fail, forcing you to retry the pipeline, potentially multiple times, before merging. This is a waste of both developer and CI time. With Intelligent Test Runner, a PR changing a README file would skip all tests.
 
 ## What sets it apart
 
-Some test selection solutions don't rely on code coverage data and make up for it by using Machine Learning. These systems infer which tests are relevant in a probabilistic fashion and might miss tests that were relevant, leading to build failures in your default branch. Machine learning based techniques also typically require longer periods of data collection before they're able to work. Intelligent Test Runner begins working immediately after a baseline of code coverage is gathered.
+Some test selection solutions don't rely on code coverage data and make up for it by using machine learning. These systems infer which tests are relevant in a probabilistic fashion and might miss tests that were relevant, leading to build failures in your default branch. Machine learning based techniques also typically require longer periods of data collection before they're able to work. Intelligent Test Runner begins working immediately after a baseline of code coverage is gathered.
 
-While others calculate test impact analysis using code coverage too, they only consider the last commit diff when evaluating which tests to run. As an example, this is a problem with GitHub's Pull Requests, which only take into account the CI status of the latest commit to allow merging. As a result, you must run all commits through CI or risk skipping tests that should have run.
+While other test solutions calculate test impact analysis using code coverage too, they only consider the last commit diff when evaluating which tests to run. As an example, this is a problem with GitHub's pull requests, which only take into account the CI status of the latest commit to allow merging. As a result, you must run all commits through CI or risk skipping tests that should have run.
 
-Intelligent Test Runner leverages per-test code coverage information along with data from [Test Visibility][1] to search previous test in all relevant past commits. Configuration of Intelligent Test Runner is a one-click operation on most languages, and the results are accurate and more precise than other methods.
+Intelligent Test Runner leverages per-test code coverage information along with data from [Test Visibility][1] to search previous tests in all relevant past commits. Configuration of Intelligent Test Runner is a one-click operation in most languages, and the results are accurate and more precise than other methods.
 
 
 ## How test selection works
@@ -50,7 +50,7 @@ The diagram above shows a developer branch that branches out from `main` and has
   - Test A has to be run because, although this commit did not affect test A (no changes in tracked files or covered files), there are no previous test runs that passed for Test A. Since Intelligent Test Runner cannot guarantee a passing status if it were run, it doesn't skip it. This time, the test passes, which indicates this is a flaky test.
   - Test B was run both because there is no previous successful test run for this test, and also because commit 2 changes files that affect it.
 - **Commit 3** runs all tests because a tracked file was changed.
-- **Commit 4** runs all tests too:
+- **Commit 4** runs all tests:
   - Test A is run because there is no previous test run that meets all criteria: test runs from commits 1 and 3 cannot be used because they failed, and the test run from commit 2 cannot be used because tracked files have been changed since commit 2 until commit 4.
   - Test B is also run because there is no previous test run that meets all criteria: test runs from commit 1 and 2 cannot be used because they failed, and the test run from commit 3 cannot be used because covered files for test B were modified between commits 3 and 4.
 - **Commit 5** was able to skip one test:

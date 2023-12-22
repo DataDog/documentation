@@ -2512,7 +2512,7 @@ main:
     parent: intelligent_test_runner
     identifier: intelligent_test_runner_setup
     weight: 1
-  - name: How it works
+  - name: How It Works
     url: intelligent_test_runner/how_it_works/
     parent: intelligent_test_runner
     identifier: intelligent_test_runner_how_it_works

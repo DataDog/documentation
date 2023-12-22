@@ -18,7 +18,7 @@ Intelligent Test Runner is Datadog's test impact analysis solution. It automatic
 
 {{< img src="continuous_integration/itr_savings.png" alt="Intelligent test runner enabled in a test session showing its time savings.">}}
 
-Intelligent Test Runner works by analyzing your test suite to determine the code each test covers. It then cross-references that coverage with the files impacted by a new code change. Datadog uses this information to run a selection of relevant, impacted tests, omitting the ones unaffected by the code change and reducing the overall testing duration. Find out more details about [how it works][1].
+Intelligent Test Runner works by analyzing your test suite to identify the code each test covers. It then cross-references that coverage with the files impacted by a new code change. Datadog uses this information to run a selection of relevant, impacted tests, omitting the ones unaffected by the code change and reducing the overall testing duration. Find out more details about [How It Works][1].
 
 By minimizing the number of tests run per commit, Intelligent Test Runner reduces the frequency of [flaky tests][2] disrupting your pipelines. This can be particularly frustrating when the test flaking is unrelated to the code change being tested. After enabling Intelligent Test Runner for your test services, you can limit each commit to its relevant tests to ensure that flaky tests unrelated to your code change don't end up arbitrarily breaking your build.
 
@@ -33,9 +33,9 @@ With the default configuration, there are known situations that can cause Intell
 
 In these scenarios, Intelligent Test Runner might skip impacted tests with the out-of-the-box configuration.
 
-There are several configuration mechanisms to ensure that no tests are skipped in these scenarios which are not supported automatically:
+There are several configuration mechanisms that you can use in these scenarios to ensure that no tests are skipped:
 
-- You can mark certain files in your repository as [tracked files](#tracked-files), which causes all tests to run whenever these files are changed. Dockerfiles, Makefiles, dependency files and other build configuration files are good candidates for tracked files.
+- You can mark certain files in your repository as [tracked files](#tracked-files), which causes all tests to run whenever these files are changed. Dockerfiles, Makefiles, dependency files, and other build configuration files are good candidates for tracked files.
 - You can mark certain tests in your source as unskippable to ensure they are always run. This is a good fit for data-driven tests or tests that interact with external systems. More information in the [setup page][3].
 - If you are authoring a risky commit and you'd like to run all tests, add `ITR:NoSkip` (case insensitive) anywhere in your Git commit message.
 - You can add a list of [excluded branches](#excluded-branches), which disables Intelligent Test Runner in those branches.
@@ -67,10 +67,10 @@ If there are other branches you want to exclude, add them on the Test Service Se
 
 ### Tracked files
 
-Tracked files are non-code files that can potentially affect your tests. Changes in tracked files could make your tests fail or change the code coverage of your tests. Examples of files that are good candidates to add as tracked files are:
+Tracked files are non-code files that can potentially impact your tests. Changes in tracked files could make your tests fail or change the code coverage of your tests. Examples of files that are good candidates to add as tracked files are:
 
 - Dockerfiles used for the CI environment
-- Files that define your dependencies (for example, `pom.xml` in Maven, `requirements.txt` in Python or `package.json` in Javascript)
+- Files that define your dependencies (for example, `pom.xml` in Maven, `requirements.txt` in Python, or `package.json` in Javascript)
 - Makefiles
 
 When you specify a set of tracked files, Intelligent Test Runner runs all tests if any of these files change.
@@ -103,7 +103,7 @@ The dashboard also tracks adoption of Intelligent Test Runner throughout your or
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: how_it_works
+[1]: /how_it_works
 [2]: /glossary/#flaky-test
 [3]: /continuous_integration/intelligent_test_runner/setup
 [4]: /continuous_integration/tests/
