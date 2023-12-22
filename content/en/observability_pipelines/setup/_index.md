@@ -69,7 +69,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 
 If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-docker). Otherwise, follow the steps in [manual configuration](#manual-configuration-docker).
 
-### Remote Configuration (Docker)
+<h3 id="remote-configuration-docker">Remote Configuration</h3>
 
 Run the following command to start the Observability Pipelines Worker with Docker:
     
@@ -86,7 +86,7 @@ Run the following command to start the Observability Pipelines Worker with Docke
   
   Any ports that your configuration uses must also be manually specified. Use `-p <PORT>:<PORT>` to forward them from the local host to the Docker container. The sample command given above opens the Datadog Agent port.
 
-### Manual configuration (Docker)
+<h3 id="manual-configuration-docker">Manual configuration</h3>
 
 1. Download the [sample pipeline configuration file][2]. This configuration emits demo data, parses and structures the data, and then sends them to the console and Datadog. See [Configurations][3] for more information about the source, transform, and sink used in the sample configuration.
 
@@ -109,9 +109,9 @@ Run the following command to start the Observability Pipelines Worker with Docke
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
 
-If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-aws-eks). Otherwise, follow the steps in [manual configuration](#manual-configuration-aws-eks).
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-eks). Otherwise, follow the steps in [manual configuration](#manual-configuration-eks).
 
-### Remote Configuration (AWS EKS)
+<h3 id="remote-configuration-eks">Remote Configuration</h3>
 
 1. Download the [Remote Configuration Helm chart][3] for AWS EKS. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
 
@@ -129,7 +129,8 @@ If you have Remote Configuration enabled, follow the steps in [Remote Configurat
         -f aws_eks_rc.yaml
     ```
 
-### Manual configuration (AWS EKS)
+<h3 id="manual-configuration-eks">Manual configuration</h3>
+
 1. Download the [Helm chart][1] for AWS EKS. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
@@ -152,9 +153,9 @@ If you have Remote Configuration enabled, follow the steps in [Remote Configurat
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 
-If you have Remote Configuration enabled, follow the steps in [ Remote Configuration](#remote-configuration-azure-aks). Otherwise, follow the steps in [manual configuration](#manual-configuration-azure-aks).
+If you have Remote Configuration enabled, follow the steps in [ Remote Configuration](#remote-configuration-aks). Otherwise, follow the steps in [manual configuration](#manual-configuration-aks).
 
-### Remote Configuration (Azure AKS)
+<h3 id="remote-configuration-aks">Remote Configuration</h3>
 
 1. Download the [Remote Configuration Helm chart][3] for Azure AKS. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
 
@@ -172,7 +173,8 @@ If you have Remote Configuration enabled, follow the steps in [ Remote Configura
       -f azure_aks_rc.yaml
     ```
 
-### Manual configuration (Azure AKS)
+<h3 id="manual-configuration-aks">Manual configuration</h3>
+
 1. Download the [Helm chart][1] for Azure AKS. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
@@ -195,10 +197,9 @@ If you have Remote Configuration enabled, follow the steps in [ Remote Configura
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 
-If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-google-gke). Otherwise, follow the steps in [manual configuration](#manual-configuration-google-gke).
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-gke). Otherwise, follow the steps in [manual configuration](#manual-configuration-gke).
 
-### Remote Configuration (Google GKE)
-
+<h3 id="remote-configuration-gke">Remote Configuration</h3>
 1. Download the [Remote Configuration Helm chart][1] for Google GKE. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
@@ -215,7 +216,7 @@ If you have Remote Configuration enabled, follow the steps in [Remote Configurat
       -f google_gke_rc.yaml
     ```
 
-### Manual configuration (Google GKE)
+<h3 id="manual-configuration-gke">Manual configuration</h3>
 
 1. Download the [Helm chart][1] for Google GKE. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
 
@@ -241,7 +242,8 @@ If you have Remote Configuration enabled, follow the steps in [Remote Configurat
 
 If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-apt). Otherwise, follow the steps in [manual configuration](#manual-configuration-apt).
 
-### Remote Configuration (APT)
+<h3 id="remote-configuration-apt">Remote Configuration</h3>
+
 1. Run the one-line install command to install the Worker. Replace `<DD_API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}.
 
     ```
@@ -263,7 +265,7 @@ If you have Remote Configuration enabled, follow the steps in [Remote Configurat
     sudo systemctl restart observability-pipelines-worker
     ```
     
-### Manual configuration (APT)
+<h3 id="manual-configuration-apt">Manual configuration</h3>
 
 1. Run the one-line install command to install the Worker. Replace `<DD_API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}.
 
@@ -296,7 +298,7 @@ If you have Remote Configuration enabled, follow the steps in [Remote Configurat
 
 If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-rpm). Otherwise, follow the steps in [manual configuration](#manual-configuration-rpm).
 
-### Remote Configuration (RPM)
+<h3 id="remote-configuration-rpm">Remote Configuration</h3>
 
 1. Run the one-line install command to install the Worker. Replace `<DD_API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}.
 
@@ -323,7 +325,7 @@ If you have Remote Configuration enabled, follow the steps in [Remote Configurat
     sudo systemctl restart observability-pipelines-worker
     ```
 
-### Manual configuration (RPM)
+<h3 id="manual-configuration-rpm">Manual configuration</h3>
 
 1. Run the one-line install command to install the Worker. Replace `<DD_API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}.
 
@@ -351,13 +353,11 @@ If you have Remote Configuration enabled, follow the steps in [Remote Configurat
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
 
-Set up the Worker module in your existing Terraform using the sample configuration below. If you have Remote Configuration enabled, use the [Remote Configuration sample](#remote-configuration-sample). Otherwise, use the [Manual Configuration sample](#manual-configuration-sample).
+Set up the Worker module in your existing Terraform using the sample configuration below. If you have Remote Configuration enabled, use the [Remote Configuration sample](#remote-configuration-sample). Otherwise, use the [manual configuration sample](#manual-configuration-sample).
 
 ### Remote Configuration sample
 
 Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline.
-
-See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
 
 ```
 module "opw" {
@@ -372,11 +372,11 @@ module "opw" {
 }
 ```
 
-### Manual Configuration sample
+### Manual configuration sample
 
 Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline.
 
-See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
+See [Configurations][1] for more information about the source, transform, and sink used in the sample configuration.
 
 ```
 module "opw" {
@@ -477,7 +477,7 @@ EOT
 }
 ```
 
-[2]: /observability_pipelines/configurations/
+[1]: /observability_pipelines/configurations/
 {{% /tab %}}
 {{< /tabs >}}
 

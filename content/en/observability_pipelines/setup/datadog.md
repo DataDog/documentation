@@ -127,7 +127,9 @@ In order to run the Worker in your AWS account, you need administrative access t
 
 The Observability Pipelines Worker Docker image is published to Docker Hub [here][1].
 
-### Remote Configuration
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-docker). Otherwise, follow the steps in [manual configuration](#manual-configuration-docker).
+
+<h3 id="remote-configuration-docker">Remote Configuration</h3>
 
 1. Run the following command to start the Observability Pipelines Worker with Docker:
     ```
@@ -140,7 +142,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     ```
     Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. Any ports that your configuration uses must also be manually specified, using `-p <PORT>:<PORT>` to forward them from the local host to the Docker container. The sample command given above opens the Datadog Agent port.
 
-### Manual Configuration
+<h3 id="manual-configuration-docker">Manual configuration</h3>
 
 1. Download the [sample pipeline configuration file][2].
 
@@ -160,7 +162,10 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
 
-### Remote Configuration
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-eks). Otherwise, follow the steps in [manual configuration](#manual-configuration-eks).
+
+<h3 id="remote-configuration-eks">Remote Configuration</h3>
+
 1. Download the [Remote Configuration Helm chart][1] for AWS EKS.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Make sure to specify any ports that your configuration uses in the `service.ports` section. The provided Helm chart already opens the Datadog Agent port, `8282`.
@@ -179,7 +184,8 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
         -f aws_eks_rc.yaml
     ```
 
-### Manual Configuration
+<h3 id="manual-configuration-eks">Manual configuration</h3>
+
 1. Download the [Helm chart][2] for AWS EKS.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
@@ -201,7 +207,10 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 
-### Remote Configuration
+If you have Remote Configuration enabled, follow the steps in [ Remote Configuration](#remote-configuration-aks). Otherwise, follow the steps in [manual configuration](#manual-configuration-aks).
+
+<h3 id="remote-configuration-aks">Remote Configuration</h3>
+
 1. Download the [Remote Configuration Helm chart][1] for Azure AKS.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Make sure to specify any ports that your configuration uses in the `service.ports` section. The provided Helm chart already opens the Datadog Agent port, `8282`.
@@ -220,7 +229,8 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       -f azure_aks_rc.yaml
     ```
 
-### Manual Configuration
+<h3 id="manual-configuration-aks">Manual configuration</h3>
+
 1. Download the [Helm chart][2] for Azure AKS.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
@@ -242,7 +252,10 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 
-### Remote Configuration
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-gke). Otherwise, follow the steps in [manual configuration](#manual-configuration-gke).
+
+<h3 id="remote-configuration-gke">Remote Configuration</h3>
+
 1. Download the [Remote Configuration Helm chart][1] for Google GKE.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Make sure to specify any ports that your configuration uses in the `service.ports` section. The provided Helm chart already opens the Datadog Agent port, `8282`.
@@ -261,7 +274,8 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       -f google_gke_rc.yaml
     ```
 
-### Manual Configuration
+<h3 id="manual-configuration-gke">Manual configuration</h3>
+
 1. Download the [Helm chart][2] for Google GKE.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
@@ -280,8 +294,10 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 
 [1]: /resources/yaml/observability_pipelines/datadog/google_gke_rc.yaml
 [2]: /resources/yaml/observability_pipelines/datadog/google_gke.yaml
+
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
+
 1. Run the following commands to set up APT to download through HTTPS:
 
     ```
@@ -307,7 +323,9 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     sudo apt-get install observability-pipelines-worker datadog-signing-keys
     ```
 
-### Remote Configuration
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-apt). Otherwise, follow the steps in [manual configuration](#manual-configuration-apt).
+
+<h3 id="remote-configuration-apt">Remote Configuration</h3>
 
 4. Add your keys and the site ({{< region-param key="dd_site" code="true" >}}) to the Worker's environment variables:
 
@@ -325,7 +343,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     sudo systemctl restart observability-pipelines-worker
     ```
 
-### Manual Configuration
+<h3 id="manual-configuration-apt">Manual configuration</h3>
 
 4. Add your keys and the site ({{< region-param key="dd_site" code="true" >}}) to the Worker's environment variables:
 
@@ -345,6 +363,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     ```
 
 [1]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
+
 {{% /tab %}}
 {{% tab "RPM-based Linux" %}}
 1. Run the following commands to set up the Datadog `rpm` repo on your system:
@@ -373,7 +392,9 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     sudo yum install observability-pipelines-worker
     ```
 
-### Remote Configuration
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-rpm). Otherwise, follow the steps in [manual configuration](#manual-configuration-rpm).
+
+<h3 id="remote-configuration-rpm">Remote Configuration</h3>
 
 3. Add your keys and the site ({{< region-param key="dd_site" code="true" >}}) to the Worker's environment variables:
 
@@ -391,7 +412,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     sudo systemctl restart observability-pipelines-worker
     ```
 
-### Manual Configuration
+<h3 id="manual-configuration-rpm">Manual configuration</h3>
 
 3. Add your keys and the site ({{< region-param key="dd_site" code="true" >}}) to the Worker's environment variables:
 
@@ -411,11 +432,15 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     ```
 
 [1]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
+
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
-Set up the Worker module in your existing Terraform using this sample configuration. Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline. Make sure to specify the ports that your configuration needs, in the `tcp-ports` input. The sample configuration given opens up the Datadog Agent port, `8282`, by default.
 
-### Remote Configuration
+Set up the Worker module in your existing Terraform using this sample configuration. If you have Remote Configuration enabled, use the [Remote Configuration sample](#remote-configuration-sample). Otherwise, use the [Manual Configuration sample](#manual-configuration-sample).
+
+### Remote Configuration sample
+
+Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline. 
 
 ```
 module "opw" {
@@ -430,7 +455,11 @@ module "opw" {
 }
 ```
 
-### Manual Configuration
+### Manual configuration sample
+
+Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline. Make sure to specify the ports that your configuration needs, in the `tcp-ports` input. The sample configuration given opens up the Datadog Agent port, `8282`, by default.
+
+See [Configurations][1] for more information about the source, transform, and sink used in the sample configuration.
 
 ```
 module "opw" {
@@ -530,6 +559,8 @@ sinks:
 EOT
 }
 ```
+
+[1]: /observability_pipelines/configurations/
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
