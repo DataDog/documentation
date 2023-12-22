@@ -20,6 +20,27 @@
       "description": "Update an AWS integration returns \"OK\" response"
     }
   ],
+  "CreateAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Create an Azure integration returns \"OK\" response"
+    }
+  ],
+  "DeleteAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Delete an Azure integration returns \"OK\" response"
+    }
+  ],
+  "UpdateAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Update an Azure integration returns \"OK\" response"
+    }
+  ],
   "CreateDashboardList": [
     {
       "group": "dashboard_lists",
@@ -469,6 +490,27 @@
       "group": "events",
       "suffix": "_19927815",
       "description": "Post an event with a long title returns \"OK\" response"
+    }
+  ],
+  "CreateGCPIntegration": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Create a GCP integration returns \"OK\" response"
+    }
+  ],
+  "DeleteGCPIntegration": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Delete a GCP integration returns \"OK\" response"
+    }
+  ],
+  "UpdateGCPIntegration": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Update a GCP integration returns \"OK\" response"
     }
   ],
   "ListLogs": [
