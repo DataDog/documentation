@@ -2522,6 +2522,11 @@ main:
     parent: intelligent_test_runner
     identifier: intelligent_test_runner_setup
     weight: 1
+  - name: How It Works
+    url: intelligent_test_runner/how_it_works/
+    parent: intelligent_test_runner
+    identifier: intelligent_test_runner_how_it_works
+    weight: 2
   - name: .NET
     url: intelligent_test_runner/setup/dotnet/
     parent: intelligent_test_runner_setup
