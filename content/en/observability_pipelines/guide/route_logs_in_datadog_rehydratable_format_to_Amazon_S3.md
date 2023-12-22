@@ -24,7 +24,7 @@ For example in this first diagram, some logs are sent to a cloud storage for arc
 
 {{< img src="observability_pipelines/guide/datadog_archives/op-cloud-storage.png" alt="A diagram showing logs going to cloud storage and Datadog." >}}
 
-In this second diagram, all logs are going to the Datadog Agent, including the logs that went to a cloud storage in the first diagram. However, in the second scenario, before the logs are ingested into Datadog, the `datadog_archives` destination formats and routes the logs that would have gone directly to a cloud storage to Datadog Log Archives instead. You can then rehydrate those archives in Datadog when you need them.
+In this second diagram, all logs are going to the Datadog Agent, including the logs that went to a cloud storage in the first diagram. However, in the second scenario, before the logs are ingested into Datadog, the `datadog_archives` destination formats and routes the logs that would have gone directly to a cloud storage to Datadog Log Archives instead. The logs in Log Archive can be rehydrated in Datadog when needed.
 
 {{< img src="observability_pipelines/guide/datadog_archives/op-datadog-archives.png" alt="A diagram showing all logs going to Datadog." >}}
 
