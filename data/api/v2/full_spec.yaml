@@ -13676,6 +13676,27 @@ components:
       - id
       - type
       type: object
+    RelationshipToUserTeamTeam:
+      description: Relationship between team membership and team
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToUserTeamTeamData'
+      required:
+      - data
+      type: object
+    RelationshipToUserTeamTeamData:
+      description: The team associated with the membership
+      properties:
+        id:
+          description: The ID of the team associated with the membership
+          example: d7e15d9d-d346-43da-81d8-3d9e71d9a5e9
+          type: string
+        type:
+          $ref: '#/components/schemas/UserTeamTeamType'
+      required:
+      - id
+      - type
+      type: object
     RelationshipToUserTeamUser:
       description: Relationship between team membership and user
       properties:
@@ -19822,6 +19843,20 @@ components:
     UserTeamAttributes:
       description: Team membership attributes
       properties:
+        provisioned_by:
+          description: 'The mechanism responsible for provisioning the team relationship.
+
+            Possible values: null for added by a user, "service_account" if added
+            by a service account, and "saml_mapping" if provisioned via SAML mapping.'
+          nullable: true
+          readOnly: true
+          type: string
+        provisioned_by_id:
+          description: UUID of the User or Service Account who provisioned this team
+            membership, or null if provisioned via SAML mapping.
+          nullable: true
+          readOnly: true
+          type: string
         role:
           $ref: '#/components/schemas/UserTeamRole'
       type: object
@@ -19873,6 +19908,8 @@ components:
     UserTeamRelationships:
       description: Relationship between membership and a user
       properties:
+        team:
+          $ref: '#/components/schemas/RelationshipToUserTeamTeam'
         user:
           $ref: '#/components/schemas/RelationshipToUserTeamUser'
       type: object
@@ -19898,6 +19935,15 @@ components:
       type: string
       x-enum-varnames:
       - ADMIN
+    UserTeamTeamType:
+      default: team
+      description: User team team type
+      enum:
+      - team
+      example: team
+      type: string
+      x-enum-varnames:
+      - TEAM
     UserTeamType:
       default: team_memberships
       description: Team membership type
