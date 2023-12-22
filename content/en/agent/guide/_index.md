@@ -15,6 +15,7 @@ cascade:
     {{< nextlink href="agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity" >}}Installing the Agent on a server with limited internet connectivity{{< /nextlink >}}
     {{< nextlink href="agent/guide/ansible_standalone_role/" >}}Set up Ansible Using a Standalone Datadog Role{{< /nextlink >}}
     {{< nextlink href="agent/guide/how-do-i-uninstall-the-agent" >}}How do I uninstall the Agent?{{< /nextlink >}}
+    {{< nextlink href="agent/guide/linux-key-rotation-2024" >}}Linux key rotation 2024{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Windows guides:" >}}
@@ -41,6 +42,7 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent 5 guides:" >}}
+    {{< nextlink href="agent/guide/install-agent-5" >}}Install Agent 5{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-autodiscovery" >}}Autodiscovery in Agent v5{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-kubernetes-basic-agent-usage" >}}Kubernetes Basic Agent Usage in Agent v5{{< /nextlink >}}
     {{< nextlink href="agent/guide/dogstream" >}}Dogstream{{< /nextlink >}}

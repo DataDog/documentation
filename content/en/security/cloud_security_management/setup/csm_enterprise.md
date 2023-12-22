@@ -1,5 +1,5 @@
 ---
-title: Setting Up CSM Enterprise
+title: Setting up CSM Enterprise
 kind: documentation
 further_reading:
   - link: "/security/cloud_security_management/setup"
@@ -403,8 +403,6 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 ### Configure the Agent for Vulnerabilities
 
 The following instructions enables the image metadata collection and [Software Bill of Materials (SBOM)][11] collection in the Datadog Agent. This allows you to scan the libraries in your container images and hosts to detect vulnerabilities. Vulnerabilities are evaluated and and scanned against your containers and hosts every hour.
-
-**Note**: CSM Vulnerabilities is not available for AWS Fargate or Windows environments.
 
 #### Containers
 

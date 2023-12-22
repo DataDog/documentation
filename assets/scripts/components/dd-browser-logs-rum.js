@@ -32,6 +32,7 @@ if (window.DD_RUM) {
             service: 'docs',
             version: CI_COMMIT_SHORT_SHA,
             trackInteractions: true,
+            trackUserInteractions: true,
             trackFrustrations: true,
             enableExperimentalFeatures: ["clickmap"],
             sessionSampleRate: 100,
