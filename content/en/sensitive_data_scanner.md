@@ -112,27 +112,27 @@ By default, users with the Datadog Admin role have access to view and define the
 
 Control who can access events containing sensitive data. Use tags added by Sensitive Data Scanner to build queries with RBAC and restrict access to specific individuals or teams until the data ages out after the retention period.
 
-### Summary page
+### Investigate sensitive data issues in the Summary page
 
-Use the [Summary][11] page to see a count of all sensitive data issues within the selected timeframe and start investigating issues.
+Use the [Summary][11] page to see all sensitive data issues within the selected timeframe and start investigating issues.
 
-In the **Sensitive Data Issues** section, click on a priority level to see only issues with that priority level in the **Issues Overview** section. Click on the priority level again to see the full list of issues.
-
-In the **Cases** section, click on a case status to see issues associated to cases with that status in the **Issues Overview** section. Click on the case status again to see the full list of issues.
+In the **Sensitive Data Issues** section, filter by a priority level to see only issues with that priority level in the **Issues Overview** section. In the **Cases** section, filter by a case status to see issues associated to cases with that status in the **Issues Overview** section.
 
 To investigate an issue:
 
 1. Click on the issue in the **Issues Overview**.
-1. In the issue panel, click **View Recent Changes** to go to Audit Trail and see if there are any recent configuration changes that caused the sensitive data issue.
-1. Click **View All Logs** to see in Log Explorer all logs matching the query.
-1. In the **Blast Radius** section:  
-    a. Click on a service to see more information about the service in the Service Catalog.  
-    b. Click **Host** to see the top 10 impacted hosts. Click on a host to see more information about the host in the Infrastructure page.  
-    c. Click **Environment** to see the top 10 impacted environments.  
+2. In the issue panel, click **View Recent Changes** to navigate to Audit Trail and see if there are any recent configuration changes that caused the sensitive data issue.
+3. Click **View All Logs** to see in Log Explorer all logs matching the query. Click **View All APM Spans** to see in Trace Explorer all traces matching the query. Click **View All RUM Events** to see in RUM Explorer all RUM events matching the query. Click **View All Events** to see in Events Explorer all events matching the query.
+4. In the **Blast Radius** section:  
+    a. View the Top 10 services, hosts, and environments impacted by this sensitive data issue.
+    b. Click on a service to see more information about the service in the **Service Catalog**.  
+    c. Click on a host to see more information about the host in the Infrastructure List page.
 
-If you want to use [Case Management][9] to track, triage, and investigate the issue, click **Create Case** at the top of the panel. These cases are summarized in the Summary page.
+If you want to use [Case Management][9] to track, triage, and investigate the issue, click **Create Case** at the top of the panel. Associated cases are surfaced in the Summary page.
 
 If you want to use [Incident Management][10] to create an incident, you can add the issue to an existing incident or declare a new incident. Click the **Declare Incident** dropdown menu to add the issue to an existing incident. Click **Declare Incident** to declare a new incident.
+
+If you want to modify the Scanning Rule that was used to detect the sensitive data issue, click **Modify Rule** at the top of the panel.
 
 ### Out-of-the-box dashboard
 
