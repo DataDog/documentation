@@ -2214,46 +2214,51 @@ main:
     parent: profiler
     identifier: profiler_enabling
     weight: 1
+  - name: Supported Language and Tracer Versions
+    url: profiler/enabling/supported_versions/
+    parent: profiler_enabling
+    identifier: profiler_supported_langs
+    weight: 101
   - name: Java
     url: profiler/enabling/java/
     parent: profiler_enabling
     identifier: profiler_enabling_java
-    weight: 101
+    weight: 102
   - name: Python
     url: profiler/enabling/python/
     parent: profiler_enabling
     identifier: profiler_enabling_python
-    weight: 102
+    weight: 103
   - name: Go
     url: profiler/enabling/go/
     parent: profiler_enabling
     identifier: profiler_enabling_go
-    weight: 103
+    weight: 104
   - name: Ruby
     url: profiler/enabling/ruby/
     parent: profiler_enabling
     identifier: profiler_enabling_ruby
-    weight: 104
+    weight: 105
   - name: Node.js
     url: profiler/enabling/nodejs/
     parent: profiler_enabling
     identifier: profiler_enabling_nodejs
-    weight: 105
+    weight: 106
   - name: .NET
     url: profiler/enabling/dotnet/
     parent: profiler_enabling
     identifier: profiler_enabling_dotnet
-    weight: 106
+    weight: 107
   - name: PHP
     url: profiler/enabling/php/
     parent: profiler_enabling
     identifier: profiler_enabling_php
-    weight: 107
+    weight: 108
   - name: C/C++/Rust
     url: profiler/enabling/ddprof/
     parent: profiler_enabling
     identifier: profiler_enabling_linux
-    weight: 108
+    weight: 109
   - name: Profile Types
     url: profiler/profile_types/
     parent: profiler
