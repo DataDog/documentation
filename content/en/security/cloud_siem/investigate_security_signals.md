@@ -32,7 +32,7 @@ Use different visualizations to investigate the threat activity in your environm
 - Timeseries to view signal trends over time.
 - Pie chart to see the relative volume of each of the detection rules.
 
-{{< img src="security/security_monitoring/investigate_a_signal/signal_list.png" alt="The Signal Explorer showing signals categoraized by detection rules" style="width:80%;" >}}
+{{< img src="security/security_monitoring/security_signals/signal_list.png" alt="The Signal Explorer showing signals categoraized by detection rules" style="width:80%;" >}}
 
 After you have filtered your signals to your use case, create a [saved view][4] so that you can reload your query later.
 
@@ -42,9 +42,9 @@ After you have filtered your signals to your use case, create a [saved view][4] 
 1. Click **Signals**.
 1. Click on a security signal from the table.
 1. To assign a signal to yourself or another Datadog user, click the user profile icon with the plus sign in the top left corner of the signal side panel.
-{{< img src="security/security_monitoring/investigate_a_signal/profile_icon.png" alt="The profile icon next to the triage status" style="width:45%;" >}}
+{{< img src="security/security_monitoring/security_signals/profile_icon.png" alt="The profile icon next to the triage status" style="width:45%;" >}}
 1. To update the triage status of the security signal, navigate to the top left corner of the signal side panel and select the status you want from the dropdown menu. The default status is `OPEN`.
-{{< img src="security/security_monitoring/investigate_a_signal/triage_status.png" alt="The profile icon next to the triage status" style="width:35%;" >}}
+{{< img src="security/security_monitoring/security_signals/triage_status.png" alt="The profile icon next to the triage status" style="width:35%;" >}}
     - **Open**: Datadog Security triggered a detection based on a rule, and the resulting signal is not yet resolved.
     - **Under Review**: During an active investigation, you can switch the signal state to **Under Review**. From the **Under Review** state, you can move the signal state to **Archived** or **Open** as needed.
     - **Archived**: When the detection that caused the signal has been resolved, you can transition it to the **Archived** state. If an archived issue resurfaces, or if further investigation is necessary, a signal can be changed back to an **Open** state within 30 days of being created.
@@ -56,7 +56,7 @@ Use bulk actions to triage multiple signals. To use bulk actions, first search a
 
 **Note**: The Signals Explorer stops dynamically updating when performing a bulk action.
 
-{{< img src="security/security_monitoring/investigate_a_signal/bulk_actions.png" alt="The Signal Explorer showing the bulk action option" style="width:45%;" >}}
+{{< img src="security/security_monitoring/security_signals/bulk_actions.png" alt="The Signal Explorer showing the bulk action option" style="width:45%;" >}}
 
 ### Case Management
 
@@ -94,7 +94,7 @@ The query to see all threat intelligence matches in the Security Signals Explore
 - For `@threat_intel.results.category`: attack, corp_vpn, cryptomining, malware, residential_proxy, tor, scanner
 - For `@threat_intel.results.intention`: malicious, suspicious, benign, unknown
 
-{{< img src="security/security_monitoring/investigate_a_signal/threat_intel_results_categories.png" alt="The Signal Explorer showing a bar graph of signals broken down by the threat intel categories of residential proxy, corp_vpn, cryptomining, and malware" style="width:80%;" >}}
+{{< img src="security/security_monitoring/security_signals/threat_intel_results_categories.png" alt="The Signal Explorer showing a bar graph of signals broken down by the threat intel categories of residential proxy, corp_vpn, cryptomining, and malware" style="width:80%;" >}}
 
 ### Search by network IP attributes
 
@@ -104,7 +104,7 @@ You can also launch this query directly from the signal panel:
 1. Click on the IP address in the **Context** section.
 2. Select **View Logs with @network.client.ip:<ip_address>**.
 
-{{< img src="security/security_monitoring/investigate_a_signal/threat_intel_view_logs.png" alt="The signal panel showing the threat options for the selected IP address" style="width:70%;" >}}
+{{< img src="security/security_monitoring/security_signals/threat_intel_view_logs.png" alt="The signal panel showing the threat options for the selected IP address" style="width:70%;" >}}
 
 ## Further reading
 
