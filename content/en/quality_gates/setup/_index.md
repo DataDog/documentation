@@ -1,5 +1,5 @@
 ---
-title: Setup Quality Gate Rules 
+title: Setup Quality Gate Rules
 description: Learn how to setup Quality Gate rules in Datadog.
 further_reading:
 - link: "/quality_gates"
@@ -43,7 +43,7 @@ The following example shows how to create a static analysis rule that fails when
 
 ## Invoking quality gates
 
-Quality Gates, requires [`datadog-ci`][7] version `2.19.0` or later.
+Quality Gates, requires [`datadog-ci`][7] version `2.27.0` or later.
 
 Invoke the Quality Gates evaluation by calling the [`datadog-ci gate evaluate`][4] command.
 
@@ -62,15 +62,12 @@ Otherwise, the rules might have an incorrect behavior due to the absence of the 
 |---|---|
 | `DD_API_KEY` | Point to your [Datadog API key][5]. |
 | `DD_APP_KEY` | Point to your [Datadog application key][6]. |
-| `DD_BETA_COMMANDS_ENABLED` | Set to `true`. |
 | `DD_SITE` | (Optional) Point to a specific [Datadog site][12] (default value is `datadoghq.com`). |
-| `LOGGING_MAXDAYS` | Number of days to keep file logs on the system before deleting them. Can be any number when running an unattended installation. |
-| `WORKERCONFIG_FILEPATH` | Specify the path to your Synthetics Private Location Worker JSON configuration file. Wrap the value in quotes if it contains spaces. |
 
-For example: 
+For example:
 
 ```shell
-DD_BETA_COMMANDS_ENABLED=true DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=&lt;API_KEY&gt; DD_APP_KEY=&lt;APP_KEY&gt; datadog-ci gate evaluate
+DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=API_KEY DD_APP_KEY=APP_KEY datadog-ci gate evaluate
 ```
 
 Configure the behavior of the `datadog-ci gate evaluate` command using the following flags:
@@ -81,7 +78,7 @@ based on the current pipeline context. By default, the command succeeds.
 By default, the command succeeds.
 - `--timeout`: The command stops its execution after the specified timeout in seconds. The default timeout is 10 minutes.
 The command typically completes within a few minutes, but it could take longer.
-- `--no-wait`: Skips the default time that the command waits for the events (tests, static analysis violations) to arrive to Datadog. The default wait time makes sure that the events are queryable in Datadog before the rules are executed, avoiding incorrect evaluations. If, in your pipeline, the job containing the `datadog-ci gate evaluate` command is called several minutes after the related events are sent to Datadog, you can opt to skip this waiting time by specifying the `--no-wait` flag. However, if used incorrectly, this flag may result in inaccurate rule evaluations.
+- `--no-wait`: Skips the default time that the command waits for the events (e.g. tests, static analysis violations) to arrive to Datadog. The default wait time makes sure that the events are queryable in Datadog before the rules are executed, avoiding incorrect evaluations. If, in your pipeline, the job containing the `datadog-ci gate evaluate` command is called several minutes after the related events are sent to Datadog, you can opt to skip this waiting time by specifying the `--no-wait` flag. However, if used incorrectly, this flag may result in inaccurate rule evaluations.
 
 Add [custom scopes](#custom-scope) to the command by using the `--scope` option one or more times:
 
