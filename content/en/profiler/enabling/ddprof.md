@@ -25,6 +25,8 @@ Profiles sent from `ddprof` show up under the _native_ runtime in the Datadog we
 
 ## Requirements
 
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][7].
+
 Supported operating systems
 : Linux (glibc or musl)
 
@@ -220,3 +222,4 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [4]: /getting_started/tagging/unified_service_tagging
 [5]: https://github.com/DataDog/ddprof/blob/main/docs/Commands.md
 [6]: /getting_started/profiler/
+[7]: /profiler/enabling/supported_versions/
