@@ -51,7 +51,7 @@ To use Static Analysis on GitHub, you can update an existing GitHub App or creat
 1. Under the **Subscribe to events** heading, check the **Pull request review comment** box.
 {{< img src="ci/static-analysis-pr-review-comment.png" alt="The checkbox for the pull request review comment permission" style="width:90%;" >}}
 
-### Enable CI visibility for your repositories
+### Enable Static Analysis PR comments for your repositories
 
 1. In Datadog, navigate to [CI Settings > Static Analysis Settings][4].
 1. Click the toggle switch next to a given repository to enable **GitHub Comments**. In the example below, comments are enabled for the `demo-static-analysis-gates` repository.
