@@ -21,7 +21,7 @@ disable_sidebar: true
 
 To configure Database Monitoring for Oracle, the following prerequisites must be met:
 
-1. An [Agent version](#recommended-agent-version) that supports Oracle monitoring features must be installed.
+1. An Agent version that supports Oracle monitoring features must be installed (`7.50.1` or greater).
     - [Install the Agent](#install-the-agent)
     - [Upgrade an existing Agent installation](#upgrade-an-existing-agent-installation)
 2. The Oracle integration must be installed.
@@ -36,71 +36,9 @@ If the above prerequisites are met, follow the setup instructions for your hosti
 
 ### Install the Agent
 
-#### Host requirements
+See the [DBM Setup Architecture][10] documentation to determine where to install the Agent. The Agent doesn't require any external Oracle clients.
 
-See the [DBM Setup Architecture][10] documentation to determine where to install the Agent.
-
-The Agent doesn't require any external Oracle clients.
-
-#### Recommended Agent version
-
-Datadog recommends the following Oracle DBM builds, because they contain all of the implemented Oracle monitoring features and bug fixes. The basis of an Oracle DBM build is always a stable Agent release.
-
-- Linux: `7.48.1~dbm~oracle~1.2-1`
-- Windows: `7.48.1-dbm-oracle-1.2-1`
-- Docker: `7.48.1-dbm-oracle-1.2`
-
-If you prefer an official Datadog Agent release, wait at least until the version `7.49.0`.
-
-- To install an Oracle build, see [Oracle DBM build installation](#oracle-dbm-build-installation).
-- To install the latest official release, follow the [instructions for your platform][3]. 
-
-#### Oracle DBM build installation
-
-{{< tabs >}}
-{{% tab "Linux" %}}
-
-Oracle DBM builds can be downloaded for [RHEL][6] and [Ubuntu][7] from their respective repositories.
-
-Set `DD_API_KEY` and run the following commands to install the Oracle DBM release, for example:
-
-```shell
-export DD_AGENT_DIST_CHANNEL=beta
-export DD_AGENT_MINOR_VERSION="48.1~dbm~oracle~1.2-1"
-
-DD_API_KEY= DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
-```
-
-[6]: https://yum.datadoghq.com/beta/7/x86_64/
-[7]: https://apt.datadoghq.com/dists/beta/7/
-{{% /tab %}}
-{{% tab "Windows" %}}
-
-Oracle DBM builds can be downloaded from the [Windows builds repository][8].
-
-Download the MSI file for the [Oracle DBM build][4].
-
-Set `APIKEY` and run the following command in the command prompt inside the directory where you downloaded the installer, for example:
-
-```shell
-start /wait msiexec /qn /i datadog-agent-7.48.1-dbm-oracle-1.2-1.x86_64.msi APIKEY="" SITE="datadoghq.com"
-```
-[4]: https://s3.amazonaws.com/ddagent-windows-stable/beta/datadog-agent-7.48.1-dbm-oracle-1.2-1.x86_64.msi
-[8]: https://ddagent-windows-stable.s3.amazonaws.com/
-
-{{% /tab %}}
-{{% tab "Docker" %}}
-Oracle DBM images can be found in the [Docker builds repository][9].
-
-Set `DD_API_KEY` and run the following command to install the Oracle DBM release, for example:
-
-```shell
-docker run -d --name dd-agent -v /var/run/docker.sock:/var/run/docker.sock:ro -v /proc/:/host/proc/:ro -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro -e DD_API_KEY="" -e DD_SITE="datadoghq.com" gcr.io/datadoghq/agent:7.48.1-dbm-oracle-1.2
-```
-
-[9]: https://hub.docker.com/r/datadog/agent/tags?page=1&name=oracle
-{{% /tab %}}
-{{< /tabs >}}
+To install the Agent, follow the [instructions for your platform][3].
 
 ### Upgrade an existing Agent installation
 
