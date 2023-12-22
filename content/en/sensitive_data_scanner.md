@@ -43,7 +43,7 @@ Sensitive Data Scanner can be found under [Organization Settings][1].
 - **Define Scanning Rules:** A scanning rule determines what sensitive information to match within the data. Within a scanning group, add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules from scratch to scan using custom regex patterns.
   - For Terraform, see the [datadog_sensitive_data_scanner_rule][4] resource.
 - **Create keyword dictionary**: Add keywords to tune detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card` and require that these keywords must be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-- **Set priority level**: Set the priority level for a rule depending on your business needs.
+- **Set priority level**: Set the priority level for a rule based on your business needs.
 
 **Note:**
 - Any rules that you add or update only affect data coming into Datadog after the rule was defined.
@@ -65,10 +65,10 @@ Sensitive Data Scanner can be found under [Organization Settings][1].
     - Callouts and embedded code
     - Atomic grouping and possessive quantifiers
 - **Define scope:** Specify whether you want to scan the entire event or just specific attributes. You can also choose to exclude specific attributes from the scan.
-- **Create keyword dictionary**: Add keywords to provide additional context when matching regex conditions. For example, if you are scanning for a nine-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card` to refine the match.
+- **Create keyword dictionary**: Add keywords to tune detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card` and require that these keywords must be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
 - **Process matching values:** Optionally, specify whether you want to redact, partially redact, or hash matching values. When redacting, specify placeholder text to replace the matching values with. When partially redacting, specify the position (start/end) and length (# of characters) to redact within matching values. Redaction, partial redaction, and hashing are all irreversible actions.
 - **Add tags:** Specify the tags you want to associate with events where the values match the specified regex pattern. Datadog recommends using `sensitive_data` and `sensitive_data_category` tags. These tags can then be used in searches, dashboards, and monitors.
-- **Set priority level**: Set the priority level for the issue created when a match is made against this rule.
+- **Set priority level**: Set the priority level for a rule based on your business needs.
 - **Name the rule:** Provide a human-readable name for the rule.
 
 {{< img src="sensitive_data_scanner/sds_rules_28_03_23.png" alt="A Sensitive Data Scanner custom rule" style="width:90%;">}}
