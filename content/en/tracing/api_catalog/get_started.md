@@ -22,27 +22,34 @@ further_reading:
 
 API Catalog uses APM instrumentation for distributed tracing to automatically discover endpoints in all environments on your Datadog organization. For instrumented services and supported libraries, endpoints are automatically populated into API Catalog.
 
-Register auto discovered endpoints, or upload an openAPI file to benefit the full value of the API Catalog.
+Register auto-discovered endpoints, or upload an OpenAPI file to benefit the full value of the API Catalog.
 
 ## Register auto-discovered endpoints
 
-Choose endpoints that you would like to move into a managed process, and hit the “register endpoints” button.
+Register auto-discovered endpoints to groups of APIs to track their usage, set ownership, and set monitoring policies from a centralized location.
+
+To register endpoints:
+
+1. From the API Catalog, select the endpoints to register.
+2. Click **Register Endpoints**.
+3. Select the API(s) you want to group the endpoints into.
+4. Click **Apply**.
 
 {{< img src="tracing/api_catalog/api-catalog-register.png" alt="Select endpoints in API Catalog and click Register Endpoints button." style="width:100%;" >}}
 
-Once endpoints are registered, Datadog will start collecting a new endpoint metric for better monitoring capabilities. It might take a few minutes for the data to display on the **New Monitor** page.
+After endpoints are registered, Datadog starts collecting a new endpoint metric for better monitoring capabilities. It might take a few minutes for the data to display if you try to create a new monitor.
 
-Auto discovery will not be available for some frameworks. Check compatibility status in the ‘learn more’ button on the app. If you still cannot find your endpoints, try uploading a definition file containing them, Datadog will automatically start to collect data on those endpoint definitions once uploaded.
+Auto discovery isn't available for some frameworks. Check compatibility status in the **learn more** button on the app. If you still cannot find your endpoints, try uploading a definition file containing them. Datadog automatically starts collecting data on those endpoint definitions after they are uploaded.
 
-## Upload openAPI file
+## Upload OpenAPI file
 
-Upload API definitions that you already own to quickly understand what endpoints are seeing traffic, and what don’t, and to get performance and deployment information on top of your API definitions.
+Upload API definitions that you already own to see which endpoints are receiving traffic, which are not receiving traffic, and get performance and deployment information on top of your API definitions.
 
-Supported formats are openAPI 2 and 3.
+Supported formats are OpenAPI 2 and 3.
 
-Datadog support custom openAPI tags to help manage metadata:
-dd_tags
-dd_team
+Datadog support custom OpenAPI tags to help manage metadata:
+- dd_tags
+- dd_team
 
 ```yaml
 openapi: 3.0.2
@@ -80,7 +87,6 @@ paths:
        '500':
          description: An internal server error
 ```
-
 
 ## Further reading
 

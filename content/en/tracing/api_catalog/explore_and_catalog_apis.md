@@ -14,7 +14,7 @@ further_reading:
 
 The [API Catalog][1] shows all endpoints in all environments in your Datadog organization. The performance data shown for each endpoint is scoped to the environment and time frame you select. You can browse and ask questions by querying different properties and metrics for more precise results, and you can filter using facets and tags.
 
-In the table, click a header to sort by its column. For example, click **P99** to see endpoints with the highest 99th percentile for latency. Note that the **P99** column may not be displayed by default.
+In the table, click a header to sort by its column. For example, click **P99** to see endpoints with the highest 99th percentile for latency. **Note**: the **P99** column may not be displayed by default.
 
 The table also shows **TEAM** ownership for the API. This information is inherited from the associated service definition in the [Service Catalog][2]. The service owner owns all of the endpoints connected to the service.
 
@@ -28,7 +28,7 @@ To scope the data shown in the table, specify an environment, another primary ta
 <!-- image TKTK -->
 ### Classify endpoints with shared expectations
 
-In addition to tagging an endpoint from its details page, you can add tags to multiple endpoints at once. To do this, select multiple endpoint check boxes, and click **Edit Tags**.  Use these labels to describe business logic, importance, or other useful grouping information. Applying these labels can help you view and access groups of endpoints defined by your own criteria. This is helpful to create assets such as monitors and dashboards for endpoint groups with common characteristics.
+In addition to tagging an endpoint from its details page, you can add tags to multiple endpoints at once. To do this, select multiple endpoint check boxes, and click **Edit Tags**. Use these labels to describe business logic, importance, or other useful grouping information. Applying these labels can help you view and access groups of endpoints defined by your own criteria. This is helpful to create assets such as monitors and dashboards for endpoint groups with common characteristics.
 
 For example, if you want to create latency alerts for endpoints that are particularly sensitive to performance problems, tag those endpoints with a tag like `Latency sensitive`. 
 
