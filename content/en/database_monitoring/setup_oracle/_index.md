@@ -9,10 +9,6 @@ disable_sidebar: true
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">
-The features described on this page are in beta. Contact your Customer Success Manager to provide feedback or ask for help.
-</div>
-
 ## Supported Oracle versions, features, and architectures
 
 - **Versions**: 11.2, 12c, 18c, 19c, and 21c
