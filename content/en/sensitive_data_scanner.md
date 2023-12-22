@@ -122,9 +122,12 @@ To investigate an issue:
 
 1. Click on the issue in the **Issues Overview**.
 2. In the issue panel, click **View Recent Changes** to navigate to Audit Trail and see if there are any recent configuration changes that caused the sensitive data issue.
-3. Click **View All Logs** to see in Log Explorer all logs matching the query. Click **View All APM Spans** to see in Trace Explorer all traces matching the query. Click **View All RUM Events** to see in RUM Explorer all RUM events matching the query. Click **View All Events** to see in Events Explorer all events matching the query.
+3. Click **View All Logs** to see in Log Explorer all logs matching the query.  
+Click **View All APM Spans** to see in Trace Explorer all traces matching the query.  
+Click **View All RUM Events** to see in RUM Explorer all RUM events matching the query.  
+Click **View All Events** to see in Events Explorer all events matching the query.
 4. In the **Blast Radius** section:  
-    a. View the Top 10 services, hosts, and environments impacted by this sensitive data issue.
+    a. View the Top 10 services, hosts, and environments impacted by this sensitive data issue.  
     b. Click on a service to see more information about the service in the **Service Catalog**.  
     c. Click on a host to see more information about the host in the Infrastructure List page.
 
