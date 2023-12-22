@@ -1,7 +1,7 @@
 ---
 title: GitHub Pull Requests
 kind: documentation
-description: Feature overview and setup instructions for GitHub Source Code Management using Static Analysis.
+description: Feature overview and setup instructions for using Static Analysis in GitHub pull requests.
 ---
 
 ## Feature overview
@@ -14,7 +14,7 @@ The comment includes the name, ID, severity, category, and description of the vi
 
 {{< img src="ci/static-analysis-pr-comment-example.png" alt="Example of a Static Analysis comment on a pull request" style="width:90%;" >}}
 
-## Set up Static Analysis for GitHub source code
+## Set up Static Analysis for GitHub pull requests
 
 ### Prerequisites
 
@@ -22,7 +22,7 @@ The [GitHub integration][2] must be installed.
 
 ### Enable Static Analysis on Datadog
 
-To use Datadog Static Analysis, add the appropriate configuration file to your repository, as described in the [Static Analysis setup instructions][1].
+To use Datadog Static Analysis, add the appropriate configuration files to your repository, as described in the [Static Analysis setup instructions][1].
 
 ### Configure a GitHub App
 
