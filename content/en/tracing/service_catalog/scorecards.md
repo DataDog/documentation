@@ -43,10 +43,6 @@ To select which of the out-of-the-box rules are evaluated for each of the defaul
 
 ### Creating custom rules
 
-{{< callout url="https://forms.gle/8HCfQiuKM8FVceTG9" btn_hidden="false">}}
-Custom Scorecard rules are in private beta. Join the beta by requesting access.
-{{< /callout >}}
-
 To add custom rules to your Scorecards dashboard using the [Scorecards API][10]: 
 
 1. Specify the name of the rule, the scorecard it belongs to, a rule description, and an owner to pass to `/scorecard/rules`.
