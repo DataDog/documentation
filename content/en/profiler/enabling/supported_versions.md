@@ -8,11 +8,11 @@ further_reading:
   text: "Enabling Profiler"
 ---
 
-The following tables summarizes the features available for each language runtime. 
-- **Minimum versions** are the minimum required to get access to a particular feature. If you have an earlier version, that feature is not supported. 
-- **Recommended versions** are the versions that give you access to **all** the supported features. It's usually best if you update to the latest version of all tracers.
+The following tables summarize the features available for each language runtime. 
+- **Minimum versions** are required to get access to a particular feature. If you have an earlier version, that feature is not supported. 
+- **Recommended versions** give you access to **all** the supported features. It's usually best if you update to the latest version of all tracers.
 
-For more more details, go to a language's profiler setup page (click the language heading in each table to access).
+For more details, go to a language's profiler setup page (click the language heading in each table to access).
 
 ## Runtime and tracer versions
 
