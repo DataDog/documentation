@@ -71,11 +71,11 @@ The Scanning Rule Library contains an evergrowing collection of predefined rules
    
 #### Define rule target and action
 
-- **Create keyword dictionary**: Add keywords to tune detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card` and require that these keywords must be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+- **Create keyword dictionary:** Add keywords to tune detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card` and require that these keywords must be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
 - **Define scope:** Specify whether you want to scan the entire event or just specific attributes. You can also choose to exclude specific attributes from the scan.
 - **Process matching values:** Optionally, specify whether you want to redact, partially redact, or hash matching values. When redacting, specify placeholder text to replace the matching values with. When partially redacting, specify the position (start/end) and length (# of characters) to redact within matching values. Redaction, partial redaction, and hashing are all irreversible actions.
 - **Add tags:** Specify the tags you want to associate with events where the values match the specified regex pattern. Datadog recommends using `sensitive_data` and `sensitive_data_category` tags. These tags can then be used in searches, dashboards, and monitors.
-- **Set priority level**: Set the priority level for a rule based on your business needs.
+- **Set priority level:** Set the priority level for a rule based on your business needs.
 - **Name the rule:** Provide a human-readable name for the rule.
 
 {{< img src="sensitive_data_scanner/sds_rules_28_03_23.png" alt="A Sensitive Data Scanner custom rule" style="width:90%;">}}
