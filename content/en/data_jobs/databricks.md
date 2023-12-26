@@ -11,16 +11,19 @@ Data Jobs Monitoring gives visibility into the performance and reliability of yo
 
 ## Setup
 
+Follow these steps to enable Data Jobs Monitoring for Databricks.
+
 1. [Configure the Datadog-Databricks integration](#configure-the-datadog-databricks-integration) with your Databricks API token.
-2. [Install the Datadog Agent](#install-the-datadog-agent-on-your-databricks-clusters) on your Databricks cluster(s).
-3. [Add your Datadog API key](#add-your-datadog-api-key-in-databricks) in Databricks.
+1. [Install the Datadog Agent](#install-the-datadog-agent-on-your-databricks-clusters) on your Databricks cluster(s).
+1. [Add your Datadog API key](#add-your-datadog-api-key-in-databricks) in Databricks.
 
 ### Configure the Datadog-Databricks integration 
 
-1. In your Databricks workspace, click _User Settings_. Then click on _Access Tokens_.
-2. Click _Generate new token_, enter a comment, and click _Generate_. Take note of your token.
-3. In Datadog, open the Databricks integration tile.
-4. On the _Configure_ tab, click _add new_. Enter a workspace name, your Databricks workspace URL, and the token you generated.
+1. In your Databricks workspace, click **User Settings**. Then click on **Access Tokens**.
+1. Click **Generate new token**, enter a comment, and click **Generate**. Take note of your token.
+1. In Datadog, open the Databricks integration tile.
+1. On the **Configure** tab, click **Add New**. 
+1. Enter a workspace name, your Databricks workspace URL, and the Databricks token you generated.
    {{< img src="data_jobs/databricks/configure-token.png" alt="In Datadog-Databricks integration, a Databricks workspace." style="width:100%;" >}}
 
 
@@ -31,25 +34,50 @@ Use [this init script][2] to install the Datadog Agent on a specific Databricks 
 {{< tabs >}}
 {{% tab "On a specific cluster" %}}
 1. Save the [init script][1] to TK
-2. In Databricks, on the cluster configuration page, click the _Advanced options_ toggle.
-3. At the bottom of the page, go to the _Init Scripts_ tab.
-4. Under the _Destination_ drop-down, select `Workspace`.
-5. Under _Init script path_, enter the path to your init script. For example, TK
-6. Click _Add_.
+1. In Databricks, on the cluster configuration page, click the **Advanced options** toggle.
+1. At the bottom of the page, go to the **Init Scripts** tab.
+1. Under the **Destination** drop-down, select `Workspace`.
+1. Under **Init script path**, enter the path to your init script. For example, TK
+1. Click **Add**.
 
 [1]: /resources/sh/data_jobs/datadog_databricks_job_monitoring_init_without_logs.sh
 {{% /tab %}}
 {{% tab "Global" %}}
-1. In Databricks, go to _Admin Settings_ and click the _Global Init Scripts_ tab.
-2. Click _Add_. Name your script. Then, in the _Script_ field, copy and paste the [init script][1].
-3. Toggle _Enabled_.
+1. In Databricks, go to **Admin Settings** and click the **Global Init Scripts** tab.
+1. Click **Add**. Name your script. Then, in the **Script** field, copy and paste the [init script][1].
+1. Toggle **Enabled**.
+
 
 [1]: /resources/sh/data_jobs/datadog_databricks_job_monitoring_init_without_logs.sh
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Add your Datadog API key in Databricks
-TK
+1. Find your [Datadog API key][3].
+1. Use [Databricks Secret Management][4] to store your Datadog API key. You can name the scope `datadog`, and you can name the secret `DD_API_KEY`.
+1. In Databricks, on the cluster configuration page, click the **Advanced options** toggle.
+1. At the bottom of the page, go to the **Spark** tab.
+1. In the **Environment variables** textbox, set values for `DD_API_KEY` and `DD_SITE`.
+
+    {{< img src="data_jobs/databricks/configure-databricks-spark-envvars.png" alt="Databricks UI, cluster configuration advanced options, Spark tab. A textbox titled 'Environment variables' contains values for DD_API_KEY and DD_SITE." style="width:100%;" >}}
+
+   For example, if you added your Datadog API key as `DD_API_KEY` to a secret scope named `datadog`, and your [Datadog site][5] is {{< region-param key="dd_site" code="true" >}}, paste the following into the box:
+
+   ```
+   DD_API_KEY={{secrets/datadog/DD_API_KEY}}
+   DD_SITE={{< region-param key="dd_site" code="true" >}}
+   ```
+
+   Optionally, you can also set other Datadog environment variables here, such as `DD_ENV` and `DD_SERVICE`.
+1. Click **Confirm**.
+
+## Validation
+
+In Datadog, visit the [Data Jobs Monitoring][6] page to see a list of all your Databricks jobs.
 
 [1]: https://app.datadoghq.com/integrations/databricks?search=databricks
 [2]: /resources/sh/data_jobs/datadog_databricks_job_monitoring_init_without_logs.sh
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://docs.databricks.com/en/security/secrets/index.html
+[5]: /getting_started/site/
+[6]: https://app.datadoghq.com/apm/data-jobs
