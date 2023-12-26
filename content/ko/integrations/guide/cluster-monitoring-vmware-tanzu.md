@@ -75,9 +75,9 @@ VMware Tanzu용 Datadog 클러스터 모니터링은 다음과 같은 주요 기
 
 ## 메트릭 및 대시보드 보기
 
-1. 클라우드 파운드리 [개요][18] 대시보드를 검토합니다.
+1. Cloud Foundry [Overview][18] Dashboard를 검토합니다.
 
- {{< img src="/integrations/guide/vmware_tanzu/cloud-foundry-dashboard_2.png" alt="클라우드 파운드리 개요 대시보드" >}}
+ {{< img src="/integrations/guide/vmware_tanzu/cloud-foundry-dashboard_2.png" alt="The Cloud Foundry Overview dashboard" >}}
 
 2. [메트릭 탐색기][19] 페이지에서 개별 메트릭을 탐색하고 `cloudfoundry.nozzle`로 시작하는 메트릭을 검색합니다:
 
