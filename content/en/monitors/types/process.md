@@ -73,7 +73,7 @@ Use thresholds to set a numeric value for triggering an alert. Datadog has two t
 
 #### Best practices for timeframe selection
 
-Datadog recommends to pick the largest timeframe that you can support. This allows for additional fault tolerance in the case where an Agent becomes  unavailable or encounters network issues.
+Datadog recommends to pick the largest timeframe that you can support. This allows for additional fault tolerance in the case where an Agent becomes unavailable or encounters network issues.
 
 Datadog recommends to always choose a timeframe that is 5 minutes or larger. This is because a network disruption or clock drift can cause 1 minute monitors to produce false positives. As a result, datadog plans on eventually phasing out 1 minute monitors.
 
