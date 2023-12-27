@@ -6418,8 +6418,20 @@ components:
             type: string
           type: array
         is_cspm_enabled:
-          description: When enabled, Datadog performs configuration checks across
-            your Google Cloud environment by continuously scanning every resource.
+          description: 'When enabled, Datadog will activate the Cloud Security Monitoring
+            product for this service account. Note: This requires resource_collection_enabled
+            to be set to true.'
+          type: boolean
+        is_security_command_center_enabled:
+          default: false
+          description: 'When enabled, Datadog will attempt to collect Security Command
+            Center Findings. Note: This requires additional permissions on the service
+            account.'
+          example: true
+          type: boolean
+        resource_collection_enabled:
+          default: false
+          description: When enabled, Datadog scans for all resources in your GCP environment.
           type: boolean
       type: object
     GCPSTSServiceAccountCreateRequest:
@@ -13664,6 +13676,27 @@ components:
       - id
       - type
       type: object
+    RelationshipToUserTeamTeam:
+      description: Relationship between team membership and team
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToUserTeamTeamData'
+      required:
+      - data
+      type: object
+    RelationshipToUserTeamTeamData:
+      description: The team associated with the membership
+      properties:
+        id:
+          description: The ID of the team associated with the membership
+          example: d7e15d9d-d346-43da-81d8-3d9e71d9a5e9
+          type: string
+        type:
+          $ref: '#/components/schemas/UserTeamTeamType'
+      required:
+      - id
+      - type
+      type: object
     RelationshipToUserTeamUser:
       description: Relationship between team membership and user
       properties:
@@ -16526,6 +16559,12 @@ components:
         pattern:
           description: Not included if there is a relationship to a standard pattern.
           type: string
+        priority:
+          description: Integer from 1 (high) to 5 (low) indicating rule issue severity.
+          format: int64
+          maximum: 5
+          minimum: 1
+          type: integer
         tags:
           description: List of tags.
           items:
@@ -16681,6 +16720,13 @@ components:
         pattern:
           description: Regex to match.
           type: string
+        priority:
+          description: Integer from 1 (high) to 5 (low) indicating standard pattern
+            issue severity.
+          format: int64
+          maximum: 5
+          minimum: 1
+          type: integer
         tags:
           description: List of tags.
           items:
@@ -19797,6 +19843,20 @@ components:
     UserTeamAttributes:
       description: Team membership attributes
       properties:
+        provisioned_by:
+          description: 'The mechanism responsible for provisioning the team relationship.
+
+            Possible values: null for added by a user, "service_account" if added
+            by a service account, and "saml_mapping" if provisioned via SAML mapping.'
+          nullable: true
+          readOnly: true
+          type: string
+        provisioned_by_id:
+          description: UUID of the User or Service Account who provisioned this team
+            membership, or null if provisioned via SAML mapping.
+          nullable: true
+          readOnly: true
+          type: string
         role:
           $ref: '#/components/schemas/UserTeamRole'
       type: object
@@ -19848,6 +19908,8 @@ components:
     UserTeamRelationships:
       description: Relationship between membership and a user
       properties:
+        team:
+          $ref: '#/components/schemas/RelationshipToUserTeamTeam'
         user:
           $ref: '#/components/schemas/RelationshipToUserTeamUser'
       type: object
@@ -19873,6 +19935,15 @@ components:
       type: string
       x-enum-varnames:
       - ADMIN
+    UserTeamTeamType:
+      default: team
+      description: User team team type
+      enum:
+      - team
+      example: team
+      type: string
+      x-enum-varnames:
+      - TEAM
     UserTeamType:
       default: team_memberships
       description: Team membership type
@@ -22384,8 +22455,7 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta for CI Pipeline Visibility
-        customers.
+      x-unstable: '**Note**: This endpoint is in private beta.
 
         If you want to request access, complete the [form](https://forms.gle/Eqq6uXfGjYxmqpjDA).'
   /api/v2/dora/incident:
@@ -22438,8 +22508,7 @@ paths:
       x-menu-order: 4
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta for CI Pipeline Visibility
-        customers.
+      x-unstable: '**Note**: This endpoint is in private beta.
 
         If you want to request access, complete the [form](https://forms.gle/Eqq6uXfGjYxmqpjDA).'
   /api/v2/downtime:
@@ -22797,9 +22866,6 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in beta.
-
-        For access, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/events/search:
     post:
       description: 'List endpoint returns events that match an events search query.
@@ -22845,9 +22911,6 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in beta.
-
-        For access, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents:
     get:
       description: Get all incidents for the user's organization.
@@ -24788,9 +24851,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Add Okta account
       tags:
       - Okta Integration
@@ -24834,9 +24894,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Delete Okta account
       tags:
       - Okta Integration
@@ -24868,9 +24925,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Get Okta account
       tags:
       - Okta Integration
@@ -24908,9 +24962,6 @@ paths:
           $ref: '#/components/responses/NotFoundResponse'
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Update Okta account
       tags:
       - Okta Integration
@@ -26682,7 +26733,9 @@ paths:
         operationId: DeleteBulkTagsMetricsConfiguration
         parameters:
         - name: body
-          source: ''
+          template: "{\n  \"data\": {\n    \"id\":\"{{ data.id }}\",\n    \"type\":\"metric_bulk_configure_tags\",\n
+            \   \"attributes\": {\n      \"emails\": [\"{{ data.attributes.emails[0]
+            }}\"]\n    }\n  }\n}"
         type: unsafe
   /api/v2/metrics/{metric_name}/active-configurations:
     get:
@@ -26986,7 +27039,9 @@ paths:
         queryable.
 
         Can only be used with application keys from users with the `Manage Tags for
-        Metrics` permission.'
+        Metrics` permission. This endpoint requires
+
+        a tag configuration to be created first.'
       operationId: UpdateTagConfiguration
       parameters:
       - $ref: '#/components/parameters/MetricName'

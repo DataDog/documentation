@@ -503,9 +503,9 @@ Rum.enable(rumConfig)
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/android
 [3]: /real_user_monitoring/android/data_collected
-[4]: /real_user_monitoring/android/advanced_configuration/#automatically-track-views
-[5]: /real_user_monitoring/android/advanced_configuration/#initialization-parameters
-[6]: /real_user_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-network-requests
 [7]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
 [8]: https://square.github.io/okhttp/features/events/
 [9]: /real_user_monitoring/android/data_collected/#event-specific-attributes

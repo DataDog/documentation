@@ -61,7 +61,8 @@ Search and filter your feature flags by typing in the search bar. You can also u
 {{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-search-filter.png" alt="Feature Flag list search bar and filtering" style="width:90%;" >}}
 
 ### Feature Flag Status
-There are two possible feature flag statuses:
+There are three possible feature flag statuses:
+- **Active**: The feature flag has evaluated different variants for the past 2 weeks
 - **Inactive**: For the past 2 weeks, there have only been feature flag evaluations for your control variant
 - **Out to 100%**: For the past 2 weeks, there have only been feature flag evaluations for one of your non-control variants
 
