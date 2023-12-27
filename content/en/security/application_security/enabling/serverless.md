@@ -18,7 +18,7 @@ further_reading:
       text: "Troubleshooting Application Security Management"
     - link: "/security/application_security/threats/"
       tag: "Documentation"
-      text: "Application Threat Monitoring and Protection"
+      text: "Application Threat Management"
 ---
 
 {{< partial name="security-platform/appsec-serverless.html" >}}</br>
@@ -51,14 +51,14 @@ To install and configure the Datadog Serverless Framework plugin:
    ```sh
    serverless plugin install --name serverless-plugin-datadog
    ```
-    
+
 2. Enable ASM by updating your `serverless.yml` with the `enableASM` configuration parameter:
    ```yaml
    custom:
      datadog:
        enableASM: true
    ```
-   
+
    Overall, your new `serverless.yml` file should contain at least:
    ```yaml
    custom:
@@ -68,7 +68,7 @@ To install and configure the Datadog Serverless Framework plugin:
        enableASM: true
    ```
    See also the complete list of [plugin parameters][4] to further configure your lambda settings.
-   
+
 4. Redeploy the function and invoke it. After a few minutes, it appears in [ASM views][3].
 
 [1]: https://docs.datadoghq.com/serverless/serverless_integrations/plugin
@@ -130,7 +130,7 @@ The Datadog CLI modifies existing Lambda function configurations to enable instr
     ```
 
     To fill in the placeholders:
-    - Replace `<functionname>` and `<another_functionname>` with your Lambda function names. 
+    - Replace `<functionname>` and `<another_functionname>` with your Lambda function names.
     - Alternatively, you can use `--functions-regex` to automatically instrument multiple functions whose names match the given regular expression.
     - Replace `<aws_region>` with the AWS region name.
 
@@ -191,7 +191,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
 1. Install the Datadog tracer:
-   - **Python** 
+   - **Python**
        ```sh
        # Use this format for x86-based Lambda deployed in AWS commercial regions
           arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:72
@@ -207,16 +207,16 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
           ```
           Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. The available `RUNTIME` options are `Python37`, `Python38` and `Python39`.
 
-   - **Node**   
+   - **Node**
        ``` sh
        # Use this format for AWS commercial regions
          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:91
 
          # Use this format for AWS GovCloud regions
          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
-         ```  
+         ```
          Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available RUNTIME options are `Node12-x`, `Node14-x`, `Node16-x` and         `Node18-x`.
-        
+
    - **Java**: [Configure the layers][1] for your Lambda function using the ARN in one of the following formats, depending on where your Lambda is deployed. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:
      ```sh
      # In AWS commercial regions
@@ -255,7 +255,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 
 {{< site-region region="ap1" >}}
 1. Install the Datadog tracer:
-   - **Python** 
+   - **Python**
        ```sh
        # Use this format for x86-based Lambda deployed in AWS commercial regions
           arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:72
@@ -271,16 +271,16 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
           ```
           Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. The available `RUNTIME` options are `Python37`, `Python38`, `Python39`, `Python310`, and `Python311`.
 
-   - **Node**   
+   - **Node**
        ``` sh
        # Use this format for AWS commercial regions
          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:91
 
          # Use this format for AWS GovCloud regions
          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
-         ```  
+         ```
          Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available RUNTIME options are `Node12-x`, `Node14-x`, `Node16-x` and         `Node18-x`.
-  
+
 
    - **Java**: [Configure the layers][1] for your Lambda function using the ARN in one of the following formats, depending on where your Lambda is deployed. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:
      ```sh
@@ -327,7 +327,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
    ```
 
 4. For **Node** and **Python** functions only, double-check that the function's handler is set correctly:
-    - **Node**: Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler`. 
+    - **Node**: Set your function's handler to `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler`.
        - Also, set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
     - **Python**: Set your function's handler to `datadog_lambda.handler.handler`.
        - Also, set the environment variable `DD_LAMBDA_HANDLER` to your original handler, for example, `myfunc.handler`.
@@ -374,7 +374,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Copy the Datadog Node.JS tracer into your Docker image. 
+2. Copy the Datadog Node.JS tracer into your Docker image.
 
    ```dockerfile
    COPY --from=datadog/dd-lib-js-init /operator-build/node_modules /dd_tracer/node/
@@ -391,7 +391,7 @@ CMD ["/nodejs/bin/node", "/path/to/your/app.js"]
    ENV DD_APPSEC_ENABLED=1
    ```
 
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. 
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
    **Note**: If you already have an entrypoint defined inside your Dockerfile, see the [alternative configuration](#alt-node).
 
    ```dockerfile
@@ -454,7 +454,7 @@ CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Install the Datadog Python tracer. 
+2. Install the Datadog Python tracer.
    ```dockerfile
    RUN pip install --target /dd_tracer/python/ ddtrace
    ```
@@ -468,7 +468,7 @@ CMD ["/dd_tracer/python/bin/ddtrace-run", "python", "app.py"]
    ENV DD_APPSEC_ENABLED=1
    ```
 
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. 
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
    **Note**: If you already have an entrypoint defined inside your Dockerfile, see the [alternative configuration](#alt-python).
    ```dockerfile
    ENTRYPOINT ["/app/datadog-init"]
@@ -515,7 +515,7 @@ Add the following instructions and arguments to your Dockerfile.
 
 ```dockerfile
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-ADD https://dtdg.co/latest-java-tracer /dd_tracer/java/dd-java-agent.jar
+ADD 'https://dtdg.co/latest-java-tracer' /dd_tracer/java/dd-java-agent.jar
 ENV DD_SERVICE=datadog-demo-run-java
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
@@ -530,9 +530,9 @@ CMD ["./mvnw", "spring-boot:run"]
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-2. Add the Datadog Java tracer to your Docker image. 
+2. Add the Datadog Java tracer to your Docker image.
    ```dockerfile
-   ADD https://dtdg.co/latest-java-tracer /dd_tracer/java/dd-java-agent.jar
+   ADD 'https://dtdg.co/latest-java-tracer' /dd_tracer/java/dd-java-agent.jar
    ```
    If you install the Datadog tracer library directly in your application, as outlined in the [manual tracer instrumentation instructions][1], omit this step.
 
@@ -544,7 +544,7 @@ CMD ["./mvnw", "spring-boot:run"]
    ENV DD_APPSEC_ENABLED=1
    ```
 
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. 
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
    **Note**: If you already have an entrypoint defined inside your Dockerfile, see the [alternative configuration](#alt-java).
    ```dockerfile
    ENTRYPOINT ["/app/datadog-init"]
@@ -560,7 +560,7 @@ If you already have an entrypoint defined inside your Dockerfile, you can instea
 
 {{< highlight dockerfile "hl_lines=7" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-ADD https://dtdg.co/latest-java-tracer /dd_tracer/java/dd-java-agent.jar
+ADD 'https://dtdg.co/latest-java-tracer' /dd_tracer/java/dd-java-agent.jar
 ENV DD_SERVICE=datadog-demo-run-java
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
@@ -572,7 +572,7 @@ If you require your entrypoint to be instrumented as well, you can swap your ent
 
 {{< highlight dockerfile "hl_lines=7-8" >}}
 COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
-ADD https://dtdg.co/latest-java-tracer /dd_tracer/java/dd-java-agent.jar
+ADD 'https://dtdg.co/latest-java-tracer' /dd_tracer/java/dd-java-agent.jar
 ENV DD_SERVICE=datadog-demo-run-java
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
@@ -606,7 +606,7 @@ ENV DD_APPSEC_ENABLED=1
    COPY --from=datadog/serverless-init:1 /datadog-init /app/datadog-init
    ```
 
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. 
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
    **Note**: If you already have an entrypoint defined inside your Dockerfile, see the [alternative configuration](#alt-go).
    ```dockerfile
    ENTRYPOINT ["/app/datadog-init"]
@@ -768,7 +768,7 @@ CMD ["rails", "server", "-b", "0.0.0.0"]
    ENV DD_TRACE_PROPAGATION_STYLE=datadog
    ```
 
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. 
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
    **Note**: If you already have an entrypoint defined inside your Dockerfile, see the [alternative configuration](#alt-ruby).
    ```dockerfile
    ENTRYPOINT ["/app/datadog-init"]
@@ -823,7 +823,7 @@ ENV DD_VERSION=1
 ENTRYPOINT ["/app/datadog-init"]
 
 # use the following for an Apache and mod_php based image
-RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf 
+RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf
 EXPOSE 8080
 CMD ["apache2-foreground"]
 
@@ -857,17 +857,17 @@ CMD php-fpm; nginx -g daemon off;
    ENV DD_VERSION=1
    ```
 
-4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process. 
+4. Change the entrypoint to wrap your application in the Datadog `serverless-init` process.
    **Note**: If you already have an entrypoint defined inside your Dockerfile, see the [alternative configuration](#alt-php).
    ```dockerfile
    ENTRYPOINT ["/app/datadog-init"]
    ```
 
 5. Execute your application.
-   
+
    Use the following for an Apache and mod_php based image:
    ```dockerfile
-   RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf 
+   RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf
    EXPOSE 8080
    CMD ["apache2-foreground"]
    ```
@@ -888,7 +888,7 @@ RUN php /datadog-setup.php --php-bin=all
 ENV DD_SERVICE=datadog-demo-run-php
 ENV DD_ENV=datadog-demo
 ENV DD_VERSION=1
-RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf 
+RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf
 EXPOSE 8080
 CMD ["/app/datadog-init", "apache2-foreground"]
 {{< /highlight >}}
@@ -905,7 +905,7 @@ ENV DD_VERSION=1
 ENTRYPOINT ["/app/datadog-init"]
 
 # use the following for an Apache and mod_php based image
-RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf 
+RUN sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf
 EXPOSE 8080
 CMD ["your_entrypoint.sh", "apache2-foreground"]
 
@@ -990,7 +990,7 @@ To see Application Security Management threat detection in action, send known at
    ```
 A few minutes after you enable your application and exercise it, **threat information appears in the [Application Signals Explorer][3]**.
 
-{{< img src="/security/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
+{{< img src="/security/security_monitoring/explorer/signal_panel_v2.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 
 ## Further reading
 

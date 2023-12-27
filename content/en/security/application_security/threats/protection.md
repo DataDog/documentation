@@ -12,7 +12,7 @@ further_reading:
 
 If your service is running [an Agent with Remote Configuration enabled and a tracing library version that supports it][2], you can block attacks and attackers from the Datadog UI without additional configuration of the Agent or tracing libraries.
 
-Application Security Management (ASM) Protect enables you to slow down attacks and attackers by _blocking_ them. Suspicious requests are blocked in real-time by the Datadog tracing libraries. Blocks are saved in the Datadog platform, automatically and securely fetched by the Datadog Agent, deployed in your infrastructure, and applied to your services.
+Application Security Management (ASM) Protect enables you to slow down attacks and attackers by _blocking_ them. Security traces are blocked in real-time by the Datadog tracing libraries. Blocks are saved in the Datadog platform, automatically and securely fetched by the Datadog Agent, deployed in your infrastructure, and applied to your services.
 
 ## Prerequisites 
 
@@ -28,7 +28,7 @@ To leveraging protection capabilities for your service:
 
 You can block attackers that are flagged in ASM [Security Signals][5] temporarily or permanently. In the Signals Explorer, click into a signal to see what users and IP addresses are generating the signal, and optionally block them.
 
-{{< img src="/security/application_security/appsec-block-user-ip.png" alt="A security signal panel in Datadog ASM, allowing to block the attackers' IPs" width="75%">}}
+{{< img src="/security/application_security/appsec-block-user-ip_v2.png" alt="A security signal panel in Datadog ASM, allowing to block the attackers' IPs" width="75%">}}
 
 
 From there, all ASM-protected services block incoming requests performed by the blocked IP or user, for the specified duration. All blocked traces are tagged with `security_response.block_ip` or `security_response.block_user` and displayed in the [Trace Explorer][6]. Services where ASM is disabled aren't protected.
@@ -60,7 +60,7 @@ ASM In-App WAF (web application firewall) combines the detection techniques of p
 
 Because ASM is aware of an application's routes, protection can be applied granularly to specific services, and not necessarily across all applications and traffic. This contextual efficiency reduces your inspection effort, and it reduces the false positive rate compared to a perimeter WAF. There is no learning period, because most web frameworks provide a structured map of routes. ASM can help your team roll out protections against zero-day vulnerabilities automatically soon after the vulnerability is disclosed, while targeting vulnerable applications, limiting the risk of false positives.
 
-### How In-App WAF blocks suspicious requests
+### How In-App WAF blocks security traces
 
 In addition to the `monitoring` and `disabled` modes offered for each of the 130+ In-App WAF rules, rules also have `blocking` mode. Each rule specifies conditions on the incoming request to define what the library considers suspicious. When a given rule pattern matches an ongoing HTTP request, the request is blocked by the library. 
 
@@ -72,7 +72,7 @@ As In-App WAF rules are toggled between modes, the changes are reflected in near
 
 Manage In-App WAF by navigating to Security --> Application Security --> Configuration --> [In-App WAF][9].
 
-View blocked suspicious requests in the [Trace Explorer][11] by filtering on the facet `Blocked:true`.
+View blocked security traces in the [Trace Explorer][11] by filtering on the facet `Blocked:true`.
 
 {{< img src="security/application_security/blocked-true.png" alt="ASM Trace Explorer filtered using facet Blocked set to true." style="width:100%;" >}}
 
@@ -102,7 +102,7 @@ You can also optionally redirect attackers to a custom deny page and away from y
 
 ### Disable protection across all services (Disabling protection mode)
 
-Protection mode is **on** by default and is a toggle available to quickly disable blocking across **all** your services. Requests can be blocked from two sections in Datadog: all attacker requests from Security Signals, and suspicious requests from In-App WAF. The latter also requires you to configure blocking per service in In-App WAF. 
+Protection mode is **on** by default and is a toggle available to quickly disable blocking across **all** your services. Requests can be blocked from two sections in Datadog: all attacker requests from Security Signals, and security traces from In-App WAF. The latter also requires you to configure blocking per service in In-App WAF. 
 
 As important as it is for you to be able to apply protection granularly and reduce the likelihood of legitimate users getting blocked, you sometimes need a simple off switch to quickly stop **all** blocking across **all** services. To turn off protection, navigate to **Security > Application Security > Configuration > [Protection][16]** and toggle **Protection mode** to off.
 

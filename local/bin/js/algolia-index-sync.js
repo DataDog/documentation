@@ -35,7 +35,7 @@ const updateSettings = (index) => {
         attributesToSnippet: ['content:20'],
         indexLanguages: ['ja', 'en', 'fr', 'ko'],
         queryLanguages: ['ja', 'en', 'fr', 'ko'],
-        attributeForDistinct: 'full_url',
+        attributeForDistinct: 'distinct_base_url',
         distinct: true,
         minWordSizefor1Typo: 3,
         minWordSizefor2Typos: 7,

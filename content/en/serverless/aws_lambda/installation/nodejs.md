@@ -309,7 +309,7 @@ Fill in variables accordingly:
         </tr>
     </table>
 
-   In the ARN, replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. Replace `<RUNTIME>` with `Node12-x`, `Node14-x`, `Node16-x`, or `Node18-x`.
+   In the ARN, replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. Replace `<RUNTIME>` with `Node14-x`, `Node16-x`, `Node18-x` or `Node20-x`.
 
 2. Replace `<DATADOG_EXTENSION_ARN>` with the ARN of the appropriate Datadog Lambda Extension for your region and architecture:
 

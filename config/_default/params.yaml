@@ -190,6 +190,7 @@ core_product:
     - name: incident management
     - name: infrastructure monitoring
     - name: log management
+    - name: metrics
     - name: network device monitoring
     - name: network performance monitoring
     - name: observability pipelines

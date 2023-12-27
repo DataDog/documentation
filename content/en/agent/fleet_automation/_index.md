@@ -14,7 +14,7 @@ further_reading:
   text: "Centrally govern and remotely manage Datadog Agents at scale with Fleet Automation"
 ---
 
-{{< callout btn_hidden="true">}}Fleet Automation is in beta.{{< /callout >}}
+{{< callout btn_hidden="true">}}Fleet Automation is in beta. Access it from the <a href="https://app.datadoghq.com/fleet">Fleet Automation</a> page in Datadog.{{< /callout >}}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Fleet Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
@@ -60,13 +60,7 @@ Datadog recommends upgrading your Agents regularly to make sure you have access 
 
 Before you send a flare, make sure that Remote Configuration is [enabled](#configuring-fleet-automation) on the selected Agent.
 
-To send a remote flare:
-1. From the [Fleet Automation][1] page, select an Agent that requires support.
-1. Click **Support**.
-1. Click **Send Support Ticket**.
-1. Provide an existing Zendesk support ticket number. If you don't provide a ticket number, one is created on your behalf.
-1. Enable **Debug mode** to allow Datadog support staff to troubleshoot your issue faster. The log level is reset to its previous configuration after you send the flare.
-1. Click **Send Ticket**.
+{{% remote-flare %}}
 
 {{< img src="agent/fleet_automation/fleet-automation-flares.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:100%;" >}}
 

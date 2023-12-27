@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-custom-scorecards/"
   tag: "Blog"
   text: "Formalize best practices with custom Scorecards"
+- link: "/continuous_integration/dora_metrics/"
+  tag: "Documentation"
+  text: "Track DORA Metrics with CI Visibility" 
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
@@ -39,10 +42,6 @@ To select which of the out-of-the-box rules are evaluated for each of the defaul
 {{< img src="/tracing/service_catalog/scorecards-setup.png" alt="Service Scorecards setup page" style="width:90%;" >}}
 
 ### Creating custom rules
-
-{{< callout url="https://forms.gle/8HCfQiuKM8FVceTG9" btn_hidden="false">}}
-Custom Scorecard rules are in private beta. Join the beta by requesting access.
-{{< /callout >}}
 
 To add custom rules to your Scorecards dashboard using the [Scorecards API][10]: 
 
@@ -90,7 +89,7 @@ Deployment tracking is active
 : For services monitored by APM or USM. [Ensure smooth rollouts by implementing a version tag with Unified Service Tagging][4]. As you roll out new versions of your functionality, Datadog captures and alerts on differences between the versions in error rates, number of requests, and more. This can help you understand when to roll back to previous versions to improve end user experience. 
 
 Logs correlation is active
-: For APM services. [Correlation between APM and Logs][5] improves the speed of troubleshooting for end users, saving you time during incidents and outages. 
+: For APM services, evaluated based on the past hour of logs detected. [Correlation between APM and Logs][5] improves the speed of troubleshooting for end users, saving you time during incidents and outages.
 
 ### Ownership and documentation
 

@@ -25,6 +25,8 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
+
 Supported operating systems for .NET Framework
 : Windows 10<br/>
 Windows Server starting from version 2012
@@ -42,7 +44,8 @@ Supported .NET runtimes (64-bit applications)
 .NET Core 2.1, 3.1<br/>
 .NET 5<br/>
 .NET 6<br/>
-.NET 7
+.NET 7<br/>
+.NET 8
 
 <div class="alert alert-warning">
   <strong>Note:</strong> For containers, <strong>at least one core</strong> is required. Read the <a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">Troubleshooting documentation</a> for more details.
@@ -415,3 +418,4 @@ The [Getting Started with Profiler][4] guide takes a sample service with a perfo
 [5]: /tracing/trace_collection/
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /profiler/enabling/supported_versions/

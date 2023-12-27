@@ -87,7 +87,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
       }]
 ```
 
-**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
 **Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -127,7 +127,7 @@ spec:
           image: cardpayment:latest
 ```
 
-**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
 **Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -208,7 +208,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
       }]
 ```
 
-**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
 **Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -248,7 +248,7 @@ spec:
           image: cardpayment:latest
 ```
 
-**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
 **Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -300,7 +300,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
       }]
 ```
 
-**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
 **Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -341,7 +341,7 @@ spec:
           image: cardpayment:latest
 ```
 
-**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
 **Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -443,7 +443,7 @@ spec:
           image: postgres:latest
 ```
 
-**Note**: Escape regex characters in your patterns when performing multi-line aggregation with pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+**Note**: Escape regex characters in your patterns when performing multi-line aggregation with pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
 **Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 

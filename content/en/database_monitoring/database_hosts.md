@@ -22,6 +22,7 @@ In addition to a filterable graph of active connections for that host, the host 
 | [Top queries](#top-queries)                     | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
 | [Metrics](#metrics)                             | {{< X >}} | {{< X >}}  |           |           |
 | [Active connections](#active-connections)       | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
+| [Schema](#schema)                               | {{< X >}} |            |           |           |
 | [Blocking queries](#blocking-queries)           | {{< X >}} | {{< X >}}  |           |           |
 | [Calling services](#calling-services)           | {{< X >}} | {{< X >}}  | {{< X >}} |           |
 | [Configuration details](#configuration-details) | {{< X >}} | {{< X >}}  | {{< X >}} |           |
@@ -44,6 +45,10 @@ Click on any query statement to open a details panel that includes:
 
 ## Metrics
 
+<div class="alert alert-info">
+This feature is in beta.
+</div>
+
 On the **Metrics** tab of the host details panel, you can view and filter metrics for system health, query activity, blocking operations, function performance, and other key areas.
 
 {{< img src="database_monitoring/db-list-metrics.png" alt="The Metrics tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
@@ -57,6 +62,16 @@ The **Active Connections** tab of the host details panel displays the live queri
 Click on a query statement to open a panel that includes event attributes, related traces, and other relevant details.
 
 {{< img src="database_monitoring/db-list-active-connection-details.png" alt="Details panel for an individual active connection" style="width:90%;" >}}
+
+## Schema
+
+<div class="alert alert-info">
+This feature is in beta.
+</div>
+
+Use the **Schema** tab to explore database structures, tables, columns, data types, existing foreign keys, and indexing strategies for every database on a host.
+
+{{< img src="database_monitoring/db-list-schema-tab.png" alt="The Schema tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
 
 ## Blocking queries
 

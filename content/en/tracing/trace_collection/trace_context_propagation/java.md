@@ -8,6 +8,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
       tag: 'Blog'
       text: 'Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context'
+    - link: '/opentelemetry/guide/otel_api_tracing_interoperability'
+      tag: 'Documentation'
+      text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
 
@@ -27,7 +30,7 @@ Injection styles can be configured using:
 - System Property: `-Ddd.trace.propagation.style.inject=datadog,b3multi`
 - Environment Variable: `DD_TRACE_PROPAGATION_STYLE_INJECT=datadog,b3multi`
 
-The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for injection. By default, the `datadog` and `tracecontext` injection styles are enabled.
+The value of the property or environment variable is a comma (or space) separated list of header styles that are enabled for injection. The default setting is `datadog,tracecontext` injection styles.
 
 Extraction styles can be configured using:
 
