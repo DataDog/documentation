@@ -27448,7 +27448,7 @@ paths:
 
         - SLO: `slo alert`
 
-        - watchdog: `event alert`
+        - watchdog: `event-v2 alert`
 
         - event-v2: `event-v2 alert`
 
