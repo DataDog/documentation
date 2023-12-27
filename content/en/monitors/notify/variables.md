@@ -394,8 +394,6 @@ Variable content is escaped by default. To prevent content such as JSON or code 
 
 ## Template variables
 
-<div class="alert alert-info">Monitor template variables reflect the values after a monitor transitions or changes state. </div>
-
 Use template variables to customize your monitor notifications. The built-in variables are:
 
 | Variable                             | Description                                                                   |
