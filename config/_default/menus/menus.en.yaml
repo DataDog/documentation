@@ -1107,7 +1107,7 @@ main:
     identifier: infrastructure_process
     weight: 4
   - name: Increase Process Retention
-    identifier: infrastructure_process_increass_process_retention
+    identifier: infrastructure_process_increase_process_retention
     url: infrastructure/process/increase_process_retention/
     parent: infrastructure_process
     weight: 401
@@ -2995,7 +2995,7 @@ main:
     parent: log_collection
     weight: 106
   - name: C#
-    identifier: log_csharp
+    identifier: log_collection_csharp
     url: logs/log_collection/csharp/
     parent: log_collection
     weight: 107
@@ -3010,7 +3010,7 @@ main:
     identifier: log_collection_java
     weight: 109
   - name: NodeJS
-    identifier: log_nodejs
+    identifier: log_collection_nodejs
     url: logs/log_collection/nodejs/
     parent: log_collection
     weight: 110
@@ -3054,12 +3054,12 @@ main:
     parent: log_configuration
     weight: 202
   - name: Parsing
-    identifier: log_parsing
+    identifier: log_configuration_parsing
     url: logs/log_configuration/parsing/
     parent: log_configuration
     weight: 203
   - name: Pipeline Scanner
-    identifier: log_pipeline_scanner
+    identifier: log_configuration_pipeline_scanner
     url: logs/log_configuration/pipeline_scanner/
     parent: log_configuration
     weight: 204
@@ -3800,12 +3800,12 @@ main:
     identifier: synthetics_browser_tests
     weight: 3
   - name: Recording Steps
-    identifier: synthetics_recording_steps
+    identifier: synthetics_browser_tests_recording_steps
     url: synthetics/browser_tests/actions
     parent: synthetics_browser_tests
     weight: 301
   - name: Test Results
-    identifier: synthetics_test_results
+    identifier: synthetics_browser_tests_test_results
     url: synthetics/browser_tests/test_results
     parent: synthetics_browser_tests
     weight: 302
@@ -4540,7 +4540,7 @@ main:
     parent: custom_checks
     weight: 301
   - name: Writing a Custom OpenMetrics Check
-    identifier: custom_checks_prometheus
+    identifier: dev_tools_custom_checks_prometheus
     url: developers/custom_checks/prometheus/
     parent: custom_checks
     weight: 302
