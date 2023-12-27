@@ -18,7 +18,7 @@ With Historical Metrics Ingestion, you can monitor a variety of new use cases wi
 
 ## What is Historical Metric Ingestion?
 
-{{< img src="metrics/custom_metrics/historical_metrics/hmi_intro.png" alt="Diagram showing the ingestion flow for Historical Metrics" >}}
+{{< img src="metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_intro.png" alt="Diagram showing the ingestion flow for Historical Metrics" >}}
 
 Datadog classifies *historical metrics* as metric points with timestamps that are older than an hour relative to the time of submission. 
 
@@ -436,13 +436,13 @@ Ingesting historical metrics includes some ingestion latencies. These latencies 
 | 12 hours - 30 days   | Up to 14 hour latency                 |
 | +30 days             | +14 hours latency                     |
 
-{{< img src="metrics/custom_metrics/historical_metrics/hmi_latency.png" alt="Diagram showing how Historical Metrics can take longer to ingest depending on the metric timestamp">}}
+{{< img src="metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_latency.png" alt="Diagram showing how Historical Metrics can take longer to ingest depending on the metric timestamp">}}
 
 ## Ingestion billing
 
-Historical Metrics are billed under the Custom Metrics billing SKU. 
+Historical Metrics are billed under the Custom Metrics billing SKU. Billable custom metrics are determined by the timstamp of the metrics submitted, regardless of whether they are submitted today or 12 months later.
 
-{{< img src="metrics/custom_metrics/historical_metrics/hmi_billing.png" alt="Historical Metrics Billing" video=false >}}
+{{< img src="metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_billing.png" alt="Diagram showing how Historical Metrics is billed based on the timestamp of the metric" >}}
 
 ## Further Reading
 
