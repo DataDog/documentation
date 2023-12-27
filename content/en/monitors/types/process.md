@@ -44,7 +44,7 @@ Filter processes to monitor by their tags. Datadog recommends that you first try
 
 #### Full text search
 
-If you cannot scope processes down to the granularity you would like using tags, it is possible to filter processes by their commandline. The full text search field performs a partial match, fuzzy search across all processes on your infrastructure. Search operators `AND`, `OR`, `NOT` are supported. Datadog recommends that you put quotes around each of your search terms. This can prevent issues like `-` getting picked up as `NOT` and spaces from being picked up as `OR`. See the [Live Process Monitoring][3] page for more details.
+If you cannot scope processes down to the granularity you would like using tags, it is possible to filter processes by their commandline. The full text search field performs a partial match, fuzzy search across all processes on your infrastructure. Search operators `AND`, `OR`, `NOT` are supported. See the [Live Process Monitoring][3] page for more details.
 
 ##### Examples
 
@@ -55,8 +55,6 @@ If you cannot scope processes down to the granularity you would like using tags,
 | `foo OR bar` | Matches any process that contains `foo` or `bar`. |
 | `foo bar` | Same as above. |
 | `foo or NOT bar` | Matches any process that contains `foo` or does not contain `bar`. |
-| `foo -bar` | Same as above. |
-| `"foo -bar"` | Matches any process that contains the string `foo -bar`. |
 
 #### Alert grouping
 
