@@ -28,7 +28,7 @@ further_reading:
 In the context of CI/CD, the production environment takes only a small part.
 Continuous Testing can be used to test your application in several environments beside the publicly available production environment Synthetics scheduled tests focus on.
 
-{{< img src="continuous_testing/continous_environements.png" alt="Continuous Testing can be used all along the development cycle, from the local development environment to staging to prod." width="100%" >}}
+{{< img src="continuous_testing/continuous_environments.png" alt="Continuous Testing can be used all along the development cycle, from the local development environment to staging to prod." width="100%" >}}
 
 ### Multiple env
 

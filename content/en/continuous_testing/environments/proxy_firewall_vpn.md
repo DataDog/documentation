@@ -18,15 +18,13 @@ However, Continuous Testing with the help of `datadog-ci` can establish a Contin
 
 The Continuous Testing tunnel creates short-lived secure connections between your internal environments and the Datadog infrastructure, allowing you to swiftly trigger Synthetic HTTP and Browser tests on your private applications.
 
-{{< img src="continuous_testing/continous_testing_tunnel.png" alt="Continuous Testing tunnel allows the Synthetics Worker to reach your private applications" width="100%" >}}
+{{< img src="continuous_testing/continuous_testing_tunnel.png" alt="Continuous Testing tunnel allows the Synthetics Worker to reach your private applications" width="100%" >}}
 
 Datadog recommends using the testing tunnel if you need to launch Continuous Testing tests against local versions of your application without deploying a dedicated and long lasting probing system (such as [private locations][1]). The testing tunnel can be used to trigger tests on short-lived cloud environments.
 
 ## What is the testing tunnel?
 
 The testing tunnel is a functionality that comes with the [@datadog/datadog-ci][2] NPM package which is one of the methods Datadog <span class="x x-first x-last">provides </span>to include your Synthetic tests as part of your CI/CD pipelines. The testing tunnel creates an end-to-end encrypted HTTP proxy between your infrastructure and Datadog, meaning that any test requests sent <span class="x x-first x-last">through</span> the CLI are automatically routed through the `datadog-ci` client<span class="x x-first x-last">. This allows</span> Datadog to access and test your internal applications.
-
-{{< img src="synthetics/tunnel_diagram.png" alt="Synthetic testing tunnel diagram" style="width:100%;">}}
 
 `datadog-ci` first gets a presigned URL from Datadog for authentication. It then opens a WebSocket Secure connection (wss) to Datadog's managed locations using the presigned URL. Using SSH connections through the WebSocket connection, tests are triggered by `datadog-ci` and executed through Datadog's managed locations.
 
