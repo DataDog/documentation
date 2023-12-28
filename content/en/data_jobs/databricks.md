@@ -63,7 +63,7 @@ Use [this init script][2] to install the Datadog Agent on a specific Databricks 
 
    For example, if you added your Datadog API key as `DD_API_KEY` to a secret scope named `datadog`, and your [Datadog site][5] is {{< region-param key="dd_site" code="true" >}}, paste the following into the box:
 
-   ```
+   ```text
    DD_API_KEY={{secrets/datadog/DD_API_KEY}}
    DD_SITE={{< region-param key="dd_site" code="true" >}}
    ```
