@@ -23383,7 +23383,7 @@ paths:
         type: safe
   /api/v1/downtime:
     get:
-      description: Get all scheduled downtimes.
+      description: Get all V1 scheduled downtimes (and currently active V2 downtimes). To retrieve all V1 and V2 scheduled downtimes, use Downtimes V2.
       operationId: ListDowntimes
       parameters:
       - description: Only return downtimes that are active when the request is made.
