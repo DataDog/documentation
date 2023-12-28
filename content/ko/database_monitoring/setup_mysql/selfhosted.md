@@ -79,7 +79,7 @@ Datadog Agent가 통계와 쿼리를 수집하려면 데이터베이스에 대�
 다음 지침은 `datadog@'%'`를 사용하는 모든 호스트에서 로그인할 수 있도록 Agent에 권한을 부여합니다. `datadog@'localhost'`를 사용하여 로컬 호스트에서만 로그인하도록 `datadog` 사용자를 제한할 수 있습니다. 자세한 정보는 [MySQL 설명서][5]를 참조하세요.
 
 {{< tabs >}}
-{{% tab "MySQL ≥ 8.0" %}}
+{{% tab "MySQL ≥ 5.7" %}}
 
 `datadog` 사용자를 생성하고 기본 권한을 부여하세요.
 
@@ -92,7 +92,7 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
 {{% /tab %}}
-{{% tab "MySQL 5.6 & 5.7" %}}
+{{% tab "MySQL 5.6" %}}
 
 `datadog` 사용자를 생성하고 기본 권한을 부여하세요.
 

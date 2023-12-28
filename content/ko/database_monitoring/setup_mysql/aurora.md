@@ -82,7 +82,7 @@ title: Aurora 관리형 MySQL에서 데이터베이스 모니터링 설정
 다음 지침에 따라 에이전트가 `datadog@'%'`을 사용해 어떤 호스트에서든 로그인할 수 있도록 권한을 부여할 수 있습니다.  `datadog@'localhost'`를 사용하여 로컬 호스트에서만 로그인할 수 있도록 `datadog` 사용자를 제한할 수 있습니다. 더 자세한 정보는 [MySQL 설명서][4]를 참고하세요.
 
 {{< tabs >}}
-{{% tab "MySQL ≥ 8.0" %}}
+{{% tab "MySQL ≥ 5.7" %}}
 
 `datadog` 사용자를 생성하고 기본 권한을 부여합니다.
 
@@ -96,7 +96,7 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 
 {{% /tab %}}
 
-{{% tab "MySQL 5.6 및 5.7" %}}
+{{% tab "MySQL 5.6" %}}
 
 `datadog` 사용자를 생성하고 기본 권한을 부여합니다.
 

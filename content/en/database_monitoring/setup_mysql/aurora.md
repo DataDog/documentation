@@ -83,7 +83,7 @@ The Datadog Agent requires read-only access to the database in order to collect 
 The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][4] for more info.
 
 {{< tabs >}}
-{{% tab "MySQL ≥ 8.0" %}}
+{{% tab "MySQL ≥ 5.7" %}}
 
 Create the `datadog` user and grant basic permissions:
 
@@ -97,7 +97,7 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 
 {{% /tab %}}
 
-{{% tab "MySQL 5.6 and 5.7" %}}
+{{% tab "MySQL 5.6" %}}
 
 Create the `datadog` user and grant basic permissions:
 

@@ -58,9 +58,6 @@ Agent は、現在実行中のクエリを収集するために `performance_sch
 
 Datadog Agent が統計やクエリを収集するためには、データベースへの読み取り専用のアクセスが必要となります。
 
-{{< tabs >}}
-{{% tab "MySQL ≥ 8.0" %}}
-
 `datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
 
 ```sql
@@ -70,21 +67,6 @@ GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
-
-{{% /tab %}}
-{{% tab "MySQL 5.7" %}}
-
-`datadog` ユーザーを作成し、基本的なアクセス許可を付与します。
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 次のスキーマを作成します。
 
