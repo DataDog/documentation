@@ -1,7 +1,7 @@
 ---
-title: Substituting Resource URLs
+title: Testing Multiple Environments
 kind: documentation
-description: Learn how to substitute the start URL for a Continuous Testing test.
+description: Learn how to use Continuous Testing to reuse the same Synthetics scenarios against multiple environments.
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
@@ -11,19 +11,24 @@ further_reading:
   text: "Test internal applications with Datadog's testing tunnel and private locations"
 ---
 
-<!-- TODO: rename the file -->
-
 ## Overview
 
-<!-- This is how we do a resource URL substitution.
+Continuous Testing brings the most value with the ability to share the same scenario between scheduled tests against the production environment and development and staging environments.
+With Continuous Testing, Synthetic Tests are used throughout the development cycle to ensure regressions are caught as soon as possible.
 
-- Information about proxies
-- Information about firewalls
-- Information about VPNs -->
+When triggering a CI Test, it's possible to overwrite the start Url of a Browser test or an API test to reroute the Synthetic Worker to the right environment.
 
 ## Overriding the Start URL
 
+TODO: about `startUrl`
+
 ## Regex substitution
+
+TODO: about `startUrlSubstitutionRegex`
+
+<!--
+
+TODO the resource URL substitution regex is not implemented yet, so let's not document it for now.
 
 ### Start URL Substitution Regex
 
@@ -53,7 +58,7 @@ for most advanced usage
 ```
 {{% /tab %}}
 
-{{< /tabs >}}
+{{< /tabs >}} -->
 
 ## Further reading
 

@@ -3935,21 +3935,16 @@ main:
     parent: continuous_testing
     identifier: continuous_testing_environments
     weight: 1
-  - name: Setup
-    url: /continuous_testing/environments/setup
+  - name: Testing Multiple Environments
+    url: /continuous_testing/environments/multiple_env
     parent: continuous_testing_environments
-    identifier: continuous_testing_environments_setup
+    identifier: continuous_testing_environments_multiple_environments
     weight: 101
-  - name: Substituting Resource URL
-    url: /continuous_testing/environments/start_url
-    parent: continuous_testing_environments
-    identifier: continuous_testing_environments_
-    weight: 102
   - name: Testing With Proxy, Firewall, or VPN
     url: /continuous_testing/environments/proxy_firewall_vpn
     parent: continuous_testing_environments
     identifier: continuous_testing_environments_proxy_firewall_vpn
-    weight: 103
+    weight: 102
   - name: CI/CD Integrations
     url: continuous_testing/cicd_integrations
     parent: continuous_testing

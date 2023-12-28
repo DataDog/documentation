@@ -29,7 +29,7 @@ cascade:
 
 <div class="alert alert-info">This page is about running Continuous Testing tests in your CI/CD pipelines. If you want to view CI/CD metrics and dashboards, see the <a href="/continuous_integration/" target="_blank">CI Visibility documentation.</a></div>
 
-Datadog Continuous Testing offers a set of tools that enable you to automate software testing for a product's entire lifecycle. By offering code-free, reliable end-to-end testing and seamless integrations with [popular CI providers][1] and collaboration tools, Continuous Testing helps you accelerate application development and ship high-quality features faster. 
+Datadog Continuous Testing offers a set of tools that enable you to automate software testing for a product's entire lifecycle. By offering code-free, reliable end-to-end testing and seamless integrations with [popular CI providers][1] and collaboration tools, Continuous Testing helps you accelerate application development and ship high-quality features faster.
 
 ## Test with ease and speed
 
@@ -40,13 +40,13 @@ Use scalable features such as a codeless [web recorder][2], [mobile app recorder
 With support for multiple protocols, frameworks, and APIs—including gRPC and WebSockets—you can test across every level of your application stack.
 
 
-## Improve test reliability 
+## Improve test reliability
 
 Instead of having to implement test code, you can build software using [Synthetic Monitoring's resilient, scalable, and codeless tests][4]. Gain confidence in your test results by minimizing false positives through self-healing browser tests, mobile app tests, and automatic test retries. To ensure your users have the best experience, you can automate [cross-browser testing][2] and [mobile application testing][16].
 
 ## Increase efficiency through seamless integrations
 
-Fast-track your application development by testing and troubleshooting in one platform. Select from the following types of CI providers and collaboration tools such as Slack or Jira to merge workflows and avoid context switching. 
+Fast-track your application development by testing and troubleshooting in one platform. Select from the following types of CI providers and collaboration tools such as Slack or Jira to merge workflows and avoid context switching.
 
 {{< partial name="continuous_testing/ct-getting-started.html" >}}
 
@@ -56,19 +56,19 @@ You can use the [Datadog Terraform provider][10] to control test creation and st
 
 ## Accelerate troubleshooting
 
-Performing tests in a unified monitoring platform helps you quickly find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools—through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][12] by looking at executed jobs in the [Synthetic Monitoring & Continuous Testing Explorer][11]. 
+Performing tests in a unified monitoring platform helps you quickly find the root cause of failed test runs and reduce MTTR. You can obtain the full context for troubleshooting—without switching between tools—through correlated metrics, traces, and logs surfaced by the Datadog [APM integration][12] by looking at executed jobs in the [Synthetic Monitoring & Continuous Testing Explorer][11].
 
 {{< img src="continuous_testing/open_sidepanel.png" alt="CI batches in the Continuous Testing Explorer" style="width:100%;">}}
 
 ## Use the Synthetic Monitoring & Continuous Testing Explorer
 
-Create [search queries and visualizations][11] for your Synthetic test runs or batches of tests running in CI/CD pipelines. 
+Create [search queries and visualizations][11] for your Synthetic test runs or batches of tests running in CI/CD pipelines.
 
 {{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 
 ## Ready to start?
 
-Once you have configured some [Synthetic tests][4], see the documentation for your preferred [CI/CD provider][1] or use the [datadog-ci NPM package][14] in your CI/CD pipelines. Then, start exploring details about your batch runs in the [Synthetic Monitoring & Continuous Testing Explorer][11].
+Once you have configured some [Synthetic tests][4], see the documentation for your preferred [CI/CD provider][1] or use the [datadog-ci NPM package][14] in your CI/CD pipelines. Head over to [Environments][17] to use Continuous Testing in over environements than the publicly available production, e.g. running tests against your local development environment, or a staging environment within a private network. Then, start exploring details about your batch runs in the [Synthetic Monitoring & Continuous Testing Explorer][11].
 
 ## Further reading
 
@@ -85,3 +85,4 @@ Once you have configured some [Synthetic tests][4], see the documentation for yo
 [14]: /continuous_testing/cicd_integrations/configuration
 [15]: /mobile_app_testing/mobile_app_tests
 [16]: /mobile_app_testing/
+[17]: /continuous_testing/environments
