@@ -440,7 +440,7 @@ Ingesting historical metrics includes some ingestion latencies. These latencies 
 
 ## Ingestion billing
 
-Historical Metrics are billed under the Custom Metrics billing SKU. Billable custom metrics are determined by the timstamp of the metrics submitted, regardless of whether they are submitted today or 12 months later.
+Historical Metrics are billed under the Custom Metrics billing SKU. Billable custom metrics are determined by the timestamp of the metrics submitted, regardless of whether they are submitted today or 12 months later. For more information, see the [Custom Metrics billing][3] documentation.
 
 {{< img src="metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_billing.png" alt="Diagram showing how Historical Metrics is billed based on the timestamp of the metric" >}}
 
@@ -450,3 +450,4 @@ Historical Metrics are billed under the Custom Metrics billing SKU. Billable cus
 
 [1]: /metrics/summary/
 [2]: /metrics/#submit-metrics
+[3]: /account_management/billing/custom_metrics/
