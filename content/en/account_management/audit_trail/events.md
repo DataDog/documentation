@@ -25,6 +25,7 @@ further_reading:
 - [OAuth](#oauth-events)
 - [Organization management](#organization-management-events)
 - [Security Notifications](#security-notification-events)
+- [Teams management](#teams-management-events)
 
 #### Product-Specific Events
 - [Application Performance Monitoring (APM)](#application-performance-monitoring-apm-events)
@@ -241,6 +242,11 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Reference Table][78] | A user created, deleted, or modified a reference table. | `@evt.name:"Reference Tables" @asset.type:reference_table @action:(created OR deleted OR modified)` |
 | [Reference Table File][79] | A user uploaded a file or imported a file with a cloud provider for a reference table. | `@evt.name:"Reference Tables" @asset.type:reference_table_file @action:(uploaded OR imported)` |                                                      |
 
+### Teams Management events
+| Name                     | Description of audit event                                          | Query in audit explorer                           |
+| ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
+| [Teams Management][104] | A user created, deleted, or modified a team or team association. | `@evt.name:"Teams Management" @action:(created OR deleted OR modified)` |
+
 ### Workflow events
 | Name                     | Description of audit event                                          | Query in audit explorer                           |
 | ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
@@ -354,5 +360,6 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [99]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Auser%20%40action%3Amodified%20
 [100]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40action%3Acreated%20
 [101]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40action%3Amodified%20
-[102]: https://app.datadoghq.com/audit-trail?query=%40tags%3A%22is_omni%3Atrue%22%20%40evt.name%3A%22Error%20Tracking%22%20%40asset.type%3Aerror_tracking_logs%20%40action%3A%28created%20OR%20deleted%29
-[103]: https://app.datadoghq.com/audit-trail?query=-%40tags%3A%22is_omni%3Atrue%22%20%40evt.name%3A%22Error%20Tracking%22%20%40asset.type%3Aerror_tracking_inclusion_filter
+[102]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Error%20Tracking%22%20%40asset.type%3Aerror_tracking_logs%20%40action%3A%28created%20OR%20deleted%29
+[103]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Error%20Tracking%22%20%40asset.type%3Aerror_tracking_inclusion_filter
+[104]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Teams%20Management%22%20%40action%3A%28created%20OR%20deleted%20OR%20modified%29
