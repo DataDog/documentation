@@ -24,7 +24,7 @@ algolia:
 
 ## Overview
 
-Continuous Testing lets you automatically run and monitor the same [Synthetic tests][1] you've configured in your staging, QA, and pre-production environments to proactively alert your team and block your pipeline deployments should code changes cause testing failures. 
+Continuous Testing lets you automatically run and monitor the same [Synthetic tests][1] you've configured in your staging, QA, and pre-production environments to proactively alert your team and block your pipeline deployments should code changes cause testing failures.
 
 Your codeless tests can:
 * [Launch API requests on your systems][2]
@@ -33,7 +33,7 @@ Your codeless tests can:
 
 Once your tests run, examine test results and CI batches in the [Synthetic Monitoring & Continuous Testing Explorer.][5]
 
-Improve your developer workflow with Continuous Testing: 
+Improve your developer workflow with Continuous Testing:
 * Use the [`datadog-ci` NPM package][6] to run these tests directly in your CI pipeline.
 * Use the [Datadog Synthetics VS Code Integration][7] to run tests in your IDE.
 
@@ -155,19 +155,19 @@ See the [Parallelization documentation][18] for more details.
 [5]: /synthetics/explorer?track=synbatch
 [6]: /continuous_testing/cicd_integrations/configuration/?tab=npm
 [7]: /developers/ide_integrations/
-[8]: https://datadoghq.com 
+[8]: https://datadoghq.com
 [9]: /getting_started/synthetics/browser_test/#create-a-browser-test
 [10]: /continuous_testing/cicd_integrations/configuration/?tab=npm#install-the-package
 [11]: /continuous_testing/cicd_integrations/configuration/?tab=npm#reporters
 [12]: /developers/ide_integrations/vscode/
 [13]: /getting_started/synthetics/private_location/
-[14]: /continuous_testing/testing_tunnel/
+[14]: /continuous_testing/
 [15]: /continuous_testing/explorer/?tab=testruns#create-a-search-query
 [16]: /continuous_testing/explorer/saved_views/
 [17]: /continuous_testing/explorer/search_runs/
 [18]: /continuous_testing/settings/#parallelization
 [19]: https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20-%40result.result.httpStatusCode%3A%5B100%20TO%20399%5D%20%40result.result.passed%3Afalse&agg_m=count&agg_q=%40result.result.httpStatusCode&cols=&index=%2A&top_n=100&track=synthetics&viz=timeseries
-[20]: https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20%40result.result.initialResultID%3A%2A%20%40result.status%3A0&agg_m=count&agg_q=%40result.result.httpStatusCode&cols=&index=%2A&top_n=100&track=synthetics&viz=stream 
+[20]: https://app.datadoghq.com/synthetics/explorer?query=%40type%3Aresult%20%40result.result.initialResultID%3A%2A%20%40result.status%3A0&agg_m=count&agg_q=%40result.result.httpStatusCode&cols=&index=%2A&top_n=100&track=synthetics&viz=stream
 [21]: https://app.datadoghq.com/synthetics/explorer?query=%40ci.job.name%3A%2A&agg_m=count&agg_q=%40result.test_public_id&cols=&index=%2A&top_n=100&track=synbatch&viz=query_table
 [22]: /glossary/?product=synthetic-monitoring#test-batch
 [23]: /glossary/?product=synthetic-monitoring#test-run

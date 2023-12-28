@@ -7,7 +7,7 @@ further_reading:
 - link: "/getting_started/synthetics/"
   tag: "Documentation"
   text: "Getting Started with Synthetic Monitoring"
-- link: "/continuous_testing/testing_tunnel/"
+- link: "/continuous_testing/"
   tag: "Documentation"
   text: "Learn about the Continuous Testing Tunnel"
 - link: "/integrations/guide/source-code-integration/"
@@ -34,7 +34,7 @@ The **Synthetic Tests** feature allows you to:
 - Test only what matters by executing relevant tests at the same time
 - Create a list of most frequently used Synthetic tests by linking them to your workspace
 
-The **View in VS Code** feature provides a link from Datadog directly to your source files. 
+The **View in VS Code** feature provides a link from Datadog directly to your source files.
 
 The **Static Analysis** integration analyzes your code (locally) against predefined rules to detect and fix problems before you commit changes.
 
@@ -70,7 +70,7 @@ The Datadog extension enables you to [run Synthetic HTTP tests and browser tests
 
 {{< img src="developers/ide_integrations/vscode/test_configuration_modified_starturl.png" alt="The Test Configuration panel and Settings page where you can specify the start URL of a Synthetics test to a localhost URL" style="width:100%;" >}}
 
-If you haven't set up Synthetic tests already, [create a test in Datadog][3]. For more information about running tests on a local environment, see [Getting Started with API Tests][4], [Getting Started with Browser Tests][5], and the [Continuous Testing Tunnel documentation][1].
+If you haven't set up Synthetic tests already, [create a test in Datadog][3]. For more information about running tests on a local environment, see [Getting Started with API Tests][4], [Getting Started with Browser Tests][5], and the [Continuous Testing documentation][1].
 
 ### Permissions
 
@@ -87,7 +87,7 @@ The **View in VS Code** feature provides a link from Datadog directly to your so
 <div class="alert alert-info">To use this feature, first configure <a href="/integrations/guide/source-code-integration/">source code integration</a> for your service.</div>
 
 ## Static Analysis
-The Datadog extension runs [Static Analysis][14] rules on the source files you have open in your Workspace. The goal is to detect and fix problems such as maintainability issues, bugs, or security vulnerabilities in your code before you commit your changes. 
+The Datadog extension runs [Static Analysis][14] rules on the source files you have open in your Workspace. The goal is to detect and fix problems such as maintainability issues, bugs, or security vulnerabilities in your code before you commit your changes.
 
 Static Analysis supports scanning for many programming languages. For a complete list, see [Static Analysis Rules][15]. For file types belonging to supported languages, issues are shown in the source code editor with the VS Code inspection system, and suggested fixes can be applied directly:
 
@@ -112,7 +112,7 @@ To share your feedback, email [team-ide-integration@datadoghq.com][9].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /continuous_testing/testing_tunnel/
+[1]: /continuous_testing/
 [2]: https://www.datadoghq.com/
 [3]: https://app.datadoghq.com/synthetics/create
 [4]: /getting_started/synthetics/api_test
