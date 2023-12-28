@@ -58,6 +58,9 @@ title: Azure Database for MySQL을 위한 데이터베이스 모니터링 설정
 
 Datadog Agent가 통계와 쿼리를 수집하려면 데이터베이스에 대한 읽기 전용 액세스가 필요합니다.
 
+{{< tabs >}}
+{{% tab "MySQL ≥ 8.0" %}}
+
 `datadog` 사용자를 생성하고 기본 권한을 부여하세요.
 
 ```sql
@@ -67,6 +70,21 @@ GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
+
+{{% /tab %}}
+{{% tab "MySQL 5.7" %}}
+
+`datadog` 사용자를 생성하고 기본 권한을 부여하세요.
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 다음 스키마 생성:
 

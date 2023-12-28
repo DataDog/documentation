@@ -75,7 +75,7 @@ L'Agent Datadog requiert un accès en lecture seule pour la base de données, af
 Les instructions suivantes autorisent l'Agent à se connecter depuis n'importe quel host à l'aide de `datadog@'%'`. Vous pouvez restreindre l'utilisateur `datadog` avec `datadog@'localhost'`, de façon à ce qu'il soit uniquement autorisé à se connecter depuis localhost. Consultez la [documentation MYSQL][4] (en anglais) pour en savoir plus.
 
 {{< tabs >}}
-{{% tab "MySQL ≥ 5.7" %}}
+{{% tab "MySQL ≥ 8.0" %}}
 
 Créez l'utilisateur `datadog` et accordez-lui des autorisations de base :
 
@@ -88,7 +88,7 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
 {{% /tab %}}
-{{% tab "MySQL 5.6" %}}
+{{% tab "MySQL 5.6 et 5.7" %}}
 
 Créez l'utilisateur `datadog` et accordez-lui des autorisations de base :
 
