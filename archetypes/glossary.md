@@ -16,4 +16,4 @@ related_terms:
     - related_term1
     - related_term2
 ---
-Add glossary term definition and markdown here. For more information, <a href="example/with/link">see the documentation</a>.
+Add glossary term definition and markdown here. 
