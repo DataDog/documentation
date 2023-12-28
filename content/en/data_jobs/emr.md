@@ -103,7 +103,7 @@ spark-submit \
 
 ## Validation
 
-In Datadog, visit the [Data Jobs Monitoring][8] page to see a list of all your data processing jobs.
+In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your data processing jobs.
 
 ## Further Reading
 

@@ -80,7 +80,7 @@ Use [this init script][2] to install the Datadog Agent on a specific Databricks 
 
 ## Validation
 
-In Datadog, visit the [Data Jobs Monitoring][6] page to see a list of all your Databricks jobs.
+In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Databricks jobs.
 
 ## Further Reading
 
