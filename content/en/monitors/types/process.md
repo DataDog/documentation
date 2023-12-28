@@ -73,7 +73,7 @@ Use thresholds to set a numeric value for triggering an alert. Datadog has two t
 
 Datadog recommends to pick the largest timeframe that you can support. This allows for additional fault tolerance in the case where an Agent becomes unavailable or encounters network issues.
 
-Live Process Monitors uses a [rolling time](https://docs.datadoghq.com/monitors/configuration/?tab=thresholdalert#evaluation-window) windows to evaluate process count, e.g. the monitor triggers when the alerting condition is met in the past X minutes. It’s recommended to not use evaluation windows shorter than 5 minutes to prevent the monitor from triggering if there is any sporadic network disruption between the Process Agent and Datadog.
+Live Process Monitors uses a [rolling time window](https://docs.datadoghq.com/monitors/configuration/?tab=thresholdalert#evaluation-window) to evaluate process count, e.g. the monitor triggers when the alerting condition is met in the past X minutes. It’s recommended to not use evaluation windows shorter than 5 minutes to prevent the monitor from triggering if there is any sporadic network disruption between the Process Agent and Datadog.
 
 ### Advanced alert conditions
 
