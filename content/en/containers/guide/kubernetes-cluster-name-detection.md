@@ -1,5 +1,5 @@
 ---
-title: Kubernetes cluster name automatic detection
+title: Kubernetes Cluster Name Automatic Detection
 kind: documentation
 aliases:
   - /agent/faq/kubernetes-cluster-name-detection
@@ -16,7 +16,7 @@ further_reading:
   text: "Custom Integrations"
 ---
 
-For Agent v6.11+, the Datadog Agent can automatically the Kubernetes cluster name on Google Kubernetes Engine (GKE), Azure Kubernetes Service (AKS), and Amazon Elastic Kubernetes Service (EKS). If detected, the cluster name is added as a suffix on the node name to all data collected. This facilitates the identification of nodes across Kubernetes clusters. 
+For Agent v6.11+, the Datadog Agent can automatically detect the Kubernetes cluster name on Google Kubernetes Engine (GKE), Azure Kubernetes Service (AKS), and Amazon Elastic Kubernetes Service (EKS). If detected, the cluster name is added as a suffix on the node name to all data collected. This facilitates the identification of nodes across Kubernetes clusters. 
 
 On GKE and AKS, the cluster name is retrieved from the cloud provider API. 
 
