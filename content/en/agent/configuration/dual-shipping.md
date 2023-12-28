@@ -129,11 +129,49 @@ Requires Agent version >= 6.20 or 7.20.
 DD_PROCESS_ADDITIONAL_ENDPOINTS='{\"https://process.datadoghq.com\": [\"apikey2\", \"apikey3\"], \"https://process.datadoghq.eu\": [\"apikey4\"]}'
 ```
 
+## Cluster Agent metrics
+
+Configure the Agent to send Cluster Agent metrics, such as Kubernetes State Metrics Core, to additional endpoints.
+
+### HELM configuration
+In Datadog `values.yaml`:
+```yaml
+clusterAgent:
+  env:
+    - name: DD_ADDITIONAL_ENDPOINTS
+      value: '{"https://app.datadoghq.com": ["apikey2"]}'
+```
+### Cluster Agent metrics provider
+
+To ensure autoscaling is resilient to failure, configure the Cluster Agent to run your metric queries for the HPA against your multiple Datadog regions with dual-shipped data. Configure the Datadog Cluster Agent manifest with several endpoints:
+
+{{< code-block lang="yaml" filename="cluster-agent-deployment.yaml" collapsible="true" >}}
+external_metrics_provider:
+  endpoints:
+  - api_key: <DATADOG_API_KEY>
+    app_key: <DATADOG_APP_KEY>
+    url: https://app.datadoghq.eu
+  - api_key: <DATADOG_API_KEY>
+    app_key: <DATADOG_APP_KEY>
+    url: https://app.datadoghq.com
+{{< /code-block >}}
+
 ## Orchestrator
 
 ### HELM configuration
 In Datadog `values.yaml`:
 ```yaml
+agents:
+  customAgentConfig:
+    process_config:
+      additional_endpoints:
+        "https://process.datadoghq.com":
+        - apikey2
+    orchestrator_explorer:
+      orchestrator_additional_endpoints:
+        "https://orchestrator.datadoghq.com":
+        - apikey2 
+
 clusterAgent:
 ...
   datadog_cluster_yaml:
@@ -341,7 +379,7 @@ DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiK
 
 ## Dual shipping in Kubernetes
 
-If you're using the [Datadog Agent Helm chart](https://github.com/DataDog/helm-charts), you must configure these settings with a configmap. In the `values.yaml`, set `useConfigMap: true`
+If you're using the [Datadog Agent Helm chart][2], you must configure these settings with a configmap. In the `values.yaml`, set `useConfigMap: true`
 and add the relevant settings to `customAgentConfig`.
 
 ```yaml
@@ -369,13 +407,14 @@ and add the relevant settings to `customAgentConfig`.
         is_reliable: true
 ```
 
-If you're using the [Datadog Agent operator][1], similarly, you can set the `agent.customConfig.configData` key. All configurable keys are documented in [v1][2] and [v2][3].
+If you're using the [Datadog Agent operator][3], similarly, you can set the `agent.customConfig.configData` key. All configurable keys are documented in [v1][4] and [v2][5].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/configuration/network/
-[1]: https://github.com/DataDog/datadog-operator
-[2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md
-[3]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+[2]: https://github.com/DataDog/helm-charts
+[3]: https://github.com/DataDog/datadog-operator
+[4]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md
+[5]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md

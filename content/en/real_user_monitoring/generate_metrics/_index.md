@@ -9,7 +9,7 @@ further_reading:
 - link: "/real_user_monitoring/explorer/"
   tag: "Documentation"
   text: "Learn how to create queries in the RUM Explorer"
-- link: "/real_user_monitoring/explorer/search/#event-types/"
+- link: "/real_user_monitoring/explorer/search/#event-types"
   tag: "Documentation"
   text: "Learn about RUM event types"
 - link: "/logs/log_configuration/logs_to_metrics/"
@@ -105,7 +105,7 @@ You can use RUM-based custom metrics for the following actions:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/#browser-and-session-replay-sampling-configuration
+[1]: /real_user_monitoring/guide/sampling-browser-plans
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /metrics/custom_metrics/
 [4]: https://app.datadoghq.com/rum/generate-metrics

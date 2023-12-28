@@ -11,9 +11,6 @@ further_reading:
     - link: 'developers/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
-    - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd'
-      tag: 'GitHub'
-      text: 'DogStatsD source code'
 ---
 
 Datadog DogStatsD implements the StatsD protocol [with some differences][1]. DogStatsD enables you to send metrics and monitor your application code without blocking it. Data is transmitted from your application through UDP to the local [DogStatsD server][2] (embedded in the Datadog Agent), which aggregates and then sends it to Datadog's API endpoint. Read more about the [DogStatsD setup][2].

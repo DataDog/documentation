@@ -44,7 +44,8 @@ hugo defaults to environment development with hugo server
 -->
 {{- $isProd := ne hugo.Environment "development" -}}
 {{- $CI_COMMIT_SHORT_SHA := (os.Getenv "CI_COMMIT_SHORT_SHA") | default "" -}}
-{{- $defines := dict "process.env.NODE_ENV" `"development"` "CI_COMMIT_SHORT_SHA" (printf "\"%s\"" $CI_COMMIT_SHORT_SHA) -}}
+{{- $IA_SUBDOMAIN := (os.Getenv "IA_SUBDOMAIN") | default "" -}}
+{{- $defines := dict "process.env.NODE_ENV" `"development"` "CI_COMMIT_SHORT_SHA" (printf "\"%s\"" $CI_COMMIT_SHORT_SHA) "IA_SUBDOMAIN" (printf "\"%s\"" $IA_SUBDOMAIN) -}}
 {{- $sourcemap := cond $isProd "external" "inline" -}}
 
 {{/* inline datadog rum & logs libs, then load config after as config changes every builds due to version */}}

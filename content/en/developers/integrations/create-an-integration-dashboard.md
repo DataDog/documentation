@@ -7,7 +7,7 @@ description: Learn how to create an integration dashboard.
 
 [Datadog Dashboards][1] enable you to efficiently monitor your infrastructure and integrations by displaying and tracking key metrics. Datadog provides a set of out-of-the-box dashboards for many features and integrations. You can access these by viewing your [Dashboard List][12].
 
-If you have [created a Datadog integration][2], you may wish to create an out-of-the-box dashboard to help your integration's users more quickly find value in your integration. This guide provides steps for creating an integration dashboard and best practices to follow during the creation process.
+If you have [created a Datadog integration][2], you must create an out-of-the-box dashboard to help your integration's users more quickly find value in your integration. This guide provides steps for creating an integration dashboard and best practices to follow during the creation process.
 
 To create a Datadog integration, see [Create a New Integration][2].
 

@@ -1,25 +1,36 @@
 ---
 title: AWS
 kind: documentation
-disable_toc: false
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Cloud Cost Management"
 - link: "/cloud_cost_management/azure"
   tag: "Documentation"
-  text: "Gain insights in your Azure bill"
+  text: "Gain insights into your Azure bill"
+- link: "/cloud_cost_management/google_cloud"
+  tag: "Documentation"
+  text: "Gain insights into your Google Cloud bill"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+{{< /site-region >}}
 
 ## Overview
 
-To use AWS Cloud Cost Management, you must have an AWS account with access to Cost and Usage Reports (CURs), and have the AWS integration installed in Datadog. To set up Cloud Cost Management in Datadog, you need to generate a Cost and Usage report.
+To set up Cloud Cost Management in Datadog, you should:
+1. Have an AWS account with billing access
+2. Have the AWS integration installed in Datadog
+3. Follow the steps below to create a Cost and Usage report
 
 ## Setup
 
 ### Prerequisite: generate a Cost and Usage Report
 
-Follow AWS instructions for [Creating Cost and Usage Reports][1], and select the following content options for use with Datadog Cloud Cost Management:
+[Create a Cost and Usage Report][1] in AWS under the **Legacy Pages** section. At this time, there is no support for creating Cost and Usage Report data exports.
+
+Select the following content options:
 
 * **Include resource IDs**
 * **Split cost allocation data** (Enables ECS Cost Allocation. You must also opt in to [AWS Split Cost Allocation][10] in Cost Explorer preferences).
@@ -139,7 +150,7 @@ You can visualize your ingested data using the following cost types:
 
 Datadog adds out-of-the-box tags to the ingested cost data to help you further break down and allocate your costs. These tags are derived from your [Cost and Usage Report (CUR)][6].
 
-The following out-of-the-box tags are also available for filtering and grouping data:
+The following out-of-the-box tags are available for filtering and grouping data:
 
 | Tag                          | Description       |
 | ---------------------------- | ----------------- |
@@ -167,6 +178,33 @@ The following out-of-the-box tags are also available for filtering and grouping 
 | `is_aws_ec2_spot_instance`   | Whether the usage is associated with a Spot Instance.|
 | `is_aws_ec2_savings_plan`    | Whether the usage is associated with a Savings Plan.|
 
+### Cost and observability correlation
+Viewing costs in context of observability data is important to understand how infrastructure changes impact costs, identify why costs change, and optimize infrastructure for both costs and performance. Datadog updates resource identifying tags on cost data for top AWS products to simplify correlating observability and cost metrics. 
+
+For example, to view cost and utilization for each RDS database, you can make a table with `aws.cost.amortized`, `aws.rds.cpuutilization`, and `aws.rds.freeable_memory` (or any other RDS metric) and group by `dbinstanceidentifier`. Or, to see Lambda usage and costs side by side, you can graph `aws.lambda.concurrent_executions` and `aws.cost.amortized` grouped by `functionname`.
+
+The following out-of-the-box tags are available:
+| AWS Product                  | Tag       |
+| ---------------------------- | ----------------- |
+| ec2                | `instance_id`|
+| s3         | `bucketname`|
+| rds         | `dbinstanceidentifier`|
+| lambda         | `functionname`|
+| dynamodb         | `tablename`|
+| elasticache      | `cacheclusterid`|
+| cloudfront (distribution)  | `distributionid`|
+| cloudfront (function)  | `functionname`|
+| ec2 natgateway | `natgatewayid`|
+| redshift         | `clusteridentifier`|
+| kinesis         | `streamname`|
+| queue         | `queuename`|
+| sns         | `topicname`|
+| elb (application, gateway, network) | `loadbalancer`|
+| elb (all other costs) | `loadbalancername` |
+
+For tags on containerized environments, see [Container Cost Allocation][11].
+
+
 ## Billing conductor
 Billing conductor enables you to simplify your bill by customizing the billing rates, distributing credits and fees, and sharing overhead costs at your discretion. You can also select which accounts to include in the CUR.
 
@@ -186,3 +224,4 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 [8]: https://docs.aws.amazon.com/cur/latest/userguide/cur-data-view.html
 [9]: https://docs.datadoghq.com/cloud_cost_management/?tab=aws#prerequisite-generate-a-cost-and-usage-report
 [10]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
+[11]: https://docs.datadoghq.com/cloud_cost_management/container_cost_allocation/#tags

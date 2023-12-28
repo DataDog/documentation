@@ -7,6 +7,9 @@ further_reading:
     - link: '/real_user_monitoring/session_replay'
       tag: Documentation
       text: Session Replay
+    - link: 'https://www.datadoghq.com/blog/datadog-rum-session-replay-playlists/'
+      tag: Blog
+      text: Organize and analyze related session replays with Playlists in Datadog RUM
 ---
 
 ## Overview
@@ -23,7 +26,7 @@ You can create a playlist directly from the [Playlist page][1] or from an indivi
 
 To create it directly from the **Playlist page**:
 
-1. In Datadog, go to **UX Monitoring > Real User Monitoring**, then click the **Playlists** page.
+1. In Datadog, go to [**UX Monitoring > Session Replay > Playlists**][1].
 2. Click **New Playlist**.
 3. Give your playlist a name and description. You can then start exploring Session Replays in RUM to add to the playlist.
 

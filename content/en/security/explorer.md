@@ -40,7 +40,7 @@ Filter the contents of the table with the list of available facets such as `Sour
 
 View additional details by clicking on any Security Signal. This opens a panel which includes information about the severity of the signal, and when it was generated.
 Actionable information includes the ability to:
- 
+
   - Change the status of the signal.
   - Access the rule settings of the signal.
   - Share or assign the signal to a teammate.
@@ -53,7 +53,7 @@ To better understand activity, the Security Signal Panel summarizes tags and att
 
 Below the header of Cloud SIEM and CSM Threats signals are tabs with detailed information related to the signal:
 
-- `Overview` displays why the rule generated a security signal in the What Happened section, including group by tag and customization based on rule type. In addition, context information and JSON associated to the signal is displayed along with any security profiles related to the signal and any suppression suggestions, if available (CSM Threats only).
+- `Overview` displays why the rule generated a security signal in the What Happened section, including group by tag and customization based on rule type. In addition, context information and JSON associated to the signal is displayed along with any suppression suggestions, if available (CSM Threats only).
 - `Rule Details` displays rule details, such as the text configured in the detection rule to help the person reviewing the signal understand the purpose of the signal and how to respond. The users can also pivot into rule modification, such as modifying suppression queries for the rule.
 - `Logs` includes a visualization and list of log samples to provide context on why the signal triggered. Click on any of the samples in the table to see the full log.
 - `Related Signals` are displayed as a timeline of other signals which contain the same group by values to assist with triaging the signal.
@@ -85,7 +85,6 @@ The query to see all threat intelligence matches in the Security Signals Explore
 * `@threat_intel.results.category "anonymizer", "scanner"`
 * `@threat_intel.results.intention "malicious", "unknown"`
 * `@threat_intel.results.subcategory options "proxy", "tor", "vpn"`
-    **Note**: Proxy, Tor, and VPN subcategory attributes are provided only by threat intelligence partner IPinfo.
 
 ### Search by network IP attributes
 

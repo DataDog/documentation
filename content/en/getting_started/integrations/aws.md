@@ -255,7 +255,7 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [42]: /serverless
 [43]: /serverless/libraries_integrations
 [44]: /serverless/distributed_tracing
-[45]: /serverless/troubleshooting
+[45]: /serverless/aws_lambda/troubleshooting/
 [46]: /integrations/amazon_xray/
 [47]: /tracing/trace_collection/
 [48]: /tracing/

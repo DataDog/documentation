@@ -90,7 +90,8 @@ For example:
     - Set `DD_ENV` to group your traces and custom statistics.
     - Set `DD_SERVICE` to specify a service name (defaults to your app name).
     - Set `DD_LOGS_INJECTION:true` for correlation with application logs from your app.
-    - Set `DD_PROFILING_ENABLED:true` to enable .NET [Continuous Profiler][5] (public beta).
+    - Set `DD_PROFILING_ENABLED:true` to enable .NET [Continuous Profiler][5].
+    - Set `DD_APPSEC_ENABLED:true` to enable [Application Security][15].
     - See a full list of [optional configuration variables][6].
 6. Click **Save** (this restarts your application).
 7. <div class="alert alert-warning">[REQUIRED] Stop your application by clicking <u>Stop</u>.</div>
@@ -150,7 +151,7 @@ Learn more about [custom metrics][12].
 [2]: /tracing/setup/dotnet/
 [3]: https://portal.azure.com/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
-[5]: /profiler/
+[5]: /profiler/enabling/dotnet/?tab=azureappservice
 [6]: /tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
 [7]: /logs/log_collection/csharp/#agentless-logging-with-apm
 [8]: /logs/log_collection/csharp/#agentless-logging-with-serilog-sink
@@ -160,6 +161,7 @@ Learn more about [custom metrics][12].
 [12]: /metrics/
 [13]: /integrations/guide/azure-portal/#app-service-extension
 [14]: /integrations/guide/azure-portal/
+[15]: /security/application_security/enabling/serverless/?tab=serverlessframework#azure-app-service
 {{% /tab %}}
 {{% tab "Java" %}}
 ### Requirements
@@ -235,7 +237,7 @@ Learn more about [custom metrics][10].
 [3]: https://portal.azure.com/
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: /tracing/trace_collection/library_config/dotnet-framework/#additional-optional-configuration
-[6]: /logs/log_collection/csharp/?tab=serilog#agentless-logging
+[6]: /logs/log_collection/java/?tab=log4j#agentless-logging
 [7]: /developers/dogstatsd
 [8]: https://search.maven.org/artifact/com.datadoghq/java-dogstatsd-client
 [9]: /developers/dogstatsd/?tab=java#code

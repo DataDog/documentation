@@ -4,6 +4,10 @@ kind: faq
 aliases:
     - /graphing/faq/interpolation-the-fill-modifier-explained
     - /dashboards/faq/interpolation-the-fill-modifier-explained
+further_reading:
+- link: "/dashboards/functions/interpolation/"
+  tag: "Documentation"
+  text: "Learn more about Interpolation Functions"
 ---
 
 {{< img src="metrics/guide/graph_fill_example.png" alt="Fill() function in the graph options" style="width:100%;" >}}
@@ -73,6 +77,10 @@ The default interpolation method (which is chosen based on a metric's type) is u
 Linear interpolation is a great fit for metrics reported on a steady basis from the same sources. For sparse metrics or metrics reported from varying sources over time, it's often more interesting to disable interpolation. This makes sense if you send data points only when the value of the thing you measure changes.
 
 Null prevents graphs from displaying interpolated values 5 min after the last real value.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /metrics/types/
 [2]: /metrics/custom_metrics/type_modifiers/?tab=gauge#in-application-modifiers

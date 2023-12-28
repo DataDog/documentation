@@ -22,7 +22,8 @@
           "width": 12,
           "x": 0,
           "y": 0
-        }
+        },
+        "live_span": "1h"
       },
       "name": "Example-Powerpack",
       "tags": [

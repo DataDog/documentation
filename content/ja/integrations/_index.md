@@ -3,6 +3,7 @@ aliases:
 - /ja/integrations/verisign_openhybrid/
 - /ja/integrations/tcp_queue_length/
 - /ja/integrations/snyk/
+- /ja/integrations/mainstorconcept_ziris/
 cascade:
 - _target:
     path: /integrations/azure.md

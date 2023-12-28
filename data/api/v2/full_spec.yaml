@@ -4,6 +4,13 @@ components:
   headers: {}
   links: {}
   parameters:
+    APIKeyCategoryParameter:
+      description: Filter API keys by category.
+      in: query
+      name: filter[category]
+      required: false
+      schema:
+        type: string
     APIKeyFilterCreatedAtEndParameter:
       description: Only include API keys created on or before the specified date.
       in: query
@@ -59,6 +66,13 @@ components:
       schema:
         example: created_by,modified_by
         type: string
+    APIKeyReadConfigReadEnabledParameter:
+      description: Filter API keys by remote config read enabled status.
+      in: query
+      name: filter[remote_config_read_enabled]
+      required: false
+      schema:
+        type: boolean
     APIKeysSortParameter:
       description: 'API key attribute used to sort results. Sort order is ascending
 
@@ -404,6 +418,13 @@ components:
       required: true
       schema:
         type: string
+    RuleId:
+      description: The ID of the rule/scorecard.
+      in: path
+      name: rule_id
+      required: true
+      schema:
+        type: string
     SchemaVersion:
       description: The schema version desired in the response.
       in: query
@@ -689,6 +710,26 @@ components:
           items:
             $ref: '#/components/schemas/APIKeyResponseIncludedItem'
           type: array
+        meta:
+          $ref: '#/components/schemas/APIKeysResponseMeta'
+      type: object
+    APIKeysResponseMeta:
+      description: Additional information related to api keys response.
+      properties:
+        max_allowed:
+          description: Max allowed number of API keys.
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/APIKeysResponseMetaPage'
+      type: object
+    APIKeysResponseMetaPage:
+      description: Additional information related to the API keys response.
+      properties:
+        total_filtered_count:
+          description: Total filtered application key count.
+          format: int64
+          type: integer
       type: object
     APIKeysSort:
       default: name
@@ -721,6 +762,47 @@ components:
       type: string
       x-enum-varnames:
       - API_KEYS
+    ActiveBillingDimensionsAttributes:
+      description: List of active billing dimensions.
+      properties:
+        month:
+          description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`.'
+          format: date-time
+          type: string
+        values:
+          description: 'List of active billing dimensions. Example: `[infra_host,
+            apm_host, serverless_infra]`.'
+          items:
+            description: A given billing dimension in a list.
+            example: infra_host
+            type: string
+          type: array
+      type: object
+    ActiveBillingDimensionsBody:
+      description: Active billing dimensions data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ActiveBillingDimensionsAttributes'
+        id:
+          description: Unique ID of the response.
+          type: string
+        type:
+          $ref: '#/components/schemas/ActiveBillingDimensionsType'
+      type: object
+    ActiveBillingDimensionsResponse:
+      description: Active billing dimensions response.
+      properties:
+        data:
+          $ref: '#/components/schemas/ActiveBillingDimensionsBody'
+      type: object
+    ActiveBillingDimensionsType:
+      default: billing_dimensions
+      description: Type of active billing dimensions data.
+      enum:
+      - billing_dimensions
+      type: string
+      x-enum-varnames:
+      - BILLING_DIMENSIONS
     ApmRetentionFilterType:
       default: apm_retention_filter
       description: The type of the resource.
@@ -792,6 +874,24 @@ components:
       oneOf:
       - $ref: '#/components/schemas/User'
       - $ref: '#/components/schemas/Role'
+    ApplicationKeyResponseMeta:
+      description: Additional information related to the application key response.
+      properties:
+        max_allowed_per_user:
+          description: Max allowed number of application keys per user.
+          format: int64
+          type: integer
+        page:
+          $ref: '#/components/schemas/ApplicationKeyResponseMetaPage'
+      type: object
+    ApplicationKeyResponseMetaPage:
+      description: Additional information related to the application key response.
+      properties:
+        total_filtered_count:
+          description: Total filtered application key count.
+          format: int64
+          type: integer
+      type: object
     ApplicationKeyUpdateAttributes:
       description: Attributes used to update an application Key.
       properties:
@@ -1290,6 +1390,104 @@ components:
       type: string
       x-enum-varnames:
       - AUTHN_MAPPINGS
+    BulkMuteFindingsRequest:
+      description: The new bulk mute finding request.
+      properties:
+        data:
+          $ref: '#/components/schemas/BulkMuteFindingsRequestData'
+      required:
+      - data
+      type: object
+    BulkMuteFindingsRequestAttributes:
+      additionalProperties: false
+      description: The mute properties to be updated.
+      properties:
+        mute:
+          $ref: '#/components/schemas/BulkMuteFindingsRequestProperties'
+      required:
+      - mute
+      type: object
+    BulkMuteFindingsRequestData:
+      description: Data object containing the new bulk mute properties of the finding.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/BulkMuteFindingsRequestAttributes'
+        id:
+          description: UUID to identify the request
+          example: dbe5f567-192b-4404-b908-29b70e1c9f76
+          type: string
+        meta:
+          $ref: '#/components/schemas/BulkMuteFindingsRequestMeta'
+        type:
+          $ref: '#/components/schemas/FindingType'
+      required:
+      - id
+      - type
+      - attributes
+      - meta
+      type: object
+    BulkMuteFindingsRequestMeta:
+      description: Meta object containing the findings to be updated.
+      properties:
+        findings:
+          description: Array of findings.
+          items:
+            $ref: '#/components/schemas/BulkMuteFindingsRequestMetaFindings'
+          type: array
+      type: object
+    BulkMuteFindingsRequestMetaFindings:
+      description: Finding object containing the finding information.
+      properties:
+        finding_id:
+          $ref: '#/components/schemas/FindingID'
+      type: object
+    BulkMuteFindingsRequestProperties:
+      additionalProperties: false
+      description: Object containing the new mute properties of the findings.
+      properties:
+        description:
+          description: Additional information about the reason why those findings
+            are muted or unmuted. This field has a maximum limit of 280 characters.
+          type: string
+        expiration_date:
+          description: 'The expiration date of the mute or unmute action (Unix ms).
+            It must be set to a value greater than the current timestamp.
+
+            If this field is not provided, the finding will be muted or unmuted indefinitely,
+            which is equivalent to setting the expiration date to 9999999999999.
+
+            '
+          example: 1778721573794
+          format: int64
+          type: integer
+        muted:
+          description: Whether those findings should be muted or unmuted.
+          example: true
+          type: boolean
+        reason:
+          $ref: '#/components/schemas/FindingMuteReason'
+      required:
+      - muted
+      - reason
+      type: object
+    BulkMuteFindingsResponse:
+      description: The expected response schema.
+      properties:
+        data:
+          $ref: '#/components/schemas/BulkMuteFindingsResponseData'
+      required:
+      - data
+      type: object
+    BulkMuteFindingsResponseData:
+      description: Data object containing the ID of the request that was updated.
+      properties:
+        id:
+          description: UUID used to identify the request
+          example: 93bfeb70-af47-424d-908a-948d3f08e37f
+          type: string
+        type:
+          $ref: '#/components/schemas/FindingType'
+      type: object
     CIAppAggregateBucketValue:
       description: A bucket value, can either be a timeseries or a single value.
       oneOf:
@@ -2865,6 +3063,11 @@ components:
           description: The SECL expression of the Agent rule.
           example: exec.file.name == \"sh\"
           type: string
+        filters:
+          description: The platforms the Agent rule is supported on.
+          items:
+            type: string
+          type: array
         name:
           description: The name of the Agent rule.
           example: my_agent_rule
@@ -3462,6 +3665,117 @@ components:
             $ref: '#/components/schemas/ConfluentResourceResponseData'
           type: array
       type: object
+    Container:
+      description: Container object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ContainerAttributes'
+        id:
+          description: Container ID.
+          type: string
+        type:
+          $ref: '#/components/schemas/ContainerType'
+      type: object
+    ContainerAttributes:
+      description: Attributes for a container.
+      properties:
+        container_id:
+          description: The ID of the container.
+          type: string
+        created_at:
+          description: Time the container was created.
+          type: string
+        host:
+          description: Hostname of the host running the container.
+          type: string
+        image_digest:
+          description: Digest of the compressed image manifest.
+          nullable: true
+          type: string
+        image_name:
+          description: Name of the associated container image.
+          type: string
+        image_tags:
+          description: List of image tags associated with the container image.
+          items:
+            type: string
+          nullable: true
+          type: array
+        name:
+          description: Name of the container.
+          type: string
+        started_at:
+          description: Time the container was started.
+          type: string
+        state:
+          description: State of the container. This depends on the container runtime.
+          type: string
+        tags:
+          description: List of tags associated with the container.
+          items:
+            type: string
+          type: array
+      type: object
+    ContainerGroup:
+      description: Container group object.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ContainerGroupAttributes'
+        id:
+          description: Container Group ID.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ContainerGroupRelationships'
+        type:
+          $ref: '#/components/schemas/ContainerGroupType'
+      type: object
+    ContainerGroupAttributes:
+      description: Attributes for a container group.
+      properties:
+        count:
+          description: Number of containers in the group.
+          format: int64
+          type: integer
+        tags:
+          description: Tags from the group name parsed in key/value format.
+          type: object
+      type: object
+    ContainerGroupRelationships:
+      description: Relationships to containers inside a container group.
+      properties:
+        containers:
+          $ref: '#/components/schemas/ContainerGroupRelationshipsLink'
+      type: object
+    ContainerGroupRelationshipsData:
+      description: Links data.
+      items:
+        description: A link data.
+        type: string
+      type: array
+    ContainerGroupRelationshipsLink:
+      description: Relationships to Containers inside a Container Group.
+      properties:
+        data:
+          $ref: '#/components/schemas/ContainerGroupRelationshipsData'
+        links:
+          $ref: '#/components/schemas/ContainerGroupRelationshipsLinks'
+      type: object
+    ContainerGroupRelationshipsLinks:
+      description: Links attributes.
+      properties:
+        related:
+          description: Link to related containers.
+          type: string
+      type: object
+    ContainerGroupType:
+      default: container_group
+      description: Type of container group.
+      enum:
+      - container_group
+      example: container_group
+      type: string
+      x-enum-varnames:
+      - CONTAINER_GROUP
     ContainerImage:
       description: Container Image object.
       properties:
@@ -3772,6 +4086,96 @@ components:
           description: Link to current page.
           type: string
       type: object
+    ContainerItem:
+      description: Possible Container models.
+      oneOf:
+      - $ref: '#/components/schemas/Container'
+      - $ref: '#/components/schemas/ContainerGroup'
+    ContainerMeta:
+      description: Response metadata object.
+      properties:
+        pagination:
+          $ref: '#/components/schemas/ContainerMetaPage'
+      type: object
+    ContainerMetaPage:
+      description: Paging attributes.
+      properties:
+        cursor:
+          description: The cursor used to get the current results, if any.
+          type: string
+        limit:
+          description: Number of results returned
+          format: int32
+          maximum: 10000
+          minimum: 0
+          type: integer
+        next_cursor:
+          description: The cursor used to get the next results, if any.
+          type: string
+        prev_cursor:
+          description: The cursor used to get the previous results, if any.
+          nullable: true
+          type: string
+        total:
+          description: Total number of records that match the query.
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/ContainerMetaPageType'
+      type: object
+    ContainerMetaPageType:
+      default: cursor_limit
+      description: Type of Container pagination.
+      enum:
+      - cursor_limit
+      example: cursor_limit
+      type: string
+      x-enum-varnames:
+      - CURSOR_LIMIT
+    ContainerType:
+      default: container
+      description: Type of container.
+      enum:
+      - container
+      example: container
+      type: string
+      x-enum-varnames:
+      - CONTAINER
+    ContainersResponse:
+      description: List of containers.
+      properties:
+        data:
+          description: Array of Container objects.
+          items:
+            $ref: '#/components/schemas/ContainerItem'
+          type: array
+        links:
+          $ref: '#/components/schemas/ContainersResponseLinks'
+        meta:
+          $ref: '#/components/schemas/ContainerMeta'
+      type: object
+    ContainersResponseLinks:
+      description: Pagination links.
+      properties:
+        first:
+          description: Link to the first page.
+          type: string
+        last:
+          description: Link to the last page.
+          nullable: true
+          type: string
+        next:
+          description: Link to the next page.
+          nullable: true
+          type: string
+        prev:
+          description: Link to previous page.
+          nullable: true
+          type: string
+        self:
+          description: Link to current page.
+          type: string
+      type: object
     ContentEncoding:
       description: HTTP header used to compress the media-type.
       enum:
@@ -3783,6 +4187,63 @@ components:
       - IDENTITY
       - GZIP
       - DEFLATE
+    CostAttributionAggregates:
+      description: An array of available aggregates.
+      items:
+        $ref: '#/components/schemas/CostAttributionAggregatesBody'
+      type: array
+    CostAttributionAggregatesBody:
+      description: The object containing the aggregates.
+      properties:
+        agg_type:
+          description: The aggregate type.
+          example: sum
+          type: string
+        field:
+          description: The field.
+          example: infra_host_committed_cost
+          type: string
+        value:
+          description: The value for a given field.
+          format: double
+          type: number
+      type: object
+    CostAttributionTagNames:
+      additionalProperties:
+        description: 'A list of values that are associated with each tag key.
+
+          - An empty list means the resource use wasn''t tagged with the respective
+          tag.
+
+          - Multiple values means the respective tag was applied multiple times on
+          the resource.
+
+          - An `<empty>` value means the resource was tagged with the respective tag
+          but did not have a value.'
+        items:
+          description: A given tag in a list.
+          example: datadog-integrations-lab
+          type: string
+        type: array
+      description: 'Tag keys and values.
+
+        A `null` value here means that the requested tag breakdown cannot be applied
+        because it does not match the [tags
+
+        configured for usage attribution](https://docs.datadoghq.com/account_management/billing/usage_attribution/#getting-started).
+
+        In this scenario the API returns the total cost, not broken down by tags.'
+      nullable: true
+      type: object
+    CostAttributionType:
+      default: cost_by_tag
+      description: Type of cost attribution data.
+      enum:
+      - cost_by_tag
+      example: cost_by_tag
+      type: string
+      x-enum-varnames:
+      - COST_BY_TAG
     CostByOrg:
       description: Cost data.
       properties:
@@ -3839,6 +4300,38 @@ components:
       type: string
       x-enum-varnames:
       - COST_BY_ORG
+    CreateRuleRequest:
+      description: Scorecard create rule request.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateRuleRequestData'
+      type: object
+    CreateRuleRequestData:
+      description: Scorecard create rule request data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RuleAttributes'
+        type:
+          $ref: '#/components/schemas/RuleType'
+      type: object
+    CreateRuleResponse:
+      description: Created rule in response.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateRuleResponseData'
+      type: object
+    CreateRuleResponseData:
+      description: Create rule response data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RuleAttributes'
+        id:
+          $ref: '#/components/schemas/RuleId'
+        relationships:
+          $ref: '#/components/schemas/RelationshipToRule'
+        type:
+          $ref: '#/components/schemas/RuleType'
+      type: object
     Creator:
       description: Creator of the object.
       properties:
@@ -3853,6 +4346,178 @@ components:
           nullable: true
           type: string
       type: object
+    DORADeploymentRequest:
+      description: Request to create a DORA deployment event.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORADeploymentRequestData'
+      required:
+      - data
+      type: object
+    DORADeploymentRequestAttributes:
+      description: Attributes to create a DORA deployment event.
+      properties:
+        finished_at:
+          description: Unix timestamp in nanoseconds when the deployment finished.
+            It should not be older than 3 hours.
+          example: 1693491984000000000
+          format: int64
+          type: integer
+        git:
+          $ref: '#/components/schemas/DORAGitInfo'
+        id:
+          description: Deployment ID.
+          type: string
+        service:
+          description: Service name from a service available in the Service Catalog.
+          example: shopist
+          type: string
+        started_at:
+          description: Unix timestamp in nanoseconds when the deployment started.
+          example: 1693491974000000000
+          format: int64
+          type: integer
+        version:
+          description: Version to correlate with [APM Deployment Tracking](https://docs.datadoghq.com/tracing/services/deployment_tracking/).
+          example: v1.12.07
+          type: string
+      required:
+      - service
+      - started_at
+      - finished_at
+      type: object
+    DORADeploymentRequestData:
+      description: The JSON:API data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DORADeploymentRequestAttributes'
+      required:
+      - attributes
+      type: object
+    DORADeploymentResponse:
+      description: Response after receiving a DORA deployment event.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORADeploymentResponseData'
+      required:
+      - data
+      type: object
+    DORADeploymentResponseData:
+      description: The JSON:API data.
+      properties:
+        id:
+          description: The ID of the received DORA deployment event.
+          example: 4242fcdd31586083
+          type: string
+        type:
+          $ref: '#/components/schemas/DORADeploymentType'
+      required:
+      - id
+      type: object
+    DORADeploymentType:
+      default: dora_deployment
+      description: JSON:API type for DORA deployment events.
+      enum:
+      - dora_deployment
+      example: dora_deployment
+      type: string
+      x-enum-varnames:
+      - DORA_DEPLOYMENT
+    DORAGitInfo:
+      description: Git info for DORA Metrics events.
+      properties:
+        commit_sha:
+          $ref: '#/components/schemas/GitCommitSHA'
+        repository_url:
+          $ref: '#/components/schemas/GitRepositoryURL'
+      required:
+      - repository_url
+      - commit_sha
+      type: object
+    DORAIncidentRequest:
+      description: Request to create a DORA incident event.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORAIncidentRequestData'
+      required:
+      - data
+      type: object
+    DORAIncidentRequestAttributes:
+      description: Attributes to create a DORA incident event.
+      properties:
+        finished_at:
+          description: Unix timestamp in nanoseconds when the incident finished. It
+            should not be older than 3 hours.
+          example: 1693491984000000000
+          format: int64
+          type: integer
+        git:
+          $ref: '#/components/schemas/DORAGitInfo'
+        id:
+          description: Incident ID
+          type: string
+        name:
+          description: Incident name.
+          example: Webserver is down failing all requests
+          type: string
+        service:
+          description: Service name from a service available in the Service Catalog.
+          example: shopist
+          type: string
+        severity:
+          description: Incident severity.
+          example: High
+          type: string
+        started_at:
+          description: Unix timestamp in nanoseconds when the incident started.
+          example: 1693491974000000000
+          format: int64
+          type: integer
+        version:
+          description: Version to correlate with [APM Deployment Tracking](https://docs.datadoghq.com/tracing/services/deployment_tracking/).
+          example: v1.12.07
+          type: string
+      required:
+      - service
+      - started_at
+      type: object
+    DORAIncidentRequestData:
+      description: The JSON:API data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/DORAIncidentRequestAttributes'
+      required:
+      - attributes
+      type: object
+    DORAIncidentResponse:
+      description: Response after receiving a DORA incident event.
+      properties:
+        data:
+          $ref: '#/components/schemas/DORAIncidentResponseData'
+      required:
+      - data
+      type: object
+    DORAIncidentResponseData:
+      description: Response after receiving a DORA incident event.
+      properties:
+        id:
+          description: The ID of the received DORA incident event.
+          example: 4242fcdd31586083
+          type: string
+        type:
+          $ref: '#/components/schemas/DORAIncidentType'
+      required:
+      - id
+      type: object
+    DORAIncidentType:
+      default: dora_incident
+      description: JSON:API type for DORA incident events.
+      enum:
+      - dora_incident
+      example: dora_incident
+      type: string
+      x-enum-varnames:
+      - DORA_INCIDENT
     DashboardListAddItemsRequest:
       description: Request containing a list of dashboards to add.
       properties:
@@ -5452,7 +6117,7 @@ components:
       type: integer
     FindingID:
       description: The unique ID for this finding.
-      example: AQAAAYbb1i0gijTHEQAAAABBWWJiMWkwZ0FBQ2FuNzBJVGZXZ3B3QUE
+      example: ZGVmLTAwcC1pZXJ-aS0wZjhjNjMyZDNmMzRlZTgzNw==
       type: string
     FindingMute:
       additionalProperties: false
@@ -5596,6 +6261,9 @@ components:
     FullAPIKeyAttributes:
       description: Attributes of a full API key.
       properties:
+        category:
+          description: The category of the API key.
+          type: string
         created_at:
           description: Creation date of the API key.
           example: '2020-11-23T10:00:00.000Z'
@@ -5623,6 +6291,9 @@ components:
           description: Name of the API key.
           example: API Key for submitting metrics
           type: string
+        remote_config_read_enabled:
+          description: The remote config read enabled status.
+          type: boolean
       type: object
     FullApplicationKey:
       description: Datadog application key.
@@ -5747,8 +6418,20 @@ components:
             type: string
           type: array
         is_cspm_enabled:
-          description: When enabled, Datadog performs configuration checks across
-            your Google Cloud environment by continuously scanning every resource.
+          description: 'When enabled, Datadog will activate the Cloud Security Monitoring
+            product for this service account. Note: This requires resource_collection_enabled
+            to be set to true.'
+          type: boolean
+        is_security_command_center_enabled:
+          default: false
+          description: 'When enabled, Datadog will attempt to collect Security Command
+            Center Findings. Note: This requires additional permissions on the service
+            account.'
+          example: true
+          type: boolean
+        resource_collection_enabled:
+          default: false
+          description: When enabled, Datadog scans for all resources in your GCP environment.
           type: boolean
       type: object
     GCPSTSServiceAccountCreateRequest:
@@ -5846,6 +6529,15 @@ components:
       - _HANDLE
       - EMAIL
       - _EMAIL
+    GitCommitSHA:
+      description: Git Commit SHA.
+      example: 66adc9350f2cc9b250b69abddab733dd55e1a588
+      pattern: ^[a-fA-F0-9]{40,}$
+      type: string
+    GitRepositoryURL:
+      description: Git Repository URL
+      example: https://github.com/organization/example-repository
+      type: string
     GroupScalarColumn:
       description: A column containing the tag keys and values in a group.
       properties:
@@ -6239,6 +6931,11 @@ components:
           $ref: '#/components/schemas/IncidentAttachmentLinkAttributesAttachmentObject'
         attachment_type:
           $ref: '#/components/schemas/IncidentAttachmentLinkAttachmentType'
+        modified:
+          description: Timestamp when the incident attachment link was last modified.
+          format: date-time
+          readOnly: true
+          type: string
       required:
       - attachment_type
       - attachment
@@ -6544,9 +7241,22 @@ components:
       - TEXTARRAY
       - METRICTAG
       - AUTOCOMPLETE
+    IncidentImpactsType:
+      description: The incident impacts type.
+      enum:
+      - incident_impacts
+      example: incident_impacts
+      type: string
+      x-enum-varnames:
+      - INCIDENT_IMPACTS
     IncidentIntegrationMetadataAttributes:
       description: Incident integration metadata's attributes for a create request.
       properties:
+        created:
+          description: Timestamp when the incident todo was created.
+          format: date-time
+          readOnly: true
+          type: string
         incident_id:
           description: UUID of the incident this integration metadata is connected
             to.
@@ -6563,6 +7273,11 @@ components:
           type: integer
         metadata:
           $ref: '#/components/schemas/IncidentIntegrationMetadataMetadata'
+        modified:
+          description: Timestamp when the incident todo was last modified.
+          format: date-time
+          readOnly: true
+          type: string
         status:
           description: 'A number indicating the status of this integration metadata.
             0 indicates unknown;
@@ -6662,6 +7377,8 @@ components:
           description: The incident integration metadata's ID.
           example: 00000000-0000-0000-1234-000000000000
           type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentIntegrationRelationships'
         type:
           $ref: '#/components/schemas/IncidentIntegrationMetadataType'
       required:
@@ -6682,6 +7399,25 @@ components:
       type: string
       x-enum-varnames:
       - INCIDENT_INTEGRATIONS
+    IncidentIntegrationRelationships:
+      description: The incident's integration relationships from a response.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        last_modified_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+      type: object
+    IncidentNonDatadogCreator:
+      description: Incident's non Datadog creator.
+      nullable: true
+      properties:
+        image_48_px:
+          description: Non Datadog creator `48px` image.
+          type: string
+        name:
+          description: Non Datadog creator name.
+          type: string
+      type: object
     IncidentNotificationHandle:
       description: A notification handle that will be notified at incident creation.
       properties:
@@ -6712,6 +7448,14 @@ components:
       x-enum-varnames:
       - USERS
       - ATTACHMENTS
+    IncidentRespondersType:
+      description: The incident responders type.
+      enum:
+      - incident_responders
+      example: incident_responders
+      type: string
+      x-enum-varnames:
+      - INCIDENT_RESPONDERS
     IncidentResponse:
       description: Response with an incident.
       properties:
@@ -6729,6 +7473,17 @@ components:
     IncidentResponseAttributes:
       description: The incident's attributes from a response.
       properties:
+        archived:
+          description: Timestamp of when the incident was archived.
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        case_id:
+          description: The incident case id.
+          format: int64
+          nullable: true
+          type: integer
         created:
           description: Timestamp when the incident was created.
           format: date-time
@@ -6779,6 +7534,8 @@ components:
           format: date-time
           readOnly: true
           type: string
+        non_datadog_creator:
+          $ref: '#/components/schemas/IncidentNonDatadogCreator'
         notification_handles:
           description: Notification handles that will be notified of the incident
             during update.
@@ -6795,6 +7552,12 @@ components:
           description: Timestamp when the incident's state was last changed from active
             or stable to resolved or completed.
           format: date-time
+          nullable: true
+          type: string
+        severity:
+          $ref: '#/components/schemas/IncidentSeverity'
+        state:
+          description: The state incident.
           nullable: true
           type: string
         time_to_detect:
@@ -6826,6 +7589,10 @@ components:
         title:
           description: The title of the incident, which summarizes what happened.
           example: A test incident title
+          type: string
+        visibility:
+          description: The incident visibility status.
+          nullable: true
           type: string
       required:
       - title
@@ -6888,10 +7655,16 @@ components:
           $ref: '#/components/schemas/NullableRelationshipToUser'
         created_by_user:
           $ref: '#/components/schemas/RelationshipToUser'
+        impacts:
+          $ref: '#/components/schemas/RelationshipToIncidentImpacts'
         integrations:
           $ref: '#/components/schemas/RelationshipToIncidentIntegrationMetadatas'
         last_modified_by_user:
           $ref: '#/components/schemas/RelationshipToUser'
+        responders:
+          $ref: '#/components/schemas/RelationshipToIncidentResponders'
+        user_defined_fields:
+          $ref: '#/components/schemas/RelationshipToIncidentUserDefinedFields'
       type: object
     IncidentSearchResponse:
       description: Response with incidents and facets.
@@ -7274,6 +8047,24 @@ components:
       required:
       - data
       type: object
+    IncidentSeverity:
+      description: The incident severity.
+      enum:
+      - UNKNOWN
+      - SEV-1
+      - SEV-2
+      - SEV-3
+      - SEV-4
+      - SEV-5
+      example: UNKNOWN
+      type: string
+      x-enum-varnames:
+      - UNKNOWN
+      - SEV_1
+      - SEV_2
+      - SEV_3
+      - SEV_4
+      - SEV_5
     IncidentTeamCreateAttributes:
       description: The incident team's attributes for a create request.
       properties:
@@ -7533,6 +8324,11 @@ components:
           description: The follow-up task's content.
           example: Restore lost data.
           type: string
+        created:
+          description: Timestamp when the incident todo was created.
+          format: date-time
+          readOnly: true
+          type: string
         due_date:
           description: Timestamp when the todo should be completed by.
           example: '2023-07-10T05:00:00.000000+00:00'
@@ -7541,6 +8337,11 @@ components:
         incident_id:
           description: UUID of the incident this todo is connected to.
           example: 00000000-aaaa-0000-0000-000000000000
+          type: string
+        modified:
+          description: Timestamp when the incident todo was last modified.
+          format: date-time
+          readOnly: true
           type: string
       required:
       - content
@@ -7603,6 +8404,14 @@ components:
       required:
       - data
       type: object
+    IncidentTodoRelationships:
+      description: The incident's relationships from a response.
+      properties:
+        created_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+        last_modified_by_user:
+          $ref: '#/components/schemas/RelationshipToUser'
+      type: object
     IncidentTodoResponse:
       description: Response with an incident todo.
       properties:
@@ -7626,6 +8435,8 @@ components:
           description: The incident todo's ID.
           example: 00000000-0000-0000-1234-000000000000
           type: string
+        relationships:
+          $ref: '#/components/schemas/IncidentTodoRelationships'
         type:
           $ref: '#/components/schemas/IncidentTodoType'
       required:
@@ -7736,6 +8547,14 @@ components:
       required:
       - data
       type: object
+    IncidentUserDefinedFieldType:
+      description: The incident user defined fields type.
+      enum:
+      - user_defined_field
+      example: user_defined_field
+      type: string
+      x-enum-varnames:
+      - USER_DEFINED_FIELD
     IncidentsResponse:
       description: Response with a list of incidents.
       properties:
@@ -7934,6 +8753,8 @@ components:
           items:
             $ref: '#/components/schemas/ApplicationKeyResponseIncludedItem'
           type: array
+        meta:
+          $ref: '#/components/schemas/ApplicationKeyResponseMeta'
       type: object
     ListDowntimesResponse:
       description: Response for retrieving all downtimes.
@@ -8011,6 +8832,39 @@ components:
           $ref: '#/components/schemas/PowerpackResponseLinks'
         meta:
           $ref: '#/components/schemas/PowerpacksResponseMeta'
+      type: object
+    ListRulesResponse:
+      description: Scorecard rules response.
+      properties:
+        data:
+          $ref: '#/components/schemas/ListRulesResponseData'
+        links:
+          $ref: '#/components/schemas/ListRulesResponseLinks'
+      type: object
+    ListRulesResponseData:
+      description: Array of rule details.
+      items:
+        $ref: '#/components/schemas/ListRulesResponseDataItem'
+      type: array
+    ListRulesResponseDataItem:
+      description: Rule details.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/RuleAttributes'
+        id:
+          $ref: '#/components/schemas/RuleId'
+        relationships:
+          $ref: '#/components/schemas/RelationshipToRule'
+        type:
+          $ref: '#/components/schemas/RuleType'
+      type: object
+    ListRulesResponseLinks:
+      description: Links attributes.
+      properties:
+        next:
+          description: Link for the next set of rules.
+          example: /api/v2/scorecard/rules?page%5Blimit%5D=2&page%5Boffset%5D=2&page%5Bsize%5D=2
+          type: string
       type: object
     ListTeamsInclude:
       description: Included related resources optionally requested.
@@ -9251,6 +10105,15 @@ components:
       properties:
         emails:
           $ref: '#/components/schemas/MetricBulkTagConfigEmailList'
+        exclude_tags_mode:
+          description: 'When set to true, the configuration will exclude the configured
+            tags and include any other submitted tags.
+
+            When set to false, the configuration will include the configured tags
+            and exclude any other submitted tags.
+
+            Defaults to false.'
+          type: boolean
         tags:
           $ref: '#/components/schemas/MetricBulkTagConfigTagNameList'
       type: object
@@ -9331,6 +10194,13 @@ components:
       properties:
         emails:
           $ref: '#/components/schemas/MetricBulkTagConfigEmailList'
+        exclude_tags_mode:
+          description: 'When set to true, the configuration will exclude the configured
+            tags and include any other submitted tags.
+
+            When set to false, the configuration will include the configured tags
+            and exclude any other submitted tags.'
+          type: boolean
         status:
           description: The status of the request.
           example: Accepted
@@ -9795,6 +10665,15 @@ components:
           example: '2020-03-25T09:48:37.463835Z'
           format: date-time
           type: string
+        exclude_tags_mode:
+          description: 'When set to true, the configuration will exclude the configured
+            tags and include any other submitted tags.
+
+            When set to false, the configuration will include the configured tags
+            and exclude any other submitted tags.
+
+            Defaults to false. Requires `tags` property.'
+          type: boolean
         include_percentiles:
           description: 'Toggle to include or exclude percentile aggregations for distribution
             metrics.
@@ -9825,6 +10704,15 @@ components:
       properties:
         aggregations:
           $ref: '#/components/schemas/MetricCustomAggregations'
+        exclude_tags_mode:
+          description: 'When set to true, the configuration will exclude the configured
+            tags and include any other submitted tags.
+
+            When set to false, the configuration will include the configured tags
+            and exclude any other submitted tags.
+
+            Defaults to false. Requires `tags` property.'
+          type: boolean
         include_percentiles:
           description: 'Toggle to include/exclude percentiles for a distribution metric.
 
@@ -9916,6 +10804,15 @@ components:
       properties:
         aggregations:
           $ref: '#/components/schemas/MetricCustomAggregations'
+        exclude_tags_mode:
+          description: 'When set to true, the configuration will exclude the configured
+            tags and include any other submitted tags.
+
+            When set to false, the configuration will include the configured tags
+            and exclude any other submitted tags.
+
+            Defaults to false. Requires `tags` property.'
+          type: boolean
         include_percentiles:
           description: 'Toggle to include/exclude percentiles for a distribution metric.
 
@@ -10359,141 +11256,78 @@ components:
           description: The monitor type.
           type: string
       type: object
-    MuteFindingRequest:
-      description: The new mute finding request.
+    MonthlyCostAttributionAttributes:
+      description: Cost Attribution by Tag for a given organization.
       properties:
-        data:
-          $ref: '#/components/schemas/MuteFindingRequestData'
-      required:
-      - data
-      type: object
-    MuteFindingRequestAttributes:
-      additionalProperties: false
-      description: The mute properties to be updated.
-      properties:
-        mute:
-          $ref: '#/components/schemas/MuteFindingRequestProperties'
-      required:
-      - mute
-      type: object
-    MuteFindingRequestData:
-      description: Data object containing the new mute properties of the finding.
-      properties:
-        attributes:
-          $ref: '#/components/schemas/MuteFindingRequestAttributes'
-        id:
-          $ref: '#/components/schemas/FindingID'
-        type:
-          $ref: '#/components/schemas/FindingType'
-      required:
-      - id
-      - type
-      - attributes
-      type: object
-    MuteFindingRequestProperties:
-      additionalProperties: false
-      description: Object containing the new mute properties of the finding.
-      properties:
-        description:
-          description: Additional information about the reason why this finding is
-            muted or unmuted. This field has a maximum limit of 280 characters.
-          example: To be resolved later
+        month:
+          description: 'Datetime in ISO-8601 format, UTC, precise to hour: `[YYYY-MM-DDThh]`.'
+          format: date-time
           type: string
-        expiration_date:
-          description: 'The expiration date of the mute or unmute action (Unix ms).
-            It must be set to a value greater than the current timestamp.
-
-            If this field is not provided, the finding will be muted or unmuted indefinitely,
-            which is equivalent to setting the expiration date to 9999999999999.
-
-            '
-          example: 1778721573794
-          format: int64
-          type: integer
-        muted:
-          description: Whether this finding is muted or unmuted.
-          example: true
-          type: boolean
-        reason:
-          $ref: '#/components/schemas/FindingMuteReason'
-      required:
-      - muted
-      - reason
-      type: object
-    MuteFindingResponse:
-      description: The expected response schema.
-      properties:
-        data:
-          $ref: '#/components/schemas/MuteFindingResponseData'
-      required:
-      - data
-      type: object
-    MuteFindingResponseAttributes:
-      description: The JSON:API attributes of the finding.
-      properties:
-        evaluation:
-          $ref: '#/components/schemas/FindingEvaluation'
-        evaluation_changed_at:
-          $ref: '#/components/schemas/FindingEvaluationChangedAt'
-        mute:
-          $ref: '#/components/schemas/MuteFindingResponseProperties'
-        resource:
-          $ref: '#/components/schemas/FindingResource'
-        resource_discovery_date:
-          $ref: '#/components/schemas/FindingResourceDiscoveryDate'
-        resource_type:
-          $ref: '#/components/schemas/FindingResourceType'
-        rule:
-          $ref: '#/components/schemas/FindingRule'
-        status:
-          $ref: '#/components/schemas/FindingStatus'
+        org_name:
+          description: The name of the organization.
+          type: string
+        public_id:
+          description: The organization public ID.
+          type: string
+        tag_config_source:
+          description: The source of the cost attribution tag configuration and the
+            selected tags in the format `<source_org_name>:::<selected tag 1>///<selected
+            tag 2>///<selected tag 3>`.
+          type: string
         tags:
-          $ref: '#/components/schemas/FindingTags'
+          $ref: '#/components/schemas/CostAttributionTagNames'
+        updated_at:
+          description: Shows the most recent hour in the current months for all organizations
+            for which all costs were calculated.
+          type: string
+        values:
+          description: 'Fields in Cost Attribution by tag(s). Example: `infra_host_on_demand_cost`,
+            `infra_host_committed_cost`, `infra_host_total_cost`, `infra_host_percentage_in_org`,
+            `infra_host_percentage_in_account`.'
+          type: object
       type: object
-    MuteFindingResponseData:
-      description: Data object containing the updated finding.
+    MonthlyCostAttributionBody:
+      description: Cost data.
       properties:
         attributes:
-          $ref: '#/components/schemas/MuteFindingResponseAttributes'
+          $ref: '#/components/schemas/MonthlyCostAttributionAttributes'
         id:
-          $ref: '#/components/schemas/FindingID'
-        type:
-          $ref: '#/components/schemas/FindingType'
-      type: object
-    MuteFindingResponseProperties:
-      additionalProperties: false
-      description: Information about the mute status of this finding.
-      properties:
-        description:
-          description: 'Additional information about the reason why this finding is
-            muted or unmuted.
-
-            This attribute will not be included in the response if the description
-            is not provided in the request body.
-
-            '
-          example: To be resolved later
+          description: Unique ID of the response.
           type: string
-        expiration_date:
-          description: 'The expiration date of the mute or unmute action.
-
-            If the expiration date is not provided in the request body, this attribute
-            will not be included in the response and the finding will be muted or
-            unmuted indefinitely.
-
-            '
-          example: 1778721573794
-          format: int64
-          type: integer
-        muted:
-          description: Whether this finding is muted or unmuted.
-          example: true
-          type: boolean
-        reason:
-          $ref: '#/components/schemas/FindingMuteReason'
+        type:
+          $ref: '#/components/schemas/CostAttributionType'
+      type: object
+    MonthlyCostAttributionMeta:
+      description: The object containing document metadata.
+      properties:
+        aggregates:
+          $ref: '#/components/schemas/CostAttributionAggregates'
+        pagination:
+          $ref: '#/components/schemas/MonthlyCostAttributionPagination'
+      type: object
+    MonthlyCostAttributionPagination:
+      description: The metadata for the current pagination.
+      properties:
+        next_record_id:
+          description: The cursor to use to get the next results, if any. To make
+            the next request, use the same parameters with the addition of the `next_record_id`.
+          nullable: true
+          type: string
+      type: object
+    MonthlyCostAttributionResponse:
+      description: Response containing the monthly cost attribution by tag(s).
+      properties:
+        data:
+          description: Response containing cost attribution.
+          items:
+            $ref: '#/components/schemas/MonthlyCostAttributionBody'
+          type: array
+        meta:
+          $ref: '#/components/schemas/MonthlyCostAttributionMeta'
       type: object
     NullableRelationshipToUser:
       description: Relationship to user.
+      nullable: true
       properties:
         data:
           $ref: '#/components/schemas/NullableRelationshipToUserData'
@@ -10513,6 +11347,141 @@ components:
       required:
       - id
       - type
+      type: object
+    OktaAccount:
+      description: Schema for an Okta account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OktaAccountAttributes'
+        id:
+          description: The ID of the Okta account, a UUID hash of the account name.
+          example: f749daaf-682e-4208-a38d-c9b43162c609
+          type: string
+        type:
+          $ref: '#/components/schemas/OktaAccountType'
+      required:
+      - attributes
+      - type
+      type: object
+    OktaAccountAttributes:
+      description: Attributes object for an Okta account.
+      properties:
+        api_key:
+          description: The API key of the Okta account.
+          type: string
+          writeOnly: true
+        auth_method:
+          description: The authorization method for an Okta account.
+          example: oauth
+          type: string
+        client_id:
+          description: The Client ID of an Okta app integration.
+          type: string
+        client_secret:
+          description: The client secret of an Okta app integration.
+          type: string
+          writeOnly: true
+        domain:
+          description: The domain of the Okta account.
+          example: https://example.okta.com/
+          type: string
+        name:
+          description: The name of the Okta account.
+          example: Okta-Prod
+          type: string
+      required:
+      - auth_method
+      - domain
+      - name
+      type: object
+    OktaAccountRequest:
+      description: Request object for an Okta account.
+      properties:
+        data:
+          $ref: '#/components/schemas/OktaAccount'
+      required:
+      - data
+      type: object
+    OktaAccountResponse:
+      description: Response object for an Okta account.
+      properties:
+        data:
+          $ref: '#/components/schemas/OktaAccount'
+      type: object
+    OktaAccountResponseData:
+      description: Data object of an Okta account
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OktaAccountAttributes'
+        id:
+          description: The ID of the Okta account, a UUID hash of the account name.
+          example: f749daaf-682e-4208-a38d-c9b43162c609
+          type: string
+        type:
+          $ref: '#/components/schemas/OktaAccountType'
+      required:
+      - attributes
+      - id
+      - type
+      type: object
+    OktaAccountType:
+      default: okta-accounts
+      description: Account type for an Okta account.
+      enum:
+      - okta-accounts
+      example: okta-accounts
+      type: string
+      x-enum-varnames:
+      - OKTA_ACCOUNTS
+    OktaAccountUpdateRequest:
+      description: Payload schema when updating an Okta account.
+      properties:
+        data:
+          $ref: '#/components/schemas/OktaAccountUpdateRequestData'
+      required:
+      - data
+      type: object
+    OktaAccountUpdateRequestAttributes:
+      description: Attributes object for updating an Okta account.
+      properties:
+        api_key:
+          description: The API key of the Okta account.
+          type: string
+          writeOnly: true
+        auth_method:
+          description: The authorization method for an Okta account.
+          example: oauth
+          type: string
+        client_id:
+          description: The Client ID of an Okta app integration.
+          type: string
+        client_secret:
+          description: The client secret of an Okta app integration.
+          type: string
+          writeOnly: true
+        domain:
+          description: The domain associated with an Okta account.
+          example: https://dev-test.okta.com/
+          type: string
+      required:
+      - auth_method
+      - domain
+      type: object
+    OktaAccountUpdateRequestData:
+      description: Data object for updating an Okta account.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OktaAccountUpdateRequestAttributes'
+        type:
+          $ref: '#/components/schemas/OktaAccountType'
+    OktaAccountsResponse:
+      description: The expected response schema when getting Okta accounts.
+      properties:
+        data:
+          description: List of Okta accounts.
+          items:
+            $ref: '#/components/schemas/OktaAccountResponseData'
+          type: array
       type: object
     OnDemandConcurrencyCap:
       description: On-demand concurrency cap.
@@ -10763,6 +11732,185 @@ components:
       type: string
       x-enum-varnames:
       - ORGS
+    OutcomeType:
+      default: outcome
+      description: The JSON:API type for an outcome.
+      enum:
+      - outcome
+      example: outcome
+      type: string
+      x-enum-varnames:
+      - OUTCOME
+    OutcomesBatchAttributes:
+      description: The JSON:API attributes for a batched set of scorecard outcomes.
+      properties:
+        results:
+          description: Set of scorecard outcomes to update.
+          items:
+            $ref: '#/components/schemas/OutcomesBatchRequestItem'
+          type: array
+      type: object
+    OutcomesBatchRequest:
+      description: Scorecard outcomes batch request.
+      properties:
+        data:
+          $ref: '#/components/schemas/OutcomesBatchRequestData'
+      type: object
+    OutcomesBatchRequestData:
+      description: Scorecard outcomes batch request data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OutcomesBatchAttributes'
+        type:
+          $ref: '#/components/schemas/OutcomesBatchType'
+      type: object
+    OutcomesBatchRequestItem:
+      description: Scorecard outcome for a specific rule, for a given service within
+        a batched update.
+      properties:
+        remarks:
+          description: Any remarks regarding the scorecard rule's evaluation, and
+            supports HTML hyperlinks.
+          example: 'See: <a href="https://app.datadoghq.com/services">Services</a>'
+          type: string
+        rule_id:
+          $ref: '#/components/schemas/RuleId'
+        service_name:
+          description: The unique name for a service in the catalog.
+          example: my-service
+          type: string
+        state:
+          $ref: '#/components/schemas/State'
+      required:
+      - rule_id
+      - service_name
+      - state
+      type: object
+    OutcomesBatchResponse:
+      description: Scorecard outcomes batch response.
+      properties:
+        data:
+          $ref: '#/components/schemas/OutcomesBatchResponseData'
+        meta:
+          $ref: '#/components/schemas/OutcomesBatchResponseMeta'
+      required:
+      - data
+      - meta
+      type: object
+    OutcomesBatchResponseAttributes:
+      description: The JSON:API attributes for an outcome.
+      properties:
+        created_at:
+          description: Creation time of the rule outcome.
+          format: date-time
+          type: string
+        modified_at:
+          description: Time of last rule outcome modification.
+          format: date-time
+          type: string
+        remarks:
+          description: Any remarks regarding the scorecard rule's evaluation, and
+            supports HTML hyperlinks.
+          example: 'See: <a href="https://app.datadoghq.com/services">Services</a>'
+          type: string
+        service_name:
+          description: The unique name for a service in the catalog.
+          example: my-service
+          type: string
+        state:
+          $ref: '#/components/schemas/State'
+      type: object
+    OutcomesBatchResponseData:
+      description: List of rule outcomes which were affected during the bulk operation.
+      items:
+        $ref: '#/components/schemas/OutcomesResponseDataItem'
+      type: array
+    OutcomesBatchResponseMeta:
+      description: Metadata pertaining to the bulk operation.
+      properties:
+        total_received:
+          description: Total number of scorecard results received during the bulk
+            operation.
+          format: int64
+          type: integer
+        total_updated:
+          description: Total number of scorecard results modified during the bulk
+            operation.
+          format: int64
+          type: integer
+      type: object
+    OutcomesBatchType:
+      default: batched-outcome
+      description: The JSON:API type for scorecard outcomes.
+      enum:
+      - batched-outcome
+      example: batched-outcome
+      type: string
+      x-enum-varnames:
+      - BATCHED_OUTCOME
+    OutcomesResponse:
+      description: Scorecard outcomes - the result of a rule for a service.
+      properties:
+        data:
+          $ref: '#/components/schemas/OutcomesResponseData'
+        included:
+          $ref: '#/components/schemas/OutcomesResponseIncluded'
+        links:
+          $ref: '#/components/schemas/OutcomesResponseLinks'
+      type: object
+    OutcomesResponseData:
+      description: List of rule outcomes.
+      items:
+        $ref: '#/components/schemas/OutcomesResponseDataItem'
+      type: array
+    OutcomesResponseDataItem:
+      description: A single rule outcome.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OutcomesBatchResponseAttributes'
+        id:
+          description: The unique ID for a rule outcome.
+          type: string
+        relationships:
+          $ref: '#/components/schemas/RuleOutcomeRelationships'
+        type:
+          $ref: '#/components/schemas/OutcomeType'
+      type: object
+    OutcomesResponseIncluded:
+      description: Array of rule details.
+      items:
+        $ref: '#/components/schemas/OutcomesResponseIncludedItem'
+      type: array
+    OutcomesResponseIncludedItem:
+      description: Attributes of the included rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/OutcomesResponseIncludedRuleAttributes'
+        id:
+          $ref: '#/components/schemas/RuleId'
+        type:
+          $ref: '#/components/schemas/RuleType'
+      type: object
+    OutcomesResponseIncludedRuleAttributes:
+      description: Details of a rule.
+      properties:
+        name:
+          description: Name of the rule.
+          example: Team Defined
+          type: string
+        scorecard_name:
+          description: The scorecard name to which this rule must belong.
+          example: Observability Best Practices
+          type: string
+      type: object
+    OutcomesResponseLinks:
+      description: Links attributes.
+      properties:
+        next:
+          description: Link for the next set of results.
+          example: /api/v2/scorecard/outcomes?include=rule&page%5Blimit%5D=100&page%5Boffset%5D=100
+          type: string
+      type: object
     Pagination:
       description: Pagination object.
       properties:
@@ -10791,6 +11939,9 @@ components:
     PartialAPIKeyAttributes:
       description: Attributes of a partial API key.
       properties:
+        category:
+          description: The category of the API key.
+          type: string
         created_at:
           description: Creation date of the API key.
           example: '2020-11-23T10:00:00.000Z'
@@ -10813,6 +11964,9 @@ components:
           description: Name of the API key.
           example: API Key for submitting metrics
           type: string
+        remote_config_read_enabled:
+          description: The remote config read enabled status.
+          type: boolean
       type: object
     PartialApplicationKey:
       description: Partial Datadog application key.
@@ -10991,6 +12145,8 @@ components:
           $ref: '#/components/schemas/PowerpackGroupWidgetDefinition'
         layout:
           $ref: '#/components/schemas/PowerpackGroupWidgetLayout'
+        live_span:
+          $ref: '#/components/schemas/WidgetLiveSpan'
       required:
       - definition
       type: object
@@ -11123,7 +12279,7 @@ components:
       description: Powerpack relationship object.
       properties:
         author:
-          $ref: '#/components/schemas/Creator'
+          $ref: '#/components/schemas/RelationshipToUser'
       type: object
     PowerpackResponse:
       description: Response object which includes a single powerpack configuration.
@@ -11195,6 +12351,7 @@ components:
         last_offset:
           description: The last offset.
           format: int64
+          nullable: true
           type: integer
         limit:
           description: Pagination limit.
@@ -11307,6 +12464,62 @@ components:
       type: string
       x-enum-varnames:
       - PROCESS
+    ProjectedCost:
+      description: Projected Cost data.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ProjectedCostAttributes'
+        id:
+          description: Unique ID of the response.
+          type: string
+        type:
+          $ref: '#/components/schemas/ProjectedCostType'
+      type: object
+    ProjectedCostAttributes:
+      description: Projected Cost attributes data.
+      properties:
+        charges:
+          description: List of charges data reported for the requested month.
+          items:
+            $ref: '#/components/schemas/ChargebackBreakdown'
+          type: array
+        date:
+          description: The month requested.
+          format: date-time
+          type: string
+        org_name:
+          description: The organization name.
+          type: string
+        projected_total_cost:
+          description: The total projected cost of products for the month.
+          format: double
+          type: number
+        public_id:
+          description: The organization public ID.
+          type: string
+        region:
+          description: The region of the Datadog instance that the organization belongs
+            to.
+          type: string
+      type: object
+    ProjectedCostResponse:
+      description: Projected Cost response.
+      properties:
+        data:
+          description: Response containing Projected Cost.
+          items:
+            $ref: '#/components/schemas/ProjectedCost'
+          type: array
+      type: object
+    ProjectedCostType:
+      default: projected_cost
+      description: Type of cost data.
+      enum:
+      - projected_cost
+      example: projected_cost
+      type: string
+      x-enum-varnames:
+      - PROJECt_COST
     QueryFormula:
       description: A formula for calculation based on one or more queries.
       properties:
@@ -12119,6 +13332,30 @@ components:
       - id
       - type
       type: object
+    RelationshipToIncidentImpactData:
+      description: Relationship to impact object.
+      properties:
+        id:
+          description: A unique identifier that represents the impact.
+          example: 00000000-0000-0000-2345-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentImpactsType'
+      required:
+      - id
+      - type
+      type: object
+    RelationshipToIncidentImpacts:
+      description: Relationship to impacts.
+      properties:
+        data:
+          description: An array of incident impacts.
+          items:
+            $ref: '#/components/schemas/RelationshipToIncidentImpactData'
+          type: array
+      required:
+      - data
+      type: object
     RelationshipToIncidentIntegrationMetadataData:
       description: A relationship reference for an integration metadata object.
       example:
@@ -12185,6 +13422,54 @@ components:
       - id
       - type
       type: object
+    RelationshipToIncidentResponderData:
+      description: Relationship to impact object.
+      properties:
+        id:
+          description: A unique identifier that represents the responder.
+          example: 00000000-0000-0000-2345-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentRespondersType'
+      required:
+      - id
+      - type
+      type: object
+    RelationshipToIncidentResponders:
+      description: Relationship to incident responders.
+      properties:
+        data:
+          description: An array of incident responders.
+          items:
+            $ref: '#/components/schemas/RelationshipToIncidentResponderData'
+          type: array
+      required:
+      - data
+      type: object
+    RelationshipToIncidentUserDefinedFieldData:
+      description: Relationship to impact object.
+      properties:
+        id:
+          description: A unique identifier that represents the responder.
+          example: 00000000-0000-0000-2345-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/IncidentUserDefinedFieldType'
+      required:
+      - id
+      - type
+      type: object
+    RelationshipToIncidentUserDefinedFields:
+      description: Relationship to incident user defined fields.
+      properties:
+        data:
+          description: An array of user defined fields.
+          items:
+            $ref: '#/components/schemas/RelationshipToIncidentUserDefinedFieldData'
+          type: array
+      required:
+      - data
+      type: object
     RelationshipToOrganization:
       description: Relationship to an organization.
       properties:
@@ -12217,6 +13502,21 @@ components:
           type: array
       required:
       - data
+      type: object
+    RelationshipToOutcome:
+      description: The JSON:API relationship to a scorecard outcome.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToOutcomeData'
+      type: object
+    RelationshipToOutcomeData:
+      description: The JSON:API relationship to an outcome, which returns the related
+        rule id.
+      properties:
+        id:
+          $ref: '#/components/schemas/RuleId'
+        type:
+          $ref: '#/components/schemas/RuleType'
       type: object
     RelationshipToPermission:
       description: Relationship to a permissions object.
@@ -12266,6 +13566,28 @@ components:
           items:
             $ref: '#/components/schemas/RelationshipToRoleData'
           type: array
+      type: object
+    RelationshipToRule:
+      description: Scorecard create rule response relationship.
+      properties:
+        scorecard:
+          $ref: '#/components/schemas/RelationshipToRuleData'
+      type: object
+    RelationshipToRuleData:
+      description: Relationship data for a rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToRuleDataObject'
+      type: object
+    RelationshipToRuleDataObject:
+      description: Rule relationship data.
+      properties:
+        id:
+          description: The unique ID for a scorecard.
+          example: 00000000-0000-beef-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/ScorecardType'
       type: object
     RelationshipToSAMLAssertionAttribute:
       description: AuthN Mapping relationship to SAML Assertion Attribute.
@@ -12350,6 +13672,27 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/UserTeamPermissionType'
+      required:
+      - id
+      - type
+      type: object
+    RelationshipToUserTeamTeam:
+      description: Relationship between team membership and team
+      properties:
+        data:
+          $ref: '#/components/schemas/RelationshipToUserTeamTeamData'
+      required:
+      - data
+      type: object
+    RelationshipToUserTeamTeamData:
+      description: The team associated with the membership
+      properties:
+        id:
+          description: The ID of the team associated with the membership
+          example: d7e15d9d-d346-43da-81d8-3d9e71d9a5e9
+          type: string
+        type:
+          $ref: '#/components/schemas/UserTeamTeamType'
       required:
       - id
       - type
@@ -13163,6 +14506,62 @@ components:
       type: string
       x-enum-varnames:
       - ROLES
+    RuleAttributes:
+      description: Details of a rule.
+      properties:
+        category:
+          deprecated: true
+          description: The scorecard name to which this rule must belong.
+          type: string
+        created_at:
+          description: Creation time of the rule outcome.
+          format: date-time
+          type: string
+        custom:
+          description: Defines if the rule is a custom rule.
+          type: boolean
+        description:
+          description: Explanation of the rule.
+          type: string
+        enabled:
+          description: If enabled, the rule is calculated as part of the score.
+          example: true
+          type: boolean
+        modified_at:
+          description: Time of the last rule outcome modification.
+          format: date-time
+          type: string
+        name:
+          description: Name of the rule.
+          example: Team Defined
+          type: string
+        owner:
+          description: Owner of the rule.
+          type: string
+        scorecard_name:
+          description: The scorecard name to which this rule must belong.
+          example: Deployments automated via Deployment Trains
+          type: string
+      type: object
+    RuleId:
+      description: The unique ID for a scorecard rule.
+      example: 00000000-0000-beef-0000-000000000000
+      type: string
+    RuleOutcomeRelationships:
+      description: The JSON:API relationship to a scorecard rule.
+      properties:
+        rule:
+          $ref: '#/components/schemas/RelationshipToOutcome'
+      type: object
+    RuleType:
+      default: rule
+      description: The JSON:API type for scorecard rules.
+      enum:
+      - rule
+      example: rule
+      type: string
+      x-enum-varnames:
+      - RULE
     SAMLAssertionAttribute:
       description: SAML assertion attribute.
       properties:
@@ -13348,6 +14747,15 @@ components:
         type:
           $ref: '#/components/schemas/ScalarFormulaResponseType'
       type: object
+    ScorecardType:
+      default: scorecard
+      description: The JSON:API type for scorecard.
+      enum:
+      - scorecard
+      example: scorecard
+      type: string
+      x-enum-varnames:
+      - SCORECARD
     SecurityFilter:
       description: The security filter's properties.
       properties:
@@ -13927,10 +15335,12 @@ components:
     SecurityMonitoringRuleTypeCreate:
       description: The rule type.
       enum:
+      - application_security
       - log_detection
       - workload_security
       type: string
       x-enum-varnames:
+      - APPLICATION_SECURITY
       - LOG_DETECTION
       - WORKLOAD_SECURITY
     SecurityMonitoringRuleTypeRead:
@@ -14061,7 +15471,7 @@ components:
 
         associated values.'
       properties:
-        attributes:
+        custom:
           additionalProperties: {}
           description: A JSON object of attributes in the security signal.
           example:
@@ -14647,6 +16057,13 @@ components:
             description: Field.
             type: string
           type: array
+        hasOptionalGroupByFields:
+          description: When false, events without a group-by value are ignored by
+            the rule. When true, events with missing group-by fields are processed
+            with `N/A`, replacing the missing values.
+          example: false
+          readOnly: true
+          type: boolean
         metric:
           deprecated: true
           description: '(Deprecated) The target field to aggregate over when using
@@ -15142,6 +16559,12 @@ components:
         pattern:
           description: Not included if there is a relationship to a standard pattern.
           type: string
+        priority:
+          description: Integer from 1 (high) to 5 (low) indicating rule issue severity.
+          format: int64
+          maximum: 5
+          minimum: 1
+          type: integer
         tags:
           description: List of tags.
           items:
@@ -15286,12 +16709,24 @@ components:
         description:
           description: Description of the standard pattern.
           type: string
+        included_keywords:
+          description: List of included keywords.
+          items:
+            type: string
+          type: array
         name:
           description: Name of the standard pattern.
           type: string
         pattern:
           description: Regex to match.
           type: string
+        priority:
+          description: Integer from 1 (high) to 5 (low) indicating standard pattern
+            issue severity.
+          format: int64
+          maximum: 5
+          minimum: 1
+          type: integer
         tags:
           description: List of tags.
           items:
@@ -16016,7 +17451,7 @@ components:
           type: object
         integrations:
           $ref: '#/components/schemas/ServiceDefinitionV2Dot2Integrations'
-        langauges:
+        languages:
           description: 'The service''s programming language. Datadog recognizes the
             following languages: `dotnet`, `go`, `java`, `js`, `php`, `python`, `ruby`,
             and `c++`.'
@@ -16411,6 +17846,16 @@ components:
       - channel_name
       - redirect_url
       type: object
+    SortDirection:
+      default: desc
+      description: The direction to sort by.
+      enum:
+      - desc
+      - asc
+      type: string
+      x-enum-varnames:
+      - DESC
+      - ASC
     Span:
       description: Object description of a spans after being processed and stored
         by Datadog.
@@ -17276,6 +18721,18 @@ components:
             from the other indexes
           type: string
       type: object
+    State:
+      description: The state of the rule evaluation.
+      enum:
+      - pass
+      - fail
+      - skip
+      example: pass
+      type: string
+      x-enum-varnames:
+      - PASS
+      - FAIL
+      - SKIP
     TagsEventAttribute:
       description: Array of tags associated with your event.
       example:
@@ -17751,6 +19208,41 @@ components:
       required:
       - data
       type: object
+    TeamsField:
+      description: Supported teams field.
+      enum:
+      - id
+      - name
+      - handle
+      - summary
+      - description
+      - avatar
+      - banner
+      - visible_modules
+      - hidden_modules
+      - created_at
+      - modified_at
+      - user_count
+      - link_count
+      - team_links
+      - user_team_permissions
+      type: string
+      x-enum-varnames:
+      - ID
+      - NAME
+      - HANDLE
+      - SUMMARY
+      - DESCRIPTION
+      - AVATAR
+      - BANNER
+      - VISIBLE_MODULES
+      - HIDDEN_MODULES
+      - CREATED_AT
+      - MODIFIED_AT
+      - USER_COUNT
+      - LINK_COUNT
+      - TEAM_LINKS
+      - USER_TEAM_PERMISSIONS
     TeamsResponse:
       description: Response with multiple teams
       properties:
@@ -18351,6 +19843,20 @@ components:
     UserTeamAttributes:
       description: Team membership attributes
       properties:
+        provisioned_by:
+          description: 'The mechanism responsible for provisioning the team relationship.
+
+            Possible values: null for added by a user, "service_account" if added
+            by a service account, and "saml_mapping" if provisioned via SAML mapping.'
+          nullable: true
+          readOnly: true
+          type: string
+        provisioned_by_id:
+          description: UUID of the User or Service Account who provisioned this team
+            membership, or null if provisioned via SAML mapping.
+          nullable: true
+          readOnly: true
+          type: string
         role:
           $ref: '#/components/schemas/UserTeamRole'
       type: object
@@ -18385,8 +19891,8 @@ components:
       description: User team permission attributes
       properties:
         permissions:
-          description: Object of team permission actions and boolean values indicating
-            of the currently logged in user can perform them on this team
+          description: Object of team permission actions and boolean values that a
+            logged in user can perform on this team.
           readOnly: true
           type: object
       type: object
@@ -18402,6 +19908,8 @@ components:
     UserTeamRelationships:
       description: Relationship between membership and a user
       properties:
+        team:
+          $ref: '#/components/schemas/RelationshipToUserTeamTeam'
         user:
           $ref: '#/components/schemas/RelationshipToUserTeamUser'
       type: object
@@ -18427,6 +19935,15 @@ components:
       type: string
       x-enum-varnames:
       - ADMIN
+    UserTeamTeamType:
+      default: team
+      description: User team team type
+      enum:
+      - team
+      example: team
+      type: string
+      x-enum-varnames:
+      - TEAM
     UserTeamType:
       default: team_memberships
       description: Team membership type
@@ -18539,6 +20056,42 @@ components:
       type: string
       x-enum-varnames:
       - USERS
+    WidgetLiveSpan:
+      description: The available timeframes depend on the widget you are using.
+      enum:
+      - 1m
+      - 5m
+      - 10m
+      - 15m
+      - 30m
+      - 1h
+      - 4h
+      - 1d
+      - 2d
+      - 1w
+      - 1mo
+      - 3mo
+      - 6mo
+      - 1y
+      - alert
+      example: 5m
+      type: string
+      x-enum-varnames:
+      - PAST_ONE_MINUTE
+      - PAST_FIVE_MINUTES
+      - PAST_TEN_MINUTES
+      - PAST_FIFTEEN_MINUTES
+      - PAST_THIRTY_MINUTES
+      - PAST_ONE_HOUR
+      - PAST_FOUR_HOURS
+      - PAST_ONE_DAY
+      - PAST_TWO_DAYS
+      - PAST_ONE_WEEK
+      - PAST_ONE_MONTH
+      - PAST_THREE_MONTHS
+      - PAST_SIX_MONTHS
+      - PAST_ONE_YEAR
+      - ALERT
   securitySchemes:
     AuthZ:
       description: This API uses OAuth 2 with the implicit grant flow.
@@ -18568,7 +20121,7 @@ components:
               an organization. Mute and unmute hosts. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
-            monitors_write: Edit, mute, and delete individual monitors.
+            monitors_write: Edit and delete individual monitors.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View CSPM Findings.
@@ -18641,6 +20194,8 @@ paths:
       - $ref: '#/components/parameters/APIKeyFilterModifiedAtStartParameter'
       - $ref: '#/components/parameters/APIKeyFilterModifiedAtEndParameter'
       - $ref: '#/components/parameters/APIKeyIncludeParameter'
+      - $ref: '#/components/parameters/APIKeyReadConfigReadEnabledParameter'
+      - $ref: '#/components/parameters/APIKeyCategoryParameter'
       responses:
         '200':
           content:
@@ -19164,6 +20719,7 @@ paths:
       - $ref: '#/components/parameters/ApplicationKeyFilterParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtStartParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtEndParameter'
+      - $ref: '#/components/parameters/ApplicationKeyIncludeParameter'
       responses:
         '200':
           content:
@@ -19763,6 +21319,9 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
+      x-unstable: '**Note:** This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/ci/pipelines/analytics/aggregate:
     post:
       description: Use this API endpoint to aggregate CI Visibility pipeline events
@@ -20181,6 +21740,250 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
+  /api/v2/containers:
+    get:
+      description: Get all containers for your organization.
+      operationId: ListContainers
+      parameters:
+      - description: Comma-separated list of tags to filter containers by.
+        example: env:prod,short_image:cassandra
+        in: query
+        name: filter[tags]
+        required: false
+        schema:
+          type: string
+      - description: Comma-separated list of tags to group containers by.
+        example: datacenter,cluster
+        in: query
+        name: group_by
+        required: false
+        schema:
+          type: string
+      - description: Attribute to sort containers by.
+        example: started_at
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      - description: Maximum number of results returned.
+        in: query
+        name: page[size]
+        required: false
+        schema:
+          default: 1000
+          format: int32
+          maximum: 10000
+          minimum: 1
+          type: integer
+      - description: 'String to query the next page of results.
+
+          This key is provided with each valid response from the API in `meta.pagination.next_cursor`.'
+        in: query
+        name: page[cursor]
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContainersResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get All Containers
+      tags:
+      - Containers
+      x-menu-order: 1
+      x-pagination:
+        cursorParam: page[cursor]
+        cursorPath: meta.pagination.next_cursor
+        limitParam: page[size]
+        resultsPath: data
+      x-undo:
+        type: safe
+  /api/v2/cost_by_tag/active_billing_dimensions:
+    get:
+      description: Get active billing dimensions for cost attribution. Cost data for
+        a given month becomes available no later than the 17th of the following month.
+      operationId: GetActiveBillingDimensions
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/ActiveBillingDimensionsResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get active billing dimensions for cost attribution
+      tags:
+      - Usage Metering
+      x-menu-order: 5
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/cost_by_tag/monthly_cost_attribution:
+    get:
+      description: "Get monthly cost attribution by tag across multi-org and single
+        root-org accounts.\nCost Attribution data for a given month becomes available
+        no later than the 17th of the following month.\nThis API endpoint is paginated.
+        To make sure you receive all records, check if the value of `next_record_id`
+        is\nset in the response. If it is, make another request and pass `next_record_id`
+        as a parameter.\nPseudo code example:\n```\nresponse := GetMonthlyCostAttribution(start_month,
+        end_month)\ncursor := response.metadata.pagination.next_record_id\nWHILE cursor
+        != null BEGIN\n  sleep(5 seconds)  # Avoid running into rate limit\n  response
+        := GetMonthlyCostAttribution(start_month, end_month, next_record_id=cursor)\n
+        \ cursor := response.metadata.pagination.next_record_id\nEND\n```"
+      operationId: GetMonthlyCostAttribution
+      parameters:
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for cost beginning in this month.'
+        in: query
+        name: start_month
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Datetime in ISO-8601 format, UTC, precise to month: `[YYYY-MM]`
+          for cost ending this month.'
+        in: query
+        name: end_month
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: 'Comma-separated list specifying cost types (e.g., `<billing_dimension>_on_demand_cost`,
+          `<billing_dimension>_committed_cost`, `<billing_dimension>_total_cost`)
+          and the
+
+          proportions (`<billing_dimension>_percentage_in_org`, `<billing_dimension>_percentage_in_account`).
+          Use `*` to retrieve all fields.
+
+          Example: `infra_host_on_demand_cost,infra_host_percentage_in_account`
+
+          To obtain the complete list of active billing dimensions that can be used
+          to replace
+
+          `<billing_dimension>` in the field names, make a request to the [Get active
+          billing dimensions API](https://docs.datadoghq.com/api/latest/usage-metering/#get-active-billing-dimensions-for-cost-attribution).'
+        in: query
+        name: fields
+        required: true
+        schema:
+          type: string
+      - description: 'The direction to sort by: `[desc, asc]`.'
+        in: query
+        name: sort_direction
+        required: false
+        schema:
+          $ref: '#/components/schemas/SortDirection'
+      - description: 'The billing dimension to sort by. Always sorted by total cost.
+          Example: `infra_host`.'
+        in: query
+        name: sort_name
+        required: false
+        schema:
+          type: string
+      - description: 'Comma separated list of tag keys used to group cost. If no value
+          is provided the cost will not be broken down by tags.
+
+          To see which tags are available, look for the value of `tag_config_source`
+          in the API response.'
+        in: query
+        name: tag_breakdown_keys
+        required: false
+        schema:
+          type: string
+      - description: List following results with a next_record_id provided in the
+          previous query.
+        in: query
+        name: next_record_id
+        required: false
+        schema:
+          type: string
+      - description: Include child org cost in the response. Defaults to `true`.
+        in: query
+        name: include_descendants
+        required: false
+        schema:
+          default: true
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/MonthlyCostAttributionResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get Monthly Cost Attribution
+      tags:
+      - Usage Metering
+      x-menu-order: 5
+      x-undo:
+        type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
@@ -20195,6 +21998,7 @@ paths:
       - $ref: '#/components/parameters/ApplicationKeyFilterParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtStartParameter'
       - $ref: '#/components/parameters/ApplicationKeyFilterCreatedAtEndParameter'
+      - $ref: '#/components/parameters/ApplicationKeyIncludeParameter'
       responses:
         '200':
           content:
@@ -20599,6 +22403,114 @@ paths:
       x-menu-order: 3
       x-undo:
         type: safe
+  /api/v2/dora/deployment:
+    post:
+      description: 'Use this API endpoint to provide data about deployments for DORA
+        metrics.
+
+
+        This is necessary for:
+
+        - Deployment Frequency
+
+        - Change Lead Time
+
+        - Change Failure Rate'
+      operationId: CreateDORADeployment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DORADeploymentRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORADeploymentResponse'
+          description: OK
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORADeploymentResponse'
+          description: OK - but delayed due to incident
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      summary: Send a deployment event for DORA Metrics
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you want to request access, complete the [form](https://forms.gle/Eqq6uXfGjYxmqpjDA).'
+  /api/v2/dora/incident:
+    post:
+      description: 'Use this API endpoint to provide data about incidents for DORA
+        metrics.
+
+
+        This is necessary for:
+
+        - Change Failure Rate
+
+        - Time to Restore'
+      operationId: CreateDORAIncident
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DORAIncidentRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAIncidentResponse'
+          description: OK
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DORAIncidentResponse'
+          description: OK - but delayed due to incident
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad Request
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+      summary: Send an incident event for DORA Metrics
+      tags:
+      - DORA Metrics
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in private beta.
+
+        If you want to request access, complete the [form](https://forms.gle/Eqq6uXfGjYxmqpjDA).'
   /api/v2/downtime:
     get:
       description: Get all scheduled downtimes.
@@ -20809,7 +22721,7 @@ paths:
       - apiKeyAuth: []
         appKeyAuth: []
       - AuthZ:
-        - monitors_read
+        - monitors_downtime
       summary: Get a downtime
       tags:
       - Downtimes
@@ -20954,9 +22866,6 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in beta.
-
-        For access, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/events/search:
     post:
       description: 'List endpoint returns events that match an events search query.
@@ -21002,9 +22911,6 @@ paths:
         resultsPath: data
       x-undo:
         type: safe
-      x-unstable: '**Note**: This endpoint is in beta.
-
-        For access, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/incidents:
     get:
       description: Get all incidents for the user's organization.
@@ -22896,6 +24802,173 @@ paths:
       x-menu-order: 9
       x-undo:
         type: safe
+  /api/v2/integrations/okta/accounts:
+    get:
+      description: List Okta accounts.
+      operationId: ListOktaAccounts
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OktaAccountsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: List Okta accounts
+      tags:
+      - Okta Integration
+      x-menu-order: 1
+      x-undo:
+        type: safe
+    post:
+      description: Create an Okta account.
+      operationId: CreateOktaAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OktaAccountRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OktaAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Add Okta account
+      tags:
+      - Okta Integration
+      x-codegen-request-body-name: body
+      x-given:
+        okta_account:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"okta-accounts\",\n    \"attributes\":
+              {\n      \"auth_method\": \"oauth\",\n      \"name\": \"{{ unique_lower_alnum
+              }}\",\n      \"domain\": \"https://dev-test.okta.com/\",\n      \"client_id\":
+              \"fakeclientid\",\n      \"client_secret\": \"fakeclientsecret\"\n    }\n
+              \ }\n}"
+          step: there is a valid "okta_account" in the system
+      x-menu-order: 2
+      x-undo:
+        operationId: DeleteOktaAccount
+        parameters:
+        - name: account_id
+          source: data.id
+        type: unsafe
+  /api/v2/integrations/okta/accounts/{account_id}:
+    delete:
+      description: Delete an Okta account.
+      operationId: DeleteOktaAccount
+      parameters:
+      - description: None
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete Okta account
+      tags:
+      - Okta Integration
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+    get:
+      description: Get an Okta account.
+      operationId: GetOktaAccount
+      parameters:
+      - description: None
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OktaAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get Okta account
+      tags:
+      - Okta Integration
+      x-menu-order: 3
+      x-undo:
+        type: safe
+    patch:
+      description: Update an Okta account.
+      operationId: UpdateOktaAccount
+      parameters:
+      - description: None
+        in: path
+        name: account_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OktaAccountUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OktaAccountResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update Okta account
+      tags:
+      - Okta Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
   /api/v2/ip_allowlist:
     get:
       description: Returns the IP allowlist and its enabled or disabled state.
@@ -24605,7 +26678,11 @@ paths:
         If multiple calls include the same metric, the last configuration applied
         (not by submit order) is used, do not
 
-        expect deterministic ordering of concurrent calls.
+        expect deterministic ordering of concurrent calls. The `exclude_tags_mode`
+        value will set all metrics that match the prefix to
+
+        the same exclusion state, metric tag configurations do not support mixed inclusion
+        and exclusion for tags on the same metric.
 
         Can only be used with application keys of users with the `Manage Tags for
         Metrics` permission.'
@@ -24656,7 +26733,9 @@ paths:
         operationId: DeleteBulkTagsMetricsConfiguration
         parameters:
         - name: body
-          source: ''
+          template: "{\n  \"data\": {\n    \"id\":\"{{ data.id }}\",\n    \"type\":\"metric_bulk_configure_tags\",\n
+            \   \"attributes\": {\n      \"emails\": [\"{{ data.attributes.emails[0]
+            }}\"]\n    }\n  }\n}"
         type: unsafe
   /api/v2/metrics/{metric_name}/active-configurations:
     get:
@@ -24953,10 +27032,16 @@ paths:
       description: 'Update the tag configuration of a metric or percentile aggregations
         of a distribution metric or custom aggregations
 
-        of a count, rate, or gauge metric.
+        of a count, rate, or gauge metric. By setting `exclude_tags_mode` to true
+        the behavior is changed
+
+        from an allow-list to a deny-list, and tags in the defined list will not be
+        queryable.
 
         Can only be used with application keys from users with the `Manage Tags for
-        Metrics` permission.'
+        Metrics` permission. This endpoint requires
+
+        a tag configuration to be created first.'
       operationId: UpdateTagConfiguration
       parameters:
       - $ref: '#/components/parameters/MetricName'
@@ -25011,7 +27096,11 @@ paths:
         Optionally, include percentile aggregations on any distribution metric or
         configure custom aggregations
 
-        on any count, rate, or gauge metric.
+        on any count, rate, or gauge metric. By setting `exclude_tags_mode` to true
+        the behavior is changed
+
+        from an allow-list to a deny-list, and tags in the defined list will not be
+        queryable.
 
         Can only be used with application keys of users with the `Manage Tags for
         Metrics` permission.'
@@ -25573,6 +27662,57 @@ paths:
       x-unstable: '**Note**: This endpoint is in public beta.
 
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    patch:
+      description: Mute or unmute findings.
+      operationId: MuteFindings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkMuteFindingsRequest'
+        description: "### Attributes\n\nAll findings are updated with the same attributes.
+          The request body must include at least two attributes: `muted` and `reason`.\nThe
+          allowed reasons depend on whether the finding is being muted or unmuted:\n
+          \ - To mute a finding: `PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`,
+          `OTHER`.\n  - To unmute a finding : `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`,
+          `OTHER`.\n\n### Meta\n\nThe request body must include a list of the finding
+          IDs to be updated.\n"
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkMuteFindingsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/FindingsBadRequestResponse'
+        '403':
+          $ref: '#/components/responses/FindingsForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/FindingsNotFoundResponse'
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: 'Invalid Request: The server understands the request syntax
+            but cannot process it due to invalid data.'
+        '429':
+          $ref: '#/components/responses/FindingsTooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      summary: Mute or unmute a batch of findings
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/posture_management/findings/{finding_id}:
     get:
       description: Returns a single finding with message and resource configuration.
@@ -25617,76 +27757,6 @@ paths:
       tags:
       - Security Monitoring
       x-menu-order: 2
-      x-undo:
-        type: safe
-      x-unstable: '**Note**: This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
-    patch:
-      description: 'Mute or unmute a specific finding.
-
-        The API returns the updated finding object when the request is successful.'
-      operationId: UpdateFinding
-      parameters:
-      - description: The ID of the finding.
-        in: path
-        name: finding_id
-        required: true
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MuteFindingRequest'
-        description: 'To mute or unmute a finding, the request body should include
-          at least two attributes: `muted` and `reason`. The allowed reasons depend
-          on whether the finding is being muted or unmuted:
-
-          - To mute a finding: `PENDING_FIX`, `FALSE_POSITIVE`, `ACCEPTED_RISK`, `OTHER`.
-
-          - To unmute a finding : `NO_PENDING_FIX`, `HUMAN_ERROR`, `NO_LONGER_ACCEPTED_RISK`,
-          `OTHER`.
-
-          '
-        required: true
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MuteFindingResponse'
-          description: OK
-        '400':
-          $ref: '#/components/responses/FindingsBadRequestResponse'
-        '403':
-          $ref: '#/components/responses/FindingsForbiddenResponse'
-        '404':
-          $ref: '#/components/responses/FindingsNotFoundResponse'
-        '409':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/JSONAPIErrorResponse'
-          description: 'Resource Conflict: The finding has already been muted or unmuted
-            within the last 60 seconds.'
-        '422':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/JSONAPIErrorResponse'
-          description: 'Invalid Request: The server understands the request syntax
-            but cannot process it due to invalid data.'
-        '429':
-          $ref: '#/components/responses/FindingsTooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
-      summary: Mute or unmute a finding
-      tags:
-      - Security Monitoring
-      x-codegen-request-body-name: body
-      x-menu-order: 3
       x-undo:
         type: safe
       x-unstable: '**Note**: This endpoint is in public beta.
@@ -26231,6 +28301,12 @@ paths:
       - description: Filter all roles by the given string.
         in: query
         name: filter
+        required: false
+        schema:
+          type: string
+      - description: Filter all roles by the given list of role IDs.
+        in: query
+        name: filter[id]
         required: false
         schema:
           type: string
@@ -27180,6 +29256,319 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
+  /api/v2/scorecard/outcomes:
+    get:
+      description: Fetches all rule outcomes.
+      operationId: ListScorecardOutcomes
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageOffset'
+      - description: Include related rule details in the response.
+        in: query
+        name: include
+        required: false
+        schema:
+          example: rule
+          type: string
+      - description: Return only specified values in the outcome attributes.
+        in: query
+        name: fields[outcome]
+        required: false
+        schema:
+          example: state, service_name
+          type: string
+      - description: Return only specified values in the included rule details.
+        in: query
+        name: fields[rule]
+        required: false
+        schema:
+          example: name
+          type: string
+      - description: Filter the outcomes on a specific service name.
+        in: query
+        name: filter[outcome][service_name]
+        required: false
+        schema:
+          example: web-store
+          type: string
+      - description: Filter the outcomes by a specific state.
+        in: query
+        name: filter[outcome][state]
+        required: false
+        schema:
+          example: fail
+          type: string
+      - description: Filter outcomes on whether a rule is enabled/disabled.
+        in: query
+        name: filter[rule][enabled]
+        required: false
+        schema:
+          example: true
+          type: boolean
+      - description: Filter outcomes based on rule ID.
+        in: query
+        name: filter[rule][id]
+        required: false
+        schema:
+          example: f4485c79-0762-449c-96cf-c31e54a659f6
+          type: string
+      - description: Filter outcomes based on rule name.
+        in: query
+        name: filter[rule][name]
+        required: false
+        schema:
+          example: SLOs Defined
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutcomesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_read
+      summary: List all rule outcomes
+      tags:
+      - Service Scorecards
+      x-menu-order: 2
+      x-pagination:
+        limitParam: page[size]
+        pageOffsetParam: page[offset]
+        resultsPath: data
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/scorecard/outcomes/batch:
+    post:
+      description: Sets multiple service-rule outcomes in a single batched request.
+      operationId: CreateScorecardOutcomesBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OutcomesBatchRequest'
+        description: Set of scorecard outcomes.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OutcomesBatchResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Create outcomes batch
+      tags:
+      - Service Scorecards
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in private beta. To request access,
+        fill out this [sign-up form](https://forms.gle/CcEyp1uJmZpxRv8U8),
+
+        and we will be in touch. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/scorecard/rules:
+    get:
+      description: Fetch all rules.
+      operationId: ListScorecardRules
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageOffset'
+      - description: Include related scorecard details in the response.
+        in: query
+        name: include
+        required: false
+        schema:
+          example: scorecard
+          type: string
+      - description: Filter the rules on a rule ID.
+        in: query
+        name: filter[rule][id]
+        required: false
+        schema:
+          example: 37d2f990-c885-4972-949b-8b798213a166
+          type: string
+      - description: Filter for enabled rules only.
+        in: query
+        name: filter[rule][enabled]
+        required: false
+        schema:
+          example: true
+          type: boolean
+      - description: Filter for custom rules only.
+        in: query
+        name: filter[rule][custom]
+        required: false
+        schema:
+          example: true
+          type: boolean
+      - description: Filter rules on the rule name.
+        in: query
+        name: filter[rule][name]
+        required: false
+        schema:
+          example: Code Repos Defined
+          type: string
+      - description: Filter rules on the rule description.
+        in: query
+        name: filter[rule][description]
+        required: false
+        schema:
+          example: Identifying
+          type: string
+      - description: Return only specific fields in the response for rule attributes.
+        in: query
+        name: fields[rule]
+        required: false
+        schema:
+          example: name, description
+          type: string
+      - description: Return only specific fields in the included response for scorecard
+          attributes.
+        in: query
+        name: fields[scorecard]
+        required: false
+        schema:
+          example: name
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRulesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_read
+      summary: List all rules
+      tags:
+      - Service Scorecards
+      x-menu-order: 2
+      x-pagination:
+        limitParam: page[size]
+        pageOffsetParam: page[offset]
+        resultsPath: data
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    post:
+      description: Creates a new rule.
+      operationId: CreateScorecardRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRuleRequest'
+        description: Rule attributes.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRuleResponse'
+          description: Created
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Create a new rule
+      tags:
+      - Service Scorecards
+      x-codegen-request-body-name: body
+      x-given:
+        create_scorecard_rule:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"rule\",\n    \"attributes\":
+              {\n      \"name\": \"{{ unique }}\",\n      \"enabled\": true,\n      \"owner\":
+              \"Datadog\",\n      \"scorecard_name\": \"OpenAPI Spec Test Best Practices\"\n
+              \   }\n  }\n}"
+          step: there is a valid "create_scorecard_rule" in the system
+      x-menu-order: 1
+      x-undo:
+        operationId: DeleteScorecardRule
+        parameters:
+        - name: rule_id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in private beta. To request access,
+        fill out this [sign-up form](https://forms.gle/CcEyp1uJmZpxRv8U8),
+
+        and we will be in touch. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/scorecard/rules/{rule_id}:
+    delete:
+      description: Deletes a single rule.
+      operationId: DeleteScorecardRule
+      parameters:
+      - $ref: '#/components/parameters/RuleId'
+      responses:
+        '204':
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - apm_service_catalog_write
+      summary: Delete a rule
+      tags:
+      - Service Scorecards
+      x-menu-order: 3
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in private beta. To request access,
+        fill out this [sign-up form](https://forms.gle/CcEyp1uJmZpxRv8U8),
+
+        and we will be in touch. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/security/cloud_workload/policy/download:
     get:
       description: 'The download endpoint generates a Cloud Workload Security policy
@@ -29399,12 +31788,14 @@ paths:
       - description: Specifies the order of the returned teams
         in: query
         name: sort
+        required: false
         schema:
           $ref: '#/components/schemas/ListTeamsSort'
       - description: 'Included related resources optionally requested. Allowed enum
           values: `team_links, user_team_permissions`'
         in: query
         name: include
+        required: false
         schema:
           items:
             $ref: '#/components/schemas/ListTeamsInclude'
@@ -29413,13 +31804,24 @@ paths:
           member
         in: query
         name: filter[keyword]
+        required: false
         schema:
           type: string
       - description: When true, only returns teams the current user belongs to
         in: query
         name: filter[me]
+        required: false
         schema:
           type: boolean
+      - description: List of fields that need to be fetched.
+        explode: false
+        in: query
+        name: fields[team]
+        required: false
+        schema:
+          items:
+            $ref: '#/components/schemas/TeamsField'
+          type: array
       responses:
         '200':
           content:
@@ -29892,11 +32294,13 @@ paths:
       - description: Specifies the order of returned team memberships
         in: query
         name: sort
+        required: false
         schema:
           $ref: '#/components/schemas/GetTeamMembershipsSort'
       - description: Search query, can be user email or name
         in: query
         name: filter[keyword]
+        required: false
         schema:
           type: string
       responses:
@@ -30924,6 +33328,60 @@ paths:
       x-menu-order: 39
       x-undo:
         type: safe
+  /api/v2/usage/projected_cost:
+    get:
+      description: 'Get projected cost across multi-org and single root-org accounts.
+
+        Projected cost data is only available for the current month and becomes available
+        around the 12th of the month.
+
+        This endpoint requires the usage_read authorization scope.'
+      operationId: GetProjectedCost
+      parameters:
+      - description: String to specify whether cost is broken down at a parent-org
+          level or at the sub-org level. Available views are `summary` and `sub-org`.
+          Defaults to `summary`.
+        in: query
+        name: view
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/ProjectedCostResponse'
+          description: OK
+        '400':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden - User is not authorized
+        '429':
+          content:
+            application/json;datetime-format=rfc3339:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too many requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - usage_read
+      summary: Get projected cost across your account
+      tags:
+      - Usage Metering
+      x-menu-order: 7
+      x-undo:
+        type: safe
   /api/v2/user_invitations:
     post:
       description: Sends emails to one or more users inviting them to join the organization.
@@ -31478,6 +33936,10 @@ tags:
 - description: The Container Images API allows you to query Container Image data for
     your organization.
   name: Container Images
+- description: The Containers API allows you to query container data for your organization.
+  name: Containers
+- description: Send events for DORA Metrics to measure and improve software delivery.
+  name: DORA Metrics
 - description: 'Interact with your dashboard lists through the API to
 
     organize, find, and share all of your dashboards with your team and
@@ -31608,6 +34070,9 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/monitors/create/types/
   name: Monitors
+- description: Configure your Datadog Okta integration directly through the Datadog
+    API.
+  name: Okta Integration
 - description: 'Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
 
     directly through the Datadog API.'
@@ -31677,6 +34142,12 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/tracing/service_catalog/
   name: Service Definition
+- description: 'API to create, update scorecard rules and outcomes.
+
+
+    This feature is currently in BETA. If you have any feedback, contact [Datadog
+    support](https://docs.datadoghq.com/help/).'
+  name: Service Scorecards
 - description: Search and aggregate your spans from your Datadog platform over HTTP.
   name: Spans
 - description: Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics)

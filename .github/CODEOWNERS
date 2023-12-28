@@ -8,8 +8,8 @@
 /config/                  @DataDog/corpweb @DataDog/documentation
 /config/_default/menus/   @DataDog/documentation
 package.json              @DataDog/corpweb @DataDog/documentation
-go.mod                    @DataDog/corpweb @DataDog/documentation  
-go.sum                    @DataDog/corpweb @DataDog/documentation  
+go.mod                    @DataDog/corpweb @DataDog/documentation
+go.sum                    @DataDog/corpweb @DataDog/documentation
 
 # SDK versions
 .github/workflows/bump_versions.yml   @DataDog/integrations-tools-and-libraries @DataDog/documentation
@@ -58,7 +58,7 @@ datadog-ci.preview.json                                 @DataDog/WebOps-Platform
 general.preview.synthetics.json                         @DataDog/WebOps-Platform
 
 # Cloud Cost Management
-documentation/content/en/cloud_cost_management/_index.md         @DataDog/cloud-cost-management-visibility @DataDog/documentation
+documentation/content/en/cloud_cost_management/*.md              @DataDog/cloud-cost-management-visibility @DataDog/documentation
 
 # Log collection
 content/en/logs/log_collection/android.md                        @Datadog/rum-mobile @DataDog/documentation
@@ -71,11 +71,11 @@ content/en/tracing/trace_collection/dd_libraries/ios.md         @Datadog/rum-mob
 content/en/tracing/**/*dotnet*                                  @DataDog/tracing-dotnet @DataDog/documentation
 
 # Mobile SDK
-content/en/real_user_monitoring/android/                        @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/flutter/                        @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/ios/                            @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/reactnative/                    @Datadog/rum-mobile @DataDog/documentation
-content/en/real_user_monitoring/roku/                           @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/android/                        @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/                        @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/ios/                            @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/reactnative/                    @Datadog/rum-mobile @DataDog/documentation
+content/en/real_user_monitoring/mobile_and_tv_monitoring/setup/roku/                           @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/error_tracking/android.md       @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/error_tracking/expo.md          @Datadog/rum-mobile @DataDog/documentation
 content/en/real_user_monitoring/error_tracking/flutter.md       @Datadog/rum-mobile @DataDog/documentation
@@ -93,14 +93,17 @@ content/en/real_user_monitoring/error_tracking/browser.md       @Datadog/rum-bro
 # Observability Pipelines
 static/resources/yaml/observability_pipelines/                  @DataDog/observability-pipelines-worker-admin  @DataDog/documentation
 
-# Synthetic Monitoring, Continuous Testing, Mobile Application Testing 
+# Synthetic Monitoring, Continuous Testing, Mobile Application Testing
 
 content/en/synthetics/*.md                                      @Datadog/synthetics-app @Datadog/documentation
 content/en/continuous_testing/*.md                              @Datadog/synthetics-ct @Datadog/documentation
 content/en/mobile_app_testing/*.md                              @Datadog/synthetics-mobile @Datadog/documentation
 
-# CI Visibility
+# Software Delivery
 
 content/en/continuous_integration/tests/*.md          @Datadog/ci-app-libraries @Datadog/documentation
 content/en/continuous_integration/pipelines/*.md      @Datadog/ci-app-backend @Datadog/documentation
-content/en/continuous_integration/static_analysis/rules/_index.md @Datadog/static-analysis @Datadog/documentation
+content/en/static_analysis/*.md                       @Datadog/static-analysis @Datadog/documentation
+content/en/static_analysis/rules/_index.md            @Datadog/static-analysis @Datadog/documentation
+content/en/quality_gates/_index.md                    @Datadog/ci-app-backend @Datadog/documentation
+content/en/dora_metrics/_index.md                     @Datadog/ci-app-backend @Datadog/documentation

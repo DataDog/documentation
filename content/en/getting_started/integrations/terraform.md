@@ -57,7 +57,7 @@ Follow the [Terraform Datadog Provider][28] tutorial for a detailed walk-through
 [8]: /monitors/
 [9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_aws
 [10]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
-[11]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_gcp
+[11]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_gcp_sts
 [12]: /integrations/amazon_web_services/
 [13]: /integrations/azure/
 [14]: /integrations/google_cloud_platform/

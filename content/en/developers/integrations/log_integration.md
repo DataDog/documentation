@@ -32,6 +32,9 @@ Use the [Logs Ingestion HTTP endpoint][1] to send logs to Datadog.
 
 When creating a log integration, consider the following best practices:
 
+Map your data to Datadog’s standard attributes
+: Centralizing logs from various technologies and applications can generate tens or hundreds of different attributes in a Log Management environment. Integrations must rely as much as possible on the [standard naming convention][17].
+
 Set the `source` tag to the integration name.
 : Datadog recommends that the `source` tag is set to `<integration_name>` and that the `service` tag is set to the name of the service that produces the telemetry. For example, the `service` tag can be used to differentiate logs by product line. </br></br> For cases where there aren't different services, set `service` to the same value as `source`. The `source` and `service` tags must be non-editable by the user because the tags are used to enable integration pipelines and dashboards. The tags can be set in the payload or through the query parameter, for example, `?ddsource=example&service=example`. </br></br> The `source` and `service` tags must be in lowercase. 
 
@@ -52,7 +55,9 @@ Do not use Datadog application keys.
 
 ## Set up the log integration assets in your Datadog partner account 
 
-### Configure the log pipeline
+For information about becoming a Datadog Technology Partner, and gaining access to an integration development sandbox, read [Build an Integration][18].
+
+### Log pipeline requirements
 
 Logs sent to Datadog are processed in [log pipelines][13] to standardize them for easier search and analysis.
 
@@ -64,22 +69,27 @@ To set up a log pipeline:
 4. Optionally, add tags and a description.
 5. Click **Create**.
 
-You can add processors within your pipelines to restructure your data and generate attributes. For example:
+You can add processors within your pipelines to restructure your data and generate attributes.
+
+**Requirements:**
 
 - Use the [date remapper][4] to define the official timestamp for logs.
-- Use the attribute [remapper][5] to remap attribute keys to standard [Datadog attributes][6]. For example, an attribute key that contains the client IP must be remapped to `network.client.ip` so Datadog can display Technology Partner logs in out-of-the-box dashboards.
+- Use a status remapper to remap the `status` of a log, or a [category processor][19] for statuses mapped to a range (as with HTTP status codes).
+- Use the attribute [remapper][5] to remap attribute keys to standard [Datadog attributes][6]. For example, an attribute key that contains the client IP must be remapped to `network.client.ip` so Datadog can display Technology Partner logs in out-of-the-box dashboards. Remove original attributes when remapping by using `preserveSource:false` to avoid duplicates.
 - Use the [service remapper][7] to remap the `service` attribute or set it to the same value as the `source` attribute.
-- Use the [grok processor][8] to extract values in the logs for better searching and analytics. 
+- Use the [grok processor][8] to extract values in the logs for better searching and analytics. To maintain optimal performance, the grok parser must be specific. Avoid wildcard matches.
 - Use the [message remapper][9] to define the official message of the log and make certain attributes searchable by full text.
 
 For a list of all log processors, see [Processors][10].
 
-### Set up facets in the Log Explorer
+**Tip**: Take the free course [Going Deeper with Logs Processing][20] for an overview on writing processors and leveraging standard attributes. 
 
-You can optionally create [facets][12], which appear in out-of-the-box dashboard widgets, in the [Log Explorer][16].
+### Facet requirements
 
-- A [facet][14] is used to get relative insights and to count unique values.
-- A [measure][15] is a type of facet used for searches over a range. For example, adding a measure for latency duration allows users to search for all logs above a certain latency. **Note**: Define the [unit][11] of a measure facet based on what the attribute represents.
+You can optionally create [facets][12] in the [Log Explorer][16]. Facets are specific attributes that can be used to filter and narrow down search results. While facets are not strictly necessary for filtering search results, they play a crucial role in helping users understand the available dimensions for refining their search.
+
+Measures are a specific type of facet used for searches over a range. For example, adding a measure for latency duration allows users to search for all logs above a certain latency. 
+**Note**: Define the [unit][11] of a measure facet based on what the attribute represents.
 
 To add a facet or measure:
 
@@ -91,17 +101,29 @@ To add a facet or measure:
 
 **Note:** You do not need to create facets for standard attributes. Facets for standard attributes will be added automatically by Datadog when the log pipeline is published. See the [default standard attribute list][6] for the standard Datadog attributes under their specific groups.
 
-To easily navigate the facet list, group similar facets together. For fields specific to the integration logs, create a group with the same name as the `source` tag. 
+To easily navigate the facet list, facets are grouped together. For fields specific to the integration logs, create a single group with the same name as the `source` tag. 
 
 1. In the log panel, click the Cog icon next to the attribute that you want in the new group.
 2. Select **Edit facet/measure for @attribute**. If there isn't a facet for the attribute yet, select **Create facet/measure for @attribute**.
 3. Click **Advanced options**.
-4. In the **Group** field, enter the name of the new group, and select **New group**.
+4. In the **Group** field, enter the name and a description of the new group, and select **New group**.
 5. Click **Update**.
+
+**Requirements:**
+- Use standard attributes as much as possible. Otherwise, use a specific namespace (such as the integration name) to avoid conflict, because facets are shared across Datadog.
+- A facet has a source. It can be `log` for attributes or `tag` for tags.
+- A facet has a type (String, Boolean, Double or Integer) which matches the type of the attribute. If the type of the value of the attribute does not match the one of the facet, the attribute is not indexed with the facet.
+- Double and Integer facets can have a unit. Units are composed of a family (such as time or bytes) and of a name (such as millisecond or gibibyte).
+- A facet is stored in groups and has a description.
+- If you remap an attribute and keep both, define a facet on a single one.
 
 ## Review and deploy the integration
 
-Datadog reviews the log integration and provides feedback to the Technology Partner. In turn, the Technology Partner reviews and makes changes accordingly. This review process is done over email.
+Datadog reviews the log integration based on the guidelines and requirements documented on this page and provides feedback to the Technology Partner. In turn, the Technology Partner reviews and makes changes accordingly.
+
+To start a review process, contact Datadog through the [Datadog Partner Portal][21] with your finalized pipeline, processors, and facets definition. 
+
+Be sure to include sample raw logs with all the attributes you expect to be sent into Datadog by your integration. Raw logs comprise the raw messages generated directly from the source before they have been ingested by Datadog.
 
 Once reviews are complete, Datadog creates and deploys the new log integration assets.
 
@@ -125,3 +147,8 @@ Once reviews are complete, Datadog creates and deploys the new log integration a
 [14]: https://docs.datadoghq.com/glossary/#facet
 [15]: https://docs.datadoghq.com/glossary/#measure
 [16]: https://docs.datadoghq.com/logs/explorer/
+[17]: https://docs.datadoghq.com/logs/log_configuration/attributes_naming_convention/#standard-attributes
+[18]: https://docs.datadoghq.com/developers/integrations/?tab=integrations
+[19]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#category-processor
+[20]: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
+[21]: https://partners.datadoghq.com/

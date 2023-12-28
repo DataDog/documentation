@@ -7,6 +7,7 @@ disable_toc: true
 
 {{< whatsnext desc="General guides:">}}
     {{< nextlink href="/service_management/service_level_objectives/guide/slo-checklist" >}}SLO Checklist{{< /nextlink >}}
+    {{< nextlink href="/service_management/service_level_objectives/guide/slo_types_comparison" >}}SLO Type Comparison{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Dashboard guides:">}}
