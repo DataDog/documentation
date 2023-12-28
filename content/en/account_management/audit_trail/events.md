@@ -32,6 +32,7 @@ further_reading:
 - [Audit Trail](#audit-trail-events)
 - [CI Visibility](#ci-visibility-events)
 - [Cloud Security Platform](#cloud-security-platform-events)
+- [Error Tracking](#error-tracking-events)
 - [Log Management](#log-management-events)
 - [Metrics](#metrics-events)
 - [Real User Monitoring](#real-user-monitoring-events)
@@ -131,6 +132,13 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Dashboard user(s) deleted][41] | A user deleted user ID(s) that can access a dashboard and the list of the deleted user ID(s).       | `@evt.name:Dashboard @asset.type:dashboard_share_acl @action:deleted`   |
 | [Public URL accessed][42] | A public dashboard URL is accessed.                                                               | `@evt.name:Dashboard @asset.type:dashboard @action:accessed`            |
 |[Public URL generated or deleted][43]  | A public URL to view a dashboard is generated or deleted.                             | `@evt.name:Dashboard @asset.type:dashboard_share_link`            |
+
+### Error Tracking events
+
+| Name     | Description of audit event                                          | Query in audit explorer                           |
+| -------- | ------------------------------------------------------------------- | --------------------------------------------------|
+| [Error Tracking for Logs activation][102] | A user has enabled or disabled Error Tracking for Logs product. | `@evt.name:"Error Tracking" @action:(created OR deleted) @asset.type:error_tracking_logs` |
+| [Create or Modify inclusion filter][103] | A user has added or modified an inclusion filter. | `@evt.name:"Error Tracking" @asset.type:error_tracking_inclusion_filter` |
 
 ### Integration events
 
@@ -346,3 +354,5 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [99]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Auser%20%40action%3Amodified%20
 [100]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40action%3Acreated%20
 [101]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40action%3Amodified%20
+[102]: https://app.datadoghq.com/audit-trail?query=%40tags%3A%22is_omni%3Atrue%22%20%40evt.name%3A%22Error%20Tracking%22%20%40asset.type%3Aerror_tracking_logs%20%40action%3A%28created%20OR%20deleted%29
+[103]: https://app.datadoghq.com/audit-trail?query=-%40tags%3A%22is_omni%3Atrue%22%20%40evt.name%3A%22Error%20Tracking%22%20%40asset.type%3Aerror_tracking_inclusion_filter
