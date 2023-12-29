@@ -168,31 +168,31 @@
     "request_schema_description": "The distribution points payload."
   },
   "ListDowntimes": {
-    "description": "Get all scheduled downtimes.",
+    "description": "Get all scheduled downtimes. **Note:** This endpoint has been deprecated. Please use v2 endpoints.",
     "summary": "Get all downtimes"
   },
   "CreateDowntime": {
-    "description": "Schedule a downtime.",
+    "description": "Schedule a downtime. **Note:** This endpoint has been deprecated. Please use v2 endpoints.",
     "summary": "Schedule a downtime",
     "request_description": "Schedule a downtime request body.",
     "request_schema_description": "Downtiming gives you greater control over monitor notifications by\nallowing you to globally exclude scopes from alerting.\nDowntime settings, which can be scheduled with start and end times,\nprevent all alerting related to specified Datadog tags."
   },
   "CancelDowntimesByScope": {
-    "description": "Delete all downtimes that match the scope of `X`.",
+    "description": "Delete all downtimes that match the scope of `X`. **Note:** This only interacts with Downtimes created using v1 endpoints. This endpoint has been deprecated and will not be replaced. Please use v2 endpoints to find and cancel downtimes.",
     "summary": "Cancel downtimes by scope",
     "request_description": "Scope to cancel downtimes for.",
     "request_schema_description": "Cancel downtimes according to scope."
   },
   "CancelDowntime": {
-    "description": "Cancel a downtime.",
+    "description": "Cancel a downtime. **Note:** This endpoint has been deprecated. Please use v2 endpoints.",
     "summary": "Cancel a downtime"
   },
   "GetDowntime": {
-    "description": "Get downtime detail by `downtime_id`.",
+    "description": "Get downtime detail by `downtime_id`. **Note:** This endpoint has been deprecated. Please use v2 endpoints.",
     "summary": "Get a downtime"
   },
   "UpdateDowntime": {
-    "description": "Update a single downtime by `downtime_id`.",
+    "description": "Update a single downtime by `downtime_id`. **Note:** This endpoint has been deprecated. Please use v2 endpoints.",
     "summary": "Update a downtime",
     "request_description": "Update a downtime request body.",
     "request_schema_description": "Downtiming gives you greater control over monitor notifications by\nallowing you to globally exclude scopes from alerting.\nDowntime settings, which can be scheduled with start and end times,\nprevent all alerting related to specified Datadog tags."
@@ -638,7 +638,7 @@
     "request_schema_description": "Object describing a monitor update request."
   },
   "ListMonitorDowntimes": {
-    "description": "Get all active downtimes for the specified monitor.",
+    "description": "Get all active v1 downtimes for the specified monitor. **Note:** This endpoint has been deprecated. Please use v2 endpoints.",
     "summary": "Get active downtimes for a monitor"
   },
   "MuteMonitor": {
