@@ -159,5 +159,5 @@ You can customize which spans are retained and at what retention rates. By defau
 [8]: /tracing/trace_pipeline/ingestion_mechanisms/#in-tracing-libraries-user-defined-rules
 [9]: /account_management/billing/apm_distributed_tracing/
 [10]: /glossary/#service-entry-span
-[11]: https://docs.datadoghq.com/glossary/#trace-root-span
+[11]: /glossary/#trace-root-span
 [12]: https://app.datadoghq.com/apm/traces/retention-filters
