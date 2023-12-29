@@ -60,7 +60,7 @@ tile:
 
 Catchpoint는 최적의 사용자 경험을 제공하기 위한 강력한 기능을 가진 디지털 성능 분석 플랫폼입니다.
 
-Catchpoint와 Datadog을 다음에 연결합니다.
+Catchpoint와 Datadog에서 다음을 수행할 수 있습니다.
 
 -   이벤트 스트림에서 종합적인 알림 설정 
 -   Catchpoint 포털의 분석 차트로 바로 연결되는 링크
