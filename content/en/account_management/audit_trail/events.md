@@ -33,6 +33,7 @@ further_reading:
 - [Audit Trail](#audit-trail-events)
 - [CI Visibility](#ci-visibility-events)
 - [Cloud Security Platform](#cloud-security-platform-events)
+- [Dynamic Instrumentation](#dynamic-instrumentation-events)
 - [Error Tracking](#error-tracking-events)
 - [Log Management](#log-management-events)
 - [Metrics](#metrics-events)
@@ -133,6 +134,14 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Dashboard user(s) deleted][41] | A user deleted user ID(s) that can access a dashboard and the list of the deleted user ID(s).       | `@evt.name:Dashboard @asset.type:dashboard_share_acl @action:deleted`   |
 | [Public URL accessed][42] | A public dashboard URL is accessed.                                                               | `@evt.name:Dashboard @asset.type:dashboard @action:accessed`            |
 |[Public URL generated or deleted][43]  | A public URL to view a dashboard is generated or deleted.                             | `@evt.name:Dashboard @asset.type:dashboard_share_link`            |
+
+### Dynamic Instrumentation events
+
+| Name     | Description of audit event                                          | Query in audit explorer                           |
+| -------- | ------------------------------------------------------------------- | --------------------------------------------------|
+| [Logs Probe][105] | A user has successfully created, modified or deleted a logs probe with Dynamic Instrumentation. | `@evt.name:"Dynamic Instrumentation" @action:(created OR modified OR deleted) @asset.type:log_probe` |
+| [Metrics Probe][106] | A user has successfully created, modified or deleted a metrics probe with Dynamic Instrumentation. | `@evt.name:"Dynamic Instrumentation" @action:(created OR modified OR deleted) @asset.type:span_probe` |
+| [Spans Probe][107] | A user has successfully created, modified or deleted a spans probe with Dynamic Instrumentation. | `@evt.name:"Dynamic Instrumentation" @action:(created OR modified OR deleted) @asset.type:metric_probe` |
 
 ### Error Tracking events
 
@@ -363,3 +372,6 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [102]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Error%20Tracking%22%20%40asset.type%3Aerror_tracking_logs%20%40action%3A%28created%20OR%20deleted%29
 [103]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Error%20Tracking%22%20%40asset.type%3Aerror_tracking_inclusion_filter
 [104]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Teams%20Management%22%20%40action%3A%28created%20OR%20deleted%20OR%20modified%29
+[105]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Dynamic%20Instrumentation%22%20%40asset.type%3Alog_probe
+[106]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Dynamic%20Instrumentation%22%20%40asset.type%3Ametric_probe
+[107]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Dynamic%20Instrumentation%22%20%40asset.type%3Aspan_probe
