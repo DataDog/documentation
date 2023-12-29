@@ -3064,11 +3064,6 @@ main:
     parent: log_configuration
     weight: 204
   - name: Attributes and Aliasing
-    identifier: log_collection_attributes_and_aliasing
-    url: logs/log_collection/?tab=host#attributes-and-tags
-    parent: log_processing
-    weight: 205
-  - name: Attributes and Aliasing
     identifier: log_configuration_attributes_and_aliasing
     url: logs/log_configuration/attributes_naming_convention/
     parent: log_configuration
