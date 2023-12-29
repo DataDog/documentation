@@ -13,8 +13,8 @@ further_reading:
 
 ## Overview
 
-Most of the development cycle happens within private networks which are usually inaccessible to the Synthetics Workers.
-However, Continuous Testing with the help of `datadog-ci` can establish a Continuous testing tunnel to allow the Synthetics Workers to reach the environements used during the development cycle.
+Most of the development cycle happens within private networks which are usually inaccessible to run Synthetic test.
+However, Continuous Testing with the help of `datadog-ci` can establish a Continuous testing tunnel to allow the Synthetics Workers to reach the environements to which your application is deployed during the development cycle, e.g. your development laptop, a CI job or a private staging environment.
 
 The Continuous Testing tunnel creates short-lived secure connections between your internal environments and the Datadog infrastructure, allowing you to swiftly trigger Synthetic HTTP and Browser tests on your private applications.
 
@@ -24,7 +24,7 @@ Datadog recommends using the testing tunnel if you need to launch Continuous Tes
 
 ## What is the testing tunnel?
 
-The testing tunnel is a functionality that comes with the [@datadog/datadog-ci][2] NPM package which is one of the methods Datadog <span class="x x-first x-last">provides </span>to include your Synthetic tests as part of your CI/CD pipelines. The testing tunnel creates an end-to-end encrypted HTTP proxy between your infrastructure and Datadog, meaning that any test requests sent <span class="x x-first x-last">through</span> the CLI are automatically routed through the `datadog-ci` client<span class="x x-first x-last">. This allows</span> Datadog to access and test your internal applications.
+The testing tunnel is a functionality that comes with the [@datadog/datadog-ci][2] NPM package which is one of the methods Datadog provides to include your Synthetic tests as part of your CI/CD pipelines. The testing tunnel creates an end-to-end encrypted HTTP proxy between your infrastructure and Datadog, meaning that any test requests sent through the CLI are automatically routed through the `datadog-ci` client. This allows Datadog to access and test your internal applications.
 
 `datadog-ci` first gets a presigned URL from Datadog for authentication. It then opens a WebSocket Secure connection (wss) to Datadog's managed locations using the presigned URL. Using SSH connections through the WebSocket connection, tests are triggered by `datadog-ci` and executed through Datadog's managed locations.
 
