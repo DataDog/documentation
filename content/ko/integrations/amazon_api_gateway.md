@@ -15,7 +15,7 @@ integration_id: amazon-api-gateway
 integration_title: Amazon API Gateway
 integration_version: ''
 is_public: true
-kind: 통합
+kind: integration
 manifest_version: '1.0'
 name: amazon_api_gateway
 public_title: Datadog-Amazon API Gateway 통합
@@ -39,7 +39,7 @@ Amazon API Gateway는 개발자가 규모에 관계없이 API를 쉽게 생성, 
 
 1. [AWS 통합 페이지][2]에서 `API Gateway`가 `Metric Collection` 탭에서 활성화되어 있는지 확인하세요.
 
-2.  API Gateway Stages에 적용되는 커스텀 태그를 확보하려면 [Datadog IAM 정책][3]에 다음 권한을 추가하세요.
+2. API Gateway Stages에 적용되는 커스텀 태그를 확보하려면 [Datadog IAM 정책][3]에 다음 권한을 추가하세요.
 
     - `apigateway:GET`
     - `tag:GetResources`
@@ -94,7 +94,7 @@ AWS에서 검색된 각 메트릭에는 호스트 이름, 보안 그룹 등을 �
 
 AWS API Gateway 통합에는 어떠한 이벤트도 포함되지 않습니다.
 
-### 서비스 점검
+### 서비스 검사
 
 AWS API Gateway 통합에는 어떠한 서비스 검사도 포함되지 않습니다.
 
