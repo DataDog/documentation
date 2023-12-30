@@ -174,8 +174,8 @@ Datadog는 수집되고 인덱싱된 스팬 볼륨을 모니터링할 수 있도
 ## 참고 자료
 
 {{< whatsnext >}}
-    {{< nextlink href="account_management/billing/usage_monitor_apm/" >}}View and Alert on APM Usage{{< /nextlink >}}
-    {{< nextlink href="account_management/billing/usage_control_apm/" >}}Estimate and Control APM Usage{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/usage_monitor_apm/" >}}APM 사용량에서 보기 및 알림{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/usage_control_apm/" >}}APM 사용량 예측 및 제어{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
