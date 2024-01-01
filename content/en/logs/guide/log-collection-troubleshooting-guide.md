@@ -235,6 +235,19 @@ These are a few of the common configuration issues that are worth triple-checkin
 
 4. You may have some .yaml parsing errors in your configuration files. YAML can be finicky, so when in doubt rely on a [YAML validator][8].
 
+5. The name of the directory in the conf.d/ folder must match the service value specified in the conf.yaml file within that directory.  
+
+  conf.d/<APP_NAME>/conf.yaml
+  
+  conf.yaml file:
+   ```yaml
+   logs:
+     - type: file
+       path: "<PATH_LOG_FILE>/<LOG_FILE_NAME>.log"
+       service: "<APP_NAME>"
+       source: "<SOURCE>"
+
+
 ### Check for errors in the Agent logs
 
 There might be an error in the logs that would explain the issue. Run the following command to check for errors:
