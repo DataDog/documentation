@@ -156,9 +156,10 @@ If you have Remote Configuration enabled, follow the steps in [Remote Configurat
       datadog/observability-pipelines-worker run
     ```
     Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1.
-  
+
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
+
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
 
@@ -204,6 +205,7 @@ If you have Remote Configuration enabled, follow the steps in [Remote Configurat
 
 [1]: /resources/yaml/observability_pipelines/datadog/aws_eks_rc.yaml
 [2]: /resources/yaml/observability_pipelines/datadog/aws_eks.yaml
+
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 
@@ -249,6 +251,7 @@ If you have Remote Configuration enabled, follow the steps in [ Remote Configura
 
 [1]: /resources/yaml/observability_pipelines/datadog/azure_aks_rc.yaml
 [2]: /resources/yaml/observability_pipelines/datadog/azure_aks.yaml
+
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 
@@ -323,7 +326,7 @@ If you have Remote Configuration enabled, follow the steps in [Remote Configurat
     sudo apt-get install observability-pipelines-worker datadog-signing-keys
     ```
 
-If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-apt). Otherwise, follow the steps in [manual configuration](#manual-configuration-apt).
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-apt)to complete the installation. Otherwise, follow the steps in [manual configuration](#manual-configuration-apt).
 
 <h3 id="remote-configuration-apt">Remote Configuration</h3>
 
@@ -366,6 +369,7 @@ If you have Remote Configuration enabled, follow the steps in [Remote Configurat
 
 {{% /tab %}}
 {{% tab "RPM-based Linux" %}}
+
 1. Run the following commands to set up the Datadog `rpm` repo on your system:
 
     ```
@@ -392,7 +396,7 @@ If you have Remote Configuration enabled, follow the steps in [Remote Configurat
     sudo yum install observability-pipelines-worker
     ```
 
-If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-rpm). Otherwise, follow the steps in [manual configuration](#manual-configuration-rpm).
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-rpm)to complete the installation. Otherwise, follow the steps in [manual configuration](#manual-configuration-rpm).
 
 <h3 id="remote-configuration-rpm">Remote Configuration</h3>
 
@@ -579,11 +583,11 @@ To install the Worker in your AWS Account, use the CloudFormation template to cr
   5. Fill in the parameters for the CloudFormation template. A few require special attention:
 
       * For `APIKey` and `PipelineID`, provide the key and ID that you gathered earlier in the Prerequisites section.
-    
+
       * For the `VPCID` and `SubnetIDs`, provide the subnets and VPC you chose earlier.
 
       * All other parameters are set to reasonable defaults for a Worker deployment but you can adjust them for your use case as needed.
-  
+
   6. Click **Next**.
 
   7. Review and make sure the parameters are as expected. Click the necessary permissions checkboxes for IAM, and click **Submit** to create the Stack.
@@ -591,6 +595,7 @@ To install the Worker in your AWS Account, use the CloudFormation template to cr
 CloudFormation handles the installation at this point; the Worker instances are launched, download the necessary software, and start running automatically.
 
 [1]: /resources/yaml/observability_pipelines/cloudformation/datadog.yaml
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -624,6 +629,7 @@ See [AWS Load Balancer Controller][3] for more details.
 [1]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/
 [2]: /observability_pipelines/architecture/capacity_planning_scaling/
 [3]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/annotations/#load-balancer-attributes
+
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 Use the load balancers provided by your cloud provider.
@@ -638,6 +644,7 @@ See [Capacity Planning and Scaling][1] for load balancer recommendations when sc
 The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen.
 
 [1]: /observability_pipelines/architecture/capacity_planning_scaling/
+
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 Use the load balancers provided by your cloud provider.
@@ -654,6 +661,7 @@ The provided Helm configuration tries to simplify load balancing, but you must t
 Global Access is enabled by default since that is likely required for use in a shared tools cluster.
 
 [1]: /observability_pipelines/architecture/capacity_planning_scaling/
+
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
 No built-in support for load-balancing is provided, given the single-machine nature of the installation. You will need to provision your own load balancers using whatever your company's standard is.

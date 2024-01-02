@@ -444,7 +444,7 @@ If you have Remote Configuration enabled, follow the steps in [Remote Configurat
     sudo apt-get install observability-pipelines-worker datadog-signing-keys
     ```
 
-If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-apt). Otherwise, follow the steps in [manual configuration](#manual-configuration-apt).
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-apt) to complete the installation. Otherwise, follow the steps in [manual configuration](#manual-configuration-apt).
 
 <h3 id="remote-configuration-apt">Remote Configuration</h3>
 
@@ -514,7 +514,7 @@ If you have Remote Configuration enabled, follow the steps in [Remote Configurat
     sudo yum install observability-pipelines-worker
     ```
 
-If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-rpm). Otherwise, follow the steps in [manual configuration](#manual-configuration-rpm).
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-rpm)to complete the installation. Otherwise, follow the steps in [manual configuration](#manual-configuration-rpm).
 
 <h3 id="remote-configuration-rpm">Remote Configuration</h3>
 
