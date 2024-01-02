@@ -2004,10 +2004,14 @@ main:
     url: tracing/trace_explorer/trace_view/
     parent: trace_explorer
     weight: 605
+  - name: Trace Queries
+    url: tracing/trace_explorer/trace_queries/
+    parent: trace_explorer
+    weight: 606
   - name: Request Flow Map
     url: tracing/trace_explorer/request_flow_map/
     parent: trace_explorer
-    weight: 606
+    weight: 607
   - name: Service Catalog
     url: tracing/service_catalog/
     parent: tracing
