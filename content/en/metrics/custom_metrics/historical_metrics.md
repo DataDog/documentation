@@ -2,6 +2,9 @@
 title: Historical Metrics Ingestion
 kind: documentation
 further_reading:
+- link: "https://www.datadoghq.com/blog/historical-metrics/"
+  tag: "Blog"
+  text: "Monitor system performance across longer time frames with historical metrics"
 - link: "/developers/dogstatsd/"
   tag: "Documentation"
   text: "Learn more about DogStatsD"
@@ -24,7 +27,7 @@ Datadog classifies *historical metrics* as metric points with timestamps that ar
 
 For example, you emit a metric point at 1:00 PM EST, and the timestamp on that point reads 10:00 AM EST. This metric point is classified as a historical metric because it is delayed by 3 hours relative to the time of submission.
 
-Metric points that are resent with the same timestamp and tag-value combination within Datadog are replaced with a *"last point wins"* ingestion rule. If you send a metric with a value of 5, and resend that metric with a value of 10, both with the same timestamp, the 10 replaces the 5 as the value of the metric.
+Metric points that are resent with the same timestamp and tag-value combination within Datadog are replaced with a *"last point wins"* ingestion rule. If you send a metric with a value of X, and resend that metric with a value of Y, both with the same timestamp, the Y replaces the X as the value of the metric. This is because Y is the most recent submission.
 
 You can start ingesting historical metrics by configuring Historical Metrics Ingestion on the [Metrics Summary Page][1] for *counts, rates, and gauges*.
 
