@@ -3723,16 +3723,21 @@ main:
     parent: appsec_threats
     identifier: threats_threat_intelligence
     weight: 508
+  - name: API Security Inventory
+    url: security/application_security/api-inventory/
+    parent: application_security
+    identifier: asm_api_security
+    weight: 6
   - name: Guides
     url: security/application_security/guide/
     parent: application_security
     identifier: appsec_guides
-    weight: 6
+    weight: 7
   - name: Troubleshooting
     url: security/application_security/troubleshooting/
     parent: application_security
     identifier: appsec_troubleshooting
-    weight: 7
+    weight: 8
   - name: Synthetic Monitoring
     url: synthetics/
     pre: synthetics
