@@ -43,7 +43,7 @@ The following example shows how to create a static analysis rule that fails when
 
 ## Invoking quality gates
 
-Quality Gates, requires [`datadog-ci`][7] version `2.27.0` or later.
+Quality Gates requires [`datadog-ci`][7] version `2.27.0` or later.
 
 Invoke the Quality Gates evaluation by calling the [`datadog-ci gate evaluate`][4] command.
 
