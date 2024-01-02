@@ -241,7 +241,7 @@ namespace Example
 
 In most cases, Datadog recommends that you use the Datadog Lambda extension to submit custom metrics. However, the Lambda extension can only submit metrics with a current timestamp.
 
-To submit historical metrics, use the Datadog Forwarder. These metrics can have timestamps within the last 20 minutes.
+To submit historical metrics, use the Datadog Forwarder. These metrics can have timestamps within the last one hour.
 
 Start by [installing Serverless Monitoring for AWS Lambda][1]. Ensure that you have installed the Datadog Lambda Forwarder.
 

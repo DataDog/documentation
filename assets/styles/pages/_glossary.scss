@@ -1,10 +1,15 @@
 .glossary-main {
-  h2:before {
-    margin-top: -140px !important;
-    height: 140px !important;
-  }
+    h2:before {
+        margin-top: -140px !important;
+        height: 140px !important;
+    }
     h4 {
         text-transform: none;
+    }
+
+    .core-product-label {
+        @include font-size-line-height(18px, 24px);
+        padding: 0px 8px 2px 8px;
     }
 
     #glossary-nav {

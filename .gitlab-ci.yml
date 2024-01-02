@@ -51,6 +51,7 @@ before_script:
   - export BRANCH=${CI_COMMIT_REF_NAME}
   - export SLACK_URL=$(get_secret 'slack_url')
   - export WEBOPS_SLACK_URL=$(get_secret 'webops_slack_url')
+  - export IA_SUBDOMAIN=$(in-isolation get_ia_subdomain)
   - git config --global url."https://${GITHUB_TOKEN}@github.com/DataDog".insteadOf https://github.com/DataDog
   - type build_dogrc &>/dev/null && build_dogrc || echo "build_dogrc not found." # create .dogrc for metrics, events submission
   - export job_start=$(date +%s) # we need the start of each job recorded for the ci reporting
@@ -118,7 +119,7 @@ before_script:
       when: on_success
 # ================== templates ================== #
 .base_template: &base_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-20763517
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:webops-site-build-23395142
   tags:
     - "arch:amd64"
   rules:
@@ -151,6 +152,7 @@ build_preview:
     - touch preview_error.log # Create log file for errors
     - exec 2> $PREVIEW_ERROR_LOG # We want to output any detected error to a log for use in notifications
     - make dependencies
+    - make vector_data
     - make config
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
     - yarn run prebuild
@@ -173,6 +175,7 @@ build_preview:
       - ./logs
       - ./public/redirects.txt
       - $PREVIEW_ERROR_LOG
+      - ./latest-cached.tar.gz
   after_script:
     - |
       if [ -s $PREVIEW_ERROR_LOG && $CI_JOB_STATUS != 'success' ]; then
@@ -224,8 +227,21 @@ algolia_sync_preview:manual:
   allow_failure: true
   interruptible: true
   timeout: 2h
+  cache:
+    - *hugo_cache
+    - *yarn_cache
+    - *pip_cache
+  dependencies:
+    - build_preview
   script:
-    - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v0.3.29.tgz
+    # build the site to get algolia.json ondemand
+    - touch Makefile.config preview_error.log
+    - make dependencies
+    - make config
+    - yarn run prebuild
+    - build_site
+    # end build
+    - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v1.0.2.tgz
     - >
       ALGOLIA_APP_ID=$(get_secret 'algolia_preview_application_id')
       ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_preview_api_key')
@@ -248,7 +264,7 @@ algolia_sync_live:
   dependencies:
     - build_live
   script:
-    - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v0.3.29.tgz
+    - yarn add atomic-algolia@https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/atomic-algolia-v1.0.2.tgz
     - >
       ALGOLIA_APP_ID=$(get_secret 'algolia_docsearch_application_id')
       ALGOLIA_ADMIN_KEY=$(get_secret 'algolia_docsearch_api_key')
@@ -323,6 +339,7 @@ build_live:
     - touch Makefile.config
     - make clean-examples
     - make dependencies
+    - make vector_data
     - yarn run prebuild
     - build_site
     - in-isolation deploy_site
@@ -445,12 +462,10 @@ link_checks:on-schedule:
 
 # template for what runs in pa11y to avoid duplication
 .pa11y_live_template: &pa11y_live_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:pa11y-17812916
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:pa11y-25121683
   tags: ["runner:docker"]
   stage: post-deploy
   cache: []
-  dependencies:
-    - build_live
   variables:
     GIT_STRATEGY: none
   script:
@@ -463,6 +478,8 @@ link_checks:on-schedule:
 
 run_pa11y:schedule:
   <<: *pa11y_live_template
+  dependencies:
+    - build_live
   rules:
     - if: $CI_COMMIT_BRANCH == "master" && $CI_PIPELINE_SOURCE == "schedule"
       when: always

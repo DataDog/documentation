@@ -5,7 +5,6 @@ announcement_banner:
 disclaimer: このページは日本語には対応しておりません。随時翻訳に取り組んでいます。翻訳に関してご質問やご意見ございましたら、お気軽にご連絡ください。
 exclude: []
 meta_description: Datadogが大規模なクラウドのモニタリングサービスをリードします。
-meta_image: datadog_logo_share_tt.png
 meta_title: Datadogを始めてみましょう
 site_name: Datadogでインフラストラクチャーとアプリケーションのモニタリング
 translate_status_banner: このドキュメントは最新ではありません。最新版はこちらをクリックして英語版をご覧ください。

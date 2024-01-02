@@ -28,7 +28,7 @@ cascade:
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-{{< img src="database_monitoring/dbm-main.png" alt="Database Monitoring" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-overview.png" alt="Database Monitoring" style="width:100%;">}}
 
 Datadog Database Monitoring provides deep visibility into databases across all of your hosts. Dig into historical query performance metrics, explain plans, and host-level metrics all in one place, to understand the health and performance of your databases and troubleshoot issues as they arise.
 
@@ -68,7 +68,7 @@ The [Query Metrics view][2] shows historical query performance for normalized qu
 - Show database-level metrics not captured by APM such as rows updated/returned.
 - Filter and group queries by arbitrary dimensions such as team, user, cluster, and host.
 
-{{< img src="database_monitoring/dbm-query-metrics.png" alt="Database Monitoring" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-query-metrics-2.png" alt="Database Monitoring" style="width:100%;">}}
 
 ### Explore query samples
 
@@ -78,7 +78,7 @@ The [Query Samples view][3] helps you understand which queries are running at a 
 - Find outliers in a query's execution time or execution cost.
 - Attribute a specific query execution to a user, application, or client host.
 
-{{< img src="database_monitoring/dbm-query-sample.png" alt="Database Monitoring" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-query-sample-2.png" alt="Database Monitoring" style="width:100%;">}}
 
 ### Understand before you run
 
@@ -88,7 +88,7 @@ The [Query Samples view][3] helps you understand which queries are running at a 
 - Improve query efficiency and save on costly sequential scans on large tables.
 - See how a query's plan changes over time.
 
-{{< img src="database_monitoring/dbm-explain-plan2.png" alt="Database Monitoring" style="width:100%;">}}
+{{< img src="database_monitoring/dbm-explain-plan-3.png" alt="Database Monitoring" style="width:100%;">}}
 
 ### Visualize everything on enriched dashboards
 

@@ -808,8 +808,9 @@ components:
           example: key:value,filter:example
           type: string
         cspm_enabled:
-          description: Enable Cloud Security Management Misconfigurations for your
-            organization.
+          description: "When enabled, Datadog\u2019s Cloud Security Management product
+            scans resource configurations monitored by this app registration.\nNote:
+            This requires resource_collection_enabled to be set to true."
           example: true
           type: boolean
         custom_metrics_enabled:
@@ -840,6 +841,12 @@ components:
           description: Your New Azure Active Directory ID.
           example: new1c44-1234-5678-9101-cc00736ftest
           type: string
+        resource_collection_enabled:
+          description: When enabled, Datadog collects metadata and configuration info
+            from cloud resources (compute instances, databases, load balancers, etc.)
+            monitored by this app registration.
+          example: true
+          type: boolean
         tenant_name:
           description: Your Azure Active Directory ID.
           example: testc44-1234-5678-9101-cc00736ftest
@@ -3304,8 +3311,16 @@ components:
           type: string
         is_cspm_enabled:
           default: false
-          description: When enabled, Datadog performs configuration checks across
-            your Google Cloud environment by continuously scanning every resource.
+          description: 'When enabled, Datadog will activate the Cloud Security Monitoring
+            product for this service account. Note: This requires resource_collection_enabled
+            to be set to true.'
+          example: true
+          type: boolean
+        is_security_command_center_enabled:
+          default: false
+          description: 'When enabled, Datadog will attempt to collect Security Command
+            Center Findings. Note: This requires additional permissions on the service
+            account.'
           example: true
           type: boolean
         private_key:
@@ -3321,6 +3336,11 @@ components:
             key.
           example: datadog-apitest
           type: string
+        resource_collection_enabled:
+          default: false
+          description: When enabled, Datadog scans for all resources in your GCP environment.
+          example: true
+          type: boolean
         token_uri:
           description: Should be `https://accounts.google.com/o/oauth2/token`.
           example: https://accounts.google.com/o/oauth2/token
@@ -9440,7 +9460,7 @@ components:
           example: some description
           type: string
         name:
-          description: The name of the new child-organization, limited to 32 characters.
+          description: The name of the child organization, limited to 32 characters.
           example: New child org
           maxLength: 32
           type: string
@@ -14934,6 +14954,55 @@ components:
         type:
           $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
       type: object
+    SyntheticsPatchTestBody:
+      description: Wrapper around an array of [JSON Patch](https://jsonpatch.com)
+        operations to perform on the test
+      properties:
+        data:
+          description: Array of [JSON Patch](https://jsonpatch.com) operations to
+            perform on the test
+          example:
+          - op: replace
+            path: /name
+            value: New test name
+          - op: remove
+            path: /config/assertions/0
+          items:
+            $ref: '#/components/schemas/SyntheticsPatchTestOperation'
+          type: array
+      type: object
+    SyntheticsPatchTestOperation:
+      description: A single [JSON Patch](https://jsonpatch.com) operation to perform
+        on the test
+      properties:
+        op:
+          $ref: '#/components/schemas/SyntheticsPatchTestOperationName'
+        path:
+          description: The path to the value to modify
+          example: /name
+          type: string
+        value:
+          description: A value to use in a [JSON Patch](https://jsonpatch.com) operation
+          example: New Test Name
+      type: object
+    SyntheticsPatchTestOperationName:
+      description: The operation to perform
+      enum:
+      - add
+      - remove
+      - replace
+      - move
+      - copy
+      - test
+      example: replace
+      type: string
+      x-enum-varnames:
+      - ADD
+      - REMOVE
+      - REPLACE
+      - MOVE
+      - COPY
+      - TEST
     SyntheticsPlayingTab:
       description: Navigate between different tabs for your browser test.
       enum:
@@ -19406,6 +19475,16 @@ components:
             Pro hosts over all hours in the current date for the given org.
           format: int64
           type: integer
+        custom_historical_ts_avg:
+          description: Shows the average number of distinct historical custom metrics
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        custom_live_ts_avg:
+          description: Shows the average number of distinct live custom metrics over
+            all hours in the current date for the given org.
+          format: int64
+          type: integer
         custom_ts_avg:
           description: Shows the average number of distinct custom metrics over all
             hours in the current date for the given org.
@@ -19935,6 +20014,16 @@ components:
         cspm_host_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management
             Pro hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        custom_historical_ts_sum:
+          description: Shows the average number of distinct historical custom metrics
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        custom_live_ts_sum:
+          description: Shows the average number of distinct live custom metrics over
+            all hours in the current months for all organizations.
           format: int64
           type: integer
         custom_ts_sum:
@@ -21115,6 +21204,8 @@ components:
       - 1mo
       - 3mo
       - 6mo
+      - week_to_date
+      - month_to_date
       - 1y
       - alert
       example: 5m
@@ -21133,6 +21224,8 @@ components:
       - PAST_ONE_MONTH
       - PAST_THREE_MONTHS
       - PAST_SIX_MONTHS
+      - WEEK_TO_DATE
+      - MONTH_TO_DATE
       - PAST_ONE_YEAR
       - ALERT
     WidgetMargin:
@@ -21478,7 +21571,7 @@ components:
               an organization. Mute and unmute hosts. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
-            monitors_write: Edit, mute, and delete individual monitors.
+            monitors_write: Edit and delete individual monitors.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View CSPM Findings.
@@ -23290,7 +23383,9 @@ paths:
         type: safe
   /api/v1/downtime:
     get:
-      description: Get all scheduled downtimes.
+      deprecated: true
+      description: Get all scheduled downtimes. **Note:** This endpoint has been deprecated.
+        Please use v2 endpoints.
       operationId: ListDowntimes
       parameters:
       - description: Only return downtimes that are active when the request is made.
@@ -23334,7 +23429,9 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Schedule a downtime.
+      deprecated: true
+      description: Schedule a downtime. **Note:** This endpoint has been deprecated.
+        Please use v2 endpoints.
       operationId: CreateDowntime
       requestBody:
         content:
@@ -23402,7 +23499,11 @@ paths:
         type: unsafe
   /api/v1/downtime/cancel/by_scope:
     post:
-      description: Delete all downtimes that match the scope of `X`.
+      deprecated: true
+      description: Delete all downtimes that match the scope of `X`. **Note:** This
+        only interacts with Downtimes created using v1 endpoints. This endpoint has
+        been deprecated and will not be replaced. Please use v2 endpoints to find
+        and cancel downtimes.
       operationId: CancelDowntimesByScope
       requestBody:
         content:
@@ -23452,7 +23553,9 @@ paths:
         type: idempotent
   /api/v1/downtime/{downtime_id}:
     delete:
-      description: Cancel a downtime.
+      deprecated: true
+      description: Cancel a downtime. **Note:** This endpoint has been deprecated.
+        Please use v2 endpoints.
       operationId: CancelDowntime
       parameters:
       - description: ID of the downtime to cancel.
@@ -23492,7 +23595,9 @@ paths:
       x-undo:
         type: idempotent
     get:
-      description: Get downtime detail by `downtime_id`.
+      deprecated: true
+      description: Get downtime detail by `downtime_id`. **Note:** This endpoint has
+        been deprecated. Please use v2 endpoints.
       operationId: GetDowntime
       parameters:
       - description: ID of the downtime to fetch.
@@ -23536,7 +23641,9 @@ paths:
       x-undo:
         type: safe
     put:
-      description: Update a single downtime by `downtime_id`.
+      deprecated: true
+      description: Update a single downtime by `downtime_id`. **Note:** This endpoint
+        has been deprecated. Please use v2 endpoints.
       operationId: UpdateDowntime
       parameters:
       - description: ID of the downtime to update.
@@ -24097,7 +24204,8 @@ paths:
         type: safe
   /api/v1/host/{host_name}/mute:
     post:
-      description: Mute a host.
+      description: Mute a host. **Note:** This creates a [Downtime V2](https://docs.datadoghq.com/api/latest/downtimes/#schedule-a-downtime)
+        for the host.
       operationId: MuteHost
       parameters:
       - description: Name of the host to mute.
@@ -24466,10 +24574,25 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-given:
+        aws_account:
+          parameters:
+          - name: body
+            origin: request
+            value: "{\n  \"account_id\": \"{{ timestamp(\"now\") }}00\",\n  \"account_specific_namespace_rules\":
+              {\n      \"auto_scaling\": false\n  },\n  \"cspm_resource_collection_enabled\":
+              true,\n  \"excluded_regions\": [\n      \"us-east-1\",\n      \"us-west-2\"\n
+              \ ],\n  \"filter_tags\": [\n      \"$KEY:$VALUE\"\n  ],\n  \"host_tags\":
+              [\n      \"$KEY:$VALUE\"\n  ],\n  \"metrics_collection_enabled\": false,\n
+              \ \"resource_collection_enabled\": true,\n  \"role_name\": \"DatadogAWSIntegrationRole\"\n}"
+          step: there is a valid "aws_account" in the system
       x-menu-order: 8
       x-undo:
         operationId: DeleteAWSAccount
-        parameters: []
+        parameters:
+        - name: body
+          origin: request
+          template: '{"account_id": "{{account_id}}", "role_name": "{{role_name}}"}'
         type: unsafe
     put:
       description: Update a Datadog-Amazon Web Services integration.
@@ -25283,10 +25406,27 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-given:
+        aws_account:
+          parameters:
+          - name: body
+            origin: request
+            value: "{\n  \"app_service_plan_filters\": \"key:value,filter:example\",\n
+              \ \"automute\": true,\n  \"client_id\": \"{{ uuid }}\",\n  \"client_secret\":
+              \"testingx./Sw*g/Y33t..R1cH+hScMDt\",\n  \"container_app_filters\":
+              \"key:value,filter:example\",\n  \"cspm_enabled\": true,\n  \"custom_metrics_enabled\":
+              true,\n  \"errors\": [\"*\"],\n  \"host_filters\": \"key:value,filter:example\",\n
+              \ \"new_client_id\": \"{{ uuid }}\",\n  \"new_tenant_name\": \"{{ uuid
+              }}\",\n  \"resource_collection_enabled\": true,\n  \"tenant_name\":
+              \"{{ uuid }}\"\n}"
+          step: there is a valid "azure_account" in the system
       x-menu-order: 2
       x-undo:
         operationId: DeleteAzureIntegration
-        parameters: []
+        parameters:
+        - name: body
+          origin: request
+          template: "{\n  \"client_id\": \"{{client_id}}\",\n  \"tenant_name\": \"{{tenant_name}}\"\n}"
         type: unsafe
     put:
       description: 'Update a Datadog-Azure integration. Requires an existing `tenant_name`
@@ -25487,10 +25627,30 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-given:
+        gcp_account:
+          parameters:
+          - name: body
+            origin: request
+            value: "{\n  \"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\n
+              \ \"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\n  \"client_email\":
+              \"{{unique_hash}}@example.com\",\n  \"client_id\": \"{{ timestamp(\"now\")
+              }}{{ timestamp(\"now\") }}0\",\n  \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL\",\n
+              \ \"host_filters\": \"key:value,filter:example\",\n  \"is_cspm_enabled\":
+              true,\n  \"is_security_command_center_enabled\": true,\n  \"private_key\":
+              \"private_key\",\n  \"private_key_id\": \"123456789abcdefghi123456789abcdefghijklm\",\n
+              \ \"project_id\": \"datadog-apitest\",\n  \"resource_collection_enabled\":
+              true,\n  \"token_uri\": \"https://accounts.google.com/o/oauth2/token\",\n
+              \ \"type\": \"service_account\"\n}"
+          step: there is a valid "gcp_account" in the system
       x-menu-order: 2
       x-undo:
         operationId: DeleteGCPIntegration
-        parameters: []
+        parameters:
+        - name: body
+          origin: request
+          template: '{"client_email": "{{ client_email }}", "client_id": "{{ client_id
+            }}", "project_id": "{{ project_id }}"}'
         type: unsafe
     put:
       deprecated: true
@@ -27302,7 +27462,7 @@ paths:
 
         - SLO: `slo alert`
 
-        - watchdog: `event alert`
+        - watchdog: `event-v2 alert`
 
         - event-v2: `event-v2 alert`
 
@@ -28167,7 +28327,9 @@ paths:
         type: idempotent
   /api/v1/monitor/{monitor_id}/downtimes:
     get:
-      description: Get all active downtimes for the specified monitor.
+      deprecated: true
+      description: Get all active v1 downtimes for the specified monitor. **Note:**
+        This endpoint has been deprecated. Please use v2 endpoints.
       operationId: ListMonitorDowntimes
       parameters:
       - description: The id of the monitor
@@ -30559,7 +30721,7 @@ paths:
       summary: Get details of batch
       tags:
       - Synthetics
-      x-menu-order: 15
+      x-menu-order: 16
       x-undo:
         type: safe
   /api/v1/synthetics/locations:
@@ -30585,7 +30747,7 @@ paths:
       summary: Get all locations (public and private)
       tags:
       - Synthetics
-      x-menu-order: 25
+      x-menu-order: 26
       x-undo:
         type: safe
   /api/v1/synthetics/private-locations:
@@ -30629,7 +30791,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 22
+      x-menu-order: 23
       x-undo:
         operationId: DeletePrivateLocation
         parameters:
@@ -30668,7 +30830,7 @@ paths:
       summary: Delete a private location
       tags:
       - Synthetics
-      x-menu-order: 26
+      x-menu-order: 27
       x-undo:
         type: idempotent
     get:
@@ -30706,7 +30868,7 @@ paths:
       summary: Get a private location
       tags:
       - Synthetics
-      x-menu-order: 23
+      x-menu-order: 24
       x-undo:
         type: safe
     put:
@@ -30752,7 +30914,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 24
+      x-menu-order: 25
       x-undo:
         type: idempotent
   /api/v1/synthetics/settings/default_locations:
@@ -30771,7 +30933,7 @@ paths:
       summary: Get the default locations
       tags:
       - Synthetics
-      x-menu-order: 28
+      x-menu-order: 29
       x-undo:
         type: safe
   /api/v1/synthetics/tests:
@@ -30824,7 +30986,7 @@ paths:
       summary: Get the list of all Synthetic tests
       tags:
       - Synthetics
-      x-menu-order: 10
+      x-menu-order: 11
       x-pagination:
         limitParam: page_size
         pageParam: page_number
@@ -30882,7 +31044,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 27
+      x-menu-order: 31
       x-undo:
         operationId: TODO
         parameters: []
@@ -31122,7 +31284,7 @@ paths:
       summary: Get an API test
       tags:
       - Synthetics
-      x-menu-order: 8
+      x-menu-order: 9
       x-undo:
         type: safe
     put:
@@ -31287,14 +31449,14 @@ paths:
       summary: Get a browser test
       tags:
       - Synthetics
-      x-menu-order: 9
+      x-menu-order: 10
       x-undo:
         type: safe
     put:
       description: Edit the configuration of a Synthetic browser test.
       operationId: UpdateBrowserTest
       parameters:
-      - description: The public ID of the test to get details from.
+      - description: The public ID of the test to edit.
         in: path
         name: public_id
         required: true
@@ -31420,7 +31582,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 14
+      x-menu-order: 15
       x-undo:
         type: safe
   /api/v1/synthetics/tests/browser/{public_id}/results/{result_id}:
@@ -31473,7 +31635,7 @@ paths:
       summary: Get a browser test result
       tags:
       - Synthetics
-      x-menu-order: 12
+      x-menu-order: 13
       x-undo:
         type: safe
   /api/v1/synthetics/tests/delete:
@@ -31530,7 +31692,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 17
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/trigger:
@@ -31575,7 +31737,7 @@ paths:
             value: '{"tests": [{"public_id": "{{ synthetics_api_test_with_wrong_dns.public_id
               }}"}]}'
           step: the "synthetics_api_test_with_wrong_dns" is triggered
-      x-menu-order: 7
+      x-menu-order: 8
       x-undo:
         type: safe
   /api/v1/synthetics/tests/trigger/ci:
@@ -31613,7 +31775,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 7
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}:
@@ -31658,9 +31820,71 @@ paths:
       summary: Get a test configuration
       tags:
       - Synthetics
-      x-menu-order: 27
+      x-menu-order: 28
       x-undo:
         type: safe
+    patch:
+      description: Patch the configuration of a Synthetic test with partial data.
+      operationId: PatchTest
+      parameters:
+      - description: The public ID of the test to patch.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsPatchTestBody'
+        description: '[JSON Patch](https://jsonpatch.com/) compliant list of operations'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsTestDetails'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Updating sub-type is forbidden'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic Monitoring is not activated for the user
+
+            - Test is not owned by the user
+
+            - Test can''t be found'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: Patch a Synthetic test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
     put:
       deprecated: true
       description: This endpoint is deprecated. To edit a test, use [Edit an API test](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test)
@@ -31722,7 +31946,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 26
+      x-menu-order: 30
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}/results:
@@ -31791,7 +32015,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 13
+      x-menu-order: 14
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/results/{result_id}:
@@ -31842,7 +32066,7 @@ paths:
       summary: Get an API test result
       tags:
       - Synthetics
-      x-menu-order: 11
+      x-menu-order: 12
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/status:
@@ -31901,7 +32125,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 6
       x-undo:
         type: idempotent
   /api/v1/synthetics/variables:
@@ -31931,7 +32155,7 @@ paths:
       summary: Get all global variables
       tags:
       - Synthetics
-      x-menu-order: 17
+      x-menu-order: 18
       x-undo:
         type: safe
     post:
@@ -31980,7 +32204,7 @@ paths:
           - file: synthetics_global_variable_payload.json
             name: body
           step: there is a valid "synthetics_global_variable" in the system
-      x-menu-order: 18
+      x-menu-order: 19
       x-undo:
         operationId: DeleteGlobalVariable
         parameters:
@@ -32029,7 +32253,7 @@ paths:
       summary: Delete a global variable
       tags:
       - Synthetics
-      x-menu-order: 21
+      x-menu-order: 22
       x-undo:
         type: idempotent
     get:
@@ -32071,7 +32295,7 @@ paths:
       summary: Get a global variable
       tags:
       - Synthetics
-      x-menu-order: 19
+      x-menu-order: 20
       x-undo:
         type: safe
     put:
@@ -32121,7 +32345,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 20
+      x-menu-order: 21
       x-undo:
         type: idempotent
   /api/v1/tags/hosts:

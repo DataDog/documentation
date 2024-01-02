@@ -12,13 +12,16 @@ further_reading:
 - link: /getting_started/tagging/unified_service_tagging
   tag: 설명서
   text: 통합 서비스 태깅 설정법 알아보기
+- link: https://dtdg.co/fe
+  tag: 기반 활성화
+  text: 대화형 세션에 참여하여 로그 관리를 최적화하세요.
 kind: 설명서
 title: 로그 시작하기
 ---
 
 ## 개요
 
-Datadog 로그 관리(로그라고도 합니다)를 사용하여 서버, 컨테이너, 클라우드 환경, 애플리케이션, 기존 로그 프로세서 및 포워더 등 여러 로깅 소스에서 로그를 수집할 수 있습니다. 기존 로깅에서는 비용 효율을 유지하기 위해 분석하고 유지할 로그를 따로 선정해야 했습니다. Datadog 제한없는 로그 수집(Logging without Limits™)*을 이용하면 로그 수집, 프로세싱, 아카이브, 탐색, 모니터링을 로그 제한 없이 수행할 수 있습니다.
+Datadog 로그 관리(또는 로그)를 사용하여 서버, 컨테이너, 클라우드 환경, 애플리케이션, 기존 로그 프로세서 및 포워더 등 여러 로깅 소스에서 로그를 수집할 수 있습니다. 기존 로깅에서는 비용 효율을 유지하기 위해 분석하고 유지할 로그를 따로 선정해야 했습니다. Datadog 제한없는 로그 수집(Logging without Limits)*을 이용하면 로그 수집, 프로세싱, 아카이브, 탐색, 모니터링을 로그 제한 없이 수행할 수 있습니다.
 
 이번 페이지에서는 Datadog로 로그 관리를 시작하는 방법을 알려드리겠습니다. 계정이 아직 없다면 [Datadog 계정][1]을 만들어주세요.
 
@@ -30,7 +33,7 @@ Datadog 로그 관리(로그라고도 합니다)를 사용하여 서버, 컨테�
 
 ### 서버
 
-서버에서 Datadog로 로그를 전송할 때는 여러 [통합][5]을 사용할 수 있습니다. 통합은 서버에서 Datadog로 로그를 전송하기 위해 Agent `conf.d/` 폴더의 `conf.yaml` 파일 내의 로그 설정 블록을 사용합니다.
+서버에서 Datadog으로 로그를 전달하는 데 사용할 수 있는 몇 가지 [통합][5]이 있습니다. 통합은 Agent의 설정 디렉터리 루트에서 `conf.d/` 폴더 내 `conf.yaml` 파일에 있는 로그 설정 블록을 사용하여 서버에서 Datadog으로 로그를 전달합니다.
 
 ```yaml
 logs:
@@ -55,7 +58,7 @@ logs:
 
 4. 통합 [활성화 절차][8]를 따르거나, Datadog 사이트의 커스텀 파일 로그 수집 절차를 따라 진행합니다.
 
-    **참조**: 커스텀 파일에서 로그를 수집하며 tail 파일, TCP/UDP, journald, 또는 윈도우즈 이벤트(Windows Events)의 예시가 필요한 경우 [커스텀 로그 수집][9]을 참조하세요.
+    **참조**: 커스텀 파일에서 로그를 수집하고 있으며 파일, TCP/UDP, journald, 또는 윈도우즈 이벤트(Windows Events)를 테일링(tailing)하는 예시가 필요한 경우 [커스텀 로그 수집][9]을 참조하세요.
 
 ### 컨테이너
 
@@ -69,7 +72,7 @@ Datadog Agent v6 기준으로, Agent는 컨테이너에서 로그를 수집할 �
 
 ### 클라우드
 
-AWS, Azure, GCP 등 다양한 클라우드 제공업체에서 Datadog로 로그를 전송할 수 있습니다. 클라우드 제공업체마다 고유한 설정 지침 세트를 안내하고 있으니 참조하시기 바랍니다.
+AWS, Azure, Google Cloud와 같은 여러 클라우드 공급자의 로그를 Datadog으로 전달할 수 있습니다. 각 클라우드 공급자는 고유한 설정 지침을 가지고 있습니다.
 
 예를 들어 AWS 서비스 로그는 주로 S3 버켓이나 클라우드와치(CloudWatch) 로그 그룹에 저장되는 경우가 많습니다. 이러한 로그를 구독하고 Amazon Kinesis 스트림으로 전송한 다음, 하나 이상의 대상으로 또 전송할 수 있습니다. Datadog는 Amazon Kinesis Delivery 스트림에 기본으로 설정된 전송 대상 중 하나입니다.
 
@@ -79,7 +82,7 @@ AWS, Azure, GCP 등 다양한 클라우드 제공업체에서 Datadog로 로그�
 
 Datadog는 클라우드에서 SDK나 라이브러리를 통한 로그 수집을 허용합니다. 예를 들어 `datadog-logs` SDK를 사용해 자바스크립트(Javascript) 클라이언트에서 Datadog로 로그를 보낼 수 있습니다.
 
-클라우드 서비스에서 로그를 수집하려면 [앱 내 안내][14]를 따라주세요.
+클라이언트에서 로그 수집을 시작하려면 [앱 내 지침서][14]를 따릅니다.
 
 ### 기타
 
@@ -109,7 +112,7 @@ Datadog는 클라우드에서 SDK나 라이브러리를 통한 로그 수집을 
 
 * [속성과 앨리어싱][18]을 설정하여 로그 환경을 통일합니다.
 * [파이프라인][19]과 [프로세서][20]로 로그를 처리할 방법을 관리합니다.
-* 제한없는 로그 수집(Logging without Limits™)*에서는 로그 가져오기와 인덱스 처리를 분리합니다. 따라서 인덱스화할 로그, 보유할 로그, 아카이브할 로그를 선택하여 [로그를 설정][21]할 수 있습니다.
+* 제한없는 로그 수집(Logging without Limits)*에서는 로그 가져오기와 인덱스 처리를 분리합니다. 따라서 인덱스화할 로그, 보유할 로그, 아카이브할 로그를 선택하여 [로그를 설정][21]할 수 있습니다.
 
 ### 로그의 상관관계
 
@@ -118,20 +121,21 @@ Datadog는 클라우드에서 SDK나 라이브러리를 통한 로그 수집을 
 
 ### 가이드
 
-* [제한없는 로그 수집(Logging without Limits™)*][22] 자세히 알아보기
-* [RBAC 설정][23]으로 민감한 로그 데이터 관리하기
+* [로그 관리 모범 사례][22]
+* [제한없는 로그 수집*][23]에 대해 더 알아보기
+* [RBAC 설정][24]으로 민감한 로그 데이터 관리하기
 
 ## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
-*제한없는 로그 수집(Logging without Limits™)은 Datadog, Inc.의 상표입니다.
+*제한없는 로그 수집(Logging without Limits)은 Datadog, Inc.의 상표입니다.
 
 [1]: https://www.datadoghq.com
 [2]: /ko/tracing/other_telemetry/connect_logs_and_traces/
 [3]: /ko/logs/guide/correlate-logs-with-metrics/
-[4]: /ko/security_platform/cloud_siem/
+[4]: /ko/security/cloud_siem/
 [5]: /ko/getting_started/integrations/
 [6]: /ko/agent/
 [7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli
@@ -149,5 +153,6 @@ Datadog는 클라우드에서 SDK나 라이브러리를 통한 로그 수집을 
 [19]: /ko/logs/log_configuration/pipelines/
 [20]: /ko/logs/log_configuration/processors/
 [21]: /ko/logs/log_configuration/
-[22]: /ko/logs/guide/getting-started-lwl/
-[23]: /ko/logs/guide/logs-rbac/
+[22]: /ko/logs/guide/best-practices-for-log-management/
+[23]: /ko/logs/guide/getting-started-lwl/
+[24]: /ko/logs/guide/logs-rbac/

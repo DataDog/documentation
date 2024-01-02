@@ -360,7 +360,7 @@ Re/Initialize Datadog-Plugin Agent Http Client
 TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 {{< /code-block >}}
 
-### Correlate infrastructure metrics 
+## Correlate infrastructure metrics
 
 If you are using Jenkins workers, you can correlate pipelines with the infrastructure that is running them. For this feature to work:
 
@@ -534,6 +534,29 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Enable Test Visibility
+
+This is an optional step that enables the collection of tests data using [Test Visibility][16].
+
+See the [Test Visibility documentation][17] for your language to make sure that the testing framework that you use is supported.
+
+### Enable with the Jenkins configuration UI
+
+UI-based Test Visibility configuration is available in Datadog Jenkins plugin v5.6.0 or newer.
+
+1. In your Jenkins instance web interface, go to the job or pipeline that you want to instrument and choose the **Configure** option.
+2. In the **General** configuration section, tick the **Enable Datadog Test Visibility** checkbox.
+3. Enter the name of the service or library being tested into the **Service Name** input. You can choose any value that makes sense to you.
+4. Choose the languages for which you want to enable tests instrumentation. Some of the languages do not support configuration through the UI. To configure Test Visibility for these languages, follow the manual [configuration instructions][18].
+5. Optionally, provide [additional configuration settings][18].
+6. Click **Save**.
+
+{{< img src="ci/ci-jenkins-plugin-tests-config.png" alt="Datadog Test Visibility configuration for Jenkins" style="width:100%;">}}
+
+### Enable with manual tracer configuration
+
+Follow the manual Test Visibility [configuration instructions][17] that are specific to your language.
 
 ## Set the default branch name
 
@@ -884,3 +907,6 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 [12]: /continuous_integration/pipelines/custom_tags_and_metrics/
 [14]: /agent/
 [15]: /account_management/teams/
+[16]: /continuous_integration/tests/
+[17]: /continuous_integration/tests/setup/
+[18]: /tracing/trace_collection/library_config/

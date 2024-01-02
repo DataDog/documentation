@@ -25,6 +25,7 @@ further_reading:
 - [OAuth](#oauth-events)
 - [Organization management](#organization-management-events)
 - [Security Notifications](#security-notification-events)
+- [Teams management](#teams-management-events)
 
 #### Product-Specific Events
 - [Application Performance Monitoring (APM)](#application-performance-monitoring-apm-events)
@@ -32,6 +33,8 @@ further_reading:
 - [Audit Trail](#audit-trail-events)
 - [CI Visibility](#ci-visibility-events)
 - [Cloud Security Platform](#cloud-security-platform-events)
+- [Dynamic Instrumentation](#dynamic-instrumentation-events)
+- [Error Tracking](#error-tracking-events)
 - [Log Management](#log-management-events)
 - [Metrics](#metrics-events)
 - [Real User Monitoring](#real-user-monitoring-events)
@@ -59,12 +62,17 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [User's role][6] | A user is added or deleted from a role in the org. | `@evt.name:"Access Management" @asset.type:role @action:modified` |
 | [Password][9] | A user modified their password in the org. | `@evt.name:"Access Management" @asset.type:password @action:modified` |
 | [Restriction policy][86] | A restriction policy is modified for a resource. | `@evt.name:"Access Management" @asset.type:restriction_policy @action:(modified OR deleted)` |
+| [Email update (Support)][99] | A user's email was updated by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:user @action:modified` |
+| [User invite (Support)][98] | A user was invited to the org by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:user @action:created` |
 
 ### Agent
 
-| Name  | Description of audit event                          | Query in audit explorer              |
-|-------------| --------------------------------------------------  | ------------------------------------ |
-| [Agent flare created][87] | Datadog Agent flare is created for support tickets| `@evt.name:Datadog Agent @action:created @asset.type:agent_flare` |
+| Name                                    | Description of audit event                          | Query in audit explorer                                             |
+|-----------------------------------------| --------------------------------------------------  | ------------------------------------------------------------------- |
+| [Agent enabled][100]                    | A new Datadog Agent was enabled.                    | `@evt.name:"Datadog Agent" @action:created`                         |
+| [Agent flare created][87]               | Datadog Agent flare is created for support tickets. | `@evt.name:"Datadog Agent" @action:created @asset.type:agent_flare` |
+| [Agent configuration updated][101]      | A Datadog Agent configuration was updated.          | `@evt.name:"Datadog Agent" @action:modified`                        |
+
 
 ### API request events
 
@@ -126,6 +134,21 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Dashboard user(s) deleted][41] | A user deleted user ID(s) that can access a dashboard and the list of the deleted user ID(s).       | `@evt.name:Dashboard @asset.type:dashboard_share_acl @action:deleted`   |
 | [Public URL accessed][42] | A public dashboard URL is accessed.                                                               | `@evt.name:Dashboard @asset.type:dashboard @action:accessed`            |
 |[Public URL generated or deleted][43]  | A public URL to view a dashboard is generated or deleted.                             | `@evt.name:Dashboard @asset.type:dashboard_share_link`            |
+
+### Dynamic Instrumentation events
+
+| Name     | Description of audit event                                          | Query in audit explorer                           |
+| -------- | ------------------------------------------------------------------- | --------------------------------------------------|
+| [Logs Probe][105] | A user has successfully created, modified or deleted a logs probe with Dynamic Instrumentation. | `@evt.name:"Dynamic Instrumentation" @action:(created OR modified OR deleted) @asset.type:log_probe` |
+| [Metrics Probe][106] | A user has successfully created, modified or deleted a metrics probe with Dynamic Instrumentation. | `@evt.name:"Dynamic Instrumentation" @action:(created OR modified OR deleted) @asset.type:span_probe` |
+| [Spans Probe][107] | A user has successfully created, modified or deleted a spans probe with Dynamic Instrumentation. | `@evt.name:"Dynamic Instrumentation" @action:(created OR modified OR deleted) @asset.type:metric_probe` |
+
+### Error Tracking events
+
+| Name     | Description of audit event                                          | Query in audit explorer                           |
+| -------- | ------------------------------------------------------------------- | --------------------------------------------------|
+| [Error Tracking for Logs activation][102] | A user has enabled or disabled Error Tracking for Logs product. | `@evt.name:"Error Tracking" @action:(created OR deleted) @asset.type:error_tracking_logs` |
+| [Create or Modify inclusion filter][103] | A user has added or modified an inclusion filter. | `@evt.name:"Error Tracking" @asset.type:error_tracking_inclusion_filter` |
 
 ### Integration events
 
@@ -227,6 +250,11 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
 | [Reference Table][78] | A user created, deleted, or modified a reference table. | `@evt.name:"Reference Tables" @asset.type:reference_table @action:(created OR deleted OR modified)` |
 | [Reference Table File][79] | A user uploaded a file or imported a file with a cloud provider for a reference table. | `@evt.name:"Reference Tables" @asset.type:reference_table_file @action:(uploaded OR imported)` |                                                      |
+
+### Teams Management events
+| Name                     | Description of audit event                                          | Query in audit explorer                           |
+| ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------|
+| [Teams Management][104] | A user created, deleted, or modified a team or team association. | `@evt.name:"Teams Management" @action:(created OR deleted OR modified)` |
 
 ### Workflow events
 | Name                     | Description of audit event                                          | Query in audit explorer                           |
@@ -337,3 +365,13 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [95]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Aci_app_exclusion_filters%20%40action%3Amodified
 [96]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22CI%20Visibility%22%20%40asset.type%3Aci_app_quality_gates%20%28%40action%3Acreated%20OR%20%40action%3Amodified%20OR%20%40action%3Adeleted%29
 [97]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Log%20Management%22%20%40asset.type%3Alogs_query
+[98]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Auser%20%40action%3Acreated%20
+[99]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Auser%20%40action%3Amodified%20
+[100]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40action%3Acreated%20
+[101]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Datadog%20Agent%22%20%40action%3Amodified%20
+[102]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Error%20Tracking%22%20%40asset.type%3Aerror_tracking_logs%20%40action%3A%28created%20OR%20deleted%29
+[103]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Error%20Tracking%22%20%40asset.type%3Aerror_tracking_inclusion_filter
+[104]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Teams%20Management%22%20%40action%3A%28created%20OR%20deleted%20OR%20modified%29
+[105]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Dynamic%20Instrumentation%22%20%40asset.type%3Alog_probe
+[106]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Dynamic%20Instrumentation%22%20%40asset.type%3Ametric_probe
+[107]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Dynamic%20Instrumentation%22%20%40asset.type%3Aspan_probe

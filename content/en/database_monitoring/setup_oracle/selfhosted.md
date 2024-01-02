@@ -13,10 +13,6 @@ further_reading:
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">
-The features described on this page are in beta. Contact your Customer Success Manager to provide feedback or ask for help.
-</div>
-
 Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues.
 
 <div class="alert alert-danger">
@@ -73,6 +69,10 @@ grant select on V_$CONTAINERS to c##datadog ;
 grant select on V_$SQL_PLAN_STATISTICS_ALL to c##datadog ;
 grant select on V_$SQL to c##datadog ;
 grant select on V_$PGASTAT to c##datadog ;
+grant select on v_$asm_diskgroup to c##datadog ;
+grant select on v_$rsrcmgrmetric to c##datadog ;
+grant select on v_$dataguard_config to c##datadog ;
+grant select on v_$dataguard_stats to c##datadog ;
 ```
 
 If you conifgured custom queries that run on a pluggable database (PDB), you must grant `set container` privilege to the `C##DATADOG` user:
@@ -89,7 +89,7 @@ Log on as `sysdba`, create a new `view` in the `sysdba` schema, and give the Age
 
 ```SQL
 CREATE OR REPLACE VIEW dd_session AS
-SELECT
+SELECT /*+ push_pred(sq) push_pred(sq_prev) */
   s.indx as sid,
   s.ksuseser as serial#,
   s.ksuudlna as username,
@@ -258,6 +258,10 @@ grant select on V_$CONTAINERS to datadog ;
 grant select on V_$SQL_PLAN_STATISTICS_ALL to datadog ;
 grant select on V_$SQL to datadog ;
 grant select on V_$PGASTAT to datadog ;
+grant select on v_$asm_diskgroup to datadog ;
+grant select on v_$rsrcmgrmetric to datadog ;
+grant select on v_$dataguard_config to datadog ;
+grant select on v_$dataguard_stats to datadog ;
 ```
 
 ### Create view
@@ -266,7 +270,7 @@ Log on as `sysdba`, create a new `view` in the `sysdba` schema, and give the Age
 
 ```SQL
 CREATE OR REPLACE VIEW dd_session AS
-SELECT
+SELECT /*+ push_pred(sq) push_pred(sq_prev) */
   s.indx as sid,
   s.ksuseser as serial#,
   s.ksuudlna as username,
@@ -427,6 +431,10 @@ grant select on V_$SQL to datadog ;
 grant select on V_$PGASTAT to datadog ;
 grant select on dba_tablespace_usage_metrics to datadog ;
 grant select on dba_tablespaces to datadog ;
+grant select on v_$asm_diskgroup to datadog ;
+grant select on v_$rsrcmgrmetric to datadog ;
+grant select on v_$dataguard_config to datadog ;
+grant select on v_$dataguard_stats to datadog ;
 ```
 
 ### Create view
@@ -435,7 +443,7 @@ Log on as `sysdba`, create a new `view` in the `sysdba` schema, and give the Age
 
 ```SQL
 CREATE OR REPLACE VIEW dd_session AS
-SELECT
+SELECT /*+ push_pred(sq) push_pred(sq_prev) */
   s.indx as sid,
   s.ksuseser as serial#,
   s.ksuudlna as username,
