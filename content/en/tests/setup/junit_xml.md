@@ -386,14 +386,14 @@ There is no need to provide the exact path to a specific file, [you can use any 
 such as `src/myTeamFolder` or `*.md`.
 
 There are multiple ways to provide the `test.source.file` tag:
-1. Using the [`--tags` parameter or the `DD_TAGS` environment variable](#configuration-settings).
+* Using the [`--tags` parameter or the `DD_TAGS` environment variable](#configuration-settings).
 
    ```shell
    datadog-ci junit upload --service service-name --tags test.source.file:src/myTeamFolder my_report.xml
    ```
 
    This adds the `test.source.file` tag to all the tests in the report. All of the tests will have the same owner(s).
-2. If you want to provide different source files for the same XML report, you can use [property elements](#Providing-metadata-through-property-elements) or set the `file` attribute manually to individual `<testcase>` or `<testsuite>` elements.
+* If you want to provide different source files for the same XML report, you can use [property elements](#Providing-metadata-through-property-elements) or set the `file` attribute manually to individual `<testcase>` or `<testsuite>` elements.
 
 ## Providing metadata with XPath expressions
 
