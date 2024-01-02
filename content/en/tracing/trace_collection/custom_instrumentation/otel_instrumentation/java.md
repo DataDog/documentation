@@ -61,7 +61,7 @@ implementation "io.opentelemetry:opentelemetry-api:${opentelemetryVersion}"
 <dependency>
     <groupId>io.opentelemetry</groupId>
     <artifactId>opentelemetry-api</artifactId>
-    <version>${io.opentelemtry.version}</version>
+    <version>${io.opentelemetry.version}</version>
 </dependency>
 {{< /code-block >}}
 
@@ -110,7 +110,7 @@ First add a dependency to the `opentelemetry-instrumentation-annotations` librar
 <dependency>
     <groupId>io.opentelemetry.instrumentation</groupId>
     <artifactId>opentelemetry-instrumentation-annotations</artifactId>
-    <version>${io.opentelemtry.version}</version>
+    <version>${io.opentelemetry.version}</version>
 </dependency>
 {{< /code-block >}}
 
