@@ -5,7 +5,7 @@ disable_toc: false
 ---
 ## Overview
 
-Error Tracking can identify suspect commits, helping you pinpoint the root cause of your errors and resolve the issue more quickly. This feature is automatically enabled on issues when the [setup requirements](#setup) are met.
+Error Tracking can identify suspect commits, helping you pinpoint the root cause of your errors and expedite resolution. This feature is automatically enabled on issues when the [setup requirements](#setup) are met.
 
 {{< img src="logs/error_tracking/suspect_commit.png" alt="A suspect commit as it is displayed in the Datadog UI" style="width:100%" >}}
 
