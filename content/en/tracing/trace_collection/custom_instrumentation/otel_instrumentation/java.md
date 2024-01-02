@@ -59,11 +59,10 @@ implementation "io.opentelemetry:opentelemetry-api:${opentelemetryVersion}"
 {{< code-block lang="xml" >}}
 <!-- OpenTelemetry API -->
 <dependency>
-        <groupId>io.opentelemetry</groupId>
-        <artifactId>opentelemetry-api</artifactId>
-        <version>${io.opentelemtry.version}</version>
-    </dependency>
-<dependency>
+    <groupId>io.opentelemetry</groupId>
+    <artifactId>opentelemetry-api</artifactId>
+    <version>${io.opentelemtry.version}</version>
+</dependency>
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -109,11 +108,10 @@ First add a dependency to the `opentelemetry-instrumentation-annotations` librar
 {{< code-block lang="xml" >}}
 <!-- OpenTelemetry instrumentation annotations -->
 <dependency>
-        <groupId>io.opentelemetry.instrumentation</groupId>
-        <artifactId>opentelemetry-instrumentation-annotations</artifactId>
-        <version>${io.opentelemtry.version}</version>
-    </dependency>
-<dependency>
+    <groupId>io.opentelemetry.instrumentation</groupId>
+    <artifactId>opentelemetry-instrumentation-annotations</artifactId>
+    <version>${io.opentelemtry.version}</version>
+</dependency>
 {{< /code-block >}}
 
 {{% /tab %}}
