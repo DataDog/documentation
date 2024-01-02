@@ -138,37 +138,28 @@ Synthetic tests by default do not [renotify][12]. This means that if you add you
 
 ## Private locations
 
+{{< tabs >}}
+{{% tab "Docker" %}}
+
 ### My private location containers sometimes get killed `OOM`
 
-Private location containers getting killed `Out Of Memory` generally uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][13].
-
-### My browser test results sometimes show `Page crashed` errors
-
-This could uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][13].
-
-### My tests are sometimes slower to execute 
-
-This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location containers are provisioned with [sufficient CPU resources][13].
-
-### My browser tests are taking too long to run
-
-Confirm you are not seeing [out of memory issues][14] with your private location deployments. If you have tried scaling your container instances following the [dimensioning guidelines][15] already, reach out to [Datadog Support][1].
-
-### `TIMEOUT` errors appear in API tests executed from my private location
-
-This might mean your private location is unable to reach the endpoint your API test is set to run on. Confirm that the private location is installed in the same network as the endpoint you are willing to test. You can also try to run your test on different endpoints to see if you get the same `TIMEOUT` error or not.
-
-{{< img src="synthetics/timeout.png" alt="API test on private location timing out" style="width:70%;" >}}
+Private location containers getting killed `Out Of Memory` generally uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][101].
 
 ### The `invalid mount config for type "bind": source path must be a directory` error appears when attempting to run a private location
 
-This occurs when you attempt to mount a single file in a Windows-based container, which is not supported. For more information, see the [Docker mount volume documentation][16]. Ensure that the source of the bind mount is a local directory.
+This occurs when you attempt to mount a single file in a Windows-based container, which is not supported. For more information, see the [Docker mount volume documentation][102]. Ensure that the source of the bind mount is a local directory.
+
+[101]: /synthetics/private_locations#private-location-total-hardware-requirements
+[102]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
+
+{{% /tab %}}
+{{% tab "Windows" %}}
 
 ### Restart the Synthetics Private Location Worker service without a reboot
 
-First, ensure that you installed the private location with a configuration specified at installation time.
+First, ensure that you installed the private location with a configuration specified at installation time. You can either use a GUI or use Windows PowerShell to restart the service.
 
-### GUI
+#### GUI
 
 1. Open the MSI installer and search for **Services** in the **Start** menu.
 1. Start **Services** on any user account.
@@ -177,7 +168,7 @@ First, ensure that you installed the private location with a configuration speci
 
 The Synthetics Private Location Worker now runs under the **Local Service** account. To confirm this, launch Task Manager and look for the `synthetics-pl-worker` process on the **Details** tab.
 
-### PowerShell
+#### PowerShell
 
 1. Start **Windows PowerShell** on any Windows account that has the rights to execute PowerShell scripts.
 1. Run the following command: `Restart-Service -Name “Datadog Synthetics Private Location”`.
@@ -189,6 +180,35 @@ First, ensure that you are logged in on the machine where the Synthetics Private
 If the Synthetics Private Location Worker crashes, add a scheduled task in Windows that runs a PowerShell script to restart the application if it stops running. This ensures that a private location is restarted after a crash. 
 
 If you provided a configuration file when installing the application, a Windows service called `Datadog Synthetics Private Location` starts automatically after installation. To verify this, ensure that you can see the service running in the **Services** tool. This Windows service restarts the private location automatically.
+
+{{% /tab %}}
+{{% tab "Common" %}}
+
+### My browser test results sometimes show `Page crashed` errors
+
+This could uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][101].
+
+### My tests are sometimes slower to execute 
+
+This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location containers are provisioned with [sufficient CPU resources][101].
+
+### My browser tests are taking too long to run
+
+Confirm you are not seeing [out of memory issues][102] with your private location deployments. If you have tried scaling your container instances following the [dimensioning guidelines][103] already, reach out to [Datadog Support][104].
+
+### `TIMEOUT` errors appear in API tests executed from my private location
+
+This might mean your private location is unable to reach the endpoint your API test is set to run on. Confirm that the private location is installed in the same network as the endpoint you are willing to test. You can also try to run your test on different endpoints to see if you get the same `TIMEOUT` error or not.
+
+{{< img src="synthetics/timeout.png" alt="API test on private location timing out" style="width:70%;" >}}
+
+[101]: /synthetics/private_locations#private-location-total-hardware-requirements
+[102]: https://docs.docker.com/config/containers/resource_constraints/
+[103]: /synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
+[104]: /help/
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 
@@ -209,4 +229,3 @@ If you provided a configuration file when installing the application, a Windows 
 [13]: /synthetics/private_locations#private-location-total-hardware-requirements
 [14]: https://docs.docker.com/config/containers/resource_constraints/
 [15]: /synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
-[16]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only

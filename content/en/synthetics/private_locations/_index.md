@@ -31,7 +31,7 @@ Private locations allow you to **monitor internal-facing applications or any pri
 * **Verify application performance in your internal CI environment** before you release new features to production with [Continuous Testing and CI/CD][1].
 * **Compare application performance** from both inside and outside your internal network.
 
-{{< img src="synthetics/private_locations/private_locations_worker.png" alt="Architecture diagram of how a private location works in Synthetic Monitoring" style="width:100%;">}}
+{{< img src="synthetics/private_locations/private_locations_worker_1.png" alt="Architecture diagram of how a private location works in Synthetic Monitoring" style="width:100%;">}}
 
 Private locations come as Docker containers or Windows services that you can install inside of your private network. After you create and install a private location, you can assign [Synthetic tests][2] to it, like with any managed location.
 
@@ -41,9 +41,7 @@ Your private location worker pulls your test configurations from Datadog's serve
 
 ## Prerequisites
 
-### Continuous Testing
-
-In order to use private locations for [Continuous Testing tests][23], you need v1.27.0 or later.
+To use private locations for [Continuous Testing tests][23], you need v1.27.0 or later.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
@@ -56,7 +54,9 @@ Private locations are Docker containers that you can install anywhere inside you
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Private locations are Windows services that you can install anywhere inside your private network using an [MSI file][101]. Run this file from the virtual or physical machine that you would like to install the private location on. This machine's requirements are listed in the table below. Datadog recommends running the private location worker on a virtual machine or Windows container.
+Private locations are Windows services that you can install anywhere inside your private network using an [MSI file][101]. Run this file from the virtual or physical machine that you would like to install the private location on. 
+
+This machine's requirements are listed in the table below. Datadog recommends running the private location worker on a virtual machine or Windows container. PowerShell scripting must be enabled on the machine where you are installing the private location worker.
 
 | System | Requirements |
 |---|---|
@@ -64,11 +64,30 @@ Private locations are Windows services that you can install anywhere inside your
 | RAM | 4GB minimum. 8GB recommended. |
 | CPU | Intel or AMD processor with 64-bit support. 2.8 GHz or faster processor recommended. |
 
-You must have .NET version 4.7.2 or later installed on your computer before using the MSI installer.
+You must install .NET version 4.7.2 or later on your computer before using the MSI installer. 
 
-PowerShell scripting must be enabled on the machine where you are installing the private location worker.
+To install the [Windows Agent][102], either use a GUI or the command line.
 
-[101]: TBD
+#### GUI
+
+1. Download the [Datadog Agent installer][101] to install the latest version of the Agent.
+
+   <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json">installer list</a>.</div>
+
+2. Run the installer (as **Administrator**) by opening `datadog-agent-7-latest.amd64.msi`.
+3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][103].
+4. When the install finishes, you are given the option to launch the Datadog Agent Manager.
+
+#### Command Line
+
+1. Download the [Synthetics Private Location Installer][101].
+2. Run one of the following commands inside the directory where you downloaded the installer.
+
+// Commands TBD
+
+[101]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
+[102]: /agent/basic_agent_usage/windows/
+[103]: https://app.datadoghq.com/organization-settings/api-keys
 
 {{% /tab %}}
 {{< /tabs >}}
