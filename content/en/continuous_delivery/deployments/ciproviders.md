@@ -23,15 +23,16 @@ CD Visibility for CI providers deployments is in private beta. To request access
 ## Overview
 
 Deployments can be performed also within continuous integration pipelines. Typically, these pipelines have a deployment step that is executed after the source code has been tested and the image has been built.
-Datadog CD Visibility can integrate with your CI provider if the following requirements are met:
-1. You are using [Pipeline Visibility][1] to monitor your pipelines.
+If you are executing deployments via a CI provider, you can monitor your deployments with CD Visibility if the following requirements are met:
+1. You are using [Pipeline Visibility][1] to monitor your CI pipelines.
 2. Your CI provider supports the "Custom tags and metrics at runtime" feature. You can check this in the [supported features table][2].
-3. The deployment is executed in a CI job (or action).
+3. You are executing a deployment in a CI job (or action).
 
 ## Setup
 
-The main step required to set up CD Visibility for CI Providers deployments is to mark a specific CI job as a deployment.
-To do that, use the `datadog-ci deployment mark` command of the [`datadog-ci` CLI][3] (>=v2.26.0) inside the CI job. Two environment variables are required:
+The setup requires the [`datadog-ci` CLI][3] with version `2.26.0` or later.
+
+To set up CD Visibility, use the `datadog-ci deployment mark` command inside the CI job that is performing the deployment. Two environment variables are required:
 1. `DD_API_KEY`: Point to your [Datadog API key][5].
 2. `DD_BETA_COMMANDS_ENABLED`: Set to 1.
 
