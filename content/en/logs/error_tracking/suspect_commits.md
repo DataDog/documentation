@@ -16,7 +16,7 @@ Once a suspect commit has been identified, it is displayed on the issue panel, a
 To view a suspect commit on GitHub, click the **View Commit** button.
 
 ### Suspect commit criteria
-A commit becomes a suspect commit if
+A commit becomes a suspect commit if:
 - it modifies one of the lines in the stack trace
 - it was authored before the first error occurrence
 - it was authored no more than 90 days before the first error occurrence
