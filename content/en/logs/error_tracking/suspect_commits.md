@@ -20,7 +20,7 @@ A commit becomes a suspect commit if:
 - It modifies one of the lines in the stack trace
 - It was authored before the first error occurrence
 - It was authored no more than 90 days before the first error occurrence
-- it is the most recent commit that meets the above criteria
+- It is the most recent commit that meets the above criteria
 
 For a suspect commit to be displayed on an issue, at least one candidate commit must have been found.
 
