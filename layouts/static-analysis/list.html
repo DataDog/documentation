@@ -109,7 +109,7 @@
                     url.searchParams.append(filterType, filterOption)
                 }else{
                     // remove one key:value param
-                    const regex = new RegExp(`([\\&\\?])${filterType}=${filterOption.replace(' ', '\\+')}`, 'g');
+                    const regex = new RegExp(`([\\&\\?])${filterType}=${filterOption.replace(' ', '\\+')}(?=\&|$)`, 'g');
                     newURL = url.toString().replaceAll(regex, '').replace('/&', '/?')
                 }
                 if(!this.filterTypes[filterType].length) {
