@@ -175,6 +175,54 @@
     "description": "Get all containers for your organization.",
     "summary": "Get All Containers"
   },
+  "ListCostAWSCURConfigs": {
+    "description": "List the AWS CUR configs.",
+    "summary": "List Cloud Cost Management AWS CUR configs"
+  },
+  "CreateCostAWSCURConfig": {
+    "description": "Create a Cloud Cost Management account for an AWS CUR config.",
+    "summary": "Create Cloud Cost Management AWS CUR config",
+    "request_description": "",
+    "request_schema_description": "AWS CUR config Post Request."
+  },
+  "DeleteCostAWSCURConfig": {
+    "description": "Archive a Cloud Cost Management Account.",
+    "summary": "Delete Cloud Cost Management AWS CUR config"
+  },
+  "UpdateCostAWSCURConfig": {
+    "description": "Update the status of an AWS CUR config (active/archived).",
+    "summary": "Update Cloud Cost Management AWS CUR config",
+    "request_description": "",
+    "request_schema_description": "AWS CUR config Patch Request."
+  },
+  "ListAWSRelatedAccounts": {
+    "description": "List the AWS accounts in an organization by calling 'organizations:ListAccounts' from the specified management account.",
+    "summary": "List related AWS accounts"
+  },
+  "ListCostAzureUCConfigs": {
+    "description": "List the Azure configs.",
+    "summary": "List Cloud Cost Management Azure configs"
+  },
+  "CreateCostAzureUCConfigs": {
+    "description": "Create a Cloud Cost Management account for an Azure config.",
+    "summary": "Create Cloud Cost Management Azure configs",
+    "request_description": "",
+    "request_schema_description": "Azure config Post Request."
+  },
+  "DeleteCostAzureUCConfig": {
+    "description": "Archive a Cloud Cost Management Account.",
+    "summary": "Delete Cloud Cost Management Azure config"
+  },
+  "UpdateCostAzureUCConfigs": {
+    "description": "Update the status of an  Azure config (active/archived).",
+    "summary": "Update Cloud Cost Management Azure config",
+    "request_description": "",
+    "request_schema_description": "Azure config Patch Request."
+  },
+  "GetCloudCostActivity": {
+    "description": "Get the Cloud Cost Management activity.",
+    "summary": "Cloud Cost Enabled"
+  },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 17th of the following month.",
     "summary": "Get active billing dimensions for cost attribution"

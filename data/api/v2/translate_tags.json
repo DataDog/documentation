@@ -19,6 +19,10 @@
     "name": "CI Visibility Tests",
     "description": "Search or aggregate your CI Visibility test events over HTTP."
   },
+  "cloud-cost-management": {
+    "name": "Cloud Cost Management",
+    "description": "The Cloud Cost Management API allows you to setup, edit and delete cloud cost management accounts for AWS & Azure."
+  },
   "cloud-workload-security": {
     "name": "Cloud Workload Security",
     "description": "Workload activity security rules for generating events using the Datadog security Agent."

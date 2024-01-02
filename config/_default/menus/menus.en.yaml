@@ -9169,6 +9169,130 @@ api:
         - AggregateCIAppTestEvents
       unstable: []
       order: 3
+  - name: Cloud Cost Management
+    url: /api/latest/cloud-cost-management/
+    identifier: cloud-cost-management
+    generated: true
+  - name: Cloud Cost Enabled
+    url: '#cloud-cost-enabled'
+    identifier: cloud-cost-management-cloud-cost-enabled
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetCloudCostActivity
+      unstable: []
+      order: 10
+  - name: Update Cloud Cost Management Azure config
+    url: '#update-cloud-cost-management-azure-config'
+    identifier: cloud-cost-management-update-cloud-cost-management-azure-config
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateCostAzureUCConfigs
+      unstable: []
+      order: 7
+  - name: Delete Cloud Cost Management Azure config
+    url: '#delete-cloud-cost-management-azure-config'
+    identifier: cloud-cost-management-delete-cloud-cost-management-azure-config
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteCostAzureUCConfig
+      unstable: []
+      order: 9
+  - name: Create Cloud Cost Management Azure configs
+    url: '#create-cloud-cost-management-azure-configs'
+    identifier: cloud-cost-management-create-cloud-cost-management-azure-configs
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCostAzureUCConfigs
+      unstable: []
+      order: 8
+  - name: List Cloud Cost Management Azure configs
+    url: '#list-cloud-cost-management-azure-configs'
+    identifier: cloud-cost-management-list-cloud-cost-management-azure-configs
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListCostAzureUCConfigs
+      unstable: []
+      order: 6
+  - name: List related AWS accounts
+    url: '#list-related-aws-accounts'
+    identifier: cloud-cost-management-list-related-aws-accounts
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListAWSRelatedAccounts
+      unstable: []
+      order: 5
+  - name: Update Cloud Cost Management AWS CUR config
+    url: '#update-cloud-cost-management-aws-cur-config'
+    identifier: cloud-cost-management-update-cloud-cost-management-aws-cur-config
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateCostAWSCURConfig
+      unstable: []
+      order: 2
+  - name: Delete Cloud Cost Management AWS CUR config
+    url: '#delete-cloud-cost-management-aws-cur-config'
+    identifier: cloud-cost-management-delete-cloud-cost-management-aws-cur-config
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteCostAWSCURConfig
+      unstable: []
+      order: 4
+  - name: Create Cloud Cost Management AWS CUR config
+    url: '#create-cloud-cost-management-aws-cur-config'
+    identifier: cloud-cost-management-create-cloud-cost-management-aws-cur-config
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCostAWSCURConfig
+      unstable: []
+      order: 3
+  - name: List Cloud Cost Management AWS CUR configs
+    url: '#list-cloud-cost-management-aws-cur-configs'
+    identifier: cloud-cost-management-list-cloud-cost-management-aws-cur-configs
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListCostAWSCURConfigs
+      unstable: []
+      order: 1
   - name: Cloud Workload Security
     url: /api/latest/cloud-workload-security/
     identifier: cloud-workload-security
