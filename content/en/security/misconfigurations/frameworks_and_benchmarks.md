@@ -22,7 +22,7 @@ CSM Misconfigurations is not available in the selected site.
 </div>
 {{< /site-region >}}
 
-CSM Misconfigurations comes with more than 400 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within a compliance standard or industry benchmarks. See [Supported Frameworks][2] for more information.
+CSM Misconfigurations comes with more than 1000 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within a compliance standard or industry benchmarks. See [Supported Frameworks][2] for more information.
 
 ## View your compliance posture
 

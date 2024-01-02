@@ -27,7 +27,7 @@ CSM Misconfigurations evaluates resources in increments between 15 minutes and 4
 
 ## Maintain compliance with industry frameworks and benchmarks
 
-CSM Misconfigurations comes with more than 400 out-of-the-box compliance rules that are maintained by a team of security experts. The rules map to controls and requirements within compliance standards and industry benchmarks, such as PCI and SOC2 compliance frameworks.
+CSM Misconfigurations comes with more than 1000 out-of-the-box compliance rules that are maintained by a team of security experts. The rules map to controls and requirements within compliance standards and industry benchmarks, such as PCI and SOC2 compliance frameworks.
 
 [View compliance reports][3] to see how well you're doing against each control in a compliance framework. The reports include details such as resources with the most failed misconfigurations, a comprehensive breakdown of the number of resources with pass/fail misconfigurations, and the top three high-severity rule failures.
 
