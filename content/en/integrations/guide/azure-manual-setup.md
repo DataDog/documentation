@@ -271,14 +271,40 @@ After the integration tile is set up, metrics are collected by a crawler. To col
 
 #### Agent installation
 
-You can use the Azure extension to install the Datadog Agent on Windows VMs, Linux x64 VMs, and Linux ARM-based VMs.
+You can use the Azure extension to install the Datadog Agent on Windows VMs, Linux x64 VMs, and Linux ARM-based VMs. You can also use the AKS Cluster Extension to deploy the Agent to your AKS Clusters.
 
-1. In the [Azure portal][14], navigate to your **VM** > **Settings** > **Extensions** > **Add** and select **Datadog Agent**.
-2. Click **Create**, enter your [Datadog API key][15], and click **OK**.
+{{< tabs >}}
+{{% tab "VM Extension" %}}
 
-To install the Agent based on operating system or CI and CD tool, see the [Datadog Agent installation instructions][16].
+1. In the [Azure portal][14], select the appropriate VM.
+2. From the left sidebar, select **Extensions + applications** under **Settings**.
+3. Click **+ Add**.
+4. Search for and select the `Datadog Agent` extension.
+5. Click **Next**.
+6. Enter your [Datadog API key][2] and [Datadog site][1], and click **OK**.
+
+To install the Agent based on operating system or CI and CD tool, see the [Datadog Agent installation instructions][3].
 
 **Note**: Domain controllers are not supported when installing the Datadog Agent with the Azure extension.
+
+[1]: /getting_started/site/
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/account/settings/agent/latest
+{{% /tab %}}
+
+{{% tab "AKS Cluster Extension" %}}
+
+The Datadog AKS Cluster Extension allows you to deploy the Datadog Agent natively within Azure AKS, avoiding the complexity of third-party management tools. To install the Datadog Agent with the AKS Cluster Extension: 
+
+1. Go to your AKS cluster in the Azure portal.
+2. From the left sidebar of the AKS cluster, select **Extensions + applications** under **Settings**.
+3. Search for and select the `Datadog AKS Cluster Extension`.
+4. Click **Create**, and follow the instructions in the tile using your [Datadog credentials][1] and [Datadog site][2].
+
+[1]: /account_management/api-app-keys/
+[2]: /getting_started/site/
+{{% /tab %}}
+{{< /tabs >}}
 
 #### Sending logs
 
@@ -298,5 +324,3 @@ See the [Azure Logging guide][5] to set up log forwarding from your Azure enviro
 [12]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
 [13]: /integrations/guide/azure-native-manual-setup/
 [14]: https://portal.azure.com
-[15]: https://app.datadoghq.com/organization-settings/api-keys
-[16]: https://app.datadoghq.com/account/settings/agent/latest
