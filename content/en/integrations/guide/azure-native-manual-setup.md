@@ -167,9 +167,11 @@ If the Agent was installed using a different method, you cannot use the Datadog 
 
 #### AKS Cluster Extension
 
+The Datadog AKS Cluster Extension allows you to deploy the Datadog Agent natively within Azure AKS, avoiding the complexity of third-party management tools. 
+
 ##### Install
 
-The Datadog AKS Cluster Extension allows you to deploy the Datadog Agent natively within Azure AKS, avoiding the complexity of third-party management tools. To install the Datadog Agent with the AKS Cluster Extension: 
+To install the Datadog Agent with the AKS Cluster Extension: 
 
 1. Click on your AKS cluster in the **Monitored Resources** section in the left sidebar.
 2. From the left sidebar of the AKS cluster, select **Extensions + applications** under **Settings**.
