@@ -133,7 +133,7 @@ For any particular tag key, you can:
 
 [Learn more about tagging][5].
 
-### Metrics Related Assets
+## Metrics Related Assets
 
  Metrics related assets refers to any dashboard, notebook, monitor or SLO that queries a particular metric. 
 1. Scroll down to the bottom of the metric’s details sidepanel, landing on the ‘Related Assets’ section.
