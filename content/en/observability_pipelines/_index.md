@@ -23,7 +23,7 @@ cascade:
 {{< /site-region >}}
 
 
-{{< img src="observability_pipelines/obs_pipelines.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
+{{< img src="observability_pipelines/obs_pipelines_new.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
 
 ## Overview
 

@@ -4,7 +4,7 @@ Datadog Agent `7.46` or later installed on your hosts or containers.
 
 | Component                | Version/Requirement                     |
 | ------------------------ | ----------------------------------------|
-| [Helm Chart][102]            | v3.33.6 or later (Kubernetes only)      |
+| [Helm Chart][102]            | v3.49.6 or later (Kubernetes only)      |
 | [containerd][103]              | v1.5.6 or later (Kubernetes and hosts only)|
 
 **Note**: CSM Vulnerabilities is not available for CRI-O runtime, Windows, or AWS Fargate environments.

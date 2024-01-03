@@ -1,7 +1,7 @@
 ---
 title: Agent FAQ
 kind: faq
-cascade: 
+cascade:
   - private: true
 disable_sidebar: true
 aliases:
