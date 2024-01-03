@@ -46,11 +46,11 @@ If you are managing your clients' Datadog org(s), you may want to control the or
 
 To do so:
 
-1. Create a child organization under your parent account.
-2. Retrieve the new child organization's Org ID.
-3. Separate the new child organization from your parent account.
-4. Register the new client details in the DPN portal.
-5. Create a child organization under the organization created in Step 1 above.
+1. [Create a child organization under your parent account.](#create-a-child-organization-under-your-parent-account)
+2. [Retrieve the new child organization's Org ID.](#retrieve-the-new-client-orgs-org-id)
+3. [Separate the new child organization from your parent account.](#separate-the-new-child-organization-from-your-parent-account)
+4. [Register the new client details in the DPN portal.](#register-the-new-client-details-in-the-dpn-portal)
+5. [Create a child organization under the organization created in Step 1 above.](#create-a-new-child-organization-under-the-organization-created-in-step-1-above)
 
 As a result:
 
@@ -67,15 +67,19 @@ There are two options for this step:
 
 ### Retrieve the new client org's org ID
 
-You can retrieve the ID of the Datadog org you are logged into by opening the browser's JavaScript console and typing:
+You can retrieve the ID of the Datadog org you are logged into by opening the browser's JavaScript console and typing the following:
 
-  `JSON.parse(document.querySelector('#_current_user_json').value).org.id`
+```javascript
+JSON.parse(document.querySelector('#_current_user_json').value).org.id
+```
 
 You can also create a bookmark named `Get Datadog OrgId` which contains the following JavaScript function:
 
-  ```javascript:(function() {var orgId = JSON.parse(document.querySelector('#_current_user_json').value).org.id; alert("Datadog OrgId is " + orgId);})();```
+```javascript
+javascript:(function() {var orgId = JSON.parse(document.querySelector('#_current_user_json').value).org.id; alert("Datadog OrgId is " + orgId);})();
+```
 
-Then, when you are on a Datadog page, click on the bookmark to display the current org ID in a browser Alert Box.
+Then, when you are on a Datadog page, click on the bookmark to display the current org ID in a browser alert box.
 
 ### Separate the new child organization from your parent account
 
@@ -91,8 +95,8 @@ There are two options for this step:
 
 ### Create a new child organization under the organization created in Step 1 above
 
-1. Switch to the org created in Step 1 above.
-2. Create a client child organization following the instructions in Step 1 above.
+1. Switch to the org created in [Step 1 above](#create-a-child-organization-under-your-parent-account).
+2. Create a client child organization following the instructions in [Step 1 above](#create-a-child-organization-under-your-parent-account).
 
 ## Custom subdomains
 
@@ -100,7 +104,7 @@ To improve your Datadog experience when handling a large number of organizations
 
 By default, any Datadog organization is accessed through Datadog's access pages, [https://app.datadoghq.com][2] and [https://app.datadoghq.eu][3]. However, custom subdomains can provide a unique URL for each sub-organization. For example, `https://account-a.datadoghq.com`.
 
-For more information, see [Custom sub-domains][4]).
+For more information, see [Custom sub-domains][4].
 
 ## User roles and custom role-based access control (RBAC)
 
