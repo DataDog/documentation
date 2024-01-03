@@ -75,7 +75,7 @@ You can also create a bookmark named Get Datadog OrgId whose content is the foll
 
   ```javascript:(function() {var orgId = JSON.parse(document.querySelector('#_current_user_json').value).org.id; alert("Datadog OrgId is " + orgId);})();```
 
-Then, when you are on a Datadog page, click on the bookmark to display the current OrgId in a browser Alert Box.
+Then, when you are on a Datadog page, click on the bookmark to display the current org ID in a browser Alert Box.
 
 ### Separate the new child organization from your parent account
 
