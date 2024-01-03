@@ -6969,7 +6969,6 @@ components:
           example: true
           type: boolean
         resource_collection_enabled:
-          default: false
           description: When enabled, Datadog scans for all resources in your GCP environment.
           type: boolean
       type: object
