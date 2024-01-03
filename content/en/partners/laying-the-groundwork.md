@@ -38,7 +38,7 @@ For more information about organization management, see the [Managing Multiple O
 
 A common question from MSP partners is whether separate Datadog orgs should be set up to manage development, test, and production resources in environments.
 
-Datadog does not recommend separating development, test, and production resources. The recommended approach is to manage all resources in the same Datadog organization and delineate the environments through tags. For more information, see [Tagging strategy](data-intake/#tagging-strategy).
+Datadog does not recommend separating development, test, and production resources. The recommended approach is to manage all resources in the same Datadog organization and delineate the environments through tags. For more information, see [Tagging strategy][20].
 
 ## Client org provisioning options
 
@@ -171,3 +171,4 @@ The next part of the guide, [Data Intake][17], focuses on feeding data into Data
 [17]: /partners/data-intake/
 [18]: /api/latest/organizations/#create-a-child-organization
 [19]: /api/latest/organizations/#spin-off-child-organization
+[20]: /partners/data-intake/#tagging-strategy
