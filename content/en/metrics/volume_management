@@ -15,17 +15,33 @@ further_reading:
 ## Overview
 Cloud-based applications can generate massive amounts of data. And as your organization or business scales, you'll naturally have more teams that want and need to submit more data to provide better coverage of how your business is doing. But this growth can be daunting and uncontrollable for organizations; especially core observability teams within these organizations that are responsible for managing their organization's overall observability spend and responsible for resolving sudden spikes and overages to not burn through their budget. Observability costs are becoming a significant budget item but the core observability team does not have visibility into what is truly valuable to each individual engineering team. Meanwhile, even though the teams creating the data are promoting a culture of deep observability, they have limited insights into the costs of the metrics/tags they're submitting; therefore, they're less incentivized to be proactive in controlling this growth.
 
-It is crucial for everyone to have visibility into their usage and feel empowered to take ownership of managing those volumes and associated costs. Datadog recognizes that not all your metrics are equally valuable at every moment, so we were the first in the industry to introduce Datadog's Metrics without LimitsTM which provides you flexibility by decoupling metric ingestion from indexing; allowing you to configure metrics to reduce costs through aggregation while preserving the mathematical accuracy of your configured metrics (all within our platform without any code-level changes). But it is also critical to balance the use of Metrics without Limits to reduce costs of metrics with the value those metrics may bring to your organization. 
+It is crucial for everyone to have visibility into their usage and feel empowered to take ownership of managing those volumes and associated costs. Datadog recognizes that not all your metrics are equally valuable at every moment, so we were the first in the industry to introduce Datadog's Metrics without LimitsTM [link] which provides you flexibility by decoupling metric ingestion from indexing; allowing you to configure metrics to reduce costs through aggregation while preserving the mathematical accuracy of your configured metrics (all within our platform without any code-level changes). But it is also critical to balance the use of Metrics without Limits to reduce costs of metrics with understanding of value those metrics may bring to your organization. 
 
-Datadog's Metrics Volume Management page provides an out-of-the-box view of both your custom metrics' value, volume and costs in real-time so any developer in your organization can quickly identify the root causes of any volume spikes, which impact your bill, and be empowered to remediate those potentially inadvertent spikes faster without sacrificing the core observability that your teams' rely on. 
+Datadog's Metrics Volume Management page [link] (beta banner here)  provides an out-of-the-box view of both your custom metrics' value, volume and therefore, costs in real-time so any developer in your organization can quickly identify the root causes of any volume spikes, which impact your bill, and be empowered to remediate those potentially inadvertent spikes faster without sacrificing the core observability that your teams' rely on. 
 
 This volume management page provides all users real-time answers to the following questions: 
   - Which metric names are causing my custom metrics bill to spike? 
   - What are my organization's largest custom metrics?
   - Are these high cardinality custom metric names actually queried and valuable to my team? 
   - What metric names have spiked recently in the past timeframe of my choosing? (i.e. past day or month) 
-  - I'm on `team:X` and responsible for optimizing my team's metrics based on internal chargebacks - which metrics should I focus my cost-optimization efforts on? 
+  - I'm on `team:X` and responsible for optimizing my team's metrics based on internal chargebacks - which metrics do I own? 
+- I'm on `team:X` and responsible for optimizing my team's metrics based on internal chargebacks -  which ones should I focus my cost-optimization efforts on? 
   - How can my team better utilize our existing metrics to get more value from our observability spend?
+
+{{< img src="metrics/volume/overview.jpg" alt="Metrics Volume Management Page" style="width:75%;">}}
+
+## Identifying drivers of your account's custom metrics bill spikes 
+As a quick refresher, insights on your overall account's usage and monthly bill for custom metrics can viewed on the Plan&Usage page [link], such as your monthly Custom Metrics usage, costs, burn rate and Top Custom Metrics. The Usage Attribution feature [] also provides a breakdown of your overall account's bill by any arbitrary dimension of your choosing; for example, team:X emits a volume of 10K custom metrics. However, as we stated earlier, all developers should have visibility into which metrics are driving their bill spikes in real-time and feel confident that their cost optimization efforts won't sacrifice another team's visibility. 
+
+Therefore, the Metrics Volume Management page provides all users (not just ones with Admin roles) with real-time, OOTB insights such as: 
+- Top 500 Metric Names by Estimated Real-time Cardinality -- Quickly identify the top 500 metric names by cardinality/volume by clicking on the "Est. Custom Metrics" 
+- Top 500 Metric Names by Change in Volume -- Quickly discover the top 500 metric names that have the greatest variance in their cardinality -- these metrics may have anomalously (potentially unintentionally) spiked in the timeframe of your choosing. If you've received an alert on your account's estimated real-time custom metrics usage, you can use this to quickly pinpoint the culprits tied to that spike. 
+
+## Understanding whether these metrics provide value to your organization 
+Now that you've identified your largest metrics or spiking metric names likely causing your account's custom metric spike, you'll need to understand the utility of this data in order to safely use Metrics without Limits to effectively reduce the costs of those metric names. 
+
+
+
 
 ------------ copied from Metrics Summary --------
 ## Facet panel
