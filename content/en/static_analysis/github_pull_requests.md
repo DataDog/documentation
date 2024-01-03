@@ -16,17 +16,18 @@ The comment includes the name, ID, severity, category, and description of the vi
 
 ## Set up Static Analysis for GitHub pull requests
 
-### Prerequisites
-
-The [GitHub integration][2] must be installed.
-
 ### Enable Static Analysis on Datadog
 
 To use Datadog Static Analysis, add the appropriate configuration files to your repository, as described in the [Static Analysis setup instructions][1].
 
 ### Configure a GitHub App
 
-To use Static Analysis on GitHub, you can update an existing GitHub App or create a new one.
+To use Static Analysis on GitHub, you can do one of the following:
+
+- Create a GitHub App on Datadog
+- Update an existing GitHub App, if you have already created one on Datadog
+
+The permissions you grant to the GitHub App determine which [GitHub integration][2] features are available for setup.
 
 #### Create and install a new GitHub App
 
@@ -48,7 +49,7 @@ To use Static Analysis on GitHub, you can update an existing GitHub App or creat
 1. On the **Features** tab, look at the **Static Analysis: Pull Request Comments** section to determine whether your GitHub App needs additional permissions. If so, click **Update permissions in GitHub** to edit the app settings.
 1. Under **Repository permissions**, set the **Pull Requests** access to **Read and write**.
 {{< img src="ci/static-analysis-pr-read-write-permissions.png" alt="The dropdown for the pull request read and write permission" style="width:90%;" >}}
-1. Under the **Subscribe to events** heading, check the **Pull request review comment** box.
+1. Under the **Subscribe to events** heading, check the **Pull request** box.
 {{< img src="ci/static-analysis-pr-review-comment.png" alt="The checkbox for the pull request review comment permission" style="width:90%;" >}}
 
 ### Enable Static Analysis PR comments for your repositories
