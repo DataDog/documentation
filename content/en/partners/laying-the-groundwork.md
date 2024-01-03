@@ -39,6 +39,7 @@ A common question from MSP partners is whether separate Datadog orgs should be s
 Datadog does not recommend separating development, test, and production resources. The recommended approach is to manage all resources in the same Datadog organization and delineate the environments through tags. For more information, see [Tagging strategy](#tagging-strategy).
 
 ## Client org provisioning options
+
 If you are managing your clients' Datadog org(s), you may want to control the org provisioning process. Doing so will allow you to carry out administrative functions in the org (such as provisioning new users, setting up access methods, defining role-based access, and managing client usage).
 
 1. Create a child organization under your parent account
@@ -48,35 +49,41 @@ If you are managing your clients' Datadog org(s), you may want to control the or
 5. Create a new child organization under the organization created in step 1 above
 
 Following this procedure will produce the following outcomes:
+
 - a new parent organization is created for the purpose of managing one or more child organizations for your new client
 - the new parent organization and client child organization will be registered and attached to a billing contract
 - you will be able to provision new users, configure their access methods, define role-based access, and manage the usage for your new client child organization
 
 ### Create a child organization under your parent account
-There are two options for this step:
-    - via UI: Click “New Organization” as described in [Managing Multiple Organization Accounts][1].
-    - via API: Use the [Create a child organization][18]”) endpoint.
 
+There are two options for this step:
+
+- via UI: Click “New Organization” as described in [Managing Multiple Organization Accounts][1].
+- via API: Use the [Create a child organization][18]”) endpoint.
 
 ### Retrieve the new client org's OrgID
+
 You can retrieve the OrgId of the Datadog org you are currently logged into by opening the browser's Javascript console and typing:
 
-`JSON.parse(document.querySelector('#_current_user_json').value).org.id`
+  `JSON.parse(document.querySelector('#_current_user_json').value).org.id`
 
 You can also create a bookmark named Get Datadog OrgId whose content is the following Javascript function:
-```javascript:(function() {var orgId = JSON.parse(document.querySelector('#_current_user_json').value).org.id; alert("Datadog OrgId is " + orgId);})();```
+
+  ```javascript:(function() {var orgId = JSON.parse(document.querySelector('#_current_user_json').value).org.id; alert("Datadog OrgId is " + orgId);})();```
 
 Then, when you are on a Datadog page, click on the bookmark to have the current OrgId displayed in a browser Alert Box.
 
 ### Separate the new child organization from your parent account
+
 There are two options for this step:
     - Self-service: Use the [Spin-off Child Organization][19] API endpoint to make the new organization a standalone parent org.
     - Assisted: Contact your Partner Sales Manager to remove the new organization from your parent account.
 
 ### Register the new client details in the DPN portal
 
-1. Log in to the [DPN portal][16] and in the click `+Register Deal` on the Deal Dashboard.
-2. Enter the new client details including the new client organization OrgID to register the new client org.
+- Log in to the [DPN portal][16] and in the click `+Register Deal` on the Deal Dashboard.
+
+- Enter the new client details including the new client organization OrgID to register the new client org.
 
 ### Create a new child organization under the organization created in step 1 above
 
@@ -96,12 +103,14 @@ For more information, see [Custom sub-domains][4]).
 Experience shows that both MSP-internal and client users often do not fall clearly into one of the three [Datadog default roles][5]. It's a good practice to create custom roles to limit user permissions in certain areas.
 
 For more information, see:
+
 - [Custom roles][6]
 - [Role Based Access Control][7]
 
 ## Single sign-on (SSO) considerations
 
 In a service provider context, you have two considerations for single sign-on (SSO):
+
 - Single sign-on for your organization
 - Single sign-on for your clients
 
@@ -110,6 +119,7 @@ Besides the obvious advantage of a unified authentication mechanism, using SAML 
 SAML authentication is enabled on a Datadog organization or sub-org, meaning you can have different SAML providers for different sub-orgs. However, this also means that if you have two groups of users with different SAML providers, those users have to be in separate orgs. Make sure you think about SAML authentication when planning your multi-organization setup.
 
 For more information, see:
+
 - [Set up SAML][8] for multiple-organization accounts
 - [Single sign-on with SAML][9]
 
