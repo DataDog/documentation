@@ -38,7 +38,7 @@ To get started, select your platform and follow the installation instructions:
 
 View all jobs across cloud accounts and workspaces. See CPU allocation, cost estimation, and other metrics to identify opportunities for optimization.
 
-{{< img src="data_jobs/djm_joblist.png" alt="Job list - CPU breakdown" style="width:100%;" >}}
+{{< img src="data_jobs/djm_demolist.png" alt="Job list - CPU breakdown" style="width:100%;" >}}
 
 ### Analyze and troubleshoot individual jobs
 
