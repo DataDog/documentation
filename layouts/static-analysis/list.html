@@ -137,7 +137,7 @@
                     const logoValue = this.lang_aliases[value.toLowerCase()]?.logo ?? value
                     const displayValue = this.lang_aliases[value.toLowerCase()]?.name ?? value
                     this.filterTypes[key].push(`${displayValue},https://static.datadoghq.com/static/images/logos/${logoValue.toLowerCase()}_avatar.svg`)
-                } else {
+                } else if (key != 'languages'){
                     this.filterTypes[key]?.push(value)
                 }
             })
