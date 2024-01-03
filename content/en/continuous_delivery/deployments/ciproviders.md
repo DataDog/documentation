@@ -58,6 +58,7 @@ Specify that the CI job executes a deployment to the `prod` environment of versi
 ```shell
 export DD_BETA_COMMANDS_ENABLED=1
 export DD_API_KEY="<YOUR_API_KEY>"
+export DD_SITE={{< region-param key="dd_site" >}}
 
 datadog-ci deployment mark --env prod --revision 1.0.0
 ```
@@ -67,6 +68,7 @@ Specify that the CI job performs a rollback deployment to the `prod` environment
 ```shell
 export DD_BETA_COMMANDS_ENABLED=1
 export DD_API_KEY="<YOUR_API_KEY>"
+export DD_SITE={{< region-param key="dd_site" >}}
 
 datadog-ci deployment mark --env prod --is-rollback
 ```
@@ -76,6 +78,7 @@ Specify that the CI job executes a deployment to the `prod` environment and add 
 ```shell
 export DD_BETA_COMMANDS_ENABLED=1
 export DD_API_KEY="<YOUR_API_KEY>"
+export DD_SITE={{< region-param key="dd_site" >}}
 
 datadog-ci deployment mark --env prod --tags team:backend --tags reason:scheduled
 ```
