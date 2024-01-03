@@ -26,7 +26,7 @@ Live Process Monitors are recommended for the following use cases:
 - Ensure that enough instances of a non-containerized long-lived process are running.
 - Flag when a specific process is running.
 
-Note that only long lived processes are picked up by the Agent. This means that monitors on processes that live for less than 20 seconds may be flaky.
+**Note**: Only long lived processes are picked up by the Agent. This means that monitors on processes that live for less than 20 seconds may be flaky.
 
 ## Monitor creation
 
@@ -46,7 +46,7 @@ Filter processes to monitor by their tags. Datadog recommends that you first try
 
 #### Full text search
 
-If you cannot scope processes down to the granularity you would like using tags, it is possible to filter processes by their commandline. The full text search field performs a partial match, fuzzy search across all processes on your infrastructure. Search operators `AND`, `OR`, `NOT` are supported. See the [Live Process Monitoring][3] page for more details.
+If you cannot scope processes down to the granularity you would like using tags, you can use text search to filter against both commandlines and username. The full text search field performs a partial match, fuzzy search across all processes on your infrastructure. Search operators `AND`, `OR`, `NOT` are supported. See the [Live Process Monitoring][3] page for more details.
 
 ##### Examples
 
@@ -69,13 +69,15 @@ If you cannot scope processes down to the granularity you would like using tags,
 - The count was `above`, `above or equal to`, `below`, or `below or equal to`
 - the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, or larger. Additionally, you can use `custom` to set a value between 5 minutes and 24 hours.
 
+Process Count in this case, refers to the number of all matching processes that were alive during the time interval.
+
 Use thresholds to set a numeric value for triggering an alert. Datadog has two types of notifications (alert and warning). Live Process Monitors recover automatically based on the alert or warning threshold.
 
 #### Best practices for timeframe selection
 
 Datadog recommends to pick the largest timeframe that you can support. This allows for additional fault tolerance in the case where an Agent becomes unavailable or encounters network issues.
 
-Live Process Monitors uses a [rolling time](https://docs.datadoghq.com/monitors/configuration/?tab=thresholdalert#evaluation-window) windows to evaluate process count. In other words, every minute, the monitor checks the past X minutes and triggers if the alerting condition is met. It’s recommended to not use evaluation windows shorter than 5 minutes in case there is any sporadic network disruption between the Process Agent and Datadog.
+Live Process Monitors uses a [rolling time](https://docs.datadoghq.com/monitors/configuration/?tab=thresholdalert#evaluation-window) window to evaluate process count. In other words, every minute, the monitor checks the past X minutes and triggers if the alerting condition is met. It's recommended to not use evaluation windows shorter than 5 minutes in case there is any sporadic network disruption between the Process Agent and Datadog.
 
 ### Advanced alert conditions
 
