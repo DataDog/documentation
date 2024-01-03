@@ -687,7 +687,7 @@ track_custom_event(tracer, event_name, metadata)
 
 If your service has ASM enabled and [Remote Config configured][1], you may create a custom WAF rule that'll flag any request it matches with a custom business logic tag. This doesn't require any modification to your application, and can be done entirely from Datadog.
 
-To get started, navigate to the (Custom WAF Rule page)[2] and click on "Create New Rule".
+To get started, navigate to the [Custom WAF Rule page][2] and click on "Create New Rule".
 
 {{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Access the Custom WAF Rule Menu from the ASM homepage by clicking on Protection, then In-App WAF and Custom Rules" style="width:100%;" >}}
 
