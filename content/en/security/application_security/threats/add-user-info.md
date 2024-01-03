@@ -693,7 +693,7 @@ To get started, navigate to the (Custom WAF Rule page)[2] and click on "Create N
 
 This will open a menu in which you may define your custom WAF rule. By selecting the "Business Logic" category, you will be able to configure an event type (for instance, `users.password_reset`). You can then select the service you want to track, and a specific endpoint. You may also use the rule condition to target a specific parameter to identify the codeflow you want to "instrument". When the condition match, the library will tag the trace and flag it to be forwarded to ASM. If you don't need the condition, you may set a very broad condition to match everything.
 
-{{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Screenshot of the form that appear when you click on the Create New Rule button style="width:100%;" >}}
+{{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Screenshot of the form that appear when you click on the Create New Rule button" style="height:100%;" >}}
 
 Once saved, the rule will be deployed to instances of the service with Remote Config enabled.
 
