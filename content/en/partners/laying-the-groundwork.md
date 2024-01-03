@@ -85,7 +85,7 @@ There are two options for this step:
 
 ### Register the new client details in the DPN portal
 
-- Log in to the [DPN portal][16] and in the click `+Register Deal` on the Deal Dashboard.
+- Log in to the [DPN portal][16] and click `+Register Deal` on the Deal Dashboard.
 
 - Enter the new client details including the new client organization OrgID to register the new client org.
 
