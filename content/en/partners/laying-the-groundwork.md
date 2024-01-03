@@ -71,7 +71,7 @@ You can retrieve the ID of the Datadog org you are logged into by opening the br
 
   `JSON.parse(document.querySelector('#_current_user_json').value).org.id`
 
-You can also create a bookmark named Get Datadog OrgId whose content is the following Javascript function:
+You can also create a bookmark named `Get Datadog OrgId` which contains the following JavaScript function:
 
   ```javascript:(function() {var orgId = JSON.parse(document.querySelector('#_current_user_json').value).org.id; alert("Datadog OrgId is " + orgId);})();```
 
