@@ -40,13 +40,13 @@ Datadog does not recommend separating development, test, and production resource
 
 ## Client org provisioning options
 
-If you are managing your clients' Datadog org(s), you may want to control the org provisioning process. Doing so will allow you to carry out administrative functions in the org (such as provisioning new users, setting up access methods, defining role-based access, and managing client usage).
+If you are managing your clients' Datadog org(s), you may want to control the org provisioning process. Doing so allows you to carry out administrative functions in the org (such as provisioning new users, setting up access methods, defining role-based access, and managing client usage).
 
 1. Create a child organization under your parent account
 2. Retrieve the new child organization's OrgID
 3. Separate the new child organization from your parent account
 4. Register the new client details in the DPN portal
-5. Create a new child organization under the organization created in step 1 above
+5. Create a child organization under the organization created in step 1 above
 
 Following this procedure will produce the following outcomes:
 
@@ -58,8 +58,8 @@ Following this procedure will produce the following outcomes:
 
 There are two options for this step:
 
-- via UI: Click “New Organization” as described in [Managing Multiple Organization Accounts][1].
-- via API: Use the [Create a child organization][18]”) endpoint.
+- Use the UI: Click "New Organization" as described in [Managing Multiple Organization Accounts][1].
+- Use the API: Use the [Create a child organization][18]”) endpoint.
 
 ### Retrieve the new client org's OrgID
 
@@ -88,7 +88,7 @@ There are two options for this step:
 ### Create a new child organization under the organization created in step 1 above
 
 1. Switch to the org created in step 1 above
-2. Create a new client child organization following the instructions in step 1 above
+2. Create a client child organization following the instructions in step 1 above
 
 ## Custom subdomains
 
