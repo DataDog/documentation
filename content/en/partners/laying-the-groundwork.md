@@ -46,11 +46,11 @@ If you are managing your clients' Datadog org(s), you may want to control the or
 
 To do so:
 
-1. Create a child organization under your parent account
-2. Retrieve the new child organization's OrgID
-3. Separate the new child organization from your parent account
-4. Register the new client details in the DPN portal
-5. Create a child organization under the organization created in step 1 above
+1. Create a child organization under your parent account.
+2. Retrieve the new child organization's Org ID.
+3. Separate the new child organization from your parent account.
+4. Register the new client details in the DPN portal.
+5. Create a child organization under the organization created in Step 1 above.
 
 Following this procedure produces the following outcomes:
 
