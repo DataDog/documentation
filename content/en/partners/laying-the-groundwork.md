@@ -10,13 +10,15 @@ This part of the guide covers the key decisions you should make at the very begi
 ## Key considerations for managed service providers
 
 The way you as a service provider get started with Datadog depends on your business model and your operational model:
+
 - **Business model**: A key question to answer is whether you are planning on giving your clients their own access to Datadog or not. If you do choose to give clients access to Datadog, set up a multi-organization account to keep client data separate and private.
 - **Operational model**: Another key consideration is whether your client base consists of many homogeneous clients, where programmatic management of many similar-looking Datadog organizations is more important, or whether your clients are fewer or more heterogeneous.
+
 Having considered the above, you are ready to lay the groundwork for your MSP setup with Datadog.
+
 ## Prerequisites
 
-Before working on implementing Datadog as a service provider, it is recommended that you complete the
-<a href="https://partners.datadoghq.com/prm/English/c/technical_content" target="_blank">Datadog Technical Specialist training</a>.
+Before working on implementing Datadog as a service provider, it is recommended that you complete the [Datadog Technical Specialist training][16] in the DPN portal.
 
 The training and certification familiarize you with many of the topics covered in the next chapters, enabling you to get started immediately.
 
@@ -36,7 +38,7 @@ For more information about organization management, see the [Managing Multiple O
 
 A common question from MSP partners is whether separate Datadog orgs should be set up to manage development, test, and production resources in environments.
 
-Datadog does not recommend separating development, test, and production resources. The recommended approach is to manage all resources in the same Datadog organization and delineate the environments through tags. For more information, see [Tagging strategy](#tagging-strategy).
+Datadog does not recommend separating development, test, and production resources. The recommended approach is to manage all resources in the same Datadog organization and delineate the environments through tags. For more information, see [Tagging strategy](data-intake/#tagging-strategy).
 
 ## Client org provisioning options
 
@@ -48,11 +50,11 @@ If you are managing your clients' Datadog org(s), you may want to control the or
 4. Register the new client details in the DPN portal
 5. Create a child organization under the organization created in step 1 above
 
-Following this procedure will produce the following outcomes:
+Following this procedure produces the following outcomes:
 
 - a new parent organization is created for the purpose of managing one or more child organizations for your new client
-- the new parent organization and client child organization will be registered and attached to a billing contract
-- you will be able to provision new users, configure their access methods, define role-based access, and manage the usage for your new client child organization
+- the new parent organization and client child organization is registered and attached to a billing contract
+- you are able to provision new users, configure their access methods, define role-based access, and manage the usage for your new client child organization
 
 ### Create a child organization under your parent account
 
@@ -71,7 +73,7 @@ You can also create a bookmark named Get Datadog OrgId whose content is the foll
 
   ```javascript:(function() {var orgId = JSON.parse(document.querySelector('#_current_user_json').value).org.id; alert("Datadog OrgId is " + orgId);})();```
 
-Then, when you are on a Datadog page, click on the bookmark to have the current OrgId displayed in a browser Alert Box.
+Then, when you are on a Datadog page, click on the bookmark to display the current OrgId in a browser Alert Box.
 
 ### Separate the new child organization from your parent account
 
