@@ -43,9 +43,9 @@ Click **Add another span query** to add a span query and use it in the trace que
 
 ### Trace query operators
 
-Combine multiple span queries, labeled `a`, `b`, `c`, and so on, into a trace query in the **Traces where spans** field, using operators between the letters that represent each span query:
+Combine multiple span queries, labeled `a`, `b`, `c`, and so on, into a trace query in the **Traces matching** field, using operators between the letters that represent each span query:
 
-{{< img src="/tracing/trace_queries/joined_span_queries.png" alt="Span queries combined into a trace query" style="width:50%;" >}}
+{{< img src="/tracing/trace_queries/traces_matching.png" alt="Span queries combined into a trace query" style="width:50%;" >}}
 
 | Operator | Description | Example |
 |-----|-----|-----|
@@ -54,7 +54,12 @@ Combine multiple span queries, labeled `a`, `b`, `c`, and so on, into a trace qu
 | `->` | **Indirect relationship**: Traces that contain a span matching the left query that is upstream of spans matching the right query | Traces where the service `checkoutservice` is upstream of the service `quoteservice`: <br/>`service:checkoutservice -> service:quoteservice` |
 | `=>` | **Direct relationship**: Traces that contain a span matching the left query that is the direct parent of a span matching the right query | Traces where the service `checkoutservice` is directly calling the service `shippingservice`: <br/>`service:checkoutservice => service:shippingservice` |
 
-### Trace Level filters
+### Trace-level filters
+
+Filter the result set of traces further by applying filters on trace-level attributes like the number of spans or the end-to-end duration of the trace in the  **Where** statement:
+
+{{< img src="/tracing/trace_queries/where_statement.png" alt="Trace-level filters example" style="width:100%;" >}}
+
 
 | Filter | Description | Example |
 |-----|-----|-----|
