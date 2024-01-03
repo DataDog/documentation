@@ -26,7 +26,7 @@ One of the key decisions for a service provider to make is how to set up client 
 
 ### Single-organization or multiple-organization
 
-Datadog offers the possibility of managing multiple child organizations from one parent organization. This is the typical deployment model used by MSPs to prevent clients from having access to each others' data. In a multi-org setup, one child organization is created for each client, and the client is restricted to their own child organization. 
+Datadog offers the possibility of managing multiple child organizations from one parent organization. This is the typical deployment model used by MSPs to prevent clients from having access to each others' data. In a multi-org setup, one child organization is created for each client, and the client is restricted to their own child organization. See **Client org provisioning options** below for more information.
 
 Use a single-org setup if you have no plans to give your clients access to Datadog and do not have a strict requirement to separate client data.
 
@@ -38,17 +38,62 @@ A common question from MSP partners is whether separate Datadog orgs should be s
 
 Datadog does not recommend separating development, test, and production resources. The recommended approach is to manage all resources in the same Datadog organization and delineate the environments through tags. For more information, see [Tagging strategy](#tagging-strategy).
 
+## Client org provisioning options
+If you are managing your clients' Datadog org(s), you may want to control the org provisioning process. Doing so will allow you to carry out administrative functions in the org (such as provisioning new users, setting up access methods, defining role-based access, and managing client usage).
+
+1. Create a child organization under your parent account
+2. Retrieve the new child organization's OrgID
+3. Separate the new child organization from your parent account
+4. Register the new client details in the DPN portal
+5. Create a new child organization under the organization created in step 1 above
+
+Following this procedure will produce the following outcomes:
+- a new parent organization is created for the purpose of managing one or more child organizations for your new client
+- the new parent organization and client child organization will be registered and attached to a billing contract
+- you will be able to provision new users, configure their access methods, define role-based access, and manage the usage for your new client child organization
+
+### Create a child organization under your parent account
+There are two options for this step:
+    - via UI: Click “New Organization” as described in [Managing Multiple Organization Accounts][1].
+    - via API: Use the [Create a child organization][18]”) endpoint.
+
+
+### Retrieve the new client org's OrgID
+You can retrieve the OrgId of the Datadog org you are currently logged into by opening the browser's Javascript console and typing:
+
+`JSON.parse(document.querySelector('#_current_user_json').value).org.id`
+
+You can also create a bookmark named Get Datadog OrgId whose content is the following Javascript function:
+```javascript:(function() {var orgId = JSON.parse(document.querySelector('#_current_user_json').value).org.id; alert("Datadog OrgId is " + orgId);})();```
+
+Then, when you are on a Datadog page, click on the bookmark to have the current OrgId displayed in a browser Alert Box.
+
+### Separate the new child organization from your parent account
+There are two options for this step:
+    - Self-service: Use the [Spin-off Child Organization][19] API endpoint to make the new organization a standalone parent org.
+    - Assisted: Contact your Partner Sales Manager to remove the new organization from your parent account.
+
+### Register the new client details in the DPN portal
+
+1. Log in to the [DPN portal][16] and in the click `+Register Deal` on the Deal Dashboard.
+2. Enter the new client details including the new client organization OrgID to register the new client org.
+
+### Create a new child organization under the organization created in step 1 above
+
+1. Switch to the org created in step 1 above
+2. Create a new client child organization following the instructions in step 1 above
+
 ## Custom subdomains
 
 To improve your Datadog experience when handling a large number of organizations, use the custom subdomain feature.
 
-By default, any Datadog organization is accessed through Datadog's access pages, [https://app.datadoghq.com][2] and [https://app.datadoghq.eu][3]. However, custom subdomains can provide a unique URL for each sub-organization. For example, `https://account-a.datadoghq.com`. 
+By default, any Datadog organization is accessed through Datadog's access pages, [https://app.datadoghq.com][2] and [https://app.datadoghq.eu][3]. However, custom subdomains can provide a unique URL for each sub-organization. For example, `https://account-a.datadoghq.com`.
 
 For more information, see [Custom sub-domains][4]).
 
 ## User roles and custom role-based access control (RBAC)
 
-Experience shows that both MSP-internal and client users often do not fall clearly into one of the three [Datadog default roles][5]. It's a good practice to create custom roles to limit user permissions in certain areas. 
+Experience shows that both MSP-internal and client users often do not fall clearly into one of the three [Datadog default roles][5]. It's a good practice to create custom roles to limit user permissions in certain areas.
 
 For more information, see:
 - [Custom roles][6]
@@ -87,7 +132,7 @@ Here are some useful resources for users that prefer to have training on the mos
 - [Datadog's YouTube channel][13]: With introduction videos posted whenever new features are released as well as videos on Tips & Tricks and Best Practices, Datadog's YouTube channel is a great source for high-level training.
 - [Datadog Learning Center][14]: The Datadog Learning Center is a great way for users to get to know the platform in-depth. When signing up for the Learning Center, a Datadog sandbox environment is automatically provisioned free of charge, allowing users to play around with the product without fear of breaking anything.
 - [The Datadog Blog][15]: With over 700 entries, the blog is a key source of information on how to use Datadog to monitor key services, tools, and technologies in your client environments, as well as information on the latest product releases.
-- [Datadog Partner Network (DPN) Enablement Center][16]: Through the DPN, Datadog service provider partners have access to a series of video courses for service provider salespeople and technical professionals.
+- [Datadog Partner Network (DPN) Enablement Center][16]: Through the DPN, Datadog partners have access to a series of video courses for service provider salespeople and technical professionals.
 
 Reach out to your Datadog partner representative if you plan on building your own training material for your clients and have any recommendations on what content would be helpful.
 
@@ -112,3 +157,5 @@ The next part of the guide, [Data Intake][17], focuses on feeding data into Data
 [15]: https://www.datadoghq.com/blog/
 [16]: https://partners.datadoghq.com/
 [17]: /partners/data-intake/
+[18]: /api/latest/organizations/#create-a-child-organization
+[19]: /api/latest/organizations/#spin-off-child-organization
