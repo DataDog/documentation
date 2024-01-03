@@ -13,7 +13,13 @@ cascade:
         subcategory: Metrics Guides
 ---
 
-{{< whatsnext desc="General guides:" >}}
+{{< whatsnext desc="Metric Submission" >}}
+    {{< nextlink href="/metrics/guide/micrometer" >}}Send metrics with Micrometer{{< /nextlink >}}
+{{< /whatsnext >}}
+
+<br> 
+
+{{< whatsnext desc="Querying Metrics:" >}}
     {{< nextlink href="metrics/guide/different-aggregators-look-same/" >}}Switching between the sum/min/max/avg aggregators doesn't change the value{{< /nextlink >}}
     {{< nextlink href="metrics/guide/calculating-the-system-mem-used-metric/" >}}Calculating the system.mem.used metric{{< /nextlink >}}
     {{< nextlink href="metrics/guide/interpolation-the-fill-modifier-explained/" >}}Interpolation and the fill modifier{{< /nextlink >}}
@@ -22,7 +28,9 @@ cascade:
     {{< nextlink href="logs/guide/manage_logs_and_metrics_with_terraform" >}}Manage Logs and Metrics with Terraform{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Custom metrics guides:" >}}
-    {{< nextlink href="/observability_pipelines/guide/custom-metrics-governance" >}}Custom Metrics Governance{{< /nextlink >}}
-    {{< nextlink href="/metrics/guide/micrometer" >}}Send metrics with Micrometer{{< /nextlink >}}
+<br>
+
+{{< whatsnext desc="Metrics Without Limits™" >}}
+    {{< nextlink href="/observability_pipelines/guide/custom-metrics-governance" >}}<u>Custom Metrics Governance</u> - Learn how to use Observability Pipelines to filter/transform your metrics data pre-ingestion{{< /nextlink >}}
+    {{< nextlink href="/observability_pipelines/guide/custom-metrics-governance" >}}<u>Metrics Without Limits™</u> - Learn how to control custom metrics volumes and costs with Metrics without Limits {{< /nextlink >}}
 {{< /whatsnext >}}
