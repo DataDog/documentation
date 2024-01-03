@@ -28,7 +28,12 @@ CSM Threats supports the following Linux distributions:
 | [Helm Chart][103]            | v3.49.6 or later (Kubernetes only)      |
 | [containerd][104]              | v1.5.6 or later (Kubernetes and hosts only)|
 
-**Note**: CSM Vulnerabilities is not available for CRI-O runtime, Windows, or AWS Fargate environments.
+**Note**: CSM Vulnerabilities is **not** available for the following environments:
+
+  - Windows
+  - AWS Fargate 
+  - CRI-O runtime
+  - podman runtime
 
 ### CSM Identity Risks
 

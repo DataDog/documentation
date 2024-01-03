@@ -4,6 +4,11 @@ kind: documentation
 aliases:
   - /security_platform/cloud_workload_security/troubleshooting/
   - /security_platform/cloud_security_management/troubleshooting/
+  - /security/cloud_security_management/troubleshooting/
+further_reading:
+- link: "/security/cloud_security_management/troubleshooting/vulnerabilities"
+  tag: "Documentation"
+  text: "Troubleshooting CSM Vulnerabilities"
 ---
 
 ## Security Agent flare
@@ -76,5 +81,8 @@ datadog:
 ```bash
 DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=false
 ```
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7
