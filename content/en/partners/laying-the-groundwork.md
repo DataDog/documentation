@@ -61,7 +61,7 @@ Following this procedure produces the following outcomes:
 There are two options for this step:
 
 - Use the UI: Click "New Organization" as described in [Managing Multiple Organization Accounts][1].
-- Use the API: Use the [Create a child organization][18]”) endpoint.
+- Use the API: Use the [Create a child organization][18] endpoint.
 
 ### Retrieve the new client org's OrgID
 
