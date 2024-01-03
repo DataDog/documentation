@@ -49,7 +49,7 @@ With the following definitions:
 : The name of the metric (examples: `hits`, `errors`, `apdex`, `duration`). See the section below.
 
 `<TAGS>`
-: Trace metrics tags, possible tags are: `env`, `service`, `version`, `resource`, `http.status_code`, `http.status_class`, Datadog Agent tags (including the host and second primary tag). 
+: Trace metrics tags, possible tags are: `env`, `service`, `version`, `resource`, `http.status_code`, `http.status_class`, and Datadog Agent tags (including the host and second primary tag). 
 **Note:** Other tags set on spans are not available as tags on traces metrics.
 
 ## Metric suffix
@@ -93,7 +93,7 @@ With the following definitions:
 ### Apdex
 
 `trace.<SPAN_NAME>.apdex`
-: **Prerequisite:** This metric exists for any HTTP/WEB APM service.<br>
+: **Prerequisite:** This metric exists for any HTTP or web-based APM service.<br>
 **Description:** Measures the [Apdex][10] score for each web service.<br>
 **Metric type:** [GAUGE][7].<br>
 **Tags:** `env`, `service`, `resource` / `resource_name`, `version`, `synthetics`, and [the second primary tag][4].
