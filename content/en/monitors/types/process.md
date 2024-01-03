@@ -23,8 +23,10 @@ Live Process Monitors are based on data collected by the [Process Agent][1]. Cre
 
 Live Process Monitors are recommended for the following use cases:
 
-- Ensure that enough instances of a non-containerized process are running.
-- Flag when a specific process is running.
+- Ensure that enough instances of a non-containerized long-lived process are running.
+- Flag when a specific process is executed.
+
+Note that only long lived processes are picked up by the Agent. This means that monitors on processes that live for less than 20 seconds may be flaky.
 
 ## Monitor creation
 
@@ -73,7 +75,7 @@ Use thresholds to set a numeric value for triggering an alert. Datadog has two t
 
 Datadog recommends to pick the largest timeframe that you can support. This allows for additional fault tolerance in the case where an Agent becomes unavailable or encounters network issues.
 
-Live Process Monitors uses a [rolling time window](https://docs.datadoghq.com/monitors/configuration/?tab=thresholdalert#evaluation-window) to evaluate process count, e.g. the monitor triggers when the alerting condition is met in the past X minutes. It’s recommended to not use evaluation windows shorter than 5 minutes to prevent the monitor from triggering if there is any sporadic network disruption between the Process Agent and Datadog.
+Live Process Monitors uses a [rolling time](https://docs.datadoghq.com/monitors/configuration/?tab=thresholdalert#evaluation-window) windows to evaluate process count. In other words, every minute, the monitor checks the past X minutes and triggers if the alerting condition is met. It’s recommended to not use evaluation windows shorter than 5 minutes in case there is any sporadic network disruption between the Process Agent and Datadog.
 
 ### Advanced alert conditions
 
