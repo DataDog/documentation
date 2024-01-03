@@ -36,9 +36,7 @@ Follow these steps to enable Data Jobs Monitoring for Amazon EMR.
 
 ### Create and configure your EMR cluster
 
-When you create a new EMR cluster in the [Amazon EMR console][4], use the following configurations on the **Create Cluster** page:
-
-#### Add a bootstrap action to install the Datadog Agent and Java tracer
+When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstrap action on the **Create Cluster** page:
 
 1. Save [this init script][6] to an S3 bucket that your EMR cluster can read. Take note of the path to this script.
 1. On the **Create Cluster** page, find the **Bootstrap actions** section. Click **Add** to bring up the **Add bootstrap action** dialog.
@@ -53,20 +51,6 @@ When you create a new EMR cluster in the [Amazon EMR console][4], use the follow
    - Click **Add bootstrap action**.
 
 When your cluster is created, this bootstrap action installs the Datadog Agent and downloads the Java tracer on each node of the cluster.
-
-#### (For ARM) Add Java tracer configuration
-
-If you are using an ARM-based EC2 instance, add the following configuration on the **Create Cluster** page, under the **Software settings** section.
-
-   ```json
-   [{
-       "Classification": "spark-defaults",
-       "Properties": {
-       "spark.driver.defaultJavaOptions": "-javaagent:/var/tmp/jars/dd-java-agent.jar -Ddd.integration.spark.enabled=true -Ddd.integrations.enabled=false"
-       }
-   }]
-   ```
-   {{< img src="data_jobs/emr/software_settings.png" alt="Amazon EMR console, Create Cluster. A section called 'Software settings'. The 'Enter configuration' option is selected. Below it, a configuration is pasted into a text field." style="width:100%;" >}}
 
 ### Grant API access to your EMR EC2 instance profile
 
