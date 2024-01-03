@@ -124,7 +124,7 @@ For the reasons explained above, spans indexed by the intelligent retention filt
 [Trace Queries][11] are based on a **uniform 1% sample** of [ingested spans][12].
 
 {{< beta-callout url="#" btn_hidden="true">}}
-To join the Trace Queries private beta <a href="https://docs.google.com/forms/d/e/1FAIpQLSebVVIAUcWIW941Zc3aBcEgmgGq349qCGKDk3QSSC2-PM8Aeg/viewform?pli=1">fill out this form</a>. Spans used for queries are from a <a href="#the-data-that-trace-queries-are-based-on"><strong>uniform 1% sample</strong> of ingested spans</a>, not from your existing retention filters.
+To join the Trace Queries private beta, <a href="https://docs.google.com/forms/d/e/1FAIpQLSebVVIAUcWIW941Zc3aBcEgmgGq349qCGKDk3QSSC2-PM8Aeg/viewform?pli=1">fill out this form</a>. Spans used for queries are from a <a href="#the-data-that-trace-queries-are-based-on"><strong>uniform 1% sample</strong> of ingested spans</a>, not from your existing retention filters.
 {{< /beta-callout >}}
 
 {{< img src="tracing/trace_queries/trace_queries_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling" >}}
@@ -135,9 +135,9 @@ The flat 1% sampling is applied based on the `trace_id`, meaning that all spans 
 
 ### What is the impact of enabling 1% flat sampling?
 
-Spans indexed by the 1% sampling can also be queried/found in the [Trace Explorer][13].
+Spans indexed by the 1% sampling can also be queried and found in the [Trace Explorer][13].
 
-From the moment 1% flat sampling is enabled, the volume of indexed spans is going to increase. To find spans that are sampled by the 1% flat sampling, add the `retained_by:flat_sampled` query parameter in the Trace Explorer.
+After you enable 1% flat sampling, the volume of indexed spans is going to increase immediately. To find spans that are sampled by the 1% flat sampling, add the `retained_by:flat_sampled` query parameter in the Trace Explorer.
 
 {{< img src="tracing/trace_queries/flat_sampling.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling in Trace Explorer" >}}
 

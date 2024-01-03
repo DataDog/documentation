@@ -106,7 +106,7 @@ For example, if you query for traces that contain a span from the service `web-s
 {{< img src="tracing/trace_queries/trace_queries_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling" >}}
 
 
-Trace Queries are based on a **uniform 1% sample** of [ingested spans][3]. Read more about it [here][6]
+Trace Queries are based on a **uniform 1% sample** of [ingested spans][3]. To learn more, read [one percent flat sampling][6].
 
 The flat 1% sampling is applied based on the `trace_id`, meaning that all spans that belong to the same trace share the same sampling decision. Spans indexed by the 1% sampling can also be queried and found in the [Trace explorer][4].
 
