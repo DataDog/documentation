@@ -89,7 +89,7 @@ There are two options for this step:
 
 - Enter the new client details including the new client organization's Org ID to register the new client org.
 
-### Create a new child organization under the organization created in step 1 above
+### Create a new child organization under the organization created in Step 1 above
 
 1. Switch to the org created in Step 1 above.
 2. Create a client child organization following the instructions in Step 1 above.
