@@ -142,14 +142,49 @@ For each VM, the following information is displayed:
 
 #### Install
 
+You can install the Datadog Agent directly in Azure with the VM Extension and AKS Cluster Extension for your VM and AKS Cluster workloads, respectively.
+
+{{< tabs >}}
+{{% tab "VM Extension" %}}
+
 To install the Datadog Agent, select the appropriate VM, then click **Install Agent**. The portal asks for confirmation to install the Agent with the default key. Select **OK** to begin installation. Azure shows the status as `Installing` until the Agent is installed and provisioned. After the Datadog Agent is installed, the status changes to `Installed`.
 
+{{% /tab %}}
+{{% tab "AKS Cluster Extension" %}}
+
+To install the Datadog Agent with the AKS Cluster Extension: 
+1. Go to the [Azure Marketplace][2] and search for the `Datadog AKS Cluster Extension`. 
+2. Click **Create**, and follow the instructions in the tile.
+
+**Note**: You must provide valid [API and Application keys][1] to deploy the AKS Cluster Extension.
+
+{{< img src="integrations/azure/datadog_aks_extension.png" alt="The Datadog AKS Cluster Extension in the Azure Marketplace" responsive="true" style="width:90%;">}}
+
+[1]: /account_management/api-app-keys/
+[2]: https://portal.azure.com/#view/Microsoft_Azure_Marketplace/MarketplaceOffersBlade/selectedMenuItemId/home
+{{% /tab %}}
+{{< /tabs >}}
+
 #### Uninstall
+
+{{< tabs >}}
+{{% tab "VM Extension" %}}
 
 If the Datadog Agent was installed with the Azure VM extension, you can uninstall the Agent by selecting the appropriate VM, then click **Uninstall Agent**.
 
 If the Agent was installed using a different method, you can not use the Datadog resource to deploy or remove the Agent, but information about the Agent is still reflected on this page.
 
+{{% /tab %}}
+{{% tab "AKS Cluster Extension" %}}
+
+To uninstall the AKS Cluster Extension:
+
+1. Navigate to the AKS Cluster in Azure.
+2. Select **Extensions + applications** From the **Settings** menu on the left. 
+3. Select the extension and click **Uninstall**.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 [1]: https://us3.datadoghq.com/signup
 [2]: https://docs.datadoghq.com/integrations/guide/azure-portal/
