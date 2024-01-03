@@ -3615,6 +3615,7 @@ components:
           type: string
       required:
       - message
+      - hostname
       type: object
     HeatMapWidgetDefinition:
       description: The heat map visualization shows metrics aggregated across many
