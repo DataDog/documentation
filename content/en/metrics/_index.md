@@ -77,6 +77,26 @@ Metrics can be sent to Datadog from several places.
 
 For a summary of all metric submission sources and methods, read the [Metrics Types documentation][16].
 
+### Metric types and real-time metrics visibility
+
+#### Metric types
+
+Datadog supports several different metric types that serve distinct use cases: count, gauge, rate, histogram, and distribution. Metric types determine which graphs and functions are available to use with the metric in the app.
+
+The Datadog Agent doesn't make a separate request to Datadog's servers for every single data point you send. Instead, it reports values collected over a _flush time interval_. The metric's type determines how the values collected from your host over this interval are aggregated for submission.
+
+A **_count_** type adds up all the submitted values in a time interval. This would be suitable for a metric tracking the number of website hits, for instance.
+
+The **_rate_** type takes the count and divides it by the length of the time interval. This is useful if you're interested in the number of hits per second.
+
+A **_gauge_** type takes the last value reported during the interval. This type would make sense for tracking RAM or CPU usage, where taking the last value provides a representative picture of the host's behavior during the time interval. In this case, using a different type such as _count_ would probably lead to inaccurate and extreme values. Choosing the correct metric type ensures accurate data.
+
+A **_histogram_** reports five different values summarizing the submitted values: the average, count, median, 95th percentile, and max. This produces five different timeseries. This metric type is suitable for things like latency, for which it's not enough to know the average value. Histograms allow you to understand how your data was spread out without recording every single data point.
+
+A **_distribution_** is similar to a histogram, but it summarizes values submitted during a time interval across all hosts in your environment. You can also choose to report multiple percentiles: p50, p75, p90, p95, and p99. You can learn more about this powerful feature in the [Distributions documentation][19].
+
+See the [metrics types][16] documentation for more detailed examples of each metric type and submission instructions.
+
 ## Querying metrics
 
 You can visualize your metrics and create graphs throughout Datadog: in [Metrics Explorer][3], [Dashboards][4], or [Notebooks][5].
@@ -151,26 +171,6 @@ It's important to remember that time aggregation is _always_ applied in every qu
 Space aggregation splits a single metric into multiple timeseries by tags such as host, container, and region. For instance, if you wanted to view the latency of your EC2 instances by region, you would need to use space aggregation's grouping by functionality to combine each region's hosts.
 
 There are four aggregators that can be applied when using space aggregation: _sum_, _min_, _max_, and _avg_. Using the above example, say that your hosts are spread across four regions: us-east-1, us-east-2, us-west-1, and us-west-2. The hosts in each region need to be combined using an aggregator function. Using the _max_ aggregator would result in the maximum latency experienced across hosts in each region, while the _avg_ aggregator would yield the average latency per region.
-
-## Metric types and real-time metrics visibility
-
-### Metric types
-
-Datadog supports several different metric types that serve distinct use cases: count, gauge, rate, histogram, and distribution. Metric types determine which graphs and functions are available to use with the metric in the app.
-
-The Datadog Agent doesn't make a separate request to Datadog's servers for every single data point you send. Instead, it reports values collected over a _flush time interval_. The metric's type determines how the values collected from your host over this interval are aggregated for submission.
-
-A **_count_** type adds up all the submitted values in a time interval. This would be suitable for a metric tracking the number of website hits, for instance.
-
-The **_rate_** type takes the count and divides it by the length of the time interval. This is useful if you're interested in the number of hits per second.
-
-A **_gauge_** type takes the last value reported during the interval. This type would make sense for tracking RAM or CPU usage, where taking the last value provides a representative picture of the host's behavior during the time interval. In this case, using a different type such as _count_ would probably lead to inaccurate and extreme values. Choosing the correct metric type ensures accurate data.
-
-A **_histogram_** reports five different values summarizing the submitted values: the average, count, median, 95th percentile, and max. This produces five different timeseries. This metric type is suitable for things like latency, for which it's not enough to know the average value. Histograms allow you to understand how your data was spread out without recording every single data point.
-
-A **_distribution_** is similar to a histogram, but it summarizes values submitted during a time interval across all hosts in your environment. You can also choose to report multiple percentiles: p50, p75, p90, p95, and p99. You can learn more about this powerful feature in the [Distributions documentation][19].
-
-See the [metrics types][16] documentation for more detailed examples of each metric type and submission instructions.
 
 ### View real-time information about metrics
 
