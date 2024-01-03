@@ -55,7 +55,7 @@ From Agent 6 and later, the Agent command-line interface is based on subcommands
 
 ### Update the Agent
 
-To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding install command for your platform][7].
+To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding installation command for your platform][7].
 
 **Note**: If you want to manually update one specific Agent integration see the [Integration Management guide][8].
 
