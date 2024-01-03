@@ -65,7 +65,7 @@ There are two options for this step:
 - Use the UI: Click "New Organization" as described in [Managing Multiple Organization Accounts][1].
 - Use the API: Use the [Create a child organization][18] endpoint.
 
-### Retrieve the new client org's OrgID
+### Retrieve the new client org's org ID
 
 You can retrieve the OrgId of the Datadog org you are currently logged into by opening the browser's Javascript console and typing:
 
