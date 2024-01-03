@@ -42,7 +42,9 @@ Datadog does not recommend separating development, test, and production resource
 
 ## Client org provisioning options
 
-If you are managing your clients' Datadog org(s), you may want to control the org provisioning process. Doing so allows you to carry out administrative functions in the org (such as provisioning new users, setting up access methods, defining role-based access, and managing client usage).
+If you are managing your clients' Datadog org(s), you may want to control the org provisioning process and carry out administrative functions in the org such as provisioning new users, setting up access methods, defining role-based access, and managing client usage.
+
+To do so:
 
 1. Create a child organization under your parent account
 2. Retrieve the new child organization's OrgID
