@@ -122,12 +122,12 @@ Provide the following values:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Deploy the Datadog Agent
+### Deploy the Datadog Agent
 
 {{< tabs >}}
 {{% tab "VM Extension" %}}
 
-### Virtual machine agent
+#### Virtual machine agent
 
 To see a list of virtual machines (VMs) in the subscription, select **Virtual machine agent** in the left sidebar. On this page, you can install the Datadog Agent on a VM as an extension.
 
@@ -145,7 +145,7 @@ For each VM, the following information is displayed:
 | Install method       | The specific tool used to install the Datadog Agent, such as Chef, Azure VM extension, etc.                                                                    |
 | Sending logs         | Whether the Datadog Agent is sending logs to Datadog.                                                                                                          |
 
-#### Install
+##### Install
 
 You can install the Datadog Agent directly in Azure with the VM Extension. To install the Datadog Agent: 
 
@@ -153,27 +153,7 @@ You can install the Datadog Agent directly in Azure with the VM Extension. To in
 2. Click **Install Agent**. 
 3. The portal asks for confirmation to install the Agent with the default key. Select **OK** to begin installation. Azure shows the status as `Installing` until the Agent is installed and provisioned. After the Datadog Agent is installed, the status changes to `Installed`.
 
-{{% /tab %}}
-{{% tab "AKS Cluster Extension" %}}
-
-### AKS Cluster Extension
-
-The Datadog AKS Cluster Extension allows you to deploy the Datadog Agent natively within Azure AKS, avoiding the complexity of third-party management tools. To install the Datadog Agent with the AKS Cluster Extension: 
-
-1. Click on your AKS cluster in the **Monitored Resources** section in the left sidebar.
-2. From the left sidebar of the AKS cluster, select **Extensions + applications** under **Settings**.
-3. Search for and select the `Datadog AKS Cluster Extension`.
-4. Click **Create**, and follow the instructions in the tile using your [Datadog credentials][1] and [Datadog site][2].
-
-[1]: /account_management/api-app-keys/
-[2]: /getting_started/site/
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Uninstall
-
-{{< tabs >}}
-{{% tab "VM Extension" %}}
+##### Uninstall
 
 If the Datadog Agent was installed with the Azure VM extension:
 
@@ -185,8 +165,26 @@ If the Agent was installed using a different method, you cannot use the Datadog 
 {{% /tab %}}
 {{% tab "AKS Cluster Extension" %}}
 
+#### AKS Cluster Extension
 
+##### Install
 
+The Datadog AKS Cluster Extension allows you to deploy the Datadog Agent natively within Azure AKS, avoiding the complexity of third-party management tools. To install the Datadog Agent with the AKS Cluster Extension: 
+
+1. Click on your AKS cluster in the **Monitored Resources** section in the left sidebar.
+2. From the left sidebar of the AKS cluster, select **Extensions + applications** under **Settings**.
+3. Search for and select the `Datadog AKS Cluster Extension`.
+4. Click **Create**, and follow the instructions in the tile using your [Datadog credentials][1] and [Datadog site][2].
+
+##### Uninstall
+
+1. Click on your AKS cluster in the **Monitored Resources** section in the left sidebar.
+2. From the left sidebar of the AKS cluster, select **Extensions + applications** under **Settings**.
+3. Select the Datadog AKS Cluster Extension (its **Type** is `Datadog.AKSExtension`).
+4. Click **Uninstall**.
+
+[1]: /account_management/api-app-keys/
+[2]: /getting_started/site/
 {{% /tab %}}
 {{< /tabs >}}
 

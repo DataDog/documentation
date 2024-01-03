@@ -269,14 +269,14 @@ Datadog provides a recommended monitor you can use as a template to get started.
 
 After the integration tile is set up, metrics are collected by a crawler. To collect additional metrics, deploy the Datadog Agent to your VMs:
 
-#### Agent installation
+### Agent installation
 
 You can use the Azure extension to install the Datadog Agent on Windows VMs, Linux x64 VMs, and Linux ARM-based VMs. You can also use the AKS Cluster Extension to deploy the Agent to your AKS Clusters.
 
 {{< tabs >}}
 {{% tab "VM Extension" %}}
 
-1. In the [Azure portal][14], select the appropriate VM.
+1. In the [Azure portal][4], select the appropriate VM.
 2. From the left sidebar, select **Extensions + applications** under **Settings**.
 3. Click **+ Add**.
 4. Search for and select the `Datadog Agent` extension.
@@ -290,6 +290,7 @@ To install the Agent based on operating system or CI and CD tool, see the [Datad
 [1]: /getting_started/site/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 [3]: https://app.datadoghq.com/account/settings/agent/latest
+[4]: https://portal.azure.com
 {{% /tab %}}
 
 {{% tab "AKS Cluster Extension" %}}
@@ -323,4 +324,3 @@ See the [Azure Logging guide][5] to set up log forwarding from your Azure enviro
 [9]: /monitors/notify/#notify-your-team
 [12]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/overview
 [13]: /integrations/guide/azure-native-manual-setup/
-[14]: https://portal.azure.com
