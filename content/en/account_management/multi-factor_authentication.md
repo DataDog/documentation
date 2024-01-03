@@ -3,10 +3,6 @@ title: Multi-Factor Authentication (MFA)
 kind: documentation
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-  Multi-Factor Authentication is in public beta.
-{{< /callout >}}
-
 ## Overview
 
 Multi-Factor Authentication (MFA), or Two-Factor Authentication (2FA) requires a user to present more than one type of verification to authenticate to a system. MFA defends against the majority of password-related attacks, including brute-force, credential stuffing, and password spraying.
@@ -64,6 +60,10 @@ If you don't have access to your authenticator app or recovery codes, during the
 1. Select the **Log in to Datadog** link to finish logging into your account.
 
 If you have lost access to your registered authenticator app, Datadog recommends that you remove the lost device and add a new one. Maintaining a valid authenticator app helps prevent issues logging into your account in the future.
+
+## View a user's MFA status
+
+To view if a user has MFA configured or not, you can filter on the Users table. The MFA status is also available on the user details panel. 
 
 [1]: https://app.datadoghq.com/personal-settings/password-and-authentication
 [2]: https://app.datadoghq.com

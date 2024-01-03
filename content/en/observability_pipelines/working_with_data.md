@@ -41,7 +41,7 @@ The [`remap` transform][1] can modify events or specify conditions for routing a
 
 ### Basic `remap` configuration example
 
-To get started, see the following example for a basic `remap` transform that contains a DPL/VRL program in the `source` field:
+To get started, see the following YAML configuration example for a basic `remap` transform that contains a DPL/VRL program in the `source` field:
 
 ```yaml
 transforms:
@@ -73,7 +73,7 @@ The below snippet is an HTTP log event in JSON format:
 ```
 #### Configuration example
 
-The configuration below uses DPL/VRL to modify the log event by:
+The following YAML configuration example uses DPL/VRL to modify the log event by:
 
 - Parsing the raw string into JSON.
 - Reformatting the time into a UNIX timestamp.
@@ -143,7 +143,7 @@ The below snippet is an example log that you want to route to different destinat
 
 #### Configuration examples
 
-To route based on the `level` value, see the below configuration example:
+The following YAML configuration example routes data based on the `level` value:
 
 ```yaml
 transforms:
@@ -181,7 +181,7 @@ Downstream services can sometimes get overwhelmed when there is a spike in volum
 
 ### Throttle configuration example
 
-See the following example of a `throttle` transform configuration:
+The following YAML configuration example is for a `throttle` transform:
 
 ```yaml
 transforms:

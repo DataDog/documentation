@@ -19,7 +19,7 @@ The following examples show how it works on each infrastructure type.
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 
-In one command, you can install, configure, and start the Agent with APM and [Remote Configuration][2] enabled, and set up automatic instrumentation of your services.
+With one command, you can install, configure, and start the Agent, while also instrumenting your services with APM.
 
 For an Ubuntu host:
 

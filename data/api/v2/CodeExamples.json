@@ -96,6 +96,34 @@
       "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
+  "CreateCostAWSCURConfig": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create Cloud Cost Management AWS CUR config returns \"OK\" response"
+    }
+  ],
+  "CreateCostAzureUCConfigs": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create Cloud Cost Management Azure configs returns \"OK\" response"
+    }
+  ],
+  "UpdateCostAWSCURConfig": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update Cloud Cost Management AWS CUR config returns \"OK\" response"
+    }
+  ],
+  "UpdateCostAzureUCConfigs": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
+    }
+  ],
   "CreateCloudWorkloadSecurityAgentRule": [
     {
       "group": "cloud_workload_security",
