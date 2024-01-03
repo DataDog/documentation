@@ -543,6 +543,8 @@ See the [Test Visibility documentation][17] for your language to make sure that 
 
 ### Enable with the Jenkins configuration UI
 
+UI-based Test Visibility configuration is available in Datadog Jenkins plugin v5.6.0 or newer.
+
 1. In your Jenkins instance web interface, go to the job or pipeline that you want to instrument and choose the **Configure** option.
 2. In the **General** configuration section, tick the **Enable Datadog Test Visibility** checkbox.
 3. Enter the name of the service or library being tested into the **Service Name** input. You can choose any value that makes sense to you.

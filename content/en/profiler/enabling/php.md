@@ -20,6 +20,8 @@ aliases:
 
 ## Requirements
 
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
+
 The Datadog Profiler requires at least PHP 7.1, on 64-bit Linux.
 
 The following are **not** supported:
@@ -137,3 +139,4 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [6]: /getting_started/profiler/
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /profiler/enabling/supported_versions/

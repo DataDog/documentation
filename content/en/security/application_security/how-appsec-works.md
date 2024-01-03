@@ -27,7 +27,7 @@ Datadog Application Security Management (ASM) provides observability into applic
 
 In addition, ASM detects the risks built into your applications, for example through vulnerable libraries and dependencies the application uses at runtime.
 
-Datadog APM records information, called traces, about each application request. Datadog ASM uses the same tracing libraries as APM to monitor your traffic. ASM flags attack attempts based on suspicious requests that match known attack patterns, or [tags business logic information][25]. Security signals are automatically created when Datadog detects application attacks or business logic abuse impacting your services. The signals identify meaningful threats for your review instead of assessing each individual attack attempt. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
+Datadog APM records information, called traces, about each application request. Datadog ASM uses the same tracing libraries as APM to monitor your traffic. ASM flags attack attempts based on security traces that match known attack patterns, or [tags business logic information][25]. Security signals are automatically created when Datadog detects application attacks or business logic abuse impacting your services. The signals identify meaningful threats for your review instead of assessing each individual attack attempt. Depending on your security signal settings, you can receive notifications from Slack, email, or PagerDuty.
 
 Traditional Web Application Firewalls (WAFs) are usually deployed at the perimeter and have no context of the application behavior. Because ASM is embedded in the application, it has access to trace data, making it more effective at pinpointing and classifying threats. Datadog ASM leverages known attack patterns, similar to a Web Application Firewall (WAF) but with additional application context to increase the signal-to-noise ratio, lowering false positives.
 
@@ -68,11 +68,11 @@ Datadog ASM uses processes already contained in the Agent and APM, so there are 
 
 In the tracing library, Datadog ASM collects all traces that include security data. A default [retention filter][9] ensures the retention of all security-related traces in the Datadog platform.
 
-Data for suspicious requests is kept for 90 days. The underlying trace data is kept for 15 days.
+Data for security traces is kept for 90 days. The underlying trace data is kept for 15 days.
 
 ## Data privacy
 
-By default, ASM collects information from suspicious requests to help you understand why the request was flagged as suspicious. Before sending the data, ASM scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag. This indicates that the request was suspicious, but that the request data could not be collected because of data security concerns.
+By default, ASM collects information from security traces to help you understand why the request was flagged as suspicious. Before sending the data, ASM scans it for patterns and keywords that indicate that the data is sensitive. If the data is deemed sensitive, it is replaced with a `<redacted>` flag. This indicates that the request was suspicious, but that the request data could not be collected because of data security concerns.
 
 Here are some examples of data that is flagged as sensitive by default:
 * `pwd`, `password`, `ipassword`, `pass_phrase`

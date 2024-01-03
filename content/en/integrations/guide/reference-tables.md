@@ -9,7 +9,7 @@ further_reading:
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Use the lookup processor to enrich logs from a Reference Table"
-- link: "/logs/explorer/analytics/#filter-logs-based-on-reference-tables"
+- link: "/logs/explorer/advanced_search#filter-logs-based-on-reference-tables"
   tag: "Documentation"
   text: "Filter logs based on Reference Tables"
 - link: "/cloud_cost_management/tag_pipelines/#map-multiple-tags"
