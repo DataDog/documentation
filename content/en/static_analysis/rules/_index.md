@@ -8,6 +8,22 @@ is_beta: true
 type: static-analysis
 
 rulesets:
+  csharp-best-practices:
+    title: "Best Practices for C#"
+    description: |
+      Rules to enforce C# best practices.
+  csharp-code-style:
+    title: "Follow C# code style patterns"
+    description: |
+      Rules to enforce C# code style.
+  csharp-inclusive:
+    title: "Use inclusive language in C#"
+    description: |
+      Rules to make your C# code more inclusive.
+  csharp-security:
+    title: "Write safe and secure C# code"
+    description: |
+      Rules focused on finding security issues in your C# code.
   docker-best-practices:
     title: "Follow best practices with using Docker"
     description: |
