@@ -24,7 +24,7 @@ Live Process Monitors are based on data collected by the [Process Agent][1]. Cre
 Live Process Monitors are recommended for the following use cases:
 
 - Ensure that enough instances of a non-containerized long-lived process are running.
-- Flag when a specific process is executed.
+- Flag when a specific process is running.
 
 Note that only long lived processes are picked up by the Agent. This means that monitors on processes that live for less than 20 seconds may be flaky.
 
