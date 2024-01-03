@@ -28,7 +28,7 @@ One of the key decisions for a service provider to make is how to set up client 
 
 ### Single-organization or multiple-organization
 
-Datadog offers the possibility of managing multiple child organizations from one parent organization. This is the typical deployment model used by MSPs to prevent clients from having access to each others' data. In a multi-org setup, one child organization is created for each client, and the client is restricted to their own child organization. See **Client org provisioning options** below for more information.
+Datadog offers the possibility of managing multiple child organizations from one parent organization. This is the typical deployment model used by MSPs to prevent clients from having access to each others' data. In a multi-org setup, one child organization is created for each client, and the client is restricted to their own child organization. See [Client org provisioning options](#client-org-provisioning-options) for more information.
 
 Use a single-org setup if you have no plans to give your clients access to Datadog and do not have a strict requirement to separate client data.
 
