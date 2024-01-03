@@ -15,21 +15,21 @@ further_reading:
 
 ## Overview
 
-Historical Metrics Ingestion allows you to collect metric points with outdated timestamps. Timestamps that are older than one hour from the time of submission, but no older than your total metric retention period (which defaults to 15 months for all metrics).
+Enabling Historical Metrics Ingestion allows you to collect metric values with timestamps older than one hour from the time of submission, but no older than your total metric retention period (default of 15 months).
 
-With Historical Metrics Ingestion, you can monitor a variety of new use cases with your metrics, such as outage recovery, overwriting invalid metrics, and managing IoT delays.
+Having Historical Metrics Ingestion enabled on your metrics can be helpful for a variety of use cases such as recovering from an outage, correcting erroneous values, and managing IoT delays.
 
 ## What is Historical Metric Ingestion?
 
 {{< img src="metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_intro.png" alt="Diagram showing the ingestion flow for Historical Metrics" >}}
 
-Datadog classifies *historical metrics* as metric points with timestamps that are older than an hour relative to the time of submission. 
+Datadog classifies *historical metrics* as metric points with timestamps that are older than an hour relative to the time of submission. If Historical Metrics Ingestion is not enabled, metrics older than an hour from submission will not be ingested.
 
-For example, you emit a metric point at 1:00 PM EST, and the timestamp on that point reads 10:00 AM EST. This metric point is classified as a historical metric because it is delayed by 3 hours relative to the time of submission.
+For example, your metric (`exampleMetricA`) emits a value to Datadog at 1:00 PM EST, and the timestamp on that value is 10:00 AM EST. This metric value is classified as _historical_ because it has a timestamp 3 hours older relative to the time of submission.
 
 Metric points that are resent with the same timestamp and tag-value combination within Datadog are replaced with a *"last point wins"* ingestion rule. If you send a metric with a value of X, and resend that metric with a value of Y, both with the same timestamp, the Y replaces the X as the value of the metric. This is because Y is the most recent submission.
 
-You can start ingesting historical metrics by configuring Historical Metrics Ingestion on the [Metrics Summary Page][1] for *counts, rates, and gauges*.
+You can start ingesting historical metric values by enabling Historical Metrics Ingestion on the [Metrics Summary Page][1] for *counts, rates, and gauges* metric types.  **Note**: Historical Metrics Ingestion is not available for distribution metrics.
 
 ## Configuration
 
@@ -42,23 +42,23 @@ To enable the ingestion of historical metrics for a specific metric:
 
 {{< img src="metrics/custom_metrics/historical_metrics/enable_historical_metrics.png" alt="Metrics Summary page showing the Historical Metrics facets panel and the Advanced section of an open Metric detail panel with the Enable historical metrics option selected" style="width:100%;" >}}
 
-### Bulk configuration
+### Bulk configuration for multiple metrics
 
-To optimize your historical metrics enablement, take advantage of the Bulk Historical Metric Enablement feature. You can enable Historical Metrics Ingestion for multiple metrics at once, rather than having to configure each one individually.
+You can enable Historical Metrics Ingestion for multiple metrics at once, rather than having to configure each one individually.
 
-1. Navigate to the Navigate to the [Metrics Summary Page][1] and click the **Configured Metrics** dropdown.
+1.  Navigate to the [Metrics Summary Page][1] and click the **Configured Metrics** dropdown.
 1. Select **Enable historical metrics**.
-1. Configure all metrics that match that namespace to enable historical metrics ingestion.
+1. Specify a metric namespace prefix to enable historical metrics ingestion on all metrics that match that namespace.
 
 {{< img src="metrics/custom_metrics/historical_metrics/enable_bulk_historical_metrics.mp4" alt="Walkthrough of bulk enabling historic metric ingestion" video=true >}}
 
 ## Historical metrics submission
 
-You can submit historical metrics through the [API](#api) or through the [Agent](#agent). 
+After enabling Historical Metrics Ingestion, you can submit metric values with historical timestamps through the [API](#api) or through the [Agent](#agent).
 
 ### API 
 
-With the API, you can include metric points with old timestamps in the payload, as long as the metric name for the point has been configured to accept historical metrics through the user interface.
+With the API, you can include metric points with historical timestamps in the payload (as long as the metric name for the point has been configured to accept historical metrics through the user interface).
 
 {{< programming-lang-wrapper langs="python,java,go,ruby,typescript,curl" collapsible="true">}}
 
@@ -429,9 +429,9 @@ public class DogStatsdClient
 
 {{< /programming-lang-wrapper >}}
 
-## Ingestion latency
+## Historical Metrics Ingestion's Latency
 
-Ingesting historical metrics includes some ingestion latencies. These latencies can be caused by the delay associated with the metric timestamp.
+Historical Metrics Ingestion has varying latency depending on how far in the past your metrics' timestamps are.
 
 | Metric Delayed by:   | Ingestion Latency                     |
 |----------------------|---------------------------------------|
@@ -441,9 +441,9 @@ Ingesting historical metrics includes some ingestion latencies. These latencies 
 
 {{< img src="metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_latency.png" alt="Diagram showing how Historical Metrics can take longer to ingest depending on the metric timestamp">}}
 
-## Ingestion billing
+## Historical Metrics Ingestion billing
 
-Historical Metrics are billed under the Custom Metrics billing SKU. Billable custom metrics are determined by the timestamp of the metrics submitted, regardless of whether they are submitted today or 12 months later. For more information, see the [Custom Metrics billing][3] documentation.
+Historical Metrics are billed under the Custom Metrics billing SKU. Billable custom metrics are determined by the timestamp of the metrics submitted, regardless of whether they have a timestamp of today or 15 months into the past. As long as that metric name and tag value combination is actively reporting ANY value (regardless of the timestamp), it would be considered active in the hour that it was submitted. For more information, see the [Custom Metrics billing][3] documentation.
 
 {{< img src="metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_billing.png" alt="Diagram showing how Historical Metrics is billed based on the timestamp of the metric" >}}
 
