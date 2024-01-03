@@ -67,7 +67,7 @@ There are two options for this step:
 
 ### Retrieve the new client org's org ID
 
-You can retrieve the OrgId of the Datadog org you are currently logged into by opening the browser's Javascript console and typing:
+You can retrieve the ID of the Datadog org you are logged into by opening the browser's JavaScript console and typing:
 
   `JSON.parse(document.querySelector('#_current_user_json').value).org.id`
 
