@@ -3310,7 +3310,6 @@ components:
           example: key:value,filter:example
           type: string
         is_cspm_enabled:
-          default: false
           description: 'When enabled, Datadog will activate the Cloud Security Monitoring
             product for this service account. Note: This requires resource_collection_enabled
             to be set to true.'
@@ -3337,7 +3336,6 @@ components:
           example: datadog-apitest
           type: string
         resource_collection_enabled:
-          default: false
           description: When enabled, Datadog scans for all resources in your GCP environment.
           example: true
           type: boolean

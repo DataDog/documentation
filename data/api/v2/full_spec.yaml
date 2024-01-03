@@ -1481,7 +1481,7 @@ components:
           type: array
         months:
           deprecated: true
-          description: (deprecated) The number of months the report has been backfilled.
+          description: The number of months the report has been backfilled.
           format: int32
           maximum: 36
           type: integer
@@ -1678,7 +1678,7 @@ components:
           type: integer
         months:
           deprecated: true
-          description: (deprecated) The number of months the report has been backfilled.
+          description: The number of months the report has been backfilled.
           format: int32
           maximum: 36
           type: integer
@@ -6969,7 +6969,6 @@ components:
           example: true
           type: boolean
         resource_collection_enabled:
-          default: false
           description: When enabled, Datadog scans for all resources in your GCP environment.
           type: boolean
       type: object
@@ -21858,9 +21857,6 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
-      x-unstable: '**Note:** This endpoint is in public beta.
-
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/ci/pipelines/analytics/aggregate:
     post:
       description: Use this API endpoint to aggregate CI Visibility pipeline events
@@ -28370,6 +28366,16 @@ paths:
         schema:
           format: int64
           type: integer
+      - $ref: '#/components/parameters/PageOffset'
+      - description: Maximum number of downtimes in the response.
+        example: 100
+        in: query
+        name: page[limit]
+        required: false
+        schema:
+          default: 30
+          format: int64
+          type: integer
       responses:
         '200':
           content:
@@ -28395,6 +28401,10 @@ paths:
       - Downtimes
       x-codegen-request-body-name: body
       x-menu-order: 7
+      x-pagination:
+        limitParam: page[limit]
+        pageOffsetParam: page[offset]
+        resultsPath: data
       x-undo:
         type: safe
   /api/v2/permissions:
