@@ -96,7 +96,7 @@ Datadog recommends embedding the Content Security Policy in an HTTP header. You 
   Report-To: { "group": "browser-intake-datadoghq",
               "max_age": 10886400,
               "endpoints": [
-                  { "url": " https://{{< region-param key=browser_sdk_endpoint_domain >}}/api/v2/logs?dd-api-key=<client-token>&dd-evp-origin=content-security-policy&ddsource=csp-report" }
+                  { "url": "https://{{< region-param key=browser_sdk_endpoint_domain >}}/api/v2/logs?dd-api-key=<client-token>&dd-evp-origin=content-security-policy&ddsource=csp-report" }
               ] }
   ```
 
