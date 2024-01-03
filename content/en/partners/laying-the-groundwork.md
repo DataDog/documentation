@@ -54,9 +54,9 @@ To do so:
 
 As a result:
 
-- a new parent organization is created for the purpose of managing one or more child organizations for your new client
-- the new parent organization and client child organization is registered and attached to a billing contract
-- you are able to provision new users, configure their access methods, define role-based access, and manage the usage for your new client child organization
+- A new parent organization is created for the purpose of managing one or more child organizations for your new client.
+- The new parent organization and client child organization is registered and attached to a billing contract.
+- You can provision new users, configure their access methods, define role-based access, and manage the usage for your new client child organization.
 
 ### Create a child organization under your parent account
 
