@@ -8,6 +8,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/logging-without-limits/"
   tag: "Blog"
   text: Learn more about Logging without Limits*
+- link: "https://www.datadoghq.com/blog/log-pipeline-scanner-datadog/"
+  tag: "Blog"
+  text: "Investigate your log processing with the Datadog Log Pipeline Scanner"
 - link: "/logs/guide/"
   tag: "Guide"
   text: Additional guides about logging with Datadog
@@ -17,7 +20,7 @@ further_reading:
 
 Datadog Logging without Limits* decouples log ingestion and indexing. Choose which logs to index and retain, or archive, and manage settings and controls at a top-level from the log configuration page at [**Logs > Configuration**][1].
 
-{{< img src="logs/log_configuration_overview.mp4" alt="The log configuration section in the Datadog app" video=true >}}
+{{< img src="logs/log_configuration_overview1.mp4" alt="The log configuration section in the Datadog app" video=true >}}
 
 ## Configuration options
 

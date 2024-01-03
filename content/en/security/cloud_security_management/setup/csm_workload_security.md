@@ -1,5 +1,5 @@
 ---
-title: Setting Up CSM Workload Security
+title: Setting up CSM Workload Security
 kind: documentation
 further_reading:
   - link: "/security/cloud_security_management/setup"

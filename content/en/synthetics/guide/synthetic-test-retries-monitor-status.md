@@ -44,7 +44,7 @@ When all retries fail:
 
 Or when a retry is successful:
 
-{{< img src="synthetics/guide/synthetics_test_retries/diagram_2.png" alt="A test run which was retried twice and failed on all retries, evaluated as a local group and as a total group" style="width:100%;">}}
+{{< img src="synthetics/guide/synthetics_test_retries/diagram_2.png" alt="A test run which was retried twice and succeeded on the third retry, evaluated as a local group and as a total group" style="width:100%;">}}
 
 **Note:** Depending on what you set for the `minFailureDuration` and `minLocationsFailed` parameters, you may see different behavior.
 

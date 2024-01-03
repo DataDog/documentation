@@ -37,7 +37,7 @@ const scrollActiveNavItemToTop = () => {
 
         if (sideNavActiveMenuItem) {
             const distanceToTop = sideNavActiveMenuItem.offsetTop;
-            leftSideNav.scrollTop = distanceToTop - 100;
+            leftSideNav.scrollTop = distanceToTop - 110;
         }
     }
 };

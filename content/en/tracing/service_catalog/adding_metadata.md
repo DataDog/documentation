@@ -249,6 +249,26 @@ As an alternative to the GitHub integration and Terraform, you can use an open-s
 
 This GitHub Action allows you to register your services with the Service Catalog using a GitHub Action, with full control over when this information is sent to Datadog, and implement other compliance checks unique to your organization.
 
+## Build custom extensions 
+
+The `extensions` field is supported in all versions including v2. You can incorporate this custom field into deployment processes to standardize and codify best practices.
+
+{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+schema-version: v2.2
+dd-service: web-store
+team: shopist
+...
+extensions:
+  shopist.com/release-scheduler:
+    release-manager:
+      slack: "release-train-shopist"
+      schedule: "* * * * *"
+      env:
+        - name: "staging"
+          ci_pipeline: "//domains/examples/apps/hello-joe/config/k8s:release-staging"
+          branch: "hello-joe/staging"
+          schedule: "* * * * 1"
+{{< /code-block >}}
 
 
 ## Further reading
