@@ -10,18 +10,27 @@ cascade:
     algolia:
         rank: 70
 ---
+This is an introduction to Metrics in Datadog and why they're useful. This section includes the following topics: 
 
-{{< whatsnext desc="This section includes the following topics:">}}
+{{< whatsnext desc="Submit metrics to Datadog" >}}
+    {{< nextlink href="/metrics/custom_metrics">}}<u>Submit Custom Metrics</u> - Learn what custom metrics are and how to submit them.{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/otel_metrics" >}}<u>Send OpenTelemetry Metrics</u> - Configure the Datadog Agent or OpenTelemetry Collector.{{< /nextlink >}}
+    {{< nextlink href="/metrics/types" >}}<u>Metrics Types</u> - Types of metrics that can be submitted to Datadog.{{< /nextlink >}}
+    {{< nextlink href="/metrics/distributions" >}}<u>Distribution Metrics</u> - Learn about Distribution Metrics and globally accurate percentiles.{{< /nextlink >}}
+    {{< nextlink href="/metrics/units" >}}<u>Metrics Units</u> - Learn about the units that can be associated with metrics.{{< /nextlink >}}
+{{< /whatsnext >}}
+
+<br>
+
+{{< whatsnext desc="Visualize and query your metrics" >}}
     {{< nextlink href="/metrics/explorer" >}}<u>Metrics Explorer</u> - Explore all of your metrics and perform Analytics.{{< /nextlink >}}
     {{< nextlink href="/metrics/summary" >}}<u>Metrics Summary</u> - Understand your actively reporting Datadog metrics.{{< /nextlink >}}
-    {{< nextlink href="/metrics/types" >}}<u>Metrics Types</u> - Types of metrics that can be submitted to Datadog.{{< /nextlink >}}
-    {{< nextlink href="metrics/distributions/" >}}<u>Distribution Metrics</u> - Learn about Distribution Metrics and globally accurate percentiles.{{< /nextlink >}}
-    {{< nextlink href="/metrics/units" >}}<u>Metrics Units</u> - Learn about the units that can be associated with metrics.{{< /nextlink >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> - Learn how to control custom metrics volumes with tags and aggregations configurations using Metrics without Limits™.{{< /nextlink >}}
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>Advanced Filtering</u> - Filter your data to narrow the scope of metrics returned.{{< /nextlink >}}
-    {{< nextlink href="/metrics/custom_metrics" >}}<u>Custom Metrics</u> - Filter your data to narrow the scope of metrics returned.{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/otel_metrics" >}}<u>Send OpenTelemetry Metrics</u> - Configure the Datadog Agent or OpenTelemetry Collector.{{< /nextlink >}}
+{{< /whatsnext >}}
 
+<br>
+{{< whatsnext desc="Understand and manage your custom metrics volumes and costs" >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> - Learn how to control custom metrics volumes with tags and aggregations configurations using Metrics without Limits™.{{< /nextlink >}
 {{< /whatsnext >}}
 
 ## Overview
@@ -54,7 +63,21 @@ Metrics that track system health come automatically through Datadog's integratio
 
 In addition, metrics can help you adjust the scale of your environment to meet the demand from your customers. Knowing exactly how much you need to consume in resources can help you save money or improve performance.
 
-### Visualizing metrics in Datadog
+### Submitting metrics to Datadog
+
+Metrics can be sent to Datadog from several places.
+
+- [Datadog-Supported Integrations][8]: Datadog's {{< translate key="integration_count" >}}+ integrations include metrics out of the box. To access these metrics, navigate to the specific integration page for your service and follow the installation instructions there. If you need to monitor an EC2 instance, for example, you would go to the [Amazon EC2 integration documentation][9].
+
+- You can generate metrics directly within the Datadog platform. For instance, you can count error status codes appearing in your logs and [store that as a new metric][10] in Datadog.
+
+- Often, you'll need to track metrics related to your business (for example, number of user logins or signups). In these cases, you can create [custom metrics][11]. Custom metrics can be submitted through the [Agent][12], [DogStatsD][13], or the [HTTP API][14].
+
+- Additionally, the [Datadog Agent][15] automatically sends several standard metrics (such as CPU and disk usage).
+
+For a summary of all metric submission sources and methods, read the [Metrics Types documentation][16].
+
+## Querying metrics
 
 You can visualize your metrics and create graphs throughout Datadog: in [Metrics Explorer][3], [Dashboards][4], or [Notebooks][5].
 
@@ -76,22 +99,6 @@ A metric query consists of the same two evaluation steps to start: time aggregat
 {{< /whatsnext >}}
 
 Additionally, Datadog has many other types of graphs and widgets for visualizations. You can learn more about them in Datadog's [blog series about metric graphs][7].
-
-### Submitting metrics to Datadog
-
-Metrics can be sent to Datadog from several places.
-
-- [Datadog-Supported Integrations][8]: Datadog's {{< translate key="integration_count" >}}+ integrations include metrics out of the box. To access these metrics, navigate to the specific integration page for your service and follow the installation instructions there. If you need to monitor an EC2 instance, for example, you would go to the [Amazon EC2 integration documentation][9].
-
-- You can generate metrics directly within the Datadog platform. For instance, you can count error status codes appearing in your logs and [store that as a new metric][10] in Datadog.
-
-- Often, you'll need to track metrics related to your business (for example, number of user logins or signups). In these cases, you can create [custom metrics][11]. Custom metrics can be submitted through the [Agent][12], [DogStatsD][13], or the [HTTP API][14].
-
-- Additionally, the [Datadog Agent][15] automatically sends several standard metrics (such as CPU and disk usage).
-
-For a summary of all metric submission sources and methods, read the [Metrics Types documentation][16].
-
-## Querying metrics
 
 The graphing experience is consistent whether you are using dashboards, notebooks, or monitors. You can create graphs by using the graphing editor UI or by directly changing the raw query string. To edit the query string, use the `</>` button on the far right.
 
