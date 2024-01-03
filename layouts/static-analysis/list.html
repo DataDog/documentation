@@ -24,7 +24,7 @@
     <!-- Build slice of unique languages to validate against url param `languages` on page load -->
     {{ range ($list.GroupByParam "group_id") }}
         {{ range .Pages }}
-            {{ $pad.Set "languages" ( union ($pad.Get "languages") (slice (( .Params.meta.language_alias | default .Params.meta.language ) | lower)) ) }}
+            {{ $pad.Set "languages" ( union ($pad.Get "languages") (slice (( cond (.Params.meta.language_alias | not) .Params.meta.language (printf "%s;%s" .Params.meta.language_alias .Params.meta.language) ))) ) }}
         {{ end }}
     {{ end }}
 
@@ -42,11 +42,8 @@
         showEmptyResultsMsg: false,
         filteredRulesets: new Set(),
         lang_aliases: {
-            // map to proper integration logo and display name
-            csharp: {
-                logo: 'net',
-                name: 'C#'
-            }
+            // map to appropriate integration logo name
+            csharp: 'net'
         },
         resetFilteredRulesets () {
             // Empty filtered rulesets
@@ -129,14 +126,20 @@
             
             const validLangsArr = validLangs.replaceAll(/[\[\]]/g, '').split(' ')
             const url = new URL(window.location.href)
+            const langAliasMap = validLangsArr.reduce((acc,l) => {
+                // map to appropriate language display name 
+                const [lang, displayName] = l.split(';')
+                acc[lang.toLowerCase()] = displayName
+                return acc
+            }, {})
 
             Array.from(url.searchParams.entries()).forEach(([key, value]) => {
                 if (key === 'search'){
                     this.searchValue = value
-                } else if ((key === 'languages') && validLangsArr.includes(value.toLowerCase())){
-                    const logoValue = this.lang_aliases[value.toLowerCase()]?.logo ?? value
-                    const displayValue = this.lang_aliases[value.toLowerCase()]?.name ?? value
-                    this.filterTypes[key].push(`${displayValue},https://static.datadoghq.com/static/images/logos/${logoValue.toLowerCase()}_avatar.svg`)
+                } else if ((key === 'languages') && validLangsArr.some(l => l.replace(/\;\w./, '').toLowerCase() === value.toLowerCase())){
+                    const logoName = this.lang_aliases[value.toLowerCase()] ?? value
+                    const displayName = langAliasMap[value.toLowerCase()] ?? value
+                    this.filterTypes[key].push(`${displayName},https://static.datadoghq.com/static/images/logos/${logoName.toLowerCase()}_avatar.svg`)
                 } else if (key != 'languages'){
                     this.filterTypes[key]?.push(value)
                 }
@@ -219,7 +222,8 @@
                         </div>
                         <div class="ps-0 mt-1">
                             {{ range .Pages }}
-                            {{ $rule_language := .Params.meta.language_alias | default .Params.meta.language }}
+                            {{ $rule_language_with_alias := ( cond (.Params.meta.language_alias | not) .Params.meta.language (printf "%s;%s" .Params.meta.language_alias .Params.meta.language) ) }}
+                            {{ $rule_language := (index (split $rule_language_with_alias ";") 0) }}
                             {{/*  
                                 build a string with rule's lookup info for filtering and searching against
                             */}}
@@ -254,7 +258,7 @@
                                     Severity: {}
                                 }
                             */}}
-                            {{ $pad.SetInMap "filters" "Languages" (union (index ($pad.Get "filters") "Languages") (slice $rule_language)) }}
+                            {{ $pad.SetInMap "filters" "Languages" (union (index ($pad.Get "filters") "Languages") (slice $rule_language_with_alias)) }}
                             {{ $pad.SetInMap "filters" "Categories" (union (index ($pad.Get "filters") "Categories") (slice .Params.meta.category)) }}
                             {{ $pad.SetInMap "filters" "Severities" (merge (index ($pad.Get "filters") "Severities") (dict (string .Params.meta.severity_rank) .Params.meta.severity)) }}
                             {{/*  
@@ -361,23 +365,24 @@
                             </div>
                             {{ range index ($pad.Get "filters") . }}
                             <div class="filter-selection-container">
-                                {{ $name_aliases := dict "csharp" "C#"}}
-                                {{ $display_name := (index $name_aliases (. | lower)) | default .}}
-                                {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" . "variant" "avatar") }}
+
+                                {{ $lang_lookup_name := index (split . ";") 0 }}
+                                {{ $display_name := (index (split . ";") 1) | default . }}
+                                {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" $lang_lookup_name "variant" "avatar") }}
+                               
                                 {{/*  store int_logo with filter value if int_logo is present e.g. "Javascript,int_logo url" */}}
-                                
                                 <input 
-                                id="{{ . | anchorize }}" 
+                                id="{{ $lang_lookup_name | anchorize }}" 
                                 type="checkbox" 
                                 value='{{ cond ($int_logo | not ) . (printf "%s,%s" $display_name $int_logo) }}' 
                                 x-model="filterTypes['{{$filter_type}}']"
                                 @change="resetFilteredRulesets"
-                                @change.debounce="pushState('{{ $filter_type }}', '{{ . }}')"
+                                @change.debounce="pushState('{{ $filter_type }}', '{{ $lang_lookup_name }}')"
                                 >  
                                 
-                                <label for="{{ . | anchorize }}" class="d-flex align-items-center">
+                                <label for="{{ $lang_lookup_name | anchorize }}" class="d-flex align-items-center">
                                     {{ if $int_logo }}
-                                    <img src="{{ $int_logo }}" height="16" alt="{{ . }}"/>
+                                    <img src="{{ $int_logo }}" height="16" alt="{{ $lang_lookup_name }}"/>
                                     {{ end }}
                                     {{$display_name}}
                                 </label>
