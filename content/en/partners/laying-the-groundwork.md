@@ -52,7 +52,7 @@ To do so:
 4. Register the new client details in the DPN portal.
 5. Create a child organization under the organization created in Step 1 above.
 
-Following this procedure produces the following outcomes:
+As a result:
 
 - a new parent organization is created for the purpose of managing one or more child organizations for your new client
 - the new parent organization and client child organization is registered and attached to a billing contract
