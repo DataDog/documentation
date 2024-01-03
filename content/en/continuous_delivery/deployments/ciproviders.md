@@ -22,11 +22,11 @@ CD Visibility for CI providers deployments is in private beta. To request access
 
 ## Overview
 
-Deployments can be performed also within continuous integration pipelines. Typically, these pipelines have a deployment step that is executed after the source code has been tested and the image has been built.
+Deployments can also be performed within continuous integration pipelines. Typically, these pipelines have a deployment step that is executed after the source code has been tested and the image has been built.
 If you are executing deployments via a CI provider, you can monitor your deployments with CD Visibility if the following requirements are met:
 1. You are using [Pipeline Visibility][1] to monitor your CI pipelines.
 2. Your CI provider supports the "Custom tags and metrics at runtime" feature. You can check this in the [supported features table][2].
-3. You are executing a deployment in a CI job (or action).
+3. You are executing deployments in a CI job (or [related level][10] in the CI provider).
 
 ## Setup
 
@@ -92,4 +92,5 @@ datadog-ci deployment mark --env prod --tags team:backend --tags reason:schedule
 [7]: https://app.datadoghq.com/ci/deployments/executions
 [8]: /continuous_delivery/search
 [9]: /continuous_delivery/explorer
+[10]: /continuous_integration/pipelines/#terminology
 
