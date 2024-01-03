@@ -82,6 +82,10 @@ Use [this init script][2] to install the Datadog Agent on a specific Databricks 
 
 In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Databricks jobs.
 
+## Tag spans at runtime
+
+{{% djm-runtime-tagging %}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
