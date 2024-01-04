@@ -47,7 +47,7 @@ CSM Vulnerabilities is **not** available for the following environments:
 
 ### Disk space requirements
 
-Ensure your free disk space is equal to the size of your largest container image. This space is needed for the Datadog Agent to scan the container image for vulnerabilities (1GB by default).
+Ensure your free disk space is equal to the size of your largest container image. This space is needed for the Datadog Agent to scan the container image for vulnerabilities (1 GB by default).
 
 The resulting error appears as:
 ```sh
@@ -56,8 +56,8 @@ Error: failed to check current disk usage: not enough disk space to safely colle
 
 Workaround: 
 
-- Increase the available disk space to at least 1GB. If your images are larger than 1GB, increase your disk space accordingly.
-- If all of your images are smaller than 1GB, you can decrease the default Agent request disk space with the environment variable: `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK` (default value 1GB).
+- Increase the available disk space to at least 1 GB. If your images are larger than 1 GB, increase your disk space accordingly.
+- If all of your images are smaller than 1 GB, you can decrease the default Agent request disk space with the environment variable: `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK` (default value 1GB).
 
 ### Uncompressed container image layers
 
