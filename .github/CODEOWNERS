@@ -2,6 +2,7 @@
 
 /assets/                  @DataDog/corpweb @DataDog/documentation
 /data/                    @DataDog/corpweb @DataDog/documentation
+/data/api/                @DataDog/documentation
 /local/                   @DataDog/corpweb @DataDog/documentation
 /layouts/                 @DataDog/corpweb @DataDog/documentation
 /src/                     @DataDog/corpweb @DataDog/documentation
@@ -99,8 +100,11 @@ content/en/synthetics/*.md                                      @Datadog/synthet
 content/en/continuous_testing/*.md                              @Datadog/synthetics-ct @Datadog/documentation
 content/en/mobile_app_testing/*.md                              @Datadog/synthetics-mobile @Datadog/documentation
 
-# CI Visibility
+# Software Delivery
 
 content/en/continuous_integration/tests/*.md          @Datadog/ci-app-libraries @Datadog/documentation
 content/en/continuous_integration/pipelines/*.md      @Datadog/ci-app-backend @Datadog/documentation
-content/en/continuous_integration/static_analysis/rules/_index.md @Datadog/static-analysis @Datadog/documentation
+content/en/static_analysis/*.md                       @Datadog/static-analysis @Datadog/documentation
+content/en/static_analysis/rules/_index.md            @Datadog/static-analysis @Datadog/documentation
+content/en/quality_gates/_index.md                    @Datadog/ci-app-backend @Datadog/documentation
+content/en/dora_metrics/_index.md                     @Datadog/ci-app-backend @Datadog/documentation

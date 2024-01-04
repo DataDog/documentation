@@ -160,7 +160,7 @@ Enables native interaction tracking. Set to `true` if you want to track interact
 : Optional<br/>
 **Type**: List<br/>
 **Default**: `[]`<br/>
-Enables native views tracking. Set to `true` if you use a custom navigation system relying on native views. For more information, see [Connect RUM and Traces][12].
+List of your backends hosts to enable tracing with. For more information, see [Connect RUM and Traces][12].
 
 `telemetrySampleRate`
 : Optional<br/>
