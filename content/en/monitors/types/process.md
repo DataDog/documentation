@@ -38,7 +38,7 @@ You can use either tags or a fuzzy search to filter across all processes in your
 
 {{< img src="monitors/monitor_types/process/select_processes.png" alt="Select processes" style="width:90%;">}}
 
-After defining your search, a graph is displayed above the search inputs with an approximation of the total number of processes found. For more granular data, visit your [Live Process Page][4].
+After defining your search, a graph is displayed above the search inputs with an approximation of the total number of processes found. It's recommended to keep your monitor scoped to a few thousands processes. Use additional tags to narrow the search down or consider splitting a monitor into multiple ones if needed. For more granular data, visit your [Live Process Page][4].
 
 #### Tags search
 
