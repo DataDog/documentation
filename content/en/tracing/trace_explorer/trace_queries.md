@@ -3,6 +3,8 @@ title: Trace Queries
 kind: documentation
 description: "Trace Queries"
 is_beta: true
+aliases:
+ - /tracing/trace_queries
 further_reading:
 - link: 'tracing/trace_explorer'
   tag: 'Documentation'
@@ -41,9 +43,9 @@ Click **Add another span query** to add a span query and use it in the trace que
 
 ### Trace query operators
 
-Combine multiple span queries, labeled `a`, `b`, `c`, and so on, into a trace query in the **Traces where spans** field, using operators between the letters that represent each span query:
+Combine multiple span queries, labeled `a`, `b`, `c`, and so on, into a trace query in the **Traces matching** field, using operators between the letters that represent each span query:
 
-{{< img src="/tracing/trace_queries/joined_span_queries.png" alt="Span queries combined into a trace query" style="width:50%;" >}}
+{{< img src="/tracing/trace_queries/traces_matching.png" alt="Span queries combined into a trace query" style="width:50%;" >}}
 
 | Operator | Description | Example |
 |-----|-----|-----|
@@ -51,6 +53,19 @@ Combine multiple span queries, labeled `a`, `b`, `c`, and so on, into a trace qu
 | `\|\|` | **Or**: One or the other span are in the trace | Traces that contain spans from the service `web-store` or from the service `mobile-store`: <br/>`service:web-store \|\| service:mobile-store` |
 | `->` | **Indirect relationship**: Traces that contain a span matching the left query that is upstream of spans matching the right query | Traces where the service `checkoutservice` is upstream of the service `quoteservice`: <br/>`service:checkoutservice -> service:quoteservice` |
 | `=>` | **Direct relationship**: Traces that contain a span matching the left query that is the direct parent of a span matching the right query | Traces where the service `checkoutservice` is directly calling the service `shippingservice`: <br/>`service:checkoutservice => service:shippingservice` |
+
+### Trace-level filters
+
+Filter the result set of traces further by applying filters on trace-level attributes like the number of spans or the end-to-end duration of the trace in the  **Where** statement:
+
+{{< img src="/tracing/trace_queries/where_statement.png" alt="Trace-level filters example" style="width:100%;" >}}
+
+
+| Filter | Description | Example |
+|-----|-----|-----|
+| `span_count(a)` | Number of occurrences of a span | Traces that contain more than 10 calls to a mongo database: <br/>- **queryA**:`service:web-store-mongo @db.statement:"SELECT * FROM stores`<br/>- **Traces matching**:`a`<br/>- **Where**:`span_count(a):>10`|
+| `total_span_count` | Number of spans in the trace | Traces that contain more than 1000 spans: <br/>**Where**`total_span_count:>1000` |
+| `trace_duration` | End to end trace duration | Traces for which the end-to-end execution time is more than 5 seconds : <br/>**Where**:`trace_duration:>2s` |
 
 ## Flow Map
 
@@ -91,7 +106,7 @@ For example, if you query for traces that contain a span from the service `web-s
 {{< img src="tracing/trace_queries/trace_queries_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling" >}}
 
 
-Trace Queries are based on a **uniform 1% sample** of [ingested spans][3].
+Trace Queries are based on a **uniform 1% sample** of [ingested spans][3]. To learn more, read [one percent flat sampling][6].
 
 The flat 1% sampling is applied based on the `trace_id`, meaning that all spans that belong to the same trace share the same sampling decision. Spans indexed by the 1% sampling can also be queried and found in the [Trace explorer][4].
 
@@ -108,3 +123,4 @@ Spans indexed by [tag-based retention filters][5] cannot be used in Trace Querie
 [3]: /tracing/trace_pipeline/ingestion_controls/
 [4]: /tracing/trace_explorer/
 [5]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
+[6]: /tracing/trace_retention/#one-percent-flat-sampling
