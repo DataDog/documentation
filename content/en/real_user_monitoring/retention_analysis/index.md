@@ -8,33 +8,72 @@ is_beta: true
 <div class="alert alert-info">Retention Analysis is in private beta. If you have any questions, contact your customer success manager.</a></div>
 
 ## Overview
-RUM Retention Analysis allows you to measure how often users are successfully returning to a page or action. By tracking user retention over time, you can measure user engagement with specific features as a tool to understand their overall satisfaction.
+RUM Retention Analysis allows you to measure how often users are successfully returning to a page or action. By tracking user retention over time, you can gain insights around overall user satisfaction.
 
-## Build a graph and analyze a cohort
-
-A cohort is a group of users who participate in an *initial event*, such as clicking a link. Each user is considered retained if they subsequently complete a *return event*, such as clicking the same link again, viewing a page, or clicking a **Proceed to Payment** button.
+A cohort is a group of users who participate in an initial event, such as clicking a link. A user in the cohort is considered retained if they subsequently complete a return event, such as clicking the same link again or clicking a **Proceed to Payment** button.
 
 The retention graph displays the percentage of users who completed the return event each week.
 
-<!-- SCREENSHOT: Retention graph -->
+{{< img src="real_user_monitoring/retention_analysis/example-retention-analysis-graph.png" alt="Example Retention Analysis graph" style="width:100%;" >}}
 
-To build a retention graph, navigate to **RUM > Retention Analysis**.
+## Build a graph
 
-### Define the initial event
+To build a retention graph, navigate to **[UX Monitoring > Product Analytics > Retention Analysis][1]**, then follow the steps below.
+
+### 1. Define the initial event
 1. Select the view or action to act as the initial event for defining a group of users.
 2. Optionally, add filters such as the device used or the country of origin.
-  - If your initial event is a view, you can add any view facets or context facets.
-  - If your initial event is an action, you can add any action facets or context facets.
+    - If your initial event is a view, you can add any [view facets][2] or context facets.
+    - If your initial event is an action, you can add any [action facets][3] or context facets.
 
-### Define the return event
+### 2. Optionally, define the return event
+The return event defaults to a repeat of the original event. To use a different return event: 
 
-### Analyze the cohort
-TODO: Notes on what the different graphs show. Note that they can download results to CSV or click on a diagram cell to view a sidepanel list of users.
+1. Change **Repeated the original event** to **Experienced a different event**.
+2. Select the view or action to act as the return event.
+3. Optionally, add any desired filter criteria.
+
+## Analyze the graph
+For insights on user retention week over week, read each row of the graph horizontally from left to right. 
+
+You can click on an individual diagram cell to view a list of users, and export the list as a CSV:
+
+{{< img src="real_user_monitoring/retention_analysis/retention-analysis-graph-details-panel.png" alt="Details panel for a diagram cell" style="width:90%;" >}}
+
+The graph displays slightly different information depending on whether the initial and return events match.
+
+### Matching events
+If the events match:
+- **Week 0** is always 100%, since it represents all of the users who completed the initial event.
+- The other cells compare the viewers in a given week to **Week 0**, displaying the percentage of the cohort who completed the event in that week.
+
+{{< img src="real_user_monitoring/retention_analysis/matching-events-retention-graph.png" alt="Retention graph for matching events" style="width:90%;" >}}
+
+Reading the **Dec 04 2023** row of the above graph from left to right:
+- 94% of the people who completed the event in **Week 0** came back and completed it again in **Week 1**.
+- 92% of the people who completed the event in **Week 0** came back and completed it again in **Week 2**.
+
+### Differing events
+If the events differ:
+- **Week 0** represents users who completed both the initial and return events.
+- After **Week 0**, each cell displays the percentage of the **Users** column who completed the return event in that week.
+
+{{< img src="real_user_monitoring/retention_analysis/differing-events-retention-graph.png" alt="Retention graph for differing events" style="width:90%;" >}}
+
+Reading the **Dec 04 2023** row of the above graph from left to right:
+- 144 users completed the initial event.
+- In **Week 0**, 94% of those 144 users completed the return event.
+- In **Week 1**, 92% of the 144 users completed the return event.
 
 ## Limitations
 
 Retention Analysis is in private beta, and has the following limitations:
 - Retention is limited to 30 days unless your organization is configured to retain data for 90 days. You can file a support ticket to increase retention to 90 days at no additional cost.
-- The unique user attributes field must be populated. (TODO: Link to the field docs.)
+- The unique user attributes field must be populated. See the [instructions for sending unique user attributes][4].
 - Only views and actions can act as events.
 - While retention data can be downloaded as a CSV, the retention graph itself cannot be exported.
+
+[1]: https://app.datadoghq.com/rum/cohort
+[2]: /real_user_monitoring/browser/data_collected/#view-attributes
+[3]: /real_user_monitoring/browser/data_collected/#action-timing-metrics
+[4]: /real_user_monitoring/browser/advanced_configuration#user-session
