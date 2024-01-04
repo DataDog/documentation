@@ -3310,7 +3310,6 @@ components:
           example: key:value,filter:example
           type: string
         is_cspm_enabled:
-          default: false
           description: 'When enabled, Datadog will activate the Cloud Security Monitoring
             product for this service account. Note: This requires resource_collection_enabled
             to be set to true.'
@@ -3337,7 +3336,6 @@ components:
           example: datadog-apitest
           type: string
         resource_collection_enabled:
-          default: false
           description: When enabled, Datadog scans for all resources in your GCP environment.
           example: true
           type: boolean
@@ -23383,7 +23381,9 @@ paths:
         type: safe
   /api/v1/downtime:
     get:
-      description: Get all scheduled downtimes.
+      deprecated: true
+      description: Get all scheduled downtimes. **Note:** This endpoint has been deprecated.
+        Please use v2 endpoints.
       operationId: ListDowntimes
       parameters:
       - description: Only return downtimes that are active when the request is made.
@@ -23427,7 +23427,9 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Schedule a downtime.
+      deprecated: true
+      description: Schedule a downtime. **Note:** This endpoint has been deprecated.
+        Please use v2 endpoints.
       operationId: CreateDowntime
       requestBody:
         content:
@@ -23495,7 +23497,11 @@ paths:
         type: unsafe
   /api/v1/downtime/cancel/by_scope:
     post:
-      description: Delete all downtimes that match the scope of `X`.
+      deprecated: true
+      description: Delete all downtimes that match the scope of `X`. **Note:** This
+        only interacts with Downtimes created using v1 endpoints. This endpoint has
+        been deprecated and will not be replaced. Please use v2 endpoints to find
+        and cancel downtimes.
       operationId: CancelDowntimesByScope
       requestBody:
         content:
@@ -23545,7 +23551,9 @@ paths:
         type: idempotent
   /api/v1/downtime/{downtime_id}:
     delete:
-      description: Cancel a downtime.
+      deprecated: true
+      description: Cancel a downtime. **Note:** This endpoint has been deprecated.
+        Please use v2 endpoints.
       operationId: CancelDowntime
       parameters:
       - description: ID of the downtime to cancel.
@@ -23585,7 +23593,9 @@ paths:
       x-undo:
         type: idempotent
     get:
-      description: Get downtime detail by `downtime_id`.
+      deprecated: true
+      description: Get downtime detail by `downtime_id`. **Note:** This endpoint has
+        been deprecated. Please use v2 endpoints.
       operationId: GetDowntime
       parameters:
       - description: ID of the downtime to fetch.
@@ -23629,7 +23639,9 @@ paths:
       x-undo:
         type: safe
     put:
-      description: Update a single downtime by `downtime_id`.
+      deprecated: true
+      description: Update a single downtime by `downtime_id`. **Note:** This endpoint
+        has been deprecated. Please use v2 endpoints.
       operationId: UpdateDowntime
       parameters:
       - description: ID of the downtime to update.
@@ -25613,10 +25625,30 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-given:
+        gcp_account:
+          parameters:
+          - name: body
+            origin: request
+            value: "{\n  \"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\n
+              \ \"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\n  \"client_email\":
+              \"{{unique_hash}}@example.com\",\n  \"client_id\": \"{{ timestamp(\"now\")
+              }}{{ timestamp(\"now\") }}0\",\n  \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL\",\n
+              \ \"host_filters\": \"key:value,filter:example\",\n  \"is_cspm_enabled\":
+              true,\n  \"is_security_command_center_enabled\": true,\n  \"private_key\":
+              \"private_key\",\n  \"private_key_id\": \"123456789abcdefghi123456789abcdefghijklm\",\n
+              \ \"project_id\": \"datadog-apitest\",\n  \"resource_collection_enabled\":
+              true,\n  \"token_uri\": \"https://accounts.google.com/o/oauth2/token\",\n
+              \ \"type\": \"service_account\"\n}"
+          step: there is a valid "gcp_account" in the system
       x-menu-order: 2
       x-undo:
         operationId: DeleteGCPIntegration
-        parameters: []
+        parameters:
+        - name: body
+          origin: request
+          template: '{"client_email": "{{ client_email }}", "client_id": "{{ client_id
+            }}", "project_id": "{{ project_id }}"}'
         type: unsafe
     put:
       deprecated: true
@@ -27428,7 +27460,7 @@ paths:
 
         - SLO: `slo alert`
 
-        - watchdog: `event alert`
+        - watchdog: `event-v2 alert`
 
         - event-v2: `event-v2 alert`
 
@@ -28293,7 +28325,9 @@ paths:
         type: idempotent
   /api/v1/monitor/{monitor_id}/downtimes:
     get:
-      description: Get all active downtimes for the specified monitor.
+      deprecated: true
+      description: Get all active v1 downtimes for the specified monitor. **Note:**
+        This endpoint has been deprecated. Please use v2 endpoints.
       operationId: ListMonitorDowntimes
       parameters:
       - description: The id of the monitor

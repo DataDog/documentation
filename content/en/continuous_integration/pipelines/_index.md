@@ -53,9 +53,9 @@ While the concept of a CI pipeline may vary depending on your provider, see how 
 | Datadog | GitHub Actions |
 |---|---|
 | Pipeline | Workflow |
-| Stage | Job |
-| Job | Step |
-| Step | Action |
+| Stage |  |
+| Job | Job |
+| Step | Step |
 
 {{% /tab %}}
 {{% tab "GitLab" %}}

@@ -8,7 +8,7 @@ code_lang_weight: 10
 aliases:
   - continuous_integration/intelligent_test_runner/java/
   - continuous_integration/intelligent_test_runner/setup/java/
-  
+
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -22,13 +22,14 @@ further_reading:
 
 ## Compatibility
 
-Intelligent Test Runner is supported in `dd-java-agent >= 1.22.0`.
+Intelligent Test Runner is supported in `dd-java-agent >= 1.26.1`.
 
 The following test frameworks are supported:
 - JUnit >= 4.10 and >= 5.3
 - TestNG >= 6.4
 - Spock >= 2.0
 - Cucumber >= 5.4.0
+- Scalatest >= 3.0.8
 
 ## Setup
 
@@ -89,6 +90,7 @@ Unskippable tests are supported in the following versions and testing frameworks
 - TestNG >= 6.4
 - Spock >= 2.2
 - Cucumber >= 5.4.0
+- Scalatest >= 3.0.8
 
 ### Marking tests as unskippable
 
@@ -286,6 +288,24 @@ Feature: My Feature
 
   Scenario: My Scenario
     # ...
+```
+
+{{% /tab %}}
+{{% tab "ScalaTest" %}}
+
+Create a `Tag` with the value `datadog_itr_unskippable` and tag your test case with it:
+
+```scala
+import org.scalatest.Tag
+import org.scalatest.flatspec.AnyFlatSpec
+
+object ItrUnskippableTag extends Tag("datadog_itr_unskippable")
+
+class MyTestSuite extends AnyFlatSpec {
+  "myTest" should "assert something" taggedAs ItrUnskippableTag in {
+    // ...
+  }
+}
 ```
 
 {{% /tab %}}

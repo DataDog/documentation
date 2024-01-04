@@ -1,5 +1,5 @@
 ---
-title: Setting Up CSM Pro
+title: Setting up CSM Pro
 kind: documentation
 further_reading:
   - link: "/security/cloud_security_management/setup"
@@ -78,7 +78,8 @@ datadog:
 
 {{% tab "Kubernetes (Operator)" %}}
 
-Add the following to the spec section of your `values.yaml` file:
+Image collection is enabled by default with Datadog Operator version `>= 1.3.0`.</br>
+Or, add the following to the spec section of your `values.yaml` file:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
