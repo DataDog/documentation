@@ -3546,11 +3546,6 @@ main:
     parent: csm
     identifier: vulnerabilities
     weight: 18
-  - name: Troubleshooting
-    url: security/vulnerabilities/troubleshooting
-    parent: vulnerabilities
-    identifier: vulnerabilities_troubleshooting
-    weight: 101
   - name: Default Detection Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm
@@ -3581,6 +3576,11 @@ main:
     parent: csm
     identifier: csm_troubleshooting
     weight: 30
+  - name: Vulnerabilities
+    url: security/cloud_security_management/troubleshooting/vulnerabilities/
+    parent: csm_troubleshooting
+    identifier: csm_troubleshooting_vulnerabilities
+    weight: 301
   - name: Application Security Management
     url: security/application_security/
     parent: security_platform_heading

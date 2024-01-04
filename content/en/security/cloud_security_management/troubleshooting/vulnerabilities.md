@@ -1,6 +1,8 @@
 ---
 title: Troubleshooting Cloud Security Management Vulnerabilities
 kind: documentation
+aliases:
+  - /security/vulnerabilities/troubleshooting/
 further_reading:
 - link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
   tag: "Documentation"
@@ -32,24 +34,30 @@ Ensure all the [prerequisites][5] are met for CSM Vulnerabilities:
 | Component                | Version/Requirement                     |
 | ------------------------ | ----------------------------------------|
 | [Helm Chart][6]            | v3.49.6 or later (Kubernetes only)      |
-| [containerd][7]              | v1.5.6 or later (Kubernetes and hosts only)|
+| [containerd][7]              | v1.5.6 or later (Kubernetes and hosts only)|</br>
 
 CSM Vulnerabilities is **not** available for the following environments:
 
   - Windows
   - AWS Fargate 
   - CRI-O runtime
+  - podman runtime
 
 ## Error messages
 
 ### Disk space requirements
 
-Ensure your free disk space is equal to the size of your largest container image. This space is needed for the Datadog Agent to scan the container image for vulnerabilities.
+Ensure your free disk space is equal to the size of your largest container image. This space is needed for the Datadog Agent to scan the container image for vulnerabilities (1 GB by default).
 
 The resulting error appears as:
 ```sh
 Error: failed to check current disk usage: not enough disk space to safely collect sbom, 192108482560 available, 1073741824000 required
 ```
+
+Workaround: 
+
+- Increase the available disk space to at least 1 GB. If your images are larger than 1 GB, increase your disk space accordingly.
+- If all of your images are smaller than 1 GB, you can decrease the default Agent request disk space with the environment variable: `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK` (default value 1GB).
 
 ### Uncompressed container image layers
 
