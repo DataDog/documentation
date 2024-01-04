@@ -715,6 +715,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_3367706049",
+      "description": "Create a detection rule with detection method 'third_party' returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_461183901",
       "description": "Create a detection rule with type 'impossible_travel' returns \"OK\" response"
     },
