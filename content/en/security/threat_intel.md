@@ -56,10 +56,11 @@ Sources, categories, and intents are available as facets and filters on relevant
 
 | Category | Intention | Entity Types | Product Use Cases | Primary Products |
 |----------|----------|--------------|----------|------------------|
-| residential_proxy | suspicious | IP Addresses | Reputation for credential stuffing and fraud use cases | ASM and Cloud SIEM |
-| malware_proxy | suspicious | IP Addresses | Reputation for automated application abuse and anomalous processes | Cloud SIEM, and CWS |
+| residential_proxy | suspicious | IP addresses | Reputation for credential stuffing and fraud use cases | ASM and Cloud SIEM |
+| malware_proxy | suspicious | IP addresses | Reputation for automated application abuse and anomalous processes | Cloud SIEM, and CWS |
 | malware | malicious | application library versions, file hashes | Malicious packages and communication with mining pools| ASM, CWS |
-| Tor | suspicious | IP Addresses  | Corporate policy violations for user activity | ASM and Cloud SIEM |
+| scanner | suspicious | IP addresses | Reputation for scanners | ASM, Cloud SIEM |
+| Tor | suspicious | IP addresses  | Corporate policy violations for user activity | ASM and Cloud SIEM |
 
 ### Threat Intel Intents
 | Intent | Use Case |
