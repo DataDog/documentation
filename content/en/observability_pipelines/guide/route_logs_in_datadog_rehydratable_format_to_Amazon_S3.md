@@ -18,7 +18,11 @@ further_reading:
 
 ## Overview
 
-The Observability Pipelines (OP) Datadog Archives destination formats logs into a Datadog-rehydratable format and then routes it to [Log Archives][1]. These logs are not ingested into Datadog, but are routed directly to the archive. You can then rehydrate the archive in Datadog when you need to analyze and investigate them. `datadog_archives` is available for OP Worker version 1.5 and later.
+The Observability Pipelines (OP) Datadog Archives destination formats logs into a Datadog-rehydratable format and then routes them to [Log Archives][1]. These logs are not ingested into Datadog, but are routed directly to the archive. You can then rehydrate the archive in Datadog when you need to analyze and investigate them. `datadog_archives` is available for OP Worker version 1.5 and later. 
+
+The Observability Pipelines Datadog Archives destination is useful when:
+- You have a high volume of noisy logs, but you may need to index them in Log Management ad hoc.
+- You have a retention policy.
 
 ## Configure a Log Archive
 

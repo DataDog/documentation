@@ -129,20 +129,29 @@ Whether to enable the endpoint data collection in profiles. Added in version `0.
 Enable the allocation size and allocation bytes profile type. Added in version `0.88.0`. When an active JIT is detected, allocation profiling is turned off for PHP version `8.0.0`-`8.1.20` and `8.2.0`-`8.2.7` due to a limitation of the ZendEngine.<br>
 **Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED` environment variable (`datadog.profiling.experimental_allocation_enabled` INI setting), which was available since `0.84`. If both are set, this one takes precedence.
 
+`DD_PROFILING_EXPERIMENTAL_FEATURES_ENABLED`
+: **INI**: `datadog.profiling.experimental_features_enabled`. INI available since `0.96.0`.<br>
+**Default**: `0`<br>
+Enable all experimental features.<br>
+**Note**: This setting overrides the more specific configurations and if enabled, toggling other experimental configuration settings won't have an effect.
+
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
 : **INI**: `datadog.profiling.experimental_cpu_time_enabled`. INI available since `0.82.0`.<br>
 **Default**: `1`<br>
 Enable the experimental CPU profile type. Added in version `0.69.0`. For version `0.76` and below it defaulted to `0`.
 
-`DD_PROFILING_EXPERIMENTAL_EXCEPTION_ENABLED`
-: **INI**: `datadog.profiling.experimental_exception_enabled`. INI available since `0.92.0`.<br>
-**Default**: `0`<br>
-Enable the experimental exception profile type. Added in version `0.92.0`.
+`DD_PROFILING_EXCEPTION_ENABLED`
+: **INI**: `datadog.profiling.exception_enabled`. INI available since `0.96.0`.<br>
+**Default**: `1`<br>
+Enable the exception profile type. Added in version `0.92.0` and GA
+in version `0.96.0`.<br><br>
+**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_EXCEPTION_ENABLED` environment variable (`datadog.profiling.experimental_exception_enabled` INI setting), which was available since `0.92`. If both are set, this one takes precedence.
 
-`DD_PROFILING_EXPERIMENTAL_EXCEPTION_SAMPLING_DISTANCE`
-: **INI**: `datadog.profiling.experimental_exception_sampling_distance`. INI available since `0.92.0`.<br>
+`DD_PROFILING_EXCEPTION_SAMPLING_DISTANCE`
+: **INI**: `datadog.profiling.exception_sampling_distance`. INI available since `0.96.0`.<br>
 **Default**: `100`<br>
-Configure the sampling distance for exceptions. The higher the sampling distance, the fewer samples are created and the lower the overhead.
+Configure the sampling distance for exceptions. The higher the sampling distance, the fewer samples are created and the lower the overhead.<br><br>
+**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_EXCEPTION_SAMPLING_DISTANCE` environment variable (`datadog.profiling.experimental_exception_sampling_distance` INI setting), which was available since `0.92`. If both are set, this one takes precedence.
 
 `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED`
 : **INI**: `datadog.profiling.experimental_timeline_enabled`. INI available since `0.89.0`.<br>
