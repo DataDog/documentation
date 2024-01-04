@@ -21,23 +21,85 @@ further_reading:
   text: "Understand how to read a Datadog Trace"
 ---
 
-View an individual [trace][1] to see all of its [spans][2] and associated metadata. Each trace can be viewed either as a flame graph or as a list (grouped by [service][3] or host).
+{{< img src="tracing/trace_view/trace_view.png" alt="Trace View" style="width:90%;">}}
 
-{{< img src="tracing/visualization/trace/trace.png" alt="Trace" style="width:90%;">}}
+## Overview
 
-Calculate the breakdown of execution time and adjust the color scheme by either **service** or **host**.
+View an individual [trace][1] to see all of its [spans][2] and associated metadata. Each trace can be visualized as either a Flame Graph, Span List, Waterfall, or Map.
 
-{{< img src="tracing/visualization/trace/service_host_display.png" alt="Service host display" style="width:40%;">}}
+The trace header displays critical trace information, including the root span's service name, resource name, trace ID, trace duration, and the trace start datetime. To retain a trace indefinitely, click "Open Full Page" and save the URL.
 
-To get a closer look at the flame graph, zoom in by scrolling:
+{{< img src="tracing/trace_view/trace_header.png" alt="Trace header" style="width:90%;">}}
 
-{{< img src="tracing/visualization/trace/trace_zoom.mp4" alt="Trace Error" video="true" width="90%" >}}
+Selected span information is visible at the bottom of the Trace View.
 
-The List view aggregates [resources][4] by [service][3] and sorts them according to their corresponding count of spans. Services are sorted per relative percentage of execution time spent by the trace in each service:
+## Trace Visualizations
 
-{{< img src="tracing/visualization/trace/trace_list.png" alt="Trace list" style="width:90%;">}}
+{{< beta-callout url="#" btn_hidden="true">}}
+To join the Waterfall private beta <a href="https://forms.gle/LjJR1ZbF1tNDv5JC6">fill out this form</a>.
+{{< /beta-callout >}}
 
-### More information
+{{< tabs >}}
+{{% tab "Flame Graph" %}}
+
+{{< img src="tracing/trace_view/flamegraph.png" alt="Trace View" style="width:90%;">}}
+
+The default visualization. Displays all the spans for an associated trace, color-coded on a timeline. Particularly useful for understanding the execution path of a request and where time was spent over a trace.
+
+To navigate the graph, scroll to zoom, click and drag to move around, and use the minimap to zoom into the selected span or zoom out to the full trace.
+
+The legend details the color coding of the flame graph. Group spans by either **service** (default), **host**, or **container** - and choose to display either **percentage of trace execution time** or **span count** by color grouping. If errors exist on spans in the trace, highlight them in the flame graph by ticking the Errors checkbox under Filter Spans.
+
+**TODO: video of legend, selecting to color by host instead of service, and span count instead of % execution time - choose a trace with errors so the Error checkbox is in view**
+
+
+{{% /tab %}}
+{{% tab "Span List" %}}
+
+**TODO: fix links**
+{{< img src="tracing/trace_view/spanlist.png" alt="Trace View" style="width:90%;">}}
+
+Displays [resources][4] by grouping ([service][3] by default) and sorts them according to their corresponding count of spans. Particularly useful for scanning latency information by resource or grouping.
+
+Filter resources by type or naming information using the corresponding buttons and text-based search.
+
+{{< img src="tracing/trace_view/spanlist_headers.png" alt="Span List headers" style="width:90%;">}}
+
+Sort groupings by clicking on the column header which you’d like to sort by: **resource**, **spans**, **average duration**, **execution time**, or **percentage of trace execution time**.
+
+{{% /tab %}}
+{{% tab "Waterfall (Beta)" %}}
+
+**TODO: add beta card here?**
+{{< img src="tracing/trace_view/waterfall.png" alt="Trace View" style="width:90%;">}}
+
+Displays all the spans for an associated trace, color-coded on separate rows and on a timeline. Particularly useful for isolating relevant parts of a trace and understanding how asynchronous processes fit into the execution flow.
+
+On each row (i.e., per span):
+* A bar (colored by service), whose length corresponds to the percentage of total trace duration
+* The service name, operation name, and resource name, with font styling: **service** operation <span style="color:gray">resource</span>
+* Absolute and relative span duration information
+* (when applicable) An error icon or HTTP status code
+
+Expand/collapse span descendants by clicking the plus/minus button on each row, and expand all spans with the plus button to the left of the timescale.
+
+{{% /tab %}}
+{{% tab "Map" %}}
+
+{{< img src="tracing/trace_view/map.png" alt="Trace View" style="width:90%;">}}
+
+Displays a service-level representation of the trace, with arrows showing the flow of calls between services. Particularly useful for getting a high level overview of the trace and the order in which services are called.
+
+Hover over a service to highlight its parent and children, and click on it to focus on the service entry span.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## More information
+
+The height-adjustable bottom of the Trace View shows selected span and trace information. 
+
+The header contains service, operation, and resource names of the selected span as well as latency information. Pivot to other parts of the platform or narrow down your [Trace Explorer][5] search by clicking on the naming pill.
 
 {{< tabs >}}
 {{% tab "Span tags" %}}
@@ -119,3 +181,4 @@ Click **View in ASM** to investigate further using [Datadog Application Security
 [2]: /tracing/glossary/#spans
 [3]: /tracing/glossary/#services
 [4]: /tracing/glossary/#resources
+[5]: /tracing/trace_explorer
