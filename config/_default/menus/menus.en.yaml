@@ -3379,6 +3379,11 @@ main:
     parent: security_platform
     identifier: security_notifications
     weight: 6
+  - name: Threat Intel
+    url: security/threat_intel
+    parent: security_platform
+    idenfier: security_threat_intel
+    weight: 6
   - name: Rules
     url: security/notifications/rules/
     parent: security_notifications
