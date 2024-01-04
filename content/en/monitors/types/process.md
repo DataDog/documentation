@@ -46,7 +46,7 @@ Filter processes to monitor by their tags. Datadog recommends trying to filter p
 
 #### Full text search
 
-If you cannot scope processes down to the granularity you would like using tags, you can use text search to filter against both command lines and username. The full text search field performs a partial match and the fuzzy search searches across all processes on your infrastructure. Search operators `AND`, `OR`, and `NOT` are supported. See the [Live Process Monitoring documentation][3] for more details.
+If you cannot scope processes down to the granularity you would like using tags, you can use text search to filter against both command lines and username. The search performs a partial match and fuzzy searches across all processes on your infrastructure. Search operators `AND`, `OR`, and `NOT` are supported. See the [Live Process Monitoring documentation][3] for more details.
 
 ##### Examples
 
