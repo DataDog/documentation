@@ -4,7 +4,6 @@ kind: documentation
 aliases:
   - /security_platform/cloud_workload_security/troubleshooting/
   - /security_platform/cloud_security_management/troubleshooting/
-  - /security/cloud_security_management/troubleshooting/
 further_reading:
 - link: "/security/cloud_security_management/troubleshooting/vulnerabilities"
   tag: "Documentation"
