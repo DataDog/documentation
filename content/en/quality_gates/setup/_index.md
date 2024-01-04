@@ -1,6 +1,6 @@
 ---
-title: Setup Quality Gate Rules
-description: Learn how to setup Quality Gate rules in Datadog.
+title: Set up Quality Gate Rules
+description: Learn how to set up Quality Gate rules in Datadog.
 further_reading:
 - link: "/quality_gates"
   tag: "Documentation"
