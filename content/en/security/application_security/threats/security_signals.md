@@ -2,24 +2,24 @@
 title: Investigate Security Signals
 kind: documentation
 further_reading:
-  - link: "/security/default_rules/?category=cat-csm-threats#all"
+  - link: "/security/default_rules/?category=cat-application-security#cat-application-security"
     tag: "Documentation"
-    text: "Explore CSM Threats detection rules"
-  - link: "/security/threats/workload_security_rules"
+    text: "Explore ASM threat detection OOTB rules"
+  - link: "/security/application_security/threats/custom_rules/"
     tag: "Documentation"
-    text: "Learn how to manage CSM Threats detection rules"
-  - link: "/security/notifications/"
+    text: "Configure custom ASM threat detection rules"
+  - link: "/security/application_security/threats/threat-intelligence/"
     tag: "Documentation"
-    text: "Learn more about security notifications"
+    text: "ASM threat intelligence"
 ---
 
 ## Overview
 
-ASM security signals are created when Datadog detects a threat based on a security rule. View, search, filter, and investigate security signals in the [Signals Explorer][2], or configure [Notification Rules][8] to send signals to third-party tools.
+ASM security signals are created when Datadog detects a threat based on a detection rule. View, search, filter, and investigate security signals in the [Signals Explorer][2], or configure [Notification Rules][8] to send signals to third-party tools.
 
-In the [Signals Explorer][2], filter by attributes and facets to find critical threats. Click into a signal to see details for it, including the user information and their IP address, what rule they triggered, attack flow, and related traces and other security signals. From this page you can also click to create a case and declare an incident.
+In the [Signals Explorer][2], filter by attributes and facets to find critical threats. Click on a signal to see details about it, including the service owner and attack details. Attack details include the authenticated user and their IP address, what rule they triggered, attack flow, related traces and other security signals. From this page, you can block IP addresses and users, and also click to create a case and declare an incident.
 
-{{< img src="security/application_security/threats/security_signals/appsec-threat-signals-details.png" alt="Overview of investigating threats in signals explorer with details side panel">}}
+{{< img src="security/application_security/threats/security_signals/appsec-threat-signals.png" alt="Overview of investigating threats in signals explorer with details side panel">}}
 
 ## Filter security signals
 
@@ -71,8 +71,9 @@ Use [Workflow Automation][5] to manually trigger a workflow for a security signa
 1. On the [Signals Explorer][2], select a security signal.
 2. On the signal side panel, click each of the review tabs such as **Attack Flow**, **Activity Summary**, and **Rule Details**.
 3. Review the **Suggested Next Steps**, and take action:
-    -  Click to **Block attacking users and IPs**
-    -  Click to **Block with Edge WAF**.
+    -  Click **Block all Attacking IPs** (by specific duration or permanently).
+    -  Click **Automated Attacker Blocking** (based on [detection][10] rules).
+    -  Click **[Block with Edge WAF][11]**.
 
 ## Further Reading
 
@@ -87,3 +88,5 @@ Use [Workflow Automation][5] to manually trigger a workflow for a security signa
 [7]: https://app.datadoghq.com/security/appsec?
 [8]: /security/notifications/rules/
 [9]: /account_management/rbac/permissions/#cloud-security-platform
+[10]: /security/application_security/threats/protection/#respond-to-threats-in-real-time-by-automating-attacker-blocking
+[11]: /security/application_security/threats/protection/#blocking-attack-attempts-with-in-app-waf
