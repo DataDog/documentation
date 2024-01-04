@@ -396,20 +396,22 @@ Variable content is escaped by default. To prevent content such as JSON or code 
 
 Use template variables to customize your monitor notifications. The built-in variables are:
 
-| Variable                          | Description                                                                   |
-|-----------------------------------|-------------------------------------------------------------------------------|
-| `{{value}}`                       | The value that breached the alert for metric based query monitors.            |
-| `{{threshold}}`                   | The value of the alert threshold set in the monitor's alert conditions.       |
-| `{{warn_threshold}}`              | The value of the warning threshold set in the monitor's alert conditions.     |
-| `{{alert_recovery_threshold}}`    | The value that recovered the monitor from its `ALERT` state.                  |
-| `{{warn_recovery_threshold}}`     | The value that recovered the monitor from its `WARN` state.                   |
-| `{{ok_threshold}}`                | The value that recovered the Service Check monitor.                           |
-| `{{comparator}}`                  | The relational value set in the monitor's alert conditions.                   |
-| `{{first_triggered_at}}`          | The UTC date and time when the monitor first triggered.                       |
-| `{{first_triggered_at_epoch}}`    | The UTC date and time when the monitor first triggered in epoch milliseconds. |
-| `{{last_triggered_at}}`           | The UTC date and time when the monitor last triggered.                        |
-| `{{last_triggered_at_epoch}}`     | The UTC date and time when the monitor last triggered in epoch milliseconds.  |
-| `{{triggered_duration_sec}}`      | The number of seconds the monitor has been in a triggered state.              |
+| Variable                             | Description                                                                   |
+|-----------------------------------   |-------------------------------------------------------------------------------|
+| `{{value}}`                          | The value that breached the alert for metric based query monitors.            |
+| `{{threshold}}`                      | The value of the alert threshold set in the monitor's alert conditions.       |
+| `{{warn_threshold}}`                 | The value of the warning threshold set in the monitor's alert conditions.     |
+| `{{alert_recovery_threshold}}`       | The value that recovered the monitor from its `ALERT` state.                  |
+| `{{warn_recovery_threshold}}`        | The value that recovered the monitor from its `WARN` state.                   |
+| `{{ok_threshold}}`                   | The value that recovered the Service Check monitor.                           |
+| `{{comparator}}`                     | The relational value set in the monitor's alert conditions.                   |
+| `{{first_triggered_at}}`<br>*See note below*         | The UTC date and time when the monitor first triggered.                       |
+| `{{first_triggered_at_epoch}}`<br>*See note below*   | The UTC date and time when the monitor first triggered in epoch milliseconds. |
+| `{{last_triggered_at}}`<br>*See note below*          | The UTC date and time when the monitor last triggered.                        |
+| `{{last_triggered_at_epoch}}`<br>*See note below*    | The UTC date and time when the monitor last triggered in epoch milliseconds.  |
+| `{{triggered_duration_sec}}`         | The number of seconds the monitor has been in a triggered state.              |
+
+**Note**: The `{{first_triggered_at}}`, `{{first_triggered_at_epoch}}`, `{{last_triggered_at}}`, and `{{last_triggered_at_epoch}}` monitor template variables reflect the values when a monitor changes state **NOT** when a new monitor event occurs. Renotification events show the same template variable if the monitor state has not changed. Use `{{triggered_duration_sec}}` to display the duration at the time of the monitor event.
 
 ### Evaluation
 

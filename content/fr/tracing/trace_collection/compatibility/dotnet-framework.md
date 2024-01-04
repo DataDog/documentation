@@ -58,13 +58,16 @@ La [dernière version du traceur .NET][5] peut instrumenter automatiquement les 
 
 | Framework ou bibliothèque            | Package NuGet                                                                             | Nom de l'intégration     |
 | ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
+| .NET Remoting                   | Intégré                                                                                  | `Remoting`           |
 | ADO.NET                         | Toutes les intégrations AdoNet                                                                   | `AdoNet`             |
 | Aerospike                       | `Aerospike.Client` 4.0.0+                                                                 | `Aerospike`          |
 | ASP.NET (y compris Web Forms)   | Intégré                                                                                  | `AspNet`             |
 | ASP.NET MVC                     | `Microsoft.AspNet.Mvc` 4.0+                                                               | `AspNetMvc`          |
 | ASP.NET Web API 2               | `Microsoft.AspNet.WebApi` 5.1+                                                            | `AspNetWebApi2`      |
-| AWS SNS                         | `AWSSDK.SNS`  3.0+                                                                        | `AwsSns`             |
-| AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
+| Amazon DynamoDB                 | `AWSSDK.DynamoDBv2`  3.0+                                                                 | `AwsDynamoDb`        |
+| Amazon Kinesis                  | `AWSSDK.Kinesis`  3.0+                                                                    | `AwsKinesis`         |
+| Amazon SNS                      | `AWSSDK.SNS`  3.0+                                                                        | `AwsSns`             |
+| Amazon SQS                      | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
 | CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0+                                                    | `CosmosDb`           |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                               | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                | `ElasticsearchNet`   |
@@ -72,6 +75,7 @@ La [dernière version du traceur .NET][5] peut instrumenter automatiquement les 
 | gRPC                            | `Grpc.Core` 2.3.0+                                                                        | `Grpc`               |
 | HotChocolate                    | `HotChocolate` 11.0.0+                                                                    | `HotChocolate`       |
 | HttpClient / HttpMessageHandler | Intégré                                                                                  | `HttpMessageHandler` |
+| IBM MQ                          | `amqmdnetstd` 9.0.0+                                                                      | `IbmMq`              |
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
 | MSMQ                            | Intégré                                                                                  | `Msmq`               |

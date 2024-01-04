@@ -4,6 +4,7 @@ kind: documentation
 description: "Learn how to control trace retention with retention filters."
 aliases:
 - /tracing/trace_retention/
+- /tracing/trace_queries/one_percent_flat_sampling/
 further_reading:
 - link: "/tracing/trace_pipeline/ingestion_mechanisms"
   tag: "Documentation"
@@ -116,7 +117,32 @@ The `retained_by` attribute is present on all retained spans. Its value is:
 
 ### In dashboards, notebooks, and monitors
 
-For the reasons explained above, spans indexed by the intelligent retention filter are **excluded** from APM queries that appear in dashboards and notebooks, and also **excluded** from trace analytics monitor evaluation. Pie charts are an exception as they only list spans retained by a retention filter.
+For the reasons explained above, spans indexed by the intelligent retention filter are **excluded** from APM queries that appear in dashboards and notebooks, and also **excluded** from trace analytics monitor evaluation.
+
+## One percent flat sampling
+
+[Trace Queries][11] are based on a **uniform 1% sample** of [ingested spans][12].
+
+{{< beta-callout url="#" btn_hidden="true">}}
+To join the Trace Queries private beta, <a href="https://docs.google.com/forms/d/e/1FAIpQLSebVVIAUcWIW941Zc3aBcEgmgGq349qCGKDk3QSSC2-PM8Aeg/viewform?pli=1">fill out this form</a>. Spans used for queries are from a <a href="#the-data-that-trace-queries-are-based-on"><strong>uniform 1% sample</strong> of ingested spans</a>, not from your existing retention filters.
+{{< /beta-callout >}}
+
+{{< img src="tracing/trace_queries/trace_queries_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling" >}}
+
+The flat 1% sampling is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision.
+
+**Note**: Spans indexed by the flat 1% sampling are not counted towards the usage of indexed spans, and so **do not impact your bill**.
+
+### What is the impact of enabling 1% flat sampling?
+
+Spans indexed by the 1% sampling can also be queried and found in the [Trace Explorer][13].
+
+After you enable 1% flat sampling, the volume of indexed spans is going to increase immediately. To find spans that are sampled by the 1% flat sampling, add the `retained_by:flat_sampled` query parameter in the Trace Explorer.
+
+{{< img src="tracing/trace_queries/flat_sampling.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling in Trace Explorer" >}}
+
+
+**Note**: Spans indexed by the flat 1% sampling are **not used** in [Trace Analytics monitors][14], dashboards, and notebooks APM queries.
 
 ## Further Reading
 
@@ -132,3 +158,7 @@ For the reasons explained above, spans indexed by the intelligent retention filt
 [8]: /tracing/glossary/#trace-root-span
 [9]: /tracing/services/service_page/
 [10]: /tracing/services/resource_page/
+[11]: /tracing/trace_explorer/trace_queries
+[12]: /tracing/trace_pipeline/ingestion_controls/
+[13]: /tracing/trace_explorer/
+[14]: /monitors/types/apm/?tab=traceanalytics
