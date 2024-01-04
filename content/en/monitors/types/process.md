@@ -66,7 +66,7 @@ If you cannot scope processes down to the granularity you would like using tags,
 
 ### Set alert conditions
 
-- The count was `above`, `above or equal to`, `below`, or `below or equal to`
+- The process count was `above`, `above or equal to`, `below`, or `below or equal to`
 - the threshold during the last `5 minutes`, `15 minutes`, `1 hour`, or larger. Additionally, you can use `custom` to set a value between 5 minutes and 24 hours.
 
 Process Count, in this case, refers to the number of all matching processes that were alive during the time interval.
