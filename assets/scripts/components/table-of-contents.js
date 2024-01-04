@@ -88,7 +88,7 @@ export function buildTOCMap() {
         tocAnchors.forEach((anchor) => {
             const href = anchor.getAttribute('href');
             const id = href ? href.replace('#', '').replace(' ', '-') : null;
-            const header = id ? document.querySelector(`#${decodeURI(id)}`) : null;
+            const header = id ? document.getElementById(`${decodeURI(id)}`) : null;
             const navParentLinks = Array.from(anchor.closest('#TableOfContents').querySelectorAll(':scope ul > li'))
                 .filter((node) => node.contains(anchor))
                 .filter((element) => element.querySelectorAll(':scope > a'));
@@ -152,7 +152,7 @@ export function onScroll() {
 
                     if (href) {
                         const id = href.replace('#', '').replace(' ', '-');
-                        const header = document.querySelector(`#${(decodeURI(id))}`);
+                        const header = document.getElementById(`${(decodeURI(id))}`);
                         if (header && header.nodeName === 'H2') {
                             link.classList.add('toc_open');
                         }
