@@ -212,10 +212,10 @@ For each VM, the following information is displayed:
 You can install the Datadog Agent directly in Azure with the VM Extension. To install the Datadog Agent: 
 
 1. Select the appropriate VM.
-2. Click **Install Agent**. 
+2. Click **Install Extension**. 
 3. The portal asks for confirmation to install the Agent with the default key. Select **OK** to begin installation. Azure shows the status as `Installing` until the Agent is installed and provisioned. After the Datadog Agent is installed, the status changes to `Installed`.
 
-#### Uninstall
+##### Uninstall
 
 If the Datadog Agent was installed with the Azure VM extension:
 
