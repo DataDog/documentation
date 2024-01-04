@@ -3456,11 +3456,20 @@ main:
     pre: cloud-security-management
     identifier: csm
     weight: 191500
+  - name: Getting Started
+    parent: csm
+    identifier: csm_getting_started_2
+    weight: 2
+  - name: Quickstart
+    identifier: getting_started_cloud_security_management
+    url: getting_started/cloud_security_management/
+    parent: csm_getting_started_2
+    weight: 50
   - name: Setup
     url: security/cloud_security_management/setup
-    parent: csm
+    parent: csm_getting_started_2
     identifier: csm_setup
-    weight: 1
+    weight: 55
   - name: CSM Enterprise
     url: security/cloud_security_management/setup/csm_enterprise
     parent: csm_setup
@@ -3476,111 +3485,166 @@ main:
     parent: csm_setup
     identifier: csm_setup_workload_security
     weight: 10010
+  - name: Learn
+    parent: csm
+    identifier: csm_learn
+    weight: 3
   - name: Threats
     url: security/threats/
-    parent: csm
-    identifier: cloud_workload_security
-    weight: 3
-  - name: Managing Detection Rules
-    url: security/threats/workload_security_rules
-    parent: cloud_workload_security
-    identifier: cws_workload_security_rules
-    weight: 202
-  - name: Security Signals
-    url: security/threats/security_signals
-    parent: cloud_workload_security
-    identifier: cws_security_signals
-    weight: 204
-  - name: Creating Custom Agent Rules
-    url: security/threats/agent_expressions
-    parent: cloud_workload_security
-    identifier: cws_agent_expressions
-    weight: 210
-  - name: CWS Events Formats
-    url: security/threats/backend
-    parent: cloud_workload_security
-    identifier: cws_backend_event_schema_documentation
-    weight: 212
+    parent: csm_learn
+    identifier: csm_threats
+    weight: 60
   - name: Misconfigurations
     url: security/misconfigurations/
-    parent: csm
-    identifier: cspm
-    weight: 5
-  - name: Compliance Rules
-    url: security/misconfigurations/compliance_rules
-    parent: cspm
-    identifier: cspm_detection_rules
-    weight: 102
-  - name: Custom Rules
-    url: security/misconfigurations/custom_rules
-    parent: cspm
-    identifier: cspm_custom_rules
-    weight: 103
-  - name: Compliance Reports
-    url: security/misconfigurations/frameworks_and_benchmarks
-    parent: cspm
-    identifier: cspm_frameworks_benchmarks
-    weight: 106
-  - name: Supported Frameworks
-    url: security/misconfigurations/supported_frameworks
-    parent: cspm
-    identifier: cspm_supported_frameworks
-    weight: 108
-  - name: Misconfigurations Explorer
-    url: /security/misconfigurations/findings
-    parent: cspm
-    identifier: cspm_findings_explorer
-    weight: 110
-  - name: Signals Explorer
-    url: /security/misconfigurations/signals_explorer/
-    parent: cspm
-    identifier: signals
-    weight: 112
+    parent: csm_learn
+    identifier: csm_misconfigurations
+    weight: 62
   - name: Identity Risks
     url: security/identity_risks/
-    parent: csm
+    parent: csm_learn
     identifier: csm_identity_risks
-    weight: 15
+    weight: 64
   - name: Vulnerabilities
     url: security/vulnerabilities
-    parent: csm
+    parent: csm_learn
     identifier: vulnerabilities
-    weight: 18
-  - name: Troubleshooting
-    url: security/vulnerabilities/troubleshooting
-    parent: vulnerabilities
-    identifier: vulnerabilities_troubleshooting
-    weight: 101
-  - name: Default Detection Rules
-    url: security/default_rules/#cat-cloud-security-management
+    weight: 66
+  - name: Review and Remediate
     parent: csm
-    identifier: csm_default_rules
-    weight: 20
-  - name: Mute Issues
-    url: security/cloud_security_management/mute_issues
-    parent: csm
-    identifier: csm_mute
-    weight: 22
+    identifier: csm_review_remediate
+    weight: 5
+  - name: Investigate Security Signals
+    url: security/threats/security_signals
+    parent: csm_review_remediate
+    identifier: csm_threats_security_signals
+    weight: 70
+  - name: Create Jira Issues
+    url: security/cloud_security_management/guide/jira
+    parent: csm_review_remediate
+    identifier: csm_jira
+    weight: 72
   - name: Automate Security Workflows
     url: security/cloud_security_management/workflows
-    parent: csm
+    parent: csm_review_remediate
     identifier: csm_workflow_automation
-    weight: 23
+    weight: 74
+  - name: Mute Issues
+    url: security/cloud_security_management/mute_issues
+    parent: csm_review_remediate
+    identifier: csm_mute
+    weight: 76    
+  - name: In-Depth Guides
+    parent: csm
+    identifier: csm_indepth_guides
+    weight: 7
+  - name: Detection Rules
+    parent: csm_indepth_guides
+    identifier: csm_detection_rules
+    weight: 80
+  - name: Managing CSM Threats Detection Rules
+    url: security/threats/workload_security_rules
+    parent: csm_detection_rules
+    identifier: cws_workload_security_rules
+    weight: 202
+  - name: Managing CSM Misconfigurations Compliance Rules
+    url: security/misconfigurations/compliance_rules
+    parent: csm_detection_rules
+    identifier: cspm_detection_rules
+    weight: 204
+  - name: Custom Rules
+    url: security/misconfigurations/custom_rules
+    parent: csm_detection_rules
+    identifier: cspm_custom_rules
+    weight: 206
+  - name: CSM Threats
+    parent: csm_indepth_guides
+    identifier: cws_guides
+    weight: 82
+  - name: Fine-tuning CSM Threats Security Signals
+    url: security/cloud_security_management/guide/tuning-rules/
+    parent: cws_guides
+    identifier: cws_fine_tuning_security_signals
+    weight: 302
+  - name: Guidelines for Writing Custom CSM Threats Rules
+    url: security/cloud_security_management/guide/custom-rules-guidelines/
+    parent: cws_guides
+    identifier: cws_guidelines_rules
+    weight: 304
+  - name: CSM Misconfigurations
+    parent: csm_indepth_guides
+    identifier: cspm_guides
+    weight: 84
+  - name: Writing Custom Rules with Rego
+    url: security/cloud_security_management/guide/writing_rego_rules/
+    parent: csm_indepth_guides
+    identifier: cspm_guidelines_rules_rego
+    weight: 402
+  - name: How Datadog Determines if Resources are Publicly Accessible
+    url: security/cloud_security_management/guide/public-accessibility-logic/
+    parent: csm_indepth_guides
+    identifier: cspm_public_accessible
+    weight: 404
+  - name: Use Filters to Exclude Resources from Evaluation
+    url: security/cloud_security_management/guide/resource_evaluation_filters
+    parent: csm_indepth_guides
+    identifier: cspm_resource_filters
+    weight: 406
+  - name: Create Custom Compliance Frameworks
+    url: security/misconfigurations/frameworks_and_benchmarks
+    parent: csm_indepth_guides
+    identifier: cspm_frameworks_benchmarks
+    weight: 408
+  - name: Export Misconfigurations
+    url: /security/misconfigurations/findings
+    parent: csm_indepth_guides
+    identifier: cspm_findings_explorer
+    weight: 410
+  - name: Reference
+    parent: csm
+    identifier: csm_reference
+    weight: 7
   - name: Severity Scoring
     url: security/cloud_security_management/severity_scoring/
-    parent: csm
+    parent: csm_reference
     identifier: csm_severity_scoring
-    weight: 24
-  - name: Guides
-    url: security/cloud_security_management/guide/
-    parent: csm
-    identifier: csm_guides
-    weight: 25
+    weight: 502
+  - name: CSM Threats
+    parent: csm_reference
+    identifier: csm_threats_reference
+    weight: 504
+  - name: CWS Events Formats
+    url: security/threats/backend
+    parent: csm_threats_reference
+    identifier: cws_backend_event_schema_documentation
+    weight: 702
+  - name: Custom Agent Rules Syntax
+    url: security/threats/agent_expressions
+    parent: csm_threats_reference
+    identifier: cws_agent_expressions
+    weight: 704
+  - name: CSM Misconfigurations
+    parent: csm_reference
+    identifier: csm_misconfigurations_reference
+    weight: 506
+  - name: Supported Frameworks
+    url: security/misconfigurations/supported_frameworks
+    parent: csm_misconfigurations_reference
+    identifier: cspm_supported_frameworks
+    weight: 802
   - name: Troubleshooting
-    url: security/cloud_security_management/troubleshooting/
     parent: csm
     identifier: csm_troubleshooting
-    weight: 30
+    weight: 9
+  - name: CSM Vulnerabilities
+    url: security/vulnerabilities/troubleshooting
+    parent: csm_troubleshooting
+    identifier: vulnerabilities_troubleshooting
+    weight: 902
+  - name: CSM Threats
+    url: security/cloud_security_management/troubleshooting/
+    parent: csm_troubleshooting
+    identifier: threats_troubleshooting
+    weight: 904
   - name: Application Security Management
     url: security/application_security/
     parent: security_platform_heading
