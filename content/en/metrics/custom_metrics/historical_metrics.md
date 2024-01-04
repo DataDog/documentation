@@ -23,7 +23,7 @@ Having Historical Metrics Ingestion enabled on your metrics can be helpful for a
 
 {{< img src="metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_intro.png" alt="Diagram showing the ingestion flow for Historical Metrics" >}}
 
-Datadog classifies *historical metrics* as metric points with timestamps that are older than an hour relative to the time of submission. If Historical Metrics Ingestion is not enabled, metrics older than an hour from submission will not be ingested.
+Datadog classifies *historical metrics* as metric points with timestamps that are older than an hour relative to the time of submission. If Historical Metrics Ingestion is not enabled, metrics older than an hour from submission are not ingested.
 
 For example, your metric (`exampleMetricA`) emits a value to Datadog at 1:00 PM EST, and the timestamp on that value is 10:00 AM EST. This metric value is classified as _historical_ because it has a timestamp 3 hours older relative to the time of submission.
 
