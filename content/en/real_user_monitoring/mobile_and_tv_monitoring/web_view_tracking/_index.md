@@ -25,7 +25,7 @@ You can perform the following:
 - Scope the root cause of latency to web pages or native components in mobile applications
 - Support users that have difficulty loading web pages on mobile devices
 
-Note that when Web View tracking is enabled, Browser Session Replay will be disabled, no matter how the Browser SDK is configured.
+**Note:** When Web View Tracking is enabled, Browser Session Replay will be disabled, no matter how the Browser SDK is configured.
 
 ## Setup
 
@@ -128,7 +128,7 @@ WebViewTracking.disable(webView: webView)
 
 The RUM Flutter SDK provides APIs for you to control web view tracking when using the [`webview_flutter`][1] package. To add Web View Tracking, call the `trackDatadogEvents` extension method on `WebViewController`, providing the list of allowed hosts.
 
-Add the following to your `pubspec.yaml` with the most recent version of the [datadog_webview_tracking][2] plugin
+Add the following to your `pubspec.yaml` with the most recent version of the [`datadog_webview_tracking`][2] plugin:
 ```yaml
 dependencies:
   datadog_webview_tracking: ^x.x.x
