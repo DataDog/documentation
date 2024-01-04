@@ -81,13 +81,24 @@ To install the [Windows Agent][102], either use a GUI or the command line.
 #### Command Line
 
 1. Download the [Synthetics Private Location Installer][101].
-2. Run one of the following commands inside the directory where you downloaded the installer.
+2. Run the following command inside the directory where you downloaded the installer.
 
-// Commands TBD
+   ```shell
+   msiexec /i datadog-synthetics-worker-<version-number>.amd64.msi
+   ```
+   
+   To run a [quiet installation][104], run the command with the `/quiet` option:
+
+   ```shell
+   msiexec /i datadog-synthetics-worker-<version-number>.amd64.msi /quiet /qn /L*V "install.log" APPLYDEFAULTFIREWALLRULES=1 APPLYFIREWALLDEFAULTBLOCKRULES=1 CONFIGURE_AUTOLOGON=1 AUTO_REBOOT=1 CONFIG_FILEPATH=C:\config\worker-config-win-pl.json LOGGING_ENABLED=1 LOGGING_MAXDAYS=7 LOGGING_VERBOSITY="-vvv"
+   ```
+   
+For more information about optional parameters, see the [Command Line Options section](#command-line-options).
 
 [101]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
 [102]: /agent/basic_agent_usage/windows/
 [103]: https://app.datadoghq.com/organization-settings/api-keys
+[104]: https://learn.microsoft.com/en-us/windows/win32/msi/standard-installer-command-line-options#quiet
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -544,7 +555,9 @@ Once the process is complete, click **Finish** on the installation completion pa
 
 <div class="alert alert-warning">If you entered your JSON configuration, the Windows Service starts running using that configuration. If you did not enter your configuration, run <code>synthetics-pl-worker.exe --config=<PathToYourConfiguration></code> from a command prompt or use the <code>start menu</code> shortcut to start the Synthetics Private Location Worker.</div>
 
-To install the Synthetics Private Location Worker on the command line, use `msiexec` and include parameters as needed. 
+### Command line options
+
+To install the Synthetics Private Location Worker on the command line, use the `msiexec` command and include parameters as needed. 
 
 | Optional Parameter | Definition | Value | Default Value | Type |
 |---|---|---|---|---|

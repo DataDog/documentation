@@ -139,6 +139,32 @@ Synthetic tests by default do not [renotify][12]. This means that if you add you
 ## Private locations
 
 {{< tabs >}}
+{{% tab "Common" %}}
+
+### My browser test results sometimes show `Page crashed` errors
+
+This could uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][101].
+
+### My tests are sometimes slower to execute 
+
+This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location containers are provisioned with [sufficient CPU resources][101].
+
+### My browser tests are taking too long to run
+
+Confirm you are not seeing [out of memory issues][102] with your private location deployments. If you have tried scaling your container instances following the [dimensioning guidelines][103] already, reach out to [Datadog Support][104].
+
+### `TIMEOUT` errors appear in API tests executed from my private location
+
+This might mean your private location is unable to reach the endpoint your API test is set to run on. Confirm that the private location is installed in the same network as the endpoint you are willing to test. You can also try to run your test on different endpoints to see if you get the same `TIMEOUT` error or not.
+
+{{< img src="synthetics/timeout.png" alt="API test on private location timing out" style="width:70%;" >}}
+
+[101]: /synthetics/private_locations#private-location-total-hardware-requirements
+[102]: https://docs.docker.com/config/containers/resource_constraints/
+[103]: /synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
+[104]: /help/
+
+{{% /tab %}}
 {{% tab "Docker" %}}
 
 ### My private location containers sometimes get killed `OOM`
@@ -180,32 +206,6 @@ First, ensure that you are logged in on the machine where the Synthetics Private
 If the Synthetics Private Location Worker crashes, add a scheduled task in Windows that runs a PowerShell script to restart the application if it stops running. This ensures that a private location is restarted after a crash. 
 
 If you provided a configuration file when installing the application, a Windows service called `Datadog Synthetics Private Location` starts automatically after installation. To verify this, ensure that you can see the service running in the **Services** tool. This Windows service restarts the private location automatically.
-
-{{% /tab %}}
-{{% tab "Common" %}}
-
-### My browser test results sometimes show `Page crashed` errors
-
-This could uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][101].
-
-### My tests are sometimes slower to execute 
-
-This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location containers are provisioned with [sufficient CPU resources][101].
-
-### My browser tests are taking too long to run
-
-Confirm you are not seeing [out of memory issues][102] with your private location deployments. If you have tried scaling your container instances following the [dimensioning guidelines][103] already, reach out to [Datadog Support][104].
-
-### `TIMEOUT` errors appear in API tests executed from my private location
-
-This might mean your private location is unable to reach the endpoint your API test is set to run on. Confirm that the private location is installed in the same network as the endpoint you are willing to test. You can also try to run your test on different endpoints to see if you get the same `TIMEOUT` error or not.
-
-{{< img src="synthetics/timeout.png" alt="API test on private location timing out" style="width:70%;" >}}
-
-[101]: /synthetics/private_locations#private-location-total-hardware-requirements
-[102]: https://docs.docker.com/config/containers/resource_constraints/
-[103]: /synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
-[104]: /help/
 
 {{% /tab %}}
 {{< /tabs >}}
