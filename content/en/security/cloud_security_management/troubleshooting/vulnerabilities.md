@@ -57,7 +57,7 @@ Error: failed to check current disk usage: not enough disk space to safely colle
 Workaround: 
 
 - Increase the available disk space to at least 1GB. If your images are larger than 1GB, increase your disk space accordingly.
-- If all of your images are smaller than 1GB, you can decrease the Agent request disk space with the parameter: `sbom.container_image.min_available_disk` (default value 1GB).
+- If all of your images are smaller than 1GB, you can decrease the default Agent request disk space with the environment variable: `DD_SBOM_CONTAINER_IMAGE_MIN_AVAILABLE_DISK` (default value 1GB).
 
 ### Uncompressed container image layers
 
