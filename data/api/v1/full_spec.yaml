@@ -56,7 +56,7 @@ components:
           type: string
         account_id:
           description: Your AWS Account ID without dashes.
-          example: '1234567'
+          example: '123456789012'
           type: string
         account_specific_namespace_rules:
           additionalProperties:
@@ -80,7 +80,9 @@ components:
           example: true
           type: boolean
         excluded_regions:
-          description: An array of AWS regions to exclude from metrics collection.
+          description: 'An array of [AWS regions](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints)
+
+            to exclude from metrics collection.'
           example:
           - us-east-1
           - us-west-2
@@ -116,7 +118,7 @@ components:
           example:
           - $KEY:$VALUE
           items:
-            description: The list of the the host_tags.
+            description: The list of the host_tags.
             type: string
           type: array
         metrics_collection_enabled:
@@ -171,7 +173,7 @@ components:
           type: string
         account_id:
           description: Your AWS Account ID without dashes.
-          example: '1234567'
+          example: '123456789012'
           type: string
         role_name:
           description: Your Datadog role delegation name.
@@ -186,6 +188,136 @@ components:
           items:
             $ref: '#/components/schemas/AWSAccount'
           type: array
+      type: object
+    AWSEventBridgeAccountConfiguration:
+      description: The EventBridge configuration for one AWS account.
+      properties:
+        accountId:
+          description: Your AWS Account ID without dashes.
+          example: '123456789012'
+          type: string
+        eventHubs:
+          description: Array of AWS event sources associated with this account.
+          items:
+            $ref: '#/components/schemas/AWSEventBridgeSource'
+          type: array
+        tags:
+          description: 'Array of tags (in the form `key:value`) which are added to
+            all hosts
+
+            and metrics reporting through the main AWS integration.'
+          example:
+          - $KEY:$VALUE
+          items:
+            description: The list of the host_tags.
+            type: string
+          type: array
+      type: object
+    AWSEventBridgeCreateRequest:
+      description: An object used to create an EventBridge source.
+      properties:
+        account_id:
+          description: Your AWS Account ID without dashes.
+          example: '123456789012'
+          type: string
+        create_event_bus:
+          description: 'True if Datadog should create the event bus in addition to
+            the event
+
+            source. Requires the `events:CreateEventBus` permission.'
+          example: true
+          type: boolean
+        event_generator_name:
+          description: 'The given part of the event source name, which is then combined
+            with an
+
+            assigned suffix to form the full name.'
+          example: app-alerts
+          type: string
+        region:
+          description: The event source's [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints).
+          example: us-east-1
+          type: string
+      type: object
+    AWSEventBridgeCreateResponse:
+      description: A created EventBridge source.
+      properties:
+        event_source_name:
+          description: The event source name.
+          example: app-alerts-zyxw3210
+          type: string
+        has_bus:
+          description: True if the event bus was created in addition to the source.
+          example: true
+          type: boolean
+        region:
+          description: The event source's [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints).
+          example: us-east-1
+          type: string
+        status:
+          $ref: '#/components/schemas/AWSEventBridgeCreateStatus'
+      type: object
+    AWSEventBridgeCreateStatus:
+      description: The event source status "created".
+      enum:
+      - created
+      example: created
+      type: string
+      x-enum-varnames:
+      - CREATED
+    AWSEventBridgeDeleteRequest:
+      description: An object used to delete an EventBridge source.
+      properties:
+        account_id:
+          description: Your AWS Account ID without dashes.
+          example: '123456789012'
+          type: string
+        event_generator_name:
+          description: The event source name.
+          example: app-alerts-zyxw3210
+          type: string
+        region:
+          description: The event source's [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints).
+          example: us-east-1
+          type: string
+      type: object
+    AWSEventBridgeDeleteResponse:
+      description: An indicator of the successful deletion of an EventBridge source.
+      properties:
+        status:
+          $ref: '#/components/schemas/AWSEventBridgeDeleteStatus'
+      type: object
+    AWSEventBridgeDeleteStatus:
+      description: The event source status "empty".
+      enum:
+      - empty
+      example: empty
+      type: string
+      x-enum-varnames:
+      - EMPTY
+    AWSEventBridgeListResponse:
+      description: An object describing the EventBridge configuration for multiple
+        accounts.
+      properties:
+        accounts:
+          description: List of accounts with their event sources.
+          items:
+            $ref: '#/components/schemas/AWSEventBridgeAccountConfiguration'
+          type: array
+        isInstalled:
+          description: True if the EventBridge sub-integration is enabled for your
+            organization.
+          type: boolean
+      type: object
+    AWSEventBridgeSource:
+      description: An EventBridge source.
+      properties:
+        name:
+          description: The event source name.
+          type: string
+        region:
+          description: The event source's [AWS region](https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints).
+          type: string
       type: object
     AWSLogsAsyncError:
       description: Description of errors.
@@ -323,7 +455,7 @@ components:
       properties:
         account_id:
           description: Your AWS Account ID without dashes.
-          example: '1234567'
+          example: '123456789012'
           type: string
         namespace:
           $ref: '#/components/schemas/AWSNamespace'
@@ -667,9 +799,18 @@ components:
           description: Your Azure web application secret key.
           example: testingx./Sw*g/Y33t..R1cH+hScMDt
           type: string
+        container_app_filters:
+          description: 'Limit the Azure container apps that are pulled into Datadog
+            using tags.
+
+            Only container apps that match one of the defined tags are imported into
+            Datadog.'
+          example: key:value,filter:example
+          type: string
         cspm_enabled:
-          description: Enable Cloud Security Management Misconfigurations for your
-            organization.
+          description: "When enabled, Datadog\u2019s Cloud Security Management product
+            scans resource configurations monitored by this app registration.\nNote:
+            This requires resource_collection_enabled to be set to true."
           example: true
           type: boolean
         custom_metrics_enabled:
@@ -700,6 +841,12 @@ components:
           description: Your New Azure Active Directory ID.
           example: new1c44-1234-5678-9101-cc00736ftest
           type: string
+        resource_collection_enabled:
+          description: When enabled, Datadog collects metadata and configuration info
+            from cloud resources (compute instances, databases, load balancers, etc.)
+            monitored by this app registration.
+          example: true
+          type: boolean
         tenant_name:
           description: Your Azure Active Directory ID.
           example: testc44-1234-5678-9101-cc00736ftest
@@ -3163,9 +3310,16 @@ components:
           example: key:value,filter:example
           type: string
         is_cspm_enabled:
+          description: 'When enabled, Datadog will activate the Cloud Security Monitoring
+            product for this service account. Note: This requires resource_collection_enabled
+            to be set to true.'
+          example: true
+          type: boolean
+        is_security_command_center_enabled:
           default: false
-          description: When enabled, Datadog performs configuration checks across
-            your Google Cloud environment by continuously scanning every resource.
+          description: 'When enabled, Datadog will attempt to collect Security Command
+            Center Findings. Note: This requires additional permissions on the service
+            account.'
           example: true
           type: boolean
         private_key:
@@ -3181,6 +3335,10 @@ components:
             key.
           example: datadog-apitest
           type: string
+        resource_collection_enabled:
+          description: When enabled, Datadog scans for all resources in your GCP environment.
+          example: true
+          type: boolean
         token_uri:
           description: Should be `https://accounts.google.com/o/oauth2/token`.
           example: https://accounts.google.com/o/oauth2/token
@@ -4000,11 +4158,15 @@ components:
       - appsec_fargate_usage
       - appsec_usage
       - browser_usage
+      - ci_pipeline_indexed_spans_usage
+      - ci_test_indexed_spans_usage
       - ci_visibility_itr_usage
+      - cloud_siem_usage
       - container_excl_agent_usage
       - container_usage
       - cspm_containers_usage
       - cspm_hosts_usage
+      - custom_event_usage
       - custom_ingested_timeseries_usage
       - custom_timeseries_usage
       - cws_containers_usage
@@ -4018,8 +4180,22 @@ components:
       - estimated_rum_sessions_usage
       - fargate_usage
       - functions_usage
+      - indexed_spans_usage
       - infra_host_usage
+      - ingested_logs_bytes_usage
+      - ingested_spans_bytes_usage
       - invocations_usage
+      - lambda_traced_invocations_usage
+      - logs_indexed_15day_usage
+      - logs_indexed_180day_usage
+      - logs_indexed_30day_usage
+      - logs_indexed_360day_usage
+      - logs_indexed_3day_usage
+      - logs_indexed_45day_usage
+      - logs_indexed_60day_usage
+      - logs_indexed_7day_usage
+      - logs_indexed_90day_usage
+      - logs_indexed_custom_retention_usage
       - mobile_app_testing_usage
       - ndm_netflow_usage
       - npm_host_usage
@@ -4027,8 +4203,11 @@ components:
       - profiled_container_usage
       - profiled_fargate_usage
       - profiled_host_usage
+      - rum_browser_mobile_sessions_usage
+      - rum_replay_sessions_usage
       - sds_scanned_bytes_usage
       - serverless_apps_usage
+      - siem_ingested_bytes_usage
       - snmp_usage
       - universal_service_monitoring_usage
       - vuln_management_hosts_usage
@@ -4041,11 +4220,15 @@ components:
       - APPSEC_FARGATE_USAGE
       - APPSEC_USAGE
       - BROWSER_USAGE
+      - CI_PIPELINE_INDEXED_SPANS_USAGE
+      - CI_TEST_INDEXED_SPANS_USAGE
       - CI_VISIBILITY_ITR_USAGE
+      - CLOUD_SIEM_USAGE
       - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_USAGE
       - CSPM_CONTAINERS_USAGE
       - CSPM_HOSTS_USAGE
+      - CUSTOM_EVENT_USAGE
       - CUSTOM_INGESTED_TIMESERIES_USAGE
       - CUSTOM_TIMESERIES_USAGE
       - CWS_CONTAINERS_USAGE
@@ -4059,8 +4242,22 @@ components:
       - ESTIMATED_RUM_SESSIONS_USAGE
       - FARGATE_USAGE
       - FUNCTIONS_USAGE
+      - INDEXED_SPANS_USAGE
       - INFRA_HOST_USAGE
+      - INGESTED_LOGS_BYTES_USAGE
+      - INGESTED_SPANS_BYTES_USAGE
       - INVOCATIONS_USAGE
+      - LAMBDA_TRACED_INVOCATIONS_USAGE
+      - LOGS_INDEXED_15DAY_USAGE
+      - LOGS_INDEXED_180DAY_USAGE
+      - LOGS_INDEXED_30DAY_USAGE
+      - LOGS_INDEXED_360DAY_USAGE
+      - LOGS_INDEXED_3DAY_USAGE
+      - LOGS_INDEXED_45DAY_USAGE
+      - LOGS_INDEXED_60DAY_USAGE
+      - LOGS_INDEXED_7DAY_USAGE
+      - LOGS_INDEXED_90DAY_USAGE
+      - LOGS_INDEXED_CUSTOM_RETENTION_USAGE
       - MOBILE_APP_TESTING_USAGE
       - NDM_NETFLOW_USAGE
       - NPM_HOST_USAGE
@@ -4068,8 +4265,11 @@ components:
       - PROFILED_CONTAINER_USAGE
       - PROFILED_FARGATE_USAGE
       - PROFILED_HOST_USAGE
+      - RUM_BROWSER_MOBILE_SESSIONS_USAGE
+      - RUM_REPLAY_SESSIONS_USAGE
       - SDS_SCANNED_BYTES_USAGE
       - SERVERLESS_APPS_USAGE
+      - SIEM_INGESTED_BYTES_USAGE
       - SNMP_USAGE
       - UNIVERSAL_SERVICE_MONITORING_USAGE
       - VULN_MANAGEMENT_HOSTS_USAGE
@@ -4130,6 +4330,22 @@ components:
       type: object
     IPPrefixesAgents:
       description: Available prefix information for the Agent endpoints.
+      properties:
+        prefixes_ipv4:
+          description: List of IPv4 prefixes.
+          items:
+            description: IPv4 prefix
+            type: string
+          type: array
+        prefixes_ipv6:
+          description: List of IPv6 prefixes.
+          items:
+            description: IPv6 prefix
+            type: string
+          type: array
+      type: object
+    IPPrefixesGlobal:
+      description: Available prefix information for all Datadog endpoints.
       properties:
         prefixes_ipv4:
           description: List of IPv4 prefixes.
@@ -4284,6 +4500,8 @@ components:
           $ref: '#/components/schemas/IPPrefixesAPI'
         apm:
           $ref: '#/components/schemas/IPPrefixesAPM'
+        global:
+          $ref: '#/components/schemas/IPPrefixesGlobal'
         logs:
           $ref: '#/components/schemas/IPPrefixesLogs'
         modified:
@@ -6710,7 +6928,6 @@ components:
             This is only used by CI Test and Pipeline monitors.
           type: boolean
         escalation_message:
-          default: none
           description: 'We recommend using the [is_renotify](https://docs.datadoghq.com/monitors/notify/?tab=is_alert#renotify),
 
             block in the original message instead.
@@ -6851,9 +7068,8 @@ components:
             type: string
           type: array
         notify_no_data:
-          default: false
           description: A Boolean indicating whether this monitor notifies when data
-            stops reporting.
+            stops reporting. Defaults to `false`.
           type: boolean
         on_missing_data:
           $ref: '#/components/schemas/OnMissingDataOption'
@@ -6938,6 +7154,33 @@ components:
           type: string
       readOnly: true
       type: object
+    MonitorOptionsCustomSchedule:
+      description: Configuration options for the custom schedule. **This feature is
+        in private beta.**
+      properties:
+        recurrences:
+          description: Array of custom schedule recurrences.
+          items:
+            $ref: '#/components/schemas/MonitorOptionsCustomScheduleRecurrence'
+          type: array
+      type: object
+    MonitorOptionsCustomScheduleRecurrence:
+      description: Configuration for a recurrence set on the monitor options for custom
+        schedule.
+      properties:
+        rrule:
+          description: Defines the recurrence rule (RRULE) for a given schedule.
+          example: FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR
+          type: string
+        start:
+          description: Defines the start date and time of the recurring schedule.
+          example: '2023-08-31T16:30:00'
+          type: string
+        timezone:
+          description: Defines the timezone the schedule runs on.
+          example: Europe/Paris
+          type: string
+      type: object
     MonitorOptionsNotificationPresets:
       default: show_all
       description: Toggles the display of additional content sent in the monitor notification.
@@ -6955,6 +7198,8 @@ components:
     MonitorOptionsSchedulingOptions:
       description: Configuration options for scheduling.
       properties:
+        custom_schedule:
+          $ref: '#/components/schemas/MonitorOptionsCustomSchedule'
         evaluation_window:
           $ref: '#/components/schemas/MonitorOptionsSchedulingOptionsEvaluationWindow'
       type: object
@@ -7558,6 +7803,8 @@ components:
       - browser_percentage
       - ci_visibility_itr_usage
       - ci_visibility_itr_percentage
+      - cloud_siem_usage
+      - cloud_siem_percentage
       - container_excl_agent_usage
       - container_excl_agent_percentage
       - container_usage
@@ -7594,6 +7841,8 @@ components:
       - infra_host_percentage
       - invocations_usage
       - invocations_percentage
+      - lambda_traced_invocations_usage
+      - lambda_traced_invocations_percentage
       - mobile_app_testing_percentage
       - mobile_app_testing_usage
       - ndm_netflow_usage
@@ -7620,6 +7869,44 @@ components:
       - vuln_management_hosts_percentage
       - sds_scanned_bytes_usage
       - sds_scanned_bytes_percentage
+      - ci_test_indexed_spans_usage
+      - ci_test_indexed_spans_percentage
+      - ingested_logs_bytes_usage
+      - ingested_logs_bytes_percentage
+      - ci_pipeline_indexed_spans_usage
+      - ci_pipeline_indexed_spans_percentage
+      - indexed_spans_usage
+      - indexed_spans_percentage
+      - custom_event_usage
+      - custom_event_percentage
+      - logs_indexed_custom_retention_usage
+      - logs_indexed_custom_retention_percentage
+      - logs_indexed_360day_usage
+      - logs_indexed_360day_percentage
+      - logs_indexed_180day_usage
+      - logs_indexed_180day_percentage
+      - logs_indexed_90day_usage
+      - logs_indexed_90day_percentage
+      - logs_indexed_60day_usage
+      - logs_indexed_60day_percentage
+      - logs_indexed_45day_usage
+      - logs_indexed_45day_percentage
+      - logs_indexed_30day_usage
+      - logs_indexed_30day_percentage
+      - logs_indexed_15day_usage
+      - logs_indexed_15day_percentage
+      - logs_indexed_7day_usage
+      - logs_indexed_7day_percentage
+      - logs_indexed_3day_usage
+      - logs_indexed_3day_percentage
+      - rum_replay_sessions_usage
+      - rum_replay_sessions_percentage
+      - rum_browser_mobile_sessions_usage
+      - rum_browser_mobile_sessions_percentage
+      - ingested_spans_bytes_usage
+      - ingested_spans_bytes_percentage
+      - siem_ingested_bytes_usage
+      - siem_ingested_bytes_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -7639,6 +7926,8 @@ components:
       - BROWSER_PERCENTAGE
       - CI_VISIBILITY_ITR_USAGE
       - CI_VISIBILITY_ITR_PERCENTAGE
+      - CLOUD_SIEM_USAGE
+      - CLOUD_SIEM_PERCENTAGE
       - CONTAINER_EXCL_AGENT_USAGE
       - CONTAINER_EXCL_AGENT_PERCENTAGE
       - CONTAINER_USAGE
@@ -7675,6 +7964,8 @@ components:
       - INFRA_HOST_PERCENTAGE
       - INVOCATIONS_USAGE
       - INVOCATIONS_PERCENTAGE
+      - LAMBDA_TRACED_INVOCATIONS_USAGE
+      - LAMBDA_TRACED_INVOCATIONS_PERCENTAGE
       - MOBILE_APP_TESTING_USAGE
       - MOBILE_APP_TESTING_PERCENTAGE
       - NDM_NETFLOW_USAGE
@@ -7701,6 +7992,44 @@ components:
       - VULN_MANAGEMENT_HOSTS_PERCENTAGE
       - SDS_SCANNED_BYTES_USAGE
       - SDS_SCANNED_BYTES_PERCENTAGE
+      - CI_TEST_INDEXED_SPANS_USAGE
+      - CI_TEST_INDEXED_SPANS_PERCENTAGE
+      - INGESTED_LOGS_BYTES_USAGE
+      - INGESTED_LOGS_BYTES_PERCENTAGE
+      - CI_PIPELINE_INDEXED_SPANS_USAGE
+      - CI_PIPELINE_INDEXED_SPANS_PERCENTAGE
+      - INDEXED_SPANS_USAGE
+      - INDEXED_SPANS_PERCENTAGE
+      - CUSTOM_EVENT_USAGE
+      - CUSTOM_EVENT_PERCENTAGE
+      - LOGS_INDEXED_CUSTOM_RETENTION_USAGE
+      - LOGS_INDEXED_CUSTOM_RETENTION_PERCENTAGE
+      - LOGS_INDEXED_360DAY_USAGE
+      - LOGS_INDEXED_360DAY_PERCENTAGE
+      - LOGS_INDEXED_180DAY_USAGE
+      - LOGS_INDEXED_180DAY_PERCENTAGE
+      - LOGS_INDEXED_90DAY_USAGE
+      - LOGS_INDEXED_90DAY_PERCENTAGE
+      - LOGS_INDEXED_60DAY_USAGE
+      - LOGS_INDEXED_60DAY_PERCENTAGE
+      - LOGS_INDEXED_45DAY_USAGE
+      - LOGS_INDEXED_45DAY_PERCENTAGE
+      - LOGS_INDEXED_30DAY_USAGE
+      - LOGS_INDEXED_30DAY_PERCENTAGE
+      - LOGS_INDEXED_15DAY_USAGE
+      - LOGS_INDEXED_15DAY_PERCENTAGE
+      - LOGS_INDEXED_7DAY_USAGE
+      - LOGS_INDEXED_7DAY_PERCENTAGE
+      - LOGS_INDEXED_3DAY_USAGE
+      - LOGS_INDEXED_3DAY_PERCENTAGE
+      - RUM_REPLAY_SESSIONS_USAGE
+      - RUM_REPLAY_SESSIONS_PERCENTAGE
+      - RUM_BROWSER_MOBILE_SESSIONS_USAGE
+      - RUM_BROWSER_MOBILE_SESSIONS_PERCENTAGE
+      - INGESTED_SPANS_BYTES_USAGE
+      - INGESTED_SPANS_BYTES_PERCENTAGE
+      - SIEM_INGESTED_BYTES_USAGE
+      - SIEM_INGESTED_BYTES_PERCENTAGE
       - ALL
     MonthlyUsageAttributionValues:
       description: Fields in Usage Summary by tag(s).
@@ -7765,6 +8094,22 @@ components:
           description: The synthetic browser test usage by tag(s).
           format: double
           type: number
+        ci_pipeline_indexed_spans_percentage:
+          description: The percentage of CI Pipeline Indexed Spans usage by tag(s).
+          format: double
+          type: number
+        ci_pipeline_indexed_spans_usage:
+          description: The total CI Pipeline Indexed Spans usage by tag(s).
+          format: double
+          type: number
+        ci_test_indexed_spans_percentage:
+          description: The percentage of CI Test Indexed Spans usage by tag(s).
+          format: double
+          type: number
+        ci_test_indexed_spans_usage:
+          description: The total CI Test Indexed Spans usage by tag(s).
+          format: double
+          type: number
         ci_visibility_itr_percentage:
           description: The percentage of Git committers for Intelligent Test Runner
             usage by tag(s).
@@ -7772,6 +8117,16 @@ components:
           type: number
         ci_visibility_itr_usage:
           description: The Git committers for Intelligent Test Runner usage by tag(s).
+          format: double
+          type: number
+        cloud_siem_percentage:
+          description: The percentage of Cloud Security Information and Event Management
+            usage by tag(s).
+          format: double
+          type: number
+        cloud_siem_usage:
+          description: The Cloud Security Information and Event Management usage by
+            tag(s).
           format: double
           type: number
         container_excl_agent_percentage:
@@ -7807,6 +8162,14 @@ components:
           type: number
         cspm_hosts_usage:
           description: The Cloud Security Management Pro host usage by tag(s).
+          format: double
+          type: number
+        custom_event_percentage:
+          description: The percentage of Custom Events usage by tag(s).
+          format: double
+          type: number
+        custom_event_usage:
+          description: The total Custom Events usage by tag(s).
           format: double
           type: number
         custom_ingested_timeseries_percentage:
@@ -7914,6 +8277,14 @@ components:
           description: The Lambda function usage by tag(s).
           format: double
           type: number
+        indexed_spans_percentage:
+          description: The percentage of APM Indexed Spans usage by tag(s).
+          format: double
+          type: number
+        indexed_spans_usage:
+          description: The total APM Indexed Spans usage by tag(s).
+          format: double
+          type: number
         infra_host_percentage:
           description: The percentage of infrastructure host usage by tag(s).
           format: double
@@ -7922,12 +8293,124 @@ components:
           description: The infrastructure host usage by tag(s).
           format: double
           type: number
+        ingested_logs_bytes_percentage:
+          description: The percentage of Ingested Logs usage by tag(s).
+          format: double
+          type: number
+        ingested_logs_bytes_usage:
+          description: The total Ingested Logs usage by tag(s).
+          format: double
+          type: number
+        ingested_spans_bytes_percentage:
+          description: The percentage of APM Ingested Spans usage by tag(s).
+          format: double
+          type: number
+        ingested_spans_bytes_usage:
+          description: The total APM Ingested Spans usage by tag(s).
+          format: double
+          type: number
         invocations_percentage:
           description: The percentage of Lambda invocation usage by tag(s).
           format: double
           type: number
         invocations_usage:
           description: The Lambda invocation usage by tag(s).
+          format: double
+          type: number
+        lambda_traced_invocations_percentage:
+          description: The percentage of Serverless APM usage by tag(s).
+          format: double
+          type: number
+        lambda_traced_invocations_usage:
+          description: The Serverless APM usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_15day_percentage:
+          description: The percentage of Indexed Logs (15-day Retention) usage by
+            tag(s).
+          format: double
+          type: number
+        logs_indexed_15day_usage:
+          description: The total Indexed Logs (15-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_180day_percentage:
+          description: The percentage of Indexed Logs (180-day Retention) usage by
+            tag(s).
+          format: double
+          type: number
+        logs_indexed_180day_usage:
+          description: The total Indexed Logs (180-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_30day_percentage:
+          description: The percentage of Indexed Logs (30-day Retention) usage by
+            tag(s).
+          format: double
+          type: number
+        logs_indexed_30day_usage:
+          description: The total Indexed Logs (30-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_360day_percentage:
+          description: The percentage of Indexed Logs (360-day Retention) usage by
+            tag(s).
+          format: double
+          type: number
+        logs_indexed_360day_usage:
+          description: The total Indexed Logs (360-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_3day_percentage:
+          description: The percentage of Indexed Logs (3-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_3day_usage:
+          description: The total Indexed Logs (3-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_45day_percentage:
+          description: The percentage of Indexed Logs (45-day Retention) usage by
+            tag(s).
+          format: double
+          type: number
+        logs_indexed_45day_usage:
+          description: The total Indexed Logs (45-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_60day_percentage:
+          description: The percentage of Indexed Logs (60-day Retention) usage by
+            tag(s).
+          format: double
+          type: number
+        logs_indexed_60day_usage:
+          description: The total Indexed Logs (60-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_7day_percentage:
+          description: The percentage of Indexed Logs (7-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_7day_usage:
+          description: The total Indexed Logs (7-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_90day_percentage:
+          description: The percentage of Indexed Logs (90-day Retention) usage by
+            tag(s).
+          format: double
+          type: number
+        logs_indexed_90day_usage:
+          description: The total Indexed Logs (90-day Retention) usage by tag(s).
+          format: double
+          type: number
+        logs_indexed_custom_retention_percentage:
+          description: The percentage of Indexed Logs (Custom Retention) usage by
+            tag(s).
+          format: double
+          type: number
+        logs_indexed_custom_retention_usage:
+          description: The total Indexed Logs (Custom Retention) usage by tag(s).
           format: double
           type: number
         mobile_app_testing_percentage:
@@ -7988,6 +8471,22 @@ components:
           description: The profiled hosts usage by tag(s).
           format: double
           type: number
+        rum_browser_mobile_sessions_percentage:
+          description: The percentage of RUM Browser and Mobile usage by tag(s).
+          format: double
+          type: number
+        rum_browser_mobile_sessions_usage:
+          description: The total RUM Browser and Mobile usage by tag(s).
+          format: double
+          type: number
+        rum_replay_sessions_percentage:
+          description: The percentage of RUM Replay Sessions usage by tag(s).
+          format: double
+          type: number
+        rum_replay_sessions_usage:
+          description: The total RUM Replay Sessions usage by tag(s).
+          format: double
+          type: number
         sds_scanned_bytes_percentage:
           description: The percentage of Sensitive Data Scanner usage by tag(s).
           format: double
@@ -8002,6 +8501,14 @@ components:
           type: number
         serverless_apps_usage:
           description: The total Serverless Apps usage by tag(s).
+          format: double
+          type: number
+        siem_ingested_bytes_percentage:
+          description: The percentage of SIEM usage by tag(s).
+          format: double
+          type: number
+        siem_ingested_bytes_usage:
+          description: The total SIEM usage by tag(s).
           format: double
           type: number
         snmp_percentage:
@@ -8951,7 +9458,7 @@ components:
           example: some description
           type: string
         name:
-          description: The name of the new child-organization, limited to 32 characters.
+          description: The name of the child organization, limited to 32 characters.
           example: New child org
           maxLength: 32
           type: string
@@ -14445,6 +14952,55 @@ components:
         type:
           $ref: '#/components/schemas/SyntheticsGlobalVariableParseTestOptionsType'
       type: object
+    SyntheticsPatchTestBody:
+      description: Wrapper around an array of [JSON Patch](https://jsonpatch.com)
+        operations to perform on the test
+      properties:
+        data:
+          description: Array of [JSON Patch](https://jsonpatch.com) operations to
+            perform on the test
+          example:
+          - op: replace
+            path: /name
+            value: New test name
+          - op: remove
+            path: /config/assertions/0
+          items:
+            $ref: '#/components/schemas/SyntheticsPatchTestOperation'
+          type: array
+      type: object
+    SyntheticsPatchTestOperation:
+      description: A single [JSON Patch](https://jsonpatch.com) operation to perform
+        on the test
+      properties:
+        op:
+          $ref: '#/components/schemas/SyntheticsPatchTestOperationName'
+        path:
+          description: The path to the value to modify
+          example: /name
+          type: string
+        value:
+          description: A value to use in a [JSON Patch](https://jsonpatch.com) operation
+          example: New Test Name
+      type: object
+    SyntheticsPatchTestOperationName:
+      description: The operation to perform
+      enum:
+      - add
+      - remove
+      - replace
+      - move
+      - copy
+      - test
+      example: replace
+      type: string
+      x-enum-varnames:
+      - ADD
+      - REMOVE
+      - REPLACE
+      - MOVE
+      - COPY
+      - TEST
     SyntheticsPlayingTab:
       description: Navigate between different tabs for your browser test.
       enum:
@@ -15837,6 +16393,8 @@ components:
           items:
             $ref: '#/components/schemas/ToplistWidgetRequest'
           type: array
+        style:
+          $ref: '#/components/schemas/ToplistWidgetStyle'
         time:
           $ref: '#/components/schemas/WidgetTime'
         title:
@@ -15862,6 +16420,40 @@ components:
       type: string
       x-enum-varnames:
       - TOPLIST
+    ToplistWidgetDisplay:
+      description: Top list widget display options.
+      oneOf:
+      - $ref: '#/components/schemas/ToplistWidgetStacked'
+      - $ref: '#/components/schemas/ToplistWidgetFlat'
+    ToplistWidgetFlat:
+      description: Top list widget flat display.
+      properties:
+        type:
+          $ref: '#/components/schemas/ToplistWidgetFlatType'
+      required:
+      - type
+      type: object
+    ToplistWidgetFlatType:
+      default: flat
+      description: Top list widget flat display type.
+      enum:
+      - flat
+      example: flat
+      type: string
+      x-enum-varnames:
+      - FLAT
+    ToplistWidgetLegend:
+      description: Top list widget stacked legend behavior.
+      enum:
+      - automatic
+      - inline
+      - none
+      example: automatic
+      type: string
+      x-enum-varnames:
+      - AUTOMATIC
+      - INLINE
+      - NONE
     ToplistWidgetRequest:
       description: Updated top list widget.
       properties:
@@ -15910,6 +16502,43 @@ components:
           $ref: '#/components/schemas/LogQueryDefinition'
         style:
           $ref: '#/components/schemas/WidgetRequestStyle'
+      type: object
+    ToplistWidgetScaling:
+      description: Top list widget scaling definition.
+      enum:
+      - absolute
+      - relative
+      type: string
+      x-enum-varnames:
+      - ABSOLUTE
+      - RELATIVE
+    ToplistWidgetStacked:
+      description: Top list widget stacked display options.
+      properties:
+        legend:
+          $ref: '#/components/schemas/ToplistWidgetLegend'
+        type:
+          $ref: '#/components/schemas/ToplistWidgetStackedType'
+      required:
+      - type
+      - legend
+      type: object
+    ToplistWidgetStackedType:
+      default: stacked
+      description: Top list widget stacked display type.
+      enum:
+      - stacked
+      example: stacked
+      type: string
+      x-enum-varnames:
+      - STACKED
+    ToplistWidgetStyle:
+      description: Style customization for a top list widget.
+      properties:
+        display:
+          $ref: '#/components/schemas/ToplistWidgetDisplay'
+        scaling:
+          $ref: '#/components/schemas/ToplistWidgetScaling'
       type: object
     TopologyMapWidgetDefinition:
       description: This widget displays a topology of nodes and edges for different
@@ -18205,6 +18834,11 @@ components:
             for the given date and given organization.
           format: int64
           type: integer
+        cloud_siem_events_sum:
+          description: Shows the sum of all Cloud Security Information and Event Management
+            events over all hours in the current date for the given org.
+          format: int64
+          type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for all organizations.
@@ -18726,6 +19360,11 @@ components:
             for the given date and given org.
           format: int64
           type: integer
+        cloud_siem_events_sum:
+          description: Shows the sum of all Cloud Security Information and Event Management
+            events over all hours in the current date for the given org.
+          format: int64
+          type: integer
         container_avg:
           description: Shows the average of all distinct containers over all hours
             in the current date for the given org.
@@ -18832,6 +19471,16 @@ components:
         cspm_host_top99p:
           description: Shows the 99th percentile of all Cloud Security Management
             Pro hosts over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        custom_historical_ts_avg:
+          description: Shows the average number of distinct historical custom metrics
+            over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        custom_live_ts_avg:
+          description: Shows the average number of distinct live custom metrics over
+            all hours in the current date for the given org.
           format: int64
           type: integer
         custom_ts_avg:
@@ -19254,6 +19903,11 @@ components:
             all cloud providers.
           format: int64
           type: integer
+        cloud_siem_events_agg_sum:
+          description: Shows the sum of all Cloud Security Information and Event Management
+            events over all hours in the current months for all organizations.
+          format: int64
+          type: integer
         container_avg_sum:
           description: Shows the average of all distinct containers over all hours
             in the current months for all organizations.
@@ -19358,6 +20012,16 @@ components:
         cspm_host_top99p_sum:
           description: Shows the 99th percentile of all Cloud Security Management
             Pro hosts over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        custom_historical_ts_sum:
+          description: Shows the average number of distinct historical custom metrics
+            over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        custom_live_ts_sum:
+          description: Shows the average number of distinct live custom metrics over
+            all hours in the current months for all organizations.
           format: int64
           type: integer
         custom_ts_sum:
@@ -20538,6 +21202,8 @@ components:
       - 1mo
       - 3mo
       - 6mo
+      - week_to_date
+      - month_to_date
       - 1y
       - alert
       example: 5m
@@ -20556,6 +21222,8 @@ components:
       - PAST_ONE_MONTH
       - PAST_THREE_MONTHS
       - PAST_SIX_MONTHS
+      - WEEK_TO_DATE
+      - MONTH_TO_DATE
       - PAST_ONE_YEAR
       - ALERT
     WidgetMargin:
@@ -20901,7 +21569,7 @@ components:
               an organization. Mute and unmute hosts. The ability to write monitors
               is not required to set downtimes.
             monitors_read: View monitors.
-            monitors_write: Edit, mute, and delete individual monitors.
+            monitors_write: Edit and delete individual monitors.
             security_monitoring_filters_read: Read Security Filters.
             security_monitoring_filters_write: Create, edit, and delete Security Filters.
             security_monitoring_findings_read: View CSPM Findings.
@@ -22713,7 +23381,9 @@ paths:
         type: safe
   /api/v1/downtime:
     get:
-      description: Get all scheduled downtimes.
+      deprecated: true
+      description: Get all scheduled downtimes. **Note:** This endpoint has been deprecated.
+        Please use v2 endpoints.
       operationId: ListDowntimes
       parameters:
       - description: Only return downtimes that are active when the request is made.
@@ -22757,7 +23427,9 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Schedule a downtime.
+      deprecated: true
+      description: Schedule a downtime. **Note:** This endpoint has been deprecated.
+        Please use v2 endpoints.
       operationId: CreateDowntime
       requestBody:
         content:
@@ -22825,7 +23497,11 @@ paths:
         type: unsafe
   /api/v1/downtime/cancel/by_scope:
     post:
-      description: Delete all downtimes that match the scope of `X`.
+      deprecated: true
+      description: Delete all downtimes that match the scope of `X`. **Note:** This
+        only interacts with Downtimes created using v1 endpoints. This endpoint has
+        been deprecated and will not be replaced. Please use v2 endpoints to find
+        and cancel downtimes.
       operationId: CancelDowntimesByScope
       requestBody:
         content:
@@ -22875,7 +23551,9 @@ paths:
         type: idempotent
   /api/v1/downtime/{downtime_id}:
     delete:
-      description: Cancel a downtime.
+      deprecated: true
+      description: Cancel a downtime. **Note:** This endpoint has been deprecated.
+        Please use v2 endpoints.
       operationId: CancelDowntime
       parameters:
       - description: ID of the downtime to cancel.
@@ -22915,7 +23593,9 @@ paths:
       x-undo:
         type: idempotent
     get:
-      description: Get downtime detail by `downtime_id`.
+      deprecated: true
+      description: Get downtime detail by `downtime_id`. **Note:** This endpoint has
+        been deprecated. Please use v2 endpoints.
       operationId: GetDowntime
       parameters:
       - description: ID of the downtime to fetch.
@@ -22959,7 +23639,9 @@ paths:
       x-undo:
         type: safe
     put:
-      description: Update a single downtime by `downtime_id`.
+      deprecated: true
+      description: Update a single downtime by `downtime_id`. **Note:** This endpoint
+        has been deprecated. Please use v2 endpoints.
       operationId: UpdateDowntime
       parameters:
       - description: ID of the downtime to update.
@@ -23520,7 +24202,8 @@ paths:
         type: safe
   /api/v1/host/{host_name}/mute:
     post:
-      description: Mute a host.
+      description: Mute a host. **Note:** This creates a [Downtime V2](https://docs.datadoghq.com/api/latest/downtimes/#schedule-a-downtime)
+        for the host.
       operationId: MuteHost
       parameters:
       - description: Name of the host to mute.
@@ -23889,10 +24572,25 @@ paths:
       tags:
       - AWS Integration
       x-codegen-request-body-name: body
+      x-given:
+        aws_account:
+          parameters:
+          - name: body
+            origin: request
+            value: "{\n  \"account_id\": \"{{ timestamp(\"now\") }}00\",\n  \"account_specific_namespace_rules\":
+              {\n      \"auto_scaling\": false\n  },\n  \"cspm_resource_collection_enabled\":
+              true,\n  \"excluded_regions\": [\n      \"us-east-1\",\n      \"us-west-2\"\n
+              \ ],\n  \"filter_tags\": [\n      \"$KEY:$VALUE\"\n  ],\n  \"host_tags\":
+              [\n      \"$KEY:$VALUE\"\n  ],\n  \"metrics_collection_enabled\": false,\n
+              \ \"resource_collection_enabled\": true,\n  \"role_name\": \"DatadogAWSIntegrationRole\"\n}"
+          step: there is a valid "aws_account" in the system
       x-menu-order: 8
       x-undo:
         operationId: DeleteAWSAccount
-        parameters: []
+        parameters:
+        - name: body
+          origin: request
+          template: '{"account_id": "{{account_id}}", "role_name": "{{role_name}}"}'
         type: unsafe
     put:
       description: Update a Datadog-Amazon Web Services integration.
@@ -23993,6 +24691,122 @@ paths:
       x-menu-order: 5
       x-undo:
         type: safe
+  /api/v1/integration/aws/event_bridge:
+    delete:
+      description: Delete an Amazon EventBridge source.
+      operationId: DeleteAWSEventBridgeSource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSEventBridgeDeleteRequest'
+        description: Delete the Amazon EventBridge source with the given name, region,
+          and associated AWS account.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSEventBridgeDeleteResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an Amazon EventBridge source
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 12
+      x-undo:
+        type: idempotent
+    get:
+      description: Get all Amazon EventBridge sources.
+      operationId: ListAWSEventBridgeSources
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSEventBridgeListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Get all Amazon EventBridge sources
+      tags:
+      - AWS Integration
+      x-menu-order: 10
+      x-undo:
+        type: safe
+    post:
+      description: Create an Amazon EventBridge source.
+      operationId: CreateAWSEventBridgeSource
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AWSEventBridgeCreateRequest'
+        description: Create an Amazon EventBridge source for an AWS account with a
+          given name and region.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AWSEventBridgeCreateResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Bad Request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Authentication Error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create an Amazon EventBridge source
+      tags:
+      - AWS Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 11
+      x-undo:
+        operationId: DeleteAWSEventBridgeSource
+        parameters: []
+        type: unsafe
   /api/v1/integration/aws/filtering:
     delete:
       description: Delete a tag filtering entry.
@@ -24590,10 +25404,27 @@ paths:
       tags:
       - Azure Integration
       x-codegen-request-body-name: body
+      x-given:
+        aws_account:
+          parameters:
+          - name: body
+            origin: request
+            value: "{\n  \"app_service_plan_filters\": \"key:value,filter:example\",\n
+              \ \"automute\": true,\n  \"client_id\": \"{{ uuid }}\",\n  \"client_secret\":
+              \"testingx./Sw*g/Y33t..R1cH+hScMDt\",\n  \"container_app_filters\":
+              \"key:value,filter:example\",\n  \"cspm_enabled\": true,\n  \"custom_metrics_enabled\":
+              true,\n  \"errors\": [\"*\"],\n  \"host_filters\": \"key:value,filter:example\",\n
+              \ \"new_client_id\": \"{{ uuid }}\",\n  \"new_tenant_name\": \"{{ uuid
+              }}\",\n  \"resource_collection_enabled\": true,\n  \"tenant_name\":
+              \"{{ uuid }}\"\n}"
+          step: there is a valid "azure_account" in the system
       x-menu-order: 2
       x-undo:
         operationId: DeleteAzureIntegration
-        parameters: []
+        parameters:
+        - name: body
+          origin: request
+          template: "{\n  \"client_id\": \"{{client_id}}\",\n  \"tenant_name\": \"{{tenant_name}}\"\n}"
         type: unsafe
     put:
       description: 'Update a Datadog-Azure integration. Requires an existing `tenant_name`
@@ -24794,10 +25625,30 @@ paths:
       tags:
       - GCP Integration
       x-codegen-request-body-name: body
+      x-given:
+        gcp_account:
+          parameters:
+          - name: body
+            origin: request
+            value: "{\n  \"auth_provider_x509_cert_url\": \"https://www.googleapis.com/oauth2/v1/certs\",\n
+              \ \"auth_uri\": \"https://accounts.google.com/o/oauth2/auth\",\n  \"client_email\":
+              \"{{unique_hash}}@example.com\",\n  \"client_id\": \"{{ timestamp(\"now\")
+              }}{{ timestamp(\"now\") }}0\",\n  \"client_x509_cert_url\": \"https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL\",\n
+              \ \"host_filters\": \"key:value,filter:example\",\n  \"is_cspm_enabled\":
+              true,\n  \"is_security_command_center_enabled\": true,\n  \"private_key\":
+              \"private_key\",\n  \"private_key_id\": \"123456789abcdefghi123456789abcdefghijklm\",\n
+              \ \"project_id\": \"datadog-apitest\",\n  \"resource_collection_enabled\":
+              true,\n  \"token_uri\": \"https://accounts.google.com/o/oauth2/token\",\n
+              \ \"type\": \"service_account\"\n}"
+          step: there is a valid "gcp_account" in the system
       x-menu-order: 2
       x-undo:
         operationId: DeleteGCPIntegration
-        parameters: []
+        parameters:
+        - name: body
+          origin: request
+          template: '{"client_email": "{{ client_email }}", "client_id": "{{ client_id
+            }}", "project_id": "{{ project_id }}"}'
         type: unsafe
     put:
       deprecated: true
@@ -26609,7 +27460,7 @@ paths:
 
         - SLO: `slo alert`
 
-        - watchdog: `event alert`
+        - watchdog: `event-v2 alert`
 
         - event-v2: `event-v2 alert`
 
@@ -26620,9 +27471,13 @@ paths:
         - database-monitoring: `database-monitoring alert`
 
 
-        **Note**: Synthetic monitors are created through the Synthetics API. See the
-        [Synthetics API] (https://docs.datadoghq.com/api/latest/synthetics/) documentation
-        for more information.
+        **Notes**:
+
+        - Synthetic monitors are created through the Synthetics API. See the [Synthetics
+        API] (https://docs.datadoghq.com/api/latest/synthetics/) documentation for
+        more information.
+
+        - Log monitors require an unscoped App Key.
 
 
         #### Query Types
@@ -26705,37 +27560,8 @@ paths:
         ##### Event Alert Query
 
 
-        Example: `events(''sources:nagios status:error,warning priority:normal tags:
-        "string query"'').rollup("count").last("1h")"`
-
-
-        - `event`, the event query string:
-
-        - `string_query` free text query to match against event title and text.
-
-        - `sources` event sources (comma-separated).
-
-        - `status` event statuses (comma-separated). Valid options: error, warn, and
-        info.
-
-        - `priority` event priorities (comma-separated). Valid options: low, normal,
-        all.
-
-        - `host` event reporting host (comma-separated).
-
-        - `tags` event tags (comma-separated).
-
-        - `excluded_tags` excluded event tags (comma-separated).
-
-        - `rollup` the stats roll-up method. `count` is the only supported method
-        now.
-
-        - `last` the timeframe to roll up the counts. Examples: 45m, 4h. Supported
-        timeframes: m, h and d. This value should not exceed 48 hours.
-
-
-        **NOTE** The Event Alert Query is being deprecated and replaced by the Event
-        V2 Alert Query. For more information, see the [Event Migration guide](https://docs.datadoghq.com/events/guides/migrating_to_new_events_features/).
+        **Note:** The Event Alert Query has been replaced by the Event V2 Alert Query.
+        For more information, see the [Event Migration guide](https://docs.datadoghq.com/service_management/events/guides/migrating_to_new_events_features/).
 
 
         ##### Event V2 Alert Query
@@ -26867,10 +27693,6 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **NOTE** Only available on US1-FED and in closed beta on US1, EU, AP1, US3,
-        and US5.
-
-
         ##### CI Pipelines Alert Query
 
 
@@ -26893,9 +27715,6 @@ paths:
         - `#` an integer or decimal number used to set the threshold.
 
 
-        **NOTE** CI Pipeline monitors are in alpha on US1, EU, AP1, US3, and US5.
-
-
         ##### CI Tests Alert Query
 
 
@@ -26916,10 +27735,6 @@ paths:
         - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
         - `#` an integer or decimal number used to set the threshold.
-
-
-        **NOTE** CI Test monitors are available only in closed beta on US1, EU, AP1,
-        US3, and US5.
 
 
         ##### Error Tracking Alert Query
@@ -27269,7 +28084,10 @@ paths:
         type: safe
   /api/v1/monitor/validate:
     post:
-      description: Validate the monitor provided in the request.
+      description: 'Validate the monitor provided in the request.
+
+
+        **Note**: Log monitors require an unscoped App Key.'
       operationId: ValidateMonitor
       requestBody:
         content:
@@ -27507,7 +28325,9 @@ paths:
         type: idempotent
   /api/v1/monitor/{monitor_id}/downtimes:
     get:
-      description: Get all active downtimes for the specified monitor.
+      deprecated: true
+      description: Get all active v1 downtimes for the specified monitor. **Note:**
+        This endpoint has been deprecated. Please use v2 endpoints.
       operationId: ListMonitorDowntimes
       parameters:
       - description: The id of the monitor
@@ -29899,7 +30719,7 @@ paths:
       summary: Get details of batch
       tags:
       - Synthetics
-      x-menu-order: 15
+      x-menu-order: 16
       x-undo:
         type: safe
   /api/v1/synthetics/locations:
@@ -29925,7 +30745,7 @@ paths:
       summary: Get all locations (public and private)
       tags:
       - Synthetics
-      x-menu-order: 25
+      x-menu-order: 26
       x-undo:
         type: safe
   /api/v1/synthetics/private-locations:
@@ -29969,7 +30789,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 22
+      x-menu-order: 23
       x-undo:
         operationId: DeletePrivateLocation
         parameters:
@@ -30008,7 +30828,7 @@ paths:
       summary: Delete a private location
       tags:
       - Synthetics
-      x-menu-order: 26
+      x-menu-order: 27
       x-undo:
         type: idempotent
     get:
@@ -30046,7 +30866,7 @@ paths:
       summary: Get a private location
       tags:
       - Synthetics
-      x-menu-order: 23
+      x-menu-order: 24
       x-undo:
         type: safe
     put:
@@ -30092,7 +30912,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 24
+      x-menu-order: 25
       x-undo:
         type: idempotent
   /api/v1/synthetics/settings/default_locations:
@@ -30111,7 +30931,7 @@ paths:
       summary: Get the default locations
       tags:
       - Synthetics
-      x-menu-order: 28
+      x-menu-order: 29
       x-undo:
         type: safe
   /api/v1/synthetics/tests:
@@ -30164,7 +30984,7 @@ paths:
       summary: Get the list of all Synthetic tests
       tags:
       - Synthetics
-      x-menu-order: 10
+      x-menu-order: 11
       x-pagination:
         limitParam: page_size
         pageParam: page_number
@@ -30222,7 +31042,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 27
+      x-menu-order: 31
       x-undo:
         operationId: TODO
         parameters: []
@@ -30462,7 +31282,7 @@ paths:
       summary: Get an API test
       tags:
       - Synthetics
-      x-menu-order: 8
+      x-menu-order: 9
       x-undo:
         type: safe
     put:
@@ -30627,14 +31447,14 @@ paths:
       summary: Get a browser test
       tags:
       - Synthetics
-      x-menu-order: 9
+      x-menu-order: 10
       x-undo:
         type: safe
     put:
       description: Edit the configuration of a Synthetic browser test.
       operationId: UpdateBrowserTest
       parameters:
-      - description: The public ID of the test to get details from.
+      - description: The public ID of the test to edit.
         in: path
         name: public_id
         required: true
@@ -30760,7 +31580,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 14
+      x-menu-order: 15
       x-undo:
         type: safe
   /api/v1/synthetics/tests/browser/{public_id}/results/{result_id}:
@@ -30813,7 +31633,7 @@ paths:
       summary: Get a browser test result
       tags:
       - Synthetics
-      x-menu-order: 12
+      x-menu-order: 13
       x-undo:
         type: safe
   /api/v1/synthetics/tests/delete:
@@ -30870,7 +31690,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 16
+      x-menu-order: 17
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/trigger:
@@ -30915,7 +31735,7 @@ paths:
             value: '{"tests": [{"public_id": "{{ synthetics_api_test_with_wrong_dns.public_id
               }}"}]}'
           step: the "synthetics_api_test_with_wrong_dns" is triggered
-      x-menu-order: 7
+      x-menu-order: 8
       x-undo:
         type: safe
   /api/v1/synthetics/tests/trigger/ci:
@@ -30953,7 +31773,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 6
+      x-menu-order: 7
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}:
@@ -30998,9 +31818,71 @@ paths:
       summary: Get a test configuration
       tags:
       - Synthetics
-      x-menu-order: 27
+      x-menu-order: 28
       x-undo:
         type: safe
+    patch:
+      description: Patch the configuration of a Synthetic test with partial data.
+      operationId: PatchTest
+      parameters:
+      - description: The public ID of the test to patch.
+        in: path
+        name: public_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyntheticsPatchTestBody'
+        description: '[JSON Patch](https://jsonpatch.com/) compliant list of operations'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyntheticsTestDetails'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- JSON format is wrong
+
+            - Updating sub-type is forbidden'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: '- Synthetic Monitoring is not activated for the user
+
+            - Test is not owned by the user
+
+            - Test can''t be found'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - synthetics_write
+      summary: Patch a Synthetic test
+      tags:
+      - Synthetics
+      x-codegen-request-body-name: body
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
     put:
       deprecated: true
       description: This endpoint is deprecated. To edit a test, use [Edit an API test](https://docs.datadoghq.com/api/latest/synthetics/#edit-an-api-test)
@@ -31062,7 +31944,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 26
+      x-menu-order: 30
       x-undo:
         type: idempotent
   /api/v1/synthetics/tests/{public_id}/results:
@@ -31131,7 +32013,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 13
+      x-menu-order: 14
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/results/{result_id}:
@@ -31182,7 +32064,7 @@ paths:
       summary: Get an API test result
       tags:
       - Synthetics
-      x-menu-order: 11
+      x-menu-order: 12
       x-undo:
         type: safe
   /api/v1/synthetics/tests/{public_id}/status:
@@ -31241,7 +32123,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 5
+      x-menu-order: 6
       x-undo:
         type: idempotent
   /api/v1/synthetics/variables:
@@ -31271,7 +32153,7 @@ paths:
       summary: Get all global variables
       tags:
       - Synthetics
-      x-menu-order: 17
+      x-menu-order: 18
       x-undo:
         type: safe
     post:
@@ -31320,7 +32202,7 @@ paths:
           - file: synthetics_global_variable_payload.json
             name: body
           step: there is a valid "synthetics_global_variable" in the system
-      x-menu-order: 18
+      x-menu-order: 19
       x-undo:
         operationId: DeleteGlobalVariable
         parameters:
@@ -31369,7 +32251,7 @@ paths:
       summary: Delete a global variable
       tags:
       - Synthetics
-      x-menu-order: 21
+      x-menu-order: 22
       x-undo:
         type: idempotent
     get:
@@ -31411,7 +32293,7 @@ paths:
       summary: Get a global variable
       tags:
       - Synthetics
-      x-menu-order: 19
+      x-menu-order: 20
       x-undo:
         type: safe
     put:
@@ -31461,7 +32343,7 @@ paths:
       tags:
       - Synthetics
       x-codegen-request-body-name: body
-      x-menu-order: 20
+      x-menu-order: 21
       x-undo:
         type: idempotent
   /api/v1/tags/hosts:

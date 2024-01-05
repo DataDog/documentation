@@ -217,7 +217,7 @@ By default, the Agent generates five custom metrics for each of the original fou
 
 [1]: /metrics/types/?tab=histogram#metric-types
 [2]: /metrics/types/?tab=histogram#definition
-[3]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[3]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Distribution" %}}
 

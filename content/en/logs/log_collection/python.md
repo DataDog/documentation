@@ -85,6 +85,47 @@ Once this is done, the log should have the following format:
 2019-01-07 15:20:15,972 DEBUG [flask.app] [app.py:100] [dd.trace_id=5688176451479556031 dd.span_id=4663104081780224235] - this is an example
 ```
 
+If logs are in JSON format, trace values are automatically extracted if the values are at the top level or in the top level `extra` or `record.extra` blocks. The following are examples of valid JSON logs where trace values are automatically parsed.
+
+```json
+{
+  "message":"Hello from the private method",
+  "dd.trace_id":"18287620314539322434",
+  "dd.span_id":"8440638443344356350",
+  "dd.env":"dev",
+  "dd.service":"logs",
+  "dd.version":"1.0.0"
+}
+```
+
+```json
+{
+  "message":"Hello from the private method",
+  "extra":{
+    "dd.trace_id":"18287620314539322434",
+    "dd.span_id":"8440638443344356350",
+    "dd.env":"dev",
+    "dd.service":"logs",
+    "dd.version":"1.0.0"
+  }
+}
+```
+
+```json
+{
+"message":"Hello from the private method",
+  "record":{
+    "extra":{
+      "dd.trace_id":"1734396609740561719",
+      "dd.span_id":"17877262712156101004",
+      "dd.env":"dev",
+      "dd.service":"logs",
+      "dd.version":"1.0.0"
+    }
+  }
+}
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -93,11 +134,11 @@ Once this is done, the log should have the following format:
 [2]: https://github.com/madzak/python-json-logger
 [3]: https://pypi.org/project/django-datadog-logger/
 [4]: /tracing/other_telemetry/connect_logs_and_traces/python
-[5]: /agent/guide/agent-commands/
+[5]: /agent/configuration/agent-commands/
 [6]: https://docs.python.org/3/library/logging.html#logging
 [7]: /agent/logs/?tab=tailfiles#activate-log-collection
 [8]: /agent/logs/?tab=tailfiles#custom-log-collection
-[9]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[9]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [10]: /logs/log_configuration/parsing/
 [11]: /logs/explorer/#overview
 [12]: /glossary/#tail

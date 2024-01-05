@@ -22,12 +22,13 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS.
+You can monitor application security for Go apps running in Docker, Kubernetes, and Amazon ECS.
 
 {{% appsec-getstarted %}}
 - Your service is [supported][2].
 
-## Get started
+## Enabling threat detection
+### Get started
 
 1. **Add to your program's go.mod dependencies** the latest version of the Datadog Go library (version 1.53.0 or later):
 
@@ -85,7 +86,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{% tab "Amazon ECS" %}}
 
 Update your application's ECS task definition JSON file, by adding this in the environment section:
 
@@ -105,7 +106,7 @@ Update your application's ECS task definition JSON file, by adding this in the e
 
 {{% appsec-getstarted-2 %}}
 
-{{< img src="/security/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
+{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
 ## Further Reading
 

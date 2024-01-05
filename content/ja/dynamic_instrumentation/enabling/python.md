@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/tracing/dynamic_instrumentation/enabling/python/
-code_lang: php
+code_lang: python
 code_lang_weight: 20
 further_reading:
 - link: /agent/

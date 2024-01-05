@@ -22,13 +22,14 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-You can monitor application security for .NET apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+You can monitor application security for .NET apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
 
 {{% appsec-getstarted-with-rc %}}
 
-## Get started
+## Enabling threat detection
+### Get started
 
 1. **Update your [Datadog .NET library][1]** to at least version 2.2.0 (at least version 2.16.0 for Application Vulnerability Management vulnerability detection features) for your target operating system architecture.
 
@@ -159,7 +160,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{% tab "Amazon ECS" %}}
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 
@@ -189,7 +190,121 @@ ENV DD_APPSEC_ENABLED=true
 
 {{% appsec-getstarted-2-plusrisk %}}
 
-{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
+{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
+
+## Enabling code-level vulnerability detection
+
+If your service runs a [tracing library version that supports Vulnerability Management for code-level vulnerability detection][2], enable the capability by setting the `DD_IAST_ENABLED=true` environment variable and restarting your service.
+
+To leverage code-level vulnerability detection capabilities for your service:
+
+1. [Update your Datadog Agent][3] to at least version 7.41.1.
+2. Update your tracing library to at least the minimum version needed to turn on code-level vulnerability detection. For details, see [ASM capabilities support][4].
+3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start-up script:
+
+```sh
+$target=[System.EnvironmentVariableTarget]::Process
+[System.Environment]::SetEnvironmentVariable("DD_IAST_ENABLED","true",$target)
+```
+
+Or one of the following methods, depending on where your application runs:
+
+ {{< tabs >}}
+{{% tab "Windows-Self-Hosted" %}} 
+
+In a Windows console:
+
+```sh
+rem Set environment variables
+SET DD_IAST_ENABLED=true
+
+rem Start application
+dotnet.exe example.dll
+```
+{{% /tab %}}
+
+{{% tab "IIS" %}} 
+
+Run the following PowerShell command as administrator to configure the necessary environment variables in the registry `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment` and restart IIS.
+
+```sh
+$target=[System.EnvironmentVariableTarget]::Machine
+[System.Environment]::SetEnvironmentVariable("DD_IAST_ENABLED","true",$target)
+net stop was /y
+net start w3svc
+```
+{{% /tab %}}
+
+
+{{% tab "Linux" %}} 
+
+Add the following to your application configuration:
+
+```
+DD_IAST_ENABLED=true
+```
+{{% /tab %}}
+
+{{% tab "Docker CLI" %}} 
+
+Update your configuration container for APM by adding the following argument in your docker run command:
+
+```
+docker run -d --name app -e DD_IAST_ENABLED=true company/app:latest
+```
+{{% /tab %}}
+
+{{% tab "Dockerfile" %}} 
+
+Add the following environment variable value to your container Dockerfile:
+
+```
+ENV DD_IAST_ENABLED=true
+```
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}} 
+
+Update your deployment configuration file for APM and add the ASM environment variable:
+
+```yaml
+spec:
+  template:
+    spec:
+      containers:
+        - name: <CONTAINER_NAME>
+          image: <CONTAINER_IMAGE>/<TAG>
+          env:
+            - name: DD_IAST_ENABLED
+              value: "true"
+``` 
+{{% /tab %}}
+
+{{% tab "AWS ECS" %}} 
+
+Update your ECS task definition JSON file, by adding this in the environment section:
+
+```yaml
+"environment": [
+  ...,
+  {
+    "name": "DD_IAST_ENABLED",
+    "value": "true"
+  }
+]
+```
+{{% /tab %}}
+
+{{% tab "AWS Fargate" %}} 
+
+Add the following line to your container Dockerfile:
+
+```
+ENV DD_IAST_ENABLED=true
+```
+{{% /tab %}}
+   {{< /tabs >}}
+
 
 ## Further Reading
 
@@ -197,3 +312,5 @@ ENV DD_APPSEC_ENABLED=true
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
 [2]: /security/application_security/enabling/compatibility/dotnet
+[3]: /agent/versions/upgrade_between_agent_minor_versions/
+[4]: /security/application_security/enabling/compatibility/

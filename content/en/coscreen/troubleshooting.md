@@ -4,6 +4,14 @@ kind: guide
 is_beta: false
 ---
 
+### Why does the audio quality degrade when using the microphone of my Bluetooth headset as input in CoScreen, Zoom, and other tools?
+
+If you're using a Bluetooth headset, the playback quality may degrade when your headset's microphone is selected as an audio input device. You may notice this if you play audio (for example, play a YouTube video) while you are in a CoScreen session. This can occur because your Bluetooth headset has switched to using a different Bluetooth profile.
+
+When only playing audio, Bluetooth headsets typically use the [A2DP profile][2], which is optimized for high audio quality but does not support using the microphone. If you choose your headset microphone as audio input (for example, during a CoScreen session or Zoom meeting) the headset switches to a different profile, usually [HFP][3] or [HSP][4], which supports microphone usage but has lower sound quality. Most Bluetooth headsets can use only one profile at a time.
+
+To avoid this issue, you can use a different audio input—such as a laptop's built-in microphone. You may need to restart your application to regain high  quality audio.
+
 ### How can I optimize my screen sharing quality and remote control latency?
 
 You can influence a few key factors behind the quality of the windows you and your peers share.
@@ -50,3 +58,6 @@ Some devices use a Realtek voice recognition feature that may cause your voice t
 {{< img src="coscreen/windows_screenshot.png" alt="Screenshot of Windows dialog for Realtek Audio Console. The 'Voice Recognition' toggle is set to off." style="width:70%;" >}}
 
 [1]: https://packetlosstest.com/
+[2]: https://www.bluetooth.com/specifications/specs/advanced-audio-distribution-profile-1-4/
+[3]: https://www.bluetooth.com/specifications/specs/hands-free-profile/
+[4]: https://www.bluetooth.com/specifications/specs/headset-profile-1-2/

@@ -1009,12 +1009,13 @@ A sample rate of `1` sends metrics 100% of the time, while a sample rate of `0` 
 
 Before sending a metric to Datadog, DogStatsD uses the `<SAMPLE_RATE>` to correct the metric value depending on the metric type (to estimate the value without sampling):
 
-| Metric Type | Sample rate correction                                                                                                                                                         |
-|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `COUNT`     | Values received are multiplied by (`1/<SAMPLE_RATE>`). It's reasonable to assume that for one datapoint received, `1/<SAMPLE_RATE>` were actually sampled with the same value. |
-| `GAUGE`     | No correction. The value received is kept as is.                                                                                                                               |
-| `SET`       | No correction. The value received is kept as is.                                                                                                                               |
-| `HISTOGRAM` | The `histogram.count` statistic is a COUNT metric, and receives the correction outlined above. Other statistics are gauge metrics and aren't "corrected".                      |
+| Metric Type    | Sample rate correction                                                                                                                                                         |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `COUNT`        | Values received are multiplied by (`1/<SAMPLE_RATE>`). It's reasonable to assume that for one datapoint received, `1/<SAMPLE_RATE>` were actually sampled with the same value. |
+| `GAUGE`        | No correction. The value received is kept as is.                                                                                                                               |
+| `SET`          | No correction. The value received is kept as is.                                                                                                                               |
+| `HISTOGRAM`    | The `histogram.count` statistic is a COUNT metric, and receives the correction outlined above. Other statistics are gauge metrics and aren't "corrected".                      |
+| `DISTRIBUTION` | Values received are counted (`1/<SAMPLE_RATE>`) times. It's reasonable to assume that for one datapoint received, `1/<SAMPLE_RATE>` were actually sampled with the same value. |
 
 #### Code examples
 
@@ -1137,6 +1138,6 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 [4]: /dashboards/functions/arithmetic/#integral
 [5]: /metrics/types/?tab=gauge#definition
 [6]: /metrics/types/?tab=histogram#definition
-[7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[7]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [8]: /metrics/distributions/
 [9]: /metrics/types/?tab=distribution#definition

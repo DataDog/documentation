@@ -153,7 +153,7 @@ This outputs:
 hello world
 ```
 
-After a few minutes, your trace displays in Datadog under the `hello` service. Check the [services page][14] or [trace list][15].
+After a few minutes, your trace displays in Datadog under the `hello` service. Check the [Service Catalog][14] or [trace list][15].
 
 {{< img src="getting_started/tracing-services-list.png" alt="Tracing Services List" >}}
 
@@ -168,11 +168,11 @@ After a few minutes, your trace displays in Datadog under the `hello` service. C
 [5]: https://www.vagrantup.com/intro/getting-started
 [6]: https://app.datadoghq.com/account/settings/agent/latest?platform=ubuntu
 [7]: https://app.datadoghq.com/organization-settings/api-keys
-[8]: /agent/guide/agent-commands/#agent-information
+[8]: /agent/configuration/agent-commands/#agent-information
 [9]: https://app.datadoghq.com/infrastructure
 [10]: https://app.datadoghq.com/apm/service-setup
-[11]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[11]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [12]: /getting_started/tagging/unified_service_tagging
 [13]: /tracing/guide/setting_primary_tags_to_scope/
-[14]: https://app.datadoghq.com/apm/services
+[14]: https://app.datadoghq.com/services
 [15]: https://app.datadoghq.com/apm/traces

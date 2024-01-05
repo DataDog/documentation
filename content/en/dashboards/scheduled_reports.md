@@ -17,6 +17,10 @@ aliases:
     - /dashboards/reporting/
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Scheduled Reports are not supported for this site.</div>
+{{< /site-region >}}
+
 ## Overview
 
 Scheduled dashboard reports automatically send a visual summary of a dashboard to selected recipients on a schedule. The generated reports display images of widgets from a dashboard in a linear HTML format.

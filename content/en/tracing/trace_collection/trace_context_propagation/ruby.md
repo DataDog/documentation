@@ -8,9 +8,12 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
       tag: 'Blog'
       text: 'Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context'
+    - link: '/opentelemetry/guide/otel_api_tracing_interoperability'
+      tag: 'Documentation'
+      text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
-### B3 headers extraction and injection
+### Headers extraction and injection
 
 Datadog APM tracer supports [B3][6] and [W3C Trace Context][7] header extraction and injection for distributed tracing.
 
@@ -26,7 +29,7 @@ Injection styles can be configured using:
 
 - Environment Variable: `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,b3`
 
-The value of the environment variable is a comma-separated list of header styles that are enabled for injection. By default only `Datadog` injection style is enabled.
+The value of the environment variable is a comma-separated list of header styles that are enabled for injection. The default setting is `Datadog,tracecontext`.
 
 Extraction styles can be configured using:
 
@@ -36,7 +39,7 @@ The value of the environment variable is a comma-separated list of header styles
 
 If multiple extraction styles are enabled extraction attempt is done on the order those styles are configured and first successful extracted value is used.
 
-The default extraction styles are, in order, `Datadog`, `b3multi`, and `b3`.
+The default extraction styles are, in order, `Datadog`, `b3multi`, `b3`, and `tracecontext`.
 
 You can also enable or disable the use of these formats in code by using `Datadog.configure`:
 

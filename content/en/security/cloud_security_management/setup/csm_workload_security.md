@@ -1,5 +1,5 @@
 ---
-title: Setting Up CSM Workload Security
+title: Setting up CSM Workload Security
 kind: documentation
 further_reading:
   - link: "/security/cloud_security_management/setup"
@@ -17,7 +17,7 @@ The Cloud Security Management (CSM) Workload Security package includes [CSM Thre
 
 ## Prerequisites
 
-{{% csm-prereqs-enterprise-ws %}}
+{{% csm-prereqs-workload-security %}}
 
 ## Installation
 
@@ -41,7 +41,7 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
 
 To enable CSM Workload Security on the Agent, navigate to the [**Cloud Security Management Setup** page][6] and click **Hosts and containers**.
 
-{{< img src="security/csm/hosts_containers_setup.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
+{{< img src="security/csm/hosts_containers_setup_2.png" alt="The Hosts and containers section on the Cloud Security Management Setup page" width="80%">}}
 
 For each version of the Agent that is installed, click **Enable** and follow the step-by-step instructions to enable CSM Workload Security.
 
@@ -61,20 +61,8 @@ Alternatively, use the following examples to enable CSM Workload Security:
         runtime:
           enabled: true
     ```
-2. **Optional**: To enable [Runtime Anomaly Detection][1], add the following to the `values.yaml` file:
 
-    ```yaml
-    # values.yaml file
-    datadog:
-      securityAgent:
-        runtime:
-          securityProfile:
-            enabled: true
-    ```
-
-3. Restart the Agent.
-
-[1]: /security/threats/runtime_anomaly_detection
+2. Restart the Agent.
 
 {{% /tab %}}
 
@@ -95,7 +83,6 @@ Alternatively, use the following examples to enable CSM Workload Security:
 2. Restart the Agent.
 
 
-[1]: /security/threats/runtime_anomaly_detection
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 
 {{% /tab %}}
@@ -174,6 +161,13 @@ For a package-based deployment, install the Datadog package with your package ma
 
 By default, Runtime Security is disabled. To enable it, both the `security-agent.yaml` and `system-probe.yaml` files need to be updated.
 
+```shell
+sudo cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
+sudo cp /etc/datadog-agent/security-agent.yaml.example /etc/datadog-agent/security-agent.yaml
+sudo chmod 640 /etc/datadog-agent/system-probe.yaml /etc/datadog-agent/security-agent.yaml
+sudo chgrp dd-agent /etc/datadog-agent/system-probe.yaml /etc/datadog-agent/security-agent.yaml
+```
+
 ```bash
 # /etc/datadog-agent/datadog.yaml file
 remote_configuration:
@@ -206,19 +200,6 @@ runtime_security_config:
     ## @param enabled - boolean - optional - default: false
     enabled: true
 ```
-
-**Optional**: To enable [Runtime Anomaly Detection][1], add the following to the `system-probe.yaml` file:
-
-```bash
-# /etc/datadog-agent/system-probe.yaml file
-runtime_security_config:
-  security_profile:
-    ## @param enabled - boolean - optional - default: false
-    ## Set to true to enable Runtime Anomaly Detection.
-    enabled: true
-```
-
-[1]: /security/threats/runtime_anomaly_detection
 
 {{% /tab %}}
 
@@ -371,3 +352,5 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 [4]: /agent/remote_config
 [5]: /agent/remote_config/?tab=environmentvariable#enabling-remote-configuration
 [6]: https://app.datadoghq.com/security/configuration/csm/setup
+[15]: /security/cloud_security_management/troubleshooting
+[14]: /agent

@@ -43,6 +43,11 @@ title: リアルユーザーモニタリングおよびセッションリプレ�
     {{< nextlink href="/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/" >}}ブラウザ SDK を使用した Electron アプリケーションの監視{{< /nextlink >}}
 {{< /whatsnext >}}
 
+{{< whatsnext desc="Mobile RUM:" >}}
+    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}RUM Mobile SDK のアップグレード{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}Mobile SDK の複数インスタンスの使用{{< /nextlink >}}
+{{< /whatsnext >}}
+
 {{< whatsnext desc="セッションリプレイ" >}}
     {{< nextlink href="/real_user_monitoring/guide/session-replay-service-worker" >}}セッションリプレイのためのサードパーティサービスワーカーの許可{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/session-replay-for-solutions" >}}サポートのワークフローでセッションリプレイを使用する{{< /nextlink >}}

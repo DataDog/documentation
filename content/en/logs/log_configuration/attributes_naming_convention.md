@@ -109,7 +109,7 @@ The following attributes are related to the data used in network communication. 
 | `network.bytes_read`       | `number` | Total number of bytes transmitted from the client to the server when the log is emitted. |
 | `network.bytes_written`    | `number` | Total number of bytes transmitted from the server to the client when the log is emitted. |
 
-Typical integrations relying on these attributes include [Apache][4], [Varnish][9], [AWS ELB][10], [Nginx][11], [HAProxy][12], etc.
+Typical integrations relying on these attributes include [Apache][4], [Varnish][9], [Amazon ELB][10], [Nginx][11], [HAProxy][12], etc.
 
 #### Geolocation
 

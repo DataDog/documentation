@@ -34,13 +34,26 @@ RUM can be configured for compliance with many standards and regulatory framewor
 By default, there are some privacy restrictions in place that protect user data to help comply with regulatory and standards frameworks.
 
 ### Browser RUM use of cookies
-Browser RUM requires **first party cookies** to be enabled on an end user's browser to collect data. If required by the jurisdictions in which you operate, your pages should be configured so that the end user must accept cookies before RUM is initialized and begins collecting data.
+Browser RUM requires first party cookies to be enabled on an end user's browser to collect data. If required by the jurisdictions in which you operate, you are responsible for configuring your pages to comply with the laws of those jurisdictions, including receiving consent to collect cookies before RUM is initialized.
 
 ### Mobile RUM consent management
 Mobile RUM tracking is only run upon user consent. If the end user accepts the RUM tracking, we track their activity and session experience. If the user declines the RUM tracking, we do not track their activity and session experience.
 
 ## Privacy options
 You have several options and tools when it comes to collecting and redacting data captured by RUM.
+
+### Client token
+The browser RUM [client token][17] is used to match data from the end user's browser to a specific RUM application in Datadog. It is unencrypted and visible from the client side of an application.
+
+Because the client token is only used to send data to Datadog, there is no risk of data loss due to this token; however, Datadog recommends good client token management to avoid other kinds of misuse, including:
+
+- Regularly [rotating the client token][18] to ensure that it is only used by your application
+- Automatically [filtering out bots][19] when capturing RUM data
+
+#### Authenticated proxy
+One method of using the client token to filter out bots is an authenticated proxy. In this method, a placeholder string is substituted for the `clientToken` when initializing the Datadog RUM Browser SDK. The proxy knows the real client token, but the end user does not. 
+
+The proxy is configured to check for valid user information before passing the session data to Datadog, thereby confirming that a real user is signed in and transmitting traffic to be monitored. When receiving traffic, the proxy verifies that the data includes the placeholder string and replaces it with the real `clientToken` before forwarding the data to Datadog.
 
 ### Event tracking
 An [event][14] is a user interaction with specific elements of your site or app. Events can be automatically captured via the SDK or sent via custom actions. You can turn off automatic tracking of user interactions and page views to only capture the interaction of your choice. By default, RUM uses target content to generate action names from actions automatically collected by the SDK. You can [explicitly override][5] this behavior with any given name.
@@ -111,11 +124,11 @@ See [privacy options specific to Session Replay][12].
 
 [1]: /real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#event-and-context-structure
 [2]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#modify-or-drop-rum-events
-[3]: /real_user_monitoring/android/advanced_configuration/?tab=kotlin#modify-or-drop-rum-events
-[4]: /real_user_monitoring/flutter/advanced_configuration/#modify-or-drop-rum-events
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tab=kotlin#modify-or-drop-rum-events
+[4]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/flutter/#modify-or-drop-rum-events
 [5]: /real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
-[6]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
-[7]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
+[6]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
+[7]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [8]: /help/
 [9]: /help/
 [10]: /account_management/rbac/permissions/#real-user-monitoring
@@ -125,3 +138,6 @@ See [privacy options specific to Session Replay][12].
 [14]: /real_user_monitoring/explorer/search/
 [15]: /real_user_monitoring/guide/proxy-rum-data/?tab=npm
 [16]: /real_user_monitoring/reactnative/advanced_configuration/#modify-or-drop-rum-events
+[17]: /real_user_monitoring/browser/#configuration
+[18]: /account_management/api-app-keys/#add-an-api-key-or-client-token
+[19]: /real_user_monitoring/guide/identify-bots-in-the-ui/#filter-out-bot-sessions-on-intake

@@ -32,7 +32,28 @@ To enable debug mode for the Datadog Java Tracer, set the flag `-Ddd.trace.debug
 
 The steps for enabling debug mode in the Datadog Python Tracer depends on the version of the tracer your application is using. Choose the scenario that applies:
 
-### Scenario 1: ddtrace version 1.3.2 or higher
+### Scenario 1: ddtrace version 2.x and higher
+
+1. To enable debug mode: `DD_TRACE_DEBUG=true`
+
+2. To route debug logs to a log file, set `DD_TRACE_LOG_FILE` to the filename of that log file, relative to the current working directory. For example, `DD_TRACE_LOG_FILE=ddtrace_logs.log`.
+   By default, the file size is 15728640 bytes (about 15MB), and one backup log file is created. To increase the default log file size, specify the size in bytes with the `DD_TRACE_LOG_FILE_SIZE_BYTES` setting.
+
+**Note:** If the application uses the root logger and changes log level to `DEBUG`, debug tracer logs are enabled. If you want to override this behavior, override the `ddtrace` logger as follows:
+
+```
+import logging
+
+# root logger configuration
+root_logger = logging.getLogger()
+root_logger.setLevel(logging.DEBUG)
+
+# override the ddtrace configuration to WARNING log level
+logging.getLogger("ddtrace").setLevel(logging.WARNING)
+```
+
+
+### Scenario 2: ddtrace version 1.3.2 to <2.x
 
 1. To enable debug mode: `DD_TRACE_DEBUG=true`
 
@@ -42,19 +63,19 @@ The steps for enabling debug mode in the Datadog Python Tracer depends on the ve
 3. To route logs to the console, for **Python 2** applications, configure `logging.basicConfig()` or similar. Logs are automatically sent to the console for **Python 3** applications.
 
 
-### Scenario 2: ddtrace version 1.0.x to 1.2.x
+### Scenario 3: ddtrace version 1.0.x to 1.2.x
 
 1. To enable debug mode: `DD_TRACE_DEBUG=true`
 
 2. To route logs to the console, for **Python 2 or Python 3** applications, configure `logging.basicConfig()` or use `DD_CALL_BASIC_CONFIG=true`.
 
-### Scenario 3: ddtrace version 0.x
+### Scenario 4: ddtrace version 0.x
 
 1. To enable debug mode: `DD_TRACE_DEBUG=true`
 
 2. To route logs to the console, for **Python 2 or Python 3** applications, configure `logging.basicConfig()` or use `DD_CALL_BASIC_CONFIG=true`.
 
-### Scenario 4: Configuring debug logging in the application code with the standard logging library
+### Scenario 5: Configuring debug logging in the application code with the standard logging library
 
 For any version of ddtrace, rather than setting the `DD_TRACE_DEBUG` tracer environment variable, you can enable debug logging in the application code by using the `logging` standard library directly:
 
@@ -94,7 +115,8 @@ See [the API documentation][1] for more details.
 
 {{< programming-lang lang="go" >}}
 
-To enable debug mode for the Datadog Go Tracer, enable the debug mode during the `Start` config:
+To enable debug mode for the Datadog Go Tracer, set the environment variable `DD_TRACE_DEBUG=true`,
+or enable the debug mode during the `Start` config:
 
 ```go
 package main

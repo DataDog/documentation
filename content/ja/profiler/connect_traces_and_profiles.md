@@ -25,9 +25,9 @@ Code Hotspots タブでスパン情報からプロファイリングデータに
 
 ### 前提条件
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
-[Java サービスのプロファイリングを起動する][1]と、コードのホットスポット識別がデフォルトで有効化されます。手動でインスツルメントされたコードの場合、Continuous Profiler はスパンのスコープアクティベーションを要求します。
+[Java サービスのプロファイリングを有効にする][1]と、Code Hotspots の識別がデフォルトで有効化されます。手動でインスツルメントされたコードの場合、Continuous Profiler はスパンのスコープをアクティブにする必要があります。
 
 ```java
 final Span span = tracer.buildSpan("ServicehandlerSpan").start();
@@ -58,9 +58,23 @@ Java Flight Recorder (JFR) の代わりに <a href="/profiler/enabling/java/?tab
 
 [Ruby サービスのプロファイリングを起動する][1]と、コードのホットスポット識別がデフォルトで有効化されます。
 
-`dd-trace-rb` バージョン 0.49.0+ が必要です。
+新しい[タイムライン機能](#span-execution-timeline-view) (ベータ版) を有効にするには
+- `dd-trace-rb` 1.15 以上にアップグレードする
+- `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED=true` に設定する
 
 [1]: /ja/profiler/enabling/ruby
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+Code Hotspots (ベータ版) の識別は、[Node.js サービスのプロファイリングを有効にする][1] と、デフォルトでは有効になりません。この追加の環境変数を設定することで有効になります。
+
+```shell
+export DD_PROFILING_CODEHOTSPOTS_ENABLED=true
+```
+
+`dd-trace-js` のバージョン 4.17.0 以降または 3.38.0 以降が必要です。
+
+[1]: /ja/profiler/enabling/nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -73,21 +87,30 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_ENABLED", "true")
 os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 ```
 
-これらの変数を設定すると、最大 1 分 (または 5 MiB) の実行トレースデータが [15 分ごとに][2]記録されます。
+これらの変数を設定すると、実行トレースデータが [15 分ごとに][2]最大 1 分間 (または 5 MiB) 記録されます。
 
-実行トレースを記録している間、アプリケーションがガベージコレクションのように CPU 使用率の増加を観測する可能性があります。ほとんどのアプリケーションでは大きな影響はないはずですが、Go 1.21 にはこのオーバーヘッドをなくすための[パッチ][3]が含まれています。
+このデータは、
 
-この機能を使用するには、`dd-trace-go` バージョン 1.37.0 以降 (タイムラインベータは 1.52.0 以降) が必要で、Go バージョン 1.18 以降 (タイムラインベータは 1.21 以降) で最適に動作します。
+- 検索クエリに `go_execution_traced:yes` を追加して [Profile List][3] で表示できます。プロファイルをクリックすると [Profile Timeline][4] が表示されます。さらに深く見るには、プロファイルをダウンロードし、`go tool trace` または [gotraceui][5] を使用して、含まれている `go.trace` ファイルを表示します。
+- 検索クエリに `@go_execution_traced:yes` (`@` に注意) を追加して[トレースエクスプローラー][6]で表示できます。スパンをクリックし、`Code Hotspots` タブを選択して[スパンタイムライン](#span-execution-timeline-view)を表示します。
+
+実行トレースを記録している間、アプリケーションがガベージコレクションのように CPU 使用率の増加を観測する可能性があります。ほとんどのアプリケーションでは大きな影響はないはずですが、Go 1.21 にはこのオーバーヘッドをなくすための[パッチ][7]が含まれています。
+
+この機能を利用するには、`dd-trace-go` のバージョン 1.37.0 以上 (タイムラインベータの場合は 1.52.0 以上) が必要で、Go のバージョン 1.18 以上 (タイムラインベータの場合は 1.21 以上) で最適に動作します。
 
 [1]: /ja/profiler/enabling/go
 [2]: https://github.com/DataDog/dd-trace-go/issues/2099
-[3]: https://blog.felixge.de/waiting-for-go1-21-execution-tracing-with-less-than-one-percent-overhead/
+[3]: /ja/profiler/profile_visualizations/#single-profile
+[4]: /ja/profiler/profile_visualizations/#timeline-view
+[5]: https://github.com/dominikh/gotraceui
+[6]: /ja/tracing/trace_explorer/
+[7]: https://blog.felixge.de/waiting-for-go1-21-execution-tracing-with-less-than-one-percent-overhead/
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
 [.NET サービスのプロファイリングを起動する][1]と、コードのホットスポット識別がデフォルトで有効化されます。
 
-この機能を使用するには `dd-trace-dotnet` バージョン 2.30.0+ が必要です。
+この機能を使用するには `dd-trace-dotnet` のバージョン 2.30.0 以上が必要です。
 
 [1]: /ja/profiler/enabling/dotnet
 {{< /programming-lang >}}
@@ -95,7 +118,7 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 
 [PHP サービスのプロファイリングを起動する][1]と、コードのホットスポット識別がデフォルトで有効化されます。
 
-`dd-trace-php` バージョン 0.71+ が必要です。
+`dd-trace-php` のバージョン 0.71 以上が必要です。
 
 [1]: /ja/profiler/enabling/php
 {{< /programming-lang >}}
@@ -140,9 +163,9 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-プラスアイコン `+` をクリックすると、スタックトレースをそのメソッドに**逆順**に展開します。値の上にカーソルを置くと、カテゴリー別に説明される時間の割合が表示されます。
+プラスアイコン `+` をクリックすると、そのメソッドのスタックトレースが**逆順**に展開されます。値の上にカーソルを置くと、カテゴリー別に説明される時間の割合が表示されます。
 
-### スパン実行タイムラインビュー
+### スパン実行のタイムラインビュー
 
 {{< img src="profiler/code_hotspots_tab-timeline.mp4" alt="Code Hotspots タブには、時間とスレッドに渡る実行の内訳を示すタイムラインビューがあります" video=true >}}
 
@@ -152,24 +175,33 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 
 - 時間のかかるメソッドを分離する。
 - スレッド間の複雑な相互作用を整理する。
-- リクエストに影響を与えたランタイムアクティビティを表面化する。
+- リクエストに影響を与えたランタイムアクティビティを明らかにする。
 
 ランタイムや言語によって、レーンは異なります。
 
-{{< programming-lang-wrapper langs="java,go,dotnet" >}}
+{{< programming-lang-wrapper langs="java,go,ruby,dotnet" >}}
 {{< programming-lang lang="java" >}}
 各レーンは**スレッド**を表します。共通のプールからのスレッドは一緒にグループ化されます。プールを展開すると、各スレッドの詳細を表示できます。
 
-上のレーンは、余分なレイテンシーを追加するかもしれないランタイムアクティビ ティです。これらはリクエスト自体に関係ないこともあります。
+上のレーンは、余分なレイテンシーを追加するかもしれないランタイムアクティビティです。これらはリクエスト自体に関係ないこともあります。
+
+タイムラインを使って p95 リクエストの遅延やタイムアウトをデバッグする方法については、ブログ記事 [プロファイリングでリクエストの遅延を理解する][1]を参照してください。
+
+[1]: https://richardstartin.github.io/posts/wallclock-profiler
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 各レーンは **goroutine** を表します。これには、選択されたスパンを開始した goroutine と、その goroutine が作成した goroutine とその子孫が含まれます。同じ `go` ステートメントで作成された goroutine はグループ化されます。グループを展開して各 goroutine の詳細を見ることができます。
 
 上のレーンは、余分なレイテンシーを追加するかもしれないランタイムアクティビティです。これらはリクエスト自体に関係ないこともあります。
 
-タイムラインを使って p95 リクエストの遅延やタイムアウトをデバッグする方法については、ブログ記事 [Datadog のプロファイリングタイムラインによる Go リクエストレイテンシーのデバッグ][2]を参照してください。
+タイムラインを使って p95 リクエストの遅延やタイムアウトをデバッグする方法については、ブログ記事 [Datadog のプロファイリングタイムラインによる Go リクエストレイテンシーのデバッグ][1]を参照してください。
 
-[2]: https://blog.felixge.de/debug-go-request-latency-with-datadogs-profiling-timeline/
+[1]: https://blog.felixge.de/debug-go-request-latency-with-datadogs-profiling-timeline/
+{{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+Ruby でこの機能を有効にする方法については、[前提条件](#prerequisites)を参照してください。
+
+各レーンは**スレッド**を表します。共通のプールからのスレッドは一緒にグループ化されます。プールを展開すると、各スレッドの詳細を表示できます。
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 各レーンは**スレッド**を表します。共通のプールからのスレッドは一緒にグループ化されます。プールを展開すると、各スレッドの詳細を表示できます。
@@ -194,7 +226,7 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 
 ### 前提条件
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 [Java サービスのプロファイリングを起動する][1]と、エンドポイントプロファイリングがデフォルトで有効化されます。
 
@@ -207,7 +239,7 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 
 [Python サービスのプロファイリングを起動する][1]と、エンドポイントプロファイリングがデフォルトで有効化されます。
 
-`dd-trace-py` バージョン 0.54.0+ が必要です。
+`dd-trace-py` のバージョン 0.54.0 以上が必要です。
 
 [1]: /ja/profiler/enabling/python
 {{< /programming-lang >}}
@@ -222,15 +254,30 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 
 [Ruby サービスのプロファイリングを起動する][1]と、エンドポイントプロファイリングがデフォルトで有効化されます。
 
-`dd-trace-rb` バージョン 0.54.0+ が必要です。
+`dd-trace-rb` のバージョン 0.54.0 以上が必要です。
 
 [1]: /ja/profiler/enabling/ruby
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+エンドポイントのプロファイリング (ベータ版) は、[Node.js サービスのプロファイリングを有効にする][1] と、デフォルトでは有効になりません。この追加の環境変数を設定することで有効になります。
+
+```shell
+export DD_PROFILING_ENDPOINT_COLLECTION_ENABLED=true
+```
+
+この環境変数を設定すると、エンドポイントのプロファイリングに必要な [Code Hotspots (ベータ版)][2] も有効になります。
+
+`dd-trace-js` のバージョン 4.17.0 以降または 3.38.0 以降が必要です。
+
+[1]: /ja/profiler/enabling/nodejs
+[2]: /ja/profiler/connect_traces_and_profiles/?code-lang=nodejs#identify-code-hotspots-in-slow-traces
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 
 [.NET サービスのプロファイリングを起動する][1]と、エンドポイントプロファイリングがデフォルトで有効化されます。
 
-`dd-trace-dotnet` バージョン 2.15.0+ が必要です。
+`dd-trace-dotnet` のバージョン 2.15.0 以上が必要です。
 
 [1]: /ja/profiler/enabling/dotnet
 {{< /programming-lang >}}
@@ -238,7 +285,7 @@ os.Setenv("DD_PROFILING_EXECUTION_TRACE_PERIOD", "15m")
 
 [PHP サービスのプロファイリングを起動する][1]と、エンドポイントプロファイリングがデフォルトで有効化されます。
 
-`dd-trace-php` バージョン 0.79.0+ が必要です。
+`dd-trace-php` のバージョン 0.79.0 以上が必要です。
 
 [1]: /ja/profiler/enabling/php
 {{< /programming-lang >}}

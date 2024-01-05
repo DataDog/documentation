@@ -34,7 +34,7 @@ Datadog recommande d'utiliser le tunnel de test si vous souhaitez lancer des tes
 
 Le tunnel de test est une fonctionnalité incluse dans le package NPM [@datadog/datadog-ci][2] ; elle fait partie des méthodes <span class="x x-first x-last">fournies</span> par Datadog pour intégrer vos tests Synthetic à vos pipelines CI/CD. Le tunnel de test crée un proxy HTTP chiffré de bout en bout entre votre infrastructure et Datadog, ce qui signifie que toute requête de test envoyée <span class="x x-first x-last">via</span> l'interface de ligne de commande passe automatiquement par le client `datadog-ci`<span class="x x-first x-last">. Datadog est ainsi en mesure</span> d'accéder à vos applications internes et de les tester.
 
-{{< img src="synthetics/tunnel_diagram.png" alt="Schéma du tunnel de test Synthetic"  style="width:100%;">}}
+{{< img src="synthetics/tunnel_diagram.png" alt="Schéma du tunnel de test Synthetic" style="width:100%;">}}
 
 Le client `datadog-ci` reçoit d'abord une URL présignée de Datadog à des fins d'authentification. Il ouvre ensuite une connexion WebSocket Secure (wss) avec les emplacements gérés de Datadog à l'aide de l'URL présignée. En utilisant des connexions SSH via la connexion WebSocket, les tests sont déclenchés par `datadog-ci` et exécutés par le biais des emplacements gérés de Datadog.
 

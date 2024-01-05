@@ -39,7 +39,7 @@ Please enable the `Include execution data` option on the state machine's logging
 
 ## Some step spans are missing in the traces
 - For actions, we support basic actions of Lambda and DynamoDB. For example, Lambda Invoke, DynamoDB GetItem, DynamoDB PutItem, DynamoDB UpdateItem and more.
-- For different flows, we do not support `Wait`, `Choice`, `Map`, `Success`, `Fail`, and `Pass`. For `Parallel` flow, you would be able to see parallel executing spans stacking on top of each other, but there will be no `Parallel` spans showing on the flame graph.
+- `Wait`, `Choice`, `Success`, `Fail`, and `Pass` are supported, while `Map` and `Parallel` are not. You are able to see parallel executing spans stacked on top of each other, but no `Parallel` spans show on the flame graph.
 
 #### Notes
 Lambda steps that use the legacy Lambda API cannot be merged. If your Lambda step's definition is `"Resource": "<Lambda function ARN>"` instead of `"Resource": "arn:aws:states:::lambda:invoke"`, then your step is using the legacy Lambda API.

@@ -10,7 +10,7 @@ further_reading:
   text: "How Application Security Management Works"
 - link: "/security/application_security/threats/"
   tag: "Documentation"
-  text: "Threat Monitoring and Protection"
+  text: "Threat Management"
 - link: "/security/application_security/risk_management/"
   tag: "Documentation"
   text: "Application Vulnerability Management"
@@ -46,7 +46,7 @@ further_reading:
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
-Datadog Application Security Management (ASM) provides protection against application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). You can monitor and protect apps hosted directly on a server, Docker, Kubernetes, AWS ECS, and (for supported languages) AWS Fargate.
+Datadog Application Security Management (ASM) provides protection against application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). You can monitor and protect apps hosted directly on a server, Docker, Kubernetes, Amazon ECS, and (for supported languages) AWS Fargate.
 
 ASM leverages Datadog [tracing libraries][1], and the [Datadog Agent][2] to identify services exposed to application attacks. Once configured, ASM leverages in-app detection rules to detect and protect against threats in your application environment and trigger security signals whenever an attack impacts your production system, or a vulnerability is triggered from the code.
 
@@ -56,7 +56,7 @@ Once a security signal is triggered, quickly pivot to investigate and protect in
 
 With ASM, you can cut through the noise of continuous trace data to focus on securing and protecting your environment.
 
-Until you fully remediate the potential vulnerabilities in your application code, ASM enables you to slow down attackers by blocking their IPs temporarily or permanently, with a single click. One-click blocking is in beta.
+Until you fully remediate the potential vulnerabilities in your application code, ASM enables you to slow down attackers by blocking their IPs temporarily or permanently, with a single click.
 
 ## Understanding how application security is implemented in Datadog
 
@@ -85,6 +85,6 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 [3]: /security/application_security/how-appsec-works/
 [4]: /security/default_rules/#cat-application-security
 [5]: /security/application_security/enabling/
-[6]: /security/explorer/
+[6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec
-[8]: /security/application_security/risk_management/
+[8]: /security/application_security/vulnerability_management/

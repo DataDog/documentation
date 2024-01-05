@@ -23,7 +23,7 @@ further_reading:
 Front-end errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
 
 ## Error origins
-Front-end errors are split into four different categories depending on their `error.origin`:
+Front-end errors are split into four different categories depending on their `origin`:
 
 - **source**: Unhandled exceptions or unhandled promise rejections (source-code related).
 - **console**: `console.error()` API calls.
@@ -141,7 +141,7 @@ try {
 {{% /tab %}}
 {{< /tabs >}}
 
-### React error boundaries instrumentation 
+### React error boundaries instrumentation
 
 You can instrument the React [error boundaries][5] to monitor React rendering errors using the RUM Browser SDK `addError()` API.
 
@@ -163,7 +163,7 @@ class ErrorBoundary extends React.Component {
     renderingError.name = `ReactRenderingError`;
     renderingError.stack = info.componentStack;
     renderingError.cause = error;
- 
+
     datadogRum.addError(renderingError);
   }
 
@@ -183,7 +183,7 @@ class ErrorBoundary extends React.Component {
     renderingError.name = `ReactRenderingError`;
     renderingError.stack = info.componentStack;
     renderingError.cause = error;
- 
+
     DD_RUM.onReady(function() {
        DD_RUM.addError(renderingError);
     });
@@ -205,7 +205,7 @@ class ErrorBoundary extends React.Component {
     renderingError.name = `ReactRenderingError`;
     renderingError.stack = info.componentStack;
     renderingError.cause = error;
- 
+
      window.DD_RUM &&
        window.DD_RUM.addError(renderingError);
 
@@ -248,7 +248,7 @@ Get visibility into cross-origin scripts by following these two steps:
 
 
 [1]: /real_user_monitoring/browser/data_collected/
-[2]: /real_user_monitoring/browser/modifying_data_and_context/
+[2]: /real_user_monitoring/browser/advanced_configuration/
 [3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
 [4]: /real_user_monitoring/error_tracking
 [5]: https://legacy.reactjs.org/docs/error-boundaries.html

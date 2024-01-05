@@ -13,6 +13,11 @@ You have not made any changes to your log configuration, but the [Logs Explorer]
 
 See [Set daily quota][3] for more information on setting up, updating or removing the quota.
 
+## Missing logs - timestamp outside of the ingestion window
+
+Logs with a timestamp further than 18 hours in the past are dropped at intake.
+Fix the issue at the source by checking which `service` and `source` are impacted with the `datadog.estimated_usage.logs.drop_count` metric.
+
 ## Unable to parse timestamp key from JSON logs
 
 If you are unable to convert the timestamp of JSON logs to a [recognized date format][4] before they are ingested into Datadog, follow these steps to convert and map the timestamps using Datadog's [arithmetic processor][5] and [log date remapper][6]:
@@ -30,6 +35,11 @@ If you are unable to convert the timestamp of JSON logs to a [recognized date fo
 3. Set up the [log date remapper][6] to use the new attribute as the official timestamp.
 
 Go to [Logs Explorer][2] to see new JSON logs with their mapped timestamp.
+
+## Truncated logs
+
+Logs above 1MB are truncated.
+Fix the issue at the source by checking which `service` and `source` are impacted with the `datadog.estimated_usage.logs.truncated_count` and `datadog.estimated_usage.logs.truncated_bytes` metrics.
 
 [1]: /help/
 [2]: https://app.datadoghq.com/logs

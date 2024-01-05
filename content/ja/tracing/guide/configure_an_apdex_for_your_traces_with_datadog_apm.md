@@ -35,7 +35,7 @@ Apdex しきい値は、Apdex スコアが計算される前に管理者によ�
 
 Web アプリケーションやサービスの Apdex を可視化するには
 
-1. [Services ページ][3] で、Web サービスをクリックします。右上のグラフで、Latency ではなく Apdex を選択します。このオプションが表示されない場合は、Web サービスをクリックしたことを確認してください。
+1. [サービスカタログ][3] で、Web サービスをクリックします。右上のグラフで、Latency の代わりに Apdex を選択します。このオプションが表示されない場合は、Web サービスをクリックしたことを確認してください。
 
    {{< img src="tracing/faq/apdex_selection.png" alt="Apdex の選択" >}}
 
@@ -51,12 +51,12 @@ Web アプリケーションやサービスの Apdex を可視化するには
 
    {{< img src="tracing/faq/apm_save.png" alt="Apdex の保存" >}}
 
-## サービス詳細画面に Apdex を表示する
+## サービスカタログに Apdex を表示する
 
-[サービス詳細画面][2]に Apdex を表示するには、ページの右上隅の構成メニューで Apdex を選択します。
+[サービスカタログ][2]に Apdex スコアを表示するには、ページの右上隅の構成メニューで Apdex を選択します。
 
-{{< img src="tracing/faq/apdex_service_list.png" alt="Apdex サービス一覧画面" >}}
+{{< img src="tracing/faq/apdex_service_list.png" alt="Apdex サービスカタログ" >}}
 
 [1]: https://www.apdex.org/
-[2]: https://app.datadoghq.com/apm/services
-[3]: https://app.datadoghq.com/apm/services?query=type%3Aweb
+[2]: https://app.datadoghq.com/services
+[3]: https://app.datadoghq.com/services?query=type%3Aweb

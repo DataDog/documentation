@@ -11,7 +11,7 @@ Watchdog looks for specific types of root causes. Watchdog Root Cause Analysis (
 
 - Version changes, as captured by the `version` tag on your [APM services][1]
 - Traffic increases, as captured by hit rate metrics on your APM-instrumented services
-- AWS instance failures, as captured by [AWS EC2 integration metrics][2]
+- AWS instance failures, as captured by [Amazon EC2 integration metrics][2]
 - Running out of disk space, as captured by [system metrics][3] from the Datadog agent
 
 If you don't see a root cause, it's likely that the specific root cause is not one of the types described above or there isn't instrumentation configured to capture it.
@@ -25,7 +25,7 @@ Do you think Watchdog should have found something that it missed? Or, do you hav
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/services
+[1]: https://app.datadoghq.com/services
 [2]: https://docs.datadoghq.com/integrations/amazon_ec2/#metrics
 [3]: https://docs.datadoghq.com/integrations/system/#metrics
 [4]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/?tab=kubernetes#overview

@@ -26,10 +26,12 @@ CPU
 : The time each method spent running on the CPU. It includes your code that runs in the JVM (for example, Java, Kotlin), but not JVM operations or native code called from within the JVM.
 
 Allocations
-: The number of heap allocations made by each method, including allocations which were subsequently freed.
+: The number of heap allocations made by each method, including allocations which were subsequently freed.<br />
+_Requires: Java 11_ 
 
 Allocated Memory
-: The amount of heap memory allocated by each method, including allocations which were subsequently freed.
+: The amount of heap memory allocated by each method, including allocations which were subsequently freed.<br />
+_Requires: Java 11_ 
 
 Heap Live Objects
 : The number of objects allocated by each method in heap memory that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks.<br />

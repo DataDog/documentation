@@ -55,8 +55,8 @@ Once all Agent configuration is complete, [restart the Datadog Agent][6].
 [3]: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [5]: /getting_started/tagging/unified_service_tagging
-[6]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: /agent/guide/agent-commands/#agent-status-and-information
+[6]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[7]: /agent/configuration/agent-commands/#agent-status-and-information
 [8]: https://app.datadoghq.com/databases
 [9]: https://docs.microsoft.com/en-us/sql/ado/microsoft-activex-data-objects-ado
 [10]: https://docs.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode

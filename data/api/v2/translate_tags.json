@@ -19,6 +19,10 @@
     "name": "CI Visibility Tests",
     "description": "Search or aggregate your CI Visibility test events over HTTP."
   },
+  "cloud-cost-management": {
+    "name": "Cloud Cost Management",
+    "description": "The Cloud Cost Management API allows you to setup, edit and delete cloud cost management accounts for AWS & Azure."
+  },
   "cloud-workload-security": {
     "name": "Cloud Workload Security",
     "description": "Workload activity security rules for generating events using the Datadog security Agent."
@@ -30,6 +34,18 @@
   "confluent-cloud": {
     "name": "Confluent Cloud",
     "description": "Configure your Datadog Confluent Cloud integration directly through the Datadog API."
+  },
+  "container-images": {
+    "name": "Container Images",
+    "description": "The Container Images API allows you to query Container Image data for your organization."
+  },
+  "containers": {
+    "name": "Containers",
+    "description": "The Containers API allows you to query container data for your organization."
+  },
+  "dora-metrics": {
+    "name": "DORA Metrics",
+    "description": "Send events for DORA Metrics to measure and improve software delivery."
   },
   "dashboard-lists": {
     "name": "Dashboard Lists",
@@ -95,6 +111,10 @@
     "name": "Monitors",
     "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and\nnotifies your team when a defined threshold has exceeded.\n\nFor more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/) and\n[Tag Policies](https://docs.datadoghq.com/monitors/settings/)."
   },
+  "okta-integration": {
+    "name": "Okta Integration",
+    "description": "Configure your Datadog Okta integration directly through the Datadog API."
+  },
   "opsgenie-integration": {
     "name": "Opsgenie Integration",
     "description": "Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)\ndirectly through the Datadog API."
@@ -117,7 +137,7 @@
   },
   "restriction-policies": {
     "name": "Restriction Policies",
-    "description": "A restriction policy defines the access control rules for a resource, mapping a set of relations\n(such as editor and viewer) to a set of allowed principals (such as roles, teams (beta), or users (beta)).\nThe restriction policy determines who is authorized to perform what actions on the resource."
+    "description": "A restriction policy defines the access control rules for a resource, mapping a set of relations\n(such as editor and viewer) to a set of allowed principals (such as roles, teams, or users).\nThe restriction policy determines who is authorized to perform what actions on the resource."
   },
   "roles": {
     "name": "Roles",
@@ -138,6 +158,10 @@
   "service-definition": {
     "name": "Service Definition",
     "description": "API to create, update, retrieve and delete service definitions."
+  },
+  "service-scorecards": {
+    "name": "Service Scorecards",
+    "description": "API to create, update scorecard rules and outcomes.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
   },
   "spans": {
     "name": "Spans",

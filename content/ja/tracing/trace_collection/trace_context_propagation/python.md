@@ -1,5 +1,5 @@
 ---
-code_lang: php
+code_lang: python
 code_lang_weight: 10
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/
@@ -27,7 +27,7 @@ Datadog APM トレーサーは、分散型トレーシングのために [B3][2]
 
 複数の環境変数が設定されている場合、`DD_TRACE_PROPAGATION_STYLE_INJECT` と `DD_TRACE_PROPAGATION_STYLE_EXTRACT` は `DD_TRACE_PROPAGATION_STYLE` で指定した値をオーバーライドします。
 
-複数の抽出スタイルが有効な場合、それらのスタイルが指定されている順序で抽出が試行されます。最初に正常に抽出された値が使用されます。
+複数の抽出スタイルが有効になっている場合、そのスタイルが設定された順序で抽出が試みられ、最初に成功した抽出値が使用されます。その後、有効なトレースコンテキストが見つかった場合、それらは終了され、スパンリンクとして追加されます。さらに、`tracecontext` スタイルが有効な場合、W3C Traceparent が抽出されたコンテキストと一致すると、W3C Tracestate が伝播されます。
 
 ## その他の参考資料
 

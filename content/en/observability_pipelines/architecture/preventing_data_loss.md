@@ -3,6 +3,10 @@ title: Preventing Data Loss
 kind: Documentation
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
+
 <div class="alert alert-info">
 This guide is for large-scale production-level deployments.
 </div>
@@ -17,7 +21,7 @@ To achieve high durability:
 
 1. Configure your agents to be simple data forwarders and stream data directly to your Observability Pipelines Worker aggregator. This reduces the amount of time your data is exposed to loss at the edge since it is not yet redundant.
 
-2. Choose a highly durable destination that serves as your system of record (for example, AWS S3). This system is responsible for the durability of data at rest and is commonly referred to as archives or data lakes.
+2. Choose a highly durable destination that serves as your system of record (for example, Amazon S3). This system is responsible for the durability of data at rest and is commonly referred to as archives or data lakes.
 
 Finally, configure the Observability Pipelines Worker sinks that write to your system of record to enable [end-to-end acknowledgments](#using-end-to-end-acknowledgment) and disk buffers. For example:
 
@@ -47,11 +51,11 @@ With this feature enabled, Observability Pipelines Worker does not respond to ag
 
 ### Handling node failures
 
-Node failures deal with the full failure of an individual node. These can also be addressed using end-to-end acknowledgements. See [Using end-to-end acknowledgment](#using-end-to-end-acknowledgment) for more details.
+Node failures deal with the full failure of an individual node. These can also be addressed using end-to-end acknowledgments. See [Using end-to-end acknowledgment](#using-end-to-end-acknowledgment) for more details.
 
 ### Handling disk failures
 
-Disk failures deal with the failure of an individual disk. Data loss related to disk failures can be mitigated by using a highly durable file system where data is replicated across multiple disks, such as block storage (for example, AWS EBS).
+Disk failures deal with the failure of an individual disk. Data loss related to disk failures can be mitigated by using a highly durable file system where data is replicated across multiple disks, such as block storage (for example, Amazon EBS).
 
 ### Handling data processing failures
 

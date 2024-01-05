@@ -23,6 +23,85 @@
       "config": {
         "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/logs/log_collection/"
       }
+    },
+    {
+      "id": "bqt-kt3-zvy",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/glossary/"
+      }
+    },
+    {
+      "id": "dbg-37u-r55",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/glossary/"
+      }
+    },
+    {
+      "id": "d6h-28c-ij9",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/glossary/?product=alerts"
+      }
+    },
+    {
+      "id": "xgp-pt3-96s",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/integrations/1e/"
+      }
+    },
+    {
+      "id": "5wk-kij-2kr",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/integrations/bigpanda_saas/"
+      }
+    },
+    {
+      "id": "we3-74z-69s",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/integrations/bigpanda_saas/"
+      }
+    },
+    {
+      "id": "tmu-5bd-zz2",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/integrations/bigpanda_saas/"
+      }
+    },
+    {
+      "id": "a6h-tc7-qxw",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/integrations/bigpanda_saas/"
+      }
+    },
+    {
+      "id": "8tg-frt-4us",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/integrations/bigpanda_saas/"
+      }
+    },
+    {
+      "id": "732-wgh-aiz",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/integrations/bigpanda_saas/"
+      }
+    },
+    {
+      "id": "5nh-qfq-fs4",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/static_analysis/rules/"
+      }
+    },
+    {
+      "id": "hys-3ee-qff",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/static_analysis/rules/"
+      }
+    },
+    {
+      "id": "skf-cqv-m5d",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/static_analysis/rules/"
+      }
     }
+
   ]
 }

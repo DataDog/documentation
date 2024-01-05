@@ -60,12 +60,10 @@ The following products and features are supported with Remote Configuration:
 ### Application Performance Monitoring (APM)
 
 - **Configure tracing library settings in the UI** (Beta): Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the [Service Catalog][19] UI, without having to restart the service.
-- **Remotely instrument your Kubernetes services with APM** (Private Beta): Remotely instrument your services in Kubernetes with Datadog APM through Datadog Library Injection, and manage your deployments all within the Datadog UI. Available for Java, Node and Python applications. See [Setting up Remote instrumentation][2] for more information.
 - **Remotely set Agent sampling rate** (Public Beta): Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
 
 ### Dynamic Instrumentation
-<div class="alert alert-info">This feature is in beta.</div>
 
 - Send critical metrics, traces, and logs from your live applications with no code changes.
 
@@ -153,7 +151,6 @@ remoteConfiguration:
 
 After you perform these steps, your Agent requests its configuration from Datadog, and the features that use remote configuration are enabled:
 - [CSM Threats default agent rules][9] update automatically as released.
-- [Datadog Remote instrumentation][2] is enabled.
 - [APM Agent-level sampling rates][10] are applied.  
 - [Dynamic Instrumentation][11] is enabled.
 - [ASM 1-Click enablement, IP blocking, and attack pattern updates][12] are enabled.
@@ -190,18 +187,33 @@ To authenticate and authorize the Agent to receive configurations and security d
 
 **Note:** If you have [`api_keys_write`][5] RBAC permission, but are missing Remote Configuration [Organization][8] level permissions, you cannot enable Remote Configuration on a new or an existing API Key. You only have permission to disable Remote Configuration on an existing API Key.
 
-### Review Remote Configuration status events
+### Review Remote Configuration status of Agents and Tracing libraries
 
-Gain visibility into the Remote Configuration status of your Agent through the [Remote Configuration UI][8]. The following table describes the meaning of each status:
+Gain visibility into the Remote Configuration status of your Agent and Tracing library through the [Remote Configuration UI][8]. 
 
-  | Status           | Description                                      |
+The following table describes the meaning of each Agent status:
+
+  | Agent Status     | Description                                      |
   |------------------|--------------------------------------------------|
   | CONNECTED      | The Agent deployed in your environment is able to reach, authenticate, and authorize successfully to Datadog. This is the optimal state you want your Agents to be in for Remote Configuration.                                               |    
-  | ERROR          | The Agent deployed in your environment is able to reach Datadog but is not able to authenticate and authorize with Datadog for Remote Configuration operation. The most likely cause is the API Key used by the Agent is not Remote Configuration-enabled. To fix the issue, enable Remote Configuration capability on the API Key used by the Agent.                                                 | 
+  | UNAUTHORIZED          | The Agent deployed in your environment is able to reach Datadog but is not able to authenticate and authorize with Datadog for Remote Configuration operation. The most likely cause is the API Key used by the Agent is not Remote Configuration-enabled. To fix the issue, enable Remote Configuration capability on the API Key used by the Agent.                                                 | 
   | CONNECTION ERROR        |   The Agent deployed in your environment has `remote_config.enabled` set to true in its `datadog.yaml` configuration file, however, the Agent cannot be found in the Remote Configuration service. The most likely cause is that the Agent is unable to reach Remote Configuration [endpoints][17]. To fix the issue, allow outbound HTTPS access to Remote Configuration endpoints from your environment. This status displays when the Agent version is `7.45.0` or higher. 
   | DISABLED       |   The Agent deployed in your environment has `remote_config.enabled` set to false in its `datadog.yaml` configuration file. Set `remote_config.enabled` to true if you want to enable Remote Configuration on the Agent. This status displays when the Agent version is `7.45.0` or higher. | 
   | NOT CONNECTED       | The Agent cannot be found in the Remote Configuration service and could have `remote_config.enabled` set to true or false in its `datadog.yaml` configuration file. Check your local Agent configuration or your proxy settings. This status displays when the Agent version is higher than `7.41.1` but lower than `7.45.0`.            | 
   | UNSUPPORTED AGENT   | The Agent is on a version that is not Remote Configuration capable. To fix this issue, update the Agent to the latest available version. |
+
+The following table describes the meaning of each Tracing library status:
+
+  | Tracing library Status| Description                                      |
+  |------------------|--------------------------------------------------|
+  | CONNECTED      | The Tracing library is successfully connected to the Remote Configuration service through the associated Agent. This is the optimal state you want your Tracing library to be in for Remote Configuration.                                               |    
+  | UNAUTHORIZED          | The Tracing library is associated with an Agent which doesn't have `Remote Config Read` permission on its API key. To fix the issue, you need to enable Remote Configuration capability on the API Key used by the Agent associated with the Tracing library.| 
+  | CONNECTION ERROR        |   The Tracing library deployed in your environment is associated with an Agent that has remote_config.enabled set to true in its `datadog.yaml` configuration file, however, the agent cannot be found in the Remote Configuration service. The most likely cause of this is that the associated Agent is unable to reach Remote Configuration [endpoints][17]. To fix the issue, you need to allow outbound HTTPS access to Remote Configuration endpoints from your environment.  
+  | DISABLED       |   The Tracing library deployed in your environment is associated with an Agent that has `remote_config.enabled` set to false in its `datadog.yaml` configuration file. This could be set deliberately or mistakenly. To enable Remote Configuration on the associated Agent, set `remote_config.enabled` to true.  | 
+  | NOT CONNECTED       | The Tracing library cannot be found in the Remote Configuration service and is associated with an Agent that could have `remote_config.enabled` set to true or false in its `datadog.yaml` configuration file. Check your local Agent configuration or your proxy settings.| 
+  | UNSUPPORTED AGENT   | The Tracing library is associated with an Agent which is not Remote Configuration capable. To fix this issue, update the associated Agent software to the latest available version. |
+  | NOT DETECTED   | The Tracing library does not support Remote Configuration. To fix this issue, update the Tracing library software to the latest available version. |
+  | UNKNOWN   | The Tracing library status is unknown, and it can't be determined if an Agent is associated with the Tracing library. For example, this could be because the Agent is deployed on a fully managed serverless container service like AWS Fargate. |
 
 ## Opting out of Remote Configuration at the Agent level
 
@@ -241,13 +253,15 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-  
+## Supported environments
+
+Remote Configuration works in environments where the Datadog Agent is deployed. For a Serverless Container service like AWS Fargate, the underlying hosts do not appear in the Remote Configuration onboarding workflow. Remote Configuration does not support Serverless Container Managed Apps (AWS App Runner, Azure Container Apps, Google Cloud Run) and Functions deployed with Container Packaging (AWS Lambda, Azure Functions, Google Cloud Functions)
+.  
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /getting_started/site/
-[2]: /tracing/trace_collection/library_injection_remote/
 [3]: /security/threats/setup
 [4]: /observability_pipelines/#observability-pipelines-worker
 [5]: /account_management/rbac/permissions#api-and-application-keys
@@ -262,8 +276,8 @@ datadog:
 [14]: /monitors/
 [15]: /help/
 [16]: /agent/remote_config/?tab=configurationyamlfile#setup
-[17]: /agent/guide/network
-[18]: /agent/proxy/
+[17]: /agent/configuration/network
+[18]: /agent/configuration/proxy/
 [19]: /tracing/service_catalog/
 [20]: /dynamic_instrumentation/?tab=configurationyaml#prerequisites
-[21]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[21]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file

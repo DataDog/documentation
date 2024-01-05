@@ -18,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
   tag: "Blog"
   text: "Best practices for monitoring static web applications"
+- link: "https://www.datadoghq.com/blog/api-test-coverage-monitoring-datadog-synthetics/"
+  tag: "Blog"
+  text: "Improve your API test coverage with Datadog Synthetic Monitoring"
 - link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
   tag: 'Learning Center'
   text: 'Introduction to Synthetic Tests'

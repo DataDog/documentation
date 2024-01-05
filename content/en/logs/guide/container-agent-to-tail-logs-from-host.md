@@ -165,4 +165,4 @@ Logs Agent
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+[1]: /agent/configuration/agent-configuration-files/?tab=agentv6v7

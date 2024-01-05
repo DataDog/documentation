@@ -23,11 +23,11 @@ Inspect the content and size of the Datadog Lambda layers using AWS CLI command 
 ```
 aws lambda get-layer-version \
   --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x \
-  --version-number 67
+  --version-number {{< latest-lambda-layer-version layer="node" >}}
 
 aws lambda get-layer-version \
   --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension \
-  --version-number 19
+  --version-number {{< latest-lambda-layer-version layer="extension" >}}
 ```
 
 In addition to the Datadog Lambda layers, also inspect other Lambda layers added (or to be added) to your functions. If you use the [Serverless Framework][4], you can find the CloudFormation template from the hidden `.serverless` folder after running the `deploy` or `package` command, and the list of Lambda layers from the `Layers` section.

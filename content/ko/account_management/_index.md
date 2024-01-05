@@ -2,6 +2,9 @@
 aliases:
 - /ko/guides/billing
 - /ko/account_management/settings
+cascade:
+  algolia:
+    rank: 70
 description: Datadog 계정과 조직을 관리하세요
 kind: 설명서
 title: 계정 관리
@@ -28,11 +31,8 @@ Google Authentication을 사용해 Datadog에 로그인하는 경우 이메일 �
 
 * 일간 다이제스트
 * 주간 다이제스트
-* 월간 모니터링 리포트
-* 주간 Pagerduty 리포트
-* 주간 Nagios 리포트
 
-이메일 다이제스트나 리포트가 관련성이 있는지 잘 모르겠다면 각 이메일 구독 옆의 **Example** 링크를 클릭해 예시를 살펴보세요. 또 **Unsubscribe From All** 버튼을 선택해 빠르게 모든 이메일 구독을 해제할 수 있습니다.
+이메일 다이제스트가 관련성이 있는지 잘 모르겠다면 각 이메일 구독 옆의 **Example** 링크를 클릭해 예시를 살펴보세요. 또 **Unsubscribe From All** 버튼을 선택해 이메일 구독 모두를 빠르게 해제할 수 있습니다.
 
 ### Organizations
 
@@ -59,13 +59,13 @@ Google Authentication을 사용해 Datadog에 로그인하는 경우 이메일 �
 
 컴퓨터 디스플레이 설정에 맞추려면 *System* 옵션을 선택하세요. 자동으로 Datadog 디스플레이가 OS 수준에서 설정한 테마에 맞게 조정됩니다.
 
-## 깃허브로 연결
+## GitHub로 연결
 
-Datadog에서 이벤트를 생성하기 위해 [GitHub 통합][9]을 설치했다면 개인 깃허브 계정을 Datadog 사용자 계정에 연결하세요. 계정을 연결하면 Datadog 내 깃허브 이벤트에 게시한 댓글이 자동으로 해당하는 깃허브의 문제 또는 풀(pull) 요청에도 게시됩니다.
+Datadog에서 이벤트를 생성하기 위해 [GitHub 통합][9]을 설치한 경우 개인 GitHub 계정을 Datadog 사용자 계정에 연결하세요. 계정을 연결하면 Datadog 내 GitHub 이벤트에 게시한 댓글이 자동으로 해당하는 GitHub  문제나 풀 요청에 게시됩니다.
 
-## 계정 탈퇴
+## 조직 계정 비활성화
 
-Datadog 계정을 완전히 탈퇴하려면 [Datadog 지원팀][10]에 문의해주세요.
+Datadog 조직 계정을 비활성화하려면 [Datadog 지원팀][10]에 문의하세요.
 
 [1]: https://gravatar.com
 [2]: https://support.google.com/accounts/answer/19870?hl=en

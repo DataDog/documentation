@@ -212,4 +212,4 @@ For more information, see [Code Coverage][7].
 [4]: /monitors/notify/
 [5]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
 [6]: /continuous_integration/search/#new-flaky-tests
-[7]: /continuous_integration/integrate_tests/code_coverage
+[7]: /continuous_integration/tests/code_coverage

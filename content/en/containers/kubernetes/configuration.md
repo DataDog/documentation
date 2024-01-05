@@ -38,7 +38,43 @@ After you have installed the Datadog Agent in your Kubernetes environment, you m
 
 ## Enable APM and tracing
 
-If you have installed Kubernetes using the Datadog Operator or Helm, **APM is enabled by default**.
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+Edit your `datadog-agent.yaml` to set `features.apm.enabled` to `true`.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+
+  features:
+    apm:
+      enabled: true
+```
+
+{{% k8s-operator-redeploy %}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+In Helm, APM is **enabled by default** over UDS or Windows named pipe.
+
+To verify, ensure that `datadog.apm.socketEnabled` is set to `true` in your `values.yaml`.
+
+```yaml
+datadog:
+  apm:
+    socketEnabled: true    
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 For more information, see [Kubernetes Trace Collection][16].
 
@@ -742,7 +778,7 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 [2]: /containers/cluster_agent/
 [3]: https://app.datadoghq.com/containers
 [5]: /containers/kubernetes/integrations/
-[12]: /agent/guide/secrets-management/
+[12]: /agent/configuration/secrets-management/
 [13]: /agent/guide/autodiscovery-management/
 [14]: /containers/guide/kubernetes_daemonset#cluster-agent-event-collection
 [15]: /infrastructure/containers/
@@ -750,7 +786,7 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 [17]: /containers/kubernetes/log
 [18]: /network_monitoring/performance/
 [19]: /developers/dogstatsd
-[20]: https://app.datadoghq.com/orchestration/overview/
+[20]: https://app.datadoghq.com/orchestration/overview
 [21]: /infrastructure/containers/orchestrator_explorer
 [22]: /containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
 [23]: /infrastructure/process/ 

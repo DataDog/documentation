@@ -22,3 +22,7 @@ title: データベースモニタリングガイド
 {{< whatsnext desc="SQL Server ガイド:" >}}
     {{< nextlink href="database_monitoring/guide/sql_alwayson" >}}SQL Server AlwaysOn アベイラビリティグループの確認{{< /nextlink >}}
 {{< /whatsnext >}}
+
+{{< whatsnext desc="PostgreSQL guides:" >}}
+    {{< nextlink href="database_monitoring/guide/pg15_upgrade" >}}PostgreSQL 15 へのアップグレード{{< /nextlink >}}
+{{< /whatsnext >}}

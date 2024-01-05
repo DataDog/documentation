@@ -10,6 +10,9 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about Source Code Integration."
+- link: "/static_analysis/?tab=githubactions"
+  tag: "Documentation"
+  text: "Learn about Static Analysis."
 - link: "https://www.jetbrains.com/lp/toolbox/"
   tag: "External Site"
   text: "Learn about the JetBrains Toolbox."
@@ -17,7 +20,7 @@ further_reading:
 
 ## Overview
 
-The Datadog plugin for the IntelliJ Platform (IDEA and GoLand) helps you to improve software performance by providing meaningful code-level insights in the IDE based on real-time observability data.
+The Datadog plugin for the IntelliJ Platform is available for IDEA, GoLand, and PyCharm. It helps you improve software performance by providing meaningful code-level insights directly in the IDE based on real-time observability data.
 
 {{< img src="/developers/ide_integrations/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
@@ -34,9 +37,14 @@ The **Continuous Profiler** helps you to reduce latency and lower cloud costs by
 
 The **Logs Navigation** support opens the Datadog Log Explorer with a view matching the context in which you are working.
 
+
+The **CI Test Runs** feature opens the Continuous Integration Visibility Explorer to show recent runs for a selected test.
+
+The **Static Analysis** integration analyzes your code (locally) against predefined rules to detect and fix problems before you commit changes.
+
 ## Requirements
 
-- **A Datadog account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
+- **A Datadog account**: The plugin requires a Datadog account (except when using [Static Analysis][13] features). If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
 - **Continuous Profiler**: To display profiling data and insights, the plugin requires the Continuous Profiler to be configured for your Services. For more information, see [Getting Started with the Continuous Profiler][2].
 - **JetBrains Toolbox**: To use the [View in IDE](#view-in-ide) feature, the plugin requires the [JetBrains Toolbox][7] to be installed on the developer's machine.
 
@@ -150,19 +158,44 @@ The active Profiling tab also affects the project tree view, which is annotated 
 
 ## Logs navigation
 
-You can navigate to the [Log Explorer][5] on the Datadog platform directly from your Java or Go source files. Look for the **View Logs** links following the log statements in your source code:
+You can navigate to the [Log Explorer][5] on the Datadog platform directly from your Java, Go, and Python source files. Look for the **View Logs** links following the log statements in your source code:
 
 {{< img src="/developers/ide_integrations/idea/logs-navigation.png" alt="A source file showing a View Logs link." style="width:100%;" >}}
 
 Clicking the link opens the **Log Explorer** with a query that matches the logger name, log level, and log message as closely as possible.
 
+## CI Test Runs
+You can view recent test runs in the [Continuous Integration Visibility Explorer][12] by navigating directly from your source files. Look for the **View Test Runs** links following test method declarations in your source code:
+
+{{< img src="/developers/ide_integrations/idea/ci-navigation.png" alt="A source file showing a View Test Runs link." style="width:100%;" >}}
+
+Clicking the link opens the **Test Runs** tab showing the recent history for one test case.
+
 ## View in IDE
 
-The **View in IntelliJ IDEA** feature provides a link from the Datadog platform directly to your Java source files (not yet available for Go). Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
+The **View in IntelliJ/GoLand/PyCharm** feature provides a link from the Datadog platform directly to your Java, Go, and Python source files. Look for the button next to frames in stack traces displayed on the platform (for example, in [Error Tracking][6]):
 
 {{< img src="/developers/ide_integrations/idea/view-in-idea.png" alt="A stack trace on the Datadog platform showing the View in IntelliJ button." style="width:100%;" >}}
 
 <div class="alert alert-info">This feature has two prerequisites: (1) Source Code Integration is configured for your service and (2) the JetBrains Toolbox is installed on your development machine.</div>
+
+## Static Analysis
+The Datadog plugin runs [Static Analysis][13] rules on your source files as you edit them. The goal is to detect and fix problems such as maintainability issues, bugs, or security vulnerabilities in your code before you commit your changes. 
+
+Static Analysis supports scanning for many programming languages. For a complete list, see [Static Analysis Rules][14]. For file types belonging to supported languages, issues are shown in the source code editor with the JetBrains inspection system, and suggested fixes can be applied directly:
+
+{{< img src="/developers/ide_integrations/idea/static-analysis-issue.png" alt="A static analysis rule violation and recommended fix." style="width:100%;" >}}
+
+Additionally, all issues detected by this feature are listed in the standard **Problems** view.
+
+### Getting started
+When you start editing a source file supported by Static Analysis, the plugin checks for `static-analysis.datadog.yml` at your source repository's root. It prompts you to create the file if necessary:
+
+{{< img src="/developers/ide_integrations/idea/static-analysis-onboard.png" alt="A banner for onboarding." style="width:100%;" >}}
+
+Once the configuration file is created, the static analyzer runs automatically in the background.
+
+<div class="alert alert-info">The Static Analysis feature does not require a Datadog account as source files are analyzed locally.</div>
 
 ## Feedback
 
@@ -189,3 +222,6 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 [9]: /continuous_integration/guides/flaky_test_management/
 [10]: /watchdog/insights
 [11]: mailto:team-ide-integration@datadoghq.com
+[12]: /continuous_integration/explorer/?tab=testruns
+[13]: /static_analysis/?tab=githubactions
+[14]: /static_analysis/rules/#python-rules

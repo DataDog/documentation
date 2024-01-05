@@ -18,7 +18,7 @@ further_reading:
 - link: "/agent/basic_agent_usage/#agent-architecture"
   tag: "Documentation"
   text: "Find out more about the Agent's architecture"
-- link: "/agent/guide/network#configure-ports"
+- link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
 ---
@@ -42,7 +42,7 @@ If installing the Datadog Agent on a domain environment, see the [installation r
 
 1. Download the [Datadog Agent installer][1] to install the latest version of the Agent.
 
-   <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://s3.amazonaws.com/ddagent-windows-stable/installers.json">installer list</a>.</div>
+   <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json">installer list</a>.</div>
 
 2. Run the installer (as **Administrator**) by opening `datadog-agent-7-latest.amd64.msi`.
 3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
@@ -117,7 +117,7 @@ Each of the following configuration options can be added as a property to the co
 
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
-[2]: /agent/proxy/
+[2]: /agent/configuration/proxy/
 [3]: /agent/faq/windows-agent-ddagent-user/
 [4]: /network_monitoring/performance
 {{% /tab %}}
@@ -445,7 +445,7 @@ After configuration is complete, [restart the Agent][11].
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
-[2]: /agent/basic_agent_usage/?tab=agentv6v7#supported-platforms
+[2]: /agent/supported_platforms/?tab=windows
 [3]: /agent/faq/windows-agent-ddagent-user/
 [4]: /agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
 [5]: /agent/faq/windows-agent-ddagent-user/#domain-controllers
@@ -453,5 +453,5 @@ After configuration is complete, [restart the Agent][11].
 [7]: /integrations/wmi_check/
 [8]: https://app.datadoghq.com/monitors#create/integration
 [9]: /infrastructure/process/?tab=linuxwindows#installation
-[10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[11]: /agent/guide/agent-commands/#restart-the-agent
+[10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[11]: /agent/configuration/agent-commands/#restart-the-agent

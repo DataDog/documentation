@@ -33,6 +33,8 @@ When a pipeline, stage, job, or step finishes, execution data is sent to Datadog
 
 {{< img src="ci/ci-pipeline-execution.png" alt="Example of a pipeline execution trace" style="width:100%;">}}
 
+Stages, jobs, and steps are expected to have the exact same pipeline name as their parent pipeline. In the case of a mismatch, some pipelines may be missing stage, job, and step information. For example, missing jobs in the job summary tables.
+
 ### Pipeline unique IDs
 
 All pipeline executions within a level must have an unique identifier. For example, a pipeline and a job may have the same unique ID, but not two pipelines.

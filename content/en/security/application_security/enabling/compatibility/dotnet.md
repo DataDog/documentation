@@ -1,5 +1,5 @@
 ---
-title: .NET Compatibility Requirements 
+title: .NET Compatibility Requirements
 kind: documentation
 code_lang: dotnet
 type: multi-code-lang
@@ -14,22 +14,23 @@ The following ASM capabilities are supported in the .NET library, for the specif
 | -------------------------------- | ----------------------------|
 | Threat Detection | 2.23.0|
 | Threat Protection  | 2.26.0|
+| Customize response to blocked requests | 2.27.0 |
 | Vulnerability Management for Open Source Software (OSS) |  2.16.0  |
-| Vulnerability Management for Code-level (beta)| private beta  |
+| Vulnerability Management for Code-level (beta)| 2.42.0  |
 | Automatic user activity event tracking | 2.32.0 |
 
-The minimum tracer version to get all supported ASM capabilities for .NET is 2.26.0.
+The minimum tracer version to get all supported ASM capabilities for .NET is 2.42.0.
 
-**Note**: Threat Protection requires enabling [Remote Configuration][3], which is included in the listed minimum tracer version.  
+**Note**: Threat Protection requires enabling [Remote Configuration][3], which is included in the listed minimum tracer version.
 
 ### Supported deployment types
 |Type   | Threat Detection support |  Vulnerability Management for OSS support |
 | ---   |   ---             |           ----        |
 | Docker | {{< X >}}  | {{< X >}} |
-| Kubernetes | {{< X >}}  | {{< X >}} | 
-| AWS ECS | {{< X >}}  | {{< X >}} |
+| Kubernetes | {{< X >}}  | {{< X >}} |
+| Amazon ECS | {{< X >}}  | {{< X >}} |
 | AWS Fargate | {{< X >}}  | {{< X >}} |
-| AWS Lambda | {{< X >}} | | 
+| AWS Lambda | {{< X >}} | |
 | Azure App Service | {{< X >}}  | {{< X >}} |
 
 **Note**: Azure App Service is supported for **web applications only**. ASM doesn't support Azure Functions.
@@ -38,7 +39,7 @@ The minimum tracer version to get all supported ASM capabilities for .NET is 2.2
 
 ### Supported .NET versions
 
-| .NET Framework Version  | Microsoft End of Life | Support level                       | Package version             | 
+| .NET Framework Version  | Microsoft End of Life | Support level                       | Package version             |
 | ----------------------- | --------------------- | ----------------------------------- | --------------------------- |
 | 4.8                     |                       | GA   | latest                      |
 | 4.7.2                   |                       | GA | latest                      |

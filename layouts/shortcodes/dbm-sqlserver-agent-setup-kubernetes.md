@@ -93,4 +93,4 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
-[4]: /agent/guide/secrets-management
+[4]: /agent/configuration/secrets-management

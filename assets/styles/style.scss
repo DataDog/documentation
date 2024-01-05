@@ -37,6 +37,7 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import "pages/home";
 @import "pages/glossary";
 @import "pages/standard-attributes";
+@import "pages/static-analysis";
 @import "pages/reference";
 
 // Components
