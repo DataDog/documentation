@@ -25,7 +25,7 @@ The comment includes the name, ID, severity, category, and description of the vi
 
 ### Enable Static Analysis on Datadog
 
-To use Datadog Static Analysis, add the appropriate configuration files to your repository, as described in the [Static Analysis setup instructions][1].
+To use Datadog Static Analysis, add the appropriate configuration files to your repository, as described in the [setup instructions][1].
 
 ### Configure a GitHub App
 
