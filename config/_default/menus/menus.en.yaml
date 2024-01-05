@@ -2708,6 +2708,11 @@ main:
     parent: static_analysis
     identifier: static_analysis_github_actions
     weight: 103
+  - name: GitHub Pull Requests
+    url: static_analysis/github_pull_requests
+    parent: static_analysis
+    identifier: static_analysis_github_prs
+    weight: 103
   - name: Quality Gates
     url: quality_gates/
     pre: ci
