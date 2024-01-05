@@ -11,7 +11,7 @@ further_reading:
   text: "Learn about Static Analysis"
 ---
 
-## Feature overview
+## Overview
 
 Static Analysis can automatically flag rule violations in pull requests on GitHub. To configure the GitHub integration to include Static Analysis features, see [the setup instructions](#set-up-static-analysis-for-github-source-code).
 
