@@ -33,9 +33,7 @@ For additional information about how Threat Management works, read [How ASM Work
 
 When threat data for your services is coming into Datadog, [ASM Overview][7] shows a summary of what's happening. Here, you can enable vulnerability detection, review attacks, customize alerting and reporting, and enable ASM on your services. To investigate signals of suspicious activity, click a service's **Review** link.
 
-In the [Signals Explorer][2], filter by attributes and facets to find critical threats. Click into a signal to see details for it, including the user information and their IP address, what rule they triggered, attack flow, and related traces and other security signals. From this page you can also click to create a case and declare an incident.
-
-Additionally, you can block attacking users and IPs, or investigate what infrastructure might have been affected.
+In the [Signals Explorer][2], filter by attributes and facets to find critical threats. Click into a signal to see details for it, including the user information and their IP address, what rule they triggered, attack flow, and related traces and other security signals. From this page you can also click to create a case and declare an incident. For more information see [Investigate Security Signals][8].
 
 {{< img src="security/application_security/threats/appsec-threat-overview.png" alt="Overview of investigating threats in signals explorer">}}
 
@@ -58,3 +56,4 @@ You can [create In-App WAF rules][5] that define what suspicious behavior looks 
 [5]: /security/application_security/threats/inapp_waf_rules/
 [6]: /security/application_security/threats/custom_rules/
 [7]: https://app.datadoghq.com/security/appsec?
+[8]: /security/application_security/threats/security_signals/

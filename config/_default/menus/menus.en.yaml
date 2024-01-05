@@ -3737,16 +3737,21 @@ main:
     parent: appsec_threats
     identifier: threats_event_rules
     weight: 506
+  - name: Security Signals
+    url: security/application_security/threats/security_signals/
+    parent: appsec_threats
+    identifier: threats_security_signals
+    weight: 507
   - name: Trace Qualification
     url: security/application_security/threats/trace_qualification/
     parent: appsec_threats
     identifier: threats_trace_qualification
-    weight: 507
+    weight: 508
   - name: Threat Intelligence
     url: security/application_security/threats/threat-intelligence/
     parent: appsec_threats
     identifier: threats_threat_intelligence
-    weight: 508
+    weight: 509
   - name: API Security Inventory
     url: security/application_security/api-inventory/
     parent: application_security
