@@ -30,15 +30,18 @@ Live Process Monitors are best used in the following scenarios:
 
 ## Monitor creation
 
-To create a [Live Process Monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> Live Process*.
+There are two ways to create a [Live Process Monitor][2]:
+
+- Using the main navigation: *Monitors --> New Monitor --> Live Process*.
+- On the Live Processes Page, search for a process you want to monitor. Then click the dropdown next to *New Metric* and click "Create monitor".
 
 ### Select processes
 
-You can use either tags or a fuzzy search to filter across all processes in your infrastructure. Matching processes and counts are displayed below the search:
+You can use either tags or a fuzzy text search to filter across all processes in your infrastructure. Matching processes and counts are displayed below the search:
 
 {{< img src="monitors/monitor_types/process/select_processes.png" alt="Select processes" style="width:90%;">}}
 
-After defining your search, a graph is displayed above the search inputs with an approximation of the total number of processes found. It's recommended to keep your monitor scoped to a few thousands processes. Use additional tags to narrow the search down or consider splitting a monitor into multiple ones if needed. For more granular data, visit your [Live Process Page][4].
+After defining your search, a graph is displayed above the search inputs with an approximation of the total number of processes found. It is recommended to keep your monitor scoped to a few thousand processes. Use additional tags to narrow the search down or consider splitting a monitor into multiple ones if needed. For more granular data, visit your [Live Process Page][4].
 
 #### Tags search
 
