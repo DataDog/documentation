@@ -21,7 +21,7 @@ further_reading:
 
 Live Process Monitors are based on data collected by the [Process Agent][1]. Create monitors that warn or alert based on the count of any group of processes across hosts or tags.
 
-Live Process Monitors are recommended to:
+Live Process Monitors are best used in the following scenarios:
 
 - Ensure that enough instances of a non-containerized long-lived process are running.
 - Flag when a specific process is running.
