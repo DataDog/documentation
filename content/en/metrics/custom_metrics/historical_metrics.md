@@ -21,7 +21,7 @@ Having Historical Metrics Ingestion enabled on your metrics can be helpful for a
 
 ## What is Historical Metrics Ingestion?
 
-{{< img src="metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_intro.png" alt="Diagram showing the ingestion flow for Historical Metrics" >}}
+{{< img src="metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_1_240105.png" alt="Diagram showing the ingestion flow for Historical Metrics enabled and disabled" >}}
 
 Datadog classifies *historical metrics* as metric points with timestamps that are older than an hour relative to the time of submission. If Historical Metrics Ingestion is not enabled, metrics older than an hour from submission are not ingested.
 
@@ -440,7 +440,7 @@ Historical Metrics Ingestion has varying latency depending on how far in the pas
 | +30 days             | +14 hours latency                     |
 
 
-{{< img src="metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_latency.png" alt="Diagram showing how Historical Metrics can take longer to ingest depending on the metric timestamp">}}
+{{< img src="metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_3_240105.png" alt="Diagram showing how Historical Metrics can take longer to ingest depending on the metric timestamp">}}
 
 ## Historical Metrics Ingestion billing
 
