@@ -1,7 +1,14 @@
 ---
 title: GitHub Pull Requests
 kind: documentation
-description: Feature overview and setup instructions for using Static Analysis in GitHub pull requests.
+description: Learn how to use Static Analysis in GitHub pull requests.
+further_reading:
+- link: "/integrations/github/"
+  tag: "Documentation"
+  text: "Learn about the GitHub integration"
+- link: "/static_analysis/"
+  tag: "Documentation"
+  text: "Learn about Static Analysis"
 ---
 
 ## Feature overview
