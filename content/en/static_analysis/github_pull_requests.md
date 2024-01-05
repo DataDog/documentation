@@ -17,9 +17,9 @@ Static Analysis can automatically flag rule violations in pull requests on GitHu
 
 During code reviews on GitHub, the integration checks for Static Analysis violations in pull requests for repos that have at least one ruleset applied. Violations are flagged with a review comment on the relevant line of code.
 
-The comment includes the name, ID, severity, category, and description of the violation. Certain violations also include suggested changes that can be applied directly in the GitHub UI.
-
 {{< img src="ci/static-analysis-pr-comment-example.png" alt="Example of a Static Analysis comment on a pull request" style="width:90%;" >}}
+
+The comment includes the name, ID, severity, category, and description of the violation. Certain violations also include suggested changes that can be applied directly in the GitHub UI.
 
 ## Set up Static Analysis for GitHub pull requests
 
