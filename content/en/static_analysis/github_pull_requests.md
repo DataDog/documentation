@@ -66,6 +66,9 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 {{< img src="ci/static-analysis-github-comments.png" alt="Example of a Static Analysis comment on a pull request" style="width:100%;" >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 [1]: /static_analysis#setup
 [2]: /integrations/github/
 [3]: https://app.datadoghq.com/integrations/github/add
