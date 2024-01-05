@@ -3741,7 +3741,7 @@ main:
     url: security/application_security/threats/threat-intelligence/
     parent: appsec_threats
     identifier: threats_threat_intelligence
-    weight: 508
+    weight: 509
   - name: API Security Inventory
     url: security/application_security/api-inventory/
     parent: application_security
