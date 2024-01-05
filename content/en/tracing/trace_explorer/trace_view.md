@@ -27,7 +27,7 @@ further_reading:
 
 View an individual [trace][1] to see all of its [spans][2] and associated metadata. Each trace can be visualized as either a Flame Graph, Span List, Waterfall, or Map.
 
-The trace header displays critical trace information, including the root span's service name, resource name, trace ID, trace duration, and the trace start datetime. To retain a trace indefinitely, click "Open Full Page" and save the URL.
+The trace header displays critical trace information, including the root span's service name, resource name, trace ID, end-to-end trace duration, and the trace start datetime. To retain a trace indefinitely, click "Open Full Page" and save the URL.
 
 {{< img src="tracing/trace_view/trace_header.png" alt="Trace header" style="width:90%;">}}
 
@@ -35,14 +35,10 @@ Selected span information is visible at the bottom of the Trace View.
 
 ## Trace Visualizations
 
-{{< beta-callout url="#" btn_hidden="true">}}
-To join the Waterfall private beta <a href="https://forms.gle/LjJR1ZbF1tNDv5JC6">fill out this form</a>.
-{{< /beta-callout >}}
-
 {{< tabs >}}
 {{% tab "Flame Graph" %}}
 
-{{< img src="tracing/trace_view/flamegraph.png" alt="Trace View" style="width:90%;">}}
+{{< img src="tracing/trace_view/flamegraph.png" alt="Flame Graph" style="width:90%;">}}
 
 The default visualization. Displays all the spans for an associated trace, color-coded on a timeline. Particularly useful for understanding the execution path of a request and where time was spent over a trace.
 
@@ -50,16 +46,15 @@ To navigate the graph, scroll to zoom, click and drag to move around, and use th
 
 The legend details the color coding of the flame graph. Group spans by either **service** (default), **host**, or **container** - and choose to display either **percentage of trace execution time** or **span count** by color grouping. If errors exist on spans in the trace, highlight them in the flame graph by ticking the Errors checkbox under Filter Spans.
 
-**TODO: video of legend, selecting to color by host instead of service, and span count instead of % execution time - choose a trace with errors so the Error checkbox is in view**
+{{< img src="tracing/trace_view/flamegraph_legend.mp4" alt="Flame Graph legend" video="true" style="width:90%;">}}
 
 
 {{% /tab %}}
 {{% tab "Span List" %}}
 
-**TODO: fix links**
 {{< img src="tracing/trace_view/spanlist.png" alt="Trace View" style="width:90%;">}}
 
-Displays [resources][4] by grouping ([service][3] by default) and sorts them according to their corresponding count of spans. Particularly useful for scanning latency information by resource or grouping.
+Displays [resources][1] by grouping ([service][2] by default) and sorts them according to their corresponding count of spans. Particularly useful for scanning latency information by resource or grouping.
 
 Filter resources by type or naming information using the corresponding buttons and text-based search.
 
@@ -67,11 +62,15 @@ Filter resources by type or naming information using the corresponding buttons a
 
 Sort groupings by clicking on the column header which you’d like to sort by: **resource**, **spans**, **average duration**, **execution time**, or **percentage of trace execution time**.
 
+[1]: /tracing/glossary/#resources
+[2]: /tracing/glossary/#services
 {{% /tab %}}
 {{% tab "Waterfall (Beta)" %}}
 
-**TODO: add beta card here?**
-{{< img src="tracing/trace_view/waterfall.png" alt="Trace View" style="width:90%;">}}
+<div class="alert alert-info"><strong>Join the Beta!</strong><br />
+To join the Waterfall private beta <a href="https://forms.gle/LjJR1ZbF1tNDv5JC6">fill out this form</a>.</div>
+
+{{< img src="tracing/trace_view/waterfall.png" alt="Waterfall" style="width:90%;">}}
 
 Displays all the spans for an associated trace, color-coded on separate rows and on a timeline. Particularly useful for isolating relevant parts of a trace and understanding how asynchronous processes fit into the execution flow.
 
@@ -86,7 +85,7 @@ Expand/collapse span descendants by clicking the plus/minus button on each row, 
 {{% /tab %}}
 {{% tab "Map" %}}
 
-{{< img src="tracing/trace_view/map.png" alt="Trace View" style="width:90%;">}}
+{{< img src="tracing/trace_view/map.png" alt="Map" style="width:90%;">}}
 
 Displays a service-level representation of the trace, with arrows showing the flow of calls between services. Particularly useful for getting a high level overview of the trace and the order in which services are called.
 
@@ -99,7 +98,9 @@ Hover over a service to highlight its parent and children, and click on it to fo
 
 The height-adjustable bottom of the Trace View shows selected span and trace information. 
 
-The header contains service, operation, and resource names of the selected span as well as latency information. Pivot to other parts of the platform or narrow down your [Trace Explorer][5] search by clicking on the naming pill.
+The span header contains service, operation, and resource names of the selected span as well as latency information. Pivot to other parts of the platform or narrow down your [Trace Explorer][5] search by clicking on the naming pill.
+
+{{< img src="tracing/trace_view/span_header.png" alt="Span header" style="width:90%;">}}
 
 {{< tabs >}}
 {{% tab "Span tags" %}}
