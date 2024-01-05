@@ -69,6 +69,7 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /static_analysis#setup
 [2]: /integrations/github/
 [3]: https://app.datadoghq.com/integrations/github/add
