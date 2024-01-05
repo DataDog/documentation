@@ -7,13 +7,15 @@ description: "Threat Intelligence at Datadog"
 ## Overview
 Threat Intelligence is reputation information that helps responders make informed decisions on attacks and compromises. 
 
-Datadog curates commercial, open-source, and in-house threat intelligence into categories and intents. Threat Intelligence is updated at least once per day per source. This data is used to enrich your logs and traces with relevant reputation information.
+Datadog curates commercial, open-source, and in-house threat intelligence indicators of compromise into categories and intents. Threat intelligence is updated at least once per day, per source. This data is used to enrich your logs and traces with relevant reputation information.
 
 ## Threat Intelligence Lifecycle
 
+Datadog collects threat intelligence across the following entity types. Each entity type has unique characteristics and a useful timeframe. This timeframe, or lifecycle, requires consideration when assessing the importance of a threat intelligence match on your data.
+
 **File Hashes: Unique Digital Fingerprints** 
 
-File hashes function as unique digital fingerprints for specific files. When a file hash is marked as malware, it signifies the file's exact content is harmful. The immutability of a hash, which is tied to its file's content, ensures its consistent identification. As a result, a file tagged as malware retains this identification, provided its content remains unaltered and the identification was a true positive.
+File hashes function as unique digital fingerprints for specific files. When a file hash is marked as malware, it signifies the file's exact content is harmful. The immutability of a hash, which is tied to its file's content, ensures its consistent identification. As a result, a file hash tagged as malware retains this identification, provided the identification was a true positive.
 
 **Application Packages: Malware Risk in Distribution**
 
@@ -25,15 +27,16 @@ Unlike file hashes, domains identified as malicious are subject to change. They 
 
 **IP Addresses: Dynamic and Transient** 
 
-IP addresses represent the most volatile element in threat intelligence, often changing reputations within a 24-hour cycle. Given their dynamic nature, particularly in residential and mobile networks where multiple hosts may be involved, it's crucial to regularly reassess their status. Not all hosts connected to a low-reputation IP address are inherently malicious, underscoring the need for cautious interpretation.
+IP addresses represent the most volatile element in threat intelligence, often changing reputations within a 24-hour cycle. Given their dynamic nature, particularly in residential and mobile networks where multiple hosts may be involved, it's crucial to regularly reassess their status. Not all hosts connected to a low-reputation IP address are inherently malicious, underscoring the need for correlation.
 
 ## Best Practices in Threat Intelligence
+
 With threat intelligence, reputation is key, but it must be weighed alongside other evidence. Relying solely on IP and Domain intelligence for blocking traffic is not recommended, with few exceptions. A balanced, evidence-based approach is essential.
 
 Threat intelligence used in Detection Rules should reference the Datadog keys such as category and intent. Other keys should not be used.
 
 ## Transparency in Threat Intelligence 
-Datadog ensures transparency by providing external links to external threat intelligence sources associated with a detection. All external threat intelligence at Datadog is ingested to the Datadog platform for enrichment and detection. Datadog does not send customer data to threat intelligence sources.
+Datadog ensures transparency by providing external links to external threat intelligence sources associated with a detection. Threat intelligence curated by Datadog is ingested into the Datadog platform for enrichment and detection. Datadog does not send customer data to threat intelligence sources.
 
 The detections and enrichments are accessible in the UI and event JSON.
 
@@ -42,12 +45,11 @@ Sources, categories, and intents are available as facets and filters on relevant
 
 ### Threat Intel Sources
 
-| Source | Categories | Source Use Cases | Primary Products | 
+| Source | Category | Source Use Cases | Primary Products | 
 |--------|------------|-----------|------------------|
 | Datadog Threat Research| scanners, exploits | Honeypots focused on software specific threats | ASM and CWS |
-| [Datadog Guarddog](https://github.com/DataDog/guarddog) | malware | Malware in application libraries | ASM |
-| [Spur](https://spur.us/) | residential_proxy | Proxies associated with fraud and credential stuffing | ASM and Cloud SIEM |
-| [Spur](https://spur.us/) | malware_proxy | Proxies associated with malware command and control | ASM and CWS |
+| [Spur](https://spur.us/) | residential_proxy | Proxies associated credential stuffing and fruad | ASM and Cloud SIEM |
+| [Spur](https://spur.us/) | malware_proxy | Proxies associated with malware command and control | Cloud SIEM |
 | [Abuse.ch](https://abuse.ch/) Malware Bazaar| malware | Malware on hosts | CWS |
 | [Minerstat](https://minerstat.com/mining-pool-whitelist.txt) | malware | Coinminer activity with known mining pools| CWS |
 | Tor | Tor | Policy violations for user activity | AWS, Cloud SIEM, and CWS |
@@ -56,8 +58,8 @@ Sources, categories, and intents are available as facets and filters on relevant
 
 | Category | Intention | Entity Types | Product Use Cases | Primary Products |
 |----------|----------|--------------|----------|------------------|
-| residential_proxy | suspicious | IP addresses | Reputation for credential stuffing and fraud use cases | ASM and Cloud SIEM |
-| malware_proxy | suspicious | IP addresses | Reputation for automated application abuse and anomalous processes | Cloud SIEM, and CWS |
+| residential_proxy | suspicious | IP addresses | Reputation for credential stuffing and fraud | ASM and Cloud SIEM |
+| malware_proxy | suspicious | IP addresses | Reputation for automated application abuse and anomalous processes | Cloud SIEM |
 | malware | malicious | application library versions, file hashes | Malicious packages and communication with mining pools| ASM, CWS |
 | scanner | suspicious | IP addresses | Reputation for scanners | ASM, Cloud SIEM |
 | Tor | suspicious | IP addresses  | Corporate policy violations for user activity | ASM and Cloud SIEM |
@@ -75,7 +77,7 @@ Sources, categories, and intents are available as facets and filters on relevant
 |-------------|---------|-----------------------------|
 | IP addresses | 128.66.0.1 | Identify IP addresses associated with attacks, command and control, and scanning activity | 
 | Domains | example.com, subdomain.example.com | Domains associated with malicious use. Often used with malware as a command and control |
-| Application packages versions | (mjrl, 1.0.0) | Identify malicious packages downloaded from PyPi |
+| Application packages versions | (example_package, 1.0.0) | Identify malicious packages downloaded from PyPi |
 | File hashes [SHA1, SHA256] | 5f7afeeee13aaee6874a59a510b75767156f75d14db0cd4e1725ee619730ccc8 | Identify a distinct file associated with malware or compromise |
 
 
@@ -84,6 +86,3 @@ Threat intelligence sources and categories are not customer configurable at this
 
 [ASM](https://docs.datadoghq.com/security/application_security/threats/threat-intelligence/)
 
-Cloud SIEM
-
-CWS

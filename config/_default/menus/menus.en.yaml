@@ -3383,7 +3383,7 @@ main:
     url: security/threat_intel
     parent: security_platform
     idenfier: security_threat_intel
-    weight: 6
+    weight: 12
   - name: Rules
     url: security/notifications/rules/
     parent: security_notifications
