@@ -17,7 +17,7 @@ further_reading:
 
 ASM security signals are created when Datadog detects a threat based on a detection rule. View, search, filter, and investigate security signals in the [Signals Explorer][2], or configure [Notification Rules][8] to send signals to third-party tools.
 
-In the [Signals Explorer][2], filter by attributes and facets to find critical threats. Click on a signal to see details about it, including the service owner and attack details. Attack details include the authenticated user and their IP address, what rule they triggered, attack flow, related traces and other security signals. From this page, you can block IP addresses and users, and also click to create a case and declare an incident.
+In the [Signals Explorer][2], filter by attributes and facets to find critical threats. Click on a signal to see details about it, including the service owner and attack details. Attack details include the authenticated user and their IP address, what rule they triggered, attack flow, related traces, and other security signals. From this page, you can block IP addresses and users, and also click to create a case and declare an incident.
 
 {{< img src="security/application_security/threats/security_signals/appsec-threat-signals.png" alt="Overview of investigating threats in signals explorer with details side panel">}}
 
@@ -29,7 +29,7 @@ To filter the security signals in the [Signals Explorer][2], use the search quer
 
 You can triage a signal by assigning it to a user for further investigation. The assigned user can then track their review by updating the signal's status.
 
-1. On the [Signals Explorer][2], select a security signal.
+1. On the [Signals Explorer][2] page, select a security signal.
 2. On the signal side panel, click the user profile icon and select a user.
 3. To update the status of the security signal, click the triage status dropdown menu and select a status. The default status is **Open**.
     - **Open**: The signal has not yet been resolved.
@@ -42,8 +42,8 @@ You can triage a signal by assigning it to a user for further investigation. The
 
 Use [Case Management][6] to track, triage, and investigate security signals.
 
-1. On the [Signals Explorer][2], select a security signal.
-2. On the signal side panel select the **Create a case** dropdown. Select **Create a new case**, or **Add to an existing case** to add the signal to an existing case. 
+1. On the [Signals Explorer][2] page, select a security signal.
+2. On the signal side panel, select the **Create a case** dropdown. Select **Create a new case**, or **Add to an existing case** to add the signal to an existing case. 
 3. Enter a title and optional description.
 4. Click **Create Case**.
 
@@ -51,7 +51,7 @@ Use [Case Management][6] to track, triage, and investigate security signals.
 
 Use [Incident Management][4] to create an incident for a security signal.
 
-1. On the [Signals Explorer][2], select a security signal.
+1. On the [Signals Explorer][2] page, select a security signal.
 2. On the signal side panel, click the **Declare Indident** dropdown menu and select **Create an incident**, or **Add to an existing incident**.
 3. On the incident creation modal, configure the incident by specifying details such as the severity level and incident commander.
 4. Click **Declare Incident**.
@@ -60,7 +60,7 @@ Use [Incident Management][4] to create an incident for a security signal.
 
 Use [Workflow Automation][5] to manually trigger a workflow for a security signal. 
 
-1. On the [Signals Explorer][4], select a security signal.
+1. On the [Signals Explorer][2] page, select a security signal.
 2. Scroll down to the **What is Workflow Automation** section. 
 3. Click **Run Workflow**.
 4. On the workflow modal, select the workflow you want to run. Depending on the workflow, you may be required to enter additional input parameters.
@@ -68,8 +68,8 @@ Use [Workflow Automation][5] to manually trigger a workflow for a security signa
 
 ## Review and remediate
 
-1. On the [Signals Explorer][2], select a security signal.
-2. On the signal side panel, click each of the review tabs such as **Attack Flow**, **Activity Summary**, and **Rule Details**.
+1. On the [Signals Explorer][2] page, select a security signal.
+2. On the signal side panel, click each of the tabs, such as **Attack Flow**, **Activity Summary**, and **Rule Details**, to review the information.
 3. Review the **Suggested Next Steps**, and take action:
     -  Click **Block all Attacking IPs** (by specific duration or permanently).
     -  Click **Automated Attacker Blocking** (based on [detection][10] rules).
