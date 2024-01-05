@@ -23,7 +23,7 @@ CD Visibility for CI providers deployments is in private beta. To request access
 ## Overview
 
 Deployments can also be performed within continuous integration pipelines. Typically, these pipelines have a deployment step that is executed after the source code has been tested and the image has been built.
-If you are executing deployments via a CI provider, you can monitor your deployments with CD Visibility if the following requirements are met:
+If you are executing deployments through a CI provider, you can monitor your deployments with CD Visibility if the following requirements are met:
 1. You are using [Pipeline Visibility][1] to monitor your CI pipelines.
 2. Your CI provider supports the "Custom tags and metrics at runtime" feature. You can check this in the [supported features table][2].
 3. You are executing deployments in a CI job (or [related level][9] in your CI provider).
