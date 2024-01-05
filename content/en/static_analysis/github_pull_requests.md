@@ -51,7 +51,7 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 #### Update an existing GitHub App
 
-1. From the [**Integrations > GitHub Applications**][5] page, navigate to the GitHub App you want to use for Static Analysis.
+1. In Datadog, navigate to [**Integrations > GitHub Applications**][5], and search for the GitHub App you want to use for Static Analysis.
 {{< img src="ci/static-analysis-existing-github-app.png" alt="Example of a Static Analysis comment on a pull request" style="width:90%;" >}}
 1. On the **Features** tab, look at the **Static Analysis: Pull Request Comments** section to determine whether your GitHub App needs additional permissions. If so, click **Update permissions in GitHub** to edit the app settings.
 1. Under **Repository permissions**, set the **Pull Requests** access to **Read and write**.
