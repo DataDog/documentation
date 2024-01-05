@@ -43,8 +43,7 @@ Use scalable features such as a codeless [web recorder][2], [mobile app recorder
 
 {{< img src="continuous_testing/continuous_testing_selection.png" alt="Choose between running your tests sequentially and customizing the number of tests you want to run at the same time in the Continuous Testing Settings page" style="width:100%;">}}
 
-With support for multiple protocols, frameworks, and APIs—including gRPC and WebSockets—you can test across every level of your application stack.
-
+With support for multiple protocols, frameworks, and APIs—including gRPC and WebSockets—you can test across every level of your application stack, and [across any pre-production environment][17].
 
 ## Improve test reliability
 

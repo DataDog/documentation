@@ -21,6 +21,9 @@ further_reading:
 - link: "/continuous_testing/environments/proxy_firewall_vpn"
   tag: "Documentation"
   text: "Learn about testing while using proxies, firewalls, or VPNs"
+- text: "/synthetics/private_locations"
+  tag: "Documentation"
+  text: "Learn about Private Locations"
 ---
 
 ## Overview
@@ -29,7 +32,7 @@ In the context of [testing within a CI/CD pipeline, also known as shift-left tes
 
 {{< img src="continuous_testing/continuous_environments.png" alt="Continuous Testing can be used all along the development cycle, from the local development environment to staging to prod." width="100%" >}}
 
-[Scheduled Synthetic tests focus on publicly available production environments][2]. You can use Continuous Testing to test your application in any or all environments it's deployed in along the development cycle.
+While [scheduled Synthetic tests focus only on publicly available production environments][2], you can use Continuous Testing to test your application in any or all environments it's deployed in along the development cycle.
 
 ## Testing in multiple environments
 
@@ -41,19 +44,19 @@ For more information, see [Testing Multiple Environments][4].
 
 ### Testing while using proxies, firewalls, or VPNs
 
-Continuous Testing can test your application in the early steps of the development cycle, even behind a private network protected by a proxy, firewall, or VPN. It can run the same scenario from scheduled Synthetic tests against changes deployed in a local server running on your development environment (such as a dev laptop), or in a CI/CD pipeline where your application is deployed in an ephemeral environments that lasts the same amount of time as the CI/CD job, or in a private staging environment.
+Continuous Testing can test your application in the early steps of the development cycle, even behind a private network protected by a proxy, firewall, or VPN. 
 
-For situations like these, Continuous Testing provides a [testing tunnel][5] which allows the Synthetic managed location to reach private environments. 
+It can run the same scenario from scheduled Synthetic tests against changes deployed in a local server running on your development environment (such as a dev laptop), or in a CI/CD pipeline where your application is deployed in an ephemeral environments that lasts the same amount of time as the CI/CD job, or in a private staging environment.
 
-For more information about the testing tunnel, see [Testing While Using Proxies, Firewalls, or VPNs][6].
+Continuous Testing provides a [testing tunnel][5] which allows the Synthetic managed location to reach private environments. For more information, see [Testing While Using Proxies, Firewalls, or VPNs][6].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /blog/shift-left-testing-best-practices/
-[2]: /blog/datadog-synthetic-ci-cd-testing/
+[1]: https://www.datadoghq.com//blog/shift-left-testing-best-practices/
+[2]: https://www.datadoghq.com//blog/datadog-synthetic-ci-cd-testing/
 [3]: https://en.wikipedia.org/wiki/Blue%E2%80%93green_deployment
 [4]: /continuous_testing/environments/multiple_env
 [5]: /continuous_testing/environments/proxy_firewall_vpn/#what-is-the-testing-tunnel
-[5]: /continuous_testing/environments/proxy_firewall_vpn
+[6]: /continuous_testing/environments/proxy_firewall_vpn
