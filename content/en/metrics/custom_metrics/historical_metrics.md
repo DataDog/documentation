@@ -27,7 +27,7 @@ Datadog classifies *historical metrics* as metric points with timestamps that ar
 
 For example, your metric (`exampleMetricA`) emits a value to Datadog at 1:00 PM EST, and the timestamp on that value is 10:00 AM EST. This metric value is classified as _historical_ because it has a timestamp 3 hours older relative to the time of submission.
 
-Metric points that are resent with the same timestamp and tag-value combination within Datadog are replaced with a *"last point wins"* ingestion rule. If you send a metric with a value of X, and resend that metric with a value of Y, both with the same timestamp, the Y replaces the X as the value of the metric. This is because Y is the most recent submission.
+With Historical Metrics Ingestion enabled, if you submit metrics with the same timestamp and same tag-value combination to Datadog, Datadog preserves the most recent ingested value. That is, If within the same timestamp, you submit a metric with a value of X, and also send that metric with a value of Y, whichever value is the most recently submitted will be preserved.
 
 You can start ingesting historical metric values by enabling Historical Metrics Ingestion on the [Metrics Summary Page][1] for *counts, rates, and gauges* metric types.  **Note**: Historical Metrics Ingestion is not available for distribution metrics.
 
