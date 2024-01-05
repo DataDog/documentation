@@ -3,48 +3,57 @@ title: Testing Local and Staging Environments
 kind: documentation
 description: Learn about using Continuous Testing in local and remote environments.
 aliases:
-  - /continuous_testing/environments
+  - /synthetics/testing_tunnel
+  - /continuous_testing/testing_tunnel
 further_reading:
+- link: "https://www.datadoghq.com/blog/shift-left-testing-best-practices/"
+  tag: "Blog"
+  text: "Best practices for shift-left testing"
 - link: "https://www.datadoghq.com/blog/datadog-synthetic-ci-cd-testing/"
   tag: "Blog"
-  text: "Incorporate Datadog Continuous Testing tests into your CI/CD pipeline"
-- link: "https://www.datadoghq.com/blog/internal-application-testing-with-datadog/"
-  tag: "Blog"
-  text: "Test internal applications with Datadog's testing tunnel and private locations"
+  text: "Incorporate Datadog Synthetic tests into your CI/CD pipeline"
 - link: "https://learn.datadoghq.com/courses/synthetic-tests-ci-cd-pipeline"
   tag: "Learning Center"
   text: "Learn how to run tests in a CI/CD pipeline"
-- link: "/synthetics/browser_tests/"
+- link: "/continuous_testing/environments/multiple_env"
   tag: "Documentation"
-  text: "Configure a browser test"
-- link: "/synthetics/api_tests/"
+  text: "Learn about testing in multiple environments"
+- link: "/continuous_testing/environments/proxy_firewall_vpn"
   tag: "Documentation"
-  text: "Configure an API test"
-
+  text: "Learn about testing while using proxies, firewalls, or VPNs"
 ---
 
-## Testing Local and Staging Environments
+## Overview
 
-In the context of CI/CD, the production environment is only the last link in the chain. Your application is likely to go through a number of steps before reaching this last stage.
-Synthetics scheduled tests focus only the publicly available production environment.
-On the other hand, Continuous Testing can be used to test your application in all the environments it's deployed along the development cycle.
+In the context of [testing within a CI/CD pipeline, also known as shift-left testing][1], the production environment is typically the last link in the chain. Your application is likely to go through a number of steps before reaching this stage.
 
 {{< img src="continuous_testing/continuous_environments.png" alt="Continuous Testing can be used all along the development cycle, from the local development environment to staging to prod." width="100%" >}}
 
-### Multiple env
+[Scheduled Synthetic tests focus on publicly available production environments][2]. You can use Continuous Testing to test your application in any or all environments it's deployed in along the development cycle.
 
-Continuous Testing can reuse the same scenarii from scheduled tests used against the production environement to test publicly available pre-production environements.
-Whether during a blue green deployment, or a dedicated staging environement, Continuous Testing provides ways to reroute an existing scenario to a different environment: `startUrlSubstitutionRegex`<!-- and `resourceUrlSubistitutionRegex`-->.
-To learn more about this, head over to the [Testing Multiple Environment](multiple_env) page.
+## Testing in multiple environments
 
-### Testing While Using Proxies, Firewalls, or VPNs
+Continuous Testing can reuse the same scenario from scheduled tests used against the production environment to test publicly available pre-production environments.
 
-Continuous Testing can test your application in the early steps of the development cycle, even behind a private network protected by a Proxy, a Firewall or a VPN.
-It can run the same scenario than scheduled Synthetics tests against changes deployed in a local server running on your development environment (e.g. dev laptop), or in a CI/CD pipeline while they are deployed in an ephemeral environments that lasts only the time the CI/CD job, or in a private staging environement.
+Whether it's for a [blue/green deployment][3], or a dedicated staging environment, Continuous Testing allows you to reroute an existing scenario to a different environment using the `startUrlSubstitutionRegex`<!-- and `resourceUrlSubstitutionRegex`--> field.
 
-For these situation, Continuous Testing provides a testing tunnel which allows the Synthetic managed location to reach private environments.
-To learn more about the testing tunnel, head over to the [Testing While Using Proxies, Firewalls, or VPNs](proxy_firewall_vpn) page.
+For more information, see [Testing Multiple Environments][4].
+
+### Testing while using proxies, firewalls, or VPNs
+
+Continuous Testing can test your application in the early steps of the development cycle, even behind a private network protected by a proxy, firewall, or VPN. It can run the same scenario from scheduled Synthetic tests against changes deployed in a local server running on your development environment (such as a dev laptop), or in a CI/CD pipeline where your application is deployed in an ephemeral environments that lasts the same amount of time as the CI/CD job, or in a private staging environment.
+
+For situations like these, Continuous Testing provides a [testing tunnel][5] which allows the Synthetic managed location to reach private environments. 
+
+For more information about the testing tunnel, see [Testing While Using Proxies, Firewalls, or VPNs][6].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /blog/shift-left-testing-best-practices/
+[2]: /blog/datadog-synthetic-ci-cd-testing/
+[3]: https://en.wikipedia.org/wiki/Blue%E2%80%93green_deployment
+[4]: /continuous_testing/environments/multiple_env
+[5]: /continuous_testing/environments/proxy_firewall_vpn/#what-is-the-testing-tunnel
+[5]: /continuous_testing/environments/proxy_firewall_vpn

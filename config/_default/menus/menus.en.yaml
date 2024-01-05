@@ -3930,7 +3930,7 @@ main:
     identifier: continuous_testing
     parent: ux_monitoring_heading
     weight: 210000
-  - name: Local and Ephemeral Environments
+  - name: Local and Staging Environments
     url: /continuous_testing/environments
     parent: continuous_testing
     identifier: continuous_testing_environments
