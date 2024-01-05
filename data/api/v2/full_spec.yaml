@@ -17084,6 +17084,44 @@ components:
         meta:
           $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
       type: object
+    SensitiveDataScannerIncludedKeywordConfiguration:
+      description: 'Object defining a set of keywords and a number of characters that
+        help reduce noise.
+
+        You can provide a list of keywords you would like to check within a defined
+        proximity of the matching pattern.
+
+        If any of the keywords are found within the proximity check, the match is
+        kept.
+
+        If none are found, the match is discarded.'
+      properties:
+        character_count:
+          description: 'The number of characters behind a match detected by Sensitive
+            Data Scanner to look for the keywords defined.
+
+            `character_count` should be greater than the maximum length of a keyword
+            defined for a rule.'
+          example: 30
+          format: int64
+          maximum: 50
+          minimum: 1
+          type: integer
+        keywords:
+          description: 'Keyword list that will be checked during scanning in order
+            to validate a match.
+
+            The number of keywords in the list must be less than or equal to 20.'
+          example:
+          - credit card
+          - cc
+          items:
+            type: string
+          type: array
+      required:
+      - keywords
+      - character_count
+      type: object
     SensitiveDataScannerMeta:
       description: Meta response containing information about the API.
       properties:
@@ -17177,6 +17215,8 @@ components:
           items:
             type: string
           type: array
+        included_keyword_configuration:
+          $ref: '#/components/schemas/SensitiveDataScannerIncludedKeywordConfiguration'
         is_enabled:
           description: Whether or not the rule is enabled.
           type: boolean
