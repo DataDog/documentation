@@ -3576,11 +3576,16 @@ main:
     parent: csm
     identifier: csm_troubleshooting
     weight: 30
+  - name: Threats
+    url: security/cloud_security_management/troubleshooting/threats/
+    parent: csm_troubleshooting
+    identifier: csm_troubleshooting_threats
+    weight: 301
   - name: Vulnerabilities
     url: security/cloud_security_management/troubleshooting/vulnerabilities/
     parent: csm_troubleshooting
     identifier: csm_troubleshooting_vulnerabilities
-    weight: 301
+    weight: 302
   - name: Application Security Management
     url: security/application_security/
     parent: security_platform_heading
