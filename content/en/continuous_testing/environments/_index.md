@@ -42,7 +42,7 @@ Whether it's for a [blue/green deployment][3], or a dedicated staging environmen
 
 For more information, see [Testing Multiple Environments][4].
 
-### Testing while using proxies, firewalls, or VPNs
+## Testing while using proxies, firewalls, or VPNs
 
 Continuous Testing can test your application in the early steps of the development cycle, even behind a private network protected by a proxy, firewall, or VPN. 
 
