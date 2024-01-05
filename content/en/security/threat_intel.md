@@ -31,7 +31,7 @@ IP addresses represent the most volatile element in threat intelligence, often c
 
 ## Best Practices in Threat Intelligence
 
-With threat intelligence, reputation is key, but it must be weighed alongside other evidence. Relying solely on IP and Domain intelligence for blocking traffic is not recommended, with few exceptions. A balanced, evidence-based approach is essential.
+With threat intelligence, reputation is key, but it must be weighed alongside other evidence. Relying solely on IP and domain intelligence for blocking traffic is not recommended, with few exceptions. A balanced, evidence-based approach is essential.
 
 Threat intelligence used in Detection Rules should reference the Datadog keys such as category and intent. Other keys should not be used.
 
@@ -40,10 +40,10 @@ Datadog ensures transparency by providing external links to external threat inte
 
 The detections and enrichments are accessible in the UI and event JSON.
 
-## Threat Intel Facets
+## Threat Intelligence Facets
 Sources, categories, and intents are available as facets and filters on relevant product Explorers. 
 
-### Threat Intel Sources
+### Threat Intelligence Sources
 
 | Source | Category | Source Use Cases | Primary Products | 
 |--------|------------|-----------|------------------|
@@ -52,9 +52,9 @@ Sources, categories, and intents are available as facets and filters on relevant
 | [Spur](https://spur.us/) | malware_proxy | Proxies associated with malware command and control | Cloud SIEM |
 | [Abuse.ch](https://abuse.ch/) Malware Bazaar| malware | Malware on hosts | CWS |
 | [Minerstat](https://minerstat.com/mining-pool-whitelist.txt) | malware | Coinminer activity with known mining pools| CWS |
-| Tor | Tor | Policy violations for user activity | AWS, Cloud SIEM, and CWS |
+| Tor | tor | Policy violations for user activity | AWS, Cloud SIEM, and CWS |
 
-### Threat Intel Categories
+### Threat Intelligence Categories
 
 | Category | Intention | Entity Types | Product Use Cases | Primary Products |
 |----------|----------|--------------|----------|------------------|
@@ -64,21 +64,21 @@ Sources, categories, and intents are available as facets and filters on relevant
 | scanner | suspicious | IP addresses | Reputation for scanners | ASM, Cloud SIEM |
 | Tor | suspicious | IP addresses  | Corporate policy violations for user activity | ASM and Cloud SIEM |
 
-### Threat Intel Intents
+### Threat Intelligence Intents
 | Intent | Use Case |
 |--------|----------|
-| Benign | Corporate VPNs and informational enrichments |
-| Suspicious | Low reputation | 
-| Malicious | Malicious reputation | 
+| benign | Corporate VPNs and informational enrichments |
+| suspicious | Low reputation | 
+| malicious | Malicious reputation | 
 
 
 ## Entity Types
 | Entity Type | Example | Use Cases | 
 |-------------|---------|-----------------------------|
 | IP addresses | 128.66.0.1 | Identify IP addresses associated with attacks, command and control, and scanning activity | 
-| Domains | example.com, subdomain.example.com | Domains associated with malicious use. Often used with malware as a command and control |
-| Application packages versions | (example_package, 1.0.0) | Identify malicious packages downloaded from PyPi |
-| File hashes [SHA1, SHA256] | 5f7afeeee13aaee6874a59a510b75767156f75d14db0cd4e1725ee619730ccc8 | Identify a distinct file associated with malware or compromise |
+| domains | example.com, subdomain.example.com | Domains associated with malicious use. Often used with malware as a command and control |
+| application packages versions | (example_package, 1.0.0) | Identify malicious packages downloaded from PyPi |
+| file hashes [SHA1, SHA256] | 5f7afeeee13aaee6874a59a510b75767156f75d14db0cd4e1725ee619730ccc8 | Identify a distinct file associated with malware or compromise |
 
 
 
