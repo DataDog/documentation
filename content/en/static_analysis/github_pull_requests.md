@@ -36,7 +36,7 @@ To use Static Analysis on GitHub, you can do one of the following:
 
 The permissions you grant to the GitHub App determine which [GitHub integration][2] features are available for setup.
 
-#### Create and install a new GitHub App
+#### Create and install a GitHub App
 
 1. In Datadog, navigate to [**Integrations > GitHub Applications > Add New GitHub Application**][3].
 1. Fill out any required details, such as the GitHub organization name.
