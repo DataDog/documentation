@@ -30,10 +30,10 @@ Live Process Monitors are best used in the following scenarios:
 
 ## Monitor creation
 
-There are two ways to create a [Live Process Monitor][2]:
+There are two ways to create a [Live Process Monitor][7]:
 
-- Using the main navigation: *Monitors --> New Monitor --> Live Process*.
-- On the Live Processes Page, search for a process you want to monitor. Then click the dropdown next to *New Metric* and click "Create monitor".
+- Using the main navigation: **Monitors --> New Monitor --> Live Process**.
+- On the [Live Process page][4], search for a process you want to monitor. Then click the dropdown menu next to **+New Metric** and click **Create monitor**.
 
 ### Select processes
 
@@ -41,7 +41,7 @@ You can use either tags or a fuzzy text search to filter across all processes in
 
 {{< img src="monitors/monitor_types/process/select_processes.png" alt="Select processes" style="width:90%;">}}
 
-After defining your search, a graph is displayed above the search inputs with an approximation of the total number of processes found. It is recommended to keep your monitor scoped to a few thousand processes. Use additional tags to narrow the search down or consider splitting a monitor into multiple ones if needed. For more granular data, visit your [Live Process Page][4].
+After defining your search, a graph is displayed above the search inputs with an approximation of the total number of processes found. It is recommended to keep your monitor scoped to a few thousand processes. Use additional tags to narrow the search down or consider splitting a monitor into multiple ones if needed. For more granular data, see the [Live Process page][4].
 
 #### Tags search
 
@@ -78,11 +78,11 @@ Use thresholds to set a numeric value for triggering an alert. Datadog has two t
 
 #### Best practices for timeframe selection
 
-Live Process Monitors uses a [rolling time window](https://docs.datadoghq.com/monitors/configuration/?tab=thresholdalert#evaluation-window) to evaluate process count. In other words, every minute, the monitor checks the past X minutes and triggers if the alerting condition is met. Using evaluation windows shorter than 5 minutes is discouraged in order to prevent any false positive due to sporadic network disruption between the Process Agent and Datadog.
+Live Process Monitors use a [rolling time window][7] to evaluate process count. In other words, every minute, the monitor checks the past X minutes and triggers if the alerting condition is met. Using evaluation windows shorter than 5 minutes is discouraged in order to prevent any false positives due to sporadic network disruption between the Process Agent and Datadog.
 
 ### Advanced alert conditions
 
-For detailed instructions on the advanced alert options (auto resolve, evaluation delay, etc.), see the [Monitor configuration][5] page.
+For detailed instructions on the advanced alert options (auto resolve, evaluation delay, and more), see the [Monitor configuration][5] page.
 
 ### Notifications
 
@@ -98,3 +98,4 @@ For detailed instructions on the **Say what's happening** and **Notify your team
 [4]: https://app.datadoghq.com/process
 [5]: /monitors/configuration/#advanced-alert-conditions
 [6]: /monitors/notify/
+[7]: /monitors/configuration/?tab=thresholdalert#evaluation-window
