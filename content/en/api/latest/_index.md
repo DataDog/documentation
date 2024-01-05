@@ -33,8 +33,8 @@ To try out the API [![Run in Postman][3]](https://god.gw.postman.com/run-collect
 [Using the API][4] is a guide to the endpoints.
 
 **Notes**: 
-   - Configure the Datadog Postman collection's included Datadog Authentication environment with your API and application key.
-   - cURL code examples assume usage of BASH and GNU coreutils. On macOS, you can install coreutils via the [Homebrew package manager][5]: `brew install coreutils`
+   - Configure the Datadog Postman collection's Datadog Authentication environment with your API and application key.
+   - cURL code examples assume usage of BASH and GNU coreutils. On macOS, you can install coreutils with the [Homebrew package manager][5]: `brew install coreutils`
 
 ### Client libraries
 
