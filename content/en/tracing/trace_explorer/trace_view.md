@@ -27,13 +27,13 @@ further_reading:
 
 View an individual [trace][1] to see all of its [spans][2] and associated metadata. Each trace can be visualized as either a Flame Graph, Span List, Waterfall, or Map.
 
-The trace header displays critical trace information, including the root span's service name, resource name, trace ID, end-to-end trace duration, and the trace start datetime. To retain a trace indefinitely, click "Open Full Page" and save the URL.
+The trace header displays critical trace information, including the root span's service name, resource name, trace ID, end-to-end trace duration, and the trace start datetime. To retain a trace indefinitely, click \"Open Full Page\" and save the URL.
 
 {{< img src="tracing/trace_view/trace_header.png" alt="Trace header" style="width:90%;">}}
 
 Selected span information is visible at the bottom of the Trace View.
 
-## Trace Visualizations
+## Trace visualizations
 
 {{< tabs >}}
 {{% tab "Flame Graph" %}}
@@ -54,13 +54,13 @@ The legend details the color coding of the flame graph. Group spans by either **
 
 {{< img src="tracing/trace_view/spanlist.png" alt="Trace View" style="width:90%;">}}
 
-Displays [resources][1] by grouping ([service][2] by default) and sorts them according to their corresponding count of spans. Particularly useful for scanning latency information by resource or grouping.
+Displays [resources][1] by grouping ([service][2] by default) and sorts them according to their count of spans. Particularly useful for scanning latency information by resource or grouping.
 
 Filter resources by type or naming information using the corresponding buttons and text-based search.
 
 {{< img src="tracing/trace_view/spanlist_headers.png" alt="Span List headers" style="width:90%;">}}
 
-Sort groupings by clicking on the column header which you’d like to sort by: **resource**, **spans**, **average duration**, **execution time**, or **percentage of trace execution time**.
+Sort groupings by clicking on the corresponding column header: **resource**, **spans**, **average duration**, **execution time**, or **percentage of trace execution time**.
 
 [1]: /tracing/glossary/#resources
 [2]: /tracing/glossary/#services
@@ -74,7 +74,7 @@ To join the Waterfall private beta <a href="https://forms.gle/LjJR1ZbF1tNDv5JC6"
 
 Displays all the spans for an associated trace, color-coded on separate rows and on a timeline. Particularly useful for isolating relevant parts of a trace and understanding how asynchronous processes fit into the execution flow.
 
-On each row (i.e., per span):
+On each row (that is, per span):
 * A bar (colored by service), whose length corresponds to the percentage of total trace duration
 * The service name, operation name, and resource name, with font styling: **service** operation <span style="color:gray">resource</span>
 * Absolute and relative span duration information
