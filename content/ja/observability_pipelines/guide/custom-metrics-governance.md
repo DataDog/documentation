@@ -22,7 +22,7 @@ title: 観測可能性パイプラインによるカスタムメトリクスガ�
 
 ## 前提条件
 
-このガイドでは、テレメトリーデータの収集、処理、ルーティングを行うツールである観測可能性パイプラインワーカーを既にセットアップしていることを前提に説明しています。観測可能性パイプラインについてよく知らない場合は、[インストール][4]ドキュメントと [Vector Remap Language][5] を参照してください。
+このガイドでは、テレメトリーデータの収集、処理、ルーティングを行うツールである観測可能性パイプラインワーカーを既にセットアップしていることを前提に説明しています。観測可能性パイプラインについてよく知らない場合は、[インストール][4]ドキュメントと [Datadog Processing Language (DPL) / Vector Remap Language (VRL)][5] を参照してください。
 
 ## 特定のタグまたはメトリクスのネームスペースが欠落しているメトリックをドロップする
 
@@ -55,7 +55,7 @@ transforms:
     inputs:
       - my-source-or-transform-id
     condition: |2
-       .namespace == "foo" 
+       .namespace == "foo"
 ```
 ## カスタムメトリクスタグを削除する
 
@@ -76,7 +76,7 @@ transforms:
 
 Datadog に取り込む前のカスタムメトリクスに特定のタグを付けるには、観測可能性パイプラインの [`remap` 変換][7]を使用します。これは、メトリクスを操作するドメイン固有の言語が付属しています。
 
-1 つのメトリクスタグをドロップするという基本的な使用方法については、VRL の `del()` 関数を使用します。例えば、以下のコンポーネントは `tag_to_drop` タグをドロップします。
+1 つのメトリクスタグをドロップするという基本的な使用方法については、DPL/VRL の `del()` 関数を使用します。例えば、以下のコンポーネントは `tag_to_drop` タグをドロップします。
 
 ```yaml
 transforms:
@@ -86,7 +86,7 @@ transforms:
       - dd_agent.metrics
     source: |
       # `tag_to_drop` タグを削除します。
-      del(.tags.tag_to_drop) 
+      del(.tags.tag_to_drop)
 ```
 
 ### 解決策 2: 保持するタグの許可リスト配列を定義する
@@ -210,8 +210,8 @@ transforms:
 [2]: /ja/account_management/billing/usage_attribution/
 [3]: /ja/metrics/metrics-without-limits/
 [4]: /ja/observability_pipelines/setup/
-[5]: https://vector.dev/docs/reference/vrl/
+[5]: /ja/observability_pipelines/reference/processing_language/
 [6]: /ja/account_management/billing/usage_attribution/
-[7]: https://vector.dev/docs/reference/vrl/
+[7]: /ja/observability_pipelines/reference/transforms/#remap
 [8]: /ja/account_management/billing/custom_metrics/?tab=countrategauge
 [9]: /ja/observability_pipelines/reference/transforms/#tagcardinalitylimit
