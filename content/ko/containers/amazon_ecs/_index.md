@@ -120,7 +120,7 @@ aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-
 위에 제공된 초기 작업 정의는 상당히 최소화된 것입니다. 이 작업 정의는 기본 설정이 되어 있는 에이전트 컨테이너를 배포하여 ECS 클러스터의 컨테이너에 대한 핵심 메트릭을 수집합니다. 또한 이 에이전트는 해당 컨테이너에서 검색된 [도커(Docker) 자동탐지 라벨][12]를 기반으로 에이전트 통합을 실행할 수 있습니다.
 
 사용한다면
-- 애플리케이션 성능 모니터링(APM): [애플리케이션 성능 모니터링 설치 설명서]와 샘플 [datadog-agent-ecs-apm.json][23]을 찾아보세요.
+- 애플리케이션 성능 모니터링(APM): [애플리케이션 성능 모니터링 설치 설명서][18]와 샘플 [datadog-agent-ecs-apm.json][23]을 찾아보세요.
 - 로그 관리: [로그 수집 설명서][7] 및 샘플 [datadog-agent-eccs-logs.json][24]을 참조하세요.
 
 #### DogStatsD
@@ -245,6 +245,7 @@ Agent를 `awsvpc` 모드로 실행할 수는 있습니다만, 권장하지는 �
 [15]: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
 [16]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
 [17]: /ko/containers/amazon_ecs/apm/?tab=ec2metadataendpoint#configure-the-trace-agent-endpoint
+[18]: https://docs.datadoghq.com/ko/containers/amazon_ecs/apm
 [20]: /resources/json/datadog-agent-ecs.json
 [21]: /resources/json/datadog-agent-ecs1.json
 [22]: /resources/json/datadog-agent-ecs-win.json
