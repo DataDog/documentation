@@ -121,7 +121,7 @@ aws ecs register-task-definition --cli-input-json file://<path to datadog-agent-
 
 사용한다면
 - 애플리케이션 성능 모니터링(APM): [애플리케이션 성능 모니터링 설치 설명서][18]와 샘플 [datadog-agent-ecs-apm.json][23]을 찾아보세요.
-- 로그 관리: [로그 수집 설명서][7] 및 샘플 [datadog-agent-eccs-logs.json][24]을 참조하세요.
+- 로그 관리: [로그 수집 설명서][7] 및 샘플 [datadog-agent-ecs-logs.json][24]을 참조하세요.
 
 #### DogStatsD
 
