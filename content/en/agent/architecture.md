@@ -18,7 +18,7 @@ further_reading:
 
 Agent 6 and 7 are composed of a main process responsible for collecting infrastructure metrics and logs, and receiving [DogStatsD metrics][1]. The main components to this process are:
 
-* The Collector, which is in charge of running checks and collecting metrics.
+* The Collector, which runs checks and collects metrics.
 * The Forwarder, which sends payloads to Datadog.
 
 Two optional processes are spawned by the Agent if enabled in the `datadog.yaml` configuration file:
@@ -34,13 +34,13 @@ On Windows the services are listed as:
 | datadog-trace-agent   | Datadog Trace Agent   |
 | datadog-process-agent | Datadog Process Agent |
 
-By default the Agent binds 3 [ports][3] on Linux and 4 ports on Windows and OSX:
+By default the Agent binds three [ports][3] on Linux and four ports on Windows and macOS:
 
 | Port | Description                                                                                 |
 |------|---------------------------------------------------------------------------------------------|
 | 5000 | Exposes runtime metrics about the Agent.                                                    |
 | 5001 | Used by the Agent CLI and GUI to send commands and pull information from the running Agent. |
-| 5002 | Serves the GUI server on Windows and OSX.                                                   |
+| 5002 | Serves the GUI server on Windows and macOS.                                                   |
 | 8125 | Used for the DogStatsD server to receive external metrics.                                  |
 
 For information on configuring the ports, see [Network Traffic][4].
