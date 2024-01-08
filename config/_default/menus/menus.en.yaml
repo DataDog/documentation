@@ -231,7 +231,7 @@ main:
     url: agent/
     pre: agent-fill
     parent: essentials_heading
-    weight: 30000
+    weight: 40000
     identifier: agent
   - name: Basic Agent Usage
     url: agent/basic_agent_usage/
@@ -337,388 +337,187 @@ main:
     url: agent/iot/
     parent: agent
     identifier: agent_iot
-    weight: 5
+    weight: 3
   - name: Supported Platforms
     url: agent/supported_platforms/
     parent: agent
     identifier: agent_supported_platforms
-    weight: 6
+    weight: 4
   - name: Log Collection
     url: agent/logs/
     identifier: agent_logs
     parent: agent
-    weight: 7
+    weight: 5
   - name: Advanced Configurations
     identifier: agent_logs_advanced_log_collection
     url: agent/logs/advanced_log_collection
     parent: agent_logs
-    weight: 701
+    weight: 501
   - name: Proxy
     identifier: agent_logs_proxy
     url: agent/logs/proxy
     parent: agent_logs
-    weight: 702
+    weight: 502
   - name: Transport
     identifier: agent_logs_transport
     url: agent/logs/log_transport
     parent: agent_logs
-    weight: 703
+    weight: 503
   - name: Configuration
     url: agent/configuration
     parent: agent
     identifier: agent_configuration
-    weight: 8
+    weight: 6
   - name: Commands
     identifier: agent_configuration_commands
     url: agent/configuration/agent-commands/
     parent: agent_configuration
-    weight: 801
+    weight: 601
   - name: Configuration Files
     identifier: agent_configuration_files
     url: agent/configuration/agent-configuration-files/
     parent: agent_configuration
-    weight: 802
+    weight: 602
   - name: Log Files
     identifier: agent_configuration_log_files
     url: agent/configuration/agent-log-files/
     parent: agent_configuration
-    weight: 803
+    weight: 603
   - name: Status Page
     identifier: agent_configuration_status_page
     url: agent/configuration/agent-status-page/
     parent: agent_configuration
-    weight: 804
+    weight: 604
   - name: Network Traffic
     identifier: agent_configuration_network_traffic
     url: agent/configuration/network/
     parent: agent_configuration
-    weight: 805
+    weight: 605
   - name: Proxy Configuration
     identifier: agent_configuration_proxy
     url: agent/configuration/proxy/
     parent: agent_configuration
-    weight: 806
+    weight: 606
   - name: FIPS Compliance
     identifier: agent_configuration_fips_compliance
     url: agent/configuration/agent-fips-proxy/
     parent: agent_configuration
-    weight: 807
+    weight: 607
   - name: Dual Shipping
     identifier: agent_configuration_dual_shipping
     url: agent/configuration/dual-shipping/
     parent: agent_configuration
-    weight: 808
+    weight: 608
   - name: Secrets Management
     identifier: agent_configuration_secrets_management
     url: agent/configuration/secrets-management/
     parent: agent_configuration
-    weight: 809
+    weight: 609
   - name: Remote Configuration
     identifier: agent_remote_configuration
     url: agent/remote_config
     parent: agent
-    weight: 9
+    weight: 7
   - name: Fleet Automation
     identifier: agent_fleet_automation
     url: agent/fleet_automation
     parent: agent
-    weight: 10
+    weight: 8
   - name: Versions
     url: agent/versions
     parent: agent
     identifier: agent_versions
-    weight: 11
+    weight: 9
   - name: Upgrade to Agent v7
     identifier: agent_versions_upgrade_to_agent_v7
     url: agent/versions/upgrade_to_agent_v7/
     parent: agent_versions
-    weight: 1101
+    weight: 901
   - name: Upgrade to Agent v6
     identifier: agent_versions_upgrade_to_agent_v6
     url: agent/versions/upgrade_to_agent_v6/
     parent: agent_versions
-    weight: 1102
+    weight: 902
   - name: Upgrade Between Agent Minor Versions
     identifier: agent_versions_upgrade_between_agent_minor_versions
     url: agent/versions/upgrade_between_agent_minor_versions
     parent: agent_versions
-    weight: 1103
+    weight: 903
   - name: Troubleshooting
     url: agent/troubleshooting/
     parent: agent
-    weight: 12
+    weight: 10
     identifier: agent_troubleshooting
   - name: Container Hostname Detection
     identifier: agent_troubleshooting_hostname_containers
     url: agent/troubleshooting/hostname_containers/
     parent: agent_troubleshooting
-    weight: 1201
+    weight: 1001
   - name: Debug Mode
     identifier: agent_troubleshooting_debug_mode
     url: agent/troubleshooting/debug_mode/
     parent: agent_troubleshooting
-    weight: 1202
+    weight: 1002
   - name: Agent Flare
     identifier: agent_troubleshooting_agent_flare
     url: agent/troubleshooting/send_a_flare/
     parent: agent_troubleshooting
-    weight: 1203
+    weight: 1003
   - name: Agent Check Status
     identifier: agent_troubleshooting_agent_check_status
     url: agent/troubleshooting/agent_check_status/
     parent: agent_troubleshooting
-    weight: 1204
+    weight: 1004
   - name: NTP Issues
     identifier: agent_troubleshooting_ntp
     url: agent/troubleshooting/ntp/
     parent: agent_troubleshooting
-    weight: 1205
+    weight: 1005
   - name: Permission Issues
     identifier: agent_troubleshooting_permissions
     url: agent/troubleshooting/permissions/
     parent: agent_troubleshooting
-    weight: 1206
+    weight: 1006
   - name: Integrations Issues
     identifier: agent_troubleshooting_integrations
     url: agent/troubleshooting/integrations/
     parent: agent_troubleshooting
-    weight: 1207
+    weight: 1007
   - name: Site Issues
     identifier: agent_troubleshooting_site
     url: agent/troubleshooting/site/
     parent: agent_troubleshooting
-    weight: 1208
+    weight: 1008
   - name: Autodiscovery Issues
     identifier: agent_troubleshooting_autodiscovery
     url: agent/troubleshooting/autodiscovery/
     parent: agent_troubleshooting
-    weight: 1209
+    weight: 1009
   - name: Windows Container Issues
     identifier: agent_troubleshooting_windows_containers
     url: agent/troubleshooting/windows_containers
-    weight: 1210
+    weight: 1010
     parent: agent_troubleshooting
   - name: Agent Runtime Configuration
     identifier: agent_troubleshooting_runtime_configuration
     url: agent/troubleshooting/config
-    weight: 1211
+    weight: 1011
     parent: agent_troubleshooting
   - name: High CPU or Memory Consumption
     identifier: agent_troubleshooting_high_cpu_memory_consumption
     url: agent/troubleshooting/high_memory_usage/
-    weight: 1212
+    weight: 1012
     parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/
     identifier: agent_guides
     parent: agent
-    weight: 13
+    weight: 11
   - name: Data Security
     identifier: agent_security
     url: data_security/agent/
     parent: agent
-    weight: 14
-  - name: Containers
-    url: containers/
-    identifier: containers
-    parent: infrastructure_heading
-    weight: 40000
-    pre: container
-  - name: Docker and other runtimes
-    url: containers/docker/
-    parent: containers
-    identifier: containers_docker
-    weight: 2
-  - name: APM
-    url: containers/docker/apm/
-    parent: containers_docker
-    identifier: containers_docker_apm
-    weight: 201
-  - name: Log collection
-    url: containers/docker/log/
-    parent: containers_docker
-    identifier: containers_docker_log
-    weight: 203
-  - name: Tag extraction
-    url: containers/docker/tag/
-    parent: containers_docker
-    identifier: containers_docker_tag
-    weight: 204
-  - name: Autodiscovery
-    url: containers/docker/integrations/
-    parent: containers_docker
-    identifier: containers_docker_integrations
-    weight: 205
-  - name: Prometheus
-    url: containers/docker/prometheus/
-    parent: containers_docker
-    identifier: containers_docker_prometheus
-    weight: 206
-  - name: Data Collected
-    url: containers/docker/data_collected/
-    parent: containers_docker
-    identifier: containers_docker_data_collected
-    weight: 207
-  - name: Kubernetes
-    url: containers/kubernetes/
-    parent: containers
-    identifier: containers_kubernetes
-    weight: 3
-  - name: Installation
-    url: containers/kubernetes/installation
-    parent: containers_kubernetes
-    identifier: containers_kubernetes_installation
-    weight: 301
-  - name: Further Configuration
-    url: containers/kubernetes/configuration
-    parent: containers_kubernetes
-    identifier: containers_kubernetes_configuration
-    weight: 302
-  - name: Distributions
-    url: containers/kubernetes/distributions
-    parent: containers_kubernetes
-    identifier: containers_kubernetes_distributions
-    weight: 303
-  - name: APM
-    url: containers/kubernetes/apm/
-    parent: containers_kubernetes
-    identifier: containers_kubernetes_apm
-    weight: 304
-  - name: Log collection
-    url: containers/kubernetes/log/
-    parent: containers_kubernetes
-    identifier: containers_kubernetes_log
-    weight: 305
-  - name: Tag extraction
-    url: containers/kubernetes/tag/
-    parent: containers_kubernetes
-    identifier: containers_kubernetes_tag
-    weight: 306
-  - name: Integrations & Autodiscovery
-    url: containers/kubernetes/integrations/
-    parent: containers_kubernetes
-    identifier: containers_kubernetes_integrations
-    weight: 307
-  - name: Prometheus & OpenMetrics
-    url: containers/kubernetes/prometheus/
-    parent: containers_kubernetes
-    identifier: containers_kubernetes_prometheus
-    weight: 308
-  - name: Control plane monitoring
-    url: containers/kubernetes/control_plane/
-    parent: containers_kubernetes
-    identifier: containers_kubernetes_control_plane
-    weight: 309
-  - name: Data collected
-    url: containers/kubernetes/data_collected/
-    parent: containers_kubernetes
-    identifier: containers_kubernetes_data_collected
-    weight: 310
-  - name: Data security
-    url: data_security/kubernetes
-    parent: containers_kubernetes
-    identifier: container_kubernetes_data_security
-    weight: 311
-  - name: Cluster Agent
-    url: containers/cluster_agent/
-    parent: containers
-    identifier: containers_cluster
-    weight: 4
-  - name: Setup
-    url: containers/cluster_agent/setup/
-    parent: containers_cluster
-    identifier: cluster_agent_setup
-    weight: 401
-  - name: Commands & Options
-    url: containers/cluster_agent/commands/
-    identifier: cluster_agent_commands
-    parent: containers_cluster
-    weight: 402
-  - name: Cluster Checks
-    identifier: containers_cluster_agent_clusterchecks
-    url: containers/cluster_agent/clusterchecks/
-    parent: containers_cluster
-    weight: 403
-  - name: Endpoint Checks
-    identifier: containers_cluster_agent_endpoint_checks
-    url: containers/cluster_agent/endpointschecks/
-    parent: containers_cluster
-    weight: 404
-  - name: Admission Controller
-    identifier: containers_cluster_agent_admission_controller
-    url: containers/cluster_agent/admission_controller/
-    parent: containers_cluster
-    weight: 405
-  - name: Amazon ECS
-    url: containers/amazon_ecs/
-    parent: containers
-    identifier: containers_amazon_ecs
-    weight: 5
-  - name: APM
-    url: containers/amazon_ecs/apm/
-    parent: containers_amazon_ecs
-    identifier: containers_amazon_ecs_apm
-    weight: 501
-  - name: Log collection
-    url: containers/amazon_ecs/logs/
-    parent: containers_amazon_ecs
-    identifier: containers_amazon_ecs_logs
-    weight: 502
-  - name: Tag extraction
-    url: containers/amazon_ecs/tags/
-    parent: containers_amazon_ecs
-    identifier: containers_amazon_ecs_tags
-    weight: 503
-  - name: Data collected
-    url: containers/amazon_ecs/data_collected/
-    parent: containers_amazon_ecs
-    identifier: containers_amazon_ecs_data_collected
-    weight: 504
-  - name: AWS Fargate
-    url: integrations/ecs_fargate/
-    parent: containers
-    identifier: ecs_fargate
-    weight: 6
-  - name: Datadog Operator
-    url: containers/datadog_operator
-    identifier: containers_datadog_operator
-    parent: containers
-    weight: 7
-  - name: Troubleshooting
-    url: containers/troubleshooting/
-    parent: containers
-    identifier: containers_troubleshooting
-    weight: 8
-  - name: Duplicate hosts
-    url: containers/troubleshooting/duplicate_hosts
-    parent: containers_troubleshooting
-    identifier: containers_troubleshooting_duplicate_hosts
-    weight: 801
-  - name: Cluster Agent
-    url: containers/troubleshooting/cluster-agent
-    parent: containers_troubleshooting
-    identifier: containers_troubleshooting_cluster_agent
-    weight: 802
-  - name: Cluster Checks
-    url: containers/troubleshooting/cluster-and-endpoint-checks
-    parent: containers_troubleshooting
-    identifier: containers_troubleshooting_cluster_and_endpoint_checks
-    weight: 803
-  - name: HPA and Metrics Provider
-    url: containers/troubleshooting/hpa
-    parent: containers_troubleshooting
-    identifier: containers_troubleshooting_hpa
-    weight: 804
-  - name: Admission Controller
-    url: containers/troubleshooting/admission-controller
-    parent: containers_troubleshooting
-    identifier: containers_troubleshooting_admission_controller
-    weight: 805
-  - name: Guides
-    url: containers/guide
-    parent: containers
-    identifier: containers_guide
-    weight: 9
+    weight: 12
   - name: Integrations
     url: integrations/
     identifier: integrations_top_level
@@ -1606,6 +1405,207 @@ main:
     parent: app_builder
     identifier: app_builder_embedded_apps
     weight: 4
+  - name: Containers
+    url: containers/
+    identifier: containers
+    parent: infrastructure_heading
+    weight: 40000
+    pre: container
+  - name: Docker and other runtimes
+    url: containers/docker/
+    parent: containers
+    identifier: containers_docker
+    weight: 2
+  - name: APM
+    url: containers/docker/apm/
+    parent: containers_docker
+    identifier: containers_docker_apm
+    weight: 201
+  - name: Log collection
+    url: containers/docker/log/
+    parent: containers_docker
+    identifier: containers_docker_log
+    weight: 203
+  - name: Tag extraction
+    url: containers/docker/tag/
+    parent: containers_docker
+    identifier: containers_docker_tag
+    weight: 204
+  - name: Autodiscovery
+    url: containers/docker/integrations/
+    parent: containers_docker
+    identifier: containers_docker_integrations
+    weight: 205
+  - name: Prometheus
+    url: containers/docker/prometheus/
+    parent: containers_docker
+    identifier: containers_docker_prometheus
+    weight: 206
+  - name: Data Collected
+    url: containers/docker/data_collected/
+    parent: containers_docker
+    identifier: containers_docker_data_collected
+    weight: 207
+  - name: Kubernetes
+    url: containers/kubernetes/
+    parent: containers
+    identifier: containers_kubernetes
+    weight: 3
+  - name: Installation
+    url: containers/kubernetes/installation
+    parent: containers_kubernetes
+    identifier: containers_kubernetes_installation
+    weight: 301
+  - name: Further Configuration
+    url: containers/kubernetes/configuration
+    parent: containers_kubernetes
+    identifier: containers_kubernetes_configuration
+    weight: 302
+  - name: Distributions
+    url: containers/kubernetes/distributions
+    parent: containers_kubernetes
+    identifier: containers_kubernetes_distributions
+    weight: 303
+  - name: APM
+    url: containers/kubernetes/apm/
+    parent: containers_kubernetes
+    identifier: containers_kubernetes_apm
+    weight: 304
+  - name: Log collection
+    url: containers/kubernetes/log/
+    parent: containers_kubernetes
+    identifier: containers_kubernetes_log
+    weight: 305
+  - name: Tag extraction
+    url: containers/kubernetes/tag/
+    parent: containers_kubernetes
+    identifier: containers_kubernetes_tag
+    weight: 306
+  - name: Integrations & Autodiscovery
+    url: containers/kubernetes/integrations/
+    parent: containers_kubernetes
+    identifier: containers_kubernetes_integrations
+    weight: 307
+  - name: Prometheus & OpenMetrics
+    url: containers/kubernetes/prometheus/
+    parent: containers_kubernetes
+    identifier: containers_kubernetes_prometheus
+    weight: 308
+  - name: Control plane monitoring
+    url: containers/kubernetes/control_plane/
+    parent: containers_kubernetes
+    identifier: containers_kubernetes_control_plane
+    weight: 309
+  - name: Data collected
+    url: containers/kubernetes/data_collected/
+    parent: containers_kubernetes
+    identifier: containers_kubernetes_data_collected
+    weight: 310
+  - name: Data security
+    url: data_security/kubernetes
+    parent: containers_kubernetes
+    identifier: container_kubernetes_data_security
+    weight: 311
+  - name: Cluster Agent
+    url: containers/cluster_agent/
+    parent: containers
+    identifier: containers_cluster
+    weight: 4
+  - name: Setup
+    url: containers/cluster_agent/setup/
+    parent: containers_cluster
+    identifier: cluster_agent_setup
+    weight: 401
+  - name: Commands & Options
+    url: containers/cluster_agent/commands/
+    identifier: cluster_agent_commands
+    parent: containers_cluster
+    weight: 402
+  - name: Cluster Checks
+    identifier: containers_cluster_agent_clusterchecks
+    url: containers/cluster_agent/clusterchecks/
+    parent: containers_cluster
+    weight: 403
+  - name: Endpoint Checks
+    identifier: containers_cluster_agent_endpoint_checks
+    url: containers/cluster_agent/endpointschecks/
+    parent: containers_cluster
+    weight: 404
+  - name: Admission Controller
+    identifier: containers_cluster_agent_admission_controller
+    url: containers/cluster_agent/admission_controller/
+    parent: containers_cluster
+    weight: 405
+  - name: Amazon ECS
+    url: containers/amazon_ecs/
+    parent: containers
+    identifier: containers_amazon_ecs
+    weight: 5
+  - name: APM
+    url: containers/amazon_ecs/apm/
+    parent: containers_amazon_ecs
+    identifier: containers_amazon_ecs_apm
+    weight: 501
+  - name: Log collection
+    url: containers/amazon_ecs/logs/
+    parent: containers_amazon_ecs
+    identifier: containers_amazon_ecs_logs
+    weight: 502
+  - name: Tag extraction
+    url: containers/amazon_ecs/tags/
+    parent: containers_amazon_ecs
+    identifier: containers_amazon_ecs_tags
+    weight: 503
+  - name: Data collected
+    url: containers/amazon_ecs/data_collected/
+    parent: containers_amazon_ecs
+    identifier: containers_amazon_ecs_data_collected
+    weight: 504
+  - name: AWS Fargate
+    url: integrations/ecs_fargate/
+    parent: containers
+    identifier: ecs_fargate
+    weight: 6
+  - name: Datadog Operator
+    url: containers/datadog_operator
+    identifier: containers_datadog_operator
+    parent: containers
+    weight: 7
+  - name: Troubleshooting
+    url: containers/troubleshooting/
+    parent: containers
+    identifier: containers_troubleshooting
+    weight: 8
+  - name: Duplicate hosts
+    url: containers/troubleshooting/duplicate_hosts
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_duplicate_hosts
+    weight: 801
+  - name: Cluster Agent
+    url: containers/troubleshooting/cluster-agent
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_cluster_agent
+    weight: 802
+  - name: Cluster Checks
+    url: containers/troubleshooting/cluster-and-endpoint-checks
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_cluster_and_endpoint_checks
+    weight: 803
+  - name: HPA and Metrics Provider
+    url: containers/troubleshooting/hpa
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_hpa
+    weight: 804
+  - name: Admission Controller
+    url: containers/troubleshooting/admission-controller
+    parent: containers_troubleshooting
+    identifier: containers_troubleshooting_admission_controller
+    weight: 805
+  - name: Guides
+    url: containers/guide
+    parent: containers
+    identifier: containers_guide
+    weight: 9
   - name: APM
     url: tracing/
     pre: apm
