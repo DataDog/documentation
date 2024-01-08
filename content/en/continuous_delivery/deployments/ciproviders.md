@@ -32,7 +32,7 @@ If you are executing deployments using a CI provider, you can monitor your deplo
 ## Setup
 
 <div class="alert alert-info">
-The setup requires the <a href="https://www.npmjs.com/package/@datadog/datadog-ci"> <code>datadog-ci</code> CLI </a> version <code>2.26.0</code> or later.
+The setup requires the <a href="https://www.npmjs.com/package/@datadog/datadog-ci"> <code>datadog-ci</code> CLI </a> version `2.26.0` or later.
 </div>
 
 To set up CD Visibility, use the `datadog-ci deployment mark` command inside the CI job that is performing the deployment.
