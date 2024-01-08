@@ -9,6 +9,9 @@ further_reading:
 - link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
   text: "Registering Services with the Service Definition API"
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
+  tag: "Terraform"
+  text: "Create and manage service definitions with Terraform"
 - link: "/tracing/service_catalog/guides/understanding-service-configuration"
   tag: "Guide"
   text: "Understanding Your Service Configuration"
@@ -27,6 +30,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/github-actions-service-catalog/"
   tag: "Blog"
   text: "I use GitHub Ac­tions for Data­dog's Service Catalog, and you should, too"
+- link: "https://www.datadoghq.com/blog/shift-left-datadog-service-catalog/"
+  tag: "Blog"
+  text: "Improve your shift-left observability with the Datadog Service Catalog"
 algolia:
   tags: ['service catalog']
 ---

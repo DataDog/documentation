@@ -22,8 +22,9 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-The Datadog Profiler requires Python 2.7+ and Agent version [7.20.2][2]+ or
-[6.20.2][3]+.
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
+
+The Datadog Profiler requires Python 2.7+ and Agent version [7.20.2][2]+ or [6.20.2][3]+.
 
 The following profiling features are available depending on your Python version. For more details, read [Profile Types][7]:
 
@@ -39,10 +40,10 @@ The installation requires pip version 18 or above.
 
 The following profiling features are available in the following minimum versions of the `dd-trace-py` library:
 
-|      Feature         | Required `dd-trace-py` version          |
-|----------------------|-----------------------------------------|
-| [Code Hotspots][12]        | 0.44.0+                       |
-| [Endpoint Profiling][13]            | 0.54.0+                       |
+| Feature                  | Required `dd-trace-py` version |
+|--------------------------|--------------------------------|
+| [Code Hotspots][12]      | 0.44.0+                        |
+| [Endpoint Profiling][13] | 0.54.0+                        |
 
 ## Installation
 
@@ -134,3 +135,4 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [7]: /profiler/profile_types/?code-lang=python
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /profiler/enabling/supported_versions/

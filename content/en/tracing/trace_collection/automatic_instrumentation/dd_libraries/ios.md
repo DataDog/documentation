@@ -1,11 +1,14 @@
 ---
-title: iOS Trace Collection
+title: Tracing iOS Applications
 kind: documentation
 aliases:
 - /tracing/setup_overview/setup/ios/
 - /tracing/setup/ios/
 - /tracing/trace_collection/dd_libraries/ios
 description: Collect traces from your iOS applications.
+code_lang: ios
+type: multi-code-lang
+code_lang_weight: 90
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: GitHub
