@@ -227,6 +227,61 @@ Configuration files for integrations are in:
 
 **Note**: `ProgramData` is a hidden folder.
 
+## Uninstall the Agent
+
+{{< tabs >}}
+{{% tab "Agent v6 & v7" %}}
+
+There are two different methods to uninstall the Agent on Windows. Both methods remove the Agent, but do not remove the `C:\ProgramData\Datadog` configuration folder on the host.
+
+### Add or remove programs
+
+1. Press **CTRL** and **Esc** or use the Windows key to run Windows Search.
+1. Search for `add` and click **Add or remove programs**.
+1. Search for `Datadog Agent` and click **Uninstall**.
+
+### PowerShell
+
+**Note:** Enable WinRM to use the commands below.
+
+Use one of the following PowerShell commands to uninstall the Agent without rebooting:
+```powershell
+start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/q', '/x', (Get-CimInstance -ClassName Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber, 'REBOOT=ReallySuppress')
+```
+
+Using `/norestart`:
+
+```powershell
+start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/norestart', '/q', '/x', (Get-CimInstance -ClassName Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
+```
+
+{{% /tab %}}
+
+{{% tab "Agent v5" %}}
+
+There are two different methods to uninstall the Agent on Windows. Both methods remove the Agent, but do not remove the `C:\ProgramData\Datadog` configuration folder on the host.
+
+> **Note**: For Agent < v5.12.0, it's important to uninstall the Agent with the **original account** used to install the Agent, otherwise it may not be cleanly removed.
+
+### Add or remove programs
+
+1. Press **CTRL** and **Esc** or use the Windows key to run Windows Search.
+1. Search for `add` and click **Add or remove programs**.
+1. Search for `Datadog Agent` and click **Uninstall**.
+
+### PowerShell
+
+**Note:** Enable WinRM to use the commands below.
+
+Use the following PowerShell command to uninstall the Agent without rebooting:
+
+```powershell
+start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/norestart', '/q', '/x', (Get-CimInstance -ClassName Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Troubleshooting
 
 ### Agent status and information
