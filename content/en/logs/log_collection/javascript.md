@@ -364,11 +364,12 @@ The following parameters are available to configure the Datadog browser logs SDK
 
 Options that must have a matching configuration when using the `RUM` SDK:
 
-| Parameter                      | Type    | Required | Default | Description                                                                                                                                                  |
-| ------------------------------ | ------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `trackSessionAcrossSubdomains` | Boolean | No       | `false` | Preserve the session across subdomains for the same site.                                                                                                    |
-| `useSecureSessionCookie`       | Boolean | No       | `false` | Use a secure session cookie. This disables logs sent on insecure (non-HTTPS) connections.                                                                    |
-| `useCrossSiteSessionCookie`    | Boolean | No       | `false` | Use a secure cross-site session cookie. This allows the logs SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`. |
+| Parameter                              | Type    | Required | Default | Description                                                                                                                                                              |
+|----------------------------------------| ------- | -------- | ------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `trackSessionAcrossSubdomains`         | Boolean | No       | `false` | Preserve the session across subdomains for the same site.                                                                                                                |
+| `useSecureSessionCookie`               | Boolean | No       | `false` | Use a secure session cookie. This disables logs sent on insecure (non-HTTPS) connections.                                                                                |
+| `usePartitionedCrossSiteSessionCookie` | Boolean | No       | `false` | Use a partitioned secure cross-site session cookie. This allows the logs SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`. |
+| `useCrossSiteSessionCookie`            | Boolean | No       | `false` | **Deprecated**, see `usePartitionedCrossSiteSessionCookie`.                                                                                                              |
 
 ## Usage
 

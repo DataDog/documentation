@@ -8,6 +8,22 @@ is_beta: true
 type: static-analysis
 
 rulesets:
+  csharp-best-practices:
+    title: "Best Practices for C#"
+    description: |
+      Rules to enforce C# best practices.
+  csharp-code-style:
+    title: "Follow C# code style patterns"
+    description: |
+      Rules to enforce C# code style.
+  csharp-inclusive:
+    title: "Use inclusive language in C#"
+    description: |
+      Rules to make your C# code more inclusive.
+  csharp-security:
+    title: "Write safe and secure C# code"
+    description: |
+      Rules focused on finding security issues in your C# code.
   docker-best-practices:
     title: "Follow best practices with using Docker"
     description: |
@@ -147,7 +163,7 @@ further_reading:
 
 {{% site-region region="us,us3,us5,eu,ap1" %}}
 <div class="alert alert-warning">
-  Static Analysis is in private beta. Python, JavaScript, TypeScript, and Docker are the only supported languages. To request access, <a href="/help">contact Support</a>.
+  Static Analysis is in private beta. Python, Java, C#, JavaScript, TypeScript, and Docker are the only supported languages. To request access, <a href="/help">contact Support</a>.
 </div>
 {{% /site-region %}}
 

@@ -43,10 +43,6 @@ To select which of the out-of-the-box rules are evaluated for each of the defaul
 
 ### Creating custom rules
 
-{{< callout url="https://forms.gle/8HCfQiuKM8FVceTG9" btn_hidden="false">}}
-Custom Scorecard rules are in private beta. Join the beta by requesting access.
-{{< /callout >}}
-
 To add custom rules to your Scorecards dashboard using the [Scorecards API][10]: 
 
 1. Specify the name of the rule, the scorecard it belongs to, a rule description, and an owner to pass to `/scorecard/rules`.
@@ -113,7 +109,7 @@ Any docs defined
 
 ## How scores are calculated
 
-Each out-of-the-box scorecard (Production Readiness, Observability Best Practices, Ownership & Documentation) is made up of a default set of rules. These reflect simple pass-fail conditions. To exclude a particular rule from a service's score calculation, set its outcome to `skip` in the scorecards API.
+Each out-of-the-box scorecard (Production Readiness, Observability Best Practices, Ownership & Documentation) is made up of a default set of rules. These reflect pass-fail conditions and are automatically evaluated once per day. A service's score against custom rules is based on outcomes sent using the Scorecards API. To exclude a particular custom rule from a service's score calculation, set its outcome to `skip` in the Scorecards API.
 
 Individual rules may have restrictions based on data availability. For example, deployment-related rules rely on the availability of version tags through APM [Unified Service Tagging][7]. 
 
