@@ -23,7 +23,7 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 
 ### Configure the Datadog-Databricks integration 
 
-1. In your Databricks workspace, click **User Settings**. Then click on **Access Tokens**.
+1. In your Databricks workspace, go to **Settings** > **Developer**. Next to **Access tokens**, click **Manage**.
 1. Click **Generate new token**, enter a comment, and click **Generate**. Take note of your token.
 1. In Datadog, open the Databricks integration tile.
 1. On the **Configure** tab, click **Add New**. 
@@ -33,9 +33,19 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 
 ### Install the Datadog Agent on your Databricks cluster(s)
 
-Use [this init script][2] to install the Datadog Agent on a specific Databricks cluster, or globally.
+Use [this init script][2] to install the Datadog Agent globally, or on a specific Databricks cluster.
 
 {{< tabs >}}
+{{% tab "Global init (Recommended)" %}}
+1. In Databricks, go to **Settings** > **Compute**. In the **All purpose clusters** section, next to **Global init scripts**, click **Manage**.
+1. Click **Add**. Name your script. Then, in the **Script** field, copy and paste the [init script][1].
+1. To enable the script for all new and restarted clusters, toggle **Enabled**.
+   {{< img src="data_jobs/databricks/toggle.png" alt="Databricks UI, admin settings, global init scripts. A script called 'install-datadog-agent' is in a list with an enabled toggle." style="width:100%;" >}}
+1. Click **Add**.
+
+
+[1]: /resources/sh/data_jobs/datadog_databricks_job_monitoring_init_without_logs.sh
+{{% /tab %}}
 {{% tab "On a specific cluster" %}}
 1. Download the [init script][1].
 1. In Databricks, on the cluster configuration page, click the **Advanced options** toggle.
@@ -47,31 +57,23 @@ Use [this init script][2] to install the Datadog Agent on a specific Databricks 
 
 [1]: /resources/sh/data_jobs/datadog_databricks_job_monitoring_init_without_logs.sh
 {{% /tab %}}
-{{% tab "Global" %}}
-1. In Databricks, go to **Admin Settings** and click the **Global Init Scripts** tab.
-1. Click **Add**. Name your script. Then, in the **Script** field, copy and paste the [init script][1].
-1. To enable the script for all new and restarted clusters, toggle **Enabled**.
-   {{< img src="data_jobs/databricks/toggle.png" alt="Databricks UI, admin settings, global init scripts. A script called 'install-datadog-agent' is in a list with an enabled toggle." style="width:100%;" >}}
-1. Click **Add**.
 
-
-[1]: /resources/sh/data_jobs/datadog_databricks_job_monitoring_init_without_logs.sh
-{{% /tab %}}
 {{< /tabs >}}
 
 ### Add your Datadog API key in Databricks
 1. Find your [Datadog API key][3].
-1. Use [Databricks Secret Management][4] to store your Datadog API key. You can name the scope `datadog`, and you can name the secret `DD_API_KEY`.
 1. In Databricks, on the cluster configuration page, click the **Advanced options** toggle.
 1. At the bottom of the page, go to the **Spark** tab.
-   {{< img src="data_jobs/databricks/configure-databricks-spark-envvars.png" alt="Databricks UI, cluster configuration advanced options, Spark tab. A textbox titled 'Environment variables' contains values for DD_API_KEY and DD_SITE." style="width:100%;" >}}
+   {{< img src="data_jobs/databricks/configure-databricks-spark-envvars-updated.png" alt="Databricks UI, cluster configuration advanced options, Spark tab. A textbox titled 'Environment variables' contains values for DD_API_KEY and DD_SITE." style="width:100%;" >}}
 
-   In the **Environment variables** textbox, set values for `DD_API_KEY` and `DD_SITE`.
+   In the **Environment variables** textbox, set values for: 
+    - `DD_API_KEY`: Your Datadog API key. (You can also use Databricks [secret management][4] to store your API key.)
+    - `DD_SITE`: Your [Datadog site][5].
 
-   For example, if you added your Datadog API key as `DD_API_KEY` to a secret scope named `datadog`, and your [Datadog site][5] is {{< region-param key="dd_site" code="true" >}}, paste the following into the box:
+   For example, if your Datadog site is {{< region-param key="dd_site" code="true" >}}, paste the following into the box:
 
    ```text
-   DD_API_KEY={{secrets/datadog/DD_API_KEY}}
+   DD_API_KEY=<YOUR API KEY>
    DD_SITE={{< region-param key="dd_site" code="true" >}}
    ```
 
