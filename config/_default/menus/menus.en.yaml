@@ -49,47 +49,47 @@ main:
     identifier: getting_started_devsecops
     url: getting_started/devsecops
     parent: getting_started
+    weight: 3
+  - name: Serverless for AWS Lambda
+    identifier: getting_started_serverless
+    url: getting_started/serverless/
+    parent: getting_started
     weight: 4
   - name: Agent
     identifier: getting_started_agent
     url: getting_started/agent/
-    parent: getting_started
-    weight: 6
-  - name: Containers
-    identifier: getting_started_containers
-    url: getting_started/containers/
-    parent: getting_started
-    weight: 8
-  - name: Autodiscovery
-    identifier: getting_started_containers_autodiscovery
-    url: getting_started/containers/autodiscovery
-    parent: getting_started_containers
-    weight: 401
-  - name: Datadog Operator
-    identifier: getting_started_containers_operator
-    url: getting_started/containers/datadog_operator
-    parent: getting_started_containers
-    weight: 402
-  - name: Serverless for AWS Lambda
-    identifier: getting_started_serverless
-    url: getting_started/serverless/
     parent: getting_started
     weight: 5
   - name: Integrations
     identifier: getting_started_integrations
     url: getting_started/integrations/
     parent: getting_started
-    weight: 7
+    weight: 6
   - name: AWS
     identifier: getting_started_with_aws
     url: getting_started/integrations/aws/
-    weight: 701
+    weight: 601
     parent: getting_started_integrations
   - name: Terraform
     identifier: getting_started_with_terraform
     url: getting_started/integrations/terraform/
-    weight: 702
+    weight: 602
     parent: getting_started_integrations
+  - name: Containers
+    identifier: getting_started_containers
+    url: getting_started/containers/
+    parent: getting_started
+    weight: 7
+  - name: Autodiscovery
+    identifier: getting_started_containers_autodiscovery
+    url: getting_started/containers/autodiscovery
+    parent: getting_started_containers
+    weight: 701
+  - name: Datadog Operator
+    identifier: getting_started_containers_operator
+    url: getting_started/containers/datadog_operator
+    parent: getting_started_containers
+    weight: 702
   - name: Dashboards
     identifier: getting_started_dashboards
     url: getting_started/dashboards/
@@ -155,16 +155,16 @@ main:
     url: getting_started/synthetics/
     parent: getting_started
     weight: 17
-  - name: Browser Tests
-    identifier: getting_started_browser_test
-    url: getting_started/synthetics/browser_test
-    parent: getting_started_synthetics
-    weight: 1702
   - name: API Tests
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
     weight: 1701
+  - name: Browser Tests
+    identifier: getting_started_browser_test
+    url: getting_started/synthetics/browser_test
+    parent: getting_started_synthetics
+    weight: 1702
   - name: Private Locations
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
@@ -199,7 +199,7 @@ main:
     identifier: getting_started_application_vulnerability
     url: getting_started/application_security/vulnerability_management
     parent: getting_started_application_security
-    weight: 101
+    weight: 2201
   - name: Workflow Automation
     identifier: getting_started_workflow_automation
     url: getting_started/workflow_automation/
