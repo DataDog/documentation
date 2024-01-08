@@ -40,12 +40,12 @@ Use the Datadog Agent Manager GUI to:
 
 The Datadog Agent Manager GUI is enabled by default on Windows and macOS, and runs on port `5052`. Use the `datadog-agent launch-gui` command to open the GUI in your default web browser.
 
-You can change the GUIs default port in your `datadog.yaml` configuration file. To disable the GUI, set the port's value to `-1`. The GUI is disabled by default on Linux.
+You can change the GUI's default port in your `datadog.yaml` configuration file. To disable the GUI, set the port's value to `-1`. On Linux, the GUI is disabled by default.
 
 GUI requirements:
-- Cookies must be enabled in your browser. The GUI generates and saves a token in your browser which is used for authenticating all communications with the GUI server.
+- Cookies must be enabled in your browser. The GUI generates and saves a token in your browser, which is used for authenticating all communications with the GUI server.
 - To start the GUI, the user must have the required permissions. If you are able to open `datadog.yaml`, you are able to use the GUI.
-- For security reasons, the GUI can **only** be accessed from the local network interface (`localhost`/`127.0.0.1`), therefore you must be on the same host that the Agent is running. You can't run the Agent on a VM or a container and access it from the host machine.
+- For security reasons, the GUI can **only** be accessed from the local network interface (`localhost`/`127.0.0.1`), therefore you must be on the host where the Agent is running. You can't run the Agent on a VM or a container and access it from the host machine.
 
 ### Command-line interface
 
@@ -57,7 +57,7 @@ From Agent 6 and later, the Agent command-line interface is based on subcommands
 
 To manually update the Datadog Agent core between two minor versions on a given host, run the [corresponding installation command for your platform][7].
 
-**Note**: If you want to manually update one specific Agent integration see the [Integration Management guide][8].
+**Note**: If you want to manually update one specific Agent integration, see the [Integration Management guide][8].
 
 ### Configuration files
 

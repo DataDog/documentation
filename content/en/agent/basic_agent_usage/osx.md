@@ -114,7 +114,7 @@ To remove the Agent and all Agent configuration files:
     ```shell
     sudo rm -rf /opt/datadog-agent
     sudo rm -rf /usr/local/bin/datadog-agent
-    sudo rm -rf ~/.datadog-agent/** #to remove broken symlinks
+    sudo rm -rf ~/.datadog-agent/** # to remove broken symlinks
     launchctl remove com.datadoghq.agent
     sudo rm -rf /var/log/datadog
     ```
@@ -128,7 +128,7 @@ To remove the Agent and all Agent configuration files:
     ```shell
     sudo rm -rf /opt/datadog-agent
     sudo rm -rf /usr/local/bin/datadog-agent
-    sudo rm -rf ~/.datadog-agent/** #to remove broken symlinks
+    sudo rm -rf ~/.datadog-agent/** # to remove broken symlinks
     sudo launchctl disable system/com.datadoghq.agent && sudo launchctl bootout system/com.datadoghq.agent
     sudo rm /Library/LaunchDaemons/com.datadoghq.agent.plist
     sudo rm -rf /var/log/datadog
@@ -144,7 +144,7 @@ To remove the Agent and all Agent configuration files:
 ```shell
 sudo rm -rf /opt/datadog-agent
 sudo rm -rf /usr/local/bin/datadog-agent
-sudo rm -rf ~/.datadog-agent/** #to remove broken symlinks
+sudo rm -rf ~/.datadog-agent/** # to remove broken symlinks
 ```
 
 If you ran the optional install commands to have the Agent run at boot time, run the following to finish uninstalling:
