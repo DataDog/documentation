@@ -354,5 +354,14 @@
   },
   "personalized_demo" : {
     "other": "Request a personalized demo"
+  },
+  "configuration_management" : {
+    "other": "Configuration management"
+  },
+  "cloud_and_container" : {
+    "other": "Cloud and container"
+  },
+  "source" : {
+    "other": "Source"
   }
 }

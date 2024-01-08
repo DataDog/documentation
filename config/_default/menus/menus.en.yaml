@@ -328,6 +328,11 @@ main:
     url: agent/basic_agent_usage/source/
     weight: 118
     parent: basic_agent_usage
+  - name: Architecture
+    url: agent/architecture/
+    parent: agent
+    identifier: architecture
+    weight: 2
   - name: IoT
     url: agent/iot/
     parent: agent
