@@ -1201,7 +1201,7 @@ main:
     identifier: metrics_without_limits
     url: metrics/metrics-without-limits/
     parent: metrics_top_level
-    weight: 8
+    weight: 9
   - name: Guides
     url: metrics/guide
     parent: metrics_top_level
