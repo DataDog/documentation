@@ -70,7 +70,7 @@ Add the following in the Collector configuration:
 ```yaml
 receivers:
   docker_stats:
-    endpoint: unix:///var/run/docker.sock
+    endpoint: unix:///var/run/docker.sock # default
     metrics:
       container.network.io.usage.rx_packets:
         enabled: true
