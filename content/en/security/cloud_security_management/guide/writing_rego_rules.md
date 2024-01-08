@@ -19,11 +19,6 @@ CSM Misconfigurations is not available in the selected site.
 </div>
 {{< /site-region >}}
 
-{{< callout url="#" btn_hidden="true">}}
-Writing custom rules is a beta feature available to all Cloud Security Management Misconfigurations (CSM Misconfigurations) customers. If you have feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /callout >}} 
-
-
 ## Overview
 
 Open Policy Agent (OPA) provides [Rego][1], an open source policy language with versatile resource inspection features for determining cloud security posture. In Datadog, you can write custom rules with Rego to control the security of your infrastructure. 

@@ -291,6 +291,10 @@ function navClickEventHandler(event) {
         // Get the targets parent li
         const parentli = event.target.closest('li');
 
+        if (!parentli) {
+            return;
+        }
+
         // Get the a
         const a = parentli.querySelector('a');
         newUrl = a.href;

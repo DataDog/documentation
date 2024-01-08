@@ -30,6 +30,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/github-actions-service-catalog/"
   tag: "Blog"
   text: "I use GitHub Ac­tions for Data­dog's Service Catalog, and you should, too"
+- link: "https://www.datadoghq.com/blog/shift-left-datadog-service-catalog/"
+  tag: "Blog"
+  text: "Improve your shift-left observability with the Datadog Service Catalog"
 algolia:
   tags: ['service catalog']
 ---
