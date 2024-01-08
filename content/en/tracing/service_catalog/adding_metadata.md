@@ -21,8 +21,8 @@ You can add metadata to existing Service Catalog entries through the Datadog UI,
 
 ## Metadata structure and supported versions
 
-{{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Opt in to the private beta for metadata schema v3.0!" >}}
-This new schema version adds a `kind` field that supports schemas for additional components types including applications, queues, datastores, internal and external libraries. Any components within an `application` will implicitly inherit the metadata of the `application` entity. Furthermore, this version supports manual declaration of dependency relationships in addition to the auto-detected topology via Distributed Tracing and Universal Service Monitoring.
+{{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for metadata schema v3.0!" >}}
+v3.0 adds a <code>kind</code> field that supports schemas for additional component types including applications, internal and external libraries, queues, and datastores. Any components within an <code>application</code> implicitly inherit its metadata. Furthermore, this version supports manually declaring dependency relationships, in addition to the auto-detected topology through Distributed Tracing and Universal Service Monitoring.
 {{< /callout >}}
 
 Service Catalog uses service definition schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted and you can view warnings in the **Definition** tab on the side panel for any selected services. 
