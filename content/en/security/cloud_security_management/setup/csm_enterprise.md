@@ -84,7 +84,26 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
 #### Configure the Agent
 
 {{< tabs >}}
+{{% tab "Kubernetes (Helm)" %}}
 
+1. Add the following to the `datadog` section of the `values.yaml` file:
+
+    ```yaml
+    # values.yaml file
+    datadog:
+      remoteConfiguration:
+        enabled: true
+      securityAgent:
+        runtime:
+          enabled: true
+        compliance:
+          enabled: true
+          host_benchmarks:
+            enabled: true
+    ```
+2. Restart the Agent.
+
+{{% /tab %}}
 
 {{% tab "Kubernetes (Operator)" %}}
 
@@ -104,26 +123,6 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
             enabled: true
     ```
 
-2. Restart the Agent.
-
-{{% /tab %}}
-{{% tab "Kubernetes (Helm)" %}}
-
-1. Add the following to the `datadog` section of the `values.yaml` file:
-
-    ```yaml
-    # values.yaml file
-    datadog:
-      remoteConfiguration:
-        enabled: true
-      securityAgent:
-        runtime:
-          enabled: true
-        compliance:
-          enabled: true
-          host_benchmarks:
-            enabled: true
-    ```
 2. Restart the Agent.
 
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
@@ -423,6 +422,22 @@ The following instructions enables the image metadata collection and [Software B
 #### Containers
 
 {{< tabs >}}
+{{% tab "Kubernetes (Helm)" %}}
+
+If you are using helm version `>= 3.46.0`, image collection is [enabled by default][1].</br>
+Or, add the following to your `values.yaml` helm configuration file:
+
+```yaml
+datadog:
+  containerImageCollection:
+    enabled: true
+  sbom:
+    containerImage:
+      enabled: true
+```
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L651
+
+{{% /tab %}}
 
 {{% tab "Kubernetes (Operator)" %}}
 
@@ -442,21 +457,6 @@ spec:
       containerImage:
         enabled: true
 ```
-{{% /tab %}}
-{{% tab "Kubernetes (Helm)" %}}
-
-If you are using helm version `>= 3.46.0`, image collection is [enabled by default][1].</br>
-Or, add the following to your `values.yaml` helm configuration file:
-
-```yaml
-datadog:
-  containerImageCollection:
-    enabled: true
-  sbom:
-    containerImage:
-      enabled: true
-```
-[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L651
 
 {{% /tab %}}
 
@@ -532,6 +532,17 @@ container_image:
 
 {{< tabs >}}
 
+{{% tab "Kubernetes (Helm)" %}}
+
+```yaml
+datadog:
+  sbom:
+    host:
+      enabled: true
+```
+
+{{% /tab %}}
+
 {{% tab "Kubernetes (Operator)" %}}
 
 Add the following to the spec section of your `values.yaml` file:
@@ -551,17 +562,6 @@ spec:
       host:
         enabled: true
 ```
-{{% /tab %}}
-
-{{% tab "Kubernetes (Helm)" %}}
-
-```yaml
-datadog:
-  sbom:
-    host:
-      enabled: true
-```
-
 {{% /tab %}}
 
 {{% tab "ECS EC2" %}}
