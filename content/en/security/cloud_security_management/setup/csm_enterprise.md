@@ -84,26 +84,6 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
 #### Configure the Agent
 
 {{< tabs >}}
-{{% tab "Kubernetes (Helm)" %}}
-
-1. Add the following to the `datadog` section of the `values.yaml` file:
-
-    ```yaml
-    # values.yaml file
-    datadog:
-      remoteConfiguration:
-        enabled: true
-      securityAgent:
-        runtime:
-          enabled: true
-        compliance:
-          enabled: true
-          host_benchmarks:
-            enabled: true
-    ```
-2. Restart the Agent.
-
-{{% /tab %}}
 
 {{% tab "Kubernetes (Operator)" %}}
 
@@ -126,6 +106,27 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
 2. Restart the Agent.
 
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+
+{{% /tab %}}
+
+{{% tab "Kubernetes (Helm)" %}}
+
+1. Add the following to the `datadog` section of the `values.yaml` file:
+
+    ```yaml
+    # values.yaml file
+    datadog:
+      remoteConfiguration:
+        enabled: true
+      securityAgent:
+        runtime:
+          enabled: true
+        compliance:
+          enabled: true
+          host_benchmarks:
+            enabled: true
+    ```
+2. Restart the Agent.
 
 {{% /tab %}}
 
