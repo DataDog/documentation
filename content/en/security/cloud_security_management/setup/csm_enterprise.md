@@ -422,22 +422,6 @@ The following instructions enables the image metadata collection and [Software B
 #### Containers
 
 {{< tabs >}}
-{{% tab "Kubernetes (Helm)" %}}
-
-If you are using helm version `>= 3.46.0`, image collection is [enabled by default][1].</br>
-Or, add the following to your `values.yaml` helm configuration file:
-
-```yaml
-datadog:
-  containerImageCollection:
-    enabled: true
-  sbom:
-    containerImage:
-      enabled: true
-```
-[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L651
-
-{{% /tab %}}
 
 {{% tab "Kubernetes (Operator)" %}}
 
@@ -460,6 +444,22 @@ spec:
 
 {{% /tab %}}
 
+{{% tab "Kubernetes (Helm)" %}}
+
+If you are using helm version `>= 3.46.0`, image collection is [enabled by default][1].</br>
+Or, add the following to your `values.yaml` helm configuration file:
+
+```yaml
+datadog:
+  containerImageCollection:
+    enabled: true
+  sbom:
+    containerImage:
+      enabled: true
+```
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L651
+
+{{% /tab %}}
 {{% tab "ECS EC2" %}}
 
 To enable container image vulnerability scanning on your [ECS EC2 instances][7], add the following environment variables to your `datadog-agent` container definition:
@@ -532,17 +532,6 @@ container_image:
 
 {{< tabs >}}
 
-{{% tab "Kubernetes (Helm)" %}}
-
-```yaml
-datadog:
-  sbom:
-    host:
-      enabled: true
-```
-
-{{% /tab %}}
-
 {{% tab "Kubernetes (Operator)" %}}
 
 Add the following to the spec section of your `values.yaml` file:
@@ -562,6 +551,17 @@ spec:
       host:
         enabled: true
 ```
+{{% /tab %}}
+
+{{% tab "Kubernetes (Helm)" %}}
+
+```yaml
+datadog:
+  sbom:
+    host:
+      enabled: true
+```
+
 {{% /tab %}}
 
 {{% tab "ECS EC2" %}}
