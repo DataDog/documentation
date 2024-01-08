@@ -1132,21 +1132,46 @@ main:
     pre: metric
     parent: platform_heading
     weight: 80000
-  - name: Explorer
-    url: metrics/explorer/
+  - name: Custom Metrics
+    url: metrics/custom_metrics/
     parent: metrics_top_level
-    identifier: metrics_explorer
+    identifier: metrics_custom_metrics
     weight: 1
-  - name: Metrics Units
-    identifier: metrics_units
-    url: metrics/units/
-    parent: metrics_explorer
+  - name: Metric Type Modifiers
+    url: metrics/custom_metrics/type_modifiers/
+    parent: metrics_custom_metrics
+    identifier: metrics_modifiers
     weight: 101
-  - name: Summary
-    identifier: metrics_summary
-    url: metrics/summary/
+  - name: 'Submission - Agent Check '
+    url: metrics/custom_metrics/agent_metrics_submission/
+    parent: metrics_custom_metrics
+    identifier: dev_tools_metrics_agent
+    weight: 102
+  - name: Submission - DogStatsD
+    url: metrics/custom_metrics/dogstatsd_metrics_submission/
+    parent: metrics_custom_metrics
+    identifier: dev_tools_metrics_dogstatsd
+    weight: 103
+  - name: Submission - Powershell
+    url: metrics/custom_metrics/powershell_metrics_submission
+    parent: metrics_custom_metrics
+    identifier: dev_tools_metrics_powershell
+    weight: 104
+  - name: 'Submission - API '
+    url: api/latest/metrics/#submit-metrics
+    parent: metrics_custom_metrics
+    identifier: dev_tools_metrics_api
+    weight: 105
+  - name: Send OpenTelemetry Metrics to Datadog
+    url: opentelemetry/otel_metrics/
     parent: metrics_top_level
+    identifier: metrics_otel
     weight: 2
+  - name: OTLP Metric Types
+    url: metrics/open_telemetry/otlp_metric_types
+    parent: metrics_otel
+    identifier: metrics_otlp_types
+    weight: 201
   - name: Metrics Types
     url: metrics/types/
     parent: metrics_top_level
@@ -1157,56 +1182,31 @@ main:
     parent: metrics_top_level
     identifier: metrics_distributions
     weight: 4
-  - name: Metrics Without Limits™
-    identifier: metrics_without_limits
-    url: metrics/metrics-without-limits/
-    parent: metrics_top_level
+  - name: Metrics Units
+    identifier: metrics_units
+    url: metrics/units/
+    parent: metrics_explorer
     weight: 5
+  - name: Explorer
+    url: metrics/explorer/
+    parent: metrics_top_level
+    identifier: metrics_explorer
+    weight: 6
+  - name: Summary
+    identifier: metrics_summary
+    url: metrics/summary/
+    parent: metrics_top_level
+    weight: 7
   - name: Advanced Filtering
     url: metrics/advanced-filtering/
     parent: metrics_top_level
     identifier: metrics_advanced_filtering
-    weight: 6
-  - name: Custom Metrics
-    url: metrics/custom_metrics/
-    parent: metrics_top_level
-    identifier: metrics_custom_metrics
-    weight: 7
-  - name: Metric Type Modifiers
-    url: metrics/custom_metrics/type_modifiers/
-    parent: metrics_custom_metrics
-    identifier: metrics_modifiers
-    weight: 701
-  - name: 'Submission - Agent Check '
-    url: metrics/custom_metrics/agent_metrics_submission/
-    parent: metrics_custom_metrics
-    identifier: dev_tools_metrics_agent
-    weight: 702
-  - name: Submission - DogStatsD
-    url: metrics/custom_metrics/dogstatsd_metrics_submission/
-    parent: metrics_custom_metrics
-    identifier: dev_tools_metrics_dogstatsd
-    weight: 703
-  - name: Submission - Powershell
-    url: metrics/custom_metrics/powershell_metrics_submission
-    parent: metrics_custom_metrics
-    identifier: dev_tools_metrics_powershell
-    weight: 704
-  - name: 'Submission - API '
-    url: api/latest/metrics/#submit-metrics
-    parent: metrics_custom_metrics
-    identifier: dev_tools_metrics_api
-    weight: 705
-  - name: Send OpenTelemetry Metrics to Datadog
-    url: opentelemetry/otel_metrics/
-    parent: metrics_top_level
-    identifier: metrics_otel
     weight: 8
-  - name: OTLP Metric Types
-    url: metrics/open_telemetry/otlp_metric_types
-    parent: metrics_otel
-    identifier: metrics_otlp_types
-    weight: 801
+  - name: Metrics Without Limits™
+    identifier: metrics_without_limits
+    url: metrics/metrics-without-limits/
+    parent: metrics_top_level
+    weight: 9
   - name: Guides
     url: metrics/guide
     parent: metrics_top_level
