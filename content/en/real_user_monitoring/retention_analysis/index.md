@@ -1,20 +1,20 @@
 ---
 title: Retention Analysis
 kind: documentation
-private: true
-is_beta: true
 ---
 
-<div class="alert alert-info">Retention Analysis is in private beta. If you have any questions, contact your customer success manager.</a></div>
-
 ## Overview
-RUM Retention Analysis allows you to measure how often users are successfully returning to a page or action. By tracking user retention over time, you can gain insights around overall user satisfaction.
+Retention Analysis allows you to measure how often users are successfully returning to a page or action. By tracking user retention over time, you can gain insights around overall user satisfaction.
 
-A cohort is a group of users who participate in an initial event, such as clicking a link. A user in the cohort is considered retained if they subsequently complete a return event, such as clicking the same link again or clicking a **Proceed to Payment** button.
+A cohort is a group of users who participate in an initial event, such as clicking a link. A user in the cohort is considered retained if they subsequently complete a return event, such as clicking the same link again or clicking a **Proceed to Payment** button. Only views and actions can act as events.
 
 The retention graph displays the percentage of users who completed the return event each week.
 
 {{< img src="real_user_monitoring/retention_analysis/example-retention-analysis-graph.png" alt="Example Retention Analysis graph" style="width:100%;" >}}
+
+## Prerequisites
+
+The unique user attributes field must be populated. See the [instructions for sending unique user attributes][4].
 
 ## Build a graph
 
@@ -31,7 +31,7 @@ The return event defaults to a repeat of the original event. To use a different 
 
 1. Change **Repeated the original event** to **Experienced a different event**.
 2. Select the view or action to act as the return event.
-3. Optionally, add any desired filter criteria.
+3. Optionally, add any desired filter criteria, such as the user's operating system.
 
 ## Analyze the graph
 For insights on user retention week over week, read each row of the graph horizontally from left to right. 
@@ -65,13 +65,9 @@ Reading the **Dec 04 2023** row of the above graph from left to right:
 - In **Week 0**, 94% of those 144 users completed the return event.
 - In **Week 1**, 92% of the 144 users completed the return event.
 
-## Limitations
+## Retention
 
-Retention Analysis is in private beta, and has the following limitations:
-- Retention is limited to 30 days unless your organization is configured to retain data for 90 days. You can file a support ticket to increase retention to 90 days at no additional cost.
-- The unique user attributes field must be populated. See the [instructions for sending unique user attributes][4].
-- Only views and actions can act as events.
-- While retention data can be downloaded as a CSV, the retention graph itself cannot be exported.
+Retention is limited to 30 days unless your organization is configured to retain data for 90 days. You can file a support ticket to increase retention to 90 days at no additional cost.
 
 [1]: https://app.datadoghq.com/rum/cohort
 [2]: /real_user_monitoring/browser/data_collected/#view-attributes
