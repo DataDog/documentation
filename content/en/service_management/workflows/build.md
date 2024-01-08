@@ -17,8 +17,8 @@ further_reading:
 <div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-You can create workflows or edit existing workflows from the Workflow Automation [Explore][1] tab. The **Explore** tab lists information about existing workflows, such as the workflow's owner, the trigger type, the dates that each workflow was last modified and executed, and whether the workflow is published or not.
-- Hover over a workflow for the options to delete or clone the workflow.
+You can create workflows or edit existing workflows from the [Workflow Automation][1] page. The page lists information about existing workflows, such as the workflow's owner, the trigger type, the dates that each workflow was last modified and executed, and whether the workflow is published or not.
+- Hover over a workflow for the options to delete, clone, or edit the permissions for the workflow.
 - Toggle **My workflows** if you want to see only workflows that you created.
 
 ## Build a workflow from a blueprint
@@ -31,6 +31,19 @@ You can create workflows or edit existing workflows from the Workflow Automation
 1. Workflow steps that require updates are marked with exclamation marks. Click on each workflow step you'd like to modify and fill in any empty fields on the **Configure** tab.
 1. When you are finished modifying the workflow, Click **Run** to test your workflow.
 1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
+
+## Create a workflow with AI
+
+{{< callout btn_hidden="true">}}
+Auto Generate is in beta.
+{{< /callout >}}
+
+If you're not sure where to start, you can automatically generate a workflow with AI. To generate a workflow:
+
+1. From the [Workflow Automation][1] page, click **New Workflow**.
+1. Click the **Auto Generate** AI button.
+1. Enter a detailed description for your workflow. Specify the integrations and actions you'd like to use.
+1. Click the up arrow (**↑**) to create your app.
 
 ## Create a custom workflow
 
@@ -53,60 +66,6 @@ If you're not sure about your workflow configuration, you can return to the pane
 1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
 You can edit a step in the workflow at any time by clicking on it. Click and drag steps on your workflow to rearrange them.
-
-### Build a workflow with JSON
-
-Build or edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. The JSON editor also allows you to:
-- **Format JSON**: Beautify your JSON.
-- **Export JSON**: Download the workflow.
-
-A typical workflow contains three top-level keys:
-- `"steps"`: An array of "step" objects. Each step defines a step in the workflow and includes a name, the action ID, and the step parameters. The `steps` object also includes a key for outbound connection data.
-- `"startStepName"`: The name of the first step in the workflow.
-- `"connectionEnvs"`: Connection data and environment variables.
-
-An example of a workflow with a single step that sends a message to a Slack channel named `#workflows-test`:
-
-{{< code-block lang="json" collapsible="true" filename="Example workflow" >}}
-{
-    "steps": [
-        {
-            "outboundConnections": [],
-            "name": "Send_message",
-            "actionId": "com.datadoghq.slack.send_simple_message",
-            "parameters": [
-                {
-                    "name": "teamId",
-                    "value": "ABC1234"
-                },
-                {
-                    "name": "channel",
-                    "value": "#workflows-test"
-                },
-                {
-                    "name": "mentionTargets",
-                    "value": [
-                        "@Bits"
-                    ]
-                },
-                {
-                    "name": "text",
-                    "value": "Hello world!"
-                }
-            ]
-        }
-    ],
-    "startStepName": "Send_message",
-    "connectionEnvs": [
-        {
-            "env": "default",
-            "connections": []
-        }
-    ]
-}
-{{< /code-block >}}
-
-When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
 
 ## Test a step
 
@@ -224,6 +183,12 @@ To get back to the main workflow canvas, click **Main** above the fallback tree.
 
 1. From the main workflow canvas, click on the step with the fallback you wish to remove.
 1. In the **Error Handling & Retries** section, click **Clear**.
+
+### Edit a workflow with JSON
+
+Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. The JSON editor also allows you to:
+- **Format JSON**: Beautify your JSON.
+- **Export JSON**: Download the workflow.
 
 ## Further reading
 
