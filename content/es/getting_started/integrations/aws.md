@@ -69,6 +69,8 @@ Antes de empezar, asegúrate de que cumples los siguientes requisitos previos:
     * logs:CreateLogGroup
     * logs:DescribeLogGroups
     * logs:PutRetentionPolicy
+    * oam:ListSinks
+    * oam:ListAttachedLinks
     * s3:CreateBucket
     * s3:GetObject
     * s3:GetObjectVersion
