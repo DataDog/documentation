@@ -38,7 +38,7 @@ The search bars provide the most comprehensive set of actions to filter the list
 - **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
 - **Distribution Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans)
 
-{{< img src="metrics/summary/facets3.jpg" alt="Metrics Facet Panel" style="width:75%;">}}
+{{< img src="metrics/summary/facets4.jpg" alt="Metrics Facet Panel" style="width:75%;">}}
 
 
 ## Configuration of multiple metrics 
