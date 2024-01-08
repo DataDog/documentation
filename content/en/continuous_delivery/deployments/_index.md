@@ -33,7 +33,7 @@ CD Visibility is in private beta. To request access, complete the form.
     {{< nextlink href="continuous_delivery/deployments/ciproviders" >}}CI Providers (GitLab, Jenkins, CircleCI, and more){{< /nextlink >}}
 {{< /whatsnext >}}
 
-<div class="alert alert-warning">If you are using a provider that is not currently supported, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeHpvshBu20v6qqMrAjMpUJrwYpRlaGai1mkAPsPU78hWZOKA/viewform?usp=sf_link">you can fill out this form to request support</a>.</div>
+<div class="alert alert-warning">If you are using a provider that is not supported, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeHpvshBu20v6qqMrAjMpUJrwYpRlaGai1mkAPsPU78hWZOKA/viewform?usp=sf_link">fill out this form to request support</a>.</div>
 
 ## Use deployment data
 
