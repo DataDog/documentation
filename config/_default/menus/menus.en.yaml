@@ -220,13 +220,13 @@ main:
     pre: features
     identifier: glossary
     parent: essentials_heading
-    weight: 15000
+    weight: 20000
   - name: Guides
     url: all_guides/
     pre: compass
     identifier: guides
     parent: essentials_heading
-    weight: 16000
+    weight: 30000
   - name: Agent
     url: agent/
     pre: agent-fill
