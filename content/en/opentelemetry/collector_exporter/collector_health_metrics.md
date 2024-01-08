@@ -3,7 +3,7 @@ title: Health Metrics
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
-  text: "Getting Started with Collector"
+  text: "Setting Up the OpenTelemetry Collector"
 ---
 
 ## Overview
@@ -15,6 +15,8 @@ To collect health metrics from the OpenTelemetry Collector itself, configure the
 For more information, see the OpenTelemetry project documentation for the [Prometheus receiver][1].
 
 ## Setup
+
+Add the following lines to your Datadog Exporter configuration:
 
 ```yaml
 receivers:
@@ -52,7 +54,7 @@ receivers:
 | `otelcol_exporter_enqueue_failed_log_records` | Number of log records failed to be added to the sending queue |
 | `otelcol_processor_batch_timeout_trigger_send` | Number of times the batch was sent due to a timeout trigger |
 | `otelcol_exporter_enqueue_failed_metric_points` | Number of metric points failed to be added to the sending queue |
-| `otelcol_process_runtime_total_sys_memory_bytes` | Total bytes of memory obtained from the OS (see 'go doc runtime.MemStats.Sys') |
+| `otelcol_process_runtime_total_sys_memory_bytes` | Total bytes of memory obtained from the OS (see [the Go docs for `runtime.MemStats.Sys`][3]) |
 | `otelcol_processor_batch_batch_size_trigger_send` | Number of times the batch was sent due to a size trigger |
 | `otelcol_exporter_sent_log_records` | Number of log records successfully sent to destination |
 | `otelcol_receiver_refused_log_records` | Number of log records that could not be pushed into the pipeline |
@@ -126,3 +128,4 @@ Descriptor:
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/prometheusreceiver
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector-metrics.yaml
+[3]: https://pkg.go.dev/runtime#MemStats.Sys

@@ -3,7 +3,7 @@ title: Docker Metrics
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
-  text: "Getting Started with Collector"
+  text: "Setting Up the OpenTelemetry Collector"
 ---
 
 ## Overview
@@ -22,12 +22,12 @@ For more information, see the OpenTelemetry project documentation for [the Docke
 
 The Docker stats receiver needs access to the Docker socket. By default, the receiver looks for the Docker socket at `unix:///var/run/docker.sock`. If this is not the Docker socket path, specify the path in the `endpoint` configuration line.
 
-**Note**: If you are using the collector image, you may need to [configure additional permissions for the collector to have access to the Docker socket][1]. 
+Add the following lines to your Datadog Exporter configuration:
 
 ```yaml
 receivers:
   docker_stats:
-    endpoint: unix:///var/run/docker.sock
+    endpoint: unix:///var/run/docker.sock # (default)
     metrics:
       container.network.io.usage.rx_packets:
         enabled: true
@@ -44,6 +44,7 @@ receivers:
       container.memory.hierarchical_memory_limit:
         enabled: true
 ```
+**Note**: If you are using the collector image, you may need to [configure additional permissions for the collector to have access to the Docker socket][1]. 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/issues/11791
 
@@ -64,7 +65,7 @@ extraVolumeMounts:
    mountPath: /var/run/docker.sock
 ```
 
-Collector configuration:
+Add the following in the Collector configuration:
 
 ```yaml
 receivers:

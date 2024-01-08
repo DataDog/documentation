@@ -3,7 +3,7 @@ title: Host Metrics
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
-  text: "Getting Started with Collector"
+  text: "Setting Up the OpenTelemetry Collector"
 ---
 
 ## Overview
@@ -19,6 +19,8 @@ For more information, including supported operating systems, see the OpenTelemet
 
 {{< tabs >}}
 {{% tab "Host" %}}
+
+Add the following lines to your Datadog Exporter configuration:
 
 ```yaml
 receivers:
@@ -48,7 +50,7 @@ receivers:
 
 {{% tab "Kubernetes" %}}
 
-Set up the host metrics receiver on each node from which metrics need to be collected. To collect host metrics from every node in your cluster, deploy the host metrics receiver as a DaemonSet collector:
+Set up the host metrics receiver on each node from which metrics need to be collected. To collect host metrics from every node in your cluster, deploy the host metrics receiver as a DaemonSet collector. Add the following in the Collector configuration:
 
 ```yaml
 receivers:

@@ -1,5 +1,5 @@
 ---
-title: Getting Started with Collector
+title: Setting up OpenTelemetry Collector and Datadog Exporter
 kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
@@ -28,13 +28,13 @@ The OpenTelemetry Collector is a vendor-agnostic agent process for collecting an
 {{< img src="metrics/otel/datadog_exporter.png" alt="Application Instrumented Library, Cloud Integrations, and Other Monitoring Solutions (for example Prometheus) -> Datadog Exporter inside OpenTelemetry Collector -> Datadog" style="width:100%;">}}
 
 
-## Setting up the OpenTelemetry Collector with the Datadog Exporter
+## Setup and configuration
 
 To run the OpenTelemetry Collector along with the Datadog Exporter, download the latest release of the [OpenTelemetry Collector Contrib distribution][3]. 
 
 ### Out-of-the-box Datadog Exporter configuration
 
-In the `exporter/datadogexporter` folder is a working example of an out-of-the-box configuration for Datadog Exporter. See the full configuration example file, [`ootb-ec2.yaml`][4]. Configure each of the following components to suit your needs:
+You can find working examples of out-of-the-box configuration for Datadog Exporter in the [`exporter/datadogexporter/examples` folder][5] in the OpenTelemetry Collector Contrib project. See the full configuration example file, [`ootb-ec2.yaml`][4]. Configure each of the following components to suit your needs:
 
 {{< whatsnext desc="" >}}
     {{< nextlink href="/opentelemetry/collector_exporter/hostname_tagging/" >}}Hostname and Tags{{< /nextlink >}}
@@ -176,8 +176,8 @@ Configure the Operator using one of the OpenTelemetry Collector standard Kuberne
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-operator#readme
-[2]: /opentelemetry/otel_collector_datadog_exporter/?tab=kubernetesdaemonset#4-run-the-collector
-[3]: /opentelemetry/otel_collector_datadog_exporter/?tab=kubernetesgateway#4-run-the-collector
+[2]: /opentelemetry/collector_exporter/?tab=kubernetesdaemonset#running-the-collector
+[3]: /opentelemetry/otel_collector_datadog_exporter/?tab=kubernetesgateway#running-the-collector
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -213,6 +213,7 @@ The OpenTelemetry Collector has [two primary deployment methods][20]: Agent and 
 [2]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry
 [3]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest
 [4]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/ootb-ec2.yaml
+[5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/
 [18]: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/?tab=python
 [19]: https://opentelemetry.io/docs/reference/specification/resource/sdk/#sdk-provided-resource-attributes
 [20]: https://opentelemetry.io/docs/collector/deployment/

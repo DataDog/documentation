@@ -731,7 +731,7 @@ main:
     pre: open-telemetry
     parent: essentials_heading
     weight: 46000
-  - name: Getting Started with Collector
+  - name: Set Up the Collector
     url: opentelemetry/collector_exporter/
     identifier: otel_gs_collector
     parent: opentelemetry_top_level

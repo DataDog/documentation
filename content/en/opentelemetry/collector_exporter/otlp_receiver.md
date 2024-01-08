@@ -3,7 +3,7 @@ title: OTLP Receiver
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
-  text: "Getting Started with Collector"
+  text: "Setting Up the OpenTelemetry Collector"
 ---
 
 ## Overview
@@ -13,6 +13,8 @@ To collect OTLP metrics, logs, and traces, configure the [OTLP receiver][1] in y
 For more information, see the OpenTelemetry project documentation for the [OTLP receiver][1].
 
 ## Setup
+
+Add the following lines to your Datadog Exporter configuration:
 
 ```yaml
 receivers:

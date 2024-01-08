@@ -3,7 +3,7 @@ title: Log Collection
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
-  text: "Getting Started with Collector"
+  text: "Setting Up the OpenTelemetry Collector"
 ---
 
 ## Overview
@@ -20,7 +20,7 @@ For more information, see the OpenTelemetry project documentation for the [filel
 {{< tabs >}}
 {{% tab "Host" %}}
 
-For a collector deployed on the same host as the log files to be collected, specify the paths of the log files to collect:
+For a collector deployed on the same host as the log files to be collected, specify the paths of the log files to collect in your Datadog Exporter configuration:
 
 ```yaml
 receivers:

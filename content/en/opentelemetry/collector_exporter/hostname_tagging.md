@@ -3,7 +3,7 @@ title: Hostname and Tagging
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
-  text: "Getting Started with Collector"
+  text: "Setting Up the OpenTelemetry Collector"
 ---
 
 {{< img src="opentelemetry/collector_exporter/hostname_tagging.png" alt="Hostname information collected from OpenTelemetry" style="width:100%;" >}}
@@ -18,6 +18,8 @@ For more information, see the OpenTelemetry project documentation for the [resou
 
 {{< tabs >}}
 {{% tab "Host" %}}
+
+Add the following lines to your Datadog Exporter configuration:
 
 ```yaml
 processors:
@@ -65,7 +67,8 @@ presets:
 
 The Helm `kubernetesAttributes` preset sets up the service account necessary for the Kubernetes attributes processor to extract metadata from pods. Read [Important Components for Kubernetes][1] for additional information about the required service account. 
 
-Collector configuration: 
+Add the following in the Collector configuration:
+
 ```yaml
 processors:
   k8sattributes:
@@ -222,7 +225,7 @@ presets:
 ```
 The Helm `kubernetesAttributes` preset sets up the service account necessary for the Kubernetes attributes processor to extract metadata from pods. Read [Important Components for Kubernetes][1] for additional information about the required service account. 
 
-Collector configuration:
+Add the following in the Collector configuration:
 
 ```yaml
 processors:

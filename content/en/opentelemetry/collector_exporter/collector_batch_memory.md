@@ -3,7 +3,7 @@ title: Batch and Memory Settings
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
-  text: "Getting Started with Collector"
+  text: "Setting Up the OpenTelemetry Collector"
 ---
 
 ## Overview
@@ -16,6 +16,7 @@ For more information, see the OpenTelemetry project documentation for the [batch
 
 {{< tabs >}}
 {{% tab "Host" %}}
+Add the following lines to your Datadog Exporter configuration:
 
 ```yaml
 processors:
@@ -42,7 +43,7 @@ resources:
     memory: 1Gi
 ```
 
-Collector configuration:
+Add the following in the Collector configuration:
 
 ```yaml
 processors:
@@ -55,16 +56,7 @@ processors:
 
 {{% /tab %}}
 {{< /tabs >}}
-```yaml
-receivers:
-  prometheus:
-    config:
-      scrape_configs:
-      - job_name: 'otelcol'
-        scrape_interval: 10s
-        static_configs:
-        - targets: ['0.0.0.0:8888']
-```
+
 
 ## Data collected
 
