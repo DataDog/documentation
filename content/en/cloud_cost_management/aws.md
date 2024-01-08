@@ -147,7 +147,9 @@ Visualize your ingested data using out of the box cost types. Datadog's cloud co
 ### Net costs
 **Net** costs apply private discounts directly to usage. The cost for a specific resource or tag represents the actual effective cost after all savings are realized.
 
-If you have private discounts and you're not using a `net` metric, those discounts will show as separate, negative-valued line items with no tags. Rather than attributing the costs to actual usage, they are treated as global discounts.
+Alternatively, if you're not using a net metric, private discounts will show as separate, negative-valued line items with no tags. Rather than attributing the costs to actual usage, they are treated as global discounts.
+
+Not all AWS accounts have net cost metrics. They are only available if your account has privately negotiated enterprise discounts. If your account doesn't have net metrics available, use the corresponding metric without `net` in the name.
 
 ### Shared resources allocated
 Metrics with the suffix `.shared.resources.allocated` include additional Datadog-powered [container cost allocation][11]. These metrics contain all of the same costs as the AWS metric, but with additional breakdowns and insights for container workloads.
