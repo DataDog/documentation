@@ -135,25 +135,39 @@ Attach the new S3 policy to the Datadog integration role.
 
 **Note:** Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
 
-## Cost metrics
+## Cost types
 
-Visualize your ingested data using out of the box cost metrics, each with its own use cases. 
+Visualize your ingested data using out of the box cost types. Datadog's cloud cost metric names contain various terms that describe how they are calculated.
+
+### Amortized vs. unblended costs
+**Amortized** cost metrics, distribute pre-payments (like up-front savings plans fees) across the entire discount term (accrual basis). As savings plans are applied to covered usage, the costs for that savings plan appear as usage charges. The unused portion appears on the accrual date. As a caveat of AWS reporting, the unused portion of an RI Fee always appears on the first of the month (i.e. this type of fee is not amortized across the billing period).
+
+**Unblended** cost metrics show all charges on the date that they were incurred (cash basis). These metrics match the AWS invoice exactly.
+
+### Net costs
+**Net** costs apply private discounts directly to usage. The cost for a specific resource or tag represents the actual effective cost after all savings are realized.
+
+If you have private discounts and you're not using a `net` metric, those discounts will show as separate, negative-valued line items with no tags. Rather than attributing the costs to actual usage, they are treated as global discounts.
+
+### Shared resources allocated
+Metrics with the suffix `.shared.resources.allocated` include additional Datadog-powered [container cost allocation][11]. These metrics contain all of the same costs as the AWS metric, but with additional breakdowns and insights for container workloads.
+
+### Cost metrics summary
 
 In general:
 - `aws.cost.net.amortized.shared.resources.allocated` provides the most complete cost allocation for specific workloads and teams.
 - If you do not have container cost allocation, use `aws.cost.net.amortized`.
 - If you do not have net amortized costs, use `aws.cost.amortized.shared.resources.allocated` or `aws.cost.amortized`.
 
-
-| Metric               | Description           | Use Case |
-| -------------------- | --------------------- | -------- |
-| `aws.cost.net.amortized` | Cost with public and private discount rates applied, plus the distribution of pre-payments across usage for the discount term (accrual basis). | Shows the effective cost of all AWS usage, but does not include container cost breakdowns. Useful for exploring savings plans and reservations in detail, pre-calculated within usage costs. |
-| `aws.cost.net.amortized.shared.resources.allocated` | All of your AWS net amortized costs, with additional breakdown and insights for container workloads. | The best metric for viewing the effective cost of all AWS usage, with additional Datadog-powered [container cost allocation][11].|
-| `aws.cost.amortized` | Cost based on applied discount rates plus the distribution of pre-payments across usage for the discount term (accrual basis). | Shows the effective cost of all AWS usage, but does not include privately negotiated enterprise discounts or container cost breakdowns. Useful for exploring savings plans and reservations in detail, pre-calculated within usage costs. Use `aws.cost.net.amortized` instead if it is available. |
-| `aws.cost.amortized.shared.resources.allocated` | All of your AWS amortized costs, with additional breakdown and insights for container workloads. | The best metric for viewing the effective cost of all AWS usage, with additional Datadog-powered [container cost allocation][11], if you do not have privately negotiated discounts. Use `aws.cost.net.amortized.shared.resources.allocated` instead if it is available. |
-| `aws.cost.net.unblended` | Cost shown as the amount charged at the time of usage (cash basis). | Matches the AWS invoice, with specialized discounts pre-calculated within usage costs. Useful for exploring savings plans and reservations in detail on the date the fees are charged, rather than rolled into usage costs. |
-| `aws.cost.unblended` | Cost shown as the amount charged at the time of usage (cash basis).| Matches the AWS invoice. Useful for exploring savings plans and reservations in detail on the date the fees are charged, rather than rolled into usage costs. |
-| `aws.cost.ondemand`  | Cost based on the list rate provided by AWS. | This metric shows AWS usage costs at the public, on-demand rate. It allows you to explore usage without impact from savings plans, reservations, and discounts. |
+| Metric               | Description           |
+| -------------------- | --------------------- |
+| `aws.cost.net.amortized.shared.resources.allocated` | All of your AWS net amortized costs, with additional breakdown and insights for container workloads. Requires [container cost allocation][11].|
+| `aws.cost.net.amortized` | Net amortized costs (accrual basis), without container cost breakdowns. |
+| `aws.cost.net.unblended` | Net unblended costs (cash basis). Matches the AWS invoice, with specialized discounts pre-calculated within usage costs. |
+| `aws.cost.amortized.shared.resources.allocated` | All of your AWS amortized costs, with additional breakdown and insights for container workloads. Requires [container cost allocation][11].|
+| `aws.cost.amortized` | Amortized costs (accrual basis), without container cost breakdowns. |
+| `aws.cost.unblended` | Unblended costs (cash basis). Matches the AWS invoice. |
+| `aws.cost.ondemand`  | Costs based on the list rate provided by AWS, excluding all savings plans, reservations, discounts, taxes, and fees. |
 
 ## Tag enrichment
 
