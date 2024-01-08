@@ -30,8 +30,8 @@ You can connect any service in your [PagerDuty Service Directory][1]. You can ma
 2. Get your PagerDuty API access key as described in their [API Access Key][3] documentation.
 
 3. Enter the API Access Key on [Pagerduty Integration Setup][4] to finish configuring it.
-{{< img src="tracing/service_catalog/pagerduty-setup.png" alt="Copy and Paste the API Key to Pagerduty Setup." style="width:100%;" >}}
 
+  {{< img src="tracing/service_catalog/pagerduty-token.png" alt="Copy and Paste the API Key to Pagerduty Setup." style="width:100%;" >}}
 
 4. Update the service definition with the PagerDuty information. For example, pass in the following `integrations` configuration lines within the full [service definition][5]:
 
