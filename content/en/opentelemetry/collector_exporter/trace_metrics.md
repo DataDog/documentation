@@ -16,6 +16,8 @@ For more information, see the OpenTelemetry project documentation for the [Datad
 
 ## Setup
 
+Add the following lines to your Datadog Exporter configuration:
+
 ```yaml
 processors:
   probabilistic_sampler:
