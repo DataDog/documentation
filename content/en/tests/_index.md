@@ -113,6 +113,8 @@ DD_TAGS=test.configuration.disk:slow,test.configuration.memory:low
 
 All tags with the `test.configuration` prefix are used as configuration tags, in addition to the automatically collected ones.
 
+Note: Nested `test.configuration` tags, such as `test.configuration.cpu.memory`, are not supported.
+
 In order to filter using these configurations tags, [you must create facets for these tags][2].
 
 ## Use CI tests data
