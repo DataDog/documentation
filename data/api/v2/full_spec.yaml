@@ -3797,6 +3797,22 @@ components:
           description: The name of the Cloudflare account.
           example: test-name
           type: string
+        resources:
+          description: An allowlist of resources to restrict pulling metrics for.
+          example:
+          - web
+          - dns
+          items:
+            type: string
+          type: array
+        zones:
+          description: An allowlist of zones to restrict pulling metrics for.
+          example:
+          - zone_id_1
+          - zone_id_2
+          items:
+            type: string
+          type: array
       required:
       - api_key
       - name
@@ -3829,6 +3845,22 @@ components:
           description: The name of the Cloudflare account.
           example: test-name
           type: string
+        resources:
+          description: An allowlist of resources to restrict pulling metrics for.
+          example:
+          - web
+          - dns
+          items:
+            type: string
+          type: array
+        zones:
+          description: An allowlist of zones to restrict pulling metrics for.
+          example:
+          - zone_id_1
+          - zone_id_2
+          items:
+            type: string
+          type: array
       required:
       - name
       type: object
@@ -3877,6 +3909,22 @@ components:
             key is provided (and not a token), this field is also required.
           example: test-email@example.com
           type: string
+        resources:
+          description: An allowlist of resources to restrict pulling metrics for.
+          example:
+          - web
+          - dns
+          items:
+            type: string
+          type: array
+        zones:
+          description: An allowlist of zones to restrict pulling metrics for.
+          example:
+          - zone_id_1
+          - zone_id_2
+          items:
+            type: string
+          type: array
       required:
       - api_key
       type: object
@@ -25144,7 +25192,8 @@ paths:
           - name: body
             value: "{\n  \"data\": {\n    \"type\": \"cloudflare-accounts\",\n    \"attributes\":
               {\n      \"api_key\": \"fakekey\",\n      \"name\": \"{{ unique_lower_alnum
-              }}\",\n      \"email\": \"dev@datadog.com\"\n    }\n  }\n}"
+              }}\",\n      \"email\": \"dev@datadog.com\",\n      \"zones\": [\"zone-id-1\",
+              \"zone-id-2\"],\n      \"resources\": [\"web\", \"dns\"]\n    }\n  }\n}"
           step: there is a valid "cloudflare_account" in the system
       x-menu-order: 2
       x-undo:
