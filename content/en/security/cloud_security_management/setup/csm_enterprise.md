@@ -98,6 +98,8 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
           enabled: true
         compliance:
           enabled: true
+          host_benchmarks:
+            enabled: true
     ```
 2. Restart the Agent.
 
@@ -117,6 +119,8 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
           enabled: true
         cspm:
           enabled: true
+          hostBenchmarks:
+            enabled: true
     ```
 
 2. Restart the Agent.
@@ -152,6 +156,7 @@ docker run -d --name dd-agent \
   -v /sys/kernel/debug:/sys/kernel/debug \
   -v /etc/os-release:/etc/os-release \
   -e DD_COMPLIANCE_CONFIG_ENABLED=true \
+  -e DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED=true \
   -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
   -e DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED=true \
   -e HOST_ROOT=/host/root \
@@ -191,6 +196,8 @@ Add the following settings to the `env` section of `security-agent` and `system-
                 value: "true"
               - name: DD_COMPLIANCE_CONFIG_ENABLED
                 value: "true"
+              - name: DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED
+                value: "true"
           [...]
 ```
 
@@ -222,10 +229,12 @@ runtime_security_config:
   enabled: true
 
 compliance_config:
- ## @param enabled - boolean - optional - default: false
- ## Set to true to enable CIS benchmarks for CSPM.
- #
- enabled: true
+  ## @param enabled - boolean - optional - default: false
+  ## Set to true to enable CIS benchmarks for CSPM.
+  #
+  enabled: true
+  host_benchmarks:
+    enabled: true
 ```
 
 ```bash
@@ -236,10 +245,12 @@ runtime_security_config:
   enabled: true
 
 compliance_config:
- ## @param enabled - boolean - optional - default: false
- ## Set to true to enable CIS benchmarks for CSPM.
- #
- enabled: true
+  ## @param enabled - boolean - optional - default: false
+  ## Set to true to enable CIS benchmarks for CSPM.
+  #
+  enabled: true
+  host_benchmarks:
+    enabled: true
 ```
 
 ```bash
@@ -338,7 +349,11 @@ The following deployment can be used to start the Runtime Security Agent and `sy
                 {
                       "name": "DD_COMPLIANCE_CONFIG_ENABLED",
                       "value": "true"
-                  }
+                },
+                {
+                      "name": "DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED",
+                      "value": "true"
+                }
             ],
             "memory": 256,
             "dockerSecurityOptions": ["apparmor:unconfined"],
@@ -426,7 +441,8 @@ datadog:
 
 {{% tab "Kubernetes (Operator)" %}}
 
-Add the following to the spec section of your `values.yaml` file:
+Image collection is enabled by default with Datadog Operator version `>= 1.3.0`.</br>
+Or, add the following to the spec section of your `values.yaml` file:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1

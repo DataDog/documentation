@@ -2057,11 +2057,15 @@ main:
     url: tracing/trace_explorer/trace_view/
     parent: trace_explorer
     weight: 605
+  - name: Trace Queries
+    url: tracing/trace_explorer/trace_queries/
+    parent: trace_explorer
+    weight: 606
   - name: Request Flow Map
     identifier: tracing_trace_explorer_request_flow_map
     url: tracing/trace_explorer/request_flow_map/
     parent: trace_explorer
-    weight: 606
+    weight: 607
   - name: Service Catalog
     url: tracing/service_catalog/
     parent: tracing
@@ -2207,6 +2211,11 @@ main:
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_custom_grouping
     weight: 1202
+  - name: Identify Suspect Commits
+    url: logs/error_tracking/suspect_commits
+    parent: tracing_error_tracking
+    identifier: tracing_error_tracking_suspect_commits
+    weight: 1203
   - name: Data Security
     url: tracing/configure_data_security/
     parent: tracing
@@ -2703,6 +2712,11 @@ main:
     url: static_analysis/github_actions
     parent: static_analysis
     identifier: static_analysis_github_actions
+    weight: 103
+  - name: GitHub Pull Requests
+    url: static_analysis/github_pull_requests
+    parent: static_analysis
+    identifier: static_analysis_github_prs
     weight: 103
   - name: Quality Gates
     url: quality_gates/
@@ -3203,11 +3217,16 @@ main:
     parent: log_management_error_tracking
     identifier: log_management_error_tracking_custom_grouping
     weight: 604
-  - name: Excluding Logs
+  - name: Exclude Logs
     url: logs/error_tracking/excluding_logs
     parent: log_management_error_tracking
     identifier: log_management_error_tracking_excluding_logs
     weight: 605
+  - name: Identify Suspect Commits
+    url: logs/error_tracking/suspect_commits
+    parent: log_management_error_tracking
+    identifier: log_management_error_tracking_suspect_commits
+    weight: 606
   - name: Guides
     url: logs/guide/
     parent: log_management
@@ -3537,11 +3556,6 @@ main:
     parent: csm
     identifier: vulnerabilities
     weight: 18
-  - name: Troubleshooting
-    url: security/vulnerabilities/troubleshooting
-    parent: vulnerabilities
-    identifier: vulnerabilities_troubleshooting
-    weight: 101
   - name: Default Detection Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm
@@ -3572,6 +3586,16 @@ main:
     parent: csm
     identifier: csm_troubleshooting
     weight: 30
+  - name: Threats
+    url: security/cloud_security_management/troubleshooting/threats/
+    parent: csm_troubleshooting
+    identifier: csm_troubleshooting_threats
+    weight: 301
+  - name: Vulnerabilities
+    url: security/cloud_security_management/troubleshooting/vulnerabilities/
+    parent: csm_troubleshooting
+    identifier: csm_troubleshooting_vulnerabilities
+    weight: 302
   - name: Application Security Management
     url: security/application_security/
     parent: security_platform_heading
@@ -3718,26 +3742,36 @@ main:
     parent: appsec_threats
     identifier: threats_event_rules
     weight: 506
+  - name: Security Signals
+    url: security/application_security/threats/security_signals/
+    parent: appsec_threats
+    identifier: threats_security_signals
+    weight: 507
   - name: Trace Qualification
     url: security/application_security/threats/trace_qualification/
     parent: appsec_threats
     identifier: threats_trace_qualification
-    weight: 507
+    weight: 508
   - name: Threat Intelligence
     url: security/application_security/threats/threat-intelligence/
     parent: appsec_threats
     identifier: threats_threat_intelligence
-    weight: 508
+    weight: 509
+  - name: API Security Inventory
+    url: security/application_security/api-inventory/
+    parent: application_security
+    identifier: asm_api_security
+    weight: 6
   - name: Guides
     url: security/application_security/guide/
     parent: application_security
     identifier: appsec_guides
-    weight: 6
+    weight: 7
   - name: Troubleshooting
     url: security/application_security/troubleshooting/
     parent: application_security
     identifier: appsec_troubleshooting
-    weight: 7
+    weight: 8
   - name: Synthetic Monitoring
     url: synthetics/
     pre: synthetics
@@ -4351,7 +4385,7 @@ main:
     url: real_user_monitoring/error_tracking/android/
     parent: rum_error_tracking
     identifier: rum_error_tracking_android
-    weight: 1403
+    weight: 1203
   - name: Track iOS Errors
     url: real_user_monitoring/error_tracking/ios/
     parent: rum_error_tracking
@@ -4382,6 +4416,11 @@ main:
     parent: rum_error_tracking
     identifier: rum_error_tracking_custom_grouping
     weight: 1209
+  - name: Identify Suspect Commits
+    url: logs/error_tracking/suspect_commits
+    parent: rum_error_tracking
+    identifier: rum_error_tracking_suspect_commits
+    weight: 1210
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
@@ -9131,8 +9170,7 @@ api:
         - v2
       operationids:
         - CreateCIAppPipelineEvent
-      unstable:
-        - v2
+      unstable: []
       order: 1
   - name: CI Visibility Tests
     url: /api/latest/ci-visibility-tests/
@@ -9174,6 +9212,130 @@ api:
         - AggregateCIAppTestEvents
       unstable: []
       order: 3
+  - name: Cloud Cost Management
+    url: /api/latest/cloud-cost-management/
+    identifier: cloud-cost-management
+    generated: true
+  - name: Cloud Cost Enabled
+    url: '#cloud-cost-enabled'
+    identifier: cloud-cost-management-cloud-cost-enabled
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetCloudCostActivity
+      unstable: []
+      order: 10
+  - name: Update Cloud Cost Management Azure config
+    url: '#update-cloud-cost-management-azure-config'
+    identifier: cloud-cost-management-update-cloud-cost-management-azure-config
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateCostAzureUCConfigs
+      unstable: []
+      order: 7
+  - name: Delete Cloud Cost Management Azure config
+    url: '#delete-cloud-cost-management-azure-config'
+    identifier: cloud-cost-management-delete-cloud-cost-management-azure-config
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteCostAzureUCConfig
+      unstable: []
+      order: 9
+  - name: Create Cloud Cost Management Azure configs
+    url: '#create-cloud-cost-management-azure-configs'
+    identifier: cloud-cost-management-create-cloud-cost-management-azure-configs
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCostAzureUCConfigs
+      unstable: []
+      order: 8
+  - name: List Cloud Cost Management Azure configs
+    url: '#list-cloud-cost-management-azure-configs'
+    identifier: cloud-cost-management-list-cloud-cost-management-azure-configs
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListCostAzureUCConfigs
+      unstable: []
+      order: 6
+  - name: List related AWS accounts
+    url: '#list-related-aws-accounts'
+    identifier: cloud-cost-management-list-related-aws-accounts
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListAWSRelatedAccounts
+      unstable: []
+      order: 5
+  - name: Update Cloud Cost Management AWS CUR config
+    url: '#update-cloud-cost-management-aws-cur-config'
+    identifier: cloud-cost-management-update-cloud-cost-management-aws-cur-config
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateCostAWSCURConfig
+      unstable: []
+      order: 2
+  - name: Delete Cloud Cost Management AWS CUR config
+    url: '#delete-cloud-cost-management-aws-cur-config'
+    identifier: cloud-cost-management-delete-cloud-cost-management-aws-cur-config
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteCostAWSCURConfig
+      unstable: []
+      order: 4
+  - name: Create Cloud Cost Management AWS CUR config
+    url: '#create-cloud-cost-management-aws-cur-config'
+    identifier: cloud-cost-management-create-cloud-cost-management-aws-cur-config
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCostAWSCURConfig
+      unstable: []
+      order: 3
+  - name: List Cloud Cost Management AWS CUR configs
+    url: '#list-cloud-cost-management-aws-cur-configs'
+    identifier: cloud-cost-management-list-cloud-cost-management-aws-cur-configs
+    parent: cloud-cost-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListCostAWSCURConfigs
+      unstable: []
+      order: 1
   - name: Cloud Workload Security
     url: /api/latest/cloud-workload-security/
     identifier: cloud-workload-security

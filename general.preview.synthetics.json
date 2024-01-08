@@ -83,6 +83,24 @@
       "config": {
         "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/integrations/bigpanda_saas/"
       }
+    },
+    {
+      "id": "5nh-qfq-fs4",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/static_analysis/rules/"
+      }
+    },
+    {
+      "id": "hys-3ee-qff",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/static_analysis/rules/"
+      }
+    },
+    {
+      "id": "skf-cqv-m5d",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/static_analysis/rules/"
+      }
     }
 
   ]

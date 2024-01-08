@@ -40,6 +40,7 @@ The following instructions enable the container image metadata collection and [S
 
 **Note**: The CSM Vulnerabilities feature is not available for AWS Fargate or Windows environments.
 
+
 {{< tabs >}}
 {{% tab "Kubernetes (Helm)" %}}
 
@@ -59,7 +60,8 @@ datadog:
 
 {{% tab "Kubernetes (Operator)" %}}
 
-Add the following to the spec section of your `values.yaml` file:
+Image collection is enabled by default with Datadog Operator version `>= 1.3.0`.</br>
+Or, add the following to the spec section of your `values.yaml` file:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
