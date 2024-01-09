@@ -137,32 +137,32 @@ Attach the new S3 policy to the Datadog integration role.
 
 ## Cost types
 
-Visualize your ingested data using out of the box cost types. Cloud cost metric names contain various terms that describe how they are calculated.
+Visualize your ingested data using out-of-the-box cost types. Cloud cost metric names contain various terms that describe how they are calculated.
 
 ### Amortized vs. unblended costs
-**Amortized** cost metrics distribute some pre-payments (like up-front savings plans fees) across the entire discount term. This is also called _accrual basis_. As savings plans are applied to covered usage, the costs for that savings plan appear as usage charges. The unused portion appears on the accrual date. Not all one-time fees are amortized across the billing period. For example, the unused portion of an RI Fee always appears on the first of the month.
+**Amortized** cost metrics distribute some pre-payments (like up-front savings plans fees) across the entire discount term. This is also called _accrual basis_. As savings plans are applied to covered usage, the costs for that savings plan appear as usage charges. The unused portion appears as a fee on the accrual date. Not all one-time fees are amortized across the billing period. For example, the unused portion of an RI Fee always appears on the first of the month.
 
 **Unblended** cost metrics show all charges on the date that they were incurred. This is also called _cash basis_. These metrics match the AWS invoice exactly.
 
 ### Net costs
-**Net** costs apply private discounts directly to usage. The cost for specific resource usage represents the actual effective cost after all savings are realized.
+**Net** costs apply private discounts directly to usage. The cost of usage for a specific resource represents the actual effective cost after all savings are realized.
 
-Other metrics (without the `net` keyword) show private discounts as separate, negative-valued line items with no attribution tags. Rather than attributing the discounts to actual usage, they are treated as offsets to total cost with no ownership.
+Other metrics (without the `net` keyword) show private discounts as separate, negative-valued line items with no attribution tags. Rather than attributing the discounts to actual usage, they are treated as offsets to total cost.
 
-Net cost metrics are available if your account has privately negotiated enterprise discounts. If your account doesn't have net metrics available, use the corresponding metric without `net` in the name.
+Net cost metrics are available if your AWS account has privately negotiated enterprise discounts. If your account doesn't have net metrics available, use the corresponding metric without `net` in the name.
 
 ### Shared resources allocated
 Metrics with the suffix `.shared.resources.allocated` include additional Datadog-powered [container cost allocation][11]. These metrics contain all of the same costs as the AWS metric, but with additional breakdowns and insights for container workloads.
 
 ### Example
-Here is an example scenario to demonstrate how these various cost types behave. Imagine you have:
+Here is an example scenario to demonstrate how these cost types behave. Imagine you have:
 - an EC2 instance running for one hour with the cost of $3/compute-hour.
 - a savings plan which covers this instance type and hour purchased for $2.
 - a negotiated discount of 10% on top of all other discounts.
 
-Here's how the cost of the instance, savings plans, and discounts will appear in each cost type:
+Here's how the instance cost, savings plans, and discounts appear in each cost type:
 
-|Cost type |Resource Cost |Savings Plan Cost|Discount| Explanation |
+|Cost type |Usage |Savings Plan |Discount | Explanation |
 |:---------|-|-|-|:------------------------------------------------|
 |On Demand |$3.00|||This is the public on-demand rate.|
 |Unblended |$3.00|$2.00|-$0.20|Savings plan and discounts are separate line items. (Note: the $3 resource cost is offset with `SavingsPlanNegation`.) |
@@ -196,7 +196,7 @@ Datadog adds tags to the ingested cost data using many sources, described in det
 - AWS Resource tags
 - AWS Account tags
 - AWS Integration tags
-- Out of the box tags
+- Out-of-the-box tags
 - Container workload tags
 - Tag pipelines
 
@@ -231,7 +231,7 @@ _Requires the Datadog AWS Integration on the tagged accounts._
 
 These are tags set on the AWS Integration tile in the Datadog integrations page. They are applied to all costs found in the CUR for the associated AWS account.
 
-### Out of the box tags
+### Out-of-the-box tags
 Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your [Cost and Usage Report (CUR)][6] and make it easier to discover and understand cost data.
 
 The following out-of-the-box tags are available for filtering and grouping data:
