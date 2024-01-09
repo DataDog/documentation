@@ -154,6 +154,21 @@ Net cost metrics are available if your account has privately negotiated enterpri
 ### Shared resources allocated
 Metrics with the suffix `.shared.resources.allocated` include additional Datadog-powered [container cost allocation][11]. These metrics contain all of the same costs as the AWS metric, but with additional breakdowns and insights for container workloads.
 
+### Example
+Here is an example scenario to demonstrate how these various cost types behave. Imagine you have:
+- an EC2 instance running for one hour with the cost of $3/compute-hour.
+- a savings plan which covers this instance type and hour purchased for $2.
+- a negotiated discount of 10% on top of all other discounts.
+
+|Cost type |Resource Cost |Savings Plan Cost|Discount| Explanation |
+|:---------|-|-|-|:------------------------------------------------|
+|On Demand |$3.00|||This is the public on-demand rate.|
+|Unblended |$3.00|$2.00|-$0.20|Savings plan and discounts are separate line items. (Note: the $3 resource cost is offset with `SavingsPlanNegation`.) |
+|Net Unblended||$1.80||Savings plan recurring fee appears as a line item with discount applied; the cost is not associated with a specific resource.|
+|Amortized |$2.00||-$0.20|Savings plan coverage is applied directly to the resource cost. Discount is a separate line item. |
+|Net Amortized |$1.80|||Savings plan coverage and discounts are applied directly to resource cost. |
+|Net Amortized - Shared Resources Allocated |$1.80|||The same cost as Net Amortized, but this cost can be further broken down by Kubernetes dimensions and pod tags. |
+
 ### Cost metrics summary
 
 In general:
