@@ -43,7 +43,7 @@ The default visualization that displays all the spans for an associated trace, c
 
 To navigate the graph, scroll to zoom, click and drag to move around, and use the minimap to zoom into the selected span or zoom out to the full trace.
 
-The legend details the color coding of the flame graph. Group spans by either **service** (default), **host**, or **container** - and choose to display either **percentage of trace execution time** or **span count** by color grouping. If errors exist on spans in the trace, highlight them in the flame graph by ticking the Errors checkbox under Filter Spans.
+The legend details the color coding of the flame graph. Group spans by either **Service** (default), **Host**, or **Container**. Choose to display either the percentage of trace execution time (**% Exec Time**) or span count (**Spans**) by color grouping. If errors exist on spans in the trace, highlight them in the flame graph by selecting the **Errors** checkbox under **Filter Spans**.
 
 {{< img src="tracing/trace_view/flamegraph_legend.mp4" alt="Flame Graph legend" video="true" style="width:90%;">}}
 
