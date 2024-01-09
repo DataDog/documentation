@@ -6,7 +6,7 @@ further_reading:
   text: Datadog으로 신서틱(Synthetic) 프라이빗 위치 모니터링
 - link: /getting_started/synthetics/private_location
   tag: 설명서
-  text: 비공개 위치로 시작하기
+  text: 프라이빗 위치 시작하기
 - link: /synthetics/private_locations/monitoring
   tag: 설명서
   text: 프라이빗 위치 모니터링
@@ -17,7 +17,7 @@ further_reading:
   tag: 설명서
   text: API 테스트 설정
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_private_location
-  tag: 테라폼
+  tag: Terraform
   text: Terraform으로 신서틱(Synthetic) 프라이빗 위치 생성 및 관리
 kind: 설명서
 title: 프라이빗 위치에서 신서틱(Synthetic) 테스트 실행
