@@ -31,7 +31,6 @@ The trace header displays critical trace information, including the root span's 
 
 {{< img src="tracing/trace_view/trace_header.png" alt="Trace header" style="width:90%;">}}
 
-Selected span information is visible at the bottom of the Trace View.
 
 ## Trace visualizations
 
