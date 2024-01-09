@@ -116,54 +116,191 @@ To run the OpenTelemetry Collector as a Docker image and receive traces from oth
 {{% /tab %}}
 {{% tab "Kubernetes (DaemonSet)" %}}
 
-Using a DaemonSet is the most common and recommended way to configure OpenTelemetry collection in a Kubernetes environment. 
+Using a DaemonSet is the most common and recommended way to configure OpenTelemetry collection in a Kubernetes environment. To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure:
 
-To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure, use this [full example of configuring the OpenTelemetry Collector using the Datadog Exporter as a DaemonSet][1], including the application configuration example.
+1. Use this [full example of configuring the OpenTelemetry Collector using the Datadog Exporter as a DaemonSet][1], including the application configuration example.
 
-[Some configuration options in the example][2] (repeated below) ensure that essential ports of the DaemonSet are exposed and accessible to your application:
+   [Some configuration options in the example][2] (repeated below) ensure that essential ports of the DaemonSet are exposed and accessible to your application:
 
-```yaml
-# ...
+   ```yaml
+   # ...
         ports:
         - containerPort: 4318 # default port for OpenTelemetry HTTP receiver.
           hostPort: 4318
         - containerPort: 4317 # default port for OpenTelemetry gRPC receiver.
           hostPort: 4317
         - containerPort: 8888  # Default endpoint for querying Collector observability metrics.
-# ...
-```
+   # ...
+   ```
 
-If you do not need both the standard HTTP and gRPC ports for your application, you can remove the corresponding configuration options.
+   If you do not need both the standard HTTP and gRPC ports for your application, you can remove the corresponding configuration options.
 
+2. Collect valuable Kubernetes attributes, which are used for Datadog container tagging, report the Pod IP as a resource attribute, [as shown in the example][3]:
+
+   ```yaml
+   # ...
+           env:
+           - name: POD_IP
+             valueFrom:
+               fieldRef:
+                 fieldPath: status.podIP
+           # The k8s.pod.ip is used to associate pods for k8sattributes
+           - name: OTEL_RESOURCE_ATTRIBUTES
+             value: "k8s.pod.ip=$(POD_IP)"
+   # ...
+   ```
+
+   This ensures that [Kubernetes Attributes Processor][4] which is used in [the config map][5] is able to extract the necessary metadata to attach to traces. There are additional [roles][6] that need to be set to allow access to this metadata. [The example][1] is complete, ready to use, and has the correct roles set up.
+  
+3. Provide your [application container][7]. To configure your application container, ensure that the correct OTLP endpoint hostname is used. The OpenTelemetry Collector runs as a DaemonSet, so the current host needs to be targeted. Set your application container's `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable correctly, as in the [example chart][8]:
+
+   ```yaml
+   # ...
+           env:
+           - name: HOST_IP
+             valueFrom:
+               fieldRef:
+                 fieldPath: status.hostIP
+             # The application SDK must use this environment variable in order to successfully
+             # connect to the DaemonSet's collector.
+           - name: OTEL_EXPORTER_OTLP_ENDPOINT
+             value: "http://$(HOST_IP):4318"
+   # ...
+   ```
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722/exporter/datadogexporter/examples/k8s-chart
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml#L41-L46
+[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml#L33-L40
+[4]: https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/k8sattributesprocessor#section-readme
+[5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/configmap.yaml#L26-L27
+[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/roles.yaml
+[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/deployment.yaml#L21-L22
+[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/deployment.yaml#L24-L32
 
 {{% /tab %}}
 {{% tab "Kubernetes (Gateway)" %}}
 
-To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gateway deployment, use this [full example of configuring the OpenTelemetry Collector using the Datadog Exporter as a DaemonSet][1], including the application configuration example.
+To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gateway deployment
 
-[Some configuration options in the example][2] (repeated below) ensure that essential ports of the DaemonSet are exposed and accessible to your application:
+1. Use this [full example of configuring the OpenTelemetry Collector using the Datadog Exporter as a DaemonSet][1], including the application configuration example.
 
-```yaml
-# ...
+   [Some configuration options in the example][2] (repeated below) ensure that essential ports of the DaemonSet are exposed and accessible to your application:
+
+   ```yaml
+   # ...
         ports:
         - containerPort: 4318 # default port for OpenTelemetry HTTP receiver.
           hostPort: 4318
         - containerPort: 4317 # default port for OpenTelemetry gRPC receiver.
           hostPort: 4317
         - containerPort: 8888  # Default endpoint for querying Collector observability metrics.
-# ...
-```
+   # ...
+   ```
 
-If you do not need both the standard HTTP and gRPC ports for your application, you can remove the corresponding configuration options.
+   If you do not need both the standard HTTP and gRPC ports for your application, you can remove the corresponding configuration options.
 
+2. Collect valuable Kubernetes attributes, which are used for Datadog container tagging, report the Pod IP as a resource attribute, [as shown in the example][3]:
+
+   ```yaml
+   # ...
+           env:
+           - name: POD_IP
+             valueFrom:
+               fieldRef:
+                 fieldPath: status.podIP
+           # The k8s.pod.ip is used to associate pods for k8sattributes
+           - name: OTEL_RESOURCE_ATTRIBUTES
+             value: "k8s.pod.ip=$(POD_IP)"
+   # ...
+   ```
+
+   This ensures that [Kubernetes Attributes Processor][4] which is used in [the config map][5] is able to extract the necessary metadata to attach to traces. There are additional [roles][6] that need to be set to allow access to this metadata. [The example][1] is complete, ready to use, and has the correct roles set up.
+  
+3. Provide your [application container][7]. To configure your application container, ensure that the correct OTLP endpoint hostname is used. The OpenTelemetry Collector runs as a DaemonSet, so the current host needs to be targeted. Set your application container's `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable correctly, as in the [example chart][8]:
+
+   ```yaml
+   # ...
+           env:
+           - name: HOST_IP
+             valueFrom:
+               fieldRef:
+                 fieldPath: status.hostIP
+             # The application SDK must use this environment variable in order to successfully
+             # connect to the DaemonSet's collector.
+           - name: OTEL_EXPORTER_OTLP_ENDPOINT
+             value: "http://$(HOST_IP):4318"
+   # ...
+   ```
+
+4. Change the DaemonSet to include an [OTLP exporter][9] instead of the Datadog Exporter [currently in place][10]:
+
+   ```yaml
+   # ...
+   exporters:
+     otlp:
+       endpoint: "<GATEWAY_HOSTNAME>:4317"
+   # ...
+   ```
+
+5. Make sure that the service pipelines use this exporter, instead of the Datadog one that [is in place in the example][11]:
+
+   ```yaml
+   # ...
+       service:
+         pipelines:
+           metrics:
+             receivers: [hostmetrics, otlp]
+             processors: [resourcedetection, k8sattributes, batch]
+             exporters: [otlp]
+           traces:
+             receivers: [otlp]
+             processors: [resourcedetection, k8sattributes, batch]
+             exporters: [otlp]
+   # ...
+   ```
+
+   This ensures that each agent forwards its data via the OTLP protocol to the Collector Gateway. 
+
+6. Replace `GATEWAY_HOSTNAME` with the address of your OpenTelemetry Collector Gateway.
+
+7. To ensure that Kubernetes metadata continues to be applied to traces, tell the [`k8sattributes` processor][12] to forward the Pod IP to the Gateway Collector so that it can obtain the metadata:
+
+   ```yaml
+   # ...
+   k8sattributes:
+     passthrough: true
+   # ...
+   ```
+
+   For more information about the `passthrough` option, read [its documentation][13].
+
+8. Make sure that the Gateway Collector's configuration uses the same Datadog Exporter settings that have been replaced by the OTLP exporter in the agents. For example (where `<DD_SITE>` is your site, {{< region-param key="dd_site" code="true" >}}):
+
+   ```yaml
+   # ...
+   exporters:
+     datadog:
+       api:
+         site: <DD_SITE>
+         key: ${env:DD_API_KEY}
+   # ...
+   ```
 
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722/exporter/datadogexporter/examples/k8s-chart
 [2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml#L41-L46
+[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml#L33-L40
+[4]: https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/k8sattributesprocessor#section-readme
+[5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/configmap.yaml#L26-L27
+[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/roles.yaml
+[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/deployment.yaml#L21-L22
+[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/deployment.yaml#L24-L32
+[9]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/exporter/otlpexporter/README.md#otlp-grpc-exporter
+[10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/configmap.yaml#L15-L18
+[11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/configmap.yaml#L30-L39
+[12]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/configmap.yaml#L27
+[13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/e79d917/processor/k8sattributesprocessor/doc.go#L196-L220
 
 {{% /tab %}}
 {{% tab "Kubernetes (Operator)" %}}
