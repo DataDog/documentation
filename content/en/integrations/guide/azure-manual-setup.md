@@ -277,7 +277,7 @@ You can use the Azure extension to install the Datadog Agent on Windows VMs, Lin
 {{% tab "VM Extension" %}}
 
 1. In the [Azure portal][4], select the appropriate VM.
-2. From the left sidebar, select **Extensions + applications** under **Settings**.
+2. From the left sidebar, under **Settings**, select **Extensions + applications**.
 3. Click **+ Add**.
 4. Search for and select the `Datadog Agent` extension.
 5. Click **Next**.
