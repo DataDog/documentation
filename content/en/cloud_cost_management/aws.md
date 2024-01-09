@@ -139,17 +139,24 @@ Attach the new S3 policy to the Datadog integration role.
 
 Visualize your ingested data using out-of-the-box cost types. Cloud cost metric names contain various terms that describe how they are calculated.
 
+### On-demand
+**On-demand** costs are the costs of usage at the public, on-demand rate published by AWS. This excludes all savings plans, reservations, discounts, taxes, and fees.
+
+These costs do not provide an accurate representation of what is paid to AWS, so it's not recommended to use this metric in most cases.
+
 ### Amortized vs. unblended costs
-**Amortized** cost metrics distribute some pre-payments (like up-front savings plans fees) across the entire discount term. This is also called _accrual basis_. As savings plans are applied to covered usage, the costs for that savings plan appear as usage charges. The unused portion appears as a fee on the accrual date. Not all one-time fees are amortized across the billing period. For example, the unused portion of an RI Fee always appears on the first of the month.
+**Amortized** cost metrics distribute some pre-payments (like up-front savings plan fees) across the entire discount term. This is also called _accrual basis_. As savings plans are applied to covered usage, the costs for that savings plan appear as usage charges. The unused portion appears as a fee.
+
+Not all one-time fees are amortized across the billing period. For example, the unused portion of a Reserved Instance Fee typically appears on the first of the month.
 
 **Unblended** cost metrics show all charges on the date that they were incurred. This is also called _cash basis_. These metrics match the AWS invoice exactly.
 
 ### Net costs
-**Net** costs apply private discounts directly to usage. The cost of usage for a specific resource represents the actual effective cost after all savings are realized.
+**Net** costs apply private discounts directly to usage. The cost of usage for a specific resource represents the effective cost after all savings are realized.
 
 Other metrics (without the `net` keyword) show private discounts as separate, negative-valued line items with no attribution tags. Rather than attributing the discounts to actual usage, they are treated as offsets to total cost.
 
-Net cost metrics are available if your AWS account has privately negotiated enterprise discounts. If your account doesn't have net metrics available, use the corresponding metric without `net` in the name.
+**Net amortized** costs provide the most accurate representation for cost allocation, with all savings applied directly to usage. Net cost metrics are available if your AWS account has privately negotiated enterprise discounts. If your account doesn't have net metrics available, use **amortized** cost instead.
 
 ### Shared resources allocated
 Metrics with the suffix `.shared.resources.allocated` include additional Datadog-powered [container cost allocation][11]. These metrics contain all of the same costs as the AWS metric, but with additional breakdowns and insights for container workloads.
@@ -220,7 +227,7 @@ To ensure consistency, Datadog normalizes tag keys using underscores and lower c
 
 When the Datadog AWS integration is enabled, Datadog automatically collects resource tags for most AWS resources. These tags are applied to all costs found in the CUR for a given resource.
 
-If the AWS integration is not enabled, you can enable resource tag enrichment by activating [cost allocation tags][13] in AWS billing. This allows you to select a subset of resource tag keys to include as columns in the AWS CUR. Datadog will automatically include those columns as tags when processing the CUR.
+If the AWS integration is not enabled, you can enable resource tag enrichment by activating [cost allocation tags][13] in AWS billing. This allows you to select a subset of resource tag keys to include as columns in the AWS CUR. Datadog automatically includes those columns as tags when processing the CUR.
 
 ### AWS account tags
 AWS Organizations supports [user-defined tags][14] on organizational units and accounts. Datadog automatically fetches and applies these tags to cost data associated with those accounts.
