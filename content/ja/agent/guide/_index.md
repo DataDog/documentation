@@ -15,6 +15,7 @@ title: Agent ガイド
     {{< nextlink href="agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity" >}}インターネット接続が制限されているサーバーへの Agent のインストール{{< /nextlink >}}
     {{< nextlink href="agent/guide/ansible_standalone_role/" >}}スタンドアロンの Datadog ロールを使った Ansible の設定{{< /nextlink >}}
     {{< nextlink href="agent/guide/how-do-i-uninstall-the-agent" >}}Agent をアンインストールするにはどうしたらいいですか？{{< /nextlink >}}
+    {{< nextlink href="agent/guide/linux-key-rotation-2024" >}}Linux キーローテーション 2024{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Windows guides:" >}}
@@ -41,6 +42,7 @@ title: Agent ガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Agent 5 ガイド:" >}}
+    {{< nextlink href="agent/guide/install-agent-5" >}}Agent 5 のインストール{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-autodiscovery" >}}Agent v5 のオートディスカバリー{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-5-kubernetes-basic-agent-usage" >}}Agent v5 における Kubernetes の基本的な Agent 利用方法{{< /nextlink >}}
     {{< nextlink href="agent/guide/dogstream" >}}Dogstream{{< /nextlink >}}
