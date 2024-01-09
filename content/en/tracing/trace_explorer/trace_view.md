@@ -71,7 +71,7 @@ To join the Waterfall private beta <a href="https://forms.gle/LjJR1ZbF1tNDv5JC6"
 
 {{< img src="tracing/trace_view/waterfall.png" alt="Waterfall" style="width:90%;">}}
 
-Displays all the spans for an associated trace, color-coded on separate rows and on a timeline. Particularly useful for isolating relevant parts of a trace and understanding how asynchronous processes fit into the execution flow.
+Displays all the spans for an associated trace, color-coded on separate rows and on a timeline. This visualization is useful for isolating relevant parts of a trace and understanding how asynchronous processes fit into the execution flow.
 
 On each row (that is, per span):
 * A bar (colored by service), whose length corresponds to the percentage of total trace duration
