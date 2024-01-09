@@ -67,7 +67,7 @@ Reading the **Dec 04 2023** row of the above graph from left to right:
 
 ## Retention
 
-Retention is limited to 30 days unless your organization is configured to retain data for 90 days. You can file a support ticket to increase retention to 90 days at no additional cost.
+Retention is limited to 30 days unless your organization is configured to retain data for 90 days. You can file a [support ticket][5] to increase retention to 90 days at no additional cost.
 
 [1]: https://app.datadoghq.com/rum/cohort
 [2]: /real_user_monitoring/browser/data_collected/#view-attributes
