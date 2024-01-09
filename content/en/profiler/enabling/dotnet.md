@@ -25,6 +25,8 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
+
 Supported operating systems for .NET Framework
 : Windows 10<br/>
 Windows Server starting from version 2012
@@ -416,3 +418,4 @@ The [Getting Started with Profiler][4] guide takes a sample service with a perfo
 [5]: /tracing/trace_collection/
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /profiler/enabling/supported_versions/

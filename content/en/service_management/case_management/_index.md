@@ -17,6 +17,12 @@ algolia:
   tags: ['inbox']
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+Case Management is not available in the US1-FED site.
+</div>
+{{% /site-region %}}
+
 {{< img src="/service_management/case_management/case_managment_overview.png" alt="View all your cases on the main Case Management page" style="width:100%;" >}}
 
 ## Overview

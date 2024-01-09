@@ -8,6 +8,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/logging-without-limits/"
   tag: "Blog"
   text: Learn more about Logging without Limits*
+- link: "https://www.datadoghq.com/blog/log-pipeline-scanner-datadog/"
+  tag: "Blog"
+  text: "Investigate your log processing with the Datadog Log Pipeline Scanner"
 - link: "/logs/guide/"
   tag: "Guide"
   text: Additional guides about logging with Datadog

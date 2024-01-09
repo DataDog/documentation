@@ -4,6 +4,9 @@ aliases:
 - /tracing/setup/android
 - /tracing/trace_collection/dd_libraries/android
 description: Collect traces from your Android applications.
+code_lang: android
+type: multi-code-lang
+code_lang_weight: 80
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: GitHub
@@ -12,7 +15,7 @@ further_reading:
   tag: Documentation
   text: Explore your services, resources, and traces
 kind: documentation
-title: Android Trace Collection
+title: Tracing Android Applications
 ---
 Send [traces][1] to Datadog from your Android applications with [Datadog's `dd-sdk-android-trace` client-side tracing library][2] and leverage the following features:
 

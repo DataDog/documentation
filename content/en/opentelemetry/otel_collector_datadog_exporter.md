@@ -28,11 +28,11 @@ The OpenTelemetry Collector is a vendor-agnostic agent process for collecting an
 
 To run the OpenTelemetry Collector along with the Datadog Exporter:
 
-### 1. Download the OpenTelemetry Collector
+### Step 1 - Download the OpenTelemetry Collector
 
 Download the latest release of the OpenTelemetry Collector Contrib distribution, from [the project's repository][3].
 
-### 2. Configure the Datadog Exporter
+### Step 2 - Configure the Datadog Exporter
 
 To use the Datadog Exporter, add it to your [OpenTelemetry Collector configuration][4]. Create a configuration file and name it `collector.yaml`. Use the example file which provides a basic configuration that is ready to use after you set your Datadog API key as the `DD_API_KEY` environment variable:
 
@@ -119,7 +119,7 @@ The exact configuration of the batch processor depends on your specific workload
 
 [This fully documented example configuration file][8] illustrates all possible configuration options for the Datadog Exporter. There may be other options relevant to your deployment, such as `api::site` or the ones on the `host_metadata` section.
 
-### 3. Configure your application
+### Step 3 - Configure your application
 
 To get better metadata for traces and for smooth integration with Datadog:
 
@@ -127,7 +127,7 @@ To get better metadata for traces and for smooth integration with Datadog:
 
 - **Apply [Unified Service Tagging][10]**: Make sure you've configured your application with the appropriate resource attributes for unified service tagging. This ties Datadog telemetry together with tags for service name, deployment environment, and service version. The application should set these tags using the OpenTelemetry semantic conventions: `service.name`, `deployment.environment`, and `service.version`.
 
-### 4. Configure the logger for your application
+### Step 4 - Configure the logger for your application
 
 {{< img src="logs/log_collection/otel_collector_logs.png" alt="A diagram showing the host, container, or application sending data to the filelog receiver in the collector and the Datadog Exporter in the collector sending the data to the Datadog backend" style="width:100%;">}}
 
@@ -244,7 +244,7 @@ spec:
 ```
 </details>
 
-### 5. Run the collector
+### Step 5 - Run the collector
 
 {{< tabs >}}
 {{% tab "On a host" %}}
@@ -258,6 +258,7 @@ otelcontribcol_linux_amd64 --config collector.yaml
 {{% /tab %}}
 
 {{% tab "Docker (localhost)" %}}
+
 To run the OpenTelemetry Collector as a Docker image and receive traces from the same host:
 
 1. Choose a published Docker image such as [`otel/opentelemetry-collector-contrib`][1].
@@ -276,7 +277,9 @@ To run the OpenTelemetry Collector as a Docker image and receive traces from the
 
 
 [1]: https://hub.docker.com/r/otel/opentelemetry-collector-contrib/tags
+
 {{% /tab %}}
+
 {{% tab "Docker (other containers)" %}}
 
 To run the OpenTelemetry Collector as a Docker image and receive traces from other containers:
@@ -310,6 +313,7 @@ To run the OpenTelemetry Collector as a Docker image and receive traces from oth
    ```
 
 {{% /tab %}}
+
 {{% tab "Kubernetes (DaemonSet)" %}}
 
 Using a DaemonSet is the most common and recommended way to configure OpenTelemetry collection in a Kubernetes environment. To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes infrastructure:
@@ -373,7 +377,9 @@ Using a DaemonSet is the most common and recommended way to configure OpenTeleme
 [6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/roles.yaml
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/deployment.yaml#L21-L22
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/deployment.yaml#L24-L32
+
 {{% /tab %}}
+
 {{% tab "Kubernetes (Gateway)" %}}
 
 To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gateway deployment:
@@ -496,7 +502,9 @@ To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gatew
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/configmap.yaml#L30-L39
 [12]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/configmap.yaml#L27
 [13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/e79d917/processor/k8sattributesprocessor/doc.go#L196-L220
+
 {{% /tab %}}
+
 {{% tab "Kubernetes (Operator)" %}}
 
 To use the OpenTelemetry Operator:
@@ -571,13 +579,12 @@ To use the OpenTelemetry Operator:
              exporters: [datadog]
    ```
 
-
-
-
 [1]: https://github.com/open-telemetry/opentelemetry-operator#readme
 [2]: /opentelemetry/otel_collector_datadog_exporter/?tab=kubernetesdaemonset#4-run-the-collector
 [3]: /opentelemetry/otel_collector_datadog_exporter/?tab=kubernetesgateway#4-run-the-collector
+
 {{% /tab %}}
+
 {{% tab "Alongside the Agent" %}}
 
 To use the OpenTelemetry Collector alongside the Datadog Agent:
@@ -636,8 +643,11 @@ To use the OpenTelemetry Collector alongside the Datadog Agent:
 [5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/configmap.yaml#L15
 [6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml#L33
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/2c32722e37f171bab247684e7c07e824429a8121/exporter/datadogexporter/examples/k8s-chart/configmap.yaml#L30-L39
+
 {{% /tab %}}
+
 {{< /tabs >}}
+
 
 ### Logs and traces correlation
 

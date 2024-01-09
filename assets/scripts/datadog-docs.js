@@ -37,7 +37,7 @@ const scrollActiveNavItemToTop = () => {
 
         if (sideNavActiveMenuItem) {
             const distanceToTop = sideNavActiveMenuItem.offsetTop;
-            leftSideNav.scrollTop = distanceToTop - 100;
+            leftSideNav.scrollTop = distanceToTop - 110;
         }
     }
 };
@@ -290,6 +290,10 @@ function navClickEventHandler(event) {
     if (event.target !== this) {
         // Get the targets parent li
         const parentli = event.target.closest('li');
+
+        if (!parentli) {
+            return;
+        }
 
         // Get the a
         const a = parentli.querySelector('a');
