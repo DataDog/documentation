@@ -2,6 +2,10 @@
 title: Threat Intelligence
 kind: documentation
 description: "Threat Intelligence at Datadog"
+further_reading:
+  - link: "/security/application_security/threats/threat-intelligence/"
+    tag: "documentation"
+    text: "ASM Threat Intelligence"
 ---
 
 ## Overview
@@ -33,7 +37,7 @@ IP addresses represent the most volatile element in threat intelligence, often c
 
 With threat intelligence, reputation is key, but it must be weighed alongside other evidence. Relying solely on IP and domain intelligence for blocking traffic is not recommended, with few exceptions. A balanced, evidence-based approach is essential.
 
-Threat intelligence used in Detection Rules should reference the Datadog keys such as category and intent. Other keys should not be used.
+Threat intelligence used in [Detection Rules][1] should reference the Datadog keys such as category and intent. Other keys should not be used.
 
 ## Transparency in Threat Intelligence 
 Datadog ensures transparency by providing external links to external threat intelligence sources associated with a detection. Threat intelligence curated by Datadog is ingested into the Datadog platform for enrichment and detection. Datadog does not send customer data to threat intelligence sources.
@@ -41,7 +45,7 @@ Datadog ensures transparency by providing external links to external threat inte
 The detections and enrichments are accessible in the UI and event JSON.
 
 ## Threat Intelligence Facets
-Sources, categories, and intents are available as facets and filters on relevant product Explorers. 
+Sources, categories, and intents are available as facets and filters on relevant product explorers. 
 
 ### Threat Intelligence Sources
 
@@ -80,9 +84,10 @@ Sources, categories, and intents are available as facets and filters on relevant
 | application packages versions | (example_package, 1.0.0) | Identify malicious packages downloaded from PyPi |
 | file hashes [SHA1, SHA256] | 5f7afeeee13aaee6874a59a510b75767156f75d14db0cd4e1725ee619730ccc8 | Identify a distinct file associated with malware or compromise |
 
+**Note**: Threat intelligence sources and categories are not configurable at this time. 
 
+## Further Reading
 
-Threat intelligence sources and categories are not customer configurable at this time. For specific product implementations see:
+{{< partial name="whats-next/whats-next.html" >}}
 
-[ASM](https://docs.datadoghq.com/security/application_security/threats/threat-intelligence/)
-
+[1]:/security/detection_rules/
