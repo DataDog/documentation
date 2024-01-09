@@ -58,7 +58,6 @@ If you cannot scope processes down to the granularity you would like using tags,
 | `foo AND bar` | Matches any process whose command line contains both `foo` and `bar` |
 | `foo AND NOT bar` | Matches any process whose command line contains `foo` but not `bar`. |
 | `foo OR bar` | Matches any process that contains `foo` or `bar`. |
-| `foo bar` | Same as above. |
 | `foo or NOT bar` | Matches any process that contains `foo` or does not contain `bar`. |
 
 #### Alert grouping
