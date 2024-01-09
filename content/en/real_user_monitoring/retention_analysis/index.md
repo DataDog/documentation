@@ -73,3 +73,4 @@ Retention is limited to 30 days unless your organization is configured to retain
 [2]: /real_user_monitoring/browser/data_collected/#view-attributes
 [3]: /real_user_monitoring/browser/data_collected/#action-timing-metrics
 [4]: /real_user_monitoring/browser/advanced_configuration#user-session
+[5]: /help
