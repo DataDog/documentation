@@ -2661,6 +2661,11 @@ main:
     identifier: cd_deployments_argocd
     parent: cd_deployments
     weight: 101
+  - name: CI Providers
+    url: continuous_delivery/deployments/ciproviders
+    identifier: cd_deployments_ciproviders
+    parent: cd_deployments
+    weight: 102
   - name: Search and Manage
     url: continuous_delivery/search
     identifier: cd_search
