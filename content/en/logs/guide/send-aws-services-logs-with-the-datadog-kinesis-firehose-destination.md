@@ -83,7 +83,7 @@ For example:
         "kinesis:PutRecord",
         "kinesis:PutRecords"
       ],
-      "Resource": "arn:aws:firehose:us-east-1:123456789012:deliverystream/<DELIVERY_STREAM>"
+      "Resource": "arn:aws:firehose:<REGION>:<ACCOUNT_ID>:deliverystream/<DELIVERY_STREAM>"
     }
   ]
 }
