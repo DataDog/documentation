@@ -144,7 +144,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 [2]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
-1. Download the [Helm chart][1] for AWS EKS.
+1. Download the [Helm chart values file][1] for AWS EKS.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
 
@@ -163,7 +163,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 [1]: /resources/yaml/observability_pipelines/datadog/aws_eks.yaml
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-1. Download the [Helm chart][1] for Azure AKS.
+1. Download the [Helm chart values file][1] for Azure AKS.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
 
@@ -182,7 +182,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 [1]: /resources/yaml/observability_pipelines/datadog/azure_aks.yaml
 {{% /tab %}}
 {{% tab "Google GKE" %}}
-1. Download the [Helm chart][1] for Google GKE.
+1. Download the [Helm chart values file][1] for Google GKE.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
 

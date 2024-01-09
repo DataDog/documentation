@@ -159,7 +159,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 [2]: /resources/yaml/observability_pipelines/splunk/pipeline.yaml
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
-1. Download the [Helm chart][1] for AWS EKS.
+1. Download the [Helm chart values file][1] for AWS EKS.
 
 2. In the Helm chart, replace `datadog.apiKey` and `datadog.pipelineId` with their respective values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
     ```yaml
@@ -195,7 +195,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 [1]: /resources/yaml/observability_pipelines/splunk/aws_eks.yaml
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-1. Download the [Helm chart][1] for Azure AKS.
+1. Download the [Helm chart values file][1] for Azure AKS.
 
 2. In the Helm chart, replace `datadog.apiKey` and `datadog.pipelineId` with their respective values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
     ```yaml
@@ -231,7 +231,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 [1]: /resources/yaml/observability_pipelines/splunk/azure_aks.yaml
 {{% /tab %}}
 {{% tab "Google GKE" %}}
-1. Download the [Helm chart][1] for Google GKE.
+1. Download the [Helm chart values file][1] for Google GKE.
 
 2. In the Helm chart, replace `datadog.apiKey` and `datadog.pipelineId` with their respective values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
     ```yaml

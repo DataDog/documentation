@@ -205,7 +205,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 [3]: https://docs.aws.amazon.com/general/latest/gr/rande.html#regional-endpoints
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
-1. Download the [Helm chart][1] for AWS EKS.
+1. Download the [Helm chart values file][1] for AWS EKS.
 
 2. In the Helm chart, replace these placeholders with the following information:
     - `datadog.apiKey` with your Datadog API key. 
