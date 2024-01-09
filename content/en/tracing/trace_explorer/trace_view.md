@@ -86,7 +86,7 @@ To expand or collapse span descendants, click the plus or minus button on any ro
 
 {{< img src="tracing/trace_view/map.png" alt="Map" style="width:90%;">}}
 
-Displays a service-level representation of the trace, with arrows showing the flow of calls between services. Particularly useful for getting a high level overview of the trace and the order in which services are called.
+Displays a service-level representation of the trace, with arrows showing the flow of calls between services. This visualization is useful for getting a high-level overview of the trace and the order in which services are called.
 
 Hover over a service to highlight its parent and children, and click on it to focus on the service entry span.
 
