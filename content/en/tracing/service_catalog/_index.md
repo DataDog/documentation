@@ -9,6 +9,9 @@ further_reading:
 - link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"
   text: "Registering Services with the Service Definition API"
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_definition_yaml"
+  tag: "Terraform"
+  text: "Create and manage service definitions with Terraform"
 - link: "/tracing/service_catalog/guides/understanding-service-configuration"
   tag: "Guide"
   text: "Understanding Your Service Configuration"
@@ -27,6 +30,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/github-actions-service-catalog/"
   tag: "Blog"
   text: "I use GitHub Ac­tions for Data­dog's Service Catalog, and you should, too"
+- link: "https://www.datadoghq.com/blog/shift-left-datadog-service-catalog/"
+  tag: "Blog"
+  text: "Improve your shift-left observability with the Datadog Service Catalog"
 algolia:
   tags: ['service catalog']
 ---
@@ -35,23 +41,31 @@ algolia:
 
 ## Overview
 
-Datadog [Service Catalog][1] is a centralized place to access important information about all services in your organization. Achieve end-to-end service ownership at scale, get real-time performance insights, detect and address reliability and security risks, and manage application dependencies all in one place. Access team communications tools such as Slack, source control such as GitHub, Datadog dashboards, and Datadog views that receive and monitor telemetry data for each service.
+Datadog [Service Catalog][1] provides a consolidated view of your services, combining ownership metadata, performance insights, security analysis, cost allocation, and much more. It makes it easy for organizations to achieve end-to-end service ownership at scale, get real-time performance insights, detect and address reliability and security risks, and manage application dependencies all in one place. 
 
-The Service Catalog includes services that do not actively emit trace metrics, and you do not need to instrument your service for it to appear. Service Catalog also automatically includes services detected by USM and RUM. Service Catalog supports a one hour look-back window. If you do not see your APM services in Service Catalog, they most likely were not sending active trace metrics during the last hour. 
+### Use cases
 
-The Service Catalog is useful for:
-- Training new developers and site reliability engineers by providing a clear view of all services, their structures, and links to more information.
-- Improving the on-call experience for everyone by establishing correct ownership information and communication channels, alongside easy access to monitoring and troubleshooting details.
-- Embedding links to solutions and troubleshooting tools such as runbooks and documentation directly in the observability tooling engineers are already using.
-- Speeding incident recovery by increasing confidence and simplifying locating owners of upstream and downstream services and dependencies.
-- Detecting which services aren't reporting observability data or having that data monitored.
-- Facilitating the practice of good tagging to optimize cross-telemetry insights.
+#### Service discovery
+- Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries.
+- As you instrument more applications across your environments, they are automatically added to the Service Catalog.
+
+#### Governance 
 - Providing engineering leadership with a high-level view of reliability practices across teams and services.
-- Spotting issues like missing SLOs, monitors, or services without ownership.
 - Proactively identifying services exposed to application attacks.
 - Reducing application risks by finding and fixing known security vulnerabilities in the dependencies of your services.
-- Visualizing how changes to infrastructure can affect costs over time. 
 - Understanding trends and identifying inefficiencies in the costs related to your services.
+
+#### Evaluate monitoring coverage  
+- Detecting which services aren’t reporting observability data or having that data monitored.
+- Facilitating [tagging best practices][6] and checking for recommended setup configurations to optimize [cross-telemetry insights][7].
+- Spotting issues like missing SLOs, monitors, or services without ownership.
+
+#### Streamline collaboration during incidents
+- Improving the on-call experience for everyone by establishing correct ownership information and communication channels, alongside streamlined access to monitoring and troubleshooting details.
+- Training new developers and site reliability engineers by providing a clear view of all services, their structures, and links to more information.
+- Embedding links to solutions and troubleshooting tools such as runbooks and documentation directly in the observability tooling engineers are already using.
+- Speeding incident recovery by increasing confidence and simplifying locating owners of upstream and downstream services and dependencies.
+
 
 ## Getting started
 
@@ -120,3 +134,5 @@ The services and resources statistics, and span summaries on the **Service List*
 [3]: /account_management/rbac/permissions/
 [4]: /developers/guide/data-collection-resolution-retention/
 [5]: /tracing/service_catalog/adding_metadata#service-definition-schema-v22
+[6]: https://www.datadoghq.com/blog/tagging-best-practices/#assign-owners-to-services-with-tags
+[7]: /tracing/other_telemetry/

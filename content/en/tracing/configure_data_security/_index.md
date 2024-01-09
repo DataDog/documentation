@@ -134,8 +134,7 @@ The table below describes the default behavior of each language tracing library 
 
 {{% tab "Go" %}}
 
-**Note:** Client IPs are not collected by default and must be enabled. Database statements and
-Client URIs are obfuscated by the Datadog Agent.
+**Note:** Client IPs are not collected by default and must be enabled. Database statements are obfuscated by the Datadog Agent.
 
 | Category                | Collected                       | Obfuscated                      |
 |:------------------------|:-------------------------------:|:-------------------------------:|
@@ -145,7 +144,7 @@ Client URIs are obfuscated by the Datadog Agent.
 | Database statements     | <i class="icon-check-bold"></i> |                                 |
 | Geographic location     |                                 |                                 |
 | Client URI path         | <i class="icon-check-bold"></i> |                                 |
-| Client URI query string | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
+| Client URI query string | <i class="icon-check-bold"></i> |                                 |
 | Server URI path         | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | Server URI query string | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |
 | HTTP body               | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |

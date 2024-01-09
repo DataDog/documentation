@@ -21,6 +21,10 @@ You can add metadata to existing Service Catalog entries through the Datadog UI,
 
 ## Metadata structure and supported versions
 
+{{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for metadata schema v3.0!" >}}
+v3.0 adds a <code>kind</code> field that supports schemas for additional component types including applications, internal and external libraries, queues, and datastores. Any components within an <code>application</code> implicitly inherit its metadata. Furthermore, this version supports manually declaring dependency relationships, in addition to the auto-detected topology through Distributed Tracing and Universal Service Monitoring.
+{{< /callout >}}
+
 Service Catalog uses service definition schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted and you can view warnings in the **Definition** tab on the side panel for any selected services. 
 
 There are three supported versions of the schema:
@@ -249,6 +253,26 @@ As an alternative to the GitHub integration and Terraform, you can use an open-s
 
 This GitHub Action allows you to register your services with the Service Catalog using a GitHub Action, with full control over when this information is sent to Datadog, and implement other compliance checks unique to your organization.
 
+## Build custom extensions 
+
+The `extensions` field is supported in all versions including v2. You can incorporate this custom field into deployment processes to standardize and codify best practices.
+
+{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+schema-version: v2.2
+dd-service: web-store
+team: shopist
+...
+extensions:
+  shopist.com/release-scheduler:
+    release-manager:
+      slack: "release-train-shopist"
+      schedule: "* * * * *"
+      env:
+        - name: "staging"
+          ci_pipeline: "//domains/examples/apps/hello-joe/config/k8s:release-staging"
+          branch: "hello-joe/staging"
+          schedule: "* * * * 1"
+{{< /code-block >}}
 
 
 ## Further reading

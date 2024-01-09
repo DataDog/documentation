@@ -462,12 +462,10 @@ link_checks:on-schedule:
 
 # template for what runs in pa11y to avoid duplication
 .pa11y_live_template: &pa11y_live_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:pa11y-17812916
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:pa11y-25121683
   tags: ["runner:docker"]
   stage: post-deploy
   cache: []
-  dependencies:
-    - build_live
   variables:
     GIT_STRATEGY: none
   script:
@@ -480,6 +478,8 @@ link_checks:on-schedule:
 
 run_pa11y:schedule:
   <<: *pa11y_live_template
+  dependencies:
+    - build_live
   rules:
     - if: $CI_COMMIT_BRANCH == "master" && $CI_PIPELINE_SOURCE == "schedule"
       when: always

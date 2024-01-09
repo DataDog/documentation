@@ -22,9 +22,11 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-The Datadog Profiler requires Go 1.12+.
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][15].
 
-For [Code Hotspots][2] and [Endpoint Profiling][3], use Go version 1.18+ and `dd-trace-go` version 1.37.0+.
+The Datadog Profiler requires Go 1.19+.
+
+For [Code Hotspots][2] and [Endpoint Profiling][3], use `dd-trace-go` version 1.37.0+.
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
@@ -141,3 +143,4 @@ The [Getting Started with Profiler][14] guide takes a sample service with a perf
 [12]: /getting_started/tagging/unified_service_tagging
 [13]: https://pkg.go.dev/github.com/ianlancetaylor/cgosymbolizer#pkg-overview
 [14]: /getting_started/profiler/
+[15]: /profiler/enabling/supported_versions/

@@ -21,9 +21,9 @@ Follow [How's my SSL? API][2] instructions to check the client of your choice.
 Modern browsers have had support for TLS v1.2 for a while. See the "Can I use..." [compatibility matrix][3] to determine if your specific browser and version are affected.
 ## Agent support
 
-### Agent v6 and v7
+### Agent v6 & v7
 
-All versions of Agent v6 and v7 support TLS v1.2.
+All versions of Agent v6 & v7 support TLS v1.2.
 
 ### Agent v5
 

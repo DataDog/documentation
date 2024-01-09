@@ -44,6 +44,7 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Mobile RUM:" >}}
+    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-deprecation-policy" >}}RUM Mobile SDKs Deprecation Policy{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}Upgrade the RUM Mobile SDKs{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}Use multiple instances of the Mobile SDK{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -1,5 +1,5 @@
 ---
-title: Setting Up CSM Pro
+title: Setting up CSM Pro
 kind: documentation
 further_reading:
   - link: "/security/cloud_security_management/setup"
@@ -48,8 +48,6 @@ To enable resource scanning for your cloud accounts for CSM Misconfigurations, y
 
 The following instructions enables the container image metadata collection and [Software Bill of Materials (SBOM)][10] collection in the Datadog Agent for CSM Vulnerabilities. This allows you to scan the libraries in container images to detect vulnerabilities. Vulnerabilities are evaluated and and scanned against your containers every hour.
 
-**Note**: CSM Vulnerabilities is not available for AWS Fargate or Windows environments.
-
 ### Follow the in-app instructions (recommended)
 
 To enable CSM Vulnerabilities on the Agent for your containers, navigate to the [**Cloud Security Management Setup** page][5] and click **Hosts and containers**.
@@ -62,25 +60,11 @@ Alternatively, use the following examples to enable CSM Vulnerabilities on your 
 
 
 {{< tabs >}}
-{{% tab "Kubernetes (Helm)" %}}
-
-If you are using helm version `>= 3.46.0`, image collection is [enabled by default][1].</br>
-Or, add the following to your `values.yaml` helm configuration file:
-
-```yaml
-datadog:
-  containerImageCollection:
-    enabled: true
-  sbom:
-    containerImage:
-      enabled: true
-```
-[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L651
-{{% /tab %}}
 
 {{% tab "Kubernetes (Operator)" %}}
 
-Add the following to the spec section of your `values.yaml` file:
+Image collection is enabled by default with Datadog Operator version `>= 1.3.0`.</br>
+Or, add the following to the spec section of your `values.yaml` file:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -96,6 +80,22 @@ spec:
         enabled: true
 ```
 
+{{% /tab %}}
+
+{{% tab "Kubernetes (Helm)" %}}
+
+If you are using helm version `>= 3.46.0`, image collection is [enabled by default][1].</br>
+Or, add the following to your `values.yaml` helm configuration file:
+
+```yaml
+datadog:
+  containerImageCollection:
+    enabled: true
+  sbom:
+    containerImage:
+      enabled: true
+```
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L651
 {{% /tab %}}
 
 {{% tab "ECS EC2" %}}

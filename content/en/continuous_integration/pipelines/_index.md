@@ -1,5 +1,5 @@
 ---
-title: Pipeline Visibility in Datadog
+title: CI Pipeline Visibility in Datadog
 kind: documentation
 aliases:
   - /continuous_integration/pipelines_setup/
@@ -53,9 +53,9 @@ While the concept of a CI pipeline may vary depending on your provider, see how 
 | Datadog | GitHub Actions |
 |---|---|
 | Pipeline | Workflow |
-| Stage | Job |
-| Job | Step |
-| Step | Action |
+| Stage |  |
+| Job | Job |
+| Step | Step |
 
 {{% /tab %}}
 {{% tab "GitLab" %}}
