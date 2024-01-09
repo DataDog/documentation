@@ -34,14 +34,12 @@ You can create workflows or edit existing workflows from the [Workflow Automatio
 
 ## Create a workflow with AI
 
-{{< callout btn_hidden="true">}}
-Auto Generate is in beta.
-{{< /callout >}}
+<div class="alert alert-info">Auto Generate is in beta.</a></div>
 
 If you're not sure where to start, you can automatically generate a workflow with AI. To generate a workflow:
 
 1. From the [Workflow Automation][1] page, click **New Workflow**.
-1. Click the **Auto Generate** AI button.
+1. Click **Auto Generate**.
 1. Enter a detailed description for your workflow. Specify the integrations and actions you'd like to use.
 1. Click the up arrow (**↑**) to create your app.
 
@@ -89,26 +87,19 @@ Published workflows accrue costs based on workflow executions. For more informat
 
 Creating useful workflows sometimes necessitates passing data from one step to another, or configuring steps that act on data from the workflow's trigger source. You can perform this kind of data interpolation with context variables.
 
-Context variables come in the following varieties:
-- A small collection of standard **workflow variables** are present in all workflows.
+- **Workflow variables** give you information about the current workflow:
+    - `WorkflowName`: The name of the workflow.
+    - `WorkflowId`: The ID of the workflow.
+    - `InstanceId`: The ID of the execution instance of the workflow.
 - Some steps come with built-in **step output variables** that allow you to pass data from that step to a subsequent step in your workflow.
 - **Trigger variables** are passed into the workflow by the triggering event.
 - **Source object variables** are passed into the workflow by the triggering event.
 
 The **Context Variables** tab for each step provides a map of all context variables available to that step.
 
-{{< img src="service_management/workflows/context-variables3.png" alt="The Context Variables tab" >}}
+{{< img src="service_management/workflows/context-variables4.png" alt="The Context Variables tab" >}}
 
 Access a context variable in a step by enclosing it in double braces (`{{`). To access fields within context variables, use [Handlebars expression syntax][2].
-
-{{< img src="service_management/workflows/use-context-variable1.png" alt="Use double fences in a supported text field to insert a context variable" >}}
-
-### Workflow variables
-
-All workflows have three standard variables:
-- `WorkflowName`: The name of the workflow. Accessed with `{{ WorkflowName }}`.
-- `WorkflowId`: The workflow ID. Accessed with `{{ WorkflowId }}`.
-- `InstanceId`: Each workflow run receives a unique instance ID. Access the instance ID with `{{ InstanceId }}`.
 
 ### Step output variables
 
@@ -120,7 +111,7 @@ Some steps create outputs that are available to subsequent steps in a workflow. 
 
 If you're not sure what variable you're looking for, Datadog suggests existing step outputs as you type. Alternatively, you can consult the [Context Variables](#context-variables) tab for a list of available variables.
 
-{{< img src="service_management/workflows/step-outputs.png" alt="Datadog suggests existing step outputs as you type." style="width:100%;" >}}
+{{< img src="service_management/workflows/step-outputs1.png" alt="Datadog suggests existing step outputs as you type." style="width:100%;" >}}
 
 ### Input parameters
 
@@ -136,7 +127,7 @@ To add an input parameter:
 
 To reference the input parameter in a step, use the syntax `{{ Trigger.<parameter name>}}`. For example, to reference an input parameter named `user`, use `{{Trigger.user}}`.
 
-{{< img src="service_management/workflows/input-parameter1.png" alt="Adding an input parameter to a step automatically adds it to the workflow" style="width:100%;">}}
+{{< img src="service_management/workflows/input-parameter2.png" alt="Adding an input parameter to a step automatically adds it to the workflow" style="width:100%;">}}
 
 The **Input Parameters** section displays the names of all existing input parameters together with a counter. Hover over a counter to see which steps are using the parameter.
 
