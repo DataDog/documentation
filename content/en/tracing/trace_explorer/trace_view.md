@@ -79,7 +79,7 @@ On each row (that is, per span):
 * Absolute and relative span duration information
 * (when applicable) An error icon or HTTP status code
 
-Expand/collapse span descendants by clicking the plus/minus button on each row, and expand all spans with the plus button to the left of the timescale.
+To expand or collapse span descendants, click the plus or minus button on any row. To expand all spans, click the plus button to the left of the timescale.
 
 {{% /tab %}}
 {{% tab "Map" %}}
