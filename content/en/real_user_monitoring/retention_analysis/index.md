@@ -4,7 +4,7 @@ kind: documentation
 ---
 
 ## Overview
-Retention Analysis allows you to measure how often users are successfully returning to a page or action. By tracking user retention over time, you can gain insights around overall user satisfaction.
+Retention Analysis allows you to measure how often users are successfully returning to a page or action. By tracking user retention over time, you can gain insights into overall user satisfaction.
 
 A cohort is a group of users who participate in an initial event, such as clicking a link. A user in the cohort is considered retained if they subsequently complete a return event, such as clicking the same link again or clicking a **Proceed to Payment** button. Only views and actions can act as events.
 
