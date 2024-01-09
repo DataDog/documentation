@@ -27,7 +27,7 @@ further_reading:
 
 View an individual [trace][1] to see all of its [spans][2] and associated metadata. Each trace can be visualized as either a Flame Graph, Span List, Waterfall, or Map.
 
-The trace header displays critical trace information, including the root span's service name, resource name, trace ID, end-to-end trace duration, and the trace start datetime. To retain a trace indefinitely, click \"Open Full Page\" and save the URL.
+The trace header displays critical trace information, including the root span's service name, resource name, trace ID, end-to-end trace duration, and the trace start datetime. To retain a trace indefinitely, click **Open Full Page** and save the URL.
 
 {{< img src="tracing/trace_view/trace_header.png" alt="Trace header" style="width:90%;">}}
 
