@@ -19,9 +19,9 @@ further_reading:
 ---
 
 {{< callout btn_hidden="true" >}}
-  Error Tracking for Logs is currently in beta.
+  Error Tracking for Logs is in beta.
 
-  We will begin billing in March 2024. The pricing plan will start at $0.25 per 1k error events, per month.
+  Billing begins in March 2024. The pricing plan starts at $0.25 per 1k error events, per month.
 {{< /callout >}} 
 
 ## Overview
