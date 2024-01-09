@@ -137,10 +137,10 @@ Attach the new S3 policy to the Datadog integration role.
 
 ## Cost types
 
-Visualize your ingested data using out of the box cost types. Datadog's cloud cost metric names contain various terms that describe how they are calculated.
+Visualize your ingested data using out of the box cost types. Cloud cost metric names contain various terms that describe how they are calculated.
 
 ### Amortized vs. unblended costs
-**Amortized** cost metrics, distribute pre-payments (like up-front savings plans fees) across the entire discount term (accrual basis). As savings plans are applied to covered usage, the costs for that savings plan appear as usage charges. The unused portion appears on the accrual date. As a caveat of AWS reporting, the unused portion of an RI Fee always appears on the first of the month. That is, RI Fees are not amortized across the billing period.
+**Amortized** cost metrics distribute pre-payments (like up-front savings plans fees) across the entire discount term (accrual basis). As savings plans are applied to covered usage, the costs for that savings plan appear as usage charges. The unused portion appears on the accrual date. As a caveat of AWS reporting, the unused portion of an RI Fee always appears on the first of the month. That is, RI Fees are not amortized across the billing period.
 
 **Unblended** cost metrics show all charges on the date that they were incurred (cash basis). These metrics match the AWS invoice exactly.
 
@@ -163,10 +163,10 @@ In general:
 
 | Metric               | Description           |
 | -------------------- | --------------------- |
-| `aws.cost.net.amortized.shared.resources.allocated` | All of your AWS net amortized costs, with additional breakdown and insights for container workloads. Requires [container cost allocation][11].|
+| `aws.cost.net.amortized.shared.resources.allocated` | All of your AWS net amortized costs, with additional breakdowns and insights for container workloads. Requires [container cost allocation][11].|
 | `aws.cost.net.amortized` | Net amortized costs (accrual basis), without container cost breakdowns. |
 | `aws.cost.net.unblended` | Net unblended costs (cash basis). Matches the AWS invoice, with specialized discounts pre-calculated within usage costs. |
-| `aws.cost.amortized.shared.resources.allocated` | All of your AWS amortized costs, with additional breakdown and insights for container workloads. Requires [container cost allocation][11].|
+| `aws.cost.amortized.shared.resources.allocated` | All of your AWS amortized costs, with additional breakdowns and insights for container workloads. Requires [container cost allocation][11].|
 | `aws.cost.amortized` | Amortized costs (accrual basis), without container cost breakdowns. |
 | `aws.cost.unblended` | Unblended costs (cash basis). Matches the AWS invoice. |
 | `aws.cost.ondemand`  | Costs based on the list rate provided by AWS, excluding all savings plans, reservations, discounts, taxes, and fees. |
@@ -176,10 +176,10 @@ In general:
 Datadog adds tags to the ingested cost data using many sources, described in detail below.
 
 - Cost and Usage Report columns
-- AWS Resource Tags
-- AWS Account Tags
-- AWS Integration Tags
-- Out of the Box Tags
+- AWS Resource tags
+- AWS Account tags
+- AWS Integration tags
+- Out of the box tags
 - Container workload tags
 - Tag pipelines
 
@@ -193,17 +193,17 @@ To ensure consistency, Datadog normalizes tag keys using underscores and lower c
 
 |CUR Column|CUR Value|Cloud Cost Tag|
 |---|---|---|
-|lineItem/resourceId|i-02261970f1b34be4f|line_item/resource_id:i-02261970f1b34be4f|
+|lineItem/resourceId|i-12345678a9b12cd3e|line_item/resource_id:i-12345678a9b12cd3e|
 |product/region|us-east-1|product/region:us-east-1|
 |product/usagetype|DataTransfer-Regional-Bytes|product/usagetype:DataTransfer-Regional-Bytes|
 
 ### AWS resource tags
 
-AWS resource tags are [user-defined tags][12] that appear in the AWS console when viewing a particular resource, like an EC2 instance or S3 bucket.
+[AWS resource tags][12] are user-defined tags that appear in the AWS console when viewing a particular resource, like an EC2 instance or S3 bucket.
 
 When the Datadog AWS integration is enabled, Datadog automatically collects resource tags for most AWS resources. These tags are applied to all costs found in the CUR for a given resource.
 
-If the AWS integration is not enabled, you can enable resource tag enrichment by activating [cost allocation tags][13] in AWS billing. This feature allows you to select a subset of resource tag keys to include as columns in the AWS CUR.
+If the AWS integration is not enabled, you can enable resource tag enrichment by activating [cost allocation tags][13] in AWS billing. This allows you to select a subset of resource tag keys to include as columns in the AWS CUR. Datadog will automatically include those columns as tags when processing the CUR.
 
 ### AWS account tags
 AWS Organizations supports [user-defined tags][14] on organizational units and accounts. Datadog automatically fetches and applies these tags to cost data associated with those accounts.
@@ -270,13 +270,11 @@ The following out-of-the-box tags are available:
 | elb (application, gateway, network) | `loadbalancer`|
 | elb (all other costs) | `loadbalancername` |
 
-For tags on containerized environments, see [Container Cost Allocation][11].
-
 ### Container orchestrators
 
 Container cost allocation adds tags from the workloads incurring cost. This includes tags from Kubernetes pods and nodes and ECS tasks and containers.
 
-_Requires [container cost allocation][11]._
+_Requires [container cost allocation][11], and applies only to shared.resources.allocated metrics._
 
 ### Tag pipelines
 
