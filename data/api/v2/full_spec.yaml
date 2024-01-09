@@ -35149,26 +35149,46 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/logs_to_metrics/
   name: Logs Metrics
-- description: "**Note: This endpoint is in public beta. If you have any feedback,
-    contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nTo grant read
-    access on log data at all, you must grant the `logs_read_data` permission.\nFrom
-    there you can limit what data a role grants read access to by associating a Restriction
-    Query with that role.\n\nA Restriction Query is a logs query that restricts which
-    logs the `logs_read_data` permission grants read access to.\nFor users whose roles
-    have Restriction Queries, any log query they make only returns those log events
-    that also match\none of their Restriction Queries. This is true whether the user
-    queries log events from any log-related feature, including\nthe log explorer,
-    Live Tail, re-hydration, or a dashboard widget.\n\nRestriction Queries currently
-    only support use of the following components of log events:\n\n- Reserved attributes\n-
-    The log message\n- Tags\n\nThe recommended way to manage restricted read access
-    on log data for customers with large or complicated organizational structures\nis
-    to add a team tag to log events to indicate which team(s) own(s) them, and then
-    to scope Restriction Queries to the appropriate\nvalues of the team tag. Tags
-    can be applied to log events in many ways, and a log event can have multiple tags
-    with the same key (like team)\nand different values\u2014in this way the same
-    log event can be visible to roles whose restriction queries are scoped to different
-    team values.\n\nYou need an API and application key with Admin rights to interact
-    with this endpoint."
+- description: '**Note: This endpoint is in public beta. If you have any feedback,
+    contact [Datadog support](https://docs.datadoghq.com/help/).**
+
+
+    A Restriction Query is a logs query that restricts which logs the `logs_read_data`
+    permission grants read access to.
+
+    For users whose roles have Restriction Queries, any log query they make only returns
+    those log events that also match
+
+    one of their Restriction Queries. This is true whether the user queries log events
+    from any log-related feature, including
+
+    the log explorer, Live Tail, re-hydration, or a dashboard widget.
+
+
+    Restriction Queries currently only support use of the following components of
+    log events:
+
+
+    - Reserved attributes
+
+    - The log message
+
+    - Tags
+
+
+    To restrict read access on log data, add a team tag to log events to indicate
+    which teams own them, and then scope Restriction Queries to the relevant values
+    of the team tag. Tags can be applied to log events in many ways, and a log event
+    can have multiple tags with the same key (like team) and different values. This
+    means the same log event can be visible to roles whose restriction queries are
+    scoped to different team values.
+
+
+    You need an API and application key with Admin rights to interact with this endpoint.
+
+
+    See [How to Set Up RBAC for Logs](https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=api#restrict-access-to-logs)
+    for details on how to add restriction queries.'
   name: Logs Restriction Queries
 - description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can
     be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period
