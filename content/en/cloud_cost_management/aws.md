@@ -142,9 +142,9 @@ Visualize your ingested data using out-of-the-box cost types. Cloud cost metric 
 ### On-demand
 **On-demand** costs are the costs of usage at the public, on-demand rate published by AWS. This excludes all savings plans, reservations, discounts, taxes, and fees.
 
-These costs do not provide an accurate representation of what is paid to AWS, so it's not recommended to use this metric in most cases.
+On-demand costs do not accurately represent what you pay AWS. Do not use this metric to estimate your actual costs.
 
-### Amortized vs. unblended costs
+### Amortized and unblended costs
 **Amortized** cost metrics distribute some pre-payments (like up-front savings plan fees) across the entire discount term. This is also called _accrual basis_. As savings plans are applied to covered usage, the costs for that savings plan appear as usage charges. The unused portion appears as a fee.
 
 Not all one-time fees are amortized across the billing period. For example, the unused portion of a Reserved Instance Fee typically appears on the first of the month.
