@@ -18860,6 +18860,11 @@ components:
             over all hours in the current date all organizations.
           format: int64
           type: integer
+        apm_devsecops_host_top99p:
+          description: Shows the 99th percentile of all APM DevSecOps hosts over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
         apm_fargate_count_avg:
           description: Shows the average of all APM ECS Fargate tasks over all hours
             in the current date for all organizations.
@@ -19383,6 +19388,11 @@ components:
         apm_azure_app_service_host_top99p:
           description: Shows the 99th percentile of all Azure app services using APM
             over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        apm_devsecops_host_top99p:
+          description: Shows the 99th percentile of all APM DevSecOps hosts over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         apm_fargate_count_avg:
@@ -19921,6 +19931,11 @@ components:
         apm_azure_app_service_host_top99p_sum:
           description: Shows the 99th percentile of all Azure app services using APM
             over all hours in the current months all organizations.
+          format: int64
+          type: integer
+        apm_devsecops_host_top99p_sum:
+          description: Shows the 99th percentile of all APM DevSecOps hosts over all
+            hours in the current months for all organizations.
           format: int64
           type: integer
         apm_fargate_count_avg_sum:

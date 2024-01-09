@@ -49,47 +49,47 @@ main:
     identifier: getting_started_devsecops
     url: getting_started/devsecops
     parent: getting_started
+    weight: 3
+  - name: Serverless for AWS Lambda
+    identifier: getting_started_serverless
+    url: getting_started/serverless/
+    parent: getting_started
     weight: 4
   - name: Agent
     identifier: getting_started_agent
     url: getting_started/agent/
-    parent: getting_started
-    weight: 6
-  - name: Containers
-    identifier: getting_started_containers
-    url: getting_started/containers/
-    parent: getting_started
-    weight: 8
-  - name: Autodiscovery
-    identifier: getting_started_containers_autodiscovery
-    url: getting_started/containers/autodiscovery
-    parent: getting_started_containers
-    weight: 401
-  - name: Datadog Operator
-    identifier: getting_started_containers_operator
-    url: getting_started/containers/datadog_operator
-    parent: getting_started_containers
-    weight: 402
-  - name: Serverless for AWS Lambda
-    identifier: getting_started_serverless
-    url: getting_started/serverless/
     parent: getting_started
     weight: 5
   - name: Integrations
     identifier: getting_started_integrations
     url: getting_started/integrations/
     parent: getting_started
-    weight: 7
+    weight: 6
   - name: AWS
     identifier: getting_started_with_aws
     url: getting_started/integrations/aws/
-    weight: 701
+    weight: 601
     parent: getting_started_integrations
   - name: Terraform
     identifier: getting_started_with_terraform
     url: getting_started/integrations/terraform/
-    weight: 702
+    weight: 602
     parent: getting_started_integrations
+  - name: Containers
+    identifier: getting_started_containers
+    url: getting_started/containers/
+    parent: getting_started
+    weight: 7
+  - name: Autodiscovery
+    identifier: getting_started_containers_autodiscovery
+    url: getting_started/containers/autodiscovery
+    parent: getting_started_containers
+    weight: 701
+  - name: Datadog Operator
+    identifier: getting_started_containers_operator
+    url: getting_started/containers/datadog_operator
+    parent: getting_started_containers
+    weight: 702
   - name: Dashboards
     identifier: getting_started_dashboards
     url: getting_started/dashboards/
@@ -155,16 +155,16 @@ main:
     url: getting_started/synthetics/
     parent: getting_started
     weight: 17
-  - name: Browser Tests
-    identifier: getting_started_browser_test
-    url: getting_started/synthetics/browser_test
-    parent: getting_started_synthetics
-    weight: 1702
   - name: API Tests
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
     weight: 1701
+  - name: Browser Tests
+    identifier: getting_started_browser_test
+    url: getting_started/synthetics/browser_test
+    parent: getting_started_synthetics
+    weight: 1702
   - name: Private Locations
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
@@ -199,7 +199,7 @@ main:
     identifier: getting_started_application_vulnerability
     url: getting_started/application_security/vulnerability_management
     parent: getting_started_application_security
-    weight: 101
+    weight: 2201
   - name: Workflow Automation
     identifier: getting_started_workflow_automation
     url: getting_started/workflow_automation/
@@ -328,6 +328,11 @@ main:
     url: agent/basic_agent_usage/source/
     weight: 118
     parent: basic_agent_usage
+  - name: Architecture
+    url: agent/architecture/
+    parent: agent
+    identifier: architecture
+    weight: 2
   - name: IoT
     url: agent/iot/
     parent: agent
@@ -1127,21 +1132,46 @@ main:
     pre: metric
     parent: platform_heading
     weight: 80000
-  - name: Explorer
-    url: metrics/explorer/
+  - name: Custom Metrics
+    url: metrics/custom_metrics/
     parent: metrics_top_level
-    identifier: metrics_explorer
+    identifier: metrics_custom_metrics
     weight: 1
-  - name: Metrics Units
-    identifier: metrics_units
-    url: metrics/units/
-    parent: metrics_explorer
+  - name: Metric Type Modifiers
+    url: metrics/custom_metrics/type_modifiers/
+    parent: metrics_custom_metrics
+    identifier: metrics_modifiers
     weight: 101
-  - name: Summary
-    identifier: metrics_summary
-    url: metrics/summary/
+  - name: 'Submission - Agent Check '
+    url: metrics/custom_metrics/agent_metrics_submission/
+    parent: metrics_custom_metrics
+    identifier: dev_tools_metrics_agent
+    weight: 102
+  - name: Submission - DogStatsD
+    url: metrics/custom_metrics/dogstatsd_metrics_submission/
+    parent: metrics_custom_metrics
+    identifier: dev_tools_metrics_dogstatsd
+    weight: 103
+  - name: Submission - Powershell
+    url: metrics/custom_metrics/powershell_metrics_submission
+    parent: metrics_custom_metrics
+    identifier: dev_tools_metrics_powershell
+    weight: 104
+  - name: 'Submission - API '
+    url: api/latest/metrics/#submit-metrics
+    parent: metrics_custom_metrics
+    identifier: dev_tools_metrics_api
+    weight: 105
+  - name: Send OpenTelemetry Metrics to Datadog
+    url: opentelemetry/otel_metrics/
     parent: metrics_top_level
+    identifier: metrics_otel
     weight: 2
+  - name: OTLP Metric Types
+    url: metrics/open_telemetry/otlp_metric_types
+    parent: metrics_otel
+    identifier: metrics_otlp_types
+    weight: 201
   - name: Metrics Types
     url: metrics/types/
     parent: metrics_top_level
@@ -1152,56 +1182,31 @@ main:
     parent: metrics_top_level
     identifier: metrics_distributions
     weight: 4
-  - name: Metrics Without Limits™
-    identifier: metrics_without_limits
-    url: metrics/metrics-without-limits/
-    parent: metrics_top_level
+  - name: Metrics Units
+    identifier: metrics_units
+    url: metrics/units/
+    parent: metrics_explorer
     weight: 5
+  - name: Explorer
+    url: metrics/explorer/
+    parent: metrics_top_level
+    identifier: metrics_explorer
+    weight: 6
+  - name: Summary
+    identifier: metrics_summary
+    url: metrics/summary/
+    parent: metrics_top_level
+    weight: 7
   - name: Advanced Filtering
     url: metrics/advanced-filtering/
     parent: metrics_top_level
     identifier: metrics_advanced_filtering
-    weight: 6
-  - name: Custom Metrics
-    url: metrics/custom_metrics/
-    parent: metrics_top_level
-    identifier: metrics_custom_metrics
-    weight: 7
-  - name: Metric Type Modifiers
-    url: metrics/custom_metrics/type_modifiers/
-    parent: metrics_custom_metrics
-    identifier: metrics_modifiers
-    weight: 701
-  - name: 'Submission - Agent Check '
-    url: metrics/custom_metrics/agent_metrics_submission/
-    parent: metrics_custom_metrics
-    identifier: dev_tools_metrics_agent
-    weight: 702
-  - name: Submission - DogStatsD
-    url: metrics/custom_metrics/dogstatsd_metrics_submission/
-    parent: metrics_custom_metrics
-    identifier: dev_tools_metrics_dogstatsd
-    weight: 703
-  - name: Submission - Powershell
-    url: metrics/custom_metrics/powershell_metrics_submission
-    parent: metrics_custom_metrics
-    identifier: dev_tools_metrics_powershell
-    weight: 704
-  - name: 'Submission - API '
-    url: api/latest/metrics/#submit-metrics
-    parent: metrics_custom_metrics
-    identifier: dev_tools_metrics_api
-    weight: 705
-  - name: Send OpenTelemetry Metrics to Datadog
-    url: opentelemetry/otel_metrics/
-    parent: metrics_top_level
-    identifier: metrics_otel
     weight: 8
-  - name: OTLP Metric Types
-    url: metrics/open_telemetry/otlp_metric_types
-    parent: metrics_otel
-    identifier: metrics_otlp_types
-    weight: 801
+  - name: Metrics Without Limits™
+    identifier: metrics_without_limits
+    url: metrics/metrics-without-limits/
+    parent: metrics_top_level
+    weight: 9
   - name: Guides
     url: metrics/guide
     parent: metrics_top_level
