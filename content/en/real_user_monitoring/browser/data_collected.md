@@ -86,6 +86,17 @@ The following device-related attributes are attached automatically to all events
 | `device.model`   | string | The device model as reported by the device (User-Agent HTTP header).   |
 | `device.name` | string | The device name as reported by the device (User-Agent HTTP header). |
 
+### Connectivity
+
+The following network-related attributes are attached automatically to all events collected by Datadog:
+
+| Attribute name                       | Type   | Description                                                                                                               |
+|--------------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------|
+| `connectivity.status`                | string | Status of device network reachability (`connected` or `not connected`).                                       |
+| `connectivity.interfaces`            | array  | The list of available network interfaces (for example, `bluetooth`, `cellular`, `ethernet`, or `wifi`).                   |
+| `connectivity.effective_type`        | string | Cellular connection type reflecting the measured network performance (`slow-2g`, `2g`, `3g` or `4g`), [more details][18]. |
+
+
 ### Operating system
 
 The following OS-related attributes are attached automatically to all events collected by Datadog:
@@ -298,3 +309,4 @@ Source errors include code-level information about the error. For more informati
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [16]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-metrics
 [17]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions
+[18]: https://developer.mozilla.org/en-US/docs/Glossary/Effective_connection_type
