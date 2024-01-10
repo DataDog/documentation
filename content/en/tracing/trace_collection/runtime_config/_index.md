@@ -48,7 +48,7 @@ You can tell when the configuration changes have been successfully applied by re
 
 The following options are supported with configuration at runtime. The required tracer version is listed for each language: 
 
-| Option                                           | Java Tracer | Javascript Tracer | Python Tracer | .NET Tracer | Ruby Tracer | Go Tracer | PHP Tracer | C++ Tracer |
+| Option                                           | Java | Javascript | Python | .NET | Ruby | Go | PHP | C++ |
 |--------------------------------------------------|-------------|-------------------|---------------|-------------|-------------|-----------|------------|------------|
 | <h5>Custom sampling rate</h5>Set a global sampling rate for the library using `DD_TRACE_SAMPLE_RATE`. | `1.17.0+`    | `4.11+`            | `?`           | `2.33.0+`    | `1.13.0+`    |           |            |            |
 | <h5>Log injection</h5>Automatically inject trace correlation identifiers to correlate logs and traces by enabling `DD_LOGS_INJECTION`.      | `3.32+`      |                   |               |             |             |           |            |            |
