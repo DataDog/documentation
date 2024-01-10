@@ -1772,6 +1772,11 @@ main:
     parent: tracing_trace_collection
     identifier: tracing_library_config
     weight: 104
+  - name: Configuration at Runtime
+    url: tracing/trace_collection/runtime_config/
+    parent: tracing_trace_collection
+    identifier: runtime_config
+    weight: 105
   - name: Java
     url: tracing/trace_collection/library_config/java/
     parent: tracing_library_config
