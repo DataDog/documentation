@@ -26,7 +26,7 @@ This feature uses [Remote Configuration][1] to apply configurations to Datadog c
 
 To make changes to a services configuration at runtime:
 
-1. Go to the Service Catalog in APM.
+1. Go to the [Service Catalog][3] in APM.
 1. Hover on the service for which you want to update configuration.
 1. Click **Full Page** next to the service name.
 1. Click **Service Info**.
@@ -60,5 +60,5 @@ The following options are supported with configuration at runtime. The required 
 
 [1]: /agent/remote_config/
 [2]: /agent/
-[3]: /tracing/service_catalog/#role-based-access-and-permissions
+[3]: /tracing/service_catalog/
 [4]: /account_management/rbac/permissions/
