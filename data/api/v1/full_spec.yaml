@@ -3310,7 +3310,6 @@ components:
           example: key:value,filter:example
           type: string
         is_cspm_enabled:
-          default: false
           description: 'When enabled, Datadog will activate the Cloud Security Monitoring
             product for this service account. Note: This requires resource_collection_enabled
             to be set to true.'
@@ -3337,7 +3336,6 @@ components:
           example: datadog-apitest
           type: string
         resource_collection_enabled:
-          default: false
           description: When enabled, Datadog scans for all resources in your GCP environment.
           example: true
           type: boolean
@@ -10345,6 +10343,13 @@ components:
           nullable: true
           type: string
       type: object
+    SLODataSourceQueryDefinition:
+      description: A formula and function query.
+      example:
+        data_source: metrics
+        query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+      oneOf:
+      - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
     SLODeleteResponse:
       description: A response list of all service level objective deleted.
       properties:
@@ -10388,6 +10393,20 @@ components:
       - THIRTY_DAYS
       - NINETY_DAYS
       - ALL
+    SLOFormula:
+      description: A formula that specifies how to combine the results of multiple
+        queries.
+      example:
+        formula: query1 - default_zero(query2)
+      properties:
+        formula:
+          description: The formula string, which is an expression involving named
+            queries.
+          example: query1 - default_zero(query2)
+          type: string
+      required:
+      - formula
+      type: object
     SLOHistoryMetrics:
       description: 'A `metric` based SLO history response.
 
@@ -11117,6 +11136,8 @@ components:
           type: string
         query:
           $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
+        sli_specification:
+          $ref: '#/components/schemas/SLOSliSpec'
         tags:
           description: 'A list of tags associated with this service level objective.
 
@@ -11171,6 +11192,11 @@ components:
           format: double
           type: number
       type: object
+    SLOSliSpec:
+      description: A generic SLI specification. This is currently used for time-slice
+        SLOs only.
+      oneOf:
+      - $ref: '#/components/schemas/SLOTimeSliceSpec'
     SLOState:
       description: State of the SLO.
       enum:
@@ -11271,6 +11297,106 @@ components:
       - timeframe
       - target
       type: object
+    SLOTimeSliceComparator:
+      description: The comparator used to compare the SLI value to the threshold.
+      enum:
+      - '>'
+      - '>='
+      - <
+      - <=
+      example: '>'
+      type: string
+      x-enum-varnames:
+      - GREATER
+      - GREATER_EQUAL
+      - LESS
+      - LESS_EQUAL
+    SLOTimeSliceCondition:
+      description: 'The time-slice condition, composed of 3 parts: 1. the metric timeseries
+        query, 2. the comparator,
+
+        and 3. the threshold.'
+      example:
+        comparator: <
+        query:
+          formulas:
+          - formula: query2/query1
+          queries:
+          - data_source: metrics
+            name: query1
+            query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+          - data_source: metrics
+            name: query1
+            query: sum:trace.servlet.request.errors{*} by {env}.as_count()
+        threshold: 5
+      properties:
+        comparator:
+          $ref: '#/components/schemas/SLOTimeSliceComparator'
+        query:
+          $ref: '#/components/schemas/SLOTimeSliceQuery'
+        threshold:
+          description: The threshold value to which each SLI value will be compared.
+          example: 5
+          format: double
+          type: number
+      required:
+      - comparator
+      - threshold
+      - query
+      type: object
+    SLOTimeSliceQuery:
+      description: The queries and formula used to calculate the SLI value.
+      example:
+        formulas:
+        - formula: query2/query1
+        queries:
+        - data_source: metrics
+          name: query1
+          query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+        - data_source: metrics
+          name: query1
+          query: sum:trace.servlet.request.errors{*} by {env}.as_count()
+      properties:
+        formulas:
+          description: A list that contains exactly one formula, as only a single
+            formula may be used in a time-slice SLO.
+          items:
+            $ref: '#/components/schemas/SLOFormula'
+          maxItems: 1
+          minItems: 1
+          type: array
+        queries:
+          description: A list of queries that are used to calculate the SLI value.
+          items:
+            $ref: '#/components/schemas/SLODataSourceQueryDefinition'
+          type: array
+      required:
+      - formulas
+      - queries
+      type: object
+    SLOTimeSliceSpec:
+      additionalProperties: false
+      description: A time-slice SLI specification.
+      example:
+        time_slice:
+          comparator: <
+          query:
+            formulas:
+            - formula: query2/query1
+            queries:
+            - data_source: metrics
+              name: query1
+              query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+            - data_source: metrics
+              name: query1
+              query: sum:trace.servlet.request.errors{*} by {env}.as_count()
+          threshold: 5
+      properties:
+        time_slice:
+          $ref: '#/components/schemas/SLOTimeSliceCondition'
+      required:
+      - time_slice
+      type: object
     SLOTimeframe:
       description: The SLO time window options.
       enum:
@@ -11290,11 +11416,13 @@ components:
       enum:
       - metric
       - monitor
+      - time_slice
       example: metric
       type: string
       x-enum-varnames:
       - METRIC
       - MONITOR
+      - TIME_SLICE
     SLOTypeNumeric:
       description: 'A numeric representation of the type of the service level objective
         (`0` for
@@ -11305,12 +11433,14 @@ components:
       enum:
       - 0
       - 1
+      - 2
       example: 0
       format: int32
       type: integer
       x-enum-varnames:
       - MONITOR
       - METRIC
+      - TIME_SLICE
     SLOWidgetDefinition:
       description: Use the SLO and uptime widget to track your SLOs (Service Level
         Objectives) and uptime on screenboards and timeboards.
@@ -12151,6 +12281,8 @@ components:
           type: string
         query:
           $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
+        sli_specification:
+          $ref: '#/components/schemas/SLOSliSpec'
         tags:
           description: 'A list of tags associated with this service level objective.
 
@@ -12280,6 +12412,8 @@ components:
           type: string
         query:
           $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
+        sli_specification:
+          $ref: '#/components/schemas/SLOSliSpec'
         tags:
           description: 'A list of tags associated with this service level objective.
 
@@ -17383,13 +17517,37 @@ components:
     UsageBillableSummaryKeys:
       description: Response with aggregated usage types.
       properties:
+        apm_devsecops_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_devsecops_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_ent_devsecops_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_ent_devsecops_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         apm_fargate_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         apm_fargate_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_host_enterprise_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_host_enterprise_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_host_no_usm_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_host_no_usm_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_host_pro_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_host_pro_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         apm_host_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         apm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_pro_devsecops_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_pro_devsecops_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         apm_profiler_host_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -17399,9 +17557,19 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         application_security_fargate_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        application_security_fargate_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         application_security_host_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         application_security_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        application_vulnerability_management_oss_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        application_vulnerability_management_oss_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ci_intelligent_test_runner_maximum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ci_intelligent_test_runner_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         ci_pipeline_indexed_spans_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -17419,6 +17587,24 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         cloud_cost_management_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cont_devsecops_ent_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cont_devsecops_pro_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        coscreen_seat_maximum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        csm_container_enterprise_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        csm_container_pro_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        csm_host_enterprise_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        csm_host_enterprise_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        csm_host_pro_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        csm_host_pro_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         cspm_container_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         cspm_host_sum:
@@ -17433,6 +17619,10 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         cws_host_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        data_stream_monitoring_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        data_stream_monitoring_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         dbm_host_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         dbm_host_top99p:
@@ -17440,6 +17630,8 @@ components:
         dbm_normalized_queries_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         dbm_normalized_queries_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        error_tracking_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         fargate_container_apm_and_profiler_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -17453,6 +17645,32 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         fargate_container_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        flex_compute_logs_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        flex_compute_logs_extra_small_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        flex_compute_logs_medium_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        flex_compute_logs_small_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        flex_logs_starter_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        flex_stored_logs_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        flex_stored_logs_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        host_devsecops_ent_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        host_devsecops_ent_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        host_devsecops_proplus_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        host_devsecops_proplus_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        host_devsecops_pro_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        host_devsecops_pro_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         incident_management_maximum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         incident_management_sum:
@@ -17460,6 +17678,8 @@ components:
         infra_and_apm_host_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         infra_and_apm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        infra_container_excl_agent_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         infra_container_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -17507,17 +17727,19 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_ingested_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        netflow_monitoring_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         network_device_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         network_device_top99p:
-          $ref: '#/components/schemas/UsageBillableSummaryBody'
-        npm_flow_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         npm_host_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         npm_host_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         observability_pipeline_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        observability_pipeline_vcpu_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         online_archive_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -17539,11 +17761,19 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         serverless_apm_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_apps_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_apps_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_asm_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         serverless_infra_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         serverless_infra_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         serverless_invocation_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        siem_indexed_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         siem_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -17553,11 +17783,29 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         synthetics_app_testing_maximum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        synthetics_app_testing_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         synthetics_browser_checks_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        synthetics_mobile_app_testing_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         timeseries_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         timeseries_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        usm_only_no_charge_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        usm_only_no_charge_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        usm_standalone_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        usm_standalone_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        usm_within_infra_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        usm_within_infra_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        workflow_execution_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
       type: object
     UsageBillableSummaryResponse:
@@ -18726,6 +18974,11 @@ components:
             over all hours in the current date all organizations.
           format: int64
           type: integer
+        apm_devsecops_host_top99p:
+          description: Shows the 99th percentile of all APM DevSecOps hosts over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
         apm_fargate_count_avg:
           description: Shows the average of all APM ECS Fargate tasks over all hours
             in the current date for all organizations.
@@ -19249,6 +19502,11 @@ components:
         apm_azure_app_service_host_top99p:
           description: Shows the 99th percentile of all Azure app services using APM
             over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        apm_devsecops_host_top99p:
+          description: Shows the 99th percentile of all APM DevSecOps hosts over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         apm_fargate_count_avg:
@@ -19787,6 +20045,11 @@ components:
         apm_azure_app_service_host_top99p_sum:
           description: Shows the 99th percentile of all Azure app services using APM
             over all hours in the current months all organizations.
+          format: int64
+          type: integer
+        apm_devsecops_host_top99p_sum:
+          description: Shows the 99th percentile of all APM DevSecOps hosts over all
+            hours in the current months for all organizations.
           format: int64
           type: integer
         apm_fargate_count_avg_sum:

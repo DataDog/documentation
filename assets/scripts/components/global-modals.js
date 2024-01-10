@@ -107,7 +107,7 @@ const doOnLoad = () => {
         var parentW = (parseInt(window.innerWidth) / 100) * 90;
         var parentH = (parseInt(window.innerHeight) / 100) * 90;
 
-        if (w && h) {
+        if (el && p && w && h) {
             /* Reset apparent image size first so container grows */
             el.style.width = '';
             el.style.height = '';

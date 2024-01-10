@@ -232,7 +232,13 @@ Format log output between `"compact"`, `"pretty"`, `"pretty-compact"`, and `"jso
 `--verbosity`
 : **Type**: Number <br>
 **Default**: `3`<br>
-Verbosity level (for example, `-v`, `-vv`, and `-vvv`).
+Verbosity level from `1` (errors only) to `4` (debug logs and above). Setting the verbosity from the command line is done with `-v`, `-vv`, `-vvv`, and `-vvvv` arguments.<br><br>
+Verbosity level | CLI argument | JSON config option
+-- | -- | --
+DEBUG | `-vvvv` | `"verbosity": 4`
+INFO (default) | `-vvv` | `"verbosity": 3`
+WARNING | `-vv` | `"verbosity": 2`
+ERROR | `-v` | `"verbosity": 1`
 
 `--help`
 : **Type**: Boolean <br>
