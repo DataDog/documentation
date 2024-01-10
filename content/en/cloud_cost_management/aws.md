@@ -154,7 +154,7 @@ Not all one-time fees are amortized across the billing period. For example, the 
 ### Net costs
 **Net** costs apply private discounts directly to usage. The cost of usage for a specific resource represents the effective cost after all savings are realized.
 
-Non-net metrics show private discounts as separate, negative-valued line items with no attribution tags. Rather than attributing the discounts to actual usage, they are treated as offsets to total cost.
+In contrast, other metrics show private discounts as separate, negative-valued line items with no attribution tags. Rather than attributing the discounts directly to usage, those metrics subtract discounts from the total cost.
 
 **Net amortized** costs provide the most accurate representation for cost allocation, with all savings applied directly to usage. Net cost metrics are available if your AWS account has privately negotiated enterprise discounts. If your account doesn't have net metrics available, use **amortized** cost instead.
 
@@ -163,9 +163,9 @@ Non-net metrics show private discounts as separate, negative-valued line items w
 
 ### Example
 The following scenario demonstrates how different cost types behave. Imagine you have:
-- an EC2 instance running for one hour with the cost of $3/compute-hour.
-- a savings plan which covers this instance type and hour purchased for $2.
-- a negotiated discount of 10% on top of all other discounts.
+- An EC2 instance running for one hour with the cost of $3 per compute-hour.
+- A savings plan which prices this instance type at $2 per compute-hour.
+- A negotiated discount of 10% on top of all other discounts.
 
 Here's how the instance cost, savings plan, and discount appear in each cost type:
 
@@ -225,18 +225,18 @@ To ensure consistency, Datadog normalizes tag keys using underscores and lower c
 
 [AWS resource tags][12] are user-defined tags that appear in the AWS console when viewing a particular resource, like an EC2 instance or S3 bucket.
 
-When the Datadog AWS integration is enabled, Datadog automatically collects resource tags for most AWS resources. These tags are applied to all costs found in the CUR for a given resource. Resource tags are retrieved regularly and are applied to cost data starting from the day they are created or modified. Historical tag values are not overwritten when tags change.
+When you enable the Datadog AWS integration, Datadog automatically collects resource tags for most AWS resources. These tags are applied to all costs found in the CUR for a given resource. Resource tags are retrieved regularly and are applied to cost data starting from the day they are created or modified. Historical tag values are not overwritten when tags change.
 
 If the AWS integration is not enabled, you can enable resource tag enrichment by activating [cost allocation tags][13] in AWS billing. This allows you to select a subset of resource tag keys to include as columns in the AWS CUR. Datadog automatically includes those columns as tags when processing the CUR.
 
 ### AWS organization and account tags
-AWS Organizations supports [user-defined tags][14] on organizational units and accounts. Datadog automatically fetches and applies these tags to cost data. Account tags are applied to all usage associated with those accounts. Organization tags are applied to all billing data for the matching payer account.
+AWS Organizations support [user-defined tags][14] on organizational units and accounts. Datadog automatically fetches and applies these tags to cost data. Account tags are applied to all usage associated with those accounts. Organization tags are applied to all billing data for the matching payer account.
 
 _Requires the Datadog AWS Integration on the organization account._
 
 ### AWS integration tags
 
-These are tags set on the AWS Integration tile in the Datadog integrations page. They are applied to all costs found in the CUR for the associated AWS account.
+AWS integration tags are tags set on the AWS Integration tile in the Datadog integrations page. They are applied to all costs found in the CUR for the associated AWS account.
 
 ### Out-of-the-box tags
 Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your [Cost and Usage Report (CUR)][6] and make it easier to discover and understand cost data.
@@ -296,9 +296,9 @@ The following out-of-the-box tags are available:
 
 ### Container orchestrators
 
-Container cost allocation adds tags from the workloads incurring cost. This includes tags from Kubernetes pods and nodes and ECS tasks and containers.
+Container cost allocation adds tags from the workloads incurring cost. Examples include tags from Kubernetes pods and nodes and ECS tasks and containers.
 
-_Requires [container cost allocation][11], and applies only to shared.resources.allocated metrics._
+_Requires [container cost allocation][11], and applies only to `shared.resources.allocated` metrics._
 
 ### Tag pipelines
 
