@@ -166,7 +166,7 @@ function getPathElement(event = null) {
     path = path.replace(/^\//, '');
     path = path.replace(/\/$/, '');
 
-    let sideNavPathElement = document.querySelector(`.side [data-path^="${getVisibleParentPath(path)}"]`) || document.querySelector(`.side [data-path="${path}"]`);
+    let sideNavPathElement = document.querySelector(`.side [data-path="${getVisibleParentPath(path)}"]`)
     let mobileNavPathElement = document.querySelector(`header [data-path="${path}"]`);
 
     // Select sidenav/mobile links by data-path attribute to ensure active class is set correctly on specific sub-pages
