@@ -127,9 +127,18 @@ const doOnLoad = () => {
 
 DOMReady(doOnLoad);
 
+function getVisibleParentPath(path){
+    // returns the closest visible parent path
+    // of a child path not visible in the left nav (anything more than 4 levels deep)
+
+    // account for preview branch name in url
+    const endIdx = env === 'preview' ? 6 : 4
+
+    return path.split('/').slice(0,endIdx).join('/')
+}
+
 // Get sidebar
 function hasParentLi(el) {
-    const els = [];
     while (el) {
         if (el.classList) {
             if (el.classList.contains('sidenav-nav-main')) {
@@ -146,7 +155,6 @@ function hasParentLi(el) {
             }
         }
 
-        els.unshift(el);
         el = el.parentNode;
     }
 }
@@ -162,7 +170,7 @@ function getPathElement(event = null) {
     path = path.replace(/^\//, '');
     path = path.replace(/\/$/, '');
 
-    let sideNavPathElement = document.querySelector(`.side [data-path="${path}"]`);
+    let sideNavPathElement = document.querySelector(`.side [data-path="${getVisibleParentPath(path)}"]`)
     let mobileNavPathElement = document.querySelector(`header [data-path="${path}"]`);
 
     // Select sidenav/mobile links by data-path attribute to ensure active class is set correctly on specific sub-pages
