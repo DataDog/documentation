@@ -59,9 +59,6 @@ The agent also requires `performance_schema.events_statements_*` consumers to be
 
 The Datadog Agent requires read-only access to the database in order to collect statistics and queries.
 
-{{< tabs >}}
-{{% tab "MySQL ≥ 8.0" %}}
-
 Create the `datadog` user and grant basic permissions:
 
 ```sql
@@ -71,21 +68,6 @@ GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
-
-{{% /tab %}}
-{{% tab "MySQL 5.7" %}}
-
-Create the `datadog` user and grant basic permissions:
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 Create the following schema:
 

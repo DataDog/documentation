@@ -2,14 +2,20 @@
 title: Cloud Security Management Vulnerabilities
 kind: documentation
 aliases:
-    - /security/infrastructure_vulnerabilities
+    - /security/infrastructure_vulnerabilities/
 further_reading:
-- link: "/security/cloud_security_management/setup/csm_pro?tab=aws#configure-the-agent-for-hosts-and-containers"
+- link: "/security/cloud_security_management/setup/csm_pro/?tab=aws#configure-the-agent-for-containers"
   tag: "Documentation"
-  text: "Setting up container vulnerabilities"
-- link: "/security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities"
+  text: "Setting up container image vulnerabilities"
+- link: "/security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts"
   tag: "Documentation"
   text: "Setting up host vulnerabilities"
+- link: "/infrastructure/containers/container_images"
+  tag: "Documentation"
+  text: "Viewing Container Images"
+- link: "/security/vulnerabilities/troubleshooting"
+  tag: "Documentation"
+  text: "Troubleshooting CSM Vulnerabilities"
 - link: "https://www.datadoghq.com/blog/csm-vulnerability-management/"
   tag: "Blog"
   text: "Mitigate infrastructure vulnerabilities with Datadog Cloud Security Management"

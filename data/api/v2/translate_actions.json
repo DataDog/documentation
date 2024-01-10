@@ -175,6 +175,54 @@
     "description": "Get all containers for your organization.",
     "summary": "Get All Containers"
   },
+  "ListCostAWSCURConfigs": {
+    "description": "List the AWS CUR configs.",
+    "summary": "List Cloud Cost Management AWS CUR configs"
+  },
+  "CreateCostAWSCURConfig": {
+    "description": "Create a Cloud Cost Management account for an AWS CUR config.",
+    "summary": "Create Cloud Cost Management AWS CUR config",
+    "request_description": "",
+    "request_schema_description": "AWS CUR config Post Request."
+  },
+  "DeleteCostAWSCURConfig": {
+    "description": "Archive a Cloud Cost Management Account.",
+    "summary": "Delete Cloud Cost Management AWS CUR config"
+  },
+  "UpdateCostAWSCURConfig": {
+    "description": "Update the status of an AWS CUR config (active/archived).",
+    "summary": "Update Cloud Cost Management AWS CUR config",
+    "request_description": "",
+    "request_schema_description": "AWS CUR config Patch Request."
+  },
+  "ListAWSRelatedAccounts": {
+    "description": "List the AWS accounts in an organization by calling 'organizations:ListAccounts' from the specified management account.",
+    "summary": "List related AWS accounts"
+  },
+  "ListCostAzureUCConfigs": {
+    "description": "List the Azure configs.",
+    "summary": "List Cloud Cost Management Azure configs"
+  },
+  "CreateCostAzureUCConfigs": {
+    "description": "Create a Cloud Cost Management account for an Azure config.",
+    "summary": "Create Cloud Cost Management Azure configs",
+    "request_description": "",
+    "request_schema_description": "Azure config Post Request."
+  },
+  "DeleteCostAzureUCConfig": {
+    "description": "Archive a Cloud Cost Management Account.",
+    "summary": "Delete Cloud Cost Management Azure config"
+  },
+  "UpdateCostAzureUCConfigs": {
+    "description": "Update the status of an  Azure config (active/archived).",
+    "summary": "Update Cloud Cost Management Azure config",
+    "request_description": "",
+    "request_schema_description": "Azure config Patch Request."
+  },
+  "GetCloudCostActivity": {
+    "description": "Get the Cloud Cost Management activity.",
+    "summary": "Cloud Cost Enabled"
+  },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 17th of the following month.",
     "summary": "Get active billing dimensions for cost attribution"
@@ -535,6 +583,30 @@
     "request_description": "",
     "request_schema_description": "Payload schema for Fastly service requests."
   },
+  "ListOktaAccounts": {
+    "description": "List Okta accounts.",
+    "summary": "List Okta accounts"
+  },
+  "CreateOktaAccount": {
+    "description": "Create an Okta account.",
+    "summary": "Add Okta account",
+    "request_description": "",
+    "request_schema_description": "Request object for an Okta account."
+  },
+  "DeleteOktaAccount": {
+    "description": "Delete an Okta account.",
+    "summary": "Delete Okta account"
+  },
+  "GetOktaAccount": {
+    "description": "Get an Okta account.",
+    "summary": "Get Okta account"
+  },
+  "UpdateOktaAccount": {
+    "description": "Update an Okta account.",
+    "summary": "Update Okta account",
+    "request_description": "",
+    "request_schema_description": "Payload schema when updating an Okta account."
+  },
   "GetIPAllowlist": {
     "description": "Returns the IP allowlist and its enabled or disabled state.",
     "summary": "Get IP Allowlist"
@@ -726,7 +798,7 @@
     "summary": "List tag configuration by name"
   },
   "UpdateTagConfiguration": {
-    "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric or custom aggregations\nof a count, rate, or gauge metric. By setting `exclude_tags_mode` to true the behavior is changed\nfrom an allow-list to a deny-list, and tags in the defined list will not be queryable.\nCan only be used with application keys from users with the `Manage Tags for Metrics` permission.",
+    "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric or custom aggregations\nof a count, rate, or gauge metric. By setting `exclude_tags_mode` to true the behavior is changed\nfrom an allow-list to a deny-list, and tags in the defined list will not be queryable.\nCan only be used with application keys from users with the `Manage Tags for Metrics` permission. This endpoint requires\na tag configuration to be created first.",
     "summary": "Update a tag configuration",
     "request_description": "",
     "request_schema_description": "Request object that includes the metric that you would like to edit the tag configuration on."

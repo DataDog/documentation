@@ -96,6 +96,34 @@
       "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
+  "CreateCostAWSCURConfig": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create Cloud Cost Management AWS CUR config returns \"OK\" response"
+    }
+  ],
+  "CreateCostAzureUCConfigs": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create Cloud Cost Management Azure configs returns \"OK\" response"
+    }
+  ],
+  "UpdateCostAWSCURConfig": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update Cloud Cost Management AWS CUR config returns \"OK\" response"
+    }
+  ],
+  "UpdateCostAzureUCConfigs": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
+    }
+  ],
   "CreateCloudWorkloadSecurityAgentRule": [
     {
       "group": "cloud_workload_security",
@@ -240,6 +268,21 @@
       "group": "gcp_integration",
       "suffix": "_109518525",
       "description": "Create a new entry for your service account with account_tags returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_4235664992",
+      "description": "Create a new entry for your service account with cspm enabled returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_130557025",
+      "description": "Create a new entry for your service account with resource collection enabled returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_2597004741",
+      "description": "Create a new entry for your service account with security command center enabled returns \"OK\" response"
     }
   ],
   "UpdateGCPSTSAccount": [
@@ -247,6 +290,11 @@
       "group": "gcp_integration",
       "suffix": "",
       "description": "Update STS Service Account returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_3205636354",
+      "description": "Update STS Service Account returns \"OK\" response with enable resource collection turned on"
     }
   ],
   "UpdateIPAllowlist": [
@@ -509,6 +557,20 @@
       "description": "Edit a monitor configuration policy returns \"OK\" response"
     }
   ],
+  "CreateOktaAccount": [
+    {
+      "group": "okta_integration",
+      "suffix": "",
+      "description": "Add Okta account returns \"OK\" response"
+    }
+  ],
+  "UpdateOktaAccount": [
+    {
+      "group": "okta_integration",
+      "suffix": "",
+      "description": "Update Okta account returns \"OK\" response"
+    }
+  ],
   "CreateOpsgenieService": [
     {
       "group": "opsgenie_integration",
@@ -650,6 +712,11 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create a detection rule returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
+      "suffix": "_3367706049",
+      "description": "Create a detection rule with detection method 'third_party' returns \"OK\" response"
     },
     {
       "group": "security_monitoring",

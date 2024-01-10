@@ -95,7 +95,7 @@ Feature flag tracking is available in the RUM Android SDK. To start, set up [RUM
 
 Feature flag tracking is available for your Flutter applications. To start, set up [RUM Flutter monitoring][1]. You need the Flutter Plugin version >= 1.3.2.
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/flutter/
+[1]: https://docs.datadoghq.com/real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
 {{% /tab %}}
 {{% tab "React Native" %}}
 
@@ -547,7 +547,7 @@ const client = factory.client();
 {{< tabs >}}
 {{% tab "Browser" %}}
 
-Feature flag tracking is available in the RUM Browser SDK. For detailed set up instructions, visit [Getting started with feature flag data in RUM](https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection).
+Initialize Statsig's SDK with `statsig.initialize`.
 
 1. Update your Browser RUM SDK version 4.25.0 or above.
 2. Initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with `["feature_flags"]`.

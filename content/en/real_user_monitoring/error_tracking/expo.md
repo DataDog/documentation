@@ -82,8 +82,9 @@ Run `eas secret:create` to set `DATADOG_SITE` to the host of your Datadog site, 
 | ----------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `iosDsyms`                    | `true`  | Enables the uploading of dSYMS files for the symbolication of native iOS crashes.                                                  |
 | `iosSourcemaps`               | `true`  | Enables the uploading of JavaScript source maps on iOS builds.                                                                     |
-| `androidProguardMappingFiles` | `true`  | Enables the uploading of Proguard mapping files to deobfuscate native Android crashes (is only applied if obfuscation is enabled). |
 | `androidSourcemaps`           | `true`  | Enables the uploading of JavaScript source maps on Android builds.                                                                 |
+| `androidProguardMappingFiles` | `true`  | Enables the uploading of Proguard mapping files to deobfuscate native Android crashes (is only applied if obfuscation is enabled). |
+| `datadogGradlePluginVersion`  | `"1.+"` | Version of `dd-sdk-android-gradle-plugin` used for uploading Proguard mapping files.     |
 
 ### Using with Sentry
 
@@ -106,4 +107,4 @@ If you are using the `expo-dev-client` and already have the `expo-datadog` plugi
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://github.com/DataDog/expo-datadog
-[3]: /real_user_monitoring/reactnative/expo/#usage
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/setup/expo/#usage

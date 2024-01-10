@@ -79,11 +79,11 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: '<http://datadoghq.com|datadoghq.com>',
+      site: 'http://datadoghq.com|datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
-      allowedTracingUrls: ["<https://api.example.com>", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("<https://api.example.com>")]
+      allowedTracingUrls: ["https://api.example.com", /https:\/\/.*\.my-api-domain\.com/, (url) => url.startsWith("https://api.example.com")]
       sessionSampleRate: 100,
       sessionReplaySampleRate: 100, // if not included, the default is 100
       trackResources: true,
@@ -261,8 +261,8 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     )..enableHttpTracking()
     ```
 
-[1]: /real_user_monitoring/flutter/
-[2]: /real_user_monitoring/flutter/#automatic-resource-tracking
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter/#automatic-resource-tracking
 
 {{% /tab %}}
 
@@ -287,7 +287,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
         result = ddUrlTransfer.GetToString()
     ```
 
-[1]: /real_user_monitoring/roku/
+[1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/roku/
 {{< /site-region >}}
 
 {{% /tab %}}

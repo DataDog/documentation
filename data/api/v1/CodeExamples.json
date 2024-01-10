@@ -20,6 +20,27 @@
       "description": "Update an AWS integration returns \"OK\" response"
     }
   ],
+  "CreateAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Create an Azure integration returns \"OK\" response"
+    }
+  ],
+  "DeleteAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Delete an Azure integration returns \"OK\" response"
+    }
+  ],
+  "UpdateAzureIntegration": [
+    {
+      "group": "azure_integration",
+      "suffix": "",
+      "description": "Update an Azure integration returns \"OK\" response"
+    }
+  ],
   "CreateDashboardList": [
     {
       "group": "dashboard_lists",
@@ -471,6 +492,27 @@
       "description": "Post an event with a long title returns \"OK\" response"
     }
   ],
+  "CreateGCPIntegration": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Create a GCP integration returns \"OK\" response"
+    }
+  ],
+  "DeleteGCPIntegration": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Delete a GCP integration returns \"OK\" response"
+    }
+  ],
+  "UpdateGCPIntegration": [
+    {
+      "group": "gcp_integration",
+      "suffix": "",
+      "description": "Update a GCP integration returns \"OK\" response"
+    }
+  ],
   "ListLogs": [
     {
       "group": "logs",
@@ -654,6 +696,11 @@
     }
   ],
   "CreateSLO": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "_3765703239",
+      "description": "Create a time-slice SLO object returns \"OK\" response"
+    },
     {
       "group": "service_level_objectives",
       "suffix": "",

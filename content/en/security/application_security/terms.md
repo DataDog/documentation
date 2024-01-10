@@ -37,7 +37,7 @@ detection rule
 : See [Detection rules][10].
 
 passlist (formerly exclusion filter)
-: A mechanism for discarding suspicious requests flagged through the ASM library and the In-App WAF rules. Passlist is applied as requests are ingested into Datadog (intake). Passlist helps manage false positives and intake costs.
+: A mechanism for discarding security traces flagged through the ASM library and the In-App WAF rules. Passlist is applied as requests are ingested into Datadog (intake). Passlist helps manage false positives and intake costs.
 : See [Exclusion filters][11] in the app.
 
 In-App WAF rules (formerly event rules)
@@ -63,6 +63,9 @@ software composition analysis (SCA)
 
 severity
 : An indicator of how quickly an attack attempt should be triaged and addressed. Based on a combination of factors, including the attack's potential impact and risk. Values are Critical, High, Medium, Low, Info.
+
+security trace
+: A distributed trace for which security activity has been flagged by In-App WAF rules. The underlying trace is shared with APM, allowing deeper and faster investigations.
 
 suspicious request
 : A distributed trace for which security activity has been flagged by In-App WAF rules. The underlying trace is shared with APM, allowing deeper and faster investigations.
