@@ -3424,10 +3424,10 @@ main:
     parent: security_platform
     identifier: security_inbox
     weight: 10
-  - name: Threat Intel
-    url: security/threat_intel
+  - name: Threat Intelligence
+    url: security/threat_intelligence
     parent: security_platform
-    idenfier: security_threat_intel
+    idenfier: security_threat_intelligence
     weight: 11
   - name: Audit Trail
     url: security/audit_trail
