@@ -130,15 +130,11 @@ DOMReady(doOnLoad);
 function getVisibleParentPath(path){
     // returns the closest visible parent path
     // of a child path not visible in the left nav (anything more than 4 levels deep)
-    let startIdx = 0
-    let endIdx = 4
-    if(env === 'preview'){
-        // account for preview branch name in url
-        startIdx += 2
-        endIdx += 2
-    }
-    console.log(path.split('/').slice(startIdx,endIdx).join('/'))
-    return path.split('/').slice(startIdx,endIdx).join('/')
+
+    // account for preview branch name in url
+    const endIdx = env === 'preview' ? 6 : 4
+
+    return path.split('/').slice(0,endIdx).join('/')
 }
 
 // Get sidebar
