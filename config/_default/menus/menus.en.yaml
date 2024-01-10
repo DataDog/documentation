@@ -1613,16 +1613,11 @@ main:
     parent: case_management
     identifier: case_management_view_and_manage
     weight: 3
-  - name: Case Details
-    url: service_management/case_management/details
-    parent: case_management
-    identifier: case_management_details
-    weight: 4
   - name: Settings
     url: service_management/case_management/settings
     parent: case_management
     identifier: case_management_settings
-    weight: 5
+    weight: 4
   - name: Troubleshooting
     url: service_management/case_management/Troubleshooting
     parent: case_management
