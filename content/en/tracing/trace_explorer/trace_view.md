@@ -59,7 +59,7 @@ Filter resources by type or naming information using the corresponding buttons a
 
 {{< img src="tracing/trace_view/spanlist_headers.png" alt="Span List headers" style="width:90%;">}}
 
-Sort groupings by clicking on the corresponding column header: **resource**, **spans**, **average duration**, **execution time**, or **percentage of trace execution time**.
+Sort groupings by clicking on the corresponding column header: **RESOURCE**, **SPANS**, average duration (**AVG DURATION**), execution time (**EXEC TIME**), or percentage of trace execution time (**% EXEC TIME**).
 
 [1]: /tracing/glossary/#resources
 [2]: /tracing/glossary/#services
