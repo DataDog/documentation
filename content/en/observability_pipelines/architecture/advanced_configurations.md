@@ -3,6 +3,14 @@ title: Advanced Configurations
 kind: Documentation
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
+
+<div class="alert alert-info">
+This guide is for large-scale production-level deployments.
+</div>
+
 ### Multiple aggregator deployments
 
 As covered in [Networking][1], Datadog recommends to start with one Observability Pipelines Worker aggregator per region. This is to prevent overcomplicating your initial deployment of Observability Pipelines Worker, but there are circumstances where starting with multiple deployments is ideal:
@@ -34,7 +42,7 @@ Partitioning, or "topics" in Kafka terminology, refers to separating data in you
 
 When using a pub-sub system, Datadog recommends the following configuration changes for Observability Pipelines Worker:
 
-- **Enable end-to-end acknowledgements for all sinks.** This setting ensures that the pub-sub checkpoint is not advanced until data is successfully written.
+- **Enable end-to-end acknowledgments for all sinks.** This setting ensures that the pub-sub checkpoint is not advanced until data is successfully written.
 - **Use memory buffers.** There is no need to use Observability Pipelines Worker's disk buffers when it sits behind a pub-sub system. Your pub-sub system is designed for long-term buffering with high durability. Observability Pipelines Worker should only be responsible for reading, processing, and routing the data (not durability).
 
 ### Global aggregation

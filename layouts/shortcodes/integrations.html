@@ -43,7 +43,7 @@
   {{- if in (slice "system" "network") $v.Params.integration_id  -}}
     {{- $basename = ($v.Params.name | lower) | default ($v.File.TranslationBaseName | lower) -}}
   {{- end -}}
-  {{- $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" $basename "variant" "large") -}}
+  {{- $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" $basename "variant" "large") $basename "large" -}}
   {{- $s.SetInMap $path "int_logo" $int_logo -}}
   {{ if $int_logo }}
     {{- $s.SetInMap "hits" $path ($s.Get $path) -}}

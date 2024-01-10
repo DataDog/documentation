@@ -1,5 +1,5 @@
 ---
-title: Using Synthetic Metrics in Monitors
+title: Use Estimated Usage Metrics
 kind: guide
 description: Learn how to use general Synthetic metrics in monitors. 
 further_reading:

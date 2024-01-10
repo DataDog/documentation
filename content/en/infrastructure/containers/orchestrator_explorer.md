@@ -103,7 +103,14 @@ Click on any row in the table or on any object in a Cluster Map to view informat
 
 {{< img src="infrastructure/livecontainers/orch_ex_panel.png" alt="A view of resources in the side panel, opened to processes." style="width:80%;">}}
 
-The side panel's **YAML** tab shows the full resource definition. Starting in **Agent version 7.44.0**, it also includes seven days of definition history, so you can compare what changed over time and across different versions.
+The side panel's **YAML** tab shows the full resource definition. Starting in **Agent version 7.44.0**, it also includes seven days of definition history. You can compare what changed over time and across different versions. The time indicated is approximately when the changes were applied to the YAML.
+
+To prevent displaying a large number of irrelevant changes, updates affecting only the following fields are ignored:
+
+* metadata.resourceVersion
+* metadata.managedFields
+* metadata.generation
+* status
 
 {{< img src="infrastructure/livecontainers/orch_ex_manifest_history.png" alt="A view of resources in the side panel, showing the yaml history feature" style="width:80%;">}}
 
@@ -138,7 +145,7 @@ All of these columns support sorting, which helps you to pinpoint individual wor
 * Data is updated automatically in constant intervals. Update intervals may change during beta.
 * In clusters with 1000+ Deployments or ReplicaSets you may notice elevated CPU usage from the Cluster Agent. There is an option to disable container scrubbing in the Helm chart. See [the Helm Chart repo][15] for more details.
 
-[1]: https://app.datadoghq.com/orchestration/overview/
+[1]: https://app.datadoghq.com/orchestration/overview
 [2]: /infrastructure/containers/?tab=datadogoperator#setup
 
 [9]: /logs

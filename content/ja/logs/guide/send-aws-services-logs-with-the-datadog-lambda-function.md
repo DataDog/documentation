@@ -31,21 +31,21 @@ S3 バケットまたは CloudWatch ロググループにログを生成する A
 
 | AWS サービス                        | AWS サービス ログを有効にする                                                                    | AWS ログを Datadog に送信する                                                    |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| [API Gateway][3]                  | [AWS API Gateway ログを有効にする][4]                                                               | [手動][5]および[自動](#automatically-set-up-triggers)ログコレクション。                                                |
-| [Cloudfront][6]                   | [AWS Cloudfront ログを有効にする][7]                                                                | [手動][8]および[自動](#automatically-set-up-triggers)ログコレクション。  |
+| [API Gateway][3]                  | [Amazon API Gateway ログを有効にする][4]                                                               | [手動][5]および[自動](#automatically-set-up-triggers)ログコレクション。                                                |
+| [Cloudfront][6]                   | [Amazon CloudFront ログを有効にする][7]                                                                | [手動][8]および[自動](#automatically-set-up-triggers)ログコレクション。  |
 | [CloudTrail][9]                   | [AWS CloudTrail ログを有効にする][9]                                                                | [手動][10]ログコレクション。AWS CloudTrail for Cloud SIEM を設定する場合は、AWS Configuration for Cloud SIEM[11] を参照してください。                                                  |
-| [DynamoDB][12]                     | [AWS DynamoDB ログを有効にする][13]                                                                  | [手動][14]ログコレクション。                                                 |
+| [DynamoDB][12]                     | [Amazon DynamoDB ログを有効にする][13]                                                                  | [手動][14]ログコレクション。                                                 |
 | [EC2][15]                          | `-`                                                                                             | [Datadog Agent][15] を使用してログを Datadog に送信します。                    |
 | [ECS][16]                          | `-`                                                                                             | [docker Agent を使用してログを収集します][17]。                              |
-| [Elastic Load Balancing (ELB)][18] | [AWS ELB ログを有効にする][19]                                                                       | [手動][20]および[自動](#automatically-set-up-triggers)ログコレクション。  |
+| [Elastic Load Balancing (ELB)][18] | [Amazon ELB ログを有効にする][19]                                                                       | [手動][20]および[自動](#automatically-set-up-triggers)ログコレクション。  |
 | [Lambda][21]                       | `-`                                                                                             | [手動][22]および[自動](#automatically-set-up-triggers)ログコレクション。 |
-| [RDS][23]                         | [AWS RDS ログを有効にします][24]                                                                      | [手動][25]ログコレクション。                                                |
-| [Route 53][26]                    | [AWS Route 53 ログを有効にする][27]                                                                 | [手動][28]ログコレクション。                                                |
-| [S3][29]                          | [AWS S3 ログを有効にする][30]                                                                       | [手動][31]および[自動](#automatically-set-up-triggers)ログコレクション。 |
+| [RDS][23]                         | [Amazon RDS ログを有効にする][24]                                                                      | [手動][25]ログコレクション。                                                |
+| [Route 53][26]                    | [Amazon Route 53 ログを有効にする][27]                                                                 | [手動][28]ログコレクション。                                                |
+| [S3][29]                          | [Amazon S3 ログを有効にする][30]                                                                       | [手動][31]および[自動](#automatically-set-up-triggers)ログコレクション。 |
 | [SNS][32]                         | SNS はログを提供しませんが、SNS サービスに送信されるログとイベントを処理することができます。 | [手動][33]ログコレクション。                                                |
-| [RedShift][34]                    | [AWS Redshift ログを有効にします][35]                                                                 | [手動][36]および[自動](#automatically-set-up-triggers)ログコレクション。 |
+| [RedShift][34]                    | [Amazon Redshift ログを有効にする][35]                                                                 | [手動][36]および[自動](#automatically-set-up-triggers)ログコレクション。 |
 | [Verified Access][37]             | [Verified Access ログを有効にする][38]                                                              | [手動][39]ログコレクション。                                                |
-| [VPC][40]                         | [AWS VPC ログを有効にする][41]                                                                      | [手動][42]ログコレクション。                                                |
+| [VPC][40]                         | [Amazon VPC ログを有効にする][41]                                                                      | [手動][42]ログコレクション。                                                |
 
 ## トリガーの設定
 

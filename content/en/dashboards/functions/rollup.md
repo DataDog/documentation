@@ -5,11 +5,14 @@ aliases:
     - /graphing/functions/rollup/
 ---
 
-`.rollup()`
-The `.rollup()` function is used to aggregate your metrics data inherently in every metrics query. However, appending the `.rollup()` function at the end of a query allows you to perform custom [time aggregation][1] that overrides the defaults. This function enables you to define:
+Every metric query is inherently aggregated. However, appending the `.rollup()` function at the end of a query allows you to perform custom [time aggregation][1] that overrides the defaults. This function enables you to define:
 
 * The rollup `<interval>`: the interval of time your data is aggregated over ([if larger than the query-enforced rollup interval](#rollup-interval-enforced-vs-custom)).
 * The rollup `<aggregator>`: How your data points are aggregated within a given rollup time interval.
+
+To apply a rollup, navigate to the **Add function** (Σ) button of the graphing editor: 
+
+{{< img src="dashboards/functions/rollup/rollup_option_1.mp4" alt="Select the Rollup average option from the Add function button" video=true >}}
 
 **Note**: The Distribution Metric type does not have a rollup `aggregator` parameter. This metric type is aggregated both in time and space. See the documentation on [rollup for distributions with percentiles][2] to learn more.
 
@@ -58,6 +61,16 @@ A custom `.rollup()` function can be used to enforce the type of time aggregatio
   {{< img src="dashboards/functions/rollup/as_count_dropdown.png" alt="as_count" style="width:100%;">}}
 
 For more details about how to use `.as_count()` and `.as_rate()` see the [Visualize StatsD metrics][3] blog post, or learn more about the effects of those functions with the documentation on [in-application modifiers][4].
+
+## Rollup with calendar aligned queries 
+
+{{< img src="dashboards/functions/rollup/calendar_aligned_queries.png" alt="calendar_aligned_queries" style="width:100%;" >}}
+
+You can customize how your metrics data is bucketed over time when using the `.rollup()` function with calendar aligned queries. This feature allows you the flexibility to define:
+
+* Calendar aligned monthly queries with adjustable start date / timezones
+* Weekly rollups with adjustable start date / timezones
+* Daily rollups with adjustable start time / timezones
 
 ## Rollups in monitors
 

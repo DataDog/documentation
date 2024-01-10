@@ -64,13 +64,35 @@ datadogRum.init({
   //  env: 'production',
   //  version: '1.0.0',
   sessionSampleRate: 100,
+  sessionReplaySampleRate: 100,
+  trackResources: true,
+  trackLongTasks: true,
+  trackUserInteractions: true,
+});
+```
+
+</details>
+
+<details>
+  <summary>before <code>v5.0.0</code></summary>
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum'
+
+datadogRum.init({
+  applicationId: '<DATADOG_APPLICATION_ID>',
+  clientToken: '<DATADOG_CLIENT_TOKEN>',
+  site: '<DATADOG_SITE>',
+  //  service: 'my-web-application',
+  //  env: 'production',
+  //  version: '1.0.0',
+  sessionSampleRate: 100,
   sessionReplaySampleRate: 100, // if not included, the default is 100
   trackResources: true,
   trackLongTasks: true,
   trackUserInteractions: true,
-  });
+});
 datadogRum.startSessionReplayRecording();
-
 ```
 
 </details>
@@ -93,9 +115,8 @@ datadogRum.init({
   trackResources: true,
   trackLongTasks: true,
   trackInteractions: true,
-  });
+});
 datadogRum.startSessionReplayRecording();
-
 ```
 
 </details>
@@ -116,9 +137,8 @@ datadogRum.init({
   sampleRate: 100,
   premiumSampleRate: 100, // if not included, the default is 100
   trackInteractions: true,
-  });
+});
 datadogRum.startSessionReplayRecording();
-
 ```
 
 </details>
@@ -139,14 +159,13 @@ datadogRum.init({
   sampleRate: 100,
   replaySampleRate: 100, // if not included, the default is 100
   trackInteractions: true,
-  });
+});
 datadogRum.startSessionReplayRecording();
-
 ```
 
 </details>
 
-The `trackUserInteractions` and `trackFrustrations` parameters enable the automatic collection of user clicks in your application. **Sensitive and private data** contained in your pages may be included to identify the elements interacted with.
+The `trackUserInteractions` parameter enables the automatic collection of user clicks in your application. **Sensitive and private data** contained in your pages may be included to identify the elements interacted with.
 
 ### CDN async
 
@@ -154,6 +173,168 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 
 <details open>
   <summary>Latest version</summary>
+
+{{< site-region region="us" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="ap1" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/ap1/v5/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'ap1.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="eu" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/eu1/v5/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'datadoghq.eu',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="us3" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us3/v5/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'us3.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="us5" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'us5.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="gov" >}}
+```html
+<script>
+  (function(h,o,u,n,d) {
+     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+     d=o.createElement(u);d.async=1;d.src=n
+     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/datadog-rum-v5.js','DD_RUM')
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'ddog-gov.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+  })
+</script>
+```
+{{</ site-region>}}
+
+</details>
+
+<details>
+  <summary>before<code>v5.0.0</code></summary>
 
 {{< site-region region="us" >}}
 ```html
@@ -800,7 +981,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 
 </details>
 
-The `trackUserInteractions` and `trackFrustrations` parameters enable the automatic collection of user clicks in your application. **Sensitive and private data** contained in your pages may be included to identify the elements interacted with.
+The `trackUserInteractions` parameter enables the automatic collection of user clicks in your application. **Sensitive and private data** contained in your pages may be included to identify the elements interacted with.
 
 Early RUM API calls must be wrapped in the `window.DD_RUM.onReady()` callback. This ensures the code only gets executed once the SDK is properly loaded.
 
@@ -810,6 +991,138 @@ Add the generated code snippet to the head tag (in front of any other script tag
 
 <details open>
   <summary>Latest version</summary>
+
+{{< site-region region="us" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="ap1" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/ap1/v5/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'ap1.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="eu" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/eu1/v5/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'datadoghq.eu',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="us3" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/us3/v5/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'us3.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="us5" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/us5/v5/datadog-rum.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'us5.datadoghq.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+</script>
+```
+{{</ site-region>}}
+{{< site-region region="gov" >}}
+```html
+<script src="https://www.datadoghq-browser-agent.com/datadog-rum-v5.js" type="text/javascript"></script>
+<script>
+  window.DD_RUM &&
+    window.DD_RUM.init({
+      clientToken: '<CLIENT_TOKEN>',
+      applicationId: '<APPLICATION_ID>',
+      site: 'ddog-gov.com',
+      //  service: 'my-web-application',
+      //  env: 'production',
+      //  version: '1.0.0',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 100,
+      trackResources: true,
+      trackLongTasks: true,
+      trackUserInteractions: true,
+    });
+</script>
+```
+{{</ site-region>}}
+
+</details>
+
+<details>
+  <summary>before<code>v5.0.0</code></summary>
 
 {{< site-region region="us" >}}
 ```html
@@ -1360,7 +1673,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 
 </details>
 
-The `trackUserInteractions` and `trackFrustrations` parameters enable the automatic collection of user clicks in your application. **Sensitive and private data** contained in your pages may be included to identify the elements interacted with.
+The `trackUserInteractions` parameter enables the automatic collection of user clicks in your application. **Sensitive and private data** contained in your pages may be included to identify the elements interacted with.
 
 The `window.DD_RUM` check is used to prevent issues if a loading failure occurs with the RUM Browser SDK.
 
@@ -1375,10 +1688,7 @@ window.DD_RUM.init({
   applicationId: 'XXX',
   clientToken: 'XXX',
   site: 'datadoghq.com',
-  sessionSampleRate: 100,
-  sessionReplaySampleRate: 100, // if not included, the default is 100
-  trackResources: true,
-  trackLongTasks: true,
+  ...
 })
 ```
 
@@ -1425,23 +1735,11 @@ The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13. Follows
 **Default**: `false` <br/>
 Allows you to control RUM views creation. See [override default RUM view names][10].
 
-`trackInteractions`
-: Optional - **Deprecated**<br/>
-**Type**: Boolean<br/>
-**Default**: `false` <br/>
-See `trackUserInteractions`.
-
 `trackUserInteractions`
 : Optional<br/>
 **Type**: Boolean<br/>
 **Default**: `false` <br/>
 Enables [automatic collection of users actions][6].
-
-`trackFrustrations`
-: Optional<br/>
-**Type**: Boolean<br/>
-**Default**: `false` <br/>
-Enables [automatic collection of user frustrations][20]. Implies `trackUserInteractions: true`.
 
 `trackResources`
 : Optional<br/>
@@ -1458,7 +1756,7 @@ Enables collection of long task events.
 `defaultPrivacyLevel`
 : Optional<br/>
 **Type**: String<br/>
-**Default**: `mask-user-input` <br/>
+**Default**: `mask` <br/>
 See [Session Replay Privacy Options][13].
 
 `actionNameAttribute`
@@ -1466,34 +1764,16 @@ See [Session Replay Privacy Options][13].
 **Type**: String<br/>
 Specify your own attribute to be used to [name actions][9].
 
-`sampleRate`
-: Optional - **Deprecated**<br/>
-**Type**: Number<br/>
-**Default**: `100`<br/>
-See ``sessionSampleRate`.
-
 `sessionSampleRate`
 : Optional<br/>
 **Type**: Number<br/>
 **Default**: `100`<br/>
 The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send RUM events. For more details about `sessionSampleRate`, see the [sampling configuration][21].
 
-`replaySampleRate`
-: Optional - **Deprecated**<br/>
-**Type**: Number<br/>
-**Default**: `100`<br/>
-See `sessionReplaySampleRate`.
-
-`premiumSampleRate`
-: Optional - **Deprecated**<br/>
-**Type**: Number<br/>
-**Default**: `100`<br/>
-See `sessionReplaySampleRate`.
-
 `sessionReplaySampleRate`
 : Optional<br/>
 **Type**: Number<br/>
-**Default**: `100`<br/>
+**Default**: `0`<br/>
 The percentage of tracked sessions with [Browser RUM & Session Replay pricing][11] features: `100` for all, `0` for none. For more details about `sessionReplaySampleRate`, see the [sampling configuration][21].
 
 `silentMultipleInit`
@@ -1502,26 +1782,15 @@ The percentage of tracked sessions with [Browser RUM & Session Replay pricing][1
 **Default**: `false`<br/>
 Initialization fails silently if the RUM Browser SDK is already initialized on the page.
 
-`proxyUrl`
+`proxy`
 : Optional<br/>
 **Type**: String<br/>
 Optional proxy URL, for example: https://www.proxy.com/path. For more information, see the full [proxy setup guide][7].
-
-`allowedTracingOrigins`
-: Optional - **Deprecated**<br/>
-**Type**: List<br/>
-A list of request origins used to inject tracing headers. For more information, see [Connect RUM and Traces][12].
 
 `allowedTracingUrls`
 : Optional<br/>
 **Type**: List<br/>
 A list of request URLs used to inject tracing headers. For more information, see [Connect RUM and Traces][12].
-
-`tracingSampleRate`
-: Optional - **Deprecated**<br/>
-**Type**: Number<br/>
-**Default**: `100`<br/>
-See `traceSampleRate`.
 
 `traceSampleRate`
 : Optional<br/>
@@ -1545,6 +1814,24 @@ A list of request origins ignored when computing the page activity. See [How pag
 **Type**: String<br/>
 URL pointing to the Datadog Browser SDK Worker JavaScript file. The URL can be relative or absolute, but is required to have the same origin as the web application. See [Content Security Policy guidelines][22] for more information.
 
+`compressIntakeRequests`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false`<br/>
+Compress requests sent to the Datadog intake to reduce bandwidth usage when sending large amounts of data. The compression is done in a Worker thread. See [Content Security Policy guidelines][22] for more information.
+
+`storeContextsAcrossPages`
+: Optional<br/>
+**Type**: String<br/>
+**Default**: `false`<br/>
+Store global context and user context in `localStorage` to preserve them along the user navigation. See [Contexts life cycle][24] for more details and specific limitations.
+
+`allowUntrustedEvents`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false`<br/>
+Allow capture of [untrusted events][25], for example in automated UI tests.
+
 Options that must have matching configuration when you are using the Logs Browser SDK:
 
 `trackSessionAcrossSubdomains`
@@ -1559,11 +1846,23 @@ Preserve the session across subdomains for the same site.
 **Default**: `false`<br/>
 Use a secure session cookie. This disables RUM events sent on insecure (non-HTTPS) connections.
 
-`useCrossSiteSessionCookie`
+`usePartitionedCrossSiteSessionCookie`
 : Optional<br/>
 **Type**: Boolean<br/>
 **Default**:`false`<br/>
-Use a secure cross-site session cookie. This allows the RUM Browser SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`.
+Use a partitioned secure cross-site session cookie. This allows the RUM Browser SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`.
+
+`useCrossSiteSessionCookie`
+: Optional - **Deprecated**<br/>
+**Type**: Boolean<br/>
+**Default**:`false`<br/>
+See `usePartitionedCrossSiteSessionCookie`.
+
+`allowFallbackToLocalStorage`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false`<br/>
+Allows the use of `localStorage` when cookies cannot be set. This enables the RUM Browser SDK to run in environments that do not provide cookie support. See [Monitor Electron Applications Using the Browser SDK][23] for a typical use-case.
 
 ### Tagging
 
@@ -1650,7 +1949,7 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [7]: /real_user_monitoring/guide/proxy-rum-data/
 [8]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
 [9]: /real_user_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
-[10]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
+[10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
 [12]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum
 [13]: /real_user_monitoring/session_replay/privacy_options?tab=maskuserinput
@@ -1663,3 +1962,6 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [20]: /real_user_monitoring/frustration_signals/
 [21]: /real_user_monitoring/guide/sampling-browser-plans/
 [22]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
+[23]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
+[24]: https://docs.datadoghq.com/real_user_monitoring/browser/advanced_configuration#contexts-life-cycle
+[25]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted

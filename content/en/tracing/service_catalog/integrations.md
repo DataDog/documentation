@@ -19,7 +19,7 @@ When you configure a service account for a [Datadog integration][10], you can in
 
 ## PagerDuty integration
 
-You can add PagerDuty metadata to a service so that the Service Catalog displays and links to information such as who is on-call and whether there are active PagerDuty incidents for the service.
+You can add PagerDuty metadata to a service so that the Service Catalog displays and links to information such as who is on-call and whether there are active PagerDuty incidents for the service. Because only one on-call can be displayed, Datadog selects the first user by escalation level, then alphabetically by email.
 
 ### Setup
 
@@ -29,7 +29,9 @@ You can connect any service in your [PagerDuty Service Directory][1]. You can ma
 
 2. Get your PagerDuty API access key as described in their [API Access Key][3] documentation.
 
-3. Follow the [integration configuration instructions][4] to finish configuring it.
+3. Enter the API Access Key on [Pagerduty Integration Setup][4] to finish configuring it.
+
+  {{< img src="tracing/service_catalog/pagerduty-token.png" alt="Copy and Paste the API Key to Pagerduty Setup." style="width:100%;" >}}
 
 4. Update the service definition with the PagerDuty information. For example, pass in the following `integrations` configuration lines within the full [service definition][5]:
 

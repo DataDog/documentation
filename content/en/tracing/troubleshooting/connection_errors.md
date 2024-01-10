@@ -190,7 +190,7 @@ If you cannot isolate the root cause, [contact Datadog Support][4] with:
 
 #### Check network configuration
 
-In containerized setups, submitting traces to `localhost` or `127.0.0.1` is often incorrect since the Datadog Agent is also containerized and located elsewhere. **Note**: AWS ECS on Fargate and AWS EKS on Fargate are exceptions to this rule.
+In containerized setups, submitting traces to `localhost` or `127.0.0.1` is often incorrect since the Datadog Agent is also containerized and located elsewhere. **Note**: Amazon ECS on Fargate and AWS EKS on Fargate are exceptions to this rule.
 
 Determine if the networking between the application and the Datadog Agent matches what is needed for that configuration.
 
@@ -213,8 +213,8 @@ See the table below for example setups. Some require setting up additional netwo
 
 | Setup   | `DD_AGENT_HOST`  |
 |---------|------------------|
-| [AWS ECS on EC2][7] | Evaluate to Amazon's EC2 metadata endpoint |
-| [AWS ECS on Fargate][8] | Do not set `DD_AGENT_HOST` |
+| [Amazon ECS on EC2][7] | Evaluate to Amazon's EC2 metadata endpoint |
+| [Amazon ECS on Fargate][8] | Do not set `DD_AGENT_HOST` |
 | [AWS EKS on Fargate][9] | Do not set `DD_AGENT_HOST` |
 | [AWS Elastic Beanstalk - Single Container][10] | Gateway IP (usually `172.17.0.1`) |
 | [AWS Elastic Beanstalk - Multiple Containers][11] | Link pointing to the Datadog Agent container name |
@@ -264,7 +264,7 @@ If the configuration is correct, but you're still seeing connection errors, [con
 
 [1]: /tracing/troubleshooting/tracer_startup_logs/
 [2]: /tracing/troubleshooting/tracer_debug_logs/
-[3]: /agent/guide/agent-commands/#agent-information
+[3]: /agent/configuration/agent-commands/#agent-information
 [4]: /help/
 [5]: /agent/troubleshooting/send_a_flare/
 [6]: https://app.datadoghq.com/apm/service-setup

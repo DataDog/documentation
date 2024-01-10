@@ -22,6 +22,8 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}Getting started with RUM Deployment Tracking{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}Getting started with Feature Flag Tracking{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}Monitor kiosk sessions using RUM{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}Best practices for RUM sampling{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-utm-campaigns-in-rum" >}}Monitor UTM Campaigns in RUM{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Browser RUM:" >}}
@@ -37,6 +39,14 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/enable-rum-shopify-store/" >}}Enable RUM on your Shopify store{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/enable-rum-squarespace-store/" >}}Enable RUM on your Squarespace store{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/enable-rum-woocommerce-store/" >}}Enable RUM on your WordPress + WooCommerce store{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-your-nextjs-app-with-rum/" >}}Monitor your Next.js application with RUM{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk/" >}}Monitor Electron applications using the browser SDK{{< /nextlink >}}
+{{< /whatsnext >}}
+
+{{< whatsnext desc="Mobile RUM:" >}}
+    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-deprecation-policy" >}}RUM Mobile SDKs Deprecation Policy{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}Upgrade the RUM Mobile SDKs{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}Use multiple instances of the Mobile SDK{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Session Replay:" >}}
@@ -45,5 +55,5 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/shadow-dom" >}}Enrich your Session Replays with Shadow DOM components{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools" >}}Connect Session Replay to your third-party tools{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}Using Session Replay as a key tool in post-mortems{{< /nextlink >}}
-
+    {{< nextlink href="/synthetics/guide/rum-to-synthetics" >}}Generate Synthetic Browser Tests from Session Replay{{< /nextlink >}}
 {{< /whatsnext >}}

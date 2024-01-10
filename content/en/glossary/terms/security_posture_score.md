@@ -16,12 +16,12 @@ For [Cloud Security Management Misconfigurations][3], the security posture score
 
 $${({\text"Pcrictical"/\text"Pcritical + Fcritical"}^2) *8}+{(\text"Phigh"/\text"Phigh + Fhigh") *6}+{(\text"Pmedium"/\text"Pmedium + Fmedium") *3}+{(\text"Plow"/\text"Plow + Flow") *2}+{(\text"Pinfo"/\text"Pinfo + Finfo") *1}$$
 
-- P is the number of findings that evaluate to pass.
-- F is the number of findings that evaluate to fail.
+- P is the number of misconfigurations that evaluate to pass.
+- F is the number of misconfigurations that evaluate to fail.
 
-The formula uses a weighted ratio that considers the severity of the finding and the number of pass/fail findings for each severity. Only rules and findings that have the tag `scored:true` are included in the calculation.
+The formula uses a weighted ratio that considers the severity of the misconfiguration and the number of pass/fail misconfigurations for each severity. Only rules and misconfigurations that have the tag `scored:true` are included in the calculation.
 
-You can improve your score by remediating findings, either by fixing the underlying issues or by muting the finding for the impacted resource.
+You can improve your score by remediating misconfigurations, either by fixing the underlying issues or by muting the misconfiguration for the impacted resource. The posture score is updated every hour.
 
 [1]: /security/default_rules/#cat-posture-management-cloud
 [2]: /security/default_rules/#cat-posture-management-infra

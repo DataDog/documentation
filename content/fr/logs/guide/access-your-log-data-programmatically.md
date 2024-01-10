@@ -437,8 +437,8 @@ Les paramètres `from` and `to` peuvent être définis sur les valeurs suivantes
 ```javascript
 {
   "filter": {
-    "from": "now",
-    "to": "now-1h"
+    "from": "now-1h",
+    "to": "now"
   }
 }
 ```

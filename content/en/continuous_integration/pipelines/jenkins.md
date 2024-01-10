@@ -68,7 +68,7 @@ To enable [collecting logs from your jobs](#enable-job-log-collection), configur
 
 3. [Restart the Agent][1] for the changes to take effect.
 
-[1]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[1]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 {{% /tab %}}
 
 {{% tab "Windows" %}}
@@ -86,7 +86,7 @@ To enable [collecting logs from your jobs](#enable-job-log-collection), configur
 
 3. [Restart the Agent][1] for the changes to take effect.
 
-[1]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[1]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 {{% /tab %}}
 
 {{% tab "macOS" %}}
@@ -104,7 +104,7 @@ To enable [collecting logs from your jobs](#enable-job-log-collection), configur
 
 3. [Restart the Agent][1] for the changes to take effect.
 
-[1]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
+[1]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -360,7 +360,7 @@ Re/Initialize Datadog-Plugin Agent Http Client
 TRACE -> http://<HOST>:<TRACE_PORT>/v0.3/traces
 {{< /code-block >}}
 
-### Correlate infrastructure metrics 
+## Correlate infrastructure metrics
 
 If you are using Jenkins workers, you can correlate pipelines with the infrastructure that is running them. For this feature to work:
 
@@ -534,6 +534,79 @@ If your Jenkins instance uses the Jenkins [`configuration-as-code`][1] plugin:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Enable Test Visibility
+
+This is an optional step that enables the collection of tests data using [Test Visibility][16].
+
+See the [Test Visibility documentation][17] for your language to make sure that the testing framework that you use is supported.
+
+There are different ways to enable Test Visibility inside a Jenkins job or pipeline:
+1. Using the Jenkins configuration UI.
+2. Adding the `datadog` step inside the pipeline script.
+3. Configuring the tracer manually.
+
+### Enable with the Jenkins configuration UI
+
+UI-based Test Visibility configuration is available in Datadog Jenkins plugin v5.6.0 or newer.
+
+This option is not suitable for pipelines that are configured entirely in `Jenkinsfile` (for example, Multibranch pipelines or pipelines from Organization Folder).
+For these pipelines use declarative configuration with the `datadog` step (described in the next section).
+
+To enable Test Visibility via UI do the following:
+1. In your Jenkins instance web interface, go to the job or pipeline that you want to instrument and choose the **Configure** option.
+2. In the **General** configuration section, tick the **Enable Datadog Test Visibility** checkbox.
+3. Enter the name of the service or library being tested into the **Service Name** input. You can choose any value that makes sense to you.
+4. Choose the languages for which you want to enable tests instrumentation. Some of the languages do not support configuration through the UI. To configure Test Visibility for these languages, follow the manual [configuration instructions][18].
+5. Optionally, provide [additional configuration settings][18].
+6. Click **Save**.
+
+{{< img src="ci/ci-jenkins-plugin-tests-config.png" alt="Datadog Test Visibility configuration for Jenkins" style="width:100%;">}}
+
+### Enable with the `datadog` pipeline step
+
+This configuration option is available in Datadog Jenkins plugin v5.6.2 or newer.
+
+In declarative pipelines, add the step to a top-level `options` block like so:
+
+```groovy
+pipeline {
+    agent any
+    options {
+        datadog(testVisibility: [
+            enabled: true,
+            serviceName: "my-service", // the name of service or library being tested
+            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON")
+            additionalVariables: ["my-var": "value"]  // additional tracer configuration settings (optional)
+        ])
+    }
+    stages {
+        stage('Example') {
+            steps {
+                echo "Hello world."
+            }
+        }
+    }
+}
+```
+
+In a scripted pipeline, wrap the relevant section with the `datadog` step like so:
+
+```groovy
+datadog(testVisibility: [ enabled: true, serviceName: "my-service", languages: ["JAVASCRIPT"], additionalVariables: [:] ]) {
+  node {
+    stage('Example') {
+      echo "Hello world."
+    }
+  }
+}
+```
+
+The other `datadog` settings, such as `collectLogs` or `tags` can be added alongside the `testVisibility` block.
+
+### Enable with manual tracer configuration
+
+Follow the manual Test Visibility [configuration instructions][17] that are specific to your language.
 
 ## Set the default branch name
 
@@ -739,6 +812,9 @@ datadog(tags: ["team:backend", "release:canary"]){
 }
 {{< /code-block >}}
 
+#### Integrate with Datadog Teams
+To display and filter the teams associated with your pipelines, add `team:<your-team>` as a custom tag. The custom tag name must match your [Datadog Teams][15] team handle exactly.
+
 ### Set global custom tags
 
 You can configure the Jenkins Plugin to send custom tags in all pipeline traces:
@@ -880,3 +956,7 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 [11]: /continuous_integration/pipelines/jenkins/?tab=linux#correlate-infrastructure-metrics
 [12]: /continuous_integration/pipelines/custom_tags_and_metrics/
 [14]: /agent/
+[15]: /account_management/teams/
+[16]: /continuous_integration/tests/
+[17]: /continuous_integration/tests/setup/
+[18]: /tracing/trace_collection/library_config/

@@ -7,7 +7,7 @@ guides:
     link_text: Getting Started with the Agent
     link: getting_started/agent/
   - title: Set Up Integrations
-    desc: Gather metrics, traces, and logs with over 600 built-in integrations to send to Datadog.
+    desc: Gather metrics, traces, and logs with over 650 built-in integrations to send to Datadog.
     link_text: Getting Started with Integrations
     link: getting_started/integrations/
   - title: Get Started in App
@@ -67,7 +67,7 @@ nav_sections:
       - title: Security
         link: security/
         icon: security-platform
-        desc: Detect threats, vulnerabilities, and misconfigurations in your applications and infrastructure
+        desc: Detect threats, vulnerabilities, and misconfigurations
       - title: Synthetic Monitoring
         link: synthetics/
         icon: synthetics
@@ -96,6 +96,10 @@ nav_sections:
         link: mobile/
         icon: mobile
         desc: View Datadog alerts, incidents, and more on your mobile device
+      - title: Incident Management
+        link: service_management/incident_management
+        icon: incidents
+        desc: Identify, analyze, and mitigate disruptive incidents in your organization
       - title: Datadog Watchdog
         link: watchdog/
         icon: watchdog
@@ -104,6 +108,10 @@ nav_sections:
         link: continuous_integration/
         icon: ci
         desc: See test metrics, build results, and pipeline executions for your CI pipeline
+      - title: CD Visibility
+        link: continuous_delivery/
+        icon: ci
+        desc: See deployment metrics, results, and insights for your CD provider
       - title: Cloud Cost Management
         link: cloud_cost_management/
         icon: cloud-cost-management

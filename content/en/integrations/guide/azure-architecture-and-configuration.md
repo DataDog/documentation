@@ -120,7 +120,7 @@ The implications of restricting access below the Monitoring Reader role are:
   - Partial or total loss of data for [Cloud Security Management Misconfigurations (CSM Misconfigurations)][3] or [Resource Catalog][4]
   - Partial or total loss of Datadog-generated metrics
 
-The implications of restricting or omitting the the Azure AD roles are:
+The implications of restricting or omitting the Azure AD roles are:
 
   - Partial or total loss of metadata for Azure AD resources in CSM Misconfigurations
   - Partial or total loss of credential expiration monitoring for Azure AD resources

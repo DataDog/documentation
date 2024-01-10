@@ -98,7 +98,7 @@ Le tableau suivant décrit comment utiliser les paramètres ci-dessus pour confi
 
 Une application Java appelée `app01` s'exécute dans VMware Tanzu Application Service. La configuration suivante redirige le conteneur `stdout`/`stderr` vers le port local `10514`. L'Agent est alors configuré de façon à recueillir les logs de ce port tout en définissant la valeur correcte de `service` et `source` :
 
-```text
+```shell
 # Rediriger Stdout/Stderr vers le port 10514
 cf set-env app01 STD_LOG_COLLECTION_PORT 10514
 # Configurer l'Agent pour effectuer une écoute sur le port 10514

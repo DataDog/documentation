@@ -24,7 +24,7 @@ By enabling Session Replay, you can automatically mask sensitive elements from b
 
 <div class="alert alert-warning"><code>defaultPrivacyLevel</code> and <code>mask-user-input</code> are available in the SDK v3.6.0+.</div>
 
-To enable your privacy settings, set `defaultPrivacyLevel` to `mask-user-input`, `mask`, or `allow` in your JavaScript configuration.
+To enable your privacy settings, set `defaultPrivacyLevel` to `mask`, `mask-user-input`, or `allow` in your JavaScript configuration.
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -41,13 +41,20 @@ datadogRum.init({
     trackResources: true,
     trackLongTasks: true,
     trackUserInteractions: true,
-    defaultPrivacyLevel: 'mask-user-input' | 'mask' | 'allow'
+    defaultPrivacyLevel: 'mask' | 'mask-user-input' | 'allow'
 });
-
-datadogRum.startSessionReplayRecording();
 ```
 
 After updating your configuration, you can override elements of your HTML documents with the below privacy options.
+
+### Mask mode
+
+Setting `defaultPrivacyLevel` to `mask` mode masks all HTML text, user input, images, links and [`data-*` attributes][1]. Text on your application is replaced with `X`, rendering the page into a wireframe.
+
+{{< img src="real_user_monitoring/session_replay/mask-mode-fixed.png" alt="Mask mode" style="width:70%;">}}
+
+**Note:** By default, `mask` is the privacy setting when you enable Session Replay.
+**Note**: Masked data is not stored on Datadog servers.
 
 ### Mask user input mode
 
@@ -55,15 +62,6 @@ Masks most form fields such as inputs, text areas, and checkbox values while rec
 
 {{< img src="real_user_monitoring/session_replay/mask-user-input-v2.png" alt="Mask user input mode" style="width:70%;">}}
 
-**Note:** By default, `mask-user-input` is the privacy setting when you enable Session Replay, which means all input fields are automatically masked.
-
-### Mask mode
-
-Setting `defaultPrivacyLevel` to `mask` mode will mask all HTML text, user input, images, and links. Text on your application is replaced with `X`, rendering the page into a wireframe.
-
-{{< img src="real_user_monitoring/session_replay/mask-mode-fixed.png" alt="Mask mode" style="width:70%;">}}
-
-**Note**: Masked data is not stored on Datadog servers.
 ### Allow mode
 
 Records everything unmasked.
@@ -134,3 +132,5 @@ Datadog is working to add more privacy features to RUM & Session Replay. Have so
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes

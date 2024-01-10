@@ -35,11 +35,11 @@ If the integration is not listed under **Running Checks**:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/agent-configuration-files/#agent-configuration-directory
-[2]: /agent/guide/agent-commands/#agent-information
+[1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
+[2]: /agent/configuration/agent-commands/#agent-information
 [3]: https://app.datadoghq.com/metric/explorer
-[4]: /agent/guide/agent-log-files/
+[4]: /agent/configuration/agent-log-files/
 [5]: /help/
 [6]: /integrations/
 [7]: https://codebeautify.org/yaml-parser-online
-[8]: /agent/guide/agent-commands/#start-stop-restart-the-agent
+[8]: /agent/configuration/agent-commands/#start-stop-restart-the-agent

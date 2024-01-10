@@ -39,7 +39,7 @@ Watchdog supports four types of root causes:
 
 * Version changes, as captured by APM Deployment Tracking
 * Traffic increases, as captured by hit rate metrics on your APM-instrumented services
-* AWS instance failures, as captured by AWS EC2 integration metrics
+* AWS instance failures, as captured by Amazon EC2 integration metrics
 * Running out of disk space, as captured by system metrics from the Datadog agent
 
 Watchdog never classifies degraded application performance, such as higher latency or new errors, as the root cause of an incident. Datadog calls an initial symptom of degraded application performance a **critical failure**, as described below. 

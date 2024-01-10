@@ -169,7 +169,7 @@ Datadog でカスタム日付と時間形式をパースする方法について
 
 [**Pipelines** ページ][1]でログステータスリマッパープロセッサーを定義します。
 
-{{< img src="logs/log_configuration/processor/severity_remapper_processor.png" alt="ログ重大度リマッピング" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/severity_remapper.png" alt="ログ重大度リマッピング" style="width:60%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}

@@ -52,20 +52,10 @@ Pour installer et configurer le plug-in Serverless Framework Datadog :
 2. Activez ASM en mettant à jour votre fichier `serverless.yml` (ou en utilisant toute autre méthode privilégiée pour définir les variables d'environnement de votre fonction) :
    ```yaml
    environment:
+     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
      DD_SERVERLESS_APPSEC_ENABLED: true
    ```
-   Pour les **fonctions Go uniquement** ajoutez également ce qui suit :
-   ```yaml
-   environment:
-     DD_UNIVERSAL_INSTRUMENTATION: true
-   ```
-   Pour les **fonctions NodeJS ou Python**, ajoutez également ce qui suit :
-   ```yaml
-   environment:
-     DD_EXPERIMENTAL_ENABLE_PROXY: true
-     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
-   ```
-3. Redéployez la fonction et invoquez-la. Après quelques minutes, celle-ci apparaît dans les [vues ASM][3].
+3. Redéployez la fonction et invoquez-la. Après quelques minutes, elle apparaît dans les [vues ASM][3].
 
 [1]: /fr/serverless/serverless_integrations/plugin
 [2]: /fr/serverless/libraries_integrations/extension
@@ -103,7 +93,7 @@ Pour installer et configurer le plug-in Serverless Framework Datadog :
          ```  
          Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour RUNTIME sont `Node12-x`, `Node14-x`, `Node16-x` et `Node18-x`.
 
-   - **Java** : [configurez les couches][1] de votre fonction Lambda en utilisant l'ARN dans l'un des formats suivants, en fonction de l'endroit où votre Lambda est déployée. Remplacez `<AWS_REGION>` par une région AWS valide comme `us-east-1` :
+   - **Java** : [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN en respectant l'un des formats suivants, en fonction de l'endroit où votre fonction Lambda est déployée. Remplacez `<AWS_REGION>` par une région AWS valide telle que `us-east-1` :
      ```sh
      # In AWS commercial regions
      arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:8
@@ -114,7 +104,7 @@ Pour installer et configurer le plug-in Serverless Framework Datadog :
      ```sh
      go get -u github.com/DataDog/datadog-lambda-go
      ```
-   - **.NET** : [configurez les couches][1] de votre fonction Lambda en utilisant l'ARN dans l'un des formats suivants, en fonction de l'endroit où votre Lambda est déployée. Remplacez `<AWS_REGION>` par une région AWS valide comme `us-east-1` :
+   - **.NET** : [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN en respectant l'un des formats suivants, en fonction de l'endroit où votre fonction Lambda est déployée. Remplacez `<AWS_REGION>` par une région AWS valide telle que `us-east-1` :
      ```sh
      # x86-based Lambda in AWS commercial regions
      arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:6
@@ -125,7 +115,7 @@ Pour installer et configurer le plug-in Serverless Framework Datadog :
      # arm64-based Lambda  in AWS GovCloud regions
      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:6
      ```
-2. Installez l'extension Lambda Datadog en configurant les couches de votre fonction Lambda avec l'ARN dans l'un des formats suivants. Remplacez `<AWS_REGION>` par une région AWS valide comme `us-east-1` :
+2. Installez l'extension Lambda Datadog en configurant les couches pour votre fonction Lambda à l'aide de l'ARN, en respectant l'un des formats suivants. Remplacez `<AWS_REGION>` par une région AWS valide telle que `us-east-1` :
    ```sh
    # x86-based Lambda in AWS commercial regions
    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:36
@@ -155,7 +145,7 @@ Pour installer et configurer le plug-in Serverless Framework Datadog :
           # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
           arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:72
           ```
-          Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour `RUNTIME` sont `Python37`, `Python38` et `Python39`.
+          Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour `RUNTIME` sont `Python37`, `Python38`, `Python39`, `Python310` et `Python311`.
 
    - **Node**   
        ``` sh
@@ -168,7 +158,7 @@ Pour installer et configurer le plug-in Serverless Framework Datadog :
          Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour RUNTIME sont `Node12-x`, `Node14-x`, `Node16-x` et `Node18-x`.
 
 
-   - **Java** : [configurez les couches][1] de votre fonction Lambda en utilisant l'ARN dans l'un des formats suivants, en fonction de l'endroit où votre Lambda est déployée. Remplacez `<AWS_REGION>` par une région AWS valide comme `us-east-1` :
+   - **Java** : [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN en respectant l'un des formats suivants, en fonction de l'endroit où votre fonction Lambda est déployée. Remplacez `<AWS_REGION>` par une région AWS valide telle que `us-east-1` :
      ```sh
      # In AWS commercial regions
      arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:8
@@ -179,7 +169,7 @@ Pour installer et configurer le plug-in Serverless Framework Datadog :
      ```sh
      go get -u github.com/DataDog/datadog-lambda-go
      ```
-   - **.NET** : [configurez les couches][1] de votre fonction Lambda en utilisant l'ARN dans l'un des formats suivants, en fonction de l'endroit où votre Lambda est déployée. Remplacez `<AWS_REGION>` par une région AWS valide comme `us-east-1` :
+   - **.NET** : [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN en respectant l'un des formats suivants, en fonction de l'endroit où votre fonction Lambda est déployée. Remplacez `<AWS_REGION>` par une région AWS valide telle que `us-east-1` :
      ```sh
      # x86-based Lambda in AWS commercial regions
      arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet:6
@@ -190,7 +180,7 @@ Pour installer et configurer le plug-in Serverless Framework Datadog :
      # arm64-based Lambda  in AWS GovCloud regions
      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:6
      ```
-2. Installez l'extension Lambda Datadog en configurant les couches de votre fonction Lambda avec l'ARN dans l'un des formats suivants. Remplacez `<AWS_REGION>` par une région AWS valide comme `us-east-1` :
+2. Installez l'extension Lambda Datadog en configurant les couches pour votre fonction Lambda à l'aide de l'ARN, en respectant l'un des formats suivants. Remplacez `<AWS_REGION>` par une région AWS valide telle que `us-east-1` :
    ```sh
    # x86-based Lambda in AWS commercial regions
    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:36
@@ -208,27 +198,21 @@ Pour installer et configurer le plug-in Serverless Framework Datadog :
 3. Activez ASM en ajoutant les variables d'environnement suivantes sur le déploiement de votre fonction :
    ```yaml
    environment:
+     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
      DD_SERVERLESS_APPSEC_ENABLED: true
-   ```
-   Pour les **fonctions Go uniquement** ajoutez également ce qui suit :
-   ```yaml
-   environment:
-     DD_UNIVERSAL_INSTRUMENTATION: true
    ```
    Pour les **fonctions NodeJS ou Python**, ajoutez également ce qui suit :
    ```yaml
    environment:
-     DD_EXPERIMENTAL_ENABLE_PROXY: true
-     AWS_LAMBDA_EXEC_WRAPPER: /opt/datadog_wrapper
      DD_TRACE_ENABLED: true
    ```
-4. Pour les fonctions **Node** et **Python** uniquement, vérifiez que le gestionnaire de la fonction est correctement défini :
+4. Pour les fonctions **Node** et **Python** uniquement, vérifiez bien que le gestionnaire de la fonction est correctement défini :
     - **Node** : définissez le gestionnaire de votre fonction sur `/opt/nodejs/node_modules/datadog-lambda-js/handler.handler`. 
        - Définissez également la variable d'environnement `DD_LAMBDA_HANDLER` sur votre gestionnaire d'origine, comme `myfunc.handler`.
     - **Python** : définissez le gestionnaire de votre fonction sur `datadog_lambda.handler.handler`.
        - Définissez également la variable d'environnement `DD_LAMBDA_HANDLER` sur votre gestionnaire d'origine, comme `myfunc.handler`.
 
-4. Redéployez la fonction et invoquez-la. Après quelques minutes, celle-ci apparaît dans les [vues ASM][3].
+5. Redéployez la fonction et invoquez-la. Après quelques minutes, elle apparaît dans les [vues ASM][3].
 
 [3]: https://app.datadoghq.com/security/appsec?column=time&order=desc
 
@@ -239,7 +223,7 @@ Pour voir la détection des menaces Application Security Management en action, e
    ```sh
    curl -H 'My-ASM-Test-Header: acunetix-product' https://url-de-votre-fonction/route-existante
    ```
-Quelques minutes après avoir activé et testé votre application, **des informations sur les menaces s'affichent dans l'[Application Signals Explorer][3]**.
+Quelques minutes après avoir activé votre application et envoyé les patterns d'attaque, **des informations sur les menaces s'affichent dans l'[Application Signals Explorer][3]**.
 
 {{< img src="/security/application_security/application-security-signal.png" alt="Page des détails d'un signal de sécurité avec des tags, des métriques, des recommandations de mesures et les adresses IP de la personne malveillante associée à la menace" style="width:100%;" >}}
 

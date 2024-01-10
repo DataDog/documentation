@@ -43,8 +43,8 @@ To get started, follow the installation instructions to configure services with 
 
 | Runtime | Supported technologies |
 |---|----|
-| Java/Scala | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, HTTP, gRPC |
-| Python | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), Amazon SQS |
+| Java/Scala | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, HTTP, gRPC, Amazon SQS |
+| Python | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), Amazon SQS, Amazon Kinesis |
 | .NET | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ |
 | Node.js | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform) |
 | Go | All (with [manual instrumentation][1]) |

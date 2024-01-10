@@ -25,7 +25,7 @@ Complete the following steps to enable Database Monitoring with your database:
 ## Before you begin
 
 Supported SQL Server versions
-: 2012, 2014, 2016, 2017, 2019
+: 2012, 2014, 2016, 2017, 2019, 2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
@@ -121,8 +121,8 @@ Once all Agent configuration is complete, [restart the Datadog Agent][9].
 [6]: https://docs.microsoft.com/en-us/sql/ado/microsoft-activex-data-objects-ado
 [7]: https://docs.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server
 [8]: https://docs.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
-[9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: /agent/guide/agent-commands/#agent-status-and-information
+[9]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[10]: /agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Linux Host" %}}
@@ -168,8 +168,8 @@ Once all Agent configuration is complete, [restart the Datadog Agent][6].
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
 [5]: /getting_started/tagging/unified_service_tagging
-[6]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: /agent/guide/agent-commands/#agent-status-and-information
+[6]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[7]: /agent/configuration/agent-commands/#agent-status-and-information
 [8]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Docker" %}}
@@ -219,7 +219,7 @@ Use the `service` and `env` tags to link your database telemetry to other teleme
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
 [4]: /getting_started/tagging/unified_service_tagging
-[5]: /agent/guide/agent-commands/#agent-status-and-information
+[5]: /agent/configuration/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -329,7 +329,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: https://helm.sh
 [4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L324-L351
-[5]: /agent/guide/secrets-management
+[5]: /agent/configuration/secrets-management
 {{% /tab %}}
 {{< /tabs >}}
 

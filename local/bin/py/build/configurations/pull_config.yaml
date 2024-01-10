@@ -32,6 +32,24 @@
                 - "configuration & deployment"
               doc_link: https://docs.datadoghq.com/integrations/jenkins/
 
+    - org_name: ansible-collections
+      
+      repos:
+      - repo_name: datadog
+        contents:
+
+        - action: pull-and-push-file
+          branch: main
+          globs:
+          - README.md
+          options:
+            dest_path: '/agent/basic_agent_usage/'
+            file_name: 'ansible.md'
+            front_matters:
+              title: Ansible
+              kind: documentation
+              dependencies: ["https://github.com/ansible-collections/Datadog/blob/main/README.md"]
+
     - org_name: aws
 
       repos:
@@ -85,26 +103,6 @@
           - "*/README.md"
           - "*/datadog_checks/*/__about__.py"
 
-        - action: pull-and-push-file
-          branch: master
-          globs:
-          - docs/dev/README.md
-          options:
-            dest_path: '/developers/integrations/'
-            file_name: '_index.md'
-            front_matters:
-              dependencies: ["https://github.com/DataDog/integrations-core/blob/master/docs/dev/README.md"]
-
-        - action: pull-and-push-folder
-          branch: master
-          globs:
-          - docs/dev/*.md
-          options:
-            dest_dir: '/developers/integrations/'
-            path_to_remove: 'docs/dev/'
-            front_matters:
-              dependencies: [ "https://github.com/DataDog/integrations-core/blob/master/docs/dev/" ]
-
       - repo_name: integrations-extras
         contents:
 
@@ -156,10 +154,10 @@
           globs:
           - README.md
           options:
-            dest_path: '/agent/basic_agent_usage/'
-            file_name: 'ansible.md'
+            dest_path: '/agent/guide/'
+            file_name: 'ansible_standalone_role.md'
             front_matters:
-              title: Ansible
+              title: Set up Ansible Using a Standalone Datadog Role
               kind: documentation
               dependencies: ["https://github.com/DataDog/ansible-datadog/blob/main/README.md"]
 
@@ -232,7 +230,7 @@
           globs:
           - 'docs/GettingStarted.md'
           options:
-            dest_path: '/tracing/trace_collection/dd_libraries/'
+            dest_path: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/'
             file_name: 'ruby.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md"]
@@ -249,6 +247,7 @@
               - /agent/apm/ruby/
               - /tracing/setup_overview/setup/ruby
               - /tracing/trace_collection/ruby
+              - /tracing/trace_collection/dd_libraries/ruby/
 
       - repo_name: datadog-serverless-functions
         contents:
@@ -265,14 +264,14 @@
       - repo_name: serverless-plugin-datadog
         contents:
         - action: pull-and-push-file
-          branch: master
+          branch: main
           globs:
           - 'README.md'
           options:
             dest_path: '/serverless/libraries_integrations/'
             file_name: 'plugin.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/master/README.md"]
+              dependencies: ["https://github.com/DataDog/serverless-plugin-datadog/blob/main/README.md"]
               title: Datadog Serverless Framework Plugin
               kind: documentation
               aliases:
@@ -281,14 +280,14 @@
       - repo_name: datadog-cloudformation-macro
         contents:
         - action: pull-and-push-file
-          branch: master
+          branch: main
           globs:
           - 'serverless/README.md'
           options:
             dest_path: '/serverless/libraries_integrations/'
             file_name: 'macro.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-cloudformation-macro/blob/master/serverless/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-cloudformation-macro/blob/main/serverless/README.md"]
               title: Datadog Serverless Macro
               kind: documentation
               aliases:
@@ -345,13 +344,15 @@
           globs:
           - 'README.md'
           options:
-            dest_path: '/continuous_integration/static_analysis/'
+            dest_path: '/static_analysis/'
             file_name: 'circleci_orbs.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"]
               title: Static Analysis and CircleCI Orbs
               kind: documentation
               description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
+              aliases:
+              - /continuous_integration/static_analysis/circleci_orbs
 
       - repo_name: datadog-static-analyzer-github-action
         contents:
@@ -360,93 +361,25 @@
           globs:
           - 'README.md'
           options:
-            dest_path: '/continuous_integration/static_analysis/'
+            dest_path: '/static_analysis/'
             file_name: 'github_actions.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md"]
               title: Static Analysis and GitHub Actions
               kind: documentation
               description: Use Datadog and GitHub to run Static Analysis jobs in a CI pipeline.
+              aliases:
+              - /continuous_integration/static_analysis/github_actions
 
       - repo_name: datadog-static-analyzer-rule-docs
         contents:
         - action: pull-and-push-folder
           branch: main
           globs:
-          - rulesets/python-best-practices/*.md
+          - rulesets/**/*.md
           options:
-            dest_dir: '/continuous_integration/static_analysis/rules/python-best-practices/'
-            path_to_remove: 'rulesets/python-best-practices/'
-            front_matters:
-              disable_edit: true
-
-        - action: pull-and-push-folder
-          branch: main
-          globs:
-          - rulesets/python-code-style/*.md
-          options:
-            dest_dir: '/continuous_integration/static_analysis/rules/python-code-style/'
-            path_to_remove: 'rulesets/python-code-style/'
-            front_matters:
-              disable_edit: true
-
-        - action: pull-and-push-folder
-          branch: main
-          globs:
-          - rulesets/python-design/*.md
-          options:
-            dest_dir: '/continuous_integration/static_analysis/rules/python-design/'
-            path_to_remove: 'rulesets/python-design/'
-            front_matters:
-              disable_edit: true
-
-        - action: pull-and-push-folder
-          branch: main
-          globs:
-          - rulesets/python-django/*.md
-          options:
-            dest_dir: '/continuous_integration/static_analysis/rules/python-django/'
-            path_to_remove: 'rulesets/python-django/'
-            front_matters:
-              disable_edit: true
-
-        - action: pull-and-push-folder
-          branch: main
-          globs:
-          - rulesets/python-flask/*.md
-          options:
-            dest_dir: '/continuous_integration/static_analysis/rules/python-flask/'
-            path_to_remove: 'rulesets/python-flask/'
-            front_matters:
-              disable_edit: true
-
-        - action: pull-and-push-folder
-          branch: main
-          globs:
-          - rulesets/python-inclusive/*.md
-          options:
-            dest_dir: '/continuous_integration/static_analysis/rules/python-inclusive/'
-            path_to_remove: 'rulesets/python-inclusive/'
-            front_matters:
-              disable_edit: true
-
-        - action: pull-and-push-folder
-          branch: main
-          globs:
-          - rulesets/python-pandas/*.md
-          options:
-            dest_dir: '/continuous_integration/static_analysis/rules/python-pandas/'
-            path_to_remove: 'rulesets/python-pandas/'
-            front_matters:
-              disable_edit: true
-
-        - action: pull-and-push-folder
-          branch: main
-          globs:
-          - rulesets/python-security/*.md
-          options:
-            dest_dir: '/continuous_integration/static_analysis/rules/python-security/'
-            path_to_remove: 'rulesets/python-security/'
+            dest_dir: '/static_analysis/rules/'
+            path_to_remove: 'rulesets/'
             front_matters:
               disable_edit: true
 
@@ -582,7 +515,7 @@
           globs:
             - "generated/md/external/*.md"
           options:
-            dest_dir: '/security/misconfigurations/custom_rules/'
+            dest_dir: '/infrastructure/resource_catalog/'
             path_to_remove: 'generated/md/external/'
             front_matters:
               disable_edit: true
@@ -595,9 +528,10 @@
             - "docs/en/getting-started.md"
           options:
             dest_path: "/developers/"
-            file_name: "datadog_apps.md"
+            file_name: "ui_extensions.md"
             front_matters:
               dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"]
+              aliases: ["/developers/datadog_apps/"]
 
       - repo_name: datadog-agent
         contents:
@@ -641,3 +575,27 @@
               base_path: ""
               dest_path: "/layouts/shortcodes/"
               file_name: "semantic-color.md"
+
+      - repo_name: dd-trace-rb
+        contents:
+          - action: pull-and-push-file
+            branch: release
+            globs:
+              - 'docs/Compatibility.md'
+            options:
+              dest_path: '/tracing/trace_collection/compatibility/'
+              file_name: 'ruby.md'
+              front_matters:
+                title: Ruby Compatibility Requirements
+                kind: documentation
+                aliases:
+                  - /tracing/compatibility_requirements/ruby
+                  - /tracing/setup_overview/compatibility_requirements/ruby
+                code_lang: ruby
+                type: multi-code-lang
+                code_lang_weight: 20
+                dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/Compatibility.md"]
+                further_reading:
+                - link: 'tracing/trace_collection/dd_libraries/ruby'
+                  tag: 'Documentation'
+                  text: 'Instrument Your Application'

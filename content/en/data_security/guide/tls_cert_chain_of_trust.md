@@ -76,6 +76,6 @@ You can test your configuration by attempting to connect to [`https://global-roo
 If you need to manually add the new root and ICA, you can [download the DigiCert Trusted Root Authority Certificates from the DigiCert website][4].
 
 [1]: https://changelogs.ubuntu.com/changelogs/pool/main/c/ca-certificates/ca-certificates_20211016ubuntu0.22.04.1/changelog
-[2]: /agent/proxy
+[2]: /agent/configuration/proxy
 [3]: https://global-root-g2.chain-demos.digicert.com
 [4]: https://www.digicert.com/kb/digicert-root-certificates.htm

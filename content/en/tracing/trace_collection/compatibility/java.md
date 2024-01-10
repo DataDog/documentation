@@ -19,17 +19,17 @@ further_reading:
 
 The Java Datadog Trace library is open source - view the [GitHub repository][1] for more information.
 
-### Supported JVM runtimes
+### Supported Java runtimes
 
 The Java Tracer supports automatic instrumentation for the following Oracle JDK and OpenJDK JVM runtimes.
 
-| JVM versions | Operating Systems                                                               | Support level                       | Tracer version |
+| Java versions | Operating Systems                                                               | Support level                       | Tracer version |
 | -------------| ------------------------------------------------------------------------------- | ----------------------------------- | -------------- |
-| 18 to 19     | Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64) | [Beta](#levels-of-support)               | Latest         |
-| 8 to 17      | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [GA](#levels-of-support)                   | Latest         |
+| 18 to 21     | Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64) | [Beta](#levels-of-support)               | Latest         |
 | 8 to 17      | Linux (arm64)<br>Mac (arm64)                                                    | [Beta](#levels-of-support)               | Latest         |
-| 7            | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [Maintenance](#levels-of-support) | v0             |
 | 7            | Linux (arm64)<br>Mac (arm64)                                                    | [End-of-life](#levels-of-support)         | v0             |
+| 8 to 17      | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [GA](#levels-of-support)                   | Latest         |
+| 7            | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [Maintenance](#levels-of-support) | v0             |
 
 Datadog does not officially support any early-access versions of Java.
 
@@ -69,7 +69,7 @@ Beta integrations are disabled by default but can be enabled individually:
 | Grizzly-HTTP            | 2.3.20+    | Fully Supported | `grizzly-filterchain`                          |
 | Java Servlet Compatible | 2.3+, 3.0+ | Fully Supported | `servlet`, `servlet-2`, `servlet-3`            |
 | Jax-RS Annotations      | JSR311-API | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-annotations`, `jax-rs-filter` |
-| Jetty                   | 7.0-9.x    | Fully Supported | `jetty`                                        |
+| Jetty                   | 7.0-12.x   | Fully Supported | `jetty`                                        |
 | Micronaut HTTP Server   | 2.x        | Fully Supported | `micronaut`                                    |
 | Mulesoft                | 4          | Fully Supported | `mule`                                         |
 | Netty HTTP Server       | 3.8+       | Fully Supported | `netty`, `netty-3.8`, `netty-4.0`, `netty-4.1` |
@@ -81,7 +81,7 @@ Beta integrations are disabled by default but can be enabled individually:
 | Spring Web (MVC)        | 4.0+       | Fully Supported | `spring-web`                                   |
 | Spring WebFlux          | 5.0+       | Fully Supported | `spring-webflux`                               |
 | Tomcat                  | 5.5+       | Fully Supported | `tomcat`                                       |
-| Vert.x                  | 3.4-3.9.x  | Fully Supported | `vertx`, `vertx-3.4`                           |
+| Vert.x                  | 3.4+       | Fully Supported | `vertx`, `vertx-3.4`, `vertx-3.9`, `vertx-4.0`  |
 
 **Note**: Many application servers are Servlet compatible and are automatically covered by that instrumentation, such as Websphere, Weblogic, and JBoss.
 Also, frameworks like Spring Boot (version 3) inherently work because they usually use a supported embedded application server, such as Tomcat, Jetty, or Netty.
@@ -119,14 +119,16 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 | Apache HTTP Client       | 4.0+        | Fully Supported | `httpclient`, `apache-httpclient`, `apache-http-client` |
 | Apache HTTP Async Client | 4.0+        | Fully Supported | `httpasyncclient`, `apache-httpasyncclient`    |
 | AWS Java SDK             | 1.11+, 2.2+ | Fully Supported | `aws-sdk`                                      |
+| Camel-OpenTelemetry      | 3.12.0+     | Beta            | [opentelemetry-1][5]                           |
 | Commons HTTP Client      | 2.0+        | Fully Supported | `commons-http-client`                          |
 | Google HTTP Client       | 1.19.0+     | Fully Supported | `google-http-client`                           |
+| Google Pub/Sub           | 1.116.0+    | Fully Supported | `google-pubsub`                                |
 | Grizzly HTTP Client      | 1.9+        | [Beta](#framework-integrations-disabled-by-default) | `grizzly-client`     |
 | gRPC                     | 1.5+        | Fully Supported | `grpc`, `grpc-client`, `grpc-server`           |
 | HttpURLConnection        | all         | Fully Supported | `httpurlconnection`, `urlconnection`           |
 | Kafka-Clients            | 0.11+       | Fully Supported | `kafka`                                        |
 | Kafka-Streams            | 0.11+       | Fully Supported | `kafka`, `kafka-streams`                       |
-| Java RMI                 | all         | Fully Supported | `rmi`, `rmi-client`, `rmi-server`              |
+| Java RMI                 | all         | Distributed Tracing Not Supported | `rmi`, `rmi-client`, `rmi-server`              |
 | Jax RS Clients           | 2.0+        | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | Jersey Client            | 1.9-2.29    | Fully Supported | `jax-rs`, `jaxrs`, `jax-rs-client`             |
 | JMS                      | 1 and 2     | Fully Supported | `jms`, `jms-1`, `jms-2`                        |
@@ -141,6 +143,8 @@ Don't see your desired web frameworks? Datadog is continually adding additional 
 **Kafka Note**: Datadog's Kafka integration works with Kafka version `0.11+`, which supports the Header API. This API is used to inject and extract trace context. If you are running a mixed version environment, the Kafka broker can incorrectly report the newer version of Kafka. This causes an issue when the tracer tries to inject headers that are not supported by the local producer. Additionally, older consumers are unable to consume the message because of the presence of headers. To prevent these issues, if you are running a mixed version Kafka environment with versions older than 0.11, disable context propagation with the environment variable: `DD_KAFKA_CLIENT_PROPAGATION_ENABLED=false`.
 
 **JMS Note**: Datadog's JMS integration automatically adds and reads message object properties `x__dash__datadog__dash__trace__dash__id` and `x__dash__datadog__dash__parent__dash__id` to maintain context propagation between consumer and producer services.
+
+**Camel Note**: Distributed trace propagation over Camel routes is not supported.
 
 Don't see your desired networking framework? Datadog is continually adding additional support. Contact [Datadog support][2] if you need help.
 
@@ -170,9 +174,9 @@ Don't see your desired networking framework? Datadog is continually adding addit
 | RediScala | 1.5+     | Fully Supported | `rediscala`, `redis`                                                                     |
 | Redisson | 2.x-3.x      | Fully Supported | `redisson`, `redis`                                                                     |
 | SpyMemcached            | 2.12+    | Fully Supported | `spymemcached`                                                                           |
-| Vert.x Cassandra Client | 3.9		 | Fully Supported | `cassandra`																			  |
+| Vert.x Cassandra Client | 3.9+		 | Fully Supported | `cassandra`																			  |
 | Vert.x Redis Client     | 3.9      | Fully Supported | `vertx-redis-client`                                                                     |
-| Vert.x MySQL Client     | 3.9      | Fully Supported | `vertx-sql-client`																		  |
+| Vert.x MySQL Client     | 3.9+      | Fully Supported | `vertx-sql-client`																		  |
 
 `dd-java-agent` is also compatible with common JDBC drivers including:
 
@@ -252,3 +256,4 @@ Running the Java tracer in Bitbucket is not supported.
 [2]: https://www.datadoghq.com/support/
 [3]: /tracing/manual_instrumentation/java
 [4]: https://github.com/DataDog/documentation#outside-contributors
+[5]: /tracing/trace_collection/otel_instrumentation/java/

@@ -41,5 +41,5 @@ If you're running the Agent, and you've intentionally [stopped][4] or [removed][
 [1]: /dashboards/graphing_json/
 [2]: /agent/
 [3]: /infrastructure/
-[4]: /agent/guide/agent-commands/#start-stop-restart-the-agent
+[4]: /agent/configuration/agent-commands/#start-stop-restart-the-agent
 [5]: /agent/guide/how-do-i-uninstall-the-agent/

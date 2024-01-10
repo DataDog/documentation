@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/"
   tag: "Blog"
   text: "DRUIDS, the design system that powers Datadog"
+- link: "https://www.datadoghq.com/blog/introducing-open-source-hub/"
+  tag: "Blog"
+  text: "Introducing the Datadog Open Source Hub"
 cascade:
     algolia:
         rank: 70

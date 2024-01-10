@@ -7,9 +7,9 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/services/services_list/"
+- link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Discover the list of services reporting to Datadog"
+  text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
@@ -19,6 +19,8 @@ further_reading:
 - link: "/tracing/trace_explorer/trace_view/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
+algolia:
+  tags: ['trace view']
 ---
 
 View an individual [trace][1] to see all of its [spans][2] and associated metadata. Each trace can be viewed either as a flame graph or as a list (grouped by [service][3] or host).
@@ -108,6 +110,26 @@ Click **View in ASM** to investigate further using [Datadog Application Security
 {{< img src="tracing/visualization/trace/trace_security.png" alt="Trace Attack Attempts" style="width:90%;">}}
 
 [1]: /security/application_security/how-appsec-works/
+{{% /tab %}}
+{{% tab "Span Links (Beta)" %}}
+
+<div class="alert alert-info">Span link support is in beta.</div>
+
+[Span links][4] correlate one or more spans together that are causally related but don't have a typical parent-child relationship.
+
+Click a span in the flame graph to display spans connected with span links:
+
+{{< img src="tracing/span_links/span_links_tab.png" alt="Span Links tab" style="width:90%;">}}
+
+**Note**: Span links only display when the corresponding spans are ingested and indexed, for example, with a [retention filter][1].
+
+To learn more about span links and how to add them with custom instrumentation, read [Span Links][4].
+
+[1]: /tracing/trace_pipeline/trace_retention/
+[2]: /tracing/trace_collection/custom_instrumentation/php#adding-span-links-beta
+[3]: /tracing/trace_collection/otel_instrumentation/java#requirements-and-limitations
+[4]: /tracing/trace_collection/span_links/
+
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -20,7 +20,7 @@ The browser SDK instruments the console functions (`console.error`, but also `.l
 This may lead to the DevTool console displaying the incorrect line number and file, as shown below:
 {{< img src="real_user_monitoring/guide/devtools-tips/issue_console.png" alt="DevTools console showing issue about wrong file and line numbers for a console.error statement.">}}
 
-In the picture above, the `console.error` function is instrumented. Notice that instead of displaying the actual file and line number on which this statement was called, `VM505:1`, the console shows `datadog-rum-v4.js:1`.
+In the picture above, the `console.error` function is instrumented. Notice that instead of displaying the actual file and line number on which this statement was called, `VM505:1`, the console shows `datadog-rum.js:1`.
 
 ### Adding scripts to your browser ignore list to display the correct file and line number
 

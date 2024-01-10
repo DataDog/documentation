@@ -1,5 +1,5 @@
 ---
-title: Basic Agent Usage for CentOS
+title: Basic Agent Usage for CentOS (and Rocky/Alma Linux)
 kind: documentation
 platform: CentOS
 aliases:
@@ -17,18 +17,18 @@ further_reading:
 - link: "/agent/basic_agent_usage/#agent-architecture"
   tag: "Documentation"
   text: "Find out more about the Agent's architecture"
-- link: "/agent/guide/network#configure-ports"
+- link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
 ---
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for CentOS. To install the Datadog Agent, follow the [Agent Installation Instructions][1] for CentOs.
+This page outlines the basic features of the Datadog Agent for CentOS and its derivatives, Rocky Linux and Alma Linux. To install the Datadog Agent, follow the [Agent Installation Instructions][1] for CentOs.
 
 Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
-**Note**: CentOS 6 and above are supported on the 64-bit x86 architecture. CentOS 8 and above are supported on the 64-bit Arm v8 architecture.
+**Note**: CentOS 6 and above are supported on the 64-bit x86 architecture. CentOS/Rocky/Alma 8 and above are supported on the 64-bit Arm v8 architecture.
 
 ## Commands
 
@@ -113,6 +113,57 @@ Configuration files for [Integrations][1]:
 * `/etc/dd-agent/conf.d/`
 
 [1]: /integrations/
+{{% /tab %}}
+{{< /tabs >}}
+
+## Uninstall the Agent
+
+{{< tabs >}}
+{{% tab "Agent v6 & v7" %}}
+
+
+```shell
+sudo yum remove datadog-agent
+```
+
+This command removes the Agent, but does not remove:
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/datadog-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+* Datadog log files
+
+If you also want to remove these elements, run this command after removing the Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/datadog-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
+{{% /tab %}}
+
+{{% tab "Agent v5" %}}
+```shell
+sudo yum remove datadog-agent
+```
+
+This command removes the Agent, but does not remove:
+
+* The `datadog.yaml` configuration file
+* User-created files in the `/etc/dd-agent` configuration folder
+* User-created files in the `/opt/datadog-agent` folder
+* The `dd-agent` user
+* Datadog log files
+
+If you also want to remove these elements, run this command after removing the Agent:
+
+```shell
+sudo userdel dd-agent \
+&& sudo rm -rf /opt/datadog-agent/ \
+&& sudo rm -rf /etc/dd-agent/ \
+&& sudo rm -rf /var/log/datadog/
+```
 {{% /tab %}}
 {{< /tabs >}}
 

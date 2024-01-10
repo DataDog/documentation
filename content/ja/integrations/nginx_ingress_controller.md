@@ -41,7 +41,7 @@ draft: false
 git_integration_title: nginx_ingress_controller
 integration_id: nginx-ingress-controller
 integration_title: nginx-ingress-controller
-integration_version: 2.3.0
+integration_version: 2.4.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -177,7 +177,7 @@ NGINX Ingress Controller には、サービスのチェック機能は含まれ�
 [1]: https://kubernetes.github.io/ingress-nginx
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/prometheus/
 [3]: https://github.com/nginxinc/nginx-prometheus-exporter#exported-metrics
-[4]: https://app.datadoghq.com/account/settings#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://github.com/DataDog/integrations-core/blob/master/nginx_ingress_controller/datadog_checks/nginx_ingress_controller/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

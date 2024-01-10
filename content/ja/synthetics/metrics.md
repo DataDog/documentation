@@ -36,7 +36,7 @@ title: Synthetic Monitoring & Continuous Testing メトリクス
     * `synthetics.icmp.*` で始まる場合、API [ICMP テスト][8]から取得されます
 * `synthetics.multi.*` で始まる場合、[マルチステップ API テスト][9]から取得されます
 * `synthetics.browser.*` で始まる場合、[ブラウザテスト][10]から取得されます
-* `synthetics.pl.worker.*` で始まる場合、[プライベートロケーション][11]から取得されます
+* `synthetics.pl.*` で始まる場合、[プライベートロケーション][11]から取得されます
 
 ### 一般的なメトリクス
 

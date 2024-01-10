@@ -19,15 +19,17 @@ cascade:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Observability Pipelines are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
 
-{{< img src="observability_pipelines/obs_pipelines.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
+{{< img src="observability_pipelines/obs_pipelines_new.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
 
 ## Overview
 
-Observability Pipelines allow you to collect, process, and route observability data (logs, metrics, and traces) from any source to any destination in infrastructure that you own or manage. With Observability Pipelines, you can:
+Observability Pipelines allow you to collect, process, and route observability data[*](#support) from any source to any destination in infrastructure that you own or manage.
+
+With Observability Pipelines, you can:
 
 - Control your data volume before routing to manage costs.
 - Route data anywhere to reduce vendor lock-in and simplify migrations.
@@ -46,6 +48,9 @@ The Datadog UI provides a control plane to manage your Observability Pipelines W
 
 1. [Set up the Observability Pipelines Worker][1].
 2. [Create pipelines to collect, transform and route your data][2].
+3. Discover how to deploy Observability Pipelines at production scale:
+    - See [Deployment Design and Principles][3] for information on what to consider when designing your Observability Pipelines architecture.
+    - See [Best Practices for OP Worker Aggregator Architecture][4].
 
 ## Explore Observability Pipelines
 
@@ -53,7 +58,7 @@ Start getting insights into your Observability Pipelines:
 
 ###  Collect data from any source and route data to any destination
 
-Collect logs, metrics, and traces from any source and route them to any destination to reduce vendor lock-in and simplify migrations.
+Collect data[*](#support) from any source and route them to any destination to reduce vendor lock-in and simplify migrations.
 
 
 {{< img src="observability_pipelines/component_panel.png" alt="The Datadog Logs component side panel showing a line graph of events in/out per second and a link graph of bytes in/out per second" style="width:100%;" >}}
@@ -62,7 +67,7 @@ Collect logs, metrics, and traces from any source and route them to any destinat
 
 Optimize volume and reduce the size of your observability data by sampling, filtering, deduplicating, and aggregating your logs and metrics. Govern your telemetry by enforcing data standards and controlling tags for metrics.
 
-{{< img src="observability_pipelines/transforms.png" alt="The list of transforms side panel showing the transforms available such as aggregate, AWS EC2 Metadata, dedupe and more." style="width:100%;" >}}
+{{< img src="observability_pipelines/transforms.png" alt="The list of transforms side panel showing the transforms available such as aggregate, Amazon EC2 Metadata, dedupe and more." style="width:100%;" >}}
 
 ### Redact sensitive data from your telemetry data
 
@@ -82,3 +87,9 @@ Get a holistic view of all of your pipelines' topologies and monitor key perform
 
 [1]: /observability_pipelines/setup/
 [2]: /observability_pipelines/configurations/
+[3]: /observability_pipelines/production_deployment_overview/
+[4]: /observability_pipelines/architecture/
+
+---
+
+<a name="support"></a> * Observability Pipelines support logs. Support for metrics is in beta.

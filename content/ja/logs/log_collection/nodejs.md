@@ -121,12 +121,12 @@ init_config:
 
 instances:
 
-##Log section
+##Log セクション
 logs:
 
   - type: file
-    path: "<ファイル名パス>.log"
-    service: nodejs
+    path: "<FILE_NAME_PATH>.log"
+    service: <SERVICE_NAME>
     source: nodejs
     sourcecategory: sourcecode
 ```

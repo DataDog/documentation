@@ -24,7 +24,7 @@ cascade:
 ---
 
 {{< site-region region="us3,us5,gov,eu,ap1" >}}
-<div class="alert alert-warning">Mobile Application Testing is not supported on this site.</div>
+<div class="alert alert-warning">Mobile Application Testing is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< site-region region="us" >}}
@@ -47,7 +47,7 @@ Mobile Application Testing allows you to test and monitor key business flows for
 
 Create [search queries and visualizations][5] for your Synthetic test runs or batches of tests running in CI/CD pipelines in the [Synthetic Monitoring & Continuous Testing Explorer][6]. 
 
-{{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="mobile_app_testing/explorer_mobile_test_runs.png" alt="Mobile App Test Runs in the Synthetic Monitoring & Continuous Testing Explorer" style="width:100%;">}}
 
 ## Further reading
 

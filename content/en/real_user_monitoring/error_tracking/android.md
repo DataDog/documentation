@@ -153,7 +153,12 @@ tasks["minify${variant}WithR8"].finalizedBy { tasks["uploadMapping${variant}"] }
 
 ## Limitations
 
-Mapping files are limited to 200 MB when targeting our US1 or EU1 sites, and 50 MB for other sites. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
+{{< site-region region="us,us3,us5,eu" >}}
+Mapping files are limited to **300** MB. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
+{{< /site-region >}}
+{{< site-region region="ap1,gov" >}}
+Mapping files are limited to **50** MB. If your project has a mapping file larger than this, use one of the following options to reduce the file size:
+{{< /site-region >}}
 
 - Set the `mappingFileTrimIndents` option to `true`. This reduces your file size by 5%, on average.
 - Set a map of `mappingFilePackagesAliases`: This replaces package names with shorter aliases. **Note**: Datadog's stacktrace uses the same alias instead of the original package name, so it's better to use this option for third party dependencies.
@@ -176,6 +181,6 @@ datadog {
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/android/#setup
+[3]: /real_user_monitoring/mobile_and_tv_monitoring/setup/android#setup
 [4]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
-[5]: /real_user_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/?tabs=kotlin#initialization-parameters

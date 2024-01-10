@@ -145,11 +145,11 @@ For more information, see [Ingestion Mechanisms][11].<br><br>
 `DD_TRACE_SAMPLING_RULES`
 : **TracerSettings property**: `CustomSamplingRules`<br>
 **Default**: `null`<br>
-A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` and `"service"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
+A JSON array of objects. Each object must have a `sample_rate`. The `name` and `service` fields are optional. The `sample_rate` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
 For more information, see [Ingestion Mechanisms][11].<br>
 **Examples:**<br>
-  - Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`
-  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`
+  - Set the sample rate to 20%: `[{"sample_rate": 0.2}]`
+  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]`
 
 `DD_TRACE_RATE_LIMIT`
 : **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
@@ -159,7 +159,7 @@ The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRAC
 `DD_SPAN_SAMPLING_RULES`
 : **Default**: `null`<br>
 A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). For more information, see [Ingestion Mechanisms][1].<br>
-**Example**: Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
+**Example**: Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]`
 
 `DD_TRACE_DEBUG`
 : Enables or disables debug logging. Valid values are `true` or `false`.<br>
@@ -167,9 +167,14 @@ A JSON array of objects. Rules are applied in configured order to determine the 
 
 `DD_TRACE_HEADER_TAGS`
 : **TracerSettings property**:`HeaderTags` <br>
-Accepts a comma-separated list of key-value pairs of case-insensitive header keys to tag names, and automatically applies matching header values as tags on root spans. Also accepts entries without a specified tag name. <br>
-**Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
-Added in version 1.18.3. Response header support and entries without tag names added in version 1.26.0.<br><br>
+Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>` and `http.response.headers.<header-name>` respectively.<br><br>
+**Example** (with specified tag names): `User-ID:userId`<br>
+If the **Request** has a header `User-ID`, its value is applied as tag `userId` to the spans produced by the service.<br><br>
+**Example** (without specified tag names): `User-ID`<br>
+If the **Request** has a header `User-ID`, its value is applied as tag `http.request.headers.User-ID`.<br>
+If the **Response** has a header `User-ID`, its value is applied as tag `http.response.headers.User-ID`.<br><br>
+Added in version 1.18.3.<br>
+Response header support and entries without tag names added in version 1.26.0.<br>
 **Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][17] UI. 
 
 `DD_TRACE_CLIENT_IP_ENABLED`
@@ -180,7 +185,7 @@ Added in version `2.19.0`.<br>
 `DD_TRACE_CLIENT_IP_HEADER`
 : The IP header to be used for client IP collection, for example: `x-forwarded-for`. <br>
 Added in version `2.19.0`.<br>
-**Default**: Datadog parses the following: `"x-forwarded-for", "x-real-ip", "true-client-ip", "x-client-ip", "x-forwarded", "forwarded-for", "x-cluster-client-ip", "fastly-client-ip", "cf-connecting-ip", "cf-connecting-ipv6",`. If several are present, the first from the list to parse correctly will be used.<br>
+**Default**: Datadog parses the following: `x-forwarded-for`, `x-real-ip`, `true-client-ip`, `x-client-ip`, `x-forwarded`, `forwarded-for`, `x-cluster-client-ip`, `fastly-client-ip`, `cf-connecting-ip`, `cf-connecting-ipv6`. If several are present, the first from the list to parse correctly will be used.<br>
 
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
@@ -230,8 +235,8 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 **Default**: `true`
 
 `DD_DBM_PROPAGATION_MODE`
-: Enables linking between data sent from APM and the Database Monitoring product when set to `'service'` or `'full'`. The `'service'` option enables the connection between DBM and APM services. The `'full'` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
-**Default**: `'disabled'`
+: Enables linking between data sent from APM and the Database Monitoring product when set to `service` or `full`. The `service` option enables the connection between DBM and APM services. The `full` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
+**Default**: `disabled`
 
 `DD_HTTP_CLIENT_ERROR_STATUSES`
 : Sets status code ranges that will cause HTTP client spans to be marked as errors. <br>
@@ -259,7 +264,7 @@ This can be useful if you are using parameter names to differentiate between for
 Added in version 2.5.1.
 
 `DD_TRACE_METHODS`
-: List of methods to trace. Accepts a semicolon (`;`) separated list where each entry has the format `TypeName[MethodNames]`, where `MethodNames` is either a comma (`,`) separated list of method names or the `*` wildcard. For generic types, replace the angled brackets and the type parameters' names with a backtick (`` ` ``) followed by the number of generic type parameters. For example, `Dictionary<TKey, TValue>` must be written as `` Dictionary`2 ``. For generic methods, you only need to specify the method name. <br>
+: List of methods to trace. Accepts a semicolon (`;`) separated list where each entry has the format `Namespace.TypeName[MethodNames]`, where `MethodNames` is either a comma (`,`) separated list of method names or the `*` wildcard. For generic types, replace the angled brackets and the type parameters' names with a backtick (`` ` ``) followed by the number of generic type parameters. For example, `Dictionary<TKey, TValue>` must be written as `` Dictionary`2 ``. For generic methods, you only need to specify the method name. <br>
 **Example**: ```Namespace1.Class1[Method1,GenericMethod];Namespace1.GenericTypeWithOneTypeVariable`1[ExecuteAsync];Namespace2.Class2[*]```<br>
 **Note:** The wildcard method support (`[*]`) selects all methods in a type except constructors, property getters and setters, `Equals`, `Finalize`, `GetHashCode`, and `ToString`. <br>
 Added in version 2.6.0.
@@ -316,7 +321,7 @@ The following configuration variables are for features that are available for us
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
 [11]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=net#pagetitle
 [12]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
-[13]: /agent/guide/network/#configure-ports
+[13]: /agent/configuration/network/#configure-ports
 [14]: /tracing/configure_data_security/#redacting-the-query-in-the-url
 [15]: /tracing/configure_data_security#telemetry-collection
 [16]: /agent/remote_config/

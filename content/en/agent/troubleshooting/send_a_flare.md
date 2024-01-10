@@ -14,15 +14,31 @@ algolia:
   tags: ['agent flare']
 ---
 
-If you are running Agent 5.3+, you can send necessary troubleshooting information to the Datadog support team with one flare command.
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Sending an Agent Flare is not supported for this site.</div>
+{{< /site-region >}}
 
-`flare` gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information including passwords, API keys, Proxy credentials, and SNMP community strings. **Confirm the upload of the archive to immediately send it to Datadog support**.
+A flare allows you to send necessary troubleshooting information to the Datadog support team. You can send a flare from the Datadog site or using the Datadog Agent command line.
+
+A flare gathers all of the Agent's configuration files and logs into an archive file. It removes sensitive information, including passwords, API keys, Proxy credentials, and SNMP community strings.
 
 The Datadog Agent is completely open source, which allows you to [verify the code's behavior][1]. If needed, the flare can be reviewed prior to sending since the flare prompts a confirmation before uploading it.
 
-In the commands below, replace `<CASE_ID>` with your Datadog support case ID if you have one, then enter the email address associated with it.
+## Send a flare from the Datadog site
 
-If you don't have a case ID, just enter your email address used to login in Datadog to create a new support case.
+To send a flare from the Datadog site, make sure you've enabled [Fleet Automation][2] and [Remote configuration][3] on the Agent.
+
+{{% remote-flare %}}
+
+{{< img src="agent/fleet_automation/fleet-automation-flares.png" alt="The Send Ticket button launches a form to send a flare for an existing or new support ticket" style="width:100%;" >}}
+
+## Send a flare from the Agent command line
+
+Use the `flare` subcommand to send a flare. In the commands below, replace `<CASE_ID>` with your Datadog support case ID if you have one, then enter the email address associated with it.
+
+If you don't have a case ID, enter your email address used to log in to Datadog to create a new support case.
+
+**Confirm the upload of the archive to immediately send it to Datadog support**.
 
 {{< tabs >}}
 {{% tab "Agent v6 & v7" %}}
@@ -34,7 +50,7 @@ If you don't have a case ID, just enter your email address used to login in Data
 | macOS      | `datadog-agent flare <CASE_ID>` or via the [web GUI][1] |
 | CentOS     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Debian     | `sudo datadog-agent flare <CASE_ID>`                    |
-| Kubernetes | `kubectl exec <POD_NAME> -it agent flare <CASE_ID>`     |
+| Kubernetes | `kubectl exec -it <POD_NAME> -- agent flare <CASE_ID>`  |
 | Fedora     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Redhat     | `sudo datadog-agent flare <CASE_ID>`                    |
 | Suse       | `sudo datadog-agent flare <CASE_ID>`                    |
@@ -152,4 +168,6 @@ kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
+[1]: https://github.com/DataDog/datadog-agent/tree/main/pkg/flare
+[2]: /agent/fleet_automation/
+[3]: /agent/remote_config#enabling-remote-configuration

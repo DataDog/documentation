@@ -43,7 +43,9 @@ Session Replay is available in the RUM Browser SDK. To start collecting data for
 
 ## Usage
 
-The Session Replay does not start recording automatically when calling `init()`. To start the recording, call `startSessionReplayRecording()`. This can be useful to conditionally start the recording, for example, to only record authenticated user sessions:
+Starting with v5.0.0 of the RUM Browser SDK, the Session Replay starts recording automatically when calling `init()`. To conditionally start the recording, use the `startSessionReplayRecordingManually` init parameter and call `startSessionReplayRecording()`. 
+
+For example, to only record authenticated user sessions:
 
 ```javascript
 window.DD_RUM.init({
@@ -54,7 +56,8 @@ window.DD_RUM.init({
   //  env: 'production',
   //  version: '1.0.0',
   sessionSampleRate: 100,
-  sessionReplaySampleRate: 100, // if not included, the default is 100
+  sessionReplaySampleRate: 100,
+  startSessionReplayRecordingManually: true,
   ...
 });
 
@@ -65,13 +68,34 @@ if (user.isAuthenticated) {
 
 To stop the Session Replay recording, call `stopSessionReplayRecording()`.
 
+<div class="alert alert-warning">When using a version of the RUM Browser SDK older than v5.0.0, Session Replay recording does not begin automatically. Call `startSessionReplayRecording()` to begin recording.</div>
+
 ## Disable Session Replay
 
-To stop session recordings, remove `startSessionReplayRecording()` and set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][6], which includes replays.
+To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][6].
+
+## Retention
+
+By default, Session Replay data is retained for 30 days.
+
+To extend retention to 15 months, you can enable _Extended Retention_ on individual session replays. These sessions must be non-active (the user has completed their experience).
+
+Extended Retention only applies to Session Replay and does not include associated events. The 15 months start when Extended Retention is enabled, not when the session is collected.
+
+You can disable Extended Retention at any time. If the session replay is still within its default 30 days of retention, the replay expires at the end of the initial 30 day window. If you disable Extended Retention on a session replay that is older than 30 days, the replay immediately expires.
+
+{{< img src="real_user_monitoring/session_replay/session-replay-extended-retention.png" alt="Enable extended retention" style="width:100%;" >}}
+
+Refer to the below diagram to understand what data is retained with extended retention.
+
+{{< img src="real_user_monitoring/session_replay/replay-extended-retention.png" alt="Diagram of what data is retained with extended retention" style="width:100%;" >}}
+
+
 
 ## Mobile Session Replay
 
 Learn more about the [Session Replay for Mobile][5].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

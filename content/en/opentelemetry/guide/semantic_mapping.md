@@ -1,6 +1,10 @@
 ---
 title: OpenTelemetry Semantic Conventions and Datadog Conventions
 kind: documentation
+further_reading:
+- link: "/opentelemetry/guide/metrics_mapping"
+  tag: "Documentation"
+  text: "Metrics mapping from OpenTelemetry to Datadog"
 ---
 
 OpenTelemetry makes use of a number of [semantic conventions][1] that specify names for different types of data. This page lists mappings for OpenTelemetry semantic conventions to Datadog's semantic conventions.
@@ -56,6 +60,10 @@ For more information, see [Unified Service Tagging][2].
 | `k8s.cronjob.name` | `kube_cronjob` |
 | `k8s.namespace.name` | `kube_namespace` |
 | `k8s.pod.name` | `pod_name` |
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://opentelemetry.io/docs/concepts/semantic-conventions/
 [2]: /getting_started/tagging/unified_service_tagging

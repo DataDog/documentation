@@ -37,11 +37,11 @@ After choosing to create a `TCP` test, define your test's request.
 
 ### Define request
 
-1. Specify the **Host** and the **Port** to run your test on. By default, the port is set to `443`.
+1. Specify the **Host** and the **Port** to run your test on.
 2. Decide whether or not to **Track number of network hops (TTL)**. This option allows you to assert on the number of network hops and to have access to a TCP Traceroute in your test results.
 3. Specify the amount of time in seconds before the test times out (optional).
 4. **Name** your TCP test.
-5. Add `env` **Tags** as well as any other tag to your TCP test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][3].
+5. Add `env` **Tags** as well as any other tag to your TCP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3].
 
 {{< img src="synthetics/api_tests/tcp_test_config.png" alt="Define TCP connection" style="width:90%;" >}}
 

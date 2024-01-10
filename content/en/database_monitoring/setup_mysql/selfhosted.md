@@ -80,7 +80,19 @@ The Datadog Agent requires read-only access to the database in order to collect 
 The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][5] for more info.
 
 {{< tabs >}}
-{{% tab "MySQL ≥ 8.0" %}}
+{{% tab "MySQL 5.6" %}}
+
+Create the `datadog` user and grant basic permissions:
+
+```sql
+CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
+GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
+GRANT PROCESS ON *.* TO datadog@'%';
+GRANT SELECT ON performance_schema.* TO datadog@'%';
+```
+
+{{% /tab %}}
+{{% tab "MySQL ≥ 5.7" %}}
 
 Create the `datadog` user and grant basic permissions:
 
@@ -88,18 +100,6 @@ Create the `datadog` user and grant basic permissions:
 CREATE USER datadog@'%' IDENTIFIED by '<UNIQUEPASSWORD>';
 ALTER USER datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
-{{% tab "MySQL 5.6 & 5.7" %}}
-
-Create the `datadog` user and grant basic permissions:
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
@@ -298,9 +298,9 @@ If you have installed and configured the integrations and Agent as described and
 [4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-options.html
 [5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
 [6]: https://app.datadoghq.com/account/settings/agent/latest
-[7]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[7]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: /agent/guide/agent-commands/#agent-status-and-information
+[9]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[10]: /agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 [12]: /database_monitoring/troubleshooting/?tab=mysql

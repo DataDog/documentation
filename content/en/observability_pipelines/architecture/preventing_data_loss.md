@@ -3,6 +3,14 @@ title: Preventing Data Loss
 kind: Documentation
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
+{{< /site-region >}}
+
+<div class="alert alert-info">
+This guide is for large-scale production-level deployments.
+</div>
+
 ## High durability
 
 High durability is the ability to retain data when there are system failures. The aggregator architecture is designed to take on the responsibility of high durability. This simplifies your durability strategy by shifting the burden away from your agents and localizing it to your aggregators. In addition, this concentrated approach allows for durability strategies that would be difficult to implement across all of your agent nodes.
@@ -13,7 +21,7 @@ To achieve high durability:
 
 1. Configure your agents to be simple data forwarders and stream data directly to your Observability Pipelines Worker aggregator. This reduces the amount of time your data is exposed to loss at the edge since it is not yet redundant.
 
-2. Choose a highly durable destination that serves as your system of record (for example, AWS S3). This system is responsible for the durability of data at rest and is commonly referred to as archives or data lakes.
+2. Choose a highly durable destination that serves as your system of record (for example, Amazon S3). This system is responsible for the durability of data at rest and is commonly referred to as archives or data lakes.
 
 Finally, configure the Observability Pipelines Worker sinks that write to your system of record to enable [end-to-end acknowledgments](#using-end-to-end-acknowledgment) and disk buffers. For example:
 
@@ -43,11 +51,11 @@ With this feature enabled, Observability Pipelines Worker does not respond to ag
 
 ### Handling node failures
 
-Node failures deal with the full failure of an individual node. These can also be addressed using end-to-end acknowledgements. See [Using end-to-end acknowledgment](#using-end-to-end-acknowledgment) for more details.
+Node failures deal with the full failure of an individual node. These can also be addressed using end-to-end acknowledgments. See [Using end-to-end acknowledgment](#using-end-to-end-acknowledgment) for more details.
 
 ### Handling disk failures
 
-Disk failures deal with the failure of an individual disk. Data loss related to disk failures can be mitigated by using a highly durable file system where data is replicated across multiple disks, such as block storage (for example, AWS EBS).
+Disk failures deal with the failure of an individual disk. Data loss related to disk failures can be mitigated by using a highly durable file system where data is replicated across multiple disks, such as block storage (for example, Amazon EBS).
 
 ### Handling data processing failures
 
@@ -59,7 +67,7 @@ The Observability Pipelines Worker can have problems, such as failing to parse a
 
 #### Which strategy is best?
 
-If durability is the most important criteria, use the direct archiving method because it addresses data loss scenarios. Use the failed event routing method, also commonly referred to as a data lake, if you prefer to analyze data in your archive. It has the advantage of using your archive/data lake for long-term analysis. Datadog [Log Archives][1] and AWS Athena are examples of archive storage solutions.
+If durability is the most important criteria, use the direct archiving method because it addresses data loss scenarios. Use the failed event routing method, also commonly referred to as a data lake, if you prefer to analyze data in your archive. It has the advantage of using your archive/data lake for long-term analysis. Datadog [Log Archives][1] and Amazon Athena are examples of archive storage solutions.
 
 ### Handling destination failures
 

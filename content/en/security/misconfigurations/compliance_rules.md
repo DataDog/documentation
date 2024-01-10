@@ -15,7 +15,7 @@ further_reading:
     text: Custom Rules
   - link: "/security/misconfigurations/frameworks_and_benchmarks/"
     tag: "Documentation"
-    text: Findings Reports
+    text: Misconfigurations Reports
 ---
 
 {{< site-region region="gov" >}}
@@ -30,8 +30,20 @@ The compliance rules follow the same [conditional logic][2] as all Datadog Secur
 
 CSM Misconfigurations uses the following rule types to validate the configuration of your cloud infrastructure:
 
-- [**Cloud configuration**][1]: These compliance rules analyze the configuration of resources within your cloud environment. For example, the [Cloudfront distribution is encrypted][3] rule evaluates an AWS Cloudfront distribution's configuration for encrypted status.
+- [**Cloud configuration**][1]: These compliance rules analyze the configuration of resources within your cloud environment. For example, the [Cloudfront distribution is encrypted][3] rule evaluates an Amazon CloudFront distribution's configuration for encrypted status.
 - [**Infrastructure configuration**][5]: These compliance rules analyze your containers and Kubernetes clusters to find configuration issues, as defined in the CIS compliance benchmarks for Docker and Kubernetes. For example, the [/etc/default/docker file permissions are set to 644 or more restrictively][6] rule evaluates Docker file permissions running on a host.
+
+## Explore default compliance rules
+
+To filter the default compliance rules by cloud provider:
+
+1. Navigate to **Security** > **Cloud Security Management** > **Compliance** > **Compliance Rules**.
+2. Choose one of the following values from the **Tag** facet.
+    - **AWS**: cloud_provider:aws
+    - **Azure**: cloud_provider:azure
+    - **Google Cloud**: cloud_provider:gcp
+    - **Docker**: framework:cis-docker
+    - **Kubernetes**: framework:cis-kubernetes
 
 ## Customize how your environment is scanned by each rule
 
@@ -39,11 +51,11 @@ Customization of a cloud configuration query directly is not supported at this t
 
 On the [Rules][13] page, select a rule to open its details page. Under **Exclude benign activity with suppression queries**, set the filtering logic for how the rule scans your environment.
 
-For example, you can exclude resources tagged with `env:staging` using the **This rule will not generate a finding if there is a match with any of the following suppression queries** function. You can also limit the scope for a certain rule to resources tagged with `compliance:pci` using the **Only generate a finding if there is a match with any of the following queries** function.
+For example, you can exclude resources tagged with `env:staging` using the **This rule will not generate a misconfiguration if there is a match with any of the following suppression queries** function. You can also limit the scope for a certain rule to resources tagged with `compliance:pci` using the **Only generate a misconfiguration if there is a match with any of the following queries** function.
 
 After you customize a rule, click **Update Rule** at the bottom of the page to apply your changes.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/never-trigger-a-finding-2.png" alt="Customize how your environment is scanned by selecting tags to include or exclude from a rule's scope" >}}
+{{< img src="security/cspm/frameworks_and_benchmarks/never-trigger-misconfiguration.png" alt="Customize how your environment is scanned by selecting tags to include or exclude from a rule's scope" >}}
 
 ## Set notification targets for compliance rules
 
@@ -61,7 +73,7 @@ On the [Rules][13] page, select a rule to open its details page. In the **Set se
 
 Alternatively, create [notification rules][21] that span across multiple compliance rules based on parameters such as severities, rule types, rule tags, signal attributes, and signal tags. This allows you to avoid having to manually edit notification preferences for individual compliance rules.
 
-**Note**: If a misconfiguration is detected for a rule with notifications enabled, the failed finding also appears on the [Signals Explorer][22].
+**Note**: If a misconfiguration is detected for a rule with notifications enabled, the failed misconfiguration also appears on the [Signals Explorer][22].
 
 {{< img src="security/cspm/frameworks_and_benchmarks/notification-2.png" alt="The Set severity and notifications section of the rule details page" >}}
 
@@ -77,7 +89,7 @@ The rule deprecation process is as follows:
 
 1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
     - Signal side panel's **Rule Details > Playbook** section
-    - Findings side panel
+    - Misconfigurations side panel
     - [Rule editor][23] for that specific rule
 2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][23] in the UI.
 3. Once the rule is deleted, you can no longer clone and re-enable it.
@@ -86,7 +98,7 @@ The rule deprecation process is as follows:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/default_rules/#cat-posture-management-cloud
+[1]: /security/default_rules/#cat-csm-misconfigurations-cloud
 [2]: /security/detection_rules/
 [3]: https://docs.datadoghq.com/security_monitoring/default_rules/aws-cloudfront-distributions-encrypted/
 [4]: /security/misconfigurations/frameworks_and_benchmarks
@@ -103,4 +115,4 @@ The rule deprecation process is as follows:
 [20]: /security/misconfigurations/custom_rules/
 [21]: /security/notifications/rules/
 [22]: /security/misconfigurations/signals_explorer/
-[23]: /security/detection_rules/#rule-and-generated-signal-options
+[23]: /security/detection_rules/#clone-a-rule

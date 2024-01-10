@@ -103,7 +103,7 @@ This option enables the tracking of a larger number of recent queries across all
 #### Missing explain plan procedure {#explain-plan-procedure-missing}
 The Agent requires the procedure `datadog.explain_statement(...)` to exist in the `datadog` schema. Read the [setup instructions][1] for details on the creation of the `datadog` schema.
 
-Create the the `explain_statement` procedure to enable the Agent to collect explain plans:
+Create the `explain_statement` procedure to enable the Agent to collect explain plans:
 
 ```sql
 DELIMITER $$
@@ -218,8 +218,8 @@ If there is no default database configured for a connection, then none of the qu
 
 [1]: /database_monitoring/setup_mysql/
 [2]: /agent/troubleshooting/
-[3]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
-[4]: /agent/guide/agent-log-files
+[3]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /agent/configuration/agent-log-files
 [5]: /database_monitoring/setup_mysql/advanced_configuration/
 [6]: https://cloud.google.com/sql/docs/mysql/flags#tips-performance-schema
 [7]: /database_monitoring/data_collected/#which-queries-are-tracked

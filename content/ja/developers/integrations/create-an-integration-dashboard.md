@@ -1,6 +1,5 @@
 ---
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/docs/dev/create-an-integration-dashboard.md
+description: インテグレーションダッシュボードの作成方法をご紹介します。
 kind: documentation
 title: インテグレーションダッシュボードの作成
 ---
@@ -8,7 +7,7 @@ title: インテグレーションダッシュボードの作成
 
 [Datadog ダッシュボード][1]は、主要なメトリクスを表示・追跡することで、インフラストラクチャーやインテグレーションを効率的に監視することができます。Datadog は、多くの機能やインテグレーションに対して、すぐに使えるダッシュボードのセットを提供しています。これらのダッシュボードには、[ダッシュボードリスト][12]からアクセスすることができます。
 
-[Datadog インテグレーションを作成][2]した場合、インテグレーションのユーザーがより迅速にインテグレーションの価値を見出すことができるよう、すぐに使えるダッシュボードを作成したいと思うかもしれません。このガイドでは、インテグレーションダッシュボードを作成するための手順と、作成プロセスで従うべきベストプラクティスを説明します。
+[Datadog インテグレーションを作成][2]した場合、インテグレーションのユーザーがより迅速にインテグレーションの価値を見出すことができるよう、すぐに使えるダッシュボードを作成しなければなりません。このガイドでは、インテグレーションダッシュボードを作成するための手順と、作成プロセスで従うべきベストプラクティスを説明します。
 
 Datadog インテグレーションを作成するには、[新しいインテグレーションの設定][2]を参照してください。
 
@@ -135,7 +134,7 @@ Datadog で、[新しいダッシュボードを作成します][12]。
 
 
 [1]: /ja/dashboards/
-[2]: /ja/developers/integrations/new_check_howto/?tab=configurationtemplate
+[2]: /ja/developers/integrations/agent_integration/
 [3]: /ja/dashboards/#new-dashboard
 [4]: /ja/dashboards/widgets/timeseries/
 [5]: /ja/dashboards/widgets/query_value/

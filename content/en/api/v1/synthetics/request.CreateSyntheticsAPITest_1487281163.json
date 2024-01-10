@@ -10,7 +10,8 @@
       {
         "operator": "lessThan",
         "target": 2000,
-        "type": "responseTime"
+        "type": "responseTime",
+        "timingsScope": "withoutDNS"
       },
       {
         "operator": "validatesJSONPath",

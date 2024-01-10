@@ -105,7 +105,7 @@ To see how a custom date and time format can be parsed in Datadog, see [Parsing 
 * Log events can be submitted up to 18 hours in the past and two hours in the future.
 * As of ISO 8601-1:2019, the basic format is `T[hh][mm][ss]` and the extended format is `T[hh]:[mm]:[ss]`. Earlier versions omitted the T (representing time) in both formats.
 * If your logs don't contain any of the default attributes and you haven't defined your own date attribute, Datadog timestamps the logs with the date it received them.
-* If multiple log date remapper processors are applied to a given log, only the first one (according to the pipeline's order) is taken into account.
+* If multiple log date remapper processors are applied to a given log within the pipeline, the last one (according to the pipeline's order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -162,14 +162,14 @@ Each incoming status value is mapped as follows:
 * Strings beginning with **o** or **s**, or matching **OK** or **Success** (case-insensitive) map to **OK**
 * All others map to **info (6)**
 
-**Note**: If multiple log status remapper processors are applied to a given log, only the first one (according to the pipeline's order) is taken into account.
+**Note**: If multiple log status remapper processors are applied to a given log within the pipeline, only the first one (according to the pipeline's order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
 
 Define the log status remapper processor on the [**Pipelines** page][1]:
 
-{{< img src="logs/log_configuration/processor/severity_remapper_processor.png" alt="Log severity remapping" style="width:80%;" >}}
+{{< img src="logs/log_configuration/processor/severity_remapper.png" alt="Log severity remapping" style="width:60%;" >}}
 
 [1]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
@@ -201,7 +201,7 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following log status rem
 
 The service remapper processor assigns one or more attributes to your logs as the official service.
 
-**Note**: If multiple service remapper processors are applied to a given log, only the first one (according to the pipeline's order) is taken into account.
+**Note**: If multiple service remapper processors are applied to a given log within the pipeline, only the first one (according to the pipeline's order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -244,7 +244,7 @@ Use the log message remapper processor to define one or more attributes as the o
 
 To define message attributes, first use the [string builder processor](#string-builder-processor) to create a new string attribute for each of the attributes you want to use. Then, use the log message remapper to remap the string attributes as the message.
 
-**Note**: If multiple log message remapper processors are applied to a given log, only the first one (according to the pipeline order) is taken into account.
+**Note**: If multiple log message remapper processors are applied to a given log within the pipeline, only the first one (according to the pipeline order) is taken into account.
 
 {{< tabs >}}
 {{% tab "UI" %}}

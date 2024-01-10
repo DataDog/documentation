@@ -25,11 +25,15 @@ You can also limit AWS metrics using the [API][4].
 
 **Note**: Only EC2 (hosts), Lambda (active functions), and CloudWatch Custom Metrics (custom metrics) are billable by Datadog. Metrics integrated for the other services you can filter do not incur Datadog charges.
 
-**Note**: EC2 metrics resource exclusion settings apply to both EC2 and its attached EBS volumes. 
+### EC2
 
-When adding limits to existing AWS accounts within the integration page, the previously discovered instances could stay in the [Infrastructure List][5] up to 2 hours. During the transition period, EC2 instances display a status of `???`. This does not count towards your billing.
+EC2 metrics resource exclusion settings apply to both EC2 instances and any attached EBS volumes. When adding limits to existing AWS accounts within the integration page, the previously discovered instances could stay in the [Infrastructure List][5] for up to two hours. During the transition period, EC2 instances display a status of `???`. This does not count towards your billing.
 
 Hosts with a running Agent still display and are included in billing. Use the limit option to restrict `aws.ec2.*` metrics collection from AWS and restrict the AWS resource EC2 instance hosts.
+
+### CloudWatch Metric Streams with Kinesis Data Firehose
+
+You can optionally [send CloudWatch metrics to Datadog using CloudWatch Metric Streams and Kinesis Data Firehose][8] instead of using the default API polling method. If your organization uses the CloudWatch Metric Streams with Kinesis method, AWS resource exclusion rules defined in the Datadog AWS integration page do not apply. You must manage all rules for including and excluding metric namespaces or specific metric names in the CloudWatch Metric Streams configuration in your AWS accounts.
 
 ## Troubleshooting
 
@@ -44,3 +48,4 @@ For billing questions, contact your [Customer Success][7] Manager.
 [5]: /infrastructure/
 [6]: /help/
 [7]: mailto:success@datadoghq.com
+[8]: https://docs.datadoghq.com/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation#streaming-vs-polling

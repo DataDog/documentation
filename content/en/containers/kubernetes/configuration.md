@@ -31,10 +31,50 @@ After you have installed the Datadog Agent in your Kubernetes environment, you m
 - [Tag mapping](#configure-tag-mapping)
 - [Secrets](#using-secret-files)
 - [Ignore containers](#ignore-containers)
+- [Kubernetes API server timeout](#kubernetes-api-server-timeout)
+- [Proxy settings](#proxy-settings)
+- [Autodiscovery](#autodiscovery)
+- [Miscellaneous](#miscellaneous)
 
 ## Enable APM and tracing
 
-If you have installed Kubernetes using the Datadog Operator or Helm, **APM is enabled by default**.
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+
+Edit your `datadog-agent.yaml` to set `features.apm.enabled` to `true`.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+
+  features:
+    apm:
+      enabled: true
+```
+
+{{% k8s-operator-redeploy %}}
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+In Helm, APM is **enabled by default** over UDS or Windows named pipe.
+
+To verify, ensure that `datadog.apm.socketEnabled` is set to `true` in your `values.yaml`.
+
+```yaml
+datadog:
+  apm:
+    socketEnabled: true    
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 For more information, see [Kubernetes Trace Collection][16].
 
@@ -644,11 +684,11 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Using secret files
+## Using secret files
 
 Integration credentials can be stored in Docker or Kubernetes secrets and used in Autodiscovery templates. For more information, see [Secrets Management][12].
 
-### Ignore containers
+## Ignore containers
 
 Exclude containers from logs collection, metrics collection, and Autodiscovery. Datadog excludes Kubernetes and OpenShift `pause` containers by default. These allowlists and blocklists apply to Autodiscovery only; traces and DogStatsD are not affected. These environment variables support regular expressions in their values.
 
@@ -656,7 +696,55 @@ See the [Container Discover Management][13] page for examples.
 
 **Note**: The `kubernetes.containers.running`, `kubernetes.pods.running`, `docker.containers.running`, `.stopped`, `.running.total` and `.stopped.total` metrics are not affected by these settings. All containers are counted.
 
-### Proxy settings
+## Kubernetes API server timeout
+
+By default, the [Kubernetes State Metrics Core check][25] waits 10 seconds for a response from the Kubernetes API server. For large clusters, the request may time out, resulting in missing metrics.
+
+You can avoid this by setting the environment variable `DD_KUBERNETES_APISERVER_CLIENT_TIMEOUT` to a higher value than the default 10 seconds.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+Update your `datadog-agent.yaml` with the following configuration:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    clusterAgent:
+      env:
+        - name: DD_KUBERNETES_APISERVER_CLIENT_TIMEOUT
+          value: <value_greater_than_10>
+```
+
+Then apply the new configuration:
+
+```shell
+kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+Update your `datadog-values.yaml` with the following configuration:
+
+```yaml
+clusterAgent:
+  env:
+    - name: DD_KUBERNETES_APISERVER_CLIENT_TIMEOUT
+      value: <value_greater_than_10>
+```
+
+Then upgrade your Helm chart:
+
+```shell
+helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+## Proxy settings
 
 Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override the Agent proxy settings with the following environment variables:
 
@@ -667,7 +755,16 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 | `DD_PROXY_NO_PROXY`      | A space-separated list of URLs for which no proxy should be used.      |
 | `DD_SKIP_SSL_VALIDATION` | An option to test if the Agent is having issues connecting to Datadog. |
 
-### Misc
+## Autodiscovery
+
+| Env Variable                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+|------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DD_LISTENERS`               | Autodiscovery listeners to run.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `DD_EXTRA_LISTENERS`         | Additional Autodiscovery listeners to run. They are added in addition to the variables defined in the `listeners` section of the `datadog.yaml` configuration file.                                                                                                                                                                                                                                                                                                                                    |
+| `DD_CONFIG_PROVIDERS`        | The providers the Agent should call to collect checks configurations. Available providers are: <br>`kubelet` - Handles templates embedded in pod annotations. <br>`docker` - Handles templates embedded in container labels. <br>`clusterchecks` - Retrieves cluster-level check configurations from the Cluster Agent. <br>`kube_services` - Watches Kubernetes services for cluster checks. |
+| `DD_EXTRA_CONFIG_PROVIDERS`  | Additional Autodiscovery configuration providers to use. They are added in addition to the variables defined in the `config_providers` section of the `datadog.yaml` configuration file. |
+
+## Miscellaneous
 
 | Env Variable                        | Description                                                                                                                                                                                                                                                         |
 |-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -676,13 +773,12 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 | `DD_CLUSTER_NAME`                   | Set a custom Kubernetes cluster identifier to avoid host alias collisions. The cluster name can be up to 40 characters with the following restrictions: Lowercase letters, numbers, and hyphens only. Must start with a letter. Must end with a number or a letter. |
 | `DD_COLLECT_KUBERNETES_EVENTS ` | Enable event collection with the Agent. If you are running multiple instances of the Agent in your cluster, set `DD_LEADER_ELECTION` to `true` as well.                                                                                                                       |
 
-You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` and `DD_EXTRA_CONFIG_PROVIDERS` environment variables. They are added in addition to the variables defined in the `listeners` and `config_providers` section of the `datadog.yaml` configuration file.
 
 [1]: /agent/
 [2]: /containers/cluster_agent/
 [3]: https://app.datadoghq.com/containers
 [5]: /containers/kubernetes/integrations/
-[12]: /agent/guide/secrets-management/
+[12]: /agent/configuration/secrets-management/
 [13]: /agent/guide/autodiscovery-management/
 [14]: /containers/guide/kubernetes_daemonset#cluster-agent-event-collection
 [15]: /infrastructure/containers/
@@ -690,8 +786,9 @@ You can add extra listeners and config providers using the `DD_EXTRA_LISTENERS` 
 [17]: /containers/kubernetes/log
 [18]: /network_monitoring/performance/
 [19]: /developers/dogstatsd
-[20]: https://app.datadoghq.com/orchestration/overview/
+[20]: https://app.datadoghq.com/orchestration/overview
 [21]: /infrastructure/containers/orchestrator_explorer
 [22]: /containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
 [23]: /infrastructure/process/ 
 [24]: /account_management/api-app-keys/#application-keys
+[25]: /integrations/kubernetes_state_core/

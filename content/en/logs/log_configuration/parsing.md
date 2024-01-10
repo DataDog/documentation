@@ -106,7 +106,7 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 : Matches an integer number (with scientific notation support) and parses it as an integer number.
 
 `word`
-: Matches characters from a-z, A-Z, 0-9, including the _ (underscore) character.
+: Matches a _word_, which starts with a word boundary; contains characters from a-z, A-Z, 0-9, including the `_` (underscore) character; and ends with a word boundary. Equivalent to `\b\w+\b` in regex.
 
 `doubleQuotedString`
 : Matches a double-quoted string.
@@ -634,6 +634,31 @@ Other examples:
 | `value1,value2`              | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key2":"value2"}             |
 | `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key3":"value3"}             |
 | <code>Value1&nbsp;&nbsp;&nbsp;&nbsp;Value2&nbsp;&nbsp;&nbsp;&nbsp;Value3</code> (TSV)      | `%{data::csv("key1,key2,key3","tab")}` | {"key1": "value1", "key2": "value2", "key3":"value3"} |
+
+### Use data matcher to discard unneeded text
+
+If you have a log where after you have parsed what is needed and know that the text after that point is safe to discard, you can use the data matcher to do so. For the following log example, you can use the `data` matcher to discard the `%` at the end.
+
+**Log**:
+
+```
+Usage: 24.3%
+```
+
+**Rule**:
+
+```
+MyParsingRule Usage\:\s+%{number:usage}%{data:ignore}
+```
+
+**Result**:
+
+```
+{
+  "usage": 24.3,
+  "ignore": "%"
+}
+```
 
 ### ASCII control characters
 

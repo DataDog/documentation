@@ -35,7 +35,7 @@ This guide walks you through best practices for getting your team up and running
 
 **Identify services vulnerable or exposed to attacks** that would benefit from ASM. Navigate to the [ASM Setup page][1] and select the services recommended there.
 
-{{< img src="getting_started/appsec/ASM_activation_service_selection.png" alt="ASM Services page view, showing Vulnerabilities and sorted by Suspicious requests column." style="width:100%;" >}}
+{{< img src="getting_started/appsec/ASM_activation_service_selection_v2.png" alt="ASM Services page view, showing Vulnerabilities and sorted by Suspicious requests column." style="width:100%;" >}}
 
 These security insights are detected from data reported by APM. The insights help prioritize your security efforts. ASM identifies, prioritizes, and helps remediate all security risks on your services.
 
@@ -78,7 +78,7 @@ Once enabled, ASM immediately identifies application vulnerabilities and detects
 2. **Validate attacks**: Send attack patterns to trigger a test detection rule. From your terminal, run the following script:
 
   {{< code-block lang="sh" >}}
-  for ((i=1;i<=200;i++)); do
+  for ((i=1;i<=250;i++)); do
   # Target existing service's routes
   curl https://your-application-url/<EXISTING ROUTE> -A
   'dd-test-scanner-log';
@@ -88,6 +88,12 @@ Once enabled, ASM immediately identifies application vulnerabilities and detects
   done{{< /code-block >}}
 
 3. Go to [Security Signals Explorer][6] to see the signal that is generated after a few seconds.
+
+## Reports and notifications
+
+1. Set up [notification rules][23] to receive alerts using Slack, Jira, email, and more.
+3. Subscribe to the weekly [threat digest][22] reports to begin investigation and remediation of the most important security threats discovered in the last seven days. 
+
 
 Interested in best practices to go further? View the [in-product Quickstart Guide.][19]
 
@@ -116,4 +122,6 @@ Interested in best practices to go further? View the [in-product Quickstart Guid
 [19]: https://app.datadoghq.com/security/configuration/asm/onboarding
 [20]: /getting_started/application_security/#setup-asm
 [21]: /agent/remote_config?tab=configurationyamlfile#setup
+[22]: https://app.datadoghq.com/security/configuration/reports
+[23]: https://app.datadoghq.com/security/configuration/notification-rules
 

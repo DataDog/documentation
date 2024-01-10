@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/tracing/connect_logs_and_traces/python
-code_lang: php
+code_lang: python
 code_lang_weight: 20
 description: Python ログとトレースを接続して Datadog で関連付けます。
 further_reading:

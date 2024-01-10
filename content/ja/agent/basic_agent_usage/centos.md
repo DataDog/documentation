@@ -19,16 +19,16 @@ further_reading:
   text: インバウンドポートの構成
 kind: documentation
 platform: CentOS
-title: CentOS 用 Agent の基本的な使用方法
+title: CentOS (および Rocky/Alma Linux) の基本的な Agent の使い方
 ---
 
 ## 概要
 
-このページでは、CentOS 用 Datadog Agent の基本的な機能について説明します。Datadog Agent のインストールは、CentOs 用 [Agent のインストール手順][1]に従ってください。
+このページでは、CentOS とその派生製品である Rocky Linux と Alma Linux 用の Datadog Agent の基本的な機能について説明します。Datadog Agent のインストールは、CentOs 用 [Agent のインストール手順][1]に従ってください。
 
 64-bit x86 および Arm v8 アーキテクチャ用のパッケージをご用意しています。その他のアーキテクチャについては、ソースインストールをご利用ください。
 
-**注**: CentOS 6 以降は、64 ビット x86 アーキテクチャでサポートされています。CentOS 8 以降は、64 ビット Arm v8 アーキテクチャでサポートされています。
+**注**: CentOS 6 以降は、64 ビット x86 アーキテクチャでサポートされています。CentOS/Rocky/Alma 8 以降は、64 ビット Arm v8 アーキテクチャでサポートされています。
 
 ## コマンド
 
@@ -130,6 +130,6 @@ Agent には、埋め込み Python 環境が `/opt/datadog-agent/embedded/` に�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/centos
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=centos
 [2]: /ja/agent/troubleshooting/
 [3]: /ja/developers/guide/custom-python-package/

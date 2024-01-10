@@ -22,9 +22,9 @@ title: ファネル分析
 **注**: コンバージョン率とは、Web サイトへの訪問者総数のうち、目的のゴールを達成した (コンバージョン) 数のことです。
 ## ファネルの構築
 
-ファネルを構築するには、**UX Monitoring > Funnel Analysis** に移動します。また、RUM 内の **Performance Summary** ページに移動すると、Funnel Analysis タブが見つかります。
+ファネルを構築するには、**UX Monitoring > Product Analytics > Funnels** へ移動します。
 
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-funnels-tab-updated.png" alt="RUM 内の Funnel Analysis タブに移動します" style="width:100%;" >}}
+{{< img src="real_user_monitoring/explorer/analytics/funnels-tab.png" alt="RUM 内の Funnel Analysis タブに移動します" style="width:100%;" >}}
 
 このビューから、開始するビューやアクションを構築し、プラスアイコンをクリックして追加のステップを構築します。ドラッグアンドドロップ機能でステップを移動することもできます。
 
@@ -40,9 +40,9 @@ title: ファネル分析
 
 ### フィルタリング
 
-ファネルを構築する際、[デフォルト属性][1] (コア、デバイス、オペレーティングシステム、ジオロケーション、ユーザー) と[セッション固有][2]属性を追加して、さらにデータを分析することができます。
+ファネルを構築する際、[デフォルト属性][1] (コア、デバイス、オペレーティングシステム、ジオロケーション、ユーザー) と[セッション固有][2]属性を追加して、さらにデータを分析することができます。**Add Filter** ボタンをクリックすると、利用可能な属性の全リストが表示されます。
 
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-filtering.jpg" alt="ファネル構築時に情報をフィルターするために属性を使用します" style="width:50%;" >}}
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-filtering.png" alt="ファネル構築時に情報をフィルターするために属性を使用します" style="width:80%;" >}}
 
 ## ファネルの分析
 

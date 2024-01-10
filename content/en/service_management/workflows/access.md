@@ -15,6 +15,10 @@ further_reading:
   text: "See the list of workflow actions"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 A few tools control access and authentication for workflows and their components.
 
 ## Workflow identity
@@ -61,33 +65,67 @@ Workflow actions can be authenticated in two ways:
 - Credentials and permissions configured in the integration tile
 - Connection credentials
 
-For more information on configuring credentials, see [Connections][7].
+For more information on configuring credentials, see [Connections][6].
 
 ## Workflow permissions
 
-Use [role-based access control (RBAC)][3] to control access to your workflows and connections. To see the list of permissions that apply to workflows and connections, see [Datadog Role Permissions][10].
+Use [role-based access control (RBAC)][3] to control access to your workflows and connections. To see the list of permissions that apply to workflows and connections, see [Datadog Role Permissions][7].
 
-### Restrict connection use
+### Restrict access on a specific connection
 
 Set permissions on each connection to limit modifications or restrict their use. The granular permissions include **Viewer**, **Resolver**, and **Editor**.
 
 Viewer
-: Can view
+: Can view the connection
 
 Resolver
-: Can resolve and view
+: Can resolve and view the connection
 
 Editor
-: Can edit, resolve, and view
+: Can edit, resolve, and view the connection
 
 Resolving a connection includes getting the connection object assigned to a step and retrieving the secret associated with it.
 
 Follow the steps below to modify the permissions on a specific connection:
 
-1. Navigate to the [Workflow Automation page][9].
+1. Navigate to the [Workflow Automation page][8].
 1. Click **Connections** in the upper right. A list of connections appears.
 1. Hover over the connection on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
 1. Click the padlock (**Permissions**) icon.
+1. Select **Restrict Access**.
+1. Select a role from the dropdown menu. Click **Add**. The role you selected populates into the bottom of the dialog box.
+1. Next to the role name, select your desired permission from the dropdown menu.
+1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
+1. Click **Save**.
+
+### Restrict access on a specific workflow
+
+Set permissions on each workflow to restrict modifications or usage of the workflow. The granular permissions include **Viewer**, **Runner**, and **Editor**.
+
+Viewer
+: Can view the workflow
+
+Runner
+: Can run and view the workflow
+
+Editor
+: Can edit, run, and view the workflow
+
+You can restrict access on a specific workflow either from the workflow list page or from the workflow canvas while editing the workflow.
+
+**Restricting permissions from the workflow list page**
+1. Navigate to the [Workflow Automation page][8].
+1. Hover over the workflow on which you would like to set granular permissions. **Edit**, **Permissions**, and **Delete** icons appear on the right.
+1. Click the padlock (**Permissions**) icon.
+1. Select **Restrict Access**.
+1. Select a role from the dropdown menu. Click **Add**. The role you selected populates into the bottom of the dialog box.
+1. Next to the role name, select your desired permission from the dropdown menu.
+1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
+1. Click **Save**.
+
+**Restricting permissions from the workflow editor**
+1. In the workflow editor click on the cog (**Settings**) icon.
+1. Select **Edit Permissions** from the dropdown.
 1. Select **Restrict Access**.
 1. Select a role from the dropdown menu. Click **Add**. The role you selected populates into the bottom of the dialog box.
 1. Next to the role name, select your desired permission from the dropdown menu.
@@ -103,8 +141,6 @@ Follow the steps below to modify the permissions on a specific connection:
 [3]: /account_management/rbac/
 [4]: /service_management/workflows/trigger/
 [5]: /service_management/workflows/actions_catalog/
-[6]: /integrations/
-[7]: /service_management/workflows/connections/
-[8]: /service_management/workflows/actions_catalog/generic_actions/
-[9]: https://app.datadoghq.com/workflow
-[10]: /account_management/rbac/permissions/#workflows
+[6]: /service_management/workflows/connections/
+[7]: /account_management/rbac/permissions/#workflow-automation
+[8]: https://app.datadoghq.com/workflow

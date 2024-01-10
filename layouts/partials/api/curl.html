@@ -96,23 +96,23 @@
         {{- end -}}
     {{- end -}}
 {{- end -}}
-<span class="kn">"</span>&nbsp;\
+<span class="kn">"</span>{{ " \\" }}
 <span class="o">-H</span> <span class="s1">"Accept: application/json"</span>
 {{- /* Content-Type header based on "requestBody" */ -}}
 {{- if (or ($body) ($endpoint.action.requestBody)) -}}
 {{- with (index $endpoint.action.responses "204") -}}
 {{- else -}}
-&nbsp;\
+{{ " \\" }}
 <span class="o">-H</span> <span class="s1">"Content-Type: {{ default "application/json" .contentType }}"</span>
 {{- with $parameters.headerParams -}}
 {{- range . -}}
 {{- if eq .name "Content-Encoding" -}}
   {{- if $contentEncoding -}}
-&nbsp;\
+{{ " \\" }}
 <span class="o">-H</span> <span class="s1">"{{ .name }}: {{ $contentEncoding }}"</span>
   {{- end -}}
 {{- else -}}
-&nbsp;\
+{{ " \\" }}
 <span class="o">-H</span> <span class="s1">"{{ .name }}: {{ .example | default .schema.example }}"</span>
 {{- end -}}
 {{- end -}}
@@ -127,14 +127,14 @@
         {{- range $key, $val := . -}}
             {{ $authSchema := (index $securitySchemes $key) }}
             {{- if eq $authSchema.in "header" -}}
-                &nbsp;\
+                {{ " \\" }}
 <span class="o">-H</span> <span class="s1">"{{ $authSchema.name }}: <span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>"</span>
             {{- end -}}
         {{- end -}}
     {{- end -}}
 {{- else -}}
     {{- /* Use global authentication */ -}}
-    &nbsp;\
+    {{ " \\" }}
 <span class="o">-H</span> <span class="s1">"{{ $securitySchemes.apiKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.apiKeyAuth "x-env-name" -}} }</span>"</span> \
 <span class="o">-H</span> <span class="s1">"{{ $securitySchemes.appKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.appKeyAuth "x-env-name" -}} }</span>"</span>
 {{- end -}}
@@ -142,15 +142,15 @@
 {{- /* Render binary data (usually compressed) */ -}}
 {{- if gt (len $contentEncoding) 0 -}}
 {{- if eq $contentEncoding "gzip" -}}
-&nbsp;\
+{{ " \\" }}
 <span class="o">--data-binary</span> <span class="n">@-</span>
 {{- else if eq $contentEncoding "deflate" -}}
-&nbsp;\
+{{ " \\" }}
 <span class="o">--data-binary</span> <span class="n">@-</span>
 {{- end -}}
 {{ else if (or ($body) ($endpoint.action.requestBody)) }}
 {{- /* Render requestBody example JSON "-d @- << EOF ... EOF" */ -}}
-&nbsp;\
+{{ " \\" }}
 <span class="o">-d</span> <span class="n">@-</span> <span class="o"><<</span> <span class="n">EOF</span>
 <span class="s1">{{ .exampleValue | default $body | default (.dollarScratch.Get "jsonRequestBody") }}</span>
 <span class="n">EOF</span>

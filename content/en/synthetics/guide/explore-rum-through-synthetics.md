@@ -1,5 +1,5 @@
 ---
-title: Explore RUM & Session Replay In Synthetics
+title: Explore A Preview of RUM Features In Synthetics
 kind: documentation
 description: Users without RUM can now preview RUM data, sessions, and errors from their Synthetic browser test results with no additional cost. 
 aliases:
@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-<div class="alert alert-info">If you don't have Real User Monitoring, you can access a preview of RUM, Session Replay, Error Tracking, and additional performance data from your Synthetic browser test runs.</div>
+<div class="alert alert-info">If you have Real User Monitoring, you can access a preview of RUM, Session Replay, Error Tracking, and additional performance data from your Synthetic browser test runs.</div>
 
 Synthetic browser tests embed the Real User Monitoring SDK, allowing you to explore:
 

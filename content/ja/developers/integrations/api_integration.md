@@ -1,6 +1,5 @@
 ---
-dependencies:
-- https://github.com/DataDog/integrations-core/blob/master/docs/dev/api_integration.md
+description: Datadog API インテグレーションを開発し、公開する方法をご紹介します。
 further_reading:
 - link: /api/latest/using-the-api/
   tag: Documentation

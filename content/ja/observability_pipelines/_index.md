@@ -1,6 +1,9 @@
 ---
 aliases:
 - /ja/integrations/observability_pipelines/
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: /observability_pipelines/setup/
   tag: ドキュメント
@@ -16,7 +19,7 @@ title: Observability Pipelines（観測データの制御）
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では観測可能性パイプラインは利用できません。</div>
+<div class="alert alert-warning">Observability Pipelines は、US1-FED Datadog サイトではご利用いただけません。</div>
 {{< /site-region >}}
 
 
@@ -24,7 +27,7 @@ title: Observability Pipelines（観測データの制御）
 
 ## 概要
 
-観測可能性パイプラインを使用すると、所有または管理するインフラストラクチャー内の観測可能性データ (ログ、メトリクス、トレース) を任意のソースから任意の宛先に収集、処理、およびルーティングすることができます。観測可能性パイプラインを使用すると、次のことが可能になります。
+Observability Pipelines を使用すると、所有または管理するインフラストラクチャー内の観測可能性データ (ログとメトリクス (ベータ版)) を任意のソースから任意の宛先に収集、処理、およびルーティングすることができます。Observability Pipelines を使用すると、次のことが可能になります。
 
 - ルーティングの前にデータ量をコントロールし、コスト管理を行うことができます。
 - データをどこにでも転送できるため、ベンダーロックインを減らし、マイグレーションを簡素化できます。
@@ -43,33 +46,36 @@ Datadog UI は、観測可能性パイプラインワーカーを管理するた
 
 1. [観測可能性パイプラインワーカーを設定します][1]。
 2. [データを収集、変換、ルーティングするパイプラインを作成します][2]。
+3. Observability Pipelines を本番環境のスケールでデプロイする方法を確認します。
+    - Observability Pipelines のアーキテクチャを設計する際に考慮すべき点については、[デプロイメントの設計と原則][3]を参照してください。
+    - [OP ワーカーのアグリゲーターアーキテクチャのベストプラクティス][4]を参照してください。
 
-## 観測可能性パイプラインの確認
+## Observability Pipelines の確認
 
-観測可能性パイプラインのインサイトの取得を開始します。
+Observability Pipelines のインサイトの取得を開始します。
 
 ### あらゆるソースからデータを収集し、あらゆる宛先にデータをルーティングする
 
-あらゆるソースからログ、メトリクス、トレースを収集し、あらゆる宛先にルーティングすることで、ベンダーのロックインを減らし、移行を簡素化することができます。
+あらゆるソースからログとメトリクス (ベータ版) を収集し、あらゆる宛先にルーティングすることで、ベンダーのロックインを減らし、移行を簡素化することができます。
 
 
 {{< img src="observability_pipelines/component_panel.png" alt="Datadog Logs コンポーネントのサイドパネルに、1 秒あたりのイベントのイン/アウトの折れ線グラフと 1 秒あたりのバイトのイン/アウトのリンクグラフが表示されます" style="width:100%;" >}}
 
 ### ルーティングされる前にデータ量を制御する
 
-ログとメトリクスのサンプリング、フィルター、重複排除、集計により、観測可能性データの量を最適化し、サイズを小さくします。データ標準を実施し、メトリクスのタグを制御することで、テレメトリーを管理します。
+ログとメトリクスをサンプリング、フィルタリング、重複排除、および集約することにより、観測可能性データのボリュームを最適化し、サイズを縮小します。データ標準を適用し、メトリクスのタグを制御することで、テレメトリーを管理します。
 
-{{< img src="observability_pipelines/transforms.png" alt="集計、AWS EC2 Metadata、dedupe など、利用可能な変換を表示する変換の一覧サイドパネル。" style="width:100%;" >}}
+{{< img src="observability_pipelines/transforms.png" alt="集計、Amazon EC2 Metadata、重複除去 (dedupe) など、利用可能な変換を表示する変換の一覧サイドパネル。" style="width:100%;" >}}
 
 ### テレメトリーデータから機密データを編集する
 
-すぐに使えるパターンで PII、PCI、秘密キーなどをスキャンし、インフラストラクチャーの外側にルーティングされる前に機密データを編集します。
+すぐに使えるパターンで PII、PCI、秘密キーなどをスキャンし、インフラストラクチャーの外側にルーティングされる前に機密データを削除します。
 
 {{< img src="observability_pipelines/scanning_rules.png" alt="機密データスキャナー ルールライブラリ パネルでは、個人を特定できる情報、ネットワークおよびデバイス情報に対して利用可能なルールが表示されます" style="width:85%;" >}}
 
 ### パイプラインの健全性の監視
 
-パイプラインのトポロジーを全体的に把握し、各フローの平均負荷、エラー率、スループットなどの主要なパフォーマンス指標を監視することができます。
+すべてのパイプラインのトポロジーを全体的に把握し、各フローに対する平均負荷、エラー率、スループットなどの主要なパフォーマンス指標を監視します。
 
 {{< img src="observability_pipelines/pipeline_health.png" alt="コンポーネントにエラーが発生し、イベント取り込みの遅延が検出されたため、警告が表示されたパイプライン構成ページ" style="width:90%;" >}}
 
@@ -79,3 +85,5 @@ Datadog UI は、観測可能性パイプラインワーカーを管理するた
 
 [1]: /ja/observability_pipelines/setup/
 [2]: /ja/observability_pipelines/configurations/
+[3]: /ja/observability_pipelines/production_deployment_overview/
+[4]: /ja/observability_pipelines/architecture/

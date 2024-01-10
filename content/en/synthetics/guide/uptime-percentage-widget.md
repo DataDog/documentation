@@ -1,5 +1,5 @@
 ---
-title: Website Uptime Monitoring With SLOs
+title: Monitor Website Uptime With SLOs
 kind: guide
 aliases:
     - /graphing/guide/uptime-percentage-widget

@@ -21,11 +21,11 @@ Funnel analysis helps you track conversion rates across key workflows to identif
 **Note**: The conversion rate is the number of visitors to your website that completed a desired goal (a conversion) out of the total number of visitors.
 ## Build a funnel
 
-To build a funnel, navigate to **UX Monitoring > Funnel Analysis**. You can also find the Funnel Analysis tab by going to the **Performance Summary** page within RUM.
+To build a funnel, navigate to **UX Monitoring > Product Analytics > Funnels**.
 
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-funnels-tab-updated.png" alt="Navigate to the Funnel Analysis tab within RUM" style="width:100%;" >}}
+{{< img src="real_user_monitoring/explorer/analytics/funnels-tab.png" alt="Navigate to the Funnel Analysis tab within RUM" style="width:100%;" >}}
 
-From this view, build your starting view or action and click on the plus icon to build additional steps. You can also use drag and drop functionality to move steps around.
+From this view, choose your starting view or action and click on the plus icon to build additional steps. You can also use drag and drop functionality to move steps around.
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-building-a-funnel-1.mp4" alt="Filtering network map with search" video=true >}}
 
@@ -39,9 +39,9 @@ When you have a starting point in mind, but aren't sure what your users did next
 
 ### Filtering
 
-When constructing your funnel, you can add [default attributes][1] (core, device, operating system, geo-location, and user) and [session-specific][2] attributes to analyze the data further.
+When constructing your funnel, you can add [default attributes][1] (core, device, operating system, geo-location, and user) and [session-specific][2] attributes to analyze the data further. Click the **Add Filter** button to view the full list of available attributes.
 
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-filtering.jpg" alt="Use attributes to filter information when constructing your funnel" style="width:50%;" >}}
+{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-filtering.png" alt="Use attributes to filter information when constructing your funnel" style="width:80%;" >}}
 
 ## Analyzing a funnel
 

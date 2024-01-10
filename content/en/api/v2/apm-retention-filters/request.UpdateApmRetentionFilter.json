@@ -1,0 +1,15 @@
+{
+  "data": {
+    "attributes": {
+      "name": "test",
+      "rate": 0.9,
+      "filter": {
+        "query": "@_top_level:1 test:service-demo"
+      },
+      "enabled": true,
+      "filter_type": "spans-sampling-processor"
+    },
+    "id": "test-id",
+    "type": "apm_retention_filter"
+  }
+}

@@ -47,7 +47,7 @@ For instance, if service `A` has more traffic than service `B`, the Agent might 
 
 #### Remote configuration
 
-<div class="alert alert-warning">Remote configuration for ingestion configuration in the Agent is in beta. Contact <a href="/help/">Datadog Support</a> to request access.</div>
+<div class="alert alert-info"><strong> Remote configuration for ingestion configuration in the Agent is in beta.</strong></div>
 
 Sampling rate configuration in the Agent is configurable remotely if you are using Agent version [7.42.0][20] or higher. Read [How Remote Configuration Works][23] for information about enabling remote configuration in your Agents. With remote configuration, you can change the parameter without having to restart the Agent.
 
@@ -59,10 +59,9 @@ Set Agent's target traces-per-second in its main configuration file (`datadog.ya
 @env DD_APM_MAX_TPS - integer - optional - default: 10
 ```
 
-**Notes**: 
+**Notes**:
 - Remotely configured parameters take precedence over local configurations - environment variables and `datadog.yaml` configuration.
-- For PHP applications, use the tracing library's user-defined rules instead.
-- The traces-per-second sampling rate set in the Agent only applies to Datadog tracing libraries other than PHP. It has no effect on other tracing libraries such as OpenTelemetry SDKs.
+- The traces-per-second sampling rate set in the Agent only applies to Datadog tracing libraries. It has no effect on other tracing libraries such as OpenTelemetry SDKs.
 
 All the spans from a trace sampled using the Datadog Agent [automatically computed sampling rates](#in-the-agent) are tagged with the ingestion reason `auto`. The `ingestion_reason` tag is also set on [usage metrics][2]. Services using the Datadog Agent default mechanism are labeled as `Automatic` in the [Ingestion Control Page][5] Configuration column.
 
@@ -250,7 +249,7 @@ With Agent version 7.33 and forward, you can configure the error sampler in the 
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/error-spans-sampling.png" alt="Error Sampling" style="width:100%;" >}}
 
-**Notes**: 
+**Notes**:
 1. Set the parameter to `0` to disable the error sampler.
 2. The error sampler captures local traces with error spans at the Agent level. If the trace is distributed, there is no guarantee that the complete trace is sent to Datadog.
 3. By default, spans dropped by tracing library rules or custom logic such as `manual.drop` are **excluded** under the error sampler.
@@ -259,7 +258,7 @@ With Agent version 7.33 and forward, you can configure the error sampler in the 
 
 <div class="alert alert-warning"> This feature is currently in Beta. Reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a> to request access to the functionality.</div>
 
-The rare sampling is remotely configurable if your using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to enable the collection of rare spans without having to restart the Datadog Agent.
+The error sampling is remotely configurable if your using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to enable the collection of rare spans without having to restart the Datadog Agent.
 
 #### Datadog Agent 6/7.41.0 and higher
 
@@ -282,7 +281,7 @@ The rare sampler sends a set of rare spans to Datadog. It catches combinations o
 
 <div class="alert alert-warning"> This feature is currently in Beta. Reach out to <a href="https://www.datadoghq.com/support/">Datadog Support</a> to request access to the functionality.</div>
 
-The error sampling rate is remotely configurable if your using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to change the parameter value without having to restart the Datadog Agent.
+The rare sampling rate is remotely configurable if your using the Agent version [7.42.0][20] or higher. Follow the [documentation][21] to enable remote configuration in your Agents. With remote configuration, you are able to change the parameter value without having to restart the Datadog Agent.
 
 #### Datadog Agent 6/7.41.0 and higher
 
@@ -610,7 +609,9 @@ If you need to sample a specific span, but don't need the full trace to be avail
 
 For example, if you are building [metrics from spans][6] to monitor specific services, you can configure span sampling rules to ensure that these metrics are based on 100% of the application traffic, without having to ingest 100% of traces for all the requests flowing through the service.
 
-**Note**: This feature is available from version [7.40.0][19] of the Datadog Agent.
+This feature is available for Datadog Agent v[7.40.0][19]+.
+
+**Note**: Single span sampling rules **cannot** be used to drop spans that are kept by [head-based sampling](#head-based-sampling), only to keep additional spans that are dropped by head-based sampling.
 
 {{< tabs >}}
 {{% tab "Java" %}}
@@ -761,8 +762,9 @@ Some additional ingestion reasons are attributed to spans that are generated by 
 |------------|-------------------------------------|---------------------------------|
 | Serverless | `lambda` and `xray`                   | Your traces received from the [Serverless applications][14] traced with Datadog Tracing Libraries or the AWS X-Ray integration. |
 | Application Security Management     | `appsec`                            | Traces ingested from Datadog tracing libraries and flagged by [ASM][15] as a threat. |
+| Data Jobs Monitoring    | `data_jobs`                            | Traces ingested from the Datadog Java Tracer Spark integration or the Databricks integration. |
 
-## Ingestion mechanisms in OpenTelemetry 
+## Ingestion mechanisms in OpenTelemetry
 `ingestion_reason:otel`
 
 Depending on your setup with the OpenTelemetry SDKs (using the OpenTelemetry Collector or the Datadog Agent), you have multiple ways of controlling ingestion sampling. See [Ingestion Sampling with OpenTelemetry][22] for details about the options available for sampling at the OpenTelemetry SDK, OpenTelemetry Collector, and Datadog Agent level in various OpenTelemetry setups.

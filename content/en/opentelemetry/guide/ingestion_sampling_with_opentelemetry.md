@@ -63,9 +63,9 @@ The [Tail Sampling Processor][9] and [Probabilistic Sampling Processor][10] allo
 
 **Note**: Tail sampling's main limitation is that all spans for a given trace must be received by the same collector instance for effective sampling decisions. If the trace is distributed across multiple collector instances, there's a risk that some parts of a trace are dropped whereas some other parts of the same trace are sent to Datadog.
 
-To ensure that APM metrics are computed based on 100% of the applications' traffic while using collector-level tail-based sampling, preprend the [Datadog Processor][11] in front of your sampling processor in the collectors' traces pipeline. The processor is available with OpenTelemetry Collector Contrib v0.69.0+.
+To ensure that APM metrics are computed based on 100% of the applications' traffic while using collector-level tail-based sampling, use the [Datadog Connector][11].
 
-<div class="alert alert-info"><strong>Beta</strong>: Alternatively, use the <a href="https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector">Datadog Connector</a> to calculate APM metrics on unsampled data. Read <a href="/opentelemetry/guide/switch_from_processor_to_connector">Switch from Datadog Processor to Datadog Connector for OpenTelemetry APM Metrics</a> for more information.</div>
+<div class="alert alert-info">The Datadog Connector is available starting v0.83.0. Read <a href="/opentelemetry/guide/switch_from_processor_to_connector">Switch from Datadog Processor to Datadog Connector for OpenTelemetry APM Metrics</a> if migrating from an older version.</div>
 
 See the [ingestion volume control guide][8] for information about the implications of setting up trace sampling on trace analytics monitors and metrics from spans.
 
@@ -85,11 +85,11 @@ In the above example, 50% of traces are captured.
 
 **Note**: Probabilistic sampler properties ensure that only complete traces are ingested, assuming you use the same sampling percentage across all Agents.
 
-The probabilistic sampler ignores spans for which the sampling priority is already set at the SDK level. Additionally, spans not caught by the probabilistic sampler might still be captured by the Datadog Agent's [error and rare samplers][13], ensuring a higher representation of errors and rare endpoint traces in the ingested dataset. 
+The probabilistic sampler ignores spans for which the sampling priority is already set at the SDK level. Additionally, spans not caught by the probabilistic sampler might still be captured by the Datadog Agent's [error and rare samplers][12], ensuring a higher representation of errors and rare endpoint traces in the ingested dataset. 
 
 ## Monitor ingested volumes from Datadog UI
 
-You can leverage the [APM Estimated Usage dashboard][14] and the estimated usage metric `datadog.estimated_usage.apm.ingested_bytes` to get visibility into your ingested volumes for a specific time period. Filter the dashboard to specific environments and services to see which services are responsible for the largest shares of the ingested volume.
+You can leverage the [APM Estimated Usage dashboard][13] and the estimated usage metric `datadog.estimated_usage.apm.ingested_bytes` to get visibility into your ingested volumes for a specific time period. Filter the dashboard to specific environments and services to see which services are responsible for the largest shares of the ingested volume.
 
 
 ## Further Reading
@@ -97,7 +97,7 @@ You can leverage the [APM Estimated Usage dashboard][14] and the estimated usage
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/otel_collector_datadog_exporter
-[2]: /opentelemetry/otel_collector_datadog_exporter/?tab=alongsidetheagent#5-run-the-collector
+[2]: /opentelemetry/otel_collector_datadog_exporter/?tab=alongsidetheagent#step-5---run-the-collector
 [3]: /opentelemetry/otlp_ingest_in_the_agent
 [4]: /tracing/metrics/metrics_namespace/
 [5]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased
@@ -106,6 +106,6 @@ You can leverage the [APM Estimated Usage dashboard][14] and the estimated usage
 [8]: /tracing/guide/trace_ingestion_volume_control/#effects-of-reducing-trace-ingestion-volume
 [9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
-[11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/datadogprocessor
-[13]: /tracing/trace_pipeline/ingestion_mechanisms/#error-and-rare-traces
-[14]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
+[11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector#datadog-connector
+[12]: /tracing/trace_pipeline/ingestion_mechanisms/#error-and-rare-traces
+[13]: https://app.datadoghq.com/dash/integration/apm_estimated_usage

@@ -27,7 +27,10 @@ With these three tags, you can:
 
 {{< img src="tagging/unified_service_tagging/overview.mp4" alt="Unified Service Tagging" video=true >}}
 
-**Note**: The official service of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official service of a log, add Autodiscovery [Docker labels/pod annotations][2]. For example: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
+**Notes**: 
+
+- The official service of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official service of a log, add Autodiscovery [Docker labels/pod annotations][2]. For example: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
+- Host information is excluded for database and cache spans because the host associated with the span is not the database/cache host.
 
 ### Requirements
 
@@ -395,7 +398,7 @@ instances:
 
 **Note**: If you already have a `service` tag set globally in your Agent's main configuration file, the process metrics are tagged with two services. Since this can cause confusion with interpreting the metrics, it is recommended to configure the `service` tag only in the configuration of the process check.
 
-[1]: /agent/guide/agent-configuration-files
+[1]: /agent/configuration/agent-configuration-files
 [2]: /integrations/process
     {{% /tab %}}
     {{< /tabs >}}

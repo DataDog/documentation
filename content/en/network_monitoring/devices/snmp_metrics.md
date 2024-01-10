@@ -16,6 +16,10 @@ further_reading:
   text: "Monitor SNMP with Datadog"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
+{{< /site-region >}}
+
 ## Installation
 
 Network Device Monitoring relies on the SNMP Integration included in the [Datadog Agent][1] package. Ensure you are using Agent v7.32+. No additional installation is necessary.
@@ -181,10 +185,10 @@ snmp_listener:
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /network_monitoring/devices/profiles#sysoid-mapped-devices
-[3]: /agent/guide/agent-configuration-files/#agent-configuration-directory
+[3]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/conf.yaml.example
-[5]: /agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
+[5]: /agent/configuration/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [6]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
 [7]: /agent
-[8]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
-[9]: /agent/guide/agent-commands/#agent-status-and-information
+[8]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[9]: /agent/configuration/agent-commands/#agent-status-and-information

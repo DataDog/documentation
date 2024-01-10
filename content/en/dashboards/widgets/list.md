@@ -1,6 +1,7 @@
 ---
 title: List Widget
 kind: documentation
+widget_type: list_stream
 further_reading:
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
@@ -83,10 +84,13 @@ For Events, you can choose how they're displayed in the widget:
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][1] for additional reference.
+This widget can be used with the **[Dashboards API][1]**. See the following table for the [widget JSON schema definition][2]:
+
+{{< dashboards-widgets-api >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/v1/dashboards/
+[1]: /api/latest/dashboards/
+[2]: /dashboards/graphing_json/widget_json/

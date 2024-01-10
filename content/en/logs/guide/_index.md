@@ -15,6 +15,7 @@ cascade:
     {{< nextlink href="logs/guide/getting-started-lwl" >}}Logging Without Limits™ Guide{{< /nextlink >}}
     {{< nextlink href="logs/guide/correlate-logs-with-metrics" >}}Correlate Logs with Metrics{{< /nextlink >}}
     {{< nextlink href="logs/guide/best-practices-for-log-management" >}}Best Practices for Log Management{{< /nextlink >}}
+    {{< nextlink href="logs/guide/manage_logs_and_metrics_with_terraform" >}}Manage Logs and Metrics with Terraform{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>
@@ -24,8 +25,11 @@ cascade:
     {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/" >}}Send AWS services logs with the Datadog Kinesis Firehose Destination{{< /nextlink >}}
     {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/" >}}Sending Events and Logs to Datadog with Amazon EventBridge API Destinations{{< /nextlink >}}
     {{< nextlink href="/logs/guide/forwarder/" >}}Set up Datadog Lambda Forwarder{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/apigee" >}}Collect Apigee Logs{{< /nextlink >}}
     {{< nextlink href="/logs/guide/azure-logging-guide/" >}}Send Azure Logs to Datadog{{< /nextlink >}}
-    {{< nextlink href="/logs/guide/azure-native-logging-guide/" >}}Send Azure Logs with the Datadog Resource{{< /nextlink >}}    
+    {{< nextlink href="/logs/guide/azure-native-logging-guide/" >}}Send Azure Logs with the Datadog Resource{{< /nextlink >}}
+    {{< nextlink href="/integrations/google_cloud_platform/#log-collection" >}}Collect Google Cloud logs with the Datadog Dataflow template{{< /nextlink >}}
+    {{< nextlink href="/logs/guide/collect-google-cloud-logs-with-push/" >}}Collect Google Cloud logs with a Pub/Sub Push subscription{{< /nextlink >}}    
     {{< nextlink href="logs/guide/collect-heroku-logs" >}}Collect Heroku Logs{{< /nextlink >}}
     {{< nextlink href="/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/" >}}Send AWS services logs with the Datadog Lambda function{{< /nextlink >}}
     {{< nextlink href="logs/guide/log-collection-troubleshooting-guide" >}}Log Collection Troubleshooting Guide{{< /nextlink >}}

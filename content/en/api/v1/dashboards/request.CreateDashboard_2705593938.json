@@ -22,7 +22,10 @@
                 "name": "query1",
                 "aggregator": "sum"
               }
-            ]
+            ],
+            "style": {
+              "palette": "dog_classic"
+            }
           }
         ]
       },

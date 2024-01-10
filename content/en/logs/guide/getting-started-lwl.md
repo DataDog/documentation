@@ -18,7 +18,7 @@ algolia:
   tags: ['logging without limits']
 ---
 
-{{< img src="logs/guide/lwl_marketecture_230424.jpeg" alt="Logging without Limits™" >}}
+{{< img src="logs/lwl_marketecture_20231030.png" alt="Logging without Limits™" >}}
 
 ## Overview
 

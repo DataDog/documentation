@@ -15,7 +15,7 @@ kind: documentation
 title: Agent フレア
 ---
 
-Agent 5.3 以上を実行している場合は、必要なトラブルシューティング情報を 1 つのフレアコマンドで Datadog のサポートチームに送信できます。
+必要なトラブルシューティング情報を 1 つのフレアコマンドで Datadog のサポートチームに送信できます。
 
 `flare` は Agent のすべての構成ファイルを収集し、1 つのアーカイブファイルに記録します。パスワード、API キー、プロキシ資格情報、SNMP コミュニティ文字列などの機密情報は削除されます。**アーカイブのアップロードを確認すると、アーカイブが直ちに Datadog のサポートチームに送信されます**。
 
@@ -153,4 +153,4 @@ kubectl cp datadog-<pod-name>:tmp/datadog-agent-<date-of-the-flare>.zip flare.zi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/dd-agent/blob/master/utils/flare.py
+[1]: https://github.com/DataDog/datadog-agent/tree/main/pkg/flare

@@ -1,10 +1,14 @@
 ---
 title: Change Widget
 kind: documentation
+widget_type: change
 description: "Graph the change in a value over a chosen time period."
 aliases:
-    - /graphing/widgets/change/
+- /graphing/widgets/change/
 further_reading:
+- link: "/monitors/types/metric/?tab=change"
+  tag: "Documentation"
+  text: "Configure Change alert detection in monitors"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"
@@ -49,9 +53,7 @@ The Change graph shows you the change in a metric over a period of time:
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][2] for additional reference.
-
-The dedicated [widget JSON schema definition][3] for the change widget is:
+This widget can be used with the **[Dashboards API][2]**. See the following table for the [widget JSON schema definition][3]:
 
 {{< dashboards-widgets-api >}}
 

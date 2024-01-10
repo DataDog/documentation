@@ -227,7 +227,7 @@ Instead, run the Agent in bridge mode with port mapping to allow easier retrieva
 {{% site-region region="gov" %}}
 #### FIPS proxy for GOVCLOUD environments
 
-To send data to Datadog's GOVCLOUD datacenter, add the `fips-proxy` sidecar container and open container ports to ensure proper communication for [all of the features](https://github.com/DataDog/datadog-agent/blob/7.45.x/pkg/config/config.go#L1564-L1577).
+To send data to Datadog's GOVCLOUD datacenter, add the `fips-proxy` sidecar container and open container ports to ensure proper communication for [supported features](https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=helmonamazoneks#supported-platforms-and-limitations).
 
 **Note**: This feature is available for Linux only.
 
@@ -237,7 +237,7 @@ To send data to Datadog's GOVCLOUD datacenter, add the `fips-proxy` sidecar cont
      (...)
           {
             "name": "fips-proxy",
-            "image": "datadog/fips-proxy:0.5.4",
+            "image": "datadog/fips-proxy:1.0.1",
             "portMappings": [
                 {
                     "containerPort": 9803,
@@ -293,6 +293,14 @@ To send data to Datadog's GOVCLOUD datacenter, add the `fips-proxy` sidecar cont
                 },
                 {
                     "containerPort": 9816,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9817,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9818,
                     "protocol": "tcp"
                 }
             ],

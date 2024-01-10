@@ -24,4 +24,5 @@ title: 開発者ガイド
     {{< nextlink href="developers/guide/dogwrap">}}コマンドを呼び出し、その結果からイベントを生成する。{{< /nextlink >}}
     {{< nextlink href="developers/guide/query-data-to-a-text-file-step-by-step">}}データをクエリしてテキストファイルにするまでの手順{{< /nextlink >}}
     {{< nextlink href="developers/guide/custom-python-package">}}Agent へのカスタム Python パッケージの追加{{< /nextlink >}}
+    {{< nextlink href="developers/guide/legacy">}}Datadog Agent v5 の Agent チェックの作成{{< /nextlink >}}
 {{< /whatsnext >}}

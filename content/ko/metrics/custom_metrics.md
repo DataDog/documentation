@@ -20,7 +20,7 @@ further_reading:
   text: 공식 및 커뮤니티에서 생성한 API 및 DogStatsD 클라이언트 라이브러리
 - link: https://www.datadoghq.com/blog/metrics-without-limits/
   tag: 블로그
-  text: Metrics without LimitsTM을 사용해 커스텀 메트릭 볼륨을 동적으로 제어합니다.
+  text: Metrics without Limits™을 사용해 커스텀 메트릭 볼륨을 동적으로 제어합니다.
 - link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
   tag: 블로그
   text: Datadog를 통해 Azure App Service에서 Linux 웹 앱을 모니터링합니다.

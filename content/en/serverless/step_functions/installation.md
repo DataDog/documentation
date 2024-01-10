@@ -39,7 +39,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
         site: <DATADOG_SITE>
         apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
         forwarderArn: <FORWARDER_ARN>
-        enableStepFunctionTracing: true
+        enableStepFunctionsTracing: true
     ```
     - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
@@ -179,7 +179,7 @@ If you have not yet instrumented your Lambda functions to send traces, you can [
 
 After you have invoked your state machine, go to the [**Serverless app**][2] in Datadog. Search for `service:<YOUR_STATE_MACHINE_NAME>` to see the relevant metrics, logs, and traces associated with that state machine. If you set the `service` tag on your state machine to a custom value, search for `service:<CUSTOM_VALUE>`.
 
-{{< img src="serverless/step_functions/stepfunctionfullview.png" alt="An AWS Step Function flame graph displayed in the serverless view." style="width:100%;" >}}
+{{< img src="serverless/step_functions/overview1.png" alt="An AWS Step Function side panel view." style="width:100%;" >}}
 
 If you cannot see your traces, see [Troubleshooting][5].
 

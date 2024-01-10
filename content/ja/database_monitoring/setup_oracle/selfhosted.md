@@ -69,6 +69,7 @@ grant select on V_$SQLSTATS to c##datadog ;
 grant select on V_$CONTAINERS to c##datadog ;
 grant select on V_$SQL_PLAN_STATISTICS_ALL to c##datadog ;
 grant select on V_$SQL to c##datadog ;
+grant select on V_$PGASTAT to c##datadog ;
 ```
 
 プラグ可能データベース (PDB) 上で実行するカスタムクエリを構成した場合は、`C##DATADOG` ユーザーに `set container` 権限を付与する必要があります。

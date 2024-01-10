@@ -35,6 +35,8 @@ Private locations allow you to **monitor internal-facing applications or any pri
 * **Verify application performance in your internal CI environment** before you release new features to production with [Continuous Testing and CI/CD][1].
 * **Compare application performance** from both inside and outside your internal network.
 
+{{< img src="synthetics/private_locations/private_locations_worker.png" alt="Architecture diagram of how a private location works in Synthetic Monitoring" style="width:100%;">}}
+
 Private locations come as Docker containers that you can install wherever makes sense inside of your private network. Once created and installed, you can assign [Synthetic tests][2] to your private location just like you would with any managed location.
 
 Your private location worker pulls your test configurations from Datadog's servers using HTTPS, executes the test on a schedule or on-demand, and returns the test results to Datadog's servers. You can then visualize your private locations test results in a completely identical manner to how you would visualize tests running from managed locations:
@@ -126,16 +128,17 @@ Only users with the **Admin** role can create private locations. For more inform
 
 Navigate to [**Synthetic Monitoring** > **Settings** > **Private Locations**][22] and click **Add Private Location**.
 
-{{< img src="synthetics/private_locations/synthetics_pl_add.png" alt="Create a private location" style="width:90%;">}}
+{{< img src="synthetics/private_locations/synthetics_pl_add_1.png" alt="Create a private location" style="width:90%;">}}
 
 Fill out your private location details:
 
 1. Specify your private location's **Name** and **Description**.
-2. Add any **Tags** you would like to associate with your private location. If you are configuring a private location for Windows, select **This is a Windows Private Location**.
+2. Add any **Tags** you would like to associate with your private location.
 3. Choose one of your existing **API Keys**. Selecting an API key allows communication between your private location and Datadog. If you don't have an existing API key, click **Generate API key** to create one on the dedicated page. Only `Name` and `API key` fields are mandatory.
 4. Set access for your private location and click **Save Location and Generate Configuration File**. Datadog creates your private location and generates the associated configuration file.
 
-{{< img src="synthetics/private_locations/pl_creation_1.png" alt="Add details to private location" style="width:85%;">}}
+{{< img src="synthetics/private_locations/pl_creation_1.png" alt="Add details to private location" style="width:85%;">}} 
+
 ### Configure your private location
 
 Configure your private location by customizing the generated configuration file. When you add initial configuration parameters such as [proxies](#proxy-configuration) and [blocked reserved IPs](#blocking-reserved-ips) in **Step 3**, your generated configuration file updates automatically in **Step 4**.
@@ -179,7 +182,7 @@ Launch your private location on:
 Run this command to boot your private location worker by mounting your configuration file to the container. Ensure that your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is in `/etc/docker`, not the root home folder:
 
 ```shell
-docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
+docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
 ```
 
 **Note:** If you have blocked reserved IPs, add the `NET_ADMIN` [Linux capabilities][1] to your private location container.
@@ -236,7 +239,7 @@ For more information about private locations parameters for admins, see [Configu
 
 The Podman configuration is very similar to Docker, however, you must set `NET_RAW` as an additional capability to support ICMP tests.
 
-1. Run `sysctl -w net.ipv4.ping_group_range = 0 2147483647` from the host where the container runs.
+1. Run `sysctl -w "net.ipv4.ping_group_range = 0 2147483647"` from the host where the container runs.
 2. Run this command to boot your private location worker by mounting your configuration file to the container. Ensure that your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is accessible to mount to the container:
 
    ```shell
@@ -695,15 +698,24 @@ livenessProbe:
 
 {{< /tabs >}}
 
+### Upgrade a private location image
+
+To upgrade an existing private location, click the **Gear** icon on the private location side panel and click **Installation instructions**.
+
+{{< img src="synthetics/private_locations/pl_edit_config.png" alt="Access the setup workflow for a private location" style="width:90%;" >}}
+
+Then, run the [configuration command based on your environment](#install-your-private-location
+) to get the latest version of the private location image. 
+
 ### Test your internal endpoint
 
-Once at least one private location container starts reporting to Datadog, the private location status displays green:
+Once at least one private location container starts reporting to Datadog, the private location status displays green.
 
 {{< img src="synthetics/private_locations/pl_reporting.png" alt="Private location reporting" style="width:90%;">}}
 
-You can also see a `REPORTING` health status displayed on the Private Locations list in the **Settings** page:
+You can see a `REPORTING` health status and an associated monitor status displayed on the Private Locations list in the **Settings** page.
 
-{{< img src="synthetics/private_locations/pl_monitoring_table_reporting.png" alt="Private location health" style="width:95%;">}}
+{{< img src="synthetics/private_locations/pl_monitoring_table_reporting_1.png" alt="Private location health and monitor status" style="width:100%;">}}
 
 Start testing your first internal endpoint by launching a fast test on one of your internal endpoints to see if you get the expected response:
 
@@ -727,7 +739,7 @@ You can also **vertically scale** your private locations by increasing the load 
 
 For more information, see [Dimensioning Private Locations][18].
 
-In order to use private locations for continuous testing, set a value in the `concurrency` parameter to control your parallelization. For more information, see [Continuous Testing][23].
+In order to use private locations for Continuous Testing, set a value in the `concurrency` parameter to control your parallelization. For more information, see [Continuous Testing][23].
 
 ## Monitor your private location
 

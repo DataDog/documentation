@@ -16,6 +16,9 @@ further_reading:
 - link: "https://github.com/DataDog/schema/blob/main/service-catalog/v2.1/schema.json"
   tag: "GitHub"
   text: "Service Definition Schema (v2.1)"
+- link: "https://github.com/DataDog/schema/blob/main/service-catalog/v2.2/schema.json"
+  tag: "GitHub"
+  text: "Service Definition Schema (v2.2)"
 algolia:
   tags: ['service definition']
 ---

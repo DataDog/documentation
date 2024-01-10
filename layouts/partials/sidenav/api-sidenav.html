@@ -6,10 +6,15 @@
                 <p class="h4">{{ i18n "datadog_docs" }} &nbsp;&nbsp;<span class="font-semibold">API</span></p>
             </a>
 
-            {{ if ne .File.ContentBaseName "search" }}
-            {{ partial "search.html" . }}
+            {{ $ContentBaseName := "" }}
+            {{ with .File }}
+              {{ $ContentBaseName = .ContentBaseName }}
+            {{ end }}
+
+            {{ if ne $ContentBaseName "search" }}
+                {{ partial "search.html" . }}
             {{ else }}
-            <div id="async-searchbar-mount"></div>
+                <div id="async-searchbar-mount"></div>
             {{ end}}
 
             <div class="sidenav-nav">

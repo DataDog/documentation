@@ -22,13 +22,14 @@ further_reading:
       text: "Troubleshooting Application Security Management"
 ---
 
-You can monitor application security for Node.js apps running in Docker, Kubernetes, AWS ECS, and AWS Fargate.
+You can monitor application security for Node.js apps running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 {{% appsec-getstarted %}}
 
 {{% appsec-getstarted-with-rc %}}
 
-## Get started
+## Enabling threat detection
+### Get started
 
 1. **Update your Datadog Node.js library package** to at least version 2.23.0 (for NodeJS 12+) or 3.10.0 (for NodeJS 14+), by running one of these commands:
    ```shell
@@ -122,7 +123,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{% tab "Amazon ECS" %}}
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 
@@ -149,7 +150,7 @@ DD_APPSEC_ENABLED=true node app.js
 
 {{% appsec-getstarted-2-plusrisk %}}
 
-{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
+{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
 ## Enabling code-level vulnerability detection
 If your service runs a [tracing library version that supports Vulnerability Management for code-level vulnerability detection][3], enable the capability by setting the `DD_IAST_ENABLED=true` environment variable and restarting your service.
@@ -186,7 +187,7 @@ docker run [...] -e DD_IAST_ENABLED=true [...]
 Add the following environment variable value to your container Dockerfile:
 
 ```Dockerfile
-ENV DD_IAST_ENABLED=true=true
+ENV DD_IAST_ENABLED=true
 ```
 
 {{% /tab %}}
@@ -207,7 +208,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{% tab "Amazon ECS" %}}
 
 Update your ECS task definition JSON file, by adding this in the environment section:
 

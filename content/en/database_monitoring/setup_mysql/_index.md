@@ -11,7 +11,7 @@ disable_sidebar: true
 
 ### MySQL versions supported
 
-|  | Self-hosted | AWS RDS | AWS Aurora | Google Cloud SQL with >26GB RAM | Azure |
+|  | Self-hosted | Amazon RDS | Amazon Aurora | Google Cloud SQL with >26GB RAM | Azure |
 |--|------------|---------|------------|------------------|---------|
 | MySQL 5.6 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | MySQL 5.7 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |

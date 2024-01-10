@@ -40,7 +40,7 @@ Cliquez n'importe où sur la carte d'aperçu d'une alerte pour ouvrir le volet d
 En plus de reprendre les informations de la carte d'aperçu, l'onglet **Overview** peut afficher un ou plusieurs des champs suivants :
 - Expected Bounds : cochez la case **Show expected bounds**. Le graphique change de couleur pour différencier les comportements attendus des comportements anormaux.
 - Suggested Next Steps : décrit les étapes à effectuer pour analyser et trier les comportements anormaux.
-- Correlated dashboards : affiche des suggestions de dashboards liés à l'alerte. Datadog met en évidence les métriques du dashboard qui sont liées aux informations utiles sur l'alerte.
+- Related dashboards : affiche des suggestions de dashboards liés à l'alerte. Datadog met en évidence les métriques du dashboard qui sont liées aux informations utiles sur l'alerte.
 
 L'onglet **Monitors** répertorie les monitors associés à votre alerte. Pour chaque monitor affiché, la métrique de l'alerte actuelle et ses tags associés sont appliqués en tant que contexte.
 

@@ -31,6 +31,7 @@ The .NET Tracer supports automatic instrumentation on the following .NET Core ve
 
 | Version              | Microsoft End of Life | Support level        | Package version      |
 | -------------------- | --------------------- | -------------------- | -------------------- |
+| .NET 8               |                       | [GA](#support-ga)    | latest (>= 2.42.0)   |
 | .NET 7               |                       | [GA](#support-ga)    | latest (>= 2.20.0)   |
 | .NET 6               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
 | .NET 5               | 05/10/2022            | [GA](#support-ga)    | latest (>= 2.0.0)    |
@@ -64,8 +65,10 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | Aerospike                       | `Aerospike.Client` 4.0.0+                                                                            | `Aerospike`          |
 | ASP.NET Core                    | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ and 3.0+                              | `AspNetCore`         |
 | Azure Functions                 | `Microsoft.Azure.Webjobs` 3.0+                                                                       | `AzureFunctions`     |
-| AWS SNS                         | `AWSSDK.SNS`  3.0+                                                                                   | `AwsSns`             |
-| AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                                   | `AwsSqs`             |
+| Amazon DynamoDB                 | `AWSSDK.DynamoDBv2`  3.0+                                                                            | `AwsDynamoDb`        |
+| Amazon Kinesis                     | `AWSSDK.Kinesis`  3.0+                                                                               | `AwsKinesis`         |
+| Amazon SNS                         | `AWSSDK.SNS`  3.0+                                                                                   | `AwsSns`             |
+| Amazon SQS                         | `AWSSDK.SQS`  3.0+                                                                                   | `AwsSqs`             |
 | CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0+                                                               | `CosmosDb`           |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                                          | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                           | `ElasticsearchNet`   |
@@ -74,6 +77,7 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | HotChocolate                    | `HotChocolate` 11.0.0+                                                                               | `HotChocolate`       |
 | HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                                               | `HttpMessageHandler` |
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                               | `Kafka`              |
+| IBM MQ                          | `amqmdnetstd` 9.0.0+                                                                      | `IbmMq`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                                         | `MongoDb`            |
 | MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                                     | `MySql`              |
 | Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                                  | `Oracle`             |

@@ -15,8 +15,8 @@ Generally, the libraries generate IDs that are 64-bit unsigned integers. Specifi
 | JavaScript | Unsigned [0, $2^63$]     | Signed or unsigned            |
 | Java       | Unsigned [1, $2^63-1$]   | Unsigned                      |
 | Go         | Unsigned [0, $2^63-1$]   | Signed or unsigned            |
-| Python     | Unsigned [0, $2^63$]     | Unsigned                      |
-| Ruby       | Unsigned [0, $2^63$]     | Unsigned                      |
-| .NET       | Unsigned [0, $2^63$]     | Unsigned                      |
-| PHP        | [0, $2^63$]              | Signed                        |
+| Python     | Unsigned [0, $2^64-1$]   | Unsigned                      |
+| Ruby       | Unsigned [1, $2^62-1$]   | Unsigned                      |
+| .NET       | Unsigned [0, $2^63-1$]   | Unsigned                      |
+| PHP        | Unsigned [1, $2^64-1$]   | Unsigned                      |
 | C++        | Unsigned [0, $2^63-1$]   | Unsigned                      |

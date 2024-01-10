@@ -10,7 +10,7 @@ further_reading:
   tag: Blog
   text: Surveillance des performances des bases de données avec Datadog
 - link: https://dtdg.co/fe
-  tag: Validation des bases&
+  tag: Validation des bases
   text: Prenez part à une session interactive pour améliorer la surveillance de vos
     bases de données avec Database Monitoring
 kind: documentation
@@ -19,7 +19,7 @@ title: Prise en main de la solution Database Monitoring
 
 {{% site-region region="gov" %}}
 <div class="alert alert-warning">La solution Database Monitoring n'est pas disponible pour le site Datadog que vous avez sélectionné ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+{{% /site-region %}}
 
 ## Présentation
 

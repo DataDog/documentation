@@ -29,6 +29,8 @@ To determine the names and types of the inferred services, Datadog uses span att
 
 If you're using the Go, Java, NodeJS, PHP, .NET, or Ruby tracer, you can customize the default names for inferred services. For more information, see the "Peer Service Mapping" section for your language below.
 
+**Note:** If you configure monitors, dashboards, or notebooks for a given inferred service during the beta, you may need to update them if the naming scheme changes.
+
 ## Dependency map
 
 Use the dependency map to visualize service-to-service communication and gain insight into system components such as databases, queues, and third-party dependencies. You can group dependencies by type and filter by Requests, Latency, or Errors to identify slow or failing connections.
@@ -47,6 +49,14 @@ Requirements:
 Set the following in your `datadog.yaml` [configuration file][5]:
 - `DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true`
 - `DD_APM_PEER_SERVICE_AGGREGATION=true`
+
+
+### OpenTelemetry Collector Datadog Exporter configuration
+
+Set the following in your `collector.yaml` [configuration file][6]:
+- `compute_stats_by_span_kind=true`
+- `peer_service_aggregation=true`
+
 
 ### APM tracer configuration
 
@@ -75,7 +85,7 @@ Remove the following settings from your configuration:
 #### Peer service mapping
 
 Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
-
+**Note**: `key:value` pairs are case sensitive.
 | Environment variable | System property |
 | ---  | ----------- |
 | `DD_TRACE_PEER_SERVICE_MAPPING` | `dd.trace.peer.service.mapping` |
@@ -106,7 +116,7 @@ To opt in, add the following environment variables or system properties to your 
 #### Peer service mapping
 
 Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
-
+**Note**: `key:value` pairs are case sensitive.
 | Environment variable | System property |
 | ---  | ----------- |
 | `DD_TRACE_PEER_SERVICE_MAPPING` | `WithPeerServiceMapping` |
@@ -137,7 +147,7 @@ To opt in, add the following environment variables or system properties to your 
 #### Peer service mapping
 
 Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
-
+**Note**: `key:value` pairs are case sensitive.
 | Environment variable | System property |
 | ---  | ----------- |
 | `DD_TRACE_PEER_SERVICE_MAPPING` | `peerServiceMapping` |
@@ -169,7 +179,7 @@ To opt in, add the following environment variables or system properties to your 
 #### Peer service mapping
 
 Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
-
+**Note**: `key:value` pairs are case sensitive.
 | Environment variable | System property |
 | ---  | ----------- |
 | `DD_TRACE_PEER_SERVICE_MAPPING` | `datadog.trace.peer_service_mapping` |
@@ -196,7 +206,7 @@ To opt in, add the following environment variables to your tracer settings or sy
 #### Peer service mapping
 
 Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
-
+**Note**: `key:value` pairs are case sensitive.
 | Environment variable | TracerSettings |
 | ---  | ----------- |
 | `DD_TRACE_PEER_SERVICE_MAPPING` | `PeerServiceNameMappings` |
@@ -223,6 +233,22 @@ Add the following environment variables to your tracer settings or system proper
 - `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`
 - `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
 
+#### Peer service mapping
+
+Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the following settings:
+
+| Environment variable | TracerSettings |
+| ---  | ----------- |
+| `DD_TRACE_PEER_SERVICE_MAPPING` | `PeerServiceNameMappings` |
+
+Each setting accepts a comma-separated list: `key1:value1,key2:value2`.
+
+For example, if you're using environment variables and you need to rename the peer service `10.0.32.3` to `my-service`, use the following configuration:
+
+```yaml
+DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
+```
+
 As of tracer version `v1.16.0` all libraries are supported except for Boto2.
 
 [1]: https://github.com/DataDog/dd-trace-py/releases/tag/v1.16.0
@@ -236,7 +262,7 @@ To opt in, add the following environment variables to your tracer settings or sy
 - `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
 
 #### Peer service mapping
-
+**Note**: `key:value` pairs are case sensitive.
 Datadog uses a default naming scheme for inferred services. If you prefer, you can map specific values to peer services using the `DD_TRACE_PEER_SERVICE_MAPPING` environment variable. The environment variable accepts a comma-separated list of key-value pairs.
 
 For example, if you're using environment variables and you need to rename the peer service `10.0.32.3` to `my-service`, use the following configuration:
@@ -257,7 +283,7 @@ For example, to set the `peer.service` value for all Dalli spans, use
 
 ### Global default service naming migration
 
-When you enable the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` environment variable, it improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations. 
+When you enable the `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` environment variable, it improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported tracing library languages and integrations.
 
 Previously, some tracing libraries included the name of the associated integration in service name tagging. For example, .NET tagged gRCP calls as `service:<DD_SERVICE>-grpc-client` while Python tagged them as `service:grpc-client`. With this option enabled, all supported tracing libraries tag spans from the downstream services with the calling service's name, `service:<DD_SERVICE>`, thereby providing a _global default service name_.
 
@@ -281,3 +307,4 @@ Update those items to use the global default service tag (`service:<DD_SERVICE>`
 [3]: /tracing/service_catalog/
 [4]: https://github.com/DataDog/datadog-agent/releases/tag/7.45.0
 [5]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L328-L341

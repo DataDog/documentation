@@ -64,7 +64,9 @@ datadog:
 {{% /tab %}}
 {{% tab "Operator" %}}
 
-DatadogAgent Kubernetes Resource:
+In an EKS cluster, you can install the Operator using [Helm][5] or as an [EKS add-on][6].
+
+The configuration below is meant to work with either setup (Helm or EKS add-on) when the Agent is installed in the same namespace as the Datadog Operator.
 
 ```yaml
 kind: DatadogAgent
@@ -94,7 +96,7 @@ spec:
 
 ## Azure Kubernetes Service (AKS) {#AKS}
 
-AKS requires a specific configuration for the `Kubelet` integration due to how AKS has setup the SSL Certificates. Additionally, the optional [Admission Controller][3] feature requires a specific configuration to prevent an error when reconciling the webhook.
+AKS requires a specific configuration for the `Kubelet` integration due to how AKS has setup the SSL Certificates. Additionally, the optional [Admission Controller][1] feature requires a specific configuration to prevent an error when reconciling the webhook.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -154,7 +156,7 @@ The `kubelet.tlsVerify=false` sets the environment variable `DD_KUBELET_TLS_VERI
 
 There is a known issue with the format of the AKS Kubelet certificate in older node image versions. As of Agent 7.35, it is required to use `tlsVerify: false` as the certificates did not contain a valid Subject Alternative Name (SAN).
 
-If all the nodes within your AKS cluster are using a supported node image version, you can use Kubelet TLS Verification. Your version must be at or above the [versions listed here for the 2022-10-30 release][4]. You must also update your Kubelet configuration to use the node name for the address and map in the custom certificate path.
+If all the nodes within your AKS cluster are using a supported node image version, you can use Kubelet TLS Verification. Your version must be at or above the [versions listed here for the 2022-10-30 release][2]. You must also update your Kubelet configuration to use the node name for the address and map in the custom certificate path.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -235,7 +237,7 @@ Since Agent 7.26, no specific configuration is required for GKE (whether you run
 
 GKE Autopilot requires some configuration, shown below.
 
-Datadog recommends that you specify resource limits for the Agent container. Autopilot sets a relatively low default limit (50m CPU, 100Mi memory) that may quickly lead the Agent container to OOMKill depending on your environment. If applicable, also specify resource limits for the Trace Agent and Process Agent containers. Additionally, you may wish to create a priority class for the Agent in order to ensure it is scheduled. 
+Datadog recommends that you specify resource limits for the Agent container. Autopilot sets a relatively low default limit (50m CPU, 100Mi memory) that may lead the Agent container to quickly OOMKill depending on your environment. If applicable, also specify resource limits for the Trace Agent and Process Agent containers. Additionally, you may wish to create a priority class for the Agent to ensure it is scheduled.
 
 {{< tabs >}}
 {{% tab "Helm" %}}
@@ -288,6 +290,7 @@ providers:
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**: Network Performance Monitoring is not supported for GKE Autopilot.
 
 ## Red Hat OpenShift {#Openshift}
 
@@ -381,8 +384,19 @@ spec:
     clusterAgent:
       image:
         name: gcr.io/datadoghq/cluster-agent:latest
+      containers:
+        cluster-agent:
+          securityContext:
+            readOnlyRootFilesystem: false
     nodeAgent:
       serviceAccountName: datadog-agent-scc
+      securityContext:
+        runAsUser: 0
+        seLinuxOptions:
+          level: s0
+          role: system_r
+          type: spc_t
+          user: system_u
       image:
         name: gcr.io/datadoghq/agent:latest
       tolerations:
@@ -393,6 +407,8 @@ spec:
           operator: Exists
           effect: NoSchedule
 ```
+
+**Note**: The nodeAgent Security Context override is necessary for Log Collection and APM Trace Collection with the `/var/run/datadog/apm/apm.socket` socket. If these features are not enabled, you can omit this override.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -534,8 +550,8 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-More `values.yaml` examples can be found in the [Helm chart repository][1]
-More `DatadogAgent` examples can be found in the [Datadog Operator repository][2]
+More `values.yaml` examples can be found in the [Helm chart repository][3]
+More `DatadogAgent` examples can be found in the [Datadog Operator repository][4]
 
 ## vSphere Tanzu Kubernetes Grid (TKG) {#TKG}
 
@@ -605,7 +621,9 @@ spec:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/helm-charts/tree/main/examples/datadog
-[2]: https://github.com/DataDog/datadog-operator/tree/main/examples/datadogagent/v2alpha1
-[3]: /containers/cluster_agent/admission_controller
-[4]: https://github.com/Azure/AKS/releases/tag/2022-10-30
+[1]: /containers/cluster_agent/admission_controller
+[2]: https://github.com/Azure/AKS/releases/tag/2022-10-30
+[3]: https://github.com/DataDog/helm-charts/tree/main/examples/datadog
+[4]: https://github.com/DataDog/datadog-operator/tree/main/examples/datadogagent/v2alpha1
+[5]: /getting_started/containers/datadog_operator
+[6]: /agent/guide/operator-eks-addon

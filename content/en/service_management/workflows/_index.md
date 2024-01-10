@@ -11,7 +11,14 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
   tag: "Blog"
   text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/azure-workflow-automation/"
+  tag: "Blog"
+  text: "Quickly remediate issues in your Azure applications with Datadog Workflow Automation"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/852419580/rendition/1080p/file.mp4?loc=external&signature=fb7ae8df018e24c9f90954f62ff3217bc1b904b92e600f3d3eb3f5a9d143213e" poster="/images/poster/workflow_automation.png" >}}
 
@@ -28,6 +35,12 @@ Datadog provides you with preconfigured flows in the form of out of the box [blu
 ## Automate critical tasks
 
 Trigger your workflows from monitors, security signals, or dashboards, or trigger them manually. This flexibility allows you to respond with the appropriate workflow at the point you become aware of an issue affecting the health of your system. Automating critical tasks with Datadog Workflow Automation helps keep your systems up and running by improving the time to resolution and reducing the possibility of errors.
+
+## Workflows Overview dashboard
+
+The Workflows Overview dashboard provides a high-level overview of your Datadog workflows and executions. To find the dashboard, go to **Dashboards > Dashboards list** and search for `Workflows Overview`.
+
+{{< img src="service_management/workflows/workflows-dashboard.png" alt="The Workflows Overview dashboard" style="width:100%;" >}}
 
 ## Examples
 
