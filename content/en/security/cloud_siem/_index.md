@@ -50,6 +50,6 @@ Threats are surfaced in Datadog as Security Signals and can be correlated and tr
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/explorer
+[1]: m/security/cloud_siem/investigate_security_signals
 [2]: /security/default_rules#cat-cloud-siem
 [3]: /security/detection_rules
