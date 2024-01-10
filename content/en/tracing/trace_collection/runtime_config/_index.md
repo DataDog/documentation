@@ -17,8 +17,8 @@ This feature uses [Remote Configuration][1] to apply configurations to Datadog c
 
 ## Prerequisites
 
-- [Datadog Agent][2] 7.41.1 or higher
-- [Remote Configuration][1] is enabled for your Agent
+- [Datadog Agent][2] 7.41.1 or higher.
+- [Remote Configuration][1] is enabled for your Agent.
 - [Read and write permission][4] to APM.
   **Note**: If you don't have these permissions, ask your Datadog Admin to update your permissions from your Organization Settings.
 
@@ -36,11 +36,11 @@ To make changes to a services configuration at runtime:
 
 **Note**: You can also access configuration at runtime from the Trace View panel. Make sure you select an environment for your service to see it.
 
-In **Active Library Configuration**, you can see which options are configured for this service and selected environment:
+In **Active Library Configuration**, you can see which options are configured for this service and the selected environment:
 
 {{< img src="/tracing/runtime_config/active-library-config.png" alt="From the Setup Guidance tab, you can see your active library configuration." style="width:100%;">}}
 
-In this example, you can see that Log Injection is enabled for the Staging environment across two instances. An instance refers to an instance of the Remote Configuration client. There should be on instance per process of your application.
+In this example, you can see that Log Injection is enabled for the Staging environment across two instances. An instance refers to an instance of the Remote Configuration client. There should be one instance per process of your application.
 
 You can tell when the configuration changes have been successfully applied by referencing the **X Applied** text. In this example, the configuration applied successfully to all two instances.
 
