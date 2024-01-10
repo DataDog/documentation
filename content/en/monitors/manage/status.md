@@ -135,7 +135,14 @@ This graph shows the results from the raw data points of a metric applied agains
 Events generated from your monitor (alerts, warnings, recoveries, etc.) are shown in this section based on the time selector above the **Status & History** section. The events are also displayed in your [Events Explorer][10].
 
 ### Audit trail
-Audit Trail automatically capture all monitor changes for all monitor types and create an event. This event explains the monitor changes (monitor edits for instance) showing the previous and the current configuration and displays the user that made the change. For more information, see the [Audit Trail][11] documentation and read the [Audit Trail best practices][12] blog.
+Audit Trail automatically captures monitor changes for all monitor types and creates an event. This event documents the changes to the monitor.
+
+ For example, in the case of an edit to a monitor, the Audit Trail event shows:
+ - The previous monitor configuration
+ - The current monitor configuration
+ - The user that made the change
+ 
+ For more information, see the [Audit Trail][11] documentation and read the [Audit Trail best practices][12] blog.
 
 Datadog also provides a notification option for changes to monitors you create. At the bottom of the monitor editor, under **Define permissions and audit notifications**, select **Notify** in the dropdown next to: *If this monitor is modified, notify monitor creator and alert recipients.*.
 
