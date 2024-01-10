@@ -137,7 +137,7 @@ After selecting a metric, you can filter your query based on tag(s). For instanc
 
 #### Configure time aggregation
 
-Next, choose the granularity of your data using time rollup. In this example, you've defined that there is one data point for every hour (3600 seconds). You can also choose how you want to aggregate the data in each time bucket. By default, _avg_ is applied, but other available options are _sum_, _min_, _max_, and _count_. If you wanted to apply max, you would use `.rollup(max, 60)`. You can customize how your metrics data is rolled up and bucketed in time with calendar aligned queries using the `.rollup()` function. Learn more about the rollup function [here][23].
+Next, choose the granularity of your data using time rollup. In this example, you've defined that there is one data point for every hour (3600 seconds). You can choose how you want to aggregate the data in each time bucket. By default, _avg_ is applied, but other available options are _sum_, _min_, _max_, and _count_. If you wanted to apply max, you would use `.rollup(max, 60)`. You can also customize how your metrics data is rolled up and bucketed in time with calendar aligned queries using the `.rollup()` function. See [Rollup with calendar aligned queries][23] for more information.
 
 #### Configure space aggregation
 
