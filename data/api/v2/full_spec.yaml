@@ -3797,6 +3797,22 @@ components:
           description: The name of the Cloudflare account.
           example: test-name
           type: string
+        resources:
+          description: An allowlist of resources to restrict pulling metrics for.
+          example:
+          - web
+          - dns
+          items:
+            type: string
+          type: array
+        zones:
+          description: An allowlist of zones to restrict pulling metrics for.
+          example:
+          - zone_id_1
+          - zone_id_2
+          items:
+            type: string
+          type: array
       required:
       - api_key
       - name
@@ -3829,6 +3845,22 @@ components:
           description: The name of the Cloudflare account.
           example: test-name
           type: string
+        resources:
+          description: An allowlist of resources to restrict pulling metrics for.
+          example:
+          - web
+          - dns
+          items:
+            type: string
+          type: array
+        zones:
+          description: An allowlist of zones to restrict pulling metrics for.
+          example:
+          - zone_id_1
+          - zone_id_2
+          items:
+            type: string
+          type: array
       required:
       - name
       type: object
@@ -3877,6 +3909,22 @@ components:
             key is provided (and not a token), this field is also required.
           example: test-email@example.com
           type: string
+        resources:
+          description: An allowlist of resources to restrict pulling metrics for.
+          example:
+          - web
+          - dns
+          items:
+            type: string
+          type: array
+        zones:
+          description: An allowlist of zones to restrict pulling metrics for.
+          example:
+          - zone_id_1
+          - zone_id_2
+          items:
+            type: string
+          type: array
       required:
       - api_key
       type: object
@@ -17084,6 +17132,44 @@ components:
         meta:
           $ref: '#/components/schemas/SensitiveDataScannerMetaVersionOnly'
       type: object
+    SensitiveDataScannerIncludedKeywordConfiguration:
+      description: 'Object defining a set of keywords and a number of characters that
+        help reduce noise.
+
+        You can provide a list of keywords you would like to check within a defined
+        proximity of the matching pattern.
+
+        If any of the keywords are found within the proximity check, the match is
+        kept.
+
+        If none are found, the match is discarded.'
+      properties:
+        character_count:
+          description: 'The number of characters behind a match detected by Sensitive
+            Data Scanner to look for the keywords defined.
+
+            `character_count` should be greater than the maximum length of a keyword
+            defined for a rule.'
+          example: 30
+          format: int64
+          maximum: 50
+          minimum: 1
+          type: integer
+        keywords:
+          description: 'Keyword list that will be checked during scanning in order
+            to validate a match.
+
+            The number of keywords in the list must be less than or equal to 20.'
+          example:
+          - credit card
+          - cc
+          items:
+            type: string
+          type: array
+      required:
+      - keywords
+      - character_count
+      type: object
     SensitiveDataScannerMeta:
       description: Meta response containing information about the API.
       properties:
@@ -17177,6 +17263,8 @@ components:
           items:
             type: string
           type: array
+        included_keyword_configuration:
+          $ref: '#/components/schemas/SensitiveDataScannerIncludedKeywordConfiguration'
         is_enabled:
           description: Whether or not the rule is enabled.
           type: boolean
@@ -22473,9 +22561,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: List Cloud Cost Management AWS CUR configs
       tags:
       - Cloud Cost Management
@@ -22516,9 +22601,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Create Cloud Cost Management AWS CUR config
       tags:
       - Cloud Cost Management
@@ -22552,9 +22634,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Delete Cloud Cost Management AWS CUR config
       tags:
       - Cloud Cost Management
@@ -22591,9 +22670,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Update Cloud Cost Management AWS CUR config
       tags:
       - Cloud Cost Management
@@ -22638,9 +22714,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: List related AWS accounts
       tags:
       - Cloud Cost Management
@@ -22670,9 +22743,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: List Cloud Cost Management Azure configs
       tags:
       - Cloud Cost Management
@@ -22713,9 +22783,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Create Cloud Cost Management Azure configs
       tags:
       - Cloud Cost Management
@@ -22749,9 +22816,6 @@ paths:
           description: Not Found
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Delete Cloud Cost Management Azure config
       tags:
       - Cloud Cost Management
@@ -22794,9 +22858,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Update Cloud Cost Management Azure config
       tags:
       - Cloud Cost Management
@@ -22826,9 +22887,6 @@ paths:
           description: Forbidden
         '429':
           $ref: '#/components/responses/TooManyRequestsResponse'
-      security:
-      - apiKeyAuth: []
-        appKeyAuth: []
       summary: Cloud Cost Enabled
       tags:
       - Cloud Cost Management
@@ -25104,7 +25162,8 @@ paths:
           - name: body
             value: "{\n  \"data\": {\n    \"type\": \"cloudflare-accounts\",\n    \"attributes\":
               {\n      \"api_key\": \"fakekey\",\n      \"name\": \"{{ unique_lower_alnum
-              }}\",\n      \"email\": \"dev@datadog.com\"\n    }\n  }\n}"
+              }}\",\n      \"email\": \"dev@datadog.com\",\n      \"zones\": [\"zone-id-1\",
+              \"zone-id-2\"],\n      \"resources\": [\"web\", \"dns\"]\n    }\n  }\n}"
           step: there is a valid "cloudflare_account" in the system
       x-menu-order: 2
       x-undo:
@@ -29142,10 +29201,9 @@ paths:
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is GA for Metrics, Real User Monitoring
-        (RUM), and Cloud Cost Management data sources.
+        (RUM), Cloud Cost Management, and Log Management data sources.
 
-        Support for logs is in beta. We are gradually onboarding support for more
-        sources. If you have any
+        We are gradually onboarding support for more sources. If you have any
 
         feedback, contact [Datadog Support](https://docs.datadoghq.com/help/).'
   /api/v2/query/timeseries:
@@ -29188,10 +29246,9 @@ paths:
       x-undo:
         type: idempotent
       x-unstable: '**Note**: This endpoint is GA for Metrics, Real User Monitoring
-        (RUM), and Cloud Cost Management data sources.
+        (RUM), Cloud Cost Management, and Log Management data sources.
 
-        Support for logs is in beta. We are gradually onboarding support for more
-        sources. If you have any
+        We are gradually onboarding support for more sources. If you have any
 
         feedback, contact [Datadog Support](https://docs.datadoghq.com/help/).'
   /api/v2/restriction_policy/{resource_id}:
@@ -35062,26 +35119,46 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/logs_to_metrics/
   name: Logs Metrics
-- description: "**Note: This endpoint is in public beta. If you have any feedback,
-    contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nTo grant read
-    access on log data at all, you must grant the `logs_read_data` permission.\nFrom
-    there you can limit what data a role grants read access to by associating a Restriction
-    Query with that role.\n\nA Restriction Query is a logs query that restricts which
-    logs the `logs_read_data` permission grants read access to.\nFor users whose roles
-    have Restriction Queries, any log query they make only returns those log events
-    that also match\none of their Restriction Queries. This is true whether the user
-    queries log events from any log-related feature, including\nthe log explorer,
-    Live Tail, re-hydration, or a dashboard widget.\n\nRestriction Queries currently
-    only support use of the following components of log events:\n\n- Reserved attributes\n-
-    The log message\n- Tags\n\nThe recommended way to manage restricted read access
-    on log data for customers with large or complicated organizational structures\nis
-    to add a team tag to log events to indicate which team(s) own(s) them, and then
-    to scope Restriction Queries to the appropriate\nvalues of the team tag. Tags
-    can be applied to log events in many ways, and a log event can have multiple tags
-    with the same key (like team)\nand different values\u2014in this way the same
-    log event can be visible to roles whose restriction queries are scoped to different
-    team values.\n\nYou need an API and application key with Admin rights to interact
-    with this endpoint."
+- description: '**Note: This endpoint is in public beta. If you have any feedback,
+    contact [Datadog support](https://docs.datadoghq.com/help/).**
+
+
+    A Restriction Query is a logs query that restricts which logs the `logs_read_data`
+    permission grants read access to.
+
+    For users whose roles have Restriction Queries, any log query they make only returns
+    those log events that also match
+
+    one of their Restriction Queries. This is true whether the user queries log events
+    from any log-related feature, including
+
+    the log explorer, Live Tail, re-hydration, or a dashboard widget.
+
+
+    Restriction Queries currently only support use of the following components of
+    log events:
+
+
+    - Reserved attributes
+
+    - The log message
+
+    - Tags
+
+
+    To restrict read access on log data, add a team tag to log events to indicate
+    which teams own them, and then scope Restriction Queries to the relevant values
+    of the team tag. Tags can be applied to log events in many ways, and a log event
+    can have multiple tags with the same key (like team) and different values. This
+    means the same log event can be visible to roles whose restriction queries are
+    scoped to different team values.
+
+
+    You need an API and application key with Admin rights to interact with this endpoint.
+
+
+    See [How to Set Up RBAC for Logs](https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=api#restrict-access-to-logs)
+    for details on how to add restriction queries.'
   name: Logs Restriction Queries
 - description: "The metrics endpoint allows you to:\n\n- Post metrics data so it can
     be graphed on Datadog\u2019s dashboards\n- Query metrics from any time period

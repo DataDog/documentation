@@ -16,7 +16,7 @@ further_reading:
   text: "Formalize best practices with custom Scorecards"
 - link: "/continuous_integration/dora_metrics/"
   tag: "Documentation"
-  text: "Track DORA Metrics with CI Visibility" 
+  text: "Track DORA Metrics with Datadog" 
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}

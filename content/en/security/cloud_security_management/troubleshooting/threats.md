@@ -1,10 +1,18 @@
 ---
-title: Troubleshooting Cloud Security Management
+title: Troubleshooting Cloud Security Management Threats
 kind: documentation
 aliases:
   - /security_platform/cloud_workload_security/troubleshooting/
   - /security_platform/cloud_security_management/troubleshooting/
+further_reading:
+- link: "/security/cloud_security_management/troubleshooting/vulnerabilities"
+  tag: "Documentation"
+  text: "Troubleshooting CSM Vulnerabilities"
 ---
+
+## Overview
+
+If you experience issues with Cloud Security Management (CSM) Threats, use the following troubleshooting guidelines. If you need further assistance, contact [Datadog support][1].
 
 ## Security Agent flare
 
@@ -76,5 +84,8 @@ datadog:
 ```bash
 DD_RUNTIME_SECURITY_CONFIG_NETWORK_ENABLED=false
 ```
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7

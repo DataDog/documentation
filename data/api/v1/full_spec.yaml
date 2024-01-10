@@ -10343,6 +10343,13 @@ components:
           nullable: true
           type: string
       type: object
+    SLODataSourceQueryDefinition:
+      description: A formula and function query.
+      example:
+        data_source: metrics
+        query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+      oneOf:
+      - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
     SLODeleteResponse:
       description: A response list of all service level objective deleted.
       properties:
@@ -10386,6 +10393,20 @@ components:
       - THIRTY_DAYS
       - NINETY_DAYS
       - ALL
+    SLOFormula:
+      description: A formula that specifies how to combine the results of multiple
+        queries.
+      example:
+        formula: query1 - default_zero(query2)
+      properties:
+        formula:
+          description: The formula string, which is an expression involving named
+            queries.
+          example: query1 - default_zero(query2)
+          type: string
+      required:
+      - formula
+      type: object
     SLOHistoryMetrics:
       description: 'A `metric` based SLO history response.
 
@@ -11115,6 +11136,8 @@ components:
           type: string
         query:
           $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
+        sli_specification:
+          $ref: '#/components/schemas/SLOSliSpec'
         tags:
           description: 'A list of tags associated with this service level objective.
 
@@ -11169,6 +11192,11 @@ components:
           format: double
           type: number
       type: object
+    SLOSliSpec:
+      description: A generic SLI specification. This is currently used for time-slice
+        SLOs only.
+      oneOf:
+      - $ref: '#/components/schemas/SLOTimeSliceSpec'
     SLOState:
       description: State of the SLO.
       enum:
@@ -11269,6 +11297,106 @@ components:
       - timeframe
       - target
       type: object
+    SLOTimeSliceComparator:
+      description: The comparator used to compare the SLI value to the threshold.
+      enum:
+      - '>'
+      - '>='
+      - <
+      - <=
+      example: '>'
+      type: string
+      x-enum-varnames:
+      - GREATER
+      - GREATER_EQUAL
+      - LESS
+      - LESS_EQUAL
+    SLOTimeSliceCondition:
+      description: 'The time-slice condition, composed of 3 parts: 1. the metric timeseries
+        query, 2. the comparator,
+
+        and 3. the threshold.'
+      example:
+        comparator: <
+        query:
+          formulas:
+          - formula: query2/query1
+          queries:
+          - data_source: metrics
+            name: query1
+            query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+          - data_source: metrics
+            name: query1
+            query: sum:trace.servlet.request.errors{*} by {env}.as_count()
+        threshold: 5
+      properties:
+        comparator:
+          $ref: '#/components/schemas/SLOTimeSliceComparator'
+        query:
+          $ref: '#/components/schemas/SLOTimeSliceQuery'
+        threshold:
+          description: The threshold value to which each SLI value will be compared.
+          example: 5
+          format: double
+          type: number
+      required:
+      - comparator
+      - threshold
+      - query
+      type: object
+    SLOTimeSliceQuery:
+      description: The queries and formula used to calculate the SLI value.
+      example:
+        formulas:
+        - formula: query2/query1
+        queries:
+        - data_source: metrics
+          name: query1
+          query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+        - data_source: metrics
+          name: query1
+          query: sum:trace.servlet.request.errors{*} by {env}.as_count()
+      properties:
+        formulas:
+          description: A list that contains exactly one formula, as only a single
+            formula may be used in a time-slice SLO.
+          items:
+            $ref: '#/components/schemas/SLOFormula'
+          maxItems: 1
+          minItems: 1
+          type: array
+        queries:
+          description: A list of queries that are used to calculate the SLI value.
+          items:
+            $ref: '#/components/schemas/SLODataSourceQueryDefinition'
+          type: array
+      required:
+      - formulas
+      - queries
+      type: object
+    SLOTimeSliceSpec:
+      additionalProperties: false
+      description: A time-slice SLI specification.
+      example:
+        time_slice:
+          comparator: <
+          query:
+            formulas:
+            - formula: query2/query1
+            queries:
+            - data_source: metrics
+              name: query1
+              query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+            - data_source: metrics
+              name: query1
+              query: sum:trace.servlet.request.errors{*} by {env}.as_count()
+          threshold: 5
+      properties:
+        time_slice:
+          $ref: '#/components/schemas/SLOTimeSliceCondition'
+      required:
+      - time_slice
+      type: object
     SLOTimeframe:
       description: The SLO time window options.
       enum:
@@ -11288,11 +11416,13 @@ components:
       enum:
       - metric
       - monitor
+      - time_slice
       example: metric
       type: string
       x-enum-varnames:
       - METRIC
       - MONITOR
+      - TIME_SLICE
     SLOTypeNumeric:
       description: 'A numeric representation of the type of the service level objective
         (`0` for
@@ -11303,12 +11433,14 @@ components:
       enum:
       - 0
       - 1
+      - 2
       example: 0
       format: int32
       type: integer
       x-enum-varnames:
       - MONITOR
       - METRIC
+      - TIME_SLICE
     SLOWidgetDefinition:
       description: Use the SLO and uptime widget to track your SLOs (Service Level
         Objectives) and uptime on screenboards and timeboards.
@@ -12149,6 +12281,8 @@ components:
           type: string
         query:
           $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
+        sli_specification:
+          $ref: '#/components/schemas/SLOSliSpec'
         tags:
           description: 'A list of tags associated with this service level objective.
 
@@ -12278,6 +12412,8 @@ components:
           type: string
         query:
           $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
+        sli_specification:
+          $ref: '#/components/schemas/SLOSliSpec'
         tags:
           description: 'A list of tags associated with this service level objective.
 
@@ -18724,6 +18860,11 @@ components:
             over all hours in the current date all organizations.
           format: int64
           type: integer
+        apm_devsecops_host_top99p:
+          description: Shows the 99th percentile of all APM DevSecOps hosts over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
         apm_fargate_count_avg:
           description: Shows the average of all APM ECS Fargate tasks over all hours
             in the current date for all organizations.
@@ -19247,6 +19388,11 @@ components:
         apm_azure_app_service_host_top99p:
           description: Shows the 99th percentile of all Azure app services using APM
             over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        apm_devsecops_host_top99p:
+          description: Shows the 99th percentile of all APM DevSecOps hosts over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         apm_fargate_count_avg:
@@ -19785,6 +19931,11 @@ components:
         apm_azure_app_service_host_top99p_sum:
           description: Shows the 99th percentile of all Azure app services using APM
             over all hours in the current months all organizations.
+          format: int64
+          type: integer
+        apm_devsecops_host_top99p_sum:
+          description: Shows the 99th percentile of all APM DevSecOps hosts over all
+            hours in the current months for all organizations.
           format: int64
           type: integer
         apm_fargate_count_avg_sum:
