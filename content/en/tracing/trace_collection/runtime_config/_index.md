@@ -19,15 +19,15 @@ This feature uses [Remote Configuration][1] to apply configurations to Datadog c
 
 - [Datadog Agent][2] 7.41.1 or higher.
 - [Remote Configuration][1] is enabled for your Agent.
-- [Read and write permission][4] to APM.
+- `APM Remote Configuration Read` and `APM Remote Configuration Write` [permissions][4].  
   **Note**: If you don't have these permissions, ask your Datadog Admin to update your permissions from your Organization Settings.
 
 ## Using configuration at runtime
 
-To make changes to a services configuration at runtime:
+To make changes to a service's configuration at runtime:
 
 1. Go to the [Service Catalog][3] in APM.
-1. Hover on the service for which you want to update configuration.
+1. Hover over the service for which you want to update configuration.
 1. Click **Full Page** next to the service name.
 1. Click **Service Info**.
 1. From the **Setup Guidance** tab, click **Edit**.
@@ -48,11 +48,11 @@ You can tell when the configuration changes have been successfully applied by re
 
 The following options are supported with configuration at runtime. The required tracer version is listed for each language: 
 
-| Option                                           | Java | Javascript | Python | .NET | Ruby | Go | PHP | C++ |
-|--------------------------------------------------|-------------|-------------------|---------------|-------------|-------------|-----------|------------|------------|
-| <h5>Custom sampling rate</h5>Set a global sampling rate for the library using `DD_TRACE_SAMPLE_RATE`. | `1.17.0+`    | `4.11+`            | `?`           | `2.33.0+`    | `1.13.0+`    |           |            |            |
-| <h5>Log injection</h5>Automatically inject trace correlation identifiers to correlate logs and traces by enabling `DD_LOGS_INJECTION`.      | `3.32+`      |                   |               |             |             |           |            |            |
-| <h5>HTTP header tags</h5>Add HTTP header values as tags on traces using `DD_TRACE_HEADER_TAGS`.  | `2.45+`      |                   |               |             |             |           |            |            |
+| Option                                                                                                                                 | Java      | Javascript | Python | .NET      | Ruby      | Go | PHP | C++ |
+|----------------------------------------------------------------------------------------------------------------------------------------|-----------|------------|--------|-----------|-----------|----|-----|-----|
+| <h5>Custom sampling rate</h5>Set a global sampling rate for the library using `DD_TRACE_SAMPLE_RATE`.                                  | `1.17.0+` | `4.11+`    | `?`    | `2.33.0+` | `1.13.0+` |    |     |     |
+| <h5>Log injection</h5>Automatically inject trace correlation identifiers to correlate logs and traces by enabling `DD_LOGS_INJECTION`. | `3.32+`   |            |        |           |           |    |     |     |
+| <h5>HTTP header tags</h5>Add HTTP header values as tags on traces using `DD_TRACE_HEADER_TAGS`.                                        | `2.45+`   |            |        |           |           |    |     |     |
 
 ## Further reading
 
