@@ -140,7 +140,7 @@ For any particular tag key, you can:
 ## Metrics Related Assets
 
 <div class="alert alert-warning">
-Metrics Related Assets are in public beta.
+Metrics Related Assets is in public beta.
 </div>
 
 To determine the value of any metric name to your organization, use Metrics Related Assets. Metrics related assets refers to any dashboard, notebook, monitor or SLO that queries a particular metric. 
