@@ -225,7 +225,7 @@ To ensure consistency, Datadog normalizes tag keys using underscores and lower c
 
 [AWS resource tags][12] are user-defined tags that appear in the AWS console when viewing a particular resource, like an EC2 instance or S3 bucket.
 
-When the Datadog AWS integration is enabled, Datadog automatically collects resource tags for most AWS resources. These tags are applied to all costs found in the CUR for a given resource.
+When the Datadog AWS integration is enabled, Datadog automatically collects resource tags for most AWS resources. These tags are applied to all costs found in the CUR for a given resource. Resource tags are retrieved regularly and are applied to cost data starting from the day they are created or modified. Historical tag values are not overwritten when tags change.
 
 If the AWS integration is not enabled, you can enable resource tag enrichment by activating [cost allocation tags][13] in AWS billing. This allows you to select a subset of resource tag keys to include as columns in the AWS CUR. Datadog automatically includes those columns as tags when processing the CUR.
 
