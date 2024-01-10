@@ -17517,13 +17517,37 @@ components:
     UsageBillableSummaryKeys:
       description: Response with aggregated usage types.
       properties:
+        apm_devsecops_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_devsecops_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_ent_devsecops_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_ent_devsecops_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         apm_fargate_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         apm_fargate_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_host_enterprise_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_host_enterprise_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_host_no_usm_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_host_no_usm_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_host_pro_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_host_pro_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         apm_host_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         apm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_pro_devsecops_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        apm_pro_devsecops_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         apm_profiler_host_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -17533,9 +17557,19 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         application_security_fargate_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        application_security_fargate_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         application_security_host_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         application_security_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        application_vulnerability_management_oss_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        application_vulnerability_management_oss_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ci_intelligent_test_runner_maximum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        ci_intelligent_test_runner_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         ci_pipeline_indexed_spans_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -17553,6 +17587,24 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         cloud_cost_management_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cont_devsecops_ent_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        cont_devsecops_pro_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        coscreen_seat_maximum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        csm_container_enterprise_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        csm_container_pro_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        csm_host_enterprise_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        csm_host_enterprise_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        csm_host_pro_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        csm_host_pro_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         cspm_container_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         cspm_host_sum:
@@ -17567,6 +17619,10 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         cws_host_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        data_stream_monitoring_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        data_stream_monitoring_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         dbm_host_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         dbm_host_top99p:
@@ -17574,6 +17630,8 @@ components:
         dbm_normalized_queries_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         dbm_normalized_queries_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        error_tracking_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         fargate_container_apm_and_profiler_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -17587,6 +17645,32 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         fargate_container_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        flex_compute_logs_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        flex_compute_logs_extra_small_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        flex_compute_logs_medium_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        flex_compute_logs_small_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        flex_logs_starter_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        flex_stored_logs_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        flex_stored_logs_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        host_devsecops_ent_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        host_devsecops_ent_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        host_devsecops_proplus_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        host_devsecops_proplus_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        host_devsecops_pro_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        host_devsecops_pro_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         incident_management_maximum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         incident_management_sum:
@@ -17594,6 +17678,8 @@ components:
         infra_and_apm_host_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         infra_and_apm_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        infra_container_excl_agent_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         infra_container_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -17641,17 +17727,19 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         logs_ingested_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        netflow_monitoring_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         network_device_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         network_device_top99p:
-          $ref: '#/components/schemas/UsageBillableSummaryBody'
-        npm_flow_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         npm_host_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         npm_host_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         observability_pipeline_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        observability_pipeline_vcpu_top99p:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         online_archive_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -17673,11 +17761,19 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         serverless_apm_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_apps_average:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_apps_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        serverless_asm_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         serverless_infra_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         serverless_infra_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         serverless_invocation_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        siem_indexed_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         siem_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
@@ -17687,11 +17783,29 @@ components:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         synthetics_app_testing_maximum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
+        synthetics_app_testing_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
         synthetics_browser_checks_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        synthetics_mobile_app_testing_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         timeseries_average:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
         timeseries_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        usm_only_no_charge_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        usm_only_no_charge_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        usm_standalone_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        usm_standalone_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        usm_within_infra_host_sum:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        usm_within_infra_host_top99p:
+          $ref: '#/components/schemas/UsageBillableSummaryBody'
+        workflow_execution_sum:
           $ref: '#/components/schemas/UsageBillableSummaryBody'
       type: object
     UsageBillableSummaryResponse:
