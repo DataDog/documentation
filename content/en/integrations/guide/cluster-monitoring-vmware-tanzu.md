@@ -48,7 +48,7 @@ Datadog Cluster Monitoring for VMware Tanzu includes the following key features:
 1. Download the **Datadog Cluster Monitoring for VMware Tanzu** product file from [Pivotal Network][11].
 1. Go to the Tanzu Ops Manager installation dashboard and click **Import a Product** to upload the product file.
 1. Click **Import a Product** to upload the product file.
-1. Select the product file downloaded in step **2**. This adds the tile to your staging area.
+1. Select the product file downloaded in step **1**. This adds the tile to your staging area.
 1. Click the newly added **Datadog Cluster Monitoring for VMware Tanzu** tile.
 1. Enter your [Datadog API key][3] in the **Datadog Config** section. Leave the Datadog API URL unchanged, unless directed otherwise by [Datadog Support][2].
 1. Create a UAA client account for Datadog using the [UAA CLI][12]. The Firehose Nozzle requires access to the Loggregator Firehose.
@@ -67,7 +67,7 @@ Datadog Cluster Monitoring for VMware Tanzu includes the following key features:
 1. The **Datadog Firehose Nozzle Config** section contains optional configurations for the Nozzle, and the **Datadog Agent Config** section contains optional configurations for the Agent. You do not need to configure anything in either section.
     <p class='note'><strong>Note:</strong> If you are using a single Datadog account to monitor multiple foundations, you must check the <strong>Use UUID Hostname</strong> checkbox.</p>
 1. The **Datadog Cluster Agent Settings** section contains configurations for the [Datadog Cluster Agent][15] that provides autodiscovery of integrations and application container features.
-Enter an **Authentication token** in the **Datadog Cluster Agent Settings**, a string of 32 or more characters, this token is shared by both the Cluster Agent and the Datadog Agents to secure communication.
+Enter an **Authentication token** in the **Datadog Cluster Agent Settings**, a string of 32 or more characters. This token is shared by both the Cluster Agent and the Datadog Agents to secure communication.
 1. Return to the Tanzu Ops Manager Installation Dashboard and click **Apply Changes** to install Datadog Cluster Monitoring for the VMware Tanzu tile.
 
 ## View metrics and dashboards
