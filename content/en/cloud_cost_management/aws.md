@@ -147,14 +147,14 @@ On-demand costs do not accurately represent what you pay AWS. Do not use this me
 ### Amortized and unblended costs
 **Amortized** cost metrics distribute some pre-payments (such as up-front savings plan fees) across the entire discount term. This is also called _accrual basis_. As savings plans are applied to covered usage, the costs for that savings plan appear as usage charges. The unused portion appears as a fee.
 
-Not all one-time fees are amortized across the billing period. For example, the unused portion of a Reserved Instance Fee typically appears on the first of the month.
+Not all one-time fees are amortized across the billing period. For example, the unused portion of a Reserved Instance Fee is typically backdated to the first of the month.
 
-**Unblended** cost metrics show all charges on the date that they are incurred. This is also called _cash basis_. These metrics match the AWS invoice exactly.
+**Unblended** cost metrics show all charges on the date that they are incurred. This is also called _cash basis_. These metrics match the AWS invoice exactly once a month is finalized.
 
 ### Net costs
 **Net** costs apply private discounts directly to usage. The cost of usage for a specific resource represents the effective cost after all savings are realized.
 
-In contrast, other metrics show private discounts as separate, negative-valued line items with no attribution tags. Rather than attributing the discounts directly to usage, those metrics subtract discounts from the total cost.
+In contrast, other metrics show some private discounts as separate, negative-valued line items with no attribution tags. Rather than attributing the discounts directly to usage, those metrics subtract discounts from the total cost.
 
 **Net amortized** costs provide the most accurate representation for cost allocation, with all savings applied directly to usage. Net cost metrics are available if your AWS account has privately negotiated enterprise discounts. If your account doesn't have net metrics available, use **amortized** cost instead.
 
@@ -211,13 +211,13 @@ Datadog adds tags to the ingested cost data using many sources, described in det
 
 All string-valued columns from the AWS [Cost and Usage Report (CUR)][6] are added as tags on cost metrics.
 
-To ensure consistency, Datadog normalizes tag keys using underscores and lower case. For example, the CUR column `lineItem/resourceId` maps to the tag key `line_item/resource_id`. Tag values are generally unmodified - maintaining exact casing and most special characters.
+To ensure consistency, Datadog normalizes tag keys using underscores and lower case. For example, the CUR column `lineItem/ResourceId` maps to the tag key `line_item/resource_id`. Tag values are generally unmodified - maintaining exact casing and most special characters.
 
 **Examples:**
 
 |CUR Column|CUR Value|Cloud Cost Tag|
 |---|---|---|
-|lineItem/resourceId|i-12345678a9b12cd3e|line_item/resource_id:i-12345678a9b12cd3e|
+|lineItem/ResourceId|i-12345678a9b12cd3e|line_item/resource_id:i-12345678a9b12cd3e|
 |product/region|us-east-1|product/region:us-east-1|
 |product/usagetype|DataTransfer-Regional-Bytes|product/usagetype:DataTransfer-Regional-Bytes|
 
