@@ -164,6 +164,9 @@ Wall Time
 
 Once profiling is enabled, the following profile types are collected for [supported Node.js versions][1]:
 
+CPU
+: The time each method spent running on the CPU.
+
 Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 
