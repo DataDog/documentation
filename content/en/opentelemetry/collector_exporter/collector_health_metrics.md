@@ -16,7 +16,7 @@ For more information, see the OpenTelemetry project documentation for the [Prome
 
 ## Setup
 
-Add the following lines to your Datadog Exporter configuration:
+Add the following lines to your Collector configuration:
 
 ```yaml
 receivers:
@@ -63,7 +63,7 @@ receivers:
 
 ## Full example configuration
 
-For a full working example configuration for the Datadog Exporter, see [`collector-metrics.yaml`][2].
+For a full working example configuration with the Datadog exporter, see [`collector-metrics.yaml`][2].
 
 ## Example logging output
 

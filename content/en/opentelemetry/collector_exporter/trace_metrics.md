@@ -16,7 +16,7 @@ For more information, see the OpenTelemetry project documentation for the [Datad
 
 ## Setup
 
-Add the following lines to your Datadog Exporter configuration:
+Add the following lines to your Collector configuration:
 
 ```yaml
 processors:
@@ -51,7 +51,7 @@ See [Trace Metrics][2].
 
 ## Full example configuration
 
-For a full working example configuration for the Datadog Exporter, see [`trace-metrics.yaml`][3].
+For a full working example configuration with the Datadog exporter, see [`trace-metrics.yaml`][3].
 
 
 

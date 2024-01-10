@@ -16,7 +16,7 @@ For more information, see the OpenTelemetry project documentation for the [batch
 
 {{< tabs >}}
 {{% tab "Host" %}}
-Add the following lines to your Datadog Exporter configuration:
+Add the following lines to your Collector configuration:
 
 ```yaml
 processors:
@@ -64,7 +64,7 @@ None.
 
 ## Full example configuration
 
-For a full working example configuration for the Datadog Exporter, see [`batch-memory.yaml`][2].
+For a full working example configuration with the Datadog exporter, see [`batch-memory.yaml`][2].
 
 ## Example logging output
 

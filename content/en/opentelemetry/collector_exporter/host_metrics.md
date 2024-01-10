@@ -20,7 +20,7 @@ For more information, including supported operating systems, see the OpenTelemet
 {{< tabs >}}
 {{% tab "Host" %}}
 
-Add the following lines to your Datadog Exporter configuration:
+Add the following lines to your Collector configuration:
 
 ```yaml
 receivers:
@@ -94,7 +94,7 @@ See [OpenTelemetry Metrics Mapping][2] for information about collected host metr
 
 ## Full example configuration
 
-For a full working example configuration for the Datadog Exporter, see [`host-metrics.yaml`][3].
+For a full working example configuration with the Datadog exporter, see [`host-metrics.yaml`][3].
 
 ## Example logging output
 

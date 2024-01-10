@@ -8,13 +8,13 @@ further_reading:
 
 ## Overview
 
-To collect OTLP metrics, logs, and traces, configure the [OTLP receiver][1] in your Datadog Exporter.
+To collect OTLP metrics, logs, and traces, configure the [OTLP receiver][1] in your Collector.
 
 For more information, see the OpenTelemetry project documentation for the [OTLP receiver][1].
 
 ## Setup
 
-Add the following lines to your Datadog Exporter configuration:
+Add the following lines to your Collector configuration:
 
 ```yaml
 receivers:
@@ -32,7 +32,7 @@ Traces, metrics, and logs.
 
 ## Full example configuration
 
-For a full working example configuration for the Datadog Exporter, see [`otlp.yaml`][2].
+For a full working example configuration with the Datadog exporter, see [`otlp.yaml`][2].
 
 ## Example logging output
 

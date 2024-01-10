@@ -22,7 +22,7 @@ For more information, see the OpenTelemetry project documentation for [the Docke
 
 The Docker stats receiver needs access to the Docker socket. By default, the receiver looks for the Docker socket at `unix:///var/run/docker.sock`. If this is not the Docker socket path, specify the path in the `endpoint` configuration line.
 
-Add the following lines to your Datadog Exporter configuration:
+Add the following lines to your Collector configuration:
 
 ```yaml
 receivers:
@@ -99,7 +99,7 @@ See [OpenTelemetry Metrics Mapping][2] for information about collected container
 
 ## Full example configuration
 
-For a full working example configuration for the Datadog Exporter, see [`docker-stats.yaml`][3].
+For a full working example configuration with the Datadog exporter, see [`docker-stats.yaml`][3].
 
 ## Example logging output
 

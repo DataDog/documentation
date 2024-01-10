@@ -20,7 +20,7 @@ For more information, see the OpenTelemetry project documentation for the [filel
 {{< tabs >}}
 {{% tab "Host" %}}
 
-For a collector deployed on the same host as the log files to be collected, specify the paths of the log files to collect in your Datadog Exporter configuration:
+For a collector deployed on the same host as the log files to be collected, specify the paths of the log files to collect in your Collector configuration:
 
 ```yaml
 receivers:
@@ -87,7 +87,7 @@ Logs from the configured files.
 
 ## Full example configuration
 
-For a full working example configuration for the Datadog Exporter, see [`logs.yaml`][2].
+For a full working example configuration with the Datadog exporter, see [`logs.yaml`][2].
 
 ## Example logging output
 

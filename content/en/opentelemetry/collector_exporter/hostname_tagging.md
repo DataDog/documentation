@@ -19,7 +19,7 @@ For more information, see the OpenTelemetry project documentation for the [resou
 {{< tabs >}}
 {{% tab "Host" %}}
 
-Add the following lines to your Datadog Exporter configuration:
+Add the following lines to your Collector configuration:
 
 ```yaml
 processors:
@@ -352,7 +352,7 @@ processors:
 
 ## Full example configuration
 
-For a full working example configuration for the Datadog Exporter, see [`k8s-values.yaml`][4]. This example is for Amazon EKS.
+For a full working example configuration with the Datadog exporter, see [`k8s-values.yaml`][4]. This example is for Amazon EKS.
 
 ## Example logging output
 
