@@ -229,10 +229,10 @@ When the Datadog AWS integration is enabled, Datadog automatically collects reso
 
 If the AWS integration is not enabled, you can enable resource tag enrichment by activating [cost allocation tags][13] in AWS billing. This allows you to select a subset of resource tag keys to include as columns in the AWS CUR. Datadog automatically includes those columns as tags when processing the CUR.
 
-### AWS account tags
-AWS Organizations supports [user-defined tags][14] on organizational units and accounts. Datadog automatically fetches and applies these tags to cost data associated with those accounts.
+### AWS organization and account tags
+AWS Organizations supports [user-defined tags][14] on organizational units and accounts. Datadog automatically fetches and applies these tags to cost data. Account tags are applied to all usage associated with those accounts. Organization tags are applied to all billing data for the matching payer account.
 
-_Requires the Datadog AWS Integration on the tagged accounts._
+_Requires the Datadog AWS Integration on the organization account._
 
 ### AWS integration tags
 
