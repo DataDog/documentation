@@ -66,8 +66,8 @@ Datadog Cluster Monitoring for VMware Tanzu includes the following key features:
 1. If Ops Manager requires you to upload a stemcell, [download a stemcell][13] from the 621 line of releases. Upload it to Ops Manager with the **Import Stemcell** button.
 1. The **Datadog Firehose Nozzle Config** section contains optional configurations for the Nozzle, and the **Datadog Agent Config** section contains optional configurations for the Agent. You do not need to configure anything in either section.
     <p class='note'><strong>Note:</strong> If you are using a single Datadog account to monitor multiple foundations, you must check the <strong>Use UUID Hostname</strong> checkbox.</p>
-1. The **Datadog Cluster Agent Settings** section contains configurations for the [Datadog Cluster Agent][15] that provides autodiscovery of integrations and application container features.
-
+1. The **Datadog Cluster Agent Settings** section contains configurations for the [Datadog Cluster Agent][15] that provides autodiscovery of integrations and application container features. 
+Enter an **Authentication token** in the **Datadog Cluster Agent Settings**, a string of 32 or more characters, this token is shared by both the Cluster Agent and the Datadog Agents to secure communication.
 1. Return to the Tanzu Ops Manager Installation Dashboard and click **Apply Changes** to install Datadog Cluster Monitoring for the VMware Tanzu tile.
 
 ## View metrics and dashboards
