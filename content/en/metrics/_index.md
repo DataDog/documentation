@@ -137,7 +137,7 @@ After selecting a metric, you can filter your query based on tag(s). For instanc
 
 #### Configure time aggregation
 
-Next, choose the granularity of your data using time rollup. In this example, you've defined that there is one data point for every hour (3600 seconds). You can also choose how you want to aggregate the data in each time bucket. By default, _avg_ is applied, but other available options are _sum_, _min_, _max_, and _count_. If you wanted to apply max, you would use `.rollup(max, 60)`.
+Next, choose the granularity of your data using time rollup. In this example, you've defined that there is one data point for every hour (3600 seconds). You can also choose how you want to aggregate the data in each time bucket. By default, _avg_ is applied, but other available options are _sum_, _min_, _max_, and _count_. If you wanted to apply max, you would use `.rollup(max, 60)`. You can customize how your metrics data is rolled up and bucketed in time with calendar aligned queries using the `.rollup()` function. Learn more about the rollup function [here][23].
 
 #### Configure space aggregation
 
@@ -210,3 +210,4 @@ Read the [metrics summary documentation][22] for more details.
 [20]: https://app.datadoghq.com/metric/summary
 [21]: /account_management/plan_and_usage/usage_details/
 [22]: /metrics/summary/
+[23]: /dashboards/functions/rollup/#rollup-with-calendar-aligned-queries
