@@ -3409,16 +3409,6 @@ main:
     parent: security_platform
     identifier: security_suppressions
     weight: 7
-  - name: Signals Explorer
-    url: security/explorer
-    parent: security_platform
-    identifier: signals_explorer
-    weight: 8
-  - name: Security Signal Management
-    url: security/security_signal_management
-    parent: security_platform
-    identifier: security_signal_management
-    weight: 9
   - name: Security Inbox
     url: security/security_inbox
     parent: security_platform
