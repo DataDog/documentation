@@ -127,6 +127,23 @@ In order to run the Worker in your AWS account, you need administrative access t
 
 The Observability Pipelines Worker Docker image is published to Docker Hub [here][1].
 
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-docker). Otherwise, follow the steps in [manual configuration](#manual-configuration-docker).
+
+<h3 id="remote-configuration-docker">Remote Configuration</h3>
+
+1. Run the following command to start the Observability Pipelines Worker with Docker:
+    ```
+    docker run -i -e DD_API_KEY=<API_KEY> \
+      -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+      -e DD_SITE=<SITE> \
+      -e DD_OP_REMOTE_CONFIGURATION_ENABLED=true \
+      -p 8282:8282 \
+      datadog/observability-pipelines-worker run
+    ```
+    Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. Any ports that your configuration uses must also be manually specified, using `-p <PORT>:<PORT>` to forward them from the local host to the Docker container. The sample command given above opens the Datadog Agent port.
+
+<h3 id="manual-configuration-docker">Manual configuration</h3>
+
 1. Download the [sample pipeline configuration file][2].
 
 2. Run the following command to start the Observability Pipelines Worker with Docker:
@@ -139,12 +156,38 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       datadog/observability-pipelines-worker run
     ```
     Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1.
-  
+
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
+
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
-1. Download the [Helm chart][1] for AWS EKS.
+
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-eks). Otherwise, follow the steps in [manual configuration](#manual-configuration-eks).
+
+<h3 id="remote-configuration-eks">Remote Configuration</h3>
+
+1. Download the [Remote Configuration Helm chart][1] for AWS EKS.
+
+2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Make sure to specify any ports that your configuration uses in the `service.ports` section. The provided Helm chart already opens the Datadog Agent port, `8282`.
+
+3. Install the Worker in your cluster with the following commands:
+
+    ```shell
+    helm repo add datadog https://helm.datadoghq.com
+    ```
+    ```shell
+    helm repo update
+    ```
+    ```shell
+    helm upgrade --install \
+        opw datadog/observability-pipelines-worker \
+        -f aws_eks_rc.yaml
+    ```
+
+<h3 id="manual-configuration-eks">Manual configuration</h3>
+
+1. Download the [Helm chart][2] for AWS EKS.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
 
@@ -160,10 +203,37 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
         -f aws_eks.yaml
     ```
 
-[1]: /resources/yaml/observability_pipelines/datadog/aws_eks.yaml
+[1]: /resources/yaml/observability_pipelines/datadog/aws_eks_rc.yaml
+[2]: /resources/yaml/observability_pipelines/datadog/aws_eks.yaml
+
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-1. Download the [Helm chart][1] for Azure AKS.
+
+If you have Remote Configuration enabled, follow the steps in [ Remote Configuration](#remote-configuration-aks). Otherwise, follow the steps in [manual configuration](#manual-configuration-aks).
+
+<h3 id="remote-configuration-aks">Remote Configuration</h3>
+
+1. Download the [Remote Configuration Helm chart][1] for Azure AKS.
+
+2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Make sure to specify any ports that your configuration uses in the `service.ports` section. The provided Helm chart already opens the Datadog Agent port, `8282`.
+
+3. Install the Worker in your cluster with the following commands:
+
+    ```shell
+    helm repo add datadog https://helm.datadoghq.com
+    ```
+    ```shell
+    helm repo update
+    ```
+    ```shell
+    helm upgrade --install \
+      opw datadog/observability-pipelines-worker \
+      -f azure_aks_rc.yaml
+    ```
+
+<h3 id="manual-configuration-aks">Manual configuration</h3>
+
+1. Download the [Helm chart][2] for Azure AKS.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
 
@@ -179,10 +249,37 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       -f azure_aks.yaml
     ```
 
-[1]: /resources/yaml/observability_pipelines/datadog/azure_aks.yaml
+[1]: /resources/yaml/observability_pipelines/datadog/azure_aks_rc.yaml
+[2]: /resources/yaml/observability_pipelines/datadog/azure_aks.yaml
+
 {{% /tab %}}
 {{% tab "Google GKE" %}}
-1. Download the [Helm chart][1] for Google GKE.
+
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-gke). Otherwise, follow the steps in [manual configuration](#manual-configuration-gke).
+
+<h3 id="remote-configuration-gke">Remote Configuration</h3>
+
+1. Download the [Remote Configuration Helm chart][1] for Google GKE.
+
+2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Make sure to specify any ports that your configuration uses in the `service.ports` section. The provided Helm chart already opens the Datadog Agent port, `8282`.
+
+3. Install the Worker in your cluster with the following commands:
+
+    ```shell
+    helm repo add datadog https://helm.datadoghq.com
+    ```
+    ```shell
+    helm repo update
+    ```
+    ```shell
+    helm upgrade --install \
+      opw datadog/observability-pipelines-worker \
+      -f google_gke_rc.yaml
+    ```
+
+<h3 id="manual-configuration-gke">Manual configuration</h3>
+
+1. Download the [Helm chart][2] for Google GKE.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
 
@@ -198,9 +295,12 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       -f google_gke.yaml
     ```
 
-[1]: /resources/yaml/observability_pipelines/datadog/google_gke.yaml
+[1]: /resources/yaml/observability_pipelines/datadog/google_gke_rc.yaml
+[2]: /resources/yaml/observability_pipelines/datadog/google_gke.yaml
+
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
+
 1. Run the following commands to set up APT to download through HTTPS:
 
     ```
@@ -226,6 +326,28 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     sudo apt-get install observability-pipelines-worker datadog-signing-keys
     ```
 
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-apt)to complete the installation. Otherwise, follow the steps in [manual configuration](#manual-configuration-apt).
+
+<h3 id="remote-configuration-apt">Remote Configuration</h3>
+
+4. Add your keys and the site ({{< region-param key="dd_site" code="true" >}}) to the Worker's environment variables:
+
+    ```
+    sudo cat <<-EOF > /etc/default/observability-pipelines-worker
+    DD_API_KEY=<API_KEY>
+    DD_OP_PIPELINE_ID=<PIPELINE_ID>
+    DD_SITE=<SITE>
+    DD_OP_REMOTE_CONFIGURATION_ENABLED=true
+    EOF
+    ```
+
+5. Start the worker:
+    ```
+    sudo systemctl restart observability-pipelines-worker
+    ```
+
+<h3 id="manual-configuration-apt">Manual configuration</h3>
+
 4. Add your keys and the site ({{< region-param key="dd_site" code="true" >}}) to the Worker's environment variables:
 
     ```
@@ -244,8 +366,10 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     ```
 
 [1]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
+
 {{% /tab %}}
 {{% tab "RPM-based Linux" %}}
+
 1. Run the following commands to set up the Datadog `rpm` repo on your system:
 
     ```
@@ -272,6 +396,28 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     sudo yum install observability-pipelines-worker
     ```
 
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-rpm)to complete the installation. Otherwise, follow the steps in [manual configuration](#manual-configuration-rpm).
+
+<h3 id="remote-configuration-rpm">Remote Configuration</h3>
+
+3. Add your keys and the site ({{< region-param key="dd_site" code="true" >}}) to the Worker's environment variables:
+
+    ```
+    sudo cat <<-EOF > /etc/default/observability-pipelines-worker
+    DD_API_KEY=<API_KEY>
+    DD_OP_PIPELINE_ID=<PIPELINE_ID>
+    DD_SITE=<SITE>
+    DD_OP_REMOTE_CONFIGURATION_ENABLED=true
+    EOF
+    ```
+
+4. Start the worker:
+    ```
+    sudo systemctl restart observability-pipelines-worker
+    ```
+
+<h3 id="manual-configuration-rpm">Manual configuration</h3>
+
 3. Add your keys and the site ({{< region-param key="dd_site" code="true" >}}) to the Worker's environment variables:
 
     ```
@@ -290,9 +436,34 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     ```
 
 [1]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
+
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
-Set up the Worker module in your existing Terraform using this sample configuration. Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline.
+
+Set up the Worker module in your existing Terraform using this sample configuration. If you have Remote Configuration enabled, use the [Remote Configuration sample](#remote-configuration-sample). Otherwise, use the [Manual Configuration sample](#manual-configuration-sample).
+
+### Remote Configuration sample
+
+Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline. 
+
+```
+module "opw" {
+    source     = "git::https://github.com/DataDog/opw-terraform//aws"
+    vpc-id     = "{VPC ID}"
+    subnet-ids = ["{SUBNET ID 1}", "{SUBNET ID 2}"]
+    region     = "{REGION}"
+
+    datadog-api-key      = "{DATADOG API KEY}"
+    pipeline-id          = "{OP PIPELINE ID}"
+    remote-configuration = true
+}
+```
+
+### Manual configuration sample
+
+Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline. Make sure to specify the ports that your configuration needs, in the `tcp-ports` input. The sample configuration given opens up the Datadog Agent port, `8282`, by default.
+
+See [Configurations][1] for more information about the source, transform, and sink used in the sample configuration.
 
 ```
 module "opw" {
@@ -392,6 +563,8 @@ sinks:
 EOT
 }
 ```
+
+[1]: /observability_pipelines/configurations/
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
@@ -410,11 +583,11 @@ To install the Worker in your AWS Account, use the CloudFormation template to cr
   5. Fill in the parameters for the CloudFormation template. A few require special attention:
 
       * For `APIKey` and `PipelineID`, provide the key and ID that you gathered earlier in the Prerequisites section.
-    
+
       * For the `VPCID` and `SubnetIDs`, provide the subnets and VPC you chose earlier.
 
       * All other parameters are set to reasonable defaults for a Worker deployment but you can adjust them for your use case as needed.
-  
+
   6. Click **Next**.
 
   7. Review and make sure the parameters are as expected. Click the necessary permissions checkboxes for IAM, and click **Submit** to create the Stack.
@@ -422,6 +595,7 @@ To install the Worker in your AWS Account, use the CloudFormation template to cr
 CloudFormation handles the installation at this point; the Worker instances are launched, download the necessary software, and start running automatically.
 
 [1]: /resources/yaml/observability_pipelines/cloudformation/datadog.yaml
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -455,6 +629,7 @@ See [AWS Load Balancer Controller][3] for more details.
 [1]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/
 [2]: /observability_pipelines/architecture/capacity_planning_scaling/
 [3]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/annotations/#load-balancer-attributes
+
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 Use the load balancers provided by your cloud provider.
@@ -469,6 +644,7 @@ See [Capacity Planning and Scaling][1] for load balancer recommendations when sc
 The provided Helm configuration tries to simplify load balancing, but you must take into consideration the potential price implications of cross-AZ traffic. Wherever possible, the samples try to avoid creating situations where multiple cross-AZ hops can happen.
 
 [1]: /observability_pipelines/architecture/capacity_planning_scaling/
+
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 Use the load balancers provided by your cloud provider.
@@ -485,6 +661,7 @@ The provided Helm configuration tries to simplify load balancing, but you must t
 Global Access is enabled by default since that is likely required for use in a shared tools cluster.
 
 [1]: /observability_pipelines/architecture/capacity_planning_scaling/
+
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
 No built-in support for load-balancing is provided, given the single-machine nature of the installation. You will need to provision your own load balancers using whatever your company's standard is.

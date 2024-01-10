@@ -140,6 +140,25 @@ After you add the input, Splunk creates a token for you. The token is typically 
 
 The Observability Pipelines Worker Docker image is published to Docker Hub [here][1].
 
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-docker). Otherwise, follow the steps in [manual configuration](#manual-configuration-docker).
+
+<h3 id="remote-configuration-docker">Remote Configuration</h3>
+
+1. Run the following command to start the Observability Pipelines Worker with Docker:
+    ```
+    docker run -i -e DD_API_KEY=<API_KEY> \
+      -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+      -e DD_SITE=<SITE> \
+      -e DD_OP_REMOTE_CONFIGURATION_ENABLED=true \
+      -e SPLUNK_HEC_ENDPOINT=<SPLUNK_URL> \
+      -e SPLUNK_TOKEN=<SPLUNK_TOKEN> \
+      -p 8088:8088 \
+      datadog/observability-pipelines-worker run
+    ```
+   Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. Be sure to also update `SPLUNK_HEC_ENDPOINT` and `SPLUNK_TOKEN` with values that match the Splunk deployment you created in [Setting up the Splunk Index](#setting-up-the-splunk-index). Any ports that your configuration uses must also be manually specified, using `-p <PORT>:<PORT>` to forward them from the local host to the Docker container. The sample command given above opens the default Splunk HEC port.
+
+<h3 id="manual-configuration-docker">Manual configuration</h3>
+
 1. Download the [sample pipeline configuration file][2].
 
 2. Run the following command to start the Observability Pipelines Worker with Docker:
@@ -153,13 +172,56 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       -v ./pipeline.yaml:/etc/observability-pipelines-worker/pipeline.yaml:ro \
       datadog/observability-pipelines-worker run
     ```
-   Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. Be sure to also update `SPLUNK_HEC_ENDPOINT` and `SPLUNK_TOKEN` with values that match the Splunk deployment you created in [Setting up the Splunk Index](#setting-up-the-splunk-index). `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1. 
-  
+   Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. Be sure to also update `SPLUNK_HEC_ENDPOINT` and `SPLUNK_TOKEN` with values that match the Splunk deployment you created in [Setting up the Splunk Index](#setting-up-the-splunk-index). `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in Step 1.
+
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/splunk/pipeline.yaml
+
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
-1. Download the [Helm chart][1] for AWS EKS.
+
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-eks). Otherwise, follow the steps in [manual configuration](#manual-configuration-eks).
+
+<h3 id="remote-configuration-eks">Remote Configuration</h3>
+
+1. Download the [Remote Configuration Helm chart][1] for AWS EKS.
+
+2. In the Helm chart, replace `datadog.apiKey` and `datadog.pipelineId` with their respective values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
+    ```yaml
+    datadog:
+      apiKey: "<datadog_api_key>"
+      pipelineId: "<observability_pipelines_configuration_id>"
+      site: "<site>"
+    ```
+
+3. Replace the values for `SPLUNK_HEC_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
+    ```yaml
+    env:
+      - name: SPLUNK_HEC_ENDPOINT
+        value: <https://your.splunk.index:8088/>
+      - name: SPLUNK_TOKEN
+        value: <a_random_token_usually_a_uuid>
+    ```
+
+4. Make sure to specify any ports that your configuration uses in the `service.ports` section. The provided Helm chart already opens the default Splunk HEC port, `8088`.
+
+5. Install the Helm chart in your cluster with the following commands:
+
+    ```shell
+    helm repo add datadog https://helm.datadoghq.com
+    ```
+    ```shell
+    helm repo update
+    ```
+    ```shell
+    helm upgrade --install \
+        opw datadog/observability-pipelines-worker \
+        -f aws_eks_rc.yaml
+    ```
+
+<h3 id="manual-configuration-eks">Manual configuration</h3>
+
+1. Download the [Helm chart][2] for AWS EKS.
 
 2. In the Helm chart, replace `datadog.apiKey` and `datadog.pipelineId` with their respective values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
     ```yaml
@@ -192,10 +254,54 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
         -f aws_eks.yaml
     ```
 
-[1]: /resources/yaml/observability_pipelines/splunk/aws_eks.yaml
+[1]: /resources/yaml/observability_pipelines/splunk/aws_eks_rc.yaml
+[2]: /resources/yaml/observability_pipelines/splunk/aws_eks.yaml
+
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-1. Download the [Helm chart][1] for Azure AKS.
+
+If you have Remote Configuration enabled, follow the steps in [ Remote Configuration](#remote-configuration-aks). Otherwise, follow the steps in [manual configuration](#manual-configuration-aks).
+
+<h3 id="remote-configuration-aks">Remote Configuration</h3>
+
+1. Download the [Remote Configuration Helm chart][1] for Azure AKS.
+
+2. In the Helm chart, replace `datadog.apiKey` and `datadog.pipelineId` with their respective values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
+    ```yaml
+    datadog:
+      apiKey: "<datadog_api_key>"
+      pipelineId: "<observability_pipelines_configuration_id>"
+      site: "<site>"
+    ```
+
+3. Replace the values for `SPLUNK_HEC_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
+    ```yaml
+    env:
+      - name: SPLUNK_HEC_ENDPOINT
+        value: <https://your.splunk.index:8088/>
+      - name: SPLUNK_TOKEN
+        value: <a_random_token_usually_a_uuid>
+    ```
+
+4. Make sure to specify any ports that your configuration uses in the `service.ports` section. The provided Helm chart already opens the default Splunk HEC port, `8088`.
+
+5. Install the Helm chart in your cluster with the following commands:
+
+    ```shell
+    helm repo add datadog https://helm.datadoghq.com
+    ```
+    ```shell
+    helm repo update
+    ```
+    ```shell
+    helm upgrade --install \
+        opw datadog/observability-pipelines-worker \
+        -f azure_aks_rc.yaml
+    ```
+
+<h3 id="manual-configuration-aks">Manual configuration</h3>
+
+1. Download the [Helm chart][2] for Azure AKS.
 
 2. In the Helm chart, replace `datadog.apiKey` and `datadog.pipelineId` with their respective values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
     ```yaml
@@ -228,10 +334,53 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       -f azure_aks.yaml
     ```
 
-[1]: /resources/yaml/observability_pipelines/splunk/azure_aks.yaml
+[1]: /resources/yaml/observability_pipelines/splunk/azure_aks_rc.yaml
+[2]: /resources/yaml/observability_pipelines/splunk/azure_aks.yaml
 {{% /tab %}}
 {{% tab "Google GKE" %}}
-1. Download the [Helm chart][1] for Google GKE.
+
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-gke). Otherwise, follow the steps in [manual configuration](#manual-configuration-gke).
+
+<h3 id="remote-configuration-gke">Remote Configuration</h3>
+
+1. Download the [Remote Configuration Helm chart][1] for Google GKE.
+
+2. In the Helm chart, replace `datadog.apiKey` and `datadog.pipelineId` with their respective values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
+    ```yaml
+    datadog:
+      apiKey: "<datadog_api_key>"
+      pipelineId: "<observability_pipelines_configuration_id>"
+      site: "<site>"
+    ```
+
+3. Replace the values for `SPLUNK_HEC_ENDPOINT` and `SPLUNK_HEC_TOKEN` to match your Splunk deployment, including the token you created in [Setting up the Splunk Index](#setting-up-the-splunk-index):
+    ```yaml
+    env:
+      - name: SPLUNK_HEC_ENDPOINT
+        value: <https://your.splunk.index:8088/>
+      - name: SPLUNK_TOKEN
+        value: <a_random_token_usually_a_uuid>
+    ```
+
+4. Make sure to specify any ports that your configuration uses in the `service.ports` section. The provided Helm chart already opens the default Splunk HEC port, `8088`.
+
+5. Install the Helm chart in your cluster with the following commands:
+
+    ```shell
+    helm repo add datadog https://helm.datadoghq.com
+    ```
+    ```shell
+    helm repo update
+    ```
+    ```shell
+    helm upgrade --install \
+        opw datadog/observability-pipelines-worker \
+        -f google_gke_rc.yaml
+    ```
+
+<h3 id="manual-configuration-gke">Manual configuration</h3>
+
+1. Download the [Helm chart][2] for Google GKE.
 
 2. In the Helm chart, replace `datadog.apiKey` and `datadog.pipelineId` with their respective values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
     ```yaml
@@ -264,9 +413,12 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       -f google_gke.yaml
     ```
 
-[1]: /resources/yaml/observability_pipelines/splunk/google_gke.yaml
+[1]: /resources/yaml/observability_pipelines/splunk/google_gke_rc.yaml
+[2]: /resources/yaml/observability_pipelines/splunk/google_gke.yaml
+
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
+
 1. Run the following commands to set up APT to download through HTTPS:
 
     ```
@@ -291,6 +443,30 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     sudo apt-get update
     sudo apt-get install observability-pipelines-worker datadog-signing-keys
     ```
+
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-apt) to complete the installation. Otherwise, follow the steps in [manual configuration](#manual-configuration-apt).
+
+<h3 id="remote-configuration-apt">Remote Configuration</h3>
+
+4. Add your keys, site ({{< region-param key="dd_site" code="true" >}}), and Splunk information to the Worker's environment variables:
+
+    ```
+    sudo cat <<-EOF > /etc/default/observability-pipelines-worker
+    DD_API_KEY=<API_KEY>
+    DD_OP_PIPELINE_ID=<PIPELINE_ID>
+    DD_SITE=<SITE>
+    DD_OP_REMOTE_CONFIGURATION_ENABLED=true
+    SPLUNK_HEC_ENDPOINT=<SPLUNK_URL>
+    SPLUNK_TOKEN=<SPLUNK_TOKEN>
+    EOF
+    ```
+
+5. Start the worker:
+    ```
+    sudo systemctl restart observability-pipelines-worker
+    ```
+
+<h3 id="manual-configuration-apt">Manual configuration</h3>
 
 4. Add your keys, site ({{< region-param key="dd_site" code="true" >}}), and Splunk information to the Worker's environment variables:
 
@@ -338,6 +514,30 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     sudo yum install observability-pipelines-worker
     ```
 
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-rpm)to complete the installation. Otherwise, follow the steps in [manual configuration](#manual-configuration-rpm).
+
+<h3 id="remote-configuration-rpm">Remote Configuration</h3>
+
+3. Add your keys, site ({{< region-param key="dd_site" code="true" >}}), and Splunk information to the Worker's environment variables:
+
+    ```
+    sudo cat <<-EOF > /etc/default/observability-pipelines-worker
+    DD_API_KEY=<API_KEY>
+    DD_OP_PIPELINE_ID=<PIPELINE_ID>
+    DD_SITE=<SITE>
+    DD_OP_REMOTE_CONFIGURATION_ENABLED=true
+    SPLUNK_HEC_ENDPOINT=<SPLUNK_URL>
+    SPLUNK_TOKEN=<SPLUNK_TOKEN>
+    EOF
+    ```
+
+4. Start the worker:
+    ```
+    sudo systemctl restart observability-pipelines-worker
+    ```
+
+<h3 id="manual-configuration-rpm">Manual configuration</h3>
+
 3. Add your keys, site ({{< region-param key="dd_site" code="true" >}}), and Splunk information to the Worker's environment variables:
 
     ```
@@ -358,9 +558,37 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     ```
 
 [1]: /resources/yaml/observability_pipelines/splunk/pipeline.yaml
+
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
-Setup the Worker module in your existing Terraform using this sample configuration. Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline.
+
+Setup the Worker module in your existing Terraform using this sample configuration. If you have Remote Configuration enabled, use the [Remote Configuration sample](#remote-configuration-sample). Otherwise, use the [Manual Configuration sample](#manual-configuration-sample).
+
+### Remote Configuration sample
+
+Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline. 
+
+```
+module "opw" {
+    source     = "git::https://github.com/DataDog/opw-terraform//aws"
+    vpc-id     = "{VPC ID}"
+    subnet-ids = ["{SUBNET ID 1}", "{SUBNET ID 2}"]
+    region     = "{REGION}"
+
+    datadog-api-key = "{DATADOG API KEY}"
+    pipeline-id = "{OP PIPELINE ID}"
+    environment = {
+      "SPLUNK_TOKEN": "<SPLUNK TOKEN>",
+    }
+    remote-configuration = true
+}
+```
+
+### Manual configuration sample
+
+Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline. Make sure to specify the ports that your configuration needs, in the `tcp-ports` input. The sample configuration given opens up the Datadog Agent port, `8282`, by default.
+
+See [Configurations][1] for more information about the source, transform, and sink used in the sample configuration.
 
 ```
 module "opw" {
@@ -423,6 +651,9 @@ sinks:
 EOT
 }
 ```
+
+[1]: /observability_pipelines/configurations/
+
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
@@ -443,11 +674,11 @@ To install the Worker in your AWS Account, use the CloudFormation template to cr
       * For `APIKey` and `PipelineID`, provide the key and ID that you gathered earlier in the Prerequisites section.
 
       * For the `SplunkToken`, provide the token you created earlier on your Splunk index.
-    
+
      * For the `VPCID` and `SubnetIDs`, provide the subnets and VPC you chose earlier.
 
       * All other parameters are set to reasonable defaults for a Worker deployment but you can adjust them for your use case as needed.
-  
+
   6. Click **Next**.
 
   7. Review and make sure the parameters are as expected. Click the necessary permissions checkboxes for IAM, and click **Submit** to create the Stack.

@@ -67,6 +67,27 @@ Follow the below instructions to install the Worker and deploy a sample pipeline
 
 The Observability Pipelines Worker Docker image is published to Docker Hub [here][1].
 
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-docker). Otherwise, follow the steps in [manual configuration](#manual-configuration-docker).
+
+<h3 id="remote-configuration-docker">Remote Configuration</h3>
+
+Run the following command to start the Observability Pipelines Worker with Docker:
+    
+  ```shell
+  docker run -i -e DD_API_KEY=<API_KEY> \
+    -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+    -e DD_SITE=<SITE> \
+    -e DD_OP_REMOTE_CONFIGURATION_ENABLED=true \
+    -p 8282:8282 \
+    datadog/observability-pipelines-worker run
+  ```
+
+  Replace `<API_KEY>` with your Datadog API key, `<PIPELINE_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. 
+  
+  Any ports that your configuration uses must also be manually specified. Use `-p <PORT>:<PORT>` to forward them from the local host to the Docker container. The sample command given above opens the Datadog Agent port.
+
+<h3 id="manual-configuration-docker">Manual configuration</h3>
+
 1. Download the [sample pipeline configuration file][2]. This configuration emits demo data, parses and structures the data, and then sends them to the console and Datadog. See [Configurations][3] for more information about the source, transform, and sink used in the sample configuration.
 
 2. Run the following command to start the Observability Pipelines Worker with Docker:
@@ -80,13 +101,36 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
       datadog/observability-pipelines-worker run
     ```
 
-    Replace `<API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. **Note**: `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in step 1.
+    Replace `<API_KEY>` with your Datadog API key, `<PIPELINE_ID>` with your Observability Pipelines configuration ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}. **Note**: `./pipeline.yaml` must be the relative or absolute path to the configuration you downloaded in step 1.
 
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/quickstart/pipeline.yaml
 [3]: /observability_pipelines/configurations/
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
+
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-eks). Otherwise, follow the steps in [manual configuration](#manual-configuration-eks).
+
+<h3 id="remote-configuration-eks">Remote Configuration</h3>
+
+1. Download the [Remote Configuration Helm chart][3] for AWS EKS. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
+
+2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
+
+    ```shell
+    helm repo add datadog https://helm.datadoghq.com
+    ```
+    ```shell
+    helm repo update
+    ```
+    ```shell
+    helm upgrade --install \
+        opw datadog/observability-pipelines-worker \
+        -f aws_eks_rc.yaml
+    ```
+
+<h3 id="manual-configuration-eks">Manual configuration</h3>
+
 1. Download the [Helm chart][1] for AWS EKS. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
@@ -105,8 +149,32 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 
 [1]: /resources/yaml/observability_pipelines/quickstart/aws_eks.yaml
 [2]: /observability_pipelines/configurations/
+[3]: /resources/yaml/observability_pipelines/quickstart/aws_eks_rc.yaml
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
+
+If you have Remote Configuration enabled, follow the steps in [ Remote Configuration](#remote-configuration-aks). Otherwise, follow the steps in [manual configuration](#manual-configuration-aks).
+
+<h3 id="remote-configuration-aks">Remote Configuration</h3>
+
+1. Download the [Remote Configuration Helm chart][3] for Azure AKS. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
+
+2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
+
+    ```shell
+    helm repo add datadog https://helm.datadoghq.com
+    ```
+    ```shell
+    helm repo update
+    ```
+    ```shell
+    helm upgrade --install \
+      opw datadog/observability-pipelines-worker \
+      -f azure_aks_rc.yaml
+    ```
+
+<h3 id="manual-configuration-aks">Manual configuration</h3>
+
 1. Download the [Helm chart][1] for Azure AKS. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
@@ -125,8 +193,31 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 
 [1]: /resources/yaml/observability_pipelines/quickstart/azure_aks.yaml
 [2]: /observability_pipelines/configurations/
+[3]: /resources/yaml/observability_pipelines/quickstart/azure_eks_rc.yaml
 {{% /tab %}}
 {{% tab "Google GKE" %}}
+
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-gke). Otherwise, follow the steps in [manual configuration](#manual-configuration-gke).
+
+<h3 id="remote-configuration-gke">Remote Configuration</h3>
+1. Download the [Remote Configuration Helm chart][1] for Google GKE. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
+
+2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
+
+    ```shell
+    helm repo add datadog https://helm.datadoghq.com
+    ```
+    ```shell
+    helm repo update
+    ```
+    ```shell
+    helm upgrade --install \
+      opw datadog/observability-pipelines-worker \
+      -f google_gke_rc.yaml
+    ```
+
+<h3 id="manual-configuration-gke">Manual configuration</h3>
+
 1. Download the [Helm chart][1] for Google GKE. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
@@ -145,11 +236,36 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 
 [1]: /resources/yaml/observability_pipelines/quickstart/google_gke.yaml
 [2]: /observability_pipelines/configurations/
+[3]: /resources/yaml/observability_pipelines/quickstart/google_gke_rc.yaml
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
 
-Install the Worker with the one-line install script or manually.
-#### One-line installation script
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-apt). Otherwise, follow the steps in [manual configuration](#manual-configuration-apt).
+
+<h3 id="remote-configuration-apt">Remote Configuration</h3>
+
+1. Run the one-line install command to install the Worker. Replace `<DD_API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}.
+
+    ```
+    DD_API_KEY=<DD_API_KEY> DD_OP_PIPELINE_ID=<PIPELINES_ID> DD_OP_REMOTE_CONFIGURATION_ENABLED=true DD_SITE=<SITE> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_op_worker1.sh)"
+    ```
+1. Add your keys and the site ({{< region-param key="dd_site" code="true" >}}) to the Worker's environment variables:
+
+    ```
+    sudo cat <<-EOF > /etc/default/observability-pipelines-worker
+    DD_API_KEY=<API_KEY>
+    DD_OP_PIPELINE_ID=<PIPELINE_ID>
+    DD_SITE=<SITE>
+    DD_OP_REMOTE_CONFIGURATION_ENABLED=true
+    EOF
+    ```
+1. Start the Worker:
+    
+    ```
+    sudo systemctl restart observability-pipelines-worker
+    ```
+    
+<h3 id="manual-configuration-apt">Manual configuration</h3>
 
 1. Run the one-line install command to install the Worker. Replace `<DD_API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}.
 
@@ -157,42 +273,9 @@ Install the Worker with the one-line install script or manually.
     DD_API_KEY=<DD_API_KEY> DD_OP_PIPELINE_ID=<PIPELINES_ID> DD_SITE=<SITE> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_op_worker1.sh)"
     ```
 
-2. Download the [sample configuration file][1] to `/etc/observability-pipelines-worker/pipeline.yaml` on the host. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
+1. Download the [sample configuration file][1] to `/etc/observability-pipelines-worker/pipeline.yaml` on the host. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
 
-3. Start the worker:
-
-    ```
-    sudo systemctl restart observability-pipelines-worker
-    ```
-
-#### Manual installation
-
-1. Run the following commands to set up APT to download through HTTPS:
-
-    ```
-    sudo apt-get update
-    sudo apt-get install apt-transport-https curl gnupg
-    ```
-
-2. Run the following commands to set up the Datadog `deb` repo on your system and create a Datadog archive keyring:
-
-    ```
-    sudo sh -c "echo 'deb [signed-by=/usr/share/keyrings/datadog-archive-keyring.gpg] https://apt.datadoghq.com/ stable observability-pipelines-worker-1' > /etc/apt/sources.list.d/datadog-observability-pipelines-worker.list"
-    sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
-    sudo chmod a+r /usr/share/keyrings/datadog-archive-keyring.gpg
-    curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    ```
-
-3. Run the following commands to update your local `apt` repo and install the Worker:
-
-    ```
-    sudo apt-get update
-    sudo apt-get install observability-pipelines-worker datadog-signing-keys
-    ```
-
-4. Add your keys and the site ({{< region-param key="dd_site" code="true" >}}) to the Worker's environment variables:
+1. Add your keys and the site ({{< region-param key="dd_site" code="true" >}}) to the Worker's environment variables:
 
     ```
     sudo cat <<-EOF > /etc/default/observability-pipelines-worker
@@ -202,22 +285,47 @@ Install the Worker with the one-line install script or manually.
     EOF
     ```
 
-5. Download the [sample configuration file][1] to `/etc/observability-pipelines-worker/pipeline.yaml` on the host.
-
-6. Start the Worker:
+1. Start the Worker:
     
     ```
     sudo systemctl restart observability-pipelines-worker
     ```
 
-[1]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
+[1]: /resources/yaml/observability_pipelines/quickstart/pipeline.yaml
 [2]: /observability_pipelines/configurations/
 {{% /tab %}}
 {{% tab "RPM-based Linux" %}}
 
-Install the Worker with the one-line install script or manually.
+If you have Remote Configuration enabled, follow the steps in [Remote Configuration](#remote-configuration-rpm). Otherwise, follow the steps in [manual configuration](#manual-configuration-rpm).
 
-#### One-line installation script
+<h3 id="remote-configuration-rpm">Remote Configuration</h3>
+
+1. Run the one-line install command to install the Worker. Replace `<DD_API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}.
+
+    ```
+    DD_API_KEY=<DD_API_KEY> DD_OP_PIPELINE_ID=<PIPELINES_ID> DD_OP_REMOTE_CONFIGURATION_ENABLED=true DD_SITE=<SITE> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_op_worker1.sh)"
+    ```
+1. Run the following command to start the Worker:
+    
+    ```
+    sudo systemctl restart observability-pipelines-worker
+    ```
+1. Add your keys and the site ({{< region-param key="dd_site" code="true" >}}) to the Worker's environment variables:
+
+    ```
+    sudo cat <<-EOF > /etc/default/observability-pipelines-worker
+    DD_API_KEY=<API_KEY>
+    DD_OP_PIPELINE_ID=<PIPELINE_ID>
+    DD_SITE=<SITE>
+    DD_OP_REMOTE_CONFIGURATION_ENABLED=true
+    EOF
+    ```
+1. Run the following command to start the Worker:
+    ```
+    sudo systemctl restart observability-pipelines-worker
+    ```
+
+<h3 id="manual-configuration-rpm">Manual configuration</h3>
 
 1. Run the one-line install command to install the Worker. Replace `<DD_API_KEY>` with your Datadog API key, `<PIPELINES_ID>` with your Observability Pipelines ID, and `<SITE>` with {{< region-param key="dd_site" code="true" >}}.
 
@@ -225,43 +333,8 @@ Install the Worker with the one-line install script or manually.
     DD_API_KEY=<DD_API_KEY> DD_OP_PIPELINE_ID=<PIPELINES_ID> DD_SITE=<SITE> bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_op_worker1.sh)"
     ```
 
-2. Download the [sample configuration file][1] to `/etc/observability-pipelines-worker/pipeline.yaml` on the host. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
-
-3. Run the following command to start the Worker:
-    
-    ```
-    sudo systemctl restart observability-pipelines-worker
-    ```
-
-#### Manual installation
-
-1. Run the following commands to set up the Datadog `rpm` repo on your system:
-
-    ```
-    cat <<EOF > /etc/yum.repos.d/datadog-observability-pipelines-worker.repo
-    [observability-pipelines-worker]
-    name = Observability Pipelines Worker
-    baseurl = https://yum.datadoghq.com/stable/observability-pipelines-worker-1/\$basearch/
-    enabled=1
-    gpgcheck=1
-    repo_gpgcheck=1
-    gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
-           https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
-           https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
-           https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
-    EOF
-    ```
-
-   **Note:** If you are running RHEL 8.1 or CentOS 8.1, use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` in the configuration above.
-
-2. Update your packages and install the Worker:
-
-    ```
-    sudo yum makecache
-    sudo yum install observability-pipelines-worker
-    ```
-
-3. Add your keys and the site ({{< region-param key="dd_site" code="true" >}}) to the Worker's environment variables:
+1. Download the [sample configuration file][1] to `/etc/observability-pipelines-worker/pipeline.yaml` on the host. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
+1. Add your keys and the site ({{< region-param key="dd_site" code="true" >}}) to the Worker's environment variables:
 
     ```
     sudo cat <<-EOF > /etc/default/observability-pipelines-worker
@@ -270,10 +343,7 @@ Install the Worker with the one-line install script or manually.
     DD_SITE=<SITE>
     EOF
     ```
-
-4. Download the [sample configuration file][1] to `/etc/observability-pipelines-worker/pipeline.yaml` on the host. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
-
-5. Run the following command to start the Worker:
+1. Run the following command to start the Worker:
     ```
     sudo systemctl restart observability-pipelines-worker
     ```
@@ -282,9 +352,31 @@ Install the Worker with the one-line install script or manually.
 [2]: /observability_pipelines/configurations/
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
-Set up the Worker module in your existing Terraform using this sample configuration. Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline.
 
-See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
+Set up the Worker module in your existing Terraform using the sample configuration below. If you have Remote Configuration enabled, use the [Remote Configuration sample](#remote-configuration-sample). Otherwise, use the [manual configuration sample](#manual-configuration-sample).
+
+### Remote Configuration sample
+
+Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline.
+
+```
+module "opw" {
+    source     = "https://github.com/DataDog/opw-terraform//aws"
+    vpc-id     = "{VPC ID}"
+    subnet-ids = ["{SUBNET ID 1}", "{SUBNET ID 2}"]
+    region     = "{REGION}"
+
+    datadog-api-key = "{DATADOG API KEY}"
+    pipeline-id = "{OP PIPELINE ID}"
+    remote-configuration = true
+}
+```
+
+### Manual configuration sample
+
+Update the values in `vpc-id`, `subnet-ids`, and `region` to match your AWS deployment. Update the values in `datadog-api-key` and `pipeline-id` to match your pipeline.
+
+See [Configurations][1] for more information about the source, transform, and sink used in the sample configuration.
 
 ```
 module "opw" {
@@ -385,7 +477,7 @@ EOT
 }
 ```
 
-[2]: /observability_pipelines/configurations/
+[1]: /observability_pipelines/configurations/
 {{% /tab %}}
 {{< /tabs >}}
 
