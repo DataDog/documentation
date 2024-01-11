@@ -16,15 +16,15 @@ Data Jobs Monitoring is in private beta. Fill out this form to join the wait lis
 
 Data Jobs Monitoring provides visibility into the performance and reliability of data processing jobs, including Apache Spark and Databricks jobs, along with the underlying infrastructure. Data Jobs Monitoring enables you to:
 
-- Track data processing jobs across your accounts and workspaces, and see which take up the most compute resources or have inefficiencies.
-- Receive an alert when a job fails—or when a job that should be complete is still running.
+- Track the health and performance of data processing jobs across your accounts and workspaces. See which take up the most compute resources or have inefficiencies.
+- Receive an alert when a job fails—or when a job is taking too long to complete.
 - Analyze job execution details and stack traces.
 - Correlate infrastructure metrics, Spark metrics from the Spark UI, logs, and cluster configuration.
 - Compare multiple runs to facilitate troubleshooting, and to optimize provisioning and configuration during deployment.
 
 ## Setup
 
-Data Jobs Monitoring is supported for Amazon EMR, Databricks, and Spark on Kubernetes.
+Data Jobs Monitoring is supported for Amazon EMR, Databricks (AWS, Azure, Google Cloud), and Spark on Kubernetes.
 
 To get started, select your platform and follow the installation instructions:
 
@@ -46,9 +46,9 @@ Click on a job to see how it performed across multiple runs, as well as error me
 
 {{< img src="data_jobs/djm_job.png" alt="Job list - CPU breakdown" style="width:100%;" >}}
 
-### View details of each individual run
+### Analyze an individual run
 
-Clicking on a run opens a side panel with details of how much time was spent on each Spark job and stage, helping you to understand the breakdown of resource consumption and Spark metrics. From this panel, you can also view executor and driver node resource utilization, as well as job and cluster configuration. 
+Clicking on a run opens a side panel with details of how much time was spent on each Spark job and stage, along with a breakdown of resource consumption and Spark metrics, such as idle executor CPU, input/output data volume, shuffling, and disk spill. From this panel, you can correlate the execution with executor and driver node resource utilization, logs, and the job and cluster configuration. 
 
 {{< img src="data_jobs/djm_run.png" alt="Job list - CPU breakdown" style="width:100%;" >}}
 
