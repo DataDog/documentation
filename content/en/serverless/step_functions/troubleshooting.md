@@ -46,7 +46,7 @@ If you are using your customized way to deploy Datadog Lambda Forwarder, here ar
 - On the forwarder, please set the environment variable `DD_FETCH_STEP_FUNCTIONS_TAGS` to `true`. 
 - Datadog-Forwarder layer version greater than 31 should be able to fetch state machine tags, which is a requirement for fetching `DD_TRACE_ENABLE` tag on state machines to enable Step Functions trace generation on Datadog backend.
 - The IAM role for the forwarder should have `tags:getResources` permission.
-- You will need to set up a subscription filter on your state machine CloudWatch log group to the Datadog forwarder.
+- Set up a subscription filter on your state machine CloudWatch log group to the Datadog forwarder.
 - To verify if logs are reaching Datadog backend correctly, please open Log Explorer page and search `source:stepfunction` with `Live` search timeframe (which will show all logs going into Datadog’s logs intake). If you cannot see any logs, please check if there are any error logs on the Datadog Forwarder. The common errors are wrong/invalid API key. Adding the environment variable `DD_LOG_LEVEL` of `DEBUG` helps you debug the Forwarder issue. If you can see Step Functions logs, please verify that the logs have the `dd_trace_enable:true` tag (all tags are normalized) and you should be able to see Step Function trace associated with the log in a few minutes.
 
 
