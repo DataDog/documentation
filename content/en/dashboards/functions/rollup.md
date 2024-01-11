@@ -70,8 +70,7 @@ You can customize how your metrics data is bucketed over time when using the `.r
 
 * Calendar aligned monthly queries with adjustable start date and timezones. For example, you can compare your monthly client errors for February and December of last year.
 * Weekly rollups with adjustable start date and timezones. For example, see how many weekly transactions are open (if your week starts on Mondays).
-* Daily rollups with adjustable start time / timezones
-_e.g. How many events of interested occurred on the current day? (given my day begins at midnight Pacific Time)_
+* Daily rollups with adjustable start time and timezones. For example, see how many events of interest occurred on the current day (if your day begins at midnight Pacific Time).
 
 ## Rollups in monitors
 
