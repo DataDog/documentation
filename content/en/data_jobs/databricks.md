@@ -33,21 +33,23 @@ Follow these steps to enable Data Jobs Monitoring for Databricks.
 
 ### Install the Datadog Agent on your Databricks cluster(s)
 
-Use [this init script][2] to install the Datadog Agent globally, or on a specific Databricks cluster.
+Use one of the following init scripts:
+- [Install the Datadog Agent][8]
+- [Install the Datadog Agent without logs][2]
+
+You can choose to install the Agent globally, or on a specific Databricks cluster.
 
 {{< tabs >}}
 {{% tab "Global init (Recommended)" %}}
 1. In Databricks, go to **Settings** > **Compute**. In the **All purpose clusters** section, next to **Global init scripts**, click **Manage**.
-1. Click **Add**. Name your script. Then, in the **Script** field, copy and paste the [init script][1].
+1. Click **Add**. Name your script. Then, in the **Script** field, copy and paste the init script.
 1. To enable the script for all new and restarted clusters, toggle **Enabled**.
    {{< img src="data_jobs/databricks/toggle.png" alt="Databricks UI, admin settings, global init scripts. A script called 'install-datadog-agent' is in a list with an enabled toggle." style="width:100%;" >}}
 1. Click **Add**.
 
-
-[1]: /resources/sh/data_jobs/datadog_databricks_job_monitoring_init_without_logs.sh
 {{% /tab %}}
 {{% tab "On a specific cluster" %}}
-1. Download the [init script][1].
+1. Download the init script.
 1. In Databricks, on the cluster configuration page, click the **Advanced options** toggle.
 1. At the bottom of the page, go to the **Init Scripts** tab.
    {{< img src="data_jobs/databricks/init_scripts.png" alt="Databricks UI, cluster configuration advanced options,  Init Scripts tab. A 'Destination' drop-down and an 'Init script path' file selector." style="width:80%;" >}}
@@ -55,7 +57,6 @@ Use [this init script][2] to install the Datadog Agent globally, or on a specifi
    - Under **Init script path**, enter the path to your init script.
    - Click **Add**.
 
-[1]: /resources/sh/data_jobs/datadog_databricks_job_monitoring_init_without_logs.sh
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -99,3 +100,4 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
 [5]: /getting_started/site/
 [6]: https://app.datadoghq.com/apm/data-jobs
 [7]: /data_jobs
+[8]: /resources/sh/data_jobs/datadog_databricks_job_monitoring_init.sh
