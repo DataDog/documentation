@@ -2192,6 +2192,11 @@ main:
     parent: tracing_services
     identifier: tracing_apm_monitors
     weight: 805
+  - name: List of Services
+    url: /service_catalog/
+    parent: tracing_services
+    identifier: tracing_service_catalog
+    weight: 806
   - name: API Catalog
     url: /tracing/api_catalog/
     identifier: api_catalog
