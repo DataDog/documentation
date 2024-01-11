@@ -107,6 +107,8 @@ The table below describes the products in which you can use the team filter:
 | [Service Level Objectives][15] | Team handle                                                                 |
 | [Data Streams Monitoring][16]  | Team handle                                                                 |
 | [Synthetic Tests][17]          | Team handle                                                                 |
+| [Notebooks][18]          | Team handle                                                                      |
+
 
 
 ## Permissions
@@ -156,3 +158,5 @@ To enforce a strict membership model, configure your default team settings so **
 [15]: https://app.datadoghq.com/slo/manage
 [16]: https://app.datadoghq.com/data-streams
 [17]: https://app.datadoghq.com/synthetics
+[18]: https://app.datadoghq.com/notebook/list/
+
