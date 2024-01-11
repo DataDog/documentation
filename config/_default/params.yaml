@@ -102,6 +102,10 @@ code_language_ids:
     javascript: "JavaScript"
     swift: "Swift"
     junit_xml: "JUnit XML"
+    kubernetes: "Kubernetes"
+    docker: "Docker"
+    hosts: "Hosts"
+    ecs_ec2: "ECS EC2"
 branch: ""
 
 signupclass: sign-up-trigger
