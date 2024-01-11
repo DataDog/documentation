@@ -75,9 +75,9 @@ Triggers when the error count is `above` or `above or equal to`. An alert is tri
 
 {{% tab "New Issue" %}}
 
-The list of new issues might display older issues that are considered new in the selected time frame, such as the past 24 hours or the past week.
-
 1. Select or input a custom time period for the monitor to consider an issue as new after its first occurrence. The selected threshold is evaluated in the given time frame. After the specific time period, the monitor stops alerting and turns green.
+
+   The list of issues on top has a separate time frame selector. It can be used to find which issues would be considered new in this time frame.
 2. Select **Web and Mobile Apps**, **Backend Services**, or **Logs** and choose to monitor over a count or [measure][1].
    - Monitor the count of occurrences for a specific issue ID.
    - Monitor over a measure. If you select a measure, the monitor alerts over the numerical value of the RUM or APM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
