@@ -69,8 +69,7 @@ For more details about how to use `.as_count()` and `.as_rate()` see the [Visual
 You can customize how your metrics data is bucketed over time when using the `.rollup()` function with calendar aligned queries. This feature allows you the flexibility to define:
 
 * Calendar aligned monthly queries with adjustable start date and timezones. For example, you can compare your monthly client errors for February and December of last year.
-* Weekly rollups with adjustable start date / timezones
-_e.g. How many weekly transactions are open (if my week starts on Mondays)_
+* Weekly rollups with adjustable start date and timezones. For example, see how many weekly transactions are open (if your week starts on Mondays).
 * Daily rollups with adjustable start time / timezones
 _e.g. How many events of interested occurred on the current day? (given my day begins at midnight Pacific Time)_
 
