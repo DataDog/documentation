@@ -34,9 +34,9 @@ To get started, select your platform and follow the installation instructions:
 
 ## Explore Data Jobs Monitoring
 
-### Take inventory of your data processing jobs
+### Easily identify unreliable and inefficient jobs
 
-View all jobs across cloud accounts and workspaces. See CPU allocation, cost estimation, and other metrics to identify opportunities for optimization.
+View all jobs across cloud accounts and workspaces. Identify failing jobs to take action on, or find jobs with high idle CPU that are using a lot of compute and should be optimized.
 
 {{< img src="data_jobs/djm_demolist.png" alt="Job list - CPU breakdown" style="width:100%;" >}}
 
