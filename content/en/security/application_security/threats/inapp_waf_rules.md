@@ -72,8 +72,8 @@ Services using a policy are visible directly in the policy management page.
 
    {{< img src="security/application_security/threats/waf/in-app-waf.png" alt="In-App WAF configuration page, showing two default policies." style="width:100%;" >}}
 
-2. Click on the three dots to the right of one of the policies, and click **Download Configuration of this Policy** to download the configuration file to your local machine.
-3. Optionally, click **Apply this Policy to Services** to apply a default policy to one or more of your protection enabled ASM services.
+2. Click on the three dots to the right of one of the policies, and select **Download Configuration of this Policy** to download the configuration file to your local machine.
+3. Optionally, select **Apply this Policy to Services** to apply a default policy to one or more of your protection enabled ASM services.
 
    **Note:** A policy can be applied to one or more services, but a service can only contain one _policy_.
 
