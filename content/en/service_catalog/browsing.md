@@ -1,6 +1,8 @@
 ---
 title: Browsing the Service Catalog
 kind: documentation
+aliases:
+  - /tracing/service_catalog/browsing
 further_reading:
 - link: "/tracing/service_catalog/service_definition_api/"
   tag: "Documentation"

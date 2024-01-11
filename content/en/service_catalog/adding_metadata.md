@@ -12,7 +12,8 @@ further_reading:
   tag: "GitHub"
   text: "Service Definition Schema"
 aliases:
-  - tracing/service_catalog/service_metadata_structure
+  - /tracing/service_catalog/service_metadata_structure
+  - /tracing/service_catalog/adding_metadata
 ---
 
 ## Overview
