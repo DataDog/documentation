@@ -43,7 +43,7 @@ Please enable the `Include execution data` option on the state machine's logging
 
 ## Customized way to deploy Datadog Lambda Forwarder
 If you are using your customized way to deploy Datadog Lambda Forwarder, here are some tips that can help you debug enabling Step Functions tracing:
-- On the forwarder, please set the environment variable `DD_FETCH_STEP_FUNCTIONS_TAGS` to `true`. 
+- On the forwarder, set the environment variable `DD_FETCH_STEP_FUNCTIONS_TAGS` to `true`. 
 - Datadog-Forwarder layer version greater than 31 should be able to fetch state machine tags, which is a requirement for fetching `DD_TRACE_ENABLE` tag on state machines to enable Step Functions trace generation on Datadog backend.
 - The IAM role for the forwarder should have `tags:getResources` permission.
 - Set up a subscription filter on your state machine CloudWatch log group to the Datadog forwarder.
