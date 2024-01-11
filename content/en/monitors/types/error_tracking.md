@@ -44,9 +44,7 @@ Choose **Count** to alert on issues with a high number of errors and **New Issue
 {{< tabs >}}
 {{% tab "Count" %}}
 
-Select **Web and Mobile Apps** from the dropdown menu. If you select **Backend Services** or **Logs**, only the **Error Occurrences** option is available.
-
-1. Choose what metric you want to monitor: a count, facet, or measure.
+1. Select **RUM Events**, **Traces**, or **Logs** from the dropdown menu and choose what metric you want to monitor: a count, facet, or measure.
    - For error occurrences, monitor over an overall count based on the issue ID.
    - For impacted users, monitor over a unique count of user emails based on the issue ID or over a measure.
    - For impacted sessions, monitor over a unique count of session IDs based on the issue ID.
@@ -57,6 +55,8 @@ Select **Web and Mobile Apps** from the dropdown menu. If you select **Backend S
    - **Error Occurrences**: Triggers when the error count is `above` or `above or equal to`.
    - **Impacted Users**: Triggers when the number of impacted user emails is `above` or `above or equal to`.
    - **Impacted Sessions**: Triggers when the number of impacted session IDs is `above` or `above or equal to`.
+
+   If you select **Traces** or **Logs** from the dropdown menu, only the **Error Occurrences** option is available.
 
 2. Construct a search query using the same logic as a [RUM Explorer search][1], [APM Explorer search][3], or [Log Explorer search][4] for the issues' error occurrences.
 3. Optionally, configure the alerting grouping strategy. For more information, see [Monitor Configuration][2].
@@ -78,7 +78,7 @@ Triggers when the error count is `above` or `above or equal to`. An alert is tri
 1. Select or input a custom time period for the monitor to consider an issue as new after its first occurrence. The selected threshold is evaluated in the given time frame. After the specific time period, the monitor stops alerting and turns green.
 
    The list of issues on top has a separate time frame selector. It can be used to find which issues would be considered new in this time frame.
-2. Select **Web and Mobile Apps**, **Backend Services**, or **Logs** and choose to monitor over a count or [measure][1].
+2. Select **RUM Events**, **Traces**, or **Logs** and choose to monitor over a count or [measure][1].
    - Monitor the count of occurrences for a specific issue ID.
    - Monitor over a measure. If you select a measure, the monitor alerts over the numerical value of the RUM or APM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 3. Construct a search query using the same logic as a [RUM Explorer search][2], [APM Explorer search][3], or [Log Explorer search][5] for the issues' error occurrences.
