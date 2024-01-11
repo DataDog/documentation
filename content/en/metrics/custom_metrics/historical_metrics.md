@@ -446,7 +446,7 @@ Historical Metrics Ingestion has varying latency depending on how far in the pas
 
 Historical Metrics are billed under the Custom Metrics billing SKU. Billable custom metrics are determined by the timestamp of the metrics submitted, regardless of whether they have a timestamp of today or 15 months into the past. As long as that metric name and tag value combination is actively reporting ANY value (regardless of the timestamp), it would be considered active in the hour that it was submitted. For more information, see the [Custom Metrics billing][3] documentation.
 
-Track your indexed historical metrics through the Usage Summary section of the [Plan and Usage page][4]. For more information, see the [Usage Details][5] documentation.
+Track your indexed historical metrics through the Usage Summary section of the [Plan and Usage page][4].
 
 {{< img src="metrics/custom_metrics/historical_metrics/custom_metrics_usage_summary.png" alt="Usage Summary section of the Plan and Usage page, which shows both custom indexed and historical indexed metrics" style="width:100%;" >}}
 
@@ -458,4 +458,3 @@ Track your indexed historical metrics through the Usage Summary section of the [
 [2]: /metrics/#submit-metrics
 [3]: /account_management/billing/custom_metrics/
 [4]: https://app.datadoghq.com/billing/usage
-[5]: /account_management/plan_and_usage/usage_details/
