@@ -2,6 +2,8 @@
 title: Service Catalog Guides
 kind: guide
 private: true
+aliases:
+  - /tracing/service_catalog/guides/
 ---
 
 

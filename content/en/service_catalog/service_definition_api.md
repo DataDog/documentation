@@ -2,7 +2,8 @@
 title: Service Catalog API
 kind: documentation
 aliases:
-- /tracing/faq/service_definition_api/
+  - /tracing/faq/service_definition_api/
+  - /tracing/service_catalog/service_definition_api
 further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"

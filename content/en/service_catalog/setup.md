@@ -1,6 +1,8 @@
 ---
 title: Adding Entries to Service Catalog
 kind: documentation
+aliases:
+  - /tracing/service_catalog/setup
 further_reading:
 - link: "/tracing/service_catalog/adding_metadata"
   tag: "Documentation"
