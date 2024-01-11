@@ -40,6 +40,12 @@ View all jobs across cloud accounts and workspaces. Identify failing jobs to tak
 
 {{< img src="data_jobs/djm_demolist.png" alt="Job list - CPU breakdown" style="width:100%;" >}}
 
+### Receive alerts on problematic jobs
+
+Datadog monitors send alerts when a job fails, or is running beyeond its completion time.
+
+{{< img src="data_jobs/djm_monitor_templates.png" alt="Monitors - templates for Data Jobs Monitoring" style="width:100%;" >}}
+
 ### Analyze and troubleshoot individual jobs
 
 Click on a job to see how it performed across multiple runs, as well as error messages for failed runs.
@@ -50,11 +56,15 @@ Click on a job to see how it performed across multiple runs, as well as error me
 
 Clicking on a run opens a side panel with details of how much time was spent on each Spark job and stage, along with a breakdown of resource consumption and Spark metrics, such as idle executor CPU, input/output data volume, shuffling, and disk spill. From this panel, you can correlate the execution with executor and driver node resource utilization, logs, and the job and cluster configuration. 
 
-{{< img src="data_jobs/djm_run.png" alt="Job list - CPU breakdown" style="width:100%;" >}}
+{{< img src="data_jobs/djm_run.png" alt="Data Jobs Monitoring > Run panel, Info tab" style="width:100%;" >}}
+
+You can also see task-level metrics for a specific Spark stage, so that you can identify data skew. See the distribution of time spent and data consumed by different tasks.
+
+{{< img src="data_jobs/djm_run.png" alt="JData Jobs Monitoring > Run panel, Spark Task Metrics tab" style="width:100%;" >}}
 
 For a failed run, you can see the stack trace to determine where and how this failure occurred.
 
-{{< img src="data_jobs/djm_stacktrace.png" alt="Job list - CPU breakdown" style="width:100%;" >}}
+{{< img src="data_jobs/djm_stacktrace.png" alt="Data Jobs Monitoring > Run panel, Errors tab" style="width:100%;" >}}
 
 ## Further Reading
 
