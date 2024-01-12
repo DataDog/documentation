@@ -82,5 +82,5 @@ Documentation, liens et articles supplémentaires utiles :
 
 [1]: https://app.datadoghq.com/account/settings#integrations/meraki
 [2]: https://app.datadoghq.com/account/settings#integrations/snmp
-[3]: https://docs.datadoghq.com/fr/network_performance_monitoring/devices/setup
+[3]: https://docs.datadoghq.com/fr/network_device_monitoring/devices/setup
 [4]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/

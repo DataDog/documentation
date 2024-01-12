@@ -83,7 +83,7 @@ SNMP インテグレーションをインストールして構成するには、
 
 
 
-[1]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/data
-[2]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/setup
+[1]: https://docs.datadoghq.com/ja/network_device_monitoring/devices/data
+[2]: https://docs.datadoghq.com/ja/network_device_monitoring/devices/setup
 [3]: https://docs.datadoghq.com/ja/help/
 [4]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/

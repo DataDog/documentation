@@ -1,6 +1,6 @@
 ---
 aliases:
-- /ja/network_performance_monitoring/devices/
+- /ja/network_device_monitoring/devices/
 description: ルーター、スイッチ、サーバー、ファイアウォールなどのネットワーク接続デバイスを可視化。
 disable_sidebar: true
 further_reading:

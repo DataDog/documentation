@@ -51,7 +51,7 @@ Pour obtenir la liste complète de toutes les métriques recueillies à partir d
 
 ## Configuration
 
-Pour installer et configurer l'intégration SNMP, consultez la documentation relative à la fonction [Network Device Monitoring][2] 
+Pour installer et configurer l'intégration SNMP, consultez la documentation relative à la fonction [Network Device Monitoring][2]
 
 ## Données collectées
 
@@ -73,6 +73,6 @@ Documentation, liens et articles supplémentaires utiles :
 
 * [Surveiller des périphériques SNMP avec Datadog][3]
 
-[1]: https://docs.datadoghq.com/fr/network_performance_monitoring/devices/data
-[2]: https://docs.datadoghq.com/fr/network_performance_monitoring/devices/setup
+[1]: https://docs.datadoghq.com/fr/network_device_monitoring/devices/data
+[2]: https://docs.datadoghq.com/fr/network_device_monitoring/devices/setup
 [3]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/

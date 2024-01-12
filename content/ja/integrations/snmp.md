@@ -97,7 +97,7 @@ SNMP インテグレーションをインストールして構成するには、
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
-[1]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/setup
+[1]: https://docs.datadoghq.com/ja/network_device_monitoring/devices/setup
 [2]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
 [3]: https://datadoghq.dev/integrations-core/tutorials/snmp/introduction/
 [4]: https://docs.datadoghq.com/ja/help/

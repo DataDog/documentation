@@ -2,7 +2,7 @@
 title: Build a NDM Profile
 kind: guide
 aliases:
-    - /network_performance_monitoring/devices/guide/build-ndm-profile
+    - /network_device_monitoring/devices/guide/build-ndm-profile
 further_reading:
 - link: "https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/"
   tag: "Documentation"

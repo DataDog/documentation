@@ -2,7 +2,7 @@
 title: NDM Profiles
 kind: documentation
 aliases:
-    - /network_performance_monitoring/devices/profiles/
+    - /network_device_monitoring/devices/profiles/
 further_reading:
 - link: "/network_monitoring/devices/data"
   tag: "Documentation"

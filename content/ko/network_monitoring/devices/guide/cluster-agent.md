@@ -1,6 +1,6 @@
 ---
 aliases:
-- /ko/network_performance_monitoring/devices/guide/cluster-agent/
+- /ko/network_device_monitoring/devices/guide/cluster-agent/
 further_reading:
 - link: /agent/cluster_agent
   tag: 설명서

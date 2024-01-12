@@ -1,6 +1,6 @@
 ---
 aliases:
-- /ko/network_performance_monitoring/devices/guide/build-ndm-profile
+- /ko/network_device_monitoring/devices/guide/build-ndm-profile
 further_reading:
 - link: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
   tag: 설명서

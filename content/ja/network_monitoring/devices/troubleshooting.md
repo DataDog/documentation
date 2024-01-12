@@ -1,6 +1,6 @@
 ---
 aliases:
-- /ja/network_performance_monitoring/devices/troubleshooting/
+- /ja/network_device_monitoring/devices/troubleshooting/
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: ブログ
@@ -82,7 +82,7 @@ snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
         snmpwalk -v 2c -c [community string] [ip address] 1.3.6.1.2.1.1.2
     ```
 
-**注**: デバイスの `sysobjectid` が不明な場合は、インターネットで調べるか、デバイスに到達できるホストで `snmpwalk` を実行します。この結果を使用して、プロファイルをリストアップします。 
+**注**: デバイスの `sysobjectid` が不明な場合は、インターネットで調べるか、デバイスに到達できるホストで `snmpwalk` を実行します。この結果を使用して、プロファイルをリストアップします。
 
 
 ## その他の参考資料

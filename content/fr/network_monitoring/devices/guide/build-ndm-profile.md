@@ -2,7 +2,7 @@
 title: Créer un profil NDM
 kind: guide
 aliases:
-  - /fr/network_performance_monitoring/devices/guide/build-ndm-profile
+  - /fr/network_device_monitoring/devices/guide/build-ndm-profile
 further_reading:
   - link: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
     tag: Documentation

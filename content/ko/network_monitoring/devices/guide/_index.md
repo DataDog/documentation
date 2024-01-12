@@ -1,6 +1,6 @@
 ---
 aliases:
-- /ko/network_performance_monitoring/devices/guide/
+- /ko/network_device_monitoring/devices/guide/
 disable_toc: true
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/

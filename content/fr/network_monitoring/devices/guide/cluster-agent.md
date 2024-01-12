@@ -2,7 +2,7 @@
 title: Network Device Monitoring avec l'Agent de cluster
 kind: guide
 aliases:
-  - /fr/network_performance_monitoring/devices/guide/cluster-agent/
+  - /fr/network_device_monitoring/devices/guide/cluster-agent/
 further_reading:
   - link: /agent/cluster_agent
     tag: Documentation

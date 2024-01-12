@@ -1,6 +1,6 @@
 ---
 aliases:
-- /ko/network_performance_monitoring/devices/troubleshooting/
+- /ko/network_device_monitoring/devices/troubleshooting/
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: 블로그

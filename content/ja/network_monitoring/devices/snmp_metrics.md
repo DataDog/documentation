@@ -1,6 +1,6 @@
 ---
 aliases:
-- /ja/network_performance_monitoring/devices/setup/
+- /ja/network_device_monitoring/devices/setup/
 - /ja/network_monitoring/devices/setup/
 further_reading:
 - link: /network_monitoring/devices/profiles

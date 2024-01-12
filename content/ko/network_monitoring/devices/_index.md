@@ -1,6 +1,6 @@
 ---
 aliases:
-- /ko/network_performance_monitoring/devices/
+- /ko/network_device_monitoring/devices/
 description: 라우터, 스위치, 서버 및 방화벽과 같은 네트워크 연결 장치에 대한 가시성을 확보합니다.
 disable_sidebar: true
 further_reading:

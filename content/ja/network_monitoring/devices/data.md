@@ -2,7 +2,7 @@
 title: 収集対象の NDM データ
 kind: documentation
 aliases:
-  - /ja/network_performance_monitoring/devices/data/
+  - /ja/network_device_monitoring/devices/data/
 ---
 ## メトリクス
 

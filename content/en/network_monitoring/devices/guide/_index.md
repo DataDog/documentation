@@ -4,7 +4,7 @@ kind: guide
 private: true
 disable_toc: true
 aliases:
-    - /network_performance_monitoring/devices/guide/
+    - /network_device_monitoring/devices/guide/
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-snmp-with-datadog/"
   tag: "Blog"

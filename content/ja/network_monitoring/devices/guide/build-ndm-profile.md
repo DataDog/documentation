@@ -2,7 +2,7 @@
 title: NDM プロファイルの構築
 kind: ガイド
 aliases:
-  - /ja/network_performance_monitoring/devices/guide/build-ndm-profile
+  - /ja/network_device_monitoring/devices/guide/build-ndm-profile
 further_reading:
   - link: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
     tag: Documentation

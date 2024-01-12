@@ -94,7 +94,7 @@ Dell インテグレーションには、イベントは含まれません。
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
-[1]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/data
-[2]: https://docs.datadoghq.com/ja/network_performance_monitoring/devices/setup
+[1]: https://docs.datadoghq.com/ja/network_device_monitoring/devices/data
+[2]: https://docs.datadoghq.com/ja/network_device_monitoring/devices/setup
 [3]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
 [4]: https://docs.datadoghq.com/ja/help/

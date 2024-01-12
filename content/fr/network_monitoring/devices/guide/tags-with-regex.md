@@ -2,7 +2,7 @@
 title: Tags NDM avec des expressions régulières
 kind: guide
 aliases:
-  - /fr/network_performance_monitoring/devices/guide/tags-with-regex/
+  - /fr/network_device_monitoring/devices/guide/tags-with-regex/
 further_reading:
   - link: /network_monitoring/devices/setup
     tag: Documentation
@@ -56,7 +56,7 @@ metrics:
           name: ifDescr
         match: '(\w)(\w+)'
         tags:
-         - prefix: '\1' 
+         - prefix: '\1'
          - suffix: '\2'
 ```
 

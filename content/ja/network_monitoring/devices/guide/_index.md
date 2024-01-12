@@ -4,7 +4,7 @@ kind: ガイド
 private: true
 disable_sidebar: true
 aliases:
-  - /ja/network_performance_monitoring/devices/guide/
+  - /ja/network_device_monitoring/devices/guide/
 further_reading:
   - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
     tag: ブログ

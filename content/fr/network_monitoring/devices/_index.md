@@ -1,6 +1,6 @@
 ---
 aliases:
-- /fr/network_performance_monitoring/devices/
+- /fr/network_device_monitoring/devices/
 description: Bénéficiez d'une visibilité optimale sur les périphériques connectés
   à votre réseau, tels que les routeurs, les switchs, les serveurs et les pare-feu.
 disable_sidebar: true

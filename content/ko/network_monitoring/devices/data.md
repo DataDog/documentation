@@ -1,6 +1,6 @@
 ---
 aliases:
-- /ko/network_performance_monitoring/devices/data/
+- /ko/network_device_monitoring/devices/data/
 kind: 설명서
 title: 수집된 NDM 데이터
 ---

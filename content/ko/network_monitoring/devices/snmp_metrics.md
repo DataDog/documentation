@@ -1,6 +1,6 @@
 ---
 aliases:
-- /ko/network_performance_monitoring/devices/setup/
+- /ko/network_device_monitoring/devices/setup/
 - /ko/network_monitoring/devices/setup/
 further_reading:
 - link: /network_monitoring/devices/profiles

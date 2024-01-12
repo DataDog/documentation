@@ -1,6 +1,6 @@
 ---
 aliases:
-- /ko/network_performance_monitoring/devices/profiles/
+- /ko/network_device_monitoring/devices/profiles/
 further_reading:
 - link: /network_monitoring/devices/data
   tag: 설명서

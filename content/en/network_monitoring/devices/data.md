@@ -2,7 +2,7 @@
 title: NDM Data Collected
 kind: documentation
 aliases:
-    - /network_performance_monitoring/devices/data/
+    - /network_device_monitoring/devices/data/
 ---
 
 {{< site-region region="gov" >}}

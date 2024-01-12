@@ -1,6 +1,6 @@
 ---
 aliases:
-- /ja/network_performance_monitoring/devices/profiles/
+- /ja/network_device_monitoring/devices/profiles/
 further_reading:
 - link: /network_monitoring/devices/data
   tag: Documentation

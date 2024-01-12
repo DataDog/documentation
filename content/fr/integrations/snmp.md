@@ -61,5 +61,5 @@ Documentation, liens et articles supplémentaires utiles :
 
 * [Surveiller des périphériques SNMP avec Datadog][2]
 
-[1]: https://docs.datadoghq.com/fr/network_performance_monitoring/devices/setup
+[1]: https://docs.datadoghq.com/fr/network_device_monitoring/devices/setup
 [2]: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
