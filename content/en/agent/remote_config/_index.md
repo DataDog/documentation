@@ -59,7 +59,7 @@ The following products and features are supported with Remote Configuration:
 
 ### Application Performance Monitoring (APM)
 
-- **Configure tracing library settings in the UI** (Beta): Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the [Service Catalog][19] UI, without having to restart the service.
+- **Configuration at runtime** (Beta): Change a service's trace sampling rate, Log Injection enablement, and HTTP header tags from within the Service Catalog UI, without having to restart the service. Read [Configuration at Runtime][22] for more information.
 - **Remotely set Agent sampling rate** (Public Beta): Remotely configure the Datadog Agent to change its trace sampling rates and set rules to scale your organization's trace ingestion according to your needs, without needing to restart your Datadog Agent.
 
 
@@ -281,3 +281,4 @@ Remote Configuration works in environments where the Datadog Agent is deployed. 
 [19]: /tracing/service_catalog/
 [20]: /dynamic_instrumentation/?tab=configurationyaml#prerequisites
 [21]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[22]: /tracing/trace_collection/runtime_config/
