@@ -741,6 +741,13 @@
       "description": "Create a security filter returns \"OK\" response"
     }
   ],
+  "CreateSecurityMonitoringSuppression": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a suppression rule returns \"OK\" response"
+    }
+  ],
   "SearchSecurityMonitoringSignals": [
     {
       "group": "security_monitoring",
@@ -779,6 +786,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update a security filter returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringSuppression": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a suppression rule returns \"OK\" response"
     }
   ],
   "CreateScanningGroup": [

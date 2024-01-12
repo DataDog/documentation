@@ -7232,6 +7232,66 @@ api:
         - ListSecurityMonitoringRules
       unstable: []
       order: 4
+  - name: Update a suppression rule
+    url: '#update-a-suppression-rule'
+    identifier: security-monitoring-update-a-suppression-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateSecurityMonitoringSuppression
+      unstable: []
+      order: 0
+  - name: Get a suppression rule
+    url: '#get-a-suppression-rule'
+    identifier: security-monitoring-get-a-suppression-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSecurityMonitoringSuppression
+      unstable: []
+      order: 0
+  - name: Delete a suppression rule
+    url: '#delete-a-suppression-rule'
+    identifier: security-monitoring-delete-a-suppression-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteSecurityMonitoringSuppression
+      unstable: []
+      order: 0
+  - name: Create a suppression rule
+    url: '#create-a-suppression-rule'
+    identifier: security-monitoring-create-a-suppression-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateSecurityMonitoringSuppression
+      unstable: []
+      order: 0
+  - name: Get all suppression rules
+    url: '#get-all-suppression-rules'
+    identifier: security-monitoring-get-all-suppression-rules
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityMonitoringSuppressions
+      unstable: []
+      order: 0
   - name: Update a security filter
     url: '#update-a-security-filter'
     identifier: security-monitoring-update-a-security-filter
