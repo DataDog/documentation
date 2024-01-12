@@ -27,5 +27,5 @@ title: メトリクスガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Metrics Without LimitsTM" >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}Metrics Without LimitsTM - Metrics without LimitsTM でカスタムメトリクスのボリュームとコストを制御する方法をご覧ください {{< /nextlink >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}Metrics Without LimitsTM - Metrics without LimitsTM を使ってカスタムメトリクスのボリュームとコストをどう制御するか学びましょう {{< /nextlink >}}
 {{< /whatsnext >}}
