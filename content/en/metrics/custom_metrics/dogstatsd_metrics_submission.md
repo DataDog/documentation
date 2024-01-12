@@ -316,7 +316,7 @@ public class DogStatsdClient {
             .hostname("localhost")
             .port(8125)
             .build();
-        while (true) {
+        for (int i = 0; true; i++) {
             Statsd.recordGaugeValue("example_metric.gauge", i, new String[]{"environment:dev"});
             Thread.sleep(10000);
         }
@@ -346,7 +346,7 @@ public class DogStatsdClient
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
-            while (true)
+            for (int i = 0; true; i++)
             {
                 dogStatsdService.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(100000);
@@ -490,7 +490,7 @@ public class DogStatsdClient {
             .hostname("localhost")
             .port(8125)
             .build();
-        while (true) {
+        for (int i = 0; true; i++) {
             Statsd.recordSetValue("example_metric.set", i, new String[]{"environment:dev"});
             Thread.sleep(random.NextInt(10000));
         }
@@ -520,7 +520,7 @@ public class DogStatsdClient
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
-            while (true)
+            for (int i = 0; true; i++)
             {
                 dogStatsdService.Set("example_metric.set", i, tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(random.Next(100000));
