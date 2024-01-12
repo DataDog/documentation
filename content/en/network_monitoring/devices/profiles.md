@@ -64,6 +64,25 @@ Profiles can be used interchangeably, meaning devices that share MIB dependencie
 
 For more Datadog provided profiles, see the [GitHub repository][3].
 
+### Metadata definition by profile
+
+Profiles have a metadata section that can be used to define where and how metadata should be collected. Values can be static or come from an OID value.
+With Datadog Agent version 7.46 and later, a new `device_type` field is supported. Accepted values include:
+
+- access_point
+- firewall
+- load balancer
+- pdu
+- printer
+- router
+- sd-wan
+- sensor
+- server
+- storage
+- switch
+- ups
+- wlc
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
