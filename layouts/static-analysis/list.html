@@ -84,7 +84,7 @@
             */
 
             const containsFilteredValue = filterValues.every(t => t.length ? t.some(f => ruleFilterInfo.includes(f.split(',')[0].toLowerCase())) : true ) // checks filter attrs match at least one filter value. allows for multiple selection of a filter type.
-            const containsSearchValues = searchValues.some(word => ruleSearchInfo.includes(word.toLowerCase())) // checks search attrs match a typed query
+            const containsSearchValues = searchValues.every(word => ruleSearchInfo.includes(word.toLowerCase())) // checks search attrs match a typed query
 
             this.shouldShowRuleSet(ruleEl.closest('.ruleset'), containsSearchValues && containsFilteredValue)
 
