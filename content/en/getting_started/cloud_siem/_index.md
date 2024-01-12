@@ -127,7 +127,7 @@ After the index is moved to the first index position, review the settings and st
 [12]: /security/default_rules/#cat-cloud-siem-log-detection
 [13]: /security/detection_rules/
 [14]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29&column=time&order=desc&product=siem&view=signal&viz=stream&start=1676321431953&end=1676407831953&paused=false
-[15]: /security/explorer
+[15]: /security/cloud_siem/investigate_security_signals
 [16]: https://app.datadoghq.com/security/configuration/notification-rules
 [17]: /security/notifications/rules/
 [18]: https://app.datadoghq.com/security/investigator/
