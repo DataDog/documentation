@@ -19,7 +19,7 @@ further_reading:
 
 Error Tracking provides fine-grained control of which errors to ingest, helping you reduce noise and avoid unexpected costs.
 
-There are two ways that you can control what data is included in Error Tracking:
+You can define which data is included in Error Tracking in two ways:
 
 1. [Rules](#rules-inclusion)
 2. [Rate Limits](#rate-limits)
@@ -28,7 +28,7 @@ Rules and rate limits can be configured on the [**Logs** > **Error Tracking** > 
 
 ## Rules
 
-Rules allow you to select which errors are ingested into Error Tracking. 
+Rules allow you to select which errors are ingested into Error Tracking.
 
 Each rule consists of:
 - An inclusion filter, which contains a [log search query][3], such as `service:my-web-store`.
@@ -78,12 +78,12 @@ After the daily cap is reached, ingestion stops until the next day. You can modi
 To set a rate limit:
 1. Navigate to [**Logs** > **Error Tracking** > **Settings**][1].
 1. Click **Rate Limits**.
-1. Choose from the options in the **errors/month** dropdown.
+1. Edit the **errors/month** field.
 1. Click **Save Rate Limit**.
 
 {{< img src="logs/error_tracking/rate_limit.png" alt="rate limit setting" style="width:70%;">}}
 
-A `Rate limit applied` event is generated when the rate limit is reached.
+A `Rate limit applied` event is generated when the rate limit is reached. See the [Event Management documentation][4] for details on viewing and using events.
 
 {{< img src="logs/error_tracking/rate_limit_reached_event.png" alt="rate limit notification" style="width:70%;">}}
 
@@ -100,3 +100,4 @@ This metric is available by default at no additional cost, and its data is retai
 [1]: https://app.datadoghq.com/error-tracking/settings/rules
 [2]: /logs/error_tracking/#setup
 [3]: /logs/explorer/search_syntax/
+[4]: /service_management/events/
