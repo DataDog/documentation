@@ -83,7 +83,7 @@ Span currentSpan = Span.current();
 currentSpan.setAttributes("some-key", "some-value");
 
 // Add attributes to the local root span
-ContextKey<OtelSpan> localRootSpanKey = ContextKey.named("datadog-root-span-key");
+ContextKey<OtelSpan> localRootSpanKey = ContextKey.named("opentelemetry-traces-local-root-span");
 Span rootSpan = Context.current().get(localRootSpanKey);
 rootSpan.setAttributes("some-key", "some-value");
 ```
