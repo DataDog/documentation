@@ -41,7 +41,7 @@ This document walks you through the following:
 
 ## Permissions
 
-By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant `data_scanner_read` or `data_scanner_write` permissions under **Compliance**. See [Access Control][1] for details on how to set up roles and permissions.
+By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant `data_scanner_read` or `data_scanner_write` permissions under [Compliance][10]. See [Access Control][1] for details on how to set up roles and permissions.
 
 {{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:55%;">}}
 
@@ -191,3 +191,4 @@ When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][9] summari
 [7]: /logs/log_configuration/processors/?tab=ui#remapper
 [8]: https://app.datadoghq.com/logs/pipelines
 [9]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
+[10]: /account_management/rbac/permissions/#compliance
