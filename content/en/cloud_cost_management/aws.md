@@ -163,17 +163,17 @@ In contrast, other metrics show some private discounts as separate, negative-val
 The following scenario demonstrates how different cost types behave. Imagine you have:
 - An EC2 instance running for one hour with the cost of $3 per compute-hour.
 - A savings plan which prices this instance type at $2 per compute-hour.
-- A negotiated discount of 10% on top of all other discounts.
+- A negotiated EDP discount of 10% on top of all other discounts.
 
 Here's how the instance cost, savings plan, and discount appear in each cost type:
 
-|Cost type |Usage |Savings Plan |Discount | Explanation |
+|Cost type |Usage |Savings Plan Fee |EDP Discount | Explanation |
 |:---------|-|-|-|:------------------------------------------------|
 |On Demand |$3.00|||This is the public on-demand rate.|
-|Unblended |$3.00|$2.00|-$0.20|Savings plan and discounts are separate line items. (**Note:** the $3 resource cost is offset with `SavingsPlanNegation`.) |
-|Net Unblended||$1.80||Savings plan recurring fee appears as a line item with discount applied; the cost is not associated with a specific resource.|
-|Amortized |$2.00||-$0.20|Savings plan coverage is applied directly to the resource cost. Discount is a separate line item. |
-|Net Amortized |$1.80|||Savings plan coverage and discounts are applied directly to resource cost. |
+|Unblended |$3.00|$2.00|-$0.20|Savings plan recurring fee and EDP discount are separate line items, not associated with a specific resource. (**Note:** the $3 resource cost is offset with `SavingsPlanNegation`.) |
+|Net Unblended||$1.80||Savings plan recurring fee appears as a line item with the discount applied; the cost is not associated with a specific resource.|
+|Amortized |$2.00||-$0.20|Savings plan discount is applied directly to the resource cost. EDP discount is a separate line item. |
+|Net Amortized |$1.80|||Savings plan and EDP discounts are applied directly to resource cost. |
 |Net Amortized - Shared Resources Allocated |$1.80|||The same cost as Net Amortized, but this cost can be further broken down by Kubernetes dimensions and pod tags. |
 
 ### Cost metrics summary
