@@ -7,11 +7,11 @@ further_reading:
   text: "Remote Configuration"
 ---
 
+<div class="alert alert-info">This feature is in public beta.</div>
+
 ## Overview
 
 Configuration at runtime lets you modify APM library configuration from the Datadog UI, without needing to restart your application or service. You don't need to wait for a new deployment or code change to update your configuration. Instead, update it right away with configuration at runtime.
-
-This feature uses [Remote Configuration][1] to apply configurations to Datadog components in your environment.
 
 {{< img src="/tracing/runtime_config/runtime-config-nav.mp4" alt="Walk through Service Catalog to use configuration at runtime." video="true" style="width:100%;">}}
 
@@ -34,8 +34,6 @@ To make changes to a service's configuration at runtime:
 1. Change the configuration options as needed. See [supported configuration options](#supported-configuration-options) for more details.
 1. Click **Apply Configuration**.
 
-**Note**: You can also access configuration at runtime from the Trace View panel. Make sure you select an environment for your service to see it.
-
 In **Active Library Configuration**, you can see which options are configured for this service and the selected environment:
 
 {{< img src="/tracing/runtime_config/active-library-config.png" alt="From the Setup Guidance tab, you can see your active library configuration." style="width:100%;">}}
@@ -48,12 +46,12 @@ You can tell when the configuration changes have been successfully applied by re
 
 The following options are supported with configuration at runtime. The required tracer version is listed for each language: 
 
-| Option                                                                                                                                 | Java      | Javascript              | Python   | .NET      | Ruby      | Go        | PHP | C++ |
-|----------------------------------------------------------------------------------------------------------------------------------------|-----------|-------------------------|----------|-----------|-----------|-----------|-----|-----|
-| <h5>Custom sampling rate</h5>Set a global sampling rate for the library using `DD_TRACE_SAMPLE_RATE`.                                  | `1.17.0+` | `4.11+` `3.32+` `2.45+` | `2.5.0+` | `2.33.0+` | `1.13.0+` | `1.59.0+` |     |     |
-| <h5>Log injection</h5>Automatically inject trace correlation identifiers to correlate logs and traces by enabling `DD_LOGS_INJECTION`. | `1.17.0+` | `4.11+` `3.32+` `2.45+` | `2.5.0+` | `2.33.0+` | `1.13.0+` |           |     |     |
-| <h5>HTTP header tags</h5>Add HTTP header values as tags on traces using `DD_TRACE_HEADER_TAGS`.                                        | `1.17.0+` | `4.11+` `3.32+` `2.45+` | `2.5.0+` | `2.33.0+` | `1.13.0+` | `1.59.0+` |     |     |
-| <h5>Custom span tags</h5>Add specified tags to each span using `DD_TAGS`.                                                              |           | `4.23.0+` `3.44.0+`     | `2.5.0+` | `2.44.0+` |           | `1.59.0+` |     |     |
+| Option                                                                                                                                 | Java      | Javascript              | Python   | .NET      | Ruby      | Go        |
+|----------------------------------------------------------------------------------------------------------------------------------------|-----------|-------------------------|----------|-----------|-----------|-----------|
+| <h5>Custom sampling rate</h5>Set a global sampling rate for the library using `DD_TRACE_SAMPLE_RATE`.                                  | `1.17.0+` | `4.11+` `3.32+` `2.45+` | `2.5.0+` | `2.33.0+` | `1.13.0+` | `1.59.0+` |
+| <h5>Log injection</h5>Automatically inject trace correlation identifiers to correlate logs and traces by enabling `DD_LOGS_INJECTION`. | `1.17.0+` | `4.11+` `3.32+` `2.45+` | `2.5.0+` | `2.33.0+` | `1.13.0+` |           |
+| <h5>HTTP header tags</h5>Add HTTP header values as tags on traces using `DD_TRACE_HEADER_TAGS`.                                        | `1.17.0+` | `4.11+` `3.32+` `2.45+` | `2.5.0+` | `2.33.0+` | `1.13.0+` | `1.59.0+` |
+| <h5>Custom span tags</h5>Add specified tags to each span using `DD_TAGS`.                                                              |           | `4.23.0+` `3.44.0+`     | `2.5.0+` | `2.44.0+` |           | `1.59.0+` |
 
 ## Further reading
 
@@ -63,3 +61,4 @@ The following options are supported with configuration at runtime. The required 
 [2]: /agent/
 [3]: /tracing/service_catalog/
 [4]: /account_management/rbac/permissions/
+[5]: /tracing/trace_explorer/trace_view
