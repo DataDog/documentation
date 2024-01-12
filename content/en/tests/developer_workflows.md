@@ -88,7 +88,7 @@ IDE plugins and extensions are required to view your test in your IDE.
 
 ## Test summaries in GitHub pull requests
 
-Datadog integrates with GitHub to show test results summaries directly in your pull requests. The summary contains an overview of the tests executions, flakiness information, and error messages for failed tests in pull request comments.
+Datadog integrates with GitHub to show test results summaries directly in your pull requests. The summary contains an overview of the tests executions, flakiness information, error messages for failed tests, performance regressions and code coverage changes in pull request comments.
 
 {{< img src="ci/github_comments_light.png" alt="Datadog GitHub pull request comment preview" style="width:100%;">}}
 
