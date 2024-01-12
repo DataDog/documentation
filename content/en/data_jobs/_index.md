@@ -58,11 +58,15 @@ Clicking on a run opens a side panel with details of how much time was spent on 
 
 {{< img src="data_jobs/djm_run.png" alt="Data Jobs Monitoring > Run panel, Info tab" style="width:100%;" >}}
 
-You can also see task-level metrics for a specific Spark stage, so that you can identify data skew. See the distribution of time spent and data consumed by different tasks.
+On the **Infrastructure** tab, you can correlate the execution to infrastructure metrics.
 
-{{< img src="data_jobs/djm_run.png" alt="JData Jobs Monitoring > Run panel, Spark Task Metrics tab" style="width:100%;" >}}
+{{< img src="data_jobs/djm_run_infra.png" alt="Data Jobs Monitoring > Run panel, Info tab" style="width:100%;" >}}
 
-For a failed run, you can see the stack trace to determine where and how this failure occurred.
+To determine why a stage is taking a long time to complete,you can use the **Spark Task Metrics** tab to view task-level metrics for a specific Spark stage, so that you can identify data skew. See the distribution of time spent and data consumed by different tasks.
+
+{{< img src="data_jobs/djm_tasks.png" alt="JData Jobs Monitoring > Run panel, Spark Task Metrics tab" style="width:100%;" >}}
+
+For a failed run, look at the **Errors** tab to see the stack trace, which can help you determine where and how this failure occurred.
 
 {{< img src="data_jobs/djm_stacktrace.png" alt="Data Jobs Monitoring > Run panel, Errors tab" style="width:100%;" >}}
 
