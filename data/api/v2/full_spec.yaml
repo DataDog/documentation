@@ -453,6 +453,13 @@ components:
       required: true
       schema:
         type: string
+    SecurityMonitoringSuppressionID:
+      description: The ID of the suppression rule
+      in: path
+      name: suppression_id
+      required: true
+      schema:
+        type: string
     SensitiveDataScannerGroupID:
       description: The ID of a group of rules.
       in: path
@@ -16794,6 +16801,216 @@ components:
           description: The version of the rule.
           format: int64
           type: integer
+    SecurityMonitoringSuppression:
+      description: The suppression rule's properties.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionAttributes'
+        id:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionID'
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionType'
+      type: object
+    SecurityMonitoringSuppressionAttributes:
+      description: The attributes of the suppression rule.
+      properties:
+        creation_date:
+          description: A Unix millisecond timestamp given the creation date of the
+            suppression rule.
+          format: int64
+          type: integer
+        creator:
+          $ref: '#/components/schemas/SecurityMonitoringUser'
+        description:
+          description: A description for the suppression rule.
+          example: This rule suppresses low-severity signals in staging environments.
+          type: string
+        enabled:
+          description: Whether the suppression rule is enabled.
+          example: true
+          type: boolean
+        expiration_date:
+          description: A Unix millisecond timestamp giving an expiration date for
+            the suppression rule. After this date, it won't suppress signals anymore.
+          example: 1703187336000
+          format: int64
+          type: integer
+        name:
+          description: The name of the suppression rule.
+          example: Custom suppression
+          type: string
+        rule_query:
+          description: The rule query of the suppression rule, with the same syntax
+            as the search bar for detection rules.
+          example: type:log_detection source:cloudtrail
+          type: string
+        suppression_query:
+          description: The suppression query of the suppression rule. If a signal
+            matches this query, it is suppressed and not triggered. Same syntax as
+            the queries to search signals in the signal explorer.
+          example: env:staging status:low
+          type: string
+        update_date:
+          description: A Unix millisecond timestamp given the update date of the suppression
+            rule.
+          format: int64
+          type: integer
+        updater:
+          $ref: '#/components/schemas/SecurityMonitoringUser'
+        version:
+          description: The version of the suppression rule; it starts at 1, and is
+            incremented at each update.
+          example: 42
+          format: int32
+          maximum: 2147483647
+          type: integer
+      type: object
+    SecurityMonitoringSuppressionCreateAttributes:
+      description: Object containing the attributes of the suppression rule to be
+        created.
+      properties:
+        description:
+          description: A description for the suppression rule.
+          example: This rule suppresses low-severity signals in staging environments.
+          type: string
+        enabled:
+          description: Whether the suppression rule is enabled.
+          example: true
+          type: boolean
+        expiration_date:
+          description: A Unix millisecond timestamp giving an expiration date for
+            the suppression rule. After this date, it won't suppress signals anymore.
+          example: 1703187336000
+          format: int64
+          type: integer
+        name:
+          description: The name of the suppression rule.
+          example: Custom suppression
+          type: string
+        rule_query:
+          description: The rule query of the suppression rule, with the same syntax
+            as the search bar for detection rules.
+          example: type:log_detection source:cloudtrail
+          type: string
+        suppression_query:
+          description: The suppression query of the suppression rule. If a signal
+            matches this query, it is suppressed and is not triggered . Same syntax
+            as the queries to search signals in the signal explorer.
+          example: env:staging status:low
+          type: string
+      required:
+      - name
+      - enabled
+      - rule_query
+      - suppression_query
+      type: object
+    SecurityMonitoringSuppressionCreateData:
+      description: Object for a single suppression rule.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionCreateAttributes'
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionType'
+      required:
+      - type
+      - attributes
+      type: object
+    SecurityMonitoringSuppressionCreateRequest:
+      description: Request object that includes the suppression rule that you would
+        like to create.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionCreateData'
+      required:
+      - data
+      type: object
+    SecurityMonitoringSuppressionID:
+      description: The ID of the suppression rule.
+      example: 3dd-0uc-h1s
+      type: string
+    SecurityMonitoringSuppressionResponse:
+      description: Response object containing a single suppression rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringSuppression'
+      type: object
+    SecurityMonitoringSuppressionType:
+      default: suppressions
+      description: The type of the resource. The value should always be `suppressions`.
+      enum:
+      - suppressions
+      example: suppressions
+      type: string
+      x-enum-varnames:
+      - SUPPRESSIONS
+    SecurityMonitoringSuppressionUpdateAttributes:
+      description: The suppression rule properties to be updated.
+      properties:
+        description:
+          description: A description for the suppression rule.
+          example: This rule suppresses low-severity signals in staging environments.
+          type: string
+        enabled:
+          description: Whether the suppression rule is enabled.
+          example: true
+          type: boolean
+        expiration_date:
+          description: A Unix millisecond timestamp giving an expiration date for
+            the suppression rule. After this date, it won't suppress signals anymore.
+          example: 1703187336000
+          format: int64
+          type: integer
+        name:
+          description: The name of the suppression rule.
+          example: Custom suppression
+          type: string
+        rule_query:
+          description: The rule query of the suppression rule, with the same syntax
+            as the search bar for detection rules.
+          example: type:log_detection source:cloudtrail
+          type: string
+        suppression_query:
+          description: The suppression query of the suppression rule. If a signal
+            matches this query, it is suppressed and not triggered. Same syntax as
+            the queries to search signals in the signal explorer.
+          example: env:staging status:low
+          type: string
+        version:
+          description: The current version of the suppression. This is optional, but
+            it can help prevent concurrent modifications.
+          format: int32
+          maximum: 2147483647
+          type: integer
+      type: object
+    SecurityMonitoringSuppressionUpdateData:
+      description: The new suppression properties; partial updates are supported.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionUpdateAttributes'
+        type:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionType'
+      required:
+      - type
+      - attributes
+      type: object
+    SecurityMonitoringSuppressionUpdateRequest:
+      description: Request object containing the fields to update on the suppression
+        rule.
+      properties:
+        data:
+          $ref: '#/components/schemas/SecurityMonitoringSuppressionUpdateData'
+      required:
+      - data
+      type: object
+    SecurityMonitoringSuppressionsResponse:
+      description: Response object containing the available suppression rules.
+      properties:
+        data:
+          description: A list of suppressions objects.
+          items:
+            $ref: '#/components/schemas/SecurityMonitoringSuppression'
+          type: array
+      type: object
     SecurityMonitoringThirdPartyRootQuery:
       description: A query to be combined with the third party case query.
       properties:
@@ -16871,6 +17088,19 @@ components:
           type: string
       required:
       - uuid
+      type: object
+    SecurityMonitoringUser:
+      description: A user.
+      properties:
+        handle:
+          description: The handle of the user.
+          example: john.doe@datadoghq.com
+          type: string
+        name:
+          description: The name of the user.
+          example: John Doe
+          nullable: true
+          type: string
       type: object
     SensitiveDataScannerConfigRequest:
       description: Group reorder request.
@@ -31020,6 +31250,177 @@ paths:
       - Security Monitoring
       x-codegen-request-body-name: body
       x-menu-order: 15
+      x-undo:
+        type: idempotent
+  /api/v2/security_monitoring/configuration/suppressions:
+    get:
+      description: Get the list of all suppression rules.
+      operationId: ListSecurityMonitoringSuppressions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSuppressionsResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_suppressions_read
+      summary: Get all suppression rules
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
+      x-undo:
+        type: safe
+    post:
+      description: Create a new suppression rule.
+      operationId: CreateSecurityMonitoringSuppression
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringSuppressionCreateRequest'
+        description: The definition of the new suppression rule.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSuppressionResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '409':
+          $ref: '#/components/responses/ConflictResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_suppressions_write
+      summary: Create a suppression rule
+      tags:
+      - Security Monitoring
+      x-codegen-request-body-name: body
+      x-given:
+        suppression:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"type\": \"suppressions\",\n    \"attributes\":
+              {\n      \"enabled\": true,\n      \"name\": \"{{ unique }}\",\n      \"description\":
+              \"{{ unique }}\",\n      \"rule_query\": \"source:cloudtrail\",\n      \"suppression_query\":
+              \"env:test\"\n    }\n  }\n}"
+          step: there is a valid "suppression" in the system
+      x-menu-order: 0
+      x-undo:
+        operationId: DeleteSecurityMonitoringSuppression
+        parameters:
+        - name: suppression_id
+          source: data.id
+        type: unsafe
+  /api/v2/security_monitoring/configuration/suppressions/{suppression_id}:
+    delete:
+      description: Delete a specific suppression rule.
+      operationId: DeleteSecurityMonitoringSuppression
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringSuppressionID'
+      responses:
+        '204':
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_suppressions_write
+      summary: Delete a suppression rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
+      x-undo:
+        type: idempotent
+    get:
+      description: Get the details of a specific suppression rule.
+      operationId: GetSecurityMonitoringSuppression
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringSuppressionID'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSuppressionResponse'
+          description: OK
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_suppressions_read
+      summary: Get a suppression rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
+      x-undo:
+        type: safe
+    patch:
+      description: Update a specific suppression rule.
+      operationId: UpdateSecurityMonitoringSuppression
+      parameters:
+      - $ref: '#/components/parameters/SecurityMonitoringSuppressionID'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SecurityMonitoringSuppressionUpdateRequest'
+        description: New definition of the suppression rule. Supports partial updates.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SecurityMonitoringSuppressionResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '403':
+          $ref: '#/components/responses/NotAuthorizedResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '409':
+          $ref: '#/components/responses/ConcurrentModificationResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - security_monitoring_suppressions_write
+      summary: Update a suppression rule
+      tags:
+      - Security Monitoring
+      x-menu-order: 0
       x-undo:
         type: idempotent
   /api/v2/security_monitoring/rules:
