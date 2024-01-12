@@ -137,7 +137,7 @@ Attach the new S3 policy to the Datadog integration role.
 
 ## Cost types
 
-Visualize your ingested data using out-of-the-box cost types. Cloud cost metric names contain various terms that describe how they are calculated. The cost types differ mainly in how they report on discount rates and commitments (savings plans and reservations).
+Visualize your ingested data using out-of-the-box cost types. Cloud cost metric names contain various terms that describe how they are calculated. The cost types differ mainly in how they report on discount rates, savings plans and reservations.
 
 ### On-demand
 **On-demand** costs are the costs of usage at the public, on-demand rate published by AWS. This excludes all savings plans, reservations, discounts, taxes, and fees.
