@@ -4771,6 +4771,47 @@ main:
     identifier: coscreen_troubleshooting
     parent: coscreen
     weight: 1
+  - name: Cloudcraft
+    url: cloudcraft/
+    pre: cloudcraft
+    identifier: cloudcraft
+    parent: essentials_heading
+    weight: 270000
+  - name: FAQ
+    url: cloudcraft/faq/
+    identifier: cloudcraft_faq
+    parent: cloudcraft
+    weight: 1
+  - name: Getting started
+    url: cloudcraft/getting-started/
+    identifier: cloudcraft_getting_started
+    parent: cloudcraft
+    weight: 2
+  - name: Account Management
+    url: cloudcraft/account-management/
+    identifier: cloudcraft_account_management
+    parent: cloudcraft
+    weight: 3
+  - name: "Components: Common"
+    url: cloudcraft/components-common/
+    identifier: cloudcraft_components_common
+    parent: cloudcraft
+    weight: 4
+  - name: "Components: Azure"
+    url: cloudcraft/components-azure/
+    identifier: cloudcraft_components_azure
+    parent: cloudcraft
+    weight: 5
+  - name: "Components: AWS"
+    url: cloudcraft/components-aws/
+    identifier: cloudcraft_components_aws
+    parent: cloudcraft
+    weight: 6
+  - name: Advanced
+    url: cloudcraft/advanced/
+    identifier: cloudcraft_advanced
+    parent: cloudcraft
+    weight: 7
   - name: Account Management
     url: account_management/
     pre: cog-2
