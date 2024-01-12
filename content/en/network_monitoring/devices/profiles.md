@@ -83,6 +83,8 @@ With Datadog Agent version 7.46 and later, a new `device_type` field is supporte
 - ups
 - wlc
 
+To know more about the profiles format, see the [Profile Format Reference][4].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -91,3 +93,4 @@ With Datadog Agent version 7.46 and later, a new `device_type` field is supporte
 [1]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/generic-device.yaml
 [2]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-3850.yaml
 [3]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/default_profiles
+[4]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
