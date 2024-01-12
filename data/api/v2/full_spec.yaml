@@ -30706,10 +30706,9 @@ paths:
       x-menu-order: 1
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta. To request access,
-        fill out this [sign-up form](https://forms.gle/CcEyp1uJmZpxRv8U8),
+      x-unstable: '**Note**: This endpoint is in public beta.
 
-        and we will be in touch. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/scorecard/rules:
     get:
       description: Fetch all rules.
@@ -30853,10 +30852,9 @@ paths:
         - name: rule_id
           source: data.id
         type: unsafe
-      x-unstable: '**Note**: This endpoint is in private beta. To request access,
-        fill out this [sign-up form](https://forms.gle/CcEyp1uJmZpxRv8U8),
+      x-unstable: '**Note**: This endpoint is in public beta.
 
-        and we will be in touch. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/scorecard/rules/{rule_id}:
     delete:
       description: Deletes a single rule.
@@ -30885,10 +30883,9 @@ paths:
       x-menu-order: 3
       x-undo:
         type: idempotent
-      x-unstable: '**Note**: This endpoint is in private beta. To request access,
-        fill out this [sign-up form](https://forms.gle/CcEyp1uJmZpxRv8U8),
+      x-unstable: '**Note**: This endpoint is in public beta.
 
-        and we will be in touch. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/security/cloud_workload/policy/download:
     get:
       description: 'The download endpoint generates a Cloud Workload Security policy
