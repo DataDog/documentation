@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-The [Observability Pipelines Worker][1] can collect, process, and route logs and metrics from any source to any destination. Using Datadog, you can build and manage all of your Observability Pipelines Worker deployments at scale.
+The [Observability Pipelines Worker][1] can collect, process, and route logs from any source to any destination. Using Datadog, you can build and manage all of your Observability Pipelines Worker deployments at scale.
 
 This guide walks you through deploying the Worker in your common tools cluster and configuring it to send logs in a Datadog-rehydratable format to a cloud storage for archiving.
 
@@ -514,17 +514,13 @@ By default, a 288GB EBS drive is allocated to each instance, and the sample conf
 {{< /tabs >}}
 
 ## Connect the Datadog Agent to the Observability Pipelines Worker
-To send Datadog Agent logs and metrics to the Observability Pipelines Worker, update your agent configuration with the following:
+To send Datadog Agent logs to the Observability Pipelines Worker, update your agent configuration with the following:
 
 ```yaml
 observability_pipelines_worker:
   logs:
     enabled: true
     url: "http://<OPW_HOST>:8282"
-  metrics:
-    enabled: true
-    url: "http://<OPW_HOST>:8282"
-
 ```
 
 `OPW_HOST` is the IP of the load balancer or machine you set up earlier. For single-host Docker-based installs, this is the IP address of the underlying host. For Kubernetes-based installs, you can retrieve it by running the following command and copying the `EXTERNAL-IP`:
