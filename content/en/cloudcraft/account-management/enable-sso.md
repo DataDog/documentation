@@ -1,0 +1,59 @@
+---
+title: Enable SSO
+kind: guide
+---
+
+Enabling Single Sign-On (SSO) for your Cloudcraft account allows you and your teammates to simplify authentication and log-in to Cloudcraft.
+
+We support SSO via two methods:
+
+- **Google / G Suite SSO:** Available for all users of Cloudcraft, including Free and Pro accounts. Google Sign In does not require any additional setup, simply select **Sign in with Google** on our signup or login pages.
+- **SAML Enterprise SSO:** Available for Cloudcraft Enterprise accounts, SAML SSO federates with your organization's existing identity provider, allowing your users to login with their existing accounts and for your organization to centrally manage who has access to the application.
+
+This article is all about SAML Enterprise SSO and how to set it up in your account.
+
+## Setting up SAML/SSO
+
+<section class="alert alert-info">
+  <p>The SAML Enterprise SSO feature is only available for the Enterprise plan, and can only be configured by the account owner.</p>
+</section>
+
+Head to **User → Security & SSO** inside Cloudcraft.
+
+{{< img src="cloudcraft/account-management/enable-sso/security-and-sso.png" alt="Screenshot of a SAML Single Sign-On configuration interface with options for security settings and identity provider metadata upload." responsive="true" style="width:100%;">}}
+
+Next you will need to register Cloudcraft as a new application with your company SAML Identity Provider. To make things easier for you, we have instructions for Okta and Azure AD, as well as for identity providers in general.
+
+- [Enable SSO With Azure AD](https://help.cloudcraft.co/article/90-enable-sso-with-azure-ad)
+- [Enable SSO With Okta](https://help.cloudcraft.co/article/89-enable-sso-with-okta)
+- [Enable SSO With a Generic Identity Provider](https://help.cloudcraft.co/article/91-enable-sso-with-generic-idp)
+
+The details you need to create a new application with your identity provider can be found in the same modal window.
+
+{{< img src="cloudcraft/account-management/enable-sso/service-provider-details.png" alt="Image Description" responsive="true" style="width:100%;">}}
+
+After creating the application with your identify provider of choice, head back to Cloudcraft, and upload the metadata file from your identity provider to the blue dotted box.
+
+{{< img src="cloudcraft/account-management/enable-sso/idp-metadata.png" alt="Image Description" responsive="true" style="width:100%;">}}
+
+Lastly, toggle the **SAML Single Sign-On is enabled** option. Once you have verified that the SSO login is working as expected, if you prefer to have your users access Cloudcraft only via your identity provider, enable the **Strict mode** option.
+
+## Additional features
+
+Using SAML SSO with Cloudcraft enables some additional benefits that are especially helpful when managing a large number of users.
+
+### Just-in-Time User Provisioning
+
+With **Just-in-Time User Provisioning**, you can automatically create user accounts in Cloudcraft when signing in for users on your corporate email domain, without requiring an invitation.
+
+You can change the default team that users join at the bottom of the **Security & Single Sign-On** page.
+
+### Identity Provider (IdP) Initiated Login
+
+Allow signing in to Cloudcraft directly from your identity provider dashboard.
+
+### Strict Mode
+
+With **Strict mode** enabled, all users must log in with SAML SSO. Existing username/password or Google Sign In logins are disabled.
+
+Before enabling this option, please make sure that the SAML SSO login is working properly so that you do not end up locking yourself out.
