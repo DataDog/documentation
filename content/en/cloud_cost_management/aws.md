@@ -137,7 +137,7 @@ Attach the new S3 policy to the Datadog integration role.
 
 ## Cost types
 
-Visualize your ingested data using out-of-the-box cost types. Cloud cost metric names contain various terms that describe how they are calculated.
+Visualize your ingested data using out-of-the-box cost types. Cloud cost metric names contain various terms that describe how they are calculated. The cost types differ mainly in how they report on discount rates and commitments (savings plans and reservations).
 
 ### On-demand
 **On-demand** costs are the costs of usage at the public, on-demand rate published by AWS. This excludes all savings plans, reservations, discounts, taxes, and fees.
@@ -145,14 +145,14 @@ Visualize your ingested data using out-of-the-box cost types. Cloud cost metric 
 In most cases, on-demand costs are not a reliable source to estimate actual costs.
 
 ### Amortized and unblended costs
-**Amortized** cost metrics distribute discount commitments across the entire discount term. This is also called _accrual basis_. Each month, reservations are drawn down from a monthly commitment and applied to usage line items at the discounted rate. The remainder appears as an unused reservation fee, typically backdated to the first of the month.
+**Amortized** cost metrics distribute commitment savings throughout the discount term. This is also called _accrual basis_. Reservations and savings plans are drawn down from a monthly commitment and applied directly to covered usage, at the time of usage. This means the cost of usage includes the savings from the commitment. Any unused remainder appears as a fee.
 
-**Unblended** cost metrics show all charges on the date that they are incurred. This is also called _cost basis_. These metrics match the AWS invoice exactly after a month is finalized.
+In contrast, **unblended** cost metrics show all charges on the date that they are incurred. This is also called _cost basis_. Reservation and savings plan fees show up on the date they were charged, and are not applied directly to covered usage. After billing data for a month is finalized, unblended metrics match the AWS invoice exactly.
 
 ### Net costs
 **Net** costs apply private discounts directly to usage. The cost of usage for a specific resource represents the effective cost after all savings are realized.
 
-In contrast, other metrics show some private discounts as separate, negative-valued line items with no attribution tags. Rather than attributing the discounts directly to usage, those metrics subtract discounts from the total cost.
+In contrast, other metrics show private discounts as separate, negative-valued line items with no resource attribution tags. Rather than attributing the discounts directly to usage, those metrics subtract discounts from the total cost.
 
 **Net amortized** costs provide the most accurate representation for cost allocation, with all savings applied directly to usage. Net cost metrics are available if your AWS account has privately negotiated enterprise discounts. If your account doesn't have net metrics available, use **amortized** cost instead.
 
