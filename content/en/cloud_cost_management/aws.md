@@ -145,7 +145,7 @@ Visualize your ingested data using out-of-the-box cost types. Cloud cost metric 
 In most cases, on-demand costs are not a reliable source to estimate actual costs.
 
 ### Amortized and unblended costs
-**Amortized** cost metrics distribute commitment savings throughout the discount term. This is also called _accrual basis_. Reservations and savings plans are drawn down from a monthly commitment and applied directly to covered usage, at the time of usage. This means the cost of usage includes the savings from the commitment. Any unused remainder appears as a fee.
+**Amortized** cost metrics distribute commitment savings throughout the discount term. This is also called _accrual basis_. Reservations and savings plans are drawn down from a monthly commitment and applied directly to covered usage, at the time of usage. Any unused remainder appears as a fee.
 
 In contrast, **unblended** cost metrics show all charges on the date that they are incurred. This is also called _cost basis_. Reservation and savings plan fees show up on the date they were charged, and are not applied directly to covered usage. After billing data for a month is finalized, unblended metrics match the AWS invoice exactly.
 
