@@ -1,0 +1,14 @@
+---
+title: Getting started
+kind: guide
+---
+
+{{< whatsnext desc="General:" >}}
+    {{< nextlink href="cloudcraft/getting-started/connect-aws-account-with-cloudcraft">}}Connect your AWS account to Cloudcraft{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/getting-started/connect-azure-account-with-cloudcraft">}}Connect your Azure account with Cloudcraft{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/getting-started/connect-amazon-eks-cluster-with-cloudcraft">}}Connect an Amazon EKS cluster with Cloudcraft{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/getting-started/connect-an-azure-aks-cluster-with-cloudcraft">}}Connect an Azure AKS cluster with Cloudcraft{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/getting-started/create-your-first-cloudcraft-diagram">}}Create your first live AWS diagram{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/getting-started/use-filters-to-create-better-diagrams">}}How to use filters to create better diagrams{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/getting-started/system-requirements">}}System requirements{{< /nextlink >}}
+{{< /whatsnext >}}
