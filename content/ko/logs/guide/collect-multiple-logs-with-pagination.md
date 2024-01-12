@@ -5,7 +5,7 @@ further_reading:
   text: 로그 처리 방법 알아보기
 - link: /logs/log_configuration/parsing
   tag: 설명서
-  text: 파싱에 대해 배우기
+  text: 파싱에 대해 알아보기
 - link: /logs/live_tail/
   tag: 설명서
   text: Datadog 라이브 테일 기능
@@ -15,13 +15,13 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: 설명서
   text: Logging without limit*
-kind: 가이드
-title: Pagination으로 여러 로그 수집
+kind: guide
+title: 페이지네이션으로 여러 로그 수집
 ---
 
 ## 개요
 
-[Logs API][1]에서 반환한 최대 1000개 로그 제한보다 긴 로그 목록을 검색하려면 Pagination 기능을 사용해야 합니다.
+[Logs API][1]에서 반환한 최대 1000개 로그 제한보다 긴 로그 목록을 검색하려면 페이지네이션 기능을 사용해야 합니다.
 
 {{< tabs >}}
 
@@ -191,6 +191,6 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-*Logging Without Limits는 Datadog, Inc.의 상표입니다.
+*Logging without Limits는 Datadog, Inc.의 상표입니다.
 
 [1]: /ko/api/v1/logs/#get-a-list-of-logs
