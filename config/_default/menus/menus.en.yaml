@@ -3613,18 +3613,18 @@ main:
     parent: csm_threats_reference
     identifier: cws_agent_expressions
     weight: 704
-#  - name: CSM Misconfigurations
-#    parent: csm_reference
-#    identifier: csm_misconfigurations_reference
-#    weight: 506
+  - name: CSM Misconfigurations
+    parent: csm_reference
+    identifier: csm_misconfigurations_reference
+    weight: 506
   - name: Supported Frameworks
     url: security/misconfigurations/supported_frameworks
-    parent: csm_reference
+    parent: csm_misconfigurations_reference
     identifier: cspm_supported_frameworks
     weight: 802
   - name: How Datadog Determines if Resources are Publicly Accessible
     url: security/cloud_security_management/guide/public-accessibility-logic/
-    parent: csm_reference
+    parent: csm_misconfigurations_reference
     identifier: cspm_public_accessible
     weight: 804
   - name: Troubleshooting
