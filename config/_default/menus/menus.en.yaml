@@ -3598,18 +3598,19 @@ main:
     parent: csm_reference
     identifier: csm_severity_scoring
     weight: 502
-#  - name: CSM Threats
-#    parent: csm_reference
-#    identifier: csm_threats_reference
-#    weight: 504
+  - name: CSM Threats
+    url: security/cloud_security_management/reference/csm_threats
+    parent: csm_reference
+    identifier: csm_threats_reference
+    weight: 504
   - name: CWS Events Formats
     url: security/threats/backend
-    parent: csm_reference
+    parent: csm_threats_reference
     identifier: cws_backend_event_schema_documentation
     weight: 702
   - name: Custom Agent Rules Syntax
     url: security/threats/agent_expressions
-    parent: csm_reference
+    parent: csm_threats_reference
     identifier: cws_agent_expressions
     weight: 704
 #  - name: CSM Misconfigurations
