@@ -39,7 +39,7 @@ The trace header displays critical trace information, including the root span's 
 
 {{< img src="tracing/trace_view/flamegraph.png" alt="Flame Graph" style="width:90%;">}}
 
-The default visualization that displays all the spans for an associated trace, color-coded on a timeline. This is useful for understanding the execution path of a request and where time was spent over a trace.
+The Flame Graph is the default visualization that displays all the color-coded spans from a trace on a timeline. This is useful for understanding the execution path of a request and where time was spent over a trace.
 
 To navigate the graph, scroll to zoom, click and drag to move around, and use the minimap to zoom into the selected span or zoom out to the full trace.
 
