@@ -462,8 +462,7 @@ RUM supports several propagator types to connect resources with backends that ar
         // ...
     );
     config.firstPartyHosts = [
-        {match: "example.com", propagatorTypes: PropagatorType.TRACECONTEXT},
-        {match: "example.com", propagatorTypes: PropagatorType.DATADOG}
+        {match: "example.com", propagatorTypes: [PropagatorType.TRACECONTEXT, PropagatorType.DATADOG]}
     ];
     ```
 
