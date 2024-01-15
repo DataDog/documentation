@@ -81,6 +81,8 @@ View blocked security traces in the [Trace Explorer][11] by filtering on the fac
 
    If you need granular control, clone one of the available policy to create a custom policy where rule statuses can be modified. Associate one or more of your services with this custom policy.
 
+   If you would like to change the policy applied by default to your services, you can update your default policy. From the In-App-WAF, click on the policy you would like to set as default, then click on "Actions" > "Set this policy as default".
+
 ## Customize protection behavior
 
 ### Customize response to blocked requests
