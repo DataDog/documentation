@@ -12,7 +12,7 @@ further_reading:
   text: 'Continuous Testing in a CI/CD Pipeline'
 - link: '/getting_started/continuous_testing'
   tag: 'Documentation'
-  text: 'Learn about Continuous Testing'  
+  text: 'Learn about Continuous Testing'
 - link: '/synthetics/private_locations/#scale-your-private-location'
   tag: 'Documentation'
   text: 'Learn about Private Locations'
