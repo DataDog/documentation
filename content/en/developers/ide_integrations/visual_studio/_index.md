@@ -27,7 +27,7 @@ Stay informed about [Error Tracking](/tracing/error_tracking/) issues, [Security
 
 ### Continuous Profiler
 
-Analyze the performance of your applications with profiling metrics such as CPU time, allocated memory, lock wait time, and more.
+Analyze and improve the performance of your applications with real-time profiling metrics for CPU, Memory, I/O, and others.
 
 {{< img src="/developers/ide_integrations/visual_studio/top-list.png" alt="The Code Insights view">}}
 
@@ -48,19 +48,18 @@ Seamless experience for navigating from Datadog to your source code with a singl
 ### Setup and Installation
 
 1. Download and install the extension from the official [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio)
-2. Start Visual Studio
-3. Go to Tools > Options > Datadog
-4. Sign-in with your Datadog account, or [sign-up for a free trial](https://www.datadoghq.com/lpg/)
-5. Open a solution file in Visual Studio
-6. Go to Extensions > Datadog > Linked Services
-7. Click the Add Service button to associate services with your solution, and save the solution.
-8. Go to Extensions > Datadog > Code Insights
+2. In Visual Studio, go to Tools > Options > Datadog
+3. Sign-in with your Datadog account, or [sign-up for a free trial](https://www.datadoghq.com/lpg/)
+4. Open a solution in Visual Studio
+5. Go to Extensions > Datadog > Linked Services
+6. Add services and save your solution
+7. Go to Extensions > Datadog > Code Insights
 
-## Feedback and Support
+## Feedback
 
-Report a bug, request a new feature, or ask for help on our [discussion forum](https://github.com/DataDog/datadog-for-visual-studio/discussions) or [issue tracker](https://github.com/DataDog/datadog-for-visual-studio/issues) on GitHub. You can also send us an e-mail to `team-ide-integration@datadoghq.com`
+Report a bug, request a new feature, or ask for help on our [Discussion Forum](https://github.com/DataDog/datadog-for-visual-studio/discussions) and [Issue Tracker](https://github.com/DataDog/datadog-for-visual-studio/issues) on GitHub. You can also send us an e-mail to `team-ide-integration@datadoghq.com`
 
-## Further reading
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
