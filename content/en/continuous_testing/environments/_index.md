@@ -38,13 +38,13 @@ While [scheduled Synthetic tests focus only on publicly available production env
 
 Continuous Testing can reuse the same scenario from scheduled tests used against the production environment to test publicly available pre-production environments.
 
-Whether it's for a [blue/green deployment][3], or a dedicated staging environment, Continuous Testing allows you to reroute an existing scenario to a different environment using the `startUrlSubstitutionRegex`<!-- and `resourceUrlSubstitutionRegex`--> field.
+Whether it's for a [blue/green deployment][3], or a dedicated staging environment, Continuous Testing allows you to reroute an existing scenario to a different environment.
 
 For more information, see [Testing Multiple Environments][4].
 
 ## Testing while using proxies, firewalls, or VPNs
 
-Continuous Testing can test your application in the early steps of the development cycle, even behind a private network protected by a proxy, firewall, or VPN. 
+Continuous Testing can test your application in the early steps of the development cycle, even behind a private network protected by a proxy, firewall, or VPN.
 
 It can run the same scenario from scheduled Synthetic tests against changes deployed in a local server running on your development environment (such as a dev laptop), or in a CI/CD pipeline where your application is deployed in an ephemeral environments that lasts the same amount of time as the CI/CD job, or in a private staging environment.
 

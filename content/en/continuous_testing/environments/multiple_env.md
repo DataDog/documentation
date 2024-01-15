@@ -26,7 +26,7 @@ A Synthetic browser test starts the test scenario by navigating to a starting UR
 
 {{< img src="continuous_testing/continuous_testing_start-url_substitution.png" alt="Continuous Testing tunnel allows the Synthetics Worker to reach your private applications" width="100%" >}}
 
-When triggering a CI test, the `startUrl` field allows you to overwrite the first URL that a browser test navigates to or the URL used by an HTTP test request. You can specify this option through the global configuration file, the Synthetics configuration files (`*.synthetics.json`), or a command line flag.
+When triggering a CI test, the `startUrl` field allows you to overwrite the first URL that a browser test navigates to or the URL used by an HTTP test request. You can specify this option through the global configuration file, the Synthetics configuration files (`*.synthetics.json`), or the command line flag `--start-url`.
 
 ```shell
 yarn datadog-ci synthetics run-tests --public-id <public-id> --start-url "https://staging.my-app.com"
@@ -56,12 +56,12 @@ https://prod.my-app.com/(.*)|https://staging.my-app.com/$1
 The regular expression uses a capture group to capture the path of the URL. The rewriting rule produces a similar looking URL pointing to `staging.my-app.com`, and appending the captured group using `$1`. Given the URL `https://prod.my-app.com/product-page?productId=id`, it would rewrite it to `https://staging.my-app.com/product-page?productId=id`.
 
 A more complex substitution regex could look like the following: `(https?://)([^/]*)|$1<deployment-prefix>.$2`.
-With a URL such as `https://my-app.com/some/path`, it would rewrite it to `https://<deployment-prefix.my-app.com/some/path`.
-Notice that the URL path is not affected by the substitution regex.
+With a URL such as `https://my-app.com/some/path`, it would rewrite it to `https://<deployment-prefix>.my-app.com/some/path`.
+Notice that the URL path is not affected by the rewrite, because it's not part of the substitution regex.
 
 <div class="alert alert-info">
-Apart from the pipe <code>|</code> syntax presented above, <code>startUrlSubstitutionRegex</code> also supports the sed syntax with modifiers: <code>s|<regex>|<rewritting rule>|<modifiers></code>.</br></br>
-The sed syntax is often used with a slash `/` separator, for example: <code>s/<regex>/rewritting rule>/<modifier></code>. However, it can use any character as a delimiter. When working on a URL containing an abundant number of slashes, Datadog recommends using another character rather than escaping all slashes of the URL.
+Apart from the pipe <code>|</code> syntax presented above, <code>startUrlSubstitutionRegex</code> also supports the sed syntax with modifiers: <code>s|&lt;regex&gt;|&lt;rewritting rule&gt;|&lt;modifiers&gt;</code>.</br></br>
+The sed syntax is often used with a slash `/` separator, for example: <code>s/&lt;regex&gt;/&lt;rewritting rule&gt;/&lt;modifier&gt;</code>. However, it can use any character as a delimiter. When working on a URL containing an abundant number of slashes, Datadog recommends using another character rather than escaping all slashes of the URL.
 </div>
 
 With this tool, any scheduled test used on your production environment can be reused to point to a development environment.
