@@ -17,33 +17,33 @@ further_reading:
 
 Datadog extension for Visual Studio helps you find and fix bugs, security issues, and performance bottlenecks based on real-time observability data from your services and runtime environments.
 
-{{< img src="/developers/ide_integrations/visual_studio/datadog-for-visual-studio.png" alt="Datadog extension for Visual Studio" style="width:100%;" >}}
+{{< img src="/developers/ide_integrations/visual_studio/datadog-for-visual-studio.png" alt="Datadog extension for Visual Studio">}}
 
 ### Code Insights
 
 Stay informed about error tracking issues, security vulnerabilities, flaky tests, and profiling insights without leaving Visual Studio.
 
-{{< img src="/developers/ide_integrations/visual_studio/code-insights.png" alt="The Code Insights view" style="width:60%;" >}}
+{{< img src="/developers/ide_integrations/visual_studio/code-insights.png" alt="The Code Insights view">}}
 
 ### Continuous Profiler
 
 Analyze the performance of your applications with profiling metrics such as CPU time, allocated memory, lock wait time, and more.
 
-{{< img src="/developers/ide_integrations/visual_studio/top-list.png" alt="The Code Insights view" style="width:60%;" >}}
+{{< img src="/developers/ide_integrations/visual_studio/top-list.png" alt="The Code Insights view">}}
 
 ### Open in Visual Studio
 
 Seamless experience for navigating from Datadog to your source code with a single click.
 
-{{< img src="/developers/ide_integrations/visual_studio/view-in-visual-studio.png" alt="A stack trace on the Datadog platform showing the View in Visual Studio button." style="width:100%;" >}}
+{{< img src="/developers/ide_integrations/visual_studio/view-in-visual-studio.png" alt="A stack trace on the Datadog platform showing the View in Visual Studio button.">}}
 
 ## Getting Started
 
 ### Requirements
 
-* Windows Operating System 64-bit.
+* Windows operating system 64-bit.
 * Visual Studio 2022 64-bit Community, Professional, or Enterprise edition.
-* Datadog [Continuous Profiler](https://docs.datadoghq.com/profiler/) and [Source Code Integration](https://docs.datadoghq.com/integrations/guide/source-code-integration/) enabled. See [Enabling the Profiler](https://docs.datadoghq.com/profiler/enabling/dotnet/?tab=linux#enabling-the-profiler) for more information.
+* Datadog account with [Continuous Profiler](https://docs.datadoghq.com/profiler/) and [Source Code Integration](https://docs.datadoghq.com/integrations/guide/source-code-integration/) enabled. See [Enabling the Profiler](https://docs.datadoghq.com/profiler/enabling/dotnet/?tab=linux#enabling-the-profiler) for more information.
 
 ### Installation
 
@@ -51,9 +51,9 @@ Seamless experience for navigating from Datadog to your source code with a singl
 2. Start Visual Studio
 3. Go to Tools > Options > Datadog
 4. Sign-in with your Datadog account, or [sign-up for a free trial](https://www.datadoghq.com/lpg/)
-5. Open a solution in Visual Studio
+5. Open a solution file in Visual Studio
 6. Go to Extensions > Datadog > Linked Services
-7. Click the Add Service button to associate services with your solution
+7. Click the Add Service button to associate services with your solution, and save the solution.
 8. Go to Extensions > Datadog > Code Insights
 
 ## Help and Feedback
