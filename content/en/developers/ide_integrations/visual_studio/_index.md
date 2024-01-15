@@ -45,7 +45,7 @@ Seamless experience for navigating from Datadog to your source code with a singl
 * Visual Studio 2022 64-bit Community, Professional, or Enterprise edition.
 * Datadog account with [Continuous Profiler](https://docs.datadoghq.com/profiler/) and [Source Code Integration](https://docs.datadoghq.com/integrations/guide/source-code-integration/) enabled. See [Enabling the Profiler](https://docs.datadoghq.com/profiler/enabling/dotnet/?tab=linux#enabling-the-profiler) for more information.
 
-### Installation
+### Setup and Installation
 
 1. Download and install the extension from the official [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio)
 2. Start Visual Studio
@@ -56,9 +56,9 @@ Seamless experience for navigating from Datadog to your source code with a singl
 7. Click the Add Service button to associate services with your solution, and save the solution.
 8. Go to Extensions > Datadog > Code Insights
 
-## Help and Feedback
+## Feedback and Support
 
-Report a bug, request a new feature, or ask for help on our [discussion forum](https://github.com/DataDog/datadog-for-visual-studio/discussions) or [issue tracker](https://github.com/DataDog/datadog-for-visual-studio/issues) on GitHub. You can also send us an e-mail to `team-ide-integration@datadoghq.com`.
+Report a bug, request a new feature, or ask for help on our [discussion forum](https://github.com/DataDog/datadog-for-visual-studio/discussions) or [issue tracker](https://github.com/DataDog/datadog-for-visual-studio/issues) on GitHub. You can also send us an e-mail to `team-ide-integration@datadoghq.com`
 
 ## Further reading
 
