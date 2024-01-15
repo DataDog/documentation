@@ -78,8 +78,8 @@ For more information, see [Ingestion Mechanisms][4].<br>
 **Examples:**<br>
   - Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`
   - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`.
-  - Set the sample rate to 40% for services that have 'HTTP GET' resource name: `'[{"resource": "HTTP GET", "sample_rate": 0.4}]'`.
-  - Set the sample rate to 100% for services that have a 'tier' tag with the value 'premium': `'[{"tags": {"tier":"premium"}, "sample_rate": 1}]'`.
+  - Set the sample rate to 40% for services that have `HTTP GET` resource name: `'[{"resource": "HTTP GET", "sample_rate": 0.4}]'`.
+  - Set the sample rate to 100% for services that have a `tier` tag with the value `premium`: `'[{"tags": {"tier":"premium"}, "sample_rate": 1}]'`.
 
 `DD_TRACE_SAMPLE_RATE`
 : Enable ingestion rate control.
@@ -90,7 +90,7 @@ A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`
 For more information, see [Ingestion Mechanisms][5].<br>
 **Example:**<br>
   - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
-  - Set the sample rate to 100% for services that have a 'priority' tag with the value 'high': `'[{"tags": {"priority":"high"}, "sample_rate": 1}]'`.
+  - Set the sample rate to 100% for services that have a `priority` tag with the value `high`: `'[{"tags": {"priority":"high"}, "sample_rate": 1}]'`.
 
 `DD_TRACE_RATE_LIMIT`
 : Maximum number of spans to sample per-second, per-Go process. Defaults to 100 when DD_TRACE_SAMPLE_RATE is set. Otherwise, delegates rate limiting to the Datadog Agent.
