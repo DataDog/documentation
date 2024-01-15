@@ -61,7 +61,7 @@ Notice that the URL path is not affected by the rewrite, because it's not part o
 
 <div class="alert alert-info">
 Apart from the pipe <code>|</code> syntax presented above, <code>startUrlSubstitutionRegex</code> also supports the sed syntax with modifiers: <code>s|&lt;regex&gt;|&lt;rewritting rule&gt;|&lt;modifiers&gt;</code>.</br></br>
-The sed syntax is often used with a slash `/` separator, for example: <code>s/&lt;regex&gt;/&lt;rewritting rule&gt;/&lt;modifier&gt;</code>. However, it can use any character as a delimiter. When working on a URL containing an abundant number of slashes, Datadog recommends using another character rather than escaping all slashes of the URL.
+The sed syntax is often used with a slash <code>/</code> separator, for example: <code>s/&lt;regex&gt;/&lt;rewritting rule&gt;/&lt;modifier&gt;</code>. However, it can use any character as a delimiter. When working on a URL containing an abundant number of slashes, Datadog recommends using another character rather than escaping all slashes of the URL.
 </div>
 
 With this tool, any scheduled test used on your production environment can be reused to point to a development environment.
