@@ -2,6 +2,8 @@
 title: Trigger a workflow
 kind: documentation
 disable_toc: false
+algolia:
+  tags: ['workflow', 'workflows', 'workflow automation']
 aliases:
 - /workflows/trigger
 further_reading:
@@ -11,7 +13,7 @@ further_reading:
 - link: "dashboards"
   tag: "Documentation"
   text: "Find out more about setting up a dashboard"
-- link: "security/explorer"
+- link: "/security"
   tag: "Documentation"
   text: "Find out more about Security Signals"
 - link: "monitors"

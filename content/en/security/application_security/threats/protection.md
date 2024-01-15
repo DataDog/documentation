@@ -28,10 +28,7 @@ To leveraging protection capabilities for your service:
 
 You can block attackers that are flagged in ASM [Security Signals][5] temporarily or permanently. In the Signals Explorer, click into a signal to see what users and IP addresses are generating the signal, and optionally block them.
 
-{{< img src="/security/application_security/appsec-block-user-ip_v2.png" alt="A security signal panel in Datadog ASM, allowing to block the attackers' IPs" width="75%">}}
-
-
-From there, all ASM-protected services block incoming requests performed by the blocked IP or user, for the specified duration. All blocked traces are tagged with `security_response.block_ip` or `security_response.block_user` and displayed in the [Trace Explorer][6]. Services where ASM is disabled aren't protected.
+From there, all ASM-protected services block incoming requests performed by the blocked IP or user, for the specified duration. All blocked traces are tagged with `security_response.block_ip` or `security_response.block_user` and displayed in the [Trace Explorer][6]. Services where ASM is disabled aren't protected. See [Investigate Security Signals][20] for more information.
 
 ## Respond to threats in real time by automating attacker blocking
 
@@ -74,7 +71,7 @@ Manage In-App WAF by navigating to Security --> Application Security --> Configu
 
 View blocked security traces in the [Trace Explorer][11] by filtering on the facet `Blocked:true`.
 
-{{< img src="security/application_security/blocked-true.png" alt="ASM Trace Explorer filtered using facet Blocked set to true." style="width:100%;" >}}
+{{< img src="security/application_security/app_sec_blocked.png" alt="ASM Trace Explorer filtered using facet Blocked set to true." style="width:100%;" >}}
 
 ### Configure In-App WAF
 
@@ -84,7 +81,7 @@ View blocked security traces in the [Trace Explorer][11] by filtering on the fac
 
    If you need granular control, clone the _Datadog Recommended_ policy to create a custom policy where rule statuses can be modified. Associate one or more of your services with this custom policy.
 
-3. **Configure blocking for each service**. By default, no requests are blocked even if certain In-App WAF rule statuses are blocking. Navigate to **Security > Configuration > Application > [In-App WAF][13]** to turn on blocking mode for a service.
+3. **Configure blocking for each service**. By default, no requests are blocked even if certain In-App WAF rule statuses are blocking. Navigate to **Security > Configuration > Application > [In-App WAF][13]** to turn on blocking mode for a service. See [In-app WAF rules][19] for more information.
 
 ## Customize protection behavior
 
@@ -128,3 +125,5 @@ As important as it is for you to be able to apply protection granularly and redu
 [16]: https://app.datadoghq.com/security/configuration/asm/protection-behaviour
 [17]: https://docs.datadoghq.com/service_management/workflows/
 [18]: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY
+[19]: /security/application_security/threats/inapp_waf_rules/
+[20]: /security/application_security/threats/security_signals/

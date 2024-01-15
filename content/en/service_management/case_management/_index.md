@@ -112,7 +112,7 @@ From an individual case:
 [1]: https://app.datadoghq.com/cases
 [2]: /account_management/teams/
 [3]: https://app.datadoghq.com/cases/contexts/new
-[4]: /security/explorer#case-management
+[4]: https://app.datadoghq.com/security
 [5]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
 [6]: /service_management/incident_management/#describing-the-incident
 [7]: /notebooks/

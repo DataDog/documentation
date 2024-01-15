@@ -26,7 +26,7 @@ further_reading:
 
 ## Overview
 
-The [Observability Pipelines Worker][1] can collect, process, and route logs and metrics from any source to any destination. Using Datadog, you can build and manage all of your Observability Pipelines Worker deployments at scale.
+The [Observability Pipelines Worker][1] can collect, process, and route logs from any source to any destination. Using Datadog, you can build and manage all of your Observability Pipelines Worker deployments at scale.
 
 There are several ways to get started with the Observability Pipelines Worker.
 
@@ -87,7 +87,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 [3]: /observability_pipelines/configurations/
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
-1. Download the [Helm chart][1] for AWS EKS. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
+1. Download the [Helm chart values file][1] for AWS EKS. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
 
@@ -107,7 +107,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 [2]: /observability_pipelines/configurations/
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-1. Download the [Helm chart][1] for Azure AKS. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
+1. Download the [Helm chart values file][1] for Azure AKS. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
 
@@ -127,7 +127,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 [2]: /observability_pipelines/configurations/
 {{% /tab %}}
 {{% tab "Google GKE" %}}
-1. Download the [Helm chart][1] for Google GKE. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
+1. Download the [Helm chart values file][1] for Google GKE. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
 

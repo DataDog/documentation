@@ -698,6 +698,11 @@
   "CreateSLO": [
     {
       "group": "service_level_objectives",
+      "suffix": "_3765703239",
+      "description": "Create a time-slice SLO object returns \"OK\" response"
+    },
+    {
+      "group": "service_level_objectives",
       "suffix": "",
       "description": "Create an SLO object returns \"OK\" response"
     }
