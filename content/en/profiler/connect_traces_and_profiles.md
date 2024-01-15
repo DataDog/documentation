@@ -66,13 +66,13 @@ To enable the new [timeline feature](#span-execution-timeline-view) (beta):
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Code Hotspots (beta) identification is NOT enabled by default when you [turn on profiling for your Node.js service][1]. Enable it by setting this additional environment variable:
+Code Hotspots identification is enabled by default when you [turn on profiling for your Node.js service][1] on Linux and macOS. The feature is not available on Windows.
+
+Requires `dd-trace-js` version 5.0.0+, 4.24.0+ or 3.45.0+. It also works with versions 4.17.0+ or 3.38.0+, but with them you need to enable it by setting this additional environment variable:
 
 ```shell
 export DD_PROFILING_CODEHOTSPOTS_ENABLED=true
 ```
-
-Requires `dd-trace-js` version 4.17.0+ or 3.38.0+.
 
 [1]: /profiler/enabling/nodejs
 {{< /programming-lang >}}
@@ -271,13 +271,13 @@ Requires `dd-trace-rb` version 0.54.0+.
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Endpoint profiling (beta) is NOT enabled by default when you [turn on profiling for your Node.js service][1]. Enable it by setting this additional environment variables:
+Endpoint profiling is enabled by default when you [turn on profiling for your Node.js service][1] on Linux and macOS. The feature is not available on Windows.
+
+Requires `dd-trace-js` version 5.0.0+, 4.24.0+ or 3.45.0+. It also works with versions 4.17.0+ or 3.38.0+, but with them you need to enable it by setting this additional environment variable:
 
 ```shell
 export DD_PROFILING_ENDPOINT_COLLECTION_ENABLED=true
 ```
-
-Requires `dd-trace-js` version 4.17.0+ or 3.38.0+.
 
 [1]: /profiler/enabling/nodejs
 {{< /programming-lang >}}
