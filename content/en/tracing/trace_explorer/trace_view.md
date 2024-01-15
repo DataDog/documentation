@@ -53,7 +53,7 @@ The legend details the color coding of the flame graph. Group spans by either **
 
 {{< img src="tracing/trace_view/spanlist.png" alt="Trace View" style="width:90%;">}}
 
-Displays [resources][1] by grouping ([service][2] by default) and sorts them according to their count of spans. This visualization is useful for scanning latency information by resource or grouping.
+Displays [resources][1] by group ([service][2] by default) and sorts them according to their count of spans. This visualization is useful for scanning latency information by resource or grouping.
 
 Filter resources by type or naming information using the corresponding buttons and text-based search.
 
