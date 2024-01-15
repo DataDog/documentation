@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Most of the development cycle happens within private networks, which are usually inaccessible to Synthetic tests. With the help of [`datadog-ci`][2], you can establish a Continuous Testing tunnel that allow Synthetics Workers to reach the environments that your application is deployed on during the development cycle, such as your development laptop, a CI job, or a private staging environment.
+Most of the development cycle happens within private networks, which are usually inaccessible to Synthetic tests. With the help of [`datadog-ci`][2], you can establish a Continuous Testing tunnel that allows Synthetics Workers to reach the environments that your application is deployed on during the development cycle, such as your development laptop, a CI job, or a private staging environment.
 
 Datadog recommends using the testing tunnel if you need to launch Continuous Testing tests against local versions of your application without deploying a dedicated, long-lasting probing system such as a [private location][1]. You can also use the testing tunnel to trigger tests on short-lived cloud environments.
 
