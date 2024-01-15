@@ -7,7 +7,7 @@ is_beta: true
 further_reading:
 - link: "/getting_started/profiler/"
   tag: "Documentation"
-  text: "Getting Started with the Continuous Profiler"
+  text: "Getting started with the Continuous Profiler"
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about Source Code Integration"
