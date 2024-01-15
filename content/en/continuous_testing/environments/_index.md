@@ -32,7 +32,7 @@ In the context of [testing within a CI/CD pipeline, also known as shift-left tes
 
 {{< img src="continuous_testing/continuous_environments.png" alt="Continuous Testing can be used all along the development cycle, from the local development environment to staging to prod." width="100%" >}}
 
-While [scheduled Synthetic tests focus only on publicly available production environments][2], you can use Continuous Testing to test your application in any or all environments it's deployed in along the development cycle.
+While [scheduled Synthetic tests focus primarily on publicly available production environments][2], you can use Continuous Testing to test your application in any or all environments it's deployed in along the development cycle.
 
 ## Testing in multiple environments
 
