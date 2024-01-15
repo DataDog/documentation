@@ -41,7 +41,7 @@ This option allows you to reuse the same test scenario on both the production en
 
 ## Partially modifying the starting URL
 
-If some of your tests start at the homepage, or a similarly simple URL, the previous solution works fine, but it doesn't cover every use case. Blindly replacing the starting URL may remove the path from the URL that the scenario is expected to test, or some search query parameters that are required to trigger certain behavior of your application.
+If some of your tests start at the homepage, or a similarly simple URL, the previous solution works fine, but it doesn't cover every use case. Blindly replacing the starting URL may unintentionally remove the path or some search query parameters from the URL that the scenario is expected to test.
 
 In addition to `startUrl`, the `startUrlSubstitutionRegex` field allows you to modify the starting URL without overwriting it entirely. This option allows you to substitute parts of the default starting URL based on the provided regular expression.
 
