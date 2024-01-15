@@ -11,6 +11,9 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about Source Code Integration"
+- link: "https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio"
+  tag: "External Site"
+  text: "Visual Studio Marketplace"  
 ---
 
 ## Overview
@@ -41,9 +44,9 @@ Seamless experience for navigating from Datadog to your source code with a singl
 
 ### Requirements
 
-* Windows operating system 64-bit.
-* Visual Studio 2022 64-bit Community, Professional, or Enterprise edition.
-* Datadog account with [Continuous Profiler](https://docs.datadoghq.com/profiler/) and [Source Code Integration](https://docs.datadoghq.com/integrations/guide/source-code-integration/) enabled. See [Enabling the Profiler](https://docs.datadoghq.com/profiler/enabling/dotnet/?tab=linux#enabling-the-profiler) for more information.
+* Windows operating system 64-bit
+* Visual Studio 2022 64-bit Community, Professional, or Enterprise edition
+* Datadog account with [Continuous Profiler](/profiler/) and [Source Code Integration](/integrations/guide/source-code-integration/) enabled. For more information, see [Enabling the Profiler](/profiler/enabling/dotnet/?tab=linux#enabling-the-profiler)
 
 ### Setup and Installation
 
