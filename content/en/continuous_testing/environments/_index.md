@@ -46,7 +46,7 @@ For more information, see [Testing Multiple Environments][4].
 
 Continuous Testing can test your application in the early steps of the development cycle, even behind a private network protected by a proxy, firewall, or VPN.
 
-It can run the same scenario from scheduled Synthetic tests against changes deployed in a local server running on your development environment (such as a dev laptop), or in a CI/CD pipeline where your application is deployed in an ephemeral environments that lasts the same amount of time as the CI/CD job, or in a private staging environment.
+It can run the same scenario from scheduled Synthetic tests against changes deployed in a local server running on your development environment (such as a dev laptop), or in a CI/CD pipeline where your application is deployed in an ephemeral environment that lasts the same amount of time as the CI/CD job, or in a private staging environment.
 
 Continuous Testing provides a [testing tunnel][5] which allows the Synthetic managed location to reach private environments. For more information, see [Testing While Using Proxies, Firewalls, or VPNs][6].
 
