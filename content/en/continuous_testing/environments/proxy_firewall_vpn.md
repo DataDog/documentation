@@ -22,7 +22,7 @@ Datadog recommends using the testing tunnel if you need to launch Continuous Tes
 
 ## What is the testing tunnel?
 
-The testing tunnel is a functionality that comes with the [@datadog/datadog-ci][2] NPM package which is one of the methods Datadog provides to include your Synthetic tests as part of your CI/CD pipelines.
+The testing tunnel is a functionality that comes with the [@datadog/datadog-ci][2] NPM package, which is one of the methods Datadog provides to include your Synthetic tests as part of your CI/CD pipelines.
 
 The testing tunnel creates short-lived secure connections between your internal environments and the Datadog infrastructure, allowing you to swiftly trigger Synthetic HTTP and Browser tests on your private applications. This allows Datadog to access and test your internal applications.
 
