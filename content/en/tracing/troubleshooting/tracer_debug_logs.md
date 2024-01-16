@@ -434,26 +434,16 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 
 {{< programming-lang lang="php" >}}
 
-
-**Generating a span:**
+**Loading an integration:**
 
 ```text
-[Mon MM  DD 19:41:13 YYYY] [YYYY-MM-DDT19:41:13+00:00] [ddtrace] [debug] - Encoding span <span id> op: 'laravel.request' serv: 'Sample_Laravel_App' res: 'Closure unnamed_route' type 'web'
+[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Loaded integration web
 ```
 
-
-
-**Attempt to send a trace to the Agent:**
+**Attempting to send traces:**
 
 ```text
-[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - About to send trace(s) to the agent
-```
-
-
-**Trace successfully sent to the Agent:**
-
-```text
-[Mon MM  DD 19:56:23 2019] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Traces successfully sent to the agent
+[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [<PHP version>] [pid <INT>] [client <IP>] Flushing trace of size 10 to send-queue for http://datadog-agent:8126
 ```
 
 
