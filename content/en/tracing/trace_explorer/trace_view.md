@@ -104,7 +104,7 @@ The span header contains service, operation, and resource names of the selected 
 {{< tabs >}}
 {{% tab "Span Info" %}} 
 
-See all span metadata, including custom tags. Click on a span tag to update the search query in the Trace Explorer or copy the tag’s value to the clipboard.
+See all span metadata, including custom tags. Click on a span tag to update the search query in the Trace Explorer or copy the tag's value to the clipboard.
 
 Other information may be displayed under various conditions:
 - A git warning message (when git information is missing on a CI Test)
