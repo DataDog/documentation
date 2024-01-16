@@ -145,7 +145,7 @@ For example, to send 50% of the traces for the service named `my-service` and 10
 ```
 
 Starting from version [v1.60.0][2], for Go applications, set by-resource and by-tags sampling rules with the `DD_TRACE_SAMPLING_RULES` environment variable.
-For example, to send 50% of the traces for the service named `my-service` and 1% of the traces for the resource `GET api/list_documents` and 10% of the rest of the traces:
+For example, to send 1% of the traces for the resource `GET api/list_documents` and 10% of the rest of the traces:
 
 ```
 @env DD_TRACE_SAMPLE_RATE=0.1
