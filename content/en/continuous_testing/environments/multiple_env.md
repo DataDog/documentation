@@ -32,20 +32,16 @@ When triggering a CI test, the `startUrl` field allows you to overwrite the firs
 yarn datadog-ci synthetics run-tests --public-id <public-id> --start-url "https://staging.my-app.com"
 ```
 
-<!--
-Note: I'm not sure about that.
-This option also supports using environment variables to allow picking up the URL from the development environment that might expose it as environment variable: `--start-url "https://$DEPLOYMENT_PREFIX.my-app.com"`.
--->
 
-This option allows you to reuse the same test scenario on both the production environment and any development environments (such as staging) as long as they are publicly available. If some of your development environments are private, see [Testing While Using Proxies, Firewalls, or VPNs][3] to learn how to test against [private environments][4].
+This option allows you to reuse the same test scenario on both the production environment and other development environments (such as staging) as long as they are publicly available. To learn how to test against [private environments][4], see [Testing While Using Proxies, Firewalls, or VPNs][3].
 
 ## Partially modifying the starting URL
 
-If some of your tests start at the homepage, or a similarly simple URL, the previous solution works fine, but it doesn't cover every use case. Blindly replacing the starting URL may unintentionally remove the path or some search query parameters from the URL that the scenario is expected to test.
+If some of your tests start at the homepage, or a similarly simple URL, the previous solution works fine, but it doesn't cover every use case. Blindly replacing the starting URL may unintentionally remove the path or certain search query parameters from the URL that the scenario is expected to test.
 
 In addition to `startUrl`, the `startUrlSubstitutionRegex` field allows you to modify the starting URL without overwriting it entirely. This option allows you to substitute parts of the default starting URL based on the provided regular expression.
 
-This field expects a string containing two parts, separated by a pipe character `|`: `<regex>|<rewritting rule>`. The first part is the regex to apply to the default starting URL. The second is the expression to rewrite the URL.
+This field expects a string containing two parts, separated by a pipe character `|`: `<regex>|<rewriting rule>`. The first part is the regex to apply to the default starting URL. The second is the expression to rewrite the URL.
 
 A simple example looks like the following:
 

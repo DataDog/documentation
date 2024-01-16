@@ -209,6 +209,6 @@ You can restrict access to a browser test based on the roles in your organizatio
 [12]: /synthetics/browser_tests/actions/
 [13]: /account_management/rbac#custom-roles
 [14]: /account_management/rbac/#create-a-custom-role
-[15]: /continuous_testing/proxy_firewall_vpn
+[15]: /continuous_testing/environments/proxy_firewall_vpn
 [16]: /synthetics/guide/browser-tests-passkeys
 [17]: /monitors/notify/variables/?tab=is_alert#conditional-variables

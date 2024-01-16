@@ -9,7 +9,7 @@ further_reading:
   text: "Getting Started with Synthetic Monitoring"
 - link: "/continuous_testing/"
   tag: "Documentation"
-  text: "Learn about the Continuous Testing Tunnel"
+  text: "Learn about Continuous Testing"
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about Source Code Integration."

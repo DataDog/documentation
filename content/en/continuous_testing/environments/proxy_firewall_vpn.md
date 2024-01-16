@@ -1,5 +1,5 @@
 ---
-title: Testing While Using Proxies, Firewalls, or VPNs
+title: Testing With Proxies, Firewalls, or VPNs
 kind: documentation
 description: Learn how to set up Continuous Testing on a private environment.
 further_reading:
