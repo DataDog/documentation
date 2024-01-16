@@ -94,7 +94,7 @@ The following network-related attributes are attached automatically to all event
 |--------------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------|
 | `connectivity.status`                | string | Status of device network reachability (`connected` or `not connected`).                                       |
 | `connectivity.interfaces`            | array  | The list of available network interfaces (for example, `bluetooth`, `cellular`, `ethernet`, or `wifi`).                   |
-| `connectivity.effective_type`        | string | Cellular connection type reflecting the measured network performance (`slow-2g`, `2g`, `3g` or `4g`), [more details][18]. |
+| `connectivity.effective_type`        | string | [Effective connection type][18], reflecting the measured network performance (`slow-2g`, `2g`, `3g`, or `4g`). |
 
 
 ### Operating system
