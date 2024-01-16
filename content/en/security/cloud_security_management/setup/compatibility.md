@@ -25,15 +25,6 @@ further_reading:
 | AWS Fargate   |                       |             |                      |                     |
 
 
-## CSM Product 
-
-| Feature                          | CSM Enterprise                       | CSM Pro                   | Cloud Workload Security | 
-| -------------------------------- | ----------------------------|---------------------------|-------------------------|
-| CSM Misconfigurations            |    {{< X >}}                |   {{< X >}}               |
-| CSM Threats                      |    {{< X >}}                |                           | {{< X >}}
-| CSM Vulnerabilities              |    {{< X >}}                |   {{< X >}}               |
-| CSM Identity Risks               |    {{< X >}}                |                           |
-
 ## Scope of protection
 | Protection scope                  | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities  | CSM Identity Risks | 
 | ----------------------------------| --------------------- | ----------- | -------------------- | ------------------- |  
