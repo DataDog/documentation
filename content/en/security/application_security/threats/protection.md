@@ -77,11 +77,11 @@ View blocked security traces in the [Trace Explorer][11] by filtering on the fac
 
 1. [**Enable Remote Configuration**][2] so that your ASM-enabled services show up under In-App WAF. This is required to securely push In-App WAF configuration from your Datadog backend to the tracing library in your infrastructure. 
 
-2. **Associate your ASM/Remote Configuration-enabled services with a policy**. After Remote Configuration is enabled on a service, navigate to **Security > Protection > Application > [In-App WAF][9]**. The service will appears under the _Datadog Monitoring-only_ policy by default. Datadog Monitoring-only is a managed policy and is read-only, meaning you cannot modify the status (monitoring, blocking, or disabled) for individual rules.
+2. **Associate your ASM/Remote Configuration-enabled services with a policy**. After Remote Configuration is enabled on a service, navigate to **Security > Protection > Application > [In-App WAF][9]**. The service appears under the _Datadog Monitoring-only_ policy by default. Datadog Monitoring-only is a managed policy and is read-only, meaning you cannot modify the status (monitoring, blocking, or disabled) for individual rules.
 
-   If you need granular control, clone one of the available policy to create a custom policy where rule statuses can be modified. Associate one or more of your services with this custom policy.
+   If you need granular control, clone one of the available policies to create a custom policy where rule statuses can be modified. Associate one or more of your services with this custom policy.
 
-   If you would like to change the policy applied by default to your services, you can update your default policy. From the In-App-WAF, click on the policy you would like to set as default, then click on "Actions" > "Set this policy as default".
+   To change the policy applied by default to your services, you can update your default policy. From the In-App-WAF, click the policy you would like to set as default, then click **Actions** > **Set this policy as default**.
 
 ## Customize protection behavior
 
