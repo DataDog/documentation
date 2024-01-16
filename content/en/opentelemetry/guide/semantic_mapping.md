@@ -29,7 +29,7 @@ For more information, see [Unified Service Tagging][2].
 | `container.image.tag` | `image_tag` |
 | `container.runtime` | `runtime` |
 
-[Semantic conventions: containers](https://opentelemetry.io/docs/specs/semconv/resource/container/)
+Read more about [Semantic conventions: containers][3].
 
 Additional cloud provider specific attributes are also mapped.
 
