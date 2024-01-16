@@ -78,7 +78,7 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 
 ### How long are traces retained?
 
-These traces are retained for 15 days thanks to the `Synthetics Default` retention filter, [just like your classical APM traces][20].
+These traces are retained for 15 days with the `Synthetics Default` retention filter, [just like your classical APM traces][20].
 
 ## Further Reading
 

@@ -31,7 +31,7 @@ The following retention filters are enabled by default to ensure that you keep v
 - The [Intelligent Retention Filter](#datadog-intelligent-retention-filter) retains spans for every environment, service, operation, and resource for different latency distributions.
 - The `Error Default` retention filter indexes error spans with `status:error`. The retention rate and the query are configurable. For example, to capture production errors, set the query to `status:error, env:production`. Disable the retention filter if you do not want to capture the errors by default.
 - The `Application Security` retention filter is enabled if you are using Application Security Management. It ensures the retention of all spans in traces that have been identified as having an application security impact (an attack attempt).
-- The `Synthetics` retention filter is enabled if you are using Synthetics Monitoring. It ensures that traces generating from synthetics API and browser tests remain available by default. [Read more][15] about how to correlate Traces and Synthetics tests.
+- The `Synthetics` retention filter is enabled if you are using Synthetic Monitoring. It ensures that traces generated from synthetic API and browser tests remain available by default. See [Synthetic APM][15] for more information, including how to correlate traces with synthetic tests.
 
 
 In addition to these, you can create any number of additional [custom tag-based retention filters](#create-your-own-retention-filter) for your services, to capture the data that matters the most to your business.
