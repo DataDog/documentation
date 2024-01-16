@@ -2,25 +2,28 @@
 title: Investigate Sensitive Data Issues
 kind: documentation
 further_reading:
-- link: "/sensitive_data_scanner/"
-  tag: "Documentation"
-  text: "Set up Sensitive Data Scanner"
+    - link: "/sensitive_data_scanner/"
+      tag: "Documentation"
+      text: "Set up Sensitive Data Scanner"
+    - link: "https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/"
+      tag: "Blog"
+      text: "Discover, triage, and remediate sensitive data issues at scale with Sensitive Data Scanner"
 ---
 
 ## Overview
 
-Sensitive Data Scanner is a stream-based, pattern matching service that you can use to identify, tag, and optionally redact or hash sensitive data. When there is a sensitive data finding, you might have the following questions:
+Sensitive Data Scanner is a stream-based, pattern matching service used to identify, tag, and optionally redact or hash sensitive data. When a sensitive data issues is found, you might have the following questions:
 
 - What sensitive data has been exposed?
 - What is the priority of the sensitive data exposure?
 - How severe is the issue in terms of spread and volume?
 - Where did the sensitive data come from?
 
-The Sensitive Data Scanner's [Summary][1] page categorizes and prioritizes sensitive data findings so that you can investigate, collaborate, and document your findings, and answer those questions.
+The Sensitive Data Scanner's [Summary][1] page categorizes and prioritizes sensitive data issues so that you can investigate, collaborate, and document your findings, and answer those questions.
 
 {{<img src="sensitive_data_scanner/sds_summary_12_01_24.png" alt="The Sensitive Data Scanner summary page showing the number of sensitive data issues, the number of scanning rules enabled, and a list of issues" style="width:80%;">}}
 
-### Investigate sensitive data issues
+## Investigate sensitive data issues
 
 Use the [Summary][1] page to see all sensitive data issues within the selected timeframe and start investigating issues.
 
