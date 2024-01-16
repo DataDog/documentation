@@ -133,14 +133,15 @@
                 acc[lang.toLowerCase()] = displayName
                 return acc
             }, {})
-
+            
             Array.from(url.searchParams.entries()).forEach(([key, value]) => {
                 if (key === 'search'){
                     this.searchValue = value
                 } else if ((key === 'languages') && validLangsArr.some(l => l.replace(/\;\w./, '').toLowerCase() === value.toLowerCase())){
                     const logoName = this.lang_aliases[value.toLowerCase()] ?? value
                     const displayName = langAliasMap[value.toLowerCase()] ?? value
-                    this.filterTypes[key].push(`${displayName},https://static.datadoghq.com/static/images/logos/${logoName.toLowerCase()}_avatar.svg`)
+                    const langLookupName = langAliasMap[value.toLowerCase()] ? `,${value}`: ''
+                    this.filterTypes[key].push(`${displayName},https://static.datadoghq.com/static/images/logos/${logoName.toLowerCase()}_avatar.svg${langLookupName}`)
                 } else if (key != 'languages'){
                     this.filterTypes[key]?.push(value)
                 }
