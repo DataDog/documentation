@@ -76,13 +76,9 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 `x-datadog-sampling-priority: 1`
 : To make sure that the Agent keeps the trace.
 
-### How are APM quotas affected?
-
-The `x-datadog-origin: synthetics` header specifies to the APM backend that the traces are synthetically generated. The generated traces consequently do not impact your classical APM quotas.
-
 ### How long are traces retained?
 
-These traces are retained [just like your classical APM traces][20].
+These traces are retained for 15 days thanks to the `Synthetics Default` retention filter, [just like your classical APM traces][20].
 
 ## Further Reading
 
