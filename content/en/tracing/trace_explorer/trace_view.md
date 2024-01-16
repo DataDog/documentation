@@ -27,7 +27,7 @@ further_reading:
 
 View an individual [trace][1] to see all of its [spans][2] and associated metadata. Each trace can be visualized as either a Flame Graph, Span List, Waterfall, or Map.
 
-The trace header displays critical trace information, including the root span's service name, resource name, trace ID, end-to-end trace duration, and the trace start datetime. To retain a trace indefinitely, click **Open Full Page** and save the URL.
+The trace header displays critical trace information, including the root span's service name, resource name, trace ID, end-to-end trace duration, and the trace start time. To get a permalink to the trace, click **Open Full Page** and save the URL.
 
 {{< img src="tracing/trace_view/trace_header.png" alt="Trace header" style="width:90%;">}}
 
@@ -39,11 +39,11 @@ The trace header displays critical trace information, including the root span's 
 
 {{< img src="tracing/trace_view/flamegraph.png" alt="Flame Graph" style="width:90%;">}}
 
-The default visualization that displays all the spans for an associated trace, color-coded on a timeline. This is useful for understanding the execution path of a request and where time was spent over a trace.
+The Flame Graph is the default visualization that displays all the color-coded spans from a trace on a timeline. This is useful for understanding the execution path of a request and where time was spent over a trace.
 
 To navigate the graph, scroll to zoom, click and drag to move around, and use the minimap to zoom into the selected span or zoom out to the full trace.
 
-The legend details the color coding of the flame graph. Group spans by either **Service** (default), **Host**, or **Container**. Choose to display either the percentage of trace execution time (**% Exec Time**) or span count (**Spans**) by color grouping. If errors exist on spans in the trace, highlight them in the flame graph by selecting the **Errors** checkbox under **Filter Spans**.
+The legend details the color coding of the flame graph. Group spans by either **Service** (default), **Host**, or **Container**. Choose to display either the percentage of trace execution time (**% Exec Time**) or span count (**Spans**) by group. If errors exist on spans in the trace, highlight them in the flame graph by selecting the **Errors** checkbox under **Filter Spans**.
 
 {{< img src="tracing/trace_view/flamegraph_legend.mp4" alt="Flame Graph legend" video="true" style="width:90%;">}}
 
@@ -53,13 +53,13 @@ The legend details the color coding of the flame graph. Group spans by either **
 
 {{< img src="tracing/trace_view/spanlist.png" alt="Trace View" style="width:90%;">}}
 
-Displays [resources][1] by grouping ([service][2] by default) and sorts them according to their count of spans. This visualization is useful for scanning latency information by resource or grouping.
+Displays [resources][1] by group ([service][2] by default) and sorts them according to their count of spans. This visualization is useful for scanning latency information by resource or grouping.
 
 Filter resources by type or naming information using the corresponding buttons and text-based search.
 
 {{< img src="tracing/trace_view/spanlist_headers.png" alt="Span List headers" style="width:90%;">}}
 
-Sort groupings by clicking on the corresponding column header: **resource**, **spans**, **average duration**, **execution time**, or **percentage of trace execution time**.
+Groups can be sorted by clicking on the corresponding column header: **RESOURCE**, **SPANS**, average duration (**AVG DURATION**), execution time (**EXEC TIME**), or percentage of trace execution time (**% EXEC TIME**).
 
 [1]: /tracing/glossary/#resources
 [2]: /tracing/glossary/#services
@@ -71,7 +71,7 @@ To join the Waterfall private beta <a href="https://forms.gle/LjJR1ZbF1tNDv5JC6"
 
 {{< img src="tracing/trace_view/waterfall.png" alt="Waterfall" style="width:90%;">}}
 
-Displays all the spans for an associated trace, color-coded on separate rows and on a timeline. This visualization is useful for isolating relevant parts of a trace and understanding how asynchronous processes fit into the execution flow.
+Displays all the spans for an associated trace, color-coded on separate rows and on a timeline. This visualization is useful for isolating and focusing on relevant parts of a trace.
 
 On each row (that is, per span):
 * A bar (colored by service), whose length corresponds to the percentage of total trace duration
@@ -86,7 +86,7 @@ To expand or collapse span descendants, click the plus or minus button on any ro
 
 {{< img src="tracing/trace_view/map.png" alt="Map" style="width:90%;">}}
 
-Displays a service-level representation of the trace, with arrows showing the flow of calls between services. This visualization is useful for getting a high-level overview of the trace and the order in which services are called.
+Displays a representation of all the services involved in the trace. This visualization is useful for getting a high-level overview of the services' dependencies and transaction lifecycle at a service level.
 
 Hover over a service to highlight its parent and children, and click on it to focus on the service entry span.
 
