@@ -373,12 +373,12 @@
                                 {{ $lang_lookup_name := index (split . ";") 0 }}
                                 {{ $display_name := (index (split . ";") 1) | default . }}
                                 {{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" $lang_lookup_name "variant" "avatar") }}
-
-                                {{/*  store int_logo with filter value if int_logo is present e.g. "Javascript,int_logo url,<alias name>" */}}
+                                {{/*  store $int_logo and $lang_lookup_name with filter value if $int_logo is present. e.g. "Javascript,int_logo url,<alias name>" */}}
+                                {{ $value := (printf "%s,%s%s" $display_name $int_logo (cond (eq ((split . ";") | len) 2) (printf ",%s" $lang_lookup_name) ""))}}
                                 <input 
                                 id="{{ $lang_lookup_name | anchorize }}" 
                                 type="checkbox" 
-                                value='{{ cond ($int_logo | not ) . (printf "%s,%s%s" $display_name $int_logo (cond (eq ((split . ";") | len) 2) (printf ",%s" $lang_lookup_name) "")) }}' 
+                                value='{{ cond ($int_logo | not ) . $value }}' 
                                 x-model="filterTypes['{{$filter_type}}']"
                                 @change="resetFilteredRulesets"
                                 @change.debounce="pushState('{{ $filter_type }}', '{{ $lang_lookup_name }}')"
