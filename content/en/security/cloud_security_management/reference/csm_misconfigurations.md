@@ -1,4 +1,12 @@
 ---
 title: Cloud Security Management Misconfigurations Reference
-kind: documentation
+disable_toc: true
+disable_sidebar: true
+type: reference
+_build:
+  render: false
+cascade:
+  disable_toc: false
+  disable_sidebar: false
+  type: reference
 ---

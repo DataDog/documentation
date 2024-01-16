@@ -3456,7 +3456,7 @@ main:
     url: getting_started/cloud_security_management/
     parent: csm
     weight: 1
-  - name: Learn
+  - name: Concepts
     parent: csm
     identifier: csm_learn
     url: security/cloud_security_management/learn
@@ -3503,9 +3503,14 @@ main:
     weight: 10010
   - name: Configuration
     parent: csm
-    identifier: csm_indepth_guides
+    identifier: csm_indepth_guides_2
     url: security/cloud_security_management/configuration
     weight: 4
+  - name: Detection Rules
+    parent: csm
+    identifier: csm_indepth_guides
+    url: security/cloud_security_management/configuration
+    weight: 5
 #  - name: Detection Rules
 #    parent: csm_indepth_guides
 #    identifier: csm_detection_rules
