@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Sensitive Data Scanner is a stream-based, pattern matching service used to identify, tag, and optionally redact or hash sensitive data. When a sensitive data issues is found, you might have the following questions:
+Sensitive Data Scanner is a stream-based, pattern matching service used to identify, tag, and optionally redact or hash sensitive data. When a sensitive data issue is found, you might have the following questions:
 
 - What sensitive data has been exposed?
 - What is the priority of the sensitive data exposure?
