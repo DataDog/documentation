@@ -13,9 +13,9 @@ This feature is in public beta. If you have any feedback, contact <a href="https
 
 ## Overview
 
-The Datadog exporter supports sending system information about your hosts to Datadog, which you can see at the [Infrastructure List][6] tab. You can send this information in OTLP via the ['Resource' field][1] as part of any of the existing signals. This is supported under any [deployment pattern][9] including gateway deploys. 
+The Datadog exporter supports sending system information about your hosts to Datadog, which you can see at the [Infrastructure List][6] tab. You can send this information in OTLP through the ['Resource' field][1] as part of any of the existing signals. This is supported under any [deployment pattern][9] including gateway deploys. 
 
-We use [OpenTelemetry semantic conventions][2] to recognize system information about your hosts. You can use the [recommended setup for host metrics][3] to send the necessary metrics and resource attributes to Datadog or manually set this information in the way that best fits your infrastructure.
+We use [OpenTelemetry semantic conventions][2] to recognize system information about your hosts. You can use the [recommended setup for host metrics][3] to send the necessary metrics and resource attributes to Datadog. Alternatively, you can manually send this information in the way that best fits your infrastructure.
 
 During the **public beta** you need to opt-in by setting the `datadog.host.use_as_metadata` resource attribute to `true` in all OTLP payloads with information relevant about hosts.
 
@@ -25,7 +25,7 @@ Resources are used to populate the infrastructure list information if they have 
 
 To explicitly declare what resources should be used for metadata, add a boolean-valued resource attribute called `datadog.host.use_as_metadata` to all resources that have relevant host information.
 
-For example, to set this for all resources in metrics, traces and logs, you can use the [transform processor][7] with the following configuration:
+For example, to set this for all resources in metrics, traces, and logs, you can use the [transform processor][7] with the following configuration:
 
 ```yaml
 processors:
@@ -38,7 +38,7 @@ processors:
       - context: resource
         statements:
           - set(attributes["datadog.host.use_as_metadata"], true)
-	log_statements:
+    log_statements:
       - context: resource
         statements:
           - set(attributes["datadog.host.use_as_metadata"], true)
@@ -82,9 +82,9 @@ The following network related conventions are supported:
 
 ### How to collect these conventions with the OpenTelemetry Collector?
 
-To collect these conventions with the OpenTelemetry Collector, you need to set up the [recommended setup for host metrics][3]. The host metrics receiver will collect all the relevant metrics, while the resource detection processor will collect all relevant resource attributes.
+To collect these conventions with the OpenTelemetry Collector, you need to set up the [recommended setup for host metrics][3]. The host metrics receiver collects all the relevant metrics, while the resource detection processor collects all relevant resource attributes.
 
-Note that you will need to use these processors and receivers in the host that you want to monitor. A gateway host will not be able to collect this information from remote hosts.
+**Note:** You need to add these processors and receivers in the Collector running on the host that you want to monitor. A gateway host is not able to collect this information from remote hosts.
 
 ## Further reading
 
