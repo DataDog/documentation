@@ -23,7 +23,7 @@ The Sensitive Data Scanner's [Summary][1] page categorizes and prioritizes sensi
 
 {{<img src="sensitive_data_scanner/sds_summary_12_01_24.png" alt="The Sensitive Data Scanner summary page showing the number of sensitive data issues, the number of scanning rules enabled, and a list of issues" style="width:80%;">}}
 
-## Investigate sensitive data issues
+## Triage sensitive data issues
 
 Use the [Summary][1] page to see all sensitive data issues within the selected timeframe and start investigating issues.
 
