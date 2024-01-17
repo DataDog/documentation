@@ -4,7 +4,6 @@ kind: documentation
 is_beta: true
 aliases:
     - /real_user_monitoring/roku/
-code_lang: roku
 type: multi-code-lang
 code_lang_weight: 60
 further_reading:
@@ -24,10 +23,6 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
-
-{{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-info">RUM for Roku is in beta.</div>
 {{< /site-region >}}
 
 ## Overview
