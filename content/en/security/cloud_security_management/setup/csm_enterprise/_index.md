@@ -24,11 +24,15 @@ further_reading:
 
 The Cloud Security Management (CSM) Enterprise package includes [CSM Threats][1], [CSM Misconfigurations][2] (cloud accounts and Agent), [CSM Identity Risks][3], and [CSM Vulnerabilities][4] (container images and hosts). To learn more about the available CSM packages, see [Setting up Cloud Security Management][8].
 
-## Enable resource scanning for cloud accounts
+## Getting started
+
+To enable CSM Enterprise on your infrastructure, complete the following steps:
+
+### Enable resource scanning for cloud accounts
 
 To enable resource scanning for your cloud accounts, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, and Google Cloud project. For detailed instructions, see [Enable CSM Enterprise for Cloud Accounts][22].
 
-## Enable CSM Enterprise on the Agent
+### Enable CSM Enterprise on the Agent
 
 Select your infrastructure type for details on how to enable CSM Enterprise on the Agent.
 
@@ -36,7 +40,7 @@ Select your infrastructure type for details on how to enable CSM Enterprise on t
 
 <br>
 
-## Enable CloudTrail logs forwarding
+### Set up CloudTrail logs forwarding
 
 Set up AWS CloudTrail logs forwarding to enable CSM Identity Risks and address over-permissive entitlements and risky IAM resources. For detailed instructions, see [Enable CSM Enterprise for Cloud Accounts][22].
 
