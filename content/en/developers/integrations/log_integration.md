@@ -69,6 +69,12 @@ To set up a log pipeline:
 4. Optionally, add tags and a description.
 5. Click **Create**.
 
+To export a log pipeline:
+
+1. 
+
+{{< img src="developers/integrations/export_pipeline.png" alt="Click the Export Pipeline icon to export your log pipeline in Datadog" width="80%">}}
+
 You can add processors within your pipelines to restructure your data and generate attributes.
 
 **Requirements:**
