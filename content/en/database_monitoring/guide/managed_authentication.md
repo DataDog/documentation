@@ -105,7 +105,7 @@ GRANT rds_iam TO datadog;
 ```
 
 
-**Note:** this has to be a new user created without a password, otherwise IAM authentication will fail.
+**Note:** this has to be a new user created without a password, or IAM authentication will fail.
 
 4. Complete the Agent setup steps for your [RDS][6] or [Aurora][7] instance.
 
