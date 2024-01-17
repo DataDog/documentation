@@ -70,32 +70,9 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
     </tr>
 </table>
 
-## Prerequisites
-
-{{< tabs >}}
-{{% tab "CSM Enterprise" %}}
-
-{{% csm-prereqs-enterprise %}}
-
-{{% /tab %}}
-
-{{% tab "CSM Pro" %}}
-
-{{% csm-prereqs-pro %}}
-
-{{% /tab %}}
-
-{{% tab "CSM Workload Security" %}}
-
-{{% csm-prereqs-workload-security %}}
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
 ## Next steps
 
-To get started setting up CSM, navigate to the [**Security** > **Setup**][4] section in Datadog, which has detailed steps on how to set up and configure CSM. For detailed instructions, see the [CSM Enterprise][1], [CSM Pro][2], and [CSM Workload Security][3] setup docs.
+To get started setting up CSM, navigate to the [**Security** > **Setup**][4] section in Datadog, which has detailed steps on how to set up and configure CSM. To check that your platform and versions are supported, see [compatibility and prerequisites][6]. For detailed setup instructions, see the [CSM Enterprise][1], [CSM Pro][2], and [CSM Workload Security][3] setup docs.
 
 ## Further Reading
 
@@ -106,4 +83,5 @@ To get started setting up CSM, navigate to the [**Security** > **Setup**][4] sec
 [3]: /security/cloud_security_management/setup/csm_workload_security
 [4]: https://app.datadoghq.com/security/configuration/csm/setup
 [5]: /security/identity_risks/#setup
+[6]: /security/cloud_security_management/setup/compatibility
 

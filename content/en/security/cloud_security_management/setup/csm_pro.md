@@ -15,10 +15,6 @@ further_reading:
 
 The Cloud Security Management (CSM) Pro package includes [CSM Misconfigurations][1] (cloud accounts) and [CSM Vulnerabilities][2] (container images). To learn more about the available CSM packages, see [Setting up Cloud Security Management][3].
 
-## Prerequisites
-
-{{% csm-prereqs-pro %}}
-
 ## Enable resource scanning for cloud accounts
 
 To enable resource scanning for your cloud accounts for CSM Misconfigurations, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, and Google Cloud project.

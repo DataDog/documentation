@@ -1,5 +1,5 @@
 ---
-title: Compatibility 
+title: CSM Compatibility 
 kind: documentation
 further_reading:
 - link: "/security/cloud_security_management/setup/csm_enterprise"
@@ -8,9 +8,16 @@ further_reading:
 - link: "/security/cloud_security_management/setup/csm_pro"
   tag: "Documentation"
   text: "Setting up CSM Pro"
+- link: "/security/cloud_security_management/setup/csm_workload_security"
+  tag: "Documentation"
+  text: "Setting up CSM Workload Security"
 ---
 
-## Supported CSM deployment types
+## Prerequisites
+
+Datadog Agent `7.46` or later installed on your hosts or containers. 
+
+## Supported deployment types and features
 
 | Type          | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities | CSM Identity Risks | 
 | ------------- | --------------------- | ----------- | -------------------- | ------------------- |  
@@ -18,30 +25,14 @@ further_reading:
 | Kubernetes    | {{< X >}}             | {{< X >}}   |  {{< X >}}           |                     | 
 | Linux         | {{< X >}}             | {{< X >}}   |  {{< X >}}           |                     |  
 | Amazon ECS    | {{< X >}}             | {{< X >}}   |  {{< X >}}           |                     |    
-| AWS Account   |  {{< X >}}            |             |                      | {{< X >}}           |
-| Azure Account |  {{< X >}}            |             |                      |                     |
-| GCP Account   |  {{< X >}}            |             |                      |                     |
+| AWS Account   | {{< X >}}             |             |                      | {{< X >}}           |
+| Azure Account | {{< X >}}             |             |                      |                     |
+| GCP Account   | {{< X >}}             |             |                      |                     |
 | Windows       |                       |  beta       |                      |                     |
-| AWS Fargate   |                       |             |                      |                     |
+| AWS Fargate   |                       |  beta       |                      |                     |
 
 
-## Scope of protection
-| Protection scope                  | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities  | CSM Identity Risks | 
-| ----------------------------------| --------------------- | ----------- | -------------------- | ------------------- |  
-| Resources in AWS Account          | {{< X >}}             |             |                      |                     |  
-| Resources in Azure Subscription   | {{< X >}}             |             |                      |                     | 
-| Resources in GCP Project          | {{< X >}}             |             |                      |                     |  
-| Kubernetes Cluster                | {{< X >}}             | {{< X >}}   |                      |                     |  
-| Docker Host                       | {{< X >}}             |             |                      |                     |
-| Linux Host                        | {{< X >}}             | {{< X >}}   |    {{< X >}}         |                     |  
-| Docker Container                  |                       | {{< X >}}   |                      |                     |
-| Container Image                   |                       |             |    {{< X >}}         |                     |
-| IAM in AWS Account                |                       |             |                      |  {{< X >}}          |
-
-
-
-
-
+{{% csm-prereqs %}}
 
 ## Further Reading
 

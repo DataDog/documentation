@@ -1,7 +1,4 @@
 
-
-Datadog Agent `7.46` or later installed on your hosts or containers.  
-
 ### CSM Threats
 
 CSM Threats supports the following Linux distributions:
@@ -28,10 +25,8 @@ CSM Threats supports the following Linux distributions:
 | [Helm Chart][103]            | v3.49.6 or later (Kubernetes only)      |
 | [containerd][104]              | v1.5.6 or later (Kubernetes and hosts only)|
 
-**Note**: CSM Vulnerabilities is **not** available for the following environments:
+**Note**: CSM Vulnerabilities is **not** available for the following container runtimes:
 
-  - Windows
-  - AWS Fargate 
   - CRI-O runtime
   - podman runtime
 

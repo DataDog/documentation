@@ -84,6 +84,6 @@ The workaround for this issue is to set the configuration option `discard_unpack
 [2]: /security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/metric/summary
-[5]: /security/cloud_security_management/setup?tab=csmenterprise#csm-vulnerabilities
+[5]: /security/cloud_security_management/setup/compatibility
 [6]: /security/cloud_security_management/troubleshooting
 [7]: /containers/kubernetes/installation/?tab=helm
