@@ -22,7 +22,6 @@ To use the Datadog Profiler, use at least the minimum versions summarized in the
 |-----------------------------------|:------------:|:----------------:|:-------------:|:--------------:|:-------------:|:-----------------------------------------------------------------------:|:-------------:|:---------------:|
 | <strong>Minimum&nbsp;runtime&nbsp;version</strong> | [JDK&nbsp;8+][17]  | Python&nbsp;2.7+ | Go&nbsp;1.19+ | Ruby&nbsp;2.3+ | Node&nbsp;14+ | .NET&nbsp;Core&nbsp;2.1+, .NET&nbsp;5+, .NET&nbsp;Framework&nbsp;4.6.1+ | PHP&nbsp;7.1+ |                 |
 | <strong>Recommended runtime version</strong>       | [JDK&nbsp;11+][17] | Python&nbsp;3.6+ | Go&nbsp;1.21+ | Ruby&nbsp;3.1+ | Node&nbsp;18+ |                              .NET&nbsp;6+                               | PHP&nbsp;8.0+ |                 |
-| <strong>Minimum tracer version</strong>            |              |      0.35.0      |    1.23.0     |     0.48.0     |    0.23.0     |                                  2.7.0                                  | 0.71.0        |                 |
 | <strong>Recommended tracer version</strong>        | [latest][9]  |   [latest][10]   | [latest][11]  |  [latest][12]  | [latest][13]  |                              [latest][14]                               | [latest][15]  |  [latest][16]   |
 
 ## Profile types
