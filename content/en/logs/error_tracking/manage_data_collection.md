@@ -19,7 +19,7 @@ further_reading:
 
 Error Tracking provides fine-grained control of which errors to ingest, helping you reduce noise and avoid unexpected costs.
 
-You can define which data is included in Error Tracking in two ways:
+You can define what data is included in Error Tracking in two ways:
 
 1. [Rules](#rules-inclusion)
 2. [Rate Limits](#rate-limits)
