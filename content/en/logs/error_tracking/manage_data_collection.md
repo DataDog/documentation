@@ -85,7 +85,7 @@ To set a rate limit:
 
 A `Rate limit applied` event is generated when the rate limit is reached. See the [Event Management documentation][4] for details on viewing and using events.
 
-{{< img src="logs/error_tracking/rate_limit_reached_event.png" alt="rate limit notification" style="width:70%;">}}
+{{< img src="logs/error_tracking/rate_limit_reached_event.png" alt="Screenshot of a 'Rate limit applied' event in the Event Explorer. The event's status is INFO, the source is Error Tracking, the timestamp reads '6h ago', and the title is 'Rate limit applied.' The event is tagged 'source:error_tracking'. The message reads 'Your rate limit has been applied as more than 60000000 logs error events were sent to Error Tracking. Rate limit can be changed from the ingestion control page. " style="width:70%;">}}
 
 ## Monitoring usage
 
