@@ -656,7 +656,7 @@ OpenShift로 Datadog를 실행하는 방법은 [datadog-openshift][1] 레포를 
 {{< tabs >}}
 {{% tab "Ansible" %}}
 
-<div class="alert alert-info">Datadog Ansible 컬렉션은 Debian, RHEL 기반 및 SUSE 기반 Linux 배포, macOS, Windows를 대부분 지원합니다.<br> Ansible 버전 2.10 이상이 필요합니다.
+<div class="alert alert-info">Datadog Ansible 컬렉션은 Debian, RHEL 기반 및 SUSE 기반 Linux 배포, macOS, Windows를 대부분 지원합니다.<br> Ansible 버전 2.10 이상이 필요합니다.</div>
 
 ### 필수 요구 사항
 
@@ -946,7 +946,7 @@ node "elastic-node1.mydomain.com" {
 
 ## 소스에서 설치
 
-<div class="alert alert-info">Datadog 에이전트를 사용하려면 Linux에 Python 2.7과 <code>sysstat</code>이 필요합니다.
+<div class="alert alert-info">Datadog 에이전트를 사용하려면 Linux에 Python 2.7과 <code>sysstat</code>이 필요합니다.</div>
 
 원스텝 소스 설치 스크립트를 사용하세요. `MY_API_KEY`를 내 Datadog API 키로 변경하세요.
 ```shell
