@@ -69,12 +69,6 @@ To set up a log pipeline:
 4. Optionally, add tags and a description.
 5. Click **Create**.
 
-To export a log pipeline:
-
-1. 
-
-{{< img src="developers/integrations/export_pipeline.png" alt="Click the Export Pipeline icon to export your log pipeline in Datadog" width="80%">}}
-
 You can add processors within your pipelines to restructure your data and generate attributes.
 
 **Requirements:**
@@ -125,13 +119,26 @@ To easily navigate the facet list, facets are grouped together. For fields speci
 
 ## Review and deploy the integration
 
-Datadog reviews the log integration based on the guidelines and requirements documented on this page and provides feedback to the Technology Partner. In turn, the Technology Partner reviews and makes changes accordingly.
+Datadog reviews the log integration based on the guidelines and requirements documented on this page and provides feedback to the Technology Partner through GitHub. In turn, the Technology Partner reviews and makes changes accordingly.
 
-To start a review process, contact Datadog through the [Datadog Partner Portal][21] with your finalized pipeline, processors, and facets definition. 
+To start a review process, export your log pipeline and relevant custom facets using the **Export** icon on the [Logs Configuration page][3]. 
 
-Be sure to include sample raw logs with all the attributes you expect to be sent into Datadog by your integration. Raw logs comprise the raw messages generated directly from the source before they have been ingested by Datadog.
+{{< img src="developers/integrations/export_pipeline.png" alt="Click the Export Pipeline icon to export your log pipeline in Datadog" width="50%">}}
 
-Once reviews are complete, Datadog creates and deploys the new log integration assets.
+Include sample raw logs with all the attributes you expect to be sent into Datadog by your integration. Raw logs comprise of the raw messages generated directly from the source before they have been ingested by Datadog.
+
+Exporting your log pipeline includes two YAML files:
+
+- One with the log pipeline, which includes custom facets, attribute remappers, and grok parsers.
+- One with the raw example logs with an empty result. Depending on your browser, you may need to adjust your settings to allow file downloads.
+
+Once you've downloaded these files, navigate to your [integration's pull request][22] on GitHub and add them in the **Assets** > **Logs** directory. If a Logs folder does not exist yet, you can create one.
+
+Validations are run automatically in your pull request. A common log pipeline validation error is not populating the `id` field in both YAML files. Ensure that the `id` field matches the `app_id` field in your integration's `manifest.json` file to connect your pipeline to your integration. 
+
+Another common validation error is not providing the result of running the raw logs you provided against your pipeline. If the resulting output from the validation is accurate, take that output and add it to the `result` field in the YAML file containing the raw example logs.
+
+Once validations pass, Datadog creates and deploys the new log integration assets. If you have any questions, add them as comments in your pull request. A Datadog team member will respond within 2-3 business days.
 
 ## Further reading
 
@@ -158,3 +165,4 @@ Once reviews are complete, Datadog creates and deploys the new log integration a
 [19]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#category-processor
 [20]: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
 [21]: https://partners.datadoghq.com/
+[22]: https://docs.datadoghq.com/developers/integrations/create_a_tile/?tab=buildatileontheintegrationspage#open-a-pull-request
