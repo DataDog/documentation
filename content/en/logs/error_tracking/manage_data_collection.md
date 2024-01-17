@@ -56,7 +56,7 @@ To add a rule (inclusion filter):
 1. Click **Add new rule.**
 1. Optionally, reorder the rules to change their [evaluation order](#evaluation-order). Click and drag the six-dot icon on a given rule to move the rule up or down in the list.
 
-{{< img src="logs/error_tracking/reorder_filters.png" alt="reorder filters" style="width:80%;">}}
+{{< img src="logs/error_tracking/reorder_filters.png" alt="On the right side of each rule is a six-dot icon, which you can drag vertically to reorder rules." style="width:80%;">}}
 
 ### Add a nested exclusion filter to a rule
 
