@@ -17,7 +17,7 @@ The following tables summarize the features available for each language runtime.
 
 ## Runtime and tracer versions
 
-To use the Datadog Profiler, use at least the minimum versions summarized in the following table. To access specific profile types, see [profile type requirements](#profile-types).
+To use the Datadog Profiler, use at least the minimum versions summarized in the following table. To use specific profile types, see [Profile types](#profile-types).
 
 |                                   |  [Java][1]   |   [Python][2]    |    [Go][3]    |   [Ruby][4]    | [Node.js][5]  |  [.NET][6]  |   [PHP][7]    | [Rust/C/C++][8] |
 |-----------------------------------|:------------:|:----------------:|:-------------:|:--------------:|:-------------:|:-----------------------------------------------------------------------:|:-------------:|:---------------:|
@@ -27,7 +27,7 @@ To use the Datadog Profiler, use at least the minimum versions summarized in the
 
 ## Profile types
 
-To collect profile types, use at least the minimum versions summarized in the following table:
+To collect profile types, use at least the minimum versions summarized in the following table. If a runtime isn't specified, the profile type requires the minimum runtime version in [Runtime and tracer versions](#runtime-and-tracer-versions).
 
 | <div style="width:150px"><div>    | [Java][1]  | [Python][2]  |  [Go][3]   |  [Ruby][4] |   [Node.js][5]  |  [.NET][6]   |   [PHP][7]  | [Rust/C/C++][8] |
 |-----------------------------------|:-------:|:-------:|:------------:|:------:|:---------:|:-------:|:------:|:----------:|
@@ -42,7 +42,7 @@ To collect profile types, use at least the minimum versions summarized in the fo
 
 ## Other features
 
-To access additional profiling features, use at least the minimum versions summarized in the following table:
+To access additional profiling features, use at least the minimum versions summarized in the following table. If a runtime isn't specified, the profile type requires the minimum runtime version in [Runtime and tracer versions](#runtime-and-tracer-versions).
 
 |                                   | [Java][1]  | [Python][2]  |  [Go][3]   |  [Ruby][4] |   [Node.js][5]  |  [.NET][6]   |   [PHP][7]  | [Rust/C/C++][8] |
 |-----------------------------------|:-------:|:-------:|:------------:|:------:|:---------:|:-------:|:------:|:----------:|
