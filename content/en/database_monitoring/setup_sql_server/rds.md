@@ -22,7 +22,7 @@ Database Monitoring provides deep visibility into your Microsoft SQL Server data
 Do the following steps to enable Database Monitoring with your database:
 
 1. [Configure the AWS integration](#configure-the-aws-integration)
-1. [Grant the Agent access to the database](#grant-the-agent-access)
+1. [Grant the Agent access](#grant-the-agent-access)
 1. [Install the Agent](#install-the-agent)
 1. [Install the RDS integration](#install-the-rds-integration)
 
@@ -50,6 +50,8 @@ GO
 --Set context to msdb database and create datadog user
 USE [msdb];
 CREATE USER datadog FOR LOGIN datadog;
+-- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next line:
+-- GRANT SELECT to datadog;
 GO
 --Switch back to master and grant datadog user server permissions
 USE [master];

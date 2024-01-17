@@ -26,6 +26,9 @@ further_reading:
 - **Supported GitHub versions**:
   - GitHub.com (SaaS)
   - GitHub Enterprise Server (GHES) 3.5.0 or newer
+
+- **Running pipelines**: View pipeline executions that are running
+
 - **Partial pipelines**: View partially retried and downstream pipeline executions
 
 - **Logs correlation**: Correlate pipeline spans to logs and [enable job log collection][10]
