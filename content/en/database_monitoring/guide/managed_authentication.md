@@ -89,7 +89,7 @@ AWS also supports wildcards for specifying the resource, for example if you want
   ],
 ```
 
-3. Log in to your database instance as the root user, and grant the `rds_iam` role[20] to the new user:
+3. Log in to your database instance as the root user, and grant the `rds_iam` [role][20] to the new user:
 
 
 ```tsql
