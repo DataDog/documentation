@@ -24,7 +24,7 @@ You can define what data is included in Error Tracking in two ways:
 1. [Rules](#rules-inclusion)
 2. [Rate Limits](#rate-limits)
 
-Rules and rate limits can be configured on the [**Logs** > **Error Tracking** > **Settings**][1] page. 
+You can configure both rules and rate limits on the [**Logs** > **Error Tracking** > **Settings**][1] page. 
 
 ## Rules
 
