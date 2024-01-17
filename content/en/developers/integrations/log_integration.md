@@ -119,13 +119,22 @@ To easily navigate the facet list, facets are grouped together. For fields speci
 
 ## Review and deploy the integration
 
-Datadog reviews the log integration based on the guidelines and requirements documented on this page and provides feedback to the Technology Partner. In turn, the Technology Partner reviews and makes changes accordingly.
+Datadog reviews the log integration based on the guidelines and requirements documented on this page and provides feedback to the Technology Partner through GitHub. In turn, the Technology Partner reviews and makes changes accordingly.
 
-To start a review process, contact Datadog through the [Datadog Partner Portal][21] with your finalized pipeline, processors, and facets definition. 
+To start a review process, export your log pipeline, and relevant custom facets using the Export button on the Logs Configuration page.
 
-Be sure to include sample raw logs with all the attributes you expect to be sent into Datadog by your integration. Raw logs comprise the raw messages generated directly from the source before they have been ingested by Datadog.
+#insertimagehere
 
-Once reviews are complete, Datadog creates and deploys the new log integration assets.
+Be sure to include sample raw logs with all the attributes you expect to be sent into Datadog by your integration. (Raw logs comprise the raw messages generated directly from the source before they have been ingested by Datadog.)
+
+The export includes two YAML files: one file with the log pipeline—including custom facets, attribute remappers, and grok parsers—and a second test file with the raw example logs with an empty result. Depending on your browser, you may need to adjust your settings to allow file downloads. 
+
+Once you have downloaded the log pipeline and test files, navigate to your [integration pull-request][22] in GitHub and submit the files under the Assets > Logs folders. If a Logs folder does not exist yet, create one. 
+
+Next, validations will automatically run to review your pull-request. A common log pipeline validation error includes the need to populate the `id` field in both YAML files. The `id` field should match the `app_id` field in your integration’s manifest.json file. This ensures your pipeline is properly connected to your integration. Another common validation error provides the result of running the raw logs you provided against your pipeline. If the result output in the validation is accurate, take the output and add it to the `result` field in your test YAML file. 
+
+Once validations are passing, Datadog will create and deploy the new log integration assets. If you have questions, ask them directly in your pull-request as a comment. A Datadog team member will respond within 2-3 business days. 
+
 
 ## Further reading
 
@@ -152,3 +161,4 @@ Once reviews are complete, Datadog creates and deploys the new log integration a
 [19]: https://docs.datadoghq.com/logs/log_configuration/processors/?tab=ui#category-processor
 [20]: https://learn.datadoghq.com/courses/going-deeper-with-logs-processing
 [21]: https://partners.datadoghq.com/
+[22]: https://docs.datadoghq.com/developers/integrations/create_a_tile/?tab=buildatileontheintegrationspage
