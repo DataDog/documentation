@@ -22,7 +22,7 @@ further_reading:
 
 ## Overview
 
-The [Observability Pipelines Worker][1] can collect, process, and route logs and metrics from any source to any destination. Using Datadog, you can build and manage all of your Observability Pipelines Worker deployments at scale.
+The [Observability Pipelines Worker][1] can collect, process, and route logs from any source to any destination. Using Datadog, you can build and manage all of your Observability Pipelines Worker deployments at scale.
 
 This guide walks you through deploying the Worker in your common tools cluster and configuring the Datadog Agent to send logs and metrics to the Worker.
 
@@ -144,7 +144,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 [2]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
-1. Download the [Helm chart][1] for AWS EKS.
+1. Download the [Helm chart values file][1] for AWS EKS.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
 
@@ -163,7 +163,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 [1]: /resources/yaml/observability_pipelines/datadog/aws_eks.yaml
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-1. Download the [Helm chart][1] for Azure AKS.
+1. Download the [Helm chart values file][1] for Azure AKS.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
 
@@ -182,7 +182,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 [1]: /resources/yaml/observability_pipelines/datadog/azure_aks.yaml
 {{% /tab %}}
 {{% tab "Google GKE" %}}
-1. Download the [Helm chart][1] for Google GKE.
+1. Download the [Helm chart values file][1] for Google GKE.
 
 2. In the Helm chart, replace the `datadog.apiKey` and `datadog.pipelineId` values to match your pipeline and use {{< region-param key="dd_site" code="true" >}} for the `site` value. Then, install it in your cluster with the following commands:
 
@@ -425,6 +425,8 @@ CloudFormation handles the installation at this point; the Worker instances are 
 {{% /tab %}}
 {{< /tabs >}}
 
+See [Configurations][4] for more information about the source, transform, and sink used in the sample configuration. See [Working with Data][5] for more information on transforming your data.
+
 ### Load balancing
 
 {{< tabs >}}
@@ -541,17 +543,13 @@ By default, a 288GB EBS drive is allocated to each instance, and is auto-mounted
 {{< /tabs >}}
 
 ## Connect the Datadog Agent to the Observability Pipelines Worker
-To send Datadog Agent logs and metrics to the Observability Pipelines Worker, update your agent configuration with the following:
+To send Datadog Agent logs to the Observability Pipelines Worker, update your agent configuration with the following:
 
 ```yaml
 observability_pipelines_worker:
   logs:
     enabled: true
     url: "http://<OPW_HOST>:8282"
-  metrics:
-    enabled: true
-    url: "http://<OPW_HOST>:8282"
-
 ```
 
 `OPW_HOST` is the IP of the load balancer or machine you set up earlier. For single-host Docker-based installs, this is the IP address of the underlying host. For Kubernetes-based installs, you can retrieve it by running the following command and copying the `EXTERNAL-IP`:
@@ -562,7 +560,7 @@ kubectl get svc opw-observability-pipelines-worker
 
 For Terraform installs, the `lb-dns` output provides the necessary value. For CloudFormation installs, the `LoadBalancerDNS` CloudFormation output has the correct URL to use.
 
-At this point, your observability data should be going to the Worker and is available for data processing. The next section goes through what processing is included by default and the additional options that are available.
+At this point, your observability data should be going to the Worker and is available for data processing.
 
 ## Updating deployment modes
 
@@ -576,7 +574,6 @@ The sample Observability Pipelines configuration does the following:
 - Collects logs sent from the Datadog agent to the Observability Pipelines Worker.
 - Tags logs coming through the Observability Pipelines Worker. This helps determine what traffic still needs to be shifted over to the Worker as you update your clusters. These tags also show you how logs are being routed through the load balancer, in case there are imbalances.
 - Corrects the status of logs coming through the Worker. Due to how the Datadog Agent collects logs from containers, the provided `.status` attribute does not properly reflect the actual level of the message. It is removed to prevent issues with parsing rules in the backend, where logs are received from the Worker.
-- Routes the logs by dual-shipping the data to both Datadog Metrics and Logs.
 
 The following are two important components in the example configuration:
 - `logs_parse_ddtags`: Parses the tags that are stored in a string into structured data.
@@ -584,10 +581,7 @@ The following are two important components in the example configuration:
 
 Internally, the Datadog Agent represents log tags as a CSV in a single string. To effectively manipulate these tags, they must be parsed, modified, and then re-encoded before they are sent to the ingest endpoint. These steps are written to automatically perform those actions for you. Any modifications you make to the pipeline, especially for manipulating tags, should be in between these two steps.
 
-### Processing metrics
-The provided metrics pipeline does not require additional parsing and re-encoding steps. Similar to the logs pipeline, it tags incoming metrics for traffic accounting purposes. Due to the additional cardinality, this may have cost implications for custom metrics.
-
-At this point, your environment is configured for Observability Pipelines with data flowing through it. Further configuration is likely required for your specific use cases, but the tools provided gives you a starting point.
+At this point, your environment is configured for Observability Pipelines with data flowing through it. Further configuration is likely required for your specific use cases, but the tools provided give you a starting point.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -596,3 +590,5 @@ At this point, your environment is configured for Observability Pipelines with d
 [1]: /observability_pipelines/#what-is-observability-pipelines-and-the-observability-pipelines-worker
 [2]: /account_management/api-app-keys/#api-keys
 [3]: https://app.datadoghq.com/observability-pipelines/create
+[4]: /observability_pipelines/configurations/
+[5]: /observability_pipelines/working_with_data/

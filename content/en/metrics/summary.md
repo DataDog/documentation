@@ -20,7 +20,7 @@ The [Metrics Summary page][1] displays a list of your metrics reported to Datado
 
 Search your metrics by metric name or tag using the **Metric** or **Tag** search fields:
 
-{{< img src="metrics/summary/tag_advancedfiltering.mp4" alt="The metrics summary page with NOT team:* entered in the Tag search bar" video=true style="width:75%;">}}
+{{< img src="metrics/summary/tag_advancedfiltering3.mp4" alt="The metrics summary page with NOT team:* entered in the Tag search bar" video=true style="width:75%;">}}
 
 Tag filtering supports boolean and wildcard syntax so that you can quickly identify: 
 * Metrics that are tagged with a particular tag key, for example, `team`: `team:*`
@@ -38,8 +38,7 @@ The search bars provide the most comprehensive set of actions to filter the list
 - **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
 - **Distribution Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans)
 
-{{< img src="metrics/summary/facets3.jpg" alt="Metrics Facet Panel" style="width:75%;">}}
-
+{{< img src="metrics/summary/facets4.png" alt="Metrics Facet Panel" style="width:75%;">}}
 
 ## Configuration of multiple metrics 
 There are two buttons that allow you to configure multiple metrics at a time: 

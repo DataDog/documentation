@@ -79,7 +79,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'http://datadoghq.com|datadoghq.com',
+      site: 'datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
