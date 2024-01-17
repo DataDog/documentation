@@ -3556,6 +3556,11 @@ main:
     parent: csm_setup
     identifier: csm_setup_workload_security
     weight: 10010
+  - name: Agent
+    url: security/cloud_security_management/setup/csm_workload_security/agent
+    parent: csm_setup_workload_security
+    identifier: csm_setup_workload_security_agent
+    weight: 1000000
   - name: Threats
     url: security/threats/
     parent: csm

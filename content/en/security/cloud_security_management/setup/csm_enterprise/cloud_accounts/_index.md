@@ -3,6 +3,8 @@ title: Enabling CSM Enterprise for Cloud Accounts
 kind: documentation
 ---
 
+Use the following instructions to enable resource scanning and CloudTrail logs forwarding.
+
 ## Enable resource scanning
 
 To enable resource scanning for your cloud accounts, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, and Google Cloud project.
@@ -28,7 +30,7 @@ To enable resource scanning for your cloud accounts, you must first set up the i
 
 {{< /tabs >}}
 
-## Enable CloudTrail logs forwarding
+## Set up CloudTrail logs forwarding
 
 ### Set up the Datadog AWS integration
 
