@@ -93,14 +93,14 @@ AWS also supports wildcards for specifying the resource, for example if you want
 
 
 ```tsql
-CREATE USER <YOUR_IAM_ROLE>;
+CREATE USER <YOUR_IAM_ROLE> WITH LOGIN;
 GRANT rds_iam TO <YOUR_IAM_ROLE>;
 ```
 
 For example, for the `datadog` user you would run:
 
 ```tsql
-CREATE USER datadog;
+CREATE USER datadog WITH LOGIN;
 GRANT rds_iam TO datadog;
 ```
 
