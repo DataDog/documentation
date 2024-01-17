@@ -3,7 +3,7 @@ title: Enabling CSM Enterprise on Hosts
 kind: documentation
 code_lang: hosts
 type: multi-code-lang
-code_lang_weight: 70 # a number that represents relative weight. 
+code_lang_weight: 80 # a number that represents relative weight. 
 ---
 
 For a package-based deployment, install the Datadog package with your package manager, and then update the `datadog.yaml`, `security-agent.yaml`, and `system-probe.yaml` files.

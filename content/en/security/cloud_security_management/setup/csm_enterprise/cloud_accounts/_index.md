@@ -1,7 +1,6 @@
 ---
 title: Enabling CSM Enterprise for Cloud Accounts
 kind: documentation
-type: multi-code-lang
 ---
 
 ## Enable resource scanning
