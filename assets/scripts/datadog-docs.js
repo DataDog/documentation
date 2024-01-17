@@ -176,8 +176,7 @@ function getPathElement(event = null) {
     path = path.replace(/^\//, '');
     path = path.replace(/\/$/, '');
 
-    // let sideNavPathElement = document.querySelector(`.side [data-path="${getVisibleParentPath(path)}"]`)
-    let sideNavPathElement = getVisibleParentPath('.sidenav',path)
+    let sideNavPathElement = getVisibleParentPath('.side',path)
     
     let mobileNavPathElement = document.querySelector(`header [data-path="${path}"]`);
 
