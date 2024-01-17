@@ -81,7 +81,7 @@ To set a rate limit:
 1. Edit the **errors/month** field.
 1. Click **Save Rate Limit**.
 
-{{< img src="logs/error_tracking/rate_limit.png" alt="rate limit setting" style="width:70%;">}}
+{{< img src="logs/error_tracking/rate_limit.png" alt="On the left side of this page, under 'Set your Rate Limit below,' is a drop-down menu where you can set your rate limit." style="width:70%;">}}
 
 A `Rate limit applied` event is generated when the rate limit is reached. See the [Event Management documentation][4] for details on viewing and using events.
 
