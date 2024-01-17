@@ -1776,6 +1776,12 @@ The percentage of sessions to track: `100` for all, `0` for none. Only tracked s
 **Default**: `0`<br/>
 The percentage of tracked sessions with [Browser RUM & Session Replay pricing][11] features: `100` for all, `0` for none. For more details about `sessionReplaySampleRate`, see the [sampling configuration][21].
 
+`startSessionReplayRecordingManually`
+: Optional<br/>
+**Type**: Boolean<br/>
+**Default**: `false`<br/>
+If the session is sampled for Session Replay, only start the recording when `startSessionReplayRecording()` is called, instead of at the beginning of the session. See [Session Replay Usage][26] for details.
+
 `silentMultipleInit`
 : Optional<br/>
 **Type**: Boolean <br/>
@@ -1965,3 +1971,4 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [23]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
 [24]: https://docs.datadoghq.com/real_user_monitoring/browser/advanced_configuration#contexts-life-cycle
 [25]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
+[26]: /real_user_monitoring/session_replay/#usage

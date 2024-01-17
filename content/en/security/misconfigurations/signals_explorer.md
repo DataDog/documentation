@@ -14,9 +14,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">
-CSM Misconfigurations is not available in the selected site.
-</div>
+<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview
@@ -68,4 +66,4 @@ At the top of the side panel, you can configure the rule or send a notification 
 [1]: /security/misconfigurations/findings/
 [2]: /security/cloud_siem/
 [3]: /security/threats/
-[4]: /security/explorer
+[4]: https://app.datadoghq.com/security

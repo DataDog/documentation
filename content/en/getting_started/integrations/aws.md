@@ -264,7 +264,7 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [49]: /watchdog/
 [50]: /getting_started/cloud_siem/
 [51]: /security/default_rules/#cat-log-detection
-[52]: /security/explorer/
+[52]: /security/cloud_siem/investigate_security_signals
 [53]: /security/notifications/rules/
 [54]: /security/misconfigurations/setup/
 [55]: /security/default_rules/#cat-posture-management-cloud

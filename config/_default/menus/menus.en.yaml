@@ -1439,6 +1439,57 @@ main:
     weight: 100
     parent: alerting
     identifier: alerting_guide
+  - name: Service Catalog
+    url: service_catalog/
+    pre: service-catalog
+    parent: platform_heading
+    identifier: service_catalog
+    weight: 110000
+  - name: Browsing
+    url: service_catalog/browsing
+    parent: service_catalog
+    identifier: service_catalog_browse
+    weight: 1
+  - name: Investigating a Service
+    url: service_catalog/investigating
+    parent: service_catalog
+    identifier: service_investigate
+    weight: 2
+  - name: Adding Entries to Service Catalog
+    url: service_catalog/setup
+    parent: service_catalog
+    identifier: service_catalog_setup
+    weight: 3
+  - name: Adding Metadata
+    url: service_catalog/adding_metadata
+    parent: service_catalog
+    identifier: service_metadata
+    weight: 4
+  - name: Service Catalog API
+    url: service_catalog/service_definition_api
+    parent: service_catalog
+    identifier: service_catalog_api
+    weight: 5
+  - name: Service Scorecards
+    url: service_catalog/scorecards
+    parent: service_catalog
+    identifier: service_catalog_scorecards
+    weight: 6
+  - name: Integrations
+    url: service_catalog/integrations
+    parent: service_catalog
+    identifier: service_catalog_integrations
+    weight: 7
+  - name: Troubleshooting
+    url: service_catalog/troubleshooting
+    parent: service_catalog
+    identifier: service_catalog_troubleshooting
+    weight: 8
+  - name: Guides
+    url: service_catalog/guides
+    parent: service_catalog
+    identifier: service_catalog_guides
+    weight: 9
   - name: Service Level Objectives
     url: service_management/service_level_objectives/
     pre: slos
@@ -1817,6 +1868,11 @@ main:
     parent: tracing_trace_collection
     identifier: tracing_library_config
     weight: 104
+  - name: Configuration at Runtime
+    url: tracing/trace_collection/runtime_config/
+    parent: tracing_trace_collection
+    identifier: runtime_config
+    weight: 105
   - name: Java
     url: tracing/trace_collection/library_config/java/
     parent: tracing_library_config
@@ -2111,86 +2167,41 @@ main:
     url: tracing/trace_explorer/request_flow_map/
     parent: trace_explorer
     weight: 607
-  - name: Service Catalog
-    url: tracing/service_catalog/
-    parent: tracing
-    identifier: service_catalog
-    weight: 7
-  - name: Browsing
-    url: tracing/service_catalog/browsing
-    parent: service_catalog
-    identifier: service_catalog_browse
-    weight: 701
-  - name: Investigating a Service
-    url: tracing/service_catalog/investigating
-    parent: service_catalog
-    identifier: service_investigate
-    weight: 702
-  - name: Adding Entries to Service Catalog
-    url: tracing/service_catalog/setup
-    parent: service_catalog
-    identifier: service_catalog_setup
-    weight: 703
-  - name: Adding Metadata
-    url: tracing/service_catalog/adding_metadata
-    parent: service_catalog
-    identifier: service_metadata
-    weight: 704
-  - name: Service Catalog API
-    url: tracing/service_catalog/service_definition_api
-    parent: service_catalog
-    identifier: service_catalog_api
-    weight: 705
-  - name: Service Scorecards
-    url: tracing/service_catalog/scorecards
-    parent: service_catalog
-    identifier: service_catalog_scorecards
-    weight: 706
-  - name: Integrations
-    url: tracing/service_catalog/integrations
-    parent: service_catalog
-    identifier: service_catalog_integrations
-    weight: 707
-  - name: Troubleshooting
-    url: tracing/service_catalog/troubleshooting
-    parent: service_catalog
-    identifier: service_catalog_troubleshooting
-    weight: 708
-  - name: Guides
-    url: tracing/service_catalog/guides
-    parent: service_catalog
-    identifier: service_catalog_guides
-    weight: 709
   - name: Service Observability
     url: tracing/services/
     parent: tracing
     identifier: tracing_services
     weight: 8
+  - name: List of Services
+    url: /service_catalog/
+    parent: tracing_services
+    identifier: tracing_service_catalog
+    weight: 801
   - name: Service Page
     url: tracing/services/service_page/
     parent: tracing_services
     identifier: tracing_service_page
-    weight: 801
+    weight: 802
   - name: Resource Page
     url: tracing/services/resource_page/
     parent: tracing_services
     identifier: tracing_resource_page
-    weight: 802
+    weight: 803
   - name: Deployment Tracking
     url: tracing/services/deployment_tracking/
     parent: tracing_services
     identifier: tracing_deployment_tracking
-    weight: 803
+    weight: 804
   - name: Service Map
     url: tracing/services/services_map/
     parent: tracing_services
     identifier: tracing_service_map
-    weight: 804
+    weight: 805
   - name: APM Monitors
     url: /monitors/create/types/apm/
     parent: tracing_services
     identifier: tracing_apm_monitors
-    weight: 805
+    weight: 806
   - name: API Catalog
     url: /tracing/api_catalog/
     identifier: api_catalog
@@ -3449,16 +3460,6 @@ main:
     parent: security_platform
     identifier: security_suppressions
     weight: 7
-  - name: Signals Explorer
-    url: security/explorer
-    parent: security_platform
-    identifier: signals_explorer
-    weight: 8
-  - name: Security Signal Management
-    url: security/security_signal_management
-    parent: security_platform
-    identifier: security_signal_management
-    weight: 9
   - name: Security Inbox
     url: security/security_inbox
     parent: security_platform
@@ -7246,6 +7247,66 @@ api:
         - ListSecurityMonitoringRules
       unstable: []
       order: 4
+  - name: Update a suppression rule
+    url: '#update-a-suppression-rule'
+    identifier: security-monitoring-update-a-suppression-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateSecurityMonitoringSuppression
+      unstable: []
+      order: 0
+  - name: Get a suppression rule
+    url: '#get-a-suppression-rule'
+    identifier: security-monitoring-get-a-suppression-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetSecurityMonitoringSuppression
+      unstable: []
+      order: 0
+  - name: Delete a suppression rule
+    url: '#delete-a-suppression-rule'
+    identifier: security-monitoring-delete-a-suppression-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteSecurityMonitoringSuppression
+      unstable: []
+      order: 0
+  - name: Create a suppression rule
+    url: '#create-a-suppression-rule'
+    identifier: security-monitoring-create-a-suppression-rule
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateSecurityMonitoringSuppression
+      unstable: []
+      order: 0
+  - name: Get all suppression rules
+    url: '#get-all-suppression-rules'
+    identifier: security-monitoring-get-all-suppression-rules
+    parent: security-monitoring
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListSecurityMonitoringSuppressions
+      unstable: []
+      order: 0
   - name: Update a security filter
     url: '#update-a-security-filter'
     identifier: security-monitoring-update-a-security-filter
