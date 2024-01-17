@@ -3527,30 +3527,31 @@ main:
     parent: csm_setup
     identifier: csm_setup_enterprise
     weight: 10000
-  - name: Agent
-    url: security/cloud_security_management/setup/csm_enterprise/agent
-    parent: csm_setup_enterprise
-    identifier: csm_setup_enterprise_agent
-    weight: 1000000
   - name: Cloud Accounts
     url: security/cloud_security_management/setup/csm_enterprise/cloud_accounts
     parent: csm_setup_enterprise
     identifier: csm_setup_enterprise_cloud
+    weight: 1000000
+  - name: Agent
+    url: security/cloud_security_management/setup/csm_enterprise/agent
+    parent: csm_setup_enterprise
+    identifier: csm_setup_enterprise_agent
     weight: 1000001
   - name: CSM Pro
     url: security/cloud_security_management/setup/csm_pro
     parent: csm_setup
     identifier: csm_setup_pro
     weight: 10005
-  - name: Agent
-    url: security/cloud_security_management/setup/csm_pro/agent
-    parent: csm_setup_pro
-    identifier: csm_setup_pro_agent
-    weight: 1000000
   - name: Cloud Accounts
     url: security/cloud_security_management/setup/csm_pro/cloud_accounts
     parent: csm_setup_pro
     identifier: csm_setup_pro_cloud
+    weight: 1000000
+  - name: Agent
+    url: security/cloud_security_management/setup/csm_pro/agent
+    parent: csm_setup_pro
+    identifier: csm_setup_pro_agent
+    weight: 1000001
   - name: CSM Workload Security
     url: security/cloud_security_management/setup/csm_workload_security
     parent: csm_setup
