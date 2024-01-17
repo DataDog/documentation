@@ -5009,6 +5009,11 @@ main:
     identifier: sds_investigate_sensitive_data_issues
     parent: sensitive_data_scanner
     weight: 1
+  - name: Library Rules
+    url: sensitive_data_scanner/library_rules/
+    identifier: sds_library_rules
+    parent: sensitive_data_scanner
+    weight: 2
   - name: Help
     url: help/
     pre: info-fill
