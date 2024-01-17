@@ -62,7 +62,7 @@ To add a rule (inclusion filter):
 
 1. Expand the rule for which you want to add an exclusion filter. 
 1. Click **Add Exclusion Filter**.
-    {{< img src="logs/error_tracking/filters.png" alt="inclusion and exclusion filter set up" style="width:70%;">}}
+    {{< img src="logs/error_tracking/filters.png" alt="Expand a rule to see the Add Exclusion Filter option." style="width:70%;">}}
 1. Enter a name in the **Name** field.
 1. Enter a [log search query][3] in the **Define exclusion filter query** field.
 1. Click **Save Exclusion Filter**.
