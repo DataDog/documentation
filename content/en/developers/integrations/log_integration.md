@@ -130,13 +130,18 @@ Include sample raw logs with all the attributes you expect to be sent into Datad
 Exporting your log pipeline includes two YAML files:
 
 - One with the log pipeline, which includes custom facets, attribute remappers, and grok parsers.
-- One with the raw example logs with an empty result. Depending on your browser, you may need to adjust your settings to allow file downloads.
+- One with the raw example logs with an empty result. 
+
+Note: Depending on your browser, you may need to adjust your settings to allow file downloads.
 
 Once you've downloaded these files, navigate to your [integration's pull request][22] on GitHub and add them in the **Assets** > **Logs** directory. If a Logs folder does not exist yet, you can create one.
 
-Validations are run automatically in your pull request. A common log pipeline validation error is not populating the `id` field in both YAML files. Ensure that the `id` field matches the `app_id` field in your integration's `manifest.json` file to connect your pipeline to your integration. 
+Validations are run automatically in your pull request. 
 
-Another common validation error is not providing the result of running the raw logs you provided against your pipeline. If the resulting output from the validation is accurate, take that output and add it to the `result` field in the YAML file containing the raw example logs.
+Two common validation errors are:
+1. The `id` field in both YAML files: Ensure that the `id` field matches the `app_id` field in your integration's `manifest.json` file to connect your pipeline to your integration. 
+2. Not providing the result of running the raw logs you provided against your pipeline. If the resulting output from the validation is accurate, take that output and add it to the `result` field in the YAML file containing the raw example logs.
+
 
 Once validations pass, Datadog creates and deploys the new log integration assets. If you have any questions, add them as comments in your pull request. A Datadog team member will respond within 2-3 business days.
 
