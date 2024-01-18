@@ -3537,6 +3537,11 @@ main:
     parent: csm_setup
     identifier: csm_setup_workload_security
     weight: 10010
+  - name: CSM on Windows
+    url: security/cloud_security_management/setup/windows
+    parent: csm_setup
+    identifier: csm_setup_windows
+    weight: 10015
   - name: Threats
     url: security/threats/
     parent: csm

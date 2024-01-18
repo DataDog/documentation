@@ -161,6 +161,12 @@ This might mean your private location is unable to reach the endpoint your API t
 
 This occurs when you attempt to mount a single file in a Windows-based container, which is not supported. For more information, see the [Docker mount volume documentation][16]. Ensure that the source of the bind mount is a local directory.
 
+### I am being asked for a password for sudo/I am being asked for a password for the dog user
+
+The Private Location user (`dog`) requires `sudo` for various reasons. Typically, this user is granted certain permissions to allow `sudo` access in the process of launching the Private Location on your container. Confirm if you have a policy in place that restricts the `dog` user's ability to `sudo`, or prevents the container from launching as the `dog` user (UID 501).
+
+Additionally, in Private Location versions `>v1.27`, Datadog depends on the use of the `clone3` system call. In some older versions of container runtime environments (such as Docker versions <20.10.10), `clone3` is not supported by the default `seccomp` policy. Confirm that your container runtime environment's `seccomp` policy includes `clone3`. Yo can do this by updating the version of your runtime in use, manually adding `clone3` to your `seccomp` policy, or using an `unconfined` seccomp policy. For more information, see [Docker's `seccomp` documentation][17].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -181,3 +187,4 @@ This occurs when you attempt to mount a single file in a Windows-based container
 [14]: https://docs.docker.com/config/containers/resource_constraints/
 [15]: /synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
 [16]: https://docs.docker.com/engine/reference/commandline/run/#mount-volume--v---read-only
+[17]: https://docs.docker.com/engine/security/seccomp/
