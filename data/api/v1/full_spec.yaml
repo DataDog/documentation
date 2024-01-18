@@ -1142,9 +1142,12 @@ components:
         is_read_only:
           default: false
           deprecated: true
-          description: Whether this dashboard is read-only. If True, only the author
-            and admins can make changes to it. Prefer using `restricted_roles` to
-            manage write authorization.
+          description: 'Whether this dashboard is read-only. If True, only the author
+            and admins can make changes to it.
+
+
+            This property is deprecated; please use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/)
+            instead to manage write authorization for individual dashboards.'
           example: false
           type: boolean
         layout_type:
@@ -1165,8 +1168,13 @@ components:
         reflow_type:
           $ref: '#/components/schemas/DashboardReflowType'
         restricted_roles:
-          description: A list of role identifiers. Only the author and users associated
+          deprecated: true
+          description: 'A list of role identifiers. Only the author and users associated
             with at least one of these roles can edit this dashboard.
+
+
+            This property is deprecated; please use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/)
+            instead to manage write authorization for individual dashboards.'
           items:
             description: A role UUID.
             type: string
@@ -1439,8 +1447,13 @@ components:
           description: Dashboard identifier.
           type: string
         is_read_only:
-          description: Whether this dashboard is read-only. If True, only the author
+          deprecated: true
+          description: 'Whether this dashboard is read-only. If True, only the author
             and admins can make changes to it.
+
+
+            This property is deprecated; please use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/)
+            instead to manage write authorization for individual dashboards.'
           type: boolean
         layout_type:
           $ref: '#/components/schemas/DashboardLayoutType'
