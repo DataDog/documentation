@@ -48,7 +48,7 @@ Trace IDs are generated as 128-bit by default, and they are accepted as either 1
 | PHP        | Unsigned  [$0, 2^64-1$]   | Unsigned                      |
 | C++        | Unsigned  [$0, 2^64-1$]   | Unsigned                      |
 
-## Span IDs
+### Span IDs
 
 Span IDs are limited to 64-bits in Datadog.
 
