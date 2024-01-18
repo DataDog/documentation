@@ -1,7 +1,6 @@
 ---
 title: Intelligent Test Runner for Java
 kind: documentation
-is_beta: true
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 10
@@ -18,11 +17,9 @@ further_reading:
       text: "Troubleshooting CI Visibility"
 ---
 
-{{< callout url="#" btn_hidden="true" >}}Intelligent Test Runner for Java is in beta.{{< /callout >}}
-
 ## Compatibility
 
-Intelligent Test Runner is supported in `dd-java-agent >= 1.26.1`.
+Intelligent Test Runner is supported in `dd-java-agent >= 1.27.0`.
 
 The following test frameworks are supported:
 - JUnit >= 4.10 and >= 5.3
