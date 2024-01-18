@@ -36,7 +36,7 @@ Performance impact
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 Proxies, load balancers, and connection poolers
-: The Agent must connect directly to the host being monitored, preferably through the instance endpoint. The Agent should not connect to the database through a proxy, load balancer, connection pooler, or the **Aurora cluster endpoint**. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+: The Agent must connect directly to the host being monitored, preferably through the instance endpoint. The Agent should not connect to the database through a proxy, load balancer, connection pooler, or the **Aurora cluster endpoint**. The Agent relies on the statistics table of each instance, so each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
 
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
