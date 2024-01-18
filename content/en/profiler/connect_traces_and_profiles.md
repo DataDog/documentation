@@ -130,7 +130,7 @@ To enable the [timeline feature](#span-execution-timeline-view) (beta):
 From the view of each trace, the Code Hotspots tab highlights profiling data scoped on the selected spans.
 
 The values on the left side represent the time spent in that method call during the selected span. Depending on the runtime and language, the categories vary:
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 - **CPU** shows the time taken executing CPU tasks.
 - **Synchronization** shows the time spent waiting on monitors, the time a thread is sleeping and the time it is parked.
@@ -147,6 +147,10 @@ The values on the left side represent the time spent in that method call during 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 - **CPU** shows the time taken executing CPU tasks.
+- **Uncategorized** shows the time taken to execute the span that is not CPU execution.
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+- **CPU** shows the time taken executing CPU tasks. Only shown for profiles collected with the Node.js experimental CPU profiler.
 - **Uncategorized** shows the time taken to execute the span that is not CPU execution.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
