@@ -3273,10 +3273,10 @@ main:
     parent: log_management_error_tracking
     identifier: log_management_error_tracking_custom_grouping
     weight: 604
-  - name: Exclude Logs
-    url: logs/error_tracking/excluding_logs
+  - name: Manage Data Collection
+    url: logs/error_tracking/manage_data_collection
     parent: log_management_error_tracking
-    identifier: log_management_error_tracking_excluding_logs
+    identifier: log_management_error_tracking_manage_data_collection
     weight: 605
   - name: Identify Suspect Commits
     url: logs/error_tracking/suspect_commits
