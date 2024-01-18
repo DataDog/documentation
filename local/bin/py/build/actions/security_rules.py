@@ -135,6 +135,7 @@ def security_rules(content, content_dir):
                 "kind": "documentation",
                 "type": "security_rules",
                 "disable_edit": True,
+                "default_rule_id": data.get('defaultRuleId', '').strip(),
                 "aliases": [
                     # f"{data.get('defaultRuleId', '').strip()}",
                     # f"/security_monitoring/default_rules/{data.get('defaultRuleId', '').strip()}",
