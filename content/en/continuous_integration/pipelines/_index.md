@@ -65,7 +65,9 @@ While the concept of a CI pipeline may vary depending on your provider, see how 
 | Pipeline | Pipeline |
 | Stage | Stage |
 | Job | Job |
-| Step |  |
+| Step* | Script |
+
+_\*Steps granularity is not available in Datadog_
 
 {{% /tab %}}
 {{% tab "Jenkins" %}}
@@ -74,8 +76,8 @@ While the concept of a CI pipeline may vary depending on your provider, see how 
 |---|---|
 | Pipeline | Pipeline |
 | Stage | Stage |
-| Job | Job |
-| Step | Step |
+| Job | Step |
+| Step |  |
 
 {{% /tab %}}
 {{% tab "CircleCI" %}}
@@ -85,18 +87,21 @@ While the concept of a CI pipeline may vary depending on your provider, see how 
 | Pipeline | Pipeline |
 | Stage | Workflow |
 | Job | Job |
-| Step | Step |
+| Step* | Step |
+
+_\*Steps granularity is not available in Datadog_
 
 {{% /tab %}}
 {{% tab "Buildkite" %}}
-
 
 | Datadog | Buildkite |
 |---|---|
 | Pipeline | Pipeline |
 | Stage |  |
 | Job | Job |
-| Step |  |
+| Step* | Step |
+
+_\*Steps granularity is not available in Datadog_
 
 {{% /tab %}}
 {{% tab "TeamCity" %}}
@@ -106,7 +111,9 @@ While the concept of a CI pipeline may vary depending on your provider, see how 
 | Pipeline | Build Chain |
 | Stage |  |
 | Job | Build |
-| Step |  |
+| Step* | Step |
+
+_\*Steps granularity is not available in Datadog_
 
 {{% /tab %}}
 {{% tab "Azure Pipelines" %}}
@@ -116,7 +123,9 @@ While the concept of a CI pipeline may vary depending on your provider, see how 
 | Pipeline | Pipeline |
 | Stage | Stage |
 | Job | Job |
-| Step | Step |
+| Step* | Step |
+
+_\*Steps granularity is not available in Datadog_
 
 {{% /tab %}}
 {{% tab "AWS CodePipeline" %}}
@@ -151,6 +160,7 @@ If your CI provider is not supported, you can try setting up Pipeline Visibility
 | {{< ci-details title="Pipeline trace visualization" >}}Visualization of pipeline executions with associated tracing.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | {{< ci-details title="Running pipelines" >}}Identification of pipelines executions that are running with associated tracing.{{< /ci-details >}} | | {{< X >}} | | | {{< X >}} | | | | |
 | {{< ci-details title="Partial retries" >}}Identification of partial retries (for example, when only a subset of jobs were retried).{{< /ci-details >}} |  | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  {{< X >}} |
+| {{< ci-details title="Step spans" >}}Step level spans are available for more granular visibility.{{< /ci-details >}} | {{< X >}} _but handled as job spans_ | {{< X >}} |  |  |  |  | {{< X >}} |  |  |  {{< X >}} |
 | {{< ci-details title="Manual steps" >}}Identification of when there is a job with a manual approval phase in the overall pipeline.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  | {{< X >}} |  |  |  {{< X >}} |
 | {{< ci-details title="Queue time" >}}Identification of the amount of time for which a pipeline or job was in the queue before execution.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |  {{< X >}} |
 | {{< ci-details title="Logs correlation" >}}Retrieval of pipeline or job logs from the CI provider. Logs are displayed on the <strong>Logs</strong> tab in the Pipeline Execution view.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  |  | {{< X >}} |  |  |  |  |  |
