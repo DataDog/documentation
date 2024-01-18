@@ -461,10 +461,13 @@ RUM supports several propagator types to connect resources with backends that ar
     const config = new DatadogProviderConfiguration(
         // ...
     );
-    config.firstPartyHosts = [
-        {match: "example.com", propagatorTypes: PropagatorType.TRACECONTEXT},
-        {match: "example.com", propagatorTypes: PropagatorType.DATADOG}
-    ];
+    config.firstPartyHosts = [{ 
+        match: "example.com", 
+        propagatorTypes: [
+            PropagatorType.TRACECONTEXT, 
+            PropagatorType.DATADOG
+        ]
+    }];
     ```
 
     `PropagatorType` is an enum representing the following tracing header types:
