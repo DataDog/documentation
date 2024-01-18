@@ -214,7 +214,7 @@ function App() {
 
 ### React Native Navigation
 
-**Note**: This package is an integration for `react-native-navigation` library, please make sure you first install and setup the core `mobile-react-native` SDK.
+**Note**: This package is an integration for `react-native-navigation` library. Please make sure you first install and setup the core `mobile-react-native` SDK.
 
 #### Setup
 
@@ -249,7 +249,7 @@ DdRumReactNativeNavigationTracking.startTracking(viewNamePredicate);
 
 ### Apollo Client
 
-**Note**: This package is an integration for `@apollo/client` library, please make sure you first install and setup the core `mobile-react-native` SDK.
+**Note**: This package is an integration for the `@apollo/client` library. Please make sure you first install and set up the core `mobile-react-native` SDK.
 
 #### Setup
 
@@ -267,7 +267,7 @@ yarn add @datadog/mobile-react-native-apollo-client
 
 #### Migrate to HttpLink
 
-If you initialize your ApolloClient with the `uri` parameter, initialize it with a `HttpLink`:
+If you initialize your `ApolloClient` with the `uri` parameter, initialize it with a `HttpLink`:
 
 ```javascript
 import { ApolloClient, HttpLink } from '@apollo/client';
@@ -285,7 +285,7 @@ const apolloClient = new ApolloClient({
 
 #### Use the Datadog Apollo Client Link to collect information
 
-Import `DatadogLink` from `@datadog/mobile-react-native-apollo-client` and use it in your ApolloClient initialization:
+Import `DatadogLink` from `@datadog/mobile-react-native-apollo-client` and use it in your `ApolloClient` initialization:
 
 ```javascript
 import { ApolloClient, from, HttpLink } from '@apollo/client';
@@ -299,7 +299,7 @@ const apolloClient = new ApolloClient({
 });
 ```
 
-For more information on Apollo Client Links, refer to the [official documentation][13].
+For more information on Apollo Client Links, see the [official documentation][13].
 
 #### Removing GraphQL information
 
