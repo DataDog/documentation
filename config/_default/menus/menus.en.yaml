@@ -1619,7 +1619,7 @@ main:
     identifier: case_management_settings
     weight: 4
   - name: Troubleshooting
-    url: service_management/case_management/Troubleshooting
+    url: service_management/case_management/troubleshooting
     parent: case_management
     identifier: case_management_troubleshooting
     weight: 5
