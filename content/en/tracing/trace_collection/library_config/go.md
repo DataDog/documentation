@@ -74,6 +74,9 @@ Overrides the default trace Agent port for DogStatsD metric submission. If the [
 `DD_TRACE_SAMPLING_RULES`
 : **Default**: `nil`<br>
 A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`"service"`, `"resource"`, and `"tags"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
+
+<div class="alert alert-info"><strong> Support for sampling by resource and tags is in beta.</strong></div>
+
 For more information, see [Ingestion Mechanisms][4].<br>
 **Examples:**<br>
   - Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`
@@ -87,6 +90,9 @@ For more information, see [Ingestion Mechanisms][4].<br>
 `DD_SPAN_SAMPLING_RULES`
 : **Default**: `nil`<br>
 A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"`,`"service"`, `"resource"`, and `"tags"` fields are optional. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
+
+<div class="alert alert-info"><strong> Support for sampling by resource and tags is in beta.</strong></div>
+
 For more information, see [Ingestion Mechanisms][5].<br>
 **Example:**<br>
   - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
