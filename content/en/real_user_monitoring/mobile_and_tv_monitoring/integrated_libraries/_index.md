@@ -256,7 +256,7 @@ Datadog provides [`datadog_gql_link`][14] for use with most GraphQL Flutter libr
 
 #### Setup
 
-Add `datadog_gql_link` to your `pubspec.yaml` or by running `flutter pub add datadog_gql_link` from your terminal
+Add `datadog_gql_link` to your `pubspec.yaml` or by running `flutter pub add datadog_gql_link` from your terminal:
 
 ```yaml
 dependencies:
@@ -264,7 +264,7 @@ dependencies:
   datadog_gql_link: ^1.0.0
 ```
 
-When creating your GraphQL link, add the `DatadogGqlLink` above at a location above your terminating link. For example:
+When creating your GraphQL link, add the `DatadogGqlLink` above your terminating link. For example:
 
 ```dart
 final graphQlUrl = "https://example.com/graphql";
@@ -275,8 +275,7 @@ final link = Link.from([
 ]);
 ```
 
-
-If you are tracking non-GraphQL network calls with `datadog_tracking_http_client`, you need to have the tracking plugin ignore requests to your GraphQL endpoint. Otherwise, GraphQL resources will be double reported, and APM traces may be broken. Ignore your GraphQL endpoint by using the `ignoreUrlPatterns` parameter added to `datadog_tracking_http_client` version 2.1.0.
+If you are tracking non-GraphQL network calls with `datadog_tracking_http_client`, you need to configure the tracking plugin to ignore requests to your GraphQL endpoint. Otherwise, GraphQL resources will be reported twice, and APM traces may be broken. Ignore your GraphQL endpoint by using the `ignoreUrlPatterns` parameter added to `datadog_tracking_http_client` version 2.1.0.
 
 ```dart
 final datadogConfig = DatadogConfiguration(
