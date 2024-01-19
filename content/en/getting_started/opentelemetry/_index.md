@@ -276,7 +276,7 @@ View traces and spans to observe the status and performance of requests processe
 [3]: https://docs.docker.com/compose/install/
 [4]: /opentelemetry/collector_exporter/
 [5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/dockerstatsreceiver/
-[6]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
+[6]: /getting_started/tagging/unified_service_tagging/
 [7]: https://app.datadoghq.com/services
 [8]: https://docs.datadoghq.com/tracing/glossary/#trace
 [9]: https://www.datadoghq.com/knowledge-center/distributed-tracing/flame-graph/
