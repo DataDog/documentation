@@ -131,7 +131,7 @@ This configuration allows the Datadog Exporter to send runtime metrics, traces, 
 
 ### Configuring your application to send infrastructure metrics
 
-As an example, you will configure your OpenTelemetry Collector to forward Docker container metrics. 
+In this example, configure your OpenTelemetry Collector to forward Docker container metrics.
 
 *Reminder: You must use Linux to send infrastructure metrics from the OpenTelemetry Collector to Datadog.*
 
