@@ -230,7 +230,7 @@ Now, you can use Datadog to explore the Calendar application's observability dat
 
 View runtime and infrastructure metrics to visualize, monitor, and measure the performance of your applications, hosts, containers, and processes.
 
-1. Hover over **APM** in the left-side panel and select **Service Catalog**.
+1. Go to **APM** > **Service Catalog**.
 2. Hover over the `calendar-otel` service and select **Full Page**.
 3. Scroll to the bottom panel and select:
 
