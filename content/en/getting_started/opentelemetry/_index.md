@@ -176,7 +176,7 @@ service:
       receivers: [otlp, docker_stats] # <- update this line!
 ```
 
-Your application now sends container metrics to Datadog for viewing in Datadog.
+This configuration allows the Calendar application to send container metrics to Datadog for you to explore in Datadog.
 
 ### Using unified tagging to correlate observability data
 
