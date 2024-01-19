@@ -182,7 +182,10 @@ This configuration allows the Calendar application to send container metrics to 
 
 [Unified service tagging][6] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
-In the Calendar application's Docker Compose file, `./deploys/docker/docker-compose-otel.yml`, the following lines are already included to enable correlation between application traces and other observability data: 
+The Calendar application is already configured with unified service tagging:
+
+1. Go to the Calendar application's Docker Compose file at `./deploys/docker/docker-compose-otel.yml`.
+2. The following lines enable the correlation between application traces and other observability data: 
 
 ```
 environment:
