@@ -1,5 +1,5 @@
 ---
-title: Language and Tracer Versions for Profiler Features
+title: Language and Library Versions for Profiler Features
 kind: documentation
 disable_sidebar: true
 further_reading:
@@ -10,12 +10,12 @@ further_reading:
 
 The following tables summarize the features available for each language runtime. 
 - **Minimum versions** are required to access at least one feature. If you have an earlier version, profiling is not available. 
-- **Feature-complete versions** give you access to **all** supported features. It's usually best if you update to the latest version of all tracers.
+- **Feature-complete versions** give you access to **all** supported features. It's usually best if you update to the latest version of all tracing libraries.
 
 <div class="alert alert-info">For more details, click the language heading in any table to go that language's setup page.</div>
 
 
-## Runtime and tracer versions
+## Runtime and tracing library versions
 
 To use the Datadog Profiler, use at least the minimum versions summarized in the following table. For specific profile type availability by version, see [Profile types](#profile-types).
 
@@ -23,11 +23,11 @@ To use the Datadog Profiler, use at least the minimum versions summarized in the
 |-----------------------------------|:------------:|:----------------:|:-------------:|:--------------:|:-------------:|:-----------------------------------------------------------------------:|:-------------:|:---------------:|
 | <strong>Minimum&nbsp;runtime&nbsp;version</strong> | [JDK&nbsp;8+][17]  | Python&nbsp;2.7+ | Go&nbsp;1.19+ | Ruby&nbsp;2.3+ | Node&nbsp;14+ | .NET&nbsp;Core&nbsp;2.1+, .NET&nbsp;5+, .NET&nbsp;Framework&nbsp;4.6.1+ | PHP&nbsp;7.1+ |                 |
 | <strong>Feature-complete runtime version</strong>       | [JDK&nbsp;11+][17] | Python&nbsp;3.6+ | Go&nbsp;1.21+ | Ruby&nbsp;3.1+ | Node&nbsp;18+ |                              .NET&nbsp;7+                               | PHP&nbsp;8.0+ |                 |
-| <strong>Feature-complete tracer version</strong>        | [latest][9]  |   [latest][10]   | [latest][11]  |  [latest][12]  | [latest][13]  |                              [latest][14]                               | [latest][15]  |  [latest][16]   |
+| <strong>Feature-complete tracing library version</strong>        | [latest][9]  |   [latest][10]   | [latest][11]  |  [latest][12]  | [latest][13]  |                              [latest][14]                               | [latest][15]  |  [latest][16]   |
 
 ## Profile types
 
-To collect profile types, use at least the minimum versions summarized in the following table. If a runtime isn't specified, the profile type requires the minimum runtime version in [Runtime and tracer versions](#runtime-and-tracer-versions).
+To collect profile types, use at least the minimum versions summarized in the following table. If a runtime isn't specified, the profile type requires the minimum runtime version in [Runtime and tracing library versions](#runtime-and-tracing-library-versions).
 
 | <div style="width:150px"><div>    | [Java][1]  | [Python][2]  |  [Go][3]   |  [Ruby][4] |   [Node.js][5]  |  [.NET][6]   |   [PHP][7]  | [Rust/C/C++][8] |
 |-----------------------------------|:-------:|:-------:|:------------:|:------:|:---------:|:-------:|:------:|:----------:|
@@ -42,7 +42,7 @@ To collect profile types, use at least the minimum versions summarized in the fo
 
 ## Other features
 
-To access additional profiling features, use at least the minimum versions summarized in the following table. If a runtime isn't specified, the profile type requires the minimum runtime version in [Runtime and tracer versions](#runtime-and-tracer-versions).
+To access additional profiling features, use at least the minimum versions summarized in the following table. If a runtime isn't specified, the profile type requires the minimum runtime version in [Runtime and tracing library versions](#runtime-and-tracing-library-versions).
 
 |                                   | [Java][1]  | [Python][2]  |  [Go][3]   |  [Ruby][4] |   [Node.js][5]  |  [.NET][6]   |   [PHP][7]  | [Rust/C/C++][8] |
 |-----------------------------------|:-------:|:-------:|:------------:|:------:|:---------:|:-------:|:------:|:----------:|
