@@ -28,17 +28,17 @@ further_reading:
 
 ## Overview
 
-[OpenTelemetry][11] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing observability data from software applications. OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application observability data—namely metrics, logs, and traces—to monitoring platforms for analysis and insight.
+[OpenTelemetry][11] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing observability data from software applications. OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application observability data---namely metrics, logs, and traces---to monitoring platforms for analysis and insight.
 
 Datadog offers multiple options for sending data from OpenTelemetry-instrumented applications to the Datadog backend. 
 
-This guide demonstrates how to integrate an existing OpenTelemetry environment with Datadog so you can analyze in Datadog the observability data you’re already generating. You will configure the Datadog Exporter, which runs alongside your OpenTelemetry Collector, to forward trace, metric, and logs data from OpenTelemetry SDKs to Datadog. 
+This guide demonstrates how to integrate an existing OpenTelemetry environment with Datadog so you can analyze in Datadog the observability data you're already generating. You will configure the Datadog Exporter, which runs alongside your OpenTelemetry Collector, to forward trace, metric, and logs data from OpenTelemetry SDKs to Datadog. 
 
 Follow this guide to:
 
 1. Configure a sample application, instrumented using the OpenTelemetry API.
 2. Send observability data (metrics, logs, and traces) to Datadog using the OpenTelemetry Collector with the Datadog Exporter. 
-3. Explore the application’s observability data in Datadog. 
+3. Explore the application's observability data in Datadog. 
 
 ## Prerequisites
 
@@ -46,7 +46,7 @@ To complete this guide, you need the following:
 
 * (Optional) Use Linux to receive infrastructure metrics.
 * Install [Docker Compose][3]. 
-* [Create a Datadog account][1] if you haven’t done so already.
+* [Create a Datadog account][1] if you haven't done so already.
 * Find or create your [Datadog API key][2].
 * Export your Datadog API key to an environment variable:
   ```
@@ -207,11 +207,11 @@ Run the Calendar application with the OpenTelemetry SDK to generate and forward 
 
 With each call, the Calendar application metrics, traces, and logs, which are forwarded to the OpenTelemetry Collector, the Datadog Exporter, and finally the Datadog backend. 
 
-Note: The Calendar application uses the probabilistic sampler processor, meaning only a percentage (30%, specifically) of all traces sent through the application reach the target backend. Run the curl command several times to ensure at least one trace exports to the Datadog backend. 
+Note: The Calendar application uses the probabilistic sampler processor, so only 30% of traces sent through the application reach the target backend. Run the curl command several times to ensure at least one trace exports to the Datadog backend. 
 
 ## Exploring observability data in Datadog
 
-Now, you can use Datadog to explore the Calendar application’s observability data.   
+Now, you can use Datadog to explore the Calendar application's observability data.   
 
 *Note: It may take a few minutes for your trace data to appear in Datadog.*
 
