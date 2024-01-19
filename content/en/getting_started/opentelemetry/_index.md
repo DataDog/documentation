@@ -81,7 +81,7 @@ private String getDate() {
    Span span = GlobalOpenTelemetry.getTracer("calendar").spanBuilder("getDate").startSpan();
 ```
 
-When the Calendar application runs, the `getDate()` call generates traces and spans. Next, you will configure the application to send this data to the Datadog backend.
+When the Calendar application runs, the `getDate()` call generates traces and spans.
 
 ### Configuring the OTLP Receiver 
 
