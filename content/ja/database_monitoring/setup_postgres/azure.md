@@ -19,7 +19,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 1. [データベースのパラメーターを構成する](#configure-postgres-settings)
 1. [Agent にデータベースへのアクセスを付与する](#grant-the-agent-access)
 1. [Agent をインストールする](#install-the-agent)
-1. [Azure PostgreSQL インテグレーションをインストールする](#install-the-rds-integration)
+1. [Azure PostgreSQL インテグレーションをインストールする](#install-the-azure-postgresql-integration)
 
 ## はじめに
 
