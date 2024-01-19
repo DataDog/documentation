@@ -206,7 +206,7 @@ All of the initial setup and configuration is complete. To start generating and 
 
    This command creates a Docker container with the OpenTelemetry Collector and the Calendar service.
 
-2. Test the Calendar application by running the following from another terminal window:
+2. To test that the Calendar application is running correctly, execute the following command from another terminal window:
    ```
    curl localhost:9090/calendar 
    ```
