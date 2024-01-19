@@ -28,17 +28,17 @@ further_reading:
 
 ## Overview
 
-OpenTelemetry is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing observability data from software applications. OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application observability data—namely metrics, logs, and traces—to monitoring platforms for analysis and insight.
+[OpenTelemetry][11] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing observability data from software applications. OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application observability data—namely metrics, logs, and traces—to monitoring platforms for analysis and insight.
 
 Datadog offers multiple options for sending data from OpenTelemetry-instrumented applications to the Datadog backend. 
 
-This guide demonstrates how to integrate an existing OpenTelemetry environment with Datadog, so you can analyze in the Datadog UI the observability data that you’re already generating. You will configure the Datadog Exporter, which runs alongside your OpenTelemetry Collector, to forward trace, metric, and logs data from OpenTelemetry SDKs to Datadog. 
+This guide demonstrates how to integrate an existing OpenTelemetry environment with Datadog so you can analyze in Datadog the observability data you’re already generating. You will configure the Datadog Exporter, which runs alongside your OpenTelemetry Collector, to forward trace, metric, and logs data from OpenTelemetry SDKs to Datadog. 
 
 Follow this guide to:
 
-1. Configure a sample application, instrumented using the OpenTelemetry SDKs.
-2. Send observability data (metrics, logs, and traces) to Datadog using the OpenTelemetry Collector with Datadog Exporter. 
-3. Explore the application’s observability data—namely, runtime metrics, infrastructure metrics, logs, and traces—in the Datadog UI. 
+1. Configure a sample application, instrumented using the OpenTelemetry API.
+2. Send observability data (metrics, logs, and traces) to Datadog using the OpenTelemetry Collector with the Datadog Exporter. 
+3. Explore the application’s observability data in the Datadog UI. 
 
 ## Prerequisites
 
@@ -81,9 +81,9 @@ private String getDate() {
 
 When the **Calendar** application runs, the `getDate()` call generates traces and spans. Next, you will configure the application to send this data to the Datadog backend.
 
-### Configuring the OTLP Receiver and the Datadog Exporter
+### Configuring the OTLP Receiver 
 
-The **Calendar** application sends data from the OpenTelemetry SDK to the [OpenTelemetry Protocol (OTLP) receiver][10] in the OpenTelemetry Collector. In the Collector configuration file, the following code configures the OTLP receiver to receive metrics, traces, and logs:
+The **Calendar** application sends data from the OpenTelemetry SDK to the [OpenTelemetry Protocol (OTLP) receiver][10] in the OpenTelemetry Collector. In the Collector configuration file---which lives at `./src/main/resources/otelcol-config.yaml`---the following code configures the OTLP receiver to receive metrics, traces, and logs:
 
 ```
 receivers:
@@ -104,7 +104,9 @@ service:
       receivers: [otlp]
 ```
 
-The Datadog Exporter sends data collected by the OTLP receiver to the Datadog backend so they can be explored through the Datadog site. In the OpenTelemetry Collector confguration file, the following configures the Datadog Exporter:
+### Configuring the Datadog Exporter
+
+The Datadog Exporter sends data collected by the OTLP receiver to the Datadog backend so it can be explored through the Datadog app. In `otelcol-config.yaml`, the following configures the Datadog Exporter:
 
 ```
 service:
@@ -123,13 +125,13 @@ This code suffices to send runtime metrics, traces, and logs to Datadog. However
 
 As an example, you will configure your OpenTelemetry Collector to forward Docker container metrics. 
 
+*Reminder: You must use Linux to send infrastructure metrics from the OpenTelemetry Collector to Datadog.*
+
 To collect container metrics, configure the [Docker stats receiver][5] in your Datadog Exporter: 
 
-1. Add a `docker_stats` block to the `receivers` section of your OpenTelemetry Collector configuration file:
+1. Add a `docker_stats` block to the `receivers` section of `otel-config.yaml`:
 
 ```
-# ./src/main/resources/otelcol-config.yaml
-
 receivers:
   otlp:
     protocols:
@@ -137,7 +139,8 @@ receivers:
         endpoint: 0.0.0.0:4317
       http:
         Endpoint: 0.0.0.0:4318
-  docker_stats:
+  # add the following block
+  docker_stats: 
     endpoint: unix:///var/run/docker.sock # default; if this is not the Docker socket path, update to the correct path
     metrics:
       container.network.io.usage.rx_packets:
@@ -162,16 +165,16 @@ receivers:
 service:
   pipelines:
     metrics:
-      receivers: [otlp, docker_stats]
+      receivers: [otlp, docker_stats] # <- update this line!
 ```
 
 Your application now sends container metrics to Datadog for viewing in the Datadog UI.
 
 ### Using unified tagging to correlate observability data
 
-[Unified service tagging][6] ties observability data together in Datadog so you can navigate across traces, metrics, and logs with consistent tags.
+[Unified service tagging][6] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
-In the **Calendar** application Docker Compose file, `./deploys/docker/docker-compose-otel.yml`, the following lines are already included to enable correlation between application traces and other observability data: 
+In the **Calendar** application's Docker Compose file, `./deploys/docker/docker-compose-otel.yml`, the following lines are already included to enable correlation between application traces and other observability data: 
 
 ```
 environment:
@@ -202,9 +205,9 @@ Run the **Calendar** application with the OpenTelemetry SDK to generate and forw
    {“date":"2022-12-30"}
    ```
 
-With each call, the **Calendar** application generates traces, logs, and runtime metrics, which are forwarded to the OpenTelemetry Collector, the Datadog Exporter, and finally the Datadog backend. 
+With each call, the **Calendar** application metrics, traces, and logs, which are forwarded to the OpenTelemetry Collector, the Datadog Exporter, and finally the Datadog backend. 
 
-Note: The **Calendar** application uses the probabilistic sampler processor, meaning only a percentage (30%, specifically) of all traces sent through the application reach the target backend. Run the curl command several times to ensure at least one trace is exported to the Datadog backend. 
+Note: The **Calendar** application uses the probabilistic sampler processor, meaning only a percentage (30%, specifically) of all traces sent through the application reach the target backend. Run the curl command several times to ensure at least one trace exports to the Datadog backend. 
 
 ## Exploring observability data in Datadog
 
@@ -216,8 +219,8 @@ Now, you can use Datadog to explore the **Calendar** application’s observabili
 
 View runtime and infrastructure metrics to visualize, monitor, and measure the performance of your applications, hosts, containers, and processes.
 
-1. Go to the [Datadog APM Service Catalog][7].
-2. Hover over the `calendar-otel` service and select **Full Page**
+1. Hover over **APM** in the left-side panel and select **Service Catalog**.
+2. Hover over the `calendar-otel` service and select **Full Page**.
 3. Scroll to the bottom panel and select:
 
    * **Infrastructure Metrics** to see your Docker container metrics, such as CPU and memory usage.
@@ -237,8 +240,8 @@ TODO: insert screenshot
 
 View traces and spans to observe the status and performance of requests processed by your application.
 
-1. Hover over APM in the left-side panel and select Traces.
-2. Find the Service section in the filter menu on the left-hand side, and select the calendar-otel service to list all calendar-otel traces:
+1. Hover over **APM** in the left-side panel and select **Traces**.
+2. Find the **Service** section in the filter menu on the left-hand side, and select the `calendar-otel` service to list all `calendar-otel` traces:
 
    TODO: insert screenshot
 
@@ -252,7 +255,7 @@ View traces and spans to observe the status and performance of requests processe
 
    TODO: insert screenshot
 
-   Note that you can also take the inverse approach: for example, in the Logs section of the Datadog site, you can click on a log and correlate it back to the respective trace.
+   You can also take the inverse approach: for example, in the **Logs** section of the Datadog site, you can click on a log and correlate it back to the respective trace.
 
    TODO: insert screenshot
 
@@ -271,3 +274,4 @@ View traces and spans to observe the status and performance of requests processe
 [8]: https://docs.datadoghq.com/tracing/glossary/#trace
 [9]: https://www.datadoghq.com/knowledge-center/distributed-tracing/flame-graph/
 [10]: https://docs.datadoghq.com/opentelemetry/collector_exporter/otlp_receiver/
+[11]: https://opentelemetry.io/
