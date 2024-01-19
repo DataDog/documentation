@@ -197,7 +197,7 @@ environment:
 
 ## Running the application to generate observability data
 
-Run the Calendar application with the OpenTelemetry SDK to generate and forward observability data to Datadog:  
+All of the initial setup and configuration is complete. To start generating and forwarding observability data to Datadog, you need to run the Calendar application with the OpenTelemetry SDK:
 
 1. Run the application from the `calendar/` folder:
    ```
