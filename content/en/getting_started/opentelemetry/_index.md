@@ -35,8 +35,11 @@ This guide demonstrates how to configure a sample OpenTelemetry application to o
 
 Follow this guide to:
 
-1. Configure a sample application, instrumented using the OpenTelemetry API.
-2. Send observability data (metrics, logs, and traces) to Datadog using the OpenTelemetry Collector with the Datadog Exporter. 
+1. See how the application is instrumented with the OpenTelemetry API.
+2. Configure the OTLP Receiver to collect metrics, logs, and traces.
+3. Send observability data to Datadog using the OpenTelemetry Collector with the Datadog Exporter. 
+4. Configure the application to send infrastructure metrics.
+5. Correlate observability data with unified service tagging.
 3. Explore the application's observability data in Datadog. 
 
 ## Prerequisites
