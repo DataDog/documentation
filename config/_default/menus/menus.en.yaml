@@ -731,21 +731,26 @@ main:
     pre: open-telemetry
     parent: essentials_heading
     weight: 46000
+  - name: Getting Started with OpenTelemetry and Datadog 
+    url: opentelemetry/getting_started_otel_and_datadog/
+    identifier: getting_started_otel_dd
+    parent: opentelemetry_top_level
+    weight: 1
   - name: OpenTelemetry Collector Datadog Exporter
     url: opentelemetry/otel_collector_datadog_exporter/
     identifier: otel_dd_exporter
     parent: opentelemetry_top_level
-    weight: 1
+    weight: 2
   - name: OTLP Ingestion by the Datadog Agent
     url: opentelemetry/otlp_ingest_in_the_agent/
     identifier: otel_ingest_agent
     parent: opentelemetry_top_level
-    weight: 2
+    weight: 3
   - name: Runtime Metrics
     url: opentelemetry/runtime_metrics
     identifier: otel_runtime_metrics
     parent: opentelemetry_top_level
-    weight: 3
+    weight: 4
   - name: Java
     url: opentelemetry/runtime_metrics/java
     identifier: otel_runtime_metrics_java
@@ -765,7 +770,7 @@ main:
     url: opentelemetry/guide/
     identifier: otel_guides
     parent: opentelemetry_top_level
-    weight: 4
+    weight: 5
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
