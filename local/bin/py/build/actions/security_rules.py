@@ -214,6 +214,26 @@ def security_rules(content, content_dir):
             if cloud and cloud == 'aws':
                 page_data["integration_id"] = "amazon-{}".format(page_data["integration_id"])
 
+            # Deeplinks to in-app rules
+            if page_data['rule_category'][0] == "Application Security":
+                # App Sec
+                page_data["view_rule_url"] = f"https://app.datadoghq.com/security/configuration/asm/rules?query=type%3Aapplication_security%20defaultRuleId%3A{page_data['default_rule_id']}"
+                page_data["view_findings_url"] = f"https://app.datadoghq.com/security?query=%40workflow.rule.defaultRuleId%3A{page_data['default_rule_id']}"
+            elif page_data['rule_category'][0] in ["Cloud SIEM (Log Detection)", "Cloud SIEM (Signal Correlation)"]:
+                # Cloud SIEM
+                page_data["view_rule_url"] = f"https://app.datadoghq.com/security/configuration/siem/rules?query=type%3A%28log_detection%20OR%20signal_correlation%29%20defaultRuleId%3A{page_data['default_rule_id']}%20&deprecated=hide&groupBy=tactic&product=siem"
+                page_data["view_findings_url"] = f"https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29%20%40workflow.rule.defaultRuleId%3A{page_data['default_rule_id']}%20&column=time&order=desc&product=siem&viz=stream"
+            elif page_data['rule_category'][0] == "CSM Threats":
+                # CSM Threats
+                page_data["view_rule_url"] = f"https://app.datadoghq.com/security/configuration/workload/rules?query=type%3Aworkload_security%20defaultRuleId%3A{page_data['default_rule_id']}%20&deprecated=hide&groupBy=tactic&product=cws&sort=rule_name"
+                page_data["view_findings_url"] = f"https://app.datadoghq.com/security?query=%40workflow.rule.defaultRuleId%3A{page_data['default_rule_id']}%20&column=time&order=desc"
+            elif page_data['rule_category'][0] in [ "CSM Identity Risks", "CSM Misconfigurations (Cloud)", "CSM Misconfigurations (Infra)", "CSM Security Issues"]:
+                # CSM Identity Risks, CSM Misconfigurations, CSM Sec Issues
+                page_data["view_rule_url"] = f"https://app.datadoghq.com/security/configuration/compliance/rules?query=type%3A%28cloud_configuration%20OR%20infrastructure_configuration%29%20defaultRuleId%3A{page_data['default_rule_id']}%20&deprecated=hide&groupBy=framework&product=cspm&sort=rule_name"
+                if page_data['rule_category'][0] != "CSM Security Issues":
+                    page_data["view_findings_url"] = f"https://app.datadoghq.com/security/identities?query=%40workflow.rule.defaultRuleId%3A{page_data['default_rule_id']}%20&aggregation=resources&column=status&order=asc&sort=ruleSeverity%2CfailedResources-desc"
+
+
             front_matter = yaml.dump(page_data, default_flow_style=False).strip()
             output_content = TEMPLATE.format(front_matter=front_matter, content=message.strip())
 
