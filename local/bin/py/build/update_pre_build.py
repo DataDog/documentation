@@ -147,13 +147,10 @@ def main(disable_cache_on_retry=False):
     # 2. Load all configuration needed to build the doc
     # 3. Retrieve the list of content to work with and updates it based of the configuration specification
     # 4. Actually build the documentation with the udpated list of content.
-    try:
-        build = Build(temp_directory)
-        build.load_config(build_configuration_file_path, integration_merge_configuration_file_path, disable_cache_on_retry)
-        build.get_list_of_content(build.build_configuration)
-        build.build_documentation()
-    except Exception as err:
-        print(err)
+    build = Build(temp_directory)
+    build.load_config(build_configuration_file_path, integration_merge_configuration_file_path, disable_cache_on_retry)
+    build.get_list_of_content(build.build_configuration)
+    build.build_documentation()
 
 
 if __name__ == "__main__":
