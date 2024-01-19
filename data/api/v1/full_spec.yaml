@@ -15920,6 +15920,10 @@ components:
           description: A protobuf JSON descriptor that needs to be gzipped first then
             base64 encoded.
           type: string
+        compressedProtoFile:
+          description: A protobuf file that needs to be gzipped first then base64
+            encoded.
+          type: string
         dnsServer:
           description: DNS server to use for DNS tests.
           type: string
