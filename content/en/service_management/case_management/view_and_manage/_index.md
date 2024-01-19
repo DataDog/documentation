@@ -9,17 +9,17 @@ further_reading:
 
 ## Overview
 
-On the [Case Management page][1], cases can be sorted by creation date, status, or priority. By default, it is sorted by creation date. 
+On the [Case Management page][1], cases can be sorted by creation date, status, or priority. By default, cases are sorted by creation date. 
 
 To make bulk edits to cases within a project, use the checkboxes to select one or more cases. Then, use the drop-down menus to perform actions in bulk, such as status management, assignment, and archiving. When cases are moved to a different project, the cases are assigned a new case ID. The old case URL does not redirect to the new case. 
 
 ## Keyboard shortcuts
-Use the comprehensive set of keyboard shortcuts for swift navigation:
+Use the following keyboard shortcuts for swift navigation:
 
 | Action              | Shortcut       |
 | ------------------  | ----------     |
 | Move up             | `↑` or `K`     |
-| Move down           | `↓` or `K`     |
+| Move down           | `↓` or `J`     |
 | Select case         | `X`            |
 | View selected case  | `Enter` or `O` |
 | Create a case       | `C`            |
@@ -32,10 +32,10 @@ Use the comprehensive set of keyboard shortcuts for swift navigation:
 ## Search cases
 
 Within a project, you can search for cases by:
-- **attribute key-value pairs**: For example, to find all cases created from Event Correlation patterns, search for "creation_source:Event Management". For cases created from individual events, search for `"creation_source:Event"`.
-- **title**: Surround your search term with double quotes. For example, to find all of your cases containing the term "kubernetes pods" in the title, search for `"kubernetes pods"`.
+- **attribute key-value pairs**: For example, to find all cases created from Event Correlation patterns, search for `creation_source:Event Management`. For cases created from individual events, search for `creation_source:Event`.
+- **title**: Surround your search term with double quotes. For example, to find all of your cases containing the term "kubernetes pods" in the title, search for `"kubernetes pods."`
 
-To compose a more complex query, you can use the following case sensitive Boolean operators: `AND`, `OR`, and `-` (exclusion). For example, `priority:(P2 OR P3)` returns cases of either priority P2 or P3. 
+To compose a more complex query, you can use the following case sensitive Boolean operators: `AND`, `OR`, and `-` (exclusion). For example, `priority:(P2 OR P3)` returns cases of either priority `P2` or `P3`. 
 
 Additionally, you can search for cases across all projects using the global search bar in the top left corner.
 
@@ -82,13 +82,13 @@ Activity timeline
 
 ## Take action
 
-Use Case Management to gather information, context, and resources to determine the proper action. This includes further investigation, escalating to an incident, or closing out a case.
+Use Case Management to gather information, context, and resources to determine the proper action to take. This includes further investigation, escalating to an incident, or closing out a case.
 
 From an individual case:
 - [Create an investigative notebook][2]: Gather investigation information and collaborate with your team members.
 - [Declare an incident][3]: Escalate a case to an incident and kick off your incident response process. 
 - Manually create a Jira issue: Use `Shift + J` to create a Jira issue. For more information on how to configure automatic Jira issue creation and bidirectional synchronization, see the [Settings][4] documentation. 
-Manually create a ServiceNow incident: Use `Shift + N` to create a ServiceNow incident. 
+- Manually create a ServiceNow incident: Use `Shift + N` to create a ServiceNow incident. 
 - [Meet on CoScreen][5]: Share screens for collaborative debugging 
 - Close out the case: Let the team know that no further action is needed. Update the status of the case to closed.
 
