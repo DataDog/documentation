@@ -85,7 +85,10 @@ When the Calendar application runs, the `getDate()` call generates traces and sp
 
 ### Configuring the OTLP Receiver 
 
-The Calendar application sends data from the OpenTelemetry SDK to the [OpenTelemetry Protocol (OTLP) receiver][10] in the OpenTelemetry Collector. In the Collector configuration file---which lives at `./src/main/resources/otelcol-config.yaml`---the following code configures the OTLP receiver to receive metrics, traces, and logs:
+The Calendar application is already configured to send data from the OpenTelemetry SDK to the [OpenTelemetry Protocol (OTLP) receiver][10] in the OpenTelemetry Collector.
+
+1. Go to the Collector configuration file located at: `./src/main/resources/otelcol-config.yaml`
+2.  The following lines configures the OTLP Receiver to receive metrics, traces, and logs:
 
 ```
 receivers:
