@@ -22,7 +22,7 @@
     {{ end }}
 		{{ $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" $basename "variant" "avatar") $basename "avatar" }}
 		{{ if $int_logo }}
-			<div class="col-3 col-lg-2 d-flex justify-content-center">
+			<div class="col-3 col-lg-2">
 				<img src="{{ $int_logo }}?auto=format&width=120" width="80px" max-height="100px" alt="{{ htmlEscape .Params.Source }}" />
 			</div>
 		{{ end }}
@@ -54,6 +54,33 @@
 					<div class="col-4 col-md-4 col-lg-3"><p class="fw-bold small">Control: </p></div>
 					<div class="col-8 col-md-8 col-lg-7"><p class="small">{{ .Params.control }}</p></div>
 				{{ end }}
+			</div>
+		</div>
+		<div class="col-12">
+			<div class="row">
+				{{ $rule_category := (index .Params.rule_category 0)}}
+				{{ $view_findings_text := "View Signals"}}
+
+				{{ if eq $rule_category "CSM Identity Risks"}}
+				{{ $view_findings_text = "View Identity Risks"}}
+				{{ else if strings.Contains $rule_category "CSM Misconfigurations"}}
+				{{ $view_findings_text = "View Misconfigurations"}}
+				{{ end }}
+
+				<div class="col-6 col-md-3 col-lg-6 col-xl-3">
+					{{ with .Params.view_rule_url }}
+					<button class="mt-1 btn btn-sm-tag btn-outline-primary position-relative">
+						<a href="{{.}}" class="stretched-link" target="_blank">VIEW RULE IN-APP</a>
+					</button>
+					{{ end }}
+				</div>
+				<div class="col-6 col-md-9 col-lg-6 col-xl-9">
+					{{ with .Params.view_findings_url }}
+					<button class="mt-1 btn btn-sm-tag btn-outline-primary position-relative">
+						<a href="{{.}}" class="stretched-link" target="_blank">{{$view_findings_text | upper}}</a>
+					</button>
+					{{ end }}
+				</div>
 			</div>
 		</div>
 	</div>
