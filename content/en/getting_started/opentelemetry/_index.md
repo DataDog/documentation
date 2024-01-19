@@ -251,7 +251,7 @@ TODO: insert screenshot
 
 View traces and spans to observe the status and performance of requests processed by your application.
 
-1. Hover over **APM** in the left-side panel and select **Traces**.
+1. Go to **APM** > **Traces**.
 2. Find the **Service** section in the filter menu on the left-hand side, and select the `calendar-otel` service to list all `calendar-otel` traces:
 
    TODO: insert screenshot
