@@ -69,14 +69,14 @@
 
 				<div class="col-6 col-md-3 col-lg-6 col-xl-3">
 					{{ with .Params.view_rule_url }}
-					<button class="mt-1 btn btn-sm-tag btn-outline-primary position-relative">
+					<button class="mt-1 btn btn-sm-tag btn-outline-secondary position-relative">
 						<a href="{{.}}" class="stretched-link" target="_blank">VIEW RULE IN-APP</a>
 					</button>
 					{{ end }}
 				</div>
 				<div class="col-6 col-md-9 col-lg-6 col-xl-9">
 					{{ with .Params.view_findings_url }}
-					<button class="mt-1 btn btn-sm-tag btn-outline-primary position-relative">
+					<button class="mt-1 btn btn-sm-tag btn-outline-secondary position-relative">
 						<a href="{{.}}" class="stretched-link" target="_blank">{{$view_findings_text | upper}}</a>
 					</button>
 					{{ end }}
