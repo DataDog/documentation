@@ -111,7 +111,10 @@ service:
 
 ### Configuring the Datadog Exporter
 
-The Datadog Exporter sends data collected by the OTLP receiver to the Datadog backend. In `otelcol-config.yaml`, the following configures the Datadog Exporter:
+The Datadog Exporter sends data collected by the OTLP Receiver to the Datadog backend.
+
+1. Go to the `otelcol-config.yaml` file.
+2. The following lines configure the Datadog Exporter to send observability data to Datadog:
 
 ```
 service:
