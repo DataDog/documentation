@@ -127,7 +127,7 @@ service:
       exporters: [datadog]
 ```
 
-This code suffices to send runtime metrics, traces, and logs to Datadog. However, [*infrastructure metrics* require additional changes][4]. 
+This configuration allows the Datadog Exporter to send runtime metrics, traces, and logs to Datadog. However, sending infrastructure metrics requires additional configuration.
 
 ### Configuring your application to send infrastructure metrics
 
