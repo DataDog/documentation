@@ -6,4 +6,4 @@ To send a remote flare:
 1. Enable **Debug mode** to allow Datadog support staff to troubleshoot your issue faster. The log level is reset to its previous configuration after you send the flare.
 1. Click **Send Ticket**.
 
-[fleet-automation]:  https://app.datadoghq.com/fleet
+[fleet-automation]: https://app.datadoghq.com/fleet
