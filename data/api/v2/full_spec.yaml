@@ -4951,6 +4951,10 @@ components:
     DORADeploymentRequestAttributes:
       description: Attributes to create a DORA deployment event.
       properties:
+        env:
+          description: Environment name to where the service was deployed.
+          example: staging
+          type: string
         finished_at:
           description: Unix timestamp in nanoseconds when the deployment finished.
             It should not be older than 3 hours.
@@ -5039,6 +5043,10 @@ components:
     DORAIncidentRequestAttributes:
       description: Attributes to create a DORA incident event.
       properties:
+        env:
+          description: Environment name that was impacted by the incident.
+          example: staging
+          type: string
         finished_at:
           description: Unix timestamp in nanoseconds when the incident finished. It
             should not be older than 3 hours.
