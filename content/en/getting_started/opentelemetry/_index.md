@@ -218,7 +218,7 @@ All of the initial setup and configuration is complete. To start generating and 
 
 Each call to the Calendar application results in metrics, traces, and logs being forwarded to the OpenTelemetry Collector, then to the Datadog Exporter, and finally to the Datadog backend. 
 
-Note: The Calendar application uses the probabilistic sampler processor, so only 30% of traces sent through the application reach the target backend. Run the curl command several times to ensure at least one trace exports to the Datadog backend. 
+**Note**: The Calendar application uses the probabilistic sampler processor, so only 30% of traces sent through the application reach the target backend. Run the `curl` command several times to ensure at least one trace exports to the Datadog backend. 
 
 ## Exploring observability data in Datadog
 
