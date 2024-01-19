@@ -21,17 +21,17 @@ This page lists integrated libraries you can use for the following applications:
 - React Native
 
 ## Android & Android TV Monitoring
- 
+
 ### Coil
- 
+
 If you use Coil to load images in your application, see Datadog's [dedicated Coil library][1].
- 
+
 ### Fresco
- 
+
 If you use Fresco to load images in your application, see Datadog's [dedicated Fresco library][2].
- 
+
 ### Glide
- 
+
 If you use Glide to load images in your application, see Datadog's [dedicated Glide library][3].
 
 ### Jetpack Compose
@@ -43,14 +43,14 @@ If you use Jetpack Compose in your application, see Datadog's [dedicated Jetpack
 If you use RxJava in your application, see Datadog's [dedicated RxJava library][8].
 
 ### Picasso
- 
+
 If you use Picasso, use it with the `OkHttpClient` that's been instrumented with the Datadog SDK for RUM and APM information about network requests made by Picasso.
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}
    ```kotlin
        val picasso = Picasso.Builder(context)
-            .downloader(OkHttp3Downloader(okHttpClient)) 
+            .downloader(OkHttp3Downloader(okHttpClient))
             // …
             .build()
        Picasso.setSingletonInstance(picasso)
@@ -66,9 +66,9 @@ If you use Picasso, use it with the `OkHttpClient` that's been instrumented with
    ```
 {{% /tab %}}
 {{< /tabs >}}
- 
+
 ### Retrofit
- 
+
 If you use Retrofit, use it with the `OkHttpClient` that's been instrumented with the Datadog SDK for RUM and APM information about network requests made with Retrofit.
 
 {{< tabs >}}
@@ -89,16 +89,16 @@ If you use Retrofit, use it with the `OkHttpClient` that's been instrumented wit
    ```
 {{% /tab %}}
 {{< /tabs >}}
- 
+
 ### SQLDelight
- 
+
 If you use SQLDelight in your application, see Datadog's [dedicated SQLDelight library][4].
- 
+
 ### SQLite
- 
+
 Following SQLiteOpenHelper's [generated API documentation][5], you only have to provide the implementation of the
 `DatabaseErrorHandler` -> `DatadogDatabaseErrorHandler` in the constructor.
- 
+
 Doing this detects whenever a database is corrupted and sends a relevant
 RUM error event for it.
 
@@ -106,13 +106,13 @@ RUM error event for it.
 {{% tab "Kotlin" %}}
    ```kotlin
         class <YourOwnSqliteOpenHelper>: SqliteOpenHelper(
-                                        <Context>, 
-                                        <DATABASE_NAME>, 
-                                        <CursorFactory>, 
+                                        <Context>,
+                                        <DATABASE_NAME>,
+                                        <CursorFactory>,
                                         <DATABASE_VERSION>,
                                         DatadogDatabaseErrorHandler()) {
             // …
-        
+
         }
    ```
 {{% /tab %}}
@@ -130,9 +130,9 @@ RUM error event for it.
    ```
 {{% /tab %}}
 {{< /tabs >}}
- 
+
 ### Apollo (GraphQL)
- 
+
 If you use Apollo, use it with the `OkHttpClient` that's been instrumented with the Datadog SDK for RUM and APM information about all the queries performed through Apollo client.
 
 {{< tabs >}}
@@ -214,7 +214,7 @@ function App() {
 
 ### React Native Navigation
 
-**Note**: This package is an integration for `react-native-navigation` library, please make sure you first install and setup the core `mobile-react-native` SDK.
+**Note**: This package is an integration for `react-native-navigation` library. Please make sure you first install and setup the core `mobile-react-native` SDK.
 
 #### Setup
 
@@ -247,6 +247,88 @@ const viewNamePredicate: ViewNamePredicate = function customViewNamePredicate(ev
 DdRumReactNativeNavigationTracking.startTracking(viewNamePredicate);
 ```
 
+### Apollo Client
+
+**Note**: This package is an integration for the `@apollo/client` library. Please make sure you first install and set up the core `mobile-react-native` SDK.
+
+#### Setup
+
+To install with NPM, run:
+
+```sh
+npm install @datadog/mobile-react-native-apollo-client
+```
+
+To install with Yarn, run:
+
+```sh
+yarn add @datadog/mobile-react-native-apollo-client
+```
+
+#### Migrate to HttpLink
+
+If you initialize your `ApolloClient` with the `uri` parameter, initialize it with a `HttpLink`:
+
+```javascript
+import { ApolloClient, HttpLink } from '@apollo/client';
+
+// before
+const apolloClient = new ApolloClient({
+    uri: 'https://my.api.com/graphql'
+});
+
+// after
+const apolloClient = new ApolloClient({
+    link: new HttpLink({ uri: 'https://my.api.com/graphql' })
+});
+```
+
+#### Use the Datadog Apollo Client Link to collect information
+
+Import `DatadogLink` from `@datadog/mobile-react-native-apollo-client` and use it in your `ApolloClient` initialization:
+
+```javascript
+import { ApolloClient, from, HttpLink } from '@apollo/client';
+import { DatadogLink } from '@datadog/mobile-react-native-apollo-client';
+
+const apolloClient = new ApolloClient({
+    link: from([
+        new DatadogLink(),
+        new HttpLink({ uri: 'https://my.api.com/graphql' }) // always in last position
+    ])
+});
+```
+
+For more information on Apollo Client Links, see the [official documentation][13].
+
+#### Removing GraphQL information
+
+Use a `resourceEventMapper` in your Datadog configuration to remove sensitive data from GraphQL variables:
+
+```javascript
+const datadogConfiguration = new DatadogProviderConfiguration(
+    '<CLIENT_TOKEN>',
+    '<ENVIRONMENT_NAME>',
+    '<RUM_APPLICATION_ID>',
+    true,
+    true,
+    true
+);
+
+datadogConfiguration.resourceEventMapper = event => {
+    // Variables are stored in event.context['_dd.graphql.variables'] as a JSON string when present
+    if (event.context['_dd.graphql.variables']) {
+        const variables = JSON.parse(event.context['_dd.graphql.variables']);
+        if (variables.password) {
+            variables.password = '***';
+        }
+        event.context['_dd.graphql.variables'] = JSON.stringify(variables);
+    }
+
+    return event;
+};
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -263,3 +345,4 @@ DdRumReactNativeNavigationTracking.startTracking(viewNamePredicate);
 [10]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-trace-coroutines
 [11]: https://wix.github.io/react-native-navigation/api/events/#componentdidappear
 [12]: https://reactnavigation.org/
+[13]: https://www.apollographql.com/docs/react/api/link/introduction/

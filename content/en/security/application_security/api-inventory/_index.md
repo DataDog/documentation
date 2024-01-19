@@ -22,7 +22,7 @@ Using the API Security Inventory you can:
 - See at a glance your publicly exposed endpoints that are handling sensitive data, such as payment card numbers.
 - See which endpoints are at risk, and pivot directly into the [Threat Monitoring and Protection][2] service for further investigation or response.
 
-{{< img src="security/application_security/api/welcome.png" alt="API Security Inventory main page">}}
+{{< img src="security/application_security/api/api_endpoints.png" alt="API Security Inventory main page">}}
 
 ## Configuration
 

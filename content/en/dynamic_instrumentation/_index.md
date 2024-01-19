@@ -30,11 +30,6 @@ further_reading:
   text: "Use Datadog Dynamic Instrumentation to add application logs without redeploying"
 ---
 
-{{< site-region region="gov,ap1" >}}
-<div class="alert alert-warning">Dynamic Instrumentation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-
 ## Overview
 
 Dynamic instrumentation allows you to add instrumentation into your running production systems without any restarts and at any location in your application's code, including third-party libraries. You can add or modify telemetry for logs, metrics, spans, and corresponding tagging, from the Datadog UI. Dynamic Instrumentation has low overhead and has no side effects on your system.
@@ -53,8 +48,8 @@ Dynamic Instrumentation requires the following:
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
 - Optionally, [Source Code Integration][7] is set up for your service.
 - The **Dynamic Instrumentation Read Configuration** (`debugger_read`) permission is required to access the Dynamic Instrumentation page
-- The **Dynamic Instrumentation Write Configuration** (`debugger_write`) permission is required to create or modify instrumentations. 
-- The **Dynamic Instrumentation Read Configuration** (`debugger_capture_variables`) permission is required to use the **Capture method parameters and local variables** option.
+- The **Dynamic Instrumentation Write Configuration** (`debugger_write`) permission is required to create or modify instrumentations.
+- The **Dynamic Instrumentation Capture Variables** (`debugger_capture_variables`) permission is required to use the **Capture method parameters and local variables** option.
 
  For more information about roles and on how to assign roles to users, see [Role Based Access Control][8].
 
@@ -70,7 +65,7 @@ If you use [Exclusion filters][9], ensure Dynamic Instrumentation logs are not f
 
 ### Enable Dynamic Instrumentation
 
-To enable Dynamic Instrumentation on a service, go to the [in-app setup page][16]. 
+To enable Dynamic Instrumentation on a service, go to the [in-app setup page][16].
 
 For more detailed instructions, select your runtime below:
 
@@ -82,7 +77,7 @@ Dynamic Instrumentation can help you understand what your application is doing a
 
 ### Using probes
 
-A probe allows you to collect data from specific points in your code without halting the execution of the program. 
+A probe allows you to collect data from specific points in your code without halting the execution of the program.
 
 Think of using probes as enhancing your observability by adding dynamic logs, metrics, and spans to a running application without needing to change code, deploy it, or restart a service. You can gather data immediately without disturbing the user experience or requiring lengthy deployments.
 
@@ -106,11 +101,11 @@ Profiling
 
 Error Tracking
 : On a stack trace, mouse over a stack frame and click **Instrument**. This prefills the probe creation form with the Issue context.
-  
+
 
 ### Creating log probes
 
-A *log probe* emits a log when it executes. 
+A *log probe* emits a log when it executes.
 
 To create a log probe:
 
@@ -146,7 +141,7 @@ Probes with this setting enabled are rate-limited to one hit per second.
 
 ### Creating metric probes
 
-A *metric probe* emits a metric when it executes. 
+A *metric probe* emits a metric when it executes.
 
 To create a metric probe:
 
@@ -168,12 +163,12 @@ Dynamic Instrumentation metric probes support the following metric types:
 
 ### Creating span probes
 
-A *span probe* emits a span when a method is executed. 
+A *span probe* emits a span when a method is executed.
 
 To create a span probe:
 
 1. Select **Span** as the probe type.
-1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location). 
+1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location).
 
 {{< img src="dynamic_instrumentation/span_probe.png" alt="Creating a Dynamic Instrumentation span probe" >}}
 
@@ -182,14 +177,14 @@ You can use a *span probe* as an alternative to [creating new spans with Custom 
 ### Creating span tag probes
 
 A *span tag* probe adds a tag value to an existing span. You can add a tag either to the _active_ span or to the _service entry_ span.
-Keep in mind that internal spans are not indexed by default and so might not be searchable in APM.  
+Keep in mind that internal spans are not indexed by default and so might not be searchable in APM.
 
 To create a span tag probe:
 
 1. Select **Span Tag** as the probe type.
-1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location). 
+1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location).
 1. Specify a name for the tag.
-1. Specify the value of the tag using the [Dynamic Instrumentation expression language][15]. 
+1. Specify the value of the tag using the [Dynamic Instrumentation expression language][15].
 1. Optionally define a condition using the Dynamic Instrumentation expression language. The tag will only be added when the expression evaluates to true.
 1. Optionally add additional tags, each with their own name, expression, and optional condition.
 
@@ -198,7 +193,7 @@ To create a span tag probe:
 
 You can use a *span tag probe* as an alternative to [using Custom Instrumentation to add tags in code][14].
 
- 
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

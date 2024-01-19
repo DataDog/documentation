@@ -10,6 +10,10 @@ further_reading:
     text: Setting Up Cloud Security Management
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 You can use resource tags to create filters that include or exclude resources from being evaluated by Cloud Security Management (CSM). The filters must be specified as a comma-separated list of `key:value` pairs.
 
 **Notes**:

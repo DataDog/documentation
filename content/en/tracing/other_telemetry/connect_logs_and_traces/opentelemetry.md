@@ -181,10 +181,12 @@ String datadogSpanIdString = Long.toUnsignedString(datadogSpanId);
 logging.pattern.console = %d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg dd.trace_id=%X{datadogTraceIdString} dd.span_id=%X{datadogSpanIdString} %n
 ```
 
+See [Java Log Collection][4] on how to send your Java logs to Datadog.
 
 [1]: https://github.com/open-telemetry/opentelemetry-java-instrumentation/blob/main/docs/logger-mdc-instrumentation.md
 [2]: https://docs.spring.io/spring-boot/docs/2.1.18.RELEASE/reference/html/boot-features-logging.html
 [3]: /tracing/other_telemetry/connect_logs_and_traces/java/?tab=log4j2#manually-inject-trace-and-span-ids
+[4]: /logs/log_collection/java/?tab=logback
 {{% /tab %}}
 
 {{% tab "PHP" %}}
