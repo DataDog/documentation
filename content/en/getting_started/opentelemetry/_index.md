@@ -216,7 +216,7 @@ All of the initial setup and configuration is complete. To start generating and 
    {“date":"2022-12-30"}
    ```
 
-With each call, the Calendar application metrics, traces, and logs, which are forwarded to the OpenTelemetry Collector, the Datadog Exporter, and finally the Datadog backend. 
+Each call to the Calendar application results in metrics, traces, and logs being forwarded to the OpenTelemetry Collector, then to the Datadog Exporter, and finally to the Datadog backend. 
 
 Note: The Calendar application uses the probabilistic sampler processor, so only 30% of traces sent through the application reach the target backend. Run the curl command several times to ensure at least one trace exports to the Datadog backend. 
 
