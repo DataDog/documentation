@@ -40,7 +40,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 <div class="alert alert-info">Cloud Security Management offerings are now available in three separate packages: CSM Enterprise, CSM Pro, and CSM Workload Security. For more information, see <a href="https://www.datadoghq.com/blog/cloud-security-management-changes/">Changes to Datadog Cloud Security Management</a>.</div>

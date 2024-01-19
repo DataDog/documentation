@@ -17,12 +17,10 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">
-CSM Misconfigurations is not available in the selected site.
-</div>
+<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-CSM Misconfigurations comes with more than 400 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within a compliance standard or industry benchmarks. See [Supported Frameworks][2] for more information.
+CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within a compliance standard or industry benchmarks. See [Supported Frameworks][2] for more information.
 
 ## View your compliance posture
 

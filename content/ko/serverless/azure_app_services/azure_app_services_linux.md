@@ -59,7 +59,7 @@ title: Azure App Service - Linux 코드
 **일반 설정**으로 가서 다음을 **시작 명령** 필드에 추가하세요:
 
 ```
-curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.2.0/datadog_wrapper | bash
+curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.7.0/datadog_wrapper | bash
 ```
 
 {{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service 설정: Azure UI 설정 섹션 아래에 있는 스택 설정. 스택 아래 주 버전과 부 버전 필드에 '시작 명령' 필드가 있고 위의 curl 명령이 입력되어 있음." style="width:100%;" >}}

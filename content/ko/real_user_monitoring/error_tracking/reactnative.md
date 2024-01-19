@@ -19,7 +19,7 @@ title: React Native 충돌 보고 및 오류 추적
 React Native 충돌 보고 및 오류 추적을 활성화하고 실제 사용자 모니터링을 사용하여 종합적인 충돌 보고와 오류 동향을 확보할 수 있습니다. 이 기능을 사용하면 다음에 액세스할 수 있습니다.
 
 -   총 React Native 충돌 대시보드 및 속성
--   심볼하된 React Native(자바스크립트(Javascript) 및 네이티브 iOS 또는 Android) 충돌 보고서
+-   심볼화된 React Native(자바스크립트(Javascript) 및 네이티브 iOS 또는 Android) 충돌 보고서
 -   React Native 오류 추적을 사용한 동향 분석
 
 스택 트레이스를 심볼화하려면 매핑 파일을 수동으로 Datadog에 업로드하세요.
@@ -338,7 +338,7 @@ Android에서 소스 맵 파일은 `android/app/build/generated/sourcemaps/react
 
 Android Gradle Plugin 버전은 `com.android.tools.build:gradle` 아래의 `android/build.gradle` 파일에서 지정되어 있습니다. 예: `classpath("com.android.tools.build:gradle:7.3.1")`
 
-애플리케이션에 보다 포괄적인 유사 제품이 있는 경우 경로의 유사 제품 이름으로 `release`를 대체합니다.
+애플리케이션에 보다 포괄적인 변형이 있는 경우 경로의 변형 이름으로 `release`를 대체합니다.
 `android/app/build.gradle`에 있는 React 설정에서 `bundleAssetName`을 지정한 경우 `index.android.bundle`을 해당 값으로 대체합니다.
 
 빌드를 실행한 후 React Native 프로젝트 루트에서 이를 실행하여 소스 맵을 업로드합니다.
