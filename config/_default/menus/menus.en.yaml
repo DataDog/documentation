@@ -26,9 +26,12 @@ main:
   - name: Log Management
     identifier: log_management_heading
     weight: 9000000
+  - name: Integrations
+    identifier: integrations_heading
+    weight: 10000000
   - name: Administration
     identifier: administration_heading
-    weight: 10000000
+    weight: 11000000
   - name: Getting Started
     identifier: getting_started
     url: getting_started/
@@ -227,314 +230,12 @@ main:
     identifier: guides
     parent: essentials_heading
     weight: 30000
-  - name: Agent
-    url: agent/
-    pre: agent-fill
-    parent: essentials_heading
-    weight: 40000
-    identifier: agent
-  - name: Basic Agent Usage
-    url: agent/basic_agent_usage/
-    parent: agent
-    identifier: basic_agent_usage
-    weight: 1
-  - name: AIX
-    identifier: basic_agent_usage_aix
-    url: agent/basic_agent_usage/aix/
-    weight: 101
-    parent: basic_agent_usage
-  - name: Amazon Linux
-    identifier: basic_agent_usage_amazon_linux
-    url: agent/basic_agent_usage/amazonlinux/
-    weight: 102
-    parent: basic_agent_usage
-  - name: Alma Linux
-    identifier: basic_agent_usage_alma_linux
-    url: agent/basic_agent_usage/centos/
-    weight: 103
-    parent: basic_agent_usage
-  - name: Ansible
-    identifier: basic_agent_usage_ansible
-    url: agent/basic_agent_usage/ansible/
-    parent: basic_agent_usage
-    weight: 104
-  - name: CentOS
-    identifier: basic_agent_usage_centos
-    url: agent/basic_agent_usage/centos/
-    weight: 105
-    parent: basic_agent_usage
-  - name: Chef
-    identifier: basic_agent_usage_chef
-    url: agent/basic_agent_usage/chef/
-    weight: 106
-    parent: basic_agent_usage
-  - name: Debian
-    identifier: basic_agent_usage_deb
-    url: agent/basic_agent_usage/deb/
-    weight: 107
-    parent: basic_agent_usage
-  - name: Fedora
-    identifier: basic_agent_usage_fedora
-    url: agent/basic_agent_usage/fedora/
-    weight: 108
-    parent: basic_agent_usage
-  - name: Heroku
-    identifier: basic_agent_usage_heroku
-    url: agent/basic_agent_usage/heroku/
-    weight: 109
-    parent: basic_agent_usage
-  - name: Mac OS X
-    identifier: basic_agent_usage_osx
-    url: agent/basic_agent_usage/osx/
-    weight: 110
-    parent: basic_agent_usage
-  - name: Puppet
-    identifier: basic_agent_usage_puppet
-    url: agent/basic_agent_usage/puppet/
-    weight: 111
-    parent: basic_agent_usage
-  - name: Red Hat
-    identifier: basic_agent_usage_redhat
-    url: agent/basic_agent_usage/redhat/
-    weight: 112
-    parent: basic_agent_usage
-  - name: Rocky Linux
-    identifier: basic_agent_usage_rockylinux
-    url: agent/basic_agent_usage/centos/
-    weight: 113
-    parent: basic_agent_usage
-  - name: SaltStack
-    identifier: basic_agent_usage_saltstack
-    url: agent/basic_agent_usage/saltstack/
-    weight: 114
-    parent: basic_agent_usage
-  - name: SUSE
-    identifier: basic_agent_usage_suse
-    url: agent/basic_agent_usage/suse/
-    weight: 115
-    parent: basic_agent_usage
-  - name: Ubuntu
-    identifier: basic_agent_usage_ubuntu
-    url: agent/basic_agent_usage/ubuntu/
-    weight: 116
-    parent: basic_agent_usage
-  - name: Windows
-    identifier: basic_agent_usage_windows
-    url: agent/basic_agent_usage/windows/
-    weight: 117
-    parent: basic_agent_usage
-  - name: From Source
-    identifier: basic_agent_usage_source
-    url: agent/basic_agent_usage/source/
-    weight: 118
-    parent: basic_agent_usage
-  - name: Architecture
-    url: agent/architecture/
-    parent: agent
-    identifier: architecture
-    weight: 2
-  - name: IoT
-    url: agent/iot/
-    parent: agent
-    identifier: agent_iot
-    weight: 3
-  - name: Supported Platforms
-    url: agent/supported_platforms/
-    parent: agent
-    identifier: agent_supported_platforms
-    weight: 4
-  - name: Log Collection
-    url: agent/logs/
-    identifier: agent_logs
-    parent: agent
-    weight: 5
-  - name: Advanced Configurations
-    identifier: agent_logs_advanced_log_collection
-    url: agent/logs/advanced_log_collection
-    parent: agent_logs
-    weight: 501
-  - name: Proxy
-    identifier: agent_logs_proxy
-    url: agent/logs/proxy
-    parent: agent_logs
-    weight: 502
-  - name: Transport
-    identifier: agent_logs_transport
-    url: agent/logs/log_transport
-    parent: agent_logs
-    weight: 503
-  - name: Configuration
-    url: agent/configuration
-    parent: agent
-    identifier: agent_configuration
-    weight: 6
-  - name: Commands
-    identifier: agent_configuration_commands
-    url: agent/configuration/agent-commands/
-    parent: agent_configuration
-    weight: 601
-  - name: Configuration Files
-    identifier: agent_configuration_files
-    url: agent/configuration/agent-configuration-files/
-    parent: agent_configuration
-    weight: 602
-  - name: Log Files
-    identifier: agent_configuration_log_files
-    url: agent/configuration/agent-log-files/
-    parent: agent_configuration
-    weight: 603
-  - name: Status Page
-    identifier: agent_configuration_status_page
-    url: agent/configuration/agent-status-page/
-    parent: agent_configuration
-    weight: 604
-  - name: Network Traffic
-    identifier: agent_configuration_network_traffic
-    url: agent/configuration/network/
-    parent: agent_configuration
-    weight: 605
-  - name: Proxy Configuration
-    identifier: agent_configuration_proxy
-    url: agent/configuration/proxy/
-    parent: agent_configuration
-    weight: 606
-  - name: FIPS Compliance
-    identifier: agent_configuration_fips_compliance
-    url: agent/configuration/agent-fips-proxy/
-    parent: agent_configuration
-    weight: 607
-  - name: Dual Shipping
-    identifier: agent_configuration_dual_shipping
-    url: agent/configuration/dual-shipping/
-    parent: agent_configuration
-    weight: 608
-  - name: Secrets Management
-    identifier: agent_configuration_secrets_management
-    url: agent/configuration/secrets-management/
-    parent: agent_configuration
-    weight: 609
-  - name: Remote Configuration
-    identifier: agent_remote_configuration
-    url: agent/remote_config
-    parent: agent
-    weight: 7
-  - name: Fleet Automation
-    identifier: agent_fleet_automation
-    url: agent/fleet_automation
-    parent: agent
-    weight: 8
-  - name: Versions
-    url: agent/versions
-    parent: agent
-    identifier: agent_versions
-    weight: 9
-  - name: Upgrade to Agent v7
-    identifier: agent_versions_upgrade_to_agent_v7
-    url: agent/versions/upgrade_to_agent_v7/
-    parent: agent_versions
-    weight: 901
-  - name: Upgrade to Agent v6
-    identifier: agent_versions_upgrade_to_agent_v6
-    url: agent/versions/upgrade_to_agent_v6/
-    parent: agent_versions
-    weight: 902
-  - name: Upgrade Between Agent Minor Versions
-    identifier: agent_versions_upgrade_between_agent_minor_versions
-    url: agent/versions/upgrade_between_agent_minor_versions
-    parent: agent_versions
-    weight: 903
-  - name: Troubleshooting
-    url: agent/troubleshooting/
-    parent: agent
-    weight: 10
-    identifier: agent_troubleshooting
-  - name: Container Hostname Detection
-    identifier: agent_troubleshooting_hostname_containers
-    url: agent/troubleshooting/hostname_containers/
-    parent: agent_troubleshooting
-    weight: 1001
-  - name: Debug Mode
-    identifier: agent_troubleshooting_debug_mode
-    url: agent/troubleshooting/debug_mode/
-    parent: agent_troubleshooting
-    weight: 1002
-  - name: Agent Flare
-    identifier: agent_troubleshooting_agent_flare
-    url: agent/troubleshooting/send_a_flare/
-    parent: agent_troubleshooting
-    weight: 1003
-  - name: Agent Check Status
-    identifier: agent_troubleshooting_agent_check_status
-    url: agent/troubleshooting/agent_check_status/
-    parent: agent_troubleshooting
-    weight: 1004
-  - name: NTP Issues
-    identifier: agent_troubleshooting_ntp
-    url: agent/troubleshooting/ntp/
-    parent: agent_troubleshooting
-    weight: 1005
-  - name: Permission Issues
-    identifier: agent_troubleshooting_permissions
-    url: agent/troubleshooting/permissions/
-    parent: agent_troubleshooting
-    weight: 1006
-  - name: Integrations Issues
-    identifier: agent_troubleshooting_integrations
-    url: agent/troubleshooting/integrations/
-    parent: agent_troubleshooting
-    weight: 1007
-  - name: Site Issues
-    identifier: agent_troubleshooting_site
-    url: agent/troubleshooting/site/
-    parent: agent_troubleshooting
-    weight: 1008
-  - name: Autodiscovery Issues
-    identifier: agent_troubleshooting_autodiscovery
-    url: agent/troubleshooting/autodiscovery/
-    parent: agent_troubleshooting
-    weight: 1009
-  - name: Windows Container Issues
-    identifier: agent_troubleshooting_windows_containers
-    url: agent/troubleshooting/windows_containers
-    weight: 1010
-    parent: agent_troubleshooting
-  - name: Agent Runtime Configuration
-    identifier: agent_troubleshooting_runtime_configuration
-    url: agent/troubleshooting/config
-    weight: 1011
-    parent: agent_troubleshooting
-  - name: High CPU or Memory Consumption
-    identifier: agent_troubleshooting_high_cpu_memory_consumption
-    url: agent/troubleshooting/high_memory_usage/
-    weight: 1012
-    parent: agent_troubleshooting
-  - name: Guides
-    url: agent/guide/
-    identifier: agent_guides
-    parent: agent
-    weight: 11
-  - name: Data Security
-    identifier: agent_security
-    url: data_security/agent/
-    parent: agent
-    weight: 12
-  - name: Integrations
-    url: integrations/
-    identifier: integrations_top_level
-    pre: integrations
-    parent: essentials_heading
-    weight: 50000
-  - name: Guides
-    url: integrations/guide/
-    identifier: integration_guides
-    parent: integrations_top_level
-    weight: 1
   - name: OpenTelemetry
     url: opentelemetry/
     identifier: opentelemetry_top_level
     pre: open-telemetry
     parent: essentials_heading
-    weight: 60000
+    weight: 40000
   - name: Set Up the Collector
     url: opentelemetry/collector_exporter/
     identifier: otel_gs_collector
@@ -615,7 +316,7 @@ main:
     pre: dev-code
     identifier: dev_tools
     parent: essentials_heading
-    weight: 70000
+    weight: 50000
   - name: Authorization
     url: developers/authorization/
     parent: dev_tools
@@ -736,83 +437,78 @@ main:
     url: developers/integrations/python/
     parent: dev_tools_integrations
     weight: 411
-  - name: UI Extensions
-    url: developers/ui_extensions
-    parent: dev_tools
-    identifier: dev_tools_ui_extensions
-    weight: 5
   - name: Service Checks
     url: developers/service_checks/
     parent: dev_tools
     identifier: dev_tools_service_check
-    weight: 6
+    weight: 5
   - name: 'Submission - Agent Check '
     url: developers/service_checks/agent_service_checks_submission/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_agent_check
-    weight: 601
+    weight: 501
   - name: Submission - DogStatsD
     url: developers/service_checks/dogstatsd_service_checks_submission/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_dogstatsd
-    weight: 602
+    weight: 502
   - name: Submission - API
     url: api/v1/service-checks/
     parent: dev_tools_service_check
     identifier: dev_tools_service_check_api
-    weight: 603
+    weight: 503
   - name: IDE Integrations
     url: developers/ide_integrations/
     parent: dev_tools
     identifier: ide_integrations
-    weight: 7
+    weight: 6
   - name: IntelliJ Platform
     url: developers/ide_integrations/idea/
     parent: ide_integrations
     identifier: ide_integrations_idea
-    weight: 701
+    weight: 601
   - name: VS Code
     url: developers/ide_integrations/vscode/
     parent: ide_integrations
     identifier: ide_integrations_vscode
-    weight: 702
+    weight: 602
   - name: Visual Studio
     url: developers/ide_integrations/visual_studio/
     parent: ide_integrations
     identifier: ide_integrations_visual_studio
-    weight: 703
+    weight: 603
   - name: Community
     url: developers/community/
     parent: dev_tools
     identifier: dev_community
-    weight: 8
+    weight: 7
   - name: Libraries
     identifier: dev_community_libraries
     url: developers/community/libraries/
     parent: dev_community
-    weight: 801
+    weight: 701
   - name: Community Office Hours
     identifier: dev_community_office_hours
     url: developers/community/office_hours/
     parent: dev_community
-    weight: 802
+    weight: 702
   - name: Guides
     url: developers/guide/
     parent: dev_tools
     identifier: dev_tools_guides
-    weight: 9
+    weight: 8
   - name: API
     url: api/
     pre: api
     identifier: api
     parent: essentials_heading
-    weight: 80000
+    weight: 60000
   - name: CoScreen
     url: coscreen/
     pre: coscreen
     identifier: coscreen
     parent: essentials_heading
-    weight: 90000
+    weight: 70000
   - name: Troubleshooting
     url: coscreen/troubleshooting
     identifier: coscreen_troubleshooting
@@ -1196,62 +892,22 @@ main:
     url: service_management/events/ingest/
     identifier: event_ingest
     parent: service_management_events
-    weight: 1
+    weight: 201
   - name: Explorer
     url: service_management/events/explorer/
     identifier: events_explorer
     parent: service_management_events
-    weight: 2
-  - name: Searching
-    url: service_management/events/explorer/searching
-    identifier: events_explorer_searching
-    parent: events_explorer
-    weight: 201
-  - name: Navigate the Explorer
-    url: service_management/events/explorer/navigate
-    identifier: events_explorer_navigate
-    parent: events_explorer
     weight: 202
-  - name: Customization
-    url: service_management/events/explorer/customization
-    identifier: events_explorer_customization
-    parent: events_explorer
-    weight: 203
-  - name: Facets
-    url: service_management/events/explorer/facets
-    identifier: events_explorer_facets
-    parent: events_explorer
-    weight: 204
-  - name: Attributes
-    url: service_management/events/explorer/attributes
-    identifier: events_explorer_attributes
-    parent: events_explorer
-    weight: 205
-  - name: Notifications
-    url: service_management/events/explorer/notifications
-    identifier: event_explorer_notifications
-    parent: events_explorer
-    weight: 206
-  - name: Analytics
-    url: service_management/events/explorer/analytics
-    identifier: event_explorer_analytics
-    parent: events_explorer
-    weight: 207
-  - name: Saved Views
-    url: service_management/events/explorer/saved_views
-    identifier: event_explorer_saved_views
-    parent: events_explorer
-    weight: 208
   - name: Using Events
     url: service_management/events/usage/
     identifier: event_usage
     parent: service_management_events
-    weight: 3
+    weight: 203
   - name: Guides
     url: service_management/events/guides/
     identifier: events_guides
     parent: service_management_events
-    weight: 4
+    weight: 204
   - name: Case Management
     url: service_management/case_management/
     parent: service_management
@@ -3868,7 +3524,7 @@ main:
     identifier: metrics
     pre: metric
     parent: metrics_heading
-    weight: 60000
+    weight: 10000
   - name: Custom Metrics
     url: metrics/custom_metrics/
     parent: metrics
@@ -4320,6 +3976,326 @@ main:
     parent: log_management
     identifier: log_troubleshooting
     weight: 8
+  - name: Integrations
+    url: integrations/
+    identifier: integrations
+    pre: integrations
+    parent: integrations_heading
+    weight: 10000
+  - name: Guides
+    url: integrations/guide/
+    identifier: integrations_guides
+    parent: integrations
+    weight: 1
+  - name: UI Extensions
+    url: developers/ui_extensions
+    parent: integrations_heading
+    identifier: integrations_extensions
+    pre: books
+    weight: 20000
+  - name: Agent
+    url: agent/
+    pre: integrations
+    parent: integrations_heading
+    weight: 30000
+    identifier: integrations_agent
+  - name: Basic Agent Usage
+    url: agent/basic_agent_usage/
+    parent: integrations_agent
+    identifier: integrations_agent_basic_agent_usage
+    weight: 1
+  - name: AIX
+    identifier: basic_agent_usage_aix
+    url: agent/basic_agent_usage/aix/
+    weight: 101
+    parent: integrations_agent_basic_agent_usage
+  - name: Amazon Linux
+    identifier: basic_agent_usage_amazon_linux
+    url: agent/basic_agent_usage/amazonlinux/
+    weight: 102
+    parent: integrations_agent_basic_agent_usage
+  - name: Alma Linux
+    identifier: basic_agent_usage_alma_linux
+    url: agent/basic_agent_usage/centos/
+    weight: 103
+    parent: integrations_agent_basic_agent_usage
+  - name: Ansible
+    identifier: basic_agent_usage_ansible
+    url: agent/basic_agent_usage/ansible/
+    parent: integrations_agent_basic_agent_usage
+    weight: 104
+  - name: CentOS
+    identifier: basic_agent_usage_centos
+    url: agent/basic_agent_usage/centos/
+    weight: 105
+    parent: integrations_agent_basic_agent_usage
+  - name: Chef
+    identifier: basic_agent_usage_chef
+    url: agent/basic_agent_usage/chef/
+    weight: 106
+    parent: integrations_agent_basic_agent_usage
+  - name: Debian
+    identifier: basic_agent_usage_deb
+    url: agent/basic_agent_usage/deb/
+    weight: 107
+    parent: integrations_agent_basic_agent_usage
+  - name: Fedora
+    identifier: basic_agent_usage_fedora
+    url: agent/basic_agent_usage/fedora/
+    weight: 108
+    parent: integrations_agent_basic_agent_usage
+  - name: Heroku
+    identifier: basic_agent_usage_heroku
+    url: agent/basic_agent_usage/heroku/
+    weight: 109
+    parent: integrations_agent_basic_agent_usage
+  - name: Mac OS X
+    identifier: basic_agent_usage_osx
+    url: agent/basic_agent_usage/osx/
+    weight: 110
+    parent: integrations_agent_basic_agent_usage
+  - name: Puppet
+    identifier: basic_agent_usage_puppet
+    url: agent/basic_agent_usage/puppet/
+    weight: 111
+    parent: integrations_agent_basic_agent_usage
+  - name: Red Hat
+    identifier: basic_agent_usage_redhat
+    url: agent/basic_agent_usage/redhat/
+    weight: 112
+    parent: integrations_agent_basic_agent_usage
+  - name: Rocky Linux
+    identifier: basic_agent_usage_rockylinux
+    url: agent/basic_agent_usage/centos/
+    weight: 113
+    parent: integrations_agent_basic_agent_usage
+  - name: SaltStack
+    identifier: basic_agent_usage_saltstack
+    url: agent/basic_agent_usage/saltstack/
+    weight: 114
+    parent: integrations_agent_basic_agent_usage
+  - name: SUSE
+    identifier: basic_agent_usage_suse
+    url: agent/basic_agent_usage/suse/
+    weight: 115
+    parent: integrations_agent_basic_agent_usage
+  - name: Ubuntu
+    identifier: basic_agent_usage_ubuntu
+    url: agent/basic_agent_usage/ubuntu/
+    weight: 116
+    parent: integrations_agent_basic_agent_usage
+  - name: Windows
+    identifier: basic_agent_usage_windows
+    url: agent/basic_agent_usage/windows/
+    weight: 117
+    parent: integrations_agent_basic_agent_usage
+  - name: From Source
+    identifier: basic_agent_usage_source
+    url: agent/basic_agent_usage/source/
+    weight: 118
+    parent: integrations_agent_basic_agent_usage
+  - name: Architecture
+    url: agent/architecture/
+    parent: integrations_agent
+    identifier: architecture
+    weight: 2
+  - name: IoT
+    url: agent/iot/
+    parent: integrations_agent
+    identifier: agent_iot
+    weight: 3
+  - name: Supported Platforms
+    url: agent/supported_platforms/
+    parent: integrations_agent
+    identifier: agent_supported_platforms
+    weight: 4
+  - name: Log Collection
+    url: agent/logs/
+    identifier: agent_logs
+    parent: integrations_agent
+    weight: 5
+  - name: Advanced Configurations
+    identifier: agent_logs_advanced_log_collection
+    url: agent/logs/advanced_log_collection
+    parent: agent_logs
+    weight: 501
+  - name: Proxy
+    identifier: agent_logs_proxy
+    url: agent/logs/proxy
+    parent: agent_logs
+    weight: 502
+  - name: Transport
+    identifier: agent_logs_transport
+    url: agent/logs/log_transport
+    parent: agent_logs
+    weight: 503
+  - name: Configuration
+    url: agent/configuration
+    parent: integrations_agent
+    identifier: agent_configuration
+    weight: 6
+  - name: Commands
+    identifier: agent_configuration_commands
+    url: agent/configuration/agent-commands/
+    parent: agent_configuration
+    weight: 601
+  - name: Configuration Files
+    identifier: agent_configuration_files
+    url: agent/configuration/agent-configuration-files/
+    parent: agent_configuration
+    weight: 602
+  - name: Log Files
+    identifier: agent_configuration_log_files
+    url: agent/configuration/agent-log-files/
+    parent: agent_configuration
+    weight: 603
+  - name: Status Page
+    identifier: agent_configuration_status_page
+    url: agent/configuration/agent-status-page/
+    parent: agent_configuration
+    weight: 604
+  - name: Network Traffic
+    identifier: agent_configuration_network_traffic
+    url: agent/configuration/network/
+    parent: agent_configuration
+    weight: 605
+  - name: Proxy Configuration
+    identifier: agent_configuration_proxy
+    url: agent/configuration/proxy/
+    parent: agent_configuration
+    weight: 606
+  - name: FIPS Compliance
+    identifier: agent_configuration_fips_compliance
+    url: agent/configuration/agent-fips-proxy/
+    parent: agent_configuration
+    weight: 607
+  - name: Dual Shipping
+    identifier: agent_configuration_dual_shipping
+    url: agent/configuration/dual-shipping/
+    parent: agent_configuration
+    weight: 608
+  - name: Secrets Management
+    identifier: agent_configuration_secrets_management
+    url: agent/configuration/secrets-management/
+    parent: agent_configuration
+    weight: 609
+  - name: Remote Configuration
+    identifier: agent_remote_configuration
+    url: agent/remote_config
+    parent: integrations_agent
+    weight: 7
+  - name: Fleet Automation
+    identifier: agent_fleet_automation
+    url: agent/fleet_automation
+    parent: integrations_agent
+    weight: 8
+  - name: Versions
+    url: agent/versions
+    parent: integrations_agent
+    identifier: agent_versions
+    weight: 9
+  - name: Upgrade to Agent v7
+    identifier: agent_versions_upgrade_to_agent_v7
+    url: agent/versions/upgrade_to_agent_v7/
+    parent: agent_versions
+    weight: 901
+  - name: Upgrade to Agent v6
+    identifier: agent_versions_upgrade_to_agent_v6
+    url: agent/versions/upgrade_to_agent_v6/
+    parent: agent_versions
+    weight: 902
+  - name: Upgrade Between Agent Minor Versions
+    identifier: agent_versions_upgrade_between_agent_minor_versions
+    url: agent/versions/upgrade_between_agent_minor_versions
+    parent: agent_versions
+    weight: 903
+  - name: Troubleshooting
+    url: agent/troubleshooting/
+    parent: integrations_agent
+    weight: 10
+    identifier: agent_troubleshooting
+  - name: Container Hostname Detection
+    identifier: agent_troubleshooting_hostname_containers
+    url: agent/troubleshooting/hostname_containers/
+    parent: agent_troubleshooting
+    weight: 1001
+  - name: Debug Mode
+    identifier: agent_troubleshooting_debug_mode
+    url: agent/troubleshooting/debug_mode/
+    parent: agent_troubleshooting
+    weight: 1002
+  - name: Agent Flare
+    identifier: agent_troubleshooting_agent_flare
+    url: agent/troubleshooting/send_a_flare/
+    parent: agent_troubleshooting
+    weight: 1003
+  - name: Agent Check Status
+    identifier: agent_troubleshooting_agent_check_status
+    url: agent/troubleshooting/agent_check_status/
+    parent: agent_troubleshooting
+    weight: 1004
+  - name: NTP Issues
+    identifier: agent_troubleshooting_ntp
+    url: agent/troubleshooting/ntp/
+    parent: agent_troubleshooting
+    weight: 1005
+  - name: Permission Issues
+    identifier: agent_troubleshooting_permissions
+    url: agent/troubleshooting/permissions/
+    parent: agent_troubleshooting
+    weight: 1006
+  - name: Integrations Issues
+    identifier: agent_troubleshooting_integrations
+    url: agent/troubleshooting/integrations/
+    parent: agent_troubleshooting
+    weight: 1007
+  - name: Site Issues
+    identifier: agent_troubleshooting_site
+    url: agent/troubleshooting/site/
+    parent: agent_troubleshooting
+    weight: 1008
+  - name: Autodiscovery Issues
+    identifier: agent_troubleshooting_autodiscovery
+    url: agent/troubleshooting/autodiscovery/
+    parent: agent_troubleshooting
+    weight: 1009
+  - name: Windows Container Issues
+    identifier: agent_troubleshooting_windows_containers
+    url: agent/troubleshooting/windows_containers
+    weight: 1010
+    parent: agent_troubleshooting
+  - name: Agent Runtime Configuration
+    identifier: agent_troubleshooting_runtime_configuration
+    url: agent/troubleshooting/config
+    weight: 1011
+    parent: agent_troubleshooting
+  - name: High CPU or Memory Consumption
+    identifier: agent_troubleshooting_high_cpu_memory_consumption
+    url: agent/troubleshooting/high_memory_usage/
+    weight: 1012
+    parent: agent_troubleshooting
+  - name: Guides
+    url: agent/guide/
+    identifier: agent_guides
+    parent: integrations_agent
+    weight: 11
+  - name: Data Security
+    identifier: agent_security
+    url: data_security/agent/
+    parent: integrations_agent
+    weight: 12
+  - name: Reference Tables
+    identifier: integrations_reference_tables
+    url: integrations/guide/reference-tables/
+    parent: integrations_heading
+    pre: table
+    weight: 40000
+  - name: Source Code Integration
+    identifier: integrations_sci
+    url: integrations/guide/source-code-integration/
+    parent: integrations_heading
+    pre: step-by-step
+    weight: 50000
   - name: Account Management
     url: account_management/
     pre: cog-2
