@@ -211,7 +211,7 @@ All of the initial setup and configuration is complete. To start generating and 
    curl localhost:9090/calendar 
    ```
 
-   You should get a response like:
+3. Verify that you receive a response like:
    ```
    {“date":"2022-12-30"}
    ```
