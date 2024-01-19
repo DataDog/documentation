@@ -255,7 +255,7 @@ View traces and spans to observe the status and performance of requests processe
 
    TODO: insert screenshot
 
-   You can also take the inverse approach: for example, in the **Logs** section of the Datadog site, you can click on a log and correlate it back to the respective trace.
+   You can also take the inverse approach: for example, in the **Logs** section of Datadog, you can click on a log and correlate it back to the respective trace.
 
    TODO: insert screenshot
 
