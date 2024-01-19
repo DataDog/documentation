@@ -31,7 +31,7 @@ further_reading:
 [OpenTelemetry][11] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing observability data from software applications. OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application observability data---namely metrics, logs, and traces---to monitoring platforms for analysis and insight.
 
 
-This guide demonstrates how to integrate an existing OpenTelemetry environment with Datadog so you can analyze in Datadog the observability data you're already generating. You will configure the Datadog Exporter, which runs alongside your OpenTelemetry Collector, to forward trace, metric, and logs data from OpenTelemetry SDKs to Datadog. 
+This guide demonstrates how to configure a sample OpenTelemetry application to observability data to Datadog using the OpenTelemetry SDK, OpenTelemetry Collector, and Datadog Exporter. This guide also shows you how to explore this data in Datadog.
 
 Follow this guide to:
 
