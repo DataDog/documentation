@@ -215,7 +215,7 @@ function App() {
 
 ### React Native Navigation
 
-**Note**: This package is an integration for `react-native-navigation` library, please make sure you first install and setup the core `mobile-react-native` SDK.
+**Note**: This package is an integration for `react-native-navigation` library. Please make sure you first install and setup the core `mobile-react-native` SDK.
 
 #### Setup
 
@@ -246,6 +246,88 @@ const viewNamePredicate: ViewNamePredicate = function customViewNamePredicate(ev
 }
 
 DdRumReactNativeNavigationTracking.startTracking(viewNamePredicate);
+```
+
+### Apollo Client
+
+**Note**: This package is an integration for the `@apollo/client` library. Please make sure you first install and set up the core `mobile-react-native` SDK.
+
+#### Setup
+
+To install with NPM, run:
+
+```sh
+npm install @datadog/mobile-react-native-apollo-client
+```
+
+To install with Yarn, run:
+
+```sh
+yarn add @datadog/mobile-react-native-apollo-client
+```
+
+#### Migrate to HttpLink
+
+If you initialize your `ApolloClient` with the `uri` parameter, initialize it with a `HttpLink`:
+
+```javascript
+import { ApolloClient, HttpLink } from '@apollo/client';
+
+// before
+const apolloClient = new ApolloClient({
+    uri: 'https://my.api.com/graphql'
+});
+
+// after
+const apolloClient = new ApolloClient({
+    link: new HttpLink({ uri: 'https://my.api.com/graphql' })
+});
+```
+
+#### Use the Datadog Apollo Client Link to collect information
+
+Import `DatadogLink` from `@datadog/mobile-react-native-apollo-client` and use it in your `ApolloClient` initialization:
+
+```javascript
+import { ApolloClient, from, HttpLink } from '@apollo/client';
+import { DatadogLink } from '@datadog/mobile-react-native-apollo-client';
+
+const apolloClient = new ApolloClient({
+    link: from([
+        new DatadogLink(),
+        new HttpLink({ uri: 'https://my.api.com/graphql' }) // always in last position
+    ])
+});
+```
+
+For more information on Apollo Client Links, see the [official documentation][13].
+
+#### Removing GraphQL information
+
+Use a `resourceEventMapper` in your Datadog configuration to remove sensitive data from GraphQL variables:
+
+```javascript
+const datadogConfiguration = new DatadogProviderConfiguration(
+    '<CLIENT_TOKEN>',
+    '<ENVIRONMENT_NAME>',
+    '<RUM_APPLICATION_ID>',
+    true,
+    true,
+    true
+);
+
+datadogConfiguration.resourceEventMapper = event => {
+    // Variables are stored in event.context['_dd.graphql.variables'] as a JSON string when present
+    if (event.context['_dd.graphql.variables']) {
+        const variables = JSON.parse(event.context['_dd.graphql.variables']);
+        if (variables.password) {
+            variables.password = '***';
+        }
+        event.context['_dd.graphql.variables'] = JSON.stringify(variables);
+    }
+
+    return event;
+};
 ```
 
 ## Flutter
@@ -303,4 +385,6 @@ final datadogConfig = DatadogConfiguration(
 [10]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-trace-coroutines
 [11]: https://wix.github.io/react-native-navigation/api/events/#componentdidappear
 [12]: https://reactnavigation.org/
+[13]: https://www.apollographql.com/docs/react/api/link/introduction/
 [14]: https://pub.dev/packages/datadog_gql_link
+
