@@ -209,5 +209,5 @@ In Datadog, view the [Data Jobs Monitoring][5] page to see a list of all your da
 [2]: /containers/cluster_agent/admission_controller/?tab=operator
 [3]: /containers/datadog_operator
 [4]: https://helm.sh
-[5]: https://app.datadoghq.com/apm/data-jobs
+[5]: https://app.datadoghq.com/data-jobs/
 [6]: /data_jobs

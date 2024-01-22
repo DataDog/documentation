@@ -1,4 +1,4 @@
-You can set tags on Spark spans at runtime. These tag are applied _only_ to spans that start after the tag is added.
+You can set tags on Spark spans at runtime. These tags are applied _only_ to spans that start after the tag is added.
 
 ```scala
 // Add tag for all next Spark computations

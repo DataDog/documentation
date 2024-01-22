@@ -15,10 +15,10 @@ date -u +"%Y-%m-%d %H:%M:%S UTC"
 echo "Running on the driver? $DB_IS_DRIVER"
 echo "Driver ip: $DB_DRIVER_IP"
 
-DB_CLUSTER_NAME=$(echo "$DB_CLUSTER_NAME" | sed -e 's/ /_/g' -e "s/'/_/g" -e 's/"/_/g')
+DB_CLUSTER_NAME="$(echo "$DB_CLUSTER_NAME" | sed 's/[^a-zA-Z0-9_:.-]/_/g')"
 DD_TAGS="environment:\${DD_ENV}","databricks_cluster_id:\${DB_CLUSTER_ID}","databricks_cluster_name:\${DB_CLUSTER_NAME}","databricks_container_ip:\${DB_CONTAINER_IP}","databricks_is_driver:\${DB_IS_DRIVER}","databricks_instance_type:\${DB_INSTANCE_TYPE}","databricks_is_job_cluster:\${DB_IS_JOB_CLUSTER}","data_workload_monitoring_trial:true"
 
-if [[ $DB_CLUSTER_NAME =~ ^job-([0-9]+)- ]]; then
+if [[ \${DB_CLUSTER_NAME} =~ ^job-([0-9]+)- ]]; then
     DATABRICKS_JOB_ID="\${BASH_REMATCH[1]}"
     DD_TAGS=\${DD_TAGS},"databricks_job_id:\${DATABRICKS_JOB_ID}"
 fi

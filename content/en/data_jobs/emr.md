@@ -104,5 +104,5 @@ In Datadog, view the [Data Jobs Monitoring][8] page to see a list of all your da
 [5]: https://console.aws.amazon.com/iam/
 [6]: /resources/sh/data_jobs/datadog_emr_job_monitoring_init_v2.sh
 [7]: /getting_started/site/
-[8]: https://app.datadoghq.com/apm/data-jobs
+[8]: https://app.datadoghq.com/data-jobs/
 [9]: /data_jobs

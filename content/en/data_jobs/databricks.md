@@ -98,6 +98,6 @@ In Datadog, view the [Data Jobs Monitoring][6] page to see a list of all your Da
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://docs.databricks.com/en/security/secrets/index.html
 [5]: /getting_started/site/
-[6]: https://app.datadoghq.com/apm/data-jobs
+[6]: https://app.datadoghq.com/data-jobs/
 [7]: /data_jobs
 [8]: /resources/sh/data_jobs/datadog_databricks_job_monitoring_init.sh
