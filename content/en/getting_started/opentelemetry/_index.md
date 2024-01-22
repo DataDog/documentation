@@ -38,8 +38,9 @@ Follow this guide to:
 2. Configure the OTLP Receiver to collect metrics, logs, and traces.
 3. Send observability data to Datadog using the OpenTelemetry Collector with the Datadog Exporter. 
 4. Configure the application to send infrastructure metrics.
-5. Correlate observability data with unified service tagging.
-3. Explore the application's observability data in Datadog. 
+5. Configure the application to send logs with OTLP.
+6. Correlate observability data with unified service tagging.
+7. Explore the application's observability data in Datadog. 
 
 ## Prerequisites
 
@@ -183,6 +184,33 @@ To collect container metrics, configure the [Docker stats receiver][5] in your D
     ```
 
 This configuration allows the Calendar application to send container metrics to Datadog for you to explore in Datadog.
+
+### Configuring your application to send logs with OTLP
+
+The Calendar application uses the OpenTelemetry logging exporter in its Logback configuration to send logs with OpenTelemetry Layer Processor (OTLP).
+
+1. Go to the Calendar application's Logback XML configuration file at `/src/main/resources/logback.xml`.
+2. The following lines define the `OpenTelemetry` appender:
+
+   ```xml
+    <appender name="OpenTelemetry" class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender">
+        <immediateFlush>true</immediateFlush>
+        <captureExperimentalAttributes>true</captureExperimentalAttributes>
+        <captureKeyValuePairAttributes>true</captureKeyValuePairAttributes>
+      </appender>
+   ```
+3. The `<appender-ref ref="OpenTelemetry"/>` line references the `OpenTelemetry` appender in the root level configuration:
+   ```xml
+    <root level="INFO">
+      <appender-ref ref="console"/>
+      <appender-ref ref="OpenTelemetry"/>
+    </root>
+   ```
+
+Additionally, an environment variable configures the OpenTelemetry environment to export logs:
+
+1. Go to the Calendar application's Docker Compose file at `./deploys/docker/docker-compose-otel.yml`.
+2. The `OTEL_LOGS_EXPORTER=otlp` configuration allows the logs to be sent with OTLP.
 
 ### Using unified tagging to correlate observability data
 
