@@ -30,7 +30,7 @@ Flat 1% sampling is applied based on the `trace_id`, meaning that all spans belo
 
 ### Diversity sampling
 
-Every 15 minutes, diversity sampling retains at least one span and the associated trace for each combination of environment, service, operation, and resource. This occurs for the `p75`, `p90`, and `p95` percentile of latencies to ensure that you can always find example traces in service and resource pages, even for low traffic endpoints. Read more about diversity sampling in the [documentation][3].
+Every 15 minutes, diversity sampling retains at least one span and the associated trace for each combination of environment, service, operation, and resource. This occurs for the `p75`, `p90`, and `p95` percentile of latencies to ensure that you can always find example traces in service and resource pages, even for low traffic endpoints. To learn more, read the [diversity sampling documentation][3].
 
 ## Impact of enabling Trace Queries
 
