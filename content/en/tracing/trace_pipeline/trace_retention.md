@@ -68,17 +68,29 @@ The `Spans Indexed` column for each retention filter is powered by the `datadog.
 
 ### Datadog intelligent retention filter
 
-The Datadog intelligent retention filter is always active for your services, and it keeps a representative selection of traces without requiring you to create dozens of custom retention filters.
+The Datadog intelligent retention filter is always active for your services, and it keeps a representative selection of traces without requiring you to create dozens of custom retention filters. It is composed of: 
+- [Diversity sampling](#diversity-sampling)
+- [One percent flat sampling](#one-percent-flat-sampling)
 
-It scans through the **service entry spans** and retains for 30 days:
+**Note:** [Trace Queries][11] are based the data indexed by the Intelligent Retention filter.
+
+Spans indexed by the Intelligent retention filter (diversity sampling and 1% flat sampling) are **not counted towards the usage** of indexed spans, and so **do not impact your bill**.
+
+If there are specific tags or attributes for which you want to index more spans than what the Intelligent Retention filter retains, then [create your own retention filter](#create-your-own-retention-filter).
+
+#### Diversity sampling
+
+Diversity sampling scans through the **service entry spans** and retains for 30 days:
 
 - At least one span (and the associated trace) for each combination of environment, service, operation, and resource every 15 minutes at most, to ensure that you can always find example traces in [service][9] and [resource][10] pages, even for low traffic endpoints.
 - High latency spans for the `p75`, `p90`, and `p95` percentile spans (and the associated trace) for each combination of environment, service, operation, and resource.
 - A representative selection of errors, ensuring error diversity (for example, response status code 400s, 500s).
 
-**Note**: Spans indexed by the intelligent retention filter are **not counted towards the usage** of indexed spans, and so **do not impact your bill**.
+The set of data captured by diversity sampling is not uniformly sampled (that is, it is not proportionally representative of the full traffic). It is biased towards errors and high latency traces. 
 
-If there are specific tags or attributes for which you want to index more spans than what diversity sampling retains, then [create your own retention filter](#create-your-own-retention-filter).
+#### One percent flat sampling
+
+The flat 1% sampling is a **uniform 1% sample** of [ingested spans][12]. It is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision. This sampling mechanism is uniform.
 
 ### Create your own retention filter
 
@@ -112,7 +124,8 @@ By default, spans indexed by custom retention filters **and** the intelligent re
 However, because the diversity-sampled set of data is **not uniformly sampled** (that is, not proportionally representative of the full traffic) and is biased towards errors and high latency traces, you can choose to exclude these spans from these views by adding `-retained_by:diversity_sampling` query parameter to the query.
 
 The `retained_by` attribute is present on all retained spans. Its value is: 
-- `retained_by:diversity_sampling` if the span was captured by diversity sampling (that is, the [Intelligent retention filter](#datadog-intelligent-retention-filter)).
+- `retained_by:diversity_sampling` if the span was captured by [diversity sampling] (part of the [Intelligent retention filter](#datadog-intelligent-retention-filter)).
+- `retained_by:flat_sampled` if the span was indexed by the 1% flat sampling 
 - `retained_by:retention_filter` if the span was captured by any [tag-based retention filter](#create-your-own-retention-filter), including the `Error Default` and `Application Security Default` retention filters.
 
 {{< img src="tracing/trace_indexing_and_ingestion/retention_filters/trace_analytics.png" style="width:100%;" alt="Retained By facet" >}}
@@ -120,31 +133,6 @@ The `retained_by` attribute is present on all retained spans. Its value is:
 ### In dashboards, notebooks, and monitors
 
 For the reasons explained above, spans indexed by the intelligent retention filter are **excluded** from APM queries that appear in dashboards and notebooks, and also **excluded** from trace analytics monitor evaluation.
-
-## One percent flat sampling
-
-[Trace Queries][11] are based on a **uniform 1% sample** of [ingested spans][12].
-
-{{< beta-callout url="#" btn_hidden="true">}}
-To join the Trace Queries private beta, <a href="https://docs.google.com/forms/d/e/1FAIpQLSebVVIAUcWIW941Zc3aBcEgmgGq349qCGKDk3QSSC2-PM8Aeg/viewform?pli=1">fill out this form</a>. Spans used for queries are from a <a href="#the-data-that-trace-queries-are-based-on"><strong>uniform 1% sample</strong> of ingested spans</a>, not from your existing retention filters.
-{{< /beta-callout >}}
-
-{{< img src="tracing/trace_queries/trace_queries_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling" >}}
-
-The flat 1% sampling is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision.
-
-**Note**: Spans indexed by the flat 1% sampling are not counted towards the usage of indexed spans, and so **do not impact your bill**.
-
-### What is the impact of enabling 1% flat sampling?
-
-Spans indexed by the 1% sampling can also be queried and found in the [Trace Explorer][13].
-
-After you enable 1% flat sampling, the volume of indexed spans is going to increase immediately. To find spans that are sampled by the 1% flat sampling, add the `retained_by:flat_sampled` query parameter in the Trace Explorer.
-
-{{< img src="tracing/trace_queries/flat_sampling.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling in Trace Explorer" >}}
-
-
-**Note**: Spans indexed by the flat 1% sampling are **not used** in [Trace Analytics monitors][14], dashboards, and notebooks APM queries.
 
 ## Further Reading
 
