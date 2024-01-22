@@ -1,49 +1,58 @@
 ---
-title: The data APM Trace queries are based on
+title: How Trace Queries Source Data
 kind: guide
+further_reading:
+    - link: "/tracing/trace_explorer/trace_queries/"
+      tag: "Documentation"
+      text: "Trace Queries"
 ---
 
 ## Overview
  
-APM Trace Queries let you find entire traces based on the properties of multiple spans and the relationships between those spans within the structure of the trace. Read more about Trace Queries in the [documentation][1].
+With Trace Queries, you can find entire traces based on the properties of multiple spans and the relationships between those spans within the structure of the trace. To learn more, read the [Trace Queries documentation][1].
 
 {{< img src="tracing/trace_queries/trace_queries.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Trace Queries UI" >}}
 
+## How Trace Queries source data
 
-## The data Trace Queries are based on
+Datadog uses the [Intelligent Retention Filter][6] to index data for Trace Queries. It does so by performing: 
 
-To power Trace Queries, Datadog relies on the **Intelligent Retention Filter** to index: 
-- a uniform 1% sample of ingested spans: this is [**flat sampling**](#1-flat-sampling).
-- a representative diverse selection of traces to ensure that you keep visibility over each environment, service, operation, and resource: this is [**diversity sampling**](#diversity-sampling).
+- [Flat sampling](#1-flat-sampling): A uniform 1% sample of ingested spans.
+- [Diversity sampling](#diversity-sampling): A representative, diverse selection of traces to keep visibility over each environment, service, operation, and resource.
 
 {{< img src="tracing/trace_queries/trace_queries_new_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling & Diversity Sampling" >}}
 
-Note: Spans indexed by the flat sampling and the diversity sampling are not counted towards the usage of indexed spans, and so **do not impact your bill**.
-
+**Note**: Spans indexed by flat sampling and diversity sampling do not count towards the usage of indexed spans, and therefore, **do not impact your bill**.
 
 ### 1% flat sampling
 
-The flat 1% sampling is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision. Read more in the [documentation][2].
+Flat 1% sampling is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision. To learn more, read the [one percent flat sampling documentation][2].
 
 ### Diversity sampling
 
-The Diversity sampling scans through the service entry spans and retains at least one span (and the associated trace) for each combination of environment, service, operation, and resource every 15 minutes at most, for the `p75`, `p90`, and `p95` percentile of latencies to ensure that you can always find example traces in service and resource pages, even for low traffic endpoints. Read more about diversity sampling in the [documentation][3].
+Every 15 minutes, diversity sampling retains at least one span and the associated trace for each combination of environment, service, operation, and resource. This occurs for the `p75`, `p90`, and `p95` percentile of latencies to ensure that you can always find example traces in service and resource pages, even for low traffic endpoints. Read more about diversity sampling in the [documentation][3].
 
-## The change: what is the impact ?
+## Impact of enabling Trace Queries
 
-From the moment Trace Queries are enabled on your account, the Intelligent Retention filter will start indexing more data
+When you enable Trace Queries on your account, the Intelligent Retention filter starts to index more data.
 
-Spans indexed by the Intelligent Retention filter can be queried in the [Trace Explorer][4]. As a result, you might notice a spike in the number of indexed spans in Trace Explorer queries, which matches an event overlay showing an **Intelligent Retention Filter change** event.
+You can query spans indexed by the Intelligent Retention filter in the [Trace Explorer][4]. As a result, you might notice a spike in the number of indexed spans in Trace Explorer queries. This change is indicated by an event overlay showing an **Intelligent Retention Filter change** event.
 
-To find spans that are sampled by the 1% flat sampling and diversity sampling, add a `retained_by:(flat_sampled OR diversity_sampling)` query parameter in the Trace Explorer. 
+To find spans that are sampled by the 1% flat sampling or the diversity sampling methods, add a `retained_by:(flat_sampled OR diversity_sampling)` query parameter in the Trace Explorer.
 
 _[add trace explorer screenshot]_
 
-### Impact of the Intelligent Retention filter change
+Spans indexed by the Intelligent retention filter are excluded from APM queries in:
 
-Spans indexed by the Intelligent retention filter are excluded from APM queries that appear in dashboards and notebooks, and also excluded from [trace analytics monitors'][5] evaluation, hence will **not be impacted** by the change.
+- Dashboards
+- Notebooks
+- [Trace Analytics monitor][5] evaluations
 
+Therefore, they are **not impacted** by this change.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 
 [1]: /tracing/trace_explorer/trace_queries/
@@ -51,3 +60,4 @@ Spans indexed by the Intelligent retention filter are excluded from APM queries 
 [3]: /tracing/trace_pipeline/trace_retention/#diversity-sampling
 [4]: /tracing/trace_explorer/
 [5]: /monitors/types/apm/?tab=traceanalytics
+[6]: /tracing/trace_pipeline/trace_retention/#datadog-intelligent-retention-filter
