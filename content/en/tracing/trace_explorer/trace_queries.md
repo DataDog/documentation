@@ -101,10 +101,9 @@ For example, if you query for traces that contain a span from the service `web-s
 {{< img src="tracing/trace_queries/timeseries_using_spans_from.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Timeseries view" >}}
 
 
-## The data that Trace Queries are based on
+## How Trace Queries source data
 
 {{< img src="tracing/trace_queries/trace_queries_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling" >}}
-
 
 Trace Queries are based on a **uniform 1% sample** of [ingested spans][3]. To learn more, read [one percent flat sampling][6].
 
