@@ -17,6 +17,12 @@ algolia:
   tags: ['inbox']
 ---
 
+{{% site-region region="gov" %}}
+<div class="alert alert-warning">
+Case Management is not available in the US1-FED site.
+</div>
+{{% /site-region %}}
+
 {{< img src="/service_management/case_management/case_managment_overview.png" alt="View all your cases on the main Case Management page" style="width:100%;" >}}
 
 ## Overview
@@ -106,7 +112,7 @@ From an individual case:
 [1]: https://app.datadoghq.com/cases
 [2]: /account_management/teams/
 [3]: https://app.datadoghq.com/cases/contexts/new
-[4]: /security/explorer#case-management
+[4]: https://app.datadoghq.com/security
 [5]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
 [6]: /service_management/incident_management/#describing-the-incident
 [7]: /notebooks/

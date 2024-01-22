@@ -41,6 +41,15 @@ Please enable the `Include execution data` option on the state machine's logging
 - For actions, we support basic actions of Lambda and DynamoDB. For example, Lambda Invoke, DynamoDB GetItem, DynamoDB PutItem, DynamoDB UpdateItem and more.
 - `Wait`, `Choice`, `Success`, `Fail`, and `Pass` are supported, while `Map` and `Parallel` are not. You are able to see parallel executing spans stacked on top of each other, but no `Parallel` spans show on the flame graph.
 
+## Customized way to deploy Datadog Lambda Forwarder
+If you are using your customized way to deploy Datadog Lambda Forwarder, here are some tips that can help you debug enabling Step Functions tracing:
+- On the forwarder, set the environment variable `DD_FETCH_STEP_FUNCTIONS_TAGS` to `true`. 
+- To enable Step Functions trace generation on the Datadog backend, the Datadog-Forwarder layer version must be greater than 31. This version is able to fetch state machine tags, including the required `DD_TRACE_ENABLED` tag.
+- The IAM role for the forwarder should have `tags:getResources` permission.
+- Set up a subscription filter on your state machine CloudWatch log group to the Datadog forwarder.
+- To verify if logs are reaching the Datadog backend, open the Log Explorer page and search `source:stepfunction` with the `Live` search timeframe (which shows all logs going into Datadog's logs intake). If you cannot see any logs, check if there are any error logs on the Datadog Forwarder such as wrong/invalid API key. Adding the environment variable `DD_LOG_LEVEL` of `DEBUG` helps you debug the Forwarder issue. If you see Step Functions logs, verify that the logs have the `dd_trace_enable:true` tag (all tags are normalized) and you should see Step Function traces associated with the log in a few minutes.
+
+
 #### Notes
 Lambda steps that use the legacy Lambda API cannot be merged. If your Lambda step's definition is `"Resource": "<Lambda function ARN>"` instead of `"Resource": "arn:aws:states:::lambda:invoke"`, then your step is using the legacy Lambda API.
 

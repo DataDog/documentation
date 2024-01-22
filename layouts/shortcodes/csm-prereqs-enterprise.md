@@ -17,6 +17,8 @@ CSM Threats supports the following Linux distributions:
 | CentOS                      | 7                                     |
 
 **Notes:**
+
+- [CSM Threats on Windows is available in beta][108].
 - Custom kernel builds are not supported.
 - For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][102].
 - Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported.
@@ -25,10 +27,15 @@ CSM Threats supports the following Linux distributions:
 
 | Component                | Version/Requirement                     |
 | ------------------------ | ----------------------------------------|
-| [Helm Chart][103]            | v3.33.6 or later (Kubernetes only)      |
+| [Helm Chart][103]            | v3.49.6 or later (Kubernetes only)      |
 | [containerd][104]              | v1.5.6 or later (Kubernetes and hosts only)|
 
-**Note**: CSM Vulnerabilities is not available for CRI-O runtime, Windows, or AWS Fargate environments.
+**Note**: CSM Vulnerabilities is **not** available for the following environments:
+
+  - Windows
+  - AWS Fargate 
+  - CRI-O runtime
+  - podman runtime
 
 ### CSM Identity Risks
 
@@ -47,3 +54,4 @@ To use CSM Identity Risks, you must [enable resource collection for AWS][105]. I
 [105]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
 [106]: /security/cloud_security_management/setup/csm_enterprise?tab=aws#enable-resource-scanning-for-cloud-accounts
 [107]: /security/cloud_security_management/setup/csm_enterprise/?tab=aws#enable-cloudtrail-logs-forwarding
+[108]: /security/cloud_security_management/setup/windows

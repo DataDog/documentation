@@ -4,6 +4,8 @@ kind: documentation
 disable_toc: false
 aliases:
 - /workflows/build
+algolia:
+  tags: ['workflow', 'workflows', 'workflow automation']
 further_reading:
 - link: "/service_management/workflows/actions_catalog"
   tag: "Documentation"
@@ -17,8 +19,8 @@ further_reading:
 <div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-You can create workflows or edit existing workflows from the Workflow Automation [Explore][1] tab. The **Explore** tab lists information about existing workflows, such as the workflow's owner, the trigger type, the dates that each workflow was last modified and executed, and whether the workflow is published or not.
-- Hover over a workflow for the options to delete or clone the workflow.
+You can create workflows or edit existing workflows from the [Workflow Automation][1] page. The page lists information about existing workflows, such as the workflow's owner, the trigger type, the dates that each workflow was last modified and executed, and whether the workflow is published or not.
+- Hover over a workflow for the options to delete, clone, or edit the permissions for the workflow.
 - Toggle **My workflows** if you want to see only workflows that you created.
 
 ## Build a workflow from a blueprint
@@ -31,6 +33,17 @@ You can create workflows or edit existing workflows from the Workflow Automation
 1. Workflow steps that require updates are marked with exclamation marks. Click on each workflow step you'd like to modify and fill in any empty fields on the **Configure** tab.
 1. When you are finished modifying the workflow, Click **Run** to test your workflow.
 1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
+
+## Create a workflow with AI
+
+<div class="alert alert-info">Auto Generate is in beta.</a></div>
+
+If you're not sure where to start, you can automatically generate a workflow with AI. To generate a workflow:
+
+1. From the [Workflow Automation][1] page, click **New Workflow**.
+1. Click **Auto Generate**.
+1. Enter a detailed description for your workflow. Specify the integrations and actions you'd like to use.
+1. Click the up arrow (**↑**) to create your app.
 
 ## Create a custom workflow
 
@@ -54,60 +67,6 @@ If you're not sure about your workflow configuration, you can return to the pane
 
 You can edit a step in the workflow at any time by clicking on it. Click and drag steps on your workflow to rearrange them.
 
-### Build a workflow with JSON
-
-Build or edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. The JSON editor also allows you to:
-- **Format JSON**: Beautify your JSON.
-- **Export JSON**: Download the workflow.
-
-A typical workflow contains three top-level keys:
-- `"steps"`: An array of "step" objects. Each step defines a step in the workflow and includes a name, the action ID, and the step parameters. The `steps` object also includes a key for outbound connection data.
-- `"startStepName"`: The name of the first step in the workflow.
-- `"connectionEnvs"`: Connection data and environment variables.
-
-An example of a workflow with a single step that sends a message to a Slack channel named `#workflows-test`:
-
-{{< code-block lang="json" collapsible="true" filename="Example workflow" >}}
-{
-    "steps": [
-        {
-            "outboundConnections": [],
-            "name": "Send_message",
-            "actionId": "com.datadoghq.slack.send_simple_message",
-            "parameters": [
-                {
-                    "name": "teamId",
-                    "value": "ABC1234"
-                },
-                {
-                    "name": "channel",
-                    "value": "#workflows-test"
-                },
-                {
-                    "name": "mentionTargets",
-                    "value": [
-                        "@Bits"
-                    ]
-                },
-                {
-                    "name": "text",
-                    "value": "Hello world!"
-                }
-            ]
-        }
-    ],
-    "startStepName": "Send_message",
-    "connectionEnvs": [
-        {
-            "env": "default",
-            "connections": []
-        }
-    ]
-}
-{{< /code-block >}}
-
-When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
-
 ## Test a step
 
 To ensure a step functions as desired without having to run the entire workflow, you can test the step independently.
@@ -130,26 +89,19 @@ Published workflows accrue costs based on workflow executions. For more informat
 
 Creating useful workflows sometimes necessitates passing data from one step to another, or configuring steps that act on data from the workflow's trigger source. You can perform this kind of data interpolation with context variables.
 
-Context variables come in the following varieties:
-- A small collection of standard **workflow variables** are present in all workflows.
+- **Workflow variables** give you information about the current workflow:
+    - `WorkflowName`: The name of the workflow.
+    - `WorkflowId`: The ID of the workflow.
+    - `InstanceId`: The ID of the execution instance of the workflow.
 - Some steps come with built-in **step output variables** that allow you to pass data from that step to a subsequent step in your workflow.
 - **Trigger variables** are passed into the workflow by the triggering event.
 - **Source object variables** are passed into the workflow by the triggering event.
 
 The **Context Variables** tab for each step provides a map of all context variables available to that step.
 
-{{< img src="service_management/workflows/context-variables3.png" alt="The Context Variables tab" >}}
+{{< img src="service_management/workflows/context-variables4.png" alt="The Context Variables tab" >}}
 
 Access a context variable in a step by enclosing it in double braces (`{{`). To access fields within context variables, use [Handlebars expression syntax][2].
-
-{{< img src="service_management/workflows/use-context-variable1.png" alt="Use double fences in a supported text field to insert a context variable" >}}
-
-### Workflow variables
-
-All workflows have three standard variables:
-- `WorkflowName`: The name of the workflow. Accessed with `{{ WorkflowName }}`.
-- `WorkflowId`: The workflow ID. Accessed with `{{ WorkflowId }}`.
-- `InstanceId`: Each workflow run receives a unique instance ID. Access the instance ID with `{{ InstanceId }}`.
 
 ### Step output variables
 
@@ -161,7 +113,7 @@ Some steps create outputs that are available to subsequent steps in a workflow. 
 
 If you're not sure what variable you're looking for, Datadog suggests existing step outputs as you type. Alternatively, you can consult the [Context Variables](#context-variables) tab for a list of available variables.
 
-{{< img src="service_management/workflows/step-outputs.png" alt="Datadog suggests existing step outputs as you type." style="width:100%;" >}}
+{{< img src="service_management/workflows/step-outputs1.png" alt="Datadog suggests existing step outputs as you type." style="width:100%;" >}}
 
 ### Input parameters
 
@@ -177,7 +129,7 @@ To add an input parameter:
 
 To reference the input parameter in a step, use the syntax `{{ Trigger.<parameter name>}}`. For example, to reference an input parameter named `user`, use `{{Trigger.user}}`.
 
-{{< img src="service_management/workflows/input-parameter1.png" alt="Adding an input parameter to a step automatically adds it to the workflow" style="width:100%;">}}
+{{< img src="service_management/workflows/input-parameter2.png" alt="Adding an input parameter to a step automatically adds it to the workflow" style="width:100%;">}}
 
 The **Input Parameters** section displays the names of all existing input parameters together with a counter. Hover over a counter to see which steps are using the parameter.
 
@@ -224,6 +176,12 @@ To get back to the main workflow canvas, click **Main** above the fallback tree.
 
 1. From the main workflow canvas, click on the step with the fallback you wish to remove.
 1. In the **Error Handling & Retries** section, click **Clear**.
+
+### Edit a workflow with JSON
+
+Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. The JSON editor also allows you to:
+- **Format JSON**: Beautify your JSON.
+- **Export JSON**: Download the workflow.
 
 ## Further reading
 

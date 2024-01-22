@@ -1,5 +1,5 @@
 ---
-title: Setting Up CSM Pro
+title: Setting up CSM Pro
 kind: documentation
 further_reading:
   - link: "/security/cloud_security_management/setup"
@@ -60,25 +60,11 @@ Alternatively, use the following examples to enable CSM Vulnerabilities on your 
 
 
 {{< tabs >}}
-{{% tab "Kubernetes (Helm)" %}}
-
-If you are using helm version `>= 3.46.0`, image collection is [enabled by default][1].</br>
-Or, add the following to your `values.yaml` helm configuration file:
-
-```yaml
-datadog:
-  containerImageCollection:
-    enabled: true
-  sbom:
-    containerImage:
-      enabled: true
-```
-[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L651
-{{% /tab %}}
 
 {{% tab "Kubernetes (Operator)" %}}
 
-Add the following to the spec section of your `values.yaml` file:
+Image collection is enabled by default with Datadog Operator version `>= 1.3.0`.</br>
+Or, add the following to the spec section of your `values.yaml` file:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -94,6 +80,22 @@ spec:
         enabled: true
 ```
 
+{{% /tab %}}
+
+{{% tab "Kubernetes (Helm)" %}}
+
+If you are using helm version `>= 3.46.0`, image collection is [enabled by default][1].</br>
+Or, add the following to your `values.yaml` helm configuration file:
+
+```yaml
+datadog:
+  containerImageCollection:
+    enabled: true
+  sbom:
+    containerImage:
+      enabled: true
+```
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L651
 {{% /tab %}}
 
 {{% tab "ECS EC2" %}}

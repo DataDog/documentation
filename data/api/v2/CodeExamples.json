@@ -96,6 +96,34 @@
       "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
+  "CreateCostAWSCURConfig": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create Cloud Cost Management AWS CUR config returns \"OK\" response"
+    }
+  ],
+  "CreateCostAzureUCConfigs": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Create Cloud Cost Management Azure configs returns \"OK\" response"
+    }
+  ],
+  "UpdateCostAWSCURConfig": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update Cloud Cost Management AWS CUR config returns \"OK\" response"
+    }
+  ],
+  "UpdateCostAzureUCConfigs": [
+    {
+      "group": "cloud_cost_management",
+      "suffix": "",
+      "description": "Update Cloud Cost Management Azure config returns \"OK\" response"
+    }
+  ],
   "CreateCloudWorkloadSecurityAgentRule": [
     {
       "group": "cloud_workload_security",
@@ -687,6 +715,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_3367706049",
+      "description": "Create a detection rule with detection method 'third_party' returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_461183901",
       "description": "Create a detection rule with type 'impossible_travel' returns \"OK\" response"
     },
@@ -706,6 +739,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create a security filter returns \"OK\" response"
+    }
+  ],
+  "CreateSecurityMonitoringSuppression": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a suppression rule returns \"OK\" response"
     }
   ],
   "SearchSecurityMonitoringSignals": [
@@ -746,6 +786,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update a security filter returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringSuppression": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a suppression rule returns \"OK\" response"
     }
   ],
   "CreateScanningGroup": [

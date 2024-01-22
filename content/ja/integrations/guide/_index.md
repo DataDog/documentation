@@ -28,6 +28,8 @@ title: インテグレーションガイド
     {{< nextlink href="integrations/guide/snmp-commonly-used-compatible-oids/" tag="snmp" >}}よく使われる SNMP と互換性のある OID{{< /nextlink >}} 
     {{< nextlink href="integrations/guide/versions-for-openmetrics-based-integrations" tag=" openmetrics" >}}OpenMetrics ベースのインテグレーションのバージョン管理{{< /nextlink >}}
     {{< nextlink href="integrations/guide/cloud-foundry-setup" tag=" pivotal cloud foundry" >}}Pivotal Cloud Foundry の手動セットアップ{{< /nextlink >}} 
+    {{< nextlink href="integrations/guide/application-monitoring-vmware-tanzu" tag=" VMWare Tanzu" >}}VMware Tanzu のための Datadog Application Monitoring{{< /nextlink >}} 
+    {{< nextlink href="integrations/guide/cluster-monitoring-vmware-tanzu" tag=" VMWare Tanzu" >}}VMware Tanzu のための Datadog Cluster Monitoring{{< /nextlink >}} 
 {{< /whatsnext >}}
 
 {{< whatsnext desc="AWS ガイド:" >}}

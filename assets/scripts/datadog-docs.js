@@ -37,7 +37,7 @@ const scrollActiveNavItemToTop = () => {
 
         if (sideNavActiveMenuItem) {
             const distanceToTop = sideNavActiveMenuItem.offsetTop;
-            leftSideNav.scrollTop = distanceToTop - 100;
+            leftSideNav.scrollTop = distanceToTop - 110;
         }
     }
 };
@@ -127,9 +127,24 @@ const doOnLoad = () => {
 
 DOMReady(doOnLoad);
 
+function getVisibleParentPath(ancestralEl, path){
+    // returns the closest visible parent path
+    // of a child path not visible in the left nav (anything more than 4 levels deep)
+
+    let el = document.querySelector(`${ancestralEl} [data-path="${path}"]`)
+    // account for preview branch name in url
+    let endIdx = env === 'preview' ? 6 : 4
+
+    while(!el && endIdx){
+        path = path.split('/').slice(0,endIdx).join('/')
+        el = document.querySelector(`${ancestralEl} [data-path="${path}"]`)
+        endIdx -= 1
+    }
+    return el
+}
+
 // Get sidebar
 function hasParentLi(el) {
-    const els = [];
     while (el) {
         if (el.classList) {
             if (el.classList.contains('sidenav-nav-main')) {
@@ -146,7 +161,6 @@ function hasParentLi(el) {
             }
         }
 
-        els.unshift(el);
         el = el.parentNode;
     }
 }
@@ -162,7 +176,8 @@ function getPathElement(event = null) {
     path = path.replace(/^\//, '');
     path = path.replace(/\/$/, '');
 
-    let sideNavPathElement = document.querySelector(`.side [data-path="${path}"]`);
+    let sideNavPathElement = getVisibleParentPath('.side',path)
+    
     let mobileNavPathElement = document.querySelector(`header [data-path="${path}"]`);
 
     // Select sidenav/mobile links by data-path attribute to ensure active class is set correctly on specific sub-pages
@@ -290,6 +305,10 @@ function navClickEventHandler(event) {
     if (event.target !== this) {
         // Get the targets parent li
         const parentli = event.target.closest('li');
+
+        if (!parentli) {
+            return;
+        }
 
         // Get the a
         const a = parentli.querySelector('a');
