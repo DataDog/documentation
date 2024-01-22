@@ -3028,6 +3028,12 @@ main:
     identifier: data_streams_troubleshooting
     parent: data_streams
     weight: 1
+  - name: Data Jobs Monitoring
+    url: data_jobs/
+    pre: datastreams-monitoring
+    identifier: data_jobs
+    parent: apm_heading
+    weight: 177000
   - name: Log Management
     url: logs/
     pre: log
