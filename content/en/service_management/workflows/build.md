@@ -145,37 +145,29 @@ All the variables of the Source object are visible in the Context Variables tab.
 
 {{< img src="service_management/workflows/context-variables-tab-source-object-variables.png" alt="The Source object variables in the Context Variables tab" >}}
 
-## Error handling and fallbacks
+## Error handling
 
-In the event that a step fails, you can specify the number of times you want your workflow to retry the step and at what interval, before moving on to an optional fallback step. If no fallback step is provided, the workflow terminates after all retries have been exhausted.
+In the event that a step fails, you can specify the number of times you want your workflow to retry the step and at what interval, before moving on to an optional error path. If no error path is present, the workflow terminates after all retries have been exhausted.
 
-To configure error handling for a step:
+### Retries
+
+To configure retries for a step:
 1. Click on the step in the workflow canvas.
-1. Click the **+** icon next to the **Error Handling & Retries** section.
-1. Adjust the **Interval** and **Max retries** values.
-1. Optionally, [add a fallback step](#add-a-fallback).
+1. In the **Retries** section, adjust the **Interval** and **Max retries** values.
 1. Save your workflow to apply the changes.
 
-{{< img src="service_management/workflows/error-handling1.png" alt="The Error Handling and Retries section" style="width:100%;" >}}
+### Add an error path
 
-### Add a fallback
+You can add an error path for workflow to proceed down if it encounters an error.
 
-To handle a step failure, you can add a downstream workflow step as a fallback by selecting it from the **Fallback** dropdown menu.
+To add an error path:
+1. Hover over the step where you'd like to add an error path.
+1. Click and drag the **Error path** icon.
+1. Select a workflow step to add to the error path.
+1. After configuring your step, you can add more steps to an error path and even flow back into the main workflow path.
+1. When you're done configuring your error path steps, click **Save** to apply your changes.
 
-Alternatively, you can create a fallback step that branches from the main workflow tree:
-1. From the **Fallback** dropdown menu, select **Add a new fallback**. The workflow canvas is replaced with a fallback tree.
-1. Click the **+** icon on the fallback tree to add a step.
-1. [Add steps using the workflow builder](#build-a-workflow-with-the-workflow-builder). You can add as many steps as needed to the fallback tree.
-1. When you're done configuring your fallback steps, click **Save** to apply your changes.
-
-To get back to the main workflow canvas, click **Main** above the fallback tree. From the workflow canvas, a fallback icon appears next to steps with a fallback. Click the icon and select the fallback step to open the fallback tree. Alternatively, you can access the fallback tree by clicking **Edit Fallback Tree** in the **Error Handling & Retries** section of a step. The **Edit Fallback Tree** button only appears if the fallback step is not an existing downstream step in the main workflow.
-
-{{< img src="service_management/workflows/fallback-icon2.png" alt="A step with a fallback" style="width:60%;" >}}
-
-### Remove a fallback
-
-1. From the main workflow canvas, click on the step with the fallback you wish to remove.
-1. In the **Error Handling & Retries** section, click **Clear**.
+{{< img src="service_management/workflows/error-path.mp4" alt="Add an error path to your workflow" video=true >}}
 
 ### Edit a workflow with JSON
 
