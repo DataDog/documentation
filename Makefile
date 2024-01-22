@@ -1,7 +1,7 @@
 # make
 SHELL = /bin/bash
-MAKEFLAGS := --jobs=$(shell nproc)
-MAKEFLAGS += --output-sync --no-print-directory
+# MAKEFLAGS := --jobs=$(shell nproc)
+# MAKEFLAGS += --output-sync --no-print-directory
 .PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source vector_data
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \

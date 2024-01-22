@@ -1142,9 +1142,12 @@ components:
         is_read_only:
           default: false
           deprecated: true
-          description: Whether this dashboard is read-only. If True, only the author
-            and admins can make changes to it. Prefer using `restricted_roles` to
-            manage write authorization.
+          description: 'Whether this dashboard is read-only. If True, only the author
+            and admins can make changes to it.
+
+
+            This property is deprecated; please use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/)
+            instead to manage write authorization for individual dashboards.'
           example: false
           type: boolean
         layout_type:
@@ -1165,8 +1168,13 @@ components:
         reflow_type:
           $ref: '#/components/schemas/DashboardReflowType'
         restricted_roles:
-          description: A list of role identifiers. Only the author and users associated
+          deprecated: true
+          description: 'A list of role identifiers. Only the author and users associated
             with at least one of these roles can edit this dashboard.
+
+
+            This property is deprecated; please use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/)
+            instead to manage write authorization for individual dashboards.'
           items:
             description: A role UUID.
             type: string
@@ -1439,8 +1447,13 @@ components:
           description: Dashboard identifier.
           type: string
         is_read_only:
-          description: Whether this dashboard is read-only. If True, only the author
+          deprecated: true
+          description: 'Whether this dashboard is read-only. If True, only the author
             and admins can make changes to it.
+
+
+            This property is deprecated; please use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/)
+            instead to manage write authorization for individual dashboards.'
           type: boolean
         layout_type:
           $ref: '#/components/schemas/DashboardLayoutType'
@@ -10160,7 +10173,7 @@ components:
           description: 'The recurrence rules as defined in the iCalendar RFC 5545.
             The supported rules for SLO corrections
 
-            are `FREQ`, `INTERVAL`, `COUNT` and `UNTIL`.'
+            are `FREQ`, `INTERVAL`, `COUNT`, `UNTIL` and `BYDAY`.'
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
           type: string
         slo_id:
@@ -10237,7 +10250,7 @@ components:
           description: 'The recurrence rules as defined in the iCalendar RFC 5545.
             The supported rules for SLO corrections
 
-            are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`.'
+            are `FREQ`, `INTERVAL`, `COUNT`, `UNTIL` and `BYDAY`.'
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
           nullable: true
           type: string
@@ -10313,7 +10326,7 @@ components:
           description: 'The recurrence rules as defined in the iCalendar RFC 5545.
             The supported rules for SLO corrections
 
-            are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`.'
+            are `FREQ`, `INTERVAL`, `COUNT`, `UNTIL` and `BYDAY`.'
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
           type: string
         start:
@@ -15906,6 +15919,10 @@ components:
         compressedJsonDescriptor:
           description: A protobuf JSON descriptor that needs to be gzipped first then
             base64 encoded.
+          type: string
+        compressedProtoFile:
+          description: A protobuf file that needs to be gzipped first then base64
+            encoded.
           type: string
         dnsServer:
           description: DNS server to use for DNS tests.
