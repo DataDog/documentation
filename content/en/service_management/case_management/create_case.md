@@ -14,7 +14,6 @@ Cases can be created [manually](#manual-case-creation) or [automatically](#autom
 ## Manual case creation
 
 On the [Case Management page][1], click **New Case**.
-1. Choose a case type: **standard** or **security**.
 1. Select a project to create the case in. A case can only belong to a single project. 
 1. Fill in a title for the case.
 1. Optionally, add a description. 
