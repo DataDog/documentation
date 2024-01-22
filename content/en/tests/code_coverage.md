@@ -231,7 +231,7 @@ The code coverage report needs to be generated in a different process, otherwise
 
 ### Compatibility
 
-* `dd-trace>=TBD`.
+* `dd-trace>=2.5.0`.
 * `Python>=3.7`.
 * `coverage>=4.4.2`.
 * `pytest>=3.0.0`.
