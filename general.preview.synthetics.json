@@ -13,12 +13,6 @@
       }
     },
     {
-      "id": "5zm-7b4-ifw",
-      "config": {
-        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/integrations/?q=mesos"
-      }
-    },
-    {
       "id": "hz2-zgi-43d",
       "config": {
         "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/logs/log_collection/"
@@ -41,6 +35,25 @@
       "config": {
         "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/glossary/?product=alerts"
       }
+    },
+    {
+      "id": "5nh-qfq-fs4",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/static_analysis/rules/"
+      }
+    },
+    {
+      "id": "hys-3ee-qff",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/static_analysis/rules/"
+      }
+    },
+    {
+      "id": "skf-cqv-m5d",
+      "config": {
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/static_analysis/rules/"
+      }
     }
+
   ]
 }

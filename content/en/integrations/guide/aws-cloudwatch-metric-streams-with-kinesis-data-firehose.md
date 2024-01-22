@@ -119,11 +119,15 @@ Once you see the Metric Stream resource has been successfully created, wait five
 ### Cross-account metric streaming
 Use cross-account metric streaming to include metrics in a single Metric Stream that spans across multiple AWS accounts within an AWS region. This helps to reduce the number of streams needed to collect metrics for a common destination. To do this, [connect your source accounts][5] with your monitoring account and enable Cross-account streaming to Datadog in your AWS monitoring account.
 
+Your monitoring account needs to have the following permissions in order for this feature to work properly:
+   * oam:ListSinks
+   * oam:ListAttachedLinks
+
 **Note:** To collect custom tags and other metadata for your streamed metrics, integrate your source accounts with Datadog.
 
 ### Disable metric streaming
 
-To disable metric streaming completely for a given AWS account and region, you must delete the AWS Metric Steam and its related resources. To prevent loss of metrics in Datadog, it's important to follow these deletion steps carefully:
+To disable metric streaming completely for a given AWS account and region, you must delete the AWS Metric Stream and its related resources. To prevent loss of metrics in Datadog, it's important to follow these deletion steps carefully:
 
 If you set streaming up with [CloudFormation](?tab=cloudformation#installation):
 1. Delete the stack that was created during the setup.

@@ -33,7 +33,7 @@ Datadog APM では、ビジネスの優先順位と重要なメトリクスに�
 * 手動で作成する。_（ステップ 4.、5.）_
 * Analytics クエリをエクスポートする。_（ステップ 7.）_
 
-1. **[サービス一覧ページ][1]**を開き、`web-store` サービスを選択します。
+1. **[サービスカタログ][1]**を開き、`web-store` サービスを選択します。
 
 2. **Total Requests グラフを見つけ**、右上の `export` ボタンをクリックして `Export to Dashboard` を選択します。**`New Timeboard` をクリックします**。
 
@@ -128,7 +128,7 @@ Datadog APM では、ビジネスの優先順位と重要なメトリクスに�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/apm/services
+[1]: https://app.datadoghq.com/services
 [2]: /ja/dashboards/widgets/timeseries/
 [3]: /ja/tracing/metrics/metrics_namespace/
 [4]: https://app.datadoghq.com/apm/traces?viz=timeseries

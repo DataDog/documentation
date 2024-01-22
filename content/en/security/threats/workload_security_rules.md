@@ -179,4 +179,4 @@ To disable a default Agent rule, navigate to the [**Agent Configuration**][6] pa
 [5]: /security/notifications/variables/
 [6]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [7]: /security/threats/setup?tab=kuberneteshelm#enable-remote-configuration
-[8]: /security/explorer
+[8]: /security/threats/security_signals

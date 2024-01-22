@@ -46,6 +46,10 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 ALTER SERVER ROLE ##MS_ServerStateReader## ADD MEMBER datadog;
 ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER datadog;
+-- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
+-- USE msdb;
+-- CREATE USER datadog FOR LOGIN datadog;
+-- GRANT SELECT to datadog;
 ```
 
 Grant the Agent access to each additional Azure SQL Database on this server:
@@ -54,7 +58,7 @@ Grant the Agent access to each additional Azure SQL Database on this server:
 CREATE USER datadog FOR LOGIN datadog;
 ```
 
-**Note:** Azure managed identity authentication is also supported. Please see [the guide][3] on how to configure this for your Azure SQL DB instance.
+**Note:** Microsoft Entra ID managed identity authentication is also supported. Please see [the guide][3] on how to configure this for your Azure SQL DB instance.
 
 When configuring the Datadog Agent, specify one check instance for each application database located on a given Azure SQL DB server. Do not include `master` and other [system databases][2]. The Datadog Agent must connect directly to each application database in Azure SQL DB because each database is running in an isolated compute environment. This also means that `database_autodiscovery` does not work for Azure SQL DB, so it should not be enabled.
 
@@ -101,6 +105,10 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
+-- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
+-- USE msdb;
+-- CREATE USER datadog FOR LOGIN datadog;
+-- GRANT SELECT to datadog;
 ```
 
 #### For SQL Server 2012
@@ -110,6 +118,10 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
+-- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
+-- USE msdb;
+-- CREATE USER datadog FOR LOGIN datadog;
+-- GRANT SELECT to datadog;
 
 -- Create the `datadog` user in each additional application database:
 USE [database_name];

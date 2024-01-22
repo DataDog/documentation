@@ -43,7 +43,9 @@ Session Replay is available in the RUM Browser SDK. To start collecting data for
 
 ## Usage
 
-The Session Replay starts recording automatically when calling `init()`. To conditionally start the recording, use the `startSessionReplayRecordingManually` init parameter and call `startSessionReplayRecording()`. For example, to only record authenticated user sessions:
+Starting with v5.0.0 of the RUM Browser SDK, the Session Replay starts recording automatically when calling `init()`. To conditionally start the recording, use the `startSessionReplayRecordingManually` init parameter and call `startSessionReplayRecording()`. 
+
+For example, to only record authenticated user sessions:
 
 ```javascript
 window.DD_RUM.init({
@@ -65,6 +67,8 @@ if (user.isAuthenticated) {
 ```
 
 To stop the Session Replay recording, call `stopSessionReplayRecording()`.
+
+<div class="alert alert-warning">When using a version of the RUM Browser SDK older than v5.0.0, Session Replay recording does not begin automatically. Call `startSessionReplayRecording()` to begin recording.</div>
 
 ## Disable Session Replay
 
@@ -99,6 +103,6 @@ Learn more about the [Session Replay for Mobile][5].
 [1]: https://github.com/DataDog/browser-sdk
 [2]: https://www.rrweb.io/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
-[4]: /real_user_monitoring/session_replay/
+[4]: /real_user_monitoring/browser/
 [5]: /real_user_monitoring/session_replay/mobile/
 [6]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay

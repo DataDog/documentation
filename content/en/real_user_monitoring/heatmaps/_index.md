@@ -15,9 +15,9 @@ further_reading:
 
 A heatmap (or heat map) is a visualization of your user's interactions overlaid on Session Replay data. RUM has three different types of heatmaps:
 
-- **Clickmaps:** View user interactions (clicks) to understand how users engage with your page
+- **Click maps:** View user interactions (clicks) to understand how users engage with your page
 - **Top Elements:** View a ranking of up to the top 10 most interacted-with elements on a given page.
-- **Scrollmaps:** View how far users scroll down a page, including where the average fold of a page falls. The average fold is the lowest point on a page that a user can see on their device without scrolling.
+- **Scroll maps:** View how far users scroll down a page, including where the average fold of a page falls. The average fold is the lowest point on a page that a user can see on their device without scrolling.
 
 Use heatmaps to review complex data at a glance, gaining insights around optimizing your user experience.
 
@@ -26,8 +26,8 @@ Use heatmaps to review complex data at a glance, gaining insights around optimiz
 To get started with heatmaps:
 
 1. Verify your SDK version:
-  - For Clickmaps, you must be on the latest version of the SDK (v4.40.0 or later).
-  - For Scrollmaps, you must be on (v4.50.0 or later)
+  - For Click maps, you must be on the latest version of the SDK (v4.40.0 or later).
+  - For Scroll maps, you must be on (v4.50.0 or later)
 2. Enable [Session Replay][1].
 3. Set`trackUserInteractions: true` in the SDK initialization to enable action tracking (required for Clickmaps).
 
@@ -41,13 +41,13 @@ This takes you to the [heatmap page][3] for a particular view. You can switch th
 
 {{< img src="real_user_monitoring/heatmaps/heatmaps-filters-v2.png" alt="Shows the selector for selecting an application and a view from the options where you have already enabled session replay." style="width:100%;">}}
 
-## Clickmaps
+## Click maps
 
-A Clickmap shows you the most interacted-with actions on a given view by aggregating user click actions from sessions and visualizing them as blobs on the map.
+A Click map shows you the most interacted-with actions on a given view by aggregating user click actions from sessions and visualizing them as blobs on the map.
 
 {{< img src="real_user_monitoring/heatmaps/heatmap_v3.png" alt="Clickmap data overlayed on a website." style="width:60%;">}}
 
-Each Clickmap also offers analytics such as:
+Each Click map also offers analytics such as:
 
 - Where that page ranks out of all other visited pages
 - Unique user counts to that page
@@ -68,13 +68,13 @@ Top Elements heatmaps aggregate click actions on a given view by displaying the 
 
 Click any action name in the panel to highlight the corresponding action on the map.
 
-## Scrollmaps
+## Scroll maps
 
-Scrollmaps show a visual of the aggregate scroll activity on a given page. Use Scrollmaps to see where the average fold of the page falls, and how many users scroll to a given depth. You can drag the floating blue bar on a Scrollmap to the depth you wish to assess.
+Scroll maps show a visual of the aggregate scroll activity on a given page. Use Scroll maps to see where the average fold of the page falls, and how many users scroll to a given depth. You can drag the floating blue bar on a Scroll map to the depth you wish to assess.
 
 {{< img src="real_user_monitoring/heatmaps/scrollmaps-v3.png" alt="Scrollmap of the bedding page in a sample ecommerce application" style="width:100%;">}}
 
-The panel to the left of the Scrollmap provides high-level insights with direct links to query results, such as a link to a list of views where the user scrolled past a given percentile. Below the insight panel is a minimap of the page and a distribution graph displaying granular scroll data, useful for identifying where the biggest drop-off occurs.
+The panel to the left of the Scroll map provides high-level insights with direct links to query results, such as a link to a list of views where the user scrolled past a given percentile. Below the insight panel is a minimap of the page and a distribution graph displaying granular scroll data, useful for identifying where the biggest drop-off occurs.
 
 {{< img src="real_user_monitoring/heatmaps/scrollmaps-insights-panel.png" alt="A screenshot of the queries for scroll data insights" style="width:50%;">}}
 
@@ -124,7 +124,7 @@ User information is not collected by default. Heatmaps use the user information 
 [3]: https://app.datadoghq.com/rum/heatmap/view
 [4]: /real_user_monitoring/explorer/
 [5]: /real_user_monitoring/guide/alerting-with-conversion-rates/
-[6]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#override-default-rum-view-names
+[6]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [7]: /real_user_monitoring/browser/tracking_user_actions/#manage-information-being-collected
-[8]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#user-session
+[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
 [9]: https://app.datadoghq.com/rum/heatmap

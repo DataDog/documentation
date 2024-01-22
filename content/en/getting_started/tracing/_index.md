@@ -67,7 +67,7 @@ For the remaining steps, follow the [Quick start instructions][10] within the Da
 
 ### Enable APM
 
-For the latest versions of Agent v6 and v7, APM is enabled by default. You can see this in the Agent [`datadog.yaml` configuration file][11]:
+For the latest versions of Agent v6 & v7, APM is enabled by default. You can see this in the Agent [`datadog.yaml` configuration file][11]:
 
 ```yaml
 # apm_config:
@@ -153,7 +153,7 @@ This outputs:
 hello world
 ```
 
-After a few minutes, your trace displays in Datadog under the `hello` service. Check the [services page][14] or [trace list][15].
+After a few minutes, your trace displays in Datadog under the `hello` service. Check the [Service Catalog][14] or [trace list][15].
 
 {{< img src="getting_started/tracing-services-list.png" alt="Tracing Services List" >}}
 
@@ -174,5 +174,5 @@ After a few minutes, your trace displays in Datadog under the `hello` service. C
 [11]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [12]: /getting_started/tagging/unified_service_tagging
 [13]: /tracing/guide/setting_primary_tags_to_scope/
-[14]: https://app.datadoghq.com/apm/services
+[14]: https://app.datadoghq.com/services
 [15]: https://app.datadoghq.com/apm/traces

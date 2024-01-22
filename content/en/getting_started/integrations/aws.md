@@ -86,6 +86,8 @@ Before getting started, ensure you have the following prerequisites:
     * logs:DeleteLogGroup
     * logs:DescribeLogGroups
     * logs:PutRetentionPolicy
+    * oam:ListSinks
+    * oam:ListAttachedLinks
     * s3:CreateBucket
     * s3:DeleteBucket
     * s3:DeleteBucketPolicy
@@ -255,14 +257,14 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [42]: /serverless
 [43]: /serverless/libraries_integrations
 [44]: /serverless/distributed_tracing
-[45]: /serverless/troubleshooting
+[45]: /serverless/aws_lambda/troubleshooting/
 [46]: /integrations/amazon_xray/
 [47]: /tracing/trace_collection/
 [48]: /tracing/
 [49]: /watchdog/
 [50]: /getting_started/cloud_siem/
 [51]: /security/default_rules/#cat-log-detection
-[52]: /security/explorer/
+[52]: /security/cloud_siem/investigate_security_signals
 [53]: /security/notifications/rules/
 [54]: /security/misconfigurations/setup/
 [55]: /security/default_rules/#cat-posture-management-cloud

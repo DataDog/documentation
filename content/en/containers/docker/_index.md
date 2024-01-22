@@ -293,7 +293,7 @@ Returns `CRITICAL` if an Agent check is unable to send metrics to Datadog, other
 [6]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/docker-dd-agent?gcrImageListsize=30
 [7]: https://gallery.ecr.aws/datadog/docker-dd-agent
 [8]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
-[9]: /agent/basic_agent_usage/#supported-os-versions
+[9]: /agent/supported_platforms/?tab=cloudandcontainers
 [10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: /agent/guide/compose-and-the-datadog-agent/
 [12]: /agent/docker/integrations/

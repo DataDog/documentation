@@ -23,15 +23,17 @@ cascade:
 {{< /site-region >}}
 
 
-{{< img src="observability_pipelines/obs_pipelines.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
+{{< img src="observability_pipelines/obs_pipelines_new.png" alt="A graphic showing different data sources on the left that flows into three hexagons named transform, reduce, and route, with arrows pointing to different destinations for the modified data" style="width:100%;" >}}
 
 ## Overview
 
-Observability Pipelines allow you to collect, process, and route observability data (logs, metrics, and traces) from any source to any destination in infrastructure that you own or manage. With Observability Pipelines, you can:
+Observability Pipelines allow you to collect, process, and route logs from any source to any destination in infrastructure that you own or manage.
+
+With Observability Pipelines, you can:
 
 - Control your data volume before routing to manage costs.
 - Route data anywhere to reduce vendor lock-in and simplify migrations.
-- Transform logs and metrics by adding, parsing, enriching, and removing fields and tags.
+- Transform logs by adding, parsing, enriching, and removing fields and tags.
 - Redact sensitive data from your telemetry data.
 
 The Observability Pipelines Worker is the software that runs in your infrastructure. It aggregates and centrally processes and routes your data. More specifically, the Worker can:
@@ -56,14 +58,14 @@ Start getting insights into your Observability Pipelines:
 
 ###  Collect data from any source and route data to any destination
 
-Collect logs, metrics, and traces from any source and route them to any destination to reduce vendor lock-in and simplify migrations.
+Collect data[*](#support) from any source and route them to any destination to reduce vendor lock-in and simplify migrations.
 
 
 {{< img src="observability_pipelines/component_panel.png" alt="The Datadog Logs component side panel showing a line graph of events in/out per second and a link graph of bytes in/out per second" style="width:100%;" >}}
 
 ### Control your data volume before it gets routed
 
-Optimize volume and reduce the size of your observability data by sampling, filtering, deduplicating, and aggregating your logs and metrics. Govern your telemetry by enforcing data standards and controlling tags for metrics.
+Optimize volume and reduce the size of your observability data by sampling, filtering, deduplicating, and aggregating your logs.
 
 {{< img src="observability_pipelines/transforms.png" alt="The list of transforms side panel showing the transforms available such as aggregate, Amazon EC2 Metadata, dedupe and more." style="width:100%;" >}}
 

@@ -12,7 +12,7 @@ further_reading:
     - link: '/containers/cluster_agent/clusterchecks/'
       tag: 'Documentation'
       text: 'Cluster Checks'
-    - link: '/containers/cluster_agent/troubleshooting#endpoint-checks'
+    - link: '/containers/troubleshooting/cluster-and-endpoint-checks'
       tag: 'Documentation'
       text: 'Troubleshooting Endpoint Checks'
 

@@ -2,6 +2,8 @@
 title: Connections
 kind: documentation
 description: Workflow connections
+algolia:
+  tags: ['workflow', 'workflows', 'workflow automation']
 aliases:
 - /workflows/connections
 - /workflows/setup

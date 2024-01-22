@@ -52,7 +52,7 @@ Before you add a directive to a CSP header, [generate a client token in your Dat
 You need a URL where browsers can send policy violation reports. The URL must have the following format:
 
 ```
-https://csp-report.{{< region-param key=browser_sdk_endpoint_domain >}}/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report
+https://{{< region-param key=browser_sdk_endpoint_domain >}}/api/v2/logs?dd-api-key=<client-token>&dd-evp-origin=content-security-policy&ddsource=csp-report
 ```
 
 Optionally, add the `ddtags` key (service name, the environment, and service version) to the URL to set up [Unified Service Tagging][3]:
@@ -74,7 +74,7 @@ service%3AbillingService%2Cenv%3Aproduction
 And the final URL with tags would be:
 
 ```
-https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=service%3AbillingService%2Cenv%3Aproduction
+https://{{< region-param key=browser_sdk_endpoint_domain >}}/api/v2/logs?dd-api-key=<client-token>&dd-evp-origin=content-security-policy&ddsource=csp-report&ddtags=service%3AbillingService%2Cenv%3Aproduction
 ```
 
 ## Add the URL to the CSP
@@ -87,7 +87,7 @@ Datadog recommends embedding the Content Security Policy in an HTTP header. You 
 
 - If you're using the `report-uri` directive:
   ```bash
-  Content-Security-Policy: ...; report-uri https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report
+  Content-Security-Policy: ...; report-uri https://{{< region-param key=browser_sdk_endpoint_domain >}}/api/v2/logs?dd-api-key=<client-token>&dd-evp-origin=content-security-policy&ddsource=csp-report
   ```
 
 - If you're using the `report-to` directive:
@@ -96,7 +96,7 @@ Datadog recommends embedding the Content Security Policy in an HTTP header. You 
   Report-To: { "group": "browser-intake-datadoghq",
               "max_age": 10886400,
               "endpoints": [
-                  { "url": " https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report" }
+                  { "url": "https://{{< region-param key=browser_sdk_endpoint_domain >}}/api/v2/logs?dd-api-key=<client-token>&dd-evp-origin=content-security-policy&ddsource=csp-report" }
               ] }
   ```
 
@@ -106,7 +106,7 @@ You can also embed the URL in a `<meta>` HTML tag.
 
 ```html
 <meta http-equiv="Content-Security-Policy"
-    content="...; report-uri 'https://csp-report.browser-intake-datadoghq.com/api/v2/logs?dd-api-key=<client -token>&dd-evp-origin=content-security-policy&ddsource=csp-report'">
+    content="...; report-uri 'https://{{< region-param key=browser_sdk_endpoint_domain >}}/api/v2/logs?dd-api-key=<client-token>&dd-evp-origin=content-security-policy&ddsource=csp-report'">
 ```
 ## Violation reports examples
 
@@ -174,9 +174,9 @@ Depending on the `site` option used to initialize [Real User Monitoring][4] or [
 connect-src https://{{< region-param key="browser_sdk_endpoint_domain" >}}
 ```
 
-### Session Replay worker
+### Web Worker
 
-If you are using Session Replay, make sure to allow workers with `blob:` URI schemes by adding the following `worker-src` entry:
+If you are using Session Replay or the RUM [`compressIntakeRequests` initialization parameter][4], make sure to allow workers with `blob:` URI schemes by adding the following `worker-src` entry:
 
 ```txt
 worker-src blob:;
