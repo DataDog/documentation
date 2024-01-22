@@ -165,9 +165,9 @@ The following scenario demonstrates how different cost types behave. Imagine you
 - A savings plan which prices this instance type at $2 per compute-hour.
 - A negotiated EDP discount of 10% on top of all other discounts.
 
-Here's how the instance cost, savings plan, and discount appear in each cost type:
+Here's how the instance cost, savings plan hourly commitment, and discount appear in each cost type:
 
-|Cost type |Usage |Savings Plan Fee |EDP Discount | Explanation |
+|Cost type |Usage |Savings Plan |Discount | Explanation |
 |:---------|-|-|-|:------------------------------------------------|
 |On Demand |$3.00|||This is the public on-demand rate.|
 |Unblended |$3.00|$2.00|-$0.20|Savings plan recurring fee and EDP discount are separate line items, not associated with a specific resource. (**Note:** the $3 resource cost is offset with `SavingsPlanNegation`.) |
