@@ -116,6 +116,13 @@ The Datadog Exporter sends data collected by the OTLP Receiver to the Datadog ba
 2. The following lines configure the Datadog Exporter to send observability data to Datadog:  
 
     ```yaml
+    exporters:
+      datadog:
+      api:
+        site: ${env:DD_SITE}
+        key: ${env:DD_API_KEY}
+    traces:
+      trace_buffer: 500
     service:
       pipelines:
         metrics:
