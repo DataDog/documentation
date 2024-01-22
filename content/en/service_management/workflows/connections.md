@@ -2,6 +2,10 @@
 title: Connections
 kind: documentation
 description: Workflow connections
+further_reading:
+- link: "/getting_started/workflow_automation/"
+  tag: "Documentation"
+  text: "Getting Started with Workflow Automation"
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
 aliases:
@@ -113,6 +117,10 @@ To connect to an arbitrary service, use the HTTP connection type, and choose fro
 1. If appropriate, use the **Add +** buttons to add headers or URL parameters.
 1. Choose an connection type: **Token Auth** or **Basic Auth**. Enter the appropriate parameters.
 1. Click **Create** to save your HTTP connection.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_management/workflows/actions_catalog/generic_actions/
 [2]: https://app.datadoghq.com/workflow

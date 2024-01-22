@@ -7,6 +7,9 @@ algolia:
 aliases:
 - /workflows/trigger
 further_reading:
+- link: "/getting_started/workflow_automation/"
+  tag: "Documentation"
+  text: "Getting Started with Workflow Automation"
 - link: "/service_management/workflows/access/#service-accounts/"
   tag: "Documentation"
   text: "Find out more about Service Accounts for workflows"
@@ -54,6 +57,16 @@ To run the workflow:
 1. Click **Run Workflow** on your dashboard widget.
 1. Under **Execution parameters**, any template variables you mapped to workflow inputs are automatically populated. Enter the values for any unmapped execution parameters, or edit the existing values if needed.
 1. Click **Run** to run the workflow.
+
+## Trigger a workflow from a workflow
+
+You can trigger a child workflow from another workflow using the **Trigger Workflow** action. For example, if you have a workflow that creates a Jira ticket and then sends a Slack message, there's no need to recreate that workflow for all of your monitors. Instead, create the workflow once and trigger it from everywhere else using the Trigger Workflow action.
+
+If the child workflow has [input parameters][5], these parameters appear as required fields in the Trigger Workflow action. In the example below, the **Hostname** input parameter is required because `Hostname` is set as an input parameter in the child workflow.
+
+{{< img src="service_management/workflows/child-workflow.png" alt="Trigger a child workflow using the Trigger Workflow action" style="width:100%;" >}}
+
+For information on creating a workflow that creates a Jira ticket and then sends a Slack message, see [Getting Started with Workflow Automation][6].
 
 ## Trigger a workflow from a Monitor
 
@@ -136,3 +149,5 @@ The initial run history for a workflow provides a panel with the list of previou
 [2]: https://app.datadoghq.com/monitors/manage
 [3]: https://app.datadoghq.com/security/configuration/rules
 [4]: /security/cloud_security_management/workflows
+[5]: /service_management/workflows/build/#input-parameters
+[6]: /getting_started/workflow_automation/
