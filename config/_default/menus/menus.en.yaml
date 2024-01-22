@@ -1598,6 +1598,31 @@ main:
     parent: service_management_heading
     identifier: case_management
     weight: 40000
+  - name: Projects
+    url: service_management/case_management/projects
+    parent: case_management
+    identifier: case_management_projects
+    weight: 1
+  - name: Create a Case
+    url: service_management/case_management/create_case
+    parent: case_management
+    identifier: case_management_create_case
+    weight: 2
+  - name: View and Manage
+    url: service_management/case_management/view_and_manage
+    parent: case_management
+    identifier: case_management_view_and_manage
+    weight: 3
+  - name: Settings
+    url: service_management/case_management/settings
+    parent: case_management
+    identifier: case_management_settings
+    weight: 4
+  - name: Troubleshooting
+    url: service_management/case_management/troubleshooting
+    parent: case_management
+    identifier: case_management_troubleshooting
+    weight: 5
   - name: Incident Management
     url: service_management/incident_management/
     pre: incidents
