@@ -67,7 +67,7 @@ While the concept of a CI pipeline may vary depending on your provider, see how 
 | Job | Job |
 | Step* | Script |
 
-_\*Steps granularity is not available in Datadog_
+_\*A pipeline's step granularity is not available in Datadog._
 
 {{% /tab %}}
 {{% tab "Jenkins" %}}
@@ -89,7 +89,7 @@ _\*Steps granularity is not available in Datadog_
 | Job | Job |
 | Step* | Step |
 
-_\*Steps granularity is not available in Datadog_
+_\*A pipeline's step granularity is not available in Datadog._
 
 {{% /tab %}}
 {{% tab "Buildkite" %}}
@@ -101,7 +101,7 @@ _\*Steps granularity is not available in Datadog_
 | Job | Job |
 | Step* | Step |
 
-_\*Steps granularity is not available in Datadog_
+_\*A pipeline's step granularity is not available in Datadog._
 
 {{% /tab %}}
 {{% tab "TeamCity" %}}
@@ -113,7 +113,7 @@ _\*Steps granularity is not available in Datadog_
 | Job | Build |
 | Step* | Step |
 
-_\*Steps granularity is not available in Datadog_
+_\*A pipeline's step granularity is not available in Datadog._
 
 {{% /tab %}}
 {{% tab "Azure Pipelines" %}}
@@ -125,7 +125,7 @@ _\*Steps granularity is not available in Datadog_
 | Job | Job |
 | Step* | Step |
 
-_\*Steps granularity is not available in Datadog_
+_\*A pipeline's step granularity is not available in Datadog._
 
 {{% /tab %}}
 {{% tab "AWS CodePipeline" %}}
