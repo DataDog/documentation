@@ -67,11 +67,12 @@ The Calendar application uses OpenTelemetry tools to generate and collect metric
 
 ## Instrumenting the application
 
-The Calendar sample application is already instrumented for you.
+The Calendar sample application is already instrumented.
 
-In `CalendarController.java`, the following code instruments the Calendar application using the OpenTelemetry API:
+1. Go to the Collector configuration file located at: `./src/main/java/com/otel/controller/CalendarController.java`.
+2. The following code instruments the Calendar application using the OpenTelemetry API:
 
-{{< code-block lang="java" disable_copy="true" >}}
+{{< code-block lang="java" disable_copy="true" filename="CalendarController.java" >}}
 private String getDate() {
    Span span = GlobalOpenTelemetry.getTracer("calendar").spanBuilder("getDate").startSpan();
 {{< /code-block >}}  
@@ -84,8 +85,8 @@ When the Calendar application runs, the `getDate()` call generates traces and sp
 
 The Calendar application is already configured to send data from the OpenTelemetry SDK to the [OpenTelemetry Protocol (OTLP) receiver][10] in the OpenTelemetry Collector.
 
-1. Go to the Collector configuration file located at: `./src/main/resources/otelcol-config.yaml`
-2.  The following lines configure the OTLP Receiver to receive metrics, traces, and logs:  
+1. Go to the Collector configuration file located at: `./src/main/resources/otelcol-config.yaml`.
+2. The following lines configure the OTLP Receiver to receive metrics, traces, and logs:  
 
     {{< code-block lang="yaml" filename="otelcol-config.yaml" collapsible="true" disable_copy="true" >}}
 receivers:
@@ -115,10 +116,14 @@ The Datadog Exporter sends data collected by the OTLP Receiver to the Datadog ba
 
    {{< code-block lang="yaml" filename="otelcol-config.yaml" collapsible="true" disable_copy="true" >}}
 exporters:
+  logging:
+    verbosity: detailed
   datadog:
-  api:
-    site: ${env:DD_SITE}
-    key: ${env:DD_API_KEY}
+    traces:
+      span_name_as_resource_name: true
+    hostname: "otelcol-docker"
+    api:
+      key: ${DD_API_KEY}
 traces:
   trace_buffer: 500
 service:
@@ -135,7 +140,7 @@ This configuration allows the Datadog Exporter to send runtime metrics, traces, 
 
 ### OpenTelemetry Collector
 
-In this example, configure your OpenTelemetry Collector to forward Docker container metrics.
+In this example, configure your OpenTelemetry Collector to send infrastructure metrics.
 
 <div class="alert alert-info">To send infrastructure metrics from the OpenTelemetry Collector to Datadog, you must use Linux. This is a limitation of the Docker Stats receiver.</div>
 
@@ -224,7 +229,6 @@ The Calendar application is already configured with unified service tagging:
    {{< code-block lang="yaml" filename="docker-compose-otel.yml" collapsible="true" disable_copy="true" >}}
 environment:
   - OTEL_SERVICE_NAME=calendar-otel
-  - OTEL_LOGS_EXPORTER=otlp
   - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=docker,host.name=otelcol-docker
 {{< /code-block >}}
 
@@ -242,7 +246,7 @@ docker compose -f deploys/docker/docker-compose-otel.yml up
 2. To test that the Calendar application is running correctly, execute the following command from another terminal window:
 
    {{< code-block lang="sh" >}}
-   curl localhost:9090/calendar 
+curl localhost:9090/calendar 
 {{< /code-block >}}
 
 3. Verify that you receive a response like:
