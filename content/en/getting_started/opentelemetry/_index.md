@@ -38,7 +38,7 @@ Follow this guide to:
 2. Configure the OTLP Receiver to collect metrics, logs, and traces.
 3. Send observability data to Datadog using the OpenTelemetry Collector with the Datadog Exporter. 
 4. Configure the application to send infrastructure metrics.
-5. Configure the application to send logs with OTLP.
+5. Configure the application to send observability data with OTLP.
 6. Correlate observability data with unified service tagging.
 7. Explore the application's observability data in Datadog. 
 
@@ -185,7 +185,7 @@ To collect container metrics, configure the [Docker stats receiver][5] in your D
 
 This configuration allows the Calendar application to send container metrics to Datadog for you to explore in Datadog.
 
-### Configuring your application to send logs with OTLP
+### Configuring your application to send observability data with OTLP
 
 The Calendar application uses the OpenTelemetry logging exporter in its Logback configuration to send logs with OpenTelemetry Layer Processor (OTLP).
 
@@ -207,10 +207,11 @@ The Calendar application uses the OpenTelemetry logging exporter in its Logback 
     </root>
    ```
 
-Additionally, an environment variable configures the OpenTelemetry environment to export logs:
+Additionally, environment variables configure the OpenTelemetry environment to export logs, metrics, and traces:
 
 1. Go to the Calendar application's Docker Compose file at `./deploys/docker/docker-compose-otel.yml`.
 2. The `OTEL_LOGS_EXPORTER=otlp` configuration allows the logs to be sent with OTLP.
+3. The `OTEL_EXPORTER_OTLP_ENDPOINT=http://otelcol:4317` configuration allows the metrics and traces to be sent with OTLP.
 
 ### Using unified tagging to correlate observability data
 
