@@ -90,7 +90,9 @@ The set of data captured by diversity sampling is not uniformly sampled (that is
 
 #### One percent flat sampling
 
-The flat 1% sampling is a **uniform 1% sample** of [ingested spans][12]. It is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision. This sampling mechanism is uniform.
+The flat 1% sampling is a **uniform 1% sample** of [ingested spans][12]. It is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision.
+
+This sampling mechanism is uniform, it is proportionally representative of the full ingested traffic. As a result, low-traffic services and endpoints might be missing from that dataset if you filter on a short time frame.
 
 ### Create your own retention filter
 
@@ -125,7 +127,7 @@ However, because the diversity-sampled set of data is **not uniformly sampled** 
 
 The `retained_by` attribute is present on all retained spans. Its value is: 
 - `retained_by:diversity_sampling` if the span was captured by [diversity sampling] (part of the [Intelligent retention filter](#datadog-intelligent-retention-filter)).
-- `retained_by:flat_sampled` if the span was indexed by the 1% flat sampling 
+- `retained_by:flat_sampled` if the span was indexed by the 1% flat sampling.
 - `retained_by:retention_filter` if the span was captured by any [tag-based retention filter](#create-your-own-retention-filter), including the `Error Default` and `Application Security Default` retention filters.
 
 {{< img src="tracing/trace_indexing_and_ingestion/retention_filters/trace_analytics.png" style="width:100%;" alt="Retained By facet" >}}

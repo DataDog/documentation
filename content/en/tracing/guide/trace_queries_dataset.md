@@ -42,7 +42,7 @@ You can query spans indexed by the Intelligent Retention filter in the [Trace Ex
 
 To find spans that are sampled by the 1% flat sampling or the diversity sampling methods, add a `retained_by:(flat_sampled OR diversity_sampling)` query parameter in the Trace Explorer.
 
-_[add trace explorer screenshot]_
+{{< img src="tracing/trace_queries/intelligent_retention_filter_change.png" style="width:90%; background:none; border:none; box-shadow:none;" alt="Event Overlay Intelligent Retention Filter" >}}
 
 Spans indexed by the Intelligent retention filter are excluded from APM queries in:
 
