@@ -1,5 +1,5 @@
 ---
-title: Getting Started with OpenTelemetry at Datadog test
+title: Getting Started with OpenTelemetry at Datadog
 kind: documentation
 further_reading:
 - link: 'https://opentelemetry.io/docs/'
@@ -217,7 +217,7 @@ Additionally, environment variables configure the OpenTelemetry environment to e
 2. The `OTEL_LOGS_EXPORTER=otlp` configuration allows the logs to be sent with OTLP.
 3. The `OTEL_EXPORTER_OTLP_ENDPOINT=http://otelcol:4317` configuration allows the metrics and traces to be sent with OTLP.
 
-## Correlate observability data
+## Correlating observability data
 
 [Unified service tagging][6] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
