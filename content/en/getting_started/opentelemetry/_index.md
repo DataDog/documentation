@@ -1,5 +1,5 @@
 ---
-title: Getting Started with OpenTelemetry at Datadog
+title: Getting Started with OpenTelemetry at Datadog test
 kind: documentation
 further_reading:
 - link: 'https://opentelemetry.io/docs/'
@@ -72,7 +72,7 @@ The Calendar sample application is already instrumented.
 1. Go to the Collector configuration file located at: `./src/main/java/com/otel/controller/CalendarController.java`.
 2. The following code instruments the Calendar application using the OpenTelemetry API:
 
-{{< code-block lang="java" disable_copy="true" filename="CalendarController.java" >}}
+   {{< code-block lang="java" disable_copy="true" filename="CalendarController.java" >}}
 private String getDate() {
    Span span = GlobalOpenTelemetry.getTracer("calendar").spanBuilder("getDate").startSpan();
 {{< /code-block >}}  
