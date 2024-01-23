@@ -56,25 +56,19 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
     </tr>
 </table>
 
-## Prerequisites
-
-Datadog Agent `7.46` or later installed on your hosts or containers. 
-
 ## Supported deployment types and features
 
-| Type          | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities | CSM Identity Risks | 
-| ------------- | --------------------- | ----------- | -------------------- | ------------------- |  
-| Docker        | {{< X >}} &nbsp; **(CSM Enterprise)**      | {{< X >}}   |  {{< X >}}           |                     |  
-| Kubernetes    | {{< X >}} &nbsp; **(CSM Enterprise)**      | {{< X >}}   |  {{< X >}}           |                     | 
-| Linux         | {{< X >}} &nbsp; **(CSM Enterprise)**      | {{< X >}}   |  {{< X >}}           |                     |  
-| Amazon ECS    | {{< X >}} &nbsp; **(CSM Enterprise)**     | {{< X >}}   |  {{< X >}}           |                     |    
-| AWS Account   | {{< X >}}             |             |                      | {{< X >}}           |
-| Azure Account | {{< X >}}             |             |                      |                     |
-| GCP Account   | {{< X >}}             |             |                      |                     |
-| Windows       |                       |  beta       |                      |                     |
-| AWS Fargate   |                       |  beta       |                      |                     |
-
-**Note:** CSM Misconfigurations deployment types marked with **(CSM Enterprise)** are available for CSM Enterprise packages only.
+| Type              | Agent Required (7.46+) | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities | CSM Identity Risks |
+|-------------------|--------------------|-----------------------|-------------|---------------------|--------------------| 
+| Docker            | {{< X >}}          | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
+| Kubernetes        | {{< X >}}          | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
+| Linux             | {{< X >}}          | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
+| Amazon ECS        | {{< X >}}          | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
+| AWS Account       |                    | {{< X >}}             |             |                     | {{< X >}}          |
+| Azure Account     |                    | {{< X >}}             |             |                     |                    |
+| GCP Account       |                    | {{< X >}}             |             |                     |                    |
+| Windows           | {{< X >}}          |                       | beta        |                     |                    |
+| AWS Fargate       | {{< X >}}          |                       | beta        |                     |                    |
 
 {{% csm-prereqs %}}
 
