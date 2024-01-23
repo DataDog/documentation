@@ -20,6 +20,8 @@ Datadog uses the [Intelligent Retention Filter][6] to index data for Trace Queri
 - [Flat sampling](#1-flat-sampling): A uniform 1% sample of ingested spans.
 - [Diversity sampling](#diversity-sampling): A representative, diverse selection of traces to keep visibility over each environment, service, operation, and resource.
 
+These 2 sampling mechanisms capture **complete traces**, meaning that all spans of a trace are always indexed to ensure the well-functioning of Trace Queries.
+
 {{< img src="tracing/trace_queries/trace_queries_new_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling & Diversity Sampling" >}}
 
 **Note**: Spans indexed by flat sampling and diversity sampling do not count towards the usage of indexed spans, and therefore, **do not impact your bill**.
@@ -36,7 +38,7 @@ Every 15 minutes, diversity sampling retains at least one span and the associate
 
 ## Impact of enabling Trace Queries
 
-When you enable Trace Queries on your account, the Intelligent Retention filter starts to index more data.
+When you enable Trace Queries on your account, the Intelligent Retention filter starts to index more data as it starts capturing complete traces .
 
 You can query spans indexed by the Intelligent Retention filter in the [Trace Explorer][4]. As a result, you might notice a spike in the number of indexed spans in Trace Explorer queries. This change is indicated by an event overlay showing an **Intelligent Retention Filter change** event.
 
