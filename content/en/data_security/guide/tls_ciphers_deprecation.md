@@ -2,7 +2,7 @@
 
 **Transport Layer Security (TLS)** is a critical security protocol used to protect web traffic. It provides confidentiality and integrity of data in transit between clients and servers exchanging information. During the establishment of a TLS session, both parties agree on a cipher suite which dictates the cryptographic algorithms used to secure the communication.
 
-As part of its ongoing commitment to the security and protection of its customer's data, **Datadog** is rolling out a more modern cryptographic engine across its systems which imposes some changes to the configurations it can accept.
+As part of its ongoing commitment to the security and protection of its customer's data, Datadog is rolling out a more modern cryptographic engine across its systems which imposes some changes to the configurations it can accept.
 
 Beginning **April 1st, 2024**, Datadog is disabling support for the following cipher suites across its public-facing applications. If you use unsupported clients to connect to Datadog after the older protocols are disabled, you will receive connection error messages.
 
