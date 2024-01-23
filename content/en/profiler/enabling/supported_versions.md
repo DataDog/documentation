@@ -8,8 +8,8 @@ further_reading:
   text: "Enabling Profiler"
 ---
 
-The following tables summarize the features available for each language runtime. 
-- **Minimum versions** are required to access at least one feature. If you have an earlier version, profiling is not available. 
+The following tables summarize the features available for each language runtime.
+- **Minimum versions** are required to access at least one feature. If you have an earlier version, profiling is not available.
 - **Feature-complete versions** give you access to **all** supported features. It's usually best if you update to the latest version of all tracing libraries.
 
 <div class="alert alert-info">For more details, click the language heading in any table to go that language's setup page.</div>
@@ -31,7 +31,7 @@ To collect profile types, use at least the minimum versions summarized in the fo
 
 | <div style="width:150px"><div>    | [Java][1]  | [Python][2]  |  [Go][3]   |  [Ruby][4] |   [Node.js][5]  |  [.NET][6]   |   [PHP][7]  | [Rust/C/C++][8] |
 |-----------------------------------|:-------:|:-------:|:------------:|:------:|:---------:|:-------:|:------:|:----------:|
-| {{< ci-details title="CPU" >}}The time each function/method spent running on the CPU.{{< /ci-details >}}   | [JDK&nbsp;8+][17] | tracer&nbsp;0.35+ | tracer&nbsp;1.23+ | tracer&nbsp;0.48+ |   | tracer&nbsp;2.15+ | tracer&nbsp;0.71+  | beta<br>ddprof&nbsp;0.1+ |
+| {{< ci-details title="CPU" >}}The time each function/method spent running on the CPU.{{< /ci-details >}}   | [JDK&nbsp;8+][17] | tracer&nbsp;0.35+ | tracer&nbsp;1.23+ | tracer&nbsp;0.48+ | beta<br>tracer&nbsp;5.0.0,<br>4.24.0, 3.45.0 | tracer&nbsp;2.15+ | tracer&nbsp;0.71+  | beta<br>ddprof&nbsp;0.1+ |
 | {{< ci-details title="Exceptions" >}}The number of exceptions raised, including those caught.{{< /ci-details >}}   | [JDK&nbsp;8+][17] | Python 3.7+ |       |       |       | .NET 5+<br>tracer&nbsp;2.31+ |  tracer&nbsp;0.96+  |       |
 | {{< ci-details title="Allocation" >}}Number and sizes of memory allocations made by each function/method, including allocations which were subsequently freed.{{< /ci-details >}}   | [JDK&nbsp;11+][17] | Python 3.6+<br>tracer&nbsp;0.50+ | tracer&nbsp;1.47+ | alpha<br>Ruby 2.7+<br>tracer&nbsp;1.19+ |       | beta<br>.NET 6+<br>tracer&nbsp;2.18+ | tracer&nbsp;0.88+ | beta<br>ddprof&nbsp;0.9.3 |
 | {{< ci-details title="Heap" >}}The amount of heap memory allocated that remains in use.{{< /ci-details >}}   | [JDK&nbsp;11+][17] | Python 3.6+<br> tracer&nbsp;0.50+ | tracer&nbsp;1.23+ | alpha<br>Ruby 2.7+<br>tracer&nbsp;1.19+ | tracer&nbsp;0.23+ | beta<br>.NET 7+<br>tracer&nbsp;2.22+ |       | beta<br>ddprof&nbsp;0.15+ |
