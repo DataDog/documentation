@@ -65,6 +65,11 @@ main:
     url: getting_started/integrations/
     parent: getting_started
     weight: 6
+  - name: OpenTelemetry
+    identifier: getting_started_opentelemetry
+    url: getting_started/opentelemetry/
+    parent: getting_started
+    weight: 7
   - name: AWS
     identifier: getting_started_with_aws
     url: getting_started/integrations/aws/
@@ -79,7 +84,7 @@ main:
     identifier: getting_started_containers
     url: getting_started/containers/
     parent: getting_started
-    weight: 7
+    weight: 8
   - name: Autodiscovery
     identifier: getting_started_containers_autodiscovery
     url: getting_started/containers/autodiscovery
@@ -94,32 +99,32 @@ main:
     identifier: getting_started_dashboards
     url: getting_started/dashboards/
     parent: getting_started
-    weight: 8
+    weight: 9
   - name: Monitors
     identifier: getting_started_monitors
     url: getting_started/monitors/
     parent: getting_started
-    weight: 9
+    weight: 10
   - name: Logs
     identifier: getting_started_logs
     url: getting_started/logs/
     parent: getting_started
-    weight: 10
+    weight: 11
   - name: Tracing
     identifier: getting_started_collect_traces
     url: getting_started/tracing/
     parent: getting_started
-    weight: 11
+    weight: 12
   - name: Profiler
     identifier: getting_started_profiler
     url: getting_started/profiler/
     parent: getting_started
-    weight: 12
+    weight: 13
   - name: Tags
     identifier: tagging_
     url: getting_started/tagging/
     parent: getting_started
-    weight: 13
+    weight: 14
   - name: Assigning Tags
     identifier: assigning_tags
     url: getting_started/tagging/assigning_tags
@@ -139,22 +144,22 @@ main:
     identifier: getting_started_api
     url: getting_started/api/
     parent: getting_started
-    weight: 14
+    weight: 15
   - name: Session Replay
     identifier: getting_started_session_replay
     url: getting_started/session_replay/
     parent: getting_started
-    weight: 15
+    weight: 16
   - name: Continuous Testing
     identifier: getting_started_continuous_testing
     url: getting_started/continuous_testing/
     parent: getting_started
-    weight: 16
+    weight: 17
   - name: Synthetic Monitoring
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
-    weight: 17
+    weight: 18
   - name: API Tests
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
@@ -174,27 +179,27 @@ main:
     identifier: getting_started_incident_management
     url: getting_started/incident_management/
     parent: getting_started
-    weight: 18
+    weight: 19
   - name: Database Monitoring
     identifier: getting_started_database_monitoring
     url: getting_started/database_monitoring/
     parent: getting_started
-    weight: 19
+    weight: 20
   - name: Cloud Security Management
     identifier: getting_started_cloud_security_management
     url: getting_started/cloud_security_management/
     parent: getting_started
-    weight: 20
+    weight: 21
   - name: Cloud SIEM
     identifier: getting_started_cloud_siem
     url: getting_started/cloud_siem/
     parent: getting_started
-    weight: 21
+    weight: 22
   - name: Application Security Management
     identifier: getting_started_application_security
     url: getting_started/application_security
     parent: getting_started
-    weight: 22
+    weight: 23
   - name: Application Vulnerability Management
     identifier: getting_started_application_vulnerability
     url: getting_started/application_security/vulnerability_management
@@ -204,17 +209,17 @@ main:
     identifier: getting_started_workflow_automation
     url: getting_started/workflow_automation/
     parent: getting_started
-    weight: 23
+    weight: 24
   - name: Learning Center
     identifier: getting_started_learning_center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 24
+    weight: 25
   - name: Support
     identifier: getting_started_support
     url: getting_started/support/
     parent: getting_started
-    weight: 25
+    weight: 26
   - name: Glossary
     url: glossary/
     pre: features
