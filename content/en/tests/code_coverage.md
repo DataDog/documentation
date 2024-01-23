@@ -227,6 +227,54 @@ The code coverage report needs to be generated in a different process, otherwise
 
 {{% /tab %}}
 
+{{% tab "Python" %}}
+
+### Compatibility
+
+* `dd-trace>=2.5.0`.
+* `Python>=3.7`.
+* `coverage>=4.4.2`.
+* `pytest>=3.0.0`.
+* `pytest-cov>=2.7.0`.
+* `unittest>=3.8`.
+* Only [`coverage.py`][1] and [`pytest-cov`][2] code coverage are supported.
+
+
+When tests are instrumented with [`coverage.py`][1] or [`pytest-cov`][2], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically.
+
+To report total code coverage from your test sessions with [`coverage.py`][1], follow these steps:
+
+1. Install `coverage`:
+```
+python3 -m pip install coverage
+```
+
+2. Run your test with the new `coverage` command:
+```
+DD_ENV=ci DD_SERVICE=my-python-service coverage run -m pytest
+```
+
+Alternatively, to report total code coverage from your test sessions with [`pytest-cov`][2], follow these steps:
+
+1. Install `pytest`:
+```
+python3 -m pip install pytest
+```
+
+2. Install `pytest-cov`:
+```
+python3 -m pip install pytest-cov
+```
+
+3. Run your test by appending the `--cov` flag to your `pytest` command:
+```
+DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
+```
+
+[1]: https://github.com/nedbat/coveragepy
+[2]: https://github.com/pytest-dev/pytest-cov
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Graph code coverage
