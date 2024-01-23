@@ -31,7 +31,6 @@ Datadog Agent `7.46` or later installed on your hosts or containers.
 | Windows       |                       |  beta       |                      |                     |
 | AWS Fargate   |                       |  beta       |                      |                     |
 
-
 {{% csm-prereqs %}}
 
 ## Further Reading

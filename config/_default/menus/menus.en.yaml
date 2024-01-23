@@ -3588,6 +3588,11 @@ main:
     parent: csm
     identifier: cloud_workload_security
     weight: 3
+  - name: CSM on Windows
+    url: security/cloud_security_management/setup/windows
+    parent: csm_setup
+    identifier: csm_setup_windows
+    weight: 10020
   - name: Managing Detection Rules
     url: security/threats/workload_security_rules
     parent: cloud_workload_security
