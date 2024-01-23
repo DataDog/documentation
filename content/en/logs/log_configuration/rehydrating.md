@@ -13,7 +13,7 @@ Log Rehydration* enables you to capture log events from customer-owned storage-o
 
 ## Historical views
 
-With historical views, teams rehydrate archived log events precisely by timeframe and query filter to meet specific, unexpected use cases efficiently. 
+With historical views, teams rehydrate archived log events precisely by timeframe and query filter to meet specific, unexpected use cases efficiently.
 
 To create a historical view:
 
@@ -116,7 +116,6 @@ Datadog requires the permission to read from your archives in order to rehydrate
 {{< tabs >}}
 {{% tab "Amazon S3" %}}
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">AWS Role Delegation is not supported on the Datadog for Government site. Access keys must be used.</div>
 {{< /site-region >}}
 
 In order to rehydrate log events from your archives, Datadog uses the IAM Role in your AWS account that you configured for [your AWS integration][1]. If you have not yet created that Role, [follow these steps to do so][2]. To allow that Role to rehydrate log events from your archives, add the following permission statement to its IAM policies. Be sure to edit the bucket names and, if desired, specify the paths that contain your log archives.

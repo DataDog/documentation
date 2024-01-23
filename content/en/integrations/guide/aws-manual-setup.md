@@ -79,6 +79,9 @@ Create an IAM role for Datadog to use the permissions defined in the IAM policy.
 {{< site-region region="ap1" >}}
 10. Enter `417141415827` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
+{{< site-region region="us1-fed" >}}
+10. If the AWS account you want to integrate is a GovCloud account, enter `065115117704` as the `Account ID`, otherwise enter `392588925713`. This is Datadog's account ID, and grants Datadog access to your AWS data.
+{{< /site-region >}}
 11. Select **Require external ID** and enter the external ID copied in the [Generate an external ID](#generate-an-external-id) section.
 Ensure to leave `Require MFA` disabled. For more details, see the [How to use an external ID when granting access to your AWS resources to a third party][2] AWS documentation.
 12. Click **Next**.
