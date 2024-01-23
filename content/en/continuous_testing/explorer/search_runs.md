@@ -23,7 +23,7 @@ The facets panel on the left lists several facets you can use to search through 
 
 ### Common test run attributes
 
-**Commmon** facets allow you to filter on your test runs' attributes.
+**Common** facets allow you to filter on your test runs' attributes.
 
 | Facet            | Description                                                                                             |
 |------------------|---------------------------------------------------------------------------------------------------------|

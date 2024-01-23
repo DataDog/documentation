@@ -11,13 +11,17 @@ disable_sidebar: true
 
 ## Supported Oracle versions
 
-|             | Self-Hosted | RDS       | RAC       | Exadata   | Autonomous Database |
-|-------------|-------------|-----------|-----------|-----------|---------------------|
-| Oracle 11.2 | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}           |
-| Oracle 12c  | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}           |
-| Oracle 18c  | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}           |
-| Oracle 19c  | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}           |
-| Oracle 21c  | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}           |
+|            | Self-Hosted | RDS       | RAC       | Exadata   | Autonomous Database | Automatic Storage Management |
+|------------|-------------|-----------|-----------|-----------|---------------------|------------------------------|
+| Oracle 11g | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}           | {{< X >}}                    |
+| Oracle 12c | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}           | {{< X >}}                    |
+| Oracle 18c | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}           | {{< X >}}                    |
+| Oracle 19c | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}           | {{< X >}}                    |
+| Oracle 21c | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}           | {{< X >}}                    |
+
+## Supported architectures
+- multi-tenant
+- non-CDB
 
 ## Setup
 For setup instructions, select your hosting type:

@@ -10,6 +10,8 @@ title: Cloud Security Management ガイド
 
 {{< whatsnext desc="Cloud Security Management (CSM) ガイド" >}}
     {{< nextlink href="/getting_started/cloud_security_management" >}}Cloud Security Management のはじめの一歩{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/workflows" >}}Workflow Automation によるセキュリティワークフローの自動化{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/guide/jira" >}}Cloud Security Management の問題に対する Jira 課題の作成{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="CSM Threats ガイド" >}}
@@ -18,6 +20,7 @@ title: Cloud Security Management ガイド
 {{< /whatsnext >}}
 
 {{< whatsnext desc="CSM Misconfigurations ガイド" >}}
-    {{< nextlink href="/security/cloud_security_management/guide/writing_rego_rules" >}}Rego によるカスタム CSM Misconfigurations ルールの記述{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/guide/writing_rego_rules" >}}Rego を用いたカスタム CSM Misconfigurations ルールの作成{{< /nextlink >}}
     {{< nextlink href="/security/cloud_security_management/guide/public-accessibility-logic" >}}Datadog がリソースがパブリックアクセス可能かどうかを判断する方法{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/guide/resource_evaluation_filters" >}}フィルターを使用してリソースを評価から除外する{{< /nextlink >}}
 {{< /whatsnext >}}

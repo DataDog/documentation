@@ -20,16 +20,12 @@ For more information on contributing, see the [contribution guidelines][18].
 ### Installation
 
 1. [Install Node.js and npm][2] (Node.js `>=14.16.0`)
-
-2. [Install Python 3][3] (you can also use [pyenv][4])
-
-3. [Install Hugo][13]
-
-4. [Install Go][14] (at minimum, `go version` 1.12)
-
-5. Install Yarn: `npm install -g yarn`
-
-6. Download the documentation repo: `git clone https://github.com/DataDog/documentation.git`
+1. [Install Python 3][3] (you can also use [pyenv][4])
+1. [Install Hugo][13]
+1. [Install Go][14] (at minimum, `go version` 1.12)
+1. Install Yarn: `npm install -g yarn`
+1. Ensure you've created an [SSH key and added it to your GitHub account][19].
+1. Download the documentation repo: `git clone git@github.com:DataDog/documentation.git`. 
 
 ### Run the server
 
@@ -135,3 +131,4 @@ To stop the app, hit Ctrl-C or run `make stop-docker`.
 [16]: https://github.com/DataDog/documentation#docker-development
 [17]: https://docs.datadoghq.com
 [18]: /CONTRIBUTING.md
+[19]: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account

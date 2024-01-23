@@ -10,6 +10,10 @@ further_reading:
   text: "Out-of-the-box Detection Rules"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Datadog uses a graph processing framework to map relationships between cloud resources to determine whether they are accessible from the internet. This guide outlines the logic used to classify resources as publicly accessible within the graph framework. 
 
 For more information on network reachability, see the [AWS documentation][34] and the [AWS Network Reachability Analyser][35]. Currently, the `Is Publicly Accessible` facet is only available for AWS resources.
@@ -39,21 +43,10 @@ The following diagrams show how related resources are used to determine whether 
 
 An [S3 Bucket][1] (`aws_s3_bucket`) is considered publicly accessible if:
 
-* _ACL-determined access:_
-
 | **Criteria** | **Explanation** |
 |--------------|-----------------|
-|The bucket's `public_access_block_configuration` and the bucket account's public access block (`aws_s3_account_public_access_block`) both have `ignore_public_acls` set to `false`. |An Access Control List (ACL) defines the AWS accounts and groups that are granted access to this bucket. With `ignore_public_acls` set to `false`, the bucket's configuration permits the use of an ACL that allows public access.  |
-|The bucket's grant list contains a URI value of `http://acs.amazonaws.com/groups/global/AllUsers` or `/AuthenticatedUsers`. |`AllUsers` gives anyone in the world access to the bucket. `AuthenticatedUsers` gives any AWS authenticated user in the world access to the bucket. |
-
-***OR***
-
-* _Bucket Policy-determined access:_
-
-| **Criteria** | **Explanation** |
-|--------------|-----------------|
-|The bucket's `public_access_block_configuration` and the bucket account's public access block (`aws_s3_account_public_access_block`) both have `ignore_public_acls` set to `false`. |An Access Control List (ACL) defines the AWS accounts and groups that are granted access to this bucket. With `ignore_public_acls` set to `false`, the bucket's configuration permits the use of an ACL that allows public access.  |
-|The bucket's policy statement allows the `s3:GetObject` permission unconditionally, with resource and principal set to `"*"`. |This defines a public policy on the bucket, meaning that cross-account access is allowed. `"*"` is a wildcard, meaning access is given to any resource and principal. |
+|The bucket policy allows the `s3:GetObject` permission unconditionally, with resource and principal set to `"*"`. |This defines a public policy on the bucket, meaning that unauthenticated access is allowed. `"*"` is a wildcard, meaning access is given to any resource and principal. |
+| None of the bucket's `public_access_block_configuration` and the AWS account's public access block (`aws_s3_account_public_access_block`) have `restrict_public_buckets` set to `true`. | None of the buckets or accounts explicitly block public access, meaning that the public bucket policy takes effect. |
 
 See [Blocking public access to your Amazon S3 storage][2] for more information.
 

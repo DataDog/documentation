@@ -1,8 +1,8 @@
 # make
 SHELL = /bin/bash
-MAKEFLAGS := --jobs=$(shell nproc)
-MAKEFLAGS += --output-sync --no-print-directory
-.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source
+# MAKEFLAGS := --jobs=$(shell nproc)
+# MAKEFLAGS += --output-sync --no-print-directory
+.PHONY: help clean-all clean dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs source-dd-source vector_data
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -114,6 +114,14 @@ data/workflows/%.json : integrations_data/extracted/dd-source/domains/workflow/a
 data/permissions.json: hugpython
 	@. hugpython/bin/activate && ./local/bin/py/build/pull_rbac.py "$(DATADOG_API_KEY)" "$(DATADOG_APP_KEY)"
 
+integrations_data/extracted/vector:
+	$(call source_repo,vector,https://github.com/vectordotdev/vector.git,master,true,website/)
+
+# builds cue.json for vector
+vector_data: integrations_data/extracted/vector
+	@cue export $(shell find integrations_data/extracted/vector -type f -name "*.cue") > integrations_data/extracted/vector/cue.json; \
+	node ./assets/scripts/reference-process.js
+
 # only build placeholders in ci
 placeholders: hugpython update_pre_build
 	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml"
@@ -122,7 +130,7 @@ placeholders: hugpython update_pre_build
 hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
 	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
-		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.20386518-py3-none-any.whl; \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.25735200-py3-none-any.whl; \
 	fi
 
 update_pre_build: hugpython

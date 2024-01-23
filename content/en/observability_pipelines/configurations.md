@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-Observability Pipelines Worker configurations can collect, transform, and route your logs and metrics (beta) from any source to any destination. The configuration file supports YAML, TOML, and JSON. The three main configuration components are sources, transforms, and sinks.
+Observability Pipelines Worker configurations can collect, transform, and route your logs from any source to any destination. The configuration file supports YAML, TOML, and JSON. The three main configuration components are sources, transforms, and sinks.
 
 ## Set up an example source
 
@@ -126,7 +126,7 @@ The `source` contains the list of remapping transformations to apply to each eve
 
 The  `parse_syslog` function receives a single field called `message`, which contains the Syslog event that is generated in the `generate_syslog` source. This function parses the content of the Syslog-formatted message and emits it as a structured event.
 
-This transform example showcases only a portion of the Observability Pipelines Worker's ability to shape and transform your logs and metrics (beta). See the [Transforms documentation][2] for all supported transforms, ranging from sampling, filtering, enrichment, and more.
+This transform example showcases only a portion of the Observability Pipelines Worker's ability to shape and transform your data[*](#support). See the [Transforms documentation][2] for all supported transforms, ranging from sampling, filtering, enrichment, and more.
 
 ## Set up an example sink
 

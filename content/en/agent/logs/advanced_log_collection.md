@@ -25,7 +25,7 @@ algolia:
   tags: ['advanced log filter']
 ---
 
-Customize your log collection configuration:
+After you set up [log collection][1], you can customize your collection configuration:
 * [Filter logs](#filter-logs)
 * [Scrub sensitive data from your logs](#scrub-sensitive-data-from-your-logs)
 * [Aggregate multi-line logs](#multi-line-aggregation)
@@ -36,7 +36,7 @@ Customize your log collection configuration:
 
 **Note**: If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
 
-**Note**: Processing rule patterns must conform to [Golang regexp syntax][1].
+**Note**: Processing rule patterns must conform to [Golang regexp syntax][2].
 
 To apply a processing rule to all logs collected by a Datadog Agent, see the [Global processing rules](#global-processing-rules) section.
 
@@ -87,7 +87,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
       }]
 ```
 
-**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
 **Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -127,7 +127,7 @@ spec:
           image: cardpayment:latest
 ```
 
-**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
 **Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -208,7 +208,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
       }]
 ```
 
-**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
 **Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -248,7 +248,7 @@ spec:
           image: cardpayment:latest
 ```
 
-**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
 **Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -300,7 +300,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
       }]
 ```
 
-**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+**Note**: Escape regex characters in your patterns when using labels. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
 **Note**: The label value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -341,7 +341,7 @@ spec:
           image: cardpayment:latest
 ```
 
-**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+**Note**: Escape regex characters in your patterns when using pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
 **Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -443,7 +443,7 @@ spec:
           image: postgres:latest
 ```
 
-**Note**: Escape regex characters in your patterns when performing multi-line aggregation with pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`, etc.
+**Note**: Escape regex characters in your patterns when performing multi-line aggregation with pod annotations. For example, `\d` becomes `\\d`, `\w` becomes `\\w`.
 
 **Note**: The annotation value must follow JSON syntax, which means you should not include any trailing commas or comments.
 
@@ -464,7 +464,7 @@ More examples:
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
 ### Automatic multi-line aggregation
-With Agent 7.37+, `auto_multi_line_detection` can be enabled, which allows the Agent to detect [common multi-line patterns][2] automatically. 
+With Agent 7.37+, `auto_multi_line_detection` can be enabled, which allows the Agent to detect [common multi-line patterns][3] automatically. 
 
 Enable `auto_multi_line_detection` globally in the `datadog.yaml` file:
 
@@ -555,7 +555,7 @@ Automatic multi-line detection detects logs that begin and comply with the follo
 
 ## Commonly used log processing rules
 
-See the dedicated [Commonly Used Log Processing Rules FAQ][3] to see a list of examples.
+See the dedicated [Commonly Used Log Processing Rules FAQ][4] to see a list of examples.
 
 ## Tail directories using wildcards
 
@@ -637,7 +637,7 @@ logs:
 
 ## Global processing rules
 
-For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][4] or through an environment variable:
+For Datadog Agent v6.10+, the `exclude_at_match`, `include_at_match`, and `mask_sequences` processing rules can be defined globally in the Agent's [main configuration file][5] or through an environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}
@@ -680,7 +680,7 @@ env:
 {{< /tabs >}}
 All the logs collected by the Datadog Agent are impacted by the global processing rules.
 
-**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][5] to troubleshoot any issues.
+**Note**: The Datadog Agent does not start the log collector if there is a format issue in the global processing rules. Run the Agent's [status subcommand][6] to troubleshoot any issues.
 
 ## Further Reading
 
@@ -689,8 +689,9 @@ All the logs collected by the Datadog Agent are impacted by the global processin
 <br>
 *Logging without Limits is a trademark of Datadog, Inc.
 
-[1]: https://golang.org/pkg/regexp/syntax/
-[2]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
-[3]: /agent/faq/commonly-used-log-processing-rules
-[4]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[5]: /agent/configuration/agent-commands/#agent-information
+[1]: /agent/logs/
+[2]: https://golang.org/pkg/regexp/syntax/
+[3]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
+[4]: /agent/faq/commonly-used-log-processing-rules
+[5]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[6]: /agent/configuration/agent-commands/#agent-information

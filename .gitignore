@@ -34,6 +34,7 @@ content/en/agent/basic_agent_usage/saltstack.md
 content/en/agent/guide/ansible_standalone_role.md
 
 # Tracing
+content/en/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby.md
 content/en/tracing/trace_collection/dd_libraries/ruby.md
 content/en/tracing/trace_collection/compatibility/ruby.md
 
@@ -79,6 +80,11 @@ content/en/security/cspm/custom_rules/*.md
 content/en/security/misconfigurations/custom_rules/*.md
 !content/en/security/misconfigurations/custom_rules/_index.md
 !content/en/security/misconfigurationspm/custom_rules/schema.md
+content/en/infrastructure/resource_catalog/*.md
+!content/en/infrastructure/resource_catalog/schema.md
+!content/en/infrastructure/resource_catalog/_index.md
+
+
 
 # compliance rules
 content/en/compliance_monitoring/default_rules/*.md
@@ -96,10 +102,15 @@ content/en/continuous_testing/cicd_integrations/circleci_orb.md
 content/en/continuous_testing/cicd_integrations/azure_devops_extension.md
 
 # Static Analysis
+content/en/static_analysis/github_actions.md
+content/en/static_analysis/circleci_orbs.md
+content/en/static_analysis/rules/*
+!content/en/static_analysis/rules/_index.md
+# Let's keep these so we don't accidentally re-add them to repo
 content/en/continuous_integration/static_analysis/github_actions.md
 content/en/continuous_integration/static_analysis/circleci_orbs.md
 content/en/continuous_integration/static_analysis/rules/
-!content/en/continuous_integration/static_analysis/rules/_index.md
+
 
 # serverless
 content/en/serverless/libraries_integrations/plugin.md

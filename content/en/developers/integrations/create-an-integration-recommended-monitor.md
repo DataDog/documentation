@@ -35,7 +35,7 @@ To create a Datadog integration, see [Create a New Integration][3].
 
 ### Open a pull request
 
-1. Save the monitor JSON file to your integration's `assets/monitors` folder.  Add the asset to your `manifest.json` file. See [Integrations Assets Reference][5] for more information about your integration's file structure and manifest file.
+1. Save the monitor JSON file to your integration's `assets/monitors` folder. Add the asset to your `manifest.json` file. See [Integrations Assets Reference][5] for more information about your integration's file structure and manifest file.
 
 2. Open a pull request (PR) to add your recommended monitor JSON file and updated manifest file to the corresponding integration folder either in the [`integrations-extras` GitHub repository][6] or [`Marketplace` GitHub repository][9]. 
 
@@ -49,19 +49,32 @@ Find your monitor in the [Monitors Template list][2]. Ensure logos render correc
 
 ## Configuration best practices
 
-In addition to the monitor definition, the Title, Description, and Tags fields are required for recommended monitors. For more information, see the documentation on [configuring a monitor][7].
+In addition to the monitor definition, the [Title](#title), [Description](#description), and Tags fields are required for recommended monitors. Set tags to "integration:<app_id>", see other available monitor tags [here][8]. For more information, see the documentation on [configuring a monitor][7].
 
-|      | Description    | Examples |
-| ---  | ----------- | ----------- |
-|Title | Allows users to quickly understand the underlying failure mode the alert is covering. The rule for the title is starting with an object and following with a verb. Do not use template variables.| - Pods are failing<br> - Cache usage is high <br> - Error rate is high <br> - Disk space is low|
-|Description | Provides extra context around the failure mode and also about the impact this mode can have on the system. It should be concise and allow users to understand at a glance whether it is relevant or not for them to create a monitor out of it.| **Title**: Unacknowledged Messages are higher than usual<br> **Description**: Unacked messages are those that have been delivered to a consumer but have not been acknowledged as processed or handled. This monitor tracks the ratio of unacked messages to avoid potential bottlenecks which could lead to delays in message processing.|
-|Tags | Set to "integration:<app_id>".| See other available monitor tags [here][8].|
+### Title
 
-Below is an example of a well-defined monitor:
+The title allows users to quickly understand the underlying failure mode the alert is covering.
+- Use the active voice and start with an object followed by a verb. 
+- Do not use template variables.
 
-{{< img src="developers/integrations/example_recommended_monitor_config.png" alt="An example of a Recommended Monitor configuration" width="100%">}}
+| Needs revision                                       | Better                                 | Best                                        |
+| -----------                                          | -----------                            | -----------                                 |
+|High Unacknowledged Messages reported on {{host.name}}| High Unacknowledged Messages reported  |Unacknowledged Messages are higher than usual|
 
-## Further reading
+### Description
+
+Provides extra context around the failure mode and also about the impact this mode can have on the system. It should allow users to understand at a glance whether it is relevant or not for them to create a monitor out of it.
+
+- This is not a copy of the title. 
+- Define the problem stated by the title.
+- Answer why this is an issue worth alerting on.
+- Describe the impact of the problem.
+
+| Needs revision                                         | Better                                       | Best                                    |
+| -----------                                          | -----------                                  | -----------                             |
+|Notify your team when unacked message are high. | Unacked messages are those that have been delivered to a consumer but have not been acknowledged as processed or handled. This monitor tracks the ratio of unacked messages.|Unacked messages are those that have been delivered to a consumer but have not been acknowledged as processed or handled. This monitor tracks the ratio of unacked messages to avoid potential bottlenecks which could lead to delays in message processing.| 
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

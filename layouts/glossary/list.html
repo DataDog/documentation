@@ -96,7 +96,13 @@
                         >
                             {{ .Params.Title }}
                         </h4>
-
+                        <div>
+                            {{ range .Params.core_product }}
+                                <div class="core-product-label btn btn-outline-secondary text-primary me-1 pe-none">
+                                    {{. | upper}}
+                                </div>
+                            {{ end }}
+                        </div>
                         {{ with .Params.related_terms }}
                             <p class="fst-italic mb-0">
                                 {{ $len := len . }}

@@ -339,6 +339,10 @@ window.DD_LOGS.init({
 
 ## Configuration
 
+### Content Security Policy integration
+
+If you're using the Datadog Content Security Policy (CSP) integration on your site, see [the RUM section of the CSP documentation][14] for configuration steps.
+
 ### Initialization parameters
 
 The following parameters are available to configure the Datadog browser logs SDK to send logs to Datadog:
@@ -364,11 +368,12 @@ The following parameters are available to configure the Datadog browser logs SDK
 
 Options that must have a matching configuration when using the `RUM` SDK:
 
-| Parameter                      | Type    | Required | Default | Description                                                                                                                                                  |
-| ------------------------------ | ------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `trackSessionAcrossSubdomains` | Boolean | No       | `false` | Preserve the session across subdomains for the same site.                                                                                                    |
-| `useSecureSessionCookie`       | Boolean | No       | `false` | Use a secure session cookie. This disables logs sent on insecure (non-HTTPS) connections.                                                                    |
-| `useCrossSiteSessionCookie`    | Boolean | No       | `false` | Use a secure cross-site session cookie. This allows the logs SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`. |
+| Parameter                              | Type    | Required | Default | Description                                                                                                                                                              |
+|----------------------------------------| ------- | -------- | ------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `trackSessionAcrossSubdomains`         | Boolean | No       | `false` | Preserve the session across subdomains for the same site.                                                                                                                |
+| `useSecureSessionCookie`               | Boolean | No       | `false` | Use a secure session cookie. This disables logs sent on insecure (non-HTTPS) connections.                                                                                |
+| `usePartitionedCrossSiteSessionCookie` | Boolean | No       | `false` | Use a partitioned secure cross-site session cookie. This allows the logs SDK to run when the site is loaded from another one (iframe). Implies `useSecureSessionCookie`. |
+| `useCrossSiteSessionCookie`            | Boolean | No       | `false` | **Deprecated**, see `usePartitionedCrossSiteSessionCookie`.                                                                                                              |
 
 ## Usage
 
@@ -1184,3 +1189,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [11]: https://docs.datadoghq.com/logs/log_collection/javascript/#contexts-life-cycle
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
+[14]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay

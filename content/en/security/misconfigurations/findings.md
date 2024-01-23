@@ -15,9 +15,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">
-CSM Misconfigurations is not available in the selected site.
-</div>
+<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 The Cloud Security Management Misconfigurations (CSM Misconfigurations) [Explorer][1] allows you to:
@@ -38,7 +36,7 @@ A misconfiguration is the primary primitive for a rule evaluation against a reso
 
 Misconfigurations are displayed on the [Misconfigurations Explorer][1]. Aggregate misconfigurations by rule using the **Group by** filters and query search bar. For example, filtering by `evaluation:fail` narrows the list to all compliance rules that have issues that need to be addressed. Misconfigurations can also be aggregated by resource to rank resources that have the most failed misconfigurations so you can prioritize remediation.
 
-{{< img src="security/cspm/findings/misconfigurations_explorer.png" alt="CSM Misconfigurations Explorer page" style="width:100%;">}}
+{{< img src="security/csm/explorers_page.png" alt="CSM Misconfigurations Explorer page" style="width:100%;">}}
 
 Select a misconfiguration to view the resources that have been evaluated by the rule, the rule description, its framework or industry benchmark mappings, and suggested remediation steps.
 
