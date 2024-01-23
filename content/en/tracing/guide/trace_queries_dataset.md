@@ -38,7 +38,7 @@ Every 15 minutes, diversity sampling retains at least one span and the associate
 
 ## Impact of enabling Trace Queries
 
-When you enable Trace Queries on your account, the Intelligent Retention filter starts to index more data as it starts capturing complete traces .
+From the moment Traces Queries are enabled on your account (find the exact date in the event published in the Event Stream), the Intelligent Retention filter starts to index more data as it starts capturing complete traces .
 
 You can query spans indexed by the Intelligent Retention filter in the [Trace Explorer][4]. As a result, you might notice a spike in the number of indexed spans in Trace Explorer queries. This change is indicated by an event overlay showing an **Intelligent Retention Filter change** event.
 
