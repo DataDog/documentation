@@ -115,6 +115,6 @@ This tab is an alternative to viewing the `param1:value1&param2:value2` structur
 [3]: https://identity.getpostman.com/signup
 [4]: https://identity.getpostman.com/login
 [5]: https://www.postman.com/downloads/
-[6]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
+[6]: https://learning.postman.com/docs/sending-requests/environments/managing-environments/
 [7]: /api/latest/#api-reference
 [8]: /api/

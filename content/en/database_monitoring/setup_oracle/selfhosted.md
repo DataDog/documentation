@@ -73,6 +73,11 @@ grant select on v_$asm_diskgroup to c##datadog ;
 grant select on v_$rsrcmgrmetric to c##datadog ;
 grant select on v_$dataguard_config to c##datadog ;
 grant select on v_$dataguard_stats to c##datadog ;
+grant select on v_$transaction to c##datadog;
+grant select on v_$locked_object to c##datadog;
+grant select on dba_objects to c##datadog;
+grant select on cdb_data_files to c##datadog;
+grant select on dba_data_files to c##datadog;
 ```
 
 If you conifgured custom queries that run on a pluggable database (PDB), you must grant `set container` privilege to the `C##DATADOG` user:
@@ -262,6 +267,11 @@ grant select on v_$asm_diskgroup to datadog ;
 grant select on v_$rsrcmgrmetric to datadog ;
 grant select on v_$dataguard_config to datadog ;
 grant select on v_$dataguard_stats to datadog ;
+grant select on v_$transaction to datadog;
+grant select on v_$locked_object to datadog;
+grant select on dba_objects to datadog;
+grant select on cdb_data_files to datadog;
+grant select on dba_data_files to datadog;
 ```
 
 ### Create view

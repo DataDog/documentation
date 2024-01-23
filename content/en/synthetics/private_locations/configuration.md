@@ -137,7 +137,8 @@ Proxy URL used by the private location to send requests to Datadog (for example,
 `--disableFipsCompliance`
 : **Type:** Boolean <br>
 **Default**: `false`<br>
-Disables the FIPS compliance for a private location using `ddgov-gov.com`.
+Disables the FIPS compliance for a private location using `ddog-gov.com`.
+By default, Private Locations reporting to `ddog-gov.com` communicate to Datadog using FIPS-compliant encryption. The communication complies on the use of FIPS 140-2 validated [Cryptographic Module - Certificate #4282][3].
 
 `--dumpConfig`
 : **Type**: Boolean <br>
@@ -202,7 +203,7 @@ Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges b
 `--enableDefaultBlockedIpRanges`
 : **Type**: Boolean <br>
 **Default**: `false`<br>
-Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][3] and [IPv6][4] Special-Purpose Address Registry), except for those explicitly set with the `--allowedIPRanges` parameter.
+Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][4] and [IPv6][5] Special-Purpose Address Registry), except for those explicitly set with the `--allowedIPRanges` parameter.
 
 `--allowedDomainNames`
 : **Type**: Array <br>
@@ -251,5 +252,6 @@ Show the output for the help command.
 
 [1]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
 [2]: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-dns-config
-[3]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
-[4]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
+[3]: https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4282
+[4]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
+[5]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml

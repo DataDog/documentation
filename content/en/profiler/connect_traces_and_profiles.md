@@ -66,13 +66,10 @@ To enable the new [timeline feature](#span-execution-timeline-view) (beta):
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Code Hotspots (beta) identification is NOT enabled by default when you [turn on profiling for your Node.js service][1]. Enable it by setting this additional environment variable:
+Code Hotspots identification is enabled by default when you [turn on profiling for your Node.js service][1] on Linux and macOS. The feature is not available on Windows.
 
-```shell
-export DD_PROFILING_CODEHOTSPOTS_ENABLED=true
-```
+Requires `dd-trace-js` version 5.0.0+, 4.24.0+ or 3.45.0+.
 
-Requires `dd-trace-js` version 4.17.0+ or 3.38.0+.
 
 [1]: /profiler/enabling/nodejs
 {{< /programming-lang >}}
@@ -133,7 +130,7 @@ To enable the [timeline feature](#span-execution-timeline-view) (beta):
 From the view of each trace, the Code Hotspots tab highlights profiling data scoped on the selected spans.
 
 The values on the left side represent the time spent in that method call during the selected span. Depending on the runtime and language, the categories vary:
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 - **CPU** shows the time taken executing CPU tasks.
 - **Synchronization** shows the time spent waiting on monitors, the time a thread is sleeping and the time it is parked.
@@ -150,6 +147,10 @@ The values on the left side represent the time spent in that method call during 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 - **CPU** shows the time taken executing CPU tasks.
+- **Uncategorized** shows the time taken to execute the span that is not CPU execution.
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+- **CPU** shows the time taken executing CPU tasks. Only shown for profiles collected with the Node.js experimental CPU profiler.
 - **Uncategorized** shows the time taken to execute the span that is not CPU execution.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
@@ -271,13 +272,9 @@ Requires `dd-trace-rb` version 0.54.0+.
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
-Endpoint profiling (beta) is NOT enabled by default when you [turn on profiling for your Node.js service][1]. Enable it by setting this additional environment variables:
+Endpoint profiling is enabled by default when you [turn on profiling for your Node.js service][1] on Linux and macOS. The feature is not available on Windows.
 
-```shell
-export DD_PROFILING_ENDPOINT_COLLECTION_ENABLED=true
-```
-
-Requires `dd-trace-js` version 4.17.0+ or 3.38.0+.
+Requires `dd-trace-js` version 5.0.0+, 4.24.0+ or 3.45.0+.
 
 [1]: /profiler/enabling/nodejs
 {{< /programming-lang >}}
