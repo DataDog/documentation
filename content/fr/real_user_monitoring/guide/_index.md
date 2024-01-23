@@ -47,6 +47,7 @@ title: Guides pour Real User Monitoring et Session Replay
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-deprecation-policy" >}}Politique de dépréciation des SDK RUM Mobile{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}Mettre à niveau les SDK RUM Mobile{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}Utiliser plusieurs instances du SDK Mobile{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/proxy-mobile-rum-data" >}}Utiliser un proxy pour les données RUM Mobile {{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Session Replay :" >}}
