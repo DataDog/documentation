@@ -25,9 +25,9 @@ To update your picture, create an account on [Gravatar][1] and associate it with
 
 If you log in to Datadog using Google authentication, your email address is provided by your Google account and is **not** editable within Datadog. To change your email address in Google, see the [Google documentation][2].
 
-{{< site-region region="us,us3,us5,eu,ap1" >}}
 ### Preferences
 
+{{% site-region region="us,us3,us5,eu,ap1" %}}
 You can set your timezone, desktop notifications, and email subscriptions from the [**Preferences** tab][1] within the **Personal Settings** page. Under email subscriptions, you have access to the following reports:
 
 * Daily Digest
@@ -36,14 +36,14 @@ You can set your timezone, desktop notifications, and email subscriptions from t
 If you are unsure if an email digest is relevant to you, view an example by clicking the **Example** link next to each email subscription. You can also use the **Unsubscribe From All** button to quickly unsubscribe from all email subscriptions.
 
 [1]: https://app.datadoghq.com/account/preferences
-{{< /site-region >}}
-{{< site-region region="gov" >}}
-### Preferences
+{{% /site-region %}}
+
+{{% site-region region="gov" %}}
 
 You can set your timezone and desktop notifications from the [**Preferences** tab][1] within the **Personal Settings** page.
 
 [1]: https://app.datadoghq.com/account/preferences
-{{< /site-region >}}
+{{% /site-region %}}
 
 ### Organizations
 
