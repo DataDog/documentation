@@ -1,5 +1,5 @@
 ---
-Trace Queries Source Data
+title: Trace Queries Source Data
 kind: guide
 further_reading:
     - link: "/tracing/trace_explorer/trace_queries/"
