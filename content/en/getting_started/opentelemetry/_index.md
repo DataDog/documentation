@@ -1,5 +1,5 @@
 ---
-title: Getting Started with OpenTelemetry and Datadog
+title: Getting Started with OpenTelemetry at Datadog
 kind: documentation
 further_reading:
 - link: 'https://opentelemetry.io/docs/'
@@ -30,113 +30,110 @@ further_reading:
 
 [OpenTelemetry][11] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing observability data from software applications. OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application observability data---namely metrics, logs, and traces---to monitoring platforms for analysis and insight.
 
-This guide demonstrates how to configure a sample OpenTelemetry application to observability data to Datadog using the OpenTelemetry SDK, OpenTelemetry Collector, and Datadog Exporter. This guide also shows you how to explore this data in Datadog.
+This guide demonstrates how to configure [a sample OpenTelemetry application][12] to send observability data to Datadog using the OpenTelemetry SDK, OpenTelemetry Collector, and Datadog Exporter. This guide also shows you how to explore this data in the Datadog UI.
 
 Follow this guide to:
 
-1. See how the application is instrumented with the OpenTelemetry API.
-2. Configure the OTLP Receiver to collect metrics, logs, and traces.
-3. Send observability data to Datadog using the OpenTelemetry Collector with the Datadog Exporter. 
-4. Configure the application to send infrastructure metrics.
-5. Configure the application to send observability data with OTLP.
-6. Correlate observability data with unified service tagging.
-7. Explore the application's observability data in Datadog. 
+1. [Instrument the application](#instrumenting-the-application) with the OpenTelemetry API.
+2. [Configure the application](#configuring-the-application) to send observability data to Datadog.
+3. [Correlate observability data](#correlate-observability-data) with unified service tagging.
+4. [Run the application](#running-the-application) to generate observability data.
+5. [Explore observability data](#exploring-observability-data-in-datadog) in the Datadog UI.
 
 ## Prerequisites
 
 To complete this guide, you need the following:
 
-* (Optional) Use Linux to receive infrastructure metrics.
-* Install [Docker Compose][3]. 
-* [Create a Datadog account][1] if you haven't done so already.
-* Find or create your [Datadog API key][2].
-* Export your Datadog API key to an environment variable:
-  ```sh
-  export DD_API_KEY=<Your API Key>
-  ```
-
-You will use a sample Java REST application named Calendar to complete this guide. To get the application:
-
-1. Clone the `opentelemetry-examples` repository to your device: 
-   ```sh
-   git clone https://github.com/DataDog/opentelemetry-examples.git
-   ```
-2. Navigate to the `/calendar` directory: 
-   ```sh
-   cd opentelemetry-examples/apps/rest-services/java/calendar
-   ```
-
-## Using OpenTelemetry with Datadog
+1. [Create a Datadog account][1] if you haven't yet. 
+2. Set up your Datadog API key:  
+   a. Find or create your [Datadog API key][2].  
+   b. Export your Datadog API key to an environment variable:  
+    {{< code-block lang="sh" >}}
+export DD_API_KEY=<Your API Key>
+{{< /code-block >}}
+3. Get the sample [Calendar][12] application.  
+   a. Clone the `opentelemetry-examples` repository to your device:
+    {{< code-block lang="sh" >}}
+git clone https://github.com/DataDog/opentelemetry-examples.git
+{{< /code-block >}} 
+   b. Navigate to the `/calendar` directory:
+    {{< code-block lang="sh" >}}
+cd opentelemetry-examples/apps/rest-services/java/calendar
+{{< /code-block >}}  
+4. Install [Docker Compose][3].
+5. (Optional) Use Linux to send infrastructure metrics.
 
 The Calendar application uses OpenTelemetry tools to generate and collect metrics, logs, and traces. The following steps explain how to get this observability data into Datadog. 
 
-### Instrumenting your application with the OpenTelemetry API
+## Instrumenting the application
 
 The Calendar sample application is already instrumented for you.
 
 In `CalendarController.java`, the following code instruments the Calendar application using the OpenTelemetry API:
 
-```java
+{{< code-block lang="java" disable_copy="true" >}}
 private String getDate() {
    Span span = GlobalOpenTelemetry.getTracer("calendar").spanBuilder("getDate").startSpan();
-```
+{{< /code-block >}}  
 
 When the Calendar application runs, the `getDate()` call generates traces and spans.
 
-### Configuring the OTLP Receiver 
+## Configuring the application
+
+### OTLP Receiver 
 
 The Calendar application is already configured to send data from the OpenTelemetry SDK to the [OpenTelemetry Protocol (OTLP) receiver][10] in the OpenTelemetry Collector.
 
 1. Go to the Collector configuration file located at: `./src/main/resources/otelcol-config.yaml`
 2.  The following lines configure the OTLP Receiver to receive metrics, traces, and logs:  
 
-    ```yaml
-    receivers:
-      otlp:
-        protocols:
-          grpc:
-            endpoint: 0.0.0.0:4317
-          http:
-            endpoint: 0.0.0.0:4318
-    ...
-    service:
-      pipelines:
-        traces:
-          receivers: [otlp]
-        metrics:
-          receivers: [otlp]
-        logs:
-          receivers: [otlp]
-    ```
+    {{< code-block lang="yaml" filename="otelcol-config.yaml" collapsible="true" disable_copy="true" >}}
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+...
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+    metrics:
+      receivers: [otlp]
+    logs:
+      receivers: [otlp]
+{{< /code-block >}}  
 
-### Configuring the Datadog Exporter
+### Datadog Exporter
 
 The Datadog Exporter sends data collected by the OTLP Receiver to the Datadog backend.
 
 1. Go to the `otelcol-config.yaml` file.
 2. The following lines configure the Datadog Exporter to send observability data to Datadog:  
 
-    ```yaml
-    exporters:
-      datadog:
-      api:
-        site: ${env:DD_SITE}
-        key: ${env:DD_API_KEY}
+   {{< code-block lang="yaml" filename="otelcol-config.yaml" collapsible="true" disable_copy="true" >}}
+exporters:
+  datadog:
+  api:
+    site: ${env:DD_SITE}
+    key: ${env:DD_API_KEY}
+traces:
+  trace_buffer: 500
+service:
+  pipelines:
+    metrics:
+      exporters: [datadog]
     traces:
-      trace_buffer: 500
-    service:
-      pipelines:
-        metrics:
-          exporters: [datadog]
-        traces:
-          exporters: [datadog]
-        logs:
-          exporters: [datadog]
-    ```
+      exporters: [datadog]
+    logs:
+      exporters: [datadog]
+{{< /code-block >}}  
 
 This configuration allows the Datadog Exporter to send runtime metrics, traces, and logs to Datadog. However, sending infrastructure metrics requires additional configuration.
 
-### Configuring your application to send infrastructure metrics
+### OpenTelemetry Collector
 
 In this example, configure your OpenTelemetry Collector to forward Docker container metrics.
 
@@ -146,8 +143,8 @@ To collect container metrics, configure the [Docker stats receiver][5] in your D
 
 1. Add a `docker_stats` block to the `receivers` section of `otel-config.yaml`:
 
-    ```yaml
-    receivers:
+   {{< code-block lang="yaml" filename="otelcol-config.yaml" collapsible="true" disable_copy="true" >}}
+receivers:
       otlp:
         protocols:
           grpc:
@@ -172,40 +169,42 @@ To collect container metrics, configure the [Docker stats receiver][5] in your D
             enabled: true
           container.memory.hierarchical_memory_limit:
             enabled: true
-    ```
+{{< /code-block >}}  
 
 2. Update `service.pipelines.metrics.receivers` to include `docker_stats`:
 
-    ```yaml
-    service:
-      pipelines:
-        metrics:
-          receivers: [otlp, docker_stats] # <- update this line!
-    ```
+   {{< code-block lang="yaml" filename="otelcol-config.yaml" collapsible="true" disable_copy="true" >}}
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp, docker_stats] # <- update this line
+{{< /code-block >}}
 
 This configuration allows the Calendar application to send container metrics to Datadog for you to explore in Datadog.
 
-### Configuring your application to send observability data with OTLP
+### Send observability data with OTLP
 
 The Calendar application uses the OpenTelemetry logging exporter in its Logback configuration to send logs with OpenTelemetry Layer Processor (OTLP).
 
 1. Go to the Calendar application's Logback XML configuration file at `/src/main/resources/logback.xml`.
 2. The following lines define the `OpenTelemetry` appender:
 
-   ```xml
-    <appender name="OpenTelemetry" class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender">
-        <immediateFlush>true</immediateFlush>
-        <captureExperimentalAttributes>true</captureExperimentalAttributes>
-        <captureKeyValuePairAttributes>true</captureKeyValuePairAttributes>
-      </appender>
-   ```
+   {{< code-block lang="xml" filename="logback.xml" collapsible="true" disable_copy="true" >}}
+<appender name="OpenTelemetry" class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender">
+    <immediateFlush>true</immediateFlush>
+    <captureExperimentalAttributes>true</captureExperimentalAttributes>
+    <captureKeyValuePairAttributes>true</captureKeyValuePairAttributes>
+  </appender>
+{{< /code-block >}}
+
 3. The `<appender-ref ref="OpenTelemetry"/>` line references the `OpenTelemetry` appender in the root level configuration:
-   ```xml
-    <root level="INFO">
-      <appender-ref ref="console"/>
-      <appender-ref ref="OpenTelemetry"/>
-    </root>
-   ```
+
+   {{< code-block lang="xml" filename="logback.xml" collapsible="true" disable_copy="true" >}}
+<root level="INFO">
+  <appender-ref ref="console"/>
+  <appender-ref ref="OpenTelemetry"/>
+</root>
+{{< /code-block >}}
 
 Additionally, environment variables configure the OpenTelemetry environment to export logs, metrics, and traces:
 
@@ -213,7 +212,7 @@ Additionally, environment variables configure the OpenTelemetry environment to e
 2. The `OTEL_LOGS_EXPORTER=otlp` configuration allows the logs to be sent with OTLP.
 3. The `OTEL_EXPORTER_OTLP_ENDPOINT=http://otelcol:4317` configuration allows the metrics and traces to be sent with OTLP.
 
-### Using unified tagging to correlate observability data
+## Correlate observability data
 
 [Unified service tagging][6] ties observability data together in Datadog so you can navigate across metrics, traces, and logs with consistent tags.
 
@@ -222,46 +221,49 @@ The Calendar application is already configured with unified service tagging:
 1. Go to the Calendar application's Docker Compose file at `./deploys/docker/docker-compose-otel.yml`.
 2. The following lines enable the correlation between application traces and other observability data: 
 
-    ```yaml
-    environment:
-      - OTEL_SERVICE_NAME=calendar-otel
-      - OTEL_LOGS_EXPORTER=otlp
-      - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=docker,host.name=otelcol-docker
-    ```
+   {{< code-block lang="yaml" filename="docker-compose-otel.yml" collapsible="true" disable_copy="true" >}}
+environment:
+  - OTEL_SERVICE_NAME=calendar-otel
+  - OTEL_LOGS_EXPORTER=otlp
+  - OTEL_RESOURCE_ATTRIBUTES=deployment.environment=docker,host.name=otelcol-docker
+{{< /code-block >}}
 
+## Running the application
 
-## Running the application to generate observability data
-
-All of the initial setup and configuration is complete. To start generating and forwarding observability data to Datadog, you need to run the Calendar application with the OpenTelemetry SDK:
+To start generating and forwarding observability data to Datadog, you need to run the Calendar application with the OpenTelemetry SDK:
 
 1. Run the application from the `calendar/` folder:
-   ```sh
-   docker compose -f deploys/docker/docker-compose-otel.yml up
-   ```
 
+   {{< code-block lang="sh" >}}
+docker compose -f deploys/docker/docker-compose-otel.yml up
+{{< /code-block >}}
    This command creates a Docker container with the OpenTelemetry Collector and the Calendar service.
 
 2. To test that the Calendar application is running correctly, execute the following command from another terminal window:
-   ```sh
+
+   {{< code-block lang="sh" >}}
    curl localhost:9090/calendar 
-   ```
+{{< /code-block >}}
 
 3. Verify that you receive a response like:
-   ```
-   {“date":"2022-12-30"}
-   ```
+
+   {{< code-block lang="sh" >}}
+{“date":"2022-12-30"}
+{{< /code-block >}}
+
+4. Run the `curl` command several times to ensure at least one trace exports to the Datadog backend.
+
+   <div class="alert alert-info">The Calendar application uses the probabilistic sampler processor, so only 30% of traces sent through the application reach the target backend.</div>
 
 Each call to the Calendar application results in metrics, traces, and logs being forwarded to the OpenTelemetry Collector, then to the Datadog Exporter, and finally to the Datadog backend. 
 
-**Note**: The Calendar application uses the probabilistic sampler processor, so only 30% of traces sent through the application reach the target backend. Run the `curl` command several times to ensure at least one trace exports to the Datadog backend. 
-
 ## Exploring observability data in Datadog
 
-Now, you can use Datadog to explore the Calendar application's observability data.   
+Use the Datadog UI to explore the Calendar application's observability data.   
 
-**Note**: It may take a few minutes for your trace data to appear in Datadog.
+**Note**: It may take a few minutes for your trace data to appear.
 
-### Exploring runtime and infrastructure metrics
+### Runtime and infrastructure metrics
 
 View runtime and infrastructure metrics to visualize, monitor, and measure the performance of your applications, hosts, containers, and processes.
 
@@ -274,7 +276,7 @@ View runtime and infrastructure metrics to visualize, monitor, and measure the p
 
    {{< img src="/getting_started/opentelemetry/infra_and_jvm.png" alt="View Infrastructure metrics and JVM Runtime metrics for the Calendar application" style="width:90%;" >}}
 
-### Exploring logs
+### Logs
 
 View logs to monitor and troubleshoot application and system operations.
 
@@ -282,7 +284,7 @@ Select **Logs** in the left-side panel to explore logs generated by the Calendar
 
 {{< img src="/getting_started/opentelemetry/logs.png" alt="View Logs for the Calendar application" style="width:90%;" >}}
 
-### Exploring traces
+### Traces
 
 View traces and spans to observe the status and performance of requests processed by your application.
 
@@ -317,3 +319,4 @@ View traces and spans to observe the status and performance of requests processe
 [9]: https://www.datadoghq.com/knowledge-center/distributed-tracing/flame-graph/
 [10]: /opentelemetry/collector_exporter/otlp_receiver/
 [11]: https://opentelemetry.io/
+[12]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/rest-services/java/calendar
