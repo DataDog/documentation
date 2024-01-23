@@ -26,7 +26,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported Oracle versions
-: 11.2, 12c, 18c, 19c, 21c
+: 11g, 12c, 18c, 19c, 21c
 
 Supported Agent versions
 : 7.49.1+
