@@ -19,7 +19,9 @@ Interested in an improved user experience when creating Dynamic Instrumentation 
 
 ## Overview
 
-Symbol Database uploads non-sensitive symbols and metadata from your application to the Datadog backend to enhance the user experience of [Dynamic Instrumentation][1] with IDE-like features like search and auto-complete. The uploaded data includes class and method names as well as field-, argument- and local variable names and related meta data like line numbers.
+Symbol Database enhances the user experience of [Dynamic Instrumentation][1]  by adding IDE-like features like search and autocomplete. 
+
+Symbol Database uploads nonsensitive symbols and metadata from your application to Datadog. The uploaded data includes the names of classes, methods, arguments, fields, and local variables, along with related metadata, like line numbers.
 
 ## Getting started
 
@@ -27,15 +29,15 @@ Symbol Database uploads non-sensitive symbols and metadata from your application
 
 Symbol Database requires the following:
 
-- You have on-boarded with [Dynamic Instrumentation][1]
+- [Dynamic Instrumentation][1] is enabled for your service.
 - [Datadog Agent][2] 7.45.0 or higher is installed alongside your service.
-- [Remote Configuration][3] is enabled in that Agent.
-- For Java applications, tracing library [`dd-trace-java`][6] 1.25.0 or higher.
-- [Unified Service Tagging][4] tags `service`, `env`, and `version` are applied to your deployment.
+- [Remote Configuration][3] is enabled in the Agent.
+- For Java applications, tracing library [`dd-trace-java`][6] 1.25.0 or higher is installed.
+- The [Unified Service Tagging][4] tags `service`, `env`, and `version` are applied to your deployment.
 
 ### Enable Symbol Database for your service
 
-To learn how to enable Symbol Database for your service, select your runtime below:
+Select your runtime below:
 
 {{< partial name="dynamic_instrumentation/symbol-database-languages.html" >}}
 
@@ -43,14 +45,14 @@ To learn how to enable Symbol Database for your service, select your runtime bel
 
 With Symbol Database, the user experience of Dynamic Instrumentation is improved to behave more like an IDE.
 
-Symbol Database provides search for class- and method names:
-{{< img src="dynamic_instrumentation/symdb_method_search.png" alt="Search for methods when creating a Dynamic Instrumentation log probe" >}}
+Symbol Database provides search for class and method names:
+{{< img src="dynamic_instrumentation/symdb_method_search.png" alt="Search for methods when creating a Dynamic Instrumentation log probe" style="width:60%;" >}}
 
-Once selected, it will highlight the selected method:
+When you select a method in the Dynamic Instrumentation configuration, the code for that method is displayed:
 {{< img src="dynamic_instrumentation/symdb_method_highlight.png" alt="Symbol Database highlights the selected method" >}}
 
-Symbol Database also provides auto-complete for log-templates and other places that use the [Dynamic Instrumentation expression language][5]:
-{{< img src="dynamic_instrumentation/symdb_completion.png" alt="Get auto-complete suggestions for log templates" >}}
+Symbol Database also provides autocomplete for log templates and other templates that use the [Dynamic Instrumentation expression language][5]:
+{{< img src="dynamic_instrumentation/symdb_completion.png" alt="Autocomplete suggestions for log templates" style="width:80%;" >}}
 
 [1]: /dynamic_instrumentation/
 [2]: /agent/
