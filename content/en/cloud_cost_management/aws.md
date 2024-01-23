@@ -135,20 +135,109 @@ Attach the new S3 policy to the Datadog integration role.
 
 **Note:** Data can take up to 48 to 72 hours after setup to stabilize in Datadog.
 
-### Cost types
+## Cost types
 
-You can visualize your ingested data using the following cost types:
+Visualize your ingested data using out-of-the-box cost types. The cost types differ mainly in how they report on discount rates, savings plans and reservations.
 
-| Cost Type            | Description           |
+### On-demand
+**On-demand** costs are the costs of usage at the public, on-demand rate published by AWS. This excludes all savings plans, reservations, discounts, taxes, and fees.
+
+In most cases, on-demand costs are not a reliable source to estimate actual costs.
+
+### Amortized and unblended costs
+**Amortized** cost metrics distribute commitment savings throughout the discount term. This is also called _accrual basis_. Reservations and savings plans are drawn down from a monthly commitment and applied directly to covered usage, at the time of usage. Any unused remainder appears as a fee.
+
+In contrast, **unblended** cost metrics show all charges on the date that they are incurred. This is also called _cost basis_. Reservation and savings plan fees show up on the date they were charged, and are not applied directly to covered usage. After billing data for a month is finalized, unblended metrics match the AWS invoice exactly.
+
+### Net costs
+**Net** costs apply private discounts directly to usage. The cost of usage for a specific resource represents the effective cost after all savings are realized.
+
+In contrast, other metrics show private discounts as separate, negative-valued line items with no resource attribution tags. Rather than attributing the discounts directly to usage, those metrics subtract discounts from the total cost.
+
+**Net amortized** costs provide the most accurate representation for cost allocation, with all savings applied directly to usage. Net cost metrics are available if your AWS account has privately negotiated enterprise discounts. If your account doesn't have net metrics available, use **amortized** cost instead.
+
+### Container allocation
+**Container allocation** metrics contain all of the same costs as the AWS metrics, but with additional breakdowns and insights for container workloads. See [container cost allocation][11] for more details.
+
+### Example
+The following scenario demonstrates how different cost types behave. Imagine you have:
+- An EC2 instance running for one hour with the cost of $3 per compute-hour.
+- A savings plan which prices this instance type at $2 per compute-hour.
+- A negotiated EDP discount of 10% on top of all other discounts.
+
+Here's how the instance cost, savings plan hourly commitment, and discount appear in each cost type:
+
+|Cost type |Usage |Savings Plan |Discount | Explanation |
+|:---------|-|-|-|:------------------------------------------------|
+|On Demand |$3.00|||This is the public on-demand rate.|
+|Unblended |$3.00|$2.00|-$0.20|Savings plan recurring fee and EDP discount are separate line items, not associated with a specific resource. (**Note:** the $3 resource cost is offset with `SavingsPlanNegation`.) |
+|Net Unblended||$1.80||Savings plan recurring fee appears as a line item with the discount applied; the cost is not associated with a specific resource.|
+|Amortized |$2.00||-$0.20|Savings plan discount is applied directly to the resource cost. EDP discount is a separate line item. |
+|Net Amortized |$1.80|||Savings plan and EDP discounts are applied directly to resource cost. |
+|Net Amortized - Shared Resources Allocated |$1.80|||The same cost as Net Amortized, but this cost can be further broken down by Kubernetes dimensions and pod tags. |
+
+### Cost metrics summary
+
+In general:
+- `aws.cost.net.amortized.shared.resources.allocated` provides the most complete cost allocation for specific workloads and teams.
+- If you do not have container cost allocation, use `aws.cost.net.amortized`.
+- If you do not have net amortized costs, use `aws.cost.amortized.shared.resources.allocated` or `aws.cost.amortized`.
+
+| Metric               | Description           |
 | -------------------- | --------------------- |
-| `aws.cost.amortized` | Cost based on applied discount rates plus the distribution of pre-payments across usage for the discount term (accrual basis). |
-| `aws.cost.unblended` | Cost shown as the amount charged at the time of usage (cash basis).|
-| `aws.cost.blended`   | Cost based on the average rate paid for a usage type across an organization's member accounts.|
-| `aws.cost.ondemand`  | Cost based on the list rate provided by AWS. |
+| `aws.cost.net.amortized.shared.resources.allocated` | All of your AWS net amortized costs, with additional breakdowns and insights for container workloads. Requires [container cost allocation][11].|
+| `aws.cost.net.amortized` | Net amortized costs, without container cost breakdowns. |
+| `aws.cost.net.unblended` | Net unblended costs, without container cost breakdowns. Matches the AWS invoice, with specialized discounts pre-calculated within usage costs. |
+| `aws.cost.amortized.shared.resources.allocated` | All of your AWS amortized costs, with additional breakdowns and insights for container workloads. Requires [container cost allocation][11].|
+| `aws.cost.amortized` | Amortized costs, without container cost breakdowns. |
+| `aws.cost.unblended` | Unblended costs, without container cost breakdowns. Matches the AWS invoice. |
+| `aws.cost.ondemand`  | Costs based on the list rate provided by AWS, excluding all savings plans, reservations, discounts, taxes, and fees. |
 
-### Tag enrichment
+## Tag enrichment
 
-Datadog adds out-of-the-box tags to the ingested cost data to help you further break down and allocate your costs. These tags are derived from your [Cost and Usage Report (CUR)][6].
+Datadog adds tags to the ingested cost data using many sources, described in detail below.
+
+- Cost and Usage Report columns
+- AWS Resource tags
+- AWS Account tags
+- AWS Integration tags
+- Out-of-the-box tags
+- Container workload tags
+- Tag pipelines
+
+### Cost and Usage Report columns
+
+All string-valued columns from the AWS [Cost and Usage Report (CUR)][6] are added as tags on cost metrics.
+
+To ensure consistency, Datadog normalizes tag keys using underscores and lower case. For example, the CUR column `lineItem/ResourceId` maps to the tag key `line_item/resource_id`. Tag values are generally unmodified - maintaining exact casing and most special characters.
+
+**Examples:**
+
+|CUR Column|CUR Value|Cloud Cost Tag|
+|---|---|---|
+|lineItem/ResourceId|i-12345678a9b12cd3e|line_item/resource_id:i-12345678a9b12cd3e|
+|product/region|us-east-1|product/region:us-east-1|
+|product/usagetype|DataTransfer-Regional-Bytes|product/usagetype:DataTransfer-Regional-Bytes|
+
+### AWS resource tags
+
+[AWS resource tags][12] are user-defined tags that appear in the AWS console when viewing a particular resource, like an EC2 instance or S3 bucket.
+
+When you enable the Datadog AWS integration, Datadog automatically collects resource tags for most AWS resources. These tags are applied to all costs found in the CUR for a given resource. Resource tags are retrieved regularly and are applied to cost data starting from the day they are created or modified. Historical tag values are not overwritten when tags change.
+
+If the AWS integration is not enabled, you can enable resource tag enrichment by activating [cost allocation tags][13] in AWS billing. This allows you to select a subset of resource tag keys to include as columns in the AWS CUR. Datadog automatically includes those columns as tags when processing the CUR.
+
+### AWS organization and account tags
+AWS Organizations support [user-defined tags][14] on organizational units and accounts. Datadog automatically fetches and applies these tags to cost data. Account tags are applied to all usage associated with those accounts. Organization tags are applied to all billing data for the matching payer account.
+
+_Requires the Datadog AWS Integration on the organization account._
+
+### AWS integration tags
+
+AWS integration tags are tags set on the AWS Integration tile in the Datadog integrations page. They are applied to all costs found in the CUR for the associated AWS account.
+
+### Out-of-the-box tags
+Datadog adds out-of-the-box tags to ingested cost data to help you further break down and allocate your costs. These tags are derived from your [Cost and Usage Report (CUR)][6] and make it easier to discover and understand cost data.
 
 The following out-of-the-box tags are available for filtering and grouping data:
 
@@ -178,7 +267,8 @@ The following out-of-the-box tags are available for filtering and grouping data:
 | `is_aws_ec2_spot_instance`   | Whether the usage is associated with a Spot Instance.|
 | `is_aws_ec2_savings_plan`    | Whether the usage is associated with a Savings Plan.|
 
-### Cost and observability correlation
+#### Cost and observability correlation
+
 Viewing costs in context of observability data is important to understand how infrastructure changes impact costs, identify why costs change, and optimize infrastructure for both costs and performance. Datadog updates resource identifying tags on cost data for top AWS products to simplify correlating observability and cost metrics. 
 
 For example, to view cost and utilization for each RDS database, you can make a table with `aws.cost.amortized`, `aws.rds.cpuutilization`, and `aws.rds.freeable_memory` (or any other RDS metric) and group by `dbinstanceidentifier`. Or, to see Lambda usage and costs side by side, you can graph `aws.lambda.concurrent_executions` and `aws.cost.amortized` grouped by `functionname`.
@@ -202,8 +292,15 @@ The following out-of-the-box tags are available:
 | elb (application, gateway, network) | `loadbalancer`|
 | elb (all other costs) | `loadbalancername` |
 
-For tags on containerized environments, see [Container Cost Allocation][11].
+### Container orchestrators
 
+Container cost allocation adds tags from the workloads incurring cost. Examples include tags from Kubernetes pods and nodes and ECS tasks and containers.
+
+_Requires [container cost allocation][11], and applies only to `shared.resources.allocated` metrics._
+
+### Tag pipelines
+
+Finally, all of your [tag pipeline][15] rulesets are applied, providing complete cost allocation when infrastructure tagging is not possible.
 
 ## Billing conductor
 Billing conductor enables you to simplify your bill by customizing the billing rates, distributing credits and fees, and sharing overhead costs at your discretion. You can also select which accounts to include in the CUR.
@@ -225,3 +322,7 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 [9]: https://docs.datadoghq.com/cloud_cost_management/?tab=aws#prerequisite-generate-a-cost-and-usage-report
 [10]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
 [11]: https://docs.datadoghq.com/cloud_cost_management/container_cost_allocation/#tags
+[12]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
+[13]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html
+[14]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
+[15]: https://docs.datadoghq.com/cloud_cost_management/tag_pipelines
