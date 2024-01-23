@@ -147,7 +147,7 @@ All the variables of the Source object are visible in the Context Variables tab.
 
 ## Error handling
 
-In the event that a step fails, you can specify the number of times you want your workflow to retry the step and at what interval before moving on to an optional error path. If no error path is present, the workflow terminates after all retries are exhausted.
+You can specify the number of times you want your workflow to retry a failed step, and at what interval, before moving on to an optional error path. If no error path is present, the workflow terminates after all retries are exhausted.
 
 ### Retries
 
@@ -158,11 +158,11 @@ To configure retries for a step:
 
 ### Add an error path
 
-You can add an error path for the workflow to proceed down if it encounters an error.
+You can add an error path for the workflow to follow if it encounters an error.
 
 To add an error path:
 1. Hover over the step where you'd like to add an error path.
-1. Click and drag the **Error path** icon.
+1. Click and drag the **Error path** icon to place a new error path on the canvas.
 1. Select a workflow step to add to the error path.
 1. After configuring your step, you can add more steps to an error path and even merge your error path back into the main workflow path.
 1. When you're done configuring your error path steps, click **Save** to apply your changes.
