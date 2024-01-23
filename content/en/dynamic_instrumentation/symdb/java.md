@@ -16,7 +16,8 @@ Interested in an improved user experience when creating Dynamic Instrumentation 
 
 ## Requirements
 
-[Dynamic Instrumentation][1] is enabled for your service.
+- [Dynamic Instrumentation][1] is enabled for your service.
+- Tracing library [`dd-trace-java`][6] 1.25.0 or higher is installed.
 
 ## Installation
 

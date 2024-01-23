@@ -32,7 +32,6 @@ Symbol Database requires the following:
 - [Dynamic Instrumentation][1] is enabled for your service.
 - [Datadog Agent][2] 7.45.0 or higher is installed alongside your service.
 - [Remote Configuration][3] is enabled in the Agent.
-- For Java applications, tracing library [`dd-trace-java`][6] 1.25.0 or higher is installed.
 - The [Unified Service Tagging][4] tags `service`, `env`, and `version` are applied to your deployment.
 
 ### Enable Symbol Database for your service
