@@ -27,6 +27,5 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Metrics Without Limits™" >}}
-    {{< nextlink href="observability_pipelines/guide/custom-metrics-governance/" >}}Custom Metrics Governance - Learn how to use Observability Pipelines to filter/transform your metrics data pre-ingestion{{< /nextlink >}}
     {{< nextlink href="metrics/metrics-without-limits/" >}}Metrics Without Limits™ - Learn how to control custom metrics volumes and costs with Metrics without Limits™ {{< /nextlink >}}
 {{< /whatsnext >}}

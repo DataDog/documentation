@@ -339,6 +339,10 @@ window.DD_LOGS.init({
 
 ## Configuration
 
+### Content Security Policy integration
+
+If you're using the Datadog Content Security Policy (CSP) integration on your site, see [the RUM section of the CSP documentation][14] for configuration steps.
+
 ### Initialization parameters
 
 The following parameters are available to configure the Datadog browser logs SDK to send logs to Datadog:
@@ -1185,3 +1189,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [11]: https://docs.datadoghq.com/logs/log_collection/javascript/#contexts-life-cycle
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
+[14]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay

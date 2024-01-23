@@ -715,6 +715,11 @@
     },
     {
       "group": "security_monitoring",
+      "suffix": "_3367706049",
+      "description": "Create a detection rule with detection method 'third_party' returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_461183901",
       "description": "Create a detection rule with type 'impossible_travel' returns \"OK\" response"
     },
@@ -734,6 +739,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Create a security filter returns \"OK\" response"
+    }
+  ],
+  "CreateSecurityMonitoringSuppression": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a suppression rule returns \"OK\" response"
     }
   ],
   "SearchSecurityMonitoringSignals": [
@@ -774,6 +786,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update a security filter returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityMonitoringSuppression": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a suppression rule returns \"OK\" response"
     }
   ],
   "CreateScanningGroup": [

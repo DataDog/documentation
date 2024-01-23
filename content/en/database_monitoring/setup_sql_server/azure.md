@@ -46,6 +46,10 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 ALTER SERVER ROLE ##MS_ServerStateReader## ADD MEMBER datadog;
 ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER datadog;
+-- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
+-- USE msdb;
+-- CREATE USER datadog FOR LOGIN datadog;
+-- GRANT SELECT to datadog;
 ```
 
 Grant the Agent access to each additional Azure SQL Database on this server:
@@ -101,6 +105,10 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
+-- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
+-- USE msdb;
+-- CREATE USER datadog FOR LOGIN datadog;
+-- GRANT SELECT to datadog;
 ```
 
 #### For SQL Server 2012
@@ -110,6 +118,10 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
+-- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
+-- USE msdb;
+-- CREATE USER datadog FOR LOGIN datadog;
+-- GRANT SELECT to datadog;
 
 -- Create the `datadog` user in each additional application database:
 USE [database_name];

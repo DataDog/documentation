@@ -8,6 +8,22 @@ is_beta: true
 type: static-analysis
 
 rulesets:
+  csharp-best-practices:
+    title: "Best Practices for C#"
+    description: |
+      Rules to enforce C# best practices.
+  csharp-code-style:
+    title: "Follow C# code style patterns"
+    description: |
+      Rules to enforce C# code style.
+  csharp-inclusive:
+    title: "Use inclusive language in C#"
+    description: |
+      Rules to make your C# code more inclusive.
+  csharp-security:
+    title: "Write safe and secure C# code"
+    description: |
+      Rules focused on finding security issues in your C# code.
   docker-best-practices:
     title: "Follow best practices with using Docker"
     description: |
@@ -49,9 +65,9 @@ rulesets:
     description: |
       Rules specifically for Express.js best practices and security.
   javascript-inclusive:
-    title: "Check Python code for wording issues"
+    title: "Check JavaScript code for wording issues"
     description: |
-      Rules for Python to avoid inappropriate wording in the code and comments.
+      Rules for JavaScript to avoid inappropriate wording in the code and comments.
   javascript-node-security:
     title: "Identify potential security hotspots in Node"
     description: |
@@ -129,9 +145,9 @@ rulesets:
     description: |
       Rules specifically for Express.js TypeScript best practices and security.
   typescript-inclusive:
-    title: "Check Python code for wording issues"
+    title: "Check TypeScript code for wording issues"
     description: |
-      Rules for Python to avoid inappropriate wording in the code and comments.
+      Rules for TypeScript to avoid inappropriate wording in the code and comments.
   typescript-node-security:
     title: "Identify potential security hotspots in Node"
     description: |
@@ -147,7 +163,7 @@ further_reading:
 
 {{% site-region region="us,us3,us5,eu,ap1" %}}
 <div class="alert alert-warning">
-  Static Analysis is in private beta. Python, Java, JavaScript, TypeScript, and Docker are the only supported languages. To request access, <a href="/help">contact Support</a>.
+  Static Analysis is in private beta. Python, Java, C#, JavaScript, TypeScript, and Docker are the only supported languages. To request access, <a href="/help">contact Support</a>.
 </div>
 {{% /site-region %}}
 

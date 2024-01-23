@@ -6,6 +6,12 @@ aliases:
   - /cloud_siem
   - /security_platform
   - /security/security_monitoring
+  - /security_monitoring/explorer/
+  - /cloud_siem/explorer/
+  - /security_platform/explorer
+  - /security/explorer
+  - /security_platform/security_signal_management
+  - /security/security_signal_management
 further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
     tag: "Release Notes"
@@ -43,6 +49,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/chaos-engineering-for-security/"
     tag: "Blog"
     text: "Security-focused chaos engineering experiments for the cloud"
+  - link: "https://www.datadoghq.com/blog/datadogs-approach-devsecops/"
+    tag: "Blog"
+    text: "Datadog's approach to DevSecOps"
 cascade:
     algolia:
         rank: 70

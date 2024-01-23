@@ -1096,6 +1096,30 @@
     "request_description": "New definition of the security filter.",
     "request_schema_description": "The new security filter body."
   },
+  "ListSecurityMonitoringSuppressions": {
+    "description": "Get the list of all suppression rules.",
+    "summary": "Get all suppression rules"
+  },
+  "CreateSecurityMonitoringSuppression": {
+    "description": "Create a new suppression rule.",
+    "summary": "Create a suppression rule",
+    "request_description": "The definition of the new suppression rule.",
+    "request_schema_description": "Request object that includes the suppression rule that you would like to create."
+  },
+  "DeleteSecurityMonitoringSuppression": {
+    "description": "Delete a specific suppression rule.",
+    "summary": "Delete a suppression rule"
+  },
+  "GetSecurityMonitoringSuppression": {
+    "description": "Get the details of a specific suppression rule.",
+    "summary": "Get a suppression rule"
+  },
+  "UpdateSecurityMonitoringSuppression": {
+    "description": "Update a specific suppression rule.",
+    "summary": "Update a suppression rule",
+    "request_description": "New definition of the suppression rule. Supports partial updates.",
+    "request_schema_description": "Request object containing the fields to update on the suppression rule."
+  },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
     "summary": "List rules"

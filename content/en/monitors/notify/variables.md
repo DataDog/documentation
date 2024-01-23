@@ -37,8 +37,8 @@ The following conditional variables are available:
 | `{{^is_no_data}}`          | The monitor is not triggered for missing data                      |
 | `{{#is_warning}}`          | The monitor warns                                                  |
 | `{{^is_warning}}`          | The monitor does not warn                                          |
-| `{{#is_recovery}}`         | The monitor recovers from `ALERT`, `WARNING`, or `NO DATA`         |
-| `{{^is_recovery}}`         | The monitor does not recover from `ALERT`, `WARNING`, or `NO DATA` |
+| `{{#is_recovery}}`         | The monitor recovers from `ALERT`, `WARNING`, `UNKNOWN`, or `NO DATA`         |
+| `{{^is_recovery}}`         | The monitor does not recover from `ALERT`, `WARNING`, `UNKNOWN`, or `NO DATA` |
 | `{{#is_warning_recovery}}` | The monitor recovers from `WARNING` to `OK`                        |
 | `{{^is_warning_recovery}}` | The monitor does not recover from `WARNING` to `OK`                |
 | `{{#is_alert_recovery}}`   | The monitor recovers from `ALERT` to `OK`                          |

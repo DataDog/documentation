@@ -14,7 +14,17 @@ further_reading:
 
 ## Setup
 
-Follow Okta's [add existing app integrations][1] instructions to configure Okta as a SAML IdP. 
+Follow Okta's [Create custom SAML app integrations][1] instructions to configure Okta as a SAML IdP.
+
+**Note**: Set up Datadog as an Okta application manually. Do not use the preconfigured Datadog application.
+
+{{% site-region region="us" %}}
+
+**Note**: US1 customers can use the preset configuration in Okta's [add existing app integrations][7] instructions to configure Okta as a SAML IdP. Use the latest preconfigured Datadog application in the [Okta Integration Network (OIN)][2].
+
+[7]: https://help.okta.com/en-us/content/topics/apps/apps-add-applications.htm
+[2]: https://www.okta.com/integrations/
+{{% /site-region %}}
 
 ## General details
 
@@ -59,7 +69,7 @@ In the event that you need to upload an `IDP.XML` file to Datadog before being a
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://help.okta.com/en-us/content/topics/apps/apps-add-applications.htm
+[1]: https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SAML.htm?cshid=ext_Apps_App_Integration_Wizard-saml
 [3]: https://app.datadoghq.com/saml/saml_setup
 [4]: /account_management/saml/mapping
 [5]: /account_management/saml/

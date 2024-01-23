@@ -7,7 +7,7 @@ kind: documentation
 
 ## Overview
 
-API Security Inventory monitors your API traffic to provide visibility into the security posture of your APIs, including:
+[API Security Inventory][7] monitors your API traffic to provide visibility into the security posture of your APIs, including:
 
 - **Authentication**: Type of authentication used, such as Basic Auth and API key.
 - **Public Exposure**: Whether the API is processing traffic from the internet.
@@ -22,7 +22,7 @@ Using the API Security Inventory you can:
 - See at a glance your publicly exposed endpoints that are handling sensitive data, such as payment card numbers.
 - See which endpoints are at risk, and pivot directly into the [Threat Monitoring and Protection][2] service for further investigation or response.
 
-{{< img src="security/application_security/api/welcome.png" alt="API Security Inventory main page">}}
+{{< img src="security/application_security/api/api_endpoints.png" alt="API Security Inventory main page">}}
 
 ## Configuration
 
@@ -108,3 +108,4 @@ By default, API Security Inventory evaluates every tenth request (10% sample rat
 [4]: /agent/remote_config/
 [5]: /security/application_security/enabling/
 [6]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
+[7]: https://app.datadoghq.com/security/appsec/inventory/apis
