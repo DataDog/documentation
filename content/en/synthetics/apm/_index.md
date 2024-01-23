@@ -71,7 +71,7 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 : To identify generated traces from your API tests. Spans from these traces are tagged with `ingestion_reason:synthetics`.
 
 `x-datadog-origin: synthetics-browser` 
-: To identify generated traces from your Browser tests.  These traces are tagged with `ingestion_reason:synthetics-browser`.
+: To identify generated traces from your Browser tests. These traces are tagged with `ingestion_reason:synthetics-browser`.
 
 `x-datadog-sampling-priority: 1`
 : To make sure that the Agent keeps the trace.
