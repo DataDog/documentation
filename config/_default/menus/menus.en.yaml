@@ -2574,16 +2574,21 @@ main:
     parent: ci_explorer
     identifier: ci_explorer_saved_views
     weight: 302
+  - name: Monitors
+    url: monitors/types/ci/?tab=pipelines
+    parent: ci
+    identifier: ci_monitors
+    weight: 4
   - name: Guides
     url: continuous_integration/guides/
     parent: ci
     identifier: ci_guides
-    weight: 4
+    weight: 5
   - name: Troubleshooting
     url: continuous_integration/troubleshooting/
     parent: ci
     identifier: ci_troubleshooting
-    weight: 5
+    weight: 6
   - name: Test Visibility
     url: tests/
     pre: ci
@@ -2645,36 +2650,41 @@ main:
     parent: tests
     identifier: tests_explorer
     weight: 4
+  - name: Monitors
+    url: monitors/types/ci/?tab=tests
+    parent: tests
+    identifier: tests_monitors
+    weight: 5
   - name: Developer Workflows
     url: tests/developer_workflows
     parent: tests
     identifier: tests_developer_workflows
-    weight: 5
+    weight: 6
   - name: Code Coverage
     url: tests/code_coverage
     parent: tests
     identifier: tests_code_coverage
-    weight: 6
+    weight: 7
   - name: Instrument Browser Tests with RUM
     url: tests/browser_tests
     parent: tests
     identifier: tests_browser_tests
-    weight: 7
+    weight: 8
   - name: Instrument Swift Tests with RUM
     url: tests/swift_tests
     parent: tests
     identifier: tests_swift_tests
-    weight: 8
+    weight: 9
   - name: Guides
     url: tests/guides/
     parent: tests
     identifier: tests_guides
-    weight: 9
+    weight: 10
   - name: Troubleshooting
     url: tests/troubleshooting/
     parent: tests
     identifier: tests_troubleshooting
-    weight: 10
+    weight: 11
   - name: Intelligent Test Runner
     url: intelligent_test_runner/
     pre: ci
