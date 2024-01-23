@@ -5292,6 +5292,21 @@ components:
       type: string
       x-enum-varnames:
       - CATEGORY_PROCESSOR
+    LogsDailyLimitReset:
+      description: Object containing options to override the default daily limit reset
+        time.
+      properties:
+        reset_time:
+          description: String in `HH:00` format representing the time of day the daily
+            limit should be reset. The hours must be between 00 and 23 (inclusive).
+          example: '14:00'
+          type: string
+        reset_utc_offset:
+          description: String in `(-|+)HH:00` format representing the UTC offset to
+            apply to the given reset time. The hours must be between -12 and +14 (inclusive).
+          example: +02:00
+          type: string
+      type: object
     LogsDateRemapper:
       description: "As Datadog receives logs, it timestamps them using the value(s)
         from any of these default attributes.\n\n  - `timestamp`\n  - `date`\n  -
@@ -5506,6 +5521,16 @@ components:
           example: 300000000
           format: int64
           type: integer
+        daily_limit_reset:
+          $ref: '#/components/schemas/LogsDailyLimitReset'
+        daily_limit_warning_threshold_percentage:
+          description: A percentage threshold of the daily quota at which a Datadog
+            warning event is generated.
+          example: 70
+          format: double
+          maximum: 99.99
+          minimum: 50
+          type: number
         exclusion_filters:
           description: 'An array of exclusion objects. The logs are tested against
             the query of each filter,
@@ -5561,6 +5586,16 @@ components:
           example: 300000000
           format: int64
           type: integer
+        daily_limit_reset:
+          $ref: '#/components/schemas/LogsDailyLimitReset'
+        daily_limit_warning_threshold_percentage:
+          description: A percentage threshold of the daily quota at which a Datadog
+            warning event is generated.
+          example: 70
+          format: double
+          maximum: 99.99
+          minimum: 50
+          type: number
         disable_daily_limit:
           description: 'If true, sets the `daily_limit` value to null and the index
             is not limited on a daily basis (any
@@ -15919,6 +15954,10 @@ components:
         compressedJsonDescriptor:
           description: A protobuf JSON descriptor that needs to be gzipped first then
             base64 encoded.
+          type: string
+        compressedProtoFile:
+          description: A protobuf file that needs to be gzipped first then base64
+            encoded.
           type: string
         dnsServer:
           description: DNS server to use for DNS tests.

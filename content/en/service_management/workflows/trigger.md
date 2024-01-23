@@ -85,11 +85,12 @@ To trigger a workflow from a Notification Rule:
 1. On the workflow canvas, click **Add an Automated Trigger** and select **@mention**.
 1. Next to **@workflow-**, enter a mention name for the trigger. Your mention name must be unique.
 1. Save your Workflow.
-1. From the [Setup & Configuration][3] page, find the Detection Rule you'd like to use to trigger your workflow, or create a new rule.
+1. From the [Configuration][3] page, find the notification rule you'd like to use to trigger your workflow, or create a new rule.
 1. In the **Recipient** section, add the full workflow mention name. For example, `@workflow-my-workflow`.
+1. Add a unique notification name.
 1. Click **Save and Activate**.
 
-{{< img src="service_management/workflows/notification-rule-trigger.png" alt="Add the workflow name to the recipient section of a Notification rule" >}}
+{{< img src="service_management/workflows/notification-rule-trigger2.png" alt="Add the workflow name to the recipient section of a Notification rule" >}}
 
 Each time the Notification Rule fires, it triggers a workflow run.
 
@@ -134,5 +135,5 @@ The initial run history for a workflow provides a panel with the list of previou
 
 [1]: /service_management/workflows/access/#use-a-service-account
 [2]: https://app.datadoghq.com/monitors/manage
-[3]: https://app.datadoghq.com/security/configuration/rules
+[3]: https://app.datadoghq.com/security/configuration/notification-rules
 [4]: /security/cloud_security_management/workflows
