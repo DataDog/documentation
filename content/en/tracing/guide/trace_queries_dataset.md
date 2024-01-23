@@ -1,5 +1,5 @@
 ---
-title: How Trace Queries Source Data
+Trace Queries Source Data
 kind: guide
 further_reading:
     - link: "/tracing/trace_explorer/trace_queries/"
@@ -25,10 +25,12 @@ Datadog uses the [Intelligent Retention Filter][6] to index data for Trace Queri
 **Note**: Spans indexed by flat sampling and diversity sampling do not count towards the usage of indexed spans, and therefore, **do not impact your bill**.
 
 ### 1% flat sampling
+`retained_by:flat_sampled`
 
 Flat 1% sampling is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision. To learn more, read the [one percent flat sampling documentation][2].
 
 ### Diversity sampling
+`retained_by:diversity_sampling`
 
 Every 15 minutes, diversity sampling retains at least one span and the associated trace for each combination of environment, service, operation, and resource. This occurs for the `p75`, `p90`, and `p95` percentile of latencies to ensure that you can always find example traces in service and resource pages, even for low traffic endpoints. To learn more, read the [diversity sampling documentation][3].
 
