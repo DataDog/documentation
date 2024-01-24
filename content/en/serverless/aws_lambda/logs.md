@@ -8,7 +8,7 @@ kind: documentation
 Datadog can collect logs from your AWS Lambda functions in two ways:
 
 - The [Datadog Lambda Extension][2], which collects logs in real time and bypasses CloudWatch.
-- The [Datadog Forwarder][4], which forwards Lambda logs from CloudWatch. This setup increases redundancy, as you have an extra place to store your logs.
+- The [Datadog Forwarder][4], which forwards Lambda logs from CloudWatch to Datadog. This setup increases redundancy, as you have an extra place to store your logs.
 
 ### Collect logs from non-Lambda resources
 
