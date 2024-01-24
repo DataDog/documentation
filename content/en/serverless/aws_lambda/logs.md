@@ -7,7 +7,7 @@ kind: documentation
 
 Datadog can collect logs from your AWS Lambda functions in two ways:
 
-- The [Datadog Lambda Extension][2], which collects logs in real time and bypasses CloudWatch.
+- The [Datadog Lambda Extension][2], which pushes logs to Datadog in real time and bypasses CloudWatch.
 - The [Datadog Forwarder][4], which forwards Lambda logs from CloudWatch to Datadog. This setup increases redundancy, as you have an extra place to store your logs.
 
 ### Collect logs from non-Lambda resources
@@ -115,16 +115,19 @@ For more information, see [Log Management][47].
 
 ## Configuration: Datadog Forwarder
 
+{{< img src="serverless/lambda/logs/log-autosubscription.png" alt="AWS integration configuration - under Log Collection, the Log Autosubscription section. On the left is a Log Sources section containing different log sources that can be toggled. Lambda Cloudwatch Logs is disabled." >}}
+
 ### Enable log collection
 
 1. Deploy the [Datadog Forwarder][4].
 2. In Datadog, open the [AWS integration tile][5]. Under _Configuration_, select your AWS account and go to the _Log Collection_ tab.
-3. Under the _Log Autosubscription_ section, find the list of _Log Sources_. **Disable** _Lambda Cloudwatch Logs_.
-   {{< img src="serverless/lambda/logs/log-autosubscription.png" alt="AWS integration configuration - under Log Collection, the Log Autosubscription section. On the left is a Log Sources section containing different log sources that can be toggled. Lambda Cloudwatch Logs is disabled." >}}
+3. Under the _Log Autosubscription_ section, find the list of _Log Sources_. **Enable** _Lambda Cloudwatch Logs_.
 
 ### Disable log collection
 
-TK
+1. Deploy the [Datadog Forwarder][4].
+2. In Datadog, open the [AWS integration tile][5]. Under _Configuration_, select your AWS account and go to the _Log Collection_ tab.
+3. Under the _Log Autosubscription_ section, find the list of _Log Sources_. **Disable** _Lambda Cloudwatch Logs_.
 
 For more information, see [Log Management][47].
 
