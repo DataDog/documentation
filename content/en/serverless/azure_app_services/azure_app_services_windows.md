@@ -358,6 +358,10 @@ Many organizations use [Azure Resource Management (ARM) templates][8] to impleme
 {{% /tab %}}
 {{< /tabs >}}
 
+## Deployment
+
+{{% aas-workflow-windows %}}
+
 ## Troubleshooting
 
 ### If your apps are identified as being misconfigured in the Serverless View and/or you are missing corresponding metrics for your traces
