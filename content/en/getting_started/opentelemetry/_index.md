@@ -30,7 +30,7 @@ further_reading:
 
 [OpenTelemetry][11] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing observability data from software applications. OpenTelemetry provides a consistent format for instrumenting, generating, gathering, and exporting application observability data---namely metrics, logs, and traces---to monitoring platforms for analysis and insight.
 
-This guide demonstrates how to configure [a sample OpenTelemetry application][12] to send observability data to Datadog using the OpenTelemetry SDK, OpenTelemetry Collector, and Datadog Exporter. This guide also shows you how to explore this data in the Datadog UI.
+This guide demonstrates how to configure [a sample OpenTelemetry application][12] to send observability data to Datadog using the OpenTelemetry SDK, OpenTelemetry Collector, and [Datadog Exporter][14]. This guide also shows you how to explore this data in the Datadog UI.
 
 Follow this guide to:
 
@@ -67,7 +67,7 @@ The Calendar application uses OpenTelemetry tools to generate and collect metric
 
 ## Instrumenting the application
 
-The Calendar sample application is already instrumented.
+The Calendar sample application is already [instrumented][15].
 
 1. Go to the Collector configuration file located at: `./src/main/java/com/otel/controller/CalendarController.java`.
 2. The following code instruments the Calendar application using the OpenTelemetry API:
@@ -324,3 +324,6 @@ View traces and spans to observe the status and performance of requests processe
 [10]: /opentelemetry/collector_exporter/otlp_receiver/
 [11]: https://opentelemetry.io/
 [12]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/rest-services/java/calendar
+[13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
+[14]: /opentelemetry/collector_exporter/
+[15]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
