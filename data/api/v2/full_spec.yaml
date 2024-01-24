@@ -34702,7 +34702,7 @@ paths:
         type: safe
   /api/v2/usage/lambda_traced_invocations:
     get:
-      description: 'Get hourly usage for lambda traced invocations.
+      description: 'Get hourly usage for Lambda traced invocations.
 
         **Note:** hourly usage data for all products is now available in the [Get
         hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)'
@@ -34756,7 +34756,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for lambda traced invocations
+      summary: Get hourly usage for Lambda traced invocations
       tags:
       - Usage Metering
       x-menu-order: 37
@@ -35402,32 +35402,39 @@ servers:
 tags:
 - description: Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters)
     for your organization. You need an API and application key with Admin rights to
-    interact with this endpoint.
+    interact with this endpoint. See [retention filters](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters)
+    on the Trace Retention page for more information.
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/
   name: APM Retention Filters
 - description: Search your Audit Logs events over HTTP.
   name: Audit
-- description: '[AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)
+- description: '[The AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)
 
-    is used to automatically map group of users to roles in Datadog using attributes
+    is used to automatically map groups of users to roles in Datadog using attributes
 
-    sent from Identity Providers.'
+    sent from Identity Providers. Use these endpoints to manage your AuthN Mappings.'
   name: AuthN Mappings
 - description: Search or aggregate your CI Visibility pipeline events and send them
-    to your Datadog site over HTTP.
+    to your Datadog site over HTTP. See the [CI Pipeline Visibility in Datadog page](https://docs.datadoghq.com/continuous_integration/pipelines/)
+    for more information.
   name: CI Visibility Pipelines
-- description: Search or aggregate your CI Visibility test events over HTTP.
+- description: Search or aggregate your CI Visibility test events over HTTP. See the
+    [Test Visibility in Datadog page](https://docs.datadoghq.com/tests/) for more
+    information.
   name: CI Visibility Tests
-- description: The Cloud Cost Management API allows you to setup, edit and delete
-    cloud cost management accounts for AWS & Azure.
+- description: The Cloud Cost Management API allows you to set up, edit, and delete
+    Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management
+    page](https://docs.datadoghq.com/cloud_cost_management/) for more information.
   name: Cloud Cost Management
 - description: Workload activity security rules for generating events using the Datadog
-    security Agent.
+    security Agent. See the [Setting up CSM Workload Security page](https://docs.datadoghq.com/security/cloud_security_management/setup/csm_workload_security/)
+    for more information.
   name: Cloud Workload Security
-- description: Configure your Datadog Cloudflare integration directly through the
-    Datadog API.
+- description: Manage your Datadog Cloudflare integration directly through the Datadog
+    API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/)
+    for more information.
   name: Cloudflare Integration
 - description: Configure your Datadog Confluent Cloud integration directly through
     the Datadog API.
@@ -35438,6 +35445,8 @@ tags:
 - description: The Containers API allows you to query container data for your organization.
   name: Containers
 - description: Send events for DORA Metrics to measure and improve software delivery.
+    See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more
+    information.
   name: DORA Metrics
 - description: 'Interact with your dashboard lists through the API to
 
@@ -35700,7 +35709,9 @@ tags:
 
     You can retrieve up to 24 hours of hourly usage data for multiple organizations,
 
-    and up to two months of hourly usage data for a single organization in one request.'
+    and up to two months of hourly usage data for a single organization in one request.
+
+    Learn more on the [usage details documentation](https://docs.datadoghq.com/account_management/billing/usage_details/).'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/billing/usage_details/

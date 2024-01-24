@@ -8343,7 +8343,7 @@ api:
         - GetUsageObservabilityPipelines
       unstable: []
       order: 39
-  - name: Get hourly usage for lambda traced invocations
+  - name: Get hourly usage for Lambda traced invocations
     url: '#get-hourly-usage-for-lambda-traced-invocations'
     identifier: usage-metering-get-hourly-usage-for-lambda-traced-invocations
     parent: usage-metering
@@ -8801,7 +8801,7 @@ api:
         - GetUsageBillableSummary
       unstable: []
       order: 5
-  - name: Get hourly usage for lambda
+  - name: Get hourly usage for Lambda
     url: '#get-hourly-usage-for-lambda'
     identifier: usage-metering-get-hourly-usage-for-lambda
     parent: usage-metering
