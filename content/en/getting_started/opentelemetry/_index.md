@@ -187,7 +187,7 @@ service:
 
 This configuration allows the Calendar application to send container metrics to Datadog for you to explore in Datadog.
 
-### Send observability data with OTLP
+### Sending observability data with OTLP
 
 The Calendar application uses the OpenTelemetry logging exporter in its Logback configuration to send logs with OpenTelemetry Layer Processor (OTLP).
 
