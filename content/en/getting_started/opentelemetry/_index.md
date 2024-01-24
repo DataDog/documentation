@@ -32,8 +32,6 @@ further_reading:
 
 This guide demonstrates how to configure [a sample OpenTelemetry application][12] to send observability data to Datadog using the OpenTelemetry SDK, OpenTelemetry Collector, and [Datadog Exporter][14]. This guide also shows you how to explore this data in the Datadog UI.
 
-{{< img src="/getting_started/opentelemetry/pipeline-diagram.png" alt="Pipeline to send observability data with OpenTelemetry to Datadog" style="width:100%;" >}}
-
 Follow this guide to:
 
 1. [Instrument the application](#instrumenting-the-application) with the OpenTelemetry API.
