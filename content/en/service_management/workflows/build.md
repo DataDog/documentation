@@ -36,7 +36,9 @@ You can create workflows or edit existing workflows from the [Workflow Automatio
 
 ## Create a workflow with AI
 
-<div class="alert alert-info">Auto Generate is in beta.</a></div>
+{{< callout url="https://docs.google.com/forms/d/14Heybl3cLHuyxl1XpsGrEoWvc1TPA2DVLeS7S0wgIRI" btn_hidden="false" header="Join the beta!">}}
+AI functionality for Workflow Automation is in private beta. Fill out this form to request access.
+{{< /callout >}}
 
 If you're not sure where to start, you can automatically generate a workflow with AI. To generate a workflow:
 
