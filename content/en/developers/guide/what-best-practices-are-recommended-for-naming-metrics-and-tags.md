@@ -17,7 +17,7 @@ Naming convention is an art and possibly one of the most difficult decisions to 
 * Provide descriptive and meaningful names: the metrics or tags clearly describe the purpose or meaning of the value.
 * Adhere to the format and limitations described below.
 * Avoid abbreviations that might have multiple meanings
-* Maintain consistency across all teams, apps, services.
+* Maintain consistency across all teams, apps, and services.
 * Avoid reserved keywords that might cause clashes with the other tags or metrics.
 * In the case of metrics, prefix them with a namespace depicting the application or service the data is generated from
 
