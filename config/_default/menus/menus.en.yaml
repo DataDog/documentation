@@ -781,6 +781,11 @@ main:
     identifier: otel_gs_batch_memory
     parent: otel_gs_collector
     weight: 108
+  - name: Kafka Metrics
+    url: opentelemetry/collector_exporter/kafka_metrics/
+    identifier: otel_gs_kafka_metrics
+    parent: otel_gs_collector
+    weight: 109
   - name: OTLP Ingestion by the Datadog Agent
     url: opentelemetry/otlp_ingest_in_the_agent/
     identifier: otel_ingest_agent
