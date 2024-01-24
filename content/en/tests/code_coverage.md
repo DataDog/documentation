@@ -310,6 +310,10 @@ You can also see the code coverage's evolution on the [Branch Overview page][6] 
 {{< img src="/continuous_integration/code_coverage_branch_view.png" text="Branch view's code coverage" style="width:100%" >}}
 
 
+## Show code coverage change of a pull request
+
+The code coverage change of a GitHub pull request compared to the default branch is shown in the pull request's [test summary comment][8].
+
 ## Intelligent Test Runner and total code coverage
 
 [Intelligent Test Runner][7] will **not** automatically provide total code coverage measurements, even though it requires _per test_ code coverage to function.
@@ -326,3 +330,4 @@ You can also see the code coverage's evolution on the [Branch Overview page][6] 
 [5]: /monitors/types/ci/#maintain-code-coverage-percentage
 [6]: /continuous_integration/tests/developer_workflows#branch-overview
 [7]: /continuous_integration/intelligent_test_runner/
+[8]: /tests/developer_workflows/#test-summaries-in-github-pull-requests
