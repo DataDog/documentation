@@ -32,6 +32,8 @@ further_reading:
 
 This guide demonstrates how to configure [a sample OpenTelemetry application][12] to send observability data to Datadog using the OpenTelemetry SDK, OpenTelemetry Collector, and [Datadog Exporter][14]. This guide also shows you how to explore this data in the Datadog UI.
 
+{{< img src="/getting_started/opentelemetry/pipeline-diagram.png" alt="Pipeline to send observability data with OpenTelemetry to Datadog" style="width:100%;" >}}
+
 Follow this guide to:
 
 1. [Instrument the application](#instrumenting-the-application) with the OpenTelemetry API.
@@ -130,6 +132,7 @@ exporters:
     hostname: "otelcol-docker"
     api:
       key: ${DD_API_KEY}
+      site: datadoghq.com
 traces:
   trace_buffer: 500
 service:
@@ -141,6 +144,7 @@ service:
     logs:
       exporters: [datadog]
 {{< /code-block >}}  
+3. Set `exporters.datadog.api.site` to your [Datadog site][16]. Otherwise, it defaults to US1.
 
 This configuration allows the Datadog Exporter to send runtime metrics, traces, and logs to Datadog. However, sending infrastructure metrics requires additional configuration.
 
@@ -335,3 +339,4 @@ View traces and spans to observe the status and performance of requests processe
 [13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
 [14]: /opentelemetry/collector_exporter/
 [15]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+[16]: /getting_started/site/
