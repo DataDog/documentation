@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: true
+    cache_enabled: false
 
 - data:
     - org_name: jenkinsci
@@ -349,11 +349,12 @@
             file_name: 'circleci_orbs.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"]
-              title: Static Analysis and CircleCI Orbs
+              title: Code Analysis and CircleCI Orbs
               kind: documentation
-              description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
+              description: Use Datadog and CircleCI to run Code Analysis jobs in a CI pipeline.
               aliases:
               - /continuous_integration/static_analysis/circleci_orbs
+              - /static_analysis/circleci_orbs
 
       - repo_name: datadog-static-analyzer-github-action
         contents:
@@ -366,11 +367,12 @@
             file_name: 'github_actions.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md"]
-              title: Static Analysis and GitHub Actions
+              title: Code Analysis and GitHub Actions
               kind: documentation
-              description: Use Datadog and GitHub to run Static Analysis jobs in a CI pipeline.
+              description: Use Datadog and GitHub to run Code Analysis jobs in a CI pipeline.
               aliases:
               - /continuous_integration/static_analysis/github_actions
+              - /static_analysis/github_actions
 
       - repo_name: datadog-static-analyzer-rule-docs
         contents:
@@ -379,10 +381,12 @@
           globs:
           - rulesets/**/*.md
           options:
-            dest_dir: '/static_analysis/rules/'
+            dest_dir: '/code_analysis/rules/'
             path_to_remove: 'rulesets/'
             front_matters:
               disable_edit: true
+              aliases:
+              - /static_analysis/rules
 
       - repo_name: datadog-cdk-constructs
         contents:

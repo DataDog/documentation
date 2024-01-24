@@ -2783,32 +2783,42 @@ main:
     parent: software_delivery_heading
     identifier: dora_metrics
     weight: 190000
-  - name: Static Analysis
-    url: static_analysis/
+  - name: Code Analysis
+    url: code_analysis/
     pre: ci
     parent: software_delivery_heading
-    identifier: static_analysis
+    identifier: code_analysis
     weight: 200000
-  - name: Rules
-    url: static_analysis/rules
-    parent: static_analysis
-    identifier: static_analysis_rules
+  - name: Code Analysis
+    url: code_analysis/
+    parent: code_analysis
+    identifier: code_analysis_index
+    weight: 1
+  - name: Static Analysis
+    url: code_analysis/static_analysis
+    parent: code_analysis_index
+    identifier: code_analysis_index_static_analysis
     weight: 101
+  - name: Rules
+    url: code_analysis/rules
+    parent: code_analysis
+    identifier: code_analysis_rules
+    weight: 2
   - name: CircleCI Orbs
-    url: static_analysis/circleci_orbs
-    parent: static_analysis
-    identifier: static_analysis_circleci_orbs
-    weight: 102
+    url: code_analysis/circleci_orbs
+    parent: code_analysis
+    identifier: code_analysis_circleci_orbs
+    weight: 3
   - name: GitHub Actions
-    url: static_analysis/github_actions
-    parent: static_analysis
-    identifier: static_analysis_github_actions
-    weight: 103
+    url: code_analysis/github_actions
+    parent: code_analysis
+    identifier: code_analysis_github_actions
+    weight: 4
   - name: GitHub Pull Requests
-    url: static_analysis/github_pull_requests
-    parent: static_analysis
-    identifier: static_analysis_github_prs
-    weight: 103
+    url: code_analysis/github_pull_requests
+    parent: code_analysis
+    identifier: code_analysis_github_prs
+    weight: 5
   - name: Quality Gates
     url: quality_gates/
     pre: ci

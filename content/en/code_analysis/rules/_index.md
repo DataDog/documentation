@@ -1,9 +1,10 @@
 ---
-title: Static Analysis Rules
+title: Code Analysis Rules
 kind: documentation
-description: View rules for multiple languages for Static Analysis.
+description: View rules for multiple languages for Code Analysis.
 aliases:
 - /continuous_integration/static_analysis/rules
+- /static_analysis/rules
 is_beta: true
 type: static-analysis
 
@@ -154,27 +155,27 @@ rulesets:
       Rules to identify potential security hotspots in Node. This may include false positives that require further triage.
 
 further_reading:
-  - link: "/static_analysis/"
+  - link: "/code_analysis/"
     tag: "Documentation"
-    text: "Learn about Datadog Static Analysis"
+    text: "Learn about Datadog Code Analysis"
 ---
 
 ## Overview
 
 {{% site-region region="us,us3,us5,eu,ap1" %}}
 <div class="alert alert-warning">
-  Static Analysis is in private beta. Python, Java, C#, JavaScript, TypeScript, and Docker are the only supported languages. To request access, <a href="/help">contact Support</a>.
+  Code Analysis is in private beta. Python, Java, C#, JavaScript, TypeScript, and Docker are the only supported languages. To request access, <a href="/help">contact Support</a>.
 </div>
 {{% /site-region %}}
 
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
-    Static Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
+    Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
 
-Datadog Static Analysis provides out-of-the-box rules to help detect violations in your CI/CD pipelines in code reviews and identify bugs, security, and maintainability issues. For more information, see the [Static Analysis documentation][1].
+Datadog Code Analysis provides out-of-the-box rules to help detect violations in your CI/CD pipelines in code reviews and identify bugs, security, and maintainability issues. For more information, see the [Code Analysis documentation][1].
 
 
 
-[1]: /static_analysis
+[1]: /code_analysis

@@ -4,6 +4,7 @@ kind: documentation
 description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 aliases:
 - /continuous_integration/static_analysis
+- /static_analysis
 is_beta: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
