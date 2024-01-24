@@ -102,9 +102,12 @@ content/en/mobile_app_testing/*.md                              @Datadog/synthet
 
 # Software Delivery
 
-content/en/continuous_integration/tests/*.md          @Datadog/ci-app-libraries @Datadog/documentation
-content/en/continuous_integration/pipelines/*.md      @Datadog/ci-app-backend @Datadog/documentation
-content/en/static_analysis/*.md                       @Datadog/static-analysis @Datadog/documentation
-content/en/static_analysis/rules/_index.md            @Datadog/static-analysis @Datadog/documentation
+content/en/tests/*.md                                 @Datadog/ci-app-libraries @Datadog/documentation
+content/en/intelligent_test_runner/*.md               @Datadog/ci-app-libraries @Datadog/documentation
+content/en/continuous_integration/*.md                @Datadog/ci-app-backend @Datadog/documentation
+content/en/continuous_delivery/*.md                   @Datadog/ci-app-backend @Datadog/documentation
+content/en/dora_metrics/*.md                          @Datadog/ci-app-backend @Datadog/documentation
+content/en/code_analysis/*.md                         @Datadog/static-analysis @Datadog/documentation
+content/en/code_analysis/rules/_index.md              @Datadog/static-analysis @Datadog/documentation
 content/en/quality_gates/_index.md                    @Datadog/ci-app-backend @Datadog/documentation
-content/en/dora_metrics/_index.md                     @Datadog/ci-app-backend @Datadog/documentation
+content/en/quality_gates/_index.md                    @Datadog/ci-app-backend @Datadog/documentation
