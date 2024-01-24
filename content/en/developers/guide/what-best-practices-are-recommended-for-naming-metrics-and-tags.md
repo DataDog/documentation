@@ -19,7 +19,7 @@ Naming convention is an art and possibly one of the most difficult decisions to 
 * Avoid abbreviations that might have multiple meanings
 * Maintain consistency across all teams, apps, and services.
 * Avoid reserved keywords that might cause clashes with the other tags or metrics.
-* In the case of metrics, prefix them with a namespace depicting the application or service the data is generated from
+* In the case of metrics, prefix them with a namespace depicting the application or service generating the data.
 
 ## Rules and best practices for naming metrics
 
