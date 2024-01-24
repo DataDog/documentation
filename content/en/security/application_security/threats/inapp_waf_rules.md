@@ -58,13 +58,13 @@ An input represents which part of the request the operator is applied to. The fo
 
    <div class="alert alert-info">Custom in-app WAF rules is in beta.</div>
 
-Custom in-app WAF rules enable users to log specific types of requests to their applications. For example, you can use custom rules to monitor login success or failure. To get started, navigate to **Security** -> **Application Security** -> **Configuration** -> **In-App WAF** -> [**Custom Rules**][4].
+Custom in-app WAF rules enable users to log or block specific types of requests to their applications. For example, you can use custom rules to monitor login success or failure. To get started, navigate to **Security** -> **Application Security** -> **Protection** -> **In-App WAF** -> [**Custom Rules**][4].
 
 **Note:** Default rules in in-app WAF are read-only. To refine your in-app WAF behavior, modify the in-app WAF rules. Default rules cannot be modified, however, you can create a custom rule based on one of the default rules, and modify the match conditions to your needs. Be sure to disable the default rule so that you don't have two similar rules evaluating the same requests. 
 
 ## Configure an ASM In-App WAF rule
 
-Blocking on a service is defined through the policy rules. Three Datadog default policies are included in the in-app WAF: *Datadog Recommended*, *Datadog Monitoring*, which monitors attacks only, and *Datadog Block Attack tools*, which blocks attack tools and monitors all other attacks.
+Blocking on a service is defined through the policy rules. Three Datadog default policies are included in the in-app WAF: *Datadog Recommended*, *Datadog Monitoring-only*, which monitors attacks only, and *Datadog Block Attack tools*, which blocks attack tools and monitors all other attacks.
 
 Services using a policy are visible directly in the policy management page.
 
@@ -129,4 +129,4 @@ Next, [configure detection rules to create security signals][1] based on those s
 [1]: /security/application_security/custom_rules/
 [2]: https://app.datadoghq.com/security/appsec/in-app-waf
 [3]: /security/application_security/enabling/
-[4]: https://app.datadoghq.com/security/configuration/asm/in-app-waf?config_by=custom-rules
+[4]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-rules
