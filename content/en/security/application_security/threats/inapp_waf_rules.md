@@ -68,7 +68,7 @@ Blocking on a service is defined through the policy rules. Three Datadog default
 
 Services using a policy are visible directly in the policy management page.
 
-1. In Datadog, navigate to the [In-App WAF page under ASM Configuration][2].
+1. In Datadog, navigate to [Security > Application Security > Protection > In-App WAF][2].
 
    {{< img src="security/application_security/threats/waf/in-app-waf.png" alt="In-App WAF configuration page, showing two default policies." style="width:100%;" >}}
 
