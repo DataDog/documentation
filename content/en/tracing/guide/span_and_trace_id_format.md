@@ -20,7 +20,7 @@ This page details Datadog tracing library support for trace and span IDs.
 
 128-bit trace IDs are generated and accepted by default in the latest versions of Datadog tracing libraries.
 
-| Language   | Generated IDs             | Valid Accepted 128-bit int IDs |
+| Language   | Generated IDs             | Valid, Accepted 128-bit int IDs |
 | ---------- | --------------------------| ------------------------------ |
 | JavaScript | Unsigned [0, $2^128-1$]   |  Signed or unsigned            |
 | Java       | Unsigned [0, $2^128-1$]   |  Unsigned                      |
@@ -37,7 +37,7 @@ This page details Datadog tracing library support for trace and span IDs.
 
 Trace IDs are generated as 128-bit by default, and they are accepted as either 128-bit or 64-bit integers. To generate 64-bit trace IDs, set the environment variable `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED` to `false`.
 
-| Language   | Generated IDs            | Valid Accepted 64-bit int IDs |
+| Language   | Generated IDs            | Valid, Accepted 64-bit int IDs |
 | ---------- | ------------------------ | ----------------------------- |
 | JavaScript | Unsigned  [$0, 2^64-1$]   | Signed or unsigned            |
 | Java       | Unsigned  [$0, 2^64-1$]   | Unsigned                      |
@@ -52,7 +52,7 @@ Trace IDs are generated as 128-bit by default, and they are accepted as either 1
 
 Span IDs are limited to 64-bits in Datadog.
 
-| Language   | Generated IDs            | Valid Accepted 64-bit int IDs |
+| Language   | Generated IDs            | Valid, Accepted 64-bit int IDs |
 | ---------- | ------------------------ | ----------------------------- |
 | JavaScript | Unsigned [0, $2^63$]     | Signed or unsigned            |
 | Java       | Unsigned [1, $2^63-1$]   | Unsigned                      |
