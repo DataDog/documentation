@@ -12,7 +12,7 @@ aliases:
   - /developers/faq/what-best-practices-are-recommended-for-naming-metrics-and-tags
 ---
 
-Naming convention is an art and possibly one of the most difficult decisions to agree on. Defining a naming convention for your metrics, tags and services is crucial to have a clean, readable and maintanable telemetry data. Here are some recommendations:
+Naming convention is an art and possibly one of the most difficult decisions to agree on. Defining a naming convention for your metrics, tags, and services is crucial to have a clean, readable, and maintainable telemetry data. Here are some recommendations:
 
 * Provide descriptive and meaningful names: the metrics or tags clearly describe the purpose or meaning of the value.
 * Adhere to the format and limitations depicted below.
