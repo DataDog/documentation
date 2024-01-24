@@ -14,10 +14,6 @@ further_reading:
   text: 'Span Query Syntax'
 ---
 
-{{< beta-callout url="#" btn_hidden="true">}}
-To join the Trace Queries private beta <a href="https://docs.google.com/forms/d/e/1FAIpQLSebVVIAUcWIW941Zc3aBcEgmgGq349qCGKDk3QSSC2-PM8Aeg/viewform?pli=1">fill out this form</a>. Spans used for queries are from a <a href="#the-data-that-trace-queries-are-based-on"><strong>uniform 1% sample</strong> of ingested spans</a>, not from your existing retention filters.
-{{< /beta-callout >}}
-
 ## Overview
 
 With Trace Queries, you can find entire traces based on the properties of multiple spans and the relationships between those spans within the structure of the trace. To create a trace query, you define two or more [span queries][1] and then specify the relationship within the searched-for trace structure of the spans that are returned by each span query.
