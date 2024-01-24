@@ -85,41 +85,6 @@ private String getDate() {
 
 When the Calendar application runs, the `getDate()` call generates [traces][8] and spans.
 
-In addition to this simple instrumentation example, you can add attributes to spans to provide more context when you are analyzing the traces in the Datadog UI. The Calendar application generates random dates, so you can add attributes for the month and day of the week.
-
-You need to add these attributes within the scope of the span, between `span.makeCurrent()` and `span.end()`:
-
-1. Go to the `CalendarController.java`.
-2. Add the following code inside the `try` block to add a month attribute:
-   {{< code-block lang="java" >}}
-String month = start.getMonth().toString();
-    span.setAttribute("month", month);
-{{< /code-block >}}
-3. Add the following code inside the `try` block to add a day of the week attribute:
-   {{< code-block lang="java">}}
-String dayOfWeek = start.getDayOfWeek().toString();
-    span.setAttribute("dayOfWeek", dayOfWeek);
-{{< /code-block >}}
-4. The new code block should look like this:
-   {{< code-block lang="java" >}}
-private String getDate() {
-  Span span = GlobalOpenTelemetry.getTracer("calendar").spanBuilder("getDate").startSpan();
-  try (Scope scope = span.makeCurrent()) {
-    
-    // Add month attribute
-    String month = start.getMonth().toString();
-    span.setAttribute("month", month);
-
-    // Add day of week attribute
-    String dayOfWeek = start.getDayOfWeek().toString();
-    span.setAttribute("dayOfWeek", dayOfWeek);
-  } finally {
-    span.end();
-  }
-}
-{{< /code-block >}}
-
-
 ## Configuring the application
 
 ### OTLP Receiver 
