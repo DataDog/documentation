@@ -65,7 +65,7 @@ Due to the [limitations](#out-of-the-box-configuration-limitations) described ab
 
 If there are other branches you want to exclude, add them on the Test Service Settings page. The query bar supports using the wildcard character `*` to exclude any branches that match, such as `release_*`.
 
-Excluded branches collect per-test code coverage, which will have a performance impact on the total testing time. However, this performance impact is mitigated by only collecting code coverage when Datadog detects that running with code coverage will generate enough new coverage information that it offsets the cost of collecting the coverage. You can check whether a test session has code coverage enabled or not by looking at the `@test.code_coverage.enabled` field.
+Excluded branches collect per-test code coverage, which has a performance impact on the total testing time. However, this performance impact is mitigated by only collecting code coverage when Datadog detects that running with code coverage generates enough new coverage information that it offsets the cost of collecting the coverage. You can check whether a test session has code coverage enabled or not by looking at the `@test.code_coverage.enabled` field.
 
 ### Tracked files
 
