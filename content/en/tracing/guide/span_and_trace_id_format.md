@@ -22,14 +22,14 @@ This page details Datadog tracing library support for trace and span IDs.
 
 | Language   | Generated IDs             | Valid, Accepted 128-bit int IDs |
 | ---------- | --------------------------| ------------------------------ |
-| JavaScript | Unsigned [0, $2^128-1$]   |  Signed or unsigned            |
-| Java       | Unsigned [0, $2^128-1$]   |  Unsigned                      |
-| Go         | Unsigned [0, $2^128-1$]   |  Signed or unsigned            |
-| Python     | Unsigned [0, $2^128-1$]   |  Unsigned                      |
-| Ruby       | Unsigned [0, $2^128-1$]   |  Unsigned                      |
-| .NET       | Unsigned [0, $2^128-1$]   |  Unsigned                      |
-| PHP        | Unsigned [0, $2^128-1$]   |  Unsigned                      |
-| C++        | Unsigned [0, $2^128-1$]   |  Unsigned                      |
+| JavaScript | Unsigned [0, $2^128-1$]   |                                |
+| Java       | Unsigned [0, $2^128-1$]   |                                |
+| Go         | Unsigned [0, $2^128-1$]   |                                |
+| Python     | Unsigned [0, $2^128-1$]   |                                |
+| Ruby       | Unsigned [0, $2^128-1$]   |                                |
+| .NET       | Unsigned [0, $2^128-1$]   |                                |
+| PHP        | Unsigned [0, $2^128-1$]   |                                |
+| C++        | Unsigned [0, $2^128-1$]   |                                |
 
 ## 64-bit trace and span IDs
 
@@ -37,16 +37,16 @@ This page details Datadog tracing library support for trace and span IDs.
 
 Trace IDs are generated as 128-bit by default, and they are accepted as either 128-bit or 64-bit integers. To generate 64-bit trace IDs, set the environment variable `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED` to `false`.
 
-| Language   | Generated IDs            | Valid, Accepted 64-bit int IDs |
+| Language   | Generated IDs            | Valid, Accepted int IDs |
 | ---------- | ------------------------ | ----------------------------- |
-| JavaScript | Unsigned  [$0, 2^64-1$]   | Signed or unsigned            |
-| Java       | Unsigned  [$0, 2^64-1$]   | Unsigned                      |
-| Go         | Unsigned  [$0, 2^64-1$]   | Signed or unsigned            |
-| Python     | Unsigned  [$0, 2^64-1$]   | Unsigned                      |
-| Ruby       | Unsigned  [$0, 2^64-1$]   | Unsigned                      |
-| .NET       | Unsigned  [$0, 2^64-1$]   | Unsigned                      |
-| PHP        | Unsigned  [$0, 2^64-1$]   | Unsigned                      |
-| C++        | Unsigned  [$0, 2^64-1$]   | Unsigned                      |
+| JavaScript | Unsigned  [$0, 2^64-1$]   |                        |
+| Java       | Unsigned  [$0, 2^64-1$]   |                        |
+| Go         | Unsigned  [$0, 2^64-1$]   |                        |
+| Python     | Unsigned  [$0, 2^64-1$]   |                        |
+| Ruby       | Unsigned  [$0, 2^64-1$]   |                        |
+| .NET       | Unsigned  [$0, 2^64-1$]   |                        |
+| PHP        | Unsigned  [$0, 2^64-1$]   |                        |
+| C++        | Unsigned  [$0, 2^64-1$]   |                        |
 
 ### Span IDs
 
