@@ -664,7 +664,7 @@ Once the deployment is completed, your metrics and traces are sent to Datadog. I
 
 ## Troubleshooting
 
-This integration depends on your runtime having a full SSL implementation. If you are using a slim image for Node, you may need to add the following command to your Dockerfile to include certificates.
+This integration depends on your runtime having a full SSL implementation. If you are using a slim image, you may need to add the following command to your Dockerfile to include certificates.
 
 ```
 RUN apt-get update && apt-get install -y ca-certificates
