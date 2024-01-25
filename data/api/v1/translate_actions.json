@@ -714,7 +714,8 @@
   "UploadIdPForOrg": {
     "description": "There are a couple of options for updating the Identity Provider (IdP)\nmetadata from your SAML IdP.\n\n* **Multipart Form-Data**: Post the IdP metadata file using a form post.\n\n* **XML Body:** Post the IdP metadata file as the body of the request.",
     "summary": "Upload IdP metadata",
-    "request_description": ""
+    "request_description": "",
+    "request_schema_description": "Object describing the IdP configuration."
   },
   "QueryMetrics": {
     "description": "Query timeseries points.",
@@ -1017,8 +1018,8 @@
     "summary": "Get hourly usage for audit logs"
   },
   "GetUsageLambda": {
-    "description": "Get hourly usage for lambda.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
-    "summary": "Get hourly usage for lambda"
+    "description": "Get hourly usage for Lambda.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family). Refer to [Migrating from the V1 Hourly Usage APIs to V2](https://docs.datadoghq.com/account_management/guide/hourly-usage-migration/) for the associated migration guide.",
+    "summary": "Get hourly usage for Lambda"
   },
   "GetUsageBillableSummary": {
     "description": "Get billable usage across your account.",
