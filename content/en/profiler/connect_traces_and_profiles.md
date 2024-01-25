@@ -221,7 +221,7 @@ See [prerequisites](#prerequisites) to learn how to enable this feature for Node
 
 There is one lane for the JavaScript **thread**.
 
-Lanes on the top are **runtime activities** that may add extra latency to your request, currently these are garbage collector activities.
+Lanes on the top are garbage collector **runtime activities** that may add extra latency to your request.
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 See [prerequisites](#prerequisites) to learn how to enable this feature for PHP.

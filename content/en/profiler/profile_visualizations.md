@@ -144,10 +144,10 @@ See [prerequisites][1] to learn how to enable this feature for Node.js.
 
 There is one lane for the JavaScript **thread**.
 
-There can also be lanes visualizing various kinds of **asynchronous activity**, currently these are DNS requests and TCP connect operations. The number of lanes matches
+There can also be lanes visualizing various kinds of **asynchronous activity** consisting of DNS requests and TCP connect operations. The number of lanes matches
 the maximum concurrency of these activities so they can be visualized without overlaps.
 
-Lanes on the top are **runtime activities** that may add extra latency to your request. Currently these are various garbage collection activities.
+Lanes on the top are garbage collector **runtime activities** that may add extra latency to your request.
 
 [1]: /profiler/connect_traces_and_profiles/#prerequisites
 {{< /programming-lang >}}
