@@ -28,7 +28,7 @@ For the **EKS Pod** component, the following options are available:
 
 ## API
 
-Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API](https://developers.cloudcraft.co/) provides an interface for you to interact with your AWS account within Cloudcraft by sending and receiving data as JSON objects.
+Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API][1] provides an interface for you to interact with your AWS account within Cloudcraft by sending and receiving data as JSON objects.
 
 ### Schema
 
@@ -58,8 +58,8 @@ The **EKS Pod** component schema representation follows the format above and def
 
 - **type: string**. The type of component. Must be a string of value `ekspod` for this component.
 - **id: string, uuid**. The unique identifier for the component. The API uses a UUID v4 internally but accepts any unique string.
-- **arn: string**. The globally unique identifier for the component within AWS, known as [Amazon Resource Names](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-- **region: string**. The AWS region for the component. The API supports all global regions, [except for AWS China](https://help.cloudcraft.co/article/110-scan-error-aws-china-region).
+- **arn: string**. The globally unique identifier for the component within AWS, known as [Amazon Resource Names][2].
+- **region: string**. The AWS region for the component. The API supports all global regions, [except for AWS China][3].
 - **mapPos: array**. The position of the component in the blueprint. The API uses a unique X and Y coordinate pair to express positioning.
 - **compute: string**. The worker node type for the pod. Accepts one of two values, `fargateProfile` or `nodeGroup`. Defaults to `nodeGroup`.
 - **cpu: number**. The number of vCPUs available for the pod. See below for more information. Defaults to `0.25`.
@@ -107,3 +107,7 @@ cpu   | memoryGB
 1     | {2..8}
 2     | {4..16}
 4     | {8..30}
+
+[1]: https://developers.cloudcraft.co/
+[2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+[3]: https://help.cloudcraft.co/article/110-scan-error-aws-china-region

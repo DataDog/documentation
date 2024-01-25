@@ -7,8 +7,8 @@ This article will walk you through connecting your Azure account to Cloudcraft.
 
 ## Requirements
 
-- A Cloudcraft user with the [Owner or Administrator role](https://help.cloudcraft.co/article/85-roles-and-permissions).
-- An active [Cloudcraft Pro subscription](https://www.cloudcraft.co/pricing).
+- A Cloudcraft user with the [Owner or Administrator role][1].
+- An active [Cloudcraft Pro subscription][2].
 - An Azure account with permission to create IAM roles.
 
 ## Manage Azure accounts
@@ -107,7 +107,7 @@ Now click the blue **Save Account** link at the bottom of the screen and that is
 
 {{< img src="cloudcraft/getting-started/connect-azure-account-with-cloudcraft/azure-account-added.png" alt="Screenshot of Cloudcraft interface for managing Azure accounts with an account added." responsive="true" style="width:100%;">}}
 
-If you have any questions or trouble with the process, [get in touch with our support team](https://app.cloudcraft.co/app/support) and we will be happy to help.
+If you have any questions or trouble with the process, [get in touch with our support team][3] and we will be happy to help.
 
 ## Edit account
 
@@ -138,3 +138,7 @@ No, you can connect an unlimited number of Azure accounts to Cloudcraft.
 **Can I choose another expiration period for the client secret?**
 
 Yes, you can any value you or your organization prefers. Just keep in mind that when the secret expires, you won't be able to scan your Azure account anymore until you register a new secret and update the account in Cloudcraft.
+
+[1]: https://help.cloudcraft.co/article/85-roles-and-permissions
+[2]: https://www.cloudcraft.co/pricing
+[3]: https://app.cloudcraft.co/app/support

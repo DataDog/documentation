@@ -7,10 +7,10 @@ Enabling Single Sign-On (SSO) with Okta as your identity provider allows you and
 
 This article will help you get set up if your identity provider is Okta. We have additional articles for other providers.
 
-- [Enable SSO With Azure AD](https://help.cloudcraft.co/article/90-enable-sso-with-azure-ad)
-- [Enable SSO With a Generic Identity Provider](https://help.cloudcraft.co/article/91-enable-sso-with-generic-idp)
+- [Enable SSO With Azure AD][1]
+- [Enable SSO With a Generic Identity Provider][2]
 
-For more general information on using SSO with Cloudcraft, check out [Enable SSO in Your Account](https://help.cloudcraft.co/article/88-enable-sso).
+For more general information on using SSO with Cloudcraft, check out [Enable SSO in Your Account][3].
 
 ## Setting Up SAML/SSO
 
@@ -71,4 +71,9 @@ Lastly, toggle the **SAML Single Sign-On is enabled** option. Once you have veri
 
 We suggest testing the integration before telling your team about it, just to ensure that everything works as expected.
 
-If you have any questions or trouble with the process, [get in touch with our support team](https://app.cloudcraft.co/app/support) and we will be happy to help.
+If you have any questions or trouble with the process, [get in touch with our support team][4] and we will be happy to help.
+
+[1]: https://help.cloudcraft.co/article/90-enable-sso-with-azure-ad
+[2]: https://help.cloudcraft.co/article/91-enable-sso-with-generic-idp
+[3]: https://help.cloudcraft.co/article/88-enable-sso
+[4]: https://app.cloudcraft.co/app/support

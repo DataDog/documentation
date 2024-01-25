@@ -22,7 +22,7 @@ You can update your name and email address by simply updating the fields in this
 
 ## Add or change your password
 
-If you need to update your password — [choose a strong one](https://help.cloudcraft.co/article/59-create-strong-password) —, you can do so by clicking the blue **Change Password** button to the right of the **Login** section.
+If you need to update your password — [choose a strong one][1] —, you can do so by clicking the blue **Change Password** button to the right of the **Login** section.
 
 {{< img src="cloudcraft/account-management/manage-user-profile/change-account-password.png" alt="User interface of a user profile page with logins section highlighted and change password button." responsive="true" style="width:100%;">}}
 
@@ -31,3 +31,5 @@ A window will open up and ask for your old and new password. Type both in and cl
 <section class="alert alert-info">
   <p>If you signed up for a Cloudcraft account using the <strong>Sign in with Google</strong> option, the <strong>Change Password</strong> button will be replaced by an <strong>Add Password</strong> button. By clicking it, you will receive a password reset request over email; just follow the link and you should be all set.</p>
 </section>
+
+[1]: https://help.cloudcraft.co/article/59-create-strong-password

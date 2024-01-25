@@ -19,7 +19,7 @@ The toolbar is displayed when selecting a component. It allows you to customize 
 
 ## API
 
-In [the Cloudcraft API](https://developers.cloudcraft.co/), the VPC component is represented in JSON.
+In [the Cloudcraft API][1], the VPC component is represented in JSON.
 
 ```json
 {
@@ -98,3 +98,5 @@ The `peeringConnections` key accepts an array, with each peering connection bein
 - **name: string**. The name of this connection. Refer to the feature image at the top to see how it is displayed.
 - **accepterVpc: string**. The `id` of the accepter VPC.
 - **hidden: boolean**. If true, the peering connection is not displayed in the diagram. Defaults to false.
+
+[1]: https://developers.cloudcraft.co/

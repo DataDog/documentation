@@ -55,4 +55,6 @@ The list below includes all the AWS components that Cloudcraft supports.
 
 If we don't support a component you are looking for, the **Design** tab lets you represent anything using blocks, icons, images, and text labels.
 
-You can also [contact our support team](https://app.cloudcraft.co/app/support) to help us identify which components you need the most.
+You can also [contact our support team][1] to help us identify which components you need the most.
+
+[1]: https://app.cloudcraft.co/app/support

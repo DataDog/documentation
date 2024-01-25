@@ -17,7 +17,7 @@ This help article will help you understand what actions each role can perform.
 
 The Account Owner has access to everything in your Cloudcraft account and is the only one who can change subscription settings, or view and change billing information.
 
-By default, the person who signed up for a paid Cloudcraft subscription is the Account Owner, but by [sending a message to our support team](https://app.cloudcraft.co/support) you can have other members of your team with this role.
+By default, the person who signed up for a paid Cloudcraft subscription is the Account Owner, but by [sending a message to our support team][1] you can have other members of your team with this role.
 
 **Permissions:**
 
@@ -94,7 +94,7 @@ In this example, if "Team 1" is an auditing team with read-only members, "User 1
 
 **Who owns a Cloudcraft account?**
 
-The person who signed up for a paid Cloudcraft subscription is the default Account Owner, but multiple owners can exist if you [reach out to our support team](https://app.cloudcraft.co/app/support).
+The person who signed up for a paid Cloudcraft subscription is the default Account Owner, but multiple owners can exist if you [reach out to our support team][2].
 
 **What happens if the Account Owner leaves the company?**
 
@@ -107,3 +107,6 @@ Only the Account Owner can update the payment method or make changes to the subs
 **Can I invite a user and give them read-only access to blueprints?**
 
 Not at the moment, but you can create shareable blueprint links and embed them in internal wiki pages as a workaround.
+
+[1]: https://app.cloudcraft.co/support
+[2]: https://app.cloudcraft.co/app/support

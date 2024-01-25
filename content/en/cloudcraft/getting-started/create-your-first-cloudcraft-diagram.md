@@ -19,7 +19,7 @@ Start by creating a new blueprint, where we will be importing your cloud archite
 
 First things first, you need to connect your AWS account. Go ahead and do that by following the help article below:
 
-- [Connect your AWS account with Cloudcraft](https://help.cloudcraft.co/article/87-connect-aws-account-with-cloudcraft)
+- [Connect your AWS account with Cloudcraft][1]
 
 Connected? Perfect!
 
@@ -43,7 +43,7 @@ For this help article we will focus on the **Live** version, so go ahead and sel
 
 {{< img src="cloudcraft/getting-started/create-your-first-cloudcraft-diagram/live-diagram-options.png" alt="Interactive Cloudcraft interface with toggle set to Live for live AWS resource diagramming." responsive="true" style="width:100%;">}}
 
-Click the yellow **Scan Now** button and Cloudcraft will start looking for [supported AWS components](https://help.cloudcraft.co/article/55-supported-aws-components) in your account. You should see a **Scan complete** message when the application finishes.
+Click the yellow **Scan Now** button and Cloudcraft will start looking for [supported AWS components][2] in your account. You should see a **Scan complete** message when the application finishes.
 
 {{< img src="cloudcraft/getting-started/create-your-first-cloudcraft-diagram/scan-complete.png" alt="Cloudcraft AWS account scan complete notification with search bar and orange progress indicator." responsive="true" style="width:100%;">}}
 
@@ -76,7 +76,7 @@ Even though it has the same tags, the S3 bucket is outside the VPC because the A
 
 How components connect to each other is very service dependent, but we try to use all available AWS APIs to discover relationships wherever possible.
 
-For this help article we will focus on **Auto Layout**, but feel free to [reach out to our support team](https://app.cloudcraft.co/support) if you want to learn more about **Filtered Layout**.
+For this help article we will focus on **Auto Layout**, but feel free to [reach out to our support team][3] if you want to learn more about **Filtered Layout**.
 
 Moving on, click on the yellow **Auto Layout** button right below the **Live/Snapshot** toggle.
 
@@ -114,6 +114,12 @@ If you click in a component like an EC2 instance, for example, the **Live Feed**
 
 This is just the tip of the iceberg, though, as Cloudcraft allows you to go much further.
 
-If you want to learn about more ways Cloudcraft can help empower your team and get started with the product as fast as possible, you can [book an online demo with a member of our team over here](https://www.cloudcraft.co/request-demo).
+If you want to learn about more ways Cloudcraft can help empower your team and get started with the product as fast as possible, you can [book an online demo with a member of our team over here][4].
 
-If you have any questions, [reach out to our support team](https://app.cloudcraft.co/support), and they will be happy to help.
+If you have any questions, [reach out to our support team][5], and they will be happy to help.
+
+[1]: https://help.cloudcraft.co/article/87-connect-aws-account-with-cloudcraft
+[2]: https://help.cloudcraft.co/article/55-supported-aws-components
+[3]: https://app.cloudcraft.co/support
+[4]: https://www.cloudcraft.co/request-demo
+[5]: https://app.cloudcraft.co/support

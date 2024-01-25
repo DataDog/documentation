@@ -15,11 +15,11 @@ You also have the option to control the access granted to Cloudcraft when scanni
 
 ## Creating a custom IAM policy
 
-Start by opening the [IAM Policies Console](https://console.aws.amazon.com/iamv2/home#/policies) and clicking the **Create Policy** button.
+Start by opening the [IAM Policies Console][1] and clicking the **Create Policy** button.
 
 {{< img src="cloudcraft/advanced/minimal-iam-policy/create-policy.png" alt="Screenshot of AWS IAM management console highlighting the Create policy button." responsive="true" style="width:100%;">}}
 
-Switch to the JSON tab, copy the content of the policy you see below or from [the minimal IAM API endpoint](https://api.cloudcraft.co/aws/account/iamParameters/policy/custom), and then paste it into the editor box. This policy represents the minimal set of AWS permissions required for a complete environment scan by Cloudcraft.
+Switch to the JSON tab, copy the content of the policy you see below or from [the minimal IAM API endpoint][2], and then paste it into the editor box. This policy represents the minimal set of AWS permissions required for a complete environment scan by Cloudcraft.
 
 You may customize the policy to suit your unique requirements.
 
@@ -107,12 +107,18 @@ Click the **Review policy** button at the bottom of the screen, and then fill in
 
 Now, click the **Create policy** button to create the policy. The AWS console will redirect you back to the policies page, and you should see a green success message at the top of your screen.
 
-Finally, attach the newly created policy to the [Cloudcraft IAM role](https://console.aws.amazon.com/iam/home?#/roles/cloudcraft). If you didn't create the role yet, please follow the instructions inside the application.
+Finally, attach the newly created policy to the [Cloudcraft IAM role][3]. If you didn't create the role yet, please follow the instructions inside the application.
 
 ## Strict policy
 
 A stricter version of the minimal IAM policy is also available.
 
-- [JSON file for the strict IAM policy](https://api.cloudcraft.co/aws/account/iamParameters/policy/minimal)
+- [JSON file for the strict IAM policy][4]
 
-If you have any questions, [reach out to the support team](https://app.cloudcraft.co/support), and they will be happy to help.
+If you have any questions, [reach out to the support team][5], and they will be happy to help.
+
+[1]: https://console.aws.amazon.com/iamv2/home#/policies
+[2]: https://api.cloudcraft.co/aws/account/iamParameters/policy/custom
+[3]: https://console.aws.amazon.com/iam/home?#/roles/cloudcraft
+[4]: https://api.cloudcraft.co/aws/account/iamParameters/policy/minimal
+[5]: https://app.cloudcraft.co/support

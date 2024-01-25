@@ -25,7 +25,7 @@ For the **Timestream** component, the following options are available:
 
 ## API
 
-Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API](https://developers.cloudcraft.co/) provides an interface for you to interact with your AWS account within Cloudcraft by sending and receiving data as JSON objects.
+Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API][1] provides an interface for you to interact with your AWS account within Cloudcraft by sending and receiving data as JSON objects.
 
 ### Schema
 
@@ -56,8 +56,8 @@ The **Timestream** component schema representation follows the format above and 
 
 - **type: string**. The type of component. Must be a string of value `timestream` for this component.
 - **id: string, uuid**. The unique identifier for the component. The API uses a UUID v4 internally but accepts any unique string.
-- **arn: string**. The globally unique identifier for the component within AWS, known as [Amazon Resource Names](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-- **region: string**. The AWS region for the component. The API supports all global regions, [except for AWS China](https://help.cloudcraft.co/article/110-scan-error-aws-china-region).
+- **arn: string**. The globally unique identifier for the component within AWS, known as [Amazon Resource Names][2].
+- **region: string**. The AWS region for the component. The API supports all global regions, [except for AWS China][3].
 - **mapPos: array**. The position of the component in the blueprint. The API uses a unique X and Y coordinate pair to express positioning.
 - **writeDataGb: number**. The total volume of written data in gigabytes. Defaults to `100`.
 - **scanDataGb: number**. The total volume of queried data in gigabytes. Defaults `100`.
@@ -71,3 +71,7 @@ The **Timestream** component schema representation follows the format above and 
   - **2d: string**. A hexadecimal color for the component logo in 2D view. Defaults to `#FFFFFF`.
 - **link: string, uri**. A URI that links the component to another diagram or an external website. Accepts one of two formats, `blueprint://` or `https://`.
 - **locked: boolean**. Whether to allow changes to the position of the component through the web interface. Defaults to `false`.
+
+[1]: https://developers.cloudcraft.co/
+[2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+[3]: https://help.cloudcraft.co/article/110-scan-error-aws-china-region

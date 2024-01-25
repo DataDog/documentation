@@ -25,7 +25,7 @@ The toolbar is displayed when selecting a component. It allows you to replace th
   <p>While you can manipulate an image inside a diagram through our API, the image itself must be uploaded through the Cloudcraft UI.</p>
 </section>
 
-In [the Cloudcraft API](https://developers.cloudcraft.co/), an image is represented in JSON.
+In [the Cloudcraft API][1], an image is represented in JSON.
 
 ```json
 {
@@ -52,3 +52,5 @@ In [the Cloudcraft API](https://developers.cloudcraft.co/), an image is represen
 - **direction: string**. The rotation or direction of the image. Accepts `down, up, right, left` as value, with `down` as the default.
 - **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
 - **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
+
+[1]: https://developers.cloudcraft.co/

@@ -20,11 +20,11 @@ For the **ECS Cluster** component, the following options are available:
 - **Color**. Select a fill color for the top of the component and an accent color for the bottom. You can use the same colors on 2D and 3D views or different colors for each.
 - **Name**. Enter a name for the cluster. You can use up to 255 letters, numbers, hyphens, and underscores.
 
-You can also add the **ECS Cluster** component to [VPCs](https://help.cloudcraft.co/article/118-component-vpc) and [subnets](https://help.cloudcraft.co/article/120-component-subnet).
+You can also add the **ECS Cluster** component to [VPCs][1] and [subnets][2].
 
 ## API
 
-Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API](https://developers.cloudcraft.co/) provides an interface for you to interact with your AWS account within Cloudcraft by sending and receiving data as JSON objects.
+Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API][3] provides an interface for you to interact with your AWS account within Cloudcraft by sending and receiving data as JSON objects.
 
 ### Schema
 
@@ -65,8 +65,8 @@ The **ECS Cluster** component schema representation follows the format above and
 
 - **type: string**. The type of component. Must be a string of value `ecscluster` for this component.
 - **id: string, uuid**. The unique identifier for the component. The API uses a UUID v4 internally but accepts any unique string.
-- **arn: string**. The globally unique identifier for the component within AWS, known as [Amazon Resource Names](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-- **region: string**. The AWS region for the component. The API supports all global regions, [except for AWS China](https://help.cloudcraft.co/article/110-scan-error-aws-china-region).
+- **arn: string**. The globally unique identifier for the component within AWS, known as [Amazon Resource Names][4].
+- **region: string**. The AWS region for the component. The API supports all global regions, [except for AWS China][5].
 - **mapPos: array**. The position of the component in the blueprint. The API uses a unique X and Y coordinate pair to express positioning.
 - **name: string**. The name of the cluster. Accepts up to 255 letters, numbers, hyphens, and underscores.
 - **nodes: array**. The services and tasks running inside the cluster. Accepts an array of unique identifiers for services and tasks components.
@@ -78,3 +78,9 @@ The **ECS Cluster** component schema representation follows the format above and
   - **2d: string**. A hexadecimal color for the component logo in 2D view. Defaults to `#693cc5`.
 - **link: string, uri**. A URI that links the component to another diagram or an external website. Accepts one of two formats, `blueprint://` or `https://`.
 - **locked: boolean**. Whether to allow changes to the position of the component through the web interface. Defaults to `false`.
+
+[1]: https://help.cloudcraft.co/article/118-component-vpc
+[2]: https://help.cloudcraft.co/article/120-component-subnet
+[3]: https://developers.cloudcraft.co/
+[4]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+[5]: https://help.cloudcraft.co/article/110-scan-error-aws-china-region

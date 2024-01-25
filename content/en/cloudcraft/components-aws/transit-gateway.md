@@ -18,7 +18,7 @@ The toolbar is displayed when selecting a component. It allows you to customize 
 
 ## API
 
-In [the Cloudcraft API](https://developers.cloudcraft.co/), the transit gateway component is represented in JSON.
+In [the Cloudcraft API][1], the transit gateway component is represented in JSON.
 
 ```json
 {
@@ -57,3 +57,5 @@ In [the Cloudcraft API](https://developers.cloudcraft.co/), the transit gateway 
 - **direction: string**. The rotation or direction of the component. Accepts `down` or `right` as value, with `down` as the default.
 - **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
 - **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
+
+[1]: https://developers.cloudcraft.co/

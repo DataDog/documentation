@@ -26,7 +26,7 @@ For the **API Management** component, the following options are available:
 
 ## API
 
-Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API](https://developers.cloudcraft.co/) provides an interface for you to interact with your Azure account within Cloudcraft by sending and receiving data as JSON objects.
+Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API][1] provides an interface for you to interact with your Azure account within Cloudcraft by sending and receiving data as JSON objects.
 
 ### Schema
 
@@ -61,7 +61,7 @@ The **API Management** component schema representation follows the format above 
 - **resourceId: string**. The globally unique identifier for the component within Azure.
 - **region: string**. The Azure region for the component. The API supports all global regions, except China.
 - **mapPos: array**. The position of the component in the blueprint. The API uses a unique X and Y coordinate pair to express positioning.
-- **tier: string**. The service tier for the API management platform. [See Azure's documentation for more information](https://learn.microsoft.com/en-us/azure/api-management/api-management-features). Defaults to `Consumption`.
+- **tier: string**. The service tier for the API management platform. [See Azure's documentation for more information][2]. Defaults to `Consumption`.
 - **calls: number**. The number of calls to the API. Defaults to `0`.
 - **units: number**. The number of units for the API management platform. Defaults to `1`.
 - **gateways: number**. The number of self-hosted API gateways. Defaults to `0`.
@@ -74,3 +74,6 @@ The **API Management** component schema representation follows the format above 
   - **2d: string**. A hexadecimal color for the component logo in 2D view. Defaults to `null`.
 - **link: string, uri**. A URI that links the component to another diagram or an external website. Accepts one of two formats, `blueprint://` or `https://`.
 - **locked: boolean**. Whether to allow changes to the position of the component through the web interface. Defaults to `false`.
+
+[1]: https://developers.cloudcraft.co/
+[2]: https://learn.microsoft.com/en-us/azure/api-management/api-management-features

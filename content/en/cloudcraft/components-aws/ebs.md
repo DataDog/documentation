@@ -22,7 +22,7 @@ The toolbar is displayed when selecting a component. It allows you to customize 
 
 ## API
 
-In [the Cloudcraft API](https://developers.cloudcraft.co/), an EBS volume is represented in JSON.
+In [the Cloudcraft API][1], an EBS volume is represented in JSON.
 
 ```json
 {
@@ -65,3 +65,5 @@ In [the Cloudcraft API](https://developers.cloudcraft.co/), an EBS volume is rep
   - **2d: string**. Accent color for the component in 3D view. Must be an hexadecimal color.
 - **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
 - **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
+
+[1]: https://developers.cloudcraft.co/

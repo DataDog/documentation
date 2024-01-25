@@ -19,7 +19,7 @@ The toolbar is displayed when selecting a component. It allows you to customize 
 
 ## API
 
-In [the Cloudcraft API](https://developers.cloudcraft.co/), a ElastiCache instance is represented in JSON.
+In [the Cloudcraft API][1], a ElastiCache instance is represented in JSON.
 
 ```json
 {
@@ -65,7 +65,7 @@ In [the Cloudcraft API](https://developers.cloudcraft.co/), a ElastiCache instan
 - **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
 - **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
 
-The ElastiCache component can be added to [VPCs](https://help.cloudcraft.co/article/118-component-vpc), [security groups](https://help.cloudcraft.co/article/119-component-security-group), and [subnets](https://help.cloudcraft.co/article/120-component-subnet).
+The ElastiCache component can be added to [VPCs][2], [security groups][3], and [subnets][4].
 
 ## Accepted values for instanceType
 
@@ -121,3 +121,8 @@ Each option is represented differently inside the `billingOptions` object.
 - **type: ri**. The billing option value for a reserved instance is always `ri`.
 - **leaseContractLength: number**. The length of time the instance will be reserved. Accepted values are `12` or `36`.
 - **purchaseOption: string**. The purchase option for the instance. Accepted values are `Heavy Utilization`, `No Upfront`, `Partial Upfront`, and `All Upfront`.
+
+[1]: https://developers.cloudcraft.co/
+[2]: https://help.cloudcraft.co/article/118-component-vpc
+[3]: https://help.cloudcraft.co/article/119-component-security-group
+[4]: https://help.cloudcraft.co/article/120-component-subnet

@@ -79,6 +79,9 @@ Here is a quick video showing this idea in action:
 
 You could also combine **Filtered layout** with the **Blueprint link** feature to break down larger environments into multiple diagrams that link to each other. You could even have an overview diagram that provides a quick glance of your whole cloud architecture with no performance penalties.
 
-These examples are just the tip of the iceberg, though. If you want to learn about more ways Cloudcraft can help empower your team, you can [book an online demo with a member of our team over here](https://www.cloudcraft.co/request-demo).
+These examples are just the tip of the iceberg, though. If you want to learn about more ways Cloudcraft can help empower your team, you can [book an online demo with a member of our team over here][1].
 
-If you have any questions, [reach out to our support team](https://app.cloudcraft.co/support), and they will be happy to help.
+If you have any questions, [reach out to our support team][2], and they will be happy to help.
+
+[1]: https://www.cloudcraft.co/request-demo
+[2]: https://app.cloudcraft.co/support

@@ -19,7 +19,7 @@ The toolbar is displayed when selecting a component. It allows you to customize 
 
 ## API
 
-In [the Cloudcraft API](https://developers.cloudcraft.co/), the SNS service is represented in JSON.
+In [the Cloudcraft API][1], the SNS service is represented in JSON.
 
 ```json
 {
@@ -68,3 +68,5 @@ The `notificationType` key accepts the following values:
 ```
 email, email-json, http, https, lambda, mobile, sms, sqs
 ```
+
+[1]: https://developers.cloudcraft.co/

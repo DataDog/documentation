@@ -20,7 +20,7 @@ The toolbar is displayed when selecting a component. It allows you to customize 
 
 ## API
 
-In [the Cloudcraft API](https://developers.cloudcraft.co/), an EBS volume is represented in JSON.
+In [the Cloudcraft API][1], an EBS volume is represented in JSON.
 
 ```json
 {
@@ -66,4 +66,9 @@ In [the Cloudcraft API](https://developers.cloudcraft.co/), an EBS volume is rep
 - **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
 - **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
 
-The EFS component can be added to [VPCs](https://help.cloudcraft.co/article/118-component-vpc), [security groups](https://help.cloudcraft.co/article/119-component-security-group), and [subnets](https://help.cloudcraft.co/article/120-component-subnet).
+The EFS component can be added to [VPCs][2], [security groups][3], and [subnets][4].
+
+[1]: https://developers.cloudcraft.co/
+[2]: https://help.cloudcraft.co/article/118-component-vpc
+[3]: https://help.cloudcraft.co/article/119-component-security-group
+[4]: https://help.cloudcraft.co/article/120-component-subnet

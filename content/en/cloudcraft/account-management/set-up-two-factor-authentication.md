@@ -16,7 +16,7 @@ After setting it up, you will log in to your account in two steps:
 
 ## Enable two-factor authentication
 
-Before starting, you will need to download an authenticator app such as Google Authenticator or [Authy](https://authy.com/) for your phone.
+Before starting, you will need to download an authenticator app such as Google Authenticator or [Authy][1] for your phone.
 
 Now that you have an authenticator app installed on your phone, log in to your Cloudcraft account and click on the **Account** icon, followed by the **User settings** link.
 
@@ -32,7 +32,7 @@ The following window will display a recovery key. We recommend printing and plac
 
 ## Disable two-factor authentication
 
-Before proceeding, please keep in mind that disabling two-factor authentication is not recommended and may lead to overall worse account security. Heimdal Security has an excellent article on [why you should always use two-factor authentication](https://heimdalsecurity.com/blog/start-using-two-factor-authentication/).
+Before proceeding, please keep in mind that disabling two-factor authentication is not recommended and may lead to overall worse account security. Heimdal Security has an excellent article on [why you should always use two-factor authentication][2].
 
 If you are aware of this and still want to proceed, click on the **Account** icon, followed by the **User settings** link.
 
@@ -45,3 +45,6 @@ Click on the **Manage MFA** button and then on the **Disable MFA** one. Two-fact
 Your recovery key is an 18-characters string of numbers and letters displayed only once and can help you get back into your account if you lose access to the device you use to manage two-factor authentication. It acts as a one-time password.
 
 To ensure you always have access to your account, we recommend printing a few copies and storing them somewhere safe, like in your wallet or the middle of a book.
+
+[1]: https://authy.com/
+[2]: https://heimdalsecurity.com/blog/start-using-two-factor-authentication/

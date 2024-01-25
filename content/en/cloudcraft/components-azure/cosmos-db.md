@@ -30,7 +30,7 @@ For the **Cosmos DB** component, the following options are available:
 
 ## API
 
-Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API](https://developers.cloudcraft.co/) provides an interface for you to interact with your Azure account within Cloudcraft by sending and receiving data as JSON objects.
+Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API][1] provides an interface for you to interact with your Azure account within Cloudcraft by sending and receiving data as JSON objects.
 
 ### Schema
 
@@ -72,7 +72,7 @@ The **Cosmos DB** component schema representation follows the format above and d
 - **resourceId: string**. The globally unique identifier for the component within Azure.
 - **region: string**. The Azure region for the component. The API supports all global regions, except China.
 - **mapPos: array**. The position of the component in the blueprint. The API uses a unique X and Y coordinate pair to express positioning.
-- **api: string**. The database API. [See Azure's Cosmos DB documentation for more information](https://learn.microsoft.com/azure/cosmos-db/). Defaults to `sql`.
+- **api: string**. The database API. [See Azure's Cosmos DB documentation for more information][2]. Defaults to `sql`.
 - **capacityMode: string**. The capacity mode for database operations. Accepts one of two values, `provisioned` or `serverless`. Defaults to `provisioned`.
 - **replicationMode: string**. The database replication mode. Accepts one of three values, `standard`, `with-zones`, and `multi-master`. Defaults to `standard`.
 - **requestUnits: number**. The number of request units per second. Defaults to `400`.
@@ -91,3 +91,6 @@ The **Cosmos DB** component schema representation follows the format above and d
   - **2d: string**. A hexadecimal color for the component logo in 2D view. Defaults to `null`.
 - **link: string, uri**. A URI that links the component to another diagram or an external website. Accepts one of two formats, `blueprint://` or `https://`.
 - **locked: boolean**. Whether to allow changes to the position of the component through the web interface. Defaults to `false`.
+
+[1]: https://developers.cloudcraft.co/
+[2]: https://learn.microsoft.com/azure/cosmos-db/

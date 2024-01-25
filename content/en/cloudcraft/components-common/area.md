@@ -19,7 +19,7 @@ The toolbar is displayed when selecting a component. It allows you customize par
 
 ## API
 
-In [the Cloudcraft API](https://developers.cloudcraft.co/), the area component is represented in JSON.
+In [the Cloudcraft API][1], the area component is represented in JSON.
 
 ```json
 {
@@ -59,3 +59,5 @@ In [the Cloudcraft API](https://developers.cloudcraft.co/), the area component i
   - **2d: string**. Edge color for the area in 2D view. Must be an hexadecimal color.
 - **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
 - **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
+
+[1]: https://developers.cloudcraft.co/

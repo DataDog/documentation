@@ -17,7 +17,7 @@ Toggle the **Disabled, the blueprint is private** option to make your diagram pu
 
 {{< img src="cloudcraft/advanced/embed-cloudcraft-diagrams-confluence/shareable-link.png" alt="Screenshot of a Cloudcraft interface for sharing a cloud infrastructure blueprint with options for embedding into Confluence and enabling diagram interactions." responsive="true" style="width:100%;">}}
 
-Copy the generated link to your clipboard and head to your [Confluence dashboard](https://www.atlassian.com/software/confluence).
+Copy the generated link to your clipboard and head to your [Confluence dashboard][1].
 
 <section class="alert alert-danger">
   <p>Anyone with this link can access the content of your blueprint, so make sure to keep it safe; treat it like a password. If you think someone unauthorized had access to the link, click the <strong>Invalidate existing links</strong> button in the <strong>Share blueprint via link</strong> window.</p>
@@ -39,7 +39,7 @@ In the **Select macro** window, search for "iframe" and then select the option t
 
 On the next prompt you will need to configure iFrame macro. The blueprint link you copied earlier is the only required information, but you can customize the macro further if you prefer.
 
-Insert the link you copied earlier in the **URL** field. While not required, some other options, like height, width, and frameborder are highly recommended. [Read the iFrame macro documentation to learn more](https://support.atlassian.com/confluence-cloud/docs/insert-the-iframe-macro/).
+Insert the link you copied earlier in the **URL** field. While not required, some other options, like height, width, and frameborder are highly recommended. [Read the iFrame macro documentation to learn more][2].
 
 {{< img src="cloudcraft/advanced/embed-cloudcraft-diagrams-confluence/configure-iframe.png" alt="Screenshot of an 'Insert Iframe Macro' interface with a preview of iframe content on Confluence." responsive="true" style="width:100%;">}}
 
@@ -51,7 +51,7 @@ And that is it! When publishing or previewing the Confluence page, your Cloudcra
 
 {{< img src="cloudcraft/advanced/embed-cloudcraft-diagrams-confluence/confluence-blueprint.png" alt="Interactive Cloudcraft diagram embedded into a Confluence page via iframe illustrating a network architecture blueprint." responsive="true" style="width:100%;">}}
 
-If you have any questions or trouble with the process, [get in touch with our support team](mailto:support@cloudcraft.co), and we will be happy to help.
+If you have any questions or trouble with the process, [get in touch with our support team][3], and we will be happy to help.
 
 ## Common questions
 
@@ -64,3 +64,7 @@ The shared link feature is disabled by default and is not guessable or subject t
 Together, these security layers make the discovery of links through brute force or any kind of dictionary attacks infeasible, but if the link is inadvertently shared in a public space, like a wiki that is made public, we also instruct web crawlers not to index the shared diagrams to prevent them from, for example, showing up in Google search results.
 
 In summary, treat the link like a strong password: it is not possible for third parties to force or crawl it, but you want to be careful not to give it out accidentally.
+
+[1]: https://www.atlassian.com/software/confluence
+[2]: https://support.atlassian.com/confluence-cloud/docs/insert-the-iframe-macro/
+[3]: https://app.cloudcraft.co/app/support

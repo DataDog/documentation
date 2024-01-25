@@ -30,4 +30,7 @@ The list below includes all Microsoft Azure components Cloudcraft supports.
 
 Assuming we do not support a component you are looking for, the **Design** tab lets you represent anything using blocks, icons, images, and text labels.
 
-You can also [reach out to our support team](https://app.cloudcraft.co/app/support) or [our sales team](mailto:cloudcraft-sales@datadoghq.com) to help us identify which components you need the most.
+You can also [reach out to our support team][1] or [our sales team][2] to help us identify which components you need the most.
+
+[1]: https://app.cloudcraft.co/app/support
+[2]: mailto:cloudcraft-sales@datadoghq.com

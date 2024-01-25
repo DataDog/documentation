@@ -20,7 +20,7 @@ The toolbar is displayed when selecting a component. It allows you to customize 
 
 ## API
 
-In [the Cloudcraft API](https://developers.cloudcraft.co/), an API Gateway is represented in JSON.
+In [the Cloudcraft API][1], an API Gateway is represented in JSON.
 
 ```json
 {
@@ -71,3 +71,5 @@ The `cache` key defaults to `1.6` and accepts the following values:
 ```
 0, 0.5, 1.6, 6.1, 13.5, 28.4, 58.2, 118.0, 237.0
 ```
+
+[1]: https://developers.cloudcraft.co/

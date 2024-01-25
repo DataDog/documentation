@@ -27,7 +27,7 @@ After clicking the button, you need to enter the user's email address and select
 
 {{< img src="cloudcraft/account-management/manage-teams/add-teammate.png" alt="User interface for adding a team member in Cloudcraft with email input and role selection options." responsive="true" style="width:100%;">}}
 
-Selecting the correct role is a critical step in this process, as different roles have different levels of access. Select the role that best fits this user, but try to follow the [principle of least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege).
+Selecting the correct role is a critical step in this process, as different roles have different levels of access. Select the role that best fits this user, but try to follow the [principle of least privilege][1].
 
 Lastly, click the **Send invite** button to invite the user to your team. The user you invited will receive an email that includes a link to join your team and set up their account if they have not already.
 
@@ -102,4 +102,7 @@ To remove a team, simply click on the red **Delete** button and confirm that you
 
 {{< img src="cloudcraft/account-management/manage-teams/delete-team.png" alt="Cloudcraft interface showing a confirmation dialog for deleting a team." responsive="true" style="width:100%;">}}
 
-If you have any questions or trouble with the process, [get in touch with our support team](https://app.cloudcraft.co/app/support), and we will be happy to help.
+If you have any questions or trouble with the process, [get in touch with our support team][2], and we will be happy to help.
+
+[1]: https://en.wikipedia.org/wiki/Principle_of_least_privilege
+[2]: https://app.cloudcraft.co/app/support

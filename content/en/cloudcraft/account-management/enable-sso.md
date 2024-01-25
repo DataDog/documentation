@@ -24,9 +24,9 @@ Head to **User → Security & SSO** inside Cloudcraft.
 
 Next you will need to register Cloudcraft as a new application with your company SAML Identity Provider. To make things easier for you, we have instructions for Okta and Azure AD, as well as for identity providers in general.
 
-- [Enable SSO With Azure AD](https://help.cloudcraft.co/article/90-enable-sso-with-azure-ad)
-- [Enable SSO With Okta](https://help.cloudcraft.co/article/89-enable-sso-with-okta)
-- [Enable SSO With a Generic Identity Provider](https://help.cloudcraft.co/article/91-enable-sso-with-generic-idp)
+- [Enable SSO With Azure AD][1]
+- [Enable SSO With Okta][2]
+- [Enable SSO With a Generic Identity Provider][3]
 
 The details you need to create a new application with your identity provider can be found in the same modal window.
 
@@ -57,3 +57,7 @@ Allow signing in to Cloudcraft directly from your identity provider dashboard.
 With **Strict mode** enabled, all users must log in with SAML SSO. Existing username/password or Google Sign In logins are disabled.
 
 Before enabling this option, please make sure that the SAML SSO login is working properly so that you do not end up locking yourself out.
+
+[1]: https://help.cloudcraft.co/article/90-enable-sso-with-azure-ad
+[2]: https://help.cloudcraft.co/article/89-enable-sso-with-okta
+[3]: https://help.cloudcraft.co/article/91-enable-sso-with-generic-idp

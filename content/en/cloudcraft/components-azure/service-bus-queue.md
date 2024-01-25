@@ -28,7 +28,7 @@ For the **Service Bus Queue** component, the following options are available:
 
 ## API
 
-Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API](https://developers.cloudcraft.co/) provides an interface for you to interact with your Azure account within Cloudcraft by sending and receiving data as JSON objects.
+Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API][1] provides an interface for you to interact with your Azure account within Cloudcraft by sending and receiving data as JSON objects.
 
 ### Schema
 
@@ -80,3 +80,5 @@ The **Service Bus Queue** component schema representation follows the format abo
   - **2d: string**. A hexadecimal color for the component logo in 2D view. Defaults to `null`.
 - **link: string, uri**. A URI that links the component to another diagram or an external website. Accepts one of two formats, `blueprint://` or `https://`.
 - **locked: boolean**. Whether to allow changes to the position of the component through the web interface. Defaults to `false`.
+
+[1]: https://developers.cloudcraft.co/

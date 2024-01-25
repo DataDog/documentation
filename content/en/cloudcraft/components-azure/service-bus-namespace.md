@@ -24,7 +24,7 @@ For the **Service Bus Namespace** component, the following options are available
 
 ## API
 
-Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API](https://developers.cloudcraft.co/) provides an interface for you to interact with your Azure account within Cloudcraft by sending and receiving data as JSON objects.
+Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API][1] provides an interface for you to interact with your Azure account within Cloudcraft by sending and receiving data as JSON objects.
 
 ### Schema
 
@@ -65,7 +65,7 @@ The **Service Bus Namespace** component schema representation follows the format
 - **region: string**. The Azure region for the component. The API supports all global regions, except China.
 - **mapPos: array**. The position of the component in the blueprint. The API uses a unique X and Y coordinate pair to express positioning.
 - **mapSize: array**. The size of the component in the blueprint. The API uses a unique X and Y coordinate pair to express size.
-- **nodes: array**. The services running inside the namespace. Accepts an array of unique identifiers for the [Service Bus Queue](https://help.cloudcraft.co/article/189-component-service-bus-queue) and [Service Bus Topic](https://help.cloudcraft.co/article/190-component-service-bus-topic) components.
+- **nodes: array**. The services running inside the namespace. Accepts an array of unique identifiers for the [Service Bus Queue][2] and [Service Bus Topic][3] components.
 - **name: string**. The name of the namespace. Defaults to `Namespace`.
 - **tier: string**. The service tier for the namespace. Accepts one of three values, `Basic`, `Standard`, and `Premium`. Defaults to `Basic`.
 - **messagingUnits: number**. The number of messaging units available for the namespace. Accepts a number from `1` to `16`. Defaults to `1`.
@@ -77,3 +77,7 @@ The **Service Bus Namespace** component schema representation follows the format
   - **2d: string**. A hexadecimal color for the component logo in 2D view. Defaults to `null`.
 - **link: string, uri**. A URI that links the component to another diagram or an external website. Accepts one of two formats, `blueprint://` or `https://`.
 - **locked: boolean**. Whether to allow changes to the position of the component through the web interface. Defaults to `false`.
+
+[1]: https://developers.cloudcraft.co/
+[2]: https://help.cloudcraft.co/article/189-component-service-bus-queue
+[3]: https://help.cloudcraft.co/article/190-component-service-bus-topic

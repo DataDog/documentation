@@ -15,4 +15,6 @@ Invoice payment methods include:
 - **Europe:** SEPA and SWIFT bank transfers in EUR
 - **Australia:** Local bank transfers in AUD
 
-[Cloudcraft is also available on the AWS Marketplace](https://aws.amazon.com/marketplace/pp/B08KBV31ZM) as an annual subscription, with the charges being included in your regular AWS invoice.
+[Cloudcraft is also available on the AWS Marketplace][1] as an annual subscription, with the charges being included in your regular AWS invoice.
+
+[1]: https://aws.amazon.com/marketplace/pp/B08KBV31ZM

@@ -20,7 +20,7 @@ The toolbar is displayed when selecting a component, and allow you to customize 
 
 ## API
 
-In [the Cloudcraft API](https://developers.cloudcraft.co/), a text label is represented in JSON.
+In [the Cloudcraft API][1], a text label is represented in JSON.
 
 ```json
 {
@@ -56,3 +56,5 @@ In [the Cloudcraft API](https://developers.cloudcraft.co/), a text label is repr
   - **2d: string**. Fill color for the component in 2D view. Must be an hexadecimal color.
 - **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
 - **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
+
+[1]: https://developers.cloudcraft.co/

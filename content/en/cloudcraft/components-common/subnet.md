@@ -18,7 +18,7 @@ The toolbar is displayed when selecting a component. It allows you to customize 
 
 ## API
 
-In [the Cloudcraft API](https://developers.cloudcraft.co/), the subnet component is represented in JSON.
+In [the Cloudcraft API][1], the subnet component is represented in JSON.
 
 ```json
 {
@@ -68,3 +68,5 @@ In addition to the AWS components, the following common components are can also 
 ```
 block, isotext, icon, image, area
 ```
+
+[1]: https://developers.cloudcraft.co/

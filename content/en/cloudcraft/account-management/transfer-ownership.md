@@ -5,7 +5,7 @@ kind: guide
 
 When creating a team in Cloudcraft account, you are automatically permissioned as an owner role. As an owner of a team, you are the only user who may manage subscription information. Payment information includes payment details, and the number of users your organization's license supports.
 
-In special cases, a user account, team, and blueprint assets may need tobe transferred to a different or new user entirely. This article will guide you through the transfer process.
+In special cases, a user account, team, and blueprint assets may need to be transferred to a different or new user entirely. This article will guide you through the transfer process.
 
 <section class="alert alert-info">
   <p>This article refers to transferring ownership of team accounts. If you have a single user account, please refer to our documentation on updating your user profile.</p>
@@ -31,7 +31,7 @@ For a faster turn around, give us as much information as possible in the **Messa
 - Does he already have an account with us?
 - Do you want to delete your credit card information, or does the new owner get to keep it in the account?
 
-The new owner will need to have a Cloudcraft account before we can make the transfer. You may direct them to [our sign up page](https://app.cloudcraft.co/signup).
+The new owner will need to have a Cloudcraft account before we can make the transfer. You may direct them to [our sign up page][1].
 
 ## If you do not have account access
 
@@ -39,7 +39,7 @@ If you do not have access to the account, but still need to transfer ownership t
 
 For security and privacy reasons, we cannot divulge any account information without first confirming some account details.
 
-[Get in touch with our support team to get the process started](mailto:support@cloudcraft.co), but please have the following information ready before contacting us:
+[Get in touch with our support team to get the process started][2], but please have the following information ready before contacting us:
 
 - Email of the previous account owner.
 - Email of the new account owner.
@@ -48,3 +48,6 @@ For security and privacy reasons, we cannot divulge any account information with
 - The date, and amount of the last charge from us.
 
 Once we have this information, we will work with you towards a successful account transfer.
+
+[1]: https://app.cloudcraft.co/signup
+[2]: https://app.cloudcraft.co/app/support

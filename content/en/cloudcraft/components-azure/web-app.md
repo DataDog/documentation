@@ -24,7 +24,7 @@ For the **Web App** component, the following options are available:
 
 ## API
 
-Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API](https://developers.cloudcraft.co/) provides an interface for you to interact with your Azure account within Cloudcraft by sending and receiving data as JSON objects.
+Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API][1] provides an interface for you to interact with your Azure account within Cloudcraft by sending and receiving data as JSON objects.
 
 ### Schema
 
@@ -104,3 +104,5 @@ Premium v2  | P1 v2, P2 v2, P3 v2
 Premium v3  | P0v3, P1 v3, P1mv3, P2 v3, P2mv3, P3 v3, P3mv3, P4mv3, P5mv3
 Shared      | D1
 Standard    | S1, S2, S3
+
+[1]: https://developers.cloudcraft.co/

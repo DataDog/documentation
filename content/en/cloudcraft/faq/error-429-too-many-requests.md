@@ -3,7 +3,7 @@ title: Why do I get error 429 Too Many Requests when using the API?
 kind: guide
 ---
 
-The [Cloudcraft API](https://developers.cloudcraft.co/) will return an <code>HTTP 429 Too Many Requests</code> response when you trigger the rate limit in place for the endpoint you called.
+The [Cloudcraft API][1] will return an <code>HTTP 429 Too Many Requests</code> response when you trigger the rate limit in place for the endpoint you called.
 
 **Current limits:**
 
@@ -17,4 +17,7 @@ Our platform relies on these limits to maintain service quality for all users, a
 You can take a few precautions to avoid triggering the rate limit currently in place.
 
 1. Ensure the resources accessed are unique. If the same account or blueprint is repeatedly accessed, only access it once within the rate limiting period and cache the result locally.
-2. Implement rate limit detection with [exponential backoff](https://docs.aws.amazon.com/general/latest/gr/api-retries.html). The request is never processed when hitting the limit, so try to detect the <code>HTTP 429 Too Many Requests</code> response from the API and wait 60 seconds before continuing.
+2. Implement rate limit detection with [exponential backoff][2]. The request is never processed when hitting the limit, so try to detect the <code>HTTP 429 Too Many Requests</code> response from the API and wait 60 seconds before continuing.
+
+[1]: https://developers.cloudcraft.co/
+[2]: https://docs.aws.amazon.com/general/latest/gr/api-retries.html

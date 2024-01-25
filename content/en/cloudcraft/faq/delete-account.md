@@ -17,4 +17,6 @@ If you are absolutely certain that you want to proceed, remember that there is n
 
 The process of deleting a paid account is currently only possible from our side, and it takes effect immediately.
 
-If that is what you want, please [get in touch with our support team from inside Cloudcraft](https://app.cloudcraft.co/support), and they will handle this for you.
+If that is what you want, please [get in touch with our support team from inside Cloudcraft][1], and they will handle this for you.
+
+[1]: https://app.cloudcraft.co/support

@@ -19,7 +19,7 @@ The toolbar is displayed when selecting a component. It allows you to customize 
 
 ## API
 
-In [the Cloudcraft API](https://developers.cloudcraft.co/), the security group component is represented in JSON.
+In [the Cloudcraft API][1], the security group component is represented in JSON.
 
 ```json
 {
@@ -144,3 +144,5 @@ The `inboundRules` and `outboundRules` keys accept an array with rule represente
 - **targetType: string**. The type of source used for `target`. Accepted values are `ip` or `sg`.
 - **description: string**. A short description for the inbound or outbound rule.
 - **hidden: boolean**. If true, the inbound or outbound rule is not displayed in the diagram. Refer to the feature image at the top to see how it is displayed. Defaults to false.
+
+[1]: https://developers.cloudcraft.co/

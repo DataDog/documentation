@@ -21,7 +21,7 @@ The toolbar is displayed when selecting a component. It allows you to customize 
 
 ## API
 
-In [the Cloudcraft API](https://developers.cloudcraft.co/), an FSx file system is represented in JSON.
+In [the Cloudcraft API][1], an FSx file system is represented in JSON.
 
 ```json
 {
@@ -67,8 +67,7 @@ In [the Cloudcraft API](https://developers.cloudcraft.co/), an FSx file system i
 - **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
 - **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
 
-The FSx component can be added to VPCs, security groups, and subnets.
-The FSx component can be added to [VPCs](https://help.cloudcraft.co/article/118-component-vpc), [security groups](https://help.cloudcraft.co/article/119-component-security-group), and [subnets](https://help.cloudcraft.co/article/120-component-subnet).
+The FSx component can be added to [VPCs][2], [security groups][3], and [subnets][4].
 
 ## Accepted values for throughputCapacity
 
@@ -79,3 +78,8 @@ The `throughputCapacity` key accepts the following values:
 ```
 
 The `throughputCapacity` key is only applicable if `fileSystemType` is set to `windows`.
+
+[1]: https://developers.cloudcraft.co/
+[2]: https://help.cloudcraft.co/article/118-component-vpc
+[3]: https://help.cloudcraft.co/article/119-component-security-group
+[4]: https://help.cloudcraft.co/article/120-component-subnet

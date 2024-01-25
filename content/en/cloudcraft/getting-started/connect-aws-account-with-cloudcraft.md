@@ -9,15 +9,15 @@ This article will walk you through connecting your AWS account to Cloudcraft.
 
 ## Requirements
 
-- A Cloudcraft user with the [Owner or Administrator role](https://help.cloudcraft.co/article/85-roles-and-permissions).
-- An active [Cloudcraft Pro subscription](https://www.cloudcraft.co/pricing).
+- A Cloudcraft user with the [Owner or Administrator role][1].
+- An active [Cloudcraft Pro subscription][2].
 - An AWS account with permission to create IAM roles.
 
 ## How the live AWS sync works
 
-Cloudcraft uses a [cross-account role to access your AWS environment](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html), the secure way to access your AWS environment. As a result, you will need to create a Cloudcraft-specific, read-only role on your AWS account. This role can be revoked at any time.
+Cloudcraft uses a [cross-account role to access your AWS environment][3], the secure way to access your AWS environment. As a result, you will need to create a Cloudcraft-specific, read-only role on your AWS account. This role can be revoked at any time.
 
-If having a read-only role with access to all components isn't permissible or violates your company's policies, you also have the option to [attach a stricter minimal access policy](https://help.cloudcraft.co/article/64-minimal-iam-policy), only giving read-only access to the resources you want to use with Cloudcraft, further minimizing the amount of data the role can access.
+If having a read-only role with access to all components isn't permissible or violates your company's policies, you also have the option to [attach a stricter minimal access policy][4], only giving read-only access to the resources you want to use with Cloudcraft, further minimizing the amount of data the role can access.
 
 Cloudcraft also doesn't keep any of the live data from your AWS environment; ARNs, which are unique identifiers for resources in AWS, are stored instead, which allow the application to link live data to components at runtime.
 
@@ -25,7 +25,7 @@ The data from your AWS environment is streamed in real-time to your browser via 
 
 While not having write access to your account prevents us from offering certain features—like deleting an EC2 instance on both the diagram and your account—, it's simply a more secure approach.
 
-We implement rigorous security processes and controls in our SOC2 compliance program. You can read more about Cloudcraft's security program and controls on [our security page](https://www.cloudcraft.co/security).
+We implement rigorous security processes and controls in our SOC2 compliance program. You can read more about Cloudcraft's security program and controls on [our security page][5].
 
 ## Manage AWS accounts
 
@@ -67,7 +67,7 @@ The next screen allows you to name, provide a description for, and review your n
 
 {{< img src="cloudcraft/getting-started/connect-aws-account-with-cloudcraft/review-iam-role.png" alt="AWS console IAM role creation screen with fields for naming and describing the new role for Cloudcraft integration." responsive="true" style="width:100%;">}}
 
-You can also add tags to organize, track, or control access for this role. Tagging your role is optional, but feel free to read [tagging best practices](https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf) and use the feature if you prefer.
+You can also add tags to organize, track, or control access for this role. Tagging your role is optional, but feel free to read [tagging best practices][6] and use the feature if you prefer.
 
 If everything looks good to you, click **Create role** button, which will, you guessed it, create the role we just configured.
 
@@ -119,4 +119,12 @@ No, you would need to add the Cloudcraft role to each individual account under t
 
 <hr>
 
-If you have any questions or trouble with the process, [get in touch with our support team](https://app.cloudcraft.co/app/support), and we will be happy to help.
+If you have any questions or trouble with the process, [get in touch with our support team][7], and we will be happy to help.
+
+[1]: https://help.cloudcraft.co/article/85-roles-and-permissions
+[2]: https://www.cloudcraft.co/pricing
+[3]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
+[4]: https://help.cloudcraft.co/article/64-minimal-iam-policy
+[5]: https://www.cloudcraft.co/security
+[6]: https://d1.awsstatic.com/whitepapers/aws-tagging-best-practices.pdf
+[7]: https://app.cloudcraft.co/app/support

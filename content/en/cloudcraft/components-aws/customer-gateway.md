@@ -17,7 +17,7 @@ The toolbar is displayed when selecting a component. It allows you to customize 
 
 ## API
 
-In [the Cloudcraft API](https://developers.cloudcraft.co/), the customer gateway component is represented in JSON.
+In [the Cloudcraft API][1], the customer gateway component is represented in JSON.
 
 ```json
 {
@@ -53,4 +53,7 @@ In [the Cloudcraft API](https://developers.cloudcraft.co/), the customer gateway
 - **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
 - **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
 
-The customer gateway component can only be added to [VPCs](https://help.cloudcraft.co/article/118-component-vpc).
+The customer gateway component can only be added to [VPCs][2].
+
+[1]: https://developers.cloudcraft.co/
+[2]: https://help.cloudcraft.co/article/118-component-vpc

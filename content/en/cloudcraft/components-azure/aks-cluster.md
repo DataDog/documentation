@@ -23,7 +23,7 @@ For the **AKS Cluster** component, the following options are available:
 
 ## API
 
-Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API](https://developers.cloudcraft.co/) provides an interface for you to interact with your AWS account within Cloudcraft by sending and receiving data as JSON objects.
+Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API][1] provides an interface for you to interact with your AWS account within Cloudcraft by sending and receiving data as JSON objects.
 
 ### Schema
 
@@ -62,7 +62,7 @@ The **AKS Cluster** component schema representation follows the format above and
 - **region: string**. The Azure region for the component. The API supports all global regions, except China.
 - **mapPos: array**. The position of the component in the blueprint. The API uses a unique X and Y coordinate pair to express positioning.
 - **mapSize: array**. The size of the component in the blueprint. The API uses a unique width and height pair to express sizing.
-- **nodes: array**. The workloads running inside the cluster. Accepts an array of unique identifiers for [the AKS Workload component](https://help.cloudcraft.co/article/217-component-aks-workload).
+- **nodes: array**. The workloads running inside the cluster. Accepts an array of unique identifiers for [the AKS Workload component][2].
 - **name: string**. The name of the cluster. Defaults to `AKS Cluster`.
 - **tier: string**. The tier of the cluster. Accepts one of three values, `free`, `standard`, or `premium`. Defaults to `standard`.
 - **color: object**. The fill color for the component body.
@@ -73,3 +73,6 @@ The **AKS Cluster** component schema representation follows the format above and
   - **2d: string**. A hexadecimal color for the component logo in 2D view. Defaults to `#0078D4`.
 - **link: string, uri**. A URI that links the component to another diagram or an external website. Accepts one of two formats, `blueprint://` or `https://`.
 - **locked: boolean**. Whether to allow changes to the position of the component through the web interface. Defaults to `false`.
+
+[1]: https://developers.cloudcraft.co/
+[2]: https://help.cloudcraft.co/article/217-component-aks-workload

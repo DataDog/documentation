@@ -23,7 +23,7 @@ For the **AKS Workload** component, the following options are available:
 
 ## API
 
-Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API](https://developers.cloudcraft.co/) provides an interface for you to interact with your AWS account within Cloudcraft by sending and receiving data as JSON objects.
+Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API][1] provides an interface for you to interact with your AWS account within Cloudcraft by sending and receiving data as JSON objects.
 
 ### Schema
 
@@ -64,7 +64,7 @@ The **AKS Workload** component schema representation follows the format above an
 - **region: string**. The Azure region for the component. The API supports all global regions, except China.
 - **mapPos: array**. The position of the component in the blueprint. The API uses a unique X and Y coordinate pair to express positioning.
 - **mapSize: array**. The size of the component in the blueprint. The API uses a unique width and height pair to express sizing.
-- **nodes: array**. The application containers inside the workload. Accepts an array of unique identifiers for [the AKS Pod component](https://help.cloudcraft.co/article/218-component-aks-pod).
+- **nodes: array**. The application containers inside the workload. Accepts an array of unique identifiers for [the AKS Pod component][2].
 - **name: string**. The name of the workload. Defaults to `AKS Workload`.
 - **workloadType: string**. The type of workload inside the cluster. [See below for more information](#accepted-values-for-workloadType). Defaults to `deployment`.
 - **color: object**. The fill color for the component body.
@@ -83,3 +83,6 @@ The `workloadType` key accepts one of the following string values:
 ```
 deployment, statefulSet, daemonSet, job, cronJob
 ```
+
+[1]: https://developers.cloudcraft.co/
+[2]: https://help.cloudcraft.co/article/218-component-aks-pod

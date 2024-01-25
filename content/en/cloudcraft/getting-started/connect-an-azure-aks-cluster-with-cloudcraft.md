@@ -17,7 +17,7 @@ Before connecting your Azure AKS clusters with Cloudcraft, you need to connect y
 
 Linked below, you will find documentation to help you connect your Azure account and familiarize yourself with Cloudcraft.
 
-- [Connect your Azure account with Cloudcraft](https://help.cloudcraft.co/article/103-connect-azure-account-with-cloudcraft)
+- [Connect your Azure account with Cloudcraft][1]
 
 ## Authorizing the Cloudcraft IAM user for view-only access
 
@@ -48,3 +48,5 @@ Head back to Cloudcraft and click the **Test cluster access** button at the bott
 {{< img src="cloudcraft/getting-started/connect-an-azure-aks-cluster-with-cloudcraft/test-cluster-access.png" alt="Screenshot of Cloudcraft Enable Kubernetes Cluster Scanning interface with instructions and Test Cluster Access button." responsive="true" style="width:100%;">}}
 
 That's it! Assuming the test passed, Cloudcraft should be able to visualize workloads and pods for your Azure AKS clusters.
+
+[1]: https://help.cloudcraft.co/article/103-connect-azure-account-with-cloudcraft

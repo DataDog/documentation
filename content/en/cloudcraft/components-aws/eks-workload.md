@@ -27,7 +27,7 @@ For the **EKS Workload** component, the following options are available:
 
 ## API
 
-Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API](https://developers.cloudcraft.co/) provides an interface for you to interact with your AWS account within Cloudcraft by sending and receiving data as JSON objects.
+Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API][1] provides an interface for you to interact with your AWS account within Cloudcraft by sending and receiving data as JSON objects.
 
 ### Schema
 
@@ -62,8 +62,8 @@ The **EKS Workload** component schema representation follows the format above an
 
 - **type: string**. The type of component. Must be a string of value `eksworkload` for this component.
 - **id: string, uuid**. The unique identifier for the component. The API uses a UUID v4 internally but accepts any unique string.
-- **arn: string**. The globally unique identifier for the component within AWS, known as [Amazon Resource Names](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-- **region: string**. The AWS region for the component. The API supports all global regions, [except for AWS China](https://help.cloudcraft.co/article/110-scan-error-aws-china-region).
+- **arn: string**. The globally unique identifier for the component within AWS, known as [Amazon Resource Names][2].
+- **region: string**. The AWS region for the component. The API supports all global regions, [except for AWS China][3].
 - **mapPos: array**. The position of the component in the blueprint. The API uses a unique X and Y coordinate pair to express positioning.
 - **name: string**. The name of the workload. Defaults to `EKS Workload`.
 - **workloadType: string**. The type of the workload on the cluster. [See below for more information](#accepted-values-for-workloadType). Defaults to `deployment`.
@@ -84,3 +84,7 @@ The `workloadType` key accepts one of the following string values:
 ```
 deployment, statefulSet, daemonSet, job, cronJob
 ```
+
+[1]: https://developers.cloudcraft.co/
+[2]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+[3]: https://help.cloudcraft.co/article/110-scan-error-aws-china-region

@@ -17,8 +17,14 @@ We also perform automatic throttling and temporary lockout of accounts at 10 gue
 
 **These are our suggestions for keeping your data safe:**
 
-1. Use a password manager like [1Password](https://1password.com/) or [Bitwarden](https://bitwarden.com/). They make it much easier to create and use long, complex passwords that are unique for each website you use.
-2. Subscribe to a breach notification service like [Have I Been Pwned](https://haveibeenpwned.com/) so you are notified if a service you use experiences a security breach. This is a free service, by the way.
-3. [Turn on two-factor authentication (2FA)](https://help.cloudcraft.co/article/28-set-up-two-factor-authentication) wherever you can! We offer 2FA protection for Cloudcraft and most services that deal with sensitive information do too.
+1. Use a password manager like [1Password][1] or [Bitwarden][2]. They make it much easier to create and use long, complex passwords that are unique for each website you use.
+2. Subscribe to a breach notification service like [Have I Been Pwned][3] so you are notified if a service you use experiences a security breach. This is a free service, by the way.
+3. [Turn on two-factor authentication (2FA)][4] wherever you can! We offer 2FA protection for Cloudcraft and most services that deal with sensitive information do too.
 
-Mozilla, the company behind the web browser Firefox, has [a great article on this subject](https://blog.mozilla.org/en/privacy-security/privacy-security-tips/how-to-create-strong-passwords/).
+Mozilla, the company behind the web browser Firefox, has [a great article on this subject][5].
+
+[1]: https://1password.com/
+[2]: https://bitwarden.com/
+[3]: https://haveibeenpwned.com/
+[4]: https://help.cloudcraft.co/article/28-set-up-two-factor-authentication
+[5]: https://blog.mozilla.org/en/privacy-security/privacy-security-tips/how-to-create-strong-passwords/

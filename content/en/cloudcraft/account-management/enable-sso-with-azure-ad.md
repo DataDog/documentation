@@ -7,10 +7,10 @@ Enabling Single Sign-On (SSO) with Azure AD as your identity provider allows you
 
 This article will help you get set up if your identity provider is Azure AD. We have additional articles for other providers.
 
-- [Enable SSO With Okta](https://help.cloudcraft.co/article/89-enable-sso-with-okta)
-- [Enable SSO With a Generic Identity Provider](https://help.cloudcraft.co/article/91-enable-sso-with-generic-idp)
+- [Enable SSO With Okta][1]
+- [Enable SSO With a Generic Identity Provider][2]
 
-For more general information on using SSO with Cloudcraft, check out [Enable SSO in Your Account](https://help.cloudcraft.co/article/88-enable-sso).
+For more general information on using SSO with Cloudcraft, check out [Enable SSO in Your Account][3].
 
 ## Setting up SAML/SSO
 
@@ -70,7 +70,7 @@ Head back to Cloudcraft, and upload your metadata XML file into the blue dotted 
 
 Lastly, toggle the **SAML Single Sign-On is enabled** option, and head back to the Azure portal. Click the **Test** button under the **Test single sign-on with Cloudcraft** section to test your integration.
 
-Now is a good time to grant access to all the relevant users within your organization. You can find instructions on how to do that [in the Azure AD documentation](https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/assign-user-or-group-access-portal).
+Now is a good time to grant access to all the relevant users within your organization. You can find instructions on how to do that [in the Azure AD documentation][4].
 
 Once you have verified that the SSO login is working as expected, if you prefer to have your users access Cloudcraft only via Azure AD, enable the **Strict mode** option, which disables all other login methods.
 
@@ -78,4 +78,10 @@ Once you have verified that the SSO login is working as expected, if you prefer 
 
 We suggest testing the integration before announcing it to your team, to ensure that everything works as expected.
 
-If you have any questions or trouble with the process, [get in touch with our support team](https://app.cloudcraft.co/support) and we will be happy to help.
+If you have any questions or trouble with the process, [get in touch with our support team][5] and we will be happy to help.
+
+[1]: https://help.cloudcraft.co/article/89-enable-sso-with-okta
+[2]: https://help.cloudcraft.co/article/91-enable-sso-with-generic-idp
+[3]: https://help.cloudcraft.co/article/88-enable-sso
+[4]: https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/assign-user-or-group-access-portal
+[5]: https://app.cloudcraft.co/support
