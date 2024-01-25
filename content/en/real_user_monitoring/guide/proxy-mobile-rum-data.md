@@ -13,7 +13,7 @@ further_reading:
 
 The RUM Mobile SDKs can be configured to send requests through a proxy.
 
-Proxies use under the hood [OkHttpClient Proxy and Authenticator][2] on Android and [URLSessionConfiguration.connectionProxyDictionary][3] on iOS.
+Proxies use [OkHttpClient Proxy and Authenticator][2] on Android and [URLSessionConfiguration.connectionProxyDictionary][3] on iOS.
 
 ## HTTP/HTTPS proxy
 
@@ -34,8 +34,8 @@ val configBuilder = Configuration.Builder(
     env = "<environment>"
 )
 
-val proxy = Proxy(Proxy.Type.HTTP, InetSocketAddress("www.example.com", 123))
-val authenticator = ProxyAuthenticator("proxyuser", "proxypass")
+val proxy = Proxy(Proxy.Type.HTTP, InetSocketAddress("<www.example.com>", <123>))
+val authenticator = ProxyAuthenticator("<proxy user>", "<proxy password>")
 
 configBuilder.setProxy(proxy, authenticator)
 ```
@@ -58,10 +58,10 @@ Datadog.initialize(
     env: "<environment>",
     proxyConfiguration: [
         kCFNetworkProxiesHTTPEnable: true,
-        kCFNetworkProxiesHTTPPort: 123,
-        kCFNetworkProxiesHTTPProxy: "www.example.com",
-        kCFProxyUsernameKey: "proxyuser",
-        kCFProxyPasswordKey: "proxypass"
+        kCFNetworkProxiesHTTPPort: <123>,
+        kCFNetworkProxiesHTTPProxy: "<www.example.com>",
+        kCFProxyUsernameKey: "<proxy user>",
+        kCFProxyPasswordKey: "<proxy password>"
     ]
   ),
   trackingConsent: trackingConsent
@@ -82,7 +82,7 @@ import { DatadogProviderConfiguration, ProxyConfiguration, ProxyType } from '@da
 
 const config = new DatadogProviderConfiguration('<client token>', '<environment>', '<application id>');
 
-config.proxyConfig = new ProxyConfiguration(ProxyType.HTTPS, 'www.example.com', 123, 'proxyuser', 'proxypass');
+config.proxyConfig = new ProxyConfiguration(ProxyType.HTTPS, '<www.example.com>', <123>, '<proxy user>', '<proxy password>');
 ```
 
 {{% /tab %}}
@@ -106,8 +106,8 @@ val configBuilder = Configuration.Builder(
     env = "<environment>"
 )
 
-val proxy = Proxy(Proxy.Type.SOCKS, InetSocketAddress("www.example.com", 123))
-val authenticator = ProxyAuthenticator("proxyuser", "proxypass")
+val proxy = Proxy(Proxy.Type.SOCKS, InetSocketAddress("<www.example.com>", <123>))
+val authenticator = ProxyAuthenticator("<proxy user>", "<proxy password>")
 
 configBuilder.setProxy(proxy, authenticator)
 ```
@@ -129,10 +129,10 @@ Datadog.initialize(
     env: "<environment>",
     proxyConfiguration: [
         kCFNetworkProxiesSOCKSEnable: true,
-        kCFNetworkProxiesSOCKSPort: 123,
-        kCFNetworkProxiesSOCKSProxy: "www.example.com",
-        kCFProxyUsernameKey: "proxyuser",
-        kCFProxyPasswordKey: "proxypass"
+        kCFNetworkProxiesSOCKSPort: <123>,
+        kCFNetworkProxiesSOCKSProxy: "<www.example.com>",
+        kCFProxyUsernameKey: "<proxy user>",
+        kCFProxyPasswordKey: "<proxy password>"
     ]
   ),
   trackingConsent: trackingConsent
@@ -153,7 +153,7 @@ import { DatadogProviderConfiguration, ProxyConfiguration, ProxyType } from '@da
 
 const config = new DatadogProviderConfiguration('<client token>', '<environment>', '<application id>');
 
-config.proxyConfig = new ProxyConfiguration(ProxyType.SOCKS, 'www.example.com', 123, 'proxyuser', 'proxypass');
+config.proxyConfig = new ProxyConfiguration(ProxyType.SOCKS, '<www.example.com>', <123>, '<proxy user>', '<proxy password>');
 ```
 
 {{% /tab %}}
