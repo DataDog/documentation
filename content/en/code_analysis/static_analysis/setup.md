@@ -29,11 +29,15 @@ further_reading:
 
 ## Overview
 
-To use Datadog Static Analysis, add a `static-analysis.datadog.yml` file to your repository's root directory to specify the rulesets for your programming language(s) for your repository.
+To use Datadog Static Analysis, add a `static-analysis.datadog.yml` file to your repository's root directory and specify which rulesets you want to include for your programming language(s).
+
+Select one or multiple programming languages and choose which rulesets you want to copy and use on the [Code Analysis Setup page][8]. 
+
+{{< img src="code_analysis/static_analysis/apply_python_rulesets.png" alt="Copy and paste the Code Quality and Security rulesets from the available options for Python on the Code Analysis Setup page" style="width:100%;">}} 
 
 ## Add a Static Analysis YAML file to your project
 
-A `static-analysis.datadog.yml` file supports the following options:
+You can include the following options in the `static-analysis.datadog.yml` file:
 
 | Name               | Description                                                                               | Required | Default |
 |--------------------|-------------------------------------------------------------------------------------------|----------|---------|
@@ -41,7 +45,21 @@ A `static-analysis.datadog.yml` file supports the following options:
 | `ignore-paths`     | A list of relative paths to ignore. It supports using globbing patterns.                  | `false`  |         |
 | `ignore-gitignore` | Determines whether Datadog Static Analysis analyzes the content in a `.gitignore` file.   | `false`  | `false` |
 
-For example, this `static-analysis.datadog.yml` file contains Python and JavaScript rulesets for code quality and security:
+For example, you can use the following:
+
+```yaml
+rulesets:
+  - python-best-practices
+  - python-security
+  - python-code-style
+  - python-inclusive
+  - python-design
+ignore-paths:
+  - "path/to/ignore"
+  - "**.js"
+```
+
+This example contains Python and JavaScript rulesets for code quality and security:
 
 ```yaml
 rulesets: 
@@ -219,3 +237,4 @@ bar = 2
 [5]: /code_analysis/github_pull_requests/
 [6]: /code_analysis/static_analysis/rules
 [7]: /getting_started/site/
+[8]: https://app.datadoghq.com/ci/setup/static-analysis
