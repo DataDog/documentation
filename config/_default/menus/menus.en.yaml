@@ -535,11 +535,16 @@ main:
     pre: open-telemetry
     parent: essentials_heading
     weight: 60000
+  - name: Getting Started
+    url: getting_started/opentelemetry/
+    identifier: getting_started_otel_dd
+    parent: opentelemetry_top_level
+    weight: 1
   - name: Set Up the Collector
     url: opentelemetry/collector_exporter/
     identifier: otel_gs_collector
     parent: opentelemetry_top_level
-    weight: 1
+    weight: 2
   - name: Hostnames and Tagging
     url: opentelemetry/collector_exporter/hostname_tagging/
     identifier: otel_gs_tagging
@@ -584,12 +589,12 @@ main:
     url: opentelemetry/otlp_ingest_in_the_agent/
     identifier: otel_ingest_agent
     parent: opentelemetry_top_level
-    weight: 2
+    weight: 3
   - name: Runtime Metrics
     url: opentelemetry/runtime_metrics
     identifier: otel_runtime_metrics
     parent: opentelemetry_top_level
-    weight: 3
+    weight: 4
   - name: Java
     url: opentelemetry/runtime_metrics/java
     identifier: otel_runtime_metrics_java
