@@ -75,16 +75,18 @@ Identify and remove prohibited libraries that you have imported into your codeba
 {{< img src="code_analysis/shopist_lib_list.png" alt="A list of libraries on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
 
 [101]: https://app.datadoghq.com/ci/code-analysis
-
 {{% /tab %}}
 {{< /tabs >}}
 
-## Setup
+## Set up a repository
 
-{{< whatsnext desc="You can identify code quality violations and vulnerable dependencies for supported languages in Datadog by using:" >}}
-  {{< nextlink href="/code_analysis/static_analysis" >}}<u>Static Analysis</u>: Scan the source code of a repository for code quality/maintainability issues or security vulnerabilities. {{< /nextlink >}}
-  {{< nextlink href="/code_analysis/software_composition_analysis" >}}<u>Software Composition Analysis</u>: Scan open source libraries imported from a repository for vulnerabilities. {{< /nextlink >}}
-{{< /whatsnext >}}
+Select a programming language to add Code Analysis to your project:
+
+{{< partial name="code_analysis/languages-getting-started.html" >}}
+
+</br>
+
+For more information about Static Analysis rulesets, see [Static Analysis Rules][6].
 
 ## Further Reading
 
@@ -95,4 +97,4 @@ Identify and remove prohibited libraries that you have imported into your codeba
 [3]: /developers/ide_integrations/vscode/#static-analysis
 [4]: /developers/ide_integrations/idea/#static-analysis
 [5]: /code_analysis/github_pull_requests/
-
+[6]: /code_analysis/static_analysis/rules
