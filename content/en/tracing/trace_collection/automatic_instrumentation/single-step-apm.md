@@ -38,8 +38,9 @@ For an Ubuntu host:
          <li><a href="#env-linux">Tagging observability data by environment.</a></li>
       </ul>
    </div>
-2. Restart the services on the host or VM.
-3. [Explore the performance observability of your services in Datadog][5].
+2. Open a new terminal session.
+3. Restart the services on the host or VM.
+4. [Explore the performance observability of your services in Datadog][5].
 
 ### Specifying tracing library versions {#lib-linux}
 
