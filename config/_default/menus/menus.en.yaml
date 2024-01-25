@@ -4589,11 +4589,16 @@ main:
     url: data_security/real_user_monitoring/
     parent: data_security
     weight: 6
+  - name: PCI Compliance
+    identifier: data_security_pci_compliance
+    url: data_security/pci_compliance/
+    parent: data_security
+    weight: 7
   - name: Guides
     identifier: data_security_guide
     url: data_security/guide/
     parent: data_security
-    weight: 7
+    weight: 8
   - name: Sensitive Data Scanner
     url: sensitive_data_scanner/
     pre: sensitive-data-scanner
