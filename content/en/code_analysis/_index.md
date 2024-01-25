@@ -1,7 +1,7 @@
 ---
 title: Code Analysis
 kind: documentation
-description: Learn about Datadog Code Analysis.
+description: Learn how to use Datadog Code Analysis to address maintainability issues, bugs, and security vulnerabilities in development and at runtime to prevent customer impact.
 is_beta: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
@@ -13,9 +13,10 @@ further_reading:
 - link: "/code_analysis/static_analysis"
   tag: "Documentation"
   text: "Learn about Static Analysis"
+- link: "/code_analysis/software_composition_analysis"
+  tag: "Documentation"
+  text: "Learn about Software Composition Analysis"
 ---
-
-## Overview
 
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
@@ -23,42 +24,75 @@ further_reading:
 </div>
 {{% /site-region %}}
 
-Code Analysis is Static Analysis and Software Composition Analysis (SCA) combined.
+{{< callout url="#" btn_hidden="true" >}}
+Code Analysis is in public beta.
+{{< /callout >}}
 
-You can search and manage code violations and library dependencies for any service in Datadog.
+## Overview
 
-Code Vulnerabilities
-: Identify and address risks in code security.
+Code Analysis is composed of [Static Analysis][1] and [Software Composition Analysis (SCA)][2] products. 
 
-Code Quality
-: Identify and address poor practices in code quality.
+Static Analysis
+: Scans codebases for bugs in code quality, maintainability issues, and security vulnerabilities early in the development lifecycle to catch issues from reaching production and, when possible, provide suggested fixes to help engineering teams address these issues before they impact customers.
 
-Library Vulnerabilities
-: Identify and address security in libraries.
+Software Composition Analysis 
+: Identifies and address vulnerable open source libraries that are imported from a repository, or identify and remove prohibited libraries and, when possible, provide suggested fixes to help engineering teams address these vulnerabilities. 
 
-Library List
-: Identify and remove prohibited libraries.
-
-## Setup
+You can receive automated feedback on poor code quality practices and security vulnerabilities on the code you write directly in an IDE such as [VS Code][3] or [IntelliJ & PyCharm][4], and in your [pull requests on GitHub][5]. 
 
 {{< tabs >}}
-{{% tab "Static Analysis" %}}
+{{% tab "Code Vulnerabilities" %}}
 
-To run Static Analysis, [see the documentation][101].
+Identify and address vulnerable code security risks in the **Code Vulnerabilities** view on the [Code Analysis page][101].
 
-[101]: /code_analysis/static_analysis
+{{< img src="code_analysis/shopist_code_vulnerabilities.png" alt="Code vulnerabilities on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
+
+[101]: https://app.datadoghq.com/ci/code-analysis
+
+{{% /tab %}}
+{{% tab "Code Quality" %}}
+
+Identify and address poor code quality practices in the **Code Quality** view on the [Code Analysis page][101].
+
+{{< img src="code_analysis/shopist_code_quality.png" alt="Code quality vulnerabilities on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
+
+[101]: https://app.datadoghq.com/ci/code-analysis
+
+{{% /tab %}}
+{{% tab "Library Vulnerabilities" %}}
+
+Identify and address vulnerable security risks in libraries that you have imported into your codebase in the **Library Vulnerabilities** view on the [Code Analysis page][101].
+
+{{< img src="code_analysis/shopist_lib_vulnerabilities.png" alt="Library vulnerabilities on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
+
+[101]: https://app.datadoghq.com/ci/code-analysis
+
+{{% /tab %}}
+{{% tab "Library List" %}}
+
+Identify and remove prohibited libraries that you have imported into your codebase in the **Library List** view on the [Code Analysis page][101].
+
+{{< img src="code_analysis/shopist_lib_list.png" alt="A list of libraries on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
+
+[101]: https://app.datadoghq.com/ci/code-analysis
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Setup
+
+{{< whatsnext desc="You can identify code quality violations and vulnerable dependencies for supported languages in Datadog by using:" >}}
+  {{< nextlink href="/code_analysis/static_analysis" >}}<u>Static Analysis</u>: Scan the source code of a repository for code quality/maintainability issues or security vulnerabilities. {{< /nextlink >}}
+  {{< nextlink href="/code_analysis/software_composition_analysis" >}}<u>Software Composition Analysis</u>: Scan open source libraries imported from a repository for vulnerabilities. {{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/ci/static-analysis
-[2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: /integrations/github/
-[4]: /account_management/api-app-keys/
-[5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
-[6]: /code_analysis/rules
-[103]: /getting_started/site/
+[1]: /code_analysis/static_analysis
+[2]: /code_analysis/software_composition_analysis
+[3]: /developers/ide_integrations/vscode/#static-analysis
+[4]: /developers/ide_integrations/idea/#static-analysis
+[5]: /code_analysis/github_pull_requests/
+
