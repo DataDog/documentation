@@ -1,5 +1,5 @@
 ---
-title: Setup Static Analysis
+title: Static Analysis Setup
 kind: documentation
 description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 aliases:
@@ -31,9 +31,9 @@ further_reading:
 
 To use Datadog Static Analysis, add a `static-analysis.datadog.yml` file to your repository's root directory and specify which rulesets you want to include for your programming language(s).
 
-Select one or multiple programming languages and choose which rulesets you want to copy and use on the [Code Analysis Setup page][8]. 
-
 {{< img src="code_analysis/static_analysis/apply_python_rulesets.png" alt="Copy and paste the Code Quality and Security rulesets from the available options for Python on the Code Analysis Setup page" style="width:100%;">}} 
+
+Select one or multiple programming languages and choose which rulesets you want to copy and use on the [Code Analysis Setup page][1]. 
 
 ## Add a Static Analysis YAML file to your project
 
@@ -76,7 +76,7 @@ rulesets:
 
 ## Configure your CI/CD provider
 
-Configure your [Datadog API and application keys][4] and run Static Analysis in the respective CI provider.
+Configure your [Datadog API and application keys][3] and run Static Analysis in the respective CI provider.
 
 {{< tabs >}}
 {{% tab "CircleCI Orbs" %}}
@@ -170,7 +170,7 @@ datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
   SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, Gitleaks, and Sysdig. Please reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
 </div>
 
-You can send results from third-party static analysis tools to Datadog, provided they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][5]. 
+You can send results from third-party static analysis tools to Datadog, provided they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][2]. 
 
 To upload a SARIF report:
 
@@ -233,8 +233,13 @@ foo = 1
 bar = 2
 ```
 
-[4]: /developers/ide_integrations/idea/#static-analysis
-[5]: /code_analysis/github_pull_requests/
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/ci/setup/static-analysis
+[2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif 
+[3]: /developers/ide_integrations/idea/#static-analysis
+[4]: /account_management/api-app-keys/
 [6]: /code_analysis/static_analysis/rules
 [7]: /getting_started/site/
-[8]: https://app.datadoghq.com/ci/setup/static-analysis
