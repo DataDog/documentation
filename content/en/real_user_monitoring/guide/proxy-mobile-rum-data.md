@@ -68,6 +68,22 @@ Datadog.initialize(
 )
 ```
 
+```objective-c
+@import DatadogObjc;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.proxyConfiguration = @{
+    (NSString *)kCFNetworkProxiesHTTPEnable: @YES,
+    (NSString *)kCFNetworkProxiesHTTPPort: @<123>,
+    (NSString *)kCFNetworkProxiesHTTPProxy: @"<www.example.com>",
+    (NSString *)kCFProxyUsernameKey: @"<proxyuser>",
+    (NSString *)kCFProxyPasswordKey: @"<proxypass>"
+};
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+```
+
 For more information, see the [URLSessionConfiguration.connectionProxyDictionary][3] documentation.
 
 [3]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411499-connectionproxydictionary
@@ -137,6 +153,22 @@ Datadog.initialize(
   ),
   trackingConsent: trackingConsent
 )
+```
+
+```objective-c
+@import DatadogObjc;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.proxyConfiguration = @{
+    (NSString *)kCFNetworkProxiesSOCKSEnable: @YES,
+    (NSString *)kCFNetworkProxiesSOCKSPort: @<123>,
+    (NSString *)kCFNetworkProxiesSOCKSProxy: @"<www.example.com>",
+    (NSString *)kCFProxyUsernameKey: @"<proxyuser>",
+    (NSString *)kCFProxyPasswordKey: @"<proxypass>"
+};
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
 ```
 
 For more information, see the [URLSessionConfiguration.connectionProxyDictionary][3] documentation.
