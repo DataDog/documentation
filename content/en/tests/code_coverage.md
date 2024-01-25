@@ -312,7 +312,7 @@ You can also see the code coverage's evolution on the [Branch Overview page][6] 
 
 ## Show code coverage change of a pull request
 
-The code coverage change of a GitHub pull request compared to the default branch is shown in the pull request's [test summary comment][8].
+The pull request's [test summary comment][8] shows the code coverage change of a GitHub pull request compared to the default branch.
 
 ## Intelligent Test Runner and total code coverage
 
