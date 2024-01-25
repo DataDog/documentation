@@ -15,12 +15,6 @@ further_reading:
   text: "Improve your on-call experience with Datadog mobile dashboard widgets"
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-warning">
-    The Datadog mobile app is not available for the {{< region-param key="dd_site_name" >}} site.
-</div>
-{{% /site-region %}}
-
 The Datadog Mobile app enables you to view alerts from Datadog on your mobile device. When receiving an alert via Slack, e-mail, Pagerduty or other pager apps, you'll be able to investigate issues by opening monitor graphs and dashboards on your mobile device.
 
 ## Installing
