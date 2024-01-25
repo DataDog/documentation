@@ -1,5 +1,5 @@
 ---
-title: Static Analysis
+title: Setup Static Analysis
 kind: documentation
 description: Learn about Datadog Static Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
 aliases:
@@ -29,58 +29,34 @@ further_reading:
 
 ## Overview
 
-Static Analysis is a clear-box software testing technique that analyzes a program's pre-production code without the need to execute the program, meaning that the program is static because it isn't running. Static Analysis helps you identify maintainability issues and security vulnerabilities early in the Software Development Life Cycle (SDLC) to ensure only the highest quality, most secure code makes it to production. Static Analysis tools that scan for security vulnerabilities are also commonly referred to as Static Application Security Testing (SAST) tools.
+To use Datadog Static Analysis, add a `static-analysis.datadog.yml` file to your repository's root directory to specify the rulesets for your programming language(s) for your repository.
 
-Using Static Analysis provides organizations with the following benefits:
+## Add a Static Analysis YAML file to your project
 
-* Static Analysis takes the guesswork out of adhering to an organization's code standards, enabling your development team to ship compliant code without significant impacts to developer velocity.
-* An organization's applications are less vulnerable to security breaches over time, due to new vulnerabilities being caught through SAST scans before code reaches production.
-* New developers to an organization are able to onboard faster because Static Analysis enables an organization to maintain a more readable codebase over time.
-* An organization's software becomes reliable over time by virtue of the code being more maintainable because the risk of a developer introducing new defects to the code is minimized.
-
-## Integrations
-
-### CI providers
-{{< whatsnext desc="With Static Analysis, you can integrate feedback on code reviews for various languages in any CI platform provider of choice. See the documentation for information about the following integrations:">}}
-    {{< nextlink href="continuous_integration/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
-{{< /whatsnext >}}
-
-### Source code management
-{{< whatsnext desc="During code reviews, source code management (SCM) integrations check for Static Analysis violations in pull requests for repos that have at least one ruleset applied. Violations are flagged with a comment on the relevant line of code. Certain violations also include suggested changes that can be applied directly in the UI of the SCM tool." >}}
-    {{< nextlink href="static_analysis/github_pull_requests" >}}GitHub Pull Requests{{< /nextlink >}}
-{{< /whatsnext >}}
-
-### IDEs
-{{< whatsnext desc="With Static Analysis, you can identify code vulnerabilities as you edit a file in your Integrated Development Environment (IDE). See the documentation for information about the following integrations:">}}
-    {{< nextlink href="developers/ide_integrations/idea/" >}}Datadog Plugin for IntelliJ IDEA{{< /nextlink >}}
-    {{< nextlink href="developers/ide_integrations/vscode/" >}}Datadog Extension for Visual Studio Code{{< /nextlink >}}
-{{< /whatsnext >}}
-
-## Setup
-
-To use Datadog Static Analysis, add a `static-analysis.datadog.yml` file to your repository's root directory to specify which rulesets to use.
-
-For example, for Python rules:
-
-```yaml
-rulesets:
-  - python-best-practices
-  - python-security
-  - python-code-style
-  - python-inclusive
-ignore-paths:
-  - "path/to/ignore"
-  - "**.js"
-```
-
-A `static-analysis.datadog.yml` file supports the following:
+A `static-analysis.datadog.yml` file supports the following options:
 
 | Name               | Description                                                                               | Required | Default |
 |--------------------|-------------------------------------------------------------------------------------------|----------|---------|
 | `rulesets`         | A list of ruleset names. [View all available rulesets][6].                                | `true`   |         |
 | `ignore-paths`     | A list of relative paths to ignore. It supports using globbing patterns.                  | `false`  |         |
 | `ignore-gitignore` | Determines whether Datadog Static Analysis analyzes the content in a `.gitignore` file.   | `false`  | `false` |
+
+For example, this `static-analysis.datadog.yml` file contains Python and JavaScript rulesets for code quality and security:
+
+```yaml
+rulesets: 
+- python-best-practices           # ensure best practices are followed
+- python-code-style               # code-style enforcement for Python
+- python-design                   # check basic design rules
+- python-inclusive                # ensure that we use inclusive wording in our codebase
+- python-security                 # ensure your Python code is safe and secure
+- javascript-best-practices       # ensure best practices are followed
+- javascript-code-style           # code-style enforcement for JavaScript
+- javascript-inclusive            # ensure that we use inclusive wording in our codebase
+- javascript-common-security      # ensure your JavaScript code is safe and secure
+```
+
+## Configure your CI/CD provider
 
 Configure your [Datadog API and application keys][4] and run Static Analysis in the respective CI provider.
 
@@ -181,7 +157,7 @@ You can send results from third-party static analysis tools to Datadog, provided
 To upload a SARIF report:
 
 1. Ensure the [`DD_API_KEY` and `DD_APP_KEY` variables are defined][4].
-2. Optional: Set a [`DD_SITE` variable][103] (default: `datadoghq.com`).
+2. Optional: Set a [`DD_SITE` variable][7] (default: `datadoghq.com`).
 3. Install the `datadog-ci` utility:
    
    ```bash
@@ -239,14 +215,7 @@ foo = 1
 bar = 2
 ```
 
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/ci/static-analysis
-[2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: /integrations/github/
-[4]: /account_management/api-app-keys/
-[5]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif
-[6]: /static_analysis/rules
-[103]: /getting_started/site/
+[4]: /developers/ide_integrations/idea/#static-analysis
+[5]: /code_analysis/github_pull_requests/
+[6]: /code_analysis/static_analysis/rules
+[7]: /getting_started/site/

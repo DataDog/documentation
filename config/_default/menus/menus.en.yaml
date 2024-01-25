@@ -3007,16 +3007,21 @@ main:
     parent: code_analysis
     identifier: code_analysis_static_analysis
     weight: 1
+  - name: Setup
+    url: code_analysis/static_analysis/setup
+    parent: code_analysis_static_analysis
+    identifier: code_analysis_static_analysis_setup
+    weight: 101
   - name: CircleCI Orbs
     url: code_analysis/static_analysis/circleci_orbs
     parent: code_analysis_static_analysis
     identifier: code_analysis_static_analysis_circleci_orbs
-    weight: 101
+    weight: 102
   - name: GitHub Actions
     url: code_analysis/static_analysis/github_actions
     parent: code_analysis_static_analysis
     identifier: code_analysis_static_analysis_github_actions
-    weight: 102
+    weight: 103
   - name: Rules
     url: code_analysis/rules
     parent: code_analysis

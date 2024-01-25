@@ -38,8 +38,6 @@ Static Analysis
 Software Composition Analysis 
 : Identifies and address vulnerable open source libraries that are imported from a repository, or identify and remove prohibited libraries and, when possible, provide suggested fixes to help engineering teams address these vulnerabilities. 
 
-You can receive automated feedback on poor code quality practices and security vulnerabilities on the code you write directly in an IDE such as [VS Code][3] or [IntelliJ & PyCharm][4], and in your [pull requests on GitHub][5]. 
-
 {{< tabs >}}
 {{% tab "Code Vulnerabilities" %}}
 
@@ -78,7 +76,9 @@ Identify and remove prohibited libraries that you have imported into your codeba
 {{% /tab %}}
 {{< /tabs >}}
 
-## Set up a repository
+You can receive automated feedback on poor code quality practices and security vulnerabilities on the code you write directly in an IDE such as [VS Code][3] or [IntelliJ & PyCharm][4], and in your [pull requests on GitHub][5]. 
+
+## Set up Code Analysis on your repository
 
 Select a programming language to add Code Analysis to your project:
 
@@ -87,6 +87,18 @@ Select a programming language to add Code Analysis to your project:
 </br>
 
 For more information about Static Analysis rulesets, see [Static Analysis Rules][6].
+
+## Configure your CI/CD provider
+
+Select a CI/CD provider to configure Code Analysis with:
+
+{{< partial name="code_analysis/ci-provider-getting-started.html" >}}
+
+</br>
+
+## Set up the GitHub integration 
+
+Configure a GitHub App using the [GitHub integration tile][7] and set up the [source code integration][8] to see the source code in Static Analysis results.
 
 ## Further Reading
 
@@ -98,3 +110,5 @@ For more information about Static Analysis rulesets, see [Static Analysis Rules]
 [4]: /developers/ide_integrations/idea/#static-analysis
 [5]: /code_analysis/github_pull_requests/
 [6]: /code_analysis/static_analysis/rules
+[7]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
+[8]: /integrations/guide/source-code-integration
