@@ -2332,8 +2332,7 @@ main:
     parent: tracing_troubleshooting
     weight: 1306
   - name: Correlated Logs
-    url: >-
-      tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel
+    url: tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel
     identifier: tracing_troubleshooting_correlated_logs
     parent: tracing_troubleshooting
     weight: 1307
