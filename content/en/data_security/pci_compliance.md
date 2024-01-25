@@ -3,7 +3,7 @@ title: PCI DSS Compliance
 kind: documentation
 disable_toc: false
 further_reading:
-- link: "Announcing PCI-Compliant Log Management and APM from Datadog"
+- link: "https://www.datadoghq.com/blog/datadog-pci-compliance-log-management-apm/"
   tag: "Blog"
   text: "Announcing PCI-Compliant Log Management and APM from Datadog"
 ---
