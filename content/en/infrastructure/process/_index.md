@@ -22,6 +22,11 @@ further_reading:
       text: 'Troubleshoot faster with process-level app and network data'
 ---
 
+
+<div class="alert alert-warning">
+Live Processes is included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
+</div>
+
 ## Introduction
 
 Datadog's Live Processes gives you real-time visibility into the process running on your infrastructure. Use Live Processes to:

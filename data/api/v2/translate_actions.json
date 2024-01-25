@@ -1018,7 +1018,8 @@
   "UploadIdPMetadata": {
     "description": "Endpoint for uploading IdP metadata for SAML setup.\n\nUse this endpoint to upload or replace IdP metadata for SAML login configuration.",
     "summary": "Upload IdP metadata",
-    "request_description": ""
+    "request_description": "",
+    "request_schema_description": "The form data submitted to upload IdP metadata"
   },
   "ListScorecardOutcomes": {
     "description": "Fetches all rule outcomes.",
@@ -1453,8 +1454,8 @@
     "summary": "Get hourly usage by product family"
   },
   "GetUsageLambdaTracedInvocations": {
-    "description": "Get hourly usage for lambda traced invocations.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
-    "summary": "Get hourly usage for lambda traced invocations"
+    "description": "Get hourly usage for Lambda traced invocations.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for Lambda traced invocations"
   },
   "GetUsageObservabilityPipelines": {
     "description": "Get hourly usage for observability pipelines.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
