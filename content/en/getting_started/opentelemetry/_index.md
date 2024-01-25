@@ -163,7 +163,7 @@ receivers:
           grpc:
             endpoint: 0.0.0.0:4317
           http:
-            Endpoint: 0.0.0.0:4318
+            endpoint: 0.0.0.0:4318
       # add the following block
       docker_stats: 
         endpoint: unix:///var/run/docker.sock # default; if this is not the Docker socket path, update to the correct path
@@ -260,7 +260,7 @@ curl localhost:9090/calendar
 3. Verify that you receive a response like:
 
    {{< code-block lang="sh" >}}
-{“date":"2022-12-30"}
+{"date":"2022-12-30"}
 {{< /code-block >}}
 
 4. Run the `curl` command several times to ensure at least one trace exports to the Datadog backend.
