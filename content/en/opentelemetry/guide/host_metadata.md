@@ -52,14 +52,14 @@ You also need to explicitly tag all your resources with a host-identifying attri
 
 The Datadog exporter supports both resource attribute-level semantic conventions as well as system metrics-level semantic conventions. Supported resource attribute semantic conventions are mainly under [the `host.` namespace][4] and [the `os.` namespace][8]. All supported system metrics-level semantic conventions are under [the `system.` namespace][5].
 
-The following general system conventions are supported:
+### General system conventions
 
-| Semantic convention | Type               | In-app field |
-|---------------------|--------------------|--------------|
-| [*Various*][10]     | Resource attribute | Hostname     |
-| `os.description`    | Resource attribute | OS           |
+| Semantic convention                         | Type               | In-app field |
+|---------------------------------------------|--------------------|--------------|
+| [*Various host-identifying attributes*][10] | Resource attribute | Hostname     |
+| `os.description`                            | Resource attribute | OS           |
 
-The following CPU related conventions are supported:
+### CPU conventions
 
 | Semantic convention         | Type               | In-app field       |
 |-----------------------------|--------------------|--------------------|
@@ -73,7 +73,7 @@ The following CPU related conventions are supported:
 | `system.cpu.physical.count` | System metric      | Cores              |
 | `system.cpu.frequency`      | System metric      | MHz                |
 
-The following network related conventions are supported:
+### Network conventions
 
 | Semantic convention | Type               | In-app field              |
 |---------------------|--------------------|---------------------------|
