@@ -2,7 +2,11 @@
 title: Setting up Oracle
 kind: documentation
 description: Setting up Database Monitoring on an Oracle database
-disable_sidebar: true
+disable_sidebar: false
+further_reading:
+- link: "https://www.datadoghq.com/blog/oracle-database-performance-monitoring-datadog/"
+  tag: "blog"
+  text: "Monitor Oracle managed databases with Datadog DBM"
 ---
 
 {{< site-region region="gov" >}}
@@ -71,6 +75,10 @@ Deactivating the legacy integration prevents sending the system metrics twice.
 Since the Agent doesn't require an external Oracle client, remove the `jdbc_driver_path` configuration parameter from the new parameter file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`.
 
 If the above prerequisites are met, follow the [setup instructions](#setup) for your hosting type.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/integrations
 [2]: https://app.datadoghq.com/integrations/oracle
