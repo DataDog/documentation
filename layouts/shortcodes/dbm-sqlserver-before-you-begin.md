@@ -6,7 +6,7 @@ Performance impact
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][100]).
 
 Proxies, load balancers, and connection poolers
-: The Agent must connect directly to the host being monitored. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. While this can be an anti-pattern for client applications, for Database Monitoring each Agent must have knowledge of the underlying host and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, then the metrics will be incorrect.
+: The Datadog Agent must connect directly to the host being monitored. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. While this can be an anti-pattern for client applications, for Database Monitoring each Agent must have knowledge of the underlying host and should stick to a single host for its lifetime, even in cases of failover. If the Agent connects to different hosts while it is running, then the metrics will be incorrect.
 
 Data security considerations
 : Read about how Database Management handles [sensitive information][101] for information about what data the Agent collects from your databases and how to ensure it is secure.
