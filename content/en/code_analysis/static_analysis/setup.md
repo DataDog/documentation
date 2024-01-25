@@ -15,17 +15,15 @@ further_reading:
   text: "Learn about the Source Code Integration"
 ---
 
-{{% site-region region="us,us3,us5,eu,ap1" %}}
-<div class="alert alert-warning">
-  Static Analysis is in private beta. Python, Java, C#, JavaScript, TypeScript, and Docker are the only supported languages. To request access, <a href="/help">contact Support</a>.
-</div>
-{{% /site-region %}}
-
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
     Static Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
+
+{{< callout url="#" btn_hidden="true" >}}
+Static Analysis is in public beta. Python, Java, C#, JavaScript, TypeScript, and Docker are the only supported languages.
+{{< /callout >}}
 
 ## Overview
 
@@ -170,12 +168,12 @@ datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
   SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, Gitleaks, and Sysdig. Please reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
 </div>
 
-You can send results from third-party static analysis tools to Datadog, provided they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][2]. 
+You can send results from third-party static analysis tools to Datadog, provided they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][2]. Node.js version 14 or later is required.
 
 To upload a SARIF report:
 
 1. Ensure the [`DD_API_KEY` and `DD_APP_KEY` variables are defined][4].
-2. Optional: Set a [`DD_SITE` variable][7] (default: `datadoghq.com`).
+2. Optionally, set a [`DD_SITE` variable][7] (this default to `datadoghq.com`).
 3. Install the `datadog-ci` utility:
    
    ```bash

@@ -38,41 +38,38 @@ Static Analysis
 Software Composition Analysis 
 : Identifies and address vulnerable open source libraries that are imported from a repository, or identify and remove prohibited libraries and, when possible, provide suggested fixes to help engineering teams address these vulnerabilities. 
 
+Once you have configured Code Analysis for your repositories, you can see information about Static Analysis and Software Composition Analysis results, including the default branch of your repository in Datadog. 
+
+Select a repository from the list on the [Code Analysis page][9] to search and manage violations in your services with the following views:
+
 {{< tabs >}}
 {{% tab "Code Vulnerabilities" %}}
 
-Identify and address vulnerable code security risks in the **Code Vulnerabilities** view on the [Code Analysis page][101].
-
 {{< img src="code_analysis/shopist_code_vulnerabilities.png" alt="Code vulnerabilities on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
 
-[101]: https://app.datadoghq.com/ci/code-analysis
+Identify and address vulnerable code security risks in the **Code Vulnerabilities** view.
 
 {{% /tab %}}
 {{% tab "Code Quality" %}}
 
-Identify and address poor code quality practices in the **Code Quality** view on the [Code Analysis page][101].
-
 {{< img src="code_analysis/shopist_code_quality.png" alt="Code quality vulnerabilities on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
 
-[101]: https://app.datadoghq.com/ci/code-analysis
+Identify and address poor code quality practices in the **Code Quality** view.
 
 {{% /tab %}}
 {{% tab "Library Vulnerabilities" %}}
 
-Identify and address vulnerable security risks in libraries that you have imported into your codebase in the **Library Vulnerabilities** view on the [Code Analysis page][101].
-
 {{< img src="code_analysis/shopist_lib_vulnerabilities.png" alt="Library vulnerabilities on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
 
-[101]: https://app.datadoghq.com/ci/code-analysis
+Identify and address vulnerable security risks in libraries that you have imported into your codebase in the **Library Vulnerabilities** view.
 
 {{% /tab %}}
 {{% tab "Library List" %}}
 
-Identify and remove prohibited libraries that you have imported into your codebase in the **Library List** view on the [Code Analysis page][101].
-
 {{< img src="code_analysis/shopist_lib_list.png" alt="A list of libraries on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
 
-[101]: https://app.datadoghq.com/ci/code-analysis
+Identify and remove prohibited libraries that you have imported into your codebase in the **Library List** view.
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -80,7 +77,7 @@ You can receive automated feedback on poor code quality practices and security v
 
 ## Set up Code Analysis on your repository
 
-Select a programming language to add Code Analysis to your project:
+Click **+ Setup a Repository** on the [Code Analysis page][8] and select a programming language to add Code Analysis to your project:
 
 {{< partial name="code_analysis/languages-getting-started.html" >}}
 
@@ -112,3 +109,4 @@ Configure a GitHub App using the [GitHub integration tile][7] and set up the [so
 [6]: /code_analysis/static_analysis/rules
 [7]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
 [8]: /integrations/guide/source-code-integration
+[9]: https://app.datadoghq.com/ci/code-analysis
