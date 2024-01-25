@@ -14,10 +14,6 @@ further_reading:
   text: 'Span Query Syntax'
 ---
 
-{{< beta-callout url="#" btn_hidden="true">}}
-To join the Trace Queries private beta <a href="https://docs.google.com/forms/d/e/1FAIpQLSebVVIAUcWIW941Zc3aBcEgmgGq349qCGKDk3QSSC2-PM8Aeg/viewform?pli=1">fill out this form</a>. Spans used for queries are from a <a href="#the-data-that-trace-queries-are-based-on"><strong>uniform 1% sample</strong> of ingested spans</a>, not from your existing retention filters.
-{{< /beta-callout >}}
-
 ## Overview
 
 With Trace Queries, you can find entire traces based on the properties of multiple spans and the relationships between those spans within the structure of the trace. To create a trace query, you define two or more [span queries][1] and then specify the relationship within the searched-for trace structure of the spans that are returned by each span query.
@@ -101,10 +97,9 @@ For example, if you query for traces that contain a span from the service `web-s
 {{< img src="tracing/trace_queries/timeseries_using_spans_from.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Timeseries view" >}}
 
 
-## The data that Trace Queries are based on
+## How Trace Queries source data
 
-{{< img src="tracing/trace_queries/trace_queries_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling" >}}
-
+{{< img src="tracing/trace_queries/trace_queries_new_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling & Diversity Sampling" >}}
 
 Trace Queries are based on a **uniform 1% sample** of [ingested spans][3]. To learn more, read [one percent flat sampling][6].
 
