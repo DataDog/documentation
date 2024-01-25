@@ -43,7 +43,7 @@ Session Replay is available in the RUM Browser SDK. To start collecting data for
 
 ## Usage
 
-Starting with v5.0.0 of the RUM Browser SDK, the Session Replay starts recording automatically when calling `init()`. To conditionally start the recording, use the `startSessionReplayRecordingManually` init parameter and call `startSessionReplayRecording()`. 
+Starting with v5.0.0 of the RUM Browser SDK, the Session Replay starts recording automatically when calling `init()`. To conditionally start the recording, use the `startSessionReplayRecordingManually` init parameter and call `startSessionReplayRecording()`.
 
 For example, to only record authenticated user sessions:
 
@@ -90,7 +90,15 @@ Refer to the below diagram to understand what data is retained with extended ret
 
 {{< img src="real_user_monitoring/session_replay/replay-extended-retention.png" alt="Diagram of what data is retained with extended retention" style="width:100%;" >}}
 
+## Playback History
 
+You can always see who has watched a session's replay, this way is easy to tell if someone you'd like to share the recording with has already watched it.
+
+{{< img src="real_user_monitoring/session_replay/session-replay-playback-history.png" alt="Check who has watched a session's recording" style="width:100%;" >}}
+
+Only those playbacks happening in the player page or in an embedded player, like in a [Notebook][8] or the side panel's one, are kept in history. And they also generate an [Audit Trail][7] event. Thumbnail previews are not registered.
+
+For a convenient access to your own playback history, check out the [My Watch History][9] playlist.
 
 ## Mobile Session Replay
 
@@ -106,3 +114,6 @@ Learn more about the [Session Replay for Mobile][5].
 [4]: /real_user_monitoring/browser/
 [5]: /real_user_monitoring/session_replay/mobile/
 [6]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
+[7]: https://docs.datadoghq.com/account_management/audit_trail/
+[8]: https://docs.datadoghq.com/notebooks/
+[9]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history
