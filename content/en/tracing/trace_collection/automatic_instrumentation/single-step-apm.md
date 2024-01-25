@@ -29,9 +29,9 @@ For an Ubuntu host:
    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
    ```
 
-   Replace `<YOUR_DD_API_KEY>` with your [Datadog API][4].
+   a. Replace `<YOUR_DD_API_KEY>` with your [Datadog API][4].
 
-   Replace `<YOUR_DD_SITE>` with your [Datadog site][3].  
+   b. Replace `<YOUR_DD_SITE>` with your [Datadog site][3].  
    <div class="alert alert-info">
       You can also optionally configure the following:
       <ul>
@@ -39,7 +39,7 @@ For an Ubuntu host:
          <li><a href="#env-linux">Tagging observability data by environment.</a></li>
       </ul>
    </div>
-2. Open a new terminal session.
+2. Open a new terminal window.
 3. Restart the services on the host or VM.
 4. [Explore the performance observability of your services in Datadog][5].
 
