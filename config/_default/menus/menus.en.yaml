@@ -2332,8 +2332,7 @@ main:
     parent: tracing_troubleshooting
     weight: 1306
   - name: Correlated Logs
-    url: >-
-      tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel
+    url: tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel
     identifier: tracing_troubleshooting_correlated_logs
     parent: tracing_troubleshooting
     weight: 1307
@@ -7879,7 +7878,7 @@ api:
         - GetUsageObservabilityPipelines
       unstable: []
       order: 39
-  - name: Get hourly usage for lambda traced invocations
+  - name: Get hourly usage for Lambda traced invocations
     url: '#get-hourly-usage-for-lambda-traced-invocations'
     identifier: usage-metering-get-hourly-usage-for-lambda-traced-invocations
     parent: usage-metering
@@ -8337,7 +8336,7 @@ api:
         - GetUsageBillableSummary
       unstable: []
       order: 5
-  - name: Get hourly usage for lambda
+  - name: Get hourly usage for Lambda
     url: '#get-hourly-usage-for-lambda'
     identifier: usage-metering-get-hourly-usage-for-lambda
     parent: usage-metering
