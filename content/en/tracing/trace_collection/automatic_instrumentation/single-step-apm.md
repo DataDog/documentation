@@ -30,6 +30,7 @@ For an Ubuntu host:
    ```
 
    Replace `<YOUR_DD_API_KEY>` with your [Datadog API][4].
+
    Replace `<YOUR_DD_SITE>` with your [Datadog site][3].  
    <div class="alert alert-info">
       You can also optionally configure the following:
@@ -60,7 +61,7 @@ Supported languages include:
 - JavaScript (`js`)
 - Ruby (`ruby`)
 
-For the Node.js tracing library, be aware that different versions of Node.js are compatible with different versions of the Node.js tracing library. See [DataDog/dd-trace-js: JavaScript APM Tracer][6] for more information.
+**Note**: For the Node.js tracing library, different versions of Node.js are compatible with different versions of the Node.js tracing library. See [DataDog/dd-trace-js: JavaScript APM Tracer][6] for more information.
 
 ### Tagging observability data by environment {#env-linux}
 
@@ -140,7 +141,7 @@ Supported languages include:
 - JavaScript (`js`)
 - Ruby (`ruby`)
 
-For the Node.js tracing library, be aware that different versions of Node.js are compatible with different versions of the Node.js tracing library. See [DataDog/dd-trace-js: JavaScript APM Tracer][7] for more information.
+**Note**: For the Node.js tracing library, different versions of Node.js are compatible with different versions of the Node.js tracing library. See [DataDog/dd-trace-js: JavaScript APM Tracer][7] for more information.
 
 ### Tagging observability data by environment {#env-docker}
 
