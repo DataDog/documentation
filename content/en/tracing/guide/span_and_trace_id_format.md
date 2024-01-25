@@ -22,7 +22,7 @@ This page details Datadog tracing library support for trace and span IDs.
 
 | Language   | Generated IDs             | Valid, Accepted 128-bit int IDs |
 | ---------- | --------------------------| ------------------------------ |
-| JavaScript | Unsigned [0, $2^128-1$]   |                                |
+| Node.js    | Unsigned [0, $2^128-1$]   |                                |
 | Java       | Unsigned [0, $2^128-1$]   |                                |
 | Go         | Unsigned [0, $2^128-1$]   |                                |
 | Python     | Unsigned [0, $2^128-1$]   |                                |
@@ -39,7 +39,7 @@ Trace IDs are generated as 128-bit by default, and they are accepted as either 1
 
 | Language   | Generated IDs            | Valid, Accepted int IDs |
 | ---------- | ------------------------ | ----------------------------- |
-| JavaScript | Unsigned  [$0, 2^64-1$]   |                        |
+| Node.js    | Unsigned  [$0, 2^64-1$]   |                        |
 | Java       | Unsigned  [$0, 2^64-1$]   |                        |
 | Go         | Unsigned  [$0, 2^64-1$]   |                        |
 | Python     | Unsigned  [$0, 2^64-1$]   |                        |
@@ -54,7 +54,7 @@ Span IDs are limited to 64-bits in Datadog.
 
 | Language   | Generated IDs            | Valid, Accepted 64-bit int IDs |
 | ---------- | ------------------------ | ----------------------------- |
-| JavaScript | Unsigned [0, $2^63$]     | Signed or unsigned            |
+| Node.js    | Unsigned [0, $2^63$]     | Signed or unsigned            |
 | Java       | Unsigned [1, $2^63-1$]   | Unsigned                      |
 | Go         | Unsigned [0, $2^63-1$]   | Signed or unsigned            |
 | Python     | Unsigned [0, $2^64-1$]   | Unsigned                      |
