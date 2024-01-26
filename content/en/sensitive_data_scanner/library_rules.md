@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The Scanning Rule Library are a collection of predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. 
+The Scanning Rules Library is a collection of predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. 
 
 {{< whatsnext desc="The library rules are organized into the following categories:">}}
   {{< nextlink href="/sensitive_data_scanner/library_rules#secrets-and-credentials">}}Secrets and credentials{{< /nextlink >}}
@@ -106,11 +106,20 @@ These rules can also be viewed in Datadog:
 
 | Library rule                             | Default Keywords                                                                                                                                                                                                                                       |
 | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Standard Email Address Scanner           | \-                                                                                                                                                                                                                                                     |
-| US Passport Scanner                      | passport, travel document                                                                                                                                                                                                                              |
+| Standard Email Address Scanner                       | \-                                                                                                                                                                                                                                         |
+| US Passport Scanner                                  | passport, travel document                                                                                                                                                                                                                  |
 | US Vehicle Identification Number Scanner | fahrgestellnummer, niv, numarul de identificare, numarul seriei de sasiu, numer vin, número de identificação do veículo, número de identificación de automóviles, numéro d'identification du véhicule, vehicle identification number, vin, vin numeris |
-| UK National Insurance Number Scanner     | national health service, nhs                                                                                                                                                                                                                           |
-| Canadian Social Insurance Number Scanner | canada healthcare number, msp number, personal healthcare number, phn, soins de santé                                                                                                                                                                  |
+| UK National Insurance Number Scanner                 | national health service, nhs                                                                                                                                                                                                               |
+| Canadian Social Insurance Number Scanner             | canada healthcare number, msp number, personal healthcare number, phn, soins de santé                                                                                                                                                      |
+| Chinese Vehicle Identification Number Scanner        | vin, vehicle identification number                                                                                                                                                                                                         |
+| Chinese Phone Number Scanner                         | mobile, phone, cell                                                                                                                                                                                                                        |
+| Chinese Identity Card Number Scanner                 | id, identity, identity number                                                                                                                                                                                                              |
+| Chinese Car License Plate Number Scanner             | car, plate, license, platenumber                                                                                                                                                                                                           |
+| Chinese Passport Scanner                             | passport, travel document                                                                                                                                                                                                                  |
+| US Social Security Number Scanner                    | ssn, social security                                                                                                                                                                                                                       |
+| US Driver License Scanner                            | dl#, dl, dlno#, driver, driving, license, permit, lic.                                                                                                                                                                                     |
+| US Individual Taxpayer Identification Number Scanner | i.t.i.n., individual taxpayer, itin                                                                                                                                                                                                        |
+| France Social Security Number Scanner (INSEE/NIR)    | social, security, insee, nir                                                                                                                                                                                                               |
 
 ## Network and device information
 
