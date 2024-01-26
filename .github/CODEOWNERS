@@ -109,5 +109,6 @@ content/en/continuous_delivery/*.md                   @Datadog/ci-app-backend @D
 content/en/dora_metrics/*.md                          @Datadog/ci-app-backend @Datadog/documentation
 content/en/code_analysis/*.md                         @Datadog/static-analysis @Datadog/documentation
 content/en/code_analysis/rules/_index.md              @Datadog/static-analysis @Datadog/documentation
+content/en/code_analysis/software_composition_analysis/*.md @Datadog/static-analysis @Datadog/documentation
 content/en/quality_gates/_index.md                    @Datadog/ci-app-backend @Datadog/documentation
 content/en/quality_gates/_index.md                    @Datadog/ci-app-backend @Datadog/documentation
