@@ -8,56 +8,55 @@ further_reading:
   text: "Announcing PCI-Compliant Log Management and APM from Datadog"
 ---
 
+{{% site-region region="us3,us5,eu,ap1,gov" %}}
 <div class="alert alert-warning">
-PCI DSS compliance for APM and Log Management is available only for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
+PCI DSS compliance for APM and Log Management is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
+</div>
+{{% /site-region %}}
+
+{{% site-region region="us" %}}
+<div class="alert alert-warning">
+PCI DSS compliance for APM and Log Management is only available for Datadog organizations in the <a href="/getting_started/site/">US1 site</a>.
 </div>
 
 ## Overview
 
-Datadog offers PCI-compliant Application Performance Monitoring (APM) and Log Management so that organizations that process cardholder data can rely on Datadog as a PCI Level 1 Service Provider.
+The Payment Card Industry (PCI) Data Security Standard (DSS) has rigorous monitoring and data security requirements for all merchants, service providers, and financial institutions. To meet these requirements, organizations have had to separate out PCI-regulated data and non-regulated data to different silos for monitoring.
 
-## Set up a PCI-compliant Dataodog organization
+Datadog offers PCI-compliant Application Performance Monitoring (APM) and Log Management within our [US1 site][1] so that you can collect all of your logs, whether they are PCI-regulated or not, in one place. See [Set up a PCI-compliant Datadog organization](#set-up-a-pci-compliant-datadog-organization) on how to get started.
+
+## Set up a PCI-compliant Datadog organization
 
 {{< tabs >}}
 {{% tab "APM" %}}
 
+<div class="alert alert-danger">
+<a href="https://docs.datadoghq.com/account_management/audit_trail/#setup">Audit Trail</a> must be enabled and remain enabled for PCI DSS compliance.
+</div>
+
 To set up a PCI-compliant Datadog organization, follow these steps:
 
-1. Contact [Datadog support][1] or your [Customer Success Manager][2] to request that the org be configured as a PCI-compliant org.
-2. After Datadog support or Customer Success confirms that the org is PCI DSS compliant, configure the Agent configuration file to send spans to the dedicated PCI-compliant endpoint (`https://trace-pci.agent.datadoghq.com`):
-    ```
-    apm_config:
-      apm_dd_url: <https://trace-pci.agent.datadoghq.com>
-    ```
-
-[1]: /help/
-[2]: mailto:success@datadoghq.com
+{{% pci-apm %}}
 
 {{% /tab %}}
 
 {{% tab "Log Management" %}}
 
+<div class="alert alert-danger">
+<a href="https://docs.datadoghq.com/account_management/audit_trail/#setup">Audit Trail</a> must be enabled and remain enabled for PCI DSS compliance.
+</div>
+
 To set up a PCI-compliant Datadog organization, follow these steps:
 
-1. Contact [Datadog support][1] or your [Customer Success Manager][2] to request that the org be configured as a PCI-compliant org.
-2. After Datadog support or Customer Success confirms that the org is PCI DSS compliant, configure the Agent configuration file to send logs to the dedicated PCI-compliant endpoint (`agent-http-intake-pci.logs.datadoghq.com`):
-    ```
-    logs_config:
-      logs_dd_url: <http://agent-http-intake-pci.logs.datadoghq.com:443|agent-http-intake-pci.logs.datadoghq.com:443>
-    ```
-    **Note**: The port must be included in the configuration. PCI compliance uses HTTPS log forwarding only. If you are using the Agent, you should [enforce HTTPS transport][3].
-
-If you have any questions about how the Log Management service satisfies the applicable requirements under PCI DSS, contact your account manager.
-
-
-[1]: /help/
-[2]: mailto:success@datadoghq.com
-[3]: /tracing/configure_data_security/#pci-dss-compliance-for-compliance-for-apm
+{{% pci-logs %}}
 
 {{% /tab %}}
 
 {{< /tabs >}}
 
+[1]: /getting_started/site/
+
+{{% /site-region %}}
 
 ## Further Reading
 
