@@ -1,4 +1,4 @@
-1. Contact [Datadog support][101] or your [Customer Success Manager][102] to request that the org be configured as a PCI-compliant org.
+1. Contact [Datadog support][101] or your [Customer Success Manager][102] to request that the org be configured as a PCI-compliant org and discuss the necessary paperwork to complete the PCI requirements.
 1. Enable [Audit Trail][103] in the new org. Audit Trail *must* be enabled and remain enabled for PCI DSS compliance.
 1. After Datadog support or Customer Success confirms that the org is PCI DSS compliant, configure the Agent configuration file to send logs to the dedicated PCI-compliant endpoint (`agent-http-intake-pci.logs.datadoghq.com`):
     ```

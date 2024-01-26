@@ -23,22 +23,11 @@ PCI DSS compliance for APM and Log Management is only available for Datadog orga
 
 The Payment Card Industry (PCI) Data Security Standard (DSS) has rigorous monitoring and data security requirements for all merchants, service providers, and financial institutions. To meet these requirements, organizations have had to separate out PCI-regulated data and non-regulated data to different silos for monitoring.
 
-Datadog offers PCI-compliant Application Performance Monitoring (APM) and Log Management within our [US1 site][1] so that you can collect all of your logs, whether they are PCI-regulated or not, in one place. See [Set up a PCI-compliant Datadog organization](#set-up-a-pci-compliant-datadog-organization) on how to get started.
+Datadog offers PCI-compliant Log Management and Application Performance Monitoring (APM) within the [US1 site][1] so that you can collect all of your logs, whether they are PCI-regulated or not, in one place. See [Set up a PCI-compliant Datadog organization](#set-up-a-pci-compliant-datadog-organization) on how to get started.
 
 ## Set up a PCI-compliant Datadog organization
 
 {{< tabs >}}
-{{% tab "APM" %}}
-
-<div class="alert alert-danger">
-<a href="https://docs.datadoghq.com/account_management/audit_trail/#setup">Audit Trail</a> must be enabled and remain enabled for PCI DSS compliance.
-</div>
-
-To set up a PCI-compliant Datadog organization, follow these steps:
-
-{{% pci-apm %}}
-
-{{% /tab %}}
 
 {{% tab "Log Management" %}}
 
@@ -49,6 +38,18 @@ To set up a PCI-compliant Datadog organization, follow these steps:
 To set up a PCI-compliant Datadog organization, follow these steps:
 
 {{% pci-logs %}}
+
+{{% /tab %}}
+
+{{% tab "APM" %}}
+
+<div class="alert alert-danger">
+<a href="https://docs.datadoghq.com/account_management/audit_trail/#setup">Audit Trail</a> must be enabled and remain enabled for PCI DSS compliance.
+</div>
+
+To set up a PCI-compliant Datadog organization, follow these steps:
+
+{{% pci-apm %}}
 
 {{% /tab %}}
 
