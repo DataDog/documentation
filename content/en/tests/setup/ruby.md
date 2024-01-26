@@ -293,6 +293,28 @@ require "ddtrace/auto_instrument" if ENV["DD_ENV"] == "ci"
 
 For the full list of available instrumentation methods, see the [`ddtrace` documentation][8]
 
+## WebMock
+
+[WebMock](https://github.com/bblimke/webmock)
+is a popular Ruby library that stubs HTTP requests when running tests.
+By default it fails when used together with datadog-ci as traces are being sent
+to Datadog via HTTP calls.
+
+In order to allow HTTP connections for Datadog backend you would need to configure
+Webmock accordingly.
+
+```ruby
+# when using agentless mode
+# note to use the correct datadog site (e.g. datadoghq.eu, etc)
+WebMock.disable_net_connect!(:allow => "citestcycle-intake.datadoghq.com")
+
+# when using agent
+WebMock.disable_net_connect!(:allow_localhost => true)
+
+# or for more granular setting set your agent URL
+WebMock.disable_net_connect!(:allow => "localhost:8126")
+```
+
 ## Collecting Git metadata
 
 {{% ci-git-metadata %}}
