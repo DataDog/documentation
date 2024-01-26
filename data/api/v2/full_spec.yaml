@@ -860,6 +860,11 @@ components:
       type: string
       x-enum-varnames:
       - BILLING_DIMENSIONS
+    ApiID:
+      description: API identifier.
+      example: 90646597-5fdb-4a17-a240-647003f8c028
+      format: uuid
+      type: string
     ApmRetentionFilterType:
       default: apm_retention_filter
       description: The type of the resource.
@@ -4894,6 +4899,29 @@ components:
       type: string
       x-enum-varnames:
       - COST_BY_ORG
+    CreateOpenAPIResponse:
+      description: Response for `CreateOpenAPI` operation.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateOpenAPIResponseData'
+      type: object
+    CreateOpenAPIResponseAttributes:
+      description: Attributes for `CreateOpenAPI`.
+      properties:
+        failed_endpoints:
+          description: List of endpoints which couldn't be parsed.
+          items:
+            $ref: '#/components/schemas/OpenAPIEndpoint'
+          type: array
+      type: object
+    CreateOpenAPIResponseData:
+      description: Data envelope for `CreateOpenAPIResponse`.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateOpenAPIResponseAttributes'
+        id:
+          $ref: '#/components/schemas/ApiID'
+      type: object
     CreateRuleRequest:
       description: Scorecard create rule request.
       properties:
@@ -12113,6 +12141,24 @@ components:
       type: string
       x-enum-varnames:
       - ON_DEMAND_CONCURRENCY_CAP
+    OpenAPIEndpoint:
+      description: Endpoint info extracted from an `OpenAPI` specification.
+      properties:
+        method:
+          description: The endpoint method.
+          type: string
+        path:
+          description: The endpoint path.
+          type: string
+      type: object
+    OpenAPIFile:
+      description: Object for API data in an `OpenAPI` format as a file.
+      properties:
+        openapi_spec_file:
+          description: Binary `OpenAPI` spec file
+          format: binary
+          type: string
+      type: object
     OpsgenieServiceCreateAttributes:
       description: The Opsgenie service attributes for a create request.
       properties:
@@ -20492,6 +20538,29 @@ components:
           example: min
           type: string
       type: object
+    UpdateOpenAPIResponse:
+      description: Response for `UpdateOpenAPI`.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateOpenAPIResponseData'
+      type: object
+    UpdateOpenAPIResponseAttributes:
+      description: Attributes for `UpdateOpenAPI`.
+      properties:
+        failed_endpoints:
+          description: List of endpoints which couldn't be parsed.
+          items:
+            $ref: '#/components/schemas/OpenAPIEndpoint'
+          type: array
+      type: object
+    UpdateOpenAPIResponseData:
+      description: Data envelope for `UpdateOpenAPIResponse`.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateOpenAPIResponseAttributes'
+        id:
+          $ref: '#/components/schemas/ApiID'
+      type: object
     UsageApplicationSecurityMonitoringResponse:
       description: Application Security Monitoring usage response.
       properties:
@@ -21344,6 +21413,217 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+  /api/v2/apicatalog/api/{id}:
+    delete:
+      description: Delete a specific API by ID.
+      operationId: DeleteOpenAPI
+      parameters:
+      - description: ID of the API to delete
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ApiID'
+      responses:
+        '204':
+          description: API deleted successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: API not found error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an API
+      tags:
+      - API Management
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/apicatalog/api/{id}/openapi:
+    get:
+      description: Retrieve information about a specific API in [OpenAPI](https://spec.openapis.org/oas/latest.html)
+        format file.
+      operationId: GetOpenAPI
+      parameters:
+      - description: ID of the API to retrieve
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ApiID'
+      responses:
+        '200':
+          content:
+            multipart/form-data:
+              schema:
+                format: binary
+                type: string
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: API not found error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get an API
+      tags:
+      - API Management
+      x-menu-order: 3
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: 'Update information about a specific API. The given content will
+        replace all API content of the given ID.
+
+        The ID is returned by the create API, or can be found in the URL in the API
+        catalog UI.
+
+        '
+      operationId: UpdateOpenAPI
+      parameters:
+      - description: ID of the API to modify
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ApiID'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OpenAPIFile'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateOpenAPIResponse'
+          description: API updated successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: API not found error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update an API
+      tags:
+      - API Management
+      x-menu-order: 2
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/apicatalog/openapi:
+    post:
+      description: 'Create a new API from the [OpenAPI](https://spec.openapis.org/oas/latest.html)
+        specification given.
+
+        It supports version `2.0`, `3.0` and `3.1` of the specification. A specific
+        extension section, `x-datadog`,
+
+        let you specify the `teamHandle` for your team responsible for the API in
+        Datadog.
+
+        It returns the created API ID.
+
+        '
+      operationId: CreateOpenAPI
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OpenAPIFile'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOpenAPIResponse'
+          description: API created successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a new API
+      tags:
+      - API Management
+      x-given:
+        managed_api:
+          parameters:
+          - name: openapi_spec_file
+            value: '"openapi-spec.yaml"'
+          step: there is a valid "managed_api" in the system
+      x-menu-order: 1
+      x-undo:
+        operationId: DeleteOpenAPI
+        parameters:
+        - name: id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/apm/config/metrics:
     get:
       description: Get the list of configured span-based metrics with their definitions.
@@ -35403,6 +35683,8 @@ servers:
       default: api
       description: The subdomain where the API is deployed.
 tags:
+- description: Configure your API endpoints through the Datadog API.
+  name: API Management
 - description: Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters)
     for your organization. You need an API and application key with Admin rights to
     interact with this endpoint. See [retention filters](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters)

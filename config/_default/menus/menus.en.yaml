@@ -2342,8 +2342,7 @@ main:
     parent: tracing_troubleshooting
     weight: 1306
   - name: Correlated Logs
-    url: >-
-      tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel
+    url: tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel
     identifier: tracing_troubleshooting_correlated_logs
     parent: tracing_troubleshooting
     weight: 1307
@@ -8660,6 +8659,62 @@ api:
         - CreateWebhooksIntegrationCustomVariable
       unstable: []
       order: 5
+  - name: API Management
+    url: /api/latest/api-management/
+    identifier: api-management
+    generated: true
+  - name: Create a new API
+    url: '#create-a-new-api'
+    identifier: api-management-create-a-new-api
+    parent: api-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateOpenAPI
+      unstable:
+        - v2
+      order: 1
+  - name: Update an API
+    url: '#update-an-api'
+    identifier: api-management-update-an-api
+    parent: api-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateOpenAPI
+      unstable:
+        - v2
+      order: 2
+  - name: Get an API
+    url: '#get-an-api'
+    identifier: api-management-get-an-api
+    parent: api-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetOpenAPI
+      unstable:
+        - v2
+      order: 3
+  - name: Delete an API
+    url: '#delete-an-api'
+    identifier: api-management-delete-an-api
+    parent: api-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteOpenAPI
+      unstable:
+        - v2
+      order: 4
   - name: APM Retention Filters
     url: /api/latest/apm-retention-filters/
     identifier: apm-retention-filters
