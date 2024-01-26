@@ -31,13 +31,13 @@ This document walks you through the following:
 
 - [The permissions required to view and set up Sensitive Data Scanner](#permissions).
 - [Setting up scanning for sensitive data](#set-up-scanning-for-sensitive-data).
-- [The out-of-the-box dashboard provided](#out-of-the-box-dashboard).
+- [Using the out-of-the-box dashboard](#out-of-the-box-dashboard).
 
 {{< img src="sensitive_data_scanner/sds_main_12_01_24.png" alt="The Sensitive Data Scanner page showing six out of the 12 active scanning groups" style="width:90%;">}}
 
 ## Permissions
 
-By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant the `data_scanner_read` or `data_scanner_write` permission under [Compliance][1] when you are adding permissions to a custom role. See [Access Control][2] for details on how to set up roles and permissions.
+By default, users with the Datadog Admin role have access to view and set up scanning rules. To allow other users access, grant the `data_scanner_read` or `data_scanner_write` permissions under [Compliance][1] to a custom role. See [Access Control][2] for details on how to set up roles and permissions.
 
 {{< img src="sensitive_data_scanner/read_write_permissions.png" alt="The compliance permissions sections showing data scanner read and writer permissions" style="width:55%;">}}
 
@@ -64,12 +64,12 @@ To set up a scanning group:
 1. Click **Add scanning group**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Group**.
 1. Enter a query filter for the data you want to scan. At the top, click **APM Spans** to preview the filtered spans. Click **Logs** to see the filtered logs.
 1. Enter a name and description for the group.
-1. Click the toggle buttons to enable Sensitive Data Scanner for the products you want.
+1. Click the toggle buttons to enable Sensitive Data Scanner for the products you want (e.g. Logs, APM Spans, RUM Events, Events).
 1. Click **Create**.
 
 ### Add scanning rules
 
-A scanning rule determines what sensitive information to match within the data for a scanning group. You can add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules using regex patterns. The data is scanned at the point of ingestion. For logs, the scan is done before indexing.
+A scanning rule determines what sensitive information to match within the data defined by a scanning group. You can add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules using regex patterns. The data is scanned at the point of ingestion. For logs, the scan is done before indexing.
 
 For Terraform, see the [Datadog Sensitive Data Scanner rule][6] resource.
 
@@ -77,8 +77,8 @@ To add scanning rules:
 
 1. Navigate to [Sensitive Data Scanner][5].
 1. Click the scanning group where you want to add the scanning rules.
-1. Click **Add Scanning Rules**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Rules**.
-1. Select whether you want to add scanning rules from the library rules or create a custom scanning rule.
+1. Click **Add Scanning Rule**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Rule**.
+1. Select whether you want to add a library rule or create a custom scanning rule.
 
 {{< tabs >}}
 {{% tab "Add scanning rule from the library rules" %}}
