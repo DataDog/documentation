@@ -64,7 +64,7 @@ You can trigger a child workflow from another workflow using the **Trigger Workf
 
 <div class="alert alert-info">For billing purposes, triggering a child workflow registers as a new workflow execution.</div>
 
-If the child workflow has [input parameters][5], these parameters appear as required fields in the Trigger Workflow action. In the example below, the **Hostname** input parameter is required because `Hostname` is set as an input parameter in the child workflow.
+If the child workflow has [input parameters][5], these parameters appear as required fields in the Trigger Workflow action.
 
 ## Trigger a workflow from a Monitor
 
