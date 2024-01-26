@@ -295,7 +295,7 @@ For the full list of available instrumentation methods, see the [`ddtrace` docum
 
 ## WebMock
 
-[WebMock](https://github.com/bblimke/webmock)
+[WebMock][10]
 is a popular Ruby library that stubs HTTP requests when running tests.
 By default it fails when used together with datadog-ci as traces are being sent
 to Datadog via HTTP calls.
@@ -328,3 +328,4 @@ WebMock.disable_net_connect!(:allow => "localhost:8126")
 [7]: /continuous_integration/guides/add_custom_metrics/?tab=ruby
 [8]: /tracing/trace_collection/dd_libraries/ruby/#integration-instrumentation
 [9]: /getting_started/tagging/unified_service_tagging
+[10]: https://github.com/bblimke/webmock
