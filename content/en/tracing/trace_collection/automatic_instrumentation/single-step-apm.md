@@ -23,7 +23,7 @@ With one command, you can install, configure, and start the Agent, while also in
 
 For an Ubuntu host:
 
-1. Run the one-line install command:
+1. Run the one-line installation command:
 
    ```shell
    DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
@@ -46,7 +46,7 @@ For an Ubuntu host:
 
 ### Specifying tracing library versions {#lib-linux}
 
-By default, enabling APM on your server installs support for Java, Python, Ruby, Node.js, and .NET Core services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` in your one-line install command:
+By default, enabling APM on your server installs support for Java, Python, Ruby, Node.js, and .NET Core services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` in your one-line installation command:
 
 ```shell
 DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=staging bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
@@ -59,14 +59,14 @@ Supported languages include:
 - .NET (`dotnet`)
 - Python (`python`)
 - Java (`java`)
-- JavaScript (`js`)
+- Node.js (`js`)
 - Ruby (`ruby`)
 
 **Note**: For the Node.js tracing library, different versions of Node.js are compatible with different versions of the Node.js tracing library. See [DataDog/dd-trace-js: JavaScript APM Tracer][6] for more information.
 
 ### Tagging observability data by environment {#env-linux}
 
-Set `DD_ENV` in your one-line install command for Linux to automatically tag instrumented services and other telemetry that pass through the Agent with a specific environment. For example, if the Agent is installed in your staging environment, set `DD_ENV=staging` to associate your observability data with `staging`.
+Set `DD_ENV` in your one-line installation command for Linux to automatically tag instrumented services and other telemetry that pass through the Agent with a specific environment. For example, if the Agent is installed in your staging environment, set `DD_ENV=staging` to associate your observability data with `staging`.
 
 For example:
 
@@ -116,21 +116,13 @@ For a Docker Linux container:
 
 ### Specifying tracing library versions {#lib-docker}
 
-By default, enabling APM on your server installs support for Java, Python, Ruby, Node.js, and .NET Core services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` in your Docker config:
+By default, enabling APM on your server installs support for Java, Python, Ruby, Node.js, and .NET services. If you only have services implemented in some of these languages, set `DD_APM_INSTRUMENTATION_LIBRARIES` when running the installation script.
 
-{{< highlight shell "hl_lines=4" >}}
-docker run -d --name dd-agent \
-   -e DD_API_KEY=${YOUR_DD_API_KEY} \
-   -e DD_APM_ENABLED=true \
-   -e DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" \
-   -e DD_APM_NON_LOCAL_TRAFFIC=true \
-   -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
-   -e DD_APM_RECEIVER_SOCKET=/opt/datadog/apm/inject/run/apm.socket \
-   -e DD_DOGSTATSD_SOCKET=/opt/datadog/apm/inject/run/dsd.socket \
-   -v /opt/datadog/apm:/opt/datadog/apm \
-   -v /var/run/docker.sock:/var/run/docker.sock:ro \
-   gcr.io/datadoghq/agent:7
-{{< /highlight >}}
+For example, to install support for only v1.25.0 of the Java tracing library and the latest Python tracing library, add the following to the installation command:
+
+```shell
+DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
+```
 
 You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. Language names are comma-separated.
 
@@ -139,7 +131,7 @@ Supported languages include:
 - .NET (`dotnet`)
 - Python (`python`)
 - Java (`java`)
-- JavaScript (`js`)
+- Node.js (`js`)
 - Ruby (`ruby`)
 
 **Note**: For the Node.js tracing library, different versions of Node.js are compatible with different versions of the Node.js tracing library. See [DataDog/dd-trace-js: JavaScript APM Tracer][7] for more information.
@@ -284,7 +276,7 @@ Supported languages include:
 - .NET (`dotnet`)
 - Python (`python`)
 - Java (`java`)
-- JavaScript (`js`)
+- Node.js (`js`)
 - Ruby (`ruby`)
 
 ### Tagging observability data by environment {#env-k8}
