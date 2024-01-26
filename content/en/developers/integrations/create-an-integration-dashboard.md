@@ -17,7 +17,7 @@ To create a Datadog integration, see [Create an Agent Integration][2].
 
 ## Create an integration dashboard
 
-### Create a new dashboard
+### Create a dashboard
 
 In Datadog, navigate to [**Dashboards** > **Dashboard List**][12] and click **+ New Dashboard**. 
 
@@ -43,7 +43,8 @@ Save this file to your integration's `assets/dashboards` folder. Add the asset t
 {{% /tab %}}
 {{% tab "Programmatically" %}}
 
-Ensure you have set an `api_key` and `app_key` for the organization that contains your dashboard in the [`ddev` configuration][101].
+- Ensure you have installed the [Datadog Agent Integration Developer tool][103] (`ddev`).
+- Ensure you have set an `api_key` and `app_key` for the organization that contains your dashboard in the [`ddev` configuration file][101].
 
 Run the [`ddev meta dash export` command][102] with the `--extras` or `-e` flag to export the dashboard definition: 
 
@@ -59,13 +60,14 @@ This command adds the dashboard definition to your integration's `manifest.json`
 
 [101]: https://datadoghq.dev/integrations-core/ddev/cli/#ddev-config
 [102]: https://datadoghq.dev/integrations-core/ddev/cli/#ddev-meta-dash-export
+[103]: /developers/integrations/python/
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Open a pull request
 
-Open a pull request (PR) to add your dashboard JSON file and updated manifest file to the corresponding integration folder in the [`integrations-extras` GitHub repository][13]. Datadog reviews all `integration-extras` PRs. Once approved, Datadog merges the PR and your integration dashboard is pushed to production.
+For the [`integrations-extras` GitHub repository][13] and open a pull request (PR) to add your dashboard JSON file and updated manifest file to the corresponding integration folder. Datadog reviews all `integration-extras` PRs. Once approved, Datadog merges the PR and your integration dashboard is pushed to production.
 
 ### Verify your dashboard in production
 
@@ -98,7 +100,7 @@ An integration dashboard should adhere to the following visual style guidelines:
 
 - Edit the About section and select the banner display option. You can then link to a banner image according to the following file location: `/static/images/integration_dashboard/your-image.png`.
 
-- Include an Overview group containing a few of the most important metrics, service checks (e.g. liveness or readiness checks), and a monitor summary if you have pre-existing monitors for this integration, and place it at the top of the dashboard. The Overview group can contain data.
+- Include an **Overview** group containing a few of the most important metrics; service checks, such as liveness or readiness checks; and a monitor summary if you have pre-existing monitors for this integration. Place the overview group at the top of the dashboard. The group can contain data.
 
   {{< img src="developers/create-an-integration-dashboard/about-and-overview-groups.png" alt="An example About section and Overview section in a dashboard" width="100%">}}
 
@@ -142,9 +144,9 @@ An integration dashboard should adhere to the following visual style guidelines:
    
    {{< img src="developers/create-an-integration-dashboard/stream-widgets.png" alt="An example of a stream widget in a dashboard" width="100%">}}
 
--  Try using a mix of widget types and sizes. Explore visualizations and formatting options until you're confident your dashboard is as clear as it can be. Sometimes a whole dashboard of timeseries is okay, but other times variety can improve legibility. The most commonly used metric widgets are [timeseries][4], [query values][5], and [tables][6]. Ensure query value widgets have a timeseries background (e.g. "bars") instead of being blank. For more information on the available widget types, see the [list of supported dashboard widgets][7].
+-  Try using a mix of widget types and sizes. Explore visualizations and formatting options until you're confident your dashboard is as clear as it can be. Sometimes a whole dashboard of timeseries is okay, but other times variety can improve legibility. The most commonly used metric widgets are [timeseries][4], [query values][5], and [tables][6]. Ensure query value widgets have a timeseries background (for example, "bars") instead of being blank. For more information on the available widget types, see the [list of supported dashboard widgets][7].
 
--  Try to make the left and right halves of your dashboard symmetrical in high density mode. Users with large monitors will see your dashboard in high density mode by default, so it's important that group relationships make sense, and that the dashboard looks good. You can adjust group heights to achieve this, and move groups between the left and right halves.
+-  Try to make the left and right halves of your dashboard symmetrical in high density mode. Users with large monitors see your dashboard in high density mode by default, so it's important that group relationships make sense, and that the dashboard looks good. You can adjust group heights to achieve this, and move groups between the left and right halves.
     
    {{< tabs >}}
    {{% tab "Perfectly symmetrical" %}}
