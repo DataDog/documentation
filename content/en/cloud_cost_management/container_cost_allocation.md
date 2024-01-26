@@ -29,8 +29,8 @@ For Kubernetes clusters, CCM allocates costs of EC2 instances and non-local EBS 
      - Ensure that you enable the [**Orchestrator Explorer**][6] in your Agent configuration.
      - Container cost allocation requires **Agent version >= 7.27.0** and **Cluster Agent version >= 1.11.0**.
      - Persistent Volume allocation requires **Agent version >= 7.46.0**
-3. For ECS support, setup [**Datadog Container Monitoring**][3] in ECS tasks.
-     - (Optional) Enable [AWS Split Cost Allocation][5] for usage-based ECS allocation.
+3. For ECS support, set up [**Datadog Container Monitoring**][3] in ECS tasks.
+     - Optionally, enable [AWS Split Cost Allocation][5] for usage-based ECS allocation.
 
 ## Cost allocation
 
