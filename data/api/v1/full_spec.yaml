@@ -14896,7 +14896,7 @@ components:
       - edge.laptop_large
       - edge.tablet
       - edge.mobile_small
-      example: laptop_large
+      example: chrome.laptop_large
       type: string
       x-enum-varnames:
       - LAPTOP_LARGE

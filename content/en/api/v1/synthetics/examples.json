@@ -20,7 +20,7 @@
             },
             "results": [
               {
-                "device": "laptop_large",
+                "device": "chrome.laptop_large",
                 "duration": "number",
                 "execution_rule": "string",
                 "location": "string",
@@ -445,7 +445,7 @@
                   "executionRule": "string"
                 },
                 "device_ids": [
-                  "laptop_large"
+                  "chrome.laptop_large"
                 ],
                 "disableCors": false,
                 "disableCsp": false,
@@ -645,7 +645,7 @@
               "executionRule": "string"
             },
             "device_ids": [
-              "laptop_large"
+              "chrome.laptop_large"
             ],
             "disableCors": false,
             "disableCsp": false,
@@ -863,7 +863,7 @@
             "executionRule": "string"
           },
           "device_ids": [
-            "laptop_large"
+            "chrome.laptop_large"
           ],
           "disableCors": false,
           "disableCsp": false,
@@ -1096,7 +1096,7 @@
               "executionRule": "string"
             },
             "device_ids": [
-              "laptop_large"
+              "chrome.laptop_large"
             ],
             "disableCors": false,
             "disableCsp": false,
@@ -1397,7 +1397,7 @@
             "executionRule": "string"
           },
           "device_ids": [
-            "laptop_large"
+            "chrome.laptop_large"
           ],
           "disableCors": false,
           "disableCsp": false,
@@ -1621,7 +1621,7 @@
               "executionRule": "string"
             },
             "device_ids": [
-              "laptop_large"
+              "chrome.laptop_large"
             ],
             "disableCors": false,
             "disableCsp": false,
@@ -1876,7 +1876,7 @@
               "executionRule": "string"
             },
             "device_ids": [
-              "laptop_large"
+              "chrome.laptop_large"
             ],
             "disableCors": false,
             "disableCsp": false,
@@ -2177,7 +2177,7 @@
             "executionRule": "string"
           },
           "device_ids": [
-            "laptop_large"
+            "chrome.laptop_large"
           ],
           "disableCors": false,
           "disableCsp": false,
@@ -2331,7 +2331,7 @@
               "executionRule": "string"
             },
             "device_ids": [
-              "laptop_large"
+              "chrome.laptop_large"
             ],
             "disableCors": false,
             "disableCsp": false,
@@ -2560,7 +2560,7 @@
             "executionRule": "string"
           },
           "device_ids": [
-            "laptop_large"
+            "chrome.laptop_large"
           ],
           "disableCors": false,
           "disableCsp": false,
@@ -2724,7 +2724,7 @@
               "executionRule": "string"
             },
             "device_ids": [
-              "laptop_large"
+              "chrome.laptop_large"
             ],
             "disableCors": false,
             "disableCsp": false,
@@ -2919,7 +2919,7 @@
               "executionRule": "string"
             },
             "device_ids": [
-              "laptop_large"
+              "chrome.laptop_large"
             ],
             "disableCors": false,
             "disableCsp": false,
@@ -3148,7 +3148,7 @@
             "executionRule": "string"
           },
           "device_ids": [
-            "laptop_large"
+            "chrome.laptop_large"
           ],
           "disableCors": false,
           "disableCsp": false,
@@ -3220,7 +3220,7 @@
               "result": {
                 "device": {
                   "height": 0,
-                  "id": "laptop_large",
+                  "id": "chrome.laptop_large",
                   "isMobile": false,
                   "name": "",
                   "width": 0
@@ -3367,7 +3367,7 @@
             "browserVersion": "string",
             "device": {
               "height": 0,
-              "id": "laptop_large",
+              "id": "chrome.laptop_large",
               "isMobile": false,
               "name": "",
               "width": 0
@@ -3528,7 +3528,7 @@
           ],
           "results": [
             {
-              "device": "laptop_large",
+              "device": "chrome.laptop_large",
               "location": "integer",
               "public_id": "string",
               "result_id": "string"
@@ -3600,7 +3600,7 @@
           ],
           "results": [
             {
-              "device": "laptop_large",
+              "device": "chrome.laptop_large",
               "location": "integer",
               "public_id": "string",
               "result_id": "string"
@@ -3648,7 +3648,7 @@
             "bodyType": "string",
             "cookies": "string",
             "deviceIds": [
-              "laptop_large"
+              "chrome.laptop_large"
             ],
             "followRedirects": false,
             "headers": {
@@ -3794,7 +3794,7 @@
               "executionRule": "string"
             },
             "device_ids": [
-              "laptop_large"
+              "chrome.laptop_large"
             ],
             "disableCors": false,
             "disableCsp": false,
@@ -3992,7 +3992,7 @@
               "executionRule": "string"
             },
             "device_ids": [
-              "laptop_large"
+              "chrome.laptop_large"
             ],
             "disableCors": false,
             "disableCsp": false,
@@ -4206,7 +4206,7 @@
               "executionRule": "string"
             },
             "device_ids": [
-              "laptop_large"
+              "chrome.laptop_large"
             ],
             "disableCors": false,
             "disableCsp": false,
@@ -4424,7 +4424,7 @@
             "executionRule": "string"
           },
           "device_ids": [
-            "laptop_large"
+            "chrome.laptop_large"
           ],
           "disableCors": false,
           "disableCsp": false,
