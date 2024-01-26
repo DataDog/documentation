@@ -81,15 +81,15 @@ Using the `allocated_spend_type` tag, you can visualize the spend category assoc
 
 ### Compute
 
-The cost of an EC2 instance is split into two components - 60% for the CPU and 40% for the memory. Each component is then allocated to individual workloads based on their resource reservations and usage.
+The cost of an EC2 instance is split into two components: 60% for the CPU and 40% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
 
-- Usage: Cost of memory and cpu used by workloads, based on the average usage on that day.
-- Workload idle: Cost of memory and cpu that is being reserved and allocated but not used. This is the difference between the total resources requested and the average usage.
-- Cluster idle: Cost of memory and cpu not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads.
+- Usage: Cost of memory and CPU used by workloads, based on the average usage on that day.
+- Workload idle: Cost of memory and CPU that is being reserved and allocated but not used. This is the difference between the total resources requested and the average usage.
+- Cluster idle: Cost of memory and CPU not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads.
 
 ### Persistent volumes
 
-The cost of an EBS volume has three components - IOPS, throughput, and storage. Each is allocated according to a pod's usage when the volume is mounted.
+The cost of an EBS volume has three components: IOPS, throughput, and storage. Each is allocated according to a pod's usage when the volume is mounted.
 
 - Usage: Cost of provisioned IOPS, throughput, or storage being used by workloads. Storage cost is based on the maximum amount of volume storage used that day. IOPS and throughput costs are based on the average amount used that day.
 - Workload idle: Cost of provisioned IOPS, throughput, or storage not being used by workloads. Storage cost is based on the maximum amount of storage used that day. IOPS and throughput costs are based on the average amount used that day. *Note: This tag is only available if you have enabled `Resource Collection` in your [**AWS Integration**][9]. To prevent being charged for `Cloud Security Posture Management`, ensure that during the `Resource Collection` setup, the `Cloud Security Posture Management` box is unchecked.*
