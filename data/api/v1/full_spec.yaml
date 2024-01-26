@@ -328,7 +328,7 @@ components:
           type: string
         message:
           description: Message content.
-          example: AWS account 12345 has no lambda config to update
+          example: AWS account 12345 has no Lambda config to update
           type: string
       type: object
     AWSLogsAsyncResponse:
@@ -18296,7 +18296,7 @@ components:
           type: array
       type: object
     UsageLambdaHour:
-      description: 'Number of lambda functions and sum of the invocations of all lambda
+      description: 'Number of Lambda functions and sum of the invocations of all Lambda
         functions
 
         for each hour for a given organization.'
@@ -18324,8 +18324,8 @@ components:
           type: string
       type: object
     UsageLambdaResponse:
-      description: 'Response containing the number of lambda functions and sum of
-        the invocations of all lambda functions
+      description: 'Response containing the number of Lambda functions and sum of
+        the invocations of all Lambda functions
 
         for each hour for a given organization.'
       properties:
@@ -33027,7 +33027,7 @@ paths:
         type: safe
   /api/v1/usage/aws_lambda:
     get:
-      description: 'Get hourly usage for lambda.
+      description: 'Get hourly usage for Lambda.
 
         **Note:** hourly usage data for all products is now available in the [Get
         hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
@@ -33081,7 +33081,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for lambda
+      summary: Get hourly usage for Lambda
       tags:
       - Usage Metering
       x-menu-order: 19
@@ -35621,9 +35621,9 @@ tags:
 - description: 'Configure your Datadog-AWS-Logs integration directly through Datadog
     API.
 
-    For more information, see the [AWS integration page](https://docs.datadoghq.com/api/?lang=bash#integration-aws-logs).'
+    For more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection).'
   externalDocs:
-    url: https://docs.datadoghq.com/api/?lang=bash#integration-aws-logs
+    url: https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection
   name: AWS Logs Integration
 - description: "All requests to Datadog\u2019s API must be authenticated.\nRequests
     that write data require reporting access and require an `API key`.\nRequests that
@@ -35631,7 +35631,9 @@ tags:
     All Datadog API clients are configured by default to consume Datadog US site APIs.\nIf
     you are on the Datadog EU site, set the environment variable `DATADOG_HOST` to\n`https://api.datadoghq.eu`
     or override this value directly when creating your client.\n\n[Manage your account\u2019s
-    API and application keys](https://app.datadoghq.com/account/settings#api)."
+    API and application keys](https://app.datadoghq.com/organization-settings/) in
+    Datadog, and see the [API and Application Keys page](https://docs.datadoghq.com/account_management/api-app-keys/)
+    in the documentation."
   name: Authentication
 - description: 'Configure your Datadog-Azure integration directly through the Datadog
     API.
@@ -35896,7 +35898,9 @@ tags:
 
     You can retrieve up to 24 hours of hourly usage data for multiple organizations,
 
-    and up to two months of hourly usage data for a single organization in one request.'
+    and up to two months of hourly usage data for a single organization in one request.
+
+    Learn more on the [usage details documentation](https://docs.datadoghq.com/account_management/billing/usage_details/).'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/billing/usage_details/

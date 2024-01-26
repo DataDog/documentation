@@ -345,7 +345,7 @@
           globs:
           - 'README.md'
           options:
-            dest_path: '/static_analysis/'
+            dest_path: '/code_analysis/static_analysis/'
             file_name: 'circleci_orbs.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"]
@@ -363,7 +363,7 @@
           globs:
           - 'README.md'
           options:
-            dest_path: '/static_analysis/'
+            dest_path: '/code_analysis/static_analysis/'
             file_name: 'github_actions.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md"]

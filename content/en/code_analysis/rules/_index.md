@@ -1,7 +1,7 @@
 ---
-title: Code Analysis Rules
+title: Static Analysis Rules
 kind: documentation
-description: View rules for multiple languages for Code Analysis.
+description: View rules for multiple languages for Static Analysis.
 aliases:
 - /continuous_integration/static_analysis/rules
 - /static_analysis/rules
@@ -160,22 +160,20 @@ further_reading:
     text: "Learn about Datadog Code Analysis"
 ---
 
-## Overview
-
 {{% site-region region="us,us3,us5,eu,ap1" %}}
 <div class="alert alert-warning">
-  Code Analysis is in private beta. Python, Java, C#, JavaScript, TypeScript, and Docker are the only supported languages. To request access, <a href="/help">contact Support</a>.
+  Static Analysis is in private beta. Python, Java, C#, JavaScript, TypeScript, and Docker are the only supported languages. To request access, <a href="/help">contact Support</a>.
 </div>
 {{% /site-region %}}
 
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
-    Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
+    Static Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
 
-Datadog Code Analysis provides out-of-the-box rules to help detect violations in your CI/CD pipelines in code reviews and identify bugs, security, and maintainability issues. For more information, see the [Code Analysis documentation][1].
+## Overview
 
+Datadog Static Analysis provides out-of-the-box rules to help detect violations in your CI/CD pipelines in code reviews and identify bugs, security, and maintainability issues. For more information, see the [Setup documentation][1].
 
-
-[1]: /code_analysis
+[1]: /code_analysis/static_analysis/setup
