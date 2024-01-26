@@ -60,7 +60,7 @@ To run the workflow:
 
 ## Trigger a workflow from a workflow
 
-You can trigger a child workflow from another workflow using the **Trigger Workflow** action. For example, if you have a complex series of steps that you need to reuse in several workflows, there's no need to recreate those steps for all of your workflows. Instead, create the workflow once and trigger it in your other workflows using the Trigger Workflow action.
+You can trigger a child workflow from another workflow using the **Trigger Workflow** action. For example, if you have a complex series of steps that you need to reuse in several workflows, there's no need to recreate those steps for all of your workflows. Instead, add the steps to a new workflow and trigger it in your other workflows using the Trigger Workflow action.
 
 <div class="alert alert-info">For billing purposes, triggering a child workflow registers as a new workflow execution.</div>
 
