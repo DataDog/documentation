@@ -18,35 +18,22 @@ This page details Datadog tracing library support for trace and span IDs.
 
 ## 128-bit trace IDs
 
-128-bit trace IDs are generated and accepted by default in the latest versions of Datadog tracing libraries.
+128-bit trace IDs are generated and accepted by default in the latest versions of Datadog tracing libraries:
 
-| Language   | Generated IDs             | Valid, Accepted 128-bit int IDs |
-| ---------- | --------------------------| ------------------------------ |
-| Node.js    | Unsigned [0, $2^128-1$]   |                                |
-| Java       | Unsigned [0, $2^128-1$]   |                                |
-| Go         | Unsigned [0, $2^128-1$]   |                                |
-| Python     | Unsigned [0, $2^128-1$]   |                                |
-| Ruby       | Unsigned [0, $2^128-1$]   |                                |
-| .NET       | Unsigned [0, $2^128-1$]   |                                |
-| PHP        | Unsigned [0, $2^128-1$]   |                                |
-| C++        | Unsigned [0, $2^128-1$]   |                                |
+- [Node.js][1]
+- [Java][2]   
+- [Go][3]     
+- [Python][4] 
+- [Ruby][5]   
+- [.NET][6]   
+- [PHP][7]    
+- [C++][8]   
 
 ## 64-bit trace and span IDs
 
 ### Trace IDs
 
 Trace IDs are generated as 128-bit by default, and they are accepted as either 128-bit or 64-bit integers. To generate 64-bit trace IDs, set the environment variable `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED` to `false`.
-
-| Language   | Generated IDs            | Valid, Accepted int IDs |
-| ---------- | ------------------------ | ----------------------------- |
-| Node.js    | Unsigned  [$0, 2^64-1$]   |                        |
-| Java       | Unsigned  [$0, 2^64-1$]   |                        |
-| Go         | Unsigned  [$0, 2^64-1$]   |                        |
-| Python     | Unsigned  [$0, 2^64-1$]   |                        |
-| Ruby       | Unsigned  [$0, 2^64-1$]   |                        |
-| .NET       | Unsigned  [$0, 2^64-1$]   |                        |
-| PHP        | Unsigned  [$0, 2^64-1$]   |                        |
-| C++        | Unsigned  [$0, 2^64-1$]   |                        |
 
 ### Span IDs
 
@@ -66,3 +53,12 @@ Span IDs are limited to 64-bits in Datadog.
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/DataDog/dd-trace-js/releases
+[2]: https://github.com/DataDog/dd-trace-java/releases
+[3]: https://github.com/DataDog/dd-trace-go/releases
+[4]: https://github.com/DataDog/dd-trace-py/releases
+[5]: https://github.com/DataDog/dd-trace-rb/releases
+[6]: https://github.com/DataDog/dd-trace-dotnet/releases
+[7]: https://github.com/DataDog/dd-trace-php/releases
+[8]: https://github.com/DataDog/dd-trace-cpp/releases
