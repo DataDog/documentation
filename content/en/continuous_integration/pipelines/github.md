@@ -39,7 +39,7 @@ further_reading:
 
 - **Queue time**: View amount of time workflow jobs sit in the queue before processing
 
-- **Approval wait time**: View amount of time workflow runs and workflow jobs wait for a manual approval
+- **Approval wait time**: View amount of time workflow runs and workflow jobs wait for manual approvals
 
 ## Configure the Datadog integration
 
