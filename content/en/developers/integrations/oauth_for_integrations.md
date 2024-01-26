@@ -41,7 +41,7 @@ This section describes how to build a new integration with a tile on the [Market
 
 The client is the component of an application that enables users to authorize the application access to the customer's Datadog data. In order to gain access, the client requires the appropriate access token.
 
-1. Navigate to the **OAuth & Permissions** tab under **Features** and click **Create OAuth Client**.
+1. Navigate to the **OAuth & Permissions** tab under **Features** and click **New Confidential OAuth Client**.
 
    The OAuth clients you create for integrations are **confidential clients** that provide a client ID and client secret. The client you create in this step is a private version of the client, whose credentials you can use for testing. When a published version of this client is created, you will receive a new set of credentials. **These credentials are never shown again after you create the client, so be sure to store them in a secure location.**
 

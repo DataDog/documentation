@@ -13,15 +13,9 @@ further_reading:
   - link: /observability_pipelines/reference/transforms/#lua
     tag: Documentation
     text: Modifying events with Lua
-  - link: /observability_pipelines/reference/transforms/#tagcardinalitylimit
-    tag: Documentation
-    text: Limit the cardinality of tags on metrics to safeguard against cardinality explosion
   - link: /observability_pipelines/reference/transforms/#logtometric
     tag: Documentation
     text: Convert logs to metric events
-  - link: /observability_pipelines/reference/transforms/#metrictolog
-    tag: Documentation
-    text: Convert metrics to log events
   - link: /observability_pipelines/configurations/
     tag: Documentation
     text: Learn more about Observability Pipelines configurations
@@ -41,7 +35,7 @@ The [`remap` transform][1] can modify events or specify conditions for routing a
 
 ### Basic `remap` configuration example
 
-To get started, see the following example for a basic `remap` transform that contains a DPL/VRL program in the `source` field:
+To get started, see the following YAML configuration example for a basic `remap` transform that contains a DPL/VRL program in the `source` field:
 
 ```yaml
 transforms:
@@ -73,7 +67,7 @@ The below snippet is an HTTP log event in JSON format:
 ```
 #### Configuration example
 
-The configuration below uses DPL/VRL to modify the log event by:
+The following YAML configuration example uses DPL/VRL to modify the log event by:
 
 - Parsing the raw string into JSON.
 - Reformatting the time into a UNIX timestamp.
@@ -115,7 +109,6 @@ Sampling, reducing, filtering, and aggregating are common transforms to reduce t
 - [Deduplicate][6] events. 
 - [Filter events][7] based on a set of conditions.
 - [Aggregate multiple metric events][8] into a single metric event based on a defined interval window.
-- [Convert metrics to logs][9].
 
 See [Control Log Volume and Size][10] for examples on how to use these transforms.
 
@@ -143,7 +136,7 @@ The below snippet is an example log that you want to route to different destinat
 
 #### Configuration examples
 
-To route based on the `level` value, see the below configuration example:
+The following YAML configuration example routes data based on the `level` value:
 
 ```yaml
 transforms:
@@ -181,7 +174,7 @@ Downstream services can sometimes get overwhelmed when there is a spike in volum
 
 ### Throttle configuration example
 
-See the following example of a `throttle` transform configuration:
+The following YAML configuration example is for a `throttle` transform:
 
 ```yaml
 transforms:

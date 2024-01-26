@@ -2,6 +2,7 @@
 
 /assets/                  @DataDog/corpweb @DataDog/documentation
 /data/                    @DataDog/corpweb @DataDog/documentation
+/data/api/                @DataDog/documentation
 /local/                   @DataDog/corpweb @DataDog/documentation
 /layouts/                 @DataDog/corpweb @DataDog/documentation
 /src/                     @DataDog/corpweb @DataDog/documentation

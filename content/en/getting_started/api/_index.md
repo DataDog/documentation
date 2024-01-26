@@ -47,6 +47,8 @@ data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsIn
 
 </br>This collection works in Postman for Web or in your Postman application. It may take several seconds to load.
 
+**Note**: Configure the Datadog Postman collection's Datadog Authentication environment with your API and application key.
+
 ### Postman environment setup
 
 After the Postman collection is imported, a full list of available Datadog API calls is structured by folder in the left pane of Postman.
@@ -113,6 +115,6 @@ This tab is an alternative to viewing the `param1:value1&param2:value2` structur
 [3]: https://identity.getpostman.com/signup
 [4]: https://identity.getpostman.com/login
 [5]: https://www.postman.com/downloads/
-[6]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
+[6]: https://learning.postman.com/docs/sending-requests/environments/managing-environments/
 [7]: /api/latest/#api-reference
 [8]: /api/

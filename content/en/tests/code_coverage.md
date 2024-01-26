@@ -227,6 +227,54 @@ The code coverage report needs to be generated in a different process, otherwise
 
 {{% /tab %}}
 
+{{% tab "Python" %}}
+
+### Compatibility
+
+* `dd-trace>=2.5.0`.
+* `Python>=3.7`.
+* `coverage>=4.4.2`.
+* `pytest>=3.0.0`.
+* `pytest-cov>=2.7.0`.
+* `unittest>=3.8`.
+* Only [`coverage.py`][1] and [`pytest-cov`][2] code coverage are supported.
+
+
+When tests are instrumented with [`coverage.py`][1] or [`pytest-cov`][2], the Datadog Tracer reports code coverage under the `test.code_coverage.lines_pct` tag for your test sessions automatically.
+
+To report total code coverage from your test sessions with [`coverage.py`][1], follow these steps:
+
+1. Install `coverage`:
+```
+python3 -m pip install coverage
+```
+
+2. Run your test with the new `coverage` command:
+```
+DD_ENV=ci DD_SERVICE=my-python-service coverage run -m pytest
+```
+
+Alternatively, to report total code coverage from your test sessions with [`pytest-cov`][2], follow these steps:
+
+1. Install `pytest`:
+```
+python3 -m pip install pytest
+```
+
+2. Install `pytest-cov`:
+```
+python3 -m pip install pytest-cov
+```
+
+3. Run your test by appending the `--cov` flag to your `pytest` command:
+```
+DD_ENV=ci DD_SERVICE=my-python-service pytest --cov
+```
+
+[1]: https://github.com/nedbat/coveragepy
+[2]: https://github.com/pytest-dev/pytest-cov
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Graph code coverage
@@ -262,6 +310,10 @@ You can also see the code coverage's evolution on the [Branch Overview page][6] 
 {{< img src="/continuous_integration/code_coverage_branch_view.png" text="Branch view's code coverage" style="width:100%" >}}
 
 
+## Show code coverage change of a pull request
+
+The pull request's [test summary comment][8] shows the code coverage change of a GitHub pull request compared to the default branch.
+
 ## Intelligent Test Runner and total code coverage
 
 [Intelligent Test Runner][7] will **not** automatically provide total code coverage measurements, even though it requires _per test_ code coverage to function.
@@ -278,3 +330,4 @@ You can also see the code coverage's evolution on the [Branch Overview page][6] 
 [5]: /monitors/types/ci/#maintain-code-coverage-percentage
 [6]: /continuous_integration/tests/developer_workflows#branch-overview
 [7]: /continuous_integration/intelligent_test_runner/
+[8]: /tests/developer_workflows/#test-summaries-in-github-pull-requests

@@ -328,7 +328,7 @@ components:
           type: string
         message:
           description: Message content.
-          example: AWS account 12345 has no lambda config to update
+          example: AWS account 12345 has no Lambda config to update
           type: string
       type: object
     AWSLogsAsyncResponse:
@@ -1142,9 +1142,12 @@ components:
         is_read_only:
           default: false
           deprecated: true
-          description: Whether this dashboard is read-only. If True, only the author
-            and admins can make changes to it. Prefer using `restricted_roles` to
-            manage write authorization.
+          description: 'Whether this dashboard is read-only. If True, only the author
+            and admins can make changes to it.
+
+
+            This property is deprecated; please use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/)
+            instead to manage write authorization for individual dashboards.'
           example: false
           type: boolean
         layout_type:
@@ -1165,8 +1168,13 @@ components:
         reflow_type:
           $ref: '#/components/schemas/DashboardReflowType'
         restricted_roles:
-          description: A list of role identifiers. Only the author and users associated
+          deprecated: true
+          description: 'A list of role identifiers. Only the author and users associated
             with at least one of these roles can edit this dashboard.
+
+
+            This property is deprecated; please use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/)
+            instead to manage write authorization for individual dashboards.'
           items:
             description: A role UUID.
             type: string
@@ -1439,8 +1447,13 @@ components:
           description: Dashboard identifier.
           type: string
         is_read_only:
-          description: Whether this dashboard is read-only. If True, only the author
+          deprecated: true
+          description: 'Whether this dashboard is read-only. If True, only the author
             and admins can make changes to it.
+
+
+            This property is deprecated; please use the [Restriction Policies API](https://docs.datadoghq.com/api/latest/restriction-policies/)
+            instead to manage write authorization for individual dashboards.'
           type: boolean
         layout_type:
           $ref: '#/components/schemas/DashboardLayoutType'
@@ -3310,7 +3323,6 @@ components:
           example: key:value,filter:example
           type: string
         is_cspm_enabled:
-          default: false
           description: 'When enabled, Datadog will activate the Cloud Security Monitoring
             product for this service account. Note: This requires resource_collection_enabled
             to be set to true.'
@@ -3337,7 +3349,6 @@ components:
           example: datadog-apitest
           type: string
         resource_collection_enabled:
-          default: false
           description: When enabled, Datadog scans for all resources in your GCP environment.
           example: true
           type: boolean
@@ -4851,7 +4862,7 @@ components:
         content:
           $ref: '#/components/schemas/LogContent'
         id:
-          description: Unique ID of the Log.
+          description: ID of the Log.
           example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
           type: string
       type: object
@@ -5281,6 +5292,21 @@ components:
       type: string
       x-enum-varnames:
       - CATEGORY_PROCESSOR
+    LogsDailyLimitReset:
+      description: Object containing options to override the default daily limit reset
+        time.
+      properties:
+        reset_time:
+          description: String in `HH:00` format representing the time of day the daily
+            limit should be reset. The hours must be between 00 and 23 (inclusive).
+          example: '14:00'
+          type: string
+        reset_utc_offset:
+          description: String in `(-|+)HH:00` format representing the UTC offset to
+            apply to the given reset time. The hours must be between -12 and +14 (inclusive).
+          example: +02:00
+          type: string
+      type: object
     LogsDateRemapper:
       description: "As Datadog receives logs, it timestamps them using the value(s)
         from any of these default attributes.\n\n  - `timestamp`\n  - `date`\n  -
@@ -5495,6 +5521,16 @@ components:
           example: 300000000
           format: int64
           type: integer
+        daily_limit_reset:
+          $ref: '#/components/schemas/LogsDailyLimitReset'
+        daily_limit_warning_threshold_percentage:
+          description: A percentage threshold of the daily quota at which a Datadog
+            warning event is generated.
+          example: 70
+          format: double
+          maximum: 99.99
+          minimum: 50
+          type: number
         exclusion_filters:
           description: 'An array of exclusion objects. The logs are tested against
             the query of each filter,
@@ -5550,6 +5586,16 @@ components:
           example: 300000000
           format: int64
           type: integer
+        daily_limit_reset:
+          $ref: '#/components/schemas/LogsDailyLimitReset'
+        daily_limit_warning_threshold_percentage:
+          description: A percentage threshold of the daily quota at which a Datadog
+            warning event is generated.
+          example: 70
+          format: double
+          maximum: 99.99
+          minimum: 50
+          type: number
         disable_daily_limit:
           description: 'If true, sets the `daily_limit` value to null and the index
             is not limited on a daily basis (any
@@ -10162,7 +10208,7 @@ components:
           description: 'The recurrence rules as defined in the iCalendar RFC 5545.
             The supported rules for SLO corrections
 
-            are `FREQ`, `INTERVAL`, `COUNT` and `UNTIL`.'
+            are `FREQ`, `INTERVAL`, `COUNT`, `UNTIL` and `BYDAY`.'
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
           type: string
         slo_id:
@@ -10239,7 +10285,7 @@ components:
           description: 'The recurrence rules as defined in the iCalendar RFC 5545.
             The supported rules for SLO corrections
 
-            are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`.'
+            are `FREQ`, `INTERVAL`, `COUNT`, `UNTIL` and `BYDAY`.'
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
           nullable: true
           type: string
@@ -10315,7 +10361,7 @@ components:
           description: 'The recurrence rules as defined in the iCalendar RFC 5545.
             The supported rules for SLO corrections
 
-            are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`.'
+            are `FREQ`, `INTERVAL`, `COUNT`, `UNTIL` and `BYDAY`.'
           example: FREQ=DAILY;INTERVAL=10;COUNT=5
           type: string
         start:
@@ -10345,6 +10391,13 @@ components:
           nullable: true
           type: string
       type: object
+    SLODataSourceQueryDefinition:
+      description: A formula and function query.
+      example:
+        data_source: metrics
+        query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+      oneOf:
+      - $ref: '#/components/schemas/FormulaAndFunctionMetricQueryDefinition'
     SLODeleteResponse:
       description: A response list of all service level objective deleted.
       properties:
@@ -10388,6 +10441,20 @@ components:
       - THIRTY_DAYS
       - NINETY_DAYS
       - ALL
+    SLOFormula:
+      description: A formula that specifies how to combine the results of multiple
+        queries.
+      example:
+        formula: query1 - default_zero(query2)
+      properties:
+        formula:
+          description: The formula string, which is an expression involving named
+            queries.
+          example: query1 - default_zero(query2)
+          type: string
+      required:
+      - formula
+      type: object
     SLOHistoryMetrics:
       description: 'A `metric` based SLO history response.
 
@@ -11117,6 +11184,8 @@ components:
           type: string
         query:
           $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
+        sli_specification:
+          $ref: '#/components/schemas/SLOSliSpec'
         tags:
           description: 'A list of tags associated with this service level objective.
 
@@ -11171,6 +11240,11 @@ components:
           format: double
           type: number
       type: object
+    SLOSliSpec:
+      description: A generic SLI specification. This is currently used for time-slice
+        SLOs only.
+      oneOf:
+      - $ref: '#/components/schemas/SLOTimeSliceSpec'
     SLOState:
       description: State of the SLO.
       enum:
@@ -11271,6 +11345,106 @@ components:
       - timeframe
       - target
       type: object
+    SLOTimeSliceComparator:
+      description: The comparator used to compare the SLI value to the threshold.
+      enum:
+      - '>'
+      - '>='
+      - <
+      - <=
+      example: '>'
+      type: string
+      x-enum-varnames:
+      - GREATER
+      - GREATER_EQUAL
+      - LESS
+      - LESS_EQUAL
+    SLOTimeSliceCondition:
+      description: 'The time-slice condition, composed of 3 parts: 1. the metric timeseries
+        query, 2. the comparator,
+
+        and 3. the threshold.'
+      example:
+        comparator: <
+        query:
+          formulas:
+          - formula: query2/query1
+          queries:
+          - data_source: metrics
+            name: query1
+            query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+          - data_source: metrics
+            name: query1
+            query: sum:trace.servlet.request.errors{*} by {env}.as_count()
+        threshold: 5
+      properties:
+        comparator:
+          $ref: '#/components/schemas/SLOTimeSliceComparator'
+        query:
+          $ref: '#/components/schemas/SLOTimeSliceQuery'
+        threshold:
+          description: The threshold value to which each SLI value will be compared.
+          example: 5
+          format: double
+          type: number
+      required:
+      - comparator
+      - threshold
+      - query
+      type: object
+    SLOTimeSliceQuery:
+      description: The queries and formula used to calculate the SLI value.
+      example:
+        formulas:
+        - formula: query2/query1
+        queries:
+        - data_source: metrics
+          name: query1
+          query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+        - data_source: metrics
+          name: query1
+          query: sum:trace.servlet.request.errors{*} by {env}.as_count()
+      properties:
+        formulas:
+          description: A list that contains exactly one formula, as only a single
+            formula may be used in a time-slice SLO.
+          items:
+            $ref: '#/components/schemas/SLOFormula'
+          maxItems: 1
+          minItems: 1
+          type: array
+        queries:
+          description: A list of queries that are used to calculate the SLI value.
+          items:
+            $ref: '#/components/schemas/SLODataSourceQueryDefinition'
+          type: array
+      required:
+      - formulas
+      - queries
+      type: object
+    SLOTimeSliceSpec:
+      additionalProperties: false
+      description: A time-slice SLI specification.
+      example:
+        time_slice:
+          comparator: <
+          query:
+            formulas:
+            - formula: query2/query1
+            queries:
+            - data_source: metrics
+              name: query1
+              query: sum:trace.servlet.request.hits{*} by {env}.as_count()
+            - data_source: metrics
+              name: query1
+              query: sum:trace.servlet.request.errors{*} by {env}.as_count()
+          threshold: 5
+      properties:
+        time_slice:
+          $ref: '#/components/schemas/SLOTimeSliceCondition'
+      required:
+      - time_slice
+      type: object
     SLOTimeframe:
       description: The SLO time window options.
       enum:
@@ -11290,11 +11464,13 @@ components:
       enum:
       - metric
       - monitor
+      - time_slice
       example: metric
       type: string
       x-enum-varnames:
       - METRIC
       - MONITOR
+      - TIME_SLICE
     SLOTypeNumeric:
       description: 'A numeric representation of the type of the service level objective
         (`0` for
@@ -11305,12 +11481,14 @@ components:
       enum:
       - 0
       - 1
+      - 2
       example: 0
       format: int32
       type: integer
       x-enum-varnames:
       - MONITOR
       - METRIC
+      - TIME_SLICE
     SLOWidgetDefinition:
       description: Use the SLO and uptime widget to track your SLOs (Service Level
         Objectives) and uptime on screenboards and timeboards.
@@ -12151,6 +12329,8 @@ components:
           type: string
         query:
           $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
+        sli_specification:
+          $ref: '#/components/schemas/SLOSliSpec'
         tags:
           description: 'A list of tags associated with this service level objective.
 
@@ -12280,6 +12460,8 @@ components:
           type: string
         query:
           $ref: '#/components/schemas/ServiceLevelObjectiveQuery'
+        sli_specification:
+          $ref: '#/components/schemas/SLOSliSpec'
         tags:
           description: 'A list of tags associated with this service level objective.
 
@@ -14714,7 +14896,7 @@ components:
       - edge.laptop_large
       - edge.tablet
       - edge.mobile_small
-      example: laptop_large
+      example: chrome.laptop_large
       type: string
       x-enum-varnames:
       - LAPTOP_LARGE
@@ -15772,6 +15954,10 @@ components:
         compressedJsonDescriptor:
           description: A protobuf JSON descriptor that needs to be gzipped first then
             base64 encoded.
+          type: string
+        compressedProtoFile:
+          description: A protobuf file that needs to be gzipped first then base64
+            encoded.
           type: string
         dnsServer:
           description: DNS server to use for DNS tests.
@@ -18110,7 +18296,7 @@ components:
           type: array
       type: object
     UsageLambdaHour:
-      description: 'Number of lambda functions and sum of the invocations of all lambda
+      description: 'Number of Lambda functions and sum of the invocations of all Lambda
         functions
 
         for each hour for a given organization.'
@@ -18138,8 +18324,8 @@ components:
           type: string
       type: object
     UsageLambdaResponse:
-      description: 'Response containing the number of lambda functions and sum of
-        the invocations of all lambda functions
+      description: 'Response containing the number of Lambda functions and sum of
+        the invocations of all Lambda functions
 
         for each hour for a given organization.'
       properties:
@@ -18726,6 +18912,11 @@ components:
             over all hours in the current date all organizations.
           format: int64
           type: integer
+        apm_devsecops_host_top99p:
+          description: Shows the 99th percentile of all APM DevSecOps hosts over all
+            hours in the current date for the given org.
+          format: int64
+          type: integer
         apm_fargate_count_avg:
           description: Shows the average of all APM ECS Fargate tasks over all hours
             in the current date for all organizations.
@@ -19249,6 +19440,11 @@ components:
         apm_azure_app_service_host_top99p:
           description: Shows the 99th percentile of all Azure app services using APM
             over all hours in the current date for the given org.
+          format: int64
+          type: integer
+        apm_devsecops_host_top99p:
+          description: Shows the 99th percentile of all APM DevSecOps hosts over all
+            hours in the current date for the given org.
           format: int64
           type: integer
         apm_fargate_count_avg:
@@ -19787,6 +19983,11 @@ components:
         apm_azure_app_service_host_top99p_sum:
           description: Shows the 99th percentile of all Azure app services using APM
             over all hours in the current months all organizations.
+          format: int64
+          type: integer
+        apm_devsecops_host_top99p_sum:
+          description: Shows the 99th percentile of all APM DevSecOps hosts over all
+            hours in the current months for all organizations.
           format: int64
           type: integer
         apm_fargate_count_avg_sum:
@@ -23383,7 +23584,9 @@ paths:
         type: safe
   /api/v1/downtime:
     get:
-      description: Get all scheduled downtimes.
+      deprecated: true
+      description: Get all scheduled downtimes. **Note:** This endpoint has been deprecated.
+        Please use v2 endpoints.
       operationId: ListDowntimes
       parameters:
       - description: Only return downtimes that are active when the request is made.
@@ -23427,7 +23630,9 @@ paths:
       x-undo:
         type: safe
     post:
-      description: Schedule a downtime.
+      deprecated: true
+      description: Schedule a downtime. **Note:** This endpoint has been deprecated.
+        Please use v2 endpoints.
       operationId: CreateDowntime
       requestBody:
         content:
@@ -23495,7 +23700,11 @@ paths:
         type: unsafe
   /api/v1/downtime/cancel/by_scope:
     post:
-      description: Delete all downtimes that match the scope of `X`.
+      deprecated: true
+      description: Delete all downtimes that match the scope of `X`. **Note:** This
+        only interacts with Downtimes created using v1 endpoints. This endpoint has
+        been deprecated and will not be replaced. Please use v2 endpoints to find
+        and cancel downtimes.
       operationId: CancelDowntimesByScope
       requestBody:
         content:
@@ -23545,7 +23754,9 @@ paths:
         type: idempotent
   /api/v1/downtime/{downtime_id}:
     delete:
-      description: Cancel a downtime.
+      deprecated: true
+      description: Cancel a downtime. **Note:** This endpoint has been deprecated.
+        Please use v2 endpoints.
       operationId: CancelDowntime
       parameters:
       - description: ID of the downtime to cancel.
@@ -23585,7 +23796,9 @@ paths:
       x-undo:
         type: idempotent
     get:
-      description: Get downtime detail by `downtime_id`.
+      deprecated: true
+      description: Get downtime detail by `downtime_id`. **Note:** This endpoint has
+        been deprecated. Please use v2 endpoints.
       operationId: GetDowntime
       parameters:
       - description: ID of the downtime to fetch.
@@ -23629,7 +23842,9 @@ paths:
       x-undo:
         type: safe
     put:
-      description: Update a single downtime by `downtime_id`.
+      deprecated: true
+      description: Update a single downtime by `downtime_id`. **Note:** This endpoint
+        has been deprecated. Please use v2 endpoints.
       operationId: UpdateDowntime
       parameters:
       - description: ID of the downtime to update.
@@ -24578,7 +24793,8 @@ paths:
         parameters:
         - name: body
           origin: request
-          template: '{"account_id": "{{account_id}}", "role_name": "{{role_name}}"}'
+          template: '{"account_id": "{{ account_id }}", "role_name": "{{ role_name
+            }}"}'
         type: unsafe
     put:
       description: Update a Datadog-Amazon Web Services integration.
@@ -25412,7 +25628,8 @@ paths:
         parameters:
         - name: body
           origin: request
-          template: "{\n  \"client_id\": \"{{client_id}}\",\n  \"tenant_name\": \"{{tenant_name}}\"\n}"
+          template: "{\n  \"client_id\": \"{{ client_id }}\",\n  \"tenant_name\":
+            \"{{ tenant_name }}\"\n}"
         type: unsafe
     put:
       description: 'Update a Datadog-Azure integration. Requires an existing `tenant_name`
@@ -27448,7 +27665,7 @@ paths:
 
         - SLO: `slo alert`
 
-        - watchdog: `event alert`
+        - watchdog: `event-v2 alert`
 
         - event-v2: `event-v2 alert`
 
@@ -28313,7 +28530,9 @@ paths:
         type: idempotent
   /api/v1/monitor/{monitor_id}/downtimes:
     get:
-      description: Get all active downtimes for the specified monitor.
+      deprecated: true
+      description: Get all active v1 downtimes for the specified monitor. **Note:**
+        This endpoint has been deprecated. Please use v2 endpoints.
       operationId: ListMonitorDowntimes
       parameters:
       - description: The id of the monitor
@@ -32808,7 +33027,7 @@ paths:
         type: safe
   /api/v1/usage/aws_lambda:
     get:
-      description: 'Get hourly usage for lambda.
+      description: 'Get hourly usage for Lambda.
 
         **Note:** hourly usage data for all products is now available in the [Get
         hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
@@ -32862,7 +33081,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for lambda
+      summary: Get hourly usage for Lambda
       tags:
       - Usage Metering
       x-menu-order: 19
@@ -35402,9 +35621,9 @@ tags:
 - description: 'Configure your Datadog-AWS-Logs integration directly through Datadog
     API.
 
-    For more information, see the [AWS integration page](https://docs.datadoghq.com/api/?lang=bash#integration-aws-logs).'
+    For more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection).'
   externalDocs:
-    url: https://docs.datadoghq.com/api/?lang=bash#integration-aws-logs
+    url: https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection
   name: AWS Logs Integration
 - description: "All requests to Datadog\u2019s API must be authenticated.\nRequests
     that write data require reporting access and require an `API key`.\nRequests that
@@ -35412,7 +35631,9 @@ tags:
     All Datadog API clients are configured by default to consume Datadog US site APIs.\nIf
     you are on the Datadog EU site, set the environment variable `DATADOG_HOST` to\n`https://api.datadoghq.eu`
     or override this value directly when creating your client.\n\n[Manage your account\u2019s
-    API and application keys](https://app.datadoghq.com/account/settings#api)."
+    API and application keys](https://app.datadoghq.com/organization-settings/) in
+    Datadog, and see the [API and Application Keys page](https://docs.datadoghq.com/account_management/api-app-keys/)
+    in the documentation."
   name: Authentication
 - description: 'Configure your Datadog-Azure integration directly through the Datadog
     API.
@@ -35677,7 +35898,9 @@ tags:
 
     You can retrieve up to 24 hours of hourly usage data for multiple organizations,
 
-    and up to two months of hourly usage data for a single organization in one request.'
+    and up to two months of hourly usage data for a single organization in one request.
+
+    Learn more on the [usage details documentation](https://docs.datadoghq.com/account_management/billing/usage_details/).'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/billing/usage_details/

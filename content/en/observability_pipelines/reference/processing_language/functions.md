@@ -6,7 +6,7 @@ title: Functions
 <div class="alert alert-warning">Observability Pipelines is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
-Datadog Processing Language (DPL) contains built-in functions for transforming your data.
+Datadog Processing Language (DPL), or Vector Remap Language (VRL), contains built-in functions for transforming your data.
 
 {{< whatsnext desc="The functions are organized into the following categories:" >}}
     {{< nextlink href="observability_pipelines/reference/processing_language/functions/#array" >}}Array{{< /nextlink >}}

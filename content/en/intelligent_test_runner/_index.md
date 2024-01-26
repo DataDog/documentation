@@ -103,7 +103,7 @@ The dashboard also tracks adoption of Intelligent Test Runner throughout your or
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /how_it_works
+[1]: /intelligent_test_runner/how_it_works/
 [2]: /glossary/#flaky-test
 [3]: /continuous_integration/intelligent_test_runner/setup
 [4]: /continuous_integration/tests/

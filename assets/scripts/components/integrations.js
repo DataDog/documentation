@@ -275,11 +275,11 @@ export function initializeIntegrations() {
         if (window.location.href.indexOf('#') > -1) {
             currentCat = window.location.href.substring(window.location.href.indexOf('#'));
         }
-        const currentSelected = document.querySelector('.controls .active').getAttribute('href');
+        const currentSelected = document.querySelector('.controls .active')?.getAttribute('href');
 
         if (currentCat && currentSelected) {
             if (currentCat !== currentSelected) {
-                document.querySelector(`a[href="${currentCat}"]`).click();
+                document.querySelector(`a[href="${currentCat}"]`)?.click();
             }
         }
         if (currentCat === '') {
