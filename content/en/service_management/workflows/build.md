@@ -167,7 +167,7 @@ To add an error path:
 1. After configuring your step, you can add more steps to an error path and even merge your error path back into the main workflow path.
 1. When you're done configuring your error path steps, click **Save** to apply your changes.
 
-{{< img src="service_management/workflows/error-path.mp4" alt="Add an error path to your workflow" video=true >}}
+{{< img src="service_management/workflows/error-path1.mp4" alt="Add an error path to your workflow" video=true >}}
 
 ### Edit a workflow with JSON
 
