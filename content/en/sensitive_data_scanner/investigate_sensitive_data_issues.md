@@ -32,7 +32,7 @@ In the **Sensitive Data Issues** section, filter by a priority level to see only
 To investigate an issue:
 
 1. Click on the issue in the **Issues Overview**.
-2. In the issue panel, click **View Recent Changes** to navigate to Audit Trail and see if there are any recent configuration changes that caused the sensitive data issue.
+2. In the issue panel, click **View Recent Changes** to navigate to [Audit Trail][4] and see if there are any recent configuration changes that caused the sensitive data issue.
 3. Click **View All Logs** to see in Log Explorer all logs matching the query.  
 Click **View All APM Spans** to see in Trace Explorer all traces matching the query.  
 Click **View All RUM Events** to see in RUM Explorer all RUM events matching the query.  
@@ -48,6 +48,8 @@ If you want to use [Incident Management][3] to create an incident, you can add t
 
 If you want to modify the Scanning Rule that was used to detect the sensitive data issue, click **Modify Rule** at the top of the panel.
 
+If you want to use [Audit Trail][4] to see who may have accessed this sensitive data within Datadog, **View in Audit Trail** in the **Users who accessed these events** section.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -55,3 +57,4 @@ If you want to modify the Scanning Rule that was used to detect the sensitive da
 [1]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
 [2]: /service_management/case_management/
 [3]: /service_management/incident_management/
+[4]: /audit-trail
