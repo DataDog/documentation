@@ -26,7 +26,7 @@ Monitor Custom Schedules are supported on events, logs, and metrics monitors wit
 
 Click **Add Custom Schedule** to configure your evaluation frequency. 
 
-<div class="alert alert-warning">After a custom schedule has been enabled on a monitor, the monitor cannot be disabled.
+<div class="alert alert-warning">After a custom schedule has been enabled on a monitor, the schedule cannot be disabled. Custom schedules can only be added or removed during monitor creation.
 </div>
 
 {{< tabs >}}
