@@ -68,7 +68,7 @@ You could run the same query on another AWS region, and before hitting **Layout*
 
 Here is a quick video showing this idea in action:
 
-{{< img src="cloudcraft/getting-started/use-filters-to-create-better-diagrams/filtered-layout-search-patterns-wb5btuyldh4q.mp4" video="true">}}
+{{< img src="cloudcraft/getting-started/use-filters-to-create-better-diagrams/filtered-layout-search-patterns-wb5btuyldh4q.mp4" alt="A 53 seconds video showing a Cloudcraft user creating a filtered diagram." video="true">}}
 
 You could also combine **Filtered layout** with the **Blueprint link** feature to break down larger environments into multiple diagrams that link to each other. You could even have an overview diagram that provides a quick glance of your whole cloud architecture with no performance penalties.
 
