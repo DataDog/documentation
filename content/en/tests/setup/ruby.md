@@ -304,14 +304,13 @@ In order to allow HTTP connections for Datadog backend you would need to configu
 Webmock accordingly.
 
 ```ruby
-# when using agentless mode
-# note to use the correct datadog site (e.g. datadoghq.eu, etc)
+# when using agentless mode (note to use the correct datadog site, e.g. datadoghq.com, datadoghq.eu, etc):
 WebMock.disable_net_connect!(:allow => "citestcycle-intake.datadoghq.com")
 
-# when using agent
+# when using agent running locally:
 WebMock.disable_net_connect!(:allow_localhost => true)
 
-# or for more granular setting set your agent URL
+# or for more granular setting set your agent URL, for example:
 WebMock.disable_net_connect!(:allow => "localhost:8126")
 ```
 
