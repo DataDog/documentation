@@ -83,6 +83,8 @@ Click **Add Query** to add additional queries.
 
 ## Exclude benign activity with suppression queries
 
+<div class="alert alert-warning"> <a href="https://docs.datadoghq.com/security/suppressions/"> Suppression rules</a> are replacing suppression queries in detection rules. The legacy suppression queries will be deprecated on April 1, 2024. See <a href="#migrate-legacy-suppression-queries-to-suppression-rules">Migrate legacy suppression queries to suppression rules</a> for more information. </div>
+
 In the **Only generate a signal if there is a match** field, you have the option to enter a query so that a trigger is only generated when a value is met.
 
 In the **This rule will not generate a signal if there is a match** field, you have the option to enter suppression queries so that a trigger is not generated when the values are met. For example, if a user called `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input a logs query that excludes `@user.username: john.doe`.
