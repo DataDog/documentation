@@ -122,17 +122,14 @@ The Datadog Exporter sends data collected by the OTLP Receiver to the Datadog ba
 
    {{< code-block lang="yaml" filename="otelcol-config.yaml" collapsible="true" disable_copy="true" >}}
 exporters:
-  logging:
-    verbosity: detailed
   datadog:
     traces:
       span_name_as_resource_name: true
+      trace_buffer: 500
     hostname: "otelcol-docker"
     api:
       key: ${DD_API_KEY}
       site: datadoghq.com
-traces:
-  trace_buffer: 500
 service:
   pipelines:
     metrics:
