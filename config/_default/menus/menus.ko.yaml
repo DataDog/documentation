@@ -19,7 +19,7 @@ api:
   weight: 7
 - generated: true
   identifier: aws-integration
-  name: AWS통합
+  name: AWS 통합
   url: /api/latest/aws-integration/
 - generated: true
   identifier: aws-integration-generate-a-new-external-id
