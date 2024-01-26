@@ -66,9 +66,7 @@ You can use the power of filters even if you do not tag your components; to crea
 
 To understand the power of **Filtered Layout**, let us look at our VPN server as an example. In AWS, we tag anything related to the VPN with the key _service_ and the value _wirecraft_, so if we wanted to see everything related to the VPN and how each component connects to each other, we could use the filter _service=wirecraft_ in the search bar just below the **Live** tab, like this.
 
-<section class="video">
-  <video controls="" muted="" width="100%" src="https://images.help.cloudcraft.co/99-create-your-first-cloudcraft-diagram/filtered-layout-example.webm" data-origwidth="0" data-origheight="0"></video>
-</section>
+{{< img src="cloudcraft/getting-started/create-your-first-cloudcraft-diagram/filtered-layout-example.mp4" video="true">}}
 
 As you can see, the EC2 instance that is tagged with _service=wirecraft_ is shown inside the VPC and security group it is connected to, and the same goes for the EBS volume and internet gateway.
 
