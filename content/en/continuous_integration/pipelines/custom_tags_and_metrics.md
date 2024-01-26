@@ -16,8 +16,6 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available for the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Custom tags and metrics is a beta feature and the API is still open to changes.</div>
-
 The custom tags and metrics commands provide a way to add user-defined text and numerical tags to your CI Visibility
 pipeline traces.
 These tags can be used to create facets (string value tags) or measures (numerical value tags). Facets and measures
