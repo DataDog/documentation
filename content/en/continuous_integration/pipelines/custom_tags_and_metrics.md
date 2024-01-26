@@ -127,7 +127,7 @@ datadog-ci metric --level pipeline --metrics "error_rate:0.56"
 The following example adds a metric `binary.size` to the span for the currently running job:
 
 {{< code-block lang="shell" >}}
-datadog-ci metric --level job --metric "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
+datadog-ci metric --level job --metrics "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
 {{< /code-block >}}
 
 To create a measure, click the gear icon next to the metrics name in the [pipeline executions page][4]

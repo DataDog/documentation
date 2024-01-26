@@ -41,7 +41,9 @@ Below are a few examples of what App Builder apps can do:
 
 ## Get started faster with AI
 
-<div class="alert alert-info">This feature is in active development and is opt-in.</div>
+{{< callout url="https://docs.google.com/forms/d/14Heybl3cLHuyxl1XpsGrEoWvc1TPA2DVLeS7S0wgIRI" btn_hidden="false" header="Join the beta!">}}
+AI functionality for App Builder is opt-in.
+{{< /callout >}}
 
 If you're not sure where to start, describe your app to the App Builder AI and let it create a starter app for you.
 
