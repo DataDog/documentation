@@ -60,13 +60,11 @@ To run the workflow:
 
 ## Trigger a workflow from a workflow
 
-You can trigger a child workflow from another workflow using the **Trigger Workflow** action. For example, if you have a workflow that creates a Jira ticket and then sends a Slack message, there's no need to recreate that workflow for all of your monitors. Instead, create the workflow once and trigger it from everywhere else using the Trigger Workflow action.
+You can trigger a child workflow from another workflow using the **Trigger Workflow** action. For example, if you have a complex series of steps that you need to reuse in several workflows, there's no need to recreate those steps for all of your workflows. Instead, create the workflow once and trigger it in your other workflows using the Trigger Workflow action.
+
+<div class="alert alert-info">For billing purposes, triggering a child workflow registers as a new workflow execution.</div>
 
 If the child workflow has [input parameters][5], these parameters appear as required fields in the Trigger Workflow action. In the example below, the **Hostname** input parameter is required because `Hostname` is set as an input parameter in the child workflow.
-
-{{< img src="service_management/workflows/child-workflow.png" alt="Trigger a child workflow using the Trigger Workflow action" style="width:100%;" >}}
-
-For information on creating a workflow that creates a Jira ticket and then sends a Slack message, see [Getting Started with Workflow Automation][6].
 
 ## Trigger a workflow from a Monitor
 
@@ -150,4 +148,3 @@ The initial run history for a workflow provides a panel with the list of previou
 [3]: https://app.datadoghq.com/security/configuration/rules
 [4]: /security/cloud_security_management/workflows
 [5]: /service_management/workflows/build/#input-parameters
-[6]: /getting_started/workflow_automation/
