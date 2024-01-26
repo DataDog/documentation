@@ -24,17 +24,14 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Ruby test instrumentation is in beta.
-</div>
-
 ## Compatibility
 
 Supported languages:
 
 | Language | Version |
 |---|---|
-| Ruby | >= 2.1 |
-| JRuby | >= 9.2 |
+| Ruby | >= 2.7 |
+| JRuby | >= 9.4 |
 
 Supported test frameworks:
 
@@ -209,7 +206,7 @@ DD_ENV=ci bundle exec rake cucumber
 
 ### Adding custom tags to tests
 
-<div class="alert alert-info">`Datadog::CI` public API is available in `ddtrace` gem versions >= 1.17.0</div>
+<div class="alert alert-info"><code>Datadog::CI</code> public API is available in <code>ddtrace</code> gem versions >= 1.17.0</div>
 
 You can add custom tags to your tests by using the current active test:
 
