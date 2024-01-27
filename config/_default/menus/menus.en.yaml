@@ -1356,6 +1356,41 @@ main:
     parent: platform_heading
     identifier: api_catalog
     weight: 80000
+  - name: Setting Up API Catalog
+    url: /tracing/api_catalog/get_started/
+    identifier: api_catalog_getstart
+    parent: api_catalog
+    weight: 1
+  - name: Exploring APIs
+    url: /tracing/api_catalog/explore_and_catalog_apis/
+    identifier: api_catalog_explore
+    parent: api_catalog
+    weight: 2
+  - name: Establish Ownership and Tag Endpoints
+    url: /tracing/api_catalog/explore_and_catalog_apis/
+    identifier: api_catalog_explore
+    parent: api_catalog
+    weight: 3
+  - name: Monitoring APIs
+    url: /tracing/api_catalog/monitor_apis/
+    identifier: api_catalog_monitor
+    parent: api_catalog
+    weight: 4
+  - name: Adding Entries
+    url: /tracing/api_catalog/entries/
+    identifier: api_catalog_entries
+    parent: api_catalog
+    weight: 5
+  - name: Adding Metadata
+    url: /tracing/api_catalog/metadata/
+    identifier: api_catalog_metadata
+    parent: api_catalog
+    weight: 6
+  - name: Troubleshooting
+    url: /tracing/api_catalog/troubleshooting/
+    identifier: api_catalog_troubleshooting
+    parent: api_catalog
+    weight: 7
   - name: Service Level Objectives
     url: service_management/service_level_objectives/
     pre: slos
@@ -2252,21 +2287,6 @@ main:
     identifier: api_catalog
     parent: tracing
     weight: 8
-  - name: Setting Up API Catalog
-    url: /tracing/api_catalog/get_started/
-    identifier: api_catalog_getstart
-    parent: api_catalog
-    weight: 801
-  - name: Exploring and Cataloging APIs
-    url: /tracing/api_catalog/explore_and_catalog_apis/
-    identifier: api_catalog_explore
-    parent: api_catalog
-    weight: 802
-  - name: Monitoring APIs
-    url: /tracing/api_catalog/monitor_apis/
-    identifier: api_catalog_monitor
-    parent: api_catalog
-    weight: 803
   - name: Dynamic Instrumentation
     url: dynamic_instrumentation/
     identifier: dyninst
