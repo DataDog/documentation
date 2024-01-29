@@ -249,6 +249,7 @@ Integrations can be enabled or disabled individually (overriding the default abo
 
 - Running the Java tracer in Bitbucket is not supported.
 - JDK 21 virtual threads are in [Beta](#levels-of-support).
+- Loading multiple Java agents that perform APM/tracing functions is not a recommended or supported configuration.
 
 ## Further Reading
 
