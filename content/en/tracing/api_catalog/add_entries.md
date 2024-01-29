@@ -12,6 +12,8 @@ further_reading:
 - link: "/tracing/api_catalog/monitor_apis/"
   tag: "Documentation"
   text: "Monitoring APIs"
+aliases:
+    - /tracing/api_catalog/get_started
 ---
 
 {{< site-region region="gov,ap1" >}}
