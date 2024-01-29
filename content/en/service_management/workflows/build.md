@@ -29,7 +29,11 @@ You can create workflows or edit existing workflows from the [Workflow Automatio
 1. If desired, use the search bar to narrow the list of blueprints by name, category, or integration.
 1. Find the blueprint you'd like to use, and click on it. The workflow canvas appears.
 1. Click **Create From Blueprint**. The workflow canvas updates to show your newly created workflow.
-1. Enter a new name and description for the workflow and click **Save**.
+1. Enter a new name and description for the workflow.
+1. Optionally, select or enter tags you'd like to apply to the workflow. For more information on Datadog tags, see [Getting Started with Tags][7].
+1. Optionally, select any related [services][8] to apply to the workflow.
+1. Optionally, select [teams][9] to associate with the workflow. If a team doesn't exist, you can enter a name to create it.
+1. Click **Save** to apply your changes.
 1. Workflow steps that require updates are marked with exclamation marks. Click on each workflow step you'd like to modify and fill in any empty fields on the **Configure** tab.
 1. When you are finished modifying the workflow, Click **Run** to test your workflow.
 1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
@@ -53,8 +57,11 @@ To create a workflow, click **New workflow** on the [Workflow Automation][1] pag
 
 To configure your workflow:
 1. In the workflow configuration panel, enter a **Name** for your workflow.
-1. Select relevant **Tags**, **Services**, or **Teams**.
+1. Optionally, select or enter tags you'd like to apply to the workflow. For more information on Datadog tags, see [Getting Started with Tags][7].
+1. Optionally, select any related [services][8] to apply to the workflow.
+1. Optionally, select [teams][9] to associate with the workflow. If a team doesn't exist, you can enter a name to create it.
 1. Enter input or output parameters if your workflow uses them.
+1. Click **Save** to apply your changes.
 
 If you're not sure about your workflow configuration, you can return to the panel later by clicking anywhere on the workflow canvas.
 
@@ -187,4 +194,7 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 [4]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
 [5]: https://app.datadoghq.com/workflow/blueprints
 [6]: /service_management/workflows/actions_catalog/generic_actions/#testing-expressions-and-functions
+[7]: /getting_started/tagging/
+[8]: /glossary/#service
+[9]: /account_management/teams/
 
