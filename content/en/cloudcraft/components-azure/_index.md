@@ -19,6 +19,7 @@ kind: guide
     {{< nextlink href="cloudcraft/components-azure/load-balancer">}}Load balancer{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-azure/application-gateway">}}Application gateway{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-azure/bastion">}}Bastion{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/vpn-gateway">}}VPN gateway{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Storage:" >}}
