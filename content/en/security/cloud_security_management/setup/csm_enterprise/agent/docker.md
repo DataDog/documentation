@@ -6,6 +6,8 @@ type: multi-code-lang
 code_lang_weight: 65 # a number that represents relative weight. 
 ---
 
+**MISSING INSTRUCTIONS FOR CSM VULNERABILITIES**
+
 Use the following command to start the Runtime Security Agent and `system-probe` in a Docker environment:
 
 {{< code-block lang="shell" filename="docker-runtime-security.sh" >}}
