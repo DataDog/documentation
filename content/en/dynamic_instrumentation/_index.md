@@ -30,14 +30,11 @@ further_reading:
   text: "Use Datadog Dynamic Instrumentation to add application logs without redeploying"
 ---
 
-{{< site-region region="gov,ap1" >}}
-<div class="alert alert-warning">Dynamic Instrumentation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-
 ## Overview
 
 Dynamic instrumentation allows you to add instrumentation into your running production systems without any restarts and at any location in your application's code, including third-party libraries. You can add or modify telemetry for logs, metrics, spans, and corresponding tagging, from the Datadog UI. Dynamic Instrumentation has low overhead and has no side effects on your system.
+
+If you are interested in trying out the latest user experience improvements for Dynamic Instrumentation, consider opting into the [Symbol Database private beta][17].
 
 ## Getting started
 
@@ -219,3 +216,4 @@ You can use a *span tag probe* as an alternative to [using Custom Instrumentatio
 [14]: /tracing/trace_collection/custom_instrumentation/java/#adding-tags
 [15]: /dynamic_instrumentation/expression-language
 [16]: https://app.datadoghq.com/dynamic-instrumentation/setup
+[17]: /dynamic_instrumentation/symdb/

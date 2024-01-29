@@ -49,6 +49,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/chaos-engineering-for-security/"
     tag: "Blog"
     text: "Security-focused chaos engineering experiments for the cloud"
+  - link: "https://www.datadoghq.com/blog/datadogs-approach-devsecops/"
+    tag: "Blog"
+    text: "Datadog's approach to DevSecOps"
 cascade:
     algolia:
         rank: 70

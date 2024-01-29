@@ -69,6 +69,8 @@ grant select on v$dataguard_stats to datadog ;
 grant select on v$transaction to datadog;
 grant select on v$locked_object to datadog;
 grant select on dba_objects to datadog;
+grant select on cdb_data_files to datadog;
+grant select on dba_data_files to datadog;
 ```
 
 ## Configure the Agent

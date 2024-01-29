@@ -248,6 +248,9 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Terraform" %}}
+
+To use Terraform, [wrap your Lambda function handler][2] with the Datadog Lambda library. Set your function's handler to the Datadog handler function, `datadog_lambda.handler.handler`.
+
 Use this format for your [Terraform resource][1]:
 ```sh
 resource "aws_lambda_function" "lambda" {
@@ -366,6 +369,7 @@ resource "aws_lambda_function" "lambda" {
 ```
 
 [1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function.html#lambda-layers
+[2]: /serverless/guide/handler_wrapper/
 {{% /tab %}}
 {{% tab "Custom" %}}
 
