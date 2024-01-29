@@ -26,6 +26,7 @@ The list below includes all Microsoft Azure components Cloudcraft supports.
 - Virtual Machines
 - Virtual Machine Scale Sets
 - Virtual Networks
+- VPN Gateways
 - Web Apps
 
 Assuming we do not support a component you are looking for, the **Design** tab lets you represent anything using blocks, icons, images, and text labels.
