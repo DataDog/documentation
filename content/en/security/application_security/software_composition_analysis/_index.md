@@ -1,8 +1,9 @@
 ---
-title: Application Vulnerability Management
+title: Software Composition Analysis
 kind: documentation
 aliases:
   - /security/application_security/risk_management/
+  - /security/application_security/vulnerability_management/
 further_reading:
 - link: "/security/application_security/how-appsec-works/"
   tag: "Documentation"
@@ -16,6 +17,8 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
   tag: "Blog"
   text: "Enhance application security in production with Datadog Application Vulnerability Management"  
+algolia:
+  tags: ['Software Composition Analysis', 'Vulnerability Management', 'SCA', 'AVM']
 ---
 
 {{< site-region region="gov" >}}
@@ -24,13 +27,15 @@ further_reading:
 
 ## Overview
 
-Application Vulnerability Management offers built-in detection capabilities that warn you about the vulnerabilities detected in your services' open source dependencies. Details of that information are shown in the [Vulnerability Explorer][3], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
+Datadog Software Composition Analysis (SCA) helps you leverage open source with confidence. The capabilities of SCA include vulnerability detection, business risk (library inventory and licensing information), and quality evaluation of the open source libraries in your services. The key differentiation factor powering Datadog SCA is the end-to-end coverage of your software development lifecycle: from the code that your developers commit, to the production applications already running in your Datadog deployment.
 
 Check [ASM Compatibility][6] to see if your service is supported.
 
 ## Explore vulnerabilities
 
-The Vulnerability Explorer shows a complete list of vulnerabilities detected by Application Vulnerability Management across all your services, ordering the vulnerabilities based on their severity, and offering grouping and filtering capabilities so you can investigate and prioritize problems. For open source vulnerabilities, it shows the number of affected services, the language of the affected library, and the last time that vulnerability was detected.
+The [Vulnerability Explorer][3] shows a complete list of vulnerabilities detected by Software Composition Analysis across all your services, ordering the vulnerabilities based on their severity, and offering grouping and filtering capabilities so you can investigate and prioritize problems. For SCA vulnerabilities, it shows the number of affected services, the language of the affected library, and the last time that vulnerability was detected.
+
+**TBD**: New screenshot with new version that has the static and runtime buttons
 
 {{< img src="security/application_security/vulnerability_management/avm_vuln_severity_status.png" alt="Application Vulnerability Management explorer page." style="width:100%;" >}}
 
@@ -48,7 +53,7 @@ The adjusted vulnerability score includes the full context of each service:
 
 {{< img src="security/application_security/vulnerability_management/vulnerability-score-modified_2.png" alt="Vulnerability details page showing a modified severity score" style="width:100%;" >}}
 
-See [getting started with application vulnerability management][7] for more information on the adjusted vulnerability score.
+See [getting started with software composition analysis][7] for more information on the adjusted vulnerability score.
 
 ## Remediation
 
@@ -56,9 +61,13 @@ The explorer also offers remediation recommendations for detected vulnerabilitie
 
 {{< img src="getting_started/appsec/appsec-vuln-remediation_3.png" alt="Application Vulnerability Management vulnerability details page showing affected services, links to infrastructure, suggested remediation, and links to more information." style="width:100%;" >}}
 
-## Manage open source vulnerabilities
+## Manage SCA vulnerabilities
 
-Application Vulnerability Management detects the open source libraries used by your application at runtime, and reports security vulnerabilities associated with them. In order to do it, Application Vulnerability Management combines various public open source software known vulnerability data sources along with data obtained by Datadog security research team. Datadog does not scan your source code and the analysis is based on how your application behaves during runtime.
+Datadog SCA detects the open source libraries used by your application at runtime, and reports security vulnerabilities associated with them. Datadog does not scan your source code, and the analysis is based on how your application behaves during runtime. The open-source libraries are monitored from the code commit to the repository (static point of view), to the applications running in production (runtime point of view). To switch to the code repository commit point of view, click on the static button. To switch to the real-time point of view to the applications already running, click on the runtime button.
+
+## Library Inventory
+
+The Datadog SCA Library Inventory helps you understand the list of libraries and its versions that compose your application. Since Datadog SCA covers your software development life cycle end-to-end, the libraries are detected throughout the entire lifecycle of the application. The library inventory contains everything you need to know about the libraries, including name and version, and other risk aspects such as licenses, and quality aspects. 
 
 ## Manage code-level vulnerabilities
 
@@ -86,12 +95,9 @@ To disable code-level vulnerability detection capability in Vulnerability Manage
 
 If you need additional help, contact [Datadog support][1].
 
-
 ## Risk information in APM views
 
-Application Vulnerability Management enriches the information APM is already collecting, and flags libraries that match with current vulnerability advisories. Potentially vulnerable services are highlighted directly in the security views embedded in the [APM Service Catalog][2].
-
-{{< img src="security/application_security/vulns_in_service_catalog_v2.png" alt="Vulnerability information shown in the APM Service Catalog" style="width:100%;" >}}
+Software Composition Analysis enriches the information APM is already collecting, and flags libraries that match with current vulnerability advisories. Potentially vulnerable services are highlighted directly in the security views embedded in the [APM Service Catalog][2].
 
 {{< img src="security/application_security/threats/threats-on-svc-cat_3.png" alt="Vulnerability information shown in the APM Service Catalog" style="width:100%;" >}}
 

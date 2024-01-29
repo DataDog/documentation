@@ -13,7 +13,7 @@ ASM provides serverless capability for the following platforms and libraries:
 ## AWS Lambda
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
   
-|Type           	| Threat Detection	|  Vulnerability Management for OSS	| Vulnerability Management for Code-Level 	|
+|Type           	| Threat Detection	|  Software Composition Analysis (SCA)	| Vulnerability Management for Code-Level 	|
 | ---  		|   ---             		|           ----           			|           ----            				|
 | Java  		| {{< X >}}         	| 	                			|						|
 | .NET    	| {{< X >}}         	|  	                          		|						|

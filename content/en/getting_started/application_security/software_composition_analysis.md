@@ -1,6 +1,8 @@
 ---
-title: Getting Started with Application Vulnerability Management
+title: Getting Started with Software Composition Analysis
 kind: documentation
+aliases:
+- /getting_started/application_security/software_composition_analysis
 further_reading:
 - link: "/security/application_security/terms"
   tag: "Documentation"
@@ -19,9 +21,9 @@ further_reading:
 
 ## Overview
 
-Datadog [Application Vulnerability Management][1] (AVM) continuously monitors your production environment for vulnerabilities in the open source libraries your applications rely on. You can identify and prioritize the remediation of the highest vulnerabilities by business impact.
+Datadog [Software Composition Analysis][1] (SCA) continuously monitors your production environment for vulnerabilities in the open source libraries your applications rely on. You can identify and prioritize the remediation of the highest vulnerabilities by business impact.
 
-This guide walks you through best practices for getting your team up and running with AVM.
+This guide walks you through best practices for getting your team up and running with SCA.
 
 ## Phase 1: Enable
 1. Check [ASM Compatibility][2] to see if your service is supported.
@@ -57,7 +59,7 @@ This guide walks you through best practices for getting your team up and running
 
       {{< img src="getting_started/appsec/appsec-vuln-explorer_3.png" alt="Application Vulnerability Management detailed view of the vulnerability." style="width:100%;" >}}
 
-      **Note**: The severity of a vulnerability within AVM is modified from the base score to take into account the presence of attacks and the business sensitivity of the environment where the vulnerability is detected. For example, if no production environment is detected, the severity is reduced.</br> </br>
+      **Note**: The severity of a vulnerability within SCA is modified from the base score to take into account the presence of attacks and the business sensitivity of the environment where the vulnerability is detected. For example, if no production environment is detected, the severity is reduced.</br> </br>
 
       The adjusted vulnerability score includes the full context of each service:
         - The original vulnerability severity.

@@ -15,7 +15,7 @@ The following ASM capabilities are supported in the Java library, for the specif
 | Threat Detection | 1.8.0  |
 | Threat Protection| 1.9.0 |
 | Customize response to blocked requests | 1.11.0 |
-| Vulnerability Management for Open Source Software (OSS) | 1.1.4 |
+| Software Composition Analysis (SCA) | 1.1.4 |
 | Vulnerability Management for Code-level (beta) | 1.15.0|
 | Automatic user activity event tracking | 1.20.0 |
 

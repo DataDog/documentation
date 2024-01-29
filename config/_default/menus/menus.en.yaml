@@ -195,9 +195,9 @@ main:
     url: getting_started/application_security
     parent: getting_started
     weight: 22
-  - name: Application Vulnerability Management
-    identifier: getting_started_application_vulnerability
-    url: getting_started/application_security/vulnerability_management
+  - name: Software Composition Analysis
+    identifier: getting_started_software_composition_analysis
+    url: getting_started/application_security/software_composition_analysis
     parent: getting_started_application_security
     weight: 2201
   - name: Workflow Automation
@@ -3733,10 +3733,10 @@ main:
     parent: application_security
     identifier: appsec_howitworks
     weight: 3
-  - name: Vulnerability Management
-    url: security/application_security/vulnerability_management/
+  - name: Software Composition Analysis
+    url: security/application_security/software_composition_analysis/
     parent: application_security
-    identifier: application_risk_management
+    identifier: application_security_software_composition_analysis
     weight: 4
   - name: Threat Management
     url: security/application_security/threats/
