@@ -17,6 +17,8 @@ sudo chmod 640 /etc/datadog-agent/system-probe.yaml /etc/datadog-agent/security-
 sudo chgrp dd-agent /etc/datadog-agent/system-probe.yaml /etc/datadog-agent/security-agent.yaml
 ```
 
+**Note**: Vulnerabilities are evaluated and and scanned against your containers and hosts every hour.
+
 ```bash
 # /etc/datadog-agent/datadog.yaml file
 remote_configuration:
@@ -36,6 +38,15 @@ compliance_config:
   enabled: true
   host_benchmarks:
     enabled: true
+
+sbom:
+  enabled: true
+  container_image:
+    enabled: true
+  host:
+    enabled: true
+container_image:
+  enabled: true
 ```
 
 ```bash
@@ -63,33 +74,5 @@ runtime_security_config:
 
   remote_configuration:
     ## @param enabled - boolean - optional - default: false
-    enabled: true
-```
-
-### Configure the Agent for Vulnerabilities
-
-The following instructions enables the image metadata collection and [Software Bill of Materials (SBOM)][11] collection in the Datadog Agent. This allows you to scan the libraries in your container images and hosts to detect vulnerabilities. Vulnerabilities are evaluated and and scanned against your containers and hosts every hour.
-
-#### Containers
-
-Add the following to your `datadog.yaml` configuration file:
-
-```yaml
-sbom:
-  enabled: true
-  container_image:
-    enabled: true
-container_image:
-  enabled: true
-```
-
-#### Hosts
-
-**Note**: CSM Enterprise customers can enable both container and host SBOM collection at the same time by combining the [containers](#containers) setup with the following setup for hosts configuration:
-
-```yaml
-sbom:
-  enabled: true
-  host:
     enabled: true
 ```
