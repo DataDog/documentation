@@ -1,16 +1,64 @@
 ---
-title: How to monitor live processes
+title: Create a live process monitor
 kind: Guide
 ---
 
 ## Overview
 
-Live Processes is essentially a distributed `top` for every process in your infrastructure. As part of the Live Processes product, we also offer live process monitors, which allow users to automatically track the amount of running processes across their entire infrastructure. You can use LP Monitors to:
+With the Live Processes product, you can monitor the number of running processes across your entire infrastructure. Live process monitors are most useful for adding observability to non-containerized processes.
 
-- Ensure that you have enough replicas of a non-containerized process to serve customers.
-- Alerting when a specific process is running.
+Use live process monitors to:
 
-Filtering processes and selecting a meaningful evaluation window is often challenging. This document intends to walk through the recommended approaches for creating a live process monitor.
+- Ensure that you have enough replicas of a process to serve customers.
+- Alert when a specific process is running.
+
+An improperly configured monitor is prone to false positives. This guide covers the recommended best practices for creating a reliable live process monitor.
+
+## Create a monitor
+
+### 1. Launch the monitor creation flow
+
+On the [**Infrastructure > Processes**][1] page, expand the **New Metric** dropdown and click **Create monitor**.
+
+<!-- create-process-monitor.png -->
+
+**Note**: Live process monitors can also be created from the **Monitors > New monitor** page, but the steps occur in a different order than shown below.
+
+### 2. Scope the monitor
+
+<div class="alert alert-warning">To avoid false positives, the scope of your monitor should not exceed a few thousand processes. Because text search is fuzzy, tags are the most accurate way to adjust the scope of your monitor.</div>
+
+1. Add tags to the monitor in the **by tags** field. For example, use `command:puma` to monitor processes associated with the `puma` command.
+
+<!-- tag-scoped-process-monitor -->
+
+2. Optionally, refine the monitor's scope by adding search text to the **by text** field. In the example below, only processes matching `cluster worker` are included.
+
+<!-- text-scoped-process-monitor -->
+
+3. If your monitor's scope still exceeds a few thousand processes total across all process groups, use additional tags to break it into multiple monitors. 
+  - For example, you can use the `env` tag to create separate monitors for `prod` and `staging`.
+
+### 3. [Single alert, multi alert]
+
+### 4. Choose a timeframe
+
+
+
+- To avoid false positives, use a minimum interval of **5 minutes**.
+- If your monitor uses tags that come from a cloud provider crawler, use a minimum interval of **15 minutes**.
+- To avoid delayed alerts, use a maximum interval of **1 hour**.
+
+<div class="alert alert-warning">
+The monitor updates its query result every 1 minute, no matter what query evaluation interval you choose for the monitor. The query evaluation interval only determines how far back the monitor looks, so a longer query interval is less prone to false positives.
+</div>
+
+
+
+
+
+
+
 
 ## Best practices
 
@@ -67,3 +115,5 @@ processes("puma worker").by().rollup('count').last('5m') < 1
 ```
 
 Example monitor: https://app.datadoghq.com/monitors/138256501?view=spans (in demo org)
+
+[1]: https://app.datadoghq.com/process
