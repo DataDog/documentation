@@ -45,7 +45,7 @@ When aggregating indexed logs by **Fields**, all logs matching your query filter
 On top of these aggregates, you can extract the following measures:
 
 - **count of logs** per group
-- **unique count** of coded values for a query search value per group
+- **count unique of** coded values for a query search value per group
 - **statistical operations** (`min`, `max`, `avg`, and `percentiles`) on numerical values of a query search value per group
 
 Individual logs with multiple query search values belong to that many aggregates. For instance, a log with the `team:sre` and the `team:marketplace` tags are counted once in the `team:sre` aggregate and once in the `team:marketplace` aggregate.
