@@ -1351,7 +1351,7 @@ main:
     identifier: service_catalog_guides
     weight: 9
   - name: API Catalog
-    url: /tracing/api-catalog/
+    url: /tracing/api_catalog/
     pre: api
     parent: platform_heading
     identifier: api_catalog

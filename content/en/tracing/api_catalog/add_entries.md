@@ -22,7 +22,7 @@ aliases:
 
 ## Overview
 
-API Catalog uses APM instrumentation for distributed tracing to automatically discover endpoints in all environments on your Datadog organization. For instrumented services and supported libraries, endpoints are automatically populated into API Catalog.
+API Catalog uses APM instrumentation for distributed tracing to automatically discover endpoints your Datadog organization. For instrumented services with supported libraries, endpoints are automatically populated into API Catalog.
 
 Register auto-discovered endpoints, or upload an OpenAPI file to benefit the full value of the API Catalog.
 
@@ -39,56 +39,15 @@ To register endpoints:
 
 {{< img src="tracing/api_catalog/api-catalog-register.png" alt="Select endpoints in API Catalog and click Register Endpoints button." style="width:65%;" >}}
 
-After endpoints are registered, Datadog starts collecting a new endpoint metric for better monitoring capabilities. It might take a few minutes for the data to display if you try to create a new monitor.
+After endpoints are registered, Datadog starts collecting a new endpoint metric for better monitoring capabilities.
 
-Auto discovery isn't available for some frameworks. Check compatibility status in the **learn more** button on the app. If you still cannot find your endpoints, try uploading a definition file containing them. Datadog automatically starts collecting data on those endpoint definitions after they are uploaded.
+Auto discovery is not available for some frameworks. Check compatibility status in the **learn more** button on the app. If you still cannot find your endpoints, try uploading a definition file containing them. Datadog automatically starts collecting data on those endpoint definitions after they are uploaded.
 
 ## Upload OpenAPI file
 
 Upload API definitions that you already own to see which endpoints are receiving traffic, which are not receiving traffic, and get performance and deployment information on top of your API definitions.
 
 Supported formats are OpenAPI 2 and 3.
-
-Datadog support custom OpenAPI tags to help manage metadata:
-- dd_tags
-- dd_team
-
-```yaml
-openapi: 3.0.2
-info:
- title: API Name
- description: API Description
- version: 1.0.0
-x-datadog:
- teamHandle: dd-team
-paths:
- /api/v2/customers/{id}:
-   get:
-     summary: get customer information
-     operationId: getCustomerInfo
-     parameters:
-       - in: path
-         name: id
-     responses:
-       '200':
-         description: Successful operation
-         content:
-           application/vnd.api+json:
-             schema:
-               type: object
-               properties:
-                 data:
-                   type: array
-                   description: Contains all customer information
-                   items:
-                     $ref: '#/components/schemas/customerInfo'
-       '400':
-         description: Invalid arguments
-       '401':
-         description: Unauthorized operation
-       '500':
-         description: An internal server error
-```
 
 ## Further reading
 
