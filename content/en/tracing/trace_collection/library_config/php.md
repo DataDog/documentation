@@ -344,8 +344,8 @@ Enable route-based naming for HTTP server requests. Set to `true` to use the int
 
 `DD_TRACE_SAMPLE_RATE`
 : **INI**: `datadog.trace.sample_rate`<br>
-**Default**: `1.0`<br>
-The sampling rate for the traces (defaults to: between `0.0` and `1.0`).
+**Default**: `-1`<br>
+The sampling rate for the traces, a number between `0.0` and `1.0`. The default value of `-1` defers control of sampling to the Datadog Agent.
 
 `DD_TRACE_SAMPLING_RULES`
 : **INI**: `datadog.trace.sampling_rules`<br>

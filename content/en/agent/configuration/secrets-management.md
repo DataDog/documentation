@@ -329,7 +329,7 @@ In addition to these permissions, you need to enable the script to read from mul
 Datadog Agent v7.32 introduces the `readsecret_multiple_providers.sh` script. Datadog recommends that you use this script instead of `/readsecret.py` and `/readsecret.sh` from Agent v6.12. Note that `/readsecret.py` and `/readsecret.sh` are still included and supported in the Agent to read files.
 
 #### Usage
-These scripts require a folder passed as an argument. Secret handles are interpreted as file names,\ relative to this folder. To avoid leaking sensitive information, these scripts refuse to access any file out of the root folder specified (including symbolic link targets).
+These scripts require a folder passed as an argument. Secret handles are interpreted as file names, relative to this folder. To avoid leaking sensitive information, these scripts refuse to access any file out of the root folder specified (including symbolic link targets).
 
 These scripts are incompatible with [OpenShift restricted SCC operations][5] and require that the Agent runs as the `root` user.
 
