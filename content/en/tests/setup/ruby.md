@@ -293,9 +293,9 @@ require "ddtrace/auto_instrument" if ENV["DD_ENV"] == "ci"
 
 For the full list of available instrumentation methods, see the [`ddtrace` documentation][8]
 
-## WebMock
+## Webmock
 
-[WebMock][10]
+[Webmock][10]
 is a popular Ruby library that stubs HTTP requests when running tests.
 By default it fails when used together with datadog-ci as traces are being sent
 to Datadog via HTTP calls.
@@ -318,12 +318,12 @@ WebMock.disable_net_connect!(:allow => "localhost:8126")
 
 {{% ci-git-metadata %}}
 
-## Manual testing API
+## Using manual testing API
 
 If you use RSpec, Minitest, or Cucumber, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
 
 Use the manual testing API only if you use an unsupported testing framework or have a different testing mechanism.
-Full public API documentation is available on our [YARD site][11].
+Full public API documentation is available on [YARD site][11].
 
 ### Domain model
 
@@ -349,7 +349,7 @@ To start a test module, call `Datadog::CI.start_test_module` and pass the name o
 
 When the module run has finished, call `Datadog::CI::TestModule#finish`.
 
-#### Test Suite
+#### Test suite
 
 A test suite comprises a set of tests that test similar functionality.
 A single suite usually corresponds to a single file where tests are defined.
@@ -363,14 +363,13 @@ Call `Datadog::CI::TestSuite#finish` when all the related tests in the suite hav
 A test represents a single test case that is executed as part of a test suite.
 Usually it corresponds to a method that contains testing logic.
 
-Create tests in a suite by calling `Datadog::CI#start_test` or `Datadog::CI.trace_test` and passing the name of the test and name of the
-test suite (must be the same as name of the test suite started in previous step).
+Create tests in a suite by calling `Datadog::CI#start_test` or `Datadog::CI.trace_test` and passing the name of the test and name of the test suite. Test suite name must be the same as name of the test suite started in previous step.
 
 Call `datadog.trace.api.civisibility.DDTest#end` when a test has finished execution.
 
 ### Code example
 
-The following code represents a simple usage of the API:
+The following code represents example usage of the API:
 
 ```ruby
 require "datadog/ci"
