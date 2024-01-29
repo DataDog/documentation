@@ -69,7 +69,7 @@ To set up a scanning group:
 
 ### Add scanning rules
 
-A scanning rule determines what sensitive information to match within the data defined by a scanning group. You can add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules using regex patterns. The data is scanned at the point of ingestion. For logs, the scan is done before indexing.
+A scanning rule determines what sensitive information to match within the data defined by a scanning group. You can add predefined scanning rules from Datadog's Scanning Rule Library or create your own rules using regex patterns. The data is scanned at ingestion time during processing. For logs, this means the scan is done before indexing and other routing decisions.
 
 For Terraform, see the [Datadog Sensitive Data Scanner rule][6] resource.
 
@@ -109,7 +109,6 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
     - The \K start of match reset directive
     - Callouts and embedded code
     - Atomic grouping and possessive quantifiers
-1. For **Create keyword dictionary**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`. You can also require that these keywords must be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
 {{% sds-scanning-rule %}}
 1. Click **Add Rule**.
 
@@ -124,17 +123,17 @@ You can create custom scanning rules using regex patterns to scan for sensitive 
 
 See [Investigate Sensitive Data Issues][7] for details on how to use the [Summary][8] page to triage your sensitive data issues.
 
-### Control access to events with sensitive data
+### Control access to logs with sensitive data
 
-To control who can access events containing sensitive data, use tags added by the Sensitive Data Scanner to build queries with role-based access control (RBAC). You can restrict access to specific individuals or teams until the data ages out after the retention period.
+To control who can access logs containing sensitive data, use tags added by the Sensitive Data Scanner to build queries with role-based access control (RBAC). You can restrict access to specific individuals or teams until the data ages out after the retention period. See [How to Set Up RBAC for Logs][9] for more information.
 
 ### Redact sensitive data in tags
 
-To redact sensitive data contained in tags, you must [remap][9] the tag to an attribute and then redact the attribute. Uncheck `Preserve source attribute` in the remapper processor so that the tag is not preserved during the remapping.
+To redact sensitive data contained in tags, you must [remap][10] the tag to an attribute and then redact the attribute. Uncheck `Preserve source attribute` in the remapper processor so that the tag is not preserved during the remapping.
 
 To remap the tag to an attribute:
 
-1. Navigate to your [log pipeline][10].
+1. Navigate to your [log pipeline][11].
 2. Click **Add Processor**.
 3. Select **Remapper** in the processor type dropdown menu.
 4. Name the processor.
@@ -157,7 +156,7 @@ To redact the attribute:
 
 ## Out-of-the-box dashboard
 
-When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][11] summarizing sensitive data findings is automatically installed in your account. To access this dashboard, go to **Dashboards > Dashboards List** and search for `Sensitive Data Scanner Overview`.
+When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][12] summarizing sensitive data findings is automatically installed in your account. To access this dashboard, go to **Dashboards > Dashboards List** and search for `Sensitive Data Scanner Overview`.
 
 {{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:70%;">}}
 
@@ -173,6 +172,7 @@ When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][11] summar
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/sensitive_data_scanner_rule
 [7]: /sensitive_data_scanner/investigate_sensitive_data_issues/
 [8]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner/summary
-[9]: /logs/log_configuration/processors/?tab=ui#remapper
-[10]: https://app.datadoghq.com/logs/pipelines
-[11]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
+[9]: /logs/guide/logs-rbac/
+[10]: /logs/log_configuration/processors/?tab=ui#remapper
+[11]: https://app.datadoghq.com/logs/pipelines
+[12]: https://app.datadoghq.com/dash/integration/sensitive_data_scanner
