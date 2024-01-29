@@ -28,7 +28,6 @@ code_lang_weight: 60 # a number that represents relative weight. 
           enabled: true
           hostBenchmarks:
             enabled: true
-        # Add this to enable Container Vulnerability Scanning and Host Vulnerability Scanning
         # Enables the image metadata collection and Software Bill of Materials (SBOM) collection
         sbom:
           enabled: true
