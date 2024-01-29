@@ -386,7 +386,9 @@ To retrieve the status of the sub-monitor `a` use:
 
 Possible values for the status are: `OK`, `Alert`, `Warn`, and `No Data`.
 
-Composite monitors also support tag variables in the same way as their underlying monitors. They follow the same format as other monitors, provided the underlying monitors are grouped by the same tag/facet. For instance,  if your composite monitor has sub-monitor `a`, given that `a` is a log monitor, you can include the value of any tag/facet of `a` with:
+Composite monitors also support tag variables in the same way as their underlying monitors. They follow the same format as other monitors, provided the underlying monitors are grouped by the same tag or facet.
+
+For instance, assume your composite monitor has a sub-monitor `a`, which is a Logs monitor. You can include the value of any tag or facet of `a` with:
 
 ```text
 {{ a.log.message }} or {{ a.log.my_facet }}
