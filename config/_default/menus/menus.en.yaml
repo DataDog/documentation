@@ -3567,15 +3567,15 @@ main:
     parent: csm_setup_pro
     identifier: csm_setup_pro_agent
     weight: 1000001
-  - name: CSM Workload Security
-    url: security/cloud_security_management/setup/csm_workload_security
+  - name: CSM Cloud Workload Security
+    url: security/cloud_security_management/setup/csm_cloud_workload_security
     parent: csm_setup
-    identifier: csm_setup_workload_security
+    identifier: csm_setup_cloud_workload_security
     weight: 10010
   - name: Agent
-    url: security/cloud_security_management/setup/csm_workload_security/agent
-    parent: csm_setup_workload_security
-    identifier: csm_setup_workload_security_agent
+    url: security/cloud_security_management/setup/csm_cloud_workload_security/agent
+    parent: csm_setup_cloud_workload_security
+    identifier: csm_setup_cloud_workload_security_agent
     weight: 1000000
   - name: Threats
     url: security/threats/
