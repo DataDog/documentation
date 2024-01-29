@@ -138,6 +138,9 @@ Add the following to your CI pipeline:
 </div>
 
 ```bash
+# Set the Datadog site to send information to
+export DD_SITE="datadoghq.com"
+
 # Install dependencies
 npm install -g @datadog/datadog-ci 
 
