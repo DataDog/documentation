@@ -62,9 +62,9 @@
 				{{ $view_findings_text := "View Signals"}}
 
 				{{ if eq $rule_category "CSM Identity Risks"}}
-				{{ $view_findings_text = "View Identity Risks"}}
+					{{ $view_findings_text = "View Identity Risks"}}
 				{{ else if strings.Contains $rule_category "CSM Misconfigurations"}}
-				{{ $view_findings_text = "View Misconfigurations"}}
+					{{ $view_findings_text = "View Misconfigurations"}}
 				{{ end }}
 
 				<div class="col-12 col-md-5 col-lg-6 col-xl-5">
