@@ -192,7 +192,7 @@ To upload a SARIF report:
 
 ## Run Static Analysis in a CI pipeline
 
-Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][2] and checks your code against Datadog's default rulesets.
+Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8] and checks your code against Datadog's default rulesets.
 
 ### Search and filter results
 
@@ -244,3 +244,4 @@ bar = 2
 [4]: /account_management/api-app-keys/
 [6]: /code_analysis/static_analysis/rules
 [7]: /getting_started/site/
+[8]: https://github.com/DataDog/datadog-ci
