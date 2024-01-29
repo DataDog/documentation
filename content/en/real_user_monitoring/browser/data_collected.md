@@ -86,6 +86,17 @@ The following device-related attributes are attached automatically to all events
 | `device.model`   | string | The device model as reported by the device (User-Agent HTTP header).   |
 | `device.name` | string | The device name as reported by the device (User-Agent HTTP header). |
 
+### Connectivity
+
+The following network-related attributes are attached automatically to all events collected by Datadog:
+
+| Attribute name                       | Type   | Description                                                                                                               |
+|--------------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------|
+| `connectivity.status`                | string | Status of device network reachability (`connected` or `not connected`).                                       |
+| `connectivity.interfaces`            | array  | The list of available network interfaces (for example, `bluetooth`, `cellular`, `ethernet`, or `wifi`).                   |
+| `connectivity.effective_type`        | string | [Effective connection type][18], reflecting the measured network performance (`slow-2g`, `2g`, `3g`, or `4g`). |
+
+
 ### Operating system
 
 The following OS-related attributes are attached automatically to all events collected by Datadog:
@@ -202,19 +213,19 @@ Detailed network timing data for the loading of an application's resources are c
 
 ### Resource attributes
 
-| Attribute                      | Type   | Description                                                                             |
-|--------------------------------|--------|-----------------------------------------------------------------------------------------|
-| `resource.type`                | string | The type of resource being collected (for example, `css`, `javascript`, `media`, `XHR`, or `image`).           |
-| `resource.method`                | string | The HTTP method (for example `POST` or `GET`).           |
-| `resource.status_code`             | number | The response status code.                                                               |
-| `resource.url`                     | string | The resource URL.                                                                       |
-| `resource.url_host`        | string | The host part of the URL.                                                          |
-| `resource.url_path`        | string | The path part of the URL.                                                          |
-| `resource.url_query` | object | The query string parts of the URL decomposed as query params key/value attributes. |
-| `resource.url_scheme`      | string | The protocol name of the URL (HTTP or HTTPS).                                            |
-| `resource.provider.name`      | string | The resource provider name. Default is `unknown`.                                            |
-| `resource.provider.domain`      | string | The resource provider domain.                                            |
-| `resource.provider.type`      | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).                                            |
+| Attribute                  | Type   | Description                                                                                          |
+|----------------------------|--------|------------------------------------------------------------------------------------------------------|
+| `resource.type`            | string | The type of resource being collected (for example, `css`, `javascript`, `media`, `XHR`, or `image`). |
+| `resource.method`          | string | The HTTP method (for example `POST` or `GET`).                                                       |
+| `resource.status_code`     | number | The response status code (available for fetch/XHR resources only).                                   |
+| `resource.url`             | string | The resource URL.                                                                                    |
+| `resource.url_host`        | string | The host part of the URL.                                                                            |
+| `resource.url_path`        | string | The path part of the URL.                                                                            |
+| `resource.url_query`       | object | The query string parts of the URL decomposed as query params key/value attributes.                   |
+| `resource.url_scheme`      | string | The protocol name of the URL (HTTP or HTTPS).                                                        |
+| `resource.provider.name`   | string | The resource provider name. Default is `unknown`.                                                    |
+| `resource.provider.domain` | string | The resource provider domain.                                                                        |
+| `resource.provider.type`   | string | The resource provider type (for example, `first-party`, `cdn`, `ad`, or `analytics`).                |
 
 ### Long task timing metrics
 
@@ -298,3 +309,4 @@ Source errors include code-level information about the error. For more informati
 [15]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming
 [16]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-metrics
 [17]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions
+[18]: https://developer.mozilla.org/en-US/docs/Glossary/Effective_connection_type

@@ -82,7 +82,6 @@ Classic:
       official: true
       api: true
       authors: Datadog
-      notes: Client library in beta and subject to change.
     - name: godspeed
       link: https://github.com/theckman/godspeed
       dogstatsd: true
@@ -112,7 +111,6 @@ Classic:
       official: true
       api: true
       authors: Datadog
-      notes: Client library in beta and subject to change.
     - name: Lassie
       link: https://github.com/bazaarvoice/lassie
       api: true
