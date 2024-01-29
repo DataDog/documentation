@@ -4605,6 +4605,11 @@ main:
     identifier: sensitive_data_scanner
     parent: administration_heading
     weight: 30000
+  - name: Library Rules
+    url: sensitive_data_scanner/library_rules/
+    identifier: sds_library_rules
+    parent: sensitive_data_scanner
+    weight: 2
   - name: Help
     url: help/
     pre: info-fill
