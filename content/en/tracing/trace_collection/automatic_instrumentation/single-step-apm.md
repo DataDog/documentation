@@ -208,8 +208,10 @@ To enable single step instrumentation with Helm:
 
 4. Run the following command:
    ```bash
-   helm install datadog-agent -f datadog-values.yaml
+   helm install datadog-agent -f datadog-values.yaml datadog/datadog
    ```
+5. Do a rolling restart on your applications for instrumentation to take effect.
+     
 
 [7]: https://v3.helm.sh/docs/intro/install/
 [8]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
