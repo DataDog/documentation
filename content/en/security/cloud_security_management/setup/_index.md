@@ -51,7 +51,7 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
         <td><ul><li style="font-size:16px"><a href="/security/misconfigurations">Misconfigurations (cloud accounts)</a></li><li style="font-size:16px"><a href="/security/vulnerabilities">Vulnerabilities (container images)</a></li></ul></td>
     </tr>
     <tr>
-        <td><a href="/security/cloud_security_management/setup/csm_workload_security">CSM Workload Security</a></td>
+        <td><a href="/security/cloud_security_management/setup/csm_cloud_workload_security">CSM Workload Security</a></td>
         <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li></ul></td>
     </tr>
 </table>
