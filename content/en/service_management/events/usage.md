@@ -10,15 +10,6 @@ further_reading:
   text: "Triage events with the Events Explorer"
 ---
 
-## Enrichment and normalization
-
-A _processor_ runs data-structuring actions on events attributes when they are ingested. A _pipeline_ is composed of one or multiple processors executed sequentially. With event processing pipelines, you can:
-
-- Normalize disparate sources of events by remapping attributes. For example, use the same reserved [service tags][1] everywhere.
-- Enrich events with external data saved in a [Reference Table][2] (beta). For example, map a service name with your service directory to enrich events with team ownership information, links to dashboards, or links to documentation.
-
-To add and configure event processing pipelines, see the **[Enrich & Normalize][3]** tab of Event Management. If you need further help, contact Datadog [support][4].
-
 ## Custom metrics
 
 [Generate metrics][5] with 15-month retention from any event search query to create and monitor historical events and alerts. For more information, see [Event Analytics][6].
