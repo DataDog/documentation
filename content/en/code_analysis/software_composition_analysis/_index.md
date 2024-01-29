@@ -38,6 +38,13 @@ SCA can run in CI pipelines by using [Code Analysis][3] and provide runtime moni
 
 For more information, see the [Application Security documentation][4].
 
+## Integrations
+
+### CI providers
+{{< whatsnext desc="With Software Composition Analysis, you can identify vulnerable open source libraries that have been imported into your codebase. See the documentation for information about the following integrations:">}}
+    {{< nextlink href="code_analysis/software_composition_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
+{{< /whatsnext >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
