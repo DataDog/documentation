@@ -10,6 +10,10 @@ aliases:
     - /tracing/custom_instrumentation/agent_customization
     - /tracing/faq/if-i-instrument-a-database-with-datadog-apm-will-there-be-sensitive-database-data-sent-to-datadog
     - /tracing/setup_overview/configure_data_security/
+further_reading:
+- link: "/data_security/pci_compliance/"
+  tag: "Documentation"
+  text: "Set up a PCI-compliant Datadog organization"
 ---
 ## Overview
 
@@ -599,6 +603,10 @@ See [PCI DSS Compliance][1] for more information. To enable PCI compliance for l
 {{< site-region region="us2,us3,us5,eu,gov" >}}
 PCI compliance for APM is not available for the {{< region-param key="dd_site_name" >}} site.
 {{< /site-region >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
 [2]: /tracing/glossary/#trace
