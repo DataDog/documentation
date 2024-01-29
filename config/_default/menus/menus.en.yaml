@@ -5001,7 +5001,7 @@ main:
   - name: Sensitive Data Scanner
     url: sensitive_data_scanner/
     pre: sensitive-data-scanner
-    identifier: sds_top_level
+    identifier: sensitive_data_scanner
     parent: administration_heading
     weight: 280000
   - name: Help
