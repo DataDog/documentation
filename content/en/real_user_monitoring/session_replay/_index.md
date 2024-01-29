@@ -90,15 +90,15 @@ Refer to the below diagram to understand what data is retained with extended ret
 
 {{< img src="real_user_monitoring/session_replay/replay-extended-retention.png" alt="Diagram of what data is retained with extended retention" style="width:100%;" >}}
 
-## Playback History
+## Playback history
 
-You can always see who has watched a session's replay, this way is easy to tell if someone you'd like to share the recording with has already watched it.
+You can see who has watched a given session replay by clicking the **watched** count displayed on the player page. This feature allows you to check whether someone you'd like to share the recording with has already watched it.
 
 {{< img src="real_user_monitoring/session_replay/session-replay-playback-history.png" alt="Check who has watched a session's recording" style="width:100%;" >}}
 
-Only those playbacks happening in the player page or in an embedded player, like in a [Notebook][8] or the side panel's one, are kept in history. And they also generate an [Audit Trail][7] event. Thumbnail previews are not registered.
+The history includes only playbacks that occurred in the player page or in an embedded player, like in a [Notebook][8] or side panel. Included playbacks also generate an [Audit Trail][7] event. Thumbnail previews are not included in history.
 
-For a convenient access to your own playback history, check out the [My Watch History][9] playlist.
+To view your own playback history, check out the [My Watch History][9] playlist.
 
 ## Mobile Session Replay
 
