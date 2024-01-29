@@ -7,12 +7,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
   tag: "Blog"
   text: "Enhance application security in production with Datadog Application Vulnerability Management"
-- link: "/getting_started/application_security/vulnerability_management/"
+- link: "/getting_started/application_security/software_composition_analysis"
   tag: "Documentation"
-  text: "Getting Started with Application Vulnerability Management"
-- link: "/security/application_security/vulnerability_management/"
+  text: "Getting Started with Software Composition Analysis"
+- link: "/security/application_security/software_composition_analysis/"
   tag: "Documentation"
-  text: "Learn about Application Vulnerability Management"
+  text: "Learn about Software Composition Analysis"
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about the Source Code Integration"
@@ -20,6 +20,18 @@ further_reading:
   tag: "Documentation"
   text: "Learn about Static Analysis"
 ---
+
+{{% site-region region="us,us3,us5,eu,ap1" %}}
+<div class="alert alert-warning">
+  Software Composition Analysis is in public beta. Go, Java, NodeJS, Python, and Ruby are the only supported languages.
+</div>
+{{% /site-region %}}
+
+{{% site-region region="gov" %}}
+<div class="alert alert-danger">
+    Software Composition Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
+</div>
+{{% /site-region %}}
 
 ## Overview
 
