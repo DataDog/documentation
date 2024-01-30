@@ -64,7 +64,7 @@ To set up a scanning group:
 1. Click **Add scanning group**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Group**.
 1. Enter a query filter for the data you want to scan. At the top, click **APM Spans** to preview the filtered spans. Click **Logs** to see the filtered logs.
 1. Enter a name and description for the group.
-1. Click the toggle buttons to enable Sensitive Data Scanner for the products you want (for example, Logs, APM Spans, RUM Events, and Events).
+1. Click the toggle buttons to enable Sensitive Data Scanner for the products you want (for example, logs, APM spans, RUM events, and Datadog events).
 1. Click **Create**.
 
 ### Add scanning rules
