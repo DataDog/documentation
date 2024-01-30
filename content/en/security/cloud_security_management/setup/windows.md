@@ -1,11 +1,9 @@
 ---
 title: Setting up Cloud Security Management on Windows
 kind: documentation
-is_beta: true
-private: true
 ---
 
-<div class="alert alert-warning">Cloud Security Management on Windows is in private beta and should only be installed on hosts that are not critical to production workloads.</div>
+<div class="alert alert-warning">Cloud Security Management on Windows is in beta and should only be installed on hosts that are not critical to production workloads.</div>
 
 Datadog [Cloud Security Management (CSM)][1] on Windows includes built-in threat detection for Windows process and network events. The out-of-the-box Windows ruleset includes the following default rules:
 
