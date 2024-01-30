@@ -31,6 +31,8 @@ Cloud Cost for Google Cloud is in private beta
 
 Custom costs allow you to upload any** cost data source to Datadog, so that you can understand the total cost of your services. **To use Custom Costs in Datadog, you must [configure Cloud Cost Management][1] for either AWS, Azure, or Google Cloud.**
 
+Cost files are aligned with the [FinOps FOCUS specification][4].
+
 {{< beta-callout url="#" btn_hidden="true" >}}
 This feature is currently in public beta.
 {{< /beta-callout >}}
@@ -150,3 +152,4 @@ You can visualize your ingested data using the following cost types:
 [1]: https://docs.datadoghq.com/cloud_cost_management
 [2]: https://www.ecma-international.org/publications-and-standards/standards/ecma-404/
 [3]: /cost/settings/cost-files
+[4]: https://focus.finops.org/#specification
