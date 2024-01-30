@@ -29,8 +29,7 @@ Cloud Cost for Google Cloud is in private beta
 
 ## Overview
 
-
-Custom costs allow you to upload any cost data source to Datadog, so that you can understand the total cost of your services. To use Custom Costs in Datadog, you must [configure Cloud Cost Management][1] for either AWS, Azure, or Google Cloud.
+Custom costs allow you to upload any** cost data source to Datadog, so that you can understand the total cost of your services. **To use Custom Costs in Datadog, you must [configure Cloud Cost Management][1] for either AWS, Azure, or Google Cloud.**
 
 {{< beta-callout url="#" btn_hidden="true" >}}
 This feature is currently in public beta.
@@ -53,29 +52,101 @@ For all fields:
 |BilledCost| The amount being charged |10.00 |NaN | Number based decimal |
 |BillingCurrency | Currency of billed cost | USD| EUR | **This must be USD at this time** |
 
-### Create a CSV or JSON file
+### Create a CSV or JSON file with required fields
  **Note:** 
 - You can upload multiple CSV and JSON files, in either or both formats.
 - Ensure that you don't upload the same file twice, since the cost will appear doubled in the product.
 
 #### CSV
+The Required Fields above must appear, in the order above, as columns in your CSV.
+
+Example of a valid CSV:
+| ProviderName | ChargeDescription | ChargePeriodStart | ChargePeriodEnd | BilledCost | BillingCurrency |
+| Github | User Costs | 2023-01-01 | 2023-01-31 | 300.00 | USD |
+
+Example of an invalid CSV:
+| ProviderName | ChargePeriodStart | ChargeDescription| ChargePeriodEnd | BilledCost | BillingCurrency |
+| Github | 2023-01-01 | User Costs | 2023-01-31 | 300.00 | EUR |
 
 #### JSON
+The Required Fields must appear within all objects of a JSON file adhering to the [ECMA-404 standard], and all objects must be encapsulated by an array.
+
+Example of a valid JSON file:
+
+[
+    {
+        "ProviderName": "Zoom",
+        "ChargeDescription": "Video Usage",
+        "ChargePeriodStart": "2023-01-01",
+        "ChargePeriodEnd": "2023-12-31",
+        "BilledCost": 100,
+        "BillingCurrency": "USD"
+    }
+]
+
+Example of an invalid JSON file:
+
+[
+    {
+        "providername": "Zoom",
+        "chargedescription": "Video Usage",
+        "chargeperiodstart": "2023-01-01",
+        "chargeperiodend": "2023-12-31",
+        "billedcost": 100,
+        "billingcurrency": "USD"
+    }
+]
    
-#### Add optional tags 
+### Add optional tags 
+You can also optionally add any number of tags to CSV or JSON files to allocate costs.
+
+For a CSV file, add a column per tag, and for a JSON file, add a Tags object property.
+
+Example of valid CSV file:
+| ProviderName | ChargeDescription | ChargePeriodStart | ChargePeriodEnd | BilledCost | BillingCurrency | team | service |
+| Github | User Costs | 2023-01-01 | 2023-01-31 | 300.00 | USD | web | ops |
+
+Example of valid JSON file:
+[
+    {
+        "ProviderName": "Zoom",
+        "ChargeDescription": "Video Usage",
+        "ChargePeriodStart": "2023-01-01",
+        "ChargePeriodEnd": "2023-12-31",
+        "BilledCost": 100,
+        "BillingCurrency": "USD",
+        "Tags": {
+            "team": "web",
+            "service": "ops"
+        }
+    }
+]
 
 ### Configure Cloud Costs
-You can either upload the file via UI or API.
+Upload your CSV and JSON files either via [the Cost Files page in the Cloud Costs UI][3] or via API. Cost data should appear after 24 hours. 
+
+To send a JSON file, use the PUT api/v2/cost/custom_costs API endpoint. 
+
+Example with curl:
+
+curl -L -X PUT "api.datadoghq.com/api/v2/cost/custom_costs/" \
+-H "Content-Type: multipart/form-data" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-F "file=${file};type=text/json"
+
 
 ## Cost types
 You can visualize your ingested data using the following cost types:
 
 | Cost Type | Description |
 | ----------| ----------------------------------|
-| `custom.cost.amortized` | Total cost of resources allocated at the time of usage over an interval. Costs include promotion credits as well as committed usage discount credits. |
-| `custom.cost.basis` | |
+| `custom.cost.amortized` | Total cost of resources accrued over an interval. |
+| `custom.cost.basis` | Total cost of resources allocated at the time of usage over an interval. |
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/cloud_cost_management
+[2]: https://www.ecma-international.org/publications-and-standards/standards/ecma-404/
+[3]: /cost/settings/cost-files
