@@ -8,6 +8,8 @@ further_reading:
   - link: "/integrations/jira/"
     tag: "Documentation"
     text: Datadog Jira Integration
+aliases:
+  - /security/cloud_security_management/guide/jira
 ---
 
 Use the [Jira integration][1] to create Jira issues for resources that are impacted by a Cloud Security Management (CSM) security issue. Jira for Cloud Security Management is available for [CSM Misconfigurations][3] and [CSM Identity Risks][4].
