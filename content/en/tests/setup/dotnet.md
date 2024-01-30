@@ -29,15 +29,17 @@ further_reading:
 
 ## Compatibility
 
-Supported languages:
+Supported frameworks:
 
-| Language | Version |
+| Framework | Version |
 |---|---|
 | .NET Framework | >= 4.6.1 |
 | .NET Core | >= 2.1 |
 | .NET Core | >= 3.1 |
+| .NET | >= 5 |
 | .NET | >= 6 |
 | .NET | >= 7 |
+| .NET | >= 8 |
 
 Supported test frameworks:
 
