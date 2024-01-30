@@ -1,5 +1,5 @@
 ---
-title: Enabling CSM Pro on Hosts
+title: Enabling CSM Pro on Linux
 kind: documentation
 code_lang: hosts
 type: multi-code-lang

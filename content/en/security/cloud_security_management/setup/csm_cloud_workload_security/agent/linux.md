@@ -1,5 +1,5 @@
 ---
-title: Enabling CSM Enterprise on Hosts
+title: Enabling CSM Cloud Workload Security on Linux
 kind: documentation
 code_lang: hosts
 type: multi-code-lang
@@ -17,8 +17,6 @@ sudo chmod 640 /etc/datadog-agent/system-probe.yaml /etc/datadog-agent/security-
 sudo chgrp dd-agent /etc/datadog-agent/system-probe.yaml /etc/datadog-agent/security-agent.yaml
 ```
 
-**Note**: Vulnerabilities are evaluated and and scanned against your containers and hosts every hour.
-
 ```bash
 # /etc/datadog-agent/datadog.yaml file
 remote_configuration:
@@ -30,23 +28,6 @@ runtime_security_config:
   ## @param enabled - boolean - optional - default: false
   ## Set to true to enable full CSM Threats.
   enabled: true
-
-compliance_config:
-  ## @param enabled - boolean - optional - default: false
-  ## Set to true to enable CIS benchmarks for CSPM.
-  #
-  enabled: true
-  host_benchmarks:
-    enabled: true
-
-sbom:
-  enabled: true
-  container_image:
-    enabled: true
-  host:
-    enabled: true
-container_image:
-  enabled: true
 ```
 
 ```bash
@@ -55,14 +36,6 @@ runtime_security_config:
   ## @param enabled - boolean - optional - default: false
   ## Set to true to enable full CSM Threats.
   enabled: true
-
-compliance_config:
-  ## @param enabled - boolean - optional - default: false
-  ## Set to true to enable CIS benchmarks for CSPM.
-  #
-  enabled: true
-  host_benchmarks:
-    enabled: true
 ```
 
 ```bash
