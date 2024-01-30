@@ -421,7 +421,7 @@ You can see a source code preview for profile frames in the [Continuous Profiler
 
 1. Navigate to [**APM** > **Profile Search**][2].
 2. Hover your cursor over a method in the flame graph.
-3. If needed, press `Opt` or `Alt` to enable the preview
+3. If needed, press `Opt` or `Alt` to enable the preview.
 
 {{< img src="integrations/guide/source_code_integration/profiler-source-code-preview.png" alt="Source code preview in the Continuous Profiler" style="width:100%;">}}
 
