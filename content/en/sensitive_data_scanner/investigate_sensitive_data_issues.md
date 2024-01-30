@@ -42,13 +42,12 @@ Click **View All Events** to see in Events Explorer all events matching the quer
     b. Click on a service to see more information about the service in the **Service Catalog**.  
     c. Click on a host to see more information about the host in the Infrastructure List page.
 
-If you want to use [Case Management][2] to track, triage, and investigate the issue, click **Create Case** at the top of the panel. Associated cases are surfaced in the Summary page.
-
-If you want to use [Incident Management][3] to create an incident, you can add the issue to an existing incident or declare a new incident. Click the **Declare Incident** dropdown menu to add the issue to an existing incident. Click **Declare Incident** to declare a new incident.
-
 If you want to modify the Scanning Rule that was used to detect the sensitive data issue, click **Modify Rule** at the top of the panel.
 
-If you want to use [Audit Trail][4] to see who may have accessed this sensitive data within Datadog, **View in Audit Trail** in the **Users who accessed these events** section.
+Additionally, you can also:
+- Use [Case Management][2] to track, triage, and investigate the issue, click **Create Case** at the top of the panel. Associated cases are surfaced in the Summary page.
+- Use [Incident Management][3] to create an incident, you can add the issue to an existing incident or declare a new incident. Click the **Declare Incident** dropdown menu to add the issue to an existing incident. Click **Declare Incident** to declare a new incident.
+- Use [Audit Trail][4] to see who may have accessed this sensitive data within Datadog, **View in Audit Trail** in the **Users who accessed these events** section.
 
 ## Further Reading
 
