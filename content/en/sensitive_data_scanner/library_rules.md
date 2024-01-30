@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-The Scanning Rule Library are a collection of predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. 
+The Scanning Rule Library is a collection of predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. 
 
 {{< whatsnext desc="The library rules are organized into the following categories:">}}
   {{< nextlink href="/sensitive_data_scanner/library_rules#secrets-and-credentials">}}Secrets and credentials{{< /nextlink >}}
