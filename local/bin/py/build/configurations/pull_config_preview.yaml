@@ -341,14 +341,14 @@
       - repo_name: datadog-static-analyzer-circleci-orb
         contents:
         - action: pull-and-push-file
-          branch: main
+          branch: alai97/configure-ci-cd-provider-instructions
           globs:
           - 'README.md'
           options:
             dest_path: '/code_analysis/static_analysis/'
             file_name: 'circleci_orbs.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/alai97/configure-ci-cd-provider-instructions/README.md"]
               title: Code Analysis and CircleCI Orbs
               kind: documentation
               description: Use Datadog and CircleCI to run Code Analysis jobs in a CI pipeline.
@@ -359,14 +359,14 @@
       - repo_name: datadog-static-analyzer-github-action
         contents:
         - action: pull-and-push-file
-          branch: main
+          branch: alai97/configure-ci-cd-provider-instructions
           globs:
           - 'README.md'
           options:
             dest_path: '/code_analysis/static_analysis/'
             file_name: 'github_actions.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-static-analyzer-github-action/blob/alai97/configure-ci-cd-provider-instructions/README.md"]
               title: Code Analysis and GitHub Actions
               kind: documentation
               description: Use Datadog and GitHub to run Code Analysis jobs in a CI pipeline.
