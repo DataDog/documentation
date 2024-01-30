@@ -28,7 +28,7 @@ You can also use private locations to:
 - **Verify the application performance in your internal testing environment** before you release new features to production with [Synthetic tests in your CI/CD pipelines][1].
 - **Compare the application performance** from inside and outside your internal network.
 
-Private locations are Docker containers or Windows services that you can install anywhere inside your private network. You can access the [private location worker image][2] on Google Container Registry.
+Private locations are Docker containers or Windows services that you can install anywhere inside your private network. You can access the docker image on [Google Container Registry][2] and the Windows installer on [S3][13].
 
 Once you've created and installed your private location, you can assign [Synthetic tests][3] to your private location just like you would with a managed location. 
 
