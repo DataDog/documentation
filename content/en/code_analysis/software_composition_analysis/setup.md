@@ -126,36 +126,6 @@ datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
 {{% /tab %}}
 {{< /tabs >}}
 
-### Upload third-party static analysis results to Datadog
-
-<div class="alert alert-info">
-  SARIF importing has been tested for Snyk, CodeQL, Semgrep, Checkov, Gitleaks, and Sysdig. Please reach out to <a href="/help">Datadog Support</a> if you experience any issues with other SARIF-compliant tools.
-</div>
-
-You can send results from third-party static analysis tools to Datadog, provided they are in the interoperable [Static Analysis Results Interchange Format (SARIF) Format][2]. Node.js version 14 or later is required.
-
-To upload a SARIF report:
-
-1. Ensure the [`DD_API_KEY` and `DD_APP_KEY` variables are defined][3].
-2. Set the [`DD_SITE` variable][4] (this default to `datadoghq.com`):
-   
-   ```bash
-   export DD_SITE="datadoghq.com"
-   ```
-
-3. Install the `datadog-ci` utility:
-   
-   ```bash
-   npm install -g @datadog/datadog-ci
-   ```
-
-4. Run the third-party static analysis tool on your code and output the results in the SARIF format.
-5. Upload the results to Datadog:
-
-   ```bash
-   datadog-ci sarif upload $OUTPUT_LOCATION --service <datadog-service> --env <datadog-env>
-   ```
-
 To upload a SBOM report:
 
 1. Ensure the [`DD_API_KEY` and `DD_APP_KEY` variables are defined][3].
