@@ -177,13 +177,13 @@ To upload a SBOM report:
    datadog-ci sbom upload --service <service> --env <env> /tmp/trivy.json
    ```
 
-## Run Static Analysis in a CI pipeline
+## Run Software Composition Analysis in a CI pipeline
 
-Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][5] and checks your code against Datadog's default rulesets.
+Datadog Software Composition Analysis runs in your CI pipelines using the [`datadog-ci` CLI][5] and checks that imported libraries are secure and compliant.
 
 ### Search and filter results
 
-After you configure your CI pipelines to run the Datadog Static Analyzer, violations appear on the [Code Analysis page][6]. To filter your results, use the facets to the left of the list, or search. 
+After you configure your CI pipelines to run the Datadog SBOM Generation and Upload job, violations appear on the [Code Analysis page][6]. To filter your results, use the facets to the left of the list, or search. 
 
 ## Further Reading
 
