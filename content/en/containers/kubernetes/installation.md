@@ -195,7 +195,7 @@ The following command deletes all the Kubernetes resources created by the above 
 kubectl delete datadogagent datadog
 helm delete my-datadog-operator
 ```
-
+Please ensure to remove DatadogAgent objects from your cluster first and then uninstall the operator via helm uninstall
 For further details on setting up Datadog Operator, including information about using tolerations, refer to the [Datadog Operator advanced setup guide][1].
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md
@@ -294,6 +294,12 @@ If Google Container Registry ([gcr.io/datadoghq][8]) is not accessible in your d
 - **Configure log collection**. See [Kubernetes log collection][7].
 - **Configure integrations**. See [Integrations & Autodiscovery][5].
 - **Other configurations**: To collect events, override proxy settings, send custom metrics with DogStatsD, configure container allowlists and blocklists, or reference the full list of available environment variables, see [Further Kubernetes Configuration][4].
+
+Manifest Templates
+
+[Manifest with Logs, APM, process, and metrics collection enabled]
+[Manifest with Cluster Agent].
+[Manifest with tolerations].
 
 ## Further Reading
 
