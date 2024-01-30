@@ -965,27 +965,27 @@ main:
     parent: cloudcraft
     weight: 8
   - name: AWS Accounts
-    url: 'cloudcraft/api/#aws-accounts'
+    url: 'cloudcraft/api/aws-accounts'
     identifier: cloudcraft_api_aws_accounts
     parent: cloudcraft_api
     weight: 1
   - name: Azure Accounts
-    url: 'cloudcraft/api/#azure-accounts'
+    url: 'cloudcraft/api/azure-accounts'
     identifier: cloudcraft_api_azure_accounts
     parent: cloudcraft_api
     weight: 2
   - name: Blueprints
-    url: 'cloudcraft/api/#blueprints'
+    url: 'cloudcraft/api/blueprints'
     identifier: cloudcraft_api_blueprints
     parent: cloudcraft_api
     weight: 3
   - name: Budgets
-    url: 'cloudcraft/api/#budgets'
+    url: 'cloudcraft/api/budgets'
     identifier: cloudcraft_api_budgets
     parent: cloudcraft_api
     weight: 4
   - name: Users
-    url: 'cloudcraft/api/#users'
+    url: 'cloudcraft/api/users'
     identifier: cloudcraft_api_users
     parent: cloudcraft_api
     weight: 5
