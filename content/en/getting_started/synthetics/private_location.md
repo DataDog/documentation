@@ -20,7 +20,7 @@ further_reading:
 
 Private locations allow you to **monitor internal-facing applications** or private URLs that aren't accessible from the public internet. 
 
-{{< img src="getting_started/synthetics/pl-list.png" alt="List of Private Locations in your Settings page" style="width:100%;">}}
+{{< img src="synthetics/private_locations/private_locations_worker_1.png" alt="Architecture diagram of how a private location works in Synthetic Monitoring" style="width:100%;">}}
 
 You can also use private locations to:
 
