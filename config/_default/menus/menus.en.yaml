@@ -3632,21 +3632,26 @@ main:
     parent: csm
     identifier: csm_default_rules
     weight: 6
+  - name: Review and Remediate
+    url: security/cloud_security_management/review_remediate
+    parent: csm
+    identifier: csm_review_remediate
+    weight: 7
   - name: Mute Issues
     url: security/cloud_security_management/mute_issues
     parent: csm
     identifier: csm_mute
-    weight: 7
+    weight: 8
   - name: Automate Security Workflows
     url: security/cloud_security_management/workflows
     parent: csm
     identifier: csm_workflow_automation
-    weight: 8
+    weight: 9
   - name: Severity Scoring
     url: security/cloud_security_management/severity_scoring/
     parent: csm
     identifier: csm_severity_scoring
-    weight: 9
+    weight: 10
   - name: Guides
     url: security/cloud_security_management/guide/
     parent: csm
