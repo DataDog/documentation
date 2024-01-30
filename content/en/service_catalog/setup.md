@@ -25,7 +25,7 @@ further_reading:
 
 Datadog Service Catalog is a centralized hub for your development teams to discover and understand critical components in your runtime envrionments. If you are using products that provide application performance telemetries such as APM, USM, and RUM, you can take advantage of the auto-discovery feature. If not, you can create your Service Catalog based on your existing knowledge base (with open-source solutions like Backstage or managed solutions like ServiceNow) or create entries from `service` tags from other Datadog products like infrastructure monitoring and Log Management. 
 
-## Automatic Service Discovery
+## Automatic service discovery
 
 Datadog Service Catalog includes both eBPF-based autodiscovery via [Universal Service Monitoring][17] and Distributed Tracing based detection via [APM][18]. RUM applications are included in the Service Catalog as well. If you are using any of these products, your catalog is pre-populated with entries.
 
