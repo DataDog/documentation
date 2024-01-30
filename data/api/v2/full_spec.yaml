@@ -26567,7 +26567,11 @@ paths:
       x-codegen-request-body-name: body
       x-menu-order: 4
       x-undo:
-        type: idempotent
+        operationId: DeleteOktaAccount
+        parameters:
+        - name: account_id
+          source: data.id
+        type: unsafe
   /api/v2/ip_allowlist:
     get:
       description: Returns the IP allowlist and its enabled or disabled state.
