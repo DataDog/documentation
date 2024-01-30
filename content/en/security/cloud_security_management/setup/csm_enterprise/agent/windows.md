@@ -8,6 +8,8 @@ code_lang_weight: 75 # a number that represents relative weight. 
 
 <div class="alert alert-warning">Cloud Security Management on Windows is in public beta and should only be installed on hosts that are not critical to production workloads.</div>
 
+<div class="alert alert-info">Cloud Security Management on Windows is only available for CSM Threats.</div>
+
 Datadog [Cloud Security Management (CSM)][1] on Windows includes built-in threat detection for Windows process and network events. The out-of-the-box Windows ruleset includes the following default rules:
 
 - Certutil used to transmit or decode a file
@@ -25,10 +27,7 @@ Datadog [Cloud Security Management (CSM)][1] on Windows includes built-in threat
 - Access to hosts running Windows Server 2016 or newer.
 - (Optional) For network events, [NPM][2] must be enabled on the hosts.
 
-**Notes**:
-
-- Windows containerized workloads are not supported.
-- Windows support is available for [CSM Enterprise and CSM Workload Security][10] only.
+**Note**: Windows containerized workloads are not supported.
 
 ## Installation
 

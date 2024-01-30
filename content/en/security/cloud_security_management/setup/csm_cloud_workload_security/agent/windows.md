@@ -25,10 +25,7 @@ Datadog [Cloud Security Management (CSM)][1] on Windows includes built-in threat
 - Access to hosts running Windows Server 2016 or newer.
 - (Optional) For network events, [NPM][2] must be enabled on the hosts.
 
-**Notes**:
-
-- Windows containerized workloads are not supported.
-- Windows support is available for [CSM Enterprise and CSM Workload Security][10] only.
+**Note**: Windows containerized workloads are not supported.
 
 ## Installation
 

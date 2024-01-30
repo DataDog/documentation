@@ -53,6 +53,7 @@ code_lang_weight: 60 # a number that represents relative weight. 
     datadog:
       remoteConfiguration:
         enabled: true
+      # Enables CSM Misconfigurations and CSM Threats
       securityAgent:
         runtime:
           enabled: true
@@ -60,6 +61,7 @@ code_lang_weight: 60 # a number that represents relative weight. 
           enabled: true
           host_benchmarks:
             enabled: true
+      # Enables CSM Vulnerabilities
       # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`.
       containerImageCollection:
         enabled: true
