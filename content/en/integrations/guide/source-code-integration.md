@@ -21,6 +21,9 @@ further_reading:
 - link: "/security/application_security/"
   tag: "Documentation"
   text: "Learn about Application Security Monitoring"
+- link: "/logs/error_tracking/"
+  tag: "Documentation"
+  text: "Learn about Error Tracking for logs"
 ---
 
 ## Overview
