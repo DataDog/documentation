@@ -16,8 +16,6 @@ further_reading:
       text: "Troubleshooting CI Visibility"
 ---
 
-{{< callout header="false" url="#" btn_hidden="true" >}}Intelligent Test Runner for Python in beta.{{< /callout >}}
-
 ## Compatibility
 
 Intelligent Test Runner is only supported in the following versions and testing frameworks:
@@ -38,37 +36,57 @@ Prior to setting up Intelligent Test Runner, set up [Test Visibility for Python]
 
 {{% ci-itr-activation-instructions %}}
 
-## Run pytest tests with the Intelligent Test Runner enabled
+## Running tests with the Intelligent Test Runner enabled
 
-<div class="alert alert-info">Setting <code>DD_CIVISIBILITY_ITR_ENABLED</code> to true is required while the Intelligent Test Runner support for pytest is in beta. </div>
+The Intelligent Test Runner will be enabled when you run tests with the Datadog integration active. Simply run your tests as normal:
 
-To run tests on services with the Intelligent Test Runner enabled, set `DD_CIVISIBILITY_ITR_ENABLED` to true.
+{{< tabs >}}
+
+{{% tab "Pytest" %}}
+
+{{< code-block lang="shell" >}}
+DD_ENV=ci DD_SERVICE=my-python-app pytest --ddtrace
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "Unittest" %}}
+
+{{< code-block lang="shell" >}}
+DD_ENV=ci DD_SERVICE=my-python-app ddtrace-run python -m unittest
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+### Temporarily disabling the Intelligent Test Runner
+
+The Intelligent Test Runner can be disabled locally by setting the `DD_CIVISIBILITY_ITR_ENABLED` environment variable to `false` or `0`.
 
 `DD_CIVISIBILITY_ITR_ENABLED` (Optional)
 : Enable the Intelligent Test Runner coverage and test skipping features<br />
-**Default**: `(false)`
+**Default**: `(true)`
 
-After completing setup, run your tests as you normally do:
+{{< tabs >}}
 
-{{< code-block lang="shell" >}}
-DD_ENV=ci DD_SERVICE=my-python-app DD_CIVISIBILITY_ITR_ENABLED=true pytest --ddtrace
-{{< /code-block >}}
-
-## Run unittest tests with the Intelligent Test Runner enabled
-
-<div class="alert alert-info">Setting <code>DD_CIVISIBILITY_ITR_ENABLED</code> to true is required while the Intelligent Test Runner support for unittest is in beta. </div>
-
-To run tests on services with the Intelligent Test Runner enabled, set `DD_CIVISIBILITY_ITR_ENABLED` to true.
-
-`DD_CIVISIBILITY_ITR_ENABLED` (Optional)
-: Enable the Intelligent Test Runner coverage and test skipping features.<br />
-**Default**: `(false)`
-
-After completing setup, run your tests as you normally do:
+{{% tab "Pytest" %}}
 
 {{< code-block lang="shell" >}}
-DD_ENV=ci DD_SERVICE=my-python-app DD_CIVISIBILITY_ITR_ENABLED=true ddtrace-run python -m unittest
+DD_ENV=ci DD_SERVICE=my-python-app DD_CIVISIBILITY_ITR_ENABLED=false pytest --ddtrace
 {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "Unittest" %}}
+
+{{< code-block lang="shell" >}}
+DD_ENV=ci DD_SERVICE=my-python-app DD_CIVISIBILITY_ITR_ENABLED=false ddtrace-run python -m unittest
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Disabling skipping for specific tests
 
@@ -85,18 +103,21 @@ Examples include:
 
 Designating tests as unskippable ensures that the Intelligent Test Runner runs them regardless of coverage data.
 
+
+{{< tabs >}}
+
+{{% tab "Pytest" %}}
+
 ### Compatibility
 
-Unskippable tests are supported in the following versions and testing frameworks:
+Unskippable tests are supported in the following versions:
 
 * `pytest`
   * From `ddtrace>=1.19.0`.
-* `unittest`
-  * From `ddtrace>=2.2.0`.
 
-### Marking tests as unskippable in `pytest`
+### Marking tests as unskippable
 
-You can use [`pytest`][2]'s [`skipif` mark][3] to prevent the Intelligent Test Runner from skipping individual tests or modules. Specify the `condition` as `False`, and the `reason` as `"datadog_itr_unskippable"`.
+You can use [`pytest`][1]'s [`skipif` mark][2] to prevent the Intelligent Test Runner from skipping individual tests or modules. Specify the `condition` as `False`, and the `reason` as `"datadog_itr_unskippable"`.
 
 #### Individual tests
 
@@ -110,7 +131,7 @@ def test_function():
 ```
 #### Modules
 
-Modules can be skipped using the [`pytestmark` global variable][4] as follows:
+Modules can be skipped using the [`pytestmark` global variable][3] as follows:
 ```python
 import pytest
 
@@ -122,9 +143,24 @@ def test_function():
 
 **Note**: This does not override any other `skip` marks, or `skipif` marks that have a `condition` evaluating to `True`.
 
+[1]: https://pytest.org/
+[2]: https://docs.pytest.org/en/latest/reference/reference.html#pytest-mark-skipif-ref
+[3]: https://docs.pytest.org/en/latest/reference/reference.html#globalvar-pytestmark
+
+{{% /tab %}}
+
+{{% tab "Unittest" %}}
+
+### Compatibility
+
+Unskippable tests are supported in the following versions:
+
+* `unittest`
+  * From `ddtrace>=2.2.0`.
+
 ### Marking tests as unskippable in `unittest`
 
-You can use [`unittest`][5]'s [`skipif` mark][6] to prevent the Intelligent Test Runner from skipping individual tests. Specify the `condition` as `False`, and the `reason` as `"datadog_itr_unskippable"`.
+You can use [`unittest`][1]'s [`skipif` mark][2] to prevent the Intelligent Test Runner from skipping individual tests. Specify the `condition` as `False`, and the `reason` as `"datadog_itr_unskippable"`.
 
 #### Individual tests
 
@@ -141,14 +177,16 @@ class MyTestCase(unittest.TestCase):
 
 Using `@unittest.skipif` does not override any other `skip` marks, or `skipIf` marks that have a `condition` evaluating to `True`.
 
+[1]: https://docs.python.org/3/library/unittest.html
+[2]: https://docs.python.org/3/library/unittest.html#unittest.skipIf
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /continuous_integration/tests/python
-[2]: https://pytest.org/
-[3]: https://docs.pytest.org/en/latest/reference/reference.html#pytest-mark-skipif-ref
-[4]: https://docs.pytest.org/en/latest/reference/reference.html#globalvar-pytestmark
-[5]: https://docs.python.org/3/library/unittest.html
-[6]: https://docs.python.org/3/library/unittest.html#unittest.skipIf
