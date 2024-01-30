@@ -38,24 +38,22 @@ Your private locations test results display identically to your managed location
 
 ## Create your private location
 
-1. Install [Docker][4] on a Unix-like machine, or use another container runtime such as [Podman][10]. To get started with using Docker, you can install Docker on a virtual machine such as [Vagrant Ubuntu 22.04][11]. To get started with using Windows, install the private location worker on a virtual machine or Windows container.
-
-2. In the Datadog site, hover over **[UX Monitoring][5]** and select **Settings** > **Private Locations**. 
-3. Click **Add Private Location**.
-4. Fill out your private location details. Only `Name` and `API key` fields are mandatory.
-5. Click **Save Location and Generate Configuration File** to generate the configuration file associated with your private location on your worker. 
-6. Depending on where you installed your private location, you may need to input additional parameters to your configuration file: 
+1. In the Datadog site, hover over **[UX Monitoring][5]** and select **Settings** > **Private Locations**. 
+2. Click **Add Private Location**.
+3. Fill out your private location details. Only `Name` and `API key` fields are mandatory.
+4. Click **Save Location and Generate Configuration File** to generate the configuration file associated with your private location on your worker. 
+5. Depending on where you installed your private location, you may need to input additional parameters to your configuration file: 
     - If you are using a proxy, input the URL as `http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`. 
     - If you want to block reserved IPs, toggle **Block reserved IPs** and enter the IP ranges. 
 
     For more information, see [Private Locations Configuration Options][6] and [Run Synthetic Tests from Private Locations][7]. 
 
-7. Copy and paste your private location configuration file to your working directory.
+6. Copy and paste your private location configuration file to your working directory.
 
     **Note**: The configuration file contains secrets for private location authentication, test configuration decryption, and test result encryption. Datadog does not store the secrets, so store them locally before leaving the **Private Locations** creation form. **You need to be able to reference the secrets again in order to add more workers to your private location**. 
-8. When you are ready, click **View Installation Instructions**.
-9. Follow the installation instructions based on the environment you want to run the Private Location worker in.
-10. If you are using Docker, launch your worker as a standalone container using the Docker `run` command and your configuration file:
+7. When you are ready, click **View Installation Instructions**.
+8. Follow the installation instructions based on the environment you want to run the Private Location worker in.
+9. If you are using Docker, launch your worker as a standalone container using the Docker `run` command and your configuration file:
 
     ```shell
     docker run --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
@@ -71,7 +69,7 @@ Your private locations test results display identically to your managed location
     msiexec /i datadog-synthetics-worker-<version-number>.amd64.msi
     ```
 
-11. If your private location reports correctly to Datadog, an `OK` health status displays under **Private Location Status** and on the **Private Locations** list in the **Settings** page:
+10. If your private location reports correctly to Datadog, an `OK` health status displays under **Private Location Status** and on the **Private Locations** list in the **Settings** page:
 
     {{< img src="synthetics/private_locations/pl_health.png" alt="Private Location Health" style="width:100%;">}}
 
@@ -82,7 +80,7 @@ Your private locations test results display identically to your managed location
     2022-02-28 16:20:03 [info]: Fetching 10 messages from queue - 10 slots available
     2022-02-28 16:20:04 [info]: Fetching 10 messages from queue - 10 slots available
     ```
-12. Once you're done testing your internal endpoint, click **OK**.
+11. Once you're done testing your internal endpoint, click **OK**.
 
 ## Run Synthetic tests with your private location
 
