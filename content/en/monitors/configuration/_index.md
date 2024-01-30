@@ -155,7 +155,7 @@ Notifications for missing data are useful if you expect a metric to always be re
 
 In this case, you should enable notifications for missing data. The sections below explain how to accomplish this with each option.
 
-**Notes**: The monitor must be able to evaluate data before alerting on missing data. For example, if you create a monitor for `service:abc` and data from that `service` is not reporting, the monitor does not send alerts.
+**Note**: The monitor must be able to evaluate data before alerting on missing data. For example, if you create a monitor for `service:abc` and data from that `service` is not reporting, the monitor does not send alerts.
 
 
 {{< tabs >}}
