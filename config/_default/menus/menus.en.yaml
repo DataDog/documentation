@@ -1940,6 +1940,11 @@ main:
     parent: cloud_cost_top_level
     identifier: container_cost_allocation
     weight: 5
+  - name: Custom Costs
+    url: cloud_cost_management/custom
+    parent: cloud_cost_top_level
+    identifier: ccm_custom
+    weight: 6
   - name: Network Monitoring
     url: network_monitoring/
     pre: network

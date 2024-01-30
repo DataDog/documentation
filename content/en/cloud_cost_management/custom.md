@@ -24,57 +24,69 @@ further_reading:
 {{< /site-region >}}
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Cloud Cost for Google Cloud is in private beta
+Custom Cost is in public beta. Cloud Cost for Google Cloud is in private beta
 {{< /beta-callout >}}
 
 ## Overview
 
-Custom costs allow you to upload any** cost data source to Datadog, so that you can understand the total cost of your services. **To use Custom Costs in Datadog, you must [configure Cloud Cost Management][1] for either AWS, Azure, or Google Cloud.**
+Custom Costs allow you to upload *any cost data source* to Datadog, so that you can understand the total cost of your services. 
 
-Cost files are aligned with the [FinOps FOCUS specification][4].
+Custom Costs accepts costs in pre-defined file structures (CSV or JSON). These files are aligned with the [FinOps FOCUS specification][2], and you can [upload multiple files in either format](#create-a-csv-or-json-with-required-fields). For example, you can upload a mix of CSV or JSON files as desired with 1+ line items (rows for CSV or objects for JSON).
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-This feature is currently in public beta.
-{{< /beta-callout >}}
+All line items must meet the following requirements and include the [properties below](#collect-the-required-fields):
+
+- All column names (CSV), property names (JSON), and values are UTF-8 encoded.
+- All required column names (CSV) or property names (JSON) are [PascalCased][5]. For example, you must use `"ProviderName"`, not `"providername"` or `"ProviderNAME"`.
+- All column names (CSV) and values or property names (JSON) and values have a maximum of 1,000 characters.
+- NULL or blank ("") parameter values are not accepted.
+- All of the data is viewed as UTC.
 
 ## Setup
 
-### Collect the required fields
+To use Custom Costs in Datadog, you must [configure Cloud Cost Management][1] for either AWS, Azure, or Google Cloud.
 
-For all fields:
-- NULL or blank ("") values are not accepted
-- All data will be viewed as UTC 
+### Collect the required fields
 
 | Parameter | Description | Valid example | Invalid example | Additional Requirements |
 | ----------| -----------|----------| -----------|----------|
-|ProviderName | The service being consumed | Snowflake | "" or NULL|  |
-|ChargeDescription | Identifies what aspect of a service is being charged | Database Costs | "" or NULL|  |
-|ChargePeriodStart| Start day of a charge | 2023-09-01| 2023-01-01 12:34:56| Formatted YYYY-MM-DD, where ChargePeriodStart <= ChargePeriodEnd|
-|ChargePeriodEnd |Last day of a charge  | 2023-09-30 | 01/01/2023 | Formatted YYYY-MM-DD |
-|BilledCost| The amount being charged |10.00 |NaN | Number based decimal |
-|BillingCurrency | Currency of billed cost | USD| EUR | **This must be USD at this time** |
+|`ProviderName` | The service being consumed. | Snowflake | "" or NULL|  |
+|`ChargeDescription` | Identifies what aspect of a service is being charged. | Database Costs | "" or NULL|  |
+|`ChargePeriodStart`| Start day of a charge. | 2023-09-01| 2023-01-01 12:34:56| Formatted YYYY-MM-DD, where `ChargePeriodStart` <= `ChargePeriodEnd`.|
+|`ChargePeriodEnd` | Last day of a charge.  | 2023-09-30 | 01/01/2023 | Formatted YYYY-MM-DD. |
+|`BilledCost`| The amount being charged. |10.00 |NaN | Number-based decimal. |
+|`BillingCurrency` | Currency of billed cost. | USD| EUR | Must be USD. |
 
 ### Create a CSV or JSON file with required fields
- **Note:** 
-- You can upload multiple CSV and JSON files, in either or both formats.
-- Ensure that you don't upload the same file twice, since the cost will appear doubled in the product.
 
-#### CSV
-The Required Fields above must appear, in the order above, as columns in your CSV.
+You can upload multiple CSV and JSON files, in either or both formats. Ensure that you don't upload the same file twice, since the cost will appear as doubled in the product.
+
+{{< tabs >}}
+{{% tab "CSV" %}}
+
+The required fields must appear as columns in your CSV in the order listed above.
 
 Example of a valid CSV:
+
+```none
 | ProviderName | ChargeDescription | ChargePeriodStart | ChargePeriodEnd | BilledCost | BillingCurrency |
-| Github | User Costs | 2023-01-01 | 2023-01-31 | 300.00 | USD |
+| GitHub | User Costs | 2023-01-01 | 2023-01-31 | 300.00 | USD |
+```
 
-Example of an invalid CSV:
+Example of an invalid CSV (`ChargePeriodStart` is listed before `ChargeDescription`):
+
+```none
 | ProviderName | ChargePeriodStart | ChargeDescription| ChargePeriodEnd | BilledCost | BillingCurrency |
-| Github | 2023-01-01 | User Costs | 2023-01-31 | 300.00 | EUR |
+| GitHub | 2023-01-01 | User Costs | 2023-01-31 | 300.00 | EUR |
+```
 
-#### JSON
-The Required Fields must appear within all objects of a JSON file adhering to the [ECMA-404 standard], and all objects must be encapsulated by an array.
+{{% /tab %}}
+{{% tab "JSON" %}}
+
+The required fields must appear within all objects of a JSON file adhering to the [ECMA-404 standard][101] and all objects must be encapsulated by an array.
 
 Example of a valid JSON file:
 
+```json
 [
     {
         "ProviderName": "Zoom",
@@ -85,9 +97,11 @@ Example of a valid JSON file:
         "BillingCurrency": "USD"
     }
 ]
+```
 
 Example of an invalid JSON file:
 
+```json
 [
     {
         "providername": "Zoom",
@@ -98,17 +112,39 @@ Example of an invalid JSON file:
         "billingcurrency": "USD"
     }
 ]
+```
+
+[101]: https://www.ecma-international.org/publications-and-standards/standards/ecma-404/
+
+{{% /tab %}}
+{{< /tabs >}}
    
 ### Add optional tags 
-You can also optionally add any number of tags to CSV or JSON files to allocate costs.
 
-For a CSV file, add a column per tag, and for a JSON file, add a Tags object property.
+You can optionally add any number of tags to CSV or JSON files to allocate costs *after* the required fields as additional columns.
 
-Example of valid CSV file:
+{{< tabs >}}
+{{% tab "CSV" %}}
+
+For a CSV file, add a column per tag.
+
+Example of a valid CSV file:
+
+```none
 | ProviderName | ChargeDescription | ChargePeriodStart | ChargePeriodEnd | BilledCost | BillingCurrency | team | service |
-| Github | User Costs | 2023-01-01 | 2023-01-31 | 300.00 | USD | web | ops |
+| GitHub | User Costs | 2023-01-01 | 2023-01-31 | 300.00 | USD | web | ops |
+```
 
-Example of valid JSON file:
+In this example, the `team` and `service` columns are added after the `BillingCurrency` column, and appears as tags on this cost.
+
+{{% /tab %}}
+{{% tab "JSON" %}}
+
+For a JSON file, add a `Tags` object property to encapsulate any desired tags associated to this cost.
+
+Example of a valid JSON file:
+
+```json
 [
     {
         "ProviderName": "Zoom",
@@ -123,22 +159,47 @@ Example of valid JSON file:
         }
     }
 ]
+```
+
+In this example, an additional `Tags` object property has been added with two key-value pairs to allocate `team` and `service` tags to this cost.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Configure Cloud Costs
-Upload your CSV and JSON files either via [the Cost Files page in the Cloud Costs UI][3] or via API. Cost data should appear after 24 hours. 
 
-To send a JSON file, use the PUT api/v2/cost/custom_costs API endpoint. 
+Once your data is formatted to the requirements above, upload your CSV and JSON files to Cloud Cost Management on [the **Custom Costs Uploaded Files** page][3] or programmatically by using the API. 
 
-Example with curl:
+{{< tabs >}}
+{{% tab "UI" %}}
 
+Navigate to [**Cloud Costs** > **Settings** > **Uploaded Files**][101] and click **+ Upload Costs**.
+
+{{< img src="cloud_cost/upload_file.png" alt="Upload a CSV or JSON file to Datadog" style="width:80%" >}}
+
+[101]: https://app.datadoghq.com/cost/settings/cost-files
+
+{{% /tab %}}
+{{% tab "Programmatically" %}}
+
+To send a JSON file, use the `PUT api/v2/cost/custom_costs` API endpoint. 
+
+Example with cURL:
+
+```curl
 curl -L -X PUT "api.datadoghq.com/api/v2/cost/custom_costs/" \
 -H "Content-Type: multipart/form-data" \
 -H "DD-API-KEY: ${DD_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
 -F "file=${file};type=text/json"
+```
+{{% /tab %}}
+{{< /tabs >}}
 
+Cost data appears after 24 hours. 
 
-## Cost types
+## Cost metric types
+
 You can visualize your ingested data using the following cost types:
 
 | Cost Type | Description |
@@ -146,10 +207,29 @@ You can visualize your ingested data using the following cost types:
 | `custom.cost.amortized` | Total cost of resources accrued over an interval. |
 | `custom.cost.basis` | Total cost of resources allocated at the time of usage over an interval. |
 
+All costs submitted to Custom Costs appear in these metrics. For example, if a $4 purchase was made on September 1, over the September 1-4 period, the following costs are attributed to each metric:
+
+| Days | `custom.cost.basis` | `custom.cost.amortized` |
+|---|---|---|
+| September 1 | $4 | $1 |
+| September 2 | - | $1 |
+| September 3 | - | $1 |
+| September 4 | - | $1 |
+
+## Use Custom Costs data
+
+You can view custom costs data on the [**Cloud Costs Analytics** page][6], the [Cloud Costs Tag Explorer][7], and in [dashboards][8] or [notebooks][9].
+
 ## Further reading
+
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.datadoghq.com/cloud_cost_management
-[2]: https://www.ecma-international.org/publications-and-standards/standards/ecma-404/
-[3]: /cost/settings/cost-files
-[4]: https://focus.finops.org/#specification
+[2]: https://focus.finops.org/#specification
+[3]: https://app.datadoghq.com/cost/settings/cost-files
+[4]: https://www.ecma-international.org/publications-and-standards/standards/ecma-404/
+[5]: https://en.wiktionary.org/wiki/Pascal_case
+[6]: https://app.datadoghq.com/cost/analytics
+[7]: https://app.datadoghq.com/cost/tags?cloud=custom
+[8]: /dashboards
+[9]: /notebooks
