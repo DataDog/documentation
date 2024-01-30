@@ -68,6 +68,8 @@ The Intelligent Test Runner can be disabled locally by setting the `DD_CIVISIBIL
 : Enable the Intelligent Test Runner coverage and test skipping features<br />
 **Default**: `(true)`
 
+Run the following command to disable the Intelligent Test Runner:
+
 {{< tabs >}}
 
 {{% tab "Pytest" %}}
