@@ -13,7 +13,7 @@ further_reading:
 - link: "/code_analysis/static_analysis"
   tag: "Documentation"
   text: "Learn about Static Analysis"
-- link: "/code_analysis/software_composition_analysis"
+- link: "/security/application_security/software_composition_analysis"
   tag: "Documentation"
   text: "Learn about Software Composition Analysis"
 ---
@@ -87,7 +87,7 @@ For more information about Static Analysis rulesets, see [Static Analysis Rules]
 
 ## Configure your CI/CD provider
 
-Select a CI/CD provider to configure Code Analysis with:
+Select a CI/CD provider to configure Static Analysis and optionally enable [Software Composition Analysis][9] with:
 
 {{< partial name="code_analysis/ci-provider-getting-started.html" >}}
 
@@ -110,3 +110,4 @@ Configure a GitHub App using the [GitHub integration tile][7] and set up the [so
 [7]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
 [8]: /integrations/guide/source-code-integration
 [9]: https://app.datadoghq.com/ci/code-analysis
+[9]: /security/application_security/software_composition_analysis
