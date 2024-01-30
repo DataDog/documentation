@@ -6,6 +6,7 @@ kind: guide
 {{< whatsnext desc="General:" >}}
     {{< nextlink href="cloudcraft/faq/supported-aws-components">}}What AWS components are supported?{{< /nextlink >}}
     {{< nextlink href="cloudcraft/faq/supported-azure-components">}}Which Azure components are supported?{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/faq/workaround-add-aws-account-without-permission">}}I can't create IAM roles in AWS. How can I add an AWS account?{{< /nextlink >}}
     {{< nextlink href="cloudcraft/faq/support-other-cloud-providers">}}Does Cloudcraft support other cloud providers?{{< /nextlink >}}
     {{< nextlink href="cloudcraft/faq/delete-account">}}How do I delete my account?{{< /nextlink >}}
     {{< nextlink href="cloudcraft/faq/why-cant-export-diagram-to-terraform">}}Why can't I export diagrams as Terraform code anymore?{{< /nextlink >}}
