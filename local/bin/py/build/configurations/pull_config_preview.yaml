@@ -377,14 +377,14 @@
       - repo_name: datadog-sca-github-action
         contents:
         - action: pull-and-push-file
-          branch: main
+          branch: alai97/configure-ci-cd-provider-instructions
           globs:
           - 'README.md'
           options:
             dest_path: '/code_analysis/software_composition_analysis/'
             file_name: 'github_actions.md'
             front_matters:
-              dependencies: ["https://github.com/DataDog/datadog-sca-github-action/blob/main/README.md"]
+              dependencies: ["https://github.com/DataDog/datadog-sca-github-action/blob/alai97/configure-ci-cd-provider-instructions/README.md"]
               title: Software Composition Analysis and GitHub Actions
               kind: documentation
               description: Use Datadog and GitHub to run Software Composition Analysis jobs in a CI pipeline.
