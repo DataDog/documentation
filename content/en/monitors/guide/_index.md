@@ -25,7 +25,7 @@ cascade:
     {{< nextlink href="monitors/guide/adjusting-no-data-alerts-for-metric-monitors" >}}Adjusting "No Data" alerts for metric Monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime" >}}Prevent alerts from monitors that were in downtime{{< /nextlink >}}
     {{< nextlink href="monitors/guide/reduce-alert-flapping" >}}Reduce alert flapping{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/best-practices-for-live-process-monitors" >}}Best practices for live process monitors{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitor-a-live-process" >}}Monitor a live process{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="API:" >}}
