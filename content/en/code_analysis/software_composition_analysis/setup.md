@@ -1,7 +1,7 @@
 ---
 title: Setting Up Software Composition Analysis
 kind: documentation
-description: Learn how to set up Software Composition Analysis to scan code for quality issues and security vulnerabilities before your code reaches production.
+description: Learn how to set up Software Composition Analysis to scan your imported open-source libraries for known security vulnerabilities before you ship to production.
 is_beta: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
@@ -21,21 +21,19 @@ further_reading:
   text: "Learn about Static Analysis"
 ---
 
-{{% site-region region="us,us3,us5,eu,ap1" %}}
-<div class="alert alert-warning">
-  Software Composition Analysis is in public beta. Go, Java, NodeJS, Python, and Ruby are the only supported languages.
-</div>
-{{% /site-region %}}
-
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
     Software Composition Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
 
+{{< callout url="#" btn_hidden="true" >}}
+Software Composition Analysis is part of the Code Analysis public beta.
+{{< /callout >}}
+
 ## Overview
 
-Software Composition Analysis (SCA) scans open source libraries imported into repositories through package managers such as `npm` for [vulnerabilities][1]. SCA enables engineering teams to identify vulnerable dependencies early on in the development life cycle so they can update dependencies to non-vulnerable versions or remove them entirely to ensure their production codebase is secure.
+To use Datadog Software Composition Analysis (SCA) in CI, you only need to set it up in its own dedicated job. 
 
 ## Enable Software Composition Analysis
 
@@ -45,7 +43,7 @@ When setting up [Code Analysis][2] on your project, select **Enable Software Com
 
 ## Configure your CI/CD provider
 
-Configure your [Datadog API and application keys][3] and run Software Composition Analysis jobs in the respective CI provider.
+Datadog Software Composition Analysis runs in your CI pipelines using the [`datadog-ci` CLI][5] and checks that imported libraries are secure. Configure your [Datadog API and application keys][3] and run Software Composition Analysis jobs in the respective CI provider.
 
 {{< tabs >}}
 {{% tab "GitHub Actions" %}}
@@ -79,44 +77,17 @@ Provide the following inputs:
 |----------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
 | `service`      | The name of the service to tag the results with.                                                                           | Yes      |                 |
 | `env`          | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
-| `cpu_count`    | Set the number of CPUs used by the analyzer. Defaults to the number of CPUs available.                                     | No       |                 |
 | `subdirectory` | The subdirectory path the analysis should be limited to. The path is relative to the root directory of the repository.                  | No       |                 |
-
-Select an analyzer for your architecture and OS:
-
-| Architecture | OS        | Name                                                    | Link                                                                                                                                          |
-|--------------|-----------|---------------------------------------------------------| ----------------------------------------------------------------------------------------------------------------------------------------------|
-| `aarch64`    | `Darwin`  | `datadog-static-analyzer-aarch64-apple-darwin.zip`      | [Download](https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-aarch64-apple-darwin.zip)      |
-| `aarch64`    | `Linux`   | `datadog-static-analyzer-aarch64-unknown-linux-gnu.zip` | [Download](https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-aarch64-unknown-linux-gnu.zip) |
-| `x86_64`     | `Darwin`  | `datadog-static-analyzer-x86_64-apple-darwin.zip`       | [Download](https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-x86_64-apple-darwin.zip)       |
-| `x86_64`     | `Linux`   | `datadog-static-analyzer-x86_64-unknown-linux-gnu.zip`  | [Download](https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-x86_64-unknown-linux-gnu.zip)  |
-| `x86_64`     | `Windows` | `datadog-static-analyzer-x86_64-pc-windows-msvc.zip`    | [Download](https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-x86_64-pc-windows-msvc.zip)    |
-
-Add the following to your CI pipeline:
-
-<div class="alert alert-info">
-  The following example uses the x86_64 Linux version of Datadog's static analyzer. If you're using a different OS or architecture, you should select it from the table above and update the <code>DATADOG_STATIC_ANALYZER_URL</code> value below. You can view all releases on our <a href="https://github.com/DataDog/datadog-static-analyzer/releases">GitHub Releases</a> page.
-</div>
 
 ```bash
 # Set the Datadog site to send information to
 export DD_SITE="datadoghq.com"
 
 # Install dependencies
-npm install -g @datadog/datadog-ci 
-
-# Download the latest Datadog static analyzer:
-# https://github.com/DataDog/datadog-static-analyzer/releases
-DATADOG_STATIC_ANALYZER_URL=https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-x86_64-unknown-linux-gnu.zip
-curl -L $DATADOG_STATIC_ANALYZER_URL > /tmp/ddog-static-analyzer.zip
-unzip /tmp/ddog-static-analyzer.zip -d /tmp
-mv /tmp/datadog-static-analyzer /usr/local/datadog-static-analyzer
-
-# Run Static Analysis
-/usr/local/datadog-static-analyzer -i . -o /tmp/report.sarif -f sarif
+npm install -g @datadog/datadog-ci
 
 # Upload results
-datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
+datadog-ci sbom upload --service "my-app" --env "ci" /tmp/trivy.json
 ```
 
 [101]: /account_management/api-app-keys/#api-keys
@@ -125,35 +96,6 @@ datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
 
 {{% /tab %}}
 {{< /tabs >}}
-
-To upload a SBOM report:
-
-1. Ensure the [`DD_API_KEY` and `DD_APP_KEY` variables are defined][3].
-2. Set the [`DD_SITE` variable][4] (this default to `datadoghq.com`):
-   
-   ```bash
-   export DD_SITE="datadoghq.com"
-   ```
-
-3. Install the `datadog-ci` utility:
-   
-   ```bash
-   npm install -g @datadog/datadog-ci
-   ```
-
-4. Upload the SBOM report to Datadog:
-
-   ```bash
-   datadog-ci sbom upload --service <service> --env <env> /tmp/trivy.json
-   ```
-
-## Run Software Composition Analysis in a CI pipeline
-
-Datadog Software Composition Analysis runs in your CI pipelines using the [`datadog-ci` CLI][5] and checks that imported libraries are secure and compliant.
-
-### Search and filter results
-
-After you configure your CI pipelines to run the Datadog SBOM Generation and Upload job, violations appear on the [Code Analysis page][6]. To filter your results, use the facets to the left of the list, or search. 
 
 ## Further Reading
 
