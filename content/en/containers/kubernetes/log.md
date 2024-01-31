@@ -123,7 +123,7 @@ datadog:
         - <DOCKER_GROUP_ID>
 ```
 
-- Replace `<USER_ID>` with the UID to run the Agent
+- Replace `<USER_ID>` with the UID to run the Agent.
 - Replace `<DOCKER_GROUP_ID>` with the group ID that owns the Docker or containerd socket.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
@@ -165,7 +165,7 @@ To apply a specific configuration to a given container, Autodiscovery identifies
 <div class="alert alert-info">
 If you define your Kubernetes pods <i>directly</i> (with <code>kind:Pod</code>), add each pod's annotations in its <code>metadata</code> section, as shown in the following sections.
 <br/><br/>
-If you define your Kubernetes pods <i>indirectly</i> (with replication controllers, ReplicaSets, or deployments), add pod annotations under <code>.spec.template.metadata</code> </div>
+If you define your Kubernetes pods <i>indirectly</i> (with replication controllers, ReplicaSets, or deployments), add pod annotations under <code>.spec.template.metadata</code>.</div>
 
 #### Configure a single container
 To configure log collection for a given `<CONTAINER_IDENTIFIER>` within your pod, add the following annotations to your pod:
