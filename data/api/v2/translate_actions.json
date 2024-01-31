@@ -23,6 +23,26 @@
     "request_description": "",
     "request_schema_description": "Request used to update an API key."
   },
+  "DeleteOpenAPI": {
+    "description": "Delete a specific API by ID.",
+    "summary": "Delete an API"
+  },
+  "GetOpenAPI": {
+    "description": "Retrieve information about a specific API in [OpenAPI](https://spec.openapis.org/oas/latest.html) format file.",
+    "summary": "Get an API"
+  },
+  "UpdateOpenAPI": {
+    "description": "Update information about a specific API. The given content will replace all API content of the given ID.\nThe ID is returned by the create API, or can be found in the URL in the API catalog UI.\n",
+    "summary": "Update an API",
+    "request_description": "",
+    "request_schema_description": "Object for API data in an `OpenAPI` format as a file."
+  },
+  "CreateOpenAPI": {
+    "description": "Create a new API from the [OpenAPI](https://spec.openapis.org/oas/latest.html) specification given.\nIt supports version `2.0`, `3.0` and `3.1` of the specification. A specific extension section, `x-datadog`,\nlet you specify the `teamHandle` for your team responsible for the API in Datadog.\nIt returns the created API ID.\n",
+    "summary": "Create a new API",
+    "request_description": "",
+    "request_schema_description": "Object for API data in an `OpenAPI` format as a file."
+  },
   "ListSpansMetrics": {
     "description": "Get the list of configured span-based metrics with their definitions.",
     "summary": "Get all span-based metrics"
@@ -174,6 +194,54 @@
   "ListContainers": {
     "description": "Get all containers for your organization.",
     "summary": "Get All Containers"
+  },
+  "ListCostAWSCURConfigs": {
+    "description": "List the AWS CUR configs.",
+    "summary": "List Cloud Cost Management AWS CUR configs"
+  },
+  "CreateCostAWSCURConfig": {
+    "description": "Create a Cloud Cost Management account for an AWS CUR config.",
+    "summary": "Create Cloud Cost Management AWS CUR config",
+    "request_description": "",
+    "request_schema_description": "AWS CUR config Post Request."
+  },
+  "DeleteCostAWSCURConfig": {
+    "description": "Archive a Cloud Cost Management Account.",
+    "summary": "Delete Cloud Cost Management AWS CUR config"
+  },
+  "UpdateCostAWSCURConfig": {
+    "description": "Update the status of an AWS CUR config (active/archived).",
+    "summary": "Update Cloud Cost Management AWS CUR config",
+    "request_description": "",
+    "request_schema_description": "AWS CUR config Patch Request."
+  },
+  "ListAWSRelatedAccounts": {
+    "description": "List the AWS accounts in an organization by calling 'organizations:ListAccounts' from the specified management account.",
+    "summary": "List related AWS accounts"
+  },
+  "ListCostAzureUCConfigs": {
+    "description": "List the Azure configs.",
+    "summary": "List Cloud Cost Management Azure configs"
+  },
+  "CreateCostAzureUCConfigs": {
+    "description": "Create a Cloud Cost Management account for an Azure config.",
+    "summary": "Create Cloud Cost Management Azure configs",
+    "request_description": "",
+    "request_schema_description": "Azure config Post Request."
+  },
+  "DeleteCostAzureUCConfig": {
+    "description": "Archive a Cloud Cost Management Account.",
+    "summary": "Delete Cloud Cost Management Azure config"
+  },
+  "UpdateCostAzureUCConfigs": {
+    "description": "Update the status of an  Azure config (active/archived).",
+    "summary": "Update Cloud Cost Management Azure config",
+    "request_description": "",
+    "request_schema_description": "Azure config Patch Request."
+  },
+  "GetCloudCostActivity": {
+    "description": "Get the Cloud Cost Management activity.",
+    "summary": "Cloud Cost Enabled"
   },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 17th of the following month.",
@@ -970,7 +1038,8 @@
   "UploadIdPMetadata": {
     "description": "Endpoint for uploading IdP metadata for SAML setup.\n\nUse this endpoint to upload or replace IdP metadata for SAML login configuration.",
     "summary": "Upload IdP metadata",
-    "request_description": ""
+    "request_description": "",
+    "request_schema_description": "The form data submitted to upload IdP metadata"
   },
   "ListScorecardOutcomes": {
     "description": "Fetches all rule outcomes.",
@@ -1047,6 +1116,30 @@
     "summary": "Update a security filter",
     "request_description": "New definition of the security filter.",
     "request_schema_description": "The new security filter body."
+  },
+  "ListSecurityMonitoringSuppressions": {
+    "description": "Get the list of all suppression rules.",
+    "summary": "Get all suppression rules"
+  },
+  "CreateSecurityMonitoringSuppression": {
+    "description": "Create a new suppression rule.",
+    "summary": "Create a suppression rule",
+    "request_description": "The definition of the new suppression rule.",
+    "request_schema_description": "Request object that includes the suppression rule that you would like to create."
+  },
+  "DeleteSecurityMonitoringSuppression": {
+    "description": "Delete a specific suppression rule.",
+    "summary": "Delete a suppression rule"
+  },
+  "GetSecurityMonitoringSuppression": {
+    "description": "Get the details of a specific suppression rule.",
+    "summary": "Get a suppression rule"
+  },
+  "UpdateSecurityMonitoringSuppression": {
+    "description": "Update a specific suppression rule.",
+    "summary": "Update a suppression rule",
+    "request_description": "New definition of the suppression rule. Supports partial updates.",
+    "request_schema_description": "Request object containing the fields to update on the suppression rule."
   },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
@@ -1381,8 +1474,8 @@
     "summary": "Get hourly usage by product family"
   },
   "GetUsageLambdaTracedInvocations": {
-    "description": "Get hourly usage for lambda traced invocations.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
-    "summary": "Get hourly usage for lambda traced invocations"
+    "description": "Get hourly usage for Lambda traced invocations.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for Lambda traced invocations"
   },
   "GetUsageObservabilityPipelines": {
     "description": "Get hourly usage for observability pipelines.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",

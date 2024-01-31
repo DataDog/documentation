@@ -15,6 +15,7 @@ title: ログガイド
     {{< nextlink href="logs/guide/getting-started-lwl" >}}Logging Without Limits™ ガイド{{< /nextlink >}}
     {{< nextlink href="logs/guide/correlate-logs-with-metrics" >}}ログとメトリクスの相関{{< /nextlink >}}
     {{< nextlink href="logs/guide/best-practices-for-log-management" >}}ログ管理のベストプラクティス{{< /nextlink >}}
+    {{< nextlink href="logs/guide/manage_logs_and_metrics_with_terraform" >}}Terraform によるログとメトリクスの管理{{< /nextlink >}}
 {{< /whatsnext >}}
 
 <br>

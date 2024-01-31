@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-To get started with Datadog APM, you need follow these key steps:
+To get started with Datadog APM, you need to follow these key steps:
 
 1. Install and configure the Datadog Agent.  
 2. Instrument your application.

@@ -137,7 +137,7 @@ let rum = RUMMonitor.shared()
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: When using `.startAction(type:name:)` and `.stopAction(type:name:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion. 
+**Note**: When using `.startAction(type:name:)` and `.stopAction(type:name:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion.
 
 Find more details and available options in the [`DDRUMMonitor` class][9].
 
@@ -736,55 +736,6 @@ This means that even if users open your application while offline, no data is lo
 
 **Note**: The data on the disk is automatically discarded if it gets too old to ensure the RUM iOS SDK does not use too much disk space.
 
-## Configuring a custom proxy for Datadog data upload
-
-If your app is running on devices behind a custom proxy, you can inform the RUM iOS SDK's data uploader to ensure that all tracked data is uploaded with the relevant configuration.
-
-When initializing the iOS SDK, specify this in your proxy configuration.
-
-{{< tabs >}}
-{{% tab "Swift" %}}
-```swift
-import DatadogCore
-
-Datadog.initialize(
-  with: Datadog.Configuration(
-    clientToken: "<client token>",
-    env: "<environment>",
-    proxyConfiguration: [
-        kCFNetworkProxiesHTTPEnable: true,
-        kCFNetworkProxiesHTTPPort: 123,
-        kCFNetworkProxiesHTTPProxy: "www.example.com",
-        kCFProxyUsernameKey: "proxyuser",
-        kCFProxyPasswordKey: "proxypass"
-    ]
-  ),
-  trackingConsent: trackingConsent
-)
-```
-
-{{% /tab %}}
-{{% tab "Objective-C" %}}
-```objective-c
-@import DatadogObjc;
-
-DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
-configuration.proxyConfiguration = @{
-    (NSString *)kCFNetworkProxiesHTTPEnable: @YES,
-    (NSString *)kCFNetworkProxiesHTTPPort: @123,
-    (NSString *)kCFNetworkProxiesHTTPProxy: @"www.example.com",
-    (NSString *)kCFProxyUsernameKey: @"proxyuser",
-    (NSString *)kCFProxyPasswordKey: @"proxypass"
-}];
-
-[DDDatadog initializeWithConfiguration:configuration
-                       trackingConsent:trackingConsent];
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-For more information, see the [URLSessionConfiguration.connectionProxyDictionary][8] documentation.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -796,5 +747,4 @@ For more information, see the [URLSessionConfiguration.connectionProxyDictionary
 [5]: /real_user_monitoring/ios/data_collected/?tab=error#error-attributes
 [6]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum
 [7]: /real_user_monitoring/ios/data_collected?tab=session#default-attributes
-[8]: https://developer.apple.com/documentation/foundation/urlsessionconfiguration/1411499-connectionproxydictionary
 [9]: https://github.com/DataDog/dd-sdk-ios/blob/56e972a6d3070279adbe01850f51cb8c0c929c52/DatadogObjc/Sources/RUM/RUM%2Bobjc.swift
