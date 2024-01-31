@@ -1,0 +1,89 @@
+---
+title: SaaS Cost Integrations
+kind: documentation
+is_beta: true
+private: true
+disable_toc: false
+further_reading:
+- link: "/cloud_cost_management/"
+  tag: "Documentation"
+  text: "Cloud Cost Management"
+- link: "/cloud_cost_management/aws"
+  tag: "Documentation"
+  text: "Gain insights into your AWS bill"
+- link: "/cloud_cost_management/azure"
+  tag: "Documentation"
+  text: "Gain insights into your Azure bill"
+- link: "/cloud_cost_management/google_cloud"
+  tag: "Documentation"
+  text: "Gain insights into your Google Cloud bill"
+  - link: "/cloud_cost_management/custom"
+  tag: "Documentation"
+  text: "Gain insights into your custom costs"
+---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
+{{< /site-region >}}
+
+{{< beta-callout url="#" btn_hidden="true" >}}
+Fastly and Confluent Cloud Cost Integrations are in public beta. Snowflake Costs are in private beta, please ask your account team to have you added to the private beta.
+{{< /beta-callout >}}
+
+## Overview
+
+SaaS Cost Integrations allow you to send cost data directly from your providers, with a one time set up. 
+
+Fastly, Confluent Cloud, and Snowflake integrations are available currently. If your provider is not supported via SaaS Cost Integrations, you can use [Custom Costs][1] to upload any cost data source to Datadog, so that you can understand the total cost of your services. 
+
+To use SaaS Cost Integrations, you must [configure Cloud Cost Management][1] for either AWS, Azure, or Google Cloud.
+
+## Configure SaaS Cost Integrations
+
+Navigate to [**Cloud Costs** > **Settings** > **Accounts**][101] and click on the provider you want to connect. Cost data appears after 24 hours. 
+ 
+{{< tabs >}}
+{{% tab "Fastly" %}}
+{{% /tab %}}
+{{% tab "Confluent Cloud" %}}
+{{% /tab %}}
+{{% tab "Snowflake" %}}
+{{% /tab %}}
+{{< /tabs >}}
+
+## Cost metric types
+
+You can visualize your ingested data using the following cost types:
+
+| Cost Type | Description |
+| ----------| ----------------------------------|
+| `custom.cost.amortized` | Total cost of resources accrued over an interval. |
+| `custom.cost.basis` | Total cost of resources allocated at the time of usage over an interval. |
+
+SaaS Cost Integration costs, and Custom Costs, appear in these metrics. Group by `provider_name` to see costs by each provider that you've integrated.
+
+For example, if a $4 purchase was made on September 1, over the September 1-4 period, the following costs are attributed to each metric:
+
+| Days | `custom.cost.basis` | `custom.cost.amortized` |
+|---|---|---|
+| September 1 | $4 | $1 |
+| September 2 | - | $1 |
+| September 3 | - | $1 |
+| September 4 | - | $1 |
+
+## Use SaaS Cost Integration data
+
+You can view cost data on the [**Cloud Costs Analytics** page][3], the [Cloud Costs Tag Explorer][4], and in [dashboards][5], [notebooks][6], or [monitors][7]. You can also combine these cost metrics with other cloud cost metrics or observability metrics.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://docs.datadoghq.com/cloud_cost_management/custom
+[2]: https://docs.datadoghq.com/cloud_cost_management
+[3]: https://app.datadoghq.com/cost/analytics
+[4]: https://app.datadoghq.com/cost/tags?cloud=custom
+[5]: /dashboards
+[6]: /notebooks
+[70]: /monitors/create/cost
+
