@@ -35,7 +35,7 @@ There are several ways to get started with the Observability Pipelines Worker.
 - [Datadog archiving setup guide][3]: Install the Worker with an out-of-the-box pipeline for receiving and routing data from your Datadog Agents to Datadog and S3.
 - [Splunk setup guide][4]: Install the Worker with an out-of-the-box pipeline for receiving and routing data from Splunk HEC to both Splunk and Datadog.
 
-This document walks you through the quickstart installation steps and then provides resources for next steps.
+This document walks you through the quickstart installation steps and then provides resources for next steps. Use and operation of this software is governed by the [End User License Agreement][5].
 
 ## Deployment Modes
 
@@ -45,12 +45,12 @@ This document walks you through the quickstart installation steps and then provi
 
 To install the Observability Pipelines Worker, you need the following:
 
-- A valid [Datadog API key][5].
+- A valid [Datadog API key][6].
 - A pipeline ID.
 
 To generate a new API key and pipeline:
 
-1. Navigate to [Observability Pipelines][6].
+1. Navigate to [Observability Pipelines][7].
 2. Click **New Pipeline**.
 3. Enter a name for your pipeline.
 4. Click **Next**.
@@ -293,7 +293,7 @@ See [Configurations][2] for more information about the source, transform, and si
 {{% /tab %}}
 {{< /tabs >}}
 
-See [Working with Data][7] for more information on transforming your data.
+See [Working with Data][8] for more information on transforming your data.
 
 ## Updating deployment modes
 
@@ -307,8 +307,8 @@ The quickstart walked you through installing the Worker and deploying a sample p
 
 For recommendations on deploying and scaling multiple Workers:
 
-- See [Deployment Design and Principles][8] for information on what to consider when designing your Observability Pipelines architecture.
-- See [Best Practices for OP Worker Aggregator Architecture][9].
+- See [Deployment Design and Principles][9] for information on what to consider when designing your Observability Pipelines architecture.
+- See [Best Practices for OP Worker Aggregator Architecture][10].
 
 ## Further reading
 
@@ -318,8 +318,9 @@ For recommendations on deploying and scaling multiple Workers:
 [2]: /observability_pipelines/setup/datadog/
 [3]: /observability_pipelines/setup/datadog_with_archiving/
 [4]: /observability_pipelines/setup/splunk/
-[5]: https://app.datadoghq.com/observability-pipelines
-[6]: /account_management/api-app-keys/#api-keys
-[7]: /observability_pipelines/working_with_data/
-[8]: /observability_pipelines/production_deployment_overview/
-[9]: /observability_pipelines/architecture/
+[5]: https://www.datadoghq.com/legal/eula/
+[6]: https://app.datadoghq.com/observability-pipelines
+[7]: /account_management/api-app-keys/#api-keys
+[8]: /observability_pipelines/working_with_data/
+[9]: /observability_pipelines/production_deployment_overview/
+[10]: /observability_pipelines/architecture/
