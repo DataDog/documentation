@@ -32,29 +32,67 @@ Fastly and Confluent Cloud Cost Integrations are in public beta. Snowflake Costs
 
 ## Overview
 
-SaaS Cost Integrations allow you to send cost data directly from your providers, with a one time set up. 
+SaaS Cost Integrations allow you to send cost data directly from your providers, with a one time set up.
 
-Fastly, Confluent Cloud, and Snowflake integrations are available currently. If your provider is not supported via SaaS Cost Integrations, you can use [Custom Costs][1] to upload any cost data source to Datadog, so that you can understand the total cost of your services. 
+Fastly, Confluent Cloud, and Snowflake integrations are available currently. If your provider is not supported via SaaS Cost Integrations, you can use [Custom Costs][1] to upload any cost data source to Datadog, so that you can understand the total cost of your services.
 
 To use SaaS Cost Integrations, you must [configure Cloud Cost Management][1] for either AWS, Azure, or Google Cloud.
 
 ## Configure SaaS Cost Integrations
 
-Navigate to [**Cloud Costs** > **Settings** > **Accounts**][101] and click on the provider you want to integrate. Cost data appears after 24 hours. 
+Navigate to [**Cloud Costs** > **Settings** > **Accounts**][101] and click on the provider you want to integrate. Cost data appears after 24 hours.
 
 {{< img src="cloud_cost/cloud_and_saas_accounts.png" alt="Integrate with Fastly, Confluent, or Snowflake." style="width:80%" >}}
 
 {{< tabs >}}
 {{% tab "Fastly" %}}
-1. Create a new API token with at least "global:read" scope and "Billing" role on the [Personal API tokens][8] page. 
+1. Create a new API token with at least "global:read" scope and "Billing" role on the [Personal API tokens][8] page.
 2. Then integrate it with Datadog by clicking Add Account in the page.
 
-{{< img src="cloud_cost/fastly_setup.png.png" alt="Integrate with Fastly." style="width:80%" >}}
+{{< img src="cloud_cost/fastly_setup.png" alt="Integrate with Fastly." style="width:80%" >}}
 
 {{% /tab %}}
 {{% tab "Confluent Cloud" %}}
+1. Create or acquire an API key with the organizational admin role.
+2. Then integrate it with Datadog by clicking Add Account in the page.
+
+{{< img src="cloud_cost/confluent_setup.png" alt="Integrate with Confluent." style="width:80%" >}}
+
 {{% /tab %}}
 {{% tab "Snowflake" %}}
+1.  Create a Datadog specific role and user to monitor Snowflake. In Snowflake, run the following to create a custom role.
+```
+-- Create a new role intended to monitor Snowflake usage.
+create role DATADOG;
+
+-- Grant privileges on the SNOWFLAKE database to the new role.
+grant imported privileges on database SNOWFLAKE to role DATADOG;
+
+-- Grant usage to your default warehouse to the role DATADOG.
+grant usage on warehouse <WAREHOUSE> to role DATADOG;
+
+-- If you have cost usage collection enabled, ensure that your credentials have permission to view the ORGANIZATION_USAGE schema.
+grant role orgadmin to role DATADOG
+
+-- Create a user.
+create user DATADOG_USER
+LOGIN_NAME = DATADOG_USER
+password = <PASSWORD>
+default_warehouse = <WAREHOUSE>
+default_role = DATADOG
+
+-- Grant the monitor role to the user.
+grant role DATADOG to user <USER>
+```
+2. Configure the key pair authentication.
+  1. Generate a private key following instructions [here][9].
+  2. Generate a public key following instructions [here][10].
+  3. Assign the public key to the user created in step 1 following instructions [here][11].
+
+3. Then integrate it with Datadog by clicking Add Account in the page.
+
+{{< img src="cloud_cost/snowflake_setup.png" alt="Integrate with Snowflake." style="width:80%" >}}
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -94,4 +132,6 @@ You can view cost data on the [**Cloud Costs Analytics** page][3], the [Cloud Co
 [6]: /notebooks
 [7]: /monitors/create/cost
 [8]: https://manage.fastly.com/account/personal/tokens
-
+[9]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key
+[10]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-a-public-key
+[11]: https://docs.snowflake.com/en/user-guide/key-pair-auth#assign-the-public-key-to-a-snowflake-user
