@@ -56,7 +56,7 @@ Private locations are Docker containers that you can install anywhere inside you
 
 Private locations are Windows services that you can install anywhere inside your private network using an [MSI file][101]. Run this file from the virtual or physical machine that you would like to install the private location on. 
 
-This machine's requirements are listed in the table below. Datadog recommends running the private location worker on a virtual machine or Windows container. PowerShell scripting must be enabled on the machine where you are installing the private location worker.
+This machine's requirements are listed in the table below. PowerShell scripting must be enabled on the machine where you are installing the private location worker.
 
 | System | Requirements |
 |---|---|
@@ -66,39 +66,7 @@ This machine's requirements are listed in the table below. Datadog recommends ru
 
 You must install .NET version 4.7.2 or later on your computer before using the MSI installer. 
 
-To install the [Windows Agent][102], either use a GUI or the command line.
-
-#### GUI
-
-1. Download the [Datadog Agent installer][101] to install the latest version of the Agent.
-
-   <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json">installer list</a>.</div>
-
-2. Run the installer (as **Administrator**) by opening `datadog-agent-7-latest.amd64.msi`.
-3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][103].
-4. When the install finishes, you are given the option to launch the Datadog Agent Manager.
-
-#### Command Line
-
-1. Download the [Synthetics Private Location Installer][101].
-2. Run the following command inside the directory where you downloaded the installer.
-
-   ```shell
-   msiexec /i datadog-synthetics-worker-<version-number>.amd64.msi
-   ```
-   
-   To run a [quiet installation][104], run the command with the `/quiet` option:
-
-   ```shell
-   msiexec /i datadog-synthetics-worker-<version-number>.amd64.msi /quiet /qn /L*V "install.log" APPLYDEFAULTFIREWALLRULES=1 APPLYFIREWALLDEFAULTBLOCKRULES=1 CONFIGURE_AUTOLOGON=1 AUTO_REBOOT=1 CONFIG_FILEPATH=C:\config\worker-config-win-pl.json LOGGING_ENABLED=1 LOGGING_MAXDAYS=7 LOGGING_VERBOSITY="-vvv"
-   ```
-   
-For more information about optional parameters, see the [Command Line Options section](#command-line-options).
-
-[101]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
-[102]: /agent/basic_agent_usage/windows/
-[103]: https://app.datadoghq.com/organization-settings/api-keys
-[104]: https://learn.microsoft.com/en-us/windows/win32/msi/standard-installer-command-line-options#quiet
+[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -124,7 +92,7 @@ To pull test configurations and push test results, the private location worker n
 | ---- | ---------------------------------- | -------------------------------------------------------------- |
 | 443  | `intake.synthetics.datadoghq.eu`   | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1]. |
 
-**Note**: These domains are pointing to a set of static IP addresses. These addresses can be found at https://ip-ranges.datadoghq.eu, specifically at https://ip-ranges.datadoghq.eu/api.json for `api.datadoghq.eu` and at https://ip-ranges.datadoghq.eu/synthetics-private-locations.json for `intake-v2.synthetics.datadoghq.eu`.
+**Note**: These domains are pointing to a set of static IP addresses. These addresses can be found at https://ip-ranges.datadoghq.eu.
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -172,7 +140,7 @@ To pull test configurations and push test results, the private location worker n
 
 ## Set up your private location
 
-Only users with the **Admin** role can create private locations. For more information, see [Permissions](#permissions).
+Only users with the **Synthetics Private Locations Write** role can create private locations. For more information, see [Permissions](#permissions).
 
 ### Create your private location
 
@@ -515,20 +483,17 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 [1]: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 
 {{% /tab %}}
-{{% tab "Windows" %}}
+{{% tab "Windows via GUI" %}}
 
 1. Download the [`datadog-synthetics-worker-<version>.amd64.msi` file][101] and run this file from the machine you want to install the private location on. 
 1. Click **Next** on the welcome page, read the EULA, and accept the terms and conditions. Click **Next**.
 1. Modify where the application will be installed, or leave the default settings. Click **Next**.
 1. To configure your Windows private location, you can either:
-
    - Paste and enter a JSON configuration for your Datadog Synthetics Private Location Worker. This file is generated by Datadog when you [create a private location][102].
-
-   {{< img src="synthetics/private_locations/configuration_selector_paste.png" alt="Synthetics Private Location Worker wizard, MSI installer. The option 'Paste in a JSON configuration' is selected. A text field for this JSON configuration is displayed." style="width:80%;" >}}
-
-   - Browse or type a file path to a file containing a JSON configuration for your Datadog Synthetics Private Location Worker. You can type the file path or leave it blank and run `synthetics-pl-worker.exe --config=<PathToYourConfiguration>` in the Windows command-line prompt after the installation is complete.
+   - Browse or type a file path to a file containing a JSON configuration for your Datadog Synthetics Private Location Worker.
+   - You can leave it blank and run `C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=<PathToYourConfiguration>` in the Windows command-line prompt after the installation is complete.
   
-   {{< img src="synthetics/private_locations/configuration_selector_browse.png" alt="Synthetics Private Location Worker wizard, MSI installer. The option 'Browse for a JSON configuration on my computer' is selected. A file selector is displayed." style="width:80%;" >}}
+   {{< img src="synthetics/private_locations/configuration_selector_paste.png" alt="Synthetics Private Location Worker wizard, MSI installer. The option 'Paste in a JSON configuration' is selected. A text field for this JSON configuration is displayed." style="width:80%;" >}}
 
 1. You can apply the following configuration options:
    
@@ -547,30 +512,37 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
    : Specifies how many days to keep logs before deleting them from the local system.
 
    Logging Verbosity
-   : Specifies the verbosity of the console and file logging for the Synthetics Private Location Worker. Options for verbosity when performing an unattended `msiexec` installation include `-v` for error, `-vv` for information, and `-vvv` for debug.
+   : Specifies the verbosity of the console and file logging for the Synthetics Private Location Worker.
 
 1. Click **Next** and **Install** to start the installation process. 
    
 Once the process is complete, click **Finish** on the installation completion page.
 
-<div class="alert alert-warning">If you entered your JSON configuration, the Windows Service starts running using that configuration. If you did not enter your configuration, run <code>synthetics-pl-worker.exe --config=<PathToYourConfiguration></code> from a command prompt or use the <code>start menu</code> shortcut to start the Synthetics Private Location Worker.</div>
+<div class="alert alert-warning">If you entered your JSON configuration, the Windows Service starts running using that configuration. If you did not enter your configuration, run <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=\<PathToYourConfiguration\></code> from a command prompt or use the <code>start menu</code> shortcut to start the Synthetics Private Location Worker.</div>
 
-### Command line options
+[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
+[102]: https://app.datadoghq.com/synthetics/settings/private-locations
 
-To install the Synthetics Private Location Worker on the command line, use the `msiexec` command and include parameters as needed. 
+{{% /tab %}}
+{{% tab "Windows via CLI" %}}
+
+1. Download the [`datadog-synthetics-worker-<version>.amd64.msi` file][101] and run this file from the machine you want to install the private location on. 
+2. Run one of the following commands inside the directory where you downloaded the installer.:
+- in a Powershell Terminal
+`Start-Process msiexec "/i datadog-synthetics-worker-<version>-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";`
+- or in a Command Terminal
+`Start-Process msiexec "/i datadog-synthetics-worker-<version>-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";`
+
+Additional parameters can be added:
 
 | Optional Parameter | Definition | Value | Default Value | Type |
 |---|---|---|---|---|
 | APPLYDEFAULTFIREWALLRULES | Applies firewall rules needed for the program. | 1 | N/A | 0: Disabled<br>1: Enabled |
 | APPLYFIREWALLDEFAULTBLOCKRULES | Blocks reserved IP addresses for each browser you have installed (Chrome, Edge, and Firefox). Blocking loopback connections is not possible in Windows Firewall. | 0 | N/A | 0: Disabled<br>1: Enabled |
 | LOGGING_ENABLED | When enabled, this configures file logging. These logs are stored in the installation directory under the logs folder. | 0 | `--enableFileLogging` | 0: Disabled<br>1: Enabled |
-| LOGGING_VERBOSITY | Configures the logging verbosity for the program. This affects console and file logs. | This affects console and file logs. | `-vvv` | `-v`: Error<br>`-vv`: Info<br>`-vvv`: Debug |
+| LOGGING_VERBOSITY | Configures the logging verbosity for the program. This affects console and file logs. | This affects console and file logs. | `-vvv` | `-v`: Error<br>`-vv`: Warning<br>`-vvv`: Info<br>`vvvv`: Debug |
 | LOGGING_MAXDAYS | Number of days to keep file logs on the system before deleting them. Can be any number when running an unattended installation. | 7 | `--logFileMaxDays` | Integer |
 | WORKERCONFIG_FILEPATH | This should be changed to the path to your Synthetics Private Location Worker JSON configuration file. Wrap this path in quotes if your path contains spaces. | <None> | `--config` | String |
-
-
-[101]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
-[102]: https://app.datadoghq.com/synthetics/settings/private-locations
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -816,7 +788,7 @@ Then, run the [configuration command based on your environment](#install-your-pr
 
 ### Test your internal endpoint
 
-Once at least one private location container starts reporting to Datadog, the private location status displays green.
+Once at least one private location worker starts reporting to Datadog, the private location status displays green.
 
 {{< img src="synthetics/private_locations/pl_reporting.png" alt="Private location reporting" style="width:90%;">}}
 
@@ -840,9 +812,9 @@ Use private locations just like your Datadog managed locations: assign [Syntheti
 
 ## Scale your private location
 
-Because you can run several containers for one single private location with a single configuration file, you can **horizontally scale** your private locations by adding or removing workers to them. When doing so, make sure to set a `concurrency` parameter and allocate worker resources that are consistent with the types and the number of tests you want your private location to execute.
+Because you can run several workers for one single private location with a single configuration file, you can **horizontally scale** your private locations by adding or removing workers to them. When doing so, make sure to set a `concurrency` parameter and allocate worker resources that are consistent with the types and the number of tests you want your private location to execute.
 
-You can also **vertically scale** your private locations by increasing the load your private location containers can handle. Similarly, you should use the `concurrency` parameter to adjust the maximum number of test your workers allowed to run and update the resources allocated to your workers.
+You can also **vertically scale** your private locations by increasing the load your private location workers can handle. Similarly, you should use the `concurrency` parameter to adjust the maximum number of test your workers allowed to run and update the resources allocated to your workers.
 
 For more information, see [Dimensioning Private Locations][18].
 
