@@ -239,7 +239,7 @@ Add context links to investigate specific logs or conditions.
 
 After you select the template variables you want to troubleshoot, the context link configuration takes those template variables and inserts them into the query. **Note**: The syntax and the parenthesis enclosure impacts the query. 
 
-As an example, you want to configure a context link with the `service:backend` AND (`env:production` OR `env:prod`). Use the following configuration:
+For example, if you want to configure a context link with `service:backend` AND (`env:production` OR `env:prod`), use the following configuration:
 
 ```
 service:backend (env:{{$env.value}})
@@ -247,7 +247,7 @@ service:backend (env:{{$env.value}})
 
 #### Result
 
-The parenthesis translates the `(env:{{$env.value}})` to (env:*) which allows you to enter multiple variables into your context links query.
+The parenthesis translates the `(env:{{$env.value}})` to `(env:*)` which allows you to enter multiple variables into your context links query.
 
 ## Further Reading
 
