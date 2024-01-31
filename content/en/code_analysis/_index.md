@@ -77,7 +77,7 @@ With Static Analysis, you can receive automated feedback on poor coding practice
 
 ## Set up Code Analysis on your repository
 
-Click **+ Setup a Repository** on the [Code Analysis page][9] and select the relevant programming languages to add Code Analysis to your project:
+Click **+ Setup a Repository** on the [Code Analysis page][9] and select the relevant programming languages to add Code Analysis to your project. Datadog provides out-of-the-box rulesets for the following languages:
 
 {{< partial name="code_analysis/languages-getting-started.html" >}}
 
