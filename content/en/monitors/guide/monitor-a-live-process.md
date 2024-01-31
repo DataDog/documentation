@@ -24,7 +24,7 @@ Example workflow:
 
 1. Navigate to the [**Monitors > New Monitor > Live Process**][1] page.
 
-1. Add tags to the monitor in the **by tags** field. 
+2. Add tags to the monitor in the **by tags** field. 
     - For example, use `command:puma` to monitor processes associated with the `puma` command.
 
 {{< img src="monitors/monitor_types/process/tag-scoped-process-monitor.png" alt="A live process monitor that has been scoped using a tag" style="width:100%;" >}}
