@@ -171,6 +171,8 @@ Set the following environment variables to configure the tracer:
 `JAVA_TOOL_OPTIONS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
 : Injects the tracer into the JVMs that execute your tests.
 
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][8].
+
 Run your tests as you normally do.
 
 {{% /tab %}}
@@ -400,3 +402,4 @@ To disable all integrations, augment the list of `-javaagent` arguments with `dd
 [5]: /tracing/trace_collection/custom_instrumentation/java?tab=locally#adding-tags
 [6]: /continuous_integration/guides/add_custom_metrics/?tab=java
 [7]: /tracing/trace_collection/compatibility/java#integrations
+[8]: /getting_started/tagging/unified_service_tagging
