@@ -12,6 +12,7 @@ aliases:
   - /security/misconfigurations/setup
   - /security/vulnerabilities/setup
   - /security/infrastructure_vulnerabilities/setup/
+  - /security/cloud_security_management/setup/windows
 further_reading:
 - link: "/getting_started/cloud_security_management"
   tag: "Documentation"
