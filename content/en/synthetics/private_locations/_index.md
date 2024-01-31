@@ -527,11 +527,15 @@ Once the process is complete, click **Finish** on the installation completion pa
 {{% tab "Windows via CLI" %}}
 
 1. Download the [`datadog-synthetics-worker-<version>.amd64.msi` file][101] and run this file from the machine you want to install the private location on. 
-2. Run one of the following commands inside the directory where you downloaded the installer.:
+2. Run one of the following commands inside the directory where you downloaded the installer:
 - in a Powershell Terminal
-`Start-Process msiexec "/i datadog-synthetics-worker-<version>-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";`
+```ps
+Start-Process msiexec "/i datadog-synthetics-worker-<version>-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
+```
 - or in a Command Terminal
-`Start-Process msiexec "/i datadog-synthetics-worker-<version>-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";`
+```cmd
+msiexec /i datadog-synthetics-worker-1.43.0-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
+```
 
 Additional parameters can be added:
 
@@ -543,6 +547,8 @@ Additional parameters can be added:
 | LOGGING_VERBOSITY | Configures the logging verbosity for the program. This affects console and file logs. | This affects console and file logs. | `-vvv` | `-v`: Error<br>`-vv`: Warning<br>`-vvv`: Info<br>`vvvv`: Debug |
 | LOGGING_MAXDAYS | Number of days to keep file logs on the system before deleting them. Can be any number when running an unattended installation. | 7 | `--logFileMaxDays` | Integer |
 | WORKERCONFIG_FILEPATH | This should be changed to the path to your Synthetics Private Location Worker JSON configuration file. Wrap this path in quotes if your path contains spaces. | <None> | `--config` | String |
+
+[101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
 
 {{% /tab %}}
 {{< /tabs >}}
