@@ -67,15 +67,55 @@ The required fields must appear as columns in your CSV in the order listed above
 
 Example of a valid CSV:
 
-| ProviderName | ChargeDescription | ChargePeriodStart | ChargePeriodEnd | BilledCost | BillingCurrency |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-| GitHub | User Costs | 2023-01-01 | 2023-01-31 | 300.00 | USD |
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:center;text-transform:none;">ProviderName</th>
+            <th style="text-align:center;text-transform:none;">ChargeDescription</th>
+            <th style="text-align:center;text-transform:none;">ChargePeriodStart</th>
+            <th style="text-align:center;text-transform:none;">ChargePeriodEnd</th>
+            <th style="text-align:center;text-transform:none;">BilledCost</th>
+            <th style="text-align:center;text-transform:none;">BillingCurrency</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:center;text-transform:none;">GitHub</td>
+            <td style="text-align:center;text-transform:none;">User Costs</td>
+            <td style="text-align:center;text-transform:none;">2023-01-01</td>
+            <td style="text-align:center;text-transform:none;">2023-01-31</td>
+            <td style="text-align:center;text-transform:none;">300.00</td>
+            <td style="text-align:center;text-transform:none;">USD</td>
+        </tr>
+    </tbody>
+</table>
+
 
 Example of an invalid CSV (`ChargePeriodStart` is listed before `ChargeDescription`):
 
-| ProviderName | ChargePeriodStart | ChargeDescription | ChargePeriodEnd | BilledCost | BillingCurrency |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-| GitHub | 2023-01-01 | User Costs | 2023-01-31 | 300.00 | EUR |
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:center;text-transform:none;">ProviderName</th>
+            <th style="text-align:center;text-transform:none;">ChargePeriodStart</th>
+            <th style="text-align:center;text-transform:none;">ChargeDescription</th>
+            <th style="text-align:center;text-transform:none;">ChargePeriodEnd</th>
+            <th style="text-align:center;text-transform:none;">BilledCost</th>
+            <th style="text-align:center;text-transform:none;">BillingCurrency</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:center;text-transform:none;">GitHub</td>
+            <td style="text-align:center;text-transform:none;">2023-01-01</td>
+            <td style="text-align:center;text-transform:none;">User Costs</td>
+            <td style="text-align:center;text-transform:none;">2023-01-31</td>
+            <td style="text-align:center;text-transform:none;">300.00</td>
+            <td style="text-align:center;text-transform:none;">USD</td>
+        </tr>
+    </tbody>
+</table>
+
 
 {{% /tab %}}
 {{% tab "JSON" %}}
@@ -128,9 +168,32 @@ For a CSV file, add a column per tag.
 
 Example of a valid CSV file:
 
-| ProviderName | ChargeDescription | ChargePeriodStart | ChargePeriodEnd | BilledCost | BillingCurrency | team | service |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| GitHub | User Costs | 2023-01-01 | 2023-01-31 | 300.00 | USD | web | ops |
+<table>
+    <thead>
+        <tr>
+            <th style="text-align:center;text-transform:none;">ProviderName</th>
+            <th style="text-align:center;text-transform:none;">ChargePeriodStart</th>
+            <th style="text-align:center;text-transform:none;">ChargeDescription</th>
+            <th style="text-align:center;text-transform:none;">ChargePeriodEnd</th>
+            <th style="text-align:center;text-transform:none;">BilledCost</th>
+            <th style="text-align:center;text-transform:none;">BillingCurrency</th>
+            <th style="text-align:center;text-transform:none;">team</th>
+            <th style="text-align:center;text-transform:none;">service</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="text-align:center;text-transform:none;">GitHub</td>
+            <td style="text-align:center;text-transform:none;">2023-01-01</td>
+            <td style="text-align:center;text-transform:none;">User Costs</td>
+            <td style="text-align:center;text-transform:none;">2023-01-31</td>
+            <td style="text-align:center;text-transform:none;">300.00</td>
+            <td style="text-align:center;text-transform:none;">USD</td>
+            <td style="text-align:center;text-transform:none;">web</td>
+            <td style="text-align:center;text-transform:none;">ops</td>
+        </tr>
+    </tbody>
+</table>
 
 </br>
 
