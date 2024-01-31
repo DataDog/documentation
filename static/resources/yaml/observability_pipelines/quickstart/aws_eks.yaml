@@ -118,7 +118,7 @@ pipelineConfig:
       default_api_key: "${DD_API_KEY}"
       site: "${DD_SITE}"
       compression: gzip
-      ## We've omitted the disk buffer here to simplify quickstart setup.
+      ## We've omitted the disk buffer to simplify quickstart setup.
       ## Consider re-enabling and configuring before deploying to production environments.
       ## The disk buffer size is currently set to 144GB.
       #buffer:

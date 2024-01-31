@@ -87,7 +87,7 @@ sinks:
     inputs:
       - metrics_add_dd_tags
     default_api_key: "$${DD_API_KEY}"
-    ## We've omitted the disk buffer here to simplify quickstart setup.
+    ## We've omitted the disk buffer to simplify quickstart setup.
     ## Consider re-enabling and configuring before deploying to production environments.
     ## The disk buffer size is currently set to 48GB.
     #buffer:
