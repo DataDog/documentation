@@ -57,31 +57,25 @@
 			</div>
 		</div>
 		<div class="col-12 mt-1">
-			<div class="row">
-				{{ $rule_category := (index .Params.rule_category 0)}}
-				{{ $view_findings_text := "View Signals"}}
+			{{ $rule_category := (index .Params.rule_category 0)}}
+			{{ $view_findings_text := "View Signals"}}
 
-				{{ if eq $rule_category "CSM Identity Risks"}}
-					{{ $view_findings_text = "View Identity Risks"}}
-				{{ else if strings.Contains $rule_category "CSM Misconfigurations"}}
-					{{ $view_findings_text = "View Misconfigurations"}}
-				{{ end }}
-
-				<div class="col-12 col-md-5 col-lg-6 col-xl-5">
-					{{ with .Params.view_rule_url }}
-					<button class="mt-1 btn btn-sm-tag btn-outline-secondary position-relative">
-						<a href="{{.}}" class="stretched-link" target="_blank">VIEW RULE IN DATADOG</a>
-					</button>
-					{{ end }}
-				</div>
-				<div class="col-12 col-md-7 col-lg-6 col-xl-7">
-					{{ with .Params.view_findings_url }}
-					<button class="mt-1 btn btn-sm-tag btn-outline-secondary position-relative">
-						<a href="{{.}}" class="stretched-link" target="_blank">{{$view_findings_text | upper}}</a>
-					</button>
-					{{ end }}
-				</div>
-			</div>
+			{{ if eq $rule_category "CSM Identity Risks"}}
+				{{ $view_findings_text = "View Identity Risks"}}
+			{{ else if strings.Contains $rule_category "CSM Misconfigurations"}}
+				{{ $view_findings_text = "View Misconfigurations"}}
+			{{ end }}
+			
+			{{ with .Params.view_rule_url }}
+			<button class="mt-1 me-1 btn btn-sm-tag btn-outline-secondary position-relative">
+				<a href="{{.}}" class="stretched-link" target="_blank">VIEW RULE IN DATADOG</a>
+			</button>
+			{{ end }}
+			{{ with .Params.view_findings_url }}
+			<button class="mt-1 btn btn-sm-tag btn-outline-secondary position-relative">
+				<a href="{{.}}" class="stretched-link" target="_blank">{{$view_findings_text | upper}}</a>
+			</button>
+			{{ end }}
 		</div>
 	</div>
 
