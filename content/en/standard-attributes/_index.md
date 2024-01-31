@@ -65,30 +65,6 @@ attributes:
       - icon-log
     type: string
     domain: Reserved
-  - name: network.client.ip
-    description: The IP address of the client that initiated the TCP connection.
-    product_source: 
-      - icon-log
-    type: string
-    domain: Network communications
-  - name: network.destination.ip
-    description: The IP address the client connected to.
-    product_source: 
-      - icon-log
-    type: string
-    domain: Network communications
-  - name: network.client.port
-    description: The port of the client that initiated the connection.
-    product_source: 
-      - icon-log
-    type: number
-    domain: Network communications
-  - name: network.destination.port
-    description: The TCP port the client connected to.
-    product_source: 
-      - icon-log
-    type: number
-    domain: Network communications
   - name: network.bytes_read
     description: Total number of bytes transmitted from the client to the server when the log is emitted.
     product_source: 
@@ -143,24 +119,6 @@ attributes:
       - icon-log
     type: string
     domain: Geolocation
-  - name: http.url
-    description: The URL of the HTTP request.
-    product_source: 
-      - icon-log
-    type: string
-    domain: HTTP
-  - name: http.status_code
-    description: The HTTP response status code.
-    product_source: 
-      - icon-log
-    type: number
-    domain: HTTP
-  - name: http.method
-    description: Indicates the desired action to be performed for a given resource.
-    product_source: 
-      - icon-log
-    type: string
-    domain: HTTP
   - name: http.referer
     description: HTTP header field that identifies the address of the webpage that linked to the resource being requested.
     product_source: 
@@ -173,13 +131,6 @@ attributes:
       - icon-log
     type: string
     domain: HTTP
-  - name: http.useragent
-    description: The User-Agent as it is sent (raw format). See also User-Agent attributes.
-    product_source: 
-      - icon-log
-    type: string
-    domain: HTTP
-  - name: http.version
     description: The version of HTTP used for the request.
     product_source: 
       - icon-log
@@ -1503,12 +1454,14 @@ attributes:
     description: The IP address of the client that initiated the inbound connection.
     product_source:
       - icon-apm
+      - icon-log
     type: string
     domain: Network communications
   - name: network.destination.ip
     description: The IP address to where the outbound connection is being made.
     product_source:
       - icon-apm
+      - icon-log
     type: string
     domain: Network communications
   - name: network.host.ip
@@ -1521,12 +1474,14 @@ attributes:
     description: The port of the client that initiated the connection.
     product_source:
       - icon-apm
+      - icon-log
     type: number
     domain: Network communications
   - name: network.destination.port
     description: The remote port number of the outbound connection.
     product_source:
       - icon-apm
+      - icon-log
     type: number
     domain: Network communications
   - name: network.client.name
@@ -1557,12 +1512,14 @@ attributes:
     description: The HTTP response status code.
     product_source:
       - icon-apm
+      - icon-logs
     type: string
     domain: HTTP requests
   - name: http.url
-    description: The URL of the HTTP request, including the obfuscated query string. For more information on obfuscation, see Configure Data Security.
+    description: The URL of the HTTP request, including the obfuscated query string. For more information on obfuscation, see [Configure Data Security](https://docs.datadoghq.com/tracing/configure_data_security/).
     product_source:
       - icon-apm
+      - icon-log
     type: string
     domain: HTTP requests
   - name: http.version
@@ -1575,6 +1532,7 @@ attributes:
     description: The port of the client that initiated the connection.
     product_source:
       - icon-apm
+      - icon-log
     type: string
     domain: HTTP requests
   - name: http.route
@@ -1593,6 +1551,7 @@ attributes:
     description: The `User-Agent` header received with the request.
     product_source:
       - icon-apm
+      - icon-log
     type: string
     domain: HTTP requests
   - name: http.request.content_length
