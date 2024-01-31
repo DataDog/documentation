@@ -36,6 +36,17 @@ Using Static Analysis provides organizations with the following benefits:
 * New developers to an organization are able to onboard faster because Static Analysis enables an organization to maintain a more readable codebase over time.
 * An organization's software becomes reliable over time by virtue of the code being more maintainable because the risk of a developer introducing new defects to the code is minimized.
 
+## Languages
+
+Static Analysis currently supports scanning the following languages and technologies for poor coding practices and security vulnerabilities:
+
+1. C#
+2. Dockerfiles
+3. Java
+4. JavaScript
+5. Python
+6. TypeScript
+
 ## Integrations
 
 ### CI providers
