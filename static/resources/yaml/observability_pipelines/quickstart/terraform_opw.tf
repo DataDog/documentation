@@ -67,7 +67,7 @@ transforms:
       .tags.opw_aggregator = get_hostname!()
 
 ## SINKS: Data output destinations
-## datadog_logs: Ship logs to Datadog Logs
+## datadog_logs: Ship logs to Datadog Log Management
 ## datadog_metrics: Publish metric events to Datadog
 sinks:
   datadog_logs:
