@@ -1,5 +1,5 @@
 ---
-title: Enabling CSM Enterprise for Cloud Accounts
+title: Enabling CSM Pro for Cloud Accounts
 kind: documentation
 ---
 

@@ -10,8 +10,6 @@ Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threat
 
 Add the following environment variables to your `datadog-agent` container definition:
 
-**Note**: Vulnerabilities are evaluated and and scanned against your containers and hosts every hour.
-
 ```json
 {
   "containerDefinitions": [

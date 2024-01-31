@@ -32,6 +32,10 @@ To enable CSM Enterprise on your infrastructure, complete the following steps:
 
 To enable resource scanning for your cloud accounts, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, and Google Cloud project. For detailed instructions, see [Enable CSM Enterprise for Cloud Accounts][22].
 
+### Set up CloudTrail logs forwarding
+
+Set up AWS CloudTrail logs forwarding to enable CSM Identity Risks and address over-permissive entitlements and risky IAM resources. For detailed instructions, see [Enable CSM Enterprise for Cloud Accounts][22].
+
 ### Enable CSM Enterprise on the Agent
 
 Select your infrastructure type for details on how to enable CSM Enterprise on the Agent.
@@ -39,10 +43,6 @@ Select your infrastructure type for details on how to enable CSM Enterprise on t
 {{< partial name="csm/csm-enterprise-agent-tiles.html" >}}
 
 <br>
-
-### Set up CloudTrail logs forwarding
-
-Set up AWS CloudTrail logs forwarding to enable CSM Identity Risks and address over-permissive entitlements and risky IAM resources. For detailed instructions, see [Enable CSM Enterprise for Cloud Accounts][22].
 
 ## Further reading
 
