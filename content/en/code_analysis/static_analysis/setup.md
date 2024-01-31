@@ -74,7 +74,7 @@ rulesets:
 
 ## Configure your CI/CD provider
 
-Configure your [Datadog API and application keys][3] and run Static Analysis in the respective CI provider.
+Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8] and checks your code against Datadog's default rulesets. Configure your [Datadog API and application keys][3] and run Static Analysis in the respective CI provider.
 
 {{< tabs >}}
 {{% tab "CircleCI Orbs" %}}
@@ -189,10 +189,6 @@ To upload a SARIF report:
    ```bash
    datadog-ci sarif upload $OUTPUT_LOCATION --service <datadog-service> --env <datadog-env>
    ```
-
-## Run Static Analysis in a CI pipeline
-
-Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8] and checks your code against Datadog's default rulesets.
 
 ### Search and filter results
 
