@@ -535,81 +535,86 @@ main:
     pre: open-telemetry
     parent: essentials_heading
     weight: 60000
+  - name: Getting Started
+    url: getting_started/opentelemetry/
+    identifier: getting_started_otel_dd
+    parent: opentelemetry_top_level
+    weight: 1
   - name: Set Up the Collector
     url: opentelemetry/collector_exporter/
     identifier: otel_gs_collector
     parent: opentelemetry_top_level
-    weight: 1
+    weight: 2
   - name: Hostnames and Tagging
     url: opentelemetry/collector_exporter/hostname_tagging/
     identifier: otel_gs_tagging
     parent: otel_gs_collector
-    weight: 101
+    weight: 201
   - name: OTLP Receiver
     url: opentelemetry/collector_exporter/otlp_receiver/
     identifier: otel_gs_otlp_receiver
     parent: otel_gs_collector
-    weight: 102
+    weight: 202
   - name: Host Metrics
     url: opentelemetry/collector_exporter/host_metrics/
     identifier: otel_gs_host_metrics
     parent: otel_gs_collector
-    weight: 103
+    weight: 203
   - name: Docker Metrics
     url: opentelemetry/collector_exporter/docker_metrics/
     identifier: otel_gs_docker_metrics
     parent: otel_gs_collector
-    weight: 104
+    weight: 204
   - name: Log Collection
     url: opentelemetry/collector_exporter/log_collection/
     identifier: otel_gs_log_collection
     parent: otel_gs_collector
-    weight: 105
+    weight: 205
   - name: Collector Health Metrics
     url: opentelemetry/collector_exporter/collector_health_metrics/
     identifier: otel_gs_coll_health
     parent: otel_gs_collector
-    weight: 106
+    weight: 206
   - name: Trace Metrics
     url: opentelemetry/collector_exporter/trace_metrics/
     identifier: otel_gs_trace_metrics
     parent: otel_gs_collector
-    weight: 107
+    weight: 207
   - name: Batch and Memory Settings
     url: opentelemetry/collector_exporter/collector_batch_memory/
     identifier: otel_gs_batch_memory
     parent: otel_gs_collector
-    weight: 108
+    weight: 208
   - name: OTLP Ingestion by the Datadog Agent
     url: opentelemetry/otlp_ingest_in_the_agent/
     identifier: otel_ingest_agent
     parent: opentelemetry_top_level
-    weight: 2
+    weight: 3
   - name: Runtime Metrics
     url: opentelemetry/runtime_metrics
     identifier: otel_runtime_metrics
     parent: opentelemetry_top_level
-    weight: 3
+    weight: 4
   - name: Java
     url: opentelemetry/runtime_metrics/java
     identifier: otel_runtime_metrics_java
     parent: otel_runtime_metrics
-    weight: 301
+    weight: 401
   - name: .NET
     url: opentelemetry/runtime_metrics/dotnet
     identifier: otel_runtime_metrics_dotnet
     parent: otel_runtime_metrics
-    weight: 302
+    weight: 402
   - name: Go
     url: opentelemetry/runtime_metrics/go
     identifier: otel_runtime_metrics_go
     parent: otel_runtime_metrics
-    weight: 303
+    weight: 403
   - name: Guides
     url: opentelemetry/guide/
     identifier: otel_guides
     parent: opentelemetry_top_level
-    weight: 4
+    weight: 5
   - name: Developers
     url: developers/
     pre: dev-code
@@ -1859,46 +1864,51 @@ main:
     parent: serverless_step_functions
     identifier: serverless_step_functions_troubleshooting
     weight: 203
+  - name: AWS Fargate
+    identifier: serverless_aws_fargate
+    url: integrations/ecs_fargate
+    parent: serverless
+    weight: 3
   - name: Azure App Service
     url: serverless/azure_app_services
     parent: serverless
     identifier: serverless_app_services
-    weight: 3
+    weight: 4
   - name: Linux - Code
     identifier: serverless_azure_app_services_linux_code
     url: serverless/azure_app_services/azure_app_services_linux
     parent: serverless_app_services
-    weight: 301
+    weight: 401
   - name: Linux - Container
     identifier: serverless_azure_app_services_linux_container
     url: serverless/azure_app_services/azure_app_services_container
     parent: serverless_app_services
-    weight: 302
+    weight: 402
   - name: Windows - Code
     identifier: serverless_azure_app_services_windows_code
     url: serverless/azure_app_services/azure_app_services_windows
     parent: serverless_app_services
-    weight: 303
+    weight: 403
   - name: Azure Container Apps
     url: serverless/azure_container_apps
     parent: serverless
     identifier: serverless_container_apps
-    weight: 4
+    weight: 5
   - name: Google Cloud Run
     url: serverless/google_cloud_run
     parent: serverless
     identifier: serverless_gcr
-    weight: 5
+    weight: 6
   - name: Glossary
     url: serverless/glossary
     parent: serverless
     identifier: serverless_glossary
-    weight: 6
+    weight: 7
   - name: Guides
     url: serverless/guide/
     identifier: serverless_guides
     parent: serverless
-    weight: 7
+    weight: 8
   - name: Cloud Cost
     url: cloud_cost_management/
     identifier: cloud_cost_top_level
@@ -2332,8 +2342,7 @@ main:
     parent: tracing_troubleshooting
     weight: 1306
   - name: Correlated Logs
-    url: >-
-      tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel
+    url: tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel
     identifier: tracing_troubleshooting_correlated_logs
     parent: tracing_troubleshooting
     weight: 1307
@@ -3618,7 +3627,7 @@ main:
     parent: csm
     identifier: vulnerabilities
     weight: 5
-  - name: Default Detection Rules
+  - name: OOTB Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm
     identifier: csm_default_rules
@@ -7879,7 +7888,7 @@ api:
         - GetUsageObservabilityPipelines
       unstable: []
       order: 39
-  - name: Get hourly usage for lambda traced invocations
+  - name: Get hourly usage for Lambda traced invocations
     url: '#get-hourly-usage-for-lambda-traced-invocations'
     identifier: usage-metering-get-hourly-usage-for-lambda-traced-invocations
     parent: usage-metering
@@ -8337,7 +8346,7 @@ api:
         - GetUsageBillableSummary
       unstable: []
       order: 5
-  - name: Get hourly usage for lambda
+  - name: Get hourly usage for Lambda
     url: '#get-hourly-usage-for-lambda'
     identifier: usage-metering-get-hourly-usage-for-lambda
     parent: usage-metering
@@ -8650,6 +8659,62 @@ api:
         - CreateWebhooksIntegrationCustomVariable
       unstable: []
       order: 5
+  - name: API Management
+    url: /api/latest/api-management/
+    identifier: api-management
+    generated: true
+  - name: Create a new API
+    url: '#create-a-new-api'
+    identifier: api-management-create-a-new-api
+    parent: api-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateOpenAPI
+      unstable:
+        - v2
+      order: 1
+  - name: Update an API
+    url: '#update-an-api'
+    identifier: api-management-update-an-api
+    parent: api-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateOpenAPI
+      unstable:
+        - v2
+      order: 2
+  - name: Get an API
+    url: '#get-an-api'
+    identifier: api-management-get-an-api
+    parent: api-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetOpenAPI
+      unstable:
+        - v2
+      order: 3
+  - name: Delete an API
+    url: '#delete-an-api'
+    identifier: api-management-delete-an-api
+    parent: api-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteOpenAPI
+      unstable:
+        - v2
+      order: 4
   - name: APM Retention Filters
     url: /api/latest/apm-retention-filters/
     identifier: apm-retention-filters

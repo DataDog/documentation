@@ -70,6 +70,9 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 
 Requires `dd-trace-js` version 5.0.0+, 4.24.0+ or 3.45.0+.
 
+To enable the [timeline feature](#span-execution-timeline-view) (beta):
+- upgrade to `dd-trace-js` 5.1.0+, 4.25.0+, or 3.46.0+
+- set `DD_PROFILING_TIMELINE_ENABLED=1`
 
 [1]: /profiler/enabling/nodejs
 {{< /programming-lang >}}
@@ -184,7 +187,7 @@ With the span **Timeline** view, you can:
 
 Depending on the runtime and language, the lanes vary:
 
-{{< programming-lang-wrapper langs="java,go,ruby,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
@@ -212,6 +215,13 @@ Each lane represents a **thread**. Threads from a common pool are grouped togeth
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
 Lanes on top are runtime activities that may add extra latency. They can be unrelated to the request itself.
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+See [prerequisites](#prerequisites) to learn how to enable this feature for Node.js.
+
+There is one lane for the JavaScript **thread**.
+
+Lanes on the top are garbage collector **runtime activities** that may add extra latency to your request.
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 See [prerequisites](#prerequisites) to learn how to enable this feature for PHP.
