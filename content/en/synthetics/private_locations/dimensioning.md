@@ -8,6 +8,8 @@ further_reading:
   text: "Monitor your Private Locations"
 ---
 
+<div class="alert alert-info">The dimensioning recommendations are for the containerized private location</div>
+
 ## Overview 
 
 Private locations can run [API][1], [multistep API][2], and [browser tests][3]. Browser tests are more resource intensive than API and multistep API tests. One private location can also run several types of tests.
