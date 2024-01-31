@@ -22,7 +22,7 @@ further_reading:
 {{% /site-region %}}
 
 {{< callout url="#" btn_hidden="true" >}}
-Static Analysis is in public beta. Python, Java, C#, JavaScript, TypeScript, and Docker are the only supported languages.
+Static Analysis is part of the Code Analysis public beta.
 {{< /callout >}}
 
 ## Overview

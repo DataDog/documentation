@@ -15,17 +15,15 @@ further_reading:
   text: "Learn about the Source Code Integration"
 ---
 
-{{% site-region region="us,us3,us5,eu,ap1" %}}
-<div class="alert alert-warning">
-  Static Analysis is in public beta. Python, Java, C#, JavaScript, TypeScript, and Docker are the only supported languages. To request access, <a href="/help">contact Support</a>.
-</div>
-{{% /site-region %}}
-
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
     Static Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
+
+{{< callout url="#" btn_hidden="true" >}}
+Static Analysis is part of the Code Analysis public beta.
+{{< /callout >}}
 
 ## Overview
 
