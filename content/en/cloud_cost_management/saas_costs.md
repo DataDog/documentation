@@ -126,6 +126,6 @@ You can view cost data on the [**Cloud Costs Analytics** page][3], the [Cloud Co
 [4]: https://app.datadoghq.com/cost/tags?cloud=custom
 [5]: /dashboards
 [6]: /notebooks
-[7]: /monitors/create/cost
+[7]: /monitors/types/cloud_cost
 [8]: https://app.datadoghq.com/cost/settings/accounts
 [9]: /cloud_cost_management/custom/?tab=csv#cost-metric-types
