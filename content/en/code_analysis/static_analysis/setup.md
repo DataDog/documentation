@@ -194,7 +194,7 @@ To upload a SARIF report:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/ci/setup/static-analysis
+[1]: https://app.datadoghq.com/ci/setup/code-analysis
 [2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif 
 [3]: /developers/ide_integrations/idea/#static-analysis
 [4]: /account_management/api-app-keys/
