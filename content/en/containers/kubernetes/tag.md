@@ -16,7 +16,7 @@ further_reading:
   text: "Limit data collection to a subset of containers only"
 ---
 
-The Agent can create and assign tags to all metrics, traces, and logs emitted by a Pod, based on its labels or annotations.
+The Agent can create and assign tags to all metrics, traces, and logs, traces, and logs emitted by a Pod, based on its labels or annotations.
 
 If you are running the Agent as a binary on a host, configure your tag extractions with the [Agent](?tab=agent) tab instructions. If you are running the Agent as a container in your Kubernetes cluster, configure your tag extraction with the [Containerized Agent](?tab=containerizedagent) tab instructions.
 
@@ -98,15 +98,16 @@ annotations:
   ad.datadoghq.com/<CONTAINER_IDENTIFIER>.tags: '{"<TAG_KEY>": "<TAG_VALUE>","<TAG_KEY_1>": "<TAG_VALUE_1>"}'
 ```
 
-Starting with Agent v7.17+, the Agent can Autodiscover tags from Docker labels. This process allows the Agent to associate custom tags to all data emitted by a container, without [modifying the Agent `datadog.yaml` file][3].
+Starting with Agent v7.17+, the Agent can Autodiscover tags from Docker labels. This process allows the Agent to associate custom tags to all data emitted by a container, without modifying the Agent configuration.
 
 ```yaml
 com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
 ```
 
-## Node labels as tags
+## Tag Extraction
+### Node labels as tags
 
-Starting with Agent v6.0+, the Agent can collect labels for a given node and use them as tags to attach to all metrics emitted associated with this `host` in Datadog:
+Starting with Agent v6.0+, the Agent can collect labels for a given node and use them as tags to attach to all metrics, traces, and logs, traces, and logs emitted associated with this `host` in Datadog:
 
 {{< tabs >}}
 {{% tab "Operator" %}}
@@ -195,11 +196,11 @@ DD_KUBERNETES_NODE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Custom metrics may impact billing. See the [custom metrics billing page][4] for more information.
+**Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
 
-## Pod labels as tags
+### Pod labels as tags
 
-Starting with Agent v6.0+, the Agent can collect labels for a given pod and use them as tags to attach to all metrics emitted by this pod:
+Starting with Agent v6.0+, the Agent can collect labels for a given pod and use them as tags to attach to all metrics, traces, and logs emitted by this pod:
 
 {{< tabs >}}
 {{% tab "Operator" %}}
@@ -288,11 +289,11 @@ DD_KUBERNETES_POD_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Custom metrics may impact billing. See the [custom metrics billing page][4] for more information.
+**Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
 
-## Pod annotations as tags
+### Pod annotations as tags
 
-Starting with Agent v6.0+, the Agent can collect annotations for a given pod and use them as tags to attach to all metrics emitted by this pod:
+Starting with Agent v6.0+, the Agent can collect annotations for a given pod and use them as tags to attach to all metrics, traces, and logs emitted by this pod:
 
 {{< tabs >}}
 {{% tab "Operator" %}}
@@ -381,11 +382,11 @@ DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Custom metrics may impact billing. See the [custom metrics billing page][4] for more information.
+**Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
 
-## Namespace labels as tags
+### Namespace labels as tags
 
-Starting with Agent v7.27+, the Agent can collect labels for a given namespace and use them as tags to attach to all metrics emitted by all pods in this namespace:
+Starting with Agent v7.27+, the Agent can collect labels for a given namespace and use them as tags to attach to all metrics, traces, and logs emitted by all pods in this namespace:
 
 {{< tabs >}}
 {{% tab "Operator" %}}
@@ -474,11 +475,11 @@ DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Custom metrics may impact billing. See the [custom metrics billing page][4] for more information.
+**Note**: Custom metrics may impact billing. See the [custom metrics billing page][3] for more information.
 
-## Container environment variables as tags
+### Container environment variables as tags
 
-Starting with Agent v7.32+, the Agent can collect container environment variables and use them as tags to attach to all metrics corresponding to the container. Both `docker` and `containerd` containers are supported:
+Starting with Agent v7.32+, the Agent can collect container environment variables and use them as tags to attach to all metrics, traces, and logs corresponding to the container. Both `docker` and `containerd` containers are supported:
 
 {{< tabs >}}
 {{% tab "Operator" %}}
@@ -493,7 +494,7 @@ spec:
   #(...)
   override:
     nodeAgent:
-      env: 
+      env:
         - name: DD_CONTAINER_ENV_AS_TAGS
           value: '{"<ENV_VAR>": "<TAG_KEY>"}'
 ```
@@ -508,7 +509,7 @@ spec:
   #(...)
   override:
     nodeAgent:
-      env: 
+      env:
         - name: DD_CONTAINER_ENV_AS_TAGS
           value: '{"app":"kube_app"}'
 ```
@@ -550,11 +551,12 @@ DD_CONTAINER_ENV_AS_TAGS='{"app":"kube_app"}'
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Custom metrics may impact billing. See [Custom Metrics Billing][4] for more details.
+**Note**: Custom metrics may impact billing. See [Custom Metrics Billing][3] for more details.
 
-## Container labels as tags
+### Container labels as tags
 
-Starting with Agent v7.33+, the Agent can collect container labels and use them as tags. The agent attaches the tags to all metrics associated with the container.
+Starting with Agent v7.33+, the Agent can collect container labels and use them as tags. The agent attaches the tags to all metrics, traces, and logs associated with the container.
+
 The Agent can generate tags from container labels for both `docker` and `containerd` containers. In the case of `containerd`, the minimum supported version is v1.5.6, because previous releases do not propagate labels correctly.
 
 {{< tabs >}}
@@ -570,7 +572,7 @@ spec:
   #(...)
   override:
     nodeAgent:
-      env: 
+      env:
         - name: DD_CONTAINER_LABELS_AS_TAGS
           value: '{"<CONTAINER_LABEL>": "<TAG_KEY>"}'
 ```
@@ -585,7 +587,7 @@ spec:
   #(...)
   override:
     nodeAgent:
-      env: 
+      env:
         - name: DD_CONTAINER_LABELS_AS_TAGS
           value: '{"app":"kube_app"}'
 ```
@@ -626,7 +628,7 @@ DD_CONTAINER_LABELS_AS_TAGS='{"app":"kube_app"}'
 {{% /tab %}}
 {{< /tabs >}}
 
-**Note**: Custom metrics may impact billing. See [Custom Metrics Billing][4] for more details.
+**Note**: Custom metrics may impact billing. See [Custom Metrics Billing][3] for more details.
 
 ## Further Reading
 
@@ -634,5 +636,4 @@ DD_CONTAINER_LABELS_AS_TAGS='{"app":"kube_app"}'
 
 [1]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables
 [2]: /getting_started/tagging/unified_service_tagging
-[3]: /agent/kubernetes/tag/?tab=agent#extract-labels-as-tags
-[4]: /account_management/billing/custom_metrics
+[3]: /account_management/billing/custom_metrics
