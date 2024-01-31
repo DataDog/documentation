@@ -218,7 +218,7 @@ All costs submitted to Custom Costs appear in these metrics. For example, if a $
 
 ## Use Custom Costs data
 
-You can view custom costs data on the [**Cloud Costs Analytics** page][6], the [Cloud Costs Tag Explorer][7], and in [dashboards][8] or [notebooks][9].
+You can view custom costs data on the [**Cloud Costs Analytics** page][6], the [Cloud Costs Tag Explorer][7], and in [dashboards][8], [notebooks][9], or [monitors][10]. You can also combine Custom Cost metrics with other cloud cost metrics or observability metrics.
 
 ## Further reading
 
@@ -233,3 +233,4 @@ You can view custom costs data on the [**Cloud Costs Analytics** page][6], the [
 [7]: https://app.datadoghq.com/cost/tags?cloud=custom
 [8]: /dashboards
 [9]: /notebooks
+[10]: /monitors/create/cost
