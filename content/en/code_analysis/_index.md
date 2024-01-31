@@ -95,7 +95,7 @@ Select a CI/CD provider to configure Code Analysis with:
 
 ## Set up the GitHub integration 
 
-Configure a GitHub App using the [GitHub integration tile][7] and set up the [source code integration][8] to see the source code in Static Analysis results.
+You must configure a GitHub App using the [GitHub integration tile][7] and set up the [source code integration][8] to see the offending code snippets as part of the Static Analysis results in the Datadog UI.
 
 ## Further Reading
 

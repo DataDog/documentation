@@ -72,6 +72,10 @@ rulesets:
 - javascript-common-security      # ensure your JavaScript code is safe and secure
 ```
 
+## Set up the GitHub integration 
+
+You must configure a GitHub App using the [GitHub integration tile][9] and set up the [source code integration][10] to see the offending code snippets as part of the Static Analysis results in the Datadog UI.
+
 ## Configure your CI/CD provider
 
 Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8] and checks your code against Datadog's default rulesets. Configure your [Datadog API and application keys][3] and run Static Analysis in the respective CI provider.
@@ -201,3 +205,5 @@ To upload a SARIF report:
 [6]: /code_analysis/static_analysis/rules
 [7]: /getting_started/site/
 [8]: https://github.com/DataDog/datadog-ci
+[9]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
+[10]: /integrations/guide/source-code-integration
