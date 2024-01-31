@@ -45,12 +45,12 @@ This document walks you through the quickstart installation steps and then provi
 
 To install the Observability Pipelines Worker, you need the following:
 
-- A valid [Datadog API key][6].
+- A valid [Datadog API key][7].
 - A pipeline ID.
 
 To generate a new API key and pipeline:
 
-1. Navigate to [Observability Pipelines][7].
+1. Navigate to [Observability Pipelines][6].
 2. Click **New Pipeline**.
 3. Enter a name for your pipeline.
 4. Click **Next**.
