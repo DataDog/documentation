@@ -1,5 +1,5 @@
 ---
-title: Monitor a live process
+title: Monitor a Live Process
 kind: Guide
 ---
 
