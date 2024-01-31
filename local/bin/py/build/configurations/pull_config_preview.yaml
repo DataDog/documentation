@@ -377,7 +377,7 @@
       - repo_name: datadog-static-analyzer-rule-docs
         contents:
         - action: pull-and-push-folder
-          branch: main
+          branch: dastrong/add-alias
           globs:
           - rulesets/**/*.md
           options:
