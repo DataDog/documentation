@@ -33,7 +33,7 @@ Example workflow:
 
 {{< img src="monitors/monitor_types/process/text-scoped-process-monitor.png" alt="A live process monitor that has been scoped using text search" style="width:100%;" >}}
 
-3. If your monitor's scope still exceeds a few thousand processes total across all process groups, use additional tags to break it into multiple monitors. 
+4. If your monitor's scope still exceeds a few thousand processes total across all process groups, use additional tags to break it into multiple monitors. 
     - For example, you can use the `env` tag to create separate monitors for `prod` and `staging`.
 
 ### Choosing a time frame
