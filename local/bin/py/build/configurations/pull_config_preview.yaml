@@ -349,7 +349,7 @@
             file_name: 'circleci_orbs.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"]
-              title: Code Analysis and CircleCI Orbs
+              title: Static Analysis and CircleCI Orbs
               kind: documentation
               description: Use Datadog and CircleCI to run Code Analysis jobs in a CI pipeline.
               aliases:
@@ -367,7 +367,7 @@
             file_name: 'github_actions.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md"]
-              title: Code Analysis and GitHub Actions
+              title: Static Analysis and GitHub Actions
               kind: documentation
               description: Use Datadog and GitHub to run Code Analysis jobs in a CI pipeline.
               aliases:
@@ -387,6 +387,7 @@
               disable_edit: true
               aliases:
               - /static_analysis/rules
+              - /continuous_integration/static_analysis/rules
 
       - repo_name: datadog-cdk-constructs
         contents:

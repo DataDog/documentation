@@ -87,9 +87,11 @@ For more information about Static Analysis rulesets, see [Static Analysis Rules]
 
 ## Configure your CI/CD provider
 
-Select a CI/CD provider to configure Code Analysis with:
-
-{{< partial name="code_analysis/ci-provider-getting-started.html" >}}
+{{< whatsnext desc="Select a CI/CD provider to configure Code Analysis with:">}}
+    {{< nextlink href="code_analysis/static_analysis/github_actions" >}}Static Analysis and GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}Static Analysis and CircleCI Orb{{< /nextlink >}}
+    {{< nextlink href="code_analysis/static_analysis/setup/?tab=other#configure-your-cicd-provider" >}}Static Analysis and Other CI Providers{{< /nextlink >}}
+{{< /whatsnext >}}
 
 </br>
 
