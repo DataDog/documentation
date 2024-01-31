@@ -143,15 +143,15 @@ Synthetic tests by default do not [renotify][12]. This means that if you add you
 
 ### My browser test results sometimes show `Page crashed` errors
 
-This could uncover a resource exhaustion issue on your private location workers. Make sure your private location containers are provisioned with [sufficient memory resources][101].
+This could uncover a resource exhaustion issue on your private location workers. Make sure your private location workers are provisioned with [sufficient memory resources][101].
 
 ### My tests are sometimes slower to execute 
 
-This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location containers are provisioned with [sufficient CPU resources][101].
+This could uncover a resource exhaustion issue on your private locations workers. Make sure your private location workers are provisioned with [sufficient CPU resources][101].
 
 ### My browser tests are taking too long to run
 
-Confirm you are not seeing [out of memory issues][102] with your private location deployments. If you have tried scaling your container instances following the [dimensioning guidelines][103] already, reach out to [Datadog Support][104].
+Confirm you are not seeing [out of memory issues][102] with your private location deployments. If you have tried scaling your workers instances following the [dimensioning guidelines][103] already, reach out to [Datadog Support][104].
 
 ### `TIMEOUT` errors appear in API tests executed from my private location
 
