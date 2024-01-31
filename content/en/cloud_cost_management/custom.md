@@ -232,4 +232,4 @@ You can view custom costs data on the [**Cloud Costs Analytics** page][6], the [
 [7]: https://app.datadoghq.com/cost/tags?cloud=custom
 [8]: /dashboards
 [9]: /notebooks
-[10]: /monitors/create/cost
+[10]: /monitors/types/cloud_cost/
