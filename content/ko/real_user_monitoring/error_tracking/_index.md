@@ -32,9 +32,9 @@ Datadog이 수집한 오류를 지속적으로 모니터링하는 것은 시스�
 
 
 
-{{< img src="real_user_monitoring/error_tracking/rum_error_tracking.png" alt="웹 및 모바일 애플리케이션의 충돌 보고서에서 문제를 표시하는 RUM용 오류 추적 탐색기" style="width:100%;" >}}
+{{< img src="real_user_monitoring/error_tracking/rum-error-tracking-2.png" alt="웹 및 모바일 애플리케이션의 충돌 보고서에서 문제를 표시하는 RUM용 오류 추적 탐색기" style="width:100%;" >}}
 
-**웹 및 모바일 앱** 오류 추적에 대해 [RUM][2]을 설정하고 나면 이슈 목록이 카드로 채워집니다. [**UX Monitoring** > **Error Tracking**][3]으로 이동하여 열려 있는 문제, 무시된 문제 또는 모든 문제를 보고, 볼륨 또는 연령별로 문제를 정렬하며, 웹 및 모바일 애플리케이션의 모든 커스텀 및 기본 패싯별로 문제를 필터링할 수 있습니다.
+**웹 및 모바일 앱** 오류 추적에 대해 [RUM][2]을 설정하고 나면 이슈 목록이 카드로 채워집니다. [**UX Monitoring** > **Error Tracking**][1]으로 이동하여 열려 있는 문제, 무시된 문제 또는 모든 문제를 보고, 볼륨 또는 연령별로 문제를 정렬하며, 웹 및 모바일 애플리케이션의 모든 커스텀 및 기본 패싯별로 문제를 필터링할 수 있습니다.
 
 오류 추적을 통해 다음을 수행할 수 있습니다:
 
@@ -43,7 +43,7 @@ Datadog이 수집한 오류를 지속적으로 모니터링하는 것은 시스�
 - 시간 경과에 따라 문제를 추적하여 문제가 처음 시작된 시점, 계속 진행 중인지 여부, 문제가 발생하는 빈도를 파악합니다.
 - 필요한 모든 컨텍스트를 한 곳에 모아 문제 해결을 용이하게 합니다.
 
-## 충돌 보고서 업로드
+## 소스 맵 업로드
 
 {{< whatsnext desc="RUM용 Datadog 오류 추적 기능을 시작하려면 해당 설명서를 참조하여 프레임워크에 대한 소스 맵을 업로드하세요.:" >}}
     {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Browser{{< /nextlink >}}
@@ -58,7 +58,7 @@ Datadog이 수집한 오류를 지속적으로 모니터링하는 것은 시스�
 
 오류 추적은 웹 및 모바일 애플리케이션에서 수집된 충돌을 [오류 추적 탐색기][1]에서 이슈로 자동 분류합니다.
 
-{{< img src="real_user_monitoring/error_tracking/issue_panel.png" alt="웹 및 모바일 애플리케이션의 충돌 보고서에서 문제를 표시하는 RUM용 오류 추적 탐색기" style="width:100%;" >}}
+{{< img src="real_user_monitoring/error_tracking/issue-panel-2" alt="웹 및 모바일 애플리케이션의 충돌 보고서에서 문제를 표시하는 RUM용 오류 추적 탐색기" style="width:100%;" >}}
 
 이슈를 클릭하면 스택 트레이스, 사용자 세션 타임라인, 메타데이터(사용자 위치, 버전, 충돌 보고서에 포함된 커스텀 속성 포함) 등의 디버깅 정보를 볼 수 있습니다.
 
@@ -68,4 +68,3 @@ Datadog이 수집한 오류를 지속적으로 모니터링하는 것은 시스�
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: /ko/real_user_monitoring/
-[3]: https://app.datadoghq.com/rum/error-tracking
