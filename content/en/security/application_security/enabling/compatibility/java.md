@@ -16,7 +16,7 @@ The following ASM capabilities are supported in the Java library, for the specif
 | Threat Protection| 1.9.0 |
 | Customize response to blocked requests | 1.11.0 |
 | Software Composition Analysis (SCA) | 1.1.4 |
-| Vulnerability Management for Code-level (beta) | 1.15.0|
+| Code Security (beta) | 1.15.0|
 | Automatic user activity event tracking | 1.20.0 |
 
 The minimum tracer version to get all supported ASM capabilities for Java is 1.15.0.

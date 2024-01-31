@@ -11,12 +11,15 @@ further_reading:
 - link: "/security/application_security/enabling/"
   tag: "Documentation"
   text: "Enabling Application Security on your services"
-- link: "/getting_started/application_security/vulnerability_management"
+- link: "/getting_started/application_security/software_composition_analysis"
   tag: "Guide"
-  text: "Getting started with Application Vulnerability Management"
+  text: "Getting started with Software Composition Analysis"
 - link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
   tag: "Blog"
-  text: "Enhance application security in production with Datadog Application Vulnerability Management"  
+  text: "Enhance application security in production with Application Vulnerability Management"  
+- link: "/security/application_security/software_composition_analysis/code_security"
+  tag: "documentation"
+  text: "Learn about code security vulnerability detection"
 algolia:
   tags: ['Software Composition Analysis', 'Vulnerability Management', 'SCA', 'AVM']
 ---
@@ -31,13 +34,11 @@ Datadog Software Composition Analysis (SCA) helps you leverage open source with 
 
 Check [ASM Compatibility][6] to see if your service is supported.
 
-## Explore vulnerabilities
+## Explore and manage SCA vulnerabilities
 
-The [Vulnerability Explorer][3] shows a complete list of vulnerabilities detected by Software Composition Analysis across all your services, ordering the vulnerabilities based on their severity, and offering grouping and filtering capabilities so you can investigate and prioritize problems. For SCA vulnerabilities, it shows the number of affected services, the language of the affected library, and the last time that vulnerability was detected.
+The [Vulnerability Explorer][3] shows a complete list of the open source libraries detected by Datadog SCA used by your application at runtime, and reports security vulnerabilities associated with them. Datadog does **not** scan your source code, and the analysis is based on how your application behaves during runtime. The open-source libraries are monitored from the code commit to the repository (static point of view), to the applications running in production (runtime point of view). To switch to the code repository commit point of view, click on the **static** button. To switch to the real-time point of view to the applications already running, click on the **runtime** button.
 
-**TBD**: New screenshot with new version that has the static and runtime buttons
-
-{{< img src="security/application_security/vulnerability_management/avm_vuln_severity_status.png" alt="Application Vulnerability Management explorer page." style="width:100%;" >}}
+{{< img src="/security/application_security/software_composition_analysis/asm_sca_vulnerabilities.png" alt="Software Composition Analysis (SCA) explorer page showing vulnerabilities sorted by static or runtime." style="width:100%;" >}}
 
 Select a specific vulnerability to see its details, including which services are affected, severity breakdown score, and recommended remediation steps. On the details explorer, you can also view impacted infrastructure to gain better insights to your overall attack exposure.
 
@@ -51,8 +52,6 @@ The adjusted vulnerability score includes the full context of each service:
 
 {{< img src="security/application_security/vulnerability-score-modified_3.png" alt="Vulnerability details page showing a modified severity score" style="width:100%;" >}}
 
-{{< img src="security/application_security/vulnerability_management/vulnerability-score-modified_2.png" alt="Vulnerability details page showing a modified severity score" style="width:100%;" >}}
-
 See [getting started with software composition analysis][7] for more information on the adjusted vulnerability score.
 
 ## Remediation
@@ -61,39 +60,9 @@ The explorer also offers remediation recommendations for detected vulnerabilitie
 
 {{< img src="getting_started/appsec/appsec-vuln-remediation_3.png" alt="Application Vulnerability Management vulnerability details page showing affected services, links to infrastructure, suggested remediation, and links to more information." style="width:100%;" >}}
 
-## Manage SCA vulnerabilities
-
-Datadog SCA detects the open source libraries used by your application at runtime, and reports security vulnerabilities associated with them. Datadog does not scan your source code, and the analysis is based on how your application behaves during runtime. The open-source libraries are monitored from the code commit to the repository (static point of view), to the applications running in production (runtime point of view). To switch to the code repository commit point of view, click on the static button. To switch to the real-time point of view to the applications already running, click on the runtime button.
-
 ## Library Inventory
 
 The Datadog SCA Library Inventory helps you understand the list of libraries and its versions that compose your application. Since Datadog SCA covers your software development life cycle end-to-end, the libraries are detected throughout the entire lifecycle of the application. The library inventory contains everything you need to know about the libraries, including name and version, and other risk aspects such as licenses, and quality aspects. 
-
-## Manage code-level vulnerabilities
-
-<div class="alert alert-info">Code-level vulnerabilities detection for Application Vulnerability Management is in beta. To use it for your service, follow the <a href="/security/application_security/enabling/">Setup instructions.</a></div>
-
-Datadog is able to indicate the file name and line number where the vulnerability is located, without scanning the source code.
-
-The code-level vulnerability types that can be found include:
-
-- Weak Cipher
-- Weak Hash
-- SQL injection
-- Path traversal
-- LDAP injection
-- Command Injection
-- Server Side Request Forgery (SSRF)
-- Insecure Cookie
-- Cookie without HttpOnly Flag
-- Cookie without SameSite Flag
-- Unvalidated Redirect
-
-### Disabling code-level vulnerability detection capability
-
-To disable code-level vulnerability detection capability in Vulnerability Management, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service.
-
-If you need additional help, contact [Datadog support][1].
 
 ## Risk information in APM views
 
@@ -111,4 +80,4 @@ Software Composition Analysis enriches the information APM is already collecting
 [4]: https://app.datadoghq.com/security/appsec
 [5]: https://app.datadoghq.com/security/appsec/landing
 [6]: /security/application_security/enabling/compatibility
-[7]: /getting_started/application_security/vulnerability_management
+[7]: /getting_started/application_security/software_composition_analysis

@@ -3734,10 +3734,15 @@ main:
     identifier: appsec_howitworks
     weight: 3
   - name: Software Composition Analysis
-    url: security/application_security/software_composition_analysis/
+    url: security/application_security/software_composition_analysis
     parent: application_security
     identifier: application_security_software_composition_analysis
     weight: 4
+  - name: Code Security
+    url: security/application_security/software_composition_analysis/code_security/
+    parent: application_security_software_composition_analysis
+    identifier: application_security_software_composition_analysis_code_security
+    weight: 401
   - name: Threat Management
     url: security/application_security/threats/
     parent: application_security

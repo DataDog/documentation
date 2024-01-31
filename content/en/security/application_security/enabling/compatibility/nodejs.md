@@ -16,7 +16,7 @@ The following ASM capabilities are supported in the Node.js library, for the spe
 | Threat Protection  | 3.19.0  |
 | Customize response to blocked requests | 4.1.0 |
 | Software Composition Analysis (SCA) |  2.23.0 for NodeJS 12+, or 3.10.0 for NodeJS 14+ |
-| Vulnerability Management for Code-level (beta)  | 2.32.0 for NodeJS 12+, or 3.19.0 for NodeJS 14+ |
+| Code Security (beta)  | 2.32.0 for NodeJS 12+, or 3.19.0 for NodeJS 14+ |
 | Automatic user activity event tracking | 2.38.0 for NodeJS 12+, or 3.25.0 for NodeJS 14+, or 4.4.0 for NodeJS 16+ |
 
 The minimum tracer version to get all supported ASM capabilities for Node.js is 3.19.0.

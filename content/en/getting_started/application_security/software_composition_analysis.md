@@ -4,9 +4,12 @@ kind: documentation
 aliases:
 - /getting_started/application_security/software_composition_analysis
 further_reading:
-- link: "/security/application_security/terms"
+- link: "/code_analysis/software_composition_analysis/"
   tag: "Documentation"
-  text: "Application Security terms and concepts"
+  text: "Read more about Software Composition Analysis in source code"
+- link: "/security/application_security/software_composition_analysis"
+  tag: "Documentation"
+  text: "Read more about Software Composition Analysis in ASM libraries"
 - link: "/security/application_security/how-appsec-works"
   tag: "Documentation"
   text: "How Application Security Management works"
@@ -27,16 +30,30 @@ This guide walks you through best practices for getting your team up and running
 
 ## Phase 1: Enable
 1. Check [ASM Compatibility][2] to see if your service is supported.
-2. Enable Application Vulnerability Management on your services. 
+2. Enable Software Composition Analysis on your services. 
    - Navigate to [**Security -> Configuration -> Application Security -> Quick Start Guide**][4].
    - Expand **Enable Vulnerability Detection**.
    - Click **Start Activation**.
    - Choose services to secure with ASM.
+
+   OR
+   
+   - Navigate to [**Security -> Configuration -> Application Security -> Setup**][9].
+   - Click **Get Started** to enable Software Composition Analysis for static analysis in source code.
+   - Select and configure your CI/CD provider.
+   - Click **Get Started** to enable Software Composition Analysis for runtime analysis in running services.
+   - Choose services to secure with ASM.
+   - Click **Get Started** to enable Software Composition Analysis for code security.
+   - Select your programming language, and restart your services.
+
+   {{< img src="getting_started/appsec/asm_sca_setup.png" alt="Software Composition Analysis setup page." style="width:100%;" >}}
+
 ## Phase 2: Identify
 1. **Identify Vulnerabilities**: Navigate to [**Security -> Application Security -> Vulnerabilities**][5].  
-2. Sort by `Status`, `Vulnerability Source`, and `Severity`:
+   - Sort by `Status`, `Vulnerability Source`, and `Severity`.
+   - To switch to the code repository commit point of view, click on the **static** button. To switch to the real-time point of view to the applications already running, click on the **runtime** button.
 
-   {{< img src="security/application_security/vulnerability_management/avm_vuln_severity_status.png" alt="Application Vulnerability Management explorer page." style="width:100%;" >}}
+   {{< img src="/security/application_security/software_composition_analysis/asm_sca_vulnerabilities.png" alt="Software Composition Analysis (SCA) explorer page showing vulnerabilities sorted by static or runtime." style="width:100%;" >}}
 
    Each vulnerability has its own status to help prioritize and manage findings:
 
@@ -103,3 +120,4 @@ This guide walks you through best practices for getting your team up and running
 [6]: https://app.datadoghq.com/services
 [7]: /tracing/service_catalog/#security-view
 [8]: /tracing/service_catalog/#investigate-a-service
+[9]: https://app.datadoghq.com/security/configuration/asm/setup
