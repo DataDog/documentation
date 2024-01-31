@@ -24,9 +24,11 @@
 {{ $currentPage := . }}
 {{ range $menu }}
     {{ if .HasChildren }}
+        {{/*  HEADER  */}}
         <p class="h5 text-uppercase fw-bold">{{.Name}}</p>
         <ul class="list-unstyled">
             {{ range .Children }}
+                {{/*  LEVEL 1  */}}
                 <li class="nav-top-level {{ if (not (or (in $excludeAsyc .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}
                 {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
                     {{ $url_without_anchor = (index (split .URL "#") 0) }}
@@ -39,6 +41,7 @@
                         </div>
                     </a>
                     <ul class="list-unstyled sub-menu {{ if (or (eq .Name "Guides") (eq .Name "Widgets")) }} d-none {{ end }}">
+                        {{/*  LEVEL 2  */}}
                         {{ range .Children }}
                             <li class="{{ if (not (or (in $excludeAsyc .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }} {{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }}">
                                 {{ $url_without_anchor = (index (split .URL "#") 0) }}
@@ -51,6 +54,7 @@
                                 </a>
                             {{ if .HasChildren }}
                                 <ul class="list-unstyled sub-menu {{ if (or (eq .Name "Guides") (eq .Name "Widgets")) }} d-none {{ end }}">
+                                {{/*  LEVEL 3  */}}
                                 {{ range .Children }}
                                     <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} {{ if (not (or (in $excludeAsyc .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}" >
                                         {{ $url_without_anchor = (index (split .URL "#") 0) }}
@@ -61,9 +65,9 @@
                                             {{ end }}
                                             <span>{{ .Name }}</span>
                                         </a>
-                                        {{/* 4th level, hide */}}
                                         {{ if .HasChildren }}
-                                            <ul class="list-unstyled sub-menu">
+                                            <ul class="list-unstyled sub-menu {{ if not (in (slice "automatic_instrumentation" "custom_instrumentation" "observability_pipelines_reference_processing_language" "observability_pipelines_vector_configuration") .Identifier) }}d-none{{ end }}">
+                                            {{/*  LEVEL 4 */}}
                                             {{ range .Children }}
                                                 <li class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} {{ if (not (or (in $excludeAsyc .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}" >
                                                     {{ $url_without_anchor = (index (split .URL "#") 0) }}

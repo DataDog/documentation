@@ -1,5 +1,5 @@
 ---
-title: Setting Up CSM Enterprise
+title: Setting up CSM Enterprise
 kind: documentation
 further_reading:
   - link: "/security/cloud_security_management/setup"
@@ -23,10 +23,6 @@ further_reading:
 ---
 
 The Cloud Security Management (CSM) Enterprise package includes [CSM Threats][1], [CSM Misconfigurations][2] (cloud accounts and Agent), [CSM Identity Risks][3], and [CSM Vulnerabilities][4] (container images and hosts). To learn more about the available CSM packages, see [Setting up Cloud Security Management][8].
-
-## Prerequisites
-
-{{% csm-prereqs-enterprise %}}
 
 ## Enable resource scanning for cloud accounts
 
@@ -84,24 +80,6 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
 #### Configure the Agent
 
 {{< tabs >}}
-{{% tab "Kubernetes (Helm)" %}}
-
-1. Add the following to the `datadog` section of the `values.yaml` file:
-
-    ```yaml
-    # values.yaml file
-    datadog:
-      remoteConfiguration:
-        enabled: true
-      securityAgent:
-        runtime:
-          enabled: true
-        compliance:
-          enabled: true
-    ```
-2. Restart the Agent.
-
-{{% /tab %}}
 
 {{% tab "Kubernetes (Operator)" %}}
 
@@ -117,11 +95,34 @@ To use Remote Configuration with CSM Threats, add the Remote Configuration scope
           enabled: true
         cspm:
           enabled: true
+          hostBenchmarks:
+            enabled: true
     ```
 
 2. Restart the Agent.
 
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
+
+{{% /tab %}}
+
+{{% tab "Kubernetes (Helm)" %}}
+
+1. Add the following to the `datadog` section of the `values.yaml` file:
+
+    ```yaml
+    # values.yaml file
+    datadog:
+      remoteConfiguration:
+        enabled: true
+      securityAgent:
+        runtime:
+          enabled: true
+        compliance:
+          enabled: true
+          host_benchmarks:
+            enabled: true
+    ```
+2. Restart the Agent.
 
 {{% /tab %}}
 
@@ -152,6 +153,7 @@ docker run -d --name dd-agent \
   -v /sys/kernel/debug:/sys/kernel/debug \
   -v /etc/os-release:/etc/os-release \
   -e DD_COMPLIANCE_CONFIG_ENABLED=true \
+  -e DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED=true \
   -e DD_RUNTIME_SECURITY_CONFIG_ENABLED=true \
   -e DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED=true \
   -e HOST_ROOT=/host/root \
@@ -191,6 +193,8 @@ Add the following settings to the `env` section of `security-agent` and `system-
                 value: "true"
               - name: DD_COMPLIANCE_CONFIG_ENABLED
                 value: "true"
+              - name: DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED
+                value: "true"
           [...]
 ```
 
@@ -222,10 +226,12 @@ runtime_security_config:
   enabled: true
 
 compliance_config:
- ## @param enabled - boolean - optional - default: false
- ## Set to true to enable CIS benchmarks for CSPM.
- #
- enabled: true
+  ## @param enabled - boolean - optional - default: false
+  ## Set to true to enable CIS benchmarks for CSPM.
+  #
+  enabled: true
+  host_benchmarks:
+    enabled: true
 ```
 
 ```bash
@@ -236,10 +242,12 @@ runtime_security_config:
   enabled: true
 
 compliance_config:
- ## @param enabled - boolean - optional - default: false
- ## Set to true to enable CIS benchmarks for CSPM.
- #
- enabled: true
+  ## @param enabled - boolean - optional - default: false
+  ## Set to true to enable CIS benchmarks for CSPM.
+  #
+  enabled: true
+  host_benchmarks:
+    enabled: true
 ```
 
 ```bash
@@ -338,7 +346,11 @@ The following deployment can be used to start the Runtime Security Agent and `sy
                 {
                       "name": "DD_COMPLIANCE_CONFIG_ENABLED",
                       "value": "true"
-                  }
+                },
+                {
+                      "name": "DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED",
+                      "value": "true"
+                }
             ],
             "memory": 256,
             "dockerSecurityOptions": ["apparmor:unconfined"],
@@ -404,31 +416,14 @@ The following deployment can be used to start the Runtime Security Agent and `sy
 
 The following instructions enables the image metadata collection and [Software Bill of Materials (SBOM)][11] collection in the Datadog Agent. This allows you to scan the libraries in your container images and hosts to detect vulnerabilities. Vulnerabilities are evaluated and and scanned against your containers and hosts every hour.
 
-**Note**: CSM Vulnerabilities is not available for AWS Fargate or Windows environments.
-
 #### Containers
 
 {{< tabs >}}
-{{% tab "Kubernetes (Helm)" %}}
-
-If you are using helm version `>= 3.46.0`, image collection is [enabled by default][1].</br>
-Or, add the following to your `values.yaml` helm configuration file:
-
-```yaml
-datadog:
-  containerImageCollection:
-    enabled: true
-  sbom:
-    containerImage:
-      enabled: true
-```
-[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L651
-
-{{% /tab %}}
 
 {{% tab "Kubernetes (Operator)" %}}
 
-Add the following to the spec section of your `values.yaml` file:
+Image collection is enabled by default with Datadog Operator version `>= 1.3.0`.</br>
+Or, add the following to the spec section of your `values.yaml` file:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -446,6 +441,22 @@ spec:
 
 {{% /tab %}}
 
+{{% tab "Kubernetes (Helm)" %}}
+
+If you are using helm version `>= 3.46.0`, image collection is [enabled by default][1].</br>
+Or, add the following to your `values.yaml` helm configuration file:
+
+```yaml
+datadog:
+  containerImageCollection:
+    enabled: true
+  sbom:
+    containerImage:
+      enabled: true
+```
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L651
+
+{{% /tab %}}
 {{% tab "ECS EC2" %}}
 
 To enable container image vulnerability scanning on your [ECS EC2 instances][7], add the following environment variables to your `datadog-agent` container definition:
@@ -518,17 +529,6 @@ container_image:
 
 {{< tabs >}}
 
-{{% tab "Kubernetes (Helm)" %}}
-
-```yaml
-datadog:
-  sbom:
-    host:
-      enabled: true
-```
-
-{{% /tab %}}
-
 {{% tab "Kubernetes (Operator)" %}}
 
 Add the following to the spec section of your `values.yaml` file:
@@ -548,6 +548,17 @@ spec:
       host:
         enabled: true
 ```
+{{% /tab %}}
+
+{{% tab "Kubernetes (Helm)" %}}
+
+```yaml
+datadog:
+  sbom:
+    host:
+      enabled: true
+```
+
 {{% /tab %}}
 
 {{% tab "ECS EC2" %}}

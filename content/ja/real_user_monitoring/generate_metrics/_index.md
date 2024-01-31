@@ -7,7 +7,7 @@ further_reading:
 - link: /real_user_monitoring/explorer/
   tag: ドキュメント
   text: RUM エクスプローラーでクエリを作成する方法をご紹介します
-- link: /real_user_monitoring/explorer/search/#event-types/
+- link: /real_user_monitoring/explorer/search/#event-types
   tag: ドキュメント
   text: RUM のイベントタイプについて
 - link: /logs/log_configuration/logs_to_metrics/
@@ -105,7 +105,7 @@ RUM ベースのカスタムメトリクスは、以下のアクションに使�
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/browser/#browser-and-session-replay-sampling-configuration
+[1]: /ja/real_user_monitoring/guide/sampling-browser-plans
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /ja/metrics/custom_metrics/
 [4]: https://app.datadoghq.com/rum/generate-metrics

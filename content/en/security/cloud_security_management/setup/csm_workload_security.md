@@ -1,5 +1,5 @@
 ---
-title: Setting Up CSM Workload Security
+title: Setting up CSM Workload Security
 kind: documentation
 further_reading:
   - link: "/security/cloud_security_management/setup"
@@ -14,10 +14,6 @@ further_reading:
 ---
 
 The Cloud Security Management (CSM) Workload Security package includes [CSM Threats][1]. To learn more about the available CSM packages, see [Setting up Cloud Security Management][2].
-
-## Prerequisites
-
-{{% csm-prereqs-workload-security %}}
 
 ## Installation
 

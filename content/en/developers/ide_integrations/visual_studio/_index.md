@@ -1,73 +1,66 @@
 ---
 title: Datadog Extension for Visual Studio
 kind: documentation
-description: The Datadog extension for .NET developers
-disable_toc: false
 is_beta: true
 further_reading:
 - link: "/getting_started/profiler/"
   tag: "Documentation"
-  text: "Getting started with Continuous Profiler."
+  text: "Getting started with the Continuous Profiler"
+- link: "/integrations/guide/source-code-integration/"
+  tag: "Documentation"
+  text: "Learn about Source Code Integration"
+- link: "https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio"
+  tag: "External Site"
+  text: "Visual Studio Marketplace"  
 ---
-
-{{< callout url="#" btn_hidden="true">}}
-  The Datadog extension for Visual Studio is in public beta. It is intended for .NET developers who use the <a href="https://docs.datadoghq.com/profiler/#pagetitle">Continuous Profiler</a> for their .NET services. If the plugin stops working unexpectedly, check for updates or <a href=#feedback>reach out to the team</a>.
-{{< /callout >}}
 
 ## Overview
 
-The Datadog extension for Visual Studio helps you to improve software performance by providing meaningful code-level insights in the IDE based on real-time observability data.
+The Datadog extension for Visual Studio helps you find and fix bugs, security issues, and performance bottlenecks based on real-time observability data from your services and runtime environments.
 
-The **Code Insights** view keeps you informed about:
+{{< img src="/developers/ide_integrations/visual_studio/datadog-for-visual-studio.png" alt="Datadog extension for Visual Studio">}}
 
-- Issues from [Error Tracking][5]
-- [Vulnerability][6] reports from Application Security Management
-- Profiling insights from [Watchdog Insights][7]
+### Code insights
 
-The **Continuous Profiler** helps you to reduce latency and lower cloud costs by highlighting code lines that:
+Stay informed about [Error Tracking][5] issues, [Security Vulnerabilities][6], [Flaky Tests][10], and [Watchdog][7] profiling insights without leaving Visual Studio.
 
-- Consume the most CPU
-- Allocate the most memory
-- Spend the most time on locks, disk I/O, and socket I/O
+{{< img src="/developers/ide_integrations/visual_studio/code-insights.png" alt="The Code Insights view" >}}
 
-## Requirements
+### Continuous Profiler
 
-- Windows 10 or higher
-- .NET Framework 4.7.2 or higher
-- Visual Studio 2022 Community, Professional or Enterprise edition (64-bit)
-- **Datadog Account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
-- **Continuous Profiler**: To display profiling data and insights, the plugin requires the Continuous Profiler to be configured for your services. For more information, see [Getting Started with the Continuous Profiler][2]
+Analyze and improve the performance of your applications with real-time profiling metrics for CPU, Memory, I/O, and others.
 
-## Getting Started
+{{< img src="/developers/ide_integrations/visual_studio/top-list.png" alt="The Code Insights view">}}
 
-### Download and install the extension
+### Open code in Visual Studio from Datadog
 
-1. In Visual Studio, go to **Extensions** > **Manage Extensions**.
-2. Search for `Datadog`.
-3. Click **Download**.
-4. Restart Visual Studio.
+Navigate from Datadog to your source code with one click.
 
-Alternatively, you can download the extension from the official [Visual Studio Marketplace][4]
+{{< img src="/developers/ide_integrations/visual_studio/view-in-visual-studio.png" alt="A stack trace on the Datadog platform showing the View in Visual Studio button.">}}
 
-### Sign-in with your Datadog account
+## Getting started
 
-1. In Visual Studio, go to **Tools** > **Options** > **Datadog**.
-2. Click **Sign In**.
-3. In the browser window that opens, select your site and organization and authorize access to the platform.
+### Requirements
 
-### Link services
+* Windows operating system 64-bit
+* Visual Studio 2022 64-bit Community, Professional, or Enterprise edition
+* Datadog account with [Continuous Profiler][8] and [Source Code Integration][12] enabled. For more information, see [Enabling the Profiler][13].
 
-1. Open a .NET solution file with Visual Studio.
-2. Go to **Extensions** > **Datadog** > **Linked Services**.
-3. Click **Add Service**.
-4. Select the services that are related to your .NET solution.
-5. Save the .NET solution file.
+### Setup and installation
+
+1. Download and install the extension from the official [Visual Studio Marketplace][17].
+2. In Visual Studio, go to **Tools > Options > Datadog**.
+3. Sign in with your Datadog account, or [sign up for a free trial][14].
+4. Open a solution in Visual Studio.
+5. Go to **Extensions > Datadog > Linked Services**.
+6. Add services, and save your solution.
+7. Go to **Extensions > Datadog > Code Insights**.
 
 ## Feedback
 
-Let us know what you think about the extension! Provide feedback on our [discussion forum][1], or send an e-mail to `team-ide-integration@datadoghq.com`.
+Report a bug, request a new feature, or ask for help on the [Discussion Forum][15] and [Issue Tracker][16] on GitHub. You can also email `team-ide-integration@datadoghq.com`.
 
-## Further reading
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -75,6 +68,14 @@ Let us know what you think about the extension! Provide feedback on our [discuss
 [2]: /getting_started/profiler/
 [3]: https://www.datadoghq.com/
 [4]: https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio
-[5]: https://docs.datadoghq.com/tracing/error_tracking/
-[6]: https://docs.datadoghq.com/security/application_security/vulnerability_management/
-[7]: https://docs.datadoghq.com/watchdog/insights
+[5]: /tracing/error_tracking/
+[6]: /security/application_security/vulnerability_management/
+[7]: /watchdog/insights
+[8]: /profiler/
+[10]: /continuous_integration/guides/flaky_test_management/
+[12]: /integrations/guide/source-code-integration/
+[13]: /profiler/enabling/dotnet/?tab=linux#enabling-the-profiler
+[14]: https://www.datadoghq.com/lpg/
+[15]: https://github.com/DataDog/datadog-for-visual-studio/discussions
+[16]: https://github.com/DataDog/datadog-for-visual-studio/issues
+[17]: https://marketplace.visualstudio.com/items?itemName=Datadog.VisualStudio

@@ -12,9 +12,9 @@ title: RUM ダッシュボード
 
 RUM アプリケーションを作成すると、Datadog は、アプリケーションのパフォーマンス、エラー、リソース、ユーザーセッションに関する[データを収集][1]し、ダッシュボードを生成します。
 
-{{< img src="real_user_monitoring/dashboards/rum_application_overview_dashboard-3.png" alt="RUM Application Overview ページ" style="width:90%;" >}}
+{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Application Overview ページ" style="width:90%;" >}}
 
-RUM ダッシュボードにアクセスするには、[**ダッシュボードリスト**][2]の検索クエリで `RUM` で絞り込むか、アプリケーションサマリーページ (**Real User Monitoring > Performance Summary** および **Real User Monitoring > Analytics Summary**) からアクセスします。
+RUM ダッシュボードにアクセスするには、[**ダッシュボードリスト**][2]の検索クエリで `RUM` で絞り込むか、アプリケーションサマリーページ (**Real User Monitoring > Performance Monitoring > Performance Summary** および **Real User Monitoring > Product Analytics > Analytics Summary**) からアクセスします。
 
 {{< img src="real_user_monitoring/dashboards/available_rum_dashboards-2.png" alt="すぐに使える RUM ダッシュボード" style="width:90%;" >}}
 

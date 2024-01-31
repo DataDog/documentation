@@ -160,7 +160,7 @@ Enables native interaction tracking. Set to `true` if you want to track interact
 : Optional<br/>
 **Type**: List<br/>
 **Default**: `[]`<br/>
-Enables native views tracking. Set to `true` if you use a custom navigation system relying on native views. For more information, see [Connect RUM and Traces][12].
+List of your backends hosts to enable tracing with. For more information, see [Connect RUM and Traces][12].
 
 `telemetrySampleRate`
 : Optional<br/>
@@ -207,7 +207,7 @@ Enables tracking of RUM event when no RUM View is active. By default, background
 `proxyConfig`
 : Optional<br/>
 **Type**: ProxyConfiguration<br/>
-Optional proxy configuration.
+Optional [proxy configuration][13].
 
 ## Manual instrumentation
 
@@ -422,7 +422,7 @@ const configuration = {
     versionSuffix: 'codepush.v3', // Optional: see overriding the reported version in the documentation. Default = undefined
     trackingConsent: TrackingConsent.GRANTED, // Optional: disable collection if user has not granted consent for tracking. Default = TrackingConsent.GRANTED
     nativeViewTracking: true, // Optional: enables tracking of native views. Default = false
-    proxyConfig: new ProxyConfig() // Optional: send requestst through a proxy. Default = undefined
+    proxyConfig: new ProxyConfig() // Optional: send requests through a proxy. Default = undefined
 };
 ```
 
@@ -441,4 +441,5 @@ const configuration = {
 [9]: /getting_started/site/
 [11]: /real_user_monitoring/frustration_signals/
 [12]: /real_user_monitoring/connect_rum_and_traces?tab=reactnativerum
+[13]: /real_user_monitoring/guide/proxy-mobile-rum-data/
 [15]: /getting_started/tagging/#define-tags

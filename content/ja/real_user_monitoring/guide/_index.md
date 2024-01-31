@@ -44,6 +44,7 @@ title: リアルユーザーモニタリングおよびセッションリプレ�
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Mobile RUM:" >}}
+    {{< nextlink href="real_user_monitoring/guide/mobile-sdk-deprecation-policy" >}}RUM Mobile SDK の非推奨ポリシー{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-upgrade" >}}RUM Mobile SDK のアップグレード{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/mobile-sdk-multi-instance" >}}Mobile SDK の複数インスタンスの使用{{< /nextlink >}}
 {{< /whatsnext >}}

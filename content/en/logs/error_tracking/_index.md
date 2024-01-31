@@ -18,10 +18,6 @@ further_reading:
     text: 'Create an Error Tracking monitor'
 ---
 
-{{< callout btn_hidden="true" >}}
-  Error Tracking for Logs is in beta.
-{{< /callout >}} 
-
 ## Overview
 
 It is critical for your system's health to consistently monitor the errors collected by Datadog. When there are many individual error events, it becomes hard to prioritize errors for troubleshooting. By tracking, triaging, and debugging logs, you can minimize the impact of fatal errors on your browser, mobile, and backend services.

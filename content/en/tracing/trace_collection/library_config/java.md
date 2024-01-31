@@ -22,8 +22,17 @@ All configuration options below have system property and environment variable eq
 If the same key type is set for both, the system property configuration takes priority.
 System properties can be set as JVM flags.
 
-Note: When using the Java tracer's system properties, make sure that they are listed before `-jar` so they get read in as JVM options.
+### Converting between system properties and environment variables
+Unless otherwise stated, you can convert between system properties and environment variables with the following transformations:
 
+- To set a system property as an environment variable, uppercase the property name and replace `.` or `-` with `_`.
+  For example, `dd.service` becomes `DD_SERVICE`.
+- To set an environment variable as a system property, lowercase the variable name and replace `_` with `.`
+  For example, `DD_TAGS` becomes `dd.tags`.
+
+**Note**: When using the Java tracer's system properties, list the properties before `-jar`. This ensures the properties are read in as JVM options.
+
+## Configuration options
 
 `dd.service`
 : **Environment Variable**: `DD_SERVICE`<br>
