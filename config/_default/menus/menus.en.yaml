@@ -4612,9 +4612,19 @@ main:
   - name: Sensitive Data Scanner
     url: sensitive_data_scanner/
     pre: sensitive-data-scanner
-    identifier: sds_top_level
+    identifier: sensitive_data_scanner
     parent: administration_heading
     weight: 30000
+  - name: Library Rules
+    url: sensitive_data_scanner/library_rules/
+    identifier: sds_library_rules
+    parent: sensitive_data_scanner
+    weight: 1
+  - name: Investigate Sensitive Data Issues
+    url: sensitive_data_scanner/investigate_sensitive_data_issues/
+    identifier: sds_investigate_sensitive_data_issues
+    parent: sensitive_data_scanner
+    weight: 2
   - name: Help
     url: help/
     pre: info-fill
