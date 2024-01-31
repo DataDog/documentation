@@ -18,17 +18,15 @@ further_reading:
   text: "Learn about the Source Code Integration"
 ---
 
-{{% site-region region="us,us3,us5,eu,ap1" %}}
-<div class="alert alert-warning">
-  Software Composition Analysis is part of the Code Analysis public beta.
-</div>
-{{% /site-region %}}
-
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
     Software Composition Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
+
+{{< callout url="#" btn_hidden="true" >}}
+Software Composition Analysis is part of the Code Analysis public beta.
+{{< /callout >}}
 
 ## Overview
 
