@@ -38,7 +38,7 @@ Example workflow:
 
 ### Choosing a time frame
 
-A common misconception is that increasing the evaluation window leads to slower responses or missed alerts, but a monitor continuously assesses data no matter what query evaluation interval you choose. The evaluation interval only determines how many data points are used to decide whether an anomaly exists.
+A common misconception is that increasing the evaluation window leads to slower responses or missed alerts, but a monitor continuously assesses data no matter what query evaluation interval you choose. The evaluation interval only determines how many datapoints are used to decide whether an anomaly exists.
 
 By increasing the evaluation window, you can ensure that you are only alerted if a behavior is happening consistently, not temporarily.
 
