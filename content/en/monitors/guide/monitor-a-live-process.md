@@ -20,7 +20,7 @@ An improperly configured monitor is prone to false positives. This guide covers 
 
 To avoid false positives, the scope of your monitor should not exceed a few thousand processes. Because text search is fuzzy, tags are the most accurate way to adjust the scope of your monitor.
 
-#### Example workflow
+Example workflow:
 
 1. Navigate to the [**Monitors > New Monitor > Live Process**][1] page.
 
