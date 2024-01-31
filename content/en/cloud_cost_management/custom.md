@@ -24,7 +24,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Custom Cost is in public beta. Cloud Cost for Google Cloud is in private beta
+Custom Cost is in public beta.
 {{< /beta-callout >}}
 
 ## Overview
