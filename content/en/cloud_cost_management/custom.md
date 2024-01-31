@@ -67,17 +67,15 @@ The required fields must appear as columns in your CSV in the order listed above
 
 Example of a valid CSV:
 
-```none
 | ProviderName | ChargeDescription | ChargePeriodStart | ChargePeriodEnd | BilledCost | BillingCurrency |
+|:---:|:---:|:---:|:---:|:---:|:---:|
 | GitHub | User Costs | 2023-01-01 | 2023-01-31 | 300.00 | USD |
-```
 
 Example of an invalid CSV (`ChargePeriodStart` is listed before `ChargeDescription`):
 
-```none
-| ProviderName | ChargePeriodStart | ChargeDescription| ChargePeriodEnd | BilledCost | BillingCurrency |
+| ProviderName | ChargePeriodStart | ChargeDescription | ChargePeriodEnd | BilledCost | BillingCurrency |
+|:---:|:---:|:---:|:---:|:---:|:---:|
 | GitHub | 2023-01-01 | User Costs | 2023-01-31 | 300.00 | EUR |
-```
 
 {{% /tab %}}
 {{% tab "JSON" %}}
@@ -130,10 +128,11 @@ For a CSV file, add a column per tag.
 
 Example of a valid CSV file:
 
-```none
 | ProviderName | ChargeDescription | ChargePeriodStart | ChargePeriodEnd | BilledCost | BillingCurrency | team | service |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | GitHub | User Costs | 2023-01-01 | 2023-01-31 | 300.00 | USD | web | ops |
-```
+
+</br>
 
 In this example, the `team` and `service` columns are added after the `BillingCurrency` column, and appears as tags on this cost.
 
