@@ -54,17 +54,17 @@ You can also [redact sensitive data in tags](#redact-sensitive-data-in-tags).
 
 ### Add a scanning group
 
-A scanning group determines what data to scan. It consists of a query filter and a set of toggles to enable scanning for Logs, APM, RUM, and Events. See the [Log Search Syntax][3] documentation to learn more about query filters.
+A scanning group determines what data to scan. It consists of a query filter and a set of toggles to enable scanning for logs, APM, RUM, and events. See the [Log Search Syntax][3] documentation to learn more about query filters.
 
-For Terraform, see the [Datadog sensitive data scanner group][4] resource.
+For Terraform, see the [Datadog Sensitive Data Scanner group][4] resource.
 
 To set up a scanning group:
 
-1. Navigate to [Sensitive Data Scanner][5]. Alternatively, go to Organization Settings > Sensitive Data Scanner.
+1. Navigate to [Sensitive Data Scanner][5]. Alternatively, go to **Organization Settings** > **Sensitive Data Scanner**.
 1. Click **Add scanning group**. Alternatively, click the **Add** dropdown menu on the top right corner of the page and select **Add Scanning Group**.
 1. Enter a query filter for the data you want to scan. At the top, click **APM Spans** to preview the filtered spans. Click **Logs** to see the filtered logs.
 1. Enter a name and description for the group.
-1. Click the toggle buttons to enable Sensitive Data Scanner for the products you want (for example, Logs, APM Spans, RUM Events, and Events).
+1. Click the toggle buttons to enable Sensitive Data Scanner for the products you want (for example, logs, APM spans, RUM events, and Datadog events).
 1. Click **Create**.
 
 ### Add scanning rules
@@ -98,15 +98,15 @@ The Scanning Rule Library contains predefined rules for detecting common pattern
 You can create custom scanning rules using regex patterns to scan for sensitive data.
 
 1. In the **Define match conditions** section, specify the regex pattern to use for matching against events in the **Define regex** field. Enter sample data in the **Regex tester** field to verify that your regex pattern is valid.   
-    Sensitive Data Scanner supports Perl Compatible RegEx (PCRE), but the following patterns are not supported:
+    Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
     - Backreferences and capturing sub-expressions (lookarounds)
     - Arbitrary zero-width assertions
     - Subroutine references and recursive patterns
     - Conditional patterns
     - Backtracking control verbs
-    - The \C "single-byte" directive (which breaks UTF-8 sequences)
-    - The \R newline match
-    - The \K start of match reset directive
+    - The `\C` "single-byte" directive (which breaks UTF-8 sequences)
+    - The `\R` newline match
+    - The `\K` start of match reset directive
     - Callouts and embedded code
     - Atomic grouping and possessive quantifiers
 {{% sds-scanning-rule %}}
