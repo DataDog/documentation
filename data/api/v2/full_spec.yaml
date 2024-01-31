@@ -17446,7 +17446,7 @@ components:
           description: 'Keyword list that will be checked during scanning in order
             to validate a match.
 
-            The number of keywords in the list must be less than or equal to 20.'
+            The number of keywords in the list must be less than or equal to 30.'
           example:
           - credit card
           - cc
@@ -23451,7 +23451,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - usage_read
       summary: Get active billing dimensions for cost attribution
       tags:
       - Usage Metering
@@ -23575,7 +23576,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - usage_read
       summary: Get Monthly Cost Attribution
       tags:
       - Usage Metering

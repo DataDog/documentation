@@ -1930,16 +1930,21 @@ main:
     parent: cloud_cost_top_level
     identifier: ccm_google_cloud
     weight: 3
+  - name: Custom Costs
+    url: cloud_cost_management/custom
+    parent: cloud_cost_top_level
+    identifier: ccm_custom
+    weight: 4
   - name: Tag Pipelines
     url: cloud_cost_management/tag_pipelines
     parent: cloud_cost_top_level
     identifier: tag_pipelines
-    weight: 4
+    weight: 5
   - name: Container Cost Allocation
     url: cloud_cost_management/container_cost_allocation
     parent: cloud_cost_top_level
     identifier: container_cost_allocation
-    weight: 5
+    weight: 6
   - name: Network Monitoring
     url: network_monitoring/
     pre: network
@@ -3314,131 +3319,136 @@ main:
     url: logs/log_configuration/forwarding_custom_destinations/
     parent: log_configuration
     weight: 211
+  - name: PCI Compliance
+    identifier: log_pci_compliance
+    url: data_security/pci_compliance/
+    parent: log_management
+    weight: 3
   - name: Connect Logs and Traces
     url: tracing/other_telemetry/connect_logs_and_traces/
     parent: log_management
     identifier: logs_traces_connection
-    weight: 3
+    weight: 4
   - name: Log Explorer
     url: logs/explorer/
     parent: log_management
     identifier: log_explorer
-    weight: 4
+    weight: 5
   - name: Live Tail
     identifier: log_explorer_live_tail
     url: logs/explorer/live_tail/
     parent: log_explorer
-    weight: 401
+    weight: 501
   - name: Search Logs
     identifier: log_explorer_search_logs
     url: logs/explorer/search/
     parent: log_explorer
-    weight: 402
+    weight: 502
   - name: Search Syntax
     identifier: log_explorer_search_syntax
     url: logs/explorer/search_syntax/
     parent: log_explorer
-    weight: 403
+    weight: 503
   - name: Advanced Search
     url: logs/explorer/advanced_search
     parent: log_explorer
     identifier: log_explorer_advanced_search
-    weight: 404
+    weight: 504
   - name: Facets
     identifier: log_explorer_facets
     url: logs/explorer/facets/
     parent: log_explorer
-    weight: 405
+    weight: 505
   - name: Analytics
     identifier: log_explorer_analytics
     url: logs/explorer/analytics/
     parent: log_explorer
-    weight: 406
+    weight: 506
   - name: Patterns
     identifier: log_explorer_patterns
     url: logs/explorer/analytics/patterns/
     parent: log_explorer
-    weight: 407
+    weight: 507
   - name: Transactions
     identifier: log_explorer_transactions
     url: logs/explorer/analytics/transactions/
     parent: log_explorer
-    weight: 408
+    weight: 508
   - name: Visualize
     identifier: log_explorer_visualize
     url: logs/explorer/visualize/
     parent: log_explorer
-    weight: 409
+    weight: 509
   - name: Log Side Panel
     identifier: log_explorer_side_panel
     url: logs/explorer/side_panel/
     parent: log_explorer
-    weight: 410
+    weight: 510
   - name: Export
     identifier: log_explorer_export
     url: logs/explorer/export/
     parent: log_explorer
-    weight: 411
+    weight: 511
   - name: Watchdog Insights for Logs
     identifier: log_explorer_watchdog_insights
     url: logs/explorer/watchdog_insights/
     parent: log_explorer
-    weight: 412
+    weight: 512
   - name: Saved Views
     identifier: log_explorer_saved_views
     url: logs/explorer/saved_views/
     parent: log_explorer
-    weight: 413
+    weight: 513
   - name: Error Tracking
     url: logs/error_tracking/
     parent: log_management
     identifier: log_management_error_tracking
-    weight: 5
+    weight: 6
   - name: Error Tracking Explorer
     identifier: log_management_error_tracking_explorer
     url: logs/error_tracking/explorer
     parent: log_management_error_tracking
-    weight: 501
+    weight: 601
   - name: Track Browser and Mobile Errors
     identifier: log_management_error_tracking_browser_and_mobile
     url: logs/error_tracking/browser_and_mobile
     parent: log_management_error_tracking
-    weight: 502
+    weight: 602
   - name: Track Backend Errors
     identifier: log_management_error_tracking_backend
     url: logs/error_tracking/backend
     parent: log_management_error_tracking
-    weight: 503
+    weight: 603
   - name: Custom Grouping
     url: logs/error_tracking/custom_grouping
     parent: log_management_error_tracking
     identifier: log_management_error_tracking_custom_grouping
-    weight: 504
+    weight: 604
   - name: Manage Data Collection
     url: logs/error_tracking/manage_data_collection
     parent: log_management_error_tracking
     identifier: log_management_error_tracking_manage_data_collection
-    weight: 505
+    weight: 605
   - name: Identify Suspect Commits
     url: logs/error_tracking/suspect_commits
     parent: log_management_error_tracking
     identifier: log_management_error_tracking_suspect_commits
-    weight: 506
+    weight: 606
   - name: Guides
     url: logs/guide/
     parent: log_management
     identifier: log_guides
-    weight: 6
+    weight: 7
   - name: Data Security
     url: data_security/logs/
     parent: log_management
     identifier: log_security
-    weight: 7
+    weight: 8
   - name: Troubleshooting
     url: logs/troubleshooting
     parent: log_management
     identifier: log_troubleshooting
-    weight: 8
+    weight: 9
   - name: Security Overview
     url: security/
     pre: security-platform
@@ -3627,7 +3637,7 @@ main:
     parent: csm
     identifier: vulnerabilities
     weight: 5
-  - name: Default Detection Rules
+  - name: OOTB Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm
     identifier: csm_default_rules
@@ -4604,17 +4614,32 @@ main:
     url: data_security/real_user_monitoring/
     parent: data_security
     weight: 6
+  - name: PCI Compliance
+    identifier: data_security_pci_compliance
+    url: data_security/pci_compliance/
+    parent: data_security
+    weight: 7
   - name: Guides
     identifier: data_security_guide
     url: data_security/guide/
     parent: data_security
-    weight: 7
+    weight: 8
   - name: Sensitive Data Scanner
     url: sensitive_data_scanner/
     pre: sensitive-data-scanner
-    identifier: sds_top_level
+    identifier: sensitive_data_scanner
     parent: administration_heading
     weight: 30000
+  - name: Library Rules
+    url: sensitive_data_scanner/library_rules/
+    identifier: sds_library_rules
+    parent: sensitive_data_scanner
+    weight: 1
+  - name: Investigate Sensitive Data Issues
+    url: sensitive_data_scanner/investigate_sensitive_data_issues/
+    identifier: sds_investigate_sensitive_data_issues
+    parent: sensitive_data_scanner
+    weight: 2
   - name: Help
     url: help/
     pre: info-fill
