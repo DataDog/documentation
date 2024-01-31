@@ -6,7 +6,9 @@ type: multi-code-lang
 code_lang_weight: 65 # a number that represents relative weight. 
 ---
 
-Use the following command to start the Runtime Security Agent and `system-probe` in a Docker environment:
+Use the following instructions to enable [CSM Threats][1] on Docker. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][2].
+
+The following command starts the Runtime Security Agent and `system-probe` in a Docker environment:
 
 {{< code-block lang="shell" filename="docker-runtime-security.sh" >}}
 
@@ -37,3 +39,6 @@ docker run -d --name dd-agent \
   gcr.io/datadoghq/agent:7
 
 {{< /code-block >}}
+
+[1]: /security/threats
+[2]: /security/cloud_security_management/setup#supported-deployment-types-and-features

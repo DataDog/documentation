@@ -3,7 +3,7 @@ title: Enabling CSM Enterprise for Cloud Accounts
 kind: documentation
 ---
 
-To enable resource scanning for your cloud accounts for CSM Misconfigurations, you must first set up the integration and then enable CSM for each AWS account, Azure subscription, and Google Cloud project.
+Use the following instructions to enable [CSM Misconfigurations][1] for your cloud accounts. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][2].
 
 {{< tabs >}}
 {{% tab "AWS" %}}
@@ -25,3 +25,6 @@ To enable resource scanning for your cloud accounts for CSM Misconfigurations, y
 {{% /tab %}}
 
 {{< /tabs >}}
+
+[1]: /security/misconfigurations/
+[2]: /security/cloud_security_management/setup#supported-deployment-types-and-features

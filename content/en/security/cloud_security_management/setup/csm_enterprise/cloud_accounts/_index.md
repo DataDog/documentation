@@ -3,7 +3,7 @@ title: Enabling CSM Enterprise for Cloud Accounts
 kind: documentation
 ---
 
-Use the following instructions to enable resource scanning and CloudTrail logs forwarding.
+Use the following instructions to enable [CSM Misconfigurations][2] and [CSM Identity Risks][3] for your cloud accounts. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][9].
 
 ## Enable resource scanning
 
@@ -68,6 +68,7 @@ Set up a trigger on your Datadog Forwarder Lambda function to send CloudTrail lo
 [6]: /agent/remote_config
 [7]: /agent/remote_config/?tab=environmentvariable#enabling-remote-configuration
 [8]: /security/cloud_security_management/setup
+[9]: /security/cloud_security_management/setup#supported-deployment-types-and-features
 [11]: https://www.cisa.gov/sbom
 [12]: /security/cloud_security_management
 [14]: /agent

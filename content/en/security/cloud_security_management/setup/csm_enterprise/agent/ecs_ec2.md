@@ -6,7 +6,9 @@ type: multi-code-lang
 code_lang_weight: 70 # a number that represents relative weight. 
 ---
 
-To enable CSM Misconfigurations, CSM Threats, Container Vulnerability Scanning, and Host Vulnerability Scanning on your [ECS EC2 instances][1], add the following environment variables to your `datadog-agent` container definition:
+Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threats][2], and [CSM Vulnerabilities][3] on your ECS EC2 instances. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][4].
+
+Add the following environment variables to your `datadog-agent` container definition:
 
 **Note**: Vulnerabilities are evaluated and and scanned against your containers and hosts every hour.
 
@@ -174,4 +176,7 @@ If the Agent fails to extract the SBOM from the container image, increase the Ag
 }
 ```
 
-[1]: /containers/amazon_ecs/?tab=awscli#setup
+[1]: /security/misconfigurations/
+[2]: /security/threats
+[3]: /security/vulnerabilities
+[4]: /security/cloud_security_management/setup#supported-deployment-types-and-features

@@ -6,6 +6,8 @@ type: multi-code-lang
 code_lang_weight: 80 # a number that represents relative weight. 
 ---
 
+Use the following instructions to enable [CSM Threats][1] on Linux. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][2].
+
 For a package-based deployment, install the Datadog package with your package manager, and then update the `datadog.yaml`, `security-agent.yaml`, and `system-probe.yaml` files.
 
 By default, Runtime Security is disabled. To enable it, both the `security-agent.yaml` and `system-probe.yaml` files need to be updated.
@@ -49,3 +51,6 @@ runtime_security_config:
     ## @param enabled - boolean - optional - default: false
     enabled: true
 ```
+
+[1]: /security/threats
+[2]: /security/cloud_security_management/setup#supported-deployment-types-and-features

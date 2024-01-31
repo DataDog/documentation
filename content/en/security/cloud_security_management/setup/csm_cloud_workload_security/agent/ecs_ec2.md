@@ -6,7 +6,9 @@ type: multi-code-lang
 code_lang_weight: 70 # a number that represents relative weight. 
 ---
 
-To enable CSM Threats on your [Amazon ECS EC2 instances][1], add the following environment variables to your `datadog-agent` container definition:
+Use the following instructions to enable [CSM Threats][1] on your ECS EC2 instances. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][2].
+
+Add the following environment variables to your `datadog-agent` container definition:
 
 ```json
 {
@@ -133,4 +135,5 @@ To enable CSM Threats on your [Amazon ECS EC2 instances][1], add the following e
 }
 ```
 
-[1]: /containers/amazon_ecs/?tab=awscli#setup
+[1]: /security/threats
+[2]: /security/cloud_security_management/setup#supported-deployment-types-and-features

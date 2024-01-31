@@ -6,6 +6,8 @@ type: multi-code-lang
 code_lang_weight: 60 # a number that represents relative weight. 
 ---
 
+Use the following instructions to enable [CSM Threats][1] on Kubernetes. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][2].
+
 {{< tabs >}}
 
 {{% tab "Operator" %}}
@@ -80,3 +82,6 @@ Add the following settings to the `env` section of `security-agent` and `system-
 {{% /tab %}}
 
 {{< /tabs >}}
+
+[1]: /security/threats
+[2]: /security/cloud_security_management/setup#supported-deployment-types-and-features

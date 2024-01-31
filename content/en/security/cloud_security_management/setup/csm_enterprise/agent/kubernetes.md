@@ -6,6 +6,8 @@ type: multi-code-lang
 code_lang_weight: 60 # a number that represents relative weight. 
 ---
 
+Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threats][2], and [CSM Vulnerabilities][3] on Kubernetes. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][4].
+
 {{< tabs >}}
 
 {{% tab "Operator" %}}
@@ -78,8 +80,6 @@ code_lang_weight: 60 # a number that represents relative weight. 
 
 {{% tab "Daemonset" %}}
 
-**MISSING INSTRUCTIONS FOR CSM VULNERABILITIES**
-
 Add the following settings to the `env` section of `security-agent` and `system-probe` in the `daemonset.yaml` file:
 
 ```bash
@@ -109,8 +109,15 @@ Add the following settings to the `env` section of `security-agent` and `system-
                 value: "true"
               - name: DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED
                 value: "true"
+              - name: DD_SBOM_CONTAINER_IMAGE_USE_MOUNT
+                value: "true"
           [...]
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
+
+[1]: /security/misconfigurations/
+[2]: /security/threats
+[3]: /security/vulnerabilities
+[4]: /security/cloud_security_management/setup#supported-deployment-types-and-features

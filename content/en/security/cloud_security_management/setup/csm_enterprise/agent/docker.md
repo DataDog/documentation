@@ -6,9 +6,9 @@ type: multi-code-lang
 code_lang_weight: 65 # a number that represents relative weight. 
 ---
 
-**MISSING INSTRUCTIONS FOR CSM VULNERABILITIES**
+Use the following instructions to enable [CSM Misconfigurations][1] and [CSM Threats][2] on Docker. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][3].
 
-Use the following command to start the Runtime Security Agent and `system-probe` in a Docker environment:
+The following command starts the Runtime Security Agent and `system-probe` in a Docker environment:
 
 {{< code-block lang="shell" filename="docker-runtime-security.sh" >}}
 
@@ -41,3 +41,7 @@ docker run -d --name dd-agent \
   gcr.io/datadoghq/agent:7
 
 {{< /code-block >}}
+
+[1]: /security/misconfigurations/
+[2]: /security/threats
+[3]: /security/cloud_security_management/setup#supported-deployment-types-and-features
