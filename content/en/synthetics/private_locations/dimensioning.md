@@ -1,14 +1,14 @@
 ---
 title: Dimensioning Private Locations
 kind: documentation
-description: Dimensioning requirements for your Private Locations
+description: Dimensioning requirements for your containerized private locations.
 further_reading:
 - link: "/synthetics/private_locations/monitoring"
   tag: "Documentation"
   text: "Monitor your Private Locations"
 ---
 
-<div class="alert alert-info">The dimensioning recommendations are for the containerized private location</div>
+<div class="alert alert-info">The dimensioning recommendations are for the containerized private location.</div>
 
 ## Overview 
 

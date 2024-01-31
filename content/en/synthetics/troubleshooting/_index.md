@@ -232,4 +232,4 @@ Additionally, in Private Location versions `>v1.27`, Datadog depends on the use 
 [10]: /synthetics/browser_tests/#use-global-variables
 [11]: https://ip-ranges.datadoghq.com/synthetics.json
 [12]: /synthetics/api_tests/?tab=httptest#notify-your-team
-[17]: https://docs.docker.com/engine/security/seccomp/
+[13]: https://docs.docker.com/engine/security/seccomp/

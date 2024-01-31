@@ -528,14 +528,18 @@ Once the process is complete, click **Finish** on the installation completion pa
 
 1. Download the [`datadog-synthetics-worker-<version>.amd64.msi` file][101] and run this file from the machine you want to install the private location on. 
 2. Run one of the following commands inside the directory where you downloaded the installer:
-- in a Powershell Terminal
-```ps
-Start-Process msiexec "/i datadog-synthetics-worker-<version>-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
-```
-- or in a Command Terminal
-```cmd
-msiexec /i datadog-synthetics-worker-1.43.0-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
-```
+   
+   - In a PowerShell Terminal:
+
+     ```shell
+     Start-Process msiexec "/i datadog-synthetics-worker-<version>-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
+     ```
+   
+   - Or in a Command Terminal:
+  
+     ```shell
+     msiexec /i datadog-synthetics-worker-1.43.0-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
+     ```
 
 Additional parameters can be added:
 
