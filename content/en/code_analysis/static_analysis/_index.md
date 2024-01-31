@@ -112,7 +112,7 @@ bar = 2
 ```
 
 ### Reporting false positives
-If you believe a specific violation is a false positive, let us know! Each Static Analysis violation has the option for you to flag it as a false positive and give an explanation for why you flagged it.
+If you believe a specific violation is a false positive, let us know! Each Static Analysis violation has the option for you to flag it as a false positive and give an explanation for why you flagged it. Datadog will review your submission to improve our rules over time.
 
 {{< img src="code_analysis/static_analysis/flag-false-positive.png" alt="Button for reporting a Static Analysis violation as a false positive" style="width:60%;">}}
 
