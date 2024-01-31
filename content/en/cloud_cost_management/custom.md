@@ -166,7 +166,7 @@ In this example, an additional `Tags` object property has been added with two ke
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configure Cloud Costs
+### Configure Custom Costs
 
 Once your data is formatted to the requirements above, upload your CSV and JSON files to Cloud Cost Management on [the **Custom Costs Uploaded Files** page][3] or programmatically by using the API. 
 
