@@ -40,10 +40,17 @@ To use SaaS Cost Integrations, you must [configure Cloud Cost Management][1] for
 
 ## Configure SaaS Cost Integrations
 
-Navigate to [**Cloud Costs** > **Settings** > **Accounts**][101] and click on the provider you want to connect. Cost data appears after 24 hours. 
- 
+Navigate to [**Cloud Costs** > **Settings** > **Accounts**][101] and click on the provider you want to integrate. Cost data appears after 24 hours. 
+
+{{< img src="cloud_cost/cloud_and_saas_accounts.png" alt="Integrate with Fastly, Confluent, or Snowflake." style="width:80%" >}}
+
 {{< tabs >}}
 {{% tab "Fastly" %}}
+1. Create a new API token with at least "global:read" scope and "Billing" role on the [Personal API tokens][8] page. 
+2. Then integrate it with Datadog by clicking Add Account in the page.
+
+{{< img src="cloud_cost/fastly_setup.png.png" alt="Integrate with Fastly." style="width:80%" >}}
+
 {{% /tab %}}
 {{% tab "Confluent Cloud" %}}
 {{% /tab %}}
@@ -85,5 +92,6 @@ You can view cost data on the [**Cloud Costs Analytics** page][3], the [Cloud Co
 [4]: https://app.datadoghq.com/cost/tags?cloud=custom
 [5]: /dashboards
 [6]: /notebooks
-[70]: /monitors/create/cost
+[7]: /monitors/create/cost
+[8]: https://manage.fastly.com/account/personal/tokens
 
