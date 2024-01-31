@@ -104,6 +104,8 @@ content/en/continuous_testing/cicd_integrations/azure_devops_extension.md
 # Code Analysis
 content/en/code_analysis/github_actions.md
 content/en/code_analysis/circleci_orbs.md
+content/en/code_analysis/static_analysis_rules/*
+content/en/code_analysis/static_analysis_rules/_index.md
 content/en/code_analysis/static_analysis/rules/*
 !content/en/code_analysis/static_analysis/rules/_index.md
 # Let's keep these so we don't accidentally re-add them to repo

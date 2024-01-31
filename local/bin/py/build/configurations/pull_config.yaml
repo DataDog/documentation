@@ -350,7 +350,7 @@
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"]
               title: Static Analysis and CircleCI Orbs
               kind: documentation
-              description: Use Datadog and CircleCI to run Code Analysis jobs in a CI pipeline.
+              description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
               aliases:
               - /continuous_integration/static_analysis/circleci_orbs
               - /static_analysis/circleci_orbs
@@ -368,7 +368,7 @@
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md"]
               title: Static Analysis and GitHub Actions
               kind: documentation
-              description: Use Datadog and GitHub to run Code Analysis jobs in a CI pipeline.
+              description: Use Datadog and GitHub to run Static Analysis jobs in a CI pipeline.
               aliases:
               - /continuous_integration/static_analysis/github_actions
               - /static_analysis/github_actions
@@ -380,7 +380,7 @@
           globs:
           - rulesets/**/*.md
           options:
-            dest_dir: '/code_analysis/static_analysis/rules/'
+            dest_dir: '/code_analysis/static_analysis_rules/'
             path_to_remove: 'rulesets/'
             front_matters:
               disable_edit: true
