@@ -26,7 +26,7 @@ further_reading:
 
 - **Partial pipelines**: View partial and downstream pipeline executions
 
-- **Logs correlation**: Correlate pipeline spans to logs and [enable job log collection][10]
+- **Logs correlation**: Correlate pipeline and job spans to logs and [enable job log collection][10]
 
 - **Custom spans**: Configure custom spans
 
