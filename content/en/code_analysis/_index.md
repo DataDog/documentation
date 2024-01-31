@@ -87,11 +87,10 @@ For more information about Static Analysis rulesets, see [Static Analysis Rules]
 
 ## Configure your CI/CD provider
 
-Select a CI/CD provider to configure Static Analysis and optionally enable [Software Composition Analysis][9] with:
-
-{{< partial name="code_analysis/ci-provider-getting-started.html" >}}
-
-</br>
+{{< whatsnext desc="Select a CI/CD provider to configure Code Analysis with:">}}
+    {{< nextlink href="code_analysis/software_composition_analysis/github_actions" >}}Software Composition Analysis and GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="code_analysis/software_composition_analysis/setup/?tab=other#configure-your-cicd-provider" >}}Software Composition Analysis and Other CI Providers{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Set up the GitHub integration 
 
