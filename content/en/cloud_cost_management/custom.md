@@ -31,7 +31,7 @@ Custom Cost is in public beta.
 
 Custom Costs allow you to upload *any cost data source* to Datadog, so that you can understand the total cost of your services. 
 
-Custom Costs accepts costs in pre-defined file structures (CSV or JSON). These files are aligned with the [FinOps FOCUS specification][2], and you can [upload multiple files in either format](#create-a-csv-or-json-with-required-fields). For example, you can upload a mix of CSV or JSON files as desired with 1+ line items (rows for CSV or objects for JSON).
+Custom Costs accepts costs in pre-defined file structures (CSV or JSON). These files are aligned with the [FinOps FOCUS specification][2], and you can [upload multiple files in either format](#create-a-csv-or-json-file-with-required-fields). For example, you can upload a mix of CSV or JSON files as desired with 1+ line items (rows for CSV or objects for JSON).
 
 All line items must meet the following requirements and include the [properties below](#collect-the-required-fields):
 
