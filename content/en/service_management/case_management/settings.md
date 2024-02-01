@@ -27,7 +27,7 @@ Case Management offers a range of native and third-party integrations, so you ca
 
 Project handles can be used in monitors to automatically create cases. In the monitor message body, include `@case-<project_handle>`. Datadog suggests a handle based on the project's name. You can accept or modify it as you wish. 
 
-Navigate to [Project Settings][1] > Integrations > Datadog Monitors and then toggle it on to get your @case-<project_handle>.
+Navigate to the [Project Settings page][1], click **Integrations** > **Datadog Monitors**, and click on the toggle to get your @case-<project_handle>.
 
 ### Jira
 
