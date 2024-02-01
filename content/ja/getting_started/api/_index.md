@@ -47,21 +47,27 @@ data-postman-param="env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsIn
 
 </br>このコレクションは  Web 用 Postman またはお使いの Postman アプリケーションで動作します。読み込みに数秒かかることがあります。
 
+**注**: Datadog Postman コレクションの Datadog 認証環境を、API キーとアプリケーションキーで構成します。
+
 ### Postman 環境のセットアップ
 
 Postman コレクションをインポートすると、Postman の左ペインに、使用できるすべての Datadog API 呼び出しの一覧がフォルダーごとに構造化されて表示されます。
 
-#### Authentication
+#### Go
 
-コレクションには、[Postman 環境][6]である `Datadog Authentication` が含まれます。ここに Datadog API キーと認証用のアプリケーションキーを追加します。
+コレクションには、[Postman 環境][6]である `Datadog Authentication` が含まれます。ここに Datadog API キーと認証用のアプリケーションキーを追加できます。
+
+{{< img src="getting_started/postman/authentication-blurred.png" alt="API フィールドと Application Key フィールドが入力された Datadog Authentication コレクション" style="width:100%;">}}
 
 以下の手順に従って環境をセットアップします。
 
 1. Postman の右上隅にある **Environments** ドロップダウンをクリックします。現時点で環境が選択されていない場合は、**Environments** ドロップダウンに `No Environment` と表示されます。
 
-2. **Datadog Authentication** を選択します
+2. **Datadog Authentication** を選択します。
 
 3. **Datadog Authentication** 環境を編集して Datadog [API キー][2]を `api_key` 変数の初期値および現在値として追加し、お使いの Datadog [アプリケーションキー][2]を `application_key` 変数の初期値および現在値として追加します。
+
+4. **Save** をクリックします。
 
 #### API エンドポイントに切り替える
 
@@ -111,6 +117,6 @@ Postman コレクションをインポートすると、Postman の左ペイン�
 [3]: https://identity.getpostman.com/signup
 [4]: https://identity.getpostman.com/login
 [5]: https://www.postman.com/downloads/
-[6]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
+[6]: https://learning.postman.com/docs/sending-requests/environments/managing-environments/
 [7]: /ja/api/latest/#api-reference
 [8]: /ja/api/
