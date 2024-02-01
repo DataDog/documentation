@@ -23,6 +23,8 @@ Case Management is not available in the {{< region-param key=dd_datacenter code=
 </div>
 {{% /site-region %}}
 
+{{< img src="/service_management/case_management/case_management_overview.png" alt="Overview of the Case Management page" style="width:100%;" >}}
+
 ## Overview
 
 Datadog Case Management offers a centralized place to triage, track, and remediate issues detected by Datadog and third-party integrations. After you create a case, you can assign it to a user, establishing clear lines of ownership that persist throughout the lifespan of the case. 

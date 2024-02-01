@@ -7,6 +7,8 @@ further_reading:
   text: "Case settings"
 ---
 
+{{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview.png" alt="Case Management page showing view of all cases, option to select status, and view assigned members" style="width:100%;" >}}
+
 ## Overview
 
 On the [Case Management page][1], cases can be sorted by creation date, status, or priority. By default, cases are sorted by creation date. 
@@ -93,6 +95,8 @@ From an individual case:
 - Close out the case: Let the team know that no further action is needed. Update the status of the case to closed.
 
 ## Case Analytics
+
+{{< img src="/service_management/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="Graph editor showing the cases options selected as a data source" style="width:100%;" >}}
 
 Case Analytics is a queryable data source for aggregated case statistics. You can query these analytics in a variety of graph widgets in both [Dashboards][6] and [Notebooks][2] to analyze team productivity and identify patterns in issues. 
 
