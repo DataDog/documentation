@@ -13,6 +13,8 @@ Cases can be created [manually](#manual-case-creation) or [automatically](#autom
 
 ## Manual case creation
 
+{{< img src="/service_management/case_management/create/manual_case_creation.png" alt="Case Management page with the New Case modal opened to create a case manually" style="width:100%;" >}}
+
 On the [Case Management page][1], click **New Case**.
 1. Select a project to create the case in. A case can only belong to a single project. 
 1. Fill in a title for the case.
@@ -30,13 +32,14 @@ You can also create cases manually from the following products:
 | Event Management (raw events) | Click into an event to open its side panel. Click the **Escalate** dropdown menu and select **Create a case**. |
 | Cloud Cost Management | Click into a cost recommendation to open its side panel. Then, click **Create case**. |
 | Sensitive Data Scanner | Click **Create case** next to a Sensitive Data Scanner issue.  |
+| Slack  | Click the **Create Case** button under a monitor notification in Slack.  |
 
 ## Automatic case creation
 
 Configure the following products to automatically create cases:
 | Product | Instructions    | 
 | ------  | ----------- | 
-| Monitors | When creating a monitor, include `@case-{project_handle}` in the **Notify your team** or  **Say what's happening** section. Cases are automatically created when the monitor transitions to a different status. To only create cases for certain monitor transitions, use [conditional variables][3]. As an example, to create cases only when a monitor triggers, wrap the `@case` mention with `{{#is_alert}}` and `{{/is_alert}}`.   |
+| Monitors | When creating a monitor, include `@case-{project_handle}` in the **Notify your team** or  **Say what's happening** section. Cases are automatically created when the monitor transitions to a different status. To only create cases for certain monitor transitions, use [conditional variables][3]. As an example, to create cases only when a monitor triggers, wrap the `@case` mention with `{{#is_alert}}` and `{{/is_alert}}`.  <br><br> Navigate to the [Project Settings page][4], click **Integrations** > **Datadog Monitors**, and click on the toggle to get your @case-<project_handle>. |
 | Event Management (Correlations) | In Event Management, correlations configured to aggregate events from Datadog and third-party sources automatically create cases.   |
 | Workflow Automation | 1. In a new or existing workflow, add a step in the Workflow builder and search for "Case Management."<br> 2. Select the **Create Case** action.<br> 3. If the workflow is configured to run based on a monitor or security signal trigger, add the workflow handle to the desired resources.|
 
@@ -47,3 +50,4 @@ Configure the following products to automatically create cases:
 [1]: https://app.datadoghq.com/cases
 [2]: /monitors/manage/status/
 [3]: /monitors/notify/variables/?tab=is_alert#conditional-variables
+[4]: https://app.datadoghq.com/cases/settings
