@@ -35,13 +35,13 @@ Supported Agent versions
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
-Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][2]).
+Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 Proxies, load balancers, and connection poolers
 : The Datadog Agent must connect directly to the host being monitored, preferably through the instance endpoint. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
 Data security considerations
-: See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
+: See [Sensitive information][3] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
 ## Configure MySQL settings
 
@@ -52,9 +52,6 @@ Configure the following in the [server parameters][3] and then **restart the ser
 | `performance_schema` | `ON` | Required. Enables the [Performance Schema][1]. |
 
 The agent also requires `performance_schema.events_statements_*` consumers to be set to `ON` to collect currently running queries. By default, Azure MySQL Database enables performance schema consumers so no additional configuration is required.
-
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-[2]: /agent/basic_agent_usage#agent-overhead
 
 ## Grant the Agent access
 
@@ -334,3 +331,4 @@ If you have installed and configured the integrations and Agent as described, an
 [7]: https://app.datadoghq.com/databases
 [8]: /integrations/azure_db_for_mysql
 [9]: /database_monitoring/setup_mysql/troubleshooting
+[10]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
