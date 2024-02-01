@@ -77,7 +77,7 @@ The Downtime scope query follows the same common [Search Syntax][19] that many o
 | `host:*-prod-cluster`       | Mutes any notification that relates to a host whose name is suffixed with `-prod-cluster`. |
 | `host:*-prod-cluster`       | Mutes any notification that relates to a host whose name is suffixed with `-prod-cluster`. |
 | `service:web-store AND -env:prod`       | Mutes any notification that relates to the `web-store` service that is **not** running on the `prod` environment. |
-| `service:web-store env:prod`       | Mutes any notification that relates to the `web-store` service **or** the `prod` host. |
+| `service:web-store env:prod`       | Mutes any notification that relates to the `web-store` service **or** the `prod` environment. |
 
 #### Downtime scope limitations
 There are a few limitations that are **not supported** which include:
