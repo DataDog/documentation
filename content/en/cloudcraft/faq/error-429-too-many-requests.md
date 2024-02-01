@@ -1,5 +1,5 @@
 ---
-title: Why do I get error 429 Too Many Requests when using the API?
+title: Why do I get a 429 Too Many Requests error when using the API?
 kind: faq
 ---
 
