@@ -16,7 +16,7 @@ further_reading:
   text: "Limit data collection to a subset of containers only"
 ---
 
-The Agent can create and assign tags to all metrics, traces, and logs, traces, and logs emitted by a Pod, based on its labels or annotations.
+The Agent can create and assign tags to all metrics, traces, and logs emitted by a Pod, based on its labels or annotations.
 
 If you are running the Agent as a binary on a host, configure your tag extractions with the [Agent](?tab=agent) tab instructions. If you are running the Agent as a container in your Kubernetes cluster, configure your tag extraction with the [Containerized Agent](?tab=containerizedagent) tab instructions.
 
@@ -78,7 +78,7 @@ The Agent can attach Kubernetes environment information as "host tags".
 
 </div>
 
-## Tag Autodiscovery
+## Tag autodiscovery
 
 Starting with Agent v6.10+, the Agent can autodiscover tags from Pod annotations. It allows the Agent to associate tags to all data emitted by the entire pods or an individual container within this pod.
 
@@ -104,10 +104,10 @@ Starting with Agent v7.17+, the Agent can Autodiscover tags from Docker labels. 
 com.datadoghq.ad.tags: '["<TAG_KEY>:TAG_VALUE", "<TAG_KEY_1>:<TAG_VALUE_1>"]'
 ```
 
-## Tag Extraction
+## Tag extraction
 ### Node labels as tags
 
-Starting with Agent v6.0+, the Agent can collect labels for a given node and use them as tags to attach to all metrics, traces, and logs, traces, and logs emitted associated with this `host` in Datadog:
+Starting with Agent v6.0+, the Agent can collect labels for a given node and use them as tags to attach to all metrics, traces, and logs emitted associated with this `host` in Datadog:
 
 {{< tabs >}}
 {{% tab "Operator" %}}
