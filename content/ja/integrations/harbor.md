@@ -33,7 +33,7 @@ draft: false
 git_integration_title: harbor
 integration_id: harbor
 integration_title: Harbor
-integration_version: 2.2.0
+integration_version: 2.3.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -170,6 +170,6 @@ Harbor インテグレーションには、イベントは含まれません。
 
 
 [1]: https://goharbor.io
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/
