@@ -1935,16 +1935,21 @@ main:
     parent: cloud_cost_top_level
     identifier: ccm_custom
     weight: 4
+  - name: SaaS Cost Integrations
+    url: cloud_cost_management/saas_costs
+    parent: cloud_cost_top_level
+    identifier: ccm_saas_cost_integrations
+    weight: 5
   - name: Tag Pipelines
     url: cloud_cost_management/tag_pipelines
     parent: cloud_cost_top_level
     identifier: tag_pipelines
-    weight: 5
+    weight: 6
   - name: Container Cost Allocation
     url: cloud_cost_management/container_cost_allocation
     parent: cloud_cost_top_level
     identifier: container_cost_allocation
-    weight: 6
+    weight: 7
   - name: Network Monitoring
     url: network_monitoring/
     pre: network
