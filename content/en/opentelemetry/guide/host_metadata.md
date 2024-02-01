@@ -1,5 +1,5 @@
 ---
-title: Mapping OpenTelemetry semantic conventions to Infrastructure List host information
+title: Mapping OpenTelemetry Semantic Conventions to Infrastructure List Host Information
 kind: guide
 further_reading:
 - link: "/opentelemetry/"
@@ -7,25 +7,25 @@ further_reading:
   text: "OpenTelemetry Support in Datadog"
 ---
 
-<div class="alert alert-warning">
-This feature is in public beta. If you have any feedback, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.
+<div class="alert alert-info">
+This feature is in beta. If you have any feedback, contact <a href="/help/">Datadog support</a>.
 </div>
 
 ## Overview
 
-The Datadog exporter supports sending system information about your hosts to Datadog, which you can see at the [Infrastructure List][6] tab. You can send this information in OTLP through the ['Resource' field][1] as part of any of the existing signals. This is supported under any [deployment pattern][9] including gateway deploys. 
+The Datadog exporter supports sending system information about your hosts to Datadog, which you can see in the [Infrastructure List][6]. You can send this information in OTLP through the ['Resource' field][1] as part of any of the existing signals. This is supported under any [deployment pattern][9] including gateway deploys. 
 
-We use [OpenTelemetry semantic conventions][2] to recognize system information about your hosts. You can use the [recommended setup for host metrics][3] to send the necessary metrics and resource attributes to Datadog. Alternatively, you can manually send this information in the way that best fits your infrastructure.
+Datadog uses [OpenTelemetry semantic conventions][2] to recognize system information about your hosts. Follow the instructions for [setting up for host metrics][3] to send the necessary metrics and resource attributes to Datadog. Alternatively, you can manually send this information in the way that best fits your infrastructure.
 
-During the **public beta** you need to opt-in by setting the `datadog.host.use_as_metadata` resource attribute to `true` in all OTLP payloads with information relevant about hosts.
+## Opting in to the feature
 
-## How to opt-in to this feature?
+To opt into the **public beta**, set the `datadog.host.use_as_metadata` resource attribute to `true` in all OTLP payloads that contain information about hosts.
 
-Resources are used to populate the infrastructure list information if they have a [host-identifying attribute][10] and the `datadog.host.use_as_metadata` attribute set to `true`.
+Resources populate the infrastructure list information if they have a [host-identifying attribute][10] and the `datadog.host.use_as_metadata` attribute set to `true`.
 
-To explicitly declare what resources should be used for metadata, add a boolean-valued resource attribute called `datadog.host.use_as_metadata` to all resources that have relevant host information.
+To explicitly declare what resources to use for metadata, add the Boolean resource attribute `datadog.host.use_as_metadata` to all resources that have relevant host information.
 
-For example, to set this for all resources in metrics, traces, and logs, you can use the [transform processor][7] with the following configuration:
+For example, to set this for all resources in metrics, traces, and logs, use the [transform processor][7] with the following configuration:
 
 ```yaml
 processors:
@@ -44,13 +44,13 @@ processors:
           - set(attributes["datadog.host.use_as_metadata"], true)
 ```
 
-Lastly, add this processor to the `processors` list of all your pipelines.
+Add this processor to the `processors` list of all your pipelines.
 
-You also need to explicitly tag all your resources with a host-identifying attribute. This is done by default by the [recommended setup for host metrics][3].
+You must explicitly tag all your resources with a host-identifying attribute. This is done by default by the [recommended setup for host metrics][3].
 
-## What conventions are supported?
+## Supported conventions
 
-The Datadog exporter supports both resource attribute-level semantic conventions as well as system metrics-level semantic conventions. Supported resource attribute semantic conventions are mainly under [the `host.` namespace][4] and [the `os.` namespace][8]. All supported system metrics-level semantic conventions are under [the `system.` namespace][5].
+The Datadog exporter supports both resource attribute-level semantic conventions and system metrics-level semantic conventions. Supported resource attribute semantic conventions are mainly under [the `host.` namespace][4] and [the `os.` namespace][8]. All supported system metrics-level semantic conventions are under [the `system.` namespace][5].
 
 ### General system conventions
 
@@ -80,11 +80,11 @@ The Datadog exporter supports both resource attribute-level semantic conventions
 | `host.ip`           | Resource attribute | IP Address & IPv6 Address |
 | `host.mac`          | Resource attribute | Mac Address               |
 
-### How to collect these conventions with the OpenTelemetry Collector?
+### Collecting these conventions with the OpenTelemetry Collector
 
-To collect these conventions with the OpenTelemetry Collector, you need to set up the [recommended setup for host metrics][3]. The host metrics receiver collects all the relevant metrics, while the resource detection processor collects all relevant resource attributes.
+To collect these conventions with the OpenTelemetry Collector, set up the [recommended setup for host metrics][3]. The host metrics receiver collects all the relevant metrics, while the resource detection processor collects all relevant resource attributes.
 
-**Note:** You need to add these processors and receivers in the Collector running on the host that you want to monitor. A gateway host is not able to collect this information from remote hosts.
+**Note:** You need to add these processors and receivers in the Collector running on the host that you want to monitor. A gateway host does not collect this information from remote hosts.
 
 ## Further reading
 
