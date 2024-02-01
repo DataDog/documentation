@@ -1,6 +1,6 @@
 ---
 title: What AWS components are supported?
-kind: guide
+kind: faq
 ---
 
 The list below includes all the AWS components that Cloudcraft supports.

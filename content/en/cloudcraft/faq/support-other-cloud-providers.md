@@ -1,6 +1,6 @@
 ---
 title: Does Cloudcraft support other cloud providers?
-kind: guide
+kind: faq
 ---
 
 Yes. Cloudcraft supports both AWS and Microsoft Azure.
