@@ -21,7 +21,7 @@ Having Historical Metrics Ingestion enabled on your metrics can be helpful for a
 
 ## What is Historical Metrics Ingestion?
 
-{{< img src="metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_1_240105.png" alt="Diagram showing the ingestion flow for Historical Metrics enabled and disabled" >}}
+{{< img src="metrics/custom_metrics/historical_metrics/diagram_historical_metrics_ingestion_intro.png" alt="Diagram showing the ingestion flow for Historical Metrics enabled" >}}
 
 Datadog classifies *historical metrics* as metric points with timestamps that are older than an hour relative to the time of submission. If Historical Metrics Ingestion is not enabled, metrics older than an hour from submission are not ingested.
 
