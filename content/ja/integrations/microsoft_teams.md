@@ -53,10 +53,6 @@ Datadog モニターから、[`@-notification` 機能][2]を使用して、Micro
 
 ## Microsoft Teams における Datadog Incident Management
 
-<div class="alert alert-warning">
-Datadog Incident Management for Microsoft Teams は公開ベータ版で、US1 サイトでのみ利用可能です。
-</div>
-
 ### アカウント設定
 
 まず、Microsoft Teams に Datadog アプリをインストールします。
