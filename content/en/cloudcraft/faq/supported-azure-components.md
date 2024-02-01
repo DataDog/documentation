@@ -3,7 +3,7 @@ title: Which Azure components are supported?
 kind: faq
 ---
 
-The list below includes all Microsoft Azure components Cloudcraft supports.
+Cloudcraft supports the following Microsoft Azure components:
 
 - AKS Clusters
 - AKS Pods
@@ -19,9 +19,9 @@ The list below includes all Microsoft Azure components Cloudcraft supports.
 - Function App
 - Load Balancers
 - Network Security Groups
-- Service Bus (Namespaces, Queues, Topics)
+- Service Bus (Namespaces, Queues, and Topics)
 - SQL Databases
-- Storage Accounts (Blob, File Shares, Queues, Tables)
+- Storage Accounts (Blob, File Shares, Queues, and Tables)
 - Subnets
 - Virtual Machines
 - Virtual Machine Scale Sets
@@ -29,9 +29,8 @@ The list below includes all Microsoft Azure components Cloudcraft supports.
 - VPN Gateways
 - Web Apps
 
-Assuming we do not support a component you are looking for, the **Design** tab lets you represent anything using blocks, icons, images, and text labels.
+For components that aren't supported, you can use the **Design** tab to create your own using blocks, icons, images, and text labels.
 
-You can also [reach out to our support team][1] or [our sales team][2] to help us identify which components you need the most.
+You can also [contact our support team][1] to help us identify which components you need the most.
 
 [1]: https://app.cloudcraft.co/app/support
-[2]: mailto:cloudcraft-sales@datadoghq.com
