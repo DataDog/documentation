@@ -440,8 +440,6 @@ Historical Metrics Ingestion has varying latency depending on how far in the pas
 | +30 days             | +14 hours latency                     |
 
 
-{{< img src="metrics/custom_metrics/historical_metrics/diagram_historical-metrics-ingestion_3_240105.png" alt="Diagram showing how Historical Metrics can take longer to ingest depending on the metric timestamp">}}
-
 ## Historical Metrics Ingestion billing
 
 Historical Metrics are billed under the Custom Metrics billing SKU. Billable custom metrics are determined by the timestamp of the metrics submitted, regardless of whether they have a timestamp of today or 15 months into the past. As long as that metric name and tag value combination is actively reporting ANY value (regardless of the timestamp), it would be considered active in the hour that it was submitted. For more information, see the [Custom Metrics billing][3] documentation.
