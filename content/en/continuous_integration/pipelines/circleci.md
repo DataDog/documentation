@@ -84,7 +84,7 @@ To display and filter the teams associated with your pipelines, add `team:<your-
 
 ### Enable log collection
 
-The DataDog CircleCI integration allows to collect logs from your finished CircleCI jobs and forward them to DataDog.
+The Datadog CircleCI integration collects logs from your finished CircleCI jobs and forwards them to Datadog.
 
 To enable this feature, follow [this guide][11] to install and configure the DataDog CircleCI integration.
 
