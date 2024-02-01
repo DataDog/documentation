@@ -24,7 +24,10 @@ func main() {
 	}
 
 	// List all blueprints in an account.
-	account, _, err := client.AWS.Delete(context.Background(), "fe3e5b29-a0e8-41ca-91e2-02a0441b1d33")
+	account, _, err := client.AWS.Delete(
+		context.Background(),
+		"fe3e5b29-a0e8-41ca-91e2-02a0441b1d33"
+	)
 	if err != nil {
 		log.Fatal(err)
 	}

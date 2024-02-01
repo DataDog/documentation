@@ -24,10 +24,13 @@ func main() {
 	}
 
 	// List all blueprints in an account.
-	account, _, err := client.AWS.Update(context.Background(), give: &cloudcraft.AWSAccount{
-    ID:   "fe3e5b29-a0e8-41ca-91e2-02a0441b1d33",
-    Name: "My updated AWS account",
-  })
+	account, _, err := client.AWS.Update(
+		context.Background(),
+		&cloudcraft.AWSAccount{
+			ID:   "fe3e5b29-a0e8-41ca-91e2-02a0441b1d33",
+			Name: "My updated AWS account",
+		}
+	)
 	if err != nil {
 		log.Fatal(err)
 	}

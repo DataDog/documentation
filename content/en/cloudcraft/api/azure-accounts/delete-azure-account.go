@@ -23,7 +23,10 @@ func main() {
 		log.Fatal(err)
 	}
 
-	account, _, err := client.Azure.Delete(context.Background(), "4349ccdb-a2fd-4a89-a07b-48e3e330670b")
+	account, _, err := client.Azure.Delete(
+		context.Background(),
+		"4349ccdb-a2fd-4a89-a07b-48e3e330670b"
+	)
 	if err != nil {
 		log.Fatal(err)
 	}

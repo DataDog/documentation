@@ -24,9 +24,12 @@ func main() {
 	}
 
 	// List all blueprints in an account.
-	blueprint, _, err := client.Blueprint.Create(context.Background(), &cloudcraft.Blueprint{
-		Name: "My new blueprint",
-	})
+	blueprint, _, err := client.Blueprint.Create(
+		context.Background(),
+		&cloudcraft.Blueprint{
+			Name: "My new blueprint",
+		}
+	)
 	if err != nil {
 		log.Fatal(err)
 	}
