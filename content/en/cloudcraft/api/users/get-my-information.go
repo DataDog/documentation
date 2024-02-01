@@ -29,5 +29,5 @@ func main() {
 	}
 
 	// Print the name of the user.
-  log.Println(user.Name)
+	log.Println(user.Name)
 }

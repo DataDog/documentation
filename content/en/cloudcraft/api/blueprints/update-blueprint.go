@@ -24,13 +24,16 @@ func main() {
 	}
 
 	// List all blueprints in an account.
-	blueprint, err := client.Blueprint.Update(context.Background(), &cloudcraft.Blueprint{
-				Name: "My updated blueprint",
-  }, "")
+	blueprint, err := client.Blueprint.Update(
+		context.Background(),
+		&cloudcraft.Blueprint{
+			Name: "My updated blueprint",
+  	},
+	"")
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// Print the name of blueprint we updated
-  log.Println(blueprint.Name)
+	log.Println(blueprint.Name)
 }

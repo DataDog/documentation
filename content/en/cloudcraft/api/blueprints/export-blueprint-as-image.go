@@ -24,10 +24,15 @@ func main() {
 	}
 
 	// List all blueprints in an account.
-	image, _, err := client.Blueprint.ExportImage(context.Background(), "0f1a4e20-a887-4467-a37b-1bc7a3deb9a9", "png", &cloudcraft.ImageExportParams{
-    Width:  1920,
-    Height: 1080,
-  })
+	image, _, err := client.Blueprint.ExportImage(
+		context.Background(),
+		"0f1a4e20-a887-4467-a37b-1bc7a3deb9a9",
+		"png",
+		&cloudcraft.ImageExportParams{
+			Width:  1920,
+			Height: 1080,
+		}
+	)
 	if err != nil {
 		log.Fatal(err)
 	}

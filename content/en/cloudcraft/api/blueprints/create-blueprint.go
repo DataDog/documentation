@@ -32,5 +32,5 @@ func main() {
 	}
 
 	// Print the name of blueprint we created
-  log.Println(blueprint.Name)
+	log.Println(blueprint.Name)
 }

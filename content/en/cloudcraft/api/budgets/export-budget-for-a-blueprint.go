@@ -24,11 +24,16 @@ func main() {
 	}
 
 	// List all blueprints in an account.
-	blueprint, _, err := client.Blueprint.ExportBudget(context.Background(), "0f1a4e20-a887-4467-a37b-1bc7a3deb9a9", "csv", &cloudcraft.BudgetExportParams{
-    Currency: "USD",
-    Period:   "month",
-    Rate:     "monthly",
-  })
+	blueprint, _, err := client.Blueprint.ExportBudget(
+	  context.Background(),
+	  "0f1a4e20-a887-4467-a37b-1bc7a3deb9a9",
+	  "csv",
+	  &cloudcraft.BudgetExportParams{
+	  	  Currency: "USD",
+	  	  Period:   "month",
+	  	  Rate:     "monthly",
+	  }
+	)
 	if err != nil {
 		log.Fatal(err)
 	}

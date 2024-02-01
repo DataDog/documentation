@@ -24,11 +24,14 @@ func main() {
 	}
 
 	// get blueprint in an account.
-  blueprint, _, err := client.Blueprint.Get(context.Background(), "0f1a4e20-a887-4467-a37b-1bc7a3deb9a9")
+	blueprint, _, err := client.Blueprint.Get(
+		context.Background(),
+		"0f1a4e20-a887-4467-a37b-1bc7a3deb9a9"
+	)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// Print the name of the blueprint.
-  log.Println(blueprint.Name)
+	log.Println(blueprint.Name)
 }
