@@ -965,42 +965,42 @@ main:
     parent: cloudcraft
     weight: 8
   - name: AWS Accounts
-    url: 'cloudcraft/api/aws-accounts'
+    url: 'cloudcraft/api/aws-accounts/'
     identifier: cloudcraft_api_aws_accounts
     parent: cloudcraft_api
     weight: 1
   - name: List my aws accounts
-    url: 'cloudcraft/api/aws-accounts#list-my-aws-accounts'
+    url: 'cloudcraft/api/aws-accounts/#list-my-aws-accounts'
     identifier: cloudcraft_api_aws_accounts_list
     parent: cloudcraft_api_aws_accounts
     weight: 1
   - name: Add aws account
-    url: 'cloudcraft/api/aws-accounts#add-aws-account'
+    url: 'cloudcraft/api/aws-accounts/#add-aws-account'
     identifier: cloudcraft_api_aws_accounts_add
     parent: cloudcraft_api_aws_accounts
     weight: 2
   - name: Delete aws account
-    url: 'cloudcraft/api/aws-accounts#delete-aws-account'
+    url: 'cloudcraft/api/aws-accounts/#delete-aws-account'
     identifier: cloudcraft_api_aws_accounts_delete
     parent: cloudcraft_api_aws_accounts
     weight: 3
   - name: Update aws account
-    url: 'cloudcraft/api/aws-accounts#update-aws-account'
+    url: 'cloudcraft/api/aws-accounts/#update-aws-account'
     identifier: cloudcraft_api_aws_accounts_update
     parent: cloudcraft_api_aws_accounts
     weight: 4
   - name: Snapshot aws account
-    url: 'cloudcraft/api/aws-accounts#snapshot-aws-account'
+    url: 'cloudcraft/api/aws-accounts/#snapshot-aws-account'
     identifier: cloudcraft_api_aws_accounts_snapshot
     parent: cloudcraft_api_aws_accounts
     weight: 5
   - name: Get my aws iam role parameters
-    url: 'cloudcraft/api/aws-accounts#get-my-aws-iam-role-parameters'
+    url: 'cloudcraft/api/aws-accounts/#get-my-aws-iam-role-parameters'
     identifier: cloudcraft_api_aws_accounts_iam
     parent: cloudcraft_api_aws_accounts
     weight: 6
   - name: Azure Accounts
-    url: 'cloudcraft/api/azure-accounts'
+    url: 'cloudcraft/api/azure-accounts/'
     identifier: cloudcraft_api_azure_accounts
     parent: cloudcraft_api
     weight: 2
@@ -1030,57 +1030,57 @@ main:
     parent: cloudcraft_api_azure_accounts
     weight: 5
   - name: Blueprints
-    url: 'cloudcraft/api/blueprints'
+    url: 'cloudcraft/api/blueprints/'
     identifier: cloudcraft_api_blueprints
     parent: cloudcraft_api
     weight: 3
   - name: List my blueprints
-    url: 'cloudcraft/api/blueprints#list-my-blueprints'
+    url: 'cloudcraft/api/blueprints/#list-my-blueprints'
     identifier: cloudcraft_api_blueprints_list
     parent: cloudcraft_api_blueprints
     weight: 1
   - name: Create blueprint
-    url: 'cloudcraft/api/blueprints#create-blueprint'
+    url: 'cloudcraft/api/blueprints/#create-blueprint'
     identifier: cloudcraft_api_blueprints_create
     parent: cloudcraft_api_blueprints
     weight: 2
   - name: Delete blueprint
-    url: 'cloudcraft/api/blueprints#delete-blueprint'
+    url: 'cloudcraft/api/blueprints/#delete-blueprint'
     identifier: cloudcraft_api_blueprints_delete
     parent: cloudcraft_api_blueprints
     weight: 3
   - name: Retrieve blueprint
-    url: 'cloudcraft/api/blueprints#retrieve-blueprint'
+    url: 'cloudcraft/api/blueprints/#retrieve-blueprint'
     identifier: cloudcraft_api_blueprints_retrieve
     parent: cloudcraft_api_blueprints
     weight: 4
   - name: Update blueprint
-    url: 'cloudcraft/api/blueprints#update-blueprint'
+    url: 'cloudcraft/api/blueprints/#update-blueprint'
     identifier: cloudcraft_api_blueprints_update
     parent: cloudcraft_api_blueprints
     weight: 5
   - name: Export blueprint as image
-    url: 'cloudcraft/api/blueprints#export-blueprint-as-image'
+    url: 'cloudcraft/api/blueprints/#export-blueprint-as-image'
     identifier: cloudcraft_api_blueprints_export
     parent: cloudcraft_api_blueprints
     weight: 6
   - name: Budgets
-    url: 'cloudcraft/api/budgets'
+    url: 'cloudcraft/api/budgets/'
     identifier: cloudcraft_api_budgets
     parent: cloudcraft_api
     weight: 4
   - name: Export budget for a blueprint
-    url: 'cloudcraft/api/budgets#export-budget-for-a-blueprint'
+    url: 'cloudcraft/api/budgets/#export-budget-for-a-blueprint'
     identifier: cloudcraft_api_budgets_export
     parent: cloudcraft_api_budgets
     weight: 1
   - name: Users
-    url: 'cloudcraft/api/users'
+    url: 'cloudcraft/api/users/'
     identifier: cloudcraft_api_users
     parent: cloudcraft_api
     weight: 5
   - name: Get my information
-    url: 'cloudcraft/api/users#get-my-information'
+    url: 'cloudcraft/api/users/#get-my-information'
     identifier: cloudcraft_api_users_info
     parent: cloudcraft_api_users
     weight: 1
