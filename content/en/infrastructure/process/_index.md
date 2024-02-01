@@ -81,9 +81,52 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 
 [1]: /agent/docker/#run-the-docker-agent
 {{% /tab %}}
-{{% tab "Kubernetes" %}}
+{{% tab "Helm" %}}
 
-In the [dd-agent.yaml][1] manifest used to create the Daemonset, add the following environmental variables, volume mount, and volume:
+Update your [datadog-values.yaml][1] file with the following process collection configuration:
+
+```yaml
+datadog:
+    # (...)
+    processAgent:
+        enabled: true
+        processCollection: true
+```
+
+Then upgrade your Helm chart:
+
+```shell
+helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
+```
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "Datadog Operator" %}}
+
+In your `datadog-agent.yaml`, set `features.liveProcessCollection.enabled` to `true`.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+
+  features:
+    liveProcessCollection:
+      enabled: true
+```
+
+{{% k8s-operator-redeploy %}}
+
+[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+{{% /tab %}}
+{{% tab "Kubernetes (Manual)" %}}
+
+In the `datadog-agent.yaml` manifest used to create the DaemonSet, add the following environmental variables, volume mount, and volume:
 
 ```yaml
  env:
@@ -99,29 +142,12 @@ In the [dd-agent.yaml][1] manifest used to create the Daemonset, add the followi
       name: passwd
 ```
 
-See the standard [Daemonset installation][2] and the [Docker Agent][3] information pages for further documentation.
+See the standard [DaemonSet installation][1] and the [Docker Agent][2] information pages for further documentation.
 
 **Note**: Running the Agent as a container still allows you to collect host processes.
 
-
-[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
-[2]: /agent/kubernetes/
-[3]: /agent/docker/#run-the-docker-agent
-{{% /tab %}}
-{{% tab "Helm" %}}
-
-Update your [datadog-values.yaml][1] file with the following process collection configuration, then upgrade your Datadog Helm chart:
-
-```yaml
-datadog:
-    # (...)
-    processAgent:
-        enabled: true
-        processCollection: true
-```
-
-
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+[1]: /containers/guide/kubernetes_daemonset
+[2]: /agent/docker/#run-the-docker-agent
 {{% /tab %}}
 {{% tab "AWS ECS Fargate" %}}
 
