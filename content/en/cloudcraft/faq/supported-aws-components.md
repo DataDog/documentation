@@ -3,9 +3,9 @@ title: What AWS components are supported?
 kind: faq
 ---
 
-The list below includes all the AWS components that Cloudcraft supports.
+Cloudcraft supports the following AWS components:
 
-- API Gateways (HTTP, REST & WebSocket APIs)
+- API Gateways (HTTP, REST, and WebSocket APIs)
 - Auto Scaling Groups
 - Availability Zones
 - CloudFront Distributions
@@ -14,8 +14,8 @@ The list below includes all the AWS components that Cloudcraft supports.
 - DocumentDB
 - DynamoDB
 - EBS
-- EC2 (On-Demand, Reserved & Spot Instances)
-- ECR (Private & Public Repositories)
+- EC2 (On-Demand, Reserved, and Spot Instances)
+- ECR (Private and Public Repositories)
 - ECS Clusters
 - ECS Services
 - ECS Tasks (including Fargate)
