@@ -10,6 +10,7 @@
   {{ $path := .path }}
   {{ $pathMethod := .pathMethod }}
   {{ $summary := .summary }}
+  {{ $page := .page }}
 
   {{ $payload := "" }}
   {{ with .pathDetails.requestBody }}
@@ -26,8 +27,16 @@
   <div class="code-snippet-wrapper js-code-block" data-code-lang-block="{{ $lang | lower }}" >
     <div class="code-snippet">
       <div class="highlight">
-        {{- $partialPath := (printf "api/openapi-code-%s.html" ($lang | lower)) -}}
-        {{- partial $partialPath (dict "payload" ($payload | safeHTML) "path" $path "method" $pathMethod ) -}}
+        {{- if eq $lang "go" -}}
+          {{ with $page.Resources.Match (print $summary ".go") }}
+            {{ range . }}
+                {{- highlight .Content "golang" -}}
+            {{ end }}
+          {{ end }}
+        {{- else -}}
+          {{- $partialPath := (printf "api/openapi-code-%s.html" ($lang | lower)) -}}
+          {{- partial $partialPath (dict "payload" ($payload | safeHTML) "path" $path "method" $pathMethod ) -}}
+        {{- end -}}
       </div>
     </div>
   </div>

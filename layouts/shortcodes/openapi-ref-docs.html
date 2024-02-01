@@ -56,7 +56,7 @@ $openapi variable declaration at the beginning with: {{/*{{ $openapi := .Site.Da
                   {{ partial "api/response.html" (dict "responses" $pathDetails.responses "operationid" $pathDetails.operationId "version" "v1") }}
 
                   <!-- code example -->
-                  {{ partial "api/openapi-code-example.html" (dict "pathDetails" $pathDetails "pathMethod" $pathMethod "path" $path "summary" ($pathDetails.summary | anchorize)) }}
+                  {{ partial "api/openapi-code-example.html" (dict "page" $.Page "pathDetails" $pathDetails "pathMethod" $pathMethod "path" $path "summary" ($pathDetails.summary | anchorize)) }}
                 </div>
               </div>
             </div>
