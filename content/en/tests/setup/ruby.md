@@ -257,6 +257,8 @@ The following is a list of the most important configuration settings that can be
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][9].
+
 The following environment variable can be used to configure the location of the Datadog Agent:
 
 `DD_TRACE_AGENT_URL`
@@ -307,3 +309,4 @@ For the full list of available instrumentation methods, see the [`ddtrace` docum
 [6]: /tracing/trace_collection/library_config/ruby/?tab=containers#configuration
 [7]: /continuous_integration/guides/add_custom_metrics/?tab=ruby
 [8]: /tracing/trace_collection/dd_libraries/ruby/#integration-instrumentation
+[9]: /getting_started/tagging/unified_service_tagging

@@ -138,7 +138,6 @@
 <span class="o">-H</span> <span class="s1">"{{ $securitySchemes.apiKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.apiKeyAuth "x-env-name" -}} }</span>"</span> \
 <span class="o">-H</span> <span class="s1">"{{ $securitySchemes.appKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.appKeyAuth "x-env-name" -}} }</span>"</span>
 {{- end -}}
-
 {{- /* Render binary data (usually compressed) */ -}}
 {{- if gt (len $contentEncoding) 0 -}}
 {{- if eq $contentEncoding "gzip" -}}
@@ -147,6 +146,14 @@
 {{- else if eq $contentEncoding "deflate" -}}
 {{ " \\" }}
 <span class="o">--data-binary</span> <span class="n">@-</span>
+{{- end -}}
+{{- else if eq .contentType "multipart/form-data" -}}
+{{ " \\" }}
+{{ $items := (index $endpoint.action.requestBody.content "multipart/form-data").schema.properties -}}
+{{- $i := 0 -}}
+{{- range $k, $prop := $items -}}
+<span class="o">-F</span> <span class="n">{{ $k }}={{- if eq ($prop.format | default "") "binary" -}}@{{- end -}}{{- $prop.type -}}</span>{{ if ne $i (sub (len $items) 1) }} \{{ end }}
+{{- $i = add $i 1 -}}
 {{- end -}}
 {{ else if (or ($body) ($endpoint.action.requestBody)) }}
 {{- /* Render requestBody example JSON "-d @- << EOF ... EOF" */ -}}

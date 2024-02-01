@@ -29,15 +29,17 @@ further_reading:
 
 ## Compatibility
 
-Supported languages:
+Supported frameworks:
 
-| Language | Version |
+| Framework | Version |
 |---|---|
 | .NET Framework | >= 4.6.1 |
 | .NET Core | >= 2.1 |
 | .NET Core | >= 3.1 |
+| .NET | >= 5 |
 | .NET | >= 6 |
 | .NET | >= 7 |
+| .NET | >= 8 |
 
 Supported test frameworks:
 
@@ -141,7 +143,7 @@ The following list shows the default values for key configuration settings:
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-All other [Datadog Tracer configuration][7] options can also be used.
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][17]. All other [Datadog Tracer configuration][7] options can also be used.
 
 ### Adding custom tags to tests
 
@@ -844,3 +846,4 @@ Always call `module.Close()` or `module.CloseAsync()` at the end so that all the
 [14]: https://www.nuget.org/packages/Datadog.Trace
 [15]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [16]: /continuous_integration/intelligent_test_runner/
+[17]: /getting_started/tagging/unified_service_tagging

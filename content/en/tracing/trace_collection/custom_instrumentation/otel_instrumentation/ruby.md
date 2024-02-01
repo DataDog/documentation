@@ -50,7 +50,7 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 1. Add the following lines to your OpenTelemetry configuration file:
 
     ```ruby
-    require 'opentelemetry'
+    require 'opentelemetry/sdk'
     require 'datadog/opentelemetry'
     ```
 
