@@ -12,7 +12,7 @@ title: Guides sur les monitors
 
 {{< whatsnext desc="Alertes, downtimes et messages :" >}}
     {{< nextlink href="monitors/guide/troubleshooting-monitor-alerts" >}}Dépanner les alertes de monitor{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/template-variable-evaluation" >}}Évaluer des template variables{< /nextlink >}}
+    {{< nextlink href="monitors/guide/template-variable-evaluation" >}}Évaluer des template variables{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-for-value-within-a-range" >}}Surveillance de plages{{< /nextlink >}}
     {{< nextlink href="monitors/guide/suppress-alert-with-downtimes" >}}Désactiver des alertes avec des downtimes{{< /nextlink >}}
     {{< nextlink href="/monitors/guide/scoping_downtimes" >}}Limiter la portée des downtimes{{< /nextlink >}}
@@ -25,8 +25,8 @@ title: Guides sur les monitors
     {{< nextlink href="monitors/guide/adjusting-no-data-alerts-for-metric-monitors" >}}Modifier la configuration des alertes avec un statut No Data pour les monitors basés sur des métriques{{< /nextlink >}}
     {{< nextlink href="monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime" >}}Empêcher des monitors de générer des alertes pendant un downtime{{< /nextlink >}}
     {{< nextlink href="monitors/guide/reduce-alert-flapping" >}}Limiter le bagottement des alertes{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitoring-sparse-metrics" >}}Surveiller les métriques creuses{{< /nextlink >}}
 {{< /whatsnext >}}
-    {{< nextlink href="monitors/guide/monitoring-sparse-metrics" >}}Surveiller les métriques creuses{{< /nextlink >}}{{< /whatsnext >}}
 
 {{< whatsnext desc="API :" >}}
     {{< nextlink href="monitors/guide/monitor_api_options" >}}Options de l'API Monitor{{< /nextlink >}}
@@ -46,7 +46,7 @@ title: Guides sur les monitors
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Interrogation de métriques :" >}}
-    {{< nextlink href="/monitors/guide/custom_schedules" >}}Ajouter des calendriers custom pour personnaliser la fréquence d'évaluation de monitors{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/custom_schedules" >}}Ajouter des calendriers custom pour personnaliser la fréquence d'évaluation de monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-arithmetic-and-sparse-metrics" >}}Surveillance des métriques arithmétiques et creuses{{< /nextlink >}}
     {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() dans les évaluations de monitors{{< /nextlink >}}
 {{< /whatsnext >}}

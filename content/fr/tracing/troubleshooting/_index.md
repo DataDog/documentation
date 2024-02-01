@@ -57,7 +57,7 @@ Datadog réduit les chaînes suivantes lorsqu'elles dépassent le nombre de cara
 | [clé de tag][8]    |  200       |
 | [valeur de tag][8]  |  5000      |
 
-En outre, une span ne peut pas inclure simultanément plus de 1 024 [tags de span][8].
+En outre, une span ne peut pas inclure simultanément plus de 1024 [tags de span][8].
 
 Sur un intervalle donné de 40 minutes, Datadog accepte les combinaisons d'éléments suivantes. Pour prendre en charge des volumes plus importants, contactez l'[assistance][1] afin de présenter votre scénario d'utilisation.
 
