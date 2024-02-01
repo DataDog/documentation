@@ -5,4 +5,6 @@ kind: faq
 
 Yes, we do.
 
-If you wish to receive a copy of our SOC 2 Type II Security, Availability & Confidentiality Report, do not hesitate to get in touch with us at [security@cloudcraft.co](mailto:security@cloudcraft.co).
+To receive a copy of the SOC 2 Type II Security, Availability & Confidentiality Report, send an email to [security@cloudcraft.co][1].
+
+[1]: mailto:security@cloudcraft.co
