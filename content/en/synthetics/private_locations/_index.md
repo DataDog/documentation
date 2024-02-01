@@ -531,13 +531,13 @@ Once the process is complete, click **Finish** on the installation completion pa
    
    - In a PowerShell Terminal:
 
-     ```shell
+     ```powershell
      Start-Process msiexec "/i datadog-synthetics-worker-<version>-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json";
      ```
    
    - Or in a Command Terminal:
   
-     ```shell
+     ```cmd
      msiexec /i datadog-synthetics-worker-1.43.0-beta.amd64.msi /quiet /qn WORKERCONFIG_FILEPATH=C:\ProgramData\Datadog-Synthetics\worker-config.json
      ```
 
