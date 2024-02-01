@@ -1,5 +1,5 @@
 ---
-title: Do you offer discounts for schools and non-profit organizations?
+title: Do you offer discounts for schools and nonprofit organizations?
 kind: faq
 ---
 
