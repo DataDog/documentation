@@ -4158,7 +4158,7 @@ main:
     identifier: rum_mobile_setup
     weight: 201
   - name: Advanced Configuration
-    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration
+    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_advanced
     weight: 202
