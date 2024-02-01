@@ -53,7 +53,7 @@ To send only a specific subset of logs to Datadog, use the `processing_rules` pa
 {{< tabs >}}
 {{% tab "Configuration file" %}}
 
-For example, to **filter OUT** logs that contain a Datadog email address, use the following `processing_rules`:
+For example, to **filter out** logs that contain a Datadog email address, use the following `processing_rules`:
 
 ```yaml
 logs:
@@ -143,7 +143,7 @@ spec:
 {{< tabs >}}
 {{% tab "Configuration file" %}}
 
-For example, to **filter IN** logs that contain a Datadog email address, use the following `processing_rules`:
+For example, to **filter in** logs that contain a Datadog email address, use the following `processing_rules`:
 
 ```yaml
 logs:
@@ -263,7 +263,7 @@ This replaces all matched groups with the value of the `replace_placeholder` par
 {{< tabs >}}
 {{% tab "Configuration file" %}}
 
-For example, to redact credit card numbers add the `mask_sequences` type in the `processing_rules` parameter:
+For example, use the `mask_sequences` type in the `processing_rules` parameter to redact credit card numbers:
 
 ```yaml
 logs:
