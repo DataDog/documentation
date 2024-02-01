@@ -7,9 +7,9 @@ further_reading:
   text: "Case settings"
 ---
 
-{{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview.png" alt="Case Management page showing view of all cases, option to select status, and view assigned members" style="width:100%;" >}}
-
 ## Overview
+
+{{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview.png" alt="Case Management page showing view of all cases, option to select status, and view assigned members" style="width:100%;" >}}
 
 On the [Case Management page][1], cases can be sorted by creation date, status, or priority. By default, cases are sorted by creation date. 
 
