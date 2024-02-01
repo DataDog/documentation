@@ -5,4 +5,6 @@ kind: faq
 
 Yes, we hire an external security company every year to run penetration and security tests in our platform.
 
-Please get in touch with us at [security@cloudcraft.co](mailto:security@cloudcraft.co) if you want a copy of latest report.
+To get a copy of the latest report, contact Cloudcraft at [security@cloudcraft.co][1].
+
+[1]: mailto:security@cloudcraft.co
