@@ -30,7 +30,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Enable/disable trace collection](#enabledisable-trace-collection)
 - [Connect logs and traces](#connect-logs-and-traces)
 - [Link errors to your source code](#link-errors-to-your-source-code)
-- [Submit custom metrics](#submit-custom-metrics)
+- [Submit custom metrics][27]
 - [Collect Profiling data (public beta)](#collect-profiling-data-public-beta)
 - [Send telemetry over PrivateLink or proxy](#send-telemetry-over-privatelink-or-proxy)
 - [Send telemetry to multiple Datadog organizations](#send-telemetry-to-multiple-datadog-organizations)
@@ -40,6 +40,7 @@ First, [install][1] Datadog Serverless Monitoring to begin collecting metrics, t
 - [Migrate to the Datadog Lambda extension](#migrate-to-the-datadog-lambda-extension)
 - [Migrating between x86 to arm64 with the Datadog Lambda Extension](#migrating-between-x86-to-arm64-with-the-datadog-lambda-extension)
 - [Configure the Datadog Lambda extension for local testing](#configure-the-datadog-lambda-extension-for-local-testing)
+- [Instrument AWS Lambda with the OpenTelemetry API](#instrument-aws-lambda-with-the-opentelemetry-api)
 - [Troubleshoot](#troubleshoot)
 - [Further Reading](#further-reading)
 
@@ -501,87 +502,11 @@ If you are using a runtime or custom logger that isn't supported, follow these s
 
 ## Link errors to your source code
 
-<div class="alert alert-info">This feature supports Go, Java, Python, and JavaScript.</div>
+[Datadog source code integration][26] allows you to link your telemetry (such as stack traces) to the source code of your Lambda functions in your Git repositories. 
 
-[Datadog source code integration][26] allows you to link your telemetry (such as stack traces) to the source code of your Lambda functions in GitHub. Follow the instructions below to enable the feature. **Note**: You must deploy from a local Git repository that is neither dirty nor ahead of remote.
+For instructions on setting up the source code integration on your serverless applications, see the [Embed Git information in your build artifacts section][101].
 
-{{< tabs >}}
-{{% tab "Datadog CLI" %}}
-
-Run `datadog-ci lambda instrument` with `--source-code-integration=true` to automatically send Git metadata in the current local directory and add the required tags to your Lambda functions.
-
-**Note**: You must set environment variable `DATADOG_API_KEY` for `datadog-ci` to upload Git metadata. `DATADOG_API_KEY` is also set on your Lambda functions to send telemetry unless you also have `DATADOG_API_KEY_SECRET_ARN` defined, which takes precedence over `DATADOG_API_KEY`.
-
-
-```sh
-# ... other required environment variables, such as DATADOG_SITE
-
-# required, to upload git metadata
-export DATADOG_API_KEY=<DATADOG_API_KEY>
-
-# optional, DATADOG_API_KEY is used if undefined
-export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
-
-datadog-ci lambda instrument \
-    --source-code-integration=true
-    # ... other required arguments, such as function names
-```
-{{% /tab %}}
-{{% tab "Serverless Framework" %}}
-
-With `enableSourceCodeIntegration` set to `true`, the Datadog serverless plugin automatically sends Git metadata in the current local directory and adds the required tags to your Lambda functions.
-
-**Note**: You must set the `apiKey` parameter for the plugin to upload Git metadata. `apiKey` is also set on your Lambda functions to send telemetry unless you also have `apiKeySecretArn` defined, which takes precedence over `apiKey`.
-
-```yaml
-custom:
-  datadog:
-    # ... other required parameters, such as the Datadog site
-    apiKey: <apiKey> # required, to upload git metadata
-    apiKeySecretArn: <apiKeySecretArn> # optional, apiKey will be used if undefined
-    enableSourceCodeIntegration: true # default is true
-```
-
-{{% /tab %}}
-{{% tab "AWS CDK" %}}
-
-Change your initialization function as follows to pass the gitHash value to the CDK stack:
-
-```typescript
-async function main() {
-  // Make sure to add @datadog/datadog-ci via your package manager
-  const datadogCi = require("@datadog/datadog-ci");
-  const gitHash = await datadogCi.gitMetadata.uploadGitCommitHash('{Datadog_API_Key}', '<SITE>')
-
-  const app = new cdk.App();
-  // Pass in the hash to the ExampleStack constructor
-  new ExampleStack(app, "ExampleStack", {}, gitHash);
-}
-```
-
-In your stack constructor, add an optional `gitHash` parameter, and call `addGitCommitMetadata()`:
-
-```typescript
-export class ExampleStack extends cdk.Stack {
-  constructor(scope: cdk.App, id: string, props?: cdk.StackProps, gitHash?: string) {
-    ...
-    ...
-    datadog.addGitCommitMetadata([<YOUR_FUNCTIONS>], gitHash)
-  }
-}
-```
-
-{{% /tab %}}
-{{% tab "Others" %}}
-
-1. Set the environment variable `DD_TAGS="git.commit.sha:<GIT_COMMIT_SHA>,git.repository_url=<REPOSITORY_URL>"` on your Lambda functions
-2. Run [datadog-ci git-metadata upload][1] in your CI pipeline to upload Git metadata
-3. Optionally, [install a GitHub App][2] to display inline source code snippets
-
-[1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
-[2]: https://app.datadoghq.com/integrations/github/
-{{% /tab %}}
-{{< /tabs >}}
+[101]: /integrations/guide/source-code-integration/?tab=go#serverless
 
 ## Collect Profiling data (public beta)
 
@@ -753,6 +678,14 @@ If you cannot use Layer Versions, Datadog recommends configuring the [Datadog Fo
 
 To test your Lambda function's container image locally with the Datadog Lambda extension installed, you need to set `DD_LOCAL_TEST` to `true` in your local testing environment. Otherwise, the extension waits for responses from the AWS Extensions API and blocks the invocation.
 
+## Instrument AWS Lambda with the OpenTelemetry API
+
+The Datadog tracing library, which is included in the Datadog Lambda Extension upon installation, accepts the spans and traces generated by OpenTelemetry-instrumented code, processes the telemetry, and sends it to Datadog.
+
+You can use this approach if, for example, your code has already been instrumented with the OpenTelemetry API. You may also use this approach if you want to instrument using vendor-agnostic code with the OpenTelemetry API while still gaining the benefits of using the Datadog tracing libraries.
+
+To instrument AWS Lambda with the OpenTelemetry API, set the environment variable `DD_TRACE_OTEL_ENABLED` to `true`. See [Custom instrumentation with the OpenTelemetry API][48] for more details.
+
 ## Troubleshoot
 
 If you have trouble configuring your installations, set the environment variable `DD_LOG_LEVEL` to `debug` for debugging logs. For additional troubleshooting tips, see the [serverless monitoring troubleshooting guide][39].
@@ -788,7 +721,7 @@ If you have trouble configuring your installations, set the environment variable
 [24]: /tracing/other_telemetry/connect_logs_and_traces/
 [25]: /logs/log_configuration/parsing/
 [26]: /integrations/guide/source-code-integration
-[27]: /serverless/custom_metrics
+[27]: /serverless/aws_lambda/metrics/#submit-custom-metrics
 [28]: /agent/guide/private-link/
 [29]: /getting_started/site/
 [30]: /agent/proxy/
@@ -809,3 +742,4 @@ If you have trouble configuring your installations, set the environment variable
 [45]: https://docs.datadoghq.com/tracing/trace_collection/library_config/
 [46]: https://docs.datadoghq.com/tracing/glossary/#services
 [47]: /logs/
+[48]: /tracing/trace_collection/otel_instrumentation/

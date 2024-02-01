@@ -6,7 +6,7 @@ further_reading:
   text: アプリケーションセキュリティの仕組み
 - link: /security/application_security/threats/
   tag: Documentation
-  text: Threat Monitoring and Protection
+  text: Threat Management
 - link: /security/application_security/risk_management/
   tag: Documentation
   text: Application Vulnerability Management

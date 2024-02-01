@@ -24,7 +24,7 @@ title: Splunk 環境で観測可能性パイプラインを設定する
 
 ## 概要
 
-[Observability Pipelines Worker][1] は、ログやメトリクスをあらゆるソースからあらゆる宛先に収集、処理、ルーティングすることができます。Datadog を使用することで、Observability Pipelines Worker のデプロイメントを大規模に構築・管理することができます。
+[Observability Pipelines Worker][1] は、ログをあらゆるソースからあらゆる宛先に収集、処理、ルーティングすることができます。Datadog を使用することで、Observability Pipelines Worker のデプロイメントを大規模に構築・管理することができます。
 
 このガイドでは、共通ツールクラスターに Worker をデプロイし、Splunk が Worker を経由してログを送信し、Datadog に二重書き込みするように構成する手順を説明します。
 
@@ -122,7 +122,7 @@ AWS アカウントで Worker を実行するには、そのアカウントの�
 
 ## Splunk インデックスの設定
 
-<div class="alert alert-info">入力の <strong>Enable Indexer Acknowledgements</strong> 設定を有効にすると、Observability Pipelines は確認応答をサポートします。</div>
+<div class="alert alert-info">入力で <strong>Enable Indexer Acknowledgments</strong> 設定を有効にすると、Observability Pipelines は確認応答をサポートします。</div>
 
 Observability Pipelines Worker からログを受信するには、インデックスに HEC 入力と HEC トークンを準備する必要があります。
 
@@ -159,7 +159,7 @@ Observability Pipelines Worker Docker イメージは[こちら][1]の Docker Hu
 [2]: /resources/yaml/observability_pipelines/splunk/pipeline.yaml
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
-1. AWS EKS 用の [Helm チャート][1]をダウンロードします。
+1. AWS EKS 用の [Helm チャート値ファイル][1]をダウンロードします。
 
 2. Helm チャートで、`datadog.apiKey` と `datadog.pipelineId` をそれぞれの値に置き換え、`<site>` を {{< region-param key="dd_site" code="true" >}} に置き換えます。
     ```yaml
@@ -195,7 +195,7 @@ Observability Pipelines Worker Docker イメージは[こちら][1]の Docker Hu
 [1]: /resources/yaml/observability_pipelines/splunk/aws_eks.yaml
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-1. Azure AKS 用の [Helm チャート][1]をダウンロードします。
+1. Azure AKS 用の [Helm チャート値ファイル][1]をダウンロードします。
 
 2. Helm チャートで、`datadog.apiKey` と `datadog.pipelineId` をそれぞれの値に置き換え、`<site>` を {{< region-param key="dd_site" code="true" >}} に置き換えます。
     ```yaml
@@ -231,7 +231,7 @@ Observability Pipelines Worker Docker イメージは[こちら][1]の Docker Hu
 [1]: /resources/yaml/observability_pipelines/splunk/azure_aks.yaml
 {{% /tab %}}
 {{% tab "Google GKE" %}}
-1. Google GKE 用の [Helm チャート][1]をダウンロードします。
+1. Google GKE 用の [Helm チャート値ファイル][1]をダウンロードします。
 
 2. Helm チャートで、`datadog.apiKey` と `datadog.pipelineId` をそれぞれの値に置き換え、`<site>` を {{< region-param key="dd_site" code="true" >}} に置き換えます。
     ```yaml

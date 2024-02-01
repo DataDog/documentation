@@ -30,7 +30,7 @@ export default {
         us5: 'US5',
         eu: 'EU',
         ap1: 'AP1',
-        gov: 'Government'
+        gov: 'US1-FED'
     },
     tcp_endpoint: {
         us: 'agent-intake.logs.datadoghq.com',

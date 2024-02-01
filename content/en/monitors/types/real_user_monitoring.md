@@ -38,7 +38,15 @@ As you expand your search filters, the graph above the search bar updates.
     * **Monitor over a RUM event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of RUM events over a selected time frame, then compares it to the threshold conditions.
     * **Monitor over a facet**: If you select a [facet][4], the monitor alerts over the `Unique value count` of the facet.
     * **Monitor over measure**: If you select a [measure][5], the monitor alerts over the numerical value of the RUM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
-3. Group RUM events by multiple dimensions (optional). All RUM events matching the query are aggregated into groups based on the value of up to four facets.
+3. Group RUM events by multiple dimensions (optional):
+  All RUM events matching the query are aggregated into groups based on the value of up to four facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. The dimensions limit depends on the total number of dimensions:
+   * **1 facet**: 1000 top values
+   * **2 facets**: 30 top values per facet (at most 900 groups)
+   * **3 facets**: 10 top values per facet (at most 1000 groups)
+   * **4 facets**: 5 top values per facet (at most 625 groups)
+
+
+
 4. Configure the alerting grouping strategy (optional).
    * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. If the query has a `group by` and you select **Simple-Alert**, you get one alert when one or multiple groups values breach the threshold. You may use this strategy to reduce notification noise.
    * **Multi Alert**: Multiple alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you can group a query by `@browser.name` to receive a separate alert for each browser when the number of errors is high.

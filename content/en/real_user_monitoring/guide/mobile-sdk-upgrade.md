@@ -5,6 +5,9 @@ further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the Explorer'
+- link: '/real_user_monitoring/guide/mobile-sdk-deprecation-policy'
+  tag: 'Documentation'
+  text: 'Deprecation Policy for Datadog Mobile SDKs'
 ---
 
 ## Overview

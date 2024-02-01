@@ -2,6 +2,8 @@
 title: Connections
 kind: documentation
 description: Workflow connections
+algolia:
+  tags: ['workflow', 'workflows', 'workflow automation']
 aliases:
 - /workflows/connections
 - /workflows/setup
@@ -73,9 +75,9 @@ Alternatively, add a connection from the workflow page:
 1. In the **New Connection** dialog box, name the connection and enter the required authentication details.
 1. Click **Save**.
 
-The example below shows the **New Connection** dialog box for the AWS connection. Each connection requires different authentication information. The AWS connection requires a valid AWS IAM Account ID and Role Name.
+The example below shows the **New Connection** dialog box for the OpenAI connection. Each connection requires different authentication information. The OpenAI connection requires a valid Connection Name and API Token.
 
-{{< img src="service_management/workflows/new-connection.png" alt="The New Connection dialog box for the AWS connection" >}}
+{{< img src="service_management/workflows/new-connection2.png" alt="The New Connection dialog box for the OpenAI connection" >}}
 
 ### Edit a connection
 

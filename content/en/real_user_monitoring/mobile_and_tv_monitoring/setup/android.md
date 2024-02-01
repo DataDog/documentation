@@ -57,7 +57,7 @@ dependencies {
 
 ### Specify application details in the UI
 
-1. Navigate to [**UX Monitoring** > **RUM Applications** > **New Application**][2].
+1. Navigate to [**UX Monitoring** > **Setup & Configurations** > **New Application**][2].
 2. Select `android` as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To instrument your web views, click the **Instrument your webviews** toggle. For more information, see [Web View Tracking][13].
 4. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Android Data Collected][15].
@@ -418,13 +418,13 @@ val inputStream = context.getRawResAsRumResource(id)
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /account_management/api-app-keys/#client-tokens
-[5]: /real_user_monitoring/android/advanced_configuration/#automatically-track-views
-[6]: /real_user_monitoring/android/troubleshooting/#set-tracking-consent-gdpr-compliance
-[7]: /real_user_monitoring/android/advanced_configuration/#initialization-parameters
+[5]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-views
+[6]: /real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/#set-tracking-consent-gdpr-compliance
+[7]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#initialization-parameters
 [8]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file
 [9]: https://square.github.io/okhttp/interceptors/
-[10]: /real_user_monitoring/android/advanced_configuration/#custom-views
-[11]: /real_user_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[10]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#custom-views
+[11]: /real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/android/#automatically-track-network-requests
 [12]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [13]: /real_user_monitoring/android/web_view_tracking/
 [14]: /getting_started/tagging/using_tags/#rum--session-replay

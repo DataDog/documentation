@@ -197,6 +197,32 @@ const config = new DdSdkReactNativeConfiguration(/* your config */);
 DdSdkReactNative.initialize(config);
 ```
 
+## Troubleshooting
+
+### App produces a lot of /logs RUM Resources
+
+When Resource tracking is enabled and SDK verbosity is set to `DEBUG`, each RUM Resource will trigger a `/logs` call to the Expo dev server to print the log, which will itself create a new RUM resource, creating an infinite loop.
+The most common patterns of Expo dev server host URL are filtered by the SDK, therefore, you may not encounter this error in most situations.
+If this error occurs, add the following RUM Resource mapper to filter out the calls:
+
+```js
+import { DdSdkReactNativeConfiguration } from 'expo-datadog';
+import Constants from 'expo-constants';
+
+const config = new DdSdkReactNativeConfiguration(/* your config */);
+config.resourceEventMapper = event => {
+  if (
+    event.resourceContext?.responseURL ===
+    `http://${Constants.expoConfig.hostUri}/logs`
+  ) {
+    return null;
+  }
+  return event;
+};
+```
+
+
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

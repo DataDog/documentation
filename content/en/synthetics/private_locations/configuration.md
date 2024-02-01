@@ -137,7 +137,8 @@ Proxy URL used by the private location to send requests to Datadog (for example,
 `--disableFipsCompliance`
 : **Type:** Boolean <br>
 **Default**: `false`<br>
-Disables the FIPS compliance for a private location using `ddgov-gov.com`.
+Disables the FIPS compliance for a private location using `ddog-gov.com`.
+By default, Private Locations reporting to `ddog-gov.com` communicate to Datadog using FIPS-compliant encryption. The communication complies on the use of FIPS 140-2 validated [Cryptographic Module - Certificate #4282][3].
 
 `--dumpConfig`
 : **Type**: Boolean <br>
@@ -202,7 +203,7 @@ Block access to specific IPs and/or CIDR in addition, or not, to the IP ranges b
 `--enableDefaultBlockedIpRanges`
 : **Type**: Boolean <br>
 **Default**: `false`<br>
-Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][3] and [IPv6][4] Special-Purpose Address Registry), except for those explicitly set with the `--allowedIPRanges` parameter.
+Prevent users from creating Synthetic tests on endpoints that are using reserved IP ranges (IANA [IPv4][4] and [IPv6][5] Special-Purpose Address Registry), except for those explicitly set with the `--allowedIPRanges` parameter.
 
 `--allowedDomainNames`
 : **Type**: Array <br>
@@ -232,12 +233,23 @@ Format log output between `"compact"`, `"pretty"`, `"pretty-compact"`, and `"jso
 `--verbosity`
 : **Type**: Number <br>
 **Default**: `3`<br>
-Verbosity level (for example, `-v`, `-vv`, and `-vvv`).
+Verbosity level from `1` (errors only) to `4` (debug logs and above). Setting the verbosity from the command line is done with `-v`, `-vv`, `-vvv`, and `-vvvv` arguments.<br><br>
+Verbosity level | CLI argument | JSON config option
+-- | -- | --
+DEBUG | `-vvvv` | `"verbosity": 4`
+INFO (default) | `-vvv` | `"verbosity": 3`
+WARNING | `-vv` | `"verbosity": 2`
+ERROR | `-v` | `"verbosity": 1`
 
 `--help`
 : **Type**: Boolean <br>
 **Default**: `none`<br>
 Show the output for the help command.
+
+## Environment variables
+Command options can also be set using environment variables such as `DATADOG_API_KEY="...", DATADOG_WORKER_CONCURRENCY="15", DATADOG_DNS_USE_HOST="true"`. For options that accept multiple arguments, use JSON string array notation (`DATADOG_TESTS_DNS_SERVER='["8.8.8.8", "1.1.1.1"]'`)
+### Supported environment variables:
+`DATADOG_ACCESS_KEY`, `DATADOG_API_KEY`, `DATADOG_PRIVATE_KEY`, `DATADOG_PUBLIC_KEY_PEM`, `DATADOG_SECRET_ACCESS_KEY`, `DATADOG_SITE`, `DATADOG_WORKER_CONCURRENCY`, `DATADOG_WORKER_LOG_FORMAT`, `DATADOG_WORKER_LOG_VERBOSITY`, `DATADOG_WORKER_MAX_NUMBER_MESSAGES_TO_FETCH`, `DATADOG_WORKER_PROXY`, `DATADOG_TESTS_DNS_SERVER`, `DATADOG_TESTS_DNS_USE_HOST`, `DATADOG_TESTS_PROXY`, `DATADOG_TESTS_PROXY_IGNORE_SSL_ERRORS`, `DATADOG_ALLOWED_IP_RANGES_4`, `DATADOG_ALLOWED_IP_RANGES_6`, `DATADOG_BLOCKED_IP_RANGES_4`, `DATADOG_BLOCKED_IP_RANGES_6`, `DATADOG_ENABLE_DEFAULT_WINDOWS_FIREWALL_RULES`, `DATADOG_ALLOWED_DOMAIN_NAMES`, `DATADOG_BLOCKED_DOMAIN_NAMES`, `DATADOG_WORKER_ENABLE_STATUS_PROBES`, `DATADOG_WORKER_STATUS_PROBES_PORT`
 
 ## Further Reading
 
@@ -245,5 +257,6 @@ Show the output for the help command.
 
 [1]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
 [2]: https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-dns-config
-[3]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
-[4]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml
+[3]: https://csrc.nist.gov/projects/cryptographic-module-validation-program/certificate/4282
+[4]: https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml
+[5]: https://www.iana.org/assignments/iana-ipv6-special-registry/iana-ipv6-special-registry.xhtml

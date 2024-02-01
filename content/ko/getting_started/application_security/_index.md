@@ -78,7 +78,7 @@ ASM이 활성화되면 애플리케이션 취약성을 즉시 파악하고 서�
 2. **공격 확인**: 공격 패턴을 보내 테스트 탐지 규칙을 트리거합니다. 단말기에서 다음 스크립트를 실행합니다:
 
   {{< code-block lang="sh" >}}
-  for ((i=1;i<=200;i++)); do
+  for ((i=1;i<=250;i++)); do
   # 기존 서비스의 경로 타겟
   curl https://your-application-url/<EXISTING ROUTE> -A
   'dd-test-scanner-log';

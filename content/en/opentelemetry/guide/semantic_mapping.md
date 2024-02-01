@@ -1,6 +1,16 @@
 ---
 title: OpenTelemetry Semantic Conventions and Datadog Conventions
 kind: documentation
+further_reading:
+- link: "/opentelemetry/guide/metrics_mapping"
+  tag: "Documentation"
+  text: "Metrics mapping from OpenTelemetry to Datadog"
+- link: "/metrics/open_telemetry/otlp_metric_types"
+  tag: "Documentation"
+  text: "OpenTelemetry metric types"
+- link: "https://github.com/DataDog/opentelemetry-mapping-go/blob/main/pkg/otlp/attributes/attributes.go"
+  tag: "GitHub"
+  text: "Implementation code for these mappings"
 ---
 
 OpenTelemetry makes use of a number of [semantic conventions][1] that specify names for different types of data. This page lists mappings for OpenTelemetry semantic conventions to Datadog's semantic conventions.
@@ -23,6 +33,10 @@ For more information, see [Unified Service Tagging][2].
 | `container.name` | `container_name` |
 | `container.image.name` | `image_name` |
 | `container.image.tag` | `image_tag` |
+
+Read more about [Containers semantic conventions in the OpenTelemetry documentation][3]. 
+
+Additional cloud provider-specific attributes are also mapped.
 
 ### Cloud
 
@@ -57,5 +71,21 @@ For more information, see [Unified Service Tagging][2].
 | `k8s.namespace.name` | `kube_namespace` |
 | `k8s.pod.name` | `pod_name` |
 
+#### Kubernetes labels
+
+| Kubernetes convention | Datadog convention |
+| --- | --- |
+| `app.kubernetes.io/name` | `kube_app_name` |
+| `app.kubernetes.io/instance` | `kube_app_instance` |
+| `app.kubernetes.io/version` | `kube_app_version` |
+| `app.kuberenetes.io/component` | `kube_app_component` |
+| `app.kubernetes.io/part-of` | `kube_app_part_of` |
+| `app.kubernetes.io/managed-by` | `kube_app_managed_by` |
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://opentelemetry.io/docs/concepts/semantic-conventions/
 [2]: /getting_started/tagging/unified_service_tagging
+[3]: https://opentelemetry.io/docs/specs/semconv/resource/container/

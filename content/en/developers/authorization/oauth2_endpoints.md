@@ -41,12 +41,12 @@ In the authorization request, the application constructs the redirect URI by add
 
 To render Datadog's consent page, redirect users to the endpoint with the specified parameters: 
 ```
-https://app.datadoghq.com/oauth2/v1/authorize?redirect_uri=http://localhost:500/oauth_redirect&client_id=abcdefghijklmnopqrstuvwxyz_123456789&response_type=code&code_challenge=12345&code_challenge_method=S256
+https://api.datadoghq.com/oauth2/v1/authorize?redirect_uri=http://localhost:500/oauth_redirect&client_id=abcdefghijklmnopqrstuvwxyz_123456789&response_type=code&code_challenge=12345&code_challenge_method=S256
 ```
 
 #### Success Response
 
-If a user successfully grants the access request, your application [obtains an authorization code](#obtain-an-authorization-code) and redirects the user to the redirect URI with the authorization `code`, as well as the `site` parameter, in the query component. 
+If a user successfully grants the access request, your application [obtains an authorization code](#obtain-an-authorization-code) and redirects the user to the redirect URI with the authorization `code`, as well as the `domain` parameter, in the query component. 
 
 #### Error Response
 

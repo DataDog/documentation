@@ -27,7 +27,11 @@ With these three tags, you can:
 
 {{< img src="tagging/unified_service_tagging/overview.mp4" alt="Unified Service Tagging" video=true >}}
 
-**Note**: The official service of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official service of a log, add Autodiscovery [Docker labels/pod annotations][2]. For example: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
+**Notes**:
+
+- The `version` tag is expected to change with each new application deployment. Two different versions of your application's code should have distinct `version` tags.
+- The official service of a log defaults to the container short-image if no Autodiscovery logs configuration is present. To override the official service of a log, add Autodiscovery [Docker labels/pod annotations][2]. For example: `"com.datadoghq.ad.logs"='[{"service": "service-name"}]'`
+- Host information is excluded for database and cache spans because the host associated with the span is not the database/cache host.
 
 ### Requirements
 
