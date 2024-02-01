@@ -21,7 +21,7 @@ further_reading:
 </div>
 {{% /site-region %}}
 
-{{< callout url="#" btn_hidden="true" >}}
+{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
 Static Analysis is part of the Code Analysis public beta.
 {{< /callout >}}
 
@@ -202,7 +202,7 @@ To upload a SARIF report:
 [2]: https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=sarif 
 [3]: /developers/ide_integrations/idea/#static-analysis
 [4]: /account_management/api-app-keys/
-[6]: /code_analysis/static_analysis/rules
+[6]: /code_analysis/static_analysis_rules
 [7]: /getting_started/site/
 [8]: https://github.com/DataDog/datadog-ci
 [9]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account

@@ -21,7 +21,7 @@ further_reading:
 </div>
 {{% /site-region %}}
 
-{{< callout url="#" btn_hidden="true" >}}
+{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
 Static Analysis is part of the Code Analysis public beta.
 {{< /callout >}}
 
@@ -121,6 +121,6 @@ If you believe a specific violation is a false positive, you can indicate false 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/code-analysis
-[2]: /code_analysis/static_analysis/rules?categories=Security
-[3]: /code_analysis/static_analysis/rules?categories=Best+Practices&categories=Code+Style&categories=Error+Prone&categories=Performance
+[2]: /code_analysis/static_analysis_rules?categories=Security
+[3]: /code_analysis/static_analysis_rules?categories=Best+Practices&categories=Code+Style&categories=Error+Prone&categories=Performance
 [4]: /integrations/github/

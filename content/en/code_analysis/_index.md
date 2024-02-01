@@ -24,7 +24,7 @@ further_reading:
 </div>
 {{% /site-region %}}
 
-{{< callout url="#" btn_hidden="true" >}}
+{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
 Code Analysis is in public beta.
 {{< /callout >}}
 
@@ -108,7 +108,7 @@ You must configure a GitHub App using the [GitHub integration tile][7] and set u
 [3]: /developers/ide_integrations/vscode/#static-analysis
 [4]: /developers/ide_integrations/idea/#static-analysis
 [5]: /code_analysis/github_pull_requests/
-[6]: /code_analysis/static_analysis/rules
+[6]: /code_analysis/static_analysis_rules
 [7]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
 [8]: /integrations/guide/source-code-integration
 [9]: https://app.datadoghq.com/ci/code-analysis
