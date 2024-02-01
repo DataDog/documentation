@@ -42,7 +42,7 @@ To apply a processing rule to all logs collected by a Datadog Agent, see the [Gl
 
 ## Filter logs
 
-To send only a specific subset of logs to Datadog use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** or **include_at_match** `type`.
+To send only a specific subset of logs to Datadog use the `processing_rules` parameter in your configuration file with the **exclude_at_match** or **include_at_match** `type`.
 
 ### Exclude at match
 
@@ -50,7 +50,7 @@ To send only a specific subset of logs to Datadog use the `log_processing_rules`
 |--------------------|----------------------------------------------------------------------------------------------------|
 | `exclude_at_match` | If the specified pattern is contained in the message, the log is excluded and not sent to Datadog. |
 
-For example, to **filter OUT** logs that contain a Datadog email address, use the following `log_processing_rules`:
+For example, to **filter OUT** logs that contain a Datadog email address, use the following `processing_rules`:
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -61,7 +61,7 @@ logs:
     path: /my/test/file.log
     service: cardpayment
     source: java
-    log_processing_rules:
+    processing_rules:
     - type: exclude_at_match
       name: exclude_datadoghq_users
       ## Regexp can be anything
@@ -71,7 +71,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a Docker environment, use the label `com.datadoghq.ad.logs` on the **container sending the logs you want to filter** in order to specify the `log_processing_rules`, for example:
+In a Docker environment, use the label `com.datadoghq.ad.logs` on the **container sending the logs you want to filter** in order to specify the `processing_rules`, for example:
 
 ```yaml
  labels:
@@ -79,7 +79,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
       [{
         "source": "java",
         "service": "cardpayment",
-        "log_processing_rules": [{
+        "processing_rules": [{
           "type": "exclude_at_match",
           "name": "exclude_datadoghq_users",
           "pattern" : "\\w+@datadoghq.com"
@@ -94,7 +94,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-To apply a specific configuration to a given container, Autodiscovery identifies containers by name, NOT image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image.` To configure using Autodiscovery to collect container logs on a given `<CONTAINER_IDENTIFIER>` within your pod, add the following annotations to your pod's `log_processing_rules`:
+To apply a specific configuration to a given container, Autodiscovery identifies containers by name, NOT image. It tries to match `<CONTAINER_IDENTIFIER>` to `.spec.containers[0].name`, not `.spec.containers[0].image.` To configure using Autodiscovery to collect container logs on a given `<CONTAINER_IDENTIFIER>` within your pod, add the following annotations to your pod's `processing_rules`:
 
 ```yaml
 apiVersion: apps/v1
@@ -112,7 +112,7 @@ spec:
           [{
             "source": "java",
             "service": "cardpayment",
-            "log_processing_rules": [{
+            "processing_rules": [{
               "type": "exclude_at_match",
               "name": "exclude_datadoghq_users",
               "pattern" : "\\w+@datadoghq.com"
@@ -141,7 +141,7 @@ spec:
 | `include_at_match` | Only logs with a message that includes the specified pattern are sent to Datadog. If multiple `include_at_match` rules are defined, all rules patterns must match in order for the log to be included. |
 
 
-For example, to **filter IN** logs that contain a Datadog email address, use the following `log_processing_rules`:
+For example, to **filter IN** logs that contain a Datadog email address, use the following `processing_rules`:
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -152,7 +152,7 @@ logs:
     path: /my/test/file.log
     service: cardpayment
     source: java
-    log_processing_rules:
+    processing_rules:
     - type: include_at_match
       name: include_datadoghq_users
       ## Regexp can be anything
@@ -167,7 +167,7 @@ logs:
     path: /my/test/file.log
     service: cardpayment
     source: java
-    log_processing_rules:
+    processing_rules:
     - type: include_at_match
       name: include_datadoghq_users
       pattern: abc|123
@@ -181,7 +181,7 @@ logs:
     path: /my/test/file.log
     service: cardpayment
     source: java
-    log_processing_rules:
+    processing_rules:
     - type: include_at_match
       name: include_datadoghq_users
       pattern: "abc\
@@ -192,7 +192,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a Docker environment, use the label `com.datadoghq.ad.logs` on the **container sending the logs you want to filter** in order to specify the `log_processing_rules`, for example:
+In a Docker environment, use the label `com.datadoghq.ad.logs` on the **container sending the logs you want to filter** in order to specify the `processing_rules`, for example:
 
 ```yaml
  labels:
@@ -200,7 +200,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
       [{
         "source": "java",
         "service": "cardpayment",
-        "log_processing_rules": [{
+        "processing_rules": [{
           "type": "include_at_match",
           "name": "include_datadoghq_users",
           "pattern" : "\\w+@datadoghq.com"
@@ -215,7 +215,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
+In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `processing_rules`, for example:
 
 ```yaml
 apiVersion: apps/v1
@@ -233,7 +233,7 @@ spec:
           [{
             "source": "java",
             "service": "cardpayment",
-            "log_processing_rules": [{
+            "processing_rules": [{
               "type": "include_at_match",
               "name": "include_datadoghq_users",
               "pattern" : "\\w+@datadoghq.com"
@@ -257,7 +257,7 @@ spec:
 
 ## Scrub sensitive data from your logs
 
-If your logs contain sensitive information that need redacting, configure the Datadog Agent to scrub sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`.
+If your logs contain sensitive information that need redacting, configure the Datadog Agent to scrub sensitive sequences by using the `processing_rules` parameter in your configuration file with the **mask_sequences** `type`.
 
 This replaces all matched groups with the value of the `replace_placeholder` parameter.
 
@@ -272,7 +272,7 @@ logs:
    path: /my/test/file.log
    service: cardpayment
    source: java
-   log_processing_rules:
+   processing_rules:
       - type: mask_sequences
         name: mask_credit_cards
         replace_placeholder: "[masked_credit_card]"
@@ -283,7 +283,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
+In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `processing_rules`, for example:
 
 ```yaml
  labels:
@@ -291,7 +291,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
       [{
         "source": "java",
         "service": "cardpayment",
-        "log_processing_rules": [{
+        "processing_rules": [{
           "type": "mask_sequences",
           "name": "mask_credit_cards",
           "replace_placeholder": "[masked_credit_card]",
@@ -307,7 +307,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
+In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `processing_rules`, for example:
 
 ```yaml
 apiVersion: apps/v1
@@ -325,7 +325,7 @@ spec:
           [{
             "source": "java",
             "service": "cardpayment",
-            "log_processing_rules": [{
+            "processing_rules": [{
               "type": "mask_sequences",
               "name": "mask_credit_cards",
               "replace_placeholder": "[masked_credit_card]",
@@ -359,7 +359,7 @@ This sends the following log to Datadog: `User email: masked_user@example.com`
 
 ## Multi-line aggregation
 
-If your logs are not sent in JSON and you want to aggregate several lines into a single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type` which aggregates all lines into a single entry until the given pattern is detected again.
+If your logs are not sent in JSON and you want to aggregate several lines into a single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line. This is accomplished by using the `processing_rules` parameter in your configuration file with the **multi_line** `type` which aggregates all lines into a single entry until the given pattern is detected again.
 
 For example, every Java log line starts with a timestamp in `yyyy-dd-mm` format. These lines include a stack trace that can be sent as two logs:
 
@@ -374,7 +374,7 @@ For example, every Java log line starts with a timestamp in `yyyy-dd-mm` format.
 {{< tabs >}}
 {{% tab "Configuration file" %}}
 
-To send the example logs above with a configuration file, use the following `log_processing_rules`:
+To send the example logs above with a configuration file, use the following `processing_rules`:
 
 ```yaml
 logs:
@@ -382,7 +382,7 @@ logs:
    path: /var/log/pg_log.log
    service: database
    source: postgresql
-   log_processing_rules:
+   processing_rules:
       - type: multi_line
         name: new_log_start_with_date
         pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
@@ -391,7 +391,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
+In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `processing_rules`, for example:
 
 ```yaml
  labels:
@@ -399,7 +399,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
       [{
         "source": "postgresql",
         "service": "database",
-        "log_processing_rules": [{
+        "processing_rules": [{
           "type": "multi_line",
           "name": "log_start_with_date",
           "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"
@@ -410,7 +410,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
+In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `processing_rules`, for example:
 
 ```yaml
 apiVersion: apps/v1
@@ -428,7 +428,7 @@ spec:
           [{
             "source": "postgresql",
             "service": "database",
-            "log_processing_rules": [{
+            "processing_rules": [{
               "type": "multi_line",
               "name": "log_start_with_date",
               "pattern" : "\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])"
@@ -502,7 +502,7 @@ logs_config:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
+In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `processing_rules`, for example:
 
 ```yaml
  labels:
