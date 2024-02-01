@@ -30,7 +30,7 @@ git_integration_title: disk
 guid: 94588b23-111e-4ed2-a2af-fd6e4caeea04
 integration_id: システム
 integration_title: Disk
-integration_version: 4.10.0
+integration_version: 5.0.0
 is_public: true
 kind: インテグレーション
 maintainer: help@datadoghq.com
@@ -120,7 +120,7 @@ Disk チェックには、イベントは含まれません。
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/disk/datadog_checks/disk/data/conf.yaml.default
 [4]: https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-findfirstvolumemountpointw
