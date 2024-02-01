@@ -27,11 +27,6 @@
     <div class="code-snippet">
       <div class="highlight">
         {{- $partialPath := (printf "api/openapi-code-%s.html" ($lang | lower)) -}}
-        {{- /*
-          {{ if eq $lang "go" }}
-            {{- $partialPath = (print "api/openapi-code-go-ccsdk.html") -}}
-          {{ end }}
-        */ -}}
         {{- partial $partialPath (dict "payload" ($payload | safeHTML) "path" $path "method" $pathMethod ) -}}
       </div>
     </div>
