@@ -3,7 +3,9 @@ title: New CSV headers for Individual Organizations Summary
 kind: guide
 ---
 
-CSV header changes take effect the week of February 19, 2024. Below is an example of the new CSV structure. Use this table to update CSV headers your automation depends on:
+CSV header changes take effect the week of February 19, 2024. The following example demonstrates the new CSV structure. 
+
+Use this table to update CSV headers that your automation depends on:
 
 
 | Organization Name | Public ID | Month | Product Name | Cost | 
