@@ -297,20 +297,20 @@ For the full list of available instrumentation methods, see the [`ddtrace` docum
 
 [Webmock][10]
 is a popular Ruby library that stubs HTTP requests when running tests.
-By default it fails when used together with datadog-ci as traces are being sent
-to Datadog via HTTP calls.
+By default, it fails when used with datadog-ci because traces are being sent
+to Datadog with HTTP calls.
 
-In order to allow HTTP connections for Datadog backend you would need to configure
+To allow HTTP connections for Datadog backend, you need to configure
 Webmock accordingly.
 
 ```ruby
-# when using agentless mode (note to use the correct datadog site, e.g. datadoghq.com, datadoghq.eu, etc):
+# when using Agentless mode (note: use the correct datadog site, for example, datadoghq.com, datadoghq.eu, etc.):
 WebMock.disable_net_connect!(:allow => "citestcycle-intake.datadoghq.com")
 
-# when using agent running locally:
+# when using Agent running locally:
 WebMock.disable_net_connect!(:allow_localhost => true)
 
-# or for more granular setting set your agent URL, for example:
+# or for more granular setting set your Agent URL, for example:
 WebMock.disable_net_connect!(:allow => "localhost:8126")
 ```
 
@@ -333,7 +333,7 @@ The API is based around four concepts: test session, test module, test suite, an
 
 A test session represents a test command run.
 
-To start a test session, call `Datadog::CI.start_test_session` and pass the Datadog service and tags (such as test framework
+To start a test session, call `Datadog::CI.start_test_session` and pass the Datadog service and tags (such as the test framework
 you are using).
 
 When all your tests have finished, call `Datadog::CI::TestSession#finish`, which closes the session and sends the session
@@ -342,8 +342,8 @@ trace to the backend.
 #### Test module
 
 A test module represents a smaller unit of work within a session.
-For supported test frameworks test module is always same as test session.
-For your use case it could be a package in your componentized application.
+For supported test frameworks, test module is always same as test session.
+For your use case, this could be a package in your componentized application.
 
 To start a test module, call `Datadog::CI.start_test_module` and pass the name of the module.
 
