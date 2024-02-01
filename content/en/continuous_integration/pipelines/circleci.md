@@ -109,4 +109,4 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 [8]: /account_management/teams/
 [9]: https://raw.githubusercontent.com/DataDog/ci-visibility-circle-ci/main/service_hooks.py
 [10]: /continuous_integration/pipelines/circleci/#enable-log-collection
-[11]: integrations/circleci/#setup
+[11]: /integrations/circleci/#setup
