@@ -24,7 +24,7 @@ further_reading:
 </div>
 {{% /site-region %}}
 
-{{< callout url="#" btn_hidden="true" >}}
+{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
 Software Composition Analysis is part of the Code Analysis public beta.
 {{< /callout >}}
 
