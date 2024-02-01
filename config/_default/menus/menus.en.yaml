@@ -1371,7 +1371,7 @@ main:
     identifier: api_catalog_monitor
     parent: api_catalog
     weight: 3
-  - name: Adding Entries
+  - name: Adding Entries to API Catalog
     url: /tracing/api_catalog/add_entries/
     identifier: api_catalog_entries
     parent: api_catalog

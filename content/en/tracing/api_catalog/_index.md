@@ -47,7 +47,24 @@ API Catalog combines data from across Datadog to provide opinionated workflows s
 - Resolving incidents faster with API **ownership information** (team, on-call, communication channels) directly associated with each endpoint, to know who to reach when something goes wrong.
 - A view of the coverage and status of **API monitors, synthetic tests, and security signals**, with direct access to more information for your incident, troubleshooting, and vulnerability investigations.
 
-<div class="alert alert-info">See <a href="/tracing/api_catalog/get_started/#key-terminology">Key terminology</a> for some background on concepts that are important to understanding what API Catalog does.</div>
+## Key terminology
+
+API
+: A set of protocols and tools that allow two applications to communicate.
+
+API endpoint
+: The address of a resource (URL) of a server or a service that implements the set of rules defined in the API, often through an HTTP, RESTful API interface. The API endpoint is responsible for making the API call response.<br /><br/>
+The API Catalog displays API endpoints as the HTTP method (for example, `GET`), the URL path (for example, `/payment/{shop_id}/purchase`), and the name of the service this resource serves (for example, `Payments`).<br /><br/>
+The API Catalog in **beta** supports only **HTTP** endpoints. 
+
+Public APIs
+: Customer-facing API endpoints that are accessible from the internet.
+
+Private APIs
+: Also called internal APIs. These are only for internal use in an organization and are used mainly for backend service communication. These are the most common type of APIs. 
+
+Partner APIs
+: Also called third-party APIs. These are another organization's public endpoints that your organization uses to provide your services (for example, Stripe, Google, and Facebook).
 
 ## Getting started
 
