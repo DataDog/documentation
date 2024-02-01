@@ -28,7 +28,7 @@ func main() {
 		context.Background(),
 		&cloudcraft.Blueprint{
 			Name: "My updated blueprint",
-  	},
+		},
 	"")
 	if err != nil {
 		log.Fatal(err)
