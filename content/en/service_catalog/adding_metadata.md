@@ -275,9 +275,9 @@ extensions:
           schedule: "* * * * 1"
 {{< /code-block >}}
 
-## Metadata Schema v3.0 ##
+## Metadata Schema v3.0
 
-### Example Application Definition ###
+### Example Application Definition
 
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
@@ -351,7 +351,7 @@ extensions:
     customField: customValue
 {{< /code-block >}}
 
-### Example Service Definition ###
+### Example Service Definition
 
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
