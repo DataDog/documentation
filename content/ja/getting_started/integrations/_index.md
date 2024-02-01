@@ -30,11 +30,15 @@ Datadog では、主に次の 3 種類のインテグレーションが提供さ
 
 Datadog Agent パッケージには、Datadog が公式にサポートしている[インテグレーションコア][11]が含まれています。これらのインテグレーションを使用するには、Datadog Agent をダウンロードします。コミュニティベースのインテグレーションは、[インテグレーションエクストラ][12]にあります。これらのインテグレーションのインストールおよび管理についての詳細は、[インテグレーション管理ガイド][14]をご参照ください。
 
+### ヘルプ
+
+Integration タイルを操作するには `manage_integrations` 権限が必要です。詳細については [RBAC ロール][45]を参照してください。
+
 ### API キーとアプリケーションキー
 
 [Datadog Agent をインストール][15]するには、[API キー][16]が必要です。Agent が既にダウンロードされている場合は、`datadog.yaml` ファイルで API キーを設定してください。メトリクスとイベントの送信を除くと、Datadog の機能の大半は、使用するために[アプリケーションキー][16]が必要です。お客様のアカウントの API キーとアプリケーションキーは、[API 設定ページ][17]で管理できます。
 
-### インストール
+### 構成
 
 クローラーまたはライブラリベースのインテグレーションに接続する場合は、[インテグレーションのページ][18]から該当するプロバイダーのページに移動し、具体的な接続方法を参照してください。その他のサポートされているインテグレーションの場合は、[Datadog Agent][15] をインストールします。ほとんどのインテグレーションがコンテナ化 Agent ([Docker][19] および [Kubernetes][20]) でサポートされています。Agent をダウンロードしたら、[インテグレーション][18]のページに移動し、個々のインテグレーションの具体的な構成方法をご確認ください。
 
@@ -136,7 +140,7 @@ Datadog がユーザーデータを取り扱う方法など、セキュリティ
 
 Datadog [ログ管理][34]、[APM][35]、[Synthetic の監視][36] の各ソリューションも参照してください。
 
-## トラブルシューティング
+## ヘルプ
 
 インテグレーションのトラブルシューティングでは、最初に、コードエディターでプラグインを使用するか、さまざまなオンラインツールのいずれかを使用して、YAML が有効であることを確認します。次に、[Agent のトラブルシューティング][37]の手順をすべて実行します。
 
@@ -184,7 +188,7 @@ tagging
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/developers/integrations/new_check_howto/
+[1]: /ja/developers/integrations/agent_integration/
 [2]: https://app.datadoghq.com/account/settings
 [3]: /ja/integrations/slack/
 [4]: /ja/integrations/amazon_web_services/
@@ -197,12 +201,12 @@ tagging
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
 [14]: /ja/agent/guide/integration-management/
-[15]: https://app.datadoghq.com/account/settings#agent
+[15]: https://app.datadoghq.com/account/settings/agent/latest
 [16]: /ja/account_management/api-app-keys/
 [17]: https://app.datadoghq.com/organization-settings/api-keys
 [18]: /ja/integrations/
-[19]: https://app.datadoghq.com/account/settings#agent/docker
-[20]: https://app.datadoghq.com/account/settings#agent/kubernetes
+[19]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
+[20]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [21]: /ja/agent/guide/agent-commands/#restart-the-agent
 [22]: /ja/developers/integrations/check_references/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
@@ -227,3 +231,4 @@ tagging
 [42]: /ja/metrics/
 [43]: /ja/metrics/custom_metrics/
 [44]: /ja/monitors/guide/visualize-your-service-check-in-the-datadog-ui/
+[45]: /ja/account_management/rbac/permissions/#integrations
