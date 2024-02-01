@@ -24,10 +24,12 @@ func main() {
 	}
 
 	// List all blueprints in an account.
-	account, _, err := client.AWS.Create(context.Background(), &cloudcraft.AWSAccount{
-		Name:       "New AWS",
-		RoleARN:    "",
-		ExternalID: "8a8a745a-d01f-4541-8ab0-e3558e7c6b1c",
+	account, _, err := client.AWS.Create(
+		context.Background(),
+		&cloudcraft.AWSAccount{
+			Name:       "New AWS",
+			RoleARN:    "",
+			ExternalID: "8a8a745a-d01f-4541-8ab0-e3558e7c6b1c",
 	})
 	if err != nil {
 		log.Fatal(err)
