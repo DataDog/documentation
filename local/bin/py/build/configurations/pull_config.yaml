@@ -485,8 +485,8 @@
           globs:
             - "workload-security/backend-rules/*.yaml"
             - "workload-security/backend-rules/*.md"
-            - "cloud-siem/*/[!deprecated]*/*.json"
-            - "cloud-siem/*/[!deprecated]*/*.md"
+            - "cloud-siem/**/*.json"
+            - "cloud-siem/**/*.md"
             - "posture-management/**/*.json"
             - "posture-management/**/*.yaml"
             - "posture-management/**/*.yml"

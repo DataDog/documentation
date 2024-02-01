@@ -75,6 +75,9 @@ def security_rules(content, content_dir):
     for file_name in chain.from_iterable(glob.glob(pattern, recursive=True) for pattern in content["globs"]):
         data = None
 
+        if "deprecated" in file_name:
+            continue
+
         if file_name.endswith(".json"):
             with open(file_name, mode="r+") as f:
                 try:
@@ -160,7 +163,7 @@ def security_rules(content, content_dir):
 
             if 'posture-management' in relative_path:
                 if 'cloud-configuration' in relative_path:
-                    
+
                     if tags and 'dd_rule_type:combination' in tags:
                         page_data['rule_category'].append('CSM Security Issues')
                     elif tags and 'dd_rule_type:ciem' in tags:
