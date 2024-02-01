@@ -23,6 +23,9 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's `dd-s
 * Add `context` and extra custom attributes to each span sent.
 * Optimized network usage with automatic bulk posts.
 
+<div class="alert alert-info"><strong>Note</strong>: Datadog charges for <strong>ingested and indexed</strong> spans sent from your Android applications, but does not charge for the underlying devices. Read more in the <a href="/account_management/billing/apm_tracing_profiler/">APM billing documentation</a></div>
+
+
 ## Setup
 
 1. Add the Gradle dependency by declaring the library as a dependency in your `build.gradle` file:
