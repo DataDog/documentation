@@ -22,28 +22,28 @@ Cloudcraft supports the following AWS components:
 - EFS
 - EKS Clusters
 - EKS Pods (including Fargate)
-- EKS Workloads (Kubernetes Deployments, Stateful Sets, Daemon Sets, Jobs & Cron Jobs)
-- ElastiCache (Redis & Memcached)
+- EKS Workloads (Kubernetes Deployments, Stateful Sets, Daemon Sets, Jobs, and Cron Jobs)
+- ElastiCache (Redis and Memcached)
 - Elasticsearch (OpenSearch)
-- FSx (Windows Filer Server, Lustre, NetApp ONTAP & OpenZFS)
-- Fargate for ECS & EKS
+- FSx (Windows Filer Server, Lustre, NetApp ONTAP, and OpenZFS)
+- Fargate for ECS and EKS
 - Glacier Vaults
 - Internet Gateways
 - Keyspaces
 - Kinesis Streams
 - Lambda
-- Load Balancers (Classic, Application, Network & Gateway)
+- Load Balancers (Classic, Application, Network, and Gateway)
 - NAT Gateways
 - Neptune
-- RDS (Aurora, MySQL, PostgreSQL, MariaDB, Oracle & SQL Server)
+- RDS (Aurora, MySQL, PostgreSQL, MariaDB, Oracle, and SQL Server)
 - Redshift
 - Route 53 Zones
 - S3
 - Security Groups
 - SES
 - SNS Topics
-- SNS Subscriptions (Mobile, SMS, Email, Email-JSON, HTTP, HTTPS, SQS, Lambda)
-- SQS (Standard & FIFO)
+- SNS Subscriptions (Mobile, SMS, Email, Email-JSON, HTTP, HTTPS, SQS, and Lambda)
+- SQS (Standard and FIFO)
 - Subnets
 - Timestream
 - Transit Gateways
@@ -53,7 +53,7 @@ Cloudcraft supports the following AWS components:
 - VPN Gateways
 - WAF
 
-If we don't support a component you are looking for, the **Design** tab lets you represent anything using blocks, icons, images, and text labels.
+For components that aren't supported, you can use the **Design** tab to create your own using blocks, icons, images, and text labels.
 
 You can also [contact our support team][1] to help us identify which components you need the most.
 
