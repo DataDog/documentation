@@ -7,6 +7,12 @@ In this article, we'll walk you through the process of seamlessly integrating yo
 
 This process allows you to grant access to these diagrams for authorized users without requiring them to have individual Cloudcraft subscriptions, while also granting you a centralized and up-to-date version of your infrastructure documentation.
 
+## Installing the app
+
+To install Cloudcraft's Confluence application, [access the marketplace listing][1] and click the yellow **Get it now** button, while making sure you're logged in as an admin.
+
+{{< img src="cloudcraft/getting-started/embedding-cloudcraft-diagrams-confluence/marketplace-listing.png" alt="Screenshot of Cloudcraft's app on Atlassian Marketplace." responsive="true" style="width:100%;">}}
+
 ## Using the app
 
 With a Confluence page open, type **/cloudcraft** into the page and then click the application command that appears.
@@ -36,3 +42,5 @@ That's it! When publishing or previewing the Confluence page, your Cloudcraft di
 **Who can view embedded diagrams?**
 
 Embedded diagrams are only viewable by Confluence user accounts. In other words, embedded diagrams won't be displayed when visiting the public URL of a Confluence page.
+
+[1]: https://marketplace.atlassian.com/apps/1233281/cloudcraft-aws-and-azure-cloud-diagrams-for-confluence?hosting=cloud&tab=overview
