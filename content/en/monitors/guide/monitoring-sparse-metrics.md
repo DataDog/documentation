@@ -12,9 +12,7 @@ further_reading:
 
 ## Overview
 
-When monitoring a metric that reports data infrequently, there are some tools and behaviors that should be considered to ensure a monitor's settings are appropriate for evaluating these queries as intended.
-
-Metric Monitors that report data infrequently, can have unexpected results and queries may not evaluate as intended. There are tools and behaviors that you can use to ensure a monitor's settings are appropriate for your data and expected evaluations. 
+Monitors that report data infrequently, can have unexpected results and queries may not evaluate as intended. There are tools and behaviors that you can use to ensure a monitor's settings are appropriate for your data and expected evaluations. 
 
 This guide covers the following ways of troubleshooting and configuring monitors with sparse data:
 - [Determine if you have sparse metrics](#how-to-determine-whether-you-have-a-sparse-metric)
