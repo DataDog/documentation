@@ -1,6 +1,6 @@
 ---
 title: Will I lose my diagrams if I downgrade?
-kind: guide
+kind: faq
 ---
 
 You will not lose access to your diagrams when downgrading your account to our free tier. As long as you do not close your account you should not lose access to the diagrams.

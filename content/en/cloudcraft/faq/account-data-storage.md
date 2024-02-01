@@ -1,6 +1,6 @@
 ---
 title: Where is my data stored?
-kind: guide
+kind: faq
 ---
 
 Cloudcraft stores data in the AWS us-east-1 (North Virginia) region for public cloud users, and in the AWS us-gov-west-1 (US West) region for GovCloud customers.

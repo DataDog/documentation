@@ -1,6 +1,6 @@
 ---
 title: Can I scan multiple accounts onto the same blueprint?
-kind: guide
+kind: faq
 ---
 
 Yes, yes, you can!

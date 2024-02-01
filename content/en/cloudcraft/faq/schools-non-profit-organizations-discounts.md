@@ -1,6 +1,6 @@
 ---
 title: Do you offer discounts for schools and non-profit organizations?
-kind: guide
+kind: faq
 ---
 
 Yes we do! Staff, teachers, and students at educational institutions and non-profit organizations are eligible for a 50% discount on any Cloudcraft Pro subscription.

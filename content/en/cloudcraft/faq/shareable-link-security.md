@@ -1,6 +1,6 @@
 ---
 title: How are shared blueprint links secured?
-kind: guide
+kind: faq
 ---
 
 A shared link should be treated as a password or secret and handled accordingly, since anyone with access to the link can view your blueprint. The link itself contains a secret access key.

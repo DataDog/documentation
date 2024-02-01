@@ -1,6 +1,6 @@
 ---
 title: What payment methods are accepted?
-kind: guide
+kind: faq
 ---
 
 All major credit and debit cards are accepted when signing up online, including Visa, MasterCard, Discover, and American Express.

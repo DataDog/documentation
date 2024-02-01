@@ -1,6 +1,6 @@
 ---
 title: Why do I get error 429 Too Many Requests when using the API?
-kind: guide
+kind: faq
 ---
 
 The [Cloudcraft API][1] will return an <code>HTTP 429 Too Many Requests</code> response when you trigger the rate limit in place for the endpoint you called.

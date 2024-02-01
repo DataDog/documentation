@@ -1,6 +1,6 @@
 ---
 title: Can you disable 2FA on my account?
-kind: guide
+kind: faq
 ---
 
 Yes, we can. If you no longer have access to your device or your recovery code, please [send an email to our support team](mailto:support@cloudcraft.co) to begin the reset process.

@@ -1,6 +1,6 @@
 ---
 title: Does Cloudcraft have HIPAA accreditation?
-kind: guide
+kind: faq
 ---
 
 Cloudcraft does not currently have HIPAA accreditation, however, the Cloudcraft application, services, and your data are hosted on [HIPAA eligible services within AWS][1].
