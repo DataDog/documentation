@@ -93,7 +93,7 @@ datadog:
         processCollection: true
 ```
 
-Then upgrade your Helm chart:
+Then, upgrade your Helm chart:
 
 ```shell
 helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
@@ -122,7 +122,6 @@ spec:
 
 {{% k8s-operator-redeploy %}}
 
-[1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{% tab "Kubernetes (Manual)" %}}
 
