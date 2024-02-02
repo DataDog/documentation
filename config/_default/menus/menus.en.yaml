@@ -823,12 +823,6 @@ main:
     identifier: coscreen_troubleshooting
     parent: coscreen
     weight: 1
-  - name: Standard Attributes
-    url: standard-attributes/
-    pre: table
-    identifier: standard_attributes
-    parent: essentials_heading
-    weight: 100000
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
