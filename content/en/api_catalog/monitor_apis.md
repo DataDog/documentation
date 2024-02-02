@@ -77,7 +77,7 @@ Powered by Datadog [Application Security Management (ASM)][4], the **SECURITY SI
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/api_catalog/get_started/#register-autodiscovered-endpoints
+[1]: /tracing/api_catalog/get_started/#register-automatically detected-endpoints
 [2]: /tracing/api_catalog/explore_and_catalog_apis/#establishing-ownership
 [3]: /synthetics/api_tests/http_tests/
 [4]: /security/application_security/threats/

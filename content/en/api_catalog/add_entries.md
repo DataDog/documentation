@@ -24,11 +24,11 @@ aliases:
 
 API Catalog uses APM instrumentation for distributed tracing to automatically discover endpoints your Datadog organization. For instrumented services with supported libraries, endpoints are automatically populated into API Catalog.
 
-Register autodiscovered endpoints, or upload an OpenAPI file to benefit from the full value of API Catalog.
+Register automatically detected endpoints, or upload an OpenAPI file to benefit from the full value of API Catalog.
 
-## Register autodiscovered endpoints
+## Register automatically detected endpoints
 
-Register autodiscovered endpoints to groups of APIs to track their usage, set ownership, and set monitoring policies from a centralized location.
+Register automatically detected endpoints to groups of APIs to track their usage, set ownership, and set monitoring policies from a centralized location.
 
 To register endpoints:
 
