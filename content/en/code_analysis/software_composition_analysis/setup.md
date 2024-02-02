@@ -23,12 +23,12 @@ further_reading:
 
 {{% site-region region="gov" %}}
 <div class="alert alert-danger">
-    Software Composition Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
+    Code Analysis is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>
 {{% /site-region %}}
 
 {{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-Software Composition Analysis is part of the Code Analysis public beta.
+Code Analysis is in public beta.
 {{< /callout >}}
 
 ## Overview
