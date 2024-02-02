@@ -7,7 +7,8 @@ further_reading:
   tag: "Documentation"
   text: "Datadog Service Catalog"
 aliases:
-    - /tracing/api_catalog/explore_and_catalog_apis
+    - /tracing/api_catalog/explore_and_catalog_apis/
+    - /api_catalog/explore_and_catalog_apis/
 ---
 
 {{< img src="tracing/api_catalog/api-catalog-explorer.png" alt="API Catalog Explorer view" style="width:100%;" >}}
