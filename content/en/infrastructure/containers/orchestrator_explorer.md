@@ -146,15 +146,19 @@ You can narrow down the displayed resources by supplying a query within the "Fil
 
 ### Syntax
 
-A query filter is composed of terms and operators. There are multiple types of terms available:
+A query filter is composed of terms and operators.
+
+#### Terms
+
+There are multiple types of terms available:
 
 | Type | Example |
 |---|---|
 | **Tags** are attached to resources by [the agent collecting them](https://docs.datadoghq.com/getting_started/tagging/assigning_tags/?tab=containerizedenvironments). There are also additional tags that Datadog generates for Kubernetes resources. | `datacenter:staging` or<br>`tag#datacenter:staging` |
 | **Labels** are extracted from [a resource's metadata](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/). They are typically used to organize your cluster and target specific resources via selectors. | `label#chart_version:2.1.0` |
 | **Annotations** are also extracted from [a resource's metadata](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/). They are generally used to support tooling that aid in cluster management. | `annotation#checksum/configmap:a1bc23d4` |
-| **Fields** are attributes found within the resource manifest. Not all attributes are supported, see [Filterable Fields](#filterable-fields) for more details. | `field#metadata.creationTimestamp:>1699535065>` |
-| **Metrics** are added to workload resources (pods, deployments, etc.). You can find resources based on their utilization. To see what metrics are supported, see [Resource Utilization Filters](#resource-utilization-filters). | `metric#cpu_usage_pct_limits_avg15:80%` |
+| **Fields** are attributes found within the resource manifest. Not all attributes are supported, see [Filterable Fields](#filterable-fields) for more details. | `field#metadata.creationTimestamp:>1699535065` |
+| **Metrics** are added to workload resources (pods, deployments, etc.). You can find resources based on their utilization. To see what metrics are supported, see [Resource Utilization Filters](#resource-utilization-filters). | `metric#cpu_usage_pct_limits_avg15:>80%` |
 | **String matching** is supported by some specific resource attributes, see below.<br>*Note: string matching does not use the key-value format, and you cannoy specify the attribute to match on.* | `"10.132.6.23"` (IP),<br>`"9cb4b43f-8dc1-4a0e"` (UID) or<br>`"web-api-3"` (Name) |
 
 >  ***Notes**:*
@@ -169,6 +173,10 @@ The following resource attributes are supported in string matching:
   - Pods
   - Nodes (Internal and External)
   - Services (Cluster, External, and Load Balancer IPs)
+
+This means that you do not need to specify a key to search for a resource by name, or IP.
+
+#### Operators
 
 To combine multiple terms into a complex query, you can use any of the following case sensitive Boolean operators:
 
