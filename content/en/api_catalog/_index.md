@@ -78,7 +78,7 @@ Read [Monitoring APIs][7] for more information.
 
 ### Adding entries to API Catalog
 
-Register auto-discovered endpoints to groups of APIs to track their usage, set ownership, and set monitoring policies from a centralized location. Alternatively, upload an OpenAPI/Swagger file to benefit from the full value of API Catalog.
+Register autodiscovered endpoints to groups of APIs to track their usage, set ownership, and set monitoring policies from a centralized location. Alternatively, upload an OpenAPI/Swagger file to benefit from the full value of API Catalog.
 
 Read [Adding Entries to API Catalog][9] for more information.
 
