@@ -12,9 +12,9 @@ To learn more about the supported deployment types for each CSM feature, see [Se
 
 {{< tabs >}}
 
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
-1. Add the following to the `spec` section of the `values.yaml` file:
+1. Add the following to the `spec` section of the `datadog-agent.yaml` file:
 
     ```yaml
     apiVersion: datadoghq.com/v2alpha1
@@ -37,7 +37,7 @@ To learn more about the supported deployment types for each CSM feature, see [Se
 
 {{% tab "Helm" %}}
 
-1. Add the following to the `datadog` section of the `values.yaml` file:
+1. Add the following to the `datadog` section of the `datadog-values.yaml` file:
 
     ```yaml
     datadog:

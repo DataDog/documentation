@@ -10,12 +10,12 @@ Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threat
 
 {{< tabs >}}
 
-{{% tab "Operator" %}}
+{{% tab "Datadog Operator" %}}
 
-1. Add the following to the `spec` section of the `values.yaml` file:
+1. Add the following to the `spec` section of the `datadog-agent.yaml` file:
 
     ```yaml
-    # values.yaml file
+    # datadog-agent.yaml file
     apiVersion: datadoghq.com/v2alpha1
     kind: DatadogAgent
     metadata:
@@ -48,10 +48,10 @@ Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threat
 
 {{% tab "Helm" %}}
 
-1. Add the following to the `datadog` section of the `values.yaml` file:
+1. Add the following to the `datadog` section of the `datadog-values.yaml` file:
 
     ```yaml
-    # values.yaml file
+    # datadog-values.yaml file
     datadog:
       remoteConfiguration:
         enabled: true
@@ -78,7 +78,7 @@ Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threat
 
 {{% /tab %}}
 
-{{% tab "Daemonset" %}}
+{{% tab "DaemonSet" %}}
 
 Add the following settings to the `env` section of `security-agent` and `system-probe` in the `daemonset.yaml` file:
 
