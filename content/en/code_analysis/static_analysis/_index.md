@@ -22,7 +22,7 @@ further_reading:
 {{% /site-region %}}
 
 {{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-Static Analysis is part of the Code Analysis public beta.
+Code Analysis public beta.
 {{< /callout >}}
 
 ## Overview
