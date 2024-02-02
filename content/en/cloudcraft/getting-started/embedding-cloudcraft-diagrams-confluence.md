@@ -1,5 +1,5 @@
 ---
-title: Embedding Cloudcraft diagrams with the Confluence app
+title: Embedding Cloudcraft Diagrams with the Confluence App
 kind: documentation
 ---
 
