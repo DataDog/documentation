@@ -53,8 +53,6 @@ Configure the following in the [server parameters][3] and then **restart the ser
 
 The agent also requires `performance_schema.events_statements_*` consumers to be set to `ON` to collect currently running queries. By default, Azure MySQL Database enables performance schema consumers so no additional configuration is required.
 
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-
 ## Grant the Agent access
 
 The Datadog Agent requires read-only access to the database in order to collect statistics and queries.
@@ -333,3 +331,4 @@ If you have installed and configured the integrations and Agent as described, an
 [7]: https://app.datadoghq.com/databases
 [8]: /integrations/azure_db_for_mysql
 [9]: /database_monitoring/setup_mysql/troubleshooting
+[10]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
