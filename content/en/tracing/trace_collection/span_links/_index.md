@@ -48,6 +48,19 @@ If your application is instrumented with:
 - The OpenTelemetry SDK, follow the OpenTelemetry manual instrumentation documentation for your language. For example, [Create spans with links for Java][3].
 - The PHP Datadog library, follow the [Adding span links][1] examples.
 
+## Minimum Support
+
+``datadog-agent>=7.52.0`` is required to generate Span Links using datadog client libraries (ex: ddtrace). Span Links are supported in the following versions of datadog client libraries:
+
+- Python: ddtrace>=2.5.0
+- GO: ddtrace>=1.61.0
+- PHP: .....
+- Java: ....
+- Node: ...
+- .NET: ...
+
+Note: (blurb about OTLP support for Span Links)
+
 ## Viewing span links
 
 You can view span links from the [Trace Explorer][4] in Datadog.
