@@ -1351,38 +1351,38 @@ main:
     identifier: service_catalog_guides
     weight: 9
   - name: API Catalog
-    url: /tracing/api_catalog/
+    url: /api_catalog/
     pre: api
     parent: platform_heading
     identifier: api_catalog
     weight: 80000
   - name: Exploring APIs
-    url: /tracing/api_catalog/explore_and_catalog_apis/
+    url: /api_catalog/explore_and_catalog_apis/
     identifier: api_catalog_explore
     parent: api_catalog
     weight: 1
-  - name: Setting Owners and Tags
-    url: /tracing/api_catalog/owners_and_tags/
+  - name: Establishing Owners and Tagging Endpoints
+    url: /api_catalog/owners_and_tags/
     identifier: api_catalog_ownership
     parent: api_catalog
     weight: 2
   - name: Monitoring APIs
-    url: /tracing/api_catalog/monitor_apis/
+    url: /api_catalog/monitor_apis/
     identifier: api_catalog_monitor
     parent: api_catalog
     weight: 3
   - name: Adding Entries to API Catalog
-    url: /tracing/api_catalog/add_entries/
+    url: /api_catalog/add_entries/
     identifier: api_catalog_entries
     parent: api_catalog
     weight: 4
-  - name: Adding Metadata
-    url: /tracing/api_catalog/metadata/
+  - name: Adding Metadata to APIs
+    url: /api_catalog/add_metadata/
     identifier: api_catalog_metadata
     parent: api_catalog
     weight: 5
   - name: Troubleshooting
-    url: /tracing/api_catalog/troubleshoot/
+    url: /api_catalog/troubleshoot/
     identifier: api_catalog_troubleshoot
     parent: api_catalog
     weight: 6

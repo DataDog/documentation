@@ -24,7 +24,7 @@ aliases:
 
 API Catalog uses APM instrumentation for distributed tracing to automatically discover endpoints your Datadog organization. For instrumented services with supported libraries, endpoints are automatically populated into API Catalog.
 
-Register auto-discovered endpoints, or upload an OpenAPI file to benefit the full value of the API Catalog.
+Register auto-discovered endpoints, or upload an OpenAPI file to benefit from the full value of API Catalog.
 
 ## Register auto-discovered endpoints
 
@@ -32,22 +32,29 @@ Register auto-discovered endpoints to groups of APIs to track their usage, set o
 
 To register endpoints:
 
-1. From the API Catalog, select the endpoints to register.
+1. From the **Explorer** page, select the endpoints to register.
 2. Click **Register Endpoints**.
 3. Select the API(s) you want to group the endpoints into.
 4. Click **Apply**.
 
 {{< img src="tracing/api_catalog/api-catalog-register.png" alt="Select endpoints in API Catalog and click Register Endpoints button." style="width:65%;" >}}
 
-After endpoints are registered, Datadog starts collecting a new endpoint metric for better monitoring capabilities.
+After endpoints are registered, Datadog starts collecting a new endpoint metric for better [monitoring capabilities][6].
 
-Auto discovery is not available for some frameworks. Check compatibility status in the **learn more** button on the app. If you still cannot find your endpoints, try uploading a definition file containing them. Datadog automatically starts collecting data on those endpoint definitions after they are uploaded.
+Auto discovery is not available for some frameworks. Check compatibility status in the **learn More** button in Datadog. If you still cannot find your endpoints, try uploading a definition file containing them. Datadog automatically starts collecting data on those endpoint definitions after they are uploaded.
 
-## Upload OpenAPI file
+## Import OpenAPI/Swagger file
 
-Upload API definitions that you already own to see which endpoints are receiving traffic, which are not receiving traffic, and get performance and deployment information on top of your API definitions.
+Import API definitions that you already own to see which endpoints are receiving traffic, which are not receiving traffic, and get performance and deployment information on top of your API definitions.
 
 Supported formats are OpenAPI 2 and 3.
+
+To import an OpenAPI/Swagger file:
+
+1. Go to the **Catalog** page.
+2. Click **Add API**.
+3. Select **Import an API**.
+4. Choose the OpenAPI file to import from your device.
 
 ## Further reading
 
@@ -58,3 +65,4 @@ Supported formats are OpenAPI 2 and 3.
 [3]: /tracing/trace_collection/
 [4]: https://app.datadoghq.com/apis/catalog-page
 [5]: https://app.datadoghq.com/apis/catalog
+[6]: /tracing/api_catalog/monitor_apis/

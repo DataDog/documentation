@@ -6,21 +6,29 @@ further_reading:
 - link: "/tracing/service_catalog/"
   tag: "Documentation"
   text: "Datadog Service Catalog"
+aliases:
+    - /tracing/api_catalog/metadata/
+    - /tracing/api_catalog/add_metadata/
 ---
 
 ## Overview
+
 You can add metadata to APIs through the Datadog UI, API, or use automated pipelines through the GitHub integration or Terraform.
 
 ## Metadata structure and supported versions
-The API Catalog supports openAPI 2 and 3 as the format for defining APIs. 
 
-Datadog supports custom openAPI fields to help manage metadata:
-API owner - Add the following to the top level of the openAPI file
-x-datadog:
- teamHandle: dd-team
+API Catalog supports OpenAPI 2 and 3 as the format for defining APIs. 
 
-Example openAPI file:
+Datadog supports custom OpenAPI fields to help manage metadata:
+- **API owner** Add the following to the top level of the OpenAPI file:
+  ```yaml
+  x-datadog:
+   teamHandle: dd-team
+  ```
 
+Example OpenAPI file:
+
+```yaml
 openapi: 3.0.2
 info:
  title: API Name
@@ -53,3 +61,8 @@ paths:
          description: Unauthorized operation
        '500':
          description: An internal server error
+```
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
