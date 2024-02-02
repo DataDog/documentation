@@ -1,6 +1,6 @@
 ---
 title: Generate an API key
-kind: guide
+kind: documentation
 ---
 
 Cloudcraft offers a developer API that provides programmatic access to and remote rendering of your architecture diagrams. The API also provides fully automated visualization of AWS and Azure accounts that are linked with your Cloudcraft account, either as ready to use images or as JSON data.

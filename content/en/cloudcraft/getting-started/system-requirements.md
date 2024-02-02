@@ -1,6 +1,6 @@
 ---
 title: System requirements
-kind: guide
+kind: documentation
 ---
 
 Our development team strives to make Cloudcraft more accessible, but for now, our application will work best with Google Chrome and other Chromium-based browsers, like Microsoft Edge, Brave, and Opera.

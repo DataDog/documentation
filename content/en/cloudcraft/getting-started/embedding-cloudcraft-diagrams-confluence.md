@@ -1,6 +1,6 @@
 ---
 title: Embedding Cloudcraft diagrams with the Confluence app
-kind: guide
+kind: documentation
 ---
 
 In this article, we'll walk you through the process of seamlessly integrating your current Cloudcraft diagrams into a Confluence page by using Cloudcraft's Confluence app.
