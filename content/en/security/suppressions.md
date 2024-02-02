@@ -75,3 +75,4 @@ To see a list of rules using the legacy suppression query and to migrate them:
 [2]: /security/detection_rules/
 [3]: https://app.datadoghq.com/security/configuration/suppressions
 [4]: https://app.datadoghq.com/security/rules
+[5]: /logs/explorer/facets/#log-side-panel
