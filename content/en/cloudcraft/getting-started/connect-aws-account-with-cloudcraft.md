@@ -1,5 +1,5 @@
 ---
-title: Connect your AWS account to Cloudcraft
+title: Connect your AWS Account to Cloudcraft
 kind: documentation
 ---
 
