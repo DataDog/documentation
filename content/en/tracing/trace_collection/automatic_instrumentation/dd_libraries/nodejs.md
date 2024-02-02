@@ -160,7 +160,7 @@ esbuild.build({
 })
 ```
 
-Note that due to the usage of native modules in the tracer, which are compiled C++ code in a usually ending with a `.node` file extension, you'll need to add entries to your `external` list. Currently native modules used in the Node.js tracer live inside of `@datadog` prefixed packages. This will also require that you ship a `node_modules/` directory alongside your bundled application. You probably don't want to ship your entire `node_modules/` directory as it would contain many superfluous packages that should be contained in your bundle.
+**Note**: Due to the usage of native modules in the tracer, which are compiled C++ code, (usually ending with a `.node` file extension), you need to add entries to your `external` list. Currently native modules used in the node.js tracer live inside of `@datadog` prefixed packages. This will also require that you ship a `node_modules/` directory alongside your bundled application. You don't need to ship your entire `node_modules/` directory as it would contain many superfluous packages that should be contained in your bundle.
 
 To generate a smaller `node_modules/` directory with just the required native modules (and their dependencies) you can first determine the versions of packages that you need, then create a temporary directory to install them into, and copy the resulting `node_modules/` directory from it. For example:
 
