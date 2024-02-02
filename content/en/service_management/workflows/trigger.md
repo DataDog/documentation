@@ -7,6 +7,9 @@ algolia:
 aliases:
 - /workflows/trigger
 further_reading:
+- link: "/getting_started/workflow_automation/"
+  tag: "Documentation"
+  text: "Getting Started with Workflow Automation"
 - link: "/service_management/workflows/access/#service-accounts/"
   tag: "Documentation"
   text: "Find out more about Service Accounts for workflows"
@@ -54,6 +57,16 @@ To run the workflow:
 1. Click **Run Workflow** on your dashboard widget.
 1. Under **Execution parameters**, any template variables you mapped to workflow inputs are automatically populated. Enter the values for any unmapped execution parameters, or edit the existing values if needed.
 1. Click **Run** to run the workflow.
+
+## Trigger a workflow from a workflow
+
+You can trigger a child workflow from another workflow using the **Trigger Workflow** action. For example, if you have a complex series of steps that you need to reuse in several workflows, there's no need to recreate those steps for all of your workflows. Instead, add the steps to a new workflow and trigger it in your other workflows using the Trigger Workflow action.
+
+<div class="alert alert-info">For billing purposes, triggering a child workflow registers as a new workflow execution.</div>
+
+If the child workflow has [input parameters][5], these parameters appear as required fields in the Trigger Workflow action. In the example below, the **service_name** input parameter is required because `service_name` is set as an input parameter in the child workflow.
+
+{{< img src="service_management/workflows/trigger-workflow-step.png" alt="The service-name input parameter is required in the child workflow" style="width:100%;" >}}
 
 ## Trigger a workflow from a Monitor
 
@@ -137,3 +150,4 @@ The initial run history for a workflow provides a panel with the list of previou
 [2]: https://app.datadoghq.com/monitors/manage
 [3]: https://app.datadoghq.com/security/configuration/notification-rules
 [4]: /security/cloud_security_management/workflows
+[5]: /service_management/workflows/build/#input-parameters
