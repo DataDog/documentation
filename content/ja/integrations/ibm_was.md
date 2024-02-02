@@ -33,7 +33,7 @@ draft: false
 git_integration_title: ibm_was
 integration_id: ibm-was
 integration_title: IBM WAS
-integration_version: 2.3.3
+integration_version: 3.1.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -190,6 +190,6 @@ IBM WAS には、イベントは含まれません。
 [1]: https://www.ibm.com/cloud/websphere-application-platform
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [3]: https://github.com/DataDog/integrations-core/blob/master/ibm_was/datadog_checks/ibm_was/data/conf.yaml.example
-[4]: https://app.datadoghq.com/account/settings#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://docs.datadoghq.com/ja/help/

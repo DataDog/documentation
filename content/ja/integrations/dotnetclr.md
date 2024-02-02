@@ -28,7 +28,7 @@ draft: false
 git_integration_title: dotnetclr
 integration_id: dotnetclr
 integration_title: .NET CLR
-integration_version: 1.13.0
+integration_version: 2.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -95,7 +95,7 @@ tile:
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/dotnetclr/datadog_checks/dotnetclr/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
