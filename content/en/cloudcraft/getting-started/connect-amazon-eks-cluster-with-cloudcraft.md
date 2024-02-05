@@ -3,28 +3,23 @@ title: Connect an Amazon EKS Cluster with Cloudcraft
 kind: documentation
 ---
 
-By scanning your Amazon EKS clusters, Cloudcraft allows you to visualize workloads and pods deployed inside to generate professional-looking system architecture diagrams.
+By scanning your Amazon EKS clusters, Cloudcraft allows you to generate system architecture diagrams to help visualize your deployed workloads and pods.
 
-By using the existing [role-based access control (RBAC) authorization method provided by Kubernetes][1] and authorizing [our existing read-only IAM entity role][2], Cloudcraft requires no special software or agent to look inside your clusters.
+Cloudcraft uses the [role-based access control (RBAC) authorization method provided by Kubernetes][1] to authorize [Cloudcraft's existing read-only IAM entity role][2]. That means Cloudcraft requires no special software or agent.
 
-You can find more information on RBAC configuration and IAM entities in the link below:
+To learn more about RBAC configuration and IAM entities, see [Managing users or IAM roles for your cluster][3].
 
-- [Managing users or IAM roles for your cluster][3]
-
-<section class="alert alert-info">
-  <p>The ability to scan Amazon EKS clusters and AWS accounts is only available to Cloudcraft Pro subscribers. Check out <a href="https://www.cloudcraft.co/pricing">our pricing page</a> for more information.</p>
-</section>
+<div class="alert alert-info">The ability to scan Amazon EKS clusters and AWS accounts is only available to Cloudcraft Pro subscribers. Check out <a href="https://www.cloudcraft.co/pricing">our pricing page</a> for more information.</div>
 
 ## Prerequisites
 
-Before connecting your Amazon EKS clusters with Cloudcraft, you need to connect your AWS account and generate diagrams that include your clusters.
+Before connecting your Amazon EKS clusters with Cloudcraft, you must connect your AWS account and generate diagrams that include your clusters.
 
-Linked below, you will find documentation to help you connect your AWS account and familiarize yourself with Cloudcraft.
-
+To connect your AWS account and familiarize yourself with Cloudcraft, see the following articles:
 - [Connect your AWS account with Cloudcraft][4]
 - [Create your first live AWS diagram][5]
 
-<p>You will also want to <a referrerpolicy="no-referrer" rel="noreferrer external help" href="https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html">install and configure <code>kubectl</code></a>, a tool that lets you control Kubernetes clusters through the command line. AWS requires version 1.21 or higher, but we recommend using the latest version to avoid issues.</p>
+You should also [install and configure `kubectl`][7], a tool that allows you to control Kubernetes clusters through the command line. Cloudcraft recommends using the latest version to avoid issues.
 
 ## Authorizing the Cloudcraft IAM role for view-only
 
@@ -34,7 +29,7 @@ With your AWS environment mapped into a blueprint, select the Amazon EKS cluster
 
 {{< img src="cloudcraft/getting-started/connect-amazon-eks-cluster-with-cloudcraft/enable-cluster-scanning.png" alt="Interactive Cloudcraft diagram showing an AWS EKS cluster with enable cluster scanning button highlighted." responsive="true" style="width:100%;">}}
 
-The next screen will provide step-by-step instructions, so open a terminal window and proceed.
+The next screen provides step-by-step commands to run in Terminal.
 
 As the Amazon EKS cluster creator or user with admin access, open the aws-auth ConfigMap file with `kubectl`.
 
@@ -42,7 +37,7 @@ As the Amazon EKS cluster creator or user with admin access, open the aws-auth C
 kubectl edit -n kube-system configmap/aws-auth
 ```
 
-With the `aws-auth.yaml` file open in your favorite text editor, add the role details to the *mapRoles* section of the file, just after under the *data* section.
+With the `aws-auth.yaml` file open in a text editor, add the role details to the *mapRoles* section of the file, just after under the *data* section.
 
 ```
 data:
@@ -54,21 +49,17 @@ data:
 
 If the section does not exist, add it. Once done, save the file and exit.
 
-<section class="alert alert-info">
-  <p><em>groups</em> refer to groups within your cluster to which you mapped the role to. The <a referrerpolicy="no-referrer" rel="noreferrer external help" href="https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings">Default Roles and Role Bindings</a> page in the Kubernetes documentation website should give you more information.</p>
-</section>
+<div class="alert alert-info">`groups` refer to groups in your cluster to which the role is mapped. For more information, see [Default Roles and Role Bindings][8] in the Kubernetes documentation.</div>
 
-<section class="alert alert-danger">
-  <p>Typos and syntax errors can affect the permissions of all IAM users and roles updated within the ConfigMap file. We recommend adding a YAML linter to your favorite text editor to prevent issues.</p>
-</section>
+<div class="alert alert-danger">Typos and syntax errors can affect the permissions of all IAM users and roles updated in the ConfigMap file. To prevent this from occuring, Cloudcraft recommends adding a YAML linter to your text editor.</div>
 
 ## Granting view-only access to the Cloudcraft IAM role
 
-Our IAM role is now allowed to have view-only access, but that alone is not enough, you still need to bind the IAM role to a Kubernetes role with a [ClusterRoleBinding][6].
+Next, use [ClusterRoleBinding][6] to bind the IAM role to a Kubernetes role.
 
-A ClusterRoleBinding grants permissions defined in a role to a user or set of users in all namespaces in a cluster. Kubernetes defines some default user-facing roles, and we will use the predefined "view" role that allows view-only access to see most objects in a namespace.
+A ClusterRoleBinding grants permissions defined in a role to a user or set of users in all namespaces in a cluster. Kubernetes defines some default user-facing roles. For Cloudcraft, use the predefined "view" role that allows view-only access to most objects in a namespace.
 
-Enter the multi-line command below to create the ClusterRoleBinding and grant view-only permission to users in the *cloudcraft-view-only* group.
+Enter the following multi-line command to create the ClusterRoleBinding and grant view-only permission to users in the **cloudcraft-view-only** group.
 
 ```
 cat << EOF | kubectl apply -f -
@@ -89,17 +80,17 @@ EOF
 
 ## Testing access to the cluster
 
-Head back to Cloudcraft and click the **Test cluster access** button at the bottom of the **Enable Kubernetes Cluster Scanning** screen.
+To test that Cloudcraft can access to the cluster, click **Test cluster access** at the bottom of the **Enable Kubernetes Cluster Scanning** screen.
 
 {{< img src="cloudcraft/getting-started/connect-amazon-eks-cluster-with-cloudcraft/test-cluster-access.png" alt="Cloudcraft interface showing Kubernetes cluster role configuration with a 'Test Cluster Access' button highlighted by an arrow." responsive="true" style="width:100%;">}}
 
-That is it! Assuming the test passed, Cloudcraft should be able to visualize workloads and pods for this cluster.
-
-If you want to scan other clusters, repeat the process as many times as needed.
+To scan other clusters, repeat the process as many times as needed.
 
 [1]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
-[2]: https://help.cloudcraft.co/article/108-how-cloudcraft-connects-to-aws
+[2]: /cloudcraft/faq/how-cloudcraft-connects-to-aws/
 [3]: https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html
-[4]: https://help.cloudcraft.co/article/87-connect-aws-account-with-cloudcraft
-[5]: https://help.cloudcraft.co/article/99-create-your-first-cloudcraft-diagram
+[4]: /cloudcraft/getting-started/connect-aws-account-with-cloudcraft/
+[5]: /cloudcraft/getting-started/create-your-first-cloudcraft-diagram/
 [6]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding
+[7]: https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
+[8]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings
