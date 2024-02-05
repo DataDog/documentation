@@ -56,5 +56,5 @@ cascade:
     {{< nextlink href="/real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools" >}}Connect Session Replay to your third-party tools{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/using-session-replay-as-a-key-tool-in-post-mortems" >}}Using Session Replay as a key tool in post-mortems{{< /nextlink >}}
     {{< nextlink href="/synthetics/guide/rum-to-synthetics" >}}Generate Synthetic Browser Tests from Session Replay{{< /nextlink >}}
-    {{< nextlink href="/synthetics/guide/investigate-zendesk-tickets-with-session-replay" >}}Investigate Zendesk Tickets with Session Replay{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/guide/investigate-zendesk-tickets-with-session-replay" >}}Investigate Zendesk Tickets with Session Replay{{< /nextlink >}}
 {{< /whatsnext >}}

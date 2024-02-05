@@ -1,10 +1,6 @@
 ---
 title: Investigate Zendesk Tickets with Session Replay
 kind: guide
-further_reading:
-  - link: '/real_user_monitoring/session_replay/playlists'
-    tag: 'Documentation'
-    text: 'Session Replay Playlists'
 ---
 
 ## Overview
@@ -13,7 +9,7 @@ When troubleshooting user-reported issues in Zendesk tickets, engineers often st
 
 With this integration, support engineers can:
 - Watch a [Session Replay][3] of the user's actions
-- Examine related backend API calls
+- Examine related backend calls
 - Organize related Session Replays into one playlist
 
 Support teams can troubleshoot more efficiently, which means customers receive solutions more quickly.
@@ -32,11 +28,11 @@ To view the session replays associated with a Zendesk ticket:
 
 {{< img src="real_user_monitoring/guide/zendesk/zendesk-sr-demo.mp4" alt="Accessing a session replay from Zendesk" video=true >}}
 
-From the replay page, you can view a list of the user's actions, along with the backend API calls associated with each action. You can also add the replay to a [playlist][4] to group related issues together for easier browsing and sharing.
+From the replay page, you can view a list of the user's actions, along with the backend calls associated with each action. Hover over an event and click **Details** to view associated traces, errors, and more.
 
-## Further Reading
+{{< img src="real_user_monitoring/guide/zendesk/session-replay-details-button.png" alt="Hover view of a session replay event with the Details button highlighted" style="width:60%;" >}}
 
-{{< partial name="whats-next/whats-next.html" >}}
+You can also add the replay to a playlist to group related issues together for easier browsing and sharing. See the [Session Replay Playlists documentation][4].
 
 [1]: /integrations/zendesk/#zendesk-rum-app-installation
 [2]: https://www.zendesk.com/sg/marketplace/apps/support/993138/datadog-rum/?queryID=fb54e1e367559c15de7e8a0f1eb8aa6f
