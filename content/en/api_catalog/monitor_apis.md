@@ -30,23 +30,6 @@ After you have [registered all your endpoints][1] and [assigned team ownership][
 
  <div class="alert alert-info">After you have registered endpoints, Datadog starts collecting a new endpoint metric for better monitoring capabilities. It might take a few minutes for the data to display if you try to create a new monitor with this metric.</div>
 
-
-## Detecting under-performing APIs and identify opportunities for optimization
-
-When exploring an endpoint, getting a higher resolution view of the API endpoint details is helpful.
-
-Use the filtering, sorting, and searching options in API Catalog to find endpoints of interest.
-Click an endpoint to view its details page. Here you can see performance, errors, issues, deployments, monitors, ownership, a dependency map, and metadata information in one central location. From the details page, you can also add custom tags to the endpoint. You can also investigate the various types of telemetry using links to other areas of Datadog. 
-
-In the details page, you can:
-- Look up a specific endpoint by path (for example, `/checkout`) when it shows a high error rate and a high request count.
-- View the **Requests & Errors** graph and correlated **Response Code** graph to identify issues.
-- Navigate to related telemetry like traces, logs, and errors.
-
-{{< img src="tracing/api_catalog/api-catalog-endpoint-details-pivot-to-traces.mp4" alt="Click into an endpoint to see Errors graph and dependency graph. Click through to related traces to investigate." video="true" >}}
-
-The graphs on the details page are initially scoped to the same settings as the **Explorer** page. You can change those settings on the details page to suit your investigation by using the time frame selector and other scope dropdown menus. 
-
 ## Alerting on endpoints that deviate from expected performance
 
 You can set up monitors to alert you if something causes your endpoints to perform unexpectedly (like occasionally slow performance), to report outlier data (like extremely slow performance or rare errors), or to achieve metrics beyond a desired threshold (high error rates). 
@@ -77,8 +60,8 @@ Powered by Datadog [Application Security Management (ASM)][4], the **SECURITY SI
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/api_catalog/get_started/#register-automatically detected-endpoints
-[2]: /tracing/api_catalog/explore_and_catalog_apis/#establishing-ownership
+[1]: /api_catalog/add_entries/#register-automatically-detected-endpoints
+[2]: /api_catalog/owners_and_tags/#establishing-owners
 [3]: /synthetics/api_tests/http_tests/
 [4]: /security/application_security/threats/
 [5]: /monitors/
