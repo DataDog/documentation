@@ -35727,13 +35727,17 @@ tags:
     API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/)
     for more information.
   name: Cloudflare Integration
-- description: Configure your Datadog Confluent Cloud integration directly through
-    the Datadog API.
+- description: Manage your Datadog Confluent Cloud integration accounts and account
+    resources directly through the Datadog API. See the [Confluent Cloud page](https://docs.datadoghq.com/integrations/confluent_cloud/)
+    for more information.
   name: Confluent Cloud
 - description: The Container Images API allows you to query Container Image data for
-    your organization.
+    your organization. See the [Container Images View page](https://docs.datadoghq.com/infrastructure/containers/container_images/)
+    for more information.
   name: Container Images
 - description: The Containers API allows you to query container data for your organization.
+    See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for
+    more information.
   name: Containers
 - description: Send events for DORA Metrics to measure and improve software delivery.
     See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more
@@ -35757,18 +35761,15 @@ tags:
 
     end times, prevent all alerting related to specified Datadog tags.'
   name: Downtimes
-- description: 'The events service allows you to programmatically post events to the
-    event stream
+- description: 'The Event Management API allows you to programmatically post events
+    to the Events Explorer
 
-    and fetch events from the event stream. Events are limited to 4000 characters.
-
-    If an event is sent out with a message containing more than 4000 characters, only
-    the
-
-    first 4000 characters are displayed.'
+    and fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/)
+    for more information.'
   name: Events
-- description: Configure your Datadog Fastly integration directly through the Datadog
-    API.
+- description: Manage your Datadog Fastly integration accounts and services directly
+    through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/)
+    for more information.
   name: Fastly Integration
 - description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
 
@@ -35788,12 +35789,15 @@ tags:
     contacting Datadog support.'
   name: IP Allowlist
 - description: Create, update, delete, and retrieve services which can be associated
-    with incidents.
+    with incidents. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/)
+    for more information.
   name: Incident Services
 - description: The Incident Teams endpoints are deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/)
     to create, update, delete, and retrieve teams which can be associated with incidents.
   name: Incident Teams
-- description: Manage incident response.
+- description: Manage incident response, as well as associated attachments, metadata,
+    and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/)
+    for more information.
   name: Incidents
 - description: 'Manage your Datadog API and application keys. You need an API key
     and
