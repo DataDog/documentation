@@ -27,7 +27,7 @@ The [API Catalog][1] shows all endpoints in all environments in your Datadog org
 
 The following example shows how to scope the displayed data to a specific environment and cluster-name:
 
-{{< img src="tracing/api_catalog/api-catalog-scope2.mp4" alt="Showing how changing scope settings changes the metrics shown in API Catalog" video="true" >}}
+{{< img src="tracing/api_catalog/api-catalog-scope3.mp4" alt="Showing how changing scope settings changes the metrics shown in API Catalog" video="true" >}}
 
 ## Detecting under-performing APIs and identify opportunities for optimization
 

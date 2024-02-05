@@ -1357,7 +1357,7 @@ main:
     identifier: api_catalog
     weight: 80000
   - name: Exploring APIs
-    url: /api_catalog/explore_and_catalog_apis/
+    url: /api_catalog/explore_apis/
     identifier: api_catalog_explore
     parent: api_catalog
     weight: 1
