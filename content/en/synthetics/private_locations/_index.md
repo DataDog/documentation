@@ -707,6 +707,8 @@ To upgrade an existing private location, click the **Gear** icon on the private 
 Then, run the [configuration command based on your environment](#install-your-private-location
 ) to get the latest version of the private location image. 
 
+***Note***: If you've previously installed the Private Location image using the `latest` tag, make sure to add `--pull=always` to the `docker run` command to make sure the newest version is pulled rather than relying on the cached version of the image that may exist locally with the same `latest` tag.
+
 ### Test your internal endpoint
 
 Once at least one private location container starts reporting to Datadog, the private location status displays green.
