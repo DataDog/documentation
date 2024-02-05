@@ -1,6 +1,10 @@
 ---
 title: Investigate Zendesk Tickets with Session Replay
 kind: guide
+further_reading:
+  - link: '/real_user_monitoring/session_replay/playlists'
+    tag: 'Documentation'
+    text: 'Session Replay Playlists'
 ---
 
 ## Overview
@@ -8,7 +12,7 @@ kind: guide
 When troubleshooting user-reported issues in Zendesk tickets, engineers often struggle to understand the context in which the problem occurred. With the Zendesk and Session Replay integration, teams can immediately reproduce the user's context from a Zendesk ticket with one click.
 
 With this integration, support engineers can:
-- Watch a Session Replay of the user's actions
+- Watch a [Session Replay][3] of the user's actions
 - Examine related backend API calls
 - Organize related Session Replays into one playlist
 
@@ -18,31 +22,23 @@ Support teams can troubleshoot more efficiently, which means customers receive s
 
 To set up the Zendesk integration, complete the **How to install** section of the [Zendesk Marketplace page for Datadog RUM][2].
 
-## How to use
+## Explore a Session Replay from Zendesk
 
-As an engineer triaging a support ticket, you may go to open a ticket where a user spotted a problem, but there is minimal information available to begin a troubleshooting workflow.
+To view the session replays associated with a Zendesk ticket:
 
-As shown in the video below, you can, in one click, pivot to the associated Session Replays in Datadog from the exact user who complained on the ticket.
+1. Navigate to the ticket in Zendesk.
+2. Click the Datadog icon in the right sidebar to view a list of session replays.
+3. Click a session replay to view it in Datadog.
 
-<!-- video -->
+{{< img src="real_user_monitoring/guide/zendesk/zendesk-sr-demo.mp4" alt="Accessing a session replay from Zendesk" video=true >}}
 
-## Watch a Session Replay
+From the replay page, you can view a list of the user's actions, along with the backend API calls associated with each action. You can also add the replay to a [playlist][4] to group related issues together for easier browsing and sharing.
 
-The ability to jump from the user ticket to the Session Replay allows support teams to have the full context of what went wrong with the user when troubleshooting. The Session Replay shows each cursor movement the user took and where they got stumped. The visual tie to the exact problem of the ticket leaves no question unanswered as to what went wrong.
+## Further Reading
 
-<!-- video -->
-
-## Drill to backend data
-
-In the Session Replay as well, users can drill down into the related backend API calls to eliminate if the root error is due to an issue on the frontend or backend.
-
-<!-- screenshot -->
-
-## Create playlists
-
-When bugs arise, support engineers often see multiple tickets with issues all stemming from the same root problem. By using Session Replay, users can group together all related behavior into a playlist to save the Session Replays into a folder-like experience that stemmed from the bug:
-
-<!-- screenshot -->
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/zendesk/#zendesk-rum-app-installation
 [2]: https://www.zendesk.com/sg/marketplace/apps/support/993138/datadog-rum/?queryID=fb54e1e367559c15de7e8a0f1eb8aa6f
+[3]: /real_user_monitoring/session_replay/
+[4]: /real_user_monitoring/session_replay/playlists
