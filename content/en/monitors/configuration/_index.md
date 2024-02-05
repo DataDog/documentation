@@ -157,30 +157,17 @@ In this case, you should enable notifications for missing data. The sections bel
 
 **Note**: The monitor must be able to evaluate data before alerting on missing data. For example, if you create a monitor for `service:abc` and data from that `service` is not reporting, the monitor does not send alerts.
 
-There are two ways to deal with missing data:
-- Metric-based monitors using the limited `Notify no data` option
-- The `On missing data` option is supported by APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM monitors
 
 {{< tabs >}}
 {{% tab "Metric-based monitors" %}}
 
-`Do not notify` if data is missing or `Notify` if data is missing for more than `N` minutes.
+If you are monitoring a metric over an auto-scaling group of hosts that stops and starts automatically, notifying for `no data` produces a lot of notifications. In this case, you should not enable notifications for missing data. This option does not work unless it is enabled at a time when data has been reporting for a long period.
 
-You are notified if data is missing or if data is not missing. The notification occurs when no data was received during the configured time window.
+| Option                                                     | Description                                                                                                                                        | Notes        |
+| ---------------------------------------------------------  | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| **Do not notify** if data is missing                       | No notification is sent if data is missing                                                                                                         | <u>Simple Alert</u>: the monitor skips evaluations and stays green until data returns that would change the status from OK <br> <u>Multi Alert</u>: if a group does not report data, the monitor skips evaluations and eventually drops the group. During this period, the bar in the results page stays green. When there is data and groups start reporting again, the green bar shows an OK status and backfills to make it look like there was no interruption.|
+| **Notify** if data is missing for more than **N** minutes. | You are notified if data is missing. The notification occurs when no data was received during the configured time window.| Datadog recommends that you set the missing data window to at least two times the evaluation period. |
 
-**Note**: It is recommended that you set the missing data window to at least two times the evaluation period.
-
-If you are monitoring a metric over an auto-scaling group of hosts that stops and starts automatically, notifying for no data produces a lot of notifications.
-
-In this case, you should not enable notifications for missing data. This option does not work if it is enabled at a time when data has not been reporting for a long period.
-
-##### Simple Alert
-
-For a monitor that does not notify on missing data, the monitor skips evaluations and stays green until data returns that would change the status from OK.
-
-##### Multi Alert
-
-For a monitor that does not notify on missing data, if a group does not report data, the monitor skips evaluations and eventually drops the group. During this period, the bar in the results page stays green. When there is data and groups start reporting again, the green bar shows an OK status and backfills to make it look like there was no interruption.
 
 {{% /tab %}}
 
@@ -215,13 +202,13 @@ The `Evaluate as zero` and `Show last known status` options are displayed based 
 
 #### Auto resolve
 
-`[Never]`, `After 1 hour`, `After 2 hours`, etc. automatically resolve this event from a triggered state.
+`[Never]`, `After 1 hour`, `After 2 hours` and so on. automatically resolve this event from a triggered state.
 
 Auto-resolve works when data is no longer being submitted. Monitors do not auto-resolve from an ALERT or WARN state if data is still reporting. If data is still being submitted, the [renotify][2] feature can be utilized to let your team know when an issue is not resolved.
 
 For some metrics that report periodically, it may make sense for triggered alerts to auto-resolve after a certain time period. For example, if you have a counter that reports only when an error is logged, the alert never resolves because the metric never reports `0` as the number of errors. In this case, set your alert to resolve after a certain time of inactivity on the metric. **Note**: If a monitor auto-resolves and the value of the query does not meet the recovery threshold at the next evaluation, the monitor triggers an alert again.
 
-In most cases this setting is not useful because you only want an alert to resolve once it is actually fixed. So, in general, it makes sense to leave this as `[Never]` so alerts only resolve when the metric is above or below the set threshold.
+In most cases this setting is not useful because you only want an alert to resolve after it is actually fixed. So, in general, it makes sense to leave this as `[Never]` so alerts only resolve when the metric is above or below the set threshold.
 
 #### Group retention time
 
