@@ -24,8 +24,8 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- 処理
 - ログの収集
+- ネットワーク
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/ambari/README.md
 display_on_public_website: true
@@ -33,7 +33,7 @@ draft: false
 git_integration_title: ambari
 integration_id: ambari
 integration_title: Ambari
-integration_version: 3.2.0
+integration_version: 3.3.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -47,10 +47,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Log Collection
+  - Category::Network
   - Supported OS::Linux
   - Supported OS::macOS
-  - Category::Processing
-  - Category::Log Collection
   configuration: README.md#Setup
   description: Ambari で管理されているすべてのクラスターのメトリクスをホストまたはサービス別に取得
   media: []
@@ -193,6 +193,6 @@ Ambari には、イベントは含まれません。
 
 
 [1]: https://ambari.apache.org
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

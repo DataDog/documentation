@@ -92,6 +92,8 @@ Once the IDs are properly injected and remapped to your logs, you can see the lo
 
 {{< img src="tracing/troubleshooting/trace_id_injection.png" alt="A trace page showing the logs section with correlated logs" style="width:90%;">}}
 
+**Note**: Trace IDs and span IDs are not displayed in your logs or log attributes in the UI.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

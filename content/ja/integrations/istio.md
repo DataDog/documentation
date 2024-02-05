@@ -44,7 +44,7 @@ draft: false
 git_integration_title: istio
 integration_id: istio
 integration_title: Istio
-integration_version: 4.4.0
+integration_version: 5.1.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -300,7 +300,7 @@ instances:
 [2]: https://docs.datadoghq.com/ja/tracing/setup_overview/proxy_setup/?tab=istio
 [3]: https://www.datadoghq.com/blog/istio-datadog/
 [4]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[5]: https://app.datadoghq.com/account/settings#agent
+[5]: https://app.datadoghq.com/account/settings/agent/latest
 [6]: https://github.com/DataDog/integrations-core/tree/master/envoy#istio
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/conf.yaml.example

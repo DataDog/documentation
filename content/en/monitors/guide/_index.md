@@ -25,6 +25,7 @@ cascade:
     {{< nextlink href="monitors/guide/adjusting-no-data-alerts-for-metric-monitors" >}}Adjusting "No Data" alerts for metric Monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime" >}}Prevent alerts from monitors that were in downtime{{< /nextlink >}}
     {{< nextlink href="monitors/guide/reduce-alert-flapping" >}}Reduce alert flapping{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitoring-sparse-metrics" >}}Monitoring Sparse Metrics{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="API:" >}}

@@ -30,7 +30,7 @@ draft: false
 git_integration_title: statsd
 integration_id: statsd
 integration_title: StatsD
-integration_version: 1.10.0
+integration_version: 1.11.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -165,7 +165,7 @@ StatsD チェックには、イベントは含まれません。
 
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/integrations-core/blob/master/statsd/datadog_checks/statsd/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

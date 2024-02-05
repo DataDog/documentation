@@ -446,7 +446,7 @@ The following is a list of the most important configuration settings that can be
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-All other [Datadog Tracer configuration][7] options can also be used.
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][20]. All other [Datadog Tracer configuration][7] options can also be used.
 
 ## Collecting Git metadata
 
@@ -664,3 +664,4 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [17]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
 [18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
 [19]: https://www.npmjs.com/package/mocha-each
+[20]: /getting_started/tagging/unified_service_tagging

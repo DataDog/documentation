@@ -2,9 +2,14 @@
 title: Workflow Automation
 kind: documentation
 disable_toc: false
+algolia:
+  tags: ['workflow', 'workflows', 'workflow automation']
 aliases:
 - /workflows
 further_reading:
+- link: "/getting_started/workflow_automation/"
+  tag: "Documentation"
+  text: "Getting Started with Workflow Automation"
 - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
   tag: "Blog"
   text: "Automate end-to-end processes and quickly respond to events with Datadog Workflows"

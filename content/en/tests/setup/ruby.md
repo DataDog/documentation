@@ -24,17 +24,14 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">Ruby test instrumentation is in beta.
-</div>
-
 ## Compatibility
 
 Supported languages:
 
 | Language | Version |
 |---|---|
-| Ruby | >= 2.1 |
-| JRuby | >= 9.2 |
+| Ruby | >= 2.7 |
+| JRuby | >= 9.4 |
 
 Supported test frameworks:
 
@@ -209,7 +206,7 @@ DD_ENV=ci bundle exec rake cucumber
 
 ### Adding custom tags to tests
 
-<div class="alert alert-info">`Datadog::CI` public API is available in `ddtrace` gem versions >= 1.17.0</div>
+<div class="alert alert-info"><code>Datadog::CI</code> public API is available in <code>ddtrace</code> gem versions >= 1.17.0</div>
 
 You can add custom tags to your tests by using the current active test:
 
@@ -257,6 +254,8 @@ The following is a list of the most important configuration settings that can be
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][9].
+
 The following environment variable can be used to configure the location of the Datadog Agent:
 
 `DD_TRACE_AGENT_URL`
@@ -294,9 +293,125 @@ require "ddtrace/auto_instrument" if ENV["DD_ENV"] == "ci"
 
 For the full list of available instrumentation methods, see the [`ddtrace` documentation][8]
 
+## Webmock
+
+[Webmock][10]
+is a popular Ruby library that stubs HTTP requests when running tests.
+By default, it fails when used with datadog-ci because traces are being sent
+to Datadog with HTTP calls.
+
+To allow HTTP connections for Datadog backend, you need to configure
+Webmock accordingly.
+
+```ruby
+# when using Agentless mode (note: use the correct datadog site, for example, datadoghq.com, datadoghq.eu, etc.):
+WebMock.disable_net_connect!(:allow => "citestcycle-intake.datadoghq.com")
+
+# when using Agent running locally:
+WebMock.disable_net_connect!(:allow_localhost => true)
+
+# or for more granular setting set your Agent URL, for example:
+WebMock.disable_net_connect!(:allow => "localhost:8126")
+```
+
 ## Collecting Git metadata
 
 {{% ci-git-metadata %}}
+
+## Using manual testing API
+
+If you use RSpec, Minitest, or Cucumber, **do not use the manual testing API**, as CI Visibility automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
+
+Use the manual testing API only if you use an unsupported testing framework or have a different testing mechanism.
+Full public API documentation is available on [YARD site][11].
+
+### Domain model
+
+The API is based around four concepts: test session, test module, test suite, and test.
+
+#### Test session
+
+A test session represents a test command run.
+
+To start a test session, call `Datadog::CI.start_test_session` and pass the Datadog service and tags (such as the test framework
+you are using).
+
+When all your tests have finished, call `Datadog::CI::TestSession#finish`, which closes the session and sends the session
+trace to the backend.
+
+#### Test module
+
+A test module represents a smaller unit of work within a session.
+For supported test frameworks, test module is always same as test session.
+For your use case, this could be a package in your componentized application.
+
+To start a test module, call `Datadog::CI.start_test_module` and pass the name of the module.
+
+When the module run has finished, call `Datadog::CI::TestModule#finish`.
+
+#### Test suite
+
+A test suite comprises a set of tests that test similar functionality.
+A single suite usually corresponds to a single file where tests are defined.
+
+Create test suites by calling `Datadog::CI#start_test_suite` and passing the name of the test suite.
+
+Call `Datadog::CI::TestSuite#finish` when all the related tests in the suite have finished their execution.
+
+#### Test
+
+A test represents a single test case that is executed as part of a test suite.
+Usually it corresponds to a method that contains testing logic.
+
+Create tests in a suite by calling `Datadog::CI#start_test` or `Datadog::CI.trace_test` and passing the name of the test and name of the test suite. Test suite name must be the same as name of the test suite started in previous step.
+
+Call `datadog.trace.api.civisibility.DDTest#end` when a test has finished execution.
+
+### Code example
+
+The following code represents example usage of the API:
+
+```ruby
+require "datadog/ci"
+
+Datadog.configure do |c|
+  c.service = "my-test-service"
+  c.ci.enabled = true
+end
+
+def run_test_suite(tests, test_suite_name)
+  test_suite = Datadog::CI.start_test_suite(test_suite_name)
+
+  run_tests(tests, test_suite_name)
+
+  test_suite.passed!
+  test_suite.finish
+end
+
+def run_tests(tests, test_suite_name)
+  tests.each do |test_name|
+    Datadog::CI.trace_test(test_name, test_suite_name) do |test|
+      test.passed!
+    end
+  end
+end
+
+Datadog::CI.start_test_session(
+  tags: {
+    Datadog::CI::Ext::Test::TAG_FRAMEWORK => "my-framework",
+    Datadog::CI::Ext::Test::TAG_FRAMEWORK_VERSION => "0.0.1",
+  }
+)
+Datadog::CI.start_test_module("my-test-module")
+
+run_test_suite(["test1", "test2", "test3"], "test-suite-name")
+
+Datadog::CI.active_test_module&.passed!
+Datadog::CI.active_test_module&.finish
+
+Datadog::CI.active_test_session&.passed!
+Datadog::CI.active_test_session&.finish
+```
 
 ## Further reading
 
@@ -307,3 +422,6 @@ For the full list of available instrumentation methods, see the [`ddtrace` docum
 [6]: /tracing/trace_collection/library_config/ruby/?tab=containers#configuration
 [7]: /continuous_integration/guides/add_custom_metrics/?tab=ruby
 [8]: /tracing/trace_collection/dd_libraries/ruby/#integration-instrumentation
+[9]: /getting_started/tagging/unified_service_tagging
+[10]: https://github.com/bblimke/webmock
+[11]: https://datadoghq.dev/datadog-ci-rb/Datadog/CI.html

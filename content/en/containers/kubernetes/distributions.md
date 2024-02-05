@@ -290,6 +290,44 @@ providers:
 {{% /tab %}}
 {{< /tabs >}}
 
+### Spot pods and instances
+
+Using Spot Pods in GKE Autopilot clusters introduces taints to these GKE nodes. To use Spot Pods, additional configuration is required to provide the Datadog Agent with tolerations.
+
+{{< tabs >}}
+{{% tab "Datadog Operator" %}}
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    credentials:
+      apiKey: <DATADOG_API_KEY>
+  override:
+    nodeAgent:
+      tolerations:
+        - effect: NoSchedule
+          key: cloud.google.com/gke-spot
+          operator: Equal
+          value: "true"
+```
+{{% /tab %}}
+{{% tab "Helm" %}}
+```yaml
+agents:
+  #(...)
+  # agents.tolerations -- Allow the DaemonSet to schedule on tainted nodes (requires Kubernetes >= 1.6)
+  tolerations:
+  - effect: NoSchedule
+    key: cloud.google.com/gke-spot
+    operator: Equal
+    value: "true"
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 **Note**: Network Performance Monitoring is not supported for GKE Autopilot.
 
 ## Red Hat OpenShift {#Openshift}

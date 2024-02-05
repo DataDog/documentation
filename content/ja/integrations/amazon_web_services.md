@@ -102,15 +102,15 @@ AWSサービスログを Datadog に送信する方法はいくつかありま�
 
 一部の Datadog 製品は、AWS リソース (S3 バケット、RDS スナップショット、CloudFront ディストリビューションなど) の構成方法に関する情報を活用します。Datadog は、AWS アカウントに対して読み取り専用の API 呼び出しを行うことにより、この情報を収集します。
 
-### Cloud Security Posture Management
+### Cloud Security Management Misconfigurations
 
 #### セットアップ
 
-お使いの AWS アカウントで AWS インテグレーションの設定を行っていない場合は、上記の[設定プロセス][15]を完了させます。クラウドセキュリティポスチャ管理が有効化されていることを適宜ご確認ください。
+お使いの AWS アカウントで AWS インテグレーションの設定を行っていない場合は、上記の[設定プロセス][15]を完了させます。Cloud Security Management Misconfigurations が有効化されていることを適宜ご確認ください。
 
 **注:** この機能を使用するには、AWS インテグレーションに**ロールの委任**を設定する必要があります。
 
-既存の AWS インテグレーションに Cloud Security Posture Management を追加するには、以下の手順でリソース収集を有効にしてください。
+既存の AWS インテグレーションに Cloud Security Management Misconfigurations を追加するには、以下の手順でリソース収集を有効にしてください。
 
 1. 自動**または**手動手順で Datadog IAM ロールに必要な権限を提供します。
 

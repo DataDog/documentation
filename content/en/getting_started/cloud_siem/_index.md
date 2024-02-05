@@ -98,16 +98,17 @@ After the index is moved to the first index position, review the settings and st
 2. Explore [security signals][14]. When a threat is detected with a detection rule, a security signal is generated. See the [security signals][15] documentation for more information.
 
     - [Set up notification rules][16] to alert when signals are generated. You can alert using Slack, Jira, email, webhooks, and other integrations. See the [notification rules][17] documentation for more information.
+    - Subscribe to the weekly [threat digest][18] reports to begin investigation and remediation of the most important security threats discovered in the last seven days.
 
 ## Phase 3: Investigation
 
-1. Explore the [Investigator][18] for faster remediation. See the [Investigator][19] documentation for more information.
-2. Use [out-of-the-box-dashboards][20] or [create your own dashboards][21] for investigations, reporting, and monitoring.
+1. Explore the [Investigator][19] for faster remediation. See the [Investigator][20] documentation for more information.
+2. Use [out-of-the-box-dashboards][21] or [create your own dashboards][22] for investigations, reporting, and monitoring.
 
 ## Phase 4: Customization
 
-1. Set up [suppression rules][22] to reduce noise. 
-2. Create [custom detection rules][23]. Review [Best Practices for Creating Detection Rules][24].
+1. Set up [suppression rules][23] to reduce noise. 
+2. Create [custom detection rules][24]. Review [Best Practices for Creating Detection Rules][25].
 
 ## Further Reading
 
@@ -127,13 +128,14 @@ After the index is moved to the first index position, review the settings and st
 [12]: /security/default_rules/#cat-cloud-siem-log-detection
 [13]: /security/detection_rules/
 [14]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29&column=time&order=desc&product=siem&view=signal&viz=stream&start=1676321431953&end=1676407831953&paused=false
-[15]: /security/explorer
+[15]: /security/cloud_siem/investigate_security_signals
 [16]: https://app.datadoghq.com/security/configuration/notification-rules
 [17]: /security/notifications/rules/
-[18]: https://app.datadoghq.com/security/investigator/
-[19]: /security/cloud_siem/investigator
-[20]: https://app.datadoghq.com/dashboard/lists/preset/100
-[21]: /dashboards/#overview
-[22]: /security/cloud_siem/log_detection_rules/?tab=threshold#advanced-options
-[23]: /security/cloud_siem/log_detection_rules/
-[24]: https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/
+[18]: https://app.datadoghq.com/security/configuration/reports
+[19]: https://app.datadoghq.com/security/investigator/
+[20]: /security/cloud_siem/investigator
+[21]: https://app.datadoghq.com/dashboard/lists/preset/100
+[22]: /dashboards/#overview
+[23]: /security/cloud_siem/log_detection_rules/?tab=threshold#advanced-options
+[24]: /security/cloud_siem/log_detection_rules/
+[25]: https://www.datadoghq.com/blog/writing-datadog-security-detection-rules/
