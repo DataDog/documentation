@@ -1,6 +1,6 @@
 ---
 title: Connect your Azure account with Cloudcraft
-kind: guide
+kind: documentation
 ---
 
 This article will walk you through connecting your Azure account to Cloudcraft.
