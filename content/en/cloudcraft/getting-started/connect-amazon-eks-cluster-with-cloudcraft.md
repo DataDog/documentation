@@ -1,5 +1,5 @@
 ---
-title: Connect an Amazon EKS cluster with Cloudcraft
+title: Connect an Amazon EKS Cluster with Cloudcraft
 kind: documentation
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Connect your Azure account with Cloudcraft
+title: Connect your Azure Account with Cloudcraft
 kind: documentation
 ---
 
