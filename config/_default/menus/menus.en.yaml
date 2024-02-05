@@ -3617,6 +3617,11 @@ main:
     parent: cspm
     identifier: cspm_frameworks_benchmarks
     weight: 303
+  - name: Create Custom Frameworks
+    url: security/misconfigurations/frameworks_and_benchmarks/custom_frameworks
+    parent: cspm_frameworks_benchmarks
+    identifier: cspm_custom_frameworks
+    weight: 303
   - name: Supported Frameworks
     url: security/misconfigurations/supported_frameworks
     parent: cspm

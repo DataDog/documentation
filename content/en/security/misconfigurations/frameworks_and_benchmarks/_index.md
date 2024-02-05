@@ -46,19 +46,6 @@ Select a rule to view details about the misconfigured resources, the rule descri
 
 {{< img src="security/cspm/frameworks_and_benchmarks/failed-finding2.png" alt="The compliance rule side panel includes information about the rule and resources with failed misconfigurations" style="width:75%;">}}
 
-## Create custom compliance frameworks
-
-Create your own compliance framework by adding a custom tag to the compliance rules you wish to track. This enables you to filter the misconfigurations on the [Misconfigurations issue explorer][27] by the custom tag. You can also clone the **Cloud Security Management - Misconfigurations Overview** dashboard and [configure a template variable][28] for the custom tag to dynamically filter the widgets on the dashboard.
-
-1. On the **Compliance Rules** page, select the rule you wish to add the custom tag to.
-2. Under **Say what's happening**, navigate to the **Tag resulting misconfigurations with** section and add the `key:value` for the custom tag.
-3. Click **Update Rule**.
-
-**Notes**:
-
-- `framework`, `requirement`, and `control` are reserved keys and cannot be used in custom tags. See [Custom Rules][26] for more information.
-- You can also add custom tags to rules using the [Update an existing rule API endpoint][29].
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
