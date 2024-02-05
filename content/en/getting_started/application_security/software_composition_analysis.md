@@ -2,7 +2,7 @@
 title: Getting Started with Software Composition Analysis
 kind: documentation
 aliases:
-- /getting_started/application_security/software_composition_analysis
+- /getting_started/application_security/vulnerability_management
 further_reading:
 - link: "/code_analysis/software_composition_analysis/"
   tag: "Documentation"
