@@ -183,6 +183,8 @@ Set all these variables in your test target:
 **Recommended**: `$(SRCROOT)`<br/>
 **Example**: `/Users/ci/source/MyApp`
 
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][8].
+
 Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
 
 `DD_SITE` (Required)
@@ -760,3 +762,4 @@ Disable the sandbox by adding Entitlements to the UI Test runner bundle, then ad
 [5]: https://app.datadoghq.com/organization-settings/application-keys
 [6]: https://opentelemetry.io/
 [7]: /continuous_integration/intelligent_test_runner/
+[8]: /getting_started/tagging/unified_service_tagging

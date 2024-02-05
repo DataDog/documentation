@@ -7,6 +7,9 @@ aliases:
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
 further_reading:
+- link: "/getting_started/workflow_automation/"
+  tag: "Documentation"
+  text: "Getting Started with Workflow Automation"
 - link: "/service_management/workflows/actions_catalog"
   tag: "Documentation"
   text: "Browse the available actions in the Actions Catalog"
@@ -29,7 +32,11 @@ You can create workflows or edit existing workflows from the [Workflow Automatio
 1. If desired, use the search bar to narrow the list of blueprints by name, category, or integration.
 1. Find the blueprint you'd like to use, and click on it. The workflow canvas appears.
 1. Click **Create From Blueprint**. The workflow canvas updates to show your newly created workflow.
-1. Enter a new name and description for the workflow and click **Save**.
+1. Enter a new name and description for the workflow.
+1. Optionally, select or enter tags you'd like to apply to the workflow. For more information on Datadog tags, see [Getting Started with Tags][7].
+1. Optionally, select any related [services][8] to apply to the workflow.
+1. Optionally, select [teams][9] to associate with the workflow. If a team doesn't exist, you can enter a name to create it.
+1. Click **Save** to apply your changes.
 1. Workflow steps that require updates are marked with exclamation marks. Click on each workflow step you'd like to modify and fill in any empty fields on the **Configure** tab.
 1. When you are finished modifying the workflow, Click **Run** to test your workflow.
 1. When you're ready to publish your workflow, click **Publish**. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][4].
@@ -53,8 +60,11 @@ To create a workflow, click **New workflow** on the [Workflow Automation][1] pag
 
 To configure your workflow:
 1. In the workflow configuration panel, enter a **Name** for your workflow.
-1. Select relevant **Tags**, **Services**, or **Teams**.
+1. Optionally, select or enter tags you'd like to apply to the workflow. For more information on Datadog tags, see [Getting Started with Tags][7].
+1. Optionally, select any related [services][8] to apply to the workflow.
+1. Optionally, select [teams][9] to associate with the workflow. If a team doesn't exist, you can enter a name to create it.
 1. Enter input or output parameters if your workflow uses them.
+1. Click **Save** to apply your changes.
 
 If you're not sure about your workflow configuration, you can return to the panel later by clicking anywhere on the workflow canvas.
 
@@ -147,37 +157,29 @@ All the variables of the Source object are visible in the Context Variables tab.
 
 {{< img src="service_management/workflows/context-variables-tab-source-object-variables.png" alt="The Source object variables in the Context Variables tab" >}}
 
-## Error handling and fallbacks
+## Error handling
 
-In the event that a step fails, you can specify the number of times you want your workflow to retry the step and at what interval, before moving on to an optional fallback step. If no fallback step is provided, the workflow terminates after all retries have been exhausted.
+You can specify the number of times you want your workflow to retry a failed step, and at what interval, before moving on to an optional error path. If no error path is present, the workflow terminates after all retries are exhausted.
 
-To configure error handling for a step:
+### Retries
+
+To configure retries for a step:
 1. Click on the step in the workflow canvas.
-1. Click the **+** icon next to the **Error Handling & Retries** section.
-1. Adjust the **Interval** and **Max retries** values.
-1. Optionally, [add a fallback step](#add-a-fallback).
+1. In the **Retries** section, adjust the **Interval** and **Max retries** values.
 1. Save your workflow to apply the changes.
 
-{{< img src="service_management/workflows/error-handling1.png" alt="The Error Handling and Retries section" style="width:100%;" >}}
+### Add an error path
 
-### Add a fallback
+You can add an error path for the workflow to follow if it encounters an error.
 
-To handle a step failure, you can add a downstream workflow step as a fallback by selecting it from the **Fallback** dropdown menu.
+To add an error path:
+1. Hover over the step where you'd like to add an error path.
+1. Click and drag the **Error path** icon to place a new error path on the canvas.
+1. Select a workflow step to add to the error path.
+1. After configuring your step, you can add more steps to an error path and even merge your error path back into the main workflow path.
+1. When you're done configuring your error path steps, click **Save** to apply your changes.
 
-Alternatively, you can create a fallback step that branches from the main workflow tree:
-1. From the **Fallback** dropdown menu, select **Add a new fallback**. The workflow canvas is replaced with a fallback tree.
-1. Click the **+** icon on the fallback tree to add a step.
-1. [Add steps using the workflow builder](#build-a-workflow-with-the-workflow-builder). You can add as many steps as needed to the fallback tree.
-1. When you're done configuring your fallback steps, click **Save** to apply your changes.
-
-To get back to the main workflow canvas, click **Main** above the fallback tree. From the workflow canvas, a fallback icon appears next to steps with a fallback. Click the icon and select the fallback step to open the fallback tree. Alternatively, you can access the fallback tree by clicking **Edit Fallback Tree** in the **Error Handling & Retries** section of a step. The **Edit Fallback Tree** button only appears if the fallback step is not an existing downstream step in the main workflow.
-
-{{< img src="service_management/workflows/fallback-icon2.png" alt="A step with a fallback" style="width:60%;" >}}
-
-### Remove a fallback
-
-1. From the main workflow canvas, click on the step with the fallback you wish to remove.
-1. In the **Error Handling & Retries** section, click **Clear**.
+{{< img src="service_management/workflows/error-path1.mp4" alt="Add an error path to your workflow" video=true >}}
 
 ### Edit a workflow with JSON
 
@@ -195,4 +197,7 @@ Edit a workflow in JSON by clicking **Edit JSON Spec** on your workflow page. Th
 [4]: https://www.datadoghq.com/pricing/?product=workflow-automation#products
 [5]: https://app.datadoghq.com/workflow/blueprints
 [6]: /service_management/workflows/actions_catalog/generic_actions/#testing-expressions-and-functions
+[7]: /getting_started/tagging/
+[8]: /glossary/#service
+[9]: /account_management/teams/
 

@@ -35,6 +35,7 @@ further_reading:
     {{< nextlink href="/opentelemetry/guide/otlp_delta_temporality/" >}}Producing Delta Temporality Metrics with OpenTelemetry{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/guide/semantic_mapping/" >}}Mapping OpenTelemetry resource attributes semantic conventions to Datadog conventions{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/guide/metrics_mapping/" >}}Mapping OpenTelemetry metrics conventions to Datadog conventions{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/guide/host_metadata/" >}}Mapping OpenTelemetry semantic conventions to Infrastructure List host information{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/guide/otlp_histogram_heatmaps/" >}}Visualizing OTLP Histograms as heatmaps{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/guide/switch_from_processor_to_connector/" >}}Switching from Datadog Processor to Datadog Connector for OpenTelemetry APM Metrics{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -28,7 +28,7 @@ Supported MySQL versions
 : 5.7, or 8.0+
 
 Supported Azure MySQL deployment types
-: MySQL on Azure VMs, Single Server, Flexible Server
+: MySQL on Azure VMs, Single Server, Flexible Server (Query Activity and Wait Event collection are not supported for Flexible Server)
 
 Supported Agent versions
 : 7.36.1+
@@ -52,8 +52,6 @@ Configure the following in the [server parameters][3] and then **restart the ser
 | `performance_schema` | `ON` | Required. Enables the [Performance Schema][1]. |
 
 The agent also requires `performance_schema.events_statements_*` consumers to be set to `ON` to collect currently running queries. By default, Azure MySQL Database enables performance schema consumers so no additional configuration is required.
-
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 
 ## Grant the Agent access
 
@@ -333,3 +331,4 @@ If you have installed and configured the integrations and Agent as described, an
 [7]: https://app.datadoghq.com/databases
 [8]: /integrations/azure_db_for_mysql
 [9]: /database_monitoring/setup_mysql/troubleshooting
+[10]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html

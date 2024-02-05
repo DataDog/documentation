@@ -13095,7 +13095,7 @@ components:
           description: Maximum number of graphs to display in the widget.
           example: 24
           format: int64
-          maximum: 100
+          maximum: 500
           minimum: 1
           type: integer
         sort:
@@ -13111,7 +13111,7 @@ components:
           description: Manual selection of tags making split graph widget static
           items:
             $ref: '#/components/schemas/SplitVectorEntry'
-          maxItems: 100
+          maxItems: 500
           type: array
       required:
       - split_dimensions
