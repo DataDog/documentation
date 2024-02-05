@@ -142,17 +142,17 @@ esbuild.build({
     '@datadog/native-metrics',
 
     // required if you use profiling
-    '@datadog/pprof'
+    '@datadog/pprof',
 
     // required if you use Datadog security features
     '@datadog/native-appsec',
     '@datadog/native-iast-taint-tracking',
-    '@datadog/native-iast-rewriter'
+    '@datadog/native-iast-rewriter',
 
     // required if you encounter graphql errors during the build step
-	'graphql/language/visitor',
+    'graphql/language/visitor',
     'graphql/language/printer',
-    'graphql/utilities',
+    'graphql/utilities'
   ]
 }).catch((err) => {
   console.error(err)
