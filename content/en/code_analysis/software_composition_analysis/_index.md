@@ -34,17 +34,16 @@ Software Composition Analysis (SCA) scans open source libraries imported into re
 
 SCA can run in CI pipelines by using [Code Analysis][3] and provide runtime monitoring capabilities by using [Datadog Application Security][1].
 
-For more information, see the [Application Security documentation][4].
 
 ## Languages
 
 SCA currently supports scanning the following languages and technologies for vulnerable libraries:
 
-1. Go
-2. Java
-3. NodeJS
-4. Python
-5. Ruby
+- Go
+- Java
+- Node.js
+- Python
+- Ruby
 
 ## Integrations
 
@@ -55,7 +54,7 @@ SCA currently supports scanning the following languages and technologies for vul
 
 ## Search and filter results
 
-After you configure your CI pipelines to run Datadog SCA, violations are summarized per repository on the [Code Analysis page][1]. After drilling down to a specific repository, SCA results are divided into the **Library Vulnerabilities** and **Library List** lenses. 
+After you configure your CI pipelines to run Datadog SCA, violations are summarized per repository on the [Code Analysis page][4]. Drill down to a specific repository and observe SCA results divided into **Library Vulnerabilities** and **Library List** lenses. 
 
 * The **Library Vulnerabilities** lens contains the vulnerable library versions found by Datadog SCA.
 * The **Library List** lens contains all the libraries (vulnerable or not) found by Datadog SCA.
@@ -69,14 +68,14 @@ Click on a library with a vulnerability to open a side panel that contains infor
 
 The content of the violation is shown in tabs:
 
-* Full Description: A description of the vulnerability contained within this specific version of the library.
-* Event: JSON metadata regarding the SCA violation event.
+- **Full Description**: A description of the vulnerability contained within this specific version of the library.
+- **Event**: JSON metadata regarding the SCA violation event.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /getting_started/application_security/software_composition_analysis
+[1]: /security/application_security/software_composition_analysis/
 [2]: https://app.datadoghq.com/ci/setup/code-analysis
 [3]: /code_analysis/software_composition_analysis/setup
-[4]: /security/application_security/software_composition_analysis/
+[4]: https://app.datadoghq.com/ci/code-analysis
