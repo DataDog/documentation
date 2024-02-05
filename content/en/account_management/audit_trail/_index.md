@@ -157,7 +157,7 @@ The Inspect Changes (Diff) tab in the audit event details panel compares the con
 
 Log management users can audit API key usage with Audit Trail. For API key auditing, logs have a `datadog.api_key_uuid` tag that contains the UUID of the API key used for collecting those logs. Use this information to determine:
 - How API keys are used across your organization and telemetry sources.
-- API key rotation and management
+- API key rotation and management.
 
 ## Create a monitor
 
