@@ -13,8 +13,6 @@ private: true
 title: PHP
 ---
 
-<div class="alert alert-info">Error Tracking Logs はベータ版です。</div>
-
 ## 概要
 
 Error Tracking は、取り込むエラーを細かく制御することで、ノイズを減らし予期せぬコストを避けるのに役立ちます。
