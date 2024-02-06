@@ -56,7 +56,7 @@ To use Custom Costs in Datadog, you must [configure Cloud Cost Management][1] fo
 |`BilledCost`| The amount being charged. |10.00 |NaN | Number-based decimal. |
 |`BillingCurrency` | Currency of billed cost. | USD| EUR | Must be USD. |
 
-#### Optional Tags within JSON Files
+#### Optional tags within JSON files
 
 For JSON files only, an additional `Tags` property is required, but its contents are optional.
 
