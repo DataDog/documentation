@@ -33,20 +33,21 @@ Check [ASM Compatibility][6] to see if your service is supported.
 
 ## Library Inventory
 
-The Datadog SCA Library Inventory helps you understand the list of libraries and its versions that compose your application. To access the library explorer, navigate to [Security > Application Security > Catalog > Library Explorer][8].
-Since Datadog SCA covers your software development life cycle end-to-end, the libraries are detected throughout the entire lifecycle of the application. The library inventory contains everything you need to know about the libraries, including name and version, and other risk aspects such as licenses, and quality aspects. 
+The Datadog SCA Library Inventory helps you understand the list of libraries and its versions that compose your application. To access the Library Explorer, navigate to [**Security** > **Application Security** > **Catalog** > **Library Explorer**][8].
+
+Since Datadog SCA covers your software development life cycle end-to-end, the libraries are detected throughout the entire lifecycle of the application. The library inventory contains everything you need to know about the libraries, including name and version, and other risk aspects such as licenses and quality aspects. 
 
 {{< img src="/security/application_security/software_composition_analysis/asm_library_explorer.png" alt="Software Composition Analysis (SCA) library explorer page showing library vulnerabilities grouped by library." style="width:100%;" >}}
 
 ## Explore and manage SCA vulnerabilities
 
-The [Vulnerability Explorer][3] shows a complete list of the open source libraries detected by Datadog SCA used by your application at runtime, and reports security vulnerabilities associated with them. Datadog does **not** scan your source code, and the analysis is based on how your application behaves during runtime. The open-source libraries are monitored from the code commit to the repository (static point of view), to the applications running in production (runtime point of view). 
+The [Vulnerability Explorer][3] shows a complete list of the open source libraries detected by Datadog SCA used by your application at runtime, and reports security vulnerabilities associated with them. Datadog does **not** scan your source code, and the analysis is based on how your application behaves during runtime. The open source libraries are monitored from the code commit to the repository (static point of view), to the applications running in production (runtime point of view). 
 
-To switch to the code repository commit point of view, click on the **static** button. The static view shows vulnerabilities from the _source code_ in your repositories. To switch to the _real-time_ point of view to the applications already running, click on the **runtime** button. The runtime view is the live view of your services being monitored by Datadog.
+To switch to the code repository commit point of view, click on the **Static** button. The static view shows vulnerabilities from the _source code_ in your repositories. To switch to the _real-time_ point of view to the applications already running, click on the **Runtime** button. The runtime view is the live view of your services being monitored by Datadog.
 
 {{< img src="/security/application_security/software_composition_analysis/asm_sca_vulnerabilities_2.png" alt="Software Composition Analysis (SCA) explorer page showing vulnerabilities sorted by static or runtime." style="width:100%;" >}}
 
-Select a specific vulnerability to see its details, including which services are affected, severity breakdown score, and recommended remediation steps. On the details explorer, you can also view impacted infrastructure to gain better insights to your overall attack exposure.
+Select a specific vulnerability to see its details, including which services are affected, severity breakdown score, and recommended remediation steps. On the Details Explorer, you can also view impacted infrastructure to gain better insights to your overall attack exposure.
 
 Within ASM, the severity of a vulnerability is modified from the base score to take into account the presence of attacks and the business sensitivity of the environment where the vulnerability is detected. For example, if no production environment is detected, the severity is reduced.
 
@@ -58,13 +59,13 @@ The adjusted vulnerability score includes the full context of each service:
 
 {{< img src="security/application_security/vulnerability-score-modified_3.png" alt="Vulnerability details page showing a modified severity score" style="width:100%;" >}}
 
-See [getting started with software composition analysis][7] for more information on the adjusted vulnerability score.
+See [Getting Started with Software Composition Analysis][7] for more information on the adjusted vulnerability score.
 
 ## Remediation
 
-The explorer also offers remediation recommendations for detected vulnerabilities that enable you to change the status of a vulnerability, assign it to a team member for review, and create a Jira issue for tracking. It also includes a collection of links and references to websites or information sources that help you understand the context behind each vulnerability.
+The Library Explorer offers remediation recommendations for detected vulnerabilities that enable you to change the status of a vulnerability, assign it to a team member for review, and create a Jira issue for tracking. It also includes a collection of links and references to websites or information sources that help you understand the context behind each vulnerability.
 
-**Note**: To create Jira issues for SCA vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira][11] integration docs, as well as the [Role Based Access Control][10] documentation.
+**Note**: To create Jira issues for SCA vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][11] documentation, as well as the [Role Based Access Control][10] documentation.
 
 {{< img src="getting_started/appsec/appsec-vuln-remediation_3.png" alt="Application Vulnerability Management vulnerability details page showing affected services, links to infrastructure, suggested remediation, and links to more information." style="width:100%;" >}}
 
@@ -79,13 +80,13 @@ Software Composition Analysis contains additional capabilities to allow you to s
 To configure vulnerabilities in your CI pipelines, navigate to [Security -> Configuration -> Application Security -> Setup][12].
 Click **Get Started** to enable Software Composition Analysis for static analysis in source code, and select and configure your CI/CD provider.
 
-See [getting started with software composition analysis][7] for more detailed instructions.
+See [Getting Started with Software Composition Analysis][7] for more detailed instructions.
 
 {{< img src="getting_started/appsec/asm_sca_setup.png" alt="Software Composition Analysis setup page." style="width:100%;" >}}
 
 ## Risk information in APM views
 
-Software Composition Analysis enriches the information APM is already collecting, and flags libraries that match with current vulnerability advisories. Potentially vulnerable services are highlighted directly in the security views embedded in the [APM Service Catalog][2].
+Software Composition Analysis enriches the information APM is already collecting, and flags libraries that match with current vulnerability advisories. Potentially vulnerable services are highlighted directly in the **Security** view embedded in the [APM Service Catalog][2].
 
 {{< img src="security/application_security/threats/threats-on-svc-cat_3.png" alt="Vulnerability information shown in the APM Service Catalog" style="width:100%;" >}}
 
