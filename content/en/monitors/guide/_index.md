@@ -26,7 +26,7 @@ cascade:
     {{< nextlink href="monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime" >}}Prevent alerts from monitors that were in downtime{{< /nextlink >}}
     {{< nextlink href="monitors/guide/reduce-alert-flapping" >}}Reduce alert flapping{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitoring-sparse-metrics" >}}Monitoring Sparse Metrics{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/best-practices-for-live-process-monitoring" >}}Best practices for live process monitoring{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/best-practices-for-live-process-monitoring" >}}Best practices for Live Process Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="API:" >}}
