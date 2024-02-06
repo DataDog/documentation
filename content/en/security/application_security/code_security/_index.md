@@ -17,11 +17,11 @@ Datadog Software Composition Analysis (SCA) code security vulnerability detectio
 
 ## Enabling code security vulnerability detection 
 
-To enable code security vulnerability detection capability in SCA, set the `DD_IAST_ENABLED=true` environment variable in your application configuration, and restart your service.
+To enable code security vulnerability detection capability in SCA, set the `DD_IAST_ENABLED` environment variable to `true` in your application configuration, and restart your service.
 
-Datadog is able to indicate the file name and line number where the vulnerability is located, without scanning the source code.
+Datadog is able to indicate the filename and line number where the vulnerability is located, without scanning the source code.
 
-The code security vulnerability types that can be found include:
+The available code security vulnerability types include the following:
 
 - Weak Cipher
 - Weak Hash
@@ -37,7 +37,7 @@ The code security vulnerability types that can be found include:
 
 ### Disabling code security vulnerability detection 
 
-To disable code security vulnerability detection capability in SCA, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service.
+To disable code security vulnerability detection capability in SCA, remove the `DD_IAST_ENABLED` environment variable from your application configuration, and restart your service.
 
 If you need additional help, contact [Datadog support][1].
 

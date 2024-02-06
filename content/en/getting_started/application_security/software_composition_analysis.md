@@ -53,7 +53,7 @@ This guide walks you through best practices for getting your team up and running
    - Sort by `Status`, `Vulnerability Source`, and `Severity`.
    - To switch to the code repository commit point of view, click on the **static** button. To switch to the real-time point of view to the applications already running, click on the **runtime** button.
 
-   {{< img src="/security/application_security/software_composition_analysis/asm_sca_vulnerabilities.png" alt="Software Composition Analysis (SCA) explorer page showing vulnerabilities sorted by static or runtime." style="width:100%;" >}}
+   {{< img src="/security/application_security/software_composition_analysis/asm_sca_vulnerabilities_2.png" alt="Software Composition Analysis (SCA) explorer page showing vulnerabilities sorted by static or runtime." style="width:100%;" >}}
 
    Each vulnerability has its own status to help prioritize and manage findings:
 
