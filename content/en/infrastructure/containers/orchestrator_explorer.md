@@ -161,10 +161,7 @@ There are multiple types of terms available:
 | **Metrics** are added to workload resources (pods, deployments, etc.). You can find resources based on their utilization. To see what metrics are supported, see [Resource Utilization Filters](#resource-utilization-filters). | `metric#cpu_usage_pct_limits_avg15:>80%` |
 | **String matching** is supported by some specific resource attributes, see below.<br>*Note: string matching does not use the key-value format, and you cannoy specify the attribute to match on.* | `"10.132.6.23"` (IP)<br>`"9cb4b43f-8dc1-4a0e"` (UID)<br>`"web-api-3"` (Name) |
 
->  ***Notes**:*
->
->  - *You might find the same key-value pairs as both a tag and label (or annotation) - this is dependent on how your cluster is configured.*
->  - In addition to the normal quality comparison (`:`), `field#` and `metric#` filters support the following: `tag:>value`, `:<`, `:>=`, and `:<=`.
+>  ***Notes**: You might find the same key-value pairs as both a tag and label (or annotation) - this is dependent on how your cluster is configured.*
 
 The following resource attributes are supported in arbitrary **String Matching**:
 - `metadata.name`
