@@ -6427,7 +6427,7 @@ components:
       description: The metrics' payload.
       properties:
         series:
-          description: A list of time series to submit to Datadog.
+          description: A list of timeseries to submit to Datadog.
           example:
           - metric: system.load.1
             points:
@@ -6480,7 +6480,7 @@ components:
           readOnly: true
           type: string
         pointlist:
-          description: List of points of the time series in milliseconds.
+          description: List of points of the timeseries in milliseconds.
           example:
           - - 1681683300000.0
             - 77.62145685254418
@@ -10508,7 +10508,7 @@ components:
       - denominator
       type: object
     SLOHistoryMetricsSeries:
-      description: 'A representation of `metric` based SLO time series for the provided
+      description: 'A representation of `metric` based SLO timeseries for the provided
         queries.
 
         This is the same response type from `batch_query` endpoint.'
@@ -10629,18 +10629,18 @@ components:
           type: string
         history:
           description: For `monitor` based SLOs, this includes the aggregated history
-            as arrays that include time series and uptime data where `0=monitor` is
+            as arrays that include timeseries and uptime data where `0=monitor` is
             in `OK` state and `1=monitor` is in `alert` state.
           example:
           - - 1579212382
             - 0
           items:
-            description: Represents an array time series data.
+            description: Represents an array timeseries data.
             example:
             - 1579212382
             - 0
             items:
-              description: A time series data point which is a tuple of (timestamp,
+              description: A timeseries data point which is a tuple of (timestamp,
                 value).
               format: double
               type: number
@@ -10811,18 +10811,18 @@ components:
           type: string
         history:
           description: For `monitor` based SLOs, this includes the aggregated history
-            as arrays that include time series and uptime data where `0=monitor` is
+            as arrays that include timeseries and uptime data where `0=monitor` is
             in `OK` state and `1=monitor` is in `alert` state.
           example:
           - - 1579212382
             - 0
           items:
-            description: Represents an array time series data.
+            description: Represents an array timeseries data.
             example:
             - 1579212382
             - 0
             items:
-              description: A time series data point which is a tuple of (timestamp,
+              description: A timeseries data point which is a tuple of (timestamp,
                 value).
               format: double
               type: number

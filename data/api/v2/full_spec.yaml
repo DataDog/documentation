@@ -11117,7 +11117,7 @@ components:
       description: The metrics' payload.
       properties:
         series:
-          description: A list of time series to submit to Datadog.
+          description: A list of timeseries to submit to Datadog.
           example:
           - metric: system.load.1
             points:
