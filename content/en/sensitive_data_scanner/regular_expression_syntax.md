@@ -32,7 +32,7 @@ Use alternation to choose the first expression that matches. An expression in an
 
 ## Groups
 
-Use groups to change precedence or set flags. Since captures are not used in Sensitive data Scanner, capturing groups behave as on-capturing groups. Capture groups names are ignored.
+Use groups to change precedence or set flags. Since captures are not used in Sensitive data Scanner, capturing groups behave like non-capturing groups. Similarly, capture group names are ignored.
 
 | Name         | Regex Syntax                                          |
 | ------------------- | ------------------------------------------------------ |
