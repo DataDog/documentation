@@ -12,6 +12,7 @@ aliases:
   - /security/misconfigurations/setup
   - /security/vulnerabilities/setup
   - /security/infrastructure_vulnerabilities/setup/
+  - /security/cloud_security_management/setup/windows
 further_reading:
 - link: "/getting_started/cloud_security_management"
   tag: "Documentation"
@@ -22,7 +23,7 @@ further_reading:
 - link: "/security/cloud_security_management/setup/csm_pro"
   tag: "Documentation"
   text: "Setting up CSM Pro"
-- link: "/security/cloud_security_management/setup/csm_workload_security"
+- link: "/security/cloud_security_management/setup/csm_cloud_workload_security"
   tag: "Documentation"
   text: "Setting up CSM Workload Security"
 ---
@@ -32,8 +33,6 @@ further_reading:
 {{< /site-region >}}
 
 Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation.
-
-You can enable features that aren't included in your package at any time by following the instructions on the [CSM Setup page][4].
 
 CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM Workload Security][3]. For more information, see [Changes to Datadog Cloud Security Management][7]. Each package includes access to a specific set of **features**, as shown in the following table:
 
@@ -51,24 +50,26 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
         <td><ul><li style="font-size:16px"><a href="/security/misconfigurations">Misconfigurations (cloud accounts)</a></li><li style="font-size:16px"><a href="/security/vulnerabilities">Vulnerabilities (container images)</a></li></ul></td>
     </tr>
     <tr>
-        <td><a href="/security/cloud_security_management/setup/csm_workload_security">CSM Workload Security</a></td>
+        <td><a href="/security/cloud_security_management/setup/csm_cloud_workload_security">CSM Workload Security</a></td>
         <td><ul><li style="font-size:16px"><a href="/security/threats">Threats</a></li></ul></td>
     </tr>
 </table>
 
+**Note**: You can enable features that aren't included in your package at any time by following the instructions on the [CSM Setup page][4].
+
 ## Supported deployment types and features
 
-| Type              | Agent Required (7.46+) | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities | CSM Identity Risks |
-|-------------------|--------------------|-----------------------|-------------|---------------------|--------------------| 
-| Docker            | {{< X >}}          | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
-| Kubernetes        | {{< X >}}          | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
-| Linux             | {{< X >}}          | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
-| Amazon ECS        | {{< X >}}          | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
-| AWS Account       |                    | {{< X >}}             |             |                     | {{< X >}}          |
-| Azure Account     |                    | {{< X >}}             |             |                     |                    |
-| GCP Account       |                    | {{< X >}}             |             |                     |                    |
-| Windows           | {{< X >}}          |                       | beta        |                     |                    |
-| AWS Fargate       | {{< X >}}          |                       | beta        |                     |                    |
+| Type          | Agent Required (7.46+) | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities | CSM Identity Risks |
+|---------------|------------------------|-----------------------|-------------|---------------------|--------------------|
+| Docker        | {{< X >}}              | {{< X >}}             | {{< X >}}   |                     |                    |
+| Kubernetes    | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
+| Linux         | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
+| Amazon ECS    | {{< X >}}              | {{< X >}}             | {{< X >}}   | {{< X >}}           |                    |
+| AWS Account   |                        | {{< X >}}             |             |                     | {{< X >}}          |
+| Azure Account |                        | {{< X >}}             |             |                     |                    |
+| GCP Account   |                        | {{< X >}}             |             |                     |                    |
+| Windows       | {{< X >}}              |                       | beta        |                     |                    |
+| AWS Fargate   | {{< X >}}              |                       | beta        |                     |                    |
 
 {{% csm-prereqs %}}
 
@@ -82,7 +83,7 @@ To get started setting up CSM, navigate to the [**Security** > **Setup**][4] sec
 
 [1]: /security/cloud_security_management/setup/csm_enterprise
 [2]: /security/cloud_security_management/setup/csm_pro
-[3]: /security/cloud_security_management/setup/csm_workload_security
+[3]: /security/cloud_security_management/setup/csm_cloud_workload_security
 [4]: https://app.datadoghq.com/security/configuration/csm/setup
 [5]: /security/identity_risks/#setup
 [6]: /security/cloud_security_management/setup/compatibility

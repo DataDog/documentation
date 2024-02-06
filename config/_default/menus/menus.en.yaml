@@ -1042,26 +1042,31 @@ main:
     parent: metrics_custom_metrics
     identifier: metrics_modifiers
     weight: 101
+  - name: Historical Metrics Ingestion
+    url: metrics/custom_metrics/historical_metrics/
+    parent: metrics_custom_metrics
+    identifier: metrics_historical_metrics
+    weight: 102
   - name: 'Submission - Agent Check '
     url: metrics/custom_metrics/agent_metrics_submission/
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_agent
-    weight: 102
+    weight: 103
   - name: Submission - DogStatsD
     url: metrics/custom_metrics/dogstatsd_metrics_submission/
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_dogstatsd
-    weight: 103
+    weight: 104
   - name: Submission - Powershell
     url: metrics/custom_metrics/powershell_metrics_submission
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_powershell
-    weight: 104
+    weight: 105
   - name: 'Submission - API '
     url: api/latest/metrics/#submit-metrics
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_api
-    weight: 105
+    weight: 106
   - name: Send OpenTelemetry Metrics to Datadog
     url: opentelemetry/otel_metrics/
     parent: metrics_top_level
@@ -1935,16 +1940,21 @@ main:
     parent: cloud_cost_top_level
     identifier: ccm_custom
     weight: 4
+  - name: SaaS Cost Integrations
+    url: cloud_cost_management/saas_costs
+    parent: cloud_cost_top_level
+    identifier: ccm_saas_cost_integrations
+    weight: 5
   - name: Tag Pipelines
     url: cloud_cost_management/tag_pipelines
     parent: cloud_cost_top_level
     identifier: tag_pipelines
-    weight: 5
+    weight: 6
   - name: Container Cost Allocation
     url: cloud_cost_management/container_cost_allocation
     parent: cloud_cost_top_level
     identifier: container_cost_allocation
-    weight: 6
+    weight: 7
   - name: Network Monitoring
     url: network_monitoring/
     pre: network
@@ -3551,22 +3561,42 @@ main:
     url: security/cloud_security_management/setup/csm_enterprise
     parent: csm_setup
     identifier: csm_setup_enterprise
-    weight: 101
+    weight: 10000
+  - name: Cloud Accounts
+    url: security/cloud_security_management/setup/csm_enterprise/cloud_accounts
+    parent: csm_setup_enterprise
+    identifier: csm_setup_enterprise_cloud
+    weight: 1000000
+  - name: Agent
+    url: security/cloud_security_management/setup/csm_enterprise/agent
+    parent: csm_setup_enterprise
+    identifier: csm_setup_enterprise_agent
+    weight: 1000001
   - name: CSM Pro
     url: security/cloud_security_management/setup/csm_pro
     parent: csm_setup
     identifier: csm_setup_pro
-    weight: 102
-  - name: CSM Workload Security
-    url: security/cloud_security_management/setup/csm_workload_security
+    weight: 10005
+  - name: Cloud Accounts
+    url: security/cloud_security_management/setup/csm_pro/cloud_accounts
+    parent: csm_setup_pro
+    identifier: csm_setup_pro_cloud
+    weight: 1000000
+  - name: Agent
+    url: security/cloud_security_management/setup/csm_pro/agent
+    parent: csm_setup_pro
+    identifier: csm_setup_pro_agent
+    weight: 1000001
+  - name: CSM Cloud Workload Security
+    url: security/cloud_security_management/setup/csm_cloud_workload_security
     parent: csm_setup
-    identifier: csm_setup_workload_security
-    weight: 103
-  - name: CSM on Windows
-    url: security/cloud_security_management/setup/windows
-    parent: csm_setup
-    identifier: csm_setup_windows
-    weight: 104
+    identifier: csm_setup_cloud_workload_security
+    weight: 10010
+  - name: Agent
+    url: security/cloud_security_management/setup/csm_cloud_workload_security/agent
+    parent: csm_setup_cloud_workload_security
+    identifier: csm_setup_cloud_workload_security_agent
+    weight: 1000000
   - name: Threats
     url: security/threats/
     parent: csm
@@ -4163,7 +4193,7 @@ main:
     identifier: rum_mobile_setup
     weight: 201
   - name: Advanced Configuration
-    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration
+    url: real_user_monitoring/mobile_and_tv_monitoring/advanced_configuration/
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_advanced
     weight: 202

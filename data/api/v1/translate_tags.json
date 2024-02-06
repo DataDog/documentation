@@ -21,7 +21,7 @@
   },
   "dashboards": {
     "name": "Dashboards",
-    "description": "Interact with your dashboard lists through the API to make it easier to organize,\nfind, and share all of your dashboards with your team and organization."
+    "description": "Manage all your dashboards, as well as access to your shared dashboards, through the API. See the [Dashboards page](https://docs.datadoghq.com/dashboards/) for more information."
   },
   "downtimes": {
     "name": "Downtimes",
@@ -29,11 +29,11 @@
   },
   "embeddable-graphs": {
     "name": "Embeddable Graphs",
-    "description": "Interact with embeddable graphs through the API."
+    "description": "Manage embeddable graphs through the API. See [Embeddable Graphs with Template Variables](https://docs.datadoghq.com/dashboards/guide/embeddable-graphs-with-template-variables/) for more information."
   },
   "events": {
     "name": "Events",
-    "description": "The events service allows you to programmatically post events to the event stream\nand fetch events from the event stream. Events are limited to 4000 characters.\nIf an event is sent out with a message containing more than 4000 characters, only the\nfirst 4000 characters are displayed."
+    "description": "The Event Management API allows you to programmatically post events to the Events Explorer\nand fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/) for more information."
   },
   "gcp-integration": {
     "name": "GCP Integration",
@@ -41,7 +41,7 @@
   },
   "hosts": {
     "name": "Hosts",
-    "description": "Get information about your live hosts in Datadog."
+    "description": "Get information about your infrastructure hosts in Datadog, and mute or unmute any notifications from your hosts. See the [Infrastructure page](https://docs.datadoghq.com/infrastructure/) for more information."
   },
   "ip-ranges": {
     "name": "IP Ranges",
