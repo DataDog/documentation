@@ -1,24 +1,25 @@
 ---
-title: "Component: Block"
-kind: guide
+title: "Block Component"
+kind: documentation
 ---
+## Overview
 
-{{< img src="cloudcraft/components-common/block/component-block.png" alt="Screenshot of a 3D representation of the block component in Cloudcraft" responsive="true" style="width:100%;">}}
+The Block is the most basic of the available components. Along with Images and Icons, it can be used to represent cloud components not yet available.
 
-The **Block** is the most basic of the available components. Along with **Images** and **Icons**, it can be used to represent cloud components not yet available with Cloudcraft.
+{{< img src="cloudcraft/components-common/block/component-block.png" alt="Screenshot of a 3D representation of the block component in Cloudcraft" responsive="true" style="width:60%;">}}
 
 ## Toolbar
 
-The toolbar is displayed when selecting a component, and allow you to customize the visual of your block to your liking.
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color.** Select a predefined color or enter the hexadecimal value for the color you want. You can use the same color for both 2D and 3D view, or choose different colors for each.
-- **Width.** Choose the width of your block component.
-- **Height.** Choose the height of your block component.
-- **Depth.** Choose the depth of your block component.
+- **Color**: Select a predefined color or enter the hexadecimal value for the color you want. You can use the same color for both 2D and 3D view, or choose different colors for each.
+- **Width**: Choose the width of your block component.
+- **Height**: Choose the height of your block component.
+- **Depth**: Choose the depth of your block component.
 
 ## API
 
-In [the Cloudcraft API][1], a block is represented in JSON.
+Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. The following is an example JSON object of a Block component:
 
 ```json
 {
@@ -37,17 +38,17 @@ In [the Cloudcraft API][1], a block is represented in JSON.
 }
 ```
 
-- **type: block**. The type of component.
-- **id: string**. A unique identifier for the component in the `uuid` format.
-- **mapPos: [number, number]**. The position of the component in the blueprint, expressed as a x,y coordinate pair.
-- **width: number**. The width of the block component. Defaults to 2.
-- **height: number**. The height of the block component. Defaults to 1.
-- **depth: number**. The depth of the block component. Defaults to 2.
-- **color: object**. The fill color for the component body.
-  - **isometric: string**. Fill color for the component in 3D view. Must be an hexadecimal color.
-  - **2d: string**. Fill color for the component in 2D view. Must be an hexadecimal color.
-- **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
-- **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
+- **type: block**: The type of component.
+- **id: string**: A unique identifier for the component in the `uuid` format.
+- **mapPos: [number, number]**: The position of the component in the blueprint, expressed as a x,y coordinate pair.
+- **width: number**: The width of the block component. Defaults to 2.
+- **height: number**: The height of the block component. Defaults to 1.
+- **depth: number**: The depth of the block component. Defaults to 2.
+- **color: object**: The fill color for the component body.
+  - **isometric: string**: Fill color for the component in 3D view. Must be an hexadecimal color.
+  - **2d: string**: Fill color for the component in 2D view. Must be an hexadecimal color.
+- **link: uri**: Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
+- **locked: boolean**: If true, changes to the component through the application are disabled until unlocked.
 
 The block component can be added to [VPCs][2], [security groups][3], and [subnets][4].
 

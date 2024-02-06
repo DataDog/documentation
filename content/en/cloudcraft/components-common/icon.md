@@ -1,29 +1,31 @@
 ---
-title: "Component: Icon"
-kind: guide
+title: "Icon Component"
+kind: documentation
 ---
 
-{{< img src="cloudcraft/components-common/icon/component-icon.png" alt="Screenshot of a 3D representation of the icon component in Cloudcraft" responsive="true" style="width:100%;">}}
+## Overview
 
-The **Icon** component is one of the basic available components. Along with **Images** and **Blocks**, it can be used to represent cloud components not yet available with Cloudcraft.
+The Icon component is one of the basic available components. Along with Images** and Blocks, it can be used to represent cloud components not yet available.
+
+{{< img src="cloudcraft/components-common/icon/component-icon.png" alt="Screenshot of a 3D representation of the icon component in Cloudcraft" responsive="true" style="width:60%;">}}
 
 ## Toolbar
 
-The toolbar is displayed when selecting a component. It allows you to select an icon from an icon set and customize its visual to your liking.
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**. Select a predefined background and icon color or enter the hexadecimal value for the color. Accepts the same color for both 2D and 3D view, or different colors for each.
-- **Icon set**. Select the set of icons containing the icon needed. Available sets are AWS, AWS (Legacy), Azure, and Font Awesome.
-- **Icon name**. Name of the icon used in the diagram. The field can be used to search for available icons as well.
-- **Toggle 3D/2D projection**. Display the icon in a 3D or 2D view when the diagram itself is in 3D view. Not available for 2D diagrams.
-- **Toggle flat/standing projection**. Display the label flat or standing. Not available when 2D projection is toggled or on 2D diagrams.
-- **Size**. Increase or decrease the size of an icon.
-- **Rotate item**. Rotate an icon and change its direction.
-- **Raise**. Raise the icon component above other icons.
-- **Lower**. Lower the icon component below other icons.
+- **Color**: Select a predefined background and icon color or enter the hexadecimal value for the color. Accepts the same color for both 2D and 3D view, or different colors for each.
+- **Icon set**: Select the set of icons containing the icon needed. Available sets are AWS, AWS (Legacy), Azure, and Font Awesome.
+- **Icon name**: Name of the icon used in the diagram. The field can be used to search for available icons as well.
+- **Toggle 3D/2D projection**: Display the icon in a 3D or 2D view when the diagram itself is in 3D view. Not available for 2D diagrams.
+- **Toggle flat/standing projection**: Display the label flat or standing. Not available when 2D projection is toggled or on 2D diagrams.
+- **Size**: Increase or decrease the size of an icon.
+- **Rotate item**: Rotate an icon and change its direction.
+- **Raise**: Raise the icon component above other icons.
+- **Lower**: Lower the icon component below other icons.
 
 ## API
 
-In [the Cloudcraft API][1], an icon is represented in JSON.
+Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. The following is an example JSON object of an Icon component:
 
 ```json
 {

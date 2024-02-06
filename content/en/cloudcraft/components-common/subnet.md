@@ -1,24 +1,27 @@
 ---
-title: "Component: Subnet"
-kind: guide
+title: "Subnet Component"
+kind: documentation
 ---
 
-{{< img src="cloudcraft/components-common/subnet/component-subnet.png" alt="Screenshot of a 3D representation of the subnet AWS component in Cloudcraft" responsive="true" style="width:100%;">}}
+## Overview
 
-The **Subnet** component is used to represent subnets from your Amazon Web Services architecture with Cloudcraft.
+The Subnet component is used to represent subnets from your Amazon Web Services architecture.
+
+{{< img src="cloudcraft/components-common/subnet/component-subnet.png" alt="Screenshot of a 3D representation of the subnet AWS component in Cloudcraft" responsive="true" style="width:60%;">}}
+
 
 ## Toolbar
 
-The toolbar is displayed when selecting a component. It allows you to customize parts of your component and its visual to your liking.
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**. Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both 2D and 3D view, or different colors for each.
-- **Name**. Give the subnet a name.
-- **Shape**. Select a shape for the subnet, dynamic or rectangular.
-- **Padding**. Increase or decrease the amount of space inside the subnet.
+- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both 2D and 3D view, or different colors for each.
+- **Name**: Give the subnet a name.
+- **Shape**: Select a shape for the subnet, dynamic or rectangular.
+- **Padding**: Increase or decrease the amount of space inside the subnet.
 
 ## API
 
-In [the Cloudcraft API][1], the subnet component is represented in JSON.
+Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. The following is an example JSON object of a Subnet component:
 
 ```json
 {
@@ -40,18 +43,18 @@ In [the Cloudcraft API][1], the subnet component is represented in JSON.
 }
 ```
 
-- **type: subnet**. The type of component.
-- **id: string**. A unique identifier for the component in the `uuid` format.
-- **region: string**. The AWS region this subnet is deployed in. With the exception of `cn-` regions, all global regions are supported.
-- **name: string**. The name for the subnet.
-- **shape: string**. The shape of the subnet. Accepted values are `dynamic` or `rectangular`.
-- **padding: number**. The internal padding for the subnet. Defaults to 1.5.
-- **nodes: array**. The components inside the subnet. [See below for more information](#accepted-values-for-nodes).
-- **color: object**. The fill color for the component.
-  - **isometric: string**. Fill color for the component in 3D view. Must be an hexadecimal color.
-  - **2d: string**. Fill color for the component in 2D view. Must be an hexadecimal color.
-- **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
-- **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
+- **type: subnet**: The type of component.
+- **id: string**: A unique identifier for the component in the `uuid` format.
+- **region: string**: The AWS region this subnet is deployed in. With the exception of `cn-` regions, all global regions are supported.
+- **name: string**: The name for the subnet.
+- **shape: string**: The shape of the subnet. Accepted values are `dynamic` or `rectangular`.
+- **padding: number**: The internal padding for the subnet. Defaults to 1.5.
+- **nodes: array**: The components inside the subnet. [See below for more information](#accepted-values-for-nodes).
+- **color: object**: The fill color for the component.
+  - **isometric: string**: Fill color for the component in 3D view. Must be an hexadecimal color.
+  - **2d: string**: Fill color for the component in 2D view. Must be an hexadecimal color.
+- **link: uri**: Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
+- **locked: boolean**: If true, changes to the component through the application are disabled until unlocked.
 
 ### Accepted values for nodes
 
