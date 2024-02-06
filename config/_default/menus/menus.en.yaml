@@ -323,10 +323,15 @@ main:
     url: agent/basic_agent_usage/windows/
     weight: 117
     parent: basic_agent_usage
+  - name: SCCM
+    identifier: basic_agent_usage_sccm
+    url: agent/basic_agent_usage/sccm/
+    weight: 118
+    parent: basic_agent_usage
   - name: From Source
     identifier: basic_agent_usage_source
     url: agent/basic_agent_usage/source/
-    weight: 118
+    weight: 119
     parent: basic_agent_usage
   - name: Architecture
     url: agent/architecture/
