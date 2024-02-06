@@ -75,9 +75,9 @@ Toggle among the **Pods**, **Clusters**, **Namespaces**, and other Kubernetes re
 
 Each of these views includes a data table to help you better organize your data by field such as status, name, and Kubernetes labels, and a detailed Cluster Map to give you a bigger picture of your pods and Kubernetes clusters.
 
-{{< img src="infrastructure/livecontainers/orch_ex_replicasets.png" alt="Orchestrator Explorer opened to show Workloads > Replica Sets, in Summary mode" style="width:80%;">}}
+***See [Query Filter Details](#query-filter-details) for more details on how to filter these views.***
 
-See [Query Filter Details](#query-filter-details) for more details on how to filter these views.
+{{< img src="infrastructure/livecontainers/orch_ex_replicasets.png" alt="Orchestrator Explorer opened to show Workloads > Replica Sets, in Summary mode" style="width:80%;">}}
 
 #### Group by functionality and facets
 
@@ -152,21 +152,21 @@ A query filter is composed of terms and operators.
 
 There are multiple types of terms available:
 
-| Type | Example |
+| Type | Examples |
 |---|---|
-| **Tags** are attached to resources by [the agent collecting them](https://docs.datadoghq.com/getting_started/tagging/assigning_tags/?tab=containerizedenvironments). There are also additional tags that Datadog generates for Kubernetes resources. | `datacenter:staging` or<br>`tag#datacenter:staging` |
+| **Tags** are attached to resources by [the agent collecting them](https://docs.datadoghq.com/getting_started/tagging/assigning_tags/?tab=containerizedenvironments). There are also additional tags that Datadog generates for Kubernetes resources. | `datacenter:staging`<br>`tag#datacenter:staging`<br>*(the `tag#` is optional)* |
 | **Labels** are extracted from [a resource's metadata](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/). They are typically used to organize your cluster and target specific resources via selectors. | `label#chart_version:2.1.0` |
 | **Annotations** are also extracted from [a resource's metadata](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/). They are generally used to support tooling that aid in cluster management. | `annotation#checksum/configmap:a1bc23d4` |
-| **Fields** are attributes found within the resource manifest. Not all attributes are supported, see [Filterable Fields](#filterable-fields) for more details. | `field#metadata.creationTimestamp:>1699535065` |
+| **Fields** are attributes found within the resource manifest. Not all attributes are supported, see [Manifest Fields](#manifest-fields) for more details. | `field#metadata.creationTimestamp:>1699535065` |
 | **Metrics** are added to workload resources (pods, deployments, etc.). You can find resources based on their utilization. To see what metrics are supported, see [Resource Utilization Filters](#resource-utilization-filters). | `metric#cpu_usage_pct_limits_avg15:>80%` |
-| **String matching** is supported by some specific resource attributes, see below.<br>*Note: string matching does not use the key-value format, and you cannoy specify the attribute to match on.* | `"10.132.6.23"` (IP),<br>`"9cb4b43f-8dc1-4a0e"` (UID) or<br>`"web-api-3"` (Name) |
+| **String matching** is supported by some specific resource attributes, see below.<br>*Note: string matching does not use the key-value format, and you cannoy specify the attribute to match on.* | `"10.132.6.23"` (IP)<br>`"9cb4b43f-8dc1-4a0e"` (UID)<br>`"web-api-3"` (Name) |
 
 >  ***Notes**:*
 >
 >  - *You might find the same key-value pairs as both a tag and label (or annotation) - this is dependent on how your cluster is configured.*
 >  - In addition to the normal quality comparison (`:`), `field#` and `metric#` filters support the following: `tag:>value`, `:<`, `:>=`, and `:<=`.
 
-The following resource attributes are supported in string matching:
+The following resource attributes are supported in arbitrary **String Matching**:
 - `metadata.name`
 - `metadata.uid`
 - IP Addresses found in:
@@ -175,6 +175,15 @@ The following resource attributes are supported in string matching:
   - Services (Cluster, External, and Load Balancer IPs)
 
 This means that you do not need to specify a key to search for a resource by name, or IP.
+
+#### Comparators
+
+All terms support the `:` equality operator. [Manifest Fields](#manifest-fields) and [Metric Values](#Resource-Utilization-Filters) support numeric comparisons as well:
+
+- `:>` Greater than (i.e. `metric#cpu_usage_avg15:>0.9`)
+- `:>=` Greater than or equal
+- `:<` Less than
+- `:<=` Less than or equal
 
 #### Operators
 
@@ -189,14 +198,13 @@ To combine multiple terms into a complex query, you can use any of the following
 
 ### Wildcards
 
-You can use `*` wildcards as part of a term value to filter by partial matches. Some examples:
+You can use `*` wildcards as part of a term to filter by partial matches, both for values and keys! Some examples:
 
 - `kube_job:stats-*`: Find all resources with a `kube_deployment` tag value starting with `stats-`
 - `pod_name:*canary`: Find all resources with a `pod_name` value ending in `canary`
-- `kube_deployment:*writer*cell-2`: Find resources with `writer` in the middle of the value, ending with `cell-2`
 - `label#release:*`: Find all resources with a `release` label, regardless of its value
-
->  ***Note:** There is no limit to the number, or the location of, wildcards in your key values. You cannot use wild cards within the key name however.*
+- `-label#*.datadoghq.com/*`: Find resources that do not have any Datadog-scoped labels.
+- `kube_*:*writer*cell-2`: Find resource with a related-resource tags, with with  `writer` in the middle of the value, also ending with `cell-2`.
 
 ### Autocomplete
 
@@ -214,26 +222,53 @@ As you build your filter query, our autocomplete drop down will help you fill in
 
 In addition to the tags you have [configured](https://docs.datadoghq.com/getting_started/tagging/assigning_tags/?tab=containerizedenvironments) within your Datadog agent, Datadog injects generated tags based on resource attributes that can help your searching and grouping needs. These tags are added to resources conditionally, when they are relevant.
 
-**All resources** will have the `kube_cluster_name` and `kube_namespace` tags added to them.
+#### All Resources
+
+All resources will have the `kube_cluster_name` and `kube_namespace` tags added to them.
 
 They will also have a `kube_<api_kind>:<metadata.name>` tag. For example, a deployment named `web-server-2` would have the `kube_deployment:web-server-2` tag automatically added to it.
 
+> ***Note**: there are some exceptions to this:*
+> - *VPAs: `verticalpodautoscaler`*
+> - *VPHs: `horizontalpodautoscaler`*
+> - *Persistant Volume Claims: `persistantvolumeclaim`*
+
 Based on the labels attached to the resource, the following tags will also be extracted:
 
-- `kube_app_name` (via `app.kubernetes.io/name`)`
-- `kube_app_instance` (via `app.kubernetes.io/instance`)`
-- `kube_app_version` (via `app.kubernetes.io/version`)`
-- `kube_app_component` (via `app.kubernetes.io/component`)`
-- `kube_app_part_of` (via `app.kubernetes.io/part-of`)`
-- `kube_app_managed_by` (via `app.kubernetes.io/managed-by`)`
+| Tag | Source Label |
+|---|---|
+| `kube_app_name` | `app.kubernetes.io/name` |
+| `kube_app_instance` | `app.kubernetes.io/instance` |
+| `kube_app_version` | `app.kubernetes.io/version` |
+| `kube_app_component` | `app.kubernetes.io/component` |
+| `kube_app_part_of` | `app.kubernetes.io/part-of` |
+| `kube_app_managed_by` | `app.kubernetes.io/managed-by` |
+| `env` | `tags.datadoghq.com/env` |
+| `version` | `tags.datadoghq.com/version` |
+| `service` | `tags.datadoghq.com/service` |
 
-**Cluster level resources** will have the following tags extracted based on labels found on them:
+#### Relationships
 
-- `env` (via `tags.datadoghq.com/env`)
-- `version` (via `tags.datadoghq.com/version`)
-- `service` ( via `tags.datadoghq.com/service`)
+Related Resources will be tagged with eachother. Some examples:
 
-**Workload resources** (pods, deployments, stateful sets, etc.) will have the following tags, indiciating their support within the Resources Utilization page:
+- A Pod that is part of the "XYZ" Deployment will have a `kube_deployment:xyz` tag.
+- An Ingress that points at Service "A" will have a `kube_service:a` tag.
+
+Resources that are spawned from "parent" resources will have the `kube_ownerref_kind` and `kube_ownerref_name` tags (such as Pods and Jobs).
+
+> **Tip:** utilize the autocomplete feature to discover what related-resource tags are available. Type `kube_` and see what results are suggested.
+
+#### Pods
+
+Pods are given the following tags:
+
+- `pod_name`
+- `pod_phase` (extracted from the Manifest)
+- `pod_status` (calculated similarly to `kubectl`)
+
+#### Workloads
+
+Workload resources (pods, deployments, stateful sets, etc.) will have the following tags, indiciating their support within the Resources Utilization page:
 
 - `resource_utilization` (`supported` or `unsupported`)
 - `missing_cpu_requests`
@@ -241,47 +276,37 @@ Based on the labels attached to the resource, the following tags will also be ex
 - `missing_memory_requests`
 - `missing_memory_limits`
 
-**Pods** are given the following tags:
+#### Custom Resources
 
-- `kube_node`
-- `pod_name`
-- `pod_phase`
-- `pod_status`
-- `kube_priority_class`
-- `kube_ownerref_kind`
-- `kube_ownerref_name`
-- `kube_replication_controller`
+Custom Resource Definitions (`kube_crd`) and Custom Resources (`kube_cr`) will have the following tags added to them:
 
-Depending on the origin of the pod, they may have 1 or more of the following tags, associating them with related resources:
+- `kube_crd_kind`
+- `kube_crd_group`
+- `kube_crd_version`
+- `kube_crd_scope`
 
-- `kube_cronjob`
-- `kube_deployment`
-- `kube_daemon_set`
-- `kube_job`
-- `kube_replica_set`
-- `kube_stateful_set`
-- `kube_cronjob`
+Definitions will have certain conditions extracted as tags:
 
-**Other resource** types have their own set of unique tags that are extracted based on your cluster environment.
+- `kube_crd_non_structural_schema` & `kube_crd_non_structural_schema_reason`
+- `kube_crd_names_accepted` & `kube_crd_names_accepted_reason`
+- `kube_crd_established` & `kube_crd_established_reason`
+
+#### Specific Reesources
+
+Some resources have specificialized tags as well - these are extracted based on your cluster environment. The following tags are in addition to the shared tags above.
 
 | Resource | Extracted Tags |
 |---|---|
 | **Cluster** | `api_server_version`<br>`kubelet_version` |
-| **Cluster Role Binding** | `kube_cluster_role_binding`<br>`kube_cluster_role` |
-| **Custom Resource** | `kube_cr`<br>`kube_crd_kind`<br>`kube_crd_group`<br>`kube_crd_version`<br>`kube_crd_scope` |
-| **Custom Resource Definition** | `kube_crd`<br>`kube_crd_kind`<br>`kube_crd_group`<br>`kube_crd_version`<br>`kube_crd_scope`<br>`kube_crd_non_structural_schema`<br>`kube_crd_non_structural_schema_reason`<br>`kube_crd_names_accepted`<br>`kube_crd_names_accepted_reason`<br>`kube_crd_established`<br>`kube_crd_established_reason` |
-| **Deployment** | `kube_deployment`<br>`kube_condition_available`<br>`kube_condition_progressing`<br>`kube_condition_replicafailure` |
-| **Ingress** | `kube_ingress`<br>`kube_service` |
-| **Job** | `kube_ownerref_kind`<br>`kube_ownerref_name`<br>`kube_cronjob`<br>`kube_job` |
+| **Deployment** | `kube_condition_available`<br>`kube_condition_progressing`<br>`kube_condition_replicafailure` |
 | **Namespace** | `phase` |
-| **Node** | `kube_node`<br>`kube_node_unschedulable`<br>`kube_node_kubelet_version`<br>`kube_node_kernel_version`<br>`kube_node_runtime_version`<br>`eks_fargate_node`<br>`node_schedulable`<br>`node_status` |
-| **Persistent Volume** | `kube_persistent_volume`<br>`persistentvolumeclaim`<br>`kube_reclaim_policy`<br>`kube_storage_class_name`<br>`pv_type`<br>`pv_phase` |
-| **Persistent Volume Claim** | `persistentvolumeclaim`<br>`kube_persistent_volume`<br>`pvc_phase`<br>`kube_storage_class_name` |
-| **Replica Set** |  `kube_replica_set`<br>`kube_deployment` |
-| **Role Binding** | `kube_role_binding`<br>`kube_cluster_role`<br>`kube_role` |
-| **Service** | `kube_service`<br>`kube_service_type`<br>`kube_service_port` |
+| **Node** | `kube_node_unschedulable`<br>`kube_node_kubelet_version`<br>`kube_node_kernel_version`<br>`kube_node_runtime_version`<br>`eks_fargate_node`<br>`node_schedulable`<br>`node_status` |
+| **Persistent Volume** | `kube_reclaim_policy`<br>`kube_storage_class_name`<br>`pv_type`<br>`pv_phase` |
+| **Persistent Volume Claim** | `pvc_phase`<br>`kube_storage_class_name` |
+| **Pod** | `pod_name`<br>`pod_phase` (extracted from the Manifest)<br>`pod_status` (calculated similarly to `kubectl`) |
+| **Service** | `kube_service_type`<br>`kube_service_port` |
 
-### Filterable Fields
+### Manifest Fields
 
 Currently, the only manifest field available for comparison is `field#metadata.creationTimestamp`. The value is a Unix Epoch in seconds (UTC). To look for resources created before January 1st, 2022, you would filter by: `field#metadata.creationTimestamp:<=1577836800`
 
@@ -297,31 +322,35 @@ The following workload resouces are enriched with resource utilization metrics:
 - Replica Sets
 - Stateful Sets
 
-For these resources, following metrics are exposed as filterable terms:
+You can filter by metric values like so: `metric#<metric_name><comparator><numeric_value>`.
 
-- `metric#cpu_limits_avg15`
-- `metric#cpu_requests_avg15`
-- `metric#cpu_usage_avg15`
-- `metric#cpu_usage_pct_limits_avg15`
-- `metric#cpu_usage_pct_requests_avg15`
-- `metric#cpu_waste_avg15`
-- `metric#mem_limits_avg15`
-- `metric#mem_requests_avg15`
-- `metric#mem_usage_avg15`
-- `metric#mem_usage_pct_limits_avg15`
-- `metric#mem_usage_pct_requests_avg15`
-- `metric#mem_waste_avg15`
+- `metric_name` is an availbale metric (see below)
+- `comparator` is a support [Comparator](#Comparator)
+- and `numeric_value` is a floating poing value.
+
+For these workload resources, the following metric names are available:
+
+| CPU | Memory |
+|---|---|
+| `cpu_limits_avg15` | `mem_limits_avg15` |
+| `cpu_requests_avg15` | `mem_requests_avg15` |
+| `cpu_usage_avg15` | `mem_usage_avg15` |
+| `cpu_usage_pct_limits_avg15` | `mem_usage_pct_limits_avg15` |
+| `cpu_usage_pct_requests_avg15` | `mem_usage_pct_requests_avg15` |
+| `cpu_waste_avg15` | `mem_waste_avg15` |
 
 In addition, Clusters and Nodes have the following metrics available to them:
 
-- `metric#cpu_usage_pct_alloc_avg15`
-- `metric#cpu_requests_pct_alloc_avg15`
-- `metric#mem_usage_pct_alloc_avg15`
-- `metric#mem_requests_pct_alloc_avg15`
+- `cpu_usage_pct_alloc_avg15`
+- `cpu_requests_pct_alloc_avg15`
+- `mem_usage_pct_alloc_avg15`
+- `mem_requests_pct_alloc_avg15`
 
-CPU Limits and Requests are stored as a number of cores.
+#### Metric Units
 
-Memory Limits and Requests are stored in bytes.
+CPU metrics are stored as a number of cores.
+
+Memory metrics are stored as bytes.
 
 Percents are stored as floats, where `0.0` is 0%, and `1.0` is 100%. Some metric values go well beyond 100%, such as CPU Usage Percents by Requests.
 
