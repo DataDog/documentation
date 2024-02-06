@@ -204,7 +204,7 @@ You can use `*` wildcards as part of a term to filter by partial matches, both f
 - `pod_name:*canary`: Find all resources with a `pod_name` value ending in `canary`
 - `label#release:*`: Find all resources with a `release` label, regardless of its value
 - `-label#*.datadoghq.com/*`: Find resources that do not have any Datadog-scoped labels.
-- `kube_*:*writer*cell-2`: Find resource with a related-resource tags, with with  `writer` in the middle of the value, also ending with `cell-2`.
+- `kube_*:*stats*canary`: Find resource with a related-resource tags (`kube_*`), with with  `stats` in the middle of the value, also ending with `canary`.
 
 ### Autocomplete
 
@@ -228,7 +228,9 @@ All resources will have the `kube_cluster_name` and `kube_namespace` tags added 
 
 They will also have a `kube_<api_kind>:<metadata.name>` tag. For example, a deployment named `web-server-2` would have the `kube_deployment:web-server-2` tag automatically added to it.
 
-> ***Note**: there are some exceptions to this:*
+> ***Note**: There are some exceptions to this pattern:*
+>
+> - Pods use `pod_name` instead
 > - *VPAs: `verticalpodautoscaler`*
 > - *VPHs: `horizontalpodautoscaler`*
 > - *Persistant Volume Claims: `persistantvolumeclaim`*
@@ -285,7 +287,7 @@ Custom Resource Definitions (`kube_crd`) and Custom Resources (`kube_cr`) will h
 - `kube_crd_version`
 - `kube_crd_scope`
 
-Definitions will have certain conditions extracted as tags:
+Custom Resource Definitions will have certain conditions extracted as tags:
 
 - `kube_crd_non_structural_schema` & `kube_crd_non_structural_schema_reason`
 - `kube_crd_names_accepted` & `kube_crd_names_accepted_reason`
@@ -303,7 +305,7 @@ Some resources have specificialized tags as well - these are extracted based on 
 | **Node** | `kube_node_unschedulable`<br>`kube_node_kubelet_version`<br>`kube_node_kernel_version`<br>`kube_node_runtime_version`<br>`eks_fargate_node`<br>`node_schedulable`<br>`node_status` |
 | **Persistent Volume** | `kube_reclaim_policy`<br>`kube_storage_class_name`<br>`pv_type`<br>`pv_phase` |
 | **Persistent Volume Claim** | `pvc_phase`<br>`kube_storage_class_name` |
-| **Pod** | `pod_name`<br>`pod_phase` (extracted from the Manifest)<br>`pod_status` (calculated similarly to `kubectl`) |
+| **Pod** | `pod_name` (instead of `kube_pod`)<br>`pod_phase` (extracted from the Manifest)<br>`pod_status` (calculated similarly to `kubectl`) |
 | **Service** | `kube_service_type`<br>`kube_service_port` |
 
 ### Manifest Fields
