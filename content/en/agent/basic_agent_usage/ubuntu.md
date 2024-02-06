@@ -26,9 +26,7 @@ further_reading:
 
 This page outlines the basic features of the Datadog Agent for Ubuntu. 
 
-To install the Agent, see the [installation instructions][1].
-
-Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
+To install the Agent, see the [installation instructions][1]. Packages are available for 64-bit x86 and Arm v8 architectures. For other architectures, use the source install.
 
 **Note**: Ubuntu 14.04 and above are supported on the 64-bit x86 architecture. Ubuntu 16.04 and above are supported on the 64-bit Arm v8 architecture.
 
