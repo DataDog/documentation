@@ -29,7 +29,7 @@ Example workflow:
 
 {{< img src="monitors/monitor_types/process/tag-scoped-process-monitor.png" alt="A live process monitor that has been scoped using a tag" style="width:100%;" >}}
 
-2. Optionally, refine the monitor's scope by adding search text to the **by text** field. In the example below, only processes matching `cluster worker` are included.
+3. Optionally, refine the monitor's scope by adding search text to the **by text** field. In the example below, only processes whose command line matches `cluster worker` are included.
 
 {{< img src="monitors/monitor_types/process/text-scoped-process-monitor.png" alt="A live process monitor that has been scoped using text search" style="width:100%;" >}}
 
