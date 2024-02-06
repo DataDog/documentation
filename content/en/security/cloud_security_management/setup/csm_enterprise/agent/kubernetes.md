@@ -36,6 +36,8 @@ Use the following instructions to enable [CSM Misconfigurations][1], [CSM Threat
           # Image collection is enabled by default with Datadog Operator version `>= 1.3.0`.
           containerImage:
             enabled: true
+            # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
+            # uncompressedLayersSupport: true
           host:
             enabled: true
     ```
