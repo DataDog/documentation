@@ -27,6 +27,10 @@ This page provides information to help you troubleshot issues with CI Visibility
 2. Make sure the Datadog Agent host is properly configured and is reachable by the Datadog Plugin. You can test connectivity by clicking on the **Check connectivity with the Datadog Agent** button on the Jenkins plugin configuration UI.
 3. Check for any errors in the Jenkins logs. You can enable debug-level logs for the Datadog plugin by [creating a `logging.properties` file][1] and adding the line: `org.datadog.level = ALL`.
 
+## Missing JunitXML tests
+
+Make sure the JunitXML report does not contain a `timestamp` older than `72 hours`, otherwise the tests will not be ingested by Datadog.
+
 ## Pipeline not found
 
 A "Pipeline not found" message is shown when you click on incomplete data coming from an in-progress pipeline for those [CI providers that do not support `running` pipelines][15]. Data is received progressively for stages, jobs, or custom commands. Wait until the pipeline has finished and try again.
@@ -43,7 +47,7 @@ Missing stages or jobs in the _Pipeline Details_ page might be due to a wrong co
 
 #### Delivery of webhook events is not guaranteed by CI providers
 
-Running pipelines support relies on data sent from CI providers indicating execution status. If this data is not available, executions marked as `Running` in Datadog may have already finished. 
+Running pipelines support relies on data sent from CI providers indicating execution status. If this data is not available, executions marked as `Running` in Datadog may have already finished.
 
 #### Maximum duration for a pipeline execution
 
