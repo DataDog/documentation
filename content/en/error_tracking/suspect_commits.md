@@ -2,6 +2,8 @@
 title: Suspect Commits
 kind: documentation
 disable_toc: false
+aliases:
+  - /logs/error_tracking/suspect_commits
 ---
 ## Overview
 
