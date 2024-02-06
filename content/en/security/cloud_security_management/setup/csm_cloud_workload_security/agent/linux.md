@@ -10,7 +10,13 @@ Use the following instructions to enable [CSM Threats][1] on Linux. To learn mor
 
 For a package-based deployment, install the Datadog package with your package manager, and then update the `datadog.yaml`, `security-agent.yaml`, and `system-probe.yaml` files.
 
-By default, Runtime Security is disabled. To enable it, both the `security-agent.yaml` and `system-probe.yaml` files need to be updated.
+You can also use the [Agent install script][3] to automatically enable CSM Threats:
+
+```shell
+DD_RUNTIME_SECURITY_CONFIG_ENABLED=true DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+```
+
+**Note**: By default, Runtime Security is disabled. To enable it, both the `security-agent.yaml` and `system-probe.yaml` files need to be updated.
 
 ```shell
 sudo cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
@@ -54,3 +60,4 @@ runtime_security_config:
 
 [1]: /security/threats
 [2]: /security/cloud_security_management/setup#supported-deployment-types-and-features
+[3]: /getting_started/agent/#installation
