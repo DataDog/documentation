@@ -13,7 +13,7 @@ aliases:
 
 ## Overview
 
-You can add metadata to APIs through the Datadog UI, API, or use automated pipelines through the GitHub integration or Terraform.
+You can add metadata to APIs through the Datadog UI or API, or use automated pipelines through the GitHub integration or Terraform.
 
 ## Metadata structure and supported versions
 

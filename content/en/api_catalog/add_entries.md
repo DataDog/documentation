@@ -22,13 +22,13 @@ aliases:
 
 ## Overview
 
-API Catalog uses APM instrumentation for distributed tracing to automatically discover endpoints your Datadog organization. For instrumented services with supported libraries, endpoints are automatically populated into API Catalog.
+API Catalog uses APM instrumentation for distributed tracing to automatically discover endpoints in your Datadog organization. For instrumented services with supported libraries, endpoints are automatically populated into API Catalog.
 
 Register automatically detected endpoints, or upload an OpenAPI file to benefit from the full value of API Catalog.
 
 ## Register automatically detected endpoints
 
-Register automatically detected endpoints to groups of APIs to track their usage, set ownership, and set monitoring policies from a centralized location.
+Group automatically detected endpoints into APIs to track their usage, set ownership, and set monitoring policies from a centralized location.
 
 To register endpoints:
 
@@ -41,11 +41,11 @@ To register endpoints:
 
 After endpoints are registered, Datadog starts collecting a new endpoint metric for better [monitoring capabilities][6].
 
-Auto discovery is not available for some frameworks. Check compatibility status in the **learn More** button in Datadog. If you still cannot find your endpoints, try uploading a definition file containing them. Datadog automatically starts collecting data on those endpoint definitions after they are uploaded.
+Autodiscovery is not available for some frameworks. Check compatibility status by clicking the **Learn More** button in Datadog. If you still cannot find your endpoints, try uploading a definition file containing them. Datadog automatically starts collecting data on those endpoint definitions after they are uploaded.
 
 ## Import OpenAPI/Swagger file
 
-Import API definitions that you already own to see which endpoints are receiving traffic, which are not receiving traffic, and get performance and deployment information on top of your API definitions.
+Import API definitions that you already own to see which endpoints are receiving traffic, and get performance and deployment information on top of your API definitions.
 
 Supported formats are OpenAPI 2 and 3.
 

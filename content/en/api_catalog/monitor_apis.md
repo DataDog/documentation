@@ -23,7 +23,7 @@ aliases:
 
 After you have [registered all your endpoints][1] and [assigned team ownership][2], you can start managing and improving them. Use API Catalog to start activities such as:
 
- - Detecting and investigating APIs that are under-performing.
+ - Detecting and investigating APIs that are underperforming.
  - Creating alerts based on key performance metrics such as latency and error rate.
  - Keeping track of an API's reliability in terms of triggered alerts, test results, and security signals.
  - Standardizing API testing and improving test coverage with Synthetic Monitoring.

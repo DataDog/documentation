@@ -18,7 +18,7 @@ To assign ownership to an endpoint:
 
 1. From the **Explorer** page, select the endpoint(s) that need owners.
 2. Click **Register Endpoints**.
-3. Search for then select the teams that should own the endpoint.
+3. Search for and then select the teams that should own the endpoint.
 4. Click **Apply**.
 
 If ownership hasn't been assigned, click the **Register Endpoints** dropdown and choose an owner to assign one.
@@ -47,7 +47,7 @@ To tag multiple endpoints at one time:
 3. Add or search for a tag.
 4. Click **Apply Changes**.
 
-When you add a tag, it appears in the list of facets beside the catalog. Click a facet to filter the list and add the tag to the Search query field.
+When you add a tag, it appears in the list of facets beside the catalog. Click a facet to filter the list and add the tag to the **Search** query field.
 
 Use tags to describe business logic, importance, or other useful grouping information. Applying these labels can help you view and access groups of endpoints defined by your own criteria. This is helpful to create assets such as monitors and dashboards for endpoint groups with common characteristics.
 

@@ -34,7 +34,7 @@ Datadog API Catalog is in beta.
 
 API Catalog provides a single view and entry point for exploring the performance, reliability, and ownership of all your API endpoints in one place. It's a central place where your whole company can find up-to-date information about the characteristics of the APIs used by internal services (private APIs) and external users (publicly exposed APIs). 
 
-Monitor your mission-critical, API-driven business features, standardize and validate APIs performance expectations, and alert when performance deviates from them.
+Monitor your mission-critical, API-driven business features, standardize and validate API performance expectations, and alert when performance deviates from them.
 
 ## Use cases
 
@@ -59,7 +59,7 @@ See [Exploring APIs][3] for more information.
 
 ### Setting owners and tags
 
-Add meaningful tags and ownership information to endpoints so your is catalog even more useful for investigations and team communication.
+Add meaningful tags and ownership information to endpoints so your catalog is even more useful for investigations and team communication.
 
 Read [Setting Owners and Tags][6] for more information.
 
@@ -67,7 +67,7 @@ Read [Setting Owners and Tags][6] for more information.
 
 Use your full catalog to start managing your APIs and endpoints:
 
-- Find and fix under-performing endpoints.
+- Find and fix underperforming endpoints.
 - Track their reliability against standards and objectives.
 - Watch for anomalies.
 - Investigate errors.
@@ -84,7 +84,7 @@ Read [Adding Entries to API Catalog][9] for more information.
 
 ### Adding metadata to APIs
 
-Add metadata to APIs through the Datadog UI, API, or use automated pipelines through the GitHub integration or Terraform.
+Add metadata to APIs through the Datadog UI or API, or use automated pipelines through the GitHub integration or Terraform.
 
 Read [Adding Metadata to APIs][10] for more information.
 
@@ -102,7 +102,7 @@ Public APIs
 : Customer-facing API endpoints that are accessible from the internet.
 
 Private APIs
-: Also called internal APIs. These are only for internal use in an organization and are used mainly for backend service communication. These are the most common type of APIs. 
+: Also called internal APIs. These are only for internal use in an organization and are used mainly for backend service communication. These are the most common type of API. 
 
 Partner APIs
 : Also called third-party APIs. These are another organization's public endpoints that your organization uses to provide your services (for example, Stripe, Google, and Facebook).
