@@ -328,7 +328,7 @@ components:
           type: string
         message:
           description: Message content.
-          example: AWS account 12345 has no lambda config to update
+          example: AWS account 12345 has no Lambda config to update
           type: string
       type: object
     AWSLogsAsyncResponse:
@@ -13095,7 +13095,7 @@ components:
           description: Maximum number of graphs to display in the widget.
           example: 24
           format: int64
-          maximum: 100
+          maximum: 500
           minimum: 1
           type: integer
         sort:
@@ -13111,7 +13111,7 @@ components:
           description: Manual selection of tags making split graph widget static
           items:
             $ref: '#/components/schemas/SplitVectorEntry'
-          maxItems: 100
+          maxItems: 500
           type: array
       required:
       - split_dimensions
@@ -14896,7 +14896,7 @@ components:
       - edge.laptop_large
       - edge.tablet
       - edge.mobile_small
-      example: laptop_large
+      example: chrome.laptop_large
       type: string
       x-enum-varnames:
       - LAPTOP_LARGE
@@ -18296,7 +18296,7 @@ components:
           type: array
       type: object
     UsageLambdaHour:
-      description: 'Number of lambda functions and sum of the invocations of all lambda
+      description: 'Number of Lambda functions and sum of the invocations of all Lambda
         functions
 
         for each hour for a given organization.'
@@ -18324,8 +18324,8 @@ components:
           type: string
       type: object
     UsageLambdaResponse:
-      description: 'Response containing the number of lambda functions and sum of
-        the invocations of all lambda functions
+      description: 'Response containing the number of Lambda functions and sum of
+        the invocations of all Lambda functions
 
         for each hour for a given organization.'
       properties:
@@ -33027,7 +33027,7 @@ paths:
         type: safe
   /api/v1/usage/aws_lambda:
     get:
-      description: 'Get hourly usage for lambda.
+      description: 'Get hourly usage for Lambda.
 
         **Note:** hourly usage data for all products is now available in the [Get
         hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family).
@@ -33081,7 +33081,7 @@ paths:
         appKeyAuth: []
       - AuthZ:
         - usage_read
-      summary: Get hourly usage for lambda
+      summary: Get hourly usage for Lambda
       tags:
       - Usage Metering
       x-menu-order: 19
@@ -35621,9 +35621,9 @@ tags:
 - description: 'Configure your Datadog-AWS-Logs integration directly through Datadog
     API.
 
-    For more information, see the [AWS integration page](https://docs.datadoghq.com/api/?lang=bash#integration-aws-logs).'
+    For more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection).'
   externalDocs:
-    url: https://docs.datadoghq.com/api/?lang=bash#integration-aws-logs
+    url: https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection
   name: AWS Logs Integration
 - description: "All requests to Datadog\u2019s API must be authenticated.\nRequests
     that write data require reporting access and require an `API key`.\nRequests that
@@ -35631,7 +35631,9 @@ tags:
     All Datadog API clients are configured by default to consume Datadog US site APIs.\nIf
     you are on the Datadog EU site, set the environment variable `DATADOG_HOST` to\n`https://api.datadoghq.eu`
     or override this value directly when creating your client.\n\n[Manage your account\u2019s
-    API and application keys](https://app.datadoghq.com/account/settings#api)."
+    API and application keys](https://app.datadoghq.com/organization-settings/) in
+    Datadog, and see the [API and Application Keys page](https://docs.datadoghq.com/account_management/api-app-keys/)
+    in the documentation."
   name: Authentication
 - description: 'Configure your Datadog-Azure integration directly through the Datadog
     API.
@@ -35647,10 +35649,9 @@ tags:
     organization.'
   name: Dashboard Lists
   x-deprecated: true
-- description: 'Interact with your dashboard lists through the API to make it easier
-    to organize,
-
-    find, and share all of your dashboards with your team and organization.'
+- description: Manage all your dashboards, as well as access to your shared dashboards,
+    through the API. See the [Dashboards page](https://docs.datadoghq.com/dashboards/)
+    for more information.
   name: Dashboards
 - description: '[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes)
     gives
@@ -35661,17 +35662,15 @@ tags:
 
     end times, prevent all alerting related to specified Datadog tags.'
   name: Downtimes
-- description: Interact with embeddable graphs through the API.
+- description: Manage embeddable graphs through the API. See [Embeddable Graphs with
+    Template Variables](https://docs.datadoghq.com/dashboards/guide/embeddable-graphs-with-template-variables/)
+    for more information.
   name: Embeddable Graphs
-- description: 'The events service allows you to programmatically post events to the
-    event stream
+- description: 'The Event Management API allows you to programmatically post events
+    to the Events Explorer
 
-    and fetch events from the event stream. Events are limited to 4000 characters.
-
-    If an event is sent out with a message containing more than 4000 characters, only
-    the
-
-    first 4000 characters are displayed.'
+    and fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/)
+    for more information.'
   name: Events
 - description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
 
@@ -35679,7 +35678,9 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/integrations/google_cloud_platform
   name: GCP Integration
-- description: Get information about your live hosts in Datadog.
+- description: Get information about your infrastructure hosts in Datadog, and mute
+    or unmute any notifications from your hosts. See the [Infrastructure page](https://docs.datadoghq.com/infrastructure/)
+    for more information.
   name: Hosts
 - description: Get a list of IP prefixes belonging to Datadog.
   name: IP Ranges
@@ -35896,7 +35897,9 @@ tags:
 
     You can retrieve up to 24 hours of hourly usage data for multiple organizations,
 
-    and up to two months of hourly usage data for a single organization in one request.'
+    and up to two months of hourly usage data for a single organization in one request.
+
+    Learn more on the [usage details documentation](https://docs.datadoghq.com/account_management/billing/usage_details/).'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/billing/usage_details/
