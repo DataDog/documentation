@@ -71,6 +71,8 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
 | Windows       | {{< X >}}              |                       | beta        |                     |                    |
 | AWS Fargate   | {{< X >}}              |                       | beta        |                     |                    |
 
+**Note**: The minimum Datadog Agent version required for all CSM components is `7.46` or higher.
+
 {{% csm-prereqs %}}
 
 ## Next steps
