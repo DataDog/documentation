@@ -3561,22 +3561,42 @@ main:
     url: security/cloud_security_management/setup/csm_enterprise
     parent: csm_setup
     identifier: csm_setup_enterprise
-    weight: 101
+    weight: 10000
+  - name: Cloud Accounts
+    url: security/cloud_security_management/setup/csm_enterprise/cloud_accounts
+    parent: csm_setup_enterprise
+    identifier: csm_setup_enterprise_cloud
+    weight: 1000000
+  - name: Agent
+    url: security/cloud_security_management/setup/csm_enterprise/agent
+    parent: csm_setup_enterprise
+    identifier: csm_setup_enterprise_agent
+    weight: 1000001
   - name: CSM Pro
     url: security/cloud_security_management/setup/csm_pro
     parent: csm_setup
     identifier: csm_setup_pro
-    weight: 102
-  - name: CSM Workload Security
-    url: security/cloud_security_management/setup/csm_workload_security
+    weight: 10005
+  - name: Cloud Accounts
+    url: security/cloud_security_management/setup/csm_pro/cloud_accounts
+    parent: csm_setup_pro
+    identifier: csm_setup_pro_cloud
+    weight: 1000000
+  - name: Agent
+    url: security/cloud_security_management/setup/csm_pro/agent
+    parent: csm_setup_pro
+    identifier: csm_setup_pro_agent
+    weight: 1000001
+  - name: CSM Cloud Workload Security
+    url: security/cloud_security_management/setup/csm_cloud_workload_security
     parent: csm_setup
-    identifier: csm_setup_workload_security
-    weight: 103
-  - name: CSM on Windows
-    url: security/cloud_security_management/setup/windows
-    parent: csm_setup
-    identifier: csm_setup_windows
-    weight: 104
+    identifier: csm_setup_cloud_workload_security
+    weight: 10010
+  - name: Agent
+    url: security/cloud_security_management/setup/csm_cloud_workload_security/agent
+    parent: csm_setup_cloud_workload_security
+    identifier: csm_setup_cloud_workload_security_agent
+    weight: 1000000
   - name: Threats
     url: security/threats/
     parent: csm
