@@ -24,7 +24,7 @@ Use the following instructions to enable [CSM Threats][1] on Kubernetes. To lear
           enabled: true
     ```
 
-2. Restart the Agent.
+2. Apply the changes and restart the Agent.
 
 
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md

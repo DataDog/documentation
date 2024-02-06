@@ -31,7 +31,7 @@ To learn more about the supported deployment types for each CSM feature, see [Se
             enabled: true
     ```
 
-2. Restart the Agent.
+2. Apply the changes and restart the Agent.
 
 {{% /tab %}}
 
