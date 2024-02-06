@@ -1,11 +1,16 @@
 ---
-title: Setting up Cloud Security Management on Windows
+title: Enabling CSM Enterprise on Windows
 kind: documentation
+code_lang: windows
+type: multi-code-lang
+code_lang_weight: 75 # a number that represents relative weight. 
 ---
 
-<div class="alert alert-warning">Cloud Security Management on Windows is in beta and should only be installed on hosts that are not critical to production workloads.</div>
+<div class="alert alert-warning">Cloud Security Management on Windows is in public beta and should only be installed on hosts that are not critical to production workloads.</div>
 
-Datadog [Cloud Security Management (CSM)][1] on Windows includes built-in threat detection for Windows process and network events. The out-of-the-box Windows ruleset includes the following default rules:
+Use the following instructions to enable [CSM Threats][11] on Windows. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][12].
+
+Datadog Cloud Security Management on Windows includes built-in threat detection for Windows process and network events. The out-of-the-box Windows ruleset includes the following default rules:
 
 - Certutil used to transmit or decode a file
 - Process memory was dumped using the minidump functions of comsvcs.dll
@@ -22,10 +27,7 @@ Datadog [Cloud Security Management (CSM)][1] on Windows includes built-in threat
 - Access to hosts running Windows Server 2016 or newer.
 - (Optional) For network events, [NPM][2] must be enabled on the hosts.
 
-**Notes**:
-
-- Windows containerized workloads are not supported.
-- Windows support is available for [CSM Enterprise and CSM Workload Security][10] only.
+**Note**: Windows containerized workloads are not supported.
 
 ## Installation
 
@@ -84,3 +86,5 @@ To get alerts whenever a Windows signal is created, create a [Notification Rule]
 [8]: https://app.datadoghq.com/security?product=cws&_gl=1*yokoae*_gcl_au*MTY0NDMyMDU4Mi4xNjk5Mjg1NDky*_ga*MTA2MDI5Mjg5My4xNzAwNTg2NjI0*_ga_KN80RDFSQK*MTcwMDU4NjYyNC42LjEuMTcwMDU4NzY3MC4wLjAuMA..*_fplc*Z3E3OTgzSExKaFZUcnBtQ0NXbFh2ZmYyQkZjclJjNXpacGZ3TnJiUDhyeG0ySHdwZDVUb0l1RXF2ZU4lMkZiQTV1Q0M3ZUxlN0pjQ3RRZ1V3b1hwd0taTDFPZlk5VDFzbzMyNDB3MUxzUEUyNiUyQlh2Q0FaQ1V5UGVRTmtXVG0lMkJRJTNEJTNE
 [9]: https://docs.datadoghq.com/security/notifications/rules/
 [10]: /security/cloud_security_management/setup
+[11]: /security/threats
+[12]: /security/cloud_security_management/setup#supported-deployment-types-and-features
