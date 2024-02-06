@@ -3582,11 +3582,16 @@ main:
     parent: csm
     identifier: cloud_workload_security
     weight: 2
-  - name: Managing Detection Rules
+  - name: Detection Rules
     url: security/threats/workload_security_rules
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
     weight: 201
+  - name: Create Custom Rules
+    url: security/threats/workload_security_rules/custom_rules
+    parent: cws_workload_security_rules
+    identifier: cws_custom_rules
+    weight: 101
   - name: Security Signals
     url: security/threats/security_signals
     parent: cloud_workload_security
