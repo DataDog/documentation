@@ -33,7 +33,7 @@ Example workflow:
 
 {{< img src="monitors/monitor_types/process/text-scoped-process-monitor.png" alt="A live process monitor that has been scoped using text search" style="width:100%;" >}}
 
-4. If your monitor's scope still exceeds a few thousand processes total across all process groups, use additional tags to break it into multiple monitors. 
+4. If your monitor's scope still exceeds a few thousand processes total across all monitor groups, use additional tags to break it into multiple monitors. 
     - For example, you can use the `env` tag to create separate monitors for `prod` and `staging`.
 
 ### Choosing a time frame
@@ -43,7 +43,7 @@ A common misconception is that increasing the evaluation window leads to slower 
 By increasing the evaluation window, you can ensure that you are only alerted if a behavior is happening consistently, not temporarily.
 
 - To avoid false positives, use a minimum interval of **5 minutes**.
-- If your monitor uses tags that come from a cloud provider crawler, use a minimum interval of **15 minutes**.
+- If your monitor uses tags that come from a cloud provider integration, use a minimum interval of **15 minutes**.
 - To avoid delayed alerts, use a maximum interval of **1 hour**.
 
 For additional guidelines, see [Best Practices to Prevent Alert Fatigue][2].
