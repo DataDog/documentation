@@ -1,5 +1,5 @@
 ---
-title: Monitor a Live Process
+title: Best Practices for Live Process Monitoring
 kind: Guide
 ---
 
@@ -18,11 +18,11 @@ An improperly configured monitor is prone to false positives. This guide covers 
 
 ### Scoping the monitor
 
-To avoid false positives, the scope of your monitor should not exceed a few thousand processes. Because text search is fuzzy, tags are the most accurate way to adjust the scope of your monitor.
+Datadog recommends scoping your monitor to no more than a few thousand processes. Because text search is fuzzy, tags are the most accurate way to adjust the scope of your monitor.
 
 Example workflow:
 
-1. Navigate to the [**Monitors > New Monitor > Live Process**][1] page.
+1. Navigate to the [**Monitors > New Monitor > Live Process**][4] page.
 
 2. Add tags to the monitor in the **by tags** field. 
     - For example, use `command:puma` to monitor processes associated with the `puma` command.
@@ -51,3 +51,4 @@ For additional guidelines, see [Best Practices to Prevent Alert Fatigue][2].
 [1]: https://app.datadoghq.com/process
 [2]: https://www.datadoghq.com/blog/best-practices-to-prevent-alert-fatigue/#increase-your-evaluation-window
 [3]: https://docs.datadoghq.com/monitors/types/process/#monitor-creation
+[4]: https://app.datadoghq.com/monitors/create/live_process
