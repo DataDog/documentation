@@ -14,8 +14,10 @@ kind: documentation
 - Check the Datadog Lambda Forwarder for error messages. Ensure that you have correctly set your API key and Datadog site.
 - Enable `DEBUG` logs on the Datadog Lambda Forwarder by setting the environment variable `DD_LOG_LEVEL` to `debug`.
 
-### Verify that logs are searchable on Live Search
-In Datadog, go to [**Logs > Live Tail**][2]. Search for `source:stepfunction`. You may need to trigger the state machine a few times.
+### Verify that logs are searchable on Live Search and have DD_TRACE_ENABLED tag
+In Datadog, go to [**Logs > Live Tail**][2]. Search for `source:stepfunction`. You may need to trigger the state machine a few times. If you need to upgrade Datadog Lambda Forwarder from an older version, please check that after the upgrade the Forwarder has `DD_FETCH_STEP_FUNCTIONS_TAGS` tag and the value should be set to `true`. If the upgraded Forwarder does not have `DD_FETCH_STEP_FUNCTIONS_TAGS` tag, your Forwarder may not be upgraded correctly. 
+
+If the Forwarder and state machine tag is set up correctly with the aformentioned steps, you should be able to see the logs are tagged with `DD_TRACE_EANBLED:true` tag.
 
 #### Search historic logs
 To enable searching historic logs, add a temporary index to the forwarded logs. In Datadog, go to **Logs** > **Configuration** and then open the [**Indexes**][4] tab. Click the **New Index** button in the upper right.
