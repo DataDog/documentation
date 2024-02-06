@@ -1,5 +1,5 @@
 ---
-title: Establishing Owners and Tagging Endpoints
+title: Assigning Owners and Tagging Endpoints
 kind: documentation
 is_beta: true
 further_reading:
@@ -10,22 +10,35 @@ further_reading:
 
 <!-- image TKTK -->
 
-## Establishing owners
+## Assigning owners
 
-The **TEAM** column on the Explorer page and each endpoint details page shows the name of the team that owns the API that the endpoint is associated with.
+In API Catalog, you manage ownership at the API level, where each API represents a group of endpoints. The owners of APIs are called *teams*.
 
-To assign ownership to an endpoint:
+You can find the teams that own an API on the API page, endpoint side panel, and in the **Explorer** table. Teams are represented by a pill containing a name like `Orders`. Click the team name to see additional details like the team members, contact links, and more. Team details are useful to resolve incidents related to specific endpoints.
 
-1. From the **Explorer** page, select the endpoint(s) that need owners.
-2. Click **Register Endpoints**.
-3. Search for and then select the teams that should own the endpoint.
-4. Click **Apply**.
+{{< img src="tracing/api_catalog/api-catalog-endpoint-owners.png" alt="The team details panel in the endpoint details page, showing the name and communication information for the team that owns the endpoint" style="width:100%;" >}}
 
-If ownership hasn't been assigned, click the **Register Endpoints** dropdown and choose an owner to assign one.
+To assign owners from the Datadog UI:
 
-You can see which team owns each endpoint, and click a team name to see more details. For example, you can see more information about the team and their dashboards, the on-call engineer, and how to reach them (email, Slack, PagerDuty) to resolve incidents involving a specific API endpoint.
+1. Make sure the [API endpoints are registered][1].
+2. From the **API** column, click the API you want to assign an owner to.
+3. Beside the **N/A** pill at the top-left, click the pencil icon.
+4. Select a team from the list.
+5. Click **Confirm**.
 
-{{< img src="tracing/api_catalog/api-catalog-endpoint-details.png" alt="The team details panel in the endpoint details page, showing the name and communication information for the team that owns the endpoint" style="width:100%;" >}}
+To assign owners within the API specification file:
+
+1. Add the team name to the `x-datadog.teamHandle` property:
+   {{< highlight yaml "hl_lines=6-7" >}}
+openapi: 3.0.2
+info:
+ title: API Name
+ description: API Description
+ version: 1.0.0
+x-datadog:
+ teamHandle: <dd-team>
+{{< /highlight >}}
+2. [Import the OpenAPI/Swagger file][2].
 
 <!--## Assess monitoring gaps TKTK -->
 
@@ -65,3 +78,6 @@ Other examples of useful tags include:
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /api_catalog/add_entries/
+[2]: /api_catalog/add_entries/#import-openapiswagger-file
