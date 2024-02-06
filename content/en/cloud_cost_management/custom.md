@@ -60,7 +60,7 @@ To use Custom Costs in Datadog, you must [configure Cloud Cost Management][1] fo
 
 For JSON files only, an additional `Tags` property is required, but its contents are optional.
 
-To tag a JSON line item with tags like `team:web` and `service:ops`, then add:
+To tag a JSON line item with tags like `team:web` and `service:ops`, add:
 ```
 "Tags": {
     "team": "web",
@@ -68,7 +68,7 @@ To tag a JSON line item with tags like `team:web` and `service:ops`, then add:
 }
 ```
 
-If a line item does _not_ contain additional tags, then add:
+If a line item does _not_ contain additional tags, add:
 ```
 "Tags": {}
 ```
