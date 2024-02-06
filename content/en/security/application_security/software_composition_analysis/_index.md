@@ -63,7 +63,7 @@ See [Getting Started with Software Composition Analysis][7] for more information
 
 ## Remediation
 
-The Library Explorer offers remediation recommendations for detected vulnerabilities that enable you to change the status of a vulnerability, assign it to a team member for review, and create a Jira issue for tracking. It also includes a collection of links and references to websites or information sources that help you understand the context behind each vulnerability.
+The Vulnerability Explorer offers remediation recommendations for detected vulnerabilities that enable you to change the status of a vulnerability, assign it to a team member for review, and create a Jira issue for tracking. It also includes a collection of links and references to websites or information sources that help you understand the context behind each vulnerability.
 
 **Note**: To create Jira issues for SCA vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][11] documentation, as well as the [Role Based Access Control][10] documentation.
 
@@ -82,7 +82,7 @@ Click **Get Started** to enable Software Composition Analysis for static analysi
 
 See [Getting Started with Software Composition Analysis][7] for more detailed instructions.
 
-{{< img src="getting_started/appsec/asm_sca_setup.png" alt="Software Composition Analysis setup page." style="width:100%;" >}}
+{{< img src="getting_started/appsec/asm_sca_ci_setup.png" alt="Software Composition Analysis setup page, showing CI setup." style="width:100%;" >}}
 
 ## Risk information in APM views
 

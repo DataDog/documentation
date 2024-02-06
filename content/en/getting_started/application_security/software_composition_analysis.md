@@ -99,7 +99,7 @@ This guide walks you through best practices for getting your team up and running
 
     - Change the status of a vulnerability.
     - Assign it to a team member for further review.
-    - Create a Jira issue.
+    - Create a Jira issue. To create Jira issues for SCA vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][11] documentation, as well as the [Role Based Access Control][10] documentation.
     - Review recommended remediation steps.
     - View links and information sources to understand the context behind each vulnerability.
 
@@ -121,3 +121,5 @@ This guide walks you through best practices for getting your team up and running
 [7]: /tracing/service_catalog/#security-view
 [8]: /tracing/service_catalog/#investigate-a-service
 [9]: https://app.datadoghq.com/security/configuration/asm/setup
+[10]: /account_management/rbac/permissions/#integrations
+[11]: /integrations/jira/
