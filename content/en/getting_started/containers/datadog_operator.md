@@ -62,6 +62,39 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
   kubectl apply -f /path/to/your/datadog-agent.yaml
   ```
 
+### Running Agents in a Single Container
+
+<div class="alert alert-warning">Available in Operator 1.4.0 or later</div>
+
+By default, Operator creates an agent daemonset with pods running multiple agent containers. Operator 1.4.0 introduces a configuration which allows users to run agents in a single container. This feature is only applicable when privileged agents are not required.
+
+To enabled this feature add `global.containerStrategy: single` configuration to the `DatadogAgent` manifest:
+
+  ```yaml
+  apiVersion: datadoghq.com/v2alpha1
+  kind: DatadogAgent
+  metadata:
+    name: datadog
+  spec:
+    global:
+      containerStrategy: single
+      credentials:
+        apiSecret:
+          secretName: datadog-secret
+          keyName: api-key
+        appSecret:
+          secretName: datadog-secret
+          keyName: app-key
+    features:
+      apm:
+        enabled: true
+      logCollection:
+        enabled: true
+  ```
+With the above configuration, agent pods will run single container with three agent processes. Default for `global.containerStrategy` is `optimized` and runs each agent process in a separate container.
+
+**Note:** Running multiple agent processes in a single container is discouraged in orchestrated environments such as Kubernetes. Kubernetes manages the lifecycle of pods and containers, it takes actions for example when container within a pod exits unexpectedly. However, when pods run multiple processes their lifecycle needs to be managed by a process manager. The behavior of the process managers is not directly controllable by Kubernetes, potentially leading to inconsistencies or conflicts in the container lifecycle management.
+
 ## Validation
 
 Use `kubectl get daemonset` and `kubectl get pod -owide` to validate your installation.
