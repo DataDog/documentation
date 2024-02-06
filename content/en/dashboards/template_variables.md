@@ -53,7 +53,7 @@ To add a template variable in a dashboard:
 To edit a template variable in a dashboard:
 1. Click the **Edit** button in the dashboard header.
 1. In edit mode, click on a template variable and make changes in the popover.
-1. To rearrange variables in the header, hover over a variable and hold down the drag icon handle to drag.
+1. To rearrange variables in the header, hover over a variable, then click and drag the drag icon handle.
   {{< img src="dashboards/template_variables/edit_template_variable_drag.png" alt="Template variable edit mode popover showing the drag icon allowing you to rearrange the order" style="width:100%;" >}}
 
 ## Apply a template variable to widgets
