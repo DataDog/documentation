@@ -87,15 +87,24 @@ Use the regex syntax `\Q...\E` to treat everything between `\Q` and `\E` as a li
 
 ## Custom character classes
 
-TKTK
+| Custom character Class | Description  |
+| ---------------------- | ------------ |
+| | |
+| | |
 
 ## Quantifiers
 
-TKTK
+| Quantifier | Description  |
+| ---------- | ------------ |
+| | |
+| | |
 
 ## Assertions
 
-TKTK
+| Assertion | Description  |
+| --------- | ------------ |
+| | |
+| | |
 
 ## ASCII classes
 
@@ -104,6 +113,4 @@ TKTK
 ## Unicode properties
 
 TKTK
-
-
 
