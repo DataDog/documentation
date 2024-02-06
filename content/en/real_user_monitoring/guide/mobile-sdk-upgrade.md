@@ -772,6 +772,7 @@ Certain configuration properties have been moved or renamed to support modularit
 The following structures have been renamed:
 
 | `1.x` | `2.x` |
+|-------|-------|
 | `DdSdkConfiguration` | `DatadogConfiguration` |
 | `LoggingConfiguartion` | `DatadogLoggingConfiguration` |
 | `RumConfiguration` | `DatadogRumConfiguration` |
@@ -779,7 +780,7 @@ The following structures have been renamed:
 
 The following properties have changed:
 
-| `1.x` | `2.x` | Notes |
+| 1.x | 2.x | Notes |
 |-------|-------|-------|
 | `DdSdkConfiguration.trackingConsent`| Removed | Part of `Datadog.initialize` | |
 | `DdSdkConfiguration.customEndpoint` | Removed | Now configured per-feature | |
@@ -790,7 +791,7 @@ The following properties have changed:
 
 In addition, the following APIs have changed:
 
-| `1.x` | `2.x` | Notes |
+| 1.x | 2.x | Notes |
 |-------|-------|-------|
 | `Verbosity` | Removed | See `CoreLoggerLevel` or `LogLevel` |
 | `DdLogs DatadogSdk.logs` | `DatadogLogging DatadogSdk.logs` | Type changed |
@@ -802,7 +803,7 @@ In addition, the following APIs have changed:
 
 ## Flutter Web Changes
 
-Clients using Flutter Web should update to using the Datadog Browser SDK v5.  Change the following import in your `index.html`:
+Clients using Flutter Web should update to using the Datadog Browser SDK v5. Change the following import in your `index.html`:
 
 ```diff
 -  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/datadog-logs-v4.js"></script>
@@ -811,17 +812,17 @@ Clients using Flutter Web should update to using the Datadog Browser SDK v5.  Ch
 +  <script type="text/javascript" src="https://www.datadoghq-browser-agent.com/us1/v5/datadog-rum-slim.js"></script>
 ```
 
-Note that Datadog provides one CDN bundle per site. See the [Browser SDK README](https://github.com/DataDog/browser-sdk/#cdn-bundles) for a list of all site URLs.
+**Note**: Datadog provides one CDN bundle per site. See the [Browser SDK README](https://github.com/DataDog/browser-sdk/#cdn-bundles) for a list of all site URLs.
 
-## Logs Product Changes
+## Logs product changes
 
-As with `1.x`, Datadog Logging can be enabled by setting the `DatadogConfiguration.loggingConfiguration` member. However, unlike `1.x`, Datadog will not create a default logger for you. `DatadogSdk.logs` is now and instance of `DatadogLogging`, which can be used to create logs. Many options were moved to `DatadogLoggerConfiguration` to give developers more granular support over individual loggers.
+As with v1, Datadog Logging can be enabled by setting the `DatadogConfiguration.loggingConfiguration` member. However, unlike v1, Datadog does not create a default logger for you. `DatadogSdk.logs` is now an instance of `DatadogLogging`, which can be used to create logs. Many options were moved to `DatadogLoggerConfiguration` to give developers more granular support over individual loggers.
 
 The following APIs have changed:
 
-| `1.x` | `2.x` | Notes |
+| 1.x | 2.x | Notes |
 |-------|-------|-------|
-| `LoggingConfiguration` | `DatadogLoggingConfiguration` | Rename, most members are now on `DatadogLoggerConfiguration` |
+| `LoggingConfiguration` | `DatadogLoggingConfiguration` | Renamed most members are now on `DatadogLoggerConfiguration` |
 | `LoggingConfiguration.sendNetworkInfo` | `DatadogLoggerConfiguration.networkInfoEnabled` | |
 | `LoggingConfiguration.printLogsToConsole` | `DatadogLoggerConfiguration.customConsoleLogFunction` | |
 | `LoggingConfiguration.sendLogsToDatadog` | Removed. Use `remoteLogThreshold` instead | |
@@ -835,7 +836,7 @@ The following APIs have changed:
 
 The following APIs have changed:
 
-| `1.x` | `2.x` | Notes |
+| 1.x | 2.x | Notes |
 |-------|-------|-------|
 | `RumConfiguration` | `DatadogRumConfiguration` | Type renamed |
 | `RumConfiguration.vitalsUpdateFrequency` | `DatadogRumConfiguration.vitalsUpdateFrequency` | Set to `null` to disable vitals updates |
