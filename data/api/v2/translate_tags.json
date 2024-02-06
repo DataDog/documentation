@@ -1,7 +1,11 @@
 {
+  "api-management": {
+    "name": "API Management",
+    "description": "Configure your API endpoints through the Datadog API."
+  },
   "apm-retention-filters": {
     "name": "APM Retention Filters",
-    "description": "Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters) for your organization. You need an API and application key with Admin rights to interact with this endpoint."
+    "description": "Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters) for your organization. You need an API and application key with Admin rights to interact with this endpoint. See [retention filters](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters) on the Trace Retention page for more information."
   },
   "audit": {
     "name": "Audit",
@@ -9,35 +13,43 @@
   },
   "authn-mappings": {
     "name": "AuthN Mappings",
-    "description": "[AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nis used to automatically map group of users to roles in Datadog using attributes\nsent from Identity Providers."
+    "description": "[The AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)\nis used to automatically map groups of users to roles in Datadog using attributes\nsent from Identity Providers. Use these endpoints to manage your AuthN Mappings."
   },
   "ci-visibility-pipelines": {
     "name": "CI Visibility Pipelines",
-    "description": "Search or aggregate your CI Visibility pipeline events and send them to your Datadog site over HTTP."
+    "description": "Search or aggregate your CI Visibility pipeline events and send them to your Datadog site over HTTP. See the [CI Pipeline Visibility in Datadog page](https://docs.datadoghq.com/continuous_integration/pipelines/) for more information."
   },
   "ci-visibility-tests": {
     "name": "CI Visibility Tests",
-    "description": "Search or aggregate your CI Visibility test events over HTTP."
+    "description": "Search or aggregate your CI Visibility test events over HTTP. See the [Test Visibility in Datadog page](https://docs.datadoghq.com/tests/) for more information."
+  },
+  "cloud-cost-management": {
+    "name": "Cloud Cost Management",
+    "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management page](https://docs.datadoghq.com/cloud_cost_management/) for more information."
   },
   "cloud-workload-security": {
     "name": "Cloud Workload Security",
-    "description": "Workload activity security rules for generating events using the Datadog security Agent."
+    "description": "Workload activity security rules for generating events using the Datadog security Agent. See the [Setting up CSM Workload Security page](https://docs.datadoghq.com/security/cloud_security_management/setup/csm_workload_security/) for more information."
   },
   "cloudflare-integration": {
     "name": "Cloudflare Integration",
-    "description": "Configure your Datadog Cloudflare integration directly through the Datadog API."
+    "description": "Manage your Datadog Cloudflare integration directly through the Datadog API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/) for more information."
   },
   "confluent-cloud": {
     "name": "Confluent Cloud",
-    "description": "Configure your Datadog Confluent Cloud integration directly through the Datadog API."
+    "description": "Manage your Datadog Confluent Cloud integration accounts and account resources directly through the Datadog API. See the [Confluent Cloud page](https://docs.datadoghq.com/integrations/confluent_cloud/) for more information."
   },
   "container-images": {
     "name": "Container Images",
-    "description": "The Container Images API allows you to query Container Image data for your organization."
+    "description": "The Container Images API allows you to query Container Image data for your organization. See the [Container Images View page](https://docs.datadoghq.com/infrastructure/containers/container_images/) for more information."
   },
   "containers": {
     "name": "Containers",
-    "description": "The Containers API allows you to query container data for your organization."
+    "description": "The Containers API allows you to query container data for your organization. See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information."
+  },
+  "dora-metrics": {
+    "name": "DORA Metrics",
+    "description": "Send events for DORA Metrics to measure and improve software delivery. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more information."
   },
   "dashboard-lists": {
     "name": "Dashboard Lists",
@@ -49,11 +61,11 @@
   },
   "events": {
     "name": "Events",
-    "description": "The events service allows you to programmatically post events to the event stream\nand fetch events from the event stream. Events are limited to 4000 characters.\nIf an event is sent out with a message containing more than 4000 characters, only the\nfirst 4000 characters are displayed."
+    "description": "The Event Management API allows you to programmatically post events to the Events Explorer\nand fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/) for more information."
   },
   "fastly-integration": {
     "name": "Fastly Integration",
-    "description": "Configure your Datadog Fastly integration directly through the Datadog API."
+    "description": "Manage your Datadog Fastly integration accounts and services directly through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/) for more information."
   },
   "gcp-integration": {
     "name": "GCP Integration",
@@ -65,7 +77,7 @@
   },
   "incident-services": {
     "name": "Incident Services",
-    "description": "Create, update, delete, and retrieve services which can be associated with incidents."
+    "description": "Create, update, delete, and retrieve services which can be associated with incidents. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
   },
   "incident-teams": {
     "name": "Incident Teams",
@@ -73,7 +85,7 @@
   },
   "incidents": {
     "name": "Incidents",
-    "description": "Manage incident response."
+    "description": "Manage incident response, as well as associated attachments, metadata, and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
   },
   "key-management": {
     "name": "Key Management",
@@ -93,7 +105,7 @@
   },
   "logs-restriction-queries": {
     "name": "Logs Restriction Queries",
-    "description": "**Note: This endpoint is in public beta. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nTo grant read access on log data at all, you must grant the `logs_read_data` permission.\nFrom there you can limit what data a role grants read access to by associating a Restriction Query with that role.\n\nA Restriction Query is a logs query that restricts which logs the `logs_read_data` permission grants read access to.\nFor users whose roles have Restriction Queries, any log query they make only returns those log events that also match\none of their Restriction Queries. This is true whether the user queries log events from any log-related feature, including\nthe log explorer, Live Tail, re-hydration, or a dashboard widget.\n\nRestriction Queries currently only support use of the following components of log events:\n\n- Reserved attributes\n- The log message\n- Tags\n\nThe recommended way to manage restricted read access on log data for customers with large or complicated organizational structures\nis to add a team tag to log events to indicate which team(s) own(s) them, and then to scope Restriction Queries to the appropriate\nvalues of the team tag. Tags can be applied to log events in many ways, and a log event can have multiple tags with the same key (like team)\nand different values—in this way the same log event can be visible to roles whose restriction queries are scoped to different team values.\n\nYou need an API and application key with Admin rights to interact with this endpoint."
+    "description": "**Note: This endpoint is in public beta. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).**\n\nA Restriction Query is a logs query that restricts which logs the `logs_read_data` permission grants read access to.\nFor users whose roles have Restriction Queries, any log query they make only returns those log events that also match\none of their Restriction Queries. This is true whether the user queries log events from any log-related feature, including\nthe log explorer, Live Tail, re-hydration, or a dashboard widget.\n\nRestriction Queries currently only support use of the following components of log events:\n\n- Reserved attributes\n- The log message\n- Tags\n\nTo restrict read access on log data, add a team tag to log events to indicate which teams own them, and then scope Restriction Queries to the relevant values of the team tag. Tags can be applied to log events in many ways, and a log event can have multiple tags with the same key (like team) and different values. This means the same log event can be visible to roles whose restriction queries are scoped to different team values.\n\nYou need an API and application key with Admin rights to interact with this endpoint.\n\nSee [How to Set Up RBAC for Logs](https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=api#restrict-access-to-logs) for details on how to add restriction queries."
   },
   "metrics": {
     "name": "Metrics",
@@ -102,6 +114,10 @@
   "monitors": {
     "name": "Monitors",
     "description": "[Monitors](https://docs.datadoghq.com/monitors) allow you to watch a metric or check that you care about and\nnotifies your team when a defined threshold has exceeded.\n\nFor more information, see [Creating Monitors](https://docs.datadoghq.com/monitors/create/types/) and\n[Tag Policies](https://docs.datadoghq.com/monitors/settings/)."
+  },
+  "okta-integration": {
+    "name": "Okta Integration",
+    "description": "Configure your Datadog Okta integration directly through the Datadog API."
   },
   "opsgenie-integration": {
     "name": "Opsgenie Integration",
@@ -169,7 +185,7 @@
   },
   "usage-metering": {
     "name": "Usage Metering",
-    "description": "The usage metering API allows you to get hourly, daily, and\nmonthly usage across multiple facets of Datadog.\nThis API is available to all Pro and Enterprise customers.\nUsage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\n**Note**: Usage data is delayed by up to 72 hours from when it was incurred.\nIt is retained for 15 months.\n\nYou can retrieve up to 24 hours of hourly usage data for multiple organizations,\nand up to two months of hourly usage data for a single organization in one request."
+    "description": "The usage metering API allows you to get hourly, daily, and\nmonthly usage across multiple facets of Datadog.\nThis API is available to all Pro and Enterprise customers.\nUsage is only accessible for [parent-level organizations](https://docs.datadoghq.com/account_management/multi_organization/).\n\n**Note**: Usage data is delayed by up to 72 hours from when it was incurred.\nIt is retained for 15 months.\n\nYou can retrieve up to 24 hours of hourly usage data for multiple organizations,\nand up to two months of hourly usage data for a single organization in one request.\nLearn more on the [usage details documentation](https://docs.datadoghq.com/account_management/billing/usage_details/)."
   },
   "users": {
     "name": "Users",

@@ -13,10 +13,6 @@ further_reading:
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">
-The features described on this page are in beta. Contact your Customer Success Manager to provide feedback or ask for help.
-</div>
-
 Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues.
 
 <div class="alert alert-danger">
@@ -66,6 +62,15 @@ grant select on V$CONTAINERS to datadog ;
 grant select on V$SQL_PLAN_STATISTICS_ALL to datadog ;
 grant select on V$SQL to datadog ;
 grant select on V$PGASTAT to datadog ;
+grant select on v$asm_diskgroup to datadog ;
+grant select on v$rsrcmgrmetric to datadog ;
+grant select on v$dataguard_config to datadog ;
+grant select on v$dataguard_stats to datadog ;
+grant select on v$transaction to datadog;
+grant select on v$locked_object to datadog;
+grant select on dba_objects to datadog;
+grant select on cdb_data_files to datadog;
+grant select on dba_data_files to datadog;
 ```
 
 ## Configure the Agent

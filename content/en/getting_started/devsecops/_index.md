@@ -135,7 +135,7 @@ The Infrastructure DevSecOps bundles combine infrastructure monitoring with the 
 {{< tabs >}}
 {{% tab "Infrastructure DevSecOps Pro" %}}
 
-Infrastructure DevSecOps Pro includes [Containers][1], [Serverless][2], and [CSM Pro][3]. It also includes more than [650+ out-of-the-box integrations][4].
+Infrastructure DevSecOps Pro includes [Containers][1], [Serverless][2], and [CSM Pro][3]. It also includes more than [700+ out-of-the-box integrations][4].
 
 ### Setup
 
@@ -148,8 +148,6 @@ To get started with Infrastructure DevSecOps Pro, [install and configure the Dat
 After you install the Agent, configure CSM Pro for your environment.
 
 - [Cloud Security Management Pro][6]
-
-<div class="alert alert-info"><strong>Note</strong>: The CSM Vulnerabilities capabilities of CSM Pro are in beta. For setup instructions, see <a href="/security/infrastructure_vulnerabilities/setup/">Setting up Cloud Security Management Vulnerabilities</a>.</div>
 
 ### Next steps
 
@@ -177,7 +175,7 @@ Learn more about the features included with Infrastructure DevSecOps Pro:
 {{% /tab %}}
 {{% tab "Infrastructure DevSecOps Enterprise" %}}
 
-Infrastructure DevSecOps Enterprise includes [Containers][1], [Serverless][2], [Live Processes][3], and [CSM Enterprise][4]. It also includes more than [650+ out-of-the-box integrations][5].
+Infrastructure DevSecOps Enterprise includes [Containers][1], [Serverless][2], [Live Processes][3], and [CSM Enterprise][4]. It also includes more than [700+ out-of-the-box integrations][5].
 
 ### Setup
 
@@ -191,8 +189,6 @@ To get started with Infrastructure DevSecOps Enterprise, [install and configure 
 After you install the Agent, configure CSM Enterprise for your environment.
 
 - [Cloud Security Management Enterprise][8]
-
-<div class="alert alert-info"><strong>Note</strong>: The CSM Identity Risks and CSM Vulnerabilities capabilities of CSM Enterprise are in beta. For setup instructions, see <a href="/security/identity_risks/#setup">Cloud Security Management Identity Risks</a> and <a href="/security/infrastructure_vulnerabilities/setup/">Setting up Cloud Security Management Vulnerabilities</a>.</div>
 
 ### Next steps
 

@@ -129,20 +129,29 @@ Whether to enable the endpoint data collection in profiles. Added in version `0.
 Enable the allocation size and allocation bytes profile type. Added in version `0.88.0`. When an active JIT is detected, allocation profiling is turned off for PHP version `8.0.0`-`8.1.20` and `8.2.0`-`8.2.7` due to a limitation of the ZendEngine.<br>
 **Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_ALLOCATION_ENABLED` environment variable (`datadog.profiling.experimental_allocation_enabled` INI setting), which was available since `0.84`. If both are set, this one takes precedence.
 
+`DD_PROFILING_EXPERIMENTAL_FEATURES_ENABLED`
+: **INI**: `datadog.profiling.experimental_features_enabled`. INI available since `0.96.0`.<br>
+**Default**: `0`<br>
+Enable all experimental features.<br>
+**Note**: This setting overrides the more specific configurations and if enabled, toggling other experimental configuration settings won't have an effect.
+
 `DD_PROFILING_EXPERIMENTAL_CPU_TIME_ENABLED`
 : **INI**: `datadog.profiling.experimental_cpu_time_enabled`. INI available since `0.82.0`.<br>
 **Default**: `1`<br>
 Enable the experimental CPU profile type. Added in version `0.69.0`. For version `0.76` and below it defaulted to `0`.
 
-`DD_PROFILING_EXPERIMENTAL_EXCEPTION_ENABLED`
-: **INI**: `datadog.profiling.experimental_exception_enabled`. INI available since `0.92.0`.<br>
-**Default**: `0`<br>
-Enable the experimental exception profile type. Added in version `0.92.0`.
+`DD_PROFILING_EXCEPTION_ENABLED`
+: **INI**: `datadog.profiling.exception_enabled`. INI available since `0.96.0`.<br>
+**Default**: `1`<br>
+Enable the exception profile type. Added in version `0.92.0` and GA
+in version `0.96.0`.<br><br>
+**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_EXCEPTION_ENABLED` environment variable (`datadog.profiling.experimental_exception_enabled` INI setting), which was available since `0.92`. If both are set, this one takes precedence.
 
-`DD_PROFILING_EXPERIMENTAL_EXCEPTION_SAMPLING_DISTANCE`
-: **INI**: `datadog.profiling.experimental_exception_sampling_distance`. INI available since `0.92.0`.<br>
+`DD_PROFILING_EXCEPTION_SAMPLING_DISTANCE`
+: **INI**: `datadog.profiling.exception_sampling_distance`. INI available since `0.96.0`.<br>
 **Default**: `100`<br>
-Configure the sampling distance for exceptions. The higher the sampling distance, the fewer samples are created and the lower the overhead.
+Configure the sampling distance for exceptions. The higher the sampling distance, the fewer samples are created and the lower the overhead.<br><br>
+**Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_EXCEPTION_SAMPLING_DISTANCE` environment variable (`datadog.profiling.experimental_exception_sampling_distance` INI setting), which was available since `0.92`. If both are set, this one takes precedence.
 
 `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED`
 : **INI**: `datadog.profiling.experimental_timeline_enabled`. INI available since `0.89.0`.<br>
@@ -172,9 +181,9 @@ Change the default name of an APM integration. Rename one or more integrations a
 `DD_TRACE_128_BIT_TRACEID_LOGGING_ENABLED`
 : **INI**: `datadog.trace.128_bit_traceid_logging_enabled`<br>
 **Default**: `0`<br>
-Enable printing of the full 128-bit ID when formatting trace IDs for logs correlation.
+Enable printing of the full 128-bit trace ID when formatting trace IDs for logs correlation.
 When false (default), only the low 64-bits of the trace ID are printed, formatted as an integer. This means if the trace ID is only 64 bits, the full ID is printed.
-When true, the trace ID is printed as a full 128-bit ID in hexadecimal format. This is the case even if the ID itself is only 64 bits.
+When true, the trace ID is printed as a full 128-bit trace ID in hexadecimal format. This is the case even if the ID itself is only 64 bits.
 
 `DD_TRACE_HEALTH_METRICS_ENABLED`
 : **INI**: `datadog.trace_health_metrics_enabled`<br>
@@ -335,8 +344,8 @@ Enable route-based naming for HTTP server requests. Set to `true` to use the int
 
 `DD_TRACE_SAMPLE_RATE`
 : **INI**: `datadog.trace.sample_rate`<br>
-**Default**: `1.0`<br>
-The sampling rate for the traces (defaults to: between `0.0` and `1.0`).
+**Default**: `-1`<br>
+The sampling rate for the traces, a number between `0.0` and `1.0`. The default value of `-1` defers control of sampling to the Datadog Agent.
 
 `DD_TRACE_SAMPLING_RULES`
 : **INI**: `datadog.trace.sampling_rules`<br>
@@ -412,6 +421,11 @@ The IP header to be used for client IP collection, for example: `x-forwarded-for
   (?i)(?:p(?:ass)?w(?:or)?d|pass(?:_?phrase)?|secret|(?:api_?|private_?|public_?|access_?|secret_?)key(?:_?id)?|token|consumer_?(?:id|key|secret)|sign(?:ed|ature)?|auth(?:entication|orization)?)(?:(?:\s|%20)*(?:=|%3D)[^&]+|(?:"|%22)(?:\s|%20)*(?::|%3A)(?:\s|%20)*(?:"|%22)(?:%2[^2]|%[^2]|[^"%])+(?:"|%22))|bearer(?:\s|%20)+[a-z0-9\._\-]|token(?::|%3A)[a-z0-9]{13}|gh[opsu]_[0-9a-zA-Z]{36}|ey[I-L](?:[\w=-]|%3D)+\.ey[I-L](?:[\w=-]|%3D)+(?:\.(?:[\w.+\/=-]|%3D|%2F|%2B)+)?|[\-]{5}BEGIN(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY[\-]{5}[^\-]+[\-]{5}END(?:[a-z\s]|%20)+PRIVATE(?:\s|%20)KEY|ssh-rsa(?:\s|%20)*(?:[a-z0-9\/\.+]|%2F|%5C|%2B){100,}
   ```
   Regular expression used to obfuscate the query string included as part of the URL. This expression is also used in the redaction process for HTTP POST data. Added in version `0.76.0`.
+
+`DD_TRACE_OTEL_ENABLED`
+: Enables or disables OpenTelemetry based tracing, both for [custom][18] or [automatic][19] instrumentation. <br>
+Valid values are: `true` or `false`.<br>
+**Default**: `false`
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
@@ -586,4 +600,5 @@ Read [Trace Context Propagation][11] for information about configuring the PHP t
 [15]: /tracing/guide/trace-php-cli-scripts/
 [16]: /tracing/configure_data_security#telemetry-collection
 [17]: /tracing/other_telemetry/connect_logs_and_traces/php
-
+[18]: /tracing/trace_collection/otel_instrumentation/php/
+[19]: /tracing/trace_collection/compatibility/php/

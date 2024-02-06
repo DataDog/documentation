@@ -25,6 +25,7 @@ title: Guides sur les monitors
     {{< nextlink href="monitors/guide/adjusting-no-data-alerts-for-metric-monitors" >}}Modifier la configuration des alertes avec un statut No Data pour les monitors basés sur des métriques{{< /nextlink >}}
     {{< nextlink href="monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime" >}}Empêcher des monitors de générer des alertes pendant un downtime{{< /nextlink >}}
     {{< nextlink href="monitors/guide/reduce-alert-flapping" >}}Limiter le bagottement des alertes{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitoring-sparse-metrics" >}}Surveiller les métriques creuses{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="API :" >}}
@@ -34,6 +35,7 @@ title: Guides sur les monitors
 {{< whatsnext desc="Guides généraux :" >}}
     {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}Configuration du RBAC pour les monitors{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}Création de monitors dans des tests Synthetic{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/non_static_thresholds" >}}Comment surveiller des seuils non statiques{{< /nextlink >}}
     {{< nextlink href="monitors/guide/anomaly-monitor" >}}Monitors d'anomalie{{< /nextlink >}}
     {{< nextlink href="monitors/guide/change-alert" >}}Monitor à alertes en cas de changement{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}Surveiller le redémarrage de serveurs éphémères{{< /nextlink >}}
@@ -44,6 +46,7 @@ title: Guides sur les monitors
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Interrogation de métriques :" >}}
+    {{< nextlink href="monitors/guide/custom_schedules" >}}Ajouter des calendriers custom pour personnaliser la fréquence d'évaluation de monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-arithmetic-and-sparse-metrics" >}}Surveillance des métriques arithmétiques et creuses{{< /nextlink >}}
     {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() dans les évaluations de monitors{{< /nextlink >}}
 {{< /whatsnext >}}

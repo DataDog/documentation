@@ -53,6 +53,16 @@ You can access performance metrics for your views in:
 | [Cumulative Layout Shift][9]  | Visual stability | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means that no shifts are happening. | <0.1        |
 | [Interaction To Next Paint][19]| Interactivity    | Longest duration between a user's interaction with the page and the next paint. Requires RUM SDK v5.1.0. | <200ms        |
 
+### Core web vitals target elements
+
+Identifying what element triggered a high Core Web Vitals metric is the first step in understanding the root cause and being able to improve performance.
+RUM reports the element that is associated with each Core Web Vital instance:
+
+- For Largest Contentful Paint, RUM reports the CSS Selector of the element corresponding to the largest contentful paint.
+- For Interaction to Next Paint, RUM reports the CSS selector of the element associated with the longest interaction to the next paint.
+- For First Input Delay, RUM reports the CSS selector of the first element the user interacted with.
+- For Cumulative Layout Shift, RUM reports the CSS selector of the most shifted element contributing to the CLS.
+
 ## All performance metrics
 
 | Attribute                       | Type        | Description                                                                                                                                                                                                                      |
@@ -60,9 +70,13 @@ You can access performance metrics for your views in:
 | `view.time_spent`               | number (ns) | Time spent on the current view.                                                                                                                                                                                                  |
 | `view.first_byte`               | number (ns) | Time elapsed until the first byte of the view has been received.                                                                                                |
 | `view.largest_contentful_paint` | number (ns) | The moment in the page load timeline when the largest DOM object in the viewport renders and is visible on screen.                                                                                                               |
+| `view.largest_contentful_paint_target_selector` | string (CSS selector) | CSS Selector of the element corresponding to the largest contentful paint.                                                                                     |
 | `view.first_input_delay`        | number (ns) | Time elapsed between a user's first interaction with the page and the browser's response.                                                                                                                                        |
+| `view.first_input_delay_target_selector`      | string (CSS selector) | CSS selector of the first element the user interacted with.                                                                                                                |
 | `view.interaction_to_next_paint`| number (ns) | Longest duration between a user's interaction with the page and the next paint.                                                                                                                              |
+| `view.interaction_to_next_paint_target_selector`| string (CSS selector) | CSS selector of the element associated with the longest interaction to the next paint.                                                                                                          |
 | `view.cumulative_layout_shift`  | number      | Quantifies unexpected page movement due to dynamically loaded content (for example, third-party ads) where 0 means no shifts are happening.                                                                                      |
+| `view.cumulative_layout_shift_target_selector`  | string (CSS selector) | CSS selector of the most shifted element contributing to the page CLS.                                           |
 | `view.loading_time`             | number (ns) | Time until the page is ready and no network request or DOM mutation is currently happening. For more information, see [Monitoring Page Performance][10].                                                                          |
 | `view.first_contentful_paint`   | number (ns) | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG. For more information about browser rendering, see the [w3c definition][11].                                         |
 | `view.dom_interactive`          | number (ns) | The moment when the parser finishes its work on the main document. For more information, see the [MDN documentation][12].                                                                                                        |
@@ -160,7 +174,7 @@ Once the timing is sent, the timing is accessible as `@view.custom_timings.<timi
 
 For single-page applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing is equal to `8-5 = 3` seconds.
 
-If you are using an asynchronous setup, you can provide your own timing (the number of milliseconds relative to the start of the current RUM view or the UNIX epoch timestamp) as a second parameter.
+If you are using an asynchronous setup, you can provide your own timing (as a UNIX epoch timestamp) as a second parameter.
 
 For example:
 

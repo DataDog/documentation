@@ -10,7 +10,7 @@ further_reading:
   text: "How Application Security Management Works"
 - link: "/security/application_security/threats/"
   tag: "Documentation"
-  text: "Threat Monitoring and Protection"
+  text: "Threat Management"
 - link: "/security/application_security/risk_management/"
   tag: "Documentation"
   text: "Application Vulnerability Management"
@@ -85,6 +85,6 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 [3]: /security/application_security/how-appsec-works/
 [4]: /security/default_rules/#cat-application-security
 [5]: /security/application_security/enabling/
-[6]: /security/explorer/
+[6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec
-[8]: /security/application_security/risk_management/
+[8]: /security/application_security/vulnerability_management/

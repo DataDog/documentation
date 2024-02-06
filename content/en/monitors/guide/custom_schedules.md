@@ -14,10 +14,6 @@ further_reading:
   text: "Cumulative time windows"
 ---
 
-{{< beta-callout url="https://docs.datadoghq.com/help/" btn_hidden="false" >}}
-The monitor custom schedule feature is in private beta. To request access, contact Datadog Support.
-{{< /beta-callout >}}
-
 ## Overview 
 
 Set a specific evaluation time and control the evaluation frequency for monitors to track the execution of critical jobs running in your environment. Monitor Custom Schedules enable you to alert on systems and processes that do not need to be continuously monitored, such as cron jobs.
@@ -30,7 +26,7 @@ Monitor Custom Schedules are supported on events, logs, and metrics monitors wit
 
 Click **Add Custom Schedule** to configure your evaluation frequency. 
 
-<div class="alert alert-warning">After a custom schedule has been enabled on a monitor, it cannot be disabled.
+<div class="alert alert-warning">After a custom schedule has been enabled on a monitor, the schedule cannot be disabled. Custom schedules can only be added or removed during monitor creation.
 </div>
 
 {{< tabs >}}

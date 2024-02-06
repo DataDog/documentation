@@ -182,7 +182,7 @@ Launch your private location on:
 Run this command to boot your private location worker by mounting your configuration file to the container. Ensure that your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is in `/etc/docker`, not the root home folder:
 
 ```shell
-docker run --rm -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
+docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
 ```
 
 **Note:** If you have blocked reserved IPs, add the `NET_ADMIN` [Linux capabilities][1] to your private location container.
@@ -706,6 +706,8 @@ To upgrade an existing private location, click the **Gear** icon on the private 
 
 Then, run the [configuration command based on your environment](#install-your-private-location
 ) to get the latest version of the private location image. 
+
+**Note**: If you're using `docker run` to launch your Private Location image and you've previously installed the Private Location image using the `latest` tag, make sure to add `--pull=always` to the `docker run` command to make sure the newest version is pulled rather than relying on the cached version of the image that may exist locally with the same `latest` tag.
 
 ### Test your internal endpoint
 

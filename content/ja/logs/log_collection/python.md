@@ -59,7 +59,7 @@ Python のログは、トレースバックのために扱いが複雑になる�
 
       - type: file
         path: "<PATH_TO_PYTHON_LOG>.log"
-        service: "<YOUR_APPLICATION>"
+        service: "<SERVICE_NAME>"
         source: python
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
@@ -85,6 +85,47 @@ APM が有効になっているアプリケーションの場合は、[APM Pytho
 2019-01-07 15:20:15,972 DEBUG [flask.app] [app.py:100] [dd.trace_id=5688176451479556031 dd.span_id=4663104081780224235] - this is an example
 ```
 
+ログが JSON 形式の場合、値がトップレベル、またはトップレベルの `extra` または `record.extra` ブロックにある場合、トレース値は自動的に抽出されます。以下はトレース値が自動的にパースされる有効な JSON ログの例です。
+
+```json
+{
+  "message":"Hello from the private method",
+  "dd.trace_id":"18287620314539322434",
+  "dd.span_id":"8440638443344356350",
+  "dd.env":"dev",
+  "dd.service":"logs",
+  "dd.version":"1.0.0"
+}
+```
+
+```json
+{
+  "message":"Hello from the private method",
+  "extra":{
+    "dd.trace_id":"18287620314539322434",
+    "dd.span_id":"8440638443344356350",
+    "dd.env":"dev",
+    "dd.service":"logs",
+    "dd.version":"1.0.0"
+  }
+}
+```
+
+```json
+{
+"message":"Hello from the private method",
+  "record":{
+    "extra":{
+      "dd.trace_id":"1734396609740561719",
+      "dd.span_id":"17877262712156101004",
+      "dd.env":"dev",
+      "dd.service":"logs",
+      "dd.version":"1.0.0"
+    }
+  }
+}
+```
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -93,11 +134,11 @@ APM が有効になっているアプリケーションの場合は、[APM Pytho
 [2]: https://github.com/madzak/python-json-logger
 [3]: https://pypi.org/project/django-datadog-logger/
 [4]: /ja/tracing/other_telemetry/connect_logs_and_traces/python
-[5]: /ja/agent/guide/agent-commands/
+[5]: /ja/agent/configuration/agent-commands/
 [6]: https://docs.python.org/3/library/logging.html#logging
 [7]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
 [8]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[9]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[9]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [10]: /ja/logs/log_configuration/parsing/
 [11]: /ja/logs/explorer/#overview
 [12]: /ja/glossary/#tail

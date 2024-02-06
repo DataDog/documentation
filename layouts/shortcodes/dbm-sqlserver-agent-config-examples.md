@@ -1,17 +1,27 @@
-### Connecting with DSN using the ODBC driver
-1. Configure the `odbc.ini` file based on your DSN settings.
+### Connecting with DSN using the ODBC driver on Linux
+1. Locate the `odbc.ini` and `odbcinst.ini` files. By default, these are placed in the `/etc` directory when installing ODBC.
+2. Copy the `odbc.ini` and `odbcinst.ini` files into the `/opt/datadog-agent/embedded/etc` folder.
+3. Configure your DSN settings as follows:
+
+    `odbcinst.ini` must provide at least one section header and ODBC driver location.
 
     Example:
     ```text
-    [DATADOG]
-    Driver=/opt/microsoft/msodbcsql18/lib64/libmsodbcsql-18.1.so.1.1
-    Server=127.0.0.1
-    Port=1433
-    User=datadog
-    Password=Password
+    [ODBC Driver 18 for SQL Server]
+    Description=Microsoft ODBC Driver 18 for SQL Server
+    Driver=/opt/microsoft/msodbcsql18/lib64/libmsodbcsql-18.3.so.2.1
+    UsageCount=1
     ```
-2. Copy the `odbc.ini` and `odbcinst.ini` files into the `/opt/datadog-agent/embedded/etc` folder.
-3. Configure the SQL Server integration config to include the DSN.
+
+    `odbc.ini` must provide a section header and a `Driver` path that matches `odbcinst.ini`.
+
+    Example:
+    ```text
+    [datadog]
+    Driver=/opt/microsoft/msodbcsql18/lib64/libmsodbcsql-18.3.so.2.1
+    ```
+    
+4. Update the `/etc/datadog-agent/conf.d/sqlserver.d/conf.yaml` file with your DSN information.
 
     Example:
     ```yaml
@@ -21,10 +31,10 @@
         username: datadog
         password: '<PASSWORD>'
         connector: 'odbc'
-        driver: '{ODBC Driver 18 for SQL Server}'
-        dsn: 'DATADOG'
+        driver: '{ODBC Driver 18 for SQL Server}' # This is the section header of odbcinst.ini
+        dsn: 'datadog' # This is the section header of odbc.ini
     ```
-4. Restart the Agent.
+5. Restart the Agent.
 
 ### Using Always On
 When monitoring Always On clusters, the Agent must be installed on a separate server from the SQL Servers and connect to the cluster through the listener endpoint.
