@@ -42,6 +42,9 @@ further_reading:
     text: "Key learnings from the State of Cloud Security study"
 algolia:
   tags: ['inbox']
+cascade:
+    algolia:
+        subcategory: Cloud Security Management
 ---
 
 {{< site-region region="gov" >}}
