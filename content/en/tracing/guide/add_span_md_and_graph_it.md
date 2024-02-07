@@ -223,7 +223,7 @@ The Datadog UI uses tags to set span level metadata. Custom tags may be set for 
 
 ## Leverage the Datadog UI to search for your custom span tags
 
-2) **Go to the Services page** and click on the [service][5] that you added tags to. **Scroll down and click on the specific resource** where the tag was added in the [Resource][4] table. **Scroll down to the Traces table**
+2) **Go to the Service Catalog** and click the [service][5] that you added tags to. **Scroll down and click on the specific resource** where the tag was added in the [Resource][4] table. **Scroll down to the Traces table**
 
 {{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="Resource Page" style="width:90%;">}}
 

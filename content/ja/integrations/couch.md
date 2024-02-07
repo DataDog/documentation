@@ -41,7 +41,7 @@ draft: false
 git_integration_title: couch
 integration_id: couchdb
 integration_title: CouchDB
-integration_version: 5.2.0
+integration_version: 6.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -201,7 +201,7 @@ Couch チェックには、イベントは含まれません。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/couch/images/couchdb_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/monitoring-couchdb-with-datadog

@@ -61,6 +61,8 @@ EC2 or Lambda metrics in the stream could increase the number of billable hosts 
 {{% tab "CloudFormation" %}}
  
 Datadog recommends using CloudFormation because it's automatic and easier if you are using multiple AWS regions.
+
+**Note**: Metric streaming to Datadog currently only supports OpenTelemetry v0.7 output format.
  
 1. On your Datadog site, go to the **Configuration** tab of the [AWS integration page][1].
 2. Click on the AWS account to set up metric streaming.
@@ -90,6 +92,8 @@ Once the stack is successfully created, wait five minutes for Datadog to recogni
 {{% tab "AWS Console" %}}
  
 To set up metric streams using the AWS Console, create a [CloudWatch Metric Stream][2] for each AWS region.
+
+**Note**: Metric streaming to Datadog currently only supports OpenTelemetry v0.7 output format.
  
 1. Choose the **Quick AWS Partner Setup** and select **Datadog** as the AWS Partner destination from the dropdown menu.
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/metric-stream-partner-setup.png" alt="Cloudwatch metric stream quick partner setup" responsive="true" style="width:60%;">}}
@@ -119,11 +123,15 @@ Once you see the Metric Stream resource has been successfully created, wait five
 ### Cross-account metric streaming
 Use cross-account metric streaming to include metrics in a single Metric Stream that spans across multiple AWS accounts within an AWS region. This helps to reduce the number of streams needed to collect metrics for a common destination. To do this, [connect your source accounts][5] with your monitoring account and enable Cross-account streaming to Datadog in your AWS monitoring account.
 
+Your monitoring account needs to have the following permissions in order for this feature to work properly:
+   * oam:ListSinks
+   * oam:ListAttachedLinks
+
 **Note:** To collect custom tags and other metadata for your streamed metrics, integrate your source accounts with Datadog.
 
 ### Disable metric streaming
 
-To disable metric streaming completely for a given AWS account and region, you must delete the AWS Metric Steam and its related resources. To prevent loss of metrics in Datadog, it's important to follow these deletion steps carefully:
+To disable metric streaming completely for a given AWS account and region, you must delete the AWS Metric Stream and its related resources. To prevent loss of metrics in Datadog, it's important to follow these deletion steps carefully:
 
 If you set streaming up with [CloudFormation](?tab=cloudformation#installation):
 1. Delete the stack that was created during the setup.
@@ -135,6 +143,7 @@ If you set streaming up through the [AWS Console](?tab=awsconsole#installation):
 Once the resources are deleted, wait for five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog's [AWS integration page][4] and verify that the disabled regions are not displayed under **CloudWatch Metric Streams** for the specified AWS account.
 
 ## Troubleshooting
+
 To resolve any issues encountered while setting up Metric Streams or the associated resources, see [AWS Troubleshooting][5].
 
 ## Further Reading

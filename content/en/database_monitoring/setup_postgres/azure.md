@@ -37,7 +37,7 @@ Performance impact
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 Proxies, load balancers, and connection poolers
-: The Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, `127.0.0.1` or the socket is preferred. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
@@ -51,7 +51,7 @@ Configure the following [parameters][3] in the [Server parameters][4], then **re
 
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value, queries longer than `1024` characters are not collected. |
+| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity`. If left at the default value, queries longer than `1024` characters are not collected. |
 | `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
 | `pg_stat_statements.track_utility` | `off` | Optional. Disables utility commands like PREPARE and EXPLAIN. Setting this value to `off` means only queries like SELECT, UPDATE, and DELETE are tracked. |
@@ -63,7 +63,7 @@ Configure the following [parameters][3] in the [Server parameters][4], then **re
 | Parameter            | Value | Description |
 |----------------------| -- | --- |
 | `azure.extensions` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics using the [pg_stat_statements][1] extension. |
-| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity` and `pg_stat_statements`. If left at the default value, queries longer than `1024` characters are not collected. |
+| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity`. If left at the default value, queries longer than `1024` characters are not collected. |
 | `pg_stat_statements.track` | `ALL` | Optional. Enables tracking of statements within stored procedures and functions. |
 | `pg_stat_statements.max` | `10000` | Optional. Increases the number of normalized queries tracked in `pg_stat_statements`. This setting is recommended for high-volume databases that see many different types of queries from many different clients. |
 | `pg_stat_statements.track_utility` | `off` | Optional. Disables utility commands like PREPARE and EXPLAIN. Setting this value to `off` means only queries like SELECT, UPDATE, and DELETE are tracked. |
@@ -91,7 +91,7 @@ Create the `datadog` user:
 CREATE USER datadog WITH password '<PASSWORD>';
 ```
 
-**Note:** Azure managed identity authentication is also supported. Please see [the guide][12] on how to configure this for your Azure instance.
+**Note:** Microsoft Entra ID managed identity authentication is also supported. Please see [the guide][12] on how to configure this for your Azure instance.
 
 {{< tabs >}}
 {{% tab "Postgres ≥ 10" %}}
@@ -221,7 +221,7 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
        port: 5432
        username: 'datadog@<AZURE_INSTANCE_ENDPOINT>'
        password: '<PASSWORD>'
-       ssl: true
+       ssl: 'require'
        ## Required for Postgres 9.6: Uncomment these lines to use the functions created in the setup
        # pg_stat_statements_view: datadog.pg_stat_statements()
        # pg_stat_activity_view: datadog.pg_stat_activity()
@@ -265,7 +265,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "port": 5432,
     "username": "datadog@<AZURE_INSTANCE_ENDPOINT>",
     "password": "<UNIQUEPASSWORD>",
-    "ssl": true,
+    "ssl": "require",
     "azure": {
       "deployment_type": "<DEPLOYMENT_TYPE>",
       "name": "<AZURE_INSTANCE_ENDPOINT>"
@@ -290,7 +290,7 @@ FROM datadog/agent:7.36.1
 
 LABEL "com.datadoghq.ad.check_names"='["postgres"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog@<AZURE_INSTANCE_ENDPOINT>","password": "<UNIQUEPASSWORD>", "ssl": true, "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<AZURE_INSTANCE_ENDPOINT>", "port": 3306,"username": "datadog@<AZURE_INSTANCE_ENDPOINT>","password": "<UNIQUEPASSWORD>", "ssl": "require", "azure": {"deployment_type": "<DEPLOYMENT_TYPE>", "name": "<AZURE_INSTANCE_ENDPOINT>"}}]'
 ```
 
 For Postgres 9.6, add the following settings to the instance config where host and port are specified:
@@ -336,7 +336,7 @@ instances:
     port: 5432
     username: "datadog@<AZURE_INSTANCE_ENDPOINT>"
     password: "<UNIQUEPASSWORD>"
-    ssl: true
+    ssl: "require"
     azure:
       deployment_type: "<DEPLOYMENT_TYPE>"
       fully_qualified_domain_name: "<AZURE_INSTANCE_ENDPOINT>"' \
@@ -363,7 +363,7 @@ instances:
     port: 5432
     username: 'datadog@<AZURE_INSTANCE_ENDPOINT>'
     password: '<PASSWORD>'
-    ssl: true
+    ssl: "require"
     # After adding your project and instance, configure the Datadog Azure integration to pull additional cloud data such as CPU, Memory, etc.
     azure:
       deployment_type: '<DEPLOYMENT_TYPE>'
@@ -398,7 +398,7 @@ metadata:
           "port": 5432,
           "username": "datadog@<AZURE_INSTANCE_ENDPOINT>",
           "password": "<UNIQUEPASSWORD>",
-          "ssl": true,
+          "ssl": "require",
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
             "fully_qualified_domain_name": "<AZURE_INSTANCE_ENDPOINT>"

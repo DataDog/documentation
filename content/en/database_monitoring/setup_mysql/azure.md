@@ -28,7 +28,7 @@ Supported MySQL versions
 : 5.7, or 8.0+
 
 Supported Azure MySQL deployment types
-: MySQL on Azure VMs, Single Server, Flexible Server
+: MySQL on Azure VMs, Single Server, Flexible Server (Query Activity and Wait Event collection are not supported for Flexible Server)
 
 Supported Agent versions
 : 7.36.1+
@@ -38,7 +38,7 @@ Performance impact
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 Proxies, load balancers, and connection poolers
-: The Agent must connect directly to the host being monitored, preferably through the instance endpoint. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. While this can be an anti-pattern for client applications, each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+: The Datadog Agent must connect directly to the host being monitored, preferably through the instance endpoint. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
@@ -53,14 +53,9 @@ Configure the following in the [server parameters][3] and then **restart the ser
 
 The agent also requires `performance_schema.events_statements_*` consumers to be set to `ON` to collect currently running queries. By default, Azure MySQL Database enables performance schema consumers so no additional configuration is required.
 
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-
 ## Grant the Agent access
 
 The Datadog Agent requires read-only access to the database in order to collect statistics and queries.
-
-{{< tabs >}}
-{{% tab "MySQL ≥ 8.0" %}}
 
 Create the `datadog` user and grant basic permissions:
 
@@ -71,21 +66,6 @@ GRANT REPLICATION CLIENT ON *.* TO datadog@'%';
 GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
-
-{{% /tab %}}
-{{% tab "MySQL 5.7" %}}
-
-Create the `datadog` user and grant basic permissions:
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
-{{< /tabs >}}
 
 Create the following schema:
 
@@ -351,3 +331,4 @@ If you have installed and configured the integrations and Agent as described, an
 [7]: https://app.datadoghq.com/databases
 [8]: /integrations/azure_db_for_mysql
 [9]: /database_monitoring/setup_mysql/troubleshooting
+[10]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html

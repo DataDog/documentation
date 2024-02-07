@@ -35,30 +35,30 @@ In the Amazon SQS console, provision a new queue specific to this configuration.
 3. Enter a name for the queue.
 4. In the **Access policy** section, click the **Advanced** button.
 5. Copy and paste the below example JSON object into the advanced access policy section. It configures the queue and allows the S3 bucket to send event notifications. Replace `${REGION}`, `${AWS_ACCOUNT_ID}`, `${QUEUE_NAME}`, and `${BUCKET_NAME}` with the relevant AWS account information, the queue name, and the bucket name you just entered.
-    ```json
+{{< code-block lang="json">}}
+  {
+  "Version": "2008-10-17",
+  "Id": "__default_policy_ID",
+  "Statement": [
     {
-    "Version": "2008-10-17",
-    "Id": "__default_policy_ID",
-    "Statement": [
-      {
-        "Effect": "Allow",
-        "Principal": {
-          "Service": "s3.amazonaws.com"
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "s3.amazonaws.com"
+      },
+      "Action": "SQS:SendMessage",
+      "Resource": "arn:aws:sqs:${REGION}:${AWS_ACCOUNT_ID}:${QUEUE_NAME}",
+      "Condition": {
+        "StringEquals": {
+          "aws:SourceAccount": "${AWS_ACCOUNT_ID}"
         },
-        "Action": "SQS:SendMessage",
-        "Resource": "arn:aws:sqs:${REGION}:${AWS_ACCOUNT_ID}:${QUEUE_NAME}",
-        "Condition": {
-          "StringEquals": {
-            "aws:SourceAccount": "${AWS_ACCOUNT_ID}"
-          },
-          "StringLike": {
-            "aws:SourceArn": "arn:aws:s3:*:*:${BUCKET_NAME}"
-          }
+        "StringLike": {
+          "aws:SourceArn": "arn:aws:s3:*:*:${BUCKET_NAME}"
         }
       }
-    ]
     }
-    ```
+  ]
+  }
+{{< /code-block >}}
 6. Leave the other queue options as the defaults.
 7. Click **Create queue**.
 

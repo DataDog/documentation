@@ -32,10 +32,10 @@ The filter tags option requires an exact string match. If your use case requires
 You can specify span tags to require or reject by using a list of keys and values separated by spaces in environment variables:
 
 `DD_APM_FILTER_TAGS_REQUIRE`
-: Collects only traces that have root spans with an exact match for the specified span tags and values. If it does not match this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REQUIRE="key1:value1 key2:value2"`.
+: Collects only traces that have root spans with an exact match for the specified span tags and values. If it does not match this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REQUIRE="key1:value1 key2:value2"`. In Datadog Agent 7.49+, regular expressions can be provided with `DD_APM_FILTER_TAGS_REGEX_REQUIRE`.
 
 `DD_APM_FILTER_TAGS_REJECT`
-: Rejects traces that have root spans with an exact match for the specified span tags and values. If it matches this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"`.
+: Rejects traces that have root spans with an exact match for the specified span tags and values. If it matches this rule, the trace is dropped. For example, `DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"`. In Datadog Agent 7.49+, regular expressions can be provided with `DD_APM_FILTER_TAGS_REGEX_REJECT`.
 
 
 {{< tabs >}}

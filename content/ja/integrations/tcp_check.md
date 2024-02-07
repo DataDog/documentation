@@ -29,7 +29,7 @@ draft: false
 git_integration_title: tcp_check
 integration_id: システム
 integration_title: TCP チェック
-integration_version: 4.6.0
+integration_version: 4.7.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -151,7 +151,7 @@ TCP チェックには、イベントは含まれません。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/tcp_check/images/netgraphs.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/monitors/monitor_types/network/?tab=checkalert
 [5]: https://docs.datadoghq.com/ja/help/

@@ -231,7 +231,7 @@
           globs:
           - 'docs/GettingStarted.md'
           options:
-            dest_path: '/tracing/trace_collection/dd_libraries/'
+            dest_path: '/tracing/trace_collection/automatic_instrumentation/dd_libraries/'
             file_name: 'ruby.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/dd-trace-rb/blob/release/docs/GettingStarted.md"]
@@ -248,6 +248,7 @@
               - /agent/apm/ruby/
               - /tracing/setup_overview/setup/ruby
               - /tracing/trace_collection/ruby
+              - /tracing/trace_collection/dd_libraries/ruby/
 
       - repo_name: datadog-serverless-functions
         contents:
@@ -344,13 +345,15 @@
           globs:
           - 'README.md'
           options:
-            dest_path: '/continuous_integration/static_analysis/'
+            dest_path: '/static_analysis/'
             file_name: 'circleci_orbs.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"]
               title: Static Analysis and CircleCI Orbs
               kind: documentation
               description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
+              aliases:
+              - /continuous_integration/static_analysis/circleci_orbs
 
       - repo_name: datadog-static-analyzer-github-action
         contents:
@@ -359,13 +362,15 @@
           globs:
           - 'README.md'
           options:
-            dest_path: '/continuous_integration/static_analysis/'
+            dest_path: '/static_analysis/'
             file_name: 'github_actions.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md"]
               title: Static Analysis and GitHub Actions
               kind: documentation
               description: Use Datadog and GitHub to run Static Analysis jobs in a CI pipeline.
+              aliases:
+              - /continuous_integration/static_analysis/github_actions
 
       - repo_name: datadog-static-analyzer-rule-docs
         contents:
@@ -374,11 +379,11 @@
           globs:
           - rulesets/**/*.md
           options:
-            dest_dir: '/continuous_integration/static_analysis/rules/'
+            dest_dir: '/static_analysis/rules/'
             path_to_remove: 'rulesets/'
             front_matters:
               disable_edit: true
-              
+
       - repo_name: datadog-cdk-constructs
         contents:
         - action: pull-and-push-file
@@ -479,20 +484,8 @@
         - action: security-rules
           branch: main
           globs:
-            # old
-            - "configuration/*.json"
-            - "configuration/*.yaml"
-            - "configuration/*.yml"
-            - "configuration/*.md"
-            - "runtime/**/*.json"
-            - "runtime/**/*.yaml"
-            - "runtime/**/*.yml"
-            - "runtime/**/*.md"
-            # new
             - "workload-security/backend-rules/*.yaml"
             - "workload-security/backend-rules/*.md"
-            - "security-monitoring/**/*.json"
-            - "security-monitoring/**/*.md"
             - "cloud-siem/**/*.json"
             - "cloud-siem/**/*.md"
             - "posture-management/**/*.json"
@@ -511,7 +504,7 @@
           globs:
             - "generated/md/external/*.md"
           options:
-            dest_dir: '/security/misconfigurations/custom_rules/'
+            dest_dir: '/infrastructure/resource_catalog/'
             path_to_remove: 'generated/md/external/'
             front_matters:
               disable_edit: true
@@ -524,9 +517,10 @@
             - "docs/en/getting-started.md"
           options:
             dest_path: "/developers/"
-            file_name: "datadog_apps.md"
+            file_name: "ui_extensions.md"
             front_matters:
               dependencies: ["https://github.com/DataDog/apps/blob/master/docs/en/getting-started.md"]
+              aliases: ["/developers/datadog_apps/"]
 
       - repo_name: datadog-agent
         contents:

@@ -34,6 +34,7 @@ title: モニターガイド
 {{< whatsnext desc="一般ガイド:" >}}
     {{< nextlink href="monitors/guide/how-to-set-up-rbac-for-monitors" >}}モニターの RBAC の設定方法{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/synthetic-test-monitors" >}}Synthetic テストでモニターを作成する方法{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/non_static_thresholds" >}}非静的しきい値の監視方法{{< /nextlink >}}
     {{< nextlink href="monitors/guide/anomaly-monitor" >}}異常モニター{{< /nextlink >}}
     {{< nextlink href="monitors/guide/change-alert" >}}アラートモニターの変更{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-ephemeral-servers-for-reboots" >}}エフェメラルサーバーの再起動を監視する{{< /nextlink >}}

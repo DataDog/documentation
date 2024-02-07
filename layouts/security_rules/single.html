@@ -20,47 +20,68 @@
         <!-- e.g gcp.project use source -->
         {{ $basename = .Params.source }}
     {{ end }}
-		{{ $int_logo := partial "integrations-logo.html" (dict "context" $dot "basename" $basename "variant" "avatar") }}
+		{{ $int_logo := partialCached "integrations-logo.html" (dict "context" $dot "basename" $basename "variant" "avatar") $basename "avatar" }}
 		{{ if $int_logo }}
-			<div class="col-3 col-lg-2 d-flex justify-content-center">
-				<img src="{{ $int_logo }}?auto=format&width=120" width="80px" max-height="100px" alt="{{ htmlEscape .Params.Source }}" />
-			</div>
+		<div class="col-3 col-md-2">
+			<img src="{{ $int_logo }}?auto=format&width=120" width="80px" max-height="100px" alt="{{ htmlEscape .Params.Source }}" />
+		</div>
 		{{ end }}
-		<div class="col-9 col-lg-10">
+		<div class="col-9 col-md-10">
 			<div class="row">
 				{{ if isset .Params "security" }}
-					<div class="col-4 col-md-4 col-lg-3"><p class="fw-bold small">Classification: </p></div>
-					<div class="col-8 col-md-8 col-lg-7"><p class="small">{{ .Params.security }}</p></div>
+					<div class="col-6 col-md-3 pe-0"><p class="fw-bold small">Classification: </p></div>
+					<div class="col-6 col-md-9"><p class="small">{{ .Params.security }}</p></div>
 				{{ end }}
 				{{ if isset .Params "tactic" }}
-					<div class="col-4 col-md-4 col-lg-3"><p class="fw-bold small">Tactic: </p></div>
-					<div class="col-8 col-md-8 col-lg-7"><p class="small">
+					<div class="col-6 col-md-3 pe-0"><p class="fw-bold small">Tactic: </p></div>
+					<div class="col-6 col-md-9"><p class="small">
 						{{ $tactic := first 1 (split .Params.tactic "-") }}
 						<a href="https://attack.mitre.org/tactics/{{ index $tactic 0 }}">{{ .Params.tactic }}</a>
 					</p></div>
 				{{ end }}
 				{{ if isset .Params "technique" }}
-					<div class="col-4 col-md-4 col-lg-3"><p class="fw-bold small">Technique: </p></div>
-					<div class="col-8 col-md-8 col-lg-7"><p class="small">
+					<div class="col-6 col-md-3 pe-0"><p class="fw-bold small">Technique: </p></div>
+					<div class="col-6 col-md-9"><p class="small">
 						{{ $technique := first 1 (split .Params.technique "-") }}
 						<a href="https://attack.mitre.org/techniques/{{ index $technique 0 }}">{{ .Params.technique }}</a>
 					</p></div>
 				{{ end }}
 				{{ if isset .Params "framework" }}
-					<div class="col-4 col-md-4 col-lg-3"><p class="fw-bold small">Framework: </p></div>
-					<div class="col-8 col-md-8 col-lg-7"><p class="small">{{ .Params.framework }}</p></div>
+					<div class="col-6 col-md-3 pe-0"><p class="fw-bold small">Framework: </p></div>
+					<div class="col-6 col-md-9"><p class="small">{{ .Params.framework }}</p></div>
 				{{ end }}
 				{{ if isset .Params "control" }}
-					<div class="col-4 col-md-4 col-lg-3"><p class="fw-bold small">Control: </p></div>
-					<div class="col-8 col-md-8 col-lg-7"><p class="small">{{ .Params.control }}</p></div>
+					<div class="col-6 col-md-3 pe-0"><p class="fw-bold small">Control: </p></div>
+					<div class="col-6 col-md-9"><p class="small">{{ .Params.control }}</p></div>
 				{{ end }}
 			</div>
 		</div>
+		<div class="col-12 mt-1">
+			{{ $rule_category := (index .Params.rule_category 0)}}
+			{{ $view_findings_text := "View Signals"}}
+
+			{{ if eq $rule_category "CSM Identity Risks"}}
+				{{ $view_findings_text = "View Identity Risks"}}
+			{{ else if strings.Contains $rule_category "CSM Misconfigurations"}}
+				{{ $view_findings_text = "View Misconfigurations"}}
+			{{ end }}
+			
+			{{ with .Params.view_rule_url }}
+			<button class="mt-1 me-1 btn btn-sm-tag btn-outline-secondary position-relative">
+				<a href="{{.}}" class="stretched-link" target="_blank">VIEW RULE IN DATADOG</a>
+			</button>
+			{{ end }}
+			{{ with .Params.view_findings_url }}
+			<button class="mt-1 btn btn-sm-tag btn-outline-secondary position-relative">
+				<a href="{{.}}" class="stretched-link" target="_blank">{{$view_findings_text | upper}}</a>
+			</button>
+			{{ end }}
+		</div>
 	</div>
 
-	{{ if isset .Params "source" }}
-		{{ with .Site.GetPage (print "/integrations/" .Params.source ) }}
-			<p>Set up the <a href="{{ (strings.TrimLeft "/" .RelPermalink) | absLangURL }}">{{ $dot.Params.source }}</a> integration.</p>
+	{{ with $dot.Params.source }}
+    {{ if (fileExists (print "content/en/integrations/" . ".md")) }}
+			<p>Set up the <a href="{{ (print "integrations/" .) | absLangURL }}">{{ . }}</a> integration.</p>
 		{{ end }}
 	{{ end }}
 

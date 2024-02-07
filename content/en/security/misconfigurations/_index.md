@@ -23,15 +23,15 @@ View a high-level overview of your security posture on the [Overview page][1]. E
 
 CSM Misconfigurations evaluates resources in increments between 15 minutes and 4 hours (depending on type). Datadog generates new misconfigurations as soon as a scan is completed, and stores a complete history of all misconfigurations for the past 15 months so they are available in case of an investigation or audit.
 
-{{< img src="security/csm/csm_overview.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}}
+{{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}}
 
 ## Maintain compliance with industry frameworks and benchmarks
 
-CSM Misconfigurations comes with more than 400 out-of-the-box compliance rules that are maintained by a team of security experts. The rules map to controls and requirements within compliance standards and industry benchmarks, such as PCI and SOC2 compliance frameworks.
+CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules that are maintained by a team of security experts. The rules map to controls and requirements within compliance standards and industry benchmarks, such as PCI and SOC2 compliance frameworks.
 
 [View compliance reports][3] to see how well you're doing against each control in a compliance framework. The reports include details such as resources with the most failed misconfigurations, a comprehensive breakdown of the number of resources with pass/fail misconfigurations, and the top three high-severity rule failures.
 
-{{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports.png" alt="CSM Misconfigurations compliance frameworks" width="100%">}}
+{{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports_2.png" alt="CSM Misconfigurations compliance frameworks" width="100%">}}
 
 ## Manage out-of-the-box and custom compliance rules
 
@@ -49,7 +49,7 @@ Use template variables and Markdown to [customize notification messages][9]. Edi
 
 Investigate details using the [Misconfigurations Explorer][10]. View detailed information about a resource, such as configuration, compliance rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment. If a misconfiguration does not match your business use case or is an accepted risk, you can [mute the misconfiguration][13] up to an indefinite period of time.
 
-{{< img src="security/cspm/findings_explorer.png" alt="CSM Misconfigurations Misconfigurations issue explorer" width="100%">}}
+{{< img src="security/cspm/misconfigurations_explorer.png" alt="CSM Misconfigurations Explorer page" width="100%">}}
 
 ## Get started
 

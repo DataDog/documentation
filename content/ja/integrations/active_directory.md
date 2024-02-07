@@ -1,44 +1,64 @@
 ---
+app_id: active-directory
+app_uuid: e03a0916-8708-4417-82e4-1f0c7bbee655
 assets:
-  configuration:
-    spec: assets/configuration/spec.yaml
   dashboards:
     Active Directory: assets/dashboards/active_directory.json
+  integration:
+    configuration:
+      spec: assets/configuration/spec.yaml
+    events:
+      creates_events: false
+    metrics:
+      check: active_directory.dra.inbound.objects.persec
+      metadata_path: metadata.csv
+      prefix: active_directory.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Active Directory
   logs:
     source: ruby
-  metrics_metadata: metadata.csv
   monitors:
     '[Active Directory] Anomalous number of sessions for connected LDAP clients for host: {{host.name}}': assets/monitors/ldap_client_sessions.json
     '[Active Directory] Anomalous number of successful LDAP bindings for host: {{host.name}}': assets/monitors/ldap_binding_successful.json
     '[Active Directory] Elevated LDAP binding duration for host {{host.name}}': assets/monitors/ldap_binding.json
-  service_checks: assets/service_checks.json
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - os & system
 - log collection
-creates_events: false
-ddtype: check
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/active_directory/README.md
-description: Microsoft Active Directory のメトリクスを収集してグラフ化
-display_name: Active Directory
+display_on_public_website: true
 draft: false
 git_integration_title: active_directory
-guid: ba667ff3-cf6a-458c-aa4b-1172f33de562
 integration_id: active-directory
 integration_title: Active Directory
-integration_version: 1.15.1
+integration_version: 2.0.0
 is_public: true
 kind: インテグレーション
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: active_directory.
-metric_to_check: active_directory.dra.inbound.objects.persec
+manifest_version: 2.0.0
 name: active_directory
-public_title: Datadog-Active Directory インテグレーション
+oauth: {}
+public_title: Active Directory
 short_description: Microsoft Active Directory のメトリクスを収集してグラフ化
-support: コア
 supported_os:
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Windows
+  - Category::OS とシステム
+  - Category::ログの収集
+  configuration: README.md#Setup
+  description: Microsoft Active Directory のメトリクスを収集してグラフ化
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Active Directory
 ---
 
 
@@ -114,7 +134,7 @@ Active Directory チェックには、サービスのチェック機能は含ま
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/active_directory/datadog_checks/active_directory/data/conf.yaml.example

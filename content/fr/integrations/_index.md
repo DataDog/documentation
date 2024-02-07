@@ -2,6 +2,7 @@
 aliases:
 - /fr/integrations/verisign_openhybrid/
 - /fr/integrations/snyk/
+- /fr/integrations/mainstorconcept_ziris/
 cascade:
 - _target:
     path: /integrations/azure.md

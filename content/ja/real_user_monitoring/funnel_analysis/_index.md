@@ -22,11 +22,11 @@ title: ファネル分析
 **注**: コンバージョン率とは、Web サイトへの訪問者総数のうち、目的のゴールを達成した (コンバージョン) 数のことです。
 ## ファネルの構築
 
-ファネルを構築するには、**UX Monitoring > Funnel Analysis** に移動します。また、RUM 内の **Performance Summary** ページに移動すると、Funnel Analysis タブが見つかります。
+ファネルを構築するには、**UX Monitoring > Product Analytics > Funnels** へ移動します。
 
-{{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-funnels-tab-updated.png" alt="RUM 内の Funnel Analysis タブに移動します" style="width:100%;" >}}
+{{< img src="real_user_monitoring/explorer/analytics/funnels-tab.png" alt="RUM 内の Funnel Analysis タブに移動します" style="width:100%;" >}}
 
-このビューから、開始するビューやアクションを構築し、プラスアイコンをクリックして追加のステップを構築します。ドラッグアンドドロップ機能でステップを移動することもできます。
+このビューから、開始するビューやアクションを選択し、プラスアイコンをクリックして追加のステップを構築します。ドラッグアンドドロップ機能でステップを移動することもできます。
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-building-a-funnel-1.mp4" alt="ネットワークマップを検索でフィルターする" video=true >}}
 

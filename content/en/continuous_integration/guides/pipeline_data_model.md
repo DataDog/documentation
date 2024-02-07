@@ -33,11 +33,13 @@ When a pipeline, stage, job, or step finishes, execution data is sent to Datadog
 
 {{< img src="ci/ci-pipeline-execution.png" alt="Example of a pipeline execution trace" style="width:100%;">}}
 
+Stages, jobs, and steps are expected to have the exact same pipeline name as their parent pipeline. In the case of a mismatch, some pipelines may be missing stage, job, and step information. For example, missing jobs in the job summary tables.
+
 ### Pipeline unique IDs
 
 All pipeline executions within a level must have an unique identifier. For example, a pipeline and a job may have the same unique ID, but not two pipelines.
 
-When sending repeated IDs with different timestamps, the user interface may exhibit undesirable behavior. For example, flame graphs may display span tags from a different pipeline execution. If duplicate IDs with the same timestamps are sent, only one pipeline execution is stored while the others are ignored.
+When sending repeated IDs with different timestamps, the user interface may exhibit undesirable behavior. For example, flame graphs may display span tags from a different pipeline execution. If duplicate IDs with the same timestamps are sent, only the values of the last pipeline execution received are stored.
 
 ## Pipeline execution types
 

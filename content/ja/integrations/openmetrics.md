@@ -24,7 +24,7 @@ draft: false
 git_integration_title: openmetrics
 integration_id: openmetrics
 integration_title: OpenMetrics
-integration_version: 3.0.0
+integration_version: 4.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -115,12 +115,36 @@ OpenMetrics の構成において、`metrics` オプションに一般的なワ�
 
 Datadog では、より正確な収集のために、特定のメトリクス名またはメトリクス名の部分一致を使用することを推奨しています。
 
+### Agent 7.46 以上での OpenMetrics ペイロードのパースエラー
+
+Agent 7.46 以上にデフォルトで同梱されているこのインテグレーションのバージョン 3.0.0 から、デフォルトで `Accept` ヘッダーを `application/openmetrics-text;version=1.0.0,application/openmetrics-text;version=0.0.1;q=0.75,text/plain;version=0.0.4;q=0.5,*/*;q=0.1` に設定して送信します。以前のバージョンでは `Accept` ヘッダーを `text/plain` に設定していました。インテグレーションは、サーバーから受け取った `Content-type` に基づいて、使用するスクレーパーを動的に決定します。
+
+この新しいバージョンで OpenMetrics のエンドポイントをスクレイピングしたときに、スクレイパーが以前より厳しくなってエラーが発生する場合は、[コンフィギュレーションファイル][11]の `headers` オプションを使って、インテグレーションが送信する `Accept` ヘッダーを手動で `text/plain` に設定してください。例:
+
+```yaml
+## ここで定義されたすべてのオプションは、すべてのインスタンスで利用可能です。
+#
+init_config:
+  ...
+instances:
+  - openmetrics_endpoint: <OPENMETRICS_ENDPOINT>
+  ...
+    headers:
+      - Accept: text/plain
+```
+
+この構成では、エンドポイントは `Content-type` を `text/plain` に設定して返し、インテグレーションは以前のスクレーパーを使用します。
+
+OpenMetrics インテグレーションは、監視しているシステムが `Content-type` ヘッダーにマッチしないデータを送信すると、ペイロードのパースでエラーを報告します。インテグレーションが `text/plain` コンテンツを受け付けるように設定することで、短期的にはこの問題に対処できます。
+
+問題の根本原因を解決するには、アップストリームシステムの保守者に連絡してください。バグレポートを送信し、ペイロードとヘッダーに設定された Content-type が一致するようにシステムを修正するよう依頼してください。
+
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 ## その他の参考資料
 
-- [OpenMetrics チェックの構成][11]
-- [カスタム OpenMetrics チェックの書き方][12]
+- [OpenMetrics チェックの構成][12]
+- [カスタム OpenMetrics チェックの書き方][13]
 
 [1]: https://prometheus.io/docs/instrumenting/exposition_formats/#text-based-format
 [2]: https://github.com/OpenObservability/OpenMetrics/blob/main/specification/OpenMetrics.md#suffixes
@@ -132,5 +156,6 @@ Datadog では、より正確な収集のために、特定のメトリクス名
 [8]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [9]: https://docs.datadoghq.com/ja/getting_started/integrations/prometheus/
 [10]: https://docs.datadoghq.com/ja/help/
-[11]: https://docs.datadoghq.com/ja/agent/openmetrics/
-[12]: https://docs.datadoghq.com/ja/developers/openmetrics/
+[11]: https://github.com/DataDog/integrations-core/blob/7.46.x/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example#L537-L546
+[12]: https://docs.datadoghq.com/ja/agent/openmetrics/
+[13]: https://docs.datadoghq.com/ja/developers/openmetrics/

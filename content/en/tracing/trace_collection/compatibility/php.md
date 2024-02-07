@@ -46,6 +46,7 @@ It's recommended to use <a href="https://www.php.net/supported-versions">officia
 
 | PHP Version    | Support level                         | Package version |
 |:---------------|:--------------------------------------|:----------------|
+| 8.3.x          | Beta (until the official PHP release) | > `0.93.0+`     |
 | 8.2.x          | General Availability                  | > `0.82.0+`     |
 | 8.1.x          | General Availability                  | > `0.66.0+`     |
 | 8.0.x          | General Availability                  | > `0.52.0+`     |
@@ -97,18 +98,19 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | CakePHP        | 2.x                               | All supported PHP versions | Framework-level instrumentation |
 | CodeIgniter    | 2.x                               | PHP 7+                     | Framework-level instrumentation |
 | CodeIgniter    | 3.x                               | PHP 7+                     | Generic web tracing             |
-| Drupal         |                                   | All supported PHP versions | Generic web tracing             |
+| Drupal         |                                   | All supported PHP versions | Framework-level instrumentation |
 | FuelPHP        | 1.1                               | PHP 7+                     | Generic web tracing             |
 | Laminas        |                                   | All supported PHP versions | Framework-level instrumentation |
 | Laravel        | 4.2, 5.x, 6.x                     | All supported PHP versions | Framework-level instrumentation |
 | Laravel 8+     | 8.x, 9.x, 10.x (tracer `0.52.0+`) | All supported PHP versions | Framework-level instrumentation |
 | Lumen          | 5.2+                              | All supported PHP versions | Framework-level instrumentation |
-| Magento        | 1, 2                              | All supported PHP versions | Generic web tracing             |
+| Magento        | 1                                 | All supported PHP versions | Generic web tracing             |
+| Magento        | 2                                 | PHP 7+                     | Framework-level instrumentation |
 | Neos Flow      | 1.1                               | All supported PHP versions | Generic web tracing             |
 | Phalcon        | 1.3, 3.4                          | All supported PHP versions | Generic web tracing             |
 | RoadRunner     | 2.x                               | All supported PHP versions | Framework-level instrumentation |
 | Slim           | 2.x, 3.x, 4.x                     | All supported PHP versions | Framework-level instrumentation |
-| Symfony        | 2.x, 3.3, 3.4, 4.x, 5.x, 6.x      | All supported PHP versions | Framework-level instrumentation |
+| Symfony        | 2.x, 3.3, 3.4, 4.x, 5.x, 6.x, 7.x | All supported PHP versions | Framework-level instrumentation |
 | WordPress      | 4.x, 5.x, 6.x                     | PHP 7+                     | Framework-level instrumentation |
 | Yii            | 1.1, 2.0                          | All supported PHP versions | Framework-level instrumentation |
 | Zend Framework | 1.12, 1.21                        | All supported PHP versions | Framework-level instrumentation |

@@ -27,11 +27,14 @@ Two release branches are supported:
 
 And the library supports the following runtimes:
 
-| OS      | CPU                   | Runtime | Runtime version | Support ddtrace versions |
-|---------|-----------------------|---------|-----------------|--------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                     |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                     |
+| OS      | CPU                   | Runtime | Runtime version | Supported ddtrace versions  |
+|---------|-----------------------|---------|-----------------|---------------------------|
+| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                      |
+| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                      |
+| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                      |
+| Linux   | x86-64, i686, AArch64 | CPython | 3.7+            | `>=2`                     |
+| MacOS   | Intel, Apple Silicon  | CPython | 3.7+            | `>=2`                     |
+| Windows | 64bit, 32bit          | CPython | 3.7+            | `>=2`                     |
 
 ## Integrations
 
@@ -111,10 +114,13 @@ The `ddtrace` library includes support for the following libraries:
 | [gevent][52]      | >= 1.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
 | [Grpc][53]        | >= 1.8.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
 | [httplib][54]     | Fully Supported   | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#httplib     |
+| [Logbook][66]     | >= 1.0.0          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#logbook     |
+| [Loguru][65]      | >= 0.4.0          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#loguru     |
 | [Jinja2][55]      | >= 2.7            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#jinja2      |
 | [Kombu][56]       | >= 4.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#kombu       |
 | [Mako][57]        | >= 0.1.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#mako        |
 | [Requests][58]    | >= 2.08           | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#requests    |
+| [structlog][64]   | >= 20.2.0         | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#structlog   | 
 | [urllib3][59]     | >= 1.22           | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#urllib3     |
 | [graphql-core][60]| >= 2.0            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#graphql |
 | [pytest][14]              | >= 3.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#pytest  |
@@ -187,3 +193,6 @@ The `ddtrace` library includes support for the following libraries:
 [61]: https://gunicorn.org/
 [62]: https://snowflake.com/
 [63]: https://opensearch.org/
+[64]: https://www.structlog.org/en/stable/
+[65]: https://loguru.readthedocs.io/en/stable/
+[66]: https://logbook.readthedocs.io/en/stable/

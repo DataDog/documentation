@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-The [Observability Pipelines Worker][1] can collect, process, and route logs and metrics from any source to any destination. Using Datadog, you can build and manage all of your Observability Pipelines Worker deployments at scale.
+The [Observability Pipelines Worker][1] can collect, process, and route logs from any source to any destination. Using Datadog, you can build and manage all of your Observability Pipelines Worker deployments at scale.
 
 This guide walks you through deploying the Worker in your common tools cluster and configuring Splunk to send logs through the Worker, to dual-write to Datadog.
 
@@ -122,7 +122,7 @@ In order to run the Worker in your AWS account, you need administrative access t
 
 ## Setting up the Splunk index
 
-<div class="alert alert-info">Observability Pipelines supports acknowledgements when you enable the <strong>Enable Indexer Acknowledgements</strong> setting on the input.</div>
+<div class="alert alert-info">Observability Pipelines supports acknowledgments when you enable the <strong>Enable Indexer Acknowledgments</strong> setting on the input.</div>
 
 To receive logs from the Observability Pipelines Worker, you must provision a HEC input and HEC token on the index.
 
@@ -159,7 +159,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 [2]: /resources/yaml/observability_pipelines/splunk/pipeline.yaml
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
-1. Download the [Helm chart][1] for AWS EKS.
+1. Download the [Helm chart values file][1] for AWS EKS.
 
 2. In the Helm chart, replace `datadog.apiKey` and `datadog.pipelineId` with their respective values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
     ```yaml
@@ -195,7 +195,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 [1]: /resources/yaml/observability_pipelines/splunk/aws_eks.yaml
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
-1. Download the [Helm chart][1] for Azure AKS.
+1. Download the [Helm chart values file][1] for Azure AKS.
 
 2. In the Helm chart, replace `datadog.apiKey` and `datadog.pipelineId` with their respective values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
     ```yaml
@@ -231,7 +231,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 [1]: /resources/yaml/observability_pipelines/splunk/azure_aks.yaml
 {{% /tab %}}
 {{% tab "Google GKE" %}}
-1. Download the [Helm chart][1] for Google GKE.
+1. Download the [Helm chart values file][1] for Google GKE.
 
 2. In the Helm chart, replace `datadog.apiKey` and `datadog.pipelineId` with their respective values and replace `<site>` with {{< region-param key="dd_site" code="true" >}}:
     ```yaml
