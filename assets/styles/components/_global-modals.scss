@@ -40,6 +40,111 @@
     }
 }
 
+#ctaModal {
+    //  static/images/
+    .modal-dialog {
+        height: 674px;
+        max-width: 720px;
+        box-sizing: content-box;
+        top: 25%;
+        border-radius: 12px;
+        padding: 8px;
+        background-color: white;
+        a {
+            color: #006BC2;
+        }
+        .modal-content {
+            height: 100%;
+            background: linear-gradient(90.13deg, #A533AF 1.91%, #3725A8 100%);
+            background-repeat: no-repeat;
+            background-size: auto 186px;
+            border: none;
+            .modal-header {
+                color: white;
+                border: none;
+                height: 186px;
+                text-align: center;
+                .modal-title {
+                    width: 75%;
+                }
+            }
+            .modal-body {
+                width: 100%;
+                padding-top: 0;
+                .floating-body-top {
+                    box-shadow: 0px 2px 8px 0px #00000052;
+                    width: 100%;
+                    height: 202px;
+                    border-radius: 8px;
+                    padding: 16px;
+                    .highlight .chroma {
+                        background: #F9FAFB;
+                        border: none;
+                        padding-top: 4px;
+                        padding-bottom: 4px;
+                        code {
+                            line-height: 20px;
+                        }
+                        span {
+                            font-size: 13px;
+                        }
+                    }
+                    ol {
+                        padding-left: 16px;
+                        li {
+                            padding-left: 4px;
+                            font-size: 14px;
+                        }
+                    }
+                    p {
+                        font-size: 14px;
+                        margin-right: 4px;
+                        color: black;
+                    }
+                    i.icon-external-link {
+                        position: relative;
+                        top: 2px;
+                    }
+                }
+                .floating-body-bottom {
+                    // border: solid 1px green;
+                    display: flex;
+                    justify-content: center;
+                    gap: 16px;
+                    margin-top: 16px;
+                    .floating-body-2 {
+                        box-shadow: 0px 2px 8px 0px #00000052;
+                        height: 188px;
+                        width: 332px;
+                        border-radius: 8px;
+                        padding: 16px;
+                        p {
+                            text-align: center;
+                            font-size: 14px;
+                            line-height: 20px;
+                            margin: 0
+                        }
+                        i.icon-external-link {
+                            position: relative;
+                            top: 3px;
+                            margin-left: 8px
+                        }
+                    }
+                }
+            }
+            .modal-footer {
+                border: 0;
+                padding: 0;
+                a {
+                    color: #006BC2;
+                }
+            }
+        }
+    }
+    
+}
+
+
 @media (max-width: 575px) {
     #signupModal {
         .modal-content {
@@ -47,3 +152,4 @@
         }
     }
 }
+
