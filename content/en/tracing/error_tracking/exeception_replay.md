@@ -1,8 +1,8 @@
 ---
-title: Error Tracking Execution Replay
+title: Error Tracking Exception Replay
 kind: documentation
 is_beta: true
-description: Learn about Execution Replay in Error Tracking.
+description: Learn about Exception Replay in Error Tracking.
 further_reading:
 - link: '/monitors/types/error_tracking'
   tag: 'Documentation'
@@ -12,17 +12,18 @@ further_reading:
   text: 'Learn about Error Tracking for Backend Services'
 aliases:
   - /tracing/error_tracking/executional_context
+  - /tracing/error_tracking/exception_replay
 ---
 
 <div class="alert alert-info">
-Execution Replay for APM Error Tracking is in beta.
+Exception Replay for APM Error Tracking is in beta.
 </div>
 
 ## Overview
 
-Execution Replay in APM Error Tracking automatically captures production variable values so you can reproduce exceptions from Error Tracking issues.
+Exception Replay in APM Error Tracking automatically captures production variable values so you can reproduce exceptions from Error Tracking issues.
 
-{{< img src="tracing/error_tracking/error_tracking_executional_context-2.png" alt="Error Tracking Explorer Execution Replay" style="width:90%" >}}
+{{< img src="tracing/error_tracking/error_tracking_executional_context-2.png" alt="Error Tracking Explorer Exception Replay" style="width:90%" >}}
 
 ## Requirements
 Supported languages
@@ -31,15 +32,15 @@ Supported languages
 - Your Datadog Agent must be configured for APM.
 - Your application must be instrumented with `ddtrace`.
 
-Executional Replay is only available in APM Error Tracking. Error Tracking for Logs and RUM is not supported.
+Exception Replay is only available in APM Error Tracking. Error Tracking for Logs and RUM is not supported.
 
 ## Setup
 
 1. Install or upgrade your Agent to version `7.44.0` or higher.
 2. Ensure that you are using `ddtrace` version `1.16.0` or higher.
-3. Set the `DD_EXCEPTION_DEBUGGING_ENABLED` environment variable to `true` to run your service with Error Tracking Executional Replay enabled.
+3. Set the `DD_EXCEPTION_DEBUGGING_ENABLED` environment variable to `true` to run your service with Error Tracking Exception Replay enabled.
 
-### Hiding sensitive data
+### Redacting sensitive data
 
 By default, variable data linked to specific identifiers deemed sensitive, such as `password` and `accessToken`, are automatically redacted. See the full [list of redacted identifiers][1].
 
