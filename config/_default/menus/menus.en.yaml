@@ -796,11 +796,6 @@ main:
     url: developers/community/libraries/
     parent: dev_community
     weight: 801
-  - name: Community Office Hours
-    identifier: dev_community_office_hours
-    url: developers/community/office_hours/
-    parent: dev_community
-    weight: 802
   - name: Guides
     url: developers/guide/
     parent: dev_tools
@@ -2062,11 +2057,31 @@ main:
     parent: tracing_trace_collection
     identifier: automatic_instrumentation
     weight: 201
+  - name: Using Single Step Instrumentation
+    url: tracing/trace_collection/automatic_instrumentation/single-step-apm/
+    parent: automatic_instrumentation
+    identifier: single_step_apm
+    weight: 2011
+  - name: Using Datadog Tracing Libraries
+    url: tracing/trace_collection/automatic_instrumentation/dd_libraries/
+    parent: automatic_instrumentation
+    identifier: auto_dd_libraries
+    weight: 2012
   - name: Custom Instrumentation
     url: tracing/trace_collection/custom_instrumentation/
     parent: tracing_trace_collection
     identifier: custom_instrumentation
     weight: 202
+  - name: Using Datadog Libraries
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/
+    parent: custom_instrumentation
+    identifier: tracing_custom_inst
+    weight: 2021
+  - name: Using OpenTelemetry APIs
+    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+    parent: custom_instrumentation
+    identifier: tracing_otel_inst
+    weight: 2022
   - name: Library Compatibility
     url: tracing/trace_collection/compatibility/
     parent: tracing_trace_collection
@@ -2311,6 +2326,11 @@ main:
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_suspect_commits
     weight: 1003
+  - name: Execution Replay
+    url: tracing/error_tracking/execution_replay
+    parent: tracing_error_tracking
+    identifier: tracing_error_tracking_execution_replay
+    weight: 1004
   - name: Data Security
     url: tracing/configure_data_security/
     parent: tracing
