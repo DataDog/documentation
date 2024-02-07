@@ -353,6 +353,35 @@ When creating a [monitor-based SLO][1] using a single [grouped monitor][2], use 
 {{% /tab %}}
 {{< /tabs >}}
 
+## CI Visibility
+
+{{< tabs >}}
+{{% tab "Test Runs" %}}
+
+The [CI Visibility Explorer][101] displays your test runs run in a CI pipeline.
+
+To filter test runs by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@test.status:failed`. For advanced search, see [Search and Manage CI Tests][102].
+
+{{< img src="/continuous_integration/test_runs.png" alt="Test runs in the CI Visibility Explorer" style="width:80%;">}}
+
+[101]: https://app.datadoghq.com/ci/test-runs
+[102]: /tests/search/
+
+{{% /tab %}}
+{{% tab "Pipeline Executions" %}}
+
+The [CI Visibility Explorer][101] displays your CI pipeline executions.
+
+To filter pipeline executions by tags, use the search bar or facet checkboxes. The search bar format is `<KEY>:<VALUE>`. For example: `@ci.provider.name:gitlab`. For advanced search, see [Search and Manage CI Pipelines][102].
+
+{{< img src="/continuous_integration/pipeline_executions.png" alt="Pipeline executions in the CI Visibility Explorer" style="width:80%;">}}
+
+[101]: https://app.datadoghq.com/ci/pipeline-executions
+[102]: /continuous_testing/explorer/search/
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Developers
 
 Tags can be used in various ways with the [API][17].
