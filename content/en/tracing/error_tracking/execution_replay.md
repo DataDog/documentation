@@ -10,6 +10,8 @@ further_reading:
 - link: '/tracing/error_tracking'
   tag: 'Documentation'
   text: 'Learn about Error Tracking for Backend Services'
+aliases:
+  - /tracing/error_tracking/executional_context
 ---
 
 <div class="alert alert-info">
