@@ -796,11 +796,6 @@ main:
     url: developers/community/libraries/
     parent: dev_community
     weight: 801
-  - name: Community Office Hours
-    identifier: dev_community_office_hours
-    url: developers/community/office_hours/
-    parent: dev_community
-    weight: 802
   - name: Guides
     url: developers/guide/
     parent: dev_tools
