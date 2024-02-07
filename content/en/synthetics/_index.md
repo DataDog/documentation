@@ -87,7 +87,7 @@ Analyze performance information about your API tests, multistep API tests, brows
 
 Create [search queries and visualizations][20] for your Synthetic test runs or batches of tests running in CI/CD pipelines. 
 
-{{< img src="continuous_testing/explorer_ci_batches.png" alt="Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_ci_batches_1.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 
 ## Ready to start?
 
