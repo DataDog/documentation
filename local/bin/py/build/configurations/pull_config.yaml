@@ -83,7 +83,7 @@
         contents:
 
         - action: integrations
-          branch: prod
+          branch: cswatt/app_mesh_updates
           globs:
           - integration/*/*_metadata.csv
           - integration/*/manifest.json
