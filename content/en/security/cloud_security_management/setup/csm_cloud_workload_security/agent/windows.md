@@ -3,7 +3,9 @@ title: Enabling CSM Cloud Workload Security on Windows
 kind: documentation
 code_lang: windows
 type: multi-code-lang
-code_lang_weight: 75 # a number that represents relative weight. 
+code_lang_weight: 75 # a number that represents relative weight.
+aliases:
+  - /security/cloud_security_management/setup/windows
 ---
 
 <div class="alert alert-warning">Cloud Security Management on Windows is in public beta and should only be installed on hosts that are not critical to production workloads.</div>
