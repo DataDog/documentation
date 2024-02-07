@@ -1,5 +1,5 @@
 ---
-title: "Components: aws"
+title: "AWS Components"
 kind: guide
 ---
 

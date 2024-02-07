@@ -1,23 +1,23 @@
 ---
-title: "Component: Availability zone"
-kind: guide
+title: "Availability Zone Component"
+kind: documentation
 ---
 
 {{< img src="cloudcraft/components-aws/availability-zone/component-availability-zone-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Availability zone' AWS component." responsive="true" style="width:100%;">}}
 
-The **Availability zone** component is used to represent availability zones from your Amazon Web Services architecture with Cloudcraft.
+Use the **Availability zone** component to represent availability zones from your Amazon Web Services architecture.
 
 ## Toolbar
 
-The toolbar is displayed when selecting a component. It allows you customize parts of your component and its visual to your liking.
+Use the toolbar to configure and customize your component. The following options are available:
 
-- **Color**. Select a predefined color or enter the hexadecimal value of the color for the component. The component can use the same color for both 2D and 3D view, or different colors for each.
-- **Raise**. Raise the availability zone component above other availability zones.
-- **Lower**. Lower the availability zone component below other availability zones.
+- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- **Raise**: Raise the availability zone component above other availability zones.
+- **Lower**: Lower the availability zone component below other availability zones.
 
 ## API
 
-In [the Cloudcraft API][1], the availability zone component is represented in JSON.
+Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. The following is an example JSON object of an availability zone component:
 
 ```json
 {
@@ -35,15 +35,15 @@ In [the Cloudcraft API][1], the availability zone component is represented in JS
 }
 ```
 
-- **type: zone**. The type of component.
-- **id: string**. A unique identifier for the component in the `uuid` format.
-- **region: string**. The AWS region this availability zone belongs to. With the exception of `cn-` regions, all global regions are supported.
-- **mapPos: [number, number]**. The position of the component in the blueprint, expressed as a x,y coordinate pair.
-- **mapSize: [number, number]**. The size of the availability zone representation in the blueprint.
+- **type: zone**: The type of component.
+- **id: string**: A unique identifier for the component in the `uuid` format.
+- **region: string**: The AWS region the availability zone belongs to. All global regions are supported except `cn-` regions.
+- **mapPos: [number, number]**. The position of the component in the blueprint, expressed as an x- and y-coordinate pair.
+- **mapSize: [number, number]**. The size of the availability zone in the blueprint.
 - **color: object**. The fill color for the availability zone.
-  - **isometric: string**. Fill color for the component in 3D view. Must be an hexadecimal color.
-  - **2d: string**. Fill color for the component in 2D view. Must be an hexadecimal color.
-- **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
+  - **isometric: string**. The fill color for the component in the 3D view. Must be an hexadecimal color.
+  - **2d: string**. The fill color for the component in the 2D view. Must be an hexadecimal color.
+- **link: uri**. Link the component to another diagram in the `blueprint://ID` format or to an external website in the `https://LINK` format.
 - **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
 
 [1]: https://developers.cloudcraft.co/
