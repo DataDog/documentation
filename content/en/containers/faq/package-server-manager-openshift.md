@@ -17,27 +17,23 @@ This error occurs if custom Security Context Constraints (SCCs), such as Datadog
 
 ## Workaround
 
-1. Find the name of your Datadog-related SCC.
+1. Back up the `datadog` SCC to `datadog_scc.yaml`:
    ```shell
-   oc get scc -A | grep -i datadog
+   oc get scc datadog -n <NAMESPACE> -o yaml > datadog_scc.yaml
    ```
 
-1. Back up this SCC to `datadog_scc.yaml`:
+   Replace `<NAMESPACE>` with the name of your project namespace.
+
+1. Remove the `datadog` SCC:
    ```shell
-   oc get scc <DATADOG_SCC_NAME> -n <NAMESPACE> -o yaml > datadog_scc.yaml
+   oc delete scc datadog -n <NAMESPACE>
    ```
 
-   - Replace `<DATADOG_SCC_NAME>` with the name you found in the first step.
-   - Replace `<NAMESPACE>` with the name of your project namespace.
-
-1. Remove the SCC:
-   ```shell
-   oc delete scc <DATADOG_SCC_NAME> -n <NAMESPACE>
-   ```
+   Replace `<NAMESPACE>` with the name of your project namespace.
 
 1. Finish upgrading your cluster.
 
-1. Recreate the SCC from the backup file:
+1. Recreate the SCC from your backup file:
    ```shell
    oc create -f datadog_scc.yaml
    ```
