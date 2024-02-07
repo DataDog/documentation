@@ -2335,7 +2335,7 @@ main:
     url: tracing/error_tracking/execution_replay
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_execution_replay
-    weight: 1003
+    weight: 1004
   - name: Data Security
     url: tracing/configure_data_security/
     parent: tracing
