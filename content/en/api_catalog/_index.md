@@ -61,7 +61,7 @@ See [Exploring APIs][3] for more information.
 
 Add ownership information to endpoints so your catalog is even more useful for investigations and team communication.
 
-Read [Assigning Owners and Tags][6] for more information.
+Read [Assigning Owners][6] for more information.
 
 ### Monitoring your APIs
 
