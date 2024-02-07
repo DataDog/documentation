@@ -1,5 +1,5 @@
 ---
-title: Assigning Owners and Tagging Endpoints
+title: Assigning Owners to APIs
 kind: documentation
 is_beta: true
 further_reading:
@@ -41,39 +41,6 @@ x-datadog:
 2. [Import the OpenAPI/Swagger file][2].
 
 <!--## Assess monitoring gaps TKTK -->
-
-## Tagging endpoints
-
-Tag endpoints to classify them with shared expectations. You can individually tag endpoints or tag multiple endpoints at one time.
-
-To tag an endpoint:
-
-1. From the **Explorer** page, select an endpoint to view its details.
-2. Click the Edit icon in **CUSTOM TAGS**.
-3. Add or search for a tag.
-4. Click **Apply Changes**.
-
-To tag multiple endpoints at one time:
-
-1. From the **Explorer** page, select checkboxes next to multiple endpoints.
-2. Click **Edit Tags**.
-3. Add or search for a tag.
-4. Click **Apply Changes**.
-
-When you add a tag, it appears in the list of facets beside the catalog. Click a facet to filter the list and add the tag to the **Search** query field.
-
-Use tags to describe business logic, importance, or other useful grouping information. Applying these labels can help you view and access groups of endpoints defined by your own criteria. This is helpful to create assets such as monitors and dashboards for endpoint groups with common characteristics.
-
-For example, if you want to create latency alerts for endpoints that are particularly sensitive to performance problems, tag those endpoints with a tag like `Latency sensitive`. Additionally, tag endpoints that handle sensitive data with a tag like `PII` and alert when endpoints with that tag have a `401 Unauthorized` response.
-
-Other examples of useful tags include:
-
-- `critical to feature X`
-- `newly added - V2`
-- `contains password`
-- `contains PII`
-- Business logic (for example, `payments`)
-- Specific customer group (`subscribers`)
 
 ## Further reading
 

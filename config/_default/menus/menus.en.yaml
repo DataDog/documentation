@@ -1361,7 +1361,7 @@ main:
     identifier: api_catalog_explore
     parent: api_catalog
     weight: 1
-  - name: Assigning Owners and Tagging Endpoints
+  - name: Assigning Owners
     url: /api_catalog/owners_and_tags/
     identifier: api_catalog_ownership
     parent: api_catalog
