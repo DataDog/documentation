@@ -3969,30 +3969,30 @@ main:
     parent: synthetics_search
     identifier: synthetics_search_saved_views
     weight: 501
-  - name: Explorer
+  - name: Results Explorer
     url: continuous_testing/explorer/
     parent: synthetics
-    identifier: synthetics_explorer
+    identifier: synthetics_results_explorer
     weight: 6
   - name: Search Test Batches
     url: continuous_testing/explorer/search/
-    parent: synthetics_explorer
-    identifier: continuous_testing_explorer_search
+    parent: synthetics_results_explorer
+    identifier: continuous_testing_results_explorer_search
     weight: 601
   - name: Search Test Runs
     url: continuous_testing/explorer/search_runs/
-    parent: synthetics_explorer
-    identifier: continuous_testing_explorer_search_runs
+    parent: synthetics_results_explorer
+    identifier: continuous_testing_results_explorer_search_runs
     weight: 602
   - name: Search Syntax
     url: continuous_testing/explorer/search_syntax/
-    parent: synthetics_explorer
-    identifier: continuous_testing_explorer_search_syntax
+    parent: synthetics_results_explorer
+    identifier: continuous_testing_results_explorer_search_syntax
     weight: 603
   - name: Saved Views
     url: continuous_testing/explorer/saved_views/
-    parent: synthetics_explorer
-    identifier: continuous_testing_explorer_saved_views
+    parent: synthetics_results_explorer
+    identifier: continuous_testing_results_explorer_saved_views
     weight: 604
   - name: Test Coverage
     url: synthetics/test_coverage
@@ -4100,10 +4100,10 @@ main:
     parent: continuous_testing
     identifier: continuous_testing_testing_tunnel
     weight: 3
-  - name: Explorer
+  - name: Results Explorer
     url: continuous_testing/explorer/
     parent: continuous_testing
-    identifier: continuous_testing_explorer
+    identifier: continuous_testing_results_explorer
     weight: 4
   - name: Metrics
     url: synthetics/metrics/
