@@ -57,11 +57,11 @@ Use the API Catalog Explorer page to navigate through all the endpoints.
 
 See [Exploring APIs][3] for more information.
 
-### Setting owners and tags
+### Assigning owners
 
-Add meaningful tags and ownership information to endpoints so your catalog is even more useful for investigations and team communication.
+Add ownership information to endpoints so your catalog is even more useful for investigations and team communication.
 
-Read [Setting Owners and Tags][6] for more information.
+Read [Assigning Owners and Tags][6] for more information.
 
 ### Monitoring your APIs
 
@@ -112,10 +112,9 @@ Partner APIs
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apis/catalog
-[2]: /tracing/service_catalog/
-[3]: /tracing/api_catalog/explore_apis/
-[6]: /tracing/api_catalog/owners_and_tags/
-[7]: /tracing/api_catalog/monitor_apis/
+[3]: /api_catalog/explore_apis/
+[6]: /api_catalog/owners_and_tags/
+[7]: /api_catalog/monitor_apis/
 [8]: /tracing/trace_collection/
-[9]: /tracing/api_catalog/add_entries
-[10]: /tracing/api_catalog/add_metadata
+[9]: /api_catalog/add_entries
+[10]: /api_catalog/add_metadata
