@@ -75,6 +75,8 @@ Datadog recommends using CloudFormation because it's automatic and easier if you
    - **First/Second/Third Namespace**: Specify the namespaces you wish to include or exclude. Note: The namespace values have to precisely match the values in the namespace column in AWS's documentation. For example, AWS/EC2.
 6. Check the acknowledgment box that states, "I acknowledge that AWS CloudFormation might create IAM resources with custom names."
 7. Click **Create Stack**.
+
+**Note**: Metric streaming to Datadog currently only supports OpenTelemetry v0.7 output format.
  
 ### Results
  
@@ -100,6 +102,8 @@ To set up metric streams using the AWS Console, create a [CloudWatch Metric Stre
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/percentiles.png" alt="Percentiles" responsive="true" style="width:60%;">}}
 5. Assign a name to your metric stream.
 6. Click **Create metric stream**.
+
+**Note**: Metric streaming to Datadog currently only supports OpenTelemetry v0.7 output format.
  
 ### Results
  
@@ -139,6 +143,7 @@ If you set streaming up through the [AWS Console](?tab=awsconsole#installation):
 Once the resources are deleted, wait for five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog's [AWS integration page][4] and verify that the disabled regions are not displayed under **CloudWatch Metric Streams** for the specified AWS account.
 
 ## Troubleshooting
+
 To resolve any issues encountered while setting up Metric Streams or the associated resources, see [AWS Troubleshooting][5].
 
 ## Further Reading
