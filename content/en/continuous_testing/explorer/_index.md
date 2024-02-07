@@ -69,7 +69,7 @@ For more information about test runs, see [Search Test Runs][6].
 
 The Results Explorer displays batches of tests run by [Continuous Testing and your CI/CD provider][2]. Every batch corresponds with a call to the Datadog API (through one of your [CI/CD integrations][2], the [datadog-ci][3] NPM package, or directly through the API endpoint) and triggers one or several test executions. 
 
-{{< img src="continuous_testing/open_sidepanel.png" alt="Side panel in the CI Results Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/open_sidepanel.png" alt="Side panel in the Synthetic Monitoring & Continuous Testing Explorer" style="width:100%;">}}
 
 1. Click on a batch to open a side panel containing batch CI/CD metadata and batch test results. 
 2. Explore the test executions performed as part of the batch and pinpoint test failures. 
