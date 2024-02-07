@@ -136,12 +136,49 @@ esbuild.build({
   outfile: 'out.js',
   plugins: [ddPlugin],
   platform: 'node', // allows built-in modules to be required
-  target: ['node16']
+  target: ['node16'],
+  external: [
+    // esbuild cannot bundle native modules
+    '@datadog/native-metrics',
+
+    // required if you use profiling
+    '@datadog/pprof',
+
+    // required if you use Datadog security features
+    '@datadog/native-appsec',
+    '@datadog/native-iast-taint-tracking',
+    '@datadog/native-iast-rewriter',
+
+    // required if you encounter graphql errors during the build step
+    'graphql/language/visitor',
+    'graphql/language/printer',
+    'graphql/utilities'
+  ]
 }).catch((err) => {
   console.error(err)
   process.exit(1)
 })
 ```
+
+**Note**: Due to the usage of native modules in the tracer, which are compiled C++ code, (usually ending with a `.node` file extension), you need to add entries to your `external` list. Currently native modules used in the Node.js tracer live inside of `@datadog` prefixed packages. This will also require that you ship a `node_modules/` directory alongside your bundled application. You don't need to ship your entire `node_modules/` directory as it would contain many superfluous packages that should be contained in your bundle.
+
+To generate a smaller `node_modules/` directory with only the required native modules, (and their dependencies) you can first determine the versions of packages that you need, then create a temporary directory to install them into, and copy the resulting `node_modules/` directory from it. For example:
+
+```sh
+cd path/to/project
+npm ls @datadog/native-metrics
+# dd-trace@5.4.3-pre ./dd-trace-js
+# └── @datadog/native-metrics@2.0.0
+$ npm ls @datadog/pprof
+# dd-trace@5.4.3-pre ./dd-trace-js
+# └── @datadog/pprof@5.0.0
+mkdir temp && cd temp
+npm init -y
+npm install @datadog/native-metrics@2.0.0 @datadog/pprof@5.0.0
+cp -R ./node_modules path/to/bundle
+```
+
+At this stage you should be able to deploy your bundle, (which is your application code and most of your dependencies), with the `node_modules/` directory, which contains the native modules and their dependencies.
 
 ## Configuration
 

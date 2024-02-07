@@ -796,11 +796,6 @@ main:
     url: developers/community/libraries/
     parent: dev_community
     weight: 801
-  - name: Community Office Hours
-    identifier: dev_community_office_hours
-    url: developers/community/office_hours/
-    parent: dev_community
-    weight: 802
   - name: Guides
     url: developers/guide/
     parent: dev_tools
@@ -1042,26 +1037,31 @@ main:
     parent: metrics_custom_metrics
     identifier: metrics_modifiers
     weight: 101
+  - name: Historical Metrics Ingestion
+    url: metrics/custom_metrics/historical_metrics/
+    parent: metrics_custom_metrics
+    identifier: metrics_historical_metrics
+    weight: 102
   - name: 'Submission - Agent Check '
     url: metrics/custom_metrics/agent_metrics_submission/
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_agent
-    weight: 102
+    weight: 103
   - name: Submission - DogStatsD
     url: metrics/custom_metrics/dogstatsd_metrics_submission/
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_dogstatsd
-    weight: 103
+    weight: 104
   - name: Submission - Powershell
     url: metrics/custom_metrics/powershell_metrics_submission
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_powershell
-    weight: 104
+    weight: 105
   - name: 'Submission - API '
     url: api/latest/metrics/#submit-metrics
     parent: metrics_custom_metrics
     identifier: dev_tools_metrics_api
-    weight: 105
+    weight: 106
   - name: Send OpenTelemetry Metrics to Datadog
     url: opentelemetry/otel_metrics/
     parent: metrics_top_level
@@ -2093,11 +2093,31 @@ main:
     parent: tracing_trace_collection
     identifier: automatic_instrumentation
     weight: 201
+  - name: Using Single Step Instrumentation
+    url: tracing/trace_collection/automatic_instrumentation/single-step-apm/
+    parent: automatic_instrumentation
+    identifier: single_step_apm
+    weight: 2011
+  - name: Using Datadog Tracing Libraries
+    url: tracing/trace_collection/automatic_instrumentation/dd_libraries/
+    parent: automatic_instrumentation
+    identifier: auto_dd_libraries
+    weight: 2012
   - name: Custom Instrumentation
     url: tracing/trace_collection/custom_instrumentation/
     parent: tracing_trace_collection
     identifier: custom_instrumentation
     weight: 202
+  - name: Using Datadog Libraries
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/
+    parent: custom_instrumentation
+    identifier: tracing_custom_inst
+    weight: 2021
+  - name: Using OpenTelemetry APIs
+    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+    parent: custom_instrumentation
+    identifier: tracing_otel_inst
+    weight: 2022
   - name: Library Compatibility
     url: tracing/trace_collection/compatibility/
     parent: tracing_trace_collection
@@ -2327,6 +2347,11 @@ main:
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_suspect_commits
     weight: 1003
+  - name: Execution Replay
+    url: tracing/error_tracking/execution_replay
+    parent: tracing_error_tracking
+    identifier: tracing_error_tracking_execution_replay
+    weight: 1004
   - name: Data Security
     url: tracing/configure_data_security/
     parent: tracing
@@ -3577,22 +3602,42 @@ main:
     url: security/cloud_security_management/setup/csm_enterprise
     parent: csm_setup
     identifier: csm_setup_enterprise
-    weight: 101
+    weight: 10000
+  - name: Cloud Accounts
+    url: security/cloud_security_management/setup/csm_enterprise/cloud_accounts
+    parent: csm_setup_enterprise
+    identifier: csm_setup_enterprise_cloud
+    weight: 1000000
+  - name: Agent
+    url: security/cloud_security_management/setup/csm_enterprise/agent
+    parent: csm_setup_enterprise
+    identifier: csm_setup_enterprise_agent
+    weight: 1000001
   - name: CSM Pro
     url: security/cloud_security_management/setup/csm_pro
     parent: csm_setup
     identifier: csm_setup_pro
-    weight: 102
-  - name: CSM Workload Security
-    url: security/cloud_security_management/setup/csm_workload_security
+    weight: 10005
+  - name: Cloud Accounts
+    url: security/cloud_security_management/setup/csm_pro/cloud_accounts
+    parent: csm_setup_pro
+    identifier: csm_setup_pro_cloud
+    weight: 1000000
+  - name: Agent
+    url: security/cloud_security_management/setup/csm_pro/agent
+    parent: csm_setup_pro
+    identifier: csm_setup_pro_agent
+    weight: 1000001
+  - name: CSM Cloud Workload Security
+    url: security/cloud_security_management/setup/csm_cloud_workload_security
     parent: csm_setup
-    identifier: csm_setup_workload_security
-    weight: 103
-  - name: CSM on Windows
-    url: security/cloud_security_management/setup/windows
-    parent: csm_setup
-    identifier: csm_setup_windows
-    weight: 104
+    identifier: csm_setup_cloud_workload_security
+    weight: 10010
+  - name: Agent
+    url: security/cloud_security_management/setup/csm_cloud_workload_security/agent
+    parent: csm_setup_cloud_workload_security
+    identifier: csm_setup_cloud_workload_security_agent
+    weight: 1000000
   - name: Threats
     url: security/threats/
     parent: csm

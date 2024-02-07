@@ -280,7 +280,7 @@ extensions:
 
 ### Example Application Definition
 
-{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
 kind: application
 metadata:
@@ -354,7 +354,7 @@ extensions:
 
 ### Example Service Definition
 
-{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
 kind: service
 metadata:

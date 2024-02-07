@@ -131,7 +131,7 @@ Example of a valid JSON file:
         "ChargeDescription": "Video Usage",
         "ChargePeriodStart": "2023-01-01",
         "ChargePeriodEnd": "2023-12-31",
-        "BilledCost": 100,
+        "BilledCost": 100.00,
         "BillingCurrency": "USD"
     }
 ]
@@ -146,7 +146,7 @@ Example of an invalid JSON file:
         "chargedescription": "Video Usage",
         "chargeperiodstart": "2023-01-01",
         "chargeperiodend": "2023-12-31",
-        "billedcost": 100,
+        "billedcost": 100.00,
         "billingcurrency": "USD"
     }
 ]
@@ -213,7 +213,7 @@ Example of a valid JSON file:
         "ChargeDescription": "Video Usage",
         "ChargePeriodStart": "2023-01-01",
         "ChargePeriodEnd": "2023-12-31",
-        "BilledCost": 100,
+        "BilledCost": 100.00,
         "BillingCurrency": "USD",
         "Tags": {
             "team": "web",
