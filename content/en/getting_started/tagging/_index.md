@@ -108,8 +108,10 @@ After you have [assigned tags][7] at the host and [integration][9] level, start 
 | [SLOs][21]           | Search for SLOs, grouped metric-based SLOs, and grouped monitor-based SLOs.                       |
 | [Developers][22]     | Pull information or setup different areas in the UI with the API.                                 |
 | [Billing][23]        | Report on Datadog usage by choosing up to three tags, for example: `env`, `team`, and `account_id`. |
+| [CI Visibility][24]  | Filter and group test runs or pipeline executions with the CI Visibility Explorer. |
 
 For more information, see [Using Tags][1].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -137,3 +139,4 @@ For more information, see [Using Tags][1].
 [21]: /getting_started/tagging/using_tags/?tab=manageslos#service-level-objectives
 [22]: /getting_started/tagging/using_tags/#developers
 [23]: /account_management/billing/usage_attribution/
+[24]: /getting_started/tagging/using_Tags/#ci-visibility
