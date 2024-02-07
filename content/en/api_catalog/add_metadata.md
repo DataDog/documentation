@@ -20,7 +20,7 @@ You can add metadata to APIs through the Datadog UI or API, or use automated pip
 API Catalog supports OpenAPI 2 and 3 as the format for defining APIs. 
 
 Datadog supports custom OpenAPI fields to help manage metadata:
-- **API owner** Add the following to the top level of the OpenAPI file:
+- **API owner**: Add the following to the top level of the OpenAPI file:
   ```yaml
   x-datadog:
    teamHandle: dd-team
@@ -28,7 +28,7 @@ Datadog supports custom OpenAPI fields to help manage metadata:
 
 Example OpenAPI file:
 
-```yaml
+{{< code-block lang="yaml" disable_copy="true" >}}
 openapi: 3.0.2
 info:
  title: API Name
@@ -61,7 +61,7 @@ paths:
          description: Unauthorized operation
        '500':
          description: An internal server error
-```
+{{< /code-block >}}
 
 ## Further reading
 
