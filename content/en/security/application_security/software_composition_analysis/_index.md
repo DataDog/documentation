@@ -41,7 +41,7 @@ Since Datadog SCA covers your software development life cycle end-to-end, the li
 
 ## Explore and manage SCA vulnerabilities
 
-The [Vulnerability Explorer][3] shows a complete list of the open source libraries detected by Datadog SCA used by your application at runtime, and reports security vulnerabilities associated with them. Datadog does **not** scan your source code, and the analysis is based on how your application behaves during runtime. The open source libraries are monitored from the code commit to the repository (static point of view), to the applications running in production (runtime point of view). 
+The [Vulnerability Explorer][3] shows a complete list of the open source libraries detected by Datadog SCA and reports security vulnerabilities associated with them. Datadog SCA leverages two techniques to analyze your services: static code analysis in your repositories (static point of view), and runtime analysis in your deployed services (runtime point of view). The result of combining both techniques is that the open source libraries are monitored end-to-end from the code commit to the repository (static point of view), to the applications running in production (runtime point of view).
 
 To switch to the code repository commit point of view, click on the **Static** button. The static view shows vulnerabilities from the _source code_ in your repositories. To switch to the _real-time_ point of view to the applications already running, click on the **Runtime** button. The runtime view is the live view of your services being monitored by Datadog.
 
