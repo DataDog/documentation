@@ -12,7 +12,7 @@ further_reading:
   text: 'Learn about Error Tracking for Backend Services'
 aliases:
   - /tracing/error_tracking/executional_context
-  - /tracing/error_tracking/exception_replay
+  - /tracing/error_tracking/execution_replay/
 ---
 
 <div class="alert alert-info">
