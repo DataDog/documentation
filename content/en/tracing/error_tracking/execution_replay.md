@@ -41,14 +41,14 @@ Executional Replay is only available in APM Error Tracking. Error Tracking for L
 
 ### Hiding sensitive data
 
-By default, variable data linked to specific identifiers deemed sensitive, such as `password` and `accessToken`, is automatically redacted. See the full [list of redacted identifiers][1].
+By default, variable data linked to specific identifiers deemed sensitive, such as `password` and `accessToken`, are automatically redacted. See the full [list of redacted identifiers][1].
 
 You can also scrub variable data for PII by:
 - [Creating custom identifier redaction][2].
 - [Redacting based on specific classes or types][3].
-- Creating a [Sensitive Data Scanner][4] rule and apply it to Logs that match the query `dd_source:debugger`.
+- Creating a [Sensitive Data Scanner][4] rule and applying it to logs that match the query `dd_source:debugger`.
 
-Learn more about how you can scrub variable data [here][5].
+To learn more about scrubbing variable data, see [Dynamic Instrumentation Sensitive Data Scrubbing][5].
 
 ## Getting started
 
