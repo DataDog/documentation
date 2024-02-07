@@ -61,6 +61,8 @@ EC2 or Lambda metrics in the stream could increase the number of billable hosts 
 {{% tab "CloudFormation" %}}
  
 Datadog recommends using CloudFormation because it's automatic and easier if you are using multiple AWS regions.
+
+**Note**: Metric streaming to Datadog currently only supports OpenTelemetry v0.7 output format.
  
 1. On your Datadog site, go to the **Configuration** tab of the [AWS integration page][1].
 2. Click on the AWS account to set up metric streaming.
@@ -75,8 +77,6 @@ Datadog recommends using CloudFormation because it's automatic and easier if you
    - **First/Second/Third Namespace**: Specify the namespaces you wish to include or exclude. Note: The namespace values have to precisely match the values in the namespace column in AWS's documentation. For example, AWS/EC2.
 6. Check the acknowledgment box that states, "I acknowledge that AWS CloudFormation might create IAM resources with custom names."
 7. Click **Create Stack**.
-
-**Note**: Metric streaming to Datadog currently only supports OpenTelemetry v0.7 output format.
  
 ### Results
  
@@ -92,6 +92,8 @@ Once the stack is successfully created, wait five minutes for Datadog to recogni
 {{% tab "AWS Console" %}}
  
 To set up metric streams using the AWS Console, create a [CloudWatch Metric Stream][2] for each AWS region.
+
+**Note**: Metric streaming to Datadog currently only supports OpenTelemetry v0.7 output format.
  
 1. Choose the **Quick AWS Partner Setup** and select **Datadog** as the AWS Partner destination from the dropdown menu.
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/metric-stream-partner-setup.png" alt="Cloudwatch metric stream quick partner setup" responsive="true" style="width:60%;">}}
@@ -102,8 +104,6 @@ To set up metric streams using the AWS Console, create a [CloudWatch Metric Stre
    {{< img src="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/percentiles.png" alt="Percentiles" responsive="true" style="width:60%;">}}
 5. Assign a name to your metric stream.
 6. Click **Create metric stream**.
-
-**Note**: Metric streaming to Datadog currently only supports OpenTelemetry v0.7 output format.
  
 ### Results
  
