@@ -17,18 +17,17 @@ Error Tracking enables you to:
 - Follow issues over time to know when they first started, if they are still ongoing, and how often they are occurring.
 - Collect all the necessary context in one place to facilitate troubleshooting.
 
-## Supported products
+## Supported error sources
 
-Error Tracking can ingest errors from the following Datadog products:
+Error Tracking can ingest errors from APM, Logs, and Real User Monitoring. Additional features are available depending on the source of the error. For example, in errors originating from an APM trace, the [Execution Replay][4] feature automatically captures production variable values. 
+
+For details, see the product-specific Error Tracking documentation:
 
 - [APM][1]
 - [Logs][2]
 - [Real User Monitoring][3]
 
-<!-- link to error tracking explorer docs -->
-
-<!-- add the above links to further reading as well -->
-
-[1]: tracing/error_tracking
-[2]: logs/error_tracking
-[3]: real_user_monitoring/error_tracking
+[1]: /tracing/error_tracking
+[2]: /logs/error_tracking
+[3]: /real_user_monitoring/error_tracking
+[4]: /tracing/error_tracking/execution_replay
