@@ -1,26 +1,31 @@
 ---
-title: "Component: EC2"
+title: "EC2 Component"
 kind: guide
 ---
+## Overview
 
-{{< img src="cloudcraft/components-aws/ec2/component-ec2-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the EC2 AWS component." responsive="true" style="width:100%;">}}
+Use the EC2 component to represent elastic compute instances from your Amazon Web Services architecture.
 
-The **EC2** block component is used to represent elastic compute instances from your Amazon Web Services architecture with Cloudcraft.
+{{< img src="cloudcraft/components-aws/ec2/component-ec2-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the EC2 AWS component." responsive="true" style="width:60%;">}}
 
 ## Toolbar
 
-The toolbar is displayed when selecting a component and allow you to customize the visual of your EC2 block to your liking.
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color.** Select a predefined color or enter the hexadecimal value of the color for the component and its accent color. The component can use the same color for both 2D and 3D view, or different colors for each.
-- **Transparency.** Choose if the EC2 block will be solid or semi-transparent.
-- **Platform.** Select the platform used in the elastic compute instance. When choosing a platform with a license fee, the cost estimate will include the fee.
-- **Instance type.** The type of the instance. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
-- **Size.** The size of the instance. As with instance type, the hardware details shown in the toolbar change to reflect the size.
-- **Billing option.** The pricing model used for the instance. Supported options are On-Demand, Reserved Instance, and Spot Instance at the moment.
+- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent color. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- **Transparency**: Choose if the EC2 block is solid or semi-transparent.
+- **Platform**: Select the platform used in the elastic compute instance. When choosing a platform with a license fee, the cost estimate is included in the fee.
+- **Instance type**: The type of the instance. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
+- **Size**: The size of the instance. As with instance type, the hardware details shown in the toolbar change to reflect the size.
+- **Billing option**: The pricing model used for the instance. Supported options are On-Demand, Reserved Instance, and Spot Instance at the moment.
 
 ## API
 
-In [the Cloudcraft API][1], an EC2 block is represented in JSON.
+Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
+
+### Schema
+
+The following is an example JSON of a EC2 block:
 
 ```json
 {
@@ -49,27 +54,27 @@ In [the Cloudcraft API][1], an EC2 block is represented in JSON.
 }
 ```
 
-- **type: ec2**. The type of component.
-- **id: string**. A unique identifier for the component in the `uuid` format.
-- **region: string**. The AWS region this EC2 instance is deployed in. With the exception of `cn-` regions, all global regions are supported.
-- **mapPos: [number, number]**. The position of the component in the blueprint, expressed as a x,y coordinate pair.
-- **transparent: boolean**. If true, the component will be semi-transparent in 3D view. Has no effect in 2D view.
-- **platform: string**. The platform used for the instance. See below for more information.
-- **instanceType: string**. The type of the instance. See below for more information.
-- **instanceSize: string**. The size used for the instance. See below for more information.
-- **billingOptions: object**. The pricing model used for the instance in AWS. See below for more information.
-- **color: object**. The fill color for the component body.
-  - **isometric: string**. Fill color for the component in 3D view. Must be an hexadecimal color.
-  - **2d: string**. Fill color for the component in 2D view. Must be an hexadecimal color.
-- **accentColor: object**. The accent color used to display the component logo on top of the block.
-  - **isometric: string**. Accent color for the component in 3D view. Must be an hexadecimal color.
-  - **2d: string**. Accent color for the component in 2D view. Must be an hexadecimal color.
-- **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
-- **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
+- **type: ec2**: The type of component.
+- **id: string**: A unique identifier for the component in the `uuid` format.
+- **region: string**: The AWS region this EC2 instance is deployed in. All global regions are supported except `cn-` regions.
+- **mapPos: [number, number]**: The position of the component in the blueprint, expressed as an x- and y-coordinate pair.
+- **transparent: boolean**: If `true`, the component is semi-transparent in the 3D view. It has no effect in the 2D view.
+- **platform: string**: The platform used for the instance. See [Accepted values for the platform](#accepted-values-for-the-platform) for more information.
+- **instanceType: string**: The type of the instance. See [Accepted values for instanceType](#accepted-values-for-instancetype) for more information.
+- **instanceSize: string**: The size used for the instance. See [Accepted values for instanceSize](#accepted-values-for-instancesize) for more information.
+- **billingOptions: object**: The pricing model used for the instance in AWS. See [Accepted values for billingOptions](#accepted-values-for-billingoptions) for more information.
+- **color: object**: The fill color for the component body.
+  - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The fill color for the component in the 2D view. Must be a hexadecimal color.
+- **accentColor: object**: The accent color used to display the component logo on top of the block.
+  - **isometric: string**: The accent color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The accent color for the component in the 2D view. Must be a hexadecimal color.
+- **link: uri**: Link the component to another diagram in the `blueprint://ID` format or to an external website in the `https://LINK` format.
+- **locked: boolean**. If `true`, changes to the component through the application are disabled until unlocked.
 
 The EC2 component can be added to [VPCs][2], [security groups][3], [auto scaling groups][4], and [subnets][5].
 
-## Accepted values for platform
+## Accepted values for the platform
 
 The `platform` key accepts the following values:
 
@@ -101,7 +106,7 @@ The `billingOptions` key accepts all billing options currently accepted by Cloud
 - Reserved instance
 - Spot instance
 
-Each option is represented differently inside the `billingOptions` object.
+Each option is represented differently in the `billingOptions` object.
 
 ### On-demand
 
@@ -114,8 +119,8 @@ Each option is represented differently inside the `billingOptions` object.
 }
 ```
 
-- **type: od**. The billing option value for on-demand is always `od`.
-- **utilization: number**. A floating number representing how much the instance will be used in a given month.
+- **type: od**: The billing option value for on-demand is always `od`.
+- **utilization: number**: A floating number representing how much the instance is used in a given month.
 
 ### Reserved instance
 
@@ -130,10 +135,10 @@ Each option is represented differently inside the `billingOptions` object.
 }
 ```
 
-- **type: ri**. The billing option value for a reserved instance is always `ri`.
-- **leaseContractLenght: number**. The lenght of time the instance will be reserved. Accepted values are 12 or 36.
-- **purchaseOption: string**. The purchase option for the instance. Accepted values are "No Upfront," "Partial Upfront," and "All Upfront."
-- **offeringClass: string**. The offering class for the instance. Accepted values are "standard" and "convertible."
+- **type: ri**: The billing option value for a reserved instance is always `ri`.
+- **leaseContractLenght: number**: The length of time the instance is reserved. Accepted values are 12 or 36.
+- **purchaseOption: string**: The purchase option for the instance. Accepted values are `No Upfront`, `Partial Upfront`, and `All Upfront`.
+- **offeringClass: string**: The offering class for the instance. Accepted values are `standard` and `convertible`.
 
 ### Spot instance
 
@@ -146,11 +151,11 @@ Each option is represented differently inside the `billingOptions` object.
 }
 ```
 
-- **type: si**. The billing option value for spot instance is always `si`.
-- **utilization: number**. A floating number representing how much the instance will be used in a given month.
+- **type: si**: The billing option value for spot instance is always `si`.
+- **utilization: number**: A floating number representing how much the instance is used in a given month.
 
 [1]: https://developers.cloudcraft.co/
-[2]: https://help.cloudcraft.co/article/118-component-vpc
-[3]: https://help.cloudcraft.co/article/119-component-security-group
-[4]: https://help.cloudcraft.co/article/113-component-auto-scaling
+[2]: /cloudcraft/components-aws/vpc/
+[3]: /cloudcraft/components-aws/security-group/
+[4]: /cloudcraft/components-aws/auto-scaling-group/
 [5]: https://help.cloudcraft.co/article/120-component-subnet

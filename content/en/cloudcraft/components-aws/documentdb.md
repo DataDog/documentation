@@ -1,27 +1,32 @@
 ---
-title: "Component: DocumentDB"
-kind: guide
+title: "DocumentDB Component"
+kind: documentation
 ---
+## Overview
 
-{{< img src="cloudcraft/components-aws/documentdb/component-documentdb-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'DocumentDB' AWS component." responsive="true" style="width:100%;">}}
+Use the DocumentDB component to represent DocumentDB clusters from your Amazon Web Services architecture.
 
-The **DocumentDB** component is used to represent document database clusters from your Amazon Web Services architecture with Cloudcraft.
+{{< img src="cloudcraft/components-aws/documentdb/component-documentdb-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'DocumentDB' AWS component." responsive="true" style="width:60%;">}}
 
 ## Toolbar
 
-The toolbar is displayed when selecting a component. It allows you to customize parts of your component and its visual to your liking.
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**. Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both 2D and 3D view, or different colors for each.
-- **Role**. Select the role of the DocumentDB instance. Can be writer or reader.
-- **Instance type**. The type of the instance. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
-- **Size**. The size of the database cluster. As with instance type, the hardware details shown in the toolbar change to reflect the size.
-- **Storage (GiB)**. Amount of storage provisioned for the cluster, in gibibytes. Only available for the writer role.
-- **Snapshots (GiB)**. Amount of storage provisioned for snapshots, in gibibytes. Only available for the writer role.
-- **IOPS (Millions)**. The monthly I/O limit for the cluster, in the millions. Only available for the writer role.
+- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- **Role**: Select the role of the DocumentDB instance. Can be writer or reader.
+- **Instance type**: The type of the instance. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
+- **Size**: The size of the database cluster. As with instance type, the hardware details shown in the toolbar change to reflect the size.
+- **Storage (GiB)**: Amount of storage provisioned for the cluster, in gibibytes. Only available for the writer role.
+- **Snapshots (GiB)**: Amount of storage provisioned for snapshots, in gibibytes. Only available for the writer role.
+- **IOPS (Millions)**: The monthly I/O limit for the cluster, in the millions. Only available for the writer role.
 
 ## API
 
-In [the Cloudcraft API][1], a DocumentDB instance is represented in JSON.
+Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. 
+
+### Schema
+
+The following is an example JSON object of a DocumentDB component:
 
 ```json
 {
@@ -48,24 +53,24 @@ In [the Cloudcraft API][1], a DocumentDB instance is represented in JSON.
 }
 ```
 
-- **type: docdb**. The type of component.
-- **id: string**. A unique identifier for the component in the `uuid` format.
-- **region: string**. The AWS region the RDS instance is deployed in. Except for `cn-` regions, all global regions are supported.
-- **mapPos: [number, number]**. The position of the component in the blueprint, expressed as a x,y coordinate pair.
-- **role: string**. The role used for the DocumentDB instance. Accepted values are `writer` and `reader`.
-- **instanceType: string**. The type of the instance. Accepted values are `r4`, `r5`, and `t3`.
-- **instanceSize: string**. The size of the database cluster. See below for more information.
-- **storage: number**. Amount of storage provisioned for the cluster, in gibibytes. Only applicable if `role` is set to `writer`.
-- **snapshots: number**. Amount of storage provisioned for snapshots, in gibibytes. Only applicable if `role` is set to `writer`.
-- **iops: number**. The monthly I/O limit for the cluster, in the millions. Only applicable if `role` is set to `writer`.
+- **type: docdb**: The type of component.
+- **id: string**: A unique identifier for the component in the `uuid` format.
+- **region: string**: The AWS region the RDS instance is deployed in. All global regions are supported except `cn-` regions.
+- **mapPos: [number, number]**: The position of the component in the blueprint, expressed as an x- and y-coordinate pair.
+- **role: string**: The role used for the DocumentDB instance. Accepted values are `writer` and `reader`.
+- **instanceType: string**: The type of the instance. Accepted values are `r4`, `r5`, and `t3`.
+- **instanceSize: string**: The size of the database cluster. See [Accepted values for instanceSize](#accepted-values-for-instancesize) for more information.
+- **storage: number**: Amount of storage provisioned for the cluster, in gibibytes. Only applicable if `role` is set to `writer`.
+- **snapshots: number**: Amount of storage provisioned for snapshots, in gibibytes. Only applicable if `role` is set to `writer`.
+- **iops: number**: The monthly I/O limit for the cluster, in the millions. Only applicable if `role` is set to `writer`.
 - **color: object**. The fill color for the component body.
-  - **isometric: string**. Fill color for the component in 3D view. Must be a hexadecimal color.
-  - **2d: string**. Fill color for the component in 3D view. Must be a hexadecimal color.
-- **accentColor: object**. The accent color used to display the component logo on the block.
-  - **isometric: string**. Accent color for the component in 3D view. Must be a hexadecimal color.
-  - **2d: string**. Accent color for the component in 3D view. Must be a hexadecimal color.
-- **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
-- **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
+  - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
+- **accentColor: object**: The accent color used to display the component logo on the block.
+  - **isometric: string**. The accent color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**. The accent color for the component in the 3D view. Must be a hexadecimal color.
+- **link: uri**. Link the component to another diagram in the `blueprint://ID` format or to an external website in the `https://LINK` format.
+- **locked: boolean**. If `true`, changes to the component through the application are disabled until unlocked.
 
 The DocumentDB component can be added to [VPCs][2], [security groups][3], and [subnets][4].
 
@@ -78,6 +83,6 @@ medium, large, xlarge, 2xlarge, 4xlarge, 8xlarge, 12xlarge, 16xlarge, 24xlarge
 ```
 
 [1]: https://developers.cloudcraft.co/
-[2]: https://help.cloudcraft.co/article/118-component-vpc
-[3]: https://help.cloudcraft.co/article/119-component-security-group
+[2]: /cloudcraft/components-aws/vpc/
+[3]: /cloudcraft/components-aws/security-group/
 [4]: https://help.cloudcraft.co/article/120-component-subnet
