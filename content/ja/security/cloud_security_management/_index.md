@@ -49,7 +49,7 @@ title: Cloud Security Management
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した __c9403c3a79a9d34cb98b87ddb28cc094__ Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、Cloud Security Management Misconfigurations はサポートされていません。</div>
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、Cloud Security Management Misconfigurations はサポートされていません。</div>
 {{< /site-region >}}
 
 Datadog Cloud Security Management (CSM) は、クラウドインフラストラクチャー全体にわたるリアルタイムの脅威検出と継続的な構成監査を、シームレスなコラボレーションと迅速な修復のための統合ビューで実現します。観測可能性データを活用することで、セキュリティチームは、攻撃フロー全体をトレースして脅威の影響を特定し、脆弱性がトリガーされたリソース所有者を特定することができます。
