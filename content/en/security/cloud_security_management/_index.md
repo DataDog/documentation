@@ -44,7 +44,7 @@ algolia:
   tags: ['inbox']
 cascade:
     algolia:
-        subcategory: Cloud Security Management
+      subcategory: Cloud Security Management
 ---
 
 {{< site-region region="gov" >}}
