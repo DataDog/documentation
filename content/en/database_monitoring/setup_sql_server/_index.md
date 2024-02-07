@@ -28,7 +28,7 @@ For setup instructions, select your hosting type:
 
 ### Agent integration overhead
 
-Agent integration overhead tests were made on an Amazon EC2 machine `c5.xlarge` instance (4 VCPU/ 8GB RAM). The database used for the tests was a SQL Server 2019 Standard Edition instance running on an Amazon RDS `db.m5.large` instance (2 VCPU/ 8GB RAM). The database was running a TPC-C workload with 20 warehouses.
+Agent integration overhead tests were run on an Amazon EC2 machine `c5.xlarge` instance (4 vCPUs, 8 GB RAM). The database used for the tests was a SQL Server 2019 Standard Edition instance running on an Amazon RDS `db.m5.large` instance (2 vCPUs, 8 GB RAM). The database was running a TPC-C workload with 20 warehouses.
 
 | Setting                              | Collection Interval |
 | ------------------------------------ | ------------------- |
@@ -38,7 +38,7 @@ Agent integration overhead tests were made on an Amazon EC2 machine `c5.xlarge` 
 | Settings Collection Interval         | 600s                |
 
 * Agent Test version: `7.50.2`
-* CPU: `~ 0.84%` of the CPU used on average
-* Memory: `~ 298 MiB` of RAM used (RSS memory)
-* Network bandwidth: `~ 33.1 KiB/s` ▼ | `20.3 KiB/s` ▲
-* Agent query overhead on database: `~ 1%` CPU Time
+* CPU: ~0.84% of the CPU used on average
+* Memory: ~298 MiB of RAM used (RSS memory)
+* Network bandwidth: ~33.1 KB/s ▼ | 20.3 KB/s ▲
+* Agent query overhead on database: ~1% CPU Time
