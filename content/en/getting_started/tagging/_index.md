@@ -139,4 +139,4 @@ For more information, see [Using Tags][1].
 [21]: /getting_started/tagging/using_tags/?tab=manageslos#service-level-objectives
 [22]: /getting_started/tagging/using_tags/#developers
 [23]: /account_management/billing/usage_attribution/
-[24]: /getting_started/tagging/using_Tags/#ci-visibility
+[24]: /getting_started/tagging/using_tags/#ci-visibility
