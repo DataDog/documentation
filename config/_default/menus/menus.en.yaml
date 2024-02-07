@@ -1356,11 +1356,16 @@ main:
     parent: platform_heading
     identifier: error_tracking
     weight: 80000
+  - name: Explorer
+    url: error_tracking/explorer
+    parent: error_tracking
+    identifier: error_tracking_explorer
+    weight: 1
   - name: Identify Suspect Commits
     url: error_tracking/suspect_commits
     parent: error_tracking
     identifier: error_tracking_suspect_commits
-    weight: 1
+    weight: 2
   - name: Service Level Objectives
     url: service_management/service_level_objectives/
     pre: slos
