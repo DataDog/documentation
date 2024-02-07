@@ -1,32 +1,28 @@
 ---
-title: "Component: Load balancer"
-kind: guide
+title: "Load Balancer Component"
+kind: documentation
 ---
 
-{{< img src="cloudcraft/components-azure/load-balancer/component-load-balancer-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing virtual machine components interconnected to an Azure load balancer component." responsive="true" style="width:100%;">}}
+## Overview
 
-You can use the **Load Balancer** component to represent and visualize load balancers from your Azure environment with Cloudcraft.
+You can use the Load Balancer component to represent and visualize load balancers from your Azure environment.
+
+{{< img src="cloudcraft/components-azure/load-balancer/component-load-balancer-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing virtual machine components interconnected to an Azure load balancer component." responsive="true" style="width:60%;">}}
 
 ## Toolbar
 
-To configure or customize how your load balancer looks in a diagram, you can use the toolbar that appears when selecting a component inside the application.
+Use the toolbar to configure and customize the component. The following options are available:
 
-### Option
-
-{{< img src="cloudcraft/components-azure/load-balancer/component-load-balancer-toolbar.png" alt="Screenshot of a Cloudcraft interface showing load balancer configuration options, including region settings with pricing information." responsive="true" style="width:100%;">}}
-
-For the **Load Balancer** component, the following options are available:
-
-- **Color**. Select accent and fill colors for the body of the component in 3D view.
-- **SKU**. Select the service level tier for your load balancer.
-- **Tier**. Select the network tier for your load balancer. This option is not available for Basic and Gateway SKUs.
-- **Number of rules**. Enter the number of configured load-balancing rules. This option is not available for Gateway SKUs.
-- **Chains**. Enter the number of chain hours for the load balancer. This option is not available for Basic and Standard SKUs.
-- **Data processed (GB)**. Enter the total volume of data processed per month by your load balancer in gigabytes.
+- **Color**: Select accent and fill colors for the body of the component in 3D view.
+- **SKU**: Select the service level tier for your load balancer.
+- **Tier**: Select the network tier for your load balancer. This option is not available for Basic and Gateway SKUs.
+- **Number of rules**: Enter the number of configured load-balancing rules. This option is not available for Gateway SKUs.
+- **Chains**: Enter the number of chain hours for the load balancer. This option is not available for Basic and Standard SKUs.
+- **Data processed (GB)**: Enter the total volume of data processed per month by your load balancer in gigabytes.
 
 ## API
 
-Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API][1] provides an interface for you to interact with your Azure account within Cloudcraft by sending and receiving data as JSON objects.
+Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. The following is an example JSON object of a Load Balancer component:
 
 ### Schema
 
@@ -55,25 +51,23 @@ Suppose you need programmatic access and remote rendering of architecture diagra
 }
 ```
 
-The **Load Balancer** component schema representation follows the format above and defines all fields within a diagram for this component.
-
-- **type: string**. The type of component. Must be a string of value `azurelb` for this component.
-- **id: string, uuid**. The unique identifier for the component. The API uses a UUID v4 internally but accepts any unique string.
-- **resourceId: string**. The globally unique identifier for the component within Azure.
-- **region: string**. The Azure region for the component. The API supports all global regions, except China.
-- **mapPos: array**. The position of the component in the blueprint. The API uses a unique X and Y coordinate pair to express positioning.
-- **skuName: string**. The service level for the load balancer. Accepts one of three values, `Basic`, `Standard`, or `Gateway`. Defaults to `Standard`.
-- **tier: string**. The network tier for the load balancer. Accepts one of two values, `Regional` or `Global`. Defaults to `Regional`.
-- **numberOfRules: number**. The number of rules for the load balancer. Defaults to `1`.
-- **chains: number**. The number of chain hours for the load balancer. Defaults to `0`.
-- **dataGb: number**. The total volume of monthly data processed by the load balancer in gigabytes. Defaults to `0`.
-- **color: object**. The fill color for the component body.
-  - **isometric: string**. A hexadecimal color for the component body in 3D view. Defaults to `#ececed`.
-  - **2d: string**. A hexadecimal color for the component body in 2D view. Defaults to `null`.
-- **accentColor: object**. The accent color for the component logo.
-  - **isometric: string**. A hexadecimal color for the component logo in 3D view. Defaults to `#0078d4`.
-  - **2d: string**. A hexadecimal color for the component logo in 2D view. Defaults to `null`.
-- **link: string, uri**. A URI that links the component to another diagram or an external website. Accepts one of two formats, `blueprint://` or `https://`.
-- **locked: boolean**. Whether to allow changes to the position of the component through the web interface. Defaults to `false`.
+- **type: string**: The type of component. Must be a string of value `azurelb` for this component.
+- **id: string, uuid**: The unique identifier for the component. The API uses a UUID v4 internally but accepts any unique string.
+- **resourceId: string**: The globally unique identifier for the component within Azure.
+- **region: string**: The Azure region for the component. The API supports all global regions, except China.
+- **mapPos: array**: The position of the component in the blueprint. The API uses a unique X and Y coordinate pair to express positioning.
+- **skuName: string**: The service level for the load balancer. Accepts one of three values, `Basic`, `Standard`, or `Gateway`. Defaults to `Standard`.
+- **tier: string**: The network tier for the load balancer. Accepts one of two values, `Regional` or `Global`. Defaults to `Regional`.
+- **numberOfRules: number**: The number of rules for the load balancer. Defaults to `1`.
+- **chains: number**: The number of chain hours for the load balancer. Defaults to `0`.
+- **dataGb: number**: The total volume of monthly data processed by the load balancer in gigabytes. Defaults to `0`.
+- **color: object**: The fill color for the component body.
+  - **isometric: string**: A hexadecimal color for the component body in 3D view. Defaults to `#ececed`.
+  - **2d: string**: A hexadecimal color for the component body in 2D view. Defaults to `null`.
+- **accentColor: object**: The accent color for the component logo.
+  - **isometric: string**: A hexadecimal color for the component logo in 3D view. Defaults to `#0078d4`.
+  - **2d: string**: A hexadecimal color for the component logo in 2D view. Defaults to `null`.
+- **link: string, uri**: A URI that links the component to another diagram or an external website. Accepts one of two formats, `blueprint://` or `https://`.
+- **locked: boolean**: Whether to allow changes to the position of the component through the web interface. Defaults to `false`.
 
 [1]: https://developers.cloudcraft.co/

@@ -1,29 +1,25 @@
 ---
-title: "Component: AKS cluster"
-kind: guide
+title: "AKS Cluster Component"
+kind: documentation
 ---
 
-{{< img src="cloudcraft/components-azure/aks-cluster/component-aks-cluster-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing interconnected Azure components." responsive="true" style="width:100%;">}}
+## Overview
 
-You can use the **AKS Cluster** component to represent and visualize Kubernetes clusters from your Azure environment with Cloudcraft.
+You can use the AKS Cluster component to represent and visualize Kubernetes clusters from your Azure environment.
+
+{{< img src="cloudcraft/components-azure/aks-cluster/component-aks-cluster-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing interconnected Azure components." responsive="true" style="width:60%;">}}
 
 ## Toolbar
 
-To configure or customize how your repository looks in a diagram, you can use the toolbar that appears when selecting a component inside the application.
+Use the toolbar to configure and customize the component. The following options are available:
 
-### Options
-
-{{< img src="cloudcraft/components-azure/aks-cluster/component-aks-cluster-toolbar.png" alt="Screenshot of a Cloudcraft interface showing configuration options for the 'AKS Cluster' component with pricing information." responsive="true" style="width:100%;">}}
-
-For the **AKS Cluster** component, the following options are available:
-
-- **Color**. Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
-- **Name**. Enter a name for the AKS Cluster.
-- **Tier**. Select a service tier for your cluster.
+- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
+- **Name**: Enter a name for the AKS Cluster.
+- **Tier**: Select a service tier for your cluster.
 
 ## API
 
-Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API][1] provides an interface for you to interact with your AWS account within Cloudcraft by sending and receiving data as JSON objects.
+Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. The following is an example JSON object of an AKS cluster component:
 
 ### Schema
 
@@ -54,25 +50,23 @@ Suppose you need programmatic access and remote rendering of architecture diagra
 }
 ```
 
-The **AKS Cluster** component schema representation follows the format above and defines all fields within a diagram for this component.
-
-- **type: string**. The type of component. Must be a string of value `azureakscluster` for this component.
-- **id: string, uuid**. The unique identifier for the component. The API uses a UUID v4 internally but accepts any unique string.
-- **resourceId: string**. The globally unique identifier for the component within Azure.
-- **region: string**. The Azure region for the component. The API supports all global regions, except China.
-- **mapPos: array**. The position of the component in the blueprint. The API uses a unique X and Y coordinate pair to express positioning.
-- **mapSize: array**. The size of the component in the blueprint. The API uses a unique width and height pair to express sizing.
-- **nodes: array**. The workloads running inside the cluster. Accepts an array of unique identifiers for [the AKS Workload component][2].
-- **name: string**. The name of the cluster. Defaults to `AKS Cluster`.
-- **tier: string**. The tier of the cluster. Accepts one of three values, `free`, `standard`, or `premium`. Defaults to `standard`.
-- **color: object**. The fill color for the component body.
-  - **isometric: string**. A hexadecimal color for the component body in 3D view. Defaults to `#CEE0F5`.
-  - **2d: string**. A hexadecimal color for the component body in 2D view. Defaults to `#CEE0F5`.
-- **accentColor: object**. The accent color for the component logo.
-  - **isometric: string**. A hexadecimal color for the component logo in 3D view. Defaults to `#0078D4`.
-  - **2d: string**. A hexadecimal color for the component logo in 2D view. Defaults to `#0078D4`.
-- **link: string, uri**. A URI that links the component to another diagram or an external website. Accepts one of two formats, `blueprint://` or `https://`.
-- **locked: boolean**. Whether to allow changes to the position of the component through the web interface. Defaults to `false`.
+- **type: string**: The type of component. Must be a string of value `azureakscluster` for this component.
+- **id: string, uuid**: The unique identifier for the component. The API uses a UUID v4 internally but accepts any unique string.
+- **resourceId: string**: The globally unique identifier for the component within Azure.
+- **region: string**: The Azure region for the component. The API supports all global regions, except China.
+- **mapPos: array**: The position of the component in the blueprint. The API uses a unique X and Y coordinate pair to express positioning.
+- **mapSize: array**: The size of the component in the blueprint. The API uses a unique width and height pair to express sizing.
+- **nodes: array**: The workloads running inside the cluster. Accepts an array of unique identifiers for [the AKS Workload component][2].
+- **name: string**: The name of the cluster. Defaults to `AKS Cluster`.
+- **tier: string**: The tier of the cluster. Accepts one of three values, `free`, `standard`, or `premium`. Defaults to `standard`.
+- **color: object**: The fill color for the component body.
+  - **isometric: string**: A hexadecimal color for the component body in 3D view. Defaults to `#CEE0F5`.
+  - **2d: string**: A hexadecimal color for the component body in 2D view. Defaults to `#CEE0F5`.
+- **accentColor: object**: The accent color for the component logo.
+  - **isometric: string**: A hexadecimal color for the component logo in 3D view. Defaults to `#0078D4`.
+  - **2d: string**: A hexadecimal color for the component logo in 2D view. Defaults to `#0078D4`.
+- **link: string, uri**: A URI that links the component to another diagram or an external website. Accepts one of two formats, `blueprint://` or `https://`.
+- **locked: boolean**: Whether to allow changes to the position of the component through the web interface. Defaults to `false`.
 
 [1]: https://developers.cloudcraft.co/
 [2]: https://help.cloudcraft.co/article/217-component-aks-workload

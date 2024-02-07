@@ -1,27 +1,23 @@
 ---
-title: "Component: AKS pod"
-kind: guide
+title: "AKS Pod Component"
+kind: documentation
 ---
 
-{{< img src="cloudcraft/components-azure/aks-pod/component-aks-pod-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing interconnected Azure components." responsive="true" style="width:100%;">}}
+## Overview
 
-You can use the **AKS Pod** component to represent and visualize application containers from your Azure environment with Cloudcraft.
+You can use the AKS Pod component to represent and visualize application containers from your Azure environment with Cloudcraft.
+
+{{< img src="cloudcraft/components-azure/aks-pod/component-aks-pod-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing interconnected Azure components." responsive="true" style="width:60%;">}}
 
 ## Toolbar
 
-To configure or customize how your repository looks in a diagram, you can use the toolbar that appears when selecting a component inside the application.
+Use the toolbar to configure and customize the component. The following options are available:
 
-### Options
-
-{{< img src="cloudcraft/components-azure/aks-pod/component-aks-pod-toolbar.png" alt="Screenshot of a Cloudcraft interface showing configuration options for the 'AKS Pod' component with pricing information." responsive="true" style="width:100%;">}}
-
-For the **AKS Pod** component, the following options are available:
-
-- **Color**. Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
+- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
 
 ## API
 
-Suppose you need programmatic access and remote rendering of architecture diagrams. In that case, [the Cloudcraft API][1] provides an interface for you to interact with your AWS account within Cloudcraft by sending and receiving data as JSON objects.
+Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. The following is an example JSON object of an AKS Pod component:
 
 ### Schema
 
@@ -44,8 +40,6 @@ Suppose you need programmatic access and remote rendering of architecture diagra
     "locked": true
 }
 ```
-
-The **AKS Pod** component schema representation follows the format above and defines all fields within a diagram for this component.
 
 - **type: string**. The type of component. Must be a string of value `azureakspod` for this component.
 - **id: string, uuid**. The unique identifier for the component. The API uses a UUID v4 internally but accepts any unique string.
