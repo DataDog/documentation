@@ -4,30 +4,30 @@ kind: guide
 ---
 
 {{< whatsnext desc="Compute:" >}}
-    {{< nextlink href="cloudcraft/components-azure/virtual-machine">}}Virtual machine{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/components-azure/function-app">}}Function app{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/components-azure/web-app">}}Web app{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/virtual-machine">}}Virtual Machine{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/function-app">}}Function App{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/web-app">}}Web App{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Containers:" >}}
-    {{< nextlink href="cloudcraft/components-azure/aks-cluster">}}AKS cluster{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/components-azure/aks-workload">}}AKS workload{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/components-azure/aks-pod">}}AKS pod{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/aks-cluster">}}AKS Cluster{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/aks-workload">}}AKS Workload{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/aks-pod">}}AKS Pod{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Networking:" >}}
-    {{< nextlink href="cloudcraft/components-azure/load-balancer">}}Load balancer{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/components-azure/application-gateway">}}Application gateway{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/load-balancer">}}Load Balancer{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/application-gateway">}}Application Gateway{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-azure/bastion">}}Bastion{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/components-azure/vpn-gateway">}}VPN gateway{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/vpn-gateway">}}VPN Gateway{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Storage:" >}}
-    {{< nextlink href="cloudcraft/components-azure/managed-disk">}}Managed disk{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/components-azure/block-blob">}}Block blob{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/components-azure/azure-queue">}}Azure queue{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/components-azure/azure-table">}}Azure table{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/components-azure/file-share">}}File share{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/managed-disk">}}Managed Disk{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/block-blob">}}Block Blob{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/azure-queue">}}Azure Queue{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/azure-table">}}Azure Table{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/file-share">}}File Share{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Database:" >}}
@@ -38,8 +38,8 @@ kind: guide
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Integrations:" >}}
-    {{< nextlink href="cloudcraft/components-azure/service-bus-queue">}}Service bus queue{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/components-azure/service-bus-topic">}}Service bus topic{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/components-azure/service-bus-namespace">}}Service bus namespace{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/components-azure/api-management">}}API management{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/service-bus-queue">}}Service Bus Queue{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/service-bus-topic">}}Service Bus Topic{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/service-bus-namespace">}}Service Bus Namespace{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-azure/api-management">}}API Management{{< /nextlink >}}
 {{< /whatsnext >}}
