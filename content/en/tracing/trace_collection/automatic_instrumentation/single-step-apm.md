@@ -172,7 +172,7 @@ You can enable APM by installing the Agent with the Datadog Helm chart. This dep
 ### Requirements
 
 - Make sure you have [Helm][13] installed.
- 
+
 ### Installation
 
 To enable single step instrumentation with Helm:
