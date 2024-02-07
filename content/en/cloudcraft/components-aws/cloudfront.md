@@ -1,21 +1,26 @@
 ---
-title: "Component: CloudFront"
-kind: guide
+title: "CloudFront Component"
+kind: documentation
 ---
+## Overview
 
-{{< img src="cloudcraft/components-aws/cloudfront/component-cloudfront-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'CloudFront' AWS component." responsive="true" style="width:100%;">}}
+Use the CloudFront component to represent CloudFront from your Amazon Web Services architecture.
 
-The **CloudFront** block component is used to represent the content delivery network from your Amazon Web Services architecture with Cloudcraft.
+{{< img src="cloudcraft/components-aws/cloudfront/component-cloudfront-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'CloudFront' AWS component." responsive="true" style="width:60%;">}}
 
 ## Toolbar
 
-The toolbar is displayed when selecting a component. It allows you to customize parts of your component and its visual to your liking.
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**. Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both 2D and 3D view, or different colors for each.
+- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
 
 ## API
 
-In [the Cloudcraft API][1], an EBS volume is represented in JSON.
+Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
+
+### Schema
+
+The following is an example JSON object of a CloudFront component:
 
 ```json
 {
@@ -35,16 +40,16 @@ In [the Cloudcraft API][1], an EBS volume is represented in JSON.
 }
 ```
 
-- **type: cloudfront**. The type of component.
-- **id: string**. A unique identifier for the component in the `uuid` format.
-- **mapPos: [number, number]**. The position of the component in the blueprint, expressed as a x,y coordinate pair.
-- **color: object**. The fill color for the component body.
-  - **isometric: string**. Fill color for the component in 3D view. Must be an hexadecimal color.
-  - **2d: string**. Fill color for the component in 2D view. Must be an hexadecimal color.
-- **accentColor: object**. The accent color used to display the component logo on the block.
-  - **isometric: string**. Accent color for the component in 3D view. Must be an hexadecimal color.
-  - **2d: string**. Accent color for the component in 2D view. Must be an hexadecimal color.
-- **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
-- **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
+- **type: cloudfront**: The type of component.
+- **id: string**: A unique identifier for the component in the `uuid` format.
+- **mapPos: [number, number]**: The position of the component in the blueprint, expressed as an x- and y-coordinate pair.
+- **color: object**: The fill color for the component body.
+  - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The fill color for the component in the 2D view. Must be a hexadecimal color.
+- **accentColor: object**: The accent color used to display the component logo on the block.
+  - **isometric: string**: The accent color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The accent color for the component in 2D view. Must be a hexadecimal color.
+- **link: uri**: Link the component to another diagram in the `blueprint://ID` format or to an external website in the `https://LINK` format.
+- **locked: boolean**: If `true`, changes to the component through the application are disabled until unlocked.
 
 [1]: https://developers.cloudcraft.co/

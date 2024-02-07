@@ -2,10 +2,11 @@
 title: "Availability Zone Component"
 kind: documentation
 ---
+## Overview
+
+Use the Availability Zone component to represent Availability Zones from your Amazon Web Services architecture.
 
 {{< img src="cloudcraft/components-aws/availability-zone/component-availability-zone-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Availability zone' AWS component." responsive="true" style="width:100%;">}}
-
-Use the **Availability zone** component to represent availability zones from your Amazon Web Services architecture.
 
 ## Toolbar
 
@@ -17,7 +18,11 @@ Use the toolbar to configure and customize your component. The following options
 
 ## API
 
-Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. The following is an example JSON object of an availability zone component:
+Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. 
+
+### Schema
+
+The following is an example JSON object of an availability zone component:
 
 ```json
 {
@@ -41,9 +46,9 @@ Use [the Cloudcraft API][1] to programmatically access and render your architect
 - **mapPos: [number, number]**. The position of the component in the blueprint, expressed as an x- and y-coordinate pair.
 - **mapSize: [number, number]**. The size of the availability zone in the blueprint.
 - **color: object**. The fill color for the availability zone.
-  - **isometric: string**. The fill color for the component in the 3D view. Must be an hexadecimal color.
-  - **2d: string**. The fill color for the component in the 2D view. Must be an hexadecimal color.
+  - **isometric: string**. The fill color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**. The fill color for the component in the 2D view. Must be a hexadecimal color.
 - **link: uri**. Link the component to another diagram in the `blueprint://ID` format or to an external website in the `https://LINK` format.
-- **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
+- **locked: boolean**. If `true`, changes to the component through the application are disabled until unlocked.
 
 [1]: https://developers.cloudcraft.co/

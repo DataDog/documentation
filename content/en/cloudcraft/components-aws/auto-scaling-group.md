@@ -2,10 +2,11 @@
 title: "Auto Scaling Group Component"
 kind: documentation
 ---
+## Overview
 
-{{< img src="cloudcraft/components-aws/auto-scaling-group/component-auto-scaling-group-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Auto scaling group' AWS component." responsive="true" style="width:100%;">}}
+Use the Auto Scaling group component to represent Auto Scaling groups from your Amazon Web Services architecture.
 
-Use the **Auto scaling group** component to represent auto scaling groups from your Amazon Web Services architecture.
+{{< img src="cloudcraft/components-aws/auto-scaling-group/component-auto-scaling-group-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Auto scaling group' AWS component." responsive="true" style="width:60%;">}}
 
 ## Toolbar
 
@@ -16,7 +17,11 @@ Use the toolbar to configure and customize your component. The following options
 
 ## API
 
-Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. The following is an example JSON object of an auto scaling group component:
+Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. 
+
+### Schema
+
+The following is an example JSON object of an auto scaling group component:
 
 ```json
 {
@@ -47,9 +52,9 @@ Use [the Cloudcraft API][1] to programmatically access and render your architect
 - **layout: string**: The layout of the auto scaling group. Accepted values are `even` or `manual`.
 - **nodes: array**: The EC2 instances inside the auto scaling group. Must consist of an array of Cloudcraft issued unique identifiers for the EC2 instances.
 - **color: object**: The fill color for the component body.
-  - **isometric: string**: The fill color for the component in the 3D view. Must be an hexadecimal color.
-  - **2d: string**: The fill color for the component in the 2D view. Must be an hexadecimal color.
+  - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The fill color for the component in the 2D view. Must be a hexadecimal color.
 - **link: uri**: Link the component to another diagram in the `blueprint://ID` format or to an external website in the `https://LINK` format.
-- **locked: boolean**: If true, changes to the component through the application are disabled until unlocked.
+- **locked: boolean**: If `true`, changes to the component through the application are disabled until unlocked.
 
 [1]: https://developers.cloudcraft.co/

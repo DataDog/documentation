@@ -2,10 +2,11 @@
 title: "API Gateway Component"
 kind: documentation
 ---
+## Overview
 
-{{< img src="cloudcraft/components-aws/api-gateway/component-api-gateway-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'API gateway' AWS component." responsive="true" style="width:100%;">}}
+Use the API Gateway component to represent RESTful, HTTP, and WebSocket APIs from your Amazon Web Services architecture.
 
-Use the **API Gateway** component to represent RESTful, HTTP, and WebSocket APIs from your Amazon Web Services architecture.
+{{< img src="cloudcraft/components-aws/api-gateway/component-api-gateway-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'API gateway' AWS component." responsive="true" style="width:60%;">}}
 
 ## Toolbar
 
@@ -20,7 +21,11 @@ Use the toolbar to configure and customize your component. The following options
 
 ## API
 
-Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. The following is an example JSON object of an API Gateway:
+Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
+
+### Schema
+
+The following is an example JSON object of an API Gateway:
 
 ```json
 {
@@ -62,7 +67,7 @@ Use [the Cloudcraft API][1] to programmatically access and render your architect
   - **isometric: string**: The accent color for the component in the 3D view. Must be a hexadecimal color.
   - **2d: string**: The accent color for the component in the 2D view. Must be a hexadecimal color.
 - **link: uri**: Link the component to another diagram in the `blueprint://ID` format or to an external website in the `https://LINK` format.
-- **locked: boolean**: If true, changes to the component through the application are disabled until unlocked.
+- **locked: boolean**: If `true`, changes to the component through the application are disabled until unlocked.
 
 ## Accepted values for cache
 
