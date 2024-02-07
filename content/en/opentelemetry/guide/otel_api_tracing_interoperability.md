@@ -44,7 +44,7 @@ Following the [W3C Trace Context recommendations][9], Datadog 128-bit trace IDs 
 
 
 [1]: https://opentelemetry.io/docs/specs/otel/trace/api/
-[2]: /trace_collection/otel_instrumentation/
+[2]: trace_collection/custom_instrumentation/otel_instrumentation/
 [3]: /profiler/
 [4]: /data_streams/
 [5]: /security/application_security/
