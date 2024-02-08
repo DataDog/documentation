@@ -37,8 +37,7 @@ If your SDK does not support this environment variable you can configure delta t
 import time
 
 from opentelemetry.exporter.otlp.proto.http.metric_exporter import (
-    OTLPMetricExporter,
-)
+    OTLPMetricExporter, )
 from opentelemetry.sdk.metrics import (
     Counter,
     Histogram,
@@ -50,6 +49,7 @@ from opentelemetry.sdk.metrics import (
 )
 from opentelemetry.sdk.metrics.export import (
     AggregationTemporality,
+    ConsoleMetricExporter,
     PeriodicExportingMetricReader,
 )
 
@@ -63,16 +63,23 @@ deltaTemporality = {
 }
 
 exporter = OTLPMetricExporter(preferred_temporality=deltaTemporality)
-reader = PeriodicExportingMetricReader(exporter)
+reader = PeriodicExportingMetricReader(exporter, export_interval_millis=5_000)
 provider = MeterProvider(metric_readers=[reader])
 
-meter = provider.get_meter("my-meter")
+consoleReader = PeriodicExportingMetricReader(
+    ConsoleMetricExporter(preferred_temporality=deltaTemporality), export_interval_millis=5_000)
+consoleProvider = MeterProvider(metric_readers=[consoleReader])
 
+meter = provider.get_meter("my-meter")
 counter = meter.create_counter("example.counter")
 
+consoleMeter = consoleProvider.get_meter("my-meter-console")
+consoleCounter = consoleMeter.create_counter("example.counter.console")
+
 for i in range(150):
-    counter.add(1)
-    time.sleep(2)
+  counter.add(1)
+  consoleCounter.add(1)
+  time.sleep(2)
 ```
 {{< /programming-lang >}}
 
@@ -86,6 +93,7 @@ import (
 	"time"
 
 	"go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetrichttp"
+	"go.opentelemetry.io/otel/exporters/stdout/stdoutmetric"
 	"go.opentelemetry.io/otel/sdk/metric"
 	"go.opentelemetry.io/otel/sdk/metric/metricdata"
 )
@@ -109,26 +117,44 @@ func main() {
 	exporter, err := otlpmetrichttp.New(ctx,
 		otlpmetrichttp.WithTemporalitySelector(deltaSelector),
 	)
-	if err != nil {
+	consoleExporter, consoleErr := stdoutmetric.New(
+		stdoutmetric.WithTemporalitySelector(deltaSelector),
+	)
+	if err != nil || consoleErr != nil {
 		panic(err)
 	}
 
-	reader := metric.NewPeriodicReader(exporter)
+	reader := metric.NewPeriodicReader(exporter,
+		metric.WithInterval(5*time.Second),
+	)
 	provider := metric.NewMeterProvider(metric.WithReader(reader))
+
+	consoleReader := metric.NewPeriodicReader(consoleExporter,
+		metric.WithInterval(5*time.Second),
+	)
+	consoleProvider := metric.NewMeterProvider(metric.WithReader(consoleReader))
+
 	defer func() {
-		if err := meterProvider.Shutdown(ctx); err != nil {
+		err := provider.Shutdown(ctx)
+		consoleErr := consoleProvider.Shutdown(ctx)
+		if err != nil || consoleErr != nil {
 			panic(err)
 		}
 	}()
 
 	meter := provider.Meter("my-meter")
 	counter, err := meter.Int64Counter("example.counter")
-	if err != nil {
+
+	consoleMeter := consoleProvider.Meter("my-meter-console")
+	consoleCounter, consoleErr := consoleMeter.Int64Counter("example.counter.console")
+
+	if err != nil || consoleErr != nil {
 		panic(err)
 	}
 
 	for i := 0; i < 150; i++ {
 		counter.Add(ctx, 1)
+		consoleCounter.Add(ctx, 1)
 		time.Sleep(2 * time.Second)
 	}
 }
@@ -188,6 +214,9 @@ using OpenTelemetry;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
+using System.Threading;
+using System;
+using System.Threading.Tasks;
 
 namespace GettingStarted;
 
@@ -196,12 +225,29 @@ public class Program
     public static void Main()
     {
 		using var meter = new Meter("my-meter");
+        var endpoint = "http://metrics-http-default.telemetry.vtex.systems/v1/metrics";
 		var providerBuilder = Sdk.CreateMeterProviderBuilder().AddMeter(meter.Name);
-		providerBuilder.AddOtlpExporter((exporterOptions, metricReaderOptions) =>
+		providerBuilder
+        .AddConsoleExporter((exporterOptions, metricReaderOptions) =>
 			{
-				exporterOptions.Protocol = OtlpExportProtocol.HttpProtobuf;
+                metricReaderOptions.PeriodicExportingMetricReaderOptions = new PeriodicExportingMetricReaderOptions
+                    {
+                        ExportIntervalMilliseconds = Convert.ToInt32("5000"),
+                    };
 				metricReaderOptions.TemporalityPreference = MetricReaderTemporalityPreference.Delta;
-			});
+			})
+        .AddOtlpExporter((exporterOptions, metricReaderOptions) =>
+			{
+                metricReaderOptions.PeriodicExportingMetricReaderOptions = new PeriodicExportingMetricReaderOptions
+                    {
+                        ExportIntervalMilliseconds = Convert.ToInt32("5000"),
+                    };
+				exporterOptions.Protocol = OtlpExportProtocol.Grpc;
+                exporterOptions.Endpoint = new Uri(endpoint);
+				metricReaderOptions.TemporalityPreference = MetricReaderTemporalityPreference.Delta;
+			})
+            .SetMaxMetricStreams(3)
+            .SetMaxMetricPointsPerMetricStream(3);;
 		using var provider = providerBuilder.Build();
 
 		Counter<int> counter = meter.CreateCounter<int>("example.counter", "1", "Example counter");
@@ -209,8 +255,9 @@ public class Program
 			counter?.Add(1);
 			Task.Delay(2000).Wait();
 		}
-    }
+  }
 }
+
 ```
 {{< /programming-lang >}}
 
