@@ -61,7 +61,7 @@ CSM は、Datadog Agent とプラットフォーム全体のクラウドイン�
 - [**Identity Risks**][8]: 組織の AWS IAM リスクに対する詳細な可視性を提供し、継続的にアイデンティティリスクを検出して解決できるようにします。
 - [**Vulnerabilities**][9]: インフラストラクチャーの観測可能性を活用して、組織のコンテナとホストの脆弱性を検出、優先順位付け、管理します。
 
-{{< img src="security/csm/csm_overview_2.png" alt=“Datadog の Cloud Security Management" width="100%">}}
+{{< img src="security/csm/csm_overview_2.png" alt="Datadog の Cloud Security Management" width="100%">}}
 
 ## 組織の健全性の追跡
 
