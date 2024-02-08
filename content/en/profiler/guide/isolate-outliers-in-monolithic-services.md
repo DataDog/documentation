@@ -88,7 +88,7 @@ try (var scope = Profiling.get().newScope()) {
 
 ## Isolate your own business logic (Go)
 
-The Go profiler supports custom annotations for your business logic as of version v1.60.0. To add annotations, use [profiler labels](https://pkg.go.dev/runtime/pprof#Do) like so:
+The Go profiler supports custom annotations for your business logic as of version v1.60.0. To add annotations, use [profiler labels][1] like so:
 
 {{< code-block lang="go" >}}
 pprof.Do(ctx, pprof.Labels("customer_name", <value>), func(context.Context) {
@@ -96,7 +96,7 @@ pprof.Do(ctx, pprof.Labels("customer_name", <value>), func(context.Context) {
 })
 {{< /code-block >}}
 
-Add the [WithCustomProfilerLabelKeys](https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithCustomProfilerLabelKeys) option when starting the profiler to specify which label keys you want use for filtering:
+To specify which label keys you want use for filtering, add the [WithCustomProfilerLabelKeys][2] option when starting the profiler:
 
 {{< code-block lang="go" >}}
 profiler.Start(
@@ -107,7 +107,9 @@ profiler.Start(
 
 Then, open CPU or goroutine profiles for your service and select the `customer_name` value you're interested in under the `CPU time by` dropdown.
 
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://pkg.go.dev/runtime/pprof#Do
+[2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithCustomProfilerLabelKeys
