@@ -66,14 +66,14 @@ For more Datadog provided profiles, see the [GitHub repository][3].
 
 ### Metadata definition by profile
 
-Profiles have a metadata section that can be used to define where and how metadata should be collected. Values can be static or come from an OID value. Metadata can be used to filter on the devices.
+Profiles have a metadata section that can be used to define where and how metadata should be collected. Values can be static or come from an OID value.
 Supported fields can be found [here][4].
 
-With Datadog Agent version 7.52 and later, a new `device_type` field is supported a a device metadata. This can be configured in the profile and can be used to filter. Accepted values include:
+With Datadog Agent version 7.52 and later, a new `device_type` field is supported as a device metadata. This can be set manually in the profile and can be used to filter on specific types of devices. Accepted values include:
 
 - access_point
 - firewall
-- load balancer
+- load_balancer
 - pdu
 - printer
 - router
