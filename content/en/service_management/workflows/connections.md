@@ -104,19 +104,7 @@ To learn how to restrict connection use, see [Access and Authentication][4].
 
 ## HTTP connection
 
-To connect to an arbitrary service, use the HTTP connection type, and choose from two authentication options:
-- Token-based authentication
-- A username and password combination
-
-### Create HTTP connection
-
-1. Navigate to the [connections list][3].
-1. Select **New Connection**. A dialog box appears.
-1. Select **HTTP Connection**. The dialog box updates to show the HTTP connection parameters.
-1. Enter the **Base URL**.
-1. If appropriate, use the **Add +** buttons to add headers or URL parameters.
-1. Choose an connection type: **Token Auth** or **Basic Auth**. Enter the appropriate parameters.
-1. Click **Create** to save your HTTP connection.
+To connect to an arbitrary service, use the HTTP connection type. For authentication options and setup instructions, see [HTTP action][10].
 
 ## Further reading
 
@@ -129,3 +117,4 @@ To connect to an arbitrary service, use the HTTP connection type, and choose fro
 [6]: /integrations/
 [8]: /service_management/workflows/actions_catalog/generic_actions/
 [9]: https://app.datadoghq.com/workflow
+[10]: /service_management/workflows/actions/http/

@@ -1536,31 +1536,41 @@ main:
     parent: workflows
     identifier: workflows_trigger
     weight: 3
+  - name: Actions
+    url: service_management/workflows/actions/
+    parent: workflows
+    identifier: workflows_actions
+    weight: 4
+  - name: Save and Reuse Actions
+    url: service_management/workflows/actions/saved_actions/
+    parent: workflows_actions
+    identifier: workflows_saved_actions
+    weight: 401
+  - name: Flow Control
+    url: service_management/workflows/actions/flow_control/
+    parent: workflows_actions
+    identifier: workflows_flow_control
+    weight: 402
+  - name: Transform Data
+    url: service_management/workflows/actions/data_transformation/
+    parent: workflows_actions
+    identifier: workflows_data_transformation
+    weight: 403
+  - name: HTTP Action
+    url: service_management/workflows/actions/http/
+    parent: workflows_actions
+    identifier: workflows_http
+    weight: 404
   - name: Actions Catalog
     url: service_management/workflows/actions_catalog/
     parent: workflows
     identifier: workflows_actions_catalog
-    weight: 4
-  - name: Generic Actions
-    url: service_management/workflows/actions_catalog/generic_actions/
-    parent: workflows_actions_catalog
-    identifier: workflows_generic_actions
-    weight: 401
-  - name: Logic Actions
-    url: service_management/workflows/actions_catalog/logic_actions/
-    parent: workflows_actions_catalog
-    identifier: workflows_logic_actions
-    weight: 402
-  - name: Save and Reuse Actions
-    url: service_management/workflows/actions_catalog/saved_actions/
-    parent: workflows_actions_catalog
-    identifier: workflows_saved_actions
-    weight: 403
+    weight: 5
   - name: Connections
     url: service_management/workflows/connections/
     parent: workflows
     identifier: workflows_connections
-    weight: 5
+    weight: 6
   - name: App Builder
     url: service_management/app_builder/
     pre: app-builder

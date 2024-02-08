@@ -1,11 +1,14 @@
 ---
-title: Logic Actions
+title: Flow control
 kind: documentation
 disable_toc: false
 type: workflows
 is_beta: false
 algolia:
-  tags: ['workflow', 'workflows', 'workflow automation']
+  tags: ['workflow', 'workflows', 'workflow automation', 'logic', 'logic step', 'flow']
+aliases:
+- /workflows/logic_actions
+- /service_management/workflows/logic_actions
 further_reading:
 - link: "/integrations/"
   tag: "Documentation"
