@@ -27,7 +27,6 @@ The Datadog Profiler requires at least PHP 7.1, on 64-bit Linux.
 The following are **not** supported:
 - PHP ZTS builds
 - PHP debug builds
-- Fibers (PHP 8.1+)
 
 {{< tabs >}}
 {{% tab "GNU C Linux" %}}
@@ -55,10 +54,11 @@ apk add libgcc
 
 The following profiling features are available in the following minimum versions of the `dd-trace-php` library:
 
-|      Feature         | Required `dd-trace-php` version          |
-|----------------------|-----------------------------------------|
-| [Code Hotspots][12]        | 0.71+                       |
-| [Endpoint Profiling][13]            | 0.79.0+                       |
+|      Feature              | Required `dd-trace-php` version          |
+|---------------------------|------------------------------------------|
+| [Code Hotspots][12]       | 0.71+                                    |
+| [Endpoint Profiling][13]  | 0.79.0+                                  |
+| [Timeline][15]            | beta, 0.89.0+                            |
 
 Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
 
@@ -140,3 +140,4 @@ The [Getting Started with Profiler][6] guide takes a sample service with a perfo
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
 [14]: /profiler/enabling/supported_versions/
+[15]: /profiler/profile_visualizations/#timeline-view
