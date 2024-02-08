@@ -243,9 +243,7 @@ public class Program
                     };
 				exporterOptions.Protocol = OtlpExportProtocol.HttpProtobuf;
 				metricReaderOptions.TemporalityPreference = MetricReaderTemporalityPreference.Delta;
-			})
-            .SetMaxMetricStreams(3)
-            .SetMaxMetricPointsPerMetricStream(3);;
+			});
 		using var provider = providerBuilder.Build();
 
 		Counter<int> counter = meter.CreateCounter<int>("example.counter", "1", "Example counter");
