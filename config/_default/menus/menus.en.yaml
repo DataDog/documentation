@@ -2843,16 +2843,21 @@ main:
     parent: ci_explorer
     identifier: ci_explorer_search_syntax
     weight: 301
-  - name: Facets
+  - name: Search Test Runs or Pipeline Executions
     url: continuous_integration/explorer/facets/
     parent: ci_explorer
     identifier: ci_explorer_facets
     weight: 302
+  - name: Export
+    url: continuous_integration/explorer/export/
+    parent: ci_explorer
+    identifier: ci_explorer_export
+    weight: 303
   - name: Saved Views
     url: continuous_integration/explorer/saved_views/
     parent: ci_explorer
     identifier: ci_explorer_saved_views
-    weight: 303
+    weight: 304
   - name: Monitors
     url: monitors/types/ci/?tab=pipelines
     parent: ci
