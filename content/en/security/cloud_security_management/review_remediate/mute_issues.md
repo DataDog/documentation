@@ -5,6 +5,8 @@ further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
   text: "Explore out-of-the-box security detection rules"
+aliases:
+  - /security/cloud_security_management/mute_issues
 ---
 
 There may be times when a misconfiguration, issue, or identity risk doesn't match the use case for your business, or you choose to accept it as a known risk. To ignore them, you can mute the underlying misconfiguration, issue, or identity risk for the impacted resources.
