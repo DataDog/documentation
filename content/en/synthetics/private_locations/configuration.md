@@ -64,8 +64,7 @@ Proxy URL used by the private location to send requests to Datadog (for example,
 `proxyTestRequests`
 : **Type**: String <br>
 **Default**: `none`<br>
-Proxy URL used by the private location to send test requests to the endpoint.
-PAC files are supported with the following synthax "pac+https://..." or "pac+http://...".
+Proxy URL used by the private location to send test requests to the endpoint. PAC files are supported with the following syntax: `pac+https://...` or `pac+http://...`.
 
 `proxyIgnoreSSLErrors`
 : **Type**: Boolean <br>
@@ -163,7 +162,7 @@ Path to the JSON configuration file.
 `--proxyTestRequests`
 : **Type**: String <br>
 **Default**: `none`<br>
-Proxy URL used by the private location to send test requests to the endpoint.
+Proxy URL used by the private location to send test requests to the endpoint. PAC files are supported with the following syntax: `pac+https://...` or `pac+http://...`.
 
 `--proxyIgnoreSSLErrors`
 : **Type**: Boolean <br>
