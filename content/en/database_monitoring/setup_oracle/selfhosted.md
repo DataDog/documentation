@@ -583,7 +583,7 @@ Once all Agent configuration is complete, [restart the Datadog Agent][4].
 
 Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][11] to learn more about the configuration options available.
 
-<div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
+<div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle. This will not result in custom metrics being added to Datadog.</div>
 
 [1]: /database_monitoring/setup_oracle/#install-agent
 [2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
