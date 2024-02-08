@@ -3693,6 +3693,11 @@ main:
     parent: cspm
     identifier: cspm_findings_explorer
     weight: 305
+  - name: Export Misconfigurations
+    url: /security/misconfigurations/findings/export_misconfigurations
+    parent: cspm_findings_explorer
+    identifier: cspm_export_misconfigurations
+    weight: 101
   - name: Signals Explorer
     url: /security/misconfigurations/signals_explorer/
     parent: cspm
