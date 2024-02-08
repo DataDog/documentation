@@ -74,21 +74,21 @@ To begin profiling applications:
 
 4. Configure the profiler using config mode through the `datadog-setup.php`:
 
-```
-# `datadog.profiling_enabled` is not required for v0.82.0+.
-php datadog-setup.php config set -d datadog.profiling.enabled=1
-
-php datadog-setup.php config set -d datadog.service=app-name \
-  -d datadog.env=prod \
-  -d datadog.verison=1.3.2
-
-php hello.php
-```
-
-Apache, PHP-FPM and other servers require a restart after changing the INI
+    ```
+    # `datadog.profiling_enabled` is not required for v0.82.0+.
+    php datadog-setup.php config set -d datadog.profiling.    enabled=1
+    
+    php datadog-setup.php config set -d datadog.service=app-name     \
+      -d datadog.env=prod \
+      -d datadog.verison=1.3.2
+    
+    php hello.php
+    ```
+    
+    Apache, PHP-FPM and other servers require a restart after changing the INI
 settings.
 
-   See the [configuration docs][4] for more INI settings.
+    See the [configuration docs][4] for more INI settings.
 
 5. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
 
