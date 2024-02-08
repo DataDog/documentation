@@ -2347,10 +2347,10 @@ main:
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_suspect_commits
     weight: 1003
-  - name: Execution Replay
-    url: tracing/error_tracking/execution_replay
+  - name: Exception Replay
+    url: tracing/error_tracking/exception_replay
     parent: tracing_error_tracking
-    identifier: tracing_error_tracking_execution_replay
+    identifier: tracing_error_tracking_exception_replay
     weight: 1004
   - name: Data Security
     url: tracing/configure_data_security/
