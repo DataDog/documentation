@@ -23,7 +23,7 @@ During code reviews on GitHub, the integration checks for Static Analysis violat
 
 The comment includes the name, ID, severity, category, and description of the Static Analysis violation. Certain violations also include suggested changes that can be applied directly in the GitHub UI.
 
-## Set up Code Analysis for GitHub pull requests
+## Setup Code Analysis for GitHub pull requests
 
 ### Enable Code Analysis on Datadog
 

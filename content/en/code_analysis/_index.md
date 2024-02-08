@@ -33,14 +33,14 @@ Code Analysis is in public beta.
 Code Analysis is composed of the [Static Analysis][1] and [Software Composition Analysis (SCA)][2] products. 
 
 Static Analysis
-: Scans your bespoke code for maintainability issues, bugs, performance issues, and security vulnerabilities early in the development lifecycle to catch issues from reaching production and, when possible, provide suggested fixes to help engineering teams address these issues before they impact customers.
+: Scans your bespoke code for maintainability issues, bugs, performance issues, and security vulnerabilities early in the development lifecycle to catch issues from reaching production and, when possible, provide suggested fixes to help engineering teams address these issues before they impact users.
 
 Software Composition Analysis 
 : Scans the open-source libraries that are imported into your repositories for known vulnerabilities. Coming soon will be the ability to block libraries with certain licenses and suggestions on which version of a library you should update to so that you can resolve the vulnerability.
 
 Once you have configured Code Analysis, you can head to the [Code Analysis page][9] to see a summary of the results from the Static Analysis and SCA scans for each of your configured repositories. The summarized results will always be for the latest commit on the default branch of each repository to ensure you are seeing all the existing problems on each repository that you may want to triage and fix.
 
-Select a repository from the list to search through and manage violations in for that specific repository. By default, the results will be filtered to the latest commit on the default branch of the repository, but you may change the branch or commit at the top of the page if desired. Regardless of the selected branch or commit, all results will be organized into the following views:
+Select a repository from the list to search through and manage violations for that specific repository. By default, the results are filtered to the latest commit on the default branch of the repository, but you may change the branch or commit at the top of the page. Regardless of the selected branch or commit, all results will be organized into the following views:
 
 {{< tabs >}}
 {{% tab "Code Vulnerabilities" %}}

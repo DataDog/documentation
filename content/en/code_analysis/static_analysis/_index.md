@@ -40,12 +40,12 @@ Using Static Analysis provides organizations with the following benefits:
 
 Static Analysis currently supports scanning the following languages and technologies for poor coding practices and security vulnerabilities:
 
-1. C#
-2. Dockerfiles
-3. Java
-4. JavaScript
-5. Python
-6. TypeScript
+- C#
+- Dockerfiles
+- Java
+- JavaScript
+- Python
+- TypeScript
 
 ## Integrations
 
@@ -82,9 +82,9 @@ Click on a violation to open a side panel that contains information about the sc
 
 The content of the violation is shown in tabs:
 
-* Details: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the [Datadog GitHub App][4].
-* Fixes: One or more code fixes that can resolve the violation, which you can copy and paste.
-* Event: JSON metadata regarding the Static Analysis violation event.
+- **Details**: A description of the violation and the lines of code that caused it. To see the offending code snippet, configure the [Datadog GitHub App][4].
+- **Fixes**: One or more code fixes that can resolve the violation, which you can copy and paste.
+- **Event**: JSON metadata regarding the Static Analysis violation event.
 
 ### Using suggested fixes
 {{< img src="code_analysis/static_analysis/static-analysis-fixes.png" alt="Fixes tab of a static analysis violation" style="width:80%;">}}
