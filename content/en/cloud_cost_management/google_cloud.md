@@ -35,7 +35,7 @@ Additionally, the Google Cloud Platform Datadog Integration Service Account must
 Navigate to [Setup & Configuration][3], and select an integrated Google Cloud Platform service account from the dropdown.
 If you do not see your desired Service Account in the list, go to the [Google Cloud Platform integration][4] to add it.
 
-<div class="alert alert-warning"> **Note:** LEGACY project integrations are deprecated and not supported. </div>
+<div class="alert alert-warning"> LEGACY project integrations are deprecated and not supported. </div>
 
 Cloud Cost processes all resources in a project, regardless of the Metrics Collection limits you can define per integration.
 
@@ -52,16 +52,7 @@ Using a previously integrated project prevents monitoring resources in a new pro
  2. Enable the [Detailed Usage cost][2] export (select or create a project and a BigQuery dataset).
  3. Document the `Billing Account ID` for the billing account where the export was configured, as well as the export `Project ID` and `Dataset Name`.
 
-### Create or select a Google Cloud Storage bucket
-Use an existing Google Cloud Storage bucket or create a new one.
-Data is extracted regularly from your Detailed Usage Cost BigQuery dataset to the selected bucket, where it will be prefixed with `datadog_cloud_cost_detailed_usage_export`.
-
-**Note:** The bucket [must be co-located][9] with the BigQuery export dataset.
-
-
-### Provide Datadog access
-
-#### Enable necessary Google Service APIs
+#### Enable Google Service APIs
 The [Enable BigQuery and BigQuery Data Transfer Service APIs][5] and permissions enable Datadog to access your Detailed Usage billing export data and extract it in a useful format.
 A scheduled BigQuery query dumps data to your specified Google Cloud Storage bucket.
 
@@ -77,21 +68,7 @@ A scheduled BigQuery query dumps data to your specified Google Cloud Storage buc
   2. From the dropdown menu, select the appropriate project.
   3. Click the ENABLE button.
 
-#### Configure required bucket access
-[Add the service account as a principal on the GCS bucket resource][6]:
-1. Select your bucket in the Google Cloud console (go to the Cloud Storage Buckets page).
-2. Select the Permissions tab near the top of the page and click the 'Grant access' button.
-3. In the New principals field, enter the service account.
-4. Assign a role with the following permissions:
-   * `storage.buckets.get`
-   * `storage.objects.create`
-   * `storage.objects.delete`
-   * `storage.objects.get`
-   * `storage.objects.list`
-
-  **Note:** This can be a custom role, or you can use the existing Google Cloud roles `roles/storage.legacyObjectReader` and `roles/storage.legacyBucketWriter`.
-
-#### Configure required export project access
+#### Configure export project access
 [Add the service account as a principal on the export dataset project resource][7]:
 1. Select the export dataset project in the Google Cloud console (go to the IAM page).
 2. Select the service account as a principal.
@@ -102,7 +79,7 @@ A scheduled BigQuery query dumps data to your specified Google Cloud Storage buc
 
   **Note:** This can be a custom role, or you can use the existing Google Cloud role `roles/bigquery.admin`.
 
-#### Configure required export BigQuery dataset access
+#### Configure export BigQuery dataset access
 [Add the service account as a principal on the export BigQuery dataset resource][8]:
 1. In the Explorer pane on the BigQuery page expand your project and select the export BigQuery dataset.
 2. Click 'Sharing > Permissions' and then 'Add principal'.
@@ -120,7 +97,27 @@ A scheduled BigQuery query dumps data to your specified Google Cloud Storage buc
 
   **Note:** This can be a custom role, or you can use the existing Google Cloud role `roles/bigquery.dataEditor`.
 
-#### (Optional) Configure required cross-project service authorization:
+### Create or select a Google Cloud Storage bucket
+Use an existing Google Cloud Storage bucket or create a new one.
+Data is extracted regularly from your Detailed Usage Cost BigQuery dataset to the selected bucket, where it will be prefixed with `datadog_cloud_cost_detailed_usage_export`.
+
+**Note:** The bucket [must be co-located][9] with the BigQuery export dataset.
+
+#### Configure bucket access
+[Add the service account as a principal on the GCS bucket resource][6]:
+1. Select your bucket in the Google Cloud console (go to the Cloud Storage Buckets page).
+2. Select the Permissions tab near the top of the page and click the 'Grant access' button.
+3. In the New principals field, enter the service account.
+4. Assign a role with the following permissions:
+   * `storage.buckets.get`
+   * `storage.objects.create`
+   * `storage.objects.delete`
+   * `storage.objects.get`
+   * `storage.objects.list`
+
+  **Note:** This can be a custom role, or you can use the existing Google Cloud roles `roles/storage.legacyObjectReader` and `roles/storage.legacyBucketWriter`.
+
+### (Optional) Configure cross-project service authorization:
 If your integrated Service Account exists in a different Google Cloud Platform project than your billing export dataset, you need to [grant cross-project service account authorization][10]:
 
 1. Trigger the service agent creation by following the [official documentation][11] using the following values:
