@@ -3687,12 +3687,12 @@ main:
     url: security/misconfigurations/frameworks_and_benchmarks/custom_frameworks
     parent: cspm_frameworks_benchmarks
     identifier: cspm_custom_frameworks
-    weight: 303
+    weight: 101
   - name: Supported Frameworks
-    url: security/misconfigurations/supported_frameworks
-    parent: cspm
+    url: security/misconfigurations/frameworks_and_benchmarks/supported_frameworks
+    parent: cspm_frameworks_benchmarks
     identifier: cspm_supported_frameworks
-    weight: 304
+    weight: 102
   - name: Misconfigurations Explorer
     url: /security/misconfigurations/findings
     parent: cspm
