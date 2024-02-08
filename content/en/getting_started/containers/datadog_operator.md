@@ -66,9 +66,9 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
 
 <div class="alert alert-warning">Available in Operator 1.4.0 or later</div>
 
-By default, the Datadog Operator creates an agent daemonset with pods running multiple agent containers. Datadog Operator v1.4.0 introduces a configuration which allows users to run agents in a single container. This feature is only applicable when privileged agents are not required.
+By default, the Datadog Operator creates an Agent Daemonset with pods running multiple Agent containers. Datadog Operator v1.4.0 introduces a configuration which allows users to run Agents in a single container. This feature is only applicable when privileged Agents are not required.
 
-To enable this feature, add `global.containerStrategy: single` to the `DatadogAgent` manifest:
+To enable this feature add `global.containerStrategy: single` to the `DatadogAgent` manifest:
 
 {{< highlight yaml "hl_lines=7" >}}
   apiVersion: datadoghq.com/v2alpha1
@@ -91,9 +91,9 @@ To enable this feature, add `global.containerStrategy: single` to the `DatadogAg
       logCollection:
         enabled: true
 {{< /highlight >}}
-With the above configuration, agent pods run a single container with three agent processes. Default for `global.containerStrategy` is `optimized` and runs each agent process in a separate container.
+With the above configuration, Agent pods run as single containers with three Agent processes. The default for `global.containerStrategy` is `optimized` and runs each Agent process in a separate container.
 
-**Note:** Running multiple agent processes in a single container is discouraged in orchestrated environments such as Kubernetes. Kubernetes manages the lifecycle of pods and containers, and it takes actions for scenarios, such as when a container within a pod exits unexpectedly. However, when pods run multiple processes, their lifecycle needs to be managed by a process manager. The behavior of the process managers is not directly controllable by Kubernetes, potentially leading to inconsistencies or conflicts in the container lifecycle management.
+**Note**: Running multiple Agent processes in a single container is discouraged in orchestrated environments such as Kubernetes. Pods running multiple processes need their lifecycles to be managed by a process manager, which is not directly controllable by Kubernetes and potentially leads to inconsistencies or conflicts in the container lifecycle management.
 
 ## Validation
 
