@@ -561,6 +561,7 @@ set_redirect_metadata_live:
   script:
     - in-isolation run_update_redirect_metadata
   interruptible: true
+  allow_failure: true
 
 ####################################
 #                                  #
