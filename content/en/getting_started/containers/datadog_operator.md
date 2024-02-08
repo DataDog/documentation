@@ -93,7 +93,7 @@ To enable this feature, add `global.containerStrategy: single` to the `DatadogAg
   ```
 With the above configuration, agent pods run a single container with three agent processes. Default for `global.containerStrategy` is `optimized` and runs each agent process in a separate container.
 
-**Note:** Running multiple agent processes in a single container is discouraged in orchestrated environments such as Kubernetes. Kubernetes manages the lifecycle of pods and containers, it takes actions for example when container within a pod exits unexpectedly. However, when pods run multiple processes their lifecycle needs to be managed by a process manager. The behavior of the process managers is not directly controllable by Kubernetes, potentially leading to inconsistencies or conflicts in the container lifecycle management.
+**Note:** Running multiple agent processes in a single container is discouraged in orchestrated environments such as Kubernetes. Kubernetes manages the lifecycle of pods and containers, and it takes actions for scenarios, such as when a container within a pod exits unexpectedly. However, when pods run multiple processes, their lifecycle needs to be managed by a process manager. The behavior of the process managers is not directly controllable by Kubernetes, potentially leading to inconsistencies or conflicts in the container lifecycle management.
 
 ## Validation
 
