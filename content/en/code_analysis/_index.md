@@ -36,7 +36,7 @@ Static Analysis
 : Scans your bespoke code for maintainability issues, bugs, performance issues, and security vulnerabilities early in the development lifecycle to catch issues from reaching production and, when possible, provide suggested fixes to help engineering teams address these issues before they impact users.
 
 Software Composition Analysis 
-: Scans the open-source libraries that are imported into your repositories for known vulnerabilities. Coming soon will be the ability to block libraries with certain licenses and suggestions on which version of a library you should update to so that you can resolve the vulnerability.
+: Scans the open source libraries that are imported into your repositories for known vulnerabilities. 
 
 Once you have configured Code Analysis, you can head to the [Code Analysis page][9] to see a summary of the results from the Static Analysis and SCA scans for each of your configured repositories. The summarized results will always be for the latest commit on the default branch of each repository to ensure you are seeing all the existing problems on each repository that you may want to triage and fix.
 
@@ -61,7 +61,7 @@ Identify and address poor coding practices detected by Static Analysis in the **
 
 {{< img src="code_analysis/shopist_lib_vulnerabilities.png" alt="Library vulnerabilities on the Code Analysis page for the Datadog Shopist service and repository" style="width:100%;">}}
 
-Identify and address vulnerable open-source libraries detected by SCA in the **Library Vulnerabilities** view.
+Identify and address vulnerable open source libraries detected by SCA in the **Library Vulnerabilities** view.
 
 {{% /tab %}}
 {{% tab "Library List" %}}

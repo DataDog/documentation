@@ -1,6 +1,6 @@
 ---
 - config:
-    cache_enabled: false
+    cache_enabled: true
 
 - data:
     - org_name: jenkinsci
@@ -377,7 +377,7 @@
       - repo_name: datadog-static-analyzer-rule-docs
         contents:
         - action: pull-and-push-folder
-          branch: dastrong/add-alias
+          branch: main
           globs:
           - rulesets/**/*.md
           options:
