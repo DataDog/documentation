@@ -75,7 +75,7 @@ Toggle among the **Pods**, **Clusters**, **Namespaces**, and other Kubernetes re
 
 Each of these views includes a data table to help you better organize your data by field such as status, name, and Kubernetes labels, and a detailed Cluster Map to give you a bigger picture of your pods and Kubernetes clusters.
 
-***See [Query Filter Details](#query-filter-details) for more details on how to filter these views.***
+***See [Query filter details](#query-filter-details) for more details on how to filter these views.***
 
 {{< img src="infrastructure/livecontainers/orch_ex_replicasets.png" alt="Orchestrator Explorer opened to show Workloads > Replica Sets, in Summary mode" style="width:80%;">}}
 
@@ -140,13 +140,15 @@ All of these columns support sorting, which helps you to pinpoint individual wor
 
 {{< img src="infrastructure/livecontainers/orch_ex_resource_utilization_sorted_column.png" alt="Container Resource Utilization Sorted Columns" style="width:50%;">}}
 
-## Query Filter Details
+## Query filter details
 
 You can narrow down the displayed resources by supplying a query within the "Filter by" search bar on the top left of the page.
 
 ### Syntax
 
 A query filter is composed of terms and operators.
+
+{{< img src="infrastructure/livecontainers/orch_syntax.png" alt="Orchestrator Explorer query filter syntax." style="width:80%;">}}
 
 #### Terms
 
@@ -155,11 +157,10 @@ There are multiple types of terms available:
 | Type | Examples |
 |---|---|
 | **Tags** are attached to resources by [the agent collecting them](https://docs.datadoghq.com/getting_started/tagging/assigning_tags/?tab=containerizedenvironments). There are also additional tags that Datadog generates for Kubernetes resources. | `datacenter:staging`<br>`tag#datacenter:staging`<br>*(the `tag#` is optional)* |
-| **Labels** are extracted from [a resource's metadata](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/). They are typically used to organize your cluster and target specific resources via selectors. | `label#chart_version:2.1.0` |
+| **Labels** are extracted from [a resource's metadata](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/). They are typically used to organize your cluster and target specific resources with selectors. | `label#chart_version:2.1.0` |
 | **Annotations** are also extracted from [a resource's metadata](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/). They are generally used to support tooling that aid in cluster management. | `annotation#checksum/configmap:a1bc23d4` |
-| **Fields** are attributes found within the resource manifest. Not all attributes are supported, see [Manifest Fields](#manifest-fields) for more details. | `field#metadata.creationTimestamp:>1699535065` |
 | **Metrics** are added to workload resources (pods, deployments, etc.). You can find resources based on their utilization. To see what metrics are supported, see [Resource Utilization Filters](#resource-utilization-filters). | `metric#cpu_usage_pct_limits_avg15:>80%` |
-| **String matching** is supported by some specific resource attributes, see below.<br>*Note: string matching does not use the key-value format, and you cannoy specify the attribute to match on.* | `"10.132.6.23"` (IP)<br>`"9cb4b43f-8dc1-4a0e"` (UID)<br>`"web-api-3"` (Name) |
+| **String matching** is supported by some specific resource attributes, see below.<br>*Note: string matching does not use the key-value format, and you cannoy specify the attribute to match on.* | `"10.132.6.23"` (IP)<br>`"9cb4b43f-8dc1-4a0e"` (UID)<br>`web-api-3` (Name) |
 
 >  ***Notes**: You might find the same key-value pairs as both a tag and label (or annotation) - this is dependent on how your cluster is configured.*
 
@@ -171,13 +172,13 @@ The following resource attributes are supported in arbitrary **String Matching**
   - Nodes (Internal and External)
   - Services (Cluster, External, and Load Balancer IPs)
 
-This means that you do not need to specify a key to search for a resource by name, or IP.
+This means that you do not need to specify a key to search for a resource by name, or IP. Quotes are not required unless your string search includes certain special characters.
 
 #### Comparators
 
-All terms support the `:` equality operator. [Manifest Fields](#manifest-fields) and [Metric Values](#Resource-Utilization-Filters) support numeric comparisons as well:
+All terms support the `:` equality operator. [Metric Value](#Resource-Utilization-Filters) terms support numeric comparisons as well:
 
-- `:>` Greater than (i.e. `metric#cpu_usage_avg15:>0.9`)
+- `:>` Greater than (for example, `metric#cpu_usage_avg15:>0.9`)
 - `:>=` Greater than or equal
 - `:<` Less than
 - `:<=` Less than or equal
@@ -193,6 +194,20 @@ To combine multiple terms into a complex query, you can use any of the following
 | `NOT` / `-` | **Exclusion**: the following term is NOT in the event (apply to each individual raw text search) | `a AND NOT b` or<br>`a AND -b` |
 |  `( )` | **Grouping:** specify how to group terms logically. | `a AND (b OR c)` or<br>`(a AND b) or c` |
 
+##### `OR` Value Shorthand
+
+Multiple terms sharing the same field name can be combined into a single term if they are all `OR`ed. For example, this query:
+
+```
+app_name:web-server OR app_name:database OR app_name:event-consumer
+```
+
+Can be reduced to:
+
+```
+app_name:(web-server OR database OR event-consume)
+```
+
 ### Wildcards
 
 You can use `*` wildcards as part of a term to filter by partial matches, both for values and keys! Some examples:
@@ -205,15 +220,15 @@ You can use `*` wildcards as part of a term to filter by partial matches, both f
 
 ### Autocomplete
 
-As you build your filter query, our autocomplete drop down will help you fill in the blanks. The filter query autocomplete drop down is composed of 3 parts:
+As you build your filter query, the autocomplete drop down can help you fill in the blanks. The filter query autocomplete drop down is composed of 3 parts:
 
 | Section | Description|
 |---|---|
-| **Facet Keys** | These suggestions will help you find, or finish typing available keys on the resources you are currently filteing. The suggestions are based on keys that are most abundent across your currently selected resources. This section only appears if you are just starting to enter a new search term, or are still typing a facet key. Once you begin typing the value portion of a search term it will be hidden. |
+| **Facet Keys** | These suggestions can help you find, or finish typing, available keys on the resources you are querying. The suggestions are based on the keys that are most abundent across your filtered resources. This section only appears if you are starting to enter a new search term, or are still typing a facet key. After you begin typing the value portion of a search term it will be hidden. |
 | **Facets** | These recommendations will be full term suggestions based on the prevelance of the facet on the currently found resources, and whatever you have already typed. |
-| **Recent Seearches** | These are the most recent full queries you have used to filter your resources, allowing you to quickly navigate back to a past filter query. |
+| **Recent Searches** | These are the most recent full queries you have used to filter your resources, allowing you to quickly navigate back to a past filter query. |
 
->  ***Note**: For both Facet Key and Facet recommnations, you will see the type of facet being recommended in grey text at the end: Tag, Label, or Annotation.*
+>  ***Note**: For both Facet Key and Facet recommendations, you will see the type of facet being recommended in grey text at the end: Tag, Label, or Annotation.*
 
 ### Extracted Tags
 
@@ -221,7 +236,7 @@ In addition to the tags you have [configured](https://docs.datadoghq.com/getting
 
 #### All Resources
 
-All resources will have the `kube_cluster_name` and `kube_namespace` tags added to them.
+All resources will have the `kube_cluster_name` tag and all namespaced resources have the `kube_namespace` tag added to them.
 
 They will also have a `kube_<api_kind>:<metadata.name>` tag. For example, a deployment named `web-server-2` would have the `kube_deployment:web-server-2` tag automatically added to it.
 
@@ -275,6 +290,12 @@ Workload resources (pods, deployments, stateful sets, etc.) will have the follow
 - `missing_memory_requests`
 - `missing_memory_limits`
 
+#### Conditions
+
+Some conditions, for some resources, are extracted as tags. For example, you can find the `kube_condition_available` tag on Deployments. The tag format is always `kube_condition_<name>` with a `true` or `false` value.
+
+> **Tip**: Use the Autocomplete feature to discover what conditions are available on a given resource type by entering `kube_condition` and reviewing the results.
+
 #### Custom Resources
 
 Custom Resource Definitions (`kube_crd`) and Custom Resources (`kube_cr`) will have the following tags added to them:
@@ -297,17 +318,12 @@ Some resources have specificialized tags as well - these are extracted based on 
 | Resource | Extracted Tags |
 |---|---|
 | **Cluster** | `api_server_version`<br>`kubelet_version` |
-| **Deployment** | `kube_condition_available`<br>`kube_condition_progressing`<br>`kube_condition_replicafailure` |
 | **Namespace** | `phase` |
 | **Node** | `kube_node_unschedulable`<br>`kube_node_kubelet_version`<br>`kube_node_kernel_version`<br>`kube_node_runtime_version`<br>`eks_fargate_node`<br>`node_schedulable`<br>`node_status` |
 | **Persistent Volume** | `kube_reclaim_policy`<br>`kube_storage_class_name`<br>`pv_type`<br>`pv_phase` |
 | **Persistent Volume Claim** | `pvc_phase`<br>`kube_storage_class_name` |
 | **Pod** | `pod_name` (instead of `kube_pod`)<br>`pod_phase` (extracted from the Manifest)<br>`pod_status` (calculated similarly to `kubectl`) |
 | **Service** | `kube_service_type`<br>`kube_service_port` |
-
-### Manifest Fields
-
-Currently, the only manifest field available for comparison is `field#metadata.creationTimestamp`. The value is a Unix Epoch in seconds (UTC). To look for resources created before January 1st, 2022, you would filter by: `field#metadata.creationTimestamp:<=1577836800`
 
 ### Resource Utilization Filters
 
@@ -321,7 +337,7 @@ The following workload resouces are enriched with resource utilization metrics:
 - Replica Sets
 - Stateful Sets
 
-You can filter by metric values like so: `metric#<metric_name><comparator><numeric_value>`.
+These metrics are calculated at the time of collection, based on the average values over the last 15 minutes. You can filter by metric values like so: `metric#<metric_name><comparator><numeric_value>`.
 
 - `metric_name` is an availbale metric (see below)
 - `comparator` is a support [Comparator](#Comparator)
@@ -351,7 +367,7 @@ CPU metrics are stored as a number of cores.
 
 Memory metrics are stored as bytes.
 
-Percents are stored as floats, where `0.0` is 0%, and `1.0` is 100%. Some metric values go well beyond 100%, such as CPU Usage Percents by Requests.
+Percents (`*_pct_*`) are stored as floats, where `0.0` is 0%, and `1.0` is 100%. The value is the ratio of the two indicated metrics - for example `cpu_usage_pct_limits_avg15` is the value of `usage / limits`. Metric values can be above 100%, such as Percentage CPU Usage of Requests.
 
 ## Notes and known issues
 
