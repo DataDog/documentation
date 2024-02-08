@@ -61,7 +61,7 @@ The following is an example JSON object of a ECS task component:
 - **link: string, uri**: A URI that links the component to another diagram or an external website. Accepts one of the following formats: `blueprint://` or `https://`.
 - **locked: boolean**: Whether to allow changes to the position of the component through the web interface. Defaults to `false`.
 
-## Accepted values for cpu
+## Accepted values for `cpu`
 
 The `cpu` key accepts the following values:
 
@@ -71,7 +71,7 @@ The `cpu` key accepts the following values:
 
 **Note**: This key does not do anything if you set `launchType` to `ec2`.
 
-## Accepted values for memoryGB
+## Accepted values for `memoryGB`
 
 The `memoryGB` key accepts the following values:
 
@@ -82,13 +82,13 @@ The `memoryGB` key accepts the following values:
 
 **Note**: This key does not do anything if you set `launchType` to `ec2`.
 
-## Valid combinations for cpu and memoryGB
+## Valid combinations for `cpu` and `memoryGB`
 
-The `cpu` and `memoryGB` keys work together to define the size of your task, but you must provide a valid combination of values.
+The `cpu` and `memoryGB` keys together determine the size of your task, but you must provide a valid combination of values.
 
 The table below shows which combinations are valid.
 
-cpu  | memoryGB
+CPU  | memoryGB
 ---- | ---------
 256  | 0.5, 1, 2
 512  | {1..4}

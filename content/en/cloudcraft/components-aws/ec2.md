@@ -69,12 +69,12 @@ The following is an example JSON of a EC2 block:
 - **accentColor: object**: The accent color used to display the component logo on top of the block.
   - **isometric: string**: The accent color for the component in the 3D view. Must be a hexadecimal color.
   - **2d: string**: The accent color for the component in the 2D view. Must be a hexadecimal color.
-- **link: uri**: Link the component to another diagram in the `blueprint://ID` format or to an external website in the `https://LINK` format.
+- **link: uri**: Link the component to another diagram using the `blueprint://ID` format or to an external website using the `https://LINK` format.
 - **locked: boolean**. If `true`, changes to the component through the application are disabled until unlocked.
 
 The EC2 component can be added to [VPCs][2], [security groups][3], [auto scaling groups][4], and [subnets][5].
 
-## Accepted values for the platform
+## Accepted values for `platform`
 
 The `platform` key accepts the following values:
 
@@ -82,7 +82,7 @@ The `platform` key accepts the following values:
 linux, linuxSQL, linuxSQLWeb, linuxSQLEnterprise, rhel, sles, mswin, mswinSQL, mswinSQLWeb, mswinSQLEnterprise
 ```
 
-## Accepted values for instanceType
+## Accepted values for `instanceType`
 
 The `instanceType` key accepts the following values:
 
@@ -90,7 +90,7 @@ The `instanceType` key accepts the following values:
 a1, c1, c3, c4, c5, c5a, c5ad, c5d, c5n, c6g, c6gd, c6gn, cc2, cr1, d2, d3, d3en, f1, g2, g3, g3s, g4ad, g4dn, h1, hs1, i2, i3, i3en, inf1, m1, m2, m3, m4, m5, m5a, m5ad, m5d, m5dn, m5n, m5zn, m6g, m6gd, p2, p3, p3dn, p4d, r3, r4, r5, r5a, r5ad, r5b, r5d, r5dn, r5n, r6g, r6gd, t1, t2, t3, t3a, t4g, x1, x1e, z1d
 ```
 
-## Accepted values for instanceSize
+## Accepted values for `instanceSize`
 
 The `instanceSize` key accepts the following values:
 
@@ -98,7 +98,7 @@ The `instanceSize` key accepts the following values:
 micro, nano, small, medium, large, xlarge, 2xlarge, 3xlarge, 4xlarge, 6xlarge, 8xlarge, 9xlarge,  10xlarge, 12xlarge, 16xlarge, 18xlarge, 24xlarge, 32xlarge, metal
 ```
 
-## Accepted values for billingOptions
+## Accepted values for `billingOptions`
 
 The `billingOptions` key accepts all billing options currently accepted by Cloudcraft:
 
