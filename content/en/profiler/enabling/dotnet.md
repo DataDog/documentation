@@ -168,6 +168,10 @@ To install the .NET Profiler per-webapp:
    DD_VERSION=1.2.3
    ```
 
+<div class="alert alert-warning">
+<strong>Note</strong>: When using Single Step Instrumentation, please set the `LD_PRELOAD` to /opt/datadog/apm/library/dotnet/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so`
+</div>
+
 4. For standalone applications, manually restart the application as you normally would.
 
 5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
