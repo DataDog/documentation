@@ -546,7 +546,6 @@ set_redirect_metadata_preview:
   script:
     - in-isolation run_update_redirect_metadata
   interruptible: true
-  allow_failure: true
 
 set_redirect_metadata_live:
   <<: *base_template
