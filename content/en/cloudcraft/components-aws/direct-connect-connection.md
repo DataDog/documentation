@@ -22,7 +22,7 @@ Use the toolbar to configure and customize the component. The following options 
 
 ## API
 
-Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
+Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
 
 ### Schema
 

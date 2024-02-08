@@ -20,7 +20,7 @@ Use the toolbar to configure and customize the component. The following options 
 
 ## API
 
-Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. 
+Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. 
 
 ### Schema
 
@@ -90,7 +90,7 @@ micro, small, medium, large, xlarge, 2xlarge, 4xlarge, 8xlarge, 10xlarge, 12xlar
 
 ## Accepted values for `billingOptions`
 
-The `billingOptions` key accepts all billing options that are accepted by the Cloudcraft web application:
+The `billingOptions` key supports all billing options that are accepted by the Cloudcraft web application:
 
 - On-demand
 - Reserved instance

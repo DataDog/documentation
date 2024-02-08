@@ -18,7 +18,7 @@ Use the toolbar to configure and customize the component. The following options 
 
 ## API
 
-Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
+Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
 
 ### Schema
 
@@ -56,7 +56,7 @@ The following is an example JSON object of a customer gateway component:
   - **2d: string**: The accent color for the component in the 2D view. Must be a hexadecimal color.
 - **direction: string**: The rotation or direction of the component. Accepts `down` or `right` as values, with `down` as the default.
 - **link: uri**: Link the component to another diagram using the `blueprint://ID` format or to an external website using the `https://LINK` format.
-- **locked: boolean**: Whether to allow changes to the position of the component through the web interface. If `true`, changes to the component through the application are disabled until unlocked.
+- **locked: boolean**: Whether to allow changes to the position of the component through the web interface. If `true`, changes made to the component using the application are disabled until unlocked.
 
 The customer gateway component can only be added to [VPCs][2].
 

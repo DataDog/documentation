@@ -1,22 +1,27 @@
 ---
-title: "Component: Internet gateway"
-kind: guide
+title: "Internet Gateway Component"
+kind: documentation
 ---
+## Overview
 
-{{< img src="cloudcraft/components-aws/internet-gateway/component-internet-gateway-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Internet gateway' AWS component." responsive="true" style="width:100%;">}}
+Use the internet gateway component to represent gateways to the internet from your Amazon Web Services architecture.
 
-The **Internet gateway** component is used to represent gateways to the internet in your Amazon Web Services architecture with Cloudcraft.
+{{< img src="cloudcraft/components-aws/internet-gateway/component-internet-gateway-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Internet gateway' AWS component." responsive="true" style="width:60%;">}}
 
 ## Toolbar
 
-The toolbar is displayed when selecting a component. It allows you customize parts of your component and its visual to your liking.
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**. Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both 2D and 3D view, or different colors for each.
-- **Rotate**. Rotate the component and change its direction.
+- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- **Rotate**: Rotate the component and change its direction.
 
 ## API
 
-In [the Cloudcraft API][1], the internet gateway component is represented in JSON.
+Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
+
+### Schema
+
+The following is an example JSON of an internet gateway component:
 
 ```json
 {
@@ -38,21 +43,21 @@ In [the Cloudcraft API][1], the internet gateway component is represented in JSO
 }
 ```
 
-- **type: internetgateway**. The type of component.
-- **id: string**. A unique identifier for the component in the `uuid` format.
-- **region: string**. The AWS region this gateway is deployed in. With the exception of `cn-` regions, all global regions are supported.
-- **mapPos: [number, number]**. The position of the component in the blueprint, expressed as a x,y coordinate pair.
-- **color: object**. The fill color for the component body.
-  - **isometric: string**. Fill color for the component in 3D view. Must be an hexadecimal color.
-  - **2d: string**. Fill color for the component in 2D view. Must be an hexadecimal color.
-- **accentColor: obect**. The accent color used to display the component logo on the block.
-  - **isometric: string**. Accent color for the component in 3D view. Must be an hexadecimal color.
-  - **2d: string**. Accent color for the component in 2D view. Must be an hexadecimal color.
-- **direction: string**. The rotation or direction of the component. Accepts `down` or `right` as value, with `down` as the default.
-- **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
-- **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
+- **type: internetgateway**: The type of component.
+- **id: string**: A unique identifier for the component in the `uuid` format.
+- **region: string**: The AWS region the gateway is deployed in. All global regions are supported except `cn-` regions.
+- **mapPos: [number, number]**: The position of the component in the blueprint, expressed as an x- and y-coordinate pair.
+- **color: object**: The fill color for the component body.
+  - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The fill color for the component in the 2D view. Must be a hexadecimal color.
+- **accentColor: obect**: The accent color used to display the component logo on the block.
+  - **isometric: string**: The accent color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The accent color for the component in the 2D view. Must be a hexadecimal color.
+- **direction: string**: The rotation or direction of the component. Accepts `down` or `right` as a value, with `down` as the default.
+- **link: uri**: Link the component to another diagram using the `blueprint://ID` format or to external website using the `https://LINK` format.
+- **locked: boolean**: If `true`, changes made to the component using the application are disabled until unlocked.
 
 The internet gateway component can only be added to [VPCs][2].
 
 [1]: https://developers.cloudcraft.co/
-[2]: https://help.cloudcraft.co/article/118-component-vpc
+[2]: /cloudcraft/components-aws/vpc/

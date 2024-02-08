@@ -17,7 +17,7 @@ Use the toolbar to configure and customize your component. The following options
 
 ## API
 
-Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. 
+Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. 
 
 ### Schema
 
@@ -55,6 +55,6 @@ The following is an example JSON object of an auto scaling group component:
   - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
   - **2d: string**: The fill color for the component in the 2D view. Must be a hexadecimal color.
 - **link: uri**: Link the component to another diagram using the `blueprint://ID` format or to an external website using the `https://LINK` format.
-- **locked: boolean**: If `true`, changes to the component through the application are disabled until unlocked.
+- **locked: boolean**: If `true`, changes made to the component using the application are disabled until unlocked.
 
 [1]: https://developers.cloudcraft.co/

@@ -21,7 +21,7 @@ You can also add the **EKS Cluster** component to [VPCs][1], [security groups][2
 
 ## API
 
-Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
+Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
 
 ### Schema
 

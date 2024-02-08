@@ -20,7 +20,7 @@ You can also add the **ECS Service** component to [VPCs][1], [security groups][2
 
 ## API
 
-Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. T
+Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. T
 
 ### Schema
 

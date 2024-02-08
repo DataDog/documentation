@@ -21,7 +21,7 @@ Use the toolbar to configure and customize the component. The following options 
 
 ## API
 
-Use [the Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. 
+Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects. 
 
 ### Schema
 
@@ -69,7 +69,7 @@ The following is an example JSON of a EFS component:
   - **isometric: string**: The accent color for the component in the 3D view. Must be a hexadecimal color.
   - **2d: string**: The accent color for the component in the 2D view. Must be a hexadecimal color.
 - **link: uri**: Link the component to another diagram using the `blueprint://ID` format or to an external website using the `https://LINK` format.
-- **locked: boolean**. If `true`, changes to the component through the application are disabled until unlocked.
+- **locked: boolean**. If `true`, changes made to the component using the application are disabled until unlocked.
 
 The EFS component can be added to [VPCs][2], [security groups][3], and [subnets][4].
 
