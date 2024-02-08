@@ -23,14 +23,14 @@ further_reading:
 
 ## Overview
 
-The [Explorer][1] provides visibility into all test runs and CI batches for **Synthetic Monitoring** and **Continuous Testing**. 
+The [Results Explorer][1] provides visibility into all test runs and CI batches for **Synthetic Monitoring** and **Continuous Testing**. 
 
 {{< tabs >}}
 {{% tab "CI Batches" %}}
-{{< img src="continuous_testing/explorer_ci_batches.png" alt="Search and manage your CI batches in the Synthetic Monitoring & Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_ci_batches_1.png" alt="Search and manage your CI batches in the Synthetic Monitoring & Continuous Testing Explorer" style="width:100%;">}}
 {{% /tab %}}
 {{% tab "Test Runs" %}}
-{{< img src="continuous_testing/explorer_test_runs.png" alt="Search and manage your test runs in the Synthetic Monitoring & Continuous Testing Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_test_runs_1.png" alt="Search and manage your test runs in the Synthetic Monitoring & Continuous Testing Explorer" style="width:100%;">}}
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -44,7 +44,7 @@ You can accomplish the following actions:
 
 Navigate to [**UX Monitoring** > **Explorer**][1] and click on an out-of-the-box search query to start viewing your test batches or runs and creating visualizations.
 
-{{< img src="continuous_testing/explorer_search_query.png" alt="Out-of-the-box search queries available in the Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_search_query_1.png" alt="Out-of-the-box search queries available in the Explorer" style="width:100%;">}}
 
 - View failed tests running in a CI pipeline by filtering on their blocking status and confirming if they are blocking your new releases.
 - Analyze failing test runs with HTTP error status codes to identify API tests with unexpected status codes.
@@ -55,7 +55,7 @@ For more information, see [Search Syntax][5].
 
 ## Explore test runs
 
-The Explorer displays all of your test runs from [Synthetic Monitoring][7] and [Continuous Testing][8]. Every test corresponds to a test run for a particular test subtype, including fast retries. Click on a test in the Explorer to access the test run page.
+The Results Explorer displays all of your test runs from [Synthetic Monitoring][7] and [Continuous Testing][8]. Every test corresponds to a test run for a particular test subtype, including fast retries. Click on a test in the Results Explorer to access the test run page.
 
 {{< img src="continuous_testing/api_test_run.png" alt="API test run details page" style="width:100%;">}}
 
@@ -67,9 +67,9 @@ For more information about test runs, see [Search Test Runs][6].
 
 ## Explore test batches
 
-The Explorer displays batches of tests run by [Continuous Testing and your CI/CD provider][2]. Every batch corresponds with a call to the Datadog API (through one of your [CI/CD integrations][2], the [datadog-ci][3] NPM package, or directly through the API endpoint) and triggers one or several test executions. 
+The Results Explorer displays batches of tests run by [Continuous Testing and your CI/CD provider][2]. Every batch corresponds with a call to the Datadog API (through one of your [CI/CD integrations][2], the [datadog-ci][3] NPM package, or directly through the API endpoint) and triggers one or several test executions. 
 
-{{< img src="continuous_testing/open_sidepanel.png" alt="Side panel in the CI Results Explorer" style="width:100%;">}}
+{{< img src="continuous_testing/open_sidepanel.png" alt="Side panel in the Synthetic Monitoring & Continuous Testing Explorer" style="width:100%;">}}
 
 1. Click on a batch to open a side panel containing batch CI/CD metadata and batch test results. 
 2. Explore the test executions performed as part of the batch and pinpoint test failures. 

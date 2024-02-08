@@ -796,11 +796,6 @@ main:
     url: developers/community/libraries/
     parent: dev_community
     weight: 801
-  - name: Community Office Hours
-    identifier: dev_community_office_hours
-    url: developers/community/office_hours/
-    parent: dev_community
-    weight: 802
   - name: Guides
     url: developers/guide/
     parent: dev_tools
@@ -1326,7 +1321,7 @@ main:
     identifier: service_catalog_setup
     weight: 3
   - name: Adding Metadata
-    url: service_catalog/adding_metadata
+    url: service_catalog/add_metadata
     parent: service_catalog
     identifier: service_metadata
     weight: 4
@@ -1355,6 +1350,42 @@ main:
     parent: service_catalog
     identifier: service_catalog_guides
     weight: 9
+  - name: API Catalog
+    url: /api_catalog/
+    pre: api-catalog
+    parent: platform_heading
+    identifier: api_catalog
+    weight: 80000
+  - name: Exploring APIs
+    url: /api_catalog/explore_apis/
+    identifier: api_catalog_explore
+    parent: api_catalog
+    weight: 1
+  - name: Assigning Owners
+    url: /api_catalog/owners_and_tags/
+    identifier: api_catalog_ownership
+    parent: api_catalog
+    weight: 2
+  - name: Monitoring APIs
+    url: /api_catalog/monitor_apis/
+    identifier: api_catalog_monitor
+    parent: api_catalog
+    weight: 3
+  - name: Adding Entries to API Catalog
+    url: /api_catalog/add_entries/
+    identifier: api_catalog_entries
+    parent: api_catalog
+    weight: 4
+  - name: Adding Metadata to APIs
+    url: /api_catalog/add_metadata/
+    identifier: api_catalog_metadata
+    parent: api_catalog
+    weight: 5
+  - name: Troubleshooting
+    url: /api_catalog/troubleshoot/
+    identifier: api_catalog_troubleshoot
+    parent: api_catalog
+    weight: 6
   - name: Service Level Objectives
     url: service_management/service_level_objectives/
     pre: slos
@@ -2062,11 +2093,31 @@ main:
     parent: tracing_trace_collection
     identifier: automatic_instrumentation
     weight: 201
+  - name: Using Single Step Instrumentation
+    url: tracing/trace_collection/automatic_instrumentation/single-step-apm/
+    parent: automatic_instrumentation
+    identifier: single_step_apm
+    weight: 2011
+  - name: Using Datadog Tracing Libraries
+    url: tracing/trace_collection/automatic_instrumentation/dd_libraries/
+    parent: automatic_instrumentation
+    identifier: auto_dd_libraries
+    weight: 2012
   - name: Custom Instrumentation
     url: tracing/trace_collection/custom_instrumentation/
     parent: tracing_trace_collection
     identifier: custom_instrumentation
     weight: 202
+  - name: Using Datadog Libraries
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/
+    parent: custom_instrumentation
+    identifier: tracing_custom_inst
+    weight: 2021
+  - name: Using OpenTelemetry APIs
+    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+    parent: custom_instrumentation
+    identifier: tracing_otel_inst
+    weight: 2022
   - name: Library Compatibility
     url: tracing/trace_collection/compatibility/
     parent: tracing_trace_collection
@@ -2261,21 +2312,6 @@ main:
     identifier: api_catalog
     parent: tracing
     weight: 8
-  - name: Setting Up API Catalog
-    url: /tracing/api_catalog/get_started/
-    identifier: api_catalog_getstart
-    parent: api_catalog
-    weight: 801
-  - name: Exploring and Cataloging APIs
-    url: /tracing/api_catalog/explore_and_catalog_apis/
-    identifier: api_catalog_explore
-    parent: api_catalog
-    weight: 802
-  - name: Monitoring APIs
-    url: /tracing/api_catalog/monitor_apis/
-    identifier: api_catalog_monitor
-    parent: api_catalog
-    weight: 803
   - name: Dynamic Instrumentation
     url: dynamic_instrumentation/
     identifier: dyninst
@@ -2311,6 +2347,11 @@ main:
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_suspect_commits
     weight: 1003
+  - name: Exception Replay
+    url: tracing/error_tracking/exception_replay
+    parent: tracing_error_tracking
+    identifier: tracing_error_tracking_exception_replay
+    weight: 1004
   - name: Data Security
     url: tracing/configure_data_security/
     parent: tracing
@@ -3954,30 +3995,30 @@ main:
     parent: synthetics_search
     identifier: synthetics_search_saved_views
     weight: 501
-  - name: Explorer
+  - name: Results Explorer
     url: continuous_testing/explorer/
     parent: synthetics
-    identifier: synthetics_explorer
+    identifier: synthetics_results_explorer
     weight: 6
   - name: Search Test Batches
     url: continuous_testing/explorer/search/
-    parent: synthetics_explorer
-    identifier: continuous_testing_explorer_search
+    parent: synthetics_results_explorer
+    identifier: continuous_testing_results_explorer_search
     weight: 601
   - name: Search Test Runs
     url: continuous_testing/explorer/search_runs/
-    parent: synthetics_explorer
-    identifier: continuous_testing_explorer_search_runs
+    parent: synthetics_results_explorer
+    identifier: continuous_testing_results_explorer_search_runs
     weight: 602
   - name: Search Syntax
     url: continuous_testing/explorer/search_syntax/
-    parent: synthetics_explorer
-    identifier: continuous_testing_explorer_search_syntax
+    parent: synthetics_results_explorer
+    identifier: continuous_testing_results_explorer_search_syntax
     weight: 603
   - name: Saved Views
     url: continuous_testing/explorer/saved_views/
-    parent: synthetics_explorer
-    identifier: continuous_testing_explorer_saved_views
+    parent: synthetics_results_explorer
+    identifier: continuous_testing_results_explorer_saved_views
     weight: 604
   - name: Test Coverage
     url: synthetics/test_coverage
@@ -4085,10 +4126,10 @@ main:
     parent: continuous_testing
     identifier: continuous_testing_testing_tunnel
     weight: 3
-  - name: Explorer
+  - name: Results Explorer
     url: continuous_testing/explorer/
     parent: continuous_testing
-    identifier: continuous_testing_explorer
+    identifier: continuous_testing_results_explorer
     weight: 4
   - name: Metrics
     url: synthetics/metrics/
