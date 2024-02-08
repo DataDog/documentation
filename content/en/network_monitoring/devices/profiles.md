@@ -66,8 +66,10 @@ For more Datadog provided profiles, see the [GitHub repository][3].
 
 ### Metadata definition by profile
 
-Profiles have a metadata section that can be used to define where and how metadata should be collected. Values can be static or come from an OID value.
-With Datadog Agent version 7.52 and later, a new `device_type` field is supported. Accepted values include:
+Profiles have a metadata section that can be used to define where and how metadata should be collected. Values can be static or come from an OID value. Metadata can be used to filter on the devices.
+Supported fields can be found [here][4].
+
+With Datadog Agent version 7.52 and later, a new `device_type` field is supported a a device metadata. This can be configured in the profile and can be used to filter. Accepted values include:
 
 - access_point
 - firewall
@@ -83,7 +85,7 @@ With Datadog Agent version 7.52 and later, a new `device_type` field is supporte
 - ups
 - wlc
 
-To know more about the profiles format, see the [Profile Format Reference][4].
+To know more about the profiles format, see the [Profile Format Reference][5].
 
 ## Further Reading
 
@@ -93,4 +95,5 @@ To know more about the profiles format, see the [Profile Format Reference][4].
 [1]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/generic-device.yaml
 [2]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-3850.yaml
 [3]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/default_profiles
-[4]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/networkdevice/metadata/payload.go
+[5]: https://datadoghq.dev/integrations-core/tutorials/snmp/profile-format/
