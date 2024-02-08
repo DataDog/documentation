@@ -70,7 +70,7 @@ By default, the Datadog Operator creates an agent daemonset with pods running mu
 
 To enable this feature, add `global.containerStrategy: single` to the `DatadogAgent` manifest:
 
-  ```yaml
+{{< highlight yaml "hl_lines=7" >}}
   apiVersion: datadoghq.com/v2alpha1
   kind: DatadogAgent
   metadata:
