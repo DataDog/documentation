@@ -72,56 +72,25 @@ To begin profiling applications:
 
 3. Run the installer to install both the tracer and profiler, for example `php datadog-setup.php --enable-profiling`. This script is interactive and asks which of the detected PHP locations it should install to. At the end of the script, it outputs the non-interactive version of the command arguments for future use.
 
-   {{< tabs >}}
-{{% tab "CLI" %}}
-
-Set the environment variables before calling PHP, for example:
+4. Configure the profiler using config mode through the `datadog-setup.php`:
 
 ```
-# DD_PROFILING_ENABLED is not required for v0.82.0+.
-export DD_PROFILING_ENABLED=true
+# `datadog.profiling_enabled` is not required for v0.82.0+.
+php datadog-setup.php config set -d datadog.profiling.enabled=1
 
-export DD_SERVICE=app-name
-export DD_ENV=prod
-export DD_VERSION=1.3.2
+php datadog-setup.php config set -d datadog.service=app-name \
+  -d datadog.env=prod \
+  -d datadog.verison=1.3.2
 
 php hello.php
 ```
 
-{{% /tab %}}
-{{% tab "PHP-FPM" %}}
+Apache, PHP-FPM and other servers require a restart after changing the INI
+settings.
 
-Use the `env` directive in the php-fpm's `www.conf` file, for example:
+   See the [configuration docs][4] for more INI settings.
 
-```
-; DD_PROFILING_ENABLED is not required for v0.82.0+
-env[DD_PROFILING_ENABLED] = true
-
-env[DD_SERVICE] = app-name
-env[DD_ENV] = prod
-env[DD_VERSION] = 1.3.2
-```
-
-{{% /tab %}}
-{{% tab "Apache" %}}
-
-Use `SetEnv` from the server config, virtual host, directory, or `.htaccess` file:
-
-```
-# DD_PROFILING_ENABLED is not required for v0.82.0+.
-SetEnv DD_PROFILING_ENABLED true
-
-SetEnv DD_SERVICE app-name
-SetEnv DD_ENV prod
-SetEnv DD_VERSION 1.3.2
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-   See the [configuration docs][4] for more environment variables.
-
-4. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
+5. A minute or two after receiving a request, profiles appear on the [APM > Profiler page][5].
 
 ## Not sure what to do next?
 
