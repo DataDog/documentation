@@ -3,7 +3,9 @@ title: Enabling CSM Cloud Workload Security on Windows
 kind: documentation
 code_lang: windows
 type: multi-code-lang
-code_lang_weight: 75 # a number that represents relative weight. 
+code_lang_weight: 75 # a number that represents relative weight.
+aliases:
+  - /security/cloud_security_management/setup/windows
 ---
 
 <div class="alert alert-warning">Cloud Security Management on Windows is in public beta and should only be installed on hosts that are not critical to production workloads.</div>
@@ -79,7 +81,7 @@ To get alerts whenever a Windows signal is created, create a [Notification Rule]
 
 [1]: /security/cloud_security_management/
 [2]: /network_monitoring/performance/setup/?tab=agentwindows#setup
-[3]: https://s3.amazonaws.com/dd-agent-mstesting/builds/beta/ddagent-cli-7.50.0-rc.6.cwsbeta-2.msi
+[3]: https://s3.amazonaws.com/dd-agent-mstesting/builds/beta/ddagent-cli-7.50.3.cwsbeta-3.msi
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://docs.datadoghq.com/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 [7]: https://app.datadoghq.com/logs
