@@ -168,9 +168,23 @@ To install the .NET Profiler per-webapp:
    DD_VERSION=1.2.3
    ```
 
-<div class="alert alert-warning">
-<strong>Note</strong>: When using Single Step Instrumentation, please set the `LD_PRELOAD` to /opt/datadog/apm/library/dotnet/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so`
-</div>
+4. For standalone applications, manually restart the application as you normally would.
+
+5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
+
+[1]: https://app.datadoghq.com/profiling
+{{% /tab %}}
+
+{{% tab "Linux with Single Step Instrumentation" %}}
+
+3. Set the following required environment variables for automatic instrumentation to attach to your application:
+
+   ```
+   LD_PRELOAD=/opt/datadog/apm/library/dotnet/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so
+   DD_PROFILING_ENABLED=1
+   DD_ENV=production
+   DD_VERSION=1.2.3
+   ```
 
 4. For standalone applications, manually restart the application as you normally would.
 
