@@ -225,7 +225,6 @@ public class Program
     public static void Main()
     {
 		using var meter = new Meter("my-meter");
-        var endpoint = "http://metrics-http-default.telemetry.vtex.systems/v1/metrics";
 		var providerBuilder = Sdk.CreateMeterProviderBuilder().AddMeter(meter.Name);
 		providerBuilder
         .AddConsoleExporter((exporterOptions, metricReaderOptions) =>
@@ -242,8 +241,7 @@ public class Program
                     {
                         ExportIntervalMilliseconds = Convert.ToInt32("5000"),
                     };
-				exporterOptions.Protocol = OtlpExportProtocol.Grpc;
-                exporterOptions.Endpoint = new Uri(endpoint);
+				exporterOptions.Protocol = OtlpExportProtocol.HttpProtobuf;
 				metricReaderOptions.TemporalityPreference = MetricReaderTemporalityPreference.Delta;
 			})
             .SetMaxMetricStreams(3)
