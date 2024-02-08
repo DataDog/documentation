@@ -62,7 +62,7 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
   kubectl apply -f /path/to/your/datadog-agent.yaml
   ```
 
-### Running Agents in a Single Container
+### Running Agents in a single container
 
 <div class="alert alert-warning">Available in Operator 1.4.0 or later</div>
 
