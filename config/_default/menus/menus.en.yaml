@@ -3689,10 +3689,10 @@ main:
     identifier: cspm_custom_frameworks
     weight: 101
   - name: Supported Frameworks
-    url: security/misconfigurations/frameworks_and_benchmarks/supported_frameworks
-    parent: cspm_frameworks_benchmarks
+    url: security/misconfigurations/supported_frameworks
+    parent: cspm
     identifier: cspm_supported_frameworks
-    weight: 102
+    weight: 304
   - name: Misconfigurations Explorer
     url: /security/misconfigurations/findings
     parent: cspm
