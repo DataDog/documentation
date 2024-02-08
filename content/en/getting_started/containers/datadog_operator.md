@@ -66,7 +66,7 @@ The [Datadog Operator][1] is an open source [Kubernetes Operator][2] that enable
 
 <div class="alert alert-warning">Available in Operator 1.4.0 or later</div>
 
-By default, the Datadog Operator creates an Agent Daemonset with pods running multiple Agent containers. Datadog Operator v1.4.0 introduces a configuration which allows users to run Agents in a single container. In order to avoid elevating privileges for all Agents in the single container, this feature is only applicable when `system-probe` and `security-agent` are not required. For more details check [privileges required by various agents][7].
+By default, the Datadog Operator creates an Agent Daemonset with pods running multiple Agent containers. Datadog Operator v1.4.0 introduces a configuration which allows users to run Agents in a single container. In order to avoid elevating privileges for all Agents in the single container, this feature is only applicable when `system-probe` or `security-agent` is not required. For more details check [privileges required by various Agents][7].
 
 To enable this feature add `global.containerStrategy: single` to the `DatadogAgent` manifest:
 
