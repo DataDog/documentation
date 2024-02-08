@@ -32,7 +32,7 @@ draft: false
 git_integration_title: kube_metrics_server
 integration_id: kube-metrics-server
 integration_title: Kubernetes Metrics Server
-integration_version: 3.0.1
+integration_version: 3.1.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -140,7 +140,7 @@ kube_metrics_server には、イベントは含まれません。
 
 
 [1]: https://github.com/kubernetes-incubator/metrics-server
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/DataDog/integrations-core/blob/master/openmetrics/datadog_checks/openmetrics/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [5]: https://docs.datadoghq.com/ja/help/

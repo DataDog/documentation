@@ -37,7 +37,7 @@ draft: false
 git_integration_title: cockroachdb
 integration_id: cockroachdb
 integration_title: CockroachDB
-integration_version: 2.7.1
+integration_version: 3.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -198,7 +198,7 @@ CockroachDB チェックには、イベントは含まれません。
 
 
 [1]: https://www.cockroachlabs.com/product/cockroachdb
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/monitor-cockroachdb-performance-metrics-with-datadog

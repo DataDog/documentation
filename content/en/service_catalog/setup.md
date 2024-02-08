@@ -23,7 +23,11 @@ further_reading:
 
 ## Overview
 
-Datadog Service Catalog includes all discovered services from APM, USM, and RUM by default. If you are using any of these products, your catalog is pre-populated with entries. If you are not, there are many other ways to add services to your Service Catalog.
+Datadog Service Catalog is a centralized hub for your development teams to discover and understand critical components in your runtime envrionments. If you are using products that provide application performance telemetries such as APM, USM, and RUM, you can take advantage of the auto-discovery feature. If not, you can create your Service Catalog based on your existing knowledge base (with open-source solutions like Backstage or managed solutions like ServiceNow) or create entries from `service` tags from other Datadog products like infrastructure monitoring and Log Management. 
+
+## Automatic service discovery
+
+Datadog Service Catalog includes both eBPF-based autodiscovery with [Universal Service Monitoring][17] and distributed tracing based detection with [APM][18]. RUM applications are included in the Service Catalog as well. If you are using any of these products, your catalog is pre-populated with entries.
 
 {{< callout url="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA/edit" d_target="#signupModal" btn_hidden="true" btn_hidden="false" header="Opt in to the private beta!" >}}
 Datadog automatically discovers the dependencies of instrumented services, including databases or third-party APIs, even if the dependency hasn't been instrumented. The Service Catalog lists these as separate entries. To differentiate auto-detected components from instrumented services, you can request access to the private beta for inferred services.
@@ -114,3 +118,5 @@ You can populate your Datadog Service Catalog with services from your ServiceNow
 [6]: /integrations/github/
 [15]: https://backstage.io/docs/features/software-catalog/descriptor-format/
 [16]: https://docs.datadoghq.com/integrations/servicenow/#service-ingestion
+[17]: https://docs.datadoghq.com/universal_service_monitoring/
+[18]: https://docs.datadoghq.com/tracing/

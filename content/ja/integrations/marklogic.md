@@ -41,7 +41,7 @@ draft: false
 git_integration_title: marklogic
 integration_id: marklogic
 integration_title: MarkLogic
-integration_version: 3.2.0
+integration_version: 4.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -187,7 +187,7 @@ MarkLogic には、イベントは含まれません。
 
 [1]: https://www.marklogic.com
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.marklogic.com/guide/admin/pre_def_roles#id_64197
 [5]: https://docs.marklogic.com/guide/admin/pre_def_roles#id_28243
 [6]: https://docs.marklogic.com/REST/POST/manage/v2/users

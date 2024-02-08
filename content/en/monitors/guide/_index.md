@@ -25,6 +25,7 @@ cascade:
     {{< nextlink href="monitors/guide/adjusting-no-data-alerts-for-metric-monitors" >}}Adjusting "No Data" alerts for metric Monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/prevent-alerts-from-monitors-that-were-in-downtime" >}}Prevent alerts from monitors that were in downtime{{< /nextlink >}}
     {{< nextlink href="monitors/guide/reduce-alert-flapping" >}}Reduce alert flapping{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitoring-sparse-metrics" >}}Monitoring Sparse Metrics{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="API:" >}}
@@ -48,4 +49,5 @@ cascade:
     {{< nextlink href="/monitors/guide/custom_schedules" >}}Add custom schedules to customize monitor evaluation frequencies{{< /nextlink >}}
     {{< nextlink href="monitors/guide/monitor-arithmetic-and-sparse-metrics" >}}Monitor arithmetic and sparse metrics{{< /nextlink >}}
     {{< nextlink href="monitors/guide/as-count-in-monitor-evaluations" >}}as_count() monitor evaluations{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/monitor_aggregators" >}}Monitor aggregators{{< /nextlink >}}
 {{< /whatsnext >}}
