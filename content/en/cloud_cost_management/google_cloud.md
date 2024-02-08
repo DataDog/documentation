@@ -39,14 +39,13 @@ If you do not see your desired Service Account in the list, go to the [Google Cl
 
 Cloud Cost processes all resources in a project, regardless of the Metrics Collection limits you can define per integration.
 
-############
-Datadog Google Cloud Platform Integrations monitor the entire project when a related service account is integrated.
-Using a previously integrated project prevents monitoring resources in a new project. If your billing is associated with a non-integrated project, those resources are monitored.
-###########
-
+**Note**: [Datadog Google Platform integration][4] will automatically find and attempt to crawl any projects this Service Account has access to (access as specified by the GCP Integration).
+This holds true for projects that the Service Account is granted access to at any later point. This drives an increase in API calls in GCP and increases the number of monitored resources if the projects contain any host data.
 
 ### Enable detailed usage cost export
-<div class="alert alert-info"> The <a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage">detailed usage cost data</a> provides all of the information included in the standard usage cost data, along with additional fields that provide granular, resource-level cost data.</div>
+<div class="alert alert-info">
+The <a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/detailed-usage">detailed usage cost data</a> provides all the information included in the standard usage cost data, along with additional fields that provide granular, resource-level cost data.
+</div>
 
  1. Navigate to [Billing Export][1] under Google Cloud console *Billing*.
  2. Enable the [Detailed Usage cost][2] export (select or create a project and a BigQuery dataset).
