@@ -1,17 +1,19 @@
 ---
+aliases:
+- /ja/security/cloud_security_management/workflows
 further_reading:
 - link: /security/cloud_security_management
   tag: ドキュメント
-  text: Cloud Security Management
+  text: 検索構文
 - link: /service_management/workflows/
   tag: ドキュメント
-  text: ワークフローの自動化
+  text: Workflow Automation
 kind: ドキュメント
 title: Workflow Automation によるセキュリティワークフローの自動化
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Cloud Security Management はサポートされていません。</div>
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Cloud Security Management Misconfigurations はサポートされていません。</div>
 {{< /site-region >}}
 
 [Datadog ワークフローオートメーション][1]では、インフラストラクチャーやツールに接続するアクションで構成されるワークフローを構築することで、エンドツーエンドのプロセスをオーケストレーションし、自動化することができます。
