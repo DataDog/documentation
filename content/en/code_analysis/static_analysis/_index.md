@@ -22,7 +22,7 @@ further_reading:
 {{% /site-region %}}
 
 {{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
-Code Analysis public beta.
+Code Analysis is in public beta.
 {{< /callout >}}
 
 ## Overview
