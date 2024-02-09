@@ -3723,21 +3723,31 @@ main:
     parent: csm
     identifier: csm_default_rules
     weight: 6
-  - name: Mute Issues
-    url: security/cloud_security_management/mute_issues
+  - name: Review and Remediate
+    url: security/cloud_security_management/review_remediate
     parent: csm
-    identifier: csm_mute
+    identifier: csm_review_remediate
     weight: 7
+  - name: Mute Issues
+    url: security/cloud_security_management/review_remediate/mute_issues
+    parent: csm_review_remediate
+    identifier: csm_mute
+    weight: 101
   - name: Automate Security Workflows
-    url: security/cloud_security_management/workflows
-    parent: csm
+    url: security/cloud_security_management/review_remediate/workflows
+    parent: csm_review_remediate
     identifier: csm_workflow_automation
-    weight: 8
+    weight: 102
+  - name: Create Jira Issues
+    url: security/cloud_security_management/review_remediate/jira
+    parent: csm_review_remediate
+    identifier: csm_jira
+    weight: 103
   - name: Severity Scoring
     url: security/cloud_security_management/severity_scoring/
     parent: csm
     identifier: csm_severity_scoring
-    weight: 9
+    weight: 10
   - name: Guides
     url: security/cloud_security_management/guide/
     parent: csm

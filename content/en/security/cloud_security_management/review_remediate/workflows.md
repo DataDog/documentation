@@ -8,6 +8,8 @@ further_reading:
   - link: "/service_management/workflows/"
     tag: "Documentation"
     text: Workflow Automation
+aliases:
+  - /security/cloud_security_management/workflows
 ---
 
 {{< site-region region="gov" >}}
