@@ -75,7 +75,7 @@ Toggle among the **Pods**, **Clusters**, **Namespaces**, and other Kubernetes re
 
 Each of these views includes a data table to help you better organize your data by field such as status, name, and Kubernetes labels, and a detailed Cluster Map to give you a bigger picture of your pods and Kubernetes clusters.
 
-***See [Query filter details](#query-filter-details) for more details on how to filter these views.***
+**See [Query filter details](#query-filter-details) for more details on how to filter these views.**
 
 {{< img src="infrastructure/livecontainers/orch_ex_replicasets.png" alt="Orchestrator Explorer opened to show Workloads > Replica Sets, in Summary mode" style="width:80%;">}}
 
