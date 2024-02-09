@@ -9,5 +9,4 @@ kind: guide
     {{< nextlink href="cloudcraft/components-common/icon">}}Icon{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-common/image">}}Image{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-common/area">}}Area{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/components-common/subnet">}}Subnet{{< /nextlink >}}
 {{< /whatsnext >}}
