@@ -218,18 +218,6 @@ You can use `*` wildcards as part of a term to filter by partial matches, both f
 - `-label#*.datadoghq.com/*`: Find resources that do not have any Datadog-scoped labels.
 - `kube_*:*stats*canary`: Find resource with a related-resource tags (`kube_*`), with with  `stats` in the middle of the value, also ending with `canary`.
 
-### Autocomplete
-
-As you build your filter query, the autocomplete drop down can help you fill in the blanks. The filter query autocomplete drop down is composed of 3 parts:
-
-| Section | Description|
-|---|---|
-| **Facet Keys** | These suggestions can help you find, or finish typing, available keys on the resources you are querying. The suggestions are based on the keys that are most abundent across your filtered resources. This section only appears if you are starting to enter a new search term, or are still typing a facet key. After you begin typing the value portion of a search term it will be hidden. |
-| **Facets** | These recommendations will be full term suggestions based on the prevelance of the facet on the currently found resources, and whatever you have already typed. |
-| **Recent Searches** | These are the most recent full queries you have used to filter your resources, allowing you to quickly navigate back to a past filter query. |
-
->  ***Note**: For both Facet Key and Facet recommendations, you will see the type of facet being recommended in grey text at the end: Tag, Label, or Annotation.*
-
 ### Extracted Tags
 
 In addition to the tags you have [configured](https://docs.datadoghq.com/getting_started/tagging/assigning_tags/?tab=containerizedenvironments) within your Datadog agent, Datadog injects generated tags based on resource attributes that can help your searching and grouping needs. These tags are added to resources conditionally, when they are relevant.
@@ -270,7 +258,7 @@ Related Resources will be tagged with eachother. Some examples:
 
 Resources that are spawned from "parent" resources will have the `kube_ownerref_kind` and `kube_ownerref_name` tags (such as Pods and Jobs).
 
-> **Tip:** utilize the autocomplete feature to discover what related-resource tags are available. Type `kube_` and see what results are suggested.
+> **Tip:** Utilize the filter query autocomplete feature to discover what related-resource tags are available. Type `kube_` and see what results are suggested.
 
 #### Pods
 
@@ -294,30 +282,16 @@ Workload resources (pods, deployments, stateful sets, etc.) will have the follow
 
 Some conditions, for some resources, are extracted as tags. For example, you can find the `kube_condition_available` tag on Deployments. The tag format is always `kube_condition_<name>` with a `true` or `false` value.
 
-> **Tip**: Use the Autocomplete feature to discover what conditions are available on a given resource type by entering `kube_condition` and reviewing the results.
+> **Tip**: Use the autocomplete feature to discover what conditions are available on a given resource type by entering `kube_condition` and reviewing the results.
 
-#### Custom Resources
+#### Resource Specific Tags
 
-Custom Resource Definitions (`kube_crd`) and Custom Resources (`kube_cr`) will have the following tags added to them:
-
-- `kube_crd_kind`
-- `kube_crd_group`
-- `kube_crd_version`
-- `kube_crd_scope`
-
-Custom Resource Definitions will have certain conditions extracted as tags:
-
-- `kube_crd_non_structural_schema` & `kube_crd_non_structural_schema_reason`
-- `kube_crd_names_accepted` & `kube_crd_names_accepted_reason`
-- `kube_crd_established` & `kube_crd_established_reason`
-
-#### Specific Reesources
-
-Some resources have specificialized tags as well - these are extracted based on your cluster environment. The following tags are in addition to the shared tags above.
+Some resources have specificialized tags as well that are extracted based on your cluster's environment. The following tags are in addition to the shared tags above.
 
 | Resource | Extracted Tags |
 |---|---|
 | **Cluster** | `api_server_version`<br>`kubelet_version` |
+| **Custom Resource Definitions** &<br>**Custom Resources** | `kube_crd_kind`<br>`kube_crd_group`<br>`kube_crd_version`<br>`kube_crd_scope` |
 | **Namespace** | `phase` |
 | **Node** | `kube_node_unschedulable`<br>`kube_node_kubelet_version`<br>`kube_node_kernel_version`<br>`kube_node_runtime_version`<br>`eks_fargate_node`<br>`node_schedulable`<br>`node_status` |
 | **Persistent Volume** | `kube_reclaim_policy`<br>`kube_storage_class_name`<br>`pv_type`<br>`pv_phase` |
