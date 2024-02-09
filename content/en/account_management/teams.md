@@ -107,6 +107,8 @@ The table below describes the products in which you can use the team filter:
 | [Service Level Objectives][15] | Team handle                                                                 |
 | [Data Streams Monitoring][16]  | Team handle                                                                 |
 | [Synthetic Tests][17]          | Team handle                                                                 |
+| [Notebooks][18]          | Team handle                                                                      |
+
 
 
 ## Permissions
@@ -145,7 +147,7 @@ To enforce a strict membership model, configure your default team settings so **
 [4]: /service_management/incident_management/incident_details#overview-section
 [5]: /monitors/configuration/?tab=thresholdalert#add-metadata
 [6]: /security/misconfigurations/resource_catalog
-[7]: /tracing/service_catalog/setup#add-service-definition-metadata
+[7]: /tracing/service_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
 [8]: /service_management/service_level_objectives/#slo-tags
 [9]: https://app.datadoghq.com/dashboard/lists
 [10]: https://app.datadoghq.com/services
@@ -156,3 +158,5 @@ To enforce a strict membership model, configure your default team settings so **
 [15]: https://app.datadoghq.com/slo/manage
 [16]: https://app.datadoghq.com/data-streams
 [17]: https://app.datadoghq.com/synthetics
+[18]: https://app.datadoghq.com/notebook/list/
+

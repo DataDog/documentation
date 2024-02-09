@@ -110,7 +110,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	for {
+	for true {
 
 		statsd.Incr("example_metric.increment", []string{"environment:dev"}, 1)
 		statsd.Decr("example_metric.decrement", []string{"environment:dev"}, 1)
@@ -136,7 +136,7 @@ public class DogStatsdClient {
             .hostname("localhost")
             .port(8125)
             .build();
-        for (int i = 0; i < 10; i++) {
+        while (true) {
             Statsd.incrementCounter("example_metric.increment", new String[]{"environment:dev"});
             Statsd.decrementCounter("example_metric.decrement", new String[]{"environment:dev"});
             Statsd.count("example_metric.count", 2, new String[]{"environment:dev"});
@@ -168,7 +168,7 @@ public class DogStatsdClient
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i--)
+            while (true)
             {
                 dogStatsdService.Increment("example_metric.increment", tags: new[] {"environment:dev"});
                 dogStatsdService.Decrement("example_metric.decrement", tags: new[] {"environment:dev"});
@@ -292,7 +292,7 @@ func main() {
 		log.Fatal(err)
 	}
 	var i float64
-	for {
+	for true {
 		i += 1
 		statsd.Gauge("example_metric.gauge", i, []string{"environment:dev"}, 1)
 		time.Sleep(10 * time.Second)
@@ -316,7 +316,7 @@ public class DogStatsdClient {
             .hostname("localhost")
             .port(8125)
             .build();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; true; i++) {
             Statsd.recordGaugeValue("example_metric.gauge", i, new String[]{"environment:dev"});
             Thread.sleep(10000);
         }
@@ -346,7 +346,7 @@ public class DogStatsdClient
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i--)
+            for (int i = 0; true; i++)
             {
                 dogStatsdService.Gauge("example_metric.gauge", i, tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(100000);
@@ -466,7 +466,7 @@ func main() {
 		log.Fatal(err)
 	}
 	var i float64
-	for {
+	for true {
 		i += 1
 		statsd.Set("example_metric.set", fmt.Sprintf("%f", i), []string{"environment:dev"}, 1)
 		time.Sleep(time.Duration(rand.Intn(10)) * time.Second)
@@ -490,7 +490,7 @@ public class DogStatsdClient {
             .hostname("localhost")
             .port(8125)
             .build();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; true; i++) {
             Statsd.recordSetValue("example_metric.set", i, new String[]{"environment:dev"});
             Thread.sleep(random.NextInt(10000));
         }
@@ -520,7 +520,7 @@ public class DogStatsdClient
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i--)
+            for (int i = 0; true; i++)
             {
                 dogStatsdService.Set("example_metric.set", i, tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(random.Next(100000));
@@ -629,7 +629,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	for {
+	for true {
 		statsd.Histogram("example_metric.histogram", float64(rand.Intn(20)), []string{"environment:dev"}, 1)
 		time.Sleep(2 * time.Second)
 	}
@@ -652,7 +652,7 @@ public class DogStatsdClient {
             .hostname("localhost")
             .port(8125)
             .build();
-        for (int i = 0; i < 10; i++) {
+        while (true) {
             Statsd.recordHistogramValue("example_metric.histogram", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
         }
@@ -682,7 +682,7 @@ public class DogStatsdClient
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i--)
+            while (true)
             {
                 dogStatsdService.Histogram("example_metric.histogram", random.Next(20), tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(2000);
@@ -898,7 +898,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	for {
+	for true {
 		statsd.Distribution("example_metric.distribution", float64(rand.Intn(20)), []string{"environment:dev"}, 1)
 		time.Sleep(2 * time.Second)
 	}
@@ -921,7 +921,7 @@ public class DogStatsdClient {
             .hostname("localhost")
             .port(8125)
             .build();
-        for (int i = 0; i < 10; i++) {
+        while (true) {
             Statsd.recordDistributionValue("example_metric.distribution", new Random().nextInt(20), new String[]{"environment:dev"});
             Thread.sleep(2000);
         }
@@ -951,7 +951,7 @@ public class DogStatsdClient
                 throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
             var random = new Random(0);
 
-            for (int i = 0; i < 10; i--)
+            while (true)
             {
                 dogStatsdService.Distribution("example_metric.distribution", random.Next(20), tags: new[] {"environment:dev"});
                 System.Threading.Thread.Sleep(2000);
@@ -1009,12 +1009,13 @@ A sample rate of `1` sends metrics 100% of the time, while a sample rate of `0` 
 
 Before sending a metric to Datadog, DogStatsD uses the `<SAMPLE_RATE>` to correct the metric value depending on the metric type (to estimate the value without sampling):
 
-| Metric Type | Sample rate correction                                                                                                                                                         |
-|-------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `COUNT`     | Values received are multiplied by (`1/<SAMPLE_RATE>`). It's reasonable to assume that for one datapoint received, `1/<SAMPLE_RATE>` were actually sampled with the same value. |
-| `GAUGE`     | No correction. The value received is kept as is.                                                                                                                               |
-| `SET`       | No correction. The value received is kept as is.                                                                                                                               |
-| `HISTOGRAM` | The `histogram.count` statistic is a COUNT metric, and receives the correction outlined above. Other statistics are gauge metrics and aren't "corrected".                      |
+| Metric Type    | Sample rate correction                                                                                                                                                         |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `COUNT`        | Values received are multiplied by (`1/<SAMPLE_RATE>`). It's reasonable to assume that for one datapoint received, `1/<SAMPLE_RATE>` were actually sampled with the same value. |
+| `GAUGE`        | No correction. The value received is kept as is.                                                                                                                               |
+| `SET`          | No correction. The value received is kept as is.                                                                                                                               |
+| `HISTOGRAM`    | The `histogram.count` statistic is a COUNT metric, and receives the correction outlined above. Other statistics are gauge metrics and aren't "corrected".                      |
+| `DISTRIBUTION` | Values received are counted (`1/<SAMPLE_RATE>`) times. It's reasonable to assume that for one datapoint received, `1/<SAMPLE_RATE>` were actually sampled with the same value. |
 
 #### Code examples
 
@@ -1137,6 +1138,6 @@ The host tag is assigned automatically by the Datadog Agent aggregating the metr
 [4]: /dashboards/functions/arithmetic/#integral
 [5]: /metrics/types/?tab=gauge#definition
 [6]: /metrics/types/?tab=histogram#definition
-[7]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[7]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [8]: /metrics/distributions/
 [9]: /metrics/types/?tab=distribution#definition

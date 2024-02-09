@@ -58,14 +58,16 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 
 | Framework or library            | NuGet package                                                                             | Integration Name     |
 | ------------------------------- | ----------------------------------------------------------------------------------------- | -------------------- |
+| .NET Remoting                   | built-in                                                                                  | `Remoting`           |
 | ADO.NET                         | All AdoNet integrations                                                                   | `AdoNet`             |
 | Aerospike                       | `Aerospike.Client` 4.0.0+                                                                 | `Aerospike`          |
 | ASP.NET (including Web Forms)   | built-in                                                                                  | `AspNet`             |
 | ASP.NET MVC                     | `Microsoft.AspNet.Mvc` 4.0+                                                               | `AspNetMvc`          |
 | ASP.NET Web API 2               | `Microsoft.AspNet.WebApi` 5.1+                                                            | `AspNetWebApi2`      |
-| Amazon Kinesis                     | `AWSSDK.Kinesis`  3.0+                                                                               | `AwsKinesis`         |
-| Amazon SNS                         | `AWSSDK.SNS`  3.0+                                                                        | `AwsSns`             |
-| Amazon SQS                         | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
+| Amazon DynamoDB                 | `AWSSDK.DynamoDBv2`  3.0+                                                                 | `AwsDynamoDb`        |
+| Amazon Kinesis                  | `AWSSDK.Kinesis`  3.0+                                                                    | `AwsKinesis`         |
+| Amazon SNS                      | `AWSSDK.SNS`  3.0+                                                                        | `AwsSns`             |
+| Amazon SQS                      | `AWSSDK.SQS`  3.0+                                                                        | `AwsSqs`             |
 | CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0+                                                    | `CosmosDb`           |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                               | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                | `ElasticsearchNet`   |
@@ -73,6 +75,7 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 | gRPC                            | `Grpc.Core` 2.3.0+                                                                        | `Grpc`               |
 | HotChocolate                    | `HotChocolate` 11.0.0+                                                                    | `HotChocolate`       |
 | HttpClient / HttpMessageHandler | built-in                                                                                  | `HttpMessageHandler` |
+| IBM MQ                          | `amqmdnetstd` 9.0.0+                                                                      | `IbmMq`              |
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                    | `Kafka`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                              | `MongoDb`            |
 | MSMQ                            | built-in                                                                                  | `Msmq`               |

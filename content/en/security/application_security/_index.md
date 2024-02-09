@@ -10,7 +10,7 @@ further_reading:
   text: "How Application Security Management Works"
 - link: "/security/application_security/threats/"
   tag: "Documentation"
-  text: "Threat Monitoring and Protection"
+  text: "Threat Management"
 - link: "/security/application_security/risk_management/"
   tag: "Documentation"
   text: "Application Vulnerability Management"
@@ -56,7 +56,7 @@ Once a security signal is triggered, quickly pivot to investigate and protect in
 
 With ASM, you can cut through the noise of continuous trace data to focus on securing and protecting your environment.
 
-Until you fully remediate the potential vulnerabilities in your application code, ASM enables you to slow down attackers by blocking their IPs temporarily or permanently, with a single click. One-click blocking is in beta.
+Until you fully remediate the potential vulnerabilities in your application code, ASM enables you to slow down attackers by blocking their IPs temporarily or permanently, with a single click.
 
 ## Understanding how application security is implemented in Datadog
 
@@ -85,6 +85,6 @@ In the [Security Signals Explorer][6], click on any security signal to see what 
 [3]: /security/application_security/how-appsec-works/
 [4]: /security/default_rules/#cat-application-security
 [5]: /security/application_security/enabling/
-[6]: /security/explorer/
+[6]: https://app.datadoghq.com/security
 [7]: https://dashcon.io/appsec
-[8]: /security/application_security/risk_management/
+[8]: /security/application_security/vulnerability_management/

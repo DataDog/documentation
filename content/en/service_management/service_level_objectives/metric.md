@@ -26,13 +26,13 @@ On the [SLO status page][5], select **New SLO +**. Then select [**Metric**][6].
 
 ### Define queries
 
-1. There are two queries to define. The numerator query defines the sum of the good events, while the denominator query defines the sum of the total events. Your queries must use COUNT, RATE, or percentile-enabled DISTRIBUTION metrics to ensure the SLO calculation behaves correctly.
-2. Use the `FROM` field to include or exclude specific groups using tags.
-3. For percentile-enabled DISTRIBUTION metrics, you must use the `count values...` aggregator to specify a numerical threshold for the metric to count. This feature is called Threshold Queries and allows you to count the number of raw values that match a numerical threshold to produce counts for your numerator and denominator. For more information, see [Threshold Queries][7].
-4. Optionally, for percentile-enabled DISTRIBUTION metrics, use the dropdown immediately to the right of the `count values..` aggregator to break your SLI out by specific groups.
-5. Optionally, for COUNT or RATE metrics, use the `sum by` aggregator to break your SLI out by specific groups.
+1. There are two queries to define. The numerator query defines the sum of the good events, while the denominator query defines the sum of the total events. Your queries must use COUNT, RATE, or percentile-enabled DISTRIBUTION metrics to ensure the SLO calculation behaves correctly. For more information, see [Querying][9] documentation. 
+1. Use the `FROM` field to include or exclude specific groups using tags.
+1. For percentile-enabled DISTRIBUTION metrics, you must use the `count values...` aggregator to specify a numerical threshold for the metric to count. This feature is called Threshold Queries and allows you to count the number of raw values that match a numerical threshold to produce counts for your numerator and denominator. For more information, see [Threshold Queries][7].
+1. Optionally, for percentile-enabled DISTRIBUTION metrics, use the dropdown immediately to the right of the `count values..` aggregator to break your SLI out by specific groups.
+1. Optionally, for COUNT or RATE metrics, use the `sum by` aggregator to break your SLI out by specific groups.
 
-**Example:** If you are tracking HTTP return codes, and your metric includes a tag like `code:2xx` || `code:3xx` || `code:4xx`. The sum of good events would be `sum:httpservice.hits{code:2xx} + sum:httpservice.hits{code:4xx}`. And the `total` events would be `sum:httpservice.hits{!code:3xx}`.
+**Example:** If you are tracking HTTP return codes, and your metric includes a tag like `code:2xx OR code:3xx OR code:4xx`. The sum of good events would be `sum:httpservice.hits{code:2xx} + sum:httpservice.hits{code:4xx}`. And the `total` events would be `sum:httpservice.hits{!code:3xx}`.
 
 Why is `HTTP 3xx` excluded? - These are typically redirects and should not count for or against the SLI, but other non-3xx based error codes should. In the `total` case, you want all types minus `HTTP 3xx`, in the `numerator`, you only want `OK` type status codes.
 
@@ -72,3 +72,4 @@ While the SLO remains above the target percentage, the SLO's status will be disp
 [6]: https://app.datadoghq.com/slo/new/metric
 [7]: /metrics/distributions/#threshold-queries
 [8]: /service_management/service_level_objectives/monitor/
+[9]: https://docs.datadoghq.com/dashboards/querying/#advanced-graphing

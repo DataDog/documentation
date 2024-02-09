@@ -41,7 +41,7 @@ To switch to using the Datadog Connector, change the following configuration in 
            processors: [batch]
            exporters: [datadog/connector]
          traces/2: # This pipeline uses sampling
-           receivers: [otlp]
+           receivers: [datadog/connector]
            processors: [batch, probabilistic_sampler]
            exporters: [datadog]
      {{< /highlight >}}
@@ -83,7 +83,7 @@ service:
         exporters: [datadog/connector]
 
      traces/2: # This pipeline uses sampling
-        receivers: [otlp]
+        receivers: [datadog/connector]
         processors: [batch, probabilistic_sampler]
         exporters: [datadog]
 

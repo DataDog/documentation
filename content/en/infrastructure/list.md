@@ -151,7 +151,7 @@ for host in infra['rows']:
 [3]: /metrics/
 [4]: /infrastructure/livecontainers/?tab=helm#overview
 [5]: /logs/
-[6]: /agent/guide/agent-configuration-files/
+[6]: /agent/configuration/agent-configuration-files/
 [7]: /api/v1/hosts/#get-the-total-number-of-active-hosts
 [8]: /developers/guide/query-the-infrastructure-list-via-the-api/
 [9]: https://github.com/DataDog/Miscellany/tree/master/get_hostname_agentversion

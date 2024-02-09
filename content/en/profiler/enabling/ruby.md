@@ -25,7 +25,9 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-The Datadog Profiler requires Ruby 2.3+ (JRuby and TruffleRuby are not supported).
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
+
+The Datadog Profiler requires Ruby 2.3+. JRuby and TruffleRuby are not supported.
 
 The following operating systems and architectures are supported:
 - Linux (GNU libc) x86-64, aarch64
@@ -46,12 +48,13 @@ To begin profiling applications:
 
 1. If you are already using Datadog, upgrade your agent to version [7.20.2][2]+ or [6.20.2][3]+.
 
-2. Add the `ddtrace` and `google-protobuf` gems to your `Gemfile` or `gems.rb` file:
+2. Add the `ddtrace` gem to your `Gemfile` or `gems.rb` file:
 
     ```ruby
-    gem 'ddtrace', '~> 1.0'
-    gem 'google-protobuf', '~> 3.0'
+    gem 'ddtrace', '~> 1.15'
     ```
+
+    If you're running a version of `ddtrace` older than 1.15.0, add the `google-protobuf` gem (version ~> 3.0) as a dependency.
 
 2. Install the gems with `bundle install`.
 
@@ -122,3 +125,4 @@ The [Getting Started with Profiler][5] guide takes a sample service with a perfo
 [5]: /getting_started/profiler/
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /profiler/enabling/supported_versions/

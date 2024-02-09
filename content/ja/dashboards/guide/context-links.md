@@ -143,11 +143,11 @@ URL に変数を追加すると、テンプレートリンクが `https://acme.z
 
 ### ダッシュボードから AWS コンソールへのリンク
 
-次の例では、ダッシュボードウィジェットのホストから、AWS コンソールの対応する AWS EC2 インスタンスページへのリンクを作成する方法を説明します。
+次の例では、ダッシュボードウィジェット内のホストから、AWS コンソールの対応する Amazon EC2 インスタンスページへのリンクを作成する方法を説明します。
 
 #### コンテキスト
 
-プラットフォームは [AWS EC2][19] インスタンスでホストされており、プラットフォームのアップスケールとダウンスケールの手順は、ほとんど手作業です。
+プラットフォームは [Amazon EC2][19] インスタンス上にホストされており、プラットフォームのアップスケールとダウンスケールの手順は、ほとんど手作業です。
 
 Datadog のダッシュボードには、インフラストラクチャーの主要なヘルスメトリクスが集約されています。
 
@@ -155,7 +155,7 @@ Datadog のダッシュボードには、インフラストラクチャーの主
 
 #### アプローチ
 
-典型的な AWS EC2 インスタンスの概要リンクは `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94` です。
+典型的な Amazon EC2 インスタンスの概要リンクは `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94` であり、そこで以下を確認することができます。
 
 * `eu-west-3`: サブドメインと URL のパラメーターとして表示される、データセンターのリージョン。
 * `i-04b737b9f8bf94a94`: ハッシュパラメーターとして表示されるホスト ID。
@@ -166,21 +166,21 @@ Datadog のダッシュボードには、インフラストラクチャーの主
 
 * リージョンがクエリ集計の一部である場合 (例えば、以下のスクリーンショット)、テンプレートリンクは `https://{{region.value}}.console.aws.amazon.com/ec2/v2/home?region={{region.value}}#InstanceDetails:instanceId={{host.value}}` で、ここで `{{region.value}}` は **query** 変数です。
 
-{{< img src="dashboards/guide/context_links/ec2_query.png" alt="AWS EC2 クエリ" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_query.png" alt="Amazon EC2 クエリ" style="width:90%;" >}}
 
 * リージョンがクエリ集計の一部である場合 (例えば、以下のスクリーンショット)、テンプレートリンクは `https://{{$region.value}}.console.aws.amazon.com/ec2/v2/home?region={{$region.value}}#InstanceDetails:instanceId={{host.value}}` で、ここで `{{region.value}}` は **template** 変数です。
 
-{{< img src="dashboards/guide/context_links/ec2_query2.png" alt="AWS EC2 クエリ" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_query2.png" alt="Amazon EC2 クエリ" style="width:90%;" >}}
 
 #### 結果
 
 ダッシュボードウィジェットには、AWS コンソールの適切なホストに移動するためのリンクが含まれています。
 
-{{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="AWS EC2 クエリコンテキストリンク" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="Amazon EC2 クエリコンテキストリンク" style="width:90%;" >}}
 
-**AWS EC2 Instance Summary** のリンクをクリックすると、AWS コンソールの AWS EC2 インスタンスページに移動します。
+**Amazon EC2 Instance Summary** のリンクをクリックすると、AWS コンソールの Amazon EC2 インスタンスページに移動します。
 
-{{< img src="dashboards/guide/context_links/ec2_result.png" alt="AWS EC2 クエリの結果" style="width:70%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_result.png" alt="Amazon EC2 クエリの結果" style="width:70%;" >}}
 
 ### ダッシュボードから Datadog の保存ビューとリマップされた属性へのリンク
 
@@ -243,11 +243,11 @@ IP アドレスをリマップすることで、RUM イベントと対応する�
 [11]: /ja/infrastructure/process/?tab=linuxwindows
 [12]: /ja/tracing/trace_explorer/?tab=listview
 [13]: /ja/real_user_monitoring/explorer/
-[14]: /ja/tracing/profiler/search_profiles/
+[14]: /ja/profiler/profile_visualizations/
 [15]: /ja/logs/explorer/
 [16]: /ja/dashboards/widgets/
 [17]: /ja/real_user_monitoring/
-[18]: /ja/security_platform/cloud_siem/
+[18]: /ja/security/cloud_siem/
 [19]: /ja/integrations/amazon_ec2/
 [20]: https://aws.amazon.com/console/
 [21]: /ja/logs/

@@ -9,9 +9,6 @@ further_reading:
     - link: 'developers/libraries'
       tag: 'Documentation'
       text: 'Official and Community created API and DogStatsD client libraries'
-    - link: 'https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd'
-      tag: 'GitHub'
-      text: 'DogStatsD source code'
 ---
 
 With Agent v7.17+, the DogStatsD Mapper feature allows you to convert parts of a metric name submitted to DogStatsD to tags using mapping rules with wildcard and regex patterns. For example it allows you to transform the metric:
@@ -126,4 +123,4 @@ It would send the metric `custom_metric.process.prod.value_1.live` to Datadog wi
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file

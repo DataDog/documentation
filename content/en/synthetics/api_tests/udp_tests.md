@@ -35,7 +35,7 @@ After choosing to create an `UDP` Test, define your test's request.
 
 ### Define request
 
-1. Specify the **Host** and **Port** to run your test on. By default, the port is set to `53`.
+1. Specify the **Host** and **Port** to run your test on.
 2. Enter the string you want to send in your test. 
 3. Specify the amount of time in seconds before the test times out (optional).
 4. **Name** your UDP test.

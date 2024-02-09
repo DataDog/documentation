@@ -20,8 +20,8 @@ disable_sidebar: true
 | Postgres 12 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | Postgres 13 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | Postgres 14 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| Postgres 15 | {{< X >}} | {{< X >}} |  |  |  |
-
+| Postgres 15 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| Postgres 16 | {{< X >}} | {{< X >}} | {{< X >}} |  |  |
 
 For setup instructions, select your hosting type:
 

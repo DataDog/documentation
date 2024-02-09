@@ -146,7 +146,7 @@ In the full side panel, you can see a latency distribution graph for the tag and
 {{% /tab %}}
 {{% tab "Profiling" %}}
 
-### Lock pressure outlier
+### Lock contention outlier
 
 In the banner card view, you can see:
 
@@ -154,11 +154,11 @@ In the banner card view, you can see:
   * The number of threads impacted
   * The potential CPU savings (and estimated cost savings)
     
-{{< img src="watchdog/small_card_profiling_lock_pressure.png" alt="Profiling insight on Lock Pressure" style="width:50%;">}}
+{{< img src="watchdog/small_card_profiling_lock_pressure.png" alt="Profiling insight on Lock Contention" style="width:50%;">}}
 
-In the full side panel, you can see instructions on how to resolve the lock pressure:
+In the full side panel, you can see instructions on how to resolve the lock contention:
 
-{{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Side panel with all the information on how to adress the Lock Pressure outlier" style="width:100%;">}}
+{{< img src="watchdog/side_panel_profiling_lock_pressure.png" alt="Side panel with all the information on how to adress the Lock Contention outlier" style="width:100%;">}}
 
 ### Garbage collection outlier
 
@@ -239,7 +239,7 @@ In the full side panel, you can see a timeseries graph about the performance met
 {{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
 [1]: /real_user_monitoring/explorer/search/#facets
-[2]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
+[2]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [3]: /real_user_monitoring/browser/monitoring_page_performance/#monitoring-single-page-applications-spa
 {{% /tab %}}
 {{% tab "Serverless" %}}

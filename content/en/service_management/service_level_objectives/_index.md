@@ -25,6 +25,9 @@ further_reading:
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session on creating effective monitors and SLOs"
+- link: "https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_level_objective"
+  tag: "Terraform"
+  text: "Create and manage SLOs with Terraform"
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/382481078/rendition/1080p/file.mp4?loc=external&signature=f5a81ca1c44d9c1c2cfcbd23c2b6b4f89914027ff344fb0a9f8dc6b9a1d141aa" poster="/images/poster/slo.png" >}}
@@ -51,18 +54,27 @@ Service Level Agreement (SLA)
 Error Budget
 : The allowed amount of unreliability derived from an SLO's target percentage (100% - target percentage) that is meant to be invested into product development.
 
+## SLO types
+
+When creating SLOs, you can choose from the following types:
+- **Metric-based SLOs**: can be used when you want the SLI calculation to be count-based, the SLI is calculated as the sum of good events divided by the sum of total events.
+- **Monitor-based SLOs**: can be used when you want the SLI calculation to be time-based, the SLI is based on the Monitor's uptime. Monitor-based SLOs must be based on a new or existing Datadog monitor, any adjustments must be made to the underlying monitor (cannot be done through SLO creation).
+- **Time Slice SLOs**: can be used when you want the SLI calculation to be time-based, the SLI is based on your custom uptime definition (amount of time your system exhibits good behavior divided by the total time). Time Slice SLOs do not require a Datadog monitor, you can try out different metric filters and thresholds and instantly explore downtime during SLO creation.
+
+For a full comparison, see the [SLO Type Comparison][1] chart.
+
 ## Setup
 
-Use Datadog's [Service Level Objectives status page][1] to create new SLOs or to view and manage all your existing SLOs. You can also add [SLO widgets](#slo-widgets) to your dashboards to visualize your SLO statuses at a glance.
+Use Datadog's [Service Level Objectives status page][2] to create new SLOs or to view and manage all your existing SLOs. 
 
 ### Configuration
 
-1. On the [SLO status page][1], select **New SLO +**.
-2. Define the source for your SLO. You can create an SLO from [metrics][2] or [monitors][3].
+1. On the [SLO status page][2], select **New SLO +**.
+2. Select the SLO type. You can create an SLO with any of the following types: [Metric-based][3], [Monitor-based][4], or [Time Slices][5].
 3. Set a target and a rolling time window (past 7, 30, or 90 days) for the SLO. Datadog recommends you make the target stricter than your stipulated SLAs. If you configure more than one time window, select one to be the primary time window. This time window is displayed on SLO lists. By default, the shortest time window is selected. 
 4. Finally, give the SLO a title, describe it in more detail or add links in the description, add tags, and save it.
 
-After you set up the SLO, select it from the [Service Level Objectives list view][1] to open the details side panel. The side panel displays the overall status percentage and remaining error budget for each of the SLO's targets, as well as status bars (monitor-based SLOs) or bar graphs (metric-based SLOs) of the SLI's history. If you created a grouped monitor-based SLO using one [multi alert monitor][4] or a grouped metric-based SLO using the [`sum by` clause][5], the status percentage and remaining error budget for each individual group is displayed in addition to the overall status percentage and remaining error budget.
+After you set up the SLO, select it from the [Service Level Objectives list view][2] to open the details side panel. The side panel displays the overall status percentage and remaining error budget for each of the SLO's targets, as well as status bars (monitor-based SLOs) or bar graphs (metric-based SLOs) of the SLI's history. If you created a grouped monitor-based SLO using one [multi alert monitor][6] or a grouped metric-based SLO using the [`sum by` clause][7], the status percentage and remaining error budget for each individual group is displayed in addition to the overall status percentage and remaining error budget.
 
 **Example:** If you create a monitor-based SLO to track latency per availability-zone, the status percentages and remaining error budget for the overall SLO and for each individual availability-zone that the SLO is tracking are displayed.
 
@@ -78,9 +90,9 @@ Setting a 100% target means having an error budget of 0% since error budget is e
 
 **Note:** The number of decimal places you can specify for your SLOs differs depending on the type of SLO and the time windows you choose. Refer to the links below for more information for each respective SLO type.
 
-[Monitor-based SLOs][6]: Up to two decimal places are allowed for 7-day and 30-day targets, up to three decimal places are allowed for 90-day targets.
+[Monitor-based SLOs][8]: Up to two decimal places are allowed for 7-day and 30-day targets, up to three decimal places are allowed for 90-day targets.
 
-[Metric-based SLOs][7]: Up to three decimal places are allowed for all targets.
+[Metric-based SLOs][9]: Up to three decimal places are allowed for all targets.
 
 ## Edit an SLO
 
@@ -90,13 +102,13 @@ To edit an SLO, hover over the SLO's row in the list view and click the edit pen
 
 ### Role based access
 
-All users can view SLOs and [SLO status corrections](#slo-status-corrections), regardless of their associated [role][8]. Only users attached to roles with the `slos_write` permission can create, edit, and delete SLOs.
+All users can view SLOs and [SLO status corrections](#slo-status-corrections), regardless of their associated [role][10]. Only users attached to roles with the `slos_write` permission can create, edit, and delete SLOs.
 
-To create, edit, and delete status corrections, users require the `slos_corrections` permissions. A user with this permission can make status corrections, even if they do not have permission to edit those SLOs. For the full list of permissions, see the [RBAC documentation][9].
+To create, edit, and delete status corrections, users require the `slos_corrections` permissions. A user with this permission can make status corrections, even if they do not have permission to edit those SLOs. For the full list of permissions, see the [RBAC documentation][11].
 
 ### Granular access controls
 
-Restrict access to individual SLOs by specifying a list of [roles][8] that are allowed to edit it. 
+Restrict access to individual SLOs by specifying a list of [roles][10] that are allowed to edit it. 
 
 {{< img src="service_management/service_level_objectives/slo_set_permissions.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLO permissions option in the cog menu">}}
 
@@ -105,18 +117,18 @@ Restrict access to individual SLOs by specifying a list of [roles][8] that are a
 1. Select **Permissions**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the drop-down to select one or more roles, teams (beta), or users (beta) that may edit the SLO.
+1. Use the drop-down to select one or more roles, teams, or users that may edit the SLO.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**
 
 To maintain your edit access to the SLO, the system requires you to include at least one role that you are a member of before saving. Users on the access control list can add roles and can only remove roles other than their own.
 
-**Note**: Users can create SLOs on any monitor even if they do not have write permissions to the monitor. Similarly, users can create SLO alerts even if they do not have write permissions to the SLO. For more information on RBAC permissions for Monitors, see the [RBAC documentation][10] or the [guide on how to set up RBAC for Monitors][11].
+**Note**: Users can create SLOs on any monitor even if they do not have write permissions to the monitor. Similarly, users can create SLO alerts even if they do not have write permissions to the SLO. For more information on RBAC permissions for Monitors, see the [RBAC documentation][12] or the [guide on how to set up RBAC for Monitors][13].
 
 ## Searching SLOs
 
-The [Service Level Objectives status page][1] lets you run an advanced search of all SLOs so you can find, view, edit, clone or delete SLOs from the search results.
+The [Service Level Objectives status page][2] lets you run an advanced search of all SLOs so you can find, view, edit, clone or delete SLOs from the search results.
 
 Advanced search lets you query SLOs by any combination of SLO attributes:
 
@@ -136,15 +148,15 @@ Group your SLOs by *team*, *service* or *environment* to get a summary view of y
 
 Sort SLOs by the *status* and *error budget* columns to prioritize which SLOs need your attention. The SLO list displays the details of SLOs over the primary time window selected in your [configuration](#configuration). All other configuration time windows are available to view in the individual side panel. Open the SLO details side panel by clicking the respective table row.
 
-**Note**: You can view your SLOs from your mobile device home screen by downloading the [Datadog Mobile App][12], available on the [Apple App Store][13] and [Google Play Store][14].
+**Note**: You can view your SLOs from your mobile device home screen by downloading the [Datadog Mobile App][14], available on the [Apple App Store][15] and [Google Play Store][16].
 
 {{< img src="service_management/service_level_objectives/slos-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="SLOs on iOS and Android">}}
 
 ### SLO tags
 
-When you create or edit an SLO, you can add tags for filtering on the [SLO status page][1] or for creating [SLO saved views][15].
+When you create or edit an SLO, you can add tags for filtering on the [SLO status page][2] or for creating [SLO saved views][17].
 
-Add tags to SLOs in bulk with the *Edit Tags* and the *[Edit Teams][16]* dropdown options at the top of the SLO list.
+Add tags to SLOs in bulk with the *Edit Tags* and the *[Edit Teams][18]* dropdown options at the top of the SLO list.
 
 ### SLO default view
 
@@ -204,7 +216,7 @@ Three types of SLO audit events appear in the Event Explorer:
 
 To get a full list of all SLO audit events, enter the search query `tags:audit,slo` in the Event Explorer. To view the list of audit events for a specific SLO, enter `tags:audit,slo_id:<SLO ID>` with the ID of the desired SLO.
 
-You can also query the Event Explorer programmatically using the [Datadog Events API][17].
+You can also query the Event Explorer programmatically using the [Datadog Events API][19].
 
 **Note:** If you don't see events appear in the UI, be sure to set the time frame of the Event Explorer to a longer period, for example, the past 7 days.
 
@@ -219,11 +231,11 @@ For example, if you wish to be notified when a specific SLO's configuration is m
 After creating your SLO, you can visualize the data through Dashboards and widgets. 
   - Use the SLO Summary widget to visualize the status of a single SLO.
   - Use the SLO List widget to visualize a set of SLOs
-  - Graph 15 months' worth of metric-based SLO data with the [SLO data source][18] in both timeseries and scalar (query value, top list, table, change) widgets. 
+  - Graph 15 months' worth of metric-based SLO data with the [SLO data source][20] in both timeseries and scalar (query value, top list, table, change) widgets. 
   
-For more information about SLO Widgets, see the [SLO Summary][19] and [SLO List][20] widget pages. For more information on the SLO data source, see the guide on how to [Graph historical SLO data on Dashboards][18].
+For more information about SLO Widgets, see the [SLO Summary][21] and [SLO List][22] widget pages. For more information on the SLO data source, see the guide on how to [Graph historical SLO data on Dashboards][20].
 
-To proactively manage the configurations of your SLOs, set an [Event Monitor][21] to notify you when events corresponding to certain tags occur.
+To proactively manage the configurations of your SLOs, set an [Event Monitor][23] to notify you when events corresponding to certain tags occur.
 
 ## SLO status corrections
 
@@ -235,8 +247,9 @@ Status corrections allow you to exclude specific time periods from SLO status an
 When you apply a correction, the time period you specify is dropped from the SLO's calculation.
 - For monitor-based SLOs, the correction time window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
+- For Time Slice SLOs, the correction time window is treated as uptime.
 
-You have the option to create one-time corrections for ad hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][22]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely. 
+You have the option to create one-time corrections for ad hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][24]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely. 
 
 For either type of correction, you must select a correction category that states why the correction is being made. The available categories are `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, and `Other`. You can optionally include a description to provide additional context if necessary.
 
@@ -253,7 +266,7 @@ The 90-day limits per SLO are as follows:
 | Weekly recurring  | 3             |
 | Monthly recurring | 5             |
 
-You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][23], or a [Terraform resource][24].
+You may configure status corrections through the UI by selecting `Correct Status` in your SLO's side panel, the [SLO status corrections API][25], or a [Terraform resource][26].
 
 {{< img src="service_management/service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI" >}}
 
@@ -271,31 +284,39 @@ To access SLO status corrections in the UI:
 
 To view, edit, and delete existing status corrections, click on the **Corrections** tab at the top of an SLO's detailed side panel view.
 
+## SLO Calendar View
+
+The SLO Calendar View is available on the [SLO status page][2]. On the top right corner, switch from the "Primary" view to the "Weekly" or "Monthly" view to see 12 months of historical SLO status data. The Calendar View is supported for Metric-based SLOs and Time Slice SLOs.
+
+{{< img src="service_management/service_level_objectives/calendar-view-slo.png" alt="SLO calendar view" >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/slo
-[2]: /service_management/service_level_objectives/metric/
-[3]: /service_management/service_level_objectives/monitor/
-[4]: /monitors/types/metric/?tab=threshold#alert-grouping
-[5]: /service_management/service_level_objectives/metric/#define-queries
-[6]: /service_management/service_level_objectives/monitor/#set-your-slo-targets
-[7]: /service_management/service_level_objectives/metric/#set-your-slo-targets
-[8]: /account_management/rbac/
-[9]: /account_management/rbac/permissions/#service-level-objectives/
-[10]: /account_management/rbac/permissions/#monitors
-[11]: /monitors/guide/how-to-set-up-rbac-for-monitors/
-[12]: /mobile
-[13]: https://apps.apple.com/app/datadog/id1391380318
-[14]: https://play.google.com/store/apps/details?id=com.datadog.app
-[15]: /service_management/service_level_objectives/#saved-views
-[16]: /account_management/teams/#associate-resources-with-team-handles
-[17]: /api/latest/events/
-[18]: /dashboards/guide/slo_data_source/
-[19]: /dashboards/widgets/slo/
-[20]: /dashboards/widgets/slo_list/
-[21]: /monitors/types/event/
-[22]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
-[23]: /api/latest/service-level-objective-corrections/
-[24]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
+[1]: /service_management/service_level_objectives/guide/slo_types_comparison/
+[2]: https://app.datadoghq.com/slo
+[3]: /service_management/service_level_objectives/metric/
+[4]: /service_management/service_level_objectives/monitor/
+[5]: /service_management/service_level_objectives/time_slice/
+[6]: /monitors/types/metric/?tab=threshold#alert-grouping
+[7]: /service_management/service_level_objectives/metric/#define-queries
+[8]: /service_management/service_level_objectives/monitor/#set-your-slo-targets
+[9]: /service_management/service_level_objectives/metric/#set-your-slo-targets
+[10]: /account_management/rbac/
+[11]: /account_management/rbac/permissions/#service-level-objectives/
+[12]: /account_management/rbac/permissions/#monitors
+[13]: /monitors/guide/how-to-set-up-rbac-for-monitors/
+[14]: /mobile
+[15]: https://apps.apple.com/app/datadog/id1391380318
+[16]: https://play.google.com/store/apps/details?id=com.datadog.app
+[17]: /service_management/service_level_objectives/#saved-views
+[18]: /account_management/teams/#associate-resources-with-team-handles
+[19]: /api/latest/events/
+[20]: /dashboards/guide/slo_data_source/
+[21]: /dashboards/widgets/slo/
+[22]: /dashboards/widgets/slo_list/
+[23]: /monitors/types/event/
+[24]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
+[25]: /api/latest/service-level-objective-corrections/
+[26]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction

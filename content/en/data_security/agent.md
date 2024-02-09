@@ -26,12 +26,24 @@ The official repositories and binary packages of the Agent are signed. Verify th
   - [7408BFD56BC5BF0C361AAAE85D88EEA3B01082D3][20]
   - [C6559B690CA882F023BDF3F63F4D1729FD4BF915][5]
   - [A4C0B90D7443CF6E4E8AA341F1068E14E09422B3][6]
-- Windows MSI:
-  - DigiCert certificate fingerprint `720FE30A376658011C45FF1BE04BDAC071F0DEA2`
 - MacOS PKG:
   - Apple certificate fingerprint `FDD2ADF623EA75E62C6DC6DBFBA7520CA549AB7314E660D78B0E3DCCF15B2FBA`
 
 On Debian and Ubuntu, the `datadog-agent` package has a soft dependency on the `datadog-signing-keys` package, which makes the above keys trusted by APT. Keeping the package updated ensures the latest signing keys are present on your system.
+
+### Windows MSI
+
+To verify the signature of a Datadog Agent installer file on Windows, pipe the output of `Get-AuthenticodeSignature` through `FormatList` (`fl`) and make sure:
+- the status is valid
+- the certificate is signed by `Datadog, Inc`
+- the issuer is `DigiCert`
+
+For example, to verify an .msi file named `ddagent-cli-7.49.1.msi`:
+{{< code-block lang="powershell" >}}
+Get-AuthenticodeSignature ddagent-cli-7.49.1.msi | fl
+{{< /code-block >}}
+
+If the output of the command is `A certificate chain could not be built to a trusted root authority`, the machine may need a DigiCert root CA update. 
 
 ## Information security
 
@@ -86,7 +98,7 @@ For more information, see the [Secrets Management][18] documentation.
 [5]: https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
 [6]: https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
 [7]: /agent/faq/network/
-[8]: /agent/proxy/
+[8]: /agent/configuration/proxy/
 [9]: /agent/troubleshooting/
 [10]: https://coreos.com/clair
 [11]: https://snyk.io
@@ -96,6 +108,6 @@ For more information, see the [Secrets Management][18] documentation.
 [15]: https://www.datadoghq.com/8869756E.asc.txt
 [16]: /agent/faq/windows-agent-ddagent-user/
 [17]: https://github.com/DataDog/datadog-agent/blob/master/docs/agent/secrets.md
-[18]: /agent/guide/secrets-management/
+[18]: /agent/configuration/secrets-management/
 [19]: https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public
 [20]: https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public

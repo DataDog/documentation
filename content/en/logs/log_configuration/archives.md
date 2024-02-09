@@ -29,10 +29,6 @@ Configure your Datadog account to forward all the logs ingested—whether [index
 
 Navigate to the [**Log Forwarding** page][14] to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket.
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Log Forwarding is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 1. If you haven't already, set up a Datadog [integration](#set-up-an-integration) for your cloud provider.
 2. Create a [storage bucket](#create-a-storage-bucket).
 3. Set [permissions](#set-permissions) to `read` and/or `write` on that archive.
@@ -268,6 +264,18 @@ For Archives with a maximum scan size defined, all users need to estimate the sc
 
 {{< img src="logs/archives/max_scan_size.png" alt="Define maximum scan size on Archive" style="width:75%;">}}
 
+{{< site-region region="us3" >}}
+#### Firewall rules
+
+{{< tabs >}}
+{{% tab "Azure storage" %}}
+
+Firewall rules are not supported.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{< /site-region >}}
 #### Storage class
 
 {{< tabs >}}

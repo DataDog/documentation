@@ -26,7 +26,8 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
 
 {{% appsec-getstarted %}}
 
-## Get started
+## Enabling threat detection
+### Get started
 
 1. **Update your Datadog Python library package** to at least version 1.2.2 (at least version 1.5.0 for Application Vulnerability Management vulnerability detection features). Run the following:
    ```shell
@@ -105,7 +106,7 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
 
 {{% appsec-getstarted-2-plusrisk %}}
 
-{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
+{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
 ## Further Reading
 

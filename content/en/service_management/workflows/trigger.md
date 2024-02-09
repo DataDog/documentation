@@ -2,16 +2,21 @@
 title: Trigger a workflow
 kind: documentation
 disable_toc: false
+algolia:
+  tags: ['workflow', 'workflows', 'workflow automation']
 aliases:
 - /workflows/trigger
 further_reading:
+- link: "/getting_started/workflow_automation/"
+  tag: "Documentation"
+  text: "Getting Started with Workflow Automation"
 - link: "/service_management/workflows/access/#service-accounts/"
   tag: "Documentation"
   text: "Find out more about Service Accounts for workflows"
 - link: "dashboards"
   tag: "Documentation"
   text: "Find out more about setting up a dashboard"
-- link: "security/explorer"
+- link: "/security"
   tag: "Documentation"
   text: "Find out more about Security Signals"
 - link: "monitors"
@@ -53,6 +58,16 @@ To run the workflow:
 1. Under **Execution parameters**, any template variables you mapped to workflow inputs are automatically populated. Enter the values for any unmapped execution parameters, or edit the existing values if needed.
 1. Click **Run** to run the workflow.
 
+## Trigger a workflow from a workflow
+
+You can trigger a child workflow from another workflow using the **Trigger Workflow** action. For example, if you have a complex series of steps that you need to reuse in several workflows, there's no need to recreate those steps for all of your workflows. Instead, add the steps to a new workflow and trigger it in your other workflows using the Trigger Workflow action.
+
+<div class="alert alert-info">For billing purposes, triggering a child workflow registers as a new workflow execution.</div>
+
+If the child workflow has [input parameters][5], these parameters appear as required fields in the Trigger Workflow action. In the example below, the **service_name** input parameter is required because `service_name` is set as an input parameter in the child workflow.
+
+{{< img src="service_management/workflows/trigger-workflow-step.png" alt="The service_name input parameter is required in the child workflow" style="width:100%;" >}}
+
 ## Trigger a workflow from a Monitor
 
 To trigger a workflow from a Monitor:
@@ -83,11 +98,12 @@ To trigger a workflow from a Notification Rule:
 1. On the workflow canvas, click **Add an Automated Trigger** and select **@mention**.
 1. Next to **@workflow-**, enter a mention name for the trigger. Your mention name must be unique.
 1. Save your Workflow.
-1. From the [Setup & Configuration][3] page, find the Detection Rule you'd like to use to trigger your workflow, or create a new rule.
+1. From the [Configuration][3] page, find the notification rule you'd like to use to trigger your workflow, or create a new rule.
 1. In the **Recipient** section, add the full workflow mention name. For example, `@workflow-my-workflow`.
+1. Add a unique notification name.
 1. Click **Save and Activate**.
 
-{{< img src="service_management/workflows/notification-rule-trigger.png" alt="Add the workflow name to the recipient section of a Notification rule" >}}
+{{< img src="service_management/workflows/notification-rule-trigger2.png" alt="Add the workflow name to the recipient section of a Notification rule" >}}
 
 Each time the Notification Rule fires, it triggers a workflow run.
 
@@ -116,15 +132,15 @@ To schedule a workflow run:
 
 <div class="alert alert-info">Scheduled and triggered workflows don't run automatically until you've published them. To publish the workflow, click <strong>Publish</strong> from the workflow's page. Published workflows accrue costs based on workflow executions. For more information, see the <a href="https://www.datadoghq.com/pricing/?product=workflow-automation#products">Datadog Pricing page</a>.</div>
 
-## Debug a workflow
+## Run history
 
-After you trigger a workflow, the workflow page switches to the **Debug** view. You can also manually toggle between the **Build** and **Debug** views.
+After you trigger a workflow, the workflow page switches to the workflow's **Run History**. Click **Configuration** or **Run History** in the top-left to switch between the configuration and run history views.
 
-Use the **Debug** view to watch the progress of a triggered workflow, or debug a failed step. Clicking on a failed step gives you the inputs, outputs, and execution context for the step, as well as the associated error message. The example below shows a failed GitHub team membership step. The error message shows that the step failed due to missing permissions:
+Use run history to watch the progress of a triggered workflow, or debug a failed step. Clicking on a failed step gives you the inputs, outputs, and execution context for the step, as well as the associated error message. The example below shows a failed _GitHub pull request status_ step. The error message shows that the step failed due to missing permissions:
 
-{{< img src="service_management/workflows/failed-step3.png" alt="A workflow with a failed step." >}}
+{{< img src="service_management/workflows/failed-step4.png" alt="A workflow with a failed step." >}}
 
-The initial **Debug** view for a workflow provides a panel with the list of previous workflow executions and whether each execution succeeded or failed. Failures include a link to the failed workflow step. Click on a workflow execution in the list to inspect it. You can return to the initial execution history at any time by clicking on the workflow canvas.
+The initial run history for a workflow provides a panel with the list of previous workflow executions and whether each execution succeeded or failed. Failures include a link to the failed workflow step. Click on a workflow execution in the list to inspect it. You can return to the initial execution history at any time by clicking anywhere on the workflow canvas.
 
 ## Further reading
 
@@ -132,5 +148,6 @@ The initial **Debug** view for a workflow provides a panel with the list of prev
 
 [1]: /service_management/workflows/access/#use-a-service-account
 [2]: https://app.datadoghq.com/monitors/manage
-[3]: https://app.datadoghq.com/security/configuration/rules
+[3]: https://app.datadoghq.com/security/configuration/notification-rules
 [4]: /security/cloud_security_management/workflows
+[5]: /service_management/workflows/build/#input-parameters

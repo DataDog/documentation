@@ -13,10 +13,6 @@ further_reading:
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">
-The features described on this page are in beta. Contact your Customer Success Manager to provide feedback or ask for help.
-</div>
-
 Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues.
 
 <div class="alert alert-danger">
@@ -67,6 +63,15 @@ exec rdsadmin.rdsadmin_util.grant_sys_object('V_$CONTAINERS','DATADOG','SELECT',
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL_PLAN_STATISTICS_ALL','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$SQL','DATADOG','SELECT',p_grant_option => false);
 exec rdsadmin.rdsadmin_util.grant_sys_object('V_$PGASTAT','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$ASM_DISKGROUP','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$RSRCMGRMETRIC','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$DATAGUARD_CONFIG','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$DATAGUARD_STATS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$TRANSACTION','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('V_$LOCKED_OBJECT','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_OBJECTS','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('CDB_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
+exec rdsadmin.rdsadmin_util.grant_sys_object('DBA_DATA_FILES','DATADOG','SELECT',p_grant_option => false);
 ```
 
 ## Configure the Agent
@@ -111,8 +116,8 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [1]: /database_monitoring/setup_oracle/#install-agent
 [2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
 [3]: /getting_started/tagging/unified_service_tagging
-[4]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[5]: /agent/guide/agent-commands/#agent-status-and-information
+[4]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[5]: /agent/configuration/agent-commands/#agent-status-and-information
 [6]: https://app.datadoghq.com/databases
 [7]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [11]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example

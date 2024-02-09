@@ -31,7 +31,7 @@ draft: false
 git_integration_title: nfsstat
 integration_id: システム
 integration_title: Nfsstat
-integration_version: 1.11.0
+integration_version: 1.12.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -119,7 +119,7 @@ Nfsstat チェックには、サービスのチェック機能は含まれませ
 - [HTTP チェックでネットワークモニターを構築][9]
 
 [1]: http://man7.org/linux/man-pages/man8/nfsiostat.8.html
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/nfsstat/datadog_checks/nfsstat/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent

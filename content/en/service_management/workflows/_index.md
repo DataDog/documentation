@@ -2,15 +2,23 @@
 title: Workflow Automation
 kind: documentation
 disable_toc: false
+algolia:
+  tags: ['workflow', 'workflows', 'workflow automation']
 aliases:
 - /workflows
 further_reading:
+- link: "/getting_started/workflow_automation/"
+  tag: "Documentation"
+  text: "Getting Started with Workflow Automation"
 - link: "https://www.datadoghq.com/blog/automate-end-to-end-processes-with-datadog-workflows/"
   tag: "Blog"
   text: "Automate end-to-end processes and quickly respond to events with Datadog Workflows"
 - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
   tag: "Blog"
   text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/azure-workflow-automation/"
+  tag: "Blog"
+  text: "Quickly remediate issues in your Azure applications with Datadog Workflow Automation"
 ---
 
 {{< site-region region="gov" >}}

@@ -133,7 +133,7 @@ Once the library is in your classpath, attach the following layout to any target
     <!-- Write logs as Json into a file -->
     <target name="json-file" xsi:type="File" fileName="application-logs.json">
       <layout xsi:type="JsonLayout">
-        <attribute name="date" layout="${date:format=yyyy-MM-ddTHH\:mm\:ss.fff}" />
+        <attribute name="date" layout="${date:universalTime=true:format=o}" />
         <attribute name="level" layout="${level:upperCase=true}"/>
         <attribute name="message" layout="${message}" />
         <attribute name="exception" layout="${exception:format=ToString}" />
@@ -635,9 +635,9 @@ In the `Serilog.WriteTo` array, add an entry for `DatadogLogs`. An example is sh
 [1]: /logs/log_configuration/parsing
 [2]: /agent/logs/?tab=tailfiles#activate-log-collection
 [3]: /agent/logs/?tab=tailfiles#custom-log-collection
-[4]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[5]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[6]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[5]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[6]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [7]: /logs/log_configuration/parsing/?tab=matchers
 [8]: /logs/explorer/#overview
 [9]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/

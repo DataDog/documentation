@@ -37,8 +37,8 @@ The following conditional variables are available:
 | `{{^is_no_data}}`          | The monitor is not triggered for missing data                      |
 | `{{#is_warning}}`          | The monitor warns                                                  |
 | `{{^is_warning}}`          | The monitor does not warn                                          |
-| `{{#is_recovery}}`         | The monitor recovers from `ALERT`, `WARNING`, or `NO DATA`         |
-| `{{^is_recovery}}`         | The monitor does not recover from `ALERT`, `WARNING`, or `NO DATA` |
+| `{{#is_recovery}}`         | The monitor recovers from `ALERT`, `WARNING`, `UNKNOWN`, or `NO DATA`         |
+| `{{^is_recovery}}`         | The monitor does not recover from `ALERT`, `WARNING`, `UNKNOWN`, or `NO DATA` |
 | `{{#is_warning_recovery}}` | The monitor recovers from `WARNING` to `OK`                        |
 | `{{^is_warning_recovery}}` | The monitor does not recover from `WARNING` to `OK`                |
 | `{{#is_alert_recovery}}`   | The monitor recovers from `ALERT` to `OK`                          |
@@ -230,9 +230,9 @@ This is the escalation message @dev-team@company.com
 {{% /tab %}}
 {{< /tabs >}}
 
-If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, it is recommended to configure a corresponding `recovery` condition in order for a recovery notification to be sent to the handle. 
+If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, it is recommended to configure a corresponding `recovery` condition in order for a recovery notification to be sent to the handle.
 
-**Note**: Any text or notification handle placed **outside** the configured conditional variables is invoked with every monitor state transition. Any text or notification handle placed **inside** of configured conditional variables is only invoked if the monitor state transition matches its condition. 
+**Note**: Any text or notification handle placed **outside** the configured conditional variables is invoked with every monitor state transition. Any text or notification handle placed **inside** of configured conditional variables is only invoked if the monitor state transition matches its condition.
 
 ## Attribute and tag variables
 
@@ -322,6 +322,7 @@ To include **any** attribute or tag from a log, a trace span, a RUM event, a CI 
 | Trace Analytics | `{{span.attributes.key}}` or `{{span.tags.key}}` |
 | Error Tracking  | Traces: `{{span.attributes.[error.message]}}`<br>RUM Events: `{{rum.attributes.[error.message]}}`<br>Logs: `{{log.attributes.[error.message]}}`             |
 | RUM             | `{{rum.attributes.key}}` or `{{rum.tags.key}}`   |
+| Audit Trail     | `{{audit.attributes.key}}` or `{{audit.message}}`    |
 | CI Pipeline     | `{{cipipeline.attributes.key}}`                  |
 | CI Test         | `{{citest.attributes.key}}`                      |
 | Database Monitoring | `{{databasemonitoring.attributes.key}}`      |
@@ -395,18 +396,22 @@ Variable content is escaped by default. To prevent content such as JSON or code 
 
 Use template variables to customize your monitor notifications. The built-in variables are:
 
-| Variable                       | Description                                                                   |
-|--------------------------------|-------------------------------------------------------------------------------|
-| `{{value}}`                    | The value that breached the alert for metric based query monitors.            |
-| `{{threshold}}`                | The value of the alert threshold set in the monitor's alert conditions.       |
-| `{{warn_threshold}}`           | The value of the warning threshold set in the monitor's alert conditions.     |
-| `{{ok_threshold}}`             | The value that recovered the Service Check monitor.                            |
-| `{{comparator}}`               | The relational value set in the monitor's alert conditions.                   |
-| `{{first_triggered_at}}`       | The UTC date and time when the monitor first triggered.                       |
-| `{{first_triggered_at_epoch}}` | The UTC date and time when the monitor first triggered in epoch milliseconds. |
-| `{{last_triggered_at}}`        | The UTC date and time when the monitor last triggered.                        |
-| `{{last_triggered_at_epoch}}`  | The UTC date and time when the monitor last triggered in epoch milliseconds.  |
-| `{{triggered_duration_sec}}`   | The number of seconds the monitor has been in a triggered state.              |
+| Variable                             | Description                                                                   |
+|-----------------------------------   |-------------------------------------------------------------------------------|
+| `{{value}}`                          | The value that breached the alert for metric based query monitors.            |
+| `{{threshold}}`                      | The value of the alert threshold set in the monitor's alert conditions.       |
+| `{{warn_threshold}}`                 | The value of the warning threshold set in the monitor's alert conditions.     |
+| `{{alert_recovery_threshold}}`       | The value that recovered the monitor from its `ALERT` state.                  |
+| `{{warn_recovery_threshold}}`        | The value that recovered the monitor from its `WARN` state.                   |
+| `{{ok_threshold}}`                   | The value that recovered the Service Check monitor.                           |
+| `{{comparator}}`                     | The relational value set in the monitor's alert conditions.                   |
+| `{{first_triggered_at}}`<br>*See note below*         | The UTC date and time when the monitor first triggered.                       |
+| `{{first_triggered_at_epoch}}`<br>*See note below*   | The UTC date and time when the monitor first triggered in epoch milliseconds. |
+| `{{last_triggered_at}}`<br>*See note below*          | The UTC date and time when the monitor last triggered.                        |
+| `{{last_triggered_at_epoch}}`<br>*See note below*    | The UTC date and time when the monitor last triggered in epoch milliseconds.  |
+| `{{triggered_duration_sec}}`         | The number of seconds the monitor has been in a triggered state.              |
+
+**Note**: The `{{first_triggered_at}}`, `{{first_triggered_at_epoch}}`, `{{last_triggered_at}}`, and `{{last_triggered_at_epoch}}` monitor template variables reflect the values when a monitor changes state **NOT** when a new monitor event occurs. Renotification events show the same template variable if the monitor state has not changed. Use `{{triggered_duration_sec}}` to display the duration at the time of the monitor event.
 
 ### Evaluation
 
@@ -567,10 +572,10 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 If your alert message includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
 
-**Example**: If your monitor message includes a URL to the APM services page filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
+**Example**: If your monitor message includes a URL to the Service Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
 
 ```
-https://app.datadoghq.com/apm/services/{{urlencode "service.name"}}
+https://app.datadoghq.com/services/{{urlencode "service.name"}}
 ```
 
 ## Further reading

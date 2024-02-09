@@ -1,5 +1,5 @@
 ---
-title: PHP Compatibility Requirements 
+title: PHP Compatibility Requirements
 kind: documentation
 code_lang: php
 type: multi-code-lang
@@ -14,6 +14,7 @@ The following ASM capabilities are supported in the PHP library, for the specifi
 | -------------------------------- |----------------------------|
 | Threat Detection | 0.84.0                     |
 | Threat Protection  | 0.86.0                     |
+| Customize response to blocked requests | 0.86.0 |
 | Vulnerability Management for Open Source Software (OSS) | 0.90.0              |
 | Vulnerability Management for Code-level (beta) | not supported              |
 | Automatic user activity event tracking | 0.89.0                     |
@@ -26,11 +27,11 @@ The minimum tracer version to get all supported ASM capabilities for PHP is 0.86
 ### Supported deployment types
 |Type | Threat Detection support | Vulnerability Management for OSS support |
 | ---           |   ---             |           ----            |
-| Docker        | {{< X >}}         |                           |
-| Kubernetes    | {{< X >}}         |                           | 
-| Amazon ECS    | {{< X >}}         |                           |
+| Docker        | {{< X >}}         |  {{< X >}}                |
+| Kubernetes    | {{< X >}}         |  {{< X >}}                |
+| Amazon ECS    | {{< X >}}         |  {{< X >}}                |
 | AWS Fargate   |                   |                           |
-| AWS Lambda    |                   |                           |   
+| AWS Lambda    |                   |                           |
 
 ## Language and framework compatibility
 
@@ -41,6 +42,7 @@ It's recommended to use <a href="https://www.php.net/supported-versions">officia
 
 | PHP Version    | Support level                         | Package version |
 |:---------------|:--------------------------------------|:----------------|
+| 8.3.x          | General Availability                  | > `0.95.0+`     |
 | 8.2.x          | General Availability                  | > `0.82.0+`     |
 | 8.1.x          | General Availability                  | > `0.66.0+`     |
 | 8.0.x          | General Availability                  | > `0.52.0+`     |
@@ -67,11 +69,13 @@ PHP ASM supports the following architectures:
 | ------------------------------------------|-----------------------|----------------------------------------|
 | Linux GNU amd64 (`x86-64-linux-gnu`)      | GA                    | All                                    |
 | Linux MUSL amd64 (`x86-64-linux-musl`)    | GA                    | All                                    |
+| Linux GNU arm64 (aarch64-linux-gnu)       | GA                    | > `0.95.0`                             |
+| Linux MUSL arm64 (aarch64-linux-musl)     | GA                    | > `0.95.0`                             |
 
 The Datadog PHP library supports PHP version 7.0 and above on the following architectures:
 
-- Linux (GNU) x86-64
-- Alpine Linux (musl) x86-64
+- Linux (GNU) x86-64 and arm64
+- Alpine Linux (musl) x86-64 and arm64
 
 The library supports the use of all PHP frameworks, and also the use of no framework.
 
@@ -124,7 +128,7 @@ The following frameworks aren't directly instrumented by ASM, but indirectly sup
 
 | Framework         | Versions | Threat Detection supported?    | Threat Protection supported?|
 |-------------------|-----------------|-----------------|---------------|
-| Amazon RDS        | Any supported PHP | {{< X >}}  |   {{< X >}} | 
+| Amazon RDS        | Any supported PHP | {{< X >}}  |   {{< X >}} |
 | Eloquent       | Laravel supported versions | {{< X >}} | {{< X >}} |
 | Memcached        | Any supported PHP |   {{< X >}}    | {{< X >}} |
 | MySQLi        | Any supported PHP | {{< X >}} | {{< X >}} |

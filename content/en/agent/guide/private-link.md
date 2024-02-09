@@ -14,10 +14,6 @@ further_reading:
 <div class="alert alert-warning">Datadog PrivateLink does not support the selected Datadog site.</div>
 {{% /site-region %}}
 
-{{% site-region region="ap1"%}}
-<div class="alert alert-primary">Datadog PrivateLink in AP1 is currently in private beta. To request access, contact <a href="https://docs.datadoghq.com/help/">Datadog support</a>.</div>
-{{% /site-region %}}
-
 {{% site-region region="us,ap1" %}}
 
 This guide walks you through how to configure [AWS PrivateLink][1] for use with Datadog.
@@ -98,10 +94,10 @@ However, to route traffic to Datadog's PrivateLink offering in {{< region-param 
 
 
 [1]: /help/
-[2]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [3]: /agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [4]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
-[5]: /agent/guide/agent-commands/#restart-the-agent
+[5]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 
 {{% tab "Connect from another region using VPC Peering" %}}
@@ -241,8 +237,8 @@ The VPCs with Private Hosted Zone (PHZ) attached need to have a couple of settin
 [4]: https://docs.aws.amazon.com/vpc/latest/privatelink/view-vpc-endpoint-service-dns-name.html
 [5]: https://docs.amazonaws.cn/en_us/Route53/latest/DeveloperGuide/hosted-zone-private-associate-vpcs-different-accounts.html
 [6]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zone-private-considerations.html#hosted-zone-private-considerations-vpc-settings
-[7]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[8]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[7]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[8]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [9]: https://docs.datadoghq.com/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [10]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
 {{% /tab %}}

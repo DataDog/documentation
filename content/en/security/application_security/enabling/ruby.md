@@ -26,7 +26,8 @@ You can monitor application security for Ruby apps running in Docker, Kubernetes
 
 {{% appsec-getstarted %}}
 
-## Get started
+## Enabling threat detection
+### Get started
 
 1. **Update your Gemfile to include the Datadog library**:
 
@@ -209,7 +210,7 @@ env DD_APPSEC_ENABLED=true rails server
 
 {{% appsec-getstarted-2-canary %}}
 
-{{< img src="/security/application_security/application-security-signal.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
+{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
 ## Further Reading
 

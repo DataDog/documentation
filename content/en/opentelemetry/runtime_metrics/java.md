@@ -38,7 +38,7 @@ The following table lists the Datadog runtime metrics that are supported by mapp
 | `jvm.gc.survivor_size` | | `process.runtime.jvm.memory.usage` |
 | `jvm.gc.metaspace_size` | | `process.runtime.jvm.memory.usage` |
 | `jvm.thread_count` | The number of live threads. | `process.runtime.jvm.threads.count` |
-| `jvm.loaded_classes` | Number of classes currently loaded. | `process.runtime.jvm.classes.loaded` |
+| `jvm.loaded_classes` | Number of classes currently loaded. | `process.runtime.jvm.classes.current_loaded` |
 | `jvm.cpu_load.system` | Recent CPU utilization for the whole system. | `process.runtime.jvm.system.cpu.utilization` |
 | `jvm.cpu_load.process` | Recent CPU utilization for the process. | `process.runtime.jvm.cpu.utilization` |
 | `jvm.buffer_pool.direct.used` | Measure of memory used by direct buffers. | `process.runtime.jvm.buffer.usage` |

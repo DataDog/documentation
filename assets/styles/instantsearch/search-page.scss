@@ -59,6 +59,16 @@
             }
         }
 
+        & div {
+            grid-column: span 4 / span 4;
+        }
+
+        @media screen and (min-width: 768px) {
+            & div {
+                grid-column: span 3 / span 3;
+            }
+        }
+
         & .ais-Hits-content {
             width: auto;
         }
@@ -76,6 +86,7 @@
         width: 100%;
         display: flex;
         flex-wrap: wrap;
+        word-break: break-word;
 
         & .ais-Hits-category,
         & .ais-Hits-subcategory,

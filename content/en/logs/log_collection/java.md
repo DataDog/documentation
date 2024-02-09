@@ -177,6 +177,30 @@ Use the [logstash-logback-encoder][1] for JSON formatted logs in Logback.
 
 [1]: https://github.com/logstash/logstash-logback-encoder
 {{% /tab %}}
+{{% tab "Tinylog" %}}
+
+Create a JSON writer configuration outputting to a file based on the [official Tinylog documentation][1].
+
+
+Use the following format in a `tinylog.properties` file:
+
+```properties
+writer                     = json
+writer.file                = log.json
+writer.format              = LDJSON
+writer.level               = info
+writer.field.level         = level
+writer.field.source        = {class}.{method}()
+writer.field.message       = {message}
+writer.field.dd.trace_id   = {context: dd.trace_id}
+writer.field.dd.span_id    = {context: dd.span_id}
+writer.field.dd.service    = {context: dd.service}
+writer.field.dd.version    = {context: dd.version}
+writer.field.dd.env        = {context: dd.env}
+```
+
+[1]: https://tinylog.org/v2/configuration/#json-writer
+{{% /tab %}}
 {{< /tabs >}}
 
 #### Inject trace IDs into your logs
@@ -257,6 +281,22 @@ Configure a file appender in `logback.xml`:
 </configuration>
 ```
 
+{{% /tab %}}
+{{% tab "Tinylog" %}}
+
+Create a writer configuration outputting to a file based on the [official Tinylog documentation][1].
+
+
+Use the following format in a `tinylog.properties` file:
+
+```properties
+writer          = file
+writer.level    = debug
+writer.format   = {level} - {message} - "dd.trace_id":{context: dd.trace_id} - "dd.span_id":{context: dd.span_id}
+writer.file     = log.txt
+```
+
+[1]: https://tinylog.org/v2/configuration/#json-writer
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -531,9 +571,9 @@ To generate this JSON:
 [3]: /tracing/other_telemetry/connect_logs_and_traces/java/
 [4]: /agent/logs/?tab=tailfiles#activate-log-collection
 [5]: /agent/logs/?tab=tailfiles#custom-log-collection
-[6]: /agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[7]: /agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[8]: /agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information]
+[6]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[7]: /agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[8]: /agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information]
 [9]: /logs/log_configuration/parsing/?tab=matchers
 [10]: /logs/explorer/#overview
 [11]: https://github.com/logstash/logstash-logback-encoder

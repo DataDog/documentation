@@ -2,7 +2,6 @@
 title: Flex Logs
 kind: documentation
 description: Cost effective live query capabilities over long term retention of Logs
-private: true
 aliases:
   - /logs/log_configuration/flex_log/
 further_reading:
@@ -16,10 +15,6 @@ further_reading:
   tag: "Documentation"
   text: "Log Archives"
 ---
-
-{{< site-region region="eu,gov,us3,us5,ap1" >}}
-<div class="alert alert-warning">Flex Logs is not supported for the Datadog {{< region-param key="dd_site_name" >}} site.</div>
-{{< /site-region >}}
 
 {{< callout url="https://docs.google.com/forms/d/15FJG6RTFMmp7c7aRE8bcTy6B1Tt8ia4OmiesQa_zkZ4/viewform?edit_requested=true" btn_hidden="false" header="Request Access!">}}
 Flex Logs is in Limited Availability, but you can request access! Use this form to submit your request today.

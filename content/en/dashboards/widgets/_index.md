@@ -50,6 +50,8 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
         img="dashboards/widgets/icons/group_default_light_large.svg">}} Group{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/powerpack"
         img="dashboards/widgets/icons/group_powerpack_light_large.svg">}} Powerpack{{< /nextlink >}}
+    {{< nextlink href="/dashboards/widgets/split_graph"
+        img="dashboards/widgets/icons/group-split_light_small.svg">}} Split Graph{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Annotations and embeds
@@ -96,6 +98,8 @@ Widgets are building blocks for your dashboards. They allow you to visualize and
 
 ### Performance and reliability
 {{< whatsnext desc="Site reliability visualizations: ">}}
+    {{< nextlink href="/dashboards/widgets/profiling_flame_graph"
+        img="dashboards/widgets/icons/profiling_flame_graph.svg">}} Profiling Flame Graph{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/slo" 
         img="dashboards/widgets/icons/slo-summary_light_large.png">}} Service Level Objective (SLO) Summary{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/slo_list" 
@@ -125,7 +129,7 @@ To customize interactions with data inline your generic widgets, see [Custom Lin
 
 ## Unit override
 
-Customize unit values displayed on widgets to add context to your data. 
+Customize unit values displayed on widgets to add context to your data. For more use cases and information, see the [Customize your visualizations with unit overrides][3].
 - **Unit override**: choose to display units in the family of 'memory', and have Datadog take care of displaying the appropriate scale depending on data (such as megabytes or gigabytes).
 - **Unit and scale override**: fix units to a single scale (display data in megabytes regardless of value).
 - **Define custom units**: define completely custom units (like 'tests' instead of a generic count).
@@ -138,7 +142,9 @@ This is not an alternative for assigning units to your data.
 
 ## Copy and paste widgets
 
-Widgets can be copied on [Dashboards][3], [Notebooks][4], [APM Service][5], and the [APM resource][6] page by using `Ctrl + C` (`Cmd + C` for Mac), or by selecting the share icon and choosing "Copy".
+<div class="alert alert-warning">You must have <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#dashboards"><code>dashboard_public_share</code> permissions</a> and enable <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>Static Public Data Sharing</strong></a> in your Organization Settings to use this feature.</div>
+
+Widgets can be copied on [Dashboards][4], [Notebooks][5], [APM Service][6], and the [APM resource][7] page by using `Ctrl + C` (`Cmd + C` for Mac), or by selecting the share icon and choosing "Copy".
 
 The copied widgets can be pasted within Datadog by using `Ctrl + V` (`Cmd + V` for Mac) on:
 
@@ -173,7 +179,8 @@ To download data from a timeseries, table, or top list widget in CSV format, cli
 
 [1]: /dashboards/widgets/timeseries/#full-screen
 [2]: /dashboards/guide/context-links/
-[3]: /dashboards/
-[4]: /notebooks/
-[5]: /tracing/services/service_page/
-[6]: /tracing/services/resource_page/
+[3]: /dashboards/guide/unit-override
+[4]: /dashboards/
+[5]: /notebooks/
+[6]: /tracing/services/service_page/
+[7]: /tracing/services/resource_page/

@@ -155,7 +155,7 @@ In order to avoid having different values for the same method name depending on 
 **Action to take**: Update monitor or dashboard queries to use the `resource.method` field with uppercase values.
 
 #### `beforeSend` action event
-The `beforeSend`` API allows access to contextual information of the collected events (see [Enrich and control RUM data][23]).
+The `beforeSend` API allows access to contextual information of the collected events (see [Enrich and control RUM data][23]).
 
 With the introduction of frustration signals, an action event can be associated with several DOM events.
 
@@ -315,13 +315,13 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [2]: /real_user_monitoring/session_replay
 [3]: /real_user_monitoring/browser/collecting_browser_errors/
 [4]: /real_user_monitoring/browser/monitoring_resource_performance/
-[5]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#enrich-and-control-rum-data
+[5]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [6]: /real_user_monitoring/browser/collecting_browser_errors/?tab=npm#collect-errors-manually
-[7]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#clear-user-session-property
-[8]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#add-global-context-property
-[9]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#remove-global-context-property
-[10]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#read-global-context
-[11]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#replace-global-context
+[7]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#clear-user-session-property
+[8]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#add-global-context-property
+[9]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#remove-global-context-property
+[10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#read-global-context
+[11]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#replace-global-context
 [12]: /api/latest/rum/
 [13]: /api/latest/rum/
 [14]: /api/latest/rum/
@@ -333,7 +333,7 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [20]: /real_user_monitoring/session_replay/privacy_options/#configuration
 [21]: /real_user_monitoring/guide/sampling-browser-plans/#setup
 [22]: /real_user_monitoring/session_replay/#usage
-[23]: /real_user_monitoring/browser/modifying_data_and_context/?tab=npm#enrich-and-control-rum-data
+[23]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [24]: /help/
 [26]: /real_user_monitoring/browser/
 [25]: /real_user_monitoring/connect_rum_and_traces#opentelemetry-support

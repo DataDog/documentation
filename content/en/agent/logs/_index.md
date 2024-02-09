@@ -67,7 +67,7 @@ logs:
 
 On **Windows**, use the path `<DRIVE_LETTER>:\<PATH_LOG_FILE>\<LOG_FILE_NAME>.log`, and verify that the user `ddagentuser` has read and write access to the log file.
 
-[1]: /agent/guide/agent-configuration-files/
+[1]: /agent/configuration/agent-configuration-files/
 {{% /tab %}}
 
 {{% tab "TCP/UDP" %}}
@@ -88,7 +88,7 @@ In the Agent version 7.31.0+, the TCP connection stays open indefinitely even wh
 
 **Note**: The Agent supports raw string, JSON, and Syslog formatted logs. If you are sending logs in batch, use line break characters to separate your logs.
 
-[1]: /agent/guide/agent-configuration-files/
+[1]: /agent/configuration/agent-configuration-files/
 {{% /tab %}}
 {{% tab "journald" %}}
 
@@ -102,7 +102,7 @@ logs:
 
 Refer to the [journald integration][2] documentation for more details regarding the setup for containerized environments and units filtering.
 
-[1]: /agent/guide/agent-configuration-files/
+[1]: /agent/configuration/agent-configuration-files/
 [2]: /integrations/journald/
 {{% /tab %}}
 {{% tab "Windows Events" %}}
@@ -173,10 +173,10 @@ List of all available parameters for log collection:
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/kubernetes/log/
 [3]: /agent/docker/log/
-[4]: /agent/guide/agent-configuration-files/
+[4]: /agent/configuration/agent-configuration-files/
 [5]: /agent/logs/log_transport/
-[6]: /agent/guide/agent-commands/#restart-the-agent
-[7]: /agent/guide/agent-commands/#agent-status-and-information
+[6]: /agent/configuration/agent-commands/#restart-the-agent
+[7]: /agent/configuration/agent-commands/#agent-status-and-information
 [8]: /tracing/
 [9]: /getting_started/tagging/unified_service_tagging
 [10]: /metrics/custom_metrics/#overview

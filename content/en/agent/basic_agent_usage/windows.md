@@ -18,7 +18,7 @@ further_reading:
 - link: "/agent/basic_agent_usage/#agent-architecture"
   tag: "Documentation"
   text: "Find out more about the Agent's architecture"
-- link: "/agent/guide/network#configure-ports"
+- link: "/agent/configuration/network#configure-ports"
   tag: "Documentation"
   text: "Configure inbound ports"
 ---
@@ -42,7 +42,7 @@ If installing the Datadog Agent on a domain environment, see the [installation r
 
 1. Download the [Datadog Agent installer][1] to install the latest version of the Agent.
 
-   <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://s3.amazonaws.com/ddagent-windows-stable/installers.json">installer list</a>.</div>
+   <div class="alert alert-info">If you need to install a specific version of the Agent, see the <a href="https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json">installer list</a>.</div>
 
 2. Run the installer (as **Administrator**) by opening `datadog-agent-7-latest.amd64.msi`.
 3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][2].
@@ -71,15 +71,10 @@ start /wait msiexec /qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADO
 Start-Process -Wait msiexec -ArgumentList '/qn /i datadog-agent-7-latest.amd64.msi APIKEY="<YOUR_DATADOG_API_KEY>"'
 ```
 
-**Notes**
+#### Installation Configuration Options 
 
-- The `/qn` option runs a quiet install. To see the GUI prompts, remove it.
-- Some Agent versions may cause a forced reboot. To prevent this, add the parameter: `REBOOT=ReallySuppress`.
-- Some Agent components require a kernel driver to collect data. To know if a kernel driver is required for your component, see its documentation page or search for `kernel driver` in the associated Agent configuration files.
+Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows. For additional Agent configuration options, see [more Agent configuration options](#more-agent-configuration-options).  
 
-### Configuration
-
-Each configuration item is added as a property to the command line. The following configuration command line options are available when installing the Agent on Windows:
 
 | Variable                                    | Type    | Description                                                                                                                                                                                                                         |
 |----------------------------                 |---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -87,6 +82,27 @@ Each configuration item is added as a property to the command line. The followin
 | `SITE`                                      | String  | Set the Datadog intake site, for example: `SITE=`{{< region-param key="dd_site" code="true" >}}                                                                                                                                     |
 | `TAGS`                                      | String  | Comma-separated list of tags to assign in the configuration file. Example: `TAGS="key_1:val_1,key_2:val_2"`                                                                                                                         |
 | `HOSTNAME`                                  | String  | Configures the hostname reported by the Agent to Datadog (overrides any hostname calculated at runtime).                                                                                                                            |
+| `DDAGENTUSER_NAME`                          | String  | Override the default `ddagentuser` username used during Agent installation _(v6.11.0+)_. [Learn more about the Datadog Windows Agent User][3].                                                                                      |
+| `DDAGENTUSER_PASSWORD`                      | String  | Override the cryptographically secure password generated for the `ddagentuser` user during Agent installation _(v6.11.0+)_. Must be provided for installs on domain servers. [Learn more about the Datadog Windows Agent User][3].  |
+| `APPLICATIONDATADIRECTORY`                  | Path    | Override the directory to use for the configuration file directory tree. May only be provided on initial install; not valid for upgrades. Default: `C:\ProgramData\Datadog`. _(v6.11.0+)_                                           |
+| `PROJECTLOCATION`                           | Path    | Override the directory to use for the binary file directory tree. May only be provided on initial install; not valid for upgrades. Default: `%ProgramFiles%\Datadog\Datadog Agent`. _(v6.11.0+)_                                    |
+
+**Notes**
+
+- The `/qn` option runs a quiet install. To see the GUI prompts, remove it.
+- Some Agent versions may cause a forced reboot. To prevent this, add the parameter: `REBOOT=ReallySuppress`.
+- Some Agent components require a kernel driver to collect data. To know if a kernel driver is required for your component, see its documentation page or search for `kernel driver` in the associated Agent configuration files.
+- If a valid `datadog.yaml` is found, that file takes precedence over all specified command line options.
+
+### More Agent configuration options
+
+Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows. 
+
+**Note**: If a valid `datadog.yaml` is found, that file takes precedence over all specified command line options.
+
+
+| Variable                                    | Type    | Description                                                                                                                                                                                                                         |
+|----------------------------                 |---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `LOGS_ENABLED`                              | String  | Enable (`"true"`) or disable (`"false"`) the log collection feature in the configuration file. Logs are disabled by default.                                                                                                        |
 | `APM_ENABLED`                               | String  | Enable (`"true"`) or disable (`"false"`) the APM Agent in the configuration file. APM is enabled by default.                                                                                                                        |
 | `PROCESS_ENABLED`                           | String  | Enable (`"true"`) or disable (`"false"`) the Process Agent in the configuration file. The Process Agent is disabled by default.                                                                                                     |
@@ -96,17 +112,12 @@ Each configuration item is added as a property to the command line. The followin
 | `PROXY_PORT`                                | Number  | If using a proxy, sets your proxy port. [Learn more about using a proxy with the Datadog Agent][2].                                                                                                                                 |
 | `PROXY_USER`                                | String  | If using a proxy, sets your proxy user. [Learn more about using a proxy with the Datadog Agent][2].                                                                                                                                 |
 | `PROXY_PASSWORD`                            | String  | If using a proxy, sets your proxy password. For the process/container Agent, this variable is required for passing in an authentication password and cannot be renamed. [Learn more about using a proxy with the Datadog Agent][2]. |
-| `DDAGENTUSER_NAME`                          | String  | Override the default `ddagentuser` username used during Agent installation _(v6.11.0+)_. [Learn more about the Datadog Windows Agent User][3].                                                                                      |
-| `DDAGENTUSER_PASSWORD`                      | String  | Override the cryptographically secure password generated for the `ddagentuser` user during Agent installation _(v6.11.0+)_. Must be provided for installs on domain servers. [Learn more about the Datadog Windows Agent User][3].  |
-| `APPLICATIONDATADIRECTORY`                  | Path    | Override the directory to use for the configuration file directory tree. May only be provided on initial install; not valid for upgrades. Default: `C:\ProgramData\Datadog`. _(v6.11.0+)_                                           |
-| `PROJECTLOCATION`                           | Path    | Override the directory to use for the binary file directory tree. May only be provided on initial install; not valid for upgrades. Default: `%ProgramFiles%\Datadog\Datadog Agent`. _(v6.11.0+)_                                    |
-| [DEPRECATED] `ADDLOCAL` | String | Enable additional agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Network Performance Monitoring][4] to be installed. _(version 7.44.0 and previous)_ |
 | `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Boolean | Use the EC2 instance id for Windows hosts on EC2. _(v7.28.0+)_                                                                                                                                                                      |
+| [DEPRECATED] `ADDLOCAL` | String | Enable additional agent component. Setting to `"MainApplication,NPM"` causes the driver component for [Network Performance Monitoring][4] to be installed. _(version 7.44.0 and previous)_ |
 
-**Note**: If a valid `datadog.yaml` is found and has an API key configured, that file takes precedence over all specified command line options.
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/datadog-agent-7-latest.amd64.msi
-[2]: /agent/proxy/
+[2]: /agent/configuration/proxy/
 [3]: /agent/faq/windows-agent-ddagent-user/
 [4]: /network_monitoring/performance
 {{% /tab %}}
@@ -215,6 +226,61 @@ Configuration files for integrations are in:
 `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`
 
 **Note**: `ProgramData` is a hidden folder.
+
+## Uninstall the Agent
+
+{{< tabs >}}
+{{% tab "Agent v6 & v7" %}}
+
+There are two different methods to uninstall the Agent on Windows. Both methods remove the Agent, but do not remove the `C:\ProgramData\Datadog` configuration folder on the host.
+
+### Add or remove programs
+
+1. Press **CTRL** and **Esc** or use the Windows key to run Windows Search.
+1. Search for `add` and click **Add or remove programs**.
+1. Search for `Datadog Agent` and click **Uninstall**.
+
+### PowerShell
+
+**Note:** Enable WinRM to use the commands below.
+
+Use one of the following PowerShell commands to uninstall the Agent without rebooting:
+```powershell
+start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/q', '/x', (Get-CimInstance -ClassName Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber, 'REBOOT=ReallySuppress')
+```
+
+Using `/norestart`:
+
+```powershell
+start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/norestart', '/q', '/x', (Get-CimInstance -ClassName Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
+```
+
+{{% /tab %}}
+
+{{% tab "Agent v5" %}}
+
+There are two different methods to uninstall the Agent on Windows. Both methods remove the Agent, but do not remove the `C:\ProgramData\Datadog` configuration folder on the host.
+
+> **Note**: For Agent < v5.12.0, it's important to uninstall the Agent with the **original account** used to install the Agent, otherwise it may not be cleanly removed.
+
+### Add or remove programs
+
+1. Press **CTRL** and **Esc** or use the Windows key to run Windows Search.
+1. Search for `add` and click **Add or remove programs**.
+1. Search for `Datadog Agent` and click **Uninstall**.
+
+### PowerShell
+
+**Note:** Enable WinRM to use the commands below.
+
+Use the following PowerShell command to uninstall the Agent without rebooting:
+
+```powershell
+start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/norestart', '/q', '/x', (Get-CimInstance -ClassName Win32_Product -Filter "Name='Datadog Agent'" -ComputerName .).IdentifyingNumber)
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Troubleshooting
 
@@ -434,7 +500,7 @@ After configuration is complete, [restart the Agent][11].
 
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
-[2]: /agent/basic_agent_usage/?tab=agentv6v7#supported-platforms
+[2]: /agent/supported_platforms/?tab=windows
 [3]: /agent/faq/windows-agent-ddagent-user/
 [4]: /agent/faq/windows-agent-ddagent-user/#installation-in-a-domain-environment
 [5]: /agent/faq/windows-agent-ddagent-user/#domain-controllers
@@ -442,5 +508,5 @@ After configuration is complete, [restart the Agent][11].
 [7]: /integrations/wmi_check/
 [8]: https://app.datadoghq.com/monitors#create/integration
 [9]: /infrastructure/process/?tab=linuxwindows#installation
-[10]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[11]: /agent/guide/agent-commands/#restart-the-agent
+[10]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[11]: /agent/configuration/agent-commands/#restart-the-agent

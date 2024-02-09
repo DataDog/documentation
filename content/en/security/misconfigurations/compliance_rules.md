@@ -19,9 +19,7 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">
-CSM Misconfigurations is not available in the selected site.
-</div>
+<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Cloud Security Management Misconfigurations (CSM Misconfigurations) [out-of-the-box compliance rules][1] evaluate the configuration of your cloud resources and identify potential misconfigurations so you can immediately take steps to remediate.
@@ -115,4 +113,4 @@ The rule deprecation process is as follows:
 [20]: /security/misconfigurations/custom_rules/
 [21]: /security/notifications/rules/
 [22]: /security/misconfigurations/signals_explorer/
-[23]: /security/detection_rules/#rule-and-generated-signal-options
+[23]: /security/detection_rules/#clone-a-rule

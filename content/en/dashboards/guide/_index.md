@@ -22,6 +22,7 @@ cascade:
     {{< nextlink href="dashboards/guide/custom_time_frames" >}}Custom time frames{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/quick-graphs" >}}Quick Graphs{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/context-links" >}}Context Links{{< /nextlink >}}
+    {{< nextlink href="dashboards/guide/unit-override" >}}Unit override{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/how-to-use-terraform-to-restrict-dashboards" >}}Using Terraform to restrict the editing of a dashboard{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/embeddable-graphs-with-template-variables" >}}Embeddable graphs with template variables{{< /nextlink >}}
     {{< nextlink href="dashboards/guide/unable-to-iframe" >}}Why am I unable to iFrame certain HTTPS URLs?{{< /nextlink >}}

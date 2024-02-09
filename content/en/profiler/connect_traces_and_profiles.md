@@ -25,7 +25,7 @@ You can move directly from span information to profiling data on the Code Hotspo
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 Code Hotspots identification is enabled by default when you [turn on profiling for your Java service][1]. For manually instrumented code, continuous profiler requires scope activation of spans:
 
@@ -58,9 +58,23 @@ Requires `dd-trace-py` version 0.44.0+.
 
 Code Hotspots identification is enabled by default when you [turn on profiling for your Ruby service][1].
 
-Requires `dd-trace-rb` version 0.49.0+.
+To enable the new [timeline feature](#span-execution-timeline-view) (beta):
+- upgrade to `dd-trace-rb` 1.15+
+- set `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED=true`
 
 [1]: /profiler/enabling/ruby
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+Code Hotspots identification is enabled by default when you [turn on profiling for your Node.js service][1] on Linux and macOS. The feature is not available on Windows.
+
+Requires `dd-trace-js` version 5.0.0+, 4.24.0+ or 3.45.0+.
+
+To enable the [timeline feature](#span-execution-timeline-view) (beta):
+- upgrade to `dd-trace-js` 5.1.0+, 4.25.0+, or 3.46.0+
+- set `DD_PROFILING_TIMELINE_ENABLED=1`
+
+[1]: /profiler/enabling/nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -106,6 +120,10 @@ Code Hotspots identification is enabled by default when you [turn on profiling f
 
 Requires `dd-trace-php` version 0.71+.
 
+To enable the [timeline feature](#span-execution-timeline-view) (beta):
+- Upgrade to `dd-trace-php` version 0.89+.
+- Set the environment variable `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED=1` or INI setting `datadog.profiling.experimental_timeline_enabled=1`
+
 [1]: /profiler/enabling/php
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
@@ -115,7 +133,7 @@ Requires `dd-trace-php` version 0.71+.
 From the view of each trace, the Code Hotspots tab highlights profiling data scoped on the selected spans.
 
 The values on the left side represent the time spent in that method call during the selected span. Depending on the runtime and language, the categories vary:
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 - **CPU** shows the time taken executing CPU tasks.
 - **Synchronization** shows the time spent waiting on monitors, the time a thread is sleeping and the time it is parked.
@@ -132,6 +150,10 @@ The values on the left side represent the time spent in that method call during 
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 - **CPU** shows the time taken executing CPU tasks.
+- **Uncategorized** shows the time taken to execute the span that is not CPU execution.
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+- **CPU** shows the time taken executing CPU tasks. Only shown for profiles collected with the Node.js experimental CPU profiler.
 - **Uncategorized** shows the time taken to execute the span that is not CPU execution.
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
@@ -165,7 +187,7 @@ With the span **Timeline** view, you can:
 
 Depending on the runtime and language, the lanes vary:
 
-{{< programming-lang-wrapper langs="java,go,dotnet" >}}
+{{< programming-lang-wrapper langs="java,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
@@ -173,7 +195,7 @@ Lanes on top are runtime activities that may add extra latency. They can be unre
 
 For additional information about debugging slow p95 requests or timeouts using the timeline, see the blog post [Understanding Request Latency with Profiling][1].
 
-[1]: https://richardstartin.github.io/posts/wallclock-profiler
+[1]: https://www.datadoghq.com/blog/request-latency-profiling/
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 Each lane represents a **goroutine**. This includes the goroutine that started the selected span, as well as any goroutines it created and their descendants. Goroutines created by the same `go` statement are grouped together. You can expand the group to view details for each goroutine.
@@ -184,10 +206,29 @@ For additional information about debugging slow p95 requests or timeouts using t
 
 [1]: https://blog.felixge.de/debug-go-request-latency-with-datadogs-profiling-timeline/
 {{< /programming-lang >}}
+{{< programming-lang lang="ruby" >}}
+See [prerequisites](#prerequisites) to learn how to enable this feature for Ruby.
+
+Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
+{{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 Each lane represents a **thread**. Threads from a common pool are grouped together. You can expand the pool to view details for each thread.
 
 Lanes on top are runtime activities that may add extra latency. They can be unrelated to the request itself.
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+See [prerequisites](#prerequisites) to learn how to enable this feature for Node.js.
+
+There is one lane for the JavaScript **thread**.
+
+Lanes on the top are garbage collector **runtime activities** that may add extra latency to your request.
+{{< /programming-lang >}}
+{{< programming-lang lang="php" >}}
+See [prerequisites](#prerequisites) to learn how to enable this feature for PHP.
+
+There is one lane for the PHP **thread**. Fibers that run in this **thread** are represented in separate lanes that are grouped together.
+
+Lanes on the top are runtime activities that may add extra latency to your request, due to file compilation and garbage collection.
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
@@ -207,7 +248,7 @@ Click the **Focus On** selector to define the scope of the data:
 
 ### Prerequisites
 
-{{< programming-lang-wrapper langs="java,python,go,ruby,dotnet,php" >}}
+{{< programming-lang-wrapper langs="java,python,go,ruby,nodejs,dotnet,php" >}}
 {{< programming-lang lang="java" >}}
 Endpoint profiling is enabled by default when you [turn on profiling for your Java service][1].
 
@@ -238,6 +279,14 @@ Endpoint profiling is enabled by default when you [turn on profiling for your Ru
 Requires `dd-trace-rb` version 0.54.0+.
 
 [1]: /profiler/enabling/ruby
+{{< /programming-lang >}}
+{{< programming-lang lang="nodejs" >}}
+
+Endpoint profiling is enabled by default when you [turn on profiling for your Node.js service][1] on Linux and macOS. The feature is not available on Windows.
+
+Requires `dd-trace-js` version 5.0.0+, 4.24.0+ or 3.45.0+.
+
+[1]: /profiler/enabling/nodejs
 {{< /programming-lang >}}
 {{< programming-lang lang="dotnet" >}}
 

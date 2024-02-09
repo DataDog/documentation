@@ -58,6 +58,8 @@ Datadog Network Performance Monitoring does not support macOS platforms.
 
 NPM helps you visualize the architecture and performance of your containerized and orchestrated environments, with support for [Docker][5], [Kubernetes][6], [ECS][7], and other container technologies. Datadog's container integrations enable you to aggregate traffic by meaningful entities--such as containers, tasks, pods, clusters, and deployments--with out-of-the-box tags such as `container_name`, `task_name`, and `kube_service`.
 
+NPM is not supported for Google Kubernetes Engine (GKE) Autopilot.
+
 ### Network routing tools
 
 #### Istio
@@ -171,7 +173,7 @@ If these utilities do not exist in your distribution, follow the same procedure 
 
 
 [1]: /infrastructure/process/?tab=linuxwindows#installation
-[2]: /agent/guide/agent-commands/#restart-the-agent
+[2]: /agent/configuration/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 {{% /tab %}}
 {{% tab "Agent (Windows)" %}}
@@ -204,7 +206,7 @@ To enable Network Performance Monitoring for Windows hosts:
 
 
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
-[2]: /agent/guide/agent-commands/#restart-the-agent
+[2]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -405,29 +407,28 @@ If using `docker-compose`, make the following additions to the Datadog Agent ser
 ```
 version: '3'
 services:
-  ..
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_NETWORK_ENABLED=true
-       DD_PROCESS_AGENT_ENABLED=true
-       DD_API_KEY=<DATADOG_API_KEY>
+      - DD_SYSTEM_PROBE_NETWORK_ENABLED=true
+      - DD_PROCESS_AGENT_ENABLED=true
+      - DD_API_KEY=<DATADOG_API_KEY>
     volumes:
-    - /var/run/docker.sock:/var/run/docker.sock:ro
-    - /proc/:/host/proc/:ro
-    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-    - /sys/kernel/debug:/sys/kernel/debug
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - /sys/kernel/debug:/sys/kernel/debug
     cap_add:
-    - SYS_ADMIN
-    - SYS_RESOURCE
-    - SYS_PTRACE
-    - NET_ADMIN
-    - NET_BROADCAST
-    - NET_RAW
-    - IPC_LOCK
-    - CHOWN
+      - SYS_ADMIN
+      - SYS_RESOURCE
+      - SYS_PTRACE
+      - NET_ADMIN
+      - NET_BROADCAST
+      - NET_RAW
+      - IPC_LOCK
+      - CHOWN
     security_opt:
-    - apparmor:unconfined
+      - apparmor:unconfined
 ```
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
