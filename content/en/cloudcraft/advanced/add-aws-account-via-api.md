@@ -3,15 +3,13 @@ title: Add AWS accounts via the Cloudcraft API
 kind: guide
 ---
 
-Cloudcraft doesn't offer a way to add multiple AWS accounts at once using the web interface, but you can do so via [our API][1]. This article shows you how.
+Cloudcraft currently doesn't offer a way to add multiple AWS accounts at once using the web interface, but you can do so via [the API][1].
 
-<section class="alert alert-info">
-  <p> The ability to add and scan AWS accounts, as well as to use Cloudcraft's developer API, is only available to Pro subscribers. Check out <a href="https://www.cloudcraft.co/pricing">Cloudcraft's pricing page</a> for more information.</p>
-</section>
+<div class="alert alert-info">The ability to add and scan AWS accounts, as well as to use Cloudcraft's developer API, is only available to Pro subscribers. Check out <a href="https://www.cloudcraft.co/pricing">Cloudcraft's pricing page</a> for more information.</div>
 
-## Getting started
+## Prerequisites
 
-This guide assumes that you have:
+Before you begin, make sure you have the following:
 
 - A Cloudcraft user with the [Owner or Administrator role][2].
 - An active [Cloudcraft Pro subscription][3].
@@ -36,7 +34,7 @@ curl \
   --header "Authorization: Bearer ${API_KEY}"
 {{< /code-block >}}
 
-Replace _API_KEY_ with your Cloudcraft API key. The response will look something like this:
+Replace `API_KEY` with your Cloudcraft API key. The response should look something like this:
 
 {{< code-block lang="json" filename="cloudcraft-response.json" >}}
 {
@@ -46,11 +44,11 @@ Replace _API_KEY_ with your Cloudcraft API key. The response will look something
 }
 {{< /code-block >}}
 
-We're interested in the `accountId` and `externalId` fields, so save them for later.
+Save a copy of the `accountId` and `externalId` fields, as you'll need them when creating the IAM role in the next step.
 
 ## Creating the IAM role
 
-Using the _create-role_ command from the AWS CLI, you can create the IAM role using the **External ID** and **Account ID** that you got in the last step.
+Next, use the _create-role_ command in the AWS CLI to create the IAM role.
 
 {{< code-block lang="shell" >}}
 aws iam create-role \
@@ -62,11 +60,11 @@ aws iam create-role \
   --output 'text'
 {{< /code-block >}}
 
-Replace _ACCOUNT_ID_ and _EXTERNAL_ID_ with the values you got in the previous step.
+Replace `ACCOUNT_ID` and `EXTERNAL_ID` with the values you got in the previous step.
 
-If everything goes well, you'll see a successful response with the role's account ARN. Save this value for later.
+If successful, a response with the role's account ARN is displayed. Save this value for later.
 
-However, the role has no permission attached to it yet, so you must connect the _ReadOnlyAccess_ role using the _attach-role-policy_ command from the AWS CLI.
+However, the role has no permission attached to it yet. To connect the `ReadOnlyAccess` role, use the `attach-role-policy` command in the AWS CLI.
 
 {{< code-block lang="shell" >}}
 aws iam attach-role-policy \
@@ -74,11 +72,11 @@ aws iam attach-role-policy \
   --policy-arn 'arn:aws:iam::aws:policy/ReadOnlyAccess'
 {{< /code-block >}}
 
-If you gave the role a different name in the previous step, ensure you replace _cloudcraft_ with that name.
+**Note**: If you gave the role a different name in the previous step, make sure you replace _cloudcraft_ with the name you used.
 
 ## Adding the AWS account to Cloudcraft
 
-Finally, once you've created the IAM role, you can add the AWS account to Cloudcraft. You can do that by using the ARN of the role you created and calling [Cloudcraft's developer API](https://developers.cloudcraft.co/).
+Finally, once you've created the IAM role, you can add the AWS account to Cloudcraft. You can do that by using the ARN of the role you created and calling [Cloudcraft's developer API][7].
 
 {{< code-block lang="shell" >}}
 curl \
@@ -91,11 +89,9 @@ curl \
   --data-raw '{"name":"AWS_ACCOUNT_NAME","roleArn":"ROLE_ARN","region":"us-east-1"}' \
 {{< /code-block >}}
 
-Replace _AWS_ACCOUNT_NAME_ with the name you want the account to have in Cloudcraft and _ROLE_ARN_ with the ARN of the role you created in the previous step. Replace _us-east-1_ with the region you want the account to be checked from, and replace _API_KEY_ with your API key.
+Replace `AWS_ACCOUNT_NAME` with the name you want the account to have in Cloudcraft and `ROLE_ARN` with the ARN of the role you created in the previous step. You must also replace `us-east-1` with the region you want the account to be checked from, and `API_KEY` with your API key.
 
-Assuming you got a successful response, the account should now be added to Cloudcraft. You can repeat the previous step for adding additional AWS accounts to Cloudcraft.
-
-If you have any questions or issues with this process, [contact Cloudcraft's support team][6]; they will be happy to help.
+After you successfully add the account, you can use the same command to add additional accounts to Cloudcraft.
 
 [1]: https://developers.cloudcraft.co/
 [2]: https://help.cloudcraft.co/article/85-roles-and-permissions
@@ -103,3 +99,4 @@ If you have any questions or issues with this process, [contact Cloudcraft's sup
 [4]: https://aws.amazon.com/cli/
 [5]: https://developers.cloudcraft.co/#aa18999e-f6da-4628-96bd-49d5a286b928
 [6]: https://app.cloudcraft.co/support
+[7]: https://developers.cloudcraft.co
