@@ -22,7 +22,7 @@ title: 신서틱(Synthetic) 대시보드
 
 {{< img src="synthetics/dashboards/dashboards_homepage_blurred.png" alt="신서틱 모니터링 및 지속적 테스트 홈페이지의 신서틱 모니터링 대시보드" style="width:100%;">}}
 
-{{< whatsnext desc="하단의 즉시 사용 가능한 신서틱 대시보드를 탐색해보세요:" >}}
+{{< whatsnext desc="하단의 즉시 사용 가능한 신서틱 대시보드를 살펴보세요:" >}}
   {{< nextlink href="/synthetics/dashboards/api_test" >}}<u>API 테스트 성능: 엔드포인트와 서비스를 모니터링합니다.{{< /nextlink >}}
   {{< nextlink href="/synthetics/dashboards/browser_test" >}}<u>브라우저 테스트 성능</u>: 브라우저 테스트의 웹 성능, 타 공급자의 통찰, 핵심 웹 바이탈을 확인합니다.{{< /nextlink >}}
   {{< nextlink href="/synthetics/dashboards/test_summary" >}}<u>테스트 개요</u>: 지역, 환경, 또는 팀별 신서틱 테스트에 대한 통찰을 살펴봅니다.{{< /nextlink >}}
