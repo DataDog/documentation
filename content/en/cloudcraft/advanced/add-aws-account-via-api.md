@@ -22,7 +22,7 @@ Before you begin, make sure you have the following:
 
 Start by using the [Get my AWS IAM Role parameters][5] endpoint of Cloudcraft's API and saving the response.
 
-To accomplish that, we'll use cURL on the command-line, so make sure you have your terminal open and type the following.
+To accomplish this, open the command line and enter the following cURL command:
 
 {{< code-block lang="shell" >}}
 curl \
