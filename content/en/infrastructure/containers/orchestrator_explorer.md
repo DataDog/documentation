@@ -284,7 +284,7 @@ Some conditions, for some resources, are extracted as tags. For example, you can
 
 > **Tip**: Use the autocomplete feature to discover what conditions are available on a given resource type by entering `kube_condition` and reviewing the results.
 
-#### Resource Specific Tags
+#### Resource specific tags
 
 Some resources have specificialized tags as well that are extracted based on your cluster's environment. The following tags are in addition to the shared tags above.
 
