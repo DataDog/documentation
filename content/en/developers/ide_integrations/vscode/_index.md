@@ -12,7 +12,7 @@ further_reading:
   text: "Learn about the Continuous Testing Tunnel"
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
-  text: "Learn about Source Code Integration."
+  text: "Learn about the Source Code Integration"
 ---
 
 ## Overview
@@ -123,7 +123,7 @@ To share your feedback, email [team-ide-integration@datadoghq.com][9].
 [9]: mailto:team-ide-integration@datadoghq.com
 [10]: /tracing/error_tracking/
 [11]: /security/application_security/vulnerability_management/
-[12]: /continuous_integration/guides/flaky_test_management/
+[12]: /tests/guides/flaky_test_management/
 [13]: /watchdog/insights
-[14]: /continuous_integration/static_analysis/?tab=githubactions
-[15]: /continuous_integration/static_analysis/rules/
+[14]: /code_analysis/static_analysis/?tab=githubactions
+[15]: /code_analysis/static_analysis_rules/

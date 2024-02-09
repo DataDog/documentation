@@ -6,16 +6,16 @@ is_beta: true
 further_reading:
 - link: "/getting_started/profiler/"
   tag: "Documentation"
-  text: "Getting started with Continuous Profiler."
+  text: "Getting Started with the Continuous Profiler"
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
-  text: "Learn about Source Code Integration."
+  text: "Learn about the Source Code Integration"
 - link: "/static_analysis/?tab=githubactions"
   tag: "Documentation"
-  text: "Learn about Static Analysis."
+  text: "Learn about Static Analysis"
 - link: "https://www.jetbrains.com/lp/toolbox/"
   tag: "External Site"
-  text: "Learn about the JetBrains Toolbox."
+  text: "Learn about the JetBrains Toolbox"
 ---
 
 ## Overview
@@ -219,9 +219,9 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 [6]: /tracing/error_tracking/
 [7]: https://www.jetbrains.com/lp/toolbox/
 [8]: /security/application_security/vulnerability_management/
-[9]: /continuous_integration/guides/flaky_test_management/
+[9]: /tests/guides/flaky_test_management/
 [10]: /watchdog/insights
 [11]: mailto:team-ide-integration@datadoghq.com
 [12]: /continuous_integration/explorer/?tab=testruns
-[13]: /static_analysis/?tab=githubactions
-[14]: /static_analysis/rules/#python-rules
+[13]: /code_analysis/static_analysis/?tab=githubactions
+[14]: /code_analysis/static_analysis_rules/#python-rules

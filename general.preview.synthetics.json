@@ -39,19 +39,19 @@
     {
       "id": "5nh-qfq-fs4",
       "config": {
-        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/static_analysis/rules/"
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/code_analysis/static_analysis_rules/"
       }
     },
     {
       "id": "hys-3ee-qff",
       "config": {
-        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/static_analysis/rules/"
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/code_analysis/static_analysis_rules/"
       }
     },
     {
       "id": "skf-cqv-m5d",
       "config": {
-        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/static_analysis/rules/"
+        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/code_analysis/static_analysis_rules/"
       }
     }
 
