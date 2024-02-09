@@ -43,13 +43,13 @@ Putting it all together, the rule expression is `exec.file.path == "/usr/bin/pas
 
 The `passwd` command rule is already present in the default CSM Threats Agent policy. However, Agent expressions can also be more advanced, and can define rules that match on process ancestors or use wildcards for broader detections.
 
-#### Detect when a PHP or Nginx process launches bash
+#### Detect when a PHP or Nginx process launches Bash
 
-To detect when a PHP or Nginx process launches bash, there are a few attributes to note.
+To detect when a PHP or Nginx process launches Bash, there are a few attributes to note.
 
 On most Linux distributions, Bash is installed at `/usr/bin/bash`. As in the previous example, to detect execution, include `exec.file.path == "/usr/bin/bash"` in your rule. This ensures the rule is accounting for the execution of Bash, and also Bash as a child process of PHP or Nginx.
 
-A process ancestor's filename in CSM Threats is an attribute with symbol `process.ancestors.file.name`. To check if the ancestor is Nginx, add `process.ancestors.file.name == "nginx"`. Since PHP runs as multiple processes, use a wildcard to expand the rule to any process with prefix PHP. To check if the ancestor is a PHP process, add `process.ancestors.file.name =~ "php*"`. 
+A process ancestor's filename in CSM Threats is an attribute with the symbol `process.ancestors.file.name`. To check if the ancestor is Nginx, add `process.ancestors.file.name == "nginx"`. Since PHP runs as multiple processes, use a wildcard to expand the rule to any process with prefix PHP. To check if the ancestor is a PHP process, add `process.ancestors.file.name =~ "php*"`. 
 
 Putting it all together, the rule expression is `exec.file.path == "/usr/bin/bash"  && (process.ancestors.file.name == "nginx" || process.ancestors.file.name =~ "php*")`.
 
