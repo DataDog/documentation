@@ -32,15 +32,11 @@ Additionally, the Google Cloud Platform Datadog Integration Service Account must
 ## Setup
 
 ### Configure the Google Cloud Platform integration
-Navigate to [Setup & Configuration][3], and select an integrated Google Cloud Platform service account from the dropdown.
-If you do not see your desired Service Account in the list, go to the [Google Cloud Platform integration][4] to add it.
+Navigate to [Setup & Configuration][3], and select a Google Cloud Platform integration.
+If you do not see your desired Service Account in the list, go to the [Google Cloud Platform integration][4] to configure it.
 
-<div class="alert alert-warning"> LEGACY project integrations are deprecated and not supported. </div>
-
-Cloud Cost processes all resources in a project, regardless of the Metrics Collection limits you can define per integration.
-
-**Note**: [Datadog Google Platform integration][4] will automatically find and attempt to crawl any projects this Service Account has access to (access as specified by the GCP Integration).
-This holds true for projects that the Service Account is granted access to at any later point. This drives an increase in API calls in GCP and increases the number of monitored resources if the projects contain any host data.
+**Note**: [Datadog Google Cloud Platform integration][4] will automatically monitor any projects this Service Account has access to.
+Cloud Cost processes all resources in a project, regardless of the Metrics Collection limits defined per integration.
 
 ### Enable detailed usage cost export
 <div class="alert alert-info">
@@ -52,24 +48,23 @@ The <a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery-t
  3. Document the `Billing Account ID` for the billing account where the export was configured, as well as the export `Project ID` and `Dataset Name`.
 
 #### Enable Google Service APIs
-The [Enable BigQuery and BigQuery Data Transfer Service APIs][5] and permissions enable Datadog to access your Detailed Usage billing export data and extract it in a useful format.
-A scheduled BigQuery query dumps data to your specified Google Cloud Storage bucket.
+The following permissions allow Datadog to access and transfer the billing export into the storage bucket using a scheduled BigQuery query.
 
-- Enable the BigQuery API
+- Enable the [BigQuery API][5]
   1. In the Google Cloud console, go to the project selector page and select your Google Cloud project.
   2. Enable billing on your project for all transfers.
 
-   **Note:** BigQuery Data Transfer API needs to be enabled on the Google Project that contains the service account.
-
-
-- Enable the BigQuery Data Transfer Service
+- Enable the [BigQuery Data Transfer Service][5]
   1. Open the BigQuery Data Transfer API page in the API library.
   2. From the dropdown menu, select the appropriate project.
   3. Click the ENABLE button.
 
+  **Note:** BigQuery Data Transfer API needs to be enabled on the Google Project that contains the service account.
+
+
 #### Configure export project access
 [Add the service account as a principal on the export dataset project resource][7]:
-1. Select the export dataset project in the Google Cloud console (go to the IAM page).
+1.  Navigate to the IAM page in the Google Cloud console and select the export dataset project.
 2. Select the service account as a principal.
 3. Select a role with the following permissions to grant from the drop-down list:
   * `bigquery.jobs.create`
@@ -80,7 +75,7 @@ A scheduled BigQuery query dumps data to your specified Google Cloud Storage buc
 
 #### Configure export BigQuery dataset access
 [Add the service account as a principal on the export BigQuery dataset resource][8]:
-1. In the Explorer pane on the BigQuery page expand your project and select the export BigQuery dataset.
+1. In the Explorer pane on the BigQuery page, expand your project and select the export BigQuery dataset.
 2. Click 'Sharing > Permissions' and then 'Add principal'.
 3. In the New principals field, enter the service account.
 4. Using the Select a role list, assign a role with the following permissions:
@@ -98,14 +93,14 @@ A scheduled BigQuery query dumps data to your specified Google Cloud Storage buc
 
 ### Create or select a Google Cloud Storage bucket
 Use an existing Google Cloud Storage bucket or create a new one.
-Data is extracted regularly from your Detailed Usage Cost BigQuery dataset to the selected bucket, where it will be prefixed with `datadog_cloud_cost_detailed_usage_export`.
+Data is extracted regularly from your Detailed Usage Cost BigQuery dataset to the selected bucket and prefixed with `datadog_cloud_cost_detailed_usage_export`.
 
 **Note:** The bucket [must be co-located][9] with the BigQuery export dataset.
 
 #### Configure bucket access
 [Add the service account as a principal on the GCS bucket resource][6]:
-1. Select your bucket in the Google Cloud console (go to the Cloud Storage Buckets page).
-2. Select the Permissions tab near the top of the page and click the 'Grant access' button.
+1. Navigate to the Cloud Storage Buckets page in the Google Cloud console and select your bucket.
+2. Select the Permissions tab and click the 'Grant access' button.
 3. In the New principals field, enter the service account.
 4. Assign a role with the following permissions:
    * `storage.buckets.get`
@@ -120,16 +115,18 @@ Data is extracted regularly from your Detailed Usage Cost BigQuery dataset to th
 If your integrated Service Account exists in a different Google Cloud Platform project than your billing export dataset, you need to [grant cross-project service account authorization][10]:
 
 1. Trigger the service agent creation by following the [official documentation][11] using the following values:
-  * ENDPOINT: `bigquerydatatransfer.googleapis.com`
-  * RESOURCE_TYPE: `project`
-  * RESOURCE_ID: export dataset project
+   * ENDPOINT: `bigquerydatatransfer.googleapis.com`
+   * RESOURCE_TYPE: `project`
+   * RESOURCE_ID: export dataset project
 
-    This creates a new service agent that looks like `service-<billing project number>@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com`.
+     This creates a new service agent that looks like `service-<billing project number>@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com`.
+
+
 2. Add the BigQuery Data Transfer Service Account role created by the trigger as a principal on your Service Account
 3. Assign it the `roles/iam.serviceAccountTokenCreator` role.
 
 ### Configure Cloud Costs
-Navigate to [Setup & Configuration][3] and follow the steps provided in-app.
+Continue to follow the steps indicated in [Setup & Configuration][3].
 
 ## Cost types
 You can visualize your ingested data using the following cost types:
