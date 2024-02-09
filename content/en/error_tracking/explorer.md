@@ -16,11 +16,11 @@ aliases:
 
 {{< img src="error_tracking/error-tracking-overview.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
-The Error Tracking Explorer allows you to explore all your different issues. An issue is a group of similar errors related to the same bug. Datadog creates issues by computing a fingerprint for each error using some of its attributes such as the error type, the error message, or the stack trace. Errors with the same fingerprint are grouped together in the same issue.
+The Error Tracking Explorer allows you to view, filter, and investigate issues. An issue is a group of similar errors related to the same bug. Datadog creates issues by computing a fingerprint for each error using some of its attributes such as the error type, the error message, or the stack trace. Errors with the same fingerprint are grouped together in the same issue.
 
 ## Explore your issues
 
-Each item listed in the Error Tracking Explorer is an issue and contains high-level information about the error, including the following:
+Each item listed in the Error Tracking Explorer is an issue that contains high-level information about the error, including the following:
 
 -   The error type and the error message
 -   The path to the file in which underlying errors are fired
@@ -51,11 +51,9 @@ The high-level details you need when troubleshooting an issue can be found in th
 
 {{< img src="real_user_monitoring/error_tracking/error_sample.png" alt="Lower part of the Error Tracking issue panel offering error samples" style="width:80%;" >}}
 
-The lower part of the issue panel gives you the ability to navigate error samples from the related issue. Each error sample gives you information while troubleshooting, for example:
+The information shown in the issue panel varies depending on the error source. For example, an issue created from APM errors will show the error span tags, such as the resource or operation name, with direct access to the related trace or to logs that are linked to it.
 
--   The stack trace where each stack frame provides a code snippet centered on the line of code that fired the error.
--   Information about the context in which the error occurred. For example, if the error was ingested from RUM, the relevant RUM sessions might be included.
--   Information about the impacted users, such as their browser or operating system.
+The lower part of the issue panel gives you the ability to navigate error samples from the related issue. Each error sample gives you troubleshooting information such as the stack trace of the error, and the characteristics of impacted users.
 
 ## Get alerted on new errors
 

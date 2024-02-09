@@ -27,8 +27,8 @@ For details, see the product-specific Error Tracking documentation:
 - [Logs][2]
 - [Real User Monitoring][3]
 
-[1]: /tracing/error_tracking
-[2]: /logs/error_tracking
-[3]: /real_user_monitoring/error_tracking
+[1]: /tracing/error_tracking#setup
+[2]: /logs/error_tracking#setup
+[3]: /real_user_monitoring/error_tracking#setup
 [4]: /tracing/error_tracking/execution_replay
 [5]: /error_tracking/explorer
