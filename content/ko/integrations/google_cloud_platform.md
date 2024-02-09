@@ -47,7 +47,7 @@ version: '1.0'
 Datadog에서 모든 Google Compute Engine(GCE) 호스트를 보려면 Google Cloud Platform에 연결하세요. Datadog의 인프라스트럭처 개요에서 호스트를 확인하고 정렬할 수 있습니다. Datadog이 자동으로 GCE 호스트 태그와 추가한 GCE 라벨을 사용하여 호스트에 태그를 지정하기 때문입니다.
 
 <div class="alert alert-warning">
-Datadog의 GCP 통합은 <a href="https://cloud.google.com/monitoring/api/metrics_gcp">모든 Google Cloud 메트릭</a>을 수집하도록 구축되었습니다. Datadog은 모든 하위 통합에 대한 정보 제공을 위해 문서를 지속적으로 업데이트하고 있으나 클라우드 서비스는 새로운 메트릭과 서비스를 빠르게 출시하기 때문에 통합 목록이 뒤처지는 경우가 있습니다.
+Datadog의 GCP 통합은 <a href="https://cloud.google.com/monitoring/api/metrics_gcp">모든 Google Cloud 메트릭</a>을 수집하도록 구축되었습니다. Datadog은 모든 하위 통합에 대한 정보 제공을 위해 문서를 지속적으로 업데이트하고 있으나 클라우드 서비스는 새로운 메트릭과 서비스를 빠르게 출시하기 때문에 통합 목록이 미처 업데이트되지 못한 경우가 있습니다.
 </div>
 
 | 통합                         | 설명                                                                           |
