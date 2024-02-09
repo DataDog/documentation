@@ -1,6 +1,6 @@
 ---
 # Glossary Term
-title: test term 2
+title: test term2
 core_product:
   - ci-cd
   - synthetic monitoring
