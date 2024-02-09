@@ -21,19 +21,9 @@ algolia:
 
 ## Overview
 
-It is critical for your system's health to consistently monitor the errors collected by Datadog. When there are many individual error events, it becomes hard to prioritize errors for troubleshooting. By tracking, triaging, and debugging stack traces, you can minimize the impact of fatal errors on your backend services.
+{{% error-tracking-description %}}
 
-Once you have set up [APM][4] for **Backend Services** error tracking, the issue list populates with cards. Navigate to **APM** > **Error Tracking** to view open, ignored, or all issues, sort issues by volume or age, and filter issues by all custom and default facets on your backend services.
-
-{{< img src="tracing/error_tracking/explorer_with_backend_issues.png" alt="The Error Tracking Explorer for APM displaying issues from your backend services" style="width:100%;" >}}
-
-Error Tracking enables you to:
-
-- Set alerts on Error Tracking events. This helps you to remain informed of fatal issues that may occur.
-- Group similar errors into issues, so that you can more easily identify important errors and reduce noise.
-- Follow issues over time to know when they first started, if they are still ongoing, and how often they are occurring.
-- Collect all the necessary context in one place to facilitate troubleshooting.
-- Access a trace in its source code repository, a Git blame, or a commit.
+Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] documentation. To view the Error Tracking Explorer for APM, navigate to [**APM** > **Error Tracking**][5].
 
 ## Use span tags to track error spans
 
@@ -59,3 +49,4 @@ Click on an issue to see a summary of the error, the distribution of impacted sp
 [2]: /tracing/trace_explorer/trace_view/?tab=spantags
 [3]: /tracing/error_tracking/explorer
 [4]: /tracing
+[5]: https://app.datadoghq.com/apm/error-tracking
