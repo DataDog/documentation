@@ -66,7 +66,7 @@ You can trigger a child workflow from another workflow using the **Trigger Workf
 
 If the child workflow has [input parameters][5], these parameters appear as required fields in the Trigger Workflow action. In the example below, the **service_name** input parameter is required because `service_name` is set as an input parameter in the child workflow.
 
-{{< img src="service_management/workflows/trigger-workflow-step.png" alt="The service-name input parameter is required in the child workflow" style="width:100%;" >}}
+{{< img src="service_management/workflows/trigger-workflow-step.png" alt="The service_name input parameter is required in the child workflow" style="width:100%;" >}}
 
 ## Trigger a workflow from a Monitor
 

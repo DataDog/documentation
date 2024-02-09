@@ -96,12 +96,17 @@ code_language_ids:
     native: Native
     other: Other
     linux: Linux
+    windows: Windows
     opentelemetry: OpenTelemetry
     ddprof: "Rust/C/C++"
     serverless: "Serverless"
     javascript: "JavaScript"
     swift: "Swift"
     junit_xml: "JUnit XML"
+    kubernetes: "Kubernetes"
+    docker: "Docker"
+    hosts: "Hosts"
+    ecs_ec2: "ECS EC2"
 branch: ""
 
 signupclass: sign-up-trigger
