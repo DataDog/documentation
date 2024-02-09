@@ -1366,6 +1366,11 @@ main:
     parent: error_tracking
     identifier: error_tracking_suspect_commits
     weight: 2
+  - name: Custom Grouping
+    url: error_tracking/custom_grouping
+    parent: error_tracking
+    identifier: error_tracking_custom_grouping
+    weight: 3
   - name: Service Level Objectives
     url: service_management/service_level_objectives/
     pre: slos
