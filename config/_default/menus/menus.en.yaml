@@ -127149,6 +127149,11 @@ main:
     url: real_user_monitoring/performance_monitoring/deployment_tracking
     parent: rum_performance_monitoring
     weight: 502
+  - name: Feature Flag Tracking
+    url: real_user_monitoring/performance_monitoring/feature_flag_tracking
+    parent: rum_performance_monitoring
+    identifier: rum_feature_flag_tracking
+    weight: 503
   - name: Heatmaps
     url: real_user_monitoring/heatmaps
     parent: rum
@@ -127194,91 +127199,86 @@ main:
     parent: rum
     identifier: rum_retention_analysis
     weight: 10
-  - name: Feature Flag Tracking
-    url: real_user_monitoring/feature_flag_tracking
-    parent: rum
-    identifier: rum_feature_flag_tracking
-    weight: 11
   - name: Generate Metrics
     url: real_user_monitoring/generate_metrics
     parent: rum
     identifier: rum_generate_metrics
-    weight: 12
+    weight: 11
   - name: Connect RUM and Traces
     url: real_user_monitoring/connect_rum_and_traces
     parent: rum
     identifier: rum_connect_rum_and_traces
-    weight: 13
+    weight: 12
   - name: Error Tracking
     url: real_user_monitoring/error_tracking/
     parent: rum
     identifier: rum_error_tracking
-    weight: 14
+    weight: 13
   - name: Explorer
     url: real_user_monitoring/error_tracking/explorer/
     parent: rum_error_tracking
     identifier: rum_error_tracking_explorer
-    weight: 1401
+    weight: 1301
   - name: Track Browser Errors
     url: real_user_monitoring/error_tracking/browser/
     parent: rum_error_tracking
     identifier: rum_error_tracking_browser
-    weight: 1402
+    weight: 1302
   - name: Track Android Errors
     url: real_user_monitoring/error_tracking/android/
     parent: rum_error_tracking
     identifier: rum_error_tracking_android
-    weight: 1403
+    weight: 1303
   - name: Track iOS Errors
     url: real_user_monitoring/error_tracking/ios/
     parent: rum_error_tracking
     identifier: rum_error_tracking_ios
-    weight: 1404
+    weight: 1304
   - name: Track Expo Errors
     url: real_user_monitoring/error_tracking/expo/
     parent: rum_error_tracking
     identifier: rum_error_tracking_expo
-    weight: 1405
+    weight: 1305
   - name: Track React Native Errors
     url: real_user_monitoring/error_tracking/reactnative/
     parent: rum_error_tracking
     identifier: rum_error_tracking_reactnative
-    weight: 1406
+    weight: 1306
   - name: Track Flutter Errors
     url: real_user_monitoring/error_tracking/flutter/
     parent: rum_error_tracking
     identifier: rum_error_tracking_flutter
-    weight: 1407
+    weight: 1307
   - name: Track Roku Errors
     url: real_user_monitoring/error_tracking/roku/
     parent: rum_error_tracking
     identifier: rum_error_tracking_roku
-    weight: 1408
+    weight: 1308
   - name: Custom Grouping
     url: real_user_monitoring/error_tracking/custom_grouping
     parent: rum_error_tracking
     identifier: rum_error_tracking_custom_grouping
-    weight: 1409
+    weight: 1309
   - name: Identify Suspect Commits
     url: logs/error_tracking/suspect_commits
     parent: rum_error_tracking
     identifier: rum_error_tracking_suspect_commits
-    weight: 1410
+    weight: 1310
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
     identifier: rum_guides
-    weight: 15
+    weight: 14
   - name: Data Management
     identifier: rum_data_management
     url: real_user_monitoring/data_management
     parent: rum
-    weight: 16
+    weight: 15
   - name: Data Security
     identifier: data_security_real_user_monitoring
     url: data_security/real_user_monitoring/
     parent: rum_data_management
-    weight: 1601
+    weight: 1501
   - name: Account Management
     url: account_management/
     pre: cog-2
