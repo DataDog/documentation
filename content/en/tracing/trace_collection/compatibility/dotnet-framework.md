@@ -88,11 +88,15 @@ The [latest version of the .NET Tracer][5] can automatically instrument the foll
 | WCF (server)                    | built-in                                                                                  | `Wcf`                |
 | WebClient / WebRequest          | built-in                                                                                  | `WebRequest`         |
 
-Don't see your desired libraries? You can check whether the library emits Open Telemetry compatible tracing (using [Activity based tracing][11]). If not, Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
+Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (for example, [activity based tracing][11]). If not, Datadog is continually adding additional support. [Check with the Datadog team][6] for help.
 
-## OTEL based integrations
+## OpenTelemetry based integrations
 
-Some libraries provide built in [Activity based tracing][11]. This is the same mechanism the OpenTelemetry project relies on. By setting `DD_TRACE_OTEL_ENABLED` to `true`, the .NET tracer will automatically resurface traces provided by the libraries themselves. This is possible since [version 2.21.0][4]. Here are a list of libraries that are tested with this setup (more libraries provide such tracing though, they aren't yet expliciitly tested).
+Some libraries provide built-in [Activity based tracing][11]. This is the same mechanism that OpenTelemetry is based on. 
+
+For these libraries, set `DD_TRACE_OTEL_ENABLED` to `true`, and the .NET tracer automatically captures traces their traces. This is supported since [version 2.21.0][4].
+
+The following list of libraries have been tested with this setup:
 
 | Framework or library            | NuGet package                                                                 | Integration Name     | Specific instructions         |
 | ------------------------------- | ----------------------------------------------------------------------------- | -------------------- | ----------------------------- |
@@ -100,7 +104,7 @@ Some libraries provide built in [Activity based tracing][11]. This is the same m
 
 ### Azure SDK
 
-Azure SDK provides built in OpenTelemety support. It requires to be enabled by setting `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` environment variable to true or by setting the `Azure.Experimental.EnableActivitySource` context switch to true in your application code. See [Azuze SDK documentation][12] for more details.
+Azure SDK provides built-in OpenTelemetry support. Enable it by setting the `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` environment variable to `true` or by setting the `Azure.Experimental.EnableActivitySource` context switch to `true` in your application code. See [Azure SDK documentation][12] for more details.
 
 ## Supported Datadog Agent versions
 

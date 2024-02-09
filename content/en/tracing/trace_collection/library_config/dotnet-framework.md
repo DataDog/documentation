@@ -242,7 +242,7 @@ The `from-key` value is specific to the integration type, and should exclude the
 **Default**: `true`
 
 `DD_TRACE_OTEL_ENABLED`
-Enables or disables OpenTelemetry based tracing, both for [custom][18] or [automatic][19] instrumentation.
+: Enables or disables OpenTelemetry based tracing, both for [custom][18] or [automatic][19] instrumentation.
 Valid values are: `true` or `false`.<br>
 **Default**: `false`
 
