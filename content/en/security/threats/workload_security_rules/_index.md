@@ -31,7 +31,7 @@ With [Remote Configuration][7] enabled, you automatically receive new and update
 
 ### Agent expressions
 
-Agent expressions use [Datadog's Security Language (SECL)][2] to define behavior based on activity in your hosts and containers as shown in the following examples:
+Agent expressions use [Datadog's Security Language (SECL)][2] to define behavior based on activity in your hosts and containers, as shown in the following examples:
 
 #### Detect when the `passwd` command is executed
 
