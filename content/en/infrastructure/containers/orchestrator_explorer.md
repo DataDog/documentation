@@ -146,7 +146,7 @@ You can narrow down the displayed resources by supplying a query within the "Fil
 
 ### Syntax
 
-A query filter is composed of terms and operators.
+A query filter is composed of terms and operators. Example:
 
 {{< img src="infrastructure/livecontainers/orch_syntax.png" alt="Orchestrator Explorer query filter syntax." style="width:80%;">}}
 
