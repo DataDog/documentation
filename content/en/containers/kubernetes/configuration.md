@@ -534,9 +534,9 @@ datadog:
 
 See the [Orchestrator Explorer documentation][21] for additional information.
 
-## Environment variables
+## Basic Configuration
 
-Use the following environment variables to configure the Datadog Agent.
+Use the following configuation fields to configure the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -554,11 +554,11 @@ Use the following environment variables to configure the Datadog Agent.
 | `global.site` | Sets the Datadog [intake site][1] to which Agent data is sent. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right). |
 | `global.tags` | A list of tags to attach to every metric, event, and service check collected. |
 
-For a complete list of environment variables for the Datadog Operator, see the [Operator v2alpha1 spec][2]. For older versions, see the [Operator v1alpha1 spec][3].
+For a complete list of configuration fields for the Datadog Operator, see the [Operator v2alpha1 spec][2]. For older versions, see the [Operator v1alpha1 spec][3]. Configuration fields can also be queried using `kubectl explain datadogagent --recursive`.
 
 [1]: /getting_started/
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
-[3]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md
+[3]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v1alpha1.md 
 {{% /tab %}}
 {{% tab "Helm" %}}
 |  Helm | Description |
@@ -589,6 +589,58 @@ For a complete list of environment variables for the Helm chart, see the [full l
 | `DD_URL` (6.36+/7.36+)            | Alias for `DD_DD_URL`. Ignored if `DD_DD_URL` is already set.                                                                                                                                                                                                                                                                                    |
 | `DD_CHECK_RUNNERS`   | The Agent runs all checks concurrently by default (default value = `4` runners). To run the checks sequentially, set the value to `1`. If you need to run a high number of checks (or slow checks) the `collector-queue` component might fall behind and fail the healthcheck. You can increase the number of runners to run checks in parallel. |
 | `DD_LEADER_ELECTION` | If multiple instances of the Agent are running in your cluster, set this variable to `true` to avoid the duplication of event collection.                                                                                                                                                                                                                         |
+{{% /tab %}}
+{{< /tabs >}}
+
+## Environment Variables
+TODO: words about env vars and link to https://docs.datadoghq.com/containers/docker/?tab=standard#environment-variables
+
+{{< tabs >}}
+
+{{% tab "Datadog Operator" %}}
+### Examples
+When using the Datadog Operator, environment variables are set in the override in the context of a component or container as `[key].containers.[key].env []object` or `[key].env []object` with the following possible keys: `nodeAgent`, `clusterAgent` or `clusterChecksRunner` The container level settings take priority over any component level settings.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  override:
+    nodeAgent:
+      env:
+        - name: <ENV_VAR_NAME>
+          value: <ENV_VAR_VALUE>
+    clusterAgent:
+      containers:
+        cluster-agent:
+          env:
+            - name: <ENV_VAR_NAME>
+              value: <ENV_VAR_VALUE>
+```
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+### Examples
+
+```yaml
+datadog:
+  env:
+  - name: <ENV_VAR_NAME>
+    value: <ENV_VAR_VALUE>
+clusterAgent:
+  env:
+  - name: <ENV_VAR_NAME>
+    value: <ENV_VAR_VALUE>
+```
+
+{{% /tab %}}
+{{% tab "DaemonSet" %}}
+```
+
+```
 {{% /tab %}}
 {{< /tabs >}}
 
