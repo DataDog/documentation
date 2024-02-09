@@ -7,7 +7,7 @@ This guide introduces the DevSecOps bundles with links to setup instructions to 
 
 ## APM DevSecOps
 
-The APM DevSecOps bundles combine [Application Performance Monitoring (APM)][4] with the [Application Vulnerability Management][3] capabilities of [Application Security Management (ASM)][2].
+The APM DevSecOps bundles combine [Application Performance Monitoring (APM)][4] with the [Application Vulnerability Management][10] capabilities of [Application Security Management (ASM)][2].
 
 {{< tabs >}}
 {{% tab "APM DevSecOps" %}}
