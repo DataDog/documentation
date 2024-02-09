@@ -20,6 +20,8 @@ further_reading:
 
 ## Overview
 
+{{< img src="error_tracking/error-tracking-overview.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
+
 {{% error-tracking-description %}}
 
 Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] documentation. To view the Error Tracking Explorer for Logs, navigate to [**Logs** > **Error Tracking**][1].

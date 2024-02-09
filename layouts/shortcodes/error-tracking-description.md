@@ -5,4 +5,3 @@ Error Tracking enables you to:
 - Set monitors on error tracking events such as high error volumes or new issues introduced.
 - Group similar errors into issues, so that you can more easily identify important errors and reduce noise.
 - Follow issues over time to know when they first started, if they are still ongoing, and how often they are occurring.
-- Collect all the necessary context in one place to facilitate troubleshooting.

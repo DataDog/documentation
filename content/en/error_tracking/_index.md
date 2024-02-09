@@ -4,9 +4,9 @@ kind: documentation
 disable_toc: false
 ---
 
-{{< img src="error_tracking/error-tracking-overview.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
-
 ## Overview
+
+{{< img src="error_tracking/error-tracking-overview.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
 {{% error-tracking-description %}}
 
