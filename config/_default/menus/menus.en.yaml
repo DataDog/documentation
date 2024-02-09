@@ -661,17 +661,17 @@ main:
     parent: opentelemetry_top_level
     weight: 4
   - name: Interoperability
-    url: opentelemetry/guide/otel_api_tracing_interoperability/
+    url: opentelemetry/interoperability/otel_api_tracing_interoperability/
     identifier: otel_trace_interoperability
     parent: otel_interoperability
     weight: 401
   - name: Metrics Mapping
-    url: opentelemetry/guide/metrics_mapping/
+    url: opentelemetry/interoperability/metrics_mapping/
     identifier: otel_interoperability_metrics
     parent: otel_interoperability
     weight: 402
   - name: Semantic Convention Mapping
-    url: opentelemetry/guide/semantic_mapping/
+    url: opentelemetry/interoperability/semantic_mapping/
     identifier: otel_interoperability_semantic
     parent: otel_interoperability
     weight: 403
@@ -681,12 +681,12 @@ main:
     parent: opentelemetry_top_level
     weight: 5
   - name: Visualizing OTLP Histograms as Heatmaps
-    url: opentelemetry/guide/otlp_histogram_heatmaps/
+    url: opentelemetry/visualize_data/otlp_histogram_heatmaps/
     identifier: otel_heatmaps
     parent: otel_data_visualization
     weight: 501
   - name: View Hosts in the Infrastructure List
-    url: opentelemetry/guide/host_metadata/
+    url: opentelemetry/visualize_data/host_metadata/
     identifier: otel_infra_list
     parent: otel_data_visualization
     weight: 502
