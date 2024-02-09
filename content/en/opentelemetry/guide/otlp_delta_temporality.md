@@ -28,7 +28,9 @@ If you opt to send OTLP monotonic sums, histograms, or exponential histograms wi
 
 If you produce OTLP metrics from an OpenTelemetry SDK, you can configure your OTLP exporter to produce these metric types with delta aggregation temporality. In some languages you can use the recommended configuration by setting the `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE` environment variable to `Delta` (case-insensitive). For a list of languages with support for this environment variable, read [the specification compliance matrix][4].
 
-If your SDK does not support this environment variable you can configure delta temporality in code. The following example configures an OTLP HTTP exporter and adds `1` to a counter every two seconds for a total of five minutes:
+If your SDK does not support this environment variable you can configure delta temporality in code. The following example configures an OTLP HTTP exporter and adds `1` to a counter every two seconds for a total of five minutes.
+
+**Note**: These examples are intended to help you get started. You shouldn't apply these patterns in production scenarios.
 
 {{< programming-lang-wrapper langs="python,go,java,.net" >}}
 
