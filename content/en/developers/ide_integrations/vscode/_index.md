@@ -125,5 +125,5 @@ To share your feedback, email [team-ide-integration@datadoghq.com][9].
 [11]: /security/application_security/vulnerability_management/
 [12]: /tests/guides/flaky_test_management/
 [13]: /watchdog/insights
-[14]: /code_analysis/static_analysis/?tab=githubactions
+[14]: /code_analysis/static_analysis/github_actions
 [15]: /code_analysis/static_analysis_rules/
