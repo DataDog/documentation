@@ -31,7 +31,7 @@ draft: false
 git_integration_title: cacti
 integration_id: cacti
 integration_title: Cacti
-integration_version: 1.11.1
+integration_version: 2.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -219,7 +219,7 @@ Cacti チェックには、サービスのチェック機能は含まれませ�
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/integrations-core/blob/master/cacti/datadog_checks/cacti/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

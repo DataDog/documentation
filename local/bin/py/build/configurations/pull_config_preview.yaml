@@ -484,20 +484,8 @@
         - action: security-rules
           branch: main
           globs:
-            # old
-            - "configuration/*.json"
-            - "configuration/*.yaml"
-            - "configuration/*.yml"
-            - "configuration/*.md"
-            - "runtime/**/*.json"
-            - "runtime/**/*.yaml"
-            - "runtime/**/*.yml"
-            - "runtime/**/*.md"
-            # new
             - "workload-security/backend-rules/*.yaml"
             - "workload-security/backend-rules/*.md"
-            - "security-monitoring/**/*.json"
-            - "security-monitoring/**/*.md"
             - "cloud-siem/**/*.json"
             - "cloud-siem/**/*.md"
             - "posture-management/**/*.json"

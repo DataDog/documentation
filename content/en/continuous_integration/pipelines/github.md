@@ -35,9 +35,11 @@ further_reading:
 
 - **Infrastructure metric correlation**: [Correlate infrastructure metrics][11] to pipeline jobs for self-hosted GitHub runners
 
-- **Custom tags and metrics at runtime**: Configure custom tags and metrics at runtime for pipeline spans
+- **Custom tags and metrics at runtime**: Configure custom tags and metrics at runtime
 
 - **Queue time**: View amount of time workflow jobs sit in the queue before processing
+
+- **Approval wait time**: View amount of time workflow runs and workflow jobs wait for manual approvals
 
 ## Configure the Datadog integration
 

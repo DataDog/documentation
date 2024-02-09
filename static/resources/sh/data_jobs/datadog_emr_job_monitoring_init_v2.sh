@@ -36,6 +36,10 @@ additional_environment_variables:
     value: false
   - key: DD_INTEGRATION_SPARK_ENABLED
     value: true
+  - key: DD_TRACE_AGENT_URL
+    value: http://localhost:8126
+  - key: DD_TRACE_EXPERIMENTAL_LONG_RUNNING_ENABLED
+    value: true
 EOF
 
 # Adding tags

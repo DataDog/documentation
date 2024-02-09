@@ -463,7 +463,7 @@ link_checks:on-schedule:
 # template for what runs in pa11y to avoid duplication
 .pa11y_live_template: &pa11y_live_template
   image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:pa11y-25121683
-  tags: ["runner:docker"]
+  tags: ["arch:amd64"]
   stage: post-deploy
   cache: []
   variables:
@@ -561,6 +561,7 @@ set_redirect_metadata_live:
   script:
     - in-isolation run_update_redirect_metadata
   interruptible: true
+  allow_failure: true
 
 ####################################
 #                                  #
