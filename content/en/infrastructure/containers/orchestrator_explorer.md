@@ -156,9 +156,9 @@ There are multiple types of terms available:
 
 | Type | Examples |
 |---|---|
-| **Tags**: Attached to resources by [the agent collecting them](https://docs.datadoghq.com/getting_started/tagging/assigning_tags/?tab=containerizedenvironments). There are also additional tags that Datadog generates for Kubernetes resources. | `datacenter:staging`<br>`tag#datacenter:staging`<br>*(the `tag#` is optional)* |
-| **Labels**: Extracted from [a resource's metadata](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/). They are typically used to organize your cluster and target specific resources with selectors. | `label#chart_version:2.1.0` |
-| **Annotations**: Extracted from [a resource's metadata](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/). They are generally used to support tooling that aid in cluster management. | `annotation#checksum/configmap:a1bc23d4` |
+| **Tags**: Attached to resources by [the agent collecting them][20]. There are also additional tags that Datadog generates for Kubernetes resources. | `datacenter:staging`<br>`tag#datacenter:staging`<br>*(the `tag#` is optional)* |
+| **Labels**: Extracted from [a resource's metadata][25]	. They are typically used to organize your cluster and target specific resources with selectors. | `label#chart_version:2.1.0` |
+| **Annotations**: Extracted from [a resource's metadata][26]. They are generally used to support tooling that aid in cluster management. | `annotation#checksum/configmap:a1bc23d4` |
 | **Metrics**: Added to workload resources (pods, deployments, etc.). You can find resources based on their utilization. To see what metrics are supported, see [Resource Utilization Filters](#resource-utilization-filters). | `metric#cpu_usage_pct_limits_avg15:>80%` |
 | **String matching**: Supported by some specific resource attributes, see below.<br>*Note: string matching does not use the key-value format, and you cannot specify the attribute to match on.* | `"10.132.6.23"` (IP)<br>`"9cb4b43f-8dc1-4a0e"` (UID)<br>`web-api-3` (Name) |
 
@@ -357,3 +357,5 @@ Percents (`*_pct_*`) are stored as floats, where `0.0` is 0%, and `1.0` is 100%.
 [13]: /infrastructure/containers/kubernetes_resource_utilization
 [15]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
 [20]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments
+[25]: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+[26]: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
