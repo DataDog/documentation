@@ -223,5 +223,5 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 [10]: /watchdog/insights
 [11]: mailto:team-ide-integration@datadoghq.com
 [12]: /continuous_integration/explorer/?tab=testruns
-[13]: /code_analysis/static_analysis/?tab=githubactions
-[14]: /code_analysis/static_analysis_rules/#python-rules
+[13]: /code_analysis/static_analysis/github_actions
+[14]: /code_analysis/static_analysis_rules/?languages=Python
