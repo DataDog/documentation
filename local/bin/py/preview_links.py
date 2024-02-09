@@ -19,9 +19,13 @@ pattern2 = re.compile('content/en/glossary/terms/(.*?).md')
 def compile_filename(filename):
     if pattern2.match(filename):
         filename = filename.replace('content/en/', '').replace('terms/', '#').replace('.md', '')
+        # Replace underscores in anchors with hyphens       
+        filename = filename.split('#')[0] + '#' + filename.split('#')[-1].replace('_', '-')
+        print(filename)
         return filename
     elif pattern1.match(filename):
         filename = filename.replace('content/en/', '').replace('_index', '').replace('.md', '')
+        print(filename)
         return filename
 
 def sort_files(file_string):
@@ -31,7 +35,7 @@ def sort_files(file_string):
         if filename.endswith('.md'):
             if pattern1.match(filename) or pattern2.match(filename):
                 final_array.append(compile_filename(filename))
-    return final_array        
+    return final_array
 
 # It looks like renamed files are counted as removed/added. I'm going to leave "renamed" in for
 # now to see if this behavior is consistent. 
