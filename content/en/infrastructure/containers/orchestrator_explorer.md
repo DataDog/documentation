@@ -91,7 +91,7 @@ You can also use facets on the left hand side of the page to group resources or 
 
 ### Cluster map
 
-A cluster map gives you a bigger picture of your pods and Kubernetes clusters. You can see all of your resources together on one screen with customized groups and filters, and choose which metrics to fill the color of the nodes with.
+A cluster map gives you a bigger picture of your pods and Kubernetes clusters. You can see all of your resources together on one screen with customized groups and filters, and choose which metrics to fill the color of the nodes.
 
 Examine resources from cluster maps by clicking on any circle or group to populate a detailed panel.
 
