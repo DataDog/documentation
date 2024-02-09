@@ -4,7 +4,7 @@ kind: documentation
 disable_toc: false
 ---
 
-<!-- screenshot of the Error Tracking explorer -->
+{{< img src="error_tracking/error-tracking-overview.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
 ## Overview
 
@@ -16,6 +16,13 @@ Error Tracking enables you to:
 - Group similar errors into issues, so that you can more easily identify important errors and reduce noise.
 - Follow issues over time to know when they first started, if they are still ongoing, and how often they are occurring.
 - Collect all the necessary context in one place to facilitate troubleshooting.
+
+Additional features are available depending on the source of the error. See [supported error sources](#supported-error-sources).
+
+## Getting started
+
+- Take a tour of key Error Tracking features in the [Error Tracking Explorer][5] documentation.
+- Use the product-specific links in the next section to set up Error Tracking for a particular error source.
 
 ## Supported error sources
 
@@ -31,3 +38,4 @@ For details, see the product-specific Error Tracking documentation:
 [2]: /logs/error_tracking
 [3]: /real_user_monitoring/error_tracking
 [4]: /tracing/error_tracking/execution_replay
+[5]: /error_tracking/explorer
