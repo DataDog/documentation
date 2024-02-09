@@ -1,25 +1,30 @@
 ---
-title: "Component: Security group"
-kind: guide
+title: "Security Group Component"
+kind: documentation
 ---
+## Overview
 
-{{< img src="cloudcraft/components-aws/security-group/component-security-group-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Security group' AWS component." responsive="true" style="width:100%;">}}
+Use the Security Group component to represent security groups from your Amazon Web Services architecture.
 
-The **Security group** component is used to represent security groups from your Amazon Web Services architecture with Cloudcraft.
+{{< img src="cloudcraft/components-aws/security-group/component-security-group-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Security group' AWS component." responsive="true" style="width:60%;">}}
 
 ## Toolbar
 
-The toolbar is displayed when selecting a component. It allows you to customize parts of your component and its visual to your liking.
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**. Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both 2D and 3D view, or different colors for each.
-- **Name**. Give the security group a name.
-- **Shape**. Select a shape for the security group, dynamic or rectangular.
-- **Padding**. Increase or decrease the amount of space inside the security group.
-- **Inbound/Outbound**. View, remove, or add, inbound and outbound rules for components inside this security group.
+- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- **Name**: Give the security group a name.
+- **Shape**: Select a shape for the security group, dynamic or rectangular.
+- **Padding**: Increase or decrease the amount of space inside the security group.
+- **Inbound/Outbound**: View, remove, or add inbound and outbound rules for components inside this security group.
 
 ## API
 
-In [the Cloudcraft API][1], the security group component is represented in JSON.
+Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
+
+### Schema
+
+The following is an example JSON of a Security Group component:
 
 ```json
 {
@@ -77,22 +82,22 @@ In [the Cloudcraft API][1], the security group component is represented in JSON.
 }
 ```
 
-- **type: sg**. The type of component.
-- **id: string**. A unique identifier for the component in the `uuid` format.
-- **region: string**. The AWS region this security group is deployed in. With the exception of `cn-` regions, all global regions are supported.
-- **name: string**. The name for the security group.
-- **shape: string**. The shape of the security group. Accepted values are `dynamic` or `rectangular`.
-- **padding: number**. The internal padding for the security group. Defaults to 1.5.
-- **nodes: array**. The components inside the security group. [See below for more information](#accepted-values-for-nodes).
-- **inboundRules: array**. The rules for incoming traffic for the components inside this security group. [See below for more information](#accepted-values-for-inboundrules-and-outboundrules).
-- **outboundRules: array**. The rules for outgoing traffic for the components inside this security group. [See below for more information](#accepted-values-for-inboundrules-and-outboundrules).
-- **color: object**. The fill color for the component.
-  - **isometric: string**. Fill color for the component in 3D view. Must be an hexadecimal color.
-  - **2d: string**. Fill color for the component in 2D view. Must be an hexadecimal color.
-- **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
-- **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
+- **type: sg**: The type of component.
+- **id: string**: A unique identifier for the component in the `uuid` format.
+- **region: string**: The AWS region the security group is deployed in. All global regions are supported except `cn-` regions.
+- **name: string**: The name for the security group.
+- **shape: string**: The shape of the security group. Accepted values are `dynamic` or `rectangular`.
+- **padding: number**: The internal padding for the security group. Defaults to `1.5`.
+- **nodes: array**: The components inside the security group. See [Accepted values for `nodes`](#accepted-values-for-nodes) for more information.
+- **inboundRules: array**: The rules for incoming traffic for the components inside this security group. See [Accepted values for `inboundRules` and `outboundRules`](#accepted-values-for-inboundrules-and-outboundrules) for more information.
+- **outboundRules: array**: The rules for outgoing traffic for the components inside this security group. See [Accepted values for `inboundRules` and `outboundRules`](#accepted-values-for-inboundrules-and-outboundrules) for more information.
+- **color: object**: The fill color for the component.
+  - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The fill color for the component in the 2D view. Must be a hexadecimal color.
+- **link: uri**: Link the component to another diagram using the `blueprint://ID` format or to an external website using the `https://LINK` format.
+- **locked: boolean**: If `true`, changes made to the component using the application are disabled until unlocked.
 
-### Accepted values for nodes
+### Accepted values for `nodes`
 
 The `nodes` key accepts an array of unique identifiers for the components inside the security group.
 
@@ -102,15 +107,15 @@ The following AWS components can be added to a security group:
 asg, ec2, lambda, efs, fsx, elb, rds, docdb, elasticache, redshift, es
 ```
 
-In addition to the AWS components, the following common components can be added to security groups as well:
+In addition to the AWS components, the following common components can also be added to security groups:
 
 ```
 block, isotext, icon, image, area
 ```
 
-### Accepted values for inboundRules and outboundRules
+### Accepted values for `inboundRules` and `outboundRules`
 
-The `inboundRules` and `outboundRules` keys accept an array with rule represented by JSON objects.
+The `inboundRules` and `outboundRules` keys accept an array with rules represented by JSON objects.
 
 ```json
 {
@@ -138,11 +143,11 @@ The `inboundRules` and `outboundRules` keys accept an array with rule represente
 
 ```
 
-- **portRange: number**. The number of the port affected by this rule. Accepts a single port or a range of ports, e.g. 42000-42222.
-- **protocol: string**. The network protocol affected by this rule.
-- **target: string**. The CIDR or `id` of a security group that is the source of traffic to the components.
-- **targetType: string**. The type of source used for `target`. Accepted values are `ip` or `sg`.
-- **description: string**. A short description for the inbound or outbound rule.
-- **hidden: boolean**. If true, the inbound or outbound rule is not displayed in the diagram. Refer to the feature image at the top to see how it is displayed. Defaults to false.
+- **portRange: number**: The number of the port affected by this rule. Accepts a single port or a range of ports, for example, `42000-42222`.
+- **protocol: string**: The network protocol affected by this rule.
+- **target: string**: The CIDR or `id` of a security group that is the source of traffic to the components.
+- **targetType: string**: The type of source used for `target`. Accepted values are `ip` or `sg`.
+- **description: string**: A short description for the inbound or outbound rule.
+- **hidden: boolean**: If `true`, the inbound or outbound rule is not displayed in the diagram. See the component image at the top of the page to see how it is displayed. Defaults to `false`.
 
 [1]: https://developers.cloudcraft.co/

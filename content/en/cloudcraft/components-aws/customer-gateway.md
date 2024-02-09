@@ -54,7 +54,7 @@ The following is an example JSON object of a customer gateway component:
 - **accentColor: object**: The accent color used to display the component logo on the block.
   - **isometric: string**: The accent color for the component in the 3D view. Must be a hexadecimal color.
   - **2d: string**: The accent color for the component in the 2D view. Must be a hexadecimal color.
-- **direction: string**: The rotation or direction of the component. Accepts `down` or `right` as values, with `down` as the default.
+- **direction: string**: The rotation or direction of the component. Accepts `down` or `right`. Default is `down`.
 - **link: uri**: Link the component to another diagram using the `blueprint://ID` format or to an external website using the `https://LINK` format.
 - **locked: boolean**: Whether to allow changes to the position of the component through the web interface. If `true`, changes made to the component using the application are disabled until unlocked.
 

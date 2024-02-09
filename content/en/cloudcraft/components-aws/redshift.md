@@ -1,24 +1,29 @@
 ---
-title: "Component: Redshift"
-kind: guide
+title: "Redshift Component"
+kind: documentation
 ---
+## Overview
 
-{{< img src="cloudcraft/components-aws/redshift/component-redshift-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Redshift' AWS component." responsive="true" style="width:100%;">}}
+Use the Redshift component to represent data warehouses from your Amazon Web Services architecture.
 
-The **Redshift** component is used to represent data warehouses from your Amazon Web Services architecture with Cloudcraft.
+{{< img src="cloudcraft/components-aws/redshift/component-redshift-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Redshift' AWS component." responsive="true" style="width:60%;">}}
 
 ## Toolbar
 
-The toolbar is displayed when selecting a component. It allows you to customize parts of your component and its visual to your liking.
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**. Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both 2D and 3D view, or different colors for each.
-- **Nodes**. Enter the number of nodes for the Redshift cluster.
-- **Instance type**. Select the Redshift instance type. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
-- **Size**. Select the size of the Redshift instance. As with instance type, the hardware details shown in the toolbar change to reflect the size.
+- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- **Nodes**: Enter the number of nodes for the Redshift cluster.
+- **Instance type**: Select the Redshift instance type. Changing the instance type changes the hardware details shown in the toolbar to reflect what is used by the hypervisor.
+- **Size**: Select the size of the Redshift instance. As with instance type, the hardware details shown in the toolbar change to reflect the size.
 
 ## API
 
-In [the Cloudcraft API][1], a Redshift instance is represented in JSON.
+Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
+
+### Schema
+
+The following is an example JSON of a Redshift component:
 
 ```json
 {
@@ -42,25 +47,25 @@ In [the Cloudcraft API][1], a Redshift instance is represented in JSON.
 }
 ```
 
-- **type: redshift**. The type of component.
-- **id: string**. A unique identifier for the component in the `uuid` format.
-- **region: string**. The AWS region the Redshift instance is deployed in. Except for `cn-` regions, all global regions are supported.
-- **mapPos: [number, number]**. The position of the component in the blueprint, expressed as a x,y coordinate pair.
-- **nodeCount: number**. The number of nodes for the Redshift cluster. Defaults to `1`.
-- **instanceType: string**. The type of the instance. [See below for more information](#accepted-values-for-instancetype).
-- **instanceSize: string**. The size of the instance. [See below for more information](#accepted-values-for-instancesize).
-- **color: object**. The fill color for the component body.
-  - **isometric: string**. Fill color for the component in 3D view. Must be a hexadecimal color.
-  - **2d: string**. Fill color for the component in 2D view. Must be a hexadecimal color.
-- **accentColor: object**. The accent color used to display the component logo on the block.
-  - **isometric: string**. Accent color for the component in 3D view. Must be a hexadecimal color.
-  - **2d: string**. Accent color for the component in 2D view. Must be a hexadecimal color.
-- **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
-- **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
+- **type: redshift**: The type of component.
+- **id: string**: A unique identifier for the component in the `uuid` format.
+- **region: string**: The AWS region the Redshift instance is deployed in. All global regions are supported except `cn-` regions.
+- **mapPos: [number, number]**: TThe position of the component in the blueprint, expressed as an x- and y-coordinate pair.
+- **nodeCount: number**: The number of nodes for the Redshift cluster. Defaults to `1`.
+- **instanceType: string**: The type of the instance. See [Accepted values for `instanceType`](#accepted-values-for-instancetype) for more information.
+- **instanceSize: string**: The size of the instance. See [Accepted values for `instanceSize`](#accepted-values-for-instancesize) for more information.
+- **color: object**: The fill color for the component body.
+  - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The fill color for the component in the 2D view. Must be a hexadecimal color.
+- **accentColor: object**: The accent color used to display the component logo on the block.
+  - **isometric: string**: The accent color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The accent color for the component in the 2D view. Must be a hexadecimal color.
+- **link: uri**: Link the component to another diagram using the `blueprint://ID` format or to an external website using the `https://LINK` format.
+- **locked: boolean**: If `true`, changes made to the component through the application are disabled until unlocked.
 
 The Redshift component can be added to [VPCs][2], [security groups][3], and [subnets][4].
 
-## Accepted values for instanceType
+## Accepted values for `instanceType`
 
 The `instanceType` key accepts the following values:
 
@@ -68,7 +73,7 @@ The `instanceType` key accepts the following values:
 dc1, dc2, ds1, ds2, ra3
 ```
 
-## Accepted values for instanceSize
+## Accepted values for `instanceSize`
 
 The `instanceSize` key accepts the following values:
 
@@ -77,6 +82,6 @@ large, xlarge, xlplus, 4xlarge, 8xlarge, 16xlarge
 ```
 
 [1]: https://developers.cloudcraft.co/
-[2]: https://help.cloudcraft.co/article/118-component-vpc
-[3]: https://help.cloudcraft.co/article/119-component-security-group
+[2]: /cloudcraft/components-aws/vpc/
+[3]: /cloudcraft/components-aws/security-group/
 [4]: https://help.cloudcraft.co/article/120-component-subnet
