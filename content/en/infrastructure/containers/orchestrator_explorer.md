@@ -328,7 +328,7 @@ For these workload resources, the following metric names are available:
 | `cpu_usage_pct_requests_avg15` | `mem_usage_pct_requests_avg15` |
 | `cpu_waste_avg15` | `mem_waste_avg15` |
 
-In addition, Clusters and Nodes have the following metrics available to them:
+In addition, clusters, and nodes have the following metrics available to them:
 
 - `cpu_usage_pct_alloc_avg15`
 - `cpu_requests_pct_alloc_avg15`
