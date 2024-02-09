@@ -64,4 +64,4 @@ The NAT gateway component can be added to [VPCs][2] and [subnets][3].
 
 [1]: https://developers.cloudcraft.co/
 [2]: /cloudcraft/components-aws/vpc/
-[3]: https://help.cloudcraft.co/article/120-component-subnet
+[3]: /cloudcraft/components-aws/subnet/

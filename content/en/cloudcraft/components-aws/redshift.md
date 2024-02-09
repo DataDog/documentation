@@ -84,4 +84,4 @@ large, xlarge, xlplus, 4xlarge, 8xlarge, 16xlarge
 [1]: https://developers.cloudcraft.co/
 [2]: /cloudcraft/components-aws/vpc/
 [3]: /cloudcraft/components-aws/security-group/
-[4]: https://help.cloudcraft.co/article/120-component-subnet
+[4]: /cloudcraft/components-aws/subnet/

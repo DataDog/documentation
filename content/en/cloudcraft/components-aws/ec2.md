@@ -158,4 +158,4 @@ Each option is represented differently in the `billingOptions` object.
 [2]: /cloudcraft/components-aws/vpc/
 [3]: /cloudcraft/components-aws/security-group/
 [4]: /cloudcraft/components-aws/auto-scaling-group/
-[5]: https://help.cloudcraft.co/article/120-component-subnet
+[5]: /cloudcraft/components-aws/subnet/

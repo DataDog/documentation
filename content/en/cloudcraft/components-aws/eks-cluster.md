@@ -70,7 +70,7 @@ The following is an example JSON object of a EKS Cluster component:
 
 [1]: /cloudcraft/components-aws/vpc/
 [2]: /cloudcraft/components-aws/security-group/
-[3]: https://help.cloudcraft.co/article/120-component-subnet
+[3]: /cloudcraft/components-aws/subnet/
 [4]: https://developers.cloudcraft.co/
 [5]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 [6]: /cloudcraft/faq/scan-error-aws-china-region/

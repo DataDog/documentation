@@ -76,4 +76,4 @@ The EFS component can be added to [VPCs][2], [security groups][3], and [subnets]
 [1]: https://developers.cloudcraft.co/
 [2]: /cloudcraft/components-aws/vpc/
 [3]: /cloudcraft/components-aws/security-group/
-[4]: https://help.cloudcraft.co/article/120-component-subnet
+[4]: /cloudcraft/components-aws/subnet/
