@@ -158,25 +158,25 @@ There are multiple types of terms available:
 |---|---|
 | **Tags**: Attached to resources by [the agent collecting them](https://docs.datadoghq.com/getting_started/tagging/assigning_tags/?tab=containerizedenvironments). There are also additional tags that Datadog generates for Kubernetes resources. | `datacenter:staging`<br>`tag#datacenter:staging`<br>*(the `tag#` is optional)* |
 | **Labels**: Extracted from [a resource's metadata](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/). They are typically used to organize your cluster and target specific resources with selectors. | `label#chart_version:2.1.0` |
-| **Annotations** are also extracted from [a resource's metadata](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/). They are generally used to support tooling that aid in cluster management. | `annotation#checksum/configmap:a1bc23d4` |
-| **Metrics** are added to workload resources (pods, deployments, etc.). You can find resources based on their utilization. To see what metrics are supported, see [Resource Utilization Filters](#resource-utilization-filters). | `metric#cpu_usage_pct_limits_avg15:>80%` |
-| **String matching** is supported by some specific resource attributes, see below.<br>*Note: string matching does not use the key-value format, and you cannoy specify the attribute to match on.* | `"10.132.6.23"` (IP)<br>`"9cb4b43f-8dc1-4a0e"` (UID)<br>`web-api-3` (Name) |
+| **Annotations**: Extracted from [a resource's metadata](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/). They are generally used to support tooling that aid in cluster management. | `annotation#checksum/configmap:a1bc23d4` |
+| **Metrics**: Added to workload resources (pods, deployments, etc.). You can find resources based on their utilization. To see what metrics are supported, see [Resource Utilization Filters](#resource-utilization-filters). | `metric#cpu_usage_pct_limits_avg15:>80%` |
+| **String matching**: Supported by some specific resource attributes, see below.<br>*Note: string matching does not use the key-value format, and you cannot specify the attribute to match on.* | `"10.132.6.23"` (IP)<br>`"9cb4b43f-8dc1-4a0e"` (UID)<br>`web-api-3` (Name) |
 
->  ***Notes**: You might find the same key-value pairs as both a tag and label (or annotation) - this is dependent on how your cluster is configured.*
+>  ***Note**: You might find the same key-value pairs as both a tag and label (or annotation) - this is dependent on how your cluster is configured.*
 
 The following resource attributes are supported in arbitrary **String Matching**:
 - `metadata.name`
 - `metadata.uid`
 - IP Addresses found in:
   - Pods
-  - Nodes (Internal and External)
-  - Services (Cluster, External, and Load Balancer IPs)
+  - Nodes (internal and external)
+  - Services (cluster, external, and load balancer IPs)
 
-This means that you do not need to specify a key to search for a resource by name, or IP. Quotes are not required unless your string search includes certain special characters.
+You do not need to specify a key to search for a resource by name, or IP. Quotes are not required unless your string search includes certain special characters.
 
 #### Comparators
 
-All terms support the `:` equality operator. [Metric Value](#Resource-Utilization-Filters) terms support numeric comparisons as well:
+All terms support the `:` equality operator. [Metric value](#resource-utilization-filters) terms support numeric comparisons as well:
 
 - `:>` Greater than (for example, `metric#cpu_usage_avg15:>0.9`)
 - `:>=` Greater than or equal
@@ -185,18 +185,18 @@ All terms support the `:` equality operator. [Metric Value](#Resource-Utilizatio
 
 #### Operators
 
-To combine multiple terms into a complex query, you can use any of the following case sensitive Boolean operators:
+To combine multiple terms into a complex query, you can use any of the following case sensitive boolean operators:
 
 | Operator | Description | Example |
 |---|---|---|
-| `AND` | **Intersection**: both terms are in the selected events (if nothing is added, AND is taken by default) | `a AND b`   |
-| `OR` | **Union**: either term is contained in the selected events                                             | `a OR b`   |
-| `NOT` / `-` | **Exclusion**: the following term is NOT in the event (apply to each individual raw text search) | `a AND NOT b` or<br>`a AND -b` |
-|  `( )` | **Grouping:** specify how to group terms logically. | `a AND (b OR c)` or<br>`(a AND b) or c` |
+| `AND` | **Intersection**: Both terms are in the selected events (if nothing is added, AND is taken by default) | `a AND b`   |
+| `OR` | **Union**: Either term is contained in the selected events                                             | `a OR b`   |
+| `NOT` / `-` | **Exclusion**: The following term is NOT in the event (apply to each individual raw text search) | `a AND NOT b` or<br>`a AND -b` |
+|  `( )` | **Grouping:** Specify how to group terms logically. | `a AND (b OR c)` or<br>`(a AND b) or c` |
 
-##### `OR` Value Shorthand
+##### `OR` value shorthand
 
-Multiple terms sharing the same key can be combined into a single term if they are all `OR`ed. For example, this query:
+Multiple terms sharing the same key can be combined into a single term if they all use the `OR` operator. For example, this query:
 
 ```
 app_name:web-server OR app_name:database OR app_name:event-consumer
@@ -210,30 +210,30 @@ app_name:(web-server OR database OR event-consumer)
 
 ### Wildcards
 
-You can use `*` wildcards as part of a term to filter by partial matches, both for values and keys! Some examples:
+You can use `*` wildcards as part of a term to filter by partial matches, both for values and keys. Some examples:
 
-- `kube_job:stats-*`: Find all resources with a `kube_deployment` tag value starting with `stats-`
-- `pod_name:*canary`: Find all resources with a `pod_name` value ending in `canary`
-- `label#release:*`: Find all resources with a `release` label, regardless of its value
-- `-label#*.datadoghq.com/*`: Find resources that do not have any Datadog-scoped labels.
-- `kube_*:*stats*canary`: Find resource with a related-resource tags (`kube_*`), with with  `stats` in the middle of the value, also ending with `canary`.
+- `kube_job:stats-*`: Find all resources with a `kube_deployment` tag value starting with `stats-`.
+- `pod_name:*canary`: Find all resources with a `pod_name` value ending in `canary`.
+- `label#release:*`: Find all resources with a `release` label, regardless of its value.
+- `-label#*.datadoghq.com/*`: Find resources that do not have any Datadog scoped labels.
+- `kube_*:*stats*canary`: Find resources that have related resource tags (`kube_*`), with  `stats` in the middle of the value, also ending with `canary`.
 
-### Extracted Tags
+### Extracted tags
 
-In addition to the tags you have [configured](https://docs.datadoghq.com/getting_started/tagging/assigning_tags/?tab=containerizedenvironments) within your Datadog agent, Datadog injects generated tags based on resource attributes that can help your searching and grouping needs. These tags are added to resources conditionally, when they are relevant.
+In addition to the tags you have [configured][20] within your Datadog agent, Datadog injects generated tags based on resource attributes that can help your searching and grouping needs. These tags are added to resources conditionally, when they are relevant.
 
-#### All Resources
+#### All resources
 
-All resources will have the `kube_cluster_name` tag and all namespaced resources have the `kube_namespace` tag added to them.
+All resources have the `kube_cluster_name` tag and all namespaced resources have the `kube_namespace` tag added to them.
 
-They will also have a `kube_<api_kind>:<metadata.name>` tag. For example, a deployment named `web-server-2` would have the `kube_deployment:web-server-2` tag automatically added to it.
+Additionally, resources contain a `kube_<api_kind>:<metadata.name>` tag. For example, a deployment named `web-server-2` would have the `kube_deployment:web-server-2` tag automatically added to it.
 
-> ***Note**: There are some exceptions to this pattern:*
+> **Note**: There are some exceptions to this pattern:
 >
-> - Pods use `pod_name` instead
-> - *VPAs: `verticalpodautoscaler`*
-> - *VPHs: `horizontalpodautoscaler`*
-> - *Persistant Volume Claims: `persistantvolumeclaim`*
+> - Pods use `pod_name` instead.
+> - *VPAs: `verticalpodautoscaler`*.
+> - *VPHs: `horizontalpodautoscaler`*.
+> - *Persistant Volume Claims: `persistantvolumeclaim`*.
 
 Based on the labels attached to the resource, the following tags will also be extracted:
 
@@ -251,21 +251,21 @@ Based on the labels attached to the resource, the following tags will also be ex
 
 #### Relationships
 
-Related Resources will be tagged with eachother. Some examples:
+Related Resources will be tagged with each other. Some examples:
 
-- A Pod that is part of the "XYZ" Deployment will have a `kube_deployment:xyz` tag.
-- An Ingress that points at Service "A" will have a `kube_service:a` tag.
+- A pod that is part of the "XYZ" deployment will have a `kube_deployment:xyz` tag.
+- An ingress that points at service "A" will have a `kube_service:a` tag.
 
-Resources that are spawned from "parent" resources will have the `kube_ownerref_kind` and `kube_ownerref_name` tags (such as Pods and Jobs).
+Resources that are spawned from "parent" resources will have the `kube_ownerref_kind` and `kube_ownerref_name` tags (such as pods and jobs).
 
-> **Tip:** Utilize the filter query autocomplete feature to discover what related-resource tags are available. Type `kube_` and see what results are suggested.
+> **Tip:** Utilize the filter query autocomplete feature to discover what related resource tags are available. Type `kube_` and see what results are suggested.
 
 #### Pods
 
 Pods are given the following tags:
 
 - `pod_name`
-- `pod_phase` (extracted from the Manifest)
+- `pod_phase` (extracted from the manifest)
 - `pod_status` (calculated similarly to `kubectl`)
 
 #### Workloads
@@ -280,7 +280,7 @@ Workload resources (pods, deployments, stateful sets, etc.) will have the follow
 
 #### Conditions
 
-Some conditions, for some resources, are extracted as tags. For example, you can find the `kube_condition_available` tag on Deployments. The tag format is always `kube_condition_<name>` with a `true` or `false` value.
+Some conditions, for some resources, are extracted as tags. For example, you can find the `kube_condition_available` tag on deployments. The tag format is always `kube_condition_<name>` with a `true` or `false` value.
 
 > **Tip**: Use the autocomplete feature to discover what conditions are available on a given resource type by entering `kube_condition` and reviewing the results.
 
@@ -314,7 +314,7 @@ The following workload resouces are enriched with resource utilization metrics:
 These metrics are calculated at the time of collection, based on the average values over the last 15 minutes. You can filter by metric values like so: `metric#<metric_name><comparator><numeric_value>`.
 
 - `metric_name` is an availbale metric (see below)
-- `comparator` is a support [Comparator](#Comparator)
+- `comparator` is a supported [comparator](#comparator)
 - and `numeric_value` is a floating poing value.
 
 For these workload resources, the following metric names are available:
@@ -350,10 +350,10 @@ Percents (`*_pct_*`) are stored as floats, where `0.0` is 0%, and `1.0` is 100%.
 
 [1]: https://app.datadoghq.com/orchestration/overview
 [2]: /infrastructure/containers/?tab=datadogoperator#setup
-
 [9]: /logs
 [10]: /metrics
 [11]: /tracing
 [12]: /events
 [13]: /infrastructure/containers/kubernetes_resource_utilization
 [15]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog
+[20]: /getting_started/tagging/assigning_tags/?tab=containerizedenvironments
