@@ -286,7 +286,7 @@ Some conditions, for some resources, are extracted as tags. For example, you can
 
 #### Resource specific tags
 
-Some resources have specificialized tags as well that are extracted based on your cluster's environment. The following tags are in addition to the shared tags above.
+Some resources have specific tags that are extracted based on your cluster's environment. The following tags are available in addition to the shared tags above.
 
 | Resource | Extracted Tags |
 |---|---|
