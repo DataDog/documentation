@@ -196,7 +196,7 @@ To combine multiple terms into a complex query, you can use any of the following
 
 ##### `OR` Value Shorthand
 
-Multiple terms sharing the same field name can be combined into a single term if they are all `OR`ed. For example, this query:
+Multiple terms sharing the same key can be combined into a single term if they are all `OR`ed. For example, this query:
 
 ```
 app_name:web-server OR app_name:database OR app_name:event-consumer
@@ -205,7 +205,7 @@ app_name:web-server OR app_name:database OR app_name:event-consumer
 Can be reduced to:
 
 ```
-app_name:(web-server OR database OR event-consume)
+app_name:(web-server OR database OR event-consumer)
 ```
 
 ### Wildcards
