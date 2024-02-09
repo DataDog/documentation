@@ -31,6 +31,8 @@ algolia:
 
 {{% error-tracking-description %}}
 
+Issues from RUM errors include the stack trace, user session timelines, and metadata—including user location, version, and any custom attributes you included in your crash reports.
+
 Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] documentation. To view the Error Tracking Explorer for RUM, navigate to [**UX Monitoring** > **Error Tracking**][1].
 
 ## Upload source maps
@@ -43,14 +45,6 @@ Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] d
     {{< nextlink href="real_user_monitoring/error_tracking/reactnative" >}}React Native{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/error_tracking/flutter" >}}Flutter{{< /nextlink >}}
 {{< /whatsnext >}}
-
-## Examine issues to start troubleshooting or debugging
-
-Error Tracking automatically categorizes crashes collected from your web and mobile applications into issues in the [Error Tracking Explorer][1]. 
-
-{{< img src="real_user_monitoring/error_tracking/issue-panel-2.png" alt="The Error Tracking Explorer for RUM displaying issues from your web and mobile application's crash reports" style="width:100%;" >}}
-
-Click on an issue to view debugging information, such as the stack trace, user session timelines, and metadata—including user location, version, and any custom attributes you included in your crash reports. 
 
 ## Further Reading
 

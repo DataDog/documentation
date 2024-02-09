@@ -23,9 +23,7 @@ algolia:
 
 {{< img src="error_tracking/error-tracking-overview.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
-{{% error-tracking-description %}}
-
-Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] documentation. To view the Error Tracking Explorer for APM, navigate to [**APM** > **Error Tracking**][5].
+{{% error-tracking-description %}}  
 
 ## Use span tags to track error spans
 
@@ -39,9 +37,9 @@ Error Tracking computes a fingerprint for each error span it processes using the
 
 ## Examine issues to start troubleshooting or debugging
 
-Error Tracking automatically categorizes errors into issues collected from your backend services in the [Error Tracking Explorer][3]. 
+Error Tracking automatically categorizes errors into issues collected from your backend services in the [Error Tracking Explorer][5]. See the [Error Tracking Explorer documentation][3] for a tour of key features.
 
-Click on an issue to see a summary of the error, the distribution of impacted spans, the latest most relevant stack trace, span tags, host tags, container tags, and metrics.
+Issues created from APM include the distribution of impacted spans, the latest most relevant stack trace, span tags, host tags, container tags, and metrics.
 
 ## Further Reading
 

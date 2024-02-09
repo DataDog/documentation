@@ -35,14 +35,6 @@ Error Tracking for Logs processes properly configured error logs with stack trac
     {{< nextlink href="logs/error_tracking/backend" >}}Backend{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Investigate issues and start triaging
-
-An *issue* is a grouping of any number of errors based on a fingerprinting algorithm that groups certain error logs with required attributes like a stack trace.
-
-{{< img src="logs/error_tracking/sidepanel.png" alt="A sidepanel consisting of details of a log error" style="width:100%;" >}}
-
-Click on an issue to see seasonality patterns, a stack trace, and the error's distribution across `env` and `version` tags. The issue panel displays the first and last versions impacted with timestamps. 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
