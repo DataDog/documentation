@@ -7,7 +7,7 @@ kind: documentation
 
 The Subnet component is used to represent subnets from your Amazon Web Services architecture.
 
-{{< img src="cloudcraft/components-common/subnet/component-subnet.png" alt="Screenshot of a 3D representation of the subnet AWS component in Cloudcraft" responsive="true" style="width:60%;">}}
+{{< img src="cloudcraft/components-aws/subnet/component-subnet.png" alt="Screenshot of a 3D representation of the subnet AWS component in Cloudcraft" responsive="true" style="width:60%;">}}
 
 
 ## Toolbar
