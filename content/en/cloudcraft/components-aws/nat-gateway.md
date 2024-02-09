@@ -4,7 +4,7 @@ kind: documentation
 ---
 ## Overview
 
-Use the NAT gateway component to represent network address translation (NAT) gateways from your Amazon Web Services architecture.
+Use the NAT Gateway component to represent network address translation (NAT) gateways from your Amazon Web Services architecture.
 
 {{< img src="cloudcraft/components-aws/nat-gateway/component-nat-gateway-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'NAT gateway' AWS component." responsive="true" style="width:60%;">}}
 

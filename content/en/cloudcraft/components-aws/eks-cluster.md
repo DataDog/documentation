@@ -6,7 +6,7 @@ kind: documentation
 
 <div class="alert alert-info">Scanning Amazon EKS components requires <a href="https://docs.datadoghq.com/cloudcraft/getting-started/connect-amazon-eks-cluster-with-cloudcraft/">authorizing our IAM role for view-only access</a>.</div>
 
-Use the EKS cluster component to visualize Amazon EKS clusters from your Amazon Web Services architecture.
+Use the EKS Cluster component to visualize Amazon EKS clusters from your Amazon Web Services architecture.
 
 {{< img src="cloudcraft/components-aws/eks-cluster/component-eks-cluster-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing interconnected AWS components." responsive="true" style="width:60%;">}}
 
@@ -25,7 +25,7 @@ Use the [Cloudcraft API][1] to programmatically access and render your architect
 
 ### Schema
 
-The following is an example JSON object of a EKS cluster component:
+The following is an example JSON object of a EKS Cluster component:
 
 ```json
 {

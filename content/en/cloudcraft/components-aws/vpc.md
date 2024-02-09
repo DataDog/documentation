@@ -1,25 +1,30 @@
 ---
-title: "Component: VPC"
-kind: guide
+title: "VPC Component"
+kind: documentation
 ---
+## Overview
 
-{{< img src="cloudcraft/components-aws/vpc/component-vpc-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'VPC' AWS component." responsive="true" style="width:100%;">}}
+Use the VPC component to represent isolated virtual network from your Amazon Web Services architecture.
 
-The **VPC** component is used to represent isolated virtual networks from your Amazon Web Services architecture with Cloudcraft.
+{{< img src="cloudcraft/components-aws/vpc/component-vpc-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'VPC' AWS component." responsive="true" style="width:60%;">}}
 
 ## Toolbar
 
-The toolbar is displayed when selecting a component. It allows you to customize parts of your component and its visual to your liking.
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**. Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both 2D and 3D view, or different colors for each.
-- **Name**. Give the VPC a name.
-- **Shape**. Select a shape for the VPC, dynamic or rectangular.
-- **Padding**. Increase or decrease the amount of space inside the VPC.
-- **Peering**. View, remove, or add, peering connections to other VPCs.
+- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- **Name**: Give the VPC a name.
+- **Shape**: Select a shape for the VPC.
+- **Padding**: Increase or decrease the amount of space inside the VPC.
+- **Peering**: View, remove, or add peering connections to other VPCs.
 
 ## API
 
-In [the Cloudcraft API][1], the VPC component is represented in JSON.
+Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
+
+### Schema
+
+The following is an example JSON of a VPC component:
 
 ```json
 {
@@ -48,20 +53,20 @@ In [the Cloudcraft API][1], the VPC component is represented in JSON.
 }
 ```
 
-- **type: vpc**. The type of component.
-- **id: string**. A unique identifier for the component in the `uuid` format.
-- **region: string**. The AWS region this VPC is deployed in. With the exception of `cn-` regions, all global regions are supported.
-- **name: string**. The name for the VPC.
-- **shape: string**. The shape of the VPC. Accepted values are `dynamic` or `rectangular`.
-- **padding: number**. The internal padding for the VPC. Defaults to 1.5.
-- **nodes: array**. The components inside the VPC. See below for more information.
-- **peeringConnections: array**. The VPCs that make peering connections to this VPC. See below for more information.
-- **color: object**. The fill color for the component.
-  - **isometric: string**. Fill color for the component in 3D view. Must be an hexadecimal color.
-  - **2d: string**. Fill color for the component in 2D view. Must be an hexadecimal color.
-- **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
+- **type: vpc**: The type of component.
+- **id: string**: A unique identifier for the component in the `uuid` format.
+- **region: string**: The AWS region this VPC is deployed in. All global regions are supported except `cn-` regions.
+- **name: string**: The name for the VPC.
+- **shape: string**: The shape of the VPC. Accepted values are `dynamic` or `rectangular`.
+- **padding: number**: The internal padding for the VPC. Defaults to `1.5`.
+- **nodes: array**: The components inside the VPC. See [Accepted values for `nodes`](#accepted-values-for-nodes) for more information.
+- **peeringConnections: array**: The VPCs that make peering connections to this VPC. See [Accepted values for `peeringConnections`](#accepted-values-for-peeringconnections) for more information.
+- **color: object**: The fill color for the component.
+  - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The fill color for the component in the 2D view. Must be a hexadecimal color.
+- **locked: boolean**: If `true`, changes made to the component using the application are disabled until unlocked.
 
-### Accepted values for nodes
+### Accepted values for `nodes`
 
 The `nodes` key accepts an array of unique identifiers for the components inside the VPC.
 
@@ -71,13 +76,13 @@ The following AWS components can be added inside a VPC:
 asg, ec2, lambda, efs, fsx, elb, subnet, sg, rds, docdb, elasticache, redshift, es, natgateway, internetgateway, vpngateway, customergateway
 ```
 
-In addition to the AWS components, the following common components are can also be added inside a VPC:
+In addition to the AWS components, the following common components can also be added inside a VPC:
 
 ```
 block, isotext, icon, image, area
 ```
 
-### Accepted values for peeringConnections
+### Accepted values for `peeringConnections`
 
 The `peeringConnections` key accepts an array, with each peering connection being represented by a JSON object.
 
@@ -94,9 +99,9 @@ The `peeringConnections` key accepts an array, with each peering connection bein
 }
 ```
 
-- **id: string**. A unique identifier in the `uuid` format for this peering connection.
-- **name: string**. The name of this connection. Refer to the feature image at the top to see how it is displayed.
-- **accepterVpc: string**. The `id` of the accepter VPC.
-- **hidden: boolean**. If true, the peering connection is not displayed in the diagram. Defaults to false.
+- **id: string**: A unique identifier in the `uuid` format for this peering connection.
+- **name: string**: The name of this connection. See the component image at the top of the page to see how it is displayed.
+- **accepterVpc: string**: The `id` of the accepter VPC.
+- **hidden: boolean**: If `true`, the peering connection is not displayed in the diagram. Defaults to `false`.
 
 [1]: https://developers.cloudcraft.co/

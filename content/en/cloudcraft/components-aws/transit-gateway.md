@@ -1,24 +1,29 @@
 ---
-title: "Component: Transit gateway"
+title: "Transit Gateway Component"
 kind: guide
 ---
+## Overview
 
-{{< img src="cloudcraft/components-aws/transit-gateway/component-transit-gateway-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Transit gateway' AWS component." responsive="true" style="width:100%;">}}
+Use the Transit Gateway component to represent transit gateway attachments from your Amazon Web Services architecture.
 
-The **Transit gateway** component is used to represent transit gateway attachments from your Amazon Web Services architecture with Cloudcraft.
+{{< img src="cloudcraft/components-aws/transit-gateway/component-transit-gateway-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Transit gateway' AWS component." responsive="true" style="width:60%;">}}
 
 ## Toolbar
 
-The toolbar is displayed when selecting a component. It allows you to customize parts of your component and its visual to your liking.
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**. Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both 2D and 3D view, or different colors for each.
-- **Connections**. Number of attachments connected to the transit gateway.
-- **Data processed**. Total volume of data processed per month in gigabytes.
-- **Rotate**. Rotate the component and change its direction.
+- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- **Connections**: The number of attachments connected to the transit gateway.
+- **Data processed**: The total volume of data processed per month, in gigabytes.
+- **Rotate**: Rotate the component and change its direction.
 
 ## API
 
-In [the Cloudcraft API][1], the transit gateway component is represented in JSON.
+Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
+
+### Schema
+
+The following is an example JSON of a Transit Gateway component:
 
 ```json
 {
@@ -42,20 +47,20 @@ In [the Cloudcraft API][1], the transit gateway component is represented in JSON
 }
 ```
 
-- **type: transitgateway**. The type of component.
-- **id: string**. A unique identifier for the component in the `uuid` format.
-- **region: string**. The AWS region this gateway is deployed in. With the exception of `cn-` regions, all global regions are supported.
-- **mapPos: [number, number]**. The position of the component in the blueprint, expressed as a x,y coordinate pair.
-- **connections: number**. Number of attachments connected to the transit gateway.
-- **dataGb: number**. Volume of data processed per month by the gateway, in gigabytes.
-- **color: object**. The fill color for the component body.
-  - **isometric: string**. Fill color for the component in 3D view. Must be an hexadecimal color.
-  - **2d: string**. Fill color for the component in 2D view. Must be an hexadecimal color.
-- **accentColor: object**. The accent color used to display the component logo on the block.
-  - **isometric: string**. Accent color for the component in 3D view. Must be an hexadecimal color.
-  - **2d: string**. Accent color for the component in 2D view. Must be an hexadecimal color.
-- **direction: string**. The rotation or direction of the component. Accepts `down` or `right` as value, with `down` as the default.
-- **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
-- **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
+- **type: transitgateway**: The type of component.
+- **id: string**: A unique identifier for the component in the `uuid` format.
+- **region: string**: The AWS region this gateway is deployed in. All global regions are supported except `cn-` regions.
+- **mapPos: [number, number]**: The position of the component in the blueprint, expressed as an x- and y-coordinate pair.
+- **connections: number**: The number of attachments connected to the transit gateway.
+- **dataGb: number**: The volume of data processed per month by the gateway, in gigabytes.
+- **color: object**: The fill color for the component body.
+  - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The fill color for the component in the 2D view. Must be a hexadecimal color.
+- **accentColor: object**: The accent color used to display the component logo on the block.
+  - **isometric: string**: The accent color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The accent color for the component in the 2D view. Must be a hexadecimal color.
+- **direction: string**: The rotation or direction of the component. Accepts `down` or `right`. Default is `down`.
+- **link: uri**: Link the component to another diagram using the `blueprint://ID` format or to an external website using the `https://LINK` format.
+- **locked: boolean**: If `true`, changes made to the component using the application are disabled until unlocked.
 
 [1]: https://developers.cloudcraft.co/

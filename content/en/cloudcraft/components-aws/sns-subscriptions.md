@@ -4,7 +4,7 @@ kind: documentation
 ---
 ## Overview
 
-Use the SNS subscription component to visualize SNS subscriptions from your Amazon Web Services architecture.
+Use the SNS Subscription component to visualize SNS subscriptions from your Amazon Web Services architecture.
 
 {{< img src="cloudcraft/components-aws/sns-subscriptions/component-sns-subscriptions-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing interconnected AWS components." responsive="true" style="width:60%;">}}
 
@@ -22,7 +22,7 @@ Use the [Cloudcraft API][1] to programmatically access and render your architect
 
 ### Schema
 
-The following is an example JSON object of a <component_name> component:
+The following is an example JSON object of a SNS subscription component:
 
 ```
 {

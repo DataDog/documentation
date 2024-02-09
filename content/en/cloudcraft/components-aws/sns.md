@@ -1,25 +1,30 @@
 ---
-title: "Component: SNS (Deprecated)"
-kind: guide
+title: "SNS Component (Deprecated)"
+kind: documentation
 ---
+## Overview
 
-{{< img src="cloudcraft/components-aws/sns/component-sns-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'SNS' AWS component." responsive="true" style="width:100%;">}}
+Use the SNS component to represent notification services from your Amazon Web Services architecture.
 
-The **SNS** component is used to represent notification services from your Amazon Web Services architecture with Cloudcraft.
+{{< img src="cloudcraft/components-aws/sns/component-sns-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'SNS' AWS component." responsive="true" style="width:60%;">}}
 
 ## Toolbar
 
-The toolbar is displayed when selecting a component. It allows you to customize parts of your component and its visual to your liking.
+Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**. Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both 2D and 3D view, or different colors for each.
-- **Rotate item**. Rotate the component and change its direction.
-- **Requests/month (K)**. Enter the number of requests sent per month, in the thousands.
-- **Notifications/month (K)**. Enter the number of notifications sent per month, in the thousands.
-- **Notification type**. Select the type of notification for the SNS component.
+- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- **Rotate item**: Rotate the component and change its direction.
+- **Requests/month (K)**: Enter the number of requests sent per month, in thousands.
+- **Notifications/month (K)**: Enter the number of notifications sent per month, in thousands.
+- **Notification type**: Select the type of notification for the SNS component.
 
 ## API
 
-In [the Cloudcraft API][1], the SNS service is represented in JSON.
+Use the [Cloudcraft API][1] to programmatically access and render your architecture diagrams as JSON objects.
+
+### Schema
+
+The following is an example JSON of a SNS component:
 
 ```json
 {
@@ -44,24 +49,24 @@ In [the Cloudcraft API][1], the SNS service is represented in JSON.
 }
 ```
 
-- **type: sns**. The type of component.
-- **id: string**. A unique identifier for the component in the `uuid` format.
-- **region: string**. The AWS region the SNS instance is deployed in. Except for `cn-` regions, all global regions are supported.
-- **mapPos: [number, number]**. The position of the component in the blueprint, expressed as a x,y coordinate pair.
-- **direction: string**. The rotation or direction of the component. Accepted values are `down`, `up`, `right`, or `left`. Defaults to `down`.
-- **requests: number**. The number of requests sent per month, in the thousands. Defaults to `1`.
-- **notifications: number**. The number of notifications sent per month, in the thousands. Defaults to `1`.
-- **notificationType: string**. The type of notification used by SNS. See below for more information.
-- **color: object**. The fill color for the component body.
-  - **isometric: string**. Fill color for the component in 3D view. Must be a hexadecimal color.
-  - **2d: string**. Fill color for the component in 2D view. Must be a hexadecimal color.
-- **accentColor: object**. The accent color used to display the component logo on the block.
-  - **isometric: string**. Accent color for the component in 3D view. Must be a hexadecimal color.
-  - **2d: string**. Accent color for the component in 2D view. Must be a hexadecimal color.
-- **link: uri**. Link component to another diagram in the `blueprint://ID` format or to external website in the `https://LINK` format.
-- **locked: boolean**. If true, changes to the component through the application are disabled until unlocked.
+- **type: sns**: The type of component.
+- **id: string**: A unique identifier for the component in the `uuid` format.
+- **region: string**: The AWS region the SNS instance is deployed in. All global regions are supported except `cn-` regions.
+- **mapPos: [number, number]**: The position of the component in the blueprint, expressed as an x- and y-coordinate pair.
+- **direction: string**: The rotation or direction of the component. Accepted values are `down`, `up`, `right`, or `left`. Defaults to `down`.
+- **requests: number**: The number of requests sent per month, in thousands. Defaults to `1`.
+- **notifications: number**: The number of notifications sent per month, in thousands. Defaults to `1`.
+- **notificationType: string**: The type of notification used by SNS. See [Accepted values for `notificationType`](#accepted-values-for-notificationtype) for more information.
+- **color: object**: The fill color for the component body.
+  - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The fill color for the component in the 2D view. Must be a hexadecimal color.
+- **accentColor: object**: The accent color used to display the component logo on the block.
+  - **isometric: string**: The accent color for the component in the 3D view. Must be a hexadecimal color.
+  - **2d: string**: The accent color for the component in the 2D view. Must be a hexadecimal color.
+- **link: uri**: Link the component to another diagram using the `blueprint://ID` format or to an external website using the `https://LINK` format.
+- **locked: boolean**: If `true`, changes made to the component using the application are disabled until unlocked.
 
-## Accepted values for notificationType
+## Accepted values for `notificationType`
 
 The `notificationType` key accepts the following values:
 

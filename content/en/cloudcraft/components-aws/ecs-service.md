@@ -4,8 +4,7 @@ kind: documentation
 ---
 ## Overview
 
-You can use the **** component to represent and visualize Amazon ECS services from your Amazon Web Services architecture with Cloudcraft.
-Use the ECS service component to visualize Amazon ECS services from your Amazon Web Services architecture.
+Use the ECS Service component to visualize Amazon ECS services from your Amazon Web Services architecture.
 
 {{< img src="cloudcraft/components-aws/ecs-service/component-ecs-service-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing interconnected AWS components." responsive="true" style="width:60%;">}}
 
@@ -24,7 +23,7 @@ Use the [Cloudcraft API][1] to programmatically access and render your architect
 
 ### Schema
 
-The following is an example JSON of a ECS service component:
+The following is an example JSON of a ECS Service component:
 
 ```json
 {

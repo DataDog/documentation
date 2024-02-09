@@ -4,7 +4,7 @@ kind: documentation
 ---
 ## Overview
 
-Use the load balancer component to represent application and network load balancers from your Amazon Web Services architecture.
+Use the Load Balancer component to represent application and network load balancers from your Amazon Web Services architecture.
 
 {{< img src="cloudcraft/components-aws/load-balancer/component-load-balancer-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Load balancer' AWS component." responsive="true" style="width:60%;">}}
 
@@ -23,7 +23,7 @@ Use the [Cloudcraft API][1] to programmatically access and render your architect
 
 ### Schema
 
-The following is an example JSON of a lambda component:
+The following is an example JSON of a Load Balancer component:
 
 ```json
 {

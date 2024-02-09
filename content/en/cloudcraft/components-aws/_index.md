@@ -12,7 +12,7 @@ kind: guide
     {{< nextlink href="cloudcraft/components-aws/auto-scaling-group">}}Auto scaling{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/ec2">}}EC2{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/lambda">}}Lambda{{< /nextlink >}}
-    {{< nextlink href="cloudcraft/components-aws/availability-zone">}}Zone{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-aws/availability-zone">}}Availability Zone{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Containers:" >}}

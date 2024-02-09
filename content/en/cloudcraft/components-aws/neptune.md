@@ -4,8 +4,6 @@ kind: documentation
 ---
 ## Overview
 
-You can use the **Neptune** component to represent and visualize serverless graph databases from your Amazon Web Services architecture with Cloudcraft.
-
 Use the Neptune component to visualize serverless graph databases from your Amazon Web Services architecture.
 
 {{< img src="cloudcraft/components-aws/neptune/component-neptune-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing interconnected AWS components." responsive="true" style="width:60%;">}}
@@ -71,7 +69,7 @@ The following is an example JSON object of a Neptune component:
 - **instanceSize: string**: The size of the Neptune instance. Not applicable if `role` is `reader`. Defaults to `large`.
 - **storage: number**: The total amount of storage available for the database in gigabytes. Not applicable if `role` is `reader`. Defaults to `10`.
 - **snapshots: number**: The total amount of storage provisioned for snapshots in gigabytes. Not applicable if `role` is `reader`. Defaults to `0`.
-- **iops: number**: The monthly I/O limit for the instance in millions. Not applicable if `role` is `reader`. Defaults to `0`.
+- **iops: number**: The monthly I/O limit for the instance, in millions. Not applicable if `role` is `reader`. Defaults to `0`.
 - **instances: number**: The number of Neptune instances. Only applicable if `role` is `serverless. Defaults to `1`.
 - **minNCUs: number**: The minimum amount of NCUs available for the database. Only applicable if `role` is `serverless`. Defaults to `1`.
 - **maxNCUs: number**: The maximum amount of NCUs available for the database. Only applicable if `role` is `serverless`. Defaults to `2.5`.

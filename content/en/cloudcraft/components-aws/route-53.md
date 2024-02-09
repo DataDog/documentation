@@ -20,7 +20,7 @@ Use the [Cloudcraft API][1] to programmatically access and render your architect
 
 ### Schema
 
-The following is an example JSON of a <component_name> component:
+The following is an example JSON of a Route 53 component:
 
 ```json
 {

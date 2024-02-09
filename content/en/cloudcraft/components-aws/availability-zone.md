@@ -22,7 +22,7 @@ Use the [Cloudcraft API][1] to programmatically access and render your architect
 
 ### Schema
 
-The following is an example JSON object of an availability zone component:
+The following is an example JSON object of an Availability Zone component:
 
 ```json
 {

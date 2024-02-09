@@ -15,7 +15,7 @@ Use the toolbar to configure and customize the component. The following options 
 - **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
 - **Architecture**: The type of computer processor used by the instance.
 - **Memory**: The amount of memory allocated for the instance.
-- **Requests per month**: The number of requests per month in millions.
+- **Requests per month**: The number of requests per month, in millions.
 - **Seconds per request**: The duration of each request in seconds.
 
 ## API
@@ -55,7 +55,7 @@ The following is an example JSON of a Lambda component:
 - **mapPos: [number, number]**: The position of the component in the blueprint, expressed as an x- and y-coordinate pair.
 - **architecture: string**: The type of computer processor used by the instance. Accepts one of the following values: `x86_64` or `arm64`.
 - **memory: number**: The amount of memory allocated for the instance in megabytes.
-- **mRequests: number**: Number of requests per month in millions.
+- **mRequests: number**: Number of requests per month, in millions.
 - **computeDuration: number**: The duration of each request in seconds.
 - **color: object**: The fill color for the component body.
   - **isometric: string**: The fill color for the component in the 3D view. Must be a hexadecimal color.

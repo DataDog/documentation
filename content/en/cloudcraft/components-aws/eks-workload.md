@@ -6,7 +6,7 @@ kind: documentation
 
 <div class="alert alert-info">Scanning Amazon EKS components requires <a href="https://docs.datadoghq.com/cloudcraft/getting-started/connect-amazon-eks-cluster-with-cloudcraft/">authorizing our IAM role for view-only access</a>.</div>
 
-Use the EKS workloads component to visualize Amazon EKS workloads from your Amazon Web Services architecture.
+Use the EKS Workload component to visualize Amazon EKS workloads from your Amazon Web Services architecture.
 
 {{< img src="cloudcraft/components-aws/eks-workload/component-eks-workload-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing interconnected AWS components." responsive="true" style="width:60%;">}}
 
@@ -24,7 +24,7 @@ Use the [Cloudcraft API][1] to programmatically access and render your architect
 
 ### Schema
 
-The following is an example JSON object of a EKS workload component:
+The following is an example JSON object of a EKS Workload component:
 
 ```json
 {

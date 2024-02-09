@@ -4,7 +4,7 @@ kind: documentation
 ---
 ## Overview
 
-Use the customer gateway component to represent the customer gateway device from your Amazon Web Services architecture.
+Use the Customer Gateway component to represent the customer gateway device from your Amazon Web Services architecture.
 
 {{< img src="cloudcraft/components-aws/customer-gateway/component-customer-gateway-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Customer gateway' AWS component." responsive="true" style="width:60%;">}}
 
@@ -22,7 +22,7 @@ Use the [Cloudcraft API][1] to programmatically access and render your architect
 
 ### Schema
 
-The following is an example JSON object of a customer gateway component:
+The following is an example JSON object of a Customer Gateway component:
 
 ```json
 {

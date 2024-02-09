@@ -4,7 +4,7 @@ kind: documentation
 ---
 ## Overview
 
-Use the internet gateway component to represent gateways to the internet from your Amazon Web Services architecture.
+Use the Internet Gateway component to represent gateways to the internet from your Amazon Web Services architecture.
 
 {{< img src="cloudcraft/components-aws/internet-gateway/component-internet-gateway-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Internet gateway' AWS component." responsive="true" style="width:60%;">}}
 
@@ -21,7 +21,7 @@ Use the [Cloudcraft API][1] to programmatically access and render your architect
 
 ### Schema
 
-The following is an example JSON of an internet gateway component:
+The following is an example JSON of an Internet Gateway component:
 
 ```json
 {

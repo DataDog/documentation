@@ -4,7 +4,7 @@ kind: documentation
 ---
 ## Overview
 
-Use the Auto Scaling group component to represent Auto Scaling groups from your Amazon Web Services architecture.
+Use the Auto Scaling Group component to represent Auto Scaling groups from your Amazon Web Services architecture.
 
 {{< img src="cloudcraft/components-aws/auto-scaling-group/component-auto-scaling-group-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Auto scaling group' AWS component." responsive="true" style="width:60%;">}}
 
@@ -21,7 +21,7 @@ Use the [Cloudcraft API][1] to programmatically access and render your architect
 
 ### Schema
 
-The following is an example JSON object of an auto scaling group component:
+The following is an example JSON object of an Auto Scaling Group component:
 
 ```json
 {

@@ -4,7 +4,7 @@ kind: documentation
 ---
 ## Overview
 
-Use the Elastic Block Store (EBS) component to represent EBS volumes from your Amazon Web Services architecture.
+Use the EBS component to represent EBS volumes from your Amazon Web Services architecture.
 
 {{< img src="cloudcraft/components-aws/ebs/component-ebs-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'EBS' AWS component." responsive="true" style="width:60%;">}}
 

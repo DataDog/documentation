@@ -4,7 +4,7 @@ kind: documentation
 ---
 ## Overview
 
-Use the Kinesis stream component to represent real-time data streams from your Amazon Web Services architecture.
+Use the Kinesis Stream component to represent real-time data streams from your Amazon Web Services architecture.
 
 {{< img src="cloudcraft/components-aws/kinesis-stream/component-kinesis-stream-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Kinesis Stream' AWS component." responsive="true" style="width:60%;">}}
 
@@ -24,7 +24,7 @@ Use the [Cloudcraft API][1] to programmatically access and render your architect
 
 ### Schema
 
-The following is an example JSON of a <component_name> component:
+The following is an example JSON of a Kinesis Stream component:
 
 ```json
 {

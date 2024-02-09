@@ -4,7 +4,7 @@ kind: documentation
 ---
 ## Overview
 
-Use the ECS cluster component to visualize Amazon ECS clusters from your Amazon Web Services architecture.
+Use the ECS Cluster component to visualize Amazon ECS clusters from your Amazon Web Services architecture.
 
 {{< img src="cloudcraft/components-aws/ecs-cluster/component-ecs-cluster-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing interconnected AWS components." responsive="true" style="width:60%;">}}
 
