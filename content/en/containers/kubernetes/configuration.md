@@ -638,9 +638,23 @@ clusterAgent:
 
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
+Add additional environment variables to the DaemonSet or Deployment (for Datadog Cluster Agent).
+```yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: datadog
+spec:
+  template:
+    spec:
+      containers:
+        - name: agent
+          ...
+          env:
+            - name: <ENV_VAR_NAME>
+              value: <ENV_VAR_VALUE>
 ```
 
-```
 {{% /tab %}}
 {{< /tabs >}}
 
