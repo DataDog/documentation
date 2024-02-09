@@ -21,11 +21,9 @@ def compile_filename(filename):
         filename = filename.replace('content/en/', '').replace('terms/', '#').replace('.md', '')
         # Replace underscores in anchors with hyphens       
         filename = filename.split('#')[0] + '#' + filename.split('#')[-1].replace('_', '-')
-        print(filename)
         return filename
     elif pattern1.match(filename):
         filename = filename.replace('content/en/', '').replace('_index', '').replace('.md', '')
-        print(filename)
         return filename
 
 def sort_files(file_string):
