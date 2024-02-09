@@ -36,7 +36,7 @@ Follow this guide to:
 
 1. [Instrument the application](#instrumenting-the-application) with the OpenTelemetry API.
 2. [Configure the application](#configuring-the-application) to send observability data to Datadog.
-3. [Correlate observability data](#correlate-observability-data) with unified service tagging.
+3. [Correlate observability data](#correlating-observability-data) with unified service tagging.
 4. [Run the application](#running-the-application) to generate observability data.
 5. [Explore observability data](#exploring-observability-data-in-datadog) in the Datadog UI.
 

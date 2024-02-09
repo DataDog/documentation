@@ -25,8 +25,8 @@ title: 자체 호스팅 SQL Server에 데이터베이스 모니터링 설정
 
 데이터베이스에서 데이터베이스 모니터링을 활성화하려면 다음 단계를 따르세요.
 
-1. [데이터베이스에 에이전트 액세스 허가](#grant-the-agent-access)
-2. [에이전트 설치](#install-the-agent)
+1. [에이전트 액세스 권한 부여](#grant-the-agent-access)
+1. [에이전트 설치](#install-the-agent)
 
 ## 시작 전 참고 사항
 
@@ -50,6 +50,10 @@ CREATE USER datadog FOR LOGIN datadog;
 GRANT CONNECT ANY DATABASE to datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
+-- 로그 전송 모니터링(에이전트 v7.50+에서 사용 가능) 기능을 활용하려면 다음 세 줄의 주석 처리를 해제하세요.
+-- USE msdb;
+-- CREATE USER datadog FOR LOGIN datadog;
+-- GRANT SELECT to datadog;
 ```
 {{% /tab %}}
 {{% tab "SQL Server 2012" %}}
@@ -59,6 +63,10 @@ CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
 CREATE USER datadog FOR LOGIN datadog;
 GRANT VIEW SERVER STATE to datadog;
 GRANT VIEW ANY DEFINITION to datadog;
+-- 로그 전송 모니터링(에이전트 v7.50+에서 사용 가능) 기능을 활용하려면 다음 세 줄의 주석 처리를 해제하세요.
+-- USE msdb;
+-- CREATE USER datadog FOR LOGIN datadog;
+-- GRANT SELECT to datadog;
 ```
 
 각 애플리케이션 추가 데이터베이스에 `datadog` 사용자를 생성합니다.

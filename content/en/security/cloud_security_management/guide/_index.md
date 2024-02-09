@@ -10,8 +10,6 @@ aliases:
 
 {{< whatsnext desc="Cloud Security Management (CSM) Guides" >}}
     {{< nextlink href="/getting_started/cloud_security_management" >}}First Steps for Cloud Security Management{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_security_management/workflows" >}}Automate Security Workflows with Workflow Automation{{< /nextlink >}}
-    {{< nextlink href="/security/cloud_security_management/guide/jira" >}}Create Jira Issues for Cloud Security Management Issues{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="CSM Threats Guides" >}}
