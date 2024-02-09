@@ -335,7 +335,7 @@ In addition, clusters, and nodes have the following metrics available to them:
 - `mem_usage_pct_alloc_avg15`
 - `mem_requests_pct_alloc_avg15`
 
-#### Metric Units
+#### Metric units
 
 CPU metrics are stored as a number of cores.
 
