@@ -1,5 +1,5 @@
 ---
-title: Create a minimal IAM policy to use with Cloudcraft
+title: Create a custom IAM policy to use with Cloudcraft
 kind: guide
 ---
 
