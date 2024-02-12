@@ -9,12 +9,18 @@ import (
 )
 
 func main() {
+	// Get the API key from the environment.
 	key, ok := os.LookupEnv("CLOUDCRAFT_API_KEY")
 	if !ok {
 		log.Fatal("missing env var: CLOUDCRAFT_API_KEY")
 	}
 
-	// Create new Config to be initialize a Client.
+	// Check if the command line arguments are correct.
+	if len(os.Args) != 5 {
+		log.Fatalf("usage: %s <account-name> <app-id> <dir-id> <sub-id>", os.Args[0])
+	}
+
+	// Create new Config to initialize a Client.
 	cfg := cloudcraft.NewConfig(key)
 
 	// Create a new Client instance with the given Config.
@@ -23,17 +29,16 @@ func main() {
 		log.Fatal(err)
 	}
 
-	account, _, err := client.Azure.Update(
+	// Create a new Azure Account with the details coming from command line
+	// arguments.
+	_, err = client.Azure.Update(
 		context.Background(),
 		&cloudcraft.AzureAccount{
-			ID:             "4349ccdb-a2fd-4a89-a07b-48e3e330670b",
-			Name:           "Azure Update",
-			ApplicationID:  "3a64bc23-5dd6-4624-8ce8-fe3e61b41579",
-			DirectoryID:    "5d7ef62e-c8bb-41fc-9a55-9a2c30701027",
-			SubscriptionID: "db0297eb-ad6c-4e63-86b0-c1acb6a16570",
-			ClientSecret:   "",
-		}
-	)
+			Name:           os.Args[1],
+			ApplicationID:  os.Args[2],
+			DirectoryID:    os.Args[3],
+			SubscriptionID: os.Args[4],
+		})
 	if err != nil {
 		log.Fatal(err)
 	}

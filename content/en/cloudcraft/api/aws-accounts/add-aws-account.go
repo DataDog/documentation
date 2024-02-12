@@ -9,12 +9,18 @@ import (
 )
 
 func main() {
+	// Get the API key from the environment.
 	key, ok := os.LookupEnv("CLOUDCRAFT_API_KEY")
 	if !ok {
 		log.Fatal("missing env var: CLOUDCRAFT_API_KEY")
 	}
 
-	// Create new Config to be initialize a Client.
+	// Check if the command line arguments are correct.
+	if len(os.Args) != 3 {
+		log.Fatalf("usage: %s <account-name> <role-arn>", os.Args[0])
+	}
+
+	// Create new Config to initialize a Client.
 	cfg := cloudcraft.NewConfig(key)
 
 	// Create a new Client instance with the given Config.
@@ -23,15 +29,18 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// List all blueprints in an account.
+	// Create a new AWS Account with the name and role ARN coming from command
+	// line arguments.
 	account, _, err := client.AWS.Create(
 		context.Background(),
 		&cloudcraft.AWSAccount{
-			Name:       "New AWS",
-			RoleARN:    "",
-			ExternalID: "8a8a745a-d01f-4541-8ab0-e3558e7c6b1c",
-	})
+			Name:    os.Args[1],
+			RoleARN: os.Args[2],
+		})
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	// Print the account ID.
+	log.Println(account.ID)
 }
