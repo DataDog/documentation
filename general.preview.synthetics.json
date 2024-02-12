@@ -53,12 +53,6 @@
       "config": {
         "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/code_analysis/static_analysis_rules/"
       }
-    },
-    {
-      "id": "ndq-ww7-u39",
-      "config": {
-        "startUrl": "https://docs-staging.datadoghq.com/{{CI_COMMIT_REF_NAME}}/static_analysis/rules/"
-      }
     }
 
   ]
