@@ -53,6 +53,7 @@ Static Analysis currently supports scanning the following languages and technolo
 {{< whatsnext desc="With Static Analysis, you can integrate feedback on code reviews for various languages in any CI platform provider of your choice. See the documentation for information about the following integrations:">}}
     {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
     {{< nextlink href="code_analysis/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="code_analysis/static_analysis/other_providers" >}}Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Source code management
