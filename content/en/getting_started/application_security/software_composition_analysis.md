@@ -1,10 +1,15 @@
 ---
-title: Getting Started with Application Vulnerability Management
+title: Getting Started with Software Composition Analysis
 kind: documentation
+aliases:
+- /getting_started/application_security/vulnerability_management
 further_reading:
-- link: "/security/application_security/terms"
+- link: "/code_analysis/software_composition_analysis/"
   tag: "Documentation"
-  text: "Application Security terms and concepts"
+  text: "Read more about Software Composition Analysis in source code"
+- link: "/security/application_security/software_composition_analysis"
+  tag: "Documentation"
+  text: "Read more about Software Composition Analysis in ASM libraries"
 - link: "/security/application_security/how-appsec-works"
   tag: "Documentation"
   text: "How Application Security Management works"
@@ -19,22 +24,36 @@ further_reading:
 
 ## Overview
 
-Datadog [Application Vulnerability Management][1] (AVM) continuously monitors your production environment for vulnerabilities in the open source libraries your applications rely on. You can identify and prioritize the remediation of the highest vulnerabilities by business impact.
+Datadog [Software Composition Analysis][1] (SCA) continuously monitors your production environment for vulnerabilities in the open source libraries your applications rely on. You can identify and prioritize the remediation of the highest vulnerabilities by business impact.
 
-This guide walks you through best practices for getting your team up and running with AVM.
+This guide walks you through best practices for getting your team up and running with SCA.
 
 ## Phase 1: Enable
 1. Check [ASM Compatibility][2] to see if your service is supported.
-2. Enable Application Vulnerability Management on your services. 
+2. Enable Software Composition Analysis on your services. 
    - Navigate to [**Security -> Configuration -> Application Security -> Quick Start Guide**][4].
    - Expand **Enable Vulnerability Detection**.
    - Click **Start Activation**.
    - Choose services to secure with ASM.
+
+   OR
+   
+   - Navigate to [**Security -> Configuration -> Application Security -> Setup**][9].
+   - Click **Get Started** to enable Software Composition Analysis for static analysis in source code.
+   - Select and configure your CI/CD provider.
+   - Click **Get Started** to enable Software Composition Analysis for runtime analysis in running services.
+   - Choose services to secure with ASM.
+   - Click **Get Started** to enable Software Composition Analysis for code security.
+   - Select your programming language, and restart your services.
+
+   {{< img src="getting_started/appsec/asm_sca_setup.png" alt="Software Composition Analysis setup page." style="width:100%;" >}}
+
 ## Phase 2: Identify
 1. **Identify Vulnerabilities**: Navigate to [**Security -> Application Security -> Vulnerabilities**][5].  
-2. Sort by `Status`, `Vulnerability Source`, and `Severity`:
+   - Sort by `Status`, `Vulnerability Source`, and `Severity`.
+   - To switch to the code repository commit point of view, click on the **static** button. To switch to the real-time point of view to the applications already running, click on the **runtime** button.
 
-   {{< img src="security/application_security/vulnerability_management/avm_vuln_severity_status.png" alt="Application Vulnerability Management explorer page." style="width:100%;" >}}
+   {{< img src="/security/application_security/software_composition_analysis/asm_sca_vulnerabilities_2.png" alt="Software Composition Analysis (SCA) explorer page showing vulnerabilities sorted by static or runtime." style="width:100%;" >}}
 
    Each vulnerability has its own status to help prioritize and manage findings:
 
@@ -57,7 +76,7 @@ This guide walks you through best practices for getting your team up and running
 
       {{< img src="getting_started/appsec/appsec-vuln-explorer_3.png" alt="Application Vulnerability Management detailed view of the vulnerability." style="width:100%;" >}}
 
-      **Note**: The severity of a vulnerability within AVM is modified from the base score to take into account the presence of attacks and the business sensitivity of the environment where the vulnerability is detected. For example, if no production environment is detected, the severity is reduced.</br> </br>
+      **Note**: The severity of a vulnerability within SCA is modified from the base score to take into account the presence of attacks and the business sensitivity of the environment where the vulnerability is detected. For example, if no production environment is detected, the severity is reduced.</br> </br>
 
       The adjusted vulnerability score includes the full context of each service:
         - The original vulnerability severity.
@@ -80,7 +99,7 @@ This guide walks you through best practices for getting your team up and running
 
     - Change the status of a vulnerability.
     - Assign it to a team member for further review.
-    - Create a Jira issue.
+    - Create a Jira issue. To create Jira issues for SCA vulnerabilities, you must configure the Jira integration, and have the `manage_integrations` permission. For detailed instructions, see the [Jira integration][11] documentation, as well as the [Role Based Access Control][10] documentation.
     - Review recommended remediation steps.
     - View links and information sources to understand the context behind each vulnerability.
 
@@ -101,3 +120,6 @@ This guide walks you through best practices for getting your team up and running
 [6]: https://app.datadoghq.com/services
 [7]: /tracing/service_catalog/#security-view
 [8]: /tracing/service_catalog/#investigate-a-service
+[9]: https://app.datadoghq.com/security/configuration/asm/setup
+[10]: /account_management/rbac/permissions/#integrations
+[11]: /integrations/jira/
