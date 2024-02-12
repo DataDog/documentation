@@ -33,6 +33,12 @@
                 {{- highlight .Content "golang" -}}
             {{ end }}
           {{ end }}
+        {{- else if eq $lang "python" -}}
+          {{ with $page.Resources.Match (print $summary ".py") }}
+            {{ range . }}
+                {{- highlight .Content "python" -}}
+            {{ end }}
+          {{ end }}
         {{- else -}}
           {{- $partialPath := (printf "api/openapi-code-%s.html" ($lang | lower)) -}}
           {{- partial $partialPath (dict "payload" ($payload | safeHTML) "path" $path "method" $pathMethod ) -}}
