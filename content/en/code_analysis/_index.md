@@ -13,7 +13,7 @@ further_reading:
 - link: "/code_analysis/static_analysis"
   tag: "Documentation"
   text: "Learn about Static Analysis"
-- link: "/code_analysis/software_composition_analysis"
+- link: "/security/application_security/software_composition_analysis"
   tag: "Documentation"
   text: "Learn about Software Composition Analysis"
 ---
@@ -91,6 +91,8 @@ For more information about Static Analysis rulesets, see [Static Analysis Rules]
     {{< nextlink href="code_analysis/static_analysis/github_actions" >}}Static Analysis and GitHub Actions{{< /nextlink >}}
     {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}Static Analysis and CircleCI Orbs{{< /nextlink >}}
     {{< nextlink href="code_analysis/static_analysis/setup/?tab=other#configure-your-cicd-provider" >}}Static Analysis and Other CI Providers{{< /nextlink >}}
+    {{< nextlink href="code_analysis/software_composition_analysis/github_actions" >}}Software Composition Analysis and GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="code_analysis/software_composition_analysis/setup/?tab=other#configure-your-cicd-provider" >}}Software Composition Analysis and Other CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
 
 </br>
@@ -112,3 +114,4 @@ You must configure a GitHub App using the [GitHub integration tile][7] and set u
 [7]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account
 [8]: /integrations/guide/source-code-integration
 [9]: https://app.datadoghq.com/ci/code-analysis
+[9]: /security/application_security/software_composition_analysis
