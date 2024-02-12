@@ -3061,39 +3061,64 @@ main:
     pre: ci
     parent: software_delivery_heading
     identifier: dora_metrics
-    weight: 50000
-  - name: Static Analysis
-    url: static_analysis/
+    weight: 190000
+  - name: Code Analysis
+    url: code_analysis/
     pre: ci
     parent: software_delivery_heading
-    identifier: static_analysis
-    weight: 60000
-  - name: Rules
-    url: static_analysis/rules
-    parent: static_analysis
-    identifier: static_analysis_rules
+    identifier: code_analysis
+    weight: 200000
+  - name: Static Analysis
+    url: code_analysis/static_analysis
+    parent: code_analysis
+    identifier: code_analysis_static_analysis
     weight: 1
+  - name: Setup
+    url: code_analysis/static_analysis/setup
+    parent: code_analysis_static_analysis
+    identifier: code_analysis_static_analysis_setup
+    weight: 101
   - name: CircleCI Orbs
-    url: static_analysis/circleci_orbs
-    parent: static_analysis
-    identifier: static_analysis_circleci_orbs
-    weight: 2
+    url: code_analysis/static_analysis/circleci_orbs
+    parent: code_analysis_static_analysis
+    identifier: code_analysis_static_analysis_circleci_orbs
+    weight: 102
   - name: GitHub Actions
-    url: static_analysis/github_actions
-    parent: static_analysis
-    identifier: static_analysis_github_actions
+    url: code_analysis/static_analysis/github_actions
+    parent: code_analysis_static_analysis
+    identifier: code_analysis_static_analysis_github_actions
+    weight: 103
+  - name: Software Composition Analysis
+    url: code_analysis/software_composition_analysis
+    parent: code_analysis
+    identifier: code_analysis_software_composition_analysis
+    weight: 2
+  - name: Setup
+    url: code_analysis/software_composition_analysis/setup
+    parent: code_analysis_software_composition_analysis
+    identifier: code_analysis_software_composition_analysis_setup
+    weight: 201
+  - name: GitHub Actions
+    url: code_analysis/software_composition_analysis/github_actions
+    parent: code_analysis_software_composition_analysis
+    identifier: code_analysis_software_composition_analysis_github_actions
+    weight: 202
+  - name: Static Analysis Rules
+    url: code_analysis/static_analysis_rules
+    parent: code_analysis
+    identifier: code_analysis_static_analysis_rules
     weight: 3
   - name: GitHub Pull Requests
-    url: static_analysis/github_pull_requests
-    parent: static_analysis
-    identifier: static_analysis_github_prs
+    url: code_analysis/github_pull_requests
+    parent: code_analysis
+    identifier: code_analysis_github_prs
     weight: 4
   - name: Quality Gates
     url: quality_gates/
     pre: ci
     parent: software_delivery_heading
     identifier: quality_gates
-    weight: 70000
+    weight: 210000
   - name: Setup
     url: quality_gates/setup
     parent: quality_gates
