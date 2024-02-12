@@ -45,7 +45,6 @@ Supported test frameworks:
 | `pytest-benchmark` | >= 3.1.0 |
 | `unittest` | >= 3.7 |
 
-
 ## Configuring reporting method
 
 To report test results to Datadog, you need to configure the Datadog Python library:
