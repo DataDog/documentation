@@ -41,6 +41,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-enterprise-azure-environments-with-datadog/
   tag: ブログ
   text: Datadog でエンタープライズ規模の Azure 環境の監視を数分で可能にします
+- link: https://docs.datadoghq.com/integrations/guide/azure-architecture-and-configuration/
+  tag: Documentation
+  text: Azure インテグレーションアーキテクチャと構成
 - link: https://docs.datadoghq.com/integrations/guide/azure-portal/
   tag: Documentation
   text: Azure ポータルの Datadog

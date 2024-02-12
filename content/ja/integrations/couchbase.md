@@ -28,6 +28,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
+- caching
 - data store
 - log collection
 dependencies:
@@ -37,7 +38,7 @@ draft: false
 git_integration_title: couchbase
 integration_id: couchbase
 integration_title: CouchBase
-integration_version: 2.2.0
+integration_version: 3.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -47,16 +48,17 @@ public_title: CouchBase
 short_description: Couchbase のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
+  - Category::キャッシュ
   - Category::データストア
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Couchbase のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
   media: []
@@ -185,7 +187,7 @@ Couchbase チェックは、クラスターのバランスが再調整される�
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/couchbase/images/couchbase_graph.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/monitoring-couchbase-performance-datadog

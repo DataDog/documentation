@@ -38,7 +38,7 @@ datadogRum.init({
     ...
 });
 
-const url = datadogRum.getSessionReplayUrl();
+const url = datadogRum.getSessionReplayLink();
 ```
 
 {{% /tab %}}
@@ -53,7 +53,7 @@ window.DD_RUM.onReady(function() {
         subdomain: ''
         ...
     })
-    const url = DD_RUM.getSessionReplayUrl();
+    const url = DD_RUM.getSessionReplayLink();
 })
 
 ```
@@ -70,7 +70,7 @@ window.DD_RUM &&
         subdomain: ''
         ...
     });
-const url = DD_RUM && DD_RUM.getSessionReplayUrl();
+const url = DD_RUM && DD_RUM.getSessionReplayLink();
 ```
 
 {{% /tab %}}

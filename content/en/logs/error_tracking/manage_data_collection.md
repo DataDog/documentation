@@ -13,8 +13,6 @@ further_reading:
   text: 'Learn about Error Tracking for Backend Services'
 ---
 
-<div class="alert alert-info">Error Tracking Logs is beta.</div>
-
 ## Overview
 
 Error Tracking provides fine-grained control of which errors to ingest, helping you reduce noise and avoid unexpected costs.

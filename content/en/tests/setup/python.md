@@ -201,17 +201,19 @@ Datadog recommends you use up to one process at a time to prevent affecting test
 
 The following is a list of the most important configuration settings that can be used with the tracer, either in code or using environment variables:
 
-`ddtrace.config.service`
+`DD_SERVICE`
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
 **Default**: `pytest`<br/>
 **Example**: `my-python-app`
 
-`ddtrace.config.env`
+`DD_ENV`
 : Name of the environment where tests are being run.<br/>
 **Environment variable**: `DD_ENV`<br/>
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
+
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][8].
 
 The following environment variable can be used to configure the location of the Datadog Agent:
 
@@ -236,3 +238,4 @@ All other [Datadog Tracer configuration][6] options can also be used.
 [5]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
 [6]: /tracing/trace_collection/library_config/python/?tab=containers#configuration
 [7]: /continuous_integration/guides/add_custom_metrics/?tab=python
+[8]: /getting_started/tagging/unified_service_tagging

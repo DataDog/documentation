@@ -38,7 +38,7 @@ Prior to setting up Intelligent Test Runner, set up [Test Visibility for Python]
 
 ## Running tests with the Intelligent Test Runner enabled
 
-The Intelligent Test Runner will be enabled when you run tests with the Datadog integration active. Simply run your tests as normal:
+The Intelligent Test Runner is enabled when you run tests with the Datadog integration active. Run your tests with the following command:
 
 {{< tabs >}}
 
@@ -67,6 +67,8 @@ The Intelligent Test Runner can be disabled locally by setting the `DD_CIVISIBIL
 `DD_CIVISIBILITY_ITR_ENABLED` (Optional)
 : Enable the Intelligent Test Runner coverage and test skipping features<br />
 **Default**: `(true)`
+
+Run the following command to disable the Intelligent Test Runner:
 
 {{< tabs >}}
 
