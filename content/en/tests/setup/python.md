@@ -41,9 +41,11 @@ Supported test frameworks:
 
 | Test Framework | Version |
 |---|---|
-| `pytest` | >= 3.0.0 |
+| `pytest` | >= 3.0.0 <= 7.0.0 (8.0.0 support under way)|
 | `pytest-benchmark` | >= 3.1.0 |
+| `pytest-xdist` | Supported with limitations |
 | `unittest` | >= 3.7 |
+
 
 ## Configuring reporting method
 
@@ -140,6 +142,20 @@ def test_square_value(benchmark):
     result = benchmark(square_value, 5)
     assert result == 25
 ```
+
+### Known limitations
+
+Plugins for `pytest` that alter test execution may cause unexpected behavior.
+
+#### Parallelization
+
+Plugins that introduce paralleization to `pytest` (such as `pytest-xdist` or `pytest-forked`) will create one session events for each parallelized instance, and may create multiple module or suite events if tests from the same package or module execute in different processes.
+
+The overall count of test events (and their correctness) will remain unaffected, but individual session, module, or suite events may have inconsistent results with other events in the same `pytest` run.
+
+#### Test ordering
+
+Plugins that chage the ordering of test execution (such as `pytest-randomly`) may create multiple module or suite events, or may create module or suite events with unexpected durations, or results.
 
 {{% /tab %}}
 
