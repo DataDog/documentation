@@ -77,10 +77,13 @@ In the previous image, notice that the `ModelTraining` operation is taking more 
 
 ## Isolate your own business logic
 
+Endpoint and operation isolation is available in your profiles by default, but you may want to isolate a different piece of logic. For example, if the monolith is sensitive to specific customers, you can add a custom filter to the profiles:
+
 {{< programming-lang-wrapper langs="java,go" >}}
 {{< programming-lang lang="java">}}
 
-Endpoint and operation isolation is available in your profiles by default, but you may want to isolate a different piece of logic. For example, if the monolith is sensitive to specific customers, you can add a custom filter to the profiles:
+
+Set a context value for the customer name like so:
 
 ```java
 try (var scope = Profiling.get().newScope()) {
@@ -88,6 +91,8 @@ try (var scope = Profiling.get().newScope()) {
    <logic goes here>
 }
 ```
+
+Then, open CPU, Exceptions or Wall Time profiles for your service and select the `customer_name` value you're interested in under the `CPU time by` dropdown.
 
 
 {{< /programming-lang >}}
