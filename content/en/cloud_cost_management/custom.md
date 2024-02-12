@@ -56,23 +56,6 @@ To use Custom Costs in Datadog, you must [configure Cloud Cost Management][1] fo
 |`BilledCost`| The amount being charged. |10.00 |NaN | Number-based decimal. |
 |`BillingCurrency` | Currency of billed cost. | USD| EUR | Must be USD. |
 
-#### Optional tags within JSON files
-
-For JSON files only, an additional `Tags` property is required, but its contents are optional.
-
-To tag a JSON line item with tags like `team:web` and `service:ops`, add:
-```
-"Tags": {
-    "team": "web",
-    "service": "ops"
-}
-```
-
-If a line item does _not_ contain additional tags, add:
-```
-"Tags": {}
-```
-
 ### Create a CSV or JSON file with required fields
 
 You can upload multiple CSV and JSON files, in either or both formats. Ensure that you don't upload the same file twice, since the cost will appear as doubled in the product.
@@ -149,8 +132,7 @@ Example of a valid JSON file:
         "ChargePeriodStart": "2023-01-01",
         "ChargePeriodEnd": "2023-12-31",
         "BilledCost": 100.00,
-        "BillingCurrency": "USD",
-        "Tags": {}
+        "BillingCurrency": "USD"
     }
 ]
 ```
@@ -165,8 +147,7 @@ Example of an invalid JSON file:
         "chargeperiodstart": "2023-01-01",
         "chargeperiodend": "2023-12-31",
         "billedcost": 100.00,
-        "billingcurrency": "USD",
-        "tags": {}
+        "billingcurrency": "USD"
     }
 ]
 ```

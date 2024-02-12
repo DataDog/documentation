@@ -760,6 +760,50 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 
 {{< /tabs >}}
 
+
+### Istio Monitoring
+
+<div class="alert alert-info">
+Universal Service Monitoring is available in <strong>beta</strong> to monitor services behind <a href="https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/">Istio mTLS</a> and to capture encrypted HTTPs traffic.
+</div>
+
+Requires Agent version 7.50 or greater.
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+Add the following configuration to the `system-probe.yaml`:
+
+```yaml
+service_monitoring_config:
+  enabled: true
+  tls:
+    istio:
+      enabled: true
+```
+
+{{% /tab %}}
+{{% tab "Environment variable" %}}
+
+```conf
+DD_SERVICE_MONITORING_CONFIG_TLS_ISTIO_ENABLED=true
+```
+{{% /tab %}}
+
+{{% tab "Helm Chart" %}}
+
+```conf
+agents:
+  containers:
+    systemProbe:
+      env:
+        - name: DD_SERVICE_MONITORING_CONFIG_TLS_ISTIO_ENABLED
+          value: "true"
+```
+{{% /tab %}}
+
+{{< /tabs >}}
+
 ## Path exclusion and replacement
 
 Use `http_replace_rules` or `DD_SYSTEM_PROBE_NETWORK_HTTP_REPLACE_RULES` to configure the Agent to drop HTTP endpoints that match a regex, or to convert matching endpoints into a different format.
