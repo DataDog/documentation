@@ -43,7 +43,6 @@ Supported test frameworks:
 |---|---|
 | `pytest` | >= 3.0.0 <= 7.0.0 (8.0.0 support under way)|
 | `pytest-benchmark` | >= 3.1.0 |
-| `pytest-xdist` | Supported with limitations |
 | `unittest` | >= 3.7 |
 
 
