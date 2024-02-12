@@ -74,42 +74,50 @@ The APM `Trace operation` attribute lets you filter and group a flame graph with
 
 In the previous image, notice that the `ModelTraining` operation is taking more CPU time than its primary use in the `GET /train` endpoint, so it must be used elsewhere. Click the operation name to determine where else it is used. In this case, `ModelTraining` is also use by `POST /update_model`.
 
-## Isolate your own business logic (Java)
+
+## Isolate your own business logic
+
+{{< programming-lang-wrapper langs="java,go" >}}
+{{< programming-lang lang="java">}}
 
 Endpoint and operation isolation is available in your profiles by default, but you may want to isolate a different piece of logic. For example, if the monolith is sensitive to specific customers, you can add a custom filter to the profiles:
 
-{{< code-block lang="java" >}}
+```java
 try (var scope = Profiling.get().newScope()) {
    scope.setContextValue("customer_name", <the customer name value>);
    <logic goes here>
 }
-{{< /code-block >}}
+```
 
 
-## Isolate your own business logic (Go)
+{{< /programming-lang >}}
+{{< programming-lang lang="go">}}
 
 The Go profiler supports custom annotations for your business logic as of version v1.60.0. To add annotations, use [profiler labels][1] like so:
 
-{{< code-block lang="go" >}}
+```go
 pprof.Do(ctx, pprof.Labels("customer_name", <value>), func(context.Context) {
   /* customer-specific logic here */
 })
-{{< /code-block >}}
+```
 
 To specify which label keys you want use for filtering, add the [WithCustomProfilerLabelKeys][2] option when starting the profiler:
 
-{{< code-block lang="go" >}}
+```go
 profiler.Start(
   profiler.WithCustomProfilerLabelKeys("customer_name"),
   /* other options */
 )
-{{< /code-block>}}
+```
 
 Then, open CPU or goroutine profiles for your service and select the `customer_name` value you're interested in under the `CPU time by` dropdown.
+
+[1]: https://pkg.go.dev/runtime/pprof#Do
+[2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithCustomProfilerLabelKeys
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://pkg.go.dev/runtime/pprof#Do
-[2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithCustomProfilerLabelKeys
