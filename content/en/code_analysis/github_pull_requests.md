@@ -1,35 +1,37 @@
 ---
 title: GitHub Pull Requests
 kind: documentation
-description: Learn how to use Static Analysis in GitHub pull requests.
+description: Learn how to use Code Analysis in GitHub pull requests.
+aliases:
+- /static_analysis/github_pull_requests
 further_reading:
 - link: "/integrations/github/"
   tag: "Documentation"
   text: "Learn about the GitHub integration"
-- link: "/static_analysis/"
+- link: "/code_analysis/"
   tag: "Documentation"
-  text: "Learn about Static Analysis"
+  text: "Learn about Code Analysis"
 ---
 
 ## Overview
 
-Static Analysis can automatically flag rule violations in pull requests on GitHub. To configure the [GitHub integration][2] to include Static Analysis features, see [the setup instructions](#set-up-static-analysis-for-github-pull-requests).
+Code Analysis can automatically flag violations in pull requests on GitHub. To configure the [GitHub integration][2] to include Code Analysis features, see [the setup instructions](#set-up-code-analysis-for-github-pull-requests).
 
 During code reviews on GitHub, the integration checks for Static Analysis violations in pull requests for repos that have at least one ruleset applied. Violations are flagged with a review comment on the relevant line of code.
 
-{{< img src="ci/static-analysis-pr-comment-example.png" alt="Example of a Static Analysis comment on a pull request" style="width:90%;" >}}
+{{< img src="ci/static-analysis-pr-comment-example.png" alt="Example of a Code Analysis comment on a pull request" style="width:90%;" >}}
 
-The comment includes the name, ID, severity, category, and description of the violation. Certain violations also include suggested changes that can be applied directly in the GitHub UI.
+The comment includes the name, ID, severity, category, and description of the Static Analysis violation. Certain violations also include suggested changes that can be applied directly in the GitHub UI.
 
-## Set up Static Analysis for GitHub pull requests
+## Setup Code Analysis for GitHub pull requests
 
-### Enable Static Analysis on Datadog
+### Enable Code Analysis on Datadog
 
-To use Datadog Static Analysis, add the appropriate configuration files to your repository, as described in the [setup instructions][1].
+To use Datadog Code Analysis, add the appropriate configuration files to your repository, as described in the [setup instructions][1].
 
 ### Configure a GitHub App
 
-To use Static Analysis on GitHub, you can do one of the following:
+To use Code Analysis on GitHub, you can do one of the following:
 
 - Create a GitHub App in Datadog.
 - Update an existing GitHub App, if you have already created one in Datadog.
@@ -51,7 +53,7 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 
 #### Update an existing GitHub App
 
-1. In Datadog, navigate to [**Integrations > GitHub Applications**][5], and search for the GitHub App you want to use for Static Analysis.
+1. In Datadog, navigate to [**Integrations > GitHub Applications**][5], and search for the GitHub App you want to use for Code Analysis.
 {{< img src="ci/static-analysis-existing-github-app.png" alt="Example of a Static Analysis comment on a pull request" style="width:90%;" >}}
 1. On the **Features** tab, look at the **Static Analysis: Pull Request Comments** section to determine whether your GitHub App needs additional permissions. If so, click **Update permissions in GitHub** to edit the app settings.
 1. Under **Repository permissions**, set the **Pull Requests** access to **Read and write**.
@@ -59,18 +61,18 @@ The permissions you grant to the GitHub App determine which [GitHub integration]
 1. Under the **Subscribe to events** heading, check the **Pull request** box.
 {{< img src="ci/static-analysis-pr-review-comment.png" alt="The checkbox for the pull request review comment permission" style="width:90%;" >}}
 
-### Enable Static Analysis PR comments for your repositories
+### Enable Code Analysis PR comments for your repositories
 
-1. In Datadog, navigate to [**CI Settings** > **Static Analysis Settings**][4].
+1. In Datadog, navigate to [**CI Settings** > **Code Analysis Settings**][4].
 1. Click the toggle switch next to a given repository to enable **GitHub Comments**. In the example below, comments are enabled for the `demo-static-analysis-gates` repository.
 
-{{< img src="ci/static-analysis-github-comments.png" alt="Example of a Static Analysis comment on a pull request" style="width:100%;" >}}
+{{< img src="ci/static-analysis-github-comments.png" alt="Example of a Code Analysis comment on a pull request" style="width:100%;" >}}
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /static_analysis#setup
+[1]: /code_analysis#setup
 [2]: /integrations/github/
 [3]: https://app.datadoghq.com/integrations/github/add
 [4]: https://app.datadoghq.com/ci/settings/static-analysis
