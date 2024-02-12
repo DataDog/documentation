@@ -129,7 +129,6 @@ The following features are available to use with the Incident Management Slack i
 - Mirror Slack channel messages, to import and retain all slack conversations in the incident timeline. **Note**: This counts every slack message commenter as a monthly active user. Alternately, push pinned message to your timeline to create a system of record for all incident-related conversations.
 - You can also automatically add [team members][6] to an incident Slack channel when a team is added to the incident. Only members who have connected their Slack and Datadog accounts by running the "/datadog connect" command in Slack are added to the channel.
 - Automatically archive a slack channel after a certain amount of time.
-- In Slack, take action on incident notifications with the Slack action tray buttons.
 
 ## Notifications
 
