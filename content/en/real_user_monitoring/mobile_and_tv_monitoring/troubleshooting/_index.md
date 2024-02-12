@@ -48,7 +48,7 @@ To update the tracking consent after the SDK is initialized, call `Datadog.setTr
 - `TrackingConsent.GRANTED`: The SDK sends all current batched data and future data directly to the data collection endpoint.
 - `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
 
-Note that the values to use differ between the different SDK to follow common capitalization patterns:
+**Note**: The `TrackingConsent` values do not use the same capitalization patterns across the SDK languages:
 
 Android | iOS, React Native and Flutter | Unity
 --- | --- | ---
