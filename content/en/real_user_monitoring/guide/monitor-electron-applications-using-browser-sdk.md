@@ -1,17 +1,12 @@
 ---
 title: Monitor Electron Applications Using the Browser SDK
 kind: guide
-beta: true
 description: Learn how to monitor desktop applications built with Electron through the browser RUM SDK.
 further_reading:
   - link: '/real_user_monitoring/'
     tag: 'Documentation'
     text: 'Learn about Real User Monitoring'
 ---
-
-<div class="alert alert-warning">
-    Electron support for RUM is in beta.
-</div>
 
 ## Overview
 

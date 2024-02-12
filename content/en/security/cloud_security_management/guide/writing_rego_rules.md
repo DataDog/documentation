@@ -14,15 +14,8 @@ is_beta: true
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">
-CSM Misconfigurations is not available in the selected site.
-</div>
+<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-{{< callout url="#" btn_hidden="true">}}
-Writing custom rules is a beta feature available to all Cloud Security Management Misconfigurations (CSM Misconfigurations) customers. If you have feedback or questions, contact <a href="/help">Datadog support</a>.
-{{< /callout >}} 
-
 
 ## Overview
 

@@ -74,9 +74,12 @@ All log anomalies are surfaced as [Insights][3] in the Log Explorer, matching th
 Log anomalies that Watchdog determines to be particularly `severe` are surfaced in the [Watchdog Alert Explorer][1] and can be alerted on by setting up a [Watchdog logs monitor][2].
 A `severe` anomaly is defined as:
 
-* containing error logs
-* lasting at least 10 minutes (to avoid transient errors)
-* having a significant increase (to avoid small increases)
+* Containing error logs.
+* Lasting at least 10 minutes (to avoid transient errors).
+* Having a significant increase (to avoid small increases).
+* Having a low `noise` score (to avoid having a lot of alerts for a given service). The `noise` score is calculated at the service level by:
+    * Looking at the number of error patterns (the higher, the noisier).
+    * Computing how close the patterns are to each other (the closer, the noisier).
 
 #### Required data history
 

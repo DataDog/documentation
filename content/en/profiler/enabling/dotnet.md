@@ -25,6 +25,8 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
+
 Supported operating systems for .NET Framework
 : Windows 10<br/>
 Windows Server starting from version 2012
@@ -171,6 +173,25 @@ To install the .NET Profiler per-webapp:
 5. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
 
 [1]: https://app.datadoghq.com/profiling
+{{% /tab %}}
+
+{{% tab "Linux with Single Step Instrumentation" %}}
+
+1. With [Single Step Instrumentation][2], set the following required environment variables for automatic instrumentation to attach to your application:
+
+   ```
+   LD_PRELOAD=/opt/datadog/apm/library/dotnet/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so
+   DD_PROFILING_ENABLED=1
+   DD_ENV=production
+   DD_VERSION=1.2.3
+   ```
+
+2. For standalone applications, manually restart the application as you normally would.
+
+3. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
+
+[1]: https://app.datadoghq.com/profiling
+[2]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentationbeta
 {{% /tab %}}
 
 {{% tab "Internet Information Services (IIS)" %}}
@@ -416,3 +437,4 @@ The [Getting Started with Profiler][4] guide takes a sample service with a perfo
 [5]: /tracing/trace_collection/
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /profiler/enabling/supported_versions/

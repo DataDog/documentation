@@ -33,7 +33,7 @@ draft: false
 git_integration_title: ibm_db2
 integration_id: ibm-db2
 integration_title: IBM Db2
-integration_version: 1.11.3
+integration_version: 2.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -300,7 +300,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/ibm_db2/images/dashboard_overview.png
 [2]: https://www.ibm.com/analytics/us/en/db2
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/ibmdb/python-ibmdb/tree/master/IBM_DB/ibm_db
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://pypi.org/project/ibm-db/#files

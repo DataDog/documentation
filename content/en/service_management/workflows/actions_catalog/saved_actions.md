@@ -4,6 +4,8 @@ kind: documentation
 description: Save and reuse an action and its parameters
 disable_toc: false
 disable_sidebar: false
+algolia:
+  tags: ['workflow', 'workflows', 'workflow automation']
 type: documentation
 aliases:
   - /workflows/actions_catalog/action_blueprints/

@@ -10,18 +10,6 @@ const tocCloseIcon = document.querySelector('.js-mobile-toc-toggle .icon-small-x
 const tocBookIcon = document.querySelector('.js-mobile-toc-toggle .icon-small-bookmark');
 const tocEditBtn = document.querySelector('.js-toc-edit-btn');
 
-// Fixes Chrome issue where pages with hash params are not scrolling to anchor
-const chromeHashScroll = () => {
-    const isChrome = /Chrome/.test(navigator.userAgent);
-    if (window.location.hash && isChrome) {
-        setTimeout(function () {
-            const hash = window.location.hash;
-            window.location.hash = '';
-            window.location.hash = hash;
-        }, 300);
-    }
-};
-
 function isTOCDisabled() {
     const toc = document.querySelector('#TableOfContents');
     if (!toc) {
@@ -94,31 +82,34 @@ export function updateTOC() {
 export function buildTOCMap() {
     sidenavMapping = [];
     let link = null;
+    const tocAnchors = document.querySelectorAll('#TableOfContents ul a');
 
-    document.querySelectorAll('#TableOfContents ul a').forEach((anchor) => {
-        const href = anchor.getAttribute('href');
-        const id = href.replace('#', '').replace(' ', '-');
-        const header = document.querySelector(`#${id}`);
-        const navParentLinks = Array.from(anchor.closest('#TableOfContents').querySelectorAll(':scope ul > li'))
-            .filter((node) => node.contains(anchor))
-            .filter((element) => element.querySelectorAll(':scope > a'));
+    if (tocAnchors.length) {
+        tocAnchors.forEach((anchor) => {
+            const href = anchor.getAttribute('href');
+            const id = href ? href.replace('#', '').replace(' ', '-') : null;
+            const header = id ? document.getElementById(`${decodeURI(id)}`) : null;
+            const navParentLinks = Array.from(anchor.closest('#TableOfContents').querySelectorAll(':scope ul > li'))
+                .filter((node) => node.contains(anchor))
+                .filter((element) => element.querySelectorAll(':scope > a'));
 
-        if (header) {
-            if (header.nodeName === 'H2' || header.nodeName === 'H3') {
-                sidenavMapping.push({
-                    navLink: anchor,
-                    navLinkPrev: link,
-                    navParentLinks,
-                    id,
-                    header,
-                    isH2: header.nodeName === 'H2',
-                    isH3: header.nodeName === 'H3'
-                });
+            if (header) {
+                if (header.nodeName === 'H2' || header.nodeName === 'H3') {
+                    sidenavMapping.push({
+                        navLink: anchor,
+                        navLinkPrev: link,
+                        navParentLinks,
+                        id,
+                        header,
+                        isH2: header.nodeName === 'H2',
+                        isH3: header.nodeName === 'H3'
+                    });
+                }
             }
-        }
 
-        link = anchor;
-    });
+            link = anchor;
+        });
+    }
 }
 
 export function onScroll() {
@@ -161,7 +152,7 @@ export function onScroll() {
 
                     if (href) {
                         const id = href.replace('#', '').replace(' ', '-');
-                        const header = document.querySelector(`#${id}`);
+                        const header = document.getElementById(`${(decodeURI(id))}`);
                         if (header && header.nodeName === 'H2') {
                             link.classList.add('toc_open');
                         }
@@ -231,9 +222,6 @@ function handleAPIPage() {
     }
 }
 
-DOMReady(chromeHashScroll);
-DOMReady(handleAPIPage);
-
 if (tocMobileToggle) {
     tocMobileToggle.addEventListener('click', toggleMobileTOC);
 }
@@ -249,4 +237,18 @@ window.addEventListener('resize', () => {
 
 window.addEventListener('scroll', () => {
     onScroll();
+});
+
+DOMReady(handleAPIPage);
+
+// Fixes Chrome issue where pages with hash params are not scrolling to anchor
+window.addEventListener('load', () => {
+    const isChrome = /Chrome/.test(navigator.userAgent);
+    if (window.location.hash && isChrome) {
+        setTimeout(function () {
+            const hash = window.location.hash;
+            window.location.hash = '';
+            window.location.hash = hash;
+        }, 300);
+    }
 });

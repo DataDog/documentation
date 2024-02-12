@@ -1,11 +1,14 @@
 ---
-title: iOS Trace Collection
+title: Tracing iOS Applications
 kind: documentation
 aliases:
 - /tracing/setup_overview/setup/ios/
 - /tracing/setup/ios/
 - /tracing/trace_collection/dd_libraries/ios
 description: Collect traces from your iOS applications.
+code_lang: ios
+type: multi-code-lang
+code_lang_weight: 90
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-ios
   tag: GitHub
@@ -20,6 +23,8 @@ Send [traces][1] to Datadog from your iOS applications with [Datadog's `dd-sdk-i
 * Send logs for each span individually.
 * Use default and add custom attributes to each span.
 * Leverage optimized network usage with automatic bulk posts.
+
+<div class="alert alert-info"><strong>Note</strong>: Datadog charges for <strong>ingested and indexed</strong> spans sent from your iOS applications, but does not charge for the underlying devices. Read more in the <a href="/account_management/billing/apm_tracing_profiler/">APM billing documentation</a>.</div>
 
 ## Setup
 

@@ -36,7 +36,7 @@ draft: false
 git_integration_title: twistlock
 integration_id: twistlock
 integration_title: Prisma Cloud Compute Edition
-integration_version: 3.2.0
+integration_version: 3.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -231,6 +231,6 @@ Prisma Cloud Compute Edition は、新しい CVE が見つかると、イベン�
 
 
 [1]: https://www.paloaltonetworks.com/prisma/cloud
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

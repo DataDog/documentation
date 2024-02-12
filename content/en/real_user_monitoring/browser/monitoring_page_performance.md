@@ -170,11 +170,11 @@ document.addEventListener("scroll", function handler() {
 });
 ```
 
-Once the timing is sent, the timing is accessible as `@view.custom_timings.<timing_name>`, for example: `@view.custom_timings.first_scroll`. You must [create a measure][18] before creating a visualization in the RUM Explorer or in your dashboards.
+Once the timing is sent, the timing is accessible in nanoseconds as `@view.custom_timings.<timing_name>`, for example: `@view.custom_timings.first_scroll`. You must [create a measure][18] before creating a visualization in the RUM Explorer or in your dashboards.
 
 For single-page applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing is equal to `8-5 = 3` seconds.
 
-If you are using an asynchronous setup, you can provide your own timing (the number of milliseconds relative to the start of the current RUM view or the UNIX epoch timestamp) as a second parameter.
+If you are using an asynchronous setup, you can provide your own timing (as a UNIX epoch timestamp) as a second parameter.
 
 For example:
 

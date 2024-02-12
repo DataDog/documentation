@@ -1,6 +1,6 @@
 {
   "integration_count": {
-    "other": "650"
+    "other": "700"
   },
 
   "beta_sentence": {
@@ -319,5 +319,14 @@
   },
   "learn_more": {
     "other": "자세히 보기"
+  },
+  "configuration_management" : {
+    "other": "Configuration management"
+  },
+  "cloud_and_container" : {
+    "other": "Cloud and container"
+  },
+  "source" : {
+    "other": "Source"
   }
 }

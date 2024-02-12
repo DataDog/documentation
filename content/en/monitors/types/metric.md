@@ -143,7 +143,7 @@ Any metric reporting to Datadog is available for monitors. Use the editor and th
 {{< /tabs >}}
 
 **Notes:**
-  - If using a distribution metric with a percentile aggregator, a matching percentile threshold is automatically specified.
+  - If using a distribution metric with a percentile aggregator, a matching percentile threshold is automatically specified. Metrics with percentile aggregators do not generate a snapshot graph in the notifications message.
   - **max/min**: These descriptions of max and min assume that the monitor alerts when the metric goes above the threshold. For monitors that alert when below the threshold, the max and min behavior is reversed.
   - Defining metrics for monitors is similar to defining metrics for graphs. For details on using the `Advanced...` option, see [Advanced graphing][2].
   - There are different behaviors when utilizing `as_count()`. See [as_count() in Monitor Evaluations][3] for details.

@@ -59,11 +59,10 @@ implementation "io.opentelemetry:opentelemetry-api:${opentelemetryVersion}"
 {{< code-block lang="xml" >}}
 <!-- OpenTelemetry API -->
 <dependency>
-        <groupId>io.opentelemetry</groupId>
-        <artifactId>opentelemetry-api</artifactId>
-        <version>${io.opentelemtry.version}</version>
-    </dependency>
-<dependency>
+    <groupId>io.opentelemetry</groupId>
+    <artifactId>opentelemetry-api</artifactId>
+    <version>${io.opentelemetry.version}</version>
+</dependency>
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -84,7 +83,7 @@ Span currentSpan = Span.current();
 currentSpan.setAttributes("some-key", "some-value");
 
 // Add attributes to the local root span
-ContextKey<OtelSpan> localRootSpanKey = ContextKey.named("datadog-root-span-key");
+ContextKey<OtelSpan> localRootSpanKey = ContextKey.named("opentelemetry-traces-local-root-span");
 Span rootSpan = Context.current().get(localRootSpanKey);
 rootSpan.setAttributes("some-key", "some-value");
 ```
@@ -109,11 +108,10 @@ First add a dependency to the `opentelemetry-instrumentation-annotations` librar
 {{< code-block lang="xml" >}}
 <!-- OpenTelemetry instrumentation annotations -->
 <dependency>
-        <groupId>io.opentelemetry.instrumentation</groupId>
-        <artifactId>opentelemetry-instrumentation-annotations</artifactId>
-        <version>${io.opentelemtry.version}</version>
-    </dependency>
-<dependency>
+    <groupId>io.opentelemetry.instrumentation</groupId>
+    <artifactId>opentelemetry-instrumentation-annotations</artifactId>
+    <version>${io.opentelemetry.version}</version>
+</dependency>
 {{< /code-block >}}
 
 {{% /tab %}}

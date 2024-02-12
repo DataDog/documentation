@@ -39,7 +39,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
         site: <DATADOG_SITE>
         apiKeySecretArn: <DATADOG_API_KEY_SECRET_ARN>
         forwarderArn: <FORWARDER_ARN>
-        enableStepFunctionTracing: true
+        enableStepFunctionsTracing: true
     ```
     - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][3] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can instead use `apiKey` and set the Datadog API key in plaintext.
@@ -77,7 +77,7 @@ For developers using [Serverless Framework][4] to deploy serverless applications
 
    For more information about the `datadog-ci stepfunctions` command, see the [Datadog CLI documentation][5].
 
-4. For Node.js and Python runtimes, add the flag `--mergeStepFunctionAndLambdaTraces` in your command. This links your Step Function traces with Lambda traces. If you have not yet instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][6].
+4. For Node.js and Python runtimes, add the flag `--merge-step-function-and-lambda-traces` in your datadog-ci command. This links your Step Function traces with Lambda traces. If you have not yet instrumented your Lambda functions to send traces, you can [follow the steps to add the Lambda layer for your preferred runtime][6].
 
 [1]: /serverless/libraries_integrations/cli/
 [2]: /logs/guide/forwarder/
