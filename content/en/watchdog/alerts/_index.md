@@ -77,6 +77,10 @@ A `severe` anomaly is defined as:
 * containing error logs
 * lasting at least 10 minutes (to avoid transient errors)
 * having a significant increase (to avoid small increases)
+* having a low `noise` score (to avoid having a lot of alerts for a given service)
+* * the `noise` score is calculated at the service level by:
+* * * looking at the number of error patterns (the higher, the noisier)
+* * * computing how close the patterns are to each other (the closer, the noisier) 
 
 #### Required data history
 
