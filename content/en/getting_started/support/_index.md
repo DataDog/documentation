@@ -7,6 +7,9 @@ further_reading:
   text: "Agent Troubleshooting"
 ---
 
+{{< callout url="https://docs.datadoghq.com/account_management/guide/access-your-support-ticket/" >}}
+Please note that our US offices will be closed on Monday, February 19th in honor of President’s Day. We will be operating with limited staffing, and as a result, Live Chat will not be available on President’s Day for Standard Support customers during normal US business hours. Premier Support customers will retain access to chat 24x7x365. For any urgent issues, please contact us through our Support Portal.
+{{< /callout >}}
 ## Overview
 
 Datadog provides two primary channels for customers seeking support:
