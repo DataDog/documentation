@@ -4,7 +4,7 @@ kind: documentation
 ---
 ## Overview
 
-<div class="alert alert-info">Scanning Amazon EKS components requires <a href="https://docs.datadoghq.com/cloudcraft/getting-started/connect-amazon-eks-cluster-with-cloudcraft/">authorizing our IAM role for view-only access</a>.</div>
+<div class="alert alert-info">Scanning Amazon EKS components requires <a href="https://docs.datadoghq.com/cloudcraft/getting-started/connect-amazon-eks-cluster-with-cloudcraft/">authorizing Cloudcraft's IAM role for view-only access</a>.</div>
 
 Use the EKS Pod component to visualize Amazon EKS containers from your Amazon Web Services architecture.
 
