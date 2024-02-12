@@ -23,16 +23,43 @@ The Java Datadog Trace library is open source - view the [GitHub repository][1] 
 
 The Java Tracer supports automatic instrumentation for the following Oracle JDK and OpenJDK JVM runtimes.
 
-| Java versions | Operating Systems                                                                                               | Support level                     | Tracer version |
-|---------------|-----------------------------------------------------------------------------------------------------------------|-----------------------------------|----------------|
-| 22+           | Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)<br>Linux (arm64)<br>Mac (arm64) | [Beta](#levels-of-support)        | Latest         |
-| 18 to 21      | Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)<br>Linux (arm64)<br>Mac (arm64) | [GA](#levels-of-support)          | Latest         |
-| 8 to 17       | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)                                               | [GA](#levels-of-support)          | Latest         |
-| 8 to 17       | Linux (arm64)<br>Mac (arm64)                                                                                    | [Beta](#levels-of-support)        | Latest         |
-| 7             | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)                                               | [Maintenance](#levels-of-support) | v0             |
-| 7             | Linux (arm64)<br>Mac (arm64)                                                                                    | [End-of-life](#levels-of-support) | v0             |
+#### Java Tracer v1 (latest)
+
+<table>
+  <thead>
+    <th>Java versions</th>
+    <th>Operating Systems</th>
+    <th>Support level</th>
+  </thead>
+  <tr>
+    <td>from 22 and upward</td>
+    <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
+    <td><a href="#levels-of-support">Beta</a></td>
+  </tr>
+  <tr>
+    <td>from 18 to 21</td>
+    <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
+    <td><a href="#levels-of-support">GA</a></td>
+  </tr>
+  <tr>
+    <td rowspan="2">from 8 to 17</td>
+    <td>Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)</td>
+    <td><a href="#levels-of-support">GA</a></td>
+  </tr>
+  <tr>
+    <td>Linux (arm64)<br>Mac (arm64)</td>
+    <td><a href="#levels-of-support">Beta</a></td>
+  </tr>
+</table>
 
 Datadog does not officially support any early-access versions of Java.
+
+#### Java Tracer v0 (maintenance)
+
+| Java versions      | Operating Systems                                                               | Support level                     |
+|--------------------|---------------------------------------------------------------------------------|-----------------------------------|
+| 7 only             | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [Maintenance](#levels-of-support) |
+| 7 only             | Linux (arm64)<br>Mac (arm64)                                                    | [End-of-life](#levels-of-support) |
 
 ### Levels of support
 

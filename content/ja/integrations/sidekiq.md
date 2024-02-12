@@ -32,7 +32,7 @@ draft: false
 git_integration_title: sidekiq
 integration_id: sidekiq
 integration_title: Sidekiq
-integration_version: 1.3.0
+integration_version: 1.3.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -180,7 +180,7 @@ Sidekiq には、イベントは含まれません。
 [1]: https://sidekiq.org/
 [2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
 [3]: https://github.com/DataDog/dogstatsd-ruby
-[4]: https://app.datadoghq.com/account/settings#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest
 [5]: https://github.com/mperham/sidekiq/wiki/Pro-Metrics
 [6]: https://github.com/mperham/sidekiq/wiki/Ent-Historical-Metrics
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/

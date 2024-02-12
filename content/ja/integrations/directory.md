@@ -28,7 +28,7 @@ draft: false
 git_integration_title: directory
 integration_id: システム
 integration_title: Directory
-integration_version: 1.14.3
+integration_version: 2.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -113,10 +113,14 @@ Directory チェックには、イベントは含まれません。
 
 ## トラブルシューティング
 
+非常に大きなディレクトリに対してチェックを実行し、再帰が true に設定されている場合、I/O と CPU に負荷がかかることに注意してください。デフォルトのチェック頻度である 15 秒ごとを調整する必要があるかもしれません。
+
+例えば、15,000 個のファイルとサブディレクトリがあるディレクトリで、CPU 使用率が高いチェックが 30～40 秒実行される場合、チェック頻度を低く設定しなければ、CPU 使用率の高いチェックが効率よく継続的に実行されます。
+
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/directory/datadog_checks/directory/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

@@ -755,6 +755,8 @@ geoIP パーサーは、IP アドレスの属性を受け取り、対象の属�
 {{% /tab %}}
 {{< /tabs >}}
 
+**注**: ログまたは UI のログ属性には、トレース ID およびスパン ID は表示されません。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

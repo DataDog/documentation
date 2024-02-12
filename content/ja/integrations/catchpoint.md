@@ -1,26 +1,60 @@
 ---
+app_id: catchpoint
+app_uuid: e80ef287-1a1a-4b73-94e7-3c1d6fe66eaf
+assets:
+  dashboards:
+    catchpoint: assets/dashboards/Catchpoint_dashboard.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: true
+    metrics:
+      check:
+      - catchpoint.success.rate
+      metadata_path: metadata.csv
+      prefix: catchpoint.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Catchpoint
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-- monitoring
+- metrics
+- issue tracking
+- network
 dependencies: []
-description: Catchpoint のアラートを Datadog イベントストリームへ送信。
-doc_link: https://docs.datadoghq.com/integrations/catchpoint/
+display_on_public_website: true
 draft: false
 git_integration_title: catchpoint
-has_logo: true
 integration_id: catchpoint
 integration_title: Catchpoint
 integration_version: ''
 is_public: true
 kind: インテグレーション
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: catchpoint
-public_title: Datadog-Catchpoint インテグレーション
+oauth: {}
+public_title: Catchpoint
 short_description: Catchpoint のアラートを Datadog イベントストリームへ送信。
-team: web-integrations
-version: '1.0'
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Metrics
+  - Category::問題の追跡
+  - Category::ネットワーク
+  configuration: README.md#Setup
+  description: Catchpoint のアラートを Datadog イベントストリームへ送信。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Catchpoint
 ---
 
-{{< img src="integrations/catchpoint/catchpoint_event.png" alt="catchpoint event" popup="true">}}
+
 
 ## 概要
 
@@ -32,13 +66,15 @@ Catchpoint を Datadog と接続すると、以下のことができます。
 -   Catchpoint ポータル内の分析チャートに直接リンクできます。
 -   タイプタグに対してアラートを生成して簡単に絞り込むことができます。
 
+{{< img src="integrations/catchpoint/catchpoint_event.png" alt="catchpoint event" popup="true">}}
+
 ## セットアップ
 
-### インストール
+### APM に Datadog Agent を構成する
 
 インストールは必要ありません。
 
-### コンフィギュレーション
+### 構成
 
 ストリームに Catchpoint のアラートを取り込むには、Catchpoint ポータルにログインし、_Settings -> API_ に移動します。
 
@@ -70,8 +106,9 @@ Catchpoint を Datadog と接続すると、以下のことができます。
 }
 ```
 
-設定後、Catchpoint がアラートを DataDog のイベントストリームに直接送信します。
-{{< img src="integrations/catchpoint/catchpoint_configuration.png" alt="Catchpoint コンフィギュレーション" responsive="true" popup="true">}}
+セットアップ後、Catchpoint は Datadog の Events ストリームにアラートを直接送信します。
+![s2][1]
+
 
 ### メトリクスのコンフィギュレーション
 
@@ -798,7 +835,8 @@ Catchpoint インテグレーションには、サービスのチェック機能
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
-[1]: https://github.com/DataDog/dogweb/blob/prod/integration/catchpoint/catchpoint_metadata.csv
-[2]: https://docs.datadoghq.com/ja/help/
+[1]: images/configuration.png
+[2]: https://github.com/DataDog/dogweb/blob/prod/integration/catchpoint/catchpoint_metadata.csv
+[3]: https://docs.datadoghq.com/ja/help/
