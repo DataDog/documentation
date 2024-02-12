@@ -9106,6 +9106,170 @@ api:
         - AggregateCIAppTestEvents
       unstable: []
       order: 3
+  - name: Cases
+    url: /api/latest/cases/
+    identifier: cases
+    generated: true
+  - name: Unassign case
+    url: '#unassign-case'
+    identifier: cases-unassign-case
+    parent: cases
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UnassignCase
+      unstable: []
+      order: 7
+  - name: Unarchive case
+    url: '#unarchive-case'
+    identifier: cases-unarchive-case
+    parent: cases
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UnarchiveCase
+      unstable: []
+      order: 9
+  - name: Update case status
+    url: '#update-case-status'
+    identifier: cases-update-case-status
+    parent: cases
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateStatus
+      unstable: []
+      order: 4
+  - name: Update case priority
+    url: '#update-case-priority'
+    identifier: cases-update-case-priority
+    parent: cases
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdatePriority
+      unstable: []
+      order: 5
+  - name: Assign case
+    url: '#assign-case'
+    identifier: cases-assign-case
+    parent: cases
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AssignCase
+      unstable: []
+      order: 6
+  - name: Archive case
+    url: '#archive-case'
+    identifier: cases-archive-case
+    parent: cases
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ArchiveCase
+      unstable: []
+      order: 8
+  - name: Get the details of a case
+    url: '#get-the-details-of-a-case'
+    identifier: cases-get-the-details-of-a-case
+    parent: cases
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetCase
+      unstable: []
+      order: 3
+  - name: Create a case
+    url: '#create-a-case'
+    identifier: cases-create-a-case
+    parent: cases
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCase
+      unstable: []
+      order: 2
+  - name: Search cases
+    url: '#search-cases'
+    identifier: cases-search-cases
+    parent: cases
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchCases
+      unstable: []
+      order: 1
+  - name: Cases Projects
+    url: /api/latest/cases-projects/
+    identifier: cases-projects
+    generated: true
+  - name: Get the details of a project
+    url: '#get-the-details-of-a-project'
+    identifier: cases-projects-get-the-details-of-a-project
+    parent: cases-projects
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetProject
+      unstable: []
+      order: 3
+  - name: Remove a project
+    url: '#remove-a-project'
+    identifier: cases-projects-remove-a-project
+    parent: cases-projects
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteProject
+      unstable: []
+      order: 4
+  - name: Create a project
+    url: '#create-a-project'
+    identifier: cases-projects-create-a-project
+    parent: cases-projects
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateProject
+      unstable: []
+      order: 1
+  - name: Get all projects
+    url: '#get-all-projects'
+    identifier: cases-projects-get-all-projects
+    parent: cases-projects
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetProjects
+      unstable: []
+      order: 2
   - name: Cloud Cost Management
     url: /api/latest/cloud-cost-management/
     identifier: cloud-cost-management

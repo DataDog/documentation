@@ -149,6 +149,74 @@
     "request_description": "",
     "request_schema_description": "Request to update an AuthN Mapping."
   },
+  "SearchCases": {
+    "description": "Search cases.",
+    "summary": "Search cases"
+  },
+  "CreateCase": {
+    "description": "Create a Case",
+    "summary": "Create a case",
+    "request_description": "Case payload",
+    "request_schema_description": "Case create request"
+  },
+  "GetProjects": {
+    "description": "Get all projects.",
+    "summary": "Get all projects"
+  },
+  "CreateProject": {
+    "description": "Create a project.",
+    "summary": "Create a project",
+    "request_description": "Project payload",
+    "request_schema_description": "Project create request"
+  },
+  "DeleteProject": {
+    "description": "Remove a project using the project's `id`.",
+    "summary": "Remove a project"
+  },
+  "GetProject": {
+    "description": "Get the details of a project by `project_id`.",
+    "summary": "Get the details of a project"
+  },
+  "GetCase": {
+    "description": "Get the details of case by `case_id`",
+    "summary": "Get the details of a case"
+  },
+  "ArchiveCase": {
+    "description": "Archive case",
+    "summary": "Archive case",
+    "request_description": "Archive case payload",
+    "request_schema_description": "Case empty request"
+  },
+  "AssignCase": {
+    "description": "Assign case to a user",
+    "summary": "Assign case",
+    "request_description": "Assign case payload",
+    "request_schema_description": "Case assign request"
+  },
+  "UpdatePriority": {
+    "description": "Update case priority",
+    "summary": "Update case priority",
+    "request_description": "Case priority update payload",
+    "request_schema_description": "Case update priority request"
+  },
+  "UpdateStatus": {
+    "description": "Update case status",
+    "summary": "Update case status",
+    "request_description": "Case status update payload",
+    "request_schema_description": "Case update status request"
+  },
+  "UnarchiveCase": {
+    "description": "Unarchive case",
+    "summary": "Unarchive case",
+    "request_description": "Unarchive case payload",
+    "request_schema_description": "Case empty request"
+  },
+  "UnassignCase": {
+    "description": "Unassign case",
+    "summary": "Unassign case",
+    "request_description": "Unassign case payload",
+    "request_schema_description": "Case empty request"
+  },
   "CreateCIAppPipelineEvent": {
     "description": "Send your pipeline event to your Datadog platform over HTTP. For details about how pipeline executions are modeled and what execution types we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nPipeline events can be submitted with a timestamp that is up to 18 hours in the past.",
     "summary": "Send pipeline event",
