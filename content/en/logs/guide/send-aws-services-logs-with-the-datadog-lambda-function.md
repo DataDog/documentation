@@ -58,16 +58,17 @@ There are two options when configuring triggers on the Datadog Forwarder Lambda 
 
 Datadog can automatically configure triggers on the Datadog Forwarder Lambda function to collect AWS logs from the following sources and locations:
 
-| Source                          | Location       |
-| ------------------------------- | ---------------|
-| API Gateway Access Logs         | CloudWatch     |
-| API Gateway Execution Logs      | CloudWatch     |
-| Application ELB Access Logs     | S3             |
-| Classic ELB Access Logs         | S3             |
-| CloudFront Access Logs          | S3             |
-| Lambda Logs                     | CloudWatch     |
-| Redshift Logs                   | S3             |
-| S3 Access Logs                  | S3             |
+| Source                      | Location       |
+| --------------------------- | -------------- |
+| API Gateway Access Logs     | CloudWatch     |
+| API Gateway Execution Logs  | CloudWatch     |
+| Application ELB Access Logs | S3             |
+| Classic ELB Access Logs     | S3             |
+| CloudFront Access Logs      | S3             |
+| Lambda Logs                 | CloudWatch     |
+| Redshift Logs               | S3             |
+| S3 Access Logs              | S3             |
+| Web Application Firewall    | S3, CloudWatch |
 
 **Note**: [Subscription filters][48] are not created automatically by the DatadogForwarder. Create them directly on a Log Group.
 
@@ -88,6 +89,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     "s3:GetBucketNotification",
     "s3:ListAllMyBuckets",
     "s3:PutBucketNotification",
+    "wafv2:ListLoggingConfigurations",
     "logs:PutSubscriptionFilter",
     "logs:DeleteSubscriptionFilter",
     "logs:DescribeSubscriptionFilters"
@@ -99,7 +101,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     | `cloudfront:ListDistributions`                              | List all CloudFront distributions.                                           |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancers`          | List all load balancers.                                                     |
     | `elasticloadbalancing:`<br>`DescribeLoadBalancerAttributes` | Get the name of the S3 bucket containing ELB access logs.                    |
-    | `lambda:List*`                                              | List all Lambda functions. |
+    | `lambda:List*`                                              | List all Lambda functions.                                                   |
     | `lambda:GetPolicy`                                          | Gets the Lambda policy when triggers are to be removed.                      |
     | `redshift:DescribeClusters`                                 | List all Redshift clusters.                                                  |
     | `redshift:DescribeLoggingStatus`                            | Get the name of the S3 bucket containing Redshift Logs.                      |
@@ -108,9 +110,11 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     | `s3:GetBucketNotification`                                  | Get existing Lambda trigger configurations.                                  |
     | `s3:ListAllMyBuckets`                                       | List all S3 buckets.                                                         |
     | `s3:PutBucketNotification`                                  | Add or remove a Lambda trigger based on S3 bucket events.                    |
+    | `wafv2:ListLoggingConfigurations`                           | Lists all logging configurations of the Web Application Firewall.            |
     | `logs:PutSubscriptionFilter`                                | Add a Lambda trigger based on CloudWatch Log events                          |
     | `logs:DeleteSubscriptionFilter`                             | Remove a Lambda trigger based on CloudWatch Log events                       |
     | `logs:DescribeSubscriptionFilters`                          | Lists the subscription filters for the specified log group.                  |
+
 
 3. In the [AWS Integration page][44], select the AWS Account to collect logs from and click on the **Log Collection** tab.  
    {{< img src="logs/aws/aws_log_setup_step1.png" alt="The Log Collection tab of the AWS integration page for a specific AWS account with instructions to send AWS Services logs and a textbox to autosubscribe the Forwarder Lambda function by entering the ARN of the Forwarder Lambda function" popup="true" style="width:90%;" >}}

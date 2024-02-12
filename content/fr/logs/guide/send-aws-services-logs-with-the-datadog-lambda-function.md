@@ -58,16 +58,17 @@ Il existe deux méthodes de configuration des déclencheurs sur la fonction Lamb
 
 Datadog peut automatiquement configurer des déclencheurs sur la fonction Lambda du Forwarder Datadog afin de recueillir les logs AWS à partir des sources et emplacements suivants :
 
-| Source                          | Emplacement       |
-| ------------------------------- | ---------------|
-| Logs d'accès API Gateway         | CloudWatch     |
-| Logs d'exécution API Gateway      | CloudWatch     |
+| Source                                | Emplacement    |
+| ------------------------------------- | -------------- |
+| Logs d'accès API Gateway              | CloudWatch     |
+| Logs d'exécution API Gateway          | CloudWatch     |
 | Logs d'accès ELB de l'application     | S3             |
-| Logs d'accès ELB classique         | S3             |
-| Logs d'accès CloudFront          | S3             |
-| Logs Lambda                     | CloudWatch     |
-| Logs Redshift                   | S3             |
-| Logs d'accès S3                  | S3             |
+| Logs d'accès ELB classique            | S3             |
+| Logs d'accès CloudFront               | S3             |
+| Logs Lambda                           | CloudWatch     |
+| Logs Redshift                         | S3             |
+| Logs d'accès S3                       | S3             |
+| Logs d'accès Web Application Firewall | S3, CloudWatch |
 
 **Remarque** : `SubscriptionFilter` n'est pas créé automatiquement.
 
@@ -88,6 +89,7 @@ Datadog peut automatiquement configurer des déclencheurs sur la fonction Lambda
     "s3:GetBucketNotification",
     "s3:ListAllMyBuckets",
     "s3:PutBucketNotification",
+    "wafv2:ListLoggingConfigurations",
     "logs:PutSubscriptionFilter",
     "logs:DeleteSubscriptionFilter",
     "logs:DescribeSubscriptionFilters"
@@ -108,6 +110,7 @@ Datadog peut automatiquement configurer des déclencheurs sur la fonction Lambda
     | `s3:GetBucketNotification`                                  | Récupère les configurations des déclencheurs Lambda existants.                                  |
    {{< partial name="whats-next/whats-next.html" >}}
     | `s3:PutBucketNotification`                                  | Ajoute ou supprime un déclencheur Lambda basé sur des événements de compartiment S3.                    |
+    | `wafv2:ListLoggingConfigurations`                           | Répertorie toutes les configurations de logs de Web Application Firewall.            |
     | `logs:PutSubscriptionFilter`                                | Ajoute un déclencheur Lambda basé sur des événements de log CloudWatch.                          |
     | `logs:DeleteSubscriptionFilter`                             | Supprime un déclencheur Lambda basé sur des événements de log CloudWatch.                       |
     | `logs:DescribeSubscriptionFilters`                          | Répertorie les filtres d'abonnement pour le groupe de logs spécifié.                  |
