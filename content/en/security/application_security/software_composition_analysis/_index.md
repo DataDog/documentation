@@ -102,7 +102,7 @@ Software Composition Analysis enriches the information APM is already collecting
 [6]: /security/application_security/enabling/compatibility
 [7]: /getting_started/application_security/software_composition_analysis
 [8]: https://app.datadoghq.com/security/appsec/inventory/libraries
-[9]: /code-analysis-software-composition-analysis/code_analysis/software_composition_analysis/setup/?tab=githubactions
+[9]: /code_analysis/software_composition_analysis/setup/?tab=githubactions
 [10]: /account_management/rbac/permissions/#integrations
 [11]: /integrations/jira/
 [12]: https://app.datadoghq.com/security/configuration/asm/setup
