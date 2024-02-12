@@ -83,7 +83,7 @@ Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8
 {{< whatsnext desc="See the documentation for information about the following integrations:">}}
     {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
     {{< nextlink href="code_analysis/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
-    {{< nextlink href="code_analysis/static_analysis/other_providers" >}}Generic CI Providers{{< /nextlink >}}
+    {{< nextlink href="code_analysis/static_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Upload third-party static analysis results to Datadog

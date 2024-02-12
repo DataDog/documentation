@@ -90,9 +90,9 @@ For more information about Static Analysis rulesets, see [Static Analysis Rules]
 {{< whatsnext desc="Select a CI/CD provider to configure Code Analysis with:">}}
     {{< nextlink href="code_analysis/static_analysis/github_actions" >}}Static Analysis and GitHub Actions{{< /nextlink >}}
     {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}Static Analysis and CircleCI Orbs{{< /nextlink >}}
-    {{< nextlink href="code_analysis/static_analysis/other_providers" >}}Static Analysis and Generic CI Providers{{< /nextlink >}}
+    {{< nextlink href="code_analysis/static_analysis/generic_ci_providers" >}}Static Analysis and Generic CI Providers{{< /nextlink >}}
     {{< nextlink href="code_analysis/software_composition_analysis/github_actions" >}}Software Composition Analysis and GitHub Actions{{< /nextlink >}}
-    {{< nextlink href="code_analysis/software_composition_analysis/other_providers" >}}Software Composition Analysis and Generic CI Providers{{< /nextlink >}}
+    {{< nextlink href="code_analysis/software_composition_analysis/generic_ci_providers" >}}Software Composition Analysis and Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
 
 </br>

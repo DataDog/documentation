@@ -47,7 +47,7 @@ Datadog Software Composition Analysis runs in your CI pipelines using the [`data
 
 {{< whatsnext desc="See the documentation for information about the following integrations:">}}
     {{< nextlink href="code_analysis/software_composition_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
-    {{< nextlink href="code_analysis/software_composition_analysis/other_providers" >}}Generic CI Providers{{< /nextlink >}}
+    {{< nextlink href="code_analysis/software_composition_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further Reading
