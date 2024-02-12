@@ -24,7 +24,8 @@ To enable profiling:
 
 1. Ensure you have [installed the associated tracing library][2] in your Lambda function.
 2. Set the `DD_PROFILING_ENABLED` environment variable to `true`.
-3. It will take at least 60 execution seconds of the function lambda before data will begin to appear in the profile page.
+
+Data is available after a minimum of 60 execution seconds of the Lambda function.
 
 The profiler works by spawning a thread that periodically wakes up and takes a snapshot of the CPU and heap of running code. This includes the profiler itself. If you want the profiler to ignore itself, set `DD_PROFILING_IGNORE_PROFILER` to `true`.
 
