@@ -128,15 +128,15 @@ Plugins for `pytest` that alter test execution may cause unexpected behavior.
 
 #### Parallelization
 
-Plugins that introduce paralleization to `pytest` (such as [`pytest-xdist`][3] or [`pytest-forked`][4]) will create one session events for each parallelized instance, and may create multiple module or suite events if tests from the same package or module execute in different processes.
+Plugins that introduce paralleization to `pytest` (such as [`pytest-xdist`][3] or [`pytest-forked`][4]) create one session event for each parallelized instance. Multiple module or suite events may be created if tests from the same package or module execute in different processes.
 
-The overall count of test events (and their correctness) will remain unaffected, but individual session, module, or suite events may have inconsistent results with other events in the same `pytest` run.
+The overall count of test events (and their correctness) remain unaffected, but individual session, module, or suite events may have inconsistent results with other events in the same `pytest` run.
 
 #### Test ordering
 
-Plugins that chage the ordering of test execution (such as [`pytest-randomly`][5]) may create multiple module or suite events, or may create module or suite events with unexpected durations, or results.
+Plugins that chage the ordering of test execution (such as [`pytest-randomly`][5]) can create multiple module or suite events. The duration and results of module or suite events may also be inconsistent with the results reported by `pytest`.
 
-The overall count of test events (and their correctness) will remain unaffected.
+The overall count of test events (and their correctness) remain unaffected.
 
 [1]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
 [2]: /continuous_integration/guides/add_custom_metrics/?tab=python
