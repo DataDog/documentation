@@ -233,7 +233,7 @@ Additionally, resources contain a `kube_<api_kind>:<metadata.name>` tag. For exa
 > - Pods use `pod_name` instead.
 > - *VPAs: `verticalpodautoscaler`*.
 > - *VPHs: `horizontalpodautoscaler`*.
-> - *Persistant Volume Claims: `persistantvolumeclaim`*.
+> - *Persistent Volume Claims: `persistentvolumeclaim`*.
 
 Based on the labels attached to the resource, the following tags will also be extracted:
 
@@ -270,7 +270,7 @@ Pods are given the following tags:
 
 #### Workloads
 
-Workload resources (pods, deployments, stateful sets, etc.) will have the following tags, indiciating their support within the Resources Utilization page:
+Workload resources (pods, deployments, stateful sets, etc.) will have the following tags, indicating their support within the Resources Utilization page:
 
 - `resource_utilization` (`supported` or `unsupported`)
 - `missing_cpu_requests`
@@ -301,7 +301,7 @@ Some resources have specific tags that are extracted based on your cluster's env
 
 ### Resource Utilization Filters
 
-The following workload resouces are enriched with resource utilization metrics:
+The following workload resources are enriched with resource utilization metrics:
 
 - Clusters
 - Daemonsets
@@ -313,7 +313,7 @@ The following workload resouces are enriched with resource utilization metrics:
 
 These metrics are calculated at the time of collection, based on the average values over the last 15 minutes. You can filter by metric values like so: `metric#<metric_name><comparator><numeric_value>`.
 
-- `metric_name` is an availbale metric (see below)
+- `metric_name` is an available metric (see below)
 - `comparator` is a supported [comparator](#comparator)
 - and `numeric_value` is a floating poing value.
 
