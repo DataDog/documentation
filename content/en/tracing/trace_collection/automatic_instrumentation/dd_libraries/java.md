@@ -59,7 +59,7 @@ To begin tracing your applications:
    **Note:** To download the latest build of a specific **major** version, use the `https://dtdg.co/java-tracer-vX` link instead, where `X` is the desired major version.
    For example, use `https://dtdg.co/java-tracer-v1` for the latest version 1 build. Minor version numbers must not be included. Alternatively, see Datadog's [Maven repository][3] for any specific version.
 
-   **Note:** Release Candidate versions are made available in the GitHub DataDog/dd-trace-java repository.  These versions will have "RC" in the version and are recommended for testing outside of your production environment. You may want to [subscribe to release notifications][20] to be informed when new Release Candidates are available for testing.
+   **Note:** Release Candidate versions are made available the GitHub [DataDog/dd-trace-java releases][21].  These will have "RC" in the version and are recommended for testing outside of your production environment. You may want to [subscribe to release notifications][20] to be informed when new Release Candidates are available for testing.
 
 2. To run your app from an IDE, Maven or Gradle application script, or `java -jar` command, with the Continuous Profiler, deployment tracking, and logs injection (if you are sending logs to Datadog), add the `-javaagent` JVM argument and the following configuration options, as applicable:
 
@@ -230,3 +230,4 @@ If needed, configure the tracing library to send application performance telemet
 [18]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
 [19]: https://docs.oracle.com/en/java/javase/11/tools/jdeps.html
 [20]: https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/managing-subscriptions-for-activity-on-github/viewing-your-subscriptions
+[21]: https://github.com/DataDog/dd-trace-java/releases
