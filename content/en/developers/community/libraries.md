@@ -93,10 +93,6 @@ To use the PHP tracer or profiler on Heroku, use the following buildpack.
 
 * [Heroku Datadog PHP Tracer and Profiler Buildpack][65] maintained by [SpeedCurve][66].
 
-### Jira
-
-A [tool][39] to poll data from Jira and upload it as metrics to Datadog.
-
 ### K6
 
 K6, a load and performance regression testing tool developed by Load Impact, can send test results to Datadog using [DogStatsD][1]. To enable this feature, see [the tutorial][40].
@@ -198,7 +194,6 @@ If you've written a Datadog library and would like to add it to this page, send 
 [36]: https://oz.com/
 [37]: https://github.com/apiaryio/heroku-datadog-drain-golang
 [38]: https://apiary.io
-[39]: https://bitbucket.org/atlassian/jiradog/src/master/
 [40]: https://blog.loadimpact.com/how-to-send-k6-metrics-to-datadog
 [41]: https://github.com/meetup/launch-dogly
 [42]: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-datadog.html
