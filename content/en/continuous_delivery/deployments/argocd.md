@@ -123,6 +123,21 @@ See the [Argo CD official guide][12] for more details on applications subscripti
 
 After this final step is completed, you can start monitoring your Argo CD deployments in Datadog.
 
+## Adding custom tags to deployment executions
+
+You can optionally add custom tags to the deployment executions generated from Argo CD applications deployments. These tags can be used to filter, group and aggregate deployment executions in Datadog.
+To add custom tags, add the `dd_customtags` annotation to your Argo CD application annotations. The value of the annotation should be a comma-separated list of tags, structured as `key:value` pairs. For example:
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    notifications.argoproj.io/subscribe.cd-visibility-trigger.cd-visibility-webhook: ""
+    dd_env: <YOUR_ENV>
+    dd_customtags: "region:us1-east, team:backend"
+```
+
 ## Visualize deployments in Datadog
 
 The [**Deployments**][6] and [**Deployment Executions**][7] pages populate with data after a deployment is executed. For more information, see [Search and Manage][9] and [CD Visibility Explorer][10].
