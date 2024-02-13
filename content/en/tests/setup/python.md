@@ -128,7 +128,7 @@ Plugins for `pytest` that alter test execution may cause unexpected behavior.
 
 #### Parallelization
 
-Plugins that introduce paralleization to `pytest` (such as [`pytest-xdist`][3] or [`pytest-forked`][4]) create one session event for each parallelized instance. Multiple module or suite events may be created if tests from the same package or module execute in different processes.
+Plugins that introduce parallelization to `pytest` (such as [`pytest-xdist`][3] or [`pytest-forked`][4]) create one session event for each parallelized instance. Multiple module or suite events may be created if tests from the same package or module execute in different processes.
 
 The overall count of test events (and their correctness) remain unaffected. Individual session, module, or suite events may have inconsistent results with other events in the same `pytest` run.
 
