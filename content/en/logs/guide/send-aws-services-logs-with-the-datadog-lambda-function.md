@@ -29,23 +29,25 @@ To start collecting logs from your AWS services:
 
 Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group is supported. Find setup instructions for the most used services in the table below:
 
-| AWS service                        | Activate AWS service logging                                                                    | Send AWS logs to Datadog                                                    |
-| ---------------------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| [API Gateway][3]                  | [Enable Amazon API Gateway logs][4]                                                               | [Manual][5] and [automatic](#automatically-set-up-triggers) log collection.                                                |
-| [Cloudfront][6]                   | [Enable Amazon CloudFront logs][7]                                                                | [Manual][8] and [automatic](#automatically-set-up-triggers) log collection.  |
-| [CloudTrail][9]                   | [Enable AWS CloudTrail logs][9]                                                                | [Manual][10] log collection. See [AWS Configuration for Cloud SIEM][11] if you are setting up AWS CloudTrail for Cloud SIEM.                                                  |
-| [DynamoDB][12]                     | [Enable Amazon DynamoDB logs][13]                                                                  | [Manual][14] log collection.                                                 |
-| [EC2][15]                          | `-`                                                                                             | Use the [Datadog Agent][15] to send your logs to Datadog.                    |
-| [ECS][16]                          | `-`                                                                                             | [Use the docker agent to gather your logs][17].                              |
-| [Elastic Load Balancing (ELB)][18] | [Enable Amazon ELB logs][19]                                                                       | [Manual][20] and [automatic](#automatically-set-up-triggers) log collection.  |
-| [Lambda][21]                       | `-`                                                                                             | [Manual][22] and [automatic](#automatically-set-up-triggers) log collection. |
-| [RDS][23]                         | [Enable Amazon RDS logs][24]                                                                      | [Manual][25] log. collection.                                                |
-| [Route 53][26]                    | [Enable Amazon Route 53 logs][27]                                                                 | [Manual][28] log collection.                                                |
-| [S3][29]                          | [Enable Amazon S3 logs][30]                                                                       | [Manual][31] and [automatic](#automatically-set-up-triggers) log collection. |
-| [SNS][32]                         | SNS does not provide logs, but you can process logs and events that are transiting through to the SNS Service. | [Manual][33] log collection.                                                |
-| [RedShift][34]                    | [Enable Amazon Redshift logs][35]                                                                 | [Manual][36] and [automatic](#automatically-set-up-triggers) log collection. |
-| [Verified Access][37]             | [Enable Verified Access logs][38]                                                              | [Manual][39] log collection.                                                |
-| [VPC][40]                         | [Enable Amazon VPC logs][41]                                                                      | [Manual][42] log collection.                                                |
+| AWS service                        | Activate AWS service logging                                                                                   | Send AWS logs to Datadog                                                                                                     |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| [API Gateway][3]                   | [Enable Amazon API Gateway logs][4]                                                                            | [Manual][5] and [automatic](#automatically-set-up-triggers) log collection.                                                  |
+| [Cloudfront][6]                    | [Enable Amazon CloudFront logs][7]                                                                             | [Manual][8] and [automatic](#automatically-set-up-triggers) log collection.                                                  |
+| [CloudTrail][9]                    | [Enable AWS CloudTrail logs][9]                                                                                | [Manual][10] log collection. See [AWS Configuration for Cloud SIEM][11] if you are setting up AWS CloudTrail for Cloud SIEM. |
+| [DynamoDB][12]                     | [Enable Amazon DynamoDB logs][13]                                                                              | [Manual][14] log collection.                                                                                                 |
+| [EC2][15]                          | `-`                                                                                                            | Use the [Datadog Agent][15] to send your logs to Datadog.                                                                    |
+| [ECS][16]                          | `-`                                                                                                            | [Use the docker agent to gather your logs][17].                                                                              |
+| [Elastic Load Balancing (ELB)][18] | [Enable Amazon ELB logs][19]                                                                                   | [Manual][20] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
+| [Lambda][21]                       | `-`                                                                                                            | [Manual][22] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
+| [RDS][23]                          | [Enable Amazon RDS logs][24]                                                                                   | [Manual][25] log. collection.                                                                                                |
+| [Route 53][26]                     | [Enable Amazon Route 53 logs][27]                                                                              | [Manual][28] log collection.                                                                                                 |
+| [S3][29]                           | [Enable Amazon S3 logs][30]                                                                                    | [Manual][31] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
+| [SNS][32]                          | SNS does not provide logs, but you can process logs and events that are transiting through to the SNS Service. | [Manual][33] log collection.                                                                                                 |
+| [RedShift][34]                     | [Enable Amazon Redshift logs][35]                                                                              | [Manual][36] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
+| [Verified Access][37]              | [Enable Verified Access logs][38]                                                                              | [Manual][39] log collection.                                                                                                 |
+| [VPC][40]                          | [Enable Amazon VPC logs][41]                                                                                   | [Manual][42] log collection.                                                                                                 |
+| [Web Application Firewall][49]     | [Enable Amazon WAF logs][50]                                                                                   | [Manual][51] log collection.                                                                                                 |
+
 
 ## Set up triggers
 
@@ -297,3 +299,6 @@ You can also exclude or send only those logs that match a specific pattern by us
 [46]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-scrubbing-optional
 [47]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-filtering-optional
 [48]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters
+[49]: /integrations/amazon_waf/
+[50]: /integrations/amazon_waf/#log-collection
+[51]: /integrations/amazon_waf/#send-logs-to-datadog
