@@ -70,4 +70,5 @@ kind: guide
     {{< nextlink href="cloudcraft/components-aws/sns-subscriptions">}}SNS subscriptions{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/sns-topic">}}SNS topic{{< /nextlink >}}
     {{< nextlink href="cloudcraft/components-aws/sqs">}}SQS{{< /nextlink >}}
+    {{< nextlink href="cloudcraft/components-aws/eventbridge-bus">}}EventBridge Bus{{< /nextlink >}}
 {{< /whatsnext >}}
