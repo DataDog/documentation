@@ -53,6 +53,10 @@ When you select a method in the Dynamic Instrumentation configuration, the code 
 Symbol Database also provides autocomplete for log templates and other templates that use the [Dynamic Instrumentation expression language][5]:
 {{< img src="dynamic_instrumentation/symdb_completion.png" alt="Autocomplete suggestions for log templates" style="width:80%;" >}}
 
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /dynamic_instrumentation/
 [2]: /agent/
 [3]: /agent/remote_config/
