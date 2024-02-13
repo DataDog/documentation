@@ -17,8 +17,8 @@ comment_template = Template(filename='local/bin/py/preview-links-template.mako')
 pattern1 = re.compile('content/en/(.*?).md')
 pattern2 = re.compile('content/en/glossary/terms/(.*?).md')
 
+# Grab YAML frontmatter from markdown file
 def grab_glossary_title(filename):
-    # Grab YAML frontmatter from markdown file
     with open(filename) as f:
         anchor = f.read().split('---')[1].split('title: ')[1].split('\n')[0]
         anchor = nodes.make_id(anchor)
