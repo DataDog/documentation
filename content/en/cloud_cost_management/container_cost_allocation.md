@@ -16,24 +16,25 @@ further_reading:
 
 ## Overview
 
-Datadog Cloud Cost Management (CCM) automatically allocates EC2 compute cost in Kubernetes and ECS clusters to individual pods and tasks running in those clusters. Use cost metrics enriched with tags from pods, nodes, containers, and tasks to visualize container workload cost in the context of your entire cloud bill.
+Datadog Cloud Cost Management (CCM) automatically allocates costs of Kubernetes and ECS clusters to individual pods and tasks running in those clusters. Use cost metrics enriched with tags from pods, nodes, containers, and tasks to visualize container workload cost in the context of your entire cloud bill.
 
 {{< img src="cloud_cost/container_cost_allocation/cost_allocation_table.png" alt="Cloud cost allocation table showing requests and idle costs over the past week" style="width:100%;" >}}
 
-Additionally, CCM allocates the cost of non-local EBS Volumes used as Persistent Volumes in Kubernetes to individual pods that claim those volumes.
+For Kubernetes clusters, CCM allocates costs of EC2 instances and non-local EBS volumes. For ECS clusters, CCM allocates costs of EC2 instances.
 
 ## Prerequisites
 
 1. Set up and configure [AWS Cloud Cost integration][1].
-2. (Optional) Enable [AWS Split Cost Allocation][5] for usage-based ECS allocation.
-1. At least one of the following must be running:
-    - [**Datadog Agent**][2] in a Kubernetes environment using EC2 instances. Ensure that you enable the [**Orchestrator Explorer**][6] in your Agent configuration.
-    - [**Datadog Container Monitoring**][3] in ECS tasks.
+2. For Kubernetes support, install the [**Datadog Agent**][2] in a Kubernetes environment using EC2 instances.
+     - Ensure that you enable the [**Orchestrator Explorer**][6] in your Agent configuration.
+     - Container cost allocation requires **Agent version >= 7.27.0** and **Cluster Agent version >= 1.11.0**.
+     - Persistent Volume allocation requires **Agent version >= 7.46.0**
+3. For ECS support, set up [**Datadog Container Monitoring**][3] in ECS tasks.
+     - Optionally, enable [AWS Split Cost Allocation][5] for usage-based ECS allocation.
 
 ## Cost allocation
 
-Cost allocation divides EC2 and EBS volume costs in the [Cost and Usage Report][4] (CUR) into associated individual tasks or pods. These divided costs are then enriched with tags from nodes, pods, tasks, and volumes. This lets you break down costs by any associated dimensions.
-
+Cost allocation divides EC2 compute and EBS volume costs in the [Cost and Usage Report][4] (CUR) into associated individual tasks or pods. These divided costs are then enriched with tags from nodes, pods, tasks, and volumes. This lets you break down costs by any associated dimensions.
 
 ### Kubernetes
 

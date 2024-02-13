@@ -102,7 +102,7 @@ data:
 `cd-visibility-trigger` is the name of the trigger, and `cd-visibility-template` is a reference to the template created above.
 
 After the service, trigger, and template have been added to the config map, you can subscribe any of your Argo CD applications to the integration.
-Modify the annotations of the application by either using the Argo CD UI or modifying the application definition with the following annotations:
+Modify the annotations of the Argo CD application by either using the Argo CD UI or modifying the application definition with the following annotations:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -114,7 +114,7 @@ metadata:
 ```
 
 There are two annotations:
-1. The notifications annotation subscribes the application to the notification setup created above.
+1. The notifications annotation subscribes the Argo CD application to the notification setup created above.
 2. The `dd_env` annotation configures the environment of the application. Replace `YOUR_ENV` above with the environment
    to which this application is deploying (for example: `staging` or `prod`). If you don't set this annotation,
    the environment defaults to `none`.

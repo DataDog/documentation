@@ -34,7 +34,7 @@ draft: false
 git_integration_title: druid
 integration_id: druid
 integration_title: Druid
-integration_version: 2.2.0
+integration_version: 2.3.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -191,7 +191,7 @@ Druid チェックには イベントは含まれません。
 [2]: https://docs.datadoghq.com/ja/developers/dogstatsd/
 [3]: https://druid.apache.org/docs/latest/operations/metrics.html
 [4]: https://docs.datadoghq.com/ja/agent/
-[5]: https://app.datadoghq.com/account/settings#agent
+[5]: https://app.datadoghq.com/account/settings/agent/latest
 [6]: https://github.com/DataDog/integrations-core/blob/master/druid/datadog_checks/druid/data/conf.yaml.example
 [7]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [8]: https://druid.apache.org/docs/latest/development/extensions-contrib/statsd.html

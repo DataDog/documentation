@@ -139,7 +139,7 @@ Agent (v7.36.1)
 
 #### イベント
 
-Datadog UI で、イベントエクスプローラページ **Events &gt; Explorer** に移動します。Agent が起動または再起動すると、Agent は Datadog にイベントを送信します。Agent が正常にインストールされた場合、以下のメッセージが表示されます。
+Datadog UI で、イベントマネジメントページ **Service Mgmt > Event Management** に移動します。Agent が起動または再起動すると、Agent は Datadog にイベントを送信します。Agent が正常にインストールされると、以下のメッセージが表示されます。
 
 ```text
 Datadog agent (v. 7.XX.X) started on <Hostname>
@@ -226,7 +226,7 @@ Agent のコンフィギュレーションファイルを調整することで�
 
 5. 数分後、再び **Metrics &gt; Summary** に移動し、メトリクス `datadog.agent.started` をクリックします。デフォルトの `host` と `version` タグに加えて、`team` タグや追加した個人用タグも表示されます。また、ページ上部にある `Tag` フィールドでメトリクスをフィルターすることもできます。
 
-6. **Events > Explorer** で、最新の Agent イベントとともに表示されるカスタムタグを見つけます。
+6. **Service Mgmt > Event Management** で、最新の Agent イベントとともに表示されるカスタムタグを見つけます。
 
 #### その他の構成オプション
 
@@ -295,22 +295,22 @@ Agent のトラブルシューティングに関するヘルプ
 [15]: https://www.datadoghq.com
 [16]: https://app.datadoghq.com/organization-settings/api-keys
 [17]: /ja/agent/basic_agent_usage/?tab=agentv6v7
-[18]: https://app.datadoghq.com/account/settings#agent/
-[19]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[18]: https://app.datadoghq.com/account/settings/agent/latest
+[19]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [20]: /ja/developers/service_checks/#visualize-your-service-check-in-datadog
 [21]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [22]: /ja/getting_started/tagging/
-[23]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[24]: /ja/agent/guide/agent-commands/#restart-the-agent
+[23]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[24]: /ja/agent/configuration/agent-commands/#restart-the-agent
 [25]: /ja/logs/
 [26]: /ja/tracing/
 [27]: /ja/infrastructure/process/?tab=linuxwindows#introduction
 [28]: /ja/opentelemetry/otlp_ingest_in_the_agent/?tab=host
 [29]: /ja/agent/logs/advanced_log_collection/
 [30]: /ja/developers/dogstatsd/?tab=hostagent
-[31]: /ja/agent/guide/agent-commands/
-[32]: /ja/agent/guide/agent-commands/#start-the-agent
-[33]: /ja/agent/guide/agent-commands/#stop-the-agent
+[31]: /ja/agent/configuration/agent-commands/
+[32]: /ja/agent/configuration/agent-commands/#start-the-agent
+[33]: /ja/agent/configuration/agent-commands/#stop-the-agent
 [34]: /ja/agent/troubleshooting/
-[35]: /ja/agent/guide/agent-log-files/
+[35]: /ja/agent/configuration/agent-log-files/
 [36]: /ja/help/

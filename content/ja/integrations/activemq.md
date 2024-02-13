@@ -43,7 +43,7 @@ draft: false
 git_integration_title: activemq
 integration_id: activemq
 integration_title: ActiveMQ
-integration_version: 2.3.1
+integration_version: 3.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -304,7 +304,7 @@ ActiveMQ XML チェックには、サービスのチェック機能は含まれ�
 
 [1]: https://github.com/DataDog/integrations-core/blob/master/activemq/metadata.csv
 [2]: https://raw.githubusercontent.com/DataDog/dd-agent/5.10.1/conf.d/activemq.yaml.example
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/jmxfetch
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [6]: https://docs.datadoghq.com/ja/help/

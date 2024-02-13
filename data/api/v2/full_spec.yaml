@@ -860,6 +860,11 @@ components:
       type: string
       x-enum-varnames:
       - BILLING_DIMENSIONS
+    ApiID:
+      description: API identifier.
+      example: 90646597-5fdb-4a17-a240-647003f8c028
+      format: uuid
+      type: string
     ApmRetentionFilterType:
       default: apm_retention_filter
       description: The type of the resource.
@@ -4894,6 +4899,29 @@ components:
       type: string
       x-enum-varnames:
       - COST_BY_ORG
+    CreateOpenAPIResponse:
+      description: Response for `CreateOpenAPI` operation.
+      properties:
+        data:
+          $ref: '#/components/schemas/CreateOpenAPIResponseData'
+      type: object
+    CreateOpenAPIResponseAttributes:
+      description: Attributes for `CreateOpenAPI`.
+      properties:
+        failed_endpoints:
+          description: List of endpoints which couldn't be parsed.
+          items:
+            $ref: '#/components/schemas/OpenAPIEndpoint'
+          type: array
+      type: object
+    CreateOpenAPIResponseData:
+      description: Data envelope for `CreateOpenAPIResponse`.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CreateOpenAPIResponseAttributes'
+        id:
+          $ref: '#/components/schemas/ApiID'
+      type: object
     CreateRuleRequest:
       description: Scorecard create rule request.
       properties:
@@ -11089,7 +11117,7 @@ components:
       description: The metrics' payload.
       properties:
         series:
-          description: A list of time series to submit to Datadog.
+          description: A list of timeseries to submit to Datadog.
           example:
           - metric: system.load.1
             points:
@@ -12113,6 +12141,24 @@ components:
       type: string
       x-enum-varnames:
       - ON_DEMAND_CONCURRENCY_CAP
+    OpenAPIEndpoint:
+      description: Endpoint info extracted from an `OpenAPI` specification.
+      properties:
+        method:
+          description: The endpoint method.
+          type: string
+        path:
+          description: The endpoint path.
+          type: string
+      type: object
+    OpenAPIFile:
+      description: Object for API data in an `OpenAPI` format as a file.
+      properties:
+        openapi_spec_file:
+          description: Binary `OpenAPI` spec file
+          format: binary
+          type: string
+      type: object
     OpsgenieServiceCreateAttributes:
       description: The Opsgenie service attributes for a create request.
       properties:
@@ -17400,7 +17446,7 @@ components:
           description: 'Keyword list that will be checked during scanning in order
             to validate a match.
 
-            The number of keywords in the list must be less than or equal to 20.'
+            The number of keywords in the list must be less than or equal to 30.'
           example:
           - credit card
           - cc
@@ -20492,6 +20538,29 @@ components:
           example: min
           type: string
       type: object
+    UpdateOpenAPIResponse:
+      description: Response for `UpdateOpenAPI`.
+      properties:
+        data:
+          $ref: '#/components/schemas/UpdateOpenAPIResponseData'
+      type: object
+    UpdateOpenAPIResponseAttributes:
+      description: Attributes for `UpdateOpenAPI`.
+      properties:
+        failed_endpoints:
+          description: List of endpoints which couldn't be parsed.
+          items:
+            $ref: '#/components/schemas/OpenAPIEndpoint'
+          type: array
+      type: object
+    UpdateOpenAPIResponseData:
+      description: Data envelope for `UpdateOpenAPIResponse`.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/UpdateOpenAPIResponseAttributes'
+        id:
+          $ref: '#/components/schemas/ApiID'
+      type: object
     UsageApplicationSecurityMonitoringResponse:
       description: Application Security Monitoring usage response.
       properties:
@@ -21344,6 +21413,217 @@ paths:
       x-menu-order: 2
       x-undo:
         type: idempotent
+  /api/v2/apicatalog/api/{id}:
+    delete:
+      description: Delete a specific API by ID.
+      operationId: DeleteOpenAPI
+      parameters:
+      - description: ID of the API to delete
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ApiID'
+      responses:
+        '204':
+          description: API deleted successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: API not found error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Delete an API
+      tags:
+      - API Management
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/apicatalog/api/{id}/openapi:
+    get:
+      description: Retrieve information about a specific API in [OpenAPI](https://spec.openapis.org/oas/latest.html)
+        format file.
+      operationId: GetOpenAPI
+      parameters:
+      - description: ID of the API to retrieve
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ApiID'
+      responses:
+        '200':
+          content:
+            multipart/form-data:
+              schema:
+                format: binary
+                type: string
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: API not found error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Get an API
+      tags:
+      - API Management
+      x-menu-order: 3
+      x-undo:
+        type: safe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+    put:
+      description: 'Update information about a specific API. The given content will
+        replace all API content of the given ID.
+
+        The ID is returned by the create API, or can be found in the URL in the API
+        catalog UI.
+
+        '
+      operationId: UpdateOpenAPI
+      parameters:
+      - description: ID of the API to modify
+        in: path
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ApiID'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OpenAPIFile'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateOpenAPIResponse'
+          description: API updated successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: API not found error
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Update an API
+      tags:
+      - API Management
+      x-menu-order: 2
+      x-undo:
+        type: idempotent
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
+  /api/v2/apicatalog/openapi:
+    post:
+      description: 'Create a new API from the [OpenAPI](https://spec.openapis.org/oas/latest.html)
+        specification given.
+
+        It supports version `2.0`, `3.0` and `3.1` of the specification. A specific
+        extension section, `x-datadog`,
+
+        let you specify the `teamHandle` for your team responsible for the API in
+        Datadog.
+
+        It returns the created API ID.
+
+        '
+      operationId: CreateOpenAPI
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OpenAPIFile'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOpenAPIResponse'
+          description: API created successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+          description: Forbidden
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      summary: Create a new API
+      tags:
+      - API Management
+      x-given:
+        managed_api:
+          parameters:
+          - name: openapi_spec_file
+            value: '"openapi-spec.yaml"'
+          step: there is a valid "managed_api" in the system
+      x-menu-order: 1
+      x-undo:
+        operationId: DeleteOpenAPI
+        parameters:
+        - name: id
+          source: data.id
+        type: unsafe
+      x-unstable: '**Note**: This endpoint is in public beta.
+
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).'
   /api/v2/apm/config/metrics:
     get:
       description: Get the list of configured span-based metrics with their definitions.
@@ -23171,7 +23451,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - usage_read
       summary: Get active billing dimensions for cost attribution
       tags:
       - Usage Metering
@@ -23295,7 +23576,8 @@ paths:
       security:
       - apiKeyAuth: []
         appKeyAuth: []
-      - AuthZ: []
+      - AuthZ:
+        - usage_read
       summary: Get Monthly Cost Attribution
       tags:
       - Usage Metering
@@ -33828,6 +34110,10 @@ paths:
       tags:
       - Teams
       x-menu-order: 6
+      x-pagination:
+        limitParam: page[size]
+        pageParam: page[number]
+        resultsPath: data
       x-undo:
         type: safe
     post:
@@ -35403,6 +35689,8 @@ servers:
       default: api
       description: The subdomain where the API is deployed.
 tags:
+- description: Configure your API endpoints through the Datadog API.
+  name: API Management
 - description: Manage configuration of [APM retention filters](https://app.datadoghq.com/apm/traces/retention-filters)
     for your organization. You need an API and application key with Admin rights to
     interact with this endpoint. See [retention filters](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters)
@@ -35439,13 +35727,17 @@ tags:
     API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/)
     for more information.
   name: Cloudflare Integration
-- description: Configure your Datadog Confluent Cloud integration directly through
-    the Datadog API.
+- description: Manage your Datadog Confluent Cloud integration accounts and account
+    resources directly through the Datadog API. See the [Confluent Cloud page](https://docs.datadoghq.com/integrations/confluent_cloud/)
+    for more information.
   name: Confluent Cloud
 - description: The Container Images API allows you to query Container Image data for
-    your organization.
+    your organization. See the [Container Images View page](https://docs.datadoghq.com/infrastructure/containers/container_images/)
+    for more information.
   name: Container Images
 - description: The Containers API allows you to query container data for your organization.
+    See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for
+    more information.
   name: Containers
 - description: Send events for DORA Metrics to measure and improve software delivery.
     See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more
@@ -35469,18 +35761,15 @@ tags:
 
     end times, prevent all alerting related to specified Datadog tags.'
   name: Downtimes
-- description: 'The events service allows you to programmatically post events to the
-    event stream
+- description: 'The Event Management API allows you to programmatically post events
+    to the Events Explorer
 
-    and fetch events from the event stream. Events are limited to 4000 characters.
-
-    If an event is sent out with a message containing more than 4000 characters, only
-    the
-
-    first 4000 characters are displayed.'
+    and fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/)
+    for more information.'
   name: Events
-- description: Configure your Datadog Fastly integration directly through the Datadog
-    API.
+- description: Manage your Datadog Fastly integration accounts and services directly
+    through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/)
+    for more information.
   name: Fastly Integration
 - description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
 
@@ -35500,12 +35789,15 @@ tags:
     contacting Datadog support.'
   name: IP Allowlist
 - description: Create, update, delete, and retrieve services which can be associated
-    with incidents.
+    with incidents. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/)
+    for more information.
   name: Incident Services
 - description: The Incident Teams endpoints are deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/)
     to create, update, delete, and retrieve teams which can be associated with incidents.
   name: Incident Teams
-- description: Manage incident response.
+- description: Manage incident response, as well as associated attachments, metadata,
+    and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/)
+    for more information.
   name: Incidents
 - description: 'Manage your Datadog API and application keys. You need an API key
     and

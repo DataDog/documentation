@@ -29,7 +29,7 @@ Datadog supports using SCIM with the Azure Active Directory (Azure AD) and Okta 
 
 ### Prerequisites
 
-Using SCIM with Datadog requires an enterprise account.
+SCIM in Datadog is an advanced feature included in the Enterprise plan.
 
 This documentation assumes your organization manages user identities using an identity provider.
 

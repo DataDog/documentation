@@ -36,7 +36,7 @@ Follow this guide to:
 
 1. [Instrument the application](#instrumenting-the-application) with the OpenTelemetry API.
 2. [Configure the application](#configuring-the-application) to send observability data to Datadog.
-3. [Correlate observability data](#correlate-observability-data) with unified service tagging.
+3. [Correlate observability data](#correlating-observability-data) with unified service tagging.
 4. [Run the application](#running-the-application) to generate observability data.
 5. [Explore observability data](#exploring-observability-data-in-datadog) in the Datadog UI.
 
@@ -122,17 +122,14 @@ The Datadog Exporter sends data collected by the OTLP Receiver to the Datadog ba
 
    {{< code-block lang="yaml" filename="otelcol-config.yaml" collapsible="true" disable_copy="true" >}}
 exporters:
-  logging:
-    verbosity: detailed
   datadog:
     traces:
       span_name_as_resource_name: true
+      trace_buffer: 500
     hostname: "otelcol-docker"
     api:
       key: ${DD_API_KEY}
       site: datadoghq.com
-traces:
-  trace_buffer: 500
 service:
   pipelines:
     metrics:

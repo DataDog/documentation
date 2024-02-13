@@ -37,7 +37,7 @@ draft: false
 git_integration_title: gearmand
 integration_id: gearman
 integration_title: Gearman
-integration_version: 2.3.0
+integration_version: 3.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -165,7 +165,7 @@ Gearman チェックには、イベントは含まれません。
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/integrations-core/blob/master/gearmand/datadog_checks/gearmand/data/conf.yaml.example
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://docs.datadoghq.com/ja/agent/kubernetes/log/
