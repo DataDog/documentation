@@ -75,10 +75,7 @@ Data aggregation needs to occur whether you have 1 or 1000 sources as long as yo
 
 Datadog's backend computes a series of local aggregates for each source corresponding to the query.
 
-However, you can control how this aggregation is performed.
-
-**Parameter involved: rollup (optional)**
-How to use the ['rollup' function][7]?
+However, you can control how this aggregation is performed by using the optional ['rollup' function][7].
 
 In this example, `rollup(avg,60)` defines an aggregate period of 60 seconds. So the X minutes interval is sliced into Y intervals of 1 minute each. Data within a given minute is aggregated into a single point that shows up on your graph (after step 3, the space aggregation).
 
