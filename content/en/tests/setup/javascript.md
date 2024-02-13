@@ -602,7 +602,7 @@ Cucumber's [parallel mode][16] is not supported. Tests run in parallel mode are 
 Jest's [test.concurrent][17] is not supported.
 
 ### Jest's `--forceExit`
-Jest's [--forceExit][21] option might cause data to be lost. We try to send data as soon as possible after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
+Jest's [--forceExit][21] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
 
 ## Best practices
 
