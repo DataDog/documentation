@@ -232,7 +232,7 @@ You can also specify a dashboard that opens by default when you tap on an SLOs w
 - Long press on your home screen.
 - Tap the "+" button on the top left corner of the screen.
 - Search for "Datadog" widgets.
-- Select your prefered size (small shows one SLO and medium shows one SLO along with a visualized timeframe of its health).
+- Select your preferred size (small shows one SLO and medium shows one SLO along with a visualized timeframe of its health).
 - Drag the widget to your desired, on-screen location.
 
 
@@ -331,7 +331,7 @@ View your [monitors][16] from your home screen with Datadog widgets. Tap any cel
 - Long press on the home screen.
 - Tap the "+" button on the top left corner of the screen.
 - Search for "Datadog" widgets.
-- Select your prefered size (small shows two monitor saved views, medium allows up to three monitor saved views, and large up to six monitor saved views).
+- Select your preferred size (small shows two monitor saved views, medium allows up to three monitor saved views, and large up to six monitor saved views).
 - Drag the widget to your desired, on-screen location.
 
 
@@ -427,7 +427,7 @@ Long-press the app icon to display a quick-action sheet of your top five [Freque
 
 ## Shortcuts and Siri suggestions
 
-**Android**: Create shortcut icons for your dashboards by touching and holding the Datadog app icon, then lift your finger. If the app has shorcuts, it displays a list. Touch and hold the desired shortcut, then drag and drop it to another location on your screen to create a unique shortcut icon.
+**Android**: Create shortcut icons for your dashboards by touching and holding the Datadog app icon, then lift your finger. If the app has shortcuts, it displays a list. Touch and hold the desired shortcut, then drag and drop it to another location on your screen to create a unique shortcut icon.
 
 **iOS**: Create Siri Shortcuts for Datadog dashboards and monitors through the Shortcuts App. For a shortcut to be available for creation, you must execute the desired action at least once in the app. For example, to create an "Open AWS Overview Dashboard" shortcut, open the AWS Overview Dashboard in your mobile app at least once.
 

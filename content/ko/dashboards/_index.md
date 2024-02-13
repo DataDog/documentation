@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - 스냅샷
 aliases:
 - /ko/guides/templating/
 - /ko/graphing/dashboards/
@@ -10,6 +13,9 @@ aliases:
 - /ko/dashboards/dashboards/
 - /ko/dashboards/screenboards/
 - /ko/dashboards/timeboards/
+cascade:
+  algolia:
+    rank: 70
 description: 데이터를 시각화하여 인사이트 확보
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Dashboards
@@ -27,7 +33,7 @@ further_reading:
 - link: /dashboards/widgets/
   tag: 설명서
   text: 모든 사용 가능한 대시보드용 위젯을 찾아보세요.
-- link: /mobile/#dashboards
+- link: /service_management/mobile/#dashboards
   tag: 설명서
   text: 모바일 앱에서 대시보드 보기
 - link: https://www.datadoghq.com/blog/datadog-clipboard/
@@ -39,6 +45,9 @@ further_reading:
 - link: https://datadoghq.dev/integrations-core/guidelines/dashboards/#best-practices
   tag: 개발자 문서
   text: 탁월한 통합 대시보드 만들기
+- link: https://dtdg.co/fe
+  tag: 기반 활성화
+  text: 대시보드를 통해 보다 나은 시각화를 위한 대화형 세션 참여
 kind: 설명서
 title: 대시보드
 ---
@@ -49,6 +58,15 @@ title: 대시보드
 
 **참고**: [Apple App Store][2] 및 [Google Play Store][3]에서 사용할 수 있는 [Datadog 모바일 앱][1]을 통해 대시보드를 확인하세요.
 
+{{< whatsnext desc="Dashboard features:">}}
+    {{< nextlink href="/dashboards/widgets" >}}위젯: 다양한 시각화를 위한 설정 알아보기{{< /nextlink >}}
+    {{< nextlink href="/dashboards/querying" >}}쿼리: 그래프 쿼리를 위한 형식 옵션 보기{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions" >}}함수: 메트릭 쿼리와 결과 그래프 수정{{< /nextlink >}}
+    {{< nextlink href="/dashboards/template_variables" >}}템플릿 변수: 대시보드에서의 동적 위젯 필터링{{< /nextlink >}}
+    {{< nextlink href="/dashboards/change_overlays" >}}오버레이: 그래프에서 변경 이벤트 자동 오버레이{{< /nextlink >}}
+    {{< nextlink href="/api/latest/dashboards" >}}API: 프로그래밍 방식으로 대시보드 관리{{< /nextlink >}}
+{{< /whatsnext >}}
+
 ## 새 대시보드
 
 대시보드를 생성하려면 [Dashboard List][1] 페이지에서 **+New Dashboard**를 클릭하거나 내비게이션 메뉴에서 **New Dashboard**를 클릭하세요. 대시보드 이름을 입력하고 레이아웃 옵션을 선택합니다.
@@ -56,7 +74,7 @@ title: 대시보드
 {{< img src="dashboards/create-dashboard.png" alt="새 대시보드 추가" style="width:70%;">}}
 
 ### 대시보드
-대시보드는 이미지, 그래프 및 로그와 같은 다양한 오브젝트를 포함할 수 있는 그리드 기반 레이아웃에 있습니다. 이들은 실시간으로 업데이트되고 과거의 고정 포인트를 나타낼 수 있는 상태 게시판 또는 스토리텔링 뷰로 일반적으로 사용됩니다. 또한 디버깅에서도 효과적으로 작동합니다.
+대시보드는 그리드 기반 레이아웃을 기본으로 하며 이미지, 그래프 및 로그 등 다양한 개체를 포함할 수 있습니다. 보통 실시간으로 업데이트되는 상태 보드나 스토리텔링 뷰에 사용되며 과거 고정된 요소를 대표할 수 있습니다. 최대 12제곱 그리드의 최대 너비를 지니며 디버깅에도 효과적으로 작동합니다.
 
 ### 타임보드
 타임보드에는 자동 레이아웃이 있으며, 전체 대시보드에서 (고정 또는 실시간) 단일 포인트를 나타냅니다. 일반적으로 트러블슈팅, 상관관계 및 일반 데이터 탐색에 사용됩니다.
@@ -74,19 +92,19 @@ title: 대시보드
 |------------------------|---------------------------------------------------------------|
 | 스냅샷 전송          | 그래프의 스냅샷을 생성하고 전송합니다.                     |
 | 상관 관계에 있는 메트릭 찾기| APM 서비스, 통합 및 대시보드에서 상관관계를 찾습니다. |
-| 전체 화면으로 보기    | [전체화면 모드][4]에서 그래프를 봅니다.                     |
+| 전체 화면으로 보기    | [전체 화면 모드][5]로 그래프 보기                     |
 | 커서 잠금            | 페이지에서 커서를 제자리에 잠금 처리합니다.                         |
 | 관련 프로세스 보기 | 그래프로 범위가 지정된 [Live Processes][5] 페이지로 이동합니다.   |
 | 관련 호스트 보기     | 그래프로 범위가 지정된 [Host Map][6] 페이지로 이동합니다.         |
 | 관련 로그 보기      | 그래프로 범위가 지정된 [Log Explorer][7] 페이지로 이동합니다.     |
 | 관련 트레이스 보기    | 그래프로 범위가 지정된 [Traces][8] 패널을 이동시킵니다.           |
-| 관련 프로필 보기  | 그래프로 범위가 지정된 [Profiling][9] 페이지로 이동합니다.        |
+| 관련 프로필 보기  | 그래프 범위의 [프로파일링][10] 페이지로 건너뜁니다.        |
 
 ### 글로벌 시간 선택기
 
 글로벌 시간 선택기를 사용하려면 하나 이상의 시간 기반 위젯이 `Global Time`을(를) 사용하도록 설정해야 합니다. **Set display preferences**에 있는 위젯 편집기에서 선택하거나, 위젯을 추가하세요(글로벌 시간이 기본 시간 설정임).
 
-글로벌 시간 선택기는 동일한 대시보드에서 `Global Time` 옵션을 사용하여 모든 위젯에 대해 동일한 시간 프레임을 설정합니다. 과거의 무빙 윈도우(`Past 1 Hour`, `Past 1 Day` 등)를 선택하거나, `Select from calendar...` 옵션을 통해 고정 기간을 선택하거나 [커스텀 타임프레임 입력][10] 기능을 통해 시간 프레임을 선택합니다. 무빙 윈도우를 선택하면 위젯이 업데이트되어 지정된 기간을 따라 이동합니다.
+글로벌 시간 선택기는 동일한 대시보드에서 `Global Time` 옵션을 사용하여 모든 위젯에 대한 동일 시간 프레임을 설정합니다. 과거 이동 기간을 선택(예: `Past 1 Hour` 또는 `Past 1 Day`)하거나 `Select from calendar...` 옵션을 사용해 고정 기간을 선택합니다. 또는 [커스텀 시간대를 입력하세요][11]. 이동 기간을 선택한 경우 위젯이 업데이트되어 해당 기간으로 이동합니다.
 
 글로벌 시간에 연결되지 않은 위젯은 글로벌 윈도우에 적용된 현지 시간 프레임의 데이터를 표시합니다. 예를 들어, 글로벌 시간 선택기가 2019년 1월 1일부터 2019년 1월 2일로 설정된 경우 `Past 1 Minute`에 대한 현지 시간 프레임으로 설정된 위젯은 오후 11시 59분부터 2019년 1월 2일 마지막 분까지를 표시합니다.
 
@@ -118,6 +136,10 @@ title: 대시보드
 
 ### 설정
 
+#### 비전 기록
+
+대시보드에서 설정 아이콘을 클릭한 다음 버전 기록 옵션을 클릭하여 버전 기록 사이드 패널을 엽니다. 대시보드의 버전 기록을 미리보고, 복구하고, 복제할 수 있습니다. 자세한 정보는 [버전 기록 가이드][12]를 참조하세요.
+
 #### 퍼블릭 URL 생성
 
 퍼블릭 URL을 생성하여 외부 사용자와 대시보드를 공유합니다. 자세한 내용은 [대시보드 공유][11]를 참조하세요.
@@ -142,32 +164,49 @@ tags:audit,dash
 
 #### 권한 허용
 
-대시보드 상단에서 설정을 클릭하고 *Permissions*을 선택합니다.
+<div class="alert alert-info">개별 대시보드의 제한 <em>보기</em>를 <strong>Enterprise</strong> 티어 플랜에 있는 누구나 사용할 수 있습니다. 계정 팀에 문의하거나 <a href="/help/">Datadog 지원</a>에 연락하여 이 기능을 활성화하세요. </div>
 
-{{< img src="dashboards/dashboard-menu-permissions.png" alt="대시보드 설정 메뉴" style="width:50%;">}}
+{{< img src="dashboards/access_popup.png" alt="사용자가 대시보드에 액세스할 역할을 선택하도록 하는 드롭다운 메뉴가 있는 대화 상자입니다." style="width:70%;">}}
 
-팝업을 사용하여 사용자, 사용자의 역할이 있는 조직의 모든 사람 또는 조직의 특정 역할에 대한 액세스를 제한합니다.
+점진적 액세스 제어를 사용해 특정 대시보드를 편집할 수 있는 [역할][15]을 제한하세요.
+1. 대시보드를 보는 동안 오른쪽 상단에서 톱니를 클릭하세요. 설정 메뉴가 열립니다.
+1. **권한**을 선택하세요.
+1. **액세스 제한**을 클릭하세요.
+1. 대화 상자가 업데이트되어 기본적으로 **뷰어** 액세스 권한이 있는 조직 구성원을 표시합니다.
+1. 드롭다운을 사용해 대시보드를 편집할 수 있는 하나 이상의 역할, 팀, 사용자를 선택하세요.
+1. **Add**를 클릭합니다.
+1. 대화상자가 업데이트되어 선택한 역할에 **편집자** 권한이 있는지 표시합니다.
+1. **Save**를 클릭합니다
 
-{{< img src="dashboards/dashboard-role-restrictions.png" alt="설정에서의 역할 제한" style="width:70%;">}}
+**참고:** 대시보드에 대한 편집 액세스를 유지관리하려면 저장하기 전 사용자가 구성원인 최소 하나의 역할을 포함해야 합니다. 역할에 대한 자세한 정보는 [RBAC 설명서][15]를 참조하세요.
 
-생성자는 항상 대시보드를 편집할 수 있지만, 대시보드 편집이 허용된 다른 사용자는 최종 액세스 제어 목록(ACL)에 자신의 역할 중 하나가 포함되어 있을 때에만 ACL에서 역할을 추가하거나 제거할 수 있습니다. 역할에 대한 자세한 내용은 [RBAC 가이드][13]를 참조하세요.
+제한된 액세스가 설정된 대시보드를 복원하려면 아래 단계를 따르세요.
+1. 대시보드를 보는 동안 오른쪽 상단의 톱니를 클릭합니다. 설정 메뉴가 열립니다.
+1. **권한**을 선택하세요.
+1. **Restore Full Access**를 클릭하세요.
+1. **Save**를 클릭합니다.
 
 지원 중단된 "읽기 전용" 설정으로 대시보드를 만든 경우 액세스 제어 목록은 액세스 관리(`user_access_manage`) 권한이 있는 역할 목록으로 미리 채워집니다.
 
-Terraform으로 대시보드를 관리하는 경우 최신 버전의 Datadog Terraform 제공업체를 사용하여 대시보드 편집이 가능한 역할을 제어할 수 있습니다. 자세한 내용은 Terraform 대시보드 역할 제한 가이드][14]를 참조하세요.
+Terraform 대시보드를 관리하는 경우 Datadog Terraform 제공자의 최신 버전을 사용하여 대시보드를 편집할 수 있는 역할을 제어합니다. 자세한 정보는 [Terraform 대시보드 역할 제한 가이드][16]를 참조하세요.
+
+액세스 표시기가 각 편집 제한 대시보드 오른쪽 상단에 표시됩니다. 사용자 권한에 따라 **편집 액세스 얻기** 또는 **편집 액세스 요청**이 나타날 수 있습니다. 액세스 표시기를 클릭해 액세스 권한과 대시보드 편집에 필요한 단계를 알아보세요.
 
 #### 고밀도 모드
 
 고밀도 모드는 대시보드에 그룹 위젯을 나란히 표시하여 위젯 밀도를 높입니다. 그룹 위젯을 사용하는 대시보드의 대형 화면에서는 이 모드가 기본적으로 켜집니다.
 
 {{< img src="dashboards/high-density-mode.png" alt="고밀도 모드 표시" style="width:90%;">}}
+
+**와이드 스크린에서 밀집도 향상**을 선택해 위젯을 화면 너비만큼 확대하세요.
+
 #### 대시보드 복제
 
 이 옵션을 사용하면 전체 대시보드를 새 대시보드에 복사할 수 있습니다. 복제 대상의 이름을 지정하라는 메시지가 표시됩니다.
 
 #### 대시보드 JSON 복사, 가져오기 또는 내보내기
 
-개별 대시보드에서 다음 옵션이 있는 설정 톱니바퀴(오른쪽 상단)를 사용하여 대시보드의 JSON을 복사, 가져오기 또는 내보내기합니다.
+개별 대시보드에서, 다음 옵션을 사용해 내보내기 아이콘(오른쪽 상단)을 사용해 대시보드의 JSON 파일을 복사, 가져오기 또는 내보내기합니다.
 
 | 옵션                          | 설명                                                                                                                                                                |
 |---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -177,17 +216,48 @@ Terraform으로 대시보드를 관리하는 경우 최신 버전의 Datadog Ter
 
 #### 대시보드 삭제
 
+<div class="alert alert-warning">대시보드는 삭제 전 별표를 해제해야 합니다.</div>
+
 대시보드를 영구적으로 삭제하려면 이 옵션을 사용하세요. 삭제를 확인하라는 메시지가 표시됩니다.
 
-## 추천 대시보드 및 활성 사용자
+## 대시보드 상세 정보
 
-개별 대시보드에서 Datadog은 관련 대시보드의 보기를 추천합니다. 추천 대시보드 및 활성 사용자를 보려면 대시보드 타이틀 옆에 있는 캐럿 아이콘을 클릭하세요. 이들 대시보드의 추천은 조직의 사용자 활동 및 사용자가 이 대시보드에서 다른 기존 대시보드로 이동하는 빈도를 감안하여 이루어집니다. '`edit`을(를) 클릭하여 이 보기에서 Markdown 지원 대시보드 설명을 추가하거나 업데이트할 수도 있습니다.
+개별 대시보드에서 대시보드 제목 위를 마우스로 가리켜 대시보드 상세 정보를 보고 편집합니다. 팝오버 패널이 열립니다.
 
 {{< img src="dashboards/suggested_dashboards.png" alt="추천 대시보드" >}}
 
+제목 아래서 아바타가 대시보드를 생성한 사용자를 알려줍니다.
+
+### 제안된 대시보드
+
+개별 대시보드에서 Datadog가 관련된 대시보드 보기에 대한 제한 사항을 제공합니다. 이러한 대시보드는 조직의 사용자 활동과 대시보드에서 다른 기존 대시보드로의 사용자 이동 빈도를 기반으로 추천됩니다.
+
+제안된 대시보드 목록을 추가하려면 대시보드 설명 안에 `[[suggested_dashboards]]`를 추가합니다.
+
+### 상세 정보 편집
+
+마크다운 지원 대시보드 설명을 업데이트하거나 [팀][17]과 대시보드를 연결하세요.
+
+1. 편집하려는 대시보드를 엽니다.
+1. 대시보드 제목 위를 마우스로 가리킵니다. 드롭다운 패널이 열립니다.
+1. 대시보드 제목이나 설명을 클릭해 편집합니다.
+1. 편집이 완료되면 완료 버튼을 클릭합니다.
+1. **팀** 드롭다운에서 최대 5개의 팀을 선택합니다.
+
+
 ## 대시보드 목록
 
-[Dashboard List][15] 페이지에서 대시보드 및 목록을 검색, 확인 또는 생성합니다.
+대시보드를 검색, 확인 또는 선택하여 [대시보드 목록][4] 페이지에 나열됩니다.
+
+### 이벤트 
+
+**내 팀** 토글을 사용해 모든 대시보드 보기와 사용자 [팀][17]이 소유한 대시보드 보기 간 전환할 수 있습니다.
+
+하나 이상의 대시보드와 연결된 팀을 편집하려면 다음 단계를 따르세요.
+1. 다음 확인란을 선택하여 수정하려는 각 대시보드를 선택합니다.
+1. 오른쪽 상단의 **팀 편집** 드롭다운을 엽니다.
+1. 확인란을 사용해 대시보드르 위한 적절한 팀을 선택합니다.
+1. **변경 사항 적용**을 클릭합니다.
 
 ### 새 목록
 
@@ -254,7 +324,7 @@ Terraform으로 대시보드를 관리하는 경우 최신 버전의 Datadog Ter
 
 [Apple App Store][2] 및 [Google Play Store][3]에서 제공되는 [Datadog 모바일 앱][1]을 사용하면 대시보드를 모바일 친화적인 형식으로 볼 수 있습니다.
 
-대시보드 페이지에서 모든 대시보드를 보고 검색할 수 있으며 Datadog 웹 앱에서 설정한 것과 동일한 템플릿 변수를 사용하여 대시보드를 필터링할 수 있습니다. 템플릿 변수가 저장된 보기를 사용하여 대시보드를 빠르게 필터링하세요. 템플릿 변수가 저장된 보기에 대한 자세한 내용은 [Dashboard 저장된 보기][16]를 참조하세요. 개별 대시보드를 클릭하면 볼 수 있습니다.
+대시보드 페이지에서 모든 대시보드를 보고 검색하고 Datadog 웹 앱에서 설정한 동일한 템플릿 변수를 사용해 필터링할 수 있습니다. 템플릿 변수 저장 보기를 사용해 빠르게 대시보드를 필터링합니다. 템플릿 변수 저장 보기에 대한 자세한 정보는 [대시보드 저장 보기][18]을 참조합니다. 개별 대시보드를 클릭해 확인하세요.
 
 **참고**: 대시보드를 설정하거나 편집하려면 Datadog 브라우저 UI에 로그인해야 합니다.
 
@@ -268,23 +338,26 @@ SLOs, Monitors 및 Open Incidents 위젯을 다른 개발 및 협업 도구와 �
 
 {{< img src="dashboards/dashboards-widget-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS 및 Android의 위젯">}}
 
-
+## 참고 자료
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ko/mobile/
+
+[1]: /ko/service_management/mobile/
 [2]: https://apps.apple.com/app/datadog/id1391380318
 [3]: https://play.google.com/store/apps/details?id=com.datadog.app
-[4]: /ko/dashboards/widgets/#full-screen
-[5]: https://app.datadoghq.com/process
-[6]: https://app.datadoghq.com/infrastructure/map
-[7]: https://app.datadoghq.com/logs
-[8]: /ko/tracing/
-[9]: /ko/profiler/
-[10]: /ko/dashboards/guide/custom_time_frames/
-[11]: /ko/dashboards/sharing/#dashboards
-[12]: /ko/events/
-[13]: /ko/account_management/rbac/
-[14]: /ko/dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
-[15]: https://app.datadoghq.com/dashboard/lists
-[16]: /ko/dashboards/template_variables/#saved-views
+[4]: https://app.datadoghq.com/dashboard/lists
+[5]: /ko/dashboards/widgets/#full-screen
+[6]: https://app.datadoghq.com/process
+[7]: https://app.datadoghq.com/infrastructure/map
+[8]: https://app.datadoghq.com/logs
+[9]: /ko/tracing/
+[10]: /ko/profiler/
+[11]: /ko/dashboards/guide/custom_time_frames/
+[12]: /ko/dashboards/guide/version_history/
+[13]: /ko/dashboards/sharing/#dashboards
+[14]: /ko/events/
+[15]: /ko/account_management/rbac/
+[16]: /ko/dashboards/guide/how-to-use-terraform-to-restrict-dashboard-edit/
+[17]: /ko/account_management/teams/
+[18]: /ko/dashboards/template_variables/#saved-views
