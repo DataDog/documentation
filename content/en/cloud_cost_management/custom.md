@@ -64,6 +64,7 @@ You can upload multiple CSV and JSON files, in either or both formats. Ensure th
 {{% tab "CSV" %}}
 
 The required fields must appear as columns in your CSV in the order listed above. You need to use the comma `,` as a separator for your CSV.
+
 Example of a valid CSV:
 
 <table>
