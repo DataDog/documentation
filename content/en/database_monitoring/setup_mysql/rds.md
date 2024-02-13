@@ -33,8 +33,7 @@ Supported Agent versions
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
-Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]). <br/><br/>
-It is recommended to run the Agent on a machine with 4 CPU cores and 8 GB of RAM or more for optimal performance.
+Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 Proxies, load balancers, and connection poolers
 : The Datadog Agent must connect directly to the host being monitored, preferably through the instance endpoint. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
@@ -353,7 +352,7 @@ If you have installed and configured the integrations and Agent as described and
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /database_monitoring/setup_mysql/#agent-integration-overhead
+[1]: /agent/basic_agent_usage#agent-overhead
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
 [4]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
