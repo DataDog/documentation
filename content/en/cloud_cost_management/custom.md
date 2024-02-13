@@ -29,7 +29,7 @@ Custom Cost is in public beta.
 
 ## Overview
 
-Custom Costs allow you to upload *any cost data source* to Datadog, so that you can understand the total cost of your services. 
+Custom Costs allow you to upload *any cost data source* to Datadog, so that you can understand the total cost of your services.
 
 Custom Costs accepts costs in pre-defined file structures (CSV or JSON). These files are aligned with the [FinOps FOCUS specification][2], and you can [upload multiple files in either format](#create-a-csv-or-json-file-with-required-fields). For example, you can upload a mix of CSV or JSON files as desired with 1+ line items (rows for CSV or objects for JSON).
 
@@ -156,8 +156,8 @@ Example of an invalid JSON file:
 
 {{% /tab %}}
 {{< /tabs >}}
-   
-### Add optional tags 
+
+### Add optional tags
 
 You can optionally add any number of tags to CSV or JSON files to allocate costs *after* the required fields as additional columns.
 
@@ -230,7 +230,7 @@ In this example, an additional `Tags` object property has been added with two ke
 
 ### Configure Custom Costs
 
-Once your data is formatted to the requirements above, upload your CSV and JSON files to Cloud Cost Management on [the **Custom Costs Uploaded Files** page][3] or programmatically by using the API. 
+Once your data is formatted to the requirements above, upload your CSV and JSON files to Cloud Cost Management on [the **Custom Costs Uploaded Files** page][3] or programmatically by using the API.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -242,9 +242,9 @@ Navigate to [**Cloud Costs** > **Settings** > **Uploaded Files**][101] and click
 [101]: https://app.datadoghq.com/cost/settings/cost-files
 
 {{% /tab %}}
-{{% tab "Programmatically" %}}
+{{% tab "API (file)" %}}
 
-To send a JSON file, use the `PUT api/v2/cost/custom_costs` API endpoint. 
+To send a file, use the `PUT api/v2/cost/custom_costs` API endpoint.
 
 Example with cURL:
 
@@ -256,9 +256,21 @@ curl -L -X PUT "api.datadoghq.com/api/v2/cost/custom_costs/" \
 -F "file=${file};type=text/json"
 ```
 {{% /tab %}}
+{{% tab "API (request)" %}}
+
+Send the content of the file though the API using the `PUT api/v2/cost/custom_costs` endpoint.
+
+```curl
+curl -L -X PUT "api.datadoghq.com/api/v2/cost/custom_costs/" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '${file_content}'
+```
+{{% /tab %}}
 {{< /tabs >}}
 
-Cost data appears after 24 hours. 
+Cost data appears after 24 hours.
 
 ## Cost metric types
 
