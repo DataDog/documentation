@@ -6,7 +6,7 @@ private: true
 further_reading:
 - link: "/dynamic_instrumentation/"
   tag: "Documentation"
-  text: "Learn more about the Dynamic Instrumentation"
+  text: "Learn more about Dynamic Instrumentation"
 ---
 
 {{< site-region region="gov,ap1" >}}
