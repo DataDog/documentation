@@ -23,15 +23,16 @@ short_description: Amazon API ゲートウェイエラーを追跡。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon API Gateway は、開発者があらゆる規模で API の作成、公開、保守、監視、およびセキュリティ保護を簡単に行えるフルマネージド型サービスです。
 
 このインテグレーションを有効にすると、Datadog にすべての API Gateway メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -44,11 +45,11 @@ Amazon API Gateway は、開発者があらゆる規模で API の作成、公�
     - `apigateway:GET`
     - `tag:GetResources`
 
-3. [Datadog - AWS API Gateway インテグレーション][4]をインストールします。
+3. [Datadog - Amazon API Gateway インテグレーション][4]をインストールします。
 
 **注**: CloudWatch の詳細メトリクスを有効にしている場合、ステージ内のすべてのリソースまたはルートで有効にする必要があります。無効の場合、Datadog の集計値が不正確になります。
 
-### ログの収集
+### 収集データ
 
 API Gateway ログを有効化します。
 
@@ -82,23 +83,23 @@ API Gateway ログを有効化します。
 
 完了したら、[Datadog Log セクション][6]に移動し、ログを確認します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_api_gateway" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
-AWS API Gateway インテグレーションには、イベントは含まれません。
+Amazon API Gateway インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
-AWS API Gateway インテグレーションには、サービスのチェック機能は含まれません。
+Amazon API Gateway インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
