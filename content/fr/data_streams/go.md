@@ -33,7 +33,7 @@ producer, err := ddkafka.NewProducer(&kafka.ConfigMap{
 
 ```
 
-Si un service consomme des données d'un point et en produit en un autre point, propagez le contexte entre ces deux points à l'aide de la structure du contexte Go :
+Si un service consomme des données en un point et en produit en un autre point, propagez le contexte entre ces deux points à l'aide de la structure du contexte Go :
 1. Extrayez le contexte des en-têtes :
     ```go
     ctx = datastreams.ExtractFromBase64Carrier(ctx, ddsarama.NewConsumerMessageCarrier(message))
