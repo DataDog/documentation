@@ -133,7 +133,7 @@ PM> Install-Package NLog
     <!-- ログを Json 形式でファイルに書き込みます -->
     <target name="json-file" xsi:type="File" fileName="application-logs.json">
       <layout xsi:type="JsonLayout">
-        <attribute name="date" layout="${date:format=yyyy-MM-ddTHH\:mm\:ss.fff}" />
+        <attribute name="date" layout="${date:universalTime=true:format=o}" />
         <attribute name="level" layout="${level:upperCase=true}"/>
         <attribute name="message" layout="${message}" />
         <attribute name="exception" layout="${exception:format=ToString}" />
@@ -283,8 +283,8 @@ JSON でログを記録する方がメリットが多いですが、未加工の
     logs:
 
       - type: file
-        path: "/path/to/your/csharp/log.log"
-        service: csharp
+        path: "<path_to_your_csharp_log>.log"
+        service: <service_name>
         source: csharp
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
@@ -634,9 +634,9 @@ using (var log = new LoggerConfiguration()
 [1]: /ja/logs/log_configuration/parsing
 [2]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
 [3]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[4]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[5]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[6]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[5]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[6]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [7]: /ja/logs/log_configuration/parsing/?tab=matchers
 [8]: /ja/logs/explorer/#overview
 [9]: /ja/tracing/other_telemetry/connect_logs_and_traces/dotnet/

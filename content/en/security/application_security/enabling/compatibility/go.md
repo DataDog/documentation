@@ -15,8 +15,8 @@ The following ASM capabilities are supported in the Go library, for the specifie
 | Threat Detection| 1.47.0  |
 | Threat Protection |  1.50.0   |
 | Customize response to blocked requests | 1.53.0 |
-| Vulnerability Management for Open Source Software (OSS) | 1.49.0 |
-| Vulnerability Management for Code-level (beta) | not supported |
+| Software Composition Analysis (SCA) | 1.49.0 |
+| Code Security (beta) | not supported |
 | Automatic user activity event tracking | not supported |
 
 The minimum tracer version to get all supported ASM capabilities for Go is 1.50.0.
