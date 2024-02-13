@@ -41,7 +41,7 @@ Supported test frameworks:
 
 | Test Framework | Version |
 |---|---|
-| `pytest` | >= 3.0.0 <= 7.0.0 (8.0.0 support under way)|
+| `pytest` | >= 3.0.0 <= 7.0.0 |
 | `pytest-benchmark` | >= 3.1.0 |
 | `unittest` | >= 3.7 |
 
