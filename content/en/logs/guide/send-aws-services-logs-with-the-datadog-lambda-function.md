@@ -46,6 +46,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [RedShift][34]                     | [Enable Amazon Redshift logs][35]                                                                              | [Manual][36] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [Verified Access][37]              | [Enable Verified Access logs][38]                                                                              | [Manual][39] log collection.                                                                                                 |
 | [VPC][40]                          | [Enable Amazon VPC logs][41]                                                                                   | [Manual][42] log collection.                                                                                                 |
+| [Step Functions][52]               | [Enable Amazon Step Functions logs][53]                                                                        | [Manual][54] log collection.                                                                                                 |
 | [Web Application Firewall][49]     | [Enable Amazon WAF logs][50]                                                                                   | [Manual][51] log collection.                                                                                                 |
 
 
@@ -70,6 +71,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
 | Lambda Logs                 | CloudWatch     |
 | Redshift Logs               | S3             |
 | S3 Access Logs              | S3             |
+| Step Functions              | CloudWatch     |
 | Web Application Firewall    | S3, CloudWatch |
 
 **Note**: [Subscription filters][48] are not created automatically by the DatadogForwarder. Create them directly on a Log Group.
@@ -91,6 +93,8 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     "s3:GetBucketNotification",
     "s3:ListAllMyBuckets",
     "s3:PutBucketNotification",
+    "states:ListStateMachines",
+    "states:DescribeStateMachine",
     "wafv2:ListLoggingConfigurations",
     "logs:PutSubscriptionFilter",
     "logs:DeleteSubscriptionFilter",
@@ -112,11 +116,12 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
     | `s3:GetBucketNotification`                                  | Get existing Lambda trigger configurations.                                  |
     | `s3:ListAllMyBuckets`                                       | List all S3 buckets.                                                         |
     | `s3:PutBucketNotification`                                  | Add or remove a Lambda trigger based on S3 bucket events.                    |
+    | `states:ListStateMachines`                                  | List all Step Functions.                                                     |
+    | `states:DescribeStateMachine`                               | Get logging details about a Step Function.                                   |
     | `wafv2:ListLoggingConfigurations`                           | Lists all logging configurations of the Web Application Firewall.            |
     | `logs:PutSubscriptionFilter`                                | Add a Lambda trigger based on CloudWatch Log events                          |
     | `logs:DeleteSubscriptionFilter`                             | Remove a Lambda trigger based on CloudWatch Log events                       |
     | `logs:DescribeSubscriptionFilters`                          | Lists the subscription filters for the specified log group.                  |
-
 
 3. In the [AWS Integration page][44], select the AWS Account to collect logs from and click on the **Log Collection** tab.  
    {{< img src="logs/aws/aws_log_setup_step1.png" alt="The Log Collection tab of the AWS integration page for a specific AWS account with instructions to send AWS Services logs and a textbox to autosubscribe the Forwarder Lambda function by entering the ARN of the Forwarder Lambda function" popup="true" style="width:90%;" >}}
@@ -302,3 +307,6 @@ You can also exclude or send only those logs that match a specific pattern by us
 [49]: /integrations/amazon_waf/
 [50]: /integrations/amazon_waf/#log-collection
 [51]: /integrations/amazon_waf/#send-logs-to-datadog
+[52]: /integrations/amazon_step_functions/
+[53]: /integrations/amazon_step_functions/#log-collection
+[54]: /integrations/amazon_step_functions/#send-logs-to-datadog

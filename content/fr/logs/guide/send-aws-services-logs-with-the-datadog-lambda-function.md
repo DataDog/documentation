@@ -70,6 +70,7 @@ Datadog peut automatiquement configurer des déclencheurs sur la fonction Lambda
 | Logs Lambda                           | CloudWatch     |
 | Logs Redshift                         | S3             |
 | Logs d'accès S3                       | S3             |
+| Log des Step Functions                | CloudWatch     |
 | Logs d'accès Web Application Firewall | S3, CloudWatch |
 
 **Remarque** : Les [Filtres d'abonnement][48] ne sont pas créés automatiquement par le DatadogForwarder. Créez les directement dans un Log Group.
@@ -91,6 +92,8 @@ Datadog peut automatiquement configurer des déclencheurs sur la fonction Lambda
     "s3:GetBucketNotification",
     "s3:ListAllMyBuckets",
     "s3:PutBucketNotification",
+    "states:ListStateMachines",
+    "states:DescribeStateMachine",
     "wafv2:ListLoggingConfigurations",
     "logs:PutSubscriptionFilter",
     "logs:DeleteSubscriptionFilter",
@@ -112,6 +115,8 @@ Datadog peut automatiquement configurer des déclencheurs sur la fonction Lambda
     | `s3:GetBucketNotification`                                  | Récupère les configurations des déclencheurs Lambda existants.                                  |
    {{< partial name="whats-next/whats-next.html" >}}
     | `s3:PutBucketNotification`                                  | Ajoute ou supprime un déclencheur Lambda basé sur des événements de compartiment S3.                    |
+    | `states:ListStateMachines`                                  | Répertorie toutes les Step Functions.                                        |
+    | `states:DescribeStateMachine`                               | Récupère la configuration des logs d'une Step Function.                      |
     | `wafv2:ListLoggingConfigurations`                           | Répertorie toutes les configurations de logs de Web Application Firewall.            |
     | `logs:PutSubscriptionFilter`                                | Ajoute un déclencheur Lambda basé sur des événements de log CloudWatch.                          |
     | `logs:DeleteSubscriptionFilter`                             | Supprime un déclencheur Lambda basé sur des événements de log CloudWatch.                       |
@@ -301,3 +306,6 @@ Vous pouvez également exclure ou envoyer uniquement les logs correspondant à u
 [49]: /integrations/amazon_waf/
 [50]: /integrations/amazon_waf/#log-collection
 [51]: /integrations/amazon_waf/#send-logs-to-datadog
+[52]: /integrations/amazon_step_functions/
+[53]: /integrations/amazon_step_functions/#log-collection
+[54]: /integrations/amazon_step_functions/#send-logs-to-datadog
