@@ -15,7 +15,7 @@ Pour implémenter la solution Data Streams Monitoring, vous devez avoir instal
 - [Démarrez le traceur][3].
 
 Vous avez le choix entre deux types d'instrumentation :
-- Une instrumentation pour les workloads basés sur Kafka
+- une instrumentation pour les workloads basés sur Kafka ;
 - Une instrumentation personnalisée pour les autres technologies ou protocoles de mise en file d'attente
 
 ### Client Confluent Kafka
