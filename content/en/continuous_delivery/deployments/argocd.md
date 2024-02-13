@@ -126,7 +126,7 @@ After this final step is completed, you can start monitoring your Argo CD deploy
 ## Adding custom tags to deployment executions
 
 You can optionally add custom tags to the deployment executions generated from Argo CD applications deployments. These tags can be used to filter, group, and aggregate deployment executions in Datadog.
-To add custom tags, add the `dd_customtags` annotation to your Argo CD application annotations. The value of the annotation should be a comma-separated list of tags, structured as `key:value` pairs. For example:
+To add custom tags, add the `dd_customtags` annotation to your Argo CD application annotations and set the value to a comma-separated list of tags, structured as `key:value` pairs. For example:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
