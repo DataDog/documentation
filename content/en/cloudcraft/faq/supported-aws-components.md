@@ -25,6 +25,7 @@ Cloudcraft supports the following AWS components:
 - EKS Workloads (Kubernetes Deployments, Stateful Sets, Daemon Sets, Jobs, and Cron Jobs)
 - ElastiCache (Redis and Memcached)
 - Elasticsearch (OpenSearch)
+- EventBridge Bus
 - FSx (Windows Filer Server, Lustre, NetApp ONTAP, and OpenZFS)
 - Fargate for ECS and EKS
 - Glacier Vaults
