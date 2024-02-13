@@ -601,6 +601,9 @@ Cucumber's [parallel mode][16] is not supported. Tests run in parallel mode are 
 ### Jest's `test.concurrent`
 Jest's [test.concurrent][17] is not supported.
 
+### Jest's `--forceExit`
+Jest's [--forceExit][21] option might cause data to be lost. We try to send data as soon as possible after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
+
 ## Best practices
 
 Follow these practices to take full advantage of the testing framework and CI Visibility.
@@ -665,3 +668,4 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
 [19]: https://www.npmjs.com/package/mocha-each
 [20]: /getting_started/tagging/unified_service_tagging
+[21]: https://jestjs.io/docs/cli#--forceexit
