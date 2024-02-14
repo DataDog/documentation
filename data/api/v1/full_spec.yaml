@@ -13441,10 +13441,12 @@ components:
         only supporting `http`.
       enum:
       - http
+      - grpc
       example: http
       type: string
       x-enum-varnames:
       - HTTP
+      - GRPC
     SyntheticsAPITest:
       description: Object containing details about a Synthetic API test.
       properties:
