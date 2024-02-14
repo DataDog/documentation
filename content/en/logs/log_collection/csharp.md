@@ -293,7 +293,7 @@ Once [log collection is enabled][2], set up [custom log collection][3] to tail y
         #    name: new_log_start_with_date
         #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
     ```
-3. Make sure the agent user has read access permissions to the log file.
+3. Make sure the Agent user has read access permissions to the log file.
 4. [Restart the Agent][5].
 5. Run the [Agent's status subcommand][6] and look for `csharp` under the `Checks` section to confirm logs are successfully submitted to Datadog.
 
