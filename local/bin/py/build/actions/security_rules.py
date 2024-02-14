@@ -105,6 +105,9 @@ def security_rules(content, content_dir):
             if not message_file_name.exists():
                 continue
 
+        # get path relative to the repo root for comparisons
+        relative_path = str(p.parent).split(f"/{content['repo_name']}/")[1]
+
         is_enabled = bool(data.get("isEnabled", True))
         is_beta = bool(data.get("isBeta", False))
 
@@ -118,9 +121,9 @@ def security_rules(content, content_dir):
         is_past_deprecation_date = date(*[int(x) for x in deprecation_date.split('-')]) < date.today() if deprecation_date else False
         # 3. general flags we should respect for removal. At least one true to cause removal
         is_removed = (data.get('isShadowDeployed', False) or data.get('isDeleted', False) or data.get('isDeprecated', False))
-        # 4. If rule not enabled and under infrastructure-monitoring directory lets remove the rule
-        # this is to cover the case where some rules exist that haven't been evaluated for use.
-        is_disabled_and_infra = not is_enabled and 'infrastructure-monitoring' in p.parent
+        # 4. If rule not enabled and under posture-management/infrastructure-monitoring directory lets remove the rule
+        # this is to cover the case where some rules were inherited that haven't been evaluated completely..
+        is_disabled_and_infra = not is_enabled and 'posture-management' in relative_path
 
         if is_restricted_and_not_beta or is_removed or is_past_deprecation_date or is_disabled_and_infra:
             if p.exists():
@@ -153,8 +156,6 @@ def security_rules(content, content_dir):
                 "is_beta": is_beta
             }
 
-            # get path relative to the repo root for comparisons
-            relative_path = str(p.parent).split(f"/{content['repo_name']}/")[1]
             # lets build up this categorization for filtering purposes
 
             tags = data.get('tags', [])
