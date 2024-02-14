@@ -5446,16 +5446,21 @@ components:
         git:
           $ref: '#/components/schemas/DORAGitInfo'
         id:
-          description: Incident ID
+          description: Incident ID. Required to update a previously sent incident.
           type: string
         name:
           description: Incident name.
-          example: Webserver is down failing all requests
+          example: Webserver is down failing all requests.
           type: string
-        service:
-          description: Service name from a service available in the Service Catalog.
-          example: shopist
-          type: string
+        services:
+          description: Service names impacted by the incident. If possible, use names
+            registered in the Service Catalog. Required when the team field is not
+            provided.
+          example:
+          - shopist
+          items:
+            type: string
+          type: array
         severity:
           description: Incident severity.
           example: High
@@ -5465,12 +5470,17 @@ components:
           example: 1693491974000000000
           format: int64
           type: integer
+        team:
+          description: Name of the team owning the services impacted. If possible,
+            use team handles registered in Datadog. Required when the services field
+            is not provided.
+          example: backend
+          type: string
         version:
           description: Version to correlate with [APM Deployment Tracking](https://docs.datadoghq.com/tracing/services/deployment_tracking/).
           example: v1.12.07
           type: string
       required:
-      - service
       - started_at
       type: object
     DORAIncidentRequestData:
