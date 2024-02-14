@@ -21,7 +21,7 @@ To get started with APM DevSecOps, [install and configure the Datadog Agent][5] 
 - [APM][6]
 - [Universal Service Monitoring][7]
 
-After you install the Agent, enable AVM for your environment.
+After you install the Agent, enable SCA for your environment.
 
 - [Software Composition Analysis][10]
 
