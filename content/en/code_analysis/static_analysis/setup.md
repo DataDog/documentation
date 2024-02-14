@@ -80,94 +80,11 @@ You must configure a GitHub App using the [GitHub integration tile][9] and set u
 
 Datadog Static Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8] and checks your code against Datadog's default rulesets. Configure your [Datadog API and application keys][3] and run Static Analysis in the respective CI provider.
 
-{{< tabs >}}
-{{% tab "CircleCI Orbs" %}}
-
-To run Static Analysis with CircleCI, [follow these instructions for setting up a CircleCI Orb][101].
-
-[101]: /static_analysis/circleci_orbs
-
-{{% /tab %}}
-{{% tab "GitHub Actions" %}}
-
-To run Static Analysis with GitHub, [follow these instructions for setting up a GitHub Action][101].
-
-[101]: /static_analysis/github_actions/
-
-{{% /tab %}}
-{{% tab "Other" %}}
-
-If you don't use CircleCI Orbs or GitHub Actions, you can run the Datadog CLI directly in your CI pipeline platform. 
-
-Prerequisites:
-
-- unzip
-- Node.js 14 or later
-
-Configure the following environment variables:
-
-| Name         | Description                                                                                                                | Required | Default         |
-|--------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `DD_API_KEY` | Your Datadog API key. This key is created by your [Datadog organization][101] and should be stored as a secret.            | Yes      |                 |
-| `DD_APP_KEY` | Your Datadog application key. This key is created by your [Datadog organization][102] and should be stored as a secret.    | Yes      |                 |
-| `DD_SITE`    | The [Datadog site][103] to send information to. Your Datadog site is {{< region-param key="dd_site" code="true" >}}.       | No       | `datadoghq.com` |
-
-Provide the following inputs:
-
-| Name           | Description                                                                                                                | Required | Default         |
-|----------------|----------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `service`      | The name of the service to tag the results with.                                                                           | Yes      |                 |
-| `env`          | The environment to tag the results with. `ci` is a helpful value for this input.                                           | No       | `none`          |
-| `cpu_count`    | Set the number of CPUs used by the analyzer. Defaults to the number of CPUs available.                                     | No       |                 |
-| `subdirectory` | The subdirectory path the analysis should be limited to. The path is relative to the root directory of the repository.                  | No       |                 |
-
-<div class="alert alert-info">
-  Add a `--performance-statistics` flag to your static analysis command to get execution time statistics for analyzed files.
-</div>
-
-Select an analyzer for your architecture and OS:
-
-| Architecture | OS        | Name                                                    | Link                                                                                                                                          |
-|--------------|-----------|---------------------------------------------------------| ----------------------------------------------------------------------------------------------------------------------------------------------|
-| `aarch64`    | `Darwin`  | `datadog-static-analyzer-aarch64-apple-darwin.zip`      | [Download](https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-aarch64-apple-darwin.zip)      |
-| `aarch64`    | `Linux`   | `datadog-static-analyzer-aarch64-unknown-linux-gnu.zip` | [Download](https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-aarch64-unknown-linux-gnu.zip) |
-| `x86_64`     | `Darwin`  | `datadog-static-analyzer-x86_64-apple-darwin.zip`       | [Download](https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-x86_64-apple-darwin.zip)       |
-| `x86_64`     | `Linux`   | `datadog-static-analyzer-x86_64-unknown-linux-gnu.zip`  | [Download](https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-x86_64-unknown-linux-gnu.zip)  |
-| `x86_64`     | `Windows` | `datadog-static-analyzer-x86_64-pc-windows-msvc.zip`    | [Download](https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-x86_64-pc-windows-msvc.zip)    |
-
-Add the following to your CI pipeline:
-
-<div class="alert alert-info">
-  The following example uses the x86_64 Linux version of Datadog's static analyzer. If you're using a different OS or architecture, you should select it from the table above and update the DATADOG_STATIC_ANALYZER_URL value below. You can view all releases on our <a href="https://github.com/DataDog/datadog-static-analyzer/releases">GitHub Releases</a> page.
-</div>
-
-```bash
-# Set the Datadog site to send information to
-export DD_SITE="datadoghq.com"
-
-# Install dependencies
-npm install -g @datadog/datadog-ci 
-
-# Download the latest Datadog static analyzer:
-# https://github.com/DataDog/datadog-static-analyzer/releases
-DATADOG_STATIC_ANALYZER_URL=https://github.com/DataDog/datadog-static-analyzer/releases/latest/download/datadog-static-analyzer-x86_64-unknown-linux-gnu.zip
-curl -L $DATADOG_STATIC_ANALYZER_URL > /tmp/ddog-static-analyzer.zip
-unzip /tmp/ddog-static-analyzer.zip -d /tmp
-mv /tmp/datadog-static-analyzer /usr/local/datadog-static-analyzer
-
-# Run Static Analysis
-/usr/local/datadog-static-analyzer -i . -o /tmp/report.sarif -f sarif
-
-# Upload results
-datadog-ci sarif upload /tmp/report.sarif --service <service> --env <env>
-```
-
-[101]: /account_management/api-app-keys/#api-keys
-[102]: /account_management/api-app-keys/#application-keys
-[103]: /getting_started/site/
-
-{{% /tab %}}
-{{< /tabs >}}
+{{< whatsnext desc="See the documentation for information about the following integrations:">}}
+    {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}CircleCI Orbs{{< /nextlink >}}
+    {{< nextlink href="code_analysis/static_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="code_analysis/static_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ### Upload third-party static analysis results to Datadog
 
