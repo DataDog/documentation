@@ -22,15 +22,16 @@ short_description: Amazon Keyspaces の主要なメトリクスを追跡しま�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Keyspaces (Apache Cassandra 用) は、スケーラブルで可用性の高い、マネージド型の Apache Cassandra 互換のデータベースサービスです。Amazon Keyspaces を使用すると、現在使用しているのと同じ Cassandra アプリケーションコードと開発者ツールを使用して、AWS 上で Cassandra ワークロードを実行することができます。
 
 このインテグレーションを有効にすると、Datadog にすべての Keyspaces メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -39,23 +40,23 @@ Amazon Keyspaces (Apache Cassandra 用) は、スケーラブルで可用性の�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Cassandra` が有効になっていることを確認します。
 2. [Datadog - Amazon Keyspaces (Apache Cassandra 用) インテグレーション][3]をインストールします。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_keyspaces" >}}
 
 
-### イベント
+### ヘルプ
 
 Amazon Keyspaces インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Amazon Keyspaces インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
