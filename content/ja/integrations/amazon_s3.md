@@ -38,7 +38,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_s3
-oauth: {}
 public_title: Amazon S3
 short_description: Amazon S3 は、可用性と拡張性に優れたクラウドストレージサービスです。
 supported_os: []
