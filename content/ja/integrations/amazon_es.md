@@ -35,7 +35,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_es
-oauth: {}
 public_title: Amazon OpenSearch Service
 short_description: Amazon OpenSearch Service は、OpenSearch のデプロイと運用を簡単にします。
 supported_os: []
