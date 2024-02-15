@@ -44,7 +44,7 @@ The following filter _only_ collects metrics from EC2 instances that contain the
 ```
 datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1
 ```
-**Note**: In Datadog, uppercase letters will be changed to lowercase and spaces will be replaced with underscores, for example if you would like to collect metrics from EC2 instances with the tag `Team:Frontend App` in Datadog the tag applied should be `team:frontend_app`.
+**Note**: In Datadog, uppercase letters are changed to lowercase letters and spaces are replaced with underscores. For example, to collect metrics from EC2 instances with the tag `Team:Frontend App`, in Datadog, the tag applied should be `team:frontend_app`.
  
 ### CloudWatch Metric Streams with Kinesis Data Firehose
 
