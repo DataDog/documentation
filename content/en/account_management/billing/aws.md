@@ -44,7 +44,8 @@ The following filter _only_ collects metrics from EC2 instances that contain the
 ```
 datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1
 ```
-
+**Note**: In Datadog, uppercase letters will be changed to lowercase and spaces will be replaced with underscores, for example if you would like to collect metrics from EC2 instances with the tag `Team:Frontend App` in Datadog the tag applied should be `team:frontend_app`.
+ 
 ### CloudWatch Metric Streams with Kinesis Data Firehose
 
 You can optionally [send CloudWatch metrics to Datadog using CloudWatch Metric Streams and Kinesis Data Firehose][8] instead of using the default API polling method. If your organization uses the CloudWatch Metric Streams with Kinesis method, AWS resource exclusion rules defined in the Datadog AWS integration page do not apply. You must manage all rules for including and excluding metric namespaces or specific metric names in the CloudWatch Metric Streams configuration in your AWS accounts.
