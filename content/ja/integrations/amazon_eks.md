@@ -36,7 +36,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_eks
-oauth: {}
 public_title: Amazon EKS
 short_description: Amazon EKS は、AWS で Kubernetes を簡単に実行できるマネージド型サービスです
 supported_os:
