@@ -3215,11 +3215,36 @@ main:
     parent: observability_pipelines_reference
     identifier: observability_pipelines_vector_configuration
     weight: 601
+  - identifier: observability_pipelines_reference_sources
+    name: Sources
+    parent: observability_pipelines_vector_configuration
+    url: observability_pipelines/reference/sources/
+    weight: 1
+  - identifier: observability_pipelines_reference_transforms
+    name: Transforms
+    parent: observability_pipelines_vector_configuration
+    url: observability_pipelines/reference/transforms/
+    weight: 2
+  - identifier: observability_pipelines_reference_sinks
+    name: Sinks
+    parent: observability_pipelines_vector_configuration
+    url: observability_pipelines/reference/sinks/
+    weight: 3
   - name: Datadog Processing Language
     url: observability_pipelines/reference/processing_language/
     parent: observability_pipelines_reference
     identifier: observability_pipelines_reference_processing_language
     weight: 602
+  - name: Functions
+    url: observability_pipelines/reference/processing_language/functions/
+    parent: observability_pipelines_reference_processing_language
+    identifier: observability_pipelines_reference_processing_language_functions
+    weight: 1
+  - name: Errors
+    url: observability_pipelines/reference/processing_language/errors/
+    parent: observability_pipelines_reference_processing_language
+    identifier: observability_pipelines_reference_processing_language_errors
+    weight: 2
   - name: Guides
     url: observability_pipelines/guide/
     parent: observability_pipelines
