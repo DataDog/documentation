@@ -39,7 +39,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_elb
-oauth: {}
 public_title: Amazon Elastic Load Balancing
 short_description: Amazon ELB は自動的に複数の EC2 インスタンスにトラフィックを分散します。
 supported_os: []
