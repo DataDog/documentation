@@ -3235,6 +3235,16 @@ main:
     parent: observability_pipelines_reference
     identifier: observability_pipelines_reference_processing_language
     weight: 602
+  - name: Functions
+    url: observability_pipelines/reference/processing_language/functions/
+    parent: observability_pipelines_reference_processing_language
+    identifier: observability_pipelines_reference_processing_language_functions
+    weight: 1
+  - name: Errors
+    url: observability_pipelines/reference/processing_language/errors/
+    parent: observability_pipelines_reference_processing_language
+    identifier: observability_pipelines_reference_processing_language_errors
+    weight: 2
   - name: Guides
     url: observability_pipelines/guide/
     parent: observability_pipelines
