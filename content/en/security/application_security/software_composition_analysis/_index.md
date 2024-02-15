@@ -8,7 +8,7 @@ further_reading:
 - link: "/getting_started/application_security/software_composition_analysis"
   tag: "Guide"
   text: "Getting started with Software Composition Analysis"
-- link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
+- link: "https://www.datadoghq.com/blog/datadog-software-composition-analysis/"
   tag: "Blog"
   text: "Mitigate vulnerabilities from third-party libraries with Datadog Software Composition Analysis" 
 - link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
