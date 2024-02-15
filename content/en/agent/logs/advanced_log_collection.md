@@ -499,7 +499,7 @@ logs_config:
    - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
    - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
 ```
-For containerized deployments, you can enable `auto_multi_line_extra_patterns` with the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable, by passing it a comma separated string.
+For containerized deployments, you can enable `auto_multi_line_extra_patterns` by passing a comma-separated string in the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_EXTRA_PATTERNS` environment variable.
 
 {{% /tab %}}
 {{% tab "Docker" %}}
