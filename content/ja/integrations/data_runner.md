@@ -25,13 +25,13 @@ public_title: The Data Runner
 short_description: メトリクスを探す Datadog ダッシュボードの放置ゲーム。
 supported_os:
 - linux
-- mac os
+- macos
 - windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::Mac OS
+  - Supported OS::macOS
   - Supported OS::Windows
   - Offering::UI Extension
   configuration: README.md#Setup
@@ -45,6 +45,7 @@ tile:
   title: The Data Runner
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -55,7 +56,7 @@ Data Runner は、プレイヤーが指定したメトリクスを、キャラ�
 
 Data Runner の詳細については、GitHub の [stuartlangridge/data-runner][2] を参照してください。
 
-## セットアップ
+## 計画と使用
 
 1. Data Runner をダッシュボードに表示するには、ウィジェットを追加したい[ダッシュボード][3]を開きます。
 
@@ -63,21 +64,21 @@ Data Runner の詳細については、GitHub の [stuartlangridge/data-runner][
 
 3. ゲームキャラクターが探すメトリクスを選びます。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Data Runner は、メトリクスを提供しません。
 
-### イベント
+### ヘルプ
 
 Data Runner には、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Data Runner には、サービスのチェック機能は含まれません。
 
-## サポート
+## Agent
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
