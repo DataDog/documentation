@@ -113,20 +113,20 @@ GRANT rds_iam TO datadog;
 5. [Attach the role][5] with each EC2 instance that is running the agent. Note, this can be done at EC2 launch time.
 
 
-6. Update your Postgres instance config with an `aws` block specifying the `region` of the RDS instance:
+6. Update your Postgres instance config with an `aws` block specifying the `region` of the RDS instance, and set `managed_authentication.enabled` to `true`:
 
 
 ```yaml
 instances:
-- dbm: true
- host: example-endpoint.us-east-2.rds.amazonaws.com
- port: 5432
- username: datadog
- aws:
-   instance_endpoint: example-endpoint.us-east-2.rds.amazonaws.com
-   region: us-east-2
-   managed_authentication:
-    enabled: true
+  - host: example-endpoint.us-east-2.rds.amazonaws.com
+    port: 5432
+    username: datadog
+    dbm: true
+    aws:
+      instance_endpoint: example-endpoint.us-east-2.rds.amazonaws.com
+      region: us-east-2
+      managed_authentication:
+        enabled: true
 ```
 
 
@@ -192,22 +192,23 @@ SECURITY DEFINER
 ```
 
 
-5. Configure your instance config with the `managed_identity` YAML block, where the `CLIENT_ID` is the Client ID of the Managed Identity:
+5. Configure your instance config with the `azure.managed_authentication` YAML block, where the `CLIENT_ID` is the Client ID of the Managed Identity:
 
 
 ```yaml
 instances:
- - host: example-flex-server.postgres.database.azure.com
-   dbm: true
-   username: "<IDENTITY_NAME>"
-   ssl: "require"
-   managed_identity:
-     client_id: "<CLIENT_ID>"
-     # Optionally set the scope from where to request the identity token
-     identity_scope: "https://ossrdbms-aad.database.windows.net/.default"
-   azure:
-     deployment_type: flexible_server
-     fully_qualified_domain_name: example-flex-server.postgres.database.azure.com
+  - host: example-flex-server.postgres.database.azure.com
+    dbm: true
+    username: "<IDENTITY_NAME>"
+    ssl: "require"
+    azure:
+      deployment_type: flexible_server
+      fully_qualified_domain_name: example-flex-server.postgres.database.azure.com
+      managed_authentication:
+        enabled: true
+        client_id: "<CLIENT_ID>"
+        # Optionally set the scope from where to request the identity token
+        identity_scope: "https://ossrdbms-aad.database.windows.net/.default"
 ```
 
 
