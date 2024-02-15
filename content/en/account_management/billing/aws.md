@@ -63,4 +63,4 @@ For billing questions, contact your [Customer Success][7] Manager.
 [5]: /infrastructure/
 [6]: /help/
 [7]: mailto:success@datadoghq.com
-[8]: https://docs.datadoghq.com/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation#streaming-vs-polling
+[8]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/?tab=cloudformation#streaming-vs-polling
