@@ -108,6 +108,7 @@ content/en/code_analysis/static_analysis_rules/*
 !content/en/code_analysis/static_analysis_rules/_index.md
 
 # Let's keep these so we don't accidentally re-add them to repo
+content/en/code_analysis/software_composition_analysis/github_actions.md
 content/en/continuous_integration/static_analysis/github_actions.md
 content/en/continuous_integration/static_analysis/circleci_orbs.md
 content/en/continuous_integration/static_analysis/rules/
