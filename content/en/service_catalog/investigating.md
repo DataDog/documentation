@@ -29,7 +29,7 @@ algolia:
   tags: ['service catalog']
 ---
 
-Clicking on a service opens a side panel with details including two main sections: 
+Clicking a service opens a side panel with details in two main sections: 
 
 ## Service overview by views:
 
@@ -37,8 +37,8 @@ Clicking on a service opens a side panel with details including two main section
 - **Reliability information** including deployment status, SLOs, ongoing incidents, and error information.
 - **Performance graphs** showing requests, errors, latency, and time spent by downstream services.
 - **Pre-production information** regarding your software delivery process, such as the average build duration and success rate of CI pipelines related to your service, along with static analysis results from CI.
-- **Costs information** showing the cloud spends for a service, broken down by resource types.
-- **Security information** including known vulnerabilities exposed in the service's libraries, the timeline and type of attacks, identity of attackers, security threats impacting your services.
+- **Costs information** showing the cloud spend for a service, broken down by resource types.
+- **Security information** including known vulnerabilities exposed in the service's libraries, the timeline and type of attacks, identity of attackers, and security threats impacting your services.
 
 ## Configuration details 
 
