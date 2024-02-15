@@ -84,6 +84,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -138,7 +139,7 @@ macOS、Linux、Windows にまたがる、あらゆる言語でのコーディ�
 
 
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから CircleCI にお問い合わせください。
 
