@@ -1,0 +1,66 @@
+
+<!-- CTA MODAL -->
+<div id="tryRuleModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header flex-column mx-auto">
+                <img src="{{.Site.Params.img_url}}images/dd-logo-white.svg" alt="datadog bits">
+                <h1 class="modal-title fs-4 mx-auto p-0">
+                    Try this rule and analyze your code and libraries with Datadog Code Analysis
+                </h1>
+                <div class="modal-close position-absolute" data-bs-dismiss="modal" aria-label="Close">
+                    {{ partial "icon" (dict "name" "x-circle-solid" "size" "16px" ) }}
+                </div>
+            </div>
+            <div class="row modal-body mx-auto">
+                <div class="col-12 floating-body-top d-flex flex-column">
+                    <h2 class="fs-6 m-0 p-0 fw-bold text-uppercase">How to use this rule</h2>
+                    {{$valid_lang := replaceRE `(\w+)` .Page.Params.meta.language .Page.Params.group_id 1}}
+                    {{$valid_ruleset := (delimit (split $valid_lang "-") " ")}}
+                    {{$code := printf "rulesets:\n  - %s     # Rules to enforce %s." .Page.Params.group_id $valid_ruleset}}
+                    {{ highlight $code "yaml" "lineNos=inline"}}
+                    <ol class="m-0">
+                        <li>Create a static-analysis.datadog.yml with the content above at the root of your repository</li>
+                        <li>Use our free IDE integrations or add Code Analysis scans to your CI pipelines</li>
+                        <li>Get feedback on your code</li>
+                    </ol>
+                    <div class="d-flex align-items-center">
+                        <p class="mb-0">For more information, please read the <a href="https://docs.datadoghq.com/static_analysis">Code Analysis documentation</a></p>
+                        {{ partial "icon" (dict "name" "external-link" "title" "external link to Datadog Code Analysis" "size" "10px" "color" "#006BC2") }}
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row floating-body-bottom">
+                        <div class="col-12 col-md-6 floating-body-2 d-flex flex-column align-items-center">
+                            <img src="{{.Site.Params.img_url}}images/icons/vscode.png" width="32" height="32" alt="" srcset="">
+                            <h2 class="fs-6 m-0 fw-bold">VS Code Extension</h2>
+                            <p>Identify code and libraries vulnerabilities directly in your VS Code editor</p>
+                            <button class="cta-button d-flex align-items-center justify-content-center w-100 btn btn-primary">
+                                <span>Download Extension</span>
+                                {{ partial "icon" (dict "name" "external-link" "title" "external link to Datadog Code Analysis" "size" "13px" "color" "white") }}
+                                <a class="stretched-link" href="https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode"></a>
+                            </button>
+                        </div>
+                        <div class="col-12 col-md-6 floating-body-2 d-flex flex-column align-items-center">
+                            <img src="{{.Site.Params.img_url}}images/icons/intellij.png" width="32" height="32" alt="" srcset="">
+                            <h2 class="fs-6 m-0 fw-bold">IntelliJ Plugin</h2>
+                            <p>Identify code vulnerabilities directly in JetBrains products (such as IntelliJ)</p>
+                            <button class="cta-button d-flex align-items-center justify-content-center w-100 btn btn-primary">
+                                <span> Download Plugin</span>
+                                {{ partial "icon" (dict "name" "external-link" "title" "external link to Datadog Code Analysis" "size" "13px" "color" "white") }}
+                                <a class="stretched-link" href="https://plugins.jetbrains.com/plugin/19495-datadog"></a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer flex justify-content-center">
+                <p class="m-0">Use Datadog Code Analysis to catch code issue at every step of your development process</p>
+                <div class="m-0">
+                    <a href="https://www.datadoghq.com/static-analysis/">Datadog Code Analysis</a>
+                    {{ partial "icon" (dict "name" "external-link" "title" "external link to Datadog Code Analysis" "size" "10px" "color" "#006BC2") }}
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

@@ -1,3 +1,4 @@
+<!-- SIGNUP MODAL-->
 <div id="signupModal" class="modal" tabindex="-1" aria-hidden="true" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -11,69 +12,12 @@
         </div>
     </div>
 </div>
-
+<!-- POPUP IMAGE MODAL -->
 <div id="popupImageModal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body mx-auto">
 
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="ctaModal" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header mx-auto">
-                <h1 class="modal-title fs-4 mx-auto">
-                    Try this rule and analyze your code and libraries with Datadog Code Analysis
-                </h1>
-                {{/*  <img src="{{}}" alt="">  */}}
-                <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body mx-auto">
-                <div class="floating-body-top">
-                    <h2 class="fs-6 m-0 fw-bold text-uppercase">How to use this rule</h2>
-                    {{$code := "rulesets:\n  - csharp-best-practices     # Rules to enforce C# best practices."}}
-                    {{ highlight $code "yaml" "lineNos=inline"}}
-                    <ol class="m-0">
-                        <li>Create a static-analysis.datadog.yml with the content above at the root of your repository</li>
-                        <li>Use our free IDE integrations or add Code Analysis scans to your CI pipelines</li>
-                        <li>Get feedback on your code</li>
-                    </ol>
-                    <div class="d-flex align-items-center">
-                        <p class="mb-0">For more information, please read the <a href="https://docs.datadoghq.com/static_analysis">Code Analysis documentation</a></p>
-                        {{ partial "icon" (dict "name" "external-link" "title" "external link to Datadog Code Analysis" "size" "10px" "color" "#006BC2") }}
-                    </div>
-                </div>
-                <div class="floating-body-bottom">
-                    <div class="floating-body-2 d-flex flex-column align-items-center">
-                        <img src="{{.Site.Params.img_url}}images/icons/vscode.png" width="32" height="32" alt="" srcset="">
-                        <h2 class="fs-6 m-0 fw-bold">VS Code Extension</h2>
-                        <p>Identify code and libraries vulnerabilities directly in your VS Code editor</p>
-                        <button class="cta-button d-flex align-items-center justify-content-center w-100 btn btn-primary px-4 py-1">
-                            <span>Download Extension</span>
-                            {{ partial "icon" (dict "name" "external-link" "title" "external link to Datadog Code Analysis" "size" "13px" "color" "white") }}
-                        </button>
-                    </div>
-                    <div class="floating-body-2 d-flex flex-column align-items-center">
-                        <img src="{{.Site.Params.img_url}}images/icons/intellij.png" width="32" height="32" alt="" srcset="">
-                        <h2 class="fs-6 m-0 fw-bold">IntelliJ Plugin</h2>
-                        <p>Identify code vulnerabilities directly in JetBrains products (such as IntelliJ)</p>
-                        <button class="cta-button d-flex align-items-center justify-content-center w-100 btn btn-primary px-4 py-1">
-                            <span> Download Plugin</span>
-                            {{ partial "icon" (dict "name" "external-link" "title" "external link to Datadog Code Analysis" "size" "13px" "color" "white") }}
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer flex justify-content-center">
-                <p class="m-0">Use Datadog Code Analysis to catch code issue at every step of your development process</p>
-                <div class="m-0">
-                    <a href="https://www.datadoghq.com/static-analysis/">Datadog Code Analysis</a>
-                    {{ partial "icon" (dict "name" "external-link" "title" "external link to Datadog Code Analysis" "size" "10px" "color" "#006BC2") }}
-                </div>
             </div>
         </div>
     </div>

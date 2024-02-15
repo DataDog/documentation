@@ -76,6 +76,8 @@
 
   {{ partial "preview_banner/preview_banner" . }}
 
+  {{ partial "static_analysis/try-rule-modal.html" . }}
+
   <!--- integrations carousel modal --->
   {{ if and (in .Params.Kind "integration") (.Params.tile) (.Params.tile.media | len) }}
   {{ partial "integrations-carousel/integrations-carousel-modal.html" . }}
