@@ -2,7 +2,7 @@
 categories:
 - AWS
 - クラウド
-- data store
+- data stores
 - ログの収集
 dependencies: []
 description: Amazon FSx のキーメトリクスを追跡
@@ -22,22 +22,23 @@ short_description: Amazon FSx のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
-Amazon FSx は、Windows File Server または Lustre にスケーラブルなストレージを提供するフルマネージド型のサービスです。
+Amazon FSx は、NetApp ONTAP、OpenZFS、Windows File Server、Lustre ファイルシステム用のスケーラブルなストレージを提供するフルマネージドサービスです。
 
 このインテグレーションを有効にすると、Datadog にすべての FSx メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `FSx` が有効になっていることを確認します。
-2. AWS FSx のメトリクスを収集するために、以下のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
+2. Amazon FSx のメトリクスを収集するために、以下のアクセス許可を [Datadog IAM ポリシー][3]に追加します。
 
     | AWS アクセス許可                          | 説明                                                                                                                                                                                                                                             |
     | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -47,7 +48,7 @@ Amazon FSx は、Windows File Server または Lustre にスケーラブルな�
 2. [Datadog - Amazon FSx インテグレーション][4]をインストールします。
 
 
-### ログの収集
+### 収集データ
 
 #### FSx for Windows ファイルサーバーのイベントログを監査する
 個々のファイル、フォルダー、およびファイル共有へのすべてのユーザーアクセスを追跡するには、FSx for Windows ファイルサーバーからの監査イベントログを統合します。
@@ -68,19 +69,19 @@ Amazon FSx は、Windows File Server または Lustre にスケーラブルな�
 Amazon FSx は、ユーザー、ロール、または AWS サービスにより実行されたすべての FSx 操作を追跡する AWS CloudTrail と統合します。 
 Datadogの [CloudTrail インテグレーション][9]を有効にすると、AWS アカウントのすべての FSx API 呼び出しを追跡できます。
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_fsx" >}}
 
 
-### イベント
+### ヘルプ
 
 Amazon FSx インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Amazon FSx インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][11]までお問合せください。
 
@@ -93,5 +94,5 @@ Amazon FSx インテグレーションには、サービスのチェック機能
 [7]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-kinesis-firehose-destination/?tab=kinesisfirehosedeliverystream
 [8]: https://docs.datadoghq.com/ja/logs/log_configuration/processors/?tab=ui
 [9]: https://docs.datadoghq.com/ja/integrations/amazon_cloudtrail/#log-collection
-[10]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_gamelift/amazon_gamelift_metadata.csv
+[10]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_fsx/amazon_fsx_metadata.csv
 [11]: https://docs.datadoghq.com/ja/help/
