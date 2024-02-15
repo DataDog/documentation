@@ -18,8 +18,11 @@ private: true
 ### AWS CLI
 
 1. Download X.
-2. Update the JSON with a TASK_NAME, your Datadog API Key, and the appropriate DD_SITE (datadoghq.com). Note: The environment variable ECS_FARGATE is already set to "true". Update the JSON with YOUR_APP_NAME/YOUR_APP_IMAGE and specify the ENTRYPOINT.
-3. Add your other application containers to the task definition. For details on collecting integration metrics, see Integration Setup for ECS Fargate.
+2. Update the JSON with a TASK_NAME, your Datadog API Key, and the appropriate DD_SITE (datadoghq.com).
+
+**Note**: The environment variable `ECS_FARGATE` is already set to `true`. Update the JSON with YOUR_APP_NAME/YOUR_APP_IMAGE and specify the ENTRYPOINT.
+
+3. Add your other application containers to the task definition. For details on collecting integration metrics, see [Integration Setup for ECS Fargate][3].
 4. Run the following command to register the ECS task definition:
 
 {{< code-block lang="shell" collapsible="true" >}}
@@ -94,7 +97,6 @@ spec:
        - name: cws-instrumentation-volume
 {{< /code-block >}}
 
-
-
 [1]: /security/cloud_security_management/setup/csm_enterprise
 [2]: /security/cloud_security_management/setup/csm_workload_security
+[3]: /security/cloud_security_management/setup/csm_workload_security
