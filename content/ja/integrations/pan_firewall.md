@@ -5,6 +5,7 @@ assets:
   dashboards:
     Palo Alto Networks Firewall Overview: assets/dashboards/palo_alto_networks_firewall_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -12,6 +13,7 @@ assets:
     process_signatures: []
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10155
     source_type_name: Palo Alto Networks Firewall
   logs:
     source: pan.firewall
@@ -35,7 +37,7 @@ draft: false
 git_integration_title: pan_firewall
 integration_id: pan-firewall
 integration_title: Palo Alto Networks Firewall
-integration_version: 1.1.0
+integration_version: 1.2.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
@@ -65,6 +67,7 @@ tile:
   title: Palo Alto Networks Firewall
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -81,9 +84,9 @@ Datadog の Alto Networks Firewall ログインテグレーションにより、
 #### 認証の異常を監視する
 ファイアウォール認証ログは、ユーザーが Palo Alto Networks ファイアウォールで認証する際の詳細情報を提供します。これらのログを使用して、特定のプロトコル、ユーザー、場所などからの認証トラフィックの異常なスパイクを監視できます。
 
-## セットアップ
+## 計画と使用
 
-### ログの収集
+### 収集データ
 
  1. ファイアウォールが到達可能でインターネットに接続できるマシンに [Datadog Agent をインストール][1]します。
  2. PanOS で、Device >> Server Profiles >> Syslog を選択し、サーバープロファイルの名前を追加します。Syslog ログ転送[コンフィギュレーション手順][2]に従います。以下と同じ手順です。
@@ -122,21 +125,21 @@ Datadog の Alto Networks Firewall ログインテグレーションにより、
      ```
  9. [Agent を再起動します][4]。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### ログ管理
+### ワークフローの自動化
 
 PANOS インテグレーションは、Palo Alto Networks ファイアウォールインテグレーションからログを収集し、それを Datadog に転送します。
 
-### メトリクス
+### データセキュリティ
 
 PANOS インテグレーションには、メトリクスは含まれません。
 
-### イベント
+### ヘルプ
 
 PANOS インテグレーションは、イベントを送信しません。
 
-### サービスのチェック
+### ヘルプ
 
 PANOS インテグレーションには、サービスのチェック機能は含まれません。
 
@@ -147,11 +150,11 @@ PANOS インテグレーションには、サービスのチェック機能は�
 - [ログの種類とフィールド][5]
 - [ログ収集のドキュメント][6]
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://www.youtube.com/watch?v=LOPXg0oCMPs
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

@@ -5,6 +5,7 @@ assets:
   dashboards:
     Active Directory: assets/dashboards/active_directory.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: active_directory.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10068
     source_type_name: Active Directory
   logs:
     source: ruby
@@ -37,12 +39,11 @@ draft: false
 git_integration_title: active_directory
 integration_id: active-directory
 integration_title: Active Directory
-integration_version: 2.0.0
+integration_version: 2.1.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: active_directory
-oauth: {}
 public_title: Active Directory
 short_description: Microsoft Active Directory のメトリクスを収集してグラフ化
 supported_os:
@@ -61,21 +62,22 @@ tile:
   title: Active Directory
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 Microsoft Active Directory からメトリクスとログを取得して、パフォーマンスを視覚化および監視します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Agent の Active Directory チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
 Datadog Agent をドメイン環境にインストールするには、[Agent のインストール要件][2]を参照してください。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 #### メトリクスの収集
 
@@ -85,7 +87,7 @@ Datadog Agent をドメイン環境にインストールするには、[Agent �
 
 **注**: このチェックのバージョン 1.13.0 以降では、メトリクスの収集に新しい実装を使用し、これには Python 3 が必要です。Python 3 の使用が不可能なホストの場合や、このチェックのレガシーバージョンを使用する場合は、以下の[コンフィグ][6]を参照してください。
 
-#### ログの収集
+#### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -100,7 +102,7 @@ _Agent バージョン 6.0 以降で利用可能_
    ```yaml
    logs:
      - type: file
-       path: /path/to/my/directory/file.log
+       path: C:\path\to\my\directory\file.log
        source: ruby
        service: "<MY_SERVICE>"
    ```
@@ -116,21 +118,21 @@ _Agent バージョン 6.0 以降で利用可能_
 
 [Agent の status サブコマンドを実行][8]し、Checks セクションの `active_directory` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "active_directory" >}}
 
 
-### イベント
+### ヘルプ
 
 Active Directory チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Active Directory チェックには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 

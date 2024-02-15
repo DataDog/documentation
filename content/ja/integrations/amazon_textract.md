@@ -4,6 +4,7 @@ categories:
 - AWS
 - クラウド
 - ログの収集
+- ai/ml
 dependencies: []
 description: Amazon Textract の主要なメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_textract/
@@ -22,6 +23,7 @@ short_description: Amazon Textract の主要なメトリクスを追跡します
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 
 ## 概要
 
@@ -29,9 +31,9 @@ Amazon Textract は、スキャンしたドキュメントからテキスト、�
 
 このインテグレーションを有効にすると、すべての Amazon Textract メトリクスを Datadog に表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -40,23 +42,23 @@ Amazon Textract は、スキャンしたドキュメントからテキスト、�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Textract` が有効になっていることを確認します。
 2. [Datadog - Amazon Textract インテグレーション][3]をインストールします。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_textract" >}}
 
 
-### イベント
+### ヘルプ
 
 Amazon Textract インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Amazon Textract インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
