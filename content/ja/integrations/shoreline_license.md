@@ -23,7 +23,7 @@ integration_version: ''
 is_public: true
 kind: integration
 legal_terms:
-  eula: assets/terms_of_service_shoreline.pdf
+  eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: shoreline_license
 oauth: {}
@@ -68,6 +68,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -82,7 +83,7 @@ Shoreline は、待機中の全員が最高の SRE と同等の能力を発揮�
 
 まずは、[Shoreline][1] でトライアルアカウントを設定してください。
 
-## サポート
+## Agent
 
 サポートおよび機能リクエストをご希望の場合は、以下のチャンネルから Shoreline にお問い合わせください。
 
