@@ -118,15 +118,15 @@ GRANT rds_iam TO datadog;
 
 ```yaml
 instances:
-- dbm: true
- host: example-endpoint.us-east-2.rds.amazonaws.com
- port: 5432
- username: datadog
- aws:
-   instance_endpoint: example-endpoint.us-east-2.rds.amazonaws.com
-   region: us-east-2
-   managed_authentication:
-    enabled: true
+  - host: example-endpoint.us-east-2.rds.amazonaws.com
+    port: 5432
+    username: datadog
+    dbm: true
+    aws:
+      instance_endpoint: example-endpoint.us-east-2.rds.amazonaws.com
+      region: us-east-2
+      managed_authentication:
+        enabled: true
 ```
 
 
@@ -197,18 +197,18 @@ SECURITY DEFINER
 
 ```yaml
 instances:
- - host: example-flex-server.postgres.database.azure.com
-   dbm: true
-   username: "<IDENTITY_NAME>"
-   ssl: "require"
-   azure:
-    deployment_type: flexible_server
-    fully_qualified_domain_name: example-flex-server.postgres.database.azure.com
-    managed_authentication:
-      enabled: true
-      client_id: "<CLIENT_ID>"
-      # Optionally set the scope from where to request the identity token
-      identity_scope: "https://ossrdbms-aad.database.windows.net/.default"
+  - host: example-flex-server.postgres.database.azure.com
+    dbm: true
+    username: "<IDENTITY_NAME>"
+    ssl: "require"
+    azure:
+      deployment_type: flexible_server
+      fully_qualified_domain_name: example-flex-server.postgres.database.azure.com
+      managed_authentication:
+        enabled: true
+        client_id: "<CLIENT_ID>"
+        # Optionally set the scope from where to request the identity token
+        identity_scope: "https://ossrdbms-aad.database.windows.net/.default"
 ```
 
 
