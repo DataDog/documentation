@@ -14,17 +14,15 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">
-CSM Misconfigurations is not available in the selected site.
-</div>
+<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-CSM Misconfigurations comes with more than 400 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
+CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
 
 | Framework                                   | Framework Tag     | Rule Type      |
 |---------------------------------------------|-------------------|----------------|
 | [CIS AWS Foundations Benchmark v1.5.0*][2]  | `cis-aws`         | Cloud          |
-| [CIS Azure Foundations Benchmark v1.3.0][3] | `cis-azure`       | Cloud          |
+| [CIS Azure Foundations Benchmark v2.0.0][3] | `cis-azure`       | Cloud          |
 | [CIS GCP Foundations Benchmark v1.3.0][22]  | `cis-gcp`         | Cloud          |
 | [CIS Docker Benchmark v1.2.0][4]            | `cis-docker `     | Infrastructure |
 | [CIS Kubernetes Benchmark v1.5.1**][5]      | `cis-kubernetes`  | Infrastructure |
@@ -35,7 +33,7 @@ CSM Misconfigurations comes with more than 400 out-of-the-box compliance rules t
 | [CIS Red Hat Linux 9 v1.0.0][24]            | `cis-rhel9`       | Infrastructure |
 | [CIS Amazon Linux 2 v1.0.0][25]             | `cis-amzn2`       | Infrastructure |
 | [CIS Amazon Linux 2023 v1.0.0][25]          | `cis-al2023`      | Infrastructure |
-| [PCI DSS v3.2.1][6]                         | `pci`             | Cloud          |
+| [PCI DSS v4.0][6]                           | `pci-dss`         | Cloud          |
 | [AICPA SOC 2][7]                            | `soc-2`           | Cloud          |
 | [ISO/IEC 27001 v2][8]                       | `iso-27001`       | Cloud          |
 | [HIPAA][9]                                  | `hipaa`           | Cloud          |

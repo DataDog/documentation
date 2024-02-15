@@ -140,7 +140,7 @@ In addition to the default attributes captured by the SDK automatically, you can
 ```
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/roku
+[2]: /real_user_monitoring/mobile_and_tv_monitoring/setup/roku
 
 
 ## Further Reading

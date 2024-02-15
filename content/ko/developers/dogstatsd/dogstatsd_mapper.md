@@ -7,9 +7,6 @@ further_reading:
 - link: developers/libraries
   tag: 설명서
   text: 공식 및 커뮤니티에서 생성한 API 및 DogStatsD 클라이언트 라이브러리
-- link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
-  tag: GitHub
-  text: DogStatsD 소스 코드
 kind: 설명서
 title: DogStatsD Mapper
 ---

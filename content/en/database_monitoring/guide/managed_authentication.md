@@ -1,6 +1,8 @@
 ---
 title: Connecting with Managed Authentication
 kind: guide
+algolia:
+  tags: ["Microsoft Entra ID", "Azure Managed Identity", "Azure AD", "Azure Active Directory"]
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
@@ -10,7 +12,7 @@ kind: guide
 This guide assumes that you have configured [Database Monitoring][1].
 
 
-[Datadog Database Monitoring (DBM)][8] allows you to view explain plans and query samples running on your database hosts. This guide shows you how to use cloud managed authentication features, such as IAM, to connect the agent to your database. This provides a more secure way to authenticate and saves you from having to manage database credentials across your agent hosts.
+[Datadog Database Monitoring (DBM)][8] allows you to view explain plans and query samples running on your database hosts. This guide shows you how to use cloud managed authentication features, such as IAM, to connect the Agent to your database. This provides a more secure way to authenticate and saves you from having to manage database credentials across your agent hosts.
 
 
 ## Before you begin
@@ -24,12 +26,12 @@ Supported authentication types and Agent versions
 :
 
 
-| Authentication Type         | Agent Version | Postgres  | SQL Server |
-|:----------------------------|:--------------|:---------:|:----------:|
-| [IAM][2]                    |               |           |            |
-|                             | 7.46          | {{< X >}} |            |
-| [Azure Managed Identity][9] |               |           |            |
-|                             | 7.48          | {{< X >}} | {{< X >}}  |
+| Authentication Type                      | Agent Version | Postgres  | SQL Server |
+|:-----------------------------------------|:--------------|:---------:|:----------:|
+| [IAM][2]                                 |               |           |            |
+|                                          | 7.46          | {{< X >}} |            |
+| [Microsoft Entra ID Managed Identity][9] |               |           |            |
+|                                          | 7.48          | {{< X >}} | {{< X >}}  |
 
 
 
@@ -59,14 +61,51 @@ AWS supports IAM authentication to RDS and Aurora databases. In order to configu
 }
 ```
 
+For example, if you wanted to use the `datadog` user, you would use the following resource ARN:
 
-3. Log in to your database instance as the root user, and grant the `rds_iam` role to the new user:
+```json
+{
+   "Version": "2012-10-17",
+   "Statement": [
+       {
+           "Effect": "Allow",
+           "Action": [
+               "rds-db:connect"
+           ],
+           "Resource": [
+               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:RESOURCE_ID/datadog"
+           ]
+       }
+   ]
+}
+```
+
+AWS also supports wildcards for specifying the resource, for example if you wanted to allow the `datadog` user to authenticate across all instances for an account add the following:
+
+```json
+  "Resource": [
+    "arn:aws:rds-db:*:ACCOUNT:dbuser:cluster-*/datadog",
+    "arn:aws:rds-db:*:ACCOUNT:dbuser:db-*/datadog"
+  ],
+```
+
+3. Log in to your database instance as the root user, and grant the `rds_iam` [role][20] to the new user:
 
 
 ```tsql
+CREATE USER <YOUR_IAM_ROLE> WITH LOGIN;
 GRANT rds_iam TO <YOUR_IAM_ROLE>;
 ```
 
+For example, for the `datadog` user you would run:
+
+```tsql
+CREATE USER datadog WITH LOGIN;
+GRANT rds_iam TO datadog;
+```
+
+
+**Note:** this has to be a new user created without a password, or IAM authentication will fail.
 
 4. Complete the Agent setup steps for your [RDS][6] or [Aurora][7] instance.
 
@@ -80,21 +119,21 @@ GRANT rds_iam TO <YOUR_IAM_ROLE>;
 ```yaml
 instances:
 - dbm: true
-  host: example-endpoint.us-east-2.rds.amazonaws.com
-  port: 5432
-  username: datadog
-  aws:
-    instance_endpoint: example-endpoint.us-east-2.rds.amazonaws.com
-    region: us-east-2
-    managed_authentication:
-      enabled: true
+ host: example-endpoint.us-east-2.rds.amazonaws.com
+ port: 5432
+ username: datadog
+ aws:
+   instance_endpoint: example-endpoint.us-east-2.rds.amazonaws.com
+   region: us-east-2
+   managed_authentication:
+    enabled: true
 ```
 
 
-## Configure Azure managed identity authentication
+## Configure Microsoft Entra ID managed identity authentication
 
 
-Azure allows users to configure managed identity authentication for any resource that can access [Azure AD][15]. The Datadog Agent supports both [user and system assigned][10] managed identity authentication to your cloud databases.
+Azure allows users to configure managed identity authentication for any resource that can access [Microsoft Entra ID][15], formerly Azure Active Directory. The Datadog Agent supports both [user and system assigned][10] managed identity authentication to your cloud databases.
 
 
 ### Connect to PostgreSQL
@@ -104,8 +143,8 @@ In order to configure authentication to your PostgreSQL Flexible or Single Serve
 
 
 1. Create your [managed identity][11] in the Azure portal, and assign it to your Azure Virtual Machine where the agent is deployed.
-2. Configure an [Azure AD admin user][12] on your PostgreSQL instance.
-3. Connect to your PostgreSQL instance as the [Azure AD admin user][13], and run the following command:
+2. Configure a [Microsoft Entra ID admin user][12] on your PostgreSQL instance.
+3. Connect to your PostgreSQL instance as the [Microsoft Entra ID admin user][13], and run the following command:
 
 
 ```tsql
@@ -182,8 +221,8 @@ In order to configure authentication to your Azure SQL DB or Azure Managed Insta
 
 
 1. Create your [managed identity][11] in the Azure portal, and assign it to your Azure Virtual Machine where the agent is deployed.
-2. Configure an [Azure AD admin user][16] on your SQL Server instance.
-3. Connect to your PostgreSQL instance as the Azure AD admin user, and run the following command in the `master` database:
+2. Configure a [Microsoft Entra ID admin user][16] on your SQL Server instance.
+3. Connect to your SQL Server instance as the Microsoft Entra ID admin user, and run the following command in the `master` database:
 
 
 ```tsql
@@ -261,3 +300,4 @@ instances:
 [17]: /database_monitoring/setup_sql_server/azure/?tab=azuresqlmanagedinstance
 [18]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
 [19]: /database_monitoring/setup_sql_server/azure/?tab=azuresqldatabase
+[20]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL

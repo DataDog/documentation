@@ -16,9 +16,9 @@ further_reading:
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to elevate your security and threat detection"
-- link: "/getting_started/application_security/vulnerability_management"
+- link: "/getting_started/application_security/software_composition_analysis"
   tag: "Guide"
-  text: "Getting Started with Application Vulnerability Management"
+  text: "Getting Started with Software Composition Analysis"
 - link: "https://securitylabs.datadoghq.com/"
   tag: "Security Labs"
   text: "Security research, reports, tips, and videos from Datadog"
@@ -35,7 +35,7 @@ This guide walks you through best practices for getting your team up and running
 
 **Identify services vulnerable or exposed to attacks** that would benefit from ASM. Navigate to the [ASM Setup page][1] and select the services recommended there.
 
-{{< img src="getting_started/appsec/ASM_activation_service_selection.png" alt="ASM Services page view, showing Vulnerabilities and sorted by Suspicious requests column." style="width:100%;" >}}
+{{< img src="getting_started/appsec/ASM_activation_service_selection_v2.png" alt="ASM Services page view, showing Vulnerabilities and sorted by Suspicious requests column." style="width:100%;" >}}
 
 These security insights are detected from data reported by APM. The insights help prioritize your security efforts. ASM identifies, prioritizes, and helps remediate all security risks on your services.
 
@@ -78,7 +78,7 @@ Once enabled, ASM immediately identifies application vulnerabilities and detects
 2. **Validate attacks**: Send attack patterns to trigger a test detection rule. From your terminal, run the following script:
 
   {{< code-block lang="sh" >}}
-  for ((i=1;i<=200;i++)); do
+  for ((i=1;i<=250;i++)); do
   # Target existing service's routes
   curl https://your-application-url/<EXISTING ROUTE> -A
   'dd-test-scanner-log';

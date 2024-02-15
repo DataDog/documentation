@@ -22,6 +22,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
     tag: "Blog"
     text: "Best practices for monitoring static web applications"
+  - link: "https://www.datadoghq.com/blog/best-practices-for-ci-cd-monitoring/"
+    tag: "Blog"
+    text: "Best practices for CI/CD monitoring"
 cascade:
     algolia:
         rank: 70

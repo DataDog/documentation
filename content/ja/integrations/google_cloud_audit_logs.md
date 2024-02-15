@@ -22,6 +22,7 @@ short_description: 監査ログダッシュボードを表示します。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 GCP 監査ログを監視すると、リソースにアクセスしているユーザー、アクセス方法、アクセスが許可されているかどうかをよりよく理解できます。

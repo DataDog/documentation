@@ -13,6 +13,9 @@ further_reading:
 - link: "/security/threats/"
   tag: "Documentation"
   text: "Cloud Security Management Threats"
+- link: "https://www.datadoghq.com/blog/datadog-resource-catalog/"
+  tag: "Blog"
+  text: "Govern your infrastructure resources with the Datadog Resource Catalog"
 ---
 
 {{< site-region region="gov" >}}
@@ -58,9 +61,9 @@ The security tab allows you to gain a clear understanding of resources with secu
 
 ### List view
 
-You can sort resources in the Resource Catalog list by cloud platform, resource type, account, team, region, misconfigurations, and threats. Sort by **Threats** to spot workloads impacted over the past four hours. Sort by **Misconfigurations** to identify cloud resources most prone to misconfigurations.
+You can sort resources in the Resource Catalog list by cloud platform, resource type, account, team, region, misconfigurations, and threats. Sort by **Threats** to spot workloads impacted over the past four hours. Sort by **Misconfigurations** to identify cloud resources most prone to misconfigurations. In addition, you can export your Resource Catalog list as a CSV file from the top right corner of the list.
 
-To find a particular resource, search by its name. To filter the list to see a subset of resources you're most interested in, select facets on the left panel. For example, you may find it helpful to filter by your team name, or to scope the misconfigurations to particular environments and clusters.
+To find a particular resource, search by its name. To filter the list to see a subset of resources you're most interested in, select facets on the left panel. For example, you may find it helpful to filter by your team name, or to scope the misconfigurations to particular environments and clusters. To access the relevant cloud console, select the cloud console icon for the desired resource. 
 
 If you use [Datadog Teams][4], select the **Teams** toggle on the left panel, then select the toggle for the teams to which you're assigned to view only resources assigned to those teams.
 
@@ -76,7 +79,7 @@ Each color corresponds to the highest severity misconfiguration detected on the 
 
 #### Threats
 
-Threats reflect data from the past four hours and are only available for compute instances such as Amazon EC2 and Azure VM. White indicates there are no active threats detected. Shades of blue to red reflect the highest-severity threat detected on the resource.
+Threats reflect data from the past four hours and are only available for compute instances such as Amazon EC2 and Azure VM. White indicates there are no active threats detected. If a resource has several threat levels on it, the color used is the highest-severity threat detected on the resource.
 
 ## Investigate a resource
 

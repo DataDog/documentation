@@ -152,6 +152,7 @@ build_preview:
     - touch preview_error.log # Create log file for errors
     - exec 2> $PREVIEW_ERROR_LOG # We want to output any detected error to a log for use in notifications
     - make dependencies
+    - make vector_data
     - make config
     - ./node_modules/.bin/jest --testPathPattern=assets/scripts/tests/
     - yarn run prebuild
@@ -174,6 +175,7 @@ build_preview:
       - ./logs
       - ./public/redirects.txt
       - $PREVIEW_ERROR_LOG
+      - ./latest-cached.tar.gz
   after_script:
     - |
       if [ -s $PREVIEW_ERROR_LOG && $CI_JOB_STATUS != 'success' ]; then
@@ -337,6 +339,7 @@ build_live:
     - touch Makefile.config
     - make clean-examples
     - make dependencies
+    - make vector_data
     - yarn run prebuild
     - build_site
     - in-isolation deploy_site
@@ -459,12 +462,10 @@ link_checks:on-schedule:
 
 # template for what runs in pa11y to avoid duplication
 .pa11y_live_template: &pa11y_live_template
-  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:pa11y-17812916
-  tags: ["runner:docker"]
+  image: 486234852809.dkr.ecr.us-east-1.amazonaws.com/ci/websites-images:pa11y-25121683
+  tags: ["arch:amd64"]
   stage: post-deploy
   cache: []
-  dependencies:
-    - build_live
   variables:
     GIT_STRATEGY: none
   script:
@@ -477,6 +478,8 @@ link_checks:on-schedule:
 
 run_pa11y:schedule:
   <<: *pa11y_live_template
+  dependencies:
+    - build_live
   rules:
     - if: $CI_COMMIT_BRANCH == "master" && $CI_PIPELINE_SOURCE == "schedule"
       when: always

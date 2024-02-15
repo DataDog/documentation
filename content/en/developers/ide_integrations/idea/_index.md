@@ -10,7 +10,7 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about Source Code Integration."
-- link: "/continuous_integration/static_analysis/?tab=githubactions"
+- link: "/static_analysis/?tab=githubactions"
   tag: "Documentation"
   text: "Learn about Static Analysis."
 - link: "https://www.jetbrains.com/lp/toolbox/"
@@ -44,7 +44,7 @@ The **Static Analysis** integration analyzes your code (locally) against predefi
 
 ## Requirements
 
-- **A Datadog account**: The plugin requires a Datadog account. If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
+- **A Datadog account**: The plugin requires a Datadog account (except when using [Static Analysis][13] features). If you're new to Datadog, go to the [Datadog website][3] to learn more about Datadog's observability tools and sign up for a free trial.
 - **Continuous Profiler**: To display profiling data and insights, the plugin requires the Continuous Profiler to be configured for your Services. For more information, see [Getting Started with the Continuous Profiler][2].
 - **JetBrains Toolbox**: To use the [View in IDE](#view-in-ide) feature, the plugin requires the [JetBrains Toolbox][7] to be installed on the developer's machine.
 
@@ -180,16 +180,16 @@ The **View in IntelliJ/GoLand/PyCharm** feature provides a link from the Datadog
 <div class="alert alert-info">This feature has two prerequisites: (1) Source Code Integration is configured for your service and (2) the JetBrains Toolbox is installed on your development machine.</div>
 
 ## Static Analysis
-The Datadog plugin runs a set of [Static Analysis][13] rules on your source files as you edit them. The goal is to detect and fix problems in your code before you commit your changes.
+The Datadog plugin runs [Static Analysis][13] rules on your source files as you edit them. The goal is to detect and fix problems such as maintainability issues, bugs, or security vulnerabilities in your code before you commit your changes. 
 
-The Static Analyzer has rules defined for [Python][14] and [Docker][15] files. For these file types, issues are shown in the source code editor with the JetBrains inspection system, and suggested fixes can be applied directly:
+Static Analysis supports scanning for many programming languages. For a complete list, see [Static Analysis Rules][14]. For file types belonging to supported languages, issues are shown in the source code editor with the JetBrains inspection system, and suggested fixes can be applied directly:
 
 {{< img src="/developers/ide_integrations/idea/static-analysis-issue.png" alt="A static analysis rule violation and recommended fix." style="width:100%;" >}}
 
 Additionally, all issues detected by this feature are listed in the standard **Problems** view.
 
 ### Getting started
-When you start editing a source file (Python and Docker files are supported), the plugin checks for `static-analysis.datadog.yml` at your source repository's root. It prompts you to create it if necessary:
+When you start editing a source file supported by Static Analysis, the plugin checks for `static-analysis.datadog.yml` at your source repository's root. It prompts you to create the file if necessary:
 
 {{< img src="/developers/ide_integrations/idea/static-analysis-onboard.png" alt="A banner for onboarding." style="width:100%;" >}}
 
@@ -223,6 +223,5 @@ You can give feedback in the [discussion forum][1], or send an e-mail to [team-i
 [10]: /watchdog/insights
 [11]: mailto:team-ide-integration@datadoghq.com
 [12]: /continuous_integration/explorer/?tab=testruns
-[13]: /continuous_integration/static_analysis/?tab=githubactions
-[14]: /continuous_integration/static_analysis/rules/#python-rules
-[15]: /continuous_integration/static_analysis/rules/#docker-rules
+[13]: /static_analysis/?tab=githubactions
+[14]: /static_analysis/rules/#python-rules

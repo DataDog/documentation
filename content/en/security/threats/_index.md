@@ -10,10 +10,6 @@ aliases:
   - /security/threats/runtime_anomaly_detection
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 Cloud Security Management Threats (CSM Threats) monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of CSM Threats with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
 
 ## Detect threats to your production workloads in real-time
@@ -27,7 +23,7 @@ CSM Threats uses the Datadog Agent to monitor your environment. If you don't alr
 3. **DNS Activity Monitoring** to watch network traffic for malicious activity on hosts and containers in real-time.
 4. **Kernel Activity Monitoring** to watch for kernel-layer attacks like process hijacking, container breakouts, and more in real-time.
 
-{{< img src="security/csm/csm_overview.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}}
+{{< img src="security/csm/csm_overview_2.png" alt="The Security Inbox on the Cloud Security Management overview shows a list of prioritized security issues to remediate" width="100%">}}
 
 ## Manage out-of-the-box and custom detection rules
 
@@ -45,9 +41,9 @@ Use template variables and Markdown to [customize notification messages][5]. Edi
 
 ## Investigate and remediate security signals
 
-Investigate and triage security signals in the [Threats Explorer][8]. View detailed information about the impacted files or processes, related signals and logs, and remediation steps.
+Investigate and triage security signals in the [Signals Explorer][8]. View detailed information about the impacted files or processes, related signals and logs, and remediation steps.
 
-{{< img src="security/cws/threats_page.png" alt="CSM Threats page" width="100%">}}
+{{< img src="security/cws/signals_explorer.png" alt="CSM Signals Explorer page" width="100%">}}
 
 ## Get started
 

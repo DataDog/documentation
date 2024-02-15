@@ -22,7 +22,10 @@ If you experience unexpected behavior with Datadog Session Replay, use this page
 
 ### Some HTML elements are not visible at replay
 
-Session Replay does not support the following HTML elements: `iframe`, `video`, `audio`, or `canvas`. 
+Session Replay does not support:
+
+- The following HTML elements: `iframe`, `video`, `audio`, or `canvas`
+- The [Web Animations API][7]
 
 Session Replay requires you to use an HTTPS connection. If you aren't using a secure connection, the resources time out and you can't see images and some page elements.
 
@@ -65,3 +68,4 @@ Additionally, authorize the `example.com` domain in the `assets.example.com`. Th
 [4]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 [5]: https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet
 [6]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
+[7]: https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Using_the_Web_Animations_API

@@ -79,6 +79,9 @@ Create an IAM role for Datadog to use the permissions defined in the IAM policy.
 {{< site-region region="ap1" >}}
 10. Enter `417141415827` as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
+{{< site-region region="gov" >}}
+10. If the AWS account you want to integrate is a GovCloud account, enter `065115117704` as the `Account ID`, otherwise enter `392588925713`. This is Datadog's account ID, and grants Datadog access to your AWS data.
+{{< /site-region >}}
 11. Select **Require external ID** and enter the external ID copied in the [Generate an external ID](#generate-an-external-id) section.
 Ensure to leave `Require MFA` disabled. For more details, see the [How to use an external ID when granting access to your AWS resources to a third party][2] AWS documentation.
 12. Click **Next**.
@@ -117,12 +120,15 @@ Ensure to leave `Require MFA` disabled. For more details, see the [How to use an
 ### Datadog
 
 3. In the [AWS integration tile][1], click **Add AWS Account**, and then select **Manually**.
-4. Select the **Access Keys (GovCloud or China Only)** tab.
+4. Select the **Access Keys (GovCloud or China\* Only)** tab.
 5. Enter your `Account ID`, `AWS Access Key` and `AWS Secret Key`. Only access and secret keys for GovCloud and China are accepted.
 6. Click **Save**.
 7. Wait up to 10 minutes for data to start being collected, and then view the out-of-the-box <a href="https://app.datadoghq.com/screen/integration/7/aws-overview" target="_blank">AWS Overview Dashboard</a> to see metrics sent by your AWS services and infrastructure.
 
+\* _All use of Datadog Services in (or in connection with environments within) mainland China is subject to the disclaimer published in the [Restricted Service Locations][2] section on our website._
+
 [1]: https://app.datadoghq.com/integrations/amazon-web-services
+[2]: https://www.datadoghq.com/legal/restricted-service-locations/
 {{% /tab %}}
 {{< /tabs >}}
 

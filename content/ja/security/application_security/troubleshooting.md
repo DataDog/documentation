@@ -51,7 +51,7 @@ ASM の設定をテストするには、次の curl スクリプトを含むフ�
 {{< programming-lang lang="java" >}}
 
 ```bash
-for ((i=1;i<=200;i++));
+for ((i=1;i<=250;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -66,7 +66,7 @@ done
 {{< programming-lang lang=".NET" >}}
 
 ```bash
-for ((i=1;i<=200;i++));
+for ((i=1;i<=250;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -81,7 +81,7 @@ done
 {{< programming-lang lang="go" >}}
 
  ```bash
- for ((i=1;i<=200;i++));
+ for ((i=1;i<=250;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A Arachni/v1.0;
@@ -94,7 +94,7 @@ done
 {{< programming-lang lang="ruby" >}}
 
  ```bash
- for ((i=1;i<=200;i++));
+ for ((i=1;i<=250;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A Arachni/v1.0;
@@ -107,7 +107,7 @@ done
 {{< programming-lang lang="PHP" >}}
 
 ```bash
-for ((i=1;i<=200;i++));
+for ((i=1;i<=250;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -122,7 +122,7 @@ done
 {{< programming-lang lang="Node.js" >}}
 
 ```bash
-for ((i=1;i<=200;i++));
+for ((i=1;i<=250;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A dd-test-scanner-log;
@@ -136,7 +136,7 @@ done
 {{< programming-lang lang="python" >}}
 
 ```bash
-for ((i=1;i<=200;i++));
+for ((i=1;i<=250;i++));
 do
 # 既存サービスのルートが対象
 curl https://your-application-url/existing-route -A dd-test-scanner-log;

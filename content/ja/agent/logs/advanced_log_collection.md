@@ -26,7 +26,7 @@ kind: documentation
 title: ログ収集の高度な構成
 ---
 
-ログ収集の構成をカスタマイズします。
+[ログ収集][1]をセットアップした後、収集構成をカスタマイズできます。
 * [ログをフィルター](#filter-logs)
 * [ログの機密データのスクラビング](#scrub-sensitive-data-from-your-logs)
 * [複数行のログを集計する](#multi-line-aggregation)
@@ -37,7 +37,7 @@ title: ログ収集の高度な構成
 
 **注**: 複数の処理ルールを設定した場合、ルールは順次適用され、各ルールは直前のルールの結果に適用されます。
 
-**注**: 処理ルールのパターンは [Golang の正規構文][1]に従う必要があります。
+**注**: 処理ルールのパターンは [Golang の正規構文][2]に従う必要があります。
 
 Datadog Agent によって収集されたすべてのログに同一の処理ルールを適用する場合は、[グローバルな処理ルール](#global-processing-rules)のセクションを参照してください。
 
@@ -88,7 +88,7 @@ Docker 環境では、`log_processing_rules` を指定するために、**フィ
       }]
 ```
 
-**注**: ラベルを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
+**注**: ラベルを使用する場合、パターン内の正規表現文字はエスケープする必要があります。例えば、`\d` は `\\d` に、`\w` は `\\w` にします。
 
 **注**: ラベルの値は JSON 構文に従う必要があります。つまり、末尾にカンマやコメントを含めてはいけません。
 
@@ -128,7 +128,7 @@ spec:
           image: cardpayment:latest
 ```
 
-**注**: ポッドアノテーションを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
+**注**: ポッドアノテーションを使用する場合、パターン内の正規表現文字はエスケープする必要があります。例えば、`\d` は `\\d` に、`\w` は `\\w` にします。
 
 **注**: アノテーションの値は JSON 構文に従う必要があります。つまり、末尾にカンマやコメントを含めてはいけません。
 
@@ -209,7 +209,7 @@ Docker 環境では、`log_processing_rules` を指定するために、**フィ
       }]
 ```
 
-**注**: ラベルを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
+**注**: ラベルを使用する場合、パターン内の正規表現文字はエスケープする必要があります。例えば、`\d` は `\\d` に、`\w` は `\\w` にします。
 
 **注**: ラベルの値は JSON 構文に従う必要があります。つまり、末尾にカンマやコメントを含めてはいけません。
 
@@ -249,7 +249,7 @@ spec:
           image: cardpayment:latest
 ```
 
-**注**: ポッドアノテーションを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
+**注**: ポッドアノテーションを使用する場合、パターン内の正規表現文字はエスケープする必要があります。例えば、`\d` は `\\d` に、`\w` は `\\w` にします。
 
 **注**: アノテーションの値は JSON 構文に従う必要があります。つまり、末尾にカンマやコメントを含めてはいけません。
 
@@ -301,7 +301,7 @@ Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用
       }]
 ```
 
-**注**: ラベルを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
+**注**: ラベルを使用する場合、パターン内の正規表現文字はエスケープする必要があります。例えば、`\d` は `\\d` に、`\w` は `\\w` にします。
 
 **注**: ラベルの値は JSON 構文に従う必要があります。つまり、末尾にカンマやコメントを含めてはいけません。
 
@@ -342,7 +342,7 @@ spec:
           image: cardpayment:latest
 ```
 
-**注**: ポッドアノテーションを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
+**注**: ポッドアノテーションを使用する場合、パターン内の正規表現文字はエスケープする必要があります。例えば、`\d` は `\\d` に、`\w` は `\\w` にします。
 
 **注**: アノテーションの値は JSON 構文に従う必要があります。つまり、末尾にカンマやコメントを含めてはいけません。
 
@@ -444,7 +444,7 @@ spec:
           image: postgres:latest
 ```
 
-**注**: ポッドアノテーションを使用して複数行の集約を実行する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
+**注**: ポッドアノテーションを使用して複数行の集約を実行する場合、パターン内の正規表現文字はエスケープする必要があります。例えば、`\d` は `\\d` に、`\w` は `\\w` にします。
 
 **注**: アノテーションの値は JSON 構文に従う必要があります。つまり、末尾にカンマやコメントを含めてはいけません。
 
@@ -465,7 +465,7 @@ spec:
 | {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
 ### 自動複数行集計
-Agent 7.37+ では、`auto_multi_line_detection` を有効にすることで、Agent が[共通複数行パターン][2]を自動的に検出することができます。
+Agent 7.37+ では、`auto_multi_line_detection` を有効にすることで、Agent が[共通複数行パターン][3]を自動的に検出することができます。
 
 `datadog.yaml` ファイルで `auto_multi_line_detection` をグローバルに有効化します。
 
@@ -556,7 +556,7 @@ spec:
 
 ## 良く使用されるログの処理ルール
 
-例の一覧を確認するには、専用の[よく使用されるログ処理ルールに関する FAQ][3] をご覧ください。
+例の一覧を確認するには、専用の[よく使用されるログ処理ルールに関する FAQ][4] をご覧ください。
 
 ## ワイルドカードを使用したディレクトリのテール
 
@@ -638,7 +638,7 @@ logs:
 
 ## グローバルな処理ルール
 
-Datadog Agent v6.10 以上では、`exclude_at_match`、`include_at_match`、`mask_sequences` の各処理ルールを、Agent の[メインコンフィギュレーションファイル][4]で、または環境変数を使用してグローバルに定義できます。
+Datadog Agent v6.10 以上では、`exclude_at_match`、`include_at_match`、`mask_sequences` の各処理ルールを、Agent の[メインコンフィギュレーションファイル][5]で、または環境変数を使用してグローバルに定義できます。
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}
@@ -681,7 +681,7 @@ env:
 {{< /tabs >}}
 Datadog Agent によって収集されるすべてのログが、グローバルな処理ルールの影響を受けます。
 
-**注**: グローバルな処理ルールに形式上の問題がある場合、Datadog Agent はログコレクターを起動しません。問題をトラブルシューティングするには、Agent の [status サブコマンド][5]を実行します。
+**注**: グローバルな処理ルールに形式上の問題がある場合、Datadog Agent はログコレクターを起動しません。問題をトラブルシューティングするには、Agent の [status サブコマンド][6]を実行します。
 
 ## その他の参考資料
 
@@ -690,8 +690,9 @@ Datadog Agent によって収集されるすべてのログが、グローバル
 <br>
 *Logging without Limits は Datadog, Inc. の商標です。
 
-[1]: https://golang.org/pkg/regexp/syntax/
-[2]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
-[3]: /ja/agent/faq/commonly-used-log-processing-rules
-[4]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[5]: /ja/agent/configuration/agent-commands/#agent-information
+[1]: /ja/agent/logs/
+[2]: https://golang.org/pkg/regexp/syntax/
+[3]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
+[4]: /ja/agent/faq/commonly-used-log-processing-rules
+[5]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[6]: /ja/agent/configuration/agent-commands/#agent-information

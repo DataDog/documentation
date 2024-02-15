@@ -23,6 +23,26 @@
     "request_description": "",
     "request_schema_description": "Request used to update an API key."
   },
+  "DeleteOpenAPI": {
+    "description": "Delete a specific API by ID.",
+    "summary": "Delete an API"
+  },
+  "GetOpenAPI": {
+    "description": "Retrieve information about a specific API in [OpenAPI](https://spec.openapis.org/oas/latest.html) format file.",
+    "summary": "Get an API"
+  },
+  "UpdateOpenAPI": {
+    "description": "Update information about a specific API. The given content will replace all API content of the given ID.\nThe ID is returned by the create API, or can be found in the URL in the API catalog UI.\n",
+    "summary": "Update an API",
+    "request_description": "",
+    "request_schema_description": "Object for API data in an `OpenAPI` format as a file."
+  },
+  "CreateOpenAPI": {
+    "description": "Create a new API from the [OpenAPI](https://spec.openapis.org/oas/latest.html) specification given.\nIt supports version `2.0`, `3.0` and `3.1` of the specification. A specific extension section, `x-datadog`,\nlet you specify the `teamHandle` for your team responsible for the API in Datadog.\nIt returns the created API ID.\n",
+    "summary": "Create a new API",
+    "request_description": "",
+    "request_schema_description": "Object for API data in an `OpenAPI` format as a file."
+  },
   "ListSpansMetrics": {
     "description": "Get the list of configured span-based metrics with their definitions.",
     "summary": "Get all span-based metrics"
@@ -129,6 +149,74 @@
     "request_description": "",
     "request_schema_description": "Request to update an AuthN Mapping."
   },
+  "SearchCases": {
+    "description": "Search cases.",
+    "summary": "Search cases"
+  },
+  "CreateCase": {
+    "description": "Create a Case",
+    "summary": "Create a case",
+    "request_description": "Case payload",
+    "request_schema_description": "Case create request"
+  },
+  "GetProjects": {
+    "description": "Get all projects.",
+    "summary": "Get all projects"
+  },
+  "CreateProject": {
+    "description": "Create a project.",
+    "summary": "Create a project",
+    "request_description": "Project payload",
+    "request_schema_description": "Project create request"
+  },
+  "DeleteProject": {
+    "description": "Remove a project using the project's `id`.",
+    "summary": "Remove a project"
+  },
+  "GetProject": {
+    "description": "Get the details of a project by `project_id`.",
+    "summary": "Get the details of a project"
+  },
+  "GetCase": {
+    "description": "Get the details of case by `case_id`",
+    "summary": "Get the details of a case"
+  },
+  "ArchiveCase": {
+    "description": "Archive case",
+    "summary": "Archive case",
+    "request_description": "Archive case payload",
+    "request_schema_description": "Case empty request"
+  },
+  "AssignCase": {
+    "description": "Assign case to a user",
+    "summary": "Assign case",
+    "request_description": "Assign case payload",
+    "request_schema_description": "Case assign request"
+  },
+  "UpdatePriority": {
+    "description": "Update case priority",
+    "summary": "Update case priority",
+    "request_description": "Case priority update payload",
+    "request_schema_description": "Case update priority request"
+  },
+  "UpdateStatus": {
+    "description": "Update case status",
+    "summary": "Update case status",
+    "request_description": "Case status update payload",
+    "request_schema_description": "Case update status request"
+  },
+  "UnarchiveCase": {
+    "description": "Unarchive case",
+    "summary": "Unarchive case",
+    "request_description": "Unarchive case payload",
+    "request_schema_description": "Case empty request"
+  },
+  "UnassignCase": {
+    "description": "Unassign case",
+    "summary": "Unassign case",
+    "request_description": "Unassign case payload",
+    "request_schema_description": "Case empty request"
+  },
   "CreateCIAppPipelineEvent": {
     "description": "Send your pipeline event to your Datadog platform over HTTP. For details about how pipeline executions are modeled and what execution types we support, see [Pipeline Data Model And Execution Types](https://docs.datadoghq.com/continuous_integration/guides/pipeline_data_model/).\n\nPipeline events can be submitted with a timestamp that is up to 18 hours in the past.",
     "summary": "Send pipeline event",
@@ -174,6 +262,54 @@
   "ListContainers": {
     "description": "Get all containers for your organization.",
     "summary": "Get All Containers"
+  },
+  "ListCostAWSCURConfigs": {
+    "description": "List the AWS CUR configs.",
+    "summary": "List Cloud Cost Management AWS CUR configs"
+  },
+  "CreateCostAWSCURConfig": {
+    "description": "Create a Cloud Cost Management account for an AWS CUR config.",
+    "summary": "Create Cloud Cost Management AWS CUR config",
+    "request_description": "",
+    "request_schema_description": "AWS CUR config Post Request."
+  },
+  "DeleteCostAWSCURConfig": {
+    "description": "Archive a Cloud Cost Management Account.",
+    "summary": "Delete Cloud Cost Management AWS CUR config"
+  },
+  "UpdateCostAWSCURConfig": {
+    "description": "Update the status of an AWS CUR config (active/archived).",
+    "summary": "Update Cloud Cost Management AWS CUR config",
+    "request_description": "",
+    "request_schema_description": "AWS CUR config Patch Request."
+  },
+  "ListAWSRelatedAccounts": {
+    "description": "List the AWS accounts in an organization by calling 'organizations:ListAccounts' from the specified management account.",
+    "summary": "List related AWS accounts"
+  },
+  "ListCostAzureUCConfigs": {
+    "description": "List the Azure configs.",
+    "summary": "List Cloud Cost Management Azure configs"
+  },
+  "CreateCostAzureUCConfigs": {
+    "description": "Create a Cloud Cost Management account for an Azure config.",
+    "summary": "Create Cloud Cost Management Azure configs",
+    "request_description": "",
+    "request_schema_description": "Azure config Post Request."
+  },
+  "DeleteCostAzureUCConfig": {
+    "description": "Archive a Cloud Cost Management Account.",
+    "summary": "Delete Cloud Cost Management Azure config"
+  },
+  "UpdateCostAzureUCConfigs": {
+    "description": "Update the status of an  Azure config (active/archived).",
+    "summary": "Update Cloud Cost Management Azure config",
+    "request_description": "",
+    "request_schema_description": "Azure config Patch Request."
+  },
+  "GetCloudCostActivity": {
+    "description": "Get the Cloud Cost Management activity.",
+    "summary": "Cloud Cost Enabled"
   },
   "GetActiveBillingDimensions": {
     "description": "Get active billing dimensions for cost attribution. Cost data for a given month becomes available no later than the 17th of the following month.",
@@ -535,6 +671,30 @@
     "request_description": "",
     "request_schema_description": "Payload schema for Fastly service requests."
   },
+  "ListOktaAccounts": {
+    "description": "List Okta accounts.",
+    "summary": "List Okta accounts"
+  },
+  "CreateOktaAccount": {
+    "description": "Create an Okta account.",
+    "summary": "Add Okta account",
+    "request_description": "",
+    "request_schema_description": "Request object for an Okta account."
+  },
+  "DeleteOktaAccount": {
+    "description": "Delete an Okta account.",
+    "summary": "Delete Okta account"
+  },
+  "GetOktaAccount": {
+    "description": "Get an Okta account.",
+    "summary": "Get Okta account"
+  },
+  "UpdateOktaAccount": {
+    "description": "Update an Okta account.",
+    "summary": "Update Okta account",
+    "request_description": "",
+    "request_schema_description": "Payload schema when updating an Okta account."
+  },
   "GetIPAllowlist": {
     "description": "Returns the IP allowlist and its enabled or disabled state.",
     "summary": "Get IP Allowlist"
@@ -726,7 +886,7 @@
     "summary": "List tag configuration by name"
   },
   "UpdateTagConfiguration": {
-    "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric or custom aggregations\nof a count, rate, or gauge metric. By setting `exclude_tags_mode` to true the behavior is changed\nfrom an allow-list to a deny-list, and tags in the defined list will not be queryable.\nCan only be used with application keys from users with the `Manage Tags for Metrics` permission.",
+    "description": "Update the tag configuration of a metric or percentile aggregations of a distribution metric or custom aggregations\nof a count, rate, or gauge metric. By setting `exclude_tags_mode` to true the behavior is changed\nfrom an allow-list to a deny-list, and tags in the defined list will not be queryable.\nCan only be used with application keys from users with the `Manage Tags for Metrics` permission. This endpoint requires\na tag configuration to be created first.",
     "summary": "Update a tag configuration",
     "request_description": "",
     "request_schema_description": "Request object that includes the metric that you would like to edit the tag configuration on."
@@ -946,7 +1106,8 @@
   "UploadIdPMetadata": {
     "description": "Endpoint for uploading IdP metadata for SAML setup.\n\nUse this endpoint to upload or replace IdP metadata for SAML login configuration.",
     "summary": "Upload IdP metadata",
-    "request_description": ""
+    "request_description": "",
+    "request_schema_description": "The form data submitted to upload IdP metadata"
   },
   "ListScorecardOutcomes": {
     "description": "Fetches all rule outcomes.",
@@ -1023,6 +1184,30 @@
     "summary": "Update a security filter",
     "request_description": "New definition of the security filter.",
     "request_schema_description": "The new security filter body."
+  },
+  "ListSecurityMonitoringSuppressions": {
+    "description": "Get the list of all suppression rules.",
+    "summary": "Get all suppression rules"
+  },
+  "CreateSecurityMonitoringSuppression": {
+    "description": "Create a new suppression rule.",
+    "summary": "Create a suppression rule",
+    "request_description": "The definition of the new suppression rule.",
+    "request_schema_description": "Request object that includes the suppression rule that you would like to create."
+  },
+  "DeleteSecurityMonitoringSuppression": {
+    "description": "Delete a specific suppression rule.",
+    "summary": "Delete a suppression rule"
+  },
+  "GetSecurityMonitoringSuppression": {
+    "description": "Get the details of a specific suppression rule.",
+    "summary": "Get a suppression rule"
+  },
+  "UpdateSecurityMonitoringSuppression": {
+    "description": "Update a specific suppression rule.",
+    "summary": "Update a suppression rule",
+    "request_description": "New definition of the suppression rule. Supports partial updates.",
+    "request_schema_description": "Request object containing the fields to update on the suppression rule."
   },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
@@ -1357,8 +1542,8 @@
     "summary": "Get hourly usage by product family"
   },
   "GetUsageLambdaTracedInvocations": {
-    "description": "Get hourly usage for lambda traced invocations.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
-    "summary": "Get hourly usage for lambda traced invocations"
+    "description": "Get hourly usage for Lambda traced invocations.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",
+    "summary": "Get hourly usage for Lambda traced invocations"
   },
   "GetUsageObservabilityPipelines": {
     "description": "Get hourly usage for observability pipelines.\n**Note:** hourly usage data for all products is now available in the [Get hourly usage by product family API](https://docs.datadoghq.com/api/latest/usage-metering/#get-hourly-usage-by-product-family)",

@@ -24,7 +24,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- os & system
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/exchange_server/README.md
@@ -33,7 +32,7 @@ draft: false
 git_integration_title: exchange_server
 integration_id: exchange-server
 integration_title: Microsoft Exchange Server
-integration_version: 1.15.0
+integration_version: 2.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -46,9 +45,8 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Windows
-  - Category::OS とシステム
   - Category::ログの収集
+  - Supported OS::Windows
   configuration: README.md#Setup
   description: Microsoft Exchange Server のメトリクスを収集してグラフ化
   media: []
@@ -131,7 +129,7 @@ Exchange Server チェックには、サービスのチェック機能は含ま�
 
 ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/integrations-core/blob/7.33.x/exchange_server/datadog_checks/exchange_server/data/conf.yaml.example

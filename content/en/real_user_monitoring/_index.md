@@ -99,7 +99,7 @@ The following table shows which RUM capabilities are supported on each platform:
 | Monitor platform-specific vitals | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
 | Global context/attribute tracking in Logs  | {{< X >}} |  |  |  |  |  |  |
 | Client side tracing |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
-| Session Replay | {{< X >}} |  |  |  |  |  |  |
+| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | Mobile Session Replay is in public beta for native mobile apps. |
 | Heatmaps | {{< X >}} |  |  |  |  |  |  |
 | Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for all **mobile** and **Roku** devices |
 
@@ -118,7 +118,7 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 
 ## Explore Datadog RUM
 
-Access RUM by navigating to [**UX Monitoring > Real User Monitoring**][1].
+Access RUM by navigating to [**UX Monitoring > Performance Monitoring**][1].
 
 ### Out-of-the-box dashboards
 
@@ -174,7 +174,7 @@ Access triggered logs, errors, and performance information when troubleshooting 
 [4]: /monitors/types/real_user_monitoring/
 [5]: /real_user_monitoring/connect_rum_and_traces/
 [6]: /real_user_monitoring/error_tracking/
-[7]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
+[7]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [8]: /real_user_monitoring/ios/mobile_vitals/
 [9]: /real_user_monitoring/android/mobile_vitals/
 [10]: /real_user_monitoring/ios/web_view_tracking/

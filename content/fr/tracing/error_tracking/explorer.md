@@ -1,57 +1,90 @@
 ---
-title: Explorateur de suivi des erreurs
+description: En savoir plus sur l'Error Tracking Explorer
+further_reading:
+- link: /monitors/types/error_tracking
+  tag: Documentation
+  text: En savoir plus sur les monitors de suivi des erreurs
+- link: /tracing/error_tracking
+  tag: Documentation
+  text: En savoir plus sur le suivi des erreurs pour les services backend
 kind: documentation
-beta: false
+title: Error Tracking Explorer
 ---
-{{< img src="tracing/error_tracking/error_tracking_explore_inspect.png" alt="Explorateur de suivi des erreurs"  >}}
+
+## Présentation
+
+L'Error Tracking Explorer présente la liste des problèmes non résolus. Un _problème_ rassemble plusieurs erreurs similaires avec la même _empreinte_. Les problèmes nécessitent potentiellement d'être résolus, selon leur gravité.
+
+{{< img src="tracing/error_tracking/explorer_with_backend_issues.png" alt="Error Tracking Explorer" style="width:100%" >}}
 
 ## Explorer vos problèmes
 
-L'Explorateur de suivi des erreurs présente la liste des problèmes non résolus. Un _problème_ rassemble plusieurs erreurs similaires avec la même _empreinte_. Les problèmes nécessitent potentiellement d'être résolus, selon leur gravité. Chaque élément indiqué dans l'Explorateur contient des informations générales sur le problème :
+Chaque élément répertorié dans l'[Error Tracking Explorer][3] fournit des informations générales sur le problème rencontré, notamment ce qui suit :
 
--   Le type d'erreur et le message d'erreur
+-   Le type et le message d'erreur
 -   Le chemin d'accès au fichier dans lequel les erreurs sous-jacentes sont survenues
--  Les informations sur le cycle de vie du problème :
-    -   Première et dernière détection
-    -   Nombre d'occurrences au cours de la période sélectionnée
-    -   Graphique des occurrences d'erreur au cours de la période sélectionnée
+-  Des informations à propos du cycle de vie du problème :
+    -   La première et dernière détection
+    -   Le nombre d'occurrences d'erreur au cours de la période sélectionnée
+    -   Un graphique représentant les occurrences d'erreur au cours de la période sélectionnée
 
 ### Intervalle
 
-{{< img src="tracing/error_tracking/time_range.png" alt="Intervalle de suivi des erreurs"  >}}
+Utilisez le sélecteur d'intervalle afin afficher les problèmes pour lesquels des erreurs sont survenues lors de la période sélectionnée.
 
-Modifiez l'intervalle à l'aide du sélecteur en haut à droite de l'Explorateur pour afficher les problèmes contenant des occurrences d'erreur lors d'une période précise. Vous pouvez définir un intervalle spécifique ou sélectionner une période prédéfinie depuis la liste déroulante.
+{{< img src="tracing/error_tracking/time_range.png" alt="Intervalle de suivi des erreurs" style="width:60%;" >}}
+
+Vous pouvez saisir un intervalle ou choisir une plage prédéfinie dans le menu déroulant.
 
 ### Facettes
 
-{{< img src="tracing/error_tracking/facet.png" alt="Facettes de suivi des erreurs"  >}}
+La fonctionnalité de suivi des erreurs établit automatiquement une liste prédéfinie d'attributs à partir des occurrences d'erreurs sous-jacentes, puis génère des facettes à partir de ces erreurs. Ces facettes vous permettent de filtrer vos problèmes ou de passer facilement d'un problème à un autre. La liste des facettes présente les membres d'un attribut pour l'intervalle sélectionné, ainsi que des analyses de base, comme le nombre de problèmes correspondants.
 
-La fonctionnalité Suivi des erreurs indexe automatiquement une liste prédéfinie d'attributs à partir des occurrences d'erreur sous-jacentes, puis les utilise pour générer des facettes. La liste des facettes affiche les membres d'un attribut pour la période sélectionnée, en plus de proposer des analyses de base, comme le nombre de problèmes correspondants. Utilisez des facettes pour faire pivoter ou filtrer vos problèmes. L'Explorateur renvoie tous les problèmes pour lesquels au moins une occurrence d'erreur correspond à l'ensemble de facettes choisies lors de la période sélectionnée.
+{{< img src="tracing/error_tracking/facets_panel.png" alt="Facettes de suivi des erreurs" style="width:100%;" >}}
 
-## Inspecter un problème
+L'Error Tracking Explorer renvoie tous les problèmes pour lesquels au moins une occurrence d'erreur dans l'intervalle sélectionné correspond à l'ensemble des facettes sélectionnées.
 
-Cliquez sur un problème pour l'examiner plus en détail dans un volet dédié.
+## Enquêter sur un problème
+
+Cliquez sur un problème de la liste pour ouvrir le volet dédié et accéder à des informations supplémentaires concernant les erreurs survenant dans votre service backend.
+
+{{< img src="tracing/error_tracking/issue_panel.png" alt="Intervalle de suivi des erreurs" style="width:100%;" >}}
 
 ### Obtenir une vue d'ensemble
 
-{{< img src="tracing/error_tracking/issue_panel_upper_part.png" alt="Partie supérieure du volet des détails d'un problème"  >}}
+Le volet comporte des informations générales requises pour la résolution du problème.
 
-Les principales informations dont vous avez besoin pour corriger un problème se trouvent dans la partie supérieure du volet. Elles vous permettent de comprendre son cycle de vie, en indiquant notamment la première et la dernière occurrence, les versions du code associées et le nombre total d'occurrences. Le graphique des occurrences d'erreur affiche des données sur une période maximale de deux semaines, afin que vous puissiez consulter l'évolution globale du problème.
+Ces informations vous permettent de comprendre le cycle de vie du problème, notamment grâce à la première et la dernière occurrence, aux versions du code associées et au nombre total d'occurrences. Le graphique des occurrences d'erreur affiche des données sur les deux dernières semaines, afin que vous puissiez consulter l'évolution globale du problème.
 
 ### Parcourir certaines occurrences d'erreur
 
-{{< img src="tracing/error_tracking/issue_panel_lower_part.png" alt="Partie inférieure du volet des détails d'un problème"  >}}
-
-Depuis la partie inférieure du volet réservé aux problèmes, parcourez des exemples d'erreurs inclus dans le problème. Les spans suivantes sont affichées :
+Voici quelques exemples d'erreurs qui peuvent composer un problème :
 
 -   Toutes les spans d'erreur ingérées lors des [15 dernières minutes de Live Search][1]
 -   Les spans d'erreur des 15 derniers jours qui sont indexées par des [filtres de rétention personnalisés][2]
 
-Chaque exemple d'erreur contient les informations dont vous avez besoin pour mieux comprendre le motif de l'erreur et la méthode à suivre pour la résoudre :
+{{< img src="tracing/error_tracking/error_sample.png" alt="Partie inférieure du volet des détails d'un problème" style="width:80%;" >}}
 
-- La stack trace de l'erreur indique à quel emplacement du code l'erreur s'est produite.
+Chaque exemple d'erreur contient les informations dont vous avez besoin pour identifier l'origine de l'erreur et les étapes de remédiation à suivre. Exemple :
+
+- La stack trace de l'erreur indique à quel emplacement du code source l'erreur s'est produite.
 - Tous les tags de span d'erreur, notamment le nom de la ressource ou de l'opération, permettent d'accéder directement à la trace ou aux logs associés.
 - Des données sur la santé du host ou du conteneur sous-jacent au moment de l'apparition de l'erreur sont également indiquées.
 
+## Associer votre référentiel pour activer les extraits de code
+
+Configurez l'[intégration GitHub][4] pour afficher des extraits de code dans vos stack traces.
+
+{{< img src="tracing/error_tracking/inline_code_snippet.png" alt="Un extrait de code généré directement dans une stack trace" style="width:70%;" >}}
+
+Pour commencer à configurer votre référentiel, consultez la [section Intégration du code source de Datadog][5].
+
+## Pour aller plus loin
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /fr/tracing/trace_explorer/#live-search-for-15-minutes
-[2]: /fr/tracing/trace_retention/#retention-filters
+[2]: /fr/tracing/trace_pipeline/trace_retention/#retention-filters
+[3]: https://app.datadoghq.com/apm/error-tracking
+[4]: /fr/integrations/github/#link-a-repository-in-your-organization-or-personal-account
+[5]: /fr/integrations/guide/source-code-integration

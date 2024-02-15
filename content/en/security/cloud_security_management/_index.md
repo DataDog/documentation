@@ -42,10 +42,13 @@ further_reading:
     text: "Key learnings from the State of Cloud Security study"
 algolia:
   tags: ['inbox']
+cascade:
+    algolia:
+        subcategory: Cloud Security Management
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">Cloud Security Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-warning">Cloud Security Management Misconfigurations is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Datadog Cloud Security Management (CSM) delivers real-time threat detection and continuous configuration audits across your entire cloud infrastructure, all in a unified view for seamless collaboration and faster remediation. Powered by observability data, security teams can determine the impact of a threat by tracing the full attack flow and identify the resource owner where a vulnerability was triggered.
@@ -57,7 +60,7 @@ CSM leverages the Datadog Agent and platform-wide cloud integrations and include
 - [**Identity Risks**][8]: Provides in-depth visibility into your organization's AWS IAM risks and enables you to detect and resolve identity risks on an ongoing basis.
 - [**Vulnerabilities**][9]: Leverages infrastructure observability to detect, prioritize, and manage vulnerabilities in your organization's containers and hosts.
 
-{{< img src="security/csm/csm_overview.png" alt="Cloud Security Management in Datadog" width="100%">}}
+{{< img src="security/csm/csm_overview_2.png" alt="Cloud Security Management in Datadog" width="100%">}}
 
 ## Track your organization's health
 
@@ -69,9 +72,9 @@ Improve your organization's score by remediating misconfigurations, either by re
 
 ## Explore and remediate issues
 
-Use the [Issues page][7] to review and remediate your organization's security detections. View detailed information about a detection, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
+Use the [Explorers][7] to review and remediate your organization's security detections. View detailed information about a detection, including guidelines and remediation steps. [Send real-time notifications][6] when a threat is detected in your environment, and use tags to identify the owner of an impacted resource.
 
-{{< img src="security/cws/threats_page.png" alt="CSM Threats page" width="100%">}}
+{{< img src="security/csm/explorers_page.png" alt="CSM Explorers page" width="100%">}}
 
 ## Investigate resources
 
@@ -99,9 +102,9 @@ To get started with CSM, navigate to the [**Security** > **Setup**][3] section i
 [4]: https://app.datadoghq.com/security/csm
 [5]: /glossary/#posture-score
 [6]: /security/notifications/
-[7]: https://app.datadoghq.com/security?product=cws
+[7]: https://app.datadoghq.com/security/compliance
 [8]: /security/identity_risks/
-[9]: /security/infrastructure_vulnerabilities/
+[9]: /security/vulnerabilities/
 [10]: /security/cloud_security_management/setup/
 [11]: https://app.datadoghq.com/security/configuration/reports
 [12]: https://app.datadoghq.com/infrastructure/catalog

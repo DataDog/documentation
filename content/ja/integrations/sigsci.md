@@ -15,6 +15,8 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: Signal Sciences
+  monitors:
+    Excessive blocked http requests: assets/monitors/excessiveblockedHTTP.json
 author:
   homepage: https://github.com/DataDog/integrations-extras
   name: Signal Sciences
@@ -95,7 +97,7 @@ Signal Sciences からメトリクスとイベントをリアルタイムに取�
 
 Signal Sciences-Datadog インテグレーションを使用するには、Signal Sciences ユーザーである必要があります。Signal Sciences の詳細については、<https://www.signalsciences.com> を参照してください。
 
-### コンフィギュレーション
+### 構成
 
 #### メトリクスの収集
 
