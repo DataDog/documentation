@@ -35,7 +35,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: airbrake
-oauth: {}
 public_title: Airbrake
 short_description: イベントストリームで Airbrake の例外を表示、検索、議論。
 supported_os: []
