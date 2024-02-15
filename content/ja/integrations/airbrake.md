@@ -13,6 +13,7 @@ assets:
       prefix: airbrake.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 34
     source_type_name: Airbrake
 author:
   homepage: https://www.datadoghq.com
@@ -52,41 +53,56 @@ tile:
   title: Airbrake
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Airbrake を Datadog に接続すると、以下のことができます。
 
-- ストリームで例外をリアルタイムに確認できます。
+- 例外は Datadog の[イベント][1]としてリアルタイムで確認できます。
 - グラフで例外を検索できます。
 - 例外についてチームで議論できます。
 
 {{< img src="integrations/airbrake/airbrakeevent.png" alt="airbrake" popup="true">}}
 
-## セットアップ
+## 計画と使用
 
-### 構成
+### ブラウザトラブルシューティング
 
-Airbrake インテグレーションのセットアップには、Webhook を使用します。
+Webhook を使用して Airbrake インテグレーションをセットアップします。
 
 1. Airbrake アカウントの Settings ページに移動します。
 
-2. 有効にするプロジェクトごとに、"Integrations" をクリックします。
+2. 有効にしたいプロジェクトごとに、**Integrations** をクリックします。
 
-3. "WebHooks" をクリックして、"URL" フィールドに次の URL を入力します。
+3. **WebHooks** をクリックし、**URL** フィールドにこの URL を入力します。
 
     ```text
     https://app.datadoghq.com/intake/webhook/airbrake?api_key=<YOUR_DATADOG_API_KEY>
     ```
 
-4. "Save" をクリックします。
+4. **Save** をクリックします。
 
-## 収集データ
+[イベントエクスプローラー][2]にアクセスすると、Airbrake からの新しいエラーが表示されます。
 
-新しいエラーが発生するたびに、[イベントストリーム][1]に表示されます。
+## リアルユーザーモニタリング
 
-## トラブルシューティング
+### データセキュリティ
+{{< get-metrics-from-git "airbrake" >}}
 
-ご不明な点は、[Datadog のサポートチーム][2]までお問合せください。
+
+### ヘルプ
+
+Airbrake インテグレーションは、Airbrake からのエラーをイベントとして表示します。
+
+### ヘルプ
+
+Airbrake インテグレーションには、サービスのチェック機能は含まれません。
+
+## ヘルプ
+
+ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://docs.datadoghq.com/ja/events/
-[2]: https://docs.datadoghq.com/ja/help/
+[2]: https://app.datadoghq.com/event/explorer
+[3]: https://github.com/DataDog/integrations-internal-core/blob/main/airbrake/metadata.csv
+[4]: https://docs.datadoghq.com/ja/help/
