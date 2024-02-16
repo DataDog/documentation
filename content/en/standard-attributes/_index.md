@@ -139,30 +139,35 @@ attributes:
     description: The HTTP host part of the URL.
     product_source: 
       - icon-log
+      - icon-apm
     type: string
     domain: HTTP, URL Details
   - name: http.url_details.port
     description: The HTTP port part of the URL.
     product_source: 
       - icon-log
+      - icon-apm
     type: number
     domain: HTTP, URL Details
   - name: http.url_details.path
     description: The HTTP path part of the URL.
     product_source: 
       - icon-log
+      - icon-apm
     type: string
     domain: HTTP, URL Details
   - name: http.url_details.queryString
     description: The HTTP query string parts of the URL decomposed as query params key/value attributes.
     product_source: 
       - icon-log
+      - icon-apm
     type: object
     domain: HTTP, URL Details
   - name: http.url_details.scheme
     description: The protocol name of the URL (HTTP or HTTPS).
     product_source: 
       - icon-log
+      - icon-apm
     type: string
     domain: HTTP, URL Details
   - name: http.useragent_details.os.family
