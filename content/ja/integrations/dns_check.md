@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: dns_check
-oauth: {}
 public_title: DNS Check
 short_description: DNS レコードの解決可能性とルックアップ時間を監視。
 supported_os:
@@ -47,7 +46,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Network
+  - Category::ネットワーク
   - Category::Web
   configuration: README.md#Setup
   description: DNS レコードの解決可能性とルックアップ時間を監視。
