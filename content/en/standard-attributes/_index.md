@@ -30,7 +30,6 @@ attributes:
     description: This corresponds to the integration name, the technology from which the data originated. When it matches an integration name, Datadog automatically installs the corresponding parsers and facets. For example, `nginx`, `postgresql`, and so on.
     product_source: 
       - icon-log
-      - icon-apm
     type: string
     domain: Reserved
   - name: status
