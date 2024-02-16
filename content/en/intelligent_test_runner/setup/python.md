@@ -195,11 +195,11 @@ Using `@unittest.skipif` does not override any other `skip` marks, or `skipIf` m
 
 #### Interaction with coverage tools
 
-Coverage data may appear incomplete when the Intelligent Test Runner is enabled. Lines of code that would normally be covered by tests will not be covered when these tests are skipped.
+Coverage data may appear incomplete when the Intelligent Test Runner is enabled. Lines of code that would normally be covered by tests are not be covered when these tests are skipped.
 
 #### Interaction with the coverage package
 
-The Intelligent Test Runner uses the [`coverage`][2] package's API to collect code coverage. Using `coverage run` or plugins like `pytest-cov` will show incomplete data as a result of `ddtrace`'s use of the `Coverage` class.
+The Intelligent Test Runner uses the [`coverage`][2] package's API to collect code coverage. Data from `coverage run` or plugins like `pytest-cov` is incomplete as a result of `ddtrace`'s use of the `Coverage` class.
 
 Some race conditions may cause exceptions when using `pytest` plugins such as `pytest-xdist` that change test execution order or introduce parallelization.
 
