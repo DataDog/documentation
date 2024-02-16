@@ -22,8 +22,8 @@ Two release branches are supported:
 
 | Release    | Support level        |
 |------------|----------------------|
-| `<1`       | Maintenance           |
-| `>=1.0,<2` | General Availability |
+| `>=1.0,<2` | Maintenance          |
+| `>=2.0,<3` | General Availability |
 
 And the library supports the following runtimes:
 
