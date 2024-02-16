@@ -24,12 +24,12 @@ Intelligent Test Runner is only supported in the following versions and testing 
   * From `ddtrace>=2.1.0`.
   * From `Python>=3.7`.
   * Requires `coverage>=5.5`.
-  * Incompatible with `pytest-cov` (see known limitations)
+  * Incompatible with `pytest-cov` (see [known limitations](#known-limitations))
 * `unittest`
   * From `ddtrace>=2.2.0`.
   * From `Python>=3.7`.
 * `coverage`
-  * Incompatible for coverage collection (see known limitations)
+  * Incompatible for coverage collection (see [known limitations](#known-limitations))
 
 ## Setup
 
