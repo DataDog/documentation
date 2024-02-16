@@ -8,9 +8,11 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- メトリクス
-- モバイル
-- トレーシング
+- ログの収集
+- モニター
+- apm
+- ネットワーク
+- profiler_troubleshooting
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rum_android/README.md
 display_on_public_website: true
@@ -23,7 +25,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: rum_android
-oauth: {}
 public_title: Android
 short_description: Datadog RUM を使用した Android アプリケーションの監視とメトリクス生成
 supported_os:
@@ -31,8 +32,10 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Log Collection
   - Category::Metrics
   - Category::Mobile
+  - Category::Network
   - Category::Tracing
   - Supported OS::Android
   configuration: README.md#Setup

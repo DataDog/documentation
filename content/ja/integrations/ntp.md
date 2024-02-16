@@ -33,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: ntp
-oauth: {}
 public_title: NTP
 short_description: 選択した NTP サーバーとの同期からホストが外れた場合にアラートを取得。
 supported_os:
@@ -47,7 +46,7 @@ tile:
   - Supported OS::macOS
   - Supported OS::Windows
   - Category::Web
-  - Category::Network
+  - Category::ネットワーク
   configuration: README.md#Setup
   description: 選択した NTP サーバーとの同期からホストが外れた場合にアラートを取得。
   media: []
