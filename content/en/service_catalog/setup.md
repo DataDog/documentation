@@ -123,4 +123,3 @@ To remove your imported services from the default **Explore** view, click **Clea
 [16]: https://docs.datadoghq.com/integrations/servicenow/#service-ingestion
 [17]: https://docs.datadoghq.com/universal_service_monitoring/
 [18]: https://docs.datadoghq.com/tracing/
-[19]: /service_catalog/setup#import-data-from-other-sources
