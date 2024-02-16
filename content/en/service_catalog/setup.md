@@ -95,7 +95,7 @@ Upon import, the following occurs:
 
 You can populate your Datadog Service Catalog with services from your ServiceNow CMDB by using the Service Ingestion feature in the [Datadog-ServiceNow integration][16].
 
-## Manual Service Discovery through other Datadog Telemetries
+## Manual Service Discovery through other Datadog telemetries
 
 To discover additional services through existing Datadog telemetry such as infrastructure metrics, navigate to the [**Setup & Config** tab][3] on the top of the page and click on the **Import Entries** tab. You can import services from other Datadog telemetry containing the `DD_SERVICE` [tag][5].
 
