@@ -7413,6 +7413,18 @@ components:
           description: Your service account email address.
           example: datadog-service-account@test-project.iam.gserviceaccount.com
           type: string
+        cloud_run_revision_filters:
+          description: 'List of filters to limit the Cloud Run revisions that are
+            pulled into Datadog by using tags.
+
+            Only Cloud Run revision resources that apply to specified filters are
+            imported into Datadog.'
+          example:
+          - $KEY:$VALUE
+          items:
+            description: Cloud Run Filters
+            type: string
+          type: array
         host_filters:
           description: Your Host Filters.
           items:
