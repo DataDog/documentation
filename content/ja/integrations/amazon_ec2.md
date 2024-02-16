@@ -29,19 +29,20 @@ short_description: インスタンスリソースの使用状況の追跡、ス�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Elastic Compute Cloud (Amazon EC2) は、クラウド内でサイズ変更可能なコンピューティング能力を提供する Web サービスです。開発者が Web スケールのコンピューティングを簡単に利用できるように設計されています。
 
 このインテグレーションを有効にすると、すべての EC2 メトリクスと、スケジュール設定されたメンテナンスなどの追加イベントが Datadog に表示されます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `EC2` が有効になっていることを確認します。
 
@@ -53,7 +54,7 @@ Amazon Elastic Compute Cloud (Amazon EC2) は、クラウド内でサイズ変�
     | `ec2:DescribeSecurityGroups` | EC2 インスタンスに SecurityGroup 名とカスタムタグを追加します。                                                                          |
     | `ec2:DescribeInstances`      | EC2 インスタンスと EC2 Cloudwatch メトリクスにタグを追加します。                                                                              |
 
-3. [Datadog - AWS EC2 インテグレーション][5]をインストールします。
+3. [Datadog - Amazon EC2 インテグレーション][5]をインストールします。
 
 **注**: Datadog で EC2 インスタンスのサブセットを監視したい場合、それらの EC2 インスタンスに `datadog:true` などの AWS タグを付与します。[Datadog AWS インテグレーションページ][2]の **Metric Collection** タブにある **Limit metric collection to specific resources** テキストボックスで、そのタグを指定します。
 
@@ -65,11 +66,11 @@ Datadog は、CloudWatch API からのホストステータスに基づいて、
 
 EC2 インスタンスのシャットダウンが予期される場合にモニターをオフにするには、[AWS インテグレーションページ][2]で **EC2 automuting** チェックボックスをオンにします。
 
-{{< img src="integrations/amazon_ec2/aws_ec2_automuting.png" alt="AWS EC2 オートミュート" >}}
+{{< img src="integrations/amazon_ec2/aws_ec2_automuting.png" alt="Amazon EC2 オートミュート" >}}
 
 ### AWS Systems Manager (SSM) を使用した Agent のインストール
 
-次の手順に従い、AWS Systems Manager を使用して Datadog Agent を EC2 インスタンスにインストールします。AWS EC2 インスタンスに Agent をインストールするメリットについては、[クラウドインスタンスに Datadog Agent をインストールする理由][7]を参照してください。
+次の手順に従い、AWS Systems Manager を使用して Datadog Agent を EC2 インスタンスにインストールします。Amazon EC2 インスタンスに Agent をインストールするメリットについては、[クラウドインスタンスに Datadog Agent をインストールする理由][7]を参照してください。
 
 #### Amazon Systems Manager UI による Agent のインストール (推奨)
 
@@ -129,13 +130,13 @@ Datadog US サイトの場合は、`runCommand` をご使用の `<AWS_REGION>` (
 
 **Run** ボタンをクリックすると、ステータスを示す確認ページが表示されます。終了後に、Datadog で[インフラストラクチャーリスト][17]をチェックします。
 
-### ログの収集
+### 収集データ
 
 [Datadog Agent][18] または別の[ログシッパー][19]を使用して、Datadog にログを送信します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_ec2" >}}
 
 
@@ -143,18 +144,18 @@ AWS から取得される各メトリクスには、ホスト名やセキュリ�
 
 **注**: Datadog - EC2 インテグレーションは、デフォルトでは `aws.ec2.instance_age` を収集しません。このメトリクスの収集を有効にするには、[Datadog サポート][21]までお問い合わせください。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "amazon_ec2" >}}
 
 
 ## すぐに使える監視
 
-AWS EC2 インテグレーションは、パフォーマンスを監視し最適化するために、すぐに使える監視機能を提供します。
+Amazon EC2 インテグレーションは、パフォーマンスを監視し最適化するために、すぐに使える監視機能を提供します。
 
-- AWS EC2 Overview ダッシュボード: すぐに使える [AWS EC2 Overview ダッシュボード][23]を使用して、EC2 インスタンスの包括的な概要を得ることができます。
-- 推奨モニター: [AWS EC2 の推奨モニター][24]を有効にすると、問題をプロアクティブに検出し、タイムリーなアラートを受信することができます。
+- Amazon EC2 Overview ダッシュボード: すぐに使える [Amazon EC2 Overview ダッシュボード][23]を使用して、EC2 インスタンスの包括的な概要を得ることができます。
+- 推奨モニター: [Amazon EC2 の推奨モニター][24]を有効にすると、問題をプロアクティブに検出し、タイムリーなアラートを受信することができます。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][21]までお問合せください。
 

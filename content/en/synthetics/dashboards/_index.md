@@ -38,13 +38,13 @@ The generated Synthetic dashboards automatically contain a set of default templa
 
 {{< img src="synthetics/dashboards/clone.png" alt="Clone a dashboard" style="width:100%;">}}
 
-The Synthetic dashboard has a default view which you can adjust. Click the **Edit** icon and customize your template variables.
+The Synthetic dashboard has a default view which you can adjust. Click the **Edit** icon to enter edit mode and customize your template variables.
 
-{{< img src="synthetics/dashboards/template_variables.png" alt="Edit template variables in a Synthetic dashboard" style="width:80%;">}}
+{{< img src="synthetics/dashboards/synthetics_template_variable_edit.png" alt="Edit template variables in a Synthetic dashboard" style="width:100%;">}}
 
 ### Create a saved view
 
-Once you are done editing, click **Save** and select **Save selections as view** from the left hand dropdown menu. 
+Once you are done editing, click **Done** and select **Save selections as view** from the left hand dropdown menu. 
 
 {{< img src="synthetics/dashboards/saved_view.png" alt="Create a saved view in a Synthetic dashboard" style="width:60%;">}}
 

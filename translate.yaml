@@ -15,6 +15,7 @@ ignores:
   - "content/en/infrastructure/resource_catalog/*.md"
   - "content/en/integrations/rapdev_services.md"
   - "content/en/workflows/actions_catalog/*.md"
+  - "content/en/code_analysis/static_analysis_rules/**/*.md"
   - "content/en/api/v1/**/*.md"
   - "content/en/api/v2/**/*.md"
   - "**/*.fr.md"

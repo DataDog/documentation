@@ -139,7 +139,7 @@ Agent (v7.36.1)
 
 #### Events
 
-In the Datadog UI, go to the Events Managment Page **Service Mgmt > Event Management**. The Agent sends events to Datadog when an Agent is started or restarted. The following message displays if your Agent successfully installs:
+In the Datadog UI, go to the Events Management Page **Service Mgmt > Event Management**. The Agent sends events to Datadog when an Agent is started or restarted. The following message displays if your Agent successfully installs:
 
 ```text
 Datadog agent (v. 7.XX.X) started on <Hostname>

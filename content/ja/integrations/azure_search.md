@@ -1,8 +1,7 @@
 ---
 categories:
-  - cloud
-  - azure
-ddtype: crawler
+- cloud
+- azure
 dependencies: []
 description: Azure Cognitive Search の主要メトリクスを追跡。
 doc_link: https://docs.datadoghq.com/integrations/azure_search/
@@ -20,33 +19,35 @@ public_title: Datadog-Microsoft Azure Cognitive Search インテグレーショ�
 short_description: Azure Cognitive Search の主要メトリクスを追跡。
 version: '1.0'
 ---
+
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Cognitive Search は、ウェブ、モバイル、エンタープライズアプリケーションで非公開の異種コンテンツを詳細に検索できるよう開発者向けに API およびツールを提供する、サービスとしての検索クラウドソリューションです。
 
 Datadog Azure インテグレーションを使用して、Azure Cognitive  Search からメトリクスを収集できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。それ以上のインストール手順はありません。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "azure_search" >}}
 
 
-### イベント
+### ヘルプ
 
 Azure Cognitive Search インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Azure Cognitive Search インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

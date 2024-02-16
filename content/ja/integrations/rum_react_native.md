@@ -1,6 +1,7 @@
 ---
 app_id: rum-react-native
 app_uuid: 61207de8-cc1e-4915-a18a-7fb25093d85c
+assets: {}
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -52,6 +53,7 @@ tile:
   title: React Native
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -74,7 +76,7 @@ React Native アプリケーションのエンドツーエンドの健全性を�
 - クライアントサイドとサーバーサイドのメトリクス、トレース、ログを統合し、クラッシュのデバッグを高速化
 - フロントエンドとバックエンドのチーム向けに、フルスタックモニタリングを単一プラットフォームで実現
 
-## セットアップ
+## 計画と使用
 
 ### RUM イベントの収集
 
@@ -88,9 +90,9 @@ React Native アプリケーションは、自動的に Datadog にトレース�
 
 React Native アプリケーションのログを Datadog に転送し始めるには、[React Native ログ収集][3]をご覧ください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 React Native インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][4]を参照してください。
 
@@ -102,7 +104,7 @@ React Native インテグレーションには、メトリクスは含まれて�
 
 React Native インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問い合わせください。
 

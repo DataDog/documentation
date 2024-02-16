@@ -3,6 +3,7 @@ app_id: backstage
 app_uuid: 2b89148d-0938-46fc-a9dc-fd8a45e583a9
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: backstage.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10281
     source_type_name: backstage
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -54,15 +56,16 @@ tile:
   title: Backstage
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 
 [Backstage][1] は、デベロッパーポータルを構築するためのオープンプラットフォームです。このインテグレーションにより、Datadog のグラフやダッシュボードを Backstage インスタンスに埋め込むことができるようになります。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 1. Datadog プラグインを Backstage にインストールします。
 
@@ -90,21 +93,21 @@ metadata:
 
 Backstage インスタンスの Overview タブを開き、Datadog のダッシュボードやグラフが期待通りにレンダリングされることを確認します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Backstage インテグレーションには、メトリクスは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Backstage インテグレーションには、サービスのチェック機能は含まれません。
 
-### イベント
+### ヘルプ
 
 Backstage インテグレーションには、イベントは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 サポートが必要な場合は、[Backstage Community][4] にお問い合わせください。
 

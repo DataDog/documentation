@@ -11,7 +11,7 @@ author:
   support_email: support@zebrium.com
   vendor_id: zebrium
 categories:
-- notification
+- notifications
 - 自動化
 - マーケットプレイス
 dependencies: []
@@ -49,7 +49,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Notification
+  - Category::Notifications
   - Category::Automation
   - Category::Marketplace
   - Offering::Software License
@@ -75,6 +75,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -87,7 +88,7 @@ Zebrium の使用方法は簡単です。トラブルシューティングを行
 
 Zebrium のお客様になると、Zebrium と Datadog の 2 点のインテグレーションを使い始めることができます。1) カスタムダッシュボードウィジェットを持つ Zebrium Datadog アプリと、2) Zebrium からイベントやメトリクスを送信するデータインテグレーションです。インストールは、[インテグレーションページ][4]から Zebrium を検索してください。
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Zebrium にお問い合わせください。
 

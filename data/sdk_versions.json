@@ -5,7 +5,7 @@
   },
   {
     "client": "datadog-api-client-java",
-    "version": "datadog-api-client-2.20.0"
+    "version": "datadog-api-client-2.21.0"
   },
   {
     "client": "datadog-api-client-python",
