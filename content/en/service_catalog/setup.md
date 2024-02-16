@@ -33,9 +33,11 @@ Datadog Service Catalog includes both eBPF-based autodiscovery with [Universal S
 Datadog automatically discovers the dependencies of instrumented services, including databases or third-party APIs, even if the dependency hasn't been instrumented. The Service Catalog lists these as separate entries. To differentiate auto-detected components from instrumented services, you can request access to the private beta for inferred services.
 {{< /callout >}}
 
-## Create user-defined services
+## Create user-defined services 
 
-You can add services to Service Catalog that are not associated with any Datadog telemetry. To create such an entry, name your service in the `dd-service` field in a `service.datadog.yaml` file at the root of the repository, using one of the supported metadata schema versions. For example: 
+You can bring your own services to Service Catalog. You can either manually add them by creating Service Definitions through API or GitHub integration or [import][19] them from existing sources like ServiceNow or Backstage. These services are by default not associated with any Datadog telemetry, you may link telemetries from Datadog or external sources manually through `service.datadog.yaml` files. 
+
+To create a user-defined service, name your service in the `dd-service` field in a `service.datadog.yaml` file at the root of the repository, using one of the supported metadata schema versions. For example: 
 
 #### Example
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
@@ -65,18 +67,6 @@ External Resources (Optional)
 
 You can register multiple services in one YAML file by separating each definition with three dashes (`---`).
 
-## Discover additional services
-
-To discover other services through existing Datadog telemetry such as infrastructure metrics, navigate to the [**Setup & Config** tab][3] on the top of the page and click on the **Import Entries** tab. You can import services from other Datadog telemetry containing the `DD_SERVICE` [tag][5].
-
-{{< img src="tracing/service_catalog/import_entries.png" alt="Import Entries tab in the Service Catalog setup and configuration section" style="width:90%;" >}}
-
-Once you have imported some entries, they appear in the **Explore** tab. Entries may expire unless you add metadata such as the owner or contacts by [using the API][1] or the [GitHub integration][6].
-
-To remove your imported services from the default **Explore** view, click **Clear Previously Imported Services**. This removes all services that do not have metadata or do not have APM, Universal Service Monitoring (USM), or Real User Monitoring (RUM) telemetry.
-
-{{< img src="tracing/service_catalog/clear_imported_services.png" alt="Confirm the deletion of previously imported services in the Service Catalog setup and configuration section" style="width:90%;" >}}
-
 ## Import data from other sources
 
 ### Backstage 
@@ -105,6 +95,19 @@ Upon import, the following occurs:
 
 You can populate your Datadog Service Catalog with services from your ServiceNow CMDB by using the Service Ingestion feature in the [Datadog-ServiceNow integration][16].
 
+## Manual Service Discovery through other Datadog Telemetries
+
+To discover additional services through existing Datadog telemetry such as infrastructure metrics, navigate to the [**Setup & Config** tab][3] on the top of the page and click on the **Import Entries** tab. You can import services from other Datadog telemetry containing the `DD_SERVICE` [tag][5].
+
+{{< img src="tracing/service_catalog/import_entries.png" alt="Import Entries tab in the Service Catalog setup and configuration section" style="width:90%;" >}}
+
+Once you have imported some entries, they appear in the **Explore** tab. Entries may expire unless you add metadata such as the owner or contacts by [using the API][1] or the [GitHub integration][6].
+
+To remove your imported services from the default **Explore** view, click **Clear Previously Imported Services**. This removes all services that do not have metadata or do not have APM, Universal Service Monitoring (USM), or Real User Monitoring (RUM) telemetry.
+
+{{< img src="tracing/service_catalog/clear_imported_services.png" alt="Confirm the deletion of previously imported services in the Service Catalog setup and configuration section" style="width:90%;" >}}
+
+
 
 ## Further reading
 
@@ -120,3 +123,4 @@ You can populate your Datadog Service Catalog with services from your ServiceNow
 [16]: https://docs.datadoghq.com/integrations/servicenow/#service-ingestion
 [17]: https://docs.datadoghq.com/universal_service_monitoring/
 [18]: https://docs.datadoghq.com/tracing/
+[19]: /service_catalog/setup#import-data-from-other-sources
