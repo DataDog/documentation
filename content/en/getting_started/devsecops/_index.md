@@ -7,12 +7,12 @@ This guide introduces the DevSecOps bundles with links to setup instructions to 
 
 ## APM DevSecOps
 
-The APM DevSecOps bundles combine [Application Performance Monitoring (APM)][4] with the [Application Vulnerability Management][10] capabilities of [Application Security Management (ASM)][2].
+The APM DevSecOps bundles combine [Application Performance Monitoring (APM)][4] with the [Software Composition Analysis][10] capabilities of [Application Security Management (ASM)][2].
 
 {{< tabs >}}
 {{% tab "APM DevSecOps" %}}
 
-APM DevSecOps includes [APM][1], [Universal Service Monitoring][2], and the [Application Vulnerability Management][3] capabilities of [ASM][4].
+APM DevSecOps includes [APM][1], [Universal Service Monitoring][2], and the [Software Composition Analysis][3] capabilities of [ASM][4].
 
 ### Setup
 
@@ -21,9 +21,9 @@ To get started with APM DevSecOps, [install and configure the Datadog Agent][5] 
 - [APM][6]
 - [Universal Service Monitoring][7]
 
-After you install the Agent, enable AVM for your environment.
+After you install the Agent, enable SCA for your environment.
 
-- [Application Vulnerability Management][10]
+- [Software Composition Analysis][10]
 
 ### Next steps
 
@@ -31,7 +31,7 @@ Learn more about the features included with APM DevSecOps:
 
 - [APM Metrics][9]: Learn more about trace application metrics
 - [Universal Service Monitoring][2]: Gain visibility into your service health metrics
-- [Application Vulnerability Management][3]: Detect vulnerabilities in your service's open source dependencies
+- [Software Composition Analysis][3]: Detect vulnerabilities in your service's open source dependencies
 
 [1]: /tracing/
 [2]: /universal_service_monitoring/
@@ -47,7 +47,7 @@ Learn more about the features included with APM DevSecOps:
 {{% /tab %}}
 {{% tab "APM DevSecOps Pro" %}}
 
-APM DevSecOps Pro includes [APM][1], [Universal Service Monitoring][2], [Data Streams Monitoring][3], and the [Application Vulnerability Management][4] capabilities of [ASM][5].
+APM DevSecOps Pro includes [APM][1], [Universal Service Monitoring][2], [Data Streams Monitoring][3], and the [Software Composition Analysis][4] capabilities of [ASM][5].
 
 ### Setup
 
@@ -57,9 +57,9 @@ To get started with APM DevSecOps Pro, [install and configure the Datadog Agent]
 - [Universal Service Monitoring][8]
 - [Data Streams Monitoring][9]
 
-After you install the Agent, configure Application Vulnerability Management for your environment.
+After you install the Agent, configure Software Composition Analysis for your environment.
 
-- [Application Vulnerability Management][10]
+- [Software Composition Analysis][10]
 
 #### Next steps
 
@@ -68,7 +68,7 @@ Learn more about the features included with APM DevSecOps Pro:
 - [APM Metrics][11]: Learn more about trace application metrics
 - [Universal Service Monitoring][2]: Gain visibility into your service health metrics
 - [Data Streams Monitoring][3]: Understand and manage your pipelines at scale
-- [Application Vulnerability Management][4]: Detect vulnerabilities in your service's open source dependencies
+- [Software Composition Analysis][4]: Detect vulnerabilities in your service's open source dependencies
 
 [1]: /tracing/
 [2]: /universal_service_monitoring/
@@ -85,7 +85,7 @@ Learn more about the features included with APM DevSecOps Pro:
 {{% /tab %}}
 {{% tab "APM DevSecOps Enterprise" %}}
 
-APM DevSecOps Enterprise includes [APM][1], [Universal Service Monitoring][2], [Data Streams Monitoring][3], [Continuous Profiler][4], and the [Application Vulnerability Management][5] capabilities of [ASM][6].
+APM DevSecOps Enterprise includes [APM][1], [Universal Service Monitoring][2], [Data Streams Monitoring][3], [Continuous Profiler][4], and the [Software Composition Analysis][5] capabilities of [ASM][6].
 
 ### Setup
 
@@ -108,7 +108,7 @@ Learn more about the features included with APM DevSecOps Enterprise:
 - [Universal Service Monitoring][2]: Gain visibility into your service health metrics
 - [Data Streams Monitoring][3]: Understand and manage your pipelines at scale
 - [Continuous Profiler][4]: Optimize code performance in production
-- [Application Vulnerability Management][5]: Detect vulnerabilities in your service's open source dependencies
+- [Software Composition Analysis][5]: Detect vulnerabilities in your service's open source dependencies
 
 [1]: /tracing/
 [2]: /universal_service_monitoring/
@@ -230,3 +230,4 @@ Learn more about the features included with Infrastructure DevSecOps Enterprise:
 [2]: /security/application_security
 [3]: /security/cloud_security_management/
 [4]: /tracing
+[10]: /security/application_security/software_composition_analysis/

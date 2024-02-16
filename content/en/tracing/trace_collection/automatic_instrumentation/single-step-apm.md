@@ -167,7 +167,7 @@ docker run -d --name dd-agent \
 
 You can enable APM by installing the Agent with the Datadog Helm chart. This deploys the Datadog Agent across all nodes in your Linux-based Kubernetes cluster with a DaemonSet.
 
-**Note:** Single step instrumentation is deployed to the `default` namespace and does not instrument any applications in the same namespace.
+**Note**: Single step instrumentation doesn't instrument applications in the namespace where you install the Datadog Agent. It's recommended to install the Agent in a separate namespace in your cluster where you don't run your applications.
 
 ### Requirements
 
