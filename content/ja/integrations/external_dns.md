@@ -3,6 +3,7 @@ app_id: external-dns
 app_uuid: b41539a6-8222-4d6e-92f9-0a9f8496acdd
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -13,6 +14,7 @@ assets:
       prefix: external_dns.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10075
     source_type_name: 外部 DNS
 author:
   homepage: https://www.datadoghq.com
@@ -29,7 +31,7 @@ draft: false
 git_integration_title: external_dns
 integration_id: external-dns
 integration_title: 外部 DNS
-integration_version: 2.3.1
+integration_version: 3.1.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -57,6 +59,7 @@ tile:
   title: 外部 DNS
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -65,13 +68,13 @@ tile:
 
 外部 DNS の詳細については、[Github リポジトリ][1]を参照してください。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 外部 DNS チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 サーバーとポートを指定し、監視するマスターを設定するには、[Agent のコンフィギュレーションディレクトリ][3]のルートにある `conf.d/` フォルダーの `external_dns.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[external_dns.d/conf.yaml のサンプル][4] を参照してください。
 
@@ -96,26 +99,26 @@ metadata:
 
 [Agent の `status` サブコマンドを実行][5]し、Checks セクションで `external_dns` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "external_dns" >}}
 
 
-### イベント
+### ヘルプ
 
 外部 DNS チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "external_dns" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://github.com/kubernetes-incubator/external-dns
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/external_dns/datadog_checks/external_dns/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

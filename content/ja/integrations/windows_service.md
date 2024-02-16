@@ -24,7 +24,7 @@ draft: false
 git_integration_title: windows_service
 integration_id: windows-service
 integration_title: Windows Services
-integration_version: 4.4.0
+integration_version: 4.5.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -147,7 +147,7 @@ Windows Service チェックには、イベントは含まれません。
 - [Windows Server 2012 メトリクスの収集方法][15]
 - [Datadog を使用した Windows Server 2012 の監視][16]
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/windows_service/datadog_checks/windows_service/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

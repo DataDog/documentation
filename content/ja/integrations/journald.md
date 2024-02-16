@@ -3,12 +3,14 @@ app_id: journald
 app_uuid: 2ee4cbe2-2d88-435b-9ed9-dbe07ca1d059
 assets:
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10167
     source_type_name: journald
 author:
   homepage: https://www.datadoghq.com
@@ -24,7 +26,7 @@ draft: false
 git_integration_title: journald
 integration_id: journald
 integration_title: journald
-integration_version: 1.1.0
+integration_version: 1.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -51,6 +53,7 @@ tile:
   title: journald
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -58,14 +61,14 @@ tile:
 Systemd-journald は、ログデータを収集して保管するシステムサービスです。
 さまざまなソースからのログ情報に基づいて、構造化およびインデックス化されたジャーナルを作成し、維持します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 journald チェックは [Datadog Agent][1] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 ジャーナルファイルは、デフォルトでは、systemd-journal システムグループによって所有され、読み取られます。ジャーナルログの収集を開始するには、以下のようにします。
 
@@ -76,13 +79,13 @@ journald チェックは [Datadog Agent][1] パッケージに含まれていま
     ```
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ログの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][1]のルートにある `conf.d/` フォルダーの `journald.d/conf.yaml` ファイルを編集します。
 
-#### ログの収集
+#### 収集データ
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` でこれを有効にする必要があります。
 
@@ -108,11 +111,11 @@ logs:
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][1]のガイドを参照して、次のパラメーターを適用してください。
 
-#### ログの収集
+#### 収集データ
 
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][2]を参照してください。
@@ -227,26 +230,26 @@ Agent がホストから実行されている場合、これは自動的に機�
 
 Agent の [status サブコマンド][3]を実行し、ログ Agent セクションで ``journald`` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 journald には、メトリクスは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 journald には、サービスのチェック機能は含まれません。
 
-### イベント
+### ヘルプ
 
 journald には、イベントは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

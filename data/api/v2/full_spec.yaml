@@ -151,6 +151,21 @@ components:
       required: true
       schema:
         type: string
+    CaseIDPathParameter:
+      description: Case's UUID or key
+      example: f98a5a5b-e0ff-45d4-b2f5-afe6e74de504
+      in: path
+      name: case_id
+      required: true
+      schema:
+        type: string
+    CaseSortableFieldParameter:
+      description: Specify which field to sort
+      in: query
+      name: sort[field]
+      required: false
+      schema:
+        $ref: '#/components/schemas/CaseSortableField'
     CloudAccountID:
       description: Cloud Account id.
       in: path
@@ -381,6 +396,14 @@ components:
         example: 10
         format: int64
         type: integer
+    ProjectIDPathParameter:
+      description: Project UUID
+      example: e555e290-ed65-49bd-ae18-8acbfcf18db7
+      in: path
+      name: project_id
+      required: true
+      schema:
+        type: string
     ResourceID:
       description: 'Identifier, formatted as `type:id`. Supported types: `connection`,
         `dashboard`, `notebook`, `security-rule`, `slo`.'
@@ -3353,6 +3376,345 @@ components:
             from the other indexes
           type: string
       type: object
+    Case:
+      description: A case
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseAttributes'
+        id:
+          description: Case's identifier
+          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+          type: string
+        relationships:
+          $ref: '#/components/schemas/CaseRelationships'
+        type:
+          $ref: '#/components/schemas/CaseResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    Case3rdPartyTicketStatus:
+      default: IN_PROGRESS
+      description: Case status
+      enum:
+      - IN_PROGRESS
+      - COMPLETED
+      - FAILED
+      example: COMPLETED
+      readOnly: true
+      type: string
+      x-enum-varnames:
+      - IN_PROGRESS
+      - COMPLETED
+      - FAILED
+    CaseAssign:
+      description: Case assign
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseAssignAttributes'
+        type:
+          $ref: '#/components/schemas/CaseResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    CaseAssignAttributes:
+      description: Case assign attributes
+      properties:
+        assignee_id:
+          description: Assignee's UUID
+          example: f98a5a5b-e0ff-45d4-b2f5-afe6e74de504
+          type: string
+      required:
+      - assignee_id
+      type: object
+    CaseAssignRequest:
+      description: Case assign request
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseAssign'
+      required:
+      - data
+      type: object
+    CaseAttributes:
+      description: Case attributes
+      properties:
+        archived_at:
+          description: Timestamp of when the case was archived
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        closed_at:
+          description: Timestamp of when the case was closed
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        created_at:
+          description: Timestamp of when the case was created
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          description: Description
+          type: string
+        jira_issue:
+          $ref: '#/components/schemas/JiraIssue'
+        key:
+          description: Key
+          example: CASEM-4523
+          type: string
+        modified_at:
+          description: Timestamp of when the case was last modified
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        priority:
+          $ref: '#/components/schemas/CasePriority'
+        service_now_ticket:
+          $ref: '#/components/schemas/ServiceNowTicket'
+        status:
+          $ref: '#/components/schemas/CaseStatus'
+        title:
+          description: Title
+          example: Memory leak investigation on API
+          type: string
+        type:
+          $ref: '#/components/schemas/CaseType'
+      type: object
+    CaseCreate:
+      description: Case creation data
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseCreateAttributes'
+        relationships:
+          $ref: '#/components/schemas/CaseCreateRelationships'
+        type:
+          $ref: '#/components/schemas/CaseResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    CaseCreateAttributes:
+      description: Case creation attributes
+      properties:
+        description:
+          description: Description
+          type: string
+        priority:
+          $ref: '#/components/schemas/CasePriority'
+        title:
+          description: Title
+          example: Security breach investigation
+          type: string
+        type:
+          $ref: '#/components/schemas/CaseType'
+      required:
+      - title
+      - type
+      type: object
+    CaseCreateRelationships:
+      description: Relationships formed with the case on creation
+      properties:
+        assignee:
+          $ref: '#/components/schemas/NullableUserRelationship'
+        project:
+          $ref: '#/components/schemas/ProjectRelationship'
+      required:
+      - project
+      type: object
+    CaseCreateRequest:
+      description: Case create request
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseCreate'
+      required:
+      - data
+      type: object
+    CaseEmpty:
+      description: Case empty request data
+      properties:
+        type:
+          $ref: '#/components/schemas/CaseResourceType'
+      required:
+      - type
+      type: object
+    CaseEmptyRequest:
+      description: Case empty request
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseEmpty'
+      required:
+      - data
+      type: object
+    CasePriority:
+      default: NOT_DEFINED
+      description: Case priority
+      enum:
+      - NOT_DEFINED
+      - P1
+      - P2
+      - P3
+      - P4
+      - P5
+      example: NOT_DEFINED
+      type: string
+      x-enum-varnames:
+      - NOT_DEFINED
+      - P1
+      - P2
+      - P3
+      - P4
+      - P5
+    CaseRelationships:
+      description: Resources related to a case
+      properties:
+        assignee:
+          $ref: '#/components/schemas/NullableUserRelationship'
+        created_by:
+          $ref: '#/components/schemas/NullableUserRelationship'
+        modified_by:
+          $ref: '#/components/schemas/NullableUserRelationship'
+        project:
+          $ref: '#/components/schemas/ProjectRelationship'
+      type: object
+    CaseResourceType:
+      default: case
+      description: Case resource type
+      enum:
+      - case
+      example: case
+      type: string
+      x-enum-varnames:
+      - CASE
+    CaseResponse:
+      description: Case response
+      properties:
+        data:
+          $ref: '#/components/schemas/Case'
+      type: object
+    CaseSortableField:
+      description: Case field that can be sorted on
+      enum:
+      - created_at
+      - priority
+      - status
+      example: created_at
+      type: string
+      x-enum-varnames:
+      - CREATED_AT
+      - PRIORITY
+      - STATUS
+    CaseStatus:
+      description: Case status
+      enum:
+      - OPEN
+      - IN_PROGRESS
+      - CLOSED
+      example: OPEN
+      type: string
+      x-enum-varnames:
+      - OPEN
+      - IN_PROGRESS
+      - CLOSED
+    CaseType:
+      description: Case type
+      enum:
+      - STANDARD
+      example: STANDARD
+      type: string
+      x-enum-varnames:
+      - STANDARD
+    CaseUpdatePriority:
+      description: Case priority status
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseUpdatePriorityAttributes'
+        type:
+          $ref: '#/components/schemas/CaseResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    CaseUpdatePriorityAttributes:
+      description: Case update priority attributes
+      properties:
+        priority:
+          $ref: '#/components/schemas/CasePriority'
+      required:
+      - priority
+      type: object
+    CaseUpdatePriorityRequest:
+      description: Case update priority request
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseUpdatePriority'
+      required:
+      - data
+      type: object
+    CaseUpdateStatus:
+      description: Case update status
+      properties:
+        attributes:
+          $ref: '#/components/schemas/CaseUpdateStatusAttributes'
+        type:
+          $ref: '#/components/schemas/CaseResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    CaseUpdateStatusAttributes:
+      description: Case update status attributes
+      properties:
+        status:
+          $ref: '#/components/schemas/CaseStatus'
+      required:
+      - status
+      type: object
+    CaseUpdateStatusRequest:
+      description: Case update status request
+      properties:
+        data:
+          $ref: '#/components/schemas/CaseUpdateStatus'
+      required:
+      - data
+      type: object
+    CasesResponse:
+      description: Response with cases
+      properties:
+        data:
+          description: Cases response data
+          items:
+            $ref: '#/components/schemas/Case'
+          type: array
+        meta:
+          $ref: '#/components/schemas/CasesResponseMeta'
+      type: object
+    CasesResponseMeta:
+      description: Cases response metadata
+      properties:
+        page:
+          $ref: '#/components/schemas/CasesResponseMetaPagination'
+      type: object
+    CasesResponseMetaPagination:
+      description: Pagination metadata
+      properties:
+        current:
+          description: Current page number
+          format: int64
+          type: integer
+        size:
+          description: Number of cases in current page
+          format: int64
+          type: integer
+        total:
+          description: Total number of pages
+          format: int64
+          type: integer
+      type: object
     ChargebackBreakdown:
       description: Charges breakdown.
       properties:
@@ -5084,16 +5446,21 @@ components:
         git:
           $ref: '#/components/schemas/DORAGitInfo'
         id:
-          description: Incident ID
+          description: Incident ID. Required to update a previously sent incident.
           type: string
         name:
           description: Incident name.
-          example: Webserver is down failing all requests
+          example: Webserver is down failing all requests.
           type: string
-        service:
-          description: Service name from a service available in the Service Catalog.
-          example: shopist
-          type: string
+        services:
+          description: Service names impacted by the incident. If possible, use names
+            registered in the Service Catalog. Required when the team field is not
+            provided.
+          example:
+          - shopist
+          items:
+            type: string
+          type: array
         severity:
           description: Incident severity.
           example: High
@@ -5103,12 +5470,17 @@ components:
           example: 1693491974000000000
           format: int64
           type: integer
+        team:
+          description: Name of the team owning the services impacted. If possible,
+            use team handles registered in Datadog. Required when the services field
+            is not provided.
+          example: backend
+          type: string
         version:
           description: Version to correlate with [APM Deployment Tracking](https://docs.datadoghq.com/tracing/services/deployment_tracking/).
           example: v1.12.07
           type: string
       required:
-      - service
       - started_at
       type: object
     DORAIncidentRequestData:
@@ -9369,6 +9741,32 @@ components:
       - project_key
       - account
       type: object
+    JiraIssue:
+      description: Jira issue attached to case
+      nullable: true
+      properties:
+        result:
+          $ref: '#/components/schemas/JiraIssueResult'
+        status:
+          $ref: '#/components/schemas/Case3rdPartyTicketStatus'
+      readOnly: true
+      type: object
+    JiraIssueResult:
+      description: Jira issue information
+      properties:
+        issue_id:
+          description: Jira issue ID
+          type: string
+        issue_key:
+          description: Jira issue key
+          type: string
+        issue_url:
+          description: Jira issue URL
+          type: string
+        project_key:
+          description: Jira project key
+          type: string
+      type: object
     ListApplicationKeysResponse:
       description: Response for a list of application keys.
       properties:
@@ -11117,7 +11515,7 @@ components:
       description: The metrics' payload.
       properties:
         series:
-          description: A list of time series to submit to Datadog.
+          description: A list of timeseries to submit to Datadog.
           example:
           - metric: system.load.1
             points:
@@ -11973,6 +12371,29 @@ components:
           type: string
         type:
           $ref: '#/components/schemas/UsersType'
+      required:
+      - id
+      - type
+      type: object
+    NullableUserRelationship:
+      description: Relationship to user.
+      nullable: true
+      properties:
+        data:
+          $ref: '#/components/schemas/NullableUserRelationshipData'
+      required:
+      - data
+      type: object
+    NullableUserRelationshipData:
+      description: Relationship to user object.
+      nullable: true
+      properties:
+        id:
+          description: A unique identifier that represents the user.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/UserResourceType'
       required:
       - id
       - type
@@ -13111,6 +13532,113 @@ components:
       type: string
       x-enum-varnames:
       - PROCESS
+    Project:
+      description: A Project
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ProjectAttributes'
+        id:
+          description: The Project's identifier
+          example: aeadc05e-98a8-11ec-ac2c-da7ad0900001
+          type: string
+        relationships:
+          $ref: '#/components/schemas/ProjectRelationships'
+        type:
+          $ref: '#/components/schemas/ProjectResourceType'
+      required:
+      - id
+      - type
+      - attributes
+      type: object
+    ProjectAttributes:
+      description: Project attributes
+      properties:
+        key:
+          description: The project's key
+          example: CASEM
+          type: string
+        name:
+          description: Project's name
+          type: string
+      type: object
+    ProjectCreate:
+      description: Project create
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ProjectCreateAttributes'
+        type:
+          $ref: '#/components/schemas/ProjectResourceType'
+      required:
+      - attributes
+      - type
+      type: object
+    ProjectCreateAttributes:
+      description: Project creation attributes
+      properties:
+        key:
+          description: Project's key. Cannot be "CASE"
+          example: SEC
+          type: string
+        name:
+          description: name
+          example: Security Investigation
+          type: string
+      required:
+      - name
+      - key
+      type: object
+    ProjectCreateRequest:
+      description: Project create request
+      properties:
+        data:
+          $ref: '#/components/schemas/ProjectCreate'
+      required:
+      - data
+      type: object
+    ProjectRelationship:
+      description: Relationship to project
+      properties:
+        data:
+          $ref: '#/components/schemas/ProjectRelationshipData'
+      required:
+      - data
+      type: object
+    ProjectRelationshipData:
+      description: Relationship to project object
+      properties:
+        id:
+          description: A unique identifier that represents the project
+          example: e555e290-ed65-49bd-ae18-8acbfcf18db7
+          type: string
+        type:
+          $ref: '#/components/schemas/ProjectResourceType'
+      required:
+      - id
+      - type
+      type: object
+    ProjectRelationships:
+      description: Project relationships
+      properties:
+        member_team:
+          $ref: '#/components/schemas/RelationshipToTeamLinks'
+        member_user:
+          $ref: '#/components/schemas/UsersRelationship'
+      type: object
+    ProjectResourceType:
+      default: project
+      description: Project resource type
+      enum:
+      - project
+      example: project
+      type: string
+      x-enum-varnames:
+      - PROJECT
+    ProjectResponse:
+      description: Project response
+      properties:
+        data:
+          $ref: '#/components/schemas/Project'
+      type: object
     ProjectedCost:
       description: Projected Cost data.
       properties:
@@ -13167,6 +13695,15 @@ components:
       type: string
       x-enum-varnames:
       - PROJECt_COST
+    ProjectsResponse:
+      description: Response with projects
+      properties:
+        data:
+          description: Projects response data
+          items:
+            $ref: '#/components/schemas/Project'
+          type: array
+      type: object
     QueryFormula:
       description: A formula for calculation based on one or more queries.
       properties:
@@ -18822,6 +19359,23 @@ components:
             $ref: '#/components/schemas/ServiceDefinitionData'
           type: array
       type: object
+    ServiceNowTicket:
+      description: ServiceNow ticket attached to case
+      nullable: true
+      properties:
+        result:
+          $ref: '#/components/schemas/ServiceNowTicketResult'
+        status:
+          $ref: '#/components/schemas/Case3rdPartyTicketStatus'
+      readOnly: true
+      type: object
+    ServiceNowTicketResult:
+      description: ServiceNow ticket information
+      properties:
+        sys_target_link:
+          description: Link to the Incident created on ServiceNow
+          type: string
+      type: object
     SlackIntegrationMetadata:
       description: Incident integration metadata for the Slack integration.
       properties:
@@ -20823,12 +21377,34 @@ components:
       type: string
       x-enum-varnames:
       - USER_INVITATIONS
+    UserRelationshipData:
+      description: Relationship to user object.
+      properties:
+        id:
+          description: A unique identifier that represents the user.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        type:
+          $ref: '#/components/schemas/UserResourceType'
+      required:
+      - id
+      - type
+      type: object
     UserRelationships:
       description: Relationships of the user object.
       properties:
         roles:
           $ref: '#/components/schemas/RelationshipToRoles'
       type: object
+    UserResourceType:
+      default: user
+      description: User resource type.
+      enum:
+      - user
+      example: user
+      type: string
+      x-enum-varnames:
+      - USER
     UserResponse:
       description: Response containing information about a single user.
       properties:
@@ -21065,6 +21641,18 @@ components:
       required:
       - data
       type: object
+    UsersRelationship:
+      description: Relationship to users.
+      properties:
+        data:
+          description: Relationships to user objects.
+          example: []
+          items:
+            $ref: '#/components/schemas/UserRelationshipData'
+          type: array
+      required:
+      - data
+      type: object
     UsersResponse:
       description: Response containing information about multiple users.
       properties:
@@ -21137,6 +21725,8 @@ components:
             apm_service_catalog_read: View service catalog and service definitions.
             apm_service_catalog_write: Add, modify, and delete service catalog definitions
               when those definitions are maintained by Datadog.
+            cases_read: Read all cases data.
+            cases_write: Create, update and delete cases data.
             ci_visibility_pipelines_write: Create CI Visibility pipeline spans using
               the API.
             ci_visibility_read: View CI Visibility.
@@ -22485,6 +23075,526 @@ paths:
       x-permission: OR(USER_ACCESS_MANAGE)
       x-undo:
         type: idempotent
+  /api/v2/cases:
+    get:
+      description: Search cases.
+      operationId: SearchCases
+      parameters:
+      - $ref: '#/components/parameters/PageSize'
+      - $ref: '#/components/parameters/PageOffset'
+      - $ref: '#/components/parameters/CaseSortableFieldParameter'
+      - description: Search query
+        in: query
+        name: filter
+        required: false
+        schema:
+          example: status:open (team:case-management OR team:event-management)
+          type: string
+      - description: Specify if order is ascending or not
+        in: query
+        name: sort[asc]
+        required: false
+        schema:
+          default: false
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CasesResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_read
+      summary: Search cases
+      tags:
+      - Cases
+      x-menu-order: 1
+      x-pagination:
+        limitParam: page[size]
+        pageOffsetParam: page[offset]
+        resultsPath: data
+      x-undo:
+        type: safe
+    post:
+      description: Create a Case
+      operationId: CreateCase
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseCreateRequest'
+        description: Case payload
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Create a case
+      tags:
+      - Cases
+      x-given:
+        case:
+          parameters:
+          - name: body
+            value: "{\n  \"data\": {\n    \"attributes\": {\n      \"title\": \"My
+              new case\",\n      \"type\": \"STANDARD\",\n      \"priority\": \"P4\"\n
+              \   },\n    \"relationships\": {\n      \"project\": {\n        \"data\":
+              {\n          \"id\": \"d4bbe1af-f36e-42f1-87c1-493ca35c320e\",\n          \"type\":
+              \"project\"\n        }\n      }\n    },\n    \"type\": \"case\"\n  }\n}"
+          source: data
+          step: there is a valid "case" in the system
+      x-menu-order: 2
+      x-undo:
+        type: safe
+  /api/v2/cases/projects:
+    get:
+      description: Get all projects.
+      operationId: GetProjects
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectsResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_read
+      summary: Get all projects
+      tags:
+      - Cases Projects
+      x-menu-order: 2
+      x-undo:
+        type: safe
+    post:
+      description: Create a project.
+      operationId: CreateProject
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectCreateRequest'
+        description: Project payload
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+          description: CREATED
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Create a project
+      tags:
+      - Cases Projects
+      x-menu-order: 1
+      x-undo:
+        operationId: DeleteProject
+        parameters:
+        - name: project_id
+          source: data.id
+        type: unsafe
+  /api/v2/cases/projects/{project_id}:
+    delete:
+      description: Remove a project using the project's `id`.
+      operationId: DeleteProject
+      parameters:
+      - $ref: '#/components/parameters/ProjectIDPathParameter'
+      responses:
+        '204':
+          description: No Content
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Remove a project
+      tags:
+      - Cases Projects
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+    get:
+      description: Get the details of a project by `project_id`.
+      operationId: GetProject
+      parameters:
+      - $ref: '#/components/parameters/ProjectIDPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_read
+      summary: Get the details of a project
+      tags:
+      - Cases Projects
+      x-menu-order: 3
+      x-undo:
+        type: safe
+  /api/v2/cases/{case_id}:
+    get:
+      description: Get the details of case by `case_id`
+      operationId: GetCase
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_read
+      summary: Get the details of a case
+      tags:
+      - Cases
+      x-menu-order: 3
+      x-undo:
+        type: safe
+  /api/v2/cases/{case_id}/archive:
+    post:
+      description: Archive case
+      operationId: ArchiveCase
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseEmptyRequest'
+        description: Archive case payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Archive case
+      tags:
+      - Cases
+      x-menu-order: 8
+      x-undo:
+        type: idempotent
+  /api/v2/cases/{case_id}/assign:
+    post:
+      description: Assign case to a user
+      operationId: AssignCase
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseAssignRequest'
+        description: Assign case payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Assign case
+      tags:
+      - Cases
+      x-menu-order: 6
+      x-undo:
+        type: idempotent
+  /api/v2/cases/{case_id}/priority:
+    post:
+      description: Update case priority
+      operationId: UpdatePriority
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseUpdatePriorityRequest'
+        description: Case priority update payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Update case priority
+      tags:
+      - Cases
+      x-menu-order: 5
+      x-undo:
+        type: idempotent
+  /api/v2/cases/{case_id}/status:
+    post:
+      description: Update case status
+      operationId: UpdateStatus
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseUpdateStatusRequest'
+        description: Case status update payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Update case status
+      tags:
+      - Cases
+      x-menu-order: 4
+      x-undo:
+        type: idempotent
+  /api/v2/cases/{case_id}/unarchive:
+    post:
+      description: Unarchive case
+      operationId: UnarchiveCase
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseEmptyRequest'
+        description: Unarchive case payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Unarchive case
+      tags:
+      - Cases
+      x-menu-order: 9
+      x-undo:
+        type: idempotent
+  /api/v2/cases/{case_id}/unassign:
+    post:
+      description: Unassign case
+      operationId: UnassignCase
+      parameters:
+      - $ref: '#/components/parameters/CaseIDPathParameter'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseEmptyRequest'
+        description: Unassign case payload
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/BadRequestResponse'
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+        '403':
+          $ref: '#/components/responses/ForbiddenResponse'
+        '404':
+          $ref: '#/components/responses/NotFoundResponse'
+        '429':
+          $ref: '#/components/responses/TooManyRequestsResponse'
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ:
+        - cases_write
+      summary: Unassign case
+      tags:
+      - Cases
+      x-menu-order: 7
+      x-undo:
+        type: idempotent
   /api/v2/ci/pipeline:
     post:
       description: 'Send your pipeline event to your Datadog platform over HTTP. For
@@ -23421,7 +24531,7 @@ paths:
   /api/v2/cost_by_tag/active_billing_dimensions:
     get:
       description: Get active billing dimensions for cost attribution. Cost data for
-        a given month becomes available no later than the 17th of the following month.
+        a given month becomes available no later than the 19th of the following month.
       operationId: GetActiveBillingDimensions
       responses:
         '200':
@@ -23466,7 +24576,7 @@ paths:
     get:
       description: "Get monthly cost attribution by tag across multi-org and single
         root-org accounts.\nCost Attribution data for a given month becomes available
-        no later than the 17th of the following month.\nThis API endpoint is paginated.
+        no later than the 19th of the following month.\nThis API endpoint is paginated.
         To make sure you receive all records, check if the value of `next_record_id`
         is\nset in the response. If it is, make another request and pass `next_record_id`
         as a parameter.\nPseudo code example:\n```\nresponse := GetMonthlyCostAttribution(start_month,
@@ -35715,6 +36825,10 @@ tags:
     [Test Visibility in Datadog page](https://docs.datadoghq.com/tests/) for more
     information.
   name: CI Visibility Tests
+- description: View and manage cases within Datadog
+  name: Cases
+- description: View and manage project within Case Management
+  name: Cases Projects
 - description: The Cloud Cost Management API allows you to set up, edit, and delete
     Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management
     page](https://docs.datadoghq.com/cloud_cost_management/) for more information.
@@ -35727,13 +36841,17 @@ tags:
     API. See the [Cloudflare integration page](https://docs.datadoghq.com/integrations/cloudflare/)
     for more information.
   name: Cloudflare Integration
-- description: Configure your Datadog Confluent Cloud integration directly through
-    the Datadog API.
+- description: Manage your Datadog Confluent Cloud integration accounts and account
+    resources directly through the Datadog API. See the [Confluent Cloud page](https://docs.datadoghq.com/integrations/confluent_cloud/)
+    for more information.
   name: Confluent Cloud
 - description: The Container Images API allows you to query Container Image data for
-    your organization.
+    your organization. See the [Container Images View page](https://docs.datadoghq.com/infrastructure/containers/container_images/)
+    for more information.
   name: Container Images
 - description: The Containers API allows you to query container data for your organization.
+    See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for
+    more information.
   name: Containers
 - description: Send events for DORA Metrics to measure and improve software delivery.
     See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more
@@ -35757,18 +36875,15 @@ tags:
 
     end times, prevent all alerting related to specified Datadog tags.'
   name: Downtimes
-- description: 'The events service allows you to programmatically post events to the
-    event stream
+- description: 'The Event Management API allows you to programmatically post events
+    to the Events Explorer
 
-    and fetch events from the event stream. Events are limited to 4000 characters.
-
-    If an event is sent out with a message containing more than 4000 characters, only
-    the
-
-    first 4000 characters are displayed.'
+    and fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/)
+    for more information.'
   name: Events
-- description: Configure your Datadog Fastly integration directly through the Datadog
-    API.
+- description: Manage your Datadog Fastly integration accounts and services directly
+    through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/)
+    for more information.
   name: Fastly Integration
 - description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
 
@@ -35788,12 +36903,15 @@ tags:
     contacting Datadog support.'
   name: IP Allowlist
 - description: Create, update, delete, and retrieve services which can be associated
-    with incidents.
+    with incidents. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/)
+    for more information.
   name: Incident Services
 - description: The Incident Teams endpoints are deprecated. See the [Teams API endpoints](https://docs.datadoghq.com/api/latest/teams/)
     to create, update, delete, and retrieve teams which can be associated with incidents.
   name: Incident Teams
-- description: Manage incident response.
+- description: Manage incident response, as well as associated attachments, metadata,
+    and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/)
+    for more information.
   name: Incidents
 - description: 'Manage your Datadog API and application keys. You need an API key
     and

@@ -23,6 +23,14 @@
     "name": "CI Visibility Tests",
     "description": "Search or aggregate your CI Visibility test events over HTTP. See the [Test Visibility in Datadog page](https://docs.datadoghq.com/tests/) for more information."
   },
+  "cases": {
+    "name": "Cases",
+    "description": "View and manage cases within Datadog"
+  },
+  "cases-projects": {
+    "name": "Cases Projects",
+    "description": "View and manage project within Case Management"
+  },
   "cloud-cost-management": {
     "name": "Cloud Cost Management",
     "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management page](https://docs.datadoghq.com/cloud_cost_management/) for more information."
@@ -37,15 +45,15 @@
   },
   "confluent-cloud": {
     "name": "Confluent Cloud",
-    "description": "Configure your Datadog Confluent Cloud integration directly through the Datadog API."
+    "description": "Manage your Datadog Confluent Cloud integration accounts and account resources directly through the Datadog API. See the [Confluent Cloud page](https://docs.datadoghq.com/integrations/confluent_cloud/) for more information."
   },
   "container-images": {
     "name": "Container Images",
-    "description": "The Container Images API allows you to query Container Image data for your organization."
+    "description": "The Container Images API allows you to query Container Image data for your organization. See the [Container Images View page](https://docs.datadoghq.com/infrastructure/containers/container_images/) for more information."
   },
   "containers": {
     "name": "Containers",
-    "description": "The Containers API allows you to query container data for your organization."
+    "description": "The Containers API allows you to query container data for your organization. See the [Container Monitoring page](https://docs.datadoghq.com/containers/) for more information."
   },
   "dora-metrics": {
     "name": "DORA Metrics",
@@ -61,11 +69,11 @@
   },
   "events": {
     "name": "Events",
-    "description": "The events service allows you to programmatically post events to the event stream\nand fetch events from the event stream. Events are limited to 4000 characters.\nIf an event is sent out with a message containing more than 4000 characters, only the\nfirst 4000 characters are displayed."
+    "description": "The Event Management API allows you to programmatically post events to the Events Explorer\nand fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/) for more information."
   },
   "fastly-integration": {
     "name": "Fastly Integration",
-    "description": "Configure your Datadog Fastly integration directly through the Datadog API."
+    "description": "Manage your Datadog Fastly integration accounts and services directly through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/) for more information."
   },
   "gcp-integration": {
     "name": "GCP Integration",
@@ -77,7 +85,7 @@
   },
   "incident-services": {
     "name": "Incident Services",
-    "description": "Create, update, delete, and retrieve services which can be associated with incidents."
+    "description": "Create, update, delete, and retrieve services which can be associated with incidents. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
   },
   "incident-teams": {
     "name": "Incident Teams",
@@ -85,7 +93,7 @@
   },
   "incidents": {
     "name": "Incidents",
-    "description": "Manage incident response."
+    "description": "Manage incident response, as well as associated attachments, metadata, and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
   },
   "key-management": {
     "name": "Key Management",

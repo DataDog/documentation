@@ -24,15 +24,16 @@ short_description: 許可およびブロックされたリクエストを追跡�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS WAF は、一般的な Web エクスプロイトから Web アプリケーションを保護するために役立つ Web アプリケーションファイアウォールです。
 
 このインテグレーションを有効にすると、WAF メトリクスを Datadog に表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -42,7 +43,7 @@ AWS WAF は、一般的な Web エクスプロイトから Web アプリケー�
 
 2. [Datadog - AWS WAF インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### 監査ログ
 
@@ -64,9 +65,9 @@ WAF ログが収集され、S3 バケットに送信されます。
 
 **注**: Datadog Lambda Forwarder は、WAF ログのネストされたオブジェクトの配列を、使いやすいように自動的に `key:value` 形式に変換します。
 
-## 収集データ
+## Datadog Operator
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_waf" >}}
 
 
@@ -74,17 +75,17 @@ WAF ログが収集され、S3 バケットに送信されます。
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
 AWS WAF インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 AWS WAF インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][7]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services

@@ -5,6 +5,7 @@ assets:
   dashboards:
     cybersixgill: assets/dashboards/cybersixgill_actionable_alerts_overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: cybersixgill_actionable_alerts.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10342
     source_type_name: cybersixgill_actionable_alerts
 author:
   homepage: https://www.cybersixgill.com/
@@ -75,15 +77,16 @@ tile:
   title: Cybersixgill Actionable Alerts
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 Cybersixgill Actionable Alerts チェックでは、IP アドレス、ドメイン、脆弱性、VIP など、ディープ Web、ダーク Web、サーフェス Web にまたがる重要なアセットを監視します。重大度、脅威の種類、説明、投稿スニペット、推奨事項、評価などのコンテキストを持つアラートを受信します。このインテグレーションにより、すぐに使えるダッシュボードが提供され、脅威の優先度を決定して対応することができるようになります。
 
-## セットアップ
+## 計画と使用
 
 
-### インストール
+### インフラストラクチャーリスト
 
 Cybersixgill Actionable Alerts チェックをホストにインストールするには
 1. マシンに[開発者ツール][1]をインストールします。
@@ -94,7 +97,7 @@ Cybersixgill Actionable Alerts チェックをホストにインストールす�
 datadog-agent integration install -t datadog-cybersixgill-actionable-alerts==1.0.1
 ```
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 5. [Cybersixgill サポート][3]に連絡し、Cybersixgill Developer Platform へのアクセスをリクエストします。
 6. Cybersixgill 開発者プラットフォームにアクセスできるウェルカムメールを受け取ります。
 7. Cybersixgill 開発者プラットフォーム内で、クライアント ID およびクライアントシークレットを作成します。
@@ -104,21 +107,21 @@ datadog-agent integration install -t datadog-cybersixgill-actionable-alerts==1.0
 ### 検証
 [Datadog Events Explorer][4] で Cybersixgill のイベントが生成されていることを確認します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "cybersixgill_actionable_alerts" >}}
 
 
-### イベント
+### ヘルプ
 このインテグレーションは、API タイプのイベントを Datadog に送信します。
 
-## トラブルシューティング
+## ヘルプ
 ご不明な点は、[Cybersixgill サポート][3]までお問い合わせください。
 
 
 [1]: https://docs.datadoghq.com/ja/developers/integrations/new_check_howto/?tab=configurationtemplate#configure-the-developer-tool
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: mailto:support@cybersixgill.com
 [4]: https://app.datadoghq.com/event/explorer
 [5]: https://github.com/DataDog/integrations-extras/blob/master/cybersixgill_actionable_alerts/assets/service_checks.json

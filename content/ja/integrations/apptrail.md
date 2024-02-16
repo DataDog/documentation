@@ -63,6 +63,7 @@ tile:
   title: Apptrail
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -73,7 +74,7 @@ Apptrail の監査イベントストリーミング機能 ([_トレイル_][2]) 
 
 Apptrail と Datadog のインテグレーションにより、SaaS の監査ログを Apptrail から Datadog にリアルタイムで継続的にエクスポートすることができるようになります。Datadog を使用して、SaaS 監査ログの分析、アーカイブ、監視、警告を行うことができます。
 
-## セットアップ
+## 計画と使用
 
 前提条件として、SaaS ベンダーから Apptrail にサインアップしている必要があります。
 
@@ -100,13 +101,13 @@ Apptrail の監査ログを Datadog で表示するには
 
 詳しくは、[Apptrail Datadog 配信ドキュメント][7]をお読みください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### ログの収集
+### 収集データ
 
 Datadog を宛先とする Apptrail の[トレイル][2]は、構成された[トレイルルール][8]にマッチしたすべてのログを Datadog に継続的に送信します。Apptrail の監査ログのフォーマットについては、[イベントフォーマット][9]を参照してください。
 
-## サポート
+## Agent
 
 ヘルプが必要ですか？[Datadog サポート][10]または [Apptrail サポート][11]にご連絡ください。
 

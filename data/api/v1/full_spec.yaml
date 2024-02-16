@@ -6427,7 +6427,7 @@ components:
       description: The metrics' payload.
       properties:
         series:
-          description: A list of time series to submit to Datadog.
+          description: A list of timeseries to submit to Datadog.
           example:
           - metric: system.load.1
             points:
@@ -6480,7 +6480,7 @@ components:
           readOnly: true
           type: string
         pointlist:
-          description: List of points of the time series in milliseconds.
+          description: List of points of the timeseries in milliseconds.
           example:
           - - 1681683300000.0
             - 77.62145685254418
@@ -10508,7 +10508,7 @@ components:
       - denominator
       type: object
     SLOHistoryMetricsSeries:
-      description: 'A representation of `metric` based SLO time series for the provided
+      description: 'A representation of `metric` based SLO timeseries for the provided
         queries.
 
         This is the same response type from `batch_query` endpoint.'
@@ -10629,18 +10629,18 @@ components:
           type: string
         history:
           description: For `monitor` based SLOs, this includes the aggregated history
-            as arrays that include time series and uptime data where `0=monitor` is
+            as arrays that include timeseries and uptime data where `0=monitor` is
             in `OK` state and `1=monitor` is in `alert` state.
           example:
           - - 1579212382
             - 0
           items:
-            description: Represents an array time series data.
+            description: Represents an array timeseries data.
             example:
             - 1579212382
             - 0
             items:
-              description: A time series data point which is a tuple of (timestamp,
+              description: A timeseries data point which is a tuple of (timestamp,
                 value).
               format: double
               type: number
@@ -10811,18 +10811,18 @@ components:
           type: string
         history:
           description: For `monitor` based SLOs, this includes the aggregated history
-            as arrays that include time series and uptime data where `0=monitor` is
+            as arrays that include timeseries and uptime data where `0=monitor` is
             in `OK` state and `1=monitor` is in `alert` state.
           example:
           - - 1579212382
             - 0
           items:
-            description: Represents an array time series data.
+            description: Represents an array timeseries data.
             example:
             - 1579212382
             - 0
             items:
-              description: A time series data point which is a tuple of (timestamp,
+              description: A timeseries data point which is a tuple of (timestamp,
                 value).
               format: double
               type: number
@@ -13441,10 +13441,12 @@ components:
         only supporting `http`.
       enum:
       - http
+      - grpc
       example: http
       type: string
       x-enum-varnames:
       - HTTP
+      - GRPC
     SyntheticsAPITest:
       description: Object containing details about a Synthetic API test.
       properties:
@@ -35649,10 +35651,9 @@ tags:
     organization.'
   name: Dashboard Lists
   x-deprecated: true
-- description: 'Interact with your dashboard lists through the API to make it easier
-    to organize,
-
-    find, and share all of your dashboards with your team and organization.'
+- description: Manage all your dashboards, as well as access to your shared dashboards,
+    through the API. See the [Dashboards page](https://docs.datadoghq.com/dashboards/)
+    for more information.
   name: Dashboards
 - description: '[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes)
     gives
@@ -35663,17 +35664,15 @@ tags:
 
     end times, prevent all alerting related to specified Datadog tags.'
   name: Downtimes
-- description: Interact with embeddable graphs through the API.
+- description: Manage embeddable graphs through the API. See [Embeddable Graphs with
+    Template Variables](https://docs.datadoghq.com/dashboards/guide/embeddable-graphs-with-template-variables/)
+    for more information.
   name: Embeddable Graphs
-- description: 'The events service allows you to programmatically post events to the
-    event stream
+- description: 'The Event Management API allows you to programmatically post events
+    to the Events Explorer
 
-    and fetch events from the event stream. Events are limited to 4000 characters.
-
-    If an event is sent out with a message containing more than 4000 characters, only
-    the
-
-    first 4000 characters are displayed.'
+    and fetch events from the Events Explorer. See the [Event Management page](https://docs.datadoghq.com/service_management/events/)
+    for more information.'
   name: Events
 - description: 'Configure your Datadog-Google Cloud Platform (GCP) integration directly
 
@@ -35681,7 +35680,9 @@ tags:
   externalDocs:
     url: https://docs.datadoghq.com/integrations/google_cloud_platform
   name: GCP Integration
-- description: Get information about your live hosts in Datadog.
+- description: Get information about your infrastructure hosts in Datadog, and mute
+    or unmute any notifications from your hosts. See the [Infrastructure page](https://docs.datadoghq.com/infrastructure/)
+    for more information.
   name: Hosts
 - description: Get a list of IP prefixes belonging to Datadog.
   name: IP Ranges

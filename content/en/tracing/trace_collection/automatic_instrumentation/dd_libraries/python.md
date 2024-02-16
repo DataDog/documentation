@@ -27,8 +27,6 @@ further_reading:
       text: 'Advanced Usage'
 ---
 ## Compatibility requirements
-The latest Python Tracer supports CPython versions 2.7 and 3.5-3.11.
-
 For a full list of Datadog's Python version and framework support (including legacy and maintenance versions), read the [Compatibility Requirements][1] page.
 
 ## Getting started

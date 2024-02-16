@@ -3,6 +3,7 @@ app_id: traefik
 app_uuid: 3e412d36-f638-4cb0-9068-294aac7a84e2
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: traefik.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10047
     source_type_name: Traefik
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -56,17 +58,18 @@ tile:
   title: Traefik
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
 
 [Traefik][1] のメトリクス、ログ、トレースを Datadog に送信し、Traefik サービスを監視します。
 
-## セットアップ
+## 計画と使用
 
 Traefik チェックは [Datadog Agent][2] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### インストール
+### インフラストラクチャーリスト
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Traefik チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][3]をご参照ください。
 
@@ -78,7 +81,7 @@ Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Traefik チェ
 
 2. コアの[インテグレーション][4]と同様にインテグレーションを構成します。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
 {{% tab "v2" %}}
@@ -90,7 +93,7 @@ v1 から v2 への変更点については、[Traefik 移行ガイド][1]を参
 
 [Traefik のドキュメント][3]に従って、[Traefik メトリクス][4]を Datadog に送信してください。
 
-#### ログの収集
+#### 収集データ
 
 **Agent 6.0 以上で使用可能**
 
@@ -176,7 +179,7 @@ v1 については [Traefik のドキュメント][1]を、v1 から v2 への�
 
 使用可能なすべての構成オプションの詳細については、[サンプル traefik.d/conf.yaml][5] を参照してください。
 
-#### ログの収集
+#### 収集データ
 
 **Agent 6.0 以上で使用可能**
 
@@ -245,27 +248,27 @@ v2 については、Datadog に送られる [Traefik メトリクス][6]のリ�
 
 v1 については、インテグレーションによって提供される[メトリクス][7]のリストを参照してください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "traefik" >}}
 
 
-### イベント
+### ヘルプ
 
 Traefik チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "traefik" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
 [1]: https://traefik.io
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/use-community-integrations/
 [4]: https://docs.datadoghq.com/ja/getting_started/integrations/
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#service-status
