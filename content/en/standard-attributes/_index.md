@@ -1594,6 +1594,12 @@ attributes:
       - icon-apm
     type: string
     domain: Database spans
+  - name: http.response.headers.*
+    description: The response HTTP headers. None are collected by default, but can be optionally configured with `DD_TRACE_HEADER_TAGS`.
+    product_source:
+      - icon-apm
+    type: string
+    domain: HTTP requests
   
   - name: db.connection_string
     description: The connection string used to connect to the database.
