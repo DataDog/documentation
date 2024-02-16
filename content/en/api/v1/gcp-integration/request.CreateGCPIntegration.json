@@ -5,6 +5,9 @@
   "client_id": "163662907116366290710",
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL",
   "host_filters": "key:value,filter:example",
+  "cloud_run_revision_filters": [
+    "dr:dre"
+  ],
   "is_cspm_enabled": true,
   "is_security_command_center_enabled": true,
   "private_key": "private_key",
