@@ -68,6 +68,8 @@
     </div>
   </div>
 
+  {{ partial "static_analysis/try-rule-modal.html" . }}
+
   {{ partialCached "footer/footer.html" . }}
 
   {{ partial "footer-scripts.html" . }}
@@ -76,7 +78,6 @@
 
   {{ partial "preview_banner/preview_banner" . }}
 
-  {{ partial "static_analysis/try-rule-modal.html" . }}
 
   <!--- integrations carousel modal --->
   {{ if and (in .Params.Kind "integration") (.Params.tile) (.Params.tile.media | len) }}

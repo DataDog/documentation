@@ -5,7 +5,7 @@ function initCopyCode () {
     addCopyButton()
 
     // Add Event Listener
-    const copyButtons = document.querySelectorAll('.js-copy-button');
+    const copyButtons = document.querySelectorAll(['.js-copy-button', '#tryRuleModal img.copy-icon']);
 
     if (copyButtons.length) {
         copyButtons.forEach(btn => {
@@ -40,24 +40,28 @@ function addCopyButton () {
 }
 
 // EVENT FUNCTION for copy functionality
-function copyCode (event, btn){
-    const codeSnippetElement = event.target
-    .closest('.code-snippet')
-    .querySelector('.chroma');
-    
+function copyCode ({target}, btn){
+    const code = getCode(target)
     // Create a range object
     const range = document.createRange();
     // Select the node
-    range.selectNode(codeSnippetElement);
+    range.selectNode(code);
     // create system clipboard object
     const Clipboard = navigator.clipboard
     // write code snippet text
-    Clipboard.writeText(codeSnippetElement.innerText).then(() => {
-        btn.textContent = "Copied!";
-        setTimeout(function() {
-            btn.textContent = "Copy"
-        }, 1000)
+    Clipboard.writeText(code.innerText).then(() => {
+        if(btn.textContent){
+            btn.textContent = "Copied!";
+            setTimeout(function() {
+                btn.textContent = "Copy"
+            }, 1000)
+        }
     })
+}
+
+function getCode (btn){
+    return btn.closest('.code-snippet')?.querySelector('code')  // for markdown fenced code blocks
+    || btn.previousElementSibling.querySelector('td:last-child code'); // for try-rule modal code examples on the static analysis rule pages
 }
 
 initCopyCode()

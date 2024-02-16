@@ -75,17 +75,35 @@
                             // Hide the js appended copy button
                             display: none;
                         }
-                        
+                    }
+                    .copy-icon {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        cursor: pointer;
+                        margin: 14px;
                     }
                     .highlight .chroma {
                         background: #F9FAFB;
                         border: none;
                         padding: 8px;
-                        code {
-                            line-height: 18px;
+                        .chroma {
+                            padding: 0;
                         }
-                        span {
-                            font-size: 13px;
+                        table {
+                            background: #F9FAFB;
+                            &::-webkit-scrollbar {
+                                display: none;
+                            }
+                            td {
+                                border-left: none !important;
+                            }
+                            code {
+                                line-height: 18px;
+                                span {
+                                    font-size: 13px;
+                                }
+                            }
                         }
                     }
                     ol {

@@ -15,10 +15,13 @@
             <div class="row modal-body mx-auto">
                 <div class="col-12 floating-body-top d-flex flex-column">
                     <h2 class="fs-6 m-0 p-0 fw-bold text-uppercase">How to use this rule</h2>
-                    {{$valid_lang := replaceRE `(\w+)` .Page.Params.meta.language .Page.Params.group_id 1}}
-                    {{$valid_ruleset := (delimit (split $valid_lang "-") " ")}}
-                    {{$code := printf "rulesets:\n  - %s     # Rules to enforce %s." .Page.Params.group_id $valid_ruleset}}
-                    {{ highlight $code "yaml" "lineNos=inline"}}
+                    <div class="position-relative">
+                        {{$valid_lang := replaceRE `(\w+)` .Page.Params.meta.language .Page.Params.group_id 1}}
+                        {{$valid_ruleset := (delimit (split $valid_lang "-") " ")}}
+                        {{$code := printf "rulesets:\n  - %s     # Rules to enforce %s." .Page.Params.group_id $valid_ruleset}}
+                        {{ highlight $code "yaml" "lineNos=table, lineNumbersInTable=true"}}
+                        <img class="copy-icon" src="{{.Site.Params.img_url}}images/icon-copy.svg" width="16" height="16" alt="copy code">
+                    </div>
                     <ol class="m-0">
                         <li>Create a static-analysis.datadog.yml with the content above at the root of your repository</li>
                         <li>Use our free IDE integrations or add Code Analysis scans to your CI pipelines</li>
@@ -31,8 +34,8 @@
                 </div>
                 <div class="col-12">
                     <div class="row floating-body-bottom">
-                        <div class="col-12 col-md-6 floating-body-2 d-flex flex-column align-items-center">
-                            <img src="{{.Site.Params.img_url}}images/icons/vscode.png" width="32" height="32" alt="" srcset="">
+                        <div class="col-12 col-md-6 floating-body-2 d-flex flex-column align-items-center justify-content-between">
+                            <img src="{{.Site.Params.img_url}}images/icons/vscode.png" width="32" height="32" alt="vscode">
                             <h2 class="fs-6 m-0 fw-bold">VS Code Extension</h2>
                             <p>Identify code and libraries vulnerabilities directly in your VS Code editor</p>
                             <button class="cta-button d-flex align-items-center justify-content-center w-100 btn btn-primary">
@@ -41,8 +44,8 @@
                                 <a class="stretched-link" href="https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode"></a>
                             </button>
                         </div>
-                        <div class="col-12 col-md-6 floating-body-2 d-flex flex-column align-items-center">
-                            <img src="{{.Site.Params.img_url}}images/icons/intellij.png" width="32" height="32" alt="" srcset="">
+                        <div class="col-12 col-md-6 floating-body-2 d-flex flex-column align-items-center justify-content-between">
+                            <img src="{{.Site.Params.img_url}}images/icons/intellij.png" width="32" height="32" alt="intellij">
                             <h2 class="fs-6 m-0 fw-bold">IntelliJ Plugin</h2>
                             <p>Identify code vulnerabilities directly in JetBrains products (such as IntelliJ)</p>
                             <button class="cta-button d-flex align-items-center justify-content-center w-100 btn btn-primary">
