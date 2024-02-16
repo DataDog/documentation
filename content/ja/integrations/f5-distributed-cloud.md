@@ -14,7 +14,7 @@ author:
 categories:
 - クラウド
 - 構成 & デプロイ
-- notification
+- notifications
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/f5-distributed-cloud/README.md
 display_on_public_website: true
@@ -39,7 +39,7 @@ tile:
   classifier_tags:
   - Category::Cloud
   - Category::Configuration & Deployment
-  - Category::Notification
+  - Category::Notifications
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows
@@ -58,6 +58,7 @@ tile:
   title: F5 Distributed Cloud Services
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 
 F5 Distributed Cloud (XC) Services は、ハイブリッド環境 (パブリッククラウド、プライベートデータセンター、コロケーション) において、アプリケーションをデプロイ、管理、保護できるグローバルなクラウドネイティブプラットフォームをお客様に提供します。また、ADN と CDN のサービスも利用可能です。
@@ -70,7 +71,7 @@ F5 XC プラットフォームには、Datadog HTTPS ロギングエンドポイ
 - ダッシュボード - *アクセスログの概要*
 - 保存ビュー - *よくクエリされるフィールドのためのファセットを含む*
 
-## セットアップ
+## 計画と使用
 
 グローバルログストリーミングは、システムネームスペースまたは共有ネームスペースで利用できます。
 - 共有ネームスペースは、アカウント内のすべての共有ネームスペース、または指定できる特定の共有ネームスペースのリストからのログのストリーミングをサポートしています。
@@ -140,7 +141,7 @@ Global Log Receiver セクションで以下を実行します。
 - path
 - connection_state
 
-## トラブルシューティング
+## ヘルプ
 
 ヘルプが必要ですか？[Datadog サポート][7]または [F5 サポート][8]にお問い合わせください。
 

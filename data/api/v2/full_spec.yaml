@@ -5446,16 +5446,21 @@ components:
         git:
           $ref: '#/components/schemas/DORAGitInfo'
         id:
-          description: Incident ID
+          description: Incident ID. Required to update a previously sent incident.
           type: string
         name:
           description: Incident name.
-          example: Webserver is down failing all requests
+          example: Webserver is down failing all requests.
           type: string
-        service:
-          description: Service name from a service available in the Service Catalog.
-          example: shopist
-          type: string
+        services:
+          description: Service names impacted by the incident. If possible, use names
+            registered in the Service Catalog. Required when the team field is not
+            provided.
+          example:
+          - shopist
+          items:
+            type: string
+          type: array
         severity:
           description: Incident severity.
           example: High
@@ -5465,12 +5470,17 @@ components:
           example: 1693491974000000000
           format: int64
           type: integer
+        team:
+          description: Name of the team owning the services impacted. If possible,
+            use team handles registered in Datadog. Required when the services field
+            is not provided.
+          example: backend
+          type: string
         version:
           description: Version to correlate with [APM Deployment Tracking](https://docs.datadoghq.com/tracing/services/deployment_tracking/).
           example: v1.12.07
           type: string
       required:
-      - service
       - started_at
       type: object
     DORAIncidentRequestData:
@@ -24521,7 +24531,7 @@ paths:
   /api/v2/cost_by_tag/active_billing_dimensions:
     get:
       description: Get active billing dimensions for cost attribution. Cost data for
-        a given month becomes available no later than the 17th of the following month.
+        a given month becomes available no later than the 19th of the following month.
       operationId: GetActiveBillingDimensions
       responses:
         '200':
@@ -24566,7 +24576,7 @@ paths:
     get:
       description: "Get monthly cost attribution by tag across multi-org and single
         root-org accounts.\nCost Attribution data for a given month becomes available
-        no later than the 17th of the following month.\nThis API endpoint is paginated.
+        no later than the 19th of the following month.\nThis API endpoint is paginated.
         To make sure you receive all records, check if the value of `next_record_id`
         is\nset in the response. If it is, make another request and pass `next_record_id`
         as a parameter.\nPseudo code example:\n```\nresponse := GetMonthlyCostAttribution(start_month,

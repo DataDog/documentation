@@ -15,6 +15,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/data-streams-monitoring/
   tag: ブログ
   text: Datadog Data Streams Monitoring でストリーミングデータパイプラインのパフォーマンスを追跡し、改善する
+- link: https://www.datadoghq.com/blog/data-streams-monitoring-apm-integration/
+  tag: ブログ
+  text: Datadog Data Streams Monitoring で APM から直接ストリーミングデータパイプラインをトラブルシューティングする
 kind: documentation
 title: データストリーム モニタリング
 ---
@@ -33,7 +36,7 @@ Data Streams Monitoring は、大規模なパイプラインを理解し管理�
 * 障害のあるプロデューサー、コンシューマー、キューを特定し、関連するログやクラスターにピボットして、トラブルシューティングを迅速に行います。
 * バックアップされたイベントがダウンストリームのサービスを圧倒するのを阻止するために、サービスオーナーが装備することによって、連鎖的な遅延を防止します。
 
-## セットアップ
+## 計画と使用
 
 まずは、インストールの説明に従って、Data Streams Monitoring でサービスを構成してください。
 
@@ -43,10 +46,11 @@ Data Streams Monitoring は、大規模なパイプラインを理解し管理�
 
 | ランタイム | 対応テクノロジー |
 |---|----|
-| Java | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ、HTTP、gRPC |
-| .NET | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ |
-| Python | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、Amazon SQS |
-| Go | 全て ([手動インスツルメンテーション][1]で) |
+| Java/Scala | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ、HTTP、gRPC、Amazon SQS |
+| ブラウザエラーの収集 | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、Amazon SQS |
+| Android および AndroidTV のモニタリング | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform)、RabbitMQ |
+| .NET | Kafka (セルフホスティング、Amazon MSK、Confluent Cloud / Platform) |
+| 収集データ | 全て ([手動インスツルメンテーション][1]で) |
 
 
 ## Data Streams Monitoring の調査

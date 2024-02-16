@@ -5,6 +5,7 @@ assets:
   dashboards:
     Tyk Analytics Canvas: assets/dashboards/tyk_analytics_canvas.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -19,6 +20,7 @@ assets:
       prefix: tyk.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10233
     source_type_name: Tyk
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -61,6 +63,7 @@ tile:
   title: Tyk
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -81,13 +84,13 @@ Datadog Agent の実行中、DogstatsD は `Tyk-pump` から `request_time` メ�
 
 カスタムメトリクス Tyk は、タイプ [DD_HISTOGRAM_AGGREGATES][5] を使用しています。
 
-## セットアップ
+## 計画と使用
 
 Tyk インテグレーションは `tyk-pump` パッケージに含まれており、`pump.conf`age でコンフィギュレーションを設定するだけです（Tyk プラットフォームから何もインストールする必要はありません）。
 
 ### インストール
 
-#### インストール
+#### インフラストラクチャーリスト
 
 このインテグレーションに必要なのは、実行中の Tyk インストールのみです。[Tyk セルフマネージド][6] または [Tyk OSS][7] をインストールできます。両オプションに、`tyk-pump` が含まれています。
 
@@ -100,7 +103,7 @@ Datadog [Agent][9] は、K8s クラスター、Docker コンテナ、Mac など�
 コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][10]のガイドをご参照ください。変更の適用を検証するには、[Agent の status サブコマンドを実行][11]します。
 
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 #### Tyk-pump
 Datadog pump を設定するには、pump README の [DogstatsD セクション][12]に記載された手順に従います。
@@ -167,13 +170,13 @@ Tyk インテグレーションでは、Datadog Agent にバンドルされた�
 
 上の例では、`tyk` です。入力を始めると、利用可能なすべてのメトリクスが表示されます。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "tyk" >}}
 
 
-### ダッシュボード  
+### ライブラリ
 
 Datadog では、API サービスおよびその消費に関する統計データを表示するダッシュボードを作成できます。
 
@@ -183,15 +186,15 @@ Datadog では、API サービスおよびその消費に関する統計デー�
 
 **注: 上記のダッシュボードを[インポート][19]して、自身のダッシュボードの例またはベースラインとして使用できます。**
 
-### イベント
+### ヘルプ
 
 Tyk インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Tyk インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][22]までお問い合わせください。
 
@@ -202,7 +205,7 @@ Tyk インテグレーションには、サービスのチェック機能は含�
 [5]: https://docs.datadoghq.com/ja/agent/docker/?tab=standard#dogstatsd-custom-metrics
 [6]: https://tyk.io/docs/tyk-self-managed/install/
 [7]: https://tyk.io/docs/apim/open-source/installation/
-[8]: https://app.datadoghq.com/account/settings#agent
+[8]: https://app.datadoghq.com/account/settings/agent/latest
 [9]: https://docs.datadoghq.com/ja/agent/
 [10]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [11]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information

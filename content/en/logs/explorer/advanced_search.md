@@ -21,6 +21,8 @@ When you need to further refine the results of a log search, use [subqueries](#f
 
 ## Filter logs with subqueries
 
+<div class="alert alert-warning">Filtering logs with subqueries is in beta.</div>
+
 Use subqueries when you want to filter the results of a query based on the results of a secondary query. See [subquery examples](#subquery-examples) for two example scenarios.
 
 To add a subquery filter:
@@ -73,7 +75,7 @@ In this example, use `service:network_directory` as your main query, and then de
 
 ## Filter logs based on Reference Tables
 
-<div class="alert alert-warning">Reference Tables and the feature to filter logs based on Reference Tables are in beta. There is a limit of 100 Reference Tables per account and a limit of 1000 rows in a Reference Table.</div>
+<div class="alert alert-warning">Reference Tables are in beta. See <a href="https://docs.datadoghq.com/integrations/guide/reference-tables/">Add Custom Metadata with Reference Tables</a> for more information on how to create and manage Reference Tables.</div>
 
 Reference Tables allow you to combine metadata with logs, providing more information to resolve application issues. Add a query filter based on a Reference Table to perform lookup queries. For more information on creating and managing this feature, see the [Reference Tables][2] guide.
 

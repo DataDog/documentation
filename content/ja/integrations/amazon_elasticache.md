@@ -3,9 +3,10 @@ aliases:
 - /ja/integrations/awselasticache/
 - /ja/integrations/elasticache/
 categories:
-- cloud
-- caching
 - aws
+- caching
+- cloud
+- configuration & deployment
 - log collection
 dependencies: []
 description: Amazon ElasicCache のキーメトリクスを追跡。
@@ -25,6 +26,7 @@ short_description: Amazon ElasicCache のキーメトリクスを追跡。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< img src="integrations/awselasticache/elasticache-memcached.png" alt="ElastiCache Memcached のデフォルトダッシュボード" popup="true">}}
 
 ## 概要
@@ -46,7 +48,7 @@ version: '1.0'
     | `elasticache:ListTagsForResource`   | (カスタムタグを追加する場合) クラスターのカスタムタグを一覧表示します。                    |
     | `elasticache:DescribeEvents`        | スナップショットとメンテナンスに関連するイベントを追加します。                          |
 
-3. [Datadog - AWS ElastiCache インテグレーション][7]をインストールします。
+3. [Datadog - Amazon ElastiCache インテグレーション][7]をインストールします。
 
 ### Datadog Agent を使用する場合のインストール (推奨)
 
@@ -58,7 +60,7 @@ version: '1.0'
 
 #### 仕組み
 
-Because the Agent metrics are tied to the EC2 instance where the agent is running and not to the actual ElastiCache instance, you need to use the `cacheclusterid` tag to connect all metrics together. Once the agent is configured with the same tags as the ElastiCache instance, combining Redis/Memcached metrics with ElastiCache metrics is straightforward.
+Agent のメトリクスは、Agent が実行されている EC2 インスタンスに紐づけられており、実際の ElastiCache インスタンスには紐づけられていません。そのため、すべてのメトリクスを関連付けるには `cacheclusterid` タグを使用する必要があります。Agent を ElastiCache インスタンスと同じタグで構成すると、Redis/Memcached のメトリクスを ElastiCache のメトリクスと簡単に組み合わせることができます。
 
 #### 手順
 
@@ -74,7 +76,7 @@ Agent は実際の ElastiCache インスタンスではなくリモートマシ�
 
 {{< img src="integrations/awselasticache/elasticache3.png" alt="AWS コンソールのノードリンク" >}}
 
-Write down the endpoint URL (for example: **replica-001.xxxx.use1.cache.amazonaws.com**) and the `cacheclusterid` (for example: **replica-001**). You need these values to configure the agent and to create graphs and dashboards.
+エンドポイント URL (例: **replica-001.xxxx.use1.cache.amazonaws.com**) と `cacheclusterid` (例: **replica-001**) をメモします。Agent を構成したり、グラフやダッシュボードを作成したりする際に、これらの値が必要になります。
 
 ##### Agent の構成
 
@@ -102,25 +104,25 @@ instances:
 
 {{< img src="integrations/awselasticache/elasticache4.png" alt="ElastiCache とキャッシュメトリクス" >}}
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_elasticache" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
-AWS ElastiCache インテグレーションには、クラスター、キャッシュセキュリティグループ、およびキャッシュパラメーターグループのイベントが含まれています。以下はイベントの例です。
+Amazon ElastiCache インテグレーションには、クラスター、キャッシュセキュリティグループ、およびキャッシュパラメーターグループのイベントが含まれています。以下はイベントの例です。
 
-{{< img src="integrations/amazon_elasticache/aws_elasticache_events.png" alt="AWS Elasticache イベント" >}}
+{{< img src="integrations/amazon_elasticache/aws_elasticache_events.png" alt="Amazon Elasticache イベント" >}}
 
-### サービスのチェック
+### ヘルプ
 
-AWS ElastiCache インテグレーションには、サービスのチェック機能は含まれません。
+Amazon ElastiCache インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
