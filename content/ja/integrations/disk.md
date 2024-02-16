@@ -40,7 +40,6 @@ metric_to_check: system.disk.free
 monitors:
   disk-space-forecast: assets/monitors/disk_monitor.json
 name: disk
-oauth: {}
 public_title: Disk
 short_description: ディスクチェックで、マウントされたディスクのメトリクスを収集。
 support: コア
@@ -54,7 +53,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::OS & System
+  - Category::OS とシステム
   configuration: README.md#Setup
   description: ディスクチェックで、マウントされたディスクのメトリクスを収集。
   media: []
