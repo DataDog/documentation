@@ -103,6 +103,7 @@ content/en/continuous_testing/cicd_integrations/azure_devops_extension.md
 
 # Code Analysis
 content/en/code_analysis/static_analysis/github_actions.md
+content/en/code_analysis/software_composition_analysis/github_actions.md
 content/en/code_analysis/static_analysis/circleci_orbs.md
 content/en/code_analysis/static_analysis_rules/*
 !content/en/code_analysis/static_analysis_rules/_index.md
