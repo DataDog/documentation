@@ -5,6 +5,9 @@ further_reading:
     - link: '/data_security/'
       tag: 'Documentation'
       text: 'Ensuring the security of the data sent to Datadog'
+    - link: '/tracing/trace_collection/tracing_naming_convention/'
+      tag: 'Documentation'
+      text: 'Span Tag Semantics'
 filter_all: All
 content: "The following table lists the attributes automatically applied to data sent to Datadog by the Agent by each of the RUM, Logs, and APM products, as applicable to the data domain. Optionally, filter the list by product or search by keyword or description text to find the attributes you're interested in."
 

@@ -52,8 +52,6 @@ Span tags are the context around the span. Some examples include:
 
 Tags are usually enriched from other data sources like tags sourced from host, container, or service catalog. These tags are added to the span to describe the context. For example, tags might describe the properties of the host and the container the span is coming from, or the properties of the services the span is emitted from.
 
-One span can have multiple tags with the same key. For example, consider a `team` tag. You might have one `team` tag that describes the team owning the infrastructure layer (host tag), and another `team` tag describing the team owning the service (service catalog tag).
-
 To find span tags in Datadog, go to the **Infrastructure** tab in the Trace side panel:
 
 {{< img src="/tracing/attributes/span-tags.png" alt="Span tags on Infrastructure tab." style="width:100%;" >}}
