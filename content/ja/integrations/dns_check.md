@@ -29,12 +29,11 @@ draft: false
 git_integration_title: dns_check
 integration_id: dns
 integration_title: DNS Check
-integration_version: 2.3.0
+integration_version: 3.1.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: dns_check
-oauth: {}
 public_title: DNS Check
 short_description: DNS レコードの解決可能性とルックアップ時間を監視。
 supported_os:
@@ -47,7 +46,7 @@ tile:
   - Supported OS::Linux
   - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Network
+  - Category::ネットワーク
   - Category::Web
   configuration: README.md#Setup
   description: DNS レコードの解決可能性とルックアップ時間を監視。
@@ -57,21 +56,22 @@ tile:
   title: DNS Check
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 選択したネームサーバーを使用した DNS レコードの解決可能性とルックアップ時間を監視します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 DNS チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
 メトリクス指向チェックの多くは監視対象サービスと同じホストで実行することが最適ですが、このステータス指向チェックは、監視対象の DNS サービスを実行していないホストから実行することが望ましい場合があります。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 1. DNS データの収集を開始するには、[Agent のコンフィギュレーションディレクトリ][2]のルートにある `conf.d/` フォルダーの `dns_check.d/conf.yaml` ファイルを編集します。
    使用可能なすべてのコンフィギュレーションオプションについては、[サンプル dns_check.d/conf.yaml][3] を参照してください。
@@ -100,26 +100,26 @@ DNS チェックは [Datadog Agent][1] パッケージに含まれています�
 
 [Agent の `status` サブコマンドを実行][5]し、Checks セクションで `dns_check` を検索します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "dns_check" >}}
 
 
-### イベント
+### ヘルプ
 
 DNS チェックには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "dns_check" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/dns_check/datadog_checks/dns_check/data/conf.yaml.example
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent

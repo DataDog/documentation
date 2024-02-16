@@ -5,6 +5,7 @@ assets:
   dashboards:
     Datazoom Overview: assets/dashboards/datazoom_overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: datazoom.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10260
     source_type_name: Datazoom
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -56,6 +58,7 @@ tile:
   title: Datazoom
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -66,13 +69,13 @@ Datazoom は、コレクターのエコシステムを通じてエンドポイ�
 
 Datazoom は INFO レベルに設定されたデータを送信します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Datazoom インテグレーションは、Datadog にログを出力します。Datadog 側でのインストールは必要ありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 - Datazoom Datadog Connector の構成方法の詳細については、Datazoom のインテグレーション[ドキュメント][1]をご覧ください。
 
@@ -80,21 +83,21 @@ Datazoom インテグレーションは、Datadog にログを出力します。
 
 [Datazoom ログダッシュボード][3]をご覧ください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Datazoom には、メトリクスは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Datazoom には、サービスのチェック機能は含まれません。
 
-### イベント
+### ヘルプ
 
 Datazoom には、イベントは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 

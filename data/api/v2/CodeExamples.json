@@ -96,6 +96,55 @@
       "description": "Search tests events returns \"OK\" response with pagination"
     }
   ],
+  "ArchiveCase": [
+    {
+      "group": "cases",
+      "suffix": "",
+      "description": "Archive case returns \"OK\" response"
+    }
+  ],
+  "AssignCase": [
+    {
+      "group": "cases",
+      "suffix": "",
+      "description": "Assign case returns \"OK\" response"
+    }
+  ],
+  "CreateCase": [
+    {
+      "group": "cases",
+      "suffix": "",
+      "description": "Create a case returns \"CREATED\" response"
+    }
+  ],
+  "UnarchiveCase": [
+    {
+      "group": "cases",
+      "suffix": "",
+      "description": "Unarchive case returns \"OK\" response"
+    }
+  ],
+  "UnassignCase": [
+    {
+      "group": "cases",
+      "suffix": "",
+      "description": "Unassign case returns \"OK\" response"
+    }
+  ],
+  "UpdatePriority": [
+    {
+      "group": "cases",
+      "suffix": "",
+      "description": "Update case priority returns \"OK\" response"
+    }
+  ],
+  "UpdateStatus": [
+    {
+      "group": "cases",
+      "suffix": "",
+      "description": "Update case status returns \"OK\" response"
+    }
+  ],
   "CreateCostAWSCURConfig": [
     {
       "group": "cloud_cost_management",
@@ -271,6 +320,11 @@
     },
     {
       "group": "gcp_integration",
+      "suffix": "_194782945",
+      "description": "Create a new entry for your service account with cloud run revision filters enabled returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
       "suffix": "_4235664992",
       "description": "Create a new entry for your service account with cspm enabled returns \"OK\" response"
     },
@@ -290,6 +344,11 @@
       "group": "gcp_integration",
       "suffix": "",
       "description": "Update STS Service Account returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_2241994060",
+      "description": "Update STS Service Account returns \"OK\" response with cloud run revision filters"
     },
     {
       "group": "gcp_integration",

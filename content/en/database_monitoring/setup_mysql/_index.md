@@ -23,4 +23,20 @@ For setup instructions, select your hosting type:
 
 <br>
 
+### Agent integration overhead
 
+Agent integration overhead tests were run on an Amazon EC2 machine `c5.xlarge` instance (4 vCPUs, 8 GB RAM). The database used for the tests was a MySQL 8.0 instance running on an Amazon RDS `db.m5.large` instance (2 vCPUs, 8 GB RAM). The database was running a TPC-C workload with 20 warehouses.
+
+| Setting                              | Collection Interval |
+| ------------------------------------ | ------------------- |
+| Check Min Collection Interval        | 15s                 |
+| Query Metrics Collection Interval    | 10s                 |
+| Query Activities Collection Interval | 10s                 |
+| Query Samples Collection Interval    | 1s                  |
+| Settings Collection Interval         | 600s                |
+
+* Agent Test version: `7.50.2`
+* CPU: ~1.48% of the CPU used on average
+* Memory: ~273 MiB of RAM used (RSS memory)
+* Network bandwidth: ~35.2 KB/s ▼ | 22.2 KB/s ▲
+* Agent query overhead on database: ~1% CPU Time

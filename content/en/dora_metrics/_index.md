@@ -12,9 +12,9 @@ further_reading:
 - link: "/continuous_integration/pipelines"
   tag: "Documentation"
   text: "Learn about Pipeline Visibility"
-- link: "/static_analysis"
+- link: "/code_analysis"
   tag: "Documentation"
-  text: "Learn about Static Analysis"
+  text: "Learn about Code Analysis"
 - link: "/tracing/service_catalog"
   tag: "Documentation"
   text: "Learn about the Service Catalog"
@@ -28,7 +28,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="https://forms.gle/Eqq6uXfGjYxmqpjDA" header="false" >}}
-DORA Metrics are in private beta. To request access, complete the form.
+DORA Metrics are in private beta. Fill out the form below to be added to the waitlist.
 {{< /callout >}}
 
 ## Overview
