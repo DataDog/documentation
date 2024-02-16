@@ -90,11 +90,6 @@ After choosing to create an `HTTP` test, define your test's request.
        * The request body is limited to one file of 3 megabytes for `application/octet-stream`.
        * The request body is limited to three files of 3 megabytes each for `multipart/form-data`.  
    {{% /tab %}}
-   
-   {{% tab "Pre-Request Script" %}}
-
-   * **Request body**: Add the content of your HTTP request body.
-   {{% /tab %}}
 
    {{% tab "Proxy" %}}
 

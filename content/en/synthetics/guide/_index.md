@@ -40,6 +40,7 @@ cascade:
     {{< nextlink href="synthetics/guide/recording-custom-user-agent/" >}}Record steps with a custom User-Agent{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/manually-adding-chrome-extension/" >}}Manually add the Chrome extension for your browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-tests-using-shadow-dom/" >}}Run tests on applications using a shadow DOM{{< /nextlink >}}
+    {{< nextlink href="synthetics/guide/http-tests-with-hmac/" >}}Create HTTP tests with hash-based message authentication code (HMAC) authentication{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Datadog Integrations:" >}}
@@ -56,7 +57,6 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Data Security:" >}}
-    {{< nextlink href="synthetics/guide/http-tests-with-hmac/" >}}Creating HTTP tests with hash-based message authentication code (HMAC) authentication{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/authentication-protocols/" >}}Use authentication in API and multistep API tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/app-that-requires-login/" >}}Monitor an application that requires authentication in browser tests{{< /nextlink >}}
     {{< nextlink href="synthetics/guide/browser-tests-totp/" >}}Use time-based one-time passwords (TOTPs) for multi-factor authentication (MFA) in browser tests{{< /nextlink >}}

@@ -10,36 +10,44 @@ further_reading:
 
 ## Overview
 
-If you are using hash-based message authentication code (HMAC) authentication, you can use [Synthetic local variables][1] in the request body, pre-request script, and request header to run an [HTTP test][2].
+Synthetic Monitoring offers to generate variables from JavaScript scrips, allowing you for instance to define custom authentications, or encode parameters.
 
-{{< img src="synthetics/guide/http-tests-with-hmac/local_synthetic_variables.png" alt="Local variables created in the HTTP test workflow" style="width:80%;" >}}
+This guide walks you through how to create an HTTP test with an HMAC signature, using variables from script.
 
-This guide walks you through how to create an HTTP test with an HMAC signature.
+<!-- TODO screensho -->
+{{< img src="synthetics/guide/http-tests-with-hmac/test_with_hmac_authentication.png" alt="HTTP test with HMAC authentication" style="width:80%;" >}}
 
-## Create local variables
+Note: There is no standard HMAC authentication, your own HMAC authentication may be slighty different. For instance, it may use a different header name.
+
+## Implementation
+### Create the building blocks of HMAC authentication using local variables
 
 Create a [Synthetic HTTP test][3] and click **Create a Local Variable** to add the following variables:
 
 `MY_SECRET_KEY`
-: The UTF-8 encoded key that is used to sign the message (which can be imported from a [global variable][4]).
+: The UTF-8 encoded key that is used to sign the message (which can also be imported from a [global variable][4]).
 
 `MY_BODY`
-: The request body which is set in the **Request Body** and **Pre-Request Script** tabs under **Advanced Options**.
+: The request body (which will be set in the **Request Body**) and will be used to compute the HMAC authentication.
 
 `MY_TIMESTAMP`
-: (Optional) An additional parameter to help compute the HMAC signature. You can create this as a [local variable][1] or create and export this inside the [pre-request script](#define-a-pre-request-script) with `dd.variable.set('MY_TIMESTAMP', Date.now())`.
+: A parameter to compute the HMAC signature. You can create this as a [local variable][1] or create and export this inside the [variable from script script](#compute-the-hmac-signature-with-javascript) with `dd.variable.set('MY_TIMESTAMP', Date.now())`.
 
-## Define a test URL and request body
+### Define a test URL and request body
 
 Define the URL and the request type for the HTTP test. Then, click **Advanced Options** > **Request Body** to add the `{{ MY_BODY }}` variable as the request body.
 
 {{< img src="synthetics/guide/http-tests-with-hmac/request_body.png" alt="A local variable set as the request body for an HTTP test" style="width:80%;" >}}
 
-## Define a pre-request script
+### Compute the HMAC Signature with JavaScript
 
-Add something like the following on the **Pre-Request Script** tab:
+Create a **Variable from script** to generate the HMAC signature for your HTTP request.
+{{< img src="synthetics/guide/http-tests-with-hmac/variables_from_script.png" alt="A local variable generated with JavaScript" style="width:80%;" >}}
 
-{{< code-block lang="none" filename="Pre-Request Script" collapsible="true" >}}
+Use `dd.variable.get(<variable_name>)` to import variables into your script.  
+Use `dd.variable.set(<variable_name>, <value>)` to define a variable.
+
+{{< code-block lang="JavaScript" filename="Variable from Script" collapsible="true" >}}
 const secretKeyUtf8 = dd.variable.get("MY_SECRET_KEY");
 const body = dd.variable.get("MY_BODY");
 // const timestamp = dd.variable.get("MY_TIMESTAMP");
@@ -62,15 +70,15 @@ const signature = base64url.encode(
 );
 
 // if MY_TIMESTAMP was not initially created as a local variable
-dd.variable.set("MY_TIMESTAMP", timestamp);
+// dd.variable.set("MY_TIMESTAMP", timestamp);
 dd.variable.set("MY_SIGNATURE", signature);
 {{< /code-block >}}
 
-## Define an HTTP header
+### Add the HMAC signature to the request header
 
-You can use the exported `MY_SIGNATURE` variable to build the HTTP request header before writing the pre-request script.
+Use the exported `MY_SIGNATURE` variable to build the HTTP request header.
 
-Under the **Request Options** tab, set the `Name` to `Signature` and the `Value` to `t={{MY_TIMESTAMP}},v1={{MY_SIGNATURE}}`. You can define a different header such as `Authorization`.
+Under the **Request Options** tab, add a header with `Name` set to `Signature` and `Value` set to `t={{MY_TIMESTAMP}},v1={{MY_SIGNATURE}}`. You can define a different header such as `Authorization`.
 
 Configure the rest of your HTTP test, and click **Create** to save.
 
