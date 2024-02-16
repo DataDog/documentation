@@ -35,7 +35,7 @@ Datadog automatically discovers the dependencies of instrumented services, inclu
 
 ## Create user-defined services 
 
-You can bring your own services to Service Catalog. You can either manually add them by creating Service Definitions through API or GitHub integration or [import][19] them from existing sources like ServiceNow or Backstage. These services are by default not associated with any Datadog telemetry, you may link telemetries from Datadog or external sources manually through `service.datadog.yaml` files. 
+To add your own services to Service Catalog, you can either manually add them by creating Service Definitions through the API or GitHub integration or [import](#import-data-from-other-sources) them from existing sources like ServiceNow or Backstage. These services are by default not associated with any Datadog telemetry, but you can link telemetries from Datadog or external sources manually using `service.datadog.yaml` files. 
 
 To create a user-defined service, name your service in the `dd-service` field in a `service.datadog.yaml` file at the root of the repository, using one of the supported metadata schema versions. For example: 
 
