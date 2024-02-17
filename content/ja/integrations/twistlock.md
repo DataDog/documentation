@@ -38,12 +38,11 @@ draft: false
 git_integration_title: twistlock
 integration_id: twistlock
 integration_title: Prisma Cloud Compute Edition
-integration_version: 3.4.1
+integration_version: 3.5.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: twistlock
-oauth: {}
 public_title: Prisma Cloud Compute Edition
 short_description: Twistlock はコンテナセキュリティスキャナ
 supported_os:
