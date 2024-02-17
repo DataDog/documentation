@@ -29,12 +29,11 @@ draft: false
 git_integration_title: cloud_foundry_api
 integration_id: cloud-foundry-api
 integration_title: Cloud Foundry API
-integration_version: 3.2.0
+integration_version: 3.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: cloud_foundry_api
-oauth: {}
 public_title: Cloud Foundry API
 short_description: Cloud Foundry 監査イベントの収集。
 supported_os:
