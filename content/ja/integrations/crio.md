@@ -32,12 +32,11 @@ draft: false
 git_integration_title: crio
 integration_id: cri-o
 integration_title: CRI-O
-integration_version: 2.5.0
+integration_version: 2.6.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: crio
-oauth: {}
 public_title: CRI-O
 short_description: CRI-O のすべてのメトリクスを Datadog で追跡
 supported_os:
