@@ -6,20 +6,23 @@ further_reading:
 - link: "/synthetics/api_tests/http_tests"
   tag: "Documentation"
   text: "Learn about HTTP tests"
+- link: "/synthetics/api_tests/http_tests#variables"
+  tag: "Documentation"
+  text: "Learn about Synthetic test variables"
 ---
 
 ## Overview
 
-Synthetic Monitoring offers to generate variables from JavaScript scrips, allowing you for instance to define custom authentications, or encode parameters.
+Synthetic Monitoring allows you to generate variables from JavaScript scripts so you can define custom authentications or encode parameters.
+
+{{< img src="synthetics/guide/http-tests-with-hmac/test_with_hmac_authentication.png" alt="HTTP test with HMAC authentication" style="width:100%;" >}}
 
 This guide walks you through how to create an HTTP test with an HMAC signature, using variables from script.
 
-<!-- TODO screensho -->
-{{< img src="synthetics/guide/http-tests-with-hmac/test_with_hmac_authentication.png" alt="HTTP test with HMAC authentication" style="width:80%;" >}}
+**Note**: There is no standard HMAC authentication, your own HMAC authentication may be slighty different. For instance, it may use a different header name.
 
-Note: There is no standard HMAC authentication, your own HMAC authentication may be slighty different. For instance, it may use a different header name.
+## Setup
 
-## Implementation
 ### Create the building blocks of HMAC authentication using local variables
 
 Create a [Synthetic HTTP test][3] and click **Create a Local Variable** to add the following variables:
@@ -28,7 +31,7 @@ Create a [Synthetic HTTP test][3] and click **Create a Local Variable** to add t
 : The UTF-8 encoded key that is used to sign the message (which can also be imported from a [global variable][4]).
 
 `MY_BODY`
-: The request body (which will be set in the **Request Body**) and will be used to compute the HMAC authentication.
+: The request body (which is set in the **Request Body**) and is used to compute the HMAC authentication.
 
 `MY_TIMESTAMP`
 : A parameter to compute the HMAC signature. You can create this as a [local variable][1] or create and export this inside the [variable from script script](#compute-the-hmac-signature-with-javascript) with `dd.variable.set('MY_TIMESTAMP', Date.now())`.
@@ -41,11 +44,14 @@ Define the URL and the request type for the HTTP test. Then, click **Advanced Op
 
 ### Compute the HMAC Signature with JavaScript
 
-Create a **Variable from script** to generate the HMAC signature for your HTTP request.
+Click **Variable From Script** to generate the HMAC signature for your HTTP request.
+
 {{< img src="synthetics/guide/http-tests-with-hmac/variables_from_script.png" alt="A local variable generated with JavaScript" style="width:80%;" >}}
 
-Use `dd.variable.get(<variable_name>)` to import variables into your script.  
-Use `dd.variable.set(<variable_name>, <value>)` to define a variable.
+* To import variables into your script, use `dd.variable.get(<variable_name>)`.  
+* To define a variable, use `dd.variable.set(<variable_name>, <value>)`.
+
+For example: 
 
 {{< code-block lang="JavaScript" filename="Variable from Script" collapsible="true" >}}
 const secretKeyUtf8 = dd.variable.get("MY_SECRET_KEY");
