@@ -43,12 +43,11 @@ draft: false
 git_integration_title: nginx_ingress_controller
 integration_id: nginx-ingress-controller
 integration_title: nginx-ingress-controller
-integration_version: 2.5.0
+integration_version: 2.6.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: nginx_ingress_controller
-oauth: {}
 public_title: nginx-ingress-controller
 short_description: NGINX Ingress Controller と埋め込み NGINX に関するメトリクスを監視
 supported_os:
