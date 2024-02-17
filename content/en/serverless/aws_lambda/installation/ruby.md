@@ -189,7 +189,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
     Add the Datadog Lambda Extension to your container image by adding the following to your Dockerfile:
 
     ```dockerfile
-    COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/extensions/ /opt/extensions
+    COPY --from=public.ecr.aws/datadog/lambda-extension:<TAG> /opt/. /opt/
     ```
 
     Replace `<TAG>` with either a specific version number (for example, `{{< latest-lambda-layer-version layer="extension" >}}`) or with `latest`. Alpine is also supported with specific version numbers (such as `{{< latest-lambda-layer-version layer="extension" >}}-alpine`) or with `latest-alpine`. You can see a complete list of possible tags in the [Amazon ECR repository][1].
@@ -291,7 +291,7 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
       ```
 
       Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
-    
+
     - Option B: Add the Datadog Lambda Extension to your container image by adding the following to your Dockerfile:
 
       ```dockerfile
