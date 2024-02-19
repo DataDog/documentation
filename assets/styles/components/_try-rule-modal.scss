@@ -81,7 +81,23 @@
                         top: 0;
                         right: 0;
                         cursor: pointer;
-                        margin: 14px;
+                        margin: 8px;
+                        padding: 6px;
+                        transition: all .3s ease-in-out;
+
+                        svg path {
+                            fill: #1C2B34;
+                            transition: all .3s ease-in-out;
+                        }
+                    }
+                    .copy-icon:hover {
+                        border-radius: 4px;
+                        background: #006BC2;
+                        box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.10), 0px 1px 2px 0px rgba(0, 0, 0, 0.32);
+                        
+                        svg path {
+                            fill: white;
+                        }
                     }
                     .highlight .chroma {
                         background: #F9FAFB;

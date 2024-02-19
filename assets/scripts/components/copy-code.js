@@ -1,3 +1,5 @@
+import Tooltip from 'bootstrap/js/dist/tooltip';
+
 // Script to add copy-clipboard functionality to copy buttons
 // Script to add copy buttons to markdown fenced (```), and {{ highlight }} hugo function code blocks
 
@@ -5,7 +7,7 @@ function initCopyCode () {
     addCopyButton()
 
     // Add Event Listener
-    const copyButtons = document.querySelectorAll(['.js-copy-button', '#tryRuleModal img.copy-icon']);
+    const copyButtons = document.querySelectorAll(['.js-copy-button', '#tryRuleModal .copy-icon']);
 
     if (copyButtons.length) {
         copyButtons.forEach(btn => {
@@ -40,8 +42,8 @@ function addCopyButton () {
 }
 
 // EVENT FUNCTION for copy functionality
-function copyCode ({target}, btn){
-    const code = getCode(target)
+function copyCode ({currentTarget}, btn){
+    const code = getCode(currentTarget)
     // Create a range object
     const range = document.createRange();
     // Select the node
@@ -50,11 +52,19 @@ function copyCode ({target}, btn){
     const Clipboard = navigator.clipboard
     // write code snippet text
     Clipboard.writeText(code.innerText).then(() => {
-        if(btn.textContent){
+        if(btn.classList.contains('js-copy-button')){
+            // if copy button clicked, change the button text to "copied" for 1 second
             btn.textContent = "Copied!";
             setTimeout(function() {
                 btn.textContent = "Copy"
             }, 1000)
+        }else{
+            // if copy icon clicked in the try-rule modal, change the tooltip
+            const copyTooltip = Tooltip.getInstance(btn);
+            copyTooltip.setContent({'.tooltip-inner': "Copied!!"});
+            setTimeout(function() {
+                copyTooltip.setContent({'.tooltip-inner': "Copy"});
+            }, 2000)
         }
     })
 }
