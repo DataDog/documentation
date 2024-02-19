@@ -35,12 +35,11 @@ draft: false
 git_integration_title: ibm_was
 integration_id: ibm-was
 integration_title: IBM WAS
-integration_version: 3.2.0
+integration_version: 3.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: ibm_was
-oauth: {}
 public_title: IBM WAS
 short_description: IBM Websphere Application Server は Java アプリケーションをホストするフレームワークです
 supported_os:
