@@ -253,7 +253,7 @@ Sets a precise log level. The log level follows RUST_LOG conventions; accepted l
 `DD_TRACE_LOG_FILE`
 : **INI**: `datadog.trace.log_file`<br>
 **Default**: ``<br>
-Specifies a log file. If none is specified, logs go to the default php error location. Note that, to debug datadog-ipc-helper issues (e.g. submission of telemetry), the log file must be specified.
+Specifies a log file. If none is specified, logs go to the default PHP error location. To debug datadog-ipc-helper issues (for example, submission of telemetry), you must specify the log file.
 
 `DD_TRACE_FORKED_PROCESS`
 : **INI**: `datadog.trace.forked_process`<br>
