@@ -31,7 +31,7 @@ Azure DevOps Server is not officially supported.
 
 The Datadog integration for [Azure Pipelines][1] works by using [service hooks][2] to send data to Datadog.
 
-1. Install the [Datadog CI Visibility][8] extension from the Azure Marketplace.
+1. Install the [Datadog CI Visibility][8] extension from the Azure Marketplace. There are several extensions starting with **Datadog**, make sure that you are installing the [Datadog CI Visibility][8] extension.
 
 2. For each project, go to **Project settings > Service hooks** in Azure DevOps and select the green plus (+) icon to create a subscription.
 
