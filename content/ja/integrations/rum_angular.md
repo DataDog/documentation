@@ -1,6 +1,7 @@
 ---
 app_id: rum-angular
 app_uuid: 0dd38c9b-921d-4252-8c46-c7a6d83c5778
+assets: {}
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -40,6 +41,7 @@ tile:
   title: Angular
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -63,7 +65,7 @@ Angular アプリケーションをエンドツーエンドで監視します。
 
 
 
-## セットアップ
+## 計画と使用
 
 ### RUM イベントの収集
 
@@ -77,9 +79,9 @@ Angular アプリケーションは、自動的に Datadog にトレースを送
 
 Angular アプリケーションのログを Datadog に転送し始めるには、[JavaScript ログ収集][3]をご覧ください。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 
 Angular インテグレーションには、メトリクスは含まれていません。RUM アプリケーションからカスタムメトリクスを生成するには、[メトリクスの生成][4]を参照してください。
 
@@ -91,7 +93,7 @@ Angular インテグレーションには、メトリクスは含まれていま
 
 Angular インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問い合わせください。
 

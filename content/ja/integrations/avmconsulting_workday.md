@@ -7,6 +7,7 @@ assets:
   dashboards:
     AVM Consulting Workday Integrations Trends: assets/dashboards/workday_integrations_trends.json
   integration:
+    auto_install: false
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -17,6 +18,7 @@ assets:
       prefix: avmconsulting.workday.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10251
     source_type_name: AVM Consulting Workday
   monitors:
     AVM Consulting Workday Connection Status: assets/monitors/workday_connect.json
@@ -68,6 +70,8 @@ tile:
   - Supported OS::Linux
   - Supported OS::Windows
   - Supported OS::macOS
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Logs
   configuration: README.md#Setup
   description: Workday インテグレーションのステータスを監視できるようになります
   media:
@@ -83,28 +87,29 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
 
 この Workday インテグレーションは、Workday におけるインテグレーションの状態を監視し、ジョブ実行の合計、失敗したジョブ実行、各ジョブの実行時間など、ジョブ実行に関する豊富なメトリクスを提供します。また、このインテグレーションは、ジョブ実行ログを取得し、各インテグレーションの状態について警告するモニターを提供します。
 
-### アラート設定
+### ログ管理
 
 このインテグレーションには、以下の推奨モニターが含まれています。
 
 1. Connect to Workday: Workday への接続を監視します。
 2. Workday Integration Status: インテグレーションごとにグループ化され、最後の Workdayインテグレーションイベントの状態を確認するマルチモニターです。
 
-### ダッシュボード  
+### ライブラリ
 
 このインテグレーションには、**Workday Integrations Trends** という名前のすぐに使えるダッシュボードが含まれており、Workday のジョブ実行の概要や、各 Workdayインテグレーションに構成されているモニターの状態を視覚的に確認することができます。
 
-### ログの収集
+### レート
 
 このインテグレーションは、Workday API を使用してインテグレーション実行のログを収集し、Datadog REST API を通じてそれらのログを Datadog に送信します。実行に関連するタグは、これらのログに動的に割り当てられます。
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから AVM Consulting にお問い合わせください。
 

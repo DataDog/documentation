@@ -56,6 +56,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -71,7 +72,7 @@ Agentil は、2 つの SAP インテグレーションを提供しています�
 
 **5 日以上必要な場合:** お客様のニーズに合わせたプライベートオファーについては、[sales@agentil-software.com](mailto:sales@agentil-software.com) までお問い合わせください。
 
-## サポート
+## Agent
 ご質問やサポートについては、[sales@agentil-software.com](mailto:sales@agentil-software.com) までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/agentil_software_sap_businessobjects/
