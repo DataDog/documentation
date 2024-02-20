@@ -440,10 +440,18 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 [Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Loaded integration web
 ```
 
+**Span information:**
+
+Available starting in 0.98.0:
+
+```text
+[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [span] Encoding span <SPAN ID>: trace_id=<TRACE ID>, name='wpdb.query', service='wordpress', resource: '<RESOURCE NAME>', type 'sql' with tags: component='wordpress'; and metrics: -
+```
+
 **Attempting to send traces:**
 
 ```text
-[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [<PHP version>] [pid <INT>] [client <IP>] Flushing trace of size 10 to send-queue for http://datadog-agent:8126
+[Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [info] Flushing trace of size 56 to send-queue for http://datadog-agent:8126
 ```
 
 
