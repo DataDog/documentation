@@ -21,43 +21,46 @@ further_reading:
 
 Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on a dashboard.
 
-{{< img src="/dashboards/widgets/slo/metric_slo_filter_by.png" alt="metric-based slo summary widget graph editor " >}}
+{{< img src="/dashboards/widgets/slo/slo-summary-widget.png" alt="metric-based slo summary widget graph editor " >}}
 
 ### Configuration
 
 1. Select an SLO from the dropdown menu.
-2. **For metric-based SLOs**: You can filter your query with tags and leverage [template variables][2] to dynamically scope your results:
+2. **For metric-based and Time Slice SLOs**: You can filter your query with tags and leverage [template variables][2] to dynamically scope your results:
     - Take advantage of template variables by using the *filter by* field to scope the SLO statuses the widget displays. For example, `filter by $datacenter` scopes your SLO query to whatever value you choose in the dashboard for the *datacenter* template variable.
     - Add additional scope and context to your SLO metric queries even if the tags were not included in the original SLO configuration. For example, if the original SLO query is `sum:trace.flask.request.hits{*} by {resource_name}.as_count()` and you filter by `env:prod` in the widget, your data will be scoped to only that from your `prod` environment.
 3. Select up to three different time windows.
 
 ### Options
 
-#### Set the time window
+#### Set the time windows
 
-Select up to three different rolling time windows. Optionally, you can select a calendar time window or select **Global Time**.
-
-`Global Time` allows you to display your SLO's status and error budget over arbitrary time periods within the past 90 days. 
-
-You can specify an optional unique SLO target for the arbitrary time period. To display an error budget and to color code the SLO status value as green or red, you need to specify an SLO target. 
-
-**Note**: If the SLO input target is not specified, only the SLO status is shown and the font color remains gray.
+Select up to three different time windows from the following:
+- **Rolling time windows**: 7, 30, or 90 days
+- **Calendar time windows**: week to date, previous week, month to date, previous month
+- **Global time** (supported for metric-based and Time Slice SLOs): This option allows you to display your SLO's status and error budget over arbitrary time periods within the past 90 days. 
+  
+  **Note:** With `Global time`, you can also specify an optional unique SLO target. To display an error budget and color code the SLO status value as green or red, you need to specify an SLO target. If the SLO input target is not specified, only the SLO status is shown and the font color remains gray.
 
 #### Display preferences
 
-Select whether to show or hide remaining error budget by toggling the `Show error budget` option. If you are visualizing a monitor-based SLO with multiple groups or multiple monitors, select your `View mode`:
+Select whether to show or hide remaining error budget by toggling the `Show error budget` option. 
 
-- For monitor-based SLOs configured with a single monitor broken into multiple groups, there are the following three view modes:
+If you are visualizing an SLO with multiple groups or a monitor-based SLO with multiple monitors, select your `View mode`:
+
+- For SLOs with groups (metric-based or Time Slice SLO with groups, or monitor-based SLOs with a single monitor broken into groups), there are the following three view modes:
   - `Overall`: displays the overall SLO status percentages and targets
   - `Groups`: displays a table of status percentages for each group
   - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each group
 
 - For monitor-based SLOs configured with multiple monitors, there are the following three view modes:
   - `Overall`: displays the overall SLO status percentages and targets
-  - `Groups`: displays a table of status percentages for each group
+  - `Groups`: displays a table of status percentages for each monitor
   - `Both`: displays both the overall SLO status percentages and targets and table of status percentages for each monitor
 
-**Note:** When the `Global Time` time window option is selected you can only use the `Overall` view mode.
+**Note:** For monitor-based SLOs, you can only use the `Overall` view mode when the `Global Time` time window option is selected. 
+
+When you set the `View mode` to `Groups` or `Both`, you have the ability to sort by any of the time windows configured for your widget. 
 
 ## API
 
