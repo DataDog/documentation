@@ -2060,7 +2060,8 @@ components:
           type: number
       type: object
     CIAppAggregateSort:
-      description: A sort rule.
+      description: A sort rule. The `aggregation` field is required when `type` is
+        `measure`.
       example:
         aggregation: count
         order: asc
