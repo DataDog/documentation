@@ -396,6 +396,12 @@ Reporting commit 007f7f466e035b052415134600ea899693e7bb34 from repository git@gi
 
 [1]: https://github.com/DataDog/datadog-ci/tree/master/src/commands/git-metadata
 {{% /tab %}}
+
+{{% tab "Gitlab" %}}
+
+To link telemetry to your source code, you can upload your repository metadata with the `datadog-ci git-metadata upload` command. When you run datadog-ci git-metadata upload within a Git repository, Datadog receives the repository URL, the commit SHA of the current branch, and a list of tracked file paths. Run this command for every commit that you need to be synchronized with Datadog. If you are using gitlab.com, this will also allow you to see inline code snippets in Error Tracking, Continuous Profiler, Serverless Monitoring, CI Visibility, and Application Security Monitoring.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Usage
