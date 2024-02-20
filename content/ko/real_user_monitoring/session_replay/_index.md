@@ -43,7 +43,9 @@ RUM Browser SDK는 [오픈 소스][1]이며 오픈 소스 [rrweb][2] 프로젝�
 
 ## 사용법
 
-`init()`를 호출할 때 세션 재생이 자동으로 녹화를 시작하지 않습니다. 녹화를 시작하려면 `startSessionReplayRecording()`를 호출합니다. 예를 들어, 인증된 사용자 세션만 녹화하기 위해 조건부로 녹화를 시작할 수 있습니다.
+RUM Browser SDK v5.0.0부터 `init()`을 호출할 때 세션 재생이 자동으로 기록됩니다. 조건적으로 기록하려면 `startSessionReplayRecordingManually` init 파라미터를 사용하고 `startSessionReplayRecording()`을 호출합니다.
+
+예를 들어, 인증된 사용자 세션만 기록하려면 다음을 따르세요.
 
 ```javascript
 window.DD_RUM.init({
@@ -54,7 +56,8 @@ window.DD_RUM.init({
   //  env: 'production',
   //  version: '1.0.0',
   sessionSampleRate: 100,
-  sessionReplaySampleRate: 100, // 포함되지 않은 경우 기본값은 100입니다.
+  sessionReplaySampleRate: 100,
+  startSessionReplayRecordingManually: true,
   ...
 });
 
@@ -65,21 +68,28 @@ if (user.isAuthenticated) {
 
 세션 재생 기록을 중지하려면 `stopSessionReplayRecording()`를 호출합니다.
 
+<div class="alert alert-warning">RUM Browser SDK v5.0.0보다 오래된 버전을 사용하는 경우, 세션 재생 레코딩이 자동으로 시작되지 않습니다. 레코딩을 시작하려면 `startSessionReplayRecording()`을 호출하세요.</div>
+
 ## 세션 재생 비활성화
 
-세션 기록을 중지하려면 `startSessionReplayRecording()`를 제거하고 `sessionReplaySampleRate`를 `0`로 설정합니다. 그러면 재생이 포함된 [브라우저 RUM & 세션 재생 플랜][6]에 대한 데이터 수집이 중지됩니다.
+세션 레코딩을 중단하려면 `sessionReplaySampleRate`을 `0`으로 설정하세요. 그러면 [Browser RUM & Session Replay 플랜][6]의 데이터 수집이 중단됩니다.
 
-## 보존
+## 보존 기간
 
 기본적으로 세션 재생 데이터는 30일 동안 보존됩니다.
 
-보존 기간을 15개월로 연장하려면 개별 세션 재생에서 _연장 보존_을 활성화하면 됩니다. 이러한 세션은 비활성 상태여야 합니다(사용자가 경험을 완료한 상태).
+보존 기간을 15개월로 연장하려면 개별 세션 재생에서 _연장 보존_을 활성화하면 됩니다. 이 세션은 비활성 상태여야 합니다(사용자가 경험을 완료한 상태).
 
 연장 보존은 세션 재생에만 적용되며 연관된 이벤트는 포함하지 않습니다. 15개월은 세션이 수집된 시점이 아니라 연장 보존이 활성화된 시점부터 시작됩니다.
 
 언제든지 연장 보존을 비활성화할 수 있습니다. 세션 재생이 아직 기본 보존 기간인 30일 이내인 경우, 초기 30일 기간이 끝나면 재생이 만료됩니다. 30일이 지난 세션 재생에서 연장 보존을 비활성화하면 재생이 즉시 만료됩니다.
 
 {{< img src="real_user_monitoring/session_replay/session-replay-extended-retention.png" alt="연장 보존 사용" style="width:100%;" >}}
+
+보존 기간을 연장하면 어떤 데이터가 보존되는지 알아보려면 다음 다이어그램을 참고하세요.
+
+{{< img src="real_user_monitoring/session_replay/replay-extended-retention.png" alt="보존 기간을 연장했을 때 보존되는 데이터를 보여주는 다이어그램" style="width:100%;" >}}
+
 
 
 ## 모바일 세션 재생
@@ -93,6 +103,6 @@ if (user.isAuthenticated) {
 [1]: https://github.com/DataDog/browser-sdk
 [2]: https://www.rrweb.io/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
-[4]: /ko/real_user_monitoring/session_replay/
+[4]: /ko/real_user_monitoring/browser/
 [5]: /ko/real_user_monitoring/session_replay/mobile/
 [6]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay

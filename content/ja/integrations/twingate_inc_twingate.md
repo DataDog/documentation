@@ -65,8 +65,10 @@ tile:
   overview: README.md#Overview
   support: README.md#Support
   title: Twingate
+  uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -82,7 +84,7 @@ Twingate Business Tier には、以下のものが含まれます。
 
 エンタープライズ層への加入するには、Datadog Marketplace から購入してください。Twingate のスタッフがアカウントのアップグレードをサポートします。
 
-## サポート
+## Agent
 お困りですか？詳しくは以下をご覧ください。
 * [Twingate ドキュメント](https://www.twingate.com/docs/)
 * [Twingate サポートポータル](https://help.twingate.com/)

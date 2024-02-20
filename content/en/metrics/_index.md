@@ -9,6 +9,7 @@ aliases:
 cascade:
     algolia:
         rank: 70
+        tags: ["submit metrics", "metrics submission"]
 ---
 This is an introduction to Metrics in Datadog and why they're useful. This section includes the following topics: 
 

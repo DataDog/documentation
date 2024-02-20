@@ -6,7 +6,7 @@ private: true
 further_reading:
 - link: "/dynamic_instrumentation/"
   tag: "Documentation"
-  text: "Learn more about the Dynamic Instrumentation"
+  text: "Learn more about Dynamic Instrumentation"
 ---
 
 {{< site-region region="gov,ap1" >}}
@@ -52,6 +52,10 @@ When you select a method in the Dynamic Instrumentation configuration, the code 
 
 Symbol Database also provides autocomplete for log templates and other templates that use the [Dynamic Instrumentation expression language][5]:
 {{< img src="dynamic_instrumentation/symdb_completion.png" alt="Autocomplete suggestions for log templates" style="width:80%;" >}}
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dynamic_instrumentation/
 [2]: /agent/
