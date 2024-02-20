@@ -25,11 +25,11 @@ Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on 
 
 ### Configuration
 
-1. Select an SLO from the dropdown menu.
-2. **For metric-based and Time Slice SLOs**: You can filter your query with tags and leverage [template variables][2] to dynamically scope your results:
+1. Select an SLO from the dropdown menu. **For metric-based and Time Slice SLOs**: You can filter your query with tags and leverage [template variables][2] to dynamically scope your results:
     - Take advantage of template variables by using the *filter by* field to scope the SLO statuses the widget displays. For example, `filter by $datacenter` scopes your SLO query to whatever value you choose in the dashboard for the *datacenter* template variable.
     - Add additional scope and context to your SLO metric queries even if the tags were not included in the original SLO configuration. For example, if the original SLO query is `sum:trace.flask.request.hits{*} by {resource_name}.as_count()` and you filter by `env:prod` in the widget, your data will be scoped to only that from your `prod` environment.
-3. Select up to three different time windows.
+2. Set up to three different time windows.
+3. Select your display preferences.
 
 ### Options
 
@@ -60,7 +60,9 @@ If you are visualizing an SLO with multiple groups or a monitor-based SLO with m
 
 **Note:** For monitor-based SLOs, you can only use the `Overall` view mode when the `Global Time` time window option is selected. 
 
-When you set the `View mode` to `Groups` or `Both`, you have the ability to sort by any of the time windows configured for your widget. 
+When you set the `View mode` to `Groups` or `Both`:
+- The groups will be sorted by ascending status in the smallest time window by default. After adding the widget to a dashboard, you have the ability to sort by status for any of the configured time windows through the widget UI.
+- For metric-based and Time Slice SLOs, the widget displays *all* underlying groups of the SLO. For monitor-based SLOs, the widget displays up to 20 groups if specific groups have been selected for the SLO, or it displays the 5 groups with the worst statuses if no specific groups have been selected.  
 
 ## API
 
