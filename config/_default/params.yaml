@@ -107,6 +107,8 @@ code_language_ids:
     docker: "Docker"
     hosts: "Hosts"
     ecs_ec2: "ECS EC2"
+    elixir: "Elixir"
+    rust: "Rust"
 branch: ""
 
 signupclass: sign-up-trigger

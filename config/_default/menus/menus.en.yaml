@@ -2108,16 +2108,61 @@ main:
     parent: tracing_trace_collection
     identifier: custom_instrumentation
     weight: 202
-  - name: Using Datadog Libraries
-    url: tracing/trace_collection/custom_instrumentation/dd_libraries/
+  - name: Java
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/java
     parent: custom_instrumentation
-    identifier: tracing_custom_inst
+    identifier: custom_instrumentation_java
     weight: 2021
-  - name: Using OpenTelemetry APIs
-    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+  - name: Python
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/python
     parent: custom_instrumentation
-    identifier: tracing_otel_inst
+    identifier: custom_instrumentation_python
     weight: 2022
+  - name: Ruby
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/ruby
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_ruby
+    weight: 2023
+  - name: Go
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/go
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_go
+    weight: 2024
+  - name: Node.js
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/nodejs
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_nodejs
+    weight: 2025
+  - name: PHP
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/php
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_php
+    weight: 2026
+  - name: C++
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/cpp
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_cpp
+    weight: 2027
+  - name: .NET
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/dotnet
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_dotnet
+    weight: 2028
+  - name: Rust
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/rust
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_rust
+    weight: 2029
+  - name: Swift
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/swift
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_ios
+    weight: 2030
+  - name: Elixir
+    url: tracing/trace_collection/custom_instrumentation/dd_libraries/elixir
+    parent: custom_instrumentation
+    identifier: custom_instrumentation_elixir
+    weight: 2031
   - name: Library Compatibility
     url: tracing/trace_collection/compatibility/
     parent: tracing_trace_collection

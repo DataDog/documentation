@@ -19,13 +19,16 @@ further_reading:
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
 ---
-<div class="alert alert-info">
-If you have not yet read the instructions for auto-instrumentation and setup, start with the <a href="https://docs.datadoghq.com/tracing/setup/python/">Python Setup Instructions</a>.
-</div>
+
+If you have not read the setup instructions for automatic instrumentation, start with the [Python Setup Instructions][6]
 
 If you aren't using supported library instrumentation (see [library compatibility][1]), you may want to manually instrument your code.
 
 You may also want to extend the functionality of the `ddtrace` library or gain finer control over instrumenting your application. Several techniques are provided by the library to accomplish this.
+
+<div class="alert alert-info">
+To learn about using the OpenTelemetry API, read <a href="/tracing/trace_collection/custom_instrumentation/otel_instrumentation/java/">Custom Instrumentation with the OpenTelemetry API</a>.
+</div>
 
 ## Creating spans
 
@@ -244,3 +247,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [2]: /tracing/trace_collection/trace_context_propagation/python/
 [4]: /tracing/security
 [5]: /tracing/guide/ignoring_apm_resources/
+[6]: /tracing/setup/python/
