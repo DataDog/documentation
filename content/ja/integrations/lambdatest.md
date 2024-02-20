@@ -5,6 +5,7 @@ assets:
   dashboards:
     LambdaTest: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: lambdatest.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10243
     source_type_name: LambdaTest
   logs:
     source: lambdatest
@@ -67,6 +69,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -86,11 +89,11 @@ LambdaTest でできることは以下の通りです。
 - 24 時間 365 日のチャットサポートで、いつでもヘルプを受けることができます。
 - プラットフォームへの生涯無料アクセス、自動化テスト 100 分無料。
 
-## セットアップ
+## 計画と使用
 
 構成はすべて LambdaTest ダッシュボード上で行われます。[LambdaTest-Datadog インテグレーション][1]セットアップドキュメントを参照してください。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 LambdaTest を使用して Datadog でインシデントを追跡する方法を紹介します。
 
@@ -106,7 +109,7 @@ LambdaTest を使用して Datadog でインシデントを追跡する方法を
 
 さらに、このインテグレーションに関連するすべての API キーが無効になっていることを、[API キー管理ページ][2]でインテグレーション名を検索して確認してください。
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから LambdaTest にお問い合わせください。
 

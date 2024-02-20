@@ -21,6 +21,7 @@ short_description: Azure Batch Service のキーメトリクスを追跡。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Azure Batch Service は、Azure アプリケーション用のマネージド型タスクスケジューラーおよびプロセッサーです。Azure Batch Service からメトリクスを取得すると、以下のことができます。
@@ -28,27 +29,27 @@ Azure Batch Service は、Azure アプリケーション用のマネージド型
 - Batch アカウントのパフォーマンスを視覚化。
 - Batch アカウントのパフォーマンスをアプリケーションと関連付け。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Microsoft Azure インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。これ以外に必要なインストール手順はありません。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "azure_batch" >}}
 
 
-### イベント
+### ヘルプ
 
 Azure Batch Service インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Azure Batch Service インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

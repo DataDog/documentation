@@ -5,6 +5,7 @@ assets:
   dashboards:
     Altostra: assets/dashboards/altostra.json
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -14,6 +15,7 @@ assets:
       prefix: altostra.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10181
     source_type_name: Altostra
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -62,6 +64,7 @@ tile:
   title: Altostra
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -70,13 +73,13 @@ Altostra は、クラウドコンピューティングサービスと統合し�
 
 Datadog Altostra インテグレーションにより、Altostra プロジェクトを実装中に自動的にインスツルメントして、Datadog アカウントにログやメトリクスを送信できます。インテグレーションのコンフィギュレーションは、デプロイ環境ごとに制御できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 Datadog Altostra インテグレーションは組み込まれているため、インストールは必要ありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 Datadog のインテグレーションは、アカウント設定ぺージの[インテグレーション][1]にある Altostra Web Console でご利用いただけます。
 
@@ -95,7 +98,7 @@ Datadog のインテグレーションは、アカウント設定ぺージの[�
 2. Lambda 関数を呼び出します。
 3. Datadog の _Logs_ ビューに Lambda 関数のログが表示されます。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 

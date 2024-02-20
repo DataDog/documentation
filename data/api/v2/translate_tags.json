@@ -23,6 +23,14 @@
     "name": "CI Visibility Tests",
     "description": "Search or aggregate your CI Visibility test events over HTTP. See the [Test Visibility in Datadog page](https://docs.datadoghq.com/tests/) for more information."
   },
+  "cases": {
+    "name": "Cases",
+    "description": "View and manage cases within Datadog"
+  },
+  "cases-projects": {
+    "name": "Cases Projects",
+    "description": "View and manage project within Case Management"
+  },
   "cloud-cost-management": {
     "name": "Cloud Cost Management",
     "description": "The Cloud Cost Management API allows you to set up, edit, and delete Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management page](https://docs.datadoghq.com/cloud_cost_management/) for more information."

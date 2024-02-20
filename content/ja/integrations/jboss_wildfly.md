@@ -5,6 +5,7 @@ assets:
   dashboards:
     JBoss WildFly: assets/dashboards/jboss_wildfly.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: jboss.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10060
     source_type_name: JBoss/WildFly
   logs:
     source: jboss_wildfly
@@ -32,7 +34,7 @@ draft: false
 git_integration_title: jboss_wildfly
 integration_id: jboss-wildfly
 integration_title: JBoss/WildFly
-integration_version: 2.0.1
+integration_version: 2.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -59,28 +61,29 @@ tile:
   title: JBoss/WildFly
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
 
 このチェックは [JBoss][1] および [WildFly][2] アプリケーションを監視します。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 JBoss/WildFly チェックは [Datadog Agent][3] パッケージに含まれています。JBoss/WildFly ホストに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 このチェックでは、インスタンスあたりのメトリクス数が 350 に制限されています。返されたメトリクスの数は、情報ページに表示されます。以下で説明するコンフィギュレーションを編集することで、関心があるメトリクスを指定できます。収集するメトリクスをカスタマイズする方法については、[JMX チェックのドキュメント][4]で詳細な手順を参照してください。制限以上のメトリクスを監視する必要がある場合は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 ##### メトリクスの収集
 
@@ -97,7 +100,7 @@ JBoss/WildFly チェックは [Datadog Agent][3] パッケージに含まれて�
 
 2. [Agent を再起動します][3]。
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -123,7 +126,7 @@ _Agent バージョン 6.0 以降で利用可能_
 [2]: https://docs.jboss.org/author/display/WFLY9/JMX%20subsystem%20configuration.html
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -131,7 +134,7 @@ _Agent バージョン 6.0 以降で利用可能_
 
 コンテナ環境の場合は、[JMX を使用したオートディスカバリー][1]のガイドを参照してください。
 
-##### ログの収集
+##### 収集データ
 
 _Agent バージョン 6.0 以降で利用可能_
 
@@ -150,29 +153,29 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 
 [Agent の status サブコマンドを実行][6]し、Checks セクションで `jboss_wildfly` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "jboss_wildfly" >}}
 
 
-### イベント
+### ヘルプ
 
 JBoss/WildFly インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "jboss_wildfly" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 
 
 [1]: https://developers.redhat.com/products/eap/overview
 [2]: http://wildfly.org
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadoghq.com/ja/integrations/java/
 [5]: https://docs.datadoghq.com/ja/help/
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
