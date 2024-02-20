@@ -3743,7 +3743,7 @@ main:
     parent: cspm
     identifier: cspm_custom_rules
     weight: 302
-  - name: Compliance Reports
+  - name: Manage Compliance Posture
     url: security/misconfigurations/frameworks_and_benchmarks
     parent: cspm
     identifier: cspm_frameworks_benchmarks
@@ -3754,10 +3754,15 @@ main:
     identifier: cspm_custom_frameworks
     weight: 101
   - name: Supported Frameworks
-    url: security/misconfigurations/supported_frameworks
-    parent: cspm
+    url: security/misconfigurations/frameworks_and_benchmarks/supported_frameworks
+    parent: cspm_frameworks_benchmarks
     identifier: cspm_supported_frameworks
-    weight: 304
+    weight: 102
+  - name: Kubernetes Security Posture Management
+    url: security/misconfigurations/frameworks_and_benchmarks/kspm
+    parent: cspm_frameworks_benchmarks
+    identifier: cspm_kspm
+    weight: 103
   - name: Misconfigurations Explorer
     url: /security/misconfigurations/findings
     parent: cspm
