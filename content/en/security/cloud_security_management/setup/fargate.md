@@ -4,13 +4,11 @@ kind: documentation
 private: true
 ---
 
-<div class="alert alert-warning">Cloud Security Management on Fargate is in private beta.</div>
+<div class="alert alert-warning">Cloud Security Management on AWS Fargate is in private beta.</div>
 
-Use the following instructions to enable [CSM Threats][1] on AWS Fargate ECS and EKS. To learn more about the supported deployment types for each CSM feature, see Setting Up Cloud Security Management.
+Use the following instructions to enable [CSM Threats][1] for Amazon ECS and EKS on AWS Fargate. To learn more about the supported deployment types for each CSM feature, see Setting Up Cloud Security Management.
 
-Datadog Cloud Security Management on Fargate includes built-in threat detection for AWS Fargate process and file integrity monitoring (FIM) events as well as 95 out-of-the-box rules.
-
-The public beta will add network event collection and automated instrumentation when installing the Datadog Agent on Fargate.
+Datadog Cloud Security Management on AWS Fargate includes built-in threat detection for AWS Fargate process and file integrity monitoring (FIM) events as well as 95 out-of-the-box rules.
 
 **DIAGRAM PLACEHOLDER**
 
@@ -146,9 +144,13 @@ The public beta will add network event collection and automated instrumentation 
 }
 {{< /code-block >}}
 
-2. Update the JSON file with a `TASK_NAME`, your Datadog API key, and the appropriate `DD_SITE` (datadoghq.com).
-
-    **Note**: The environment variable `ECS_FARGATE` is already set to `true`. Update the JSON with `YOUR_APP_NAME/YOUR_APP_IMAGE` and specify the `ENTRYPOINT`.
+2. Update the following items in the JSON file:
+    - `TASK_NAME`
+    - `DD_API_KEY`
+    - `DD_SITE`
+    - `YOUR_APP_NAME`
+    - `YOUR_APP_IMAGE`
+    - `ENTRYPOINT`
 
 3. Add your other application containers to the task definition. For details on collecting integration metrics, see [Integration Setup for ECS Fargate][6].
 4. Run the following command to register the ECS task definition:
@@ -161,7 +163,7 @@ aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-
 
 ### Running the Agent as a sidecar
 
-This is the minimum manifest configuration to deploy your application with the Datadog Agent as a sidecar with CSM Threats enabled.
+The following manifest represents the minimum configuration required to deploy your application with the Datadog Agent as a sidecar with CSM Threats enabled:
 
 {{< code-block lang="yaml" collapsible="true" >}}
 apiVersion: apps/v1
