@@ -33,8 +33,7 @@ Cloud Security Management Vulnerabilities (CSM Vulnerabilities) vous aide à
 ## Explorer les vulnérabilités
 Le [Vulnerabilities Explorer][1] affiche une liste exhaustive des vulnérabilités détectées sur l'ensemble de votre infrastructure et les classe selon leur niveau de gravité. Il propose également des fonctionnalités de regroupement, de filtrage et de triage afin que vous puissiez étudier les problèmes, les attribuer et les résoudre.
 
-{{< img src="security/vulnerabilities/csm_vulnerabilities_3.png" alt="
-La page CSM  Vulnerability triée en fonction des vulnérabilités uniques, avec un volet latéral" width="100%">}}
+{{< img src="security/vulnerabilities/csm_vulnerabilities_3.png" alt="La page CSM  Vulnerability triée en fonction des vulnérabilités uniques, avec un volet latéral" width="100%">}}
 
 Sélectionnez une vulnérabilité spécifique pour afficher les détails associés, notamment les conteneurs et hosts affectés, le score du niveau de gravité ainsi que les étapes de remédiation recommandées.
 Le niveau de gravité d'une vulnérabilité est modifié à partir du score de base et tient compte des éléments suivants :
