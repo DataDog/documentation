@@ -35,12 +35,11 @@ draft: false
 git_integration_title: ambari
 integration_id: ambari
 integration_title: Ambari
-integration_version: 4.1.0
+integration_version: 4.2.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: ambari
-oauth: {}
 public_title: Ambari
 short_description: Ambari で管理されているすべてのクラスターのメトリクスをホストまたはサービス別に取得
 supported_os:

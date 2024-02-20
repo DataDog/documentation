@@ -320,6 +320,11 @@
     },
     {
       "group": "gcp_integration",
+      "suffix": "_194782945",
+      "description": "Create a new entry for your service account with cloud run revision filters enabled returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
       "suffix": "_4235664992",
       "description": "Create a new entry for your service account with cspm enabled returns \"OK\" response"
     },
@@ -339,6 +344,11 @@
       "group": "gcp_integration",
       "suffix": "",
       "description": "Update STS Service Account returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_2241994060",
+      "description": "Update STS Service Account returns \"OK\" response with cloud run revision filters"
     },
     {
       "group": "gcp_integration",
