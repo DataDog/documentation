@@ -45,7 +45,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: singlestore
-oauth: {}
 public_title: SingleStore
 short_description: リーフやアグリゲーターから SingleStore のメトリクスを収集します。
 supported_os:

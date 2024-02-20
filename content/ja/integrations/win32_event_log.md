@@ -32,7 +32,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: win32_event_log
-oauth: {}
 public_title: Windows Event Log
 short_description: Windows のイベントを Datadog イベントストリームへ送信。
 supported_os:

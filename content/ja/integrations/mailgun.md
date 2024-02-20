@@ -39,7 +39,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: mailgun
-oauth: {}
 public_title: Mailgun
 short_description: 開発者のメール送信、追跡、受信を支援するクラウドベースのメールサービス
 supported_os: []

@@ -25,7 +25,6 @@ legal_terms:
   eula: Komodor Terms of use.pdf
 manifest_version: 2.0.0
 name: komodor
-oauth: {}
 public_title: Komodor Automation
 short_description: K8s のランドスケープとスタック全体の変更点を追跡する
 supported_os:

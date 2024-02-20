@@ -36,7 +36,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: cacti
-oauth: {}
 public_title: Cacti
 short_description: Cacti RRD を Datadog に転送して豊富なアラート機能や美しいグラフを活用。
 supported_os:

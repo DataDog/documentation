@@ -35,7 +35,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: tidb_cloud
-oauth: {}
 public_title: TiDB Cloud
 short_description: Datadog による TiDB Cloud クラスターのモニタリング
 supported_os:

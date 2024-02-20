@@ -50,7 +50,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: apache
-oauth: {}
 public_title: Apache
 short_description: 毎秒のリクエスト数、処理バイト数、ワーカースレッド数、アップタイムなどを追跡
 supported_os:

@@ -36,7 +36,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: amazon_mediaconvert
-oauth: {}
 public_title: Amazon MediaConvert
 short_description: テレビ、コネクテッドデバイス向けビデオコンテンツのフォーマットと圧縮
 supported_os: []

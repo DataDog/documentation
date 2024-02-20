@@ -33,7 +33,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: snmp_american_power_conversion
-oauth: {}
 public_title: American Power Conversion
 short_description: American Power Conversion のネットワークデバイスから SNMP メトリクスを収集します。
 supported_os:

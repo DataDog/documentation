@@ -23,7 +23,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: harness_cloud_cost_management
-oauth: {}
 public_title: Harness クラウドコストマネジメント
 short_description: Harness のクラウドとクラスターのコストメトリクスを日付範囲で表示する
 supported_os:

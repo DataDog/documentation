@@ -34,7 +34,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: flume
-oauth: {}
 public_title: flume
 short_description: Apache Flume Agent のシンク、チャンネル、ソースを追跡
 supported_os:

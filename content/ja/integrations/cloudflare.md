@@ -41,7 +41,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: cloudflare
-oauth: {}
 public_title: Cloudflare
 short_description: Cloudflare Web トラフィックおよび DNS メトリクスを追跡
 supported_os: []

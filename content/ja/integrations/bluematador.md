@@ -35,7 +35,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: bluematador
-oauth: {}
 public_title: Blue Matador
 short_description: Blue Matador は自動的にセットアップされ、何百ものアラートを動的に管理します。
 supported_os:

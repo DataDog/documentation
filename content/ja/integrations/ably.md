@@ -43,7 +43,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: ably
-oauth: {}
 public_title: Ably
 short_description: Ably メトリクスの収集とグラフ化
 supported_os:

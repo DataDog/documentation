@@ -35,7 +35,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: tcp_queue_length
-oauth: {}
 public_title: TCP Queue Length
 short_description: Datadog で、TCP バッファのサイズを追跡します。
 supported_os:

@@ -42,7 +42,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: fluentd
-oauth: {}
 public_title: FluentD
 short_description: 有効化した各 FluentD プラグインのバッファキューと再試行回数を監視。
 supported_os:

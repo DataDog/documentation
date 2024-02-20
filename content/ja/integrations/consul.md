@@ -48,7 +48,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: consul
-oauth: {}
 public_title: Consul
 short_description: Consul 健全性チェックのアラート、サービス/ノードマッピングの表示、その他
 supported_os:

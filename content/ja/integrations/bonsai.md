@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: bonsai
-oauth: {}
 public_title: Bonsai
 short_description: 'Bonsai: マネージド型 Elasticsearch'
 supported_os:

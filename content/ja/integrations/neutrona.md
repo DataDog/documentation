@@ -35,7 +35,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: neutrona
-oauth: {}
 public_title: Neutrona
 short_description: Neutrona Telemetry
 supported_os:
