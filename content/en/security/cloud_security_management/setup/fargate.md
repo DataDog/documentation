@@ -6,16 +6,16 @@ private: true
 
 <div class="alert alert-warning">Cloud Security Management on AWS Fargate is in private beta.</div>
 
-Use the following instructions to enable [CSM Threats][1] for Amazon ECS and EKS on AWS Fargate. To learn more about the supported deployment types for each CSM feature, see Setting Up Cloud Security Management.
+Use the following instructions to enable [CSM Threats][1] for Amazon ECS and EKS on AWS Fargate. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][2].
 
-Datadog Cloud Security Management on AWS Fargate includes built-in threat detection for AWS Fargate process and file integrity monitoring (FIM) events as well as 95 out-of-the-box rules.
+Datadog Cloud Security Management on AWS Fargate includes built-in threat detection for AWS Fargate process and file integrity monitoring (FIM) events as well as [95 out-of-the-box rules][3].
 
-**DIAGRAM PLACEHOLDER**
+{{< img src="security/csm/csm_fargate_workflow.png" alt="Diagram showing the workflow for Cloud Security Management on AWS Fargate" width="80%">}}
 
 ## Prerequisites
 
-* [CSM Enterprise][2] or [CSM Workload Security][3] with the AWS integration configured
-* Access to AWS
+* [CSM Enterprise][4] or [CSM Workload Security][5] with the AWS integration configured
+* Access to AWS Management Console
 * AWS Fargate ECS or EKS workloads
 
 ### Images
@@ -27,7 +27,7 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
 
 ### AWS Console
 
-1. Log in to the [AWS Management Console][4].
+1. Log in to the [AWS Management Console][6].
 2. Navigate to the ECS section.
 3. On the left menu, click **Task Definitions**, then click **Create new Task Definition with JSON** or choose an existing Fargate task definition.
 4. Use the JSON definition of the AWS CLI method.
@@ -35,7 +35,7 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
 
 ### AWS CLI
 
-1. Download [datadog-agent-cws-ecs-fargate.json][5].
+1. Download [datadog-agent-cws-ecs-fargate.json][7].
 {{< code-block lang="json" filename="datadog-agent-cws-ecs-fargate.json" collapsible="true" >}}
 {
     "family": "<YOUR_TASK_NAME>",
@@ -152,7 +152,9 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
     - `YOUR_APP_IMAGE`
     - `ENTRYPOINT`
 
-3. Add your other application containers to the task definition. For details on collecting integration metrics, see [Integration Setup for ECS Fargate][6].
+    **Note**: The environment variable `ECS_FARGATE` is already set to "true".
+
+3. Add your other application containers to the task definition. For details on collecting integration metrics, see [Integration Setup for ECS Fargate][8].
 4. Run the following command to register the ECS task definition:
 
 {{< code-block lang="shell" collapsible="true" >}}
@@ -228,8 +230,10 @@ spec:
 {{< /code-block >}}
 
 [1]: /security/threats/
-[2]: /security/cloud_security_management/setup/csm_enterprise
-[3]: /security/cloud_security_management/setup/csm_workload_security
-[4]: https://aws.amazon.com/console
-[5]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-fargate.json
-[6]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
+[2]: /security/cloud_security_management/setup#supported-deployment-types-and-features
+[3]: /security/default_rules/?category=cat-csm-threats
+[4]: /security/cloud_security_management/setup/csm_enterprise
+[5]: /security/cloud_security_management/setup/csm_cloud_workload_security
+[6]: https://aws.amazon.com/console
+[7]: /resources/json/datadog-agent-ecs-fargate.json
+[8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
