@@ -5,7 +5,7 @@ kind: documentation
 
 We're sorry to see you go! Only the Account Owner can cancel a Cloudcraft subscription, which takes effect at the end of the current billing cycle. When you cancel your subscription, your account is downgraded to the free plan. 
 
-* You won't lose access to the diagrams you created. However, **Infinite Grid** blueprints will switch to read-only mode until you subscribe again or change them to the standard grid size, and AWS resources will no longer update.
+You won't lose access to the diagrams you created. However, **Infinite Grid** blueprints will switch to read-only mode until you subscribe again or change them to the standard grid size, and AWS resources will no longer update.
 
 <div class="alert alert-info">If you're canceling within our 30-day money-back guarantee period and prefer a refund, <a href="https://app.cloudcraft.co/support" rel="help" title="Cloudcraft support">reach out to our support team</a> instead.
 </div>

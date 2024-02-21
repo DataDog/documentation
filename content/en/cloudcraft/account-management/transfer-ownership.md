@@ -9,22 +9,22 @@ In certain cases, a user account, team, or blueprint assets may need to be trans
 
 ## If you have account access
 
-If you have access to your Cloudcraft account and team, and wish to initiate a transfer to another user,  contact Support while logged in to the application. This method automatically meets Cloudcraft's requirements for account identification and proof of ownership, and ensures that Cloudcraft complies with all applicable laws.
+If you have access to your Cloudcraft account and team, and wish to initiate a transfer to another user, contact Support using the **Contact support** page in the application. This method automatically meets Cloudcraft's requirements for account identification and proof of ownership, and ensures that Cloudcraft complies with all applicable laws.
+
+**Note**: The new owner must have a Cloudcraft account before the transfer can be completed.
 
 1. Log in to Cloudcraft as the account owner.
 2. Click the **User** avatar in the upper-right corner of the application and select **Contact support**. 
-3. In the popup that appears in the lower-right corner of the application, click **Ask**.
-4. Select **Email**, and then **Next**.
-5. Fill in **Subject**, and **Message** fields.
-6. Press the **Submit your support request** button.
+3. Click **Ask**.
+4. Select **Email**, and then click **Next**.
+5. Fill in the **Subject** and **Message** fields.
+6. Click **Submit your support request**.
 
-For a faster turn around, give us as much information as possible in the **Message** field.
+For a faster turnaround, provide as much information as possible in the **Message** field.
 
 - What is the email address of the new owner?
-- Does he already have an account with us?
+- Does the new owner already have a Cloudcraft account?
 - Do you want to delete your credit card information, or does the new owner get to keep it in the account?
-
-The new owner will need to have a Cloudcraft account before we can make the transfer. You may direct them to [our sign up page][1].
 
 ## If you do not have account access
 
