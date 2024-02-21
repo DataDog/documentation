@@ -25,7 +25,7 @@ API Catalog is based on APM tracing, so info from traffic is displayed only when
 ## No data for new monitor
 
 API Catalog is based on APM tracing, so info from traffic is displayed only when there are traces for the endpoint. If you do not see data in the monitor graph, one of the options below may apply:
-- The endpoint has not been used yet, because it was registered/uploaded through OpenAPI.
+- The endpoint has not been used yet since it was just registered/uploaded through OpenAPI.
 - Traces are sampled on the Agent side. Read [Ingestion Controls][3] for more information.
 
 ## Further reading

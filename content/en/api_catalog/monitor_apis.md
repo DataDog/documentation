@@ -21,7 +21,7 @@ aliases:
 
 ## Overview
 
-After you have [registered all your endpoints][1] and [assigned team ownership][2], you can start managing and improving them. Use API Catalog to start activities such as:
+After you have [registered your endpoints][1] and [assigned team ownership][2], you can start managing and improving them. Use API Catalog to start activities such as:
 
  - Detecting and investigating APIs that are underperforming.
  - Creating alerts based on key performance metrics such as latency and error rate.

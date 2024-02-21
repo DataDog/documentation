@@ -7,17 +7,18 @@ further_reading:
   tag: "Documentation"
   text: "Datadog API Catalog"
 aliases:
-    - /tracing/api_catalog/api_catalog_api/
+    - /tracing/api_catalog/endpoint_discovery/
 ---
 
 ## Overview
-If a service has a supported tracer install, the API Catalog will automatically be filled by all endpoints discovered from this service. 
+If a service has a supported tracer installed, the API Catalog will automatically be filled by all endpoints discovered from this service. 
 
 In order to check compatibility, you can visit the ‘troubleshoot’ page on the app by pressing the ‘learn more’ button
 [[TODO:add image]]
 
 ## Providing endpoint path manually
 Add the `datadog.api_catalog.route` tag to force endpoint discovery by the API Catalog.
+This tag should contain the matched route, that is, the path template in the format used by the respective server framework.
 
 Note: API Catalog will still filter out spans that do not contain the following tags:
 * http.method
