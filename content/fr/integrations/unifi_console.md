@@ -32,7 +32,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: unifi_console
-oauth: {}
 public_title: Unifi Console
 short_description: Ce check recueille des métriques à partir du contrôleur Unifi.
 supported_os:

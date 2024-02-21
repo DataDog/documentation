@@ -48,7 +48,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: etcd
-oauth: {}
 public_title: etcd
 short_description: 書き込み、更新、削除、ノード間レイテンシー、さまざまな Etcd メトリクスを追跡。
 supported_os:

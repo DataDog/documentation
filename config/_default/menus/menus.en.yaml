@@ -3088,6 +3088,11 @@ main:
     parent: code_analysis_static_analysis
     identifier: code_analysis_static_analysis_github_actions
     weight: 103
+  - name: Generic CI Providers
+    url: code_analysis/static_analysis/generic_ci_providers
+    parent: code_analysis_static_analysis
+    identifier: code_analysis_static_analysis_other_providers
+    weight: 104
   - name: Software Composition Analysis
     url: code_analysis/software_composition_analysis
     parent: code_analysis
@@ -3103,6 +3108,11 @@ main:
     parent: code_analysis_software_composition_analysis
     identifier: code_analysis_software_composition_analysis_github_actions
     weight: 202
+  - name: Generic CI Providers
+    url: code_analysis/software_composition_analysis/generic_ci_providers
+    parent: code_analysis_software_composition_analysis
+    identifier: code_analysis_software_composition_analysis_other_providers
+    weight: 203
   - name: Static Analysis Rules
     url: code_analysis/static_analysis_rules
     parent: code_analysis
@@ -3205,11 +3215,36 @@ main:
     parent: observability_pipelines_reference
     identifier: observability_pipelines_vector_configuration
     weight: 601
+  - identifier: observability_pipelines_reference_sources
+    name: Sources
+    parent: observability_pipelines_vector_configuration
+    url: observability_pipelines/reference/sources/
+    weight: 1
+  - identifier: observability_pipelines_reference_transforms
+    name: Transforms
+    parent: observability_pipelines_vector_configuration
+    url: observability_pipelines/reference/transforms/
+    weight: 2
+  - identifier: observability_pipelines_reference_sinks
+    name: Sinks
+    parent: observability_pipelines_vector_configuration
+    url: observability_pipelines/reference/sinks/
+    weight: 3
   - name: Datadog Processing Language
     url: observability_pipelines/reference/processing_language/
     parent: observability_pipelines_reference
     identifier: observability_pipelines_reference_processing_language
     weight: 602
+  - name: Functions
+    url: observability_pipelines/reference/processing_language/functions/
+    parent: observability_pipelines_reference_processing_language
+    identifier: observability_pipelines_reference_processing_language_functions
+    weight: 1
+  - name: Errors
+    url: observability_pipelines/reference/processing_language/errors/
+    parent: observability_pipelines_reference_processing_language
+    identifier: observability_pipelines_reference_processing_language_errors
+    weight: 2
   - name: Guides
     url: observability_pipelines/guide/
     parent: observability_pipelines
@@ -3668,11 +3703,16 @@ main:
     parent: csm
     identifier: cloud_workload_security
     weight: 2
-  - name: Managing Detection Rules
+  - name: Detection Rules
     url: security/threats/workload_security_rules
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
     weight: 201
+  - name: Create Custom Rules
+    url: security/threats/workload_security_rules/custom_rules
+    parent: cws_workload_security_rules
+    identifier: cws_custom_rules
+    weight: 101
   - name: Security Signals
     url: security/threats/security_signals
     parent: cloud_workload_security
@@ -3708,6 +3748,11 @@ main:
     parent: cspm
     identifier: cspm_frameworks_benchmarks
     weight: 303
+  - name: Create Custom Frameworks
+    url: security/misconfigurations/frameworks_and_benchmarks/custom_frameworks
+    parent: cspm_frameworks_benchmarks
+    identifier: cspm_custom_frameworks
+    weight: 101
   - name: Supported Frameworks
     url: security/misconfigurations/supported_frameworks
     parent: cspm
@@ -3718,6 +3763,11 @@ main:
     parent: cspm
     identifier: cspm_findings_explorer
     weight: 305
+  - name: Export Misconfigurations
+    url: /security/misconfigurations/findings/export_misconfigurations
+    parent: cspm_findings_explorer
+    identifier: cspm_export_misconfigurations
+    weight: 101
   - name: Signals Explorer
     url: /security/misconfigurations/signals_explorer/
     parent: cspm
@@ -9111,6 +9161,166 @@ api:
         - AggregateCIAppTestEvents
       unstable: []
       order: 3
+  - name: Case Management
+    url: /api/latest/case-management/
+    identifier: case-management
+    generated: true
+  - name: Unassign case
+    url: '#unassign-case'
+    identifier: case-management-unassign-case
+    parent: case-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UnassignCase
+      unstable: []
+      order: 7
+  - name: Unarchive case
+    url: '#unarchive-case'
+    identifier: case-management-unarchive-case
+    parent: case-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UnarchiveCase
+      unstable: []
+      order: 9
+  - name: Update case status
+    url: '#update-case-status'
+    identifier: case-management-update-case-status
+    parent: case-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateStatus
+      unstable: []
+      order: 4
+  - name: Update case priority
+    url: '#update-case-priority'
+    identifier: case-management-update-case-priority
+    parent: case-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdatePriority
+      unstable: []
+      order: 5
+  - name: Assign case
+    url: '#assign-case'
+    identifier: case-management-assign-case
+    parent: case-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - AssignCase
+      unstable: []
+      order: 6
+  - name: Archive case
+    url: '#archive-case'
+    identifier: case-management-archive-case
+    parent: case-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ArchiveCase
+      unstable: []
+      order: 8
+  - name: Get the details of a case
+    url: '#get-the-details-of-a-case'
+    identifier: case-management-get-the-details-of-a-case
+    parent: case-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetCase
+      unstable: []
+      order: 3
+  - name: Get the details of a project
+    url: '#get-the-details-of-a-project'
+    identifier: case-management-get-the-details-of-a-project
+    parent: case-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetProject
+      unstable: []
+      order: 3
+  - name: Remove a project
+    url: '#remove-a-project'
+    identifier: case-management-remove-a-project
+    parent: case-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteProject
+      unstable: []
+      order: 4
+  - name: Create a project
+    url: '#create-a-project'
+    identifier: case-management-create-a-project
+    parent: case-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateProject
+      unstable: []
+      order: 1
+  - name: Get all projects
+    url: '#get-all-projects'
+    identifier: case-management-get-all-projects
+    parent: case-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetProjects
+      unstable: []
+      order: 2
+  - name: Create a case
+    url: '#create-a-case'
+    identifier: case-management-create-a-case
+    parent: case-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCase
+      unstable: []
+      order: 2
+  - name: Search cases
+    url: '#search-cases'
+    identifier: case-management-search-cases
+    parent: case-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchCases
+      unstable: []
+      order: 1
   - name: Cloud Cost Management
     url: /api/latest/cloud-cost-management/
     identifier: cloud-cost-management

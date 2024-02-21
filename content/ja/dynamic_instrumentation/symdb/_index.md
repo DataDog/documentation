@@ -53,6 +53,10 @@ Symbol Database は、クラス名およびメソッド名の検索機能を提�
 また、Symbol Database は、ログテンプレートや[ダイナミックインスツルメンテーション式言語][5]を使用するその他のテンプレートを対象に、オートコンプリート機能も提供します。
 {{< img src="dynamic_instrumentation/symdb_completion.png" alt="ログテンプレートを対象としたオートコンプリートによる提案" style="width:80%;" >}}
 
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /ja/dynamic_instrumentation/
 [2]: /ja/agent/
 [3]: /ja/agent/remote_config/

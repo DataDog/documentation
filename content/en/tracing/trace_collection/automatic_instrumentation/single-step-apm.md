@@ -14,7 +14,7 @@ Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.j
 
 If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation (beta)** option selected, the Agent is installed and configured to enable APM. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
 
-The following examples show how it works on each infrastructure type. 
+The following examples show how it works on each infrastructure type.
 
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
@@ -31,7 +31,7 @@ For an Ubuntu host:
 
    a. Replace `<YOUR_DD_API_KEY>` with your [Datadog API][4].
 
-   b. Replace `<YOUR_DD_SITE>` with your [Datadog site][3].  
+   b. Replace `<YOUR_DD_SITE>` with your [Datadog site][3].
    <div class="alert alert-info">
       You can also optionally configure the following:
       <ul>
@@ -167,7 +167,7 @@ docker run -d --name dd-agent \
 
 You can enable APM by installing the Agent with the Datadog Helm chart. This deploys the Datadog Agent across all nodes in your Linux-based Kubernetes cluster with a DaemonSet.
 
-**Note:** Single step instrumentation is deployed to the `default` namespace and does not instrument any applications in the same namespace. 
+**Note**: Single step instrumentation doesn't instrument applications in the namespace where you install the Datadog Agent. It's recommended to install the Agent in a separate namespace in your cluster where you don't run your applications.
 
 ### Requirements
 
@@ -213,7 +213,7 @@ To enable single step instrumentation with Helm:
    helm install datadog-agent -f datadog-values.yaml datadog/datadog
    ```
 5. Do a rolling restart on your applications for instrumentation to take effect.
-     
+
 
 [7]: https://v3.helm.sh/docs/intro/install/
 [8]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -268,11 +268,11 @@ To set specific tracing library versions, add the following configuration to you
        instrumentation:
          enabled: true
          libVersions: # Add any versions you want to set
-            dotnet: v2.40.0
+            dotnet: v2.46.0
             python: v1.20.6
             java: v1.22.0
             js: v4.17.0
-            ruby: v1.15.0 
+            ruby: v1.15.0
 {{< /highlight >}}
 
 Supported languages include:
@@ -314,7 +314,7 @@ Run the following commands and restart the service to stop injecting the library
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 
-1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command: 
+1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command:
 
    ```shell
    DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
@@ -325,7 +325,7 @@ Run the following commands and restart the service to stop injecting the library
 
 {{% tab "Docker" %}}
 
-1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command: 
+1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command:
    ```shell
    docker run -e DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
    ```

@@ -38,7 +38,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: aspdotnet
-oauth: {}
 public_title: ASP.NET
 short_description: ASP.NET サービスのメトリクスをリアルタイムに追跡。
 supported_os:

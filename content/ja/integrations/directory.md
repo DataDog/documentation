@@ -33,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: directory
-oauth: {}
 public_title: Directory
 short_description: Directory インテグレーションにより、既定のディレクトリのファイルについてメトリクスを報告
 supported_os:

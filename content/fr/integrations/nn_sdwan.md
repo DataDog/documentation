@@ -41,7 +41,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: nn_sdwan
-oauth: {}
 public_title: Netnology Cisco SD-WAN
 short_description: Exportateur de métriques pour les contrôleurs Cisco SD-WAN
 supported_os:
