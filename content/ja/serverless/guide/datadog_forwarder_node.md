@@ -298,7 +298,7 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION
 arn:aws-us-gov:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-使用できる `RUNTIME` オプションは、`Node12-x`、`Node14-x`、`Node16-x` です。最新の `VERSION` は `{{< latest-lambda-layer-version layer="node" >}}` です。例:
+使用できる `RUNTIME` オプションは、`Node14-x`、`Node16-x`、`Node18-x`、`Node20-x` です。最新の `VERSION` は `{{< latest-lambda-layer-version layer="node" >}}` です。例:
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
 ```

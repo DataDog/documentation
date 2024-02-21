@@ -215,7 +215,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
          # Use this format for AWS GovCloud regions
          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
          ```
-         Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available RUNTIME options are `Node12-x`, `Node14-x`, `Node16-x` and         `Node18-x`.
+         Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available RUNTIME options are `Node14-x`, `Node16-x`, `Node18-x` and `Node20-x`.
 
    - **Java**: [Configure the layers][1] for your Lambda function using the ARN in one of the following formats, depending on where your Lambda is deployed. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:
      ```sh
@@ -279,7 +279,7 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
          # Use this format for AWS GovCloud regions
          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
          ```
-         Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available RUNTIME options are `Node12-x`, `Node14-x`, `Node16-x` and         `Node18-x`.
+         Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available RUNTIME options are `Node14-x`, `Node16-x`, `Node18-x` and `Node20-x`.
 
 
    - **Java**: [Configure the layers][1] for your Lambda function using the ARN in one of the following formats, depending on where your Lambda is deployed. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:

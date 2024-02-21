@@ -101,7 +101,7 @@ Datadog Serverless Framework プラグインをインストールして構成す
          # Use this format for AWS GovCloud regions
          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
          ```
-         `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。RUNTIME オプションは、`Node12-x`、`Node14-x`、`Node16-x`、`Node18-x` が利用可能です。
+         `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。RUNTIME オプションは、`Node14-x`、`Node16-x`、`Node18-x`、`Node20-x` が利用可能です。
 
    - **Java**: Lambda がデプロイされている場所に応じて、以下のいずれかの形式の ARN を使用して Lambda 関数の[レイヤーを構成します][1]。`<AWS_REGION>` は `us-east-1` などの有効な AWS リージョンに置き換えてください。
      ```sh
@@ -165,7 +165,7 @@ Datadog Serverless Framework プラグインをインストールして構成す
          # Use this format for AWS GovCloud regions
          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
          ```
-         `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。RUNTIME オプションは、`Node12-x`、`Node14-x`、`Node16-x`、`Node18-x` が利用可能です。
+         `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。RUNTIME オプションは、`Node14-x`、`Node16-x`、`Node18-x`、`Node20-x` が利用可能です。
 
 
    - **Java**: Lambda がデプロイされている場所に応じて、以下のいずれかの形式の ARN を使用して Lambda 関数の[レイヤーを構成します][1]。`<AWS_REGION>` は `us-east-1` などの有効な AWS リージョンに置き換えてください。

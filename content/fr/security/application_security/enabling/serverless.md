@@ -91,7 +91,7 @@ Pour installer et configurer le plug-in Serverless Framework Datadog :
          # Use this format for AWS GovCloud regions
          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
          ```  
-         Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour RUNTIME sont `Node12-x`, `Node14-x`, `Node16-x` et `Node18-x`.
+         Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour RUNTIME sont `Node14-x`, `Node16-x`, `Node18-x` et `Node20-x`.
 
    - **Java** : [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN en respectant l'un des formats suivants, en fonction de l'endroit où votre fonction Lambda est déployée. Remplacez `<AWS_REGION>` par une région AWS valide telle que `us-east-1` :
      ```sh
@@ -155,7 +155,7 @@ Pour installer et configurer le plug-in Serverless Framework Datadog :
          # Use this format for AWS GovCloud regions
          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
          ```  
-         Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour RUNTIME sont `Node12-x`, `Node14-x`, `Node16-x` et `Node18-x`.
+         Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour RUNTIME sont `Node14-x`, `Node16-x`, `Node18-x` et `Node20-x`.
 
 
    - **Java** : [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN en respectant l'un des formats suivants, en fonction de l'endroit où votre fonction Lambda est déployée. Remplacez `<AWS_REGION>` par une région AWS valide telle que `us-east-1` :
