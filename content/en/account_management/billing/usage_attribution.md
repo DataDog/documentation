@@ -28,7 +28,7 @@ This feature does not support product usage that cannot be tagged during instrum
 
 ## Getting started
 
-To start receiving daily data, an administrator needs to create a select tags for the report.
+To start receiving daily data, an administrator needs to choose tags for the report.
 
 {{< img src="account_management/billing/usage_attribution/advanced-usage-reporting.png" alt="Getting Started with Usage Attribution in Datadog" style="width:100%;" >}}
 
