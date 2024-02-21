@@ -230,7 +230,7 @@ In this example, an additional `Tags` object property has been added with two ke
 
 ### Configure Custom Costs
 
-Once your data is formatted to the requirements above, upload your CSV and JSON files to Cloud Cost Management on [the **Custom Costs Uploaded Files** page][3] or programmatically by using the API.
+After your data is formatted to the requirements above, upload your CSV and JSON files to Cloud Cost Management on [the **Custom Costs Uploaded Files** page][3] or programmatically by using the API.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -258,7 +258,7 @@ curl -L -X PUT "api.datadoghq.com/api/v2/cost/custom_costs/" \
 {{% /tab %}}
 {{% tab "API (request)" %}}
 
-Send the content of the file though the API using the `PUT api/v2/cost/custom_costs` endpoint.
+Use the `PUT api/v2/cost/custom_costs` endpoint to send the content of the file with the API .
 
 ```curl
 curl -L -X PUT "api.datadoghq.com/api/v2/cost/custom_costs/" \
