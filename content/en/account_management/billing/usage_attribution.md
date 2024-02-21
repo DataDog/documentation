@@ -18,14 +18,13 @@ algolia:
 Usage Attribution is an advanced feature included in the Enterprise plan. For all other plans, contact your account representative or <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> to request this feature.
 </div>
 
-Administrators can access the Usage Attribution tab from the Plan & Usage section in Datadog. The Usage Attribution page provides the following information and functionality:
+Administrators or users with the Usage Read permission can access the Usage Attribution tab from the Plan & Usage section in Datadog. The Usage Attribution page provides the following information and functionality:
 
 - Lists the existing tag keys that usage is being broken down by and provides the ability to change and add new ones (up to three tag keys).
-- Generates daily tab separated values (TSV) files for most usage types.
-- Summarizes usage at the end of each month.
-- Surfaces the data both in the UI and as a TSV download.
+- Summarizes usage at the end of each month and visualizes usage over time broken out by tags.
+- Generates month-to-date and hourly CSV files.
 
-This feature does not support product usage that cannot be tagged during instrumentation. For example, Incident Management Users and Parallel Testing Slots. 
+This feature does not support product usage that cannot be tagged during instrumentation. For example, Incident Management Users, CI Pipeline and Test Users, Parallel Testing Slots, and Audit Trail. 
 
 ## Getting started
 
@@ -40,10 +39,10 @@ The **Applied Tags** section enables the following:
 
 {{< img src="account_management/billing/advanced-usage-reporting-02.png" alt="Applied tags in Datadog" style="width:80%;" >}}
 
-- Once the tags are configured, it takes a full 24-hour period for the first report to be generated.
+- Once the tags are configured, it takes 24 hours for the first report to be generated.
 - The reports are generated on an ongoing basis.
 - If tags are changed, the new report reflects the new tags. However, the previous reports keep the old tags.
-- Monthly reports reflect the latest set of tags. If you change tags mid-month, the usage percentages might not match up.
+- Monthly reports reflect the latest set of tags. If tags are changed in the middle of a month, partial month reports are created for each reporting period.
 
 ## Total usage
 
@@ -63,7 +62,7 @@ Once the reports start to be generated, they are updated daily and aggregated mo
 - If multi-org is enabled, usage is summarized across all Datadog organizations at the parent account.
 - Previous months' reports are accessible through the time selector.
 - Monthly reports are not generated until the month is over. Each monthly report should appear by the second day of the following month.
-- Reports are downloadable in TSV format. These TSV reports include both usage numbers and percentages, allowing for simplified allocations and chargebacks. Percentages are calculated on a per-organization basis.
+- Reports are downloadable in CSV format. These CSV reports include both usage numbers and percentages, allowing for simplified allocations and chargebacks. Percentages are calculated on a per-organization basis.
 
 Monthly data can also be pulled using the tool's public API. For more information, see the [API endpoint documentation][1].
 
@@ -85,6 +84,10 @@ The table below shows a sample daily report for Infra usage by two tags: `app` a
 - No value means the resource was not tagged with that particular tag.
 - `|` (pipe) separated values (for example, `service1 | service2`) mean that a particular tag was applied multiple times on the resource.
 - A valid tag value (see the [Defining Tags documentation][3]) refers to the actual value of the respective tag.
+
+## Cost Attribution
+
+For direct billing customers, month-end cost attribution reports are generated at the end of each billing cycle. Cost data for the preceding month is available no later than the 19th of the current month. 
 
 #### Further data analysis
 
@@ -113,4 +116,5 @@ Each color block represents a unique tag value for each tag.
 
 [1]: https://docs.datadoghq.com/api/v1/usage-metering/#get-monthly-usage-attribution
 [2]: https://docs.datadoghq.com/api/v1/usage-metering/#get-hourly-usage-attribution
-[3]: https://docs.datadoghq.com/getting_started/tagging/#define-tags
+[3]: https://docs.datadoghq.com/api/latest/usage-metering/#get-monthly-cost-attribution
+[4]: https://docs.datadoghq.com/getting_started/tagging/#define-tags
