@@ -226,7 +226,7 @@ Lanes on the top are garbage collector **runtime activities** that may add extra
 {{< programming-lang lang="php" >}}
 See [prerequisites](#prerequisites) to learn how to enable this feature for PHP.
 
-There is one lane for each PHP **thread** (in PHP NTS this is just one lane, in PHP ZTS there is one lane per **thread**). Fibers that run in this **thread** are represented in the same lane.
+There is one lane for each PHP **thread**. In PHP NTS, this is one lane; in PHP ZTS, there is one lane per **thread**. Fibers that run in this **thread** are represented in the same lane.
 
 Lanes on the top are runtime activities that may add extra latency to your request, due to file compilation and garbage collection.
 {{< /programming-lang >}}

@@ -156,7 +156,7 @@ Configure the sampling distance for exceptions. The higher the sampling distance
 `DD_PROFILING_TIMELINE_ENABLED`
 : **INI**: `datadog.profiling.timeline_enabled`. INI available since `0.98.0`.<br>
 **Default**: `1`<br>
-Enable the timeline profile type. Added in version `0.89.0`.
+Enable the timeline profile type. Added in version `0.89.0`.<br><br>
 **Note**: This supersedes the `DD_PROFILING_EXPERIMENTAL_TIMELINE_ENABLED` environment variable (`datadog.profiling.experimental_timeline_enabled` INI setting), which was available since `0.89` (default `0`). If both are set, this one takes precedence.
 
 `DD_PROFILING_LOG_LEVEL`
