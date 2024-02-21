@@ -22,7 +22,7 @@ further_reading:
     text: "Remote Configuration"
 ---
 
-The Cloud Security Management (CSM) Enterprise package includes [CSM Threats][1], [CSM Misconfigurations][2] (cloud accounts and Agent), [CSM Identity Risks][3], and [CSM Vulnerabilities][4] (container images and hosts). To learn more about the available CSM packages, see [Setting up Cloud Security Management][8].
+The Cloud Security Management (CSM) Enterprise package includes [CSM Threats][1], [CSM Misconfigurations][2] (cloud accounts and Agent), [CSM Identity Risks][3], [CSM Vulnerabilities][4] (container images and hosts), and [Agentless Scanning][23] (container images and hosts). To learn more about the available CSM packages, see [Setting up Cloud Security Management][8].
 
 ## Getting started
 
@@ -67,3 +67,4 @@ Select your infrastructure type for details on how to enable CSM Enterprise on t
 [20]: https://console.aws.amazon.com/lambda/home
 [21]: https://app.datadoghq.com/logs?query=service%3Acloudtrail
 [22]: /security/cloud_security_management/setup/csm_enterprise/cloud_accounts
+[23]: /security/agentless_scanning
