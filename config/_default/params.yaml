@@ -75,7 +75,6 @@ code_language_ids:
     codepush: CodePush
     roku: Roku
     swiftui: Swift UI
-    unity: Unity
     java: Java
     cpp: 'C++'
     php: PHP
