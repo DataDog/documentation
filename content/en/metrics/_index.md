@@ -138,7 +138,7 @@ After selecting a metric, you can filter your query based on tag(s). For instanc
 
 #### Configure time aggregation
 
-Next, choose the granularity of your data using time rollup. In this example, you've defined that there is one data point for every hour (3600 seconds). You can choose how you want to aggregate the data in each time bucket. By default, _avg_ is applied, but other available options are _sum_, _min_, _max_, and _count_. You can also customize how your metrics data is aggregated and bucketed with functions. For example, if you wanted to apply max and customize how your metrics data is rolled up and bucketed in time with calendar aligned queries, you would use `.rollup(max, 60)`. For more information, see the [Functions][24] and [Rollup][23] documentation.
+Next, choose the granularity of your data using time rollup. In this example, you've defined that there is one data point for every hour (3600 seconds). You can choose how you want to aggregate the data in each time bucket. By default, _avg_ is applied, but other available options are _sum_, _min_, _max_, and _count_. You can also customize how your metrics data is aggregated and bucketed with functions or in-application modifiers. For example, if you wanted to apply max and customize how your metrics data is rolled up and bucketed in time with calendar aligned queries, you would use `.rollup(max, 60)`. For more information, see the [Functions][24], [Rollup][23], and [In-application modifiers][25] documentation.
 
 #### Configure space aggregation
 
@@ -213,3 +213,4 @@ Read the [metrics summary documentation][22] for more details.
 [22]: /metrics/summary/
 [23]: /dashboards/functions/rollup/#rollup-with-calendar-aligned-queries
 [24]: /dashboards/functions/
+[25]: /metrics/custom_metrics/type_modifiers/?tab=count#in-application-modifiers
