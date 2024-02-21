@@ -1,6 +1,6 @@
 ---
-title: Enable SSO with a generic identity provider
-kind: guide
+title: Enable SSO with a Generic Identity Provider
+kind: documentation
 ---
 
 Enabling Single Sign-On (SSO) in Cloudcraft allows you and your teammates to simplify authentication and log-in access to Cloudcraft.

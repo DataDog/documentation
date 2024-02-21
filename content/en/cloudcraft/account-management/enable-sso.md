@@ -56,7 +56,7 @@ Allow signing in to Cloudcraft directly from your identity provider dashboard.
 
 With **Strict mode** enabled, all users must log in with SAML SSO. Existing username/password or Google Sign In logins are disabled.
 
-Before enabling this option, please make sure that the SAML SSO login is working properly so that you do not end up locking yourself out.
+Before enabling this option, make sure that the SAML SSO login is working properly so that you don't end up locking yourself out of your account.
 
 [1]: https://help.cloudcraft.co/article/90-enable-sso-with-azure-ad
 [2]: https://help.cloudcraft.co/article/89-enable-sso-with-okta
