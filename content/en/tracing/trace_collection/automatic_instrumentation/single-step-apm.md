@@ -12,17 +12,9 @@ further_reading:
 
 ## Requirements
 
-**Languages and architectures**
-: Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
+- **Languages and architectures**: Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
 
-**Operating systems**
-: <ul><li>Alpine Linux<br><strong>Note</strong>: For .NET services, you must specify a tag with the <code>-musl</code> suffix for the pod annotation.
-  <li> Amazon Linux
-  <li> Debian
-  <li> Fedora
-  <li> Red Hat Linux
-  <li> Ubuntu</ul>
-
+- **Operating systems**: Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora), Docker, Kubernetes clusters with Linux containers.
 
 ## Enabling APM on your services in one step
 
