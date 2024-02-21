@@ -60,7 +60,7 @@ Monthly reports are updated daily and provide a month-to-date aggregation of usa
 - Previous months' reports are accessible through the time selector.
 - Reports are downloadable in CSV format. These CSV reports include both usage numbers and percentages, allowing for simplified allocations and chargebacks. Percentages are calculated on a per-organization basis.
 
-Monthly data can also be pulled via API. For more information, see the [API endpoint documentation][1].
+Monthly data can also be pulled using the API. For more information, see the [API endpoint documentation][1].
 
 ### Hourly usage attribution
 
