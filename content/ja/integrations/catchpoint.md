@@ -36,7 +36,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: catchpoint
-oauth: {}
 public_title: Catchpoint
 short_description: Catchpoint のアラートを Datadog イベントストリームへ送信。
 supported_os: []

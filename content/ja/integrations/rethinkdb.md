@@ -42,7 +42,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: rethinkdb
-oauth: {}
 public_title: RethinkDB
 short_description: ステータスやパフォーマンスなどのメトリクスを RethinkDB クラスターから収集します。
 supported_os:

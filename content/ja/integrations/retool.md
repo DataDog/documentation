@@ -36,7 +36,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: retool
-oauth: {}
 public_title: Retool
 short_description: Retool は内部ツールを素早く構築する方法です
 supported_os:

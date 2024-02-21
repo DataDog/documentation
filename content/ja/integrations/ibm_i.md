@@ -37,7 +37,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: ibm_i
-oauth: {}
 public_title: IBM i
 short_description: ジョブ、ジョブキュー、ASP などを含む IBM i システムをリモートで監視します。
 supported_os:

@@ -42,7 +42,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: confluent_platform
-oauth: {}
 public_title: Confluent Platform
 short_description: Confluent Platform のコンポーネントを監視する。
 supported_os:

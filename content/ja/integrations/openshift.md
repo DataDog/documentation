@@ -39,7 +39,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: OpenShift
-oauth: {}
 public_title: OpenShift
 short_description: ビッグアイデア用の Kubernetes プラットフォーム
 supported_os:

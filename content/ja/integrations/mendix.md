@@ -34,7 +34,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: mendix
-oauth: {}
 public_title: Mendix
 short_description: Mendix 環境メトリクスの監視
 supported_os:

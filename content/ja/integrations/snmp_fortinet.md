@@ -32,7 +32,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: snmp_fortinet
-oauth: {}
 public_title: Fortinet
 short_description: Fortinet ネットワークデバイスから SNMP メトリクスを収集
 supported_os:

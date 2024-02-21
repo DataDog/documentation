@@ -37,7 +37,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: neo4j
-oauth: {}
 public_title: Neo4j
 short_description: Neo4j のメトリクスを収集する
 supported_os:

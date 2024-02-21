@@ -33,7 +33,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: flagsmith
-oauth: {}
 public_title: Flagsmith
 short_description: Les événements de changement de flag dans Flagsmith sont affichés
   dans Datadog.

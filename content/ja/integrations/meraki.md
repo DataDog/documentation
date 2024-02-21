@@ -39,7 +39,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: meraki
-oauth: {}
 public_title: Cisco Meraki
 short_description: NDM メトリクス、ログ、Cloud SIEM を使用して Cisco Meraki プラットフォームを監視する
 supported_os:

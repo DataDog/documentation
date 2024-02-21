@@ -39,7 +39,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: buoyant_cloud
-oauth: {}
 public_title: Buoyant Cloud
 short_description: Buoyant Cloud は、お客様のクラスター上でフルマネージド Linkerd を提供します。
 supported_os:
