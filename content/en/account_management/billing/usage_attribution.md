@@ -48,7 +48,7 @@ The **Edit Tags** popover allows:
 
 ### Monthly usage attribution
 
-Once the reports start to be generated, they are updated daily and aggregated monthly in a table.
+Monthly reports are updated daily and provide a month-to-date aggregation of usage data.
 
 {{< img src="account_management/billing/usage_attribution/Usage-Attribution-Monthly-Facets.png" alt="Applied tags in Datadog" style="width:100%;" >}}
 
