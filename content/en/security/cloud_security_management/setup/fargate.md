@@ -66,7 +66,7 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
         },
         {
             "name": "datadog-agent",
-            "image": "datadog/agent:7.51.0-rc.6-linux",
+            "image": "datadog/agent:latest",
             "essential": true,
             "environment": [
                 {
@@ -208,7 +208,7 @@ spec:
            mountPath: "/cws-instrumentation-volume"
            readOnly: true
      - name: datadog-agent
-       image: datadog/agent:7.51.0-rc.6-linux 
+       image: datadog/agent:latest 
        env:
          - name: DD_API_KEY
            value: "<DD_API_KEY>"
