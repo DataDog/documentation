@@ -127354,6 +127354,16 @@ main:
     url: real_user_monitoring/data_management
     parent: rum
     weight: 12
+  - name: Billing
+    identifier: rum_billing
+    url: real_user_monitoring/data_management/billing
+    parent: rum_data_management
+    weight: 1201
+  - name: Role-Based Access Control
+    identifier: rum_rbac
+    url: real_user_monitoring/data_management/role_based_access_control
+    parent: rum_data_management
+    weight: 1202
   - name: Data Security
     identifier: data_security_real_user_monitoring
     url: data_security/real_user_monitoring/
