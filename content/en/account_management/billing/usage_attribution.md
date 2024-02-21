@@ -99,7 +99,7 @@ A timeseries of Usage Attribution data can be viewed by clicking on "Track Usage
 For direct billing customers, month-end cost attribution reports are generated at the end of each billing cycle to enable monthly chargeback and cost allocation processes. 
 - Cost data for the preceding month is available no later than the 19th of the current month.
 - Cost attribution data is not currently available in GovCloud datacenters
-- Monthly Cost Attribution data is [available via API][4]
+- Monthly Cost Attribution data is [available with the API][4]
 
 {{< img src="account_management/billing/usage_attribution/Cost-Attribution-Monthly.png" alt="Cost Attribution report" style="width:100%;" >}}
 
