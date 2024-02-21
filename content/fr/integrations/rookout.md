@@ -33,7 +33,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: rookout
-oauth: {}
 public_title: Debugging en temps réel Rookout
 short_description: Utilisez Rookout pour recueillir des métriques depuis votre code
   exécuté en production.

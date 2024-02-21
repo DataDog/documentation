@@ -45,7 +45,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: agora_analytics
-oauth: {}
 public_title: Agora Analytics
 short_description: Datadog で Agora Analytics Collector のメトリクスを表示する
 supported_os:

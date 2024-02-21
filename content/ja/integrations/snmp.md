@@ -45,7 +45,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: snmp
-oauth: {}
 public_title: SNMP
 short_description: ネットワークデバイスから SNMP メトリクスを収集。
 supported_os:

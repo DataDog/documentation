@@ -25,7 +25,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: rum_cypress
-oauth: {}
 public_title: Cypress
 short_description: Datadog を使用したアプリケーションの Cypress テスト実行の監視
 supported_os:

@@ -35,7 +35,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: cisco_aci
-oauth: {}
 public_title: CiscoACI
 short_description: Surveillez l'utilisation et les performances de Cisco ACI.
 supported_os:

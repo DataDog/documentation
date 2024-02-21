@@ -45,7 +45,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: hudi
-oauth: {}
 public_title: Hudi
 short_description: Hudi の構成に関するメトリックスを追跡します。
 supported_os:

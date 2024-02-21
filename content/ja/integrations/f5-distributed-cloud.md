@@ -27,7 +27,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: f5-distributed-cloud
-oauth: {}
 public_title: F5 Distributed Cloud Services
 short_description: F5 Distributed Cloud Services のイベントログをストリーミングし、視覚化します。
 supported_os:

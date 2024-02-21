@@ -36,7 +36,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: sigsci
-oauth: {}
 public_title: Signal Sciences
 short_description: Signal Sciences からデータを収集して異常値を表示し、攻撃を阻止
 supported_os:

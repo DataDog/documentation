@@ -39,7 +39,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: altostra
-oauth: {}
 public_title: Altostra
 short_description: Altostra から Datadog へクラウドアプリケーションログを自動的に送信
 supported_os:

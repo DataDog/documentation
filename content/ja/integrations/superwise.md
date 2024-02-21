@@ -37,7 +37,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: superwise
-oauth: {}
 public_title: Superwise
 short_description: 本番環境の機械学習モデルのためのモデル観測プラットフォーム
 supported_os:

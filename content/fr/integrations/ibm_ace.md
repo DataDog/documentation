@@ -35,7 +35,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: ibm_ace
-oauth: {}
 public_title: IBM ACE
 short_description: Surveillez les statistiques de vos ressources IBM ACE et les flux
   de messages.

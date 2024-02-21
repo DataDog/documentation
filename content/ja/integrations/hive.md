@@ -39,7 +39,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: hive
-oauth: {}
 public_title: Hive
 short_description: HiveServer2 と Hive MetaStore から、さまざまな JMX メトリクスを収集
 supported_os:
