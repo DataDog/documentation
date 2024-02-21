@@ -32,7 +32,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: drata
-oauth: {}
 public_title: Drata
 short_description: Datadog のコンプライアンス情報を Drata に取り込む
 supported_os:

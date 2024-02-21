@@ -44,7 +44,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: voltdb
-oauth: {}
 public_title: VoltDB
 short_description: ステータスやパフォーマンスなどのメトリクスを VoltDB クラスターから収集します。
 supported_os:

@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: nvidia_jetson
-oauth: {}
 public_title: Nvidia Jetson
 short_description: Nvidia Jetson ボードに関するメトリクスを収集します
 supported_os:

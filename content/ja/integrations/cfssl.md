@@ -35,7 +35,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: cfssl
-oauth: {}
 public_title: cfssl
 short_description: cfssl インスタンスを監視する
 supported_os:

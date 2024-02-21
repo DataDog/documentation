@@ -41,7 +41,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: hazelcast
-oauth: {}
 public_title: Hazelcast
 short_description: Hazelcast メンバーと管理センターを監視します。
 supported_os:

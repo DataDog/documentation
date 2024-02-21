@@ -42,7 +42,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: lambdatest
-oauth: {}
 public_title: LambdaTest
 short_description: 最も強力な自動テストプラットフォーム
 supported_os:

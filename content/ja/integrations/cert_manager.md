@@ -37,7 +37,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: cert_manager
-oauth: {}
 public_title: cert-manager
 short_description: cert-manager のすべてのメトリクスを Datadog で追跡
 supported_os:

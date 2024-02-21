@@ -39,7 +39,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: filemage
-oauth: {}
 public_title: FileMage
 short_description: FileMage サービス用モニタリング Agent
 supported_os:

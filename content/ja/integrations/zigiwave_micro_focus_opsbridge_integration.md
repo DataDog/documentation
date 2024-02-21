@@ -30,7 +30,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: zigiwave_micro_focus_opsbridge_integration
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true

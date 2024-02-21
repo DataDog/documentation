@@ -36,7 +36,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: cyral
-oauth: {}
 public_title: Cyral
 short_description: Cyral インスタンスモニタリング MySQL からランタイムメトリクスを収集。
 supported_os:

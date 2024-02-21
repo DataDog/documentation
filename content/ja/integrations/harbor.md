@@ -35,12 +35,11 @@ draft: false
 git_integration_title: harbor
 integration_id: harbor
 integration_title: Harbor
-integration_version: 3.1.0
+integration_version: 3.2.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: harbor
-oauth: {}
 public_title: Harbor
 short_description: Harbor コンテナレジストリの健全性を監視
 supported_os:

@@ -30,7 +30,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: isdown
-oauth: {}
 public_title: IsDown
 short_description: IsDown は、企業がすべてのサードパーティのステータスページを一元的に監視することを支援します
 supported_os:

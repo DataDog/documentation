@@ -2060,7 +2060,8 @@ components:
           type: number
       type: object
     CIAppAggregateSort:
-      description: A sort rule.
+      description: A sort rule. The `aggregation` field is required when `type` is
+        `measure`.
       example:
         aggregation: count
         order: asc
@@ -23133,7 +23134,7 @@ paths:
         - cases_read
       summary: Search cases
       tags:
-      - Cases
+      - Case Management
       x-menu-order: 1
       x-pagination:
         limitParam: page[size]
@@ -23175,7 +23176,7 @@ paths:
         - cases_write
       summary: Create a case
       tags:
-      - Cases
+      - Case Management
       x-given:
         case:
           parameters:
@@ -23218,7 +23219,7 @@ paths:
         - cases_read
       summary: Get all projects
       tags:
-      - Cases Projects
+      - Case Management
       x-menu-order: 2
       x-undo:
         type: safe
@@ -23256,7 +23257,7 @@ paths:
         - cases_write
       summary: Create a project
       tags:
-      - Cases Projects
+      - Case Management
       x-menu-order: 1
       x-undo:
         operationId: DeleteProject
@@ -23290,7 +23291,7 @@ paths:
         - cases_write
       summary: Remove a project
       tags:
-      - Cases Projects
+      - Case Management
       x-menu-order: 4
       x-undo:
         type: idempotent
@@ -23323,7 +23324,7 @@ paths:
         - cases_read
       summary: Get the details of a project
       tags:
-      - Cases Projects
+      - Case Management
       x-menu-order: 3
       x-undo:
         type: safe
@@ -23357,7 +23358,7 @@ paths:
         - cases_read
       summary: Get the details of a case
       tags:
-      - Cases
+      - Case Management
       x-menu-order: 3
       x-undo:
         type: safe
@@ -23398,7 +23399,7 @@ paths:
         - cases_write
       summary: Archive case
       tags:
-      - Cases
+      - Case Management
       x-menu-order: 8
       x-undo:
         type: idempotent
@@ -23439,7 +23440,7 @@ paths:
         - cases_write
       summary: Assign case
       tags:
-      - Cases
+      - Case Management
       x-menu-order: 6
       x-undo:
         type: idempotent
@@ -23480,7 +23481,7 @@ paths:
         - cases_write
       summary: Update case priority
       tags:
-      - Cases
+      - Case Management
       x-menu-order: 5
       x-undo:
         type: idempotent
@@ -23521,7 +23522,7 @@ paths:
         - cases_write
       summary: Update case status
       tags:
-      - Cases
+      - Case Management
       x-menu-order: 4
       x-undo:
         type: idempotent
@@ -23562,7 +23563,7 @@ paths:
         - cases_write
       summary: Unarchive case
       tags:
-      - Cases
+      - Case Management
       x-menu-order: 9
       x-undo:
         type: idempotent
@@ -23603,7 +23604,7 @@ paths:
         - cases_write
       summary: Unassign case
       tags:
-      - Cases
+      - Case Management
       x-menu-order: 7
       x-undo:
         type: idempotent
@@ -29584,7 +29585,8 @@ paths:
         schema:
           type: string
       - description: The number of hours of look back (from now) to estimate cardinality
-          with.
+          with. Estimates are based on historical data, and unspecified fields default
+          to the minimum 49 hours.
         example: 49
         in: query
         name: filter[hours_ago]
@@ -29592,6 +29594,7 @@ paths:
         schema:
           format: int32
           maximum: 2147483647
+          minimum: 49
           type: integer
       - description: The number of aggregations that a `count`, `rate`, or `gauge`
           metric is configured to use. Max number of aggregation combos is 9.
@@ -36837,10 +36840,8 @@ tags:
     [Test Visibility in Datadog page](https://docs.datadoghq.com/tests/) for more
     information.
   name: CI Visibility Tests
-- description: View and manage cases within Datadog
-  name: Cases
-- description: View and manage project within Case Management
-  name: Cases Projects
+- description: View and manage cases and project within Case Management
+  name: Case Management
 - description: The Cloud Cost Management API allows you to set up, edit, and delete
     Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management
     page](https://docs.datadoghq.com/cloud_cost_management/) for more information.

@@ -33,7 +33,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: oke
-oauth: {}
 public_title: Oracle Container Engine for Kubernetes
 short_description: OKE は、Oracle が管理するコンテナオーケストレーションサービスです。
 supported_os:
