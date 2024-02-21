@@ -28,16 +28,16 @@ This feature does not support product usage that cannot be tagged during instrum
 
 ## Getting started
 
-To start receiving daily data, an administrator needs to create a new report with the user interface.
+To start receiving daily data, an administrator needs to create a select tags for the report.
 
 {{< img src="account_management/billing/usage_attribution/advanced-usage-reporting.png" alt="Getting Started with Usage Attribution in Datadog" style="width:100%;" >}}
 
-The **Applied Tags** section enables the following:
+The **Edit Tags** popover allows:
 
 - Entering up to three tag keys from a dropdown. The dropdown is pre-populated with existing tags on both the root account and any child organizations under the account.
 - Deleting and editing existing tags.
 
-{{< img src="account_management/billing/advanced-usage-reporting-02.png" alt="Applied tags in Datadog" style="width:80%;" >}}
+{{< img src="account_management/billing/usage_attribution/Edit-Tags-Popover.png" alt="Edit Tags in Usage Attribution" style="width:80%;" >}}
 
 - Once the tags are configured, it takes 24 hours for the first report to be generated.
 - The reports are generated on an ongoing basis.
@@ -48,27 +48,23 @@ The **Applied Tags** section enables the following:
 
 ### Monthly usage attribution
 
-Once the reports start to be generated, they are updated daily and aggregated monthly in this table.
+Once the reports start to be generated, they are updated daily and aggregated monthly in a table.
 
-{{< img src="account_management/billing/usage_attribution/Usage-Attribution-v2-Total-Usage.png" alt="Applied tags in Datadog" style="width:100%;" >}}
+{{< img src="account_management/billing/usage_attribution/Usage-Attribution-Monthly-Facets.png" alt="Applied tags in Datadog" style="width:100%;" >}}
 
-- Data is shown by all tag keys selected e.g. by app and service. 
-- Data can be shown by specific organization or tag keys by querying on the left-side dropdown. 
+- Data for specific products, tags, and organizations can be selected using the facet selector.
+- Data can be grouped and ungrouped by the tag keys selected.
 - Value and Percentage options are available for table display. 
 - Data shown on the table can be edited to include select products. 
-
-{{< img src="account_management/billing/usage_attribution/usage-attribution-options.png" alt="Usage Attribution options dropdown menu" style="width:100%;" >}}
-
 - If multi-org is enabled, usage is summarized across all Datadog organizations at the parent account.
 - Previous months' reports are accessible through the time selector.
-- Monthly reports are not generated until the month is over. Each monthly report should appear by the second day of the following month.
 - Reports are downloadable in CSV format. These CSV reports include both usage numbers and percentages, allowing for simplified allocations and chargebacks. Percentages are calculated on a per-organization basis.
 
-Monthly data can also be pulled using the tool's public API. For more information, see the [API endpoint documentation][1].
+Monthly data can also be pulled via API. For more information, see the [API endpoint documentation][1].
 
 ### Hourly usage attribution
 
-Hourly data can be pulled using the tool's public API. For more information, see the [API endpoint documentation][2].
+Hourly data can be pulled via API. For more information, see the [API endpoint documentation][2].
 
 ### Interpreting the data
 
@@ -85,30 +81,27 @@ The table below shows a sample daily report for Infra usage by two tags: `app` a
 - `|` (pipe) separated values (for example, `service1 | service2`) mean that a particular tag was applied multiple times on the resource.
 - A valid tag value (see the [Defining Tags documentation][3]) refers to the actual value of the respective tag.
 
-## Cost Attribution
-
-For direct billing customers, month-end cost attribution reports are generated at the end of each billing cycle. Cost data for the preceding month is available no later than the 19th of the current month. 
-
 #### Further data analysis
 
 When using multiple tags, both the Hourly and Monthly Usage Attribution reports contain data for all possible combinations of those tags, and are suitable to use as base datasets for further data analysis tasks. For instance, you can use grouping or pivoting to produce views focused on a subset of the tags, or to perform aggregations across custom date ranges.
 
 ## Tracking usage
 
-- Data can be shown by specific product(s), organization, or tag keys by editing the search queries below **Usage Attribution Trends**. 
-- Data can be shown at a daily, weekly, or monthly level. 
+A timeseries of Usage Attribution data can be viewed by clicking on "Track Usage"
+- Data for specific products, organization, or tag keys can be selected using the facet selector.
+- Data can be graphed for a day, week, or month by using the time selector above the graphs.
 
-{{< img src="account_management/billing/usage_attribution/graph-by-tags.png" alt="Infra Hosts graphs separated by tags" style="width:100%;" >}}
+{{< img src="account_management/billing/usage_attribution/Usage-Attribution-Hourly-Facets.png" alt="Infra Hosts graphs separated by tags" style="width:100%;" >}}
 
-### Interpreting the data
 
-For each product, graphs are displayed by tags. 
+## Cost Attribution
 
-{{< img src="account_management/billing/usage_attribution/multiple-graphs-by-tags.png" alt="Infra Hosts and Custom Metrics graphs separated by tags" style="width:100%;" >}}
+For direct billing customers, month-end cost attribution reports are generated at the end of each billing cycle to enable monthly chargeback and cost allocation processes. 
+- Cost data for the preceding month is available no later than the 19th of the current month.
+- Cost attribution data is not currently available in GovCloud datacenters
+- Monthly Cost Attribution data is [available via API][4]
 
-Each color block represents a unique tag value for each tag.
-
-{{< img src="account_management/billing/usage_attribution/histogram-graph-tag.png" alt="A breakdown of a pillar in the Infra Hosts graph" style="width:100%;" >}}
+{{< img src="account_management/billing/usage_attribution/Cost-Attribution-Monthly.png" alt="Cost Attribution report" style="width:100%;" >}}
 
 ## Further Reading
 
@@ -116,5 +109,5 @@ Each color block represents a unique tag value for each tag.
 
 [1]: https://docs.datadoghq.com/api/v1/usage-metering/#get-monthly-usage-attribution
 [2]: https://docs.datadoghq.com/api/v1/usage-metering/#get-hourly-usage-attribution
-[3]: https://docs.datadoghq.com/api/latest/usage-metering/#get-monthly-cost-attribution
-[4]: https://docs.datadoghq.com/getting_started/tagging/#define-tags
+[3]: https://docs.datadoghq.com/getting_started/tagging/#define-tags
+[4]: https://docs.datadoghq.com/api/latest/usage-metering/#get-monthly-cost-attribution
