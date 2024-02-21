@@ -29585,7 +29585,8 @@ paths:
         schema:
           type: string
       - description: The number of hours of look back (from now) to estimate cardinality
-          with.
+          with. Estimates are based on historical data, and unspecified fields default
+          to the minimum 49 hours.
         example: 49
         in: query
         name: filter[hours_ago]
@@ -29593,6 +29594,7 @@ paths:
         schema:
           format: int32
           maximum: 2147483647
+          minimum: 49
           type: integer
       - description: The number of aggregations that a `count`, `rate`, or `gauge`
           metric is configured to use. Max number of aggregation combos is 9.
