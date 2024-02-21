@@ -94,7 +94,7 @@ A timeseries of Usage Attribution data can be viewed by clicking on "Track Usage
 {{< img src="account_management/billing/usage_attribution/Usage-Attribution-Hourly-Facets.png" alt="Infra Hosts graphs separated by tags" style="width:100%;" >}}
 
 
-## Cost Attribution
+## Cost attribution
 
 For direct billing customers, month-end cost attribution reports are generated at the end of each billing cycle to enable monthly chargeback and cost allocation processes. 
 - Cost data for the preceding month is available no later than the 19th of the current month.
