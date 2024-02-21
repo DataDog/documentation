@@ -184,7 +184,7 @@ In addition to integrating with [Slack][7], Incident Management also integrates 
 - [PagerDuty][13] and [OpsGenie][14] to send incident notifications to your on-call engineers.
 - [Jira][15] to create a Jira ticket for an incident.
 - [Webhooks][16] to send incident notifications using webhooks (for example, [sending SMS to Twilio][17]).
-- [Statuspage][17] to create and update Statuspage incidents.
+- [Statuspage][19] to create and update Statuspage incidents.
 
 ## Ready to try it out?
 
