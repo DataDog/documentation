@@ -150,7 +150,7 @@ This is described in more detail [in the Microsoft documentation][7]
       adoprovider: MSOLEDBSQL
   ```
 
-#### Other Microsoft OLE DB Driver versions and ODBC drivers
+#### Other Microsoft OLE DB and ODBC driver versions
 
 If you are using an OLE DB driver other than `MSOLEDBSQL` 2019 or ODBC drivers, this error can be resolved by setting `TrustServerCertificate=yes` in the connection string. For example, for the `ODBC` driver:
 
