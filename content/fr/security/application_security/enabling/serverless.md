@@ -70,35 +70,35 @@ Pour installer et configurer le plug-in Serverless Framework Datadog :
    - **Python** 
        ```sh
        # Use this format for x86-based Lambda deployed in AWS commercial regions
-          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:72
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
 
           # Use this format for arm64-based Lambda deployed in AWS commercial regions
-          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:72
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
 
           # Use this format for x86-based Lambda deployed in AWS GovCloud regions
-          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:72
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
 
           # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
-          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:72
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
           ```
-          Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour `RUNTIME` sont `Python38`, `Python39`, `Python310`, `Python311` et `Python312`.
+          Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour `RUNTIME` sont {{< latest-lambda-layer-version layer="python-versions" >}}.
 
    - **Node**   
        ``` sh
        # Use this format for AWS commercial regions
-         arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:91
+         arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
 
          # Use this format for AWS GovCloud regions
-         arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
+         arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
          ```  
-         Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour RUNTIME sont `Node16-x`, `Node18-x` et `Node20-x`.
+         Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour RUNTIME sont {{< latest-lambda-layer-version layer="node-versions" >}}.
 
    - **Java** : [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN en respectant l'un des formats suivants, en fonction de l'endroit où votre fonction Lambda est déployée. Remplacez `<AWS_REGION>` par une région AWS valide telle que `us-east-1` :
      ```sh
      # In AWS commercial regions
-     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:8
+     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
      # In AWS GovCloud regions
-     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:8
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
      ```
    - **Go** : le traceur Go ne fait appel à aucune couche et fonctionne comme un module Go standard. Vous pouvez installer la dernière version avec la commande suivante :
      ```sh
@@ -118,13 +118,13 @@ Pour installer et configurer le plug-in Serverless Framework Datadog :
 2. Installez l'extension Lambda Datadog en configurant les couches pour votre fonction Lambda à l'aide de l'ARN, en respectant l'un des formats suivants. Remplacez `<AWS_REGION>` par une région AWS valide telle que `us-east-1` :
    ```sh
    # x86-based Lambda in AWS commercial regions
-   arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:36
+   arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
    # arm64-based Lambda in AWS commercial regions
-   arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:36
+   arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
    # x86-based Lambda in AWS GovCloud regions
-   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:36
+   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
    # arm64-based Lambda in AWS GovCloud regions
-   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:36
+   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
    ```
    [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 {{< /site-region >}}
@@ -134,36 +134,36 @@ Pour installer et configurer le plug-in Serverless Framework Datadog :
    - **Python** 
        ```sh
        # Use this format for x86-based Lambda deployed in AWS commercial regions
-          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:72
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
 
           # Use this format for arm64-based Lambda deployed in AWS commercial regions
-          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:72
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
 
           # Use this format for x86-based Lambda deployed in AWS GovCloud regions
-          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:72
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
 
           # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
-          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:72
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
           ```
-          Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour `RUNTIME` sont `Python38`, `Python39`, `Python310`, `Python311` et `Python312`.
+          Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour `RUNTIME` sont {{< latest-lambda-layer-version layer="python-versions" >}}.
 
    - **Node**   
        ``` sh
        # Use this format for AWS commercial regions
-         arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:91
+         arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
 
          # Use this format for AWS GovCloud regions
-         arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
+         arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
          ```  
-         Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour RUNTIME sont `Node16-x`, `Node18-x` et `Node20-x`.
+         Remplacez `<AWS_REGION>` par une région AWS valide, comme `us-east-1`. Les options disponibles pour RUNTIME sont {{< latest-lambda-layer-version layer="node-versions" >}}.
 
 
    - **Java** : [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN en respectant l'un des formats suivants, en fonction de l'endroit où votre fonction Lambda est déployée. Remplacez `<AWS_REGION>` par une région AWS valide telle que `us-east-1` :
      ```sh
      # In AWS commercial regions
-     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:8
+     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
      # In AWS GovCloud regions
-     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:8
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
      ```
    - **Go** : le traceur Go ne fait appel à aucune couche et fonctionne comme un module Go standard. Vous pouvez installer la dernière version avec la commande suivante :
      ```sh
@@ -172,24 +172,24 @@ Pour installer et configurer le plug-in Serverless Framework Datadog :
    - **.NET** : [Configurez les couches][1] pour votre fonction Lambda à l'aide de l'ARN en respectant l'un des formats suivants, en fonction de l'endroit où votre fonction Lambda est déployée. Remplacez `<AWS_REGION>` par une région AWS valide telle que `us-east-1` :
      ```sh
      # x86-based Lambda in AWS commercial regions
-     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet:6
+     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      # arm64-based Lambda in AWS commercial regions
-     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet-ARM:6
+     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      # x86-based Lambda in AWS GovCloud regions
-     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:6
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      # arm64-based Lambda  in AWS GovCloud regions
-     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:6
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      ```
 2. Installez l'extension Lambda Datadog en configurant les couches pour votre fonction Lambda à l'aide de l'ARN, en respectant l'un des formats suivants. Remplacez `<AWS_REGION>` par une région AWS valide telle que `us-east-1` :
    ```sh
    # x86-based Lambda in AWS commercial regions
-   arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:36
+   arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
    # arm64-based Lambda in AWS commercial regions
-   arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:36
+   arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
    # x86-based Lambda in AWS GovCloud regions
-   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:36
+   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
    # arm64-based Lambda in AWS GovCloud regions
-   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:36
+   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
    ```
 
    [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html

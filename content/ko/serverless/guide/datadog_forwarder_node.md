@@ -262,10 +262,10 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION
 
 ```
 
-사용 가능한 `RUNTIME`옵션은 `Node16-x`, `Node18-x`, `Node20-x`입니다. 최신 `VERSION`은 `{{< latest-lambda-layer-version layer="node" >}}`입니다. 다음 예를 참고하세요.
+사용 가능한 `RUNTIME`옵션은 {{< latest-lambda-layer-version layer="node-versions" >}}입니다. 최신 `VERSION`은 `{{< latest-lambda-layer-version layer="node" >}}`입니다. 다음 예를 참고하세요.
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x:{{< latest-lambda-layer-version layer="node" >}}
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}}:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
 Lambda 함수가 코드 서명을 사용하도록 설정된 경우 먼저 Datadog Signing Profile ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`)을 함수의 [코드 서명 구성][2]에 추가한 후 Datadog Lambda 라이브러리를 레이어로 추가해야 합니다.

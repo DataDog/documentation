@@ -80,35 +80,35 @@ Datadog Serverless Framework プラグインをインストールして構成す
    - **Python**
        ```sh
        # Use this format for x86-based Lambda deployed in AWS commercial regions
-          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:72
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
 
           # Use this format for arm64-based Lambda deployed in AWS commercial regions
-          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:72
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
 
           # Use this format for x86-based Lambda deployed in AWS GovCloud regions
-          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:72
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
 
           # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
-          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:72
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
           ```
-          `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。`RUNTIME` オプションは、`Python38`、`Python39`、`Python310`、`Python311` または `Python312` が利用可能です。
+          `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。`RUNTIME` オプションは、{{< latest-lambda-layer-version layer="python-versions" >}} が利用可能です。
 
    - **Node**
        ``` sh
        # Use this format for AWS commercial regions
-         arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:91
+         arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
 
          # Use this format for AWS GovCloud regions
-         arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
+         arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
          ```
-         `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。RUNTIME オプションは、`Node16-x`、`Node18-x`、`Node20-x` が利用可能です。
+         `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。RUNTIME オプションは、{{< latest-lambda-layer-version layer="node-versions" >}} が利用可能です。
 
    - **Java**: Lambda がデプロイされている場所に応じて、以下のいずれかの形式の ARN を使用して Lambda 関数の[レイヤーを構成します][1]。`<AWS_REGION>` は `us-east-1` などの有効な AWS リージョンに置き換えてください。
      ```sh
      # In AWS commercial regions
-     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:8
+     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
      # In AWS GovCloud regions
-     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:8
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
      ```
    - **Go**: Go トレーサーはレイヤーに依存せず、通常の Go モジュールとして使用できます。以下で最新バージョンにアップグレードできます。
      ```sh
@@ -117,24 +117,24 @@ Datadog Serverless Framework プラグインをインストールして構成す
    - **.NET**: Lambda がデプロイされている場所に応じて、以下のいずれかの形式の ARN を使用して Lambda 関数の[レイヤーを構成します][1]。`<AWS_REGION>` は `us-east-1` などの有効な AWS リージョンに置き換えてください。
      ```sh
      # x86-based Lambda in AWS commercial regions
-     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:6
+     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      # arm64-based Lambda in AWS commercial regions
-     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet-ARM:6
+     arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      # x86-based Lambda in AWS GovCloud regions
-     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:6
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      # arm64-based Lambda  in AWS GovCloud regions
-     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:6
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      ```
 2. 以下のいずれかの関数で ARN を使用して Lambda 関数のレイヤーを構成し、Datadog Lambda 拡張機能をインストールします。`<AWS_REGION>` は、`us-east-1` など有効な AWS リージョンに置き換えてください。
    ```sh
    # x86-based Lambda in AWS commercial regions
-   arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:36
+   arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
    # arm64-based Lambda in AWS commercial regions
-   arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:36
+   arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
    # x86-based Lambda in AWS GovCloud regions
-   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:36
+   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
    # arm64-based Lambda in AWS GovCloud regions
-   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:36
+   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
    ```
    [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 {{< /site-region >}}
@@ -144,36 +144,36 @@ Datadog Serverless Framework プラグインをインストールして構成す
    - **Python**
        ```sh
        # Use this format for x86-based Lambda deployed in AWS commercial regions
-          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:72
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
 
           # Use this format for arm64-based Lambda deployed in AWS commercial regions
-          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:72
+          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
 
           # Use this format for x86-based Lambda deployed in AWS GovCloud regions
-          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:72
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
 
           # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
-          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:72
+          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
           ```
-`<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えます。`RUNTIME` オプションは、`Python38`、`Python39`、`Python310`、`Python311`、`Python312` が利用可能です。
+`<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えます。`RUNTIME` オプションは、{{< latest-lambda-layer-version layer="python-versions" >}} が利用可能です。
 
    - **Node**
        ``` sh
        # Use this format for AWS commercial regions
-         arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:91
+         arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
 
          # Use this format for AWS GovCloud regions
-         arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
+         arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
          ```
-         `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。RUNTIME オプションは、`Node16-x`、`Node18-x`、`Node20-x` が利用可能です。
+         `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。RUNTIME オプションは、{{< latest-lambda-layer-version layer="node-versions" >}} が利用可能です。
 
 
    - **Java**: Lambda がデプロイされている場所に応じて、以下のいずれかの形式の ARN を使用して Lambda 関数の[レイヤーを構成します][1]。`<AWS_REGION>` は `us-east-1` などの有効な AWS リージョンに置き換えてください。
      ```sh
      # In AWS commercial regions
-     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:8
+     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
      # In AWS GovCloud regions
-     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:8
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
      ```
    - **Go**: Go トレーサーはレイヤーに依存せず、通常の Go モジュールとして使用できます。以下で最新バージョンにアップグレードできます。
      ```sh
@@ -182,24 +182,24 @@ Datadog Serverless Framework プラグインをインストールして構成す
    - **.NET**: Lambda がデプロイされている場所に応じて、以下のいずれかの形式の ARN を使用して Lambda 関数の[レイヤーを構成します][1]。`<AWS_REGION>` は `us-east-1` などの有効な AWS リージョンに置き換えてください。
      ```sh
      # x86-based Lambda in AWS commercial regions
-     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet:6
+     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      # arm64-based Lambda in AWS commercial regions
-     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet-ARM:6
+     arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      # x86-based Lambda in AWS GovCloud regions
-     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:6
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      # arm64-based Lambda  in AWS GovCloud regions
-     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:6
+     arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
      ```
 2. 以下のいずれかの関数で ARN を使用して Lambda 関数のレイヤーを構成し、Datadog Lambda 拡張機能をインストールします。`<AWS_REGION>` は、`us-east-1` など有効な AWS リージョンに置き換えてください。
    ```sh
    # x86-based Lambda in AWS commercial regions
-   arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:36
+   arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
    # arm64-based Lambda in AWS commercial regions
-   arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:36
+   arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
    # x86-based Lambda in AWS GovCloud regions
-   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:36
+   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
    # arm64-based Lambda in AWS GovCloud regions
-   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:36
+   arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
    ```
 
    [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
