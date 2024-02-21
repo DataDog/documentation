@@ -1,23 +1,23 @@
 ---
-title: Roles and permissions
-kind: guide
+title: Roles and Permissions
+kind: documentation
 ---
 
 Members of a Cloudcraft team may be assigned one of three different user roles:
 
-- Account Owner.
-- Administrator.
-- User.
+- Account Owner
+- Administrator
+- User
 
-This help article will help you understand what actions each role can perform.
+## User roles and default permissions
 
-## User roles and their default permissions
+**Note**: To grant read-only access to blueprints, you can create a shareable blueprint link and embed the blueprint in an internal wiki page.
 
-### Account owner
+### Account Owner
 
-The Account Owner has access to everything in your Cloudcraft account and is the only one who can change subscription settings, or view and change billing information.
+The Account Owner has access to everything in your Cloudcraft account and is the only role that can change subscription settings, or view and change billing information.
 
-By default, the person who signed up for a paid Cloudcraft subscription is the Account Owner, but by [sending a message to our support team][1] you can have other members of your team with this role.
+By default, the person who signed up for a paid Cloudcraft subscription is the Account Owner. To assign the role to other members of your team, [contact Support][1].
 
 **Permissions:**
 
@@ -40,9 +40,9 @@ By default, the person who signed up for a paid Cloudcraft subscription is the A
 
 ### Administrator
 
-Administrators are the second most privileged role in Cloudcraft, and have access to everything but billing and subscription information.
+Administrators are the second-most privileged role in Cloudcraft, and have access to everything but billing and subscription information.
 
-This role was created for project leads who require permission to manage their team or sub-teams within Cloudcraft.
+This role is for project leads who require permission to manage their team or sub-teams within Cloudcraft.
 
 **Permissions:**
 
@@ -50,7 +50,7 @@ This role was created for project leads who require permission to manage their t
 - Manage team settings (for teams they are assigned)
   - Invite new administrators and users
   - Delete administrators and users
-  - Revoke teammate invitations to join your Cloudcraft team
+  - Revoke team invitations to join your Cloudcraft team
 - Manage AWS accounts
   - Connect new AWS accounts
   - Remove AWS accounts
@@ -62,7 +62,7 @@ This role was created for project leads who require permission to manage their t
 
 ### User
 
-Users are the least-privileged role type for Cloudcraft team members. Users should be members of teams with whom they will share blueprints, collaborate on AWS accounts, and generally work together.
+Users are the least-privileged role type in Cloudcraft. Users are members of teams with whom they can share blueprints, collaborate on AWS accounts, and generally work together.
 
 **Permissions:**
 
@@ -89,24 +89,6 @@ Here is an example to make this easier to understand:
     - [User 1 from Cross-org Team 1, but explicit membership determines the team role]
 
 In this example, if "Team 1" is an auditing team with read-only members, "User 1" will implicitly have read-only access to "Team 2", while the role explicitly assigned to the user in "Team 3" takes precedence.
-
-## Common questions
-
-**Who owns a Cloudcraft account?**
-
-The person who signed up for a paid Cloudcraft subscription is the default Account Owner, but multiple owners can exist if you [reach out to our support team][2].
-
-**What happens if the Account Owner leaves the company?**
-
-If the Account Owner has left the company without transferring ownership, another person on the team can ask for ownership to be transfered to someone else.
-
-**Who can update the credit card or change plans?**
-
-Only the Account Owner can update the payment method or make changes to the subscription.
-
-**Can I invite a user and give them read-only access to blueprints?**
-
-Not at the moment, but you can create shareable blueprint links and embed them in internal wiki pages as a workaround.
 
 [1]: https://app.cloudcraft.co/support
 [2]: https://app.cloudcraft.co/app/support
