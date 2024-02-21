@@ -3784,7 +3784,7 @@ main:
     identifier: vulnerabilities
     weight: 5
   - name: Agentless Vulnerability Scanning
-    url: security/vulnerabilities/agentless_vulnerabilitiy_scanning
+    url: security/vulnerabilities/agentless_vulnerability_scanning
     parent: vulnerabilities
     identifier: csm_agentless_vulnerabilities
     weight: 501
