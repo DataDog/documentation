@@ -1,5 +1,5 @@
 ---
-title: Account management
+title: Account Management
 kind: guide
 ---
 
