@@ -212,10 +212,8 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
        # Use this format for AWS commercial regions
          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
 
-
          # Use this format for AWS GovCloud regions
          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
-
          ```
          Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available RUNTIME options are {{< latest-lambda-layer-version layer="node-versions" >}}.
 
@@ -223,10 +221,8 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
      ```sh
      # In AWS commercial regions
      arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
-
      # In AWS GovCloud regions
      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
-
      ```
    - **Go**: The Go tracer doesn't rely on a layer and is a regular Go module. You can upgrade to its latest version with:
      ```sh
@@ -236,31 +232,23 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
      ```sh
      # x86-based Lambda in AWS commercial regions
      arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
-
      # arm64-based Lambda in AWS commercial regions
      arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
-
      # x86-based Lambda in AWS GovCloud regions
      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
-
      # arm64-based Lambda  in AWS GovCloud regions
      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
-
      ```
 2. Install the Datadog Lambda Extension by configuring the layers for your Lambda function using the ARN in one of the following formats. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:
    ```sh
    # x86-based Lambda in AWS commercial regions
    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-
    # arm64-based Lambda in AWS commercial regions
    arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-
    # x86-based Lambda in AWS GovCloud regions
    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-
    # arm64-based Lambda in AWS GovCloud regions
    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-
    ```
    [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 {{< /site-region >}}
@@ -272,18 +260,14 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
        # Use this format for x86-based Lambda deployed in AWS commercial regions
           arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
 
-
           # Use this format for arm64-based Lambda deployed in AWS commercial regions
           arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
-
 
           # Use this format for x86-based Lambda deployed in AWS GovCloud regions
           arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="python" >}}
 
-
           # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
           arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
-
           ```
           Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. The available `RUNTIME` options are {{< latest-lambda-layer-version layer="python-versions" >}}
 .
@@ -293,10 +277,8 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
        # Use this format for AWS commercial regions
          arn:aws:lambda:<AWS_REGION>:464622532012:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
 
-
          # Use this format for AWS GovCloud regions
          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
-
          ```
          Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available RUNTIME options are {{< latest-lambda-layer-version layer="node-versions" >}}.
 
@@ -305,10 +287,8 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
      ```sh
      # In AWS commercial regions
      arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
-
      # In AWS GovCloud regions
      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}
-
      ```
    - **Go**: The Go tracer doesn't rely on a layer and is a regular Go module. You can upgrade to its latest version with:
      ```sh
@@ -318,31 +298,23 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
      ```sh
      # x86-based Lambda in AWS commercial regions
      arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
-
      # arm64-based Lambda in AWS commercial regions
      arn:aws:lambda:<AWS_REGION>:417141415827:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
-
      # x86-based Lambda in AWS GovCloud regions
      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
-
      # arm64-based Lambda  in AWS GovCloud regions
      arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:dd-trace-dotnet-ARM:{{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
-
      ```
 2. Install the Datadog Lambda Extension by configuring the layers for your Lambda function using the ARN in one of the following formats. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:
    ```sh
    # x86-based Lambda in AWS commercial regions
    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-
    # arm64-based Lambda in AWS commercial regions
    arn:aws:lambda:<AWS_REGION>:417141415827:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-
    # x86-based Lambda in AWS GovCloud regions
    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}
-
    # arm64-based Lambda in AWS GovCloud regions
    arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-Extension-ARM:{{< latest-lambda-layer-version layer="extension" >}}
-
    ```
 
    [1]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
