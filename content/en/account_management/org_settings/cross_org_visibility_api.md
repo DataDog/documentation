@@ -9,9 +9,13 @@ is_beta: true
   Cross-organization visibility is in <strong>private beta</strong> for customers with Enterprise plans. If you're interested in the feature, reach out to your Technical Account Manager or Customer Success Manager.
 {{< /callout >}} 
 
-Configure connections through the public API `/api/v2/org_connections` endpoint. The application key you use to authenticate to the endpoint must have the [`org_management`][1] permission.
+[Cross-organization visibility][1] allows customers to share data between different organizations in the same account, and show insights from multiple organizations in one place.
 
-To configure connections through the UI, see [cross-organization visibility][2].
+This document describes how to configure cross-organization connections through the API. To configure connections through the UI, see [cross-organization visibility][1].
+
+## API endpoint
+
+Configure connections through the public API `/api/v2/org_connections` endpoint. The application key you use to authenticate to the endpoint must have the [`org_management`][2] permission.
 
 ## List connections
 
@@ -66,6 +70,6 @@ Deletes a connection. Perform this operation either from the source organization
 - The organization does not participate as a source or a destination to the connection
 - The connection does not exist
 
-[1]: /account_management/rbac/permissions/#access-management
-[2]: /account_management/org_settings/cross_org_visibility
+[1]: /account_management/org_settings/cross_org_visibility
+[2]: /account_management/rbac/permissions/#access-management
 [3]: /api/latest/organizations/#list-your-managed-organizations
