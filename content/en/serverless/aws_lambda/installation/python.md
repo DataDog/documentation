@@ -304,7 +304,7 @@ Fill in variables accordingly:
         </tr>
     </table>
 
-   In the ARN, replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. Replace `<RUNTIME>` with `Python37`, `Python38`, or `Python39`.
+   In the ARN, replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. Replace `<RUNTIME>` with `Python38`, `Python39`, `Python310`, `Python311` or `Python312`.
 
 2. Replace `<DATADOG_EXTENSION_ARN>` with the ARN of the appropriate Datadog Lambda Extension for your region and architecture:
 
@@ -397,7 +397,7 @@ resource "aws_lambda_function" "lambda" {
       arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:{{< latest-lambda-layer-version layer="python" >}}
       ```
 
-      Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. The available `RUNTIME` options are `Python37`, `Python38`, `Python39`, `Python310`, and `Python311`.
+      Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. The available `RUNTIME` options are `Python38`, `Python39`, `Python310`, `Python311`, and `Python312`.
 
     - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively install the `datadog-lambda` package and its dependencies locally to your function project folder using your favorite Python package manager, such as `pip`.
 

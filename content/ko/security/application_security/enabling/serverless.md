@@ -205,7 +205,7 @@ Datadog CLI는 기존 Lambda 함수의 구성을 변경하여 새롭게 배포�
           # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
           arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:72
           ```
-          `<AWS_REGION>`을  `us-east-1`와 같은 유효 AWS 리전으로 변경하세요. 사용할 수 있는 `RUNTIME` 옵션은 `Python37`, `Python38`, `Python39`입니다.
+          `<AWS_REGION>`을  `us-east-1`와 같은 유효 AWS 리전으로 변경하세요. 사용할 수 있는 `RUNTIME` 옵션은 `Python38`, `Python39`, `Python310`, `Python311`,`Python312`입니다.
 
    - **Node**
        ``` sh
@@ -215,7 +215,7 @@ Datadog CLI는 기존 Lambda 함수의 구성을 변경하여 새롭게 배포�
          # Use this format for AWS GovCloud regions
          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
          ```
-         `<AWS_REGION>`을 `us-east-1`와 같은 유효 AWS 리전으로 변경하세요. 사용할 수 있는 런타임 옵션은 `Node14-x`, `Node16-x`, `Node18-x`, `Node20-x`입니다.
+         `<AWS_REGION>`을 `us-east-1`와 같은 유효 AWS 리전으로 변경하세요. 사용할 수 있는 런타임 옵션은 `Node16-x`, `Node18-x`, `Node20-x`입니다.
 
    - **Java**: Lambda가 배포된 위치에 따라 다음 형식 중 하나의 ARN을 사용해 Lambda 함수의 [레이어를 구성][1]하세요. `<AWS_REGION>`을 `us-east-1`와 같은 유효 AWS 리전으로 바꾸세요.
      ```sh
@@ -269,7 +269,7 @@ Datadog CLI는 기존 Lambda 함수의 구성을 변경하여 새롭게 배포�
           # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
           arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:72
           ```
-          `<AWS_REGION>`을 `us-east-1`와 같은 유효 AWS 리전으로 변경하세요. 사용할 수 있는 `RUNTIME` 옵션은 `Python37`, `Python38`, `Python39`, `Python310`, `Python311`입니다.
+          `<AWS_REGION>`을 `us-east-1`와 같은 유효 AWS 리전으로 변경하세요. 사용할 수 있는 `RUNTIME` 옵션은 `Python38`, `Python39`, `Python310`, `Python311`, `Python312`입니다.
 
    - **Node**
        ``` sh
@@ -279,7 +279,7 @@ Datadog CLI는 기존 Lambda 함수의 구성을 변경하여 새롭게 배포�
          # Use this format for AWS GovCloud regions
          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
          ```
-         `<AWS_REGION>`을 `us-east-1`와 같은 유효 AWS 리전으로 변경하세요. 사용할 수 있는 런타임 옵션은 `Node14-x`, `Node16-x`, `Node18-x`, `Node20-x`입니다.
+         `<AWS_REGION>`을 `us-east-1`와 같은 유효 AWS 리전으로 변경하세요. 사용할 수 있는 런타임 옵션은 `Node16-x`, `Node18-x`, `Node20-x`입니다.
 
 
    - **Java**: Lambda가 배포된 위치에 따라 다음 형식 중 하나의 ARN을 사용해 Lambda 함수의 [레이어를 구성][1]하세요. `<AWS_REGION>`을 `us-east-1`와 같은 유효 AWS 리전으로 바꾸세요.

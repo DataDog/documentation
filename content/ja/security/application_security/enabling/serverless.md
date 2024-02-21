@@ -91,7 +91,7 @@ Datadog Serverless Framework プラグインをインストールして構成す
           # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
           arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:72
           ```
-          `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。`RUNTIME` オプションは、`Python37`、`Python38` または `Python39` が利用可能です。
+          `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。`RUNTIME` オプションは、`Python38`、`Python39`、`Python310`、`Python311` または `Python312` が利用可能です。
 
    - **Node**
        ``` sh
@@ -101,7 +101,7 @@ Datadog Serverless Framework プラグインをインストールして構成す
          # Use this format for AWS GovCloud regions
          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
          ```
-         `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。RUNTIME オプションは、`Node14-x`、`Node16-x`、`Node18-x`、`Node20-x` が利用可能です。
+         `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。RUNTIME オプションは、`Node16-x`、`Node18-x`、`Node20-x` が利用可能です。
 
    - **Java**: Lambda がデプロイされている場所に応じて、以下のいずれかの形式の ARN を使用して Lambda 関数の[レイヤーを構成します][1]。`<AWS_REGION>` は `us-east-1` などの有効な AWS リージョンに置き換えてください。
      ```sh
@@ -155,7 +155,7 @@ Datadog Serverless Framework プラグインをインストールして構成す
           # Use this format for arm64-based Lambda deployed in AWS GovCloud regions
           arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>-ARM:72
           ```
-`<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えます。`RUNTIME` オプションは、`Python37`、`Python38`、`Python39`、`Python310`、`Python311` が利用可能です。
+`<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えます。`RUNTIME` オプションは、`Python38`、`Python39`、`Python310`、`Python311`、`Python312` が利用可能です。
 
    - **Node**
        ``` sh
@@ -165,7 +165,7 @@ Datadog Serverless Framework プラグインをインストールして構成す
          # Use this format for AWS GovCloud regions
          arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:91
          ```
-         `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。RUNTIME オプションは、`Node14-x`、`Node16-x`、`Node18-x`、`Node20-x` が利用可能です。
+         `<AWS_REGION>` を `us-east-1` などの有効な AWS リージョンに置き換えてください。RUNTIME オプションは、`Node16-x`、`Node18-x`、`Node20-x` が利用可能です。
 
 
    - **Java**: Lambda がデプロイされている場所に応じて、以下のいずれかの形式の ARN を使用して Lambda 関数の[レイヤーを構成します][1]。`<AWS_REGION>` は `us-east-1` などの有効な AWS リージョンに置き換えてください。

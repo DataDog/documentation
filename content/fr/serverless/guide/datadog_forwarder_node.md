@@ -261,7 +261,7 @@ arn:aws:lambda:<RÉGION_AWS>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 arn:aws-us-gov:lambda:<RÉGION_AWS>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-Les options `RUNTIME` disponibles sont `Node14-x`, `Node16-x`, `Node18-x` et `Node20-x`. La dernière `VERSION` est `{{< latest-lambda-layer-version layer="node" >}}`. Exemple :
+Les options `RUNTIME` disponibles sont `Node16-x`, `Node18-x` et `Node20-x`. La dernière `VERSION` est `{{< latest-lambda-layer-version layer="node" >}}`. Exemple :
 
 ```
 arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x:{{< latest-lambda-layer-version layer="node" >}}

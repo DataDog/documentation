@@ -237,13 +237,13 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
         }
     }
     ```
-1. レイヤー ARN のプレースホルダー `<AWS_REGION>`、`<RUNTIME>`、`<VERSION>` に適切な値を挿入します。`RUNTIME` には `Python27`、`Python36`、`Python37`、`Python38` のいずれかを使用できます。最新の `VERSION` は `{{< latest-lambda-layer-version layer="python" >}}` です。例:
+1. レイヤー ARN のプレースホルダー `<AWS_REGION>`、`<RUNTIME>`、`<VERSION>` に適切な値を挿入します。`RUNTIME` には `Python38`、`Python39`、`Python310`、`Python311`、`Python312` のいずれかを使用できます。最新の `VERSION` は `{{< latest-lambda-layer-version layer="python" >}}` です。例:
     ```
     # For regular regions
-    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python312:{{< latest-lambda-layer-version layer="python" >}}
 
     # For us-gov regions
-    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python312:{{< latest-lambda-layer-version layer="python" >}}
     ```
 1. Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][1]に追加します。
 
@@ -265,13 +265,13 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
         }
     }
     ```
-1. レイヤー ARN のプレースホルダー `<AWS_REGION>`、`<RUNTIME>`、`<VERSION>` に適切な値を挿入します。`RUNTIME` には `Python27`、`Python36`、`Python37`、`Python38` のいずれかを使用できます。最新の `VERSION` は `{{< latest-lambda-layer-version layer="python" >}}` です。例:
+1. レイヤー ARN のプレースホルダー `<AWS_REGION>`、`<RUNTIME>`、`<VERSION>` に適切な値を挿入します。`RUNTIME` には `Python38`、`Python39`、`Python310`、`Python311`、`Python312` のいずれかを使用できます。最新の `VERSION` は `{{< latest-lambda-layer-version layer="python" >}}` です。例:
     ```
     # For regular regions
-    arn:aws:lambda:us-east-1:417141415827:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+    arn:aws:lambda:us-east-1:417141415827:layer:Datadog-Python312:{{< latest-lambda-layer-version layer="python" >}}
 
     # For us-gov regions
-    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python312:{{< latest-lambda-layer-version layer="python" >}}
     ```
 1. Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][1]に追加します。
 
@@ -404,10 +404,10 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION
 arn:aws-us-gov:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-使用できる `RUNTIME` オプションは、`Python27`、`Python36`、`Python37`、`Python38` です。最新の `VERSION` は `{{< latest-lambda-layer-version layer="python" >}}` です。例:
+使用できる `RUNTIME` オプションは、`Python38`、`Python39`、`Python310`、`Python311`、`Python312` です。最新の `VERSION` は `{{< latest-lambda-layer-version layer="python" >}}` です。例:
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python312:{{< latest-lambda-layer-version layer="python" >}}
 ```
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
