@@ -20,7 +20,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: twenty_forty_eight
-oauth: {}
 public_title: Twenty Forty Eight
 short_description: Datadog ダッシュボードに追加できる楽しいパズルゲーム
 supported_os:

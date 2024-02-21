@@ -38,7 +38,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: sleuth
-oauth: {}
 public_title: Sleuth
 short_description: Sleuth Deployment Tracker
 supported_os:

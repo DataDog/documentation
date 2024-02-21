@@ -35,7 +35,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: pusher
-oauth: {}
 public_title: Pusher
 short_description: Pusher から Datadog にメトリクスを取り込み、アプリエンゲージメントを参照および監視。
 supported_os: []

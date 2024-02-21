@@ -33,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: rookout
-oauth: {}
 public_title: Rookout ライブデバッグ
 short_description: Rookout を使って本番環境で動作するコードからメトリクスを収集する
 supported_os:

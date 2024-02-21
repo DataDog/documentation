@@ -42,7 +42,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: docker_daemon
-oauth: {}
 public_title: Docker Daemon
 short_description: コンテナのパフォーマンスをその内部で実行中のサービスのパフォーマンスと関連付けます。
 supported_os:

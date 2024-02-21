@@ -35,7 +35,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: amazon_medialive
-oauth: {}
 public_title: Amazon MediaLive
 short_description: AWS Elemental MediaLive は、ブロードキャストグレードのライブビデオ処理サービスです。
 supported_os: []

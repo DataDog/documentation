@@ -36,7 +36,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: eks_anywhere
-oauth: {}
 public_title: Amazon EKS Anywhere
 short_description: オンプレミスで Kubernetes クラスターを運用するための EKS デプロイメントオプション
 supported_os:

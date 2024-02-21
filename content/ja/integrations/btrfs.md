@@ -35,7 +35,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: btrfs
-oauth: {}
 public_title: Btrfs
 short_description: Btrfs ボリュームに空きがなくなる前に対応できるように使用状況を監視。
 supported_os:
