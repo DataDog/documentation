@@ -37,10 +37,10 @@ Datadog Real User Monitoring (RUM) enables you to visualize and analyze user jou
 ## Setup
 
 <div class="alert alert-info">
-Datadog supports Unity Monitoring for iOS and Android for Unity LTS 2022+
+Datadog supports Unity Monitoring for iOS and Android for Unity LTS 2022+.
 </div>
 
-Datadog does not currently support Desktop (Windows, Mac, or Linux), console or Web deployments from Unity, but Datadog's priorities are often re-evaluated based on your feedback. If you have a game or application and would want to use Datadog RUM to monitor its performance, reach out to your customer support team and escalate this feature request.
+Datadog does not support Desktop (Windows, Mac, or Linux), console, or web deployments from Unity. If you have a game or application and want to use Datadog RUM to monitor its performance, create a ticket with [Datadog support](/help/).
 
 ### Specify application details in the UI
 
@@ -70,13 +70,14 @@ To ensure the safety of your data, you must use a client token. For more informa
    ```
 
 5. After adding the Datadog Unity SDK, configure Datadog from your Project Settings:
-    a. Enable Datadog and RUM
-    b. Copy your `Client Token` and `Application Id` into the fields in the settings window.
-    c. Verify that your `Site` is correct.
+
+    1. Enable Datadog and RUM
+    2. Copy your `Client Token` and `Application Id` into the fields in the settings window.
+    3. Verify that your `Site` is correct.
 
 ## Using Datadog
 
-### Setting Tracking Consent
+### Setting tracking consent
 
 In order to be compliant with data protection and privacy policies, the Datadog Unity SDK requires setting a tracking consent value.
 
@@ -137,7 +138,7 @@ logger.Debug("Hello with attributes", new()
 
 #### Manual Scene (View) Tracking
 
-To manually track new Scenes (`Views` id Datadog), use the `StartVeiw` and `StopView` methods:
+To manually track new Scenes (`Views` in Datadog), use the `StartView` and `StopView` methods:
 
 ```cs
 public void Start()
