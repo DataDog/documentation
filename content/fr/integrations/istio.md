@@ -45,7 +45,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: istio
-oauth: {}
 public_title: Istio
 short_description: Récupérez des métriques de schéma de performance, le débit de requêtes,
   des métriques custom, et plus encore.

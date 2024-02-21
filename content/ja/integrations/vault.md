@@ -45,7 +45,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: vault
-oauth: {}
 public_title: Vault
 short_description: Vault は機密情報管理サービスアプリケーション
 supported_os:

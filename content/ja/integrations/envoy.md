@@ -40,7 +40,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: envoy
-oauth: {}
 public_title: Envoy
 short_description: Envoy はオープンソースのエッジ/サービスプロキシを提供
 supported_os:

@@ -340,38 +340,43 @@ window.DD_LOGS.init({
 
 ## コンフィギュレーション
 
+### Content Security Policy インテグレーション
+
+サイトで Datadog Content Security Policy (CSP) インテグレーションを使用している場合、構成手順については [CSP ドキュメントの RUM セクション][14]を参照してください。
+
 ### 初期化パラメーター
 
 以下のパラメーターを使用して、Datadog にログを送信するように Datadog ブラウザログ SDK を構成できます。
 
 | パラメーター                  | タイプ                                                                      | 必須 | デフォルト         | 説明                                                                                                                                                                           |
 |----------------------------|---------------------------------------------------------------------------|----------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `clientToken`              | 文字列                                                                    | 〇      |                 | [Datadog クライアントトークン][2]。                                                                                                                                                          |
-| `site`                     | 文字列                                                                    | 〇      | `datadoghq.com` | 組織の Datadog サイトパラメーター][9]。                                                                                                                                 |
-| `service`                  | 文字列                                                                    | ✕       |                 | アプリケーションのサービス名。[タグの構文要件][7]に従っている必要があります。                                                                                             |
-| `env`                      | 文字列                                                                    | ✕       |                 | アプリケーションの環境 (例: prod、pre-prod、staging など)。[タグの構文要件][7]に従っている必要があります。                                                    |
-| `version`                  | 文字列                                                                    | ✕       |                 | アプリケーションのバージョン。例: 1.2.3、6c44da20、2020.02.13 など。[タグの構文要件][7]に従っている必要があります。                                                    |
-| `forwardErrorsToLogs`      | Boolean                                                                   | ✕       | `true`          | `false` に設定すると、console.error ログ、キャッチされない例外、ネットワークエラーは Datadog へ送信されません。                                                                              |
-| `forwardConsoleLogs`       | `"all"` または `"log"` `"debug"` `"info"` `"warn"` `"error"` の配列      | ✕       | `[]`            | `console.*` のログを Datadog に転送します。全てを転送する場合は `"all"` を、サブセットのみを転送する場合はコンソール API 名の配列を使用します。                                                |
-| `forwardReports`           | `"all"` または `"intervention"` `"deprecation"` `"csp_violation"` の配列 | ✕       | `[]`            | [Reporting API][8] から Datadog にレポートを転送します。すべてを転送する場合は `"all"` を、サブセットのみを転送する場合はレポートタイプの配列を使用します。                                       |
-| `sampleRate`               | 数値                                                                    | ✕       | `100`           | **非推奨** - `sessionSampleRate` を参照してください。                                                                                                                                             |
-| `sessionSampleRate`        | 数値                                                                    | ✕       | `100`           | 追跡するセッションの割合。`100` は全てを、`0` は皆無を意味します。追跡されたセッションのみがログを送信します。                                                                                    |
-| `silentMultipleInit`       | Boolean                                                                   | ✕       |                 | 複数の init を使用しながらログエラーを防ぎます。                                                                                                                                    |
-| `proxyUrl`                 | 文字列                                                                    | ✕       |                 | オプションのプロキシ URL (例: https://www.proxy.com/path)。詳細については、完全な[プロキシ設定ガイド][6]を参照してください。                                                                        |
-| `telemetrySampleRate`      | 数値                                                                    | ✕       | `20`            | SDK の実行に関するテレメトリーデータ (エラー、デバッグログ) は、潜在的な問題を検出して解決するために、Datadog に送信されます。このオプションを `0` に設定すると、テレメトリー収集がオプトアウトされます。 |
+| `clientToken`              | 文字列                                                                    | はい      |                 | [Datadog クライアントトークン][2]。                                                                                                                                                          |
+| `site`                     | 文字列                                                                    | はい      | `datadoghq.com` | 組織の Datadog サイトパラメーター][9]。                                                                                                                                 |
+| `service`                  | 文字列                                                                    | いいえ       |                 | アプリケーションのサービス名。[タグの構文要件][7]に従っている必要があります。                                                                                             |
+| `env`                      | 文字列                                                                    | いいえ       |                 | アプリケーションの環境 (例: prod、pre-prod、staging など)。[タグの構文要件][7]に従っている必要があります。                                                    |
+| `version`                  | 文字列                                                                    | いいえ       |                 | アプリケーションのバージョン。例: 1.2.3、6c44da20、2020.02.13 など。[タグの構文要件][7]に従っている必要があります。                                                    |
+| `forwardErrorsToLogs`      | ブール値                                                                   | いいえ       | `true`          | `false` に設定すると、console.error ログ、キャッチされない例外、ネットワークエラーは Datadog へ送信されません。                                                                              |
+| `forwardConsoleLogs`       | `"all"` または `"log"` `"debug"` `"info"` `"warn"` `"error"` の配列      | いいえ       | `[]`            | `console.*` のログを Datadog に転送します。全てを転送する場合は `"all"` を、サブセットのみを転送する場合はコンソール API 名の配列を使用します。                                                |
+| `forwardReports`           | `"all"` または `"intervention"` `"deprecation"` `"csp_violation"` の配列 | いいえ       | `[]`            | [Reporting API][8] から Datadog にレポートを転送します。すべてを転送する場合は `"all"` を、サブセットのみを転送する場合はレポートタイプの配列を使用します。                                       |
+| `sampleRate`               | 数値                                                                    | いいえ       | `100`           | **非推奨** - `sessionSampleRate` を参照してください。                                                                                                                                             |
+| `sessionSampleRate`        | 数値                                                                    | いいえ       | `100`           | 追跡するセッションの割合。`100` は全てを、`0` は皆無を意味します。追跡されたセッションのみがログを送信します。                                                                                    |
+| `silentMultipleInit`       | ブール値                                                                   | いいえ       |                 | 複数の init を使用しながらログエラーを防ぎます。                                                                                                                                    |
+| `proxyUrl`                 | 文字列                                                                    | いいえ       |                 | オプションのプロキシ URL (例: https://www.proxy.com/path)。詳細については、完全な[プロキシ設定ガイド][6]を参照してください。                                                                        |
+| `telemetrySampleRate`      | 数値                                                                    | いいえ       | `20`            | SDK の実行に関するテレメトリーデータ (エラー、デバッグログ) は、潜在的な問題を検出して解決するために、Datadog に送信されます。このオプションを `0` に設定すると、テレメトリー収集がオプトアウトされます。 |
 | `storeContextsAcrossPages` | ブール値                                                                   | いいえ       |                 | グローバルコンテキストとユーザーコンテキストを `localStorage` に格納して、ユーザーナビゲーションに沿って保存します。詳細と具体的な制限については[コンテキストのライフサイクル][11]を参照してください。          |
 | `allowUntrustedEvents`     | ブール値                                                                   | いいえ       |                 | 例えば、自動化された UI テストでの[信頼できないイベント][13]のキャプチャを許可します。                                                                                                           |
 
 
 `RUM` SDK を使用するときに一致するコンフィギュレーションが必要なオプション:
 
-| パラメーター                      | タイプ    | 必須 | デフォルト | 説明                                                                                                                                                  |
-| ------------------------------ | ------- | -------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `trackSessionAcrossSubdomains` | ブール値 | いいえ       | `false` | 同じサイトのサブドメイン間でセッションを保持します。                                                                                                    |
-| `useSecureSessionCookie`       | ブール値 | いいえ       | `false` | 安全なセッション Cookie を使用します。これにより、安全でない (非 HTTPS) 接続で送信されるログが無効になります。                                                                    |
-| `useCrossSiteSessionCookie`    | ブール値 | いいえ       | `false` | 安全なクロスサイトセッション Cookie を使用します。これにより、サイトが別のサイトから読み込まれたときに、logs SDK を実行できます (iframe)。`useSecureSessionCookie` を意味します。 |
+| パラメーター                              | タイプ    | 必須 | デフォルト | 説明                                                                                                                                                              |
+|----------------------------------------| ------- | -------- | ------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `trackSessionAcrossSubdomains`         | ブール値 | いいえ       | `false` | 同じサイトのサブドメイン間でセッションを保持します。                                                                                                                |
+| `useSecureSessionCookie`               | ブール値 | いいえ       | `false` | 安全なセッション Cookie を使用します。これにより、安全でない (非 HTTPS) 接続で送信されるログが無効になります。                                                                                |
+| `usePartitionedCrossSiteSessionCookie` | ブール値 | いいえ       | `false` | 分割された安全なクロスサイトセッション Cookie を使用します。これにより、サイトが別のサイトから読み込まれたときに、logs SDK を実行できます (iframe)。`useSecureSessionCookie` を意味します。 |
+| `useCrossSiteSessionCookie`            | ブール値 | いいえ       | `false` | **非推奨**、`usePartitionedCrossSiteSessionCookie` を参照してください。                                                                                                              |
 
-## 使用
+## ガイド
 
 ### カスタムログ
 
@@ -1184,3 +1189,4 @@ window.DD_LOGS && window.DD_LOGS.getInternalContext() // { session_id: "xxxx-xxx
 [11]: https://docs.datadoghq.com/ja/logs/log_collection/javascript/#contexts-life-cycle
 [12]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [13]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
+[14]: /ja/integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay

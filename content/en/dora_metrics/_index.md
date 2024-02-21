@@ -28,7 +28,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< callout url="https://forms.gle/Eqq6uXfGjYxmqpjDA" header="false" >}}
-DORA Metrics are in private beta. To request access, complete the form.
+DORA Metrics are in private beta. Fill out the form below to be added to the waitlist.
 {{< /callout >}}
 
 ## Overview

@@ -50,6 +50,7 @@ SCA currently supports scanning the following languages and technologies for vul
 ### CI providers
 {{< whatsnext desc="With Software Composition Analysis, you can identify vulnerable open source libraries that have been imported into your codebase. See the documentation for information about the following integrations:">}}
     {{< nextlink href="code_analysis/software_composition_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="code_analysis/software_composition_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Search and filter results

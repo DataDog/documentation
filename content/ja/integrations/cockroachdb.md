@@ -42,7 +42,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: cockroachdb
-oauth: {}
 public_title: CockroachDB
 short_description: CockroachDB クラスターの全体的な健全性とパフォーマンスを監視
 supported_os:
