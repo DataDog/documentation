@@ -26,14 +26,14 @@ Microsoft SCCM (Systems Center Configuration Manager) is a configuration managem
 ## Prerequisites
 
 - The Agent supports SCCM version 2103 or greater.
-- Make sure you've installed and configured [Distribution Points][1] in Configuration Manager before you install the Agent.
+- Before you install the Agent, make sure you've installed and configured [Distribution Points][1] in Configuration Manager.
 
 ## Setup
 
 ### Create a deployable Datadog Agent application
 
-1. Download the latest Datadog Agent installer file to the SCCM server from the [Agent page][2].
-1. In SCCM, create a new application and use the Datadog Agent MSI as the target MSI.
+1. Download the latest Windows Datadog Agent installer file (MSI) to the SCCM server from the [Agent page][2].
+1. In SCCM, create an application and use the location of the Datadog Agent MSI.
    {{< img src="/agent/basic_agent_usage/sccm/sccm-deployable-app.png" alt="Create a new application and use the Datadog Agent MSI as the target MSI." style="height:100%;" >}}
 1. Click **Next** until you get to the **General Information** page.
 1. Under **Installation program**, paste the following command, replacing `MY_API_KEY` with your API key:
@@ -42,7 +42,7 @@ Microsoft SCCM (Systems Center Configuration Manager) is a configuration managem
    start /wait msiexec /qn /i datadog-agent-7-latest.amd64.msi APIKEY="MY_API_KEY" SITE="datadoghq.com"
    ```
 
-   For more install options, see full list of [installation variables][3].
+   For more installation options, see full list of [installation variables][3].
 
 1. Ensure that **Install behavior** is set to **Install for system**.
 1. Click **Next** and follow the prompts to create the application.
@@ -71,7 +71,7 @@ SCCM packages allow you to deploy configuration files to your Datadog Agents, ov
 ### Restart the Datadog Agent
 
 Restart the Agent service to observe your configuration changes:
-1. Create a PowerShell script to restart the Datadog Agent using the [Agent commands][6].
+1. Create a PowerShell script to restart the Datadog Agent using [Agent commands][6].
 1. Run the script to restart the Datadog Agent.
 1. Check for new data in the Datadog UI.
 
