@@ -236,6 +236,19 @@ There are two types of logs that are created in these paths:
 
 To enable debug mode for the Datadog PHP Tracer, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][1] for details about how and when this environment variable value should be set in order to be properly handled by the tracer.
 
+There are two options to route debug logs to a file.
+
+**Option 1:**
+
+Available starting in dd-trace-php 0.98.0, you can specify a path to a log file through `DD_TRACE_LOG_FILE` for certain types of debug logs.
+
+**Environment variable:** DD_TRACE_LOG_FILE
+**INI:** datadog.trace.log_file
+
+**Note**: If none is specified, logs go to the default PHP error location. For details about where to set the settings, please review [Configuring the PHP Tracing Library][2].
+
+**Option 2:**
+
 You can specify where PHP should put `error_log` messages either at the server level, or as a PHP `ini` parameter, which is the standard way to configure PHP behavior.
 
 If you are using an Apache server, use the `ErrorLog` directive.
@@ -244,6 +257,7 @@ If you are configuring instead at the PHP level, use PHP's `error_log` ini param
 
 
 [1]: https://www.php-fig.org/psr/psr-3
+[2]: https://docs.datadoghq.com/tracing/trace_collection/library_config/php/
 {{< /programming-lang >}}
 
 {{< programming-lang lang="cpp" >}}
@@ -435,6 +449,8 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 {{< programming-lang lang="php" >}}
 
 **Loading an integration:**
+
+Note: This log **does not** follow DD_TRACE_LOG_FILE (ini: `datadog.trace.log_file`) and is always routed to the ErrorLog directive. 
 
 ```text
 [Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Loaded integration web
