@@ -21,7 +21,7 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
 ### Images
 
 * cws-instrumentation: datadog/cws-instrumentation-dev:cws-instrumentation-beta
-* Datadog-agent: datadog/agent:7.51.0-rc.6-linux
+* Datadog-agent: datadog/agent:latest
 
 ## Installation
 
