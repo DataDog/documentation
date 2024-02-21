@@ -857,6 +857,8 @@ You can configure the Jenkins Plugin to include or exclude some pipelines:
 **Environment variable**: `DATADOG_JENKINS_PLUGIN_INCLUDED`<br/>
 **Example**: `susans-job,johns-.*,prod_folder/prod_release`
 
+Lists of included and excluded jobs can contain regular expressions, but not glob patterns. To include a job with a specific prefix, use `prefix-.*`—not `prefix-*`.
+
 ## Visualize pipeline data in Datadog
 
 Once the integration is successfully configured, both the [Pipelines][7] and [Pipeline Executions][8] pages populate with data after pipelines finish.

@@ -16,8 +16,6 @@ title: パイプライントレースへのタグとメトリクスの追加
 <div class="alert alert-warning">選択したサイト ({{< region-param key="dd_site_name" >}}) では CI Visibility は利用できません。</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">カスタムタグとメトリクスはベータ版機能であり、API はまだ変更可能です。</div>
-
 カスタムタグとメトリクスコマンドは、CI Visibility パイプラインのトレースにユーザー定義のテキストや数値のタグを追加する方法を提供します。
 これらのタグを使用して、ファセット (文字列値タグ) またはメジャー (数値タグ) を作成することができます。ファセットやメジャーは、パイプラインの検索、グラフ化、監視に使用することができます。
 
@@ -28,7 +26,7 @@ title: パイプライントレースへのタグとメトリクスの追加
 - Buildkite
 - CircleCI
 - GitLab (SaaS またはセルフホスト >= 14.1)
-- GitHub.com (SaaS) **注:** GitHub の場合、タグとメトリクスはパイプラインスパンにのみ追加可能です。
+- GitHub.com (SaaS) **注:** GitHub ジョブにタグとメトリクスを追加するには、以下の[セクション][6]を参照してください。
 - Jenkins **注:** Jenkins の場合、[こちらの説明][5]に従って、パイプラインにカスタムタグを設定してください。
 - Azure DevOps パイプライン
 
@@ -124,10 +122,41 @@ datadog-ci metric --level pipeline --metrics "error_rate:0.56"
 次の例では、現在実行中のジョブのスパンに `binary.size` というメトリクスを追加しています。
 
 {{< code-block lang="shell" >}}
-datadog-ci metric --level job --metric "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
+datadog-ci metric --level job --metrics "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
 {{< /code-block >}}
 
 メジャーを作成するには、[ パイプライン実行ページ ][4]でメトリクス名の横にある歯車アイコンをクリックし、**create measure** (メジャーを作成する) オプションをクリックします。
+
+## GitHub ジョブへのタグとメトリクスの追加
+
+GitHub ジョブにタグとメトリクスを追加するには、`datadog-ci CLI` バージョン `2.29.0` 以上が必要です。
+ジョブ名がワークフロー構成ファイルで定義されたエントリ (GitHub [ジョブ ID][7]) と一致しない場合、
+環境変数 `DD_GITHUB_JOB_NAME` を公開し、ジョブ名を指す必要があります。例:
+1. ジョブ名が [name プロパティ][8]を使って変更された場合:
+    ```yaml
+    jobs:
+      build:
+        name: My build job name
+        env:
+          DD_GITHUB_JOB_NAME: My build job name
+        steps:
+        - run: datadog-ci tag ...
+    ```
+2. [マトリックス戦略][9]が使用された場合、ジョブ名の最後にマトリックス値を追加する形で GitHub によって複数のジョブ名がカッコ内に生成されます。
+環境変数 `DD_GITHUB_JOB_NAME` は、マトリックス値次第となります。
+
+    ```yaml
+    jobs:
+      build:
+        strategy:
+          matrix:
+            version: [1, 2]
+            os: [linux, macos]
+        env:
+          DD_GITHUB_JOB_NAME: build (${{ matrix.version }}, ${{ matrix.os }})
+        steps:
+        - run: datadog-ci tag ...
+    ```
 
 ## その他の参考資料
 
@@ -138,3 +167,7 @@ datadog-ci metric --level job --metric "binary.size:`ls -l dst/binary | awk '{pr
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipeline-executions
 [5]: /ja/continuous_integration/pipelines/jenkins?tab=usingui#setting-custom-tags-for-your-pipelines
+[6]: /ja/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux#add-tags-and-metrics-to-github-jobs
+[7]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_id
+[8]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#name
+[9]: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs#using-a-matrix-strategy

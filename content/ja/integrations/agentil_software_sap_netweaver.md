@@ -13,6 +13,7 @@ assets:
     SAP System Shortdumps: assets/dashboards/agentil_software_system_shortdumps.json
     SAP jobs details: assets/dashboards/agentil_software_sap_jobs_details.json
   integration:
+    auto_install: false
     configuration: {}
     events:
       creates_events: true
@@ -22,6 +23,7 @@ assets:
       prefix: agentil_software
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10218
     source_type_name: AGENTIL Software SAP NetWeaver
 author:
   homepage: https://www.agentil-software.com
@@ -66,6 +68,8 @@ tile:
   - Category::SAP
   - Offering::Integration
   - Supported OS::Linux
+  - Submitted Data Type::Metrics
+  - Submitted Data Type::Events
   configuration: README.md#Setup
   description: S/4HANA と NetWeaver システムの ABAP および J2EE スタックを監視する
   media:
@@ -96,6 +100,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -144,7 +149,7 @@ SAP NetWeaver インテグレーションは、SAP **NetWeaver** および **S/4
 - 更新サービス
 - ワークプロセス
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから AGENTIL Software にお問い合わせください。
 

@@ -114,6 +114,51 @@ To install and configure the Datadog Serverless Plugin, follow these steps:
 [2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
+{{% tab "AWS SAM" %}}
+
+The [Datadog CloudFormation macro][1] automatically transforms your SAM application template to install Datadog on your functions using Lambda layers, and configures your functions to send metrics, traces, and logs to Datadog through the [Datadog Lambda Extension][2].
+
+1. Install the Datadog CloudFormation macro
+
+    Run the following command with your [AWS credentials][3] to deploy a CloudFormation stack that installs the macro AWS resource. You only need to install the macro **once** for a given region in your account. Replace `create-stack` with `update-stack` to update the macro to the latest version.
+
+    ```sh
+    aws cloudformation create-stack \
+      --stack-name datadog-serverless-macro \
+      --template-url https://datadog-cloudformation-template.s3.amazonaws.com/aws/serverless-macro/latest.yml \
+      --capabilities CAPABILITY_AUTO_EXPAND CAPABILITY_IAM
+    ```
+
+    The macro is now deployed and ready to use.
+
+2. Instrument your Lambda functions
+
+    Add the `DatadogServerless` transform **after** the `AWS::Serverless` transform under the `Transform` section in your `template.yml` file for SAM.
+
+    ```yaml
+    Transform:
+      - AWS::Serverless-2016-10-31
+      - Name: DatadogServerless
+        Parameters:
+          stackName: !Ref "AWS::StackName"
+          dotnetLayerVersion: {{< latest-lambda-layer-version layer="dd-trace-dotnet" >}}
+          extensionLayerVersion: {{< latest-lambda-layer-version layer="extension" >}}
+          site: "<DATADOG_SITE>"
+          apiKeySecretArn: "<DATADOG_API_KEY_SECRET_ARN>"
+    ```
+
+    To fill in the placeholders:
+    - Replace `<DATADOG_SITE>` with {{< region-param key="dd_site" code="true" >}} (ensure the correct SITE is selected on the right).
+    - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][4] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
+
+    More information and additional parameters can be found in the [macro documentation][1].
+
+
+[1]: https://docs.datadoghq.com/serverless/serverless_integrations/macro
+[2]: https://docs.datadoghq.com/serverless/libraries_integrations/extension
+[3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
+[4]: https://app.datadoghq.com/organization-settings/api-keys
+{{% /tab %}}
 {{% tab "Container image" %}}
 
 1. Install the Datadog Lambda Extension
@@ -233,7 +278,6 @@ Fill in variables accordingly:
 
 4. Replace `<API_KEY>` with the ARN of the AWS secret where your Datadog API key is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, use `DD_API_KEY` instead of `DD_API_KEY_SECRET_ARN` and set the value to your Datadog API key in plaintext.
 
-5. Replace `<LAMBDA_HANDLER>` with your original handler. For example, `myfunc.handler`.
 
 #### Full example
 
@@ -249,7 +293,6 @@ resource "aws_lambda_function" "lambda" {
     "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:45"
   ]
 
-  handler = "/opt/nodejs/node_modules/datadog-lambda-js/handler.handler"
 
   environment {
     variables = {

@@ -34,15 +34,16 @@ After you set up [log collection][1], you can customize your collection configur
 * [Specify log file encodings](#log-file-encodings)
 * [Define global processing rules](#global-processing-rules)
 
-**Note**: If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
-
-**Note**: Processing rule patterns must conform to [Golang regexp syntax][2].
-
 To apply a processing rule to all logs collected by a Datadog Agent, see the [Global processing rules](#global-processing-rules) section.
+
+**Notes**:
+- If you set up multiple processing rules, they are applied sequentially and each rule is applied on the result of the previous one.
+- Processing rule patterns must conform to [Golang regexp syntax][2].
+- The `log_processing_rules` parameter is used in integration configurations to customize your log collection configuration. While in the Agent's [main configuration][5], the `processing_rules` parameter is used to define global processing rules.
 
 ## Filter logs
 
-To send only a specific subset of logs to Datadog use the `log_processing_rules` parameter in your configuration file with the **exclude_at_match** or **include_at_match** `type`.
+To send only a specific subset of logs to Datadog, use the `log_processing_rules` parameter in your configuration file with the `exclude_at_match` or `include_at_match` type.
 
 ### Exclude at match
 
@@ -50,7 +51,7 @@ To send only a specific subset of logs to Datadog use the `log_processing_rules`
 |--------------------|----------------------------------------------------------------------------------------------------|
 | `exclude_at_match` | If the specified pattern is contained in the message, the log is excluded and not sent to Datadog. |
 
-For example, to **filter OUT** logs that contain a Datadog email address, use the following `log_processing_rules`:
+For example, to **filter out** logs that contain a Datadog email address, use the following `log_processing_rules`:
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -141,7 +142,7 @@ spec:
 | `include_at_match` | Only logs with a message that includes the specified pattern are sent to Datadog. If multiple `include_at_match` rules are defined, all rules patterns must match in order for the log to be included. |
 
 
-For example, to **filter IN** logs that contain a Datadog email address, use the following `log_processing_rules`:
+For example, use the following `log_processing_rules` configuration to **filter in** logs that contain a Datadog email address:
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -159,7 +160,7 @@ logs:
       pattern: \w+@datadoghq.com
 ```
 
-If you want to match one or more patterns you must define them in a single expression:
+If you want to match one or more patterns, you must define them in a single expression:
 
 ```yaml
 logs:
@@ -173,7 +174,7 @@ logs:
       pattern: abc|123
 ```
 
-If the patterns are too long to fit legibly on a single line you can break them into multiple lines:
+If the patterns are too long to fit legibly on a single line, you can break them into multiple lines:
 
 ```yaml
 logs:
@@ -192,7 +193,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a Docker environment, use the label `com.datadoghq.ad.logs` on the **container sending the logs you want to filter** in order to specify the `log_processing_rules`, for example:
+In a Docker environment, use the label `com.datadoghq.ad.logs` on the container that is sending the logs you want to filter, to specify the `log_processing_rules`. For example:
 
 ```yaml
  labels:
@@ -215,7 +216,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on the **containe
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
+In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`. For example:
 
 ```yaml
 apiVersion: apps/v1
@@ -257,11 +258,11 @@ spec:
 
 ## Scrub sensitive data from your logs
 
-If your logs contain sensitive information that need redacting, configure the Datadog Agent to scrub sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the **mask_sequences** `type`.
+If your logs contain sensitive information that need redacting, configure the Datadog Agent to scrub sensitive sequences by using the `log_processing_rules` parameter in your configuration file with the `mask_sequences` type.
 
 This replaces all matched groups with the value of the `replace_placeholder` parameter.
 
-For example, redact credit card numbers:
+For example, to redact credit card numbers:
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
@@ -283,7 +284,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
+In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`. For example:
 
 ```yaml
  labels:
@@ -307,7 +308,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
+In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`. For example:
 
 ```yaml
 apiVersion: apps/v1
@@ -359,7 +360,7 @@ This sends the following log to Datadog: `User email: masked_user@example.com`
 
 ## Multi-line aggregation
 
-If your logs are not sent in JSON and you want to aggregate several lines into a single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line. This is accomplished by using the `log_processing_rules` parameter in your configuration file with the **multi_line** `type` which aggregates all lines into a single entry until the given pattern is detected again.
+If your logs are not sent in JSON and you want to aggregate several lines into a single entry, configure the Datadog Agent to detect a new log using a specific regex pattern instead of having one log per line. Use the `multi_line` type in the `log_processing_rules` parameter to aggregates all lines into a single entry until the given pattern is detected again.
 
 For example, every Java log line starts with a timestamp in `yyyy-dd-mm` format. These lines include a stack trace that can be sent as two logs:
 
@@ -391,7 +392,7 @@ logs:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
+In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`. For example:
 
 ```yaml
  labels:
@@ -410,7 +411,7 @@ In a Docker environment, use the label `com.datadoghq.ad.logs` on your container
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`, for example:
+In a Kubernetes environment, use the pod annotation `ad.datadoghq.com` on your pod to specify the `log_processing_rules`. For example:
 
 ```yaml
 apiVersion: apps/v1
@@ -502,7 +503,7 @@ logs_config:
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`, for example:
+In a Docker environment, use the label `com.datadoghq.ad.logs` on your container to specify the `log_processing_rules`. For example:
 
 ```yaml
  labels:
@@ -668,7 +669,7 @@ DD_LOGS_CONFIG_PROCESSING_RULES='[{"type": "mask_sequences", "name": "mask_user_
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Use the `env` parameter in the helm chart to set the `DD_LOGS_CONFIG_PROCESSING_RULES` environment variable to configure global processing rules, for example:
+Use the `env` parameter in the helm chart to set the `DD_LOGS_CONFIG_PROCESSING_RULES` environment variable to configure global processing rules. For example:
 
 ```yaml
 env:

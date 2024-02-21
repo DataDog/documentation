@@ -171,6 +171,10 @@ Since v6.1.0, the Agent also queries Datadog's API to provide non-critical funct
 Agent v7.18.0 or 6.18.0 and later: `api.`{{< region-param key="dd_site" code="true" >}}<br>
 Agent < v7.18.0 or 6.18.0: `app.`{{< region-param key="dd_site" code="true" >}}
 
+[Agent flare][12]
+: `<VERSION>-flare.agent.`{{< region-param key="dd_site" code="true" >}}<br>
+For example, Agent v7.31.0 sends flare data to `7-31-0-flare.agent.`{{< region-param key="dd_site" code="true" >}}. You must add `*.agent.`{{< region-param key="dd_site" code="true" >}} to your inclusion list in your firewall(s).<br>
+
 All of these domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
 
 The information is structured as JSON following this schema:
@@ -448,3 +452,4 @@ To avoid running out of storage space, the Agent stores the metrics on disk only
 [9]: /agent/configuration/proxy/
 [10]: /network_monitoring/devices
 [11]: /getting_started/site/
+[12]: /agent/troubleshooting/send_a_flare

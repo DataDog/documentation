@@ -35,7 +35,7 @@ draft: false
 git_integration_title: envoy
 integration_id: envoy
 integration_title: Envoy
-integration_version: 2.6.1
+integration_version: 3.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -272,7 +272,7 @@ Envoy チェックには、イベントは含まれません。
 
 
 [1]: https://www.envoyproxy.io
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://istio.io
 [4]: https://www.envoyproxy.io/docs/envoy/latest/operations/admin
 [5]: https://gist.github.com/ofek/6051508cd0dfa98fc6c13153b647c6f8

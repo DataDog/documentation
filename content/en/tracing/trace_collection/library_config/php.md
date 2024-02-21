@@ -243,7 +243,17 @@ Enable tracing of PHP scripts from the CLI. See [Tracing CLI scripts][15].
 `DD_TRACE_DEBUG`
 : **INI**: `datadog.trace.debug`<br>
 **Default**: `0`<br>
-Enable debug mode. When `1`, log messages are sent to the device or file set in the `error_log` INI setting. The actual value of `error_log` might be different than the output of `php -i` as it can be overwritten in the PHP-FPM/Apache configuration files.
+Enable debug mode. When `1`, log messages are sent to the device or file set in the `error_log` INI setting. The actual value of `error_log` may be different than the output of `php -i` as it can be overwritten in the PHP-FPM/Apache configuration files. Takes precedence over `DD_TRACE_LOG_LEVEL` if active.
+
+`DD_TRACE_LOG_LEVEL`
+: **INI**: `datadog.trace.log_level`<br>
+**Default**: `Error`<br>
+Sets a precise log level. The log level follows RUST_LOG conventions; accepted log levels are `error`, `warn`, `info`, `debug`, `trace` and `off`.
+
+`DD_TRACE_LOG_FILE`
+: **INI**: `datadog.trace.log_file`<br>
+**Default**: ``<br>
+Specifies a log file. If none is specified, logs go to the default PHP error location. To debug datadog-ipc-helper issues (for example, submission of telemetry), you must specify the log file.
 
 `DD_TRACE_FORKED_PROCESS`
 : **INI**: `datadog.trace.forked_process`<br>
@@ -344,8 +354,8 @@ Enable route-based naming for HTTP server requests. Set to `true` to use the int
 
 `DD_TRACE_SAMPLE_RATE`
 : **INI**: `datadog.trace.sample_rate`<br>
-**Default**: `1.0`<br>
-The sampling rate for the traces (defaults to: between `0.0` and `1.0`).
+**Default**: `-1`<br>
+The sampling rate for the traces, a number between `0.0` and `1.0`. The default value of `-1` defers control of sampling to the Datadog Agent.
 
 `DD_TRACE_SAMPLING_RULES`
 : **INI**: `datadog.trace.sampling_rules`<br>
@@ -429,7 +439,7 @@ Valid values are: `true` or `false`.<br>
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **INI**: `datadog.trace.propagation_style_inject`<br>
-**Default**: `tracecontext,Datadog`<br>
+**Default**: `Datadog,tracecontext`<br>
 Propagation styles to use when injecting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
   - [tracecontext][10]
@@ -439,7 +449,7 @@ Propagation styles to use when injecting tracing headers. If using multiple styl
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **INI**: `datadog.trace.propagation_style_extract`<br>
-**Default**: `tracecontext,Datadog,b3multi,B3 single header`<br>
+**Default**: `Datadog,tracecontext,b3multi,B3 single header`<br>
 Propagation styles to use when extracting tracing headers. If using multiple styles, comma separate them. The supported styles are:
 
   - [tracecontext][10]

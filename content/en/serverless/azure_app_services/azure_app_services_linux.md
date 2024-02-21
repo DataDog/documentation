@@ -94,6 +94,10 @@ To configure your application to submit metrics, follow the appropriate steps fo
 - [PHP][10]
 - [Python][11]
 
+## Deployment
+
+{{% aas-workflow-linux %}}
+
 ## Troubleshooting
 
 If you are not receiving traces or custom metric data as expected, enable **App Service logs** to receive debugging logs.

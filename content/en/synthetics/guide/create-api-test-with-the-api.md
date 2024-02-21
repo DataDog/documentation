@@ -476,9 +476,9 @@ The [synthetic test resource][7], with `type` set to `api`, can be used to creat
 
 If you need to run your synthetic tests from custom or secured locations, you can use the [private location resource][3] to create and manage private locations to run your tests from. Learn more on the [private locations][4] page.
 
-### Global variables
+### Global and local variables
 
-Use the [synthetics global variable resource][5] to create and manage synthetics global variables, which are variables that can be securely shared across tests.
+Use the [synthetics global variable resource][5] to create and manage synthetics global variables, which are variables that can be securely shared across tests. You can also create test-specific [local variables with builtins][8] by defining the [config_variable][9] nested schema with `type = "text"` in your synthetic test resources.
 
 ### Concurrency cap
 
@@ -495,3 +495,5 @@ The [synthetics concurrency cap resource][6] enables you to limit the number of 
 [5]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_global_variable
 [6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_concurrency_cap
 [7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
+[8]: https://docs.datadoghq.com/synthetics/api_tests/http_tests/?tab=requestoptions#create-local-variables
+[9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test#nested-schema-for-config_variable

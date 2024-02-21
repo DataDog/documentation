@@ -82,7 +82,7 @@ Datadog이 IAM 정책에 정의된 권한을 사용할 수 있도록 IAM 역할�
 `Require MFA`를 사용하지 않도록 설정하세요. 자세한 내용은 [제3자에게 AWS 리소스 액세스 권한 부여 시 외부 ID를 사용하는 방법][2] AWS 설명서를 참조하세요.
 12. **Next**를 클릭합니다.
 13. 정책을 이미 만든 경우 이 페이지에서 정책을 검색하고 선택합니다. 그렇지 않으면 새 창에서 열리는 **Create Policy**를 클릭하고 이전 섹션의 지침을 따릅니다.
-14. 필요한 경우, <a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS 보안감사 정책</a>을 역할에 연결하여 Datadog의 [클라우드 보안 대처 관리 제품][5] (CSPM)을 사용할 수 있습니다.
+14. (선택 사항)<a href="https://console.aws.amazon.com/iam/home#policies/arn:aws:iam::aws:policy/SecurityAudit" target="_blank">AWS 보안감사 정책</a>을 역할에 연결하여 [Cloud Security Management Misconfiguration][5]을 사용할 수 있습니다.
 15.  **Next**를 클릭합니다.
 16. 적절한 설명과 함께 `DatadogIntegrationRole`와 같은 이름을 지정합니다.
 17. **Create Role**을 클릭합니다.
@@ -101,7 +101,7 @@ Datadog이 IAM 정책에 정의된 권한을 사용할 수 있도록 IAM 역할�
 [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
 [3]: https://console.aws.amazon.com/iam/home#/policies
 [4]: https://console.aws.amazon.com/iam/home#/roles
-[5]: /ko/security/cspm
+[5]: /ko/security/misconfigurations
 [6]: /ko/integrations/guide/error-datadog-not-authorized-sts-assume-role/
 {{% /tab %}}
 {{% tab "Access keys (GovCloud or China Only)" %}}

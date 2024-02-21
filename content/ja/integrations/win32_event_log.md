@@ -26,14 +26,14 @@ display_on_public_website: true
 draft: false
 git_integration_title: win32_event_log
 integration_id: win32-event-log
-integration_title: Win32 Event Log
-integration_version: 2.13.2
+integration_title: Windows Event Log
+integration_version: 2.14.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: win32_event_log
 oauth: {}
-public_title: Win32 Event Log
+public_title: Windows Event Log
 short_description: Windows のイベントを Datadog イベントストリームへ送信。
 supported_os:
 - windows
@@ -48,16 +48,16 @@ tile:
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Win32 Event Log
+  title: Windows Event Log
 ---
 
 
 
 ## 概要
 
-Win32 Event Log チェックは、Windows のイベントログを監視して Datadog に転送します。
+このインテグレーションは、Windows Event Log を監視して Datadog に転送します。
 
-このチェックを有効にして、以下のことができます。
+このインテグレーションを有効にすると、
 
 - システムとアプリケーションのイベントを Datadog で追跡できます。
 - システムとアプリケーションのイベントを他のアプリケーションと関連付けることができます。
@@ -235,8 +235,7 @@ Get-WmiObject -Class Win32_NTLogEvent -Filter "LogFile='Security'" | select -Fir
 コマンドの出力にリストされる値を `win32_event_log.d/conf.yaml` で設定して、同種のイベントをキャプチャできます。
 
 <div class="alert alert-info">
-<code>Get-EventLog</code> PowerShell コマンドまたは Windows イベントビューア GUI から提供される情報が、<code>Get-WmiObject</code> から提供される情報とは多少異なる場合があります。<br>
-設定したイベントがインテグレーションによってキャプチャされない場合は、<code>Get-WmiObject</code> を使用してフィルターの値をダブルチェックしてください。
+<code>Get-EventLog</code> PowerShell コマンドまたは Windows イベントビューア GUI から提供される情報が、<code>Get-WmiObject</code> から提供される情報とは多少異なる場合があります。<br>設定したイベントがインテグレーションによってキャプチャされない場合は、<code>Get-WmiObject</code> を使用してフィルターの値をダブルチェックしてください。
 </div>
 
 Datadog Agent は、Windows Event Log を Datadog イベントとして収集するために、2 つの方法で構成することができます。それぞれの方法には、フィルターの構成構文があります。各モードで使用可能なフィルターオプションについては、[サンプル win32_event_log.d/conf.yaml][1] を参照してください。
@@ -519,7 +518,7 @@ Logs Agent
 
 ### メトリクス
 
-Win32 Event log チェックには、メトリクスは含まれません。
+Windows Event Log チェックには、メトリクスは含まれません。
 
 ### イベント
 
@@ -527,7 +526,7 @@ Win32 Event log チェックには、メトリクスは含まれません。
 
 ### サービスのチェック
 
-Win32 Event log チェックには、サービスのチェック機能は含まれません。
+Windows Event Log チェックには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
@@ -561,10 +560,11 @@ Win32 Event log チェックには、サービスのチェック機能は含ま�
 - [Windows Server 2012 の監視][12]
 - [Windows Server 2012 メトリクスの収集方法][13]
 - [Datadog を使用した Windows Server 2012 の監視][14]
+- [Datadog を使用した Windows イベントログの監視][15]
 
 
 [1]: https://docs.microsoft.com/en-us/windows/win32/eventlog/event-logging
-[2]: https://app.datadoghq.com/account/settings#agent/windows
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [3]: https://docs.datadoghq.com/ja/events/
 [4]: https://docs.datadoghq.com/ja/logs/
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
@@ -577,3 +577,4 @@ Win32 Event log チェックには、サービスのチェック機能は含ま�
 [12]: https://www.datadoghq.com/blog/monitoring-windows-server-2012
 [13]: https://www.datadoghq.com/blog/collect-windows-server-2012-metrics
 [14]: https://www.datadoghq.com/blog/windows-server-monitoring
+[15]: https://www.datadoghq.com/blog/monitor-windows-event-logs-with-datadog/

@@ -67,6 +67,8 @@ Follow these steps to set up your environment:
 
 3. Edit the **Datadog Authentication** environment to add in your Datadog [API key][2] as the initial value and current value for the `api_key` variable, and add your Datadog [application key][2] as the initial value and current value for the `application_key` variable.
 
+4. Click **Save**.
+
 #### Switch the API endpoint
  
 If you are accessing a Datadog site other than `https://api.datadoghq.com`, you need to switch the Postman collection to access a different endpoint URL.
@@ -115,6 +117,6 @@ This tab is an alternative to viewing the `param1:value1&param2:value2` structur
 [3]: https://identity.getpostman.com/signup
 [4]: https://identity.getpostman.com/login
 [5]: https://www.postman.com/downloads/
-[6]: https://learning.postman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
+[6]: https://learning.postman.com/docs/sending-requests/environments/managing-environments/
 [7]: /api/latest/#api-reference
 [8]: /api/

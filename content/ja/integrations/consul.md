@@ -43,7 +43,7 @@ draft: false
 git_integration_title: consul
 integration_id: consul
 integration_title: Consul
-integration_version: 2.2.2
+integration_version: 2.3.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
@@ -331,7 +331,7 @@ Datadog Agent は、Consul クラスターが新しいリーダーを選出す�
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/consul/images/consul-dash.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://www.consul.io/docs/agent/telemetry.html
 [5]: https://www.consul.io/docs/internals/coordinates.html

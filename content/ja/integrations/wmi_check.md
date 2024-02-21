@@ -24,7 +24,7 @@ draft: false
 git_integration_title: wmi_check
 integration_id: wmi
 integration_title: WMI チェック
-integration_version: 1.15.1
+integration_version: 1.16.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0

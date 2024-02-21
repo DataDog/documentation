@@ -3,6 +3,7 @@ app_id: auth0
 app_uuid: 0c91d12e-f01e-47d9-8a07-4dba1cde4b67
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
@@ -12,6 +13,7 @@ assets:
       prefix: auth0.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10098
     source_type_name: Auth0
 author:
   homepage: https://github.com/DataDog/integrations-extras
@@ -58,6 +60,7 @@ tile:
   title: Auth0
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -83,7 +86,7 @@ ID 情報を使って、セキュリティやパフォーマンスのインシ�
 
 しきい値を構成することで、セキュリティチームは不審なイベントが発生した際に通知するためのアラートを設定でき、セキュリティインシデントにより早急に対応することができます。
 
-## セットアップ
+## 計画と使用
 
 コンフィギュレーションはすべて [Auth0 ダッシュボード][1]で行います。
 
@@ -111,25 +114,25 @@ ID 情報を使って、セキュリティやパフォーマンスのインシ�
 1. **Logs** > **Livetail** の順に移動します。
 2. `source:auth0` を設定して、Auth0 ログを確認します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### ログの収集
+### 収集データ
 
 Auth0 のログが収集され、Datadog に送信されます。送信されるログのタイプについては、[ログのイベントタイプコード][4]を参照してください。
 
-### メトリクス
+### データセキュリティ
 
 auth0 には、メトリクスは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 auth0 には、サービスのチェック機能は含まれません。
 
-### イベント
+### ヘルプ
 
 auth0 には、イベントは含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ヘルプが必要な場合は、[Datadog サポート][5]までお問い合せください。
 このインテグレーションの詳細は、Datadog の[ブログ記事][6]でご確認いただけます。

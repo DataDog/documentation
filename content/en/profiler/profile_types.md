@@ -177,6 +177,10 @@ _Requires: Ruby 2.7+_ and [needs to be enabled][2]
 
 Once profiling is enabled, the following profile types are collected for [supported Node.js versions][1]:
 
+CPU (beta, v5.0.0+, v4.24.0+, v3.45.0+)
+: The time each function spent running on the CPU, including JavaScript and native code.<br />
+Set the environment variable `DD_PROFILING_EXPERIMENTAL_CPU_ENABLED=1` to enable it.
+
 Wall Time
 : The elapsed time used by each function. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the function is running.
 

@@ -224,6 +224,8 @@ kubectl get services -o=jsonpath='{.items[?(@.metadata.annotations.prometheus\.i
 
 Once the Prometheus scrape feature is enabled, the Datadog Agent collects custom metrics from these resources. If you do not want to collect the custom metrics from these resources, you can remove this annotation or update the Autodiscovery rules as described in the [advanced configuration section](#advanced-configuration).
 
+**Note**: Enabling this feature without advanced configuration can cause a significant increase in custom metrics, which can lead to billing implications. See the [advanced configuration section](#advanced-configuration) to learn how to only collect metrics from a subset of containers/pods/services.
+
 #### Basic configuration
 
 {{< tabs >}}
