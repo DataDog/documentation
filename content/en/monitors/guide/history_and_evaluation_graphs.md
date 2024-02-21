@@ -6,6 +6,9 @@ further_reading:
 - link: "monitors/manage/status/"
   tag: "Documentation"
   text: "Learn more about the Monitor Status page"
+- link: "monitors/guide/monitor_aggregators/"
+  tag: "Documentation"
+  text: "Learn more about Monitor aggregators"
 ---
 
 ## Overview
@@ -13,7 +16,7 @@ further_reading:
 The [Monitor Status page][1] gives you an overview of the data your monitor is evaluating. It displays visualizations of the history of the monitor state changes in the History Graph. And displays visualizations of the monitor data with configured aggregations over a specific evaluation window in the Evaluation Graph. Both provide insights on your monitor data, however, the graphs are different and this guide covers:
 - [Why the two graphs are displaying different information](#why-are-the-graphs-different)
 - [Formulas/Functions to avoid when creating the Monitor](#using-formulas-and-functions)
-- [Ways to replicate the Evaluation Graph result outside of the Monitor](#troubleshooting-different-graph-values)
+- [Ways to replicate the Evaluation Graph result outside of the Monitor](#troubleshooting-evaluation-graph-values)
 
 
 ## Evaluation vs. History graph
@@ -24,22 +27,20 @@ History Graph
 Evaluation Graph
 : This graph shows results from the raw data points of a metric applied against the user defined alert conditions. This shows the data after it has been aggregated, so it is like looking at the result of a query value widget for each data point.
 
-You can see different results depending on the aggregation method you are using in your query and your evaluation aggregation. The History and Edit Page use the aggregation methods from your queries while the Evaluation Graph uses the aggregation method determined by the **Evaluate the** option. For more examples, see the [Metric aggregation section](#metric-aggregation-method).
+When you submit your raw data points to Datadog for monitoring, this information is visualized in the history graph. For example, you have the following data points over the past 5 minutes: [10, 15, 12, 8, 11]. The history graph shows each value.
 
-### Examples
+{{< img src="monitors/guide/history_and_evaluation_graphs/history_graph_query_config.png" alt="Metric query configuration of the monitor highlighting the section the history graph displays" style="width:100%;" >}}
 
-The below aggregation methods use the the same metric. You can see how each method affects the way the metric is aggregated in a timeseries:
+When you configure your evaluation of the query, this adds another aggregation to the metric values for your monitor to alert on. For example, you configure your monitor to evaluate the average over the past 5 minutes. The evaluation graph shows the value of 11.2 as a single data point.
 
-{{< img src="monitors/guide/history_and_evaluation_graphs/monitor_aggregation_options.png" alt="Dropdown to configure different monitor aggregation methods" style="width:100%;" >}}
+`(10+15+12+8+11)/5 = 11.2`
 
-| Aggregation | Resulting graph | 
-| ---  | ----------- | 
-| Average (`avg by`): average value of the metric | {{< img src="monitors/guide/history_and_evaluation_graphs/AVG_aggregation.png" alt="Your image description" style="width:100%;" >}} |
-| Maximum (`max by`): maximum value of the metric | {{< img src="monitors/guide/history_and_evaluation_graphs/MAX_aggregation.png" alt="Your image description" style="width:100%;" >}} |
-| Minimum (`min by`): minimum value of the metric | {{< img src="monitors/guide/history_and_evaluation_graphs/MIN_aggregation.png" alt="Your image description" style="width:100%;" >}} |
-| Sum (`sum by`): total of all metric values added up | {{< img src="monitors/guide/history_and_evaluation_graphs/SUM_aggregation.png" alt="Your image description" style="width:100%;" >}} | 
+{{< img src="monitors/guide/history_and_evaluation_graphs/eval_graph_evaluation_config.png" alt="Evaluation configuration for a metric monitor highlighting the section the evaluation graph displays" style="width:100%;" >}}
+
 
 ## Why are the graphs different?
+
+Typically, the two graphs are not visualizing the same data point values. In addition, multiple other factors can contribute to the differences in the visualization graphs.
 
 ### as_count() metrics
 
@@ -52,7 +53,7 @@ For more information, see the [as_count() in Monitor Evaluations][2] guide.
 
 ### Using formulas
 
-When using formulas it is important to know that monitors apply the aggregation function for the monitor evaluation on the formula, not the individual queries. What this means is that in your monitor queries, if you are using the AVG (`avg by`) aggregation function but are using SUM (`sum by`) over the past X minutes/hours, then the edit page/history graph will not match the values. In this example, the monitor alert on the SUM of the formula which is not seen in these graphs (but can be seen using a Query Value widget, see the [troubleshooting](#troubleshooting-different-graph-values) section).
+When using formulas note that monitors apply the aggregation function for the monitor evaluation on the formula, not the individual queries. This means that in your monitor queries, if you are using the AVG (`avg by`) aggregation function but are using SUM (`sum by`) over the past X minutes in your evaluation configuration, then the edit page/history graph will not match the values. For an example, see the [troubleshooting](#troubleshooting-different-graph-values) section.
 
 ### Evaluation delay
 
@@ -60,11 +61,13 @@ When using an evaluation delay, the evaluation graph does not match the timing o
 
 ### Metric aggregation method
 
-Depending on the aggregation method you are choosing in your Monitor setup, this can show a different value compared to what you are seeing on the edit page. For example, if your monitor queries are using AVG but you are looking to alert on the MINIMUM value over the last X minutes/hours, then the evaluation graph will show the MIN value while your history/edit page graphs will show the AVG values. This is because we are alerting on the aggregation method set in the monitor, not the aggregation method set in the metric query.
+You can see different results depending on the aggregation method you are using in your query and your evaluation aggregation. The History and Edit Page use the aggregation methods from your queries while the Evaluation Graph uses the aggregation method determined by the **Evaluate the** option.
 
-## Troubleshooting different graph values
+Depending on the aggregation method you are choosing in your monitor setup, this can show a different value compared to what you are seeing on the edit page. For example, if your monitor queries are using AVG but you are looking to alert on the MINIMUM value over the last X minutes/hours, then the evaluation graph shows the MIN value while your history/edit page graphs shows the AVG values. This is because the monitor is alerting on the aggregation method set in the monitor evaluation, not the aggregation method set in the metric query.
 
-You can visualize what the Monitor is evaluating at a time point by using a [Query Value Widget][3] in a Notebook. Take the query you are using in your Monitor (as well as any formulas or functions) and then set your time frame for the graph to your evaluation window. This shows the data as it is aggregated to one single point.
+## Troubleshooting evaluation graph values
+
+You can visualize what the monitor is evaluating at a time point by using a Notebook [Query Value Widget][3]. Take the query you are using in your monitor (as well as any formulas or functions) and then set your time frame for the graph to your evaluation window. This shows the data as it is aggregated to one single point.
 
 In the following example, take a time frame from the Evaluation graph you want to investigate:
 
@@ -74,11 +77,17 @@ In the following example, take a time frame from the Evaluation graph you want t
 
 This is the query from the Monitor edit page:
 
+
+
 Aggregation method:
 
 Evaluation window:
 
 Combine the above components into a Query Value widget configuration:
+
+### Troubleshooting an evaluation graph with formulas
+
+In this example, troubleshoot an evaluation graph with multiple queries and a formula in a Notebook Query Value widget.
 
 
 
