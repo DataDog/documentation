@@ -64,7 +64,7 @@ Monthly data can also be pulled using the API. For more information, see the [AP
 
 ### Hourly usage attribution
 
-Hourly data can be pulled via API. For more information, see the [API endpoint documentation][2].
+Hourly data can be pulled using the API. For more information, see the [API endpoint documentation][2].
 
 ### Interpreting the data
 
