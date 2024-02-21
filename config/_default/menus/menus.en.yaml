@@ -3783,6 +3783,11 @@ main:
     parent: csm
     identifier: vulnerabilities
     weight: 5
+  - name: Agentless Vulnerability Scanning
+    url: security/vulnerabilities/agentless_vulnerabilitiy_scanning
+    parent: vulnerabilities
+    identifier: csm_agentless_vulnerabilities
+    weight: 501
   - name: OOTB Rules
     url: security/default_rules/#cat-cloud-security-management
     parent: csm
