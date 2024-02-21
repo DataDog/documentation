@@ -1360,32 +1360,37 @@ main:
     url: /api_catalog/explore_apis/
     identifier: api_catalog_explore
     parent: api_catalog
-    weight: 1
+    weight: 1000
   - name: Assigning Owners
     url: /api_catalog/owners_and_tags/
     identifier: api_catalog_ownership
     parent: api_catalog
-    weight: 2
+    weight: 2000
   - name: Monitoring APIs
     url: /api_catalog/monitor_apis/
     identifier: api_catalog_monitor
     parent: api_catalog
-    weight: 3
+    weight: 3000
   - name: Adding Entries to API Catalog
     url: /api_catalog/add_entries/
     identifier: api_catalog_entries
     parent: api_catalog
-    weight: 4
+    weight: 4000
   - name: Adding Metadata to APIs
     url: /api_catalog/add_metadata/
     identifier: api_catalog_metadata
     parent: api_catalog
-    weight: 5
+    weight: 5000
+  - name: API Catalog API
+    url: /api_catalog/api_catalog_api/
+    identifier: api_catalog_api
+    parent: api_catalog
+    weight: 5500
   - name: Troubleshooting
     url: /api_catalog/troubleshoot/
     identifier: api_catalog_troubleshoot
     parent: api_catalog
-    weight: 6
+    weight: 6000
   - name: Service Level Objectives
     url: service_management/service_level_objectives/
     pre: slos
