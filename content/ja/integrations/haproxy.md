@@ -65,7 +65,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: haproxy
-oauth: {}
 public_title: HAProxy
 short_description: リクエスト、応答、エラー、処理バイト数などのキーメトリクスを監視。
 supported_os:

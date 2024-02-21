@@ -79,7 +79,7 @@ To get alerts whenever a Windows signal is created, create a [Notification Rule]
 
 [1]: /security/cloud_security_management/
 [2]: /network_monitoring/performance/setup/?tab=agentwindows#setup
-[3]: https://s3.amazonaws.com/dd-agent-mstesting/builds/beta/ddagent-cli-7.50.0-rc.6.cwsbeta-2.msi
+[3]: https://s3.amazonaws.com/dd-agent-mstesting/builds/beta/ddagent-cli-7.50.3.cwsbeta-3.msi
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://docs.datadoghq.com/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
 [7]: https://app.datadoghq.com/logs

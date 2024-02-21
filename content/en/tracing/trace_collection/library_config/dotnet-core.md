@@ -140,7 +140,7 @@ It can contain a Unix path to a socket by prefixing the path with `unix://`. <br
 **Default**: Defaults to the rates returned by the Datadog Agent<br>
 Enables ingestion rate control. This parameter is a float representing the percentage of spans to sample. Valid values are from `0.0` to `1.0`.
 For more information, see [Ingestion Mechanisms][11].<br><br>
-**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][17] UI. 
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][17] UI.
 
 `DD_TRACE_SAMPLING_RULES`
 : **TracerSettings property**: `CustomSamplingRules`<br>
@@ -225,6 +225,11 @@ The `from-key` value is specific to the integration type, and should exclude the
 : Datadog may collect [environmental and diagnostic information about your system][15] to improve the product. When false, this telemetry data will not be collected.<br>
 **Default**: `true`
 
+`DD_TRACE_OTEL_ENABLED`
+: Enables or disables OpenTelemetry based tracing, both for [custom][18] or [automatic][19] instrumentation.
+Valid values are: `true` or `false`.<br>
+**Default**: `false`
+
 #### Automatic instrumentation optional configuration
 
 The following configuration variables are available **only** when using automatic instrumentation:
@@ -250,7 +255,7 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
 Enables or disables automatic injection of correlation identifiers into application logs. <br>
 Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5].<br><br>
-**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI. 
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI.
 
 `DD_RUNTIME_METRICS_ENABLED`
 : Enables .NET runtime metrics. Valid values are `true` or `false`. <br>
@@ -326,3 +331,5 @@ The following configuration variables are for features that are available for us
 [15]: /tracing/configure_data_security#telemetry-collection
 [16]: /agent/remote_config/
 [17]: https://app.datadoghq.com/services
+[18]: /tracing/trace_collection/otel_instrumentation/dotnet/
+[19]: /tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations

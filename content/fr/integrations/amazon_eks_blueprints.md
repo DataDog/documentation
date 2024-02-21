@@ -30,7 +30,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: amazon_eks_blueprints
-oauth: {}
 public_title: Extension Blueprints Datadog
 short_description: Amazon EKS Blueprints regroupe vos outils de déploiement et de
   configuration de clusters.

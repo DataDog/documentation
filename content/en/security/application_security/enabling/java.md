@@ -133,14 +133,14 @@ java -javaagent:dd-java-agent.jar \
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
-## Enabling code-level vulnerability detection
+## Enabling code security vulnerability detection
 
-If your service runs a [tracing library version that supports Vulnerability Management for code-Level vulnerability detection][3], enable the capability by setting the `DD_IAST_ENABLED=true` environment variable and restarting your service.
+If your service runs a [tracing library version that supports code security vulnerability detection][3], enable the capability by setting the `DD_IAST_ENABLED=true` environment variable and restarting your service.
 
-To detect code-level vulnerabilities for your service:
+To detect code security vulnerabilities for your service:
 
 1. [Update your Datadog Agent][6] to at least version 7.41.1.
-2. Update your tracing library to at least the minimum version needed to turn on code-level vulnerability detection. For details, see [ASM capabilities support][3].
+2. Update your tracing library to at least the minimum version needed to turn on code security vulnerability detection. For details, see [ASM capabilities support][3].
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    From the command line:
@@ -210,7 +210,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
    {{< /tabs >}}
 
 4. Restart your service.
-5. To see Application Vulnerability Management for code-level vulnerabilities in action, browse your service and the code-level vulnerabilities appear in the [Vulnerability Explorer][4]. The `SOURCE` column shows the Code value.
+5. To see Software Composition Analysis for code security vulnerabilities in action, browse your service and the code security vulnerabilities appear in the [Vulnerability Explorer][4]. The `SOURCE` column shows the Code value.
 
 {{< img src="/security/application_security/Code-Level-Vulnerability-Details.mp4" alt="Video showing Vulnerabilities tab, Code source, and inspecting the code vulnerability" video="true" >}}
 

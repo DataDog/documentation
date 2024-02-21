@@ -36,7 +36,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: cockroachdb_dedicated
-oauth: {}
 public_title: CockroachDB Dedicated
 short_description: Cockroach Cloud のメトリクスを DataDog に送信します。
 supported_os:
