@@ -22,7 +22,7 @@ AWS CLI コマンド [`aws lambda get-layer-version`][3] で Datadog Lambda レ�
 
 ```
 aws lambda get-layer-version \
-  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-versions" >}} \
+  --layer-name arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}} \
   --version-number {{< latest-lambda-layer-version layer="node" >}}
 
 aws lambda get-layer-version \

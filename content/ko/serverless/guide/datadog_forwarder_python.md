@@ -237,7 +237,7 @@ class CdkStack(core.Stack):
         }
     }
     ```
-1. 레이어 ARN에서 자리표시자 `<AWS_REGION>`, `<RUNTIME>`, `<VERSION>`을 적합한 값으로 대체하세요. 사용 가능한 `RUNTIME` 옵션은 {{< latest-lambda-layer-version layer="python-example-version" >}}입니다. 최신 `VERSION`은 `{{< latest-lambda-layer-version layer="python" >}}`입니다. 예시: 
+1. 레이어 ARN에서 자리표시자 `<AWS_REGION>`, `<RUNTIME>`, `<VERSION>`을 적합한 값으로 대체하세요. 사용 가능한 `RUNTIME` 옵션은 {{< latest-lambda-layer-version layer="python-example-version" >}}입니다. 최신 `VERSION`은 `{{< latest-lambda-layer-version layer="python-versions" >}}`입니다. 예시: 
     ```
     # For regular regions
     arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="python-example-version" >}}:{{< latest-lambda-layer-version layer="python" >}}
@@ -407,7 +407,7 @@ arn:aws-us-gov:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>:<VERSION
 사용 가능한 `RUNTIME` 옵션은 {{< latest-lambda-layer-version layer="python-versions" >}}입니다. 최신 `VERSION`은 `{{< latest-lambda-layer-version layer="python" >}}`입니다. 예시:
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python3:{{< latest-lambda-layer-version layer="python" >}}
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="python-example-version" >}}:{{< latest-lambda-layer-version layer="python" >}}
 ```
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
