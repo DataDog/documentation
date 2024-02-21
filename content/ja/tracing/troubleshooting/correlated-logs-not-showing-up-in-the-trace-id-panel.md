@@ -92,6 +92,8 @@ ID が正しく挿入され、ログにリマップされると、トレース�
 
 {{< img src="tracing/troubleshooting/trace_id_injection.png" alt="関連するログを含むログセクションを表示するトレースページ" style="width:90%;">}}
 
+**注**: ログまたは UI のログ属性には、トレース ID およびスパン ID は表示されません。
+
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}

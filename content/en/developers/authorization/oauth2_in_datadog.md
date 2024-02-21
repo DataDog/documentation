@@ -32,7 +32,7 @@ This page provides a step-by-step overview on how to implement the OAuth protoco
 
    - To build the URL for this GET request, use the `site` query parameter that is provided on the redirect to your `onboarding_url`. 
    - This parameter is only provided if the user initiates authorization from the Datadog integration tile. See the [Initiate authorization from a third-party location](#Initiate-authorization-from-a-third-party-location) section for more options if the user chooses to initiate authorization externally.  
-   - The `site` query parameter provides the [Datadog site][17] that the authorizing user is in, as well as any subdomain they may be using, and is required to construct the URL for this GET request to the Authorize endpoint: `https://<site>/oauth2/v1/authorize?...`.
+   - The `site` query parameter provides the [Datadog site][17] that the authorizing user is in, as well as any subdomain they may be using, and is required to construct the URL for this GET request to the Authorize endpoint: `<site>/oauth2/v1/authorize?...`.
 
 4. Once a user clicks **Authorize**, Datadog makes a POST request to the authorize endpoint. The user is redirected to the `redirect_uri` that you provided when setting up the OAuth Client with the authorization `code` parameter in the query component.
 

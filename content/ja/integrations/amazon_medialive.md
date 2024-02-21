@@ -13,6 +13,7 @@ assets:
       prefix: aws.medialive.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 354
     source_type_name: Amazon MediaLive
 author:
   homepage: https://www.datadoghq.com
@@ -52,15 +53,16 @@ tile:
   title: Amazon MediaLive
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 AWS Elemental MediaLive は、ブロードキャストグレードのライブビデオ処理サービスです。
 
 このインテグレーションを有効にすると、Datadog にすべての MediaLive メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -70,23 +72,23 @@ AWS Elemental MediaLive は、ブロードキャストグレードのライブ�
    確認します。
 2. [Datadog - MediaLive インテグレーション][3]をインストールします。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_medialive" >}}
 
 
-### イベント
+### ヘルプ
 
 MediaLive インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 MediaLive インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
-ご不明な点は、[Datadog のサポートチーム][5]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][5]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services

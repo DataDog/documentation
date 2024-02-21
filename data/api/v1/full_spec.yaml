@@ -3306,6 +3306,18 @@ components:
             key.'
           example: https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL
           type: string
+        cloud_run_revision_filters:
+          description: 'Limit the Cloud Run revisions that are pulled into Datadog
+            by using tags.
+
+            Only Cloud Run revision resources that apply to specified filters are
+            imported into Datadog.'
+          example:
+          - $KEY:$VALUE
+          items:
+            description: Cloud Run Filters
+            type: string
+          type: array
         errors:
           description: An array of errors.
           example:
@@ -13441,10 +13453,12 @@ components:
         only supporting `http`.
       enum:
       - http
+      - grpc
       example: http
       type: string
       x-enum-varnames:
       - HTTP
+      - GRPC
     SyntheticsAPITest:
       description: Object containing details about a Synthetic API test.
       properties:
