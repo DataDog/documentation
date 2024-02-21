@@ -75,6 +75,10 @@ Set up the [Google Cloud integration][1] for the project that holds your GCS sto
 
 ### Create a storage bucket
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Sending logs to an archive is outside of the Datadog GovCloud environment, which is outside the control of Datadog. Datadog shall not be responsible for any logs that have left the Datadog GovCloud environment, including without limitation, any obligations or requirements that Customer may have related to FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency or similar regulations applicable to such logs.</div>
+{{< /site-region >}}
+
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
