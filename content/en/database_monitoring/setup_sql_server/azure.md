@@ -191,11 +191,11 @@ The other two providers, `SQLOLEDB` and `SQLNCLI`, are considered deprecated by 
 
 #### ODBC
 
-The recommended ODBC driver is [Microsoft ODBC Driver][8]. Ensure the driver is installed on the host where the Agent is running.
+The recommended ODBC driver is [Microsoft ODBC Driver][8]. Starting from Agent 7.51, ODBC Driver 18 for SQL Server is included in the agent for Linux. For Windows, ensure the driver is installed on the host where the agent is running.
 
 ```yaml
 connector: odbc
-driver: '{ODBC Driver 17 for SQL Server}'
+driver: '{ODBC Driver 18 for SQL Server}'
 ```
 
 Once all Agent configuration is complete, [restart the Datadog Agent][9].
@@ -273,7 +273,7 @@ Replace the values to match your account and environment. See the [sample conf f
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.35.0
+export DD_AGENT_VERSION=7.51.0
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -283,7 +283,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "dbm": true,
     "host": "<HOSTNAME>,<SQL_PORT>",
     "connector": "odbc",
-    "driver": "FreeTDS",
+    "driver": "ODBC Driver 18 for SQL Server",
     "username": "datadog",
     "password": "<PASSWORD>",
     "tags": [
@@ -339,7 +339,7 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     connector: 'odbc'
-    driver: 'FreeTDS'
+    driver: 'ODBC Driver 18 for SQL Server'
     include_ao_metrics: true  # Optional: For AlwaysOn users
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
@@ -363,7 +363,7 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     connector: "odbc"
-    driver: "FreeTDS"
+    driver: "ODBC Driver 18 for SQL Server"
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
@@ -394,7 +394,7 @@ metadata:
           "username": "datadog",
           "password": "<PASSWORD>",
           "connector": "odbc",
-          "driver": "FreeTDS",
+          "driver": "ODBC Driver 18 for SQL Server",
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",
