@@ -10,9 +10,9 @@ further_reading:
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
-    - link: "/continuous_integration/pipelines/custom_tags_and_metrics/"
+    - link: "/continuous_integration/pipelines/custom_tags_and_measures/"
       tag: "Documentation"
-      text: "Extend Pipeline Visibility by adding custom tags and metrics"
+      text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
 
 {{< site-region region="gov" >}}
@@ -29,7 +29,7 @@ further_reading:
 
 - **Queue time**: View amount of time pipeline jobs sit in the queue before processing
 
-- **Custom tags and metrics at runtime**: Configure [custom tags][6] and metrics at runtime
+- **Custom tags and measures at runtime**: Configure [custom tags][6] and measures at runtime
 
 ## Configure the Datadog integration
 
@@ -127,6 +127,6 @@ These filters can also be applied through the facet panel on the left hand side 
 [3]: https://app.datadoghq.com/ci/pipelines
 [4]: https://app.datadoghq.com/ci/pipeline-executions
 [5]: https://docs.datadoghq.com/continuous_integration/pipelines/buildkite/#view-partial-and-downstream-pipelines
-[6]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[6]: https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [7]: /agent/
 [8]: /continuous_integration/pipelines/buildkite/#correlate-infrastructure-metrics-to-jobs
