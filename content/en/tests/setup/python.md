@@ -7,7 +7,7 @@ code_lang_weight: 30
 aliases:
   - /continuous_integration/setup_tests/python
   - /continuous_integration/tests/python
-  - continuous_integration/tests/setup/python
+  - /continuous_integration/tests/setup/python
 further_reading:
     - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"

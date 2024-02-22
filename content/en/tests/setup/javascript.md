@@ -7,7 +7,7 @@ code_lang_weight: 20
 aliases:
   - /continuous_integration/setup_tests/javascript
   - /continuous_integration/tests/javascript
-  - continuous_integration/tests/setup/javascript
+  - /continuous_integration/tests/setup/javascript
 further_reading:
     - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"

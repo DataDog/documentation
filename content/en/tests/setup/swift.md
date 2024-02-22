@@ -7,7 +7,7 @@ code_lang_weight: 50
 aliases:
   - /continuous_integration/setup_tests/swift
   - /continuous_integration/tests/swift
-  - continuous_integration/tests/setup/swift
+  - /continuous_integration/tests/setup/swift
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"

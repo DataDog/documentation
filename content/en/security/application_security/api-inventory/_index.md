@@ -14,7 +14,7 @@ kind: documentation
 - **Production status**: If the API is running in a production environment.
 - **Sensitive data flows**: Sensitive data handled by the API and flows between APIs.
 - **Attack Exposure**: If the endpoint is targeted by attacks (powered by [Application Threat Management][2]).
-- **Vulnerabilities**: If the endpoint contains a vulnerability (powered by [Application Vulnerability Management][3]).
+- **Vulnerabilities**: If the endpoint contains a vulnerability (powered by [Software Composition Analysis][3]).
 
 Using the API Security Inventory you can:
 
@@ -96,7 +96,7 @@ Authentication is determined by:
 
 ### Contains exploitable vulnerabilities
 
-This risk is determined by [Vulnerability Management][3] for the service hosting the endpoint.
+This risk is determined by [Software Composition Analysis][3] for the service hosting the endpoint.
 
 ## Performance impact
 
@@ -104,7 +104,7 @@ By default, API Security Inventory evaluates every tenth request (10% sample rat
 
 [1]: /agent/remote_config/?tab=configurationyamlfile#enabling-remote-configuration
 [2]: /security/application_security/threats/
-[3]: /security/application_security/vulnerability_management/
+[3]: /security/application_security/software_composition_analysis/
 [4]: /agent/remote_config/
 [5]: /security/application_security/enabling/
 [6]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
