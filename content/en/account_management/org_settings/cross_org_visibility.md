@@ -143,7 +143,7 @@ Note the `cross_org_uuids` parameter in the JSON widget definition payload.
 [3]: /metrics/custom_metrics/#overview
 [4]: /tracing/metrics/metrics_namespace/
 [5]: /logs/log_configuration/logs_to_metrics/
-[6]: https://app.datadog.com/organization-settings/cross-org-visibility
+[6]: https://app.datadoghq.com/organization-settings/cross-org-visibility
 [7]: /account_management/org_settings/cross_org_visibility_api
 [8]: /api/latest/metrics/#query-timeseries-data-across-multiple-products
 [9]: /api/latest/organizations/#list-your-managed-organizations
