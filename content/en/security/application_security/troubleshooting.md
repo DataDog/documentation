@@ -540,9 +540,9 @@ Wait a minute for the agent to forward the traces, then check that the traces sh
 {{< /programming-lang-wrapper >}}
 
 
-## No vulnerabilities detected by Application Vulnerability Management
+## No vulnerabilities detected by Software Composition Analysis
 
-There are a series of steps that must run successfully for vulnerability information to appear either in the Service Catalog Security View or in the Application Vulnerability Management Explorer. It is important to check each step when investigating this issue. 
+There are a series of steps that must run successfully for vulnerability information to appear either in the Service Catalog Security View or in the [Vulnerability Explorer][12]. It is important to check each step when investigating this issue. 
 
 ### Confirm ASM is enabled
 
@@ -586,3 +586,4 @@ If you continue to have issues with ASM, contact [Datadog support][1] with the f
 [9]: /tracing/glossary/#spans
 [10]: /tracing/troubleshooting/#tracer-debug-logs
 [11]: /security/application_security/enabling/
+[12]: https://app.datadoghq.com/security/appsec/vm

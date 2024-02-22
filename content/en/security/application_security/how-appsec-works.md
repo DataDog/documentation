@@ -39,18 +39,20 @@ Because APM collects a sample of your application traffic, enabling ASM in the t
 
 Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses and manually-added user tags on all requests.
 
-<div class="alert alert-info">
+<div class="alert alert-info"><strong>1-Click Enablement</strong><br>
 If your service is running with <a href="/agent/remote_config/#enabling-remote-configuration">an Agent with Remote Configuration enabled and a tracing library version that supports it</a>, you can <a href="/security/application_security/enabling/">enable ASM</a> from the Datadog UI without additional configuration of the Agent or tracing libraries.</div>
 
 ### Identify vulnerable services
 
-Datadog [Software Composition Analysis (SCA)][5] uses various known vulnerability data sources related to open source software libraries, plus information provided by the Datadog security research team, to match the libraries your application depends on at runtime with their potential vulnerabilities, and to make remediation recommendations.
+Datadog [Software Composition Analysis][5] uses various known vulnerability data sources related to open source software libraries, plus information provided by the Datadog security research team, to match the libraries your application depends on at runtime with their potential vulnerabilities, and to make remediation recommendations.
 
 ## Compatibility
 
 For Datadog ASM to be compatible with your Datadog configuration, you must have APM enabled, and [send traces to Datadog][6]. ASM uses the same libraries used by APM, so you don't need to deploy and maintain another library. Steps to enable Datadog ASM are specific to runtime language. Check to see if your language is supported in the [ASM prerequisites][7].
 
 ### Serverless monitoring
+
+<div class="alert alert-info">ASM support for AWS Lambda is in beta. Threat detection is done by using Datadog's lambda extension.</div>
 
 Datadog ASM for AWS Lambda provides deep visibility into attackers targeting your functions. With distributed tracing providing a context-rich picture of the attack, you can assess the impact and remediate the threat effectively.
 
@@ -124,11 +126,11 @@ Datadog ASM includes over 100 attack signatures that help protect against [many 
 
 Datadog ASM offers built-in detection capabilities that warn you about the vulnerabilities detected in your open source dependencies. Details of that information are shown in the [Vulnerability Explorer][15], identifying the severity, affected services, potentially vulnerable infrastructure, and remediation instructions to solve the surfaced risks.
 
-For more information, read [Software Composition Analysis (SCA)][5].
+For more information, read [Software Composition Analysis][5].
 
 ## API security
 
-<div class="alert alert-info">API security is in beta.</div>
+<div class="alert alert-info">API security is in private beta.</div>
 
 Datadog Application Security Management (ASM) provides visibility into threats targeting your APIs. Use the [API Catalog][27] to monitor API health and performance metrics, where you can view attacks targeting your APIs. This view includes the attacker's IP and authentication information, as well as request headers showing details about how the attack was formed. Using both ASM and API management, you can maintain a comprehensive view of your API attack surface, and respond to mitigate threats.
 
@@ -144,7 +146,7 @@ Datadog ASM identifies Log4j Log4Shell attack payloads and provides visibility i
 [2]: /tracing/service_catalog/#security-view
 [3]: /tracing/services/service_page/#security
 [4]: /tracing/trace_explorer/trace_view/?tab=security#more-information
-[5]: /security/application_security/risk_management/
+[5]: /security/application_security/software_composition_analysis/
 [6]: /tracing/trace_collection/
 [7]: /security/application_security/enabling/#prerequisites
 [8]: /security/application_security/enabling/serverless/
