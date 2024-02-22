@@ -48,9 +48,12 @@ Provide the following inputs:
 ```bash
 # Set the Datadog site to send information to
 export DD_SITE="datadoghq.com"
-
+                        
 # Install dependencies
 npm install -g @datadog/datadog-ci
+
+# Output Trivy results
+trivy fs --output /tmp/trivy.json --format cyclonedx </path/to/code>
 
 # Upload results
 datadog-ci sbom upload --service "my-app" --env "ci" /tmp/trivy.json
