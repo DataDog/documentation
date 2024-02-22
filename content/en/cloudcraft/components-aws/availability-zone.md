@@ -6,7 +6,7 @@ kind: documentation
 
 Use the Availability Zone component to represent Availability Zones from your Amazon Web Services architecture.
 
-{{< img src="cloudcraft/components-aws/availability-zone/component-availability-zone-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Availability zone' AWS component." responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/components-aws/availability-zone/component-availability-zone-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing the 'Availability zone' AWS component." responsive="true" style="width:60%;">}}
 
 ## Toolbar
 

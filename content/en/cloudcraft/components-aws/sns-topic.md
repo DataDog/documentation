@@ -6,7 +6,7 @@ kind: documentation
 
 Use the SNS Topic component to represent visualize SNS topics from your Amazon Web Services architecture.
 
-{{< img src="cloudcraft/components-aws/sns-topic/component-sns-topic-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing interconnected AWS components." responsive="true" style="width:100%;">}}
+{{< img src="cloudcraft/components-aws/sns-topic/component-sns-topic-diagram.png" alt="Screenshot of an isometric Cloudcraft diagram showing interconnected AWS components." responsive="true" style="width:60%;">}}
 
 ## Toolbar
 
