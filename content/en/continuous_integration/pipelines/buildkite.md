@@ -71,7 +71,7 @@ The resulting pipeline looks as follows:
 
 {{< img src="ci/buildkite-custom-tags.png" alt="Buildkite pipeline trace with custom tags" style="width:100%;">}}
 
-Any metadata with a key starting with `dd-metrics.` and containing a numerical value will be set as
+Any metadata with a key starting with `dd-measures.` and containing a numerical value will be set as
 a metric tag that can be used to create numerical measures. You can use the `buildkite-agent meta-data set`
 command to create such tags. This can be used for example to measure the binary size in a pipeline:
 
@@ -79,7 +79,7 @@ command to create such tags. This can be used for example to measure the binary 
 steps:
   - commands:
     - go build -o dst/binary .
-    - ls -l dst/binary | awk '{print \$5}' | tr -d '\n' | buildkite-agent meta-data set "dd_metrics.binary_size"
+    - ls -l dst/binary | awk '{print \$5}' | tr -d '\n' | buildkite-agent meta-data set "dd_measures.binary_size"
     label: Go build
 ```
 
