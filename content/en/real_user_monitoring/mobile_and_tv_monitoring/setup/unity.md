@@ -3,8 +3,6 @@ title: RUM Unity Monitoring Setup
 kind: documentation
 is_beta: true
 private: true
-is_public: false
-disable_toc: false
 description: Collect RUM data from your Unity Mobile projects.
 aliases:
     - /real_user_monitoring/unity/
