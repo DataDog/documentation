@@ -12,7 +12,8 @@ If you experience unexpected behavior with Datadog API Catalog, this guide may h
 
 ## Missing endpoints
 
-API Catalog is based on APM tracing, so the first step is to make sure [your services are instrumented][2].
+API Catalog is based on APM tracing, so the first step is to make sure your services are instrumented by hitting the 'learn more' button in the app.
+{{< img src="tracing/api_catalog/api-catalog-discovery-learn-more.png" alt="ALT TEXT" style="width:30%;text-align: left;" >}}
 
 If your service is instrumented and you still can't see the endpoints, there are two options:
 - **Upload OpenAPI file**: Uploading a spec file to the **Catalog** page automatically connects any trace seen in traffic to the matching endpoints. You should expect to see the endpoints in the **Explorer** page soon after uploading, depending on traffic.

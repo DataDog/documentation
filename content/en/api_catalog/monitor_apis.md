@@ -28,7 +28,7 @@ After you have [registered your endpoints][1] and [assigned team ownership][2], 
  - Keeping track of an API's reliability in terms of triggered alerts, test results, and security signals.
  - Standardizing API testing and improving test coverage with Synthetic Monitoring.
 
- <div class="alert alert-info">After you have registered endpoints, Datadog starts collecting a new endpoint metric for better monitoring capabilities. It might take a few minutes for the data to display if you try to create a new monitor with this metric.</div>
+ <div class="alert alert-info">After you have registered endpoints, Datadog starts collecting a new endpoint metric for better monitoring capabilities. It might take some time for the metric to display, depending on the traffic of the registered endpoints.</div>
 
 ## Alerting on endpoints that deviate from expected performance
 
