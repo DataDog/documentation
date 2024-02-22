@@ -82,19 +82,6 @@ $$10+15+12+8+11+14+13+25+37+45+50 = 240$$
 
 **OK** state, this monitor is not going to alert.
 
-## Visualizing aggregators
-
-You can see different results depending on the aggregation method you are using in your query and your evaluation aggregation. The aggregation methods below use the the same metric. You can see how each method affects the way the metric is aggregated in a timeseries:
-
-{{< img src="monitors/guide/history_and_evaluation_graphs/monitor_aggregation_options.png" alt="Dropdown to configure different monitor aggregation methods" style="width:100%;" >}}
-
-| Aggregation | Resulting graph | 
-| ---  | ----------- | 
-| Average (`avg by`): average value of the metric | {{< img src="monitors/guide/history_and_evaluation_graphs/AVG_aggregation.png" alt="Your image description" style="width:100%;" >}} |
-| Maximum (`max by`): maximum value of the metric | {{< img src="monitors/guide/history_and_evaluation_graphs/MAX_aggregation.png" alt="Your image description" style="width:100%;" >}} |
-| Minimum (`min by`): minimum value of the metric | {{< img src="monitors/guide/history_and_evaluation_graphs/MIN_aggregation.png" alt="Your image description" style="width:100%;" >}} |
-| Sum (`sum by`): total of all metric values added up | {{< img src="monitors/guide/history_and_evaluation_graphs/SUM_aggregation.png" alt="Your image description" style="width:100%;" >}} | 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
