@@ -35,12 +35,11 @@ draft: false
 git_integration_title: kube_scheduler
 integration_id: kube-scheduler
 integration_title: Kubernetes Scheduler
-integration_version: 4.6.0
+integration_version: 4.6.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: kube_scheduler
-oauth: {}
 public_title: Kubernetes Scheduler
 short_description: Kubernetes Scheduler の監視
 supported_os:

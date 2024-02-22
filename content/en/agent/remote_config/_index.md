@@ -228,12 +228,13 @@ If you don't want your Agent to send configuration requests to Datadog, you can 
 
 {{< tabs >}}
 {{% tab "Configuration YAML file" %}}
-Change `remote_configuration.enabled` from `true` to `false` in your [configuration YAML file][21]:
+Change `remote_configuration.enabled` from `true` to `false` in your [configuration YAML file][101]:
 ```yaml
 remote_configuration:
   enabled: false
 ``` 
 
+[101]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Environment variable" %}}
 Add the following to your Datadog Agent manifest:

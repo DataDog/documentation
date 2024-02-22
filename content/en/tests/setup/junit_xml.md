@@ -261,9 +261,10 @@ See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-e
 : Flag used to add extra verbosity to the output of the command<br/>
 **Default**: `false`<br/>
 
-
 Positional arguments
 : The file paths or directories in which the JUnit XML reports are located. If you pass a directory, the CLI looks for all `.xml` files in it.
+
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][17].
 
 The following environment variables are supported:
 
@@ -568,3 +569,4 @@ For more information, see [Code Coverage][10].
 [14]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-syntax
 [15]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-file-location
 [16]: https://docs.datadoghq.com/integrations/github/
+[17]: /getting_started/tagging/unified_service_tagging

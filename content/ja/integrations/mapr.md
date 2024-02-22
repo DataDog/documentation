@@ -38,7 +38,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: mapr
-oauth: {}
 public_title: MapR
 short_description: MapR で利用可能な作成済みのモニタリングメトリクスを収集します。
 supported_os:

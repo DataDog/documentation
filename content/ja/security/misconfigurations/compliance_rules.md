@@ -19,9 +19,7 @@ title: CSM Misconfigurations コンプライアンスルールの管理
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">
-CSM Misconfigurations は、選択したサイトではご利用いただけません。
-</div>
+<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では Cloud Security Management Misconfigurations はサポートされていません。</div>
 {{< /site-region >}}
 
 Cloud Security Management Misconfigurations (CSM Misconfigurations) の[すぐに使えるコンプライアンスルール][1]は、クラウドリソースの構成を評価し、潜在的な誤構成を特定するので、すぐに是正のための措置を講じることができます。
@@ -115,4 +113,4 @@ CSM Misconfigurations は以下のルールタイプを使用して、お客様�
 [20]: /ja/security/misconfigurations/custom_rules/
 [21]: /ja/security/notifications/rules/
 [22]: /ja/security/misconfigurations/signals_explorer/
-[23]: /ja/security/detection_rules/#rule-and-generated-signal-options
+[23]: /ja/security/detection_rules/#clone-a-rule

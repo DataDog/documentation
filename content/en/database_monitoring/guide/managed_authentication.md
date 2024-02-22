@@ -61,14 +61,51 @@ AWS supports IAM authentication to RDS and Aurora databases. In order to configu
 }
 ```
 
+For example, if you wanted to use the `datadog` user, you would use the following resource ARN:
 
-3. Log in to your database instance as the root user, and grant the `rds_iam` role to the new user:
+```json
+{
+   "Version": "2012-10-17",
+   "Statement": [
+       {
+           "Effect": "Allow",
+           "Action": [
+               "rds-db:connect"
+           ],
+           "Resource": [
+               "arn:aws:rds-db:REGION:ACCOUNT:dbuser:RESOURCE_ID/datadog"
+           ]
+       }
+   ]
+}
+```
+
+AWS also supports wildcards for specifying the resource, for example if you wanted to allow the `datadog` user to authenticate across all instances for an account add the following:
+
+```json
+  "Resource": [
+    "arn:aws:rds-db:*:ACCOUNT:dbuser:cluster-*/datadog",
+    "arn:aws:rds-db:*:ACCOUNT:dbuser:db-*/datadog"
+  ],
+```
+
+3. Log in to your database instance as the root user, and grant the `rds_iam` [role][20] to the new user:
 
 
 ```tsql
+CREATE USER <YOUR_IAM_ROLE> WITH LOGIN;
 GRANT rds_iam TO <YOUR_IAM_ROLE>;
 ```
 
+For example, for the `datadog` user you would run:
+
+```tsql
+CREATE USER datadog WITH LOGIN;
+GRANT rds_iam TO datadog;
+```
+
+
+**Note:** this has to be a new user created without a password, or IAM authentication will fail.
 
 4. Complete the Agent setup steps for your [RDS][6] or [Aurora][7] instance.
 
@@ -76,18 +113,20 @@ GRANT rds_iam TO <YOUR_IAM_ROLE>;
 5. [Attach the role][5] with each EC2 instance that is running the agent. Note, this can be done at EC2 launch time.
 
 
-6. Update your Postgres instance config with an `aws` block specifying the `region` of the RDS instance:
+6. Update your Postgres instance config with an `aws` block specifying the `region` of the RDS instance, and set `managed_authentication.enabled` to `true`:
 
 
 ```yaml
 instances:
-- dbm: true
- host: example-endpoint.us-east-2.rds.amazonaws.com
- port: 5432
- username: datadog
- aws:
-   instance_endpoint: example-endpoint.us-east-2.rds.amazonaws.com
-   region: us-east-2
+  - host: example-endpoint.us-east-2.rds.amazonaws.com
+    port: 5432
+    username: datadog
+    dbm: true
+    aws:
+      instance_endpoint: example-endpoint.us-east-2.rds.amazonaws.com
+      region: us-east-2
+      managed_authentication:
+        enabled: true
 ```
 
 
@@ -153,22 +192,23 @@ SECURITY DEFINER
 ```
 
 
-5. Configure your instance config with the `managed_identity` YAML block, where the `CLIENT_ID` is the Client ID of the Managed Identity:
+5. Configure your instance config with the `azure.managed_authentication` YAML block, where the `CLIENT_ID` is the Client ID of the Managed Identity:
 
 
 ```yaml
 instances:
- - host: example-flex-server.postgres.database.azure.com
-   dbm: true
-   username: "<IDENTITY_NAME>"
-   ssl: "require"
-   managed_identity:
-     client_id: "<CLIENT_ID>"
-     # Optionally set the scope from where to request the identity token
-     identity_scope: "https://ossrdbms-aad.database.windows.net/.default"
-   azure:
-     deployment_type: flexible_server
-     fully_qualified_domain_name: example-flex-server.postgres.database.azure.com
+  - host: example-flex-server.postgres.database.azure.com
+    dbm: true
+    username: "<IDENTITY_NAME>"
+    ssl: "require"
+    azure:
+      deployment_type: flexible_server
+      fully_qualified_domain_name: example-flex-server.postgres.database.azure.com
+      managed_authentication:
+        enabled: true
+        client_id: "<CLIENT_ID>"
+        # Optionally set the scope from where to request the identity token
+        identity_scope: "https://ossrdbms-aad.database.windows.net/.default"
 ```
 
 
@@ -257,3 +297,4 @@ instances:
 [17]: /database_monitoring/setup_sql_server/azure/?tab=azuresqlmanagedinstance
 [18]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
 [19]: /database_monitoring/setup_sql_server/azure/?tab=azuresqldatabase
+[20]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html#UsingWithRDS.IAMDBAuth.DBAccounts.PostgreSQL

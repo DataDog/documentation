@@ -25,7 +25,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: statsig_rum
-oauth: {}
 public_title: Statsig - RUM
 short_description: Datadog の RUM データを Statsig の機能ゲート情報でリッチ化
 supported_os:
@@ -57,11 +56,12 @@ tile:
   title: Statsig - RUM
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 ## 概要
 
 Statsig の機能フラグ追跡インテグレーションは、Datadog RUM データに機能ゲート情報を追加し、製品機能とシステムおよびパフォーマンスメトリクスの因果関係を測定することができます。
 
-## セットアップ
+## 計画と使用
 
 ### 機能フラグ追跡の設定
 

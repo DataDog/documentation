@@ -45,7 +45,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: azure_iot_edge
-oauth: {}
 public_title: Azure IoT Edge
 short_description: Azure IoT Edge デバイスとモジュールの健全性とパフォーマンスを監視。
 supported_os:

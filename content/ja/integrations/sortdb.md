@@ -32,7 +32,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: sortdb
-oauth: {}
 public_title: Sortdb
 short_description: sortdb の監視を Datadog がサポート
 supported_os:

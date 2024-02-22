@@ -30,12 +30,11 @@ draft: false
 git_integration_title: btrfs
 integration_id: btrfs
 integration_title: Btrfs
-integration_version: 1.14.1
+integration_version: 2.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: btrfs
-oauth: {}
 public_title: Btrfs
 short_description: Btrfs ボリュームに空きがなくなる前に対応できるように使用状況を監視。
 supported_os:
@@ -100,7 +99,7 @@ Btrfs チェックには、サービスのチェック機能は含まれませ�
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/btrfs/images/btrfs_metric.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/btrfs/datadog_checks/btrfs/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
