@@ -2,6 +2,11 @@
 title: React Native Crash Reporting and Error Tracking
 kind: documentation
 description: Set up Error Tracking for your React Native projects.
+aliases:
+- /real_user_monitoring/error_tracking/reactnative
+type: multi-code-lang
+code_lang: reactnative
+code_lang_weight: 40
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: GitHub

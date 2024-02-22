@@ -4298,11 +4298,16 @@ main:
     parent: rum_browser
     identifier: track_actions
     weight: 106
+  - name: Error Tracking
+    url: real_user_monitoring/error_tracking/browser/
+    parent: rum_browser
+    identifier: rum_browser_error_tracking
+    weight: 107
   - name: Troubleshooting
     url: real_user_monitoring/browser/troubleshooting/
     parent: rum_browser
     identifier: troubleshooting
-    weight: 107
+    weight: 108
   - name: Mobile and TV Monitoring
     url: real_user_monitoring/mobile_and_tv_monitoring/
     parent: rum
@@ -4333,16 +4338,21 @@ main:
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_web_view_tracking
     weight: 205
+  - name: Error Tracking
+    url: real_user_monitoring/error_tracking/mobile
+    parent: mobile_and_tv_monitoring
+    identifier: rum_mobile_error_tracking
+    weight: 206
   - name: Integrated Libraries
     url: real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_integrated_libraries
-    weight: 206
+    weight: 207
   - name: Troubleshooting
     url: real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_troubleshooting
-    weight: 207
+    weight: 208
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
@@ -4493,36 +4503,11 @@ main:
     parent: rum_error_tracking
     identifier: rum_error_tracking_browser
     weight: 1302
-  - name: Track Android Errors
-    url: real_user_monitoring/error_tracking/android/
+  - name: Track Mobile Errors
+    url: real_user_monitoring/error_tracking/mobile/
     parent: rum_error_tracking
-    identifier: rum_error_tracking_android
+    identifier: rum_error_tracking_mobile
     weight: 1303
-  - name: Track iOS Errors
-    url: real_user_monitoring/error_tracking/ios/
-    parent: rum_error_tracking
-    identifier: rum_error_tracking_ios
-    weight: 1304
-  - name: Track Expo Errors
-    url: real_user_monitoring/error_tracking/expo/
-    parent: rum_error_tracking
-    identifier: rum_error_tracking_expo
-    weight: 1305
-  - name: Track React Native Errors
-    url: real_user_monitoring/error_tracking/reactnative/
-    parent: rum_error_tracking
-    identifier: rum_error_tracking_reactnative
-    weight: 1306
-  - name: Track Flutter Errors
-    url: real_user_monitoring/error_tracking/flutter/
-    parent: rum_error_tracking
-    identifier: rum_error_tracking_flutter
-    weight: 1307
-  - name: Track Roku Errors
-    url: real_user_monitoring/error_tracking/roku/
-    parent: rum_error_tracking
-    identifier: rum_error_tracking_roku
-    weight: 1308
   - name: Custom Grouping
     url: real_user_monitoring/error_tracking/custom_grouping
     parent: rum_error_tracking

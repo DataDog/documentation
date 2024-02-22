@@ -2,6 +2,11 @@
 dependencies:
 - https://github.com/DataDog/dd-sdk-flutter/blob/main/packages/datadog_flutter_plugin/doc/rum/error_tracking.md
 description: Learn how to track Flutter errors with Error Tracking.
+aliases:
+- /real_user_monitoring/error_tracking/flutter
+type: multi-code-lang
+code_lang: flutter
+code_lang_weight: 50
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-flutter
   tag: GitHub
