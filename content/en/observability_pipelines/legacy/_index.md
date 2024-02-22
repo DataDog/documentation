@@ -29,9 +29,9 @@ The following documents are for the Observability Pipelines Worker 1.8 and older
 
 {{< whatsnext desc="Setup" >}}
     {{< nextlink href="observability_pipelines/legacy/setup/" >}}Quickstart{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/legacy/setup/datadog/" >}}Setup Datadog{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/legacy/setup/datadog_with_archiving/" >}}Setup Datadog with Archiving{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/legacy/setup/splunk/" >}}Setup Splunk{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/legacy/setup/datadog/" >}}Set up Datadog{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/legacy/setup/datadog_with_archiving/" >}}Set up Datadog with Archiving{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/legacy/setup/splunk/" >}}Set up Splunk{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/legacy/troubleshooting/" >}}Troubleshooting{{< /nextlink >}}
 {{< /whatsnext >}}
 
