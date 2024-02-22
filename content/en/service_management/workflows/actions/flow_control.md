@@ -1,5 +1,5 @@
 ---
-title: Flow control
+title: Flow Control and Workflow Logic
 kind: documentation
 disable_toc: false
 type: workflows
@@ -15,13 +15,13 @@ further_reading:
   text: "Learn about integrations"
 ---
 
-Logic actions allow you to control the execution path between steps in your workflow. For example, you can implement a logic action within your workflow to branch on a decision, or perform an action iteratively.
+Workflow [Logic actions][2] allow you to control the execution path of your workflow. For example, you can branch from a condition, perform an action iteratively, include a sleep interval, and much more.
 
 ## Branch workflow from condition
 
 You can branch the execution path of your workflow based on the evaluation of one or more statements that you define. In the screenshot below, a **Branch workflow from condition** action determines the next step in the workflow based on whether the status code of a previous HTTP request action returns `200`.
 
-{{< img src="service_management/workflows/branch-workflow-configuration2.png" alt="The workflow canvas with a branch workflow from condition action selected and the configuration tab open. The Statements section is highlighted with two statements specifying that the status of a previous request must be 200." >}}
+{{< img src="service_management/workflows/branch-workflow-configuration3.png" alt="The workflow canvas with a branch workflow from condition action selected and the configuration tab open. The Statements section is highlighted with two statements specifying that the status of a previous request must be 200." >}}
 
 ## Sleep
 
@@ -30,6 +30,8 @@ The **Sleep** action pauses the execution of the workflow for a specified durati
 ## Iteration
 
 The **For each** action allows you to execute a specific action iteratively for each element in a given input list. It enables you to automate repetitive tasks by applying the same action to multiple items within a list.
+
+{{< img src="service_management/workflows/iteration.png" alt="An example of an interation step." style="width:100%;" >}}
 
 The action is made up of the For each step and an inner step that you intend to perform iteratively. The output of a For each step is an array of outputs from the inner step.
 
@@ -56,3 +58,4 @@ You can delete the inner step by:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
+[2]: https://app.datadoghq.com/workflow/action-catalog#logic//com.datadoghq.core.if

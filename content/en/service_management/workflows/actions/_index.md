@@ -15,21 +15,22 @@ further_reading:
   text: "Learn about integrations"
 ---
 
-Generic actions are workflow actions that are not associated with a tool or integration. If an action you need is missing from the Actions catalog, you might be able to solve your use case with a generic action.
+Datadog provides a suite of generic workflow actions that are not associated with a specific tool or integration. These actions give you more control over your workflows by allowing you to do things like:
+- Add logic to control the execution path of your workflow.
+- Transform the data collected by an action.
+- Make custom HTTP requests.
 
-As with all workflow actions, you can use the [context variables][1] tab to access any values available in the workflow context.
-
-You can also [request a new action or entire integration][2].
-
-{{< whatsnext desc="Usage metering API migration guides:" >}}
-    {{< nextlink href="account_management/guide/hourly-usage-migration" >}}Migrating from the v1 Hourly Usage APIs to v2{{< /nextlink >}}
-    {{< nextlink href="account_management/guide/usage-attribution-migration" >}}Migrating from v1 to v2 of the Usage Attribution API{{< /nextlink >}}
-    {{< nextlink href="account_management/guide/csv-headers-billing-migration" >}}Updates to Plan & Usage CSV Headers as of September 18, 2023{{< /nextlink >}}
+{{< whatsnext desc="Find out more about generic actions:" >}}
+    {{< nextlink href="/service_management/workflows/actions/flow_control" >}}Use logic actions to add a sleep interval, branch on a condition, use iteration, and more.{{< /nextlink >}}
+    {{< nextlink href="/service_management/workflows/actions/data_transformation" >}}Perform custom data transformations within your workflows using JavaScript.{{< /nextlink >}}
+    {{< nextlink href="/service_management/workflows/actions/http" >}}Use the HTTP action to make a request to a custom endpoint.{{< /nextlink >}}
+    {{< nextlink href="/service_management/workflows/actions/saved_actions" >}}Use the <i>Saved Actions</i> feature to store and reuse an action and its parameters.{{< /nextlink >}}
 {{< /whatsnext >}}
+
+If your use case is not covered by an integration or generic Datadog action, you can [request a new action or an entire integration][1].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/workflows/build/#context-variables
-[2]: https://forms.gle/JzPazvxXox7fvA2R8
+[1]: https://forms.gle/JzPazvxXox7fvA2R8

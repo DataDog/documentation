@@ -10,6 +10,7 @@ type: documentation
 aliases:
   - /workflows/actions_catalog/action_blueprints/
   - /service_management/workflows/actions_catalog/saved_actions/
+  - /service_management/workflows/actions/saved_actions/
 further_reading:
 - link: "/integrations/"
   tag: "Documentation"

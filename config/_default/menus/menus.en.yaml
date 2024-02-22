@@ -1577,11 +1577,6 @@ main:
     parent: workflows
     identifier: workflows_actions
     weight: 4
-  - name: Save and Reuse Actions
-    url: service_management/workflows/actions/saved_actions/
-    parent: workflows_actions
-    identifier: workflows_saved_actions
-    weight: 401
   - name: Flow Control
     url: service_management/workflows/actions/flow_control/
     parent: workflows_actions
@@ -1597,16 +1592,21 @@ main:
     parent: workflows_actions
     identifier: workflows_http
     weight: 404
-  - name: Actions Catalog
-    url: service_management/workflows/actions_catalog/
+  - name: Save and Reuse Actions
+    url: service_management/workflows/saved_actions/
     parent: workflows
-    identifier: workflows_actions_catalog
-    weight: 5
+    identifier: workflows_saved_actions
+    weight: 5 
   - name: Connections
     url: service_management/workflows/connections/
     parent: workflows
     identifier: workflows_connections
     weight: 6
+  - name: Actions Catalog
+    url: service_management/workflows/actions_catalog/
+    parent: workflows
+    identifier: workflows_actions_catalog
+    weight: 7
   - name: App Builder
     url: service_management/app_builder/
     pre: app-builder
