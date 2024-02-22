@@ -29,8 +29,8 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
 
 1. Log in to the [AWS Management Console][6].
 2. Navigate to the ECS section.
-3. On the left menu, click **Task Definitions**, then click **Create new Task Definition with JSON** or choose an existing Fargate task definition.
-4. Use the JSON definition of the AWS CLI method.
+3. On the left menu, click **Task Definitions**, then click **Create new Task Definition with JSON**, or choose an existing Fargate task definition.
+4. Use the JSON definition, or the [AWS CLI method](#aws-cli).
 5. Click **Create** to create the task definition.
 
 ### AWS CLI
