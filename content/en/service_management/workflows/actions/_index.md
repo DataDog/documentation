@@ -8,7 +8,7 @@ algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
 aliases:
 - /workflows/generic_actions
-- /service_management/workflows/generic_actions
+- /service_management/workflows/actions_catalog/generic_actions/
 further_reading:
 - link: "/integrations/"
   tag: "Documentation"
