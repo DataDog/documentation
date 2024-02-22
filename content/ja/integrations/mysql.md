@@ -49,7 +49,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: mysql
-oauth: {}
 public_title: MySQL
 short_description: パフォーマンススキーマメトリクス、クエリスループット、カスタムメトリクスなどを収集。
 supported_os:

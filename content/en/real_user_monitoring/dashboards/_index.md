@@ -31,9 +31,7 @@ You can clone [dashboards][3] and customize them to explore your application's d
 
 ### Template variables
 
-The generated RUM dashboards automatically contain a set of default template variables. Use the template variable dropdown menus to narrow your search. For example, you can filter for a specific application with the `applicationId` template variable.
-
-{{< img src="real_user_monitoring/dashboards/template_variables.mp4" alt="Template variable" video=true style="width:50%;" >}}
+The generated RUM dashboards automatically contain a set of default template variables. Use the template variable dropdowns to select values and narrow your search. For more information, see the [Template Variables][5] documentation.
 
 ### View RUM events
 
@@ -45,7 +43,7 @@ To explore individual events, click on a graph and click **View RUM events**. Th
 
 To clone your RUM dashboards, click the **Settings** icon and select **Clone dashboard**. To add more widgets, powerpacks, or apps, scroll down to the bottom and click the **+** icon. 
 
-You can also modify the template variables and create a [saved view][5].
+You can also modify the template variables and create a [saved view][6].
 
 ## Further Reading
 
@@ -55,4 +53,5 @@ You can also modify the template variables and create a [saved view][5].
 [2]: https://app.datadoghq.com/dashboard/lists
 [3]: /dashboards/
 [4]: /real_user_monitoring/explorer/
-[5]: /real_user_monitoring/explorer/saved_views/
+[5]: /dashboards/template_variables
+[6]: /real_user_monitoring/explorer/saved_views/

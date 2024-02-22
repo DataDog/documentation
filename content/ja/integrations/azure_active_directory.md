@@ -33,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: azure_active_directory
-oauth: {}
 public_title: Azure Active Directory
 short_description: Azure Active Directory アクティビティログを分析
 supported_os:

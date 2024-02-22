@@ -29,7 +29,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: pdh_check
-oauth: {}
 public_title: PDH Check
 short_description: Windows のパフォーマンスカウンターを収集およびグラフ化。
 supported_os:
