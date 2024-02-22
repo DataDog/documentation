@@ -540,161 +540,121 @@ main:
     identifier: getting_started_otel_dd
     parent: opentelemetry_top_level
     weight: 1
-  - name: Instrumentation
-    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/
-    identifier: otel_instrumentation
+  - name: Terms and Concepts
+    url: opentelemetry/otel_terms/
+    identifier: otel_terms
     parent: opentelemetry_top_level
     weight: 2
-  - name: Go
-    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/go/
-    identifier: otel_instrumentation_go
-    parent: otel_instrumentation
-    weight: 201
-  - name: Java
-    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/java/
-    identifier: otel_instrumentation_java
-    parent: otel_instrumentation
-    weight: 202
-  - name: .NET
-    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/dotnet/
-    identifier: otel_instrumentation_dotnet
-    parent: otel_instrumentation
-    weight: 203
-  - name: Node.js
-    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/nodejs/
-    identifier: otel_instrumentation_nodejs
-    parent: otel_instrumentation
-    weight: 204
-  - name: PHP
-    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/php/
-    identifier: otel_instrumentation_php
-    parent: otel_instrumentation
-    weight: 205
-  - name: Python
-    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/python/
-    identifier: otel_instrumentation_python
-    parent: otel_instrumentation
-    weight: 206
-  - name: Ruby
-    url: tracing/trace_collection/custom_instrumentation/otel_instrumentation/ruby/
-    identifier: otel_instrumentation_ruby
-    parent: otel_instrumentation
-    weight: 207
-  - name: Data Collection
-    url: opentelemetry/collect_data/
-    identifier: otel_data_collection
+  - name: Collector
+    url: opentelemetry/collector_exporter/
+    identifier: otel_collector
     parent: opentelemetry_top_level
     weight: 3
-  - name: Set Up the Collector
-    url: opentelemetry/collector_exporter/
-    identifier: otel_gs_collector
-    parent: otel_data_collection
+  - name: Integrations
+    url: opentelemetry/integrations/
+    identifier: otel_integrations
+    parent: otel_collector
     weight: 301
-  - name: Hostnames and Tagging
-    url: opentelemetry/collector_exporter/hostname_tagging/
-    identifier: otel_gs_tagging
-    parent: otel_gs_collector
+  - name: Datadog Exporter
+    url: opentelemetry/integrations/otel_collector_datadog_exporter/
+    identifier: otel_exporter
+    parent: otel_integrations
     weight: 3011
   - name: OTLP Receiver
-    url: opentelemetry/collector_exporter/otlp_receiver/
-    identifier: otel_gs_otlp_receiver
-    parent: otel_gs_collector
+    url: opentelemetry/integrations/otlp_receiver/
+    identifier: otel_receiver
+    parent: otel_integrations
     weight: 3012
   - name: Host Metrics
-    url: opentelemetry/collector_exporter/host_metrics/
-    identifier: otel_gs_host_metrics
-    parent: otel_gs_collector
-    weight: 3012
-  - name: Docker Metrics
-    url: opentelemetry/collector_exporter/docker_metrics/
-    identifier: otel_gs_docker_metrics
-    parent: otel_gs_collector
-    weight: 3012
-  - name: Log Collection
-    url: opentelemetry/collector_exporter/log_collection/
-    identifier: otel_gs_log_collection
-    parent: otel_gs_collector
+    url: opentelemetry/integrations/host_metrics/
+    identifier: otel_host_metrics
+    parent: otel_integrations
     weight: 3013
-  - name: Collector Health Metrics
-    url: opentelemetry/collector_exporter/collector_health_metrics/
-    identifier: otel_gs_coll_health
-    parent: otel_gs_collector
-    weight: 3014
   - name: Trace Metrics
-    url: opentelemetry/collector_exporter/trace_metrics/
-    identifier: otel_gs_trace_metrics
-    parent: otel_gs_collector
-    weight: 3015
-  - name: Batch and Memory Settings
-    url: opentelemetry/collector_exporter/collector_batch_memory/
-    identifier: otel_gs_batch_memory
-    parent: otel_gs_collector
-    weight: 3016
-  - name: OTLP Ingestion by the Datadog Agent
-    url: opentelemetry/otlp_ingest_in_the_agent/
-    identifier: otel_ingest_agent
-    parent: otel_data_collection
-    weight: 302
+    url: opentelemetry/integrations/trace_metrics/
+    identifier: otel_trace_metrics
+    parent: otel_integrations
+    weight: 3014
   - name: Runtime Metrics
-    url: opentelemetry/runtime_metrics
+    url: opentelemetry/integrations/runtime_metrics/
     identifier: otel_runtime_metrics
-    parent: otel_data_collection
-    weight: 303
-  - name: Java
-    url: opentelemetry/runtime_metrics/java
-    identifier: otel_runtime_metrics_java
-    parent: otel_runtime_metrics
-    weight: 3031
-  - name: .NET
-    url: opentelemetry/runtime_metrics/dotnet
-    identifier: otel_runtime_metrics_dotnet
-    parent: otel_runtime_metrics
-    weight: 3032
-  - name: Go
-    url: opentelemetry/runtime_metrics/go
-    identifier: otel_runtime_metrics_go
-    parent: otel_runtime_metrics
-    weight: 3033
-  - name: Interoperability and Conventions
+    parent: otel_integrations
+    weight: 3015
+  - name: Log Collection
+    url: opentelemetry/integrations/log_collection/
+    identifier: otel_log_collection
+    parent: otel_integrations
+    weight: 3016
+  - name: Schema and Semantics
+    url: opentelemetry/schema_semantics/
+    identifier: otel_schema
+    parent: opentelemetry_top_level
+    weight: 4
+  - name: Resource Attribute Mapping
+    url: opentelemetry/schema_semantics/semantic_mapping/
+    identifier: otel_semantic_mapping
+    parent: otel_schema
+    weight: 401
+  - name: Metrics Mapping
+    url: opentelemetry/schema_semantics/metrics_mapping/
+    identifier: otel_metrics_mapping
+    parent: otel_schema
+    weight: 402
+  - name: Infrastructure Host Mapping
+    url: opentelemetry/schema_semantics/host_metadata/
+    identifier: otel_host_metadata
+    parent: otel_schema
+    weight: 403
+  - name: Sampling
+    url: opentelemetry/ingestion_sampling_with_opentelemetry
+    identifier: otel_sampling
+    parent: opentelemetry_top_level
+    weight: 5
+  - name: Resources
+    url: opentelemetry/resources
+    identifier: otel_resources
+    parent: opentelemetry_top_level
+    weight: 6
+  - name: Troubleshooting
+    url: opentelemetry/troubleshooting/
+    identifier: otel_troubleshooting
+    parent: opentelemetry_top_level
+    weight: 7
+  - name: Interoperability with Datadog
     url: opentelemetry/interoperability/
     identifier: otel_interoperability
     parent: opentelemetry_top_level
-    weight: 4
-  - name: Interoperability
-    url: opentelemetry/interoperability/otel_api_tracing_interoperability/
-    identifier: otel_trace_interoperability
+    weight: 8
+  - name: OTLP Ingestion by the Agent
+    url: opentelemetry/interoperability/otlp_ingest_in_the_agent/
+    identifier: otel_ingest
     parent: otel_interoperability
-    weight: 401
-  - name: Metrics Mapping
-    url: opentelemetry/interoperability/metrics_mapping/
-    identifier: otel_interoperability_metrics
+    weight: 801
+  - name: W3C Trace Context Propagation
+    url: /tracing/trace_collection/trace_context_propagation/
+    identifier: otel_propagation
     parent: otel_interoperability
-    weight: 402
-  - name: Semantic Convention Mapping
-    url: opentelemetry/interoperability/semantic_mapping/
-    identifier: otel_interoperability_semantic
+    weight: 802
+  - name: Custom Instrumentation
+    url: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+    identifier: otel_instrumentation
     parent: otel_interoperability
-    weight: 403
-  - name: Data Visualization
-    url: opentelemetry/visualize_data/
-    identifier: otel_data_visualization
-    parent: opentelemetry_top_level
-    weight: 5
-  - name: Visualizing OTLP Histograms as Heatmaps
-    url: opentelemetry/visualize_data/otlp_histogram_heatmaps/
-    identifier: otel_heatmaps
-    parent: otel_data_visualization
-    weight: 501
-  - name: View Hosts in the Infrastructure List
-    url: opentelemetry/visualize_data/host_metadata/
-    identifier: otel_infra_list
-    parent: otel_data_visualization
-    weight: 502
+    weight: 803
+  - name: Correlate RUM and Traces 
+    url: /real_user_monitoring/connect_rum_and_traces/
+    identifier: otel_rum
+    parent: otel_interoperability
+    weight: 804
+  - name: Producing Delta Temporality Metrics
+    url: /opentelemetry/interoperability/otlp_delta_temporality/
+    identifier: otel_delta
+    parent: otel_interoperability
+    weight: 805
   - name: Guides
     url: opentelemetry/guide/
     identifier: otel_guides
     parent: opentelemetry_top_level
-    weight: 6
+    weight: 9
   - name: Developers
     url: developers/
     pre: dev-code

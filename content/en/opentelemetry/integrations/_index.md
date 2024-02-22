@@ -1,5 +1,4 @@
----
-title: Visualizing Telemetry Data in Datadog
+title: Interoperability
 kind: documentation
 ---
 

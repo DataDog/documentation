@@ -1,6 +1,6 @@
 ---
 title: Interoperability of OpenTelemetry API and Datadog instrumented traces
-kind: guide
+kind: documentation
 further_reading:
 - link: "/tracing/trace_collection/otel_instrumentation/"
   tag: "Documentation"

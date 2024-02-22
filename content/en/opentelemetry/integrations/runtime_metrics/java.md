@@ -1,5 +1,7 @@
 ---
 title: OpenTelemetry Java Runtime Metrics
+aliases:
+- /opentelemetry/runtime_metrics/java/
 kind: documentation
 code_lang: java
 type: multi-code-lang

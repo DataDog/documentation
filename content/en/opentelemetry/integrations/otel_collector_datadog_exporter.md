@@ -4,6 +4,7 @@ kind: documentation
 aliases:
 - /tracing/setup_overview/open_standards/otel_collector_datadog_exporter/
 - /tracing/trace_collection/open_standards/otel_collector_datadog_exporter/
+- /opentelemetry/otel_collector_datadog_exporter/
 description: 'Send OpenTelemetry data to the OpenTelemetry collector and Datadog exporter'
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/"
