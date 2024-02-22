@@ -29,7 +29,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: windows_service
-oauth: {}
 public_title: Windows Services
 short_description: Windows Service の状態を監視。
 supported_os:

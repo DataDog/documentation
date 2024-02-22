@@ -47,7 +47,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: php_fpm
-oauth: {}
 public_title: PHP FPM
 short_description: プロセスの状態、低速なリクエスト、受け付けたリクエストを監視.
 supported_os:

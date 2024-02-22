@@ -14,6 +14,7 @@ further_reading:
 aliases:
   - /tracing/service_catalog/service_metadata_structure
   - /tracing/service_catalog/adding_metadata
+  - /service_catalog/add_metadata
 ---
 
 ## Overview

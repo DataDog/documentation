@@ -38,7 +38,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: linkerd
-oauth: {}
 public_title: Linkerd
 short_description: linkerd からメトリクスを取得してサービス健全性を監視
 supported_os:

@@ -39,7 +39,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: druid
-oauth: {}
 public_title: Druid
 short_description: クエリ、取り込み、コーディネーションに関するメトリクスを追跡。
 supported_os:

@@ -3306,6 +3306,18 @@ components:
             key.'
           example: https://www.googleapis.com/robot/v1/metadata/x509/$CLIENT_EMAIL
           type: string
+        cloud_run_revision_filters:
+          description: 'Limit the Cloud Run revisions that are pulled into Datadog
+            by using tags.
+
+            Only Cloud Run revision resources that apply to specified filters are
+            imported into Datadog.'
+          example:
+          - $KEY:$VALUE
+          items:
+            description: Cloud Run Filters
+            type: string
+          type: array
         errors:
           description: An array of errors.
           example:
@@ -13441,10 +13453,12 @@ components:
         only supporting `http`.
       enum:
       - http
+      - grpc
       example: http
       type: string
       x-enum-varnames:
       - HTTP
+      - GRPC
     SyntheticsAPITest:
       description: Object containing details about a Synthetic API test.
       properties:
@@ -17085,6 +17099,8 @@ components:
       - appsec_fargate_percentage
       - estimated_rum_usage_attribution_usage
       - estimated_rum_usage_attribution_percentage
+      - asm_serverless_traced_invocations_usage
+      - asm_serverless_traced_invocations_percentage
       type: string
       x-enum-varnames:
       - API_PERCENTAGE
@@ -17123,6 +17139,8 @@ components:
       - APPSEC_FARGATE_PERCENTAGE
       - ESTIMATED_RUM_USAGE_ATTRIBUTION_USAGE
       - ESTIMATED_RUM_USAGE_ATTRIBUTION_PERCENTAGE
+      - ASM_SERVERLESS_TRACED_INVOCATIONS_USAGE
+      - ASM_SERVERLESS_TRACED_INVOCATIONS_PERCENTAGE
     UsageAttributionSupportedMetrics:
       description: Supported fields for usage attribution requests (valid requests
         contain one or more metrics, or `*` for all).
@@ -17173,6 +17191,8 @@ components:
       - appsec_fargate_percentage
       - estimated_rum_usage_attribution_usage
       - estimated_rum_usage_attribution_percentage
+      - asm_serverless_traced_invocations_usage
+      - asm_serverless_traced_invocations_percentage
       - '*'
       type: string
       x-enum-varnames:
@@ -17222,6 +17242,8 @@ components:
       - APPSEC_FARGATE_PERCENTAGE
       - ESTIMATED_RUM_USAGE_ATTRIBUTION_USAGE
       - ESTIMATED_RUM_USAGE_ATTRIBUTION_PERCENTAGE
+      - ASM_SERVERLESS_TRACED_INVOCATIONS_USAGE
+      - ASM_SERVERLESS_TRACED_INVOCATIONS_PERCENTAGE
       - ALL
     UsageAttributionTagNames:
       additionalProperties:
@@ -18932,6 +18954,11 @@ components:
             Fargate tasks over all hours in the current date for all organizations.
           format: int64
           type: integer
+        asm_serverless_sum:
+          description: Shows the sum of all Application Security Monitoring Serverless
+            invocations over all hours in the current date for all organizations.
+          format: int64
+          type: integer
         audit_logs_lines_indexed_sum:
           deprecated: true
           description: Shows the sum of audit logs lines indexed over all hours in
@@ -19460,6 +19487,11 @@ components:
         appsec_fargate_count_avg:
           description: Shows the average of all Application Security Monitoring ECS
             Fargate tasks over all hours in the current months for the given org.
+          format: int64
+          type: integer
+        asm_serverless_sum:
+          description: Shows the sum of all Application Security Monitoring Serverless
+            invocations over all hours in the current month for the given org.
           format: int64
           type: integer
         audit_logs_lines_indexed_sum:
@@ -20003,6 +20035,11 @@ components:
         appsec_fargate_count_avg_sum:
           description: Shows the average of all Application Security Monitoring ECS
             Fargate tasks over all hours in the current months for all organizations.
+          format: int64
+          type: integer
+        asm_serverless_agg_sum:
+          description: Shows the sum of all Application Security Monitoring Serverless
+            invocations over all hours in the current months for all organizations.
           format: int64
           type: integer
         audit_logs_lines_indexed_agg_sum:
