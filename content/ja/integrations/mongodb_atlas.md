@@ -41,7 +41,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: mongodb_atlas
-oauth: {}
 public_title: MongoDB Atlas
 short_description: MongoDB Atlas
 supported_os:

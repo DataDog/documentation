@@ -47,7 +47,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: kong
-oauth: {}
 public_title: Kong
 short_description: 合計リクエスト数、応答コード数、クライアント接続数などを追跡
 supported_os:

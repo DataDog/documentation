@@ -38,7 +38,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: hyperv
-oauth: {}
 public_title: HyperV
 short_description: Microsoft の Hyper-V 仮想化テクノロジーを監視
 supported_os:

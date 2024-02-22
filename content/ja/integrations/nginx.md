@@ -54,7 +54,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: nginx
-oauth: {}
 public_title: Nginx
 short_description: 接続およびリクエストのメトリクスを監視。NGINX Plus でさらに多くのメトリクスを取得できます。
 supported_os:

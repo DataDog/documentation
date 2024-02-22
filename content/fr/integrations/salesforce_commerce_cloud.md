@@ -28,7 +28,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: salesforce_commerce_cloud
-oauth: {}
 public_title: Salesforce Commerce Cloud
 short_description: Importer vos logs Salesforce Commerce Cloud dans Datadog
 supported_os: []

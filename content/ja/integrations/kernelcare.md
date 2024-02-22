@@ -36,7 +36,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: kernelcare
-oauth: {}
 public_title: KernelCare
 short_description: KernelCare サーバーのアクティビティとステータスメトリクスを監視します。
 supported_os:

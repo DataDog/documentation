@@ -111,6 +111,7 @@ The following frameworks aren't directly instrumented by ASM, but indirectly sup
 | Yii           | 3.1+        |  {{< X >}} | {{< X >}} |
 | Zend          | 3.1+        |  {{< X >}} | {{< X >}} |
 | Symfony 3     | 3.1+        |  {{< X >}} | {{< X >}} |
+| RoadRunner    | 2.x         |  {{< X >}} | {{< X >}} |
 
 
 ### Data store compatibility

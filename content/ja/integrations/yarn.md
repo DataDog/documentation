@@ -41,7 +41,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: yarn
-oauth: {}
 public_title: Yarn
 short_description: クラスター全体の健全性メトリクスを収集し、アプリケーションの進捗状況を追跡。
 supported_os:

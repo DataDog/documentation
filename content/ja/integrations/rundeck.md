@@ -37,7 +37,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: rundeck
-oauth: {}
 public_title: Rundeck
 short_description: Rundeck の Webhook を使用して修復アクションを自動化
 supported_os:

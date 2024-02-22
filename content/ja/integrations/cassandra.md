@@ -47,7 +47,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: cassandra
-oauth: {}
 public_title: Cassandra
 short_description: クラスターのパフォーマンス、容量、全体的な健全性などを追跡
 supported_os:

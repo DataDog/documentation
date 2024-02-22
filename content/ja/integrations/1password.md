@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: 1password
-oauth: {}
 public_title: 1Password
 short_description: 1Password アカウントのイベントを取得します。
 supported_os: []

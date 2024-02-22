@@ -20,7 +20,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: data_runner
-oauth: {}
 public_title: The Data Runner
 short_description: メトリクスを探す Datadog ダッシュボードの放置ゲーム。
 supported_os:

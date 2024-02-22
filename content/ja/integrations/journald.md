@@ -31,7 +31,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: journald
-oauth: {}
 public_title: journald
 short_description: Datadog を使用して systemd-journald ログを監視します。
 supported_os:

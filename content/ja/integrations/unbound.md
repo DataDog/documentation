@@ -35,7 +35,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: unbound
-oauth: {}
 public_title: Unbound
 short_description: unbound メトリクスを収集する Datadog インテグレーション
 supported_os:

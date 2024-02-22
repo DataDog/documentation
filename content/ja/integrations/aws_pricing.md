@@ -36,7 +36,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: aws_pricing
-oauth: {}
 public_title: AWS Pricing
 short_description: サービスの AWS Pricing 情報をレートコードごとに収集
 supported_os:

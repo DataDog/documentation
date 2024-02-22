@@ -36,7 +36,6 @@ is_public: true
 kind: 통합
 manifest_version: 2.0.0
 name: neoload
-oauth: {}
 public_title: NeoLoad
 short_description: NeLoad 성능 테스트 결과 모니터링 및 분석
 supported_os:

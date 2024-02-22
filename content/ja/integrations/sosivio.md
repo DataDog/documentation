@@ -41,7 +41,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: sosivio
-oauth: {}
 public_title: Sosivio
 short_description: 手に入れるのは、データではなく答え。Kubernetes の予測型トラブルシューティング。
 supported_os:
