@@ -14,7 +14,7 @@ aliases:
 If a service has a supported tracer installed, the API Catalog will automatically be filled by all endpoints discovered from this service. 
 
 In order to check compatibility, you can visit the ‘troubleshoot’ page on the app by pressing the ‘learn more’ button
-{{< img src="tracing/api_catalog/api-catalog-discovery-learn-more.png" alt="ALT TEXT" style="width:30%;" >}}
+{{< img src="tracing/api_catalog/api-catalog-discovery-learn-more.png" alt="ALT TEXT" style="width:30%;text-align: left;" >}}
 
 ## Providing endpoint path manually
 Add the `datadog.api_catalog.route` tag to force endpoint discovery by the API Catalog.
@@ -39,7 +39,7 @@ Datadog::Tracing.active_trace.set_tag('datadog.api_catalog.route', '/products/{i
 Once you set this tag, you should expect to see this tag in spans:
 {{< img src="tracing/api_catalog/api-catalog-discovery-span.png" alt="ALT TEXT" style="width:100%;" >}}
 
-Which will lead to the creation of the following endpoint in the API Catalog
+Which will lead to the creation of the following endpoint in the API Catalog:
 {{< img src="tracing/api_catalog/api-catalog-discovery-result.png" alt="ALT TEXT" style="width:100%;" >}}
 
 ## Further reading
