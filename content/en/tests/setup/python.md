@@ -41,7 +41,7 @@ Supported test frameworks:
 
 | Test Framework | Version |
 |---|---|
-| `pytest` | >= 3.0.0 |
+| `pytest` | >= 3.0.0 <= 7.0.0 |
 | `pytest-benchmark` | >= 3.1.0 |
 | `unittest` | >= 3.7 |
 
@@ -104,7 +104,7 @@ def test_simple_case(ddspan):
     # ...
 ```
 
-To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][5] section of the Python custom instrumentation documentation.
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Python custom instrumentation documentation.
 
 ### Adding custom metrics to tests
 
@@ -120,10 +120,29 @@ def test_simple_case(ddspan):
     # test continues normally
     # ...
 ```
-Read more about custom metrics in the [Add Custom Metrics Guide][7].
+Read more about custom metrics in the [Add Custom Metrics Guide][2].
 
-[5]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
-[7]: /continuous_integration/guides/add_custom_metrics/?tab=python
+### Known limitations
+
+Plugins for `pytest` that alter test execution may cause unexpected behavior.
+
+#### Parallelization
+
+Plugins that introduce parallelization to `pytest` (such as [`pytest-xdist`][3] or [`pytest-forked`][4]) create one session event for each parallelized instance. Multiple module or suite events may be created if tests from the same package or module execute in different processes.
+
+The overall count of test events (and their correctness) remain unaffected. Individual session, module, or suite events may have inconsistent results with other events in the same `pytest` run.
+
+#### Test ordering
+
+Plugins that chage the ordering of test execution (such as [`pytest-randomly`][5]) can create multiple module or suite events. The duration and results of module or suite events may also be inconsistent with the results reported by `pytest`.
+
+The overall count of test events (and their correctness) remain unaffected.
+
+[1]: /tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
+[2]: /continuous_integration/guides/add_custom_metrics/?tab=python
+[3]: https://pypi.org/project/pytest-xdist/
+[4]: https://pypi.org/project/pytest-forked/
+[5]: https://pypi.org/project/pytest-randomly/
 
 {{% /tab %}}
 

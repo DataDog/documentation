@@ -40,7 +40,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: emnify
-oauth: {}
 public_title: EMnify
 short_description: EMnify データ使用量メトリクスのモニターとダッシュボード
 supported_os: []

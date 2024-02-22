@@ -33,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: dotnetclr
-oauth: {}
 public_title: .NET CLR
 short_description: Dotnetclr の状態を視覚化および監視
 supported_os:

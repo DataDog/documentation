@@ -237,13 +237,13 @@ class CdkStack(core.Stack):
         }
     }
     ```
-1. 레이어 ARN에서 자리표시자 `<AWS_REGION>`, `<RUNTIME>`, `<VERSION>`을 적합한 값으로 대체하세요. 사용 가능한 `RUNTIME` 옵션은 `Python27`, `Python36`, `Python37`, `Python38`입니다. 최신 `VERSION`은 `{{< latest-lambda-layer-version layer="python" >}}`입니다. 예시: 
+1. 레이어 ARN에서 자리표시자 `<AWS_REGION>`, `<RUNTIME>`, `<VERSION>`을 적합한 값으로 대체하세요. 사용 가능한 `RUNTIME` 옵션은 {{< latest-lambda-layer-version layer="python-example-version" >}}입니다. 최신 `VERSION`은 `{{< latest-lambda-layer-version layer="python-versions" >}}`입니다. 예시: 
     ```
     # For regular regions
-    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+    arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="python-example-version" >}}:{{< latest-lambda-layer-version layer="python" >}}
 
     # For us-gov regions
-    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-{{< latest-lambda-layer-version layer="python-example-version" >}}:{{< latest-lambda-layer-version layer="python" >}}
     ```
 1. 람바 함수가 코드 서명을 사용하도록 설정된 경우 Datadog 서명 프로필 ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`)을 함수의 [코드 서명 설정][1]에 추가하세요.
 
@@ -265,13 +265,13 @@ class CdkStack(core.Stack):
         }
     }
     ```
-1. 레이어 ARN에서 자리표시자 `<AWS_REGION>`, `<RUNTIME>`, `<VERSION>`을 적합한 값으로 대체하세요. 사용 가능한 `RUNTIME` 옵션은 `Python27`, `Python36`, `Python37`, `Python38`입니다. 최신 `VERSION`은 `{{< latest-lambda-layer-version layer="python" >}}`입니다. 예시: 
+1. 레이어 ARN에서 자리표시자 `<AWS_REGION>`, `<RUNTIME>`, `<VERSION>`을 적합한 값으로 대체하세요. 사용 가능한 `RUNTIME` 옵션은 {{< latest-lambda-layer-version layer="python-versions" >}}입니다. 최신 `VERSION`은 `{{< latest-lambda-layer-version layer="python" >}}`입니다. 예시: 
     ```
     # For regular regions
-    arn:aws:lambda:us-east-1:417141415827:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+    arn:aws:lambda:us-east-1:417141415827:layer:Datadog-{{< latest-lambda-layer-version layer="python-example-version" >}}:{{< latest-lambda-layer-version layer="python" >}}
 
     # For us-gov regions
-    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+    arn:aws-us-gov:lambda:us-gov-east-1:002406178527:layer:Datadog-{{< latest-lambda-layer-version layer="python-example-version" >}}:{{< latest-lambda-layer-version layer="python" >}}
     ```
 1. 람바 함수가 코드 서명을 사용하도록 설정된 경우 Datadog 서명 프로필 ARN(`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`)을 함수의 [코드 서명 설정][1]에 추가하세요.
 
@@ -404,10 +404,10 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION
 arn:aws-us-gov:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-사용 가능한 `RUNTIME` 옵션은 `Python27`, `Python36`, `Python37`, `Python38`입니다. 최신 `VERSION`은 `{{< latest-lambda-layer-version layer="python" >}}`입니다. 예시:
+사용 가능한 `RUNTIME` 옵션은 {{< latest-lambda-layer-version layer="python-versions" >}}입니다. 최신 `VERSION`은 `{{< latest-lambda-layer-version layer="python" >}}`입니다. 예시:
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Python37:{{< latest-lambda-layer-version layer="python" >}}
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="python-example-version" >}}:{{< latest-lambda-layer-version layer="python" >}}
 ```
 
 {{< site-region region="us,us3,us5,eu,gov" >}}

@@ -28,7 +28,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: podman
-oauth: {}
 public_title: Podman
 short_description: Surveiller toutes vos métriques sur les conteneurs Podman avec
   Datadog

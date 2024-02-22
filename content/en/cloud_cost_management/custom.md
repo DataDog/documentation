@@ -29,7 +29,7 @@ Custom Cost is in public beta.
 
 ## Overview
 
-Custom Costs allow you to upload *any cost data source* to Datadog, so that you can understand the total cost of your services. 
+Custom Costs allow you to upload *any cost data source* to Datadog, so that you can understand the total cost of your services.
 
 Custom Costs accepts costs in pre-defined file structures (CSV or JSON). These files are aligned with the [FinOps FOCUS specification][2], and you can [upload multiple files in either format](#create-a-csv-or-json-file-with-required-fields). For example, you can upload a mix of CSV or JSON files as desired with 1+ line items (rows for CSV or objects for JSON).
 
@@ -56,23 +56,6 @@ To use Custom Costs in Datadog, you must [configure Cloud Cost Management][1] fo
 |`BilledCost`| The amount being charged. |10.00 |NaN | Number-based decimal. |
 |`BillingCurrency` | Currency of billed cost. | USD| EUR | Must be USD. |
 
-#### Optional tags within JSON files
-
-For JSON files only, an additional `Tags` property is required, but its contents are optional.
-
-To tag a JSON line item with tags like `team:web` and `service:ops`, add:
-```
-"Tags": {
-    "team": "web",
-    "service": "ops"
-}
-```
-
-If a line item does _not_ contain additional tags, add:
-```
-"Tags": {}
-```
-
 ### Create a CSV or JSON file with required fields
 
 You can upload multiple CSV and JSON files, in either or both formats. Ensure that you don't upload the same file twice, since the cost will appear as doubled in the product.
@@ -80,7 +63,7 @@ You can upload multiple CSV and JSON files, in either or both formats. Ensure th
 {{< tabs >}}
 {{% tab "CSV" %}}
 
-The required fields must appear as columns in your CSV in the order listed above.
+The required fields must appear as columns in your CSV in the order listed above. You need to use a comma (`,`) as a separator for your CSV.
 
 Example of a valid CSV:
 
@@ -149,8 +132,7 @@ Example of a valid JSON file:
         "ChargePeriodStart": "2023-01-01",
         "ChargePeriodEnd": "2023-12-31",
         "BilledCost": 100.00,
-        "BillingCurrency": "USD",
-        "Tags": {}
+        "BillingCurrency": "USD"
     }
 ]
 ```
@@ -165,8 +147,7 @@ Example of an invalid JSON file:
         "chargeperiodstart": "2023-01-01",
         "chargeperiodend": "2023-12-31",
         "billedcost": 100.00,
-        "billingcurrency": "USD",
-        "tags": {}
+        "billingcurrency": "USD"
     }
 ]
 ```
@@ -175,8 +156,8 @@ Example of an invalid JSON file:
 
 {{% /tab %}}
 {{< /tabs >}}
-   
-### Add optional tags 
+
+### Add optional tags
 
 You can optionally add any number of tags to CSV or JSON files to allocate costs *after* the required fields as additional columns.
 
@@ -249,7 +230,7 @@ In this example, an additional `Tags` object property has been added with two ke
 
 ### Configure Custom Costs
 
-Once your data is formatted to the requirements above, upload your CSV and JSON files to Cloud Cost Management on [the **Custom Costs Uploaded Files** page][3] or programmatically by using the API. 
+After your data is formatted to the requirements above, upload your CSV and JSON files to Cloud Cost Management on [the **Custom Costs Uploaded Files** page][3] or programmatically by using the API.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -261,9 +242,9 @@ Navigate to [**Cloud Costs** > **Settings** > **Uploaded Files**][101] and click
 [101]: https://app.datadoghq.com/cost/settings/cost-files
 
 {{% /tab %}}
-{{% tab "Programmatically" %}}
+{{% tab "API (file)" %}}
 
-To send a JSON file, use the `PUT api/v2/cost/custom_costs` API endpoint. 
+To send a file, use the `PUT api/v2/cost/custom_costs` API endpoint.
 
 Example with cURL:
 
@@ -275,9 +256,21 @@ curl -L -X PUT "api.datadoghq.com/api/v2/cost/custom_costs/" \
 -F "file=${file};type=text/json"
 ```
 {{% /tab %}}
+{{% tab "API (request)" %}}
+
+Use the `PUT api/v2/cost/custom_costs` endpoint to send the content of the file with the API .
+
+```curl
+curl -L -X PUT "api.datadoghq.com/api/v2/cost/custom_costs/" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '${file_content}'
+```
+{{% /tab %}}
 {{< /tabs >}}
 
-Cost data appears after 24 hours. 
+Cost data appears after 24 hours.
 
 ## Cost metric types
 

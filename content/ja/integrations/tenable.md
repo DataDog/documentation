@@ -31,7 +31,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: tenable
-oauth: {}
 public_title: Tenable Nessus
 short_description: Nessus のバックエンドと Web サーバーのログを追跡
 supported_os:
