@@ -3,7 +3,6 @@ title: Adding Custom Tags and Measures to Pipeline Traces
 kind: documentation
 aliases:
   - /continuous_integration/pipelines/custom_tags_and_measures
-  - /continuous_integration/setup_pipelines/custom_tags_and_measures
   - /continuous_integration/setup_pipelines/custom_tags_and_metrics
 further_reading:
   - link: "/continuous_integration/troubleshooting/"
