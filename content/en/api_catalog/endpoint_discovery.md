@@ -29,11 +29,11 @@ Example of adding a custom tag for each span in Go and Ruby:
 
 **Go**\
 {{< code-block lang="go" disable_copy="true" >}}
-span.SetTag("datadog.api_catalog.route", "/products/{id}")
+span.SetTag("datadog.api_catalog.route", "/products/:id")
 {{< /code-block >}}
 **Ruby**\
 {{< code-block lang="ruby" disable_copy="true" >}}
-Datadog::Tracing.active_trace.set_tag('datadog.api_catalog.route', '/products/{id}')
+Datadog::Tracing.active_trace.set_tag('datadog.api_catalog.route', '/products/:id')
 {{< /code-block >}}
 
 Once you set this tag, you should expect to see this tag in spans:
