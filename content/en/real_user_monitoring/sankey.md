@@ -7,7 +7,7 @@ kind: documentation
 
 The Sankey diagram allows you to visualize all user journeys across your application to analyze the critical path.
 
-<!-- default-sankey.png -->
+{{< img src="real_user_monitoring/product_analytics/sankey_diagrams/default-sankey.png" alt="The default Sankey diagram for an app" style="width:90%;" >}}
 
 Each node represents a view the user visited. The thickness of each node represents the count of user sessions on that page. A page with fewer visitors will have a thinner node in the diagram.
 
@@ -24,21 +24,21 @@ Actions are not supported in Sankey diagrams.
 
 ### Start or end the diagram at a given view
 
-You can use the **Define Sankey** menu to customize this diagram to display
-- the steps users took *after* visiting a given view.
-- the steps users took *before* visiting a given view.
+You can use the **Define Sankey** menu to customize this diagram to display:
+- the steps users took *after* visiting a given view
+- the steps users took *before* visiting a given view
 
 The example below displays the four steps that users in the United States take after visiting `/department/lightning`:
 
-<!-- customized-sankey.png -->
+{{< img src="real_user_monitoring/product_analytics/sankey_diagrams/customized-sankey.png" alt="A customized Sankey diagram for an app" style="width:90%;" >}}
 
 ### Graph all views containing a given phrase
 
 Sankey diagrams support [Datadog wildcards][2], allowing you to build a diagram of all views containing a given phrase.
 
-The example below displays the five steps that users take after visiting any view matching `/department/*`:
+To match multiple routes, type a wildcard instead of choosing a single view name. The example below displays the five steps that users take after visiting any view matching `/department/*`:
 
-<!-- wildcard-sankey.png -->
+{{< img src="real_user_monitoring/product_analytics/sankey_diagrams/wildcard-sankey.png" alt="A Sankey diagram that uses a wildcard to match several routes" style="width:90%;" >}}
 
 ## Analyze a Sankey diagram
 
@@ -46,15 +46,15 @@ You can hover over a diagram node to view the number of sessions that included v
 
 Click the node for a list of analysis options, such as viewing a sample [Session Replay][3] or building a Sankey diagram that starts with that view.
 
-<!-- sankey-node-interaction.png -->
+{{< img src="real_user_monitoring/product_analytics/sankey_diagrams/sankey-node-interaction.png" alt="The actions menu of a Sankey diagram node" style="width:90%;" >}}
 
 ### Convert the diagram to a funnel
 
-1. From the Sankey diagram page, click the **Build funnel** button.
+1. From the Sankey diagram page, click the **Build Funnel** button.
 2. In the Sankey diagram, click the nodes of the views you want to include in the funnel.
-3. Click **Create funnel from selection**.
+3. Click **Create Funnel from Selection**.
 
-<!-- sankey-funnel-conversion.png -->
+{{< img src="real_user_monitoring/product_analytics/sankey_diagrams/sankey-funnel-conversion.png" alt="A Sankey to funnel conversion in process" style="width:90%;" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/user-journey
 [2]: /real_user_monitoring/explorer/search_syntax/#wildcards
