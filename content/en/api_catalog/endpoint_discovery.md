@@ -25,7 +25,8 @@ Note: API Catalog will still filter out spans that do not contain the following 
 * `http.status_code`
 
 ## Example
-Example of adding a custom tag for each span in Go and Ruby:\
+Example of adding a custom tag for each span in Go and Ruby:
+
 **Go**\
 {{< code-block lang="go" disable_copy="true" >}}
 span.SetTag("datadog.api_catalog.route", "/products/{id}")
