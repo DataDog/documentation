@@ -90,10 +90,10 @@ You can see different results depending on the aggregation method you are using 
 
 | Aggregation | Resulting graph | 
 | ---  | ----------- | 
-| Average (`avg by`): average value of the metric | {{< img src="monitors/guide/history_and_evaluation_graphs/AVG_aggregation.png" alt="Your image description" style="width:100%;" >}} |
-| Maximum (`max by`): maximum value of the metric | {{< img src="monitors/guide/history_and_evaluation_graphs/MAX_aggregation.png" alt="Your image description" style="width:100%;" >}} |
-| Minimum (`min by`): minimum value of the metric | {{< img src="monitors/guide/history_and_evaluation_graphs/MIN_aggregation.png" alt="Your image description" style="width:100%;" >}} |
-| Sum (`sum by`): total of all metric values added up | {{< img src="monitors/guide/history_and_evaluation_graphs/SUM_aggregation.png" alt="Your image description" style="width:100%;" >}} | 
+| Average (`avg by`): average value of the metric | {{< img src=monitors/guide/monitor_aggregators/AVG_aggregation.png" alt="Your image description" style="width:100%;" >}} |
+| Maximum (`max by`): maximum value of the metric | {{< img src="monitors/guide/monitor_aggregators/MAX_aggregation.png" alt="Your image description" style="width:100%;" >}} |
+| Minimum (`min by`): minimum value of the metric | {{< img src="monitors/guide/monitor_aggregators/MIN_aggregation.png" alt="Your image description" style="width:100%;" >}} |
+| Sum (`sum by`): total of all metric values added up | {{< img src="monitors/guide/monitor_aggregators/SUM_aggregation.png" alt="Your image description" style="width:100%;" >}} | 
 
 ## Further Reading
 
