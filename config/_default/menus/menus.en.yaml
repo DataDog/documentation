@@ -834,17 +834,17 @@ main:
     identifier: cloudcraft_account_management
     parent: cloudcraft
     weight: 2
-  - name: "Components: Common"
+  - name: 'Components: Common'
     url: cloudcraft/components-common/
     identifier: cloudcraft_components_common
     parent: cloudcraft
     weight: 3
-  - name: "Components: Azure"
+  - name: 'Components: Azure'
     url: cloudcraft/components-azure/
     identifier: cloudcraft_components_azure
     parent: cloudcraft
     weight: 4
-  - name: "Components: AWS"
+  - name: 'Components: AWS'
     url: cloudcraft/components-aws/
     identifier: cloudcraft_components_aws
     parent: cloudcraft
