@@ -159,13 +159,13 @@ The active Profiling tab also affects the project tree view, which is annotated 
 
 ## Logs insights
 
-Log patterns from Datadog are matched directly to lines of code in your editor for your Java, Go, and Python source files.
-{{< img src="/developers/ide_integrations/idea/log-patterns.png" alt="A log line showing log events from Datadog" style="width:60%;" >}}
+Log patterns from Datadog are matched directly to lines of code in your editor for your Java, Go, and Python source files:
+{{< img src="/developers/ide_integrations/idea/log-patterns.png" alt="A log line showing log events from Datadog" style="width:100%;" >}}
 
-A popup will show the log patterns that match the log line.
-{{< img src="/developers/ide_integrations/idea/log-patterns-popup.png" alt="A popup showing log patterns from Datadog" style="width:60%;" >}}
+A popup will show runtime values from the log entries:
+{{< img src="/developers/ide_integrations/idea/log-patterns-popup.png" alt="A popup showing log patterns from Datadog" style="width:100%;" >}}
 
-The small icon in the log line links to the [Log Explorer][5] on the Datadog platform with a pre-filled query that matches the logger name, log level, and log message as closely as possible.
+Click the log icon to open the [Log Explorer][5] on the Datadog platform with a pre-filled query that matches the logger name, log level, and log message as closely as possible:
 {{< img src="/developers/ide_integrations/idea/log-explorer-link.png" alt="A source file showing a View Logs link." style="width:100%;" >}}
 
 ## CI Test Runs
