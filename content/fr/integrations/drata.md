@@ -30,7 +30,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: drata
-oauth: {}
 public_title: Drata
 short_description: Ingérez les informations de conformité Datadog dans Drata
 supported_os:

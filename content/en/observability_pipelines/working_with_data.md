@@ -13,15 +13,9 @@ further_reading:
   - link: /observability_pipelines/reference/transforms/#lua
     tag: Documentation
     text: Modifying events with Lua
-  - link: /observability_pipelines/reference/transforms/#tagcardinalitylimit
-    tag: Documentation
-    text: Limit the cardinality of tags on metrics to safeguard against cardinality explosion
   - link: /observability_pipelines/reference/transforms/#logtometric
     tag: Documentation
     text: Convert logs to metric events
-  - link: /observability_pipelines/reference/transforms/#metrictolog
-    tag: Documentation
-    text: Convert metrics to log events
   - link: /observability_pipelines/configurations/
     tag: Documentation
     text: Learn more about Observability Pipelines configurations
@@ -115,7 +109,6 @@ Sampling, reducing, filtering, and aggregating are common transforms to reduce t
 - [Deduplicate][6] events. 
 - [Filter events][7] based on a set of conditions.
 - [Aggregate multiple metric events][8] into a single metric event based on a defined interval window.
-- [Convert metrics to logs][9].
 
 See [Control Log Volume and Size][10] for examples on how to use these transforms.
 

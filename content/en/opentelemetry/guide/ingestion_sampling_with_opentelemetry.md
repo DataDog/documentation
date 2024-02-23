@@ -97,7 +97,7 @@ You can leverage the [APM Estimated Usage dashboard][13] and the estimated usage
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /opentelemetry/otel_collector_datadog_exporter
-[2]: /opentelemetry/otel_collector_datadog_exporter/?tab=alongsidetheagent#5-run-the-collector
+[2]: /opentelemetry/otel_collector_datadog_exporter/?tab=alongsidetheagent#step-5---run-the-collector
 [3]: /opentelemetry/otlp_ingest_in_the_agent
 [4]: /tracing/metrics/metrics_namespace/
 [5]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased

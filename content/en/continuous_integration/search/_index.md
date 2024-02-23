@@ -82,4 +82,4 @@ Pipeline Visibility provides AI-generated explanations for pipeline errors based
 [4]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection-beta
 [5]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
 [6]: /account_management/teams/ 
-[7]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[7]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux

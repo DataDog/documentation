@@ -4,6 +4,8 @@ kind: documentation
 disable_toc: false
 disable_sidebar: false
 type: documentation
+algolia:
+  tags: ['workflow', 'workflows', 'workflow automation']
 is_beta: true
 aliases:
 - /workflows/generic_actions

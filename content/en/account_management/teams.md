@@ -32,6 +32,8 @@ The [team directory page][1] lists all teams within your organization. Use the *
 1. Use the dropdown menu to select team members.
 1. Click **Create**.
 
+**Note:** Allowed characters for team names and team handles are `a-z`, `A-Z`, `0-9`, and `._-:/`.
+
 ### Modify team
 
 1. On the [team directory page][1], click the team you wish to modify. A side panel appears with the team details.
@@ -107,6 +109,8 @@ The table below describes the products in which you can use the team filter:
 | [Service Level Objectives][15] | Team handle                                                                 |
 | [Data Streams Monitoring][16]  | Team handle                                                                 |
 | [Synthetic Tests][17]          | Team handle                                                                 |
+| [Notebooks][18]          | Team handle                                                                      |
+
 
 
 ## Permissions
@@ -139,6 +143,7 @@ If you prefer a team-driven membership model, set your default team settings so 
 
 To enforce a strict membership model, configure your default team settings so **Only users with user_access_manage** can add or remove members. Assign the `teams_manage` permission only to organization administrators.
 
+
 [1]: https://app.datadoghq.com/organization-settings/teams
 [2]: /account_management/saml/mapping/#map-saml-attributes-to-teams
 [3]: /dashboards/#edit-details
@@ -156,3 +161,4 @@ To enforce a strict membership model, configure your default team settings so **
 [15]: https://app.datadoghq.com/slo/manage
 [16]: https://app.datadoghq.com/data-streams
 [17]: https://app.datadoghq.com/synthetics
+[18]: https://app.datadoghq.com/notebook/list/

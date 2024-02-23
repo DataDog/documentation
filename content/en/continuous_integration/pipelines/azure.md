@@ -10,9 +10,9 @@ further_reading:
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
-    - link: "/continuous_integration/pipelines/custom_tags_and_metrics/"
+    - link: "/continuous_integration/pipelines/custom_tags_and_measures/"
       tag: "Documentation"
-      text: "Extend Pipeline Visibility by adding custom tags and metrics"
+      text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
 
 <div class="alert alert-warning">
@@ -25,13 +25,13 @@ Azure DevOps Server is not officially supported.
 
 ## Compatibility
 
-- **Custom tags and metrics at runtime**: Configure [custom tags][6] and metrics at runtime
+- **Custom tags and measures at runtime**: Configure [custom tags][6] and measures at runtime
 
 ## Configure the Datadog integration
 
 The Datadog integration for [Azure Pipelines][1] works by using [service hooks][2] to send data to Datadog.
 
-1. Install the [Datadog CI Visibility][8] extension from the Azure Marketplace.
+1. Install the [Datadog CI Visibility][8] extension from the Azure Marketplace. There are several extensions starting with **Datadog**, make sure that you are installing the [Datadog CI Visibility][8] extension.
 
 2. For each project, go to **Project settings > Service hooks** in Azure DevOps and select the green plus (+) icon to create a subscription.
 
@@ -104,5 +104,5 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
-[6]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[6]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [8]: https://marketplace.visualstudio.com/items?itemName=Datadog.ci-visibility

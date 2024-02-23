@@ -8,6 +8,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
     tag: "Blog"
     text: "Monitor all your CI pipelines with Datadog"
+  - link: "/intelligent_test_runner"
+    tag: "Documentation"
+    text: "Learn about Intelligent Test Runner"
+  - link: "/tests"
+    tag: "Documentation"
+    text: "Learn about Test Visibility"
 ---
 
 ## Overview
@@ -33,15 +39,15 @@ When you enable Intelligent Test Runner, per-test (or per-suite, depending on th
 
 The Datadog backend uses that information to search through previous test runs to determine if a given test can be skipped. If Datadog has a record of the test passing in a commit where the covered and [tracked files][2] are identical to the current commit, the test is skipped. This is used as evidence that the code change didn't impact the test.
 
-{{< img src="continuous_integration/itr_test_selection.png" alt="Intelligent Test Runner Test Selection Diagram" style="width:60%;">}}
+{{< img src="continuous_integration/itr_test_selection_diagram.png" alt="A Venn diagram explaining what makes a test skippable in the test selection process for Intelligent Test Runner" style="width:80%;">}}
 
 The Datadog library then removes tests marked as unskippable in source from the skippable tests list. It then proceeds to run the tests, but directs the test framework to skip those that remain in the skippable test list.
 
-{{< img src="continuous_integration/itr_skipped_test_run.png" alt="Intelligent Test Runner Skipped Test" style="width:80%;">}}
+{{< img src="continuous_integration/itr_skipped_test_run.png" alt="A skipped test by Intelligent Test Runner" style="width:80%;">}}
 
 Let's take a look at a specific example:
 
-{{< img src="continuous_integration/itr_example.png" alt="Intelligent Test Runner Example Diagram" style="width:80%;">}}
+{{< img src="continuous_integration/itr_example_2.png" alt="A diagram explaining how a pull request with multiple commits to main and feature branches can have different results with tracked files" style="width:80%;">}}
 
 The diagram above shows a developer branch that branches out from `main` and has several commits. On each commit, the CI has been running two tests (A and B) with different results.
 
@@ -60,5 +66,9 @@ The diagram above shows a developer branch that branches out from `main` and has
   - Test A could be skipped thanks to the test run in commit 4.
   - Test B could be skipped thanks to the test run in commit 5.
 
-[1]: ../../tests/
-[2]: ../#tracked-files
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /tests/
+[2]: /intelligent_test_runner/#tracked-files

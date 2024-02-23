@@ -5,8 +5,9 @@ private: true
 title: SLO ガイド
 ---
 
-{{< whatsnext desc="全般ガイド:">}}
+{{< whatsnext desc="一般ガイド:">}}
     {{< nextlink href="/service_management/service_level_objectives/guide/slo-checklist" >}}SLO チェックリスト{{< /nextlink >}}
+    {{< nextlink href="/service_management/service_level_objectives/guide/slo_types_comparison" >}}SLO タイプの比較{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="ダッシュボードガイド:">}}

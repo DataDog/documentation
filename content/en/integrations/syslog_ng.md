@@ -8,7 +8,7 @@ categories:
     - log collection
 doc_link: /integrations/syslog_ng/
 aliases:
-    - logs/log_collection/syslog_ng
+    - /logs/log_collection/syslog_ng
 has_logo: true
 integration_title: syslog_ng
 is_public: true

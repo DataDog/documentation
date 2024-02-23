@@ -4,6 +4,8 @@ kind: documentation
 disable_toc: false
 type: workflows
 is_beta: false
+algolia:
+  tags: ['workflow', 'workflows', 'workflow automation']
 further_reading:
 - link: "/integrations/"
   tag: "Documentation"
