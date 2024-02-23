@@ -1577,17 +1577,17 @@ main:
     parent: workflows
     identifier: workflows_actions
     weight: 4
-  - name: Flow Control
+  - name: Workflow Logic
     url: service_management/workflows/actions/flow_control/
     parent: workflows_actions
     identifier: workflows_flow_control
     weight: 402
-  - name: Transform Data
+  - name: Data Transformation
     url: service_management/workflows/actions/data_transformation/
     parent: workflows_actions
     identifier: workflows_data_transformation
     weight: 403
-  - name: HTTP Action
+  - name: HTTP Requests
     url: service_management/workflows/actions/http/
     parent: workflows_actions
     identifier: workflows_http

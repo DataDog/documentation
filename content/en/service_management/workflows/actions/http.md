@@ -1,5 +1,5 @@
 ---
-title: HTTP Action
+title: HTTP Requests
 kind: Documentation
 disable_toc: false
 further_reading:

@@ -1,5 +1,5 @@
 ---
-title: Flow Control and Workflow Logic
+title: Workflow Logic
 kind: documentation
 disable_toc: false
 type: workflows
@@ -15,7 +15,7 @@ further_reading:
   text: "Learn about integrations"
 ---
 
-Workflow [Logic actions][2] allow you to control the execution path of your workflow. For example, you can branch from a condition, perform an action iteratively, include a sleep interval, and much more.
+Use [Logic actions][2] to add control logic to your workflow. For example, you can branch from a condition, perform an action iteratively, include a sleep interval, and more.
 
 ## Branch workflow from condition
 
