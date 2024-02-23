@@ -36022,10 +36022,10 @@ paths:
           `application_security`, `audit_trail`, `serverless`, `ci_app`, `cloud_cost_management`,
 
           `csm_container_enterprise`, `csm_host_enterprise`, `cspm`, `custom_events`,
-          `cws`, `dbm`, `fargate`,
+          `cws`, `dbm`, `error_tracking`,
 
-          `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`,
-          `iot`,
+          `fargate`, `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`,
+          `ingested_spans`, `iot`,
 
           `lambda_traced_invocations`, `logs`, `network_flows`, `network_hosts`, `netflow_monitoring`,
           `observability_pipelines`,

@@ -48,7 +48,7 @@ datadog:monitored,env:production,instance-type:c1.*,!region:us-east-1
  
 ### CloudWatch Metric Streams with Kinesis Data Firehose
 
-You can optionally [send CloudWatch metrics to Datadog using CloudWatch Metric Streams and Kinesis Data Firehose][8] instead of using the default API polling method. If your organization uses the CloudWatch Metric Streams with Kinesis method, AWS resource exclusion rules defined in the Datadog AWS integration page do not apply. You must manage all rules for including and excluding metric namespaces or specific metric names in the CloudWatch Metric Streams configuration in your AWS accounts.
+You can optionally [send CloudWatch metrics to Datadog using CloudWatch Metric Streams and Kinesis Data Firehose][8] instead of using the default API polling method. If your organization uses the CloudWatch Metric Streams with Kinesis method, AWS resource exclusion rules defined in the Datadog AWS integration page do not apply. You must manage all rules for including and excluding metric namespaces or specific metric names in the CloudWatch Metric Streams configuration for each of your AWS accounts within the AWS console.
 
 ## Troubleshooting
 
