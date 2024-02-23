@@ -43,7 +43,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: openstack
-oauth: {}
 public_title: OpenStack (レガシー)
 short_description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
 supported_os:

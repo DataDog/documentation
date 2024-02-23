@@ -60,7 +60,7 @@ To create a custom view:
 
 ## Case details
 
-{{< img src="/service_management/case_management/case_detail_view.png" alt="Case detail view of an example case that was escalated" style="width:100%;" >}}
+{{< img src="/service_management/case_management/view_and_manage/case_details_overview.png" alt="Case detail view of an example case that was escalated" style="width:100%;" >}}
 
 The Case Details page acts as the single source of truth on what is going on with the investigation. Each case has the following properties: 
 

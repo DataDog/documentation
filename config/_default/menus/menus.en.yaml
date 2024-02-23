@@ -818,6 +818,47 @@ main:
     identifier: coscreen_troubleshooting
     parent: coscreen
     weight: 1
+  - name: Cloudcraft
+    url: cloudcraft/
+    pre: cloudcraft
+    identifier: cloudcraft
+    parent: essentials_heading
+    weight: 270000
+  - name: Getting Started
+    url: cloudcraft/getting-started/
+    identifier: cloudcraft_getting_started
+    parent: cloudcraft
+    weight: 1
+  - name: Account Management
+    url: cloudcraft/account-management/
+    identifier: cloudcraft_account_management
+    parent: cloudcraft
+    weight: 2
+  - name: "Components: Common"
+    url: cloudcraft/components-common/
+    identifier: cloudcraft_components_common
+    parent: cloudcraft
+    weight: 3
+  - name: "Components: Azure"
+    url: cloudcraft/components-azure/
+    identifier: cloudcraft_components_azure
+    parent: cloudcraft
+    weight: 4
+  - name: "Components: AWS"
+    url: cloudcraft/components-aws/
+    identifier: cloudcraft_components_aws
+    parent: cloudcraft
+    weight: 5
+  - name: Advanced
+    url: cloudcraft/advanced/
+    identifier: cloudcraft_advanced
+    parent: cloudcraft
+    weight: 6
+  - name: FAQ
+    url: cloudcraft/faq/
+    identifier: cloudcraft_faq
+    parent: cloudcraft
+    weight: 7
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
@@ -3215,11 +3256,36 @@ main:
     parent: observability_pipelines_reference
     identifier: observability_pipelines_vector_configuration
     weight: 601
+  - identifier: observability_pipelines_reference_sources
+    name: Sources
+    parent: observability_pipelines_vector_configuration
+    url: observability_pipelines/reference/sources/
+    weight: 1
+  - identifier: observability_pipelines_reference_transforms
+    name: Transforms
+    parent: observability_pipelines_vector_configuration
+    url: observability_pipelines/reference/transforms/
+    weight: 2
+  - identifier: observability_pipelines_reference_sinks
+    name: Sinks
+    parent: observability_pipelines_vector_configuration
+    url: observability_pipelines/reference/sinks/
+    weight: 3
   - name: Datadog Processing Language
     url: observability_pipelines/reference/processing_language/
     parent: observability_pipelines_reference
     identifier: observability_pipelines_reference_processing_language
     weight: 602
+  - name: Functions
+    url: observability_pipelines/reference/processing_language/functions/
+    parent: observability_pipelines_reference_processing_language
+    identifier: observability_pipelines_reference_processing_language_functions
+    weight: 1
+  - name: Errors
+    url: observability_pipelines/reference/processing_language/errors/
+    parent: observability_pipelines_reference_processing_language
+    identifier: observability_pipelines_reference_processing_language_errors
+    weight: 2
   - name: Guides
     url: observability_pipelines/guide/
     parent: observability_pipelines
@@ -3678,11 +3744,16 @@ main:
     parent: csm
     identifier: cloud_workload_security
     weight: 2
-  - name: Managing Detection Rules
+  - name: Detection Rules
     url: security/threats/workload_security_rules
     parent: cloud_workload_security
     identifier: cws_workload_security_rules
     weight: 201
+  - name: Create Custom Rules
+    url: security/threats/workload_security_rules/custom_rules
+    parent: cws_workload_security_rules
+    identifier: cws_custom_rules
+    weight: 101
   - name: Security Signals
     url: security/threats/security_signals
     parent: cloud_workload_security
@@ -3718,6 +3789,11 @@ main:
     parent: cspm
     identifier: cspm_frameworks_benchmarks
     weight: 303
+  - name: Create Custom Frameworks
+    url: security/misconfigurations/frameworks_and_benchmarks/custom_frameworks
+    parent: cspm_frameworks_benchmarks
+    identifier: cspm_custom_frameworks
+    weight: 101
   - name: Supported Frameworks
     url: security/misconfigurations/supported_frameworks
     parent: cspm
@@ -3728,6 +3804,11 @@ main:
     parent: cspm
     identifier: cspm_findings_explorer
     weight: 305
+  - name: Export Misconfigurations
+    url: /security/misconfigurations/findings/export_misconfigurations
+    parent: cspm_findings_explorer
+    identifier: cspm_export_misconfigurations
+    weight: 101
   - name: Signals Explorer
     url: /security/misconfigurations/signals_explorer/
     parent: cspm
@@ -9121,14 +9202,14 @@ api:
         - AggregateCIAppTestEvents
       unstable: []
       order: 3
-  - name: Cases
-    url: /api/latest/cases/
-    identifier: cases
+  - name: Case Management
+    url: /api/latest/case-management/
+    identifier: case-management
     generated: true
   - name: Unassign case
     url: '#unassign-case'
-    identifier: cases-unassign-case
-    parent: cases
+    identifier: case-management-unassign-case
+    parent: case-management
     generated: true
     params:
       versions:
@@ -9139,8 +9220,8 @@ api:
       order: 7
   - name: Unarchive case
     url: '#unarchive-case'
-    identifier: cases-unarchive-case
-    parent: cases
+    identifier: case-management-unarchive-case
+    parent: case-management
     generated: true
     params:
       versions:
@@ -9151,8 +9232,8 @@ api:
       order: 9
   - name: Update case status
     url: '#update-case-status'
-    identifier: cases-update-case-status
-    parent: cases
+    identifier: case-management-update-case-status
+    parent: case-management
     generated: true
     params:
       versions:
@@ -9163,8 +9244,8 @@ api:
       order: 4
   - name: Update case priority
     url: '#update-case-priority'
-    identifier: cases-update-case-priority
-    parent: cases
+    identifier: case-management-update-case-priority
+    parent: case-management
     generated: true
     params:
       versions:
@@ -9175,8 +9256,8 @@ api:
       order: 5
   - name: Assign case
     url: '#assign-case'
-    identifier: cases-assign-case
-    parent: cases
+    identifier: case-management-assign-case
+    parent: case-management
     generated: true
     params:
       versions:
@@ -9187,8 +9268,8 @@ api:
       order: 6
   - name: Archive case
     url: '#archive-case'
-    identifier: cases-archive-case
-    parent: cases
+    identifier: case-management-archive-case
+    parent: case-management
     generated: true
     params:
       versions:
@@ -9199,8 +9280,8 @@ api:
       order: 8
   - name: Get the details of a case
     url: '#get-the-details-of-a-case'
-    identifier: cases-get-the-details-of-a-case
-    parent: cases
+    identifier: case-management-get-the-details-of-a-case
+    parent: case-management
     generated: true
     params:
       versions:
@@ -9209,38 +9290,10 @@ api:
         - GetCase
       unstable: []
       order: 3
-  - name: Create a case
-    url: '#create-a-case'
-    identifier: cases-create-a-case
-    parent: cases
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - CreateCase
-      unstable: []
-      order: 2
-  - name: Search cases
-    url: '#search-cases'
-    identifier: cases-search-cases
-    parent: cases
-    generated: true
-    params:
-      versions:
-        - v2
-      operationids:
-        - SearchCases
-      unstable: []
-      order: 1
-  - name: Cases Projects
-    url: /api/latest/cases-projects/
-    identifier: cases-projects
-    generated: true
   - name: Get the details of a project
     url: '#get-the-details-of-a-project'
-    identifier: cases-projects-get-the-details-of-a-project
-    parent: cases-projects
+    identifier: case-management-get-the-details-of-a-project
+    parent: case-management
     generated: true
     params:
       versions:
@@ -9251,8 +9304,8 @@ api:
       order: 3
   - name: Remove a project
     url: '#remove-a-project'
-    identifier: cases-projects-remove-a-project
-    parent: cases-projects
+    identifier: case-management-remove-a-project
+    parent: case-management
     generated: true
     params:
       versions:
@@ -9263,8 +9316,8 @@ api:
       order: 4
   - name: Create a project
     url: '#create-a-project'
-    identifier: cases-projects-create-a-project
-    parent: cases-projects
+    identifier: case-management-create-a-project
+    parent: case-management
     generated: true
     params:
       versions:
@@ -9275,8 +9328,8 @@ api:
       order: 1
   - name: Get all projects
     url: '#get-all-projects'
-    identifier: cases-projects-get-all-projects
-    parent: cases-projects
+    identifier: case-management-get-all-projects
+    parent: case-management
     generated: true
     params:
       versions:
@@ -9285,6 +9338,30 @@ api:
         - GetProjects
       unstable: []
       order: 2
+  - name: Create a case
+    url: '#create-a-case'
+    identifier: case-management-create-a-case
+    parent: case-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCase
+      unstable: []
+      order: 2
+  - name: Search cases
+    url: '#search-cases'
+    identifier: case-management-search-cases
+    parent: case-management
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - SearchCases
+      unstable: []
+      order: 1
   - name: Cloud Cost Management
     url: /api/latest/cloud-cost-management/
     identifier: cloud-cost-management

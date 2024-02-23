@@ -37,7 +37,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: exchange_server
-oauth: {}
 public_title: Microsoft Exchange Server
 short_description: Microsoft Exchange Server のメトリクスを収集してグラフ化
 supported_os:
