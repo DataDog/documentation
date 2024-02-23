@@ -228,7 +228,7 @@ You are required to provide the following incident attributes:
 You can optionally add the following incident attributes:
 
 - `finished_at` for *resolved incidents*. Required for [time to restore service](#time-to-restore-service).
-- `id` for identifying incidents when they are created and resolved. This attribute is user-generated; when not provided, the endpoint returns a Datadog-generated UUID."
+- `id` for identifying incidents when they are created and resolved. This attribute is user-generated; when not provided, the endpoint returns a Datadog-generated UUID.
 - `name` to describe the incident.
 - `severity`
 - `env` to accurately filter your DORA metrics by environment.
