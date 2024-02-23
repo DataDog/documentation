@@ -3,9 +3,9 @@ title: HTTP Action
 kind: Documentation
 disable_toc: false
 further_reading:
-- link: ""
+- link: "/service_management/workflows/connections/"
   tag: "Documentation"
-  text: ""
+  text: "Find out more about connection credentials for Workflow Automation"
 ---
 
 Use the HTTP action to make a request to a custom endpoint. You can control the request method and its contents, how it is authenticated and processed, and how it should respond to scenarios like expired certificates or redirects. If you need to add Datadog IP address ranges to your allowlist so that the HTTP action works as expected, use the IPs listed in the `webhooks` object. See the [IP Ranges page][1] for details.
@@ -31,19 +31,6 @@ If you need to authenticate your request, use the action's **Connection** to con
 1. Optionally, enter the **Custom Scope** to be requested from Microsoft when acquiring an OAuth 2 access token. A resource's scope is constructed using the identifier URI for the resource and `.default`, separated by a forward slash (`/`). For example, `{identifierURI}/.default`. For more information, see [the Microsoft documentation on .default scope][3].
 1. Click **Create**.
 
-### Create an HTTP basic auth connection
-
-The Basic Auth connection uses an authorization header with a username and password to authenticate the HTTP request.
-
-1. In the **Connection** section, click the plus icon (**+**).
-1. Select **HTTP**.
-1. Enter a **Connection Name**.
-1. From the **Authentication Type** dropdown, select **Basic Auth**.
-1. Enter a **Username** and **Password**.
-1. Enter the **Base URL** for authentication. The required authorization request header is automatically populated using your username and password, but you can add additional **Request Headers** if necessary.
-1. Optionally, add **URL parameters** and a **Body** to your request.
-1. Click **Create**.
-
 ### Create an HTTP token auth connection
 
 The Token Auth connection uses a bearer token to authenticate the HTTP request.
@@ -51,10 +38,22 @@ The Token Auth connection uses a bearer token to authenticate the HTTP request.
 1. In the **Connection** section, click the plus icon (**+**).
 1. Select **HTTP**.
 1. Enter a **Connection Name**.
+1. Enter the **Base URL** for authentication.
 1. From the **Authentication Type** dropdown, select **Token Auth**.
 1. Enter a **Token Name** and **Token Value**. You can enter multiple tokens. To reference your token in a header, parameter, or the request body, use the syntax `{{ secretTokenName }}`.
-1. Enter the **Base URL** for authentication.
 1. Optionally, add additional **Request Headers**, **URL parameters** and a **Body** to your request.
+1. Click **Create**.
+
+### Create an HTTP basic auth connection
+
+The Basic Auth connection uses an authorization header with a username and password to authenticate the HTTP request.
+
+1. In the **Connection** section, click the plus icon (**+**).
+1. Select **HTTP**.
+1. Enter a **Connection Name**.
+1. Enter the **Base URL** for authentication. The required authorization request header is automatically populated using your username and password.
+1. From the **Authentication Type** dropdown, select **Basic Auth**.
+1. Enter a **Username** and **Password**.
 1. Click **Create**.
 
 ### Create a 2 Step HTTP auth connection
