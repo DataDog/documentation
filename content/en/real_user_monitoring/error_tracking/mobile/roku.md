@@ -2,6 +2,11 @@
 title: Roku Crash Reporting and Error Tracking
 kind: documentation
 description: Set up Error Tracking for your Roku channels.
+aliases:
+- /real_user_monitoring/error_tracking/roku
+type: multi-code-lang
+code_lang: roku
+code_lang_weight: 50
 further_reading:
 - link: '/real_user_monitoring/error_tracking/'
   tag: 'Error Tracking'
@@ -13,10 +18,6 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
-
-{{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-info">RUM for Roku is in beta.</div>
 {{< /site-region >}}
 
 ## Overview

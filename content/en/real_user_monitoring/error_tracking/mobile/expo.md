@@ -2,6 +2,11 @@
 title: Expo Crash Reporting and Error Tracking
 kind: documentation
 description: Capture Expo crash reports in Datadog.
+aliases:
+- /real_user_monitoring/error_tracking/expo
+type: multi-code-lang
+code_lang: expo
+code_lang_weight: 30
 further_reading:
 - link: https://www.datadoghq.com/blog/debug-android-crashes/
   tag: Blog
