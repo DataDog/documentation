@@ -37,11 +37,10 @@ For more information about the latest updates, see the schemas on GitHub.
 {{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for metadata schema v3.0!" >}}
 {{< /callout >}}
 
-### Entity Definition Schema (v3.0)
+### Metadata Schema v3.0 (beta)
 The Entity Definition Schema is a structure that contains basic information about an entity.
-## Metadata Schema v3.0
 
-### Example Entity Definition (`kind:application`)
+#### Example Entity Definition (`kind:application`)
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
@@ -115,7 +114,7 @@ extensions:
     customField: customValue
 {{< /code-block >}}
 
-### Example Entity Definition (`kind:service`)
+#### Example Entity Definition (`kind:service`)
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3
@@ -186,7 +185,6 @@ datadog:
     - fp1
     - fp2
 {{< /code-block >}}
-
 
 
 ### Service Definition Schema (v2.2) (Recommended)
