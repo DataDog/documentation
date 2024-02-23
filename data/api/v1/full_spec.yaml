@@ -6638,6 +6638,8 @@ components:
           nullable: true
           readOnly: true
           type: string
+        freshness:
+          $ref: '#/components/schemas/MonitorFreshness'
         id:
           description: ID of this monitor.
           format: int64
@@ -6877,6 +6879,25 @@ components:
       description: A formula and function query.
       oneOf:
       - $ref: '#/components/schemas/MonitorFormulaAndFunctionEventQueryDefinition'
+    MonitorFreshness:
+      description: The freshness of the monitor, indicating if the monitor evaluation
+        is up to date. **This feature is currently in private beta.**
+      properties:
+        error:
+          description: The error message if the monitor freshness was not able to
+            be determined.
+          nullable: true
+          type: string
+        is_fresh:
+          description: Whether the monitor evaluation is up to date.
+          type: boolean
+        last_evaluated:
+          description: The timestamp of the last evaluation.
+          example: '2024-01-01T00:00:00Z'
+          format: date-time
+          type: string
+      readOnly: true
+      type: object
     MonitorGroupSearchResponse:
       description: The response of a monitor group search.
       example:
@@ -27622,6 +27643,20 @@ paths:
           format: int32
           maximum: 1000
           type: integer
+      - description: A comma separated list of monitor ids
+        in: query
+        name: monitor_ids
+        required: false
+        schema:
+          example: 1,2
+          type: string
+      - description: If this argument is set to true, then the returned monitors include
+          the monitor freshness, indicating whether the monitor is correctly evaluating
+        in: query
+        name: with_freshness
+        required: false
+        schema:
+          type: boolean
       responses:
         '200':
           content:
