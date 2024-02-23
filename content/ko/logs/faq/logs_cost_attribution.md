@@ -34,7 +34,7 @@ Datadog은 [Log Estimated Usage 대시보드][1], 앱 내 [Plan and Usage][2] �
 3. 비용을 어트리뷰션하려는 로그에 대한 필터를 입력합니다.
 4. 파이프라인의 이름을 입력합니다. 예: `Cost attribution by team`
 5. 선택적으로 태그 및 설명을 추가합니다.
-6. **생성**을 클릭합니다.
+6. **Create**를 클릭합니다.
 
 파이프라인 목록 끝에 새 파이프라인을 그대로 둡니다. 이렇게 하면 로그가 다른 파이프라인을 통과하여 해당 태그와 속성이 먼저 생성됩니다.
 
@@ -64,7 +64,7 @@ Datadog에서는 이러한 [태그 지정 방법][5] 중 하나를 사용하여 
       b. **Appear under the value name** 필드에서 `service_a`를 입력합니다. 
       c. **Add**를 클릭합니다.
 6. 다른 팀을 별도의 카테고리로 추가합니다.
-7. **생성**을 클릭합니다.
+7. **Create**를 클릭합니다.
 
 #### `team` 속성을 태그로 변환하는 리매퍼 만들기
 
@@ -75,7 +75,7 @@ Datadog에서는 이러한 [태그 지정 방법][5] 중 하나를 사용하여 
 5. **Set target attribute or tag key** 섹션에서 **Tag key**를 선택하고 `team`을 입력합니다.
 6. 속성이 제거되고 태그만 유지되도록 하려면 **Preserve source attribute**를 비활성화하세요.
 7. **Override on conflict**를 활성화합니다.
-8. **생성**을 클릭합니다.
+8. **Create**를 클릭합니다.
 
 {{< img src="logs/faq/logs_cost_attribution/team_remapper.png" alt="팀 리매퍼를 생성하기 위해 입력된 모든 데이터를 보여주는 리매퍼 생성 양식" style="width:75%" >}}
 
@@ -114,7 +114,7 @@ Datadog은 다음과 같은 방법으로 `retention_period` 태그를 설정할 
       b. **Appear under the value name** 필드에서 `retention-7`을 입력합니다.  
       c. **Add**를 클릭합니다.
 6. 다른 인덱스를 별도의 카테고리로 추가합니다.
-7. **생성**을 클릭합니다.
+7. **Create**를 클릭합니다.
 
 {{< img src="logs/faq/logs_cost_attribution/indexes_category_processor.png" alt="카테고리 프로세서 양식은 index_name 속성을 생성하기 위해 데이터를 입력합니다." style="width:75%" >}} 
 
@@ -131,7 +131,7 @@ Datadog은 다음과 같은 방법으로 `retention_period` 태그를 설정할 
       b. **Appear under the value name** 필드에서 `7`을 입력합니다.
       c. **Add**를 클릭합니다.
 6. 다른 보관 기간을 별도의 카테고리로 추가합니다.
-7. **생성**을 클릭합니다.
+7. **Create**를 클릭합니다.
 
 {{< img src="logs/faq/logs_cost_attribution/retention_period_processor.png" alt="카테고리 프로세서 양식에 데이터를 입력하여 retention_period 속성을 생성합니다." style="width:75%" >}} 
 
@@ -144,7 +144,7 @@ Datadog은 다음과 같은 방법으로 `retention_period` 태그를 설정할 
 5. **Set target attribute or tag key** 섹션에서 **Tag key**를 선택하고 `retention_period`을 입력합니다.
 6. 속성이 제거되고 태그만 유지되도록 하려면 **Preserve source attribute**를 비활성화하세요.
 7. **Override on conflict**를 활성화합니다.
-8. **생성**을 클릭합니다.
+8. **Create**를 클릭합니다.
 
 {{< img src="logs/faq/logs_cost_attribution/retention_period_remapper.png" alt="retention_period 리매퍼를 생성하기 위해 입력된 모든 데이터를 보여주는 리매퍼 생성 양식" style="width:75%" >}}
 
@@ -172,7 +172,7 @@ Datadog은 다음과 같은 방법으로 `online_archive` 태그를 설정할 �
       a. **All events that match** 필드에 `*`을 입력합니다.
       b. **Appear under the value name** 필드에 `false`를 입력합니다.
       c. **Add**를 클릭합니다.
-5. **생성**을 클릭합니다.
+5. **Create**를 클릭합니다.
 
 {{< img src="logs/faq/logs_cost_attribution/online_archives_attribute.png" alt="카테고리 프로세서 양식은 online_archives 속성을 생성하기 위해 데이터를 입력합니다." style="width:75%" >}}
 
@@ -185,7 +185,7 @@ Datadog은 다음과 같은 방법으로 `online_archive` 태그를 설정할 �
 5. **Set target attribute or tag key** 섹션에서 **Tag key**를 선택하고 `online_archives`을 입력합니다.
 6. 속성이 제거되고 태그만 유지되도록 하려면 **Preserve source attribute**를 비활성화하세요.
 7. **Override on conflict**를 활성화합니다.
-8. **생성**을 클릭합니다.
+8. **Create**를 클릭합니다.
 
 <div class="alert alert-info"> Category Processor의 카테고리 순서는 중요합니다. 속성에는 인덱스와 동일한 로직을 사용하여 로그가 일치하는 쿼리와 일치하는 첫 번째 카테고리의 값이 할당됩니다. 따라서 일치하는 쿼리와 인덱스 Category Processor의 순서가 실제 인덱스 순서와 동일해야 하며, Online Archives Category Processor에서 `true` 카테고리를 `false` 이전에 항상 미리 확인해야 합니다.<br><br>
 인덱스 설정이 변경되면 프로세서 설정을 업데이트하여 변경 사항을 반영해야 합니다.</div>
