@@ -12,7 +12,6 @@ With this integration, support engineers can:
 - Examine related backend calls
 - Organize related Session Replays into one playlist
 
-Support teams can troubleshoot more efficiently, which means customers receive solutions more quickly.
 
 ## Setup
 
