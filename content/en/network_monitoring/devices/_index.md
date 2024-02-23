@@ -44,7 +44,7 @@ Network Device Monitoring gives you visibility into your on-premise and virtual 
 
 1. Install the Datadog Agent (usually on a server that is not the monitored device).
 2. Configure the SNMP integration by either [monitoring individual devices][1], or using [device autodiscovery][2].
-3. Start monitoring your entire network infrastructure on the Network Devices explore page.
+3. Start monitoring your entire network infrastructure on the [Network Devices][7] page.
 4. View metrics collected on Datadog's out-of-the-box dashboards:
     - [Overview of all devices monitored][3]
     - [Across the performance on all interfaces][4]
@@ -96,3 +96,4 @@ The following vendor devices are supported with dedicated profiles. If a vendor/
 [4]: https://app.datadoghq.com/dash/integration/30417/interface-performance
 [5]: /monitors/types/metric/
 [6]: /network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported
+[7]: https://app.datadoghq.com/devices

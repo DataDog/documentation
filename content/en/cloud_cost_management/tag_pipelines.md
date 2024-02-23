@@ -48,7 +48,7 @@ For example, if you want to add information about which VPs, organizations, and 
 {{< img src="cloud_cost/tags_mapmultiple.png" alt="Add account metadata like vp, organization, and businessunit using reference tables for tag pipelines" >}}
 
 ## Reserved tags
-You cannot add the tags `service`, `env`, `version`, and `host` in Tag Pipelines because they are part of [Unified service Tagging][3].
+You cannot add the tag `host` in Tag Pipelines because it is part of [Unified service Tagging][3].
 
 To correlate metrics, traces, and logs, tag your underlying infrastructure with these tags and take advantage of Unified Service Tagging across Datadog.
 

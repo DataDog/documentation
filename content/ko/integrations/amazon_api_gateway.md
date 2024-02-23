@@ -23,6 +23,7 @@ short_description: Amazon API Gateway 오류를 추적하세요.
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 개요
 
 Amazon API Gateway는 개발자가 규모에 관계없이 API를 쉽게 생성, 게시, 유지 관리, 모니터링 및 보호할 수 있는 완전 관리형 서비스입니다.
@@ -44,7 +45,7 @@ Amazon API Gateway는 개발자가 규모에 관계없이 API를 쉽게 생성, 
     - `apigateway:GET`
     - `tag:GetResources`
 
-3. [Datadog - AWS API Gateway 통합][4]을 설치하세요.
+3. [Datadog - Amazon API Gateway 통합][4]을 설치합니다.
 
 **참고**: 상세 CloudWatch 메트릭을 활성화한 경우, 스테이지 내의 모든 리소스 또는 경로에 대해 해당 메트릭을 활성화해야 합니다. 그렇지 않으면 Datadog의 집계 값이 올바르지 않습니다.
 
@@ -82,7 +83,7 @@ API Gateway 로깅 활성화:
 
 완료되면 [Datadog Log 섹션][6]으로 이동해서 로그를 탐색해 보세요!
 
-## 수집한 데이터
+## 수집한 데이터
 
 ### 메트릭
 {{< get-metrics-from-git "amazon_api_gateway" >}}
@@ -92,15 +93,15 @@ AWS에서 검색된 각 메트릭에는 호스트 이름, 보안 그룹 등을 �
 
 ### 이벤트
 
-AWS API Gateway 통합에는 어떠한 이벤트도 포함되지 않습니다.
+Amazon API Gateway 통합에는 어떠한 이벤트도 포함되지 않습니다.
 
 ### 서비스 검사
 
-AWS API Gateway 통합에는 어떠한 서비스 검사도 포함되지 않습니다.
+Amazon API Gateway 통합에는 어떠한 서비스 점검도 포함되지 않습니다.
 
 ## 트러블슈팅
 
-도움이 필요하신가요? [Datadog 지원팀][8]에 문의하세요. 
+도움이 필요하신가요? [Datadog 지원팀][8]에 문의하세요.
 
 [1]: https://docs.datadoghq.com/ko/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services

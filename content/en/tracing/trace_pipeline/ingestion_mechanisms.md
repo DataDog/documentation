@@ -144,11 +144,20 @@ For example, to send 50% of the traces for the service named `my-service` and 10
 @env DD_TRACE_SAMPLING_RULES=[{"service": `my-service`, "sample_rate": 0.5}]
 ```
 
+Starting from version [v1.60.0][2], for Go applications, set by-resource and by-tags sampling rules with the `DD_TRACE_SAMPLING_RULES` environment variable.
+For example, to send 1% of the traces for the resource `GET api/list_documents` and 10% of the rest of the traces:
+
+```
+@env DD_TRACE_SAMPLE_RATE=0.1
+@env DD_TRACE_SAMPLING_RULES=[{"resource": `GET api/list_documents`, "sample_rate": 0.01}]
+```
+
 Configure a rate limit by setting the environment variable `DD_TRACE_RATE_LIMIT` to a number of traces per second per service instance. If no `DD_TRACE_RATE_LIMIT` value is set, a limit of 100 traces per second is applied.
 
 Read more about sampling controls in the [Go tracing library documentation][1].
 
 [1]: /tracing/trace_collection/dd_libraries/go
+[2]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.60.0
 {{% /tab %}}
 {{% tab "Node.js" %}}
 For Node.js applications, set a global sampling rate in the library using the `DD_TRACE_SAMPLE_RATE` environment variable.
@@ -665,11 +674,19 @@ For example, to collect `100%` of the spans from the service named `my-service`,
 ```
 @env DD_SPAN_SAMPLING_RULES=[{"service": "my-service", "name": "http.request", "sample_rate":1.0, "max_per_second": 50}]
 ```
+Starting from version [v1.60.0][3], for Go applications, set by-resource and by-tags **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.
+
+For example, to collect `100%` of the spans from the service for the resource `POST /api/create_issue`, for the tag `priority` with value `high`:
+
+```
+@env DD_SPAN_SAMPLING_RULES=[{"resource": "POST /api/create_issue", "tags": { "priority":"high" }, "sample_rate":1.0}]
+```
 
 Read more about sampling controls in the [Go tracing library documentation][2].
 
 [1]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.41.0
 [2]: /tracing/trace_collection/dd_libraries/go
+[3]: https://github.com/DataDog/dd-trace-go/releases/tag/v1.60.0
 {{% /tab %}}
 {{% tab "Node.js" %}}
 For Node.js applications, set by-service and by-operation name **span** sampling rules with the `DD_SPAN_SAMPLING_RULES` environment variable.

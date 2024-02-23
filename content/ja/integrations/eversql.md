@@ -23,7 +23,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: eversql
-oauth: {}
 public_title: 'EverSQL: データベースのチューニング'
 short_description: MySQL、PostgreSQL、Aurora のための自動 SQL およびデータベースチューニング
 supported_os:

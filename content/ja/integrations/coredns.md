@@ -44,7 +44,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: coredns
-oauth: {}
 public_title: CoreDNS
 short_description: CoreDNS は、Kubernetes の DNS メトリクスを収集します。
 supported_os:

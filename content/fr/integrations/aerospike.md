@@ -38,7 +38,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: aerospike
-oauth: {}
 public_title: Aerospike
 short_description: Recueillez des statistiques sur les clusters et les espaces de
   nommage à partir de la base de données Aerospike
