@@ -35,7 +35,7 @@ The following documentation describes how to deploy, configure, and manage the C
     {{< nextlink href="/opentelemetry/collector_exporter/deployment/" >}}Deployment{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/collector_exporter/configuration/" >}}Configuration{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/collector_exporter/management/" >}}Management{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/collector_exporter/integrations/" >}}Integrations{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/integrations/" >}}Integrations{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
