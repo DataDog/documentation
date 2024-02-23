@@ -550,41 +550,56 @@ main:
     identifier: otel_collector
     parent: opentelemetry_top_level
     weight: 3
+  - name: Deployment
+    url: opentelemetry/collector_exporter/deployment/
+    identifier: otel_collector_deployment
+    parent: otel_collector
+    weight: 301
+  - name: Configuration
+    url: opentelemetry/collector_exporter/configuration/
+    identifier: otel_collector_configuration
+    parent: otel_collector
+    weight: 302
+  - name: Management
+    url: opentelemetry/collector_exporter/management/
+    identifier: otel_collector_management
+    parent: otel_collector
+    weight: 303
   - name: Integrations
     url: opentelemetry/integrations/
     identifier: otel_integrations
     parent: otel_collector
-    weight: 301
+    weight: 304
   - name: Datadog Exporter
     url: opentelemetry/integrations/otel_collector_datadog_exporter/
     identifier: otel_exporter
     parent: otel_integrations
-    weight: 3011
+    weight: 3041
   - name: OTLP Receiver
     url: opentelemetry/integrations/otlp_receiver/
     identifier: otel_receiver
     parent: otel_integrations
-    weight: 3012
+    weight: 3042
   - name: Host Metrics
     url: opentelemetry/integrations/host_metrics/
     identifier: otel_host_metrics
     parent: otel_integrations
-    weight: 3013
+    weight: 3043
   - name: Trace Metrics
     url: opentelemetry/integrations/trace_metrics/
     identifier: otel_trace_metrics
     parent: otel_integrations
-    weight: 3014
+    weight: 3044
   - name: Runtime Metrics
     url: opentelemetry/integrations/runtime_metrics/
     identifier: otel_runtime_metrics
     parent: otel_integrations
-    weight: 3015
+    weight: 3045
   - name: Log Collection
     url: opentelemetry/integrations/log_collection/
     identifier: otel_log_collection
     parent: otel_integrations
-    weight: 3016
+    weight: 3046
   - name: Schema and Semantics
     url: opentelemetry/schema_semantics/
     identifier: otel_schema

@@ -1,5 +1,13 @@
-title: Interoperability
+---
+title: Integrations
 kind: documentation
 ---
 
-<div class="alert alert-warning">Placeholder: Page under construction</div>
+{{< whatsnext desc="Collector integrations" >}}
+    {{< nextlink href="/opentelemetry/integrations/otel_collector_datadog_exporter/" >}}Datadog Exporter{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/collector_exporter/otlp_receiver/" >}}OTLP Receiver{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/collector_exporter/host_metrics/" >}}Host Metrics{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/collector_exporter/trace_metrics/" >}}Trace Metrics{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/integrations/runtime_metrics/" >}}Runtime Metrics{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/collector_exporter/log_collection/" >}}Log Collection{{< /nextlink >}}
+{{< /whatsnext >}}

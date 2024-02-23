@@ -47,7 +47,7 @@ Datadog recommends you use the OpenTelemetry Collector Datadog exporter or the O
     {{< nextlink href="/tracing/trace_collection/opentracing/dotnet" >}}.NET{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

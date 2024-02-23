@@ -262,7 +262,7 @@ Datadog provides out-of-the-box dashboards that you can copy and customize. To u
 
 The **Host Metrics** dashboard is for data collected from the [host metrics receiver][7]. The **Collector Metrics** dashboard is for any other types of metrics collected, depending on which [metrics receiver][8] you choose to enable.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
