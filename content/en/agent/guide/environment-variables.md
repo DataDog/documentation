@@ -116,6 +116,6 @@ From Datadog Agent 7.45, the Datadog Agent service (`datadog-agent.service` unit
 [3]: /agent/configuration/proxy/#environment-variables
 [4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/config.go
 [5]: https://docs.datadoghq.com/agent/docker/apm/#docker-apm-agent-environment-variables
-[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/apm.go
-[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/process.go
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/apm.go
+[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/process.go
 [8]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment
