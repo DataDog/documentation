@@ -63,7 +63,7 @@ RUM 애플리케이션이 생성한 세션 개수를 추적하려면 [Dashboard 
 
 [이상 감지 모니터][3]에서 RUM 메트릭을 사용할 수 있습니다.
 
-{{< img src="real_user_monitoring/guide/monitor-your-rum-usage/anomaly-monitor-notification.png" alt="이상 감지 모니터 알림 메시지 예시="width:90%" >}}
+{{< img src="real_user_monitoring/guide/monitor-your-rum-usage/anomaly-monitor-notification.png" alt="이상 감지 모니터 알림 메시지 예시" style="width:90%" >}}
 
 이상 감지 모니터를 생성해 예상치 못한 세션의 개수가 급증할 때 알림을 받으려면 다음을 따르세요.
 
