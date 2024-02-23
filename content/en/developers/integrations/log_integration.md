@@ -126,7 +126,7 @@ To start a review process, export your log pipeline and relevant custom facets u
 {{< img src="developers/integrations/export_pipeline.png" alt="Click the Export Pipeline icon to export your log pipeline in Datadog" width="50%">}}
 
 Include sample raw logs with all the attributes you expect to be sent into Datadog by your integration. Raw logs comprise of the raw messages generated directly from the source before they have been ingested by Datadog.
-Great samples are logs that will be matched and transformed by the processors created in your integrations.
+Useful samples are logs that will be matched and transformed by the processors created in your integrations.
 
 Exporting your log pipeline includes two YAML files:
 
