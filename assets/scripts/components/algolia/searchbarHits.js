@@ -1,5 +1,5 @@
 import { getHitData } from './getHitData';
-import { truncateContent } from '../../helpers/truncateContent';
+import { truncateContentAtHighlight } from '../../helpers/truncateContent';
 import { bodyClassContains } from '../../helpers/helpers';
 import connectHits from 'instantsearch.js/es/connectors/hits/connectHits';
 
@@ -87,16 +87,17 @@ const renderHits = (renderOptions, isFirstRender) => {
     const generateJoinedHits = (hitsArray, category) => {
         const joinedListItems = hitsArray
             .map((item) => {
-                const hit = getHitData(item);
-                const displayContent = truncateContent(hit.content, 145);
+                const hit = getHitData(item, renderOptions.results.query);
+                const displayContent = truncateContentAtHighlight(hit.content, 145);
                 const cleanRelpermalink = `${basePathName}${hit.relpermalink}`.replace('//', '/');
+                const section_header = hit.section_header ? `&raquo; ${hit.section_header}` : '';
 
                 return `
                     <li class="ais-Hits-item">
                         <a href="${cleanRelpermalink}" target="_blank" rel="noopener noreferrer">
                             <p class="ais-Hits-subcategory">${hit.subcategory}</p>
                             <div>
-                                <p class="ais-Hits-title"><strong>${hit.title}</strong></p>
+                                <p class="ais-Hits-title"><strong>${hit.title} ${section_header}</strong></p>
                                 <p class="ais-Hits-content">${displayContent}</p>
                             </div>
                         </a>
@@ -105,12 +106,15 @@ const renderHits = (renderOptions, isFirstRender) => {
             })
             .join('');
 
-        const enhanceApiCategoryHeader = category.toLowerCase() === 'api' && bodyClassContains('api')
-        const categoryLiClassList = 'ais-Hits-item ais-Hits-category'
-        const categoryParagraphClassList = enhanceApiCategoryHeader ? 'fw-bold text-primary' : ''
+        const enhanceApiCategoryHeader = category.toLowerCase() === 'api' && bodyClassContains('api');
+        const categoryLiClassList = 'ais-Hits-item ais-Hits-category';
+        const categoryParagraphClassList = enhanceApiCategoryHeader ? 'fw-bold text-primary' : '';
 
         return hitsArray.length
-            ? [`<li class="${categoryLiClassList}"><p class="${categoryParagraphClassList}">${category}</p></li>`, joinedListItems].join('')
+            ? [
+                  `<li class="${categoryLiClassList}"><p class="${categoryParagraphClassList}">${category}</p></li>`,
+                  joinedListItems
+              ].join('')
             : null;
     };
 
@@ -133,8 +137,8 @@ const renderHits = (renderOptions, isFirstRender) => {
 
     // Ensure API results render first if user performs a search from an API page.
     if (bodyClassContains('api')) {
-        allJoinedListItemsHTML.pop()
-        allJoinedListItemsHTML.unshift(generateJoinedHits(apiHitsArray, 'API'))
+        allJoinedListItemsHTML.pop();
+        allJoinedListItemsHTML.unshift(generateJoinedHits(apiHitsArray, 'API'));
     }
 
     if (isFirstRender) {

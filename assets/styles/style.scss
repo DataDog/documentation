@@ -36,6 +36,8 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import "pages/404";
 @import "pages/home";
 @import "pages/glossary";
+@import "pages/standard-attributes";
+@import "pages/static-analysis";
 @import "pages/reference";
 
 // Components
@@ -43,11 +45,11 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import 'components/announcement-banner'; // imported from websites-modules
 @import 'components/badge';
 @import 'components/cards';
-@import 'components/footer';
+@import 'components/footer'; // imported from websites-modules
 @import 'components/global-modals';
 @import 'components/header';
 @import 'components/integration-labels';
-@import 'components/integration-breadcrumbs';
+@import 'components/breadcrumbs';
 @import 'components/integrations';
 @import 'components/platforms';
 @import 'components/preview_banner';
@@ -65,6 +67,8 @@ $baseImgURL: '{{.Site.Params.img_url}}';
 @import 'components/main-nav'; // imported from websites-modules
 @import 'components/mobile-nav'; // imported from websites-modules
 @import 'components/dd-navbar'; // for body-noscroll
+@import 'components/demo-request-modal'; // imported from websites-modules
+
 
 // for now just include ie fixes
 @import 'ie';

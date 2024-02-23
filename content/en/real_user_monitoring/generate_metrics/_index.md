@@ -9,7 +9,7 @@ further_reading:
 - link: "/real_user_monitoring/explorer/"
   tag: "Documentation"
   text: "Learn how to create queries in the RUM Explorer"
-- link: "/real_user_monitoring/explorer/search/#event-types/"
+- link: "/real_user_monitoring/explorer/search/#event-types"
   tag: "Documentation"
   text: "Learn about RUM event types"
 - link: "/logs/log_configuration/logs_to_metrics/"
@@ -30,9 +30,9 @@ RUM-based custom metrics are a cost-efficient option to summarize the data from 
 
 ## Create a RUM-based custom metric
 
-To create a custom metric from RUM event data, navigate to [**UX Monitoring** > **Generate Metrics**][4] and click **+ New Metric**.
+To create a custom metric from RUM event data, navigate to [**UX Monitoring** > **Setup & Configuration** > **Generate Metrics**][4] and click **+ New Metric**.
 
-{{< img src="real_user_monitoring/generate_metrics/new_metrics_button.png" alt="Click + New Metric to create a RUM-based custom metric" width="80%" >}}
+{{< img src="real_user_monitoring/generate_metrics/new_metrics_button-2.png" alt="Click + New Metric to create a RUM-based custom metric" width="80%" >}}
 
 To create a custom metric from a search query in the [RUM Explorer][5], click the **Export** button and select **Generate new metric** from the dropdown menu.
 
@@ -105,7 +105,7 @@ You can use RUM-based custom metrics for the following actions:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/#browser-and-session-replay-sampling-configuration
+[1]: /real_user_monitoring/guide/sampling-browser-plans
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /metrics/custom_metrics/
 [4]: https://app.datadoghq.com/rum/generate-metrics
@@ -119,4 +119,4 @@ You can use RUM-based custom metrics for the following actions:
 [12]: /dashboards/querying/#configuring-a-graph
 [13]: /monitors/types/anomaly/
 [14]: /monitors/types/forecasts/
-[15]: /monitors/service_level_objectives/metric/
+[15]: /service_management/service_level_objectives/metric/

@@ -69,7 +69,25 @@ Subscribe your new Kinesis stream to the CloudWatch log groups you want to inges
 
 Create an IAM role and permissions policy to enable CloudWatch Logs to put data into your Kinesis stream. 
    - Ensure that `logs.amazonaws.com` or `logs.<region>.amazonaws.com` is configured as the service principal in the role's **Trust relationships**.
-   - Ensure that the role's attached permissions policy allows the `firehose:PutRecord` `firehose:PutRecordBatch`, `kinesis:PutRecord`, and `kinesis:PutRecords` actions.
+   - Ensure that the role's attached permissions policy allows the `firehose:PutRecord` `firehose:PutRecordBatch`, `kinesis:PutRecord`, and `kinesis:PutRecords` actions.   
+    For example:
+      ```
+      {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "firehose:PutRecord",
+              "firehose:PutRecordBatch",
+              "kinesis:PutRecord",
+              "kinesis:PutRecords"
+            ],
+            "Resource": "arn:aws:firehose:<REGION>:<ACCOUNT_ID>:deliverystream/<DELIVERY_STREAM>"
+          }
+        ]
+      }
+      ```
 
 Use the [Subscription filters with Kinesis][2] example (steps 3 to 6) for an example of setting this up with the AWS CLI.
 
@@ -102,7 +120,7 @@ You can also create a subscription filter through the AWS console.
 
 Check the **Subscriptions** column in the log groups index page in [CloudWatch][1] to confirm that the new Kinesis stream is now subscribed to your log groups.
 
-### Search for AWS Kinesis logs in Datadog
+### Search for Amazon Kinesis logs in Datadog
 
 After you have set up an Amazon Kinesis delivery stream, you can analyze the logs subscribed to your delivery stream in Datadog. 
 

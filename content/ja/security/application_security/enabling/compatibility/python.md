@@ -1,52 +1,92 @@
 ---
-code_lang: php
+code_lang: python
 code_lang_weight: 50
 kind: documentation
 title: Python 互換性要件
 type: multi-code-lang
 ---
-
-## 言語とフレームワークの互換性
-
-### サポート対象の Python バージョン
-
-Datadog Python ライブラリは、以下の Python のバージョンをサポートしています。
-
-- Python 2.7、3.5、またはそれ以上
-
-これらは、以下のアーキテクチャでサポートされています。
-
-- Linux (GNU) x86-64
-- Alpine Linux (musl) x86-64
-- macOS (Darwin) x86-64
-- Windows (msvc) x86、x86-64
-
-Docker、Kubernetes、AWS ECS、AWS Fargate で動作する Python アプリのアプリケーションセキュリティを監視することができます。
-
-### サポートされているフレームワーク
-
-| Framework Web Server | フレームワークの最小バージョン |
-|----------------------|---------------------------|
-| Django               | 1.8                       |
-| Flask                | 0.10                      |
-
-Flask では、クエリ文字列のサポートはありません。
-
-<div class="alert alert-info">ご希望のフレームワークが掲載されていない場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
-
 ## ASM の機能サポート
 
 Python ライブラリでは、指定されたトレーサーのバージョンで、以下の ASM 機能がサポートされています。
 
 | ASM の機能                   | Python トレーサーの最小バージョン |
 | -------------------------------- | ----------------------------|
-| Threat Detection <br/> --> Business logic API  | 1.9.0<br/>   |
-| Threat Protection <br/> --> IP ブロッキング <br/> --> 不審リクエストブロッキング <br> --> ユーザーブロッキング   | 1.10.0<br/><br/><br/>     |
-| Risk Management <br/> --> サードパーティの脆弱性検出 <br/> --> カスタムコードの脆弱性検出 | 1.5.0 <br/><br/> |
-
-Python でサポートされるすべての ASM 機能を得るためのトレーサーの最小バージョンは 1.10.0 です。
+| Threat Detection | 1.9.0   |
+| Threat Protection | 1.10.0  |
+| オープンソースソフトウェア (OSS) の脆弱性管理 | 1.5.0  |
+| コードレベルの脆弱性管理 (ベータ版)  |  非公開ベータ版  |
 
 **注**: Threat Protection では、[リモート構成][2]を有効にする必要があり、これは記載のトレーサーの最小バージョンに含まれています。
 
+### サポートされるデプロイメントタイプ
+|タイプ | 脅威検知のサポート | OSSの脆弱性管理のサポート |
+| ---           |   ---             |           ----            |
+| Docker        | {{< X >}}         | {{< X >}}                 |
+| Kubernetes    | {{< X >}}         | {{< X >}}                 |
+| AWS ECS       | {{< X >}}         | {{< X >}}                 |
+| AWS Fargate   | {{< X >}}         | {{< X >}}                 |
+| AWS Lambda    | {{< X >}}         |                           |
+
+
+## 言語とフレームワークの互換性
+
+### サポート対象の Python バージョン
+
+Python ASM クライアントライブラリは，ライブラリと Python ランタイムの異なるバージョンに対するサポートレベルを指定する[バージョニングポリシー][3]に従っています。
+
+2 つのリリースブランチに対応しています。
+
+| リリース    | サポートレベル        |
+|------------|----------------------|
+| `<1`       | メンテナンス           |
+| `>=1.0,<2` | 一般提供 |
+
+また、このライブラリは以下のランタイムをサポートしています。
+
+| OS      | CPU                   | ランタイム | ランタイムバージョン | ddtrace のバージョンに対応 |
+|---------|-----------------------|---------|-----------------|--------------------------|
+| Linux   | x86-64、i686、AArch64 | CPython | 2.7、3.5-3.11   | `<2`                     |
+| MacOS   | Intel、Apple Silicon  | CPython | 2.7、3.5-3.11   | `<2`                     |
+| Windows | 64bit、32bit          | CPython | 2.7、3.5-3.11   | `<2`                     |
+
+
+### Web フレームワークの互換性
+
+- 攻撃元の HTTP リクエストの詳細
+- HTTP リクエスト用のタグ (ステータスコード、メソッドなど)
+- アプリケーション内の攻撃フローを確認するための分散トレーシング
+
+##### ASM の機能に関する備考
+- **Vulnerability Management for OSS** はすべてのフレームワークでサポートされています
+
+### サポートされているフレームワーク
+
+
+| フレームワーク                | バージョン    | 脅威検知のサポートの有無 | 脅威保護のサポートの有無 |
+| ------------------------ | ----------- | --------------- | ---------------------------------------------- |
+| Django    | 1.8   |  {{< X >}} | {{< X >}}  |
+| Flask     | 0.10  |  {{< X >}} | {{< X >}}  |
+
+Flask では、クエリ文字列のサポートはありません。
+
+<div class="alert alert-info">ご希望のフレームワークが掲載されていない場合は、お知らせください！<a href="https://forms.gle/gHrxGQMEnAobukfn7">この短いフォーム</a>に必要事項を記入して、詳細を送信してください。</div>
+
+### データストアの互換性
+
+
+**データストアのトレーシングでは以下の確認が可能です**
+
+- リクエストの応答タイミング
+- クエリ情報 (サニタイジングされたクエリ文字列など)
+- エラーとスタックトレースの取得
+
+##### ASM の機能に関する備考
+- **OSS の脆弱性管理** はすべてのフレームワークでサポートされています。
+- **脅威保護** は HTTP リクエスト (input) レイヤーでも機能するため、下表に掲載されていなくても、デフォルトですべてのデータベースで機能します。
+-
+Python ライブラリは[データベース API 仕様][4]をサポートしており、すべての汎用 SQL データベースをサポートしています。これには SQLite、Mysql、Postgres、MariaDB などのデータベースが含まれます。
+
 [1]: /ja/tracing/trace_collection/compatibility/python/
-[2]: /ja/agent/guide/how_remote_config_works/#enabling-remote-configuration
+[2]: /ja/agent/remote_config/#enabling-remote-configuration
+[3]: https://ddtrace.readthedocs.io/en/stable/versioning.html
+[4]: https://peps.python.org/pep-0249/

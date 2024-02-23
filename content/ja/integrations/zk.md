@@ -39,12 +39,11 @@ draft: false
 git_integration_title: zk
 integration_id: zookeeper
 integration_title: ZooKeeper
-integration_version: 4.2.1
+integration_version: 4.2.3
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: zk
-oauth: {}
 public_title: ZooKeeper
 short_description: クライアント接続とレイテンシーを追跡し、リクエストの遅延状況を把握。
 supported_os:
@@ -76,7 +75,7 @@ ZooKeeper チェックは、クライアント接続とレイテンシーの追�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 ZooKeeper チェックは [Datadog Agent][2] パッケージに含まれています。ZooKeeper サーバーに追加でインストールする必要はありません。
 

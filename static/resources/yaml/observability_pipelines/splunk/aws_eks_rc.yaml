@@ -1,0 +1,82 @@
+datadog:
+  apiKey: "<datadog_api_key>"
+  pipelineId: "<observability_pipelines_configuration_id>"
+  site: "datadoghq.com"
+  ## The remote configuration env var must be set so that the OP worker 
+  ## boots up with RC enabled. In this Helm chart, the pipelineConfig 
+  ## key is notably omitted in lieu of retrieving the config from Datadog.
+  remoteConfigurationEnabled: true
+
+env:
+  - name: SPLUNK_HEC_ENDPOINT
+    value: <https://your.splunk.index:8088/>
+  - name: SPLUNK_TOKEN
+    value: <a_random_token_usually_a_uuid>
+
+## Autoscaling
+##
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  targetCPUUtilizationPercentage: 80
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+## HorizontalPodAutoscaler (HPA) requires resource requests to function,
+## so this example configures several default values. Datadog recommends
+## that you change the values to match the actual size of instances that
+## you are using.
+resources:
+  requests:
+    cpu: 1000m
+    memory: 512Mi
+
+affinity:
+  ## To prevent a single datacenter from causing a complete system failure,
+  ## this example defaults to running pods in different availability zones.
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - observability-pipelines-worker
+          topologyKey: topology.kubernetes.io/zone
+
+
+## Load Balancing
+## This example configuration avoids cross-availability-zone costs where possible.
+service:
+  enabled: true
+  ## You must manually specify the ports to open; this will match the Splunk source.
+  ports:
+    - port: 8088
+  type: "LoadBalancer"
+  externalTrafficPolicy: "Local"
+  annotations:
+    ## This example marks the service as ignored by the in-tree AWS LB controller.
+    service.beta.kubernetes.io/aws-load-balancer-type: "external"
+    ## This is the default for the AWS LB Controller but it is worthwhile to be explicit.
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internal"
+    ## NLBs should communicate directly with the OP container instead of
+    ## passing through kube-proxy. This avoids cross-availability-zone traffic
+    ## to keep things within the availability zone, which kube-proxy might change.
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+
+
+## Buffering
+## This creates an EBS drive that can be used for buffers, which
+## must then be configured in the sinks themselves.
+##
+## The default drive is `io2`. Alternatively, you can also use `gp3` drives.
+persistence:
+  enabled: true
+  storageClassName: "io2"
+  accessModes:
+    - ReadWriteOnce
+  size: 288Gi

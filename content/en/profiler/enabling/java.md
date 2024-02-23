@@ -8,9 +8,9 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'profiler/search_profiles'
+    - link: 'profiler/profile_visualizations'
       tag: 'Documentation'
-      text: 'Learn more about available profile types'
+      text: 'Learn more about available profile visualizations'
     - link: 'profiler/profiler_troubleshooting/java'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
@@ -22,16 +22,21 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
-As of dd-trace-java version 1.0.0, you have two options for the engine that generates CPU profile data for Java applications: [Java Flight Recorder (JFR)][2] or the Datadog Profiler. As of version 1.7.0, Datadog Profiler is the default. Each profiler engine has different side effects, requirements, available configurations, and limitations, and this page describes each. You can enable either one or both engines. Enabling both captures both profile types at the same time.
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][12].
+
+As of dd-trace-java 1.0.0, you have two options for the engine that generates profile data for Java applications: [Java Flight Recorder (JFR)][2] or the Datadog Profiler. As of dd-trace-java 1.7.0, Datadog Profiler is the default. Each profiler engine has different side effects, requirements, available configurations, and limitations, and this page describes each. You can enable either one or both engines. Enabling both captures both profile types at the same time.
 
 {{< tabs >}}
-{{% tab "Datadog" %}}
+{{% tab "Datadog Profiler" %}}
+
+Supported operating systems:
+- Linux
 
 Minimum JDK versions:
-
-- OpenJDK 11.0.17+, 17.0.5+
-- Oracle JDK 11.0.17+, 17.0.5+
-- OpenJDK 8 version 8u352+
+- OpenJDK 8u352+, 11.0.17+, 17.0.5+ (including builds on top of it: Amazon Corretto, Azul Zulu, and others)
+- Oracle JDK 8u352+, 11.0.17+, 17.0.5+
+- OpenJ9 JDK 8u372+, 11.0.18+, 17.0.6+ (used on Eclipse OpenJ9, IBM JDK, IBM Semeru Runtime). The profiler is disabled by default for OpenJ9 due to the possibility of crashing JVM caused by a subtle bug in JVTMI implementation. If you are not experiencing any crashes, you can enable the profiler by adding `-Ddd.profiling.ddprof.enabled=true`.
+- Azul Platform Prime 23.05.0.0+ (formerly Azul Zing)
 
 The Datadog Profiler uses the JVMTI `AsyncGetCallTrace` function, in which there is a [known issue][1] prior to JDK release 17.0.5. This fix was backported to 11.0.17 and 8u352. The Datadog Profiler is not enabled unless the JVM the profiler is deployed into has this fix. Upgrade to at least 8u352, 11.0.17, 17.0.5, or the latest non-LTS JVM version to use the Datadog Profiler.
 
@@ -40,23 +45,22 @@ The Datadog Profiler uses the JVMTI `AsyncGetCallTrace` function, in which there
 
 {{% tab "JFR" %}}
 
+Supported operating systems:
+- Linux
+- Windows
+
 Minimum JDK versions:
-- OpenJDK 11+
-- Oracle JDK 11+
-- [OpenJDK 8 (version 1.8.0.262/8u262+)][3]
-- Azul Zulu 8 (version 1.8.0.212/8u212+).
-
-JFR is not supported in OpenJ9.
-
-**Note**: Enabling the Java Flight Recorder for OracleJDK may require a commercial license from Oracle. Reach out to your Oracle representative to confirm whether this is part of your license.
+- OpenJDK [1.8.0.262/8u262+][3], 11+ (including builds on top of it: Amazon Corretto, and others)
+- Oracle JDK 11+ (Enabling the JFR may require a commercial license from Oracle. Reach out to your Oracle representative to confirm whether this is part of your license)
+- Azul Zulu 8 (version 1.8.0.212/8u212+), 11+.
 
 Because non-LTS JDK versions may not contain stability and performance fixes related to the Datadog Profiler library, use versions 8, 11, and 17 of the Long Term Support JDK.
 
 Additional requirements for profiling [Code Hotspots][11]:
- - OpenJDK 11+ and `dd-trace-java` version 0.65.0+; or
- - OpenJDK 8 8u282+ and `dd-trace-java` version 0.77.0+.
+ - OpenJDK 11+ and `dd-trace-java` version 0.65.0+
+ - OpenJDK 8 8u282+ and `dd-trace-java` version 0.77.0+
 
-[3]: /profiler/profiler_troubleshooting/#java-8-support
+[3]: /profiler/profiler_troubleshooting/java/#java-8-support
 [11]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 
 {{% /tab %}}
@@ -74,9 +78,23 @@ To begin profiling applications:
 
 2. Download `dd-java-agent.jar`, which contains the Java Agent class files:
 
-    ```shell
-    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
-    ```
+{{< tabs >}}
+{{% tab "Wget" %}}
+   ```shell
+   wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
+{{% /tab %}}
+{{% tab "cURL" %}}
+   ```shell
+   curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
+{{% /tab %}}
+{{% tab "Dockerfile" %}}
+   ```dockerfile
+   ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+   ```
+{{% /tab %}}
+{{< /tabs >}}
 
      **Note**: Profiler is available in the `dd-java-agent.jar` library in versions 0.55+.
 
@@ -134,7 +152,8 @@ The Datadog profiler consists of several profiling engines, including CPU, wallc
 
 
 {{< tabs >}}
-{{% tab "Datadog" %}}
+{{% tab "Datadog Profiler" %}}
+_Requires JDK 11+._
 
 The Datadog profiler is enabled by default in dd-trace-java versions 1.7.0+. Datadog CPU profiling is scheduled through perf events and is more accurate than JFR CPU profiling. To enable CPU profiling:
 
@@ -183,8 +202,6 @@ For JDK Mission Control (JMC) users, the JFR CPU sample event is `jdk.ExecutionS
 
 The wallclock profiling engine is useful for profiling latency and integrates tightly with APM tracing. The engine samples all threads, on- or off-CPU, with active tracing activity and can be used to diagnose trace or span latency. The engine has been enabled by default since 1.7.0.
 
-or:
-
 ```
 -Ddd.profiling.ddprof.enabled=true # this is the default in v1.7.0+
 -Ddd.profiling.ddprof.wall.enabled=true
@@ -204,25 +221,71 @@ For JMC users, the `datadog.MethodSample` event is emitted for wallclock samples
 
 The wallclock engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
-### Datadog profiler allocation engine
+### Profiler allocation engine
 
-In dd-java-agent v0.84.0+ and Java 15 and lower, the allocation profiler is turned off by default because it can use excessive CPU in allocation-heavy applications. This isn't common, so you may want to try it in a staging environment to see if it affects your application. To enable it, see [Enabling the allocation profiler][8].
+{{< tabs >}}
+{{% tab "JFR" %}}
+The JFR based allocation profiling engine is enabled by default since JDK 16.
+The reason it's not enabled by default for JDK 8 and 11, is that an allocation intensive
+application can lead to high overhead and large recording sizes.
+To enable it for JDK 8 and 11, add the following:
 
-The Datadog allocation profiling engine contextualizes allocation profiles, which supports allocation profiles filtered by endpoint. It is disabled by default, but you can enable it with:
+```
+export DD_PROFILING_ENABLED_EVENTS=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB
+```
+
+or:
+
+```
+-Ddd.profiling.enabled.events=jdk.ObjectAllocationInNewTLAB,jdk.ObjectAllocationOutsideTLAB
+```
+{{% /tab %}}
+
+{{% tab "Datadog Profiler" %}}
+
+The Datadog allocation profiling engine contextualizes allocation profiles, which supports allocation profiles filtered by endpoint.
+In dd-java-agent earlier than v1.17.0 it is **disabled** by default. Enable it with:
 
 ```
 export DD_PROFILING_DDPROF_ENABLED=true # this is the default in v1.7.0+
-export DD_PROFILING_DDPROF_ALLOC_ENABLED=true
+export DD_PROFILING_DDPROF_ALLOC_ENABLED=true # this is the default in v1.17.0+
 ```
 
 or:
 
 ```
 -Ddd.profiling.ddprof.enabled=true # this is the default in v1.7.0+
--Ddd.profiling.ddprof.alloc.enabled=true
+-Ddd.profiling.ddprof.alloc.enabled=true # this is the default in v1.17.0+
 ```
 
-For JMC users, the Datadog allocation events are `datadog.ObjectAllocationInNewTLAB` and `datadog.ObjectAllocationOutsideTLAB`. The JFR allocation events are `jdk.ObjectAllocationInNewTLAB` and `jdk.ObjectAllocationOutsideTLAB`.
+For JMC users, the Datadog allocation events are `datadog.ObjectAllocationInNewTLAB` and `datadog.ObjectAllocationOutsideTLAB`.
+
+The allocation profiler engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
+{{% /tab %}}
+
+{{< /tabs >}}
+
+### Live-heap profiler engine
+
+_Since: v1.17.0. Requires JDK 11+._
+
+The live-heap profiler engine is useful for investigating the overall memory usage of your service and identifying potential memory leaks.
+The engine samples allocations and keeps track of whether those samples survived the most recent garbage collection cycle. The number of surviving samples is used to estimate the number of live objects in the heap.
+The number of tracked samples is limited to avoid unbounded growth of the profiler's memory usage.
+
+The engine is disabled by default, but you can enable it with:
+
+```
+export DD_PROFILING_DDPROF_LIVEHEAP_ENABLED=true
+```
+
+or:
+
+```
+-Ddd.profiling.ddprof.liveheap.enabled=true
+```
+
+For JMC users, the Datadog live-heap event is `datadog.HeapLiveObject`.
 
 The allocation engine does not depend on the `/proc/sys/kernel/perf_event_paranoid` setting.
 
@@ -272,11 +335,12 @@ The [Getting Started with Profiler][10] guide takes a sample service with a perf
 [1]: /tracing/trace_collection/
 [2]: https://docs.oracle.com/javacomponents/jmc-5-4/jfr-runtime-guide/about.htm
 [3]: /profiler/profiler_troubleshooting/#java-8-support
-[4]: https://app.datadoghq.com/account/settings#agent/overview
-[5]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[4]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[5]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [6]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [7]: https://app.datadoghq.com/profiling
 [8]: /profiler/profiler_troubleshooting/#enabling-the-allocation-profiler
 [9]: /getting_started/tagging/unified_service_tagging
 [10]: /getting_started/profiler/
 [11]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
+[12]: /profiler/enabling/supported_versions/

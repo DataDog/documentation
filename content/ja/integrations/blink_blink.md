@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: blink-blink
 app_uuid: eaa3426f-383b-44b4-a7f9-ff9706ed37f8
 assets:
@@ -35,7 +37,6 @@ legal_terms:
   eula: ./assets/eula.pdf
 manifest_version: 2.0.0
 name: blink_blink
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true

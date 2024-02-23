@@ -2,12 +2,9 @@
 aliases:
 - /ja/continuous_integration/setup_pipelines/azure
 further_reading:
-- link: /continuous_integration/pipelines
-  tag: Documentation
-  text: パイプラインの実行結果とパフォーマンスを確認する
-- link: /continuous_integration/pipelines/custom_commands/
-  tag: Documentation
-  text: 個々のコマンドをトレースしてパイプラインの可視性を拡張する
+- link: https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/
+  tag: ブログ
+  text: Datadog CI Visibility で Azure Pipelines を監視する
 - link: /continuous_integration/troubleshooting/
   tag: Documentation
   text: トラブルシューティング CI
@@ -24,28 +21,70 @@ title: Azure パイプラインでトレースを設定する
 
 ## 互換性
 
-- **カスタム事前定義タグ**: 生成されたすべてのパイプラインとジョブスパンに[カスタムタグ][6]を設定します。
+- **ランタイムのカスタムタグとメトリクス**: ランタイムの[カスタムタグ][6]とメトリクスを構成します
 
 ## Datadog インテグレーションの構成
 
-Datadog の [Azure パイプライン][1]インテグレーションは、[サービスフック][2]を使用することでデータを Datadog に送信します。
+[Azure Pipelines][1] の Datadog インテグレーションは、[サービスフック][2]を使って Datadog にデータを送信することで動作します。 
 
-1. 各プロジェクトについて、Azure DevOps の **Project settings > Service hooks** にアクセスし、`Create subscription` (緑色のプラスアイコン) を選択します。
+1. Azure Marketplace から [Datadog CI Visibility][8] の拡張機能をインストールします。
 
-2. 以下の各 Webhook タイプについて、同じ URL で新しいサブスクリプションを作成します。
+2. 各プロジェクトについて、Azure DevOps の **Project settings > Service hooks** に移動し、緑色のプラス (+) アイコンを選択し、サブスクリプションを作成します。
+
+3. 以下の Webhook タイプごとに、`Datadog CI Visibility` サービスに対する新しいサブスクリプションを作成します。
     - **Run state changed**
     - **Run stage state changed**
     - **Run job state changed**
 
-3. `Next` をクリックして次のステップに進み、次のように設定します。
-    - **URL**: <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/</code>
-    - **HTTP Headers**: `DD-API-KEY:<API_KEY>`、`<API_KEY>` は [Datadog API キー][3]です。
-    - **Resource Version**: 最新のフィールドまでスクロールして、`[Latest]` を選択します。
+4. **Next** をクリックして次のステップに進み、次のように設定します。
+    - **Datadog Site**: {{< region-param key="dd_site" >}}
+    - **Datadog API Key**: your [Datadog API key][3].
 
-### カスタムタグの設定
-インテグレーションによって生成されたすべてのパイプラインとジョブのスパンにカスタムタグを設定するには、**Service hook URL** に URL エンコードされたクエリパラメーター `tags` を追加し、`key:value` ペアをカンマで区切って指定します。key:value のペアにカンマが含まれる場合は、引用符で囲んでください。例えば、`key1:value1,"key2: value with , comma",key3:value3` を追加するには、**Service hook URL** に以下の文字列を追加します。
+5. **Finish** をクリックします。
 
-`?tags=key1%3Avalue1%2C%22key2%3A+value+with+%2C+comma%22%2Ckey3%3Avalue3`
+<div class="alert alert-info">
+サポートされている 3 種類のイベントはすべて必須であり、個別に有効にする必要があります。
+1 つ以上のイベントを有効にしないと、インストールが不完全になり、Datadog の予期せぬ動作につながります。
+</div>
+
+
+### 複数プロジェクトの一括構成
+
+
+多くの、あるいはすべての Azure プロジェクトでフックを有効にしたい場合、Datadog は Azure API を通してそれを行うための[スクリプト](https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py)を提供します。
+
+スクリプトを実行するには、以下が必要です。
+
+- Azure DevOps のユーザー名
+- Azure DevOps [API Token](https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat)
+- Azure DevOps の組織名
+
+このスクリプトに必要なのは、python3 とリクエストパッケージだけです。詳しくは、以下を実行してください。
+```shell
+./service_hooks.py --help
+```
+
+このスクリプトは環境変数 `DD_API_KEY` と `DD_SITE`、フラグパラメーター `--dd-api-key` と `--dd-site` をサポートします。
+
+すべてのプロジェクトでフックを有効にする場合の例:
+```
+./service_hooks.py \
+    --dd-api-key ******************** \
+    --az-user "John Doe" \
+    --az-token ********************** \
+    --az-org datadoghq \
+    --threads 4
+```
+
+指定したプロジェクトでフックを有効にする場合の例:
+```
+./service_hooks.py \
+    --dd-api-key ******************** \
+    --az-user "John Doe" \
+    --az-token ********************** \
+    --az-org datadoghq \
+    projectName1 projectName2
+```
 
 ## Datadog でパイプラインデータを視覚化する
 
@@ -62,4 +101,5 @@ Datadog の [Azure パイプライン][1]インテグレーションは、[サ�
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
-[6]: https://docs.datadoghq.com/ja/continuous_integration/pipelines/azure/#set-custom-tags
+[6]: /ja/continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[8]: https://marketplace.visualstudio.com/items?itemName=Datadog.ci-visibility

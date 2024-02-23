@@ -19,22 +19,25 @@ further_reading:
 - link: /logs/logging_without_limits/
   tag: ドキュメント
   text: Logging without Limits (無制限のログ)*
+- link: /glossary/#tail
+  tag: 用語集
+  text: 用語集 "テール" の項目
 kind: documentation
 title: ログ収集の高度な構成
 ---
 
-ログ収集の構成をカスタマイズします。
+[ログ収集][1]をセットアップした後、収集構成をカスタマイズできます。
 * [ログをフィルター](#filter-logs)
 * [ログの機密データのスクラビング](#scrub-sensitive-data-from-your-logs)
 * [複数行のログを集計する](#multi-line-aggregation)
 * [よく使われる例をコピーする](#commonly-used-log-processing-rules)
-* [ディレクトリを監視するためにワイルドカードを使用する](#tail-directories-by-using-wildcards)
+* [ディレクトリを監視するためにワイルドカードを使用する](#tail-directories-using-wildcards)
 * [ログファイルのエンコーディングを指定する](#log-file-encodings)
 * [グローバルな処理ルールを定義する](#global-processing-rules)
 
 **注**: 複数の処理ルールを設定した場合、ルールは順次適用され、各ルールは直前のルールの結果に適用されます。
 
-**注**: 処理ルールのパターンは [Golang の正規構文][1]に従う必要があります。
+**注**: 処理ルールのパターンは [Golang の正規構文][2]に従う必要があります。
 
 Datadog Agent によって収集されたすべてのログに同一の処理ルールを適用する場合は、[グローバルな処理ルール](#global-processing-rules)のセクションを参照してください。
 
@@ -85,12 +88,14 @@ Docker 環境では、`log_processing_rules` を指定するために、**フィ
       }]
 ```
 
-**注**: ラベルを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
+**注**: ラベルを使用する場合、パターン内の正規表現文字はエスケープする必要があります。例えば、`\d` は `\\d` に、`\w` は `\\w` にします。
+
+**注**: ラベルの値は JSON 構文に従う必要があります。つまり、末尾にカンマやコメントを含めてはいけません。
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
-Kubernetes 環境では、ポッドで `ad.datadoghq.com` ポッドアノテーションを使用して `log_processing_rules` を指定します。以下に例を示します。
+特定のコンフィギュレーションを特定のコンテナに適用するために、オートディスカバリーはコンテナをイメージではなく、名前で識別します。つまり、`<CONTAINER_IDENTIFIER>` は、`.spec.containers[0].image.` とではなく `.spec.containers[0].name` との一致が試みられます。オートディスカバリーを使用して構成してポッド内の特定の `<CONTAINER_IDENTIFIER>` でコンテナログを収集するには、以下のアノテーションをポッドの `log_processing_rules` に追加します。
 
 ```yaml
 apiVersion: apps/v1
@@ -104,7 +109,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -119,11 +124,13 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: cardpayment
+        - name: '<CONTAINER_IDENTIFIER>'
           image: cardpayment:latest
 ```
 
-**注**: ポッドアノテーションを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
+**注**: ポッドアノテーションを使用する場合、パターン内の正規表現文字はエスケープする必要があります。例えば、`\d` は `\\d` に、`\w` は `\\w` にします。
+
+**注**: アノテーションの値は JSON 構文に従う必要があります。つまり、末尾にカンマやコメントを含めてはいけません。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -202,7 +209,9 @@ Docker 環境では、`log_processing_rules` を指定するために、**フィ
       }]
 ```
 
-**注**: ラベルを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
+**注**: ラベルを使用する場合、パターン内の正規表現文字はエスケープする必要があります。例えば、`\d` は `\\d` に、`\w` は `\\w` にします。
+
+**注**: ラベルの値は JSON 構文に従う必要があります。つまり、末尾にカンマやコメントを含めてはいけません。
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -221,7 +230,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -236,11 +245,13 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: cardpayment
+        - name: '<CONTAINER_IDENTIFIER>'
           image: cardpayment:latest
 ```
 
-**注**: ポッドアノテーションを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
+**注**: ポッドアノテーションを使用する場合、パターン内の正規表現文字はエスケープする必要があります。例えば、`\d` は `\\d` に、`\w` は `\\w` にします。
+
+**注**: アノテーションの値は JSON 構文に従う必要があります。つまり、末尾にカンマやコメントを含めてはいけません。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -290,7 +301,9 @@ Docker 環境では、コンテナで `com.datadoghq.ad.logs` ラベルを使用
       }]
 ```
 
-**注**: ラベルを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
+**注**: ラベルを使用する場合、パターン内の正規表現文字はエスケープする必要があります。例えば、`\d` は `\\d` に、`\w` は `\\w` にします。
+
+**注**: ラベルの値は JSON 構文に従う必要があります。つまり、末尾にカンマやコメントを含めてはいけません。
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
@@ -309,7 +322,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/cardpayment.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "cardpayment",
@@ -325,11 +338,13 @@ spec:
       name: cardpayment
     spec:
       containers:
-        - name: cardpayment
+        - name: '<CONTAINER_IDENTIFIER>'
           image: cardpayment:latest
 ```
 
-**注**: ポッドアノテーションを使用する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
+**注**: ポッドアノテーションを使用する場合、パターン内の正規表現文字はエスケープする必要があります。例えば、`\d` は `\\d` に、`\w` は `\\w` にします。
+
+**注**: アノテーションの値は JSON 構文に従う必要があります。つまり、末尾にカンマやコメントを含めてはいけません。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -347,7 +362,7 @@ Agent バージョン 7.17 以降をご利用の場合、文字列 `replace_plac
 
 送信されるログが JSON 形式でない場合に、複数の行を 1 つのエントリに集約するには、1 行に 1 つのログを入れる代わりに、正規表現パターンを使用して新しいログを検出するように Datadog Agent を構成します。それには、構成ファイルで `log_processing_rules` パラメーターを使用して、`type` に **multi_line** を指定します。これで、指定されたパターンが再度検出されるまで、すべての行が 1 つのエントリに集約されます。
 
-たとえば、Java のログ行は、どれも `yyyy-dd-mm` 形式のタイムスタンプで始まります。以下の行にはスタックトレースが含まれますが、これらは 2 つのログとして送信可能です。
+例えば、Java のログ行は、どれも `yyyy-dd-mm` 形式のタイムスタンプで始まります。以下の行にはスタックトレースが含まれますが、これらは 2 つのログとして送信可能です。
 
 ```text
 2018-01-03T09:24:24.983Z UTC Exception in thread "main" java.lang.NullPointerException
@@ -360,7 +375,7 @@ Agent バージョン 7.17 以降をご利用の場合、文字列 `replace_plac
 {{< tabs >}}
 {{% tab "Configuration file" %}}
 
-構成ファイルで上記のログ例を送信するには、次の `log_processing_rules` を使用します。
+コンフィギュレーションファイルで上記のログ例を送信するには、次の `log_processing_rules` を使用します。
 
 ```yaml
 logs:
@@ -410,7 +425,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/postgres.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "postgresql",
             "service": "database",
@@ -425,11 +440,13 @@ spec:
       name: postgres
     spec:
       containers:
-        - name: postgres
+        - name: '<CONTAINER_IDENTIFIER>'
           image: postgres:latest
 ```
 
-**注**: ポッドアノテーションを使用して複数行の集約を実行する場合、パターン内の正規表現文字はエスケープする必要があります。たとえば、`\d` は `\\d` に、`\w` は `\\w` にします。
+**注**: ポッドアノテーションを使用して複数行の集約を実行する場合、パターン内の正規表現文字はエスケープする必要があります。例えば、`\d` は `\\d` に、`\w` は `\\w` にします。
+
+**注**: アノテーションの値は JSON 構文に従う必要があります。つまり、末尾にカンマやコメントを含めてはいけません。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -438,17 +455,17 @@ spec:
 
 その他の例:
 
-| **文字列の例**           | **パターン**                                   |
-|--------------------------|-----------------------------------------------|
-| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                           |
-| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                         |
-| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}`    |
-| 20180228                 | `\d{8}`                                       |
-| 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}` |
-| {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                |
+| **生の文字列**           | **パターン**                                       |
+|--------------------------|---------------------------------------------------|
+| 14:20:15                 | `\d{2}:\d{2}:\d{2}`                               |
+| 11/10/2014               | `\d{2}\/\d{2}\/\d{4}`                             |
+| Thu Jun 16 08:29:03 2016 | `\w{3}\s+\w{3}\s+\d{2}\s\d{2}:\d{2}:\d{2}\s\d{4}` |
+| 20180228                 | `\d{8}`                                           |
+| 2020-10-27 05:10:49.657  | `\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}`     |
+| {"date": "2018-01-02"    | `\{"date": "\d{4}-\d{2}-\d{2}`                    |
 
 ### 自動複数行集計
-Agent 7.37+ では、`auto_multi_line_detection` を有効にすることで、Agent が[共通複数行パターン][2]を自動的に検出することができます。
+Agent 7.37+ では、`auto_multi_line_detection` を有効にすることで、Agent が[共通複数行パターン][3]を自動的に検出することができます。
 
 `datadog.yaml` ファイルで `auto_multi_line_detection` をグローバルに有効化します。
 
@@ -471,6 +488,16 @@ logs:
     service: testApp
     source: java
     auto_multi_line_detection: true
+```
+
+複数行の自動検出は、一般的な正規表現のリストを使用して、ログとのマッチングを試みます。組み込みのリストでは不十分な場合、`datadog.yaml` ファイルにカスタムパターンを追加することもできます。
+
+```yaml
+logs_config:
+  auto_multi_line_detection: true
+  auto_multi_line_extra_patterns:
+   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
 ```
 
 {{% /tab %}}
@@ -503,7 +530,7 @@ spec:
   template:
     metadata:
       annotations:
-        ad.datadoghq.com/testApp.logs: >-
+        ad.datadoghq.com/<CONTAINER_IDENTIFIER>.logs: >-
           [{
             "source": "java",
             "service": "testApp",
@@ -514,22 +541,12 @@ spec:
       name: testApp
     spec:
       containers:
-        - name: testApp
+        - name: '<CONTAINER_IDENTIFIER>'
           image: testApp:latest
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
-
-複数行の自動検出は、一般的な正規表現のリストを使用して、ログとのマッチングを試みます。組み込みのリストでは不十分な場合、`datadog.yaml` ファイルにカスタムパターンを追加することもできます。
-
-```yaml
-logs_config:
-  auto_multi_line_detection: true
-  auto_multi_line_extra_patterns:
-   - \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
-   - '[A-Za-z_]+ \d+, \d+ \d+:\d+:\d+ (AM|PM)'
-```
 
 この機能を有効にすると、新しいログファイルが開かれたとき、Agent はパターンの検出を試みます。このプロセスの間、ログは 1 行で送信されます。検出しきい値に達すると、そのソースの将来のすべてのログは、検出されたパターンで集計され、パターンが見つからない場合は 1 行で集計されます。検出には、最大 30 秒または最初の 500 ログ (いずれか早い方) が必要です。
 
@@ -539,9 +556,9 @@ logs_config:
 
 ## 良く使用されるログの処理ルール
 
-例の一覧を確認するには、専用の[よく使用されるログ処理ルールに関する FAQ][3] をご覧ください。
+例の一覧を確認するには、専用の[よく使用されるログ処理ルールに関する FAQ][4] をご覧ください。
 
-## ワイルドカードを使用したディレクトリの追跡
+## ワイルドカードを使用したディレクトリのテール
 
 ログファイルに日付のラベルが付いているか、すべてのログファイルが同じディレクトリに保存されている場合は、すべてのファイルを監視して、新しいファイルを自動的に検出するように Datadog Agent を構成できます。それには、`path` 属性にワイルドカードを使用します。選択した `path` と一致するファイルを除外する場合は、`exclude_paths` 属性にリストします。
 
@@ -554,7 +571,7 @@ logs_config:
   * `/var/log/myapp/errorLog/myerrorfile.log` に一致します。
   * `/var/log/myapp/mylogfile.log` には一致しません。
 
-構成例:
+Linux の構成例:
 
 ```yaml
 logs:
@@ -569,10 +586,24 @@ logs:
 
 上記の例では、`/var/log/myapp/log/myfile.log` にマッチし、`/var/log/myapp/log/debug.log` と `/var/log/myapp/log/trace.log` は除外しています。
 
+Windows の構成例:
+
+```yaml
+logs:
+  - type: file
+    path: C:\\MyApp\\*.log
+    exclude_paths:
+      - C:\\MyApp\\MyLog.*.log
+    service: mywebapp
+    source: csharp
+```
+
+上記の例では、`C:\\MyApp\\MyLog.log` にマッチし、`C:\\MyApp\\MyLog.20230101.log` と `C:\\MyApp\\MyLog.20230102.log` は除外しています。
+
 **注**: Agent がディレクトリ内にあるファイルをリストするには、そのディレクトリへの読み取りおよび実行アクセス許可が必要です。
+**注 2**: path と exclude_paths の値は、大文字と小文字が区別されます。
 
 ## 最近更新されたファイルを最初に追跡する
-**注:** この機能は公開ベータ版です。
 
 Datadog Agent は、ファイルを優先的に追跡する際、ディレクトリパスのファイル名を逆辞典順でソートします。ファイルの修正時間に基づいてファイルをソートするには、構成オプション `logs_config.file_wildcard_selection_mode` に値 `by_modification_time` を設定します。
 
@@ -607,7 +638,7 @@ logs:
 
 ## グローバルな処理ルール
 
-Datadog Agent v6.10 以上では、`exclude_at_match`、`include_at_match`、`mask_sequences` の各処理ルールを、Agent の[メインコンフィギュレーションファイル][4]で、または環境変数を使用してグローバルに定義できます。
+Datadog Agent v6.10 以上では、`exclude_at_match`、`include_at_match`、`mask_sequences` の各処理ルールを、Agent の[メインコンフィギュレーションファイル][5]で、または環境変数を使用してグローバルに定義できます。
 
 {{< tabs >}}
 {{% tab "Configuration files" %}}
@@ -650,7 +681,7 @@ env:
 {{< /tabs >}}
 Datadog Agent によって収集されるすべてのログが、グローバルな処理ルールの影響を受けます。
 
-**注**: グローバルな処理ルールに形式上の問題がある場合、Datadog Agent はログコレクターを起動しません。問題をトラブルシューティングするには、Agent の [status サブコマンド][5]を実行します。
+**注**: グローバルな処理ルールに形式上の問題がある場合、Datadog Agent はログコレクターを起動しません。問題をトラブルシューティングするには、Agent の [status サブコマンド][6]を実行します。
 
 ## その他の参考資料
 
@@ -659,8 +690,9 @@ Datadog Agent によって収集されるすべてのログが、グローバル
 <br>
 *Logging without Limits は Datadog, Inc. の商標です。
 
-[1]: https://golang.org/pkg/regexp/syntax/
-[2]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
-[3]: /ja/agent/faq/commonly-used-log-processing-rules
-[4]: /ja/agent/guide/agent-configuration-files/#agent-main-configuration-file
-[5]: /ja/agent/guide/agent-commands/#agent-information
+[1]: /ja/agent/logs/
+[2]: https://golang.org/pkg/regexp/syntax/
+[3]: https://github.com/DataDog/datadog-agent/blob/a27c16c05da0cf7b09d5a5075ca568fdae1b4ee0/pkg/logs/internal/decoder/auto_multiline_handler.go#L187
+[4]: /ja/agent/faq/commonly-used-log-processing-rules
+[5]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[6]: /ja/agent/configuration/agent-commands/#agent-information

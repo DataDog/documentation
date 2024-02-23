@@ -177,7 +177,7 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
-## AWS ECS and Docker VM hostname errors
+## Amazon ECS and Docker VM hostname errors
 
 When the Agent runs in Docker on a cloud provider, a hostname error usually means that the Agent cannot access at least one of:
 * Container runtime API
@@ -188,7 +188,7 @@ When the Agent runs in Docker on a cloud provider, a hostname error usually mean
 Allow the Agent to connect to the Docker socket:
 
 {{< tabs >}}
-{{% tab "AWS ECS on EC2" %}}
+{{% tab "Amazon ECS on EC2" %}}
 
 Make sure the Docker socket is mounted in your [task definition][1].
 

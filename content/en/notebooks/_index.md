@@ -16,6 +16,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/automate-security-tasks-with-workflows-and-cloud-siem/"
   tag: "blog"
   text: "Automate common security tasks and stay ahead of threats with Datadog Workflows and Cloud SIEM"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview
@@ -92,6 +95,9 @@ Hover over the Preview icon for any Notebook to see a preview of the contents, i
 ## Template gallery
 From the [Template Gallery][3], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response postmortem, an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
 
+## Version history
+From a notebook, click the **Configure** icon and click **Version history** to open the Version History side panel. You can preview, restore, or clone your notebook's version history. For more information, see the [Version History guide][4].
+
 ## Notebook configuration
 
 ### Time frames
@@ -132,7 +138,7 @@ To share a version of your notebook with snapshots, from the cog menu, click **V
 
 ### Template variables
 
-Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][4].
+Notebooks support template variables. Dynamically scope visualizations by adding and selecting template variable values. For more information, see [Template Variables][5].
 
 ### Cell configuration
 
@@ -156,31 +162,31 @@ In a Notebook cell, click **Edit** to view the cell configuration in edit mode. 
 
 #### Types of content
 
-Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][5], which enables the use of headings, subheadings, links, images, lists, and code blocks. Notebooks also support diagrams formatted with [MermaidJS][6].
+Notebooks support visualizations and text cells. Text cells are formatted with [Markdown][6], which enables the use of headings, subheadings, links, images, lists, and code blocks. Notebooks also support diagrams formatted with [MermaidJS][7].
 
 Graphs in notebooks support all Datadog data sources: metrics, log events, Indexed Spans, live processes, network traffic, RUM events, profiling metrics, security signals, and more. Graphs are created with the Datadog query editor. Notebooks support:
 
-* [Timeseries][7]
-* [Top List][8]
-* [Table][9]
-* [Heatmap][10]
-* [Distribution][11]
-* [List][12]
-* [Query value][13]
-* [Funnel][14]
-* [Pie][15]
-* [SLO Summary][16]
+* [Timeseries][8]
+* [Top List][9]
+* [Table][10]
+* [Heatmap][11]
+* [Distribution][12]
+* [List][13]
+* [Query value][14]
+* [Funnel][15]
+* [Pie][16]
+* [SLO Summary][17]
 
 ### Limit edit access
 
 By default, all users have full access to notebooks.
 
-Use granular access controls to limit the [roles][17] that may edit a particular notebook:
+Use granular access controls to limit the [roles][18] that may edit a particular notebook:
 1. While viewing a notebook, click on the cog in the upper right. The settings menu opens.
 1. Select **Permissions**.
 1. Click **Restrict Access**.
 1. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the dropdown to select one or more roles that may edit the notebook.
+1. Use the dropdown to select one or more roles, teams, or users that may edit the notebook.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
 1. Click **Save**
@@ -200,17 +206,18 @@ To restore general access to a notebook with restricted access, follow the steps
 [1]: https://app.datadoghq.com/notebook
 [2]: https://app.datadoghq.com/notebook/list
 [3]: https://app.datadoghq.com/notebook/template-gallery
-[4]: /dashboards/template_variables/
-[5]: https://daringfireball.net/projects/markdown/
-[6]: https://mermaid.js.org/
-[7]: /dashboards/widgets/timeseries/
-[8]: /dashboards/widgets/top_list/
-[9]: /dashboards/widgets/table/
-[10]: /dashboards/widgets/heatmap/
-[11]: /dashboards/widgets/distribution/
-[12]: /dashboards/widgets/list/
-[13]: /dashboards/widgets/query_value/
-[14]: /dashboards/widgets/funnel/
-[15]: /dashboards/widgets/pie_chart/
-[16]: /dashboards/widgets/slo/
-[17]: /account_management/rbac/
+[4]: /notebooks/guide/version_history
+[5]: /dashboards/template_variables/
+[6]: https://daringfireball.net/projects/markdown/
+[7]: https://mermaid.js.org/
+[8]: /dashboards/widgets/timeseries/
+[9]: /dashboards/widgets/top_list/
+[10]: /dashboards/widgets/table/
+[11]: /dashboards/widgets/heatmap/
+[12]: /dashboards/widgets/distribution/
+[13]: /dashboards/widgets/list/
+[14]: /dashboards/widgets/query_value/
+[15]: /dashboards/widgets/funnel/
+[16]: /dashboards/widgets/pie_chart/
+[17]: /dashboards/widgets/slo/
+[18]: /account_management/rbac/

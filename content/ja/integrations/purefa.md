@@ -32,12 +32,11 @@ draft: false
 git_integration_title: purefa
 integration_id: purefa
 integration_title: Pure Storage FlashArray
-integration_version: 1.1.0
+integration_version: 1.1.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: purefa
-oauth: {}
 public_title: Pure Storage FlashArray
 short_description: Pure Storage FlashArrays のパフォーマンスと利用状況を監視
 supported_os:
@@ -90,7 +89,7 @@ tile:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、オートディスカバリーのインテグレーションテンプレートのガイドを参照してこの手順を行ってください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 1. [Datadog Agent をダウンロードして起動][2]します。
 2. Pure FlashArray インテグレーションを手動でインストールします。環境に応じた詳細は、[コミュニティインテグレーションを利用する][4]を参照してください。

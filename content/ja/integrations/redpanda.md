@@ -33,12 +33,11 @@ draft: false
 git_integration_title: redpanda
 integration_id: redpanda
 integration_title: Redpanda
-integration_version: 1.1.0
+integration_version: 1.1.1
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: redpanda
-oauth: {}
 public_title: Redpanda
 short_description: Redpanda クラスターの全体的な健全性とパフォーマンスを監視します。
 supported_os:
@@ -70,7 +69,7 @@ Datadog と [Redpanda][1] を接続し、主要なメトリクスを表示した
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 1. [Datadog Agent をダウンロードして起動][2]します。
 2. Redpanda インテグレーションを手動でインストールします。環境に応じた詳細は、[コミュニティインテグレーションを利用する][3]を参照してください。

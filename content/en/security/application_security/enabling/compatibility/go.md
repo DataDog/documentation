@@ -1,77 +1,98 @@
 ---
-title: Go Compatibility Requirements 
+title: Go Compatibility Requirements
 kind: documentation
 code_lang: go
 type: multi-code-lang
 code_lang_weight: 20
 ---
 
-## Language and framework compatibility
-
-### Supported Go versions
-
-The Datadog Go tracing library supports Go version 1.14 and greater, on the following architectures:
-- Linux (GNU) x86-64
-- Alpine Linux (musl) x86-64
-- macOS (Darwin) x86-64
-
-You can monitor application security for Go apps running in Docker, Kubernetes, and AWS ECS.
-
-### Supported frameworks
-
-Integrate the Go tracer with the following list of web frameworks using one of the corresponding APM tracer integrations. Refer to [Go's integrations documentation][1] for a detailed overview of the supported packages and their APIs, along with usage examples.
-
-- [gRPC][2]
-- [net/http][3]
-- [Gorilla Mux][4]
-- [Echo][5]
-- [Chi][6]
-- [HttpRouter][7]
-
-### Enabling CGO
-
-Compiling your code with ASM enabled involves [CGO][8] and therefore requires:
-
-- The `gcc` compiler for the target `GOOS` and `GOARCH`.
-- The C library headers.
-- The CGO bindings enabled. This is controlled by the `CGO_ENABLED` environment variable which is enabled by default when compiling natively.
-
-To install the above requirements:
-
-| Operating system     | Console command |
-|----------------------|-----------------|
-| Debian, Ubuntu       | `$ apt install gcc libc6-dev`   |
-| Alpine               | `$ apk add gcc musl-dev`        |
-| RHEL, CentOS, Fedora | `$ yum install gcc glibc-devel` |
-| macOS                | `$ xcode-select --install`      |
-
-**Note**: The Go toolchain disables CGO when cross-compiling and so, CGO needs to be explicitly enabled.
-
-
-## ASM capabilities support
+## ASM capabilities
 
 The following ASM capabilities are supported in the Go library, for the specified tracer version:
 
 | ASM capability                   | Minimum Go tracer version |
 | -------------------------------- | ----------------------------|
-| Threat Detection <br/> --> Business logic API  | 1.47.0 <br/>  |
-| Threat Protection <br/> --> IP blocking <br/> --> Suspicious request blocking <br> --> User blocking   |  <br/> --> 1.48.0<br/> --> v1.50.0<br/> --> 1.48.0     |
-| Risk Management <br/> --> Third-party vulnerability detection <br/> --> Custom code vulnerability detection | not supported<br/><br/> |
+| Threat Detection| 1.47.0  |
+| Threat Protection |  1.50.0   |
+| Customize response to blocked requests | 1.53.0 |
+| Software Composition Analysis (SCA) | 1.49.0 |
+| Code Security (beta) | not supported |
+| Automatic user activity event tracking | not supported |
 
-The minimum tracer version to get all supported ASM capabilities for Go is 1.48.0.
+The minimum tracer version to get all supported ASM capabilities for Go is 1.50.0.
 
-**Note**: Threat Protection requires enabling [Remote Configuration][10], which is included in the listed minimum tracer version.  
+**Note**: Threat Protection requires enabling [Remote Configuration][1], which is included in the listed minimum tracer version.
 
-<div class="alert alert-info">If you would like to see support added for any of the unsupported capabilities, or for your Go framework, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
+### Supported deployment types
+|Type | Threat Detection support | Vulnerability Management for OSS support |
+| ---           |   ---             |           ----            |
+| Docker        | {{< X >}}         | {{< X >}}                 |
+| Kubernetes    | {{< X >}}         | {{< X >}}                 |
+| Amazon ECS    | {{< X >}}         | {{< X >}}                 |
+| AWS Fargate   | {{< X >}}         | {{< X >}}                 |
+| AWS Lambda    | {{< X >}}         |                           |
 
+## Language and framework compatibility
 
-[1]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
-[2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc#example-package-Server
-[3]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http#example-package
-[4]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux#example-package
-[5]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4#example-package
-[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi.v5#example-package
-[7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/julienschmidt/httprouter#example-package
-[8]: https://github.com/golang/go/wiki/cgo
-[9]: /tracing/trace_collection/compatibility/go/
-[10]: /agent/guide/how_remote_config_works/#enabling-remote-configuration
+### Supported Go versions
+
+The Datadog Go Tracing library is open source. View the [GitHub repository][2] for more information.
+
+The Datadog Go Tracing Library has a [version support policy][3] defined for Go versions. The two latest releases of Go are fully supported, while the third newest release is considered in [maintenance][4]. Older versions may function, but no support is provided by default. For special requests, [contact support][5].
+
+You must be running Datadog Agent v5.21.1+
+
+Starting from tracer version 1.53.0, ASM does not require [CGO][15].
+
+## Integrations
+
+The Go tracer includes support for the following frameworks, data stores and libraries.
+
+The Go packages listed in this page are relevant for ASM. You can also find more tracing integrations in [APM's tracing compatibility page][16].
+
+**Note**: The [Go integrations documentation][6] provides a detailed overview of the supported packages and their APIs, along with usage examples.
+
+<div class="alert alert-info">If you don't see your library of choice listed, fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this form to send details</a>.</div>
+
+### Web framework compatibility
+
+| Framework         | Threat Detection supported? | Threat Protection supported? |
+|-------------------|-----------------------------|------------------------------|
+| [net/http][13]     | {{< X >}}  | {{< X >}} |
+| [Gin][7]          | {{< X >}} | {{< X >}} |
+| [Gorilla Mux][8] | {{< X >}} | {{< X >}} |
+| [gRPC][11]          | {{< X >}} | {{< X >}} |
+| [echo v4][9]     | {{< X >}}  | {{< X >}} |
+| [echo v3][10]     | {{< X >}} | {{< X >}} |
+| [chi][12] | {{< X >}} | {{< X >}} |
+
+### Networking framework compatibility
+
+| Framework             | Threat Detection supported? | Threat Protection supported? |
+|-----------------------|-----------------------------|------------------------------|
+| [gRPC client][11]     | {{< X >}}                   | {{< X >}} |
+| [net/http client][13] | {{< X >}}                   | {{< X >}} |
+
+### Data store compatibility
+
+| Framework         | Threat Detection supported?    | Threat Protection supported?                                              |
+|-------------------|-----------------|--------------------------------------------------------------------------|
+| [sql][14]          | {{< X >}} |   {{< X >}}    |
+
+[1]: /agent/remote_config/#enabling-remote-configuration
+[2]: https://github.com/DataDog/dd-trace-go
+[3]: https://github.com/DataDog/dd-trace-go#support-policy
+[4]: https://github.com/DataDog/dd-trace-go#support-maintenance
+[5]: https://www.datadoghq.com/support/
+[6]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib
+[7]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gin-gonic/gin
+[8]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/gorilla/mux
+[9]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo.v4
+[10]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/labstack/echo
+[11]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc
+[12]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/go-chi/chi
+[13]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http
+[14]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/contrib/database/sql
+[15]: https://github.com/golang/go/wiki/cgo
+[16]: /tracing/compatibility_requirements/go
+

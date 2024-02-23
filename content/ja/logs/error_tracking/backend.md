@@ -25,6 +25,21 @@ Datadog でまだログを収集していない場合は、[ログドキュメ�
 もし、スタックトレースを Datadog に送信しているが、`error.stack` にない場合、[ジェネリックログリマッパー][8]をセットアップして、スタックトレースを Datadog の正しい属性にリマップすることが可能です。
 
 課題でのインラインコードスニペットを構成するには、[ソースコードインテグレーション][9]を設定します。Error Tracking for Logs でコードスニペットを追加する場合、APM は必要ありません。エンリッチメントタグとリンク先のリポジトリは、どちらも同じです。
+
+#### エラー追跡の属性
+
+Datadog 内には、専用の UI 表示を持つ特定の属性があります。エラー追跡でこれらの関数を有効にするには、以下の属性名を使用します。
+
+| 属性            | 説明                                                             |
+|----------------------|-------------------------------------------------------------------------|
+| `error.stack`        | 実際のスタックトレース                                                      |
+| `error.message`      | スタックトレースに含まれるエラーメッセージ                              |
+| `error.kind`         | エラーのタイプまたは「種類」("Exception" や "OSError" など) |
+
+**注**: インテグレーションパイプラインは、デフォルトのログライブラリパラメーターをこれらの属性に再マップし、スタックトレースをパースまたはトレースバックして、自動的に `error.message` と `error.kind` を抽出しようとします。
+
+詳しくは、[ソースコード属性の完全なドキュメント][11]をご覧ください。
+
 ### C# と .NET
 
 {{< tabs >}}
@@ -37,12 +52,12 @@ C# のログ収集の設定をしていない場合は、[C# ログ収集ドキ�
 ```csharp
 var log = new LoggerConfiguration()
     .WriteTo.File(new JsonFormatter(renderMessage: true), "log.json")
-    .Enrich.WithExceptionDetails() 
+    .Enrich.WithExceptionDetails()
     .CreateLogger();
 try {
   // ...
 } catch (Exception ex) {
-  // ログ呼び出しの最初の引数として例外を渡す
+  // log 呼び出しの最初の引数として例外を渡す
   log.Error(ex, "an exception occurred");
 }
 ```
@@ -116,9 +131,9 @@ type stackTracer interface {
 }
 
 type errorField struct {
-  kind    string `json:"kind"`
-  stack   string `json:"stack"`
-  message string `json:"message"`
+  Kind    string `json:"kind"`
+  Stack   string `json:"stack"`
+  Message string `json:"message"`
 }
 
 func ErrorField(err error) errorField {
@@ -130,10 +145,10 @@ func ErrorField(err error) errorField {
             stack = stack[1:]
         }
     }
-    return ErrorField{
-        kind: reflect.TypeOf(err).String(),
-        stack: stack,
-        message: err.Error(),
+    return errorField{
+        Kind: reflect.TypeOf(err).String(),
+        Stack: stack,
+        Message: err.Error(),
     }
 }
 
@@ -218,39 +233,81 @@ except:
 
 ### Ruby on Rails
 
-#### Lograge (JSON)
+#### カスタムロガーフォーマッター
 
 Ruby on Rails のログ収集の設定をしていない場合は、[Ruby on Rails ログ収集ドキュメント][7]を参照してください。
 
-キャッチした例外を自分でログに残すには、オプションで以下を使用できます。
+手動でエラーを記録するには、JSON を使ってフォーマッターを作成し、例外値を正しいフィールドにマッピングします。
 
 ```ruby
-# Lograge 構成
-config.lograge.enabled = true
+require 'json'
+require 'logger'
 
-# JSON 形式でログを記録することを指定する
-config.lograge.formatter = Lograge::Formatters::Json.new
+class JsonWithErrorFieldFormatter < ::Logger::Formatter
+    def call(severity, datetime, progname, message)
+        log = {
+            timestamp: "#{datetime.to_s}",
+            level: severity,
+        }
 
-# ログのカラーリングを無効にする
-config.colorize_logging = false
+        if message.is_a?(Hash)
+            log = log.merge(message)
+        elsif message.is_a?(Exception)
+            log['message'] = message.inspect
+            log['error'] = {
+                kind: message.class,
+                message: message.message,
+                stack: message.backtrace.join("\n"),
+            }
+        else
+            log['message'] = message.is_a?(String) ? message : message.inspect
+        end
 
-# 専用ファイルへのログ記録
-config.lograge.logger = ActiveSupport::Logger.new(Rails.root.join('log', "#{Rails.env}.log"))
-
-# 例外のログを正しいフィールドにログ記録するよう構成する
-config.lograge.custom_options = lambda do |event|
-    {
-      error: {
-        type: event.payload[:exception][0],
-        message: event.payload[:exception][1],
-        stack: event.payload[:exception_object].backtrace
-      }
-    }
-  end  
+        JSON.dump(log) + "\n"
+    end
 end
 ```
 
-## {{< partial name="whats-next/whats-next.html" >}}
+そして、それをロガーで使用します。
+```ruby
+logger = Logger.new(STDOUT)
+logger.formatter = JsonWithErrorFieldFormatter.new
+```
+
+**Lograge** を使用する場合は、フォーマットされたエラーログを送信するように設定することもできます。
+``` ruby
+Rails.application.configure do
+    jsonLogger = Logger.new(STDOUT) # STDOUT または Agent の構成に応じたファイル
+    jsonLogger.formatter = JsonWithErrorFieldFormatter.new
+
+    # Rails のデフォルトの TaggedLogging ロガーを json フォーマッター付きの新規ロガーに置き換えます。
+    # TaggedLogging はより複雑な json 形式のメッセージと互換性がありません
+    config.logger = jsonLogger
+
+    # Lograge の構成
+    config.lograge.enabled = true
+    config.lograge.formatter = Lograge::Formatters::Raw.new
+
+    # ログの着色を無効にします
+    config.colorize_logging = false
+
+    # 例外のロギングを正しいフィールドに構成します
+    config.lograge.custom_options = lambda do |event|
+        if event.payload[:exception_object]
+            return {
+                level: 'ERROR',
+                message: event.payload[:exception_object].inspect,
+                error: {
+                    kind: event.payload[:exception_object].class,
+                    message: event.payload[:exception_object].message,
+                    stack: event.payload[:exception_object].backtrace.join("\n")
+                }
+            }
+        end
+    end
+end
+```
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -264,3 +321,4 @@ end
 [8]: /ja/logs/log_configuration/processors/?tab=ui#remapper
 [9]: https://app.datadoghq.com/source-code/setup/apm
 [10]: /ja/logs/log_collection/
+[11]: /ja/logs/log_configuration/attributes_naming_convention/#source-code

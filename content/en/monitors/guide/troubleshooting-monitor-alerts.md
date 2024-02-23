@@ -42,7 +42,7 @@ The state of a monitor may also sometimes update in the absence of a monitor eva
 
 If your monitor's state or status is not what you expect, confirm the behavior of the underlying data source. For a metric monitor, you can use the [history][2] graph to view the data points being pulled in by the metric query. For further investigation into your metrics evolution, click **Open in a notebook** by the status graph. This generates an investigation [notebook][20] with a formatted graph of the monitor query.
 
-{{< img src="monitors/monitor_status/notebook-button.png" alt="The monitor status page with the mouse cursor hovering over the Open in a notebook button next to one monitor group status bar" style="width:60%;">}}
+{{< img src="monitors/monitor_status/notebook-button2.png" alt="The monitor status page with the mouse cursor hovering over the Open in a notebook button next to one monitor group status bar" style="width:60%;">}}
 
 ### Alert conditions
 
@@ -81,6 +81,8 @@ If you suspect that notifications are not being properly delivered, check the it
 
 If you are using multiple `@opsgenie-[...]` notifications in your monitor, we send those notifications with the same alias to Opsgenie.
 Due to an [Opsgenie feature][19], Opsgenie will discard what is seen as a duplication.
+
+## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -224,11 +224,30 @@
 		"description": "Video short-code"
 	},
 
-  "Vimeo": {
-		"prefix": ";;vimeo",
-		"body": [
-			"{{< vimeo url=\"VIMEO_URL\" poster=\"THUMBNAIL_URL\" >}}"
-		],
-		"description": "Vimeo short-code"
+	"Vimeo": {
+			"prefix": ";;vimeo",
+			"body": [
+				"{{< vimeo url=\"VIMEO_URL\" poster=\"THUMBNAIL_URL\" >}}"
+			],
+			"description": "Vimeo short-code"
+		},
+
+	"Highlight": {
+			"prefix": ";;highlight",
+			"body": [
+				"{{< highlight py \"hl_lines=1-2\" >}}",
+				"a='Hello World!'",
+				"print(a)",
+				"{{< /highlight >}}"
+			]
+	},
+	
+	"Whats next": {
+			"prefix": ";;whatsnext",
+			"body": [
+				"{{< whatsnext desc=\"Overall description goes here:\" >}}",
+				"   {{< nextlink href=\"link/here\" >}}Link desctiption goes here{{< /nextlink >}}",
+				"{{< /whatsnext >}}"
+			]
 	}
 }

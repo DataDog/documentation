@@ -1,18 +1,15 @@
 .glossary-main {
-  h2:before {
-    margin-top: -140px !important;
-    height: 140px !important;
-  }
+    h2:before {
+        margin-top: -140px !important;
+        height: 140px !important;
+    }
     h4 {
         text-transform: none;
+    }
 
-        @include media-breakpoint-up(md) {
-            scroll-margin-top: 30px;
-        }
-
-        @include media-breakpoint-up(lg) {
-            scroll-margin-top: 40px;
-        }
+    .core-product-label {
+        @include font-size-line-height(18px, 24px);
+        padding: 0px 8px 2px 8px;
     }
 
     #glossary-nav {
@@ -27,22 +24,22 @@
             padding-top: 11px;
             background: white;
             width: 100%;
-            height: 50px;
             top: 89px;
-
-            &:lang(ja) {
-                height: 130px;
-            }
         }
 
         @include media-breakpoint-up(lg) {
             top: 95px;
-
-            &:lang(ja) {
-                height: 150px;
-            }
         }
 
+        button.filter-btn{
+            &:hover {
+                color: white !important;
+            }
+        }
+        button.filter-btn.active{
+            background: $brand-primary;
+            color: white;
+        }
         .btn {
             padding: 0 5px;
 
@@ -79,6 +76,11 @@
                     content: ''
                 }
             }
+        }
+        .filters-glossary{
+            padding-left: 15px;
+            margin-top: 16px;
+            font-size: 16px;
         }
     }
 }

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: lambdatest-software-license
 app_uuid: 19d686c3-df14-485b-8efb-539e3dbc23e9
 assets: {}
@@ -28,7 +30,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: lambdatest_license
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true
@@ -76,6 +77,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -96,7 +98,7 @@ LambdaTest を使用すると、以下にアクセスできます。
 Datadog Marketplace を通じて、LambdaTest のサブスクリプションを購入することができます。LambdaTest のアカウントを設定したら (または既に LambdaTest のお客様である場合)、[インテグレーションタイル][1]に移動して、Datadog へのデータ送信を開始してください。
 
 
-## サポート
+## Agent
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから LambdaTest にお問い合わせください。
 

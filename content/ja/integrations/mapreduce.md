@@ -24,7 +24,6 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- processing
 - log collection
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mapreduce/README.md
@@ -33,26 +32,24 @@ draft: false
 git_integration_title: mapreduce
 integration_id: mapreduce
 integration_title: Map Reduce
-integration_version: 3.2.0
+integration_version: 4.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: mapreduce
-oauth: {}
 public_title: Map Reduce
 short_description: マップのステータスと期間を監視し、タスクを削減。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::処理
   - Category::ログの収集
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: マップのステータスと期間を監視し、タスクを削減。
   media: []
@@ -74,7 +71,7 @@ mapreduce サービスからメトリクスをリアルタイムに取得して�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Mapreduce チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
@@ -179,7 +176,7 @@ Mapreduce チェックには、イベントは含まれません。
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mapreduce/images/mapreduce_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/
 [5]: https://www.datadoghq.com/blog/hadoop-architecture-overview

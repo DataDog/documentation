@@ -7,9 +7,6 @@ further_reading:
 - link: developers/libraries
   tag: ドキュメント
   text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-- link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
-  tag: GitHub
-  text: DogStatsD ソースコード
 kind: documentation
 title: 大量のメトリクスの送信
 ---
@@ -159,9 +156,10 @@ public class DogStatsdClient
 
         using (var dogStatsdService = new DogStatsdService())
         {
-            dogStatsdService.Configure(dogstatsdConfig);
+            if (!dogStatsdService.Configure(dogstatsdConfig))
+                throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
 
-            // カウンターとゲージは同じデータグラムで送信されます
+            // Counter と Gauge は同じデータグラムで送信されます
             dogStatsdService.Counter("example_metric.count", 2, tags: new[] { "environment:dev" });
             dogStatsdService.Gauge("example_metric.gauge", 100, tags: new[] { "environment:dev" });
         }

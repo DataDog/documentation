@@ -25,9 +25,9 @@ further_reading:
 - link: "/tracing/trace_explorer/trace_view/"
   tag: "Documentation"
   text: "Understand how to read a Datadog Trace"
-- link: "/tracing/services/services_list/"
+- link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Discover the list of services reporting to Datadog"
+  text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
@@ -101,7 +101,7 @@ It is also possible to search for numerical attributes within a specific range. 
 
 Typing a complex query can be cumbersome. Use the search bar's autocomplete feature to complete your query using existing values:
 
-{{< img src="tracing/app_analytics/search/search_bar_autocomplete.png" alt="search bar autocomplete "  style="width:60%;">}}
+{{< img src="tracing/app_analytics/search/search_bar_autocomplete.png" alt="search bar autocomplete " style="width:60%;">}}
 
 ### Escaping of special characters
 
@@ -119,7 +119,7 @@ If an attribute is called `user.first name`, perform a search on this attribute 
 
 Don't lose time building the same views everyday. Saved searches contain your search query, columns, and time horizon. They are then available in the search bar thanks to the auto-complete matching whether the search name or query.
 
-{{< img src="tracing/app_analytics/search/saved_search.png" alt="Saved Search"  style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/saved_search.png" alt="Saved Search" style="width:80%;">}}
 
 To delete a saved search, click on the bin icon under the Trace search dropdown menu.
 
@@ -137,28 +137,28 @@ The Trace Stream is the list of traces that match the selected context. A contex
 
 Click on any trace to see more details about it:
 
-{{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="Trace in tracestream"  style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/trace_in_tracestream.png" alt="Trace in tracestream" style="width:80%;">}}
 
 ### Columns
 
 To add more Trace details to the list, click the **Options** button and select any Facets you want to see:
 
-{{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Trace list with columns"  style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/trace_list_with_column.png" alt="Trace list with columns" style="width:80%;">}}
 
 ### Multi-line display
 
-{{< img src="tracing/app_analytics/search/multi_line_display.png" alt="Multi-line display"  style="width:30%;">}}
+{{< img src="tracing/app_analytics/search/multi_line_display.png" alt="Multi-line display" style="width:30%;">}}
 
 Choose to display one, three, or ten lines from your traces. 3 and 10 lines display are here to give you more insights on the `error.stack` attribute.
 
 * With one line displayed:
-{{< img src="tracing/app_analytics/search/1_multi_line.png" alt="1 line Multi-line display"  style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/1_multi_line.png" alt="1 line Multi-line display" style="width:80%;">}}
 
 * With three lines displayed:
-{{< img src="tracing/app_analytics/search/3_multi_line.png" alt="2 lines with Multi-line display"  style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/3_multi_line.png" alt="2 lines with Multi-line display" style="width:80%;">}}
 
 * With ten lines displayed:
-{{< img src="tracing/app_analytics/search/10_multi_line.png" alt="10 lines with Multi-line display"  style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/10_multi_line.png" alt="10 lines with Multi-line display" style="width:80%;">}}
 
 ## Facets
 
@@ -166,7 +166,7 @@ A Facet displays all the distinct values of an attribute or a tag as well as pro
 
 Facets allow you to pivot or filter your datasets based on a given attribute. Examples Facets may include users, services, etc...
 
-{{< img src="tracing/app_analytics/search/facets_demo.png" alt="Facets demo"  style="width:80%;">}}
+{{< img src="tracing/app_analytics/search/facets_demo.png" alt="Facets demo" style="width:80%;">}}
 
 ### Quantitative (measures)
 
@@ -189,7 +189,7 @@ Use `duration:>20ms` (see search syntax for reference) to consistently query spa
 
 To start using an attribute as a Facet or in the search, click on it and add it as a Facet:
 
-{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet"  style="width:50%;">}}
+{{< img src="tracing/app_analytics/search/create_facet.png" style="width:50%;" alt="Create Facet" style="width:50%;">}}
 
 Once this is done, the value of this attribute is stored **for all new traces** and can be used in [the search bar](#search-bar), [the Facet Panel](#facet-panel), and in the Trace graph query.
 
@@ -197,7 +197,7 @@ Once this is done, the value of this attribute is stored **for all new traces** 
 
 Use Facets to filter on your Traces. The search bar and url automatically reflect your selections.
 
-{{< img src="tracing/app_analytics/search/facet_panel.png" alt="Facet panel"  style="width:30%;">}}
+{{< img src="tracing/app_analytics/search/facet_panel.png" alt="Facet panel" style="width:30%;">}}
 
 ## Analytics overview
 
@@ -213,24 +213,24 @@ Use the query to control what's displayed in your Analytics:
 
 1. Choose the `Duration` metric or a [Facet][8] to analyze. Selecting the `Duration` metric lets you choose the aggregation function whereas a facet displays the unique count.
 
-    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="choose measure facet"  style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/choose_measure_facet.png" alt="choose measure facet" style="width:50%;">}}
 
 2. Select the aggregation function for the `Duration` metric:
 
-    {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="aggregation function"  style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/agg_function.png" alt="aggregation function" style="width:50%;">}}
 
 3. Use a tag or facet to split your Analytic.
 
-    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="split by"  style="width:50%;">}}
+    {{< img src="tracing/app_analytics/analytics/split_by.png" alt="split by" style="width:50%;">}}
 
 4. Choose to display either the *X* **top** or **bottom** values according to the selected facet or `Duration`.
 
-    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="top bottom button"  style="width:20%;">}}
+    {{< img src="tracing/app_analytics/analytics/top_bottom_button.png" alt="top bottom button" style="width:20%;">}}
 
 5. Choose the Analytic Timesteps.
  Changing the global timeframe changes the list of available Timesteps values.
 
-    {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="Timestep"  style="width:30%;">}}
+    {{< img src="tracing/app_analytics/analytics/timesteps.png" alt="Timestep" style="width:30%;">}}
 
 ## Visualizations
 
@@ -246,7 +246,7 @@ Visualize the evolution of the `Duration` metric (or a facet unique count of val
 
 The following timeseries Analytics shows the evolution of the **pc99** **duration** by steps of **5min** for each **Service**
 
-{{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="timeserie example"  style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/timeserie_example.png" alt="timeserie example" style="width:90%;">}}
 
 ### Top list
 
@@ -254,7 +254,7 @@ Visualize the top values from a facet according to their `Duration` (or a facet 
 
 The following top list analytics shows the top **pc99** **duration** of **Service**:
 
-{{< img src="tracing/app_analytics/analytics/top_list_example.png" alt="top list example"  style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/top_list_example.png" alt="top list example" style="width:90%;">}}
 
 ### Table
 
@@ -268,17 +268,17 @@ Visualize the top values from a facet according to a chosen [measure][9] (the fi
 
 The following Table Log Analytics shows the evolution of the **top Status Codes** according to their **Throughput**, along with the number of unique **Client IPs**, and over the last 15 minutes:
 
-{{< img src="tracing/app_analytics/analytics/trace_table_example.png" alt="top list example"  style="width:90%;">}}
+{{< img src="tracing/app_analytics/analytics/trace_table_example.png" alt="top list example" style="width:90%;">}}
 
 ## Related traces
 
 Select or click on a section of the graph to either zoom in the graph or see the list of [traces][10] corresponding to your selection:
 
-{{< img src="tracing/app_analytics/analytics/view_traces.png" alt="view Traces"  style="width:40%;">}}
+{{< img src="tracing/app_analytics/analytics/view_traces.png" alt="view Traces" style="width:40%;">}}
 
 ## Export
 
-{{< img src="tracing/app_analytics/analytics/export_button.png" alt="Export your analytics button"  style="width:40%;">}}
+{{< img src="tracing/app_analytics/analytics/export_button.png" alt="Export your analytics button" style="width:40%;">}}
 
 Export your Analytics:
 

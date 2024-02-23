@@ -23,6 +23,9 @@ further_reading:
 - link: /logs/faq/log-collection-troubleshooting-guide/
   tag: よくあるご質問
   text: ログ収集のトラブルシューティングガイド
+- link: /glossary/#tail
+  tag: 用語集
+  text: 用語集 "テール" の項目
 kind: documentation
 title: C# ログ収集
 ---
@@ -37,7 +40,7 @@ C# のログを Datadog に送信するには、次のいずれかの方法を�
 
 ## Datadog Agent によるファイルテールロギング
 
-C# ログ収集の推奨アプローチは、ログをファイルに出力し、そのファイルを Datadog Agent でテールすることです。これにより、Datadog Agent が追加のメタデータでログをリッチ化することができます。
+C# ログ収集の推奨アプローチは、ログをファイルに出力し、そのファイルを Datadog Agent で[テール][20]することです。これにより、Datadog Agent が追加のメタデータでログをリッチ化することができます。
 
 Datadog は、[カスタムパース規則][1]の使用を避け、ログを JSON 形式で生成するようにロギングライブラリをセットアップすることを強くお勧めします。
 
@@ -130,7 +133,7 @@ PM> Install-Package NLog
     <!-- ログを Json 形式でファイルに書き込みます -->
     <target name="json-file" xsi:type="File" fileName="application-logs.json">
       <layout xsi:type="JsonLayout">
-        <attribute name="date" layout="${date:format=yyyy-MM-ddTHH\:mm\:ss.fff}" />
+        <attribute name="date" layout="${date:universalTime=true:format=o}" />
         <attribute name="level" layout="${level:upperCase=true}"/>
         <attribute name="message" layout="${message}" />
         <attribute name="exception" layout="${exception:format=ToString}" />
@@ -280,8 +283,8 @@ JSON でログを記録する方がメリットが多いですが、未加工の
     logs:
 
       - type: file
-        path: "/path/to/your/csharp/log.log"
-        service: csharp
+        path: "<path_to_your_csharp_log>.log"
+        service: <service_name>
         source: csharp
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
@@ -398,6 +401,14 @@ Tracer バージョン 2.7.0 からエージェントレスロギングを使用
 
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+
+`DD_LOGS_DIRECT_SUBMISSION_URL`
+: ログを送信するための URL を設定します。デフォルトでは `DD_SITE` で指定されたドメインを使用します。<br>
+**デフォルト**: `https://http-intake.logs.ap1.datadoghq.com:443` (`DD_SITE` に基づく)
+
+{{< /site-region >}}
+
 {{< site-region region="eu" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
@@ -483,6 +494,19 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+
+```csharp
+using (var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs("<API_KEY>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ap1.datadoghq.com" })
+    .CreateLogger())
+{
+    // コード
+}
+```
+
+{{< /site-region >}}
+
 {{< site-region region="us5" >}}
 
 ```csharp
@@ -522,10 +546,9 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
-
-デフォルトの動作を上書きして、ログを TCP で転送することもできます。それには、必須プロパティ `url`、`port`、`useSSL`、および `useTCP` を手動で指定します。また、オプションで、[`source`、`service`、`host`、およびカスタムタグを指定][20]できます。
-
 {{< site-region region="us" >}}
+
+デフォルトの動作を上書きして、ログを TCP で転送することもできます。それには、必須プロパティ `url`、`port`、`useSSL`、および `useTCP` を手動で指定します。また、オプションで、[`source`、`service`、`host`、およびカスタムタグを指定][1]できます。
 
 たとえば、Datadog US リージョンに TCP でログを転送する場合は、次のようなシンクコンフィギュレーションを使用します。
 
@@ -546,8 +569,12 @@ using (var log = new LoggerConfiguration()
 }
 ```
 
+[1]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
+
 {{< /site-region >}}
 {{< site-region region="eu" >}}
+
+デフォルトの動作を上書きして、ログを TCP で転送することもできます。それには、必須プロパティ `url`、`port`、`useSSL`、および `useTCP` を手動で指定します。また、オプションで、[`source`、`service`、`host`、およびカスタムタグを指定][1]できます。
 
 たとえば、Datadog EU リージョンに TCP でログを転送する場合は、次のようなシンクコンフィギュレーションを使用します。
 
@@ -567,6 +594,7 @@ using (var log = new LoggerConfiguration()
     // コード
 }
 ```
+[1]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
 
 {{< /site-region >}}
 
@@ -599,22 +627,22 @@ using (var log = new LoggerConfiguration()
 }
 ```
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/logs/log_configuration/parsing
 [2]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
 [3]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[4]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[5]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[6]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information
+[4]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[5]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[6]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information
 [7]: /ja/logs/log_configuration/parsing/?tab=matchers
 [8]: /ja/logs/explorer/#overview
 [9]: /ja/tracing/other_telemetry/connect_logs_and_traces/dotnet/
 [10]: /ja/agent/logs/advanced_log_collection
 [11]: /ja/serverless/azure_app_services
-[12]: /ja/account_management/org_settings/sensitive_data_detection/#overview
+[12]: /ja/sensitive_data_scanner/
 [13]: /ja/tracing/trace_collection/dd_libraries/dotnet-core
 [14]: /ja/tracing/trace_collection/dd_libraries/dotnet-framework
 [15]: https://app.datadoghq.com/organization-settings/api-keys
@@ -622,4 +650,4 @@ using (var log = new LoggerConfiguration()
 [17]: /ja/logs/log_configuration/pipelines/?tab=source
 [18]: /ja/api/latest/logs/#send-logs
 [19]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
-[20]: /ja/logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[20]: /ja/glossary/#tail

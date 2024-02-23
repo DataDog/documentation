@@ -33,7 +33,7 @@ Artifacts are browser test screenshots, snapshots, errors, and resources.
 
 {{< site-region region="us,us3,us5,gov,ap1" >}}
 
-* **Storage**: Encryption for [AWS S3 buckets][1].
+* **Storage**: Encryption for [Amazon S3 buckets][1].
 * **Transport**: Encryption in transit using [AWS Signature Version 4 for S3][2].
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html

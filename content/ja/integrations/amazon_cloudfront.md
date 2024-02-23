@@ -2,11 +2,11 @@
 aliases:
 - /ja/integrations/awscloudfront/
 categories:
-- cloud
-- caching
-- web
 - aws
+- caching
+- cloud
 - log collection
+- network
 dependencies: []
 description: エラー率、リクエストカウント数、ダウンロードバイト数、アップロードバイト数を追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_cloudfront/
@@ -52,25 +52,28 @@ Amazon CloudFront は、Web サイト、API、ビデオコンテンツなどの 
 
 ディストリビューションで CloudFront ログを有効にする際は、CloudFront がログファイルを格納するために使用する Amazon S3 バケットを指定します。Amazon S3 を発信元として使用する場合、Datadog ではログファイルに同じバケットを使用しないことをお勧めしています。別のバケットを使用することで、メンテナンスを簡略化できます。
 
-**重要**: 複数のディストリビューションのログファイルは同じバケットに格納してください。ログを有効にする場合は、[どのログファイルがどのディストリビューションに関連付けられているかを追跡できるように][1]、`cloudfront` をファイル名のプレフィックスとして指定します。
+**注**: Datadog は、ログ転送が 1 つのバケットにサブスクライブするだけでよいように、複数のディストリビューションのログファイルを同じバケットに格納することを推奨します。
+
+<div class="alert alert-info">
+ログを CloudFront ソースで自動的に分類するには、ロギングを有効にする際にファイル名のプレフィックスとして <code>cloudfront</code> を指定してください。それ以外の場合、ログは <code>s3</code> に分類されます。
+</div>
 
 #### ログを Datadog に送信する方法
 
-1. AWS アカウントで [Datadog Forwarder Lambda 関数][2] をまだセットアップしていない場合は、セットアップします。
+1. AWS アカウントで [Datadog Forwarder Lambda 関数][1]をまだセットアップしていない場合は、セットアップします。
 2. 設定したら、Datadog Forwarder Lambda 関数に移動します。Function Overview セクションで、**Add Trigger** をクリックします。
 3. Trigger Configuration で **S3** トリガーを選択します。
 4. CloudFront のログが格納されている S3 バケットを選択します。
 5. イベントの種類は `All object create events` のままにしておきます。
 6. **Add** をクリックすると、Lambda にトリガーが追加されます。
 
-[ログエクスプローラー][3]に移動して、ログを確認します。
+[ログエクスプローラー][2]に移動して、ログを確認します。
 
-AWS Services のログを収集する方法については、[Datadog Lambda 関数で AWS Services のログを送信する][4]を参照してください。
+AWS Services のログを収集する方法については、[Datadog Lambda 関数で AWS Services のログを送信する][3]を参照してください。
 
-[1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#access-logs-choosing-s3-bucket
-[2]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[3]: https://app.datadoghq.com/logs
-[4]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
+[1]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[2]: https://app.datadoghq.com/logs
+[3]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/
 {{% /tab %}}
 {{% tab "Real-Time Logs" %}}
 

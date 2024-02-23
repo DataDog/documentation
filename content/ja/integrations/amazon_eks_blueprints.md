@@ -31,7 +31,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: amazon_eks_blueprints
-oauth: {}
 public_title: Datadog Blueprints アドオン
 short_description: Amazon EKS Blueprints は、クラスター構成とデプロイツールを統合します。
 supported_os:
@@ -68,7 +67,7 @@ Datadog Blueprints アドオンでは、Blueprints を使用して Amazon EKS �
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 ```
 npm install @datadog/datadog-eks-blueprints-addon

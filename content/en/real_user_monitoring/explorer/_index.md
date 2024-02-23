@@ -17,9 +17,7 @@ further_reading:
 
 ## Overview
 
-The Real User Monitoring (RUM) Explorer allows you to examine data collected from your applications and granular information about your RUM events. 
-
-Click the **Sessions** tab under **UX Monitoring** > **RUM Applications** to access the [RUM Explorer][1] and investigate any questions you have about your applications' health and usage. 
+The [Real User Monitoring (RUM) Explorer][1] allows you to examine data collected from your applications and granular information about your RUM events.
 
 You can:
 
@@ -27,7 +25,13 @@ You can:
 - Investigate performance issues affecting views, resources, or actions
 - Troubleshoot application errors and long tasks
 
-{{< img src="real_user_monitoring/explorer/rum_explorer_1.png" alt="RUM Explorer" style="width:95%;" >}}
+{{< img src="real_user_monitoring/explorer/rum-explorer-2.png" alt="RUM Explorer" style="width:95%;" >}}
+
+## View by application
+
+Use the application selector in the top navigation to select and view all RUM data for a specific application.
+
+{{< img src="real_user_monitoring/explorer/application-selector-2.png" alt="Click the application selector to view all RUM data for a specific application" style="width:95%;" >}}
 
 ## Search and filter
 
@@ -51,7 +55,7 @@ To start visualizing RUM data in the RUM Explorer, see [Create RUM Visualization
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rum/explorer
+[1]: https://app.datadoghq.com/rum/sessions
 [2]: /real_user_monitoring/explorer/group
 [3]: /real_user_monitoring/explorer/search_syntax
 [4]: /real_user_monitoring/explorer/visualize

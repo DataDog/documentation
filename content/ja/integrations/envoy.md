@@ -35,12 +35,11 @@ draft: false
 git_integration_title: envoy
 integration_id: envoy
 integration_title: Envoy
-integration_version: 2.5.0
+integration_version: 3.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: envoy
-oauth: {}
 public_title: Envoy
 short_description: Envoy はオープンソースのエッジ/サービスプロキシを提供
 supported_os:
@@ -71,7 +70,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Envoy チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
@@ -272,7 +271,7 @@ Envoy チェックには、イベントは含まれません。
 
 
 [1]: https://www.envoyproxy.io
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://istio.io
 [4]: https://www.envoyproxy.io/docs/envoy/latest/operations/admin
 [5]: https://gist.github.com/ofek/6051508cd0dfa98fc6c13153b647c6f8

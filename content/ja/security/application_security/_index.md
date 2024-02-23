@@ -2,18 +2,17 @@
 aliases:
 - /ja/security_platform/application_security
 description: 分散型トレースにより提供された実行コンテキストを利用して、実稼働システムをターゲットとした脅威を監視します。
-disable_sidebar: true
 further_reading:
 - link: /security/application_security/how-appsec-works/
   tag: ドキュメント
   text: Application Security Management の仕組み
 - link: /security/application_security/threats/
   tag: ドキュメント
-  text: Threat Monitoring and Protection
+  text: Threat Management
 - link: /security/application_security/risk_management/
   tag: ドキュメント
-  text: リスク管理
-- link: /security/application_security/setup_and_configure/#compatibility
+  text: Application Vulnerability Management
+- link: /security/application_security/enabling/#compatibility
   tag: ドキュメント
   text: 言語およびフレームワークの互換性に関する詳細
 - link: https://www.datadoghq.com/product/security-platform/application-security-monitoring/
@@ -31,6 +30,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/apm-security-view/
   tag: ブログ
   text: APM セキュリティビューでリスク、脆弱性、攻撃を可視化する
+- link: https://www.datadoghq.com/blog/block-attackers-application-security-management-datadog/
+  tag: ブログ
+  text: Datadog Application Security Management でアプリや API の攻撃者をブロックする
+- link: https://www.datadoghq.com/blog/threat-modeling-datadog-application-security-management/
+  tag: ブログ
+  text: Datadog Application Security Management による脅威のモデリング
 kind: documentation
 title: Application Security Management
 ---
@@ -57,7 +62,7 @@ Application Security Management がどのように構成され、トレースデ
 
 [独自の規則][4]を利用する ASM なら、手動でコンフィギュレーションをせずに脅威を検出できます。すでに Datadog [APM][1] を物理ホストまたは仮想ホストにすでに構成している場合、環境変数を 1 つ設定するだけですぐに開始できます。
 
-環境を構成し、ASM で脅威の検出と保護を開始するには、[はじめに][5]のドキュメントの手順に従います。ASM の構成が完了すると、[セキュリティシグナルエクスプローラー][6]でセキュリティシグナルの調査およびその修復を開始できます。
+環境を構成し、ASM で脅威の検出と保護を開始するには、[有効化のドキュメント][5]の手順に従います。ASM の構成が完了すると、[セキュリティシグナルエクスプローラー][6]でセキュリティシグナルの調査およびその修復を開始できます。
 
 ## セキュリティシグナルの調査と修復
 
@@ -65,9 +70,7 @@ Application Security Management がどのように構成され、トレースデ
 
 ## アップストリームのオープンソースライブラリや依存関係に潜むリスクの調査
 
-<div class="alert alert-info">Application Security Risk Management はベータ版です。</a></div>
-
-[ASM Risk Management][8] は、既知の脆弱性を持つオープンソースライブラリを使用または依存することで、サービスがリスクにさらされる場合を示しています。発見された脆弱性を調査し、修正アドバイスに従うか、脆弱性の原因を調査することで、ソフトウェアの安全性を確保します。
+[Application Vulnerability Management][8] は、既知の脆弱性を持つオープンソースライブラリを使用または依存することで、サービスがリスクにさらされる場合を示しています。発見された脆弱性を調査し、修正アドバイスに従うか、脆弱性の原因を調査することで、ソフトウェアの安全性を確保します。
 
 ## 次のステップ
 
@@ -77,7 +80,7 @@ Application Security Management がどのように構成され、トレースデ
 [2]: /ja/agent/
 [3]: /ja/security/application_security/how-appsec-works/
 [4]: /ja/security/default_rules/#cat-application-security
-[5]: /ja/security/application_security/getting_started/
+[5]: /ja/security/application_security/enabling/
 [6]: /ja/security/explorer/
 [7]: https://dashcon.io/appsec
 [8]: /ja/security/application_security/risk_management/

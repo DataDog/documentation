@@ -20,6 +20,8 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: FoundationDB
+  logs:
+    source: foundationdb
   monitors:
     FoundationDB Errors Logged: assets/monitors/errors_logged.json
     FoundationDB High Durability Lag: assets/monitors/high_durability_lag.json
@@ -55,7 +57,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: foundationdb
-oauth: {}
 public_title: FoundationDB
 short_description: FoundationDB インテグレーション
 supported_os:
@@ -92,7 +93,7 @@ tile:
 
 FoundationDB チェックは [Datadog Agent][2] パッケージに含まれていますが、[FoundationDB クライアント][3]がインストールされている必要があります。
 
-### コンフィギュレーション
+### 構成
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -160,7 +161,7 @@ FoundationDB はデフォルトで XML ログを書き込みますが、Datadog 
 [3]: https://www.foundationdb.org/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 

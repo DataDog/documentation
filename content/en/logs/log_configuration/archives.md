@@ -10,30 +10,31 @@ aliases:
   - /logs/archives/gcp/
   - /logs/archives/
 further_reading:
+- link: "/logs/archives/rehydrating"
+  tag: "Documentation"
+  text: "Learn how to access your archived log content in Datadog"
 - link: "/logs/explorer/"
   tag: "Documentation"
-  text: "Log Explorer"
+  text: "Learn about the Log Explorer"
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
-  text: "Logging without Limits*"
+  text: "Learn about Logging without Limits*"
 ---
 
 ## Overview
 
-Configure your Datadog account to forward all the logs ingested - whether [indexed][1] or not - to a cloud storage system of your own. Keep your logs in a storage-optimized archive for longer periods of time and meet compliance requirements while also keeping auditability for ad hoc investigations, with [Rehydration][2].
+Configure your Datadog account to forward all the logs ingested—whether [indexed][1] or not—to a cloud storage system of your own. Keep your logs in a storage-optimized archive for longer periods of time and meet compliance requirements while also keeping auditability for ad-hoc investigations, with [Rehydration][2].
 
-{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Archive page view" style="width:75%;">}}
+{{< img src="logs/archives/log_forwarding_archives_tab.png" alt="Archives tab on the Log Forwarding page" style="width:100%;">}}
 
-This guide shows you how to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket:
+Navigate to the [**Log Forwarding** page][14] to set up an archive for forwarding ingested logs to your own cloud-hosted storage bucket.
 
-1. If you haven't already, set up a Datadog [integration](#set-up-an-integration) for your cloud provider
-2. Create a [storage bucket](#create-a-storage-bucket)
-3. Set [permissions](#set-permissions) to `read` and/or `write` on that archive
-4. [Route your logs](#route-your-logs-to-a-bucket) to and from that archive
-5. Configure [advanced settings](#advanced-settings) such as encryption, storage class, and tags
-6. [Validate](#validation) your setup checking for possible misconfigurations that Datadog would be able to detect for you
-
-**Note:** Only Datadog users with the [logs_write_archive permission][3] can create, modify, or delete log archive configurations.
+1. If you haven't already, set up a Datadog [integration](#set-up-an-integration) for your cloud provider.
+2. Create a [storage bucket](#create-a-storage-bucket).
+3. Set [permissions](#set-permissions) to `read` and/or `write` on that archive.
+4. [Route your logs](#route-your-logs-to-a-bucket) to and from that archive.
+5. Configure [advanced settings](#advanced-settings) such as encryption, storage class, and tags.
+6. [Validate](#validation) your setup and check for possible misconfigurations that Datadog would be able to detect for you.
 
 ## Configure an archive
 
@@ -57,7 +58,7 @@ If not already configured, set up the [AWS integration][1] for the AWS account t
 
 Set up the [Azure integration][1] within the subscription that holds your new storage account, if you haven't already. This involves [creating an app registration that Datadog can use][2] to integrate with.
 
-**Note:** Archiving to Azure ChinaCloud is not supported.
+**Note:** Archiving to Azure ChinaCloud, GermanyCloud, and GovCloud is not supported.
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azure
 [2]: /integrations/azure/?tab=azurecliv20#integrating-through-the-azure-portal
@@ -74,6 +75,10 @@ Set up the [Google Cloud integration][1] for the project that holds your GCS sto
 
 ### Create a storage bucket
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Sending logs to an archive is outside of the Datadog GovCloud environment, which is outside the control of Datadog. Datadog shall not be responsible for any logs that have left the Datadog GovCloud environment, including without limitation, any obligations or requirements that the user may have related to FedRAMP, DoD Impact Levels, ITAR, export compliance, data residency or similar regulations applicable to such logs.</div>
+{{< /site-region >}}
+
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
@@ -82,8 +87,6 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 **Notes:**
 
 - Do not make your bucket publicly readable.
-- Do not set [Object Lock][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
-
 - For [US1, US3, and US5 sites][4], see [AWS Pricing][5] for inter-region data transfer fees and how cloud storage costs may be impacted. Consider creating your storage bucket in `us-east-1` to manage your inter-region data transfer fees.
 
 [1]: https://s3.console.aws.amazon.com/s3
@@ -95,7 +98,7 @@ Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives
 
 {{% tab "Azure Storage" %}}
 
-* Go to your [Azure Portal][1] and [create a storage account][2] to send your archives to. Give your storage account a name, any account kind, and select the **hot** or **cool** access tier.
+* Go to your [Azure Portal][1] and [create a storage account][2] to send your archives to. Give your storage account a name, select either standard performance or **Block blobs** premium account type, and select the **hot** or **cool** access tier.
 * Create a **container** service into that storage account. Take note of the container name as you will need to add this in the Datadog Archive Page.
 
 **Note:** Do not set [immutability policies][3] because the last data needs to be rewritten in some rare cases (typically a timeout).
@@ -119,10 +122,12 @@ Go to your [Google Cloud account][1] and [create a GCS bucket][2] to send your a
 
 ### Set permissions
 
+Only Datadog users with the [`logs_write_archive` permission][3] can create, modify, or delete log archive configurations.
+
 {{< tabs >}}
 {{% tab "AWS S3" %}}
 
-1. [Create a policy][1] with the following two permission statements:  
+1. [Create a policy][1] with the following permission statements:  
 
    ```json
    {
@@ -151,17 +156,16 @@ Go to your [Google Cloud account][1] and [create a GCS bucket][2] to send your a
    ```
      * The `GetObject` and `ListBucket` permissions allow for [rehydrating from archives][2].
      * The `PutObject` permission is sufficient for uploading archives.
+     * Ensure that the resource value under the `s3:PutObject` and `s3:GetObject` actions ends with `/*` because these permissions are applied to objects within the buckets. 
 
 2. Edit the bucket names.
 3. Optionally, specify the paths that contain your log archives.
 4. Attach the new policy to the Datadog integration role.  
-    a. Navigate to **Roles** in the AWS IAM console.  
-    b. Locate the role used by the Datadog integration. By default it is named **DatadogIntegrationRole**, but the name may vary if your organization has renamed it. Click the role name to open the role summary page.  
-    c. Click **Add permissions**, and then **Attach policies**.  
-    d. Enter the name of the policy created above.  
-    e. Click **Attach policies**.  
-
-**Note**: Ensure that the resource value under the `s3:PutObject` and `s3:GetObject` actions ends with `/*` because these permissions are applied to objects within the buckets. 
+   * Navigate to **Roles** in the AWS IAM console.  
+   * Locate the role used by the Datadog integration. By default it is named **DatadogIntegrationRole**, but the name may vary if your organization has renamed it. Click the role name to open the role summary page.  
+   * Click **Add permissions**, and then **Attach policies**.  
+   * Enter the name of the policy created above.  
+   * Click **Attach policies**.  
  
 
 [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
@@ -169,9 +173,9 @@ Go to your [Google Cloud account][1] and [create a GCS bucket][2] to send your a
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
 
-* Grant the Datadog app permission to write to and rehydrate from your storage account.
-* Select your storage account from the [Storage Accounts page][1], go to **Access Control (IAM)**, and select **Add -> Add Role Assignment**.
-* Input the Role called **Storage Blob Data Contributor**, select the Datadog app, which you created to integrate with Azure, and save.
+1. Grant the Datadog app permission to write to and rehydrate from your storage account.
+2. Select your storage account from the [Storage Accounts page][1], go to **Access Control (IAM)**, and select **Add -> Add Role Assignment**.
+3. Input the Role called **Storage Blob Data Contributor**, select the Datadog app which you created to integrate with Azure, and save.
 
 {{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Add the Storage Blob Data Contributor role to your Datadog App." style="width:75%;">}}
 
@@ -179,26 +183,22 @@ Go to your [Google Cloud account][1] and [create a GCS bucket][2] to send your a
 {{% /tab %}}
 {{% tab "Google Cloud Storage" %}}
 
-Grant your Datadog Google Cloud service account permissions to write your archives to your bucket.
+1. Grant your Datadog Google Cloud service account permissions to write your archives to your bucket.
+2. Select your Datadog Google Cloud service account principal from the [Google Cloud IAM Admin page][1] and select **Edit principal**.
+3. Click **ADD ANOTHER ROLE**, select the **Storage Object Admin** role, and save.
 
-* If you're creating a new Service Account, this can be done from the [Google Cloud Credentials page][1].
-* If you're updating an existing Service Account, this can be done from the [Google Cloud IAM Admin page][2].
+   {{< img src="logs/archives/gcp_role_storage_object_admin-2.png" alt="Add the Storage Object Admin role to your Datadog Google Cloud Service Account." style="width:75%;">}}
 
-Add the role under **Storage** called **Storage Object Admin**.
-
-  {{< img src="logs/archives/gcp_role_storage_object_admin.png" alt="Add the Storage Object Admin role to your Datadog Google Cloud Service Account." style="width:75%;">}}
-
-[1]: https://console.cloud.google.com/apis/credentials
-[2]: https://console.cloud.google.com/iam-admin/iam
+[1]: https://console.cloud.google.com/iam-admin/iam
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Route your logs to a bucket
 
-Go to the [Archives page][5] in the Datadog app and select the **Add a new archive** option at the bottom.
+Navigate to the [Log Forwarding page][5] and select **Add a new archive** on the **Archives** tab.
 
 **Notes:** 
-* Only Datadog users with [logs_write_archive permission][3] can complete this and the following step.  
+* Only Datadog users with the [`logs_write_archive` permission][3] can complete this and the following step.  
 * Archiving logs to Azure Blob Storage requires an App Registration. See instructions [on the Azure integration page][6], and set the "site" on the right-hand side of the documentation page to "US." App Registration(s) created for archiving purposes only need the "Storage Blob Data Contributor" role. If your storage bucket is in a subscription being monitored through a Datadog Resource, a warning is displayed about the App Registration being redundant. You can ignore this warning.
 * If your bucket restricts network access to specified IPs, add the webhook IPs from the [IP ranges list][4] to the allowlist. 
 
@@ -209,7 +209,7 @@ Select the appropriate AWS account and role combination for your S3 bucket.
 
 Input your bucket name. **Optional**: Input a prefix directory for all the content of your log archives.
 
-{{< img src="logs/archives/logs_archive_aws_setup.png" alt="Set your S3 bucket info in Datadog"  style="width:75%;">}}
+{{< img src="logs/archives/logs_archive_aws_setup.png" alt="Set your S3 bucket info in Datadog" style="width:75%;">}}
 
 {{% /tab %}}
 {{% tab "Azure Storage" %}}
@@ -218,7 +218,7 @@ Select the **Azure Storage** archive type, and the Azure tenant and client for t
 
 Input your storage account name and the container name for your archive. **Optional**: Input a prefix directory for all the content of your log archives.
 
-{{< img src="logs/archives/logs_archive_azure_setup.png" alt="Set your Azure storage account info in Datadog"  style="width:75%;">}}
+{{< img src="logs/archives/logs_archive_azure_setup.png" alt="Set your Azure storage account info in Datadog" style="width:75%;">}}
 
 
 {{% /tab %}}
@@ -228,7 +228,7 @@ Select the **GCS** archive type, and the GCS Service Account that has permission
 
 Input your bucket name. **Optional**: Input a prefix directory for all the content of your log archives.
 
-{{< img src="logs/archives/logs_archive_gcp_setup.png" alt="Set your Azure storage account info in Datadog"  style="width:75%;">}}
+{{< img src="logs/archives/logs_archive_gcp_setup.png" alt="Set your Azure storage account info in Datadog" style="width:75%;">}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -239,26 +239,26 @@ Input your bucket name. **Optional**: Input a prefix directory for all the conte
 
 By default:
 
-* All Datadog Admin users can create, edit and reorder (see [Configure Multiple Archives](#multiple-archives) archives
-* All Datadog Admin and Standard users can rehydrate from archives
-* All users, including Datadog Read Only users, can access rehydrated logs
+* All Datadog Admin users can create, edit and reorder. See [Configure Multiple Archives](#multiple-archives) for more information.
+* All Datadog Admin and Standard users can rehydrate from archives.
+* All users, including Datadog Read Only users, can access rehydrated logs.
 
 Use this optional configuration step to assign roles on that archive and restrict who can:
 
-* Edit that archive configuration. See the [logs_write_archive][7] permission.
-* Rehydrate from that archive. See the [logs_read_archives][8] and [logs_write_historical_view][9].
-* Access rehydrated logs in case you use the legacy [read_index_data permission][10].
+* Edit that archive configuration. See the [`logs_write_archive`][7] permission.
+* Rehydrate from that archive. See the [`logs_read_archives`][8] and [`logs_write_historical_view`][9] permissions.
+* Access rehydrated logs in case you use the legacy [`read_index_data` permission][10].
 
-{{< img src="logs/archives/archive_restriction.png" alt="Restrict access to Archives and Rehydrated logs"  style="width:75%;">}}
+{{< img src="logs/archives/archive_restriction.png" alt="Restrict access to Archives and Rehydrated logs" style="width:75%;">}}
 
 #### Datadog tags
 
 Use this optional configuration step to:
 
 * Include all log tags in your archives (activated by default on all new archives). **Note**: This increases the size of resulting archives.
-* Add tags on rehydrated logs according to your Restriction Queries policy. See [logs_read_data][11] permission.
+* Add tags on rehydrated logs according to your Restriction Queries policy. See the [`logs_read_data`][11] permission.
 
-{{< img src="logs/archives/tags_in_out.png" alt="Configure Archive Tags"  style="width:75%;">}}
+{{< img src="logs/archives/tags_in_out.png" alt="Configure Archive Tags" style="width:75%;">}}
 
 #### Define maximum scan size
 
@@ -268,6 +268,18 @@ For Archives with a maximum scan size defined, all users need to estimate the sc
 
 {{< img src="logs/archives/max_scan_size.png" alt="Define maximum scan size on Archive" style="width:75%;">}}
 
+{{< site-region region="us3" >}}
+#### Firewall rules
+
+{{< tabs >}}
+{{% tab "Azure storage" %}}
+
+Firewall rules are not supported.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{< /site-region >}}
 #### Storage class
 
 {{< tabs >}}
@@ -319,7 +331,7 @@ To confirm your S3 bucket is encrypted with SSE-S3:
 
 Alternatively, Datadog supports server-side encryption with a CMK from [AWS KMS][2]. To enable it, take the following steps:
 
-1. Create your CMK
+1. Create your CMK.
 2. Attach a CMK policy to your CMK with the following content, replacing the AWS account number and Datadog IAM role name appropriately:
 
 ```
@@ -375,7 +387,7 @@ Alternatively, Datadog supports server-side encryption with a CMK from [AWS KMS]
 
 3. Go to the **Properties** tab in your S3 bucket and select **Default Encryption**. Choose the "AWS-KMS" option, select your CMK ARN, and save.
 
-For any changes to existing KSM keys, reach out to [Datadog support][3] for further assistance
+For any changes to existing KSM keys, reach out to [Datadog support][3] for further assistance.
 
 [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-bucket-encryption.html
 [2]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
@@ -388,25 +400,25 @@ For any changes to existing KSM keys, reach out to [Datadog support][3] for furt
 
 Once your archive settings are successfully configured in your Datadog account, your processing pipelines begin to enrich all logs ingested into Datadog. These logs are subsequently forwarded to your archive.
 
-However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. The frequency at which archives are uploaded can vary. **Check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account. After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [live tail][12].
+However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. The frequency at which archives are uploaded can vary. **Check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account. 
 
-When Datadog fails to upload logs to an external archive, due to unintentional changes in settings or permissions, the corresponding Log Archive is highlighted in the configuration page. Hover over the archive to view the error details and the actions to take to resolve the issue.
+After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [Live Tail][12]. When Datadog fails to upload logs to an external archive, due to unintentional changes in settings or permissions, the corresponding Log Archive is highlighted in the configuration page. 
 
-In addition, an event is generated, visible in the [Events Explorer][13]. Build a monitor on such events to detect and remediate failures quickly.
+{{< img src="logs/archives/archive_errors_details.png" alt="Check that your archives are properly set up" style="width:100%;">}}
 
-{{< img src="logs/archives/archive_errors.png" alt="Check that your archives are properly set up."  style="width:75%;">}}
+Hover over the archive to view the error details and the actions to take to resolve the issue. An event is also generated in the [Events Explorer][13]. You can create a monitor for these events to detect and remediate failures quickly.
 
 ## Multiple archives
 
-If multiple archives are defined, logs enter the first archive based on filter. Therefore, it is important to order your archives carefully.
+If multiple archives are defined, logs enter the first archive based on filter. 
 
-For example, if you create a first archive filtered to the `env:prod` tag and a second archive without any filter (the equivalent of `*`), all your production logs would go to one storage bucket/path, and the rest would go to the other.
+{{< img src="logs/archives/log_forwarding_archives_multiple.png" alt="Logs enter the first archive whose filter they match on." style="width:100%;">}}
 
-{{< img src="logs/archives/log_archives_s3_multiple.png" alt="Logs enter the first archive whose filter they match on."  style="width:75%;">}}
+It is important to order your archives carefully. For example, if you create a first archive filtered to the `env:prod` tag and a second archive without any filter (the equivalent of `*`), all your production logs would go to one storage bucket or path, and the rest would go to the other.
 
 ## Format of the archives
 
-The log archives that Datadog forwards to your storage bucket are in compressed JSON format (`.json.gz`). Using the prefix you indicate (or `/` if there is none), the archives are stored in a directory structure that indicates on what date and at what time the archive files were generated, like so:
+The log archives that Datadog forwards to your storage bucket are in compressed JSON format (`.json.gz`). Using the prefix you indicate (or `/` if there is none), the archives are stored in a directory structure that indicates on what date and at what time the archive files were generated, such as the following:
 
 ```
 /my/bucket/prefix/dt=20180515/hour=14/archive_143201.1234.7dq1a9mnSya3bFotoErfxl.json.gz
@@ -433,10 +445,6 @@ Within the zipped JSON file, each event's content is formatted as follows:
 
 ## Further Reading
 
-{{< whatsnext desc="Next, learn how to access your archived log content from Datadog:" >}}
-    {{< nextlink href="/logs/archives/rehydrating" >}}<u>Rehydrate from Archives</u>: Capture log events from your archives back into Datadog's Log Explorer.{{< /nextlink >}}
-{{< /whatsnext >}}
-
 {{< partial name="whats-next/whats-next.html" >}}
 
 <br>
@@ -454,4 +462,5 @@ Within the zipped JSON file, each event's content is formatted as follows:
 [10]: /account_management/rbac/permissions#logs_read_index_data
 [11]: /account_management/rbac/permissions#logs_read_data
 [12]: /logs/explorer/live_tail/
-[13]: /events/explorer/
+[13]: /service_management/events/explorer/
+[14]: https://app.datadoghq.com/logs/pipelines/log-forwarding

@@ -1,14 +1,18 @@
 ---
-title: カスタム Agent チェック
-kind: documentation
+algolia:
+  tags:
+  - カスタム Agent チェック
 aliases:
-  - /ja/agent/faq/how-do-i-change-the-frequency-of-an-agent-check/
-  - /ja/agent/faq/agent-5-custom-agent-check/
+- /ja/agent/faq/how-do-i-change-the-frequency-of-an-agent-check/
+- /ja/agent/faq/agent-5-custom-agent-check/
 further_reading:
-  - link: /developers/integrations/new_check_howto/
-    tag: Documentation
-    text: 新しいインテグレーションの作成
+- link: /developers/integrations/agent_integration/
+  tag: Documentation
+  text: 新しいインテグレーションの作成
+kind: documentation
+title: カスタム Agent チェック
 ---
+
 ## 概要
 
 ここでは、簡単なカスタム Agent チェックと `min_collection_interval` について説明します。標準的な Agent ベースのインテグレーションと同様に、カスタムチェックも一定の間隔 (デフォルトは 15 秒ごと) で実行するようにスケジューリングされます。
@@ -159,9 +163,9 @@ class LSCheck(AgentCheck):
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/developers/integrations/new_check_howto/
+[1]: /ja/developers/integrations/agent_integration/
 [2]: https://github.com/DataDog/integrations-extras
-[3]: http://app.datadoghq.com/account/settings#agent
+[3]: http://app.datadoghq.com/account/settings/agent/latest
 [4]: /ja/help/
 [5]: https://datadoghq.dev/integrations-core/base/api/#datadog_checks.base.checks.base.AgentCheck
 [6]: https://datadog-checks-base.readthedocs.io/en/latest/datadog_checks.utils.html#module-datadog_checks.base.utils.subprocess_output

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-influxdb
 app_uuid: e560c4c8-7983-4338-bc41-30b121a4ac98
 assets:
@@ -42,7 +44,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_influxdb
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true

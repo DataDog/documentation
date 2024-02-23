@@ -1,23 +1,62 @@
 ---
+app_id: sendgrid
+app_uuid: 828968b6-254c-4c82-8736-998004d6e607
+assets:
+  dashboards:
+    Sendgrid-Overview: assets/dashboards/Sendgrid-Overview_dashboard.json
+  integration:
+    auto_install: true
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: sendgrid.emails.requests
+      metadata_path: metadata.csv
+      prefix: sendgrid.emails.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: SendGrid
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - web
+- メトリクス
+- ログの収集
 dependencies: []
-description: Datadog で Sendgrid のメール配信とエンゲージメントの統計情報を監視します。
-doc_link: https://docs.datadoghq.com/integrations/sendgrid/
+display_on_public_website: true
 draft: false
 git_integration_title: sendgrid
-has_logo: true
-integration_id: ''
+integration_id: sendgrid
 integration_title: SendGrid
 integration_version: ''
 is_public: true
 kind: integration
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: sendgrid
-public_title: Datadog-SendGrid
+public_title: SendGrid
 short_description: Sendgrid のメトリクスを収集します。
-team: web-integrations
-version: '1.0'
+supported_os:
+- linux
+- windows
+- macos
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
+  - Category::Web
+  - Category::Metrics
+  - Category::Log Collection
+  configuration: README.md#Setup
+  description: Sendgrid のメトリクスを収集します。
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: SendGrid
 ---
 
 ## 概要
@@ -81,5 +120,5 @@ SendGrid インテグレーションには、サービスのチェック機能�
 
 [1]: https://app.sendgrid.com/
 [2]: https://app.datadoghq.com/account/settings#integrations/sendgrid
-[3]: https://github.com/DataDog/dogweb/blob/prod/integration/sendgrid/sendgrid_metadata.csv
+[3]: https://github.com/DataDog/integrations-internal-core/blob/main/sendgrid/metadata.csv
 [4]: https://docs.datadoghq.com/ja/help

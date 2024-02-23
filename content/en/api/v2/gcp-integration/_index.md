@@ -1,4 +1,4 @@
 ---
-title: Google Cloud Integration
+title: GCP Integration
 headless: true
 ---

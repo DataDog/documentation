@@ -33,7 +33,7 @@ Datadog を Akamai DataStream と接続すると、CDN の健全性、レイテ�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Datadog の [Akamai インテグレーションタイル][1]を使用して、インテグレーションをインストールします。
 

@@ -21,7 +21,7 @@ Before troubleshooting your parser, read the Datadog log [processors][1] and [pa
 1. **Identify your log's pipeline**:
     Because of the Pipeline filters, you can find the processing Pipeline that your log went through. Integration Pipeline takes the source as filter, so check that your log source is correctly set.
 
-    {{< img src="logs/faq/integrationpipeline.png" alt="integrationpipeline"  >}}
+    {{< img src="logs/faq/integrationpipeline.png" alt="integrationpipeline" >}}
 
     For integration pipeline, clone them and troubleshoot on the clone.
 
@@ -55,12 +55,12 @@ Before troubleshooting your parser, read the Datadog log [processors][1] and [pa
     ```
 
     From the provided sample, there are no obvious differences and the parser works fine for the sample:
-    {{< img src="logs/faq/sampleparsing.png" alt="sampleparsing"  >}}
+    {{< img src="logs/faq/sampleparsing.png" alt="sampleparsing" >}}
 
     But when tested with the log, it is not working. The next step is to start to remove attributes one by one from the end until you find the culprit. To do so, add `.*` at the end of the rule and then remove the attributes.
 
    The image below illustrates the rule starting to work after you have removed everything up to the user Agent:
-    {{< img src="logs/faq/Troubleshootparsing.png" alt="Troubleshootparsing"  >}}
+    {{< img src="logs/faq/Troubleshootparsing.png" alt="Troubleshootparsing" >}}
 
     This means that the issue is in the user Agent attribute.
 

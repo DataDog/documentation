@@ -40,12 +40,11 @@ draft: false
 git_integration_title: gunicorn
 integration_id: gunicorn
 integration_title: Gunicorn
-integration_version: 2.3.1
+integration_version: 2.4.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: gunicorn
-oauth: {}
 public_title: Gunicorn
 short_description: リクエスト率、リクエスト処理時間、ログメッセージ率、ワーカープロセス数を監視。
 supported_os:
@@ -82,7 +81,7 @@ Gunicorn 自身は、これ以外にも以下のようなメトリクスを DogS
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Datadog Agent の Gunicorn チェックは [Datadog Agent][2] パッケージに含まれています。Gunicorn サーバーに追加でインストールする必要はありません。
 
@@ -223,7 +222,7 @@ ubuntu   18463 18457  0 20:26 pts/0    00:00:00 gunicorn: worker [my_app]
 - [Datadog を使用した Gunicorn パフォーマンスの監視][14]
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/gunicorn/images/gunicorn-dash.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://pypi.python.org/pypi/setproctitle
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [5]: https://github.com/DataDog/integrations-core/blob/master/gunicorn/datadog_checks/gunicorn/data/conf.yaml.example

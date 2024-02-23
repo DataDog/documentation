@@ -39,12 +39,11 @@ draft: false
 git_integration_title: presto
 integration_id: presto
 integration_title: Presto
-integration_version: 2.6.1
+integration_version: 2.7.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: presto
-oauth: {}
 public_title: Presto
 short_description: PrestoSQL クラスターのパフォーマンスや使用状況の統計などを収集
 supported_os:
@@ -146,7 +145,7 @@ Presto には、イベントは含まれません。
 
 [1]: https://docs.datadoghq.com/ja/integrations/presto/
 [2]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/integrations/java/
 [6]: https://docs.datadoghq.com/ja/help/

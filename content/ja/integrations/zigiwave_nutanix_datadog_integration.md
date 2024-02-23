@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: zigiwave-nutanix-integration
 app_uuid: df66726a-0691-4c82-827c-f474ae98e4f5
 assets:
@@ -28,7 +30,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: zigiwave_nutanix_datadog_integration
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true

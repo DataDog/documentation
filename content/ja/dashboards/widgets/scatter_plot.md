@@ -19,7 +19,7 @@ widget_type: scatterplot
 
 ### コンフィギュレーション
 
-1. X 軸と Y 軸それぞれのメトリクスと集計を選択します。
+1. X 軸と Y 軸それぞれのメトリクスまたはその他のデータセットと、集計を選択します。
 1. 散布図の各ポイントのスコープ (`host`、`service`、`app`、または `region` など) を定義します。
 1. オプション: color-by タグを有効にします。
 1. オプション: X 軸および Y 軸コントロールを設定します。
@@ -32,11 +32,13 @@ widget_type: scatterplot
 
 [コンテキストリンク][4]は、デフォルトで有効になっており、オンまたはオフに切り替えることができます。コンテキストリンクは、ダッシュボードウィジェットと Datadog またはサードパーティアプリケーションの他のページの橋渡しをします。
 
+#### グローバルタイム
+
+ウィジェットにカスタムタイムフレームがあるか、ダッシュボードのグローバルタイムフレームがあるかを選択します。
+
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] ドキュメントをご参照ください。
-
-散布図ウィジェットの[ウィジェット JSON スキーマ定義][3]は次のとおりです。
+このウィジェットは **[Dashboards API][2]** で使用できます。[ウィジェット JSON スキーマ定義][3]については、以下の表を参照してください。
 
 {{< dashboards-widgets-api >}}
 
@@ -45,5 +47,5 @@ widget_type: scatterplot
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/dashboards/guide/context-links/
-[2]: /ja/api/v1/dashboards/
+[2]: /ja/api/latest/dashboards/
 [3]: /ja/dashboards/graphing_json/widget_json/

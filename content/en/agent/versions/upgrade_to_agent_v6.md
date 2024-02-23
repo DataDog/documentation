@@ -74,12 +74,13 @@ Find below the manual upgrade instructions for:
     gpgcheck=1
     repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
 
 2. Update your local Yum repo and install the Agent:
-    ```
+    ```shell
     sudo yum makecache
     sudo yum install datadog-agent
     ```
@@ -90,19 +91,19 @@ Find below the manual upgrade instructions for:
     ```
 
 4. Transition your Agent configuration paths and formats from Agent v5 to Agent v6 with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
-    ```
+    ```shell
     sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
     ```
 
 5. (Re-)start the Agent:
 
     * Amazon Linux 2.0:
-    ```
+    ```shell
     sudo systemctl restart datadog-agent.service
     ```
 
     * Amazon Linux 1.0:
-    ```
+    ```shell
     sudo initctl start datadog-agent
     ```
 
@@ -117,6 +118,7 @@ Find below the manual upgrade instructions for:
     gpgcheck=1
     repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
@@ -124,7 +126,7 @@ Find below the manual upgrade instructions for:
    **Note**: due to a [bug in dnf][1], use `repo_gpgcheck=0` instead of `repo_gpgcheck=1` on CentOS 8.1.
 
 2. Update your local Yum repo and install the Agent:
-    ```
+    ```shell
     sudo yum makecache
     sudo yum remove datadog-agent-base
     sudo yum install datadog-agent
@@ -136,26 +138,26 @@ Find below the manual upgrade instructions for:
     ```
 
 4. Transition your Agent configuration paths and formats from Agent v5 to Agent v6, with the `import` command. The command parses an existing v5 `datadog.conf` and converts the configuration options to the new v6 `datadog.yaml` format. It also copies configuration files for checks that are currently enabled:
-    ```
+    ```shell
     sudo -u dd-agent -- datadog-agent import /etc/dd-agent/ /etc/datadog-agent/
     ```
 
 5. Restart the Agent:
 
     * Centos 7 and above:
-    ```
+    ```shell
     sudo systemctl restart datadog-agent.service
     ```
 
     * Centos 6:
-    ```
+    ```shell
     sudo initctl restart datadog-agent
     ```
 
 ### Debian
 
 1. Enable HTTPS support for APT, install `curl` and `gnupg`:
-    ```
+    ```shell
     sudo apt-get update
     sudo apt-get install apt-transport-https curl gnupg
     ```
@@ -166,8 +168,9 @@ Find below the manual upgrade instructions for:
     sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
 
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
 3. If running Debian 8 or earlier, copy the keyring to `/etc/apt/trusted.gpg.d`:
@@ -177,7 +180,7 @@ Find below the manual upgrade instructions for:
    ```
 
 4. Update your local APT cache and install the Agent:
-    ```
+    ```shell
     sudo apt-get update
     sudo apt-get install datadog-agent datadog-signing-keys
     ```
@@ -208,12 +211,13 @@ Find below the manual upgrade instructions for:
     gpgcheck=1
     repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
 
 2. Update your local Yum repo and install the Agent:
-    ```
+    ```shell
     sudo yum makecache
     sudo yum remove datadog-agent-base
     sudo yum install datadog-agent
@@ -245,6 +249,7 @@ Find below the manual upgrade instructions for:
     gpgcheck=1
     repo_gpgcheck=1
     gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+           https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
            https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
     ```
@@ -294,8 +299,9 @@ Find below the manual upgrade instructions for:
     sudo touch /usr/share/keyrings/datadog-archive-keyring.gpg
 
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_CURRENT.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
-    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_C0962C7D.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     curl https://keys.datadoghq.com/DATADOG_APT_KEY_F14F620E.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
+    curl https://keys.datadoghq.com/DATADOG_APT_KEY_382E94DE.public | sudo gpg --no-default-keyring --keyring /usr/share/keyrings/datadog-archive-keyring.gpg --import --batch
     ```
 
 3. If running Ubuntu 14 or earlier, copy the keyring to `/etc/apt/trusted.gpg.d`:
@@ -344,14 +350,16 @@ Find below the manual upgrade instructions for:
   gpgcheck=1
   repo_gpgcheck=1
   gpgkey=https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+         https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
          https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
          https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
   ```
 
 2. Update your local Zypper repo and install the Agent:
-  ```
+  ```shell
   sudo zypper refresh
   sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_CURRENT.public
+  sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_B01082D3.public
   sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_FD4BF915.public
   sudo rpm --import https://keys.datadoghq.com/DATADOG_RPM_KEY_E09422B3.public
   sudo zypper install datadog-agent

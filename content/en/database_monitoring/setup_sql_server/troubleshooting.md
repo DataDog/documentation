@@ -114,15 +114,17 @@ host: sqlserver-foo.cfxxae8cilce.us-east-1.rds.amazonaws.com,1433
 
 ### SSL Provider: The certificate chain was issued by an authority that is not trusted {#certificate-verify-fail}
 
-This error is common after upgrading to the latest [MSOLEDBSQL][6] driver due to [breaking changes][7] that were introduced. In the latest version of the driver, all connections to the SQL instance are encrypted by default.
+#### Microsoft OLE DB Driver 2019
 
-If you are using the latest version of the Microsoft OLE DB Driver for SQL Server, and trying to connect to a SQL Server instance which requires encrypted connections, you can use the following workarounds:
+This error is common after upgrading to the [`MSOLEDBSQL` 2019][6] driver due to [breaking changes][7] that were introduced. In the latest version of the driver, all connections to the SQL instance are encrypted by default.
+
+If you are using the latest version of the Microsoft OLE DB Driver for SQL Server, and trying to connect to a SQL Server instance which requires encrypted connections, you can use one of the following workarounds:
 
 1. If you are using a self-signed certificate and the Force Encryption setting on the server (`rds.force_ssl=1` on AWS) to ensure clients connect with encryption:
 
-   - Change to a certificate that is trusted as part of the client's trust chain
-   - Add the self-signed certificate as a trusted certificate on the client
-   - Add `TrustServerCertificate=yes;` to the connection string
+   - Change to a certificate that is trusted as part of the client's trust chain.
+   - Add the self-signed certificate as a trusted certificate on the client.
+   - Add `Trust Server Certificate=True;` to the connection string.
 
 This is described in more detail [in the Microsoft documentation][7]
 
@@ -132,7 +134,7 @@ This is described in more detail [in the Microsoft documentation][7]
   # example uses windows authentication
   instances:
     - host: <INSTANCE_ENDPOINT>,<PORT>
-      connection_string: "Trusted_Connection=yes;Use Encryption for Data=False;"
+      connection_string: "Trust Server Certificate=True;Use Encryption for Data=False;"
       connector: adodbapi
       adoprovider: MSOLEDBSQL19
   ```
@@ -148,7 +150,9 @@ This is described in more detail [in the Microsoft documentation][7]
       adoprovider: MSOLEDBSQL
   ```
 
-If you are using a driver **other than `MSOLEDBSQL` 2019**, this error can be resolved by setting `TrustServerCertificate=yes` in the connection string. For example, for the 2017 `ODBC` driver:
+#### Other Microsoft OLE DB and ODBC driver versions
+
+If you are using an OLE DB driver other than `MSOLEDBSQL` 2019 or ODBC drivers, this error can be resolved by setting `TrustServerCertificate=yes` in the connection string. For example, for the `ODBC` driver:
 
   ```yaml
   # this example uses SQL Server authentication
@@ -158,7 +162,7 @@ If you are using a driver **other than `MSOLEDBSQL` 2019**, this error can be re
       password: <DD_AGENT_PASSWORD>
       connection_string: "TrustServerCertificate=yes;"
       connector: odbc
-      driver: '{ODBC Driver 17 for SQL Server}'
+      driver: '{ODBC Driver 18 for SQL Server}'
   ```
 
 ### SQL Server unable to connect 'SSL Security error (18)' {#ssl-security-error}

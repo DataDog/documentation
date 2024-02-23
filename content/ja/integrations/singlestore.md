@@ -40,12 +40,11 @@ draft: false
 git_integration_title: singlestore
 integration_id: singlestore
 integration_title: SingleStore
-integration_version: 1.3.1
+integration_version: 1.3.2
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: singlestore
-oauth: {}
 public_title: SingleStore
 short_description: リーフやアグリゲーターから SingleStore のメトリクスを収集します。
 supported_os:
@@ -84,7 +83,7 @@ tile:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 SingleStore チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
@@ -102,9 +101,11 @@ SingleStore チェックは [Datadog Agent][3] パッケージに含まれてい
 
 ##### ログの収集
 
+
 {{< site-region region="us3" >}}
 **ログ収集は、このサイトではサポートされていません。**
 {{< /site-region >}}
+
 
 1. Datadog Agent で、ログの収集はデフォルトで無効になっています。以下のように、`datadog.yaml` ファイルでこれを有効にします。
 
@@ -140,9 +141,11 @@ SingleStore チェックは [Datadog Agent][3] パッケージに含まれてい
 
 ##### ログの収集
 
+
 {{< site-region region="us3" >}}
 **ログ収集は、このサイトではサポートされていません。**
 {{< /site-region >}}
+
 
 Datadog Agent で、ログの収集はデフォルトで無効になっています。有効にする方法については、[Kubernetes ログ収集][6]を参照してください。
 
@@ -177,7 +180,7 @@ SingleStore インテグレーションには、イベントは含まれませ�
 
 [1]: https://www.singlestore.com/
 [2]: https://docs.datadoghq.com/ja/getting_started/agent/autodiscovery#integration-templates
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://github.com/DataDog/integrations-core/blob/master/singlestore/datadog_checks/singlestore/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [6]: https://docs.datadoghq.com/ja/agent/kubernetes/log/

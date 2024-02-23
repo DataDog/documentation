@@ -12,7 +12,7 @@ further_reading:
 - link: "agent/logs/advanced_log_collection/#multi-line-aggregation"
   tag: "Documentation"
   text: "Multi-line log aggregation"
-- link: "agent/logs/advanced_log_collection/#tail-directories-by-using-wildcards"
+- link: "agent/logs/advanced_log_collection/#tail-directories-using-wildcards"
   tag: "Documentation"
   text: "Tail directories by using wildcards"
 - link: "agent/logs/advanced_log_collection/#global-processing-rules"
@@ -30,7 +30,7 @@ This connectivity test mechanism is only running at Agent startup and only test 
 
 To check which transport is used by the Agent, run the [Agent status command][1].
 
-{{< img src="agent/logs/agent-status.png" alt="Agent status"  style="width:70%;">}}
+{{< img src="agent/logs/agent-status.png" alt="Agent status" style="width:70%;">}}
 
 **Notes**:
 
@@ -63,7 +63,7 @@ By default, the Datadog Agent uses the port `443` to send its logs to Datadog ov
 
 **HTTPS log forwarding is the recommended configuration** for the best log collection reliability as the`200` status code is returned by the Datadog storage system:
 
-{{< img src="agent/HTTPS_intake_reliability_schema.png" alt="HTTPS Intake Schema"  style="width:80%;">}}
+{{< img src="agent/HTTPS_intake_reliability_schema.png" alt="HTTPS Intake Schema" style="width:80%;">}}
 
 Using HTTP, the Agent sends log batches with the following limits:
 
@@ -104,9 +104,9 @@ Or use the `DD_LOGS_CONFIG_BATCH_WAIT=2` environment variable. The unit is in se
 
 When logs are sent through HTTPS, use the same [set of proxy settings][3] as the other data types to send logs through a web proxy.
 
-[1]: /agent/guide/agent-configuration-files/
+[1]: /agent/configuration/agent-configuration-files/
 [2]: /agent/basic_agent_usage/#agent-overhead
-[3]: /agent/proxy/
+[3]: /agent/configuration/proxy/
 {{% /tab %}}
 {{% tab "TCP" %}}
 
@@ -124,12 +124,12 @@ To send logs with environment variables, configure the following:
 
 By default, the Datadog Agent sends its logs to Datadog over TLS-encrypted TCP. This requires outbound communication (on port `10516` for Datadog US site and port `443`for Datadog EU site).
 
-[1]: /agent/guide/agent-configuration-files/
+[1]: /agent/configuration/agent-configuration-files/
 {{% /tab %}}
 {{< /tabs >}}
 
 **Note**: Setting up a [SOCKS5 proxy][2] server enforces TCP transport because socks5 proxies are not yet supported in HTTPS with compression.
 
 
-[1]: /agent/guide/agent-commands/?tab=agentv6v7#service-status
+[1]: /agent/configuration/agent-commands/?tab=agentv6v7#service-status
 [2]: /agent/logs/proxy/?tab=socks5

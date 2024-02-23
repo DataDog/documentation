@@ -21,7 +21,7 @@ title: スパンタグを追加し、アプリケーションのパフォーマ�
 
 _所要時間 7 分_
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="分析ビュー" video="true"  style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="分析ビュー" video="true" style="width:90%;">}}
 
 Datadog APM を使用すると、[トレース][1]をカスタマイズして、継続的に観察する必要がある追加情報を含めることができます。特定の企業カスタマーのスループットにおけるスパイクや、最も高いレイテンシーの影響を受けているユーザーの確認、または最も多くエラーを生成している共有データベースの特定などが可能になります。
 
@@ -194,22 +194,20 @@ public class ShoppingCartController : Controller
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
-Datadog の UI では、タグを使用してスパンレベルのメタデータを設定します。グローバルトレーサーからアクティブスパンを取得して `setTag` メソッドでタグを設定することで、自動インスツルメンテーションにカスタムタグを設定できます。
+Datadog の UI は、タグを使用してスパンレベルのメタデータを設定します。グローバルトレーサーからアクティブスパンを取得して `meta` 配列にタグを設定することで、自動インスツルメンテーションにカスタムタグを設定できます。
 
 ```php
 <?php
   namespace App\Http\Controllers;
 
-  use DDTrace\GlobalTracer;
-
   class ShoppingCartController extends Controller
   {
       public shoppingCartAction (Request $request) {
           // 現在のアクティブスパンを取得
-          $span = GlobalTracer::get()->getActiveSpan();
+          $span = \DDTrace\active_span();
           if (null !== $span) {
               // customer_id -> 254889
-              $span->setTag('customer_id', $request->get('customer_id'));
+              $span->meta['customer_id'] = $request->get('customer_id');
           }
 
           // [...]
@@ -225,15 +223,15 @@ Datadog の UI では、タグを使用してスパンレベルのメタデー�
 
 ## Datadog UI を活用してカスタムスパンタグを検索する
 
-2) **サービスページに移動**し、タグを追加した[サービス][5]をクリックします。[リソース][4]表でタグが追加されたところまで**スクロールダウンし、特定のリソースをクリック**します。**トレース表までスクロールダウンします**。
+2) **サービスカタログに移動**し、タグを追加した[サービス][5]をクリックします。[リソース][4]表でタグが追加された**特定のリソースにスクロールダウンし、クリックします**。次に**トレース表までスクロールダウンします**。
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="リソースページ"  style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_3.png" alt="リソースページ" style="width:90%;">}}
 
 トレース表には、現在のスコープ (サービス、リソース、時間枠) における全トレースのレイテンシー分布と、各トレースへのリンクが表示されます。期間やエラーコードで表を並べ替えて問題のあるオペレーションや最適化の機会を特定できます。
 
 3) **トレースの 1 つをクリックします。**
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_4.png" alt="フレームグラフ"  style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_4.png" alt="フレームグラフ" style="width:90%;">}}
 
 このビューでは、一番上に**フレームグラフ**、その下に付加情報のウィンドウが表示されます。Datadog のフレームグラフから、リクエストに影響を与える各論理ユニット (スパン) の期間と状態が一目でわかります。フレームグラフは完全にインタラクティブで、ドラッグしてパンしたり、スクロールして拡大縮小したりできます。スパンをクリックすると、ビューの下部にそのスパンの詳細情報が表示されます。
 
@@ -251,11 +249,11 @@ Datadog の UI では、タグを使用してスパンレベルのメタデー�
 
 6) **トレースに追加した新しいタグを探します**。見つけたらその新しいタグをクリックし、**Create facet** for `@[your facet name]` をクリックします (この例では customer_id)。
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_5.png" alt="ファセットメニューの作成"  style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_5.png" alt="ファセットメニューの作成" style="width:90%;">}}
 
 次に、ファセットの表示名とファセット検索での分類場所を決定します。
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_8.png" alt="ファセットモデルの作成"  style="width:60%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_8.png" alt="ファセットモデルの作成" style="width:60%;">}}
 
 これで、作成したファセットがファセット検索に表示されるようになります。`Search facets` ボックスを使用すると、ファセットを素早く見つけられます。
 
@@ -265,29 +263,29 @@ Analytics は、クエリを作成し無限濃度でトレースの調査を実�
 
 7) サービスファセット一覧で作業中の**サービスを選択**し、ファセットのステータスで **Error を選択**したら、group by フィールドで **`customer_id`** (またはスパンに追加した他のタグ) を選択します。
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="スパン md 6"  video="true" style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_6.mp4" alt="スパン md 6" video="true" style="width:90%;">}}
 
 8) クエリから **Error を削除**し、**measure を `count *` から `Duration` に**、**グラフタイプを `Top List` に変更**します。
 
 これで、平均リクエストが最も遅いカスタマーが表示されます。**注**: カスタマーのパフォーマンスが今後一定の閾値を越えないようにする場合は、[このクエリをモニターにエクスポート][10]するか、この視覚的情報をダッシュボードに保存して長期的に監視します。
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.mp4" alt="スパン md 7" video="true"  style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_7.mp4" alt="スパン md 7" video="true" style="width:90%;">}}
 
 最後に、表示された情報をクリックして `View traces` を選択することで、クエリに関連するすべてのトレースを確認できます。
 
-{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_9.mp4" alt="スパン md 9" video="true"  style="width:90%;">}}
+{{< img src="tracing/guide/add_span_md_and_graph_it/span_md_9.mp4" alt="スパン md 9" video="true" style="width:90%;">}}
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/tracing/visualization/#trace
-[2]: /ja/tracing/visualization/#spans
-[3]: /ja/tracing/visualization/#span-tags
-[4]: /ja/tracing/visualization/#resources
-[5]: /ja/tracing/visualization/#services
+[1]: /ja/tracing/glossary/#trace
+[2]: /ja/tracing/glossary/#spans
+[3]: /ja/tracing/glossary/#span-tags
+[4]: /ja/tracing/glossary/#resources
+[5]: /ja/tracing/glossary/#services
 [6]: https://app.datadoghq.com/apm/traces
 [7]: /ja/tracing/trace_explorer/#live-search-for-15-minutes
-[8]: https://app.datadoghq.com/apm/analytics
+[8]: https://app.datadoghq.com/apm/traces?viz=timeseries
 [9]: /ja/tracing/trace_explorer/query_syntax/
 [10]: /ja/tracing/guide/alert_anomalies_p99_database/

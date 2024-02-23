@@ -40,12 +40,11 @@ draft: false
 git_integration_title: azure_iot_edge
 integration_id: azure-iot-edge
 integration_title: Azure IoT Edge
-integration_version: 3.3.0
+integration_version: 3.3.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: azure_iot_edge
-oauth: {}
 public_title: Azure IoT Edge
 short_description: Azure IoT Edge デバイスとモジュールの健全性とパフォーマンスを監視。
 supported_os:
@@ -84,7 +83,7 @@ Datadog-Azure IoT Edge インテグレーションを使用すると IoT Edge �
 
 以下の手順に従って、このチェックをデバイスホストで実行中の IoT Edge デバイスにインストール、構成します。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Azure IoT Edge チェックは [Datadog Agent][2] パッケージに含まれています。
 
@@ -108,15 +107,8 @@ IoT Edge メトリクスの収集を開始するには、下記の手順で IoT 
         }
         ```
 
-    - "Environment Variables" で、以下の環境変数 (アンダースコアが 2 回続けて使用されていることに注意) を追加して試験的メトリクスを有効にします。
-        - `ExperimentalFeatures__Enabled`: `true`
-        - `ExperimentalFeatures__EnableMetrics`: `true`
-
 2. **Edge Hub** ランタイムモジュールを以下のように構成します。
     - イメージバージョンは `1.0.10` 以上である必要があります。
-    - "Environment Variables" で、以下の環境変数 (アンダースコアが 2 回続けて使用されていることに注意) を追加して試験的メトリクスを有効にします。
-        - `ExperimentalFeatures__Enabled`: `true`
-        - `ExperimentalFeatures__EnableMetrics`: `true`
 
 3. Datadog Agent を**カスタムモジュール**としてインストールし、構成します。
     - モジュール名を設定します。(例: `datadog-agent`)

@@ -42,7 +42,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: ecs_fargate
-oauth: {}
 public_title: Amazon ECS on AWS Fargate
 short_description: ECS Fargate を使用して実行中のコンテナのメトリクスを追跡する
 supported_os:
@@ -96,7 +95,7 @@ Datadog Agent は、ECS のタスクメタデータエンドポイントでタ�
 
 Datadog Agent を持たないタスクも Cloudwatch でメトリクスを報告しますが、Autodiscovery、詳細なコンテナメトリクス、トレーシングなどの機能には Agent が必要です。さらに、Cloudwatch メトリクスは粒度が低く、Datadog Agent を通じて直接発送されるメトリクスより報告のレイテンシーが高くなります。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Datadog で ECS Fargate タスクを監視するには、アプリケーションコンテナと**同じタスク定義**内のコンテナとして Agent を実行します。Datadog でメトリクスを収集するには、各タスク定義にアプリケーションコンテナのほかに Datadog Agent コンテナを含める必要があります。以下のセットアップ手順を実行します。
 
@@ -114,7 +113,10 @@ Fargate の主要な作業単位はタスクで、これはタスク定義内で
 {{% tab "Web UI" %}}
 ##### Web UI タスク定義
 
-1. [AWS Web Console][1] にログインし、ECS セクションに移動します。
+
+{{< site-region region="us,us3,us5,eu,ap1,gov" >}}
+
+1. [AWS Web Console][4] にログインし、ECS セクションに移動します。
 2. 左メニューの **Task Definitions** をクリックし、**Create new Task Definition** ボタンをクリックするか、既存の Fargate タスク定義を選択します。
 3. 新しいタスク定義の場合
     1. 起動タイプとして **Fargate** を選択し、**Next step** ボタンをクリックします。
@@ -124,24 +126,34 @@ Fargate の主要な作業単位はタスクで、これはタスク定義内で
 4. Datadog Agent コンテナの追加を開始するには、**Add container** ボタンをクリックします。
     1. **Container name** に `datadog-agent` と入力します。
     2. **Image** に `public.ecr.aws/datadog/agent:latest` と入力します。
-    3. **Env Variables** には、**Key** `DD_API_KEY` を追加し、値として [Datadog API キー][2]を入力します。
+    3. **Env Variables** には、**Key** `DD_API_KEY` を追加し、値として [Datadog API キー][41]を入力します。
     4. **キー** `ECS_FARGATE` と値 `true` を使用して、もう 1 つ環境変数を追加します。**Add** をクリックしてコンテナを追加します。
     5. **Key** `DD_SITE` と値 {{< region-param key="dd_site" code="true" >}} を使用して、別の環境変数を追加します。設定しない場合、これはデフォルトで `datadoghq.com` になります。
     6. (Windows のみ) 作業ディレクトリとして `C:\` を選択します。
-5. タスク定義に他のアプリケーションコンテナを追加します。インテグレーションメトリクスの収集の詳細については、[ECS Fargate のインテグレーションセットアップ][3]を参照してください。
+5. タスク定義に他のアプリケーションコンテナを追加します。インテグレーションメトリクスの収集の詳細については、[ECS Fargate のインテグレーションセットアップ][12]を参照してください。
 6. **Create** をクリックしてタスク定義を作成します。
 
-[1]: https://aws.amazon.com/console
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: http://docs.datadoghq.com/integrations/faq/integration-setup-ecs-fargate
+[4]: https://aws.amazon.com/console
+[12]: http://docs.datadoghq.com/integrations/faq/integration-setup-ecs-fargate
+[41]: https://app.datadoghq.com/organization-settings/api-keys
+
+{{< /site-region >}}
+
+
 {{% /tab %}}
 
 {{% tab "AWS CLI" %}}
 ##### AWS CLI タスク定義
 
 1. [datadog-agent-ecs-fargate.json][1] をダウンロードします。**注**: Internet Explorer をお使いの場合は、以下に記載の JSON ファイルを含む gzip ファイルとしてダウンロードされる場合があります。
-2. JSON を `TASK_NAME`、[Datadog API キー][2]、および適切な `DD_SITE` ({{< region-param key="dd_site" code="true" >}}) で更新します。**注**: 環境変数 `ECS_FARGATE` はすでに `"true"` に設定されています。
-3. タスク定義に他のアプリケーションコンテナを追加します。インテグレーションメトリクスの収集の詳細については、[ECS Fargate のインテグレーションセットアップ][3]を参照してください。
+
+{{< site-region region="us,us3,us5,eu,ap1,gov" >}}
+2. JSON を `TASK_NAME`、[Datadog API キー][41]、および適切な `DD_SITE` ({{< region-param key="dd_site" code="true" >}}) で更新します。**注**: 環境変数 `ECS_FARGATE` はすでに `"true"` に設定されています。
+
+[41]: https://app.datadoghq.com/organization-settings/api-keys
+{{< /site-region >}}
+
+3. タスク定義に他のアプリケーションコンテナを追加します。インテグレーションメトリクスの収集の詳細については、[ECS Fargate のインテグレーションセットアップ][2]を参照してください。
 4. オプション - Agent 健全性チェックを追加します。
 
     ECS タスク定義に次を追加して、Agent 健全性チェックを作成します。
@@ -162,8 +174,7 @@ aws ecs register-task-definition --cli-input-json file://<ファイルへのパ�
 ```
 
 [1]: https://docs.datadoghq.com/resources/json/datadog-agent-ecs-fargate.json
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: http://docs.datadoghq.com/integrations/faq/integration-setup-ecs-fargate
+[2]: http://docs.datadoghq.com/integrations/faq/integration-setup-ecs-fargate
 {{% /tab %}}
 
 {{% tab "CloudFormation" %}}
@@ -171,7 +182,13 @@ aws ecs register-task-definition --cli-input-json file://<ファイルへのパ�
 
  [AWS CloudFormation][1] テンプレートを使用して Fargate コンテナを構成することができます。CloudFormation テンプレート内で `AWS::ECS::TaskDefinition` リソースを使用して Amazon ECS タスクを設定し、そのタスクで必要な起動タイプとして `FARGATE` を指定します。
 
-下記の CloudFormation テンプレートに [Datadog API キー][2]を入れて更新します。また、必要に応じて適切な `DD_SITE` ({{< region-param key="dd_site" code="true" >}}) 環境変数も設定します。設定しない場合、デフォルトは `datadoghq.com` になります。
+
+{{< site-region region="us,us3,us5,eu,ap1,gov" >}}
+下記の CloudFormation テンプレートに [Datadog API キー][41]を入れて更新します。また、必要に応じて適切な `DD_SITE` ({{< region-param key="dd_site" code="true" >}}) 環境変数も設定します。設定しない場合、デフォルトは `datadoghq.com` になります。
+
+[41]: https://app.datadoghq.com/organization-settings/api-keys
+{{< /site-region >}}
+
 
 ```yaml
 Resources:
@@ -195,12 +212,11 @@ Resources:
 
 最後に、他のアプリケーションコンテナを `ContainerDefinitions` 内に含め、CloudFormation を通してデプロイします。
 
-CloudFormation のテンプレートと統語法に関する詳細は、[AWS CloudFormation タスク定義のドキュメント][3]をご参照ください。
+CloudFormation のテンプレートと統語法に関する詳細は、[AWS CloudFormation タスク定義のドキュメント][2]をご参照ください。
 
 
 [1]: https://aws.amazon.com/cloudformation/
-[2]: https://app.datadoghq.com/organization-settings/api-keys
-[3]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html
+[2]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -519,11 +535,18 @@ Datadog の Fluent Bit アウトプットプラグインに組み込まれてい
   ```
 {{< /site-region >}}
 
-**注**: `apikey` と `Host` は、それぞれのサイト `http-intake.logs.{{< region-param key="dd_site" code="true" >}}` から相対的に設定します。利用可能なパラメーターの完全なリストは、[Datadog Fluent Bit ドキュメント][24]に記載されています。
+
+
+{{< site-region region="us,us3,us5,eu,ap1,gov" >}}
+**注**: `apikey` と `Host` は、それぞれのサイト `http-intake.logs.`{{< region-param key="dd_site" code="true" >}} から相対的に設定します。利用可能なパラメーターの完全なリストは、[Datadog Fluent Bit ドキュメント][24]に記載されています。
+
+[24]: https://docs.datadoghq.com/ja/integrations/fluentbit/#configuration-parameters
+{{< /site-region >}}
+
 
 `dd_service`、`dd_source`、`dd_tags` は、任意のタグに調整することができます。
 
-3. Fargate タスクの実行中は常に、Fargate タスクが管理するコンテナの情報を含むコンテナログが、Fluent Bit から Datadog に送信されるようになります。[Log Explorer ページ][25]で生ログを確認したり、ログ用の[モニターを作成][26]し [Live Container ビュー][27]で確認したりすることが可能です。
+3. Fargate タスクの実行中は常に、Fargate タスクが管理するコンテナの情報を含むコンテナログが、Fluent Bit から Datadog に送信されるようになります。[Log Explorer ページ][24]で生ログを確認したり、ログ用の[モニターを作成][25]し [Live Container ビュー][26]で確認したりすることが可能です。
 
 {{< tabs >}}
 {{% tab "Web UI" %}}
@@ -748,13 +771,13 @@ CloudFormation のテンプレートと統語法に関する詳細は、[AWS Clo
 
 {{< /tabs >}}
 
-**注**: プレーンテキストで `apikey` を公開しないようにするには、[TaskDefinition シークレット][28]を使用します。
+**注**: プレーンテキストで `apikey` を公開しないようにするには、[TaskDefinition シークレット][27]を使用します。
 
 #### AWS ログドライバー
 
 `awslogs` ログドライバーと Lambda 関数を使用して Fargate ログを監視し、Datadog にルーティングします。
 
-1. ログを収集したいタスクのアプリケーションコンテナで、ログドライバーを `awslogs` として定義します。手順は、[AWS Fargate デベロッパーガイド][29]を参照してください。
+1. ログを収集したいタスクのアプリケーションコンテナで、ログドライバーを `awslogs` として定義します。手順は、[AWS Fargate デベロッパーガイド][28]を参照してください。
 
 2. これは、Fargate タスクがログ情報を Amazon CloudWatch Logs に送信するように構成します。次は、awslogs ログドライバーを構成するためのタスク定義のスニペットです。
 
@@ -771,21 +794,41 @@ CloudFormation のテンプレートと統語法に関する詳細は、[AWS Clo
    }
    ```
 
-    タスク定義で `awslogs` ログドライバーを使用して、コンテナログを CloudWatch Logs に送信する方法については、[awslogs  ログドライバーを使用する][30]を参照してください。このドライバーは、コンテナが生成したログを収集し、CloudWatch に直接送信します。
+    タスク定義で `awslogs` ログドライバーを使用して、コンテナログを CloudWatch Logs に送信する方法については、[awslogs  ログドライバーを使用する][29]を参照してください。このドライバーは、コンテナが生成したログを収集し、CloudWatch に直接送信します。
 
-3. 最後に、[Datadog Lambda Log Forwarder 関数][31]を使用して CloudWatch からログを収集し、Datadog に送信します。
+3. 最後に、[Datadog Lambda Log Forwarder 関数][30]を使用して CloudWatch からログを収集し、Datadog に送信します。
 
 ### トレースの収集
 
-1. [上の手順](#installation)に従ってタスク定義に Datadog Agent コンテナを追加し、追加の環境変数 `DD_APM_ENABLED` を `true` に設定します。`DD_SITE` 変数を {{< region-param key="dd_site" code="true" >}} に設定します。設定しない場合、デフォルトで `datadoghq.com` になります。
 
-2. [アプリケーションのインスツルメンテーション][32]に基づいて、セットアップを行います。Fargate APM のアプリケーションでは、`DD_AGENT_HOST` を**設定しない**でください。デフォルトの `localhost` で動作します。
+{{< site-region region="us,us3,us5,eu,ap1,gov" >}}
+1. [上の手順](#installation)に従ってタスク定義に Datadog Agent コンテナを追加し、追加の環境変数 `DD_APM_ENABLED` を `true` に設定します。`DD_SITE` 変数を {{< region-param key="dd_site" code="true" >}} に設定します。設定しない場合、デフォルトで `datadoghq.com` になります。
+{{< /site-region >}}
+
+
+2. 現在のセットアップに基づいてアプリケーションをインスツルメントします。
+
+   **注**: Fargate APM アプリケーションでは、`DD_AGENT_HOST` を設定**しない**でください。デフォルトの `localhost` が動作します。
+
+   | 言語                           |
+   |------------------------------------|
+   | [Java][31] |
+   | [Python][32] |
+   | [Ruby][33] |
+   | [Go][34] |
+   | [Node.js][35] |
+   | [PHP][36] |
+   | [C++][37] |
+   | [.NET Core][38] |
+   | [.NET Framework][39] |
+
+   [Datadog へのトレース送信][40]の一般的な情報を参照してください。
 
 3. アプリケーションが Datadog Agent コンテナと同じタスク定義内で実行されていることを確認します。
 
 ## すぐに使えるタグ
 
-Agent は、タグを自動検出して、タスク全体またはこのタスク内の個別のコンテナにより送信されたすべてのデータにアタッチします。自動的にアタッチされるタグのリストは、Agent の[カーディナリティコンフィギュレーション][33]に基づきます。
+Agent は、タグを自動検出して、タスク全体またはこのタスク内の個別のコンテナにより送信されたすべてのデータにアタッチします。自動的にアタッチされるタグのリストは、Agent の[カーディナリティコンフィギュレーション][32]に基づきます。
 
   | タグ                           | カーディナリティ  | ソース               |
   |-------------------------------|--------------|----------------------|
@@ -824,14 +867,15 @@ ECS Fargate チェックには、イベントは含まれません。
 
 ## その他の参考資料
 
-- ブログ記事: [Datadog を使用した AWS Fargate アプリケーションの監視][34]
+- ブログ記事: [Datadog を使用した AWS Fargate アプリケーションの監視][42]
 - よくあるご質問: [ECS Fargate のインテグレーションセットアップ][12]
-- ブログ記事: [FireLens と Datadog を使用した Fargate コンテナログの監視][35]
-- ブログ記事: [AWS Fargate 監視のための主要メトリクス][36]
-- ブログ記事: [AWS Fargate ワークロードからのメトリクスおよびログの収集方法][37]
-- ブログ記事: [Datadog を使用した AWS Fargate モニタリング][38]
-- ブログ記事: [Graviton2 による AWS Fargate のデプロイ][39]
+- ブログ記事: [FireLens と Datadog を使用した Fargate コンテナログの監視][23]
+- ブログ記事: [AWS Fargate 監視のための主要メトリクス][24]
+- ブログ記事: [AWS Fargate ワークロードからのメトリクスおよびログの収集方法][25]
+- ブログ記事: [Datadog を使用した AWS Fargate モニタリング][26]
+- ブログ記事: [Graviton2 による AWS Fargate のデプロイ][47]
 - ブログ記事: [Windows コンテナ型アプリ向けに AWS Fargate を監視する][40]
+
 
 
 
@@ -859,20 +903,28 @@ ECS Fargate チェックには、イベントは含まれません。
 [21]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definitions
 [22]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_firelens.html#firelens-using-fluentbit
 [23]: https://github.com/aws-samples/amazon-ecs-firelens-examples/tree/master/examples/fluent-bit/parse-json
-[24]: https://docs.datadoghq.com/ja/integrations/fluentbit/#configuration-parameters
-[25]: https://app.datadoghq.com/logs
-[26]: https://docs.datadoghq.com/ja/monitors/monitor_types/
-[27]: https://docs.datadoghq.com/ja/infrastructure/livecontainers/?tab=linuxwindows
-[28]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-secret.html
-[29]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
-[30]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
-[31]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[32]: https://docs.datadoghq.com/ja/tracing/setup/
-[33]: https://docs.datadoghq.com/ja/getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables
-[34]: https://www.datadoghq.com/blog/monitor-aws-fargate
-[35]: https://www.datadoghq.com/blog/collect-fargate-logs-with-firelens/
-[36]: https://www.datadoghq.com/blog/aws-fargate-metrics/
-[37]: https://www.datadoghq.com/blog/tools-for-collecting-aws-fargate-metrics/
-[38]: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/
-[39]: https://www.datadoghq.com/blog/aws-fargate-on-graviton2-monitoring/
-[40]: https://www.datadoghq.com/blog/aws-fargate-windows-containers-support/
+[24]: https://app.datadoghq.com/logs
+[25]: https://docs.datadoghq.com/ja/monitors/monitor_types/
+[26]: https://docs.datadoghq.com/ja/infrastructure/livecontainers/?tab=linuxwindows
+[27]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ecs-taskdefinition-secret.html
+[28]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
+[29]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_awslogs.html
+[30]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
+[31]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/java?tab=containers#automatic-instrumentation
+[32]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/python?tab=containers#instrument-your-application
+[33]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/ruby#instrument-your-application
+[34]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/go/?tab=containers#activate-go-integrations-to-create-spans
+[35]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/nodejs?tab=containers#instrument-your-application
+[36]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/php?tab=containers#automatic-instrumentation
+[37]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/cpp?tab=containers#instrument-your-application
+[38]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/dotnet-core?tab=containers#custom-instrumentation
+[39]: https://docs.datadoghq.com/ja/tracing/trace_collection/dd_libraries/dotnet-framework?tab=containers#custom-instrumentation
+[40]: https://docs.datadoghq.com/ja/tracing/setup/
+[41]: https://docs.datadoghq.com/ja/getting_started/tagging/assigning_tags/?tab=containerizedenvironments#environment-variables
+[42]: https://www.datadoghq.com/blog/monitor-aws-fargate
+[43]: https://www.datadoghq.com/blog/collect-fargate-logs-with-firelens/
+[44]: https://www.datadoghq.com/blog/aws-fargate-metrics/
+[45]: https://www.datadoghq.com/blog/tools-for-collecting-aws-fargate-metrics/
+[46]: https://www.datadoghq.com/blog/aws-fargate-monitoring-with-datadog/
+[47]: https://www.datadoghq.com/blog/aws-fargate-on-graviton2-monitoring/
+[48]: https://www.datadoghq.com/blog/aws-fargate-windows-containers-support/

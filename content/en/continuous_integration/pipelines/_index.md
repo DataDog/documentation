@@ -1,24 +1,35 @@
 ---
-title: Pipeline Visibility in Datadog
+title: CI Pipeline Visibility in Datadog
 kind: documentation
 aliases:
   - /continuous_integration/pipelines_setup/
   - /continuous_integration/explore_pipelines/
+  - /continuous_integration/setup_pipelines/
 further_reading:
+    - link: "/monitors/types/ci/"
+      tag: "Documentation"
+      text: "Creating CI Pipeline Monitors"
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
-      text: "Troubleshooting CI"
+      text: "Troubleshooting CI Visibility"
+cascade:
+    algolia:
+        rank: 70
+        tags: ['ci pipeline', 'ci pipelines']
 ---
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
-Your pipelines appear in the [Pipelines][1] page under the CI menu.
+## Overview
+
+[Pipeline Visibility][1] provides a pipeline-first view into your CI health by displaying important metrics and results from your pipelines. It helps you troubleshoot pipeline failures, address performance bottlenecks, and track CI performance and reliability over time.
 
 ## Setup
 
-{{< whatsnext desc="Select your CI provider to set up pipeline visibility in Datadog:" >}}
+{{< whatsnext desc="Select your CI provider to set up Pipeline Visibility in Datadog:" >}}
+    {{< nextlink href="continuous_integration/pipelines/awscodepipeline" >}}AWS CodePipeline{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/azure" >}}Azure{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/buildkite" >}}Buildkite{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/circleci" >}}CircleCI{{< /nextlink >}}
@@ -27,82 +38,158 @@ Your pipelines appear in the [Pipelines][1] page under the CI menu.
     {{< nextlink href="continuous_integration/pipelines/gitlab" >}}GitLab{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/jenkins" >}}Jenkins{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/teamcity" >}}TeamCity{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/pipelines/custom" >}}Other CI Providers{{< /nextlink >}}
     {{< nextlink href="continuous_integration/pipelines/custom_commands" >}}Custom Commands{{< /nextlink >}}
-    {{< nextlink href="continuous_integration/pipelines/custom_tags_and_metrics" >}}Custom Tags and Metrics{{< /nextlink >}}
+    {{< nextlink href="continuous_integration/pipelines/custom_tags_and_measures" >}}Custom Tags and measures{{< /nextlink >}}
 {{< /whatsnext >}}
-## Pipelines health overview
 
-The Pipelines page shows aggregate stats for the default branch of each pipeline over the selected time frame, as well as the status of the latest pipeline execution. Use this page to see all your pipelines and get a quick view of their health. The Pipelines page shows metrics for the _default_ branch, usually named something like `main` or `prod`.
+### Terminology
 
-Metrics shown include build frequency, failure rate, average duration, and 95th percentile duration. This information reveals which pipelines are high-usage and potentially high resource consumers. The last build result, duration, and last run time show you the effect of the last commit.
+While the concept of a CI pipeline may vary depending on your provider, see how those concepts correspond to the definition of a CI pipeline in Datadog Pipeline Visibility:
 
-You can filter the page by pipeline name to see the pipelines you're most concerned with. Click on a pipeline that is slow or failing to dig into details that show what commit might have introduced the performance regression or build error.
+{{< tabs >}}
+{{% tab "GitHub Actions" %}}
 
-## Pipeline details and branches
+| Datadog | GitHub Actions |
+|---|---|
+| Pipeline | Workflow |
+| Stage |  |
+| Job | Job |
+| Step | Step |
 
-Click into a specific pipeline to see the _Pipeline Details_ page which provides views of the data for the pipeline you selected over a specified time frame, and can display branches other than the default.
+{{% /tab %}}
+{{% tab "GitLab" %}}
 
-{{< img src="ci/pipeline_branch_overview_updated.png" alt="Details for a single pipeline" style="width:100%;">}}
+| Datadog | GitLab |
+|---|---|
+| Pipeline | Pipeline |
+| Stage | Stage |
+| Job | Job |
+| Step* | Script |
 
-Get insights on the selected pipeline such as total and failed executions over time, build duration percentiles, and total time spent breakdown by stage. There are also summary tables for stages and jobs so you can quickly sort them in terms of duration, percentage of overall execution time, or failure rate.
+_\*A pipeline's step granularity is not available in Datadog._
 
-When viewing the _default_ branch for a pipeline, each stage and job summary table on the page contains a _Duration Change_ graph that visualizes the absolute and relative change in duration of stages and jobs, along with a graph of _Errored Executions_.
+{{% /tab %}}
+{{% tab "Jenkins" %}}
 
-{{< img src="ci/pipeline_job_summary_duration_change.png" alt="Job summary table" style="width:100%;">}}
+| Datadog | Jenkins |
+|---|---|
+| Pipeline | Pipeline |
+| Stage | Stage |
+| Job | Step |
+| Step |  |
 
-When viewing a feature branch for a pipeline, there are two graphs for _Errored Executions_: one for failed executions in this feature branch, and another for comparing failures in this branch to other failures. You have the option to toggle between `Other Branches` and `Specific Branch`. Selecting `Other Branches` compares failed executions in this feature branch with aggregated failures across all other branches to help you distinguish between introduced (local) execution failures and inherited (global) execution failures. Toggling to `Specific Branch` directly compares failed executions in this feature branch with failed executions in another branch of your choice to help you specifically track changes in pipeline performance.
+{{% /tab %}}
+{{% tab "CircleCI" %}}
 
-Optionally, you can directly compare failed executions in this feature branch with failed executions in another branch of your choice.
+| Datadog | CircleCI |
+|---|---|
+| Pipeline | Pipeline |
+| Stage | Workflow |
+| Job | Job |
+| Step* | Step |
 
-{{< img src="ci/pipeline_stage_summary_feature_branch.png" alt="Stage summary table" style="width:100%;">}}
+_\*A pipeline's step granularity is not available in Datadog._
 
-The pipeline execution list at the bottom shows all the times that pipeline (or its stages or jobs) ran during the selected time frame, for the selected branch. Use the facets on the left side to filter the list to exactly the pipelines, stages, or jobs you want to see.
+{{% /tab %}}
+{{% tab "Buildkite" %}}
 
-### Explore connections to services, resources, and network events
+| Datadog | Buildkite |
+|---|---|
+| Pipeline | Pipeline |
+| Stage |  |
+| Job | Job |
+| Step* | Step |
 
-Click one of the executions to open the pipeline execution view and see the flame graph or span list for the pipeline and its stages. The _Executions (n)_ list on the left side gives you quick access to the data for each retry of the pipeline for the same commit.
+_\*A pipeline's step granularity is not available in Datadog._
 
-Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the following image) to investigate the Resource, Service, or Analytics page for the pipeline, stage, or job specifically. You can also find complete tags information and links to network monitoring events.
+{{% /tab %}}
+{{% tab "TeamCity" %}}
 
-{{< img src="ci/ci-pipeline-execution.png" alt="Trace info for pipeline execution" style="width:100%;">}}
+| Datadog | TeamCity |
+|---|---|
+| Pipeline | Build Chain |
+| Stage |  |
+| Job | Build |
+| Step* | Step |
 
-### Explore connections to logs
+_\*A pipeline's step granularity is not available in Datadog._
 
-If job log collection is supported and enabled for the CI provider, related log events can be found in the _Logs_ tab of the pipeline execution view.
+{{% /tab %}}
+{{% tab "Azure Pipelines" %}}
 
-**Note**: Job log collection is supported for a limited set of providers:
-- [GitHub Actions][2]
-- [GitLab][3] (beta)
-- [Jenkins][4]
+| Datadog | Azure Pipelines |
+|---|---|
+| Pipeline | Pipeline |
+| Stage | Stage |
+| Job | Job |
+| Step* | Step |
 
-## Pipeline executions details and traces
+_\*A pipeline's step granularity is not available in Datadog._
 
-On the [Pipeline Executions][5] page, you can see aggregated data about pipeline executions over the selected time frame. Use the search field and facets to scope the list down to the executions you want to investigate. Change the list to show pipelines, stages, or jobs using the buttons at the top.
+{{% /tab %}}
+{{% tab "AWS CodePipeline" %}}
 
-Below are three graphs that visualize the durations of your most active pipelines, your failed pipelines over time, and the executions of your pipelines with an option to toggle to accumulated duration, respectively. These graphs are scoped to the level chosen at the top left (`Pipeline`, `Stage`, `Job`, and more.)
+| Datadog | AWS CodePipeline |
+|---|---|
+| Pipeline | Pipeline |
+| Stage | Stage |
+| Job | Action |
+| Step |  |
 
-{{< img src="ci/pipeline_explorer_trends.png" alt="Explorer view trend graphs" style="width:100%;">}}
+{{% /tab %}}
 
-Each pipeline execution is reported as a trace, which includes stage and job information. Access individual pipeline, stage, and job execution traces by clicking on an execution in the list (similar to clicking into a pipeline execution from the Pipeline Details page).
+{{% tab "Other CI Providers" %}}
 
-Alternatively, click the [**Analytics**][6] button to interactively filter and group pipelines execution data into visualizations you can use to answer questions and share on dashboards.
+| Datadog | Other CI Providers |
+|---|---|
+| Pipeline | Pipeline |
+| Stage | Stage |
+| Job | Job |
+| Step | Step |
 
-{{< img src="ci/ci-pipelines-execution.png" alt="Analytics for a pipeline execution" style="width:100%;">}}
+{{% /tab %}}
+{{< /tabs >}}
 
-## Communicate about CI pipelines data
+If your CI provider is not supported, you can try setting up Pipeline Visibility through the [public API endpoint][2].
 
-CI pipeline data is available when you create widgets in [Dashboards][7] and [Notebooks][8].
+### Supported features
+
+|  | Jenkins | GitLab | CircleCI | Buildkite | GitHub Actions | Azure Pipelines | Codefresh | TeamCity | AWS Code Pipeline | Other CI Providers |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| {{< ci-details title="Pipeline trace visualization" >}}Visualization of pipeline executions with associated tracing.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| {{< ci-details title="Running pipelines" >}}Identification of pipelines executions that are running with associated tracing.{{< /ci-details >}} | | {{< X >}} | | | {{< X >}} | | | | |
+| {{< ci-details title="Partial retries" >}}Identification of partial retries (for example, when only a subset of jobs were retried).{{< /ci-details >}} |  | {{< X >}} |  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  {{< X >}} |
+| {{< ci-details title="Step spans" >}}Step level spans are available for more granular visibility.{{< /ci-details >}} | {{< X >}} (_But are presented as job spans_) |  |  |  | {{< X >}} |  | {{< X >}} |  |  |  {{< X >}} |
+| {{< ci-details title="Manual steps" >}}Identification of when there is a job with a manual approval phase in the overall pipeline.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  |  {{< X >}} |
+| {{< ci-details title="Approval wait time">}}Identification of the amount of time for which a pipeline or job has been waiting for a manual approval.{{< /ci-details >}} |  |  |  |  |  {{< X >}}  |   |   |  |  |  |
+| {{< ci-details title="Queue time" >}}Identification of the amount of time for which a pipeline or job was in the queue before execution.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |  {{< X >}} |
+| {{< ci-details title="Logs correlation" >}}Retrieval of pipeline or job logs from the CI provider. Logs are displayed on the <strong>Logs</strong> tab in the Pipeline Execution view.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  |  | {{< X >}} |  |  |  |  |  |
+| {{< ci-details title="Infrastructure metric correlation" >}}Correlation of host-level information for the Datadog Agent, CI pipelines, or job runners to CI pipeline execution data.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |  |  |  |  |
+| {{< ci-details title="Custom spans for traced commands using datadog-ci" >}}Support for sending command-level events to CI Visibility to be incorporated into pipeline flame graph visualization. You can then query and analyze <a href="https://docs.datadoghq.com/continuous_integration/pipelines/custom_commands/">these events</a>. {{< /ci-details >}} | {{< X >}} |  | {{< X >}} |  |  |  |  |  |  |  |
+| {{< ci-details title="Custom predefined tags" >}}Support for setting static pipeline tags in the CI provider that do not change between executions.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |  |  |  |
+| {{< ci-details title="Custom tags and measures at runtime" >}}Support for adding <a href="https://docs.datadoghq.com/continuous_integration/pipelines/custom_tags_and_measures/">user-defined text and numerical tags</a> to pipelines and jobs in CI Visibility.{{< /ci-details >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  |  {{< X >}} |
+| {{< ci-details title="Parameters" >}}Support for adding custom pipeline parameters that users set (for example, <code>DYNAMICS_IS_CHILD:true</code>). You can then search using these parameters in the <a href="https://docs.datadoghq.com/continuous_integration/explorer/?tab=pipelineexecutions">CI Visibility Explorer</a> to find all events with a specific parameter.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  |  |  |  | {{< X >}} |  |  |  {{< X >}} |
+| {{< ci-details title="Pipeline failure reason" >}}Identification of a specific reason behind a pipeline or job failure.{{< /ci-details >}} | {{< X >}} | {{< X >}} |  |  |  |  | {{< X >}} | {{< X >}} | {{< X >}} |  {{< X >}} |
+
+## Use CI pipelines data
+
+When creating a [dashboard][8] or a [notebook][9], you can use CI pipeline data in your search query, which updates the visualization widget options. For more information, see the [Dashboards][10] and [Notebooks documentation][11].
+
+## Alert on pipeline data
+
+You can export your search query to a [CI Pipeline monitor][12] on the [**Pipelines Executions** page][6] or the [**Test Runs** page][13] by clicking the **Export** button.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-
 [1]: https://app.datadoghq.com/ci/pipelines
-[2]: /continuous_integration/pipelines/github/#enable-log-collection
-[3]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection-beta
-[4]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
-[5]: https://app.datadoghq.com/ci/pipeline-executions
-[6]: https://app.datadoghq.com/ci/pipeline-executions?viz=timeseries
-[7]: https://app.datadoghq.com/dashboard/lists
-[8]: https://app.datadoghq.com/notebook/list
+[2]: /api/latest/ci-visibility-pipelines/#send-pipeline-event
+[6]: https://app.datadoghq.com/ci/pipeline-executions
+[8]: https://app.datadoghq.com/dashboard/lists
+[9]: https://app.datadoghq.com/notebook/list
+[10]: /dashboards
+[11]: /notebooks
+[12]: /monitors/types/ci
+[13]: https://app.datadoghq.com/ci/test-runs

@@ -6,14 +6,17 @@ further_reading:
   text: 機能フラグデータ収集の設定
 - link: /real_user_monitoring/explorer/
   tag: Documentation
-  text: RUM エクスプローラー
+  text: RUM エクスプローラーについて
+- link: https://www.datadoghq.com/blog/feature-flag-tracking/
+  tag: ブログ
+  text: Datadog RUM の機能フラグ追跡によるリリースの安全性の確保
 kind: documentation
 title: 機能フラグ追跡
 ---
 
-{{< callout url="#" btn_hidden="true" >}}
-RUM の機能フラグ追跡は非公開ベータ版です。アクセスをリクエストするには、サポート (support@datadoghq.com) までご連絡ください。
-{{< /callout >}}
+<div class="alert alert-warning">
+    機能フラグ追跡はベータ版です。
+</div>
 
 ## 概要
 
@@ -32,7 +35,7 @@ RUM データを機能フラグデータでリッチ化することで、以下�
 
 機能フラグデータの収集は、[カスタム機能フラグ管理ソリューション][3]、またはインテグレーションパートナーのいずれかを使用して開始することができます。
 
-現在、以下とのインテグレーションをサポートしています。
+以下とのインテグレーションをサポートしています。
 
 {{< partial name="rum/rum-feature-flag-tracking.html" >}}
 
@@ -42,14 +45,14 @@ RUM データを機能フラグデータでリッチ化することで、以下�
 
 ## 機能フラグを表示する
 
-機能フラグデータ収集を設定したら、RUM 内の [**Feature Flags**][4] タブに移動するか、**UX Monitoring** の下の [**Feature Flags**][4] タブをクリックします。
+機能フラグデータ収集をセットアップしたら、RUM 内の [**Feature Flags**][4] タブに移動します。
 
 このビューから、機能フラグの健全性や使用状況について疑問点を調査することができます。
 - 各バリアントを体験しているユーザー数をモニターし、機能フラグのサマリー統計を見る
 - 機能フラグのステータスを確認し、コードクリーンアップのために削除できるものがあるかどうかを確認する
 - 機能フラグがどのページで評価されているかを確認する
 
-{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list.png" alt="機能フラグの一覧を表示し、機能フラグの健全性や使用状況について疑問点を調査することができます" style="width:90%;" >}}
+{{< img src="real_user_monitoring/feature_flag_tracking/feature-flag-list-2.png" alt="機能フラグの一覧を表示し、機能フラグの健全性や使用状況について疑問点を調査することができます" style="width:90%;" >}}
 
 
 ### 検索とフィルター

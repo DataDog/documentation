@@ -21,18 +21,18 @@ Login to Trello to get your [Trello application key and token][3].
 
 **NOTE**: Trello mentions API key in the URL. For this article, API and app keys are one and the same.
 
-{{< img src="developers/faq/developer_api_key.png" alt="developer_api_key"  >}}
+{{< img src="developers/faq/developer_api_key.png" alt="developer_api_key" >}}
 
 To get the token, click the token link (green arrow) above, authorize a token with the Trello account you are logged into, and grab the token in the subsequent link:
-{{< img src="developers/faq/trello_api_key.png" alt="trello_api_key"  >}}
+{{< img src="developers/faq/trello_api_key.png" alt="trello_api_key" >}}
 
 ## Designate the Trello list
 
 Click on a card in the list you'd like to add cards to. Append `.json` to the URL, and then navigate to that URL.
-{{< img src="developers/faq/card_url.png" alt="card_url"  >}}
+{{< img src="developers/faq/card_url.png" alt="card_url" >}}
 
 From there, find the value of `idList`:
-{{< img src="developers/faq/id_list.png" alt="id_list"  >}}
+{{< img src="developers/faq/id_list.png" alt="id_list" >}}
 
 ## Configure the Webhook
 
@@ -40,7 +40,7 @@ See the [API documentation for Trello cards][4] and Datadog's [webhooks integrat
 
 In the configuration:
 
-* "name" is the alias for how you references this hook (@webhook-NAME)
+* "name" is the alias for how you reference this hook (@webhook-NAME)
 
 * "URL" is `https://api.trello.com/1/cards`
 
@@ -65,12 +65,12 @@ Enable Custom Payload and fill in a JSON object that looks like:
 * **idList**: list ID
 
 The resulting config looks like this:
-{{< img src="developers/faq/integration_config.png" alt="integration_config"  >}}
+{{< img src="developers/faq/integration_config.png" alt="integration_config" >}}
 
 ## Some points to consider
 
-This flow involves Trello generating a server token for the application. As you can see in the the token disclaimer:
-{{< img src="developers/faq/trello_disclaimer.png" alt="trello_disclaimer"  >}}
+This flow involves Trello generating a server token for the application. As you can see in the token disclaimer:
+{{< img src="developers/faq/trello_disclaimer.png" alt="trello_disclaimer" >}}
 
 The token provides read/write access to all your boards and teams, so this is a potential concern if you do not want to give away access in this way.
 

@@ -3,11 +3,13 @@ app_id: drata-integration
 app_uuid: c06736af-282f-4b3c-a9e6-2b049dbc0e2a
 assets:
   integration:
+    auto_install: true
     configuration: {}
     events:
       creates_events: false
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10311
     source_type_name: Drata
 author:
   homepage: https://www.drata.com/
@@ -30,7 +32,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: drata
-oauth: {}
 public_title: Drata
 short_description: Datadog のコンプライアンス情報を Drata に取り込む
 supported_os:
@@ -55,6 +56,7 @@ tile:
   title: Drata
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-extras -->
 
 
 ## 概要
@@ -63,11 +65,11 @@ Drata は、企業のセキュリティ管理を継続的に監視して証拠�
 
 このインテグレーションにより、[Drata][1] のお客様は、API インテグレーションを通じて、Datadog から Drata にコンプライアンス関連のログやイベントを転送することができます。
 
-## セットアップ
+## 計画と使用
 
 このインテグレーションを設定するには、アクティブな [Drata アカウント][2]が必要です。また、Datadog の適切な[管理者権限][3]も必要となります。
 
-### APM に Datadog Agent を構成する
+### インフラストラクチャーリスト
 
 1. このインテグレーションをインストールするには、API キーとアプリキーを作成する必要があります。
 2. Datadog でサービスアカウントを作成し、"Datadog Read Only" Role を適用して、この接続に限定的な権限を付与することをお勧めします。
@@ -79,7 +81,7 @@ Drata は、企業のセキュリティ管理を継続的に監視して証拠�
 8. Drata は Datadog API からユーザーと構成データの同期を開始し、コンプライアンスモニターが失敗している場合は通知されます。
 
 
-## サポート
+## Agent
 
 ヘルプが必要ですか？[Datadog サポート][6]または [support@drata.com][7] にお問い合わせください。
 

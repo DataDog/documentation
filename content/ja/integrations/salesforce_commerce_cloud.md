@@ -28,7 +28,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: salesforce_commerce_cloud
-oauth: {}
 public_title: Salesforce Commerce Cloud
 short_description: Salesforce Commerce Cloud のログを Datadog にインポートする
 supported_os: []
@@ -50,7 +49,7 @@ Salesforce Commerce Cloud は、マルチテナント型のクラウドベース
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 インストールは必要ありません。
 

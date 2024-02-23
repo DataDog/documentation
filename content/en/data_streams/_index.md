@@ -5,9 +5,21 @@ further_reading:
     - link: '/integrations/kafka/'
       tag: 'Documentation'
       text: 'Kafka Integration'
+    - link: '/integrations/amazon_sqs/'
+      tag: 'Documentation'
+      text: 'Amazon SQS Integration'
     - link: '/tracing/service_catalog/'
       tag: 'Documentation'
       text: 'Service Catalog'
+    - link: 'https://www.datadoghq.com/blog/data-streams-monitoring/'
+      tag: 'Blog'
+      text: 'Track and improve the performance of streaming data pipelines with Datadog Data Streams Monitoring'
+    - link: 'https://www.datadoghq.com/blog/data-streams-monitoring-apm-integration/'
+      tag: 'Blog'
+      text: 'Troubleshoot streaming data pipelines directly from APM with Datadog Data Streams Monitoring'
+cascade:
+    algolia:
+        rank: 70
 ---
 
 
@@ -34,10 +46,12 @@ To get started, follow the installation instructions to configure services with 
 
 | Runtime | Supported technologies |
 |---|----|
-| Java | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, HTTP, gRPC |
+| Java/Scala | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ, HTTP, gRPC, Amazon SQS |
+| Python | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), Amazon SQS |
+| .NET | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform), RabbitMQ |
+| Node.js | Kafka (self-hosted, Amazon MSK, Confluent Cloud / Platform) |
 | Go | All (with [manual instrumentation][1]) |
-| .NET | Kafka (self-hosted, Amazon MSK), RabbitMQ |
-
+  
 
 ## Explore Data Streams Monitoring
 
@@ -48,7 +62,7 @@ Once Data Streams Monitoring is configured, you can measure the time it usually 
 | Metric Name | Notable Tags | Description |
 |---|---|-----|
 | data_streams.latency | `start`, `end`, `env` | End to end latency of a pathway from a specified source to destination service |
-| dd.stream.kafka.lag_seconds | `consumer_group`, `partition`, `topic`, `env` | Lag in seconds between producer and consumer. Requires Java Agent v1.9.0 or later. |
+| data_streams.kafka.lag_seconds | `consumer_group`, `partition`, `topic`, `env` | Lag in seconds between producer and consumer. Requires Java Agent v1.9.0 or later. |
 
 You can also graph and visualize these metrics on any dashboard or notebook:
 
@@ -62,11 +76,11 @@ Depending on how events traverse through your system, different paths can lead t
 
 ### Attribute incoming messages to any queue, service, or cluster
 
-High lag on a consuming service, increased resource use on a Kafka broker and increased RabbitMQ queue size are frequently explained by changes in the way adjacent services are producing to or consuming from these entities.
+High lag on a consuming service, increased resource use on a Kafka broker, and increased RabbitMQ or Amazon SQS queue size are frequently explained by changes in the way adjacent services are producing to or consuming from these entities.
 
 Click on the **Throughput** tab on any service or queue in Data Streams Monitoring to quickly detect changes in throughput, and which upstream or downstream service these changes originate from. Once the [Service Catalog][2] is configured, you can immediately pivot to the corresponding team's Slack channel or on-call engineer.
 
-By filtering to a single Kafka or RabbitMQ cluster, you can detect changes in incoming or outgoing traffic for all detected topics or queues running on that cluster:
+By filtering to a single Kafka, RabbitMQ, or Amazon SQS cluster, you can detect changes in incoming or outgoing traffic for all detected topics or queues running on that cluster:
 
 {{< img src="data_streams/data_streams_throughput.jpg" alt="Datadog Data Streams Monitoring" style="width:100%;" >}}
 

@@ -35,7 +35,7 @@ Datadog アプリ内の[クイックスタート手順][2]に従って、最高�
 - `service`、`env`、`version` タグを動的に設定します。
 - セットアップ中に Continuous Profiler、トレースの 100% の取り込み、およびトレース ID 挿入を有効にします。
 
-### APM に Datadog Agent を構成する
+### APM 用に Datadog Agent を構成する
 
 インスツルメントされたアプリケーションからトレースを受信するように Datadog Agent をインストールして構成します。デフォルトでは、Datadog Agent は `apm_config` 下にある  `datadog.yaml` ファイルの `enabled: true` で有効になっており、`http://localhost:8126` でトレースデータをリッスンします。コンテナ化環境の場合、以下のリンクに従って、Datadog Agent 内でトレース収集を有効にします。
 
@@ -115,9 +115,8 @@ Agent のインストール後、アプリケーションをトレースする�
    wget -O dd-java-agent.jar https://dtdg.co/latest-java-tracer
    ```
 
-   **注:** 特定のメジャーバージョンをダウンロードするには、代わりに `https://dtdg.co/java-tracer-vX` リンクを使用します。`vX` は希望のバージョンです。
-   例えば、最新のバージョン 0 には `https://dtdg.co/java-tracer-v0` を使用します。
-   または、特定のバージョンについては、Datadog の [Maven リポジトリ][3]を参照してください。
+   **注:** 特定の**メジャー**バージョンの最新ビルドをダウンロードするには、代わりに `https://dtdg.co/java-tracer-vX` リンクを使用します。ここで `X` は希望するメジャーバージョンです。
+   例えば、最新のバージョン 1 のビルドには `https://dtdg.co/java-tracer-v1` を使用します。マイナーバージョン番号を含めることはできません。また、特定のバージョンについては、Datadog の [Maven リポジトリ][3]を参照してください。
 
 2. IDE、Maven または Gradle アプリケーションスクリプト、`java -jar` コマンドから、Continuous Profiler、デプロイ追跡、ログ挿入（Datadog へログを送信する場合）を使用してアプリケーションを実行するには、`-javaagent` JVM 引数と、該当する以下のコンフィギュレーションオプションを追加します。
 
@@ -266,7 +265,7 @@ Java の自動インスツルメンテーションは、[JVM によって提供�
 
 必要に応じて、統合サービスタグ付けの設定など、アプリケーションパフォーマンスのテレメトリーデータを送信するためのトレースライブラリーを構成します。詳しくは、[ライブラリの構成][9]を参照してください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

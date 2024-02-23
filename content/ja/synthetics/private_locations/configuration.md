@@ -98,6 +98,11 @@ Datadog にリクエストを送信するためにプライベートロケーシ
 **デフォルト**: `10`<br>
 並列で実行されるテストの最大数。
 
+`maxNumberMessagesToFetch`
+: **タイプ**: 数字 <br>
+**デフォルト**: `10`<br>
+Datadog から取得されるテストの最大数。
+
 `enableStatusProbes`
 : **タイプ**: ブール値 <br>
 プライベートロケーションプローブの readiness と liveness を有効にします。これにより 2 つのエンドポイント、`http://127.0.0.1:8080/liveness` と `http://127.0.0.1:8080/readiness` が有効になります。
@@ -121,12 +126,12 @@ Docker の場合、例えば `docker run --env VARIABLE gcr.io/datadoghq/synthet
 ## プライベートロケーション管理者
 
 `config`
-: **種類**: 文字列 <br>
+: **タイプ**: 文字列 <br>
 **デフォルト**: `/etc/datadog/synthetics-check-runner.json`<br>
 JSON コンフィギュレーションファイルへのパス。
 
 `logFormat`
-: **種類**: 文字列 <br>
+: **タイプ**: 文字列 <br>
 **デフォルト**: `pretty`<br>
 `"pretty"` と `"json"` 間でログ出力をフォーマットします。ログフォーマットを `json` に設定すると、ログが Datadog によって収集された時点で自動的に解析できます。
 
@@ -141,7 +146,7 @@ JSON コンフィギュレーションファイルへのパス。
 シークレットなしでワーカーコンフィギュレーションパラメーターを表示します。
 
 `help`
-: **種類**: ブール値<br>
+: **タイプ**: ブール値<br>
 **デフォルト**: `none`<br>
 ヘルプを表示します。
 

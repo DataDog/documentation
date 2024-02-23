@@ -34,7 +34,7 @@ Le [schéma JSON][3] utilisé pour le widget Service Map est le suivant :
 
 {{< dashboards-widgets-api >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

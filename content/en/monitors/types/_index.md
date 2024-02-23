@@ -6,6 +6,7 @@ aliases:
   - /monitors/monitor_types/
   - /monitors/create/types/
   - /monitors/create/#monitor-types
+  - /monitors/create/
 further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
@@ -25,7 +26,9 @@ further_reading:
 {{< nextlink href="/monitors/types/apm" >}}<strong>APM</strong>: Monitor APM metrics or trace queries.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/audit_trail" >}}<strong>Audit Trail</strong>: Alert when a specified type of audit log exceeds a user-defined threshold over a given period of time.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/ci" >}}<strong>CI</strong>: Monitor CI pipelines and tests data gathered by Datadog.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/cloud_cost" >}}<strong>Cloud Cost</strong>: Monitor cost changes associated with cloud platforms.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/composite" >}}<strong>Composite</strong>: Alert on an expression combining multiple monitors.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/database_monitoring" >}}<strong>Database Monitoring</strong>: Monitor query execution and explain plan data gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/error_tracking" >}}<strong>Error Tracking</strong>: Monitor issues in your applications gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/event" >}}<strong>Event</strong>: Monitor events gathered by Datadog.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/forecasts" >}}<strong>Forecast</strong>: Alert when a metric is projected to cross a threshold.{{< /nextlink >}}
@@ -33,6 +36,7 @@ further_reading:
 {{< nextlink href="/monitors/types/process" >}}<strong>Live Process</strong>: Check if one or more processes are running on a host.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/log" >}}<strong>Logs</strong>: Alert when a specified type of log exceeds a user-defined threshold over a given period of time.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/network" >}}<strong>Network</strong>: Check the status of TCP/HTTP endpoints.{{< /nextlink >}}
+{{< nextlink href="/monitors/types/network_performance" >}}<strong>Network Performance</strong>: Set alerts on your network traffic.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/outlier" >}}<strong>Outlier</strong>: Alert on members of a group behaving differently than the others.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/process_check" >}}<strong>Process Check</strong>: Watch the status produced by the process.up service check.{{< /nextlink >}}
 {{< nextlink href="/monitors/types/real_user_monitoring" >}}<strong>Real User Monitoring</strong>: Monitor real user data gathered by Datadog.{{< /nextlink >}}

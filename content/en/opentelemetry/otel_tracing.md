@@ -27,7 +27,7 @@ If your applications and services are instrumented with [OpenTelemetry][1] libra
 
 Read [OpenTelemetry][4] for more information.
 
-<div class="alert alert-info"><strong>Beta: Custom Instrumentation for Datadog Libraries</strong></br>For some supported languages, you can configure OTel instrumented applications to use the Datadog tracing library to process spans and traces. For more information, read <a href="/tracing/trace_collection/otel_instrumentation/">Custom Instrumentation with the OpenTelemetry API</a>.</div>
+<div class="alert alert-info"><strong>Beta: Custom Instrumentation for Datadog Libraries</strong></br>For some supported languages, you can configure OpenTelemetry instrumented applications to use the Datadog tracing library to process spans and traces. For more information, read <a href="/tracing/trace_collection/otel_instrumentation/">Custom Instrumentation with the OpenTelemetry API</a>.</div>
 
 ## Connect OpenTelemetry traces and logs
 

@@ -38,12 +38,11 @@ draft: false
 git_integration_title: openstack
 integration_id: openstack
 integration_title: OpenStack (レガシー)
-integration_version: 1.13.1
+integration_version: 1.13.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: openstack
-oauth: {}
 public_title: OpenStack (レガシー)
 short_description: ハイパーバイザーおよび VM レベルのリソース使用状況と Neutron メトリクスを追跡
 supported_os:
@@ -82,7 +81,7 @@ OpenStack サービスからメトリクスをリアルタイムに取得して�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 OpenStack メトリクスをキャプチャするには、ハイパーバイザーを実行しているホストに [Agent をインストール][3]します。
 

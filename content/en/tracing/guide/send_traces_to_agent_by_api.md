@@ -42,6 +42,8 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource` and so on
 
 ### Model
 
+<div class="alert alert-info">Datadog tracing libraries support both 64-bit and 128-bit trace IDs. Read <a href="/tracing/guide/span_and_trace_id_format/">Span and Trace ID formats to learn more.</a></div>
+
 | Field      | Type    | Description                           |
 |------------|---------|---------------------------------------|
 | `duration`   | int64   | The duration of the request in nanoseconds. |
@@ -56,7 +58,7 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource` and so on
 | `service`    | string  | The service you are tracing. The service name must not be longer than 100 characters. |
 | `span_id`    | int64   | The span integer (64-bit unsigned) ID. |
 | `start`      | int64   | The start time of the request in nanoseconds from the UNIX epoch. |
-| `trace_id`   | int64   | The unique integer (64-bit unsigned) ID of the trace containing this span. |
+| `trace_id`   | int64 or int128   | The unique integer (64-bit unsigned or 128-bit unsigned) ID of the trace containing this span. |
 | `type`       | enum    | The type of request. Allowed enum values: `web`, `db`, `cache`, `custom` |
 
 
@@ -95,6 +97,10 @@ and each span is a dictionary with a `trace_id`, `span_id`, `resource` and so on
 
 ### Example
 
+{{< tabs >}}
+
+{{% tab "Shell" %}}
+
 {{< code-block lang="curl" >}}
 # Curl command
 curl -X PUT "http://localhost:8126/v0.3/traces" \
@@ -115,6 +121,38 @@ curl -X PUT "http://localhost:8126/v0.3/traces" \
 ]
 EOF
 {{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "Powershell" %}}
+{{< code-block lang="curl" >}}
+
+# Invoke-RestMethod command
+
+$uri = "http://localhost:8126/v0.3/traces"
+$headers = @{
+    "Content-Type" = "application/json"
+}
+$body = @"
+[
+  [
+    {
+      "duration": 12345,
+      "name": "span_name",
+      "resource": "/home",
+      "service": "service_name",
+      "span_id": 987654321,
+      "start": 0,
+      "trace_id": 123456789
+    }
+  ]
+]
+"@
+
+Invoke-RestMethod -Uri $uri -Method Put -Body $body -Headers $headers
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 

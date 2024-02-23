@@ -41,7 +41,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: lighttpd
-oauth: {}
 public_title: Lighttpd
 short_description: アップタイム、処理バイト数、毎秒のリクエスト数、応答コードなどを追跡。
 supported_os:
@@ -73,7 +72,7 @@ Agent の lighttpd チェックは、アップタイム、処理バイト数、�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Lighttpd チェックは [Datadog Agent][2] パッケージに含まれています。Lighttpd サーバーに追加でインストールする必要はありません。
 

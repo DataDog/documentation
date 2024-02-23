@@ -23,11 +23,14 @@ further_reading:
 - link: https://www.datadoghq.com/blog/java-logging-guide/
   tag: ブログ
   text: Java ログの収集、カスタマイズ、標準化方法
+- link: /glossary/#tail
+  tag: 用語集
+  text: 用語集 "テール" の項目
 kind: documentation
 title: Java ログ収集
 ---
 
-ログを Datadog に送信するには、ファイルにログを記録し、そのファイルを Datadog Agent で調整します。
+ログを Datadog に送信するには、ファイルにログを記録し、そのファイルを Datadog Agent で[テール][14]します。
 
 一般的な Java ログのスタックトレースは複数の行に分割されているため、元のログイベントに関連付けることが困難です。例:
 
@@ -174,6 +177,30 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
 
 [1]: https://github.com/logstash/logstash-logback-encoder
 {{% /tab %}}
+{{% tab "Tinylog" %}}
+
+[Tinylog 公式ドキュメント][1]に基づいて、ファイルに出力する JSON ライターの構成を作成します。
+
+
+`tinylog.properties` ファイルには以下のフォーマットを使用します。
+
+```properties
+writer                     = json
+writer.file                = log.json
+writer.format              = LDJSON
+writer.level               = info
+writer.field.level         = level
+writer.field.source        = {class}.{method}()
+writer.field.message       = {message}
+writer.field.dd.trace_id   = {context: dd.trace_id}
+writer.field.dd.span_id    = {context: dd.span_id}
+writer.field.dd.service    = {context: dd.service}
+writer.field.dd.version    = {context: dd.version}
+writer.field.dd.env        = {context: dd.env}
+```
+
+[1]: https://tinylog.org/v2/configuration/#json-writer
+{{% /tab %}}
 {{< /tabs >}}
 
 #### ログへのトレース ID の挿入
@@ -255,6 +282,22 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
 ```
 
 {{% /tab %}}
+{{% tab "Tinylog" %}}
+
+[Tinylog 公式ドキュメント][1]に基づいて、ファイルに出力するライターの構成を作成します。
+
+
+`tinylog.properties` ファイルには以下のフォーマットを使用します。
+
+```properties
+writer          = file
+writer.level    = debug
+writer.format   = {level} - {message} - "dd.trace_id":{context: dd.trace_id} - "dd.span_id":{context: dd.span_id}
+writer.file     = log.txt
+```
+
+[1]: https://tinylog.org/v2/configuration/#json-writer
+{{% /tab %}}
 {{< /tabs >}}
 
 #### ログへのトレース ID の挿入
@@ -276,8 +319,8 @@ Logback の JSON 形式のログには、[logstash-logback-encoder][1] を使用
     logs:
 
       - type: file
-        path: "/path/to/your/java/log.log"
-        service: java
+        path: "<path_to_your_java_log>.log"
+        service: <service_name>
         source: java
         sourcecategory: sourcecode
         # For multiline logs, if they start by the date with the format yyyy-mm-dd uncomment the following processing rule
@@ -335,7 +378,7 @@ SLF4J モジュール [log4j-over-slf4j][1] を Logback とともに使用して
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 [2]: http://logback.qos.ch/translator/
-{{< /tabs >}}
+{{% /tab %}}
 
 {{% tab "Log4j 2" %}}
 
@@ -369,7 +412,7 @@ Log4j 2 では、リモートホストへのログ記録が可能ですが、ロ
 
 [1]: http://www.slf4j.org/legacy.html#log4j-over-slf4j
 [2]: http://logback.qos.ch/translator
-{{< /tabs >}}
+{{% /tab %}}
 
 {{< /tabs >}}
 
@@ -519,7 +562,7 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 
 **注:** MDC は文字列タイプのみを許可するため、数値メトリクスには使用しないでください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -528,11 +571,12 @@ logger.info("Emitted 1001 messages during the last 93 seconds");
 [3]: /ja/tracing/other_telemetry/connect_logs_and_traces/java/
 [4]: /ja/agent/logs/?tab=tailfiles#activate-log-collection
 [5]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
-[6]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
-[7]: /ja/agent/guide/agent-commands/?tab=agentv6v7#restart-the-agent
-[8]: /ja/agent/guide/agent-commands/?tab=agentv6v7#agent-status-and-information]
+[6]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[7]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent
+[8]: /ja/agent/configuration/agent-commands/?tab=agentv6v7#agent-status-and-information]
 [9]: /ja/logs/log_configuration/parsing/?tab=matchers
 [10]: /ja/logs/explorer/#overview
 [11]: https://github.com/logstash/logstash-logback-encoder
 [12]: https://github.com/logstash/logstash-logback-encoder#prefixsuffixseparator
 [13]: /ja/logs/log_configuration/parsing/#key-value-or-logfmt
+[14]: /ja/glossary/#tail

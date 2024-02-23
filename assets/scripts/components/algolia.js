@@ -7,6 +7,12 @@ import { searchpageHits } from './algolia/searchpageHits';
 import { customPagination } from './algolia/customPagination';
 import { debounce } from '../utils/debounce';
 
+const { env } = document.documentElement.dataset;
+const pageLanguage = getPageLanguage();
+const algoliaConfig = getConfig(env).algoliaConfig;
+const searchClient = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
+let indexName = algoliaConfig.index;
+
 function getPageLanguage() {
     const pageLanguage = document.documentElement.lang;
 
@@ -18,21 +24,39 @@ function getPageLanguage() {
     return 'en';
 }
 
-function sendSearchRumAction(searchQuery) {
-    if (window.DD_RUM && searchQuery !== '') {
-        window.DD_RUM.addAction('userSearch', {
-            query: searchQuery,
+function sendSearchRumAction(searchQuery, clickthroughLink = '', clickedLinkPosition = -1) {
+    if (window.DD_RUM && window._DATADOG_SYNTHETICS_BROWSER === undefined && searchQuery !== '') {
+        const userSearchData = {
+            query: searchQuery.toLowerCase(),
             page: window.location.pathname,
             lang: getPageLanguage()
-        })
+        }
+
+        if (clickthroughLink) {
+            userSearchData.clickthroughLink = clickthroughLink
+        }
+
+        if (clickedLinkPosition >= 0) {
+            userSearchData.clickPosition = clickedLinkPosition
+        }
+
+        window.DD_RUM.addAction('userSearch', userSearchData)
     }
 }
 
-const { env } = document.documentElement.dataset;
-const pageLanguage = getPageLanguage();
-const algoliaConfig = getConfig(env).algoliaConfig;
-const searchClient = algoliasearch(algoliaConfig.appId, algoliaConfig.apiKey);
-const indexName = algoliaConfig.index;
+const getSearchResultClickPosition = (clickedTargetHref, hitsArray, numberOfHitsPerPage, currentPage) => {
+    let clickedTargetRelPermalink = clickedTargetHref
+
+    if (env === 'preview') {
+        const commitRef = document.documentElement.dataset.commitRef
+        clickedTargetRelPermalink = clickedTargetRelPermalink.replace(`/${commitRef}`, '')
+    }
+
+    const { pathname, hash } = new URL(clickedTargetRelPermalink)
+    const relPath = `${pathname}${hash}`
+    const clickedSearchResultIndexOnPage = hitsArray.findIndex(hit => hit.relpermalink == relPath)
+    return clickedSearchResultIndexOnPage + (currentPage * numberOfHitsPerPage)
+}
 
 function loadInstantSearch(currentPageWasAsyncLoaded) {
     const searchBoxContainerContainer = document.querySelector('.searchbox-container');
@@ -43,6 +67,7 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
     const pageTitleScrollTo = document.querySelector('#pagetitle');
     const filtersDocs = `language: ${pageLanguage}`;
     const homepage = document.querySelector('.kind-home');
+    const apiPage = document.querySelector('body.api');
     let searchResultsPage = document.querySelector('.search_results_page');
     let basePathName = '/';
     let numHits = 5;
@@ -59,6 +84,10 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
 
     if (pageLanguage !== 'en') {
         basePathName += `${pageLanguage}/`;
+    }
+
+    if (apiPage) {
+        indexName = algoliaConfig.api_index;
     }
 
     if (searchResultsPage) {
@@ -170,21 +199,21 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
                 }
             };
 
-            const handleOutsideSearchbarClick = (e) => {                
+            const handleOutsideSearchbarClick = (e) => {
                 // Intercept user clicks within algolia dropdown to send custom RUM event before redirect.
                 if (hitsContainer.contains(e.target)) {
-                    e.preventDefault()
+                    e.preventDefault();
                 }
-                
+
                 let target = e.target;
 
                 do {
                     if (target === searchBoxContainerContainer) return;
 
                     if (target && target.href && hitsContainer.contains(e.target)) {
-                        sendSearchRumAction(search.helper.state.query)
-                        window.history.pushState({}, '', target.href)
-                        window.location.reload()
+                        sendSearchRumAction(search.helper.state.query, target.href);
+                        window.history.pushState({}, '', target.href);
+                        window.location.reload();
                     }
 
                     target = target.parentNode;
@@ -199,19 +228,27 @@ function loadInstantSearch(currentPageWasAsyncLoaded) {
         } else {
             // Handle sending search RUM events from click events on the search results page.
             hitsContainer.addEventListener('click', (e) => {
-                e.preventDefault()
-                let target = e.target
+                e.preventDefault();
+                let target = e.target;
 
                 do {
                     if (target.href) {
-                        sendSearchRumAction(search.helper.state.query)
-                        window.history.pushState({}, '', target.href)
-                        window.location.reload()
+                        const hitsArray = search.helper.lastResults.hits
+                        const page = search.helper.state.page
+                        const clickPosition = getSearchResultClickPosition(target.href, hitsArray, numHits, page)
+                        sendSearchRumAction(search.helper.state.query, target.href, clickPosition);
+                        window.history.pushState({}, '', target.href);
+
+                        if (e.metaKey || e.ctrlKey) {
+                            window.open(target.href, "_blank")
+                        } else {
+                            window.location.reload()
+                        }
                     }
 
-                    target = target.parentNode
-                } while (target)
-            })
+                    target = target.parentNode;
+                } while (target);
+            });
         }
 
         // Pages that aren't homepage or search page need to move the searchbar on mobile

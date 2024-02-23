@@ -2,7 +2,7 @@
 title: Signal Correlation Rules
 type: documentation
 aliases:
- - security_platform/cloud_siem/signal_correlation_rules
+ - /security_platform/cloud_siem/signal_correlation_rules
 further_reading:
 - link: "/cloud_siem/explorer/"
   tag: "Documentation"
@@ -23,7 +23,7 @@ As another example, you can create a signal by combining these two rules:
 
 And use the `expired account ID` attribute to correlate the two rules.
 
-You can correlate log detection rules, as well as log detection rules with Cloud Workload Security and Application Security Management rules.
+You can correlate log detection rules, as well as log detection rules with Cloud Security Management Threats and Application Security Management rules.
 
 ## Create a Signal Correlation rule
 

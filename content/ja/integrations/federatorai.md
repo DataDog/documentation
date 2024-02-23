@@ -45,7 +45,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: federatorai
-oauth: {}
 public_title: Federator.ai
 short_description: ProphetStor Federator.ai とのインテグレーションでアプリケーションのパフォーマンスを最適化します
 supported_os:
@@ -208,7 +207,7 @@ Federator.ai について詳しくは、[ProphetStor Federator.ai 機能デモ][
 
 * 以下の手順に従って、Federator.ai をダウンロードおよび設定してください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 1. OpenShift/Kubernetes クラスターにログインします
 2. 次のコマンドで OpenShift/Kubernetes 用の Federator.ai をインストールします

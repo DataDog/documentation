@@ -3,11 +3,11 @@ kind: documentation
 title: OpenTelemetry のセマンティック規則と Datadog の規則
 ---
 
-OpenTelemetry (OTel) では、さまざまなデータタイプの名前を指定する、多くの[セマンティック規則][1]を使用しています。このページでは、OTel のセマンティック規則と Datadog のセマンティック規則のマッピングをリストアップします。
+OpenTelemetry では、さまざまなデータタイプの名前を指定する、多くの[セマンティック規則][1]を使用しています。このページでは、OpenTelemetry のセマンティック規則と Datadog のセマンティック規則のマッピングをリストアップします。
 
 ### 統合サービスタグ付け
 
-| OTel 規則 | Datadog 規則 |
+| OpenTelemetry 規則 | Datadog 規則 |
 | --- | --- |
 | `deployment.environment` | `env` |
 | `service.name` | `service` |
@@ -17,7 +17,7 @@ OpenTelemetry (OTel) では、さまざまなデータタイプの名前を指�
 
 ### コンテナ
 
-| OTel 規則 | Datadog 規則 |
+| OpenTelemetry 規則 | Datadog 規則 |
 | --- | --- |
 | `container.id` | `container_id` |
 | `container.name` | `container_name` |
@@ -26,7 +26,7 @@ OpenTelemetry (OTel) では、さまざまなデータタイプの名前を指�
 
 ### クラウド
 
-| OTel 規則 | Datadog 規則 |
+| OpenTelemetry 規則 | Datadog 規則 |
 | --- | --- |
 | `cloud.provider` | `cloud_provider` |
 | `cloud.region` | `region` |
@@ -34,7 +34,7 @@ OpenTelemetry (OTel) では、さまざまなデータタイプの名前を指�
 
 ### ECS
 
-| OTel 規則 | Datadog 規則 |
+| OpenTelemetry 規則 | Datadog 規則 |
 | --- | --- |
 | `aws.ecs.task.family` | `task_family` |
 | `aws.ecs.task.arn` | `task_arn` |
@@ -44,7 +44,7 @@ OpenTelemetry (OTel) では、さまざまなデータタイプの名前を指�
 
 ### Kubernetes
 
-| OTel 規則 | Datadog 規則 |
+| OpenTelemetry 規則 | Datadog 規則 |
 | --- | --- |
 | `k8s.container.name` | `kube_container_name` |
 | `k8s.cluster.name` | `kube_cluster_name` |

@@ -94,7 +94,7 @@ API エンドポイントを使用して、新しいデプロイメントが回�
 
 詳しくは、[Synthetics API エンドポイントのドキュメント][5]をご覧ください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

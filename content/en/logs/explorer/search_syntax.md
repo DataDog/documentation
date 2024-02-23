@@ -39,17 +39,6 @@ To combine multiple terms into a complex query, you can use any of the following
 | `OR`         | **Union**: either term is contained in the selected events                                             | authentication OR password   |
 | `-`          | **Exclusion**: the following term is NOT in the event (apply to each individual raw text search)                                                  | authentication AND -password |
 
-## Autocomplete
-
-Use the search bar's autocomplete feature to complete your query using:
-- Existing keys and values in your logs
-- Your recent searches (recent searches from other users are not displayed)
-- Saved views
-
-{{< img src="logs/explorer/search/log_search_bar_autocomplete.png" alt="The logs search bar showing service: as the query and emailer, balancer-checker, ad-server, and vpc as autocomplete options" style="width:80%;">}}
-
-Clear error states inform you which part of the query contains syntax errors and how to remediate them. For example, if you input the query `service:` with no value, the message "Missing value in key:value pair" is displayed when you hover over the query.
-
 ## Escape special characters and spaces
 
 The following characters, which are considered special: `+` `-` `=` `&&` `||` `>` `<` `!` `(` `)` `{` `}` `[` `]` `^` `"` `“` `”` `~` `*` `?` `:` `\`, and spaces require escaping with the `\` character. 
@@ -87,6 +76,21 @@ Examples:
 | `@http.url_details.path:"/api/v1/test"`                              | Searches all logs matching `/api/v1/test` in the attribute `http.url_details.path`.                                                                               |
 | `@http.url:\/api\/v1\/*`                                             | Searches all logs containing a value in `http.url` attribute that start with `/api/v1/`                                                                             |
 | `@http.status_code:[200 TO 299] @http.url_details.path:\/api\/v1\/*` | Searches all logs containing a `http.status_code` value between 200 and 299, and containing a value in `http.url_details.path` attribute that start with `/api/v1/` |
+| `-@http.status_code:*`                                                | Searches all logs not containing the `http.status_code` attribute |
+
+### Search using CIDR notation
+Classless Inter Domain Routing (CIDR) is a notation that allows users to define a range of IP addresses (also called CIDR blocks) succinctly. CIDR is most commonly used to define a network (such as a VPC) or a subnetwork (such as public/private subnet within a VPC).
+
+Users can use the `CIDR()` function to query attributes in logs using CIDR notation. The `CIDR()` function needs to be passed in a log attribute as a parameter to filter against, followed by one or multiple CIDR blocks. 
+
+#### Examples
+- `CIDR(@network.client.ip,13.0.0.0/8)` matches and filters logs that have IP addresses in the field `network.client.ip` that fall under the 13.0.0.0/8 CIDR block.
+- `CIDR(@network.ip.list,13.0.0.0/8, 15.0.0.0/8)` matches and filters logs that have any IP addresses in an array attribute `network.ip.list` that fall under the 13.0.0.0/8 or 15.0.0.0/8 CIDR blocks.
+- `source:pan.firewall evt.name:reject CIDR(@network.client.ip, 13.0.0.0/8)` would match and filter reject events from palo alto firewall that originate in the 13.0.0.0/8 subnet
+- `source:vpc NOT(CIDR(@network.client.ip, 13.0.0.0/8)) CIDR(@network.destination.ip, 15.0.0.0/8)` will show all VPC logs that do not originate in subnet 13.0.0.0/8 but are designated for destination subnet 15.0.0.0/8 because you want to analyze network traffic in your environments between subnets
+
+The `CIDR()` function supports both IPv4 and IPv6 CIDR notations and works in Log Explorer, Live Tail, log widgets in Dashboards, log monitors, and log configurations.
+
 
 ## Wildcards
 
@@ -178,3 +182,4 @@ In the following example, CloudWatch logs for Windows contain an array of JSON o
 [4]: /integrations/#cat-log-collection
 [5]: /getting_started/tagging/#tags-best-practices
 [6]: /logs/explorer/saved_views/
+[7]: /logs/explorer/facets/#facet-panel

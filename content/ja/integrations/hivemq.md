@@ -24,9 +24,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- メッセージング
-- 処理
+- iot
 - ログの収集
+- メッセージング
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/hivemq/README.md
 display_on_public_website: true
@@ -34,27 +34,26 @@ draft: false
 git_integration_title: hivemq
 integration_id: hivemq
 integration_title: HiveMQ
-integration_version: 1.6.1
+integration_version: 1.7.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: hivemq
-oauth: {}
 public_title: HiveMQ
 short_description: HiveMQ クラスターを監視します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Messaging
-  - Category::Processing
+  - Category::IOT
   - Category::Log Collection
+  - Category::Messaging
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: HiveMQ クラスターを監視します。
   media: []
@@ -181,7 +180,14 @@ JMXFetch
 
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
+## その他の参考資料
+
+お役に立つドキュメント、リンクや記事:
+
+- [Datadog で IoT アプリケーションを監視するために HiveMQ と OpenTelemetry を使用する][4]
+
 
 [1]: https://www.hivemq.com/hivemq/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/help
+[4]: https://www.datadoghq.com/blog/hivemq-opentelemetry-monitor-iot-applications/

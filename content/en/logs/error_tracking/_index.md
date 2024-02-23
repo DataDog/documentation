@@ -18,15 +18,11 @@ further_reading:
     text: 'Create an Error Tracking monitor'
 ---
 
-{{< callout btn_hidden="true" >}}
-  Error Tracking for Logs is in beta.
-{{< /callout >}} 
-
 ## Overview
 
 It is critical for your system's health to consistently monitor the errors collected by Datadog. When there are many individual error events, it becomes hard to prioritize errors for troubleshooting. By tracking, triaging, and debugging logs, you can minimize the impact of fatal errors on your browser, mobile, and backend services.
 
-Once you have set up logs for **Browser and Mobile** or **Backend** error tracking, the issue list populates with cards. You can view open, ignored, or all issues, sort issues by volume or age, and filter issues by all custom and default facets on your logs.
+Once you have set up [Logs][2] for **Browser and Mobile** or **Backend** error tracking, the issue list populates with cards. Navigate to [**Logs** > **Error Tracking**][1] to view open, ignored, or all issues, sort issues by volume or age, and filter issues by all custom and default facets on your logs.
 
 {{< img src="logs/error_tracking/homepage.png" alt="The Error Tracking Explorer for Logs displaying Java issues" style="width:100%;" >}}
 
@@ -39,7 +35,7 @@ Error Tracking enables you to:
 
 ## Setup
 
-Error Tracking for Logs processes properly configured error logs with stack traces. To enable Error Tracking for Logs, navigate to [**Logs** > **Error Tracking**][1].
+Error Tracking for Logs processes properly configured error logs with stack traces.
 
 {{< whatsnext desc="To get started with Datadog Error Tracking for Logs, see the corresponding documentation for your framework:" >}}
     {{< nextlink href="logs/error_tracking/browser_and_mobile" >}}Browser and Mobile{{< /nextlink >}}
@@ -59,3 +55,4 @@ Click on an issue to see seasonality patterns, a stack trace, and the error's di
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs/error-tracking
+[2]: /logs/log_collection

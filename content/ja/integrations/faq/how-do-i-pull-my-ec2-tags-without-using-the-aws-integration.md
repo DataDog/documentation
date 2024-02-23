@@ -56,7 +56,7 @@ EC2 Instance Metadata Service を通じてタグが利用できない場合、Da
 
 このオプションは、AWS コンソールの **Tags** タブで EC2 ホストに設定されたカスタムタグのみを引き込みます。
 
-{{< img src="integrations/faq/ec2_tags.png" alt="ec2_tags"  >}}
+{{< img src="integrations/faq/ec2_tags.png" alt="ec2_tags" >}}
 
 `availability_zone`、`region`、`instance_type` などのタグは、[AWS インテグレーション][1]を介して EC2 ホストを引き込むことで初めて利用可能になります。
 

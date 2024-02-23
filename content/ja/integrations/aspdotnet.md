@@ -38,7 +38,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: aspdotnet
-oauth: {}
 public_title: ASP.NET
 short_description: ASP.NET サービスのメトリクスをリアルタイムに追跡。
 supported_os:
@@ -68,7 +67,7 @@ ASP.NET からメトリクスをリアルタイムに取得すると、以下の
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 ASP.NET チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

@@ -1,4 +1,13 @@
 {
   "message": "Example-Downtime-updated",
-  "mute_first_recovery_notification": true
+  "mute_first_recovery_notification": true,
+  "notify_end_states": [
+    "alert",
+    "no data",
+    "warn"
+  ],
+  "notify_end_types": [
+    "canceled",
+    "expired"
+  ]
 }

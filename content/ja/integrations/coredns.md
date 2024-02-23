@@ -39,12 +39,11 @@ draft: false
 git_integration_title: coredns
 integration_id: coredns
 integration_title: CoreDNS
-integration_version: 2.3.1
+integration_version: 2.4.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: coredns
-oauth: {}
 public_title: CoreDNS
 short_description: CoreDNS は、Kubernetes の DNS メトリクスを収集します。
 supported_os:
@@ -74,11 +73,14 @@ CoreDNS からリアルタイムにメトリクスを取得して、DNS エラ�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 CoreDNS チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
-**注**: 現在のバージョンのチェック (1.11.0+) は、メトリクスの収集に [OpenMetrics][2] (OpenMetricsBaseCheckV2) を使用しており、これは Python 3 を必要とします。Python 3 を使用できないホスト、またはこのチェックのレガシー OpenMetricsBaseCheckV1 バージョンを使用する場合は、次の[構成][3]を参照してください。ただし、`coredns.d/auto_conf.yaml` ファイルに依存するオートディスカバリーユーザーには例外があり、デフォルトで OpenMetricsBaseCheckV1 のレガシーバージョンに対して `prometheus_url` オプションが有効になっています。デフォルトの構成オプションについてはサンプル [coredns.d/auto_conf.yaml][4] を、利用可能なすべての構成オプションについてはサンプル [coredns.d/conf.yaml.example][20] を参照してください。
+**注**: 現在のバージョンのチェック (1.11.0+) は、メトリクスの収集に [OpenMetrics][2] (OpenMetricsBaseCheckV2) を使用しており、これは Python 3 を必要とします。
+Python 3 を使用できないホストや、以前にこのインテグレーションバージョンを実装した場合は、[レガシー OpenMetricsBaseCheckV1 の例][3]をご覧ください。
+ただし、`coredns.d/auto_conf.yaml` ファイルに依存するオートディスカバリーユーザーには例外があり、デフォルトで OpenMetricsBaseCheckV1 のレガシーバージョンに対して `prometheus_url` オプションが有効になっています。
+デフォルトの構成オプションについてはサンプル [coredns.d/auto_conf.yaml][4] を、利用可能なすべての構成オプションについてはサンプル [coredns.d/conf.yaml.example][20] を参照してください。
 
 **注**: OpenMetricsBaseCheckV2 バージョンの CoreDNS チェックでは、`.bucket` メトリクスを送信し、`.sum` と `.count` ヒストグラムサンプルをモノトニックカウントタイプとして送信するようになりました。これらのメトリクスは、OpenMetricsBaseCheckV1 ではゲージタイプとして送信されていました。各バージョンで利用可能なメトリクスの一覧は [metadata.csv][5] を参照してください。
 

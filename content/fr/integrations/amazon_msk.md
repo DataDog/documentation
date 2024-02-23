@@ -82,7 +82,7 @@ L'intégration Amazon MSK n'inclut aucun check de service.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][9].
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

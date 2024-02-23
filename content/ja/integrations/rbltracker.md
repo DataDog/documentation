@@ -15,11 +15,11 @@ assets:
     source_type_name: RBLTracker
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: RBL Tracker
   sales_email: help@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- monitoring
+- security
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/rbltracker/README.md
 display_on_public_website: true
@@ -32,20 +32,19 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: rbltracker
-oauth: {}
 public_title: RBLTracker
 short_description: RBLTracker は、操作が簡単なリアルタイムのブラックリスト監視機能を提供します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::モニタリング
+  - Category::Security
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: RBLTracker は、操作が簡単なリアルタイムのブラックリスト監視機能を提供します。
   media: []

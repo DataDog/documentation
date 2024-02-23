@@ -33,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: storm
-oauth: {}
 public_title: Storm
 short_description: Apache Storm 1.x.x トポロジー実行統計
 supported_os:
@@ -69,7 +68,7 @@ Storm サービスからリアルタイムにメトリクスを取得して、�
 
 Storm チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い Storm チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2]をご参照ください。
 

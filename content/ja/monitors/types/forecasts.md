@@ -7,7 +7,7 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール
 - link: /monitors/manage/status/
@@ -40,7 +40,9 @@ Datadog で[予測値モニター][1]を作成するには、メインナビゲ�
 * 予測の信頼限界のエッジが `above` または `below` になったときにアラートをトリガーします。
 * 次の `24 hours`、`1 week`、`1 month` 内などのしきい値、または `custom` に 12 時間〜3 か月の値を設定します。
 * アラートのしきい値: >= `<数値>`
+* 警告のしきい値: >= `<NUMBER>`
 * アラートの[リカバリしきい値][3]: < `<数値>`
+* 警告の[リカバリしきい値][3]: < `<NUMBER>`
 
 #### 高度なオプション
 

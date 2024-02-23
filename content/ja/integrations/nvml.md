@@ -29,12 +29,11 @@ draft: false
 git_integration_title: nvml
 integration_id: nvml
 integration_title: Nvidia NVML
-integration_version: 1.0.6
+integration_version: 1.0.7
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: nvml
-oauth: {}
 public_title: Nvidia NVML
 short_description: k8s で Nvidia GPU メトリクスをサポート
 supported_os:
@@ -67,7 +66,7 @@ tile:
 
 NVML チェックは [Datadog Agent][3] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い NVML チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][4]をご参照ください。
 

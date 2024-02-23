@@ -14,28 +14,29 @@ further_reading:
 git_integration_title: amazon_msk
 has_logo: true
 integration_id: amazon-msk
-integration_title: Amazon Managed Streaming for Apache Kafka
+integration_title: Amazon Managed Streaming for Apache Kafka (MSK)
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_msk
-public_title: Datadog-Amazon Managed Streaming for Apache Kafka インテグレーション
+public_title: Datadog-Amazon Managed Streaming for Apache Kafka (MSK) インテグレーション
 short_description: Amazon MSK のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Managed Streaming for Apache Kafka (MSK) は、Apache Kafka を使用してストリーミングデータを処理するアプリケーションを、簡単に構築して実行できるフルマネージド型のサービスです。
 
 このインテグレーションでは、CloudWatch からメトリクスを収集するクローラーを使用します。Datadog Agent による MSK の監視については、[Amazon MSK (Agent)][1] のページをお読みください。
 
-## セットアップ
+## 計画と使用
 
 Amazon MSK クローラーを有効にして、CloudWatch からの MSK メトリクスを Datadog で確認できるようにします。
 
-### APM に Datadog Agent を構成する
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -45,7 +46,7 @@ Amazon MSK クローラーを有効にして、CloudWatch からの MSK メト�
 
 2. [Amazon MSK インテグレーション][4]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -63,25 +64,25 @@ Amazon MSK から S3 バケットまたは CloudWatch のいずれかにログ�
     - [S3 バケットに手動トリガーを追加][6]
     - [CloudWatch ロググループに手動トリガーを追加][7]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_msk" >}}
 
 
-### イベント
+### ヘルプ
 
 Amazon MSK クローラーには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Amazon MSK インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

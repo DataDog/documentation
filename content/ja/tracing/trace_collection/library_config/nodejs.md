@@ -8,6 +8,9 @@ further_reading:
 - link: https://datadog.github.io/dd-trace-js
   tag: ドキュメント
   text: API ドキュメント
+- link: /tracing/trace_collection/trace_context_propagation/nodejs/
+  tag: Documentation
+  text: トレースコンテキストの伝搬
 - link: tracing/glossary/
   tag: APM の UI を利用する
   text: サービス、リソース、トレースを調査する
@@ -231,32 +234,22 @@ WAF の同期実行時間 (マイクロ秒) を制限します。
 
 ### ヘッダーの抽出と挿入
 
-Datadog APM トレーサーは、分散型トレーシングのための [B3][5] と [W3C (TraceParent)][6] のヘッダー抽出と挿入をサポートしています。
-
-分散ヘッダーの挿入と抽出のスタイルを構成することができます。
-
-Node.js トレーサーは、以下のスタイルをサポートしています。
-
-- Datadog: `Datadog`
-- B3 マルチヘッダー: `b3multi` (`B3` は非推奨)
-- W3C Trace Context: `tracecontext`
-- B3 シングルヘッダー: `B3 single header`
+有効な値と以下の構成オプションの使用に関する情報については、[Node.js トレースコンテキストの伝播][5]を参照してください。
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
 : **構成**: `tracePropagationStyle.inject`<br>
 **デフォルト**: `Datadog,tracecontext`<br>
-サービス間で分散型トレーシングを行うために含めるべきヘッダーフォーマットのカンマ区切りリスト。
+サービス間で分散型トレースを伝播させるために含めるヘッダーフォーマットのカンマ区切りリスト。
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
 : **構成**: `tracePropagationStyle.extract`<br>
 **デフォルト**: `Datadog,tracecontext`<br>
-分散型トレーシングの伝搬データを抽出するためのヘッダーフォーマットのカンマ区切りリスト。完全で有効なヘッダーを持つ最初のフォーマットが、トレースを継続するための定義に使用されます。
+分散型トレーシングの伝搬データを抽出しようと試みるヘッダーフォーマットのカンマ区切りリスト。完全かつ有効なヘッダーを持つ最初のフォーマットが見つかった場合、トレースを続行するためにそれが使用されます。
 
 `DD_TRACE_PROPAGATION_STYLE`
 : **構成**: `tracePropagationStyle`<br>
 **デフォルト**: `Datadog,tracecontext`<br>
-分散型トレーシングの伝搬データを挿入および抽出するためのヘッダーフォーマットのカンマ区切りリスト。完全で有効なヘッダーを持つ最初のフォーマットが、トレースを継続するための定義に使用されます。より詳細な `DD_TRACE_PROPAGATION_STYLE_INJECT` と `DD_TRACE_PROPAGATION_STYLE_EXTRACT` の構成が存在する場合には、そちらが優先されます。
-
+分散型トレーシングの伝搬データを挿入および抽出しようと試みるヘッダーフォーマットのカンマ区切りリスト。完全かつ有効なヘッダーを持つ最初のフォーマットが見つかった場合、トレースを続行するためにそれが使用されます。存在する場合、より具体的な `DD_TRACE_PROPAGATION_STYLE_INJECT` と `DD_TRACE_PROPAGATION_STYLE_EXTRACT` の構成が優先されます。
 
 ライブラリの操作例については、[API ドキュメント][2]を参照してください。
 
@@ -268,6 +261,5 @@ Node.js トレーサーは、以下のスタイルをサポートしています
 [2]: https://datadog.github.io/dd-trace-js/
 [3]: /ja/tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /ja/help/
-[5]: https://github.com/openzipkin/b3-propagation
-[6]: https://www.w3.org/TR/trace-context/#trace-context-http-headers-format
+[5]: /ja/tracing/trace_collection/trace_context_propagation/nodejs
 [13]: /ja/agent/guide/network/#configure-ports

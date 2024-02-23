@@ -11,9 +11,9 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/services/services_list/"
+- link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Discover the list of services reporting to Datadog"
+  text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
@@ -45,7 +45,7 @@ Datadog APM computes following aggregate statistics over all the traces instrume
 * Breakdown of time spent by service/type
 * [Apdex score][2] (web services only)
 
-{{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Aggregate statistics are generated on un-sampled data."  style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/sampling_stats.png" alt="Aggregate statistics are generated on un-sampled data." style="width:90%;">}}
 
 ### Goal of sampling
 
@@ -55,7 +55,7 @@ The goal of sampling is to *keep* the traces that matter the most:
 * Low QPS Services
 * Representative variety set of traces
 
-{{< img src="tracing/product_specs/trace_sampling_storage/tracing-flow-chart.png" alt="Individual traces are sampled at the Client, Agent, and Server level."  style="width:90%;">}}
+{{< img src="tracing/product_specs/trace_sampling_storage/tracing-flow-chart.png" alt="Individual traces are sampled at the Client, Agent, and Server level." style="width:90%;">}}
 
 ### Sampling rules
 
@@ -377,9 +377,9 @@ Note that trace priority should be manually controlled only before any context p
 
 ## Trace storage
 
-Individual traces are stored for 15 days. This means that all **sampled** traces are retained for a period of 15 days and at the end of the 15th day, the entire set of expired traces is deleted. In addition, once a trace has been viewed by opening a full page, it continues to be available by using its trace ID in the URL: `{{< region-param key="dd_full_site" >}}/apm/trace/<TRACE_ID>`. This is true even if it "expires" from the UI. This behavior is independent of the UI retention time buckets.
+Individual traces are stored for 30 days. This means that all **sampled** traces are retained for a period of 30 days and at the end of the 30th day, the entire set of expired traces is deleted. In addition, once a trace has been viewed by opening a full page, it continues to be available by using its trace ID in the URL: `{{< region-param key="dd_full_site" >}}/apm/trace/<TRACE_ID>`. This is true even if it "expires" from the UI. This behavior is independent of the UI retention time buckets.
 
-{{< img src="tracing/guide/trace_sampling_and_storage/trace_id.png" alt="Trace ID"  >}}
+{{< img src="tracing/guide/trace_sampling_and_storage/trace_id.png" alt="Trace ID" >}}
 
 ## Further Reading
 

@@ -31,7 +31,7 @@ title: API ソース属性
 | Amazon Auto Scaling           | amazon auto scaling           | autoscaling                |
 | Bigpanda                      | bigpanda                      | bigpanda                   |
 | Amazon App Runner             | amazon app runner             | awsapprunner               |
-| Amazon Backup                 | amazon backup                 | awsbackup                  |
+| AWS Backup                    | amazon backup                 | awsbackup                  |
 | Amazon Billing                | amazon billing                | billing                    |
 | Amazon Certificate Manager    | amazon certificate manager    | awscertificatemanager      |
 | Amazon Cloudfront             | amazon cloudfront             | cloudfront                 |
@@ -52,10 +52,11 @@ title: API ソース属性
 | Amazon Ebs                    | amazon ebs                    | ebs                        |
 | Amazon Ec2                    | amazon ec2                    | ec2                        |
 | Amazon Ec2 Spot               | amazon ec2 spot               | ec2spot                    |
+| Amazon Ecr                    | amazon ecr                    | ecr                        |
 | Amazon Ecs                    | amazon ecs                    | ecs                        |
 | Amazon Efs                    | amazon efs                    | efs                        |
 | Amazon Elasticache            | amazon elasticache            | elasticache                |
-| Amazon Elasticbeanstalk       | amazon elasticbeanstalk       | elasticbeanstalk           |
+| AWS Elastic Beanstalk         | amazon elasticbeanstalk       | elasticbeanstalk           |
 | Amazon Elastic Transcoder     | amazon elastic transcoder     | elastictranscoder          |
 | Amazon Mediaconnect           | amazon mediaconnect           | mediaconnect               |
 | Amazon Mediaconvert           | amazon mediaconvert           | mediaconvert               |
@@ -78,7 +79,7 @@ title: API ソース属性
 | Amazon Kinesis Data Analytics | amazon kinesis data analytics | kinesisanalytics           |
 | Amazon Kinesis                | amazon kinesis                | kinesis                    |
 | Amazon Kms                    | amazon kms                    | kms                        |
-| Amazon Lambda                 | amazon lambda                 | lambda                     |
+| AWS Lambda                    | amazon lambda                 | lambda                     |
 | Amazon Lex                    | amazon lex                    | awslex                     |
 | Amazon App Mesh               | amazon app mesh               | amazonappmesh              |
 | Amazon Machine Learning       | amazon machine learning       | machinelearning            |
@@ -98,7 +99,7 @@ title: API ソース属性
 | Amazon S3                     | amazon s3                     | s3                         |
 | Amazon S3 Storage Lens        | amazon s3 storage lens        | s3storagelens              |
 | Amazon Sagemaker              | amazon sagemaker              | sagemaker                  |
-| Amazon Security Hub           | amazon security hub           | awssecurityhub             |
+| Amazon Security Hub           | amazon security hub           | amazon_security_hub        |
 | Amazon Ses                    | amazon ses                    | ses                        |
 | Amazon Shield                 | amazon shield                 | shield                     |
 | Amazon Sns                    | amazon sns                    | sns                        |
@@ -116,7 +117,7 @@ title: API ソース属性
 | アマゾン ウェブ サービス (AWS)           | amazon web services           | cloudwatch                 |
 | Amazon Workspaces             | amazon workspaces             | workspaces                 |
 | Amazon Xray                   | amazon xray                   | awsxray                    |
-| Ansible                       | Ansible                       | Ansible                    |
+| Ansible                       | ansible                       | ansible                    |
 | Apache                        | apache                        | apache                     |
 | Azure Analysis Services       | azure analysis services       | azureanalysisservices      |
 | Azure Api Management          | azure api management          | azureapimanagement         |
@@ -308,6 +309,7 @@ title: API ソース属性
 | Ruby                          | ruby                          | ruby                       |
 | セールスフォース・ドットコム                    | salesforce                    | salesforce                 |
 | Salesforce Commerce Cloud     | salesforce commerce cloud     | salesforcecommercecloud    |
+| Salesforce Marketing Cloud    | salesforce marketing cloud    | salesforcemarketingcloud   |
 | Salesforce Incidents          | salesforce incidents          | salesforceincidents        |
 | セグメント                       | セグメント                       | セグメント                    |
 | Sendgrid                      | sendgrid                      | sendgrid                   |
@@ -318,6 +320,7 @@ title: API ソース属性
 | Solarwinds                    | solarwinds                    | solarwinds                 |
 | Solr                          | Solr                          | Solr                       |
 | Spark                         | spark                         | spark                      |
+| Split.io                      | splitio                       | splitio                    |
 | Splunk                        | splunk                        | splunk                     |
 | Sql Server                    | sql server                    | sqlserver                  |
 | Ssh                           | ssh                           | ssh                        |

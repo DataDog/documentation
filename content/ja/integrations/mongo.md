@@ -43,12 +43,11 @@ draft: false
 git_integration_title: mongo
 integration_id: mongodb
 integration_title: MongoDB
-integration_version: 5.0.0
+integration_version: 6.0.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: mongo
-oauth: {}
 public_title: MongoDB
 short_description: 読み取り/書き込みのパフォーマンス、最も使用されたレプリカ、収集メトリクスなどを追跡。
 supported_os:
@@ -88,7 +87,7 @@ MongoDB を Datadog に接続して、以下のことができます。
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 MongoDB チェックは [Datadog Agent][2] パッケージに含まれています。追加でインストールする必要はありません。
 
@@ -108,15 +107,12 @@ Mongo シェルで、`admin` データベースに Datadog Agent 用の読み取
 ```shell
 # 管理者ユーザーとして認証します。
 use admin
-db.auth("admin", "<MongoDB_管理者パスワード>")
+db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
 
-# MongoDB 2.x では、addUser コマンドを使用します。
-db.addUser("datadog", "<一意のパスワード>", true)
-
-# MongoDB 3.x 以降では、createUser コマンドを使用します。
+# Datadog Agent のユーザーを作成します。
 db.createUser({
   "user": "datadog",
-  "pwd": "<一意のパスワード>",
+  "pwd": "<UNIQUEPASSWORD>",
   "roles": [
     { role: "read", db: "admin" },
     { role: "clusterMonitor", db: "admin" },
@@ -139,15 +135,12 @@ Mongo シェルで、プライマリに対して認証し、`admin` データベ
 ```shell
 # 管理者ユーザーとして認証します。
 use admin
-db.auth("admin", "<MongoDB_管理者パスワード>")
+db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
 
-# MongoDB 2.x では、addUser コマンドを使用します。
-db.addUser("datadog", "<一意のパスワード>", true)
-
-# MongoDB 3.x 以降では、createUser コマンドを使用します。
+# Datadog Agent のユーザーを作成します。
 db.createUser({
   "user": "datadog",
-  "pwd": "<一意のパスワード>",
+  "pwd": "<UNIQUEPASSWORD>",
   "roles": [
     { role: "read", db: "admin" },
     { role: "clusterMonitor", db: "admin" },
@@ -199,15 +192,12 @@ instances:
 ```shell
 # 管理者ユーザーとして認証します。
 use admin
-db.auth("admin", "<MongoDB_管理者パスワード>")
+db.auth("admin", "<YOUR_MONGODB_ADMIN_PASSWORD>")
 
-# MongoDB 2.x では、addUser コマンドを使用します。
-db.addUser("datadog", "<一意のパスワード>", true)
-
-# MongoDB 3.x 以降では、createUser コマンドを使用します。
+# Datadog Agent のユーザーを作成します。
 db.createUser({
   "user": "datadog",
-  "pwd": "<一意のパスワード>",
+  "pwd": "<UNIQUEPASSWORD>",
   "roles": [
     { role: "read", db: "admin" },
     { role: "clusterMonitor", db: "admin" },
@@ -557,7 +547,9 @@ Agent コンテナで必要な環境変数
 
 メトリクスの詳細については、[MongoDB 3.0 マニュアル][4]を参照してください。
 
-**注**: 次のメトリクスは、デフォルトでは収集されません。これらを収集するには、`mongo.d/conf.yaml` ファイルで `additional_metrics` パラメーターを使用してください。
+#### 追加のメトリクス
+
+次のメトリクスは、デフォルトでは収集**されません**。これらを収集するには、`mongo.d/conf.yaml` ファイルで `additional_metrics` パラメーターを使用してください。
 
 | メトリクスのプレフィックス            | 収集するために `additional_metrics` に追加する項目 |
 | ------------------------ | ------------------------------------------------- |
@@ -597,7 +589,7 @@ Agent コンテナで必要な環境変数
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/mongo/images/mongo_dashboard.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.mongodb.org/manual/reference/command/dbStats
 [5]: https://docs.datadoghq.com/ja/help/

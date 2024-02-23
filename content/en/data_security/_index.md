@@ -14,15 +14,18 @@ further_reading:
 - link: "/tracing/configure_data_security/"
   tag: "Documentation"
   text: "Tracing Data Security"
-- link: "/real_user_monitoring/browser/modifying_data_and_context/"
+- link: "/data_security/real_user_monitoring/"
   tag: "Documentation"
   text: "RUM Data Security"
 - link: "/real_user_monitoring/session_replay/privacy_options"
   tag: "Documentation"
   text: "Session Replay Privacy Options"
-- link: "/account_management/org_settings/sensitive_data_detection/"
+- link: "/sensitive_data_scanner/"
   tag: "Documentation"
   text: "Sensitive Data Scanner"
+cascade:
+    algolia:
+        rank: 70
 ---
 
 <div class="alert alert-info">This page is about the tools and security for protecting data sent to Datadog. If you're looking for cloud and application security products and features, see the <a href="/security/" target="_blank">Security</a> section.</div>
@@ -108,7 +111,7 @@ The Database Monitoring Agent obfuscates all query bind parameters sent to the D
 
 ## Other sources of potentially sensitive data 
 
-In addition to the sensitive data that you can automatically scrub, obfuscate, and otherwise avoid collecting, a lot of the data collected by Datadog is the names and descriptions of things.  We recommend not including private or personal information in the text you are sending.  Consider the following (non-exhaustive) list of text data you send to Datadog in the intended use of the product:
+In addition to the sensitive data that you can automatically scrub, obfuscate, and otherwise avoid collecting, a lot of the data collected by Datadog is the names and descriptions of things. We recommend not including private or personal information in the text you are sending. Consider the following (non-exhaustive) list of text data you send to Datadog in the intended use of the product:
 
 Metadata and tags
 : Metadata consists primarily of [tags][24] in the `key:value` format, for example, `env:prod`. Metadata is used by Datadog to filter and group data to help you derive meaningful information. 
@@ -143,12 +146,12 @@ Continuous Integration pipelines and tests
 [2]: https://www.datadoghq.com/legal/privacy/
 [3]: /developers/dogstatsd/
 [4]: /data_security/agent/
-[5]: /agent/guide/secrets-management/
+[5]: /agent/configuration/secrets-management/
 [6]: /integrations/amazon_web_services/
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
 [8]: /integrations/azure/
 [9]: /integrations/google_cloud_platform/
-[10]: /account_management/org_settings/sensitive_data_detection/
+[10]: /sensitive_data_scanner/
 [11]: /data_security/logs/
 [12]: /logs/guide/control-sensitive-logs-data/
 [13]: /agent/logs/advanced_log_collection
@@ -159,7 +162,7 @@ Continuous Integration pipelines and tests
 [18]: /tracing/configure_data_security/
 [19]: /serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /data_security/synthetics/
-[21]: /real_user_monitoring/browser/modifying_data_and_context/
+[21]: /real_user_monitoring/browser/advanced_configuration/
 [22]: /real_user_monitoring/session_replay/privacy_options
 [23]: /database_monitoring/data_collected/#sensitive-information
 [24]: /getting_started/tagging/

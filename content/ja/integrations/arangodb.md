@@ -37,12 +37,11 @@ draft: false
 git_integration_title: arangodb
 integration_id: arangodb
 integration_title: ArangoDB
-integration_version: 1.3.0
+integration_version: 1.4.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: arangodb
-oauth: {}
 public_title: ArangoDB
 short_description: ArangoDB の構成に関するメトリックスを追跡します。
 supported_os:
@@ -82,7 +81,7 @@ Datadog-ArangoDB インテグレーションを有効にすると、以下のこ
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]を参照してこの手順を行ってください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 ArangoDB チェックは [Datadog Agent][3] パッケージに含まれています。
 

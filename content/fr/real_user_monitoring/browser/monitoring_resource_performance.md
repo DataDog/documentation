@@ -16,7 +16,7 @@ kind: documentation
 title: Surveillance des performances de ressources
 ---
 
-LE SDK RUM Browser recueille les ressources de chaque vue RUM (chargement de page) : [XMLHttpRequest][1] (XHR), requêtes Fetch, mais également les images, les fichiers CSS, les ressources JavaScript et les fichiers de police. Un événement de ressource RUM est généré pour chaque ressource, avec des métadonnées et des durées précises.
+Le SDK RUM Browser recueille les ressources de chaque vue RUM (chargement de page) : [XMLHttpRequest][1] (XHR), requêtes Fetch, mais également les images, les fichiers CSS, les ressources JavaScript et les fichiers de police. Un événement de ressource RUM est généré pour chaque ressource, avec des métadonnées et des durées précises.
 
 Les ressources RUM héritent de tout le contexte lié à la vue RUM active au moment de la collecte.
 
@@ -30,7 +30,7 @@ Pour bénéficier d'une réelle visibilité de bout en bout sur vos requêtes au
 
 Consultez la section [Associer RUM à vos traces][2] pour en savoir plus sur la configuration de cette fonctionnalité.
 
-{{< img src="real_user_monitoring/browser/resource_performance_graph.png" alt="Informations sur les traces de l'APM pour une ressource RUM"  >}}
+{{< img src="real_user_monitoring/browser/resource_performance_graph.png" alt="Informations sur les traces APM pour une ressource RUM" >}}
 
 ## Durée et métriques des ressources
 

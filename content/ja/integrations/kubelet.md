@@ -28,12 +28,11 @@ draft: false
 git_integration_title: kubelet
 integration_id: kubelet
 integration_title: Kubelet
-integration_version: 7.6.0
+integration_version: 7.9.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: kubelet
-oauth: {}
 public_title: Kubelet
 short_description: Kubelet からコンテナ統計を収集。
 supported_os:
@@ -124,7 +123,7 @@ kubeletArguments:
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [3]: https://github.com/DataDog/integrations-core/blob/master/kubelet/datadog_checks/kubelet/data/conf.yaml.default
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information

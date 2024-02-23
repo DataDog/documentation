@@ -4,6 +4,9 @@ aliases:
 - /ja/metrics/introduction/
 - /ja/graphing/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph/
 - /ja/dashboards/faq/inconsistent-sum-aggregation-between-different-time-windows-on-graph/
+cascade:
+  algolia:
+    rank: 70
 kind: documentation
 title: メトリクス
 ---
@@ -59,11 +62,11 @@ Datadog では、メトリクスデータは値とタイムスタンプを持つ
 
 #### 追加の視覚化
 
-Datadog は、ユーザーがメトリクスを簡単にグラフ化して表示できるように、さまざまな視覚化オプションを提供しています。メトリクスのユーザーがよく便利だと感じる視覚化製品は 2 つあります。
+Datadog は、メトリクスを簡単にグラフ化して表示できるように、さまざまな視覚化オプションを提供しています。
 
-メトリクスクエリは、開始時に同じ 2 つの評価ステップで構成されています。1) 時間集計、2) 空間集計です。詳しくは[メトリクスクエリの構造][6]を参照してください。
+メトリクスクエリは、開始時に同じ 2 つの評価ステップ、時間集計と空間集計で構成されています。詳しくは[メトリクスクエリの構造][6]を参照してください。
 
-{{< whatsnext desc="メトリクスのユーザーがよく便利だと感じる視覚化製品">}}
+{{< whatsnext desc="メトリクスのユーザーがよく便利だと感じる 2 つの視覚化製品">}}
     {{< nextlink href="dashboards/widgets/query_value/" >}}<u>クエリ値ウィジェット</u> - この 2 つのステップの結果を 1 つの値に還元します。{{< /nextlink >}}
     {{< nextlink href="/dashboards/widgets/top_list/" >}}<u>トップリスト</u> - グループごとに 1 つの値を返します。{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -173,7 +176,8 @@ Datadog Agent が、送信するデータポイントごとに Datadog のサー
 {{< whatsnext desc="メトリクスに関するトピックを続行する場合は、以下を確認してください。">}}
     {{< nextlink href="/metrics/advanced-filtering" >}}<u>高度なフィルタリング</u> - フィルターを使用して返されたメトリクスのスコープを絞り込みます。{{< /nextlink >}}
     {{< nextlink href="/metrics/distributions" >}}<u>ディストリビューションメトリクス</u> - データセット全体のグローバルパーセンタイルを計算します。{{< /nextlink >}}
-    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without LimitsTM</u> - Metrics without LimitsTM を使って、タグや集計構成によりカスタムメトリクスのボリュームを制御する方法をご紹介します。{{< /nextlink >}}
+    {{< nextlink href="metrics/metrics-without-limits/" >}}<u>Metrics without Limits™</u> - Metrics without Limits™ を使って、タグや集計構成によりカスタムメトリクスのボリュームを制御する方法をご紹介します。{{< /nextlink >}}
+    {{< nextlink href="https://dtdg.co/fe" >}}<u>Foundation Enablement</u> - メトリクスの可能性を最大限に引き出すインタラクティブなセッションに参加できます。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /ja/logs
@@ -196,5 +200,5 @@ Datadog Agent が、送信するデータポイントごとに Datadog のサー
 [18]: /ja/dashboards/functions/
 [19]: /ja/metrics/distributions/
 [20]: https://app.datadoghq.com/metric/summary
-[21]: /ja/account_management/billing/usage_details/
+[21]: /ja/account_management/plan_and_usage/usage_details/
 [22]: /ja/metrics/summary/

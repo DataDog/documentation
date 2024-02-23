@@ -20,7 +20,7 @@ Data Streams Monitoring を開始するには、Datadog Agent と Java ライブ
 * [Datadog Agent v7.34.0 以降][1]
 * [Java Agent v1.9.0 以降で APM を有効にする][2]
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Java は自動インスツルメンテーションを使用して、Data Streams Monitoring がエンドツーエンドのレイテンシーやキューとサービス間の関係を測定するために必要な追加のメタデータを挿入し抽出します。Data Streams Monitoring を有効にするには、Kafka または RabbitMQ にメッセージを送信する (またはメッセージを消費する) サービス上で `DD_DATA_STREAMS_ENABLED` 環境変数を `true` に設定します。
 

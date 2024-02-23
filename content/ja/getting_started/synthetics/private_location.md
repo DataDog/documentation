@@ -17,7 +17,7 @@ title: プライベートロケーションの概要
 ---
 
 <div class="alert alert-info">
-IE11 ブラウザテストを実行するための Windows プライベートロケーションベータ版への追加をご希望の場合は、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>にご連絡ください。
+Windows プライベートロケーションベータ版への追加をご希望の場合は、<a href="https://docs.datadoghq.com/help/">Datadog サポート</a>にご連絡ください。
 </div>
 
 ## 概要
@@ -42,28 +42,34 @@ IE11 ブラウザテストを実行するための Windows プライベートロ
 
 ## プライベートロケーションを作成する
 
-1. [Docker][4] をマシンにインストールします。すばやく開始するには、Docker を [Vagrant Ubuntu 16.04][2] などの仮想マシンにインストールします。
+1. Unix 系マシンに [Docker][4] をインストールするか、[Podman][10] などの他のコンテナランタイムを使用します。
+
+   すばやく開始するには、Docker を [Vagrant Ubuntu 22.04][11] などの仮想マシンにインストールします。
+
 2. Datadog サイトで **[UX Monitoring][5]** にカーソルを合わせ、**Settings** > **Private Locations** の順に選択します。
 3. **Add Private Location** をクリックします。
-4. プライベートロケーションの詳細を入力します。`Name` と `API key` フィールドのみ必須です。Windows 用のプライベートロケーションを構成する場合は、**This is a Windows Private Location** を選択します。
+4. プライベートロケーションの詳細を入力します。`Name` と `API key` フィールドのみが必須です。
 5. **Save Location and Generate Configuration File** をクリックして、ワーカーのプライベートロケーションと関連付けられたコンフィギュレーションファイルを生成します。
 6. プライベートロケーションをインストールした場所によっては、コンフィギュレーションファイルに追加のパラメーターを入力する必要があります。
     - プロキシをご利用の場合は、URL を`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>` のように入力します。
     - 予約した IP をブロックする場合は、**Block reserved IPs** を切り替えて、IP 範囲を入力します。
 
-   詳しくは、[プライベートロケーションの構成オプション][6]、[プライベートロケーションからの Synthetic テストの実行][7]をご覧ください。
+    詳しくは、[プライベートロケーションの構成オプション][6]、[プライベートロケーションからの Synthetic テストの実行][7]をご覧ください。
+
 7. プライベートロケーションコンフィギュレーションファイルをコピーして、作業ディレクトリに貼り付けます。
 
     **注**: コンフィギュレーションファイルには、プライベートロケーションの認証、テストコンフィギュレーションの復号、テスト結果の暗号といった秘密情報が含まれています。Datadog は秘密情報を保存しないため、**プライベートロケーション**作成フォームを離れる前に、これらの情報をローカルに保存してください。**プライベートロケーションにワーカーをさらに追加するには、この秘密情報を再度参照できる必要があります。**
 8. 準備ができたら、**View Installation Instructions** をクリックします。
 9. プライベートロケーションワーカーを実行したい環境に応じて、インストール手順に従います。
-10. 例えば Docker を使う場合、Docker の `run` コマンドとコンフィギュレーションファイルを使って、ワーカーをスタンドアロンコンテナとして起動します。
+10. Docker を使っている場合、Docker の `run` コマンドとコンフィギュレーションファイルを使って、ワーカーをスタンドアロンコンテナとして起動します。
 
     ```shell
     docker run --rm -v $PWD/worker-config-<LOCATION_ID>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker
     ```
 
     このコマンドは、Docker コンテナを起動し、テストを実行するためのプライベートロケーションを準備します。Datadog は、適切な再起動ポリシーでコンテナをデタッチドモードで実行することを推奨しています。
+
+    <div class="alert alert-info">Podman などの他のコンテナランタイムを使用することができます。詳しくは、<a href="https://docs.datadoghq.com/synthetics/private_locations/?tab=podman#install-your-private-location">プライベートロケーションのドキュメント</a>をご覧ください。</div>
 
 11. プライベートロケーションが Datadog に正しく報告されている場合、ヘルスステータスが **Private Location Status** と **Settings** ページの **Private Locations** リストに `OK` と表示されます。
 
@@ -77,6 +83,9 @@ IE11 ブラウザテストを実行するための Windows プライベートロ
     2022-02-28 16:20:04 [info]: Fetching 10 messages from queue - 10 slots available
     ```
 12. 内部エンドポイントのテストが完了したら、**OK** をクリックします。
+
+
+
 ## プライベートロケーションで Synthetics テストを実行する
 
 管理ロケーションのように、新しいプライベートロケーションを Synthetics テストで使用します。
@@ -92,7 +101,7 @@ IE11 ブラウザテストを実行するための Windows プライベートロ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/synthetics/cicd_integrations
+[1]: /ja/continuous_testing/cicd_integrations
 [2]: https://console.cloud.google.com/gcr/images/datadoghq/GLOBAL/synthetics-private-location-worker?pli=1
 [3]: /ja/getting_started/synthetics/
 [4]: https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-docker-ce
@@ -101,3 +110,5 @@ IE11 ブラウザテストを実行するための Windows プライベートロ
 [7]: /ja/synthetics/private_locations/?tab=docker#blocking-reserved-ips
 [8]: /ja/getting_started/synthetics/api_test#create-a-multistep-api-test
 [9]: /ja/getting_started/synthetics/browser_test
+[10]: https://podman.io/
+[11]: https://app.vagrantup.com/ubuntu/boxes/jammy64

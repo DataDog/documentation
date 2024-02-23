@@ -38,7 +38,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: openldap
-oauth: {}
 public_title: OpenLDAP
 short_description: cn=monitor バックエンドを使用して OpenLDAP サーバーからメトリクスを収集
 supported_os:
@@ -69,7 +68,7 @@ OpenLDAP インテグレーションを使用すると、OpenLDAP サーバー�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 OpenLDAP インテグレーションは Agent とパッケージ化されています。OpenLDAP メトリクスの収集を開始するには、以下を実行します。
 

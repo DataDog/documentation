@@ -20,13 +20,16 @@ further_reading:
 - link: /logs/faq/log-collection-troubleshooting-guide
   tag: Documentation
   text: Guide de dépannage pour la collecte de logs
+- link: /glossary/#tail
+  tag: Glossaire
+  text: Entrée du glossaire pour le terme « tail »
 kind: documentation
 title: Collecte de logs avec PHP
 ---
 
 ## Présentation
 
-Pour envoyer vos logs PHP à Datadog, activez la journalisation au sein d'un fichier et suivez ce fichier avec l'Agent Datadog. Les exemples de configuration ci-dessous utilisent les bibliothèques de journalisation [Monolog][8], [Zend-Log][9] et [Symfony][10].
+Pour envoyer vos logs PHP à Datadog, activez la journalisation au sein d'un fichier et [suivez][14] ce fichier avec l'Agent Datadog. Les exemples de configuration ci-dessous utilisent les bibliothèques de journalisation [Monolog][8], [Zend-Log][9] et [Symfony][10].
 
 ## Implémentation
 
@@ -473,7 +476,7 @@ class AppServiceProvider extends ServiceProvider
         $monolog->pushProcessor(function ($record) use ($useJson) {
             $context = \DDTrace\current_context();
             if ($useJson === true) {
-                $record['dd'] = [
+                $record['extra']['dd'] = [
                     'trace_id' => $context['trace_id'],
                     'span_id'  => $context['span_id'],
                 ];
@@ -550,3 +553,4 @@ Ajoutez ce qui suit :
 [11]: /fr/agent/logs/?tab=tailfiles#activate-log-collection
 [12]: /fr/agent/logs/?tab=tailfiles#custom-log-collection
 [13]: /fr/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[14]: /fr/glossary/#tail

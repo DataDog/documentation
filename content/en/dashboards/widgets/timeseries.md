@@ -1,6 +1,7 @@
 ---
 title: Timeseries Widget
 kind: documentation
+widget_type: timeseries
 description: "Display the evolution of one or more metrics, log events, indexed spans, or process metrics over time."
 aliases:
     - /graphing/widgets/timeseries/
@@ -51,21 +52,13 @@ For all graph types, Datadog offers various color options to differentiate multi
 | Palette     | Description                                                                                                 |
 |-------------|-------------------------------------------------------------------------------------------------------------|
 | Classic     | The simple colors light blue, dark blue, light purple, purple, light yellow, and yellow (colors repeat).    |
-| Categorical | Using a set of 16 colors, applies a consistent color for each series of data across all timeseries widgets. |
-| Purple      | A gradient color scheme made from purple.                                                                   |
-| Cool        | A gradient color scheme made from green and blue.                                                           |
-| Warm        | A gradient color scheme made from yellow and orange.                                                        |
-| Orange      | A gradient color scheme made from orange.                                                                   |
-| Gray        | A gradient color scheme made from gray.                                                                     |
-| Red         | A gradient color scheme made from red.                                                                      |
-| Green       | A gradient color scheme made from green.                                                                    |
-| Blue        | A gradient color scheme made from blue.                                                                     |
+| Consistent | Using a set of 16 colors, applies a consistent color for each series of data across all widgets for each tag group. |
 
-For line graphs, different metrics can be assigned specific palettes by separating the queries in JSON.
+For line graphs, different metrics can be assigned specific palettes by separating the queries in JSON. For more information, see the guide for [Selecting the right colors for your graphs][6].
 
 ### Metric aliasing
 
-Each query or formula, along with any [filtering tags][6], can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names or long lists of filters. At the end of your query or formula, click on **as...** and enter your metric alias:
+Each query or formula, along with any [filtering tags][7], can be aliased. The alias overrides the display on the graph and legend, which is useful for long metric names or long lists of filters. At the end of your query or formula, click on **as...** and enter your metric alias:
 
 {{< img src="dashboards/widgets/timeseries/metric_alias.png" alt="Adding an alias to a search query in the Timeseries widget editor" style="width:100%;" >}}
 
@@ -73,7 +66,7 @@ Each query or formula, along with any [filtering tags][6], can be aliased. The a
 
 The event overlay supports all data sources. This allows for easier correlation between business events and data from any Datadog service.
 
-With the event overlay, you can quickly see how actions within the organization impact application and infrastructure performance. Here are some example use cases:
+With the event overlay, you can see how actions within the organization impact application and infrastructure performance. Here are some example use cases:
 - RUM error rates with deployment events overlaid
 - Correlating CPU usage with events related to provisioning extra servers
 - Correlating egress traffic with suspicious login activity
@@ -81,30 +74,30 @@ With the event overlay, you can quickly see how actions within the organization 
 
 {{< img src="/dashboards/querying/event_overlay_example.png" alt="Timeseries widgets showing RUM error rates with deployment events overlaid" style="width:100%;" >}}
 
-You can add events from related systems to add more context to your graph, such as GitHub commits, Jenkins deploys, and Docker creation events. Click **Add Event Overlay** in the **Event Overlays** section and enter a query to display those events. 
+You can add events from related systems to add more context to your graph, such as GitHub commits, Jenkins deploys, and Docker creation events. Click **Add Event Overlay** in the **Event Overlays** section and enter a query to display those events.
 
-Use the same query format as for the [Event Explorer][7], for example:
+Use the same query format as for the [Event Explorer][8], for example:
 
 | Query                       | Description                                                |
 |-----------------------------|------------------------------------------------------------|
 | `sources:jenkins`           | Shows all events from the Jenkins source.                  |
 | `tag:role:web`              | Shows all events with the `role:web` tag.                  |
-| `tags:$<TEMPLATE_VARIABLE>` | Shows all events from the selected [template variable][8]. |
+| `tags:$<TEMPLATE_VARIABLE>` | Shows all events from the selected [template variable][9]. |
 
 ### Markers
 
 To add markers for additional data sets, click **Add Marker** in the **Markers** section.
 
 1. Select a Line or Range and input a value or a range or values.
-2. In the **Show as** field, select an alerting status/color and choose from a solid, bold, or dashed horizontal line. 
-3. To add a label that displays on the bottom left of the timeseries widget, define a value for the Y-Axis and click the **Label** checkbox. 
+2. In the **Show as** field, select an alerting status/color and choose from a solid, bold, or dashed horizontal line.
+3. To add a label that displays on the bottom left of the timeseries widget, define a value for the Y-Axis and click the **Label** checkbox.
 
 ### Y-Axis controls
 
-Y-axis controls are available in the UI and in the JSON editor. You can set the value and type of the y-axis in order to:
+Y-axis controls are available in the UI and in the JSON editor. You can set the value and type of the y-axis to:
 
 * Clip the y-axis to specific ranges.
-* Automatically change y-axis bounds based on a percentage or an absolute value threshold. This threshold can be applied to one or both ends of the graph (lower and upper) in order to remove the "outliers" series.
+* Automatically change y-axis bounds based on an absolute value threshold. This threshold can be applied to one or both ends of the graph (lower and upper) to remove the "outlier" series.
 * Change the y-axis scale from linear to log, pow, or sqrt.
 
 The following configuration options are available:
@@ -133,19 +126,17 @@ For timeboards, legends display automatically when a dashboard is set to L or XL
 
 To add a context link in the dropdown menu that appears when you click in a dashboard widget, click **Add a Context Link** in the **Context Links** section.
 
-For more information about editing and deleting context links, see [Context Links][9].
+For more information about editing and deleting context links, see [Context Links][10].
 
 ### Full screen
 
-In addition to the [standard full screen options][10], you can apply quick functions, compare to previous time periods, adjust the Y scale, save changes, or save as a new graph.
+In addition to the [standard full screen options][11], you can apply quick functions, compare to previous time periods, adjust the Y scale, save changes, or save as a new graph.
 
-For more information, see [Explore your data in full-screen graph mode][11].
+For more information, see [Explore your data in full-screen graph mode][12].
 
 ## API
 
-This widget can be used with the **Dashboards API**. See the [Dashboards API documentation][12] for additional reference.
-
-The dedicated [widget JSON schema definition][13] for the timeseries widget is:
+This widget can be used with the **[Dashboards API][13]**. See the following table for the [widget JSON schema definition][14]:
 
 {{< dashboards-widgets-api >}}
 
@@ -158,11 +149,12 @@ The dedicated [widget JSON schema definition][13] for the timeseries widget is:
 [3]: /dashboards/querying/
 [4]: /tracing/trace_explorer/query_syntax/#search-bar
 [5]: /logs/search_syntax/
-[6]: /dashboards/querying/#filter
-[7]: /events/
-[8]: /dashboards/template_variables/
-[9]: /dashboards/guide/context-links/
-[10]: /dashboards/widgets/#full-screen
-[11]: https://www.datadoghq.com/blog/full-screen-graphs
-[12]: /api/v1/dashboards/
-[13]: /dashboards/graphing_json/widget_json/
+[6]: /dashboards/guide/widget_colors/
+[7]: /dashboards/querying/#filter
+[8]: /events/
+[9]: /dashboards/template_variables/
+[10]: /dashboards/guide/context-links/
+[11]: /dashboards/widgets/#full-screen
+[12]: https://www.datadoghq.com/blog/full-screen-graphs
+[13]: /api/latest/dashboards/
+[14]: /dashboards/graphing_json/widget_json/

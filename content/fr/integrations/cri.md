@@ -1,42 +1,65 @@
 ---
+app_id: cri
+app_uuid: 81805522-0f55-45a4-95f6-23dd9ea46361
 assets:
   dashboards:
     cri: assets/dashboards/overview.json
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: cri.cpu.usage
+      metadata_path: metadata.csv
+      prefix: cri.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: CRI
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
-  - containers
-creates_events: false
-ddtype: check
+- containers
+- kubernetes
 dependencies:
-  - https://github.com/DataDog/integrations-core/blob/master/cri/README.md
-display_name: CRI
+- https://github.com/DataDog/integrations-core/blob/master/cri/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: cri
-guid: 6eb96c6a-3e2d-4236-9387-fa3b0c455336
 integration_id: cri
 integration_title: CRI
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: cri.
-metric_to_check: cri.cpu.usage
-name: CRI
-public_title: Intégration Datadog/CRI
+manifest_version: 2.0.0
+name: cri
+public_title: CRI
 short_description: Surveillez toutes vos métriques CRI avec Datadog.
-support: core
 supported_os:
-  - linux
+- linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Containers
+  - Category::Kubernetes
+  - Supported OS::Linux
+  configuration: README.md#Setup
+  description: Surveillez toutes vos métriques CRI avec Datadog.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: CRI
 ---
+
+
+
 ## Présentation
 
 Ce check surveille une interface de runtime de conteneur (Container Runtime Interface ou CRI).
 
-## Configuration
+## Implémentation
 
 ### Installation
 
@@ -111,7 +134,7 @@ CRI n'inclut aucun événement.
 
 Besoin d'aide ? Contactez [l'assistance Datadog][5].
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/cri.d/conf.yaml.default
 [3]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [4]: https://github.com/DataDog/integrations-core/blob/master/cri/metadata.csv

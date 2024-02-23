@@ -13,6 +13,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/docker-logging/"
   tag: "Blog"
   text: "Docker Logging Best Practices"
+- link: "/glossary/#tail"
+  tag: Glossary
+  text: 'Glossary entry for "tail"'
 ---
 
 <div class="alert alert-info">Datadog recommends using <b>STDOUT/STDERR</b> to collect container logs.</div>
@@ -162,4 +165,4 @@ Logs Agent
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv6v7
+[1]: /agent/configuration/agent-configuration-files/?tab=agentv6v7

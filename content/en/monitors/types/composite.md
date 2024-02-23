@@ -10,7 +10,7 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Configure your monitor notifications"
-- link: "/monitors/notify/downtimes/"
+- link: "/monitors/downtimes/"
   tag: "Documentation"
   text: "Schedule a downtime to mute a monitor"
 - link: "/monitors/manage/status/"
@@ -25,7 +25,7 @@ Composite monitors combine individual monitors into one monitor to define more s
 
 Choose existing monitors to create a composite monitor, for example: monitor `A` and monitor `B`. Then set a trigger condition using Boolean operators, such as `A && B`. The composite monitor triggers when the individual monitors simultaneously have values that cause the composite monitor's trigger condition to be true.
 
-{{< img src="monitors/monitor_types/composite/overview.jpg" alt="composite example"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/overview.jpg" alt="composite example" style="width:80%;">}}
 
 For configuration purposes, a composite monitor is independent of its constituent monitors. The notification policy of a composite monitor can be modified without affecting the policies of its constituent monitors, and vice versa. Furthermore, deleting a composite monitor does not delete the constituent monitors. A composite monitor does not own other monitors—it only uses their results. Also, many composite monitors may reference the same individual monitor.
 
@@ -47,11 +47,11 @@ Choose up to **10** individual monitors to use in a composite monitor. Monitors 
 
 If you choose a multi alert monitor, the UI shows the monitor's group-by clause and how many unique sources are currently reporting, for example: `Returns 5 host groups`. When you combine multi alert monitors, this information helps you choose monitors that pair together naturally.
 
-{{< img src="monitors/monitor_types/composite/composite_example.jpg" alt="composite example"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/composite_example.jpg" alt="composite example"style="width:80%;">}}
 
 You should choose monitors that have the same groups. Otherwise, the UI warns you that such a composite monitor may never trigger:
 
-{{< img src="monitors/monitor_types/composite/composite_common_group.jpg" alt="composite common groups"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/composite_common_group.jpg" alt="composite common groups" style="width:80%;">}}
 
 
 Even if you choose multi alert monitors with the same groups, you might still see a `Group Matching Error` if the monitors have no common reporting sources (also called common groupings). If there are no common reporting sources, Datadog cannot compute a status for the composite monitor, and it never triggers. However, you _can_ ignore the warning and create the monitor anyway. For more details, see [How composite monitors select common reporting sources](#select-monitors-and-set-triggering-conditions).
@@ -82,7 +82,7 @@ For detailed instructions on the advanced alert options (auto resolve, etc.), se
 
 ### Notifications
 
-For instructions on using template variables from a composite monitor's constituent monitors in your notifications, see [composite monitor variables][5]. For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
+For instructions on using template variables from a composite monitor's constituent monitors in your notifications, see [composite monitor variables][4]. For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][3] page.
 
 ### API
 
@@ -125,19 +125,21 @@ Consider a composite monitor that uses two individual monitors: `A` and `B`. The
 | Monitor A   | Monitor B   | Condition   | Notify No Data   | Composite status | Alert triggered? |
 |-------------|-------------|-------------|------------------|------------------|------------------|
 | Alert (T)   | Warn (T)    | `A && B`    |                  | Warn (T)         | {{< X >}}        |
-| Alert (T)   | Warn (T)    | `A \|\| B`    |                  | Alert (T)        | {{< X >}}        |
+| Alert (T)   | Warn (T)    | `A \|\| B`  |                  | Alert (T)        | {{< X >}}        |
+| Alert (T)   | Ok (F)      | `A && B`    |                  | OK (F)           |                  |
+| Alert (T)   | Ok (F)      | `A \|\| B`  |                  | Alert (T)        | {{< X >}}        |
 | Warn (T)    | Ok (F)      | `A && B`    |                  | OK (F)           |                  |
-| Warn (T)    | Ok (F)      | `A \|\| B`    |                  | Warn (T)         | {{< X >}}        |
+| Warn (T)    | Ok (F)      | `A \|\| B`  |                  | Warn (T)         | {{< X >}}        |
 | No Data (T) | Warn (T)    | `A && B`    | True             | No Data (T)      | {{< X >}}        |
-| No Data (T) | Warn (T)    | `A \|\| B`    | True             | Warn (T)         | {{< X >}}        |
+| No Data (T) | Warn (T)    | `A \|\| B`  | True             | Warn (T)         | {{< X >}}        |
 | No Data (T) | Warn (T)    | `A && B`    | False            | Last known       |                  |
-| No Data (T) | Warn (T)    | `A \|\| B`    | False            | Warn (T)         | {{< X >}}        |
+| No Data (T) | Warn (T)    | `A \|\| B`  | False            | Warn (T)         | {{< X >}}        |
 | No Data (T) | OK (F)      | `A && B`    | False            | OK (F)           |                  |
-| No Data (T) | OK (F)      | `A \|\| B`    | False            | Last known       |                  |
+| No Data (T) | OK (F)      | `A \|\| B`  | False            | Last known       |                  |
 | No Data (T) | OK (F)      | `A && B`    | True             | OK (F)           |                  |
-| No Data (T) | OK (F)      | `A \|\| B`    | True             | No Data (T)      | {{< X >}}        |
+| No Data (T) | OK (F)      | `A \|\| B`  | True             | No Data (T)      | {{< X >}}        |
 | No Data (T) | No Data (T) | `A && B`    | True             | No Data (T)      | {{< X >}}        |
-| No Data (T) | No Data (T) | `A \|\| B`    | True             | No Data (T)      | {{< X >}}        |
+| No Data (T) | No Data (T) | `A \|\| B`  | True             | No Data (T)      | {{< X >}}        |
 
 **Note**: When the composite has `notify_no_data` to false, and the result of the evaluation of the sub-monitors should end up on a `No Data` status for the composite, the composite uses the last known state instead.
 
@@ -188,33 +190,10 @@ If the example above included a multi alert monitor `C` grouped by `service` wit
 In the case of a multi alert monitor split by two or more tags, a monitor group corresponds to the whole combination of tags.
 For example, if monitor `1` is a multi alert per `device,host`, and monitor `2` is a multi alert per `host`, a composite monitor can combine monitor `1` and monitor `2`.
 
-{{< img src="monitors/monitor_types/composite/multi-alert-1.png" alt="writing notification"  style="width:80%;">}}
+{{< img src="monitors/monitor_types/composite/multi-alert-1.png" alt="writing notification" style="width:80%;">}}
 
 However, consider monitor `3`, a multi alert per `host,url`. Monitor `1` and monitor `3` may not create a composite result because the groupings are too different:
-{{< img src="monitors/monitor_types/composite/multi-alert-2.png" alt="writing notification"  style="width:80%;">}}
-
-### New Group Delay and composite
-
-Setting [new_group_delay][4] is possible in composite monitors and if set and bigger than the value on the child monitors, it then overrides the value set on the child monitors.
-
-**Examples:**
-
-1. Composite with different new group delays on child monitors:
-
-    * monitor A: new_group_delay=120s
-    * monitor B: new_group_delay=60s
-    * composite: `A&&B`
-
-    When a new group appears, immediately, the composite monitor has this new group in OK state. After `60s`, the new group has the state from B in the composite monitor. After `120s`, the new group has its worst status among A and B in the composite.
-
-2. Composite with new group delay
-
-    * monitor A: new_group_delay=120s
-    * monitor B: new_group_delay=60s
-    * composite: new_group_delay=200s
-    * composite: `A&&B`
-
-    When a new group appears, immediately, the composite monitor has this new group in OK state. After `200s`, the new group has its worst status among A and B in the composite.
+{{< img src="monitors/monitor_types/composite/multi-alert-2.png" alt="writing notification" style="width:80%;">}}
 
 
 ## Further Reading
@@ -224,5 +203,4 @@ Setting [new_group_delay][4] is possible in composite monitors and if set and bi
 [1]: https://app.datadoghq.com/monitors#create/composite
 [2]: /monitors/configuration/#advanced-alert-conditions
 [3]: /monitors/notify/
-[4]: /monitors/configuration/?tab=thresholdalert#new-group-delay
-[5]: /monitors/notify/variables/?tab=is_alert#composite-monitor-variables
+[4]: /monitors/notify/variables/?tab=is_alert#composite-monitor-variables

@@ -1,22 +1,23 @@
 ---
-title: ログコンフィギュレーション
-kind: ドキュメント
-description: ログコンフィギュレーションページからログを処理、強化、制御、管理します
 aliases:
-  - /ja/logs/processing
+- /ja/logs/processing
+description: ログコンフィギュレーションページからログを処理、強化、制御、管理します
 further_reading:
-  - link: https://www.datadoghq.com/blog/logging-without-limits/
-    tag: ブログ
-    text: Logging without Limits* の詳細
-  - link: /logs/guide/
-    tag: ガイド
-    text: Datadog を使用したロギングに関する追加ガイド
+- link: https://www.datadoghq.com/blog/logging-without-limits/
+  tag: ブログ
+  text: Logging without Limits* の詳細
+- link: /logs/guide/
+  tag: ガイド
+  text: Datadog を使用したロギングに関する追加ガイド
+kind: ドキュメント
+title: ログコンフィギュレーション
 ---
+
 ## 概要
 
-Datadog Logging without Limits* は、ログの取り込みとインデックス作成を切り離します。[ログコンフィギュレーションセクション][1]から、インデックスを作成して保持するログ、またはアーカイブするログを選択し、トップレベルで設定とコントロールを管理します。
+Datadog Logging without Limits* は、ログの取り込みとインデックス作成を切り離します。[**Logs > Configuration**][1] のログ構成ページから、インデックスを作成して保持するログ、またはアーカイブするログを選択し、トップレベルで設定とコントロールを管理します。
 
-{{< img src="logs/log_configuration_overview.mp4" alt="Datadog アプリのログコンフィギュレーションセクション" video=true >}}
+{{< img src="logs/log_configuration_overview1.mp4" alt="Datadog アプリのログコンフィギュレーションセクション" video=true >}}
 
 ## コンフィギュレーションオプション
 

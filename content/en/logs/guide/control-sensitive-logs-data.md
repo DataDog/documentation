@@ -1,5 +1,5 @@
 ---
-title: Control sensitive logs data
+title: Control Sensitive Logs Data
 kind: guide
 aliases:
   - /logs/guide/restrict-access-to-sensitive-data-with-rbac
@@ -121,7 +121,7 @@ If you have a specific compliance questions or need help, contact Datadog [suppo
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/guide/logs-rbac/
-[2]: /account_management/org_settings/sensitive_data_detection/
+[2]: /sensitive_data_scanner/
 [3]: /account_management/org_settings/
 [4]: /logs/search_syntax/
 [5]: /logs/indexes

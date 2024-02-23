@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: crest-data-systems-microsoft-defender
 app_uuid: 137062cb-83a8-4c46-83e6-7a84efa859ef
 assets:
@@ -29,7 +31,7 @@ assets:
 author:
   homepage: https://www.crestdatasys.com
   name: Crest Data Systems
-  sales_email: sales@crestdatasys.com
+  sales_email: datadog-sales@crestdatasys.com
   support_email: datadog.integrations@crestdatasys.com
   vendor_id: crest-data-systems
 categories:
@@ -49,7 +51,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: crest_data_systems_microsoft_defender
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -114,25 +115,28 @@ tile:
 
 このインテグレーションは、Microsoft 365 Defender for Endpoint プラットフォームから、エンドポイントの詳細、脆弱性、アラート、インシデントを収集します。また、エンドポイント上の KB の欠落に関する情報も提供します。このインテグレーションは、エンドポイント上の KB の欠落を警告するためのさまざまなすぐに使えるダッシュボードとモニターを提供します。
 
+> 注: 4 つの異なるディフェンダーサービス (Endpoint、Cloud Apps、Office 365、Identity) の統合ソリューションをお求めの場合、Datadog の「Microsoft 365 Defender」インテグレーションをお勧めします。
+
 ### アラート設定
 
- - エンドポイントの欠落 KB
+- エンドポイントの欠落 KB
 
 ### ダッシュボード  
 
- - Microsoft 365 Defender エンドポイントの概要
- - エンドポイントの概要
- - アラートの概要
- - 脅威と脆弱性の概要
- - ソフトウェアの概要
- - インシデントの概要
+- Microsoft 365 Defender エンドポイントの概要
+- エンドポイントの概要
+- アラートの概要
+- 脅威と脆弱性の概要
+- ソフトウェアの概要
+- インシデントの概要
 
 ## サポート
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
 
- - メール: datadog.integrations@crestdatasys.com
- - Web サイト: [crestdatasys.com](https://www.crestdatasys.com/microsoft-365-defender-integration/)
+- サポートメール: datadog.integrations@crestdatasys.com
+- 営業メール: datadog-sales@crestdatasys.com
+- Web サイト: [crestdatasys.com](https://www.crestdatasys.com/microsoft-365-defender-integration/)
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-microsoft-defender" target="_blank">こちらをクリック</a>してください。

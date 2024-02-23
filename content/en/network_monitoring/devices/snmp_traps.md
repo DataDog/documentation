@@ -8,6 +8,10 @@ further_reading:
     text: "Monitor and diagnose network performance issues with SNMP Traps"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Network Device Monitoring is not supported for this site.</div>
+{{< /site-region >}}
+
 ## Overview
 
 SNMP Traps are notifications sent from an SNMP-enabled device to an SNMP manager. When a network device encounters unusual activity, such as a sudden state change on a piece of equipment, the device triggers an SNMP Trap event.
@@ -117,12 +121,15 @@ You can write these mappings by hand, or generate mappings from a list of MIBs u
 Put all your MIBs into a dedicated folder. Then, run:
 `ddev meta snmp generate-traps-db -o ./output_dir/ /path/to/my/mib1 /path/to/my/mib2 /path/to/my/mib3 ...`
 
-If your MIBs have dependencies, `ddev` fetches them online if they can be found. Alternatively, put all your dependencies in a separate folder and use the `--mib-sources` parameter to specify this folder.
+If your MIBs have dependencies, `ddev` fetches them online if they can be found.
+
+If there are errors due to missing dependencies and you have access to the missing MIB files, put the files in a separate folder and use the `--mib-sources <DIR>` parameter so that ddev knows where to find them. Make sure that each filename is the same as the MIB name (for example, `SNMPv2-SMI` and not `snmp_v2_smi.txt`).
+
 
 
 
 [1]: /monitors/
 [2]: /help/
 [3]: /network_monitoring/devices
-[4]: /developers/integrations/new_check_howto/?tab=configurationtemplate#developer-toolkit
+[4]: /developers/integrations/python
 [5]: https://pypi.org/project/pysmi/

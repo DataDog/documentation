@@ -8,9 +8,9 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
-    - link: 'profiler/search_profiles'
+    - link: 'profiler/profile_visualizations'
       tag: 'Documentation'
-      text: 'Learn more about available profile types'
+      text: 'Learn more about available profile visualizations'
     - link: 'profiler/profiler_troubleshooting/dotnet'
       tag: 'Documentation'
       text: 'Fix problems you encounter while using the profiler'
@@ -25,6 +25,8 @@ The profiler is shipped within Datadog tracing libraries. If you are already usi
 
 ## Requirements
 
+For a summary of the minimum and recommended runtime and tracer versions across all languages, read [Supported Language and Tracer Versions][14].
+
 Supported operating systems for .NET Framework
 : Windows 10<br/>
 Windows Server starting from version 2012
@@ -35,30 +37,36 @@ Windows 10<br/>
 Windows Server starting from version 2012
 
 Serverless
-: Continuous Profiler is not supported on serverless platforms, such as AWS Lambda.
+: Azure App Service Windows and Linux - Web Apps only, Function Apps are not supported
 
 Supported .NET runtimes (64-bit applications)
 : .NET Framework 4.6.1+<br/>
 .NET Core 2.1, 3.1<br/>
 .NET 5<br/>
 .NET 6<br/>
-.NET 7
+.NET 7<br/>
+.NET 8
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> For containers, <strong>at least one core</strong> is required. Read the <a href="/profiler/profiler_troubleshooting/dotnet#linux-containers">Troubleshooting documentation</a> for more details.
+</div>
 
 Supported languages
 : Any language that targets the .NET runtime, such as C#, F#, and Visual Basic.
 
 The following profiling features are available in the following minimum versions of the `dd-trace-dotnet` library:
 
-|      Feature         | Required `dd-trace-dotnet` version      | Required .NET Runtime versions        |
-|----------------------|-----------------------------------------|---------------------------------------|
-| Wall time profiling        | 2.7.0+                     |All supported runtime versions.      |
-| CPU profiling        | 2.15.0+                       | All supported runtime versions.      |
-| Exceptions profiling        | beta, 2.10.0+                       | All supported runtime versions.      |
-| Allocations profiling        | beta, 2.18.0+                       | .NET 6+      |
-| Lock Contention profiling        | beta, 2.18.0+                       | .NET 5+      |
-| Live heap profiling        | beta, 2.22.0+                       | .NET 7+      |
-| [Code Hotspots][12]        | 2.7.0+                       | All supported runtime versions.      |
-| [Endpoint Profiling][13]            | 2.15.0+                       | All supported runtime versions.      |
+| Feature                   | Required `dd-trace-dotnet` version | Required .NET Runtime versions                                                           |
+|---------------------------|------------------------------------|------------------------------------------------------------------------------------------|
+| Wall time profiling       | 2.7.0+                             | All supported runtime versions.                                                          |
+| CPU profiling             | 2.15.0+                            | All supported runtime versions.                                                          |
+| Exceptions profiling      | 2.31.0+                            | All supported runtime versions.                                                          |
+| Allocations profiling     | beta, 2.18.0+                      | .NET 6+                                                                                  |
+| Lock Contention profiling | 2.31.0+                            | .NET 5+                                                                                  |
+| Live heap profiling       | beta, 2.22.0+                      | .NET 7+                                                                                  |
+| [Code Hotspots][12]       | 2.7.0+                             | All supported runtime versions.                                                          |
+| [Endpoint Profiling][13]  | 2.15.0+                            | All supported runtime versions.                                                          |
+| Timeline                  | 2.30.0+                            | All supported runtime versions (except .NET 5+ required for garbage collection details). |
 
 ## Installation
 
@@ -122,6 +130,19 @@ To install the .NET Profiler per-application:
 [1]: https://www.nuget.org/packages/Datadog.Trace.Bundle
 {{% /tab %}}
 
+{{% tab "Azure App Service" %}}
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> Only Web Apps are supported. Functions are not supported.
+</div>
+
+To install the .NET Profiler per-webapp:
+1. Install the Azure App Service Datadog APM Extension [for Windows][1] or use the [Linux setup][2] for your webapp.
+
+[1]: /serverless/azure_app_services/azure_app_services_windows/?tab=net#installation
+[2]: /serverless/azure_app_services/azure_app_services_linux/?tab=nodenetphppython#setup
+{{% /tab %}}
+
 {{< /tabs >}}
 
 <br>
@@ -129,7 +150,7 @@ To install the .NET Profiler per-application:
 ## Enabling the Profiler
 
 <div class="alert alert-info">
-  <strong>Note:</strong> Datadog does not recommend enabling the profiler at machine-level or for all IIS applications. If you have enabled it machine-wide, see the <a href="/profiler/profiler_troubleshooting/?code-lang=dotnet#enabling-the-profiler-machine-wide">Troubleshooting documentation</a> for information about reducing the overhead related to enabling the profiler for all system applications.
+  <strong>Note</strong>: Datadog does not recommend enabling the profiler at machine-level or for all IIS applications. If you do have enabled it machine-wide, read the <a href="/profiler/profiler_troubleshooting/?code-lang=dotnet#avoid-enabling-the-profiler-machine-wide">Troubleshooting documentation</a> for information about reducing the overhead that is associated with enabling the profiler for all system applications.
 </div>
 
 {{< tabs >}}
@@ -154,6 +175,25 @@ To install the .NET Profiler per-application:
 [1]: https://app.datadoghq.com/profiling
 {{% /tab %}}
 
+{{% tab "Linux with Single Step Instrumentation" %}}
+
+1. With [Single Step Instrumentation][2], set the following required environment variables for automatic instrumentation to attach to your application:
+
+   ```
+   LD_PRELOAD=/opt/datadog/apm/library/dotnet/continuousprofiler/Datadog.Linux.ApiWrapper.x64.so
+   DD_PROFILING_ENABLED=1
+   DD_ENV=production
+   DD_VERSION=1.2.3
+   ```
+
+2. For standalone applications, manually restart the application as you normally would.
+
+3. A minute or two after starting your application, your profiles appear on the [Datadog APM > Profiler page][1].
+
+[1]: https://app.datadoghq.com/profiling
+[2]: https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/?tab=singlestepinstrumentationbeta
+{{% /tab %}}
+
 {{% tab "Internet Information Services (IIS)" %}}
 
 3. Set needed environment variables to configure and enable Profiler.
@@ -174,7 +214,7 @@ To install the .NET Profiler per-application:
    DD_VERSION=1.2.3
    ```
 
-   {{< img src="tracing/setup/dotnet/RegistryEditorCoreIIS.png" alt="Using the Registry Editor to create environment variables for a .NET Core application in IIS" style="width:90%" >}}
+   {{< img src="tracing/setup/dotnet/RegistryEditorCore.png" alt="Using the Registry Editor to create environment variables for a .NET Core application in IIS" style="width:90%" >}}
 
    For .NET Framework:
    ```text
@@ -184,7 +224,7 @@ To install the .NET Profiler per-application:
    DD_ENV=production
    DD_VERSION=1.2.3
    ```
-   {{< img src="tracing/setup/dotnet/RegistryEditorFrameworkIIS.png" alt="Using the Registry Editor to create environment variables for a .NET Framework application in IIS" style="width:90%" >}}
+   {{< img src="tracing/setup/dotnet/RegistryEditorFramework.png" alt="Using the Registry Editor to create environment variables for a .NET Framework application in IIS" style="width:90%" >}}
 
    <strong>Note</strong>: the environment variables are applied for <em>all</em> IIS applications. Starting with IIS 10, you can set environment variables for each IIS application in the <a href="https://docs.microsoft.com/en-us/iis/get-started/planning-your-iis-architecture/introduction-to-applicationhostconfig"><code>C:\Windows\System32\inetsrv\config\applicationhost.config</code> file</a>. Read the <a href="https://docs.microsoft.com/en-us/iis/configuration/system.applicationhost/applicationpools/add/environmentvariables/">Microsoft documentation</a> for more details.
 
@@ -342,6 +382,14 @@ To install the .NET Profiler per-application:
 [1]: https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/NugetDeployment
 {{% /tab %}}
 
+{{% tab "Azure App Service" %}}
+
+2. Follow these installation guidelines ([Windows][1] or [Linux][2]) to set `DD_PROFILING_ENABLED:true` to enable the profiler.
+
+[1]: /serverless/azure_app_services/azure_app_services_windows/?tab=net#installation
+[2]: /serverless/azure_app_services/azure_app_services_linux/?tab=nodenetphppython#setup
+{{% /tab %}}
+
 {{< /tabs >}}
 
 
@@ -367,6 +415,7 @@ You can configure the profiler using the following environment variables. Note t
 | `DD_PROFILING_ALLOCATION_ENABLED` | Boolean        | If set to `true`, enables the Allocations profiling (beta). Defaults to `false`.  |
 | `DD_PROFILING_LOCK_ENABLED` | Boolean        | If set to `true`, enables the Lock Contention profiling (beta). Defaults to `false`.  |
 | `DD_PROFILING_HEAP_ENABLED` | Boolean        | If set to `true`, enables the Live Heap profiling (beta). Defaults to `false`.  |
+| `DD_PROFILING_GC_ENABLED` | Boolean        | If set to `false`, disable Garbage Collection profiling used in Timeline user interface. Defaults to `true`.  |
 
 <div class="alert alert-warning">
 <strong>Note</strong>: For IIS applications, you must set environment variables in the Registry (under <code>HKLM\System\CurrentControlSet\Services\WAS</code> and <code>HKLM\System\CurrentControlSet\Services\W3SVC</code> nodes) as shown in the <a href="?tab=windowsservices#installation">Windows Service tab, above</a>. The environment variables are applied for <em>all</em> IIS applications.
@@ -381,10 +430,11 @@ The [Getting Started with Profiler][4] guide takes a sample service with a perfo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent/overview
-[2]: https://app.datadoghq.com/account/settings?agent_version=6#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
+[2]: https://app.datadoghq.com/account/settings/agent/6?platform=overview
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /getting_started/profiler/
 [5]: /tracing/trace_collection/
 [12]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces
 [13]: /profiler/connect_traces_and_profiles/#break-down-code-performance-by-api-endpoints
+[14]: /profiler/enabling/supported_versions/

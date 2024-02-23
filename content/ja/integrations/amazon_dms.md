@@ -1,29 +1,30 @@
 ---
 categories:
-- cloud
-- aws
+- AWS
+- クラウド
+- data store
 - ログの収集
 dependencies: []
-description: Amazon DMS のキーメトリクスを追跡
+description: AWS Database Migration Service (DMS) のキーメトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/amazon_dms/
 draft: false
 git_integration_title: amazon_dms
 has_logo: true
 integration_id: amazon-dms
-integration_title: Amazon DMS
+integration_title: AWS Database Migration Service (DMS)
 integration_version: ''
 is_public: true
 kind: インテグレーション
 manifest_version: '1.0'
 name: amazon_dms
-public_title: Datadog-Amazon DMS インテグレーション
-short_description: Amazon DMS のキーメトリクスを追跡
+public_title: Datadog-AWS Database Migration Service (DMS) インテグレーション
+short_description: AWS Database Migration Service (DMS) のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
 ## 概要
 
-Amazon Database Migration Service (DMS) は、リレーショナルデータベース、データウェアハウス、NoSQL データベースなどの各種データストアの移行を簡単に行えるクラウドサービスです。
+AWS Database Migration Service (DMS) は、リレーショナルデータベース、データウェアハウス、NoSQL データベースなどの各種データストアの移行を簡単に行えるクラウドサービスです。
 
 このインテグレーションを有効にすると、Datadog にすべての DMS メトリクスを表示できます。
 
@@ -36,20 +37,20 @@ Amazon Database Migration Service (DMS) は、リレーショナルデータベ�
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Database Migration Service` が有効になっていることを確認します。
-2. [Datadog - Amazon DMS インテグレーション][3]をインストールします。
+2. [Datadog - AWS Database Migration Service (DMS) インテグレーション][3]をインストールします。
 
 ### ログの収集
 
 #### ログの有効化
 
-Amazon Database Migration Service から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
+AWS Database Migration Service から S3 バケットまたは CloudWatch のいずれかにログを送信するよう構成します。
 
 **注**: S3 バケットにログを送る場合は、_Target prefix_ が `amazon_dms` に設定されているかを確認してください。
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][4] をまだ設定していない場合は、設定を行ってください。
-2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon DMS ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+1. [Datadog Forwarder Lambda 関数][4]をまだセットアップしていない場合は、セットアップします。
+2. Lambda 関数がインストールされたら、AWS コンソールから、AWS DMS ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
@@ -62,11 +63,11 @@ Amazon Database Migration Service から S3 バケットまたは CloudWatch の
 
 ### イベント
 
-Amazon DMS インテグレーションには、イベントは含まれません。
+AWS Database Migration Service (DMS) インテグレーションには、イベントは含まれません。
 
 ### サービスのチェック
 
-Amazon DMS インテグレーションには、サービスのチェック機能は含まれません。
+AWS Database Migration Service (DMS) インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
@@ -75,7 +76,7 @@ Amazon DMS インテグレーションには、サービスのチェック機能
 [1]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-dms
-[4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_dms/amazon_dms_metadata.csv

@@ -1,51 +1,59 @@
 ---
-title: Dashboards RUM
-kind: documentation
+description: Utilisez les dashboards RUM prêts à l'emploi pour étudier en détail les
+  données et performances de votre application.
 further_reading:
-  - link: /real_user_monitoring/explorer
-    tag: Documentation
-    text: Explorer vos vues dans Datadog
+- link: /real_user_monitoring/explorer
+  tag: Documentation
+  text: En savoir plus sur le RUM Explorer
+kind: documentation
+title: Dashboards RUM
 ---
-Lorsque vous créez une application RUM, des dashboards sont automatiquement créés dans Datadog pour analyser l'intégralité des [données recueillies][1]. Les dashboards RUM figurent dans la liste des dashboards. Ils sont identifiés par le logo Datadog :
 
-{{< img src="real_user_monitoring/dashboards/rum_dashboard_in_dashlist.png" alt="Dashboard RUM dans la liste des dashboards" >}}
+## Présentation
 
-Vous pouvez également consulter ces dashboards depuis la [page de vos applications RUM][2]. Cliquez sur les liens **Dashboard** associés à votre application :
+Lorsque vous créez une application RUM, Datadog [recueille des données][1] et génère des dashboards sur les performances, erreurs, ressources et sessions utilisateur de votre application.
 
-{{< img src="real_user_monitoring/dashboards/rum_applications.mp4" alt="Applications RUM" video=true >}}
+{{< img src="real_user_monitoring/dashboards/rum_application_overview_dashboard-3.png" alt="Page de présentation d'une application RUM" style="width:90%;" >}}
 
-{{< whatsnext desc="Vous pouvez utiliser les dashboards suivants :" >}}
-  {{< nextlink href="/real_user_monitoring/dashboards/performance_overview_dashboard" >}}<u>Performance Overview</u> : consultez une vue d'ensemble des performances et des données démographiques de votre site Web. {{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/dashboards/resources_dashboard" >}}<u>Resources</u> : identifiez les ressources les plus lentes et étudiez les ressources tierces. {{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/dashboards/errors_dashboard" >}}<u>Errors</u> : analysez les erreurs survenant dans la console des utilisateurs en fonction du navigateur et du type d'appareil. {{< /nextlink >}}
+Pour accéder à vos dashboards RUM, appliquez un filtre basé sur `RUM` dans la requête de recherche de la [**liste des dashboards**][2] ou à partir des pages de synthèse des applications (**Real User Monitoring > Performance Summary** et **Real User Monitoring > Analytics Summary**).
+
+{{< img src="real_user_monitoring/dashboards/available_rum_dashboards-2.png" alt="Dashboards RUM prêts à l'emploi" style="width:90%;" >}}
+
+{{< whatsnext desc="Vous pouvez explorer les dashboards RUM suivants :" >}}
+  {{< nextlink href="/real_user_monitoring/dashboards/performance" >}}<u>Résumés des performances</u> : consultez une vue d'ensemble des performances et des données démographiques de votre site Web ou application. {{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/dashboards/testing_and_deployment" >}}<u>Testing et déploiement</u> : évaluez la couverture de vos tests Browser vis-à-vis de votre application et identifiez les principaux éléments de votre application à surveiller à l'aide des données RUM et Synthetics. {{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/dashboards/usage" >}}<u>Utilisation</u> : analysez les données relatives à l'utilisation et aux sessions utilisateur de vos applications RUM, y compris les signaux de frustration. {{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/dashboards/errors" >}}<u>Erreurs</u> : visualisez les erreurs générées dans les consoles utilisateur, en les filtrant par navigateur et type d'appareil. {{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Interactions avec les dashboards
+## Interagir avec des dashboards RUM
 
-Vous pouvez personnaliser vos dashboards RUM comme [n'importe quel autre dashboard][3]. Il est également possible d'explorer directement les données sous-jacentes dans votre [RUM Explorer][1].
+Vous pouvez dupliquer et personnaliser des [dashboards][3] afin d'explorer les données de votre application dans le [RUM Explorer][4].
 
 ### Template variables
 
-Les dashboards RUM sont générés pour toutes vos applications avec un ensemble de template variables par défaut. Grâce à celles-ci, vous pouvez appliquer différents filtres. Utilisez par exemple la template variable `applicationId` pour afficher uniquement les données d'une certaine application.
+Les dashboards RUM générés contiennent automatiquement un ensemble de template variables par défaut. Utilisez les menus déroulants des template variables pour affiner votre recherche. Par exemple, vous pouvez afficher uniquement les données d'une certaine application avec la template variable `applicationId`.
 
 {{< img src="real_user_monitoring/dashboards/template_variables.mp4" alt="Template variable" video=true style="width:50%;" >}}
 
 ### Événements de vue RUM
 
-Pour explorer chacun événement, cliquez sur un graphique et sélectionnez l'option _View RUM events_. Vous serez alors redirigé vers le RUM Explorer. Les filtres que vous aviez sélectionnés sont conservés.
+Pour explorer des événements spécifiques, cliquez sur un graphique, puis sur **View RUM events**. Vous êtes alors redirigé vers le RUM Explorer. Les filtres de recherche présélectionnés sont appliqués.
 
 {{< img src="real_user_monitoring/dashboards/view_rum_events.mp4" alt="Événements de vue RUM" video=true style="width:80%;" >}}
 
 ### Personnaliser les dashboards
 
-Dupliquez vos dashboards RUM et personnalisez-les afin de répondre à vos besoins. Vous pouvez ajouter des widgets et modifier les template variables :
+Pour dupliquer vos dashboards RUM, cliquez sur l'icône **Settings** et sélectionnez **Clone dashboard**. Pour ajouter d'autres widgets, powerpacks ou applications, faites défiler l'écran vers le bas et cliquez sur l'icône **+**. 
 
-{{< img src="real_user_monitoring/dashboards/clone_dashboard.png" alt="Dupliquer un dashboard" style="width:50%;">}}
+Vous pouvez également modifier les template variables et créer une [vue enregistrée][5].
 
 ## Pour aller plus loin
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/real_user_monitoring/data_collected/
-[2]: https://app.datadoghq.com/rum/list
+[2]: https://app.datadoghq.com/dashboard/lists
 [3]: /fr/dashboards/
+[4]: /fr/real_user_monitoring/explorer/
+[5]: /fr/real_user_monitoring/explorer/saved_views/

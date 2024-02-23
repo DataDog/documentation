@@ -57,7 +57,7 @@ Consultez le carré de l'intégration pour obtenir des instructions détaillées
 
 ### Logs
 
-Les logs sont recueillis à partir d'un seul endpoint de l'API. Consultez la section [API Insights][1].
+Les logs sont recueillis à partir d'un seul endpoint d'API. Consultez la documentation relative à l'[API Insight][1] (en anglais).
 
 ### Métriques
 

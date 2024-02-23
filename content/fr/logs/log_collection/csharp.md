@@ -23,6 +23,9 @@ further_reading:
 - link: /logs/faq/log-collection-troubleshooting-guide/
   tag: FAQ
   text: Guide de dépannage pour la collecte de logs
+- link: /glossary/#tail
+  tag: Glossaire
+  text: Entrée du glossaire pour le terme « tail »
 kind: documentation
 title: Collecte de logs avec C#
 ---
@@ -37,7 +40,7 @@ Cette page offre des exemples de configuration avec les bibliothèques de loggin
 
 ## Logging dans un fichier suivi avec l'Agent Datadog
 
-Pour recueillir des logs C#, il est conseillé d'écrire ces logs dans un fichier et de suivre ce fichier avec votre Agent Datadog. L'Agent pourra ainsi enrichir les logs en y ajoutant des métadonnées supplémentaires.
+Pour recueillir des logs C#, il est conseillé d'écrire ces logs dans un fichier et de [suivre][20] ce fichier avec votre Agent Datadog. L'Agent pourra ainsi enrichir les logs en y ajoutant des métadonnées supplémentaires.
 
 Datadog vous recommande fortement de configurer votre bibliothèque de journalisation de façon à générer vos logs au format JSON. Vous n'aurez ainsi pas besoin de créer de [règles de parsing personnalisées][1].
 
@@ -398,6 +401,14 @@ Les variables de configuration suivantes ne doivent généralement pas être mod
 
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+
+`DD_LOGS_DIRECT_SUBMISSION_URL`
+: Permet de définir l'URL vers laquelle les logs sont envoyés. Utilise le domaine spécifié dans `DD_SITE` par défaut.<br>
+**Valeur par défaut** : `https://http-intake.logs.ap1.datadoghq.com:443` (d'après `DD_SITE`)
+
+{{< /site-region >}}
+
 {{< site-region region="eu" >}}
 
 `DD_LOGS_DIRECT_SUBMISSION_URL`
@@ -483,6 +494,19 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
+{{< site-region region="ap1" >}}
+
+```csharp
+using (var log = new LoggerConfiguration()
+    .WriteTo.DatadogLogs("<CLÉ_API>", configuration: new DatadogConfiguration(){ Url = "https://http-intake.logs.ap1.datadoghq.com" })
+    .CreateLogger())
+{
+    // Insérer du code
+}
+```
+
+{{< /site-region >}}
+
 {{< site-region region="us5" >}}
 
 ```csharp
@@ -522,10 +546,9 @@ using (var log = new LoggerConfiguration()
 
 {{< /site-region >}}
 
-
-Vous pouvez également remplacer le comportement par défaut et transférer les logs via TCP en spécifiant manuellement les propriétés requises suivantes : `url`, `port`, `useSSL` et `useTCP`. Si vous le souhaitez, vous pouvez [spécifier les paramètres `source`, `service` et `host` et ajouter des tags personnalisés][20].
-
 {{< site-region region="us" >}}
+
+Vous pouvez également remplacer le comportement par défaut et transférer les logs via TCP en spécifiant manuellement les propriétés requises suivantes : `url`, `port`, `useSSL` et `useTCP`. Si vous le souhaitez, vous pouvez [spécifier les paramètres `source`, `service` et `host` et ajouter des tags personnalisés][1].
 
 Par exemple, pour transférer des logs vers la région américaine de Datadog via TCP, utilisez la configuration de récepteur suivante :
 
@@ -546,8 +569,12 @@ using (var log = new LoggerConfiguration()
 }
 ```
 
+[1]: /fr/logs/log_configuration/attributes_naming_convention/#reserved-attributes
+
 {{< /site-region >}}
 {{< site-region region="eu" >}}
+
+Vous pouvez également remplacer le comportement par défaut et transférer les logs via TCP en spécifiant manuellement les propriétés requises suivantes : `url`, `port`, `useSSL` et `useTCP`. Si vous le souhaitez, vous pouvez [spécifier les paramètres `source`, `service` et `host` et ajouter des tags personnalisés][1].
 
 Par exemple, pour transférer des logs vers la région européenne de Datadog via TCP, utilisez la configuration de récepteur suivante :
 
@@ -567,6 +594,7 @@ using (var log = new LoggerConfiguration()
     // Insérer du code
 }
 ```
+[1]: /fr/logs/log_configuration/attributes_naming_convention/#reserved-attributes
 
 {{< /site-region >}}
 
@@ -614,7 +642,7 @@ Dans la matrice `Serilog.WriteTo`, ajoutez une entrée pour `DatadogLogs`. Voici
 [9]: /fr/tracing/other_telemetry/connect_logs_and_traces/dotnet/
 [10]: /fr/agent/logs/advanced_log_collection
 [11]: /fr/serverless/azure_app_services
-[12]: /fr/account_management/org_settings/sensitive_data_detection/#overview
+[12]: /fr/sensitive_data_scanner/
 [13]: /fr/tracing/trace_collection/dd_libraries/dotnet-core
 [14]: /fr/tracing/trace_collection/dd_libraries/dotnet-framework
 [15]: https://app.datadoghq.com/organization-settings/api-keys
@@ -622,4 +650,4 @@ Dans la matrice `Serilog.WriteTo`, ajoutez une entrée pour `DatadogLogs`. Voici
 [17]: /fr/logs/log_configuration/pipelines/?tab=source
 [18]: /fr/api/latest/logs/#send-logs
 [19]: https://www.nuget.org/packages/Serilog.Sinks.Datadog.Logs
-[20]: /fr/logs/log_configuration/attributes_naming_convention/#reserved-attributes
+[20]: /fr/glossary/#tail

@@ -1,6 +1,4 @@
 ---
-dependencies:
-- https://github.com/DataDog/dd-sdk-android/blob/master/docs/log_collection.md
 description: Android アプリケーションからログを収集する。
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
@@ -12,9 +10,10 @@ further_reading:
 kind: ドキュメント
 title: Android ログの収集
 ---
+
 [Datadog の `dd-sdk-android` クライアント側ロギングライブラリ][1]を使用すると、Android アプリケーションから Datadog へログを送信すると共に、次の機能を利用できます。
 
-* Datadog に JSON 形式でネイティブに記録。
+* Datadog に JSON 形式でネイティブに記録する。
 * 送信される各ログに `context` およびカスタム属性を追加する。
 * Java/Kotlin がキャッチした例外を転送します。
 * 実際のクライアント IP アドレスとユーザーエージェントを記録する。
@@ -30,7 +29,7 @@ title: Android ログの収集
     }
     ```
 
-2. アプリケーションコンテキストと追跡に関する同意、[Datadog クライアントトークン][2]、そして Datadog UI で新しい RUM アプリケーションを作成したときに生成されたアプリケーション ID で、ライブラリを初期化します（詳細は、[Android の RUM データを収集][6]を参照）。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の Android アプリケーションの APK バイトコードで公開されてしまうため、[Datadog API キー][3]を使用して `dd-sdk-android` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][2]を参照してください。
+2. アプリケーションコンテキストと追跡に関する同意、[Datadog クライアントトークン][2]、そして Datadog UI で新しい RUM アプリケーションを作成したときに生成されたアプリケーション ID で、ライブラリを初期化します (詳細は、[Android の RUM データを収集][6]を参照)。セキュリティ上の理由から、クライアントトークンを使用する必要があります。API キーがクライアント側の Android アプリケーションの APK バイトコードで公開されてしまうため、[Datadog API キー][3]を使用して `dd-sdk-android` ライブラリを構成することはできません。クライアントトークンの設定に関する詳細は、[クライアントトークンに関するドキュメント][2]を参照してください。`APP_VARIANT_NAME` は、データを生成するアプリケーションのバリアントを指定します。
 
 {{< site-region region="us" >}}
 {{< tabs >}}
@@ -474,10 +473,10 @@ logger.removeAttribute("version_name")
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-sdk-android
-[2]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#client-tokens
-[3]: https://docs.datadoghq.com/ja/account_management/api-app-keys/#api-keys
-[4]: https://docs.datadoghq.com/ja/logs/processing/attributes_naming_convention/
-[5]: https://docs.datadoghq.com/ja/tagging/
-[6]: https://docs.datadoghq.com/ja/real_user_monitoring/android/?tab=us
-[7]: https://docs.datadoghq.com/ja/real_user_monitoring/error_tracking/android/#upload-your-mapping-file
+[2]: /ja/account_management/api-app-keys/#client-tokens
+[3]: /ja/account_management/api-app-keys/#api-keys
+[4]: /ja/logs/processing/attributes_naming_convention/
+[5]: /ja/tagging/
+[6]: /ja/real_user_monitoring/android/?tab=us
+[7]: /ja/real_user_monitoring/error_tracking/android/#upload-your-mapping-file
 [8]: https://source.android.com/security/app-sandbox

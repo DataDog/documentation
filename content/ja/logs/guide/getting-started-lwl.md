@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - logging without limits
 further_reading:
 - link: /logs/explorer/
   tag: ドキュメント
@@ -16,7 +19,7 @@ kind: ガイド
 title: Logging Without Limits™ ガイド
 ---
 
-{{< img src="logs/guide/log_ingestion_and_processing.png" alt="Logging without Limits™" >}}
+{{< img src="logs/lwl_marketecture_20231030.png" alt="Logging without LimitsTM" >}}
 
 ## 概要
 
@@ -130,5 +133,5 @@ Logging Without Limits™ の詳細やログエクスポローラー、Live Tail
 [6]: /ja/logs/archives/
 [7]: /ja/metrics/
 [8]: /ja/logs/logs_to_metrics/
-[9]: /ja/monitors/create/types/anomaly/
+[9]: /ja/monitors/types/anomaly/
 [10]: https://app.datadoghq.com/monitors#/triggered

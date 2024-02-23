@@ -1,5 +1,5 @@
 ---
-title: Connecting .NET Logs and Traces
+title: Correlating .NET Logs and Traces
 kind: documentation
 description: 'Connect your .NET logs and traces to correlate them in Datadog.'
 aliases:
@@ -125,7 +125,19 @@ To automatically inject correlation identifiers into your log messages:
 
 2. Enable auto-instrumentation tracing of your app by following the [instructions to install the .NET Tracer][1].
 
-3. Enable mapped diagnostic context (MDC), as shown in the following example code for NLog version 4.6+:
+3. Enable mapped diagnostic context (MDC), as shown in the following example code for NLog version 5.0+:
+
+```xml
+  <!-- Add includeScopeProperties="true" to emit ScopeContext properties -->
+  <layout xsi:type="JsonLayout" includeScopeProperties="true">
+    <attribute name="date" layout="${longdate}" />
+    <attribute name="level" layout="${level:upperCase=true}"/>
+    <attribute name="message" layout="${message}" />
+    <attribute name="exception" layout="${exception:format=ToString}" />
+  </layout>
+```
+
+For NLog version 4.6+:
 
 ```xml
   <!-- Add includeMdlc="true" to emit MDC properties -->
@@ -206,6 +218,8 @@ The final step to enable automatic correlation identifier injection is to:
 After configuring the correlation identifier injection, see [C# Log Collection][7] to configure your log collection.
 
 **Note:** To correlate traces with logs, you might need to set up a [trace ID remapper][8] to parse `dd_trace_id` as the log's trace ID. See [Correlated Logs Not Showing Up in the Trace ID Panel][9] for more information.
+
+<div class="alert alert-info"><strong>Beta</strong>: Starting in version 2.35.0, if <a href="/agent/remote_config/">Agent Remote Configuration</a> is enabled where this service runs, you can set <code>DD_LOGS_INJECTION</code> in the <a href="/tracing/service_catalog">Service Catalog</a> UI.</div>
 
 ## Manual injection
 

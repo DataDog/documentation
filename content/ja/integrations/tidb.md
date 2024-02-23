@@ -20,7 +20,7 @@ assets:
     source: tidb
 author:
   homepage: https://github.com/DataDog/integrations-extras
-  name: 不明
+  name: PingCAP
   sales_email: xuyifan02@pingcap.com
   support_email: xuyifan02@pingcap.com
 categories:
@@ -39,7 +39,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: tidb
-oauth: {}
 public_title: TiDB
 short_description: TiDB クラスター用インテグレーション
 supported_os:

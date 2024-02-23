@@ -3,11 +3,12 @@ aliases:
 - /ja/integrations/awsautoscaling/
 - /ja/integrations/faq/get-your-autoscaling-group-events-and-metrics/
 categories:
-- cloud
-- provisioning
-- configuration & deployment
+- automation
 - aws
+- cloud
+- configuration & deployment
 - log collection
+- provisioning
 dependencies: []
 description: Auto Scaling グループ内のインスタンスのステータスとカウントを追跡。
 doc_link: https://docs.datadoghq.com/integrations/amazon_auto_scaling/
@@ -26,6 +27,7 @@ short_description: Auto Scaling グループ内のインスタンスのステー
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS Auto Scaling は、ユーザー定義のポリシーに基づいて EC2 インスタンスを自動的に起動または終了するサービスです。
@@ -35,9 +37,9 @@ AWS Auto Scaling は、ユーザー定義のポリシーに基づいて EC2 イ�
 - `autoscaling_group` タグを使用して、Auto Scaling グループ内のホストの EC2 メトリクスを収集できます。
 - `autoscaling_group` タグと `autoscalinggroupname` タグを使用して、特定のグループに関する Auto Scaling メトリクスを収集できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -57,7 +59,7 @@ AWS Auto Scaling は、ユーザー定義のポリシーに基づいて EC2 イ�
 
 4. [Datadog - AWS Auto Scaling インテグレーション][6]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -67,31 +69,31 @@ S3 バケットまたは CloudWatch のいずれかにログを送信するよ�
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログ コレクション AWS Lambda 関数][7]をまだ実行していない場合は、セットアップします。
+1. [Datadog Forwarder Lambda 関数][7]をまだセットアップしていない場合は、セットアップします。
 2. Lambda 関数がインストールされたら、AWS コンソールで、AWS Auto Scaling ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動でトリガーを追加][8]
     - [CloudWatch ロググループに手動トリガーを追加][9]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_auto_scaling" >}}
 
 
 AWS から取得される各メトリクスには、ホスト名やセキュリティ グループなど、AWS コンソールに表示されるのと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
 AWS Auto-Scaling インテグレーションには、EC2 インスタンスを起動および終了するためのイベントが含まれています。以下はイベントの例です。
 
 {{< img src="integrations/amazon_auto_scaling/aws_auto_scaling_events.png" alt="AWS Auto-Scaling イベント" >}}
 
-### サービスのチェック
+### ヘルプ
 
 AWS Auto-Scaling インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ASG メトリクスを Datadog に表示するには、まず、それらのメトリクスを AWS コンソールで有効にする必要があります。[ASG メトリクスを有効にする方法については、AWS のガイドを参照してください][11]。**注**: これらのメトリクスは、有効にされてから表示されるまでに多少時間がかかる場合があります。
 
@@ -103,7 +105,7 @@ ASG メトリクスを Datadog に表示するには、まず、それらのメ�
 [4]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/#installation
 [5]: https://docs.aws.amazon.com/autoscaling/plans/userguide/auth-and-access-control.html
 [6]: https://app.datadoghq.com/integrations/amazon-auto-scaling
-[7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[7]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [8]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [9]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [10]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_auto_scaling/amazon_auto_scaling_metadata.csv

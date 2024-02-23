@@ -36,7 +36,7 @@ Datadog Google Cloud Platform インテグレーションを使用して、Googl
 
 ### メトリクスの収集
 
-#### APM に Datadog Agent を構成する
+#### インストール
 
 [Google Cloud Platform インテグレーション][3]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -88,7 +88,7 @@ Google Cloud Run for Anthos インテグレーションには、サービスの�
 
 ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: skykit-digital-signage-license
 app_uuid: f1d99715-3b71-4caa-9682-09224b8419dd
 assets: {}
@@ -23,7 +25,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: skykit_digital_signage
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -72,6 +73,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 ## 概要
 
 ### Skykit とは
@@ -84,7 +86,7 @@ Skykit は、デジタルサイネージとワークプレイスエクスペリ�
 
 [Skykit の仕組みをご覧ください。][1]
 
-## サポート
+## Agent
 
 サポート、機能リクエスト、北米以外の組織の場合は、以下のチャンネルで Skykit にお問い合わせください。
 

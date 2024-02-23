@@ -5,7 +5,7 @@ further_reading:
 - link: api/v1/downtimes/
   tag: Documentation
   text: Référence sur l'API Downtime
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: Documentation
   text: Documentation sur les downtimes
 kind: guide
@@ -217,7 +217,7 @@ Remplacez la valeur du paramètre fictif `<SITE_DATADOG>` par {{< region-param k
 
 Ouvrez la [page de gestion des downtimes][1] et ajoutez un nouveau downtime. Sélectionnez `recurring` :
 
-{{< img src="monitors/downtimes/downtine_guide_rrule.jpg" alt="downtime avec rrule"  style="width:80%;">}}
+{{< img src="monitors/downtimes/downtime_guide_rrule.jpg" alt="downtime avec rrule"  style="width:80%;">}}
 
 [1]: https://app.datadoghq.com/monitors#downtime
 {{% /tab %}}
@@ -229,6 +229,6 @@ Ouvrez la [page de gestion des downtimes][1] et ajoutez un nouveau downtime. Sé
 
 [1]: https://docs.datadoghq.com/fr/api/v1/downtimes/
 [2]: https://docs.datadoghq.com/fr/api/v1/authentication/
-[3]: https://docs.datadoghq.com/fr/monitors/notify/downtimes/
+[3]: https://docs.datadoghq.com/fr/monitors/downtimes/
 [4]: https://icalendar.org/iCalendar-RFC-5545/3-8-5-3-recurrence-rule.html
 [5]: https://icalendar.org/rrule-tool.html

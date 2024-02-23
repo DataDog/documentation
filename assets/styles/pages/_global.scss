@@ -58,7 +58,11 @@ body {
         position: relative;
     }
 }
-
+.chroma {
+    max-height: 350px;
+    overflow-wrap: break-word;
+    white-space: inherit;
+}
 .greyside {
     position: absolute;
     height: 100%;
@@ -150,7 +154,7 @@ pre {
         font-size: 14px;
         line-height: 27px;
         color: #555555;
-        white-space: pre-wrap;
+        white-space: pre;
         background-color: transparent;
         border-radius: 0;
         border: none;
@@ -272,6 +276,51 @@ details {
         }
     }
 }
+
+.code-snippet.js-appended-copy-btn {
+    position: relative;
+    padding-right: 0 !important;
+    pre {
+        padding: 30px 10px;
+    }
+    code {
+        white-space: pre;
+    }
+    &.wrap {
+        code {
+            white-space: normal !important;
+        }
+    }
+    &:hover {
+        .code-button-wrapper {
+            opacity: 1;
+        }
+    }
+    .code-button-wrapper {
+        opacity: 0;
+        right: 0;
+        top: 0;
+        padding: 1rem 1rem 0 0;
+        transition: opacity 0.2s ease-in-out;
+        z-index: 1;
+        button {
+            background-color: $white;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+            border-radius: 4px;
+            padding: 8px 25px;
+            transition: box-shadow 0.2s ease-in-out;
+            &:hover {
+                box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.45);
+            }
+            &:active,
+            &:focus {
+                box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.45) !important;
+            }
+        }
+    }
+}
+
+
 .code-filename-wrapper {
     background-color: $codesnippet-filename-bg;
     min-height: 5px;
@@ -368,6 +417,9 @@ p {
 h1 {
     line-height: 42px;
     padding-bottom: 15.5px;
+    &#pagetitle {
+      margin-top: 30px;
+    }
 }
 
 h2 {
@@ -742,6 +794,10 @@ video {
 }
 
 // Tables
+.table-wrapper {
+    overflow-x: auto;
+}
+
 table,
 .table {
     width: 100%;

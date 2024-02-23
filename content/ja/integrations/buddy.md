@@ -19,7 +19,7 @@ author:
   sales_email: support@buddy.works
   support_email: support@buddy.works
 categories:
-- web
+- automation
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/buddy/README.md
 display_on_public_website: true
@@ -32,20 +32,19 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: buddy
-oauth: {}
 public_title: Buddy
 short_description: Web 開発者向けのワンクリック自動配信および作業中 Web サイトのプレビュー機能。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Category::Automation
   - Supported OS::Linux
-  - Supported OS::macOS
   - Supported OS::Windows
-  - Category::Web
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: Web 開発者向けのワンクリック自動配信および作業中 Web サイトのプレビュー機能。
   media: []

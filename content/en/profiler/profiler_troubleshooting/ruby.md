@@ -14,22 +14,8 @@ further_reading:
 
 If you've configured the profiler and don't see profiles in the profile search page, turn on [debug mode][1] and [open a support ticket][2] with debug files and the following information:
 
-- Operating system type and version (for example, Linux Ubuntu 20.04)
+- Operating system type and version (for example, Ubuntu Linux 22.04)
 - Runtime type, version, and vendor (for example, Ruby 2.7.3)
-
-## Application triggers "stack level too deep (SystemStackError)" errors
-
-This issue is not expected to happen since [`dd-trace-rb` version `0.54.0`][3].
-If you're still running into it, [open a support ticket][2] taking care to include the full backtrace leading to the error.
-
-Prior to version `0.54.0`, the profiler needed to instrument the Ruby VM to track thread creation, which clashed
-with similar instrumentation from other gems.
-
-If you're using any of the below gems:
-
-* `rollbar`: Ensure you're using version 3.1.2 or newer.
-* `logging`: Disable `logging`'s thread context inheritance by setting the `LOGGING_INHERIT_CONTEXT` environment
-  variable to `false`.
 
 ## Missing profiles for Resque jobs
 
@@ -59,7 +45,7 @@ Datadog.configure do |c|
 end
 ```
 
-## Unexpected run-time failures and errors from Ruby gems that use native extensions in `dd-trace-rb` 1.11.0+
+## Unexpected failures or errors from Ruby gems that use native extensions in `dd-trace-rb` 1.11.0+
 
 Starting from `dd-trace-rb` 1.11.0, the "CPU Profiling 2.0" profiler gathers data by sending `SIGPROF` unix signals to Ruby applications, enabling finer-grained data gathering.
 
@@ -69,19 +55,37 @@ Rarely, native extensions or libraries called by them may have missing or incorr
 The following incompatibilities are known:
 * Using the `mysql2` gem together with versions of `libmysqlclient` [older than 8.0.0][9]. The affected `libmysqlclient` version is known to be present on Ubuntu 18.04, but not 20.04 or later releases.
 * [Using the `rugged` gem.][10]
+* Using the `passenger` gem/Phusion Passenger web server [older than 6.0.19][11]
 
-In these cases, the profiler automatically detects the incompatibility and applies a workaround.
+In these cases, the latest version of the profiler automatically detects the incompatibility and applies a workaround.
 
-If you encounter run-time failures or errors from Ruby gems that use native extensions, you can revert back to the legacy profiler which does not use `SIGPROF` signals. To revert to the legacy profiler, set the `DD_PROFILING_FORCE_ENABLE_LEGACY` environment variable to `true`, or in code:
+If you encounter failures or errors from Ruby gems that use native extensions other than those listed above, you can manually enable the "no signals" workaround, which avoids the use of `SIGPROF` signals.
+To enable this workaround, set the `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED` environment variable to `true`, or in code:
 
 ```ruby
 Datadog.configure do |c|
-  c.profiling.advanced.force_enable_legacy_profiler = true
+  c.profiling.advanced.no_signals_workaround_enabled = true
 end
 ```
 
-Let our team know if you find or suspect any such incompatibilities [by opening a support ticket][2].
+**Note**: The above setting is only available starting in `dd-trace-rb` 1.12.0.
+
+Let our team know if you find or suspect any incompatibilities [by opening a support ticket][2].
 Doing this enables Datadog to add them to the auto-detection list, and to work with the gem/library authors to fix the issue.
+
+## Segmentation faults in `gc_finalize_deferred` in Ruby versions 2.6 to 3.2
+
+In rare situations, the profiler can trigger [Ruby VM Bug #19991][12] that manifests itself as a "Segmentation fault" with a crash stack trace including the `gc_finalize_deferred` function.
+
+This bug has been fixed for Ruby 3.3 and above. For older Ruby versions, you can use the "no signals" workaround to resolve this issue.
+
+To enable this workaround, set the `DD_PROFILING_NO_SIGNALS_WORKAROUND_ENABLED` environment variable to `true`, or in code:
+
+```ruby
+Datadog.configure do |c|
+  c.profiling.advanced.no_signals_workaround_enabled = true
+end
+```
 
 ## Further Reading
 
@@ -98,3 +102,5 @@ Doing this enables Datadog to add them to the auto-detection list, and to work w
 [8]: https://man7.org/linux/man-pages/man7/signal.7.html#:~:text=Interruption%20of%20system%20calls%20and%20library%20functions%20by%20signal%20handlers
 [9]: https://bugs.mysql.com/bug.php?id=83109
 [10]: https://github.com/DataDog/dd-trace-rb/issues/2721
+[11]: https://github.com/DataDog/dd-trace-rb/issues/2976
+[12]: https://bugs.ruby-lang.org/issues/19991

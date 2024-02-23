@@ -155,16 +155,17 @@ Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_T
 : **TracerSettings property**: `GlobalSamplingRate` <br>
 **Default**: Defaults to the rates returned by the Datadog Agent<br>
 Enables ingestion rate control. This parameter is a float representing the percentage of spans to sample. Valid values are from `0.0` to `1.0`.
-For more information, see [Ingestion Mechanisms][6].
+For more information, see [Ingestion Mechanisms][6]. <br><br>
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_SAMPLE_RATE` in the [Service Catalog][17] UI.
 
 `DD_TRACE_SAMPLING_RULES`
 : **TracerSettings property**: `CustomSamplingRules`<br>
 **Default**: `null`<br>
-A JSON array of objects. Each object must have a `"sample_rate"`. The `"name"` and `"service"` fields are optional. The `"sample_rate"` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
+A JSON array of objects. Each object must have a `sample_rate`. The `name` and `service` fields are optional. The `sample_rate` value must be between `0.0` and `1.0` (inclusive). Rules are applied in configured order to determine the trace's sample rate.
 For more information, see [Ingestion Mechanisms][6].<br>
 **Examples:**<br>
-  - Set the sample rate to 20%: `'[{"sample_rate": 0.2}]'`
-  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `'[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]'`
+  - Set the sample rate to 20%: `[{"sample_rate": 0.2}]`
+  - Set the sample rate to 10% for services starting with 'a' and span name 'b' and set the sample rate to 20% for all other services: `[{"service": "a.*", "name": "b", "sample_rate": 0.1}, {"sample_rate": 0.2}]`
 
 `DD_TRACE_RATE_LIMIT`
 : **TracerSettings property**: `MaxTracesSubmittedPerSecond` <br>
@@ -174,13 +175,7 @@ The number of traces allowed to be submitted per second (deprecates `DD_MAX_TRAC
 `DD_SPAN_SAMPLING_RULES`
 : **Default**: `null`<br>
 A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). For more information, see [Ingestion Mechanisms][3].<br>
-**Example**: Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
-
-`DD_TRACE_GLOBAL_TAGS`
-: **TracerSettings property**: `GlobalTags`<br>
-If specified, adds all of the specified tags to all generated spans.
-**Example**: `layer:api, team:intake` <br>
-Note that the delimiter is a comma and a space: `, `.
+**Example**: Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]`
 
 `DD_TRACE_DEBUG`
 : Enables or disables debug logging. Valid values are `true` or `false`.<br>
@@ -188,9 +183,15 @@ Note that the delimiter is a comma and a space: `, `.
 
 `DD_TRACE_HEADER_TAGS`
 : **TracerSettings property**:`HeaderTags` <br>
-Accepts a comma-separated list of key-value pairs of case-insensitive header keys to tag names, and automatically applies matching header values as tags on root spans. Also accepts entries without a specified tag name. <br>
-**Example**: `CASE-insensitive-Header:my-tag-name,User-ID:userId,My-Header-And-Tag-Name`<br>
-Added in version 1.18.3. Response header support and entries without tag names added in version 1.26.0.
+Accepts a map of case-insensitive header keys to tag names and automatically applies matching header values as tags on traces. Also accepts entries without a specified tag name that are automatically mapped to tags of the form `http.request.headers.<header-name>` and `http.response.headers.<header-name>` respectively.<br><br>
+**Example** (with specified tag names): `User-ID:userId`<br>
+If the **Request** has a header `User-ID`, its value is applied as tag `userId` to the spans produced by the service.<br><br>
+**Example** (without specified tag names): `User-ID`<br>
+If the **Request** has a header `User-ID`, its value is applied as tag `http.request.headers.User-ID`.<br>
+If the **Response** has a header `User-ID`, its value is applied as tag `http.response.headers.User-ID`.<br><br>
+Added in version 1.18.3.<br>
+Response header support and entries without tag names added in version 1.26.0.<br>
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_TRACE_HEADER_TAGS` in the [Service Catalog][17] UI.
 
 `DD_TRACE_CLIENT_IP_ENABLED`
 : Enables client IP collection from relevant IP headers.<br>
@@ -200,17 +201,22 @@ Added in version `2.19.0`.<br>
 `DD_TRACE_CLIENT_IP_HEADER`
 : The IP header to be used for client IP collection, for example: `x-forwarded-for`. <br>
 Added in version `2.19.0`.<br>
-**Default**: Datadog parses the following: `"x-forwarded-for", "x-real-ip", "client-ip", "x-forwarded", "x-cluster-client-ip", "forwarded-for", "forwarded", "via", "true-client-ip"`. If several are present, none will be reported.<br>
+**Default**: Datadog parses the following: `x-forwarded-for`, `x-real-ip`, `true-client-ip`, `x-client-ip`, `x-forwarded`, `forwarded-for`, `x-cluster-client-ip`, `fastly-client-ip`, `cf-connecting-ip`, `cf-connecting-ipv6`. If several are present, none will be reported.<br>
 
 `DD_TAGS`
 : **TracerSettings property**: `GlobalTags`<br>
 If specified, adds all of the specified tags to all generated spans. <br>
-**Example**: `layer:api,team:intake,key:value` <br>
+**Example**: `layer:api, team:intake, key:value` <br>
+**Note**: The delimiter is a comma and a space: `, `. <br>
 Added in version 1.17.0. <br>
 
 `DD_TRACE_LOG_DIRECTORY`
 : Sets the directory for .NET Tracer logs. <br>
 **Default**: `%ProgramData%\Datadog .NET Tracer\logs\`
+
+`DD_TRACE_LOGFILE_RETENTION_DAYS`
+: During the tracer's startup, this configuration uses the tracer's current log directory to delete log files the same age and older than the given number of days. Added in version 2.19.0. <br>
+**Default**: `31`
 
 `DD_TRACE_LOGGING_RATE`
 : Sets rate limiting for log messages. If set, unique log lines are written once per `x` seconds. For example, to log a given message once per 60 seconds, set to `60`. Setting to `0` disables log rate limiting. Added in version 1.24.0. Disabled by default.
@@ -230,6 +236,16 @@ The `from-key` value is specific to the integration type, and should exclude the
 
 `DD_TRACE_OBFUSCATION_QUERY_STRING_REGEXP`
 : When `DD_HTTP_SERVER_TAG_QUERY_STRING` is true, this regex redacts sensitive data from incoming requests' query string reported in the `http.url` tag (matches are replaced with `<redacted>`). This regex executes for every incoming request.
+
+`DD_INSTRUMENTATION_TELEMETRY_ENABLED`
+: Datadog may collect [environmental and diagnostic information about your system][15] to improve the product. When false, this telemetry data will not be collected.<br>
+**Default**: `true`
+
+`DD_TRACE_OTEL_ENABLED`
+: Enables or disables OpenTelemetry based tracing, both for [custom][18] or [automatic][19] instrumentation.
+Valid values are: `true` or `false`.<br>
+**Default**: `false`
+
 #### Automatic instrumentation optional configuration
 
 The following configuration variables are available **only** when using automatic instrumentation:
@@ -240,8 +256,8 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 **Default**: `true`
 
 `DD_DBM_PROPAGATION_MODE`
-: Enables linking between data sent from APM and the Database Monitoring product when set to `'service'` or `'full'`. The `'service'` option enables the connection between DBM and APM services. The `'full'` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
-**Default**: `'disabled'`
+: Enables linking between data sent from APM and the Database Monitoring product when set to `service` or `full`. The `service` option enables the connection between DBM and APM services. The `full` option enables connection between database spans with database query events. Available for Postgres and MySQL.<br>
+**Default**: `disabled`
 
 `DD_HTTP_CLIENT_ERROR_STATUSES`
 : Sets status code ranges that will cause HTTP client spans to be marked as errors. <br>
@@ -254,7 +270,8 @@ Enables or disables all automatic instrumentation. Setting the environment varia
 `DD_LOGS_INJECTION`
 : **TracerSettings property**: `LogsInjectionEnabled` <br>
 Enables or disables automatic injection of correlation identifiers into application logs. <br>
-Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5].
+Your logger needs to have a `source` that sets the `trace_id` mapping correctly. The default source for .NET Applications, `csharp`, does this automatically. For more information, see [correlated logs in the Trace ID panel][5]. <br><br>
+**Beta**: Starting in version 2.35.0, if [Agent Remote Configuration][16] is enabled where this service runs, you can set `DD_LOGS_INJECTION` in the [Service Catalog][17] UI.
 
 `DD_RUNTIME_METRICS_ENABLED`
 : Enables .NET runtime metrics. Valid values are `true` or `false`. <br>
@@ -318,11 +335,16 @@ The following configuration variables are for features that are available for us
 [3]: /tracing/trace_pipeline/ingestion_mechanisms/
 [4]: /getting_started/tagging/unified_service_tagging/
 [5]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel#trace_id-option
-[6]: /tracing/trace_pipeline/ingestion_mechanisms//?tab=environmentvariables#head-based-sampling
+[6]: /tracing/trace_pipeline/ingestion_mechanisms/?tab=environmentvariables#head-based-sampling
 [7]: /tracing/trace_collection/compatibility/dotnet-framework/#integrations
 [8]: /tracing/trace_collection/custom_instrumentation/dotnet/
 [9]: https://github.com/openzipkin/b3-propagation
 [10]: https://www.w3.org/TR/trace-context/#traceparent-header
 [12]: /tracing/trace_collection/custom_instrumentation/dotnet/#headers-extraction-and-injection
-[13]: /agent/guide/network/#configure-ports
+[13]: /agent/configuration/network/#configure-ports
 [14]: /tracing/configure_data_security/#redacting-the-query-in-the-url
+[15]: /tracing/configure_data_security#telemetry-collection
+[16]: /agent/remote_config/
+[17]: https://app.datadoghq.com/services
+[18]: /tracing/trace_collection/otel_instrumentation/dotnet/
+[19]: /tracing/trace_collection/compatibility/dotnet-core/#opentelemetry-based-integrations

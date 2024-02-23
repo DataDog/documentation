@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: crest-data-systems-dell-emc-isilon
 app_uuid: 1c1b7c48-0c7c-46f2-9f0c-f68c74419244
 assets:
@@ -29,7 +31,7 @@ assets:
 author:
   homepage: https://www.crestdatasys.com
   name: Crest Data Systems
-  sales_email: sales@crestdatasys.com
+  sales_email: datadog-sales@crestdatasys.com
   support_email: datadog.integrations@crestdatasys.com
   vendor_id: crest-data-systems
 categories:
@@ -49,7 +51,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: crest_data_systems_dell_emc_isilon
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -119,8 +120,9 @@ tile:
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
 
-- メール: datadog.integrations@crestdatasys.com
-- Web サイト: [crestdatasys.com](https://www.crestdatasys.com/)
+- サポートメール: datadog.integrations@crestdatasys.com
+- 営業メール: datadog-sales@crestdatasys.com
+- Web サイト: [crestdatasys.com][3]
 
 ### その他の参考資料
 
@@ -131,6 +133,8 @@ tile:
 
 [1]: https://www.datadoghq.com/blog/dell-emc-isilon-monitoring-crest-data-systems-datadog-marketplace/
 [2]: https://www.crestdatasys.com/data_sheet/datadog-setup-monitor/
+[3]: https://www.crestdatasys.com/
+[4]: https://www.dell.com/support/manuals/en-in/isilon-onefs/ifs_pub_administration_guide_cli/administrative-roles-and-privileges
 
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-dell-emc-isilon" target="_blank">こちらをクリック</a>してください。

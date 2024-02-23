@@ -1,16 +1,17 @@
 ---
-title: NDM プロファイル
-kind: documentation
 aliases:
-  - /ja/network_performance_monitoring/devices/profiles/
+- /ja/network_performance_monitoring/devices/profiles/
 further_reading:
-  - link: /network_monitoring/devices/data
-    tag: Documentation
-    text: ネットワークデバイスモニタリングで収集されるデータ
-  - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
-    tag: ブログ
-    text: Datadog での SNMP モニタリング
+- link: /network_monitoring/devices/data
+  tag: Documentation
+  text: ネットワークデバイスモニタリングで収集されるデータ
+- link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
+  tag: ブログ
+  text: Datadog での SNMP モニタリング
+kind: documentation
+title: NDM プロファイル
 ---
+
 ## 概要
 
 ネットワークデバイスモニタリングはプロファイルを使用して、収集するメトリクスと関連タグを Datadog Agent に通知します。プロファイルは、デバイスに関連付けられた OID のコレクションです。
@@ -19,7 +20,7 @@ further_reading:
 
 デフォルトでは、Agent コンフィギュレーションディレクトリ内のすべてのプロファイルがロードされます。コレクションの特定のプロファイルをカスタマイズするには、`definition_file` でファイル名別に明示的に参照するか、`definition` でインラインリストを指定します。Datadog プロファイルはいずれも名前別にリストできます。追加のカスタムプロファイルは、コンフィギュレーション内でファイルパスで参照するか、コンフィギュレーションディレクトリに配置できます。
 
-**注**: 一般的なプロファイルは [generic_router.yaml][1] で、ルーターやスイッチなどをサポートしています。
+**注**: 一般的なプロファイルは [generic-device.yaml][1] で、ルーターやスイッチなどをサポートしています。
 
 ### sysOID マップデバイス
 
@@ -57,12 +58,13 @@ instances:
 
 プロファイルは互いに交換して使用できます。つまり、MIB 依存関係を共有するデバイスは同じプロファイルを再利用できます。たとえば、[Cisco c3850 のプロファイル][2]は多くの Cisco スイッチで使用できます。
 
-Datadog が提供するプロファイルの詳細については、[GitHub リポジトリ][2]を参照してください。
+Datadog が提供するプロファイルの詳細については、[GitHub リポジトリ][3]を参照してください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/profiles/generic-router.yaml
-[2]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/profiles
+[1]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/generic-device.yaml
+[2]: https://github.com/DataDog/integrations-core/blob/master/snmp/datadog_checks/snmp/data/default_profiles/cisco-3850.yaml
+[3]: https://github.com/DataDog/integrations-core/tree/master/snmp/datadog_checks/snmp/data/default_profiles

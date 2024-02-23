@@ -12,22 +12,30 @@ further_reading:
 - link: 'https://learn.datadoghq.com/courses/intro-to-synthetic-tests'
   tag: 'Learning Center'
   text: 'Introduction to Synthetic Tests'
+- link: "/synthetics/multistep"
+  tag: "Documentation"
+  text: "Chain gRPC requests with multistep API tests"
 - link: "/synthetics/private_locations"
   tag: "Documentation"
   text: "Run gRPC tests on internal endpoints"
 - link: "/synthetics/guide/synthetic-test-monitors"
   tag: "Documentation"
   text: "Learn about Synthetic test monitors"
+algolia:
+  rank: 70
+  category: Documentation
+  subcategory: Synthetic API Tests
+  tags: ["grpc", "grpc test", "grpc tests"]
 ---
 ## Overview
 
 gRPC tests allow you to proactively monitor your gRPC services and servers. You can choose from two types:
 
-Unary Calls
+Behavior Checks
 : Send gRPC requests to your applications' API endpoints to verify responses and defined conditions, such as overall response time, header, or body content.
 
 Health Checks 
-: gRPC health checks are a standard for reporting the health of gRPC services. Determine if your gRPC servers and services are responsive, running, and capable of handling remote procedure calls (RPCs).<br> By implementing gRPC health checks, you can run gRPC health checks tests without having to provide a `.proto` file to Datadog. For more information, see the [example health checks `.proto` file][1] shared by the gRPC community.
+: gRPC health checks are a standard for reporting the health of gRPC services. Determine if your gRPC servers and services are responsive, running, and capable of handling remote procedure calls (RPCs).<br><br>By implementing gRPC health checks, you can run gRPC health checks tests without having to provide a `.proto` file to Datadog. For more information, see the [example health checks `.proto` file][1] shared by the gRPC community.
 
 gRPC tests can run from both [managed](#select-locations) and [private locations][2] depending on your preference for running the test from outside or inside your network. gRPC tests can run on a schedule, on-demand, or directly within your [CI/CD pipelines][3].
 
@@ -37,25 +45,27 @@ After choosing to create a `gRPC` test, define your test's request.
 
 ### Define request
 
-1. Specify the **Host** and **Port** to run your test on. By default, the port is set to `50051`.
+1. Specify the **Host** and **Port** to run your test on. The default gRPC port is `50051`.
+2. Select **Behavior Check** to perform a unary call or **Health Check** to perform a health check. 
+   
+   {{< tabs >}}
+   {{% tab "Behavior Check" %}}
 
-{{< tabs >}}
-{{% tab "Unary Call" %}}
+   For a behavior check, specify the **Server Reflection** or [upload a **Proto File**][101] that defines your gRPC server. Select a method and include a request message. Datadog does not support streaming methods.
+   
+   {{< img src="synthetics/api_tests/grpc_behavior_check_test.png" alt="Define gRPC request" style="width:90%;" >}}
+   
+   [101]: https://grpc.io/docs/what-is-grpc/introduction/#working-with-protocol-buffers
 
-2. Upload a [`.proto` file][1] that defines your gRPC server.
+   {{% /tab %}}
+   {{% tab "Health Check" %}}
 
-   - Select the service and method you want to send a gRPC message to from the dropdown menu.  
-     Datadog does not support streaming methods, which are greyed out in-app.
-   - Add a request message.  
+   For a health check, enter the name of the service. Leave this field blank if you want to send a health check on the gRPC server.
 
-
-[1]: https://grpc.io/docs/what-is-grpc/introduction/#working-with-protocol-buffers
-{{% /tab %}}
-{{% tab "Health Check" %}}
-2. Enter the service you want to send a health check. Leave this field blank if you want to send a health check on the gRPC server.
-
-{{% /tab %}}
-{{< /tabs >}}
+   {{< img src="synthetics/api_tests/grpc_health_check_test.png" alt="Define gRPC request" style="width:90%;" >}}
+   
+   {{% /tab %}}
+   {{< /tabs >}}
 
 3. Add **Advanced Options** (optional) to your test:
 
@@ -88,40 +98,46 @@ After choosing to create a `gRPC` test, define your test's request.
 
 3. **Name** your gRPC test.
 
-4. Add `env` **Tags** as well as any other tag to your gRPC test. You can then use these tags to quickly filter through your Synthetic tests on the [Synthetic Monitoring homepage][4].
+4. Add `env` **Tags** as well as any other tag to your gRPC test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][4].
 
-   {{< img src="synthetics/api_tests/grpc_test_config.png" alt="Define gRPC request" style="width:90%;" >}}
-
-Click **Test Service** to try out the request configuration. A response preview is displayed on the right side of your screen.
+Click **Send** to try out the request configuration. A response preview is displayed on the right side of your screen.
 
 ### Define assertions
 
-Assertions define what an expected test result is. After you click **Test Service**, an assertion on the `response time` is added based on the response that was obtained. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. After you click **Send**, an assertion on the `response time` is added based on the response that was obtained. You must define at least one assertion for your test to monitor.
 
 {{< tabs >}}
-{{% tab "Unary Call" %}}
-| Type                    | Operator                                        | Value type                           |
-|-------------------------|-------------------------------------------------|--------------------------------------|
-| response time           | `is less than`                                  | _Integer (ms)_                       |
-| gRPC response           | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][1], [`xpath`][2] | _String_ <br> _[Regex][3]_ |
+{{% tab "Behavior Check" %}}
 
+| Type | Operator | Value type |
+|---|---|---|
+| response time | `is less than` | _Integer (ms)_ |
+| gRPC response | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][1], [`xpath`][2] | _String_ <br> _[Regex][3]_ |
+| gRPC metadata | `is`, `is not`, `contains`, `does not contain`, `matches regex`, `does not match regex`, `does not exist` | _Integer (ms)_ <br> _[Regex][3]_ |
+
+You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
+
+{{< img src="synthetics/api_tests/assertions_grpc_behavior_check_blur.png" alt="Define assertions for your gRPC test to succeed or fail on" style="width:90%;" >}}
 
 [1]: https://restfulapi.net/json-jsonpath/
 [2]: https://www.w3schools.com/xml/xpath_syntax.asp
 [3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-{{% /tab %}}
-{{% tab "Health Check" %}}
-| Type                    | Operator                                        | Value type                           |
-|-------------------------|-------------------------------------------------|--------------------------------------|
-| response time           | `is less than`                                  | _Integer (ms)_                       |
-| healthcheck status      | `is`, `is not`                                  | _Integer (ms)_                       |
 
 {{% /tab %}}
-{{< /tabs >}}
+{{% tab "Health Check" %}}
+
+| Type | Operator | Value type |
+|---|---|---|
+| response time | `is less than` | _Integer (ms)_ |
+| healthcheck status | `is`, `is not` | _Integer (ms)_ |
+| gRPC metadata | `is`, `is not`, `contains`, `does not contain`, `matches regex`, `does not match regex`, `does not exist` | _Integer (ms)_ |
 
 You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
 
-{{< img src="synthetics/api_tests/assertions_grpc.png" alt="Define assertions for your gRPC test to succeed or fail on" style="width:90%;" >}}
+{{< img src="synthetics/api_tests/assertions_grpc_health_check.png" alt="Define assertions for your gRPC test to succeed or fail on" style="width:90%;" >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
 
@@ -141,47 +157,7 @@ gRPC tests can run:
 * [**Within your CI/CD pipelines**][3] to start shipping without fearing faulty code might impact your customers experience.
 * **On-demand** to run your tests whenever makes the most sense for your team.
 
-### Define alert conditions
-
-Set alert conditions to determine the circumstances under which you want a test to fail and trigger an alert.
-
-#### Alerting rule
-
-When you set the alert conditions to: `An alert is triggered if any assertion fails for X minutes from any n of N locations`, an alert is triggered only if these two conditions are true:
-
-* At least one location was in failure (at least one assertion failed) during the last *X* minutes;
-* At one moment during the last *X* minutes, at least *n* locations were in failure.
-
-#### Fast retry
-
-Your test can trigger retries `X` times after `Y` ms in case of a failed test result. Customize the retry interval to suit your alerting sensibility.
-
-Location uptime is computed on a per-evaluation basis (whether the last test result before evaluation was up or down). The total uptime is computed based on the configured alert conditions. Notifications sent are based on the total uptime.
-
-### Configure the test monitor
-
-A notification is sent by your test based on the [alerting conditions](#define-alert-conditions) previously defined. Use this section to define how and what to message your teams.
-
-1. [Similar to how you configure monitors][5], select **users and/or services** that should receive notifications either by adding a `@notification`to the message or by searching for team members and connected integrations with the dropdown box.
-
-2. Enter the notification **message** for your test. This field allows standard [Markdown formatting][6] and supports the following [conditional variables][7]:
-
-    | Conditional Variable       | Description                                                         |
-    |----------------------------|---------------------------------------------------------------------|
-    | `{{#is_alert}}`            | Show when the test alerts.                                          |
-    | `{{^is_alert}}`            | Show unless the test alerts.                                        |
-    | `{{#is_recovery}}`         | Show when the test recovers from an alert.                          |
-    | `{{^is_recovery}}`         | Show unless the test recovers from an alert.                        |
-    | `{{#is_renotify}}`         | Show when the monitor renotifies.                                   |
-    | `{{^is_renotify}}`         | Show unless the monitor renotifies.                                 |
-    | `{{#is_priority}}`         | Show when the monitor matches priority (P1 to P5).                  |
-    | `{{^is_priority}}`         | Show unless the monitor matches priority (P1 to P5).                |
-
-3. Specify how often you want your test to **re-send the notification message** in case of test failure. To prevent renotification on failing tests, leave the option as `Never renotify if the monitor has not been resolved`.
-
-4. Click **Create** to save your test configuration and monitor.
-
-For more information, see [Using Synthetic Test Monitors][8].
+{{% synthetics-alerting-monitoring %}}
 
 {{% synthetics-variables %}}
 
@@ -230,7 +206,7 @@ Access restriction is available for customers using [custom roles][14] on their 
 
 You can restrict access to a browser test based on the roles in your organization. When creating a browser test, choose which roles (in addition to your user) can read and write your test.
 
-{{< img src="synthetics/settings/restrict_access.png" alt="Set permissions for your test" style="width:70%;" >}}
+{{< img src="synthetics/settings/restrict_access_1.png" alt="Set permissions for your test" style="width:70%;" >}}
 
 
 ## Further Reading

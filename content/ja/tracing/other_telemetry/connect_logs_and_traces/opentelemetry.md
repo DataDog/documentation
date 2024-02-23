@@ -5,7 +5,7 @@ code_lang: opentelemetry
 code_lang_weight: 80
 description: アプリケーションログと OpenTelemetry トレースを接続して Datadog で関連付けます
 further_reading:
-- link: /tracing/trace_collection/open_standards/
+- link: /opentelemetry/otel_tracing/
   tag: ドキュメント
   text: OpenTelemetry トレースを Datadog へ送信
 - link: tracing/glossary/
@@ -78,106 +78,26 @@ log.info("Example log line with trace correlation info")
 [3]: https://github.com/DataDog/trace-examples/blob/98626d924f82666de60d6b2d6a65d87eebebdff1/opentelemetry/python-microservice/ddlogging/injection.py#L3
 {{< /tabs >}}
 
-{{% tab "NodeJS" %}}
+{{% tab "Node.js" %}}
 
-手動でトレースとログに相関性を持たせるには、OpenTelemetry 形式の `trace_id` および `span_id` を Datadog 形式に変換するプロセッサで、使用しているロギングモジュールにパッチを適用します。以下の例では、[winston ロギングライブラリ][1]を使用しています。その他のロギングライブラリの場合は、[Datadog SDK の例を変更][2]した方がより適切なことがあります。また、`trace-examples` GitHub リポジトリでは、[OpenTelemetry がインスツルメントされた Nodejs アプリケーションとそのトレース-ログ相関の例][3]が紹介されています。
+手動でトレースとログに相関性を持たせるには、OpenTelemetry 形式の `trace_id` および `span_id` を Datadog 形式に変換するプロセッサで、使用しているロギングモジュールにパッチを適用します。以下の例では、[winston ロギングライブラリ][1]を使用しています。その他のロギングライブラリの場合は、[Datadog SDK の例を変更][2]した方がより適切なことがあります。また、`trace-examples` GitHub リポジトリでは、[OpenTelemetry がインスツルメントされた Node.js アプリケーションとそのトレース-ログ相関の例][3]が紹介されています。
 
 ```js
 // ########## logger.js
 
-// 以下で dd に変換:
+// 以下で dd に変換します。
 // https://github.com/DataDog/dd-trace-js/blob/master/packages/dd-trace/src/id.js
 const opentelemetry = require('@opentelemetry/api');
 const winston = require('winston')
-const UINT_MAX = 4294967296
-
-// バッファを数字列に変換。
-function toNumberString (buffer, radix) {
-  let high = readInt32(buffer, 0)
-  let low = readInt32(buffer, 4)
-  let str = ''
-
-  radix = radix || 10
-
-  while (1) {
-    const mod = (high % radix) * UINT_MAX + low
-
-    high = Math.floor(high / radix)
-    low = Math.floor(mod / radix)
-    str = (mod % radix).toString(radix) + str
-
-    if (!high && !low) break
-  }
-
-  return str
-}
-
-// 指定した radix を使用して数字列をバッファに変換。
-function fromString (str, raddix) {
-  const buffer = new Uint8Array(8)
-  const len = str.length
-
-  let pos = 0
-  let high = 0
-  let low = 0
-
-  if (str[0] === '-') pos++
-
-  const sign = pos
-
-  while (pos < len) {
-    const chr = parseInt(str[pos++], raddix)
-
-    if (!(chr >= 0)) break // NaN
-
-    low = low * raddix + chr
-    high = high * raddix + Math.floor(low / UINT_MAX)
-    low %= UINT_MAX
-  }
-
-  if (sign) {
-    high = ~high
-
-    if (low) {
-      low = UINT_MAX - low
-    } else {
-      high++
-    }
-  }
-
-  writeUInt32BE(buffer, high, 0)
-  writeUInt32BE(buffer, low, 4)
-
-  return buffer
-}
-
-// 符号なしバイト整数をバッファに記述。
-function writeUInt32BE (buffer, value, offset) {
-  buffer[3 + offset] = value & 255
-  value = value >> 8
-  buffer[2 + offset] = value & 255
-  value = value >> 8
-  buffer[1 + offset] = value & 255
-  value = value >> 8
-  buffer[0 + offset] = value & 255
-}
-
-// バッファを符号なしバイト整数に読み込み。
-function readInt32 (buffer, offset) {
-  return (buffer[offset + 0] * 16777216) +
-    (buffer[offset + 1] << 16) +
-    (buffer[offset + 2] << 8) +
-    buffer[offset + 3]
-}
 
 const tracingFormat = function () {
   return winston.format(info => {
     const span = opentelemetry.trace.getSpan(opentelemetry.context.active());
     if (span) {
-      const context = span.context();
-      const traceIdEnd = context.traceId.slice(context.traceId.length / 2)
-      info['dd.trace_id'] = toNumberString(fromString(traceIdEnd,16))
-      info['dd.span_id'] = toNumberString(fromString(context.spanId,16))
+      const { spanId, traceId } = span.spanContext();
+      const traceIdEnd = traceId.slice(traceId.length / 2);
+      info['dd.trace_id'] = BigInt(`0x${traceIdEnd}`).toString();
+      info['dd.span_id'] = BigInt(`0x${spanId}`).toString();
     }
     return info;
   })();
@@ -193,12 +113,12 @@ module.exports = winston.createLogger({
 // ########## index.js
 //
 // ...
-// トレーサーを初期化
+// トレーサーを初期化します
 // ...
 // 
 const logger = require('./logger') 
 //
-// アプリケーションでロガーを使用
+// アプリケーションでロガーを使用します
 logger.info("Example log line with trace correlation info")
 ```
 
@@ -251,8 +171,7 @@ String traceIdHexString = traceIdValue.substring(traceIdValue.length() - 16 );
 long datadogTraceId = Long.parseUnsignedLong(traceIdHexString, 16);
 String datadogTraceIdString = Long.toUnsignedString(datadogTraceId);
 
-String spanIdValue = Span.current().getSpanContext().getSpanId();
-String spanIdHexString = spanIdValue.substring(spanIdValue.length() - 16 );
+String spanIdHexString = Span.current().getSpanContext().getSpanId();
 long datadogSpanId = Long.parseUnsignedLong(spanIdHexString, 16);
 String datadogSpanIdString = Long.toUnsignedString(datadogSpanId);
 
@@ -338,7 +257,7 @@ func convertTraceID(id string) string {
 
 {{% tab ".NET" %}}
 
-トレースとログを手動で相関付けるには、OpenTelemetry の `TraceId` と `SpanId` を Datadog が使用するフォーマットに変換します。これらの ID をログに `dd.trace_id` と `dd.span_id` 属性で追加してください。次の例では、[Serilog ライブラリ][1]を使用して、OTel (`System.DiagnosticSource.Activity`) のトレースとスパン ID を Datadog の要求するフォーマットに変換する方法を示しています。
+トレースとログを手動で相関付けるには、OpenTelemetry の `TraceId` と `SpanId` を Datadog が使用するフォーマットに変換します。これらの ID をログに `dd.trace_id` と `dd.span_id` 属性で追加してください。次の例では、[Serilog ライブラリ][1]を使用して、OpenTelemetry (`System.DiagnosticSource.Activity`) のトレースとスパン ID を Datadog の要求するフォーマットに変換する方法を示しています。
 
 ```csharp
 var stringTraceId = Activity.Current.TraceId.ToString();
@@ -360,7 +279,7 @@ using (LogContext.PushProperty("dd.span_id", ddSpanId))
 
 {{< /tabs >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

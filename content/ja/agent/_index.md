@@ -7,7 +7,10 @@ aliases:
 - /ja/agent/faq/install-core-extra
 - /ja/logs/faq/can-the-datadog-agent-be-used-to-send-only-logs
 - /ja/agent/faq/the-datadog-agent-for-logs-or-traces-only
-description: Agent をインストールおよび構成してデータを収集する
+cascade:
+  algolia:
+    rank: 70
+description: Agent をインストールして、データ収集のために構成する
 further_reading:
 - link: /logs/
   tag: Documentation
@@ -36,7 +39,7 @@ Agent v7 が利用可能です。 <a href="/agent/versions/upgrade_to_agent_v7">
 
 Datadog Agent は、ホストで実行されるソフトウェアです。ホストからイベントとメトリクスを収集し、Datadog に送信します。ここで、モニタリングとパフォーマンスのデータを分析できます。Datadog Agent はオープンソースです。ソースコードは、GitHub の [DataDog/datadog-agent][1] から入手できます。
 
-**Agent はフルでインストールすることが推奨されています。**ただし、Amazon Linux、CentOS、Debian、Fedora、Red Hat、SUSE、Ubuntu 用に、スタンドアロンの DogStatsD パッケージを使用することが可能です。このパッケージは、DogStatsD がサイドカーとして稼働するか、Agent の機能をフルに持たない DogStatsD サーバーを稼働させているコンテナ環境で使用されます。
+**Agent はフルでインストールすることが推奨されています。** ただし、Amazon Linux、CentOS、Debian、Fedora、Red Hat、SUSE、Ubuntu 用に、スタンドアロンの DogStatsD パッケージを使用することが可能です。このパッケージは、DogStatsD がサイドカーとして稼働するか、Agent の機能をフルに持たない DogStatsD サーバーを稼働させているコンテナ環境で使用されます。
 
 スタンドアロンの DogStatsD パッケージは、Agent の [1 行のインストールコマンド][2]でインストールできますが、`datadog-agent` の部分をすべて `datadog-dogstatsd` に変える必要があります。[DogStatsD6 Docker イメージリポジトリ][3]にある Docker イメージも利用できます。
 
@@ -49,7 +52,7 @@ Datadog は、Datadog Agent をマイナーリリースとパッチリリース�
 <p>
 Datadog Agent のメジャーバージョンにアップグレードして最新の状態に保つことが、最新の Agent 機能と修正を入手するためにサポートされている唯一の方法です。ただし、Agent は頻繁にアップデートをリリースしており、エンタープライズ規模でアップデートを管理することは困難な場合があります。これは、メジャーリリースまで更新を待つべきであるあるという意味ではありません。組織に適した更新の頻度は、インフラストラクチャーと構成管理の方法によって異なりますが、毎月が目標です。</p>
 <p>
-特定のホストの 2 つのマイナーバージョン間で Datadog Agent コアを更新するには、<a href="https://app.datadoghq.com/account/settings#agent">プラットフォームに対応するインストールコマンド</a>を実行します。</p>
+特定のホストの 2 つのマイナーバージョン間で Datadog Agent コアを更新するには、<a href="https://app.datadoghq.com/account/settings/agent/latest">プラットフォームに対応するインストールコマンド</a>を実行します。</p>
 <p>
 Datadog Agent のリリース番号は、<a href="https://semver.org/">SemVer</a> の規則に従います。</p>
 </div>
@@ -58,11 +61,12 @@ Datadog Agent のリリース番号は、<a href="https://semver.org/">SemVer</a
   {{< nextlink href="/agent/basic_agent_usage">}}<u>基本的なエージェントの利用方法</u>: アーキテクチャの詳細、CLI、オーバーヘッド、構成管理ツールなど、Datadog Agent について詳しく説明します。{{< /nextlink >}}
   {{< nextlink href="/agent/docker">}}<u>Docker</u>: Datadog Agent を Docker にインストールして構成します。{{< /nextlink >}}
   {{< nextlink href="/agent/kubernetes">}}<u>Kubernetes</u>: Datadog Agent を Kubernetes にインストールして構成します。{{< /nextlink >}}
-  {{< nextlink href="/agent/cluster_agent">}}<u>Cluster Agent</u>: オーケストレーションされたクラスターからモニタリングデータを効率的に収集するよう設計された Datadog Agent のバージョン、Cluster Agent for Kubernetes をインストールして構成します。{{< /nextlink >}} {{< nextlink href="/agent/amazon_ecs">}}<u>Amazon ECS</u>: Amazon ECS に Datadog Agent をインストールし構成します。{{< /nextlink >}}
-{{< nextlink href="integrations/ecs_fargate/">}}<u>AWS Fargate</u>: AWS Fargate上の Amazon ECS で Datadog Agent をインストールし、構成します。{{< /nextlink >}}
- {{< nextlink href="/agent/iot">}}<u>IoT</u>: IoT デバイスの監視に最適化された設計で、アプリケーションに埋め込み型バージョンの Datadog Agent、Datadog IoT Agent をインストールし構成します。{{< /nextlink >}}
-  {{< nextlink href="/agent/logs">}}<u>ログ収集</u>: Datadog Agent でのログ収集を有効にし、構成します。{{< /nextlink >}}
-  {{< nextlink href="/agent/proxy">}}<u>プロキシ</u>: ネットワーク構成によってアウトバウンドトラフィックが制限される場合は、Agent トラフィックにプロキシを使用します。{{< /nextlink >}}
+  {{< nextlink href="/agent/cluster_agent">}}<u>Cluster Agent</u>: オーケストレーションされたクラスターからモニタリングデータを効率的に収集するよう設計された Datadog Agent のバージョン、Cluster Agent for Kubernetes をインストールして構成します。{{< /nextlink >}}
+  {{< nextlink href="/agent/amazon_ecs">}}<u>Amazon ECS</u>: Amazon ECS に Datadog Agent をインストールし構成します。{{< /nextlink >}}
+  {{< nextlink href="integrations/ecs_fargate/">}}<u>AWS Fargate</u>: AWS Fargate上の Amazon ECS で Datadog Agent をインストールし、構成します。{{< /nextlink >}}
+  {{< nextlink href="/agent/iot">}}<u>IoT</u>:  IoT デバイスや組み込みアプリケーションの監視に最適化された Datadog Agent のバージョンである Datadog IoT Agent をインストールし構成します。{{< /nextlink >}}
+  {{< nextlink href="/agent/logs">}}<u>ログ収集</u>: Datadog Agent でログ収集を有効にし、構成します。{{< /nextlink >}}
+  {{< nextlink href="/agent/configuration/proxy">}}<u>プロキシ</u>: ネットワーク構成によってアウトバウンドトラフィックが制限される場合は、Agent トラフィックにプロキシを使用します。{{< /nextlink >}}
   {{< nextlink href="/agent/versions/">}}<u>バージョン</u>: Agent 7 は Datadog Agent の最新メジャーバージョンです。Agent のメジャーバージョン間の違いやアップグレード方法について説明します。{{< /nextlink >}}
   {{< nextlink href="/agent/troubleshooting">}}<u>トラブルシューティング</u>: Datadog Agent のトラブルシューティング情報をご紹介します。{{< /nextlink >}}
   {{< nextlink href="/agent/guide">}}<u>ガイド</u>: Agent の使用に関するステップバイステップの詳細なチュートリアルです。{{< /nextlink >}}
@@ -75,5 +79,5 @@ Datadog Agent のリリース番号は、<a href="https://semver.org/">SemVer</a
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/datadog-agent
-[2]: https://app.datadoghq.com/account/settings#agent/aws
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=aws
 [3]: https://github.com/DataDog/datadog-agent/tree/main/Dockerfiles/dogstatsd/alpine

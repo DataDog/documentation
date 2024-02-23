@@ -18,7 +18,7 @@ title: エフェメラルサーバーの再起動を監視する
 
 以下に示す例は、この設定方法をキャプチャしたものです。
 
-{{< img src="monitors/guide/ephemeral_set_up.png" alt="ephemeral_set_up"  >}}
+{{< img src="monitors/guide/ephemeral_set_up.png" alt="エフェメラルサーバー用の設定" >}}
 
 
 {{< partial name="whats-next/whats-next.html" >}}

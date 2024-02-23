@@ -1,29 +1,30 @@
 ---
-title: Corrélation de métriques
-kind: documentation
 aliases:
-  - /fr/graphing/correlations/
+- /fr/graphing/correlations/
 further_reading:
-  - link: /dashboards/
-    tag: Documentation
-    text: Dashboards Datadog
-  - link: /notebooks/
-    tag: Documentation
-    text: Notebooks Datadog
-  - link: /tracing/visualization/service/
-    tag: Documentation
-    text: Page Service APM
-  - link: /watchdog/
-    tag: Documentation
-    text: Watchdog
+- link: /dashboards/
+  tag: Documentation
+  text: Dashboards Datadog
+- link: /notebooks/
+  tag: Documentation
+  text: Notebooks Datadog
+- link: /tracing/visualization/service/
+  tag: Documentation
+  text: Page Service APM
+- link: /watchdog/
+  tag: Documentation
+  text: Watchdog
+kind: documentation
+title: Corrélation de métriques
 ---
+
 ## Présentation
 
 Les corrélations de métriques vous aident à identifier les causes potentielles d'un problème en recherchant d'autres métriques affichant un comportement anormal dans la même période. Les corrélations examinent vos métriques issues de différentes sources, telles que les dashboards, les intégrations, l'APM et les métriques custom.
 
 ## Rechercher des monitors
 
-Vous pouvez commencer à explorer vos corrélations de métriques depuis n'importe quelle page des dashboards, des notebooks, de l'APM, des stories Watchdog ou de statut des monitors.
+Vous pouvez commencer à explorer vos corrélations de métriques depuis n'importe quelle page relative aux dashboards, aux notebooks, à APM, aux alertes Watchdog ou aux statuts des monitors.
 
 * Cliquez sur n'importe quel graphique et sélectionnez **Find correlated metrics**.
 * Depuis un graphique affiché en plein écran, cliquez sur l'onglet **Correlations**.

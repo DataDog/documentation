@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-zoom
 app_uuid: a79217b7-6499-4de5-8ebd-73a91d227644
 assets:
@@ -6,6 +8,7 @@ assets:
     RapDev Zoom Call Quality: assets/dashboards/rapdev_zoom_meeting_quality.json
     RapDev Zoom Geolocation Overview: assets/dashboards/rapdev_zoom_geo_overview.json
     RapDev Zoom Overview: assets/dashboards/rapdev_zoom_overview.json
+    RapDev Zoom Phones Overview: assets/dashboards/rapdev_zoom_phones_overview.json
     RapDev Zoom Rooms Dashboard: assets/dashboards/rapdev_zoom_rooms_dashboard.json
     RapDev Zoom User Details: assets/dashboards/rapdev_zoom_user_details.json
   integration:
@@ -32,9 +35,9 @@ author:
   support_email: support@rapdev.io
   vendor_id: rapdev
 categories:
+- マーケットプレイス
 - クラウド
 - コラボレーション
-- マーケットプレイス
 dependencies: []
 display_on_public_website: true
 draft: false
@@ -48,32 +51,31 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_zoom
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
   metric: datadog.marketplace.rapdev.zoom
   product_id: zoom
-  short_description: ユーザー 1 人あたりの単価
+  short_description: ユーザー 1 人またはデバイス 1 台あたりの単価
   tag: zoom_user_email
-  unit_label: Zoom 登録ユーザー
+  unit_label: Zoom 登録ユーザーと電話デバイス
   unit_price: 1
 public_title: Zoom
 short_description: Zoom アカウントを監視し、ライセンスを最適化します
 supported_os:
 - linux
-- windows
 - macos
+- windows
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
+  - Supported OS::Linux
+  - Supported OS::macOS
+  - Supported OS::Windows
+  - Category::Marketplace
   - Category::Cloud
   - Category::Collaboration
-  - Category::Marketplace
   - Offering::Integration
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
   configuration: README.md#Setup
   description: Zoom アカウントを監視し、ライセンスを最適化します
   media:
@@ -116,6 +118,7 @@ Zoom インテグレーションにより、ミーティング、Rooms、ユー�
 3. RapDev Zoom ミーティング品質
 4. RapDev Zoom ユーザー詳細
 5. RapDev Zoom ジオ概要
+6. RapDev Zoom 電話概要
 
 ## サポート
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから RapDev.io にお問い合わせください。

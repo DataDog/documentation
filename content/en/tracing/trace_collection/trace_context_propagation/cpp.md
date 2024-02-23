@@ -4,30 +4,40 @@ kind: documentation
 code_lang: cpp
 type: multi-code-lang
 code_lang_weight: 50
+further_reading:
+    - link: 'https://www.datadoghq.com/blog/monitor-otel-with-w3c-trace-context/'
+      tag: 'Blog'
+      text: 'Monitor OpenTelemetry-instrumented apps with support for W3C Trace Context'
+    - link: '/opentelemetry/guide/otel_api_tracing_interoperability'
+      tag: 'Documentation'
+      text: 'Interoperability of OpenTelemetry API and Datadog instrumented traces'
 ---
 
 ## Overview
 
-Datadog APM tracer supports [B3 headers extraction][11] and injection for distributed tracing.
+Datadog APM tracer supports [B3][11] and [W3C][1] headers extraction and injection for distributed tracing.
 
 Distributed headers injection and extraction is controlled by configuring injection/extraction styles. The supported styles for C++ are:
 
 - Datadog: `Datadog`
 - B3: `B3`
+- W3C: `tracecontext`
 
 Injection styles can be configured using:
 
-- Environment Variable: `DD_PROPAGATION_STYLE_INJECT="Datadog B3"`
+- Environment Variable: `DD_TRACE_PROPAGATION_STYLE_INJECT="Datadog B3"`
 
 The value of the environment variable is a comma (or space) separated list of header styles that are enabled for injection. By default only Datadog injection style is enabled.
 
 Extraction styles can be configured using:
 
-- Environment Variable: `DD_PROPAGATION_STYLE_EXTRACT="Datadog B3"`
+- Environment Variable: `DD_TRACE_PROPAGATION_STYLE_EXTRACT="Datadog B3"`
 
 The value of the environment variable is a comma (or space) separated list of header styles that are enabled for extraction. By default only Datadog extraction style is enabled.
 
 If multiple extraction styles are enabled, the extraction attempt is done on the order those styles are configured and first successful extracted value is used.
+
+The default injection and extractions settings for the most recent versions of the library are `datadog,tracecontext`. If you're using Envoy or nginx upstream proxies, the default values are `tracecontext,datadog`.
 
 ### Inject and extract context for distributed tracing
 
@@ -69,7 +79,11 @@ void example() {
 }
 ```
 
+## Further Reading
 
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://github.com/w3c/trace-context
 [9]: https://github.com/opentracing/opentracing-cpp/#inject-span-context-into-a-textmapwriter
 [10]: https://github.com/opentracing/opentracing-cpp/blob/master/include/opentracing/propagation.h
 [11]: https://github.com/openzipkin/b3-propagation

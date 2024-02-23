@@ -43,6 +43,6 @@ See additional examples in the [Datadog API documentation][1].
 [4]: https://app.datadoghq.com/organization-settings/api-keys
 [5]: https://app.datadoghq.com/metric/summary
 [6]: https://app.datadoghq.com/infrastructure
-[7]: /api/#rate-limiting
+[7]: /api/latest/rate-limits/
 [8]: https://virtualenv.pypa.io/en/stable
 [9]: https://pypi.org/project/datadog

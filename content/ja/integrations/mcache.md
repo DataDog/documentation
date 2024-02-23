@@ -29,9 +29,9 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
 - caching
 - log collection
+- tracing
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/mcache/README.md
 display_on_public_website: true
@@ -39,12 +39,11 @@ draft: false
 git_integration_title: mcache
 integration_id: memcached
 integration_title: Memcache
-integration_version: 3.3.1
+integration_version: 4.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: mcache
-oauth: {}
 public_title: Memcache
 short_description: メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。
 supported_os:
@@ -53,11 +52,11 @@ supported_os:
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Category::Web
   - Category::キャッシュ
   - Category::ログの収集
+  - Category::Tracing
+  - Supported OS::Linux
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。
   media: []
@@ -74,13 +73,15 @@ Agent の Memcache チェックを使用して、Memcache のメモリ使用量�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Memcache チェックは [Datadog Agent][1] パッケージに含まれています。Memcache サーバーに追加でインストールする必要はありません。
 
 ### コンフィギュレーション
 
 ホストで実行されている Agent 用にこのチェックを構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[コンテナ化](#containerized)セクションを参照してください。
+
+Memcache サーバーを起動する際に、バインディングプロトコル `-B` を `binary` または `auto` に設定します。自動 (auto) がデフォルトです。
 
 #### メトリクスの収集
 
@@ -203,7 +204,7 @@ Mcache チェックには、イベントは含まれません。
 - [Redis または Memcached を使用した ElastiCache のパフォーマンスメトリクスの監視][6]
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://docs.datadoghq.com/ja/help/
 [4]: https://www.datadoghq.com/blog/speed-up-web-applications-memcached

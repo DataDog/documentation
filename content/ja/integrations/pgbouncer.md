@@ -40,12 +40,11 @@ draft: false
 git_integration_title: pgbouncer
 integration_id: pgbouncer
 integration_title: PGBouncer
-integration_version: 4.3.1
+integration_version: 4.4.2
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: pgbouncer
-oauth: {}
 public_title: PGBouncer
 short_description: 接続プールメトリクスを追跡し、アプリケーションに出入りするトラフィックを監視
 supported_os:
@@ -74,7 +73,7 @@ PgBouncer チェックは、接続プールメトリクスを追跡し、アプ�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 PgBouncer チェックは [Datadog Agent][1] パッケージに含まれています。PgBouncer ノードに追加でインストールする必要はありません。
 

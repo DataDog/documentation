@@ -32,9 +32,9 @@ To enable the Agent full debug mode:
 
 4. Wait a few minutes to generate some logs. See [Agent Log Files][3] for OS specific details.
 
-[1]: /agent/guide/agent-configuration-files/#agent-main-configuration-file
-[2]: /agent/guide/agent-commands/#restart-the-agent
-[3]: /agent/guide/agent-log-files/
+[1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[2]: /agent/configuration/agent-commands/#restart-the-agent
+[3]: /agent/configuration/agent-log-files/
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -46,9 +46,9 @@ To enable the Agent full debug mode:
 
 4. Wait a few minutes to generate some logs. See [Agent Log Files][3] for OS specific details.
 
-[1]: /agent/guide/agent-configuration-files/?tab=agentv5#agent-main-configuration-file
-[2]: /agent/guide/agent-commands/?tab=agentv5#restart-the-agent
-[3]: /agent/guide/agent-log-files/?tab=agentv5
+[1]: /agent/configuration/agent-configuration-files/?tab=agentv5#agent-main-configuration-file
+[2]: /agent/configuration/agent-commands/?tab=agentv5#restart-the-agent
+[3]: /agent/configuration/agent-log-files/?tab=agentv5
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -65,7 +65,7 @@ For Agent v6.19+ / v7.19+, set the Agent log level at runtime using:
 agent config set log_level debug
 ```
 
-If the trace-agent is in a dedicated container, you **cannot** change the log level for the trace-agent container at runtime like you can do for the agent container. A redeployment after setting `dd_log_level` variable to `debug` is still necessary for the dedicated trace-agent container.
+You **cannot** change the log level for the trace-agent container at runtime like you can do for the agent container. A redeployment after setting `dd_log_level` variable to `debug` is still necessary for the dedicated trace-agent container.
 
 {{% /tab %}}
 {{% tab "Agent v5" %}}

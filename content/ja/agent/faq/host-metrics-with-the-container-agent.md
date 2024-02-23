@@ -56,7 +56,8 @@ Agent から報告される関連ログの例を示します。
 
 理想的には、Agent のコンテナに有用なパスのみを公開する必要があります。必要に応じて、ディスクチェックの `conf.yaml` を更新し、以下のパラメーターのいずれかを使用して関連するファイルシステムを除外することで、これらのログが Agent によって報告されるのを防ぎます。
 
-* Agent v6.8.0+ の場合は `file_system_blacklist`
+* Agent v6.24.0+ および v7.24.0+ の場合は `file_system_exclude`
+* Agent v6.8.0 - v6.23.1/v7.23.1 の場合は `file_system_blacklist`
 * それより古い Agent バージョンの場合は `excluded_filesystems`
 
 ## その他の参考資料

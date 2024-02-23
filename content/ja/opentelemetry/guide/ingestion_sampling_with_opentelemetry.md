@@ -67,9 +67,27 @@ OpenTelemetry コレクターレベルでは、_追跡ベースサンプリン�
 
 スパンからのトレース分析モニターとメトリクスにトレースサンプリングを設定することの意味については、[取り込み量制御ガイド][8]を参照してください。
 
+### Datadog Agent によるサンプリング
+
+[Datadog Agent OTLP Ingest][3] を使用する場合、Agent バージョン 7.44.0 から[確率的サンプラー][10]が利用できます。環境変数 `DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE` を使用して設定するか、Agent のコンフィグレーションファイルで以下の YAML を設定します。
+
+```yaml
+otlp_config:
+  # ...
+  traces:
+    probabilistic_sampler:
+      sampling_percentage: 50
+```
+
+上記の例では、50% のトレースがキャプチャされます。
+
+**注**: 確率的サンプラーのプロパティは、すべての Agent で同じサンプリング率を使用すると仮定した場合、完全なトレースのみが取り込まれることを保証します。
+
+確率的サンプラーは、SDK レベルでサンプリング優先度がすでに設定されているスパンを無視します。さらに、確率的サンプラーでキャプチャされなかったスパンは、Datadog Agent の[エラーサンプラーとレアサンプラー][13]でキャプチャされる可能性があり、取り込みデータセットにエラーとレアエンドポイントトレースの高い表現力を確保することができます。
+
 ## Datadog UI から取り込み量を監視する
 
-[APM 推定使用量ダッシュボード][12]と推定使用量メトリクス `datadog.estimated_usage.apm.ingested_bytes` を活用すると、特定の期間の取り込み量を可視化することができます。ダッシュボードを特定の環境とサービスにフィルターして、取り込み量の最大のシェアを占めるサービスを確認できます。
+[APM 推定使用量ダッシュボード][14]と推定使用量メトリクス `datadog.estimated_usage.apm.ingested_bytes` を活用すると、特定の期間の取り込み量を可視化することができます。ダッシュボードを特定の環境とサービスにフィルターして、取り込み量の最大のシェアを占めるサービスを確認できます。
 
 
 ## その他の参考資料
@@ -77,7 +95,7 @@ OpenTelemetry コレクターレベルでは、_追跡ベースサンプリン�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/opentelemetry/otel_collector_datadog_exporter
-[2]:/ja/opentelemetry/otel_collector_datadog_exporter/?tab=alongsidetheagent#5-run-the-collector
+[2]: /ja/opentelemetry/otel_collector_datadog_exporter/?tab=alongsidetheagent#5-run-the-collector
 [3]: /ja/opentelemetry/otlp_ingest_in_the_agent
 [4]: /ja/tracing/metrics/metrics_namespace/
 [5]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased
@@ -87,4 +105,5 @@ OpenTelemetry コレクターレベルでは、_追跡ベースサンプリン�
 [9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/datadogprocessor
-[12]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
+[13]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#error-and-rare-traces
+[14]: https://app.datadoghq.com/dash/integration/apm_estimated_usage

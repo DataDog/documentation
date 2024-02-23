@@ -6,66 +6,61 @@ aliases:
     - /agent/kubernetes/helm
     - /agent/kubernetes/installation
 further_reading:
-    - link: 'infrastructure/livecontainers/'
-      tag: 'Documentation'
-      text: 'Live Containers'
     - link: '/agent/kubernetes/configuration'
       tag: 'Documentation'
-      text: 'Configure the Datadog Agent on Kubernetes'
-    - link: '/agent/kubernetes/integrations'
-      tag: 'Documentation'
-      text: 'Configure integrations'
-    - link: '/agent/kubernetes/apm'
-      tag: 'Documentation'
-      text: 'Collect your application traces'
-    - link: 'agent/kubernetes/log'
-      tag: 'Documentation'
-      text: 'Collect your application logs'
-    - link: '/agent/kubernetes/tag'
-      tag: 'Documentation'
-      text: 'Assign tags to all data emitted by a container, Pod, or Node'
+      text: 'Further Configure the Datadog Agent on Kubernetes'
+    - link: 'https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#all-configuration-options'
+      tag: 'GitHub'
+      text: 'Datadog Helm chart - All configuration options'
+    - link: 'https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#upgrading'
+      tag: 'GitHub'
+      text: 'Upgrading Datadog Helm'
 ---
 
-## Installation
+## Overview
 
-This page provides instructions on installing the Datadog Agent in a Kubernetes environment through three different methods. The following methods are supported:
-
-- Datadog Operator
-- Helm chart
-- DaemonSet
+This page provides instructions on installing the Datadog Agent in a Kubernetes environment. By default, the Datadog Agent runs in a DaemonSet.
 
 For dedicated documentation and examples for major Kubernetes distributions including AWS Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), Google Kubernetes Engine (GKE), Red Hat OpenShift, Rancher, and Oracle Container Engine for Kubernetes (OKE), see [Kubernetes distributions][1].
 
 For dedicated documentation and examples for monitoring the Kubernetes control plane, see [Kubernetes control plane monitoring][2].
 
-### Minimum Agent and Cluster Agent versions
+### Minimum Kubernetes and Datadog Agent versions
 
 Some features related to later Kubernetes versions require a minimum Datadog Agent version.
 
-| Kubernetes version | Agent version  | Cluster Agent version | Reason                                |
-|--------------------|----------------|-----------------------|---------------------------------------|
-| 1.16.0+            | 7.19.0+        | 1.9.0+                | Kubelet metrics deprecation           |
-| 1.21.0+            | 7.36.0+        | 1.20.0+               | Kubernetes resource deprecation       |
-| 1.22.0+            | 7.37.0+        | 7.37.0+               | Support dynamic service account token |
+| Kubernetes version | Agent version  | Reason                                |
+|--------------------|----------------|---------------------------------------|
+| 1.16.0+            | 7.19.0+        | Kubelet metrics deprecation           |
+| 1.21.0+            | 7.36.0+        |  Kubernetes resource deprecation       |
+| 1.22.0+            | 7.37.0+        |  Support dynamic service account token |
+
+See also: [Minimum Kubernetes and Cluster Agent versions][8].
+
+## Installation
+
+You have the following options for installing the Datadog Agent on Kubernetes:
+
+- The [Datadog Operator][9], a [Kubernetes Operator][10] (Recommended)
+- [Helm][11]
+- Manual installation. See [Manually install and configure the Datadog Agent on Kubernetes with DaemonSet][12].
 
 {{< tabs >}}
 {{% tab "Operator" %}}
 
 <div class="alert alert-warning">The Datadog Operator is Generally Available with the 1.0.0 version, and it reconciles the version <code>v2alpha1</code> of the DatadogAgent Custom Resource. </div>
 
-[The Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
+The [Datadog Operator][1] is a way to deploy the Datadog Agent on Kubernetes and OpenShift. It reports deployment status, health, and errors in its Custom Resource status, and it limits the risk of misconfiguration thanks to higher-level configuration options.
 
-## Prerequisites
+### Prerequisites
 
 Using the Datadog Operator requires the following prerequisites:
 
-- **Kubernetes Cluster version >= v1.20.X**: Tests were done on versions >= `1.20.0`. Still, it should work on versions `>= v1.11.0`. For earlier versions, because of limited CRD support, the Operator may not work as expected.
+- **Kubernetes Cluster version v1.20.X+**: Tests were done on v1.20.0+; should be supported in v1.11.0+. For earlier versions, because of limited CRD support, the Operator may not work as expected.
 - [`Helm`][2] for deploying the `datadog-operator`.
 - [`Kubectl` CLI][3] for installing the `datadog-agent`.
 
-## Deploy an Agent with the Operator
-
-To deploy the Datadog Agent with the operator in the minimum number of steps, see the [`datadog-operator`][4] Helm chart. Here are the steps:
+### Deploy an Agent with the Operator
 
 1. Install the [Datadog Operator][5]:
 
@@ -79,40 +74,121 @@ To deploy the Datadog Agent with the operator in the minimum number of steps, se
    ```shell
    kubectl create secret generic datadog-secret --from-literal api-key=<DATADOG_API_KEY> --from-literal app-key=<DATADOG_APP_KEY>
    ```
-   Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API and application keys][6]
+   Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your [Datadog API][6] and [application keys][7].
 
-2. Create a file with the spec of your Datadog Agent deployment configuration. The simplest configuration is as follows:
+2. Create a file, `datadog-agent.yaml`, with the spec of your Datadog Agent deployment configuration. The simplest configuration is as follows:
 
-```yaml
-kind: DatadogAgent
-apiVersion: datadoghq.com/v2alpha1
-metadata:
-  name: datadog
-spec:
-  global:
-    credentials:
-      apiSecret:
-        secretName: datadog-secret
-        keyName: api-key
-      appSecret:
-        secretName: datadog-secret
-        keyName: app-key
-  override:
-    clusterAgent:
-      image:
-        name: gcr.io/datadoghq/cluster-agent:latest
-    nodeAgent:
-      image:
-        name: gcr.io/datadoghq/agent:latest
-```
+   ```yaml
+   kind: DatadogAgent
+   apiVersion: datadoghq.com/v2alpha1
+   metadata:
+     name: datadog
+   spec:
+     global:
+       site: <DATADOG_SITE>
+       credentials:
+         apiSecret:
+           secretName: datadog-secret
+           keyName: api-key
+         appSecret:
+           secretName: datadog-secret
+           keyName: app-key
+     override:
+       clusterAgent:
+         image:
+           name: gcr.io/datadoghq/cluster-agent:latest
+       nodeAgent:
+         image:
+           name: gcr.io/datadoghq/agent:latest
+   ```
+
+   Replace `<DATADOG_SITE>` with your [Datadog site][10]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
 
 3. Deploy the Datadog Agent with the above configuration file:
    ```shell
    kubectl apply -f /path/to/your/datadog-agent.yaml
    ```
+[1]: https://github.com/DataDog/datadog-operator
+[2]: https://helm.sh
+[3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+[4]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
+[5]: https://artifacthub.io/packages/helm/datadog/datadog-operator
+[6]: https://app.datadoghq.com/organization-settings/api-keys
+[7]: https://app.datadoghq.com/organization-settings/application-keys
+[10]: /getting_started/site
+{{% /tab %}}
+{{% tab "Helm" %}}
 
-## Cleanup
+### Prerequisites
 
+- [Helm][1]
+- If this is a fresh install, add the Helm Datadog repo:
+    ```bash
+    helm repo add datadog https://helm.datadoghq.com
+    helm repo update
+    ```
+
+### Install the chart
+
+1. Create an empty `datadog-values.yaml` file. Any parameters not specified in this file default to those set in [`values.yaml`][14].
+
+2. Create a Kubernetes Secret to store your Datadog [API key][3] and [app key][15]:
+   
+   ```bash
+   kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY --from-literal app-key=$DD_APP_KEY
+   ```
+3. Set the following parameters in your `datadog-values.yaml` to reference the secret:
+   ```
+   datadog:
+    apiKeyExistingSecret: datadog-secret
+    appKeyExistingSecret: datadog-secret
+    site: <DATADOG_SITE>
+   ```
+   Replace `<DATADOG_SITE>` with your [Datadog site][13]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct SITE is selected on the right).
+3. Run the following command:
+   ```bash
+   helm install <RELEASE_NAME> \
+    -f datadog-values.yaml \
+    --set targetSystem=<TARGET_SYSTEM> \
+    datadog/datadog
+   ```
+
+- `<RELEASE_NAME>`: Your release name. For example, `datadog-agent`.
+
+- `<TARGET_SYSTEM>`: The name of your OS. For example, `linux` or `windows`.
+
+
+**Note**: If you are using Helm `2.x`, run the following:
+   ```bash
+   helm install --name <RELEASE_NAME> \
+    -f datadog-values.yaml \
+    --set targetSystem=<TARGET_SYSTEM> \
+    datadog/datadog
+   ```
+
+[1]: https://v3.helm.sh/docs/intro/install/
+[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-state-metrics
+[5]: /agent/kubernetes/apm?tab=helm
+[6]: /agent/kubernetes/log?tab=helm
+
+[8]: https://gcr.io/datadoghq
+[9]: https://gallery.ecr.aws/datadog/
+[10]: https://hub.docker.com/u/datadog/
+[11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
+[12]: /integrations/kubernetes_state_core
+[13]: /getting_started/site
+[14]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml
+[15]: https://app.datadoghq.com/organization-settings/application-keys
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Cleanup
+
+{{< tabs >}}
+{{% tab "Operator" %}}
 The following command deletes all the Kubernetes resources created by the above instructions:
 
 ```shell
@@ -120,11 +196,28 @@ kubectl delete datadogagent datadog
 helm delete my-datadog-operator
 ```
 
-For further details on setting up Operator, including information about using tolerations, refer to the [Datadog Operator advanced setup guide][7].
+For further details on setting up Datadog Operator, including information about using tolerations, refer to the [Datadog Operator advanced setup guide][1].
 
-## Unprivileged
+[1]: https://github.com/DataDog/datadog-operator/blob/main/docs/installation.md
 
-(Optional) To run an unprivileged installation, add the following to the [Datadog custom resource (CR)][8]:
+{{% /tab %}}
+{{% tab "Helm" %}}
+To uninstall/delete the `<RELEASE_NAME>` deployment:
+
+```bash
+helm uninstall <RELEASE_NAME>
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+
+### Unprivileged
+
+(Optional) To run an unprivileged installation:
+
+{{< tabs >}}
+{{% tab "Operator" %}}
+Add the following to the Datadog custom resource (CR) in your `datadog-agent`.yaml:
 
 ```yaml
 agent:
@@ -135,62 +228,42 @@ agent:
         - <DOCKER_GROUP_ID>
 ```
 
-where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the Docker or containerd socket.
-
-## Container registries
-
-To modify the container image registry, see the [Changing Container Registry][9] guide.
-
-[1]: https://github.com/DataDog/datadog-operator
-[2]: https://helm.sh
-[3]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
-[4]: https://github.com/DataDog/helm-charts/tree/master/charts/datadog-operator
-[5]: https://artifacthub.io/packages/helm/datadog/datadog-operator
-[6]: https://app.datadoghq.com/organization-settings/api-keys
-[7]: /agent/guide/operator-advanced
-[8]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.md
-[9]: /agent/guide/changing_container_registry/#kubernetes-with-the-datadog-operator
 {{% /tab %}}
 {{% tab "Helm" %}}
+Add the following in your `datadog-values.yaml` file:
 
-To install the chart with a custom release name, `<RELEASE_NAME>` (for example, `datadog-agent`):
+```yaml
+datadog:
+  securityContext:
+      runAsUser: <USER_ID>
+      supplementalGroups:
+        - <DOCKER_GROUP_ID>
+```
 
-1. [Install Helm][1].
-2.  Using the [Datadog `values.yaml` configuration file][2] as a reference, create your `values.yaml`. Datadog recommends that your `values.yaml` only contain values that need to be overridden, as it allows a smooth experience when upgrading chart versions.
-3. If this is a fresh install, add the Helm Datadog repo:
-    ```bash
-    helm repo add datadog https://helm.datadoghq.com
-    helm repo update
-    ```
-4. Retrieve your Datadog API key from your [Agent installation instructions][3] and run:
+{{% /tab %}}
+{{< /tabs >}}
 
-- **Helm v3+**
-
-    ```bash
-    helm install <RELEASE_NAME> -f values.yaml  --set datadog.apiKey=<DATADOG_API_KEY> datadog/datadog --set targetSystem=<TARGET_SYSTEM>
-    ```
-
-    Replace `<TARGET_SYSTEM>` with the name of your OS: `linux` or `windows`.
-
-- **Helm v1/v2**
-
-    ```bash
-    helm install -f values.yaml --name <RELEASE_NAME> --set datadog.apiKey=<DATADOG_API_KEY> datadog/datadog
-    ```
-
-This chart adds the Datadog Agent to all nodes in your cluster with a DaemonSet. It also optionally deploys the [kube-state-metrics chart][4] and uses it as an additional source of metrics about the cluster. A few minutes after installation, Datadog begins to report hosts and metrics.
-
-Next, enable the Datadog features that you'd like to use: [APM][5], [Logs][6]
-
-**Notes**:
-
-- For a full list of the Datadog chart's configurable parameters and their default values, see the [Datadog Helm repository README][7].
+- `<USER_ID>` is the UID to run the Agent.
+- `<DOCKER_GROUP_ID>` is the group ID owning the Docker or containerd socket.
 
 ### Container registries
 
+{{< tabs >}}
+{{% tab "Operator" %}}
+
+To modify the container image registry, see the [Changing Container Registry][9] guide.
+
+
+[9]: /agent/guide/changing_container_registry/#kubernetes-with-the-datadog-operator
+
+{{% /tab %}}
+{{% tab "Helm" %}}
+
+<div class="alert alert-warning">Docker Hub is subject to image pull rate limits. If you are not a Docker Hub customer, Datadog recommends that you update your Datadog Agent and Cluster Agent configuration to pull from GCR or ECR. For instructions, see <a href="/agent/guide/changing_container_registry">Changing your container registry</a>.</div>
+
 If Google Container Registry ([gcr.io/datadoghq][8]) is not accessible in your deployment region, use another registry with the following configuration in the `values.yaml` file:
 
-- For the public AWS ECR registry ([public.ecr.aws/datadog][9]), use the following:
+- For the public Amazon ECR registry ([public.ecr.aws/datadog][9]), use the following:
 
   ```yaml
   registry: public.ecr.aws/datadog
@@ -204,189 +277,27 @@ If Google Container Registry ([gcr.io/datadoghq][8]) is not accessible in your d
 
 **Note**:
 
-- It is recommended to use the public AWS ECR registry ([public.ecr.aws/datadog][9]) when the Datadog chart is deployed in an AWS environment.
+- It is recommended to use the public Amazon ECR registry ([public.ecr.aws/datadog][9]) when the Datadog chart is deployed in an AWS environment.
 
-### Upgrading from chart v1.x
-
-The Datadog chart has been refactored in v2.0 to regroup the `values.yaml` parameters in a more logical way.
-
-If your current chart version deployed is earlier than `v2.0.0`, follow the [migration guide][11] to map your previous settings with the new fields.
-
-### Kube state metrics core in chart v2.x
-
-In new deployments, Datadog recommends using the newer `kube-state-metrics` core with the following values:
-
-```yaml
-...
-datadog:
-...
-  kubeStateMetricsCore:
-    enabled: true
-...
-```
-
-For details about `kube-state-metrics` core, read the [Kubernetes State Metrics Core documentation][12].
-
-### Unprivileged
-
-(Optional) To run an unprivileged installation, add the following in the `values.yaml` file:
-
-```yaml
-datadog:
-  securityContext:
-      runAsUser: <USER_ID>
-      supplementalGroups:
-        - <DOCKER_GROUP_ID>
-```
-
-where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
-
-[1]: https://v3.helm.sh/docs/intro/install/
-[2]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
-[3]: https://app.datadoghq.com/organization-settings/api-keys
-[4]: https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-state-metrics
-[5]: /agent/kubernetes/apm?tab=helm
-[6]: /agent/kubernetes/log?tab=helm
-[7]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog
 [8]: https://gcr.io/datadoghq
 [9]: https://gallery.ecr.aws/datadog/
 [10]: https://hub.docker.com/u/datadog/
-[11]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/docs/Migration_1.x_to_2.x.md
-[12]: /integrations/kubernetes_state_core
-{{% /tab %}}
-{{% tab "DaemonSet" %}}
 
-Take advantage of DaemonSets to deploy the Datadog Agent on all your nodes (or on specific nodes by [using nodeSelectors][1]).
-
-To install the Datadog Agent on your Kubernetes cluster:
-
-1. **Configure Agent permissions**: If your Kubernetes has role-based access control (RBAC) enabled, configure RBAC permissions for your Datadog Agent service account. From Kubernetes 1.6 onwards, RBAC is enabled by default. Create the appropriate ClusterRole, ServiceAccount, and ClusterRoleBinding with the following command:
-
-    ```shell
-    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrole.yaml"
-
-    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/serviceaccount.yaml"
-
-    kubectl apply -f "https://raw.githubusercontent.com/DataDog/datadog-agent/master/Dockerfiles/manifests/rbac/clusterrolebinding.yaml"
-    ```
-
-    **Note**: Those RBAC configurations are set for the `default` namespace. If you are in a custom namespace, update the `namespace` parameter before applying them.
-
-
-2. **Create the Datadog Agent manifest**. Create the `datadog-agent.yaml` manifest out of one of the following templates:
-
-    | Metrics                   | Logs                      | APM                       | Process                   | NPM                       | Security                       | Linux                   | Windows                 |
-    |---------------------------|---------------------------|---------------------------|---------------------------|---------------------------|-------------------------|-------------------------|-------------------------|
-    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |  <i class="icon-check-bold"></i>                         | <i class="icon-check-bold"></i> | [Manifest template][2]  | [Manifest template][3] (no security)  |
-    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           | [Manifest template][4]  | [Manifest template][5]  |
-    | <i class="icon-check-bold"></i> | <i class="icon-check-bold"></i> |                           |                           |                           |                           | [Manifest template][6]  | [Manifest template][7]  |
-    | <i class="icon-check-bold"></i> |                           | <i class="icon-check-bold"></i> |                           |                           |                           | [Manifest template][8]  | [Manifest template][9] |
-    |                           |                           |                           |                           | <i class="icon-check-bold"></i> |                           | [Manifest template][10] | no template             |
-    | <i class="icon-check-bold"></i> |                           |                           |                           |                           |                           | [Manifest template][11] | [Manifest template][12] |
-
-     To enable trace collection completely, [extra steps are required on your application Pod configuration][13]. Refer also to the [logs][14], [APM][15], [processes][16], and [Network Performance Monitoring][17], and [Security][18] documentation pages to learn how to enable each feature individually.
-
-     **Note**: Those manifests are set for the `default` namespace. If you are in a custom namespace, update the `metadata.namespace` parameter before applying them.
-
-3. In the `secret-api-key.yaml` manifest, replace `PUT_YOUR_BASE64_ENCODED_API_KEY_HERE` with [your Datadog API key][19] encoded in base64. To get the base64 version of your API key, you can run:
-
-    ```shell
-    echo -n '<Your API key>' | base64
-    ```
-4. In the `secret-cluster-agent-token.yaml` manifest, replace `PUT_A_BASE64_ENCODED_RANDOM_STRING_HERE` with a random string encoded in base64. To get the base64 version of it, you can run:
-
-    ```shell
-    echo -n 'Random string' | base64
-    ```
-
-    **Note**: The random string must contain at least 32 alphanumeric characters to secure Cluster Agent to Agent communication.
-
-5. **Set your Datadog site** to {{< region-param key="dd_site" code="true" >}} using the `DD_SITE` environment variable in the `datadog-agent.yaml` manifest.
-
-    **Note**: If the `DD_SITE` environment variable is not explicitly set, it defaults to the `US` site `datadoghq.com`. If you are using one of the other sites (`EU`, `US3`, or `US1-FED`) this will result in an invalid API key message. Use the [documentation site selector][20] to see documentation appropriate for the site you're using.
-
-6. **Deploy the DaemonSet** with the command:
-
-    ```shell
-    kubectl apply -f datadog-agent.yaml
-    ```
-
-7. **Verification**: To verify the Datadog Agent is running in your environment as a DaemonSet, execute:
-
-    ```shell
-    kubectl get daemonset
-    ```
-
-     If the Agent is deployed, output similar to the text below appears, where `DESIRED` and `CURRENT` are equal to the number of nodes running in your cluster.
-
-    ```shell
-    NAME            DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
-    datadog-agent   2         2         2         2            2           <none>          10s
-    ```
-
-8. Optional - **Setup Kubernetes State metrics**: Download the [Kube-State manifests folder][21] and apply them to your Kubernetes cluster to automatically collects [kube-state metrics][22]:
-
-    ```shell
-    kubectl apply -f <NAME_OF_THE_KUBE_STATE_MANIFESTS_FOLDER>
-    ```
-
-### Unprivileged
-
-(Optional) To run an unprivileged installation, add the following to your [pod template][19]:
-
-```yaml
-kind: DatadogAgent
-apiVersion: datadoghq.com/v2alpha1
-metadata:
-  name: placeholder
-  namespace: placeholder
-spec:
-  override:
-    nodeAgent:
-      securityContext:
-        runAsUser: 1 # <USER_ID>
-        supplementalGroups:
-          - 123 # "<DOCKER_GROUP_ID>"
-```
-
-where `<USER_ID>` is the UID to run the agent and `<DOCKER_GROUP_ID>` is the group ID owning the docker or containerd socket.
-
-[1]: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
-[2]: /resources/yaml/datadog-agent-all-features.yaml
-[3]: /resources/yaml/datadog-agent-windows-all-features.yaml
-[4]: /resources/yaml/datadog-agent-logs-apm.yaml
-[5]: /resources/yaml/datadog-agent-windows-logs-apm.yaml
-[6]: /resources/yaml/datadog-agent-logs.yaml
-[7]: /resources/yaml/datadog-agent-windows-logs.yaml
-[8]: /resources/yaml/datadog-agent-apm.yaml
-[9]: /resources/yaml/datadog-agent-windows-apm.yaml
-[10]: /resources/yaml/datadog-agent-npm.yaml
-[11]: /resources/yaml/datadog-agent-vanilla.yaml
-[12]: /resources/yaml/datadog-agent-windows-vanilla.yaml
-[13]: /agent/kubernetes/apm/#setup
-[14]: /agent/kubernetes/log/
-[15]: /agent/kubernetes/apm/
-[16]: /infrastructure/process/?tab=kubernetes#installation
-[17]: /network_monitoring/performance/setup/
-[18]: /data_security/agent/
-[19]: https://app.datadoghq.com/organization-settings/api-keys
-[20]: /getting_started/site/
-[21]: https://github.com/kubernetes/kube-state-metrics/tree/master/examples/standard
-[22]: /agent/kubernetes/data_collected/#kube-state-metrics
 {{% /tab %}}
 {{< /tabs >}}
 
 ## Next steps
 
-To configure Live Containers, see [Live Containers][3].
+- **Monitor your Kubernetes infrastructure in Datadog**. If you used a Datadog Operator or Helm install, you can start monitoring your containers in Datadog's [Containers view][13]. For more information, see the [Containers view documentation][14].
 
-To collect events, override proxy settings, send custom metrics with DogStatsD, configure container allowlists and blocklists, or reference the full list of available environment variables, see [Configure the Datadog Agent on Kubernetes][4].
+- **Configure APM**. See [Kubernetes APM - Trace Collection][15].
+- **Configure log collection**. See [Kubernetes log collection][7].
+- **Configure integrations**. See [Integrations & Autodiscovery][5].
+- **Other configurations**: To collect events, override proxy settings, send custom metrics with DogStatsD, configure container allowlists and blocklists, or reference the full list of available environment variables, see [Further Kubernetes Configuration][4].
 
-To configure integrations, see [Integrations & Autodiscovery][5].
+## Further Reading
 
-To set up APM, see [Kubernetes Trace Collection][6].
-
-To set up log collection, see [Kubernetes Log Collection][7].
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/kubernetes/distributions
 [2]: /agent/kubernetes/control_plane
@@ -395,3 +306,11 @@ To set up log collection, see [Kubernetes Log Collection][7].
 [5]: /agent/kubernetes/integrations/
 [6]: /agent/kubernetes/apm/
 [7]: /agent/kubernetes/log/
+[8]: /containers/cluster_agent/#minimum-agent-and-cluster-agent-versions
+[9]: /containers/datadog_operator
+[10]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
+[11]: https://helm.sh
+[12]: /containers/guide/kubernetes_daemonset/
+[13]: https://app.datadoghq.com/containers
+[14]: /infrastructure/containers
+[15]: /containers/kubernetes/apm

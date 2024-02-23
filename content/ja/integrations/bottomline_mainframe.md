@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: bottomline-mainframe
 app_uuid: 249f45de-03cc-45f3-8a57-c40ce33e62a3
 assets: {}
@@ -24,7 +26,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: bottomline_mainframe
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true

@@ -17,7 +17,7 @@ Categorical palettes are best used for data that needs to be differentiated, but
 
 #### Classic
 
-The default Classic palette uses a set of six distinct colors optimized for readability. Colors assigned to series repeat if the number of series exceeds six. Adjacent series have distinct colors.
+The default Classic palette uses a set of six distinct colors optimized for readability. Colors assigned to series repeat if the number of series exceeds six. Adjacent series typically have distinct colors. However, in rare conditions, adjacent series could use the same color if intermediate series have no value for partial timeframes.
 
 The Classic color palette has visual accessibility support.
 
@@ -25,14 +25,14 @@ The Classic color palette has visual accessibility support.
 
 #### Consistent/Semantic
 
-The Consistent palette allows you to assign the same color consistently to a series of data, making it easier to correlate data across charts. Unlike the Classic palette, the Consistent palette does not guarantee that adjacent data series do not use the same color, and it does not have accessibility support.
+The Consistent palette allows you to assign the same color consistently to a series of data, making it easier to correlate data across charts. The Consistent palette does not guarantee that adjacent data series do not use the same color, and it does not have accessibility support.
 
 
 {{< img src="dashboards/guide/colors/4_consistent_palette.png" alt="A color palette for the Consistent/Semantic palette." style="width:70%;" >}}
 
 {{< img src="dashboards/guide/colors/5_consistent_interface.png" alt="Consistent palette bar graphs." style="width:90%;" >}}
 
-For a small subset of compatible tags, Datadog automatically recognizes the meaning behind each series of data. In this case, the Consistent color palette appears as a Semantic color palette, which uses color to represent meaning. For instance, the color red may represent an error.
+For a small subset of compatible tags, Datadog automatically recognizes the meaning behind each series of data. In this case, the Consistent color palette appears as a Semantic color palette, which uses color to represent meaning. For instance, the color red may represent an error. See [Compatible Semantic Tags][2] for a list of supported tags.
 
 {{< img src="dashboards/guide/colors/6_semantic_interface.png" alt="Semantic palette bar graph." style="width:90%;" >}}
 
@@ -73,3 +73,4 @@ Datadog offers accessible color modes for graphs to cater to visual needs, inclu
 {{< img src="dashboards/guide/colors/visual_accessibility.png" alt="Available visual accessibility options: Default, protanopia (difficulty distinguishing greens and reds), deuteranopia (difficulty distinguishing between reds, greens, and yellows), tritanopia (difficulty distinguishing blues and greens), high contrast (increased separation between colors for lower visual acuity), low saturation (decreased contrast for visual contrast sensitivity)." style="width:90%;" >}}
 
 [1]: https://app.datadoghq.com/personal-settings/preferences
+[2]: /dashboards/guide/compatible_semantic_tags

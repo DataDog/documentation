@@ -31,6 +31,8 @@ Agent 6.0.0 では、Trace Agent はデフォルトで有効になっていま�
 
 このページの CLI コマンドは Docker ランタイム用です。containerd ランタイムは `docker` を `nerdctl` に、Podman ランタイムは `podman` に置き換えてください。
 
+<div class="alert alert-info">コンテナ化されたアプリ (Agent とアプリが別々のコンテナで動作している) からトレースを収集する場合、以下の説明の代わりに、トレーシングライブラリをアプリケーションに自動的に挿入することができます。手順については、<a href="/tracing/trace_collection/library_injection_local/?tab=agentandappinseparatecontainers">ライブラリの挿入</a>をお読みください。</div>
+
 ## ホストからのトレース
 
 `docker run` コマンドにオプション `-p 127.0.0.1:8126:8126/tcp` を追加すると、ポート `8126/tcp` で _自分のホストからのみ_ トレースを利用できます。

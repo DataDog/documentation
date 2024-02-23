@@ -39,12 +39,11 @@ draft: false
 git_integration_title: voltdb
 integration_id: voltdb
 integration_title: VoltDB
-integration_version: 2.1.2
+integration_version: 2.1.3
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: voltdb
-oauth: {}
 public_title: VoltDB
 short_description: ステータスやパフォーマンスなどのメトリクスを VoltDB クラスターから収集します。
 supported_os:

@@ -31,12 +31,11 @@ draft: false
 git_integration_title: kube_apiserver_metrics
 integration_id: kube-apiserver-metrics
 integration_title: Kubernetes API サーバーメトリクス
-integration_version: 3.5.0
+integration_version: 4.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: kube_apiserver_metrics
-oauth: {}
 public_title: Kubernetes API サーバーメトリクス
 short_description: Kubernetes APIServer からメトリクスを収集
 supported_os:
@@ -69,7 +68,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Kube_apiserver_metrics チェックは [Datadog Agent][3] パッケージに含まれているため、サーバーに追加でインストールする必要はありません。
 
@@ -94,7 +93,7 @@ annotations:
 
 チェックを実行する Agent は、デフォルトで、APIServer に対する認証に使用するサービスアカウントのベアラートークンを取得しようとします。RBAC を使用していない場合は、`bearer_token_auth` を `false` に設定してください。
 
-最後に、Datadog Agent をマスターノードで実行する場合は、[オートディスカバリー][8]に依存してチェックをスケジューリングできます。公式のイメージ `k8s.gcr.io/kube-apiserver` を実行している場合は自動です。
+最後に、Datadog Agent をマスターノードで実行する場合は、[オートディスカバリー][8]に依存してチェックをスケジューリングできます。公式のイメージ `registry.k8s.io/kube-apiserver` を実行している場合は自動です。
 
 ### 検証
 
@@ -120,7 +119,7 @@ Kube_apiserver_metrics には、イベントは含まれません。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kube_apiserver_metrics/images/screenshot.png
 [2]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadoghq.com/ja/agent/cluster_agent/clusterchecks/
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [6]: https://docs.datadoghq.com/ja/agent/cluster_agent/clusterchecks/#set-up-cluster-checks

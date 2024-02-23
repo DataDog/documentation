@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: embrace-mobile-license
 app_uuid: 2996b6e0-1aed-46cc-9fe5-4ea72aeae636
 assets: {}
@@ -25,7 +27,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: embrace_mobile_license
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true
@@ -79,6 +80,7 @@ tile:
   uninstallation: README.md#Uninstallation
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/marketplace -->
 
 
 ## 概要
@@ -97,7 +99,7 @@ Datadog ダッシュボードは、クラッシュやネットワークに関す
 
 Datadog で直接、クラッシュの傾向を監視し、すべてのクラッシュのスタックトレースを調査します。さらに、Embrace でユーザーセッションの詳細を確認することができます。
 
-#### ネットワーキング
+#### SSL
 
 Embrace は、サーバーに到達しなかったものも含め、すべてのネットワークコールを収集します。4xx、5xx、タイムアウト、接続エラーなど、エンドポイントでのすべてのエラーを確認できます。
 
@@ -113,7 +115,7 @@ Datadog から、Embrace プラットフォーム内のモバイル体験を最�
 
 モバイルアプリの健全性を正しく測定し、改善するために、ユーザー体験が損なわれている原因を理解します。クラッシュだけでなく、強制終了や主要なユーザーフローの放棄につながる遅延またはフリーズエリアを取り除くために、パフォーマンスを最適化します。
 
-#### ダッシュボード  
+#### ライブラリ
 
 リアルタイムダッシュボードで、適応、パフォーマンス、安定性、エンゲージメント、収益化など、ビジネスにとって重要なメトリクスを確認できます。個人またはチームでダッシュボードを作成し、気になる機能や実験に焦点を当てます。
 
@@ -125,7 +127,7 @@ Datadog から、Embrace プラットフォーム内のモバイル体験を最�
 
 機能やリリースのパフォーマンスや安定性の低下について、いち早くお知らせします。不具合の原因がコードにあるのか、バックエンドにあるのか、サードパーティの SDK やベンダーにあるのか、Embrace がリアルタイムで通知するので、ユーザーから苦情が来る前に対策を講じることができます。
 
-## サポート
+## Agent
 サポートやご質問は、以下のチャンネルから Embrace にお問い合わせください。
 
 メール: [datadogsupport@embrace.io][4] 

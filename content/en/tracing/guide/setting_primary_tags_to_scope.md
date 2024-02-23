@@ -151,7 +151,7 @@ DD_APM_FEATURES=enable_cid_stats
 
 Restart the Agent. Go to the [APM Settings][6] page and select the second primary tag you want to use. It can take up to two hours for changes to this setting to take effect. 
 
-Now you can filter your services in the [Service List][7] by the tag being sent by your containerized services. Trace metrics used by Dashboards and Monitors can also be aggregated by the container primary tag.
+Now you can filter your services in the [Service Catalog][7] by the tag being sent by your containerized services. Trace metrics used by Dashboards and Monitors can also be aggregated by the container primary tag.
 
 ### Custom labels as tags
 
@@ -174,6 +174,6 @@ Primary tags appear at the top of APM pages. Use these selectors to filter the d
 [4]: /getting_started/tagging/assigning_tags/#traces
 [5]: /tracing/metrics/metrics_namespace/
 [6]: https://app.datadoghq.com/apm/settings
-[7]: https://app.datadoghq.com/apm/services
+[7]: https://app.datadoghq.com/services
 [8]: /getting_started/tagging/assigning_tags
 [9]: /tracing/troubleshooting/#data-volume-guidelines

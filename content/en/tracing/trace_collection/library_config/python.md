@@ -42,12 +42,12 @@ It is recommended to use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `env`, 
 : The service name to be used for this application. The value is passed through when setting up middleware for web framework integrations like Pylons, Flask, or Django. For tracing without a web integration, it is recommended that you set the service name in code ([for example, see these Django docs][4]). Available in version 0.38+.
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT`
-: **Default**: `Datadog`<br>
+: **Default**: `tracecontext,Datadog`<br>
 Propagation styles to use when injecting tracing headers. For example, use `DD_TRACE_PROPAGATION_STYLE_INJECT=Datadog,B3` to inject both Datadog and B3 format headers.
 
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT`
-: **Default**: Value of `DD_TRACE_PROPAGATION_STYLE_INJECT` (`Datadog`)<br>
-Propagation styles to use when extracting tracing headers. When multiple values are given, it uses the first header match found. The order of matching is static and unrelated to the order of values given. For example: `DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` produces the same behavior as `DD_TRACE_PROPAGATION_STYLE_EXTRACT=Datadog,B3`.
+: **Default**: Value of `DD_TRACE_PROPAGATION_STYLE_INJECT` (`tracecontext,Datadog`)<br>
+Propagation styles to use when extracting tracing headers. When multiple values are given, it uses the first header match found. The order of matching is based on the order of values given. For example, `DD_TRACE_PROPAGATION_STYLE_EXTRACT=B3,Datadog` looks for `B3` headers first, and only uses `Datadog` headers if those are not available.
 
 `DD_SERVICE_MAPPING`
 : Define service name mappings to allow renaming services in traces, for example: `postgres:postgresql,defaultdb:postgresql`. Available in version 0.47+.
@@ -122,4 +122,4 @@ Enable [connecting logs and trace injection][6].
 [4]: https://ddtrace.readthedocs.io/en/stable/integrations.html#django
 [5]: /tracing/trace_pipeline/ingestion_mechanisms/
 [6]: /tracing/other_telemetry/connect_logs_and_traces/python/
-[13]: /agent/guide/network/#configure-ports
+[13]: /agent/configuration/network/#configure-ports

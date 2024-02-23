@@ -32,13 +32,12 @@ draft: false
 git_integration_title: cert_manager
 integration_id: cert-manager
 integration_title: cert-manager
-integration_version: 3.0.0
+integration_version: 3.1.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: cert_manager
-oauth: {}
-public_title: cert-manager Integration
+public_title: cert-manager
 short_description: cert-manager のすべてのメトリクスを Datadog で追跡
 supported_os:
 - linux
@@ -58,7 +57,7 @@ tile:
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: cert-manager Integration
+  title: cert-manager
 ---
 
 

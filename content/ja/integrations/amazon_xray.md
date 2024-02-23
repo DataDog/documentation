@@ -23,6 +23,7 @@ short_description: AWS サービス間で交わされるリクエストをトレ
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Datadog AWS Lambda X-Ray インテグレーションは、商用 AWS アカウントでのみサポートされます。商用 Lambda アカウントがない場合、Datadog AWS Lambda X-Ray インテグレーションは Datadog for Government サイトではサポートされません。</div>
 
@@ -33,7 +34,7 @@ AWS X-Ray を使用すると、開発者は AWS 製品を使用して構築さ�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 最初に、[AWS インテグレーションを有効化][3]し、以下のアクセス許可が Datadog インテグレーションロールのポリシードキュメントに含まれていることを確認します。
 

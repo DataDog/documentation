@@ -8,6 +8,9 @@ further_reading:
 - link: "/dashboards/"
   tag: "Documentation"
   text: "Visualize your data to gain insight"
+- link: "/dashboards/guide/unit-override/"
+  tag: "Documentation"
+  text: "Customize your visualizations with unit override"
 ---
 
 ## Overview
@@ -54,7 +57,7 @@ The following units may be associated with metrics submitted to Datadog:
 | CURRENT     | milliampere / ampere                                                                                                                                                                                                                                                                                                       |
 | POTENTIAL   | millivolt / volt                                                                                                                                                                                                                                                                                                           |
 | APM         | span                                                                                                                                                                                                                                                                                                                       |
-| SYNTHETICS  | run                                                                                                                                                                                                                                                                                                                        |
+| SYNTHETICS  | run / step                                                                                                                                                                                                                                                                                                                       |
 
 ## Number formatting
 

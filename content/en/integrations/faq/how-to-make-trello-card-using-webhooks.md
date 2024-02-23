@@ -62,7 +62,7 @@ The resulting config should look like [this][7] and you are all set! @-notify aw
 
 #### Some points to consider
 
-This flow involves Trello generating a server token for our application. As you can see in the the [token disclaimer][8].
+This flow involves Trello generating a server token for our application. As you can see in the [token disclaimer][8].
 
 The token provides read/write access to all your boards and teams, so this is a potential concern if you do not want to give away access like that.
 

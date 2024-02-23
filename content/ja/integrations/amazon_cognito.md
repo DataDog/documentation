@@ -1,8 +1,9 @@
 ---
 categories:
-- cloud
-- aws
+- AWS
+- クラウド
 - ログの収集
+- モバイル
 dependencies: []
 description: Amazon Cognito のキーメトリクスを追跡
 doc_link: https://docs.datadoghq.com/integrations/amazon_cognito/
@@ -21,15 +22,16 @@ short_description: Amazon Cognito のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Cognito は、ユーザーの一意 ID の作成、ID プロバイダーによるユーザー ID の認証、AWS Cloud へのモバイルユーザーデータの保存を行うことができるサービスです。
 
 このインテグレーションを有効にすると、Datadog に Cognito Advanced Security メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -40,7 +42,7 @@ Amazon Cognito は、ユーザーの一意 ID の作成、ID プロバイダー�
 
 **注**: AWS で Advanced Security を有効にする必要があります。[User Pool に Advanced Security][4] を追加するには、AWS のドキュメントを参照してください。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -52,27 +54,27 @@ Amazon Cognito から S3 バケットまたは CloudWatch のいずれかにロ�
 
 #### ログを Datadog に送信する方法
 
-1. [Datadog ログコレクション AWS Lambda 関数][5] をまだ設定していない場合は、設定を行ってください。
-2. lambda 関数がインストールされたら、AWS コンソールから、Amazon Cognito ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
+1. [Datadog Forwarder Lambda 関数][5]をまだセットアップしていない場合は、セットアップします。
+2. Lambda 関数がインストールされたら、AWS コンソールから、Amazon Cognito ログを含む S3 バケットまたは CloudWatch のロググループに手動でトリガーを追加します。
 
     - [S3 バケットに手動トリガーを追加][6]
     - [CloudWatch ロググループに手動トリガーを追加][7]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_cognito" >}}
 
 
-### イベント
+### ヘルプ
 
 Amazon Cognito インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Amazon Cognito インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
@@ -80,7 +82,7 @@ Amazon Cognito インテグレーションには、サービスのチェック�
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-cognito
 [4]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-advanced-security.html
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#set-up-the-datadog-lambda-function
+[5]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
 [6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
 [7]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
 [8]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_cognito/amazon_cognito_metadata.csv

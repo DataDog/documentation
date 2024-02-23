@@ -35,7 +35,7 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 
 | パラメーター                     | 説明                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `site`                        | データを送信する Datadog サイトを設定します。例えば、 `datadoghq.com` (デフォルト)、`datadoghq.eu`、`us3.datadoghq.com`、`us5.datadoghq.com`、または `ddog-gov.com` などに設定します。このパラメーターは、Datadog Lambda 拡張機能を使用してテレメトリーを収集する場合に必要です。 |
+| `site`                        | データを送信する Datadog サイトを設定します。例えば、 `datadoghq.com` (デフォルト)、`datadoghq.eu`、`us3.datadoghq.com`、`us5.datadoghq.com`、`ap1.datadoghq.com` または `ddog-gov.com` などに設定します。このパラメーターは、Datadog Lambda 拡張機能を使用してテレメトリーを収集する場合に必要です。 |
 | `apiKey`                      | [Datadog API キー][7]。このパラメーターは、Datadog Lambda 拡張機能を使用してテレメトリーを収集する際に必要です。また、デプロイ環境で `DATADOG_API_KEY` 環境変数を設定することも可能です。 |
 | `appKey`                      | Datadog アプリキー。`monitors` フィールドが定義されている場合のみ必要です。また、デプロイ環境で `DATADOG_APP_KEY` 環境変数を設定することも可能です。 |
 | `apiKeySecretArn`             | `apiKey` フィールドを使用する代替です。AWS Secrets Manager に Datadog API キーを保存しているシークレットの ARN です。Lambda の実行ロールに `secretsmanager:GetSecretValue` 権限を追加することを忘れないようにします。 |
@@ -61,7 +61,6 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 | `enabled`                     | `false` に設定すると、Datadog プラグインが非アクティブ状態になります。デフォルトは `true` です。たとえば、`enabled: ${strToBool(${env:DD_PLUGIN_ENABLED, true})}` の環境変数を使用してこのオプションを制御し、デプロイ時にプラグインを有効化 / 無効化することができます。また、`--stage` を通じて渡された値を使用してこのオプションを制御することもできます。[こちらの例](#disable-plugin-for-particular-environment)をご覧ください。 |
 | `customHandler`               | 設定すると、指定されたハンドラーがすべての関数のハンドラーとして設定されます。 |
 | `failOnError`                 | このプラグインを設定すると、Datadog カスタムモニターの作成または更新が失敗した場合にエラーが生成されます。これは、デプロイ後に発生しますが、`serverless deploy` の結果が 0 以外の終了コードを返す原因になります（ユーザー CI を失敗にするため）。デフォルトは `false` です。 |
-| `integrationTesting`          | インテグレーションテストを実行するときに `true` に設定します。これにより、Forwarder ARN と追加した Datadog モニターの出力リンクの検証要件がバイパスされます。デフォルトは `false` です。 |
 | `logLevel`                    | ログのレベル。拡張ロギングの場合 `DEBUG` に設定します。 |
 | `skipCloudformationOutputs`   | スタックに Datadog Cloudformation Outputs を追加するのをスキップしたい場合は、`true` に設定します。これは、スタックの作成に失敗する原因となる 200 の出力制限に遭遇している場合に有効です。 |
 | `enableColdStartTracing`      | コールドスタートトレースを無効にするには、`false` に設定します。NodeJS と Python で使用されます。デフォルトは `true` です。 |
@@ -71,6 +70,8 @@ Datadog は、サーバーレスフレームワークを使用してサーバー
 | `enableProfiling`             | Datadog Continuous Profiler を `true` で有効にします。NodeJS と Python のベータ版でサポートされています。デフォルトは `false` です。 |
 | `encodeAuthorizerContext`     | Lambda オーサライザーで `true` に設定すると、トレースコンテキストがレスポンスにエンコードされて伝搬されます。NodeJS と Python でサポートされています。デフォルトは `true` です。 |
 | `decodeAuthorizerContext`     | Lambda オーサライザーで認可された Lambda に対して `true` を設定すると、エンコードされたトレースコンテキストをパースして使用します (見つかった場合)。NodeJS と Python でサポートされています。デフォルトは `true` です。 |
+| `apmFlushDeadline`            | タイムアウトが発生する前にスパンを送信するタイミングをミリ秒単位で決定するために使用されます。AWS Lambda の呼び出しの残り時間が設定された値よりも小さい場合、トレーサーは、現在のアクティブなスパンとすべての終了したスパンの送信を試みます。NodeJS と Python でサポートされています。デフォルトは `100` ミリ秒です。 |
+
 上記のパラメーターを使用するには、以下の例のように `custom` > `datadog` セクションを `serverless.yml` に追加します。
 
 ```yaml

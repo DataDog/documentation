@@ -40,7 +40,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: ignite
-oauth: {}
 public_title: ignite
 short_description: Ignite サーバーからメトリクスを収集します。
 supported_os:
@@ -73,7 +72,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Ignite チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

@@ -1,14 +1,16 @@
 ---
-title: API テストのタイミングと各バリエーションのトラブルシューティングを理解する
-kind: documentation
-description: API テストのタイミングと各バリエーションのトラブルシューティングを理解する
 aliases:
-  - /ja/synthetics/api_test_timing_variations
+- /ja/synthetics/api_test_timing_variations
+description: API テストのタイミングを理解し、その変動に対してトラブルシューティングします。
 further_reading:
-  - link: https://docs.datadoghq.com/synthetics/metrics/#api-tests
-    tag: ドキュメント
-    text: Synthetics API テストのメトリクス
+- link: https://docs.datadoghq.com/synthetics/metrics/#api-tests
+  tag: ドキュメント
+  text: Synthetics API テストのメトリクス
+kind: documentation
+title: API テストのタイミングの理解と、その変動に対するトラブルシューティング
 ---
+
+
 ## 概要
 
 Synthetic API テストで収集した[タイミングメトリクス][1]を用いて、サーバーとクライアント間の通信におけるボトルネックを特定することができます。

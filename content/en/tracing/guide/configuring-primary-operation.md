@@ -7,9 +7,9 @@ further_reading:
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/services/services_list/"
+- link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Discover the list of services reporting to Datadog"
+  text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
@@ -23,7 +23,7 @@ further_reading:
 
 ## APM services
 
-APM services calculate trace metrics for errors, throughput, and latency. These are calculated based on resources that match a single span name, deemed the primary operation. These service metrics are used throughout the product, both as the default Service Page, in the Service List, and the Service Map.
+APM services calculate trace metrics for errors, throughput, and latency. These are calculated based on resources that match a single span name, deemed the primary operation. These service metrics are used throughout the product, both as the default Service Page, in the Service Catalog, and the Service Map.
 
 **Note**: Trace Metrics can be queried based on their `trace.*` [namespace][1].
 
@@ -51,7 +51,7 @@ When there are multiple primary operations defined for a service, the highest re
 5. Select the operation that you want reflected as the entry-point to the service.
 6. Click **Save**.
 
-{{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="APM save"  >}}
+{{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="APM save" >}}
 
 ## Viewing stats for additional span names
 

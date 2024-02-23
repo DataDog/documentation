@@ -1,58 +1,165 @@
 {{ define "main" }}
+    {{ $core_product_taxonomy := .Site.Params.core_product }}
     {{ $headless := .Site.GetPage "/glossary/terms" }}
     {{ $headless_term_pages := $headless.Resources.ByType "page" }}
     {{ $letters := slice }}
+    {{ $products := slice }}
 
-    <div class="glossary-main">
+    <div 
+    class="glossary-main" 
+    x-data="{
+        filterValue: '', 
+        filteredLetters: [],
+        glossaryNavHeight: 0,
+        activeGlossaryLetter: '',
+        shouldShowGlossaryLetter (firstChar) {
+            return this.filteredLetters.length ? this.filteredLetters.includes(firstChar) : true
+        },
+        shouldShowGlossaryTerm (coreProducts) {
+            return coreProducts.replaceAll(' ','-').includes(this.filterValue)
+        },
+        getProductParamValue (queryParam) {
+            return (queryParam.includes('?product=') && !queryParam.includes('?product=all')) ? queryParam.replace('?product=', '') : ''
+        },
+        resetFilteredLetters (selectedFilter) {
+            if (selectedFilter !== this.filterValue) {
+                this.filteredLetters = []
+            }
+        },
+        appendToFilteredLetters (gtcEl) {
+            gtcEl.classList.contains('show') && this.filteredLetters.push(gtcEl.dataset.letter)
+        },
+        pushState (productParamValue) {
+            const newParam = `?product=${productParamValue}`
+            window.history.pushState({param: newParam },'', newParam)
+            window.scroll(0, 0)
+        },
+        setGlossaryNavHeight (nav) {
+            this.glossaryNavHeight = nav.getBoundingClientRect().height - 50
+        },
+        setActiveGlossaryLetterToHighlight (glossaryLetterEl) {
+            const letterDistanceFromTop = glossaryLetterEl.getBoundingClientRect().top
+            if ( (letterDistanceFromTop - 10) < this.glossaryNavHeight){
+                this.activeGlossaryLetter = glossaryLetterEl.id
+            }
+        }
+    }"
+    x-init="filterValue = getProductParamValue(window.location.search)">
         <h1 class="pb-0">{{ .Title }}</h1>
         <div class="row">
+            <!-- Technical terms section -->
             <div class="col-10 col-md-12 order-md-1 mt-5">
                 {{ .Content }}
                 {{ range $headless_term_pages }}
+                    {{ $dot := . }}
                     {{ $first_char := substr .Title 0 1 | upper }}
                     {{ $curr_letter := $.Scratch.Get "curr_letter" }}
-
-                    {{ if ne $first_char $curr_letter }}
+                    {{ $core_products_string := (delimit (.Params.core_product | default "") ",") }}
+                    <!-- Letter Header -->
+                    {{ if and (ne $first_char $curr_letter) (not (in $letters $first_char)) }}
                         {{ $.Scratch.Set "curr_letter" $first_char }}
                         {{ $letters = $letters | append $first_char }}
-                        <h2 id="{{ $first_char | anchorize }}" class="mb-3">{{ $first_char }}</h2>
+                        <h2 
+                        id="{{ $first_char | lower }}" 
+                        class="glossary-letter mb-3"
+                        :style="{scrollMarginTop: `${glossaryNavHeight}px`}"
+                        @scroll.window.throttle.1ms="if($el.style.display !== 'none')setActiveGlossaryLetterToHighlight($el)" 
+                        x-cloak x-show="shouldShowGlossaryLetter('{{ $first_char | lower }}')">{{ $first_char }}</h2>
                     {{ end }}
 
-                    <h4 id="{{ anchorize .Params.Title }}" class="font-24-28">
-                        {{ .Params.Title }}
-                    </h4>
-
-                    {{ with .Params.related_terms }}
-                        <p class="fst-italic mb-0">
-                            {{ $len := len . }}
-
-                            Related terms:
-                            {{ range $index, $related_term := . }}
-                                <a href="/glossary/#{{ anchorize $related_term }}">{{ $related_term }}</a>
-                                {{ if ne $index (sub $len 1) }}, {{ end }}
+                    <!-- `$watch` method filters letter headers on every state change of filterValue - not on state initialization-->
+                    <div class="glossary-term-container" 
+                    :class="shouldShowGlossaryTerm('{{ $core_products_string }}') && 'show'" 
+                    x-cloak x-show="shouldShowGlossaryTerm('{{ $core_products_string }}')" 
+                    data-letter='{{ $first_char | lower }}'
+                    data-products="{{ $core_products_string }}"
+                    x-init="$watch('filterValue', _ => appendToFilteredLetters($el))"
+                    >
+                    
+                        <!-- Validate core_product values and build $products slice for filtering section (filter-btns)-->
+                        {{ range .Params.core_product  }}
+                            {{ $valid_core_product := index (where $core_product_taxonomy.possible_values "name" .) 0 }}
+                            {{ if $valid_core_product }}
+                                {{ $products = union $products (slice $valid_core_product.name) }}
+                            {{ else }}
+                                {{ errorf "Invalid core_product tag %q" . }}
+                                {{ errorf "in %q" $dot.File.Path }}
                             {{ end }}
-                        </p>
-                    {{ end }}
+                        {{ end }}
 
-                    {{ with .Params.synonyms }}
-                        <p class="fst-italic">
-                            Synonyms: {{ delimit . ", " }}
-                        </p>
-                    {{ end }}
+                        <!-- `$nextTick` filters letter headers on state initialization. -->
+                        <h4 
+                        id="{{ anchorize .Params.Title }}" 
+                        class="glossary-term font-24-28"
+                        :style="{scrollMarginTop: `${glossaryNavHeight+30}px`}"
+                        x-init="$nextTick(() => appendToFilteredLetters($el.parentElement))"
+                        >
+                            {{ .Params.Title }}
+                        </h4>
+                        <div>
+                            {{ range .Params.core_product }}
+                                <div class="core-product-label btn btn-outline-secondary text-primary me-1 pe-none">
+                                    {{. | upper}}
+                                </div>
+                            {{ end }}
+                        </div>
+                        {{ with .Params.related_terms }}
+                            <p class="fst-italic mb-0">
+                                {{ $len := len . }}
 
-                    <p>{{ .Content | safeHTML }}</p>
+                                Related terms:
+                                {{ range $index, $related_term := . }}
+                                    <a href="/glossary/#{{ anchorize $related_term }}">{{ $related_term }}</a>
+                                    {{ if ne $index (sub $len 1) }}, {{ end }}
+                                {{ end }}
+                            </p>
+                        {{ end }}
+
+                        {{ with .Params.synonyms }}
+                            <p class="fst-italic">
+                                Synonyms: {{ delimit . ", " }}
+                            </p>
+                        {{ end }}
+
+                        {{ .Content | safeHTML }}
+                    </div>
                 {{ end }}
             </div>
 
             <!-- ID is scrollspy target -->
-            <nav id="glossary-nav">
+            <!-- keep glossary-nav element here. $letters slice needs to be formed before use -->
+            <nav 
+            id="glossary-nav" 
+            class="d-none d-md-block" 
+            x-init="setGlossaryNavHeight($el)" 
+            @resize.window.throttle="setGlossaryNavHeight($el)" >
                 <ul class="nav js-glossary-nav col-2 col-md-12 d-flex align-items-end">
                     {{ range $letters }}
-                        <li class="nav-item">
-                            <a class="nav-link btn font-14-19" role='button' href='#{{ . | lower }}'>{{ . }}</a>
+                        <li class="nav-item" x-cloak x-show="shouldShowGlossaryLetter('{{ . | lower }}')">
+                            <a class="nav-link btn font-14-19" :class="($el.textContent.toLowerCase() === activeGlossaryLetter) && 'active'" role='button' href='#{{ . | lower }}'>{{ . }}</a>
                         </li>
                     {{ end }}
                 </ul>
+
+                <!-- Filtering section -->
+                <!-- pushState adds the product query param to url without loading/refreshing the url/page  -->
+                <div class="filters-glossary">
+                    {{ if  $products }}
+                        <button 
+                        @click="resetFilteredLetters($el.dataset.filter); filterValue = ''; pushState('all')"
+                        :class="(filterValue === 'all' || !filterValue) && 'active'"
+                        class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
+                        data-filter="{{ .Params.filter_all | lower }}">{{.Params.filter_all }}</button> 
+                    {{ end }}
+                    {{ range $products | sort }}
+                        {{ $product := . | anchorize}}
+                        <button 
+                        @click="resetFilteredLetters('{{ $product }}'); filterValue = '{{ $product }}'; pushState('{{ $product }}')"
+                        :class="$el.dataset.filter === filterValue && 'active'"
+                        class="filter-btn mb-1 me-1 btn btn-sm-tag btn-outline-secondary"
+                        data-filter="{{ $product }}">{{ . | upper }}</button>
+                    {{ end }}
+                </div>
             </nav>
         </div>
     </div>

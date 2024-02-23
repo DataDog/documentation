@@ -23,6 +23,8 @@ You may want to connect a third-party tool with Session Replay for a more compre
 
 To fetch the URL for the current user session's recording, use the following snippet, depending on the installation method you used to set up RUM:
 
+**Note**: Providing a value for `subdomain` when fetching the user session's recording URL is optional, but must be provided if you're accessing Datadog through a custom subdomain and want to see the custom domain in the URL that gets returned.
+
 {{< tabs >}}
 {{% tab "NPM" %}}
 
@@ -36,7 +38,7 @@ datadogRum.init({
     ...
 });
 
-const url = datadogRum.getSessionReplayUrl();
+const url = datadogRum.getSessionReplayLink();
 ```
 
 {{% /tab %}}
@@ -51,7 +53,7 @@ window.DD_RUM.onReady(function() {
         subdomain: ''
         ...
     })
-    const url = DD_RUM.getSessionReplayUrl();
+    const url = DD_RUM.getSessionReplayLink();
 })
 
 ```
@@ -68,7 +70,7 @@ window.DD_RUM &&
         subdomain: ''
         ...
     });
-const url = DD_RUM && DD_RUM.getSessionReplayUrl();
+const url = DD_RUM && DD_RUM.getSessionReplayLink();
 ```
 
 {{% /tab %}}
@@ -83,7 +85,6 @@ Once you retrieve the link through the snippet above, you have a few different w
 - As a JSON field.
 - Through a URL parameter.
 - Directly in your integration of choice in JavaScript.
-
 
 ## Further Reading
 

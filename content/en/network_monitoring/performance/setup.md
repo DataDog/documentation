@@ -48,7 +48,7 @@ Data collection is done using eBPF, so Datadog minimally requires platforms that
 
 #### Windows OS
 
-Data collection is done using a device driver. Support is available as of Datadog Agent version 7.27.1, for Windows versions 2012 R2 (and equivalent desktop OSs, including Windows 10) and up.
+Data collection is done using a network kernel device driver. Support is available as of Datadog Agent version 7.27.1, for Windows versions 2012 R2 (and equivalent desktop OSs, including Windows 10) and up.
 
 #### macOS
 
@@ -57,6 +57,8 @@ Datadog Network Performance Monitoring does not support macOS platforms.
 ### Containers
 
 NPM helps you visualize the architecture and performance of your containerized and orchestrated environments, with support for [Docker][5], [Kubernetes][6], [ECS][7], and other container technologies. Datadog's container integrations enable you to aggregate traffic by meaningful entities--such as containers, tasks, pods, clusters, and deployments--with out-of-the-box tags such as `container_name`, `task_name`, and `kube_service`.
+
+NPM is not supported for Google Kubernetes Engine (GKE) Autopilot.
 
 ### Network routing tools
 
@@ -171,7 +173,7 @@ If these utilities do not exist in your distribution, follow the same procedure 
 
 
 [1]: /infrastructure/process/?tab=linuxwindows#installation
-[2]: /agent/guide/agent-commands/#restart-the-agent
+[2]: /agent/configuration/agent-commands/#restart-the-agent
 [3]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/selinux/system_probe_policy.te
 {{% /tab %}}
 {{% tab "Agent (Windows)" %}}
@@ -182,7 +184,7 @@ To enable Network Performance Monitoring for Windows hosts:
 
 1. Install the [Datadog Agent][1] (version 7.27.1 or above) with the network driver component enabled.
 
-   During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the agent installation through the GUI.
+   [DEPRECATED] _(version 7.44 or below)_ During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Network Performance Monitoring" when running the Agent installation through the GUI.
 
 1. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 
@@ -204,7 +206,7 @@ To enable Network Performance Monitoring for Windows hosts:
 
 
 [1]: /agent/basic_agent_usage/windows/?tab=commandline
-[2]: /agent/guide/agent-commands/#restart-the-agent
+[2]: /agent/configuration/agent-commands/#restart-the-agent
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -405,35 +407,34 @@ If using `docker-compose`, make the following additions to the Datadog Agent ser
 ```
 version: '3'
 services:
-  ..
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_NETWORK_ENABLED=true
-       DD_PROCESS_AGENT_ENABLED=true
-       DD_API_KEY=<DATADOG_API_KEY>
+      - DD_SYSTEM_PROBE_NETWORK_ENABLED=true
+      - DD_PROCESS_AGENT_ENABLED=true
+      - DD_API_KEY=<DATADOG_API_KEY>
     volumes:
-    - /var/run/docker.sock:/var/run/docker.sock:ro
-    - /proc/:/host/proc/:ro
-    - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
-    - /sys/kernel/debug:/sys/kernel/debug
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc/:/host/proc/:ro
+      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
+      - /sys/kernel/debug:/sys/kernel/debug
     cap_add:
-    - SYS_ADMIN
-    - SYS_RESOURCE
-    - SYS_PTRACE
-    - NET_ADMIN
-    - NET_BROADCAST
-    - NET_RAW
-    - IPC_LOCK
-    - CHOWN
+      - SYS_ADMIN
+      - SYS_RESOURCE
+      - SYS_PTRACE
+      - NET_ADMIN
+      - NET_BROADCAST
+      - NET_RAW
+      - IPC_LOCK
+      - CHOWN
     security_opt:
-    - apparmor:unconfined
+      - apparmor:unconfined
 ```
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "ECS" %}}
-To set up on AWS ECS, see the [AWS ECS][1] documentation page.
+To set up on Amazon ECS, see the [Amazon ECS][1] documentation page.
 
 
 [1]: /agent/amazon_ecs/#network-performance-monitoring-collection-linux-only
@@ -441,24 +442,24 @@ To set up on AWS ECS, see the [AWS ECS][1] documentation page.
 {{< /tabs >}}
 
 {{< site-region region="us,us3,us5,eu" >}}
-### Enhanced Resolution
+### Enhanced resolution
 
 Optionally, enable resource collection for cloud integrations to allow Network Performance Monitoring to discover cloud-managed entities.
-- Install the [Azure integration][1] for visibility into Azure load balancers and NAT gateways.
+- Install the [Azure integration][1] for visibility into Azure load balancers and application gateways.
 - Install the [AWS Integration][2] for visibility into AWS Load Balancer. **you must enable ENI and EC2 metric collection**
 
-For additional information around these capabilities, please see [Cloud service enhanced resolution][3].
+For additional information around these capabilities, see [Cloud service enhanced resolution][3].
 
   [1]: /integrations/azure
   [2]: /integrations/amazon_web_services/#resource-collection
-  [3]: /network_monitoring/performance/network_page/#cloud-service-enhanced-resolution
+  [3]: /network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
 
 {{< /site-region >}}
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/network_monitoring/dns/#setup
 [3]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
 [4]: /network_monitoring/dns/

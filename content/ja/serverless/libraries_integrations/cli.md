@@ -77,7 +77,7 @@ datadog-ci lambda uninstrument -f <function-name> -f <another-function-name> -r 
 | `DATADOG_API_KEY` | Datadog API キー。Lambda 関数のコンフィギュレーションに `DD_API_KEY` 環境変数を設定します。Datadog API キーの取得の詳細については、[API キーのドキュメント][6]を参照してください。  | `export DATADOG_API_KEY=<API_KEY>` |
 | `DATADOG_API_KEY_SECRET_ARN` | AWS Secrets Manager に Datadog の API キーを格納するシークレットの ARN です。Lambda 関数の構成に `DD_API_KEY_SECRET_ARN` を設定します。注: `DD_KMS_API_KEY` が設定されている場合、 `DD_API_KEY_SECRET_ARN` は無視されます。Lambda の実行ロールに `secretsmanager:GetSecretValue` 権限を追加してください。 | `export DATADOG_API_KEY_SECRET_ARN=<SECRETS_MANAGER_RESOURCE_ARN>` |
 | `DATADOG_KMS_API_KEY` | KMS を使用して暗号化された Datadog API キー。Lambda 関数のコンフィギュレーションに `DD_KMS_API_KEY` 環境変数を設定します。注: `DD_KMS_API_KEY` が設定されている場合、`DD_API_KEY` は無視されます。 | `export DATADOG_KMS_API_KEY=<KMS_ENCRYPTED_API_KEY>` |
-| `DATADOG_SITE` | データを送信する Datadog サイトを設定します。Datadog Lambda Extension を使用する場合にのみ必要です。可能な値は、`datadoghq.com`、`datadoghq.eu`、`us3.datadoghq.com`、`us5.datadoghq.com`、`ddog-gov.com` です。デフォルトは `datadoghq.com` です。Lambda 関数設定に `DD_SITE` 環境変数を設定します。 | `export DATADOG_SITE="datadoghq.com"` |
+| `DATADOG_SITE` | データを送信する Datadog サイトを設定します。Datadog Lambda Extension を使用する場合にのみ必要です。可能な値は、`datadoghq.com`、`datadoghq.eu`、`us3.datadoghq.com`、`us5.datadoghq.com`、`ap1.datadoghq.com`、`ddog-gov.com` です。デフォルトは `datadoghq.com` です。Lambda 関数設定に `DD_SITE` 環境変数を設定します。 | `export DATADOG_SITE="datadoghq.com"` |
 
 
 ### 引数

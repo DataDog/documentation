@@ -179,7 +179,7 @@ Datadog はシークレットを保存しないので、**View Installation Inst
 次のコマンドを実行して、コンフィギュレーションファイルをコンテナにマウントすることでプライベートロケーションワーカーを起動します。`<MY_WORKER_CONFIG_FILE_NAME>.json` ファイルはルートホームフォルダーではなく `/etc/docker` 内に格納してください。
 
 ```shell
-docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
+docker run --rm -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
 ```
 
 **注:** 予約済み IP をブロックした場合は、プライベートロケーションコンテナに `NET_ADMIN` [Linux 機能][1]を追加してください。
@@ -236,7 +236,7 @@ docker run --rm -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetic
 
 Podman の構成は Docker と非常に似ていますが、ICMP テストに対応するため、追加機能として `NET_RAW` を設定する必要があります。
 
-1. コンテナが動作するホストから、`sysctl -w net.ipv4.ping_group_range = 0 2147483647` を実行します。
+1. コンテナが動作するホストから、`sysctl -w "net.ipv4.ping_group_range = 0 2147483647"` を実行します。
 2. このコマンドを実行すると、コンフィギュレーションファイルをコンテナにマウントしてプライベートロケーションのワーカーが起動します。コンテナにマウントするために、`<MY_WORKER_CONFIG_FILE_NAME>.json` ファイルがアクセス可能であることを確認します。
 
    ```shell

@@ -2,7 +2,7 @@
 title: Automate the Remediation of Detected Threats with Webhooks
 kind: guide
 further_reading:
-- link: "/security/explorer/"
+- link: "/security/cloud_siem/investigate_security_signals"
   tag: "Documentation"
   text: "Start investigating signals in the Signals Explorer"
 aliases:
@@ -22,7 +22,7 @@ In a cloud environment, it's important to delete a misconfigured resource as soo
 
 {{< img src="security/security_monitoring/guide/automate-the-remediation-of-detected-threats/automation-diagram.png" alt="A diagram for a webhook sent to a cloud provider's API" >}}
 
-Once configured, if an AWS user creates a poorly configured resource (for example, an overly permissive security group, or user role) within your AWS environment, Datadog Log Management ingests the related log, which triggers a security group-based Detection Rule. This process automatically sends the webhook's JSON payload to the designated AWS API Gateway URL, which in turn activates an AWS Lambda function that automatically deletes the offending resource.
+Once configured, if an AWS user creates a poorly configured resource (for example, an overly permissive security group, or user role) within your AWS environment, Datadog Log Management ingests the related log, which triggers a security group-based Detection Rule. This process automatically sends the webhook's JSON payload to the designated Amazon API Gateway URL, which in turn activates an AWS Lambda function that automatically deletes the offending resource.
 
 ## Ban a suspicious IP address
 
@@ -93,6 +93,6 @@ Datadog generates the Security Signal, which details the offense as well as the 
 [2]: https://app.datadoghq.com/account/settings#integrations/webhooks
 [3]: /security/detection_rules/
 [4]: https://www.datadoghq.com/blog/new-term-detection-method-datadog/
-[5]: /security/cloud_siem/log_detection_rules/?tab=threshold#new-term
+[5]: /security/cloud_siem/log_detection_rules/?tab=threshold#new-value
 [6]: https://www.datadoghq.com/blog/detect-abuse-of-functionality-with-datadog/
 [7]: /security/cloud_siem/log_detection_rules/?tab=threshold#define-a-search-query

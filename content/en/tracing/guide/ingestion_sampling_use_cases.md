@@ -83,7 +83,7 @@ You can configure sampling rules by setting the environment variable `DD_TRACE_S
 For example, to send 20 percent of the traces for the service named `my-service`:
 
 ```
-DD_TRACE_SAMPLING_RULES=[{"service": "my-service", "sample_rate": 0.2}]
+DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.2}]'
 ```
 
 Read more about [sampling rules ingestion mechanisms][6].
@@ -133,13 +133,13 @@ The backend service `web-store` is calling a Mongo database multiple times per t
 - Configure a **trace sampling rule** for the backend service `web-store`, ensuring 10 percent of entire traces are kept, including Mongo spans.
 
   ```
-  DD_TRACE_SAMPLING_RULES=[{"service": "web-store", "sample_rate": 0.1}]
+  DD_TRACE_SAMPLING_RULES='[{"service": "web-store", "sample_rate": 0.1}]'
   ```
 
 - Optionally, if you want to keep all the `web-store` spans, configure a **single span sampling rule** to keep 100 percent of the spans for the backend service `web-store`. This sampling does not ingest any database call spans outside of the 10 percent identified above.
 
   ```
-  DD_SPAN_SAMPLING_RULES=[{"service": "web-store", "sample_rate": 1}]
+  DD_SPAN_SAMPLING_RULES='[{"service": "web-store", "sample_rate": 1}]'
   ```
 
   **Note**: Configuring a single span sampling rule is especially useful if you are using [span-based metrics][8], which are derived from ingested spans.

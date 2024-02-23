@@ -46,7 +46,7 @@ https://app.datadoghq.com/oauth2/v1/authorize?redirect_uri=http://localhost:500/
 
 #### Success Response
 
-If a user successfully grants the access request, your application [obtains an authorization code](#Obtain-an-authorization-code) and redirects the user to the redirect URI with the authorization `code`, as well as the `site` parameter, in the query component. 
+If a user successfully grants the access request, your application [obtains an authorization code](#obtain-an-authorization-code) and redirects the user to the redirect URI with the authorization `code`, as well as the `domain` parameter, in the query component. 
 
 #### Error Response
 

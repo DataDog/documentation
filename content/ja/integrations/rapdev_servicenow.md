@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-servicenow
 app_uuid: 50d76130-5970-43e1-a055-0cd5d681d9b7
 assets:
@@ -41,7 +43,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_servicenow
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true

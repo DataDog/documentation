@@ -40,12 +40,11 @@ draft: false
 git_integration_title: glusterfs
 integration_id: glusterfs
 integration_title: Red Hat Gluster Storage
-integration_version: 1.5.0
+integration_version: 1.5.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: glusterfs
-oauth: {}
 public_title: Red Hat Gluster Storage
 short_description: GlusterFS クラスターノード、ボリューム、ブリックステータスのメトリクスを監視します。
 supported_os:

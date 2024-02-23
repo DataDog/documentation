@@ -32,15 +32,15 @@ The recommended best practice for scoping application keys is to grant your keys
 
 ## Client tokens
 
-For security reasons, API keys cannot be used to send data from a browser, as they would be exposed client-side in the JavaScript code. Instead, web browsers and other clients use client tokens to send data to Datadog.
+For security reasons, API keys cannot be used to send data from a browser, mobile, or TV app, as they would be exposed client-side. Instead, end user facing applications use client tokens to send data to Datadog.
 
  Several types of clients submit data that requires a client token, including the following examples:
-- The [web browser log collector][6] submits logs.
+- The log collectors for [web browser][6], [Android][12], [iOS][13], [React Native][14], [Flutter][15], and [Roku][16] submit logs.
 - [Real User Monitoring][7] applications submit events and logs.
 
 Client tokens are unique to your organization. To manage your client tokens, go to **Organization Settings**, then click the **Client Tokens** tab.
 
-**Note:** When a user who created a client token is deactivated, the client token remains active.
+**Note**: When a user who created a client token is deactivated, the client token remains active.
 
 ## Add an API key or client token
 
@@ -132,3 +132,8 @@ Need help? Contact [Datadog support][10].
 [9]: /api/latest/service-accounts/
 [10]: /help/
 [11]: /account_management/org_settings/service_accounts/
+[12]: /logs/log_collection/android/
+[13]: /logs/log_collection/ios/
+[14]: /logs/log_collection/reactnative/
+[15]: /logs/log_collection/flutter/
+[16]: /logs/log_collection/roku/

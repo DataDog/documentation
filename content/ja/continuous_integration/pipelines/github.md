@@ -30,6 +30,8 @@ title: GitHub Actions のワークフローにトレースを設定する
 
 - **ログとの関連付け**: パイプラインスパンをログに関連付け、[ジョブログの収集を有効にします][10]
 
+- **インフラストラクチャーメトリクスの相関**: セルフホスト型 GitHub ランナーのパイプラインジョブに[インフラストラクチャーメトリクスを相関付けます][11]。
+
 - **ランタイムのカスタムタグおよびメトリクス**: パイプラインスパンのランタイムにカスタムタグとメトリクスを構成します
 
 - **Queue time**: ワークフローのジョブが処理される前にキューに残っている時間を表示します
@@ -73,7 +75,7 @@ GitHub Actions CI Visibility のインテグレーションでは、ワークフ
 
 1GiB を超えるログファイルは切り捨てられます。
 
-### インフラストラクチャーメトリクスの相関
+### インフラストラクチャーメトリクスとジョブの相関付け
 
 セルフホスト型の GitHub ランナーを使用している場合は、ジョブとそれを実行しているホストを関連付けることができます。これを行うには、GitHub ランナー名が実行されているマシンのホスト名と一致することを確認します。CI Visibility はこれを利用して、インフラストラクチャーのメトリクスにリンクします。メトリクスを見るには、トレースビューでジョブスパンをクリックすると、ウィンドウ内にホストメトリクスを含む **Infrastructure** という新しいタブが表示されます。
 
@@ -106,3 +108,4 @@ CI Visibility GitHub Actions のインテグレーションを無効にするに
 [8]: https://app.datadoghq.com/ci/pipeline-executions
 [9]: https://github.com/settings/apps
 [10]: https://docs.datadoghq.com/ja/continuous_integration/pipelines/github/#enable-log-collection
+[11]: https://docs.datadoghq.com/ja/continuous_integration/pipelines/github/#correlate-infrastructure-metrics-to-jobs

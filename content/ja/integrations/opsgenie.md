@@ -72,7 +72,7 @@ Opsgenie インテグレーションには、サービスのチェック機能�
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}
 

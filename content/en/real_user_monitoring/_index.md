@@ -5,10 +5,14 @@ description: "Visualize, observe, and analyze the performance of your front-end 
 disable_sidebar: true
 aliases:
   - /real_user_monitoring/installation
+  - /real_user_monitoring/faq/
 further_reading:
 - link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
   tag: "Release Notes"
   text: "Check out the latest Datadog RUM releases! (App login required)"
+- link: "https://dtdg.co/fe"
+  tag: "Foundation Enablement"
+  text: "Join an interactive session to gain insights through Real User Monitoring"
 - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
   tag: "Blog"
   text: "Introducing Datadog Real User Monitoring"
@@ -36,14 +40,20 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/"
   tag: "Blog"
   text: "How Datadog's Technical Solutions team uses RUM, Session Replay, and Error Tracking to resolve customer issues"
+- link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
+  tag: "Blog"
+  text: "Best practices for monitoring static web applications"
 - link: "/real_user_monitoring/browser/data_collected/"
   tag: "Documentation"
   text: "RUM Browser Data Collected"
 algolia:
   tags: ['rum', 'real user monitoring']
+cascade:
+    algolia:
+        rank: 70
 ---
 
-{{< img src="real_user_monitoring/RUM-perf-dashboard.jpeg" alt="RUM Dashboard" >}}
+{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Dashboard" >}}
 
 ## What is Real User Monitoring?
 
@@ -54,7 +64,7 @@ Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the 
 * **Analytics / Usage**: Understand who is using your application (country, device, OS), monitor individual users journeys, and analyze how users interact with your application (most common page visited, clicks, interactions, and feature usage).
 * **Support**: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, and errors).
 
-A user session is a user journey on your web or mobile application lasting up to four hours. A session usually includes page views and associated telemetry. If a user does not interact with an application for 15 minutes, the session is considered complete. A new session starts when the user interacts with the application again. 
+A user session is a user journey on your web or mobile application lasting up to four hours. A session usually includes page views and associated telemetry. If a user does not interact with an application for 15 minutes, the session is considered complete. A new session starts when the user interacts with the application again.
 
 ## What is Session Replay?
 
@@ -70,15 +80,51 @@ Select an application type to start collecting RUM data:
 
 </br>
 
+### Capabilities and platform support
+
+**Note**: The Datadog Flutter SDK is not supported for MacOS, Windows, or Linux.
+
+The following table shows which RUM capabilities are supported on each platform:
+
+| Feature                               | Browser | Android | iOS |   Flutter   | React Native | Roku | Notes |
+| ------------------------------------- | --------|---------|---------|---------|--------------|------|-------|
+| Send logs to Datadog  | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| Distributed tracing of network requests | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | The **Datadog Roku SDK** is only able to track some types of HTTP requests. |
+| Track Views and Actions (RUM) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | - All actions tracked in **Flutter Web** are recorded as `custom` <br> - **Roku** supports only manual action tracking. |
+| Feature Flags tracking and release tracking | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| Error tracking and source mapping | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for **React Native** |
+| Crash tracking, symbolication, and deobfuscation | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  |
+| Stop sessions (Kiosk Monitoring) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| Track Events in WebViews |  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| Monitor platform-specific vitals | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  |  |
+| Global context/attribute tracking in Logs  | {{< X >}} |  |  |  |  |  |  |
+| Client side tracing |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |
+| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} |  |  |  | Mobile Session Replay is in public beta for native mobile apps. |
+| Heatmaps | {{< X >}} |  |  |  |  |  |  |
+| Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | Only partially supported for all **mobile** and **Roku** devices |
+
+## Supported endpoints for SDK domains
+
+All Datadog SDKs traffic is transmitted over SSL (default 443) to the following domains:
+
+| Site | Site URL                                      |
+|------|-----------------------------------------------|
+| US1  | `https://browser-intake-datadoghq.com`        |
+| US3  | `https://browser-intake-us3-datadoghq.com`    |
+| US5  | `https://browser-intake-us5-datadoghq.com`    |
+| EU1  | `https://browser-intake-datadoghq.eu`         |
+| US1-FED  | `https://browser-intake-ddog-gov.com`     |
+| AP1  | `https://browser-intake-ap1-datadoghq.com`    |
+
 ## Explore Datadog RUM
 
-Access RUM by navigating to [**UX Monitoring > RUM Applications**][1].
+Access RUM by navigating to [**UX Monitoring > Performance Monitoring**][1].
 
 ### Out-of-the-box dashboards
 
 Analyze information about your user sessions, performance, mobile applications, frustration signals, network resources, and errors collected automatically with [out-of-the-box RUM dashboards][2].
 
-{{< img src="real_user_monitoring/RUM-session-dashboard.jpeg" alt="RUM dashboard" >}}
+{{< img src="real_user_monitoring/rum-out-of-the-box-dashboard.png" alt="RUM dashboard" >}}
 
 ### RUM Explorer and visualizations
 
@@ -94,7 +140,7 @@ View your [backend traces, logs, and infrastructure metrics][5] down to the exac
 
 ### Error tracking and crash reporting
 
-Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [Error Tracking][6]. 
+Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [Error Tracking][6].
 
 {{< img src="real_user_monitoring/error_tracking/errors_rum.mp4" alt="RUM error tracking" video=true >}}
 
@@ -122,13 +168,13 @@ Access triggered logs, errors, and performance information when troubleshooting 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/rum/list
+[1]: https://app.datadoghq.com/rum/performance-monitoring
 [2]: /real_user_monitoring/dashboards/
 [3]: /real_user_monitoring/explorer/visualize/
 [4]: /monitors/types/real_user_monitoring/
 [5]: /real_user_monitoring/connect_rum_and_traces/
 [6]: /real_user_monitoring/error_tracking/
-[7]: /real_user_monitoring/browser/monitoring_page_performance/#core-web-vitals
+[7]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
 [8]: /real_user_monitoring/ios/mobile_vitals/
 [9]: /real_user_monitoring/android/mobile_vitals/
 [10]: /real_user_monitoring/ios/web_view_tracking/

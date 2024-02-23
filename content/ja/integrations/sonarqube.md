@@ -28,9 +28,9 @@ author:
   sales_email: info@datadoghq.com (日本語対応)
   support_email: help@datadoghq.com
 categories:
-- セキュリティ
-- 問題追跡
+- 自動化
 - ログの収集
+- セキュリティ
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/sonarqube/README.md
 display_on_public_website: true
@@ -38,27 +38,26 @@ draft: false
 git_integration_title: sonarqube
 integration_id: sonarqube
 integration_title: SonarQube
-integration_version: 2.1.0
+integration_version: 2.2.5
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: sonarqube
-oauth: {}
 public_title: SonarQube
 short_description: SonarQube のサーバーとプロジェクトを監視します。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Security
-  - Category::Issue Tracking
+  - Category::Automation
   - Category::Log Collection
+  - Category::Security
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: SonarQube のサーバーとプロジェクトを監視します。
   media: []
@@ -153,7 +152,7 @@ instances:
     password: <password>  # SonarQube の sonar.properties ファイルで定義済み
 ```
 
-**注**: インテグレーションを構成したら、SonarQube で 1 つ以上のプロジェクトをスキャンし、メトリクスを Datadog に表示します。
+**注**: インテグレーションを構成したら、SonarQube で 1 つ以上のプロジェクトをスキャンし、メトリクスを Datadog に送信します。
 
 このインテグレーションで収集される.メトリクスは、デフォルトで `component` タグが付けられます。タグ名をコンポーネント別に変更するには、コンポーネントの定義で `tag` プロパティを指定します。すべてのプロジェクトに設定するには、インスタンスのコンフィグで `default_tag` プロパティを設定します。
 
@@ -280,6 +279,54 @@ Datadog Agent では、ログの収集がデフォルトで無効になってい
 [2]: https://docs.datadoghq.com/ja/agent/docker/log/
 {{% /tab %}}
 {{< /tabs >}}
+
+#### コンポーネントの検出
+
+`components_discovery` パラメータで、コンポーネントの検出方法を構成することができます。
+
+`limit`
+: 自動検出するアイテムの最大数。
+**デフォルト値**: `10`
+
+`include`
+: 正規表現キーとコンポーネント設定値の自動検出へのマッピング。 
+**デフォルト値**: 空のマップ
+
+`exclude`
+: 自動検出から除外するコンポーネントのパターンを持つ正規表現のリスト。
+**デフォルト値**: 空のリスト
+
+**例**:
+
+`my_project` で始まる名前のコンポーネントを最大 `5` まで含めます。
+
+```yaml
+components_discovery:
+  limit: 5
+  include:
+    'my_project*':
+```
+
+最大 `20` のコンポーネントを含み、`temp` で始まるコンポーネントは除外します。
+
+```yaml
+components_discovery:
+  limit: 20
+  include:
+    '.*':
+  exclude:
+    - 'temp*'
+```
+
+名前が `issues` で始まるコンポーネントをすべて含み、`issues_project` タグを適用し、カテゴリー `issues` に属するメトリクスのみを収集します。`limit` が定義されていないため、検出されるコンポーネントの数はデフォルト値の `10` に制限されます。
+```yaml
+components_discovery:
+  include:
+    'issues*':
+       tag: issues_project
+       include:
+         - issues.
+```
 
 ### 検証
 

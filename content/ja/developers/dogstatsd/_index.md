@@ -7,15 +7,18 @@ aliases:
 - /ja/agent/kubernetes/dogstatsd
 description: データタイプ、タグ付けなど、DogStatsD の機能の概要
 further_reading:
+- link: integrations/node
+  tag: ドキュメント
+  text: NodeJS インテグレーションを利用して NodeJS 用の DogStatsD を有効にします
 - link: developers/dogstatsd
   tag: ドキュメント
   text: DogStatsD 入門
 - link: developers/libraries
   tag: ドキュメント
   text: 公式/コミュニティ作成の API および DogStatsD クライアントライブラリ
-- link: https://github.com/DataDog/datadog-agent/tree/main/pkg/dogstatsd
-  tag: GitHub
-  text: DogStatsD ソースコード
+- link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
+  tag: ブログ
+  text: Datadog で Azure App Service 上の Linux Web アプリを監視する
 kind: documentation
 title: DogStatsD
 ---
@@ -37,6 +40,8 @@ DogStatsD は、Docker Hub と GCR で利用できます。
 |--------------------------------------------------|-----------------------------------------------------------|
 | [hub.docker.com/r/datadog/dogstatsd][3]          | [gcr.io/datadoghq/dogstatsd][4]                           |
 
+<div class="alert alert-warning">Docker Hub にはイメージのプルレート制限があります。Docker Hub をご利用でない場合は、Datadog Agent および Cluster Agent の構成を更新して、GCR または ECR からプルすることをお勧めします。手順については、<a href="/agent/guide/changing_container_registry">コンテナレジストリの変更</a>を参照してください。</div>
+
 ## UDS の仕組み
 
 DogStatsD は、UDP 経由で[カスタムメトリクス][5]、[イベント][6]、および[サービスチェック][7]を受け入れ、それらを定期的に集計して Datadog に転送します。
@@ -51,7 +56,7 @@ DogStatsD は、データを受け取ると共に、_フラッシュ間隔_と�
 
 DogStatsD は、Agent v6 以上の UDP ポート `8125` でデフォルトで有効になっています。このポートを変更する必要がない場合は、[コードで DogStatsD をセットアップする](#code)方法を直接参照してください。
 
-### エージェント
+### Agent
 
 {{< tabs >}}
 {{% tab "Host Agent" %}}
@@ -76,9 +81,9 @@ DogStatsD は、Agent v6 以上の UDP ポート `8125` でデフォルトで有
 2. [Agent を再起動します][3]。
 
 
-[1]: /ja/agent/guide/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[1]: /ja/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [2]: /ja/developers/dogstatsd/unix_socket/
-[3]: /ja/agent/guide/agent-commands/
+[3]: /ja/agent/configuration/agent-commands/
 {{% /tab %}}
 {{% tab "コンテナ Agent" %}}
 
@@ -98,7 +103,16 @@ docker run -d --cgroupns host \
 
 StatsD メトリクスの収集に使用するポートを変更する必要がある場合は、`DD_DOGSTATSD_PORT="<新しい_DOGSTATSD_ポート>` 環境変数を使用します。[Unix ドメインソケット][1]を使用するように DogStatsD を構成することもできます。
 
+#### UDP 発信点検出
+
+発信点検出は Agent v6.10.0+ でサポートされており、これにより、DogStatsD はコンテナメトリクスとタグメトリクスがどこから発信されたかを自動的に検出します。このモードが有効な場合は、UDP で受信されたすべてのメトリクスがオートディスカバリーメトリクスと同じポッドタグに基づいてタグ付けされます。
+
+Kubernetes 以外の環境での発信点検出は、[Datagram Format and Shell Usage][2] の DogStatsD プロトコルの拡張機能に基づきます。Agent でこの機能を有効にするには、`DD_DOGSTATSD_ORIGIN_DETECTION_CLIENT` 環境変数を `true` に設定します。
+
+**注**: Fargate 環境では、発信点検出はサポートされていません。
+
 [1]: /ja/developers/dogstatsd/unix_socket/
+[2]: /ja/developers/dogstatsd/datagram_shell/?tab=metrics#dogstatsd-protocol-v12
 {{% /tab %}}
 {{% tab "Kubernetes" %}}
 
@@ -151,7 +165,7 @@ env:
 
 これにより、アプリケーションを実行しているポッドは、`$DD_AGENT_HOST` のポート `8125` で DogStatsD メトリクスを送信できるようになります。
 
-**注**: Datadog では、属性を割り当てる際のベストプラクティスとして、統合サービスタグ付けを使用することをおすすめしています。統合サービスタグ付けは、`env`、`service`、`version` の 3 つの標準タグを使用して Datadog テレメトリーと結合します。環境を統合する方法については、[統合サービスタグ付け][8]をご参照ください。
+**注**: Datadog では、属性を割り当てる際のベストプラクティスとして、統合サービスタグ付けを使用することをおすすめしています。統合サービスタグ付けは、`env`、`service`、`version` の 3 つの標準タグを使用して Datadog テレメトリーと結合します。環境を統合する方法については、[統合サービスタグ付け][4]をご参照ください。
 
 #### UDP 発信点検出
 
@@ -160,7 +174,7 @@ env:
 **注**: 
 
 * UDP による発信点検出では、ポッド ID をエンティティ ID として使用するため、コンテナレベルのタグは発行されません。
-* UDP 以外には [Unix ドメインソケット][4]があります。
+* UDP 以外には [Unix ドメインソケット][5]があります。
 
 UDP 経由の発信点検出を有効にするには、アプリケーションマニフェストに次の行を追加します。
 
@@ -172,16 +186,17 @@ env:
               fieldPath: metadata.uid
 ```
 
-発信点検出を使用して収集されたメトリクスに[タグカーディナリティ][5]を設定するには、環境変数 `DD_DOGSTATSD_TAG_CARDINALITY` に `low` (デフォルト) または `orchestrator` を使用します。
+発信点検出を使用して収集されたメトリクスに[タグカーディナリティ][6]を設定するには、環境変数 `DD_DOGSTATSD_TAG_CARDINALITY` に `low` (デフォルト) または `orchestrator` を使用します。
 
-**注:** UDP の場合、`pod_name` タグは、[カスタムメトリクス][6]が多くなりすぎないように、デフォルトで追加されていません。
+**注:** UDP の場合、`pod_name` タグは、[カスタムメトリクス][7]が多くなりすぎないように、デフォルトで追加されていません。
 
 [1]: /ja/developers/dogstatsd/unix_socket/
 [2]: https://github.com/containernetworking/cni
 [3]: https://kubernetes.io/docs/setup/independent/troubleshooting-kubeadm/#hostport-services-do-not-work
-[4]: /ja/developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
-[5]: /ja/getting_started/tagging/assigning_tags/#environment-variables
-[6]: /ja/metrics/custom_metrics/
+[4]: /ja/getting_started/tagging/unified_service_tagging
+[5]: /ja/developers/dogstatsd/unix_socket/?tab=host#using-origin-detection-for-container-tagging
+[6]: /ja/getting_started/tagging/assigning_tags/#environment-variables
+[7]: /ja/metrics/custom_metrics/
 {{% /tab %}}
 {{% tab "Helm" %}}
 
@@ -264,7 +279,7 @@ Java DataDog StatsD Client は maven central とともに配布され、[Maven �
 <dependency>
     <groupId>com.datadoghq</groupId>
     <artifactId>java-dogstatsd-client</artifactId>
-    <version>3.0.0</version>
+    <version>4.2.1</version>
 </dependency>
 ```
 
@@ -292,8 +307,11 @@ Java DataDog StatsD Client は maven central とともに配布され、[Maven �
 
 {{< programming-lang lang=".NET" >}}
 
-- [NuGet からパッケージ][1]を取得してインストールします。
+Nuget CLI を使用してパッケージを直接インストールするか、[NuGet から PackageReference][1] を取得します。
 
+```shell
+dotnet add package DogStatsD-CSharp-Client
+```
 
 [1]: https://www.nuget.org/packages/DogStatsD-CSharp-Client
 {{< /programming-lang >}}
@@ -334,6 +352,10 @@ require 'datadog/statsd'
 # DogStatsD クライアントインスタンスを作成します。
 statsd = Datadog::Statsd.new('localhost', 8125)
 ```
+
+<div class="alert alert-info">
+  コンテナ Agent または Kubernetes で DogStatsD を使用する場合、Unix ドメインソケットを使用している場合は <code>$DD_DOGSTATSD_SOCKET</code> 環境変数を、ホストポートバインディング方式を使用している場合は <code>$DD_AGENT_HOST</code> 環境変数を使用して、StatsD メトリクスの転送先のホストをインスタンス化する必要があります。
+</div>
 
 {{< /programming-lang >}}
 
@@ -422,7 +444,8 @@ var dogstatsdConfig = new StatsdConfig
 
 using (var dogStatsdService = new DogStatsdService())
 {
-    dogStatsdService.Configure(dogstatsdConfig);
+    if (!dogStatsdService.Configure(dogstatsdConfig))
+        throw new InvalidOperationException("Cannot initialize DogstatsD. Set optionalExceptionHandler argument in the `Configure` method for more information.");
     // ...
 } // 未送信のメトリクスをフラッシュします
 ```
@@ -430,10 +453,6 @@ using (var dogStatsdService = new DogStatsdService())
 {{< /programming-lang >}}
 
 {{< /programming-lang-wrapper >}}
-
-<div class="alert alert-info">
-  コンテナ Agent または Kubernetes で DogStatsD を使用する場合、Unix ドメインソケットを使用している場合は <code>$DD_DOGSTATSD_SOCKET</code> 環境変数を、ホストポートバインディング方式を使用している場合は <code>$DD_AGENT_HOST</code> 環境変数を使用して、StatsD メトリクスの転送先のホストをインスタンス化する必要があります。
-</div>
 
 ### クライアントのインスタンス化パラメーター
 
@@ -541,18 +560,22 @@ DogStatsD と StatsD はほぼ同じですが、DogStatsD には、使用可能�
 
 {{< whatsnext desc="">}}
     {{< nextlink href="/metrics/custom_metrics/dogstatsd_metrics_submission/" >}}DogStatsD でメトリクスを Datadog に送信します。{{< /nextlink >}}
-    {{< nextlink href="/events/guides/dogstatsd/" >}}DogStatsD でイベントを Datadog に送信します。{{< /nextlink >}}
+    {{< nextlink href="/service_management/events/guides/dogstatsd/" >}}DogStatsD でイベントを Datadog に送信します。{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks/dogstatsd_service_checks_submission/" >}}DogStatsD でサービスチェックを Datadog に送信します。{{< /nextlink >}}
 {{< /whatsnext >}}
 
 DogStatsD が使用するデータグラム形式についてさらに理解を深めたい場合、または独自の Datadog ライブラリを開発したい場合は、[データグラムとシェルの使用][9]を参照してください。ここでは、メトリクスとイベントをコマンドラインから直接送信する方法についても説明しています。
+
+## 参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/etsy/statsd
 [2]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/
 [3]: https://hub.docker.com/r/datadog/dogstatsd
 [4]: https://gcr.io/datadoghq/dogstatsd
 [5]: /ja/metrics/custom_metrics/
-[6]: /ja/events/guides/dogstatsd/
+[6]: /ja/service_management/events/guides/dogstatsd/
 [7]: /ja/developers/service_checks/dogstatsd_service_checks_submission/
 [8]: /ja/getting_started/tagging/unified_service_tagging
 [9]: /ja/developers/dogstatsd/datagram_shell/

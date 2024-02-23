@@ -1,36 +1,56 @@
 ---
+app_id: containerd
+app_uuid: 206cf95f-1d2a-4ad5-b027-0de15431833b
 assets:
-  dashboards: {}
-  logs: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: true
+    metrics:
+      check: containerd.cpu.user
+      metadata_path: metadata.csv
+      prefix: containerd.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Containerd
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - containers
-creates_events: true
-ddtype: check
+- kubernetes
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/containerd/README.md
-display_name: Containerd
+display_on_public_website: true
 draft: false
 git_integration_title: containerd
-guid: 5cdc0363-a0df-469b-8346-2da4ab84128c
 integration_id: containerd
 integration_title: Containerd
 integration_version: ''
 is_public: true
 kind: integration
-maintainer: help@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: containerd.
-metric_to_check: containerd.cpu.user
+manifest_version: 2.0.0
 name: containerd
-public_title: Intégration Datadog/Containerd
+public_title: Containerd
 short_description: Surveillez toutes vos métriques Containerd avec Datadog.
-support: core
 supported_os:
 - linux
 - windows
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Containers
+  - Category::Kubernetes
+  - Supported OS::Linux
+  - Supported OS::Windows
+  configuration: README.md#Setup
+  description: Surveillez toutes vos métriques Containerd avec Datadog.
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Containerd
 ---
 
 
@@ -39,7 +59,7 @@ supported_os:
 
 Ce check surveille le runtime du conteneur Containerd.
 
-## Configuration
+## Implémentation
 
 ### Installation
 
@@ -152,7 +172,7 @@ Besoin d'aide ? Contactez [l'assistance Datadog][3].
 
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://github.com/DataDog/datadog-agent/blob/master/cmd/agent/dist/conf.d/containerd.d/conf.yaml.default
 [3]: https://docs.datadoghq.com/fr/help/
 [4]: https://docs.datadoghq.com/fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent

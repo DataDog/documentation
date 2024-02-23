@@ -1,40 +1,63 @@
 ---
+app_id: sendmail
+app_uuid: 8169d145-8d1f-4bb8-a4de-a0aa9aa84c0b
 assets:
-  dashboards: {}
-  metrics_metadata: metadata.csv
-  monitors: {}
-  service_checks: assets/service_checks.json
+  integration:
+    configuration: {}
+    events:
+      creates_events: false
+    metrics:
+      check: sendmail.queue.size
+      metadata_path: metadata.csv
+      prefix: sendmail.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_name: Sendmail
+author:
+  homepage: https://github.com/DataDog/integrations-extras
+  name: Communauté
+  sales_email: david.bouchare@datadoghq.com
+  support_email: david.bouchare@datadoghq.com
 categories:
-  - Collaboration
-creates_events: false
-ddtype: check
+- metrics
+- network
 dependencies:
-  - https://github.com/DataDog/integrations-extras/blob/master/sendmail/README.md
-display_name: Sendmail
+- https://github.com/DataDog/integrations-extras/blob/master/sendmail/README.md
+display_on_public_website: true
 draft: false
 git_integration_title: sendmail
-guid: 4d4f72c7-c8c5-4e7a-b281-32c2d462c7c8
 integration_id: sendmail
 integration_title: Sendmail
 integration_version: 1.0.0
 is_public: true
 kind: integration
-maintainer: david.bouchare@datadoghq.com
-manifest_version: 1.0.0
-metric_prefix: sendmail.
-metric_to_check: sendmail.queue.size
+manifest_version: 2.0.0
 name: sendmail
-public_title: Intégration Datadog/Sendmail
+public_title: Sendmail
 short_description: Intégration Sendmail pour surveiller les files d'attente d'e-mails
-support: contrib
 supported_os:
-  - linux
+- linux
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Metrics
+  - Category::Network
+  - Supported OS::Linux
+  configuration: README.md#Setup
+  description: Intégration Sendmail pour surveiller les files d'attente d'e-mails
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Sendmail
 ---
+
+
+
 ## Présentation
 
 Ce check permet de surveiller [Sendmail][1] avec l'Agent Datadog.
 
-## Configuration
+## Implémentation
 
 Le check Sendmail n'est pas inclus avec le package de l'[Agent Datadog][2] : vous devez donc l'installer.
 

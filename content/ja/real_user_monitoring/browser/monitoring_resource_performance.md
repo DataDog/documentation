@@ -30,7 +30,7 @@ RUM リソースは、収集時にアクティブな RUM ビューに関連す�
 
 この機能の設定については、[RUM とトレースの接続][2]を参照してください。
 
-{{< img src="real_user_monitoring/browser/resource_performance_graph.png" alt="RUM リソースの APM トレース情報"  >}}
+{{< img src="real_user_monitoring/browser/resource_performance_graph.png" alt="RUM リソースの APM トレース情報" >}}
 
 ## リソースタイミングとメトリクス
 

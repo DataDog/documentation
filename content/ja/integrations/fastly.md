@@ -42,7 +42,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: fastly
-oauth: {}
 public_title: Fastly
 short_description: ファイルをキャッシュすることで、Web ページの読み込みを早くするコンテンツ配信ネットワーク
 supported_os: []
@@ -69,7 +68,7 @@ Fastly に接続して、Fastly のキーメトリクス (キャッシュカバ�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 必要なインストール手順はありません。
 

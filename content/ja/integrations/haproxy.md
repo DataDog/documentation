@@ -52,9 +52,7 @@ author:
   sales_email: info@datadoghq.com
   support_email: help@datadoghq.com
 categories:
-- web
 - log collection
-- autodiscovery
 dependencies:
 - https://github.com/DataDog/integrations-core/blob/master/haproxy/README.md
 display_on_public_website: true
@@ -62,27 +60,24 @@ draft: false
 git_integration_title: haproxy
 integration_id: haproxy
 integration_title: HAProxy
-integration_version: 4.4.0
+integration_version: 5.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: haproxy
-oauth: {}
 public_title: HAProxy
 short_description: リクエスト、応答、エラー、処理バイト数などのキーメトリクスを監視。
 supported_os:
 - linux
-- macos
 - windows
+- macos
 tile:
   changelog: CHANGELOG.md
   classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::macOS
-  - Supported OS::Windows
-  - Category::Web
   - Category::ログの収集
-  - Category::オートディスカバリー
+  - Supported OS::Linux
+  - Supported OS::Windows
+  - Supported OS::macOS
   configuration: README.md#Setup
   description: リクエスト、応答、エラー、処理バイト数などのキーメトリクスを監視。
   media: []
@@ -207,7 +202,7 @@ spec:
         - name: haproxy
 ```
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -490,25 +485,31 @@ Haproxy チェックには、イベントは含まれません。
 
 
 ## トラブルシューティング
+### エラー: ポート 514 はすでに使用中
+syslog があるシステムで、Agent がポート 514 で HAProxy ログをリッスンしている場合、Agent ログに以下のエラーが表示されることがあります: 
+`Can't start UDP forwarder on port 514: listen udp :514: bind: address already in use`
 
-ご不明な点は、[Datadog のサポートチーム][7]までお問合せください。
+これは、デフォルトで syslog がポート 514 でリッスンしているために起こっています。このエラーを解決するには、syslog を無効にするか、ポート 514 と Agent がログをリッスンしている別のポートにログを転送するように HAProxy を構成することができます。Agent がリッスンするポートは、[こちら][7]で haproxy.d/conf.yaml ファイル定義することができます。
+
+ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
 ## その他の参考資料
 
-- [HAProxy パフォーマンスメトリクスの監視][8]
-- [HAProxy メトリクスの収集方法][9]
-- [Datadog を使用した HAProxy の監視][10]
-- [HAProxy のマルチプロセスコンフィギュレーション][11]
+- [HAProxy パフォーマンスメトリクスの監視][9]
+- [HAProxy メトリクスの収集方法][10]
+- [Datadog を使用した HAProxy の監視][11]
+- [HAProxy のマルチプロセスコンフィギュレーション][12]
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/haproxy/images/haproxy-dash.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/prometheus/haproxy_exporter
 [4]: https://www.haproxy.com/blog/haproxy-exposes-a-prometheus-metrics-endpoint/
 [5]: https://www.haproxy.org/download/1.7/doc/management.txt
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
-[7]: https://docs.datadoghq.com/ja/help/
-[8]: https://www.datadoghq.com/blog/monitoring-haproxy-performance-metrics
-[9]: https://www.datadoghq.com/blog/how-to-collect-haproxy-metrics
-[10]: https://www.datadoghq.com/blog/monitor-haproxy-with-datadog
-[11]: https://docs.datadoghq.com/ja/integrations/faq/haproxy-multi-process/
+[7]: https://github.com/DataDog/integrations-core/blob/0e34b3309cc1371095762bfcaf121b0b45a4e263/haproxy/datadog_checks/haproxy/data/conf.yaml.example#L631
+[8]: https://docs.datadoghq.com/ja/help/
+[9]: https://www.datadoghq.com/blog/monitoring-haproxy-performance-metrics
+[10]: https://www.datadoghq.com/blog/how-to-collect-haproxy-metrics
+[11]: https://www.datadoghq.com/blog/monitor-haproxy-with-datadog
+[12]: https://docs.datadoghq.com/ja/integrations/faq/haproxy-multi-process/

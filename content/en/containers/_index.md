@@ -8,6 +8,9 @@ further_reading:
       text: "Datadog's Annual State of Containers Report"
 algolia:
   tags: ['containers']
+cascade:
+    algolia:
+        rank: 70
 ---
 
 ## Overview

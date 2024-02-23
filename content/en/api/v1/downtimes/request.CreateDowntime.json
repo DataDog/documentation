@@ -1,6 +1,7 @@
 {
   "message": "Example-Downtime",
   "start": 1636629071,
+  "end": 1636632671,
   "timezone": "Etc/UTC",
   "scope": [
     "test:exampledowntime"
@@ -16,5 +17,14 @@
       "Fri"
     ],
     "until_date": 1638443471
-  }
+  },
+  "notify_end_states": [
+    "alert",
+    "no data",
+    "warn"
+  ],
+  "notify_end_types": [
+    "canceled",
+    "expired"
+  ]
 }

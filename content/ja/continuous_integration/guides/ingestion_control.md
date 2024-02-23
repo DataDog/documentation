@@ -88,5 +88,5 @@ git author のメールアドレス (`@git.commit.author.email`) をフィルタ
 [1]: /ja/account_management/rbac/permissions/#ci-visibility
 [3]: /ja/getting_started/tagging/
 [4]: /ja/account_management/rbac/permissions/#ci-visibility
-[5]: https://www.datadoghq.com/product/audit-trail/
+[5]: /ja/account_management/audit_trail/events/#ci-visibility-events
 [6]: /ja/monitors/types/apm/

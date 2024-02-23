@@ -27,12 +27,11 @@ draft: false
 git_integration_title: redis_sentinel
 integration_id: redis-sentinel
 integration_title: Redis Sentinel
-integration_version: 1.1.0
+integration_version: 1.1.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: redis_sentinel
-oauth: {}
 public_title: Redis Sentinel
 short_description: Redis Sentinel は Redis に高可用性を提供します。
 supported_os:

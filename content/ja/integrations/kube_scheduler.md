@@ -35,12 +35,11 @@ draft: false
 git_integration_title: kube_scheduler
 integration_id: kube-scheduler
 integration_title: Kubernetes Scheduler
-integration_version: 4.5.0
+integration_version: 4.6.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: kube_scheduler
-oauth: {}
 public_title: Kubernetes Scheduler
 short_description: Kubernetes Scheduler の監視
 supported_os:
@@ -77,7 +76,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Kubernetes Scheduler チェックは [Datadog Agent][3] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
@@ -124,7 +123,7 @@ Kube Scheduler には、イベントは含まれません。
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/kube_scheduler/images/kube_scheduler_screenshot.jpeg
 [2]: https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler
-[3]: https://app.datadoghq.com/account/settings#agent
+[3]: https://app.datadoghq.com/account/settings/agent/latest
 [4]: https://docs.datadoghq.com/ja/agent/kubernetes/integrations/
 [5]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/datadog_checks/kube_scheduler/data/conf.yaml.example
 [6]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: rapdev-maxdb
 app_uuid: f30ae17c-d58a-43f4-a8a6-693279394101
 assets:
@@ -46,7 +48,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev_maxdb
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true

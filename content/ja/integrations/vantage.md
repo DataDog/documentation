@@ -24,7 +24,6 @@ legal_terms:
   eula: assets/terms-of-service.pdf
 manifest_version: 2.0.0
 name: vantage
-oauth: {}
 public_title: Vantage
 short_description: Datadog のコストをインポートし、他のインフラストラクチャー費用と一緒に追跡することができます
 supported_os:
@@ -66,7 +65,7 @@ Vantage は、クラウドコストの透明性と最適化のためのプラッ
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 [Vantage][1] にアクセスし、無料で登録します。登録が完了したら、[Vantage インテグレーションページ][2]にアクセスし、Datadog インテグレーションを追加してください。これにより、Datadog OAUTH2 フローを使用して、Vantage が請求および使用量にアクセスできるようになります。
 

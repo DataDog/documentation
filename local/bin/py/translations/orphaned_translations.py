@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os
+import re
 
 
 def get_orphaned_translated_files_by_language(language_code):
@@ -35,6 +36,7 @@ def get_translation_languages():
 
 
 def is_git_ignored(file):
+    file = re.escape(file)
     is_ignored = os.popen(f'git check-ignore {file}').read()
     return len(is_ignored) > 0
 

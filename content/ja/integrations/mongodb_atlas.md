@@ -2,6 +2,8 @@
 app_id: mongodb-atlas
 app_uuid: d7f734da-a1f7-4e3f-a590-ea154018a8d8
 assets:
+  dashboards:
+    MongoDB-Atlas-Overview: assets/dashboards/MongoDB-Atlas-Overview_dashboard.json
   integration:
     auto_install: true
     configuration: {}
@@ -39,7 +41,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: mongodb_atlas
-oauth: {}
 public_title: MongoDB Atlas
 short_description: MongoDB Atlas
 supported_os:
@@ -76,7 +77,7 @@ MongoDB Atlas は、算出メトリクスを Datadog にプッシュして、以
 
 MongoDB Atlas インテグレーションは、Atlas ポータルにログインすることによってインストールできます。
 
-### コンフィギュレーション
+### 構成
 
 1. Datadog [API キー][1]を取得または作成します。
 2. [Atlas ポータル][2]の **Integrations** -> **Datadog Settings** で、Datadog API キーを入力します。

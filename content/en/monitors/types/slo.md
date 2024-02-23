@@ -3,7 +3,18 @@ title: SLO Alerts
 kind: documentation
 aliases :
   - /monitors/create/types/slo/
+further_reading:
+- link: "/service_management/service_level_objectives/monitor"
+  tag: "Documentation"
+  text: "Monitor-Based SLOs"
+- link: "/service_management/service_level_objectives/metric"
+  tag: "Documentation"
+  text: "Metric-Based SLOs"
 ---
+
+<div class="alert alert-info">
+This monitor is only available for metric-based SLOs and metric monitor-based SLOs.
+</div>
 
 ## Overview
 
@@ -38,9 +49,13 @@ In addition to the [standard template variables][6] available across all monitor
 | `{{short_window_burn_rate}}` | The burn rate value observed by the short window (burn rate alerts only). |
 | `{{long_window_burn_rate}}` | The burn rate value observed by the long window (burn rate alerts only). |
 
-[1]: /monitors/service_level_objectives/
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /service_management/service_level_objectives/
 [2]: https://app.datadoghq.com/monitors/create/slo
-[3]: /monitors/service_level_objectives/error_budget/
-[4]: /monitors/service_level_objectives/burn_rate/
+[3]: /service_management/service_level_objectives/error_budget/
+[4]: /service_management/service_level_objectives/burn_rate/
 [5]: /monitors/notify/#overview
 [6]: /monitors/notify/variables/?tab=is_alert#template-variables

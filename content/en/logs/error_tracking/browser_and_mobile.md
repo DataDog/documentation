@@ -25,7 +25,7 @@ Your crash reports appear in [**Error Tracking**][2].
 {{< tabs >}}
 {{% tab "Browser" %}}
 
-If you have not setup the Datadog Browser SDK yet, follow the [in-app setup instructions][1] or see the [Browser Logs setup documentation][2].
+If you have not set up the Datadog Browser SDK yet, follow the [in-app setup instructions][1] or see the [Browser Logs setup documentation][2].
 
 1. Download the latest version of the Logs Browser SDK. Error Tracking requires at least `v4.36.0`.
 2. Configure your application's `version`, `env`, and `service` when [initializing the SDK][3]. For example, with NPM:
@@ -63,7 +63,7 @@ If you have not setup the Datadog Browser SDK yet, follow the [in-app setup inst
 {{% /tab %}}
 {{% tab "Android" %}}
 
-If you have not setup the Datadog Android SDK yet, follow the [in-app setup instructions][1] or see the [Android Logs setup documentation][2].
+If you have not set up the Datadog Android SDK yet, follow the [in-app setup instructions][1] or see the [Android Logs setup documentation][2].
 
 1. Download the latest version of the [Datadog Android SDK for Logs][3].
 2. Configure your application's `version`, `env`, and `service` when [initializing the SDK][4].
@@ -78,7 +78,7 @@ If you have not setup the Datadog Android SDK yet, follow the [in-app setup inst
    ```
 
 [1]: https://app.datadoghq.com/logs/onboarding/client
-[2]:/logs/log_collection/android/#setup
+[2]: /logs/log_collection/android/#setup
 [3]: https://github.com/Datadog/dd-sdk-android
 [4]: /logs/log_collection/android/?tab=kotlin#setup
 

@@ -49,7 +49,7 @@ La collecte de données étant basée sur eBPF, votre plateforme doit utiliser l
 
 #### Windows
 
-La collecte de données se fait via un pilote de périphérique et est disponible depuis la version 7.27.1 de l'Agent Datadog, à partir du système d'exploitation Windows 2012 R2.
+La collecte de données se fait via un pilote de kernel réseau. Elle est disponible à partir de la version 7.27.1 de l'Agent Datadog pour Windows 2012 R2 et ses versions ultérieures (ainsi que pour les systèmes d'exploitation équivalents, tels que Windows 10).
 
 #### macOS
 
@@ -57,7 +57,7 @@ La solution NPM Datadog ne prend pas en charge les plateformes macOS.
 
 ### Containers
 
-NPM vous aide à visualiser l'architecture et les performances de vos environnements orchestrés et conteneurisés, avec la prise en charge de [Docker][5], [Kubernetes][6], [ECS][7], et d'autres technologies de conteneur. Les intégrations pour conteneurs de Datadog vous permettent d'agréger le trafic en fonction d'entités pertinentes (conteneurs, tâches, pods, clusters, déploiements, etc.) grâce à des tags prêts à l'emploi (tels que `container_name`, `task_name` et `kube_service`).
+NPM vous aide à visualiser l'architecture et les performances de vos environnements orchestrés et conteneurisés, avec la prise en charge de [Docker][5], [Kubernetes][6], [ECS][7], et d'autres technologies de conteneur. Les intégrations pour conteneurs de Datadog vous permettent d'agréger le trafic en fonction d'entités pertinentes (conteneurs, tâches, pods, clusters, déploiements, etc.) grâce à des tags prêts à l'emploi (tels que `container_name`, `task_name` et `kube_service`). 
 
 ### Outils de routage réseau
 
@@ -103,7 +103,7 @@ Pour activer la solution Network Performance Monitoring avec l'Agent Datadog, ut
 2. Copiez l'exemple de configuration system-probe :
 
     ```shell
-    sudo -u dd-agent cp /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
+    sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
     ```
 
 3. Modifiez `/etc/datadog-agent/system-probe.yaml` en définissant le flag enable sur `true` :
@@ -179,11 +179,11 @@ Si ces utilitaires ne sont pas disponibles pour votre distribution, suivez les m
 
 La collecte de logs réseau pour Windows repose sur un pilote de filtre.
 
-Pour activer NPM pour des hosts Windows, procédez comme suit
+Pour activer NPM pour des hosts Windows, procédez comme suit 
 
 1. Installez l'[Agent Datadog][1 (version 7.27.1+) en prenant soin d'activer le composant du pilote de filtre.
 
-   Lors de l'installation, transmettez `ADDLOCAL="MainApplication,NPM"` à la commande `msiexec`, ou sélectionnez « Network Performance Monitoring » pour une installation via l'interface graphique.
+   [OBSOLÈTE] _(version 7.44 et versions antérieures)_Lors de l'installation, passez `ADDLOCAL="MainApplication,NPM"` à la commande `msiexec`, ou sélectionnez « Network Performance Monitoring » pour une installation via l'interface graphique.
 
 1. Modifiez `C:\ProgramData\Datadog\system-probe.yaml` en définissant le flag enabled sur `true` :
 
@@ -255,7 +255,7 @@ Si l'[Agent est déjà exécuté avec un manifeste][4] :
                       # (...)
                           - name: DD_PROCESS_AGENT_ENABLED
                             value: 'true'
-                          - name: DD_SYSTEM_PROBE_NETWORK_ENABLED
+                          - name: DD_SYSTEM_PROBE_ENABLED
                             value: 'true'
                           - name: DD_SYSTEM_PROBE_EXTERNAL
                             value: 'true'
@@ -353,7 +353,7 @@ Si l'[Agent est déjà exécuté avec un manifeste][4] :
 [4]: /fr/agent/kubernetes/
 {{% /tab %}}
 {{% tab "Operator" %}}
-<div class="alert alert-warning">L'Operator Datadog est disponible pour le grand public depuis la version `1.0.0`, il prend en charge la version `v2alpha1` du `DatadogAgent` .</div>
+<div class="alert alert-warning">L'Operator Datadog est disponible librement depuis la version `1.0.0`, qui correspond à la version `v2alpha1` de la ressource personnalisée DatadogAgent. </div>
 
 [L'Operator Datadog][1] est une fonctionnalité permettant de déployer l'Agent Datadog sur Kubernetes et OpenShift. L'Operator transmet des données sur le statut, la santé et les erreurs du déploiement dans le statut de sa ressource personnalisée. Ses paramètres de niveau supérieur permettent également de réduire les erreurs de configuration.
 
@@ -378,9 +378,9 @@ spec:
 Pour configurer la fonctionnalité Network Performance Monitoring dans Docker, utilisez la configuration suivante lorsque vous lancez l'Agent de conteneur :
 
 ```shell
-$ docker run --cgroupns host \
+docker run --cgroupns host \
 --pid host \
--e DD_API_KEY="<CLÉ_API_DATADPG>" \
+-e DD_API_KEY="<DATADOG_API_KEY>" \
 -e DD_SYSTEM_PROBE_NETWORK_ENABLED=true \
 -e DD_PROCESS_AGENT_ENABLED=true \
 -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -410,9 +410,9 @@ services:
   datadog:
     image: "gcr.io/datadoghq/agent:latest"
     environment:
-       DD_SYSTEM_PROBE_NETWORK_ENABLED: 'true'
-       DD_PROCESS_AGENT_ENABLED: 'true'
-       DD_API_KEY: '<CLÉ_API_DATADOG>'
+       DD_SYSTEM_PROBE_NETWORK_ENABLED=true
+       DD_PROCESS_AGENT_ENABLED=true
+       DD_API_KEY=<CLÉ_API_DATADOG>
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock:ro
     - /proc/:/host/proc/:ro
@@ -441,10 +441,25 @@ Pour une configuration sur AWS ECS, consultez la section relative à [AWS ECS]
 {{% /tab %}}
 {{< /tabs >}}
 
+{{< site-region region="us,us3,us5,eu" >}}
+### Résolution améliorée
+
+Si vous le souhaitez, vous pouvez activer la collecte des ressources sur les intégrations cloud pour permettre à Network Performance Monitoring de découvrir les entités gérées sur le cloud.
+- Installez l'[intégration Azure][1] pour avoir accès aux équilibreurs de charge et aux passerelles d'application Azure.
+- Installez l'[intégration AWS][2] pour avoir accès à AWS Load Balancer. **Vous devez activer la collecte des métriques ENI et EC2.**
+
+Pour en savoir plus sur ces fonctionnalités, consultez la section [Résolution améliorée sur les services cloud][3].
+
+  [1]: /integrations/azure
+  [2]: /integrations/amazon_web_services/#resource-collection
+  [3]: /network_monitoring/performance/network_analytics/#cloud-service-enhanced-resolution
+
+{{< /site-region >}}
+
 ## Pour aller plus loin
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/fr/network_monitoring/dns/#setup
 [3]: https://www.redhat.com/en/blog/introduction-ebpf-red-hat-enterprise-linux-7
 [4]: /fr/network_monitoring/dns/

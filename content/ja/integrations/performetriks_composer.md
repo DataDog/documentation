@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: performetriks-composer
 app_uuid: b1b4d663-f81a-4892-8aef-5dd67b40a37f
 assets: {}
@@ -23,7 +25,6 @@ legal_terms:
   eula: assets/Composer End User License Agreement.pdf
 manifest_version: 2.0.0
 name: performetriks_composer
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true

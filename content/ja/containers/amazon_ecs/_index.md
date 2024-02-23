@@ -4,7 +4,6 @@ algolia:
   - ecs
 aliases:
 - /ja/agent/amazon_ecs/
-- /ja/containers/amazon_ecs/data_collected
 further_reading:
 - link: /agent/amazon_ecs/logs/
   tag: ドキュメント
@@ -12,9 +11,15 @@ further_reading:
 - link: /agent/amazon_ecs/apm/
   tag: ドキュメント
   text: アプリケーショントレースの収集
+- link: /agent/amazon_ecs/data_collected/#metrics
+  tag: Documentation
+  text: ECS メトリクスの収集
 - link: https://www.datadoghq.com/blog/amazon-ecs-anywhere-monitoring/
   tag: ブログ
   text: Amazon ECS Anywhere のサポート開始
+- link: https://www.datadoghq.com/blog/cloud-cost-management-container-support/
+  tag: blog
+  text: Datadog Cloud Cost Management で Kubernetes と ECS の支出を把握する
 kind: documentation
 title: Amazon ECS
 ---
@@ -219,6 +224,134 @@ Agent バージョン 6.10 以降は、ホストインスタンスのセキュ�
 Agent を `awsvpc` モードで実行することは可能ですが、これは推奨されるセットアップではありません。Agent を DogStatsD メトリクスや APM トレースに到達させるための ENI IP を取得することが難しい可能性があるからです。
 
 代わりに、ブリッジモードで Agent をポートマッピングとともに実行すると、[メタデータサーバを介するホスト IP][6] を簡単に取得できます。
+
+{{% site-region region="gov" %}}
+#### GOVCLOUD 環境向け FIPS プロキシ
+
+Datadog の GOVCLOUD データセンターにデータを送信するには、`fips-proxy` サイドカーコンテナを追加し、コンテナポートを開いて、[サポートされている機能](https://docs.datadoghq.com/agent/configuration/agent-fips-proxy/?tab=helmonamazoneks#supported-platforms-and-limitations)の適切な通信を確保します。
+
+**注**: この機能は、Linux でのみ使用可能です
+
+```json
+ {
+   "containerDefinitions": [
+     (...)
+          {
+            "name": "fips-proxy",
+            "image": "datadog/fips-proxy:1.0.1",
+            "portMappings": [
+                {
+                    "containerPort": 9803,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9804,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9805,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9806,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9807,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9808,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9809,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9810,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9811,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9812,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9813,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9814,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9815,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9816,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9817,
+                    "protocol": "tcp"
+                },
+                {
+                    "containerPort": 9818,
+                    "protocol": "tcp"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "DD_FIPS_PORT_RANGE_START",
+                    "value": "9803"
+                },
+                {
+                    "name": "DD_FIPS_LOCAL_ADDRESS",
+                    "value": "127.0.0.1"
+                }
+            ]
+        }
+   ],
+   "family": "datadog-agent-task"
+}
+```
+
+また、Datadog Agent のコンテナの環境変数を更新して、FIPS プロキシを介したトラフィックの送信を可能にする必要があります。
+
+```json
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "image": "public.ecr.aws/datadog/agent:latest",
+            (...)
+            "environment": [
+              (...)
+                {
+                    "name": "DD_FIPS_ENABLED",
+                    "value": "true"
+                },
+                {
+                    "name": "DD_FIPS_PORT_RANGE_START",
+                    "value": "9803"
+                },
+                {
+                    "name": "DD_FIPS_HTTPS",
+                    "value": "false"
+                },
+             ],
+        },
+    ],
+   "family": "datadog-agent-task"
+}
+```
+{{% /site-region %}}
 
 ## トラブルシューティング
 

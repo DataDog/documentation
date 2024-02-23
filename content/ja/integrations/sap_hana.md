@@ -36,7 +36,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: sap_hana
-oauth: {}
 public_title: SAP HANA
 short_description: SAP HANA システムのメモリ、ネットワーク、ボリューム、およびその他のメトリクスを監視します。
 supported_os:
@@ -67,7 +66,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 SAP HANA チェックは、[Datadog Agent][2] のパッケージに含まれています。このインテグレーションを使用するには、[hdbcli][3] ライブラリを手動でインストールする必要があります。
 

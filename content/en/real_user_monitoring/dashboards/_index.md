@@ -10,33 +10,28 @@ further_reading:
 
 ## Overview
 
-When you create a RUM application, Datadog [collects data][1] and generates dashboards about your application's performance, errors, resources, user sessions, and mobile performance. 
+When you create a RUM application, Datadog [collects data][1] and generates dashboards about your application's performance, errors, resources, and user sessions. 
 
-{{< img src="real_user_monitoring/dashboards/rum_application_overview_dashboard.png" alt="RUM Application Overview page" style="width:90%;" >}}
+{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM Application Overview page" style="width:90%;" >}}
 
-Access your RUM dashboards by filtering for `RUM` in the search query of the [**Dashboard List**][2] or by clicking on a dashboard's **Application Overview** in the [**RUM Applications** page][3].
+Access your RUM dashboards by filtering for `RUM` in the search query of the [**Dashboard List**][2] or from your application summary pages (**Real User Monitoring > Performance Monitoring > Performance Summary** and **Real User Monitoring > Product Analytics > Analytics Summary**).
 
-{{< img src="real_user_monitoring/dashboards/available_rum_dashboards.png" alt="Out-of-the-box RUM Dashboards" style="width:90%;" >}}
+{{< img src="real_user_monitoring/dashboards/available_rum_dashboards-2.png" alt="Out-of-the-box RUM Dashboards" style="width:90%;" >}}
 
 {{< whatsnext desc="You can explore the following out-of-the-box RUM dashboards:" >}}
-  {{< nextlink href="/real_user_monitoring/dashboards/performance_overview_dashboard" >}}<u>Performance Overview</u>: See a global view of your website's performance and demographics. {{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/dashboards/frustration_signals_dashboard" >}}<u>Frustration Signals</u>: Examine frustration signals where users experience the highest points of friction in your application. {{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/dashboards/testing_coverage" >}}<u>Testing Coverage</u>: Evaluate your browser tests' application coverage and identify popular elements in your application to track using RUM and Synthetics data. {{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/dashboards/user_sessions_dashboard" >}}<u>User Sessions</u>: Analyze user session and usage data for your RUM applications. {{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/dashboards/errors_dashboard" >}}<u>Errors</u>: Observe errors that appear in user consoles by browser and device type. {{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/dashboards/resources_dashboard" >}}<u>Resources</u>: Analyze which resources are the slowest and investigate third-party resources. {{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/dashboards/mobile_dashboard" >}}<u>Mobile</u>: Observe screen views, errors, and crashes for your mobile RUM applications. {{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/dashboards/performance" >}}<u>Performance Overviews</u>: See a global view of your website/app performance and demographics. {{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/dashboards/testing_and_deployment" >}}<u>Testing and Deployment</u>: Evaluate your browser tests' application coverage and identify popular elements in your application to track using RUM and Synthetics data. {{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/dashboards/usage" >}}<u>Usage</u>: Analyze user session and usage data for your RUM applications, including frustration signals. {{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/dashboards/errors" >}}<u>Errors</u>: Observe errors that appear in user consoles by browser and device type. {{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Interact with RUM dashboards
 
-You can clone [dashboards][4] and customize them to explore your application's data in the [RUM Explorer][5].
+You can clone [dashboards][3] and customize them to explore your application's data in the [RUM Explorer][4].
 
 ### Template variables
 
-The generated RUM dashboards automatically contain a set of default template variables. Use the template variable dropdown menus to narrow your search. For example, you can filter for a specific application with the `applicationId` template variable.
-
-{{< img src="real_user_monitoring/dashboards/template_variables.mp4" alt="Template variable" video=true style="width:50%;" >}}
+The generated RUM dashboards automatically contain a set of default template variables. Use the template variable dropdowns to select values and narrow your search. For more information, see the [Template Variables][5] documentation.
 
 ### View RUM events
 
@@ -56,7 +51,7 @@ You can also modify the template variables and create a [saved view][6].
 
 [1]: /real_user_monitoring/data_collected/
 [2]: https://app.datadoghq.com/dashboard/lists
-[3]: https://app.datadoghq.com/rum/list
-[4]: /dashboards/
-[5]: /real_user_monitoring/explorer/
+[3]: /dashboards/
+[4]: /real_user_monitoring/explorer/
+[5]: /dashboards/template_variables
 [6]: /real_user_monitoring/explorer/saved_views/

@@ -4,12 +4,15 @@ kind: documentation
 aliases:
 - /tracing/visualization/resource/
 further_reading:
+- link: "https://www.datadoghq.com/blog/dependency-map-navigator/"
+  tag: "Blog"
+  text: "Pinpoint performance issues in downstream services with the Dependency Map Navigator"
 - link: "/tracing/trace_collection/"
   tag: "Documentation"
   text: "Learn how to setup APM tracing with your application"
-- link: "/tracing/services/services_list/"
+- link: "/tracing/service_catalog/"
   tag: "Documentation"
-  text: "Discover the list of services reporting to Datadog"
+  text: "Discover and catalog the services reporting to Datadog"
 - link: "/tracing/services/service_page/"
   tag: "Documentation"
   text: "Learn more about services in Datadog"
@@ -18,13 +21,13 @@ further_reading:
   text: "Understand how to read a Datadog Trace"
 ---
 
-{{< img src="tracing/visualization/resource/ressource.png" alt="Ressource"  >}}
+{{< img src="tracing/visualization/resource/resource-page.png" alt="The APM resource page" >}}
 
 A resource is a particular action for a given [service][1] (typically an individual endpoint or query). Read more about resources in [Getting Started with APM][2]. For each resource, APM automatically generates a dashboard page covering:
 
 * Key health metrics
 * Monitor status for all monitors associated with this service
-* List and metrics for all resources associated with this service
+* List of metrics for all resources associated with this service
 
 ## Out-of-the-box graphs
 
@@ -45,7 +48,7 @@ Datadog provides out-of-the-box graphs for any given resource:
 
     **Note**: For services like *Postgres* or *Redis*, which are "final" operations that do not call other services, there is no sub-services graph.
 
-{{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Out of the bow resource graphs"  style="width:90%;">}}
+{{< img src="tracing/visualization/resource/resource_otb_graphs.png" alt="Out of the bow resource graphs" style="width:90%;">}}
 
 ### Export to dashboard
 
@@ -55,33 +58,40 @@ On the upper-right corner of each graph, click on the up arrow in order to expor
 
 The resource page also displays a resource latency distribution graph:
 
-{{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="Latency distribution"  style="width:100%;">}}
+{{< img src="tracing/visualization/resource/resource_latency_distribution.png" alt="Latency distribution" style="width:100%;">}}
 
 Use the top right percentile selectors to zoom into a given percentile, or hover over the sidebar to view percentile markers.
 
-{{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="latency distribution selector"  style="width:50%;">}}
+{{< img src="tracing/visualization/service/latency_distribution_sidebar.png" alt="latency distribution selector" style="width:50%;">}}
 
-## Dependency Map
+## Dependency Map with Navigator
 
-You can also view a map of all of a resource's upstream and downstream service dependencies. With the Dependency Map, you can quickly see the flow of services with spans that go through the specific resource (such as endpoints or database queries) end-to-end.
+You can also view a map of all of a resource's upstream and downstream service dependencies. With the Dependency Map Navigator, you can see the flow of services, with spans that go through a specific resource ( endpoint, database query, etc.) end-to-end, along with their request counts. 
 
-The dependency map is only available for resources containing service entry spans.
+This map is based on a sample of ingested spans; the sample is drawn by a fixed sampling algorithm that considers the structure of traces. The sampling algorithm is not configurable and is not impacted by ingestion control. 
 
-{{<img alt="resource dependency map" src="tracing/visualization/resource/resource_dependency_map.png" style="width:100%;">}}
+The dependency map is only available for resources containing service entry spans. 
 
-Hover over a node to view metrics of each service including requests/second, error rate, and average latency.
+{{< img src="tracing/visualization/resource/dependency-map-navigator.png" alt="dependency map navigator" style="width:100%;" >}}
+
+Hover over a node to view metrics of each service including requests/second, error rate, and average latency. Click on a node to open a context menu with options to view the Service Page, related traces, and more.
 
 The highlight color of the node indicates the service's [monitor status][5]. If a service has more than one configured monitor, the status of the most severe monitor is shown.
 
-{{<img src="tracing/visualization/resource/resource_dependency_map_hover.mp4" video="true" alt="hovering and clicking a resource dependency map node" style="width:100%;">}}
+{{< img src="tracing/visualization/resource/dependency-navigator.mp4" video="true" alt="hovering and clicking on the list" style="width:100%;" >}}
 
-Click on a node to open a context menu with options to view the Service Page, related traces, and more.
+### Load amplification
+
+A service has load amplification if it's receiving more than 100% of the requests received by the selected resource upstream. Services with call paths highlighted in orange have load amplification, and the amplification multiplier is shown in the list on the panel. The amplification is calculated based on the requests received by the resource (shown highlighted on the map in the image below), and the requests received by the downstream service (shown inside the downstream service node on the map). By clicking on a service in the list, you can see the spans contributing to the amplification.
+
+{{< img src="tracing/visualization/resource/dependency-map-requests.png" alt="Dependency map showing request count of a resource" style="width:100%;" >}}
+
 
 ## Span summary
 
 For a given resource, Datadog provides you a [span][6] analysis breakdown of all matching traces:
 
-{{< img src="tracing/visualization/resource/span_stats.png" alt="Span statistics"  style="width:80%;">}}
+{{< img src="tracing/visualization/resource/span_stats.png" alt="Span statistics" style="width:80%;">}}
 
 The displayed metrics represent, per span:
 
@@ -105,7 +115,7 @@ The span summary table is only available for resources containing service entry 
 
 Consult the list of [traces][7] associated with this resource in the [Trace search][8] modal already filtered on your environment, service, operation, and resource name:
 
-{{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list"  style="width:90%;">}}
+{{< img src="tracing/visualization/resource/traces_list.png" alt="Traces list" style="width:90%;">}}
 
 ## Further Reading
 

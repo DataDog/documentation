@@ -34,12 +34,11 @@ draft: false
 git_integration_title: redisenterprise
 integration_id: redisenterprise
 integration_title: RedisEnterprise
-integration_version: 1.1.1
+integration_version: 1.2.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: redisenterprise
-oauth: {}
 public_title: RedisEnterprise
 short_description: Redis Enterprise 可視性
 supported_os:

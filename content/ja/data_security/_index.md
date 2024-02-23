@@ -1,7 +1,7 @@
 ---
-aliases:
-- /ja/security/
-- /ja/security/other/
+cascade:
+  algolia:
+    rank: 70
 further_reading:
 - link: /data_security/logs/
   tag: ドキュメント
@@ -12,23 +12,23 @@ further_reading:
 - link: /data_security/synthetics/
   tag: ドキュメント
   text: Synthetic モニタリングのデータセキュリティ
-- link: /tracing/setup_overview/configure_data_security/
+- link: /tracing/configure_data_security/
   tag: ドキュメント
   text: トレースのデータセキュリティ
-- link: /real_user_monitoring/browser/modifying_data_and_context/
+- link: /data_security/real_user_monitoring/
   tag: ドキュメント
   text: RUM のデータセキュリティ
 - link: /real_user_monitoring/session_replay/privacy_options
   tag: ドキュメント
   text: セッションリプレイのプライバシーオプション
-- link: /account_management/org_settings/sensitive_data_detection/
+- link: /sensitive_data_scanner/
   tag: ドキュメント
   text: センシティブ データ スキャナー
 kind: documentation
 title: データ関連リスクの低減
 ---
 
-<div class="alert alert-info">このページでは、Datadog に送信されるデータを保護するためのツールやセキュリティについて説明します。クラウドやアプリケーションのセキュリティ製品や機能をお探しの場合は、<a href="/security_platform/" target="_blank">セキュリティプラットフォーム</a>のセクションをご覧ください。</div>
+<div class="alert alert-info">このページでは、Datadog に送信されるデータを保護するためのツールやセキュリティについて説明します。クラウドやアプリケーションのセキュリティ製品や機能をお探しの場合は、<a href="/security/" target="_blank">セキュリティ</a>のセクションをご覧ください。</div>
 
 Datadog を意図したとおりに使用する通常の過程で、お客様は Datadog にデータを送信します。Datadog は、お客様とともに、送信するデータを適切に制限するツールを提供し、送信中および送信後のデータを保護することで、データリスクを低減します。
 
@@ -86,8 +86,8 @@ Datadog のトレーシングライブラリは、アプリケーション、サ
 
 - アプリケーションパフォーマンスモニタリング (APM)
 - Continuous Profiler
-- CI Visibility
-- アプリケーションセキュリティモニタリング
+- CI Visibility （CI/CDの可視化）
+- Application Security Management
 
 トレーシングライブラリのソースデータの管理方法、デフォルトの基本的なセキュリティ設定、トレース関連要素のカスタム難読化、スクラビング、除外、および変更についての詳細情報は、[トレースデータのセキュリティのための Agent とトレーサーの構成][18]を参照してください。
 
@@ -146,12 +146,12 @@ Continuous Integration のパイプラインとテスト
 [2]: https://www.datadoghq.com/legal/privacy/
 [3]: /ja/developers/dogstatsd/
 [4]: /ja/data_security/agent/
-[5]: /ja/agent/guide/secrets-management/
+[5]: /ja/agent/configuration/secrets-management/
 [6]: /ja/integrations/amazon_web_services/
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
 [8]: /ja/integrations/azure/
 [9]: /ja/integrations/google_cloud_platform/
-[10]: /ja/account_management/org_settings/sensitive_data_detection/
+[10]: /ja/sensitive_data_scanner/
 [11]: /ja/data_security/logs/
 [12]: /ja/logs/guide/control-sensitive-logs-data/
 [13]: /ja/agent/logs/advanced_log_collection
@@ -159,11 +159,11 @@ Continuous Integration のパイプラインとテスト
 [15]: /ja/logs/guide/logs-rbac-permissions
 [16]: /ja/infrastructure/process/#process-arguments-scrubbing
 [17]: /ja/infrastructure/livecontainers/configuration/#scrubbing-sensitive-information
-[18]: /ja/tracing/setup_overview/configure_data_security/
+[18]: /ja/tracing/configure_data_security/
 [19]: /ja/serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /ja/data_security/synthetics/
-[21]: /ja/real_user_monitoring/browser/modifying_data_and_context/
+[21]: /ja/real_user_monitoring/browser/advanced_configuration/
 [22]: /ja/real_user_monitoring/session_replay/privacy_options
 [23]: /ja/database_monitoring/data_collected/#sensitive-information
 [24]: /ja/getting_started/tagging/
-[25]: /ja/tracing/visualization/
+[25]: /ja/tracing/glossary/

@@ -32,12 +32,11 @@ draft: false
 git_integration_title: vsphere
 integration_id: vsphere
 integration_title: vSphere
-integration_version: 6.2.1
+integration_version: 6.3.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: vsphere
-oauth: {}
 public_title: vSphere
 short_description: vSphere のリソース使用状況がアプリケーションに与える影響を把握
 supported_os:
@@ -70,7 +69,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 vSphere チェックは [Datadog Agent][2] パッケージに含まれています。vCenter サーバーに追加でインストールする必要はありません。
 

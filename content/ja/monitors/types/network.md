@@ -7,7 +7,7 @@ further_reading:
 - link: /monitors/notify/
   tag: ドキュメント
   text: モニター通知の設定
-- link: /monitors/notify/downtimes/
+- link: /monitors/downtimes/
   tag: ドキュメント
   text: モニターをミュートするダウンタイムのスケジュール。
 - link: /monitors/manage/status/
@@ -86,7 +86,7 @@ Datadog で[ネットワークモニター][3]を作成するには、メイン�
 
 ### ネットワークメトリクス
 
-[メトリクスモニター][8]ドキュメントの手順に従って、ネットワークメトリクスモニターを作成します。モニタータイプにネットワークメトリクスを選択すると、[モニターの管理][9] ページで、確実にネットワークモニタータイプのファセットでモニターを選択できるようになります。
+[メトリクスモニター][10]ドキュメントの手順に従って、ネットワークメトリクスモニターを作成します。モニタータイプにネットワークメトリクスを選択すると、[モニターの管理][9]ページで、確実にネットワークモニタータイプのファセットでモニターを選択できるようになります。
 
 ## その他の参考資料
 
@@ -101,3 +101,4 @@ Datadog で[ネットワークモニター][3]を作成するには、メイン�
 [7]: /ja/monitors/configuration/#new-group-delay
 [8]: /ja/monitors/notify/
 [9]: https://app.datadoghq.com/monitors/manage
+[10]: /ja/monitors/types/metric

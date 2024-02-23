@@ -33,12 +33,11 @@ draft: false
 git_integration_title: linkerd
 integration_id: linkerd
 integration_title: Linkerd
-integration_version: 3.3.0
+integration_version: 4.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: linkerd
-oauth: {}
 public_title: Linkerd
 short_description: linkerd からメトリクスを取得してサービス健全性を監視
 supported_os:
@@ -75,7 +74,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Linkerd チェックは [Datadog Agent][2] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 
@@ -181,7 +180,7 @@ curl <linkerd_prometheus_endpoint>
 
 
 [1]: https://linkerd.io
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://github.com/DataDog/integrations-core/blob/master/linkerd/metadata.csv
 [5]: https://twitter.github.io/finagle/guide/Metrics.html

@@ -78,6 +78,6 @@ timeshift(avg:system.load.1{*}, -1209600)
     {{< nextlink href="/dashboards/functions/smoothing" >}}スムーシング: メトリクスの変動を滑らかにします。{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+
 
 {{< partial name="whats-next/whats-next.html" >}}

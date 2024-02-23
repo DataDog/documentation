@@ -45,6 +45,18 @@ The families and usage types:
     * `ci_visibility_test_committers`
 - **cloud_cost_management**
     * `host_count`
+- **csm_container_enterprise**
+    * `cws_count`
+    * `compliance_count`
+    * `total_count`
+- **csm_host_enterprise**
+    * `total_host_count`
+    * `compliance_hosts`
+    * `cws_hosts`
+    * `aas_host_count`
+    * `azure_host_count`
+    * `aws_host_count`
+    * `gcp_host_count`
 - **cspm**
     * `aas_host_count`
     * `azure_host_count`
@@ -157,6 +169,8 @@ The families and usage types:
     * `check_calls_count`
 - **synthetics_browser**
     * `browser_check_calls_count`
+- **synthetics_mobile**
+    * `test_runs`
 - **timeseries**
     * `num_custom_input_timeseries`
     * `num_custom_output_timeseries`

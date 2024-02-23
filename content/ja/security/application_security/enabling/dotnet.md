@@ -22,19 +22,20 @@ title: .NET の ASM を有効にする
 type: multi-code-lang
 ---
 
-Docker、Kubernetes、AWS ECS、AWS Fargate で動作する .NET アプリのアプリケーションセキュリティを監視することができます。
+Docker、Kubernetes、Amazon ECS、AWS Fargate で実行されている .NET アプリのアプリケーションセキュリティを監視することができます。
 
 {{% appsec-getstarted %}}
 
 {{% appsec-getstarted-with-rc %}}
 
-## 詳細はこちら
+## 脅威検出を有効にする
+### はじめに
 
-1. **[Datadog .NET ライブラリ][1]を、ターゲット OS アーキテクチャのバージョン 2.2.0 以上 (Risk Management の脆弱性検出機能についてはバージョン 2.16.0 以上) に更新してください**。
+1. **ターゲットオペレーティングシステムアーキテクチャ用に [Datadog .NET ライブラリ][1]をバージョン 2.2.0 以上 (Application Vulnerability Management の脆弱性検出機能についてはバージョン 2.16.0 以上) に更新してください**。
 
-   ライブラリが対応している言語やフレームワークのバージョンについては、[互換性][2]をご覧ください。
+   サービスの言語やフレームワークのバージョンが ASM 機能に対応しているかどうかは、[互換性][2]をご参照ください。
 
-2. 環境変数 `DD_APPSEC_ENABLED` を `true` に設定し、**ASM を有効化**します。例えば、Windows のセルフホストでは、アプリケーションの起動スクリプトの一部として、次の PowerShell スニペットを実行します。
+2. 環境変数 `DD_APPSEC_ENABLED` を `true` に設定することで、**ASM を有効にします**。例えば、Windows のセルフホストでは、アプリケーションの起動スクリプトの一部として、次の PowerShell スニペットを実行します。
    ```
    $target=[System.EnvironmentVariableTarget]::Process
    [System.Environment]::SetEnvironmentVariable("DD_APPSEC_ENABLED","true",$target)
@@ -133,7 +134,7 @@ APM 用の構成コンテナを更新するには、`docker run` コマンドに
 docker run [...] -e DD_APPSEC_ENABLED=true [...]
 ```
 
-{{< /tabs >}}
+{{% /tab %}}
 {{% tab "Dockerfile" %}}
 
 コンテナの Dockerfile に以下の環境変数の値を追加します。
@@ -160,7 +161,7 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "AWS ECS" %}}
+{{% tab "Amazon ECS" %}}
 
 以下を環境セクションに追加して、ECS タスク定義 JSON ファイルを更新します。
 
@@ -186,7 +187,7 @@ ENV DD_APPSEC_ENABLED=true
 
 {{< /tabs >}}
 
-3. 完全停止と起動を使用して、**アプリケーションを再起動**します。
+3. 完全に停止してから起動することで、**アプリケーションを再起動**します。
 
 {{% appsec-getstarted-2-plusrisk %}}
 
@@ -197,4 +198,4 @@ ENV DD_APPSEC_ENABLED=true
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases/latest
-[2]: /ja/security/application_security/setup_and_configure/?code-lang=dotnet#compatibility
+[2]: /ja/security/application_security/enabling/compatibility/dotnet

@@ -41,7 +41,7 @@ The **View in context** button updates the search request in order to show you t
 
 Click on the **Metrics** tab and access underlying infrastructure metrics in a 30 minutes time frame around the log.
 
-Interact with **Host** in the upper reserved attributes section, the related [host dashboard][5], or [network page][6]. Interact with **Container** sections to navigate to the [container page][7] scoped with the underlying parameters.
+Interact with **Host** in the upper reserved attributes section, the related [host dashboard][5], or [Network Analytics][6] page. Interact with **Container** sections to navigate to the [container page][7] scoped with the underlying parameters.
 
 {{< img src="logs/explorer/side_panel/infra.mp4" alt="Hub to Infra" video=true style="width:100%;">}}
 
@@ -88,7 +88,7 @@ Use the **Share** button to share the log opened in side panel to other contexts
 [3]: /agent/autodiscovery/integrations/?tab=kubernetes
 [4]: /logs/log_configuration/attributes_naming_convention
 [5]: /dashboards/#preset-lists
-[6]: /network_monitoring/performance/network_page/
+[6]: /network_monitoring/performance/network_analytics/
 [7]: /infrastructure/livecontainers/?tab=linuxwindows#introduction
 [8]: /infrastructure/serverless/#function-detail-view
 [9]: /tracing/other_telemetry/connect_logs_and_traces/

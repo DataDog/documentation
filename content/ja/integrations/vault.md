@@ -40,12 +40,11 @@ draft: false
 git_integration_title: vault
 integration_id: vault
 integration_title: Vault
-integration_version: 3.3.3
+integration_version: 3.4.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: vault
-oauth: {}
 public_title: Vault
 short_description: Vault は機密情報管理サービスアプリケーション
 supported_os:
@@ -76,7 +75,7 @@ tile:
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Vault チェックは [Datadog Agent][2] パッケージに含まれています。
 

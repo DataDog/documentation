@@ -97,6 +97,12 @@ window.DD_RUM &&
 
 [1]: https://docs.datadoghq.com/ja/real_user_monitoring/flutter/
 {{% /tab %}}
+{{% tab "React Native" %}}
+
+機能フラグ追跡は、React Native アプリケーションで利用可能です。まずは、[RUM React Native モニタリング][1]をセットアップしてください。React Native RUM SDK のバージョン >= 1.7.0 が必要です。
+
+[1]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/
+{{% /tab %}}
 {{< /tabs >}}
 
 ## インテグレーション
@@ -108,6 +114,91 @@ Datadog は、以下とのインテグレーションをサポートしていま
 
 
 </br>
+
+### Amplitude インテグレーション
+
+{{< tabs >}}
+{{% tab "ブラウザ" %}}
+
+Amplitude の SDK を初期化し、以下に示すコードスニペットを使用して Datadog に機能フラグの評価を報告する露出リスナーを作成します。
+
+Amplitude の SDK の初期化については、[Amplitude の JavaScript SDK ドキュメント][1]を参照してください。
+
+```javascript
+  const experiment = Experiment.initialize("CLIENT_DEPLOYMENT_KEY", {
+    exposureTrackingProvider: {
+      track(exposure: Exposure)  {
+        // Amplitude が露出を報告したときに機能フラグを送信します
+        datadogRum.addFeatureFlagEvaluation(exposure.flag_key, exposure.variant);
+      }
+    }
+  })
+```
+
+
+[1]: https://www.docs.developers.amplitude.com/experiment/sdks/javascript-sdk/
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Amplitude の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
+
+Amplitude の SDK の初期化については、Amplitude の [iOS SDK ドキュメント][1]を参照してください。
+
+```swift
+  class DatadogExposureTrackingProvider : ExposureTrackingProvider {
+    func track(exposure: Exposure) {
+      // Amplitude で露出が報告された際に機能フラグを送信します
+      if let variant = exposure.variant {
+        RUMMonitor.shared().addFeatureFlagEvaluation(name: exposure.flagKey, value: variant)
+      }
+    }
+  }
+
+  // 初期化時:
+  ExperimentConfig config = ExperimentConfigBuilder()
+    .exposureTrackingProvider(DatadogExposureTrackingProvider(analytics))
+    .build()
+```
+
+[1]: https://www.docs.developers.amplitude.com/experiment/sdks/ios-sdk/
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Amplitude の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
+
+Amplitude の SDK の初期化については、Amplitude の [Android SDK ドキュメント][1]を参照してください。
+
+```kotlin
+  internal class DatadogExposureTrackingProvider : ExposureTrackingProvider {
+    override fun track(exposure: Exposure) {
+        // Amplitude で露出が報告された際に機能フラグを送信します
+        GlobalRumMonitor.get().addFeatureFlagEvaluation(
+            exposure.flagKey,
+            exposure.variant.orEmpty()
+        )
+    }
+  }
+
+  // 初期化時:
+  val config = ExperimentConfig.Builder()
+      .exposureTrackingProvider(DatadogExposureTrackingProvider())
+      .build()
+```
+
+[1]: https://www.docs.developers.amplitude.com/experiment/sdks/android-sdk/
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Amplitude はこのインテグレーションをサポートしていません。この機能をリクエストするには、Amplitude にチケットを作成してください。
+
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### カスタム機能フラグ管理
 
@@ -125,8 +216,8 @@ datadogRum.addFeatureFlagEvaluation(key, value);
 
 機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
 
-   ```javascript
-   Global.rum.addFeatureFlagEvaluation(key, value);
+   ```swift
+   RUMMonitor.shared().addFeatureFlagEvaluation(key, value);
    ```
 
 {{% /tab %}}
@@ -134,9 +225,134 @@ datadogRum.addFeatureFlagEvaluation(key, value);
 
 機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
 
-   ```javascript
-   GlobalRum.get().addFeatureFlagEvaluation(key, value);
+   ```kotlin
+   GlobalRumMonitor.get().addFeatureFlagEvaluation(key, value);
    ```
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
+
+   ```dart
+   DatadogSdk.instance.rum?.addFeatureFlagEvaluation(key, value);
+   ```
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+機能フラグが評価されるたびに、以下の関数を追加して、機能フラグの情報を RUM に送信します。
+
+   ```javascript
+   DdRum.addFeatureFlagEvaluation(key, value);
+   ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### DevCycle インテグレーション
+
+{{< tabs >}}
+{{% tab "ブラウザ" %}}
+
+DevCycle の SDK を初期化し、`variableEvaluated` イベントにサブスクライブします。すべての変数評価 `variableEvaluated:*` または特定の変数評価 `variableEvaluated:my-variable-key` にサブスクライブすることを選択します。
+
+DevCycle の SDK の初期化については、[DevCycle の JavaScript SDK ドキュメント][5]を、DevCycle のイベントシステムについては、[DevCycle の SDK イベントドキュメント][6]を参照してください。
+
+```javascript
+const user = { user_id: "<USER_ID>" };
+const dvcOptions = { ... };
+const dvcClient = initialize("<DVC_CLIENT_SDK_KEY>", user, dvcOptions);
+...
+dvcClient.subscribe(
+    "variableEvaluated:*",
+    (key, variable) => {
+        // すべての変数評価を追跡します
+        datadogRum.addFeatureFlagEvaluation(key, variable.value);
+    }
+)
+...
+dvcClient.subscribe(
+    "variableEvaluated:my-variable-key",
+    (key, variable) => {
+        // 特定の変数評価を追跡します
+        datadogRum.addFeatureFlagEvaluation(key, variable.value);
+    }
+)
+```
+
+
+[5]: https://docs.devcycle.com/sdk/client-side-sdks/javascript/javascript-install
+[6]: https://docs.devcycle.com/sdk/client-side-sdks/javascript/javascript-usage#subscribing-to-sdk-events
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
+
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするには、DevCycle にチケットを作成してください。
+
+
+{{% /tab %}}
+{{< /tabs >}}
+
+
+### Flagsmith インテグレーション
+
+{{< tabs >}}
+{{% tab "ブラウザ" %}}
+
+Flagsmith の SDK に `datadogRum` オプションを付けて初期化すると、以下に示すコードのスニペットを使用して Datadog に機能フラグの評価を報告することができるようになります。
+
+ オプションとして、`datadogRum.setUser()` を介して Flagsmith の Trait が Datadog に送信されるようにクライアントを構成することができます。Flagsmith の SDK の初期化についての詳細は、[Flagsmith の JavaScript SDK ドキュメント][1]を参照してください。
+
+   ```javascript
+    // Flagsmith SDK を初期化します
+    flagsmith.init({
+        datadogRum: {
+            client: datadogRum,
+            trackTraits: true,
+        },
+        ...
+    })
+   ```
+
+
+[1]: https://docs.flagsmith.com/clients/javascript
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Flagsmith は、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
+
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Flagsmith は、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Flagsmith は、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Flagsmith は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -151,7 +367,7 @@ LaunchDarkly の SDK を初期化し、以下に示すコードスニペット�
 LaunchDarkly の SDK の初期化については、[LaunchDarkly の JavaScript SDK ドキュメント][1]を参照してください。
 
 ```javascript
-const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
+const client = LDClient.initialize("<CLIENT_SIDE_ID>", "<CONTEXT>", {
   inspectors: [
     {
       type: "flag-used",
@@ -169,11 +385,23 @@ const client = LDClient.initialize("<APP_KEY>", "<USER_ID>", {
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-LaunchDarkly は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、LaunchDarkly でチケットを作成してください。
+LaunchDarkly は、このインテグレーションをサポートしていません。この機能をリクエストするには、LaunchDarkly でチケットを作成してください。
 
 
 {{% /tab %}}
 {{% tab "Android" %}}
+
+LaunchDarkly は、このインテグレーションをサポートしていません。この機能をリクエストするには、LaunchDarkly でチケットを作成してください。
+
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+LaunchDarkly は、このインテグレーションをサポートしていません。この機能をリクエストするには、LaunchDarkly でチケットを作成してください。
+
+
+{{% /tab %}}
+{{% tab "React Native" %}}
 
 LaunchDarkly は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、LaunchDarkly でチケットを作成してください。
 
@@ -187,7 +415,7 @@ LaunchDarkly は現在、このインテグレーションをサポートして�
 {{< tabs >}}
 {{% tab "ブラウザ" %}}
 
-Split の SDK を初期化し、以下に示すコードスニペットを使用して Datadog に機能フラグの評価を報告するインプレッションリスナーを作成します
+Split の SDK を初期化し、以下に示すコードスニペットを使用して Datadog に機能フラグの評価を報告するインプレッションリスナーを作成します。
 
 Split の SDK の初期化については、[Split の JavaScript SDK ドキュメント][1]を参照してください。
 
@@ -220,13 +448,13 @@ Split の SDK を初期化し、以下に示すコードスニペットを使用
 
 Split の SDK の初期化については、[Split の iOS SDK ドキュメント][1]を参照してください。
 
-```javascript
+```swift
   let config = SplitClientConfig()
-// Split がインプレッションを報告する際に機能フラグを送信します
+  // Split がインプレッションを報告する際に機能フラグを送信します
   config.impressionListener = { impression in
       if let feature = impression.feature,
           let treatment = impression.treatment {
-          Global.rum.addFeatureFlagEvaluation(name: feature, value: treatment)
+          RUMMonitor.shared().addFeatureFlagEvaluation(name: feature, value: treatment)
       }
   }
 ```
@@ -240,11 +468,11 @@ Split の SDK を初期化し、以下に示すコードスニペットを使用
 
 Split の SDK の初期化については、[Split の Android SDK ドキュメント][1]を参照してください。
 
-```javascript
+```kotlin
   internal class DatadogSplitImpressionListener : ImpressionListener {
     override fun log(impression: Impression) {
-        // Split がインプレッションを報告する際に機能フラグを送信します
-        GlobalRum.get().addFeatureFlagEvaluation(
+        // Split でインフレが報告された際に機能フラグを送信
+        GlobalRumMonitor.get().addFeatureFlagEvaluation(
             impression.split(),
             impression.treatment()
         )
@@ -263,41 +491,99 @@ Split の SDK の初期化については、[Split の Android SDK ドキュメ�
 
 [1]: https://help.split.io/hc/en-us/articles/360020343291-Android-SDK
 {{% /tab %}}
+{{% tab "Flutter" %}}
+
+Split の SDK を初期化し、以下に示すコードスニペットを使用して、Datadog に機能フラグの評価を報告するインスペクターを作成します。
+
+Split の SDK の初期化については、Split の [Flutter プラグインのドキュメント][1]を参照してください。
+
+```dart
+  StreamSubscription<Impression> impressionsStream = _split.impressionsStream().listen((impression) {
+    // Split がインプレッションを報告する際に機能フラグを送信します
+    final split = impression.split;
+    final treatment = impression.treatment;
+    if (split != null && treatment != null) {
+      DatadogSdk.instance.rum?.addFeatureFlagEvaluation(split, treatment);
+    }
+  });
+```
+
+
+[1]: https://help.split.io/hc/en-us/articles/8096158017165-Flutter-plugin
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Split の SDK を初期化し、以下に示すコードスニペットを使用して Datadog に機能フラグの評価を報告するインプレッションリスナーを作成します。
+
+Split の SDK の初期化については、Split の [React Native SDK ドキュメント][1]を参照してください。
+
+```javascript
+const factory = SplitFactory({
+    core: {
+      authorizationKey: "<APP_KEY>",
+      key: "<USER_ID>",
+    },
+    impressionListener: {
+      logImpression(impressionData) {
+          DdRum
+              .addFeatureFlagEvaluation(
+                  impressionData.impression.feature,
+                  impressionData.impression.treatment
+              );
+    },
+  },
+});
+
+const client = factory.client();
+```
+
+
+[1]: https://help.split.io/hc/en-us/articles/4406066357901-React-Native-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
+{{% /tab %}}
 {{< /tabs >}}
 
-
-### Flagsmith インテグレーション
+### Statsig インテグレーション
 
 {{< tabs >}}
 {{% tab "ブラウザ" %}}
 
-Flagsmith の SDK に `datadogRum` オプションを付けて初期化すると、以下に示すコードのスニペットを使用して Datadog に機能フラグの評価を報告することができるようになります。
+機能フラグ追跡は、RUM ブラウザ SDK で利用可能です。詳細なセットアップ方法は、[RUM での機能フラグデータの概要](https://docs.datadoghq.com/real_user_monitoring/guide/setup-feature-flag-data-collection)をご覧ください。
 
- オプションとして、`datadogRum.setUser()` を介して Flagsmith の Trait が Datadog に送信されるようにクライアントを構成することができます。Flagsmith の SDK の初期化についての詳細は、[Flagsmith の JavaScript SDK ドキュメント][1]を参照してください。
+1. ブラウザ RUM SDK バージョン 4.25.0 以上に更新します。
+2. RUM SDK を初期化し、`["feature_flags"]` で `enableExperimentalFeatures` 初期化パラメーターを構成します。
+3. Statsig の SDK (`>= v4.34.0`) を初期化し、以下のように `gateEvaluationCallback` オプションを実装します。
 
    ```javascript
-    // Flagsmith SDK を初期化します
-    flagsmith.init({
-        datadogRum: {
-            client: datadogRum,
-            trackTraits: true,
-        },
-        ...
-    })
+    await statsig.initialize('client-<STATSIG CLIENT KEY>',
+    {userID: '<USER ID>'},
+    {     
+        gateEvaluationCallback: (key, value) => {
+            datadogRum.addFeatureFlagEvaluation(key, value);
+        }
+    }
+    ); 
    ```
 
-
-[1]: https://docs.flagsmith.com/clients/javascript
+[1]: https://docs.statsig.com/client/jsClientSDK
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Flagsmith は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
-
+Statsig はこのインテグレーションをサポートしていません。この機能のリクエストは、support@statsig.com までご連絡ください。
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
-Flagsmith は現在、このインテグレーションをサポートしていません。この機能をリクエストするには、Flagsmith でチケットを作成してください。
+Statsig はこのインテグレーションをサポートしていません。この機能のリクエストは、support@statsig.com までご連絡ください。
+
+{{% /tab %}}
+{{% tab "Flutter" %}}
+
+Statsig はこのインテグレーションをサポートしていません。この機能のリクエストは、support@statsig.com までご連絡ください。
+
+{{% /tab %}}
+{{% tab "React Native" %}}
+
+Statsig は現在このインテグレーションをサポートしていません。この機能のリクエストは、support@statsig.com までご連絡ください。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -326,6 +612,8 @@ Flagsmith は現在、このインテグレーションをサポートしてい�
 
 {{< img src="real_user_monitoring/guide/setup-feature-flag-data-collection/rum-explorer-error-feature-flag-search.png" alt="RUM エクスプローラーでの機能フラグのエラー検索" style="width:75%;">}}
 
+## トラブルシューティング
+
 ### 機能フラグのデータが期待通りに反映されないのはなぜですか？
 機能フラグは、それが評価されるイベントのコンテキストに表示されます。つまり、機能フラグのコードロジックが実行されるビューに表示されるはずです。
 
@@ -344,9 +632,19 @@ Flagsmith は現在、このインテグレーションをサポートしてい�
 
 調査を行う際、機能フラグに関連する `View Name` のデータをスコープすることも可能です。
 
+### 機能フラグの命名
+
+以下の特殊文字は [機能フラグ追跡][5] ではサポートされていません: `.`、`:`、`+`、`-`、`=`、`&&`、`||`、`>`、`<`、`!`、`(`、`)`、`{`、`}`、`[`、`]`、`^`、`"`、`"`、`~`、`*`、`?`、``。Datadogでは、機能フラグ名にこれらの文字を使用しないことを推奨しています。これらの文字を使用する必要がある場合は、 Datadog にデータを送信する前に文字を置き換えてください。例:
+
+```javascript
+datadogRum.addFeatureFlagEvaluation(key.replace(':', '_'), value);
+```
+
 ## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /ja/real_user_monitoring/browser/#setup
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /ja/dashboards/
 [4]: /ja/monitors/#create-monitors
+[5]: /ja/real_user_monitoring/feature_flag_tracking

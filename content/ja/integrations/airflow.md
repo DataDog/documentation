@@ -40,7 +40,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: airflow
-oauth: {}
 public_title: Airflow
 short_description: DAG、タスク、プール、エグゼキューターなどに関するメトリクスを追跡
 supported_os:
@@ -80,7 +79,7 @@ Datadog Agent はメトリクスだけでなく、Airflow の健全性に関す�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Airflow インテグレーションを適切に動作させるには、以下のステップをすべて実施する必要があります。ステップを開始する前に、StatsD/DogStatsD マッピング機能が含まれる [Datadog Agent][3] (バージョン `6.17 または 7.17` 以降) をインストールしてください。
 

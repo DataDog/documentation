@@ -15,7 +15,7 @@ further_reading:
 
 This page describes the architecture behind the Datadog VMware Tanzu Application Service integration.
 
-{{< img src="integrations/pivotal/pivotal_datadog_diagram.png" alt="An overview of the components of the Datadog integration with VMware Tanzu Application Service and the flow of data between them."  >}}
+{{< img src="integrations/pivotal/pivotal_datadog_diagram.png" alt="An overview of the components of the Datadog integration with VMware Tanzu Application Service and the flow of data between them." >}}
 
 The following sections provide further detail about the individual components and their interrelationships.
 

@@ -5,6 +5,7 @@ assets:
   dashboards:
     TLS Overview: assets/dashboards/overview.json
   integration:
+    auto_install: true
     configuration:
       spec: assets/configuration/spec.yaml
     events:
@@ -15,6 +16,7 @@ assets:
       prefix: tls.
     service_checks:
       metadata_path: assets/service_checks.json
+    source_type_id: 10058
     source_type_name: TLS
 author:
   homepage: https://www.datadoghq.com
@@ -31,12 +33,11 @@ draft: false
 git_integration_title: tls
 integration_id: tls
 integration_title: TLS
-integration_version: 2.10.0
+integration_version: 2.15.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: tls
-oauth: {}
 public_title: TLS
 short_description: プロトコルバージョン、証明書の有効期限と有効性などについて TLS を監視します。
 supported_os:
@@ -59,6 +60,7 @@ tile:
   title: TLS
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/integrations-core -->
 
 
 ## 概要
@@ -70,21 +72,21 @@ tile:
 1. TCP のみがサポートされています。
 2. リーフ/エンドユーザー証明書のみが検証されます (中間証明書およびルート証明書は検証されません)。
 
-## セットアップ
+## 計画と使用
 
-### APM に Datadog Agent を構成する
+### インフラストラクチャーリスト
 
 TLS チェックは [Datadog Agent][2] パッケージに含まれています。
 サーバーに追加でインストールする必要はありません。
 
-### コンフィギュレーション
+### ブラウザトラブルシューティング
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "ホスト" %}}
 
-#### ホスト
+#### メトリクスベース SLO
 
-ホストで実行中の Agent に対してこのチェックを構成するには:
+ホストで実行中の Agent に対してこのチェックを構成するには
 
 1. TLS データの収集を開始するには、Agent のコンフィギュレーションディレクトリのルートにある `conf.d/` フォルダーの `tls.d/conf.yaml` ファイルを編集します。使用可能なすべてのコンフィギュレーションオプションの詳細については、[サンプル tls.d/conf.yaml][1] を参照してください。
 
@@ -93,7 +95,7 @@ TLS チェックは [Datadog Agent][2] パッケージに含まれています�
 [1]: https://github.com/DataDog/integrations-core/blob/master/tls/datadog_checks/tls/data/conf.yaml.example
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 
@@ -101,9 +103,9 @@ TLS チェックは [Datadog Agent][2] パッケージに含まれています�
 
 | パラメーター            | 値                                  |
 | -------------------- | -------------------------------------- |
-| `<インテグレーション名>` | `tls`                                  |
-| `<初期コンフィギュレーション>`      | 空白または `{}`                          |
-| `<インスタンスコンフィギュレーション>`  | `{"server": "%%host%%", "port":"443"}` |
+| `<INTEGRATION_NAME>` | `tls`                                  |
+| `<INIT_CONFIG>`      | 空白または `{}`                          |
+| `<INSTANCE_CONFIG>`  | `{"server": "%%host%%", "port":"443"}` |
 
 **注**: よく知られた信頼できる CA からのものではない内部証明書を使用している場合、特定のメトリクスが Datadog にレポートされない場合があります。インテグレーションテンプレートで `tls_verify: false` を使用して、このインスタンスのすべてのメトリクスをレポートします。
 
@@ -115,27 +117,27 @@ TLS チェックは [Datadog Agent][2] パッケージに含まれています�
 
 [Agent の status サブコマンドを実行][3]し、Checks セクションで `tls` を探します。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "tls" >}}
 
 
-### イベント
+### ヘルプ
 
 TLS には、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 {{< get-service-checks-from-git "tls" >}}
 
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 
 
 [1]: https://en.wikipedia.org/wiki/Transport_Layer_Security
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/help/

@@ -3,8 +3,8 @@ title: Enable Dynamic Instrumentation for Java
 kind: Documentation
 aliases:
     - /tracing/dynamic_instrumentation/enabling/java/
-is_beta: true
-private: true
+is_beta: false
+private: false
 code_lang: java
 type: multi-code-lang
 code_lang_weight: 10
@@ -22,15 +22,29 @@ The Datadog Dynamic Instrumentation library is supported in JDK version 8 and ab
 
 ## Installation
 
-1. Install or upgrade your Agent to version [7.41.1][2]+.
+1. Install or upgrade your Agent to version [7.44.0][2] or higher.
 2. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 
 3. Download `dd-java-agent.jar`:
-
+ {{< tabs >}}
+ {{% tab "Wget" %}}
    ```shell
    wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
    ```
-   **Note**: Dynamic Instrumentation is available in the `dd-java-agent.jar` library in versions 1.8.0 and later.
+{{% /tab %}}
+{{% tab "cURL" %}}
+   ```shell
+   curl -Lo dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
+{{% /tab %}}
+{{% tab "Dockerfile" %}}
+   ```dockerfile
+   ADD 'https://dtdg.co/latest-java-tracer' dd-java-agent.jar
+   ```
+{{% /tab %}}
+{{< /tabs >}}
+
+   **Note**: Dynamic Instrumentation is available in the `dd-java-agent.jar` library in versions 1.24.0 and later.
 
 3. Run your service with Dynamic Instrumentation enabled by setting `-Ddd.dynamic.instrumentation.enabled` flag or `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `dd.service`, `dd.env`, and `dd.version` Unified Service Tags so you can filter and group your probes and target active clients across these dimensions.
    {{< tabs >}}
@@ -93,7 +107,7 @@ See [Dynamic Instrumentation][6] for information about setting snapshot and metr
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/
-[2]: https://app.datadoghq.com/account/settings#agent/overview
+[2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: https://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html
 [4]: https://app.datadoghq.com/dynamic-instrumentation
 [5]: /getting_started/tagging/unified_service_tagging

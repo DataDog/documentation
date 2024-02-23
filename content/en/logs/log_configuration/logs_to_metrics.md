@@ -9,6 +9,9 @@ further_reading:
     - link: 'logs/log_configuration/processors'
       tag: 'Documentation'
       text: 'Learn how to process your logs'
+    - link: "https://www.datadoghq.com/blog/cidr-queries-datadog-log-management/"
+      tag: "Blog"
+      text: "Use CIDR notation queries to filter your network traffic logs"
 algolia:
   tags: ['log metrics', 'generating logs from metrics']
 ---
@@ -25,7 +28,11 @@ With log-based metrics, you can generate a count metric of logs that match a que
 
 {{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="Generate Logs to metric" style="width:80%;">}}
 
-To generate a new log-based metric, go to the [Configuration page][5] of your Datadog account and select the _[Generate Metrics][6]_ tab, then the **New Metric+** button.
+To generate a new log-based metric:
+
+1. Navigate to Log > **[Configuration][5]**.
+1. Select the **Generate Metrics** tab.
+1. Click **+New Metric**.
 
 You can also create metrics from an Analytics search by selecting the "Generate new metric" option from the Export menu.
 

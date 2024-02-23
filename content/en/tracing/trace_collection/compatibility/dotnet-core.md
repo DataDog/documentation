@@ -21,7 +21,9 @@ further_reading:
 ---
 
 
-The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic). It is open source. For more information, see the [.NET Tracer repository][1].
+The .NET Tracer supports all .NET-based languages (for example, C#, F#, Visual Basic). It has [beta support for trimmed apps][12].
+
+The .NET Tracer is open source. For more information, see the [.NET Tracer repository][1].
 
 ## Supported .NET Core runtimes
 
@@ -29,14 +31,15 @@ The .NET Tracer supports automatic instrumentation on the following .NET Core ve
 
 | Version              | Microsoft End of Life | Support level        | Package version      |
 | -------------------- | --------------------- | -------------------- | -------------------- |
+| .NET 8               |                       | [GA](#support-ga)    | latest (>= 2.42.0)   |
 | .NET 7               |                       | [GA](#support-ga)    | latest (>= 2.20.0)   |
 | .NET 6               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
-| .NET 5               |                       | [GA](#support-ga)    | latest (>= 2.0.0)    |
-| .NET Core 3.1        | 12/03/2022            | [GA](#support-ga)    | latest               |
+| .NET 5               | 05/10/2022            | [GA](#support-ga)    | latest (>= 2.0.0)    |
+| .NET Core 3.1        | 12/13/2022            | [GA](#support-ga)    | latest               |
 | .NET Core 2.1        | 08/21/2021            | [GA](#support-ga)    | latest               |
-| .NET Core 3.0        | 03/03/2020            | [EOL](#support-eol)  | Not recommeded       |
-| .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | Not recommeded       |
-| .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | Not recommeded       |
+| .NET Core 3.0        | 03/03/2020            | [EOL](#support-eol)  | Not recommended       |
+| .NET Core 2.2        | 12/23/2019            | [EOL](#support-eol)  | Not recommended       |
+| .NET Core 2.0        | 10/01/2018            | [EOL](#support-eol)  | Not recommended       |
 
  Additional information can be found within [Microsoft's .NET Core Lifecycle Policy][3], [End of life APM .NET Core versions](#end-of-life-net-core-versions), and in [Runtime support policy for .NET Core APM](#runtime-support-policy-for-net-core-apm).
 
@@ -62,7 +65,10 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | Aerospike                       | `Aerospike.Client` 4.0.0+                                                                            | `Aerospike`          |
 | ASP.NET Core                    | `Microsoft.AspNetCore`</br>`Microsoft.AspNetCore.App`</br>2.0+ and 3.0+                              | `AspNetCore`         |
 | Azure Functions                 | `Microsoft.Azure.Webjobs` 3.0+                                                                       | `AzureFunctions`     |
-| AWS SQS                         | `AWSSDK.SQS`  3.0+                                                                                   | `AwsSqs`             |
+| Amazon DynamoDB                 | `AWSSDK.DynamoDBv2`  3.0+                                                                            | `AwsDynamoDb`        |
+| Amazon Kinesis                     | `AWSSDK.Kinesis`  3.0+                                                                               | `AwsKinesis`         |
+| Amazon SNS                         | `AWSSDK.SNS`  3.0+                                                                                   | `AwsSns`             |
+| Amazon SQS                         | `AWSSDK.SQS`  3.0+                                                                                   | `AwsSqs`             |
 | CosmosDb                        | `Microsoft.Azure.Cosmos.Client` 3.6.0+                                                               | `CosmosDb`           |
 | Couchbase                       | `CouchbaseNetClient` 2.2.8+                                                                          | `Couchbase`          |
 | Elasticsearch                   | `Elasticsearch.Net` 5.3.0+                                                                           | `ElasticsearchNet`   |
@@ -71,6 +77,7 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | HotChocolate                    | `HotChocolate` 11.0.0+                                                                               | `HotChocolate`       |
 | HttpClient / HttpMessageHandler | `System.Net.Http` 4.0+                                                                               | `HttpMessageHandler` |
 | Kafka                           | `Confluent.Kafka` 1.4+                                                                               | `Kafka`              |
+| IBM MQ                          | `amqmdnetstd` 9.0.0+                                                                      | `IbmMq`              |
 | MongoDB                         | `MongoDB.Driver.Core` 2.1.0+                                                                         | `MongoDb`            |
 | MySql                           | `MySql.Data` 6.7.0+</br>`MySqlConnector` 0.61.0+                                                     | `MySql`              |
 | Oracle                          | `Oracle.ManagedDataAccess` 4.122.0+                                                                  | `Oracle`             |
@@ -82,10 +89,22 @@ The [latest version of the .NET Tracer][4] can automatically instrument the foll
 | Service Fabric Remoting         | `Microsoft.ServiceFabric.Services.Remoting` 4.0.470+                                                 | `ServiceRemoting`    |
 | SQLite                          | `System.Data.Sqlite` 2.0.0+ </br>`Microsoft.Data.Sqlite` 1.0.0+                                      | `Sqlite`             |
 | SQL Server                      | `System.Data` 4.0.0+</br>`System.Data.SqlClient` 4.0.0+</br>`Microsoft.Data.SqlClient` 1.0.0+        | `SqlClient`          |
-| WCF (server)                    | built-in                                                                                             | `Wcf`                |
 | WebClient / WebRequest          | `System.Net.Requests` 4.0+                                                                           | `WebRequest`         |
 
-Don't see your desired frameworks? Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
+Don't see the library you're looking for? First, check if the library produces observability data compatible with OpenTelemetry (for example, [activity based tracing][13]). If not, Datadog is continually adding additional support. [Check with the Datadog team][5] for help.
+
+## OpenTelemetry based integrations
+
+Some libraries provide built in [Activity based tracing][13]. This is the same mechanism the OpenTelemetry project relies on. By setting `DD_TRACE_OTEL_ENABLED` to `true`, the .NET tracer will automatically resurface traces provided by the libraries themselves. This is possible since [version 2.21.0][4]. Here are a list of libraries that are tested with this setup (more libraries provide such tracing though, they aren't yet expliciitly tested).
+
+| Framework or library            | NuGet package                                                                 | Integration Name     | Specific instructions         |
+| ------------------------------- | ----------------------------------------------------------------------------- | -------------------- | ----------------------------- |
+| Azure Service Bus               | `Azure.Messaging.ServiceBus` 7.14.0+                                          | `AzureServiceBus`    | See `Azure SDK` section below |
+
+### Azure SDK
+
+Azure SDK provides built-in OpenTelemetry support. Enable it by setting the `AZURE_EXPERIMENTAL_ENABLE_ACTIVITY_SOURCE` environment variable to `true` or by setting the `Azure.Experimental.EnableActivitySource` context switch to `true` in your application code. See [Azure SDK documentation][14] for more details.
+
 
 ## End of life .NET Core versions
 
@@ -142,3 +161,6 @@ Version updates imply the following changes to runtime support:
 [9]: /agent/basic_agent_usage/?tab=agentv5
 [10]: https://www.datadoghq.com/support/
 [11]: https://semver.org/
+[12]: https://www.nuget.org/packages/Datadog.Trace.Trimming/
+[13]: https://learn.microsoft.com/en-us/dotnet/core/diagnostics/distributed-tracing
+[14]: https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/Diagnostics.md#enabling-experimental-tracing-features

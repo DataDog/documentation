@@ -7,19 +7,18 @@ further_reading:
 - link: /real_user_monitoring/explorer/
   tag: ドキュメント
   text: RUM エクスプローラーでクエリを作成する方法をご紹介します
-- link: /real_user_monitoring/explorer/search/#event-types/
+- link: /real_user_monitoring/explorer/search/#event-types
   tag: ドキュメント
   text: RUM のイベントタイプについて
 - link: /logs/log_configuration/logs_to_metrics/
   tag: ドキュメント
   text: 取り込んだログからメトリクスを生成する
+- link: https://www.datadoghq.com/blog/track-customer-experience-with-rum-metrics/
+  tag: GitHub
+  text: カスタマーエクスペリエンスの過去の傾向を追跡するための RUM ベースのメトリクスを生成する
 kind: documentation
 title: RUM イベントからカスタムメトリクスを生成する
 ---
-
-<div class="alert alert-warning">
-RUM イベントからカスタムメトリクスを生成する機能はベータ版です。この機能へのアクセスは、Real User Monitoring を使用しているお客様に対してプロビジョニングされます。フィードバックは、<a href="/help">Datadog サポート</a>にお問い合わせください。
-</div>
 
 ## 概要
 
@@ -27,19 +26,19 @@ Real User Monitoring (RUM) では、Datadog RUM SDK を使用してブラウザ�
 
 RUM ベースのカスタムメトリクスは、RUM イベントのセットからデータを要約するためのコスト効率の良いオプションです。最大 15 か月間の RUM データの傾向や異常を詳細に視覚化することができます。
 
-**請求について:** RUM イベントから生成されたメトリクスは、[カスタムメトリクス][5]として請求されます。
+**請求について:** RUM イベントから生成されたメトリクスは、[カスタムメトリクス][3]として請求されます。
 
 ## RUM ベースのカスタムメトリクスを作成する
 
-RUM イベントデータからカスタムメトリクスを作成するには、[**UX Monitoring** > **Generate Metrics**][3] に移動して **+ New Metric** をクリックします。
+RUM イベントデータからカスタムメトリクスを作成するには、[**UX Monitoring** > **Setup & Configuration** > **Generate Metrics**][4] に移動して **+ New Metric** をクリックします。
 
-{{< img src="real_user_monitoring/generate_metrics/new_metrics_button.png" alt="RUM ベースのカスタムメトリクスを作成するには、+ New Metric をクリックします" width="80%" >}}
+{{< img src="real_user_monitoring/generate_metrics/new_metrics_button-2.png" alt="RUM ベースのカスタムメトリクスを作成するには、+ New Metric をクリックします" width="80%" >}}
 
 [RUM エクスプローラー][5]で検索クエリからカスタムメトリクスを作成するには、**Export** ボタンをクリックし、ドロップダウンメニューから **Generate new metric** を選択します。
 
 {{< img src="real_user_monitoring/generate_metrics/generate_metric_example.png" alt="RUM ベースのカスタムメトリクスを生成する" width="80%" >}}
 
-1. [カスタムメトリクス][5]には、`datadog.estimated_usage` で始まらない名前、例えば `rum.sessions.count_by_geography` を付けてください。詳しくは、[命名規則][6]を参照してください。
+1. [カスタムメトリクス][3]には、`datadog.estimated_usage` で始まらない名前、例えば `rum.sessions.count_by_geography` を付けてください。詳しくは、[命名規則][6]を参照してください。
 2. カスタムメトリクスを作成したいイベントタイプを選択します (例: `Sessions`)。オプションには、**Sessions**、**Views**、**Actions**、**Errors**、**Resources**、**Long Tasks** があります。詳細については、[RUM イベントの検索][7]を参照してください。
 3. RUM エクスプローラーの[検索構文][8] (例: `@session.type:user`) を使用して、RUM イベントをフィルタリングする検索クエリを作成します。
 4. **Count** の隣にあるドロップダウンメニューから、追跡するフィールドを選択します。
@@ -102,15 +101,15 @@ RUM ベースのカスタムメトリクスは、以下のアクションに使�
 - [予測モニター][14]で、あるメトリクスが将来的にしきい値を超えると予測された場合にアラートをトリガーする
 - [メトリクスベースの SLO][15] を作成し、チームや組織のユーザー中心のパフォーマンス目標を追跡する
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/real_user_monitoring/browser/#browser-and-session-replay-sampling-configuration
+[1]: /ja/real_user_monitoring/guide/sampling-browser-plans
 [2]: https://app.datadoghq.com/rum/explorer
-[3]: https://app.datadoghq.com/rum/generate-metrics
-[4]: /ja/real_user_monitoring/explorer/
-[5]: /ja/metrics/custom_metrics/
+[3]: /ja/metrics/custom_metrics/
+[4]: https://app.datadoghq.com/rum/generate-metrics
+[5]: /ja/real_user_monitoring/explorer/
 [6]: /ja/metrics/custom_metrics/#naming-custom-metrics
 [7]: /ja/real_user_monitoring/explorer/search/#event-types
 [8]: /ja/real_user_monitoring/explorer/search_syntax/
@@ -118,6 +117,6 @@ RUM ベースのカスタムメトリクスは、以下のアクションに使�
 [10]: /ja/monitors/
 [11]: /ja/metrics/distributions/
 [12]: /ja/dashboards/querying/#configuring-a-graph
-[13]: /ja/monitors/create/types/anomaly/
-[14]: /ja/monitors/create/types/forecasts/
-[15]: /ja/monitors/service_level_objectives/metric/
+[13]: /ja/monitors/types/anomaly/
+[14]: /ja/monitors/types/forecasts/
+[15]: /ja/service_management/service_level_objectives/metric/

@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: crest-data-systems-netapp-eseries-santricity
 app_uuid: 018234fd-7290-4477-9982-38d8df86803e
 assets:
@@ -26,7 +28,7 @@ assets:
 author:
   homepage: https://www.crestdatasys.com
   name: Crest Data Systems
-  sales_email: sales@crestdatasys.com
+  sales_email: datadog-sales@crestdatasys.com
   support_email: datadog.integrations@crestdatasys.com
   vendor_id: crest-data-systems
 categories:
@@ -113,13 +115,14 @@ tile:
 
 サポートまたは機能リクエストをご希望の場合は、以下のチャンネルから Crest Data Systems にお問い合わせください。
 
-- メール: datadog.integrations@crestdatasys.com
+- サポートメール: datadog.integrations@crestdatasys.com
+- 営業メール: datadog-sales@crestdatasys.com
 - Web サイト: [crestdatasys.com][3]
-
 
 [1]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/?tab=agentv6v7#start-stop-and-restart-the-agent
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://www.crestdatasys.com/
 [4]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/?tab=agentv6v7
+
 ---
 このアプリケーションは Marketplace から入手でき、Datadog テクノロジーパートナーによってサポートされています。このアプリケーションを購入するには、<a href="https://app.datadoghq.com/marketplace/app/crest-data-systems-netapp-eseries-santricity" target="_blank">こちらをクリック</a>してください。

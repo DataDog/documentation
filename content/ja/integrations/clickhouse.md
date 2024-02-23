@@ -34,12 +34,11 @@ draft: false
 git_integration_title: clickhouse
 integration_id: clickhouse
 integration_title: ClickHouse
-integration_version: 2.8.2
+integration_version: 2.8.3
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: clickhouse
-oauth: {}
 public_title: ClickHouse
 short_description: ClickHouse クラスターの健全性とパフォーマンスを監視。
 supported_os:
@@ -73,7 +72,7 @@ tile:
 
 ホストで実行されている Agent 用にこのチェックをインストールおよび構成する場合は、以下の手順に従ってください。コンテナ環境の場合は、[オートディスカバリーのインテグレーションテンプレート][2]のガイドを参照してこの手順を行ってください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 ClickHouse チェックは [Datadog Agent][3] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

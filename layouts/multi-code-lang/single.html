@@ -1,17 +1,27 @@
 {{ define "main" }}
 
     {{ $codeLangs := slice }}
-    {{ range sort .CurrentSection.Pages ".Params.code_lang_weight" }} 
-        {{ with .Params.code_lang }}  
+    {{ range sort .CurrentSection.Pages ".Params.code_lang_weight" }}
+        {{ with .Params.code_lang }}
             {{ $codeLangs = $codeLangs | append .  }}
         {{ end }}
     {{ end }}
 
-    {{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs) }}
+    <div class="row">
+        <div class="col-12 order-1">
+            <div class="mt-2">{{ partial "code-lang-tabs" (dict "context" . "codeLangs" $codeLangs) }}</div>
+            <h1 id="pagetitle">{{ .Title }}</h1>
+        </div>
+        <div class="col-12">
+            {{ partial "breadcrumbs.html" . }}
+        </div>
+    </div>
 
-    <h1 id="pagetitle">{{ .Title }}</h1>
     {{ partial "translate_status_banner/translate_status_banner.html" . }}
 
-    <div>{{ .Content }}</div>
+    {{/* Add `table-wrapper` div to tables in imported markdown to fix overflow issues */}}
+      
+    {{ $wrappedTable := printf "<div class=table-wrapper> ${1} </div>" }} 
+    {{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
 
 {{ end }}

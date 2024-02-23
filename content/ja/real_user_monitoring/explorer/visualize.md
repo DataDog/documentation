@@ -15,7 +15,7 @@ title: 視覚化
 
 リストは、イベントの結果をページ分割したもので、個々の結果が重要な場合に最適です。リストを使うのに、一致する結果を定義するための予備知識は必要ありません。
 
-{{< img src="real_user_monitoring/explorer/visualize/rum_explorer_lists.mp4" alt="RUM エクスプローラー内のリスト" video="true" style="width:70%;" >}}
+{{< img src="real_user_monitoring/explorer/visualize/rum_explorer_lists-1.mp4" alt="RUM エクスプローラー内のリスト" video="true" style="width:70%;" >}}
 
 検索した情報は、列で表示されます。以下の管理が可能です。
 
@@ -28,11 +28,17 @@ title: 視覚化
 
 RUM イベントテーブルの構成は、トラブルシューティングコンテキストの追加要素とともに[保存ビュー][4]に保存されます。
 
+### リストウィジェット
+
+[ダッシュボード上のリストウィジェット][8]は、RUM データを含む、指定されたデータソースの個々のイベントを表示します。リストウィジェットを使用すると、例えば特定のページのすべてのエラーなど、ダッシュボード上のあらゆる RUM イベントを表示することができます。
+
+ダッシュボードだけでなく、リストウィジェットはノートブックでも使用することができ、レポートや調査の一部として RUM イベントを追加することが可能です。
+
 ## Timeseries
 
 選択したタイムフレーム内での 1 つのメジャー (または[ファセット][5]のユニーク値数) の動きを可視化し、オプションで、使用可能な[ファセット][5]で分割します。
 
-{{< img src="real_user_monitoring/explorer/visualize/timeseries.png" alt="RUM エクスプローラーの時系列グラフ" style="width:80%;" >}}
+{{< img src="real_user_monitoring/explorer/visualize/timeseries-2.png" alt="RUM エクスプローラーの時系列グラフ" style="width:90%;" >}}
 
 時系列グラフは、Shopist アプリケーションのページビュー数の推移を、ビューパスごとに過去 1 日間に渡って示したものです。
 
@@ -45,28 +51,28 @@ RUM イベントテーブルの構成は、トラブルシューティングコ�
 
 選択したメジャーに基づくファセットから上位の値を視覚化します。
 
-{{< img src="real_user_monitoring/explorer/visualize/top_list.png" alt="RUM エクスプローラーの上位リストの棒グラフ" style="width:80%;" >}}
+{{< img src="real_user_monitoring/explorer/visualize/top-list-2.png" alt="RUM エクスプローラーの上位リストの棒グラフ" style="width:90%;" >}}
 
-上位リストには、直近 1 日間に Shopist のウェブサイトを訪問した際に使用されたブラウザの上位 10 個が含まれます。
+上位リストには、直近 1 日間に Shopist のウェブサイトを訪問した際に使用された上位のブラウザが含まれます。
 
 ## ネストされたテーブル
 
-選択した[メジャー][5] (リストで選択した最初のメジャー) に基づいて最大 3 つの[ファセット][5]から上位の値を可視化し、テーブルの値に現れる要素に対して他のメジャーの値を表示します。検索クエリを更新したり、いずれかのディメンションに対応する RUM イベントを調べたりすることができます。
+選択した[メジャー][5] (リストで選択した最初のメジャー) に基づいて最大 3 つの[ファセット][5]から上位の値を可視化し、ネストしたテーブルに現れる要素に対して他のメジャーの値を表示します。検索クエリを更新したり、いずれかのディメンションに対応する RUM イベントを調べたりすることができます。
 
 * メジャーが複数ある場合、最初のメジャーに応じて上位または下位リストが決定されます。
 * サブセット（上位または下位）のみが表示されるため、小計がグループ内の実際の合計値とは異なる場合があります。このディメンジョンに対する、値が null または空欄のイベントは、サブグループとして表示されません。
 
  **注**: 単一のメジャーと単一のディメンジョンで使用されるテーブルの可視化は、表示が異なりますが、[上位リスト](#top-list)と同じです。
 
- 次の RUM 分析テーブルは、**2 つの国**の**上位 5 の URL パス**です。つまり、**ユニークなセッション ID** の量と、90 パーセンタイルの**期間**に基づく、過去 1 日間の米国と日本の分析結果を示しています。
+ 次の RUM 分析テーブルは、米国と日本という **2 つの国**の**直近 1 日間の上位 5 つの URL パス**を、ブラウザごとにグループ化して表示しています。
 
-{{< img src="real_user_monitoring/explorer/visualize/nested_table.png" alt="RUM エクスプローラーのネストされたテーブル" style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/visualize/nested-table-4.png" alt="RUM エクスプローラーのネストされたテーブル" style="width:90%;">}}
 
 ## ディストリビューション
 
 選択した時間帯のメジャー属性の分布を表示し、値の変動を確認することができます。
 
-{{< img src="real_user_monitoring/explorer/visualize/distribution.png" alt="RUM エクスプローラーの分布グラフ" style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/visualize/distribution-2.png" alt="RUM エクスプローラーの分布グラフ" style="width:90%;">}}
 
 分布グラフは、Shopist ランディングページのユーザー体験を測定する Largest Contentful Paint の分布を表示します。
 
@@ -74,15 +80,30 @@ RUM イベントテーブルの構成は、トラブルシューティングコ�
 
 世界地図上で単一の[メジャー][5] (または[ファセット][5]の一意の値のカウント) を視覚化します。
 
-{{< img src="real_user_monitoring/explorer/visualize/geomap.png" alt="RUM エクスプローラーの地形図" style="width:90%;">}}
+{{< img src="real_user_monitoring/explorer/visualize/geomap-2.png" alt="RUM エクスプローラーの地理的なマップ" style="width:90%;">}}
 
 RUM Analytics ジオマップは、過去 1 日間の **Largest Contentful Paint** の 75 パーセンタイルを示しています。
 
+## ファネル
+[ファネル分析][9]について学びます。
+## ツリーマップ
+ツリーマップは、データを整理して、全体に対する割合として視覚的にわかりやすく表示するのに役立ちます。ツリーマップは、ネストされた長方形でデータを表示します。長方形のサイズと色の両方を使用して、異なる次元を比較します。また、複数の属性を選択して、長方形の階層を表示することもできます。
+
+以下のツリーマップは、**View Name** 別の構成比を表しています。
+
+{{< img src="real_user_monitoring/explorer/visualize/tree-map.png" alt="RUM エクスプローラーのツリーマップ" style="width:90%;">}}
+## 円グラフ
+円グラフは、データを整理し、全体に対する割合で表示するのに役立ちます。ログデータ内のサービス、ユーザー、ホスト、国など、異なる次元の関係を比較するときに便利です。
+
+以下の円グラフは、**View Path** 別の構成比を表しています。
+
+{{< img src="real_user_monitoring/explorer/visualize/pie-chart.png" alt="RUM エクスプローラーの円グラフ" style="width:90%;">}}
+
 ## 関連イベント
 
-[ファネル](#funnel)以外のすべての視覚化では、グラフのセクションを選択するか、グラフをクリックしてズームインするか、選択した項目に対応するイベントのリストを表示します。
+[ファネル](#funnels)以外のすべての視覚化では、グラフのセクションを選択するか、グラフをクリックしてズームインするか、選択した項目に対応するイベントのリストを表示します。
 
-{{< img src="real_user_monitoring/explorer/visualize/related_events.png" alt="グラフをクリックすると、関連イベントリンクが表示されます" width="80%" >}}
+{{< img src="real_user_monitoring/explorer/visualize/related-events-2.png" alt="グラフをクリックすると、関連イベントリンクが表示されます" width="90%" >}}
 
 ファネルグラフの場合、グラフをクリックすると、クエリに対応するコンバージョンされたセッションとドロップオフされたセッションのリストが表示されます。
 
@@ -99,3 +120,5 @@ RUM Analytics ジオマップは、過去 1 日間の **Largest Contentful Paint
 [5]: /ja/real_user_monitoring/explorer/search#setup-facets-and-measures
 [6]: /ja/notebooks
 [7]: /ja/real_user_monitoring/explorer/export/
+[8]: /ja/dashboards/widgets/list/
+[9]: /ja/real_user_monitoring/funnel_analysis

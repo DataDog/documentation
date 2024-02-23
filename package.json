@@ -40,17 +40,17 @@
     "dependencies": {
         "@apidevtools/json-schema-ref-parser": "^8.0.0",
         "@babel/polyfill": "^7.4.4",
-        "@datadog/browser-logs": "^4.29.1",
-        "@datadog/browser-rum": "^4.29.1",
+        "@datadog/browser-logs": "^4.44.0",
+        "@datadog/browser-rum": "^4.44.0",
         "@popperjs/core": "^2.11",
-        "a11y": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/a11y-v1.0.1.tgz",
         "algoliasearch": "4.14.2",
+        "alpinejs": "^3.12.0",
         "bootstrap": "^5.2",
         "del": "4.1.1",
         "fancy-log": "^1.3.3",
-        "hugo-bin": "0.99.3",
+        "geo-locate": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/geo-locate-v1.0.1.tgz",
+        "hugo-bin": "0.108.0",
         "instantsearch.js": "^4.53.0",
-        "jquery": "3.5.1",
         "js-cookie": "^2.2.1",
         "js-yaml": "^3.14.1",
         "jshint": "2.10.2",
@@ -63,10 +63,10 @@
         "minimist": "^1.2.5",
         "mixitup": "^3.3.1",
         "mousetrap": "^1.6.5",
-        "pa11y": "^5.3.0",
         "picturefill": "3.0.2",
         "popper.js": "1.16.1",
         "safe-json-stringify": "^1.2.0",
+        "signup-failover": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/signup-failover-v1.0.0.tgz",
         "slugify": "^1.4.6",
         "tiny-async-pool": "^1.0.4",
         "tomlify-j0.4": "^3.0.0",
@@ -103,5 +103,5 @@
     "hugo-bin": {
         "buildTags": "extended"
     },
-    "packageManager": "yarn@3.2.1"
+    "packageManager": "yarn@3.6.1"
 }

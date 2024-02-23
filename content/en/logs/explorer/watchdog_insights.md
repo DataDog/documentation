@@ -56,7 +56,12 @@ The logs surface as Insights in the Log Explorer, matching the search context an
 
 Click on a specific insight to see the full description of the detected anomaly as well as the list of patterns contributing to it.
 
-Anomalies that Watchdog determines to be particularly severe are also surfaced in the [Watchdog alerts feed][6]. Set up a [Watchdog logs monitor][7] to be notified whenever Watchdog finds one of these anomalies.
+Anomalies that Watchdog determines to be particularly severe are also surfaced in the [Watchdog alerts feed][6] and can be alerted on by setting up a [Watchdog logs monitor][7].
+A severe anomaly is defined as:
+
+* containing error logs
+* lasting at least 10 minutes (to avoid transient errors)
+* having a significant increase (to avoid small increases)
 
 For more information about searching logs in the Log Explorer, see [Log Search Syntax][2] and [Custom Time Frames][3].
 

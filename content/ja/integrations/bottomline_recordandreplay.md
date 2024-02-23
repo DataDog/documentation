@@ -25,7 +25,6 @@ author:
   vendor_id: bottomline
 categories:
 - mainframe
-- マーケットプレイス
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/bottomline_recordandreplay/README.md
 display_on_public_website: true
@@ -38,7 +37,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: bottomline_recordandreplay
-oauth: {}
 public_title: 'Bottomline の Record and Replay: Mainframe'
 short_description: ネットワークトラフィックを利用して 3270/5250 Mainframe のユーザーとリソースを監視する
 supported_os:
@@ -48,7 +46,6 @@ tile:
   changelog: CHANGELOG.md
   classifier_tags:
   - Category::Mainframe
-  - Category::Marketplace
   - Offering::Integration
   - Supported OS::Linux
   - Supported OS::Windows

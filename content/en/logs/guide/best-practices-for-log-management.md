@@ -13,6 +13,8 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/log-management-policies/"
       tag: "Blog"
       text: "How to implement log management policies with your teams"
+algolia:
+  tags: ['log usage']
 ---
 
 ## Overview
@@ -53,7 +55,7 @@ Setting daily quotas on your indexes can help prevent billing overages when new 
 
 ### Set up multiple archives for long-term storage
 
-If you want to store your logs for longer periods of time, set up [Log Archives][2] to send your logs to a storage-optimized system, such as AWS S3, Azure Storage, or Google Cloud Storage. When you want to use Datadog to analyze those logs, use [Log Rehydration][3]™ to capture those logs back in Datadog. With multiple archives, you can both segment logs for compliance reasons and keep rehydration costs under control.
+If you want to store your logs for longer periods of time, set up [Log Archives][2] to send your logs to a storage-optimized system, such as Amazon S3, Azure Storage, or Google Cloud Storage. When you want to use Datadog to analyze those logs, use [Log Rehydration][3]™ to capture those logs back in Datadog. With multiple archives, you can both segment logs for compliance reasons and keep rehydration costs under control.
 
 #### Set up max scan size to manage expensive rehydrations 
 
@@ -128,11 +130,17 @@ Set up a monitor to alert if an indexed log volume in any scope of your infrastr
     ```
     Unexpected spike on indexed logs for service {{service.name}}
     ```
-6.  Add a message, for example:
+6. Add a message, for example:
     ```
     The volume on this service exceeded the threshold. Define an additional exclusion filter or increase the sampling rate to reduce the volume.
     ```
 7. Click **Create**.
+
+#### Alert on indexed logs volume since the beginning of the month
+
+Leverage the `datadog.estimated_usage.logs.ingested_events` metric filtered on `datadog_is_excluded:false` to only count indexed logs and the [metric monitor cumulative window][28] to monitor the count since the beginning of the month. 
+
+{{< img src="logs/guide/monthly_usage_monitor.png" alt="Setup a monitor to alert for the count of indexed logs since the beginning of the month" style="width:70%;">}}
 
 #### Alert on indexes reaching their daily quota
 
@@ -203,14 +211,15 @@ If you want to see user activities, such as who changed the retention of an inde
 [14]: https://app.datadoghq.com/logs
 [15]: /logs/explorer/search/
 [16]: /logs/indexes/#set-daily-quota
-[17]: /events/explorer/#facets
+[17]: /service_management/events/explorer/facets
 [18]: https://app.datadoghq.com/dash/integration/logs_estimated_usage
 [19]: https://app.datadoghq.com/dashboard/lists?q=Log+Management+-+Estimated+Usage
 [20]: /logs/log_configuration/indexes/#exclusion-filters
 [21]: /logs/explorer/analytics/patterns
 [22]: /logs/log_configuration/logs_to_metrics/
-[23]: /account_management/org_settings/sensitive_data_detection/
+[23]: /sensitive_data_scanner/
 [24]: https://www.datadoghq.com/pricing/?product=sensitive-data-scanner#sensitive-data-scanner
 [25]: /account_management/audit_trail/events/
 [26]: /account_management/audit_trail/
 [27]: https://www.datadoghq.com/pricing/?product=audit-trail#audit-trail
+[28]: /monitors/configuration/?tab=thresholdalert#evaluation-window

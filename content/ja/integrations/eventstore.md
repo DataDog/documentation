@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: eventstore
-oauth: {}
 public_title: Eventstore
 short_description: Eventstore のメトリクスを収集
 supported_os:
@@ -70,7 +69,7 @@ EventStore からメトリクスをリアルタイムに取得して、以下の
 
 EventStore チェックは [Datadog Agent][1] パッケージに含まれていないため、お客様自身でインストールする必要があります。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Agent v7.21 / v6.21 以降の場合は、下記の手順に従い EventStore チェックをホストにインストールします。Docker Agent または 上記バージョン以前の Agent でインストールする場合は、[コミュニティインテグレーションの使用][2]をご参照ください。
 

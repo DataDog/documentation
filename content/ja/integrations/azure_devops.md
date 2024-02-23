@@ -10,6 +10,10 @@ dependencies: []
 description: 主要な Azure DevOps メトリクスを追跡します。
 doc_link: https://docs.datadoghq.com/integrations/azure_devops
 draft: false
+further_reading:
+- link: https://www.datadoghq.com/blog/azure-pipelines-ci-visibility/
+  tag: ブログ
+  text: Datadog CI Visibility で Azure Pipelines を監視する
 git_integration_title: azure_devops
 has_logo: true
 integration_id: azuredevops
@@ -36,7 +40,7 @@ Datadog と Azure DevOps を統合して、次のことを行います。
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Datadog で、[Azure DevOps インテグレーションタイル][1]のインストールボタンをクリックします。
 
@@ -136,6 +140,10 @@ Azure DevOps インテグレーションには、サービスのチェック機�
 
 #### サービスフックサブスクリプションのテストで、成功メッセージが返されましたが、イベントが Datadog に到達しないのはなぜですか？
 サービスフックサブスクリプションテストは、Azure DevOps が Datadog へイベントを送信できるかどうかのみをチェックします。API キーまたは Datadog オーガニゼーションサイト (US または EU) は検証されません。API キーおよびサイトが正しいことをご確認ください。
+
+## その他の参考資料
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings#integrations/azuredevops
 [2]: https://app.datadoghq.com/organization-settings/api-keys

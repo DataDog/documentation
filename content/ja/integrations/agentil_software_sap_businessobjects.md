@@ -1,4 +1,6 @@
 ---
+algolia:
+  subcategory: Marketplace インテグレーション
 app_id: agentil-software-sap-businessobjects
 app_uuid: cac9d777-3bd1-40a1-aef3-28a8141804f1
 assets:
@@ -38,7 +40,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: agentil_software_sap_businessobjects
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true

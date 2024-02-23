@@ -6,11 +6,14 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/dd-101-sre
   tag: ラーニングセンター
   text: 'Datadog の基本: サイト信頼性エンジニア'
+- link: https://dtdg.co/fe
+  tag: Foundation Enablement
+  text: Datadog の基礎を固めるためのインタラクティブなセッションに参加できます
 - link: https://www.datadoghq.com/blog/datadog-quick-nav-menu/
-  tag: ブログ
+  tag: GitHub
   text: Datadog クイックナビメニューのご紹介
 - link: https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/
-  tag: GitHub
+  tag: ブログ
   text: Datadog を支えるデザインシステム、DRUIDS
 kind: documentation
 title: Datadog の開始
@@ -41,7 +44,7 @@ Datadog サイトのナビゲーションは、ブラウザの幅に応じて変
 
 {{< img src="getting_started/apm.png" alt="APM ダッシュボード" >}}
 
-[Datadog Application Performance Monitoring][6]（APM またはトレース）を利用すると、ログやインフラストラクチャーの監視と合わせて、リクエストの量やレイテンシーなどの重要なメトリクスを監視するために自動生成されたダッシュボードから、個々のリクエストの詳細なトレースに至るまで、アプリケーションのパフォーマンスを深く理解することができます。アプリケーションに対してリクエストが行われると、Datadog は分散システム全体でトレースを確認できるため、このリクエストに対して何が起こっているかについての体系的なデータを表示できます。
+[Datadog Application Performance Monitoring][6] (APM またはトレース) を利用すると、ログやインフラストラクチャーの監視と合わせて、リクエストの量やレイテンシーなどの重要なメトリクスを監視するために自動生成されたダッシュボードから、個々のリクエストの詳細なトレースに至るまで、アプリケーションのパフォーマンスを深く理解することができます。アプリケーションに対してリクエストが行われると、Datadog は分散システム全体でトレースを確認できるため、このリクエストに対して何が起こっているかについての体系的かつ正確なデータを表示できます。
 
 ## インフラストラクチャー
 
@@ -66,7 +69,7 @@ Datadog サイトのナビゲーションは、ブラウザの幅に応じて変
 
 ## イベント
 
-{{< img src="events/explorer/events-overview.png" alt="イベントエクスプローラー" style="width:100%;" >}}
+{{< img src="service_management/events/explorer/events-overview.png" alt="イベントエクスプローラー" style="width:100%;" >}}
 
 [イベントエクスプローラー][10]には、インフラストラクチャーやサービスによって生成された最新のイベントが表示されます。
 
@@ -103,7 +106,7 @@ Datadog サイトのナビゲーションは、ブラウザの幅に応じて変
 [モニター][16]は、メトリクスのしきい値、インテグレーションの有無、ネットワークエンドポイントなどに基づいて、アラートと通知を提供します。
 
 - Datadog に報告される任意のメトリクスを使用できます。
-- デバイス、ホストなどによるマルチアラートの設定
+- デバイス単位やホスト単位など、複数のアラートの設定
 - アラートメッセージで `@` を使用することで適切な相手に通知を届けることができます。
 - ダウンタイムをスケジューリングすると、システムシャットダウン時やオフラインメンテナンス時などに通知を停止できます。
 
@@ -119,7 +122,7 @@ Datadog [Network Performance Monitoring][17] (NPM) を使用すると、コン�
 
 {{< img src="getting_started/rum.png" alt="RUM" >}}
 
-Datadog [Real User Monitoring][18] (RUM) は、ユーザーの活動や体験をリアルタイムに視覚化し、分析することが可能です。[セッションリプレイ][19]を使用すると、ユーザーの Web ブラウジングセッションをキャプチャして表示し、ユーザーの行動をよりよく理解することができます。RUM エクスプローラーでは、ロードタイム、フロントエンドエラー、ページの依存関係を視覚化できるだけでなく、ビジネスとアプリケーションのメトリクスを関連付け、アプリケーション、インフラストラクチャー、ビジネスのメトリクスの問題を 1 つのダッシュボードでトラブルシューティングすることができます。
+Datadog [Real User Monitoring][18] (RUM) では、ユーザーの活動や体験をリアルタイムに視覚化し、分析することが可能です。[セッションリプレイ][19]を使用すると、ユーザーの Web ブラウジングセッションをキャプチャして表示し、ユーザーの行動をよりよく理解することができます。RUM エクスプローラーでは、ロードタイム、フロントエンドエラー、ページの依存関係を視覚化できるだけでなく、ビジネスとアプリケーションのメトリクスを関連付け、アプリケーション、インフラストラクチャー、ビジネスのメトリクスの問題を 1 つのダッシュボードでトラブルシューティングすることができます。
 
 ## サーバーレス
 
@@ -135,15 +138,15 @@ Datadog [Cloud SIEM][21] (Security Information and Event Management) は、ア�
 
 {{< img src="getting_started/synthetics.png" alt="Synthetics" >}}
 
-Datadog [Synthetic Monitoring][22] では、API やブラウザのテストを作成・実行し、アプリケーション上のユーザートランザクションを積極的にシミュレートし、システム層全体の内部および外部ネットワークエンドポイントを監視することができます。エラーの検出、回帰の特定、ロールバックの自動化により、本番環境での問題の顕在化を防止することができます。
+Datadog [Synthetic Monitoring][22] では、API やブラウザのテストを作成・実行し、アプリケーション上のユーザートランザクションを積極的にシミュレートし、システムの全てのレイヤーで内部および外部ネットワークエンドポイントを監視することができます。エラーの検出、回帰の特定、ロールバックの自動化により、本番環境での問題の顕在化を防止することができます。
 
 ## モバイル版 Datadog
 
-[Apple App Store][24] と [Google Play Store][25] で提供されている [Datadog モバイルアプリ][23]は、オンコールエンジニアやビジネスユーザーが、ラップトップを開かずにサービスの状態をフォローし、問題を迅速にトリアージするための重要なデータを提供します。組織のダッシュボード、モニター、インシデント、SLO などに、モバイルデバイスから直接アクセスできます。
+[Apple App Store][24] と [Google Play Store][25] で提供されている [Datadog モバイルアプリ][23]は、オンコールエンジニアやビジネスユーザーが、ノートパソコンを開かずにサービスの状態をフォローし、問題を迅速にトリアージするための重要なデータを提供します。組織のダッシュボード、モニター、インシデント、SLO などに、モバイルデバイスから直接アクセスできます。
 
 {{< img src="getting_started/application/mobile-app-store-screens.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS 向けモバイルアプリ">}}
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com
@@ -155,8 +158,8 @@ Datadog [Synthetic Monitoring][22] では、API やブラウザのテストを�
 [7]: /ja/infrastructure/
 [8]: /ja/getting_started/tagging/
 [9]: /ja/infrastructure/hostmap/
-[10]: /ja/events/
-[11]: /ja/events/explorer/#event-analytics
+[10]: /ja/service_management/events/
+[11]: /ja/service_management/events/explorer/#event-analytics
 [12]: /ja/dashboards/
 [13]: /ja/dashboards/#screenboards
 [14]: /ja/dashboards/functions/arithmetic/
@@ -166,8 +169,8 @@ Datadog [Synthetic Monitoring][22] では、API やブラウザのテストを�
 [18]: /ja/real_user_monitoring/
 [19]: /ja/real_user_monitoring/session_replay/
 [20]: /ja/serverless
-[21]: /ja/security_platform/cloud_siem/
+[21]: /ja/security/cloud_siem/
 [22]: /ja/synthetics/
-[23]: /ja/mobile/
+[23]: /ja/service_management/mobile/
 [24]: https://apps.apple.com/app/datadog/id1391380318
 [25]: https://play.google.com/store/apps/details?id=com.datadog.app

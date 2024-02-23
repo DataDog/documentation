@@ -5,13 +5,13 @@ description: フィルターと集計の結果を視覚化して、ログを正�
 further_reading:
 - link: logs/explorer/search
   tag: ドキュメント
-  text: ログの絞り込み
-- link: logs/explorer/group
+  text: ログのフィルター方法
+- link: logs/explorer/analytics
   tag: ドキュメント
-  text: クエリログのグループ化
+  text: ログをグループ化する方法
 - link: /logs/explorer/export
   tag: ドキュメント
-  text: ログエクスプローラーのビューをエクスポート
+  text: ログエクスプローラーからビューをエクスポートする
 kind: documentation
 title: ログの視覚化
 ---

@@ -8,7 +8,7 @@ To search your monitors, construct a query using the facet panel on the left and
 
 ## Search bar
 
-Use simple text to search across all monitor titles and notification messages. For example, a search of `*postgresql*` returns all monitors with `postgresql` anywhere in the title or 
+Use simple text to search across all monitor titles and notification messages. For example, a search of `*postgresql*` returns all monitors with `postgresql` anywhere in the title or
 notification message.
 
 To limit the search, specify the field name:
@@ -20,12 +20,14 @@ To limit the search, specify the field name:
 
 Additionally, you can search for a monitor using the ID, for example: `1234567`. The monitor's ID is available on the [monitor status page][1].
 
+<div class="alert alert-info">For information on how to filter monitor groups, see the <a href="/monitors/manage/status/">Monitor Status page</a>.</div>
+
 ### Query
 
 Enhance your search query with boolean operators (`AND`, `OR`, `NOT`) and parentheses. The search syntax is similar to [Elasticsearch][2] with the following exceptions:
 
 * Regular expressions are not supported.
-* Single-character wildcard (`?`) is not supported, but the general wildcard (`*`) is supported.
+* Both single-character wildcard (`?`) and the general wildcard (`*`) are supported.
 * Proximity searches are not supported, but the [fuzzy][3] operator is supported.
 * Ranges are not supported.
 * Boosting is not supported.

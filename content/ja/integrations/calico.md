@@ -18,6 +18,8 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_name: Calico
+  logs:
+    source: calico
   monitors:
     '[calico] monitor dataplane failures': ./assets/monitors/dataplane_failures.json
     '[calico] monitor ipsets error': ./assets/monitors/ipset_error.json
@@ -39,12 +41,11 @@ draft: false
 git_integration_title: calico
 integration_id: calico
 integration_title: calico
-integration_version: 1.1.0
+integration_version: 1.2.0
 is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: calico
-oauth: {}
 public_title: calico
 short_description: Calico は、コンテナ向けのネットワーク & ネットワークセキュリティソリューションです。
 supported_os:
@@ -78,7 +79,7 @@ Calico チェックは、Calico で設定した Kubernetes クラスターのネ
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Calico チェックは [Datadog Agent][2] パッケージに含まれています。
 
@@ -125,7 +126,7 @@ Calico チェックは [Datadog Agent][2] パッケージに含まれていま�
    minikube を使用していない場合は、`felix-metrics-svc` が外部 IP を持っているかを確認してください。サービスが外部 IP を持っていない場合は、`kubectl edit svc` を使用して、そのタイプを `ClusterIP` から `LoadBalancer` に変更してください。
 
 
-### コンフィギュレーション
+### 構成
 
 ホストで実行中の Agent でこのチェックを構成する場合は、手順に従ってください。コンテナ環境の場合は、[コンテナ化](#コンテナ化)セクションを参照してください。
 
@@ -166,7 +167,7 @@ Datadog Agent で、ログの収集はデフォルトで無効になっていま
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
 [3]: https://docs.datadoghq.com/ja/agent/kubernetes
 {{% /tab %}}
-{{% tab "Containerized" %}}
+{{% tab "コンテナ化" %}}
 
 #### コンテナ化
 

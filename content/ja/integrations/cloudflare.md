@@ -41,7 +41,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: cloudflare
-oauth: {}
 public_title: Cloudflare
 short_description: Cloudflare Web トラフィックおよび DNS メトリクスを追跡
 supported_os: []
@@ -73,7 +72,7 @@ Cloudflare と統合することで、Web トラフィック、DNS クエリ、�
 
 Cloudflare API トークンを使用する場合は、**Zone** > **Zone** > **Read** および **Zone** > **Analytics** > **Read** の権限を保有していることを確認してください。
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Datadog の [Cloudflare インテグレーションタイル][5]を使用して、インテグレーションをインストールします。
 
@@ -87,6 +86,13 @@ Datadog の [Cloudflare インテグレーションタイル][5]を使用して�
 
 Cloudflareでは、Cloudflare Logpush を使用してログを直接 Datadog にプッシュすることができます。Logpush のジョブは [Cloudflare API](#cloudflare-api) または [Cloudflare ダッシュボード](#cloudflare-dashboard)で管理できます。
 
+Cloudflare インテグレーションパイプラインをインストールすると、特定の属性が自動的にリマップされます。どの属性がリマップされるかを確認するには
+
+1. [ログパイプライン][6]に移動します。
+2. 右上の **Browse Pipeline Library** をクリックします。
+3. 検索バーに `Cloudflare` と入力します。
+4. **Cloudflare** をクリックすると、インストールされているリマッパーなどのプロセッサーのリストが表示されます。
+
 #### Cloudflare API
 
 1. Logpush ジョブエンドポイントへ POST をリクエストし、Logpush ジョブを作成します。以下のフィールドを含めます。
@@ -98,8 +104,8 @@ Cloudflareでは、Cloudflare Logpush を使用してログを直接 Datadog に
         * `service` (任意): サービス名を指定。
         * `host` (任意): ホスト名を指定。
         * `ddtags` (任意): タグを指定。
-    * `dataset`: 受信するログのカテゴリー。サポートされるデータセットについては、[Cloudflare のログフィールド][6]を参照。
-    * `logpull_options` (任意): フィールド、サンプルレート、タイムスタンプの形式を構成するには、[Logpush API オプション][7]を参照。
+    * `dataset`: 受信するログのカテゴリー。サポートされるデータセットについては、[Cloudflare のログフィールド][7]を参照。
+    * `logpull_options` (オプション): フィールド、サンプルレート、タイムスタンプの形式を構成するには、[Logpush API オプション][8]を参照。
 
     **リクエスト例**:
 
@@ -218,14 +224,15 @@ Cloudflare インテグレーションには、サービスのチェック機能
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
+ご不明な点は、[Datadog のサポートチーム][10]までお問合せください。
 
 [1]: https://api.cloudflare.com/#zone-analytics-dashboard
 [2]: https://www.datadoghq.com/free-datadog-trial/
 [3]: /ja/account_management/api-app-keys/#api-keys
 [4]: https://developers.cloudflare.com/logs/about
 [5]: https://app.datadoghq.com/account/settings#integrations/cloudflare
-[6]: https://developers.cloudflare.com/logs/log-fields
-[7]: https://developers.cloudflare.com/logs/logpush/logpush-configuration-api/understanding-logpush-api#options
-[8]: https://github.com/DataDog/dogweb/blob/prod/integration/cloudflare/cloudflare_metadata.csv
-[9]: https://docs.datadoghq.com/ja/help/
+[6]: https://app.datadoghq.com/logs/pipelines
+[7]: https://developers.cloudflare.com/logs/log-fields
+[8]: https://developers.cloudflare.com/logs/logpush/logpush-configuration-api/understanding-logpush-api#options
+[9]: https://github.com/DataDog/dogweb/blob/prod/integration/cloudflare/cloudflare_metadata.csv
+[10]: https://docs.datadoghq.com/ja/help/

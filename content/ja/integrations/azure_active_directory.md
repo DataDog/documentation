@@ -33,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: azure_active_directory
-oauth: {}
 public_title: Azure Active Directory
 short_description: Azure Active Directory アクティビティログを分析
 supported_os:
@@ -67,13 +66,13 @@ Azure Active Directory は、Microsoft Azure によるクラウドホスト型 A
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 このインテグレーションにより、 Azure Event Hubs を使用してログが Datadog に転送されます。アクティビティログをイベントハブに転送するように Azure AD を構成します。
 
 ### コンフィギュレーション
 
-1. [ログ収集のドキュメント][2]に従い、Event Hubs 使用して Azure から Datadog へのログ転送パイプラインを設定します。
+1. [Azure ログを Datadog に送信][2]のガイドに従い、Event Hubs 使用して Azure から Datadog へのログ転送パイプラインを設定します。
 
 2. Azure ポータルで、 _Azure Active Directory > Monitoring > Audit logs_ を選択します。
 
@@ -121,6 +120,6 @@ Azure Active Directory には、メトリクスは含まれません。
 ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
 
 [1]: https://docs.microsoft.com/en-us/azure/active-directory/reports-monitoring/overview-reports#activity-reports
-[2]: https://docs.datadoghq.com/ja/integrations/azure/?tab=eventhub#log-collection
+[2]: https://docs.datadoghq.com/ja/logs/guide/azure-logging-guide/
 [3]: https://docs.microsoft.com/en-us/azure/active-directory/reports-monitoring/tutorial-azure-monitor-stream-logs-to-event-hub
 [4]: https://docs.datadoghq.com/ja/help

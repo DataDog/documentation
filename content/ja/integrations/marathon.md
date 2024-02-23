@@ -43,7 +43,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: marathon
-oauth: {}
 public_title: Marathon
 short_description: 必要なメモリとディスク、インスタンス数などのアプリケーションメトリクスを追跡。
 supported_os:
@@ -76,7 +75,7 @@ Agent の Marathon チェックを使用して、以下のことができます�
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Marathon チェックは [Datadog Agent][1] パッケージに含まれています。サーバーに追加でインストールする必要はありません。
 

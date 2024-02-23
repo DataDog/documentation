@@ -66,6 +66,16 @@ code_languages:
     example_file: example.ts
 
 code_language_ids:
+    android: Android
+    ios: iOS
+    expo: Expo
+    flutter: Flutter
+    otel: OTel
+    reactnative: React Native
+    codepush: CodePush
+    roku: Roku
+    unity: Unity
+    swiftui: Swift UI
     java: Java
     cpp: 'C++'
     php: PHP
@@ -87,10 +97,17 @@ code_language_ids:
     native: Native
     other: Other
     linux: Linux
+    windows: Windows
     opentelemetry: OpenTelemetry
     ddprof: "Rust/C/C++"
     serverless: "Serverless"
-
+    javascript: "JavaScript"
+    swift: "Swift"
+    junit_xml: "JUnit XML"
+    kubernetes: "Kubernetes"
+    docker: "Docker"
+    hosts: "Hosts"
+    ecs_ec2: "ECS EC2"
 branch: ""
 
 signupclass: sign-up-trigger
@@ -129,3 +146,62 @@ allowedRegions:
     value: gov
     weight: 30
     domain: ddog-gov.com
+
+
+core_product:
+  value_required: false
+  possible_values:
+    - name: alerts
+    - name: apm
+    - name: appsec
+      requires_all_keyvals:
+        - 'core_product:security'
+    - name: ci-cd
+    - name: cloud siem
+      requires_all_keyvals:
+        - 'core_product:security'
+    - name: code profiling
+    - name: continuous testing
+      requires_all_keyvals:
+        - 'core_product:synthetic monitoring'
+        - 'core_product:digital experience monitoring'
+        - 'specific_interest:testing'
+    - name: csm
+      requires_all_keyvals:
+        - 'core_product:security'
+    - name: cspm
+      requires_all_keyvals:
+        - 'specific_interest:compliance'
+        - 'core_product:security'
+    - name: cwpp
+      requires_all_keyvals:
+        - 'core_product:security'
+    - name: dashboards
+    - name: database monitoring
+    - name: datadog agent
+    - name: datadog api
+    - name: datadog marketplace
+    - name: datadog mobile app
+    - name: digital experience monitoring
+      requires_one_keyval:
+        - 'core_product:real user monitoring'
+        - 'core_product:synthetic monitoring'
+    - name: real user monitoring
+      requires_all_keyvals:
+        - 'core_product:digital experience monitoring'
+    - name: synthetic monitoring
+      requires_all_keyvals:
+        - 'core_product:digital experience monitoring'
+    - name: error tracking
+    - name: incident management
+    - name: infrastructure monitoring
+    - name: log management
+    - name: metrics
+    - name: network device monitoring
+    - name: network performance monitoring
+    - name: observability pipelines
+    - name: security
+    - name: serverless monitoring
+    - name: service catalog
+    - name: slos
+    - name: watchdog

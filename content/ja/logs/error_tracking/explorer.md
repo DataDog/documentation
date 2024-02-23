@@ -41,7 +41,7 @@ Datadog は、エラータイプ、エラーメッセージ、スタックトレ
 
 1 つの問題にグループ化されたエラーのスタックトレースが異なる場合、**Group Into Pattern** をクリックします。
 
-## {{< partial name="whats-next/whats-next.html" >}}
+## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

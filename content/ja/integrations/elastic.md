@@ -44,12 +44,11 @@ draft: false
 git_integration_title: elastic
 integration_id: elasticsearch
 integration_title: ElasticSearch
-integration_version: 5.3.0
+integration_version: 5.5.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: elastic
-oauth: {}
 public_title: ElasticSearch
 short_description: クラスター全体のステータスから JVM のヒープ使用量まで、すべてを監視
 supported_os:
@@ -85,7 +84,7 @@ Datadog Agent の Elasticsearch チェックは、検索とインデックス化
 
 ## セットアップ
 
-### APM に Datadog Agent を構成する
+### インストール
 
 Elasticsearch チェックは [Datadog Agent][2] パッケージに含まれています。追加のインストールは必要ありません。
 
@@ -179,6 +178,20 @@ custom_queries:
    - custom_tag:1
 ```
 カスタムクエリは `GET` リクエストとして送信されます。オプションの `payload` パラメーターを使用すると、`POST` リクエストとして送信されます。
+
+`value_path` には文字列キーまたはリストインデックスを指定します。例:
+```json
+{
+  "foo": {
+    "bar": [
+      "result0",
+      "result1"
+    ]
+  }
+}
+```
+
+`value_path: foo.bar.1` は値 `result1` を返します。
 
 ##### トレースの収集
 
@@ -502,6 +515,7 @@ Agent コンテナで必要な環境変数
 - `pshard_stats` は、**elasticsearch.primaries.\*** および **elasticsearch.indices.count** メトリクスを送信します。
 - `index_stats` は、**elasticsearch.index.\*** メトリクスを送信します。
 - `pending_task_stats` は、**elasticsearch.pending\_\*** メトリクスを送信します。
+- `slm_stats` は、**elasticsearch.slm.\*** メトリクスを送信します
 
 ### メトリクス
 {{< get-metrics-from-git "elastic" >}}
@@ -527,7 +541,7 @@ Elasticsearch チェックは、Elasticsearch クラスターの全体的なス�
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/elastic/images/elasticsearch-dash.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [4]: https://docs.datadoghq.com/ja/integrations/faq/elastic-agent-can-t-connect/
 [5]: https://docs.datadoghq.com/ja/integrations/faq/why-isn-t-elasticsearch-sending-all-my-metrics/
