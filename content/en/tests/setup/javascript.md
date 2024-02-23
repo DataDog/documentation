@@ -310,7 +310,7 @@ module.exports = defineConfig({
 
 ### Cypress before version 10
 
-These are the instructions if you're using a version older than `cypress@10`. See more about migrating to a newer version in [cypress docs][9]
+These are the instructions if you're using a version older than `cypress@10`. See the [Cypress documentation][9] for more information about migrating to a newer version.
 
 1. Set [`pluginsFile`][2] to `"dd-trace/ci/cypress/plugin"`, for example, through [`cypress.json`][3]:
    {{< code-block lang="json" filename="cypress.json" >}}
