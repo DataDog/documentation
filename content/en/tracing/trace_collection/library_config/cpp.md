@@ -54,16 +54,16 @@ Sets the port where traces are sent (the port where the Agent is listening for c
 : **Since**: v0.1.0 <br>
 **Examples**:
   - HTTP URL: `http://localhost:8126`
-  - Unix Domain Socket: `unix:///var/run/datadog/apm.socket`
+  - Unix Domain Socket: `unix:///var/run/datadog/apm.socket` <br>
 Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. This URL supports HTTP, HTTPS, and Unix address schemes. If the [Agent configuration][3] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
 
 `DD_TRACE_RATE_LIMIT`
 : **Since**: 0.1.0 <br>
-**Default**: 200 <br>
+**Default**: `200` <br>
 Maximum number of spans to sample per-second.
 
 `DD_TRACE_SAMPLE_RATE`
-: **Since*: 0.1.0 <br>
+: **Since**: 0.1.0 <br>
 Sets the sampling rate for all generated traces. The value must be between `0.0` and `1.0` (inclusive). By default, the sampling rate is delegated to the Datadog Agent. If no sampling rate is set by the Datadog Agent, then the default is `1.0`.
 
 `DD_TRACE_SAMPLING_RULES` 
@@ -73,16 +73,16 @@ A JSON array of objects. Each object must have a `sample_rate`, and the `name` a
 
 `DD_SPAN_SAMPLING_RULES`
 : **Version**: v0.1.0 <br>
-**Default**: `nil`<br>
+**Default**: `[]`<br>
 **Example:**<br>
-  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'`
+  - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'` <br>
 A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
 For more information, see [Ingestion Mechanisms][2].<br>
 
 `DD_TRACE_PROPAGATION_STYLE_INJECT` 
 : **Since**: v0.1.6 <br>
 **Default**: `datadog,tracecontext` <br>
-**Accepted values**: `datadog`, `tracecontext`, `b3`
+**Accepted values**: `datadog`, `tracecontext`, `b3` <br>
 Propagation style(s) to use when injecting tracing headers.
 When multiple values are given, the order of matching is based on the order of values.
 TODO: write incompatibilities
@@ -90,7 +90,7 @@ TODO: write incompatibilities
 `DD_TRACE_PROPAGATION_STYLE_EXTRACT` 
 : **Since**: v0.1.6 <br>
 **Default**: `datadog,tracecontext` <br>
-**Accepted values**: `datadog`, `tracecontext`, `b3`
+**Accepted values**: `datadog`, `tracecontext`, `b3` <br>
 Propagation style(s) to use when extracting tracing headers. 
 When multiple values are given, the order of matching is based on the order of values.
 TODO: Ditto!
@@ -109,9 +109,11 @@ Adds the `hostname` tag with the result of `gethostname`.
 `DD_TRACE_STARTUP_LOGS`
 : **Since**: 0.1.0 <br>
 **Default**: `true` <br>
-Log the tracer configuration once the tracer is fully initialized. 
+Log the tracer configuration once the tracer is fully initialized. <br>
 **Log Example**: <br>
-`DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type":"datadog::tracing::ThreadedEventScheduler"},"flush_interval_milliseconds":2000,"http_client":{"type":"datadog::tracing::Curl"},"remote_configuration_url":"unix:///apm.sock/v0.7/config","request_timeout_milliseconds":2000,"shutdown_timeout_milliseconds":2000,"telemetry_url":"unix:///apm.sock/telemetry/proxy/api/v2/apmtelemetry","traces_url":"unix:///apm.sock/v0.4/traces"},"type":"datadog::tracing::DatadogAgent"},"default":{"environment":"dmehala-dev","service":"dd-trace-cpp-example","service_type":"web"},"environment_variables":{"DD_ENV":"dmehala-dev","DD_TRACE_AGENT_URL":"unix:///apm.sock"},"extraction_styles":["Datadog","tracecontext"],"injection_styles":["Datadog","tracecontext"],"report_traces":true,"runtime_id":"d71b5215-ec13-4e1f-b670-332a91a48b26","span_sampler":{"rules":[]},"tags_header_size":512,"trace_sampler":{"max_per_second":200.0,"rules":[]},"version":"[dd-trace-cpp version v0.1.12]"`
+````
+DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type":"datadog::tracing::ThreadedEventScheduler"},"flush_interval_milliseconds":2000,"http_client":{"type":"datadog::tracing::Curl"},"remote_configuration_url":"unix:///apm.sock/v0.7/config","request_timeout_milliseconds":2000,"shutdown_timeout_milliseconds":2000,"telemetry_url":"unix:///apm.sock/telemetry/proxy/api/v2/apmtelemetry","traces_url":"unix:///apm.sock/v0.4/traces"},"type":"datadog::tracing::DatadogAgent"},"default":{"environment":"dmehala-dev","service":"dd-trace-cpp-example","service_type":"web"},"environment_variables":{"DD_ENV":"dmehala-dev","DD_TRACE_AGENT_URL":"unix:///apm.sock"},"extraction_styles":["Datadog","tracecontext"],"injection_styles":["Datadog","tracecontext"],"report_traces":true,"runtime_id":"d71b5215-ec13-4e1f-b670-332a91a48b26","span_sampler":{"rules":[]},"tags_header_size":512,"trace_sampler":{"max_per_second":200.0,"rules":[]},"version":"[dd-trace-cpp version v0.1.12]"
+````
 
 `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
 : **Since**: 0.1.6 <br>
