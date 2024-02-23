@@ -1,7 +1,8 @@
 ---
-title: Adding Custom Tags and Metrics to Pipeline Traces
+title: Adding Custom Tags and Measures to Pipeline Traces
 kind: documentation
 aliases:
+  - /continuous_integration/pipelines/custom_tags_and_metrics
   - /continuous_integration/setup_pipelines/custom_tags_and_metrics
 further_reading:
   - link: "/continuous_integration/troubleshooting/"
@@ -16,19 +17,19 @@ further_reading:
 <div class="alert alert-warning">CI Visibility is not available for the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-The custom tags and metrics commands provide a way to add user-defined text and numerical tags to your CI Visibility
+The custom tags and measures commands provide a way to add user-defined text and numerical tags to your CI Visibility
 pipeline traces.
 These tags can be used to create facets (string value tags) or measures (numerical value tags). Facets and measures
 can then be used to search, graph, or monitor the pipelines.
 
 ## Compatibility
 
-Custom tags and metrics work with the following CI providers:
+Custom tags and measures work with the following CI providers:
 
 - Buildkite
 - CircleCI
 - GitLab (SaaS or self-hosted >= 14.1)
-- GitHub.com (SaaS) **Note:** For adding tags and metrics to GitHub jobs, see the [section][6] below.
+- GitHub.com (SaaS) **Note:** For adding tags and measures to GitHub jobs, see the [section][6] below.
 - Jenkins **Note:** For Jenkins, follow [these instructions][5] to set up custom tags in your pipelines.
 - Azure DevOps Pipelines
 
@@ -101,12 +102,12 @@ and then click the **create facet** option.
 
 {{< img src="ci/custom-tags-create-facet.mp4" alt="Facet creation for custom tag" style="width:100%;" video="true">}}
 
-## Add metrics to pipeline traces
+## Add measures to pipeline traces
 
 To add numerical tags to the pipeline span or the job span, run:
 
 {{< code-block lang="shell" >}}
-datadog-ci metric [--level <pipeline|job>] [--metrics <metrics>]
+datadog-ci measure [--level <pipeline|job>] [--measures <measures>]
 {{< /code-block >}}
 
 You must specify a valid [Datadog API key][3] using the environment variable `DATADOG_API_KEY`.
@@ -116,24 +117,24 @@ You must specify the [Datadog site][1] using the environment variable `DATADOG_S
 [1]: /getting_started/site/
 {{< /site-region >}}
 
-The following example adds the metric `error_rate` to the pipeline span:
+The following example adds the measure `error_rate` to the pipeline span:
 
 {{< code-block lang="shell" >}}
-datadog-ci metric --level pipeline --metrics "error_rate:0.56"
+datadog-ci measure --level pipeline --measures "error_rate:0.56"
 {{< /code-block >}}
 
-The following example adds a metric `binary.size` to the span for the currently running job:
+The following example adds a measure `binary.size` to the span for the currently running job:
 
 {{< code-block lang="shell" >}}
-datadog-ci metric --level job --metrics "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
+datadog-ci measure --level job --measures "binary.size:`ls -l dst/binary | awk '{print \$5}' | tr -d '\n'`"
 {{< /code-block >}}
 
-To create a measure, click the gear icon next to the metrics name in the [pipeline executions page][4]
+To create a measure, click the gear icon next to the measures name in the [pipeline executions page][4]
 and then click the **create measure** option.
 
-## Add tags and metrics to GitHub jobs
+## Add tags and measures to GitHub jobs
 
-To add tags and metrics to GitHub jobs, `datadog-ci CLI` version `2.29.0` or higher is required.
+To add tags and measures to GitHub jobs, `datadog-ci CLI` version `2.29.0` or higher is required.
 If the job name does not match the entry defined in the workflow configuration file (the GitHub [job ID][7]),
 the `DD_GITHUB_JOB_NAME` environment variable needs to be exposed, pointing to the job name. For example:
 1. If the job name is changed using the [name property][8]:
@@ -171,7 +172,7 @@ within parenthesis. The `DD_GITHUB_JOB_NAME` environment variable should then be
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://app.datadoghq.com/ci/pipeline-executions
 [5]: /continuous_integration/pipelines/jenkins?tab=usingui#setting-custom-tags-for-your-pipelines
-[6]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux#add-tags-and-metrics-to-github-jobs
+[6]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux#add-tags-and-measures-to-github-jobs
 [7]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_id
 [8]: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#name
 [9]: https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs#using-a-matrix-strategy
