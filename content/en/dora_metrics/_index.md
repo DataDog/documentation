@@ -222,12 +222,13 @@ Submit deployment events as described in [deployment frequency](#deployment-freq
 
 You are required to provide the following incident attributes:
 
-- `service`
+- `services` or `team`. At least one of them is required.
 - `started_at`
 
 You can optionally add the following incident attributes:
 
 - `finished_at` for *resolved incidents*. Required for [time to restore service](#time-to-restore-service).
+- `id` provide your own ID. Required to resolve a previously sent incident. When not provided the endpoint will return a random UUID that can be used in the next request.
 - `name` to describe the incident.
 - `severity`
 - `env` to accurately filter your DORA metrics by environment.
@@ -247,7 +248,8 @@ curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/dora/inciden
   {
     "data": {
       "attributes": {
-        "service": "shopist",
+        "services": ["shopist"],
+        "team": "shopist-devs"
         "started_at": 1693491974000000000,
         "finished_at": 1693491984000000000,
         "git": {
