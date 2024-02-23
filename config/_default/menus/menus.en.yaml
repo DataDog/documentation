@@ -771,7 +771,7 @@ main:
     parent: dev_tools
     identifier: ide_integrations
     weight: 7
-  - name: IntelliJ Platform
+  - name: JetBrains IDEs
     url: developers/ide_integrations/idea/
     parent: ide_integrations
     identifier: ide_integrations_idea
