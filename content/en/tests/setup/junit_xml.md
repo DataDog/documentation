@@ -7,7 +7,7 @@ code_lang_weight: 60
 aliases:
   - /continuous_integration/setup_tests/junit_upload
   - /continuous_integration/tests/junit_upload
-  - continuous_integration/tests/setup/junit_xml
+  - /continuous_integration/tests/setup/junit_xml
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -261,9 +261,10 @@ See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-e
 : Flag used to add extra verbosity to the output of the command<br/>
 **Default**: `false`<br/>
 
-
 Positional arguments
 : The file paths or directories in which the JUnit XML reports are located. If you pass a directory, the CLI looks for all `.xml` files in it.
+
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][17].
 
 The following environment variables are supported:
 
@@ -346,11 +347,11 @@ As a result, the JUnit XML tests have a `test.codeowners` tag with the owner of 
 To automatically add the `test.codeowners` tag to your tests, you need to:
 1. Have a `CODEOWNERS` file [in one of the allowed locations][15] in your repository.
 2. Provide the tests source file in your JUnit XML report. The following plugins do this automatically and add the `file` attribute to the `<testcase>` or `<testsuite>` elements in the XML report:
-    
+
     * phpunit
     * Most Python plugins (pytest, unittest)
     * Most Ruby plugins (ruby minitest)
-    
+
     If the XML does not have the `file` attribute, you need to [provide the source file manually](#manually-providing-the-testsourcefile-tag).
    Example of a valid report:
 
@@ -568,3 +569,4 @@ For more information, see [Code Coverage][10].
 [14]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-syntax
 [15]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-file-location
 [16]: https://docs.datadoghq.com/integrations/github/
+[17]: /getting_started/tagging/unified_service_tagging

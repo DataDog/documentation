@@ -418,6 +418,10 @@ az containerapp up \
 
 Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure->Serverless** to see your serverless metrics and traces.
 
+## Deployment
+
+{{% aas-workflow-linux %}}
+
 ## Additional configurations
 
 - **Advanced Tracing:** The Datadog Agent already provides some basic tracing for popular frameworks. Follow the [advanced tracing guide][2] for more information.

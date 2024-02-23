@@ -54,7 +54,7 @@ spec:
     apm:
       enabled: true
       unixDomainSocketConfig:
-        path: /var/run/datadog/apm.sock # default
+        path: /var/run/datadog/apm.socket # default
 ```
 
 When APM is enabled, the default configuration creates a directory on the host and mounts it within the Agent. The Agent then creates and listens on a socket file `/var/run/datadog/apm/apm.socket`. The application pods can then similarly mount this volume and write to this same socket. You can modify the path and socket with the `features.apm.unixDomainSocketConfig.path` configuration value.

@@ -18,8 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-rum-deployment-tracking/"
   tag: "Blog"
   text: "Troubleshoot faulty frontend deployments with Deployment Tracking in RUM"
-
-
+- link: "https://www.datadoghq.com/blog/change-overlays/"
+  tag: "Blog"
+  text: "Quickly spot and revert faulty deployments with Change Overlays"
 ---
 <div class="alert alert-warning">
     Change Overlays is in beta.

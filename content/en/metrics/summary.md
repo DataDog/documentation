@@ -20,7 +20,7 @@ The [Metrics Summary page][1] displays a list of your metrics reported to Datado
 
 Search your metrics by metric name or tag using the **Metric** or **Tag** search fields:
 
-{{< img src="metrics/summary/tag_advancedfiltering.mp4" alt="The metrics summary page with NOT team:* entered in the Tag search bar" video=true style="width:75%;">}}
+{{< img src="metrics/summary/tag_advancedfiltering3.mp4" alt="The metrics summary page with NOT team:* entered in the Tag search bar" video=true style="width:75%;">}}
 
 Tag filtering supports boolean and wildcard syntax so that you can quickly identify: 
 * Metrics that are tagged with a particular tag key, for example, `team`: `team:*`
@@ -38,8 +38,7 @@ The search bars provide the most comprehensive set of actions to filter the list
 - **Metric Type**: Differentiate between distribution and non-distribution metrics (counts, gauges, rates)
 - **Distribution Metric Origin**: The product from which the metric originated (for example, metrics generated from Logs or APM Spans)
 
-{{< img src="metrics/summary/facets3.jpg" alt="Metrics Facet Panel" style="width:75%;">}}
-
+{{< img src="metrics/summary/facets4.png" alt="Metrics Facet Panel" style="width:75%;">}}
 
 ## Configuration of multiple metrics 
 There are two buttons that allow you to configure multiple metrics at a time: 
@@ -136,6 +135,20 @@ For any particular tag key, you can:
 {{< img src="metrics/summary/updated_tags_table.mp4" alt="Tags Table" video=true style="width:75%;">}}
 
 [Learn more about tagging][5].
+
+## Metrics Related Assets
+
+<div class="alert alert-warning">
+Metrics Related Assets is in public beta.
+</div>
+
+{{< img src="metrics/summary/RelatedAssets.PublicBeta.png" alt="Related Assets for a specified metrics name" style="width:80%;">}}
+
+To determine the value of any metric name to your organization, use Metrics Related Assets. Metrics related assets refers to any dashboard, notebook, monitor, or SLO that queries a particular metric. 
+
+1. Scroll to the bottom of the metric's details side panel to the "Related Assets" section.
+2. Click the dropdown button to view the type of related asset you are interested in (dashboards, monitors, notebooks, SLOs). You can additionally leverage the search bar to validate specific assets.
+   
 
 ## Metrics without Limits™
 Metrics without Limits™ provides you control over the size of your custom metrics without requiring any agent or code-level changes. 

@@ -44,7 +44,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: temporal
-oauth: {}
 public_title: Temporal
 short_description: Temporal Cluster の健全性とパフォーマンスを監視します。
 supported_os:

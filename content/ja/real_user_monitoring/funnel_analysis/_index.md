@@ -26,7 +26,7 @@ title: ファネル分析
 
 {{< img src="real_user_monitoring/explorer/analytics/funnels-tab.png" alt="RUM 内の Funnel Analysis タブに移動します" style="width:100%;" >}}
 
-このビューから、開始するビューやアクションを構築し、プラスアイコンをクリックして追加のステップを構築します。ドラッグアンドドロップ機能でステップを移動することもできます。
+このビューから、開始するビューやアクションを選択し、プラスアイコンをクリックして追加のステップを構築します。ドラッグアンドドロップ機能でステップを移動することもできます。
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-building-a-funnel-1.mp4" alt="ネットワークマップを検索でフィルターする" video=true >}}
 

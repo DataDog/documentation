@@ -755,6 +755,8 @@ Use the [Datadog Log Pipeline API endpoint][1] with the following trace remapper
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note**: Trace IDs and span IDs are not displayed in your logs or log attributes in the UI.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
