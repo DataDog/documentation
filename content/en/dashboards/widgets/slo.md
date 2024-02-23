@@ -21,13 +21,13 @@ further_reading:
 
 Use the SLO Summary widget to visualize a [Service Level Objective (SLO)][1] on a dashboard.
 
-{{< img src="/dashboards/widgets/slo/slo_summary_widget_new.png" alt="metric-based slo summary widget graph editor " >}}
+{{< img src="/dashboards/widgets/slo/slo-summary-widget-new.png" alt="metric-based slo summary widget graph editor " >}}
 
 ### Configuration
 
 1. Select an SLO from the dropdown menu. 
 2. **For metric-based and Time Slice SLOs**: You can filter your query with tags and leverage [template variables][2] to dynamically scope your results:
-    - Take advantage of template variables by using the *filter by* field to scope the SLO statuses the widget displays. For example, `filter by $datacenter` scopes your SLO query to whatever value you choose in the dashboard for the *datacenter* template variable.
+    - Take advantage of template variables by using the *filter by* field to scope the SLO statuses the widget displays. For example, `filter by $env` scopes your SLO query to whatever value you choose in the dashboard for the *env* template variable.
     - Add additional scope and context to your SLO metric queries even if the tags were not included in the original SLO configuration. For example, if the original SLO query is `sum:trace.flask.request.hits{*} by {resource_name}.as_count()` and you filter by `env:prod` in the widget, your data will be scoped to only that from your `prod` environment.
 2. Set up to three different time windows.
 3. Select your display preferences.
