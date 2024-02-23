@@ -51,7 +51,7 @@ Defining and tracking DORA metrics can help you identify areas of improvement fo
 
 ## Set up DORA Metrics
 
-Services tracked for DORA Metrics must be registered in the [Service Catalog][2]. For more information, see [Adding Entries to Service Catalog][3]. The `team` ownership from the Service Catalog is automatically associated with all metrics.
+Services tracked for the DORA Metrics Deployment Frequency and Change Lead Time must be registered in the [Service Catalog][2]. For more information, see [Adding Entries to Service Catalog][3]. The `team` ownership from the Service Catalog is automatically associated with all metrics.
 
 ### Deployment frequency
 
@@ -222,13 +222,13 @@ Submit deployment events as described in [deployment frequency](#deployment-freq
 
 You are required to provide the following incident attributes:
 
-- `services` or `team`. At least one of them is required.
+- `services` or `team`. At least one is required.
 - `started_at`
 
 You can optionally add the following incident attributes:
 
 - `finished_at` for *resolved incidents*. Required for [time to restore service](#time-to-restore-service).
-- `id` provide your own ID. Required to resolve a previously sent incident. When not provided the endpoint will return a random UUID that can be used in the next request.
+- `id` for identifying incidents when they are created and resolved. This attribute is user-generated; when not provided, the endpoint returns a Datadog-generated UUID."
 - `name` to describe the incident.
 - `severity`
 - `env` to accurately filter your DORA metrics by environment.
