@@ -20,7 +20,7 @@ disable_sidebar: true
 | Oracle 21c | {{< X >}}   | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}           | {{< X >}}                    |
 
 ## Supported architectures
-- multi-tenant
+- multi-tenant (CDB/PDB)
 - non-CDB
 
 ## Setup
