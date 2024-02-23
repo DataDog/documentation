@@ -2,7 +2,7 @@
 title: Producing Delta Temporality Metrics with OpenTelemetry
 kind: documentation
 aliases:
-  - /opentelemetry/guides/otlp_delta_temporality/
+  - /opentelemetry/guide/otlp_delta_temporality/
 further_reading:
 - link: "/metrics/open_telemetry/otlp_metric_types"
   tag: "Documentation"

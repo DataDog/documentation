@@ -3,7 +3,7 @@ title: Management
 kind: documentation
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/management/"
-  tag: "Documentation"
+  tag: "OpenTelemetry"
   text: "OpenTelemetry Collector Management"
 ---
 

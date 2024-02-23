@@ -27,6 +27,17 @@ The OpenTelemetry Collector is a vendor-agnostic agent process for collecting an
 
 {{< img src="metrics/otel/datadog_exporter.png" alt="Application Instrumented Library, Cloud Integrations, and Other Monitoring Solutions (for example Prometheus) -> Datadog Exporter inside OpenTelemetry Collector -> Datadog" style="width:100%;">}}
 
+## Using the Collector
+
+The following documentation describes how to deploy, configure, and manage the Collector:
+
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/collector_exporter/deployment/" >}}Deployment{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/collector_exporter/configuration/" >}}Configuration{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/collector_exporter/management/" >}}Management{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/collector_exporter/integrations/" >}}Integrations{{< /nextlink >}}
+{{< /whatsnext >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

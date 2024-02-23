@@ -6,7 +6,7 @@ further_reading:
   tag: "Documentation"
   text: "Configuring the OpenTelemetry Collector"
 - link: "https://opentelemetry.io/docs/collector/deployment/"
-  tag: "Documentation"
+  tag: "OpenTelemetry"
   text: "OpenTelemetry Collector Deployment"
 ---
 

@@ -2,7 +2,7 @@
 title: Ingestion Sampling with OpenTelemetry
 kind: documentation
 aliases:
-  - /opentelemetry/guides/ingestion_sampling_with_opentelemetry
+  - /opentelemetry/guide/ingestion_sampling_with_opentelemetry/
 further_reading:
 - link: "/tracing/guide/trace_ingestion_volume_control"
   tag: "Guide"
