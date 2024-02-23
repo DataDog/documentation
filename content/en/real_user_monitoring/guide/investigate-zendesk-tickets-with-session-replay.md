@@ -31,7 +31,7 @@ From the replay page, you can view a list of the user's actions, along with the 
 
 {{< img src="real_user_monitoring/guide/zendesk/session-replay-details-button.png" alt="Hover view of a session replay event with the Details button highlighted" style="width:60%;" >}}
 
-You can also add the replay to a playlist to group related issues together for easier browsing and sharing. See the [Session Replay Playlists documentation][4].
+You can also add the replay to a playlist to group related issues together for easier browsing and sharing. For more information, see the [Session Replay Playlists documentation][4].
 
 [1]: /integrations/zendesk/#zendesk-rum-app-installation
 [2]: https://www.zendesk.com/sg/marketplace/apps/support/993138/datadog-rum/?queryID=fb54e1e367559c15de7e8a0f1eb8aa6f
