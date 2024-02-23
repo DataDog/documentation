@@ -3,13 +3,14 @@ title: RUM Unity Monitoring Setup
 kind: documentation
 is_beta: true
 private: true
+is_public: false
 disable_toc: false
 description: Collect RUM data from your Unity Mobile projects.
 aliases:
     - /real_user_monitoring/unity/
     - /real_user_monitoring/unity/setup
-code_lang: unity
-type: multi-code-lang
+# code_lang: unity
+# type: multi-code-lang
 code_lang_weight: 30
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-unity
@@ -29,7 +30,7 @@ further_reading:
 ## Overview
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Unity Monitoring is in private beta.
+Unity Monitoring is in private beta. To request access, reach out to your Customer Success Manager.
 {{< /beta-callout >}}
 
 Datadog Real User Monitoring (RUM) enables you to visualize and analyze user journeys of your application's individual users.

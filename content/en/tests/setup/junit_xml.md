@@ -7,7 +7,7 @@ code_lang_weight: 60
 aliases:
   - /continuous_integration/setup_tests/junit_upload
   - /continuous_integration/tests/junit_upload
-  - continuous_integration/tests/setup/junit_xml
+  - /continuous_integration/tests/setup/junit_xml
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -347,11 +347,11 @@ As a result, the JUnit XML tests have a `test.codeowners` tag with the owner of 
 To automatically add the `test.codeowners` tag to your tests, you need to:
 1. Have a `CODEOWNERS` file [in one of the allowed locations][15] in your repository.
 2. Provide the tests source file in your JUnit XML report. The following plugins do this automatically and add the `file` attribute to the `<testcase>` or `<testsuite>` elements in the XML report:
-    
+
     * phpunit
     * Most Python plugins (pytest, unittest)
     * Most Ruby plugins (ruby minitest)
-    
+
     If the XML does not have the `file` attribute, you need to [provide the source file manually](#manually-providing-the-testsourcefile-tag).
    Example of a valid report:
 
