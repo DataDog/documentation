@@ -6,14 +6,14 @@ description: 지정된 유형의 감사 추적 이벤트가 감지되거나 임�
 further_reading:
 - link: /account_management/audit_trail/
   tag: 설명서
-  text: Audit Trail에 대해 자세히 알아보기
+  text: 감사 추적에 대해 자세히 알아보기
 - link: /monitors/notifications/
   tag: 설명서
-  text: Configure your monitor notifications
+  text: 모니터 알림 설정
 - link: /monitors/downtimes/
   tag: 설명서
-  text: Schedule a downtime to mute a monitor
-kind: 설명서
+  text: 모니터 숨김을 위한 다운타임 예약
+kind: documentation
 title: 감사 추적 모니터
 ---
 
