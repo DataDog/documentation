@@ -615,6 +615,16 @@ main:
     identifier: otel_guides
     parent: opentelemetry_top_level
     weight: 5
+  - name: Interoperability
+    url: opentelemetry/guide/otel_api_tracing_interoperability/
+    identifier: otel_interoperability
+    parent: otel_guides
+    weight: 501
+  - name: Ingestion Sampling
+    url: opentelemetry/guide/ingestion_sampling_with_opentelemetry
+    identifier: otel_guides_ingestion_sampling
+    parent: otel_guides
+    weight: 502
   - name: Developers
     url: developers/
     pre: dev-code
