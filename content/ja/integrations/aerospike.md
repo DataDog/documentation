@@ -11,7 +11,9 @@ assets:
     events:
       creates_events: false
     metrics:
-      check: aerospike.uptime
+      check:
+      - aerospike.uptime
+      - aerospike.namespace.memory_free_pct
       metadata_path: metadata.csv
       prefix: aerospike.
     service_checks:
