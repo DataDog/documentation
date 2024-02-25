@@ -1365,7 +1365,7 @@ main:
     url: /api_catalog/owners_and_tags/
     identifier: api_catalog_ownership
     parent: api_catalog
-    weight: 2000
+    weight: 2
   - name: Monitoring APIs
     url: /api_catalog/monitor_apis/
     identifier: api_catalog_monitor
