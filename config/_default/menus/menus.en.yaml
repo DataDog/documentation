@@ -1360,7 +1360,7 @@ main:
     url: /api_catalog/explore_apis/
     identifier: api_catalog_explore
     parent: api_catalog
-    weight: 1000
+    weight: 1
   - name: Assigning Owners
     url: /api_catalog/owners_and_tags/
     identifier: api_catalog_ownership
