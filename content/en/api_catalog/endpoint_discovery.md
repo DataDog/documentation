@@ -39,7 +39,7 @@ Datadog::Tracing.active_trace.set_tag('datadog.api_catalog.route', '/products/:i
 After you set this tag, you should see this tag in spans:
 {{< img src="tracing/api_catalog/api-catalog-discovery-span.png" alt="ALT TEXT" style="width:100%;" >}}
 
-Which will lead to the creation of the following endpoint in the API Catalog:
+This leads to the endpoint displaying in the API Catalog:
 {{< img src="tracing/api_catalog/api-catalog-discovery-result.png" alt="ALT TEXT" style="width:100%;" >}}
 
 ## Further reading
