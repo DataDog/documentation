@@ -1,5 +1,5 @@
 ---
-title: Endpoint Discovery from APM
+title: Discovering Endpoints from APM
 kind: documentation
 is_beta: true
 further_reading:
