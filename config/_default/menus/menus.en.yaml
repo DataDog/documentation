@@ -1390,7 +1390,7 @@ main:
     url: /api_catalog/endpoint_discovery/
     identifier: endpoint_discovery
     parent: api_catalog
-    weight: 5550
+    weight: 7
   - name: Troubleshooting
     url: /api_catalog/troubleshoot/
     identifier: api_catalog_troubleshoot
