@@ -1385,7 +1385,7 @@ main:
     url: /api_catalog/api_catalog_api/
     identifier: api_catalog_api
     parent: api_catalog
-    weight: 5500
+    weight: 6
   - name: Endpoint Discovery from APM
     url: /api_catalog/endpoint_discovery/
     identifier: endpoint_discovery
