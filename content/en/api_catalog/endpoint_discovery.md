@@ -36,7 +36,7 @@ span.SetTag("datadog.api_catalog.route", "/products/:id")
 Datadog::Tracing.active_trace.set_tag('datadog.api_catalog.route', '/products/:id')
 {{< /code-block >}}
 
-Once you set this tag, you should expect to see this tag in spans:
+After you set this tag, you should see this tag in spans:
 {{< img src="tracing/api_catalog/api-catalog-discovery-span.png" alt="ALT TEXT" style="width:100%;" >}}
 
 Which will lead to the creation of the following endpoint in the API Catalog:
