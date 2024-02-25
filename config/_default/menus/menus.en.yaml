@@ -1375,7 +1375,7 @@ main:
     url: /api_catalog/add_entries/
     identifier: api_catalog_entries
     parent: api_catalog
-    weight: 4000
+    weight: 4
   - name: Adding Metadata to APIs
     url: /api_catalog/add_metadata/
     identifier: api_catalog_metadata
