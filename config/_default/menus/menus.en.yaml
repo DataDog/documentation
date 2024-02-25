@@ -1380,7 +1380,7 @@ main:
     url: /api_catalog/add_metadata/
     identifier: api_catalog_metadata
     parent: api_catalog
-    weight: 5000
+    weight: 5
   - name: API Catalog API
     url: /api_catalog/api_catalog_api/
     identifier: api_catalog_api
