@@ -1395,7 +1395,7 @@ main:
     url: /api_catalog/troubleshoot/
     identifier: api_catalog_troubleshoot
     parent: api_catalog
-    weight: 6000
+    weight: 8
   - name: Service Level Objectives
     url: service_management/service_level_objectives/
     pre: slos
