@@ -1422,11 +1422,21 @@ main:
     identifier: api_catalog_metadata
     parent: api_catalog
     weight: 5
+  - name: API Catalog API
+    url: /api_catalog/api_catalog_api/
+    identifier: api_catalog_api
+    parent: api_catalog
+    weight: 6
+  - name: Endpoint Discovery from APM
+    url: /api_catalog/endpoint_discovery/
+    identifier: endpoint_discovery
+    parent: api_catalog
+    weight: 7
   - name: Troubleshooting
     url: /api_catalog/troubleshoot/
     identifier: api_catalog_troubleshoot
     parent: api_catalog
-    weight: 6
+    weight: 8
   - name: Service Level Objectives
     url: service_management/service_level_objectives/
     pre: slos
