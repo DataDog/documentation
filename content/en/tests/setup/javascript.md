@@ -7,7 +7,7 @@ code_lang_weight: 20
 aliases:
   - /continuous_integration/setup_tests/javascript
   - /continuous_integration/tests/javascript
-  - continuous_integration/tests/setup/javascript
+  - /continuous_integration/tests/setup/javascript
 further_reading:
     - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"
@@ -265,7 +265,7 @@ Read more about custom metrics in [Add Custom Metrics Guide][2]
 
 ### Cypress version 10 or later
 
-Use the Cypress API documentation to [learn how to write plugins][1] for `cypress>=10`.
+Use the Cypress API documentation to [learn how to use plugins][1] for `cypress>=10`.
 
 In your `cypress.config.js` file, set the following:
 
@@ -310,7 +310,7 @@ module.exports = defineConfig({
 
 ### Cypress before version 10
 
-These are the instructions if you're using a version older than `cypress@10`.
+These are the instructions if you're using a version older than `cypress@10`. See the [Cypress documentation][9] for more information about migrating to a newer version.
 
 1. Set [`pluginsFile`][2] to `"dd-trace/ci/cypress/plugin"`, for example, through [`cypress.json`][3]:
    {{< code-block lang="json" filename="cypress.json" >}}
@@ -391,7 +391,7 @@ Read more about custom metrics in [Add Custom Metrics Guide][6].
 If the browser application being tested is instrumented using [Browser Monitoring][7], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][8].
 
 
-[1]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
+[1]: https://docs.cypress.io/guides/tooling/plugins-guide#Using-a-plugin
 [2]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
 [3]: https://docs.cypress.io/guides/references/configuration#cypress-json
 [4]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
@@ -399,6 +399,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 [6]: /continuous_integration/guides/add_custom_metrics/?tab=javascripttypescript
 [7]: /real_user_monitoring/browser/#setup
 [8]: /continuous_integration/guides/rum_integration/
+[9]: https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-100
 {{% /tab %}}
 
 {{< /tabs >}}

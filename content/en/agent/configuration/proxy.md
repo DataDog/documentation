@@ -348,7 +348,7 @@ frontend processes-forwarder
 
 # This declares the endpoint where your Agents connects for
 # sending Logs (e.g the value of "logs.config.logs_dd_url")
-# If sending logs with use_http: true
+# If sending logs with force_use_http: true
 frontend logs_http_frontend
     bind *:3838
     mode http
@@ -614,7 +614,7 @@ frontend processes-forwarder
 
 # This declares the endpoint where your Agents connect for
 # sending Logs (e.g the value of "logs.config.logs_dd_url")
-# If sending logs with use_http: true
+# If sending logs with force_use_http: true
 frontend logs_http_frontend
     bind *:3838 ssl crt <PATH_TO_PROXY_CERTIFICATE_PEM>
     mode http
@@ -829,7 +829,7 @@ process_config:
     process_dd_url: <SCHEME>://haproxy.example.com:3837
 
 logs_config:
-    use_http: true
+    force_use_http: true
     logs_dd_url: haproxy.example.com:3838
     # Comment the line below to use encryption between the Agent and HAProxy
     logs_no_ssl: true
@@ -1006,7 +1006,7 @@ stream {
         proxy_pass process.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3838; #listen for logs with use_http: true
+        listen 3838; #listen for logs with force_use_http: true
         proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass agent-http-intake.logs.{{< region-param key="dd_site" >}}:443;
@@ -1123,7 +1123,7 @@ stream {
         proxy_pass process.{{< region-param key="dd_site" >}}:443;
     }
     server {
-        listen 3838 ssl; #listen for logs with use_http: true
+        listen 3838 ssl; #listen for logs with force_use_http: true
         proxy_ssl_verify on;
         proxy_ssl on;
         proxy_pass agent-http-intake.logs.{{< region-param key="dd_site" >}}:443;
@@ -1197,7 +1197,7 @@ process_config:
     process_dd_url: <SCHEME>://nginx.example.com:3837
 
 logs_config:
-    use_http: true
+    force_use_http: true
     logs_dd_url: nginx.example.com:3838
     # Comment the line below to use encryption between the Agent and NGINX
     logs_no_ssl: true

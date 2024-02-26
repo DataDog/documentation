@@ -542,6 +542,7 @@ To include a comment in the monitor message that only displays in the monitor ed
 
 ```text
 {{!-- this is a comment --}}
+{{!-- this is a comment }}
 ```
 
 ### Raw format

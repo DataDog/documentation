@@ -5,8 +5,8 @@ code_lang: python
 type: multi-code-lang
 code_lang_weight: 30
 aliases:
-  - continuous_integration/intelligent_test_runner/python/
-  - continuous_integration/intelligent_test_runner/setup/python/
+  - /continuous_integration/intelligent_test_runner/python/
+  - /continuous_integration/intelligent_test_runner/setup/python/
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
