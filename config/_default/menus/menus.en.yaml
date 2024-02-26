@@ -660,11 +660,6 @@ main:
     identifier: otel_rum
     parent: otel_interoperability
     weight: 804
-  - name: Producing Delta Temporality Metrics
-    url: /opentelemetry/interoperability/otlp_delta_temporality/
-    identifier: otel_delta
-    parent: otel_interoperability
-    weight: 805
   - name: Guides
     url: opentelemetry/guide/
     identifier: otel_guides
