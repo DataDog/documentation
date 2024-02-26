@@ -57,5 +57,5 @@ If you're using a managed destination, such as Datadog, Observability Pipelines 
 
 {{< img src="observability_pipelines/production_deployment_overview/external_disaster_recovery.png" alt="A diagram showing Observability Pipelines Workers in different zones, and all sending data to the same disaster recovery destination" style="width:75%;" >}}
 
-[1]: /observability_pipelines/architecture/capacity_planning_scaling
-[2]: /observability_pipelines/architecture/networking
+[1]: /observability_pipelines/legacy/architecture/capacity_planning_scaling
+[2]: /observability_pipelines/legacy/architecture/networking

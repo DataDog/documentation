@@ -3,7 +3,7 @@ title: Route Logs in Datadog-Rehydratable Format to Amazon S3
 kind: documentation
 disable_toc: false
 further_reading:
-  - link: "/observability_pipelines/working_with_data/"
+  - link: "/observability_pipelines/legacy/working_with_data/"
     tag: "Documentation"
     text: "Working with data in Observability Pipelines"
   - link: "/logs/log_configuration/archives/"
@@ -294,7 +294,7 @@ See [Rehydrating from Archives][10] for instructions on how to rehydrate your ar
 [4]: https://app.datadoghq.com/logs/pipelines/log-forwarding
 [5]: /logs/log_configuration/archives/#advanced-settings
 [6]: /logs/log_configuration/archives
-[7]: /observability_pipelines/setup/datadog_with_archiving#install-the-observability-pipelines-worker
+[7]: /observability_pipelines/legacy/setup/datadog_with_archiving#install-the-observability-pipelines-worker
 [8]: https://app.datadoghq.com/observability-pipelines/
-[9]: /observability_pipelines/reference/sinks/#datadogarchivessink
+[9]: /observability_pipelines/legacy/reference/sinks/#datadogarchivessink
 [10]: /logs/log_configuration/rehydrating/

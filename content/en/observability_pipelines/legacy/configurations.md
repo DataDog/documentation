@@ -6,10 +6,10 @@ aliases:
   - /observability_pipelines/vector_configurations/
   - /observability_pipelines/reference/
 further_reading:
-  - link: /observability_pipelines/working_with_data/
+  - link: /observability_pipelines/legacy/working_with_data/
     tag: Documentation
     text: Working with data using Observability Pipelines
-  - link: /observability_pipelines/setup
+  - link: /observability_pipelines/legacy/setup
     tag: Documentation
     text: Set up Observability Pipelines
 ---
@@ -287,6 +287,6 @@ If successfully setup, the parsed demo logs are printed in JSON format.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/reference/sources/
-[2]: /observability_pipelines/reference/transforms/
-[3]: /observability_pipelines/reference/sinks/
+[1]: /observability_pipelines/legacy/reference/sources/
+[2]: /observability_pipelines/legacy/reference/transforms/
+[3]: /observability_pipelines/legacy/reference/sinks/

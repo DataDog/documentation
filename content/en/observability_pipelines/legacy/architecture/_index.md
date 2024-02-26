@@ -31,9 +31,9 @@ This guide walks you through the recommended aggregator architecture for new Obs
 - Using the Observability Pipelines Worker as part of your [disaster recovery][7].
 - More [advanced configurations][8] for deploying multiple aggregators, publish-subscribe systems, and global aggregation.
 
-[3]: /observability_pipelines/architecture/optimize
-[4]: /observability_pipelines/architecture/capacity_planning_scaling
-[5]: /observability_pipelines/architecture/networking
-[6]: /observability_pipelines/architecture/preventing_data_loss
-[7]: /observability_pipelines/architecture/availability_disaster_recovery
-[8]: /observability_pipelines/architecture/advanced_configurations
+[3]: /observability_pipelines/legacy/architecture/optimize
+[4]: /observability_pipelines/legacy/architecture/capacity_planning_scaling
+[5]: /observability_pipelines/legacy/architecture/networking
+[6]: /observability_pipelines/legacy/architecture/preventing_data_loss
+[7]: /observability_pipelines/legacy/architecture/availability_disaster_recovery
+[8]: /observability_pipelines/legacy/architecture/advanced_configurations

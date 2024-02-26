@@ -2,7 +2,7 @@
 title: Set Up Observability Pipelines to Send Logs in Datadog-Rehydratable Format to Amazon S3 and Datadog
 kind: Documentation
 further_reading:
-  - link: "/observability_pipelines/production_deployment_overview/"
+  - link: "/observability_pipelines/legacy/production_deployment_overview/"
     tag: "Documentation"
     text: "Production deployment design and principles for the Observability Pipelines Worker"
   - link: "https://dtdg.co/d22op"
@@ -73,7 +73,7 @@ See [Best Practices for OPW Aggregator Architecture][6] for production-level req
 [1]: https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html
 [2]: /resources/yaml/observability_pipelines/helm/storageclass.yaml
 [3]: https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
-[6]: /observability_pipelines/architecture/
+[6]: /observability_pipelines/legacy/architecture/
 
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
@@ -365,7 +365,7 @@ service.beta.kubernetes.io/aws-load-balancer-attributes: load_balancing.cross_zo
 See [AWS Load Balancer Controller][3] for more details.
 
 [1]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/
-[2]: /observability_pipelines/architecture/capacity_planning_scaling/
+[2]: /observability_pipelines/legacy/architecture/capacity_planning_scaling/
 [3]: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/service/annotations/#load-balancer-attributes
 {{% /tab %}}
 
@@ -436,7 +436,7 @@ See [Rehydrating from Archives][4] for instructions on how to rehydrate your arc
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/#what-is-observability-pipelines-and-the-observability-pipelines-worker
+[1]: /observability_pipelines/legacy/
 [2]: /account_management/api-app-keys/#api-keys
 [3]: https://app.datadoghq.com/observability-pipelines/create
 [4]: /logs/log_configuration/rehydrating/

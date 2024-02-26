@@ -5,10 +5,10 @@ disable_toc: false
 private: true
 is_beta: true
 further_reading:
-- link: "/observability_pipelines/setup/"
+- link: "/observability_pipelines/legacy/setup/"
   tag: "Documentation"
   text: "Set up Observability Pipelines"
-- link: "/observability_pipelines/working_with_data/"
+- link: "/observability_pipelines/legacy/working_with_data/"
   tag: "Documentation"
   text: "Working with data in Observability Pipelines"
 - link: "/monitors/configuration/"
@@ -197,9 +197,9 @@ sinks:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/reference/transforms/#sample
-[3]: /observability_pipelines/reference/sinks/
-[4]: /observability_pipelines/configurations/
+[2]: /observability_pipelines/legacy/reference/transforms/#sample
+[3]: /observability_pipelines/legacy/reference/sinks/
+[4]: /observability_pipelines/legacy/configurations/
 [5]: https://app.datadoghq.com/monitors/create
 [6]: /monitors/types/metric/
 [7]: /monitors/notify/
@@ -208,4 +208,4 @@ sinks:
 [10]: /monitors/notify/#priority
 [11]: /monitors/notify/#permissions
 [12]: /logs/log_configuration/archives/
-[13]: /observability_pipelines/guide/route_logs_in_datadog_rehydratable_format_to_amazon_s3/
+[13]: /observability_pipelines/legacy/guide/route_logs_in_datadog_rehydratable_format_to_amazon_s3/

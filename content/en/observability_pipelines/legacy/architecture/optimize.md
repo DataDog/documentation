@@ -66,4 +66,4 @@ See [Preventing Data Loss][1] for more information on why disks are used in this
 
 Choose a Linux-based operating system with glibc (GNU) ≥ 2.14 (released in 2011) if possible. Observability Pipelines Worker runs on other platforms, but this combination produces the best performance in Datadog's benchmarks.
 
-[1]: /observability_pipelines/architecture/preventing_data_loss
+[1]: /observability_pipelines/legacy/architecture/preventing_data_loss

@@ -4,10 +4,10 @@ kind: guide
 aliases:
   - /integrations/observability_pipelines/guide/control_log_volume_and_size/
 further_reading:
-  - link: "/observability_pipelines/working_with_data/"
+  - link: "/observability_pipelines/legacy/working_with_data/"
     tag: "Documentation"
     text: "Working with data using Observability Pipelines"
-  - link: /observability_pipelines/configurations/
+  - link: /observability_pipelines/legacy/configurations/
     tag: Documentation
     text: Learn more about Observability Pipelines configurations
 ---
@@ -493,13 +493,13 @@ del(.unecessary_tag_field)"""
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/setup/
-[2]: /observability_pipelines/configurations/
-[3]: /observability_pipelines/reference/transforms/#dedupe
-[4]: /observability_pipelines/reference/transforms/#filter
-[5]: /observability_pipelines/reference/processing_language/
+[1]: /observability_pipelines/legacy/setup/
+[2]: /observability_pipelines/legacy/configurations/
+[3]: /observability_pipelines/legacy/reference/transforms/#dedupe
+[4]: /observability_pipelines/legacy/reference/transforms/#filter
+[5]: /observability_pipelines/legacy/reference/processing_language/
 [6]: /logs/explorer/search_syntax/
-[7]: /observability_pipelines/reference/transforms/#sample
-[8]: /observability_pipelines/reference/transforms/#logtometric
-[9]: /observability_pipelines/reference/transforms/#reduce
+[7]: /observability_pipelines/legacy/reference/transforms/#sample
+[8]: /observability_pipelines/legacy/reference/transforms/#logtometric
+[9]: /observability_pipelines/legacy/reference/transforms/#reduce
 

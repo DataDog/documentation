@@ -2,10 +2,10 @@
 title: Ingest Amazon S3 Logs with the Observability Pipelines Worker
 kind: guide
 further_reading:
-  - link: "/observability_pipelines/working_with_data/"
+  - link: "/observability_pipelines/legacy/working_with_data/"
     tag: "Documentation"
     text: "Working with data using Observability Pipelines"
-  - link: /observability_pipelines/configurations/
+  - link: /observability_pipelines/legacy/configurations/
     tag: Documentation
     text: Learn more about Observability Pipelines configurations
 ---
@@ -206,12 +206,12 @@ Then the `merge` function collapses the data in `.Records` to the top level so t
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/#observability-pipelines-worker
-[2]: /observability_pipelines/setup/
-[3]: /observability_pipelines/configurations/
+[1]: /observability_pipelines/legacy/#observability-pipelines-worker
+[2]: /observability_pipelines/legacy/setup/
+[3]: /observability_pipelines/legacy/configurations/
 [4]: https://console.aws.amazon.com/sqs/home
 [5]: https://console.aws.amazon.com/s3/
 [6]: https://console.aws.amazon.com/iam/
-[7]: /observability_pipelines/reference/sources/#awss3
-[8]: /observability_pipelines/reference/transforms/
-[9]: /observability_pipelines/reference/sinks/
+[7]: /observability_pipelines/legacy/reference/sources/#awss3
+[8]: /observability_pipelines/legacy/reference/transforms/
+[9]: /observability_pipelines/legacy/reference/sinks/

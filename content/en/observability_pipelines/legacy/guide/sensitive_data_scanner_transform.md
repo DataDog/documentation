@@ -5,10 +5,10 @@ disable_toc: false
 private: true
 is_beta: true
 further_reading:
-- link: "/observability_pipelines/setup/"
+- link: "/observability_pipelines/legacy/setup/"
   tag: "Documentation"
   text: "Set up Observability Pipelines"
-- link: "/observability_pipelines/working_with_data/"
+- link: "/observability_pipelines/legacy/working_with_data/"
   tag: "Documentation"
   text: "Working with data in Observability Pipelines"
 ---

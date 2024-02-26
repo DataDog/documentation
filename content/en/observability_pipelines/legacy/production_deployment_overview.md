@@ -139,9 +139,9 @@ Optimize your system of analysis for analysis while reducing costs by doing the 
 - Consider sampling logs with `level` `info` or lower to reduce their volume
 
 [1]: https://wiki.archlinux.org/title/Domain_name_resolution
-[2]: /observability_pipelines/reference/sources/
+[2]: /observability_pipelines/legacy/reference/sources/
 [4]: /network_monitoring/performance/
-[5]: /observability_pipelines/architecture/
+[5]: /observability_pipelines/legacy/architecture/
 
 ---
 

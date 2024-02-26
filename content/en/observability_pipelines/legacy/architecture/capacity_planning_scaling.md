@@ -96,5 +96,5 @@ Autoscaling should be based on average CPU utilization. For the vast majority of
 - Average CPU with a 85% utilization target.
 - A five minute stabilization period for scaling up and down.
 
-[1]: /observability_pipelines/architecture/advanced_configurations
-[2]: /observability_pipelines/architecture/networking
+[1]: /observability_pipelines/legacy/architecture/advanced_configurations
+[2]: /observability_pipelines/legacy/architecture/networking

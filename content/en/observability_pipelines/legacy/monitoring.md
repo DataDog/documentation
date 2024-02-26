@@ -60,7 +60,7 @@ Resource utilization graphs are available for the following metrics:
 | Lag time rate of change   | {{< X >}} |           |              | <=0    | >0      | >1       | Indicates whether there is a substantial delay between when the event is generated and when the Worker receives the data. If there is a delay, then the Worker is falling behind in receiving data from the source.<br><br> A value of `0` indicates there is no additional lag from when the observability data is generated and when the Worker receives the data. A value equal to or greater than `1` indicates that there is backpressure and a bottleneck. |
 | Disk usage                |           |           |{{< X >}}     | >=0.20 | > 0.20  | N/A     | Measures how full a given disk is. <br><br> A value of `1` indicates that no data can be stored in the disk. A value of `0` indicates that the disk is empty. |
 
-[1]: /observability_pipelines/
-[2]: /observability_pipelines/architecture/
-[3]: https://app.datadoghq.com/observability-pipelines/
-[4]: /observability_pipelines/troubleshooting/#investigate-diagnostic-logs
+[1]: /observability_pipelines/legacy/
+[2]: /observability_pipelines/legacy/architecture/
+[3]: https://app.datadoghq.com/observability-pipelines/legacy/
+[4]: /observability_pipelines/legacy/troubleshooting/#investigate-diagnostic-logs

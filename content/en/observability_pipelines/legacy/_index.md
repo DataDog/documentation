@@ -4,13 +4,13 @@ kind: Documentation
 aliases:
   - /integrations/observability_pipelines/
 further_reading:
-  - link: /observability_pipelines/setup/
+  - link: /observability_pipelines/legacy/setup/
     tag: Documentation
     text: Set up Observability Pipelines
   - link: https://www.datadoghq.com/blog/datadog-observability-pipelines/
     tag: Blog
     text: Take control of your telemetry data with Observability Pipelines
-  - link: /observability_pipelines/configurations/
+  - link: /observability_pipelines/legacy/configurations/
     tag: Documentation
     text: Learn more about Observability Pipelines configurations
 cascade:
@@ -63,7 +63,7 @@ The following documents are for the Observability Pipelines Worker 1.8 and older
 {{< whatsnext desc="Guides " >}}
     {{< nextlink href="observability_pipelines/legacy/guide/control_log_volume_and_size/" >}}Control Log Volume and Size{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/legacy/guide/ingest_aws_s3_logs_with_the_observability_pipelines_worker/" >}}Ingest Amazon S3 Logs with the Observability Pipelines Worker{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/legacy/guide/ingest_aws_s3_logs_with_the_observability_pipelines_worker/" >}}Route Logs in Datadog-Rehydratable Format to Amazon S3{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/legacy/guide/route_logs_in_datadog_rehydratable_format_to_Amazon_S3" >}}Route Logs in Datadog-Rehydratable Format to Amazon S3{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Architecture" >}}

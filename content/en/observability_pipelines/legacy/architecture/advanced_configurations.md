@@ -60,5 +60,5 @@ In the above diagram, the tier two aggregators receive an aggregated sub-stream 
 - Limit global aggregation to tasks that can reduce data, such as computing global histograms. Never send all data to your global aggregators.
 - Continue to use your local aggregators to process and deliver most data so that you do not introduce a single point of failure.
 
-[1]: /observability_pipelines/architecture/networking
-[2]: /observability_pipelines/architecture/availability_disaster_recovery
+[1]: /observability_pipelines/legacy/architecture/networking
+[2]: /observability_pipelines/legacy/architecture/availability_disaster_recovery

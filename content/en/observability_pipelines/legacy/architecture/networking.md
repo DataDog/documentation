@@ -68,5 +68,5 @@ Compression can impose a 50% decrease in throughput based on Datadog benchmarks.
 
 Compression of network traffic should only be used for cost-sensitive egress scenarios due to its impact on performance (for example, sending data over the public internet). Therefore, compression is not recommended for internal network traffic.
 
-[1]: /observability_pipelines/architecture/advanced_configurations
+[1]: /observability_pipelines/legacy/architecture/advanced_configurations
 [2]: https://wiki.archlinux.org/title/Domain_name_resolution

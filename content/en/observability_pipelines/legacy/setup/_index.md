@@ -6,13 +6,13 @@ aliases:
   - /getting_started/observability_pipelines/
   - /observability_pipelines/installation/
 further_reading:
-  - link: "/observability_pipelines/working_with_data/"
+  - link: "/observability_pipelines/legacy/working_with_data/"
     tag: "Documentation"
     text: "Working with data in Observability Pipelines"
-  - link: "/observability_pipelines/production_deployment_overview/"
+  - link: "/observability_pipelines/legacy/production_deployment_overview/"
     tag: "Documentation"
     text: "Deployment Design and Principles for the Observability Pipelines Worker"
-  - link: "/observability_pipelines/architecture/"
+  - link: "/observability_pipelines/legacy/architecture/"
     tag: "Documentation"
     text: "Production deployment design and principles for the Observability Pipelines Worker"
   - link: "https://dtdg.co/d22op"
@@ -84,7 +84,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 
 [1]: https://hub.docker.com/r/datadog/observability-pipelines-worker
 [2]: /resources/yaml/observability_pipelines/quickstart/pipeline.yaml
-[3]: /observability_pipelines/configurations/
+[3]: /observability_pipelines/legacy/configurations/
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
 1. Download the [Helm chart values file][1] for AWS EKS. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
@@ -104,7 +104,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     ```
 
 [1]: /resources/yaml/observability_pipelines/quickstart/aws_eks.yaml
-[2]: /observability_pipelines/configurations/
+[2]: /observability_pipelines/legacy/configurations/
 {{% /tab %}}
 {{% tab "Azure AKS" %}}
 1. Download the [Helm chart values file][1] for Azure AKS. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
@@ -124,7 +124,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     ```
 
 [1]: /resources/yaml/observability_pipelines/quickstart/azure_aks.yaml
-[2]: /observability_pipelines/configurations/
+[2]: /observability_pipelines/legacy/configurations/
 {{% /tab %}}
 {{% tab "Google GKE" %}}
 1. Download the [Helm chart values file][1] for Google GKE. See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
@@ -144,7 +144,7 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
     ```
 
 [1]: /resources/yaml/observability_pipelines/quickstart/google_gke.yaml
-[2]: /observability_pipelines/configurations/
+[2]: /observability_pipelines/legacy/configurations/
 {{% /tab %}}
 {{% tab "APT-based Linux" %}}
 
@@ -211,7 +211,7 @@ Install the Worker with the one-line install script or manually.
     ```
 
 [1]: /resources/yaml/observability_pipelines/datadog/pipeline.yaml
-[2]: /observability_pipelines/configurations/
+[2]: /observability_pipelines/legacy/configurations/
 {{% /tab %}}
 {{% tab "RPM-based Linux" %}}
 
@@ -279,7 +279,7 @@ Install the Worker with the one-line install script or manually.
     ```
 
 [1]: /resources/yaml/observability_pipelines/quickstart/pipeline.yaml
-[2]: /observability_pipelines/configurations/
+[2]: /observability_pipelines/legacy/configurations/
 {{% /tab %}}
 {{% tab "Terraform (AWS)" %}}
 
@@ -289,7 +289,7 @@ Install the Worker with the one-line install script or manually.
 See [Configurations][2] for more information about the source, transform, and sink used in the sample configuration.
 
 [1]: /resources/yaml/observability_pipelines/quickstart/terraform_opw.tf
-[2]: /observability_pipelines/configurations/
+[2]: /observability_pipelines/legacy/configurations/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -314,13 +314,13 @@ For recommendations on deploying and scaling multiple Workers:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/#what-is-observability-pipelines-and-the-observability-pipelines-worker
-[2]: /observability_pipelines/setup/datadog/
-[3]: /observability_pipelines/setup/datadog_with_archiving/
-[4]: /observability_pipelines/setup/splunk/
+[1]: /observability_pipelines/legacy/#what-is-observability-pipelines-and-the-observability-pipelines-worker
+[2]: /observability_pipelines/legacy/setup/datadog/
+[3]: /observability_pipelines/legacy/setup/datadog_with_archiving/
+[4]: /observability_pipelines/legacy/setup/splunk/
 [5]: https://www.datadoghq.com/legal/eula/
 [6]: https://app.datadoghq.com/observability-pipelines
 [7]: /account_management/api-app-keys/#api-keys
-[8]: /observability_pipelines/working_with_data/
-[9]: /observability_pipelines/production_deployment_overview/
-[10]: /observability_pipelines/architecture/
+[8]: /observability_pipelines/legacy/working_with_data/
+[9]: /observability_pipelines/legacy/production_deployment_overview/
+[10]: /observability_pipelines/legacy/architecture/

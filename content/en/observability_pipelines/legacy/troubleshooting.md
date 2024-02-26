@@ -3,7 +3,7 @@ title: Troubleshooting
 kind: documentation
 disable_toc: false
 further_reading:
-  - link: "/observability_pipelines/monitoring/"
+  - link: "/observability_pipelines/legacy/monitoring/"
     tag: "Documentation"
     text: "Monitor the health of your pipelines"
 ---
@@ -94,5 +94,5 @@ The expected output should be similar to the following, where the `log` attribut
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/observability-pipelines/
-[2]: /observability_pipelines/setup/
+[2]: /observability_pipelines/legacy/setup/
 [3]: /help

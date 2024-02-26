@@ -4,19 +4,19 @@ kind: Documentation
 aliases:
   - /integrations/observability_pipelines/working_with_data/
 further_reading:
-  - link: /observability_pipelines/setup/
+  - link: /observability_pipelines/legacy/setup/
     tag: Documentation
     text: Set up Observability Pipelines
-  - link: /observability_pipelines/reference/transforms/#awsec2metadata
+  - link: /observability_pipelines/legacy/reference/transforms/#awsec2metadata
     tag: Documentation
     text: Parsing metadata emitted by AWS EC2 instance
-  - link: /observability_pipelines/reference/transforms/#lua
+  - link: /observability_pipelines/legacy/reference/transforms/#lua
     tag: Documentation
     text: Modifying events with Lua
-  - link: /observability_pipelines/reference/transforms/#logtometric
+  - link: /observability_pipelines/legacy/reference/transforms/#logtometric
     tag: Documentation
     text: Convert logs to metric events
-  - link: /observability_pipelines/configurations/
+  - link: /observability_pipelines/legacy/configurations/
     tag: Documentation
     text: Learn more about Observability Pipelines configurations
 ---
@@ -193,14 +193,14 @@ The `threshold` field defines the number of events allowed for a given bucket. `
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /observability_pipelines/reference/transforms/#remap
-[2]: /observability_pipelines/reference/processing_language/
-[3]: /observability_pipelines/reference/processing_language/functions/
-[4]: /observability_pipelines/reference/transforms/#sample
-[5]: /observability_pipelines/reference/transforms/#reduce
-[6]: /observability_pipelines/reference/transforms/#dedupe
-[7]: /observability_pipelines/reference/transforms/#filter
-[8]: /observability_pipelines/reference/transforms/#aggregate
-[9]: /observability_pipelines/reference/transforms/#metrictolog
-[10]: /observability_pipelines/guide/control_log_volume_and_size/
-[11]: /observability_pipelines/reference/transforms/#route
+[1]: /observability_pipelines/legacy/reference/transforms/#remap
+[2]: /observability_pipelines/legacy/reference/processing_language/
+[3]: /observability_pipelines/legacy/reference/processing_language/functions/
+[4]: /observability_pipelines/legacy/reference/transforms/#sample
+[5]: /observability_pipelines/legacy/reference/transforms/#reduce
+[6]: /observability_pipelines/legacy/reference/transforms/#dedupe
+[7]: /observability_pipelines/legacy/reference/transforms/#filter
+[8]: /observability_pipelines/legacy/reference/transforms/#aggregate
+[9]: /observability_pipelines/legacy/reference/transforms/#metrictolog
+[10]: /observability_pipelines/legacy/guide/control_log_volume_and_size/
+[11]: /observability_pipelines/legacy/reference/transforms/#route
