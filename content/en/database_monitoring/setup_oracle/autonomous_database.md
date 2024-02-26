@@ -15,7 +15,7 @@ further_reading:
 
 {% dbm-oracle-definition %}
 
-The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your Oracle database:
+The Agent collects telemetry directly from the database by logging in as a read-only user. Complete the following setup steps to enable Database Monitoring with your Oracle database:
 
 1. [Create the user](#create-the-user)
 1. [Grant the Agent access to the database](#grant-the-agent-access-to-the-database)
