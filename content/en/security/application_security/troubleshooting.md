@@ -564,9 +564,7 @@ See the Application Security [set up documentation][11] to validate you you are 
 
 Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for NodeJS) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`
 
-## Threat Detection and Protection
-
-### Disabling Application Security Management
+## Disabling Threat Detection and Protection
 
 To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
 
@@ -575,16 +573,14 @@ If no `DD_APPSEC_ENABLED=true` environment variable is set for your service:
 * If ASM was activated in one-click: go to [ASM service configuration][15], select **Services with Threat Management Capabilities**, click on your service and then click **Deactivate**.
 * To disable ASM on your services in bulk, click the check box in the list header and then under "Bulk Actions" select "Deactivate Threat Management detection on (number of) services".
 
-## Vulnerability Detection
-
-### Disabling Software Composition Analysis
+## Disabling Software Composition Analysis (SCA)
 
 To disable [Software Composition Analysis][14]:
 
 * Go to [ASM service configuration][15], select **Services with Open Source Vulnerability Detection**, click on your service and then click **Deactivate**.
 * To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under "Bulk Actions" select "Deactivate Open source vulnerability detection on (number of) services".
 
-### Disabling Code Security vulnerability detection
+## Disabling Code Security
 
 <div class="alert alert-info">Code security vulnerability detection is in beta.</div>
 
