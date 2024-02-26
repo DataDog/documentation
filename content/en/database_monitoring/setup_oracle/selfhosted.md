@@ -13,6 +13,34 @@ further_reading:
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
+{% dbm-oracle-definition %}
+
+The Agent collects telemetry directly from the database by logging in as a read-only user. Complete the following setup steps to enable Database Monitoring with your Oracle database:
+
+1. [Create the user](#create-the-user)
+1. [Grant the Agent access to the database](#grant-the-agent-access-to-the-database)
+1. [Install the Agent](#install-the-agent)
+1. [Configure the Agent](#configure-the-agent)
+1. [Install or verify the Oracle integration](#install-or-verify-the-oracle-integration)
+
+## Before you begin
+
+{% dbm-supported-oracle-versions %}
+
+{% dbm-supported-oracle-agent-version %}
+
+Performance impact
+: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
+Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][12]).
+
+Proxies, load balancers, and connection poolers
+: The Agent must connect directly to the host being monitored. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. Each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+
+Data security considerations
+: See [Sensitive information][13] for information about what data the Agent collects from your databases and how to ensure it is secure.
+
+<!-- begin old content -->
+
 Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues.
 
 <div class="alert alert-danger">
@@ -593,6 +621,8 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [6]: https://app.datadoghq.com/databases
 [7]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [11]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
+[12]: /database_monitoring/setup_oracle
+[13]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
 
 ## Further reading
 
