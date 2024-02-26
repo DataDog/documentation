@@ -13,7 +13,7 @@ further_reading:
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues.
+{% dbm-oracle-definition %}
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your Oracle database:
 
@@ -25,11 +25,9 @@ The Agent collects telemetry directly from the database by logging in as a read-
 
 ## Before you begin
 
-Supported Oracle versions
-: 11g, 12c, 18c, 19c, 21c
+{% dbm-supported-oracle-versions %}
 
-Supported Agent versions
-: 7.49.1+
+{% dbm-supported-oracle-agent-version %}
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
@@ -43,7 +41,7 @@ Data security considerations
 
 ## 1. Create the user
 
-{{% dbm_create_oracle_user %}}
+{{% dbm-create-oracle-user %}}
 
 ## 2. Grant the Agent access to the database 
 
@@ -86,8 +84,6 @@ grant select on dba_data_files to datadog;
 ```
 
 ## 3. Install the Agent
-
-<!-- TODO: Make this section a shortcode -->
 
 See the [DBM Setup Architecture][10] documentation to determine where to install the Agent. The Agent doesn't require any external Oracle clients.
 
@@ -140,7 +136,7 @@ On the Integrations page in Datadog, install the [Oracle integration][9] for you
 
 ### Existing installations
 
-{{% dbm_existing_oracle_integration_setup %}}
+{{% dbm-existing-oracle-integration-setup %}}
 
 ## Custom queries
 

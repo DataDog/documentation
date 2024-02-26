@@ -13,15 +13,42 @@ further_reading:
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-Database Monitoring provides deep visibility into your Oracle databases by exposing query samples to profile your different workloads and diagnose issues.
+{% dbm-oracle-definition %}
 
-<div class="alert alert-danger">
-Before completing the steps below, verify that you have met <a href="/database_monitoring/setup_oracle/?tab=linux#prerequisites">the prerequisites</a> for Database Monitoring.
-</div>
+The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your Oracle database:
 
-## Setup
+1. [Create the user](#create-the-user)
+1. [Install the Agent](#install-the-agent)
+1. [Configure the Agent](#configure-the-agent)
+1. [Install or verify the Oracle integration](#install-or-verify-the-oracle-integration)
 
-Complete the following steps to enable Database Monitoring with your database:
+## Before you begin
+
+{% dbm-supported-oracle-versions %}
+
+{% dbm-supported-oracle-agent-version %}
+
+Performance impact
+: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
+Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][12]).
+
+Proxies, load balancers, and connection poolers
+: The Agent must connect directly to the host being monitored. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. Each Agent must have knowledge of the underlying hostname and should stick to a single host for its lifetime, even in cases of failover. If the Datadog Agent connects to different hosts while it is running, the values of metrics will be incorrect.
+
+Data security considerations
+: See [Sensitive information][13] for information about what data the Agent collects from your databases and how to ensure it is secure.
+
+## 1. Create the user
+
+{{% dbm-create-oracle-user %}}
+
+## 2. Install the Agent
+
+See the [DBM Setup Architecture][14] documentation to determine where to install the Agent. The Agent doesn't require any external Oracle clients.
+
+For installation steps, see the [Agent installation instructions][15].
+
+## 3. Configure the Agent
 
 ### Multi-node Exadata
 
@@ -34,6 +61,16 @@ Configure the Agent by following the instructions for [self-hosted Oracle databa
 ### Validate
 
 [Run the Agent's status subcommand][5] and look for `oracle-dbm` under the **Checks** section. Navigate to the [Databases][6] page in Datadog to get started.
+
+## 4. Install or verify the Oracle integration
+
+### First-time installations
+
+On the Integrations page in Datadog, install the [Oracle integration][16] for your organization. This installs an [Oracle dashboard][17] in your account that can be used to monitor the performance of your Oracle databases.
+
+### Existing installations
+
+{{% dbm-existing-oracle-integration-setup %}}
 
 ## Custom queries
 
@@ -50,6 +87,12 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [7]: /database_monitoring/setup_oracle/selfhosted
 [8]: /database_monitoring/setup_oracle/rac
 [11]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
+[12]: /database_monitoring/setup_oracle
+[13]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
+[14]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
+[15]: https://app.datadoghq.com/account/settings/agent/latest
+[16]: https://app.datadoghq.com/integrations/oracle
+[17]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 
 ## Further reading
 
