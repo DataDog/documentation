@@ -7,6 +7,8 @@ aliases:
     - /integrations/snyk/
     - /integrations/lightstep_incident_response/
     - /integrations/mainstorconcept_ziris/
+    - /integrations/rookout/
+    - /integrations/rookout_license/
 description: Gather data from all of your systems, apps, & services
 cascade:
 - _target:
