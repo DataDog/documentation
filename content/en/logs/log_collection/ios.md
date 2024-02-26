@@ -380,6 +380,8 @@ logger.critical("Something critical happened!")
 {{% /tab %}}
 {{< /tabs >}}
 
+**Note:** To add a custom iOS log to a newly created RUM view, apply it with the `viewDidAppear` method. If the log is applied before `viewDidAppear` occurs, such as at `viewDidLoad`, the log is applied to the preceding RUM view, which is still technically the active view.
+
 5. (Optional) Provide a map of `attributes` alongside your log message to add attributes to the emitted log. Each entry of the map is added as an attribute.
 
 {{< tabs >}}

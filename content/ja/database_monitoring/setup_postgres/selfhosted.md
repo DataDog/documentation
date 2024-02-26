@@ -12,7 +12,7 @@ title: セルフホストの Postgres のデータベースモニタリングの
 <div class="alert alert-warning">データベースモニタリングはこのサイトでサポートされていません。</div>
 {{< /site-region >}}
 
-データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Postgres データベースを詳細に可視化します。
+データベースモニタリングは、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Postgres データベースを詳細に視覚化します。
 
 Agent は、読み取り専用のユーザーとしてログインすることでデータベースから直接テレメトリを収集します。Postgres データベースでデータベースモニタリングを有効にするには、以下の設定を行ってください。
 
@@ -48,7 +48,7 @@ Agent は、読み取り専用のユーザーとしてログインすること�
 | パラメーター | 値 | 説明 |
 | --- | --- | --- |
 | `shared_preload_libraries` | `pg_stat_statements` | `postgresql.queries.*` メトリクスに対して必要です。[pg_stat_statements][5] 拡張機能を使用して、クエリメトリクスの収集を可能にします。 |
-| `track_activity_query_size` | `4096` | より大きなクエリを収集するために必要です。`pg_stat_activity` および `pg_stat_statements` の SQL テキストのサイズを拡大します。 デフォルト値のままだと、`1024` 文字よりも長いクエリは収集されません。 |
+| `track_activity_query_size` | `4096` | より大きなクエリを収集するために必要です。`pg_stat_activity` の SQL テキストのサイズを拡大します。 デフォルト値のままだと、`1024` 文字よりも長いクエリは収集されません。 |
 | `pg_stat_statements.track` | `ALL` | オプション。ストアドプロシージャや関数内のステートメントを追跡することができます。 |
 | `pg_stat_statements.max` | `10000` | オプション。`pg_stat_statements` で追跡する正規化されたクエリの数を増やします。この設定は、多くの異なるクライアントからさまざまな種類のクエリが送信される大容量のデータベースに推奨されます。 |
 | `pg_stat_statements.track_utility` | `off` | オプション。PREPARE や EXPLAIN のようなユーティリティコマンドを無効にします。この値を `off` にすると、SELECT、UPDATE、DELETE などのクエリのみが追跡されます。 |
@@ -322,9 +322,9 @@ PostgreSQL のデフォルトのログは `stderr` に記録され、ログに�
 [7]: https://www.postgresql.org/docs/current/app-psql.html
 [8]: https://app.datadoghq.com/account/settings/agent/latest
 [9]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
-[10]: /ja/agent/guide/agent-commands/#start-stop-and-restart-the-agent
+[10]: /ja/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [11]: https://www.postgresql.org/docs/11/runtime-config-logging.html
 [12]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
-[13]: /ja/agent/guide/agent-commands/#agent-status-and-information
+[13]: /ja/agent/configuration/agent-commands/#agent-status-and-information
 [14]: https://app.datadoghq.com/databases
 [15]: /ja/database_monitoring/troubleshooting/?tab=postgres

@@ -1,33 +1,37 @@
 import { DOMReady } from '../helpers/documentReady';
 import { isMobile } from '../utils/isMobile';
+import { getGeoloc, getAppBaseUrl } from 'geo-locate';
 
 const doOnLoad = () => {
     const signupModal = document.getElementById('signupModal');
 
     signupModal.addEventListener('show.bs.modal', () => {
-        var regURL = 'https://app.datadoghq.com/signup_corp';
-        var mobileURL = 'https://app.datadoghq.com/signup_corp?mobile=true';
-        var lang_param = '';
-        var lang = '';
+      
+        getGeoloc().then((loc) => {
+            const baseUrl = `https://${getAppBaseUrl(loc.appRegion)}/signup_corp`;
+        
+            var lang_param = '';
+            var lang = '';
 
-        if (document.documentElement.lang) {
-            lang = document.documentElement.lang;
-        } else {
-            lang = ddc.lang;
-        }
+            if (document.documentElement.lang) {
+                lang = document.documentElement.lang;
+            } else {
+                lang = ddc.lang;
+            }
 
-        if (lang === 'fr' || lang === 'ja') {
-            lang_param = `?lang=${lang}`;
-        } else {
-            lang_param = '';
-        }
+            if (lang === 'fr' || lang === 'ja') {
+                lang_param = `?lang=${lang}`;
+            } else {
+                lang_param = '';
+            }
 
-        // Trigger conditional URL
-        if (isMobile()) {
-            document.querySelector('#signUpIframe').setAttribute('src', mobileURL);
-        } else {
-            document.querySelector('#signUpIframe').setAttribute('src', regURL + lang_param);
-        }
+            // Trigger conditional URL
+            if (isMobile()) {
+                document.querySelector('#signUpIframe').setAttribute('src', `${baseUrl}?mobile=true`);
+            } else {
+                document.querySelector('#signUpIframe').setAttribute('src', baseUrl + lang_param);
+            }
+        });
     });
 
     signupModal.addEventListener('hide.bs.modal', () => {

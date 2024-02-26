@@ -102,7 +102,7 @@ data:
 `cd-visibility-trigger` is the name of the trigger, and `cd-visibility-template` is a reference to the template created above.
 
 After the service, trigger, and template have been added to the config map, you can subscribe any of your Argo CD applications to the integration.
-Modify the annotations of the application by either using the Argo CD UI or modifying the application definition with the following annotations:
+Modify the annotations of the Argo CD application by either using the Argo CD UI or modifying the application definition with the following annotations:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -114,7 +114,7 @@ metadata:
 ```
 
 There are two annotations:
-1. The notifications annotation subscribes the application to the notification setup created above.
+1. The notifications annotation subscribes the Argo CD application to the notification setup created above.
 2. The `dd_env` annotation configures the environment of the application. Replace `YOUR_ENV` above with the environment
    to which this application is deploying (for example: `staging` or `prod`). If you don't set this annotation,
    the environment defaults to `none`.
@@ -122,6 +122,21 @@ There are two annotations:
 See the [Argo CD official guide][12] for more details on applications subscriptions.
 
 After this final step is completed, you can start monitoring your Argo CD deployments in Datadog.
+
+## Adding custom tags to deployment executions
+
+You can optionally add custom tags to the deployment executions generated from Argo CD applications deployments. These tags can be used to filter, group, and aggregate deployment executions in Datadog.
+To add custom tags, add the `dd_customtags` annotation to your Argo CD application annotations and set the value to a comma-separated list of tags, structured as `key:value` pairs. For example:
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    notifications.argoproj.io/subscribe.cd-visibility-trigger.cd-visibility-webhook: ""
+    dd_env: <YOUR_ENV>
+    dd_customtags: "region:us1-east, team:backend"
+```
 
 ## Visualize deployments in Datadog
 

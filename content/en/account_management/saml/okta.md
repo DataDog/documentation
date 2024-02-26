@@ -33,7 +33,7 @@ Follow Okta's [Create custom SAML app integrations][1] instructions to configure
 | Single Sign On URL          | Assertion Consumer Service URL (Find this URL on the [Configure SAML page][3], in the *Assertion Consumer Service URL* field.) |
 | Recipient URL               | Assertion Consumer Service URL (or click the *Use this for Recipient URL and Destination URL* checkbox)                        |
 | Destination URL             | Assertion Consumer Service URL (or click the *Use this for Recipient URL and Destination URL* checkbox)                        |
-| Audience URI (SP Entity ID) | Service Provider Entity ID (Find this URL on the [Configure SAML page][3], in the *Service Provider Entity ID* field.)         |
+| Audience URI (SP Entity ID) | Service Provider Entity ID (Find this ID on the [Configure SAML page][3], in the *Service Provider Entity ID* field.)         |
 | Name ID Format              | EmailAddress                                                                                                                   |
 | Response                    | Signed                                                                                                                         |
 | Assertion Signature         | Signed                                                                                                                         |

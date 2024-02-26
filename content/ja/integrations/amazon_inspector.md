@@ -22,15 +22,16 @@ short_description: Amazon Inspector のキーメトリクスを追跡
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon Inspector は、AWS リソースのセキュリティとコンプライアンスの強化を支援するセキュリティ脆弱性評価サービスです。
 
 このインテグレーションを有効にすると、Datadog にすべての Inspector メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -39,7 +40,7 @@ Amazon Inspector は、AWS リソースのセキュリティとコンプライ�
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `Inspector` が有効になっていることを確認します。
 2. [Datadog - Amazon Inspector インテグレーション][3]をインストールします。
 
-### ログの収集
+### 収集データ
 
 #### ログの有効化
 
@@ -55,21 +56,21 @@ S3 バケットまたは CloudWatch のいずれかにログを送信するよ�
     - [S3 バケットに手動トリガーを追加][5]
     - [CloudWatch ロググループに手動トリガーを追加][6]
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_inspector" >}}
 
 
-### イベント
+### ヘルプ
 
 Amazon Inspector インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 Amazon Inspector インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
 
@@ -77,7 +78,7 @@ Amazon Inspector インテグレーションには、サービスのチェック
 [2]: https://app.datadoghq.com/integrations/amazon-web-services
 [3]: https://app.datadoghq.com/integrations/amazon-inspector
 [4]: https://docs.datadoghq.com/ja/logs/guide/forwarder/
-[5]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-s3-buckets
-[6]: https://docs.datadoghq.com/ja/integrations/amazon_web_services/?tab=allpermissions#collecting-logs-from-cloudwatch-log-group
+[5]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-s3-buckets
+[6]: https://docs.datadoghq.com/ja/logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=awsconsole#collecting-logs-from-cloudwatch-log-group
 [7]: https://github.com/DataDog/dogweb/blob/prod/integration/amazon_inspector/amazon_inspector_metadata.csv
 [8]: https://docs.datadoghq.com/ja/help/

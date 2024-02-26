@@ -68,21 +68,17 @@ Datadog uses the distributed tracing protocol and sets up the following HTTP hea
 : To have Synthetic tests be the root span of the generated trace.
 
 `x-datadog-origin: synthetics`
-: To make sure the generated traces from your API tests [don't affect your APM quotas](#how-are-apm-quotas-affected).
+: To identify generated traces from your API tests. Spans from these traces are tagged with `ingestion_reason:synthetics`.
 
 `x-datadog-origin: synthetics-browser` 
-: To make sure the generated traces from your Browser tests [don't affect your APM quotas](#how-are-apm-quotas-affected).
+: To identify generated traces from your Browser tests. These traces are tagged with `ingestion_reason:synthetics-browser`.
 
 `x-datadog-sampling-priority: 1`
 : To make sure that the Agent keeps the trace.
 
-### How are APM quotas affected?
-
-The `x-datadog-origin: synthetics` header specifies to the APM backend that the traces are synthetically generated. The generated traces consequently do not impact your classical APM quotas.
-
 ### How long are traces retained?
 
-These traces are retained [just like your classical APM traces][20].
+These traces are retained for 15 days with the `Synthetics Default` retention filter, [just like your classical APM traces][20].
 
 ## Further Reading
 

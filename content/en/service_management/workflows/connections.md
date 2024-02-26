@@ -2,6 +2,10 @@
 title: Connections
 kind: documentation
 description: Workflow connections
+further_reading:
+- link: "/getting_started/workflow_automation/"
+  tag: "Documentation"
+  text: "Getting Started with Workflow Automation"
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
 aliases:
@@ -75,9 +79,9 @@ Alternatively, add a connection from the workflow page:
 1. In the **New Connection** dialog box, name the connection and enter the required authentication details.
 1. Click **Save**.
 
-The example below shows the **New Connection** dialog box for the AWS connection. Each connection requires different authentication information. The AWS connection requires a valid AWS IAM Account ID and Role Name.
+The example below shows the **New Connection** dialog box for the OpenAI connection. Each connection requires different authentication information. The OpenAI connection requires a valid Connection Name and API Token.
 
-{{< img src="service_management/workflows/new-connection.png" alt="The New Connection dialog box for the AWS connection" >}}
+{{< img src="service_management/workflows/new-connection2.png" alt="The New Connection dialog box for the OpenAI connection" >}}
 
 ### Edit a connection
 
@@ -113,6 +117,10 @@ To connect to an arbitrary service, use the HTTP connection type, and choose fro
 1. If appropriate, use the **Add +** buttons to add headers or URL parameters.
 1. Choose an connection type: **Token Auth** or **Basic Auth**. Enter the appropriate parameters.
 1. Click **Create** to save your HTTP connection.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /service_management/workflows/actions_catalog/generic_actions/
 [2]: https://app.datadoghq.com/workflow

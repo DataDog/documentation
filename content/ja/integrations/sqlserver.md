@@ -46,7 +46,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: sqlserver
-oauth: {}
 public_title: SQL Server
 short_description: SQL Server の重要なパフォーマンスメトリクスと健全性メトリクスを収集。
 supported_os:

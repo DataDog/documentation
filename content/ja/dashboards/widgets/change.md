@@ -3,6 +3,9 @@ aliases:
 - /ja/graphing/widgets/change/
 description: 選択した期間中の値の変化をグラフ化する
 further_reading:
+- link: /monitors/types/metric/?tab=change
+  tag: ドキュメント
+  text: モニターの変化アラート検出の構成
 - link: /ja/dashboards/graphing_json/
   tag: ドキュメント
   text: JSON を使用したダッシュボードの構築
@@ -14,14 +17,15 @@ further_reading:
   text: リクエスト JSON スキーマ
 kind: documentation
 title: 変化ウィジェット
+widget_type: 変化
 ---
 Change グラフは、ある期間におけるメトリクスの変化を表示します。
 
-{{< img src="/dashboards/widgets/change/change_widget.png" alt="jvm.heap_memory メトリクスの変更ウィジェットの例" style="width:100%;" >}}
+{{< img src="/dashboards/widgets/change/change_widget.png" alt="jvm.heap_memory メトリクスの変化ウィジェットの例" style="width:100%;" >}}
 
 ## セットアップ
 
-### コンフィギュレーション
+### 構成
 
 1. グラフ化するメトリクスを選択します。
 2. 集計関数を選択します。
@@ -49,9 +53,7 @@ Change グラフは、ある期間におけるメトリクスの変化を表示�
 
 ## API
 
-このウィジェットは、**ダッシュボード API** とともに使用できます。詳しくは、[ダッシュボード API][2] ドキュメントをご参照ください。
-
-変化ウィジェット専用の[ウィジェット JSON スキーマ定義][3]は次のとおりです。
+このウィジェットは **[Dashboards API][2]** で使用できます。[ウィジェット JSON スキーマ定義][3]については、以下の表を参照してください。
 
 {{< dashboards-widgets-api >}}
 

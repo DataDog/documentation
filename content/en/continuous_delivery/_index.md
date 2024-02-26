@@ -14,6 +14,9 @@ further_reading:
 - link: "/continuous_delivery/explorer"
   tag: "Documentation"
   text: "Learn about the CD Visibility Explorer"
+- link: "https://www.datadoghq.com/blog/best-practices-for-ci-cd-monitoring/"
+  tag: "Blog"
+  text: "Best practices for CI/CD monitoring"
 cascade:
     algolia:
         rank: 70
