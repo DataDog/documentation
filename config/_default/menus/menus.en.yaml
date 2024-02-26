@@ -3764,7 +3764,7 @@ main:
     parent: cws_workload_security_rules
     identifier: cws_custom_rules
     weight: 101
-  - name: Security Signals
+  - name: Investigate Security Signals
     url: security/threats/security_signals
     parent: cloud_workload_security
     identifier: cws_security_signals
@@ -3784,12 +3784,12 @@ main:
     parent: csm
     identifier: cspm
     weight: 3
-  - name: Compliance Rules
+  - name: Manage Compliance Rules
     url: security/misconfigurations/compliance_rules
     parent: cspm
     identifier: cspm_detection_rules
     weight: 301
-  - name: Custom Rules
+  - name: Create Custom Rules
     url: security/misconfigurations/custom_rules
     parent: cspm
     identifier: cspm_custom_rules
@@ -3809,7 +3809,7 @@ main:
     parent: cspm_frameworks_benchmarks
     identifier: cspm_supported_frameworks
     weight: 102
-  - name: Misconfigurations Explorer
+  - name: Explore Misconfigurations
     url: /security/misconfigurations/findings
     parent: cspm
     identifier: cspm_findings_explorer
