@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-The Datadog plugin for JetBrains IDEs is available for IDEA, GoLand, PhpStorm and PyCharm. It helps you improve software performance by providing meaningful code-level insights directly in the IDE based on real-time observability data.
+The Datadog plugin for JetBrains IDEs is available for IDEA, GoLand, PhpStorm, and PyCharm. It helps you improve software performance by providing meaningful code-level insights directly in the IDE based on real-time observability data.
 
 {{< img src="/developers/ide_integrations/idea/overview1.png" alt="The Datadog tool window open in IDEA" style="width:100%;" >}}
 
@@ -162,11 +162,11 @@ The active Profiling tab also affects the project tree view, which is annotated 
 Log patterns from Datadog are matched directly to lines of code in your editor for your Java, Go, and Python source files:
 {{< img src="/developers/ide_integrations/idea/log-patterns.png" alt="A log line showing log events from Datadog" style="width:100%;" >}}
 
-A popup will show runtime values from the log entries:
+A popup shows runtime values from the log entries:
 {{< img src="/developers/ide_integrations/idea/log-patterns-popup.png" alt="A popup showing log patterns from Datadog" style="width:100%;" >}}
 
 Click the log icon to open the [Log Explorer][5] on the Datadog platform with a pre-filled query that matches the logger name, log level, and log message as closely as possible:
-{{< img src="/developers/ide_integrations/idea/log-explorer-link.png" alt="A source file showing a View Logs link." style="width:100%;" >}}
+{{< img src="/developers/ide_integrations/idea/log-explorer-link.png" alt="A source file showing a View Logs icon and link." style="width:100%;" >}}
 
 ## CI Test Runs
 You can view recent test runs in the [Continuous Integration Visibility Explorer][12] by navigating directly from your source files. Look for the **View Test Runs** links following test method declarations in your source code:
