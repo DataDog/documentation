@@ -2,6 +2,8 @@
 title: Feature Flag Tracking
 kind: documentation
 disable_toc: false
+aliases:
+- /real_user_monitoring/feature_flag_tracking
 further_reading:
 - link: "/real_user_monitoring/guide/setup-feature-flag-data-collection/"
   tag: "Documentation"

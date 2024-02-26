@@ -1,5 +1,5 @@
 ---
-title: Performance Monitoring
+title: Product Analytics
 kind: documentation
 disable_toc: false
 further_reading:
