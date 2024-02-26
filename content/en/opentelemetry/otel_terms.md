@@ -3,10 +3,10 @@ title: OpenTelemetry Terms and Concepts
 kind: documentation
 further_reading:
     - link: 'https://opentelemetry.io/docs/concepts/'
-      tag: 'Documentation'
+      tag: 'OpenTelemetry'
       text: 'OpenTelemetry Concepts'
     - link: 'https://opentelemetry.io/docs/concepts/glossary/'
-      tag: 'Documentation'
+      tag: 'OpenTelemetry'
       text: 'OpenTelemetry Glossary'
     - link: 'https://docs.datadoghq.com/glossary/'
       tag: 'Documentation'
