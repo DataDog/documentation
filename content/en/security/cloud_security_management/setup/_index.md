@@ -60,13 +60,13 @@ CSM is available in three packages: [CSM Enterprise][1], [CSM Pro][2], and [CSM 
 
 ## Prerequsites
 
-The following table summarizes the CSM features available relative to each deployment type.
-
 - The **minimum** Datadog Agent version required for CSM is `7.46` or higher.
 
-<div class="alert alert-info">For more details, click each of the CSM feature headings to review additional requirements for that feature.</div>
-
 ### Supported deployment types and features
+
+The following table summarizes the CSM features available relative to each deployment type.
+
+<div class="alert alert-info">For more details, click each of the CSM feature headings to review additional requirements for that feature.</div>
 
 | Type          | Agent Required (7.46+) | CSM Misconfigurations | [CSM Threats][8]| [CSM Vulnerabilities][9] | [CSM Identity Risks][10] |
 |---------------|------------------------|-----------------------|-------------|---------------------|--------------------|
@@ -125,10 +125,11 @@ To use CSM Identity Risks, you must [enable resource collection for AWS][105]. I
 
 - If you've [enabled CSM Misconfigurations for your AWS accounts][106], you already have cloud resource collection enabled.
 - Although not required, when you [enable CloudTrail logs forwarding][107], you get additional insights based on the actual usage (or non-usage) of resources in your infrastructure, for example, users and roles with significant gaps between provisioned and used permissions.
-
-The following table summarizes the scope of coverage available relative to each CSM feature.
+</br>
 
 ## Scope of coverage
+
+The following table summarizes the scope of coverage available relative to each CSM feature.
 | Resources types                         | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities  | CSM Identity Risks | 
 | ----------------------------------------| --------------------- | ----------- | -------------------- | ------------------- |  
 | Resources in AWS Account                | {{< X >}}             |             |                      |                     |  
