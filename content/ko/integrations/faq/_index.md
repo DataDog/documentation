@@ -39,7 +39,7 @@ title: FAQ 통합
 
 * [다중 프로세스 모드의 HAProxy][10]
 
-## 지라
+## Jira
 
 * [JIRA 통합을 설정했습니다. 이제 이벤트와 티켓을 어떻게 생성하나요?][11]
 
@@ -56,7 +56,7 @@ title: FAQ 통합
 
 * [Kafka 트러블슈팅 및 심층 분석][18]
 
-## 쿠버네티스(Kubernetes)
+## Kubernetes
 
 * [apiserver 및 kubelet에 대한 클라이언트 인증][19]
 
@@ -66,7 +66,7 @@ title: FAQ 통합
 * [SQL Server 통합에서 네임드 인스턴스를 사용할 수 있나요?
 * [데이터베이스 사용자에게 권한이 없습니다.][22]
 
-## 포스트그레스
+## Postgres
 
 * [Postgres 커스텀 메트릭 수집 설명][23]
 
@@ -84,17 +84,17 @@ title: FAQ 통합
 
 ## VMware Tanzu Application Service
 
-* [VMware Tanzu 애플리케이션 서비스 아키텍처][31]
+* [VMware Tanzu Application Service 아키텍처][31]
 
 ## VSphere
 
 * [vSphere로 중복 호스트 문제 해결][27]
 
-## 웹훅스
+## Webhooks
 
-* [웹훅을 사용하여 Trello Card 만들기][28]
+* [Webhooks를 사용하여 Trello Card 만들기][28]
 
-## 윈도우즈(Windows)
+## Windows
 
 * [WMI를 통해 커스텀 Windows 성능 카운터 수집하기][29]
 * [Windows 상태 기반 점검][30]
