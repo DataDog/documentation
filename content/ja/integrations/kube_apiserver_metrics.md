@@ -36,7 +36,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: kube_apiserver_metrics
-oauth: {}
 public_title: Kubernetes API サーバーメトリクス
 short_description: Kubernetes APIServer からメトリクスを収集
 supported_os:

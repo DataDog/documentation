@@ -48,7 +48,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: iis
-oauth: {}
 public_title: IIS
 short_description: 全体またはサイトごとのメトリクスを追跡し、各サイトの稼働/停止状態を監視。
 supported_os:

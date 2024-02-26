@@ -33,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: go_expvar
-oauth: {}
 public_title: Go-Expvar
 short_description: Go サービスから expvar で計測されたメトリクスとメモリ統計を収集
 supported_os:

@@ -32,7 +32,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: vespa
-oauth: {}
 public_title: Vespa
 short_description: ビッグデータサービングエンジン Vespa の健全性とパフォーマンスの監視
 supported_os:

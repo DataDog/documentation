@@ -15,6 +15,9 @@ further_reading:
 - link: "/monitors/manage/status/"
   tag: "Documentation"
   text: "Check your monitor status"
+- link: "https://www.datadoghq.com/blog/monitor-fargate-processes/"
+  tag: "Blog"
+  text: "Monitor processes running on AWS Fargate with Datadog"
 ---
 
 ## Overview
