@@ -33,7 +33,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: linux_proc_extras
-oauth: {}
 public_title: Linux Proc Extras
 short_description: Visualiser et surveiller les états de linux_proc_extras.
 supported_os:

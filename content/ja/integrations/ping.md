@@ -35,7 +35,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: ping
-oauth: {}
 public_title: Ping
 short_description: リモートホストへの接続を監視
 supported_os:

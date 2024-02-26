@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: concourse_ci
-oauth: {}
 public_title: Concourse-CI
 short_description: Concourse CI から送信されるメトリクスを収集
 supported_os:

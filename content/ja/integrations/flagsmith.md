@@ -37,7 +37,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: flagsmith
-oauth: {}
 public_title: Flagsmith
 short_description: Flagsmith のフラグ変更イベントが Datadog に表示されます
 supported_os:

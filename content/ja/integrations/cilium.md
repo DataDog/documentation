@@ -42,7 +42,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: cilium
-oauth: {}
 public_title: Cilium
 short_description: Agent のメトリクスと、クラスター全体のオペレーターメトリクスをポッドごとに収集
 supported_os:

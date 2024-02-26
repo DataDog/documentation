@@ -38,7 +38,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: Squadcast
-oauth: {}
 public_title: Squadcast
 short_description: Datadog アラートの通知を受け取り Squadcast でアクションを実行します。
 supported_os:

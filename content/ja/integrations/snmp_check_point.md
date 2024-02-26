@@ -33,7 +33,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: snmp_check_point
-oauth: {}
 public_title: Check Point
 short_description: Check Point のネットワークデバイスから SNMP メトリクスを収集します。
 supported_os:

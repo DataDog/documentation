@@ -298,11 +298,11 @@ arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:<VERSION
 arn:aws-us-gov:lambda:<AWS_REGION>:417141415827:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-使用できる `RUNTIME` オプションは、`Node12-x`、`Node14-x`、`Node16-x` です。最新の `VERSION` は `{{< latest-lambda-layer-version layer="node" >}}` です。例:
+使用できる `RUNTIME` オプションは、{{< latest-lambda-layer-version layer="node-versions" >}} です。最新の `VERSION` は `{{< latest-lambda-layer-version layer="node" >}}` です。例:
 
 {{< site-region region="us,us3,us5,eu,gov" >}}
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x:{{< latest-lambda-layer-version layer="node" >}}
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}}:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
 Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Lambda ライブラリをレイヤーとして追加するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][1]に追加する必要があります。
@@ -312,7 +312,7 @@ Lambda 関数が、コード署名を使用するよう構成してある場合�
 
 {{< site-region region="ap1" >}}
 ```
-arn:aws:lambda:us-east-1:417141415827:layer:Datadog-Node16-x:{{< latest-lambda-layer-version layer="node" >}}
+arn:aws:lambda:us-east-1:417141415827:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}}:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
 Lambda 関数が、コード署名を使用するよう構成してある場合、Datadog Lambda ライブラリをレイヤーとして追加するには事前に Datadog の署名プロフィール ARN (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) を関数の[コード署名コンフィギュレーション][1]に追加する必要があります。

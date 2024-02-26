@@ -35,7 +35,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: postman
-oauth: {}
 public_title: Postman
 short_description: Postman Monitoring を実行し、Datadog でメトリクスを分析しイベントを生成します。　
 supported_os:
