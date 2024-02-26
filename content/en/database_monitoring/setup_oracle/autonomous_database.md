@@ -43,13 +43,7 @@ Data security considerations
 
 ## 1. Create the user
 
-If you already have the legacy Oracle integration installed, the user already exists, and you can skip this step.
-
-Create a read-only login to connect to your server and grant the required permissions:
-
-```SQL
-CREATE USER datadog IDENTIFIED BY your_password ;
-```
+{{% dbm_create_oracle_user %}}
 
 ## 2. Grant the Agent access to the database 
 
@@ -139,7 +133,6 @@ After all Agent configuration is complete, [restart the Datadog Agent][4].
 [Run the Agent's status subcommand][5] and look for `oracle-dbm` under the **Checks** section. Navigate to the [DBM Oracle Database Overview][7] dashboard and [Databases][6] page in Datadog to get started.
 
 ## 5. Install or verify the Oracle integration
-<!-- TODO: Make everything under this header a shortcode -->
 
 ### First-time installations
 
@@ -147,27 +140,9 @@ On the Integrations page in Datadog, install the [Oracle integration][9] for you
 
 ### Existing installations
 
-For an existing installation, verify that your configuration is located in the `conf.d/oracle-dbm.d/` directory. You may need to migrate the legacy configuration from the `conf.d/oracle.d/` directory.
-
-Use the following command to migrate the Oracle integration from the legacy integration to the new one:
-
-```shell
-cp /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml
-```
-
-Deactivate the legacy integration:
-
-```shell
-mv /etc/datadog-agent/conf.d/oracle.d/conf.yaml /etc/datadog-agent/conf.d/oracle.d/conf.yaml.bak
-```
-
-Deactivating the legacy integration prevents sending the system metrics twice.
-
-Since the Agent doesn't require an external Oracle client, remove the `jdbc_driver_path` configuration parameter from the new parameter file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`.
+{{% dbm_existing_oracle_integration_setup %}}
 
 ## Custom queries
-
-<!-- TODO: Make this section a shortcode -->
 
 Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][11] to learn more about the configuration options available.
 
