@@ -38,7 +38,7 @@ markup:
     guessSyntax: true
 
 module:
-  imports:
+  imports:  
    - path: github.com/DataDog/websites-modules
      disabled: false
      mounts:
@@ -82,6 +82,12 @@ module:
        target: static/fonts/iconfont.woff2
      - source: static/fonts/iconfont.woff
        target: static/fonts/iconfont.woff
+
+   - path: github.com/DataDog/websites-sources
+     disabled: false
+     mounts:
+     - source: content/en/integrations/ably.md
+       target: content/en/integrations/ably-apw.md
 
   mounts:
     # default mounts
