@@ -210,20 +210,20 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Example**: `team:backend`<br/>
 **Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
 
-`--metrics`
-: Key-value numerical pairs in the form `key:number` to be attached to all tests (the `--metrics` parameter can be specified multiple times). When specifying metrics using `DD_METRICS`, separate them using commas (for example, `memory_allocations:13,test_importance:2`).<br/>
-**Environment variable**: `DD_METRICS`<br/>
+`--measures`
+: Key-value numerical pairs in the form `key:number` to be attached to all tests (the `--measures` parameter can be specified multiple times). When specifying measures using `DD_MEASURES`, separate them using commas (for example, `memory_allocations:13,test_importance:2`).<br/>
+**Environment variable**: `DD_MEASURES`<br/>
 **Default**: (none)<br/>
 **Example**: `memory_allocations:13`<br/>
-**Note**: Metrics specified using `--metrics` and with the `DD_METRICS` environment variable are merged. If the same key appears in both `--metrics` and `DD_METRICS`, the value in the environment variable `DD_METRICS` takes precedence.
+**Note**: Measures specified using `--measures` and with the `DD_MEASURES` environment variable are merged. If the same key appears in both `--measures` and `DD_MEASURES`, the value in the environment variable `DD_MEASURES` takes precedence.
 
 `--report-tags`
 : Key-value pairs in the form `key:value`. Works like the `--tags` parameter but these tags are only applied at the session level and are **not** merged with the environment variable `DD_TAGS`<br/>
 **Default**: (none)<br/>
 **Example**: `test.code_coverage.enabled:true`<br/>
 
-`--report-metrics`
-: Key-value pairs in the form `key:123`. Works like the `--metrics` parameter but these tags are only applied at the session level and are **not** merged with the environment variable `DD_METRICS`<br/>
+`--report-measures`
+: Key-value pairs in the form `key:123`. Works like the `--measures` parameter but these tags are only applied at the session level and are **not** merged with the environment variable `DD_MEASURES`<br/>
 **Default**: (none)<br/>
 **Example**: `test.code_coverage.lines_pct:82`<br/>
 
@@ -537,15 +537,15 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 </testsuites>
 {{< /code-block >}}
 
-The values that you send to Datadog are strings, so the facets are displayed in lexicographical order. To send integers instead of strings, use the `--metrics` flag and the `DD_METRICS` environment variable.
+The values that you send to Datadog are strings, so the facets are displayed in lexicographical order. To send integers instead of strings, use the `--measures` flag and the `DD_MEASURES` environment variable.
 
 
 ## Reporting code coverage
 
-It is possible to report code coverage for a given JUnit report via the `--report-metrics` option, by setting the `test.code_coverage.lines_pct` metric:
+It is possible to report code coverage for a given JUnit report via the `--report-measures` option, by setting the `test.code_coverage.lines_pct` measure:
 
 ```shell
-datadog-ci junit upload --service my-api-service --report-metrics test.code_coverage.lines_pct:82 unit-tests/junit-reports e2e-tests/single-report.xml
+datadog-ci junit upload --service my-api-service --report-measures test.code_coverage.lines_pct:82 unit-tests/junit-reports e2e-tests/single-report.xml
 ```
 
 For more information, see [Code Coverage][10].
