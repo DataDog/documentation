@@ -8280,6 +8280,8 @@ components:
           description: 'A number indicating the type of integration this metadata
             is for. 1 indicates Slack;
 
+            7 indicates Microsoft Teams;
+
             8 indicates Jira.'
           example: 1
           format: int32
@@ -8349,6 +8351,7 @@ components:
       oneOf:
       - $ref: '#/components/schemas/SlackIntegrationMetadata'
       - $ref: '#/components/schemas/JiraIntegrationMetadata'
+      - $ref: '#/components/schemas/MicrosoftTeamsIntegrationMetadata'
     IncidentIntegrationMetadataPatchData:
       description: Incident integration metadata data for a patch request.
       properties:
@@ -12008,6 +12011,43 @@ components:
       required:
       - data_source
       - query
+      type: object
+    MicrosoftTeamsIntegrationMetadata:
+      description: Incident integration metadata for the Microsoft Teams integration.
+      properties:
+        teams:
+          description: Array of Microsoft Teams teams in this integration metadata.
+          example: []
+          items:
+            $ref: '#/components/schemas/MicrosoftTeamsIntegrationMetadataTeamsItem'
+          type: array
+      required:
+      - teams
+      type: object
+    MicrosoftTeamsIntegrationMetadataTeamsItem:
+      description: Item in the Microsoft Teams integration metadata teams array.
+      properties:
+        ms_team_id:
+          description: Team ID of the Microsoft Teams team
+          example: 00b9ce32-cbb8-4702-a638-42674f65e5ad
+          type: string
+        ms_tenant_id:
+          description: Microsoft Teams tenant ID
+          example: a5f17203-44db-482e-9e8a-20492610bf84
+          type: string
+        redirect_url:
+          description: URL redirecting to the Microsoft Teams team
+          example: https://teams.microsoft.com/l/team/19:tkO54atjviTjUSWZOJLhLrG2X1VRNtvXGCTj7zoEPlA1%40thread.tacv2/conversations?groupId=00b9ce32-cbb8-4702-a638-42674f65e5ad&tenantId=a5f17203-44db-482e-9e8a-20492610bf84
+          type: string
+        team_name:
+          description: Name of the Microsoft Teams team
+          example: example-team-name
+          type: string
+      required:
+      - team_name
+      - ms_team_id
+      - ms_tenant_id
+      - redirect_url
       type: object
     MonitorConfigPolicyAttributeCreateRequest:
       description: Policy and policy type for a monitor configuration policy.
