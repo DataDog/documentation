@@ -80,27 +80,10 @@ The following table summarizes the CSM features available relative to each deplo
 | Windows       | {{< X >}}              |                       | beta        |                     |                    |
 | AWS Fargate ECS/EKS  | {{< X >}}              |                       | beta        |                     |                    |
 
-The following table summarizes the scope of coverage relative to each CSM feature.
-
-## Scope of coverage
-| Resources types                         | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities  | CSM Identity Risks | 
-| ----------------------------------------| --------------------- | ----------- | -------------------- | ------------------- |  
-| Resources in AWS Account                | {{< X >}}             |             |                      |                     |  
-| Resources in Azure Subscription         | {{< X >}}             |             |                      |                     | 
-| Resources in GCP Project                | {{< X >}}             |             |                      |                     |  
-| Kubernetes Cluster                      | {{< X >}}             | {{< X >}}   |                      |                     |  
-| Docker Host                             | {{< X >}}             |             |                      |                     |
-| Linux Host                              | {{< X >}}             | {{< X >}}   |    {{< X >}}         |                     |  
-| Docker Container                        |                       | {{< X >}}   |                      |                     |
-| Container Image                         |                       |             |    {{< X >}}         |                     |
-| IAM in AWS Account                      |                       |             |                      |  {{< X >}}          |
-
-**Note**: CSM Misconfigurations additionally monitors common resources used in your cloud accounts that are running Windows and AWS Fargate, such as EC2 instances, RDS, S3, and ELB.
-
 
 The following tables represent additional prerequisites relative to each CSM feature.
 
-## CSM Threats
+### CSM Threats 
 
 CSM Threats supports the following Linux distributions:
 
@@ -120,7 +103,7 @@ CSM Threats supports the following Linux distributions:
 - For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][102].
 - Data collection is done using eBPF, so Datadog minimally requires platforms that have underlying Linux kernel versions of 4.15.0+ or have eBPF features backported.
 
-## CSM Vulnerabilities
+### CSM Vulnerabilities 
 
 | Component                | Version/Requirement                     |
 | ------------------------ | ----------------------------------------|
@@ -132,7 +115,7 @@ CSM Threats supports the following Linux distributions:
   - CRI-O runtime
   - podman runtime
 
-## CSM Identity Risks
+### CSM Identity Risks 
 
 <div class="alert alert-info"><strong>Note</strong>: At this time, CSM Identity Risks is available for AWS only.</div>
 
@@ -142,6 +125,23 @@ To use CSM Identity Risks, you must [enable resource collection for AWS][105]. I
 
 - If you've [enabled CSM Misconfigurations for your AWS accounts][106], you already have cloud resource collection enabled.
 - Although not required, when you [enable CloudTrail logs forwarding][107], you get additional insights based on the actual usage (or non-usage) of resources in your infrastructure, for example, users and roles with significant gaps between provisioned and used permissions.
+
+The following table summarizes the scope of coverage available relative to each CSM feature.
+
+## Scope of coverage
+| Resources types                         | CSM Misconfigurations | CSM Threats | CSM Vulnerabilities  | CSM Identity Risks | 
+| ----------------------------------------| --------------------- | ----------- | -------------------- | ------------------- |  
+| Resources in AWS Account                | {{< X >}}             |             |                      |                     |  
+| Resources in Azure Subscription         | {{< X >}}             |             |                      |                     | 
+| Resources in GCP Project                | {{< X >}}             |             |                      |                     |  
+| Kubernetes Cluster                      | {{< X >}}             | {{< X >}}   |                      |                     |  
+| Docker Host                             | {{< X >}}             |             |                      |                     |
+| Linux Host                              | {{< X >}}             | {{< X >}}   |    {{< X >}}         |                     |  
+| Docker Container                        |                       | {{< X >}}   |                      |                     |
+| Container Image                         |                       |             |    {{< X >}}         |                     |
+| IAM in AWS Account                      |                       |             |                      |  {{< X >}}          |
+
+**Note**: CSM Misconfigurations additionally monitors common resources used in your cloud accounts that are running Windows and AWS Fargate, such as EC2 instances, RDS, S3, and ELB.
 
 ## Next steps
 
