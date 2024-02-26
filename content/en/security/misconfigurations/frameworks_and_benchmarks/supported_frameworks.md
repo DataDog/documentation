@@ -1,6 +1,8 @@
 ---
 title: Supported Frameworks
 kind: documentation
+aliases:
+  - /security/misconfigurations/supported_frameworks
 further_reading:
 - link: "security/cspm/setup"
   tag: "Documentation"
@@ -18,6 +20,7 @@ further_reading:
 {{< /site-region >}}
 
 CSM Misconfigurations comes with more than 1,000 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within the following compliance standards and industry benchmarks:
+
 
 | Framework                                   | Framework Tag     | Rule Type      |
 |---------------------------------------------|-------------------|----------------|
