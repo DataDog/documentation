@@ -41,9 +41,9 @@ Proxies, load balancers, and connection poolers
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
-### Create the user
+## 1. Create the user
 
-If you installed the legacy Oracle integration, skip this step because the user already exists. You must, however, execute the subsequent steps.
+If you already have the legacy Oracle integration installed, the user already exists, and you can skip this step.
 
 Create a read-only login to connect to your server and grant the required permissions:
 
@@ -51,7 +51,7 @@ Create a read-only login to connect to your server and grant the required permis
 CREATE USER datadog IDENTIFIED BY your_password ;
 ```
 
-### Grant the Agent access to the database 
+## 2. Grant the Agent access to the database 
 
 ```SQL
 grant create session to datadog ;
@@ -91,13 +91,15 @@ grant select on cdb_data_files to datadog;
 grant select on dba_data_files to datadog;
 ```
 
-## Install the Agent
+## 3. Install the Agent
+
+<!-- TODO: Make this section a shortcode -->
 
 See the [DBM Setup Architecture][10] documentation to determine where to install the Agent. The Agent doesn't require any external Oracle clients.
 
 For installation steps, see the [Agent installation instructions][8].
 
-## Configure the Agent
+## 4. Configure the Agent
 
 Download the wallet zip file from the Oracle Cloud and unzip it.
 
@@ -136,7 +138,8 @@ After all Agent configuration is complete, [restart the Datadog Agent][4].
 
 [Run the Agent's status subcommand][5] and look for `oracle-dbm` under the **Checks** section. Navigate to the [DBM Oracle Database Overview][7] dashboard and [Databases][6] page in Datadog to get started.
 
-## Install or verify the Oracle integration
+## 5. Install or verify the Oracle integration
+<!-- TODO: Make everything under this header a shortcode -->
 
 ### First-time installations
 
@@ -163,6 +166,8 @@ Deactivating the legacy integration prevents sending the system metrics twice.
 Since the Agent doesn't require an external Oracle client, remove the `jdbc_driver_path` configuration parameter from the new parameter file `/etc/datadog-agent/conf.d/oracle-dbm.d/conf.yaml`.
 
 ## Custom queries
+
+<!-- TODO: Make this section a shortcode -->
 
 Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][11] to learn more about the configuration options available.
 
