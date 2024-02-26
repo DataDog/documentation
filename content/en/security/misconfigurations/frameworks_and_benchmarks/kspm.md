@@ -10,6 +10,8 @@ further_reading:
   text: "Create Custom Rules"
 ---
 
+<div class="alert alert-warning">Kubernetes Security Posture Management is in beta.</div>
+
 Kubernetes Security Posture Management (KSPM) for Cloud Security Management (CSM) helps you proactively strengthen the security posture of your Kubernetes deployments by benchmarking your environment against established industry best practices, such as those defined by [CIS][1], or your own [custom detection policies](#create-your-own-kubernetes-security-detections).
 
 **Note**: To take full advantage of KSPM, you must install both the Datadog Agent and cloud integrations.
@@ -17,6 +19,15 @@ Kubernetes Security Posture Management (KSPM) for Cloud Security Management (CSM
 * Setup requires both cloud integrations AND the Agent (for latter, e.g., cluster).
 * Need to call out resource types that are surfaced as part of KSPM.
 * Limited to the control plane (don't have lower level resource types and associated detections).
+
+| Resource Type            | Install Method    | Framework        |
+|--------------------------|-------------------|------------------|
+| `aws_eks_cluster`        | cloud integration |                  |
+| `aws_eks_worker_node`    | Agent             | `cis-eks`        |
+| `azure_aks_cluster`      | cloud integration |                  |
+| `azure_aks_worker_node`  | Agent             | `cis-aks`        |
+| `kubernetes_master_node` | Agent             | `cis-kubernetes` |
+| `kubernetes_worker_node` | Agent             |                  |
 
 In addition to KSPM, Datadog CSM also enables you to:
 
