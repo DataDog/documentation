@@ -56,7 +56,7 @@ The **Static Analysis** integration analyzes your code (locally) against predefi
 1. If you receive a prompt notifying you that Datadog is a third-party plugin, click **Accept**.
 1. Click **Restart IDE**.
 
-{{< img src="/developers/ide_integrations/idea/marketplace.png" alt="The Datadog plugin" style="width:100%;" >}}
+{{< img src="/developers/ide_integrations/idea/install-plugin.png" alt="The Datadog plugin" style="width:100%;" >}}
 
 Alternatively, you can install the plugin from the [JetBrains Marketplace][4].
 
