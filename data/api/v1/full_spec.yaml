@@ -27856,7 +27856,7 @@ paths:
         **Notes**:
 
         - Synthetic monitors are created through the Synthetics API. See the [Synthetics
-        API] (https://docs.datadoghq.com/api/latest/synthetics/) documentation for
+        API](https://docs.datadoghq.com/api/latest/synthetics/) documentation for
         more information.
 
         - Log monitors require an unscoped App Key.
@@ -28163,10 +28163,7 @@ paths:
 
         - `operator` `<`, `<=`, `>`, `>=`, `==`, or `!=`.
 
-        - `#` an integer or decimal number used to set the threshold.
-
-
-        **NOTE** Database Monitoring monitors are in alpha on US1.'
+        - `#` an integer or decimal number used to set the threshold.'
       operationId: CreateMonitor
       requestBody:
         content:
