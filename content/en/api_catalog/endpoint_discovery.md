@@ -11,21 +11,22 @@ aliases:
 ---
 
 ## Overview
-If a service has a supported tracer installed, the API Catalog will automatically be filled by all endpoints discovered from this service. 
+If a service has a supported tracer installed, the API Catalog is automatically populated with all endpoints discovered from this service. 
 
-In order to check compatibility, you can visit the ‘troubleshoot’ page on the app by pressing the ‘learn more’ button
+To check for compatibility issues, click **Learn More** in the app, then select **Troubleshoot**.
 {{< img src="tracing/api_catalog/api-catalog-discovery-learn-more.png" alt="ALT TEXT" style="width:30%;text-align: left;" >}}
 
-## Providing endpoint path manually
+## Providing endpoint paths manually
 Add the `datadog.api_catalog.route` tag to force endpoint discovery by the API Catalog.
 This tag should contain the matched route, that is, the path template in the format used by the respective server framework.
 
-Note: API Catalog will still filter out spans that do not contain the following tags:
-* `http.method`
-* `http.status_code`
+<div class="alert alert-info">API Catalog filters out spans that do not contain the following tags:<ul>
+<li> <code>http.method</code>
+<li> <code>http.status_code</code></ul>
+</div>
 
 ## Example
-Example of adding a custom tag for each span in Go and Ruby:
+The following examples demonstrate adding a custom tag for each span in Go and Ruby:
 
 **Go**\
 {{< code-block lang="go" disable_copy="true" >}}
