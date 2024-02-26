@@ -1,5 +1,5 @@
 ---
-title: Deployment Tracking
+title: Performance Metrics
 kind: documentation
 disable_toc: false
 further_reading:
