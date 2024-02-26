@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting
+title: (LEGACY) Troubleshooting
 kind: documentation
 disable_toc: false
 further_reading:

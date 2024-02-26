@@ -1,5 +1,5 @@
 ---
-title: Sensitive Data Scanner Transform
+title: (LEGACY) Sensitive Data Scanner Transform
 kind: documentation
 disable_toc: false
 private: true

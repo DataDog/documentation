@@ -1,5 +1,5 @@
 ---
-title: Sinks
+title: (LEGACY) Sinks
 ---
 
 {{< site-region region="gov" >}}

@@ -1,5 +1,5 @@
 ---
-title: Advanced Configurations
+title: (LEGACY) Advanced Configurations
 kind: Documentation
 ---
 

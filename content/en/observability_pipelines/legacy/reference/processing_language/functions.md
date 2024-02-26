@@ -1,5 +1,5 @@
 ---
-title: Functions
+title: (LEGACY) Functions
 ---
 
 {{< site-region region="gov" >}}

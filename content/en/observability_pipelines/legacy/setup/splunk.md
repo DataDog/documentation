@@ -1,5 +1,5 @@
 ---
-title: Set Up Observability Pipelines in your Splunk Environment
+title: (LEGACY) Set Up Observability Pipelines in your Splunk Environment
 kind: documentation
 aliases:
   - /integrations/observability_pipelines/splunk

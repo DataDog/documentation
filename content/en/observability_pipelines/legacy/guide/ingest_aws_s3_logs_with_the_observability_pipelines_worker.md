@@ -1,5 +1,5 @@
 ---
-title: Ingest Amazon S3 Logs with the Observability Pipelines Worker
+title: (LEGACY) Ingest Amazon S3 Logs with the Observability Pipelines Worker
 kind: guide
 further_reading:
   - link: "/observability_pipelines/legacy/working_with_data/"

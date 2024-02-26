@@ -1,5 +1,5 @@
 ---
-title: Observability Pipelines Guides
+title: (LEGACY) Observability Pipelines Guides
 kind: guide
 private: true
 disable_toc: true

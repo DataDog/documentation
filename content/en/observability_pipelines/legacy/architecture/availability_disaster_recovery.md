@@ -1,5 +1,5 @@
 ---
-title: High Availability and Disaster Recovery
+title: (LEGACY) High Availability and Disaster Recovery
 kind: Documentation
 ---
 

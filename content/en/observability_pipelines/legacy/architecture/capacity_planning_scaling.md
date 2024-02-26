@@ -1,5 +1,5 @@
 ---
-title: Capacity Planning and Scaling
+title: (LEGACY) Capacity Planning and Scaling
 kind: Documentation
 ---
 

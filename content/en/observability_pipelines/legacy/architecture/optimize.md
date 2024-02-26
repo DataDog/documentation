@@ -1,5 +1,5 @@
 ---
-title: Optimizing the Instance
+title: (LEGACY) Optimizing the Instance
 kind: Documentation
 ---
 

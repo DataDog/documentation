@@ -1,5 +1,5 @@
 ---
-title: Datadog Processing Language / Vector Remap Language
+title: (LEGACY) Datadog Processing Language / Vector Remap Language
 ---
 
 {{< site-region region="gov" >}}

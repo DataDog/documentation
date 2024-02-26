@@ -1,5 +1,5 @@
 ---
-title: Monitoring
+title: (LEGACY) Monitoring
 kind: documentation
 disable_toc: false
 ---
