@@ -11,7 +11,7 @@ aliases:
 ---
 
 ## Overview
-For more details about creating, getting, and deleting endpoint definitions, see the [API Catalog API reference][8]
+For more details about creating, getting, and deleting endpoint definitions, see the [API Catalog API reference][8].
 
 ## Further reading
 
