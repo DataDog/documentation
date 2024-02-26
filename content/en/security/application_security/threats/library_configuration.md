@@ -96,15 +96,6 @@ The following are examples of data that are flagged as sensitive by default:
 
 See [APM Data Security][3] for information about other mechanisms in the Datadog Agent and libraries that can also be used to remove sensitive data.
 
-## Disabling Application Security Management
-
-To disable ASM, remove the `DD_APPSEC_ENABLED=true` environment variable from your application configuration, and restart your service.
-
-If no `DD_APPSEC_ENABLED=true` environment variable is set for your service:
-* If it's a PHP service: explicitly set the environment variable to `DD_APPSEC_ENABLED=false`, and restart your service.
-* If ASM was activated in one-click: go to [ASM service configuration][8], select **Services with Threat Management Capabilities**, click on your service and then click **Deactivate**.
-* To disable ASM on your services in bulk, click the check box in the list header and then under "Bulk Actions" select "Deactivate Threat Management detection on (number of) services".
-
 ## Configure a custom blocking page or payload
 
 {{% asm-protection-page-configuration %}}

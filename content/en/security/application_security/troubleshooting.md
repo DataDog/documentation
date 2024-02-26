@@ -573,6 +573,7 @@ If no `DD_APPSEC_ENABLED=true` environment variable is set for your service:
 * If ASM was activated in one-click: go to [ASM service configuration][15], select **Services with Threat Management Capabilities**, click on your service and then click **Deactivate**.
 * To disable ASM on your services in bulk, click the check box in the list header and then under "Bulk Actions" select "Deactivate Threat Management detection on (number of) services".
 
+## Threat Detection and Protection
 
 ### Disabling Software Composition Analysis
 
