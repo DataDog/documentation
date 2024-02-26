@@ -18,12 +18,14 @@ further_reading:
 
 After you set up the tracing library with your code and configure the Agent to collect APM data, optionally configure the tracing library as desired, including setting up [Unified Service Tagging][1].
 
-It is recommended to use `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` to set `env`, `service` and `version` for your services. Refer to the [Unified Service Tagging][1] docummentation recommendations on which value to set for environment variables
+It is recommended to use `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` to set `env`, `service` and `version` for your services. Refer to the [Unified Service Tagging][1] docummentation recommendations on which value to set for environment variables.
+
 ## Environment variables
+To configure the tracer using environment variables, set the variables before launching the instrumented application.
 
 `DD_SERVICE` 
 : **Since**: v0.1.0 <br>
-Sets the default service name.
+Sets the service name.
 
 `DD_ENV`
 : **Since**: v0.1.0 <br>
@@ -33,12 +35,12 @@ Adds the `env` tag with the specified value to all generated spans.
 `DD_VERSION` 
 : **Since**: v0.1.0 <br>
 **Example**: `1.2.3`, `6c44da20`, `2020.02.13` <br>
-Sets the service's version to all generated spans.
+Sets the version of the service.
 
 `DD_TAGS` 
 : **Since**: v0.1.0 <br>
 **Example**: `team:intake,layer:api,foo:bar` <br>
-A comma separated list of default `key:value` pairs to be added to all generated spans.
+A comma separated list of `key:value` pairs to be added to all generated spans.
 
 `DD_AGENT_HOST` 
 : **Since**: v0.1.0 <br>
@@ -52,29 +54,33 @@ Sets the port where traces are sent (the port where the Agent is listening for c
 
 `DD_TRACE_AGENT_URL` 
 : **Since**: v0.1.0 <br>
+**Default**: `http://<DD_AGENT_HOST>:<DD_TRACE_AGENT_PORT>` if they are set, or `http://localhost:8126`.
 **Examples**:
   - HTTP URL: `http://localhost:8126`
-  - Unix Domain Socket: `unix:///var/run/datadog/apm.socket` <br>
-Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. This URL supports HTTP, HTTPS, and Unix address schemes. If the [Agent configuration][3] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
+  - Unix Domain Socket: `unix:///var/run/datadog/apm.socket`
+Sets the URL endpoint where traces are sent. Overrides `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` if set. This URL supports HTTP, HTTPS, and Unix address schemes. <br>
+If the [Agent configuration][3] sets `receiver_port` or `DD_APM_RECEIVER_PORT` to something other than the default `8126`, then `DD_TRACE_AGENT_PORT` or `DD_TRACE_AGENT_URL` must match it.
 
 `DD_TRACE_RATE_LIMIT`
 : **Since**: 0.1.0 <br>
 **Default**: `200` <br>
-Maximum number of spans to sample per-second.
+Maximum number of traces allowed to be submitted per second.
 
 `DD_TRACE_SAMPLE_RATE`
 : **Since**: 0.1.0 <br>
+**Default**: The Datadog Agent default rates or `1.0`. <br>
 Sets the sampling rate for all generated traces. The value must be between `0.0` and `1.0` (inclusive). By default, the sampling rate is delegated to the Datadog Agent. If no sampling rate is set by the Datadog Agent, then the default is `1.0`.
 
 `DD_TRACE_SAMPLING_RULES` 
 : **Since**: v0.1.0 <br>
-**Default**: `[]` <br>
+**Default**: `null` <br>
 A JSON array of objects. Each object must have a `sample_rate`, and the `name` and `service` fields are optional. The `sample_rate` value must be between 0.0 and 1.0 (inclusive). Rules are applied in configured order to determine the trace's sample rate.
 
 `DD_SPAN_SAMPLING_RULES`
 : **Version**: v0.1.0 <br>
-**Default**: `[]`<br>
+**Default**: `null`<br>
 **Example:**<br>
+  - Set the sample rate to 20%: `[{"sample_rate": 0.2}]`
   - Set the span sample rate to 50% for the service `my-service` and operation name `http.request`, up to 50 traces per second: `'[{"service": "my-service", "name": "http.request", "sample_rate":0.5, "max_per_second": 50}]'` <br>
 A JSON array of objects. Rules are applied in configured order to determine the span's sample rate. The `sample_rate` value must be between 0.0 and 1.0 (inclusive).
 For more information, see [Ingestion Mechanisms][2].<br>
@@ -110,10 +116,6 @@ Adds the `hostname` tag with the result of `gethostname`.
 : **Since**: 0.1.0 <br>
 **Default**: `true` <br>
 Log the tracer configuration once the tracer is fully initialized. <br>
-**Log Example**: <br>
-````
-DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type":"datadog::tracing::ThreadedEventScheduler"},"flush_interval_milliseconds":2000,"http_client":{"type":"datadog::tracing::Curl"},"remote_configuration_url":"unix:///apm.sock/v0.7/config","request_timeout_milliseconds":2000,"shutdown_timeout_milliseconds":2000,"telemetry_url":"unix:///apm.sock/telemetry/proxy/api/v2/apmtelemetry","traces_url":"unix:///apm.sock/v0.4/traces"},"type":"datadog::tracing::DatadogAgent"},"default":{"environment":"dmehala-dev","service":"dd-trace-cpp-example","service_type":"web"},"environment_variables":{"DD_ENV":"dmehala-dev","DD_TRACE_AGENT_URL":"unix:///apm.sock"},"extraction_styles":["Datadog","tracecontext"],"injection_styles":["Datadog","tracecontext"],"report_traces":true,"runtime_id":"d71b5215-ec13-4e1f-b670-332a91a48b26","span_sampler":{"rules":[]},"tags_header_size":512,"trace_sampler":{"max_per_second":200.0,"rules":[]},"version":"[dd-trace-cpp version v0.1.12]"
-````
 
 `DD_TRACE_128_BIT_TRACEID_GENERATION_ENABLED`
 : **Since**: 0.1.6 <br>
@@ -124,7 +126,7 @@ If `false`, the tracer will generate legacy 64-bit trace IDs.
 `DD_INSTRUMENTATION_TELEMETRY_ENABLED`
 : **Since**: 0.1.12 <br>
 **Default**: `true` <br>
-Generates and submit telemetry metrics to the Datadog Agent when enabled. If `false`, telemetry metrics are not generated and also not be submitted.
+Datadog may collect [environmental and diagnostic information about your system][4] to improve the product. When `false`, this telemetry data will not be collected.
 
 `DD_REMOTE_CONFIG_POLL_INTERVAL_SECONDS`
 : **Since**: 0.1.13 (NOT RELEASE YET) <br>
@@ -177,3 +179,4 @@ Sets the App Analytics sampling rate. Overrides `DD_TRACE_ANALYTICS_ENABLED` if 
 [1]: /getting_started/tagging/unified_service_tagging/
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/
 [3]: /agent/configuration/network/#configure-ports
+[4]: /tracing/configure_data_security#telemetry-collection

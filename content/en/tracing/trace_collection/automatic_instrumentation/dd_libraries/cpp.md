@@ -23,153 +23,168 @@ further_reading:
   tag: "Advanced Usage"
   text: "Advanced Usage"
 ---
-**Note**: C++ does not provide integrations for OOTB instrumentation, but it's used by Proxy tracing such as [Envoy][1] and [Nginx][2]. For compatibility requirements for the C++ Tracer, visit the [Compatibility Requirements][3] page.
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> C++ does not provide integrations for OOTB instrumentation, but it's used by Proxy tracing such as [Envoy][1] and [Nginx][2].
+</div>
+
+## Compatibility requirements
+The C++ tracing library requires C++17 to build. For a full list of Datadog's tracing library compatiblity requirements and processor architecture support, visit the [Compatibility Requirements][3] page.
+
+## Getting started
+Before you begin, make sure you have already [installed and configured the Agent][6].
 
 ## Instrument your application
 
-After [the Agent is installed][6], follow these steps to add the Datadog tracing library to your C++ applications in one of two ways:
+{{< tabs >}}
 
-* Compile against dd-opentracing-cpp, where the Datadog lib is compiled in and configured in code
-* Dynamic loading, where the Datadog OpenTracing library is loaded at runtime and configured via JSON
+{{% tab "CMake" %}}
+````CMake
+include(FetchContent)
 
-### Compile against dd-opentracing-cpp
+FetchContent_Declare(
+  dd-trace-cpp
+  GIT_REPOSITORY https://github.com/DataDog/dd-trace-cpp
+  GIT_TAG        ${DD_TRACE_CPP_COMMIT}"
+  GIT_SHALLOW    ON
+  GIT_PROGRESS   ON
+)
+
+FetchContent_MakeAvailable(dd-trace-cpp)
+
+# Add `tracer_example` target
+add_executable(tracer_example tracer_example.cpp)
+
+# Statically link against `dd-trace-cpp`
+# To dynamically link agains `dd-trace-cpp` use the `dd_trace_cpp_shared` target
+target_link_libraries(cpp-parametric-http-test dd_trace_cpp-objects)
+````
+
+```cpp
+// tracer_example.cpp
+#include <datadog/span_config.h>
+#include <datadog/tracer.h>
+#include <datadog/tracer_config.h>
+
+#include <iostream>
+#include <string>
+
+namespace dd = datadog::tracing;
+
+int main() {
+  dd::TracerConfig config;
+  config.defaults.service = "my-service";
+
+  const auto validated_config = dd::finalize_config(config);
+  if (!validated_config) {
+    std::cerr << validated_config.error() << '\n';
+    return 1;
+  }
+
+  dd::Tracer tracer{*validated_config};
+  // Create some spans.
+  {
+    auto span_a = tracer.create_span();
+    span_a.set_name("A");
+    span_a.set_tag("tag", "123");
+    auto span_b = span_a.create_child();
+    span_b.set_name("B");
+    span_b.set_tag("tag", "value");
+  }
+
+  return 0;
+}
+```
+
+```bash
+cmake -B build -DDD_TRACE_VERSION=v0.1.12 .
+cmake --build build --target tracer_example -j
+
+./build/tracer_example
+DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type":"datadog::tracing::ThreadedEventScheduler" ... }}}
+```
+
+{{% /tab %}}
+
+{{% tab "Manual" %}}
 
 ```bash
 # Requires the "jq" command, which can be installed via
-# the package manager, for example "apt install jq",
-# "apk add jq", "yum install jq".
+# the package manager:
+#   - APT: `apt install jq`
+#   - APK: `apk add jq`
+#   - YUM: `yum install jq`
 if ! command -v jq >/dev/null 2>&1; then
   >&2 echo "jq command not found. Install using the local package manager."
-else
-  # Gets the latest release version number from GitHub.
-  get_latest_release() {
-    curl --silent "https://api.github.com/repos/$1/releases/latest" | jq --raw-output .tag_name
-  }
-  DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
-  # Download and install dd-opentracing-cpp library.
-  wget https://github.com/DataDog/dd-opentracing-cpp/archive/${DD_OPENTRACING_CPP_VERSION}.tar.gz -O dd-opentracing-cpp.tar.gz
-  mkdir -p dd-opentracing-cpp/.build
-  tar zxvf dd-opentracing-cpp.tar.gz -C ./dd-opentracing-cpp/ --strip-components=1
-  cd dd-opentracing-cpp/.build
-  # Download and install the correct version of opentracing-cpp, & other deps.
-  ../scripts/install_dependencies.sh
-  # Configure the project, build it, and install it.
-  cmake ..
-  make -j
-  make install
+  exit 1
 fi
-```
 
-Include `<datadog/opentracing.h>` and create the tracer:
-
-```cpp
-// tracer_example.cpp
-#include <datadog/opentracing.h>
-#include <iostream>
-#include <string>
-
-int main(int argc, char* argv[]) {
-  datadog::opentracing::TracerOptions tracer_options{"localhost", 8126, "compiled-in example"};
-  auto tracer = datadog::opentracing::makeTracer(tracer_options);
-
-  // Create some spans.
-  {
-    auto span_a = tracer->StartSpan("A");
-    span_a->SetTag("tag", 123);
-    auto span_b = tracer->StartSpan("B", {opentracing::ChildOf(&span_a->context())});
-    span_b->SetTag("tag", "value");
-  }
-
-  tracer->Close();
-  return 0;
-}
-```
-
-Link against `libdd_opentracing` and `libopentracing`, making sure that they are both in your `LD_LIBRARY_PATH`:
-
-```bash
-g++ -std=c++14 -o tracer_example tracer_example.cpp -ldd_opentracing -lopentracing
-./tracer_example
-```
-
-### Dynamic loading
-
-```bash
+# Gets the latest release version number from GitHub.
 get_latest_release() {
-  wget -qO- "https://api.github.com/repos/$1/releases/latest" |
-    grep '"tag_name":' |
-    sed -E 's/.*"([^"]+)".*/\1/';
+  curl --silent "https://api.github.com/repos/$1/releases/latest" | jq --raw-output .tag_name
 }
-DD_OPENTRACING_CPP_VERSION="$(get_latest_release DataDog/dd-opentracing-cpp)"
-OPENTRACING_VERSION="$(get_latest_release opentracing/opentracing-cpp)"
-# Download and install OpenTracing-cpp
-wget https://github.com/opentracing/opentracing-cpp/archive/${OPENTRACING_VERSION}.tar.gz -O opentracing-cpp.tar.gz
-mkdir -p opentracing-cpp/.build
-tar zxvf opentracing-cpp.tar.gz -C ./opentracing-cpp/ --strip-components=1
-cd opentracing-cpp/.build
-cmake ..
-make
-make install
-# Install dd-opentracing-cpp shared plugin.
-wget https://github.com/DataDog/dd-opentracing-cpp/releases/download/${DD_OPENTRACING_CPP_VERSION}/linux-amd64-libdd_opentracing_plugin.so.gz
-gunzip linux-amd64-libdd_opentracing_plugin.so.gz -c > /usr/local/lib/libdd_opentracing_plugin.so
-```
 
-Include `<opentracing/dynamic_load.h>` and load the tracer from `libdd_opentracing_plugin.so`:
+DD_TRACE_CPP_VERSION="$(get_latest_release DataDog/dd-trace-cpp)"
+
+# Download and install dd-trace-cpp library.
+wget https://github.com/DataDog/dd-trace-cpp/archive/${DD_TRACE_CPP_VERSION}.tar.gz -O dd-trace-cpp.tar.gz
+mkdir dd-trace-cpp && tar zxvf dd-trace-cpp.tar.gz -C ./dd-trace-cpp/ --strip-components=1
+cd dd-trace-cpp
+
+# Download and install the correct version of opentracing-cpp, & other deps.
+# Configure the project, build it, and install it.
+cmake -B build .
+cmake --build build -j
+cmake --install build
+```
 
 ```cpp
 // tracer_example.cpp
-#include <opentracing/dynamic_load.h>
+#include <datadog/span_config.h>
+#include <datadog/tracer.h>
+#include <datadog/tracer_config.h>
+
 #include <iostream>
 #include <string>
 
-int main(int argc, char* argv[]) {
-  // Load the tracer library.
-  std::string error_message;
-  auto handle_maybe = opentracing::DynamicallyLoadTracingLibrary(
-      "/usr/local/lib/libdd_opentracing_plugin.so", error_message);
-  if (!handle_maybe) {
-    std::cerr << "Failed to load tracer library " << error_message << "\n";
+namespace dd = datadog::tracing;
+
+int main() {
+  dd::TracerConfig config;
+  config.defaults.service = "my-service";
+
+  const auto validated_config = dd::finalize_config(config);
+  if (!validated_config) {
+    std::cerr << validated_config.error() << '\n';
     return 1;
   }
 
-  // Read in the tracer's configuration.
-  std::string tracer_config = R"({
-      "service": "dynamic-load example",
-      "agent_host": "localhost",
-      "agent_port": 8126
-    })";
-
-  // Construct a tracer.
-  auto& tracer_factory = handle_maybe->tracer_factory();
-  auto tracer_maybe = tracer_factory.MakeTracer(tracer_config.c_str(), error_message);
-  if (!tracer_maybe) {
-    std::cerr << "Failed to create tracer " << error_message << "\n";
-    return 1;
-  }
-  auto& tracer = *tracer_maybe;
-
+  dd::Tracer tracer{*validated_config};
   // Create some spans.
   {
-    auto span_a = tracer->StartSpan("A");
-    span_a->SetTag("tag", 123);
-    auto span_b = tracer->StartSpan("B", {opentracing::ChildOf(&span_a->context())});
-    span_b->SetTag("tag", "value");
+    auto span_a = tracer.create_span();
+    span_a.set_name("A");
+    span_a.set_tag("tag", "123");
+    auto span_b = span_a.create_child();
+    span_b.set_name("B");
+    span_b.set_tag("tag", "value");
   }
 
-  tracer->Close();
   return 0;
 }
 ```
 
-Just link against `libopentracing`, making sure that `libopentracing.so` is in your `LD_LIBRARY_PATH`:
+Link against `libdd_trace_cpp`, making sure that they are both in your `LD_LIBRARY_PATH`:
 
-```bash
-g++ -std=c++11 -o tracer_example tracer_example.cpp -lopentracing
+````bash
+g++ -std=c++17 -o tracer_example tracer_example.cpp -ldd_trace_cpp
 ./tracer_example
-```
+DATADOG TRACER CONFIGURATION - {"collector":{"config":{"event_scheduler":{"type":"datadog::tracing::ThreadedEventScheduler" ... }}}
+````
 
-**Note**: OpenTracing requires C++ 11 or higher.
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Configuration
 
@@ -185,3 +200,4 @@ If needed, configure the tracing library to send application performance telemet
 [4]: https://app.datadoghq.com/apm/service-setup
 [5]: /tracing/trace_collection/library_config/cpp/
 [6]: /tracing/trace_collection/automatic_instrumentation/?tab=datadoglibraries#install-and-configure-the-agent
+[7]: TODO
