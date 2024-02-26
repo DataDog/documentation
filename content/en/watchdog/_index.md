@@ -23,6 +23,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/watchdog-impact-analysis/"
     tag: "Blog"
     text: "Understand user impact scope with Watchdog Impact Analysis"
+  - link: https://www.datadoghq.com/blog/watchdog-live-processes/
+    tag: 'Blog'
+    text: 'Troubleshoot anomalies in workload performance with Watchdog Insights for Live Processes'
 algolia:
   tags: ['watchdog']
 cascade:
