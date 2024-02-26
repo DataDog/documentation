@@ -106,8 +106,6 @@ You can specify the following parameters for the profiling data:
 
 The available profiling types usually include options like **CPU Time** and **Allocated Memory**, but are determined by the platform and vary by language.
 
-<div class="alert alert-info">This feature requires the Continuous Profiler to be [enabled][9] for the selected service.</div>
-
 ### Top list
 
 The **Top List** sub-tab shows the methods that consume the most resources based on the aggregated profile data loaded from the Datadog servers. These are the methods that are most likely candidates for optimization.
