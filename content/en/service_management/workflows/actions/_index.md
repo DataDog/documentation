@@ -15,7 +15,7 @@ further_reading:
   text: "Learn about integrations"
 ---
 
-Datadog provides a suite of generic workflow actions that are not associated with a specific tool or integration. These actions give you more control over your workflows by allowing you to do things like:
+Datadog provides a suite of workflow actions that are not associated with a specific tool or integration. These actions give you more control over your workflows by allowing you to do things like:
 - Add logic to control the execution path of your workflow.
 - Transform the data collected by an action.
 - Make custom HTTP requests.
