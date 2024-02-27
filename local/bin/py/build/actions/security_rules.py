@@ -239,7 +239,10 @@ def security_rules(content, content_dir):
                 # CSM Identity Risks, CSM Misconfigurations, CSM Sec Issues
                 page_data["view_rule_url"] = f"https://app.datadoghq.com/security/configuration/compliance/rules?query=type%3A%28cloud_configuration%20OR%20infrastructure_configuration%29%20defaultRuleId%3A{page_data['default_rule_id']}%20&deprecated=hide&groupBy=framework&product=cspm&sort=rule_name"
                 if page_data['rule_category'][0] != "CSM Security Issues":
-                    page_data["view_findings_url"] = f"https://app.datadoghq.com/security/identities?query=%40workflow.rule.defaultRuleId%3A{page_data['default_rule_id']}%20&aggregation=resources&column=status&order=asc&sort=ruleSeverity%2CfailedResources-desc"
+                    if "CSM Misconfigurations" in page_data['rule_category'][0]:
+                        page_data["view_findings_url"] = f"https://app.datadoghq.com/security/compliance?query=%40workflow.rule.defaultRuleId%3A{page_data['default_rule_id']}%20&aggregation=resources&column=status&order=asc&sort=ruleSeverity%2CfailedResources-desc"
+                    else:
+                        page_data["view_findings_url"] = f"https://app.datadoghq.com/security/identities?query=%40workflow.rule.defaultRuleId%3A{page_data['default_rule_id']}%20&aggregation=resources&column=status&order=asc&sort=ruleSeverity%2CfailedResources-desc"
 
 
             front_matter = yaml.dump(page_data, default_flow_style=False).strip()
