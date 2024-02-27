@@ -51,7 +51,7 @@ All 3 supported types of events are required and must be enabled individually.
 Not enabling one or more events results in an an incomplete installation, leading to unexpected behavior in Datadog.
 </div>
 
-### Approvals support
+### Approvals
 
 The Datadog integration for [Azure Pipelines][1] also supports the [Approvals][9] feature. To enable it
 on multiple projects, you can use a [script](#configuring-multiple-projects-in-bulk) provided by Datadog. To enable it
