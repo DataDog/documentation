@@ -137,7 +137,7 @@ metadata:
     dd_service: transaction-service
 ```
 
-When this annotation is used, the service name is added to all the deployment executions generated from the application.
+Using this annotation adds the service name to all the deployment executions generated from the application.
 Moreover, if your service is registered in [Service Catalog][13], the team name is also added to all the deployment executions.
 
 ## Adding custom tags to deployment executions
