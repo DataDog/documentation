@@ -41,7 +41,7 @@ processors:
 
 In AWS Fargate environments, an incorrect hostname might be reported for traces.
 
-To troubleshoot, make sure to use the `resourcedetection` processor in your Datadog exporter configuration and enable the `ecs` detector.
+To troubleshoot, make sure to use the `resourcedetection` processor in your Collector configuration and enable the `ecs` detector.
 
 ```yaml
 processors:
@@ -50,8 +50,6 @@ processors:
     timeout: 2s
     override: false
 ```
-
-**Note**: ECS Fargate is supported for v0.42+ of the Datadog Exporter.
 
 ## Further reading
 

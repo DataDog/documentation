@@ -625,44 +625,44 @@ main:
     identifier: otel_sampling
     parent: opentelemetry_top_level
     weight: 5
-  - name: Resources
-    url: opentelemetry/resources
-    identifier: otel_resources
+  - name: Interoperability with Datadog
+    url: opentelemetry/interoperability/
+    identifier: otel_interoperability
     parent: opentelemetry_top_level
     weight: 6
+  - name: OTLP Ingestion by the Agent
+    url: opentelemetry/interoperability/otlp_ingest_in_the_agent/
+    identifier: otel_ingest
+    parent: otel_interoperability
+    weight: 601
+  - name: W3C Trace Context Propagation
+    url: /tracing/trace_collection/trace_context_propagation/
+    identifier: otel_propagation
+    parent: otel_interoperability
+    weight: 602
+  - name: Custom Instrumentation
+    url: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
+    identifier: otel_instrumentation
+    parent: otel_interoperability
+    weight: 603
+  - name: Correlate RUM and Traces 
+    url: /real_user_monitoring/connect_rum_and_traces/
+    identifier: otel_rum
+    parent: otel_interoperability
+    weight: 604
   - name: Troubleshooting
     url: opentelemetry/troubleshooting/
     identifier: otel_troubleshooting
     parent: opentelemetry_top_level
     weight: 7
-  - name: Interoperability with Datadog
-    url: opentelemetry/interoperability/
-    identifier: otel_interoperability
-    parent: opentelemetry_top_level
-    weight: 8
-  - name: OTLP Ingestion by the Agent
-    url: opentelemetry/interoperability/otlp_ingest_in_the_agent/
-    identifier: otel_ingest
-    parent: otel_interoperability
-    weight: 801
-  - name: W3C Trace Context Propagation
-    url: /tracing/trace_collection/trace_context_propagation/
-    identifier: otel_propagation
-    parent: otel_interoperability
-    weight: 802
-  - name: Custom Instrumentation
-    url: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
-    identifier: otel_instrumentation
-    parent: otel_interoperability
-    weight: 803
-  - name: Correlate RUM and Traces 
-    url: /real_user_monitoring/connect_rum_and_traces/
-    identifier: otel_rum
-    parent: otel_interoperability
-    weight: 804
   - name: Guides
     url: opentelemetry/guide/
     identifier: otel_guides
+    parent: opentelemetry_top_level
+    weight: 8
+  - name: Resources
+    url: opentelemetry/resources
+    identifier: otel_resources
     parent: opentelemetry_top_level
     weight: 9
   - name: Developers
