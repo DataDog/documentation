@@ -8,8 +8,8 @@ further_reading:
   text: Kafka 통합
 - link: /data_streams/
   tags: 설명서
-  text: 로그 수집 & 통합
-kind: 가이드
+  text: 데이터 스트림 모니터링
+kind: guide
 title: Kafka 대기열 모니터링
 ---
 
@@ -29,7 +29,7 @@ title: Kafka 대기열 모니터링
 
 {{< img src="tracing/guide/monitor_kafka_queues/dash-2022-data-streams-compressed-blurb.mp4" alt="데이터 스트림 모니터링 데모" video="true">}}
 
-### 분산 추적
+### 분산된 트레이스
 
 APM의 분산 추적은 요청 볼륨과 지연 시간을 측정하여 서비스 성능에 대한 확장된 가시성을 제공합니다. 그래프와 알림을 생성하여 APM 데이터를 모니터링하고 아래와 같은 플레임 그래프에서 단일 요청의 활동을 시각화하여 지연 시간과 오류의 원인을 더 잘 이해할 수 있습니다.
 
@@ -53,7 +53,7 @@ Kafka 애플리케이션을 추적하기 위해 Datadog은 Kafka SDK 내에서 �
   </div>
 </div>
 
-| **이름**                         | **유형** | **Description**                                                                                                     |
+| **이름**                         | **유형** | **설명**                                                                                                     |
 |----------------------------------|----------|---------------------------------------------------------------------------------------------------------------------|
 | `messaging.system`               | `string` | `Kafka`                                                                                                             |
 | `messaging.destination`          | `string` | 메시지가 전송되는 주제.                                                                                   |
