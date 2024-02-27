@@ -221,39 +221,24 @@ attributes:
       - icon-log
     type: string
     domain: Source code
-  - name: error.message
-    description: A concise, human-readable, one-line message explaining the event.
-    product_source: 
-      - icon-log
-    type: string
-    domain: Source code
-  - name: error.stack
-    description: The stack trace or the complementary information about the error.
-    product_source: 
-      - icon-log
-    type: string
-    domain: Source code
   - name: db.instance
-    description: Database instance name. For example, in Java, if `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"`, the instance name is `customers`.
-    product_source: 
+    description: The name of the database being connected to. For example, in Java, if `jdbc.url="jdbc:mysql://127.0.0.1:3306/customers"`, the instance name is `customers`.
+    product_source:
+      - icon-apm 
       - icon-log
     type: string
     domain: Database
   - name: db.statement
     description: "A database statement for the given database type. For example, for mySQL: `'SELECT * FROM wuser_table';` and for Redis: `'SET mykey 'WuValue''`."
     product_source: 
-      - icon-log
-    type: string
-    domain: Database
-  - name: db.operation
-    description: The operation that was performed ("query", "update", "delete", and so on).
-    product_source: 
+      - icon-apm
       - icon-log
     type: string
     domain: Database
   - name: db.user
     description: User that performs the operation.
     product_source: 
+      - icon-apm
       - icon-log
     type: string
     domain: Database
@@ -854,6 +839,7 @@ attributes:
   - name: error.type
     description: The error type (or error code in some cases).
     product_source:
+      - icon-apm
       - icon-rum
       - android
       - browser
@@ -865,6 +851,8 @@ attributes:
   - name: error.message
     description: A concise, human-readable, one-line message explaining the event.
     product_source:
+      - icon-apm
+      - icon-log
       - icon-rum
       - android
       - browser
@@ -876,6 +864,8 @@ attributes:
   - name: error.stack
     description: The stack trace or complementary information about the error.
     product_source:
+      - icon-apm
+      - icon-log
       - icon-rum
       - android
       - browser
@@ -1352,14 +1342,6 @@ attributes:
       - browser
     type: string
     domain: Resource (Browser events)
-    
-  - name: error.type
-    description: The error type (or error code in some cases).
-    product_source:
-      - icon-rum
-      - browser
-    type: string
-    domain: Source errors (Browser events)
 
   - name: action.frustration.type:dead_click
     description: The dead clicks detected by the RUM Browser SDK.
@@ -1519,7 +1501,7 @@ attributes:
     description: The HTTP response status code.
     product_source:
       - icon-apm
-      - icon-logs
+      - icon-log
     type: string
     domain: HTTP requests
   - name: http.url
@@ -1611,31 +1593,11 @@ attributes:
     type: string
     domain: Database spans
     
-  - name: db.user
-    description: The username that accessed the database.
-    product_source:
-      - icon-apm
-    type: string
-    domain: Database spans
-    
-  - name: db.instance
-    description: The name of the database being connected to.
-    product_source:
-      - icon-apm
-    type: string
-    domain: Database spans
-    
-  - name: db.statement
-    description: The database statement being executed.
-    product_source:
-      - icon-apm
-    type: string
-    domain: Database spans
-    
   - name: db.operation
     description: The name of the operation being executed. For example, `SELECT`, `findAndModify`, `HMSET`.
     product_source:
       - icon-apm
+      - icon-log
     type: string
     domain: Database spans
     
@@ -1750,26 +1712,7 @@ attributes:
       - icon-apm
     type: string
     domain: Remote procedure calls
-  - name: error.type
-    description: The error type or kind (or code in some cases).
-    product_source:
-      - icon-apm
-    type: string
-    domain: Errors
   
-  - name: error.message
-    description: A concise, human-readable, one-line message explaining the event.
-    product_source:
-      - icon-apm
-    type: string
-    domain: Errors
-  
-  - name: error.stack
-    description: The stack trace or the complementary information about the error.
-    product_source:
-      - icon-apm
-    type: string
-    domain: Errors
 ---
 
 
