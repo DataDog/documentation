@@ -12,9 +12,7 @@ further_reading:
 
 Performance monitoring provides an overview of how your application is performing against the user experience by application environment, service, version, and so on.
 
-## Performance Metrics
-
-Performance metrics provide insights into your web or mobile application's performance. They vary depending on the application type: [browser][], [Android][], [iOS][]
+## Product Analytics
 
 ## Deployment Tracking
 
