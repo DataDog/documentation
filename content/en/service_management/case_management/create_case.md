@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Cases can be created [manually](#manual-case-creation) or [automatically](#automatic-case-creation) from across Datadog. There are two types of cases: standard and security. Cases created from security signals and Sensitive Data Scanner are automatically made security cases. The security case type has all the features of the standard case type, along with a mandatory field for specifying the reason for closing a case (testing, false positive, or one time exception). 
+Cases can be created [manually](#manual-case-creation), [automatically](#automatic-case-creation) from across Datadog, or [programmatically](#api) with the API. There are two types of cases: standard and security. Cases created from security signals and Sensitive Data Scanner are automatically made security cases. The security case type has all the features of the standard case type, along with a mandatory field for specifying the reason for closing a case (testing, false positive, or one time exception). 
 
 ## Manual case creation
 
@@ -43,6 +43,12 @@ Configure the following products to automatically create cases:
 | Event Management (Correlations) | In Event Management, correlations configured to aggregate events from Datadog and third-party sources automatically create cases.   |
 | Workflow Automation | 1. In a new or existing workflow, add a step in the Workflow builder and search for "Case Management."<br> 2. Select the **Create Case** action.<br> 3. If the workflow is configured to run based on a monitor or security signal trigger, add the workflow handle to the desired resources.|
 
+## API
+
+Create a case through the [API endpoint][5]. 
+
+**Note**: This endpoint requires the `cases_write` authorization scope.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -51,3 +57,4 @@ Configure the following products to automatically create cases:
 [2]: /monitors/manage/status/
 [3]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [4]: https://app.datadoghq.com/cases/settings
+[5]: /api/latest/case-management/#create-a-case

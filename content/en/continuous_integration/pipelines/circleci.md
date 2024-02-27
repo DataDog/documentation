@@ -13,9 +13,9 @@ further_reading:
     - link: "/continuous_integration/troubleshooting/"
       tag: "Documentation"
       text: "Troubleshooting CI"
-    - link: "/continuous_integration/pipelines/custom_tags_and_metrics/"
+    - link: "/continuous_integration/pipelines/custom_tags_and_measures/"
       tag: "Documentation"
-      text: "Extend Pipeline Visibility by adding custom tags and metrics"
+      text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
 
 {{< site-region region="gov" >}}
@@ -32,7 +32,7 @@ further_reading:
 
 - **Custom pre-defined tags**: Set [custom tags][6] to all generated pipeline and job spans
 
-- **Custom tags and metrics at runtime**: Configure [custom tags][7] and metrics at runtime
+- **Custom tags and measures at runtime**: Configure [custom tags][7] and measures at runtime
 
 ## Configure the Datadog integration
 
@@ -105,7 +105,7 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 [4]: https://app.datadoghq.com/ci/pipelines
 [5]: https://app.datadoghq.com/ci/pipeline-executions
 [6]: /continuous_integration/pipelines/circleci/#set-custom-tags
-[7]: /continuous_integration/pipelines/custom_tags_and_metrics/?tab=linux
+[7]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [8]: /account_management/teams/
 [9]: https://raw.githubusercontent.com/DataDog/ci-visibility-circle-ci/main/service_hooks.py
 [10]: /continuous_integration/pipelines/circleci/#enable-log-collection

@@ -818,6 +818,47 @@ main:
     identifier: coscreen_troubleshooting
     parent: coscreen
     weight: 1
+  - name: Cloudcraft
+    url: cloudcraft/
+    pre: cloudcraft
+    identifier: cloudcraft
+    parent: essentials_heading
+    weight: 270000
+  - name: Getting Started
+    url: cloudcraft/getting-started/
+    identifier: cloudcraft_getting_started
+    parent: cloudcraft
+    weight: 1
+  - name: Account Management
+    url: cloudcraft/account-management/
+    identifier: cloudcraft_account_management
+    parent: cloudcraft
+    weight: 2
+  - name: 'Components: Common'
+    url: cloudcraft/components-common/
+    identifier: cloudcraft_components_common
+    parent: cloudcraft
+    weight: 3
+  - name: 'Components: Azure'
+    url: cloudcraft/components-azure/
+    identifier: cloudcraft_components_azure
+    parent: cloudcraft
+    weight: 4
+  - name: 'Components: AWS'
+    url: cloudcraft/components-aws/
+    identifier: cloudcraft_components_aws
+    parent: cloudcraft
+    weight: 5
+  - name: Advanced
+    url: cloudcraft/advanced/
+    identifier: cloudcraft_advanced
+    parent: cloudcraft
+    weight: 6
+  - name: FAQ
+    url: cloudcraft/faq/
+    identifier: cloudcraft_faq
+    parent: cloudcraft
+    weight: 7
   - name: Watchdog
     url: watchdog/
     identifier: watchdog_top_level
@@ -1381,11 +1422,21 @@ main:
     identifier: api_catalog_metadata
     parent: api_catalog
     weight: 5
+  - name: API Catalog API
+    url: /api_catalog/api_catalog_api/
+    identifier: api_catalog_api
+    parent: api_catalog
+    weight: 6
+  - name: Endpoint Discovery from APM
+    url: /api_catalog/endpoint_discovery/
+    identifier: endpoint_discovery
+    parent: api_catalog
+    weight: 7
   - name: Troubleshooting
     url: /api_catalog/troubleshoot/
     identifier: api_catalog_troubleshoot
     parent: api_catalog
-    weight: 6
+    weight: 8
   - name: Service Level Objectives
     url: service_management/service_level_objectives/
     pre: slos
@@ -2823,10 +2874,10 @@ main:
     parent: pipeline_visibility
     identifier: ci_custom_commands
     weight: 110
-  - name: Custom Tags and Metrics
-    url: continuous_integration/pipelines/custom_tags_and_metrics/
+  - name: Custom Tags and Measures
+    url: continuous_integration/pipelines/custom_tags_and_measures/
     parent: pipeline_visibility
-    identifier: ci_custom_tags_and_metrics
+    identifier: ci_custom_tags_and_measures
     weight: 111
   - name: Search and Manage
     url: continuous_integration/search/
@@ -3713,7 +3764,7 @@ main:
     parent: cws_workload_security_rules
     identifier: cws_custom_rules
     weight: 101
-  - name: Security Signals
+  - name: Investigate Security Signals
     url: security/threats/security_signals
     parent: cloud_workload_security
     identifier: cws_security_signals
@@ -3733,17 +3784,17 @@ main:
     parent: csm
     identifier: cspm
     weight: 3
-  - name: Compliance Rules
+  - name: Manage Compliance Rules
     url: security/misconfigurations/compliance_rules
     parent: cspm
     identifier: cspm_detection_rules
     weight: 301
-  - name: Custom Rules
+  - name: Create Custom Rules
     url: security/misconfigurations/custom_rules
     parent: cspm
     identifier: cspm_custom_rules
     weight: 302
-  - name: Compliance Reports
+  - name: Manage Compliance Posture
     url: security/misconfigurations/frameworks_and_benchmarks
     parent: cspm
     identifier: cspm_frameworks_benchmarks
@@ -3754,11 +3805,11 @@ main:
     identifier: cspm_custom_frameworks
     weight: 101
   - name: Supported Frameworks
-    url: security/misconfigurations/supported_frameworks
-    parent: cspm
+    url: security/misconfigurations/frameworks_and_benchmarks/supported_frameworks
+    parent: cspm_frameworks_benchmarks
     identifier: cspm_supported_frameworks
-    weight: 304
-  - name: Misconfigurations Explorer
+    weight: 102
+  - name: Explore Misconfigurations
     url: /security/misconfigurations/findings
     parent: cspm
     identifier: cspm_findings_explorer
@@ -4298,11 +4349,16 @@ main:
     parent: rum_browser
     identifier: track_actions
     weight: 106
+  - name: Error Tracking
+    url: real_user_monitoring/error_tracking/browser/
+    parent: rum_browser
+    identifier: rum_browser_error_tracking
+    weight: 107
   - name: Troubleshooting
     url: real_user_monitoring/browser/troubleshooting/
     parent: rum_browser
     identifier: troubleshooting
-    weight: 107
+    weight: 108
   - name: Mobile and TV Monitoring
     url: real_user_monitoring/mobile_and_tv_monitoring/
     parent: rum
@@ -4333,16 +4389,21 @@ main:
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_web_view_tracking
     weight: 205
+  - name: Crash Reporting
+    url: real_user_monitoring/error_tracking/mobile
+    parent: mobile_and_tv_monitoring
+    identifier: rum_mobile_error_tracking
+    weight: 206
   - name: Integrated Libraries
     url: real_user_monitoring/mobile_and_tv_monitoring/integrated_libraries
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_integrated_libraries
-    weight: 206
+    weight: 207
   - name: Troubleshooting
     url: real_user_monitoring/mobile_and_tv_monitoring/troubleshooting/
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_troubleshooting
-    weight: 207
+    weight: 208
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
@@ -4493,36 +4554,11 @@ main:
     parent: rum_error_tracking
     identifier: rum_error_tracking_browser
     weight: 1302
-  - name: Track Android Errors
-    url: real_user_monitoring/error_tracking/android/
+  - name: Track Mobile Errors
+    url: real_user_monitoring/error_tracking/mobile/
     parent: rum_error_tracking
-    identifier: rum_error_tracking_android
+    identifier: rum_error_tracking_mobile
     weight: 1303
-  - name: Track iOS Errors
-    url: real_user_monitoring/error_tracking/ios/
-    parent: rum_error_tracking
-    identifier: rum_error_tracking_ios
-    weight: 1304
-  - name: Track Expo Errors
-    url: real_user_monitoring/error_tracking/expo/
-    parent: rum_error_tracking
-    identifier: rum_error_tracking_expo
-    weight: 1305
-  - name: Track React Native Errors
-    url: real_user_monitoring/error_tracking/reactnative/
-    parent: rum_error_tracking
-    identifier: rum_error_tracking_reactnative
-    weight: 1306
-  - name: Track Flutter Errors
-    url: real_user_monitoring/error_tracking/flutter/
-    parent: rum_error_tracking
-    identifier: rum_error_tracking_flutter
-    weight: 1307
-  - name: Track Roku Errors
-    url: real_user_monitoring/error_tracking/roku/
-    parent: rum_error_tracking
-    identifier: rum_error_tracking_roku
-    weight: 1308
   - name: Custom Grouping
     url: real_user_monitoring/error_tracking/custom_grouping
     parent: rum_error_tracking
