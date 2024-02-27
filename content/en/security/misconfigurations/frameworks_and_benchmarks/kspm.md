@@ -4,7 +4,7 @@ kind: documentation
 further_reading:
 - link: "security/default_rules"
   tag: "Documentation"
-  text: "Explore default CSM Misconfigurations cloud configuration compliance rules"
+  text: "Explore default CSM Misconfigurations cloud configuration detection rules"
 - link: "/security/misconfigurations/custom_rules"
   tag: "Documentation"
   text: "Create Custom Rules"
@@ -14,11 +14,9 @@ further_reading:
 
 Kubernetes Security Posture Management (KSPM) for Cloud Security Management (CSM) helps you proactively strengthen the security posture of your Kubernetes deployments by benchmarking your environment against established industry best practices, such as those defined by [CIS][1], or your own [custom detection policies](#create-your-own-kubernetes-security-detections).
 
-**Note**: To take full advantage of KSPM, you must install both the Datadog Agent and cloud integrations.
+## 
 
-* Setup requires both cloud integrations AND the Agent (for latter, e.g., cluster).
-* Need to call out resource types that are surfaced as part of KSPM.
-* Limited to the control plane (don't have lower level resource types and associated detections).
+To take full advantage of KSPM, you must install both the Datadog Agent and cloud integrations.
 
 | Resource Type            | Install Method    | Framework        |
 |--------------------------|-------------------|------------------|
@@ -36,19 +34,31 @@ In addition to KSPM, Datadog CSM also enables you to:
 
 ## Monitor risk across Kubernetes deployments
 
-Datadog scans your environment for risks defined by the more than 50+ out-of-the-box detection rules and offers a clear description of any issue detected, along with remediation guidelines.
+With KSPM, Datadog scans your environment for risks defined by the more than 50+ out-of-the-box Kubernetes detection rules. When at least one case defined in a rule is matched over a given period of time, a notification alert is sent (if configured), and a finding is generated in the [Misconfigurations Explorer][11].
 
 Each finding contains the context you need to identify the issue's impact, such as the full resource configuration, resource-level tags, and a map of the resource's relationships with other components of your infrastructure. Once you understand the problem and its impact, you can start remediating the issue by [creating a Jira ticket][7] from within CSM or [executing a pre-defined workflow][8].
 
-## Assess your Kubernetes security posture against industry-standard frameworks 
+**Note**: You can also use the [API to programmatically interact with findings][10].
 
-The [security posture score][2] helps you understand your security and compliance status at a glance under a single metric. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure compliance rules.
+## Assess your Kubernetes security posture against industry-standard frameworks
 
-On the report page for a framework, you can generate detailed PDF or CSV exports to share internally or with auditors. You  can also use the API to programmatically interact with the findings surfaced. For an in-depth explanation how the security posture score works, see [Security posture score][3].
+CSM provides a [security posture score][2] that helps you understand your security and compliance status using a single metric. The score represents the percentage of your environment that satisfies all of your active out-of-the-box cloud and infrastructure detection rules. You can obtain the score for your entire organization, or for specific teams, accounts, and environments, including Kubernetes deployments.
+
+For an in-depth explanation on how the security posture score works, see [Security posture score][3].
+
+### View security posture score for Kubernetes deployments
+
+To view the security posture score for your Kubernetes deployments, navigate to the [**Security** > **Compliance**][9] page and locate the CIS Kubernetes frameworks reports.
+
+### View detailed reports for Kubernetes frameworks
+
+To view a detailed report that gives you insight into how you score against the framework's requirements and rules, click **Framework Overview**. On the framework page, you can download a copy of the report as a PDF or export it as a CSV.
+
+{{< img src="security/csm/kubernetes_posture_score.png" alt="The CIS Kubernetes compliance report page showing an overall posture score of 64 percent" width="100%">}}
 
 ## Create your own Kubernetes detection rules
 
-In addition to the out-of-the-box detection rules, you can also create your own detection rules for Kubernetes by cloning an existing rule or creating one from scratch. Rules are written in the [Rego policy language][4], a flexible Python-like language that serves as the industry standard for detection rules. For more information, see [Writing Custom Rules with Rego][5].
+In addition to the out-of-the-box detection rules, you can also create your own Kubernetes detection rules by cloning an existing rule or creating a new one from scratch. Rules are written in the [Rego policy language][4], a flexible Python-like language that serves as the industry standard for detection rules. For more information, see [Writing Custom Rules with Rego][5].
 
 After you create the detection rule, you can customize its severity (Critical, High, Medium, Low, or Info) and [set alerts for real-time notifications][6] to notify you when a new finding is detected.
 
@@ -64,3 +74,6 @@ After you create the detection rule, you can customize its severity (Critical, H
 [6]: /security/misconfigurations/compliance_rules#set-notification-targets-for-compliance-rules
 [7]: /security/cloud_security_management/review_remediate/jira
 [8]: /security/cloud_security_management/review_remediate/workflows
+[9]: https://app.datadoghq.com/security/compliance/home
+[10]: /api/latest/security-monitoring/#list-findings
+[11]: https://app.datadoghq.com/security/compliance
