@@ -582,7 +582,7 @@ To disable [Software Composition Analysis][14]:
 
 ## Disabling Code Security
 
-<div class="alert alert-info">Code security vulnerability detection is in beta.</div>
+<div class="alert alert-info">Code Security vulnerability detection is in beta.</div>
 
 To disable [Code Security][13] vulnerability detection, remove the `DD_IAST_ENABLED=true` environment variable from your application configuration, and restart your service. 
 
