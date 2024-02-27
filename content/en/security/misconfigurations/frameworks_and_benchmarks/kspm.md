@@ -14,9 +14,9 @@ further_reading:
 
 Kubernetes Security Posture Management (KSPM) for Cloud Security Management (CSM) helps you proactively strengthen the security posture of your Kubernetes deployments by benchmarking your environment against established industry best practices, such as those defined by [CIS][1], or your own [custom detection policies](#create-your-own-kubernetes-security-detections).
 
-## 
+## Setting up KSPM
 
-To take full advantage of KSPM, you must install both the Datadog Agent and cloud integrations.
+To take full advantage of KSPM, you must [install both the Datadog Agent and cloud integrations][12]. This enables Datadog to detect risks in your Kubernetes deployments for each of the following resource types:
 
 | Resource Type            | Install Method    | Framework        |
 |--------------------------|-------------------|------------------|
@@ -27,18 +27,15 @@ To take full advantage of KSPM, you must install both the Datadog Agent and clou
 | `kubernetes_master_node` | Agent             | `cis-kubernetes` |
 | `kubernetes_worker_node` | Agent             |                  |
 
-In addition to KSPM, Datadog CSM also enables you to:
-
-- Identify vulnerabilities in your container images and get advice on how to prioritize remediation efforts, based on whether the affected containers run in production and if attackers are likely to exploit a vulnerability (determined by public exploit availability and [Exploit Prediction Scoring System (EPSS)](https://www.first.org/epss/) score).
-- Use out-of-the-box detection rules to catch Kubernetes-native attacks such as unfamiliar processes accessing a pod's service account token, and use the existing Datadog observability context for 360-degree investigations.
-
 ## Monitor risk across Kubernetes deployments
 
-With KSPM, Datadog scans your environment for risks defined by the more than 50+ out-of-the-box Kubernetes detection rules. When at least one case defined in a rule is matched over a given period of time, a notification alert is sent (if configured), and a finding is generated in the [Misconfigurations Explorer][11].
+With KSPM, Datadog scans your environment for risks defined by the more than 50+ out-of-the-box Kubernetes detection rules. When at least one case defined in a rule is matched over a given period of time, [a notification alert is sent][6], and a finding is generated in the [Misconfigurations Explorer][11].
 
 Each finding contains the context you need to identify the issue's impact, such as the full resource configuration, resource-level tags, and a map of the resource's relationships with other components of your infrastructure. Once you understand the problem and its impact, you can start remediating the issue by [creating a Jira ticket][7] from within CSM or [executing a pre-defined workflow][8].
 
 **Note**: You can also use the [API to programmatically interact with findings][10].
+
+{{< img src="security/csm/kspm_finding.png" alt="The details panel for a high severity finding for the EKS Cluster should have public access limited rule" width="80%">}}
 
 ## Assess your Kubernetes security posture against industry-standard frameworks
 
@@ -77,3 +74,4 @@ After you create the detection rule, you can customize its severity (Critical, H
 [9]: https://app.datadoghq.com/security/compliance/home
 [10]: /api/latest/security-monitoring/#list-findings
 [11]: https://app.datadoghq.com/security/compliance
+[12]: /security/cloud_security_management/setup
