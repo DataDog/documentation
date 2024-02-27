@@ -1,6 +1,8 @@
 ---
 title: Setting up CSM Cloud Workload Security
 kind: documentation
+aliases:
+  - /security/cloud_security_management/setup/csm_workload_security/
 further_reading:
   - link: "/security/cloud_security_management/setup"
     tag: "Documentation"

@@ -4,17 +4,23 @@ kind: documentation
 is_beta: true
 aliases:
 - /tracing/trace_collection/single-step-apm
+further_reading:
+  - link: /tracing/metrics/runtime_metrics/
+    tag: Documentation
+    text: Enable Runtime Metrics
 ---
 
 ## Requirements
 
-Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
+- **Languages and architectures**: Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
+
+- **Operating systems**: Linux VMs (Debian, Ubuntu, Amazon Linux, CentOS/Red Hat, Fedora), Docker, Kubernetes clusters with Linux containers.
 
 ## Enabling APM on your services in one step
 
 If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation (beta)** option selected, the Agent is installed and configured to enable APM. This allows you to automatically instrument your application, without any additional installation or configuration steps. Restart services for this instrumentation to take effect.
 
-The following examples show how it works on each infrastructure type. 
+The following examples show how it works on each infrastructure type.
 
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
@@ -31,7 +37,7 @@ For an Ubuntu host:
 
    a. Replace `<YOUR_DD_API_KEY>` with your [Datadog API][4].
 
-   b. Replace `<YOUR_DD_SITE>` with your [Datadog site][3].  
+   b. Replace `<YOUR_DD_SITE>` with your [Datadog site][3].
    <div class="alert alert-info">
       You can also optionally configure the following:
       <ul>
@@ -52,7 +58,7 @@ By default, enabling APM on your server installs support for Java, Python, Ruby,
 DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_ENV=staging bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
 ```
 
-You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. Language names are comma-separated.
+You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
 
 Supported languages include:
 
@@ -124,7 +130,7 @@ For example, to install support for only v1.25.0 of the Java tracing library and
 DD_APM_INSTRUMENTATION_LIBRARIES="java:1.25.0,python" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_docker_injection.sh)"
 ```
 
-You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. Language names are comma-separated.
+You can optionally provide a version number for the tracing library by placing a colon after the language name and specifying the tracing library version. If you don't specify a version, it defaults to the latest version. Language names are comma-separated.
 
 Supported languages include:
 
@@ -167,7 +173,7 @@ docker run -d --name dd-agent \
 
 You can enable APM by installing the Agent with the Datadog Helm chart. This deploys the Datadog Agent across all nodes in your Linux-based Kubernetes cluster with a DaemonSet.
 
-**Note:** Single step instrumentation is deployed to the `default` namespace and does not instrument any applications in the same namespace. 
+**Note**: Single step instrumentation doesn't instrument applications in the namespace where you install the Datadog Agent. It's recommended to install the Agent in a separate namespace in your cluster where you don't run your applications.
 
 ### Requirements
 
@@ -213,7 +219,7 @@ To enable single step instrumentation with Helm:
    helm install datadog-agent -f datadog-values.yaml datadog/datadog
    ```
 5. Do a rolling restart on your applications for instrumentation to take effect.
-     
+
 
 [7]: https://v3.helm.sh/docs/intro/install/
 [8]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -268,11 +274,11 @@ To set specific tracing library versions, add the following configuration to you
        instrumentation:
          enabled: true
          libVersions: # Add any versions you want to set
-            dotnet: v2.40.0
+            dotnet: v2.46.0
             python: v1.20.6
             java: v1.22.0
             js: v4.17.0
-            ruby: v1.15.0 
+            ruby: v1.15.0
 {{< /highlight >}}
 
 Supported languages include:
@@ -314,7 +320,7 @@ Run the following commands and restart the service to stop injecting the library
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 
-1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command: 
+1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command:
 
    ```shell
    DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
@@ -325,7 +331,7 @@ Run the following commands and restart the service to stop injecting the library
 
 {{% tab "Docker" %}}
 
-1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command: 
+1. Add the `DD_INSTRUMENT_SERVICE_WITH_APM` environment variable to the service startup command:
    ```shell
    docker run -e DD_INSTRUMENT_SERVICE_WITH_APM=false <service_start_command>
    ```
@@ -393,6 +399,10 @@ To stop producing traces, remove library injectors and restart the infrastructur
 {{% /tab %}}
 
 {{< /tabs >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/remote_config

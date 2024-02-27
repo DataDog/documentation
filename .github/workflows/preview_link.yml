@@ -18,11 +18,11 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
-    - run: pip install Mako
+    - run: pip install Mako docutils
 
     - name: Find changed files
       id: changed_files
-      uses: tj-actions/changed-files@v23
+      uses: tj-actions/changed-files@v42
       with:
         include_all_old_new_renamed_files: true
 

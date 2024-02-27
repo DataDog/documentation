@@ -32,7 +32,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: riak_repl
-oauth: {}
 public_title: Riak MDC Replication
 short_description: レプリケーションのパフォーマンス、容量、健全性を追跡
 supported_os:

@@ -22,6 +22,7 @@ short_description: AWS PrivateLink のキーメトリクスを追跡します。
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 AWS PrivateLink は、VPC、AWS サービス、およびお客様のオンプレミスネットワーク間のプライベート接続を提供します。
@@ -30,9 +31,9 @@ AWS PrivateLink は、VPC、AWS サービス、およびお客様のオンプレ
 
 **重要:** PrivateLink 経由でテレメトリーデータを Datadog に送信したい場合は、[こちらの手順][1]で行ってください。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][2]をまだセットアップしていない場合は、最初にセットアップします。
 
@@ -42,21 +43,21 @@ AWS PrivateLink は、VPC、AWS サービス、およびお客様のオンプレ
    有効になっていることを確認します。
 2. [Datadog - AWS PrivateLink インテグレーション][4]をインストールします。
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_privatelink" >}}
 
 
-### イベント
+### ヘルプ
 
 AWS PrivateLink インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
 AWS PrivateLink インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 

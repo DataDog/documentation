@@ -20,7 +20,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: data_runner
-oauth: {}
 public_title: Data Runner
 short_description: Un jeu incrémental de recherche de métriques dans les dashboards
   Datadog.

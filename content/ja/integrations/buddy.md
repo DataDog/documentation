@@ -32,7 +32,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: buddy
-oauth: {}
 public_title: Buddy
 short_description: Web 開発者向けのワンクリック自動配信および作業中 Web サイトのプレビュー機能。
 supported_os:

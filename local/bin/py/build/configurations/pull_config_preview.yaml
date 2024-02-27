@@ -345,7 +345,7 @@
           globs:
           - 'README.md'
           options:
-            dest_path: '/static_analysis/'
+            dest_path: '/code_analysis/static_analysis/'
             file_name: 'circleci_orbs.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-circleci-orb/blob/main/README.md"]
@@ -354,6 +354,7 @@
               description: Use Datadog and CircleCI to run Static Analysis jobs in a CI pipeline.
               aliases:
               - /continuous_integration/static_analysis/circleci_orbs
+              - /static_analysis/circleci_orbs
 
       - repo_name: datadog-static-analyzer-github-action
         contents:
@@ -362,7 +363,7 @@
           globs:
           - 'README.md'
           options:
-            dest_path: '/static_analysis/'
+            dest_path: '/code_analysis/static_analysis/'
             file_name: 'github_actions.md'
             front_matters:
               dependencies: ["https://github.com/DataDog/datadog-static-analyzer-github-action/blob/main/README.md"]
@@ -371,6 +372,22 @@
               description: Use Datadog and GitHub to run Static Analysis jobs in a CI pipeline.
               aliases:
               - /continuous_integration/static_analysis/github_actions
+              - /static_analysis/github_actions
+
+      - repo_name: datadog-sca-github-action
+        contents:
+        - action: pull-and-push-file
+          branch: main
+          globs:
+          - 'README.md'
+          options:
+            dest_path: '/code_analysis/software_composition_analysis/'
+            file_name: 'github_actions.md'
+            front_matters:
+              dependencies: ["https://github.com/DataDog/datadog-sca-github-action/blob/main/README.md"]
+              title: Software Composition Analysis and GitHub Actions
+              kind: documentation
+              description: Use Datadog and GitHub to run Software Composition Analysis jobs in a CI pipeline.
 
       - repo_name: datadog-static-analyzer-rule-docs
         contents:
@@ -379,7 +396,7 @@
           globs:
           - rulesets/**/*.md
           options:
-            dest_dir: '/static_analysis/rules/'
+            dest_dir: '/code_analysis/static_analysis_rules/'
             path_to_remove: 'rulesets/'
             front_matters:
               disable_edit: true

@@ -6,6 +6,9 @@ is_beta: true
 aliases:
  - /tracing/trace_queries
 further_reading:
+- link: 'https://www.datadoghq.com/blog/trace-queries/'
+  tag: 'Blog'
+  text: 'Analyze the root causes and business impact of production issues with Trace Queries'
 - link: 'tracing/trace_explorer'
   tag: 'Documentation'
   text: 'Trace Explorer'
