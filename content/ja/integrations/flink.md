@@ -53,7 +53,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: flink
-oauth: {}
 public_title: Flink
 short_description: Flink ジョブのメトリクスを追跡する。
 supported_os:

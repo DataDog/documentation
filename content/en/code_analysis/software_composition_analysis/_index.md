@@ -6,7 +6,7 @@ is_beta: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
   tag: "Blog"
-  text: "Enhance application security in production with Datadog Application Vulnerability Management"
+  text: "Enhance application security in production with Software Composition Analysis"
 - link: "/getting_started/application_security/software_composition_analysis"
   tag: "Documentation"
   text: "Getting Started with Software Composition Analysis"

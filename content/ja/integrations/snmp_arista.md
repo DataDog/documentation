@@ -33,7 +33,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: snmp_arista
-oauth: {}
 public_title: Arista
 short_description: Arista ネットワークデバイスから SNMP メトリクスを収集
 supported_os:

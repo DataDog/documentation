@@ -29,7 +29,7 @@ You can monitor the security of your Python apps running in Docker, Kubernetes, 
 ## Enabling threat detection
 ### Get started
 
-1. **Update your Datadog Python library package** to at least version 1.2.2 (at least version 1.5.0 for Application Vulnerability Management vulnerability detection features). Run the following:
+1. **Update your Datadog Python library package** to at least version 1.2.2 (at least version 1.5.0 for Software Composition Analysis detection features). Run the following:
    ```shell
    pip install --upgrade ddtrace
    ```

@@ -33,7 +33,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: databricks
-oauth: {}
 public_title: Databricks
 short_description: Databricks クラスターで Apache Spark を監視する
 supported_os:

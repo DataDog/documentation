@@ -41,7 +41,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: tyk
-oauth: {}
 public_title: Tyk
 short_description: resp-code、api、path、oauth などで細分化された、時間に関する統計付きでリクエストを追跡
 supported_os:

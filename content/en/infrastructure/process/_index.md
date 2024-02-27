@@ -20,6 +20,9 @@ further_reading:
     - link: https://www.datadoghq.com/blog/process-level-data/
       tag: 'Blog'
       text: 'Troubleshoot faster with process-level app and network data'
+    - link: https://www.datadoghq.com/blog/watchdog-live-processes/
+      tag: 'Blog'
+      text: 'Troubleshoot anomalies in workload performance with Watchdog Insights for Live Processes'
 ---
 
 

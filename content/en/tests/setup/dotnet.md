@@ -7,7 +7,7 @@ code_lang_weight: 0
 aliases:
   - /continuous_integration/setup_tests/dotnet
   - /continuous_integration/tests/dotnet
-  - continuous_integration/tests/setup/dotnet
+  - /continuous_integration/tests/setup/dotnet
 further_reading:
     - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"

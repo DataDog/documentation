@@ -33,7 +33,6 @@ legal_terms:
   eula: assets/eula.pdf
 manifest_version: 2.0.0
 name: circleci_circleci
-oauth: {}
 pricing:
 - billing_type: flat_fee
   includes_assets: true

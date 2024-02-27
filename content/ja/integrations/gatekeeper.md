@@ -43,7 +43,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: gatekeeper
-oauth: {}
 public_title: Gatekeeper
 short_description: Gatekeeper インテグレーション
 supported_os:

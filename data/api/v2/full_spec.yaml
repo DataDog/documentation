@@ -21496,6 +21496,10 @@ components:
       required:
       - type
       type: object
+    UserTeamIncluded:
+      description: Included resources related to the team membership
+      oneOf:
+      - $ref: '#/components/schemas/User'
     UserTeamPermission:
       description: A user's permissions for a given team
       properties:
@@ -21550,6 +21554,11 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/UserTeam'
+        included:
+          description: Resources related to the team memberships
+          items:
+            $ref: '#/components/schemas/UserTeamIncluded'
+          type: array
       type: object
     UserTeamRole:
       description: The user's role within the team
@@ -29585,7 +29594,8 @@ paths:
         schema:
           type: string
       - description: The number of hours of look back (from now) to estimate cardinality
-          with.
+          with. Estimates are based on historical data, and unspecified fields default
+          to the minimum 49 hours.
         example: 49
         in: query
         name: filter[hours_ago]
@@ -29593,6 +29603,7 @@ paths:
         schema:
           format: int32
           maximum: 2147483647
+          minimum: 49
           type: integer
       - description: The number of aggregations that a `count`, `rate`, or `gauge`
           metric is configured to use. Max number of aggregation combos is 9.
@@ -36011,10 +36022,10 @@ paths:
           `application_security`, `audit_trail`, `serverless`, `ci_app`, `cloud_cost_management`,
 
           `csm_container_enterprise`, `csm_host_enterprise`, `cspm`, `custom_events`,
-          `cws`, `dbm`, `fargate`,
+          `cws`, `dbm`, `error_tracking`,
 
-          `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`, `ingested_spans`,
-          `iot`,
+          `fargate`, `infra_hosts`, `incident_management`, `indexed_logs`, `indexed_spans`,
+          `ingested_spans`, `iot`,
 
           `lambda_traced_invocations`, `logs`, `network_flows`, `network_hosts`, `netflow_monitoring`,
           `observability_pipelines`,

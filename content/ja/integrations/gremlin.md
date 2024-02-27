@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: gremlin
-oauth: {}
 public_title: Gremlin
 short_description: Gremlin で発生したイベントを Datadog に送信
 supported_os:

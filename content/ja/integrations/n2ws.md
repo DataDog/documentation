@@ -40,7 +40,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: n2ws
-oauth: {}
 public_title: N2WS
 short_description: 接続されているすべての N2WS Backup & Recovery ホストからの要約データを表示する
 supported_os:

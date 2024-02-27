@@ -150,9 +150,9 @@ This is described in more detail [in the Microsoft documentation][7]
       adoprovider: MSOLEDBSQL
   ```
 
-#### Other Microsoft OLE DB Driver versions
+#### Other Microsoft OLE DB and ODBC driver versions
 
-If you are using a driver other than `MSOLEDBSQL` 2019, this error can be resolved by setting `TrustServerCertificate=yes` in the connection string. For example, for the 2017 `ODBC` driver:
+If you are using an OLE DB driver other than `MSOLEDBSQL` 2019 or ODBC drivers, this error can be resolved by setting `TrustServerCertificate=yes` in the connection string. For example, for the `ODBC` driver:
 
   ```yaml
   # this example uses SQL Server authentication
@@ -162,7 +162,7 @@ If you are using a driver other than `MSOLEDBSQL` 2019, this error can be resolv
       password: <DD_AGENT_PASSWORD>
       connection_string: "TrustServerCertificate=yes;"
       connector: odbc
-      driver: '{ODBC Driver 17 for SQL Server}'
+      driver: '{ODBC Driver 18 for SQL Server}'
   ```
 
 ### SQL Server unable to connect 'SSL Security error (18)' {#ssl-security-error}

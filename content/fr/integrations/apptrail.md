@@ -24,7 +24,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: apptrail
-oauth: {}
 public_title: Apptrail
 short_description: Surveiller et analyser tous vos logs d'audit SaaS et générer des
   alertes avec Apptrail
