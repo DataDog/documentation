@@ -2148,7 +2148,7 @@ main:
     parent: tracing_trace_collection
     identifier: tracing_proxies
     weight: 208
-  - name: Span Tags Semantics
+  - name: Span Tag Semantics
     url: tracing/trace_collection/tracing_naming_convention
     parent: tracing_trace_collection
     identifier: tracing_naming_convention
@@ -2157,7 +2157,7 @@ main:
     url: tracing/trace_collection/span_links
     parent: tracing_trace_collection
     identifier: tracing_span_links
-    weight: 210
+    weight: 211
   - name: APM Metrics Collection
     url: tracing/metrics/
     parent: tracing
@@ -2357,66 +2357,71 @@ main:
     parent: tracing
     identifier: tracing_data_security
     weight: 11
+  - name: Standard Attributes
+    url: /standard-attributes
+    parent: tracing
+    identifier: trace_standard_attributes
+    weight: 12
   - name: Guides
     url: tracing/guide/
     parent: tracing
     identifier: tracing_guides
-    weight: 12
+    weight: 13
   - name: Troubleshooting
     url: tracing/troubleshooting/
     parent: tracing
     identifier: tracing_troubleshooting
-    weight: 13
+    weight: 14
   - name: Tracer Startup Logs
     url: tracing/troubleshooting/tracer_startup_logs
     identifier: tracing_troubleshooting_startup_logs
     parent: tracing_troubleshooting
-    weight: 1301
+    weight: 1401
   - name: Tracer Debug Logs
     url: tracing/troubleshooting/tracer_debug_logs
     identifier: tracing_troubleshooting_debug_logs
     parent: tracing_troubleshooting
-    weight: 1302
+    weight: 1402
   - name: Connection Errors
     url: tracing/troubleshooting/connection_errors
     identifier: tracing_troubleshooting_connection_errors
     parent: tracing_troubleshooting
-    weight: 1303
+    weight: 1403
   - name: Agent Rate Limits
     url: tracing/troubleshooting/agent_rate_limits
     identifier: tracing_troubleshooting_rate_limits
     parent: tracing_troubleshooting
-    weight: 1304
+    weight: 1404
   - name: Agent APM metrics
     url: tracing/troubleshooting/agent_apm_metrics
     identifier: tracing_troubleshooting_apm_metrics
     parent: tracing_troubleshooting
-    weight: 1305
+    weight: 1405
   - name: Agent Resource Usage
     url: tracing/troubleshooting/agent_apm_resource_usage
     identifier: tracing_troubleshooting_agent_usage
     parent: tracing_troubleshooting
-    weight: 1306
+    weight: 1406
   - name: Correlated Logs
     url: tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel
     identifier: tracing_troubleshooting_correlated_logs
     parent: tracing_troubleshooting
-    weight: 1307
+    weight: 1407
   - name: PHP 5 Deep Call Stacks
     url: tracing/troubleshooting/php_5_deep_call_stacks
     identifier: tracing_troubleshooting_php_5_deep_call_stacks
     parent: tracing_troubleshooting
-    weight: 1308
+    weight: 1408
   - name: .NET diagnostic tool
     url: tracing/troubleshooting/dotnet_diagnostic_tool
     identifier: tracing_troubleshooting_dotnet_diagnostic_tool
     parent: tracing_troubleshooting
-    weight: 1309
+    weight: 1409
   - name: APM Quantization
     url: tracing/troubleshooting/quantization
     identifier: tracing_troubleshooting_quantization
     parent: tracing_troubleshooting
-    weight: 1310
+    weight: 1410
   - name: Continuous Profiler
     url: profiler/
     pre: profiling-1
