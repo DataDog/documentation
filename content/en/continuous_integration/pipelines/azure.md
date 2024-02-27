@@ -62,12 +62,12 @@ on a single project, follow the steps below:
 2. Go to **Project settings > Service hooks** in Azure DevOps and select the green plus (+) icon to create a subscription.
 
 3. Create a new subscription to the `Datadog CI Visibility` service for each of the following webhook types:
-  - **Run stage approval completed**
-  - **Run stage waiting for approval**
+    - **Run stage approval completed**
+    - **Run stage waiting for approval**
 
 4. Click **Next** to continue to the next step and set the following:
-  - **Datadog Site**: {{< region-param key="dd_site" >}}
-  - **Datadog API Key**: your [Datadog API key][3].
+    - **Datadog Site**: {{< region-param key="dd_site" >}}
+    - **Datadog API Key**: your [Datadog API key][3].
 
 5. Click **Finish**.
 
