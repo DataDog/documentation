@@ -51,6 +51,30 @@ All 3 supported types of events are required and must be enabled individually.
 Not enabling one or more events results in an an incomplete installation, leading to unexpected behavior in Datadog.
 </div>
 
+### Approvals support
+
+The Datadog integration for [Azure Pipelines][1] also supports the [Approvals][9] feature. To enable it
+on multiple projects, you can use a [script](#configuring-multiple-projects-in-bulk) provided by Datadog. To enable it
+on a single project, follow the steps below:
+
+1. If not done already, [configure the datadog integration](#configure-the-datadog-integration)
+
+2. Go to **Project settings > Service hooks** in Azure DevOps and select the green plus (+) icon to create a subscription.
+
+3. Create a new subscription to the `Datadog CI Visibility` service for each of the following webhook types:
+  - **Run stage approval completed**
+  - **Run stage waiting for approval**
+
+4. Click **Next** to continue to the next step and set the following:
+  - **Datadog Site**: {{< region-param key="dd_site" >}}
+  - **Datadog API Key**: your [Datadog API key][3].
+
+5. Click **Finish**.
+
+Once enabled, the wait time for the approval will be visible in the pipeline execution details in Datadog.
+Additinally, the pipelines and stages with approvals will have the metric `ci.wait_time` which indicates for how long the
+pipeline or stage was waiting for the approval.
+
 ### Configuring multiple projects in bulk
 
 
@@ -106,3 +130,4 @@ The [Pipelines][4] and [Pipeline Executions][5] pages populate with data after t
 [5]: https://app.datadoghq.com/ci/pipeline-executions
 [6]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [8]: https://marketplace.visualstudio.com/items?itemName=Datadog.ci-visibility
+[9]: https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals?view=azure-devops&tabs=check-pass#approvals
