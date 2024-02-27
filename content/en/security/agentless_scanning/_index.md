@@ -27,14 +27,20 @@ It is available only for vulnerabilities detected across your container images a
 
 Datadog Agentless Vulnerability scanning does .. need more info here. (Very high level since we'll add more than vulnerabilities down the road.)
 
-**Note**: The actual data that is scanned remains within your infrastructure, and only the findings are reported back to Datadog.
-
 Scans occur every 12 hours.
 
 ## Security considerations
 
-- Address security risks
-  - List top three security risks
+Datadog recommends to use the following security considerations with Agentless Scanning:
+
+- The actual data that is scanned remains within your infrastructure, and only the findings are reported back to Datadog.
+
+- As the scanner instances are given permissions to create and copy EBS snapshots and describe volumes, Datadog recommends that the scanner instances should **not** be accessible to non-administrative users. 
+
+- Obtain sensitive information in customer's cloud accounts by SSH'ing into the Side Scanner EC2 instance??
+
+- Obtain sensitive information in customer's cloud accounts by deleting and recreating the scanner role to allow assuming the delegate role??
+
 
 ## Agentless Scanning with Existing Agent Coverage
 - Explain exclusion of scans on Agent-based resources with VM enabled

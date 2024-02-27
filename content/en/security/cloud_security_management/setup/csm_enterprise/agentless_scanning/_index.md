@@ -5,13 +5,12 @@ kind: documentation
 
 <div class="alert alert-info">Agentless Scanning is in beta.</div>
 
-Containers and Hosts
+To configure CSM Enterprise on your agentless scanning instances for your hosts and containers, use the following steps:
 
-- Prerequisites
-- Enable AWS Integration + CSM
-- Enable Remote Configuration
-- Use Remote Configuration-enabled Datadog API keys
-- Specific permissions on accounts that need to be scanned
+{{% csm-agentless-prereqs %}}
+
+
+
 - Deployment Models
   - Cross-account scans (create new account or choose existing one)
   - Cross-region scans (one scanner per account)
