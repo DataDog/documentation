@@ -11,4 +11,4 @@ Error Tracking enables you to:
 - Track, triage, and debug fatal errors
 - Group similar errors into issues, so that you can more easily identify important errors and reduce noise
 - Set monitors on error tracking events, such as high error volume or new issues
-- Follow issues over time to know when they first started, if they are still ongoing, and how often they are occurring
+- Follow issues over time to know when they first started, if they are still ongoing, and how often they occur
