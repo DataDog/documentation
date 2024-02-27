@@ -49,10 +49,10 @@ issue in Error Tracking.
 [1]: /tracing/
 {{% /tab %}}
 
-{{% tab "Logs" %}}
+{{% tab "Log Management" %}}
 Custom grouping only needs an error log and an `error.fingerprint` string attribute.
 
-If you aren't already collecting logs with Datadog, see the [Logs documentation][1] to set up logs.
+If you aren't already collecting logs with Datadog, see the [Log Management documentation][1] to set up logs.
 
 Ensure that the `source` tag (specifying language) is properly configured.
 

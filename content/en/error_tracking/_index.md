@@ -19,12 +19,12 @@ Additional features are available depending on the source of the error. See [sup
 
 ## Supported error sources
 
-Error Tracking can ingest errors from APM, Logs, and Real User Monitoring. Additional features are available depending on the source of the error. For example, in errors originating from an APM trace, the [Execution Replay][4] feature automatically captures production variable values. 
+Error Tracking can ingest errors from APM, Log Management, and Real User Monitoring. Additional features are available depending on the source of the error. For example, in errors originating from an APM trace, the [Execution Replay][4] feature automatically captures production variable values. 
 
 For details, see the product-specific Error Tracking documentation:
 
 - [APM][1]
-- [Logs][2]
+- [Log Management][2]
 - [Real User Monitoring][3]
 
 [1]: /tracing/error_tracking#setup
