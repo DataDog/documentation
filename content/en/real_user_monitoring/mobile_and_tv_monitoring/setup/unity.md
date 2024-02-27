@@ -3,7 +3,6 @@ title: RUM Unity Monitoring Setup
 kind: documentation
 is_beta: true
 private: true
-disable_toc: false
 description: Collect RUM data from your Unity Mobile projects.
 aliases:
     - /real_user_monitoring/unity/
@@ -29,7 +28,7 @@ further_reading:
 ## Overview
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Unity Monitoring is in private beta.
+Unity Monitoring is in private beta. To request access, reach out to Datadog support.
 {{< /beta-callout >}}
 
 Datadog Real User Monitoring (RUM) enables you to visualize and analyze user journeys of your application's individual users.
