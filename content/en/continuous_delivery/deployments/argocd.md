@@ -123,6 +123,23 @@ See the [Argo CD official guide][12] for more details on applications subscripti
 
 After this final step is completed, you can start monitoring your Argo CD deployments in Datadog.
 
+## Adding service information to deployment executions
+
+The `dd_service` annotation can be used to map an Argo CD application to the service that it deploys. For example:
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    notifications.argoproj.io/subscribe.cd-visibility-trigger.cd-visibility-webhook: ""
+    dd_env: <YOUR_ENV>
+    dd_service: transaction-service
+```
+
+When this annotation is used, the service name is added to all the deployment executions generated from the application.
+Moreover, if your service is registered in [Service Catalog][13], the team name is also added to all the deployment executions.
+
 ## Adding custom tags to deployment executions
 
 You can optionally add custom tags to the deployment executions generated from Argo CD applications deployments. These tags can be used to filter, group, and aggregate deployment executions in Datadog.
@@ -163,3 +180,4 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [10]: /continuous_delivery/explorer
 [11]: https://app.datadoghq.com/organization-settings/api-keys
 [12]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/subscriptions/
+[13]: /tracing/service_catalog
