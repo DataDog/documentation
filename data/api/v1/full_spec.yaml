@@ -25786,7 +25786,7 @@ paths:
       - Azure Integration
       x-codegen-request-body-name: body
       x-given:
-        aws_account:
+        azure_account:
           parameters:
           - name: body
             origin: request
