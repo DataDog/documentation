@@ -53,7 +53,7 @@ For more information, see the [as_count() in Monitor Evaluations][2] guide.
 
 ### Using formulas
 
-When using formulas note that monitors apply the aggregation function for the monitor evaluation on the formula, not the individual queries. This means that in your monitor queries, if you are using the AVG (`avg by`) aggregation function but are using SUM (`sum by`) over the past X minutes in your evaluation configuration, then the edit page/history graph will not match the values. For an example, see the [troubleshooting](#troubleshooting-different-graph-values) section.
+When using formulas, monitors apply the aggregation function for the monitor evaluation on the formula, not the individual queries. This means that in your monitor queries, if you are using the AVG (`avg by`) aggregation function but are using SUM (`sum by`) over the past X minutes in your evaluation configuration, then the edit page/history graph will not match the values. For an example, see the [troubleshooting](#troubleshooting-different-graph-values) section.
 
 ### Evaluation delay
 
@@ -67,28 +67,52 @@ Depending on the aggregation method you are choosing in your monitor setup, this
 
 ## Troubleshooting evaluation graph values
 
-You can visualize what the monitor is evaluating at a time point by using a Notebook [Query Value Widget][3]. Take the query you are using in your monitor (as well as any formulas or functions) and then set your time frame for the graph to your evaluation window. This shows the data as it is aggregated to one single point.
+You can visualize what the monitor is evaluating at a specific time point by using a Notebook [Query Value Widget][3]. Take the query in your monitor (with any formulas or functions) and then set your time frame for the graph to your evaluation window. This shows the data as it is aggregated to one single point.
 
-In the following example, take a time frame from the Evaluation graph you want to investigate:
+In the following example, take a time frame from the Evaluation graph you want to investigate. Hover over the evaluation graph data point to see the value and the time. For example, you want to investigate why your evaluation graph shows a data point of `0.38` at 10:50:35, when your history graph shows `0.26` around the same time.
 
-{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
+To troubleshoot this value you can open the monitor edit page and transfer the monitor configuration to a Notebook Query Value widget.
 
-{{< img src="path/to/your/image-name-here.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshoot_monitor_eval_config.png" alt="Example configuration showing metric with a query aggregation of p95 and a monitor evaluation aggregation of p95 over the last 5 minutes" style="width:100%;" >}}
 
-This is the query from the Monitor edit page:
+Monitor edit page configuration fields:
+- Metric Query **a**: `proc.test_process.cpu.total_pct` p95 by (everything)
+- Monitor evaluation aggregation: Evaluate the `percentile (p95)` of the query
+- Monitor evaluation window: the `last 5 minutes`
 
+Transfer the same configuration to the Notebook Query Value widget.
+1. The widget dropdown should display **Query Value**.
+1. Select the timeframe corresponding to the data point you are troubleshooting.
+1. Input the metric query from your monitor configuration: `proc.test_process.cpu.total_pct`. Add the metric aggregation `p95 by`.
+1. Verify the evaluation matches the monitor evaluation, `percentile (p95)`.
+1. Verify the query value matches the evaluation data point in your monitor.
 
+| Configuration                 | Monitor     | Query Value widget |
+| -------------                 | ----------- | ------------------ |
+| Metric Query                  |{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_monitor_query.png" alt="Example configuration showing metric with a query aggregation of p95 and a monitor evaluation aggregation of p95 over the last 5 minutes" style="width:100%;" >}}|{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_widget_query.png" alt="Query value widget configuration highlighting field that matches the metric query" style="width:100%;" >}}|
+| Monitor Aggregation            |{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_monitor_aggregation.png" alt="Example configuration showing metric with a query aggregation of p95 highlighting the monitor evaluation aggregation of p95" style="width:100%;" >}}|{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_widget_aggregation.png" alt="Query value widget configuration highlighting field that matches the monitor aggregation" style="width:100%;" >}}|
+| Evaluation Window            |{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_monitor_eval_window.png" alt="Example configuration showing metric with a query aggregation of p95 highlighting the monitor evaluation window of last 5 minutes" style="width:100%;" >}}|{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_widget_eval_window.png" alt="Query value widget configuration highlighting field that matches the monitor evaluation window" style="width:100%;" >}}|
 
-Aggregation method:
-
-Evaluation window:
-
-Combine the above components into a Query Value widget configuration:
 
 ### Troubleshooting an evaluation graph with formulas
 
-In this example, troubleshoot an evaluation graph with multiple queries and a formula in a Notebook Query Value widget.
+{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_formula_eval_graph.png" alt="Evaluation graph showing data point of 266.24 at 12:15:29 on hover" style="width:50%;" >}}
 
+In this example, troubleshoot a value in the monitor evaluation graph with multiple queries and a formula, in a Notebook Query Value widget. On the evaluation graph, hover over the data point you want to investigate, in this example, you want to troubleshoot the evaluation graph value of `255.24` at 12:15:29.
+
+{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_formula_monitor_config.png" alt="Monitor configuration showing two metric queries and a formula 'a+b', which evaluates the sum of the query over the last 5 minutes" style="width:100%;" >}}
+
+Monitor edit page configuration fields:
+- Metric Query **a**: `proc.test_process.cpu.total_pct` avg by (everything)
+- Metric Query **b**: `system.cpu.user` avg by (everything)
+- Monitor evaluation aggregation: Evaluate the `sum` of the query
+- Monitor evaluation window: the `last 5 minutes`
+
+Transfer the same configuration to the Notebook Query Value widget one metric at a time.
+**Metric a**
+1. The widget dropdown should display **Query Value**.
+1. Select the timeframe corresponding to 5 minutes around 12:15:29. In this case, 12:11 - 12:16
+1. Input the metric query from your monitor configuration: `proc.test_process.cpu.total_pct`. Add the metric aggregation `avg`.
 
 
 ## Further Reading
