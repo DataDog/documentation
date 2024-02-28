@@ -69,6 +69,8 @@ The following OpenTelemetry features implemented in the Datadog library as noted
 
 Datadog combines these OpenTelemetry spans with other Datadog APM spans into a single trace of your application. It supports [integration instrumentation][7] and [OpenTelemetry Automatic instrumentation][8] also.
 
+Note: In this mode of operation, you don't need to set up ingestion of OTLP, since OTLP is not actually being used.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
