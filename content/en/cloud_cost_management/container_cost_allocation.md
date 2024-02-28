@@ -29,7 +29,7 @@ For Kubernetes clusters, CCM allocates costs of AWS/GCP host instances and non-l
      - Ensure that you enable the [**Orchestrator Explorer**][6] in your Agent configuration.
      - Container cost allocation requires **Agent version >= 7.27.0** and **Cluster Agent version >= 1.11.0**.
      - AWS Persistent Volume allocation requires **Agent version >= 7.46.0**
-     - GCP supports agentless kubernetes cost tracking with some limitations, [see below for more details](#Agentless-GCP-Kubernetes-costs)
+     - GCP supports agentless kubernetes cost tracking with some limitations, [see below for more details](#agentless-gcp-kubernetes-costs)
 3. For AWS ECS support, set up [**Datadog Container Monitoring**][3] in ECS tasks.
      - Optionally, enable [AWS Split Cost Allocation][5] for usage-based ECS allocation.
 
