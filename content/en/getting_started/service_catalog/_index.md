@@ -19,7 +19,7 @@ further_reading:
       text: 'Service Scorecards'
 ---
 
-INSERT IMAGE 
+{{< img src="/getting_started/service_catalog/overview_image.jpeg" alt="Service Catalog Reliability view showing several services and their associated MTTR, deployment metrics, issues, incidents, SLOs, and monitor statuses." style="width:90%;" >}}
 
 ## Overview
 
@@ -110,7 +110,7 @@ You can also use any existing knowledge sources your organization maintains, suc
 
 Finally, you can also create entries from `service` tags in other Datadog products like Infrastructure Monitoring and Log Management. 
 
-INSERT IMAGE 
+{{< img src="/getting_started/service_catalog/import_entries.jpeg" alt="Import Entries tab in the Service Catalog setup and configuration section" style="width:90%;" >}}
 
 ## Managing metadata in Service Catalog
 
@@ -163,7 +163,7 @@ To add custom rules to your Scorecards dashboard:
 3. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, service}` tuple that you are evaluating to the [Scorecards API][13] `/scorecard/outcomes/batch` endpoint. 
 4. View an overview of outcomes in the Scorecards dashboard.
 
-INSERT IMAGE
+{{< img src="/getting_started/service_catalog/create_rule.jpeg" alt="Create Rule modal to add custom rules in Scorecards dashboard" style="width:90%;" >}}
 
 
 [1]: https://www.datadoghq.com
