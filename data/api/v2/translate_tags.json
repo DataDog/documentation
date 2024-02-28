@@ -77,7 +77,7 @@
   },
   "ip-allowlist": {
     "name": "IP Allowlist",
-    "description": "The IP allowlist API is used to manage the IP addresses that\ncan access the Datadog API and web UI. It does not block\naccess to intake APIs or public dashboards.\n\nThis is an enterprise-only feature. Request access by\ncontacting Datadog support."
+    "description": "The IP allowlist API is used to manage the IP addresses that\ncan access the Datadog API and web UI. It does not block\naccess to intake APIs or public dashboards.\n\nThis is an enterprise-only feature. Request access by\ncontacting Datadog support, or see the [IP Allowlist page](https://docs.datadoghq.com/account_management/org_settings/ip_allowlist/) for more information."
   },
   "incident-services": {
     "name": "Incident Services",
@@ -97,11 +97,11 @@
   },
   "logs": {
     "name": "Logs",
-    "description": "Search your logs and send them to your Datadog platform over HTTP."
+    "description": "Search your logs and send them to your Datadog platform over HTTP. See the [Log Management page](https://docs.datadoghq.com/logs/) for more information."
   },
   "logs-archives": {
     "name": "Logs Archives",
-    "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in web UI."
+    "description": "Archives forward all the logs ingested to a cloud storage system.\n\nSee the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)\nfor a list of the archives currently configured in Datadog."
   },
   "logs-metrics": {
     "name": "Logs Metrics",
@@ -113,7 +113,7 @@
   },
   "metrics": {
     "name": "Metrics",
-    "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period (timeseries and scalar)\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission."
+    "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period (timeseries and scalar)\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission.\n\nSee the [Metrics page](https://docs.datadoghq.com/metrics/) for more information."
   },
   "monitors": {
     "name": "Monitors",
@@ -121,7 +121,7 @@
   },
   "okta-integration": {
     "name": "Okta Integration",
-    "description": "Configure your Datadog Okta integration directly through the Datadog API."
+    "description": "Configure your [Datadog Okta integration](https://docs.datadoghq.com/integrations/okta/) directly through the Datadog API."
   },
   "opsgenie-integration": {
     "name": "Opsgenie Integration",
@@ -133,15 +133,15 @@
   },
   "powerpack": {
     "name": "Powerpack",
-    "description": "The powerpack endpoints allow you to:\n\n- Get a powerpack\n- Create a powerpack\n- Delete a powerpack\n- Get a list of all powerpacks\n\nThe Patch and Delete API methods can only be performed on a powerpack by\na user who has the powerpack create permission for that specific powerpack."
+    "description": "The Powerpack endpoints allow you to:\n\n- Get a Powerpack\n- Create a Powerpack\n- Delete a Powerpack\n- Get a list of all Powerpacks\n\nThe Patch and Delete API methods can only be performed on a Powerpack by\na user who has the powerpack create permission for that specific Powerpack.\n\nRead [Scale Graphing Expertise with Powerpacks](https://docs.datadoghq.com/dashboards/guide/powerpacks-best-practices/) for more information."
   },
   "processes": {
     "name": "Processes",
-    "description": "The processes API allows you to query processes data for your organization."
+    "description": "The processes API allows you to query processes data for your organization. See the [Live Processes page](https://docs.datadoghq.com/infrastructure/process/) for more information."
   },
   "rum": {
     "name": "RUM",
-    "description": "Search or aggregate your RUM events over HTTP."
+    "description": "Manage your Real User Monitoring (RUM) applications, and search or aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
   },
   "restriction-policies": {
     "name": "Restriction Policies",
@@ -153,7 +153,7 @@
   },
   "security-monitoring": {
     "name": "Security Monitoring",
-    "description": "Detection rules for generating signals and listing of generated\nsignals."
+    "description": "Create and manage your security rules, signals, filters, and more. See the [Datadog Security page](https://docs.datadoghq.com/security/) for more information."
   },
   "sensitive-data-scanner": {
     "name": "Sensitive Data Scanner",

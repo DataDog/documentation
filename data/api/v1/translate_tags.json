@@ -53,7 +53,7 @@
   },
   "logs": {
     "name": "Logs",
-    "description": "Search your logs and send them to your Datadog platform over HTTP."
+    "description": "Search your logs and send them to your Datadog platform over HTTP. See the [Log Management page](https://docs.datadoghq.com/logs/) for more information."
   },
   "logs-indexes": {
     "name": "Logs Indexes",
@@ -65,7 +65,7 @@
   },
   "metrics": {
     "name": "Metrics",
-    "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission."
+    "description": "The metrics endpoint allows you to:\n\n- Post metrics data so it can be graphed on Datadog’s dashboards\n- Query metrics from any time period\n- Modify tag configurations for metrics\n- View tags and volumes for metrics\n\n**Note**: A graph can only contain a set number of points\nand as the timeframe over which a metric is viewed increases,\naggregation between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can only be performed by\na user who has the `Manage Tags for Metrics` permission.\n\nSee the [Metrics page](https://docs.datadoghq.com/metrics/) for more information."
   },
   "monitors": {
     "name": "Monitors",
@@ -89,7 +89,7 @@
   },
   "security-monitoring": {
     "name": "Security Monitoring",
-    "description": "Detection rules for generating signals and listing of generated\nsignals."
+    "description": "Create and manage your security rules, signals, filters, and more. See the [Datadog Security page](https://docs.datadoghq.com/security/) for more information."
   },
   "service-checks": {
     "name": "Service Checks",
