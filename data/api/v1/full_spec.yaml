@@ -35871,6 +35871,7 @@ tags:
     url: https://docs.datadoghq.com/account_management/api-app-keys/
   name: Key Management
 - description: Search your logs and send them to your Datadog platform over HTTP.
+    See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.
   name: Logs
 - description: 'Manage configuration of [log indexes](https://docs.datadoghq.com/logs/indexes/).
 
@@ -35901,7 +35902,8 @@ tags:
     A graph can only contain a set number of points\nand as the timeframe over which
     a metric is viewed increases,\naggregation between points occurs to stay below
     that set number.\n\nThe Post, Patch, and Delete `manage_tags` API methods can
-    only be performed by\na user who has the `Manage Tags for Metrics` permission."
+    only be performed by\na user who has the `Manage Tags for Metrics` permission.\n\nSee
+    the [Metrics page](https://docs.datadoghq.com/metrics/) for more information."
   name: Metrics
 - description: '[Monitors](https://docs.datadoghq.com/monitors) allow you to watch
     a metric or check that you care about and
@@ -35944,9 +35946,9 @@ tags:
     url: https://docs.datadoghq.com/dashboards/guide/screenboard-api-doc/
   name: Screenboards
   x-deprecated: true
-- description: 'Detection rules for generating signals and listing of generated
-
-    signals.'
+- description: Create and manage your security rules, signals, filters, and more.
+    See the [Datadog Security page](https://docs.datadoghq.com/security/) for more
+    information.
   name: Security Monitoring
 - description: 'The service check endpoint allows you to post check statuses for use
     with monitors.
