@@ -1437,6 +1437,27 @@ main:
     identifier: api_catalog_troubleshoot
     parent: api_catalog
     weight: 8
+  - name: Error Tracking
+    url: error_tracking/
+    pre: error-tracking
+    parent: platform_heading
+    identifier: error_tracking
+    weight: 90000
+  - name: Explorer
+    url: error_tracking/explorer
+    parent: error_tracking
+    identifier: error_tracking_explorer
+    weight: 1
+  - name: Custom Grouping
+    url: error_tracking/custom_grouping
+    parent: error_tracking
+    identifier: error_tracking_custom_grouping
+    weight: 2
+  - name: Identify Suspect Commits
+    url: error_tracking/suspect_commits
+    parent: error_tracking
+    identifier: error_tracking_suspect_commits
+    weight: 3
   - name: Service Level Objectives
     url: service_management/service_level_objectives/
     pre: slos
@@ -63804,17 +63825,17 @@ main:
     identifier: tracing_error_tracking
     weight: 10
   - name: Error Tracking Explorer
-    url: tracing/error_tracking/explorer/
+    url: error_tracking/explorer
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_explorer
     weight: 1001
   - name: Custom Grouping
-    url: tracing/error_tracking/custom_grouping
+    url: error_tracking/custom_grouping?tab=apm
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_custom_grouping
     weight: 1002
   - name: Identify Suspect Commits
-    url: logs/error_tracking/suspect_commits
+    url: error_tracking/suspect_commits
     parent: tracing_error_tracking
     identifier: tracing_error_tracking_suspect_commits
     weight: 1003
@@ -64988,9 +65009,9 @@ main:
     identifier: log_management_error_tracking
     weight: 6
   - name: Error Tracking Explorer
-    identifier: log_management_error_tracking_explorer
-    url: logs/error_tracking/explorer
+    url: error_tracking/explorer
     parent: log_management_error_tracking
+    identifier: log_management_error_tracking_explorer
     weight: 601
   - name: Track Browser and Mobile Errors
     identifier: log_management_error_tracking_browser_and_mobile
@@ -65003,7 +65024,7 @@ main:
     parent: log_management_error_tracking
     weight: 603
   - name: Custom Grouping
-    url: logs/error_tracking/custom_grouping
+    url: error_tracking/custom_grouping?tab=logs
     parent: log_management_error_tracking
     identifier: log_management_error_tracking_custom_grouping
     weight: 604
@@ -65013,7 +65034,7 @@ main:
     identifier: log_management_error_tracking_manage_data_collection
     weight: 605
   - name: Identify Suspect Commits
-    url: logs/error_tracking/suspect_commits
+    url: error_tracking/suspect_commits
     parent: log_management_error_tracking
     identifier: log_management_error_tracking_suspect_commits
     weight: 606
@@ -65160,7 +65181,7 @@ main:
     parent: cws_workload_security_rules
     identifier: cws_custom_rules
     weight: 101
-  - name: Security Signals
+  - name: Investigate Security Signals
     url: security/threats/security_signals
     parent: cloud_workload_security
     identifier: cws_security_signals
@@ -65180,17 +65201,17 @@ main:
     parent: csm
     identifier: cspm
     weight: 3
-  - name: Compliance Rules
+  - name: Manage Compliance Rules
     url: security/misconfigurations/compliance_rules
     parent: cspm
     identifier: cspm_detection_rules
     weight: 301
-  - name: Custom Rules
+  - name: Create Custom Rules
     url: security/misconfigurations/custom_rules
     parent: cspm
     identifier: cspm_custom_rules
     weight: 302
-  - name: Compliance Reports
+  - name: Manage Compliance Posture
     url: security/misconfigurations/frameworks_and_benchmarks
     parent: cspm
     identifier: cspm_frameworks_benchmarks
@@ -65201,11 +65222,11 @@ main:
     identifier: cspm_custom_frameworks
     weight: 101
   - name: Supported Frameworks
-    url: security/misconfigurations/supported_frameworks
-    parent: cspm
+    url: security/misconfigurations/frameworks_and_benchmarks/supported_frameworks
+    parent: cspm_frameworks_benchmarks
     identifier: cspm_supported_frameworks
-    weight: 304
-  - name: Misconfigurations Explorer
+    weight: 102
+  - name: Explore Misconfigurations
     url: /security/misconfigurations/findings
     parent: cspm
     identifier: cspm_findings_explorer
@@ -65996,7 +66017,7 @@ main:
     identifier: rum_error_tracking
     weight: 8
   - name: Explorer
-    url: real_user_monitoring/error_tracking/explorer/
+    url: error_tracking/explorer/
     parent: rum_error_tracking
     identifier: rum_error_tracking_explorer
     weight: 801
@@ -66011,12 +66032,12 @@ main:
     identifier: rum_error_tracking_mobile
     weight: 803
   - name: Custom Grouping
-    url: real_user_monitoring/error_tracking/custom_grouping
+    url: error_tracking/custom_grouping?tab=rum
     parent: rum_error_tracking
     identifier: rum_error_tracking_custom_grouping
     weight: 809
   - name: Identify Suspect Commits
-    url: logs/error_tracking/suspect_commits
+    url: error_tracking/suspect_commits
     parent: rum_error_tracking
     identifier: rum_error_tracking_suspect_commits
     weight: 810
