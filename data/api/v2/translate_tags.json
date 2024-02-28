@@ -25,7 +25,7 @@
   },
   "case-management": {
     "name": "Case Management",
-    "description": "View and manage cases and project within Case Management"
+    "description": "View and manage cases and projects within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
   },
   "cloud-cost-management": {
     "name": "Cloud Cost Management",
