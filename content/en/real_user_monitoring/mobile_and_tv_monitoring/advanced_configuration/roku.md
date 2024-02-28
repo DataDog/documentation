@@ -19,10 +19,6 @@ further_reading:
 <div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
-{{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-info">RUM for Roku is in beta.</div>
-{{< /site-region >}}
-
 ## Overview
 
 If you have not set up the SDK yet, follow the [in-app setup instructions][1] or refer to the [Roku RUM setup documentation][2]. 

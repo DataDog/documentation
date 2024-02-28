@@ -273,9 +273,6 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 <div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
-{{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-info">RUM for Roku is in beta.</div>
-
 1. Set up [RUM Roku Monitoring][1].
 
 2. Use the `datadogroku_DdUrlTransfer` component to perform your network requests.

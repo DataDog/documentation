@@ -20,10 +20,6 @@ further_reading:
 <div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
-{{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-info">RUM for Roku is in beta.</div>
-{{< /site-region >}}
-
 ## Overview
 
 The RUM Roku SDK generates events that have associated metrics and attributes. Metrics are quantifiable values that can be used for measurements related to the event. Attributes are non-quantifiable values used to slice metrics data (group by) in analytics. 
