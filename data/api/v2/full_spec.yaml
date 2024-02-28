@@ -36848,7 +36848,9 @@ tags:
     [Test Visibility in Datadog page](https://docs.datadoghq.com/tests/) for more
     information.
   name: CI Visibility Tests
-- description: View and manage cases and project within Case Management
+- description: View and manage cases and projects within Case Management. See the
+    [Case Management page](https://docs.datadoghq.com/service_management/case_management/)
+    for more information.
   name: Case Management
 - description: The Cloud Cost Management API allows you to set up, edit, and delete
     Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management
