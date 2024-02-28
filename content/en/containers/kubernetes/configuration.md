@@ -593,12 +593,12 @@ For a complete list of environment variables for the Helm chart, see the [full l
 {{< /tabs >}}
 
 ## Environment Variables
-TODO: words about env vars and link to https://docs.datadoghq.com/containers/docker/?tab=standard#environment-variables
+The containerized Datadog Agent can be configured by using environment variables, for an extensive list of supported environement variables in the [Environment Variables][26] section of the Docker Agent documentation.
 
+### Examples
 {{< tabs >}}
 
 {{% tab "Datadog Operator" %}}
-### Examples
 When using the Datadog Operator, environment variables are set in the override in the context of a component or container as `[key].containers.[key].env []object` or `[key].env []object` with the following possible keys: `nodeAgent`, `clusterAgent` or `clusterChecksRunner` The container level settings take priority over any component level settings.
 
 ```yaml
@@ -622,8 +622,6 @@ spec:
 
 {{% /tab %}}
 {{% tab "Helm" %}}
-
-### Examples
 
 ```yaml
 datadog:
@@ -858,3 +856,4 @@ Starting with Agent v6.4.0 (and v6.5.0 for the Trace Agent), you can override th
 [23]: /infrastructure/process/ 
 [24]: /account_management/api-app-keys/#application-keys
 [25]: /integrations/kubernetes_state_core/
+[26]: /containers/docker/?tab=standard#environment-variables
