@@ -285,7 +285,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     ```
 
 [1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/roku/
-{{< /site-region >}}
+
 
 {{% /tab %}}
 {{< /tabs >}}
