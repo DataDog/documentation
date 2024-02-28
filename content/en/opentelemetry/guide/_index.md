@@ -4,7 +4,7 @@ kind: guide
 private: true
 ---
 
-## OpenTelemetry Guides
+## Guides
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/guide/otlp_histogram_heatmaps/" >}}Visualizing OTLP Histograms as heatmaps{{< /nextlink >}}
@@ -31,7 +31,7 @@ private: true
     {{< nextlink href="https://opentelemetry.io/ecosystem/registry/?s=datadog" >}}Search for instrumentation libraries, collector components, utilities, and other OpenTelmetry projects{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## OpenTelemetry Documentation
+## OpenTelemetry documentation
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="https://opentelemetry.io/docs/" >}}OpenTelemetry Documentation{{< /nextlink >}}
