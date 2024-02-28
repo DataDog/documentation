@@ -46,7 +46,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: couch
-oauth: {}
 public_title: CouchDB
 short_description: CouchDB のアクティビティとパフォーマンスのメトリクスを追跡およびグラフ化
 supported_os:

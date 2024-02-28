@@ -29,7 +29,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: openmetrics
-oauth: {}
 public_title: OpenMetrics
 short_description: OpenMetrics はメトリクスデータを公開するためのオープンな標準
 supported_os:

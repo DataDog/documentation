@@ -312,7 +312,7 @@ Fill in variables accordingly:
         </tr>
     </table>
 
-   In the ARN, replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. Replace `<RUNTIME>` with `Node14-x`, `Node16-x`, `Node18-x` or `Node20-x`.
+   In the ARN, replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`. Replace `<RUNTIME>` with one of the following: {{< latest-lambda-layer-version layer="node-versions" >}}.
 
 2. Replace `<DATADOG_EXTENSION_ARN>` with the ARN of the appropriate Datadog Lambda Extension for your region and architecture:
 
@@ -372,8 +372,8 @@ resource "aws_lambda_function" "lambda" {
   # Remember sure to choose the right layers based on your Lambda architecture and AWS regions
 
   layers = [
-    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x:96",
-    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:45"
+    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}}:{{< latest-lambda-layer-version layer="node" >}}",
+    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}"
   ]
 
   handler = "/opt/nodejs/node_modules/datadog-lambda-js/handler.handler"
@@ -413,7 +413,7 @@ resource "aws_lambda_function" "lambda" {
       arn:aws-us-gov:lambda:<AWS_REGION>:002406178527:layer:Datadog-<RUNTIME>:{{< latest-lambda-layer-version layer="node" >}}
       ```
 
-      Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available `RUNTIME` options are `Node12-x`, `Node14-x`, `Node16-x` and `Node18-x`.
+      Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`. The available `<RUNTIME>` options are: {{< latest-lambda-layer-version layer="node-versions" >}}.
 
     - Option B: If you cannot use the prebuilt Datadog Lambda layer, alternatively you can install the packages `datadog-lambda-js` and `dd-trace` using your favorite package manager.
 

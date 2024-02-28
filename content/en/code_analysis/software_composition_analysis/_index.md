@@ -6,7 +6,7 @@ is_beta: true
 further_reading:
 - link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
   tag: "Blog"
-  text: "Enhance application security in production with Datadog Application Vulnerability Management"
+  text: "Enhance application security in production with Software Composition Analysis"
 - link: "/getting_started/application_security/software_composition_analysis"
   tag: "Documentation"
   text: "Getting Started with Software Composition Analysis"
@@ -50,6 +50,7 @@ SCA currently supports scanning the following languages and technologies for vul
 ### CI providers
 {{< whatsnext desc="With Software Composition Analysis, you can identify vulnerable open source libraries that have been imported into your codebase. See the documentation for information about the following integrations:">}}
     {{< nextlink href="code_analysis/software_composition_analysis/github_actions" >}}GitHub Actions{{< /nextlink >}}
+    {{< nextlink href="code_analysis/software_composition_analysis/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Search and filter results

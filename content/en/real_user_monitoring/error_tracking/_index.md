@@ -27,20 +27,15 @@ algolia:
 
 ## Overview
 
-It is critical for your system's health to consistently monitor the errors collected by Datadog. When there are many individual error events, it becomes hard to prioritize errors for troubleshooting. By tracking, triaging, and debugging crashes, you can minimize the impact of fatal errors on your web and mobile applications' user experience.
+{{< img src="real_user_monitoring/error_tracking/rum-et-explorer.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
-{{< img src="real_user_monitoring/error_tracking/rum-error-tracking-2.png" alt="The Error Tracking Explorer for RUM displaying issues from your web and mobile applications' crash reports" style="width:100%;" >}}
+{{% error-tracking-description %}}
 
-Once you have set up [RUM][2] for **Web and Mobile Apps** error tracking, the issue list populates with cards. Navigate to [**UX Monitoring** > **Error Tracking**][1] to view open, ignored, or all issues, sort issues by volume or age, and filter issues by all custom and default facets on your web and mobile applications.
+Issues from RUM errors include the stack trace, user session timelines, and metadata—including user location, version, and any custom attributes you included in your crash reports.
 
-Error Tracking enables you to:
+Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] documentation. To view the Error Tracking Explorer for RUM, navigate to [**UX Monitoring** > **Error Tracking**][1].
 
-- Set alerts on Error Tracking events. This helps you to remain informed of fatal issues that may occur.
-- Group similar errors into issues, so that you can more easily identify important errors and reduce noise.
-- Follow issues over time to know when they first started, if they are still ongoing, and how often they are occurring.
-- Collect all the necessary context in one place to facilitate troubleshooting.
-
-## Upload source maps
+## Setup
 
 {{< whatsnext desc="To get started with Datadog Error Tracking for RUM, see the corresponding documentation to upload source maps for your framework:" >}}
     {{< nextlink href="real_user_monitoring/error_tracking/browser" >}}Browser{{< /nextlink >}}
@@ -51,17 +46,10 @@ Error Tracking enables you to:
     {{< nextlink href="real_user_monitoring/error_tracking/flutter" >}}Flutter{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Examine issues to start troubleshooting or debugging
-
-Error Tracking automatically categorizes crashes collected from your web and mobile applications into issues in the [Error Tracking Explorer][1]. 
-
-{{< img src="real_user_monitoring/error_tracking/issue-panel-2.png" alt="The Error Tracking Explorer for RUM displaying issues from your web and mobile application's crash reports" style="width:100%;" >}}
-
-Click on an issue to view debugging information, such as the stack trace, user session timelines, and metadata—including user location, version, and any custom attributes you included in your crash reports. 
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: /real_user_monitoring/
+[3]: /error_tracking/explorer

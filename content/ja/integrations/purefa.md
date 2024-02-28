@@ -37,7 +37,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: purefa
-oauth: {}
 public_title: Pure Storage FlashArray
 short_description: Pure Storage FlashArrays のパフォーマンスと利用状況を監視
 supported_os:

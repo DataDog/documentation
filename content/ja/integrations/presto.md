@@ -44,7 +44,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: presto
-oauth: {}
 public_title: Presto
 short_description: PrestoSQL クラスターのパフォーマンスや使用状況の統計などを収集
 supported_os:

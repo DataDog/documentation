@@ -37,7 +37,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: ibm_ace
-oauth: {}
 public_title: IBM ACE
 short_description: IBM ACE のリソース統計とメッセージフローを監視します。
 supported_os:

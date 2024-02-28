@@ -279,7 +279,7 @@ See [logs endpoints][3] for other connection types.
 
 {{% /site-region %}}
 
-{{% site-region region="us3,us5,gov" %}}
+{{% site-region region="us3,us5,gov,ap1" %}}
 
 443/tcp
 : Port for most Agent data (Metrics, APM, Live Processes & Containers).
