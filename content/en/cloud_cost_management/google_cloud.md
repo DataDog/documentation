@@ -20,10 +20,6 @@ further_reading:
 <div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
 {{< /site-region >}}
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-Cloud Cost for Google Cloud is in public beta
-{{< /beta-callout >}}
-
 ## Overview
 
 To use Google Cloud Cost Management in Datadog, you must configure the [Google Cloud Platform Integration][12] and set up the [detailed usage cost][14] billing export for your desired billing account.
