@@ -1,5 +1,5 @@
 ---
-title: Browser Crash Reporting and Error Tracking
+title: Browser Error Tracking
 kind: documentation
 aliases:
 - /real_user_monitoring/error_tracking/browser_errors

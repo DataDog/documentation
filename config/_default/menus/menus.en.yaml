@@ -65805,31 +65805,56 @@ main:
     parent: rum
     identifier: rum_session_replay
     weight: 3
+  - name: Browser
+    url: real_user_monitoring/session_replay/browser
+    parent: rum_session_replay
+    identifier: rum_session_replay_browser
+    weight: 301
+  - name: Privacy Options
+    url: real_user_monitoring/session_replay/browser/privacy_options
+    parent: rum_session_replay_browser
+    identifier: rum_session_replay_privacy_options
+    weight: 101
+  - name: Developer Options
+    url: real_user_monitoring/session_replay/browser/developer_tools
+    parent: rum_session_replay_browser
+    identifier: rum_session_replay_developer_tools
+    weight: 102
+  - name: Troubleshooting
+    url: real_user_monitoring/session_replay/browser/troubleshooting
+    parent: rum_session_replay_browser
+    identifier: rum_session_replay_troubleshooting
+    weight: 103
   - name: Mobile
     url: real_user_monitoring/session_replay/mobile
     parent: rum_session_replay
     identifier: rum_session_replay_mobile
-    weight: 301
-  - name: Browser Privacy Options
-    url: real_user_monitoring/session_replay/privacy_options
-    parent: rum_session_replay
-    identifier: rum_session_replay_privacy_options
     weight: 302
-  - name: Browser Developer Tools
-    url: real_user_monitoring/session_replay/developer_tools
-    parent: rum_session_replay
-    identifier: rum_session_replay_developer_tools
-    weight: 303
-  - name: Browser Troubleshooting
-    url: real_user_monitoring/session_replay/troubleshooting
-    parent: rum_session_replay
-    identifier: rum_session_replay_troubleshooting
-    weight: 304
+  - name: Setup
+    url: real_user_monitoring/session_replay/mobile/setup_and_configuration
+    parent: rum_session_replay_mobile
+    identifier: rum_session_replay_mobile_setup
+    weight: 101
+  - name: Privacy Options
+    url: real_user_monitoring/session_replay/mobile/privacy_options
+    parent: rum_session_replay_mobile
+    identifier: rum_session_replay_mobile_privacy_options
+    weight: 102
+  - name: Impact On App Performance
+    url: real_user_monitoring/session_replay/mobile/app_performance
+    parent: rum_session_replay_mobile
+    identifier: rum_session_replay_mobile_app_performance
+    weight: 103
+  - name: Troubleshooting
+    url: real_user_monitoring/session_replay/mobile/troubleshooting
+    parent: rum_session_replay_mobile
+    identifier: rum_session_replay_mobile_troubleshooting
+    weight: 104
   - name: Playlists
     url: real_user_monitoring/session_replay/playlists
     parent: rum_session_replay
     identifier: rum_session_replay_playlists
-    weight: 305
+    weight: 303
   - name: Exploring RUM Data
     url: real_user_monitoring/explorer/
     parent: rum

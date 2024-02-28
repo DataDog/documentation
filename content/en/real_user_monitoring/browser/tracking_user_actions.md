@@ -107,6 +107,12 @@ To extend the collection of user interactions, send your custom actions using th
 
 For more information, see [Send Custom Actions][5].
 
+## Add user information to RUM sessions
+
+You can add user information such as user IDs to your RUM sessions to enrich your data.
+
+Learn more about adding [user information][6] to your RUM sessions.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -116,3 +122,4 @@ For more information, see [Send Custom Actions][5].
 [3]: /real_user_monitoring/browser/data_collected/#default-attributes
 [4]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
 [5]: /real_user_monitoring/guide/send-rum-custom-actions
+[6]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#user-session
