@@ -15,7 +15,11 @@ Supported databases
 : Postgres, MySQL
 
 Supported Agent versions
-: 7.53.0+
+: 7.53.0+ (Not currently released)
+
+## Agent Installation
+
+// TODO: Add the installation steps for the beta agent
 
 ## Overview
 
@@ -195,6 +199,22 @@ instances:
 **Note**: In this example, `%%host%%`, `%%port%%`, `%%extra_dbclusteridentifier%%` and `%%extra_region%%` are a template variables that is dynamically populated with information from the aurora cluster.
 
 For more information on Integrations Autodiscovery and how to configure it, see the [Autodiscovery documentation][5].
+
+### Supported template variables
+
+The following documentation lists the supported template variables for the aurora cluster discovery:
+
+| Template variable                        | Source                                                                                                                                        |
+|:-----------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
+| %%host%%                                 | The Aurora instance endpoint                                                                                                                  |
+|                                          |                                                                                                                                               |
+| %%port%%                                 | The port of the Aurora instance                                                                                                               |
+|                                          |                                                                                                                                               |
+| %%extra_region%%                         | The AWS region where the instance is located                                                                                                  |
+|                                          |                                                                                                                                               |
+| %%extra_dbclusteridentifier%%            | The cluster identifier of the discovered Aurora cluster                                                                                       |
+|                                          |                                                                                                                                               |
+| %%extra_managed_authentication_enabled%% | The value of IAM Authentication enabled on the cluster. <br/>This is used to determine if managed authentication should be used for postgres. |
 
 [1]: /database_monitoring/#getting-started
 [2]: /database_monitoring/guide/managed_authentication/#configure-iam-authentication
