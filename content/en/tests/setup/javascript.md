@@ -307,7 +307,7 @@ module.exports = defineConfig({
 })
 {{< /code-block >}}
 
-#### Cypress after:run event
+#### Cypress `after:run` event
 Datadog requires the [`after:run`][10] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:run` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-run'`:
 
 {{< code-block lang="javascript" filename="cypress.config.js" >}}
@@ -339,7 +339,7 @@ These are the instructions if you're using a version older than `cypress@10`. Se
 }
 {{< /code-block >}}
 
-If you've already defined a `pluginsFile`, you can still initialize the instrumentation with:
+If you already defined a `pluginsFile`, initialize the instrumentation with:
 {{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
 module.exports = (on, config) => {
   // your previous code is before this line
@@ -356,7 +356,7 @@ require('dd-trace/ci/cypress/support')
 // Cypress.Commands.add('login', (email, pw) => {})
 {{< /code-block >}}
 
-#### Cypress after:run event
+#### Cypress `after:run` event
 Datadog requires the [`after:run`][10] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:run` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-run'`:
 
 {{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
