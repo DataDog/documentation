@@ -1,8 +1,6 @@
 ---
 title: Connecting with Managed Authentication
 kind: guide
-algolia:
-  tags: ["Microsoft Entra ID", "Azure Managed Identity", "Azure AD", "Azure Active Directory"]
 ---
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
