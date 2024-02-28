@@ -157,11 +157,11 @@
   },
   "sensitive-data-scanner": {
     "name": "Sensitive Data Scanner",
-    "description": "Create, update, delete, and retrieve sensitive data scanner groups and rules."
+    "description": "Create, update, delete, and retrieve sensitive data scanner groups and rules. See the [Sensitive Data Scanner page](https://docs.datadoghq.com/sensitive_data_scanner/) for more information."
   },
   "service-accounts": {
     "name": "Service Accounts",
-    "description": "Create, edit, and disable service accounts."
+    "description": "Create, edit, and disable service accounts. See the [Service Accounts page](https://docs.datadoghq.com/account_management/org_settings/service_accounts/) for more information."
   },
   "service-definition": {
     "name": "Service Definition",
@@ -169,7 +169,7 @@
   },
   "service-scorecards": {
     "name": "Service Scorecards",
-    "description": "API to create, update scorecard rules and outcomes.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+    "description": "API to create, update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/account_management/org_settings/service_accounts/) for more information.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
   },
   "spans": {
     "name": "Spans",
@@ -177,7 +177,7 @@
   },
   "spans-metrics": {
     "name": "Spans Metrics",
-    "description": "Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics) for your organization."
+    "description": "Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics) for your organization. See [Generate Metrics from Spans](https://docs.datadoghq.com/tracing/trace_pipeline/generate_metrics/) for more information."
   },
   "synthetics": {
     "name": "Synthetics",
@@ -185,7 +185,7 @@
   },
   "teams": {
     "name": "Teams",
-    "description": "View and manage teams within Datadog."
+    "description": "View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information."
   },
   "usage-metering": {
     "name": "Usage Metering",

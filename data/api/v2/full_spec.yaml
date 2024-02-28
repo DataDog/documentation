@@ -37105,15 +37105,19 @@ tags:
     information.
   name: Security Monitoring
 - description: Create, update, delete, and retrieve sensitive data scanner groups
-    and rules.
+    and rules. See the [Sensitive Data Scanner page](https://docs.datadoghq.com/sensitive_data_scanner/)
+    for more information.
   name: Sensitive Data Scanner
-- description: Create, edit, and disable service accounts.
+- description: Create, edit, and disable service accounts. See the [Service Accounts
+    page](https://docs.datadoghq.com/account_management/org_settings/service_accounts/)
+    for more information.
   name: Service Accounts
 - description: API to create, update, retrieve and delete service definitions.
   externalDocs:
     url: https://docs.datadoghq.com/tracing/service_catalog/
   name: Service Definition
-- description: 'API to create, update scorecard rules and outcomes.
+- description: 'API to create, update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/account_management/org_settings/service_accounts/)
+    for more information.
 
 
     This feature is currently in BETA. If you have any feedback, contact [Datadog
@@ -37122,7 +37126,8 @@ tags:
 - description: Search and aggregate your spans from your Datadog platform over HTTP.
   name: Spans
 - description: Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics)
-    for your organization.
+    for your organization. See [Generate Metrics from Spans](https://docs.datadoghq.com/tracing/trace_pipeline/generate_metrics/)
+    for more information.
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/tracing/metrics/metrics_namespace/
@@ -37134,7 +37139,8 @@ tags:
     use Datadog\u2019s API to\nmanage both test types programmatically.\n\nFor more
     information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
   name: Synthetics
-- description: View and manage teams within Datadog.
+- description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/)
+    for more information.
   name: Teams
 - description: 'The usage metering API allows you to get hourly, daily, and
 
