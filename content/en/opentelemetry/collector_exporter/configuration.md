@@ -2,8 +2,8 @@
 title: Configuration
 kind: documentation
 further_reading:
-- link: "/opentelemetry/collector_exporter/management/"
-  tag: "Documentation"
+- link: "https://opentelemetry.io/docs/collector/management/"
+  tag: "OpenTelemetry"
   text: "OpenTelemetry Collector Management"
 - link: "https://opentelemetry.io/docs/collector/configuration/"
   tag: "OpenTelemetry"

@@ -29,12 +29,11 @@ The OpenTelemetry Collector is a vendor-agnostic agent process for collecting an
 
 ## Using the Collector
 
-The following documentation describes how to deploy, configure, and manage the Collector:
+The following documentation describes how to deploy and configure the Collector:
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/collector_exporter/deployment/" >}}Deployment{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/collector_exporter/configuration/" >}}Configuration{{< /nextlink >}}
-    {{< nextlink href="/opentelemetry/collector_exporter/management/" >}}Management{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/integrations/" >}}Integrations{{< /nextlink >}}
 {{< /whatsnext >}}
 
