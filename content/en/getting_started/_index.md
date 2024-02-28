@@ -31,6 +31,7 @@ cascade:
 {{< nextlink href="/getting_started/profiler" >}}<u>Profiler</u>: Use Continuous Profiler to find and fix performance problems in your code.{{< /nextlink >}}
 {{< nextlink href="/getting_started/tagging" >}}<u>Tags</u>: Start tagging your metrics, logs, and traces.{{< /nextlink >}}
 {{< nextlink href="/getting_started/api" >}}<u>API</u>: Get started with the Datadog HTTP API.{{< /nextlink >}}
+{{< nextlink href="/getting_started/service_catalog" >}}<u>API</u>: Manage service ownership, reliability, and performance at scale in Service Catalog. {{< /nextlink >}}
 {{< nextlink href="/getting_started/session_replay" >}}<u>Session Replay</u>: Get an in-depth look at how users are interacting with your product with Session Replays.{{< /nextlink >}}
 {{< nextlink href="/getting_started/continuous_testing" >}}<u>Continuous Testing</u>: Run Synthetic end-to-end tests in your CI pipelines and IDEs.{{< /nextlink >}}
 {{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic Monitoring</u>: Start testing and monitoring your API endpoints and key business journeys with Synthetic tests.{{< /nextlink >}}
