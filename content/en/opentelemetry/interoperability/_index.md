@@ -1,6 +1,6 @@
 ---
 title: Interoperability with Datadog and OpenTelemetry
-kind: guide
+kind: documentation
 further_reading:
     - link: '/opentelemetry/schema_semantics/'
       tag: 'Documentation'
@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Integrating Datadog with OpenTelemetry allows you to use Datadog's comprehensive observability platform while leveraging OpenTelemetry's vendor-agnostic instrumentation. This aloows you to collect, visualize, and analyze traces, metrics, and logs from your applications and infrastructure.
+Integrating Datadog with OpenTelemetry allows you to use Datadog's comprehensive observability platform while leveraging OpenTelemetry's vendor-agnostic instrumentation. This allows you to collect, visualize, and analyze traces, metrics, and logs from your applications and infrastructure.
 
 ## Key areas
 
@@ -19,6 +19,7 @@ Integrating Datadog with OpenTelemetry allows you to use Datadog's comprehensive
     {{< nextlink href="/tracing/trace_collection/trace_context_propagation/" >}}W3C Trace Context Propagation{{< /nextlink >}}
     {{< nextlink href="/tracing/trace_collection/custom_instrumentation/otel_instrumentation/" >}}Custom Instrumentation with the OpenTelemetry API{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/connect_rum_and_traces/" >}}Correlate RUM and Traces{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/connect_logs_and_traces/" >}}Correlate Logs and Traces{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

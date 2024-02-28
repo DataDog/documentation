@@ -1,5 +1,7 @@
 ---
 title: Docker Metrics
+aliases:
+- /opentelemetry/collector_exporter/docker_metrics/
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
