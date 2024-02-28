@@ -25,7 +25,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: taskcall
-oauth: {}
 public_title: TaskCall
 short_description: TaskCall による Datadog インシデントの監視と一元化
 supported_os:

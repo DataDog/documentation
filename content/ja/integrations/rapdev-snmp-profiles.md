@@ -73,7 +73,6 @@ assets:
     Printer Issue Monitor: assets/monitors/rapdev_printer_issue.json
     iDRAC Bios Status Monitor: assets/monitors/rapdev_idrac-biosstatus.json
     iDRAC CMOS Monitor: assets/monitors/rapdev_idrac-cmos.json
-    iDRAC Disk State Monitor: assets/monitors/rapdev_idrac-diskstate.json
     iDRAC Disk Status Monitor: assets/monitors/rapdev_idrac-diskstatus.json
     iDRAC Fan Status Monitor: assets/monitors/rapdev_idrac-fanstatus.json
     iDRAC LCD Status Monitor: assets/monitors/rapdev_idrac-lcdstatus.json
@@ -109,7 +108,6 @@ legal_terms:
   eula: assets/EULA.pdf
 manifest_version: 2.0.0
 name: rapdev-snmp-profiles
-oauth: {}
 pricing:
 - billing_type: tag_count
   includes_assets: true

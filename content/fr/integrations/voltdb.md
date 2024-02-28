@@ -44,7 +44,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: voltdb
-oauth: {}
 public_title: VoltDB
 short_description: Recueillez des métriques de statut, des métriques de performance
   et d'autres métriques à partir d'un cluster VoltDB.

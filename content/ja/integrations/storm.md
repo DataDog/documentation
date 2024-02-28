@@ -33,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: storm
-oauth: {}
 public_title: Storm
 short_description: Apache Storm 1.x.x トポロジー実行統計
 supported_os:

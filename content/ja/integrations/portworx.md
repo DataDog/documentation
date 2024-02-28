@@ -33,7 +33,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: portworx
-oauth: {}
 public_title: Portworx
 short_description: Portworx インスタンスからランタイムメトリクスを収集
 supported_os:

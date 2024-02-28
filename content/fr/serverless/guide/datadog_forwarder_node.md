@@ -261,10 +261,10 @@ arn:aws:lambda:<RÉGION_AWS>:464622532012:layer:Datadog-<RUNTIME>:<VERSION>
 arn:aws-us-gov:lambda:<RÉGION_AWS>:002406178527:layer:Datadog-<RUNTIME>:<VERSION>
 ```
 
-Les options `RUNTIME` disponibles sont `Node12-x`, `Node14-x` et `Node16-x`. La dernière `VERSION` est `{{< latest-lambda-layer-version layer="node" >}}`. Exemple :
+Les options `RUNTIME` disponibles sont {{< latest-lambda-layer-version layer="node-versions" >}}. La dernière `VERSION` est `{{< latest-lambda-layer-version layer="node" >}}`. Exemple :
 
 ```
-arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Node16-x:{{< latest-lambda-layer-version layer="node" >}}
+arn:aws:lambda:us-east-1:464622532012:layer:Datadog-{{< latest-lambda-layer-version layer="node-example-version" >}}:{{< latest-lambda-layer-version layer="node" >}}
 ```
 
 Si votre fonction Lambda est configurée de façon à utiliser la signature de code, vous devez ajouter l'ARN du profil de signature de Datadog (`arn:aws:signer:us-east-1:464622532012:/signing-profiles/DatadogLambdaSigningProfile/9vMI9ZAGLc`) à la [configuration de la signature de code][2] de votre fonction avant de pouvoir ajouter la bibliothèque Lambda Datadog en tant que couche.

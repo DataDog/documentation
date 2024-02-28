@@ -23,7 +23,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: flagsmith-rum
-oauth: {}
 public_title: Flagsmith
 short_description: Flagsmith の機能フラグで RUM データを強化
 supported_os:

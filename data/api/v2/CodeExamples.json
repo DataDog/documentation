@@ -98,49 +98,49 @@
   ],
   "ArchiveCase": [
     {
-      "group": "cases",
+      "group": "case_management",
       "suffix": "",
       "description": "Archive case returns \"OK\" response"
     }
   ],
   "AssignCase": [
     {
-      "group": "cases",
+      "group": "case_management",
       "suffix": "",
       "description": "Assign case returns \"OK\" response"
     }
   ],
   "CreateCase": [
     {
-      "group": "cases",
+      "group": "case_management",
       "suffix": "",
       "description": "Create a case returns \"CREATED\" response"
     }
   ],
   "UnarchiveCase": [
     {
-      "group": "cases",
+      "group": "case_management",
       "suffix": "",
       "description": "Unarchive case returns \"OK\" response"
     }
   ],
   "UnassignCase": [
     {
-      "group": "cases",
+      "group": "case_management",
       "suffix": "",
       "description": "Unassign case returns \"OK\" response"
     }
   ],
   "UpdatePriority": [
     {
-      "group": "cases",
+      "group": "case_management",
       "suffix": "",
       "description": "Update case priority returns \"OK\" response"
     }
   ],
   "UpdateStatus": [
     {
-      "group": "cases",
+      "group": "case_management",
       "suffix": "",
       "description": "Update case status returns \"OK\" response"
     }

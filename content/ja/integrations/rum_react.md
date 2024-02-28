@@ -23,7 +23,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: rum_react
-oauth: {}
 public_title: React
 short_description: Datadog RUM を使用した React アプリケーションの監視とメトリクス生成
 supported_os:
