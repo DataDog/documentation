@@ -150,7 +150,7 @@ labels:
 -l com.datadoghq.ad.check_names='["openmetrics"]' -l com.datadoghq.ad.init_configs='[{}]' -l com.datadoghq.ad.instances="[{\"openmetrics_endpoint\":\"http://%%host%%:<PROMETHEUS_PORT>/<PROMETHEUS_ENDPOINT>\",\"namespace\":\"<NAMESPACE>\",\"metrics\":[{\"<METRIC_TO_FETCH>\": \"<NEW_METRIC_NAME>\"}]}]"
 ```
 
-Notes on metrics formatting in com.datadoghq.ad.instances:
+**Examples of metrics formatting in `com.datadoghq.ad.instances`**
 
 ```shell
 # multiple metrics
