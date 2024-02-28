@@ -19,7 +19,7 @@ Integrating Datadog with OpenTelemetry allows you to use Datadog's comprehensive
     {{< nextlink href="/tracing/trace_collection/trace_context_propagation/" >}}W3C Trace Context Propagation{{< /nextlink >}}
     {{< nextlink href="/tracing/trace_collection/custom_instrumentation/otel_instrumentation/" >}}Custom Instrumentation with the OpenTelemetry API{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/connect_rum_and_traces/" >}}Correlate RUM and Traces{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/connect_logs_and_traces/" >}}Correlate Logs and Traces{{< /nextlink >}}
+    {{< nextlink href="/tracing/other_telemetry/connect_logs_and_traces/opentelemetry/" >}}Correlate Logs and Traces{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
