@@ -4,7 +4,7 @@ kind: guide
 ---
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Aurora cluster auto discovery is in **beta**. If you have any feedback about this feature, please [contact support](https://docs.datadoghq.com/help/).
+Aurora cluster auto discovery is a beta feature. If you have any feedback about this feature, please contact Support at support@datadoghq.com.
 {{< /beta-callout >}}
 
 This guide assumes that you have configured [Database Monitoring][1] for your Aurora hosts.
