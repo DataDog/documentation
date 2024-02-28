@@ -31,6 +31,8 @@ ebs:GetSnapshotBlock
 
 ### Lambda
 
+The Agentless Scanning instance requires the following Lambda permissions to scan for resources:
+
 Permissions required:
 ```
 lambda:GetFunction
