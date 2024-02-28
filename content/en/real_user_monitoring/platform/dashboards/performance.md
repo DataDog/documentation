@@ -5,6 +5,7 @@ aliases:
 - '/real_user_monitoring/dashboards/performance_overview_dashboard/'
 - '/real_user_monitoring/dashboards/resources_dashboard'
 - '/real_user_monitoring/dashboards/mobile_dashboard'
+- '/real_user_monitoring/dashboards/performance'
 
 further_reading:
 - link: '/real_user_monitoring/explorer'
