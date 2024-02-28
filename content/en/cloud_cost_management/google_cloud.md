@@ -1,8 +1,6 @@
 ---
 title: Google Cloud
 kind: documentation
-is_beta: true
-private: true
 disable_toc: false
 further_reading:
 - link: "/cloud_cost_management/"
