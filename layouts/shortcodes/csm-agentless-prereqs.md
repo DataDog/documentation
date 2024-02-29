@@ -29,7 +29,7 @@ ebs:ListChangedBlocks
 ebs:GetSnapshotBlock
 ```
 
-### Lambda
+### Lambda permissions
 
 The Agentless Scanning instance requires the following Lambda permissions to scan for resources:
 
