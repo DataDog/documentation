@@ -549,7 +549,7 @@ main:
     url: /metrics/open_telemetry/otlp_metric_types/
     parent: otel_terms
     weight: 201
-  - name: Collector
+  - name: Collector and Exporter
     url: opentelemetry/collector_exporter/
     identifier: otel_collector
     parent: opentelemetry_top_level
@@ -564,16 +564,11 @@ main:
     identifier: otel_collector_configuration
     parent: otel_collector
     weight: 302
-  - name: Datadog Exporter
-    url: opentelemetry/collector_exporter/otel_collector_datadog_exporter/
-    identifier: otel_exporter
-    parent: otel_collector_configuration
-    weight: 3021
   - name: OTLP Receiver
     url: opentelemetry/collector_exporter/otlp_receiver/
     identifier: otel_receiver
     parent: otel_collector_configuration
-    weight: 3022
+    weight: 3021
   - name: Integrations
     url: opentelemetry/integrations/
     identifier: otel_integrations
@@ -639,7 +634,7 @@ main:
     identifier: otel_host_metadata
     parent: otel_schema
     weight: 403
-  - name: Sampling
+  - name: Ingestion Sampling
     url: opentelemetry/ingestion_sampling_with_opentelemetry
     identifier: otel_sampling
     parent: opentelemetry_top_level
