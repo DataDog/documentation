@@ -221,17 +221,23 @@ main:
     identifier: glossary
     parent: essentials_heading
     weight: 20000
+  - name: Standard Attributes
+    url: /standard-attributes
+    pre: search
+    parent: essentials_heading
+    identifier: agent_standard_attributes
+    weight: 30000
   - name: Guides
     url: all_guides/
     pre: compass
     identifier: guides
     parent: essentials_heading
-    weight: 30000
+    weight: 40000
   - name: Agent
     url: agent/
     pre: agent-fill
     parent: essentials_heading
-    weight: 40000
+    weight: 50000
     identifier: agent
   - name: Basic Agent Usage
     url: agent/basic_agent_usage/
@@ -443,75 +449,70 @@ main:
     url: agent/versions/upgrade_between_agent_minor_versions
     parent: agent_versions
     weight: 903
-  - name: Standard Attributes
-    url: /standard-attributes
-    parent: agent
-    identifier: agent_standard_attributes
-    weight: 10
   - name: Troubleshooting
     url: agent/troubleshooting/
     parent: agent
-    weight: 11
+    weight: 10
     identifier: agent_troubleshooting
   - name: Container Hostname Detection
     identifier: agent_troubleshooting_hostname_containers
     url: agent/troubleshooting/hostname_containers/
     parent: agent_troubleshooting
-    weight: 1101
+    weight: 1001
   - name: Debug Mode
     identifier: agent_troubleshooting_debug_mode
     url: agent/troubleshooting/debug_mode/
     parent: agent_troubleshooting
-    weight: 1102
+    weight: 1002
   - name: Agent Flare
     identifier: agent_troubleshooting_agent_flare
     url: agent/troubleshooting/send_a_flare/
     parent: agent_troubleshooting
-    weight: 1103
+    weight: 1003
   - name: Agent Check Status
     identifier: agent_troubleshooting_agent_check_status
     url: agent/troubleshooting/agent_check_status/
     parent: agent_troubleshooting
-    weight: 1104
+    weight: 1004
   - name: NTP Issues
     identifier: agent_troubleshooting_ntp
     url: agent/troubleshooting/ntp/
     parent: agent_troubleshooting
-    weight: 1105
+    weight: 1005
   - name: Permission Issues
     identifier: agent_troubleshooting_permissions
     url: agent/troubleshooting/permissions/
     parent: agent_troubleshooting
-    weight: 1106
+    weight: 1006
   - name: Integrations Issues
     identifier: agent_troubleshooting_integrations
     url: agent/troubleshooting/integrations/
     parent: agent_troubleshooting
-    weight: 1107
+    weight: 1007
   - name: Site Issues
     identifier: agent_troubleshooting_site
     url: agent/troubleshooting/site/
     parent: agent_troubleshooting
-    weight: 1108
+    weight: 1008
   - name: Autodiscovery Issues
     identifier: agent_troubleshooting_autodiscovery
     url: agent/troubleshooting/autodiscovery/
     parent: agent_troubleshooting
-    weight: 1109
+    weight: 1009
   - name: Windows Container Issues
     identifier: agent_troubleshooting_windows_containers
     url: agent/troubleshooting/windows_containers
-    weight: 1110
+    weight: 1010
     parent: agent_troubleshooting
   - name: Agent Runtime Configuration
     identifier: agent_troubleshooting_runtime_configuration
     url: agent/troubleshooting/config
-    weight: 1111
+    weight: 1011
     parent: agent_troubleshooting
   - name: High CPU or Memory Consumption
     identifier: agent_troubleshooting_high_cpu_memory_consumption
     url: agent/troubleshooting/high_memory_usage/
-    weight: 1112
+    weight: 1012
     parent: agent_troubleshooting
   - name: Guides
     url: agent/guide/
