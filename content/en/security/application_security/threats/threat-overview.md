@@ -29,7 +29,7 @@ Each section of Threats Overview focuses on a different aspect of security with 
 3. Block attack tools and ensure that customer scanners are part of an authorized vulnerability management program.
 4. Monitor business logic for changes in detection profiles related to distributed credential stuffing campaigns or risky payment activity.
 5. Use the geographic overview to compare the attack traffic sources with your expected customer sources.
-6. Use the [linked Powerpacks](#using-the-powerpacks) to enhance your own Dashboards with the most relevant information.
+6. Use [Powerpacks](#using-the-powerpacks) to enhance your own Dashboards with the most relevant information.
 
 ### Using the Powerpacks
 
