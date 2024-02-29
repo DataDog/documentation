@@ -328,7 +328,7 @@ curl -X POST "https://api.datadoghq.com/api/v2/series" \
       "points": [
         {
             # Add historical timestamp here
-          "timestamp": 1636629071,
+          "timestamp": $NOW,
             # ***********************
 
           "value": 0.7
