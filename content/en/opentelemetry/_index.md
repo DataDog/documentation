@@ -55,7 +55,7 @@ Datadog supports the [W3C Trace Context standard][6], ensuring complete traces a
 
 [1]: https://opentelemetry.io/
 [2]: https://www.cncf.io/
-[3]: /opentelemetry/otel_collector_datadog_exporter/
+[3]: /opentelemetry/collector_exporter/
 [4]: /opentelemetry/otlp_ingest_in_the_agent/
 [5]: /tracing/trace_collection/trace_context_propagation/
 [6]: https://www.w3.org/TR/trace-context/
