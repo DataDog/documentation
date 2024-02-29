@@ -16,11 +16,11 @@ further_reading:
 
 ## Overview
 
-Datadog Cloud Cost Management (CCM) automatically allocates AWS/GCP costs of Kubernetes and AWS ECS clusters to individual pods and tasks running in those clusters. Use cost metrics enriched with tags from pods, nodes, containers, and tasks to visualize container workload cost in the context of your entire cloud bill.
+Datadog Cloud Cost Management (CCM) automatically allocates AWS/Google costs of Kubernetes and AWS ECS clusters to individual pods and tasks running in those clusters. Use cost metrics enriched with tags from pods, nodes, containers, and tasks to visualize container workload cost in the context of your entire cloud bill.
 
 {{< img src="cloud_cost/container_cost_allocation/cost_allocation_table.png" alt="Cloud cost allocation table showing requests and idle costs over the past week" style="width:100%;" >}}
 
-For Kubernetes clusters, CCM allocates costs of AWS/GCP host instances and non-local AWS EBS volumes. For AWS ECS clusters, CCM allocates costs of AWS EC2 instances.
+For Kubernetes clusters, CCM allocates costs of AWS/Google host instances and non-local AWS EBS volumes. For AWS ECS clusters, CCM allocates costs of AWS EC2 instances.
 
 ## Prerequisites
 
@@ -29,22 +29,9 @@ For Kubernetes clusters, CCM allocates costs of AWS/GCP host instances and non-l
      - Ensure that you enable the [**Orchestrator Explorer**][6] in your Agent configuration.
      - Container cost allocation requires **Agent version >= 7.27.0** and **Cluster Agent version >= 1.11.0**.
      - AWS Persistent Volume allocation requires **Agent version >= 7.46.0**
-     - GCP supports agentless kubernetes cost tracking with some limitations, [see below for more details](#agentless-gcp-kubernetes-costs)
+     - Google supports agentless Kubernetes cost tracking with some limitations, [see below for more details](#agentless-google-kubernetes-costs)
 3. For AWS ECS support, set up [**Datadog Container Monitoring**][3] in ECS tasks.
      - Optionally, enable [AWS Split Cost Allocation][5] for usage-based ECS allocation.
-
-### Agentless GCP Kubernetes costs
-
-In some cases, you may wish to view the costs of GKE clusters without having Datadog infrastructure monitoring enabled. In these cases CCM supports viewing costs allocated using [GKE cost allocation](https://cloud.google.com/kubernetes-engine/docs/how-to/cost-allocations), with some limitations.
-
-#### Limitations and differences from the Datadog agent
-
-- There is no support for tracking workload idle costs
-- The cost of individual pods is not tracked, only the aggregated workloads inside a namespace. There will be no `pod_name` tag.
-- GKE enriches data using only pod labels and will ignore any Datadog tags you add
-- The full list of limitations can be found on the [GKE docs](https://cloud.google.com/kubernetes-engine/docs/how-to/cost-allocations#limitations)
-
-GKE cost allocation can be enabled by following the [instructions in the GKE docs](https://cloud.google.com/kubernetes-engine/docs/how-to/cost-allocations#enable_breakdown)
 
 ## Cost allocation
 
@@ -66,6 +53,19 @@ For Kubernetes Persistent Volume storage allocation, Persistent Volumes (PV), Pe
 
 Next, Datadog looks at all of the pods that claimed the volume on that day. The cost of the volume is allocated to a pod based on the resources it used and the length of time it ran. These resources
 include the provisioned capacity for storage, IOPS, and throughput. This allocated cost is enriched with all of the pod's tags.
+
+#### Agentless Google Kubernetes costs
+
+In some cases, you may wish to view the costs of GKE clusters without having Datadog infrastructure monitoring enabled. In these cases CCM supports viewing costs allocated using [GKE cost allocation](https://cloud.google.com/kubernetes-engine/docs/how-to/cost-allocations), with some limitations.
+
+##### Limitations and differences from the Datadog agent
+
+- There is no support for tracking workload idle costs
+- The cost of individual pods are not tracked, only the aggregated cost of a workload and the namespace. No `pod_name` tag.
+- GKE enriches data using only pod labels and ignores any Datadog tags you add
+- The full list of limitations can be found on the [GKE docs](https://cloud.google.com/kubernetes-engine/docs/how-to/cost-allocations#limitations)
+
+GKE cost allocation can be enabled by following the [instructions in the GKE docs](https://cloud.google.com/kubernetes-engine/docs/how-to/cost-allocations#enable_breakdown)
 
 
 ### AWS ECS on EC2
@@ -96,7 +96,7 @@ Using the `allocated_spend_type` tag, you can visualize the spend category assoc
 
 ### Compute
 
-When the info is not available on the bill directly, the cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
+ The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
 
 - Usage: Cost of memory and CPU used by workloads, based on the average usage on that day.
 - Workload idle: Cost of memory and CPU that is being reserved and allocated but not used. This is the difference between the total resources requested and the average usage.
@@ -122,7 +122,7 @@ When the prerequisites are met, new cost metrics automatically appear.
 | `aws.cost.net.amortized.shared.resources.allocated` | Net EC2 costs allocated by CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively. Also includes allocated EBS costs. <br> *Based on `aws.cost.net.amortized`, if available* |
 | `gcp.cost.amortized.shared.resources.allocated` | Compute Engine costs allocated by the CPU & memory used by a pod, using 60:40 split for CPU & memory respectively (when no split is already found in the bill). <br> *Based on `gcp.cost.amortized`* |
 
-These new cost metrics include all of your cloud costs. This allows you to continue visualizing all of your cloud costs at one time, with added visibility into the costs of k8s pods and AWS ECS tasks.
+These new cost metrics include all of your cloud costs. This allows you to continue visualizing all of your cloud costs at one time, with added visibility into the costs of Kubernetes pods and AWS ECS tasks.
 
 For example, say you have the tag `team` on a storage bucket, a cloud provider managed database, and Kubernetes pods. You can use these new metrics to group costs by `team`, which includes the costs for all 3.
 
@@ -147,11 +147,16 @@ Datadog consolidates and applies additional tags from various sources to cost me
 
 ### Kubernetes
 
-In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the-box tags are applied to cost metrics:
+In addition to Kubernetes pod and Kubernetes node tags, the following non exhaustive list of out-of-the-box tags are applied to cost metrics:
 
 | Out-of-the-box tag  |  Description |
 | ---                 | ------------ |
 | `kube_cluster_name` | The name of the Kubernetes cluster. |
+| `kube_namespace` | The namespace where workloads are running. |
+| `kube_deployment` | The name of the Kubernetes Deployment. |
+| `kube_stateful_set` | The name of the Kubernetes StatefulSet. |
+| `pod_name` | The name of any individual pod. |
+
 
 ### AWS ECS
 
