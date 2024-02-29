@@ -286,7 +286,7 @@ The metrics can also be queried with the API endpoints [Query timeseries points]
 The metrics provided by DORA Metrics are:
 - `dora.deployments.count` of type `count`. Used for Deployment Frequency.
 - `dora.change_lead_time` of type `distribution`. Contains the age in `seconds` of the git commits at the time of deployment.
-- `dora.incidents_impact` of type `count`. User for Change Failure Rate. It tracks the services or teams impacted by incidents. Used for Change Failure Rate with the formula `dora.incidents_impact / dora.deployments.count`. A big time rollup of at least 1 week is recommended to account for time difference between deployments and when the impact starts.
+- `dora.incidents_impact` of type `count`. Used for Change Failure Rate. It tracks the services or teams impacted by incidents. Used for Change Failure Rate with the formula `dora.incidents_impact / dora.deployments.count`. A big time rollup of at least 1 week is recommended to account for time difference between deployments and when the impact starts.
 - `dora.time_to_restore` of type `distribution`. Contains the time in `seconds` between the incident's `started_at` and `finished_at`.
 
 All the metrics contain the following tags when available:
