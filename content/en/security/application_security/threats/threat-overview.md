@@ -33,7 +33,7 @@ Each section of Threats Overview focuses on a different aspect of security with 
 
 ### Using the Powerpacks
 
-When adding a Widget to a [New Dashboard][1] in Datadog, choose the **Powerpacks** section in the right-hand drawer. Filter on `tag:threat_overview` or type *Threat Overview* in the search box.
+When adding a Widget to a [new dashboard][1] in Datadog, choose the **Powerpacks** section in the right-hand drawer. Filter on `tag:threat_overview` or type *Threat Overview* in the search box.
  
 Each section in the Threat Overview page corresponds to a dedicated Powerpack.
 
