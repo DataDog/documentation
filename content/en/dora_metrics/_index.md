@@ -281,12 +281,12 @@ You can access and visualize your DORA metrics and filter them by team, service,
 
 Use the information on this page to identify improvements or regressions for each metric, visualize changes, and compare trends over time. DORA metrics can be exported to dashboards or notebooks and be alerted on using [metric monitors][9].
 
-The metrics can also be queried with the API endpoints [Query timeseries points][10] and [Query timeseries data across multiple products][11].
+The metrics can also be queried with the [Query timeseries points][10] and [Query timeseries data across multiple products][11] API endpoints.
 
 The metrics provided by DORA Metrics are:
 - `dora.deployments.count` of type `count`. Used for Deployment Frequency.
 - `dora.change_lead_time` of type `distribution`. Contains the age in `seconds` of the git commits at the time of deployment.
-- `dora.incidents_impact` of type `count`. It tracks the services or teams impacted by incidents. Used for Change Failure Rate with the formula `dora.incidents_impact / dora.deployments.count`. A big time rollup of at least 1 week is recommended to account for time difference between deployments and when the impact starts.
+- `dora.incidents_impact` of type `count`. Tracks the services or teams impacted by incidents. Used for Change Failure Rate with the formula `dora.incidents_impact / dora.deployments.count`. A big time rollup of at least 1 week is recommended to account for time difference between deployments and when the impact starts.
 - `dora.time_to_restore` of type `distribution`. Contains the time in `seconds` between the incident's `started_at` and `finished_at`.
 
 All the metrics contain the following tags when available:
@@ -295,13 +295,13 @@ All the metrics contain the following tags when available:
 - `env`
 - `repository_id`
 
-Additionally `dora.incidents_impact` and `dora.time_to_restore` have the tag `severity`, if it was provided through the API.
+**Note**: The `severity` tag is available for the `dora.incidents_impact` and `dora.time_to_restore` metrics, if provided through the API.
 
 ### Deployment and Incident events
 
-DORA Metrics also provides individual `deployment`, `incident` and `incident_finished` events in [Event Management][12] with `source:software_delivery_insights`.
+DORA Metrics also provides individual `deployment`, `incident`, and `incident_finished` events in [Event Management][12] with `source:software_delivery_insights`.
 
-The events can be queried and visualized with all the capabilities of [Event Management][13].
+The events can be queried and visualized with [Event Management][13].
 
 ### Limitations
 
