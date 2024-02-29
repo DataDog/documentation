@@ -144,7 +144,7 @@ service:
     logs:
       exporters: [datadog]
 {{< /code-block >}}  
-4. Set `exporters.datadog.api.site` to your [Datadog site][16]. Otherwise, it defaults to US1.
+3. Set `exporters.datadog.api.site` to your [Datadog site][16]. Otherwise, it defaults to US1.
 
 This configuration allows the Datadog Exporter to send runtime metrics, traces, and logs to Datadog. However, sending infrastructure metrics requires additional configuration.
 
