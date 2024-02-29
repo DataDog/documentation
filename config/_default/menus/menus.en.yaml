@@ -4036,6 +4036,11 @@ main:
     parent: appsec_threats
     identifier: threats_threat_intelligence
     weight: 709
+  - name: Threat Overview
+    url: security/application_security/threats/threat-overview/
+    parent: appsec_threats
+    identifier: threats_threat_overview
+    weight: 710
   - name: API Security Inventory
     url: security/application_security/api-inventory/
     parent: application_security
