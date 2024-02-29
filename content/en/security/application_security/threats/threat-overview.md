@@ -16,7 +16,7 @@ Each section of Threats Overview focuses on a different aspect of security with 
 
 **Attack Surface Area**: This section provides insights into the exposed services, the tools attackers are using, and the commercial scanners that identify potential vulnerabilities.
 
-**Attack Traffic**: These graphs identify the classification of attacks, such as SSRF, LFI, SQL and command injection, allowing users to identify spikes in malicious traffic and patterns.
+**Attack Traffic**: These graphs identify the classification of attacks, such as SSRF, LFI, SQL and command injection. They allow users to identify spikes in malicious traffic and patterns.
 
 **Business Logic**: This section focuses on the application-specific operations, such as account takeover attempts and custom business logic metrics, to help you understand trending attacks related to user accounts or fraud.
 
