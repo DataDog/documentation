@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-OpenTelemetry uses of semantic conventions to specify names for different types of data. Semantic conventions define common names and values for telemetry data to promote consistency across systems.
+OpenTelemetry uses semantic conventions to specify names for different types of data. Semantic conventions define common names and values for telemetry data to promote consistency across systems.
 
 The following documentation describes how OpenTelemetry and Datadog conventions map to one another.
 

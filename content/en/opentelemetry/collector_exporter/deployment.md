@@ -101,7 +101,7 @@ Using a DaemonSet is the most common and recommended way to configure OpenTeleme
 
    If you do not need both the standard HTTP and gRPC ports for your application, you can remove the corresponding configuration options.
 
-2. Collect valuable Kubernetes attributes, which are used for Datadog container tagging, report the Pod IP as a resource attribute, [as shown in the example][3]:
+2. To collect valuable Kubernetes attributes, which are used for Datadog container tagging, report the Pod IP as a resource attribute, [as shown in the example][3]:
 
    ```yaml
    # ...
@@ -166,7 +166,7 @@ To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gatew
 
    If you do not need both the standard HTTP and gRPC ports for your application, you can remove the corresponding configuration options.
 
-2. Collect valuable Kubernetes attributes, which are used for Datadog container tagging, report the Pod IP as a resource attribute, [as shown in the example][3]:
+2. To collect valuable Kubernetes attributes, which are used for Datadog container tagging, report the Pod IP as a resource attribute, [as shown in the example][3]:
 
    ```yaml
    # ...
@@ -226,7 +226,7 @@ To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gatew
    # ...
    ```
 
-   This ensures that each agent forwards its data via the OTLP protocol to the Collector Gateway. 
+   This ensures that each Agent forwards its data through the OTLP protocol to the Collector Gateway. 
 
 6. Replace `GATEWAY_HOSTNAME` with the address of your OpenTelemetry Collector Gateway.
 
@@ -241,7 +241,7 @@ To deploy the OpenTelemetry Collector and Datadog Exporter in a Kubernetes Gatew
 
    For more information about the `passthrough` option, read [its documentation][13].
 
-8. Make sure that the Gateway Collector's configuration uses the same Datadog Exporter settings that have been replaced by the OTLP exporter in the agents. For example (where `<DD_SITE>` is your site, {{< region-param key="dd_site" code="true" >}}):
+8. Make sure that the Gateway Collector's configuration uses the same Datadog Exporter settings that have been replaced by the OTLP exporter in the Agents. For example (where `<DD_SITE>` is your site, {{< region-param key="dd_site" code="true" >}}):
 
    ```yaml
    # ...
