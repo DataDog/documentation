@@ -10,7 +10,9 @@ cascade:
   aliases:
     - /api/latest/downtimes/s
 - _target:
-    path: /api/latest/dashboards/_index.md
+    path: /api/latest/ci-visibility-pipelines/_index.md
+- _target:
+    path: /api/latest/ci-visibility/
   aliases:
     - /api/screenboards/
 ---
