@@ -1,14 +1,12 @@
 ---
 title: OTLP Receiver
-aliases:
-- /opentelemetry/collector_exporter/otlp_receiver/
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
   text: "Setting Up the OpenTelemetry Collector"
 - link: "/opentelemetry/otlp_ingest_in_the_agent/"
   tag: "Documentation"
-  text: "OTLP Ingestion by the Datadog Agent"  
+  text: "OTLP Ingestion by the Datadog Agent"
 ---
 
 ## Overview
