@@ -1,5 +1,5 @@
 ---
-title: Enabling CSM Enterprise on ECS EC2
+title: Enabling CSM Pro on ECS EC2
 kind: documentation
 code_lang: ecs_ec2
 type: multi-code-lang

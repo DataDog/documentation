@@ -130,12 +130,17 @@ exporters:
     api:
       key: ${DD_API_KEY}
       site: datadoghq.com
+   
+connectors:
+    datadog/connector:
+
 service:
   pipelines:
     metrics:
+      receivers: [otlp, datadog/connector] # <- update this line
       exporters: [datadog]
     traces:
-      exporters: [datadog]
+      exporters: [datadog, datadog/connector]
     logs:
       exporters: [datadog]
 {{< /code-block >}}  
@@ -187,7 +192,7 @@ receivers:
 service:
   pipelines:
     metrics:
-      receivers: [otlp, docker_stats] # <- update this line
+      receivers: [otlp, datadog/connector, docker_stats] # <- update this line
 {{< /code-block >}}
 
 This configuration allows the Calendar application to send container metrics to Datadog for you to explore in Datadog.
