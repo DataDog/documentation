@@ -87,7 +87,8 @@ module:
      disabled: false
      mounts:
      - source: content/en/integrations/ably.md
-       target: content/en/integrations/ably-apw.md
+       target: content/integrations/ably-apw.md
+       lang: en
 
   mounts:
     # default mounts
