@@ -1,15 +1,17 @@
 ---
+aliases:
+- /ja/opentelemetry/guide/ingestion_sampling_with_opentelemetry/
 further_reading:
 - link: /tracing/guide/trace_ingestion_volume_control
   tag: ガイド
   text: トレース取り込み量制御
 - link: /tracing/trace_pipeline/ingestion_controls
   tag: ドキュメント
-  text: Ingestion Controls
+  text: Expression Language
 - link: /opentelemetry/
   tag: ドキュメント
   text: Datadog の OpenTelemetry サポート
-kind: ガイド
+kind: ドキュメント
 title: OpenTelemetry による取り込みサンプリング
 ---
 
@@ -63,7 +65,9 @@ OpenTelemetry コレクターレベルでは、_追跡ベースサンプリン�
 
 **注**: 追跡サンプリングの主な制限は、効果的なサンプリング決定のために、与えられたトレースのすべてのスパンが同じコレクターインスタンスによって受信されなければならないということです。トレースが複数のコレクターインスタンスに分散している場合、トレースの一部がドロップされ、同じトレースの他の一部が Datadog に送信される危険性があります。
 
-コレクターレベルのテールベースサンプリングを使用しながら、APM メトリクスがアプリケーションのトラフィックの 100% に基づいて計算されるようにするには、コレクターのトレースパイプラインでサンプリングプロセッサの前に [Datadog Processor][11] を事前定義してください。このプロセッサは、OpenTelemetry Collector Contribor v0.69.0+ で利用可能です。
+コレクターレベルのテールベースサンプリングを使用しながら、APM メトリクスがアプリケーションのトラフィックの 100% に基づいて計算されるようにするには、[Datadog Connector][11] を使用します。
+
+<div class="alert alert-info">Datadog Connector は v0.83.0 から利用可能です。古いバージョンから移行する場合は、<a href="/opentelemetry/guide/switch_from_processor_to_connector">OpenTelemetry APM メトリクスのために Datadog Processor から Datadog Connector に切り替える</a>をお読みください。</div>
 
 スパンからのトレース分析モニターとメトリクスにトレースサンプリングを設定することの意味については、[取り込み量制御ガイド][8]を参照してください。
 
@@ -83,11 +87,11 @@ otlp_config:
 
 **注**: 確率的サンプラーのプロパティは、すべての Agent で同じサンプリング率を使用すると仮定した場合、完全なトレースのみが取り込まれることを保証します。
 
-確率的サンプラーは、SDK レベルでサンプリング優先度がすでに設定されているスパンを無視します。さらに、確率的サンプラーでキャプチャされなかったスパンは、Datadog Agent の[エラーサンプラーとレアサンプラー][13]でキャプチャされる可能性があり、取り込みデータセットにエラーとレアエンドポイントトレースの高い表現力を確保することができます。
+確率的サンプラーは、SDK レベルでサンプリング優先度がすでに設定されているスパンを無視します。さらに、確率的サンプラーでキャプチャされなかったスパンは、Datadog Agent の[エラーサンプラーと希少サンプラー][12]でキャプチャされる可能性があり、取り込みデータセットにおいてエラーと稀少エンドポイントトレースの高い反映を確保することができます。
 
 ## Datadog UI から取り込み量を監視する
 
-[APM 推定使用量ダッシュボード][14]と推定使用量メトリクス `datadog.estimated_usage.apm.ingested_bytes` を活用すると、特定の期間の取り込み量を可視化することができます。ダッシュボードを特定の環境とサービスにフィルターして、取り込み量の最大のシェアを占めるサービスを確認できます。
+[APM 推定使用量ダッシュボード][13]と推定使用量メトリクス `datadog.estimated_usage.apm.ingested_bytes` を活用すると、特定の期間の取り込み量を視覚化することができます。ダッシュボードで特定の環境とサービスをフィルターして、取り込み量の最大のシェアを占めるサービスを確認できます。
 
 
 ## その他の参考資料
@@ -95,7 +99,7 @@ otlp_config:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/opentelemetry/otel_collector_datadog_exporter
-[2]: /ja/opentelemetry/otel_collector_datadog_exporter/?tab=alongsidetheagent#5-run-the-collector
+[2]: /ja/opentelemetry/otel_collector_datadog_exporter/?tab=alongsidetheagent#step-5---run-the-collector
 [3]: /ja/opentelemetry/otlp_ingest_in_the_agent
 [4]: /ja/tracing/metrics/metrics_namespace/
 [5]: https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/sdk.md#traceidratiobased
@@ -104,6 +108,6 @@ otlp_config:
 [8]: /ja/tracing/guide/trace_ingestion_volume_control/#effects-of-reducing-trace-ingestion-volume
 [9]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md
 [10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/probabilisticsamplerprocessor/README.md
-[11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/datadogprocessor
-[13]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#error-and-rare-traces
-[14]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
+[11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector#datadog-connector
+[12]: /ja/tracing/trace_pipeline/ingestion_mechanisms/#error-and-rare-traces
+[13]: https://app.datadoghq.com/dash/integration/apm_estimated_usage
