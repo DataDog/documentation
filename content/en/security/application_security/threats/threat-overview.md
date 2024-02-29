@@ -8,9 +8,9 @@ aliases:
 
 ## Introduction
 
-The ASM Threats Overview provides an at a glance view of your application and API posture, highlighting trends, service exposure, attack traffic, and the impact on business logic. Users can quickly pivot from widgets to related traces.
+The ASM Threat Overview provides an at a glance view of your application and API posture. It highlights trends, service exposure, attack traffic, and the impact on business logic. You can pivot from widgets to their related traces.
 
-The Threats Overview is divided into several sections, each focusing on a different aspect of security with supporting information.
+The Threat Overview is divided into several sections, each focusing on a different aspect of security with supporting information.
 
 ## Sections
 
