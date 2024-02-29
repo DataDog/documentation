@@ -18,7 +18,7 @@ The Threats Overview is divided into several sections, each focusing on a differ
 
 **Attack Traffic**: These graphs identify the classification of attacks, such as SSRF, LFI, SQL and command injection, allowing users to identify spikes in malicious traffic and patterns.
 
-**Business Logic**: This section focuses on the application-specific operations, such as account takeover attempts and custom business logic metrics, to help you understand trending attacks related to user accounts or fraud.
+**Business Logic**: This section focuses on fraud and business logic abuse such as account takeover attempts or any custom business logic events tracked by your application.
 
 **Geographic Overview**: A global heatmap indicating the sources of attack traffic, providing a visual representation of threats by region.
 
