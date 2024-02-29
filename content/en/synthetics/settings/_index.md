@@ -35,76 +35,12 @@ further_reading:
 
 On the [Synthetic Monitoring & Continuous Testing Settings page][1], you can access and control the following topics:
 
-* [Default Settings](#default-settings)
 * [Private Locations](#private-locations)
 * [Global Variables](#global-variables)
+* [Default Settings](#default-settings)
 * [Integration Settings](#integration-settings)
 * [Continuous Testing Settings][2]
 * [Mobile Applications Settings][18]
-
-## Default settings
-
-### Enforced tags settings
-
-Selecting this option ensures that configured tags from the Usage Attribution tab are required by users creating and editing Synthetic tests. They won't be able to save tests without entering all required tags.
-
-Usage Attribution tags allow you to break down cost and usage attributes of this feature by services, applications, or teams. 
-
-### Default locations
-
-Choose the default locations for your [API test][4], [multistep API test][5], or [browser test][6] details. 
-
-Your options include all of the available managed locations Datadog offers and the private locations you set up for your account.
-
-When you are done selecting locations, click **Save Default Locations**.
-
-### Default browsers and devices
-
-Choose the default browser and device types for your [browser test][6] details.
-
-Your options for browsers include Google Chrome, Firefox, and Microsoft Edge. Your options for devices include a large laptop, a tablet, and a small mobile device.
-
-When you are done selecting browsers and devices, click **Save Default Browsers & Devices**.
-
-### Default tags
-
-Choose or add the default tags for your [API test][4], [multistep API test][5], or [browser test][6] details.
-
-When you are done selecting related tags, click **Save Default Tags**.
-
-### Permissions
-
-By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of those two [default roles][11]. 
-
-If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
-
-## Integration settings
-
-{{< img src="synthetics/settings/integration_settings.png" alt="Integration Settings page" style="width:100%;">}}
-
-### APM integration for browser tests
-
-Allow URLs to add APM integration headers to those URLs. Datadog's APM integration headers allow Datadog to link browser tests with APM. 
-
-Define which endpoints you want to send the APM headers to by entering a URL in the **Value** field. If the endpoint is being traced and is allowed, your browser test results are automatically tied to its corresponding trace.
-
-Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`. When you are done adding URLs, click **Save APM Integration Settings**. 
-
-For more information, see [Connect Synthetics and APM Traces][15].
-
-### Synthetic data collection and RUM applications
-
-To allow Datadog to collect RUM data from your test runs, click **Enable Synthetic RUM data collection**. If disabled, you cannot edit the RUM setting in the browser test recorder. When you are done enabling data collection, click **Save RUM Data Collection**.
-
-Select a RUM application from the **Default Application** dropdown menu that collects browser test data. When you are done specifying a default application, click **Save RUM Data Applications**.
-
-For more information, see [Explore RUM & Session Replay][14].
-
-### Permissions
-
-By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Integration Settings** page. To get access to the **Integration Settings** page, upgrade your user to one of those two [default roles][11]. 
-
-If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
 
 ## Private locations
 
@@ -217,6 +153,64 @@ Access restriction is available for customers using [custom roles][11] on their 
 You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
 
 {{< img src="synthetics/settings/restrict_access_1.png" alt="Restrict access to a global variable" style="width:100%;" >}}
+
+## Default settings
+
+### Default locations
+
+Choose the default locations for your [API test][4], [multistep API test][5], or [browser test][6] details. 
+
+Your options include all of the available managed locations Datadog offers and the private locations you set up for your account.
+
+When you are done selecting locations, click **Save Default Locations**.
+
+### Default browsers and devices
+
+Choose the default browser and device types for your [browser test][6] details.
+
+Your options for browsers include Google Chrome, Firefox, and Microsoft Edge. Your options for devices include a large laptop, a tablet, and a small mobile device.
+
+When you are done selecting browsers and devices, click **Save Default Browsers & Devices**.
+
+### Default tags
+
+Choose or add the default tags for your [API test][4], [multistep API test][5], or [browser test][6] details.
+
+When you are done selecting related tags, click **Save Default Tags**.
+
+### Permissions
+
+By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Default Settings** page. To get access to the **Default Settings** page, upgrade your user to one of those two [default roles][11]. 
+
+If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
+
+## Integration settings
+
+{{< img src="synthetics/settings/integration_settings.png" alt="Integration Settings page" style="width:100%;">}}
+
+### APM integration for browser tests
+
+Allow URLs to add APM integration headers to those URLs. Datadog's APM integration headers allow Datadog to link browser tests with APM. 
+
+Define which endpoints you want to send the APM headers to by entering a URL in the **Value** field. If the endpoint is being traced and is allowed, your browser test results are automatically tied to its corresponding trace.
+
+Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`. When you are done adding URLs, click **Save APM Integration Settings**. 
+
+For more information, see [Connect Synthetics and APM Traces][15].
+
+### Synthetic data collection and RUM applications
+
+To allow Datadog to collect RUM data from your test runs, click **Enable Synthetic RUM data collection**. If disabled, you cannot edit the RUM setting in the browser test recorder. When you are done enabling data collection, click **Save RUM Data Collection**.
+
+Select a RUM application from the **Default Application** dropdown menu that collects browser test data. When you are done specifying a default application, click **Save RUM Data Applications**.
+
+For more information, see [Explore RUM & Session Replay][14].
+
+### Permissions
+
+By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Integration Settings** page. To get access to the **Integration Settings** page, upgrade your user to one of those two [default roles][11]. 
+
+If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
 
 ## Further Reading
 
