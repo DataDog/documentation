@@ -27,7 +27,7 @@ The Threats Overview is divided into several sections, each focusing on a differ
 1. Users should review trends and adopt a corresponding protection policy to meet their posture needs.
 2. Regularly review the Exposed Services widget to ensure only intended services are accessible and that they have a protection policy that meets your risk profile.
 3. Block attack tools and ensure that customer scanners are part of an authorized vulnerability management program.
-4. Monitor business logic for changes in detection profiles related to distributed credential stuffing campaigns or risky payment activity.
+4. Monitor business logic for spikes in credential stuffing attacks or risky payment activity.
 5. Use the geographic overview to compare the attack traffic sources with your expected customer sources.
 6. Use the [linked Powerpacks](#using-the-powerpacks) to enhance your own Dashboards with the most relevant information.
 
