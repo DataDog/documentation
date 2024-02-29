@@ -544,7 +544,6 @@ set_redirect_metadata_preview:
   dependencies:
     - build_preview
   script:
-    - export EXTENDED_ROLE_DURATION="1800"
     - in-isolation run_update_redirect_metadata
   interruptible: true
   allow_failure: true
