@@ -37,6 +37,6 @@ When adding a Widget to a [New Dashboard][1] in Datadog, choose the **Powerpacks
  
 Each section in the Threat Overview page corresponds to a dedicated Powerpack.
 
-{{< img src="security/application_security/threats/appsec-threat-overview-powerpacks.png" alt="Screenshot of the New dashboard page with the Powerpacks drawer open, filtering on tag:threat_overview"  >}}
+{{< img src="security/application_security/threats/appsec-threat-overview-powerpacks.png" alt="Screenshot of the new dashboard page with the Powerpacks drawer open, filtering on tag:threat_overview"  >}}
 
 [1]: /dashboards/
