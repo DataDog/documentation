@@ -1,8 +1,6 @@
 ---
 title: Google Cloud
 kind: documentation
-is_beta: true
-private: true
 disable_toc: false
 further_reading:
 - link: "/cloud_cost_management/"
@@ -19,10 +17,6 @@ further_reading:
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">Cloud Cost Management is not supported for this site.</div>
 {{< /site-region >}}
-
-{{< beta-callout url="#" btn_hidden="true" >}}
-Cloud Cost for Google Cloud is in public beta
-{{< /beta-callout >}}
 
 ## Overview
 

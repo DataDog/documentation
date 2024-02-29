@@ -2,7 +2,7 @@
 title: Export Test Runs or Pipeline Executions 
 kind: documentation
 further_reading:
-- link: "/continuous_integration/explorer/search/"
+- link: "/continuous_integration/search/"
   tag: "Documentation"
   text: "Search for your pipelines"
 - link: "/dashboards"
@@ -56,8 +56,8 @@ Options available for some visualization types are not supported in others. For 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/ci-visibility/#search-tests-events
-[2]: /api/latest/ci-visibility/#search-pipelines-events
+[1]: /api/latest/ci-visibility-pipelines/#search-tests-events
+[2]: /api/latest/ci-visibility-pipelines/#search-pipelines-events
 [3]: /continuous_integration/explorer/
 [4]: /api/latest/
 [5]: /monitors/types/ci/
