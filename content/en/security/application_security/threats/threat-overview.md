@@ -24,7 +24,7 @@ Each section of Threats Overview focuses on a different aspect of security with 
 
 ## Best Practices
 
-1. Users should review trends and adopt a corresponding protection policy to meet their posture needs.
+1. Review trends and adopt a corresponding protection policy to meet your posture needs.
 2. Regularly review the Exposed Services widget to ensure only intended services are accessible and that they have a protection policy that meets your risk profile.
 3. Block attack tools and ensure that customer scanners are part of an authorized vulnerability management program.
 4. Monitor business logic for changes in detection profiles related to distributed credential stuffing campaigns or risky payment activity.
