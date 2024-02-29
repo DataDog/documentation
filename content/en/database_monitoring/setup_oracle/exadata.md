@@ -13,7 +13,7 @@ further_reading:
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-{% dbm-oracle-definition %}
+{{% dbm-oracle-definition %}}
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Complete the following setup steps to enable Database Monitoring with your Oracle database:
 
