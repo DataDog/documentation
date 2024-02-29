@@ -14,7 +14,7 @@ Each section of Threats Overview focuses on a different aspect of security with 
 
 ## Sections
 
-**Attack Surface Area**: This section provides insights into the exposed services, the tools attackers are using, and the commercial scanners that are identifying potential vulnerabilities.
+**Attack Surface Area**: This section provides insights into the exposed services, the tools attackers are using, and the commercial scanners that identify potential vulnerabilities.
 
 **Attack Traffic**: These graphs identify the classification of attacks, such as SSRF, LFI, SQL and command injection, allowing users to identify spikes in malicious traffic and patterns.
 
