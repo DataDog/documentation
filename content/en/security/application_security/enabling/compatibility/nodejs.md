@@ -85,6 +85,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 | Framework                  | Versions   | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
 | ----------------------- | ---------- | --------------- | ---------------------------------------------- | ---------------------------------------------- |
 | express | >=4| {{< X >}}  |{{< X >}}  | {{< X >}} |
+| nextjs | >=11.1| {{< X >}}  |  |  |
 
 
 
@@ -109,7 +110,7 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 | Framework                | Threat Detection supported? | Threat Protection supported? | Vulnerability Management for Code-level supported? |
 | ------------------------ | ----------- | --------------- | ---------------------------------------------- |
 | http    |  {{< X >}} |  {{< X >}}  |  {{< X >}}  |
-| https   |  {{< X >}} |  {{< X >}} |  |
+| https   |  {{< X >}} |  {{< X >}} |  {{< X >}}  |
 
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
