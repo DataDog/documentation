@@ -12,10 +12,6 @@ To configure CSM Enterprise on your agentless scanning instances for your hosts 
 {{% csm-agentless-setup %}}
 
 
-- Resource Exclusion
-- How to stop certain resources from being scanned
-- How to disable
-
 
 [1]: /security/vulnerabilities
 [2]: https://www.cisa.gov/sbom

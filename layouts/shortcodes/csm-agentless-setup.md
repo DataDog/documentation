@@ -12,11 +12,14 @@ For larger regions with 250 or more hosts, it is recommended and more cost effic
 
 The following diagram illustrates how Agentless scanning works when deployed in a central cloud account:
 
-<img src="security/agentless_scanning/agentless_vulnerability_advanced.png" alt="Diagram of Agentless Vulnerability Scanning showing the Agentless scanner is deployed in a central Cloud account" width="90%">
-
-![Diagram of Agentless Vulnerability Scanning showing the Agentless scanner is deployed in a central Cloud account](security/agentless_scanning/agentless_vulnerability_advanced.png)
+<img src="/images/security/agentless_scanning/agentless_vulnerability_advanced.png" alt="Diagram of Agentless Scanning showing the Agentless scanner is deployed in a central Cloud account" width="90%">
 
 **Option 2**: Deploy a scanner for every region where there are scannable cloud resources without creating an account dedicated to Agentless scanners.
+
+Option 1 and 2 are actually almost identical BUT there is a subtle difference
+
+Option 1 is saying: we create Cloud Account 4 for you AND add the scanning instances in Cloud Account 4
+Option 2 is saying: Cloud Account 4 already exists. the customer chose to add scanning instances exclusively to Cloud Account 4
 
 **Are we missing a diagram for this ?**
 
@@ -32,7 +35,7 @@ We will inform customers that if they have more than 250 hosts in an account, th
 
 The following diagram illustrates how Agentless scanning works when deployed within each Cloud account:
 
-<img src="security/agentless_scanning/agentless_vulnerability_quickstart.png" alt="Diagram of Agentless Vulnerability Scanning showing the Agentless scanner is deployed in each Cloud account" width="90%">
+<img src="/images/security/agentless_scanning/agentless_vulnerability_quickstart.png" alt="Diagram of Agentless Scanning showing the Agentless scanner is deployed in each Cloud account" width="90%">
 
 Within the AWS integration in Datadog, after selecting the Cloud Formation template, and enabling [Remote Configuration][4] for your organization, Datadog updates the template with the necessary IAM permissions, and deploys a modified, standalone version of the Datadog Agent on an EC2 instance in your AWS Cloud account. Datadog scans the EBS volume to generate a [Software Bill of Materials (SBOM)][2], and sends the SBOM back to Datadog [Vulnerability Management][3], where you can investigate and remediate vulnerabilities. 
 
