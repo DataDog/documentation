@@ -1,6 +1,8 @@
 ---
 title: Mapping OpenTelemetry Semantic Conventions to Infrastructure List Host Information
-kind: guide
+kind: documentation
+aliases:
+- /opentelemetry/guide/host_metadata/
 further_reading:
 - link: "/opentelemetry/"
   tag: "Documentation"

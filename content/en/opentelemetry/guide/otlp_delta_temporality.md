@@ -1,6 +1,8 @@
 ---
 title: Producing Delta Temporality Metrics with OpenTelemetry
 kind: guide
+aliases:
+  - /opentelemetry/guide/otlp_delta_temporality/
 further_reading:
 - link: "/metrics/open_telemetry/otlp_metric_types"
   tag: "Documentation"
@@ -30,7 +32,7 @@ If you produce OTLP metrics from an OpenTelemetry SDK, you can configure your OT
 
 If your SDK does not support this environment variable you can configure delta temporality in code. The following example configures an OTLP HTTP exporter and adds `1` to a counter every two seconds for a total of five minutes.
 
-**Note**: These examples are to get you started. You shouldn't apply patterns like using console or stdout exporters in production scenarios.
+**Note**: These examples are intended to help you get started. You shouldn't apply patterns like using console or stdout exporters in production scenarios.
 
 {{< programming-lang-wrapper langs="python,go,java,.net" >}}
 
@@ -39,8 +41,7 @@ If your SDK does not support this environment variable you can configure delta t
 import time
 
 from opentelemetry.exporter.otlp.proto.http.metric_exporter import (
-    OTLPMetricExporter,
-)
+    OTLPMetricExporter, )
 from opentelemetry.sdk.metrics import (
     Counter,
     Histogram,

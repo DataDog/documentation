@@ -1,5 +1,7 @@
 ---
 title: OpenTelemetry Runtime Metrics
+aliases:
+- /opentelemetry/runtime_metrics/
 kind: documentation
 type: multi-code-lang
 ---

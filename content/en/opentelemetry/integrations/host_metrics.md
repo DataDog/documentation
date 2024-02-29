@@ -1,5 +1,7 @@
 ---
 title: Host Metrics
+aliases:
+- /opentelemetry/collector_exporter/host_metrics/
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"

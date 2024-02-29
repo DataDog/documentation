@@ -1,6 +1,8 @@
 ---
 title: Ingestion Sampling with OpenTelemetry
-kind: guide
+kind: documentation
+aliases:
+  - /opentelemetry/guide/ingestion_sampling_with_opentelemetry/
 further_reading:
 - link: "/tracing/guide/trace_ingestion_volume_control"
   tag: "Guide"
@@ -92,7 +94,7 @@ The probabilistic sampler ignores spans for which the sampling priority is alrea
 You can leverage the [APM Estimated Usage dashboard][13] and the estimated usage metric `datadog.estimated_usage.apm.ingested_bytes` to get visibility into your ingested volumes for a specific time period. Filter the dashboard to specific environments and services to see which services are responsible for the largest shares of the ingested volume.
 
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

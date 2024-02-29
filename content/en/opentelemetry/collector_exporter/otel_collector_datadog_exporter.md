@@ -717,7 +717,7 @@ Use the following configuration to enable additional attributes on the Docker St
 
 The minimum required OpenTelemetry Collector version that supports this feature is v0.78.0. 
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

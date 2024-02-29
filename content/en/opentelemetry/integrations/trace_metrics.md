@@ -1,5 +1,7 @@
 ---
 title: Trace Metrics
+aliases:
+- /opentelemetry/collector_exporter/trace_metrics/
 further_reading:
 - link: "/opentelemetry/collector_exporter/"
   tag: "Documentation"
