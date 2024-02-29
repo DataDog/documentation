@@ -14,13 +14,17 @@ The Threat Overview is divided into several sections, each focusing on a differe
 
 ## Sections
 
-**Attack Surface Area**: This section provides insights into the exposed services, the tools attackers are using, and the commercial scanners that are identifying potential vulnerabilities.
+Attack Surface Area
+: This section provides insights into the exposed services, the tools attackers are using, and the commercial scanners that are identifying potential vulnerabilities.
 
-**Attack Traffic**: These graphs identify the classification of attacks, such as SSRF, LFI, SQL and command injection, allowing users to identify spikes in malicious traffic and patterns.
+Attack Traffic
+: These graphs identify the classification of attacks, such as SSRF, LFI, SQL and command injection, allowing users to identify spikes in malicious traffic and patterns.
 
-**Business Logic**: This section focuses on fraud and business logic abuse such as account takeover attempts or any custom business logic events tracked by your application.
+Business Logic
+: This section focuses on fraud and business logic abuse such as account takeover attempts or any custom business logic events tracked by your application.
 
-**Geographic Overview**: A global heatmap indicating the sources of attack traffic, providing a visual representation of threats by region.
+Geographic Overview
+: A global heatmap indicating the sources of attack traffic, providing a visual representation of threats by region.
 
 ## Best Practices
 
