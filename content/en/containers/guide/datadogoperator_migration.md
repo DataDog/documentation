@@ -1,5 +1,12 @@
 ## Migrating to version 1.0 of the Datadog Operator
 
+<div class="alert alert-warning">
+The <code>v1alpha1</code> DatadogAgent reconciliation in the Operator is deprecated since v1.2.0+ and will be removed in v1.7.0. Once removed, the Datadog Operator cannot be configured to reconcile the <code>v1alpha1</code> DatadogAgent CRD. However, you will still be able to apply a <code>v1alpha1</code> manifest with the conversion webhook enabled (using <code>datadogCRDs.migration.datadogAgents.conversionWebhook.enabled</code>).
+
+DatadogAgent <code>v1alpha1</code> and the conversion webhook will be removed in v1.8.0. You will not be able to migrate thereafter unless you use earlier version of the Operator.
+</div>
+
+
 Datadog Operator v0.X uses `v1alpha1` of the DatadogAgent custom resource. Datadog Operator v1.X reconciles `v2alpha1`.
 
 This guide describes how to migrate to the `v2alpha1/DatadogAgent` custom resource from `v1alpha1/DatadogAgent`.
