@@ -115,6 +115,7 @@ extensions:
 {{< /code-block >}}
 
 #### Example Entity Definition (`kind:service`)
+The same schema applies to `kind:datastores` and `kind:queue`. 
 
 {{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
 apiVersion: v3

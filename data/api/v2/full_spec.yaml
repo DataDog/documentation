@@ -11116,6 +11116,136 @@ components:
           $ref: '#/components/schemas/MetricAllTags'
       readOnly: true
       type: object
+    MetricAssetAttributes:
+      description: Assets where only included attribute is its title
+      properties:
+        title:
+          description: Title of the asset.
+          type: string
+      type: object
+    MetricAssetDashboardRelationship:
+      description: An object of type `dashboard` that can be referenced in the `included`
+        data.
+      properties:
+        id:
+          $ref: '#/components/schemas/MetricDashboardID'
+        type:
+          $ref: '#/components/schemas/MetricDashboardType'
+      type: object
+    MetricAssetDashboardRelationships:
+      description: An object containing the list of dashboards that can be referenced
+        in the `included` data.
+      properties:
+        data:
+          description: A list of dashboards that can be referenced in the `included`
+            data.
+          items:
+            $ref: '#/components/schemas/MetricAssetDashboardRelationship'
+          type: array
+      type: object
+    MetricAssetMonitorRelationship:
+      description: An object of type `monitor` that can be referenced in the `included`
+        data.
+      properties:
+        id:
+          $ref: '#/components/schemas/MetricMonitorID'
+        type:
+          $ref: '#/components/schemas/MetricMonitorType'
+      type: object
+    MetricAssetMonitorRelationships:
+      description: A object containing the list of monitors that can be referenced
+        in the `included` data.
+      properties:
+        data:
+          description: A list of monitors that can be referenced in the `included`
+            data.
+          items:
+            $ref: '#/components/schemas/MetricAssetMonitorRelationship'
+          type: array
+      type: object
+    MetricAssetNotebookRelationship:
+      description: An object of type `notebook` that can be referenced in the `included`
+        data.
+      properties:
+        id:
+          $ref: '#/components/schemas/MetricNotebookID'
+        type:
+          $ref: '#/components/schemas/MetricNotebookType'
+      type: object
+    MetricAssetNotebookRelationships:
+      description: An object containing the list of notebooks that can be referenced
+        in the `included` data.
+      properties:
+        data:
+          description: A list of notebooks that can be referenced in the `included`
+            data.
+          items:
+            $ref: '#/components/schemas/MetricAssetNotebookRelationship'
+          type: array
+      type: object
+    MetricAssetResponseData:
+      description: Metric assets response data.
+      properties:
+        id:
+          $ref: '#/components/schemas/MetricName'
+        relationships:
+          $ref: '#/components/schemas/MetricAssetResponseRelationships'
+        type:
+          $ref: '#/components/schemas/MetricType'
+      required:
+      - id
+      - type
+      type: object
+    MetricAssetResponseIncluded:
+      description: List of included assets with full set of attributes.
+      oneOf:
+      - $ref: '#/components/schemas/MetricDashboardAsset'
+      - $ref: '#/components/schemas/MetricMonitorAsset'
+      - $ref: '#/components/schemas/MetricNotebookAsset'
+      - $ref: '#/components/schemas/MetricSLOAsset'
+    MetricAssetResponseRelationships:
+      description: Relationships to assets related to the metric.
+      properties:
+        dashboards:
+          $ref: '#/components/schemas/MetricAssetDashboardRelationships'
+        monitors:
+          $ref: '#/components/schemas/MetricAssetMonitorRelationships'
+        notebooks:
+          $ref: '#/components/schemas/MetricAssetNotebookRelationships'
+        slos:
+          $ref: '#/components/schemas/MetricAssetSLORelationships'
+      type: object
+    MetricAssetSLORelationship:
+      description: An object of type `slos` that can be referenced in the `included`
+        data.
+      properties:
+        id:
+          $ref: '#/components/schemas/MetricSLOID'
+        type:
+          $ref: '#/components/schemas/MetricSLOType'
+      type: object
+    MetricAssetSLORelationships:
+      description: An object containing a list of SLOs that can be referenced in the
+        `included` data.
+      properties:
+        data:
+          description: A list of SLOs that can be referenced in the `included` data.
+          items:
+            $ref: '#/components/schemas/MetricAssetSLORelationship'
+          type: array
+      type: object
+    MetricAssetsResponse:
+      description: Response object that includes related dashboards, monitors, notebooks,
+        and SLOs.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricAssetResponseData'
+        included:
+          description: Array of objects related to the metric assets.
+          items:
+            $ref: '#/components/schemas/MetricAssetResponseIncluded'
+          type: array
+      type: object
     MetricBulkConfigureTagsType:
       default: metric_bulk_configure_tags
       description: The metric bulk configure tags resource.
@@ -11357,6 +11487,44 @@ components:
       - MAX
       - MIN
       - SUM
+    MetricDashboardAsset:
+      description: A dashboard object with title and popularity.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricDashboardAttributes'
+        id:
+          $ref: '#/components/schemas/MetricDashboardID'
+        type:
+          $ref: '#/components/schemas/MetricDashboardType'
+      required:
+      - id
+      - type
+      type: object
+    MetricDashboardAttributes:
+      description: Attributes related to the dashboard, including title and popularity.
+      properties:
+        popularity:
+          description: Value from 0 to 5 that ranks popularity of the dashboard.
+          format: double
+          maximum: 5
+          minimum: 0
+          type: number
+        title:
+          description: Title of the asset.
+          type: string
+      type: object
+    MetricDashboardID:
+      description: The related dashboard's ID.
+      example: xxx-yyy-zzz
+      type: string
+    MetricDashboardType:
+      description: Dashboard resource type.
+      enum:
+      - dashboards
+      example: dashboards
+      type: string
+      x-enum-varnames:
+      - DASHBOARDS
     MetricDistinctVolume:
       description: Object for a single metric's distinct volume.
       properties:
@@ -11497,10 +11665,60 @@ components:
         origin:
           $ref: '#/components/schemas/MetricOrigin'
       type: object
+    MetricMonitorAsset:
+      description: A monitor object with title.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricAssetAttributes'
+        id:
+          $ref: '#/components/schemas/MetricMonitorID'
+        type:
+          $ref: '#/components/schemas/MetricMonitorType'
+      required:
+      - id
+      - type
+      type: object
+    MetricMonitorID:
+      description: The related monitor's ID.
+      example: '1775073'
+      type: string
+    MetricMonitorType:
+      description: Monitor resource type.
+      enum:
+      - monitors
+      example: monitors
+      type: string
+      x-enum-varnames:
+      - MONITORS
     MetricName:
       description: The metric name for this resource.
       example: test.metric.latency
       type: string
+    MetricNotebookAsset:
+      description: A notebook object with title.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricAssetAttributes'
+        id:
+          $ref: '#/components/schemas/MetricNotebookID'
+        type:
+          $ref: '#/components/schemas/MetricNotebookType'
+      required:
+      - id
+      - type
+      type: object
+    MetricNotebookID:
+      description: The related notebook's ID.
+      example: '12345'
+      type: string
+    MetricNotebookType:
+      description: Notebook resource type.
+      enum:
+      - notebooks
+      example: notebooks
+      type: string
+      x-enum-varnames:
+      - NOTEBOOKS
     MetricOrigin:
       description: Metric origin information.
       properties:
@@ -11574,6 +11792,31 @@ components:
           description: The type of the resource.
           type: string
       type: object
+    MetricSLOAsset:
+      description: A SLO object with title.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricAssetAttributes'
+        id:
+          $ref: '#/components/schemas/MetricSLOID'
+        type:
+          $ref: '#/components/schemas/MetricSLOType'
+      required:
+      - id
+      - type
+      type: object
+    MetricSLOID:
+      description: The SLO ID.
+      example: 9ffef113b389520db54391d67d652dfb
+      type: string
+    MetricSLOType:
+      description: SLO resource type.
+      enum:
+      - slos
+      example: slos
+      type: string
+      x-enum-varnames:
+      - SLOS
     MetricSeries:
       description: 'A metric to submit to Datadog.
 
@@ -29577,6 +29820,54 @@ paths:
       x-menu-order: 6
       x-undo:
         type: safe
+  /api/v2/metrics/{metric_name}/assets:
+    get:
+      description: Returns dashboards, monitors, notebooks, and SLOs that a metric
+        is stored in, if any.  Updated every 24 hours.
+      operationId: ListMetricAssets
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricAssetsResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Related Assets to a Metric
+      tags:
+      - Metrics
+      x-menu-order: 12
+      x-undo:
+        type: safe
   /api/v2/metrics/{metric_name}/estimate:
     get:
       description: Returns the estimated cardinality for a metric with a given tag,
@@ -29670,20 +29961,7 @@ paths:
       summary: Tag Configuration Cardinality Estimator
       tags:
       - Metrics
-      x-dd-ownership:
-        notification_configuration:
-          manual_escalation_policy: '[Points Aggregation] Primary'
-          prod_high_urgency: '@pagerduty-Points-Aggregation @slack-points-aggr-ops'
-          prod_low_urgency: '@slack-points-aggr-ops'
-          slack_support_channel: '#points-aggregation'
-          staging_high_urgency: '@slack-points-aggr-stg-ops'
-          staging_low_urgency: '@slack-points-aggr-stg-ops'
-        team: points-aggregation
-        team_escalation: '[Points Aggregation] Primary'
       x-menu-order: 11
-      x-permission:
-        operator: OPEN
-        permissions: []
       x-undo:
         type: safe
   /api/v2/metrics/{metric_name}/tags:

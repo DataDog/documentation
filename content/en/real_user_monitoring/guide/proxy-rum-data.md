@@ -34,7 +34,7 @@ To successfully forward a request to Datadog, your proxy must
 A Datadog intake URL (example: `https://browser-intake-datadoghq.eu/api/v2/rum?ddsource=browser&...`) has three parts:
 
 - the Datadog intake origin corresponding to your `site` [initialization parameter][1] (example: `https://browser-intake-datadoghq.eu`)
-- the path containing the API version and the product (example: `/api/v2/rum`)
+- the path containing the API version and the product (example: `/api/v2/rum` for RUM data or `/api/v2/replay` for Session Replay data)
 - the parameters (example: `ddsource=browser&...`)
 
 The Datadog intake origin corresponding to your `site` parameter should be defined in your proxy implementation. The path and parameters for each request sent to the proxy can be accessed in the request's `ddforward` parameter (for example, `https://www.example-proxy.com/any-endpoint?ddforward=%2Fapi%2Fv2%2Frum%3Fddsource%3Dbrowser`).
