@@ -6,20 +6,21 @@ further_reading:
 - link: '/monitors/types/error_tracking'
   tag: 'Documentation'
   text: 'Learn about Error Tracking Monitors'
-- link: '/real_user_monitoring/error_tracking'
-  tag: 'Documentation'
-  text: 'Learn about Error Tracking for RUM'
+aliases:
+  - /real_user_monitoring/error_tracking/explorer
+  - /logs/error_tracking/explorer
+  - /tracing/error_tracking/explorer
 ---
 
 ## Overview
 
-{{< img src="real_user_monitoring/error_tracking/rum_error_tracking.png" alt="The Error Tracking Explorer for RUM displaying issues from your web and mobile applications' crash reports" style="width:100%;" >}}
+{{< img src="error_tracking/error-tracking-overview.png" alt="The details of an issue in the Error Tracking Explorer" style="width:100%;" >}}
 
-The Error Tracking Explorer allows you to explore all your different issues. An issue is a group of similar errors related to the same bug. Datadog creates issues by computing a fingerprint for each error using some of its attributes such as the error type, the error message, or the stack trace. Errors with the same fingerprint are grouped together in the same issue.
+The Error Tracking Explorer allows you to view, filter, and investigate issues. An issue is a group of similar errors related to the same bug. Datadog creates issues by computing a fingerprint for each error using some of its attributes such as the error type, the error message, or the stack trace. Errors with the same fingerprint are grouped together in the same issue.
 
 ## Explore your issues
 
-Each item listed in the Error Tracking Explorer is an issue and contains high-level information about the error, including the following:
+Each item listed in the Error Tracking Explorer is an issue that contains high-level information about the error, including the following:
 
 -   The error type and the error message
 -   The path to the file in which underlying errors are fired
@@ -27,7 +28,6 @@ Each item listed in the Error Tracking Explorer is an issue and contains high-le
     -   When it was first and last seen
     -   Graph of occurrences over time
     -   Number of occurrences in the selected time period
-
 
 ### Time range
 
@@ -51,11 +51,9 @@ The high-level details you need when troubleshooting an issue can be found in th
 
 {{< img src="real_user_monitoring/error_tracking/error_sample.png" alt="Lower part of the Error Tracking issue panel offering error samples" style="width:80%;" >}}
 
-The lower part of the issue panel gives you the ability to navigate error samples from the related issue. Each error sample gives you information while troubleshooting, for example:
+The information shown in the issue panel varies depending on the error source. For example, an issue created from APM errors shows the error span tags, such as the resource or operation name, with direct access to the related trace or to logs that are linked to it.
 
--   The stack trace where each stack frame provides a code snippet centered on the line of code that fired the error.
--   Information about the RUM session in which the error occurred if actually collected by the RUM SDK.
--   Information about the user, such as their browser or their OS with the related versions that were used when the error occurred.
+The lower part of the issue panel gives you the ability to navigate error samples from the related issue. Each error sample gives you troubleshooting information such as the stack trace of the error, and the characteristics of impacted users.
 
 ## Get alerted on new errors
 
