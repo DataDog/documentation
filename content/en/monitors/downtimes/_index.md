@@ -454,7 +454,7 @@ Attributes specifying the duration in `RRULE` are not supported (for example, `D
 {{< tabs >}}
 {{% tab "API " %}}
 
-The `start` and `end` parameters must match the expected start and end of the recurring rule's first day. So, assuming the first 2nd Tuesday of our rule is Tuesday, July 11th, the start date has to be July 11th 08:00 AM and  a duration of two hours needs to be set.
+The `start` and `end` parameters must match the expected start and end of the recurring rule's first day. So, assuming the first 2nd Tuesday of our rule is Tuesday, July 11th, the start date has to be July 11th 08:00 AM and a duration of two hours needs to be set.
 
 **API call:**
 
