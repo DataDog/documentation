@@ -130,16 +130,21 @@ exporters:
     api:
       key: ${DD_API_KEY}
       site: datadoghq.com
+   
+connectors:
+    datadog/connector:
+
 service:
   pipelines:
     metrics:
+      receivers: [otlp, datadog/connector] # <- update this line
       exporters: [datadog]
     traces:
-      exporters: [datadog]
+      exporters: [datadog, datadog/connector]
     logs:
       exporters: [datadog]
 {{< /code-block >}}  
-3. Set `exporters.datadog.api.site` to your [Datadog site][16]. Otherwise, it defaults to US1.
+4. Set `exporters.datadog.api.site` to your [Datadog site][16]. Otherwise, it defaults to US1.
 
 This configuration allows the Datadog Exporter to send runtime metrics, traces, and logs to Datadog. However, sending infrastructure metrics requires additional configuration.
 
@@ -187,7 +192,7 @@ receivers:
 service:
   pipelines:
     metrics:
-      receivers: [otlp, docker_stats] # <- update this line
+      receivers: [otlp, datadog/connector, docker_stats] # <- update this line
 {{< /code-block >}}
 
 This configuration allows the Calendar application to send container metrics to Datadog for you to explore in Datadog.
