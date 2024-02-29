@@ -92,7 +92,7 @@ try (var scope = Profiling.get().newScope()) {
 }
 ```
 
-Then, open CPU, Exceptions or Wall Time profiles for your service and select the `customer_name` value you're interested in under the `CPU time by` dropdown.
+Then, open CPU, Exceptions, or Wall Time profiles for your service and select the `customer_name` value you're interested in under the `CPU time by` dropdown.
 
 
 {{< /programming-lang >}}
