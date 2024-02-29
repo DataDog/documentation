@@ -534,7 +534,7 @@ datadog:
 
 See the [Orchestrator Explorer documentation][21] for additional information.
 
-## Basic Configuration
+## Basic configuration
 
 Use the following configuation fields to configure the Datadog Agent.
 
@@ -592,7 +592,7 @@ For a complete list of environment variables for the Helm chart, see the [full l
 {{% /tab %}}
 {{< /tabs >}}
 
-## Environment Variables
+## Environment variables
 The containerized Datadog Agent can be configured by using environment variables, for an extensive list of supported environement variables in the [Environment Variables][26] section of the Docker Agent documentation.
 
 ### Examples
