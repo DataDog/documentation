@@ -65997,7 +65997,7 @@ main:
     identifier: rum_dashboards_errors
     weight: 104
   - name: Monitors
-    url: real_user_monitoring/monitors
+    url: real_user_monitoring/platform/monitors
     parent: rum_platform
     identifier: rum_monitors
     weight: 702
