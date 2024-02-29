@@ -237,7 +237,7 @@ Detailed network timing data for the loading of an application's resources are c
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
-| `error.source`  | string | Where the error originates from (for example, `console` or `network`).     |
+| `error.source`  | string | Where the error originates from (for example, `console`).     |
 | `error.type`    | string | The error type (or error code in some cases).                   |
 | `error.message` | string | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
