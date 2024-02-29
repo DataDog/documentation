@@ -25,9 +25,9 @@ The Agent collects telemetry directly from the database by logging in as a read-
 
 ## Before you begin
 
-{% dbm-supported-oracle-versions %}
+{{% dbm-supported-oracle-versions %}}
 
-{% dbm-supported-oracle-agent-version %}
+{{% dbm-supported-oracle-agent-version %}}
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
@@ -74,15 +74,15 @@ Log on as `sysdba`, and grant the following permissions:
 {{< tabs >}}
 
 {{% tab "Multi-tenant" %}}
-{% dbm-oracle-multitenant-permissions-grant-sql %}
+{{% dbm-oracle-multitenant-permissions-grant-sql %}}
 {{% /tab %}}
 
 {{% tab "Non-CDB" %}}
-{% dbm-oracle-non-cdb-permissions-grant-sql %}
+{{% dbm-oracle-non-cdb-permissions-grant-sql %}}
 {{% /tab %}}
 
 {{% tab "Oracle 11" %}}
-{% dbm-oracle-11-permissions-grant-sql %}
+{{% dbm-oracle-11-permissions-grant-sql %}}
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -94,15 +94,15 @@ Log on as `sysdba`, create a new `view` in the `sysdba` schema, and give the Age
 {{< tabs >}}
 
 {{% tab "Multi-tenant" %}}
-{% dbm-multitenant-view-create-sql %}
+{{% dbm-multitenant-view-create-sql %}}
 {{% /tab %}}
 
 {{% tab "Non-CDB" %}}
-{% dbm-non-cdb-view-create-sql %}
+{{% dbm-non-cdb-view-create-sql %}}
 {{% /tab %}}
 
 {{% tab "Oracle 11" %}}
-{% dbm-oracle-11-view-create-sql %}
+{{% dbm-oracle-11-view-create-sql %}}
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -144,7 +144,7 @@ Once all Agent configuration is complete, [restart the Datadog Agent][1].
 {{% /tab %}}
 
 {{% tab "Non-CDB" %}}
-{% dbm-oracle-selfhosted-config %}
+{{% dbm-oracle-selfhosted-config %}}
 
 Once all Agent configuration is complete, [restart the Datadog Agent][1].
 
@@ -152,7 +152,7 @@ Once all Agent configuration is complete, [restart the Datadog Agent][1].
 {{% /tab %}}
 
 {{% tab "Oracle 11" %}}
-{% dbm-oracle-selfhosted-config %}
+{{% dbm-oracle-selfhosted-config %}}
 
 Once all Agent configuration is complete, [restart the Datadog Agent][1].
 

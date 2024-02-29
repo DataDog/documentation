@@ -13,7 +13,7 @@ further_reading:
 <div class="alert alert-warning">Database Monitoring is not supported for this site.</div>
 {{< /site-region >}}
 
-{% dbm-oracle-definition %}
+{{% dbm-oracle-definition %}}
 
 The Agent collects telemetry directly from the database by logging in as a read-only user. Complete the following setup steps to enable Database Monitoring with your Oracle database:
 
@@ -24,9 +24,9 @@ The Agent collects telemetry directly from the database by logging in as a read-
 
 ## Before you begin
 
-{% dbm-supported-oracle-versions %}
+{{% dbm-supported-oracle-versions %}}
 
-{% dbm-supported-oracle-agent-version %}
+{{% dbm-supported-oracle-agent-version %}}
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
