@@ -339,6 +339,8 @@ To enable single step instrumentation with the Datadog Operator:
    spec:
      global:
        site: <DATADOG_SITE>
+       tags:
+         - env:<AGENT_ENV>
        credentials:
          apiSecret:
            secretName: datadog-secret
@@ -350,15 +352,9 @@ To enable single step instrumentation with the Datadog Operator:
      apm:
        instrumentation:
          enabled: true  
-     override:
-       clusterAgent:
-         image:
-           name: gcr.io/datadoghq/cluster-agent:latest
-       nodeAgent:
-         image:
-           name: gcr.io/datadoghq/agent:latest
    ```
-   Replace `<DATADOG_SITE>` with your [Datadog site][6].
+   a. Replace `<DATADOG_SITE>` with your [Datadog site][6].  
+   b. Replace `<AGENT_ENV>` with the environment your Agent is installed on (for example, `env:staging`).
 
 3. Run the following command:
    ```shell
@@ -371,30 +367,26 @@ To enable single step instrumentation with the Datadog Operator:
 You can choose to selectively instrument specific namespaces or choose to not instrument them.
 
 To enable instrumentation for specific namespaces, replace `enabled: true` with `enabledNamespaces` configuration in your `datadog-agent.yaml` file:
-{{< highlight yaml "hl_lines=6-8" >}}
-      datadog:
-        apiKeyExistingSecret: datadog-secret
-        site: <DATADOG_SITE>
-        apm:
-          instrumentation:
-            enabledNamespaces: # Add namespaces to instrument
-               - namespace_1
-               - namespace_2
+{{< highlight yaml "hl_lines=4-6" >}}
+   features:
+     apm:
+       instrumentation:
+         enabledNamespaces: # Add namespaces to instrument
+           - namespace_1
+           - namespace_2
  {{< /highlight >}}
 
 <div class="alert alert-info">The <code>enabled: true</code> option enables instrumentation for the entire cluster. You need to remove this to only enable instrumentation for specific namespaces.</a></div>
 
 To disable instrumentation for specific namespaces, add the `disabledNamespaces` configuration to your `datadog-agent.yaml` file:
-{{< highlight yaml "hl_lines=7-9" >}}
-   datadog:
-     apiKeyExistingSecret: datadog-secret
-     site: <DATADOG_SITE>
+{{< highlight yaml "hl_lines=5-7" >}}
+   features:
      apm:
        instrumentation:
          enabled: true
-         disabledNamespaces: # Add namespaces to not instrument
-            - namespace_1
-            - namespace_2
+         enabledNamespaces: # Add namespaces to instrument
+           - namespace_1
+           - namespace_2
 {{< /highlight >}}
 
 ### Specifying tracing library versions
@@ -402,10 +394,8 @@ To disable instrumentation for specific namespaces, add the `disabledNamespaces`
 You can optionally set specific tracing library versions to use. If you don't specify a version, it defaults to the latest version. To find the latest version for a library, go to **Releases** in the dd-trace-&lt;language&gt; GitHub repo. For example, [dd-trace-dotnet releases][15].
 
 To set specific tracing library versions, add the following configuration to your `datadog-agent.yaml` file:
-{{< highlight yaml "hl_lines=7-12" >}}
-   datadog:
-     apiKeyExistingSecret: datadog-secret
-     site: <DATADOG_SITE>
+{{< highlight yaml "hl_lines=5-10" >}}
+   features:
      apm:
        instrumentation:
          enabled: true
@@ -425,24 +415,7 @@ Supported languages include:
 - Node.js (`js`)
 - Ruby (`ruby`)
 
-### Tagging observability data by environment {#env-operator}
-
-Automatically tag instrumented services and other telemetry that pass through the Agent with a specific environment. For example, if the Agent is installed in your staging environment, set `env:staging` to associate your observability data with `staging`.
-
-For example, add the following configuration to your `datadog-agent.yaml` file:
-{{< highlight yaml "hl_lines=4-5" >}}
-   datadog:
-     apiKeyExistingSecret: datadog-secret
-     site: <DATADOG_SITE>
-     tags:
-         - env:staging
-     apm:
-       instrumentation:
-         enabled: true
-{{< /highlight >}}
-
 [15]: https://github.com/DataDog/dd-trace-dotnet/releases
-
 [1]: https://helm.sh/
 [2]: https://kubernetes.io/docs/tasks/tools/
 [3]: https://app.datadoghq.com/organization-settings/api-keys
