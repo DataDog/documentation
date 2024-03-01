@@ -4626,17 +4626,17 @@ main:
     identifier: rum_performance
     weight: 5
   - name: Performance Metrics
-    url: real_user_monitoring/performance_metrics
+    url: real_user_monitoring/rum_performance/performance_metrics
     parent: rum_performance
     identifier: rum_performance_metrics
     weight: 501
   - name: Deployment Tracking
-    url: real_user_monitoring/deployment_tracking
+    url: real_user_monitoring/rum_performance/deployment_tracking
     parent: rum_performance
     identifier: rum_deployment_tracking
     weight: 502
   - name: Feature Flag Tracking
-    url: real_user_monitoring/feature_flag_tracking
+    url: real_user_monitoring/rum_performance/feature_flag_tracking
     parent: rum_performance
     identifier: rum_feature_flag_tracking
     weight: 503
@@ -4696,7 +4696,7 @@ main:
     identifier: rum_dashboards_errors
     weight: 104
   - name: Monitors
-    url: real_user_monitoring/monitors/
+    url: real_user_monitoring/platform/monitors/
     parent: rum_platform
     identifier: monitors
     weight: 702
