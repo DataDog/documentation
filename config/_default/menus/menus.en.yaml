@@ -221,17 +221,23 @@ main:
     identifier: glossary
     parent: essentials_heading
     weight: 20000
+  - name: Standard Attributes
+    url: /standard-attributes
+    pre: search
+    parent: essentials_heading
+    identifier: agent_standard_attributes
+    weight: 30000
   - name: Guides
     url: all_guides/
     pre: compass
     identifier: guides
     parent: essentials_heading
-    weight: 30000
+    weight: 40000
   - name: Agent
     url: agent/
     pre: agent-fill
     parent: essentials_heading
-    weight: 40000
+    weight: 50000
     identifier: agent
   - name: Basic Agent Usage
     url: agent/basic_agent_usage/
@@ -512,12 +518,12 @@ main:
     url: agent/guide/
     identifier: agent_guides
     parent: agent
-    weight: 11
+    weight: 12
   - name: Data Security
     identifier: agent_security
     url: data_security/agent/
     parent: agent
-    weight: 12
+    weight: 13
   - name: Integrations
     url: integrations/
     identifier: integrations_top_level
@@ -2299,7 +2305,7 @@ main:
     parent: tracing_trace_collection
     identifier: tracing_proxies
     weight: 208
-  - name: Span Tags Semantics
+  - name: Span Tag Semantics
     url: tracing/trace_collection/tracing_naming_convention
     parent: tracing_trace_collection
     identifier: tracing_naming_convention
@@ -2308,7 +2314,7 @@ main:
     url: tracing/trace_collection/span_links
     parent: tracing_trace_collection
     identifier: tracing_span_links
-    weight: 210
+    weight: 211
   - name: APM Metrics Collection
     url: tracing/metrics/
     parent: tracing
