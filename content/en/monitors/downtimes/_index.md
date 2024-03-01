@@ -60,7 +60,7 @@ Schedule a downtime based on one or more [monitor tags][3]. The maximum number o
 #### Downtime scope
 Use group scope to apply additional filters to your downtime and have more control over which monitors to mute. The group scope of a downtime is matched after the monitor specific target. If you target multiple monitors by using monitor tags, it finds monitors that are tagged before it matches the group scope.
 
-For instance, a monitor is looking at the average latency of all your services. You are planning on running an upgrade on the `web-store` service and are anticipating slow requests and potential errors.
+For instance, you have a monitor that looks at the average latency of all your services. You are planning on running an upgrade on the `web-store` service and are anticipating slow requests and potential errors.
 
 You would like to make sure that `service:web-store` related notifications are muted and other critical alerts for the remaining services are delivered as usual. Enter `service:web-store` in the Downtime's group scope after selecting the monitor targets.
 
