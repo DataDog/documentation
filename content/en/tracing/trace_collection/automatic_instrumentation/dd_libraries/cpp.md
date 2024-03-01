@@ -56,7 +56,7 @@ FetchContent_MakeAvailable(dd-trace-cpp)
 add_executable(tracer_example tracer_example.cpp)
 
 # Statically link against `dd-trace-cpp`
-# To dynamically link agains `dd-trace-cpp` use the `dd_trace_cpp_shared` target
+# NOTE: To dynamically link against `dd-trace-cpp` use the `dd_trace_cpp_shared` target
 target_link_libraries(cpp-parametric-http-test dd_trace_cpp-objects)
 ````
 
@@ -144,9 +144,6 @@ cmake --install build
 #include <datadog/tracer.h>
 #include <datadog/tracer_config.h>
 
-#include <iostream>
-#include <string>
-
 namespace dd = datadog::tracing;
 
 int main() {
@@ -162,9 +159,10 @@ int main() {
   dd::Tracer tracer{*validated_config};
   // Create some spans.
   {
-    auto span_a = tracer.create_span();
-    span_a.set_name("A");
-    span_a.set_tag("tag", "123");
+    dd::SpanConfig options;
+    options.name = "A";
+    options.tags.emplace("tag", "123");
+    auto span_a = tracer.create_span(options);
     auto span_b = span_a.create_child();
     span_b.set_name("B");
     span_b.set_tag("tag", "value");
