@@ -107,7 +107,7 @@
         contents:
 
         - action: integrations
-          branch: master
+          branch: cswatt/logstash-containers
           globs:
           - "*/metadata.csv"
           - "*/manifest.json"
