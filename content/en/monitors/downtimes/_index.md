@@ -31,7 +31,7 @@ Schedule downtimes for system shutdowns, off-line maintenance, or upgrades witho
 
 {{% tab "UI" %}}
 
-### Create a new downtime schedule
+### Create a downtime schedule
 
 To schedule a [monitor downtime][1] in Datadog navigate to _Monitors > Manage Downtimes_. Then, click the **Schedule Downtime** button in the upper right.
 
