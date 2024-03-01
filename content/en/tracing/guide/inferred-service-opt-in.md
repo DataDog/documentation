@@ -101,7 +101,6 @@ To opt in, add the following environment variables or system properties to your 
 
 | Environment variable | System property |
 | ---  | ----------- |
-| `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true` | `-Ddd.trace.peer.service.defaults.enabled=true` |
 | `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `-Ddd.trace.remove.integration-service-names.enabled=true` |
 
 Remove the following settings from your configuration:
@@ -140,7 +139,6 @@ To opt in, add the following environment variables or system properties to your 
 
 | Environment variable | System property |
 | ---  | ----------- |
-| `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true` | `WithPeerServiceDefaultsEnabled(true)` |
 | `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `WithGlobalServiceName(true)` |
 
 #### Peer service mapping
@@ -171,7 +169,6 @@ To opt in, add the following environment variables or system properties to your 
 
 | Environment variable | System property |
 | ---  | ----------- |
-| `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true` | `spanComputePeerService=true` |
 | `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `spanRemoveIntegrationFromService=true` |
 
 #### Peer service mapping
@@ -203,7 +200,6 @@ To opt in, add the following environment variables or system properties to your 
 
 | Environment variable | System property |
 | ---  | ----------- |
-| `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true` | `datadog.trace.peer_service_defaults_enabled=true` |
 | `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `datadog.trace.remove_integration_service_names_enabled=true` |
 
 #### Peer service mapping
@@ -260,7 +256,6 @@ The minimum Python tracer version required is [v1.16.0][1]. Regular updates to t
 To opt in, add the following environment variables to your tracer settings or system properties:
 
 Add the following environment variables to your tracer settings or system properties:
-- `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`
 - `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
 
 #### Peer service mapping
