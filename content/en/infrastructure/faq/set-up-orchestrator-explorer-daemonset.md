@@ -115,7 +115,7 @@ This page contains instructions for setting up the Orchestrator Explorer using a
             value: "true"
     ```
 
-5. (Optional) Set collectors under instances section to specify the resources to be collected. Create `orchestrator.yaml` in ConfigMap. Sample configuration:
+4. (Optional) Set collectors under instances section to specify the resources to be collected. Create `orchestrator.yaml` in ConfigMap. Sample configuration:
 
      ```yaml
       apiVersion: v1
