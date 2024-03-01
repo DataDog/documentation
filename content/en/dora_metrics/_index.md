@@ -284,10 +284,13 @@ Use the information on this page to identify improvements or regressions for eac
 The metrics can also be queried with the [Query timeseries points][10] and [Query timeseries data across multiple products][11] API endpoints.
 
 The metrics provided by DORA Metrics are:
-- `dora.deployments.count` of type `count`. Used for Deployment Frequency.
-- `dora.change_lead_time` of type `distribution`. Contains the age in `seconds` of the git commits at the time of deployment.
-- `dora.incidents_impact` of type `count`. Tracks the services or teams impacted by incidents. Used for Change Failure Rate with the formula `dora.incidents_impact / dora.deployments.count`. A big time rollup of at least 1 week is recommended to account for time difference between deployments and when the impact starts.
-- `dora.time_to_restore` of type `distribution`. Contains the time in `seconds` between the incident's `started_at` and `finished_at`.
+
+| Metric | Type | |
+| :--- | :--- | :--- |
+| `dora.deployments.count` | count | Used for Deployment Frequency.
+| `dora.change_lead_time` | distribution | Contains the age in `seconds` of the git commits at the time of deployment.
+| `dora.incidents_impact` | count | Tracks the services or teams impacted by incidents. Used for Change Failure Rate with the formula `dora.incidents_impact / dora.deployments.count`. A big time rollup of at least 1 week is recommended to account for time difference between deployments and when the impact starts.
+| `dora.time_to_restore` | distribution | Contains the time in `seconds` between the incident's `started_at` and `finished_at`.
 
 All the metrics contain the following tags when available:
 - `service`
@@ -297,11 +300,11 @@ All the metrics contain the following tags when available:
 
 **Note**: The `severity` tag is available for the `dora.incidents_impact` and `dora.time_to_restore` metrics, if provided through the API.
 
-### Deployment and Incident events
+### Deployment and incident events
 
 DORA Metrics also provides individual `deployment`, `incident`, and `incident_finished` events in [Event Management][12] with `source:software_delivery_insights`.
 
-The events can be queried and visualized with [Event Management][13].
+The events can be queried and visualized with the [Events Explorer][13].
 
 ### Limitations
 
