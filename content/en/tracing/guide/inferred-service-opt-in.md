@@ -44,12 +44,17 @@ To opt in, you must adjust your Datadog Agent and APM Tracer configurations. Che
 ### Datadog Agent configuration
 
 Requirements:
-- Datadog Agent version >= [7.50.0][4].
+- Datadog Agent version >= [7.50.3][4].
 
 Set the following in your `datadog.yaml` [configuration file][5]:
-- `DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true`
-- `DD_APM_PEER_TAGS_AGGREGATION=true`
 
+{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+
+DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true 
+DD_APM_PEER_TAGS_AGGREGATION=true
+DD_APM_PEER_TAGS='["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","bucketname","cassandra.cluster","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.system","grpc.host","hazelcast.instance","hostname","http.host","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]'
+
+{{< /code-block >}}
 
 ### OpenTelemetry Collector Datadog Exporter configuration
 
@@ -305,6 +310,6 @@ Update those items to use the global default service tag (`service:<DD_SERVICE>`
 [1]: /tracing/services/service_page/
 [2]: /tracing/services/services_map/
 [3]: /tracing/service_catalog/
-[4]: https://github.com/DataDog/datadog-agent/releases/tag/7.50.0
+[4]: https://github.com/DataDog/datadog-agent/releases/tag/7.50.3
 [5]: /agent/guide/agent-configuration-files/?tab=agentv6v7
 [6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L328-L341
