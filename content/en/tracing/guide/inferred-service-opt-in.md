@@ -338,5 +338,5 @@ Update those items to use the global default service tag (`service:<DD_SERVICE>`
 [3]: /tracing/service_catalog/
 [4]: https://github.com/DataDog/datadog-agent/releases/tag/7.50.3
 [5]: /agent/guide/agent-configuration-files/?tab=agentv6v7
-[6]: [https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L328-L341](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L335-L357)https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L335-L357
+[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L335-L357
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases
