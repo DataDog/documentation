@@ -214,7 +214,7 @@ There are many other environment variables and settings supported in the Datadog
 1. For the application container, set `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable to point to the Datadog Agent container. For example:
 
    ```
-   OTEL_EXPORTER_OTLP_ENDPOINT=http://<datadog-agent>:4318.
+   OTEL_EXPORTER_OTLP_ENDPOINT=http://<datadog-agent>:4318
    ```
 
 2. Both containers must be defined in the same bridge network, which is handled automatically if you use Docker Compose. Otherwise, follow the Docker example in [Tracing Docker Applications][1] to set up a bridge network with the correct ports.
