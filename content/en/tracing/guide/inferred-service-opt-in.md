@@ -48,7 +48,7 @@ Requirements:
 
 Set the following in your `datadog.yaml` [configuration file][5]:
 
-{{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
+{{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
 
 DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true 
 DD_APM_PEER_TAGS_AGGREGATION=true
@@ -56,11 +56,37 @@ DD_APM_PEER_TAGS='["_dd.base_service","amqp.destination","amqp.exchange","amqp.q
 
 {{< /code-block >}}
 
-### OpenTelemetry Collector Datadog Exporter configuration
+### OpenTelemetry Collector 
 
-Set the following in your `collector.yaml` [configuration file][6]:
-- `compute_stats_by_span_kind=true`
-- `peer_tags_aggregation=true`
+Minimum version recommended: opentelemetry-collector-contrib >= [v0.95.0][7].
+
+Example [collector.yaml][6].
+
+{{< code-block lang="yaml"  collapsible="true" >}}
+
+connectors:
+  datadog/connector:
+    traces:
+      compute_stats_by_span_kind: true
+      peer_tags_aggregation: true
+      peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","bucketname","cassandra.cluster","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.system","grpc.host","hazelcast.instance","hostname","http.host","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]
+
+{{< /code-block >}}
+
+If your collector version is below [v0.95.0][7], you need to configure the exporter with the peer tags config:
+
+### Datadog Exporter configuration
+
+{{< code-block lang="yaml" collapsible="true" >}}
+
+exporters:
+  datadog:
+    traces:
+      compute_stats_by_span_kind: true
+      peer_tags_aggregation: true
+      peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","bucketname","cassandra.cluster","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.system","grpc.host","hazelcast.instance","hostname","http.host","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]   
+
+{{< /code-block >}}
 
 
 ### APM tracer configuration
@@ -312,4 +338,5 @@ Update those items to use the global default service tag (`service:<DD_SERVICE>`
 [3]: /tracing/service_catalog/
 [4]: https://github.com/DataDog/datadog-agent/releases/tag/7.50.3
 [5]: /agent/guide/agent-configuration-files/?tab=agentv6v7
-[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L328-L341
+[6]: [https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L328-L341](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L335-L357)https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L335-L357
+[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases
