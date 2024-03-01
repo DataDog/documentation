@@ -73,7 +73,7 @@ connectors:
 
 {{< /code-block >}}
 
-If your collector version is below [v0.95.0][7], you need to configure the exporter with the peer tags config:
+If your collector version is below [v0.95.0][7], use an exporter configuration with the following `peer_tags`:
 
 ### Datadog Exporter configuration
 
