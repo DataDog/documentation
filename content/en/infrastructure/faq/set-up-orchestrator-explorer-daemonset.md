@@ -106,7 +106,7 @@ This page contains instructions for setting up the Orchestrator Explorer using a
           - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
             value: "true"
     ```
-    For Agent versions 7.51.0+, the orchestrator check runs on the Agent container instead of the Process Agent container so configure the following on the Agent container instead:
+    For Agent versions 7.51.0+, the orchestrator check runs on the Agent container instead of the Process Agent container. To configure the Agent container:
     ```yaml
     containers:
         - name: agent
