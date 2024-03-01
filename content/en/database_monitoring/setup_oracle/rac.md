@@ -106,8 +106,8 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [3]: /database_monitoring/setup_oracle/selfhosted
 [4]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [5]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
-[6]: /database_monitoring/setup_oracle
-[7]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
+[6]: /agent/basic_agent_usage#agent-overhead
+[7]: /database_monitoring/data_collected/#sensitive-information
 [8]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [9]: https://app.datadoghq.com/account/settings/agent/latest
 [10]: https://app.datadoghq.com/integrations/oracle

@@ -144,8 +144,8 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 
 <div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
 
-[1]: /database_monitoring/setup_oracle
-[2]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
+[1]: /agent/basic_agent_usage#agent-overhead
+[2]: /database_monitoring/data_collected/#sensitive-information
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [5]: /agent/configuration/agent-commands/#agent-status-and-information
