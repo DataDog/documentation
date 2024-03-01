@@ -75,7 +75,6 @@ connectors:
 
 If your collector version is below [v0.95.0][7], use an exporter configuration with the following `peer_tags`:
 
-### Datadog Exporter configuration
 
 {{< code-block lang="yaml" collapsible="true" >}}
 
