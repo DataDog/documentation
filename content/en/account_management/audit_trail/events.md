@@ -28,21 +28,38 @@ further_reading:
 - [Teams management](#teams-management-events)
 
 #### Product-Specific Events
-- [Application Performance Monitoring (APM)](#application-performance-monitoring-apm-events)
-- [Application Security Management (ASM)](#application-security-management)
-- [Audit Trail](#audit-trail-events)
-- [CI Visibility](#ci-visibility-events)
-- [Cloud Security Platform](#cloud-security-platform-events)
-- [Dynamic Instrumentation](#dynamic-instrumentation-events)
-- [Error Tracking](#error-tracking-events)
-- [Log Management](#log-management-events)
-- [Metrics](#metrics-events)
-- [Real User Monitoring](#real-user-monitoring-events)
-- [Sensitive Data Scanner](#sensitive-data-scanner-events)
-- [Service Level Objectives](#service-level-objectives-slo-events)
-- [Synthetic Monitoring](#synthetic-monitoring-events)
-- [Reference Tables](#reference-table-events)
-- [Workflows](#workflow-events)
+- [Overview](#overview)
+    - [Platform Events](#platform-events)
+    - [Product-Specific Events](#product-specific-events)
+- [Audit Events](#audit-events)
+  - [Access management events](#access-management-events)
+  - [Agent](#agent)
+  - [API request events](#api-request-events)
+  - [Application Performance Monitoring (APM) events](#application-performance-monitoring-apm-events)
+  - [Application Security Management](#application-security-management)
+  - [Audit Trail events](#audit-trail-events)
+  - [Authentication events](#authentication-events)
+  - [CI Visibility events](#ci-visibility-events)
+  - [Cloud Security Platform events](#cloud-security-platform-events)
+  - [Dashboard events](#dashboard-events)
+  - [Dynamic Instrumentation events](#dynamic-instrumentation-events)
+  - [Error Tracking events](#error-tracking-events)
+  - [Integration events](#integration-events)
+  - [Log Management events](#log-management-events)
+  - [Metrics events](#metrics-events)
+  - [Monitor events](#monitor-events)
+  - [Notebook events](#notebook-events)
+  - [OAuth events](#oauth-events)
+  - [Organization management events](#organization-management-events)
+  - [Real User Monitoring events](#real-user-monitoring-events)
+  - [Security Notification events](#security-notification-events)
+  - [Sensitive Data Scanner events](#sensitive-data-scanner-events)
+  - [Service Level Objectives (SLO) events](#service-level-objectives-slo-events)
+  - [Synthetic Monitoring events](#synthetic-monitoring-events)
+  - [Reference Table events](#reference-table-events)
+  - [Teams Management events](#teams-management-events)
+  - [Workflow events](#workflow-events)
+- [Further Reading](#further-reading)
 
 
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
@@ -64,6 +81,7 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 | [Restriction policy][10] | A restriction policy is modified for a resource. | `@evt.name:"Access Management" @asset.type:restriction_policy @action:(modified OR deleted)` |
 | [Email update (Support)][11] | A user's email was updated by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:user @action:modified` |
 | [User invite (Support)][12] | A user was invited to the org by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:user @action:created` |
+| [Role modified (Support)][99] | A role is modified and what the previous and new permissions are by Datadog Support. | `@evt.name:"Access Management" @evt.actor.type:SUPPORT_USER @asset.type:role @action:modified` |
 
 ### Agent
 
@@ -365,3 +383,4 @@ See the [Audit Trail documentation][2] for more information on setting up and co
 [95]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AWorkflows%20%40asset.type%3Aworkflow_schedule%20%40action%3A%28modified%20OR%20created%20OR%20deleted%29
 [96]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3AWorkflows%20%40asset.type%3Aworkflow_action%20%40action%3Aresponded
 [97]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Custom%20Connections%22%20%40asset.type%3Acustom_connection
+[99]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Access%20Management%22%20%40evt.actor.type%3ASUPPORT_USER%20%40asset.type%3Arole%20%40action%3Amodified%20
