@@ -536,7 +536,7 @@ See the [Orchestrator Explorer documentation][21] for additional information.
 
 ## Basic configuration
 
-Use the following configuation fields to configure the Datadog Agent.
+Use the following configuration fields to configure the Datadog Agent.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -593,13 +593,18 @@ For a complete list of environment variables for the Helm chart, see the [full l
 {{< /tabs >}}
 
 ## Environment variables
-The containerized Datadog Agent can be configured by using environment variables, for an extensive list of supported environement variables in the [Environment Variables][26] section of the Docker Agent documentation.
+The containerized Datadog Agent can be configured by using environment variables. For an extensive list of supported environment variables, see the [Environment variables][26] section of the Docker Agent documentation.
 
 ### Examples
 {{< tabs >}}
-
 {{% tab "Datadog Operator" %}}
-When using the Datadog Operator, environment variables are set in the override in the context of a component or container as `[key].containers.[key].env []object` or `[key].env []object` with the following possible keys: `nodeAgent`, `clusterAgent` or `clusterChecksRunner` The container level settings take priority over any component level settings.
+When using the Datadog Operator, you can set additional environment variables in `override` for a component with `[key].env []object`, or for a container with `[key].containers.[key].env []object`. The following keys are supported: 
+
+- `nodeAgent`
+- `clusterAgent`
+- `clusterChecksRunner`
+
+Container-level settings take priority over any component-level settings.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -636,7 +641,7 @@ clusterAgent:
 
 {{% /tab %}}
 {{% tab "DaemonSet" %}}
-Add additional environment variables to the DaemonSet or Deployment (for Datadog Cluster Agent).
+Add environment variables to the DaemonSet or Deployment (for Datadog Cluster Agent).
 ```yaml
 apiVersion: apps/v1
 kind: DaemonSet
