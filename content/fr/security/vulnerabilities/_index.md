@@ -28,17 +28,18 @@ title: Cloud Security Management Vulnerabilities
 
 Cloud Security Management Vulnerabilities (CSM Vulnerabilities) vous aide à sécuriser votre infrastructure cloud préventivement en détectant, priorisant et gérant les vulnérabilités sur l'ensemble de vos images de conteneur et hosts. La fonctionnalité tire parti d'un [contexte d'observabilité][6] étendu ainsi que des informations du secteur pour vous aider à corriger les vulnérabilités les plus critiques à un instant T.
 
-**Remarque** : si vous cherchez à gérer les vulnérabilités au niveau des bibliothèques de votre application et du code personnalisé de celle-ci, consultez la section [Application Vulnerability Management][5].
+**Remarque** : si vous cherchez à gérer les vulnérabilités au niveau des bibliothèques de votre application et du code personnalisé de celle-ci, consultez la section [Analyse de composition logicielle][5].
 
 ## Explorer les vulnérabilités
 Le [Vulnerabilities Explorer][1] affiche une liste exhaustive des vulnérabilités détectées sur l'ensemble de votre infrastructure et les classe selon leur niveau de gravité. Il propose également des fonctionnalités de regroupement, de filtrage et de triage afin que vous puissiez étudier les problèmes, les attribuer et les résoudre.
 
-{{< img src="security/vulnerabilities/csm_vulnerabilities_3.png" alt="La page CSM  Vulnerability triée en fonction des vulnérabilités uniques, avec un volet latéral" width="100%">}}
+{{< img src="security/vulnerabilities/csm_vulnerabilities_3.png" alt="
+La page CSM  Vulnerability triée en fonction des vulnérabilités uniques, avec un volet latéral" width="100%">}}
 
 Sélectionnez une vulnérabilité spécifique pour afficher les détails associés, notamment les conteneurs et hosts affectés, le score du niveau de gravité ainsi que les étapes de remédiation recommandées.
 Le niveau de gravité d'une vulnérabilité est modifié à partir du score de base et tient compte des éléments suivants :
 
-- Selon que l'infrastructure sous-jacente est ou non exécutée et selon l'ampleur de l'impact.
+- Selon que l'infrastructure sous-jacente est exécutée ou non et selon l'ampleur de l'impact.
 - L'environnement au sein duquel l'infrastructure sous-jacente est exécutée. Par exemple, le niveau de gravité est moindre si l'environnement n'est pas en production.
 - Selon qu'il existe ou non une faille pour une vulnérabilité donnée provenant de sources telles que le [catalogue KEV de la CISA][9].
 
@@ -52,22 +53,22 @@ Dans la fenêtre des détails, vous pouvez également consulter les ressources a
 
 {{< img src="security/vulnerabilities/container_vulnerability_side_panel.png" alt="Les détails du volet latéral des images de conteneur dans l'onglet des vulnérabilités" width="100%">}}
 
-Toutes les vulnérabilités incluent un ensemble de liens et de références vers des sites web ou des sources d'information qui vous aident à cerner le contexte au sein duquel s'inscrit chaque vulnérabilité.
+Toutes les vulnérabilités incluent un ensemble de liens et de références vers des sites Web ou des sources d'information qui vous aident à cerner le contexte de chaque vulnérabilité.
 
-## Trier et corriger
+## Triage et remédiation
 
 Le [Vulnerabilities Explorer][1] offre également des options de triage des vulnérabilités détectées qui vous permettent de modifier le statut d'une vulnérabilité et de l'attribuer à des membres spécifiques de votre équipe pour qu'ils en assurent le suivi et la corrigent.
 
-**Remarque** : pour vous aider à prioriser les plus critiques, les vulnérabilités sont traitées automatiquement pour une infrastructure qui n'est plus exécutée ou qui contient la version corrigée du package auparavant vulnérable.
+**Remarque** : pour vous aider à prioriser les plus critiques, les vulnérabilités sont traitées automatiquement lorsqu'une infrastructure n'est plus exécutée ou que le package vulnérable a été corrigé.
 
-{{< img src="security/vulnerabilities/csm_remediate.png" alt="Détails d'une vulnérabilité spécifique, avec les étapes de correction et d'attribution à un membre de l'équipe mises en évidence" width="100%">}}
+{{< img src="security/vulnerabilities/csm_remediate.png" alt="Détails d'une vulnérabilité spécifique, avec les étapes de remédiation et d'attribution à un membre de l'équipe mises en évidence" width="100%">}}
 
 
 [1]: https://app.datadoghq.com/security/csm/vm
 [2]: https://app.datadoghq.com/containers/images
 [3]: https://app.datadoghq.com/security/csm
 [4]: https://app.datadoghq.com/security/infra-vulnerability?query=asset_type%3AHost&group=none
-[5]: /fr/security/application_security/vulnerability_management/
+[5]: /fr/security/application_security/software_composition_analysis/
 [6]: https://www.datadoghq.com/product/infrastructure-monitoring/
 [9]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 
