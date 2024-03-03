@@ -4,10 +4,10 @@ kind: guide
 ---
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Aurora cluster auto discovery is a beta feature. If you have any feedback about this feature, please contact Support at support@datadoghq.com.
+Aurora cluster auto discovery is a beta feature. If you have any feedback about this feature, contact Support at support@datadoghq.com.
 {{< /beta-callout >}}
 
-This guide assumes that you have configured [Database Monitoring][1] for your Aurora hosts.
+This guide assumes that you have configured [Database Monitoring][1] for your Amazon Aurora DB clusters.
 
 ## Before you begin
 
@@ -15,21 +15,68 @@ Supported databases
 : Postgres, MySQL
 
 Supported Agent versions
-: 7.53.0+ (Not currently released)
+: 7.53.0+ (Not yet released)
 
-## Agent Installation
-
-// TODO: Add the installation steps for the beta agent
+In order to use this feature now, you need to install the beta version of the Agent. See the installation instructions below.
 
 ## Overview
 
 The Datadog Agent supports configuring automatic discovery and monitoring of your aurora clusters. This feature works in lieu of manually configuring the Agent by listing individual database host endpoints.
 
-This is helpful for environments where the number of endpoints can be dynamic, such as with clusters that use [Aurora Auto Scaling][6].
+This is helpful for Aurora clusters with [auto-scaling enabled][6], automatically adjusting the number of read replicas in response to workload variations.
 
 This features leverages the Agent [Autodiscovery feature][4] and lets you define configuration templates for Postgres or MySQL checks, and specify which clusters each check should apply to.
 
-## How it works
+## Enabling aurora cluster discovery
+
+The following outlines the different configuration steps to enable aurora cluster discovery in your Datadog Agent.
+
+### Agent installation
+
+To use this feature, you need to install a beta version of the Agent.
+
+The beta version can be found [here][9]. You can use the Agent installation script to install the correct version by running the following command:
+
+```bash
+DD_API_KEY=${API_KEY} DD_SITE="datadoghq.com" \
+DD_AGENT_DIST_CHANNEL=beta DD_AGENT_MAJOR_VERSION=7 \
+DD_AGENT_MINOR_VERSION=52.0~dbm~aurora~autodiscovery~beta~0.3-1 \
+bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+```
+
+For more information on installing the Datadog Agent, please read the following [documentation][10].
+
+### AWS permissions
+
+It's required that the Agent has permission to run `rds:DescribeDBClusters` and `rds:DescribeDBInstances` in your AWS account. The recommended way to do this, is to attach an IAM role policy to the EC2 instance where the Agent is running.
+
+An example policy that grants the required permissions is:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "rds:DescribeDBClusters",
+        "rds:DescribeDBInstances"
+      ],
+      "Resource": "arn:aws:rds:<region>:<account>:cluster:<name>"
+    }
+  ]
+}
+```
+
+You can also attach the [AmazonRDSReadOnlyAccess][3] policy.
+
+### Configure aurora
+
+By default, the listener discovers all aurora clusters in the account and region where the Agent is running that have the `datadoghq.com/scrape:true` tag applied. You can also configure the Agent to discover clusters with specific tags.
+
+The tags must be applied to the DB cluster (Role: `Regional clutser`). For more information on tagging RDS resources, see the [AWS documentation][7].
+
+### Configure the Datadog Agent
 
 This utilizes an Agent service listener, responsible for discovering all database host endpoints in an aurora cluster and forwarding discovered endpoints to the existing Agent check scheduling pipeline. You can configure the listener in the `datadog.yaml` file:
 
@@ -40,7 +87,19 @@ database_monitoring:
       enabled: true
 ```
 
-By default, the listener will discover all aurora clusters in the account and region where the Agent is running that have the `datadoghq.com/scrape:true` tag applied. You can also configure the listener to discover clusters with specific tags.
+**Note**: The Agent only discovers Aurora instances running in the same region as the Agent. In order to discover the region, the Agent uses [IMDS (Instance Metadata Service)][8] to determine the region where it is running. If your Ec2 instance requires `IMDSv2`, you need to configure the Agent to use `IMDSv2` by setting `ec2_prefer_imdsv2: true` in the `datadog.yaml`.
+
+Specify IMDSv2 in the `datadog.yaml` file:
+
+```yaml
+ec2_prefer_imdsv2: true
+database_monitoring:
+  autodiscovery:
+    aurora:
+      enabled: true
+```
+
+By default, the listener discovers all aurora clusters in the account and region where the Agent is running that have the `datadoghq.com/scrape:true` tag applied. You can also configure the listener to discover clusters with specific tags.
 
 Specify custom tags for the aurora cluster discovery in the `datadog.yaml` file:
 
@@ -63,58 +122,11 @@ database_monitoring:
       discovery_interval: 300
 ```
 
-## Enabling aurora cluster discovery
+### Create a configuration template
 
-### Prerequisites
+The Datadog Agent supports configuration templates for the Postgres and MySQL integrations. You can define a configuration template for the Aurora clusters you wish to monitor.
 
-It's required that the Agent has permission to run `rds:DescribeDBClusters` and `rds:DescribeDBInstances` in your AWS account. The recommended way to do this, is to attach an IAM role policy to the EC2 instance where the Agent is running.
-
-An example policy that grants the required permissions is:
-
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "rds:DescribeDBClusters",
-        "rds:DescribeDBInstances"
-      ],
-      "Resource": "*"
-    }
-  ]
-}
-```
-
-You can also attach the [AmazonRDSReadOnlyAccess][3] policy.
-
-### Configure the Agent
-
-To enable aurora cluster discovery, add the following to your `datadog.yaml` file:
-
-```yaml
-database_monitoring:
-  autodiscovery:
-    aurora:
-      enabled: true
-```
-
-This will enable the Agent to automatically discover and monitor Aurora instances with the tag `datadoghq.com/scrape:true` applied to the Regional cluster. If you wish to apply a different tag, or set of tags, to the cluster you can specify it in the `datadog.yaml` file:
-
-```yaml
-database_monitoring:
-  autodiscovery:
-    aurora:
-      enabled: true
-      tags:
-        - "cluster:foo"
-        - "env:prod"
-```
-
-The above configuration will discover all aurora clusters with the tags `cluster:foo` and `env:prod` applied to the Regional cluster.
-
-### Postgres
+#### Postgres
 
 In order to enable aurora cluster discovery for the postgres integration, you need to add the postgres aurora `ad_identifier` to your configuration template (`postgres.d/conf_aws_aurora.yaml`) file:
 
@@ -123,7 +135,7 @@ ad_identifiers:
   - _dbm_postgres_aurora
 ```
 
-**Example**: The following configuration template will be applied to every instance discovered in the aurora cluster:
+**Example**: The following configuration template is applied to every instance discovered in the aurora cluster:
 
 ```yaml
 ad_identifiers:
@@ -169,7 +181,7 @@ instances:
 
 The template variable `%%extra_managed_authentication_enabled%%` will be set to `true` if the instance is using IAM authentication.
 
-### MySQL
+#### MySQL
 
 In order to enable aurora cluster discovery for the mysql integration, you need to add the mysql aurora `ad_identifier` to your configuration template (`mysql.d/conf_aws_aurora.yaml`) file:
 
@@ -200,7 +212,7 @@ instances:
 
 For more information on Integrations Autodiscovery and how to configure it, see the [Autodiscovery documentation][5].
 
-### Supported template variables
+#### Supported template variables
 
 The following documentation lists the supported template variables for the aurora cluster discovery:
 
@@ -222,3 +234,7 @@ The following documentation lists the supported template variables for the auror
 [4]: /getting_started/containers/autodiscovery/?tab=adannotationsv2agent736
 [5]: /containers/docker/integrations/?tab=dockeradv2
 [6]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Integrating.AutoScaling.html
+[7]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html#Tagging.HowTo
+[8]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
+[9]: https://yum.datadoghq.com/beta/7/x86_64/datadog-agent-7.52.0~dbm~aurora~autodiscovery~beta~0.3-1.x86_64.rpm
+[10]: https://docs.datadoghq.com/agent/basic_agent_usage/amazonlinux/?tab=agentv6v7
