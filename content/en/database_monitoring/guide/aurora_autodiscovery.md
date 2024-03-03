@@ -109,7 +109,7 @@ database_monitoring:
     aurora:
       enabled: true
       tags:
-        - "my-cluster-tag"
+        - "my-cluster-tag-key:value"
 ```
 
 The listener queries the AWS API for the list of hosts in a loop. The frequency with which the listener queries the AWS API, in seconds, is configurable in the `datadog.yaml` file:
