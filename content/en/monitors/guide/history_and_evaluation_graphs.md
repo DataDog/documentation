@@ -13,19 +13,19 @@ further_reading:
 
 ## Overview
 
-The [Monitor Status page][1] gives you an overview of the data your monitor is evaluating. It displays visualizations of the history of the monitor state changes in the History Graph. And displays visualizations of the monitor data with configured aggregations over a specific evaluation window in the Evaluation Graph. Both provide insights on your monitor data, however, the graphs are different and this guide covers:
-- [What is a history graph and evaluation graph](#evaluation-vs-history-graph)
-- [Why the two graphs are displaying different information](#why-are-the-graphs-different)
-- [Ways to replicate the Evaluation Graph result outside of the Monitor](#troubleshooting-evaluation-graph-values)
+The [Monitor Status page][1] contains two graphs, the History Graph and Evaluation Graph, that provide insight into monitor evaluations. This guide covers:
+- [Defining the history graph and evaluation graph](#evaluation-vs-history-graph)
+- [Which values the two graphs display](#why-are-the-graphs-different)
+- [Replicating the Evaluation Graph result outside of a monitor](#troubleshooting-evaluation-graph-values)
 
 
 ## Evaluation vs. History graph
 
 History Graph
-: History graph shows the raw data points being submitted for the metric query in the monitor; the monitor status page uses the same graph widget in notebooks or a dashboard.
+: Shows the raw data points being submitted for the monitor query. The monitor status page uses the same graph widget in notebooks and dashboards.
 
 Evaluation Graph
-: This graph shows results from the raw data points of a metric applied against the user defined alert conditions. This shows the data after it has been aggregated, so it is like looking at the result of a query value widget for each data point.
+: Shows results from the raw data points of a metric applied against the user defined alert conditions. This graph's data have been aggregated and reduced due to the evaluation window, so the query results are similar to the query value widget for each data point.
 
 When you submit your raw data points to Datadog for monitoring, this information is visualized in the history graph. For example, you have the following data points over the past 5 minutes: [10, 15, 12, 8, 11]. The history graph shows each value.
 
