@@ -19,6 +19,8 @@ Datadog integrations are configured through the Datadog Agent using YAML configu
 
 If an integration that you've configured is not showing up in Datadog, run the [`status` CLI command][2] and look for the integration under the *Running Checks* heading.
 
+**Note:** Non-core integrations such as those built by partners or community members are not retained when the Agent is upgraded. Please be mindful that these integrations need to be re-installed upon upgrading the Agent version.
+
 If the integration is listed under **Running Checks**, but is not visible in the Datadog app:
 1. Make sure there are no errors or warnings listed under the integration's entry in the `status` output.
 1. Check the [Metrics Explorer][3] to see if system metrics are showing up from the host. For example, on the host where you configured the integration, look for `system.cpu.user`.
