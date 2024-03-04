@@ -788,7 +788,7 @@
         "tags": [
           "AWS Accounts"
         ],
-        "summary": "Add AWS account",
+        "summary": "Add an AWS account",
         "description": "Register a new AWS account with Cloudcraft.\n\nThe body of the request should contain the account properties in JSON format. The response will contain the created account object, including the newly assigned ID for use with other API endpoints.\n\nProperties\n==========\n- **name**: A human-readable name for the AWS account. For example \"Production\" or \"Staging\".\n- **roleArn**: The ARN of the read-only IAM role you've created in your AWS account for Cloudcraft. The IAM role must be created with the unique external ID value of the person who generated the API key being used. \n- **region**: Optional property representing the AWS region to be used for account validation. By default, the account will be validated in the us-east-1 region. \n\nResponses\n=========\n- **201 Created on success**\n- 401 Unauthorized\n- 403 Forbidden, insufficient privileges",
         "operationId": "addAwsAccount",
         "requestBody": {
@@ -1596,12 +1596,12 @@
         "tags": [
           "Users"
         ],
-        "summary": "Get my information",
-        "description": "Retrieve your own user profile.\n\nResponses\n=========\n- **200 OK on success**\n- 401 Unathorized",
+        "summary": "Get user profile",
+        "description": "Retrieve your user profile.\n\nResponses\n=========\n- **200 OK**\n- 401 Unauthorized",
         "operationId": "getMyInformation",
         "responses": {
           "200": {
-            "description": "Get my information",
+            "description": "OK",
             "headers": {
               "Cache-Control": {
                 "schema": {
