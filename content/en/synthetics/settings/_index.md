@@ -94,7 +94,7 @@ For more information, see [Connect Synthetics and APM Traces][15].
 
 To allow Datadog to collect RUM data from your test runs, click **Enable Synthetic RUM data collection**. If disabled, you cannot edit RUM settings in the browser test recorder. To apply changes, click **Save RUM Data Collection**.
 
-Select a RUM application from the **Default Application** dropdown menu that collects browser test data. When you are done specifying a default application, click **Save RUM Data Applications**.
+Select a default application for new browser tests to send data. Use the **Default Application** dropdown menu to select a RUM application that collects browser test data. To apply changes, click **Save RUM Data Applications**.
 
 For more information, see [Explore RUM & Session Replay][14].
 
