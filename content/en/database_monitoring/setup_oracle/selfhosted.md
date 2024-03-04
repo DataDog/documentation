@@ -6,7 +6,6 @@ further_reading:
 - link: "/integrations/oracle/"
   tag: "Documentation"
   text: "Basic Oracle Integration"
-
 ---
 
 {{< site-region region="gov" >}}
@@ -35,7 +34,7 @@ Data security considerations
 
 ## Setup
 
-Complete the following setup steps to enable Database Monitoring with your Oracle database:
+Complete the following to enable Database Monitoring with your Oracle database:
 
 1. [Create the user](#create-the-user)
 1. [Grant the Agent access to the database](#grant-the-agent-access-to-the-database)
@@ -43,10 +42,11 @@ Complete the following setup steps to enable Database Monitoring with your Oracl
 1. [Install the Agent](#install-the-agent)
 1. [Configure the Agent](#configure-the-agent)
 1. [Install or verify the Oracle integration](#install-or-verify-the-oracle-integration)
+1. [Validate the setup](#validate-the-setup)
 
 ### Create the user
 
-If you installed the legacy Oracle integration, skip this step, because the user already exists.
+If you already have the Oracle integration installed, skip this step, because the user already exists.
 
 Create a read-only login to connect to your server and grant the required permissions:
 
@@ -144,32 +144,19 @@ instances:
 ```
 
 The Agent connects only to the root multitenant container database (CDB). It queries the information about PDB while connected to the root CDB. Don't create connections to individual PDBs.
-
-Once all Agent configuration is complete, [restart the Datadog Agent][1].
-
-[1]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 
 {{% tab "Non-CDB" %}}
 {{% dbm-oracle-selfhosted-config %}}
-
-Once all Agent configuration is complete, [restart the Datadog Agent][1].
-
-[1]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 
 {{% tab "Oracle 11" %}}
 {{% dbm-oracle-selfhosted-config %}}
 
-Once all Agent configuration is complete, [restart the Datadog Agent][1].
-
-[1]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Validate
-
-[Run the Agent's status subcommand][1] and look for `oracle-dbm` under the **Checks** section. Navigate to the [Dashboard][2] and [Databases][3] page in Datadog to get started.
+Once all Agent configuration is complete, [restart the Datadog Agent][9].
 
 ### Install or verify the Oracle integration
 
@@ -181,19 +168,25 @@ On the Integrations page in Datadog, install the [Oracle integration][7] for you
 
 {{% dbm-existing-oracle-integration-setup %}}
 
+### Validate the setup
+
+[Run the Agent's status subcommand][8] and look for `oracle-dbm` under the **Checks** section. Navigate to the [Dashboard][2] and [Databases][3] page in Datadog to get started.
+
 ## Custom queries
 
 Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][4] to learn more about the configuration options available.
 
 <div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
 
-[1]: /agent/configuration/agent-commands/#agent-status-and-information
+[1]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [2]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [3]: https://app.datadoghq.com/databases
 [4]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
 [5]: /database_monitoring/data_collected/#sensitive-information
 [6]: /agent/basic_agent_usage#agent-overhead
 [7]: https://app.datadoghq.com/integrations/oracle
+[8]: /agent/configuration/agent-commands/#agent-status-and-information
+[9]: /agent/guide/agent-commands/#start-stop-and-restart-the-agent
 
 ## Further reading
 

@@ -15,13 +15,7 @@ further_reading:
 
 {{% dbm-oracle-definition %}}
 
-The Agent collects telemetry directly from the database by logging in as a read-only user. Complete the following setup steps to enable Database Monitoring with your Oracle database:
-
-1. [Create the user](#create-the-user)
-1. [Grant the Agent access to the database](#grant-the-agent-access-to-the-database)
-1. [Install the Agent](#install-the-agent)
-1. [Configure the Agent](#configure-the-agent)
-1. [Install or verify the Oracle integration](#install-or-verify-the-oracle-integration)
+The Agent collects telemetry directly from the database by logging in as a read-only user. 
 
 ## Before you begin
 
@@ -39,11 +33,21 @@ Proxies, load balancers, and connection poolers
 Data security considerations
 : See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
-## 1. Create the user
+## Setup
+
+Complete the following to enable Database Monitoring with your Oracle database:
+
+1. [Create the user](#create-the-user)
+1. [Grant the Agent access to the database](#grant-the-agent-access-to-the-database)
+1. [Install the Agent](#install-the-agent)
+1. [Configure the Agent](#configure-the-agent)
+1. [Install or verify the Oracle integration](#install-or-verify-the-oracle-integration)
+
+### 1. Create the user
 
 {{% dbm-create-oracle-user %}}
 
-## 2. Grant the Agent access to the database 
+### 2. Grant the Agent access to the database 
 
 ```SQL
 grant create session to datadog ;
@@ -83,13 +87,13 @@ grant select on cdb_data_files to datadog;
 grant select on dba_data_files to datadog;
 ```
 
-## 3. Install the Agent
+### 3. Install the Agent
 
 See the [DBM Setup Architecture][10] documentation to determine where to install the Agent. The Agent doesn't require any external Oracle clients.
 
 For installation steps, see the [Agent installation instructions][8].
 
-## 4. Configure the Agent
+### 4. Configure the Agent
 
 Download the wallet zip file from the Oracle Cloud and unzip it.
 
@@ -124,17 +128,17 @@ instances:
 
 After all Agent configuration is complete, [restart the Datadog Agent][4].
 
-### Validate
+#### Validate
 
 [Run the Agent's status subcommand][5] and look for `oracle-dbm` under the **Checks** section. Navigate to the [DBM Oracle Database Overview][7] dashboard and [Databases][6] page in Datadog to get started.
 
-## 5. Install or verify the Oracle integration
+### 5. Install or verify the Oracle integration
 
-### First-time installations
+#### First-time installations
 
 On the Integrations page in Datadog, install the [Oracle integration][9] for your organization. This installs an [Oracle dashboard][10] in your account that can be used to monitor the performance of your Oracle databases.
 
-### Existing installations
+#### Existing installations
 
 {{% dbm-existing-oracle-integration-setup %}}
 
