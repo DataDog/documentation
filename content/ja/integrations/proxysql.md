@@ -39,7 +39,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: proxysql
-oauth: {}
 public_title: ProxySQL
 short_description: ProxySQLメトリクスとログを収集。
 supported_os:

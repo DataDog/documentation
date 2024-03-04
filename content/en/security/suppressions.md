@@ -47,9 +47,9 @@ The [suppression list][3] provides a centralized and organized way for you to ma
 1. Optionally, add an expiration date on which this suppression will be deactivated.
 1. Select the detection rules you want to apply this suppression to. You can select multiple detection rules.
 1. In the **Add Suppression Query** section, you have the option to enter suppression queries so that a signal is not generated when the values are met. For example, if a user `john.doe` is triggering a signal, but their actions are benign and you no longer want signals triggered from this user, input the log query: `@user.username:john.doe`.
-
 {{< img src="security/security_monitoring/suppressions/suppression_query.png" alt="The add suppression query with the query @user.username:john.doe" style="width:65%;" >}}
-
+  **Note**: Suppression rule queries are based on signal attributes. If the query value you want to use is not a signal attribute, you have to add it as a facet in Log Explorer. See [Log side panel][5] on how to create a facet.
+  
 ## Migrate legacy suppression queries to suppression rules
 
 <div class="alert alert-warning">The legacy suppression queries will be deprecated on April 1, 2024.</div>
@@ -75,3 +75,4 @@ To see a list of rules using the legacy suppression query and to migrate them:
 [2]: /security/detection_rules/
 [3]: https://app.datadoghq.com/security/configuration/suppressions
 [4]: https://app.datadoghq.com/security/rules
+[5]: /logs/explorer/facets/#log-side-panel

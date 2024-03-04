@@ -43,9 +43,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
   tag: ブログ
   text: Datadog で Azure App Service 上の Linux Web アプリを監視する
+- link: https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/
+  tag: ブログ
+  text: Datadog API カタログで API のパフォーマンス、セキュリティ、所有権を管理する
 - link: https://dtdg.co/fe
-  tag: Foundation Enablement
-  text: APM の理解を深めるためのインタラクティブなセッションに参加できます
+  tag: 基盤の活用
+  text: APM の理解を深めるためのインタラクティブなセッションにご参加ください
 kind: documentation
 title: APM
 ---
@@ -58,7 +61,7 @@ Datadog Application Performance Monitoring (APM) は、Web サービス、キュ
 
 Datadog APM で使用される用語の紹介は、[APM の用語と概念][1]を参照してください。
 
-## Datadog へトレースを送信
+## はじめに
 
 モノリスからマイクロサービスに移行すると、ホスト、コンテナ、またはサーバーレス関数全体の Datadog APM の設定に数分しかかかりません。
 
@@ -66,9 +69,9 @@ Datadog APM で使用される用語の紹介は、[APM の用語と概念][1]�
 <strong>ベータ版: シングルステップ APM インスツルメンテーション</strong> - Datadog Agent のインストール時に APM インスツルメンテーションを有効にして、アプリケーションパフォーマンスモニタリングを素早く開始することができます。このオプションは、コードを変更することなく、自動的にサービスをインスツルメンテーションします。詳細については、<a href="/tracing/trace_collection/single-step-apm">シングルステップ APM インスツルメンテーション</a>をお読みください。
 </div>
 
-**始めるには[トレースを Datadog に送信する][2]をお読みください。**
+**[アプリケーションインスツルメンテーション][2]を読んで、Datadog APM を使い始めましょう。**
 
-[プロキシのトレース][3]、[AWS Lambda 関数][4]のトレース、自動インスツルメンテーションやカスタムインスツルメンテーションの使用、[OpenTelemetry][5] によるインスツルメンテーションなど、環境と言語に合わせて Datadog トレーシングライブラリを追加します。
+[プロキシのトレース][3]、[AWS Lambda 関数][4]のトレース、[自動インスツルメンテーション][17]や[カスタムインスツルメンテーション][18]の使用など、環境と言語に合わせて Datadog トレーシングライブラリを追加します。
 
 ## Datadog に流入するデータ、Datadog が保持するデータの制御と管理
 
@@ -84,7 +87,7 @@ Datadog APM で使用される用語の紹介は、[APM の用語と概念][1]�
 
 {{< img src="tracing/index/SpantoMetricsPreview.png" alt="取り込んだスパンからカスタムメトリクスを生成する" style="width:100%;">}}
 
-## トレースと他のテレメトリーとの連携
+## トレースを他のテレメトリーと相関付ける
 
 [アプリケーションログ][9]と、自動トレース ID 挿入による単一の分散リクエストのトレースを並べて表示することができます。[実際のユーザーセッション][10]とトレースをリンクさせ、ユーザーの経験や報告された問題に対応する正確なトレースを確認することができます。フロントエンド、ネットワーク、バックエンドのリクエストにまたがる障害の根本原因を見つけるために、トレースと[シミュレーションテストのリンク][11]を行います。
 
@@ -137,3 +140,5 @@ CPU、メモリ、または I/O を最も多く消費するコード行を特定
 [14]: /ja/tracing/services/service_page/
 [15]: /ja/tracing/services/deployment_tracking/
 [16]: /ja/profiler/
+[17]: /ja/tracing/trace_collection/automatic_instrumentation/
+[18]: /ja/tracing/trace_collection/custom_instrumentation/

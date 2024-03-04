@@ -24,12 +24,11 @@ draft: false
 git_integration_title: pdh_check
 integration_id: pdh
 integration_title: PDH Check
-integration_version: 1.16.1
+integration_version: 2.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: pdh_check
-oauth: {}
 public_title: PDH Check
 short_description: Windows のパフォーマンスカウンターを収集およびグラフ化。
 supported_os:
@@ -92,7 +91,7 @@ PDH チェックには、サービスのチェック機能は含まれません�
 ご不明な点は、[Datadog のサポートチーム][9]までお問い合わせください。
 
 [1]: https://docs.datadoghq.com/ja/integrations/windows_performance_counters/
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://docs.datadoghq.com/ja/agent/guide/agent-configuration-files/#agent-configuration-directory
 [4]: https://github.com/DataDog/integrations-core/blob/master/pdh_check/datadog_checks/pdh_check/data/conf.yaml.example
 [5]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#restart-the-agent

@@ -90,7 +90,7 @@ These traces are retained for 15 days with the `Synthetics Default` retention fi
 [2]: /synthetics/multistep?tab=requestoptions
 [3]: /synthetics/browser_tests/
 [4]: /tracing/
-[5]: https://app.datadoghq.com/synthetics/settings/default
+[5]: https://app.datadoghq.com/synthetics/settings/integrations
 [6]: /tracing/trace_collection/dd_libraries/python/
 [7]: https://github.com/DataDog/dd-trace-py/releases/tag/v0.50.4
 [8]: /tracing/trace_collection/dd_libraries/go/

@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Cases can be created [manually](#manual-case-creation) or [automatically](#automatic-case-creation) from across Datadog. There are two types of cases: standard and security. Cases created from security signals and Sensitive Data Scanner are automatically made security cases. The security case type has all the features of the standard case type, along with a mandatory field for specifying the reason for closing a case (testing, false positive, or one time exception). 
+Cases can be created [manually](#manual-case-creation), [automatically](#automatic-case-creation) from across Datadog, or [programmatically](#api) with the API. There are two types of cases: standard and security. Cases created from security signals and Sensitive Data Scanner are automatically made security cases. The security case type has all the features of the standard case type, along with a mandatory field for specifying the reason for closing a case (testing, false positive, or one time exception). 
 
 ## Manual case creation
 
@@ -39,9 +39,15 @@ You can also create cases manually from the following products:
 Configure the following products to automatically create cases:
 | Product | Instructions    | 
 | ------  | ----------- | 
-| Monitors | When creating a monitor, include `@case-{project_handle}` in the **Notify your team** or  **Say what's happening** section. Cases are automatically created when the monitor transitions to a different status. To only create cases for certain monitor transitions, use [conditional variables][3]. As an example, to create cases only when a monitor triggers, wrap the `@case` mention with `{{#is_alert}}` and `{{/is_alert}}`.  <br><br> Navigate to the [Project Settings page][4], click **Integrations** > **Datadog Monitors**, and click on the toggle to get your @case-<project_handle>. |
+| Monitors | Navigate to the [Project Settings page][4], click **Integrations** > **Datadog Monitors**, and click on the toggle to get your @case-<project_handle>. <br><br> When creating a monitor, include `@case-{project_handle}` in the **Notify your team** or **Say what's happening** section. Cases are automatically created when the monitor transitions to a different status. To only create cases for certain monitor transitions, use [conditional variables][3]. As an example, to create cases only when a monitor triggers, wrap the `@case` mention with `{{#is_alert}}` and `{{/is_alert}}`. |
 | Event Management (Correlations) | In Event Management, correlations configured to aggregate events from Datadog and third-party sources automatically create cases.   |
 | Workflow Automation | 1. In a new or existing workflow, add a step in the Workflow builder and search for "Case Management."<br> 2. Select the **Create Case** action.<br> 3. If the workflow is configured to run based on a monitor or security signal trigger, add the workflow handle to the desired resources.|
+
+## API
+
+Create a case through the [API endpoint][5]. 
+
+**Note**: This endpoint requires the `cases_write` authorization scope.
 
 ## Further Reading
 
@@ -51,3 +57,4 @@ Configure the following products to automatically create cases:
 [2]: /monitors/manage/status/
 [3]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [4]: https://app.datadoghq.com/cases/settings
+[5]: /api/latest/case-management/#create-a-case

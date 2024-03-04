@@ -41,7 +41,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: launchdarkly
-oauth: {}
 public_title: LaunchDarkly
 short_description: Contrôlez en toute confiance la publication de vos fonctionnalités
   et les changements d'infrastructure.

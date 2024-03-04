@@ -25,7 +25,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14, 15
+: 9.6, 10, 11, 12, 13, 14, 15, 16
 
 Supported Agent versions
 : 7.36.1+
@@ -242,8 +242,8 @@ To configure collecting Database Monitoring metrics for an Agent running on a ho
    ssl: allow
    ```
 
-   If you want to authenticate with IAM, set the `region` and `instance_endpoint` parameters. 
-   
+   If you want to authenticate with IAM, set the `region` and `instance_endpoint` parameters.
+
    **Note**: only set the `region` parameter if you want to use IAM authentication. IAM authentication takes precedence over the `password` field.
 
    ```yaml

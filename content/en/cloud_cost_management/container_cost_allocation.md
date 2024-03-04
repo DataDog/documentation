@@ -71,19 +71,32 @@ The information on this page pertains to EC2 compute and EBS costs for EC2 insta
 
 ## Understanding spend
 
-Using the `allocated_spend_type` tag, you can visualize the spend category associated with your cost at the Kubernetes node, ECS host, EBS volume, or cluster level. Costs are allocated into three spend types:
+Using the `allocated_spend_type` tag, you can visualize the spend category associated with your cost at the Kubernetes node, ECS host, EBS volume, or cluster level. Costs are allocated into different spend types:
+
+| Spend type | Description    |
+| -----------| -----------    |
+| Managed service fee | Cost of associated fees charged by the provider for managing the cluster, such as EKS fees. |
+| Usage | Cost of resources used by workloads. |
+| Workload idle | Cost of resources that are reserved and allocated but not used by workloads. |
+| Cluster idle | Cost of resources that are not reserved by workloads in a cluster. |
 
 ### Compute
 
-- Usage: Cost of memory and cpu being used or reserved by workloads.
-- Workload idle: Cost of memory and cpu that is being reserved and allocated but not used by workloads.
-- Cluster idle: Cost of memory and cpu not reserved by workloads in a cluster.
+The cost of an EC2 instance is split into two components: 60% for the CPU and 40% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
+
+- Usage: Cost of memory and CPU used by workloads, based on the average usage on that day.
+- Workload idle: Cost of memory and CPU that is being reserved and allocated but not used. This is the difference between the total resources requested and the average usage.
+- Cluster idle: Cost of memory and CPU not reserved by workloads in a cluster. This is the difference between the total cost of the resources and what is allocated to workloads.
 
 ### Persistent volumes
+
+The cost of an EBS volume has three components: IOPS, throughput, and storage. Each is allocated according to a pod's usage when the volume is mounted.
 
 - Usage: Cost of provisioned IOPS, throughput, or storage being used by workloads. Storage cost is based on the maximum amount of volume storage used that day. IOPS and throughput costs are based on the average amount used that day.
 - Workload idle: Cost of provisioned IOPS, throughput, or storage not being used by workloads. Storage cost is based on the maximum amount of storage used that day. IOPS and throughput costs are based on the average amount used that day. *Note: This tag is only available if you have enabled `Resource Collection` in your [**AWS Integration**][9]. To prevent being charged for `Cloud Security Posture Management`, ensure that during the `Resource Collection` setup, the `Cloud Security Posture Management` box is unchecked.*
 - Cluster idle: Cost of provisioned IOPS, throughput, or storage for volumes not claimed by any pods that day.
+
+**Note**: Persistent volume allocation is only supported in Kubernetes clusters.
 
 ## Cost metrics
 
@@ -93,10 +106,6 @@ When the prerequisites are met, new AWS cost metrics automatically appear.
 | ---                                | ----------- |
 | `aws.cost.amortized.shared.resources.allocated` | EC2 costs allocated by the CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively. Also includes allocated EBS costs. <br> *Based on `aws.cost.amortized`* |
 | `aws.cost.net.amortized.shared.resources.allocated` | Net EC2 costs allocated by CPU & memory used by a pod or ECS task, using a 60:40 split for CPU & memory respectively. Also includes allocated EBS costs. <br> *Based on `aws.cost.net.amortized`, if available* |
-| `aws.cost.amortized.mem.allocated`   | EC2 costs allocated by memory used by a pod or ECS task. <br> *Based on `aws.cost.amortized`* |
-| `aws.cost.net.amortized.mem.allocated` | Net EC2 costs allocated by memory used by a pod or ECS task <br> *Based on `aws.cost.net.amortized`, if available* |
-| `aws.cost.amortized.cpu.allocated` | EC2 costs allocated by CPU used by a pod or ECS task <br> *Based on `aws.cost.amortized`* |
-| `aws.cost.net.amortized.cpu.allocated` | Net EC2 costs allocated by CPU used by a pod or ECS task <br> *Based on `aws.cost.net.amortized`, if available* |
 
 These new cost metrics include all of your AWS cloud costs. This allows you to continue visualizing all of your cloud costs at one time, with added visibility into pods and tasks running on EC2 instances.
 
@@ -112,14 +121,14 @@ Datadog consolidates and applies additional tags from various sources to cost me
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------  |
 | `orchestrator:kubernetes`                  | The orchestration platform associated with the item is Kubernetes.                                                                                            |
 | `orchestrator:ecs`                         | The orchestration platform associated with the item is ECS.                                                                                                   |
-| `allocated_spend_type:usage`               | Cost of resources used by a workload. *Only available for `.shared.resources.allocated` metrics.*                            |
-| `allocated_spend_type:workload_idle`       | Cost of resources reserved and allocated by a workload, but not used. *Only available for `.shared.resources.allocated` metrics.*          |
-| `allocated_spend_type:cluster_idle`        | Cost of resources that are not reserved or used by any workload. *Only available for `.shared.resources.allocated` metrics.* |
-| `allocated_spend_type:managed_service_fee` | Cost of cloud provider managed service fees. *Only available for `.shared.resources.allocated` metrics.*                           |
-| `allocated_resource:cpu`                   | Cost of CPU resources. *Only available for `.shared.resources.allocated` metrics.*                                            |
-| `allocated_resource:memory`                | Cost of Memory resources. *Only available for `.shared.resources.allocated` metrics.*                                         |
-| `allocated_resource:managed_service_fee`   | Cost of cloud provider managed service fees. *Only available for `.shared.resources.allocated` metrics.*           |
-| `allocated_resource:persistent_volume`     | Cost of non-local EBS volumes used as Persistent Volumes in Kubernetes. *Only available for `.shared.resources.allocated` metrics.*           |
+| `allocated_spend_type:usage`               | Cost of resources used by a workload. |
+| `allocated_spend_type:workload_idle`       | Cost of resources reserved and allocated by a workload, but not used. |
+| `allocated_spend_type:cluster_idle`        | Cost of resources that are not reserved or used by any workload. |
+| `allocated_spend_type:managed_service_fee` | Cost of cloud provider managed service fees. |
+| `allocated_resource:cpu`                   | Cost of CPU resources. |
+| `allocated_resource:memory`                | Cost of Memory resources. |
+| `allocated_resource:managed_service_fee`   | Cost of cloud provider managed service fees. |
+| `allocated_resource:persistent_volume`     | Cost of non-local EBS volumes used as Persistent Volumes in Kubernetes. |
 
 ### Kubernetes
 
@@ -128,8 +137,6 @@ In addition to Kubernetes pod and Kubernetes node tags, the following out-of-the
 | Out-of-the-box tag  |  Description |
 | ---                 | ------------ |
 | `kube_cluster_name` | The name of the Kubernetes cluster. |
-| `is_kubernetes`     | All EC2 compute costs associated with running Kubernetes nodes. *Only available for `.cpu.allocated` or `.mem.allocated` metrics.* |
-| `is_cluster_idle`   | The cost of unreserved CPU or memory on Kubernetes nodes. *Only available for `.cpu.allocated` or `.mem.allocated` metrics.*|
 
 ### ECS
 
@@ -141,7 +148,6 @@ In addition to ECS task tags, the following out-of-the-box tags are applied to c
 | `is_aws_ecs`            | All costs associated with running ECS. |
 | `is_aws_ecs_on_ec2`     | All EC2 compute costs associated with running ECS on EC2. |
 | `is_aws_ecs_on_fargate` | All costs associated with running ECS on Fargate. |
-| `is_cluster_idle`       | The cost of unreserved CPU or memory on EC2 instances running ECS tasks. *Only available for `.cpu.allocated` or `.mem.allocated` metrics.*|
 
 ### Persistent volumes
 

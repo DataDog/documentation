@@ -1,8 +1,7 @@
 ---
 categories:
 - コラボレーション
-- ネットワーク
-- 通知
+- notifications
 dependencies: []
 description: Microsoft Teams で Datadog アラートとイベントの通知を受信
 doc_link: https://docs.datadoghq.com/integrations/microsoft_teams/
@@ -21,6 +20,7 @@ short_description: Microsoft Teams で Datadog アラートとイベントの通
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Microsoft Teams と統合して、以下のことができます。
@@ -53,10 +53,6 @@ Datadog モニターから、[`@-notification` 機能][2]を使用して、Micro
 
 ## Microsoft Teams における Datadog Incident Management
 
-<div class="alert alert-warning">
-Datadog Incident Management for Microsoft Teams は公開ベータ版で、US1 サイトでのみ利用可能です。
-</div>
-
 ### アカウント設定
 
 まず、Microsoft Teams に Datadog アプリをインストールします。
@@ -74,10 +70,12 @@ Datadog Incident Management for Microsoft Teams は公開ベータ版で、US1 �
 2. **Add Account** をクリックすると、Microsoft に移動します。
 3. 画面の指示に従って、**OK** をクリックします。
 
-Datadog Incident Management の機能の中には、インシデントごとに新しいチームを作成するなど、テナント上でアクションを実行するものがあり、権限が必要になります。Datadog がこれらのアクションを実行することを認可するには、*Global Admin* ロールを持つ人が次のステップを完了する必要があります。
+Datadog Incident Management の一部の機能では、テナント上でアクションを実行するための権限が必要です。たとえば、インシデント用の新しいチームを作成する場合などです。テナント全体に対する管理者の同意を得るには、Microsoft 組織を代表して同意を与える権限を持つ人物が必要です。例えば、*Global Admin* ロールが割り当てられたユーザーが該当します。Datadog アプリケーションにテナント全体に対する管理者の同意を付与できる人物についての詳細は、[Microsoft Entra ID ドキュメント][3]をご覧ください。
 
-1. Datadog で、[Microsoft Teams Integration Tile][1] に移動します。
-2. **Authorize** をクリックすると、Microsoft に移動します。
+同意を付与するには
+
+1. Datadog で [Microsoft Teams インテグレーションタイル][1]に移動します。
+2. **Authorize** をクリックすると Microsoft にリダイレクトされます。この手順を実行するには、テナント全体に対する管理者同意を与えることができるユーザーが必要です。Microsoft のユーザーが Datadog のアカウントを持っている必要はありません。
 3. 画面の指示に従って、**OK** をクリックします。
 
 ### ユーザー設定
@@ -97,14 +95,12 @@ Microsoft Teams からアカウントを接続するには
 7. [Microsoft Teams Integration Tile][1] のプロンプトで **Create** をクリックし、アプリケーションキーを作成します。
 
 
-
 Datadog からアカウントを接続することも可能です。
 
 1. Datadog で、[Microsoft Teams Integration Tile][1] に移動します。
 2. 表示されたテナントの中から、**Connect** をクリックします。
 3. 画面の指示に従って、**OK** をクリックします。
-4. [Microsoft Teams Integration Tile][1] へと戻ります。
-5. 上記のプロンプトで **Create** をクリックし、アプリケーションキーを作成します。
+5. [Microsoft Teams インテグレーションタイル][1]から、上記のプロンプトで **Create** をクリックしてアプリケーションキーを作成します。
 
 {{< img src="integrations/microsoft_teams/microsoft_teams_connect_account_from_datadog_v2.png" alt="Datadog Microsoft Teams インテグレーションタイルからアカウントを接続します" >}}
 
@@ -150,7 +146,7 @@ Microsoft Teams アプリがインストールされたら、**Incident Settings
 
 #### インシデントチャンネルの設定方法
 
-1. [Incidents Settings][3] に移動します。
+1. [Incidents Settings][4] に移動します。
 2. Microsoft Teams インテグレーションの **Incident Updates Channel** セクションを探します。
 3. インシデントアップデートのために、正しいテナント、チーム、チャンネルを選択します。
 
@@ -170,7 +166,20 @@ Microsoft Teams インテグレーションには、イベントは含まれま�
 
 Microsoft Teams インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
+
+Datadog for Microsoft Teams には、以下の権限が必要です。詳細については、[Microsoft Graph 権限リファレンス][5]を参照してください。
+
+| API / 権限名               | タイプ        | リクエスト理由                                                                                  |
+|--------------------------------------|-------------|-------------------------------------------------------------------------------------------------|
+| `ChannelSettings.ReadWrite.All`      | Application | Datadog Incident Management を使用して、インシデントを修復するためのチャンネルを作成および変更します。 |
+| `GroupMember.Read.All`               | Application | Datadog Incident Management の構成に、チーム名とチャンネル名のオートコンプリート候補を提供します。        |
+| `Team.Create`                        | Application | Datadog Incident Management を使用して、インシデントを管理および修復するチームを作成します。               |
+| `TeamMember.ReadWrite.All`           | Application | Datadog Incident Management でインシデントを管理するユーザーを Teams に追加します。 |
+| `TeamsAppInstallation.ReadWrite.All` | Application | Datadog Incident Management によって作成されたチームに Datadog アプリを追加します。  |
+| `TeamSettings.ReadWrite.All`         | Application | Datadog Incident Management が、インシデントチームの状態を最新の状態に保つようにします。            |
+
+## ヘルプ
 
 ### SSO の使用
 
@@ -180,9 +189,11 @@ Microsoft Teams インテグレーションには、サービスのチェック�
 
 2. セットアップ手順 3 で MS Teams ページから Datadog にリダイレクトされたら、新しいタブを開き、SSO で Datadog にログインします。次に、セットアップ手順 4 を個別に実行します。
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
-[1]: https://app.datadoghq.com/account/settings#integrations/microsoft-teams
+[1]: https://app.datadoghq.com/integrations/microsoft-teams
 [2]: https://docs.datadoghq.com/ja/monitors/notifications/#notification
-[3]: https://app.datadoghq.com/incidents/settings#Integrations
-[4]: https://docs.datadoghq.com/ja/help/
+[3]: https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/grant-admin-consent?pivots=ms-graph#prerequisites
+[4]: https://app.datadoghq.com/incidents/settings#Integrations
+[5]: https://learn.microsoft.com/en-us/graph/permissions-reference
+[6]: https://docs.datadoghq.com/ja/help/

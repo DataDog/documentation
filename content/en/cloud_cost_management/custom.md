@@ -29,7 +29,7 @@ Custom Cost is in public beta.
 
 ## Overview
 
-Custom Costs allow you to upload *any cost data source* to Datadog, so that you can understand the total cost of your services. 
+Custom Costs allow you to upload *any cost data source* to Datadog, so that you can understand the total cost of your services.
 
 Custom Costs accepts costs in pre-defined file structures (CSV or JSON). These files are aligned with the [FinOps FOCUS specification][2], and you can [upload multiple files in either format](#create-a-csv-or-json-file-with-required-fields). For example, you can upload a mix of CSV or JSON files as desired with 1+ line items (rows for CSV or objects for JSON).
 
@@ -39,7 +39,8 @@ All line items must meet the following requirements and include the [properties 
 - All required column names (CSV) or property names (JSON) are [PascalCased][5]. For example, you must use `"ProviderName"`, not `"providername"` or `"ProviderNAME"`.
 - All column names (CSV) and values or property names (JSON) and values have a maximum of 1,000 characters.
 - NULL or blank ("") parameter values are not accepted.
-- All of the data is viewed as UTC.
+
+Additionally, all dates are transformed into UTC timestamps. For example, "2024-01-01" becomes "2024-01-01 00:00:00".
 
 ## Setup
 
@@ -52,7 +53,7 @@ To use Custom Costs in Datadog, you must [configure Cloud Cost Management][1] fo
 |`ProviderName` | The service being consumed. | Snowflake | "" or NULL|  |
 |`ChargeDescription` | Identifies what aspect of a service is being charged. | Database Costs | "" or NULL|  |
 |`ChargePeriodStart`| Start day of a charge. | 2023-09-01| 2023-01-01 12:34:56| Formatted YYYY-MM-DD, where `ChargePeriodStart` <= `ChargePeriodEnd`.|
-|`ChargePeriodEnd` | Last day of a charge.  | 2023-09-30 | 01/01/2023 | Formatted YYYY-MM-DD. |
+|`ChargePeriodEnd` | Last day of a charge (inclusive).  | 2023-09-30 | 01/01/2023 | Formatted YYYY-MM-DD. |
 |`BilledCost`| The amount being charged. |10.00 |NaN | Number-based decimal. |
 |`BillingCurrency` | Currency of billed cost. | USD| EUR | Must be USD. |
 
@@ -63,7 +64,7 @@ You can upload multiple CSV and JSON files, in either or both formats. Ensure th
 {{< tabs >}}
 {{% tab "CSV" %}}
 
-The required fields must appear as columns in your CSV in the order listed above.
+The required fields must appear as columns in your CSV in the order listed above. You need to use a comma (`,`) as a separator for your CSV.
 
 Example of a valid CSV:
 
@@ -131,7 +132,7 @@ Example of a valid JSON file:
         "ChargeDescription": "Video Usage",
         "ChargePeriodStart": "2023-01-01",
         "ChargePeriodEnd": "2023-12-31",
-        "BilledCost": 100,
+        "BilledCost": 100.00,
         "BillingCurrency": "USD"
     }
 ]
@@ -146,7 +147,7 @@ Example of an invalid JSON file:
         "chargedescription": "Video Usage",
         "chargeperiodstart": "2023-01-01",
         "chargeperiodend": "2023-12-31",
-        "billedcost": 100,
+        "billedcost": 100.00,
         "billingcurrency": "USD"
     }
 ]
@@ -156,8 +157,8 @@ Example of an invalid JSON file:
 
 {{% /tab %}}
 {{< /tabs >}}
-   
-### Add optional tags 
+
+### Add optional tags
 
 You can optionally add any number of tags to CSV or JSON files to allocate costs *after* the required fields as additional columns.
 
@@ -213,7 +214,7 @@ Example of a valid JSON file:
         "ChargeDescription": "Video Usage",
         "ChargePeriodStart": "2023-01-01",
         "ChargePeriodEnd": "2023-12-31",
-        "BilledCost": 100,
+        "BilledCost": 100.00,
         "BillingCurrency": "USD",
         "Tags": {
             "team": "web",
@@ -230,7 +231,7 @@ In this example, an additional `Tags` object property has been added with two ke
 
 ### Configure Custom Costs
 
-Once your data is formatted to the requirements above, upload your CSV and JSON files to Cloud Cost Management on [the **Custom Costs Uploaded Files** page][3] or programmatically by using the API. 
+After your data is formatted to the requirements above, upload your CSV and JSON files to Cloud Cost Management on [the **Custom Costs Uploaded Files** page][3] or programmatically by using the API.
 
 {{< tabs >}}
 {{% tab "UI" %}}
@@ -242,9 +243,9 @@ Navigate to [**Cloud Costs** > **Settings** > **Uploaded Files**][101] and click
 [101]: https://app.datadoghq.com/cost/settings/cost-files
 
 {{% /tab %}}
-{{% tab "Programmatically" %}}
+{{% tab "API (file)" %}}
 
-To send a JSON file, use the `PUT api/v2/cost/custom_costs` API endpoint. 
+To send a file, use the `PUT api/v2/cost/custom_costs` API endpoint.
 
 Example with cURL:
 
@@ -256,9 +257,21 @@ curl -L -X PUT "api.datadoghq.com/api/v2/cost/custom_costs/" \
 -F "file=${file};type=text/json"
 ```
 {{% /tab %}}
+{{% tab "API (request)" %}}
+
+Use the `PUT api/v2/cost/custom_costs` endpoint to send the content of the file with the API .
+
+```curl
+curl -L -X PUT "api.datadoghq.com/api/v2/cost/custom_costs/" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '${file_content}'
+```
+{{% /tab %}}
 {{< /tabs >}}
 
-Cost data appears after 24 hours. 
+Cost data appears after 24 hours.
 
 ## Cost metric types
 

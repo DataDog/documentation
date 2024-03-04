@@ -36,7 +36,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: catchpoint
-oauth: {}
 public_title: Catchpoint
 short_description: Datadog 이벤트 스트림에 Catchpoint 알림을 발송하세요.
 supported_os: []

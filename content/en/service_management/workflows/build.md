@@ -7,6 +7,9 @@ aliases:
 algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
 further_reading:
+- link: "/getting_started/workflow_automation/"
+  tag: "Documentation"
+  text: "Getting Started with Workflow Automation"
 - link: "/service_management/workflows/actions_catalog"
   tag: "Documentation"
   text: "Browse the available actions in the Actions Catalog"

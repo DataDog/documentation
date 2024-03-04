@@ -9,6 +9,9 @@ algolia:
   tags: ['workflow', 'workflows', 'workflow automation']
 disable_toc: false
 further_reading:
+- link: "/getting_started/workflow_automation/"
+  tag: "Documentation"
+  text: "Getting Started with Workflow Automation"
 - link: "/integrations/"
   tag: "Documentation"
   text: "Learn about integrations"
