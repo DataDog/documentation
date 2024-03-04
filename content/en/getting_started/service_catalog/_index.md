@@ -41,7 +41,7 @@ Service Catalog automatically discovers services based on application performanc
 
 If you are not using these products, you can manually declare services as entries in the `service.definition.yaml` registry. The definitions in this file include all the metadata that the catalog uses to file your services. These can be created and updated programmatically using an internal API or with a configuration management service like Terraform. You should include this file in your version control and regularly update it whenever new resources are added to your environment.
 
-The following example represents a `shopping-cart` service from an e-commerce application. It includes important metadata about the service, such as its owning team, languages used, runbook link, and code repository." 
+The following example represents a `shopping-cart` service from an e-commerce application. It includes important metadata about the service, such as its owning team, languages used, runbook link, and code repository. 
 
 {{< code-block lang="yaml" filename="service.datadog.yaml" collapsible="true" >}}
 schema-version: v2.2
