@@ -46,7 +46,7 @@ Complete the following to enable Database Monitoring with your Oracle database:
 
 ### Create the user
 
-If you already have the Oracle integration installed, skip this step, because the user already exists.
+If you already have the legacy Oracle integration installed, skip this step, because the user already exists.
 
 Create a read-only login to connect to your server and grant the required permissions:
 
