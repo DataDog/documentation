@@ -14,8 +14,8 @@ further_reading:
 ## Overview
 
 The [Monitor Status page][1] gives you an overview of the data your monitor is evaluating. It displays visualizations of the history of the monitor state changes in the History Graph. And displays visualizations of the monitor data with configured aggregations over a specific evaluation window in the Evaluation Graph. Both provide insights on your monitor data, however, the graphs are different and this guide covers:
+- [What is a history graph and evaluation graph](#evaluation-vs-history-graph)
 - [Why the two graphs are displaying different information](#why-are-the-graphs-different)
-- [Formulas/Functions to avoid when creating the Monitor](#using-formulas-and-functions)
 - [Ways to replicate the Evaluation Graph result outside of the Monitor](#troubleshooting-evaluation-graph-values)
 
 
