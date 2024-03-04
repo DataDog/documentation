@@ -62,7 +62,10 @@ An example policy that grants the required permissions is:
         "rds:DescribeDBClusters",
         "rds:DescribeDBInstances"
       ],
-      "Resource": "arn:aws:rds:<region>:<account>:cluster:<name>"
+      "Resource": [
+        "arn:aws:rds:<region>:<account>:cluster:*",
+        "arn:aws:rds:<region>:<account>:db:*"
+      ]
     }
   ]
 }
