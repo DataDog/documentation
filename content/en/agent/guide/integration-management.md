@@ -9,7 +9,7 @@ algolia:
 
 The Agent comes with a set of bundled official Datadog integrations to allow users to start monitoring their applications quickly. These integrations are available as single Python packages, and you can upgrade them separately.
 
-**Note:** Non-core integrations such as those built by partners or community members are not retained when the Agent is upgraded. Please be mindful that these integrations will need to be re-installed upon upgrading the Agent version.
+**Note:** Non-core integrations such as those built by partners or community members are not retained when the Agent is upgraded. Please be mindful that these integrations need to be re-installed upon upgrading the Agent version.
 
 For Agent v6.8+, the `datadog-agent integration` command allows users to manage the official Datadog integrations that are available for the Agent. It has the following subcommands:
 
