@@ -47,6 +47,12 @@
                         color: white;
                         cursor: pointer;
                     }
+                    &:hover {
+                        i.icon-x-circle-solid {
+                            opacity: 0.7;
+                        }
+                    }
+                    
                 }
             }
             .modal-body {
