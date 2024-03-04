@@ -46,9 +46,7 @@ On the [Synthetic Monitoring & Continuous Testing Settings page][1], you can acc
 
 ### Enforced tags settings
 
-Selecting this option ensures that configured tags from the Usage Attribution tab are required by users creating and editing Synthetic tests. They won't be able to save tests without entering all required tags.
-
-Usage Attribution tags allow you to break down cost and usage attributes of this feature by services, applications, or teams. 
+On the Usage Attribution page, you can configure up to three tags by which to break down cost and usage attributes.  Select **Enforce tags for usage attribution on all tests** to require that users enter all configured Usage Attribution tags when creating or editing Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags.
 
 ### Default locations
 
@@ -62,7 +60,7 @@ When you are done selecting locations, click **Save Default Locations**.
 
 Choose the default browser and device types for your [browser test][6] details.
 
-Your options for browsers include Google Chrome, Firefox, and Microsoft Edge. Your options for devices include a large laptop, a tablet, and a small mobile device.
+Your options for browsers include Google Chrome, Mozilla Firefox, and Microsoft Edge. Your options for devices include a large laptop, a tablet, and a small mobile device.
 
 When you are done selecting browsers and devices, click **Save Default Browsers & Devices**.
 
@@ -84,9 +82,9 @@ If you are using the [custom role feature][12], add your user to any custom role
 
 ### APM integration for browser tests
 
-Allow URLs to add APM integration headers to those URLs. Datadog's APM integration headers allow Datadog to link browser tests with APM. 
+Datadog's APM integration headers allow Datadog to link browser tests with APM. 
 
-Define which endpoints you want to send the APM headers to by entering a URL in the **Value** field. If the endpoint is being traced and is allowed, your browser test results are automatically tied to its corresponding trace.
+Define which endpoints you want to send the APM headers to by adding a URL to the **Value** list. If the endpoint is being traced and is allowed, your browser test results are automatically tied to its corresponding trace.
 
 Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`. When you are done adding URLs, click **Save APM Integration Settings**. 
 
