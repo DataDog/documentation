@@ -4440,7 +4440,7 @@ main:
     identifier: rum
     parent: ux_monitoring_heading
     weight: 40000
- - name: Browser Monitoring
+  - name: Browser Monitoring
     url: real_user_monitoring/browser/
     parent: rum
     identifier: rum_browser
