@@ -103,28 +103,23 @@ Datadog APM では、ビジネスの優先順位と重要なメトリクスに�
 
    ここでは、ダッシュボードのビューとともに、デプロイ、タスクの完了、モニターアラートなど、（Datadog または Ansible、Chef などの外部サービスで）発生した最近のイベントを確認できます。これらのイベントは、ダッシュボードで設定されたメトリクスで起こっていることと関連付けることができます。
 
-   最後に、テンプレート変数を必ず使用してください。これは、すべてのユーザーがウィジェット自体を編集しなくても使用できるダッシュボード上のウィジェットを動的に制御する一連の値です。
+   最後に、テンプレート変数を必ず使用してください。これは、すべてのユーザーがウィジェット自体を編集しなくても使用できるダッシュボード上のウィジェットを動的に制御する一連の値です。詳しくは、[テンプレート変数][6]のドキュメントを参照してください。
 
-10. コントロールパネルの **`Add Template Variables` をクリック**します。**`Add Variable +` をクリック**し、テンプレート変数に名前を付けて、変数が制御するタグを選択します。
+10. ヘッダーの **Add Variable** をクリックします。変数が制御するタグを選択し、その名前、デフォルト値、または利用可能な値を構成します。
 
     この例では、ダッシュボードが 2 つの主要な操作領域である `us-east1` と `europe-west-4` でどのように動作するかを確認するために、`Region` のテンプレート変数が追加されています。
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_8.mp4" alt="ダッシュボード 8" video="true" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_add_template_variable.png" alt="変数名と変数タグを追加するフィールドオプションを表示する Add Variable ポップオーバー" style="width:90%;">}}
 
     これで、このテンプレート変数を各グラフに追加できます。
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_9.png" alt="ダッシュボード 9" style="width:90%;">}}
+    {{< img src="tracing/guide/apm_dashboard/dashboard_dynamic_template_variable.png" alt="クエリに動的テンプレート変数を追加します。この例では、'$RG' を地域テンプレート変数に動的にスコープしています" style="width:90%;">}}
 
-    コントロールパネルで値を変更すると、ダッシュボードですべての値が更新されます。
-
-    {{< img src="tracing/guide/apm_dashboard/dashboard_10.mp4" alt="ダッシュボード 10" video="true" style="width:90%;">}}
+    テンプレート変数値を選択すると、ダッシュボードの該当するウィジェットですべての値が更新されます。
 
     使用可能なメトリクスをすべて確認し、Datadog の可観測性の 3 本の柱を最大限に活用してください。この基本的なダッシュボードは、組織の監視と可観測性のためのワンストップショップである強力なツールに変換できます。
 
-    {{< img src="tracing/guide/apm_dashboard/dashboard_7.mp4" alt="ダッシュボード 7" video="true" style="width:90%;">}}
-
 ## その他の参考資料
-
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -133,3 +128,4 @@ Datadog APM では、ビジネスの優先順位と重要なメトリクスに�
 [3]: /ja/tracing/metrics/metrics_namespace/
 [4]: https://app.datadoghq.com/apm/traces?viz=timeseries
 [5]: /ja/events/
+[6]: /ja/dashboards/template_variables/
