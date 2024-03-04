@@ -46,7 +46,7 @@ On the [Synthetic Monitoring & Continuous Testing Settings page][1], you can acc
 
 ### Enforced tags settings
 
-On the Usage Attribution page, you can configure up to three tags by which to break down cost and usage attributes.  Select **Enforce tags for usage attribution on all tests** to require that users enter all configured Usage Attribution tags when creating or editing Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags.
+On the Usage Attribution page, you can configure up to three tags by which to break down cost and usage attributes. Select **Enforce tags for usage attribution on all tests** to require that users enter all configured Usage Attribution tags when creating or editing Synthetic tests. With this setting enabled, users cannot save tests without entering all required tags.
 
 ### Default locations
 
@@ -97,12 +97,6 @@ To allow Datadog to collect RUM data from your test runs, click **Enable Synthet
 Select a RUM application from the **Default Application** dropdown menu that collects browser test data. When you are done specifying a default application, click **Save RUM Data Applications**.
 
 For more information, see [Explore RUM & Session Replay][14].
-
-### Permissions
-
-By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Integration Settings** page. To get access to the **Integration Settings** page, upgrade your user to one of those two [default roles][11]. 
-
-If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions. 
 
 ## Private locations
 
@@ -206,7 +200,9 @@ For more information about variables, see the [HTTP test][8], [Multistep API tes
 
 ### Permissions
 
-By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of those two [default roles][11]. 
+By default, only users with the [Datadog Admin and Datadog Standard roles][11] can access the Synthetic Monitoring **Global Variables** page. You can get access to the **Global Variables** page by having your user upgraded to one of those two [default roles][11].
+
+If you are using the [custom role feature][12], add your user to any custom role that includes `synthetics_default_settings_read` and `synthetics_default_settings_write` permissions.
 
 ### Restrict access
 
@@ -215,6 +211,28 @@ Access restriction is available for customers using [custom roles][11] on their 
 You can restrict access to a global variable based on the roles in your organization. When creating a global variable, choose which roles (in addition to your user) can read and write your global variable in **Permissions settings**. 
 
 {{< img src="synthetics/settings/restrict_access_1.png" alt="Restrict access to a global variable" style="width:100%;" >}}
+
+## Integration settings
+
+{{< img src="synthetics/settings/integration_settings.png" alt="Integration Settings page" style="width:100%;">}}
+
+### APM integration for browser tests
+
+Allow URLs to add APM integration headers to those URLs. Datadog's APM integration headers allow Datadog to link browser tests with APM. 
+
+Define which endpoints you want to send the APM headers to by entering a URL in the **Value** field. If the endpoint is being traced and is allowed, your browser test results are automatically tied to its corresponding trace.
+
+Use `*` to allow wider domain names. For example, adding `https://*.datadoghq.com/*` allows everything on `https://datadoghq.com/`. When you are done adding URLs, click **Save APM Integration Settings**. 
+
+For more information, see [Connect Synthetics and APM Traces][15].
+
+### Synthetic data collection and RUM applications
+
+To allow Datadog to collect RUM data from your test runs, click **Enable Synthetic RUM data collection**. If disabled, you cannot edit the RUM setting in the browser test recorder. When you are done enabling data collection, click **Save RUM Data Collection**.
+
+Select a RUM application from the **Default Application** dropdown menu that collects browser test data. When you are done specifying a default application, click **Save RUM Data Applications**.
+
+For more information, see [Explore RUM & Session Replay][14].
 
 ## Further Reading
 
