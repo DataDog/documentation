@@ -73,7 +73,7 @@ In the following example, take a time frame from the Evaluation graph you want t
 
 To troubleshoot this value you can open the monitor edit page and transfer the monitor configuration to a Notebook Query Value widget.
 
-{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshoot_monitor_eval_config.png" alt="Example configuration showing metric with a query aggregation of p95 and a monitor evaluation aggregation of p95 over the last 5 minutes" style="width:100%;" >}}
+{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshoot_monitor_eval_config.png" alt="Example configuration showing metric with a query aggregation of p95 and a monitor evaluation aggregation of p95 over the last 5 minutes" style="width:90%;" >}}
 
 Monitor edit page configuration fields:
 - Metric Query **a**: `proc.test_process.cpu.total_pct` p95 by (everything)
@@ -99,7 +99,7 @@ Transfer the same configuration to the Notebook Query Value widget.
 
 In this example, troubleshoot a value in the monitor evaluation graph with multiple queries and a formula, in a Notebook Query Value widget. On the evaluation graph, hover over the data point you want to investigate, in this example, you want to troubleshoot the evaluation graph value of `9.17` at 13:55:29.
 
-{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_formula_monitor_config.png" alt="Monitor configuration showing two metric queries and a formula 'a+b', which evaluates the minimum of the query over the last 5 minutes" style="width:100%;" >}}
+{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_formula_monitor_config.png" alt="Monitor configuration showing two metric queries and a formula 'a+b', which evaluates the minimum of the query over the last 5 minutes" style="width:80%;" >}}
 
 Monitor edit page configuration fields:
 - Metric Query **a**: `proc.test_process.cpu.total_pct` avg by (everything)
@@ -107,24 +107,25 @@ Monitor edit page configuration fields:
 - Monitor evaluation aggregation: Evaluate the `min` of the query
 - Monitor evaluation window: the `last 5 minutes`
 
-{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_formulas_query_a.png" alt="Query value widget showing a metric with the avg aggregation" style="width:100%;" >}}
-
 Transfer the same configuration to the Notebook Query Value widget one metric at a time.
+
 **Metric a**
 1. The widget dropdown should display **Query Value**.
 1. Select the timeframe corresponding to 5 minutes around 13:55:29. In this case, 13:50 - 13:55 (1:50 - 1:55).
 1. Input the metric query from your monitor configuration: `proc.test_process.cpu.total_pct`. Add the metric aggregation `avg`.
 
-{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_formulas_query_b.png" alt="Query value widget showing a metric with the avg aggregation" style="width:100%;" >}}
+{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_formulas_query_a.png" alt="Query value widget showing a metric with the avg aggregation" style="width:80%;" >}}
 
 **Metric b**
 1. The widget dropdown should display **Query Value**.
 1. Select the timeframe corresponding to 5 minutes around 13:55:29. In this case, 13:50 - 13:55 (1:50 - 1:55).
 1. Input the metric query from your monitor configuration: `system.cpu.user`. Add the metric aggregation `avg`.
 
+{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshooting_formulas_query_b.png" alt="Query value widget showing a metric with the avg aggregation" style="width:80%;" >}}
+
 The monitor evaluation `Min` takes the minimum value of the queries over the past 5 minutes.
 
-{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshoot_formulas_multi_query.png" alt="Query value widget showing two queries each with an avg metric aggregation, and a min evaluation aggregation" style="width:100%;" >}}
+{{< img src="monitors/guide/history_and_evaluation_graphs/troubleshoot_formulas_multi_query.png" alt="Query value widget showing two queries each with an avg metric aggregation, and a min evaluation aggregation" style="width:80%;" >}}
 
 
 ## Further Reading
