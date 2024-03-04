@@ -4530,41 +4530,56 @@ main:
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_troubleshooting
     weight: 208
+  - name: Product Analytics
+    identifier: rum_product_analytics
+    url: real_user_monitoring/product_analytics
+    parent: rum
+    weight: 3
+  - name: Retention Analysis
+    url: real_user_monitoring/retention_analysis
+    parent: rum_product_analytics
+    identifier: rum_retention_analysis
+    weight: 301
+  - name: Funnel Analysis
+    url: real_user_monitoring/funnel_analysis
+    parent: rum_product_analytics
+    identifier: rum_funnel_analysis
+    weight: 302
+  - name: Heatmaps
+    url: real_user_monitoring/heatmaps
+    parent: rum_product_analytics
+    identifier: rum_heatmaps
+    weight: 303
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
     identifier: rum_session_replay
-    weight: 3
+    weight: 4
   - name: Mobile
     url: real_user_monitoring/session_replay/mobile
     parent: rum_session_replay
     identifier: rum_session_replay_mobile
-    weight: 301
+    weight: 401
   - name: Browser Privacy Options
     url: real_user_monitoring/session_replay/privacy_options
     parent: rum_session_replay
     identifier: rum_session_replay_privacy_options
-    weight: 302
+    weight: 402
   - name: Browser Developer Tools
     url: real_user_monitoring/session_replay/developer_tools
     parent: rum_session_replay
     identifier: rum_session_replay_developer_tools
-    weight: 303
+    weight: 403
   - name: Browser Troubleshooting
     url: real_user_monitoring/session_replay/troubleshooting
     parent: rum_session_replay
     identifier: rum_session_replay_troubleshooting
-    weight: 304
+    weight: 404
   - name: Playlists
     url: real_user_monitoring/session_replay/playlists
     parent: rum_session_replay
     identifier: rum_session_replay_playlists
-    weight: 305
-  - name: Heatmaps
-    url: real_user_monitoring/heatmaps
-    parent: rum
-    identifier: rum_heatmaps
-    weight: 4
+    weight: 405
   - name: Frustration Signals
     url: real_user_monitoring/frustration_signals/
     parent: rum
@@ -4640,71 +4655,61 @@ main:
     parent: rum_explorer
     identifier: rum_explorer_watchdog_insights
     weight: 708
-  - name: Funnel Analysis
-    url: real_user_monitoring/funnel_analysis
-    parent: rum
-    identifier: rum_funnel_analysis
-    weight: 8
-  - name: Retention Analysis
-    url: real_user_monitoring/retention_analysis
-    parent: rum
-    identifier: rum_retention_analysis
-    weight: 9
   - name: Feature Flag Tracking
     url: real_user_monitoring/feature_flag_tracking
     parent: rum
     identifier: rum_feature_flag_tracking
-    weight: 10
+    weight: 8
   - name: Generate Metrics
     url: real_user_monitoring/generate_metrics
     parent: rum
     identifier: rum_generate_metrics
-    weight: 11
+    weight: 9
   - name: Connect RUM and Traces
     url: real_user_monitoring/connect_rum_and_traces
     parent: rum
     identifier: rum_connect_rum_and_traces
-    weight: 12
+    weight: 10
   - name: Error Tracking
     url: real_user_monitoring/error_tracking/
     parent: rum
     identifier: rum_error_tracking
-    weight: 13
+    weight: 11
   - name: Explorer
     url: error_tracking/explorer/
     parent: rum_error_tracking
     identifier: rum_error_tracking_explorer
-    weight: 1301
+    weight: 1101
   - name: Track Browser Errors
     url: real_user_monitoring/error_tracking/browser/
     parent: rum_error_tracking
     identifier: rum_error_tracking_browser
-    weight: 1302
+    weight: 1102
   - name: Track Mobile Errors
     url: real_user_monitoring/error_tracking/mobile/
     parent: rum_error_tracking
     identifier: rum_error_tracking_mobile
-    weight: 1303
+    weight: 1103
   - name: Custom Grouping
     url: error_tracking/custom_grouping?tab=rum
     parent: rum_error_tracking
     identifier: rum_error_tracking_custom_grouping
-    weight: 1309
+    weight: 1104
   - name: Identify Suspect Commits
     url: error_tracking/suspect_commits
     parent: rum_error_tracking
     identifier: rum_error_tracking_suspect_commits
-    weight: 1310
+    weight: 1105
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
     identifier: rum_guides
-    weight: 14
+    weight: 12
   - name: Data Security
     identifier: data_security_real_user_monitoring
     url: data_security/real_user_monitoring/
     parent: rum
-    weight: 15
+    weight: 13
   - name: Account Management
     url: account_management/
     pre: cog-2
