@@ -1395,6 +1395,11 @@ main:
     parent: alerting
     identifier: monitors_notify_downtimes
     weight: 4
+  - name: Examples
+    url: monitors/downtimes/examples
+    parent: monitors_notify_downtimes
+    identifier: monitors_notify_downtimes_examples
+    weight: 401
   - name: Manage Monitors
     url: monitors/manage/
     parent: alerting

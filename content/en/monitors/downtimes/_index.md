@@ -35,7 +35,7 @@ To mute an individual monitor, click the **Mute** button at the top of the monit
 
 ### Choose what to silence
 
-Apply downtime schedules to specific monitors by [name](#by-monitor-name) or to a broad range of monitors by monitor [tags](#by-monitor-tags). Apply additional filters through the [*Group scope*](#downtime-scope). Click **Preview affected monitors** to see the monitors included. For more examples and use cases see  [Scoping downtimes schedules][2].
+Apply downtime schedules to specific monitors by name or to a broad range of monitors by monitor tags. Apply additional filters through the [*Group scope*](#downtime-scope). Click **Preview affected monitors** to see the monitors included. For more examples and use cases see  [Scoping downtimes schedules][2].
 
 **Note**: Any monitor created or edited after the downtime is scheduled is automatically included in the downtime if it matches the scope.
 
