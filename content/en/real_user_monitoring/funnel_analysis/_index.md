@@ -90,7 +90,7 @@ Setting up alerts on conversion and drop off rates allows you to be notified whe
 
 [1]: /real_user_monitoring/browser/data_collected/#default-attributes
 [2]: /real_user_monitoring/browser/data_collected/#session-metrics
-[3]: /real_user_monitoring/frustration_signals/
+[3]: /real_user_monitoring/browser/frustration_signals/
 [4]: /notebooks/
 [5]: /real_user_monitoring/session_replay
 [6]: /dashboards/

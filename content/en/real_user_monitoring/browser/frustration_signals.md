@@ -1,6 +1,8 @@
 ---
 title: Frustration Signals
 kind: documentation
+aliases:
+- /real_user_monitoring/frustration_signals
 further_reading:
 - link: 'https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/'
   tag: 'Blog'
