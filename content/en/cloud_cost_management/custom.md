@@ -40,7 +40,7 @@ All line items must meet the following requirements and include the [properties 
 - All column names (CSV) and values or property names (JSON) and values have a maximum of 1,000 characters.
 - NULL or blank ("") parameter values are not accepted.
 
-Additionally, all dates are transformed into UTC timestamps.  For example, "2024-01-01" becomes "2024-01-01 00:00:00".
+Additionally, all dates are transformed into UTC timestamps. For example, "2024-01-01" becomes "2024-01-01 00:00:00".
 
 ## Setup
 
