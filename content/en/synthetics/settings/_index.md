@@ -92,7 +92,7 @@ For more information, see [Connect Synthetics and APM Traces][15].
 
 ### Synthetic data collection and RUM applications
 
-To allow Datadog to collect RUM data from your test runs, click **Enable Synthetic RUM data collection**. If disabled, you cannot edit the RUM setting in the browser test recorder. When you are done enabling data collection, click **Save RUM Data Collection**.
+To allow Datadog to collect RUM data from your test runs, click **Enable Synthetic RUM data collection**. If disabled, you cannot edit RUM settings in the browser test recorder. To apply changes, click **Save RUM Data Collection**.
 
 Select a RUM application from the **Default Application** dropdown menu that collects browser test data. When you are done specifying a default application, click **Save RUM Data Applications**.
 
