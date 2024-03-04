@@ -106,7 +106,7 @@ extensions:
     customField2: customValue2
 {{< /code-block >}}
 
-You can also use any existing knowledge sources your organization maintains, such as Configuration Management Database (CMDB) tables (through [Datadog’s ServiceNow integration][6]) and spreadsheets, to populate your Service Catalog. Datadog also has an [integration with Backstage][7] that allows you to import any data or services registered here into Datadog directly.
+You can also use any existing knowledge sources your organization maintains, such as Configuration Management Database (CMDB) tables (through [Datadog's ServiceNow integration][6]) and spreadsheets, to populate your Service Catalog. Datadog also has an [integration with Backstage][7] that allows you to import any data or services registered here into Datadog directly.
 
 Finally, you can also create entries from `service` tags in other Datadog products like Infrastructure Monitoring and Log Management. 
 
