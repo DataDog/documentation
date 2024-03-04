@@ -33,7 +33,7 @@ If you have not already, create a [Datadog account][1].
 
 ## Adding entries to Service Catalog
 
-### Auto-discovered services
+### Automatically detected services
 
 Service Catalog automatically discovers services based on application performance telemetries such as [APM][2], [USM][3], and [RUM][4]. The integration with APM enables Datadog to routinely discover new services at the same frequency as your traces are collected. With USM, the Datadog Agent connects to your eBPF-compatible hosts. USM automatically detects the services running on this infrastructure and tags them using [unified service tagging][5]. 
 
