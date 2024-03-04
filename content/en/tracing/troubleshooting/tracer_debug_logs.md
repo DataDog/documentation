@@ -7,6 +7,59 @@ further_reading:
   text: "Troubleshooting APM Connection Errors"
 ---
 
+To collect tracer debug logs, you can do one of the following:
+
+- Send a tracer flare.
+- Enable debug mode, then review the debug logs. 
+
+Both options are covered below.
+
+## Tracer flare
+
+<div class="alert alert-warning">Tracer flares are supported for Java and .NET only. For other languages, use <a href="/tracing/troubleshooting/tracer_debug_logs/#enable-debug-mode">debug mode</a> instead.</div>
+
+A flare allows you to send necessary troubleshooting information to the Datadog support team, including tracer logs, with sensitive data removed. Flares are useful for troubleshooting issues like high CPU usage, high memory usage, and missing spans.
+
+The data collected varies by language. See [Data collected](#data-collected).
+
+### Prerequisites
+
+- [Remote configuration][3] must be enabled.
+- Your API key must be configured for Remote Configuration.
+- You must have a supported tracer version:
+  - Java: `1.26.0` or greater
+  - .NET: `2.46.0` or greater
+
+### Send a tracer flare
+
+For instructions, see [Send a flare from the Datadog site][4].
+
+### Data collected
+
+{{< programming-lang-wrapper langs="java,.NET" >}}
+
+{{< programming-lang lang="java" >}}
+All application tracer debug logs are included in the flare.
+{{< /programming-lang>}}
+
+{{< programming-lang lang=".NET" >}}
+The following logs are included in the flare:
+
+- `classpath.txt`
+- `dynamic_config.txt`
+- `initial_config.txt`
+- `instrumenter_metrics.txt`
+- `instrumenter_state.txt`
+- `jmxfetch.txt`
+- `span_metrics.txt`
+- `threads.txt`
+- `tracer_health.txt`
+- `tracer_version.txt`
+- `version.txt`
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
+
 ## Enable debug mode
 
 Use Datadog debug settings to diagnose issues or audit trace data. Datadog does not recommend that you enable debug mode in production systems because it increases the number of events that are sent to your loggers. Use debug mode for debugging purposes only.
@@ -467,3 +520,5 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 
 [1]: /help/
 [2]: /agent/troubleshooting/#send-a-flare
+[3]: /agent/remote_config
+[4]: /agent/troubleshooting/send_a_flare/?tab=agentv6v7#send-a-flare-from-the-datadog-site
