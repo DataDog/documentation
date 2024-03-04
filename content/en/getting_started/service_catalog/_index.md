@@ -122,7 +122,7 @@ If your organization has an existing registry of ownership, including internal s
 
 ### Connect telemetry from across your monitoring stack
 
-You can also greatly improve the utility of your catalog by connecting monitoring data from the rest of your observability platform. 
+Connect monitoring data from the rest of your observability platform to improve the utility of your catalog.
 
 With [unified service tagging][5], you can use the `service` tag to cross-reference service entities in the Service Catalog across all Datadog products. These tags can help enrich your service entities with metadata, metrics, and other context sources like Infrastructure Monitoring, RUM, Log Management, Software Delivery, and Security. 
 
