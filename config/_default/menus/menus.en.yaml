@@ -4476,7 +4476,7 @@ main:
     identifier: track_actions
     weight: 106
   - name: Frustration Signals
-    url: real_user_monitoring/frustration_signals/
+    url: real_user_monitoring/browser/frustration_signals/
     parent: rum_browser
     identifier: rum_frustration_signals
     weight: 107
