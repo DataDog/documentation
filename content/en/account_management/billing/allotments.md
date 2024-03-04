@@ -1,28 +1,36 @@
 ---
-title: Allotments
+title: Billing Calculations with Allotments
 kind: documentation
 ---
 
+Allotments refer to additional usage that comes with subscriptions to select parent products. Allotments grant a certain amount of usage for a child product as part of the account's committed and on-demand usage of the parent product.
+
+Examples of products that have this structure include Infrastructure hosts and containers, where every host comes with a container allotment.
+
+## Allotments by parent products
+
+For a full list of default allotments by parent product, see the [allotments table](#allotments-table).
+
+For custom or otherwise non-default contracts, the allotment amount is defined in the user's contract.
+
+If a user's billable usage of the parent product exceeds their commitment, they receive an additional allotment from the on-demand parent product usage and are only billed for the parent product. Once that additional allotment is exhausted, the user may be billed at an on-demand rate for any additional allotment usage.
+
+For example, if a user is committed to 5 APM Pro Hosts, they have a default Ingested Spans allotment of `5 APM Pro Hosts * 150 GB Ingested Spans per host = 750 GB` for the month. If they use 6 APM Hosts and 800 GB of Ingested Spans, they are billed for the additional host usage but not for the additional spans usage, since their Ingested Spans allotment increases to 900 GB.
+
 ## Calculating on-demand usage
 
-On-demand usage refers to usage accrued beyond the sum of committed and allotted usage. To calculate on-demand usage, subtract **total included usage** (that is, committed and allotted usages) from **billable usage**. On-demand usage is billed at an on-demand rate. See [Datadog Pricing][1].
+On-demand usage refers to usage accrued beyond the sum of committed and allotted usage. To calculate on-demand usage, subtract **total included usage** (that is, committed and allotted usages) from **billable usage**. 
+
+For example, a user has a commitment of 100 GB of Ingested Spans and 5 APM Pro Hosts. Their host commitment results in a span allotment of `5 APM Pro Hosts * 150 GB Ingested Spans per host = 750 GB` for the month. Their total included usage of Ingested Spans is `750 GB + 100`. If they have 1000 GB worth of Ingested Spans usage, then use 6 APM Hosts and 800 GB of Ingested Spans, they are billed for the additional host usage but not for the additional spans usage, since their allotment increases to 900 GB.
+
+On-demand usage is billed at an on-demand rate. See [Datadog Pricing][1].
 
 ## Calculating total included usage
 Total included usage is made up of the **commitment for the product, and the sum of allotments per parent product**. Refer to the user's contract for commitment quantities. The following variables determine how allotment usage is calculated:
 
-- Default allotments by parent products
-- On-demand option (hourly or monthly)
+- Allotments by parent products
+- On-demand option
 - Usage aggregation function
-
-### Default allotments by parent products
-
-For a full list of hourly and monthly default allotments by product, see [Allotments table](#allotments-table).
-
-For custom or otherwise non-default contracts, the allotment amount is defined in the user's contract.
-
-If a user's billable usage of the parent product exceeds their commitment, they receive an additional allotment from the on-demand parent product usage and are only billed for the parent product. Once that additional allotment is exhausted, the user may be billed at an on-demand rate for any additional allotment usage. 
-
-For example, if a user is committed to 5 APM Pro Hosts, they have a default Ingested Spans allotment of 5 APM Pro hosts * 150 GB Ingested Spans / host = 750 GB for the month. If they use 6 APM Hosts and 800 GB of Ingested Spans, they are billed for the additional host usage but not for the additional spans usage, since their allotment increases to 900 GB.
 
 ### On-demand option
 
