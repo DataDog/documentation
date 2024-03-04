@@ -225,7 +225,7 @@ DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
 
 The minimum .NET tracer version required is [v2.35.0][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
 
-To opt in, add the following environment variables to your tracer settings or system properties:
+To opt in, add the following environment variable to your tracer settings or system properties:
 - `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
 
 #### Peer service mapping
