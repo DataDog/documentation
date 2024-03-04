@@ -89,6 +89,7 @@
                         cursor: pointer;
                         margin: 8px;
                         padding: 6px;
+                        border-radius: 4px;
                         transition: all .3s ease-in-out;
 
                         svg path {
@@ -97,7 +98,6 @@
                         }
                     }
                     .copy-icon:hover {
-                        border-radius: 4px;
                         background: #006BC2;
                         box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.10), 0px 1px 2px 0px rgba(0, 0, 0, 0.32);
                         
