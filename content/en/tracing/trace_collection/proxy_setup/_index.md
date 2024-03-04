@@ -304,9 +304,9 @@ directory.
 
 For example, the module compatible with the Docker image
 [nginx:1.23.2-alpine][3] is included in each release as the file
-`nginx_1.23.2-alpine-ngx_http_datadog_module.so.tgz`. The module compatible with
+`nginx_1.23.2-alpine-amd64-ngx_http_datadog_module.so.tgz`. The module compatible with
 the Docker image [amazonlinux:2.0.20230119.1][2] is included in each release as the file
-`amazonlinux_2.0.20230119.1-ngx_http_datadog_module.so.tgz`.
+`amazonlinux_2.0.20230119.1-amd64-ngx_http_datadog_module.so.tgz`.
 
 ```bash
 get_latest_release() {
@@ -376,6 +376,10 @@ http {
 ```
 
 ## Ingress-NGINX Controller for Kubernetes
+
+{{< tabs >}}
+{{% tab "< v1.10.0" %}}
+
 To enable Datadog tracing, create or edit a ConfigMap to set `enable-opentracing: "true"` and the `datadog-collector-host` to which traces should be sent.
 The name of the ConfigMap is cited explicitly by the Ingress-NGINX Controller container's command line argument, defaulting to `--configmap=$(POD_NAMESPACE)/nginx-configuration`.
 If ingress-nginx was installed via helm chart, this ConfigMap will be named like `Release-Name-nginx-ingress-controller`.
@@ -465,6 +469,42 @@ by the Datadog Agent</a>. We are working to resolve this bug.
 [15]: https://github.com/DataDog/nginx-datadog/blob/master/doc/API.md
 [16]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#datadog-sample-rate
 [17]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/
+
+{{% /tab %}}
+
+{{% tab "v1.10.0 and older" %}}
+
+<div class="alert alert-warning">
+  <strong>Note:</strong> OpenTracing has been deprecated in v1.10.0. For now, use the OpenTelemetry collector.
+</div>
+
+- Ensure your datadog agent has an OTel collector: set link
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+    app.kubernetes.io/version: 1.7.1
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  enable-opentelemetry: "true"
+  otlp-collector-host: $HOST_IP
+  # Defaults
+  # otlp-collector-port: 4317
+  # otel-service-name: "nginx"
+  # otel-sampler-ratio: 0.01
+```
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
 {{% /tab %}}
 {{% tab "Istio" %}}
 
