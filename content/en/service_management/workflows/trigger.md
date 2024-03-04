@@ -88,7 +88,7 @@ Each time the monitor threshold is hit, the monitor triggers a workflow run.
 
 ### Test a monitor trigger
 
-You can test a monitor trigger during workflow creation. The test modal generates a snippet that you can paste into your monitor notification window to trigger the workflow.
+You can test a monitor trigger during workflow creation. Testing a monitor generates a snippet that you can paste into your monitor notification window to trigger the workflow.
 
 To test a monitor trigger:
 1. Select the monitor trigger action in your workflow.
