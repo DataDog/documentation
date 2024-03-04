@@ -42,12 +42,13 @@ Complete the following to enable Database Monitoring with your Oracle database:
 1. [Install the Agent](#install-the-agent)
 1. [Configure the Agent](#configure-the-agent)
 1. [Install or verify the Oracle integration](#install-or-verify-the-oracle-integration)
+1. [Validate the setup](#validate-the-setup)
 
-### 1. Create the user
+### Create the user
 
 {{% dbm-create-oracle-user %}}
 
-### 2. Grant the Agent access to the database 
+### Grant the Agent access to the database 
 
 ```SQL
 grant create session to datadog ;
@@ -87,13 +88,13 @@ grant select on cdb_data_files to datadog;
 grant select on dba_data_files to datadog;
 ```
 
-### 3. Install the Agent
+### Install the Agent
 
-See the [DBM Setup Architecture][10] documentation to determine where to install the Agent. The Agent doesn't require any external Oracle clients.
+See the [DBM Setup Architecture][12] documentation to determine where to install the Agent. The Agent doesn't require any external Oracle clients.
 
 For installation steps, see the [Agent installation instructions][8].
 
-### 4. Configure the Agent
+### Configure the Agent
 
 Download the wallet zip file from the Oracle Cloud and unzip it.
 
@@ -128,23 +129,23 @@ instances:
 
 After all Agent configuration is complete, [restart the Datadog Agent][4].
 
-#### Validate
-
-[Run the Agent's status subcommand][5] and look for `oracle-dbm` under the **Checks** section. Navigate to the [DBM Oracle Database Overview][7] dashboard and [Databases][6] page in Datadog to get started.
-
-### 5. Install or verify the Oracle integration
+### Install or verify the Oracle integration
 
 #### First-time installations
 
-On the Integrations page in Datadog, install the [Oracle integration][9] for your organization. This installs an [Oracle dashboard][10] in your account that can be used to monitor the performance of your Oracle databases.
+On the Integrations page in Datadog, install the [Oracle integration][9] for your organization. This installs an [Oracle dashboard][7] in your account that can be used to monitor the performance of your Oracle databases.
 
 #### Existing installations
 
 {{% dbm-existing-oracle-integration-setup %}}
 
+### Validate the setup
+
+[Run the Agent's status subcommand][5] and look for `oracle-dbm` under the **Checks** section. Navigate to the [DBM Oracle Database Overview][7] dashboard and [Databases][6] page in Datadog to get started.
+
 ## Custom queries
 
-Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][11] to learn more about the configuration options available.
+Database Monitoring supports custom queries for Oracle databases. See the [conf.yaml.example][12] to learn more about the configuration options available.
 
 <div class="alert alert-warning">Running custom queries may result in additional costs or fees assessed by Oracle.</div>
 
@@ -157,8 +158,8 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [7]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [8]: https://app.datadoghq.com/account/settings/agent/latest
 [9]: https://app.datadoghq.com/integrations/oracle
-[10]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
 [11]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/oracle-dbm.d/conf.yaml.example
+[12]: /database_monitoring/architecture/
 
 ## Further reading
 
