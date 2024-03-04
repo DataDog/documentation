@@ -41,7 +41,7 @@ Agent integration overhead tests were run on an Amazon EC2 machine `c5.xlarge` i
 | Schema Collection Interval        | 600s                |
 
 * Agent Test version: `7.50.2`
-* CPU: ~0.98% of the CPU used on average
-* Memory: ~290 MiB of RAM used (RSS memory)
-* Network bandwidth: ~28 KB/s ▼ | 23 KB/s ▲
+* CPU: ~1% of the CPU used on average
+* Memory: ~300 MiB of RAM used (RSS memory)
+* Network bandwidth: ~30 KB/s ▼ | 30 KB/s ▲
 * Agent query overhead on database: ~1% CPU Time
