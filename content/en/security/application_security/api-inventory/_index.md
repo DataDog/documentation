@@ -31,6 +31,7 @@ The following library versions are compatible with API Security Inventory. [Remo
 |Technology|Minimum version| Support for sensitive data scanning |
 |----------|----------|----------|
 |Python    | v2.1.6   | Requests and responses |
+|Java      | v1.31.0  | Requests only |
 
 ## How it works
 

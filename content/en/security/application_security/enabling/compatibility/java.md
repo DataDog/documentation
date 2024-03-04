@@ -13,7 +13,7 @@ The following ASM capabilities are supported in the Java library, for the specif
 | ASM capability                   | Minimum Java tracer version |
 | -------------------------------- | ----------------------------|
 | Threat Detection | 1.8.0  |
-| API Security | ABXY |
+| API Security | 1.31.0 |
 | Threat Protection| 1.9.0 |
 | Customize response to blocked requests | 1.11.0 |
 | Software Composition Analysis (SCA) | 1.1.4 |
