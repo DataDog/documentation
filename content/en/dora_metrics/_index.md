@@ -285,7 +285,7 @@ The metrics can also be queried with the [Query timeseries points][10] and [Quer
 
 The metrics provided by DORA Metrics are:
 
-| Metric | Type | |
+| Metric | Type | Description |
 | :--- | :--- | :--- |
 | `dora.deployments.count` | count | Used for Deployment Frequency.
 | `dora.change_lead_time` | distribution | Contains the age in `seconds` of the git commits at the time of deployment.
