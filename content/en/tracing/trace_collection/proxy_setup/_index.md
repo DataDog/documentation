@@ -377,7 +377,7 @@ http {
 
 ## Ingress-NGINX Controller for Kubernetes
 
-{{< tabs >}}
+{{< tabs groupId="ingress-nginx-version" >}}
 {{% tab "< v1.10.0" %}}
 
 To enable Datadog tracing, create or edit a ConfigMap to set `enable-opentracing: "true"` and the `datadog-collector-host` to which traces should be sent.
@@ -478,7 +478,16 @@ by the Datadog Agent</a>. We are working to resolve this bug.
   <strong>Note:</strong> OpenTracing has been deprecated in v1.10.0. For now, use the OpenTelemetry collector.
 </div>
 
-- Ensure your datadog agent has an OTel collector: set link
+Before you begin, ensure your [Datadog Agent has gRPC OTLP Ingestion enabled][1]. Then, make sure that your nginx-ingress controller's pod spec has the `HOST_IP` environment variable set. Add this entry to the `env:` block that contains the environment variables `POD_NAME` and `POD_NAMESPACE`.
+
+```yaml
+- name: HOST_IP
+  valueFrom:
+    fieldRef:
+      fieldPath: status.hostIP
+```
+
+
 
 ```yaml
 apiVersion: v1
@@ -500,6 +509,8 @@ data:
   # otel-service-name: "nginx"
   # otel-sampler-ratio: 0.01
 ```
+
+[1]: /opentelemetry/otlp_ingest_in_the_agent/
 
 {{% /tab %}}
 
