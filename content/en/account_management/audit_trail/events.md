@@ -44,7 +44,6 @@ further_reading:
 - [Reference Tables](#reference-table-events)
 - [Workflows](#workflow-events)
 
-
 See the [Audit Trail documentation][2] for more information on setting up and configuring Audit Trail.
 
 ## Audit Events
