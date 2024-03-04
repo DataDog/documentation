@@ -86,9 +86,14 @@ A `severe` anomaly is defined as:
 Watchdog requires some data to establish a baseline of expected behavior. For log anomalies, the minimum history is 24 hours. 
 Watchdog starts finding anomalies after the minimum required history is available, and Watchdog improves as history grows. Best performances are obtained with six weeks of history. 
 
+#### Disabling log anomaly detection
+
+To disable log anomaly detection, go to the [Log Management pipeline page][4] and click the Log Anomalies toggle.
+
 [1]: https://app.datadoghq.com/watchdog
 [2]: /monitors/types/watchdog/
 [3]: /watchdog/insights?tab=logmanagement#explore-insights
+[4]: https://app.datadoghq.com/logs/pipelines
 {{% /tab %}}
 {{% tab "APM" %}}
 
