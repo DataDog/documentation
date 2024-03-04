@@ -10,9 +10,9 @@ further_reading:
 
 ## Overview
 
-In Sensitive Data Scanner, the scanning rule determines what sensitive information to match within the data. You can create custom scanning rules using regular expression (regex) patterns to scan for sensitive data. The Sensitive Data Scanner regex syntax is a subset of [PCRE2][1].
+In [Sensitive Data Scanner][1], the scanning rule determines what sensitive information to match within the data. You can use rules from the [Scanning Rule Library][2] or you can create custom scanning rules using regular expression (regex) patterns to scan for sensitive information. The Sensitive Data Scanner regex syntax is a subset of [PCRE2][3].
 
-{{< whatsnext desc="The available regex syntax for custom rules are categorized as follows:" >}}
+{{< whatsnext desc="The available regex syntax for custom rules are broken down into the following categories:" >}}
     {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#alternation" >}}Alternation{{< /nextlink >}}
     {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#assertions" >}}Assertions{{< /nextlink >}}
     {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#ascii_classes" >}}ASCII classes{{< /nextlink >}}
@@ -28,45 +28,45 @@ In Sensitive Data Scanner, the scanning rule determines what sensitive informati
 
 ## Alternation
 
-Use alternation to choose the first expression that matches. An expression in an alteration can be left empty, which matches to anything, thus making the entire alternation expression optional.
+Use alternation to choose the first expression that matches. An expression in an alteration can be left empty, which means it matches to anything and makes the entire alternation expression optional.
 
-| Regex Syntax| Description                              |
-| ------------| ---------------------------------------- |
-| `A\|B\|C`   | An alternation.                          |
-| `A\|B\|`    | An alternation with an empty expression. |
+| Regex Syntax      | Description                              |
+| ------------------| ---------------------------------------- |
+| `...\|...\|...`   | An alternation.                          |
+| `...\|...\|`      | An alternation with an empty expression. |
 
 ## Assertions
 
-| Assertion | Description                                                               |
-| --------- | ------------------------------------------------------------------------- |
-| `\b `     | A word boundary.                                                          |
-| `\B`      | Not a word boundary.                                                      |
-| `^`       | Start of line.                                                            |
-| `$`       | End of line.                                                              |
-| `/A`      | Start of text.                                                            |
-| `\z`      | End of text.                                                              |
-| `\Z`      | End of text (or before a `\n` that is immediately before the end of text).|
+| Assertion | Description                                                                    |
+| --------- | ------------------------------------------------------------------------------ |
+| `\b `     | A word boundary.                                                               |
+| `\B`      | Not a word boundary.                                                           |
+| `^`       | Start of a line.                                                               |
+| `$`       | End of a line.                                                                 |
+| `/A`      | Start of text.                                                                 |
+| `\z`      | End of text.                                                                   |
+| `\Z`      | End of text (or before a `\n` that is immediately before the end of the text). |
 
 ## ASCII classes
 
-Names classes that can be used in [custom character classes](#custom-character-classes), for example [[:ascii:]]. These only match ASCII characters.
+Names classes that can be used in [custom character classes](#custom-character-classes), for example `[[:ascii:]]`. These only match ASCII characters.
 
-| Names Class | Description                                     |
-| ----------- | ----------------------------------------------- |
-| `alnum`     | Alphanumeric                                    |
-| `alpha`     | Alphabetical                                    |
-| `ascii`     | An ASCII character                              |
-| `blank`     | Space or tab                                    |
-| `cntrl`     | Control character                               |
-| `digit`     | Any digit                                       |
-| `graph`     | Any graphical/printing character (not a space)  |
-| `lower`     | Any lowercase letter                            |
-| `print`     | Any printable character (including spaces)      |
-| `punct`     | Any punctuation character                       |
-| `space`     | Whitespace                                      |
-| `upper`     | Any uppercase letter                            |
-| `word`      | Any uppercase letter                            |
-| `xdigit`    | Any hexadecimal digit                           |
+| Names Class | Description                                       |
+| ----------- | ------------------------------------------------- |
+| `alnum`     | Alphanumeric.                                     |
+| `alpha`     | Alphabetic.                                       |
+| `ascii`     | Any ASCII character.                              |
+| `blank`     | A space or tab.                                   |
+| `cntrl`     | A control character.                              |
+| `digit`     | Any digit.                                        |
+| `graph`     | Any graphical or printing character (not a space).|
+| `lower`     | Any lowercase letter.                             |
+| `print`     | Any printable character (including spaces).       |
+| `punct`     | Any punctuation character.                        |
+| `space`     | A whitespace.                                     |
+| `upper`     | Any uppercase letter.                             |
+| `word`      | The same as `/w`.                                 |
+| `xdigit`    | Any hexadecimal digit.                            |
 
 ## Character escapes
 
@@ -75,8 +75,8 @@ Names classes that can be used in [custom character classes](#custom-character-c
 | `\xhh`          | Escapes characters with hex code `hh` (up to 2 digits are allowed).  |
 | `\x{hhhhhh}`    | Escapes characters with hex code `hhhhhh` (between 1 and 6 digits).  |
 | `\a`            | Escapes a bell `(\x{7})`.                                            |
-| `\b`            | Escapes a backspace `(\x{8})`. This only works in a custom character class (for example, `[\b]`) otherwise it is treated as a word boundary. |
-| `\cx`           | Escapes a control sequence, where x is `A-Z` (upper or lowercase). (`\cA` = `\x{0}`, `\cB` = `\x{1}`,...`\cZ` = `\x{19})` |
+| `\b`            | Escapes a backspace `(\x{8})`. This only works in a custom character class (for example, `[\b]`), otherwise it is treated as a word boundary. |
+| `\cx`           | Escapes a control sequence, where `x` is `A-Z` (upper or lowercase). For example: `\cA` = `\x{0}`, `\cB` = `\x{1}`,...`\cZ` = `\x{19}`. |
 | `\e`            | Escapes `(\x{1B})`.                                                  |
 | `\f`            | Escapes a form feed `(\x{C})`.                                       |
 | `\n`            | Escapes a newline (`\x{A}`).                                         |
@@ -92,12 +92,12 @@ Names classes that can be used in [custom character classes](#custom-character-c
 | `\d`            | Matches any ASCII digit (`[0-9]`).                                                            |
 | `\D `           | Matches anything that does not match with `\d`.                                               |
 | `\h`            | Matches a space or tab (`[\x{20}\t]`).                                                        |
-| `\H`            | Matches anything that does not match with `\h`                                                |
-| `\s`            | Matches any ASCII whitespace (`[\r\n\t\x{C}\x{B}\x{20}]`)                                     |
+| `\H`            | Matches anything that does not match with `\h`.                                               |
+| `\s`            | Matches any ASCII whitespace (`[\r\n\t\x{C}\x{B}\x{20}]`).                                    |
 | `\S`            | Matches anything that does not match with `\s`.                                               |
-| `\v`            | Matches ASCII vertical space (`[\x{B}\x{A}\x{C}\x{D}]`)                                       |
+| `\v`            | Matches ASCII vertical space (`[\x{B}\x{A}\x{C}\x{D}]`).                                      |
 | `\V`            | Matches anything that does not match with `\v`.                                               |
-| `\w`            | Matches any ASCII word character (`[a-zA-Z0-9_]`)                                             |
+| `\w`            | Matches any ASCII word character (`[a-zA-Z0-9_]`).                                            |
 | `\W`            | Matches anything that does not match with `\w`.                                               |
 | `\p{x}`         | Matches anything that matches the unicode property `x`. See [Unicode Properties](#unicode-properties) for a full list.|
 
@@ -119,7 +119,9 @@ Use groups to change precedence or set flags. Since captures are not used in Sen
 | Regex Syntax                                           | Description            |
 | ------------------------------------------------------ | ---------------------- |
 | `(...)`                                                | A capture group.       |
-| `(?<name>...)`<br> `(?P<name>...)` <br> `(?'name'...)` | A named capture group. |
+| `(?<name>...)`                                         | A named capture group. |
+| `(?P<name>...)`                                        | A named capture group. |
+| `(?'name'...)`                                         | A named capture group. |
 | `(?:...)`                                              | A non-capturing group. |
 
 ## Setting flags
@@ -128,7 +130,7 @@ Use flags to modify regex match. There are two ways to specify flags:
 1. `(?imsx:...)`: Set flags that only apply to the expression inside of a non-capturing group.
 2. `(?imsx)...`: Set flags that apply to the rest of the current group.
 
-Flags listed after a `-` are removed, if they were previously set.
+Flags listed after a `-` are removed if they were previously set.
 
 Use `(?-imsx)` to unset the `imsx` flags.
 
@@ -137,18 +139,18 @@ Use `(?-imsx)` to unset the `imsx` flags.
 | Flag | Name             | Description                                                                           |
 | ---- | ---------------- | ------------------------------------------------------------------------------------- |
 | `i`  | Case insensitive | Letters match both upper and lower case.                                              |
-| `m`  | Multi-line mode  | `^` and `$` match the beginning and end of line                                       |
-| `s`  | Single line      | This allows `.` to match any character, when usually it matches anything except `\n`).|
-| `x`  | Extended         | Whitespace is ignored (except in a custom character class)                            |
+| `m`  | Multi-line mode  | `^` and `$` match the beginning and end of line.                                      |
+| `s`  | Single line      | Allows `.` to match any character, when it usually matches anything except `\n`).     |
+| `x`  | Extended         | Whitespace is ignored (except in a custom character class).                           |
 
 ## Quoting
 
-Use the regex syntax `\Q...\E` to handle everything between `\Q` and `\E` as a literal.
+Use the regex syntax `\Q...\E` to treat everything between `\Q` and `\E` as a literal.
 
 
 ## Quantifiers
 
-Quantifiers repeat the previous expression. The term greedy means that the most number of repetitions are taken, and are only given back as needed to find a match. Lazy takes the minimum number of repetitions, and adds more as needed.
+Quantifiers repeat the previous expression. Greedy means that the most number of repetitions are taken, and are only given back as needed to find a match. Lazy takes the minimum number of repetitions and adds more as needed.
 
 | Regex Syntax | Description                                                                   |
 | ------------ | ----------------------------------------------------------------------------- |
@@ -159,12 +161,12 @@ Quantifiers repeat the previous expression. The term greedy means that the most 
 | `*`          | Repeat `0` or more times (greedy).                                            |
 | `*?`         | Repeat `0` or more times (lazy).                                              |
 | `{n}`        | Repeat exactly `n` times (the lazy modifier is accepted here but is ignored). |
-| `{n,m}`      | Repeat at least `n`, but no more than m times (greedy).                       |
-| `{n,m}?`     | Repeat at least `n`, but no more than m times (lazy).                         |
+| `{n,m}`      | Repeat at least `n` times, but no more than `m` times (greedy).               |
+| `{n,m}?`     | Repeat at least `n times`, but no more than `m` times (lazy).                 |
 | `{n,}`       | Repeat at least `n` times (greedy).                                           |
 | `{n,}?`      | Repeat at least `n` times (lazy).                                             |
 
-**Note**: `{,m}`is not valid and is instead treated as a literal. Similarly, any syntax differences such as adding spaces inside the braces causes the quantifier to be treated as a literal instead.
+**Note**: `{,m}`is not valid and is treated as a literal. Similarly, any syntax differences such as adding spaces inside the braces cause the quantifier to be treated as a literal instead.
 
 ## Unicode properties
 
@@ -218,10 +220,12 @@ Unicode properties for `x` in the character class `\p{x}`.
 
 Script names can be used to match any character from the script. The following are allowed:
 
-`Adlam`, `Ahom`, `Anatolian_Hieroglyphs`, `Arabic`, `Armenian`, `Avestan`, `Balinese`, `Bamum`, `Bassa_Vah`, `Batak`, `Bengali`, `Bhaiksuki`, `Bopomofo`, `Brahmi`, `Braille`, `Buginese`, `Buhid`, `Canadian_Aboriginal`, `Carian`, `Caucasian_Albanian`, `Chakma`, `Cham`, `Cherokee`, `Chorasmian`, `Common`, `Coptic`, `Cuneiform`, `Cypriot`, `Cypro_Minoan`, `Cyrillic`, `Deseret`, `Devanagari`, `Dives_Akuru`, `Dogra`, `Duployan`, `Egyptian_Hieroglyphs`, `Elbasan`, `Elymaic`, `Ethiopic`, `Georgian`, `Glagolitic`, `Gothic`, `Grantha`, `Greek`, `Gujarati`, `Gunjala_Gondi`, `Gurmukhi`, `Han`, `Hangul`, `Hanifi_Rohingya`, `Hanunoo`, `Hatran`, `Hebrew`, `Hiragana`, `Imperial_Aramaic`, `Inherited`, `Inscriptional_Pahlavi`, `Inscriptional_Parthian`, `Javanese`, `Kaithi`, `Kannada`, `Katakana`, `Kayah_Li`, `Kharoshthi`, `Khitan_Small_Script`, `Khmer`, `Khojki`, `Khudawadi`, `Lao`, `Latin`, `Lepcha`, `Limbu`, `Linear_A`, `Linear_B`, `Lisu`, `Lycian`, `Lydian`, `Mahajani`, `Makasar`, `Malayalam`, `Mandaic`, `Manichaean`, `Marchen`, `Masaram_Gondi`, `Medefaidrin`, `Meetei_Mayek`, `Mende_Kikakui`, `Meroitic_Cursive`, `Meroitic_Hieroglyphs`, `Miao`, `Modi`, `Mongolian`, `Mro`, `Multani`, `Myanmar`, `Nabataean`, `Nandinagari`, `New_Tai_Lue`, `Newa`, `Nko`, `Nushu`, `Ogham`, `Ol_Chiki`, `Old_Hungarian`, `Old_Italic`, `Old_North_Arabian`, `Old_Permic`, `Old_Persian`, `Old_Sogdian`, `Old_South_Arabian`, `Old_Turkic`, `Old_Uyghur`, `Oriya`, `Osage`, `Osmanya`, `Pahawh_Hmong`, `Palmyrene`, `Pau_Cin_Hau`, `Phags_Pa`, `Phoenician`, `Psalter_Pahlavi`, `Rejang`, `Runic`, `Samaritan`, `Saurashtra`, `Sharada`, `Shavian`, `Siddham`, `SignWriting`, `Sinhala`, `Sogdian`, `Sora_Sompeng`, `Soyombo`, `Sundanese`, `Syloti_Nagri`, `Syriac`, `Tagalog`, `Tagbanwa`, `Tai_Le`, `Tai_Tham`, `Tai_Viet`, `Takri`, `Tamil`, `Tangsa`, Tang`ut, `Telugu`, `Thaana`, `Thai`, `Tibetan`, `Tifinagh`, `Tirhuta`, `Toto`, `Ugaritic`, `Vai`, `Vithkuqi`, `Wancho`, `Warang_Citi`, `Yezidi`, `Yi`, `Zanabazar_Square`.
+`Adlam`, `Ahom`, `Anatolian_Hieroglyphs`, `Arabic`, `Armenian`, `Avestan`, `Balinese`, `Bamum`, `Bassa_Vah`, `Batak`, `Bengali`, `Bhaiksuki`, `Bopomofo`, `Brahmi`, `Braille`, `Buginese`, `Buhid`, `Canadian_Aboriginal`, `Carian`, `Caucasian_Albanian`, `Chakma`, `Cham`, `Cherokee`, `Chorasmian`, `Common`, `Coptic`, `Cuneiform`, `Cypriot`, `Cypro_Minoan`, `Cyrillic`, `Deseret`, `Devanagari`, `Dives_Akuru`, `Dogra`, `Duployan`, `Egyptian_Hieroglyphs`, `Elbasan`, `Elymaic`, `Ethiopic`, `Georgian`, `Glagolitic`, `Gothic`, `Grantha`, `Greek`, `Gujarati`, `Gunjala_Gondi`, `Gurmukhi`, `Han`, `Hangul`, `Hanifi_Rohingya`, `Hanunoo`, `Hatran`, `Hebrew`, `Hiragana`, `Imperial_Aramaic`, `Inherited`, `Inscriptional_Pahlavi`, `Inscriptional_Parthian`, `Javanese`, `Kaithi`, `Kannada`, `Katakana`, `Kayah_Li`, `Kharoshthi`, `Khitan_Small_Script`, `Khmer`, `Khojki`, `Khudawadi`, `Lao`, `Latin`, `Lepcha`, `Limbu`, `Linear_A`, `Linear_B`, `Lisu`, `Lycian`, `Lydian`, `Mahajani`, `Makasar`, `Malayalam`, `Mandaic`, `Manichaean`, `Marchen`, `Masaram_Gondi`, `Medefaidrin`, `Meetei_Mayek`, `Mende_Kikakui`, `Meroitic_Cursive`, `Meroitic_Hieroglyphs`, `Miao`, `Modi`, `Mongolian`, `Mro`, `Multani`, `Myanmar`, `Nabataean`, `Nandinagari`, `New_Tai_Lue`, `Newa`, `Nko`, `Nushu`, `Ogham`, `Ol_Chiki`, `Old_Hungarian`, `Old_Italic`, `Old_North_Arabian`, `Old_Permic`, `Old_Persian`, `Old_Sogdian`, `Old_South_Arabian`, `Old_Turkic`, `Old_Uyghur`, `Oriya`, `Osage`, `Osmanya`, `Pahawh_Hmong`, `Palmyrene`, `Pau_Cin_Hau`, `Phags_Pa`, `Phoenician`, `Psalter_Pahlavi`, `Rejang`, `Runic`, `Samaritan`, `Saurashtra`, `Sharada`, `Shavian`, `Siddham`, `SignWriting`, `Sinhala`, `Sogdian`, `Sora_Sompeng`, `Soyombo`, `Sundanese`, `Syloti_Nagri`, `Syriac`, `Tagalog`, `Tagbanwa`, `Tai_Le`, `Tai_Tham`, `Tai_Viet`, `Takri`, `Tamil`, `Tangsa`, `Tangut`, `Telugu`, `Thaana`, `Thai`, `Tibetan`, `Tifinagh`, `Tirhuta`, `Toto`, `Ugaritic`, `Vai`, `Vithkuqi`, `Wancho`, `Warang_Citi`, `Yezidi`, `Yi`, `Zanabazar_Square`.
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.pcre.org/current/doc/html/pcre2syntax.html
+[1]: /sensitive_data_scanner/
+[2]: /sensitive_data_scanner/library_rules/
+[3]: https://www.pcre.org/current/doc/html/pcre2syntax.html
