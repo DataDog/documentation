@@ -77,8 +77,8 @@ Names classes that can be used in [custom character classes](#custom-character-c
 | `\a`            | Escapes a bell `(\x{7})`.                                            |
 | `\b`            | Escapes a backspace `(\x{8})`. This only works in a custom character class (for example, `[\b]`), otherwise it is treated as a word boundary. |
 | `\cx`           | Escapes a control sequence, where `x` is `A-Z` (upper or lowercase). For example: `\cA` = `\x{0}`, `\cB` = `\x{1}`,...`\cZ` = `\x{19}`. |
-| `\e`            | Escapes `(\x{1B})`.                                                  |
-| `\f`            | Escapes a form feed `(\x{C})`.                                       |
+| `\e`            | Escapes the ASCII character called `Escape` (`\x{1B}`).              |
+| `\f`            | Escapes a form feed (`\x{C}`).                                       |
 | `\n`            | Escapes a newline (`\x{A}`).                                         |
 | `\r`            | Escapes a carriage return (`\x{D}`)                                  |
 | `\t`            | Escapes a tab (`\x{9}`).                                             |
@@ -110,7 +110,7 @@ Names classes that can be used in [custom character classes](#custom-character-c
 | `[a-zA-Z]`                      | Matches anything in the range `A - Z` (upper or lowercase).                         |
 | `[\s\w\d\S\W\D\v\V\h\H\p{x}...]`| Other classes defined above are allowed (except `.` which is treated as a literal). |
 | `[[:ascii_class:]]`             | Matches special named [ASCII classes](#ascii-classes).                              |
-| `[[:^ascii_class:]]`            | Matches inverted [ASCII class](#ascii-classes).                                     |
+| `[[:^ascii_class:]]`            | Matches inverted [ASCII classes](#ascii-classes).                                   |
 
 ## Groups
 
@@ -126,7 +126,7 @@ Use groups to change precedence or set flags. Since captures are not used in Sen
 
 ## Setting flags
 
-Use flags to modify regex match. There are two ways to specify flags:
+Use flags to modify the regex behavior. There are two ways to specify flags:
 1. `(?imsx:...)`: Set flags that only apply to the expression inside of a non-capturing group.
 2. `(?imsx)...`: Set flags that apply to the rest of the current group.
 
@@ -180,24 +180,20 @@ Unicode properties for `x` in the character class `\p{x}`.
 | `Cn`              | Unassigned            |
 | `Co`              | Private use           |
 | `Cs`              | Surrogate             |
-|                   |                       |
 | `L`               | Letter                |
 | `Ll`              | Lowercase letter      |
 | `Lm`              | Modifier letter       |
 | `Lo`              | Other letter          |
 | `Lt`              | Title case letter     |
 | `Lu`              | Uppercase letter      |
-|                   |                       |
 | `M`               | Mark                  |
 | `Mc`              |Spacing mark           |
 | `Me`              | Enclosing mark        |
 | `Mn`              | Non-spacing mark      |
-|                   |                       |
 | `N`               | Number                |
 | `Nd`              | Decimal number        |
 | `Nl`              | Letter number         |
 | `No`              | Other number          |
-|                   |                       |
 | `P`               | Punctuation           |
 | `Pc`              | Connector punctuation |
 | `Pd`              | Dash punctuation      |
@@ -206,13 +202,11 @@ Unicode properties for `x` in the character class `\p{x}`.
 | `Pi`              | Initial punctuation   |
 | `Po`              | Other punctuation     |
 | `Ps`              | Open punctuation      |
-|                   |                       |
 | `S`               | Symbol                |
 | `Sc`              | Currency symbol       |
 | `Sk`              | Modifier symbol       |
 | `Sm`              | Mathematical symbol   |
 | `So`              | Other symbol          |
-|                   |                       |
 | `Z`               | Separator             |
 | `Zl`              | Line separator        |
 | `Zp`              | Paragraph separator   |
