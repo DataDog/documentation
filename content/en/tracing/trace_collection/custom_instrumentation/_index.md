@@ -75,7 +75,7 @@ If [OpenTelemetry][1] or [`ddtrace`][2] custom instrumentation doesn't work for 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/guide/add_span_md_and_graph_it/
+[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 [2]: /tracing/trace_collection/custom_instrumentation/dd_libraries/
 [3]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation
 [4]: /tracing/trace_collection/custom_instrumentation/opentracing/
