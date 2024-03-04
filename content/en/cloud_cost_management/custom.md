@@ -39,7 +39,8 @@ All line items must meet the following requirements and include the [properties 
 - All required column names (CSV) or property names (JSON) are [PascalCased][5]. For example, you must use `"ProviderName"`, not `"providername"` or `"ProviderNAME"`.
 - All column names (CSV) and values or property names (JSON) and values have a maximum of 1,000 characters.
 - NULL or blank ("") parameter values are not accepted.
-- All of the data is viewed as UTC.
+
+Additionally, all dates are transformed into UTC timestamps.  For example, "2024-01-01" becomes "2024-01-01 00:00:00".
 
 ## Setup
 
@@ -52,7 +53,7 @@ To use Custom Costs in Datadog, you must [configure Cloud Cost Management][1] fo
 |`ProviderName` | The service being consumed. | Snowflake | "" or NULL|  |
 |`ChargeDescription` | Identifies what aspect of a service is being charged. | Database Costs | "" or NULL|  |
 |`ChargePeriodStart`| Start day of a charge. | 2023-09-01| 2023-01-01 12:34:56| Formatted YYYY-MM-DD, where `ChargePeriodStart` <= `ChargePeriodEnd`.|
-|`ChargePeriodEnd` | Last day of a charge.  | 2023-09-30 | 01/01/2023 | Formatted YYYY-MM-DD. |
+|`ChargePeriodEnd` | Last day of a charge (inclusive).  | 2023-09-30 | 01/01/2023 | Formatted YYYY-MM-DD. |
 |`BilledCost`| The amount being charged. |10.00 |NaN | Number-based decimal. |
 |`BillingCurrency` | Currency of billed cost. | USD| EUR | Must be USD. |
 
