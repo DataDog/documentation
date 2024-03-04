@@ -44,7 +44,7 @@ algolia:
 You can set up tracing to include collecting trace information about proxies.
 
 {{< tabs >}}
-{{% tab "Envoy" %}}
+{{< tab "Envoy" >}}
 
 Datadog APM is included in Envoy v1.9.0 and newer.
 
@@ -286,7 +286,7 @@ The available [environment variables][3] depend on the version of the C++ tracer
 [1]: https://github.com/DataDog/dd-opentracing-cpp/tree/master/examples/envoy-tracing
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [3]: /tracing/setup/cpp/#environment-variables
-{{% /tab %}}
+{{< /tab >}}
 {{< tab "NGINX" >}}
 
 Datadog APM supports NGINX in two configurations:
@@ -467,7 +467,7 @@ data:
 {{% tab "v1.10.0 and older" %}}
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> OpenTracing has been deprecated in v1.10.0. As a in-place replacement, we recommend to use the OpenTelemetry collector.
+  <strong>Note:</strong> OpenTracing and Datadog's integration has been deprecated in v1.10.0. As a drop-in replacement, we recommend to use the OpenTelemetry collector.
 </div>
 
 Before you begin, ensure your [Datadog Agent has gRPC OTLP Ingestion enabled][1]. Then, make sure that your nginx-ingress controller's pod spec has the `HOST_IP` environment variable set. Add this entry to the `env:` block that contains the environment variables `POD_NAME` and `POD_NAMESPACE`.
@@ -502,7 +502,7 @@ data:
 {{< /tabs >}} <!-- nginx-ingress -->
 {{< /tab >}} <!-- nginx -->
 
-{{% tab "Istio" %}}
+{{< tab "Istio" >}}
 
 Datadog monitors every aspect of your Istio environment, so you can:
 - View individual distributed traces for applications transacting over the mesh with APM (see below).
@@ -654,8 +654,8 @@ If using Kubernetes 1.18+, `appProtocol: tcp` can be added to the port specifica
 [11]: /tracing/setup/cpp/#environment-variables
 [12]: https://istio.io/docs/ops/configuration/traffic-management/protocol-selection/#manual-protocol-selection
 [13]: https://istio.io/latest/docs/releases/supported-releases/#support-status-of-istio-releases
-{{% /tab %}}
-{{% tab "Kong" %}}
+{{< /tab >}}
+{{< tab "Kong" >}}
 
 Datadog APM is available for [Kong Gateway][1] using the [kong-plugin-ddtrace][2] plugin.
 
@@ -700,7 +700,7 @@ More configuration options can be found on the [kong-plugin-ddtrace][3] plugin d
 [2]: https://github.com/DataDog/kong-plugin-ddtrace
 [3]: https://github.com/DataDog/kong-plugin-ddtrace#configuration
 
-{{% /tab %}}
+{{< /tab >}}
 {{< /tabs >}}
 
 ## Further Reading
