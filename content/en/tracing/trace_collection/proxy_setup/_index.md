@@ -287,7 +287,7 @@ The available [environment variables][3] depend on the version of the C++ tracer
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent
 [3]: /tracing/setup/cpp/#environment-variables
 {{% /tab %}}
-{{% tab "NGINX" %}}
+{{< tab "NGINX" >}}
 
 Datadog APM supports NGINX in two configurations:
 - NGINX operated as a proxy with tracing provided by the Datadog module.
@@ -377,7 +377,7 @@ http {
 
 ## Ingress-NGINX Controller for Kubernetes
 
-{{< tabs groupId="ingress-nginx-version" >}}
+{{< tabs >}}
 {{% tab "< v1.10.0" %}}
 
 To enable Datadog tracing, create or edit a ConfigMap to set `enable-opentracing: "true"` and the `datadog-collector-host` to which traces should be sent.
@@ -444,14 +444,6 @@ data:
   datadog-sample-rate: "0.4"
 ```
 
-<div class="alert alert-warning">
-Due to a bug in the Datadog tracing integration, the <a
-href="https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#datadog-priority-sampling">datadog-priority-sampling</a>
-option has no effect, and it is not possible to use the sampling rates <a
-href="https://docs.datadoghq.com/tracing/trace_pipeline/ingestion_mechanisms/#in-the-agent">calculated
-by the Datadog Agent</a>. We are working to resolve this bug.
-</div>
-
 [1]: https://github.com/DataDog/nginx-datadog/releases/latest
 [2]: https://hub.docker.com/layers/library/amazonlinux/2.0.20230119.1/images/sha256-db0bf55c548efbbb167c60ced2eb0ca60769de293667d18b92c0c089b8038279?context=explore
 [3]: https://hub.docker.com/layers/library/nginx/1.23.2-alpine/images/sha256-0f2ab24c6aba5d96fcf6e7a736333f26dca1acf5fa8def4c276f6efc7d56251f?context=explore
@@ -470,12 +462,12 @@ by the Datadog Agent</a>. We are working to resolve this bug.
 [16]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#datadog-sample-rate
 [17]: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/
 
-{{% /tab %}}
+{{% /tab %}} <!-- nginx-ingress < 1.10.0 -->
 
 {{% tab "v1.10.0 and older" %}}
 
 <div class="alert alert-warning">
-  <strong>Note:</strong> OpenTracing has been deprecated in v1.10.0. For now, use the OpenTelemetry collector.
+  <strong>Note:</strong> OpenTracing has been deprecated in v1.10.0. As a in-place replacement, we recommend to use the OpenTelemetry collector.
 </div>
 
 Before you begin, ensure your [Datadog Agent has gRPC OTLP Ingestion enabled][1]. Then, make sure that your nginx-ingress controller's pod spec has the `HOST_IP` environment variable set. Add this entry to the `env:` block that contains the environment variables `POD_NAME` and `POD_NAMESPACE`.
@@ -487,18 +479,12 @@ Before you begin, ensure your [Datadog Agent has gRPC OTLP Ingestion enabled][1]
       fieldPath: status.hostIP
 ```
 
-
+To enable OpenTelemetry instrumentation for Ingress-NGINX Controller, create or edit a ConfigMap:
 
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  labels:
-    app.kubernetes.io/component: controller
-    app.kubernetes.io/instance: ingress-nginx
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.7.1
   name: ingress-nginx-controller
   namespace: ingress-nginx
 data:
@@ -512,11 +498,10 @@ data:
 
 [1]: /opentelemetry/otlp_ingest_in_the_agent/
 
-{{% /tab %}}
+{{% /tab %}} <!-- nginx-ingress 1.10.0+ >
+{{< /tabs >}} <!-- nginx-ingress -->
+{{< /tab >}} <!-- nginx -->
 
-{{< /tabs >}}
-
-{{% /tab %}}
 {{% tab "Istio" %}}
 
 Datadog monitors every aspect of your Istio environment, so you can:
