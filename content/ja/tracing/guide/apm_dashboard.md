@@ -9,9 +9,6 @@ further_reading:
 - link: /tracing/guide/slowest_request_daily/
   tag: 3 分
   text: ウェブサービスの最も遅いエンドポイントで最も遅いトレースをデバッグする
-- link: /tracing/guide/add_span_md_and_graph_it/
-  tag: 7 分
-  text: スパンタグを追加し、アプリケーションのパフォーマンスをフィルタリングし、グループ化する
 - link: /tracing/guide/
   tag: ''
   text: すべてのガイド
