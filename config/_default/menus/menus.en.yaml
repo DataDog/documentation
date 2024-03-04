@@ -959,7 +959,7 @@ main:
     identifier: cloudcraft_faq
     parent: cloudcraft
     weight: 7
-  - name: Api
+  - name: API
     url: cloudcraft/api
     identifier: cloudcraft_api
     parent: cloudcraft
@@ -969,32 +969,32 @@ main:
     identifier: cloudcraft_api_aws_accounts
     parent: cloudcraft_api
     weight: 1
-  - name: List my aws accounts
+  - name: List AWS accounts
     url: 'cloudcraft/api/aws-accounts/#list-my-aws-accounts'
     identifier: cloudcraft_api_aws_accounts_list
     parent: cloudcraft_api_aws_accounts
     weight: 1
-  - name: Add aws account
+  - name: Add an AWS account
     url: 'cloudcraft/api/aws-accounts/#add-aws-account'
     identifier: cloudcraft_api_aws_accounts_add
     parent: cloudcraft_api_aws_accounts
     weight: 2
-  - name: Delete aws account
+  - name: Delete an AWS account
     url: 'cloudcraft/api/aws-accounts/#delete-aws-account'
     identifier: cloudcraft_api_aws_accounts_delete
     parent: cloudcraft_api_aws_accounts
     weight: 3
-  - name: Update aws account
+  - name: Update an AWS account
     url: 'cloudcraft/api/aws-accounts/#update-aws-account'
     identifier: cloudcraft_api_aws_accounts_update
     parent: cloudcraft_api_aws_accounts
     weight: 4
-  - name: Snapshot aws account
+  - name: Snapshot an AWS account
     url: 'cloudcraft/api/aws-accounts/#snapshot-aws-account'
     identifier: cloudcraft_api_aws_accounts_snapshot
     parent: cloudcraft_api_aws_accounts
     weight: 5
-  - name: Get my aws iam role parameters
+  - name: Get my AWS iam role parameters
     url: 'cloudcraft/api/aws-accounts/#get-my-aws-iam-role-parameters'
     identifier: cloudcraft_api_aws_accounts_iam
     parent: cloudcraft_api_aws_accounts
@@ -1004,27 +1004,27 @@ main:
     identifier: cloudcraft_api_azure_accounts
     parent: cloudcraft_api
     weight: 2
-  - name: list my azure accounts
+  - name: List Azure accounts
     url: 'cloudcraft/api/azure-accounts/#list-my-azure-accounts'
     identifier: cloudcraft_api_azure_accounts_list
     parent: cloudcraft_api_azure_accounts
     weight: 1
-  - name: Add azure account
+  - name: Add an Azure account
     url: 'cloudcraft/api/azure-accounts/#add-azure-account'
     identifier: cloudcraft_api_azure_accounts_add
     parent: cloudcraft_api_azure_accounts
     weight: 2
-  - name: Delete azure account
+  - name: Delete an Azure account
     url: 'cloudcraft/api/azure-accounts/#delete-azure-account'
     identifier: cloudcraft_api_azure_accounts_delete
     parent: cloudcraft_api_azure_accounts
     weight: 3
-  - name: Update azure account
+  - name: Update an Azure account
     url: 'cloudcraft/api/azure-accounts/#update-azure-account'
     identifier: cloudcraft_api_azure_accounts_update
     parent: cloudcraft_api_azure_accounts
     weight: 4
-  - name: Snapshot azure account
+  - name: Snapshot an Azure account
     url: 'cloudcraft/api/azure-accounts/#snapshot-azure-account'
     identifier: cloudcraft_api_azure_accounts_snapshot
     parent: cloudcraft_api_azure_accounts
@@ -1039,22 +1039,22 @@ main:
     identifier: cloudcraft_api_blueprints_list
     parent: cloudcraft_api_blueprints
     weight: 1
-  - name: Create blueprint
+  - name: Create a blueprint
     url: 'cloudcraft/api/blueprints/#create-blueprint'
     identifier: cloudcraft_api_blueprints_create
     parent: cloudcraft_api_blueprints
     weight: 2
-  - name: Delete blueprint
+  - name: Delete a blueprint
     url: 'cloudcraft/api/blueprints/#delete-blueprint'
     identifier: cloudcraft_api_blueprints_delete
     parent: cloudcraft_api_blueprints
     weight: 3
-  - name: Retrieve blueprint
+  - name: Retrieve a blueprint
     url: 'cloudcraft/api/blueprints/#retrieve-blueprint'
     identifier: cloudcraft_api_blueprints_retrieve
     parent: cloudcraft_api_blueprints
     weight: 4
-  - name: Update blueprint
+  - name: Update a blueprint
     url: 'cloudcraft/api/blueprints/#update-blueprint'
     identifier: cloudcraft_api_blueprints_update
     parent: cloudcraft_api_blueprints
@@ -1079,7 +1079,7 @@ main:
     identifier: cloudcraft_api_users
     parent: cloudcraft_api
     weight: 5
-  - name: Get my information
+  - name: Get user profile
     url: 'cloudcraft/api/users/#get-my-information'
     identifier: cloudcraft_api_users_info
     parent: cloudcraft_api_users
