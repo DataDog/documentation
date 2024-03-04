@@ -41,6 +41,7 @@ Complete the following to enable Database Monitoring with your Oracle database:
 1. [Install the Agent](#install-the-agent)
 1. [Configure the Agent](#configure-the-agent)
 1. [Install or verify the Oracle integration](#install-or-verify-the-oracle-integration)
+1. [Validate the setup](#validate-the-setup)
 
 ### Create the user
 
@@ -48,7 +49,7 @@ Complete the following to enable Database Monitoring with your Oracle database:
 
 ### Install the Agent
 
-See the [DBM Setup Architecture][8] documentation to determine where to install the Agent. The Agent doesn't require any external Oracle clients.
+See the [DBM Setup Architecture][12] documentation to determine where to install the Agent. The Agent doesn't require any external Oracle clients.
 
 For installation steps, see the [Agent installation instructions][9].
 
@@ -62,10 +63,6 @@ Configure the Agent for each node by following the instructions for [Oracle RAC]
 
 Configure the Agent by following the instructions for [self-hosted Oracle databases][3].
 
-#### Validate
-
-[Run the Agent's status subcommand][1] and look for `oracle-dbm` under the **Checks** section. Navigate to the [Databases][2] page in Datadog to get started.
-
 ### Install or verify the Oracle integration
 
 #### First-time installations
@@ -75,6 +72,10 @@ On the Integrations page in Datadog, install the [Oracle integration][10] for yo
 #### Existing installations
 
 {{% dbm-existing-oracle-integration-setup %}}
+
+### Validate the setup
+
+[Run the Agent's status subcommand][1] and look for `oracle-dbm` under the **Checks** section. Navigate to the [Dashboard][11] and the [Databases][2] page in Datadog to get started.
 
 ## Custom queries
 
@@ -93,6 +94,7 @@ Database Monitoring supports custom queries for Oracle databases. See the [conf.
 [9]: https://app.datadoghq.com/account/settings/agent/latest
 [10]: https://app.datadoghq.com/integrations/oracle
 [11]: https://app.datadoghq.com/dash/integration/30990/dbm-oracle-database-overview
+[12]: /database_monitoring/architecture/
 
 ## Further reading
 
