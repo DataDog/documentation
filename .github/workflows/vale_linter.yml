@@ -31,6 +31,10 @@ jobs:
       uses: hestonhoffman/changed-lines@heston/bug-fix-filter
       with:
         file_filter: '.md, .html'
+    
+    - name: Test conditional    
+      if: ${{ steps.changed_lines.outputs.changed_lines }}
+      run: echo "Files changed"
       
     - name: Run vale on changed files
       run: |
