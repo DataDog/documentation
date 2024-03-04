@@ -114,7 +114,7 @@ Finally, you can also create entries from `service` tags in other Datadog produc
 
 ## Managing metadata in Service Catalog
 
-After you create these initial entries in your Service Catalog, it is important to keep the catalog updated consistently so that it remains effective. Service definition files should exist within your team’s version control to make it easier to reference new deployments and other changes to the services where an update may be required. 
+After you create these initial entries in your Service Catalog, it is important to keep the catalog updated consistently so that it remains effective. Service definition files should exist within your team's version control to make it easier to reference new deployments and other changes to the services where an update may be required. 
 
 You can also automate the management of your service metadata by configuring a [GitHub action][8]. This will also allow you to ensure that teams are declaring services in a way that meets your standards, such as requiring all of your production services to have valid runbook links. 
 
