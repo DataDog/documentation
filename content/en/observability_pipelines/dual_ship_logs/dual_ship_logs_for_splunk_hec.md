@@ -6,7 +6,7 @@ disable_toc: false
 
 ## Overview
 
-The Observability Pipelines Worker can dual ship your logs to Splunk and Datadog. You can configure your Splunk HTTP Event Collectors (HEC) to send logs to the Worker to dual ship them to Splunk and Datadog. See [Dual Ship Logs with Splunk TCP][1] if you want to use Splunk Heavy/Universal Forwarders.
+Configure your Splunk HTTP Event Collectors (HEC) to send logs to the Observability Pipelines Worker to dual ship logs to multiple destinations. See [Dual Ship Logs from Splunk TCP][1] if you want to use Splunk Heavy/Universal Forwarders.
 
 This document walks you through the following steps:
 
@@ -57,7 +57,7 @@ Add a query to filter your logs.
 1. Enter the daily quota limit.
 
 {{% /tab %}}
-{{% tab "Remap" %}}
+{{% tab "Edit field" %}}
 
 Select one of the following type of reamp in the dropdown menu: **add field**, **drop field**, or **rename field**.
 
@@ -91,7 +91,38 @@ For the **Rename** remap:
 
 ## Install the Observability Pipelines Worker
 
-Select your platform in the **Choose your installation platform** dropdown menu.
+1. Select your platform in the **Choose your installation platform** dropdown menu.
+1. Provide the environment variables for each of your selected destinations.
+{{< tabs >}}
+{{% tab "Splunk HEC" %}}
+1. Enter the Splunk HEC token in the **DD_OP_SOURCE_SPLUNK_HEC_TOKENS** field.   
+1. Enter the Splunk HEC endpoint URL in the **DD_OP_SOURCE_SPLUNK_HEC_ADDRESS**. For example `https://<your_account>.splunkcloud.com:8088`. See [Send Data to HTTP Event Collector][1] for more information.   
+**Note**: `/services/collector/event` is automatically appended to the endpoint.
+
+[1]: https://docs.splunk.com/Documentation/Splunk/latest/Data/UsetheHTTPEventCollector#Send_data_to_HTTP_Event_Collector
+
+{{% /tab %}}
+{{% tab "Splunk TCP" %}}
+
+Enter the Splunk TCP address into the **DD_OP_DESTINATION_SUMO_LOGIC_HTTP_COLLECTOR_URL** field.
+
+[1]: /agent/guide/agent-commands/
+
+{{% /tab %}}
+
+{{% tab "Sumo Logic" %}}
+
+Enter the Sumo Logic HTTP collector URL in the **DD_OP_DESTINATION_SUMO_LOGIC_HTTP_COLLECTOR_URL** field.
+
+{{% /tab %}}
+{{% tab "Datadog" %}}
+
+Text inside tab. [Link references][1] must be inside the tab.
+
+[1]: /agent/guide/agent-commands/
+
+{{% /tab %}}
+{{< /tabs >}}
 
 {{< tabs >}}
 {{% tab "Docker" %}}
