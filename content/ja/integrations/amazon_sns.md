@@ -3,7 +3,7 @@ aliases:
 - /ja/integrations/awssns/
 categories:
 - cloud
-- notification
+- notifications
 - aws
 - log collection
 dependencies: []
@@ -24,6 +24,7 @@ short_description: Amazon SNS メッセージを Datadog に、Datadog アラー
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< img src="integrations/amazon_sns/snsdashboard.png" alt="SNS ダッシュボード" popup="true">}}
 
 ## 概要
