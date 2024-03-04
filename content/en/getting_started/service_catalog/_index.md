@@ -126,11 +126,11 @@ Connect monitoring data from the rest of your observability platform to improve 
 
 With [unified service tagging][5], you can use the `service` tag to cross-reference service entities in the Service Catalog across all Datadog products. These tags can help enrich your service entities with metadata, metrics, and other context sources like Infrastructure Monitoring, RUM, Log Management, Software Delivery, and Security. 
 
-Application performance telemetry from Universal Service Monitoring and APM also provide out-of-the-box dependency mapping for your system ecosystem, so you can easily see how components interact with each other in all your runtime environments.
+Application performance telemetry from Universal Service Monitoring and APM also provide out-of-the-box dependency mapping for your system ecosystem, so you can see how components interact with each other in all your runtime environments.
 
 ## Enriching your Service Catalog
 
-Once services are populated in the catalog, you can enrich your service definitions with additional context to make them more useful. This could include adding key pieces of service metadata to your `service.definition.yaml` files such as: 
+After services are populated in the catalog, you can enrich your service definitions with additional context to make them more useful. This could include adding key pieces of service metadata to your `service.definition.yaml` files such as: 
 
 - Team
 - On-call engineer
@@ -146,7 +146,7 @@ Service Catalog uses service definition schemas to store and display this metada
 
 ## Using Service Catalog Scorecards
 
-[Service Scorecards][12] help you codify your organization’s best practices as rules that can be evaluated. By implementing scorecards in your catalog, your teams can measure many dimensions of service quality, including:
+[Service Scorecards][12] help you codify your organization's best practices as rules that can be evaluated. By implementing scorecards in your catalog, your teams can measure many dimensions of service quality, including:
 
 - Monitoring coverage
 - Production readiness
@@ -158,13 +158,16 @@ Datadog Scorecards include 10 out-of-the-box rules across observability practice
 
 To add custom rules to your Scorecards dashboard: 
 
-1. Click Create Rule on the Scorecards page 
+1. Click **Create Rule** on the Scorecards page.
 2. Specify the name of the rule, the scorecard it belongs to, a rule description, and the owning team. 
 3. Send an outcome of `pass`, `fail`, or `skip` for each `{rule, service}` tuple that you are evaluating to the [Scorecards API][13] `/scorecard/outcomes/batch` endpoint. 
 4. View an overview of outcomes in the Scorecards dashboard.
 
 {{< img src="/getting_started/service_catalog/create_rule.jpeg" alt="Create Rule modal to add custom rules in Scorecards dashboard" style="width:90%;" >}}
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com
 [2]: /tracing
