@@ -21,7 +21,7 @@ further_reading:
       tag: 'Documentation'
       text: 'Collect your traces'
 algolia:
-  tags: ['network traffic', 'destinations', 'ports', 'data buffering']
+  tags: ['network traffic', 'destinations', 'ports', 'data buffering', 'static IP addresses']
 ---
 
 ## Overview
@@ -175,6 +175,8 @@ Agent < v7.18.0 or 6.18.0: `app.`{{< region-param key="dd_site" code="true" >}}
 : `<VERSION>-flare.agent.`{{< region-param key="dd_site" code="true" >}}<br>
 For example, Agent v7.31.0 sends flare data to `7-31-0-flare.agent.`{{< region-param key="dd_site" code="true" >}}. You must add `*.agent.`{{< region-param key="dd_site" code="true" >}} to your inclusion list in your firewall(s).<br>
 
+### Static IP addresses
+
 All of these domains are **CNAME** records pointing to a set of static IP addresses. These addresses can be found at `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
 
 The information is structured as JSON following this schema:
@@ -279,7 +281,7 @@ See [logs endpoints][3] for other connection types.
 
 {{% /site-region %}}
 
-{{% site-region region="us3,us5,gov" %}}
+{{% site-region region="us3,us5,gov,ap1" %}}
 
 443/tcp
 : Port for most Agent data (Metrics, APM, Live Processes & Containers).

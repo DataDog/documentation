@@ -37,7 +37,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: amazon_kafka
-oauth: {}
 public_title: Amazon MSK (Agent)
 short_description: Surveillez les performances et la santé de vos clusters Amazon MSK.
 supported_os:

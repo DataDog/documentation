@@ -12,9 +12,9 @@ further_reading:
 - link: "/continuous_integration/pipelines"
   tag: "Documentation"
   text: "Learn about Pipeline Visibility"
-- link: "/static_analysis"
+- link: "/code_analysis"
   tag: "Documentation"
-  text: "Learn about Static Analysis"
+  text: "Learn about Code Analysis"
 - link: "/tracing/service_catalog"
   tag: "Documentation"
   text: "Learn about the Service Catalog"
@@ -24,11 +24,11 @@ further_reading:
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">CI Visibility is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
+<div class="alert alert-warning">DORA Metrics is not available in the selected site ({{< region-param key="dd_site_name" >}}) at this time.</div>
 {{< /site-region >}}
 
 {{< callout url="https://forms.gle/Eqq6uXfGjYxmqpjDA" header="false" >}}
-DORA Metrics are in private beta. To request access, complete the form.
+DORA Metrics are in private beta. Fill out the form below to be added to the waitlist.
 {{< /callout >}}
 
 ## Overview
@@ -51,7 +51,7 @@ Defining and tracking DORA metrics can help you identify areas of improvement fo
 
 ## Set up DORA Metrics
 
-Services tracked for DORA Metrics must be registered in the [Service Catalog][2]. For more information, see [Adding Entries to Service Catalog][3]. The `team` ownership from the Service Catalog is automatically associated with all metrics.
+Services tracked for the DORA Metrics Deployment Frequency and Change Lead Time must be registered in the [Service Catalog][2]. For more information, see [Adding Entries to Service Catalog][3]. The `team` ownership from the Service Catalog is automatically associated with all metrics.
 
 ### Deployment frequency
 
@@ -222,12 +222,13 @@ Submit deployment events as described in [deployment frequency](#deployment-freq
 
 You are required to provide the following incident attributes:
 
-- `service`
+- `services` or `team`. At least one is required.
 - `started_at`
 
 You can optionally add the following incident attributes:
 
 - `finished_at` for *resolved incidents*. Required for [time to restore service](#time-to-restore-service).
+- `id` for identifying incidents when they are created and resolved. This attribute is user-generated; when not provided, the endpoint returns a Datadog-generated UUID.
 - `name` to describe the incident.
 - `severity`
 - `env` to accurately filter your DORA metrics by environment.
@@ -247,7 +248,8 @@ curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/dora/inciden
   {
     "data": {
       "attributes": {
-        "service": "shopist",
+        "services": ["shopist"],
+        "team": "shopist-devs"
         "started_at": 1693491974000000000,
         "finished_at": 1693491984000000000,
         "git": {
@@ -277,7 +279,32 @@ Events can be sent both at the start of and after incident resolution. Incident 
 
 You can access and visualize your DORA metrics and filter them by team, service, repository, environment, and time period on the [DORA Metrics page][8].
 
-Use the information on this page to identify improvements or regressions for each metric, visualize changes, and compare trends over time. DORA metrics can be exported to dashboards and alerted on using [metric monitors][9].
+Use the information on this page to identify improvements or regressions for each metric, visualize changes, and compare trends over time. DORA metrics can be exported to dashboards or notebooks and be alerted on using [metric monitors][9].
+
+The metrics can also be queried with the [Query timeseries points][10] and [Query timeseries data across multiple products][11] API endpoints.
+
+The metrics provided by DORA Metrics are:
+
+| Metric | Type | Description |
+| :--- | :--- | :--- |
+| `dora.deployments.count` | count | Used for Deployment Frequency.
+| `dora.change_lead_time` | distribution | Contains the age in `seconds` of the git commits at the time of deployment.
+| `dora.incidents_impact` | count | Tracks the services or teams impacted by incidents. Used for Change Failure Rate with the formula `dora.incidents_impact / dora.deployments.count`. A big time rollup of at least 1 week is recommended to account for time difference between deployments and when the impact starts.
+| `dora.time_to_restore` | distribution | Contains the time in `seconds` between the incident's `started_at` and `finished_at`.
+
+All the metrics contain the following tags when available:
+- `service`
+- `team`
+- `env`
+- `repository_id`
+
+**Note**: The `severity` tag is available for the `dora.incidents_impact` and `dora.time_to_restore` metrics, if provided through the API.
+
+### Deployment and incident events
+
+DORA Metrics also provides individual `deployment`, `incident`, and `incident_finished` events in [Event Management][12] with `source:software_delivery_insights`.
+
+The events can be queried and visualized with the [Events Explorer][13].
 
 ### Limitations
 
@@ -298,3 +325,7 @@ Use the information on this page to identify improvements or regressions for eac
 [7]: /api/latest/dora-metrics/#send-an-incident-event-for-dora-metrics
 [8]: https://app.datadoghq.com/ci/dora
 [9]: https://docs.datadoghq.com/monitors/types/metric/?tab=threshold
+[10]: https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-points
+[11]: https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products
+[12]: https://app.datadoghq.com/event/explorer?query=source%3Asoftware_delivery_insights
+[13]: https://docs.datadoghq.com/service_management/events/explorer/

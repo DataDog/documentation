@@ -44,7 +44,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: mcache
-oauth: {}
 public_title: Memcache
 short_description: メモリ使用量、ヒット数、ミス数、エビクション数、フィルパーセンテージなどを追跡する。
 supported_os:

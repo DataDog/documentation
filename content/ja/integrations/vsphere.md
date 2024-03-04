@@ -37,7 +37,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: vsphere
-oauth: {}
 public_title: vSphere
 short_description: vSphere のリソース使用状況がアプリケーションに与える影響を把握
 supported_os:

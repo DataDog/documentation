@@ -36,7 +36,7 @@ Follow this guide to:
 
 1. [Instrument the application](#instrumenting-the-application) with the OpenTelemetry API.
 2. [Configure the application](#configuring-the-application) to send observability data to Datadog.
-3. [Correlate observability data](#correlate-observability-data) with unified service tagging.
+3. [Correlate observability data](#correlating-observability-data) with unified service tagging.
 4. [Run the application](#running-the-application) to generate observability data.
 5. [Explore observability data](#exploring-observability-data-in-datadog) in the Datadog UI.
 
@@ -130,12 +130,17 @@ exporters:
     api:
       key: ${DD_API_KEY}
       site: datadoghq.com
+   
+connectors:
+    datadog/connector:
+
 service:
   pipelines:
     metrics:
+      receivers: [otlp, datadog/connector] # <- update this line
       exporters: [datadog]
     traces:
-      exporters: [datadog]
+      exporters: [datadog, datadog/connector]
     logs:
       exporters: [datadog]
 {{< /code-block >}}  
@@ -187,7 +192,7 @@ receivers:
 service:
   pipelines:
     metrics:
-      receivers: [otlp, docker_stats] # <- update this line
+      receivers: [otlp, datadog/connector, docker_stats] # <- update this line
 {{< /code-block >}}
 
 This configuration allows the Calendar application to send container metrics to Datadog for you to explore in Datadog.

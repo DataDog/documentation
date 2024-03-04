@@ -47,6 +47,8 @@ To learn more about the supported deployment types for each CSM feature, see [Se
       sbom:
         containerImage:
           enabled: true
+          # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
+          # uncompressedLayersSupport: true
     ```
 
 2. Restart the Agent.

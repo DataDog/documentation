@@ -12,9 +12,9 @@ title: RUM 대시보드
 
 RUM 애플리케이션을 생성하면 Datadog는 [데이터를 수집하고][1] 애플리케이션의 성능, 오류, 리소스 및 사용자 세션에 대한 대시보드를 생성합니다.
 
-{{< img src="real_user_monitoring/dashboards/rum_application_overview_dashboard-3.png" alt="RUM 애플리케이션 개요 페이지" style="width:90%;" >}}
+{{< img src="real_user_monitoring/rum-performance-summary-2.png" alt="RUM 애플리케이션 개요 페이지" style="width:90%;" >}}
 
-[**대시보드 목록**][2]의 검색 쿼리나 애플리케이션 요약 페이지(**실제 사용자 모니터링 > 성능 요약** 및 **실제 사용자 모니터링 > 분석 요약**)에서 `RUM`을 필터링하여 RUM 대시보드에 액세스하세요.
+[**대시보드 목록**][2]의 검색 쿼리나 애플리케이션 요약 페이지(**실제 사용자 모니터링 > 성능 모니터링 > 성능 요약** 및 **실제 사용자 모니터링 > 프로덕트 분석 > 분석 요약**)에서 `RUM`을 필터링하여 RUM 대시보드에 액세스합니다.
 
 {{< img src="real_user_monitoring/dashboards/available_rum_dashboards-2.png" alt="Out-of-the-box RUM Dashboards" style="width:90%;" >}}
 
@@ -31,9 +31,7 @@ RUM 애플리케이션을 생성하면 Datadog는 [데이터를 수집하고][1]
 
 ### 템플릿 변수
 
-생성된 RUM 대시보드는 자동으로 일련의 기본 템플릿 변수를 포함합니다. 템플릿 변수 드롭다운 메뉴를 사용해 검색 결과를 좁힙니다. 예를 들어 `applicationId` 템플릿 변수를 사용해 특정 애플리케이션을 필터링할 수 있습니다.
-
-{{< img src="real_user_monitoring/dashboards/template_variables.mp4" alt="템플릿 변수" video=true style="width:50%;" >}}
+생성한 RUM 대시보드에는 일련의 기본 템플릿 변수가 자동으로 포함됩니다. 템플릿 변수 드롭다운 메뉴를 사용해 값을 선택하여 검색 결과를 좁힙니다. 자세한 내용을 확인하려면 [템플릿 변수][5] 문서를 참조하세요.
 
 ### RUM 이벤트 보기
 
@@ -45,7 +43,7 @@ RUM 애플리케이션을 생성하면 Datadog는 [데이터를 수집하고][1]
 
 RUM 대시보드를 복제하려면 **설정** 아이콘을 클릭한 다음 **대시보드 복제**를 선택합니다. 더 많은 위젯, 파워팩, 또는 앱을 추가하려면 아래로 스크롤한 다음 **+** 아이콘을 클릭합니다.
 
-또한 템플릿 변수를 수정하여 [저장된 보기][5]를 생성할 수 있습니다.
+또한 템플릿 변수를 수정하여 [저장된 보기][6]를 생성할 수 있습니다.
 
 ## 참고 자료
 
@@ -55,4 +53,5 @@ RUM 대시보드를 복제하려면 **설정** 아이콘을 클릭한 다음 **�
 [2]: https://app.datadoghq.com/dashboard/lists
 [3]: /ko/dashboards/
 [4]: /ko/real_user_monitoring/explorer/
-[5]: /ko/real_user_monitoring/explorer/saved_views/
+[5]: /ko/dashboards/template_variables
+[6]: /ko/real_user_monitoring/explorer/saved_views/
