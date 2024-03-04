@@ -171,7 +171,7 @@ class BackupLedger
 end
 ```
 
-[1]: 
+[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang="go" >}}
 
@@ -217,7 +217,7 @@ func (bl *BackupLedger) persistTransaction(ctx context.Context, transaction *Tra
 }
 ```
 
-[1]: 
+[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang="nodejs" >}}
 
@@ -244,7 +244,7 @@ function write (transactions) {
 }
 ```
 
-[1]: 
+[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang=".NET" >}}
 
@@ -275,7 +275,7 @@ public void Write(List<Transaction> transactions)
 }
 ```
 
-[1]: 
+[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< programming-lang lang="php" >}}
 
@@ -345,7 +345,7 @@ This example adds child spans to the `BackupLedger.write` span created above. Th
 ?>
 ```
 
-[1]: 
+[1]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
