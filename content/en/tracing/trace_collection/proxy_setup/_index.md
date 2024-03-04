@@ -20,9 +20,18 @@ further_reading:
 - link: "https://istio.io/docs/"
   tag: "Documentation"
   text: "Istio documentation"
+- link: "https://docs.konghq.com/gateway/latest/"
+  tag: "Documentation"
+  text: "Kong website"
 - link: "https://github.com/DataDog/dd-trace-cpp"
   tag: "Source Code"
   text: "Datadog C++ Client"
+- link: "https://github.com/DataDog/kong-plugin-ddtrace/"
+  tag: "Source Code"
+  text: "Datadog APM Plugin for Kong"
+- link: "https://kubernetes.github.io/ingress-nginx/user-guide/third-party-addons/opentelemetry/"
+  tag: "Documentation"
+  text: "OpenTelemetry for Ingress-Nginx Controller"
 aliases:
 - /tracing/proxies/envoy
 - /tracing/envoy/
@@ -445,14 +454,12 @@ data:
 ### v1.10.0+
 
 <div class="alert alert-warning">
-  <strong>Important Note:</strong> With the release of *v1.10.0*, OpenTracing and Datadog's integration have been deprecated. As a seamless alternative for now, we highly recommend utilizing the OpenTelemetry Collector.
+  <strong>Important Note:</strong> With the release of <b>v1.10.0</b>, OpenTracing and Datadog's integration have been deprecated. As a seamless alternative for now, we highly recommend utilizing the OpenTelemetry Collector.
 </div>
 
-**Prepare Datadog Agent**
-Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][18] to act as an OpenTelemetry Collector.
+**1. Prepare Datadog Agent:** Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][18] to act as an OpenTelemetry Collector.
 
-**Configure NGINX Ingress Controller**
-To begin, verify that your nginx-ingress controller's pod spec has the `HOST_IP` environment variable set. If not, add the following entry to the `env` block within the pod's specification:
+**2. Configure NGINX Ingress Controller:** To begin, verify that your nginx-ingress controller's pod spec has the `HOST_IP` environment variable set. If not, add the following entry to the `env` block within the pod's specification:
 ```yaml
 - name: HOST_IP
   valueFrom:
