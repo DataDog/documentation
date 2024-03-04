@@ -372,4 +372,4 @@ You've now successfully added custom spans to your codebase, making them availab
 [1]: https://app.datadoghq.com/services
 [2]: https://bojanv91.github.io/posts/2018/06/select-n-1-problem
 [3]: https://app.datadoghq.com/apm/traces?viz=timeseries
-[4]: 
+[4]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
