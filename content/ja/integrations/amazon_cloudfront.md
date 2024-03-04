@@ -25,25 +25,26 @@ short_description: エラー率、リクエストカウント数、ダウンロ�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 ## 概要
 
 Amazon CloudFront は、Web サイト、API、ビデオコンテンツなどの Web 資産の配信を高速化するグローバルなコンテンツ配信ネットワーク (CDN) サービスです。
 
 このインテグレーションを有効にすると、Datadog にすべての CloudFront メトリクスを表示できます。
 
-## セットアップ
+## 計画と使用
 
-### インストール
+### インフラストラクチャーリスト
 
 [Amazon Web Services インテグレーション][1]をまだセットアップしていない場合は、最初にセットアップします。
 
 ### メトリクスの収集
 
 1. [AWS インテグレーションページ][2]で、`Metric Collection` タブの下にある `CloudFront` が有効になっていることを確認します。
-2. [Datadog - AWS CloudFront インテグレーション][3]をインストールします。
+2. [Datadog - Amazon CloudFront インテグレーション][3]をインストールします。
 3. 任意: [CloudFront ディストリビューションの追加メトリクス][4] を有効化すると、CloudFront トラフィックのパフォーマンスの可視性を高めることができます。
 
-### ログの収集
+### 収集データ
 
 {{< tabs >}}
 {{% tab "Standard Logs" %}}
@@ -83,11 +84,11 @@ AWS Services のログを収集する方法については、[Datadog Lambda 関
 
 リアルタイムのログコンフィギュレーションを作成する際、受信するログのフィールドを指定することができます。デフォルトでは、すべての[利用可能なフィールド][1]が選択されています。
 
-{{< img src="integrations/amazon_cloudfront/cloudfront_logging_3.png" alt="Cloudfront ロギング 3" popup="true" style="width:70%;">}}
+{{< img src="integrations/amazon_cloudfront/cloudfront_logging_3.png" alt="CloudFront ロギング 3" popup="true" style="width:70%;">}}
 
 Datadog は、このデフォルトのコンフィギュレーションを維持し、以下のカスタムパースルールを追加して、すべてのフィールドが有効な状態でログを自動的に処理することをおすすめします。
 
-[Pipelines ページ][1]に移動し、AWS CloudFront を検索し、[grok parser processor を作成または編集][7]し、*Advanced Settings* に以下のヘルパールールを追加します。
+[Pipelines ページ][1]に移動し、Amazon CloudFront を検索し、[grok parser processor を作成または編集][7]し、*Advanced Settings* に以下のヘルパールールを追加します。
 
 {{< code-block lang="java" >}}
       real_time_logs (%{number:timestamp:scale(1000)}|%{number:timestamp})\s+%{_client_ip}\s+%{_time_to_first_byte}\s+%{_status_code}\s+%{_bytes_write}\s+%{_method}\s+%{regex("[a-z]*"):http.url_details.scheme}\s+%{notSpace:http.url_details.host:nullIf("-")}\s+%{notSpace:http.url_details.path:nullIf("-")}\s+%{_bytes_read}\s+%{notSpace:cloudfront.edge-location:nullIf("-")}\s+%{_request_id}\s+%{_ident}\s+%{_duration}\s+%{_version}\s+IPv%{integer:network.client.ip_version}\s+%{_user_agent}\s+%{_referer}\s+%{notSpace:cloudfront.cookie}\s+(%{notSpace:http.url_details.queryString:querystring}|%{notSpace:http.url_details.queryString:nullIf("-")})\s+%{notSpace:cloudfront.edge-response-result-type:nullIf("-")}\s+%{_x_forwarded_for}\s+%{_ssl_protocol}\s+%{_ssl_cipher}\s+%{notSpace:cloudfront.edge-result-type:nullIf("-")}\s+%{_fle_encrypted_fields}\s+%{_fle_status}\s+%{_sc_content_type}\s+%{_sc_content_len}\s+%{_sc_range_start}\s+%{_sc_range_end}\s+%{_client_port}\s+%{_x_edge_detailed_result_type}\s+%{notSpace:network.client.country:nullIf("-")}\s+%{notSpace:accept-encoding:nullIf("-")}\s+%{notSpace:accept:nullIf("-")}\s+%{notSpace:cache-behavior-path-pattern:nullIf("-")}\s+%{notSpace:headers:nullIf("-")}\s+%{notSpace:header-names:nullIf("-")}\s+%{integer:headers-count}.*
@@ -105,23 +106,23 @@ Amazon Kinesis Data Firehose などのコンシューマーを構成してリア
 {{% /tab %}}
 {{< /tabs >}}
 
-## 収集データ
+## リアルユーザーモニタリング
 
-### メトリクス
+### データセキュリティ
 {{< get-metrics-from-git "amazon_cloudfront" >}}
 
 
 AWS から取得される各メトリクスには、`aws_account`、`region`、`distributionid` など、AWS コンソールに表示されるタグと同じタグが割り当てられます。
 
-### イベント
+### ヘルプ
 
-AWS Cloudfront インテグレーションには、イベントは含まれません。
+Amazon CloudFront インテグレーションには、イベントは含まれません。
 
-### サービスのチェック
+### ヘルプ
 
-AWS Cloudfront インテグレーションには、サービスのチェック機能は含まれません。
+Amazon CloudFront インテグレーションには、サービスのチェック機能は含まれません。
 
-## トラブルシューティング
+## ヘルプ
 
 ご不明な点は、[Datadog のサポートチーム][6]までお問合せください。
 
