@@ -260,7 +260,7 @@ If you are configuring instead at the PHP level, use PHP's `error_log` ini param
 
 
 [1]: https://www.php-fig.org/psr/psr-3
-[2]: https://docs.datadoghq.com/tracing/trace_collection/library_config/php/
+[2]: /tracing/trace_collection/library_config/php/
 {{< /programming-lang >}}
 
 {{< programming-lang lang="cpp" >}}
