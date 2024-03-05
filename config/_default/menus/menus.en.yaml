@@ -323,7 +323,7 @@ main:
     identifier: basic_agent_usage_sccm
     url: agent/basic_agent_usage/sccm/
     weight: 115
-    parent: basic_agent_usage  
+    parent: basic_agent_usage
   - name: SUSE
     identifier: basic_agent_usage_suse
     url: agent/basic_agent_usage/suse/
@@ -675,12 +675,12 @@ main:
     identifier: otel_instrumentation
     parent: otel_interoperability
     weight: 603
-  - name: Correlate RUM and Traces 
+  - name: Correlate RUM and Traces
     url: /real_user_monitoring/connect_rum_and_traces/#opentelemetry-support
     identifier: otel_rum
     parent: otel_interoperability
     weight: 604
-  - name: Correlate Logs and Traces 
+  - name: Correlate Logs and Traces
     url: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/
     identifier: otel_logs
     parent: otel_interoperability
