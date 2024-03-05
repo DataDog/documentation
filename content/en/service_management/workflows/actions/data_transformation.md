@@ -28,9 +28,17 @@ Use expression actions for data transformations that can be accomplished in a si
 
 `[1, 2, 3].filter(x => x < 3)`
 
+To add an expression action:
+- In a new workflow, click **Add step** and search for `expression`. Select the **Expression** action to add it to your workflow.
+- In an existing workflow, click **+** and search for `expression`. Select the **Expression** action to add it to your workflow.
+
 ## Function
 
 The function action allows for variable assignments and data transformations requiring multiple expressions.
+
+To add a function action:
+- In a new workflow, click **Add step** and search for `function`. Select the **Function** action to add it to your workflow.
+- In an existing workflow, click **+** and search for `function`. Select the **Function** action to add it to your workflow.
 
 ## Testing expressions and functions
 
