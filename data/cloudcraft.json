@@ -17,8 +17,8 @@
         "tags": [
           "Blueprints"
         ],
-        "summary": "List my blueprints",
-        "description": "List all of your saved blueprints.\n\nThe response is an array of blueprint entries without the diagram data. Each entry includes the blueprint ID and name, access control and user information.\n\nThe provided blueprint IDs are required to access the other blueprint related APIs.\n\nResponses\n=========\n- **200 OK on success**\n- 401 Unauthorized",
+        "summary": "List blueprints",
+        "description": "List all of your saved blueprints.\n\nThe response is an array of blueprint entries without the diagram data. Each entry includes the blueprint ID and name, access control, and user information.\n\nThe provided blueprint IDs are required to access the other blueprint-related APIs.\n\nResponses\n=========\n- **200 OK on success**\n- 401 Unauthorized",
         "operationId": "listMyBlueprints",
         "responses": {
           "200": {
@@ -309,13 +309,13 @@
         }
       }
     },
-    "/blueprint/BLUEPRINT_ID": {
+    "/blueprint/{blueprint_id}": {
       "get": {
         "tags": [
           "Blueprints"
         ],
         "summary": "Retrieve a blueprint",
-        "description": "Retrieve a blueprint in JSON format.\n\n# Path Parameters\n\n*   **blueprint_id**: *UUID*, Blueprint ID. Required.\n    \n\n# Responses\n\n*   **200 OK on success**\n*   401 Unauthorized\n*   403 Forbidden, insufficient privileges\n*   404 Blueprint not found",
+        "description": "Retrieve a blueprint in JSON format.\n\n# Path Parameters\n\n*   **blueprint_id**: *UUID*. Blueprint ID. Required.\n    \n\n# Responses\n\n*   **200 OK on success**\n*   401 Unauthorized\n*   403 Forbidden, insufficient privileges\n*   404 Blueprint not found",
         "operationId": "retrieveBlueprint",
         "responses": {
           "200": {
@@ -550,7 +550,7 @@
           "Blueprints"
         ],
         "summary": "Delete a blueprint",
-        "description": "Delete a blueprint.\n\nWhen the deletion succeeds *204 No Content* is returned.\n\n# Path Parameters\n\n*   **blueprint_id**: *UUID*, Blueprint ID. Required.\n    \n\n# Responses\n\n*   **204 No Content on success**\n*   401 Unathorized\n*   403 Forbidden, insufficient privileges\n*   404 Blueprint not found",
+        "description": "Delete a blueprint.\n\nWhen the deletion succeeds, *204 No Content* is returned.\n\n# Path Parameters\n\n*   **blueprint_id**: *UUID*. Blueprint ID. Required.\n    \n\n# Responses\n\n*   **204 No Content on success**\n*   401 Unathorized\n*   403 Forbidden, insufficient privileges\n*   404 Blueprint not found",
         "operationId": "deleteBlueprint",
         "requestBody": {
           "content": {
@@ -626,13 +626,13 @@
         }
       }
     },
-    "/blueprint/BLUEPRINT_ID/FORMAT": {
+    "/blueprint/{blueprint_id}/{format}": {
       "get": {
         "tags": [
           "Blueprints"
         ],
         "summary": "Export a blueprint as an image",
-        "description": "Render blueprint for export in SVG, PNG, PDF, or MxGraph format.\n\nPath Parameters\n===============\n- **blueprint_id**: _UUID_, Blueprint ID\n- **format**: _String_, one of \"svg\", \"png\", \"pdf\", \"mxGraph\"\n\nOptional query parameters\n=========================\n- **scale**: _Float_. Scale relative to original size (1.0), for example, 0.5 for half or 2.0 for double size.\n- **width**: _Number_. Image width in pixels (for SVG, PNG, and PDF).\n- **height**: _Number_. Image height in pixels (for SVG, PNG, and PDF).\n- **grid**: _Boolean_. Enable or disable grid rendering.\n- **transparent**: _Boolean_. Enable or disable transparent background rendering.\n- **landscape**: _Boolean_. Enable or disable landscape paper format (PDF).\n- **paperSize**: _String_. One of \"Letter\", \"Legal\", \"Tabloid\", \"Ledger\", \"A0\", \"A1\", \"A2\", \"A3\", \"A4\", \"A5\".\n\nResponses\n=========\n- **200 OK on success**, with the content type being one of:\n  - image/svg+xml\n  - image/png\n  - application/pdf\n  - application/xml\n  - application/json\n- 401 Unathorized\n- 403 Forbidden, insufficient privileges\n- 404 Blueprint not found",
+        "description": "Render blueprint for export in SVG, PNG, PDF, or MxGraph format.\n\nPath Parameters\n===============\n- **blueprint_id**: _UUID_. Blueprint ID\n- **format**: _String_. One of \"svg\", \"png\", \"pdf\", \"mxGraph\"\n\nOptional query parameters\n=========================\n- **scale**: _Float_. Scale relative to original size (1.0), for example, 0.5 for half or 2.0 for double size.\n- **width**: _Number_. Image width in pixels (for SVG, PNG, and PDF).\n- **height**: _Number_. Image height in pixels (for SVG, PNG, and PDF).\n- **grid**: _Boolean_. Enable or disable grid rendering.\n- **transparent**: _Boolean_. Enable or disable transparent background rendering.\n- **landscape**: _Boolean_. Enable or disable landscape paper format (PDF).\n- **paperSize**: _String_. One of \"Letter\", \"Legal\", \"Tabloid\", \"Ledger\", \"A0\", \"A1\", \"A2\", \"A3\", \"A4\", \"A5\".\n\nResponses\n=========\n- **200 OK on success**, with the content type being one of:\n  - image/svg+xml\n  - image/png\n  - application/pdf\n  - application/xml\n  - application/json\n- 401 Unathorized\n- 403 Forbidden, insufficient privileges\n- 404 Blueprint not found",
         "operationId": "exportBlueprintAsImage",
         "responses": {
           "200": {
@@ -1393,7 +1393,7 @@
           "Azure Accounts"
         ],
         "summary": "Snapshot an Azure account",
-        "description": "Scan and render one region of an Azure account into a blueprint in JSON, SVG, PNG, PDF, or MxGraph format.\n\nThe time required to generate the snapshot depends on the number of resources in the Azure region.  \n\nThe API behaves as a long poll, with a wait time of up to 120 seconds for the result. For most  \nenvironments, the API call returns a blueprint. If  \nthe wait time is exceeded, a `202 Accepted` response is returned with a  \n`{code: STILL_PROCESSING, retry: true ...}` JSON body. The snapshot will continue processing  \nin the background, and a retry will either immediately return the result or continue waiting.\n\n# Path Parameters\n\n- **ACCOUNT_ID**: _UUID_. Azure Account ID as registered with Cloudcraft. \n- **REGION**: _String_. Azure region, for example, \"eastus\".\n- **FORMAT**: _String_. One of \"json\", \"svg\", \"png\", \"pdf\", \"mxGraph\".\n    \n\n# Optional query parameters\n\n- **filter**: _String_. Render a subset of the Azure account. Accepts a filter expression as used on the Live tab in the web application. Terms of the filter expression must be separated by spaces. The terms are substrings to be matched, key-value pairs, logical operators, or parentheses. Example: \\`env=dev OR env=test\\.`\n- **exclude**: _List of Strings_. Exclude Azure services by name. Example: \"azurevmss,azurensg\" to exclude both Virtual Machine Scale Set and Network Security Groups. The service value is specified by the \"type\" field of Blueprint components.\n- **label**: _Bool_. Automatically label all components. Defaults to true.\n- **autoconnect**: _Bool_. Automatically connect all components. Defaults to true.\n- **scale**: _Float_. Scale relative to original size (1.0), for example, 0.5 for half or 2.0 for double size.\n- **width**: _Number_. Image width in pixels (for SVG, PNG, and PDF).\n- **height**: _Number_. Image height in pixels (for SVG, PNG, and PDF).\n- **grid**: _Boolean_. Enable or disable grid rendering.\n- **transparent**: _Boolean_. Enable or disable transparent background rendering.\n- **landscape**: _Boolean_. Enable or disable landscape paper format (PDF).\n- **paperSize**: _String_. Applies when the format is PDF. One of \"Letter\", \"Legal\", \"Tabloid\", \"Ledger\", \"A0\", \"A1\", \"A2\", \"A3\", \"A4\", \"A5\".\n- **projection**: _String_. The visual style of the diagram. One of \"isometric\" or \"2d\".\n- **theme**: _String_. The color theme of the diagram. One of \"light\" or \"dark\".\n    \n\n# Responses\n\n- **200 OK on success**, with the content type being one of:\n    - image/svg+xml\n    - image/png\n    - application/pdf\n    - application/xml\n    - application/json\n- **202 Accepted**, if the snapshot generation is taking longer than the max wait time\n- 401 Unathorized\n- 403 Forbidden, insufficient privileges\n- 404 Azure account not found",
+        "description": "Scan and render one region of an Azure account into a blueprint in JSON, SVG, PNG, PDF, or MxGraph format.\n\nThe time required to generate the snapshot depends on the number of resources in the Azure region.  \n\nThe API behaves as a long poll, with a wait time of up to 120 seconds for the result. For most  \nenvironments, the API call returns a blueprint. If  \nthe wait time is exceeded, a `202 Accepted` response is returned with a  \n`{code: STILL_PROCESSING, retry: true ...}` JSON body. The snapshot will continue processing in the background, and a retry will either immediately return the result or continue waiting.\n\n# Path Parameters\n\n- **account_id**: _UUID_. Azure Account ID as registered with Cloudcraft. \n- **region**: _String_. Azure region, for example, \"eastus\".\n- **format**: _String_. One of \"json\", \"svg\", \"png\", \"pdf\", or \"mxGraph\".\n    \n\n# Optional query parameters\n\n- **filter**: _String_. Render a subset of the Azure account. Accepts a filter expression as used on the Live tab in the web application. The filter expression terms must be separated by spaces. The terms are substrings to be matched, key-value pairs, logical operators, or parentheses. For example, \\`env=dev OR env=test\\.`\n- **exclude**: _List of Strings_. Exclude Azure services by name. For example, \"azurevmss,azurensg\" to exclude both Virtual Machine Scale Set and Network Security Groups. The service value is specified by the \"type\" field of Blueprint components.\n- **label**: _Bool_. Automatically label all components. Defaults to true.\n- **autoconnect**: _Bool_. Automatically connect all components. Defaults to true.\n- **scale**: _Float_. Scale relative to original size (1.0), for example, 0.5 for half or 2.0 for double size.\n- **width**: _Number_. Image width in pixels (for SVG, PNG, and PDF).\n- **height**: _Number_. Image height in pixels (for SVG, PNG, and PDF).\n- **grid**: _Boolean_. Enable or disable grid rendering.\n- **transparent**: _Boolean_. Enable or disable transparent background rendering.\n- **landscape**: _Boolean_. Enable or disable landscape paper format (PDF).\n- **paperSize**: _String_. Applies when the format is PDF. One of \"Letter\", \"Legal\", \"Tabloid\", \"Ledger\", \"A0\", \"A1\", \"A2\", \"A3\", \"A4\", \"A5\".\n- **projection**: _String_. The visual style of the diagram. One of \"isometric\" or \"2d\".\n- **theme**: _String_. The color theme of the diagram. One of \"light\" or \"dark\".\n    \n\n# Responses\n\n- **200 OK on success** with the content type being one of:\n    - image/svg+xml\n    - image/png\n    - application/pdf\n    - application/xml\n    - application/json\n- **202 Accepted** when the snapshot generation takes longer than the max wait time\n- 401 Unathorized\n- 403 Forbidden, insufficient privileges\n- 404 Azure account not found",
         "operationId": "snapshotAzureAccount",
         "responses": {
           "200": {
@@ -1506,13 +1506,13 @@
         }
       }
     },
-    "/azure/account/ACCOUNT_ID": {
+    "/azure/account/{account_id}": {
       "put": {
         "tags": [
           "Azure Accounts"
         ],
         "summary": "Update an Azure account",
-        "description": "Update an Azure account registered in Cloudcraft.\n\nThe body of the request should contain the account properties in JSON format. The response will contain the updated account object.\n\n# Path Parameters\n\n- **account_id**: _UUID_, Azure account ID. Required.\n    \n\n# Properties\n\n- **name**: A human-readable name for the Azure account. For example, \"Production\" or \"Staging\".\n- **subscriptionId**: Subscription ID of your Azure account.\n- **directoryId**: Azure Tenant or Directory ID.\n- **applicationId**: Identifier of the application registered with Azure.\n- **clientSecret**: Client secret associated with the registered application.\n    \n\n# Responses\n\n- **200 OK on success**\n- 401 Unauthorized\n- 403 Forbidden, insufficient privileges",
+        "description": "Update an Azure account registered in Cloudcraft.\n\nThe body of the request should contain the account properties in JSON format. The response contains the updated account object.\n\n# Path Parameters\n\n- **account_id**: _UUID_. Azure account ID. Required.\n    \n\n# Properties\n\n- **name**: A human-readable name for the Azure account. For example, \"Production\" or \"Staging\".\n- **subscriptionId**: Subscription ID of your Azure account.\n- **directoryId**: Azure Tenant or Directory ID.\n- **applicationId**: Identifier of the application registered with Azure.\n- **clientSecret**: Client secret associated with the registered application.\n    \n\n# Responses\n\n- **200 OK on success**\n- 401 Unauthorized\n- 403 Forbidden, insufficient privileges",
         "operationId": "updateAzureAccount",
         "requestBody": {
           "content": {
@@ -1567,7 +1567,7 @@
           "Azure Accounts"
         ],
         "summary": "Delete an Azure account",
-        "description": "Delete a registered Azure account by ID.\n\n# Path Parameters\n\n- **account_id**: _UUID_, Azure account ID. Required.\n    \n\n# Responses\n\n- **204 No Content on success**\n- 401 Unathorized\n- 403 Forbidden, insufficient privileges\n- 404 Azure account not found",
+        "description": "Delete a registered Azure account.\n\n# Path Parameters\n\n- **account_id**: _UUID_. Azure account ID. Required.\n    \n\n# Responses\n\n- **204 No Content on success**\n- 401 Unathorized\n- 403 Forbidden, insufficient privileges\n- 404 Azure account not found",
         "operationId": "deleteAzureAccount",
         "responses": {
           "200": {
@@ -1582,7 +1582,7 @@
           "Budgets"
         ],
         "summary": "Export budget for a blueprint",
-        "description": "Export budget for blueprint in CSV or XLSX format.\n\nPath Parameters\n===============\n- **BLUEPRINT_ID**: _UUID_, Blueprint ID\n- **FORMAT**: _String_, one of \"csv\", \"xlsx\"\n\nOptional query parameters\n=========================\n- **currency**: _String_. Currency in ISO_4217 format. Should be one of \"USD\", \"AUD\", \"CHF\", \"CKK\", \"EUR\", \"GBP\", \"HKD\", \"JPY\", \"NOK\", \"NZD\", \"SEK\", \"ZAR\". Defaults to \"USD\".\n- **period**: _String_. Period for budget. Should be one of \"h\" (hourly), \"d\" (daily), \"w\" (weekly), \"m\" (monthly), \"y\" (yearly).Defaults to \"m\".\n- **rate**: _String_. Should be one of \"effective\" (includes upfront fees) or \"stated\" (excludes upfront fees). Defaults to \"effective\".\nResponses\n=========\n- **200 OK on success**, with the content type being one of:\n  - text/csv\n  - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\n- 401 Unauthorized\n- 403 Forbidden, insufficient privileges\n- 404 Blueprint not found",
+        "description": "Export budget for blueprint in CSV or XLSX format.\n\nPath Parameters\n===============\n- **blueprint_id**: _UUID_. Blueprint ID\n- **format**: _String_. One of \"csv\" or \"xlsx\".\n\nOptional query parameters\n=========================\n- **currency**: _String_. Currency in ISO_4217 format. Should be one of \"USD\", \"AUD\", \"CHF\", \"CKK\", \"EUR\", \"GBP\", \"HKD\", \"JPY\", \"NOK\", \"NZD\", \"SEK\", \"ZAR\". Defaults to \"USD\".\n- **period**: _String_. Period for budget. Should be one of \"h\" (hourly), \"d\" (daily), \"w\" (weekly), \"m\" (monthly), \"y\" (yearly). Defaults to \"m\".\n- **rate**: _String_. Should be one of \"effective\" (includes upfront fees) or \"stated\" (excludes upfront fees). Defaults to \"effective\".\n\n# Responses\n\n- **200 OK on success** with the content type being one of:\n  - text/csv\n  - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\n- 401 Unauthorized\n- 403 Forbidden, insufficient privileges\n- 404 Blueprint not found",
         "operationId": "exportBudgetForABlueprint",
         "responses": {
           "200": {
