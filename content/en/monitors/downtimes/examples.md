@@ -34,7 +34,7 @@ Replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your
 
 This guide also assumes that you have a terminal with `CURL` and have reviewed the main [Downtime documentation page][3]
 
-## Examples
+## Use cases
 
 ### Downtime over the weekend
 
