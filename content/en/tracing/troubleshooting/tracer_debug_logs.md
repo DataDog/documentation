@@ -242,7 +242,7 @@ There are two options to route debug logs to a file.
 
 With dd-trace-php 0.98.0+, you can specify a path to a log file for certain debug logs:
 
-**Environment variable:** DD_TRACE_LOG_FILE
+- **Environment variable**: `DD_TRACE_LOG_FILE`
 
 **INI:** datadog.trace.log_file
 
