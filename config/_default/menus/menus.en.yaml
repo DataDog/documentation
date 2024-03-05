@@ -3607,6 +3607,8 @@ main:
     url: data_security/pci_compliance/
     parent: log_management
     weight: 3
+    params: 
+      skip: true
   - name: Connect Logs and Traces
     url: tracing/other_telemetry/connect_logs_and_traces/
     parent: log_management
