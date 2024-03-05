@@ -12,7 +12,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_redshift/
 draft: false
 git_integration_title: amazon_redshift
 has_logo: true
-integration_id: amazon-redshift
+integration_id: ''
 integration_title: Amazon Redshift
 integration_version: ''
 is_public: true
