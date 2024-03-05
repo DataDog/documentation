@@ -40,7 +40,7 @@ To use SaaS Cost Integrations, you must [configure Cloud Cost Management][1] for
 
 Navigate to [**Cloud Costs** > **Settings** > **Accounts**][8] and click on the provider you want to integrate. 
 
-{{< img src="cloud_cost/cloud_and_saas_accounts.png" alt="Integrate with Fastly, Confluent, or Snowflake." style="width:80%" >}}
+{{< img src="cloud_cost/cloud_and_saas_accounts_2.png" alt="Integrate with Fastly, Confluent, or Snowflake." style="width:80%" >}}
 
 {{< tabs >}}
 {{% tab "Fastly" %}}
