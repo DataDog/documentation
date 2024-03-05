@@ -236,11 +236,11 @@ There are two types of logs that are created in these paths:
 
 To enable debug mode for the Datadog PHP Tracer, set the environment variable `DD_TRACE_DEBUG=true`. See the PHP [configuration docs][1] for details about how and when this environment variable value should be set in order to be properly handled by the tracer.
 
-There are two options to route debug logs to a file.
+There are two options to route debug tracer logs to a file.
 
 **Option 1:**
 
-With dd-trace-php 0.98.0+, you can specify a path to a log file for certain debug logs:
+With dd-trace-php 0.98.0+, you can specify a path to a log file for certain debug tracer logs:
 
 - **Environment variable**: `DD_TRACE_LOG_FILE`
 
