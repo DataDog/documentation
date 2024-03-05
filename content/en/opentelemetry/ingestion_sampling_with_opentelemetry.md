@@ -18,9 +18,10 @@ further_reading:
 ## Overview
 
 If your applications and services are instrumented with OpenTelemetry libraries, you can: 
-- Send traces to the **[OpenTelemetry collector][1]**, and use the Datadog exporter to forward them to Datadog
-- Send traces to the **[OpenTelemetry collector alongside the Datadog Agent][2]**, which then forwards them to Datadog.
+- Send traces to the **[OpenTelemetry Collector][1]**, and use the Datadog exporter to forward them to Datadog
 - Send traces to the **[Datadog Agent OTLP ingest][3]**, which forwards them to Datadog.
+
+**Note**: Datadog doesn't support running the OpenTelemetry Collector and the Datadog Agent on the same host.
 
 In the first and second scenario, [APM RED metrics][4] (request/errors counts and latency distributions by service, operation and resource) are computed in the Datadog Exporter. In the third case, the Datadog Agent computes these metrics.
 
