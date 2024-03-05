@@ -4,9 +4,9 @@ kind: documentation
 aliases:
   - /ci
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=CI%20Visibility"
+  - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
     tag: "Release Notes"
-    text: "Check out the latest CI Visibility releases! (App login required)"
+    text: "Check out the latest Software Delivery releases! (App login required)"
   - link: "https://www.datadoghq.com/blog/circleci-monitoring-datadog/"
     tag: "Blog"
     text: "Monitor your CircleCI environment with Datadog"

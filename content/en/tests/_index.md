@@ -7,6 +7,9 @@ aliases:
   - /continuous_integration/integrate_tests/
   - /continuous_integration/tests/
 further_reading:
+    - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+      tag: "Release Notes"
+      text: "Check out the latest Software Delivery releases! (App login required)"
     - link: "/monitors/types/ci/"
       tag: "Documentation"
       text: "Creating CI Test Monitors"
