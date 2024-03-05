@@ -230,11 +230,12 @@ spec:
 {{< /code-block >}}
 
 ## Verify that the Agent is sending events to CSM
-When you enable CSM on AWS Fargate ECS or EKS, the Agent sends a log to Datadog to confirm that the default ruleset has been successfully deployed. To view the log, navigate to the Logs page in Datadog and search for @agent.rule_id:ruleset_loaded.
 
-Another method to verify that the Agent is sending events to CSM is to manually trigger a AWS Fargate security signal.
+When you enable CSM on AWS Fargate ECS or EKS, the Agent sends a log to Datadog to confirm that the default ruleset has been successfully deployed. To view the log, navigate to the [Logs][9] page in Datadog and search for `@agent.rule_id:ruleset_loaded`.
 
-In the task definition, replace the "workload" container by the following:
+Another method to verify that the Agent is sending events to CSM is to manually trigger an AWS Fargate security signal.
+
+In the task definition, replace the "workload" container with the following:
 
 {{< code-block lang="yaml" collapsible="true" >}}
             "name": "cws-signal-test",
@@ -259,3 +260,4 @@ In the task definition, replace the "workload" container by the following:
 [6]: https://aws.amazon.com/console
 [7]: /resources/json/datadog-agent-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
+[9]: https://app.datadoghq.com/logs
