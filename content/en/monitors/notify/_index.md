@@ -132,12 +132,14 @@ You can trigger a [workflow automation][9] or create a new workflow from a monit
 
 1. Alternatively, click **Add Workflow** and search for it in the drop-down menu.
 
+For more information on triggering a workflow, see [Trigger a workflow][10].
+
 **To create a workflow**:
-1. Click **Add Worklfow**. 
-1. Click the **+** icon and select a Blueprint, or select **Start From Scratch**. 
+1. Click **Add Worklfow**.
+1. Click the **+** icon and select a Blueprint, or select **Start From Scratch**.
    {{< img src="/monitors/notifications/create-workflow.png" alt="Click the + button to add a new workflow" style="width:90%;">}}
 
-For more information on how to trigger a workflow, see the [Workflow Automation][10] docs.
+For more information on building a workflow, see [Build workflows][11].
 
 ### Toggle additional content
 
@@ -158,15 +160,15 @@ The options are:
 
 ### Modifications
 
-An [event][11] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members, chat services, and the monitor creator of these events.
+An [event][12] is created anytime a monitor is created, modified, silenced, or deleted. Set the `Notify` option to notify team members, chat services, and the monitor creator of these events.
 
 ### Permissions
 
 All users can read all monitors, regardless of the role they are associated with.
 
-By default, only users attached to roles with the [Monitors Write permission][12] can edit monitors. [Datadog Admin Role and Datadog Standard Role][13] have the Monitors Write permission by default. If your organization uses [Custom Roles][14], other custom roles may have the Monitors Write permission.
+By default, only users attached to roles with the [Monitors Write permission][13] can edit monitors. [Datadog Admin Role and Datadog Standard Role][14] have the Monitors Write permission by default. If your organization uses [Custom Roles][15], other custom roles may have the Monitors Write permission.
 
-You can further restrict your monitor by specifying a list of [roles][15] allowed to edit it. The monitor's creator can always edit the monitor.
+You can further restrict your monitor by specifying a list of [roles][16] allowed to edit it. The monitor's creator can always edit the monitor.
 
   {{< img src="monitors/notifications/monitor_rbac_restricted.jpg" alt="RBAC Restricted Monitor" style="width:90%;" >}}
 
@@ -174,17 +176,17 @@ Editing includes any updates to the monitor configuration, deleting the monitor,
 
 **Note**: The limitations are applied both in the UI and API.
 
-For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see [How to set up RBAC for Monitors][16].
+For more information on setting up RBAC for Monitors and migrating monitors from the locked setting to using role restrictions, see [How to set up RBAC for Monitors][17].
 
 ## Test notifications
 
-Test notifications are supported for the [monitor types][17]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
+Test notifications are supported for the [monitor types][18]: host, metric, anomaly, outlier, forecast, logs, rum, apm, integration (check only), process (check only), network (check only), custom check, event, and composite.
 
 ### Run the test
 
 1. After defining your monitor, test the notifications with the **Test Notifications** button at the bottom right of the monitor page.
 
-2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor's configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][18] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
+2. From the test notifications pop-up, choose the monitor case to test. You can only test states that are available in the monitor's configuration for the thresholds specified in the alerting conditions. [Recovery thresholds][19] are an exception, as Datadog sends a recovery notification once the monitor either is no longer in alert, or it has no warn conditions.
 
     {{< img src="monitors/notifications/test-notif-select.png" alt="Test the notifications for this monitor" style="width:70%;" >}}
 
@@ -219,11 +221,12 @@ Message variables auto-populate with a randomly selected group based on the scop
 [8]: /monitors/notify/variables/?tab=is_renotify#examples
 [9]: /service_management/workflows/
 [10]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-monitor
-[11]: /events/
-[12]: /account_management/rbac/permissions/#monitors
-[13]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
-[14]: /account_management/rbac/?tab=datadogapplication#custom-roles
-[15]: /account_management/rbac/?tab=datadogapplication
-[16]: /monitors/guide/how-to-set-up-rbac-for-monitors/
-[17]: /monitors/types
-[18]: /monitors/guide/recovery-thresholds/
+[11]: /service_management/workflows/build/
+[12]: /events/
+[13]: /account_management/rbac/permissions/#monitors
+[14]: /account_management/rbac/?tab=datadogapplication#datadog-default-roles
+[15]: /account_management/rbac/?tab=datadogapplication#custom-roles
+[16]: /account_management/rbac/?tab=datadogapplication
+[17]: /monitors/guide/how-to-set-up-rbac-for-monitors/
+[18]: /monitors/types
+[19]: /monitors/guide/recovery-thresholds/
