@@ -453,7 +453,7 @@ YYYY-MM-DD HH:MM:SS.<integer> +00:00 [ERR] An error occurred while sending trace
 
 **Loading an integration:**
 
-Note: This log **does not** follow DD_TRACE_LOG_FILE (ini: `datadog.trace.log_file`) and is always routed to the ErrorLog directive. 
+Note: This log **does not** follow `DD_TRACE_LOG_FILE` (ini: `datadog.trace.log_file`) and is always routed to the ErrorLog directive. 
 
 ```text
 [Mon MM  DD 19:56:23 YYYY] [YYYY-MM-DDT19:56:23+00:00] [ddtrace] [debug] - Loaded integration web
