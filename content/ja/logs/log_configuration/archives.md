@@ -29,10 +29,6 @@ Datadog アカウントを構成して、独自のクラウドストレージシ
 
 [**Log Forwarding** ページ][14]に移動して、取り込んだログをクラウドホストのストレージバケットに転送するためのアーカイブをセットアップします。
 
-{{< site-region region="gov" >}}
-<div class="alert alert-warning">選択した <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) ではログ転送はサポートされていません。</div>
-{{< /site-region >}}
-
 1. まだの場合は、お使いのクラウドプロバイダーと Datadogの[インテグレーション](#set-up-an-integration)を設定してください。
 2. [ストレージバケット](#create-a-storage-bucket)を作成します。
 3. そのアーカイブへの `read` および `write` [権限](#set-permissions)を設定します。
@@ -78,6 +74,10 @@ GCS ストレージバケットを持つプロジェクト用の [Google Cloud �
 {{< /tabs >}}
 
 ### ストレージバケットを作成
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">アーカイブへのログの送信は、Datadog GovCloud 環境の外部であり、Datadog の管理外です。Datadog は、Datadog GovCloud 環境から出たログについて、FedRAMP、DoD Impact Levels、ITAR、輸出コンプライアンス、データレジデンシー、または当該ログに適用される類似の規制に関連するユーザーの義務または要件を含むが、これらに限定されることなく、一切の責任を負わないものとします。</div>
+{{< /site-region >}}
 
 {{< tabs >}}
 {{% tab "AWS S3" %}}
