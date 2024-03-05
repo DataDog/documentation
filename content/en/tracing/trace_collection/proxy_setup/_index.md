@@ -389,13 +389,13 @@ http {
 ### Controller v1.10.0+
 
 <div class="alert alert-warning">
-  <strong>Important Note:</strong> With the release of <b>v1.10.0</b>, the Ingres Controller's OpenTracing and Datadog integration have been deprecated. As an alternative, the OpenTelemetry integration is recommended.<br><br>
+  <strong>Important Note:</strong> With the release of <b>v1.10.0</b>, the Ingress controller's OpenTracing and Datadog integration have been deprecated. As an alternative, the OpenTelemetry integration is recommended.<br><br>
   For older versions, see the <a href="#controller-v190-and-older">OpenTracing-based instructions</a>.
 </div>
 
-**1. Prepare Datadog Agent:** Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][18] to act as an OpenTelemetry Collector.
+**1. Prepare the Datadog Agent:** Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][18] to act as an OpenTelemetry Collector.
 
-**2. Configure NGINX Ingress Controller:** To begin, verify that your NGINX Ingress Controller's pod spec has the `HOST_IP` environment variable set. If not, add the following entry to the `env` block within the pod's specification:
+**2. Configure the Ingress controller:** To begin, verify that your Ingress controller's pod spec has the `HOST_IP` environment variable set. If not, add the following entry to the `env` block within the pod's specification:
 ```yaml
 - name: HOST_IP
   valueFrom:
@@ -403,7 +403,7 @@ http {
       fieldPath: status.hostIP
 ```
 
-Next, it's essential to enable OpenTelemetry instrumentation for the Ingress-NGINX Controller. Create or edit a ConfigMap with the following details:
+Next, enable OpenTelemetry instrumentation for the controller. Create or edit a ConfigMap with the following details:
 
 ```yaml
 apiVersion: v1
@@ -422,10 +422,10 @@ data:
 
 ### Controller v1.9.0 and older
 To enable Datadog tracing, create or edit a ConfigMap to set `enable-opentracing: "true"` and the `datadog-collector-host` to which traces should be sent.
-The name of the ConfigMap is cited explicitly by the Ingress-NGINX Controller container's command line argument, defaulting to `--configmap=$(POD_NAMESPACE)/nginx-configuration`.
-If ingress-nginx was installed via helm chart, this ConfigMap will be named like `Release-Name-nginx-ingress-controller`.
+The name of the ConfigMap is cited explicitly by the Ingress-NGINX Controller container's command line argument, defaulting to `--configmap=<POD_NAMESPACE>/nginx-configuration`.
+If `ingress-nginx` was installed via Helm chart, the ConfigMap's name will follow the pattern `<RELEASE_NAME>-nginx-ingress-controller`.
 
-The ingress controller manages both the `nginx.conf` and `/etc/nginx/opentracing.json` files. Tracing is enabled for all `location` blocks.
+The Ingress controller manages both the `nginx.conf` and `/etc/nginx/opentracing.json` files. Tracing is enabled for all `location` blocks.
 
 ```yaml
 kind: ConfigMap
@@ -446,7 +446,7 @@ data:
   # datadog-sample-rate: "1.0"
 ```
 
-Additionally, ensure that your nginx-ingress controller's pod spec has the `HOST_IP` environment variable set. Add this entry to the `env:` block that contains the environment variables `POD_NAME` and `POD_NAMESPACE`.
+Additionally, ensure that your controller's pod spec has the `HOST_IP` environment variable set. Add this entry to the `env:` block that contains the environment variables `POD_NAME` and `POD_NAMESPACE`.
 
 ```yaml
 - name: HOST_IP
