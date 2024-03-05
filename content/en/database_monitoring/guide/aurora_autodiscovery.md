@@ -15,7 +15,7 @@ Supported databases
 : Postgres, MySQL
 
 Supported Agent versions
-: 7.53.0+ (Not yet released)
+: 7.53.0+ (beta)
 
 To use this feature, you need to install the beta version of the Agent. See the [Install Datadog Agent 7.53.0+](#install-datadog-agent-7530) section on this page.
 
