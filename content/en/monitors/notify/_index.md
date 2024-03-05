@@ -96,11 +96,16 @@ For example, you can set different priorities for `alert` and `warning` notifica
 
 ## Notify your team
 
-Use this section to send notifications to your team through email, Slack, PagerDuty, and other integrations. You can also trigger a workflow or create a workflow from a monitor.
+Use the **Notify your team** section to:
+- Send notifications to your team through email, Slack, PagerDuty, and other integrations. 
+- Trigger a workflow or create a workflow from a monitor.
+- Add a case to your monitor.
+
+{{< img src="/monitors/notifications/notification-options.png" alt="You can send notification to your team, trigger a workflow, or add a case to your monitor" style="width:90%;">}}
 
 ### Notifications
 
-You can search for team members and connected integrations with the dropdown box. When an `@notification` is added to this section, the notification is automatically added to the [message](#message) field.
+Use an `@notification` to add a team member, integration, workflow, or case to your notification. As you type, Datadog recommends existing options in a drop-down menu. Click an option to add it to your notification. Alternatively, click **@ Add Mention**, **Add Workflow**, or **Add Case**.
 
 **Note**: An `@notification` must have a space between it and the last line character, for example:
 
@@ -118,14 +123,21 @@ Disk space is low @ops-team@company.com
 {{% notifications-integrations %}}
 
 ### Workflows
+You can trigger a [workflow automation][9] or create a new workflow from a monitor.
 
-[Datadog Workflow Automation][9] allows you to orchestrate and automate your end-to-end processes by building workflows made up of actions that connect to your infrastructure and tools. You can add a pre-configured flow from an out-of-the-box blueprint, add an existing custom workflow or create a new workflow. 
-
-In the message section, add the full workflow mention name:
+**To add an existing workflow to a monitor**:
+1. In the message section, add the full workflow mention name:
    - The mention name should start with `@workflow-`. For example, `@workflow-my-workflow`
-   - To pass trigger variables into the workflow, use a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. For example, `@workflow-my-workflow(name="Bits", alert_threshold=threshold)`
+   - To pass trigger variables into the workflow, use a comma-separated list with the syntax `@workflow-name(key=value, key=value)`. You can use message template variables as trigger variables. For example, `@workflow-my-workflow(hostname={{host.name}})`
 
-You can also click **Add Workflow** below the message section and select from existing workflows. To create a workflow, click the **+** icon. For more information on how to trigger a workflow, see the [Workflow Automation][10] docs.
+1. Alternatively, click **Add Workflow** and search for it in the drop-down menu.
+
+**To create a workflow**:
+1. Click **Add Worklfow**. 
+1. Click the **+** icon and select a Blueprint, or select **Start From Scratch**. 
+   {{< img src="/monitors/notifications/create-workflow.png" alt="Click the + button to add a new workflow" style="width:90%;">}}
+
+For more information on how to trigger a workflow, see the [Workflow Automation][10] docs.
 
 ### Toggle additional content
 
