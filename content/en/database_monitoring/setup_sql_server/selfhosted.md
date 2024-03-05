@@ -57,25 +57,6 @@ GRANT VIEW ANY DEFINITION to datadog;
 -- GRANT SELECT to datadog;
 ```
 {{% /tab %}}
-{{% tab "SQL Server 2012" %}}
-
-```SQL
-CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
-CREATE USER datadog FOR LOGIN datadog;
-GRANT VIEW SERVER STATE to datadog;
-GRANT VIEW ANY DEFINITION to datadog;
--- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
-```
-
-Create the `datadog` user in each additional application database:
-```SQL
-USE [database_name];
-CREATE USER datadog FOR LOGIN datadog;
-```
-{{% /tab %}}
 {{< /tabs >}}
 
 ## Install the Agent

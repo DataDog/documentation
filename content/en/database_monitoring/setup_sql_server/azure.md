@@ -111,23 +111,6 @@ GRANT VIEW ANY DEFINITION to datadog;
 -- GRANT SELECT to datadog;
 ```
 
-#### For SQL Server 2012
-
-```SQL
-CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
-CREATE USER datadog FOR LOGIN datadog;
-GRANT VIEW SERVER STATE to datadog;
-GRANT VIEW ANY DEFINITION to datadog;
--- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
-
--- Create the `datadog` user in each additional application database:
-USE [database_name];
-CREATE USER datadog FOR LOGIN datadog;
-```
-
 **Note:** Azure managed identity authentication is also supported. Please see [the guide][1] on how to configure this for your Azure SQL DB instance.
 
 [3]: /database_monitoring/guide/managed_authentication
