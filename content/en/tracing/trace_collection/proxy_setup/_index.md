@@ -31,7 +31,7 @@ further_reading:
   text: "Datadog APM Plugin for Kong"
 - link: "https://kubernetes.github.io/ingress-nginx/user-guide/third-party-addons/opentelemetry/"
   tag: "Documentation"
-  text: "OpenTelemetry for Ingress-Nginx Controller"
+  text: "OpenTelemetry for Ingress-NGINX Controller"
 aliases:
 - /tracing/proxies/envoy
 - /tracing/envoy/
@@ -390,7 +390,7 @@ http {
 
 <div class="alert alert-warning">
   <strong>Important Note:</strong> With the release of <b>v1.10.0</b>, the Ingres Controller's OpenTracing and Datadog integration have been deprecated. As an alternative, the OpenTelemetry integration is recommended.<br><br>
-  For older versions, see the <a href="#v190-and-older">OpenTracing-based instructions</a>.
+  For older versions, see the <a href="#controller-v190-and-older">OpenTracing-based instructions</a>.
 </div>
 
 **1. Prepare Datadog Agent:** Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][18] to act as an OpenTelemetry Collector.
