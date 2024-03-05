@@ -3845,11 +3845,6 @@ main:
     parent: csm_setup_enterprise
     identifier: csm_setup_enterprise_agent
     weight: 1000001
-  - name: Agentless Scanning
-    url: security/cloud_security_management/setup/csm_enterprise/agentless_scanning
-    parent: csm_setup_enterprise
-    identifier: csm_setup_enterprise_agentless_scanning
-    weight: 1000002
   - name: CSM Pro
     url: security/cloud_security_management/setup/csm_pro
     parent: csm_setup
@@ -3865,16 +3860,16 @@ main:
     parent: csm_setup_pro
     identifier: csm_setup_pro_agent
     weight: 1000001
-  - name: Agentless Scanning
-    url: security/cloud_security_management/setup/csm_pro/agentless_scanning
-    parent: csm_setup_pro
-    identifier: csm_setup_pro_agentless_scanning
-    weight: 1000002
   - name: CSM Cloud Workload Security
     url: security/cloud_security_management/setup/csm_cloud_workload_security
     parent: csm_setup
     identifier: csm_setup_cloud_workload_security
     weight: 10010
+  - name: CSM Agentless Scanning
+    url: security/cloud_security_management/setup/agentless_scanning
+    parent: csm_setup
+    identifier: csm_setup_agentless_scanning
+    weight: 10015
   - name: Agent
     url: security/cloud_security_management/setup/csm_cloud_workload_security/agent
     parent: csm_setup_cloud_workload_security

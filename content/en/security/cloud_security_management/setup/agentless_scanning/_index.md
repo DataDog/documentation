@@ -1,11 +1,11 @@
 ---
-title: Enabling CSM Enterprise for Agentless Scanning
+title: Setting up CSM Agentless Scanning
 kind: documentation
 ---
 
-<div class="alert alert-info">Agentless Scanning is in beta.</div>
+<div class="alert alert-info">CSM Agentless Scanning is in beta.</div>
 
-To configure CSM Enterprise on your agentless scanning instances for your hosts and containers, use the following steps:
+To configure CSM Agentless scanning for your hosts and containers, use the following steps:
 
 {{% csm-agentless-prereqs %}}
 
