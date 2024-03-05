@@ -475,7 +475,7 @@ To collect more comprehensive database metrics from Azure, install the [Azure Po
 
 ## Known issues
 
-For Postgres 16 databases, the following error messages is being written into the log file:
+For Postgres 16 databases, the following error messages are written into the log file:
 
 ```
 psycopg2.errors.InsufficientPrivilege: permission denied for function pg_ls_waldir
@@ -489,7 +489,7 @@ Traceback (most recent call last):
 psycopg2.errors.InsufficientPrivilege: permission denied for function pg_ls_waldir
 ```
 
-As a conseuqence, the Agent doesn't collect the following metrics for Postgres 16: `postgresql.wal_count`, `postgresql.wal_size` and `postgresql.wal_age`.
+As a consequence, the Agent doesn't collect the following metrics for Postgres 16: `postgresql.wal_count`, `postgresql.wal_size` and `postgresql.wal_age`.
 
 ## Troubleshooting
 
