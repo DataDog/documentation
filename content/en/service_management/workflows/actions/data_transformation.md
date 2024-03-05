@@ -18,7 +18,7 @@ The **Expression** and **Function** actions perform custom data transformations 
 $.Steps.Make_request.status
 ```
 
-And to apply the `_.includes` Lodash function on an array returned by a previous step `Array_function` to determine if it includes the name `Bits`, you'd use the following syntax:
+And to determine if an array returned by `Array_function` includes the name `Bits`, apply the `_.includes` Lodash function with the following syntax:
 
 ```
 _.includes($.Steps.Array_function.data, "Bits")

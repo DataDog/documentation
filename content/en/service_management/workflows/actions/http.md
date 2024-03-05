@@ -12,7 +12,7 @@ further_reading:
 <div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Use the HTTP action to make a request to a custom endpoint. You can control the request method and its contents, how it is authenticated and processed, and how it should respond to scenarios like expired certificates or redirects. If you need to add Datadog IP address ranges to your allowlist so that the HTTP action works as expected, use the IPs listed in the `webhooks` object. See the [IP Ranges page][1] for details.
+Use the HTTP action to make a request to a custom endpoint. You can control the request method and its contents, how it is authenticated and processed, and how it should respond to scenarios like expired certificates or redirects. If you need to add Datadog IP address ranges to your allowlist so that the HTTP action works as expected, use the IPs listed in the `webhooks` object. See the [IP Ranges API][1] for details.
 
 Begin by specifying the request method and any necessary [authentication][2]. Read the sections below for further information about the available configuration options. Optionally, the request can wait on conditions that you specify in the **Conditional wait** section, and retry at a given interval if the condition is not satisfied.
 
