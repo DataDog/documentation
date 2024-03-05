@@ -1,5 +1,5 @@
 ---
-title: Automatically configure your aurora clusters for monitoring
+title: Automatically configure your Aurora clusters for monitoring
 kind: guide
 ---
 
@@ -7,7 +7,7 @@ kind: guide
 Autodiscovery for Aurora clusters is a beta feature. If you have any feedback about this feature, contact support at support@datadoghq.com.
 {{< /beta-callout >}}
 
-This guide assumes that you have configured Database Monitoring for your Amazon Aurora [Postgres][1] or [MySQL][11] databases.
+This guide assumes you have configured Database Monitoring for your Amazon Aurora [Postgres][1] or [MySQL][11] databases.
 
 ## Before you begin
 
@@ -17,7 +17,7 @@ Supported databases
 Supported Agent versions
 : 7.53.0+ (beta)
 
-To use this feature, you need to install the beta version of the Agent. See the [Install Datadog Agent 7.53.0+](#install-datadog-agent-7530) section on this page.
+To use this feature, you must install the beta version of the Agent. See the [Install Datadog Agent 7.53.0+](#install-datadog-agent-7530) section on this page.
 
 ## Overview
 
@@ -40,7 +40,7 @@ To use this feature, you need to install a [beta version][9] of the Agent.
 You can use the Agent installation script to install the correct version by running the following command:
 
 ```bash
-DD_API_KEY=${API_KEY} DD_SITE="{{< region-param key="dd_site" code="true" >}}" \
+DD_API_KEY=<API_KEY> DD_SITE="{{< region-param key="dd_site" code="true" >}}" \
 DD_AGENT_DIST_CHANNEL=beta DD_AGENT_MAJOR_VERSION=7 \
 DD_AGENT_MINOR_VERSION=52.0~dbm~aurora~autodiscovery~beta~0.3-1 \
 bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
@@ -92,7 +92,7 @@ database_monitoring:
       enabled: true
 ```
 
-**Note**: The Agent only discovers Aurora instances running in the same region as the Agent. To discover the region, the Agent uses [IMDS (Instance Metadata Service)][8] to determine the region where it is running. If your EC2 instance requires `IMDSv2`, you need to configure the Agent to use `IMDSv2` by setting `ec2_prefer_imdsv2: true` in `datadog.yaml`, as shown below:
+**Note**: The Agent only discovers Aurora instances running in the same region as the Agent. To determine the region of the instance, the Agent uses [IMDS (Instance Metadata Service)][8]. If your EC2 instance requires `IMDSv2`, you must configure the Agent to use `IMDSv2` by setting `ec2_prefer_imdsv2: true` in `datadog.yaml`, as shown below:
 
 ```yaml
 ec2_prefer_imdsv2: true
@@ -102,7 +102,7 @@ database_monitoring:
       enabled: true
 ```
 
-By default, the listener only discovers Aurora clusters in the account and region where the Agent is running that have the `datadoghq.com/scrape:true` tag applied. You can also configure the listener to discover clusters with specific tags.
+By default, the listener only discovers Aurora clusters in the account and region where the Agent is running, and only those with the `datadoghq.com/scrape:true` tag. You can also configure the listener to discover clusters with specific tags.
 
 To specify custom tags for Aurora cluster discovery in the `datadog.yaml` file:
 
