@@ -54,14 +54,16 @@ If your application is instrumented with:
 
 Agent v7.52.0 or greater is required to generate span links using [Datadog tracing libraries][7]. Support for span links was introduced in the following releases:
 
-- Python: v2.5.0
-- Go: v1.61.0
-- PHP: v0.97.0
-- Java: v1.26.0
-- Node: v5.3.0
-- .NET: Unreleased
-- Ruby: Unreleased
-- C++/Proxy: Unreleased
+| Language  | Minimum tracing library version |
+|-----------|---------------------------------|
+| C++/Proxy | Not supported                   |
+| Go        | 1.61.0                          |
+| Java      | 1.26.0                          |
+| .NET      | Not supported                   |
+| Node      | 5.3.0                           |
+| PHP       | 0.97.0                          |
+| Python    | 2.5.0                           |
+| Ruby      | Not supported                   |
 
 ## Viewing span links
 
