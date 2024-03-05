@@ -129,16 +129,19 @@ database_monitoring:
 
 The Datadog Agent supports configuration templates for the Postgres and MySQL integrations. Define a configuration template for the Aurora clusters you wish to monitor.
 
-#### Postgres
+{{< tabs >}}
+{{% tab "Postgres" %}}
 
-In order to enable Aurora cluster discovery for the postgres integration, you need to add the postgres Aurora `ad_identifier` to your configuration template (`postgres.d/conf_aws_aurora.yaml`) file:
+First, add an `ad_identifier` for Postgres on Aurora to your configuration template (`postgres.d/conf_aws_aurora.yaml`) file:
 
 ```yaml
 ad_identifiers:
   - _dbm_postgres_aurora
 ```
 
-**Example**: The following configuration template is applied to every instance discovered in the Aurora cluster:
+Then, define the remainder of the template. Use [template variables](#supported-template-variables) for parameters that may change, such as `host` and `port`.
+
+The following example configuration template is applied to every instance discovered in the Aurora cluster:
 
 ```yaml
 ad_identifiers:
@@ -157,11 +160,9 @@ instances:
     - "region:%%extra_region%%"
 ```
 
-**Note**: In this example, `%%host%%`, `%%port%%`, `%%extra_dbclusteridentifier%%` and `%%extra_region%%` are a template variables that is dynamically populated with information from the Aurora cluster.
+In this example, the template variables `%%host%%`, `%%port%%`, `%%extra_dbclusteridentifier%%`, and `%%extra_region%%` are dynamically populated with information from the Aurora cluster.
 
-For more information on Integrations Autodiscovery and how to configure it, see the [Autodiscovery documentation][5].
-
-If you want to use [IAM authentication][2] to connect to your Aurora cluster, you can create the following configuration template (`postgres.d/conf_aws_aurora.yaml`) file:
+To use [IAM authentication][2] to connect to your Aurora cluster, use the following template:
 
 ```yaml
 ad_identifiers:
@@ -182,18 +183,21 @@ instances:
       - "region:%%extra_region%%"
 ```
 
-The template variable `%%extra_managed_authentication_enabled%%` will be set to `true` if the instance is using IAM authentication.
+The template variable `%%extra_managed_authentication_enabled%%` resolves to `true` if the instance is using IAM authentication.
 
-#### MySQL
+{{% /tab %}}
+{{% tab "MySQL" %}}
 
-In order to enable Aurora cluster discovery for the mysql integration, you need to add the mysql Aurora `ad_identifier` to your configuration template (`mysql.d/conf_aws_aurora.yaml`) file:
+First, add an `ad_identifier` for MySQL on Aurora to your configuration template (`mysql.d/conf_aws_aurora.yaml`) file:
 
 ```yaml
 ad_identifiers:
   - _dbm_mysql_aurora
 ```
 
-**Example**: The following configuration template will be applied to every instance discovered in the Aurora cluster:
+Then, define the remainder of the template. Use [template variables](#supported-template-variables) for parameters that may change, such as `host` and `port`.
+
+The following example configuration template is applied to every instance discovered in the Aurora cluster:
 
 ```yaml
 ad_identifiers:
@@ -211,13 +215,14 @@ instances:
     - "region:%%extra_region%%"
 ```
 
-**Note**: In this example, `%%host%%`, `%%port%%`, `%%extra_dbclusteridentifier%%` and `%%extra_region%%` are a template variables that is dynamically populated with information from the Aurora cluster.
+In this example, the template variables `%%host%%`, `%%port%%`, `%%extra_dbclusteridentifier%%`, and `%%extra_region%%` are dynamically populated with information from the Aurora cluster.
 
-For more information on Integrations Autodiscovery and how to configure it, see the [Autodiscovery documentation][5].
+{{% /tab %}}
+{{< /tabs >}}
+
+For more information on configuring Autodiscovery with integrations, see the [Autodiscovery documentation][5].
 
 #### Supported template variables
-
-The following documentation lists the supported template variables for the Aurora cluster discovery:
 
 | Template variable                        | Source                                                                                                                                        |
 |:-----------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -229,7 +234,7 @@ The following documentation lists the supported template variables for the Auror
 |                                          |                                                                                                                                               |
 | %%extra_dbclusteridentifier%%            | The cluster identifier of the discovered Aurora cluster                                                                                       |
 |                                          |                                                                                                                                               |
-| %%extra_managed_authentication_enabled%% | The value of IAM Authentication enabled on the cluster. <br/>This is used to determine if managed authentication should be used for postgres. |
+| %%extra_managed_authentication_enabled%% | Whether IAM authentication enabled on the cluster. <br/>This is used to determine if managed authentication should be used for Postgres. |
 
 [1]: /database_monitoring/setup_postgres/aurora/?tab=postgres10
 [2]: /database_monitoring/guide/managed_authentication/#configure-iam-authentication
