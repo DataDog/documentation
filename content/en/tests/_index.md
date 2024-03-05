@@ -28,7 +28,7 @@ further_reading:
 cascade:
     algolia:
         rank: 70
-        tags: ['ci test', 'ci tests']
+        tags: ['ci test', 'ci tests', 'supported features']
 ---
 
 {{< site-region region="gov" >}}
