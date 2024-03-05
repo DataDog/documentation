@@ -33,7 +33,7 @@ This guide walks you through best practices for getting your team up and running
 ## Identify services that have security risk
 
 
-**Identify services vulnerable or exposed to attacks** that would benefit from ASM. Navigate to the [ASM Setup page][1] and select the services recommended there.
+**Identify services vulnerable or exposed to attacks** that would benefit from ASM. Navigate to [Service Catalog > Security][1],  and select the services recommended there.
 
 {{< img src="getting_started/appsec/ASM_activation_service_selection_v2.png" alt="ASM Services page view, showing Vulnerabilities and sorted by Suspicious requests column." style="width:100%;" >}}
 
@@ -101,7 +101,7 @@ Interested in best practices to go further? View the [in-product Quickstart Guid
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/security/configuration/asm/services-setup/services-selection?services=recommended
+[1]: https://app.datadoghq.com/services?&lens=Security
 [2]: https://app.datadoghq.com/services?hostGroup=%2A&lens=Security
 [3]: /security/application_security/threats/library_configuration/#configuring-a-client-ip-header
 [4]: /security/application_security/how-appsec-works/
