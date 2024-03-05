@@ -132,7 +132,7 @@ The Datadog Agent supports configuration templates for the Postgres and MySQL in
 {{< tabs >}}
 {{% tab "Postgres" %}}
 
-First, add an `ad_identifier` for Postgres on Aurora to your configuration template (`postgres.d/conf_aws_aurora.yaml`) file:
+First, add an `ad_identifier` for Aurora-managed Postgres to your configuration template (`postgres.d/conf_aws_aurora.yaml`) file:
 
 ```yaml
 ad_identifiers:
@@ -188,7 +188,7 @@ The template variable `%%extra_managed_authentication_enabled%%` resolves to `tr
 {{% /tab %}}
 {{% tab "MySQL" %}}
 
-First, add an `ad_identifier` for MySQL on Aurora to your configuration template (`mysql.d/conf_aws_aurora.yaml`) file:
+First, add an `ad_identifier` for Aurora-managed MySQL to your configuration template (`mysql.d/conf_aws_aurora.yaml`) file:
 
 ```yaml
 ad_identifiers:
@@ -227,13 +227,9 @@ For more information on configuring Autodiscovery with integrations, see the [Au
 | Template variable                        | Source                                                                                                                                        |
 |:-----------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------|
 | %%host%%                                 | The Aurora instance endpoint                                                                                                                  |
-|                                          |                                                                                                                                               |
 | %%port%%                                 | The port of the Aurora instance                                                                                                               |
-|                                          |                                                                                                                                               |
 | %%extra_region%%                         | The AWS region where the instance is located                                                                                                  |
-|                                          |                                                                                                                                               |
 | %%extra_dbclusteridentifier%%            | The cluster identifier of the discovered Aurora cluster                                                                                       |
-|                                          |                                                                                                                                               |
 | %%extra_managed_authentication_enabled%% | Whether IAM authentication enabled on the cluster. <br/>This is used to determine if managed authentication should be used for Postgres. |
 
 [1]: /database_monitoring/setup_postgres/aurora/?tab=postgres10
