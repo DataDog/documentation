@@ -8,7 +8,7 @@ private: true
 
 Use the following instructions to enable [CSM Threats][1] for Amazon ECS and EKS on AWS Fargate. To learn more about the supported deployment types for each CSM feature, see [Setting Up Cloud Security Management][2].
 
-Datadog Cloud Security Management on AWS Fargate includes built-in threat detection for AWS Fargate process and file integrity monitoring (FIM) events as well as [95 out-of-the-box rules][3].
+Datadog Cloud Security Management on AWS Fargate includes built-in threat detection for AWS Fargate process and file integrity monitoring (FIM) events as well as [100+ out-of-the-box rules][3].
 
 {{< img src="security/csm/csm_fargate_workflow.png" alt="Diagram showing the workflow for Cloud Security Management on AWS Fargate" width="80%">}}
 
@@ -21,7 +21,7 @@ Datadog Cloud Security Management on AWS Fargate includes built-in threat detect
 ### Images
 
 * cws-instrumentation: datadog/cws-instrumentation-dev:cws-instrumentation-beta
-* Datadog-agent: datadog/agent:latest
+* Datadog-agent: datadog/agent:7.52.0-rc.4
 
 ## Installation
 
@@ -228,6 +228,28 @@ spec:
      volumes:
        - name: cws-instrumentation-volume
 {{< /code-block >}}
+
+## Verify that the Agent is sending events to CSM
+When you enable CSM on AWS Fargate ECS or EKS, the Agent sends a log to Datadog to confirm that the default ruleset has been successfully deployed. To view the log, navigate to the Logs page in Datadog and search for @agent.rule_id:ruleset_loaded.
+
+Another method to verify that the Agent is sending events to CSM is to manually trigger a AWS Fargate security signal.
+
+In the task definition, replace the "workload" container by the following:
+
+{{< code-block lang="yaml" collapsible="true" >}}
+            "name": "cws-signal-test",
+            "image": "ubuntu:latest",
+            "entryPoint": [
+                "/cws-instrumentation-volume/cws-instrumentation",
+                "trace",
+                "--verbose",
+                "--",
+                "/usr/bin/bash",
+                "-c",
+                "apt update;apt install -y curl; while true; do curl https://google.com; sleep 5; done"
+            ],
+{{< /code-block >}}
+
 
 [1]: /security/threats/
 [2]: /security/cloud_security_management/setup#supported-deployment-types-and-features
