@@ -11,7 +11,7 @@ Configure your Splunk HTTP Event Collectors (HEC) to send logs to the Observabil
 This document walks you through the following steps:
 
 1. Set up the Splunk index
-1. Set up Observability Pipelines
+1. Set up a pipeline in Observability Pipelines
 1. Connect Splunk to the Observability Pipelines Worker
 
 ## Set up the Splunk index
@@ -22,17 +22,15 @@ You must provision a Splunk HEC input and HEC token on the Splunk index so that 
 
 After configuring the HTTP Event Collector, use the Splunk HEC token to set up Observability Pipelines.
 
-## Set up Observability Pipelines
+## Set up a pipeline
 
-To build a pipeline:
+Do the following to set up a pipeline to dual ship your logs to multiple destinations:
+
+### Add a log source
 
 1. Navigate to [Observability Pipelines][LINK].
 1. Select the **Dual Ship Logs** use case to create a new pipeline.
-
-### Add the log source
-
 1. Select **Splunk HEC** as the source.
-1. Enter the Splunk HEC endpoint in the Splunk HEC **Address** field. For example `https://<your_account>.splunkcloud.com:8088/services/collector/event`. See Send Data to HTTP Event Collector for more information.
 
 ### Add processors
 
@@ -84,10 +82,10 @@ For the **Rename** remap:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Configure the destinations for your logs
+### Add the destinations for your logs
 
-1. Select **Splunk HEC** and **Datadog** for the destination.
-1. Enter in the Splunk endpoint URL. 
+1. Select the destinations for your logs.
+1. Enter in the Splunk endpoint URL.
 
 ## Install the Observability Pipelines Worker
 
@@ -123,21 +121,16 @@ Text inside tab. [Link references][1] must be inside the tab.
 
 {{% /tab %}}
 {{< /tabs >}}
-
+3. Follow the instructions for your environment to install the Worker.
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-**[INSTRUCTIONS ARE WIP]**
-
-1. Enter the Splunk HEC token ino the **Splunk_Token** field.
-1. Enter the Splunk HEC endpoint in the Splunk HEC **Address** field. For example `https://<your_account>.splunkcloud.com:8088/services/collector/event`. See Send Data to HTTP Event Collector for more information.
 1. Click **Select an API key** to choose the Datadog API key you want to use.
-1. Run the provided command to install the Worker.
+1. Run the command automatically provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
 1. Run the following command to start the worker:
-
-```
-sudo systemctl restart observability-pipelines-worker
-```
+    ```
+    sudo systemctl restart observability-pipelines-worker
+    ```
 
 {{% /tab %}}
 {{% tab "AWS EKS" %}}
