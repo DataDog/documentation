@@ -15,7 +15,7 @@ In [Sensitive Data Scanner][1], the scanning rule determines what sensitive info
 {{< whatsnext desc="The available regex syntax for custom rules are broken down into the following categories:" >}}
     {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#alternation" >}}Alternation{{< /nextlink >}}
     {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#assertions" >}}Assertions{{< /nextlink >}}
-    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#ascii_classes" >}}ASCII classes{{< /nextlink >}}
+    {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#ascii-classes" >}}ASCII classes{{< /nextlink >}}
     {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#character-classes" >}}Character classes{{< /nextlink >}}
     {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#character-escapes" >}}Character escapes{{< /nextlink >}}
     {{< nextlink href="sensitive_data_scanner/regular_expression_syntax#custom-character-classes" >}}Custom character classes{{< /nextlink >}}
