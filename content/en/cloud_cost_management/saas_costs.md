@@ -27,7 +27,7 @@ further_reading:
 {{< /site-region >}}
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Fastly and Confluent Cloud Cost Integrations are in public beta. Snowflake Costs are in private beta, contact your account team to be added to the private beta.
+Cost Integrations are in public beta.
 {{< /beta-callout >}}
 
 ## Overview
