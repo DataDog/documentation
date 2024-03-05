@@ -85,6 +85,7 @@
                   "type": "object",
                   "properties": {
                     "blueprints": {
+                      "description": "An array of blueprints without diagram data.",
                       "type": "array",
                       "items": {
                         "type": "object",
@@ -250,39 +251,48 @@
                   "properties": {
                     "CreatorId": {
                       "type": "string",
+                      "description": "The user ID of the creator of the blueprint.",
                       "example": "us46e9aa-5806-4cd6-8e78-c22d58602d09"
                     },
                     "LastUserId": {
                       "type": "string",
+                      "description": "The user ID of the last user to modify the blueprint.",
                       "example": "us46e9aa-5806-4cd6-8e78-c22d58602d09"
                     },
                     "createdAt": {
                       "type": "string",
+                      "description": "The date and time the blueprint was created.",
                       "example": "2022-01-01T20:59:57.340Z"
                     },
                     "data": {
                       "type": "object",
+                      "description": "The definition of the blueprint.",
                       "properties": {
                         "grid": {
                           "type": "string",
+                          "description": "The size of the grid used in the blueprint.",
                           "example": "standard"
                         },
                         "name": {
                           "type": "string",
+                          "description": "A human-readable name for the blueprint.",
                           "example": "My new blueprint"
                         },
                         "version": {
                           "type": "number",
+                          "description": "The version of the blueprint.",
                           "example": 1
                         }
                       }
                     },
                     "id": {
                       "type": "string",
+                      "description": "The unique identifier of the blueprint.",
                       "example": "bp37712a-c507-4c62-ad8b-7d981cacb3be"
                     },
                     "updatedAt": {
                       "type": "string",
+                      "description": "The date and time the blueprint was last updated.",
                       "example": "2022-01-01T20:59:57.340Z"
                     }
                   }
@@ -715,6 +725,7 @@
                   "properties": {
                     "accounts": {
                       "type": "array",
+                      "description": "An array of AWS accounts.",
                       "items": {
                         "type": "object",
                         "properties": {
@@ -878,30 +889,37 @@
                   "properties": {
                     "CreatorId": {
                       "type": "string",
+                      "description": "The user ID of the creator of the AWS account.",
                       "example": "us46e9aa-5806-4cd6-8e78-c22d58602d09"
                     },
                     "createdAt": {
                       "type": "string",
+                      "description": "The date and time the AWS account was created.",
                       "example": "2022-01-01T01:37:55.709Z"
                     },
                     "externalId": {
                       "type": "string",
+                      "description": "The unique external ID of the Cloudcraft user who created the AWS account.",
                       "example": "ex53e827-a724-4a2a-9fec-b13761540785"
                     },
                     "id": {
                       "type": "string",
+                      "description": "The unique identifier of the AWS account.",
                       "example": "awfda35c-82fe-4edf-b9e9-ffd48f041c22 "
                     },
                     "name": {
                       "type": "string",
+                      "description": "A human-readable name for the AWS account.",
                       "example": "AWS account name (for example prod or staging)"
                     },
                     "roleArn": {
                       "type": "string",
+                      "description": "The ARN of the IAM role created in AWS for Cloudcraft.",
                       "example": "arn:aws:iam::1234567890:role/cloudcraft"
                     },
                     "updatedAt": {
                       "type": "string",
+                      "description": "The date and time the AWS account was last updated.",
                       "example": "2022-01-01T01:37:55.709Z"
                     }
                   }
@@ -1335,34 +1353,42 @@
                   "properties": {
                     "CreatorId": {
                       "type": "string",
+                      "description": "The user ID of the creator of the Azure account.",
                       "example": "us46e9aa-5806-4cd6-8e78-c22d58602d09"
                     },
                     "applicationId": {
                       "type": "string",
+                      "description": "Identifier of the application registered with Azure.",
                       "example": "azapp737-4763-4fc4-9d2b-c5f4d07d22df"
                     },
                     "createdAt": {
                       "type": "string",
+                      "description": "The date and time the Azure account was created.",
                       "example": "2022-01-01T21:18:59.057Z"
                     },
                     "directoryId": {
                       "type": "string",
+                      "description": "The Azure Tenant or Directory ID.",
                       "example": "azdirc44-0230-4732-9e70-cc00736f0a97"
                     },
                     "id": {
                       "type": "string",
+                      "description": "The unique identifier of the Azure account.",
                       "example": "azfda35c-82fe-4edf-b9e9-ffd48f041c22"
                     },
                     "name": {
                       "type": "string",
+                      "description": "A human-readable name for the Azure account.",
                       "example": "Development"
                     },
                     "subscriptionId": {
                       "type": "string",
+                      "description": "Subscription ID of the Azure account.",
                       "example": "azsub827-5f07-45ce-8f2b-6c5001db5c6f"
                     },
                     "updatedAt": {
                       "type": "string",
+                      "description": "The date and time the Azure account was last updated.",
                       "example": "2022-01-01T21:19:03.487Z"
                     }
                   }
@@ -1665,22 +1691,27 @@
                   "properties": {
                     "createdAt": {
                       "type": "string",
+                      "description": "The date and time the user was created.",
                       "example": "2022-01-01T20:54:47.282Z"
                     },
                     "email": {
                       "type": "string",
+                      "description": "The email address of the user.",
                       "example": "user@example.org"
                     },
                     "id": {
                       "type": "string",
+                      "description": "The unique identifier of the user.",
                       "example": "us46e9aa-5806-4cd6-8e78-c22d58602d09"
                     },
                     "name": {
                       "type": "string",
+                      "description": "The name of the user.",
                       "example": "Example API User"
                     },
                     "settings": {
                       "type": "object",
+                      "description": "An array of key-value pairs representing the user's settings.",
                       "properties": {
                         "key": {
                           "type": "string",
@@ -1690,6 +1721,7 @@
                     },
                     "updatedAt": {
                       "type": "string",
+                      "description": "The date and time the user was last updated.",
                       "example": "2022-01-01T20:54:53.963Z"
                     }
                   }
