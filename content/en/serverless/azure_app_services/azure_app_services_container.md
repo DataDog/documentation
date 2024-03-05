@@ -402,18 +402,6 @@ Once the container is built and pushed to your registry, the last step is to set
 
 For more environment variables and their function, see [Additional Configurations](#additional-configurations).
 
-This command deploys the service and allows any external connection to reach it. Set `DD_API_KEY` as an environment variable, and set your service listening to port 80.
-
-```shell
-az containerapp up \
-  --name APP_NAME \
-  --resource-group RESOURCE_GROUP \
-  --ingress external \
-  --target-port 80 \
-  --env-vars "DD_API_KEY=$DD_API_KEY" "DD_TRACE_ENABLED=true" "DD_SITE='datadoghq.com'" \
-  --image YOUR_REGISTRY/YOUR_PROJECT
-```
-
 ### 3. Results
 
 Once the deployment is completed, your metrics and traces are sent to Datadog. In Datadog, navigate to **Infrastructure->Serverless** to see your serverless metrics and traces.
