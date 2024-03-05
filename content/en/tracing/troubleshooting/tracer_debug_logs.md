@@ -244,7 +244,7 @@ With dd-trace-php 0.98.0+, you can specify a path to a log file for certain debu
 
 - **Environment variable**: `DD_TRACE_LOG_FILE`
 
-**INI:** datadog.trace.log_file
+- **INI**: `datadog.trace.log_file`
 
 **Notes**: 
   - For details about where to set `DD_TRACE_LOG_FILE`, review [Configuring the PHP Tracing Library][2].
