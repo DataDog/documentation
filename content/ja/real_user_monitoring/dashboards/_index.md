@@ -31,9 +31,7 @@ RUM ダッシュボードにアクセスするには、[**ダッシュボード�
 
 ### テンプレート変数
 
-生成された RUM ダッシュボードは、自動的にデフォルトのテンプレート変数のセットを含みます。テンプレート変数のドロップダウンメニューを使用して、検索を絞り込むことができます。例えば、`applicationId` テンプレート変数で、特定のアプリケーションをフィルターすることができます。
-
-{{< img src="real_user_monitoring/dashboards/template_variables.mp4" alt="テンプレート変数" video=true style="width:50%;" >}}
+生成された RUM ダッシュボードには自動的にデフォルトのテンプレート変数セットが含まれています。テンプレート変数のドロップダウンから値を選択して検索範囲を絞り込むことができます。詳細は、[テンプレート変数][5]のドキュメントをご覧ください。
 
 ### RUM イベントの表示
 
@@ -45,7 +43,7 @@ RUM ダッシュボードにアクセスするには、[**ダッシュボード�
 
 RUM ダッシュボードを複製するには、**Settings** アイコンをクリックし、**Clone dashboard** を選択します。ウィジェット、パワーパック、アプリを追加するには、一番下までスクロールして、**+** アイコンをクリックします。
 
-また、テンプレート変数を変更し、[保存ビュー][5]を作成することができます。
+また、テンプレート変数を変更し、[保存ビュー][6]を作成することができます。
 
 ## その他の参考資料
 
@@ -55,4 +53,5 @@ RUM ダッシュボードを複製するには、**Settings** アイコンをク
 [2]: https://app.datadoghq.com/dashboard/lists
 [3]: /ja/dashboards/
 [4]: /ja/real_user_monitoring/explorer/
-[5]: /ja/real_user_monitoring/explorer/saved_views/
+[5]: /ja/dashboards/template_variables
+[6]: /ja/real_user_monitoring/explorer/saved_views/

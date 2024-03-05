@@ -29,6 +29,8 @@ jobs:
     - name: Find changed lines
       id: changed_lines
       uses: hestonhoffman/changed-lines@v1
+      with:
+        file_filter: '.md, .html'
       
     - name: Run vale on changed files
       run: |
