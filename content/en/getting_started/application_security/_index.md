@@ -55,7 +55,7 @@ On the [ASM landing page,][18] follow the instructions to get started. This incl
 - Restarting your services. </br>
 
 1. Click **Get Started with ASM**.
-2. Select **Get Started** to detect vulnerabilities in open-source libraries (Software Composition Analysis), find and fix code-level vulnerabilities (Code Security), and select Threat Management to find and enable threat detection on your services that are recommended by Datadog.
+2. Select **Get Started** to detect vulnerabilities in open-source libraries (Software Composition Analysis), find and fix code-level vulnerabilities (Code Security), and find and enable threat detection on your services (Threat Management).
 3. Follow the instructions to get started with ASM.
 
    {{< img src="getting_started/appsec/asm_sca_setup.png" alt="Software Composition Analysis setup page." style="width:100%;" >}}
