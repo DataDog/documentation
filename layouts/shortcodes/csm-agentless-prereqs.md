@@ -13,7 +13,9 @@ After configuring Remote Configuration for Agentless Scanning, Remote Configurat
 
 **Note**: Only the CSM-enabled AWS Accounts that have scanners deployed need Remote-config enabled API keys.
 
-###  IAM permissions
+### Permissions
+
+####  IAM permissions
 
 The Agentless Scanning instance requires the following IAM permissions to scan for resources:
 
@@ -29,7 +31,7 @@ ebs:ListChangedBlocks
 ebs:GetSnapshotBlock
 ```
 
-### Lambda permissions
+#### Lambda permissions
 
 The Agentless Scanning instance requires the following Lambda permissions to scan for resources:
 
