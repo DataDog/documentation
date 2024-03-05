@@ -2459,7 +2459,7 @@ main:
     parent: tracing
     identifier: tracing_services
     weight: 7
-  - name: List of Services
+  - name: Service Catalog
     url: /service_catalog/
     parent: tracing_services
     identifier: tracing_service_catalog
