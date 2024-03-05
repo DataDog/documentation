@@ -34,7 +34,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: snmpwalk
-oauth: {}
 public_title: SNMP walk
 short_description: snmpwalk の説明
 supported_os:

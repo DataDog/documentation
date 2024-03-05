@@ -372,8 +372,8 @@ resource "aws_lambda_function" "lambda" {
   # Remember sure to choose the right layers based on your Lambda architecture and AWS regions
 
   layers = [
-    "arn:aws:lambda:us-east-1:464622532012:layer:dd-trace-java:11",
-    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:45"
+    "arn:aws:lambda:us-east-1:464622532012:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}",
+    "arn:aws:lambda:us-east-1:464622532012:layer:Datadog-Extension:{{< latest-lambda-layer-version layer="extension" >}}"
   ]
 
   environment {

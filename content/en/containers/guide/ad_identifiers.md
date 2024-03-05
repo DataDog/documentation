@@ -84,7 +84,7 @@ Then, apply a Docker label or Kubernetes annotation to identify your container a
 {{% tab "Docker label" %}}
 
 ```yaml
-com.datadoghq.ad.check.id: foo
+LABEL com.datadoghq.ad.check.id="foo"
 ```
 
 **Note**: The `com.datadoghq.ad.check.id` label takes precedence over the image name.

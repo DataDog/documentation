@@ -23,16 +23,43 @@ The Java Datadog Trace library is open source - view the [GitHub repository][1] 
 
 The Java Tracer supports automatic instrumentation for the following Oracle JDK and OpenJDK JVM runtimes.
 
-| Java versions | Operating Systems                                                                                               | Support level                     | Tracer version |
-|---------------|-----------------------------------------------------------------------------------------------------------------|-----------------------------------|----------------|
-| 22+           | Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)<br>Linux (arm64)<br>Mac (arm64) | [Beta](#levels-of-support)        | Latest         |
-| 18 to 21      | Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)<br>Linux (arm64)<br>Mac (arm64) | [GA](#levels-of-support)          | Latest         |
-| 8 to 17       | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)                                               | [GA](#levels-of-support)          | Latest         |
-| 8 to 17       | Linux (arm64)<br>Mac (arm64)                                                                                    | [Beta](#levels-of-support)        | Latest         |
-| 7             | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)                                               | [Maintenance](#levels-of-support) | v0             |
-| 7             | Linux (arm64)<br>Mac (arm64)                                                                                    | [End-of-life](#levels-of-support) | v0             |
+#### Java Tracer v1 (latest)
+
+<table>
+  <thead>
+    <th>Java versions</th>
+    <th>Operating Systems</th>
+    <th>Support level</th>
+  </thead>
+  <tr>
+    <td>from 22 and upward</td>
+    <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
+    <td><a href="#levels-of-support">Beta</a></td>
+  </tr>
+  <tr>
+    <td>from 18 to 21</td>
+    <td>Windows (x86, x86-64)<br>Linux (x86, x86-64, arm64)<br>Mac (x86, x86-64, arm64)</td>
+    <td><a href="#levels-of-support">GA</a></td>
+  </tr>
+  <tr>
+    <td rowspan="2">from 8 to 17</td>
+    <td>Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)</td>
+    <td><a href="#levels-of-support">GA</a></td>
+  </tr>
+  <tr>
+    <td>Linux (arm64)<br>Mac (arm64)</td>
+    <td><a href="#levels-of-support">Beta</a></td>
+  </tr>
+</table>
 
 Datadog does not officially support any early-access versions of Java.
+
+#### Java Tracer v0 (maintenance)
+
+| Java versions      | Operating Systems                                                               | Support level                     |
+|--------------------|---------------------------------------------------------------------------------|-----------------------------------|
+| 7 only             | Windows (x86, x86-64)<br>Linux (x86, x86-64)<br>Mac (x86, x86-64)               | [Maintenance](#levels-of-support) |
+| 7 only             | Linux (arm64)<br>Mac (arm64)                                                    | [End-of-life](#levels-of-support) |
 
 ### Levels of support
 
@@ -99,6 +126,7 @@ The following instrumentations are disabled by default and can be enabled with t
 | Grizzly-HTTP    | `-Ddd.integration.grizzly-filterchain.enabled=true`                                                                                       |
 | Ning            | `-Ddd.integration.ning.enabled=true`                                                                                                      |
 | Spark Java      | `-Ddd.integration.sparkjava.enabled=true`                                                                                                 |
+| Hazelcast       | `-Ddd.integration.hazelcast.enabled=true` </br> `-Ddd.integration.hazelcast_legacy.enabled=true`                                               |
 
 **Note**: JAX-WS integration instruments endpoints annotated with @WebService (JAX-WS 1.x) and @WebServiceProvider (JAX-WS 2.x).
 
@@ -207,21 +235,22 @@ Don't see your desired datastores? Datadog is continually adding additional supp
 
 `dd-java-agent` includes support for automatically tracing the following frameworks.
 
-| Framework         | Versions   | Support Type    | Instrumentation Names (used for configuration) |
-|-------------------|------------|-----------------|------------------------------------------------|
-| Datanucleus JDO   | 4.0+       | Fully Supported | `datanucleus`                                  |
-| Dropwizard Views  | 0.7+       | Fully Supported | `dropwizard`, `dropwizard-view`                |
-| GraphQL           | 14.0+      | Fully Supported | `graphql-java`                                 |
-| Hibernate         | 3.5+       | Fully Supported | `hibernate`, `hibernate-core`                  |
-| Hystrix           | 1.4+       | Fully Supported | `hystrix`                                      |
-| JSP Rendering     | 2.3+       | Fully Supported | `jsp`, `jsp-render`, `jsp-compile`             |
-| JUnit             | 4.1+, 5.3+ | Fully Supported | `junit`, `junit-4`, `junit-5`                  |
-| Project Reactor   | 3.1+       | Fully Supported | `reactor-core`                                 |
-| Quartz            | 2.x        | Fully Supported | `quartz`                                       |
-| RxJava            | 2.x        | Fully Supported | `rxjava`                                       |
-| Spring Data       | 1.8+       | Fully Supported | `spring-data`                                  |
-| Spring Scheduling | 3.1+       | Fully Supported | `spring-scheduling`                            |
-| Twilio SDK        | < 8.0      | Fully Supported | `twilio-sdk`                                   |
+| Framework         | Versions   | Support Type                                                     | Instrumentation Names (used for configuration) |
+|-------------------|------------|------------------------------------------------------------------|------------------------------------------------|
+| Datanucleus JDO   | 4.0+       | Fully Supported                                                  | `datanucleus`                                  |
+| Dropwizard Views  | 0.7+       | Fully Supported                                                  | `dropwizard`, `dropwizard-view`                |
+| GraphQL           | 14.0+      | Fully Supported                                                  | `graphql-java`                                 |
+| Hazelcast         | 3.6+       | [Beta](#framework-integrations-disabled-by-default)              | `hazelcast`, `hazelcast_legacy`                |
+| Hibernate         | 3.5+       | Fully Supported                                                  | `hibernate`, `hibernate-core`                  |
+| Hystrix           | 1.4+       | Fully Supported                                                  | `hystrix`                                      |
+| JSP Rendering     | 2.3+       | Fully Supported                                                  | `jsp`, `jsp-render`, `jsp-compile`             |
+| JUnit             | 4.1+, 5.3+ | Fully Supported                                                  | `junit`, `junit-4`, `junit-5`                  |
+| Project Reactor   | 3.1+       | Fully Supported                                                  | `reactor-core`                                 |
+| Quartz            | 2.x        | Fully Supported                                                  | `quartz`                                       |
+| RxJava            | 2.x        | Fully Supported                                                  | `rxjava`                                       |
+| Spring Data       | 1.8+       | Fully Supported                                                  | `spring-data`                                  |
+| Spring Scheduling | 3.1+       | Fully Supported                                                  | `spring-scheduling`                            |
+| Twilio SDK        | < 8.0      | Fully Supported                                                  | `twilio-sdk`                                   |
 
 Don't see your desired frameworks? Datadog is continually adding additional support. To request a framework, contact our awesome [support team][2].
 

@@ -33,7 +33,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: ntp
-oauth: {}
 public_title: NTP
 short_description: Recevez des alertes lorsque vos hosts se désynchronisent du serveur
   NTP de votre choix.

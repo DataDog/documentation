@@ -39,7 +39,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: citrix_hypervisor
-oauth: {}
 public_title: Citrix Hypervisor
 short_description: Citrix Hypervisor ホストの健全性とパフォーマンスを監視します。
 supported_os:

@@ -89,13 +89,13 @@ In addition to automatically recording steps based on your device interactions, 
 
 Interacting with elements with a tap on your mobile application records a step.
 
-{{< img src="mobile_app_testing/tap.mp4" alt="Recording a Tap step in a mobile test" video=true >}}
+{{< img src="mobile_app_testing/tap.mp4" alt="Recording a tap step in a mobile test" video=true >}}
 
 #### Double tap
 
 Interacting with elements with a double tap on your mobile application records a step.
 
-{{< img src="mobile_app_testing/double_tap.mp4" alt="Recording a Tap step in a mobile test" video=true >}}
+{{< img src="mobile_app_testing/double_tap.mp4" alt="Recording a double tap step in a mobile test" video=true >}}
 
 #### Type text
 

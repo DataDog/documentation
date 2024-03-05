@@ -25,5 +25,5 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="PostgreSQL guides:" >}}
-    {{< nextlink href="database_monitoring/guide/pg15_upgrade" >}}Upgrading to PostgreSQL 15{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/pg15_upgrade" >}}Upgrading to PostgreSQL 15 and higher{{< /nextlink >}}
 {{< /whatsnext >}}
