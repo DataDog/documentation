@@ -2,10 +2,6 @@
 title: Data Transformation
 kind: Documentation
 disable_toc: false
-further_reading:
-- link: "logs/processing/pipelines"
-  tag: "Documentation"
-  text: "Log processing pipelines"
 ---
 
 {{< site-region region="gov" >}}
@@ -58,10 +54,5 @@ let object = {0:{
 }}
 ...
 ```
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 
 [1]: https://lodash.com/
