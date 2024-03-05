@@ -29,17 +29,15 @@ Use [Retention Analysis][1] to measure how a group of users engage with specific
 
 Explore [User Journeys][2] to see different visualizations of the user experience when interacting with your application:
 
-- **Funnel**: Measure the conversion rate end-to-end of a given workflow.
-- **Sankey**: Explore aggregated workflows in a single visualization to aid in answering exploratory questions about user journeys.
-- **Conversion**: Track conversation rates, such as browser type, geography, and 
-
+- **[Funnel][3]**: Measure the conversion rate end-to-end of a given workflow.
+- **[Conversion][4]**: Track conversation rates over time and compare it against specific attributes that may have affected conversion rates, such as browser type or geography.
 
 ## Visualize user interactions with heatmaps
 
-Visualize the most interacted with elements on a page to see where hot spots of activity are, along with analyzing scroll depth to see how far users scrolled down a given page.
+[Heatmaps][5] visualize the most interacted with elements on a page to see where hot spots of activity are, along with analyzing scroll depth to see how far users scrolled down a given page.
 
-[1]: 
-[2]: 
-[3]: 
-[4]: 
-[5]: 
+[1]: /real_user_monitoring/product_analytics/retention_analysis
+[2]: https://app.datadoghq.com/product-analytics/user-journey/sankey
+[3]: /real_user_monitoring/product_analytics/funnel_analysis
+[4]: https://app.datadoghq.com/product-analytics/user-journey/conversion
+[5]: /real_user_monitoring/product_analytics/heatmaps
