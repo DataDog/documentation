@@ -18,7 +18,7 @@
           "Blueprints"
         ],
         "summary": "List blueprints",
-        "description": "List all of your saved blueprints.\n\nThe response is an array of blueprint entries without the diagram data. Each entry includes the blueprint ID and name, access control, and user information.\n\nThe provided blueprint IDs are required to access the other blueprint-related APIs.\n\nResponses\n=========\n- **200 OK on success**\n- 401 Unauthorized",
+        "description": "List all of your saved blueprints.\n\nEach entry includes the blueprint ID and name, access control, and user information.\n\nThe provided blueprint IDs are required to access the other blueprint-related APIs.\n\nResponses\n=========\n- **200 OK on success**\n- 401 Unauthorized",
         "operationId": "listMyBlueprints",
         "responses": {
           "200": {
@@ -85,7 +85,7 @@
                   "type": "object",
                   "properties": {
                     "blueprints": {
-                      "description": "An array of blueprints without diagram data.",
+                      "description": "An array of blueprint metadata.",
                       "type": "array",
                       "items": {
                         "type": "object",
@@ -280,7 +280,6 @@
                         },
                         "version": {
                           "type": "number",
-                          "description": "The version of the blueprint.",
                           "example": 1
                         }
                       }
