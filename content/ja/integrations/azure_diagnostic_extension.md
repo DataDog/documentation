@@ -31,9 +31,9 @@ version: '1.0'
 
 Azure Diagnostic Extension は、Microsoft Azure 上で実行されている VM の健全性の監視を支援します。
 
-Datadog Azure インテグレーションは、Azure Diagnostic Extension からメトリクスを収集できますが、ご使用の VM に Datadog Agent をインストールすることを[お勧めします][1]。
+Datadog Azure インテグレーションは、Azure Diagnostic Extension からメトリクスを収集できますが、VM に Datadog Agent をインストールすることを[お勧めします][1]。
 
-- 組織が Datadog の US3 サイトにあり、Azure で Datadog リソースを構成している場合は、[Azure Native インテグレーション手動セットアップガイド][2]の手順を使用します。
+- 組織が Datadog の US3 サイトを利用しており、Azure で Datadog リソースを構成している場合、[Azure Native インテグレーション手動セットアップガイド][2]の指示に従ってください。
 - **すべてのサイト**は、[Azure インテグレーション手動セットアップガイド][3]または [Azure プログラム管理ガイド][4]の手順を使用できます。
 
 ## 計画と使用
