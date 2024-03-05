@@ -386,6 +386,39 @@ http {
 
 ## Ingress-NGINX Controller for Kubernetes
 
+### v1.10.0+
+
+<div class="alert alert-warning">
+  <strong>Important Note:</strong> With the release of <b>v1.10.0</b>, OpenTracing and Datadog's integration have been deprecated. As a seamless alternative for now, we highly recommend utilizing the OpenTelemetry Collector. [Check instructions to set up tracing on older versions of Ingress-NGINX](#v190-and-older).
+</div>
+
+**1. Prepare Datadog Agent:** Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][18] to act as an OpenTelemetry Collector.
+
+**2. Configure NGINX Ingress Controller:** To begin, verify that your nginx-ingress controller's pod spec has the `HOST_IP` environment variable set. If not, add the following entry to the `env` block within the pod's specification:
+```yaml
+- name: HOST_IP
+  valueFrom:
+    fieldRef:
+      fieldPath: status.hostIP
+```
+
+Next, it's essential to enable OpenTelemetry instrumentation for the Ingress-NGINX Controller. Create or edit a ConfigMap with the following details:
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ingress-nginx-controller
+  namespace: ingress-nginx
+data:
+  enable-opentelemetry: "true"
+  otlp-collector-host: $HOST_IP
+  # Defaults
+  # otlp-collector-port: 4317
+  # otel-service-name: "nginx"
+  # otel-sampler-ratio: 0.01
+```
+
 ### v1.9.0 and older
 To enable Datadog tracing, create or edit a ConfigMap to set `enable-opentracing: "true"` and the `datadog-collector-host` to which traces should be sent.
 The name of the ConfigMap is cited explicitly by the Ingress-NGINX Controller container's command line argument, defaulting to `--configmap=$(POD_NAMESPACE)/nginx-configuration`.
@@ -449,39 +482,6 @@ data:
   datadog-collector-host: $HOST_IP
   enable-opentracing: "true"
   datadog-sample-rate: "0.4"
-```
-
-### v1.10.0+
-
-<div class="alert alert-warning">
-  <strong>Important Note:</strong> With the release of <b>v1.10.0</b>, OpenTracing and Datadog's integration have been deprecated. As a seamless alternative for now, we highly recommend utilizing the OpenTelemetry Collector.
-</div>
-
-**1. Prepare Datadog Agent:** Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][18] to act as an OpenTelemetry Collector.
-
-**2. Configure NGINX Ingress Controller:** To begin, verify that your nginx-ingress controller's pod spec has the `HOST_IP` environment variable set. If not, add the following entry to the `env` block within the pod's specification:
-```yaml
-- name: HOST_IP
-  valueFrom:
-    fieldRef:
-      fieldPath: status.hostIP
-```
-
-Next, it's essential to enable OpenTelemetry instrumentation for the Ingress-NGINX Controller. Create or edit a ConfigMap with the following details:
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: ingress-nginx-controller
-  namespace: ingress-nginx
-data:
-  enable-opentelemetry: "true"
-  otlp-collector-host: $HOST_IP
-  # Defaults
-  # otlp-collector-port: 4317
-  # otel-service-name: "nginx"
-  # otel-sampler-ratio: 0.01
 ```
 
 [1]: https://github.com/DataDog/nginx-datadog/releases/latest
