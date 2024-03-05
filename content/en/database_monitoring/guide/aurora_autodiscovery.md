@@ -4,10 +4,10 @@ kind: guide
 ---
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Aurora cluster auto discovery is a beta feature. If you have any feedback about this feature, contact Support at support@datadoghq.com.
+Autodiscovery for Aurora clusters is a beta feature. If you have any feedback about this feature, contact support at support@datadoghq.com.
 {{< /beta-callout >}}
 
-This guide assumes that you have configured Database Monitoring for your Amazon Aurora [Postgres][1] or [MySQL][11].
+This guide assumes that you have configured Database Monitoring for your Amazon Aurora [Postgres][1] or [MySQL][11] databases.
 
 ## Before you begin
 
@@ -17,17 +17,15 @@ Supported databases
 Supported Agent versions
 : 7.53.0+ (Not yet released)
 
-In order to use this feature now, you need to install the beta version of the Agent. See the installation instructions below.
+To use this feature, you need to install the beta version of the Agent. See the [Agent installation](#agent-installation) section on this page.
 
 ## Overview
 
-The Datadog Agent supports configuring automatic discovery and monitoring of your Aurora clusters. This feature works in lieu of manually configuring the Agent by listing individual database host endpoints.
+Datadog's [Autodiscovery][4] enables you to configure monitoring in dynamic infrastructures. You can use this feature to monitor your Aurora clusters without having to list individual database host endpoints. This is especially helpful for clusters that use [Aurora Auto Scaling][6], which dynamically adjusts the number of Aurora Replicas in response to variations in connectivity or workload.
 
-This is helpful for Aurora clusters with [auto-scaling enabled][6], automatically adjusting the number of read replicas in response to workload variations.
+With Autodiscovery and Database Monitoring, you can define configuration templates for Postgres or MySQL checks and specify which clusters to apply each check to.
 
-This features leverages the Agent [Autodiscovery feature][4] and lets you define configuration templates for Postgres or MySQL checks, and specify which clusters each check should apply to.
-
-## Enabling Aurora cluster discovery
+## Enabling Autodiscovery for Aurora clusters
 
 The following outlines the different configuration steps to enable Aurora cluster discovery in your Datadog Agent.
 
