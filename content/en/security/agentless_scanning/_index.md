@@ -28,7 +28,7 @@ The following table provides a summary of Agentless scanning technologies in rel
 | Operating System            | Linux                                                       |
 | Host Filesystem             | Btrfs, Ext2, Ext3, Ext4, xfs                                |
 | Package Manager             | Deb (debian, ubuntu) <br> RPM (amazon-linux, fedora, redhat, centos) <br> APK (alpine) |
-| Encryption                  | AWS </br> Unencrypted </br> Encrypted - Platform Managed Key (PMK) </br> 🛑 **Encrypted - Customer Managed Key (CMK) is not supported** |
+| Encryption                  | AWS </br> Unencrypted </br> Encrypted - Platform Managed Key (PMK) </br> Encrypted - Customer Managed Key (CMK) is **not** supported |
 | Container runtime           | Docker, containerd                                           |
 | Serverless                  | AWS, AWS Lambda                                             |
 | Serverless languages        | .Net, Python, Java, Ruby, Node.js, Go                        |
