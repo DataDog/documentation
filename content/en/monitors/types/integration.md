@@ -27,18 +27,12 @@ To create an [integration monitor][2] in Datadog:
 
 1. Use the main navigation: *Monitors --> New Monitor --> Integration*.
 2. Search for an integration or select it from the list or images.
-3. Choose an **Integration Metric** or **Integration Status** monitor:
-    {{< img src="monitors/monitor_types/integration/metric_or_status.png" alt="Metric or Status" style="width:90%;">}}
 
 ### Integration metric
 
 Create an integration metric monitor by following the instructions in the [metric monitor][3] documentation. Using the integration metric monitor type ensures the monitor can be selected by the integration monitor type facet on the [Manage Monitors][4] page.
 
-### Integration status
-
-If the integration has a service check, the **Integration Status** tab is active.
-
-**Note**: If the integration does not submit metrics or service checks, it will show up as "Misconfigured".
+**Note**: The integration must submit metrics or service checks to configure an Integration monitor.
 
 #### Pick a check
 
