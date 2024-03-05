@@ -386,17 +386,16 @@ http {
 
 ## Ingress-NGINX Controller for Kubernetes
 
-### v1.10.0+
+### Controller v1.10.0+
 
 <div class="alert alert-warning">
-  <strong>Important Note:</strong> With the release of <b>v1.10.0</b>, the Ingres Controller's OpenTracing and Datadog integration have been deprecated. As an alternative, we  recommend the OpenTelemetry integration.<br><br>
-  
+  <strong>Important Note:</strong> With the release of <b>v1.10.0</b>, the Ingres Controller's OpenTracing and Datadog integration have been deprecated. As an alternative, the OpenTelemetry integration is recommended.<br><br>
   For older versions, see the <a href="#v190-and-older">OpenTracing-based instructions</a>.
 </div>
 
 **1. Prepare Datadog Agent:** Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][18] to act as an OpenTelemetry Collector.
 
-**2. Configure NGINX Ingress Controller:** To begin, verify that your nginx-ingress controller's pod spec has the `HOST_IP` environment variable set. If not, add the following entry to the `env` block within the pod's specification:
+**2. Configure NGINX Ingress Controller:** To begin, verify that your NGINX Ingress Controller's pod spec has the `HOST_IP` environment variable set. If not, add the following entry to the `env` block within the pod's specification:
 ```yaml
 - name: HOST_IP
   valueFrom:
@@ -421,7 +420,7 @@ data:
   # otel-sampler-ratio: 0.01
 ```
 
-### v1.9.0 and older
+### Controller v1.9.0 and older
 To enable Datadog tracing, create or edit a ConfigMap to set `enable-opentracing: "true"` and the `datadog-collector-host` to which traces should be sent.
 The name of the ConfigMap is cited explicitly by the Ingress-NGINX Controller container's command line argument, defaulting to `--configmap=$(POD_NAMESPACE)/nginx-configuration`.
 If ingress-nginx was installed via helm chart, this ConfigMap will be named like `Release-Name-nginx-ingress-controller`.
