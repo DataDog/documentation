@@ -1,5 +1,5 @@
 ---
-title: Automatically configure your Aurora clusters for monitoring
+title: Configuring Database Monitoring for Amazon Aurora DB Clusters
 kind: guide
 ---
 
