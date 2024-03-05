@@ -111,17 +111,38 @@ metadata:
   annotations:
     notifications.argoproj.io/subscribe.cd-visibility-trigger.cd-visibility-webhook: ""
     dd_env: <YOUR_ENV>
+    dd_service: <YOUR_SERVICE>
 ```
 
-There are two annotations:
+There are three annotations:
 1. The notifications annotation subscribes the Argo CD application to the notification setup created above.
 2. The `dd_env` annotation configures the environment of the application. Replace `YOUR_ENV` above with the environment
    to which this application is deploying (for example: `staging` or `prod`). If you don't set this annotation,
    the environment defaults to `none`.
+3. The `dd_service` annotation configures the service of the application. Replace `YOUR_SERVICE` above with the service
+   that the Argo CD application is deploying (for example: `transaction-service`). When this annotation is used, the service
+   name is added to all the deployment executions generated from the application. Moreover, if your service is
+   registered in [Service Catalog][13], the team name is also added to all the deployment executions. Omit this annotation
+   if your Argo CD application is configured to deploy more than one service.
 
 See the [Argo CD official guide][12] for more details on applications subscriptions.
 
 After this final step is completed, you can start monitoring your Argo CD deployments in Datadog.
+
+## Adding custom tags to deployment executions
+
+You can optionally add custom tags to the deployment executions generated from Argo CD applications deployments. These tags can be used to filter, group, and aggregate deployment executions in Datadog.
+To add custom tags, add the `dd_customtags` annotation to your Argo CD application annotations and set the value to a comma-separated list of tags, structured as `key:value` pairs. For example:
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    notifications.argoproj.io/subscribe.cd-visibility-trigger.cd-visibility-webhook: ""
+    dd_env: <YOUR_ENV>
+    dd_customtags: "region:us1-east, team:backend"
+```
 
 ## Visualize deployments in Datadog
 
@@ -148,3 +169,4 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [10]: /continuous_delivery/explorer
 [11]: https://app.datadoghq.com/organization-settings/api-keys
 [12]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/subscriptions/
+[13]: /tracing/service_catalog

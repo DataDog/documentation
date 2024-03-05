@@ -8,6 +8,9 @@ further_reading:
 - link: "/getting_started/application_security/software_composition_analysis"
   tag: "Guide"
   text: "Getting started with Software Composition Analysis"
+- link: "https://www.datadoghq.com/blog/datadog-software-composition-analysis/"
+  tag: "Blog"
+  text: "Mitigate vulnerabilities from third-party libraries with Datadog Software Composition Analysis" 
 - link: "https://www.datadoghq.com/blog/iast-datadog-application-vulnerability-management/"
   tag: "Blog"
   text: "Enhance application security in production with Application Vulnerability Management"  
@@ -102,7 +105,7 @@ Software Composition Analysis enriches the information APM is already collecting
 [6]: /security/application_security/enabling/compatibility
 [7]: /getting_started/application_security/software_composition_analysis
 [8]: https://app.datadoghq.com/security/appsec/inventory/libraries
-[9]: /code-analysis-software-composition-analysis/code_analysis/software_composition_analysis/setup/?tab=githubactions
+[9]: /code_analysis/software_composition_analysis/setup/?tab=githubactions
 [10]: /account_management/rbac/permissions/#integrations
 [11]: /integrations/jira/
 [12]: https://app.datadoghq.com/security/configuration/asm/setup

@@ -7,7 +7,7 @@ code_lang_weight: 20
 aliases:
   - /continuous_integration/setup_tests/javascript
   - /continuous_integration/tests/javascript
-  - continuous_integration/tests/setup/javascript
+  - /continuous_integration/tests/setup/javascript
 further_reading:
     - link: "/continuous_integration/tests/containers/"
       tag: "Documentation"
@@ -265,7 +265,7 @@ Read more about custom metrics in [Add Custom Metrics Guide][2]
 
 ### Cypress version 10 or later
 
-Use the Cypress API documentation to [learn how to write plugins][1] for `cypress>=10`.
+Use the Cypress API documentation to [learn how to use plugins][1] for `cypress>=10`.
 
 In your `cypress.config.js` file, set the following:
 
@@ -306,36 +306,70 @@ module.exports = defineConfig({
   }
 })
 {{< /code-block >}}
-<div class="alert alert-warning"> Datadog requires the <a href="#cypress-afterrun-event">after:run</a> Cypress event to work, and Cypress does not allow multiple <a href="">'after:run'</a> handlers. If you are using this event, dd-trace will not work properly.</div>
+
+#### Cypress `after:run` event
+Datadog requires the [`after:run`][10] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:run` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-run'`:
+
+{{< code-block lang="javascript" filename="cypress.config.js" >}}
+const { defineConfig } = require('cypress')
+
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      require('dd-trace/ci/cypress/plugin')(on, config)
+      // other plugins
+      on('after:run', (details) => {
+        // other 'after:run' handlers
+        // important that this function call is returned
+        return require('dd-trace/ci/cypress/after-run')(details)
+      })
+    }
+  }
+})
+{{< /code-block >}}
 
 ### Cypress before version 10
 
-These are the instructions if you're using a version older than `cypress@10`.
+These are the instructions if you're using a version older than `cypress@10`. See the [Cypress documentation][9] for more information about migrating to a newer version.
 
 1. Set [`pluginsFile`][2] to `"dd-trace/ci/cypress/plugin"`, for example, through [`cypress.json`][3]:
-   {{< code-block lang="json" filename="cypress.json" >}}
-   {
-     "pluginsFile": "dd-trace/ci/cypress/plugin"
-   }
-   {{< /code-block >}}
+{{< code-block lang="json" filename="cypress.json" >}}
+{
+  "pluginsFile": "dd-trace/ci/cypress/plugin"
+}
+{{< /code-block >}}
 
-   If you've already defined a `pluginsFile`, you can still initialize the instrumentation with:
-   {{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
-   module.exports = (on, config) => {
-     // your previous code is before this line
-     require('dd-trace/ci/cypress/plugin')(on, config)
-   }
-   {{< /code-block >}}
-   <div class="alert alert-warning"> Datadog requires the <a href="#cypress-afterrun-event">'after:run'</a> Cypress event to work, and Cypress does not allow multiple <a href="">'after:run'</a> handlers. If you are using this event, dd-trace will not work properly.</div>
+If you already defined a `pluginsFile`, initialize the instrumentation with:
+{{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
+module.exports = (on, config) => {
+  // your previous code is before this line
+  require('dd-trace/ci/cypress/plugin')(on, config)
+}
+{{< /code-block >}}
 
 2. Add the following line to the **top level** of your [`supportFile`][4]:
-   {{< code-block lang="javascript" filename="cypress/support/index.js" >}}
-   // Your code can be before this line
-   // require('./commands')
-   require('dd-trace/ci/cypress/support')
-   // Your code can also be after this line
-   // Cypress.Commands.add('login', (email, pw) => {})
-   {{< /code-block >}}
+{{< code-block lang="javascript" filename="cypress/support/index.js" >}}
+// Your code can be before this line
+// require('./commands')
+require('dd-trace/ci/cypress/support')
+// Your code can also be after this line
+// Cypress.Commands.add('login', (email, pw) => {})
+{{< /code-block >}}
+
+#### Cypress `after:run` event
+Datadog requires the [`after:run`][10] Cypress event to work, and Cypress does not allow multiple handlers for that event. If you defined handlers for `after:run` already, add the Datadog handler manually by importing `'dd-trace/ci/cypress/after-run'`:
+
+{{< code-block lang="javascript" filename="cypress/plugins/index.js" >}}
+module.exports = (on, config) => {
+  // your previous code is before this line
+  require('dd-trace/ci/cypress/plugin')(on, config)
+  on('after:run', (details) => {
+    // other 'after:run' handlers
+    // important that this function call is returned
+    return require('dd-trace/ci/cypress/after-run')(details)
+  })
+}
+{{< /code-block >}}
 
 
 Run your tests as you normally do, specifying the environment where test are being run (for example, `local` when running tests on a developer workstation, or `ci` when running them on a CI provider) in the `DD_ENV` environment variable. For example:
@@ -391,7 +425,7 @@ Read more about custom metrics in [Add Custom Metrics Guide][6].
 If the browser application being tested is instrumented using [Browser Monitoring][7], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][8].
 
 
-[1]: https://docs.cypress.io/api/plugins/writing-a-plugin#Plugins-API
+[1]: https://docs.cypress.io/guides/tooling/plugins-guide#Using-a-plugin
 [2]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Plugins-file
 [3]: https://docs.cypress.io/guides/references/configuration#cypress-json
 [4]: https://docs.cypress.io/guides/core-concepts/writing-and-organizing-tests#Support-file
@@ -399,6 +433,8 @@ If the browser application being tested is instrumented using [Browser Monitorin
 [6]: /continuous_integration/guides/add_custom_metrics/?tab=javascripttypescript
 [7]: /real_user_monitoring/browser/#setup
 [8]: /continuous_integration/guides/rum_integration/
+[9]: https://docs.cypress.io/guides/references/migration-guide#Migrating-to-Cypress-100
+[10]: https://docs.cypress.io/api/plugins/after-run-api
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -588,10 +624,6 @@ If you want visibility into the browser process, consider using [RUM & Session R
 
 Cypress interactive mode (which you can enter by running `cypress open`) is not supported by CI Visibility because some cypress events, such as [`before:run`][12], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][13].
 
-### Cypress `after:run` event
-
-Datadog requires usage of the Cypress [`after:run` event][14]. Cypress only allows a single listener for this event, so if your custom Cypress plugin requires `after:run`, it is incompatible with `dd-trace`.
-
 ### Mocha parallel tests
 Mocha's [parallel mode][15] is not supported. Tests run in parallel mode are not instrumented by CI Visibility.
 
@@ -600,6 +632,9 @@ Cucumber's [parallel mode][16] is not supported. Tests run in parallel mode are 
 
 ### Jest's `test.concurrent`
 Jest's [test.concurrent][17] is not supported.
+
+### Jest's `--forceExit`
+Jest's [--forceExit][21] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
 
 ## Best practices
 
@@ -658,10 +693,10 @@ When you use this approach, both the testing framework and CI Visibility can tel
 [11]: /continuous_integration/guides/rum_integration/
 [12]: https://docs.cypress.io/api/plugins/before-run-api
 [13]: https://docs.cypress.io/guides/references/configuration#Configuration-File
-[14]: https://docs.cypress.io/api/plugins/after-run-api
 [15]: https://mochajs.org/#parallel-tests
 [16]: https://github.com/cucumber/cucumber-js/blob/63f30338e6b8dbe0b03ddd2776079a8ef44d47e2/docs/parallel.md
 [17]: https://jestjs.io/docs/api#testconcurrentname-fn-timeout
 [18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
 [19]: https://www.npmjs.com/package/mocha-each
 [20]: /getting_started/tagging/unified_service_tagging
+[21]: https://jestjs.io/docs/cli#--forceexit

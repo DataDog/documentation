@@ -45,7 +45,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: gunicorn
-oauth: {}
 public_title: Gunicorn
 short_description: リクエスト率、リクエスト処理時間、ログメッセージ率、ワーカープロセス数を監視。
 supported_os:

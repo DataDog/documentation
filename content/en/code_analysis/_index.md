@@ -4,6 +4,9 @@ kind: documentation
 description: Learn how to use Datadog Code Analysis to address maintainability issues, bugs, and security vulnerabilities in development to prevent customer impact.
 is_beta: true
 further_reading:
+- link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+  tag: "Release Notes"
+  text: "Check out the latest Software Delivery releases! (App login required)"
 - link: "https://www.datadoghq.com/blog/monitor-ci-pipelines/"
   tag: "Blog"
   text: "Monitor all your CI pipelines with Datadog"
@@ -90,9 +93,9 @@ For more information about Static Analysis rulesets, see [Static Analysis Rules]
 {{< whatsnext desc="Select a CI/CD provider to configure Code Analysis with:">}}
     {{< nextlink href="code_analysis/static_analysis/github_actions" >}}Static Analysis and GitHub Actions{{< /nextlink >}}
     {{< nextlink href="code_analysis/static_analysis/circleci_orbs" >}}Static Analysis and CircleCI Orbs{{< /nextlink >}}
-    {{< nextlink href="code_analysis/static_analysis/setup/?tab=other#configure-your-cicd-provider" >}}Static Analysis and Other CI Providers{{< /nextlink >}}
+    {{< nextlink href="code_analysis/static_analysis/generic_ci_providers" >}}Static Analysis and Generic CI Providers{{< /nextlink >}}
     {{< nextlink href="code_analysis/software_composition_analysis/github_actions" >}}Software Composition Analysis and GitHub Actions{{< /nextlink >}}
-    {{< nextlink href="code_analysis/software_composition_analysis/setup/?tab=other#configure-your-cicd-provider" >}}Software Composition Analysis and Other CI Providers{{< /nextlink >}}
+    {{< nextlink href="code_analysis/software_composition_analysis/generic_ci_providers" >}}Software Composition Analysis and Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
 
 </br>

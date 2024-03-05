@@ -103,9 +103,9 @@ A trace is used to track the time spent by an application processing a request a
 [9]: /tracing/manual_instrumentation/
 [10]: /tracing/opentracing/
 [11]: /tracing/other_telemetry/connect_logs_and_traces/
-[12]: /tracing/guide/add_span_md_and_graph_it/
+[12]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 [13]: /tracing/metrics/runtime_metrics/
-[14]: /tracing/guide/add_span_md_and_graph_it/
+[14]: /tracing/trace_pipeline/trace_retention/#trace-search-and-analytics-on-indexed-spans
 [15]: /tracing/metrics/metrics_namespace/
 [16]: https://app.datadoghq.com/metric/summary
 [17]: https://app.datadoghq.com/monitors#/create
