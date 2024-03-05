@@ -111,6 +111,8 @@ Ensure that the IP address in the response matches the one associated with your 
 | Process | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-process-psc` | `process.us5.datadoghq.com` |
 | Profiling | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-logs-http-profile-psc` | `intake.profile.us5.datadoghq.com` |
 | Traces | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-trace-edge-psc` | `trace.agent.us5.datadoghq.com` |
+| Database Monitoring | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-dbm-metrics-psc` | `dbm-metrics-intake.us5.datadoghq.com` |
+| Remote Configuration | `projects/datadog-prod-us5/regions/us-central1/serviceAttachments/nlb-fleet-psc` | `config.us5.datadoghq.com` |
 
 
 
@@ -216,6 +218,8 @@ Ensure that the IP address in the response matches the one associated with your 
 | Process | `projects/datadog-prod/regions/europe-west3/serviceAttachments/nlb-process-psc` | `process.datadoghq.eu` |
 | Profiling | `projects/datadog-prod/regions/europe-west3/serviceAttachments/nlb-logs-http-profile-psc` | `intake.profile.datadoghq.eu` |
 | Traces | `projects/datadog-prod/regions/europe-west3/serviceAttachments/nlb-trace-edge-psc` | `trace.agent.datadoghq.eu` |
+| Database Monitoring | `projects/datadog-prod/regions/europe-west3/serviceAttachments/nlb-dbm-metrics-psc` | `dbm-metrics-intake.datadoghq.eu` |
+| Remote Configuration | `projects/datadog-prod/regions/europe-west3/serviceAttachments/nlb-fleet-psc` | `config.datadoghq.eu` |
 
 
 
