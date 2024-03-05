@@ -77,7 +77,7 @@ Names classes that can be used in [custom character classes](#custom-character-c
 | `\a`            | Escapes a bell `(\x{7})`.                                            |
 | `\b`            | Escapes a backspace `(\x{8})`. This only works in a custom character class (for example, `[\b]`), otherwise it is treated as a word boundary. |
 | `\cx`           | Escapes a control sequence, where `x` is `A-Z` (upper or lowercase). For example: `\cA` = `\x{0}`, `\cB` = `\x{1}`,...`\cZ` = `\x{19}`. |
-| `\e`            | Escapes the ASCII character called `Escape` (`\x{1B}`).              |
+| `\e`            | Escapes the ASCII escape character (`\x{1B}`).                       |
 | `\f`            | Escapes a form feed (`\x{C}`).                                       |
 | `\n`            | Escapes a newline (`\x{A}`).                                         |
 | `\r`            | Escapes a carriage return (`\x{D}`)                                  |
