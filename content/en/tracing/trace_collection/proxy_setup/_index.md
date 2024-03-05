@@ -389,7 +389,9 @@ http {
 ### v1.10.0+
 
 <div class="alert alert-warning">
-  <strong>Important Note:</strong> With the release of <b>v1.10.0</b>, OpenTracing and Datadog's integration have been deprecated. As a seamless alternative for now, we highly recommend utilizing the OpenTelemetry Collector. [Check instructions to set up tracing on older versions of Ingress-NGINX](#v190-and-older).
+  <strong>Important Note:</strong> With the release of <b>v1.10.0</b>, the Ingres Controller's OpenTracing and Datadog integration have been deprecated. As an alternative, we  recommend the OpenTelemetry integration.<br><br>
+  
+  For older versions, see the <a href="#v190-and-older">OpenTracing-based instructions</a>.
 </div>
 
 **1. Prepare Datadog Agent:** Ensure that your Datadog Agent has [gRPC OTLP Ingestion enabled][18] to act as an OpenTelemetry Collector.
@@ -442,6 +444,7 @@ data:
   # datadog-service-name: "nginx"
   # datadog-collector-port: "8126"
   # datadog-operation-name-override: "nginx.handle"
+  # datadog-sample-rate: "1.0"
 ```
 
 Additionally, ensure that your nginx-ingress controller's pod spec has the `HOST_IP` environment variable set. Add this entry to the `env:` block that contains the environment variables `POD_NAME` and `POD_NAMESPACE`.
@@ -460,29 +463,6 @@ To set a different service name per Ingress using annotations:
       opentracing_tag "service.name" "custom-service-name";
 ```
 The above overrides the default `nginx-ingress-controller.ingress-nginx` service name.
-
-### Ingress Controller Sampling
-To set a fixed sampling rate, use the [datadog-sample-rate][16] option in the
-ingress controller's [ConfigMap][17]. For example, to set the sampling rate to
-40%:
-
-```yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  labels:
-    app.kubernetes.io/component: controller
-    app.kubernetes.io/instance: ingress-nginx
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
-    app.kubernetes.io/version: 1.7.1
-  name: ingress-nginx-controller
-  namespace: ingress-nginx
-data:
-  datadog-collector-host: $HOST_IP
-  enable-opentracing: "true"
-  datadog-sample-rate: "0.4"
-```
 
 [1]: https://github.com/DataDog/nginx-datadog/releases/latest
 [2]: https://hub.docker.com/layers/library/amazonlinux/2.0.20230119.1/images/sha256-db0bf55c548efbbb167c60ced2eb0ca60769de293667d18b92c0c089b8038279?context=explore
