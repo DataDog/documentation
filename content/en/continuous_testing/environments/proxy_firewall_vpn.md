@@ -36,7 +36,7 @@ When using the testing tunnel, your tests' locations are overridden by a locatio
 
 ## How to use the testing tunnel
 
-As mentioned above, the testing tunnel comes with the [`@datadog/datadog-ci`][2] NPM package and is available from version [v0.11.0][3] of the package. To get started, see [Continuous Testing and CI/CD][4].
+As mentioned above, the testing tunnel comes with the [`@datadog/datadog-ci`][2] NPM package and is available in versions `>=v0.11.0` of the package. To get started, see [Continuous Testing and CI/CD][4].
 
 Once you've set up your client on your local machine or your CI server, you can launch your HTTP and browser tests with the testing tunnel by appending the command used to launch tests with `--tunnel`.
 
