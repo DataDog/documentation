@@ -6,9 +6,14 @@ further_reading:
 - link: "security/detection_rules/"
   tag: "Documentation"
   text: "Learn more about detection rules"
+products:
+- name: Cloud SIEM
+  url: /security/cloud_siem/
+- name: CSM Threats
+  url: /security/threats/
 ---
 
-{{< product-availability "Cloud SIEM" "CSM Threats">}}
+{{< product-availability >}}
 
 <div class="alert alert-warning">Suppressions are available for Cloud Security Management Threats and Cloud SIEM.</div>
 
