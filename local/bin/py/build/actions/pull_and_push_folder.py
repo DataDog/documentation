@@ -31,6 +31,7 @@ def pull_and_push_folder(content, content_dir):
     for file_name in chain.from_iterable(glob.iglob(pattern, recursive=True) for pattern in content["globs"]):
         source_comment = f"<!--  SOURCED FROM https://github.com/DataDog/{content['repo_name']} -->\n"
         try_rule_cta = "\n{{< try-rule-cta >}}"
+        try_rule_banner = "\n{{< try-rule-banner >}}"
         with open(file_name, mode="r+", encoding="utf-8", errors="ignore") as f:
             file_name_path = Path(file_name)
             # get the path without integrations_data/extracted/<repo_name>/
@@ -81,8 +82,8 @@ def pull_and_push_folder(content, content_dir):
                 count=0,
             )
 
-            # replace html comments with shortcodes and add source comment
-            txt = source_comment + try_rule_cta + replace_comments(txt)
+            # replace html comments with shortcodes, add source comment, and other ui shortcode 
+            txt = source_comment + try_rule_cta + replace_comments(txt) + try_rule_banner
 
             file_content = TEMPLATE.format(front_matter=front_matter, content=txt.strip())
             # Replacing the master README.md by _index.md to follow Hugo logic

@@ -34,8 +34,11 @@
                         <li>Get feedback on your code</li>
                     </ol>
                     <div class="d-flex align-items-center">
-                        <p class="mb-0">For more information, please read the <a href="https://docs.datadoghq.com/static_analysis">Code Analysis documentation</a></p>
-                        {{ partial "icon" (dict "name" "external-link" "title" "external link to Datadog Code Analysis" "size" "10px" "color" "#006BC2") }}
+                        <p class="mb-0">
+                            For more information, please read the <a href="/code_analysis">Code Analysis documentation</a>
+                            {{ partial "icon" (dict "name" "external-link" "title" "link to Code Analysis documentation" "size" "12px" "color" "#006BC2") }}
+                        </p>
+                        
                     </div>
                 </div>
                 <div class="col-12">
@@ -46,7 +49,7 @@
                             <p>Identify code vulnerabilities directly in your VS Code editor</p>
                             <button class="cta-button d-flex align-items-center justify-content-center w-100 btn btn-primary position-relative">
                                 <span>Download Extension</span>
-                                {{ partial "icon" (dict "name" "external-link" "title" "external link to Datadog Code Analysis" "size" "13px" "color" "white") }}
+                                {{ partial "icon" (dict "name" "external-link" "size" "13px" "color" "white") }}
                                 <a class="stretched-link" href="https://marketplace.visualstudio.com/items?itemName=Datadog.datadog-vscode"></a>
                             </button>
                         </div>
@@ -56,7 +59,7 @@
                             <p>Identify code vulnerabilities directly in JetBrains products (such as IntelliJ)</p>
                             <button class="cta-button d-flex align-items-center justify-content-center w-100 btn btn-primary position-relative">
                                 <span> Download Plugin</span>
-                                {{ partial "icon" (dict "name" "external-link" "title" "external link to Datadog Code Analysis" "size" "13px" "color" "white") }}
+                                {{ partial "icon" (dict "name" "external-link" "size" "13px" "color" "white") }}
                                 <a class="stretched-link" href="https://plugins.jetbrains.com/plugin/19495-datadog"></a>
                             </button>
                         </div>
@@ -65,9 +68,10 @@
             </div>
             <div class="modal-footer flex justify-content-center">
                 <p class="m-0">Use Datadog Code Analysis to catch code issue at every step of your development process</p>
-                <div class="m-0">
-                    <a href="https://www.datadoghq.com/static-analysis/">Datadog Code Analysis</a>
-                    {{ partial "icon" (dict "name" "external-link" "title" "external link to Datadog Code Analysis" "size" "10px" "color" "#006BC2") }}
+                <div class="m-0 position-relative">
+                    <span>Datadog Code Analysis</span>
+                    {{ partial "icon" (dict "name" "external-link" "size" "12px" "color" "#006BC2") }}
+                    <a class="stretched-link" href="/code_analysis"></a>
                 </div>
             </div>
         </div>

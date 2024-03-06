@@ -144,6 +144,7 @@
                     i.icon-external-link {
                         position: relative;
                         top: 2px;
+                        cursor: pointer;
                     }
                 }
                 .floating-body-bottom {
@@ -180,7 +181,7 @@
                         i.icon-external-link {
                             position: relative;
                             top: 3px;
-                            margin-left: 8px
+                            margin-left: 8px;
                         }
                     }
                 }
@@ -188,11 +189,18 @@
             .modal-footer {
                 border: 0;
                 padding: 0;
-                margin: 0 16px;
+                margin: 0 52px;
                 margin-bottom: 8px;
                 text-align: center;
-                a {
+                p, span {
+                    font-size: 14px;
+                }
+                span {
                     color: #006BC2;
+                }
+                i {
+                    position: relative;
+                    top: 2px;
                 }
             }
         }
