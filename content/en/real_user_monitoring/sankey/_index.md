@@ -3,6 +3,10 @@ title: Sankey Diagrams
 kind: documentation
 ---
 
+{{< callout url="#" btn_hidden="true" header="Try the Beta!" >}}
+Sankey diagrams are in public beta.
+{{< /callout >}}
+
 ## Overview
 
 The Sankey diagram allows you to visualize all user journeys across your application to analyze the critical path.
