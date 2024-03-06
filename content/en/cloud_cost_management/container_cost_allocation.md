@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Datadog Cloud Cost Management (CCM) automatically allocates AWS/Google costs of Kubernetes and AWS ECS clusters to individual pods and tasks running in those clusters. Use cost metrics enriched with tags from pods, nodes, containers, and tasks to visualize container workload cost in the context of your entire cloud bill.
+Datadog Cloud Cost Management (CCM) automatically allocates costs of Kubernetes and AWS ECS clusters to individual pods and tasks running in those clusters. Use cost metrics enriched with tags from pods, nodes, containers, and tasks to visualize container workload cost in the context of your entire cloud bill.
 
 {{< img src="cloud_cost/container_cost_allocation/cost_allocation_table.png" alt="Cloud cost allocation table showing requests and idle costs over the past week" style="width:100%;" >}}
 
