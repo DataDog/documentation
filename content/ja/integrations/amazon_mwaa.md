@@ -9,7 +9,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_mwaa/
 draft: false
 git_integration_title: amazon_mwaa
 has_logo: true
-integration_id: amazon-mwaa
+integration_id: ''
 integration_title: Amazon Managed Workflows for Apache Airflow (MWAA)
 integration_version: ''
 is_public: true
