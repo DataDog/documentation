@@ -18522,7 +18522,10 @@ components:
           description: Name of the standard pattern.
           type: string
         pattern:
-          description: Regex to match.
+          deprecated: true
+          description: (Deprecated) Regex to match, optionally documented for older
+            standard rules. Refer to the `description` field to understand what the
+            rule does.
           type: string
         priority:
           description: Integer from 1 (high) to 5 (low) indicating standard pattern
