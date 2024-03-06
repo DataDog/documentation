@@ -1,5 +1,5 @@
 ---
-title: Configurations
+title: (LEGACY) Configurations
 kind: Documentation
 aliases:
   - /integrations/observability_pipelines/vector_configurations/
