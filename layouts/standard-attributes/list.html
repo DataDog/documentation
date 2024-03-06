@@ -109,7 +109,7 @@
                 {{ range $idx, $el := .product_source }}
                   {{ if in . "icon-"}}
                     {{ $product := (substr . 5) }}
-                    {{ partial "icon" (dict "name" $product "size" "18px" "color" "#7c3eb9" "title" (cond (eq $product "log") (printf "%s management" $product) $product) )}}
+                    {{ partial "icon" (dict "name" $product "size" "18px" "color" "#7c3eb9" "title" ((cond (eq $product "log") (printf "%s management" $product) $product) | upper) )}}
 
                   {{ else if in (slice "android" "ios" "flutter" "roku") . }}
                     {{/*  Local partial */}}
@@ -118,13 +118,13 @@
                     {{/*  Get integration logos for android, ios, roku, and flutter  */}}
                     {{ $int_logo := partialCached "integrations-logo.html" (dict "context" $ctx "basename" . "variant" "avatar") . "avatar" }}
                     {{ if $int_logo }}
-                      <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}" title='{{ printf "rum %s" . }}' data-bs-toggle="tooltip" data-bs-placement="top"/>
+                      <img src="{{ $int_logo }}" height="18" alt="{{$int_logo}}" title='{{ (printf "rum %s" .) | upper }}' data-bs-toggle="tooltip" data-bs-placement="top"/>
                     {{ end }}
                   {{ else if eq . "browser" }}
                     {{/*  Local partial */}}
                     {{ partial "throw-error" (dict "ctx_product_source" $ctx_product_source "ctx_file_path" $ctx.File.Path) }}
 
-                    {{ partial "icon" (dict "name" . "size" "18px" "color" "#7c3eb9" "title" (printf "rum %s" .))}}
+                    {{ partial "icon" (dict "name" . "size" "18px" "color" "#7c3eb9" "title" ((printf "rum %s" .) | upper))}}
 
                   {{ end }}
                 {{ end }}
