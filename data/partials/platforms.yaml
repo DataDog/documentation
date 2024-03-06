@@ -75,6 +75,10 @@ platforms:
     link: "agent/basic_agent_usage/windows/"
     image: "platform_windows.png"
     category: "Windows"
+  - name: sccm
+    link: "agent/basic_agent_usage/sccm/"
+    image: "platform_sccm.png"
+    category: "Windows"
   - name: source
     link: "agent/basic_agent_usage/source/"
     image: "platform_fromsource.png"

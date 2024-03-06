@@ -4,6 +4,9 @@ kind: documentation
 aliases:
 - /continuous_integration/intelligent_test_runner/
 further_reading:
+  - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+    tag: "Release Notes"
+    text: "Check out the latest Software Delivery releases! (App login required)"
   - link: "https://www.datadoghq.com/blog/streamline-ci-testing-with-datadog-intelligent-test-runner/"
     tag: "Blog"
     text: "Streamline CI testing with Datadog Intelligent Test Runner"
