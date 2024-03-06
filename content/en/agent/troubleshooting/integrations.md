@@ -19,7 +19,7 @@ Datadog integrations are configured through the Datadog Agent using YAML configu
 
 If an integration that you've configured is not showing up in Datadog, run the [`status` CLI command][2] and look for the integration under the *Running Checks* heading.
 
-**Note:** Community, Partner and Marketplace integrations are not retained when the Agent is upgraded. These integrations need to be re-installed upon upgrading the Agent version.
+**Note**: Community, Partner, and Marketplace integrations are not retained when the Agent is upgraded. These integrations need to be re-installed upon upgrading the Agent version.
 
 If the integration is listed under **Running Checks**, but is not visible in the Datadog app:
 1. Make sure there are no errors or warnings listed under the integration's entry in the `status` output.
