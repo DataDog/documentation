@@ -26,7 +26,8 @@ team: web-integrations
 version: '1.0'
 ---
 
-{{< img src="integrations/bitbucket/integrations-bitbucket.mp4" alt="integrations bitbucket" video="true" >}}
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+{{< img src="integrations/bitbucket/integrations-bitbucket.mp4" alt="インテグレーションビットバケット" video="true" >}}
 
 ## 概要
 
@@ -97,5 +98,5 @@ Bitbucket インテグレーションには、サービスのチェック機能�
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html
-[2]: https://app.datadoghq.com/account/settings#integrations/bitbucket
+[2]: https://app.datadoghq.com/integrations/bitbucket
 [3]: https://docs.datadoghq.com/ja/help/

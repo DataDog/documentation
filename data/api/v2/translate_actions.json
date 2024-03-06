@@ -873,6 +873,10 @@
     "description": "View indexed tag key-value pairs for a given metric name.",
     "summary": "List tags by metric name"
   },
+  "ListMetricAssets": {
+    "description": "Returns dashboards, monitors, notebooks, and SLOs that a metric is stored in, if any.  Updated every 24 hours.",
+    "summary": "Related Assets to a Metric"
+  },
   "EstimateMetricsOutputSeries": {
     "description": "Returns the estimated cardinality for a metric with a given tag, percentile and number of aggregations configuration using Metrics without Limits&trade;.",
     "summary": "Tag Configuration Cardinality Estimator"

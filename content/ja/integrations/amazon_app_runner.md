@@ -11,7 +11,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_app_runner/
 draft: false
 git_integration_title: amazon_app_runner
 has_logo: true
-integration_id: amazon-app-runner
+integration_id: ''
 integration_title: AWS App Runner
 integration_version: ''
 is_public: true

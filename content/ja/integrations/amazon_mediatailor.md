@@ -9,7 +9,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_mediatailor/
 draft: false
 git_integration_title: amazon_mediatailor
 has_logo: true
-integration_id: amazon-mediatailor
+integration_id: ''
 integration_title: AWS Elemental MediaTailor
 integration_version: ''
 is_public: true
