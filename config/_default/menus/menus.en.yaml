@@ -1763,7 +1763,7 @@ main:
     url: service_management/workflows/saved_actions/
     parent: workflows
     identifier: workflows_saved_actions
-    weight: 5 
+    weight: 5
   - name: Connections
     url: service_management/workflows/connections/
     parent: workflows
@@ -1799,7 +1799,7 @@ main:
     url: service_management/workflows/actions_catalog/
     parent: app_builder
     identifier: app_builder_actions_catalog
-    weight: 4  
+    weight: 4
   - name: Containers
     url: containers/
     identifier: containers
@@ -3622,7 +3622,7 @@ main:
     url: data_security/pci_compliance/
     parent: log_management
     weight: 3
-    params: 
+    params:
       skip: true
   - name: Connect Logs and Traces
     url: tracing/other_telemetry/connect_logs_and_traces/
