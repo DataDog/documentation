@@ -29,12 +29,12 @@ You can configure Azure Private Link to expose a private IP address for each Dat
 5. On the **Create a private endpoint** > **Resource** page, configure the following:
    - For **Connection method**, select **Connect to an Azure resource by resource ID or alias**.
    - For **Resource ID or alias**, enter the Private Link service name that corresponds to the Datadog intake service that you want to use. You can find this service name in the [table of published services](#published-services).
-   - For **Request message**, TK
+   - Optionally, for **Request message**, you can enter your email address (associated with a Datadog account). This helps Datadog identify your request and reach out to you if necessary.
 
    Select **Next: Virtual Network** to continue.
 6. On the **Create a private endpoint** > **Virtual Network** page, configure the following:
-   - Under **Networking** select the **Virtual network** and **Subnet** where the endpoint should live. Typically, this is located in the same network as the compute resources that need to access the the private endpoint.
-   - TK
+   - Under **Networking**, select the **Virtual network** and **Subnet** where the endpoint should live. Typically, this is located in the same network as the compute resources that need to access the the private endpoint.
+   - Under **Private DNS integration**, select **No**.
 
    Select **Next: Tags** to continue.
 7. On the **Create a private endpoint** > **Tags** page, you can optionally set tags. Select **Next**.
@@ -48,8 +48,6 @@ You can configure Azure Private Link to expose a private IP address for each Dat
    - Under **Project details**, select the **Subscription** and **Resource group** from which production resources should access the private endpoint.
    - Under **Instance details**, for **Name**, enter the _private DNS name_ that corresponds to the Datadog intake service that you want to use. You can find this service name in the [table of published services](#published-services).
 
-      For **Resource group location**, TK
-
    Select **Review create**.
 4. Review your configuration settings. Then, select **Create**.
 5. After the Private DNS zone is created, select it from the list.
@@ -58,6 +56,7 @@ You can configure Azure Private Link to expose a private IP address for each Dat
    - For **Name**, enter `*`.
    - For **Type**, select **A - Address record**.
    - For **IP address**, enter the IP address you noted at the end of the previous section.
+   
    Select **OK** to finish.
 
 ## Published services
