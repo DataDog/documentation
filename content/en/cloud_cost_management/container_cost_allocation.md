@@ -20,11 +20,11 @@ Datadog Cloud Cost Management (CCM) automatically allocates costs of Kubernetes 
 
 {{< img src="cloud_cost/container_cost_allocation/cost_allocation_table.png" alt="Cloud cost allocation table showing requests and idle costs over the past week" style="width:100%;" >}}
 
-For Kubernetes clusters, CCM allocates costs of AWS/Google host instances and non-local AWS EBS volumes. For AWS ECS clusters, CCM allocates costs of AWS EC2 instances.
+For Kubernetes clusters, CCM allocates costs of AWS and Google host instances, and non-local AWS EBS volumes. For AWS ECS clusters, CCM allocates costs of AWS EC2 instances.
 
 ## Prerequisites
 
-1. Set up and configure the [Cloud Cost integration][1].
+1. Set up and configure the [AWS or Google Cloud Cost integration][1].
 2. For Kubernetes support, install the [**Datadog Agent**][2] in a Kubernetes environment.
      - Ensure that you enable the [**Orchestrator Explorer**][6] in your Agent configuration.
      - Container cost allocation requires **Agent version >= 7.27.0** and **Cluster Agent version >= 1.11.0**.
@@ -53,9 +53,9 @@ For Kubernetes Persistent Volume storage allocation, Persistent Volumes (PV), Pe
 Next, Datadog looks at all of the pods that claimed the volume on that day. The cost of the volume is allocated to a pod based on the resources it used and the length of time it ran. These resources
 include the provisioned capacity for storage, IOPS, and throughput. This allocated cost is enriched with all of the pod's tags.
 
-#### Agentless Google Kubernetes costs
+#### Agentless Kubernetes costs (Google Kubernetes Engine only)
 
-In some cases, you may wish to view the costs of GKE clusters without having Datadog infrastructure monitoring enabled. In these cases CCM supports viewing costs allocated using [GKE cost allocation](https://cloud.google.com/kubernetes-engine/docs/how-to/cost-allocations), with some limitations.
+To view the costs of GKE clusters without enabling Datadog infrastructure monitoring, use [GKE cost allocation](https://cloud.google.com/kubernetes-engine/docs/how-to/cost-allocations). Enable GKE cost allocation on unmonitored GKE clusters to access this feature set.
 
 ##### Limitations and differences from the Datadog agent
 
@@ -88,14 +88,14 @@ Using the `allocated_spend_type` tag, you can visualize the spend category assoc
 
 | Spend type | Description    |
 | -----------| -----------    |
-| Managed service fee | Cost of associated fees charged by the provider for managing the cluster, such as EKS/GKE fees. |
+| Managed service fee | Cost of associated fees charged by the provider for managing the cluster, such as EKS or GKE fees. |
 | Usage | Cost of resources used by workloads. |
 | Workload idle | Cost of resources that are reserved and allocated but not used by workloads. |
 | Cluster idle | Cost of resources that are not reserved by workloads in a cluster. |
 
 ### Compute
 
- The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
+The cost of a host instance is split into two components: 60% for the CPU and 40% for the memory. Each component is allocated to individual workloads based on their resource reservations and usage.
 
 - Usage: Cost of memory and CPU used by workloads, based on the average usage on that day.
 - Workload idle: Cost of memory and CPU that is being reserved and allocated but not used. This is the difference between the total resources requested and the average usage.
@@ -123,7 +123,7 @@ When the prerequisites are met, new cost metrics automatically appear.
 
 These new cost metrics include all of your cloud costs. This allows you to continue visualizing all of your cloud costs at one time, with added visibility into the costs of Kubernetes pods and AWS ECS tasks.
 
-For example, say you have the tag `team` on a storage bucket, a cloud provider managed database, and Kubernetes pods. You can use these new metrics to group costs by `team`, which includes the costs for all 3.
+For example, say you have the tag `team` on a storage bucket, a cloud provider managed database, and Kubernetes pods. You can use these new metrics to group costs by `team`, which includes the costs for all three.
 
 ## Tags
 
