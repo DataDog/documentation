@@ -34,7 +34,7 @@ For Kubernetes clusters, CCM allocates costs of AWS/Google host instances and no
 
 ## Cost allocation
 
-Cost allocation divides host compute and AWS EBS volume costs in the bill into associated individual tasks or pods. These divided costs are then enriched with tags from nodes, pods, tasks, and volumes (AWS only). This lets you break down costs by any associated dimensions.
+Cost allocation divides host compute and AWS EBS volume costs from the cloud provider into associated individual tasks or pods. These divided costs are then enriched with tags from nodes, pods, tasks, and volumes (AWS only). This lets you break down costs by any associated dimensions.
 
 ### Kubernetes
 
