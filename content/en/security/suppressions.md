@@ -8,6 +8,8 @@ further_reading:
   text: "Learn more about detection rules"
 ---
 
+{{< product-availability "Cloud SIEM" "CSM Threats">}}
+
 <div class="alert alert-warning">Suppressions are available for Cloud Security Management Threats and Cloud SIEM.</div>
 
 ## Overview

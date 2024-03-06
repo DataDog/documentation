@@ -1,0 +1,14 @@
+.product-availability {
+    strong, p {
+        font-size: 18px;
+    }
+    strong {
+        white-space: nowrap;
+    }
+    p {
+        margin-left: 4px;
+        span {
+            white-space: nowrap;
+        }
+    }
+}
