@@ -1,7 +1,6 @@
 ---
 title: RUM Roku Data Collected
 kind: documentation
-is_beta: true
 code_lang: roku
 type: multi-code-lang
 code_lang_weight: 50
