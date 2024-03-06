@@ -15,6 +15,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/
   tag: ブログ
   text: Datadog を支えるデザインシステム、DRUIDS
+- link: https://www.datadoghq.com/blog/introducing-open-source-hub/
+  tag: ブログ
+  text: Datadog Open Source Hub のご紹介
 kind: documentation
 title: 開発者
 ---
@@ -67,7 +70,7 @@ Datadog パートナーになるための詳細は、[Datadog パートナーネ
 
 初期目標は、小規模なコードを生成して信頼できる方法で希望するメトリクスを収集し、基本的なインテグレーションフレームワークを構築することです。カスタムチェックとして基本機能のコードを記述し、[Agent インテグレーションの作成][13]からフレームワークの詳細を入力してください。
 
-次に、[`integrations-extras` リポジトリ][7]にプルリクエストを送信します。これにより、コードレビューの準備が整ったことが Datadog に通知されます。テストや Datadog 内部の仕組み、その他の点について不明点がある場合は、Datadog Ecosystems チームがサポートしますのでご安心ください。プルリクエストを通じて効率的に懸念点を振り返ることができます。[Community Office Hours][4] も有効活用してください。
+次に、[`integrations-extras` リポジトリ][7]に対してプルリクエストを開いてください。これにより、コードレビューの準備が整ったことが Datadog に通知されます。テストや Datadog 内部の仕組み、その他の点について不明点がある場合は、Datadog Ecosystems チームがサポートしますのでご安心ください。プルリクエストを通じて効率的に懸念点を振り返ることができます。
 
 インテグレーションは、機能性、フレームワークへの準拠、一般的なコード品質が検証されると、`integrations-extras` にマージされ、Datadog エコシステムの一部となります。
 
@@ -78,7 +81,7 @@ Datadog パートナーになるための詳細は、[Datadog パートナーネ
 | DogStatsD           | 最小 | はい            | 任意      |
 | カスタムチェック        | 小    | はい            | Python   |
 | プライベートインテグレーション | 中 | はい            | Python   |
-| パブリックインテグレーション  | 大   | ✕             | Python   |
+| パブリックインテグレーション  | 大   | いいえ             | Python   |
 
 ### インテグレーション作成のメリット
 
@@ -111,7 +114,6 @@ Datadog パートナーになるための詳細は、[Datadog パートナーネ
 
 {{< whatsnext desc="Datadog 開発者コミュニティへの参加方法を説明します。" >}}
     {{< nextlink href="/developers/libraries" >}}<u>ライブラリ</u>: Datadog API、DogStatsD クライアント、APM トレースと Continuous Profiler、および広範なプラットフォームを外部からサポートするコミュニティインテグレーションの、公式/コミュニティ寄稿のライブラリ一覧。{{< /nextlink >}}
-    {{< nextlink href="/developers/office_hours" >}}<u>Community Office Hours</u>: 定期的に実施される Datadog Office Hours です。Datadog での開発について、エンジニアとチャットで直接話すことができます。{{< /nextlink >}}
     {{< nextlink href="/developers/guide/" >}}<u>ガイド</u>: 詳しい技術情報やコードサンプル、その他の参考資料など、便利な記事をお読みください。{{< /nextlink >}}
 {{< /whatsnext >}}
 
