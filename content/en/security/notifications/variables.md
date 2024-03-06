@@ -33,10 +33,10 @@ The following variables are available:
 | `{{last_seen_epoch}}`                              | Time the signal was most recently triggered, in milliseconds, since midnight, January 1, 1970.|
 | `{{rule_name}}`                                    | Name of the associated rule.                                                                  |
 | `{{case_name}}`                                    | Name of the triggering rule case.                                                             |
-| `{{events_matched}}`                               | Number of events which has matched the associated rule.                                       |
-| `{{events_matched_per_query.<name_of_the_query>}}` | Number of events which has matched the associated rule query `<name_of_the_query>`.           |
+| `{{events_matched}}`                               | Number of events that have matched the associated rule.                                       |
+| `{{events_matched_per_query.<name_of_the_query>}}` | Number of events that have matched the associated rule query `<name_of_the_query>`.           |
 
-When a high amount of logs match a rule, the rule title/message are not rendered for every new logs. Therefore, in this case, the rendered values of `{{events_matched}}` and `{{events_matched_per_query.<name_of_the_query>}}` could be below the values displayed in the Overview Tab of the Signal Side Panel.
+When a large number of logs match a rule, the rule's title and message are not rendered for every new log. In these cases, the rendered values of `{{events_matched}}` and `{{events_matched_per_query.<name_of_the_query>}}` could be below the values displayed in the Overview tab of the signal's side panel.
 
 ### Dynamic links
 
