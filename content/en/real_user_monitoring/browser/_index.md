@@ -1730,6 +1730,12 @@ The application's environment, for example: prod, pre-prod, and staging. Follows
 **Type**: String<br/>
 The application's version, for example: 1.2.3, 6c44da20, and 2020.02.13. Follows the [tag syntax requirements][15].
 
+`trackingConsent`
+: Optional<br/>
+**Type**: `"granted"` or `"not-granted"`<br/>
+**Default**: `"granted"`<br/>
+Whether the user granted their tracking consent. See [User Tracking Consent][27].
+
 `trackViewsManually`
 : Optional<br/>
 **Type**: Boolean<br/>
@@ -1973,3 +1979,5 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [24]: https://docs.datadoghq.com/real_user_monitoring/browser/advanced_configuration#contexts-life-cycle
 [25]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
 [26]: /real_user_monitoring/session_replay/#usage
+[27]: /real_user_monitoring/browser/advanced_configuration/#user-tracking-consent
+

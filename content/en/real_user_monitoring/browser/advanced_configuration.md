@@ -734,6 +734,69 @@ window.DD_RUM &&
 
 For a sampled out session, all page views and associated telemetry for that session are not collected.
 
+## User tracking consent
+
+To be compliant with the GDPR, CCPA and similar regulations, the RUM Browser SDK allows to provide the tracking consent value at initialization.
+
+The `trackingConsent` initialization can be one of the following values:
+
+1. `"granted"`: The RUM Browser SDK starts collecting data and sends it to Datadog.
+2. `"not-granted"`: The RUM Browser SDK does not collect any data.
+
+To change the tracking consent value after the RUM Browser SDK is initialized, use the `setTrackingConsent()` API call. The RUM Browser SDK changes its behavior according to the new value:
+
+* when changed from `"granted"` to `"not-granted"`, the RUM session is stopped, and no data will be sent anymore.
+* when changed from `"not-granted"` to `"granted"`, a new RUM session is be created if no previous session is active anymore, and data collection is be started again.
+
+This state is not synchronized between tabs nor persisted between navigation. It is your responsibility to provide the user decision during RUM Browser SDK initialization or by using `setTrackingConsent()`.
+
+When `setTrackingConsent()` is used before `init()`, the provided value takes precedence over the initialization parameter.
+
+{{< tabs >}}
+{{% tab "NPM" %}}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+    ...,
+    trackingConsent: 'not-granted'
+});
+
+acceptCookieBannerButton.addEventListener('click', function() {
+    datadogRum.setTrackingConsent('granted');
+});
+```
+{{% /tab %}}
+{{% tab "CDN async" %}}
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+        ...,
+        trackingConsent: 'not-granted'
+    });
+});
+
+acceptCookieBannerButton.addEventListener('click', () => {
+    window.DD_RUM.onReady(function() {
+        window.DD_RUM.setTrackingConsent('granted');
+    });
+});
+```
+{{% /tab %}}
+{{% tab "CDN sync" %}}
+```javascript
+window.DD_RUM && window.DD_RUM.init({
+  ...,
+  trackingConsent: 'not-granted'
+});
+
+acceptCookieBannerButton.addEventListener('click', () => {
+    window.DD_RUM && window.DD_RUM.setTrackingConsent('granted');
+});
+```
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Global context
 
 ### Add global context property
