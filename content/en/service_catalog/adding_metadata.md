@@ -14,6 +14,7 @@ further_reading:
 aliases:
   - /tracing/service_catalog/service_metadata_structure
   - /tracing/service_catalog/adding_metadata
+  - /service_catalog/add_metadata
 ---
 
 ## Overview
@@ -22,21 +23,182 @@ You can add metadata to existing Service Catalog entries through the Datadog UI,
 
 ## Metadata structure and supported versions
 
-{{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for metadata schema v3.0!" >}}
-v3.0 adds a <code>kind</code> field that supports schemas for additional component types including applications, internal and external libraries, queues, and datastores. Any components within an <code>application</code> implicitly inherit its metadata. Furthermore, this version supports manually declaring dependency relationships, in addition to the auto-detected topology through Distributed Tracing and Universal Service Monitoring.
-{{< /callout >}}
-
 Service Catalog uses service definition schemas to store and display relevant metadata about your services. The schemas have built-in validation rules to ensure that only valid values are accepted and you can view warnings in the **Definition** tab on the side panel for any selected services. 
 
 There are three supported versions of the schema:
 
 - V2 is the earliest version, and contains some experimental features, such as `dd-team`, which are removed from v2.1.
 - V2.1 supports additional UI elements such as service groupings and fields like `application`, `tier`, and `lifecycle`. `Application`, along with Teams, can be used as grouping variables in Service Catalog. `Lifecycle` helps you differentiate between `production`, `experimental`, or `deprecated` services to indicate development stages and apply different reliability and availability requirements. `Tier` indicates the criticality of services, to prioritize during incident triage. For example, `tier 1` typically represents the most critical services whose failure would result in severe customer impact, whereas `tier 4` services typically have no impacts on actual customer experience.
-- V2.2 supports user annotation and overwriting auto-detected service type and languages using the fields `type` and `languages`. It also adds support for associating CI pipelines with a service using the field `ci-pipeline-fingerprints`. This version also includes less restrictive validation logic for `contact.type` and `link.type`, so users should expect fewer warnings while submitting YAML. 
+- V2.2 supports user annotation and overwriting auto-detected service type and languages using the fields `type` and `languages`. It also adds support for associating CI pipelines with a service using the field `ci-pipeline-fingerprints`. This version also includes less restrictive validation logic for `contact.type` and `link.type`, so users should expect fewer warnings while submitting YAML.
+- V3.0 adds a `kind` field that supports schemas for additional component types including applications, internal and external libraries, queues, and datastores. Any components within an `application` implicitly inherit its metadata. Furthermore, this version supports manually declaring dependency relationships, in addition to the auto-detected topology through Distributed Tracing and Universal Service Monitoring.
 
 For more information about the latest updates, see the schemas on GitHub.
 
-### Service Definition Schema (v2.2)
+{{< callout url="https://forms.gle/L5zXVkKr5bAzbdMD9" d_target="#signupModal" btn_hidden="false" header="Opt in to the private beta for metadata schema v3.0!" >}}
+{{< /callout >}}
+
+### Metadata Schema v3.0 (beta)
+The Entity Definition Schema is a structure that contains basic information about an entity.
+
+#### Example Entity Definition (`kind:application`)
+
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: application
+metadata:
+  name: myapp
+  namespace: default
+  displayName: My App
+  tags:
+    - tag:value
+  links:
+    - name: shopping-cart runbook
+      type: runbook
+      url: https://runbook/shopping-cart
+    - name: shopping-cart architecture
+      provider: gdoc
+      url: https://google.drive/shopping-cart-architecture
+      type: doc
+    - name: shopping-cart Wiki
+      provider: wiki
+      url: https://wiki/shopping-cart
+      type: doc
+    - name: shopping-cart source code
+      provider: github
+      url: http://github/shopping-cart
+      type: repo
+  contacts:
+    - name: Support Email
+      type: email
+      contact: team@shopping.com
+    - name: Support Slack
+      type: slack
+      contact: https://www.slack.com/archives/shopping-cart
+  owner: myteam
+  additionalOwners:
+    - name: opsTeam
+      type: operator
+integrations:
+  pagerduty:
+    serviceURL: https://www.pagerduty.com/service-directory/Pshopping-cart
+  opsgenie:
+    serviceURL: https://www.opsgenie.com/service/shopping-cart
+    region: US
+spec:
+  components:
+    - service:myservice
+    - service:otherservice
+extensions:
+  datadoghq.com/shopping-cart:
+    customField: customValue
+datadog:
+  performanceData:
+    tags:
+      - 'service:shopping-cart'
+      - 'hostname:shopping-cart'
+  events:
+    - name: "deployment events"
+      query: "app:myapp AND type:github"
+    - name: "event type B"
+      query: "app:myapp AND type:github"
+  logs:
+    - name: "critical logs"
+      query: "app:myapp AND type:github"
+    - name: "ops logs"
+      query: "app:myapp AND type:github"
+  pipelines:
+    fingerprints:
+      - fp1
+      - fp2
+{{< /code-block >}}
+
+#### Example Entity Definition (`kind:service`)
+The same schema applies to `kind:datastore` and `kind:queue`. 
+
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: service
+metadata:
+  name: shopping-cart
+  namespace: default
+  displayName: Shopping Cart
+  inheritFrom: service:otherService
+  tags:
+    - tag:value
+  links:
+    - name: shopping-cart runbook
+      type: runbook
+      url: https://runbook/shopping-cart
+    - name: shopping-cart architecture
+      provider: gdoc
+      url: https://google.drive/shopping-cart-architecture
+      type: doc
+    - name: shopping-cart Wiki
+      provider: wiki
+      url: https://wiki/shopping-cart
+      type: doc
+    - name: shopping-cart source code
+      provider: github
+      url: http://github/shopping-cart
+      type: repo
+  contacts:
+    - name: Support Email
+      type: email
+      contact: team@shopping.com
+    - name: Support Slack
+      type: slack
+      contact: https://www.slack.com/archives/shopping-cart
+  owner: myteam
+  additionalOwners:
+    - name: opsTeam
+      type: operator
+integrations:
+  pagerduty:
+    serviceURL: https://www.pagerduty.com/service-directory/Pshopping-cart
+  opsgenie:
+    serviceURL: https://www.opsgenie.com/service/shopping-cart
+    region: US
+extensions:
+  datadoghq.com/shopping-cart:
+    customField: customValue
+spec:
+  lifecycle: production
+  tier: "1"
+  type: web
+  languages:
+    - go
+    - python
+  dependsOn:
+    - service:serviceA
+    - service:serviceB
+datadog:
+  performanceData:
+    tags:
+      - 'service:shopping-cart'
+      - 'hostname:shopping-cart'
+  events:
+    - name: "deployment events"
+      query: "app:myapp AND type:github"
+    - name: "event type B"
+      query: "app:myapp AND type:github"
+  logs:
+    - name: "critical logs"
+      query: "app:myapp AND type:github"
+    - name: "ops logs"
+      query: "app:myapp AND type:github"
+  pipelines:
+    fingerprints:
+      - fp1
+      - fp2
+  code:
+    paths:
+      - baz/*.c
+      - bat/**/*
+      - ../plop/*.java
+{{< /code-block >}}
+
+
+### Service Definition Schema (v2.2) (Recommended)
 
 The Service Definition Schema is a structure that contains basic information about a service. See the [full schema on GitHub][15].
 
@@ -274,6 +436,7 @@ extensions:
           branch: "hello-joe/staging"
           schedule: "* * * * 1"
 {{< /code-block >}}
+
 
 
 ## Further reading

@@ -22,7 +22,7 @@ further_reading:
 
 ## Compatibility
 
-- **Custom tags and metrics**: Attach custom tags and metrics to pipeline executions
+- **Custom tags and measures**: Attach custom tags and measures to pipeline executions
 
 - **Manual steps**: View manually triggered pipelines
 

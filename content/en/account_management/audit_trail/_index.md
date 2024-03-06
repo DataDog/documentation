@@ -151,6 +151,13 @@ The Inspect Changes (Diff) tab in the audit event details panel compares the con
 
 {{< img src="account_management/audit_logs/inspect_changes.png" alt="The audit event side panel showing the changes to a composite monitor configuration, where the text highlighted in green is what was changed and the text highlighted in red is what was removed." style="width:70%;">}}
 
+### API key auditing
+
+<div class="alert alert-warning">API key auditing is in private beta.</div>
+
+Log management users can audit API key usage with Audit Trail. For API key auditing, logs have a `datadog.api_key_uuid` tag that contains the UUID of the API key used for collecting those logs. Use this information to determine:
+- How API keys are used across your organization and telemetry sources.
+- API key rotation and management.
 
 ## Create a monitor
 

@@ -102,10 +102,10 @@ The following attributes are related to the data used in network communication. 
 
 | **Fullname**               | **Type** | **Description**                                                                          |
 | :------------------------- | :------- | :--------------------------------------------------------------------------------------- |
-| `network.client.ip`        | `string` | The IP address of the client that initiated the TCP connection.                          |
+| `network.client.ip`        | `string` | The IP address of the client that initiated the connection.                          |
 | `network.destination.ip`   | `string` | The IP address the client connected to.                                                  |
 | `network.client.port`      | `number` | The port of the client that initiated the connection.                                    |
-| `network.destination.port` | `number` | The TCP port the client connected to.                                                    |
+| `network.destination.port` | `number` | The port the client connected to.                                                    |
 | `network.bytes_read`       | `number` | Total number of bytes transmitted from the client to the server when the log is emitted. |
 | `network.bytes_written`    | `number` | Total number of bytes transmitted from the server to the client when the log is emitted. |
 

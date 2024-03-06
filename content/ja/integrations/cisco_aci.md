@@ -30,12 +30,11 @@ draft: false
 git_integration_title: cisco_aci
 integration_id: cisco-aci
 integration_title: CiscoACI
-integration_version: 2.2.2
+integration_version: 2.3.1
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: cisco_aci
-oauth: {}
 public_title: CiscoACI
 short_description: Cisco ACI のパフォーマンスと使用状況を追跡。
 supported_os:
@@ -185,6 +184,6 @@ Cisco ACI チェックはテナントの障害をイベントとして送信し�
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.datadoghq.com/ja/agent/guide/agent-commands/#agent-status-and-information
 [3]: https://docs.datadoghq.com/ja/help/

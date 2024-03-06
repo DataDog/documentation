@@ -1017,4 +1017,9 @@ class Integrations:
             manifest_json["name"] = manifest_json.get("name", name)
             if skipped_tags:
                 print(f'\x1b[33mWARNING\x1b[0m: Categories skipped on integration {manifest_json["name"]}, {skipped_tags}')
+
+        # temporary workaround until we can source integration data from APW
+        # https://datadoghq.atlassian.net/browse/WEB-4579
+        if 'oauth' in manifest_json.keys(): del manifest_json['oauth']
+
         return manifest_json

@@ -1,5 +1,5 @@
 ---
-title: Span Tags Semantics
+title: Span Tag Semantics
 kind: documentation
 further_reading:
     - link: 'logs/log_configuration/attributes_naming_convention'
@@ -14,119 +14,69 @@ further_reading:
 ---
 
 ## Overview
+
 [Datadog tracing libraries][1] provide out-of-the-box support for instrumenting a variety of libraries.
 These instrumentations generate spans to represent logical units of work in distributed systems.
-Each span consists of [span tags][2] to provide additional information on the unit of work happening in the system. The naming convention describes the name and content that can be used in span events.
+Each span consists of [span tags][2] to provide additional information on the unit of work happening in the system. Naming conventions describe the name and content that can be used in span events.
 
-## Span tag naming convention
-### Core
-The following span tags are the core concepts for describing the instrumentation used and the kind of operation performed:
+<div class="alert alert-info">To find a comprehensive list of all span tags, reserved attributes, and naming conventions, see <a href="/standard-attributes/?product=apm">Default Standard Attributes.</a></div>
 
-| **Name**    | **Type** | **Description**                                                                                                                                                                                                                                                                   |
-|-------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `language`  | `string` | The client SDK language used to generate the span. It can be one of the following: `cpp`, `dotnet`, `go`, `jvm`, `javascript`, `php`, `python`, `ruby`.                                                                                                                                                                                                                                 |
-| `env`       | `string` | The value of `DD_ENV` environment variable or user defined `env` for the running process.                                                                                                                                                                                            |
-| `version`   | `string` | The value of `DD_VERSION` environment variable or user defined `version` for the running process.                                                                                                                                                                                      |
-| `span.kind` | `string` | The string representing the type of work unit handled by the span. It can be one of the following: `server`, `client`, `producer`, `consumer` or `internal`.<br>More information in the [OpenTelemetry SpanKind documentation][3]. |
-| `component` | `string` | The name of the library/integration that created the span.                                                                                                                                                                                                                        |
+## Span tag naming conventions
 
-### Network communications
-The following span tags can be used to describe work units corresponding to network communications:
+There are a variety of span tags to describe work happening in the system. For example, there are span tags to describe the following domains:
 
-| **Name**                    | **Type** | **Description**                                                           |
-|---------------------------------|----------|---------------------------------------------------------------------------|
-| `network.client.ip`             | `string` | The IP address of the client that initiated the inbound connection.        |
-| `network.destination.ip`        | `string` | The IP address to where the outbound connection is being made.             |
-| `network.host.ip`               | `string` | The local host IP address.                                                     |
-| `network.client.port`           | `number` | The port of the client that initiated the connection.                      |
-| `network.destination.port`      | `number` | The remote port number of the outbound connection.                             |
-| `network.client.name`           | `string` | The hostname of the client that initiated the inbound connection.          |
-| `network.destination.name`      | `string` | The remote hostname or similar to where the outbound connection is being made. |
-| `network.host.name`             | `string` | The local hostname.                                                            |
-| `network.client.transport`      | `string` | The transport protocol used to make the inbound connection.                    |
-| `network.destination.transport` | `string` | The transport protocol used to make the outbound connection.                   |
+- **Reserved**: Attributes that are always present on all spans.
+- **Core**: Instrumentation used and the kind of operation.
+- **Network communications**: Work units corresponding to network communications.
+- **HTTP requests**: HTTP client and server spans.
+- **Database**: Database spans.
+- **Message queue**: Messaging system spans.
+- **Remote procedure calls**: Spans corresponding to remote procedure calls such as RMI or gRPC.
+- **Errors**: Errors associated with spans.
 
-### HTTP requests
-The following span tags can be used to describe the HTTP client and server spans:
+For more information, see [Default Standard Attributes][6].
 
-| **Name**                                | **Description**                                                                                                                                                                                                              |
-|---------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `http.status_code`                          | Type: `string` <br> The HTTP response status code.                                                                                                                                                                                                |
-| `http.url`                                  | Type: `string` <br>  The URL of the HTTP request, including the obfuscated query string. For more information on obfuscation, see [Configure Data Security][4].                                                         |
-| `http.version`                              | Type: `string` <br>  The version of HTTP used for the request.                                                                                                                                                                                     |
-| `http.method`                               | Type: `string` <br>  The port of the client that initiated the connection.                                                                                                                                                                         |
-| `http.route`                                | Type: `string` <br>  The matched route (path template).<br>Example: `/users/:userID`                                                                                                                                                              |
-| `http.client_ip`                            | Type: `string` <br>  The IP address of the original client behind all proxies, if known. Discovered from headers such as `X-Forwarded-For`.                                                                                                        |
-| `http.useragent`                            | Type: `string` <br>  The user agent header received with the request.                                                                                                                                                                              |
-| `http.request.content_length`               | Type: `number` <br>  The size of the request payload body in bytes.                                                                                                                                                                                |
-| `http.response.content_length`              | Type: `number` <br> The size of the response payload body in bytes.                                                                                                                                                                                |
-| `http.request.content_length_uncompressed`  | Type: `number` <br> The size of the uncompressed request payload body after transport decoding.                                                                                                                                                   |
-| `http.response.content_length_uncompressed` | Type: `number` <br> The size of the uncompressed response payload body after transport decoding.                                                                                                                                                  |
-| `http.request.headers.*`                    | Type: `string` <br> The request HTTP headers. None are collected by default, but can be optionally configured with `DD_TRACE_HEADER_TAGS`.<br>To learn more about how to collect headers, see the corresponding [Library configuration][5].  |
-| `http.response.headers.*`                   | Type: `string` <br> The response HTTP headers. None are collected by default, but can be optionally configured with `DD_TRACE_HEADER_TAGS`.<br>To learn more about how to collect headers, see the corresponding [Library configuration][5]. |
+## Span tags and span attributes
 
-### Database
+Span tags and span attributes are similar but distinct concepts:
 
-The following span tags can be used to describe database spans:
+- [Span tags](#span-tags) are the context around the span.
+- [Span attributes](#span-attributes) are the content of the span.
 
-| **Name**           | **Type** | **Description**                                                                                              |
-|------------------------|----------|--------------------------------------------------------------------------------------------------------------|
-| `db.system`            | `string` | Identifier for the database management system (DBMS product being used).                                       |
-| `db.connection_string` | `string` | The connection string used to connect to the database.                                                        |
-| `db.user`              | `string` | The username that accessed the database                                                                          |
-| `db.instance`          | `string` | The name of the database being connected to.                                                                  |
-| `db.statement`         | `string` | The database statement being executed.                                                                        |
-| `db.operation`         | `string` | The name of the operation being executed. <br>Examples: `SELECT`, `findAndModify`, `HMSET`                     |
-| `db.sql.table`         | `number` | The name of the primary table that the operation is acting upon, including the database name (if applicable). |
-| `db.row_count`         | `number` | The number of rows/results from the query or operation.                                                      |
+### Span tags
 
-Additional attributes for specific database technologies use the prefix `db.<db.system>`.
+Span tags are the context around the span. Some examples include:
 
-### Message queue
+- **Host tags**: `hostname`, `availability-zone`, `cluster-name`
+- **Container tags**: `container_name`, `kube_deployment`, `pod_name`
 
-The following span tags can be used to describe spans corresponding to messaging systems:
+Tags are usually enriched from other data sources like tags sourced from host, container, or service catalog. These tags are added to the span to describe the context. For example, tags might describe the properties of the host and the container the span is coming from, or the properties of the services the span is emitted from.
 
-| **Name**                         | **Type** | **Description**                                                                                                                                                                                                                      |
-|----------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `messaging.system`               | `string` | The identifier of the messaging system.                                                                                                                                                                                              |
-| `messaging.destination`          | `string` | The message destination name.                                                                                                                                                                                                        |
-| `messaging.destination_kind`     | `string` | The kind of message destination.                                                                                                                                                                                                     |
-| `messaging.protocol`             | `string` | The name of the transport protocol.                                                                                                                                                                                                  |
-| `messaging.protocol_version`     | `string` | The version of the transport protocol.                                                                                                                                                                                               |
-| `messaging.url`                  | `string` | The connection string to the messaging system.                                                                                                                                                                                       |
-| `messaging.message_id`           | `string` | A value used by the messaging system as an identifier for the message, represented as a string.                                                                                                                                      |
-| `messaging.conversation_id`      | `string` | The conversation ID identifying the conversation to which the message belongs, represented as a string.                                                                                                                              |
-| `messaging.message_payload_size` | `number` | The size of the uncompressed message payload in bytes.                                                                                                                                                                               |
-| `messaging.operation`            | `string` | A string identifying the kind of message consumption. <br>Examples: `send` (a message sent to a producer), `receive` (a message is received by a consumer), or `process` (a message previously received is processed by a consumer). |
-| `messaging.consumer_id`          | `string` | The identifier for the consumer receiving a message.                                                                                                                                                                                 |
+To find span tags in Datadog, go to the **Infrastructure** tab in the Trace side panel:
 
-Additional attributes for specific messaging systems use the prefix `messaging.<messaging.system>`.
+{{< img src="/tracing/attributes/span-tags.png" alt="Span tags on Infrastructure tab." style="width:100%;" >}}
 
-### Remote procedure calls
+### Span attributes
 
-The following span tags can be used to describe spans corresponding to remote procedure calls such as RMI or gRPC:
+Span attributes are the content of the span. Some example include:
 
-| **Name**  | **Type** | **Description**                      |
-|---------------|----------|--------------------------------------|
-| `rpc.system`  | `string` | The identifier of the remote system.    |
-| `rpc.service` | `string` | The name of the service being called. |
-| `rpc.method`  | `string` | The name of the method being called.  |
+- `http.url`
+- `http.status_code`
+- `error.message`
 
-### Errors
-The following span tags can be used to describe errors associated with spans:
+To query span attributes, use the the `@` character followed by the attribute name in the search box. For example, `@http.url`.
 
-| **Name**    | **Type** | **Description**                                                  |
-|-----------------|----------|------------------------------------------------------------------|
-| `error.type` | `string` | The error type or kind (or code in some cases).                  |
-| `error.message`    | `string` | A concise, human-readable, one-line message explaining the event. |
-| `error.stack`   | `string` | The stack trace or the complementary information about the error. |
+To find span attributes in Datadog, go to the **Info** tab in the Trace side panel:
+
+{{< img src="/tracing/attributes/span-attributes.png" alt="Span attributes on Info tab." style="width:100%;" >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup_overview/
-[2]: /tracing/visualization/#span-tags
+[2]: /glossary/#span-tag
 [3]: https://opentelemetry.io/docs/reference/specification/trace/api/#spankind
 [4]: /tracing/setup_overview/configure_data_security/
 [5]: /tracing/trace_collection/library_config/
+[6]: /standard-attributes/?product=apm
