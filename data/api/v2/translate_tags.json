@@ -169,7 +169,7 @@
   },
   "service-scorecards": {
     "name": "Service Scorecards",
-    "description": "API to create, update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/account_management/org_settings/service_accounts/) for more information.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
+    "description": "API to create, update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards) for more information.\n\nThis feature is currently in BETA. If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/)."
   },
   "spans": {
     "name": "Spans",
