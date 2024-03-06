@@ -7,8 +7,15 @@
     }
     p {
         margin-left: 4px;
-        span{
+        .product {
             white-space: nowrap;
+            &:hover {
+                color: $ddpurple;
+            }
+            i {
+                position: relative;
+                top: 1.5px;
+            }
         }
     }
 }

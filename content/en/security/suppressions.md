@@ -9,8 +9,10 @@ further_reading:
 products:
 - name: Cloud SIEM
   url: /security/cloud_siem/
+  icon: siem
 - name: CSM Threats
   url: /security/threats/
+  icon: cloud-security-management
 ---
 
 {{< product-availability >}}
