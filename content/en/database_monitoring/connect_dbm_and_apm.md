@@ -149,7 +149,7 @@ func main() {
 
 Follow the [Java tracing][1] instrumentation instructions and install the `1.11.0` version, or greater, of the Agent.
 
-You must also enable the `jdbc-datastore` [instrumentation][2].
+You must also enable the `jdbc-datasource` [instrumentation][2].
 
 Enable the database monitoring propagation feature using **one** of the following methods:
 

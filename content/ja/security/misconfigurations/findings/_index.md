@@ -11,7 +11,7 @@ further_reading:
   tag: ドキュメント
   text: フレームワークおよび業界のベンチマークの詳細
 kind: ドキュメント
-title: Azure DevOps Extension
+title: 誤構成を探索する
 ---
 
 {{< site-region region="gov" >}}

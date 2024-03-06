@@ -9,7 +9,7 @@ further_reading:
 - link: '/real_user_monitoring/'
   tag: 'Documentation'
   text: 'Learn how to visualize your RUM data'
-- link: '/real_user_monitoring/frustration_signals'
+- link: '/real_user_monitoring/browser/frustration_signals/'
   tag: 'Documentation'
   text: 'Learn about frustration signals'
 - link: '/real_user_monitoring/session_replay'
@@ -131,7 +131,7 @@ This powerpack provides graphs about usage by country, actions on a view, and ac
 [7]: /real_user_monitoring/explorer/saved_views/
 [8]: /real_user_monitoring/explorer/export/
 [9]: /real_user_monitoring/error_tracking/
-[10]: /real_user_monitoring/frustration_signals/
+[10]: /real_user_monitoring/browser/frustration_signals/
 [11]: /real_user_monitoring/session_replay/
 [12]: /dashboards/guide/powerpacks-best-practices/
 [13]: https://app.datadoghq.com/dashboard/lists
