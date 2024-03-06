@@ -22,8 +22,8 @@ further_reading:
 
 Front-end errors are collected with Real User Monitoring (RUM). The error message and stack trace are included when available.
 
-## Error origins
-Front-end errors come from several different origins:
+## Error sources
+Front-end errors come from several different sources:
 
 - **agent**: From the SDK execution
 - **console**: From `console.error()` API calls

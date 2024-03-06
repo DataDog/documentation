@@ -237,7 +237,7 @@ Detailed network timing data for the loading of an application's resources are c
 
 | Attribute       | Type   | Description                                                       |
 |-----------------|--------|-------------------------------------------------------------------|
-| `error.source`  | string | Where the error originates from (for example, `console`).     |
+| `error.source`  | string | Where the error originates from (for example, `console`). See [Error sources][19].   |
 | `error.type`    | string | The error type (or error code in some cases).                   |
 | `error.message` | string | A concise, human-readable, one-line message explaining the event. |
 | `error.stack`   | string | The stack trace or complementary information about the error.     |
@@ -310,3 +310,4 @@ Source errors include code-level information about the error. For more informati
 [16]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#action-timing-metrics
 [17]: /real_user_monitoring/browser/tracking_user_actions/?tab=npm#custom-actions
 [18]: https://developer.mozilla.org/en-US/docs/Glossary/Effective_connection_type
+[19]: /real_user_monitoring/browser/collecting_browser_errors#error-sources
