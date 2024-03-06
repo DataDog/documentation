@@ -77,10 +77,12 @@ You can use `datadog-ci` to execute only those tests tagged with specific [Team 
 
 1. Navigate to your command line.
 2. Run the following:
+
    ```
-   yarn datadog-ci synthetics run-tests -search 'tag:team-checkout' --config global.config.json
+   datadog-ci synthetics run-tests -search 'tag:team-checkout' --config global.config.json
    ```
-For more information about running the Synthetics command and using reporters, see [Configuration Documentation][11]
+
+For more information about running the Synthetics command and using reporters, see the [Configuration documentation][11].
 
 ### Running tests in your IDE
 

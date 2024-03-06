@@ -26,7 +26,7 @@ The testing tunnel is a functionality that comes with the [@datadog/datadog-ci][
 
 The testing tunnel creates short-lived secure connections between your internal environments and the Datadog infrastructure, allowing you to swiftly trigger Synthetic HTTP and Browser tests on your private applications. This allows Datadog to access and test your internal applications.
 
-{{< img src="continuous_testing/continuous_testing_tunnel.png" alt="Continuous Testing tunnel allows the Synthetics Worker to reach your private applications" width="100%" >}}
+{{< img src="continuous_testing/testing_tunnel.png" alt="Continuous Testing tunnel allows the Synthetics Worker to reach your private applications" width="100%" >}}
 
 First, `datadog-ci` gets a pre-signed URL from Datadog for authentication. Then, it opens a WebSocket secure (WSS) connection to Datadog's managed locations using the pre-signed URL. By using SSH connections through the WebSocket connection, tests are triggered by `datadog-ci` and executed through Datadog's managed locations.
 
@@ -36,7 +36,7 @@ When using the testing tunnel, your tests' locations are overridden by a locatio
 
 ## How to use the testing tunnel
 
-As mentioned above, the testing tunnel comes with the [`@datadog/datadog-ci`][2] NPM package and is available in versions `>=v0.11.0` of the package. To get started, see [Continuous Testing and CI/CD][4].
+As mentioned above, the testing tunnel comes with the [`@datadog/datadog-ci`][2] NPM package and is available in versions `>=v0.11.0` of the package. To get started, see [Continuous Testing and CI/CD][3].
 
 Once you've set up your client on your local machine or your CI server, you can launch your HTTP and browser tests with the testing tunnel by appending the command used to launch tests with `--tunnel`.
 
@@ -104,5 +104,4 @@ Allow **Outbound connections** for the following Datadog endpoints:
 
 [1]: /synthetics/private_locations
 [2]: https://www.npmjs.com/package/@datadog/datadog-ci
-[3]: https://github.com/DataDog/datadog-ci/releases/tag/v0.11.0
-[4]: /continuous_testing/cicd_integrations#use-the-cli
+[3]: /continuous_testing/cicd_integrations#use-the-cli

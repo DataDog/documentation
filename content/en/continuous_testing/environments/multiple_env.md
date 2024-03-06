@@ -24,12 +24,12 @@ When triggering a CI test, you can overwrite the starting URL of a [browser][1] 
 
 A Synthetic browser test starts the test scenario by navigating to a starting URL. Similarly, an API HTTP test sends a request to a specific URL. When triggering a CI test, you can overwrite this starting URL to point to another environment where your application is deployed in.
 
-{{< img src="continuous_testing/continuous_testing_start-url_substitution.png" alt="Continuous Testing tunnel allows the Synthetics Worker to reach your private applications" width="100%" >}}
+{{< img src="continuous_testing/starting_url_substitution.png" alt="Continuous Testing tunnel allows the Synthetics Worker to reach your private applications" width="100%" >}}
 
-When triggering a CI test, the `startUrl` field allows you to overwrite the first URL that a browser test navigates to or the URL used by an HTTP test request. You can specify this option through the global configuration file, the Synthetics configuration files (`*.synthetics.json`), or the command line flag `--start-url`.
+When triggering a CI test, the `startUrl` field allows you to overwrite the first URL that a browser test navigates to or the URL used by an HTTP test request. You can specify this option through the global configuration file, the Synthetic Monitoring configuration files (`*.synthetics.json`), or the command line flag `--start-url`.
 
-```shell
-yarn datadog-ci synthetics run-tests --public-id <public-id> --start-url "https://staging.my-app.com"
+```
+datadog-ci synthetics run-tests --public-id <public-id> --start-url "https://staging.my-app.com"
 ```
 
 
@@ -45,7 +45,7 @@ This field expects a string containing two parts, separated by a pipe character 
 
 A simple example looks like the following:
 
-```shell
+```
 https://prod.my-app.com/(.*)|https://staging.my-app.com/$1
 ```
 
@@ -62,48 +62,6 @@ The sed syntax is often used with a slash <code>/</code> separator, for example:
 
 With this tool, any scheduled test used on your production environment can be reused to point to a development environment.
 
-<!--
-
-## Other forms of rerouting
-
-TODO other overrride possible, headers, variables etc... -->
-
-<!--
-
-TODO the resource URL substitution regex is not implemented yet, so let's not document it for now.
-
-{{< img src="continuous_testing/continuous_testing_resource-url_substitution.png" alt="Continuous Testing tunnel allows the Synthetics Worker to reach your private applications" width="100%" >}}
-
-### Start URL Substitution Regex
-
-only for the entrypoint
-
-### Resource URL Substitution Regex
-
-for most advanced usage
-
-{{< tabs >}}
-
-{{% tab "Sed-based syntax" %}}
-```json
-[
-  "s/hello-world.com/hell0-w0rld.com/",
-  "s/(my-cdn.com/)prod//$1staging//"
-]
-```
-{{% /tab %}}
-
-{{% tab "Pipe-based syntax" %}}
-```json
-[
-  "hello-world.com|hell0-w0rld.com",
-  "(my-cdn.com/)prod/|$1staging/"
-]
-```
-{{% /tab %}}
-
-{{< /tabs >}} -->
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -112,7 +70,3 @@ for most advanced usage
 [2]: /synthetics/api_tests/
 [3]: /continuous_testing/environments/proxy_firewall_vpn
 [4]: /synthetics/private_locations
-
-<!-- [2]: https://www.npmjs.com/package/@datadog/datadog-ci -->
-<!-- [3]: https://github.com/DataDog/datadog-ci/releases/tag/v0.11.0 -->
-<!-- [4]: /continuous_testing/cicd_integrations#use-the-cli -->

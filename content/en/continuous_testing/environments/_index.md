@@ -23,14 +23,14 @@ further_reading:
   text: "Learn about testing while using proxies, firewalls, or VPNs"
 - link: "/synthetics/private_locations"
   tag: "Documentation"
-  text: "Learn about Private Locations"
+  text: "Learn about private locations"
 ---
 
 ## Overview
 
 In the context of [testing within a CI/CD pipeline, also known as shift-left testing][1], the production environment is typically the last link in the chain. Your application is likely to go through several steps before reaching this stage.
 
-{{< img src="continuous_testing/continuous_environments.png" alt="Continuous Testing can be used all along the development cycle, from the local development environment to staging to prod." width="100%" >}}
+{{< img src="continuous_testing/environments.png" alt="Continuous Testing can be used all along the development cycle, from the local development environment to staging to prod." width="100%" >}}
 
 While [scheduled Synthetic tests focus primarily on publicly available production environments][2], Continuous Testing allows you to test your application in any or all environments it's deployed in throughout the development cycle.
 
@@ -38,9 +38,7 @@ While [scheduled Synthetic tests focus primarily on publicly available productio
 
 Continuous Testing can reuse the same scenario from scheduled tests used against the production environment to test publicly available pre-production environments.
 
-Whether it's for a [blue/green deployment][3], or a dedicated staging environment, Continuous Testing allows you to reroute an existing scenario to a different environment.
-
-For more information, see [Testing Multiple Environments][4].
+Whether it's for a [blue—green deployment][3], or a dedicated staging environment, Continuous Testing allows you to reroute an existing scenario to a different environment. For more information, see [Testing Multiple Environments][4].
 
 ## Testing while using proxies, firewalls, or VPNs
 
