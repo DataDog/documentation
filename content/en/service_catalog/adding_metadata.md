@@ -48,82 +48,7 @@ kind: application
 metadata:
   name: myapp
   namespace: default
-  displayName: "My App" 
-  description: "application for serving blah..." 
-  tags:
-     - tag:value
-  links:
-    - name: shopping-cart runbook
-      type: runbook
-      url: https://runbook/shopping-cart
-    - name: shopping-cart architecture
-      provider: gdoc
-      url: https://google.drive/shopping-cart-architecture
-      type: doc
-    - name: shopping-cart Wiki
-      provider: wiki
-      url: https://wiki/shopping-cart
-      type: doc
-    - name: shopping-cart source code
-      provider: github
-      url: http://github/shopping-cart
-      type: repo
-  contacts:
-    - name: Support Email
-      type: email
-      value: team@shopping.com
-    - name: Support Slack
-      type: slack
-      value: https://www.slack.com/archives/shopping-cart
-  owner: myteam
-  additionalOwners:
-    - name: opsTeam
-      type: operator
-    - name: opsTeam
-      type: operator
-integrations:
-  pagerduty:
-    serviceURL: https://www.pagerduty.com/service-directory/Pshopping-cart
-  opsgenie:
-    serviceURL: https://www.opsgenie.com/service/shopping-cart
-    region: US
-datadog: 
-  performanceData: 
-    tags:
-- service:foo
-- peer.db.instance:my-db
-  events: 
-    - name: "deployment events"
-      query: "app:myapp AND type:github"
-    - name: "event type B"
-      query: "app:myapp AND type:github"
-  logs: 
-    - name: "critical logs"
-      query: "app:myapp AND type:github"
-    - name: "ops logs"
-      query: "app:myapp AND type:github"
-  pipelines:
-    - fp1
-    - fp2
-spec:
-  components:
-    - service:myservice
-    - service:otherservice
-extensions:
-  datadoghq.com/shopping-cart:
-    customField: customValue
-{{< /code-block >}}
-
-#### Example Entity Definition (`kind:service`)
-The same schema applies to `kind:datastores` and `kind:queue`. 
-
-{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-apiVersion: v3
-kind: service
-metadata:
-  name: shopping-cart
-  namespace: default
-  inheritFrom: application:myapp
+  displayName: My App
   tags:
     - tag:value
   links:
@@ -153,6 +78,78 @@ metadata:
   additionalOwners:
     - name: opsTeam
       type: operator
+integrations:
+  pagerduty:
+    serviceURL: https://www.pagerduty.com/service-directory/Pshopping-cart
+  opsgenie:
+    serviceURL: https://www.opsgenie.com/service/shopping-cart
+    region: US
+spec:
+  components:
+    - service:myservice
+    - service:otherservice
+extensions:
+  datadoghq.com/shopping-cart:
+    customField: customValue
+datadog:
+  performanceData:
+    tags:
+      - 'service:shopping-cart'
+      - 'hostname:shopping-cart'
+  events:
+    - name: "deployment events"
+      query: "app:myapp AND type:github"
+    - name: "event type B"
+      query: "app:myapp AND type:github"
+  logs:
+    - name: "critical logs"
+      query: "app:myapp AND type:github"
+    - name: "ops logs"
+      query: "app:myapp AND type:github"
+  pipelines:
+    fingerprints:
+      - fp1
+      - fp2
+{{< /code-block >}}
+
+#### Example Entity Definition (`kind:service`)
+The same schema applies to `kind:datastore` and `kind:queue`. 
+
+{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
+apiVersion: v3
+kind: service
+metadata:
+  name: shopping-cart
+  namespace: default
+  displayName: Shopping Cart
+  inheritFrom: service:otherService
+  tags:
+    - tag:value
+  links:
+    - name: shopping-cart runbook
+      type: runbook
+      url: https://runbook/shopping-cart
+    - name: shopping-cart architecture
+      provider: gdoc
+      url: https://google.drive/shopping-cart-architecture
+      type: doc
+    - name: shopping-cart Wiki
+      provider: wiki
+      url: https://wiki/shopping-cart
+      type: doc
+    - name: shopping-cart source code
+      provider: github
+      url: http://github/shopping-cart
+      type: repo
+  contacts:
+    - name: Support Email
+      type: email
+      contact: team@shopping.com
+    - name: Support Slack
+      type: slack
+      contact: https://www.slack.com/archives/shopping-cart
+  owner: myteam
+  additionalOwners:
     - name: opsTeam
       type: operator
 integrations:
@@ -175,16 +172,29 @@ spec:
     - service:serviceA
     - service:serviceB
 datadog:
-  performanceData: 
+  performanceData:
     tags:
-- service:foo
-- peer.db.instance:my-db
-  events: 
+      - 'service:shopping-cart'
+      - 'hostname:shopping-cart'
+  events:
     - name: "deployment events"
       query: "app:myapp AND type:github"
+    - name: "event type B"
+      query: "app:myapp AND type:github"
+  logs:
+    - name: "critical logs"
+      query: "app:myapp AND type:github"
+    - name: "ops logs"
+      query: "app:myapp AND type:github"
   pipelines:
-    - fp1
-    - fp2
+    fingerprints:
+      - fp1
+      - fp2
+  code:
+    paths:
+      - baz/*.c
+      - bat/**/*
+      - ../plop/*.java
 {{< /code-block >}}
 
 

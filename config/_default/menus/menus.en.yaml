@@ -140,81 +140,86 @@ main:
     url: getting_started/api/
     parent: getting_started
     weight: 14
+  - name: Service Catalog
+    identifier: getting_started_service_catalog
+    url: getting_started/service_catalog/
+    parent: getting_started
+    weight: 15
   - name: Session Replay
     identifier: getting_started_session_replay
     url: getting_started/session_replay/
     parent: getting_started
-    weight: 15
+    weight: 16
   - name: Continuous Testing
     identifier: getting_started_continuous_testing
     url: getting_started/continuous_testing/
     parent: getting_started
-    weight: 16
+    weight: 17
   - name: Synthetic Monitoring
     identifier: getting_started_synthetics
     url: getting_started/synthetics/
     parent: getting_started
-    weight: 17
+    weight: 18
   - name: API Tests
     identifier: getting_started_api_test
     url: getting_started/synthetics/api_test
     parent: getting_started_synthetics
-    weight: 1701
+    weight: 1801
   - name: Browser Tests
     identifier: getting_started_browser_test
     url: getting_started/synthetics/browser_test
     parent: getting_started_synthetics
-    weight: 1702
+    weight: 1802
   - name: Private Locations
     identifier: getting_started_private_location
     url: getting_started/synthetics/private_location
     parent: getting_started_synthetics
-    weight: 1703
+    weight: 1803
   - name: Incident Management
     identifier: getting_started_incident_management
     url: getting_started/incident_management/
     parent: getting_started
-    weight: 18
+    weight: 19
   - name: Database Monitoring
     identifier: getting_started_database_monitoring
     url: getting_started/database_monitoring/
     parent: getting_started
-    weight: 19
+    weight: 20
   - name: Cloud Security Management
     identifier: getting_started_cloud_security_management
     url: getting_started/cloud_security_management/
     parent: getting_started
-    weight: 20
+    weight: 21
   - name: Cloud SIEM
     identifier: getting_started_cloud_siem
     url: getting_started/cloud_siem/
     parent: getting_started
-    weight: 21
+    weight: 22
   - name: Application Security Management
     identifier: getting_started_application_security
     url: getting_started/application_security
     parent: getting_started
-    weight: 22
+    weight: 23
   - name: Software Composition Analysis
     identifier: getting_started_software_composition_analysis
     url: getting_started/application_security/software_composition_analysis
     parent: getting_started_application_security
-    weight: 2201
+    weight: 2301
   - name: Workflow Automation
     identifier: getting_started_workflow_automation
     url: getting_started/workflow_automation/
     parent: getting_started
-    weight: 23
+    weight: 24
   - name: Learning Center
     identifier: getting_started_learning_center
     url: getting_started/learning_center/
     parent: getting_started
-    weight: 24
+    weight: 25
   - name: Support
     identifier: getting_started_support
     url: getting_started/support/
     parent: getting_started
-    weight: 25
+    weight: 26
   - name: Glossary
     url: glossary/
     pre: features
@@ -314,25 +319,30 @@ main:
     url: agent/basic_agent_usage/saltstack/
     weight: 114
     parent: basic_agent_usage
+  - name: SCCM
+    identifier: basic_agent_usage_sccm
+    url: agent/basic_agent_usage/sccm/
+    weight: 115
+    parent: basic_agent_usage
   - name: SUSE
     identifier: basic_agent_usage_suse
     url: agent/basic_agent_usage/suse/
-    weight: 115
+    weight: 116
     parent: basic_agent_usage
   - name: Ubuntu
     identifier: basic_agent_usage_ubuntu
     url: agent/basic_agent_usage/ubuntu/
-    weight: 116
+    weight: 117
     parent: basic_agent_usage
   - name: Windows
     identifier: basic_agent_usage_windows
     url: agent/basic_agent_usage/windows/
-    weight: 117
+    weight: 118
     parent: basic_agent_usage
   - name: From Source
     identifier: basic_agent_usage_source
     url: agent/basic_agent_usage/source/
-    weight: 118
+    weight: 119
     parent: basic_agent_usage
   - name: Architecture
     url: agent/architecture/
@@ -665,12 +675,12 @@ main:
     identifier: otel_instrumentation
     parent: otel_interoperability
     weight: 603
-  - name: Correlate RUM and Traces 
+  - name: Correlate RUM and Traces
     url: /real_user_monitoring/connect_rum_and_traces/#opentelemetry-support
     identifier: otel_rum
     parent: otel_interoperability
     weight: 604
-  - name: Correlate Logs and Traces 
+  - name: Correlate Logs and Traces
     url: /tracing/other_telemetry/connect_logs_and_traces/opentelemetry/
     identifier: otel_logs
     parent: otel_interoperability
@@ -856,7 +866,7 @@ main:
     parent: dev_tools
     identifier: ide_integrations
     weight: 7
-  - name: IntelliJ Platform
+  - name: JetBrains IDEs
     url: developers/ide_integrations/idea/
     parent: ide_integrations
     identifier: ide_integrations_idea
@@ -1729,31 +1739,41 @@ main:
     parent: workflows
     identifier: workflows_trigger
     weight: 3
-  - name: Actions Catalog
-    url: service_management/workflows/actions_catalog/
+  - name: Actions
+    url: service_management/workflows/actions/
     parent: workflows
-    identifier: workflows_actions_catalog
+    identifier: workflows_actions
     weight: 4
-  - name: Generic Actions
-    url: service_management/workflows/actions_catalog/generic_actions/
-    parent: workflows_actions_catalog
-    identifier: workflows_generic_actions
-    weight: 401
-  - name: Logic Actions
-    url: service_management/workflows/actions_catalog/logic_actions/
-    parent: workflows_actions_catalog
-    identifier: workflows_logic_actions
+  - name: Workflow Logic
+    url: service_management/workflows/actions/flow_control/
+    parent: workflows_actions
+    identifier: workflows_flow_control
     weight: 402
-  - name: Save and Reuse Actions
-    url: service_management/workflows/actions_catalog/saved_actions/
-    parent: workflows_actions_catalog
-    identifier: workflows_saved_actions
+  - name: Data Transformation
+    url: service_management/workflows/actions/data_transformation/
+    parent: workflows_actions
+    identifier: workflows_data_transformation
     weight: 403
+  - name: HTTP Requests
+    url: service_management/workflows/actions/http/
+    parent: workflows_actions
+    identifier: workflows_http
+    weight: 404
+  - name: Save and Reuse Actions
+    url: service_management/workflows/saved_actions/
+    parent: workflows
+    identifier: workflows_saved_actions
+    weight: 5
   - name: Connections
     url: service_management/workflows/connections/
     parent: workflows
     identifier: workflows_connections
-    weight: 5
+    weight: 6
+  - name: Actions Catalog
+    url: service_management/workflows/actions_catalog/
+    parent: workflows
+    identifier: workflows_actions_catalog
+    weight: 7
   - name: App Builder
     url: service_management/app_builder/
     pre: app-builder
@@ -1775,6 +1795,11 @@ main:
     parent: app_builder
     identifier: app_builder_embedded_apps
     weight: 3
+  - name: Actions Catalog
+    url: service_management/workflows/actions_catalog/
+    parent: app_builder
+    identifier: app_builder_actions_catalog
+    weight: 4
   - name: Containers
     url: containers/
     identifier: containers
@@ -2434,7 +2459,7 @@ main:
     parent: tracing
     identifier: tracing_services
     weight: 7
-  - name: List of Services
+  - name: Service Catalog
     url: /service_catalog/
     parent: tracing_services
     identifier: tracing_service_catalog
@@ -3597,6 +3622,8 @@ main:
     url: data_security/pci_compliance/
     parent: log_management
     weight: 3
+    params:
+      skip: true
   - name: Connect Logs and Traces
     url: tracing/other_telemetry/connect_logs_and_traces/
     parent: log_management
@@ -4465,16 +4492,21 @@ main:
     parent: rum_browser
     identifier: track_actions
     weight: 106
+  - name: Frustration Signals
+    url: real_user_monitoring/browser/frustration_signals/
+    parent: rum_browser
+    identifier: rum_frustration_signals
+    weight: 107
   - name: Error Tracking
     url: real_user_monitoring/error_tracking/browser/
     parent: rum_browser
     identifier: rum_browser_error_tracking
-    weight: 107
+    weight: 108
   - name: Troubleshooting
     url: real_user_monitoring/browser/troubleshooting/
     parent: rum_browser
     identifier: troubleshooting
-    weight: 108
+    weight: 109
   - name: Mobile and TV Monitoring
     url: real_user_monitoring/mobile_and_tv_monitoring/
     parent: rum
@@ -4555,146 +4587,141 @@ main:
     parent: rum
     identifier: rum_heatmaps
     weight: 4
-  - name: Frustration Signals
-    url: real_user_monitoring/frustration_signals/
-    parent: rum
-    identifier: rum_frustration_signals
-    weight: 5
   - name: Dashboards
     url: real_user_monitoring/dashboards/
     parent: rum
     identifier: rum_dashboards
-    weight: 6
+    weight: 5
   - name: Performance
     url: real_user_monitoring/dashboards/performance
     parent: rum_dashboards
     identifier: rum_dashboards_performance
-    weight: 601
+    weight: 501
   - name: Testing and Deployment
     url: real_user_monitoring/dashboards/testing_and_deployment
     parent: rum_dashboards
     identifier: rum_dashboards_testing_and_deployment
-    weight: 602
+    weight: 502
   - name: Usage
     url: real_user_monitoring/dashboards/usage
     parent: rum_dashboards
     identifier: rum_dashboards_usage
-    weight: 603
+    weight: 503
   - name: Errors
     url: real_user_monitoring/dashboards/errors
     parent: rum_dashboards
     identifier: rum_dashboards_errors
-    weight: 604
+    weight: 504
   - name: Exploring RUM Data
     url: real_user_monitoring/explorer/
     parent: rum
     identifier: rum_explorer
-    weight: 7
+    weight: 6
   - name: Search RUM Events
     url: real_user_monitoring/explorer/search/
     parent: rum_explorer
     identifier: rum_explorer_search
-    weight: 701
+    weight: 601
   - name: Search Syntax
     url: real_user_monitoring/explorer/search_syntax/
     parent: rum_explorer
     identifier: rum_explorer_search_syntax
-    weight: 702
+    weight: 602
   - name: Group
     url: real_user_monitoring/explorer/group/
     parent: rum_explorer
     identifier: rum_explorer_group
-    weight: 703
+    weight: 603
   - name: Visualize
     url: real_user_monitoring/explorer/visualize/
     parent: rum_explorer
     identifier: rum_explorer_visualize
-    weight: 704
+    weight: 604
   - name: Events
     url: real_user_monitoring/explorer/events/
     parent: rum_explorer
     identifier: rum_explorer_events
-    weight: 705
+    weight: 605
   - name: Export
     url: real_user_monitoring/explorer/export/
     parent: rum_explorer
     identifier: rum_explorer_export
-    weight: 706
+    weight: 606
   - name: Saved Views
     url: real_user_monitoring/explorer/saved_views/
     parent: rum_explorer
     identifier: rum_explorer_saved_views
-    weight: 707
+    weight: 607
   - name: Watchdog Insights for RUM
     url: real_user_monitoring/explorer/watchdog_insights/
     parent: rum_explorer
     identifier: rum_explorer_watchdog_insights
-    weight: 708
+    weight: 608
   - name: Funnel Analysis
     url: real_user_monitoring/funnel_analysis
     parent: rum
     identifier: rum_funnel_analysis
-    weight: 8
+    weight: 7
   - name: Retention Analysis
     url: real_user_monitoring/retention_analysis
     parent: rum
     identifier: rum_retention_analysis
-    weight: 9
+    weight: 8
   - name: Feature Flag Tracking
     url: real_user_monitoring/feature_flag_tracking
     parent: rum
     identifier: rum_feature_flag_tracking
-    weight: 10
+    weight: 9
   - name: Generate Metrics
     url: real_user_monitoring/generate_metrics
     parent: rum
     identifier: rum_generate_metrics
-    weight: 11
+    weight: 10
   - name: Connect RUM and Traces
     url: real_user_monitoring/connect_rum_and_traces
     parent: rum
     identifier: rum_connect_rum_and_traces
-    weight: 12
+    weight: 11
   - name: Error Tracking
     url: real_user_monitoring/error_tracking/
     parent: rum
     identifier: rum_error_tracking
-    weight: 13
+    weight: 12
   - name: Explorer
     url: error_tracking/explorer/
     parent: rum_error_tracking
     identifier: rum_error_tracking_explorer
-    weight: 1301
+    weight: 1201
   - name: Track Browser Errors
     url: real_user_monitoring/error_tracking/browser/
     parent: rum_error_tracking
     identifier: rum_error_tracking_browser
-    weight: 1302
+    weight: 1202
   - name: Track Mobile Errors
     url: real_user_monitoring/error_tracking/mobile/
     parent: rum_error_tracking
     identifier: rum_error_tracking_mobile
-    weight: 1303
+    weight: 1203
   - name: Custom Grouping
     url: error_tracking/custom_grouping?tab=rum
     parent: rum_error_tracking
     identifier: rum_error_tracking_custom_grouping
-    weight: 1309
+    weight: 1204
   - name: Identify Suspect Commits
     url: error_tracking/suspect_commits
     parent: rum_error_tracking
     identifier: rum_error_tracking_suspect_commits
-    weight: 1310
+    weight: 1205
   - name: Guides
     url: real_user_monitoring/guide/
     parent: rum
     identifier: rum_guides
-    weight: 14
+    weight: 13
   - name: Data Security
     identifier: data_security_real_user_monitoring
     url: data_security/real_user_monitoring/
     parent: rum
-    weight: 15
+    weight: 14
   - name: Account Management
     url: account_management/
     pre: cog-2
@@ -4943,6 +4970,11 @@ main:
     identifier: sds_investigate_sensitive_data_issues
     parent: sensitive_data_scanner
     weight: 2
+  - name: Regular Expression Syntax
+    url: sensitive_data_scanner/regular_expression_syntax/
+    identifier: sds_regular_expression_syntax
+    parent: sensitive_data_scanner
+    weight: 3
   - name: Help
     url: help/
     pre: info-fill

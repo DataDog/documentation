@@ -2,6 +2,7 @@
 aliases:
 - /ja/tracing/trace_collection/otel_instrumentation/
 - /ja/opentelemetry/otel_tracing/
+- /ja/tracing/guide/add_span_md_and_graph_it/
 description: OpenTelemetry API を介したカスタムインスツルメンテーションから、Datadog のトレーシングライブラリまでスパンを送信します。
 further_reading:
 - link: /opentelemetry/

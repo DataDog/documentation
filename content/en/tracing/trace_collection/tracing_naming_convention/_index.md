@@ -75,7 +75,7 @@ To find span attributes in Datadog, go to the **Info** tab in the Trace side pan
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/setup_overview/
-[2]: /tracing/visualization/#span-tags
+[2]: /glossary/#span-tag
 [3]: https://opentelemetry.io/docs/reference/specification/trace/api/#spankind
 [4]: /tracing/setup_overview/configure_data_security/
 [5]: /tracing/trace_collection/library_config/
