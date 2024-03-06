@@ -28,6 +28,7 @@ cascade:
     {{< nextlink href="/agent/guide/heroku-ruby" >}}Instrumenting a Ruby on Rails application on Heroku with Datadog{{< /nextlink >}}
     {{< nextlink href="agent/guide/heroku-troubleshooting/" >}}Datadog-Heroku Buildpack troubleshooting{{< /nextlink >}}
     {{< nextlink href="agent/guide/private-link" >}}Forward your telemetry securely to Datadog over AWS PrivateLink{{< /nextlink >}}
+    {{< nextlink href="agent/guide/azure-private-linkt" >}}Connect to Datadog over Azure Private Link{{< /nextlink >}}
     {{< nextlink href="agent/guide/why-should-i-install-the-agent-on-my-cloud-instances" >}}Why should I install the Datadog Agent on my cloud instances?{{< /nextlink >}}
 {{< /whatsnext >}}
 
