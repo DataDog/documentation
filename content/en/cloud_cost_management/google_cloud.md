@@ -127,7 +127,11 @@ You can visualize your ingested data using the following cost types:
 
 | Cost Type | Description |
 | ----------| ----------------------------------|
-| `gcp.cost.usage_date` | Total cost of resources allocated at the time of usage over an interval. Costs include promotion credits as well as committed usage discount credits. |
+| `gcp.cost.amortized` | Total cost of resources allocated at the time of usage over an interval. Costs include promotion credits as well as committed usage discount credits. |
+| `gcp.cost.amortized.shared.resources.allocated` | All of your GCP amortized costs, with additional breakdowns and insights for container workloads. Requires [container cost allocation][15].|
+
+### Container allocation
+**Container allocation** metrics contain all of the same costs as the GCP metrics, but with additional breakdowns and insights for container workloads. See [container cost allocation][15] for more details.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
@@ -146,3 +150,4 @@ You can visualize your ingested data using the following cost types:
 [12]: /integrations/google_cloud_platform/
 [13]: /cloud_cost_management/google_cloud/#provide-service-account-necessary-permissions
 [14]: /cloud_cost_management/google_cloud/#enable-detailed-usage-cost-export
+[15]: https://docs.datadoghq.com/cloud_cost_management/container_cost_allocation/

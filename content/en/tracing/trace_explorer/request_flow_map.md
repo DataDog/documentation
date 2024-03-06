@@ -42,7 +42,7 @@ Use the request flow map to investigate your application's behavior:
 
 - Search for a [resource][6] that corresponds to a particular HTTP request.
 
-- If you use [shadow deployments][7] or feature flags set as [custom span tags][8], use the map to compare request latency between requests. This is a great pre-production complement to [deployment tracking][9] to observe how potential code changes will impact latency of deployed versions.
+- If you use [shadow deployments][7] or feature flags set as custom span tags, use the map to compare request latency between requests. This is a great pre-production complement to [deployment tracking][9] to observe how potential code changes will impact latency of deployed versions.
 
 ## Further Reading
 
@@ -55,5 +55,4 @@ Use the request flow map to investigate your application's behavior:
 [5]: https://app.datadoghq.com/apm/flow-map
 [6]: /tracing/glossary/#resources
 [7]: /tracing/services/deployment_tracking/#shadow-deploys
-[8]: /tracing/guide/add_span_md_and_graph_it/
 [9]: /tracing/services/deployment_tracking/

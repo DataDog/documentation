@@ -111,7 +111,7 @@ The `ddtrace` library includes support for the following libraries:
 | [Celery][49]      | >= 3.1            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#celery      |
 | [Consul][50]      | >= 0.7            | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#consul      |
 | [Futures][51]     | Fully Supported   | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#futures     |
-| [gevent][52]      | >= 1.0            | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
+| [gevent][52]      | >= 20.12          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#gevent      |
 | [Grpc][53]        | >= 1.8.0          | yes | https://ddtrace.readthedocs.io/en/stable/integrations.html#grpc        |
 | [httplib][54]     | Fully Supported   | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#httplib     |
 | [Logbook][66]     | >= 1.0.0          | no | https://ddtrace.readthedocs.io/en/stable/integrations.html#logbook     |
