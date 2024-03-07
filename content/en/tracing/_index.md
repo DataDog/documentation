@@ -65,7 +65,7 @@ Discover how Datadog APM can help support your specific use cases:
 | Understand how requests flow through your system. | Use the [Trace Explorer][21] to visualize and analyze end-to-end traces across distributed services. |
 | Monitor service health and performance of individual services. | Use the [service page][26] to assess service health by analyzing performance metrics, tracking deployments, identifying problematic resources. |
 | Correlate traces with DBM, RUM, logs, synthetics, and profiles. | [Correlate APM Data with Other Telemetry][20] to give more context to your data for more comprehensive analysis. |
-| Control how data flows into Datadog. | Use [Ingestion Controls][6] to adjust service-level ingestion configuration and adjust trace sampling rates. |
+| Control how data flows into Datadog. | Use [Ingestion Controls][6] to adjust service-level ingestion configuration and sampling rates. Use [retention filters][7] to control which spans are retained for 15 days. |
 
 ### Trace Explorer
 
@@ -93,14 +93,11 @@ Datadog APM integrates seamlessly with logs, real user monitoring (RUM), synthet
 
 Traces start in your instrumented applications and flow into Datadog.
 
+Datadog APM provides tools to manage the volume and retention of your trace data. Use [Ingestion Controls][6] to adjust sampling rates and [retention filters][7] to control which spans are are stored.
+
 {{< img src="/tracing/apm_lifecycle/apm_lifecycle_0.png" alt="Flow of data through Datadog APM." style="width:100%;" >}}
 
-Datadog APM provides tools to manage the volume and retention of your trace data. Use [Ingestion Controls][6] to adjust sampling rates and [retention filters][7] to control which traces are are stored.
-
-{{< img src="tracing/index/RetentionFilterTracingPage.png" alt="Trace Retention and Ingestion" style="width:100%;">}}
-
-
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
