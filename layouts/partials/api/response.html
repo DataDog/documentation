@@ -87,7 +87,7 @@
                                 {{ $row = (print $row "<div class=\"row\">") }}
                                 {{ $row = (print $row "<div class=\"col-4 column\"><p class=\"key\">" $sk "</p></div>") }}
                                 {{ $row = (print $row "<div class=\"col-2 column\"><p>" $sv.type "</p></div>") }}
-                                {{ $row = (print $row "<div class=\"col-6 column\"><p>&nbsp;</p></div>") }}
+                                {{ $row = (print $row "<div class=\"col-6 column\"><p>" ($sv.description | default "&nbsp;") "</p></div>") }}
                                 {{ $row = (print $row "</div>") }}
                                 {{ $row = (print $row "</div>") }}
                                 {{ $row = (print $row "</div>") }}
