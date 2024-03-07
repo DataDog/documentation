@@ -32,7 +32,7 @@ To create an [integration monitor][2] in Datadog:
 
 Create an integration metric monitor by following the instructions in the [metric monitor][3] documentation. Using the integration metric monitor type ensures the monitor can be selected by the integration monitor type facet on the [Manage Monitors][4] page.
 
-**Note**: The integration must submit metrics or service checks to configure an Integration monitor.
+**Note**: To configure an integration monitor, ensure that the integration submits metrics or service checks.
 
 #### Pick a check
 
