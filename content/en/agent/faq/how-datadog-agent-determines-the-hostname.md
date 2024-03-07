@@ -118,6 +118,7 @@ If you're upgrading from Agent v5 with `gce_updated_hostname` unset or set to fa
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [2]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
+[3]: https://github.com/DataDog/datadog-agent/tree/main/pkg/util/hostname
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
