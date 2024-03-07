@@ -480,7 +480,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 
 ### How to fix "Cannot find module 'dd-trace/ci/init'" errors
 
-When using `dd-trace` you might encounter this error message:
+When using `dd-trace`, you might encounter the following error message:
 
 ```text
  Error: Cannot find module 'dd-trace/ci/init'
@@ -507,7 +507,7 @@ jobs:
         run: npm test
 ```
 
-This will **not** work because `NODE_OPTIONS` will be interpreted by every node process, including `npm install`. If you try to import `dd-trace/ci/init` before it's intalled, this step will fail.
+**Note:** This does not work because `NODE_OPTIONS` are interpreted by every node process, including `npm install`. If you try to import `dd-trace/ci/init` before it's installed, this step fails.
 
 Your GitHub Action should instead look like this:
 ```yml
@@ -528,15 +528,15 @@ jobs:
           NODE_OPTIONS: -r dd-trace/ci/init
 ```
 
-To sum up:
+Follow these best practices:
 
-* Make sure `NODE_OPTIONS` environment variable is only set to the process running tests.
-* Specifically avoid defining `NODE_OPTIONS` in global environment variables settings in your pipeline or job definition.
+* Make sure the `NODE_OPTIONS` environment variable is only set to the process running tests.
+* Specifically avoid defining `NODE_OPTIONS` in the global environment variables settings in your pipeline or job definition.
 
 
 #### Using Yarn 2 or later
 
-If you're using `yarn>=2` and a `.pnp.cjs` file you might also get the same error:
+If you're using `yarn>=2` and a `.pnp.cjs` file, you might also get the same error:
 
 ```text
  Error: Cannot find module 'dd-trace/ci/init'
