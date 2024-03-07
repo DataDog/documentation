@@ -1,4 +1,6 @@
 ---
+aliases:
+- /ja/real_user_monitoring/frustration_signals
 further_reading:
 - link: https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/
   tag: ブログ
@@ -12,8 +14,8 @@ further_reading:
 - link: /real_user_monitoring/session_replay
   tag: ドキュメント
   text: セッションリプレイについて
-kind: documentation
-title: フラストレーションシグナル
+kind: ドキュメント
+title: コミュニティ
 ---
 
 ## 概要
@@ -37,6 +39,16 @@ RUM は 3 種類のフラストレーションシグナルを収集します。
 
 フラストレーションシグナルの収集を開始するには、SDK の構成に以下を追加します。
 
+<details open>
+  <summary>最新バージョン</summary>
+```
+window.DD_RUM.init({
+  trackUserInteractions: true,
+})
+```
+</details>
+<details>
+  <summary><code>v5.0.0</code> より前</summary>
 ```
 window.DD_RUM.init({
   trackUserInteractions: true,
@@ -44,9 +56,10 @@ window.DD_RUM.init({
 })
 ```
 
-フラストレーションシグナルにはアクションが必須です。`trackFrustrations` を有効にすると、自動的に `trackUserInteractions` が有効になります。
+フラストレーションシグナルにはアクションが必要です。`trackFrustrations` を有効にすると、自動的に `trackUserInteractions` が有効になります。
+</details>
 
-## 使用方法
+## API
 
 フラストレーションシグナルは、[**RUM Applications** ページ][1]にユーザーのフラストレーションの原因を表す高レベルのデータポイントとして表示されます。[RUM エクスプローラー][2]にフラストレーションカウントのリストを表示するには、**Options** ボタンをクリックして `@session.frustration.count` の列を追加してください。
 
@@ -94,7 +107,7 @@ Frustration Count
 
 {{< img src="real_user_monitoring/frustration_signals/actions_panel_multiple_frustration_signals.png" alt="What Happened のアクションで検出された複数のフラストレーションシグナルの種類" style="width:90%;" >}}
 
-#### エラー
+#### CoScreen
 
 **Errors** タブでエラーをクリックすると、エラーの詳細が表示されたサイドパネルが開きます。フラストレーションシグナルが発生したかどうかを確認することができます。
 
@@ -120,7 +133,7 @@ Frustration Count
 
 詳しくは、[リアルユーザーモニタリングモニターのドキュメント][9]をご覧ください。
 
-## トラブルシューティング
+## ヘルプ
 
 ### ユーザーがキーボードのキー (Delete など) を押したときに、なぜレイジクリックが作成されないのでしょうか？
 

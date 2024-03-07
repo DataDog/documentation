@@ -9,12 +9,18 @@ algolia:
 type: documentation
 aliases:
   - /workflows/actions_catalog/action_blueprints/
+  - /service_management/workflows/actions_catalog/saved_actions/
+  - /service_management/workflows/actions/saved_actions/
 further_reading:
 - link: "/integrations/"
   tag: "Documentation"
   text: "Learn about integrations"
 
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Workflow Automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Use the _Saved Actions_ feature to store and reuse an action and its parameters. You can insert a saved action into your workflow as a new step, or use one to populate an existing step's parameters.
 
