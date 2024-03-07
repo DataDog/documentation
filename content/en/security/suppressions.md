@@ -17,7 +17,7 @@ products:
 
 {{< product-availability >}}
 
-<div class="alert alert-warning">Suppressions are available for Cloud Security Management Threats and Cloud SIEM.</div>
+<!-- <div class="alert alert-warning">Suppressions are available for Cloud Security Management Threats and Cloud SIEM.</div> -->
 
 ## Overview
 
