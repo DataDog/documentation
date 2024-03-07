@@ -1405,6 +1405,11 @@ main:
     parent: alerting
     identifier: monitors_notify_downtimes
     weight: 4
+  - name: Examples
+    url: monitors/downtimes/examples
+    parent: monitors_notify_downtimes
+    identifier: monitors_notify_downtimes_examples
+    weight: 401
   - name: Manage Monitors
     url: monitors/manage/
     parent: alerting
@@ -1763,7 +1768,7 @@ main:
     url: service_management/workflows/saved_actions/
     parent: workflows
     identifier: workflows_saved_actions
-    weight: 5 
+    weight: 5
   - name: Connections
     url: service_management/workflows/connections/
     parent: workflows
@@ -1799,7 +1804,7 @@ main:
     url: service_management/workflows/actions_catalog/
     parent: app_builder
     identifier: app_builder_actions_catalog
-    weight: 4  
+    weight: 4
   - name: Containers
     url: containers/
     identifier: containers
@@ -3057,7 +3062,7 @@ main:
     weight: 6
   - name: Test Visibility
     url: tests/
-    pre: ci
+    pre: intelligent-test-runner
     parent: software_delivery_heading
     identifier: tests
     weight: 20000
@@ -3153,7 +3158,7 @@ main:
     weight: 11
   - name: Intelligent Test Runner
     url: intelligent_test_runner/
-    pre: ci
+    pre: intelligent-test-runner
     parent: software_delivery_heading
     identifier: intelligent_test_runner
     weight: 30000
@@ -3622,7 +3627,7 @@ main:
     url: data_security/pci_compliance/
     parent: log_management
     weight: 3
-    params: 
+    params:
       skip: true
   - name: Connect Logs and Traces
     url: tracing/other_telemetry/connect_logs_and_traces/
@@ -4173,7 +4178,7 @@ main:
     pre: synthetics
     identifier: synthetics
     parent: ux_monitoring_heading
-    weight: 10000
+    weight: 50000
   - name: API Tests
     url: synthetics/api_tests/
     parent: synthetics
@@ -4359,51 +4364,61 @@ main:
     pre: continuous-testing
     identifier: continuous_testing
     parent: ux_monitoring_heading
-    weight: 20000
+    weight: 60000
+  - name: Local and Staging Environments
+    url: /continuous_testing/environments
+    parent: continuous_testing
+    identifier: continuous_testing_environments
+    weight: 1
+  - name: Testing Multiple Environments
+    url: /continuous_testing/environments/multiple_env
+    parent: continuous_testing_environments
+    identifier: continuous_testing_environments_multiple_environments
+    weight: 101
+  - name: 'Testing With Proxy, Firewall, or VPN'
+    url: /continuous_testing/environments/proxy_firewall_vpn
+    parent: continuous_testing_environments
+    identifier: continuous_testing_environments_proxy_firewall_vpn
+    weight: 102
   - name: CI/CD Integrations
     url: continuous_testing/cicd_integrations
     parent: continuous_testing
     identifier: continuous_testing_cicd_integrations
-    weight: 1
+    weight: 2
   - name: Configuration
     url: /continuous_testing/cicd_integrations/configuration
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integrations_configuration
-    weight: 101
+    weight: 201
   - name: Azure DevOps Extension
     url: /continuous_testing/cicd_integrations/azure_devops_extension
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integrations_azure_devops_extension
-    weight: 102
+    weight: 202
   - name: CircleCI Orb
     url: /continuous_testing/cicd_integrations/circleci_orb
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integrations_circleci_orb
-    weight: 103
+    weight: 203
   - name: GitHub Actions
     url: /continuous_testing/cicd_integrations/github_actions
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integrations_github_actions
-    weight: 104
+    weight: 204
   - name: GitLab
     url: /continuous_testing/cicd_integrations/gitlab
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integrations_gitlab
-    weight: 105
+    weight: 205
   - name: Jenkins
     url: /continuous_testing/cicd_integrations/jenkins
     parent: continuous_testing_cicd_integrations
     identifier: continuous_testing_cicd_integrations_jenkins
-    weight: 106
+    weight: 206
   - name: Settings
     url: /continuous_testing/settings
     parent: continuous_testing
     identifier: continuous_testing_settings
-    weight: 2
-  - name: Testing Tunnel
-    url: /continuous_testing/testing_tunnel
-    parent: continuous_testing
-    identifier: continuous_testing_testing_tunnel
     weight: 3
   - name: Results Explorer
     url: continuous_testing/explorer/
@@ -4425,7 +4440,7 @@ main:
     parent: ux_monitoring_heading
     identifier: mobile_app_testing
     pre: mobile
-    weight: 30000
+    weight: 70000
   - name: Mobile App Tests
     url: /mobile_app_testing/mobile_app_tests
     parent: mobile_app_testing
@@ -4456,7 +4471,7 @@ main:
     pre: rum
     identifier: rum
     parent: ux_monitoring_heading
-    weight: 40000
+    weight: 80000
   - name: Browser Monitoring
     url: real_user_monitoring/browser/
     parent: rum
