@@ -7,7 +7,7 @@ type: documentation
 
 ## Client libraries
 
-By default, the Cloudcraft API Docs show examples in cURL. Select one of our official client library languages in each endpoint to see code examples from that library. To install each library:
+By default, the Cloudcraft API docs show examples in cURL. Each endpoint also includes code examples from one of the official client library languages. To install each library:
 
 {{< programming-lang-wrapper langs="go,python" class="api-reference" >}}
 
