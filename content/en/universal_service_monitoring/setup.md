@@ -764,11 +764,11 @@ DD_SYSTEM_PROBE_PROCESS_SERVICE_INFERENCE_ENABLED=true
 
 <div class="alert alert-info">
 Universal Service Monitoring is available in <strong>beta</strong> to monitor TLS encrypted traffic from services implemented in Golang.
-
-<i>Note: Go HTTPs servers can upgrade HTTP1.1 protocol to HTTP/2 which is supported in private beta, please reach to your account manager for further details<i>
 </div>
 
-Requires Agent version 7.51 or greater.
+**Note**:
+* Go HTTPs servers can upgrade HTTP1.1 protocol to HTTP/2 which is supported in private beta, please reach to your account manager for further details
+* Requires Agent version 7.51 or greater.
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
