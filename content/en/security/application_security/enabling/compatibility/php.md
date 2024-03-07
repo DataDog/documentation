@@ -18,6 +18,7 @@ The following ASM capabilities are supported in the PHP library, for the specifi
 | Software Composition Analysis (SCA) | 0.90.0              |
 | Code Security (beta) | not supported              |
 | Automatic user activity event tracking | 0.89.0                     |
+| API Security | 0.95.0 |
 
 The minimum tracer version to get all supported ASM capabilities for PHP is 0.86.0.
 
