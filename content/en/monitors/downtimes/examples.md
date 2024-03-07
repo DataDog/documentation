@@ -1,3 +1,32 @@
+---
+title: Examples
+kind: Documentation
+aliases:
+- /monitors/guide/suppress-alert-with-downtimes
+further_reading:
+- link: "monitors/downtimes/"
+  tag: "Documentation"
+  text: "Downtimes"
+- link: "monitors/downtimes/"
+  tag: "Documentation"
+  text: "Downtimes"
+- link: "api/latest/downtimes/"
+  tag: "Documentation"
+  text: "Downtime API reference"
+---
+
+## Overview
+
+Use Downtimes to eliminate unnecessary alerts during scheduled maintenance, testing, or auto-scaling events.
+Use the [Downtime API][1] to manage advanced maintenance schedules format, or to dynamically mute monitors, for example when resizing cloud instances.
+
+This guide describes how to configure downtimes for the following use cases:
+
+* [Downtime over the weekend](#downtime-over-the-weekend)
+* [Downtime outside of business hours](#downtime-outside-of-business-hours)
+* [Recurring downtime on nth weekday of the month](#recurring-downtime-on-the-nth-weekday-of-the-month)
+
+
 ## Prerequisites
 
 Since this guide describes the usage of the API, you will need an API key and an application key with admin privileges. These are available in your [Datadog account API key page][2].
@@ -5,7 +34,7 @@ Replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your
 
 This guide also assumes that you have a terminal with `CURL` and have reviewed the main [Downtime documentation page][3]
 
-## Examples
+## Use cases
 
 ### Downtime over the weekend
 

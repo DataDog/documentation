@@ -17,6 +17,10 @@ further_reading:
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Monitor notifications"
+cascade:
+  algolia:
+    subcategory: 'Downtimes'
+    tags: ['downtimes', 'mute monitors']
 ---
 
 ## Overview
@@ -35,7 +39,7 @@ To mute an individual monitor, click the **Mute** button at the top of the monit
 
 ### Choose what to silence
 
-Apply downtime schedules to specific monitors by [name](#by-monitor-name) or to a broad range of monitors by monitor [tags](#by-monitor-tags). Apply additional filters through the [*Group scope*](#downtime-scope). Click **Preview affected monitors** to see the monitors included. For more examples and use cases see  [Scoping downtimes schedules][2].
+Apply downtime schedules to specific monitors by name or to a broad range of monitors by monitor tags. Apply additional filters through the [*Group scope*](#downtime-scope). Click **Preview affected monitors** to see the monitors included. For more examples and use cases see  [Scoping downtimes schedules][2].
 
 **Note**: Any monitor created or edited after the downtime is scheduled is automatically included in the downtime if it matches the scope.
 
@@ -79,7 +83,7 @@ The Downtime scope query follows the same common [Search Syntax][19] that many o
 #### Downtime scope limitations
 There are a few limitations that are **not supported** which include:
 
-* More than two levels of nesting, e.g. `team:app AND (service:auth OR (service:graphics-writer AND (env:prod OR (type:metric AND status:ok))))`, are not supported. At most, Downtimes accept two levels of nesting. Use separate Downtimes instead to break down the logic.
+* More than two levels of nesting, such as `team:app AND (service:auth OR (service:graphics-writer AND (env:prod OR (type:metric AND status:ok))))`, are not supported. At most, Downtimes accept two levels of nesting. Use separate Downtimes instead to break down the logic.
 * Negation is only supported for key/value pairs and tags with `OR`. For example, `-key:value` and `-key(A OR B)`. Scopes such as `-service:(A AND B)`, `service:(-A OR -B)`, or `-service(A B)` are not supported.
 * Top level ORs are not supported, for example, `service:A OR host:X`. This requires two separate Downtimes.
 * Keyless tags, such as `prod AND service:(A or B)` or just `prod`, aren't supported. Tags need to have a key, in this case for example `env:prod`.
