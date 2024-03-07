@@ -34,7 +34,7 @@ The canonical hostname is chosen according to the following rules. The first mat
 
 If the name is recognized as a common non-unique name (for example, `localhost.localdomain`), the current rule fails and passes through to the next.
 
-See [Hostname detection logic][3] for details on how the Agent determines the hostname.
+See [Hostname detection logic][5] for details on how the Agent determines the hostname.
 
 ### AWS hosts
 
@@ -118,7 +118,6 @@ If you're upgrading from Agent v5 with `gce_updated_hostname` unset or set to fa
 
 [1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [2]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
-[3]: https://github.com/DataDog/datadog-agent/tree/main/pkg/util/hostname
 {{% /tab %}}
 {{% tab "Agent v5" %}}
 
@@ -131,3 +130,4 @@ If you're upgrading from Agent v5 with `gce_updated_hostname` unset or set to fa
 [2]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [3]: /api/v1/hosts/
 [4]: https://app.datadoghq.com/infrastructure
+[5]: https://github.com/DataDog/datadog-agent/tree/main/pkg/util/hostname
