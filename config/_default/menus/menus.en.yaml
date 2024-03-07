@@ -1410,6 +1410,11 @@ main:
     parent: alerting
     identifier: monitors_notify_downtimes
     weight: 4
+  - name: Examples
+    url: monitors/downtimes/examples
+    parent: monitors_notify_downtimes
+    identifier: monitors_notify_downtimes_examples
+    weight: 401
   - name: Manage Monitors
     url: monitors/manage/
     parent: alerting
@@ -3343,7 +3348,7 @@ main:
     weight: 6
   - name: Test Visibility
     url: tests/
-    pre: ci
+    pre: intelligent-test-runner
     parent: software_delivery_heading
     identifier: tests
     weight: 20000
@@ -3439,7 +3444,7 @@ main:
     weight: 11
   - name: Intelligent Test Runner
     url: intelligent_test_runner/
-    pre: ci
+    pre: intelligent-test-runner
     parent: software_delivery_heading
     identifier: intelligent_test_runner
     weight: 30000
