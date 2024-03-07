@@ -1022,14 +1022,17 @@
                   "properties": {
                     "code": {
                       "type": "string",
+                      "description": "A code indicating the status of the snapshot generation.",
                       "example": "STILL_PROCESSING"
                     },
                     "message": {
                       "type": "string",
+                      "description": "A message explaining the reason for the 202 response.",
                       "example": "Result wait time exceeded. Processing continues in the background, retry to receive result."
                     },
                     "retry": {
                       "type": "boolean",
+                      "description": "A flag indicating whether the client should retry the request.",
                       "example": true
                     }
                   }
@@ -1202,14 +1205,17 @@
                   "properties": {
                     "accountId": {
                       "type": "string",
+                      "description": "The AWS account ID for Cloudcraft.",
                       "example": "1234567890"
                     },
                     "awsConsoleUrl": {
                       "type": "string",
+                      "description": "The URL to the AWS IAM console with pre-filled role creation parameters.",
                       "example": "https://console.aws.amazon.com/iam/home?#/roles..."
                     },
                     "externalId": {
                       "type": "string",
+                      "description": "The unique external ID for the Cloudcraft user.",
                       "example": "ex53e827-a724-4a2a-9fec-b13761540785"
                     }
                   }
