@@ -6,21 +6,6 @@ further_reading:
   - link: "https://app.datadoghq.com/release-notes?category=APM"
     tag: "Release Notes"
     text: "Check out the latest Datadog APM releases! (App login required)"
-  - link: "/profiler/"
-    tag: "Documentation"
-    text: "Profile your production code"
-  - link: "/profiler/"
-    tag: "Documentation"
-    text: "Monitor databases across hosts"
-  - link: "/universal_service_monitoring/"
-    tag: "Documentation"
-    text: "See service health metrics without instrumenting any code"
-  - link: "/logs/"
-    tag: "Documentation"
-    text: "Collect, process, explore, and monitor logs"
-  - link: "/metrics/"
-    tag: "Documentation"
-    text: "Submit and query metrics about your environment"
   - link: "https://www.datadoghq.com/blog/span-based-metrics/"
     tag: "Blog"
     text: "Generate span-based metrics to track historical trends in application performance"
@@ -63,22 +48,57 @@ For an introduction to terminology used in Datadog APM, see [APM Terms and Conce
 
 ## Getting started
 
-To get started, you need to:
-
-1. [Install the Datadog Agent][23].
-2. [Instrument your application][2].
-3. [Explore your application's observability data in Datadog][21].
-
 <div class="alert alert-info"><strong>Simplify your setup!</strong> Install the Agent and instrument your application in one step with <a href="https://docs.datadoghq.com/tracing/trace_collection/single-step-apm/">Single Step Instrumentation</a>.</div>
+
+{{< whatsnext desc="To get started, you need to:" >}}
+    {{< nextlink href="/agent/" >}} 1. Install the Datadog Agent.{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/" >}} 2. Instrument your application.{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_explorer/" >}} 3. Explore your application's observability data in Datadog.{{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Use cases
 
+Discover how Datadog APM can help support your specific use cases:
+
 | You want to...| How Datadog APM can help |
 | ----------- | ----------- |
-| Control data flowing into Datadog. | Use [Ingestion Controls][6] to access service-level ingestion configuration and adjust trace sampling rates. |
-| Generate metrics like request counts, error counts, and latency measures. | Instrument your application to generate [trace metrics][24] or [runtime metrics][25]. |
-| Correlate traces with DBM, RUM, logs, synthetics, and profiles. | [Correlate APM Data with Other Telemetry][20] to give more context to your data and analysis. |
-| Explore application performance in Datadog. | Use the [Trace Explorer][21] to explore performance for live and indexed traces. |
+| Understand how requests flow through your system. | Use the [Trace Explorer][21] to visualize and analyze end-to-end traces across distributed services. |
+| Monitor service health and performance of individual services. | Use the [service page][26] to assess service health by analyzing performance metrics, tracking deployments, identifying problematic resources. |
+| Correlate traces with DBM, RUM, logs, synthetics, and profiles. | [Correlate APM Data with Other Telemetry][20] to give more context to your data for more comprehensive analysis. |
+| Control how data flows into Datadog. | Use [Ingestion Controls][6] to adjust service-level ingestion configuration and adjust trace sampling rates. |
+
+### Trace Explorer
+
+Use the [Trace Explorer][21] to search and analyze your traces in real-time. Identify performance bottlenecks, troubleshoot errors, and pivot to related logs and metrics to understand the full context around any issue.
+
+{{< img src="/tracing/trace_explorer/trace_explorer.png" alt="Trace explorer view." style="width:100%;" >}}
+
+### Service page
+
+[Monitor service performance][15] and compare between versions during deployments.
+
+{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versions on the Service Page" style="width:100%;">}}
+
+### Correlating traces with other telemetry
+
+Datadog APM integrates seamlessly with logs, real user monitoring (RUM), synthetic monitoring, and more:
+
+- [View your application logs side-by-side with traces][9] to find logs for specific requests, services, or versions.
+- [Associate RUM sessions with backend traces][10] to understand how backend performance affects user experience.
+- [Associate synthetic tests with traces][11] to troubleshoot failures across frontend and backend requests.
+
+{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connect Logs And Traces" style="width:100%;">}}
+
+### Ingestion controls and retention filters
+
+Traces start in your instrumented applications and flow into Datadog.
+
+{{< img src="/tracing/apm_lifecycle/apm_lifecycle_0.png" alt="Flow of data through Datadog APM." style="width:100%;" >}}
+
+Datadog APM provides tools to manage the volume and retention of your trace data. Use [Ingestion Controls][6] to adjust sampling rates and [retention filters][7] to control which traces are are stored.
+
+{{< img src="tracing/index/RetentionFilterTracingPage.png" alt="Trace Retention and Ingestion" style="width:100%;">}}
+
 
 ## Further Reading
 
@@ -109,3 +129,4 @@ To get started, you need to:
 [23]: /agent/
 [24]: /tracing/metrics/metrics_namespace/
 [25]: /tracing/metrics/runtime_metrics/
+[26]: /tracing/services/service_page/
