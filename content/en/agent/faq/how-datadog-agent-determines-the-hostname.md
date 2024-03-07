@@ -34,6 +34,8 @@ The canonical hostname is chosen according to the following rules. The first mat
 
 If the name is recognized as a common non-unique name (for example, `localhost.localdomain`), the current rule fails and passes through to the next.
 
+A more detailed explanation of how the Agent determines the hostname can be found on [our public repository on Github](https://github.com/DataDog/datadog-agent/tree/main/pkg/util/hostname).
+
 ### AWS hosts
 
 When pulling information on your AWS hosts from the [Datadog API][3], the following attributes display based on availability:
