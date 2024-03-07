@@ -31,7 +31,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: alertnow
-oauth: {}
 public_title: AlertNow
 short_description: Synchroniser des alertes Datadog avec des alertes AlertNow
 supported_os:

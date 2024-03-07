@@ -7,7 +7,7 @@ code_lang_weight: 60
 aliases:
   - /continuous_integration/setup_tests/junit_upload
   - /continuous_integration/tests/junit_upload
-  - continuous_integration/tests/setup/junit_xml
+  - /continuous_integration/tests/setup/junit_xml
 further_reading:
     - link: "/continuous_integration/tests"
       tag: "Documentation"
@@ -210,20 +210,20 @@ This is the full list of options available when using the `datadog-ci junit uplo
 **Example**: `team:backend`<br/>
 **Note**: Tags specified using `--tags` and with the `DD_TAGS` environment variable are merged. If the same key appears in both `--tags` and `DD_TAGS`, the value in the environment variable `DD_TAGS` takes precedence.
 
-`--metrics`
-: Key-value numerical pairs in the form `key:number` to be attached to all tests (the `--metrics` parameter can be specified multiple times). When specifying metrics using `DD_METRICS`, separate them using commas (for example, `memory_allocations:13,test_importance:2`).<br/>
-**Environment variable**: `DD_METRICS`<br/>
+`--measures`
+: Key-value numerical pairs in the form `key:number` to be attached to all tests (the `--measures` parameter can be specified multiple times). When specifying measures using `DD_MEASURES`, separate them using commas (for example, `memory_allocations:13,test_importance:2`).<br/>
+**Environment variable**: `DD_MEASURES`<br/>
 **Default**: (none)<br/>
 **Example**: `memory_allocations:13`<br/>
-**Note**: Metrics specified using `--metrics` and with the `DD_METRICS` environment variable are merged. If the same key appears in both `--metrics` and `DD_METRICS`, the value in the environment variable `DD_METRICS` takes precedence.
+**Note**: Measures specified using `--measures` and with the `DD_MEASURES` environment variable are merged. If the same key appears in both `--measures` and `DD_MEASURES`, the value in the environment variable `DD_MEASURES` takes precedence.
 
 `--report-tags`
 : Key-value pairs in the form `key:value`. Works like the `--tags` parameter but these tags are only applied at the session level and are **not** merged with the environment variable `DD_TAGS`<br/>
 **Default**: (none)<br/>
 **Example**: `test.code_coverage.enabled:true`<br/>
 
-`--report-metrics`
-: Key-value pairs in the form `key:123`. Works like the `--metrics` parameter but these tags are only applied at the session level and are **not** merged with the environment variable `DD_METRICS`<br/>
+`--report-measures`
+: Key-value pairs in the form `key:123`. Works like the `--measures` parameter but these tags are only applied at the session level and are **not** merged with the environment variable `DD_MEASURES`<br/>
 **Default**: (none)<br/>
 **Example**: `test.code_coverage.lines_pct:82`<br/>
 
@@ -261,9 +261,10 @@ See [Providing metadata with XPath expressions](#providing-metadata-with-xpath-e
 : Flag used to add extra verbosity to the output of the command<br/>
 **Default**: `false`<br/>
 
-
 Positional arguments
 : The file paths or directories in which the JUnit XML reports are located. If you pass a directory, the CLI looks for all `.xml` files in it.
+
+For more information about `service` and `env` reserved tags, see [Unified Service Tagging][17].
 
 The following environment variables are supported:
 
@@ -346,11 +347,11 @@ As a result, the JUnit XML tests have a `test.codeowners` tag with the owner of 
 To automatically add the `test.codeowners` tag to your tests, you need to:
 1. Have a `CODEOWNERS` file [in one of the allowed locations][15] in your repository.
 2. Provide the tests source file in your JUnit XML report. The following plugins do this automatically and add the `file` attribute to the `<testcase>` or `<testsuite>` elements in the XML report:
-    
+
     * phpunit
     * Most Python plugins (pytest, unittest)
     * Most Ruby plugins (ruby minitest)
-    
+
     If the XML does not have the `file` attribute, you need to [provide the source file manually](#manually-providing-the-testsourcefile-tag).
    Example of a valid report:
 
@@ -536,15 +537,15 @@ To be processed, the `name` attribute in the `<property>` element must have the 
 </testsuites>
 {{< /code-block >}}
 
-The values that you send to Datadog are strings, so the facets are displayed in lexicographical order. To send integers instead of strings, use the `--metrics` flag and the `DD_METRICS` environment variable.
+The values that you send to Datadog are strings, so the facets are displayed in lexicographical order. To send integers instead of strings, use the `--measures` flag and the `DD_MEASURES` environment variable.
 
 
 ## Reporting code coverage
 
-It is possible to report code coverage for a given JUnit report via the `--report-metrics` option, by setting the `test.code_coverage.lines_pct` metric:
+It is possible to report code coverage for a given JUnit report via the `--report-measures` option, by setting the `test.code_coverage.lines_pct` measure:
 
 ```shell
-datadog-ci junit upload --service my-api-service --report-metrics test.code_coverage.lines_pct:82 unit-tests/junit-reports e2e-tests/single-report.xml
+datadog-ci junit upload --service my-api-service --report-measures test.code_coverage.lines_pct:82 unit-tests/junit-reports e2e-tests/single-report.xml
 ```
 
 For more information, see [Code Coverage][10].
@@ -568,3 +569,4 @@ For more information, see [Code Coverage][10].
 [14]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-syntax
 [15]: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners#codeowners-file-location
 [16]: https://docs.datadoghq.com/integrations/github/
+[17]: /getting_started/tagging/unified_service_tagging

@@ -79,7 +79,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
    window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
       applicationId: '<APPLICATION_ID>',
-      site: 'http://datadoghq.com|datadoghq.com',
+      site: 'datadoghq.com',
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
@@ -273,9 +273,6 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
 <div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
 {{< /site-region >}}
 
-{{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-info">RUM for Roku is in beta.</div>
-
 1. Set up [RUM Roku Monitoring][1].
 
 2. Use the `datadogroku_DdUrlTransfer` component to perform your network requests.
@@ -288,7 +285,7 @@ To start sending just your iOS application's traces to Datadog, see [iOS Trace C
     ```
 
 [1]: /real_user_monitoring/mobile_and_tv_monitoring/setup/roku/
-{{< /site-region >}}
+
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -461,10 +458,13 @@ RUM supports several propagator types to connect resources with backends that ar
     const config = new DatadogProviderConfiguration(
         // ...
     );
-    config.firstPartyHosts = [
-        {match: "example.com", propagatorTypes: PropagatorType.TRACECONTEXT},
-        {match: "example.com", propagatorTypes: PropagatorType.DATADOG}
-    ];
+    config.firstPartyHosts = [{ 
+        match: "example.com", 
+        propagatorTypes: [
+            PropagatorType.TRACECONTEXT, 
+            PropagatorType.DATADOG
+        ]
+    }];
     ```
 
     `PropagatorType` is an enum representing the following tracing header types:

@@ -25,7 +25,7 @@ _List widget displaying error tracking issues_
 
 ### Configuration
 
-1. Choose the type of data to graph. You can create a list widget from Issues, Logs, Audit Trail, or Events depending on which products are available for your organization.
+1. Choose the type of data to graph. You can create a list widget from Issues, Logs, Audit Trail, Watchdog Alerts, or Events depending on which products are available for your organization.
 
 2. Set display preferences. On screenboards and notebooks, choose whether your widget has a custom timeframe or uses the global timeframe.
 

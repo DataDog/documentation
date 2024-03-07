@@ -35,7 +35,6 @@ is_public: true
 kind: integration
 manifest_version: 2.0.0
 name: cri
-oauth: {}
 public_title: CRI
 short_description: Surveillez toutes vos métriques CRI avec Datadog.
 supported_os:

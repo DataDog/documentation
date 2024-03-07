@@ -60,12 +60,11 @@ draft: false
 git_integration_title: haproxy
 integration_id: haproxy
 integration_title: HAProxy
-integration_version: 4.6.0
+integration_version: 5.0.0
 is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: haproxy
-oauth: {}
 public_title: HAProxy
 short_description: リクエスト、応答、エラー、処理バイト数などのキーメトリクスを監視。
 supported_os:
@@ -203,7 +202,7 @@ spec:
         - name: haproxy
 ```
 
-[1]: https://app.datadoghq.com/account/settings#agent
+[1]: https://app.datadoghq.com/account/settings/agent/latest
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -503,7 +502,7 @@ syslog があるシステムで、Agent がポート 514 で HAProxy ログを�
 
 
 [1]: https://raw.githubusercontent.com/DataDog/integrations-core/master/haproxy/images/haproxy-dash.png
-[2]: https://app.datadoghq.com/account/settings#agent
+[2]: https://app.datadoghq.com/account/settings/agent/latest
 [3]: https://github.com/prometheus/haproxy_exporter
 [4]: https://www.haproxy.com/blog/haproxy-exposes-a-prometheus-metrics-endpoint/
 [5]: https://www.haproxy.org/download/1.7/doc/management.txt

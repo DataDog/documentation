@@ -45,7 +45,6 @@ is_public: true
 kind: インテグレーション
 manifest_version: 2.0.0
 name: ceph
-oauth: {}
 public_title: Ceph
 short_description: プールごとのパフォーマンスメトリクスを収集し、クラスター状態全体を監視。
 supported_os:

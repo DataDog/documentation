@@ -31,7 +31,7 @@ You can monitor application security for .NET apps running in Docker, Kubernetes
 ## Enabling threat detection
 ### Get started
 
-1. **Update your [Datadog .NET library][1]** to at least version 2.2.0 (at least version 2.16.0 for Application Vulnerability Management vulnerability detection features) for your target operating system architecture.
+1. **Update your [Datadog .NET library][1]** to at least version 2.2.0 (at least version 2.16.0 for Software Composition Analysis detection features) for your target operating system architecture.
 
    To check that your service's language and framework versions are supported for ASM capabilities, see [Compatibility][2].
 
@@ -192,14 +192,14 @@ ENV DD_APPSEC_ENABLED=true
 
 {{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video showing Signals explorer and details, and Vulnerabilities explorer and details." video="true" >}}
 
-## Enabling code-level vulnerability detection
+## Enabling code security vulnerability detection
 
-If your service runs a [tracing library version that supports Vulnerability Management for code-level vulnerability detection][2], enable the capability by setting the `DD_IAST_ENABLED=true` environment variable and restarting your service.
+If your service runs a [tracing library version that supports code security vulnerability detection][2], enable the capability by setting the `DD_IAST_ENABLED=true` environment variable and restarting your service.
 
-To leverage code-level vulnerability detection capabilities for your service:
+To leverage code security vulnerability detection capabilities for your service:
 
 1. [Update your Datadog Agent][3] to at least version 7.41.1.
-2. Update your tracing library to at least the minimum version needed to turn on code-level vulnerability detection. For details, see [ASM capabilities support][4].
+2. Update your tracing library to at least the minimum version needed to turn on code security vulnerability detection. For details, see [ASM capabilities support][4].
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start-up script:
 
 ```sh

@@ -34,7 +34,7 @@ further_reading:
 
 - **Custom spans**: Configure custom spans
 
-- **Custom pre-defined tags**: Configure [custom tags][12] and metrics at runtime
+- **Custom pre-defined tags**: Configure [custom tags][12] and measures at runtime
 
 - **Parameters**: Set custom parameters such as default branch name and Git information
 
@@ -541,10 +541,19 @@ This is an optional step that enables the collection of tests data using [Test V
 
 See the [Test Visibility documentation][17] for your language to make sure that the testing framework that you use is supported.
 
+There are different ways to enable Test Visibility inside a Jenkins job or pipeline:
+1. Using the Jenkins configuration UI.
+2. Adding the `datadog` step inside the pipeline script.
+3. Configuring the tracer manually.
+
 ### Enable with the Jenkins configuration UI
 
 UI-based Test Visibility configuration is available in Datadog Jenkins plugin v5.6.0 or newer.
 
+This option is not suitable for pipelines that are configured entirely in `Jenkinsfile` (for example, Multibranch pipelines or pipelines from Organization Folder).
+For these pipelines use declarative configuration with the `datadog` step (described in the next section).
+
+To enable Test Visibility via UI do the following:
 1. In your Jenkins instance web interface, go to the job or pipeline that you want to instrument and choose the **Configure** option.
 2. In the **General** configuration section, tick the **Enable Datadog Test Visibility** checkbox.
 3. Enter the name of the service or library being tested into the **Service Name** input. You can choose any value that makes sense to you.
@@ -553,6 +562,47 @@ UI-based Test Visibility configuration is available in Datadog Jenkins plugin v5
 6. Click **Save**.
 
 {{< img src="ci/ci-jenkins-plugin-tests-config.png" alt="Datadog Test Visibility configuration for Jenkins" style="width:100%;">}}
+
+### Enable with the `datadog` pipeline step
+
+This configuration option is available in Datadog Jenkins plugin v5.6.2 or newer.
+
+In declarative pipelines, add the step to a top-level `options` block like so:
+
+```groovy
+pipeline {
+    agent any
+    options {
+        datadog(testVisibility: [
+            enabled: true,
+            serviceName: "my-service", // the name of service or library being tested
+            languages: ["JAVA"], // languages that should be instrumented (available options are "JAVA", "JAVASCRIPT", "PYTHON")
+            additionalVariables: ["my-var": "value"]  // additional tracer configuration settings (optional)
+        ])
+    }
+    stages {
+        stage('Example') {
+            steps {
+                echo "Hello world."
+            }
+        }
+    }
+}
+```
+
+In a scripted pipeline, wrap the relevant section with the `datadog` step like so:
+
+```groovy
+datadog(testVisibility: [ enabled: true, serviceName: "my-service", languages: ["JAVASCRIPT"], additionalVariables: [:] ]) {
+  node {
+    stage('Example') {
+      echo "Hello world."
+    }
+  }
+}
+```
+
+The other `datadog` settings, such as `collectLogs` or `tags` can be added alongside the `testVisibility` block.
 
 ### Enable with manual tracer configuration
 
@@ -807,6 +857,8 @@ You can configure the Jenkins Plugin to include or exclude some pipelines:
 **Environment variable**: `DATADOG_JENKINS_PLUGIN_INCLUDED`<br/>
 **Example**: `susans-job,johns-.*,prod_folder/prod_release`
 
+Lists of included and excluded jobs can contain regular expressions, but not glob patterns. To include a job with a specific prefix, use `prefix-.*`—not `prefix-*`.
+
 ## Visualize pipeline data in Datadog
 
 Once the integration is successfully configured, both the [Pipelines][7] and [Pipeline Executions][8] pages populate with data after pipelines finish.
@@ -904,7 +956,7 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 [9]: https://plugins.jenkins.io/kubernetes/#plugin-content-pod-template
 [10]: /continuous_integration/pipelines/jenkins/?tab=linux#enable-job-log-collection
 [11]: /continuous_integration/pipelines/jenkins/?tab=linux#correlate-infrastructure-metrics
-[12]: /continuous_integration/pipelines/custom_tags_and_metrics/
+[12]: /continuous_integration/pipelines/custom_tags_and_measures/
 [14]: /agent/
 [15]: /account_management/teams/
 [16]: /continuous_integration/tests/

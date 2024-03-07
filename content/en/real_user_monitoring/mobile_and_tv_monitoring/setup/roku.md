@@ -1,7 +1,6 @@
 ---
 title: RUM Roku Channel Monitoring Setup
 kind: documentation
-is_beta: true
 aliases:
     - /real_user_monitoring/roku/
 code_lang: roku
@@ -24,10 +23,6 @@ further_reading:
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">RUM for Roku is not available on the US1-FED Datadog site.</div>
-{{< /site-region >}}
-
-{{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-info">RUM for Roku is in beta.</div>
 {{< /site-region >}}
 
 ## Overview
@@ -66,7 +61,7 @@ Make sure you have a `roku_modules/datadogroku` subfolder in both the `component
 2. Select **Roku** as the application type and enter an application name to generate a unique Datadog application ID and client token.
 3. To disable automatic user data collection for either client IP or geolocation data, uncheck the boxes for those settings. For more information, see [RUM Roku Data Collected][4].
 
-   {{< img src="real_user_monitoring/roku/roku-new-application.png" alt="Create a RUM application for Roku in Datadog" style="width:90%;">}}
+   {{< img src="real_user_monitoring/roku/roku-new-application-2.png" alt="Create a RUM application for Roku in Datadog" style="width:90%;">}}
 
 To ensure the safety of your data, you must use a client token. If you used only [Datadog API keys][5] to configure the `dd-sdk-roku` library, they would be exposed client-side in the Roku channel's BrightScript code. 
 
