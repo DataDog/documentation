@@ -66,6 +66,10 @@ The history includes only playbacks that occurred in the player page or in an em
 
 To view your own playback history, check out the [My Watch History][7] playlist.
 
+## Playlists
+
+You can create a playlist of Session Replays to organize them by any patterns you notice. Learn more about [Session Replay Playlists][8].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -77,3 +81,4 @@ To view your own playback history, check out the [My Watch History][7] playlist.
 [5]: https://docs.datadoghq.com/notebooks/
 [6]: https://docs.datadoghq.com/account_management/audit_trail/
 [7]: https://app.datadoghq.com/rum/replay/playlists/my-watch-history
+[8]: /real_user_monitoring/session_replay/playlists
