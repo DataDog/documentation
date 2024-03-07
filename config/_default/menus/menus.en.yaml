@@ -970,12 +970,12 @@ main:
     parent: cloudcraft_api
     weight: 1
   - name: List AWS accounts
-    url: 'cloudcraft/api/aws-accounts/#list-my-aws-accounts'
+    url: 'cloudcraft/api/aws-accounts/#list-aws-accounts'
     identifier: cloudcraft_api_aws_accounts_list
     parent: cloudcraft_api_aws_accounts
     weight: 1
   - name: Add an AWS account
-    url: 'cloudcraft/api/aws-accounts/#add-aws-account'
+    url: 'cloudcraft/api/aws-accounts/#add-an-aws-account'
     identifier: cloudcraft_api_aws_accounts_add
     parent: cloudcraft_api_aws_accounts
     weight: 2
@@ -985,7 +985,7 @@ main:
     parent: cloudcraft_api_aws_accounts
     weight: 3
   - name: Update an AWS account
-    url: 'cloudcraft/api/aws-accounts/#update-aws-account'
+    url: 'cloudcraft/api/aws-accounts/#update-an-aws-account'
     identifier: cloudcraft_api_aws_accounts_update
     parent: cloudcraft_api_aws_accounts
     weight: 4
