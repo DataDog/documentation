@@ -1,17 +1,19 @@
 ---
-title: Suppress Alerts with Downtimes
-kind: guide
+title: Examples
+kind: Documentation
 aliases:
-- /monitors/guide/supress-alert-with-downtimes
+- /monitors/guide/suppress-alert-with-downtimes
 further_reading:
-- link: "api/v1/downtimes/"
+- link: "monitors/downtimes/"
+  tag: "Documentation"
+  text: "Downtimes"
+- link: "monitors/downtimes/"
+  tag: "Documentation"
+  text: "Downtimes"
+- link: "api/latest/downtimes/"
   tag: "Documentation"
   text: "Downtime API reference"
-- link: "/monitors/downtimes/"
-  tag: "Documentation"
-  text: "Downtime documentation"
 ---
-
 
 ## Overview
 
@@ -24,6 +26,7 @@ This guide describes how to configure downtimes for the following use cases:
 * [Downtime outside of business hours](#downtime-outside-of-business-hours)
 * [Recurring downtime on nth weekday of the month](#recurring-downtime-on-the-nth-weekday-of-the-month)
 
+
 ## Prerequisites
 
 Since this guide describes the usage of the API, you will need an API key and an application key with admin privileges. These are available in your [Datadog account API key page][2].
@@ -31,7 +34,7 @@ Replace all occurrences of `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your
 
 This guide also assumes that you have a terminal with `CURL` and have reviewed the main [Downtime documentation page][3]
 
-## Examples
+## Use cases
 
 ### Downtime over the weekend
 
@@ -270,7 +273,7 @@ Attributes specifying the duration in `RRULE` are not supported (for example, `D
 {{< tabs >}}
 {{% tab "API " %}}
 
-The `start` and `end` parameters must match the expected start and end of the recurring rule's first day. So, assuming the first 2nd Tuesday of our rule is Tuesday, July 11th, the start date has to be July 11th 08:00 AM and  a duration of two hours needs to be set.
+The `start` and `end` parameters must match the expected start and end of the recurring rule's first day. So, assuming the first 2nd Tuesday of our rule is Tuesday, July 11th, the start date has to be July 11th 08:00 AM and a duration of two hours needs to be set.
 
 **API call:**
 
