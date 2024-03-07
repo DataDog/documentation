@@ -7,14 +7,16 @@
     }
     p {
         margin-left: 4px;
-        .product {
+        .product-wrapper {
             white-space: nowrap;
-            &:hover {
-                color: $ddpurple;
-            }
-            i {
-                position: relative;
-                top: 1.5px;
+            .product {
+                &:hover {
+                    color: $ddpurple;
+                }
+                i {
+                    position: relative;
+                    top: 1.5px;
+                }
             }
         }
     }
