@@ -34516,7 +34516,7 @@ paths:
       x-menu-order: 1
       x-pagination:
         limitParam: page[size]
-        pageOffsetParam: page[number]
+        pageParam: page[number]
         resultsPath: data
       x-undo:
         type: safe
