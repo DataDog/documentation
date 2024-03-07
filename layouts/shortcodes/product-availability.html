@@ -26,7 +26,7 @@
                         <span>{{$product.name}}</span>
                         <a class="border border-0 stretched-link" href="{{$product.url}}"></a>
                     </span>
-                    <span>{{ if ne $idx (sub $len 1) }}, {{ end }}</span>
+                    <span>{{ if ne $idx (sub $len 1) }}|{{ end }}</span>
                 </span>
             {{ end }}
         </p>
