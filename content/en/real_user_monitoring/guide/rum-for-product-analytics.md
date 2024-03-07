@@ -132,6 +132,6 @@ This powerpack provides graphs about usage by country, actions on a view, and ac
 [8]: /real_user_monitoring/explorer/export/
 [9]: /real_user_monitoring/error_tracking/
 [10]: /real_user_monitoring/browser/frustration_signals/
-[11]: /real_user_monitoring/session_replay/
+[11]: /real_user_monitoring/session_replay/browser/
 [12]: /dashboards/guide/powerpacks-best-practices/
 [13]: https://app.datadoghq.com/dashboard/lists

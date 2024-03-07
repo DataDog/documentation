@@ -1959,12 +1959,12 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [10]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
 [12]: /real_user_monitoring/connect_rum_and_traces?tab=browserrum
-[13]: /real_user_monitoring/session_replay/privacy_options?tab=maskuserinput
+[13]: /real_user_monitoring/session_replay/browser/privacy_options?tab=maskuserinput
 [14]: /getting_started/site/
 [15]: /getting_started/tagging/#define-tags
 [16]: /real_user_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
-[17]: /real_user_monitoring/session_replay/
-[18]: /real_user_monitoring/session_replay/privacy_options
+[17]: /real_user_monitoring/session_replay/browser/
+[18]: /real_user_monitoring/session_replay/browser/privacy_options
 [19]: /getting_started/tagging/using_tags
 [20]: /real_user_monitoring/browser/frustration_signals/
 [21]: /real_user_monitoring/guide/sampling-browser-plans/
@@ -1972,4 +1972,4 @@ window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", app
 [23]: /real_user_monitoring/guide/monitor-electron-applications-using-browser-sdk
 [24]: https://docs.datadoghq.com/real_user_monitoring/browser/advanced_configuration#contexts-life-cycle
 [25]: https://developer.mozilla.org/en-US/docs/Web/API/Event/isTrusted
-[26]: /real_user_monitoring/session_replay/#usage
+[26]: /real_user_monitoring/session_replay/browser/#usage

@@ -3,7 +3,7 @@ title: Heatmaps
 kind: documentation
 description: Heatmaps are a type of visualization allowing you to see where users click on your website.
 further_reading:
-- link: '/real_user_monitoring/session_replay/'
+- link: '/real_user_monitoring/session_replay/browser/'
   tag: 'Documentation'
   text: 'Session Replay'
 - link: 'https://www.datadoghq.com/blog/visualize-behavior-datadog-scrollmaps/'
@@ -119,7 +119,7 @@ User information is not collected by default. Heatmaps use the user information 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/session_replay/
+[1]: /real_user_monitoring/session_replay/browser/
 [2]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json
 [3]: https://app.datadoghq.com/rum/heatmap/view
 [4]: /real_user_monitoring/explorer/
