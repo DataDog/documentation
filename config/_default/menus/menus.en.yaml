@@ -4370,7 +4370,7 @@ main:
     parent: continuous_testing_environments
     identifier: continuous_testing_environments_multiple_environments
     weight: 101
-  - name: Testing With Proxy, Firewall, or VPN
+  - name: 'Testing With Proxy, Firewall, or VPN'
     url: /continuous_testing/environments/proxy_firewall_vpn
     parent: continuous_testing_environments
     identifier: continuous_testing_environments_proxy_firewall_vpn
