@@ -1,9 +1,3 @@
-<!-- openapi-ref-docs.htmlhugo OpenAPI reference documentation generatorParams:
-  url: the public URL of the OpenAPI .json specificationGenerates reference documentation based on the provided OpenAPI specification. Use with: {{/*  {{< openapi-ref-docs url="your-.json-file-url" >}}  */}}  Example: {{/*  {{< openapi-ref-docs url="https://raw.githubusercontent.com/github/rest-api-description/main/descriptions/api.github.com/api.github.com.json" >}}  */}}If your OpenAPI spec is not hosted at an accessible url endpoint, you can
-store a copy of your OpenAPI specification in the root-level site /data folder.
-Then delete the first and last lines of the code block below, and replace the
-$openapi variable declaration at the beginning with: {{/*{{ $openapi := .Site.Data.fileName }}*/}}where fileName is the file's name with `.json` removed from the end
- -->
 {{ $tag := $.Params.tag | default nil }}
 {{ $dot := . }}
  {{ with $.Params.url }}
