@@ -4572,21 +4572,26 @@ main:
     url: real_user_monitoring/product_analytics
     parent: rum
     weight: 3
-  - name: Retention Analysis
-    url: real_user_monitoring/product_analytics/retention_analysis
+  - name: Sankey Diagrams
+    url: real_user_monitoring/product_analytics/sankey
     parent: rum_product_analytics
-    identifier: rum_retention_analysis
+    identifier: rum_sankey
     weight: 301
   - name: Funnel Analysis
     url: real_user_monitoring/product_analytics/funnel_analysis
     parent: rum_product_analytics
     identifier: rum_funnel_analysis
     weight: 302
+  - name: Retention Analysis
+    url: real_user_monitoring/product_analytics/retention_analysis
+    parent: rum_product_analytics
+    identifier: rum_retention_analysis
+    weight: 303
   - name: Heatmaps
     url: real_user_monitoring/product_analytics/heatmaps
     parent: rum_product_analytics
     identifier: rum_heatmaps
-    weight: 303
+    weight: 304
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
