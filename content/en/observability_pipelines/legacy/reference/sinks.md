@@ -1,5 +1,6 @@
 ---
-title: (LEGACY) Sinks
+title: Sinks
+legacy: true
 ---
 
 {{< site-region region="gov" >}}
