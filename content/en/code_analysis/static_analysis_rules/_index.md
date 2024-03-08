@@ -32,7 +32,7 @@ rulesets:
   go-best-practices:
     title: "Best Practices for Go"
     description: |
-      Rules to make writing Go code faster and easier. From code style to preventing bugs, this ruleset helps developers writing performant, maintainable and efficient Go code.
+      Rules to make writing Go code faster and easier. From code style to preventing bugs, this ruleset helps developers writing performant, maintainable, and efficient Go code.
   go-inclusive:
     title: "Use inclusive language in Go"
     description: |
