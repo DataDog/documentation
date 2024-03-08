@@ -33,7 +33,7 @@ Datadog은 **{{< region-param key="aws_region" >}}에서 AWS PrivateLink 엔드�
 {{< tabs >}}
 {{% tab "같은 리전에서 연결" %}}
 
-1. AWS 콘솔을 **{{< Region-param key="aws_region" >}}** 리전에 연결하고 VPC 엔드포인트를 생성합니다.
+1. AWS 콘솔을 **{{< region-param key="aws_region" >}}** 리전에 연결하고 VPC 엔드포인트를 생성합니다.
 
    {{< img src="agent/guide/private_link/create_vpc_endpoint.png" alt="VPC 엔드포인트 생성" style="width:60%;" >}}
 
