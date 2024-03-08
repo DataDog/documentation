@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     hideTOCItems()
 
     if (regionSelector) {
-        regionOnChangeHandler(currentUserSavedRegion)
         const options = regionSelector.querySelectorAll('.dropdown-item');
 
         options.forEach(option => {
@@ -60,6 +59,7 @@ function replaceButtonInnerText(value) {
 
 function regionOnChangeHandler(region) {
     const queryParams = new URLSearchParams(window.location.search);
+
     // on change, if query param exists, update the param
     if (config.allowedRegions.includes(queryParams.get('site') || region)) {
         queryParams.set('site', region);
