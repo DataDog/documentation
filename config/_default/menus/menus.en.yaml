@@ -4567,31 +4567,51 @@ main:
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_troubleshooting
     weight: 208
+  - name: Product Analytics
+    identifier: rum_product_analytics
+    url: real_user_monitoring/product_analytics
+    parent: rum
+    weight: 3
+  - name: Retention Analysis
+    url: real_user_monitoring/product_analytics/retention_analysis
+    parent: rum_product_analytics
+    identifier: rum_retention_analysis
+    weight: 301
+  - name: Funnel Analysis
+    url: real_user_monitoring/product_analytics/funnel_analysis
+    parent: rum_product_analytics
+    identifier: rum_funnel_analysis
+    weight: 302
+  - name: Heatmaps
+    url: real_user_monitoring/product_analytics/heatmaps
+    parent: rum_product_analytics
+    identifier: rum_heatmaps
+    weight: 303
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
     identifier: rum_session_replay
-    weight: 3
+    weight: 4
   - name: Mobile
     url: real_user_monitoring/session_replay/mobile
     parent: rum_session_replay
     identifier: rum_session_replay_mobile
-    weight: 301
+    weight: 401
   - name: Browser Privacy Options
     url: real_user_monitoring/session_replay/privacy_options
     parent: rum_session_replay
     identifier: rum_session_replay_privacy_options
-    weight: 302
+    weight: 402
   - name: Browser Developer Tools
     url: real_user_monitoring/session_replay/developer_tools
     parent: rum_session_replay
     identifier: rum_session_replay_developer_tools
-    weight: 303
+    weight: 403
   - name: Browser Troubleshooting
     url: real_user_monitoring/session_replay/troubleshooting
     parent: rum_session_replay
     identifier: rum_session_replay_troubleshooting
-    weight: 304
+    weight: 404
   - name: Playlists
     url: real_user_monitoring/session_replay/playlists
     parent: rum_session_replay
