@@ -138,7 +138,7 @@ You can share the replay with your team by selecting the **Share** dropdown at t
 [6]: /real_user_monitoring/explorer/saved_views/
 [7]: /real_user_monitoring/browser/#setup
 [8]: /real_user_monitoring/session_replay/developer_tools
-[9]: /real_user_monitoring/connect_rum_and_traces
+[9]: /real_user_monitoring/platform/connect_rum_and_traces
 [10]: /real_user_monitoring/error_tracking/
 [11]: /synthetics/guide/rum-to-synthetics/
 [12]: /synthetics/browser_tests/

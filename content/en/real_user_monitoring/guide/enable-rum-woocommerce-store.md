@@ -60,4 +60,4 @@ making data-driven decisions to improve your store
 [1]: /real_user_monitoring/browser/#choose-the-right-installation-method/
 [2]: /real_user_monitoring/session_replay/
 [3]: /real_user_monitoring/funnel_analysis/
-[4]: /real_user_monitoring/generate_metrics/
+[4]: /real_user_monitoring/platform/generate_metrics/

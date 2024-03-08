@@ -4,6 +4,8 @@ kind: documentation
 aliases:
   - '/real_user_monitoring/dashboards/frustration_signals_dashboard'
   - '/real_user_monitoring/dashboards/user_sessions_dashboard'
+  - '/real_user_monitoring/platform/dashboards/frustration_signals_dashboard'
+  - '/real_user_monitoring/platform/dashboards/user_sessions_dashboard'
 further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'

@@ -336,4 +336,4 @@ The RUM Browser SDK no longer lets you specify the source of an error collected 
 [23]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#enrich-and-control-rum-data
 [24]: /help/
 [26]: /real_user_monitoring/browser/
-[25]: /real_user_monitoring/connect_rum_and_traces#opentelemetry-support
+[25]: /real_user_monitoring/platform/connect_rum_and_traces#opentelemetry-support

@@ -7,7 +7,7 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/'
   tag: 'Blog'
   text: 'Detect user pain points with Datadog Frustration Signals'
-- link: '/real_user_monitoring/dashboards/usage#frustration-signals'
+- link: '/real_user_monitoring/platform/dashboards/usage#frustration-signals'
   tag: 'Documentation'
   text: 'Frustration Signals Dashboard'
 - link: '/real_user_monitoring/explorer'
@@ -157,7 +157,7 @@ To provide feedback or submit a feature request, contact <a href="/help/">Datado
 
 [1]: https://app.datadoghq.com/rum/list
 [2]: /real_user_monitoring/explorer/
-[3]: /real_user_monitoring/dashboards/usage#frustration-signals
+[3]: /real_user_monitoring/platform/dashboards/usage#frustration-signals
 [4]: https://app.datadoghq.com/rum/explorer
 [5]: /dashboards/
 [6]: /monitors/

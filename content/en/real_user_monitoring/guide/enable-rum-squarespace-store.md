@@ -60,4 +60,4 @@ making data-driven decisions to improve your store
 [2]: https://support.squarespace.com/hc/en-us/articles/205815908-Using-code-injection
 [3]: /real_user_monitoring/session_replay/
 [4]: /real_user_monitoring/funnel_analysis/
-[5]: /real_user_monitoring/generate_metrics/
+[5]: /real_user_monitoring/platform/generate_metrics/
