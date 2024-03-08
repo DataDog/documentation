@@ -4567,6 +4567,26 @@ main:
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_troubleshooting
     weight: 208
+  - name: Product Analytics
+    identifier: rum_product_analytics
+    url: real_user_monitoring/product_analytics
+    parent: rum
+    weight: 3
+  - name: Retention Analysis
+    url: real_user_monitoring/product_analytics/retention_analysis
+    parent: rum_product_analytics
+    identifier: rum_retention_analysis
+    weight: 301
+  - name: Funnel Analysis
+    url: real_user_monitoring/product_analytics/funnel_analysis
+    parent: rum_product_analytics
+    identifier: rum_funnel_analysis
+    weight: 302
+  - name: Heatmaps
+    url: real_user_monitoring/product_analytics/heatmaps
+    parent: rum_product_analytics
+    identifier: rum_heatmaps
+    weight: 303
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
