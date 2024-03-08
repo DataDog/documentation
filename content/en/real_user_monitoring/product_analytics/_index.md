@@ -30,6 +30,7 @@ Use [Retention Analysis][1] to measure how a group of users engage with specific
 Explore [User Journeys][2] to see different visualizations of the user experience when interacting with your application:
 
 - **[Funnel][3]**: Measure the conversion rate end-to-end of a given workflow.
+- **[Sankey][4]**: Explore aggregated workflows in a single visualization to aid in answering questions about user journeys.
 - **[Conversion][4]**: Track conversation rates over time and compare it against specific attributes that may have affected conversion rates, such as browser type or geography.
 
 ## Visualize user interactions with heatmaps
