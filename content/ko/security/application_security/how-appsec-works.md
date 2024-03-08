@@ -18,7 +18,7 @@ title: Datadog에서 애플리케이션 보안 관리가 작동하는 방식
 ---
 
 {{< site-region region="gov" >}}
-<div class="alert alert-warning">애플리케이션 보안 관리는 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}}에서 지원되지 않습니다.).</div>
+<div class="alert alert-warning">애플리케이션 보안 관리는 선택한 <a href="/getting_started/site">Datadog 사이트</a> ({{< region-param key="dd_site_name" >}}에서 지원되지 않습니다.</div>
 {{< /site-region >}}
 
 ## 개요
