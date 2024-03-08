@@ -40,7 +40,7 @@ rulesets:
   go-security:
     title: "Ensure your Go code is safe and secure"
     description: |
-      Detect common security issues (such as SQL injection, XSS, shell injection) in your Go codebase.
+      Detect common security issues (such as SQL injection, XSS, or shell injection) in your Go codebase.
   java-best-practices:
     title: "Follow best practices in Java"
     description: |
