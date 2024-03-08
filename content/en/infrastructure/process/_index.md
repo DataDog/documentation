@@ -20,6 +20,9 @@ further_reading:
     - link: https://www.datadoghq.com/blog/process-level-data/
       tag: 'Blog'
       text: 'Troubleshoot faster with process-level app and network data'
+    - link: https://www.datadoghq.com/blog/watchdog-live-processes/
+      tag: 'Blog'
+      text: 'Troubleshoot anomalies in workload performance with Watchdog Insights for Live Processes'
 ---
 
 
@@ -70,7 +73,7 @@ Follow the instructions for the [Docker Agent][1], passing in the following attr
 
 ```text
 -v /etc/passwd:/etc/passwd:ro
--e DD_PROCESS_AGENT_ENABLED=true
+-e DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED=true
 ```
 
 **Note**:
@@ -129,7 +132,7 @@ In the `datadog-agent.yaml` manifest used to create the DaemonSet, add the follo
 
 ```yaml
  env:
-    - name: DD_PROCESS_AGENT_ENABLED
+    - name: DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED
       value: "true"
   volumeMounts:
     - name: passwd

@@ -34,7 +34,7 @@ further_reading:
 
 - **Custom spans**: Configure custom spans
 
-- **Custom pre-defined tags**: Configure [custom tags][12] and metrics at runtime
+- **Custom pre-defined tags**: Configure [custom tags][12] and measures at runtime
 
 - **Parameters**: Set custom parameters such as default branch name and Git information
 
@@ -956,7 +956,7 @@ Failed to reinitialize Datadog-Plugin Tracer, Cannot enable traces collection vi
 [9]: https://plugins.jenkins.io/kubernetes/#plugin-content-pod-template
 [10]: /continuous_integration/pipelines/jenkins/?tab=linux#enable-job-log-collection
 [11]: /continuous_integration/pipelines/jenkins/?tab=linux#correlate-infrastructure-metrics
-[12]: /continuous_integration/pipelines/custom_tags_and_metrics/
+[12]: /continuous_integration/pipelines/custom_tags_and_measures/
 [14]: /agent/
 [15]: /account_management/teams/
 [16]: /continuous_integration/tests/

@@ -28,7 +28,7 @@ Do the following steps to enable Database Monitoring with your database:
 ## Before you begin
 
 Supported SQL Server versions
-: 2012, 2014, 2016, 2017, 2019, 2022
+: 2014, 2016, 2017, 2019, 2022
 
 {{% dbm-sqlserver-before-you-begin %}}
 
@@ -111,23 +111,6 @@ GRANT VIEW ANY DEFINITION to datadog;
 -- GRANT SELECT to datadog;
 ```
 
-#### For SQL Server 2012
-
-```SQL
-CREATE LOGIN datadog WITH PASSWORD = '<PASSWORD>';
-CREATE USER datadog FOR LOGIN datadog;
-GRANT VIEW SERVER STATE to datadog;
-GRANT VIEW ANY DEFINITION to datadog;
--- To use Log Shipping Monitoring (available in Agent v7.50+), uncomment the next three lines:
--- USE msdb;
--- CREATE USER datadog FOR LOGIN datadog;
--- GRANT SELECT to datadog;
-
--- Create the `datadog` user in each additional application database:
-USE [database_name];
-CREATE USER datadog FOR LOGIN datadog;
-```
-
 **Note:** Azure managed identity authentication is also supported. Please see [the guide][1] on how to configure this for your Azure SQL DB instance.
 
 [3]: /database_monitoring/guide/managed_authentication
@@ -191,11 +174,11 @@ The other two providers, `SQLOLEDB` and `SQLNCLI`, are considered deprecated by 
 
 #### ODBC
 
-The recommended ODBC driver is [Microsoft ODBC Driver][8]. Ensure the driver is installed on the host where the Agent is running.
+The recommended ODBC driver is [Microsoft ODBC Driver][8]. Starting with Agent 7.51, ODBC Driver 18 for SQL Server is included in the agent for Linux. For Windows, ensure the driver is installed on the host where the Agent is running.
 
 ```yaml
 connector: odbc
-driver: '{ODBC Driver 17 for SQL Server}'
+driver: '{ODBC Driver 18 for SQL Server}'
 ```
 
 Once all Agent configuration is complete, [restart the Datadog Agent][9].
@@ -273,7 +256,7 @@ Replace the values to match your account and environment. See the [sample conf f
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-export DD_AGENT_VERSION=7.35.0
+export DD_AGENT_VERSION=7.51.0
 
 docker run -e "DD_API_KEY=${DD_API_KEY}" \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -283,7 +266,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "dbm": true,
     "host": "<HOSTNAME>,<SQL_PORT>",
     "connector": "odbc",
-    "driver": "FreeTDS",
+    "driver": "ODBC Driver 18 for SQL Server",
     "username": "datadog",
     "password": "<PASSWORD>",
     "tags": [
@@ -339,7 +322,7 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     connector: 'odbc'
-    driver: 'FreeTDS'
+    driver: 'ODBC Driver 18 for SQL Server'
     include_ao_metrics: true  # Optional: For AlwaysOn users
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
@@ -363,7 +346,7 @@ instances:
     username: datadog
     password: '<PASSWORD>'
     connector: "odbc"
-    driver: "FreeTDS"
+    driver: "ODBC Driver 18 for SQL Server"
     tags:  # Optional
       - 'service:<CUSTOM_SERVICE>'
       - 'env:<CUSTOM_ENV>'
@@ -394,7 +377,7 @@ metadata:
           "username": "datadog",
           "password": "<PASSWORD>",
           "connector": "odbc",
-          "driver": "FreeTDS",
+          "driver": "ODBC Driver 18 for SQL Server",
           "tags": ["service:<CUSTOM_SERVICE>", "env:<CUSTOM_ENV>"],  # Optional
           "azure": {
             "deployment_type": "<DEPLOYMENT_TYPE>",

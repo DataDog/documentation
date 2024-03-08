@@ -83,31 +83,7 @@ Screenboards are dashboards with free-form layouts which can include a variety o
 
 ## Configuring dashboards
 
-### Graph menu
-
-Click on any dashboard graph to open an options menu:
-
-| Option                 | Description                                                   |
-|------------------------|---------------------------------------------------------------|
-| Send snapshot          | Create and send a snapshot of your graph.                     |
-| Find correlated metrics| Find correlations from APM services, integrations, and dashboards. |
-| View in full screen    | View the graph in [full screen mode][5].                     |
-| Lock cursor            | Lock the cursor in place on the page.                         |
-| View related processes | Jump to the [Live Processes][6] page scoped to your graph.   |
-| View related hosts     | Jump to the [Host Map][7] page scoped to your graph.         |
-| View related logs      | Jump to the [Log Explorer][8] page scoped to your graph.     |
-| View related traces    | Populate a [Traces][9] panel scoped to your graph.           |
-| View related profiles  | Jump to the [Profiling][10] page scoped to your graph.        |
-
-### Global time selector
-
-To use the global time selector, at least one time-based widget must be set to use `Global Time`. Make the selection in the widget editor under **Set display preferences**, or add a widget (global time is the default time setting).
-
-The global time selector sets the same time frame for all widgets using the `Global Time` option on the same dashboard. Select a moving window in the past (for example, `Past 1 Hour` or `Past 1 Day`) or a fixed period with the `Select from calendar…` option or [enter a custom time frame][11]. If a moving window is chosen, the widgets are updated to move along with the time window.
-
-Widgets not linked to global time show the data for their local time frame as applied to the global window. For example, if the global time selector is set to January 1, 2019 through January 2, 2019, a widget set with the local time frame for `Past 1 Minute` shows the last minute of January 2, 2019 from 11:59 pm.
-
-#### Refresh rate
+### Refresh rate
 
 The refresh rate of a private dashboard depends on the time frame you are viewing. The shorter the time frame is, the more frequently the data is refreshed. Publicly shared dashboards refresh every thirty seconds, regardless of the selected time frame.
 
