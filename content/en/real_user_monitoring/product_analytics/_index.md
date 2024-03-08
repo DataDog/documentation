@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Product Analytics helps you gain insight into your users to make data-driven decisions.
+Product Analytics helps you gain insight into user behavior and make data-driven decisions.
 
 It can help solve the following types of use cases in your application:
 
@@ -31,7 +31,7 @@ Explore [User Journeys][2] to see different visualizations of the user experienc
 
 - **[Funnel][3]**: Measure the conversion rate end-to-end of a given workflow.
 - **[Sankey][4]**: Explore aggregated workflows in a single visualization to aid in answering questions about user journeys.
-- **[Conversion][4]**: Track conversation rates over time and compare it against specific attributes that may have affected conversion rates, such as browser type or geography.
+- **[Conversion][4]**: Track conversion rates over time and compare it against specific attributes that may have affected conversion rates, such as browser type or geography.
 
 ## Visualize user interactions with heatmaps
 
