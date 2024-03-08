@@ -40,7 +40,7 @@ Visualize the evolution of a single measure (or a [facet][5] unique count of val
 
 {{< img src="real_user_monitoring/explorer/visualize/timeseries-2.png" alt="Timeseries graph in the RUM Explorer" style="width:90%;" >}}
 
-The timeseries graph depicts the evolution of the number of page views on the Shopist application over the past day for every view path.
+The timeseries graph depicts the evolution of the number of pageviews on the Shopist application over the past day for every view path.
 
 You can choose additional display options such as:
 
