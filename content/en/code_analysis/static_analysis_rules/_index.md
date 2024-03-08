@@ -29,6 +29,18 @@ rulesets:
     title: "Follow best practices with using Docker"
     description: |
       Best practices for using Docker.
+  go-best-practices:
+    title: "Best Practices for Go"
+    description: |
+      Rules to make writing Go code faster and easier. From code style to preventing bugs, this ruleset helps developers writing performant, maintainable and efficient Go code.
+  go-inclusive:
+    title: "Use inclusive language in Go"
+    description: |
+      Check Go code for wording issues.
+  go-security:
+    title: "Ensure your Go code is safe and secure"
+    description: |
+      Detect common security issues (such as SQL injection, XSS, shell injection) in your Go codebase.
   java-best-practices:
     title: "Follow best practices in Java"
     description: |
@@ -76,7 +88,7 @@ rulesets:
   jsx-react:
     title: "React specific linting rules"
     description: |
-      This plugin exports a `recommended` configuration that enforces React good practices.
+      This plugin exports a `recommended` configuration that enforces React good practices.
   python-best-practices:
     title: "Follow best practices for writing Python code"
     description: |
@@ -124,7 +136,7 @@ rulesets:
   tsx-react:
     title: "TypeScript React code quality"
     description: |
-      This plugin exports a `recommended` configuration that enforces React good practices.
+      This plugin exports a `recommended` configuration that enforces React good practices.
   typescript-best-practices:
     title: "Follow best practices for writing TypeScript code"
     description: |
