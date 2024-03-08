@@ -8,6 +8,8 @@ further_reading:
     text: Enable Runtime Metrics
 ---
 
+This page covers configuration options for Single Step Instrumentation. For instructions on enabling Single Step Instrumentation, read [Enabling Single Step Instrumentation][3].
+
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
 
@@ -187,3 +189,4 @@ For example, add the following configuration to your `datadog-values.yaml` file:
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: /agent/remote_config
+[3]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/

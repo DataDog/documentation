@@ -10,6 +10,8 @@ further_reading:
     text: Enable Runtime Metrics
 ---
 
+This page covers how to enable and disable Single Step Instrumentation. 
+
 ## Requirements
 
 - **Languages and architectures**: Single step APM instrumentation only supports tracing Java, Python, Ruby, Node.js, and .NET Core services on `x86_64` and `arm64` architectures.
@@ -18,7 +20,7 @@ further_reading:
 
 ## Enabling Single Step Instrumentation
 
-If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation (beta)** option selected, the Agent is installed and configured to enable APM. This allows you to automatically instrument your application, without any additional installation or configuration steps.
+If you [install or update a Datadog Agent][1] with the **Enable APM Instrumentation (beta)** option selected, the Agent is installed and configured to enable APM. This automatically instruments your application, without any additional installation or configuration steps.
 
 {{< tabs >}}
 {{% tab "Linux host or VM" %}}
@@ -133,9 +135,11 @@ To enable single step instrumentation with Helm:
 
 There are a few options to customize your experience:
 
+- Tagging observability data by environment.
 - Enabling or disabling instrumentation by namespace.
 - Specifying tracing library versions.
 - Choosing specific pod specifications.
+
 
 To learn more, read [Configuring Single Step Instrumentation][3].
 
