@@ -1,17 +1,17 @@
 ---
 description: MySQL 데이터베이스에서 데이터베이스 모니터링 설정
 disable_sidebar: true
-kind: 설명서
+kind: documentation
 title: MySQL 설정
 ---
 
 {{< site-region region="gov" >}}
-해당 지역에서는 데이터베이스 모니터링이 지원되지 않습니다
+해당 사이트에서는 데이터베이스 모니터링이 지원되지 않습니다
 {{< /site-region >}}
 
-### MySQL 버전 지원됨
+### 지원되는 MySQL 버전 
 
-|  | 자체 호스팅 | Amazon RDS | Amazon Aurora | Google 클리우드 SQL >26GM RAM | Azure |
+|  | 자체 호스팅 | Amazon RDS | Amazon Aurora | 26GB 이상의 RAM을 갖춘 Google Cloud SQL | Azure |
 |--|------------|---------|------------|------------------|---------|
 | MySQL 5.6 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | MySQL 5.7 | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
@@ -23,7 +23,7 @@ title: MySQL 설정
 
 <br>
 
-### 에이전트 통합 오버헤드
+### Agent 통합 오버헤드
 
 Agent 통합 오버헤드 테스트는 Amazon EC2 머신 `c5.xlarge` 인스턴스(vCPU 4개, 8GB RAM)에서 실행되었습니다. 테스트에 사용된 데이터베이스는 Amazon RDS `db.m5.large` 인스턴스(vCPU 2개, 8GB RAM)에서 실행되는 MySQL 8.0 인스턴스였습니다. 데이터베이스는 20개의 웨어하우스가 있는 TPC-C 워크로드를 실행하고 있었습니다.
 
