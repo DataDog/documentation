@@ -26,6 +26,7 @@ short_description: キューサイズ、平均メッセージサイズ、メッ�
 version: '1.0'
 ---
 
+<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
 {{< img src="integrations/amazon_sqs/sqsdashboard.png" alt="SQS ダッシュボード" popup="true">}}
 
 ## 概要
