@@ -2,7 +2,7 @@
 algolia:
   tags:
   - npm
-  - 네트워크 성능 모니터링
+  - network performance monitoring
 aliases:
 - /ko/monitors/network_flow_monitors/
 - /ko/graphing/infrastructure/network_performance_monitor/
