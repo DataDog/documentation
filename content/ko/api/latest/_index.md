@@ -31,9 +31,13 @@ Datadog API는 HTTP REST API입니다. API는 리소스 중심의 URL을 사용�
 
 API를 사용하려면 [![Postman에서 실행하세요][3]](https://god.gw.postman.com/run-collection/20651290-809b13c1-4ada-46c1-af65-ab276c434068?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D20651290-809b13c1-4ada-46c1-af65-ab276c434068%26entityType%3Dcollection%26workspaceId%3Dbf049f54-c695-4e91-b879-0cad1854bafa#?env%5BDatadog%20Authentication%5D=W3sia2V5IjoiYXBpX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjowfSx7ImtleSI6ImFwcGxpY2F0aW9uX2tleSIsInZhbHVlIjoiIiwiZW5hYmxlZCI6dHJ1ZSwic2Vzc2lvblZhbHVlIjoiIiwic2Vzc2lvbkluZGV4IjoxfV0=)
 
+**참고**: Postman을 통해 Datadog API에 인증하려면 Datadog API 및 애플리케이션 키 값을 Datadog Postman 컬렉션에 포함된 **Datadog Authentication** 환경에 추가하세요.
+
 [API 사용하기][4]는 엔드포인트에 대한 가이드입니다.
 
-**참고**: cURL 코드 예제는 BASH와 GNU coreutils 사용을 가정한 것입니다. macOS에서는 [Homebrew 패키지 관리자][5]를 통해 coreutils를 설치할 수 있습니다:`brew install coreutils`
+**참고**: 
+   - API 및 애플리케이션 키를 사용하여 Datadog Postman 컬렉션의 Datadog 인증 환경을 설정합니다.
+   - cURL 코드 예제에서는 BASH 및 GNU coreutils를 사용한다고 가정합니다. macOS에서는 [Homebrew 패키지 관리자][5]를 사용하여 coreutils를 설치할 수 있습니다: `brew install coreutils`
 
 ### 클라이언트 라이브러리
 
@@ -42,7 +46,7 @@ API를 사용하려면 [![Postman에서 실행하세요][3]](https://god.gw.post
 {{< programming-lang-wrapper langs="java,python-legacy,python,ruby-legacy,ruby,go,typescript" class="api-reference" >}}
 
 {{< programming-lang lang="java" >}}
-#### 설치
+#### 인프라스트럭처 목록
 Maven - 프로젝트의 POM에 이 종속성을 추가합니다:
 ```xml
 <dependency>
@@ -58,7 +62,7 @@ Gradle - 프로젝트의 빌드 파일에 이 종속성을 추가합니다:
 compile "com.datadoghq:datadog-api-client:{{< sdk-version "datadog-api-client-java" >}}"
 ```
 
-#### 사용법
+#### 가이드
 
 ```java
 import com.datadog.api.client.ApiClient;
@@ -118,55 +122,55 @@ application {
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python-legacy" >}}
-#### 설치
+#### 인프라스트럭처 목록
 ```sh
 pip install datadog
 ```
-#### 사용법
+#### 가이드
 ```python
 import datadog
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
-#### 설치
+#### 인프라스트럭처 목록
 ```console
 pip3 install datadog-api-client
 ```
-#### 사용법
+#### 가이드
 ```python
 import datadog_api_client
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby-legacy" >}}
-#### 설치
+#### 인프라스트럭처 목록
 ```sh
 gem install dogapi
 ```
-#### 사용법
+#### 가이드
 ```ruby
 require 'dogapi'
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
-#### 설치
+#### 인프라스트럭처 목록
 ```sh
 gem install datadog_api_client -v {{< sdk-version "datadog-api-client-ruby" >}}
 ```
-#### 사용법
+#### 가이드
 ```ruby
 require 'datadog_api_client'
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
-#### 설치
+#### 인프라스트럭처 목록
 ```sh
 go mod init main && go get github.com/DataDog/datadog-api-client-go/v2/api/datadog
 ```
-#### 사용법
+#### 가이드
 ```go
 import (
         "github.com/DataDog/datadog-api-client-go/v2/api/datadog"
@@ -177,7 +181,7 @@ import (
 {{< /programming-lang >}}
 
 {{< programming-lang lang="typescript" >}}
-#### 설치
+#### 인프라스트럭처 목록
 패키지는 [@datadog/datadog-api-client][1] 아래에 있으며 NPM 또는 Yarn을 통해 설치할 수 있습니다:
 
 ```js
@@ -188,7 +192,7 @@ npm install @datadog/datadog-api-client
 yarn add @datadog/datadog-api-client
 ```
 
-#### 사용법
+#### 가이드
 ```js
 import { <VERSION> } from 'datadog-api-client';
 ```
