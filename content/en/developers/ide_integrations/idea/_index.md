@@ -16,6 +16,9 @@ further_reading:
 - link: "https://www.jetbrains.com/lp/toolbox/"
   tag: "External Site"
   text: "Learn about the JetBrains Toolbox."
+- link: "https://www.datadoghq.com/blog/datadog-ide-plugins/"
+  tag: "Blog"
+  text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
 ---
 
 ## Overview

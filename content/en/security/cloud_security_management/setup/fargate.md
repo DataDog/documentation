@@ -10,7 +10,7 @@ Use the following instructions to enable [CSM Threats][1] for Amazon ECS and EKS
 
 Datadog Cloud Security Management on AWS Fargate includes built-in threat detection for AWS Fargate process and file integrity monitoring (FIM) events as well as [100+ out-of-the-box rules][3].
 
-{{< img src="security/csm/csm_fargate_workflow.png" alt="Diagram showing the workflow for Cloud Security Management on AWS Fargate" width="80%">}}
+{{< img src="security/csm/csm_fargate_workflow2.png" alt="Diagram showing the workflow for Cloud Security Management on AWS Fargate" width="100%">}}
 
 ## Prerequisites
 

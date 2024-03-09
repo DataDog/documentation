@@ -333,15 +333,13 @@ Enable the database monitoring propagation feature using one of the following me
 
 2. Option `dbmPropagationMode` (default: `ENV['DD_DBM_PROPAGATION_MODE']`):
    ```javascript
-   tracer.use('pg', { dbmPropagationMode: 'full', service: 'my-db-service' })
+   tracer.init({ dbmPropagationMode: 'full' })
    ```
 
 Full example:
 ```javascript
 const pg = require('pg')
-const tracer = require('dd-trace').init()
-
-tracer.use('pg', { dbmPropagationMode: 'full', service: 'my-db-service' })
+const tracer = require('dd-trace').init({ dbmPropagationMode: 'full' })
 
 const client = new pg.Client({
 	user: 'postgres',

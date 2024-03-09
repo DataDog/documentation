@@ -109,7 +109,7 @@ The cost of an EBS volume has three components: IOPS, throughput, and storage. E
 - Workload idle: Cost of provisioned IOPS, throughput, or storage not being used by workloads. Storage cost is based on the maximum amount of storage used that day. IOPS and throughput costs are based on the average amount used that day. *Note: This tag is only available if you have enabled `Resource Collection` in your [**AWS Integration**][9]. To prevent being charged for `Cloud Security Posture Management`, ensure that during the `Resource Collection` setup, the `Cloud Security Posture Management` box is unchecked.*
 - Cluster idle: Cost of provisioned IOPS, throughput, or storage for volumes not claimed by any pods that day.
 
-**Note**: Persistent volume allocation is only supported in Kubernetes clusters.
+**Note**: Persistent volume allocation is only supported in Kubernetes clusters, and not available for pods that are part of a Kubernetes Deployment.
 
 ## Cost metrics
 

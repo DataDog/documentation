@@ -77,6 +77,18 @@ You can disable some files from uploading by setting the `iosDsyms`, `iosSourcem
 
 If you want to disable **all file uploads**, remove the `expo-datadog` from the list of plugins.
 
+### Add git repository data to your mapping files on Expo Application Services (EAS)
+
+If you are using EAS to build your Expo application, set `cli.requireCommit` to `true` in your `eas.json` file to add git repository data to your mapping files.
+
+```json
+{
+    "cli": {
+        "requireCommit": true
+    }
+}
+```
+
 ### Setting the Datadog site
 
 Run `eas secret:create` to set `DATADOG_SITE` to the host of your Datadog site, for example: `datadoghq.eu`. By default, `datadoghq.com` is used.
