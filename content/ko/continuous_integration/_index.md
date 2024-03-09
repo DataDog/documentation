@@ -8,9 +8,9 @@ cascade:
     - ci/cd
     - continuous integration
 further_reading:
-- link: https://app.datadoghq.com/release-notes?category=CI%20Visibility
+- link: https://app.datadoghq.com/release-notes?category=Software%20Delivery
   tag: 릴리스 노트
-  text: 최신 CI Visibility 릴리스를 확인하세요! (앱 로그인 필요)
+  text: 최신 소프트웨어 배포 릴리스를 확인하세요! (앱 로그인 필요)
 - link: https://www.datadoghq.com/blog/circleci-monitoring-datadog/
   tag: 블로그
   text: Datadog으로 CircleCI 환경을 모니터링하세요
@@ -26,6 +26,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/
   tag: 블로그
   text: 정적 웹 애플리케이션 모니터링을 위한 모범 사례를 확인하세요
+- link: https://www.datadoghq.com/blog/best-practices-for-ci-cd-monitoring/
+  tag: 블로그
+  text: CI/CD 모니터링 모범 사례
 kind: 설명서
 title: Continuous Integration Visibility
 ---
@@ -56,7 +59,7 @@ Datadog은 다음 CI 공급자와 협력하여 커밋이 파이프라인에 들�
 
 </br>
 
-`datadog-ci` CLI를 사용하여 파이프라인에서 [트레이스 명령][8]을 추적하고 [커스텀 태그와 메트릭 명령][9]을 사용하여 파이프라인 트레이스에 사용자 정의 텍스트 및 숫자 태그를 추가할 수 있습니다.
+`datadog-ci` CLI를 사용하여 파이프라인에서 [트레이스 명령][8]을 사용할 수 있을 뿐만 아니라 [커스텀 태그 및 측정 명령][9]을 사용하여 파이프라인 트레이스에 사용자 정의 텍스트 및 숫자 태그를 추가할 수 있습니다.
 
 ## 시작할 준비가 되셨나요?
 
@@ -73,4 +76,4 @@ CI 공급자와의 CI Visibility 설정 지침, 호환성 요구 사항에 대�
 [6]: /ko/monitors/types/ci/
 [7]: /ko/continuous_integration/explorer/
 [8]: /ko/continuous_integration/pipelines/custom_commands/
-[9]: /ko/continuous_integration/pipelines/custom_tags_and_metrics/
+[9]: /ko/continuous_integration/pipelines/custom_tags_and_measures/
