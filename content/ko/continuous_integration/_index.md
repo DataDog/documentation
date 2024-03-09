@@ -30,7 +30,7 @@ further_reading:
   tag: 블로그
   text: CI/CD 모니터링 모범 사례
 kind: 설명서
-title: Continuous Integration Visibility
+title: 지속적 통합 가시성
 ---
 
 {{< site-region region="gov" >}}
