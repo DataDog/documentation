@@ -133,44 +133,44 @@ import datadog
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
-#### 인프라스트럭처 목록
+#### 설치
 ```console
 pip3 install datadog-api-client
 ```
-#### 가이드
+#### 사용법
 ```python
 import datadog_api_client
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby-legacy" >}}
-#### 인프라스트럭처 목록
+#### 설치
 ```sh
 gem install dogapi
 ```
-#### 가이드
+#### 사용법
 ```ruby
 require 'dogapi'
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="ruby" >}}
-#### 인프라스트럭처 목록
+#### 설치
 ```sh
 gem install datadog_api_client -v {{< sdk-version "datadog-api-client-ruby" >}}
 ```
-#### 가이드
+#### 사용법
 ```ruby
 require 'datadog_api_client'
 ```
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
-#### 인프라스트럭처 목록
+#### 설치
 ```sh
 go mod init main && go get github.com/DataDog/datadog-api-client-go/v2/api/datadog
 ```
-#### 가이드
+#### 사용법
 ```go
 import (
         "github.com/DataDog/datadog-api-client-go/v2/api/datadog"
@@ -181,7 +181,7 @@ import (
 {{< /programming-lang >}}
 
 {{< programming-lang lang="typescript" >}}
-#### 인프라스트럭처 목록
+#### 설치
 패키지는 [@datadog/datadog-api-client][1] 아래에 있으며 NPM 또는 Yarn을 통해 설치할 수 있습니다:
 
 ```js
@@ -192,7 +192,7 @@ npm install @datadog/datadog-api-client
 yarn add @datadog/datadog-api-client
 ```
 
-#### 가이드
+#### 사용법
 ```js
 import { <VERSION> } from 'datadog-api-client';
 ```
