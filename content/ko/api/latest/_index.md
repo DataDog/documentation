@@ -13,7 +13,7 @@ further_reading:
   text: API 사용
 - link: /api/latest/scopes/
   tag: 설명서
-  text: 승인 범위
+  text: 인증 범위
 - link: /api/latest/rate-limits/
   tag: 설명서
   text: 속도 제한
@@ -36,7 +36,7 @@ API를 사용하려면 [![Postman에서 실행하세요][3]](https://god.gw.post
 [API 사용하기][4]는 엔드포인트에 대한 가이드입니다.
 
 **참고**: 
-   - API 및 애플리케이션 키를 사용하여 Datadog Postman 컬렉션의 Datadog 인증 환경을 설정합니다.
+   - API 및 애플리케이션 키를 사용하여 Datadog Postman 컬렉션의 Datadog Authentication 환경을 설정합니다. 
    - cURL 코드 예제에서는 BASH 및 GNU coreutils를 사용한다고 가정합니다. macOS에서는 [Homebrew 패키지 관리자][5]를 사용하여 coreutils를 설치할 수 있습니다: `brew install coreutils`
 
 ### 클라이언트 라이브러리
@@ -46,7 +46,7 @@ API를 사용하려면 [![Postman에서 실행하세요][3]](https://god.gw.post
 {{< programming-lang-wrapper langs="java,python-legacy,python,ruby-legacy,ruby,go,typescript" class="api-reference" >}}
 
 {{< programming-lang lang="java" >}}
-#### 인프라스트럭처 목록
+#### 설치
 Maven - 프로젝트의 POM에 이 종속성을 추가합니다:
 ```xml
 <dependency>
@@ -62,7 +62,7 @@ Gradle - 프로젝트의 빌드 파일에 이 종속성을 추가합니다:
 compile "com.datadoghq:datadog-api-client:{{< sdk-version "datadog-api-client-java" >}}"
 ```
 
-#### 가이드
+#### 사용법
 
 ```java
 import com.datadog.api.client.ApiClient;
@@ -122,11 +122,11 @@ application {
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python-legacy" >}}
-#### 인프라스트럭처 목록
+#### 설치
 ```sh
 pip install datadog
 ```
-#### 가이드
+#### 사용법
 ```python
 import datadog
 ```
