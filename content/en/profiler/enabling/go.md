@@ -121,6 +121,13 @@ To add detailed C function call information to CPU profiles, you may opt to use 
 
 **Note**: This library is considered experimental. It can cause (infrequent) deadlocks in programs that use C++ exceptions, or that use libraries such as `tcmalloc`, which also collect call stacks.
 
+## Profiling Third-Party Go Services
+
+Prefer the `dd-trace-go` profiling library for your Go services whenever possible.
+If you can't instrument your Go service, but you have access to the standard library [`net/http/pprof`][16] HTTP endpoints, use the [`go_pprof_scraper`][17] Datadog Agent integration to collect profiles.
+You will not have access to the full range of profiling features through this integration, however.
+The agent integration does not support [correlation with APM traces][8], [Profile Timelines][18], or [profile comparison][19] for allocation, block, and mutex profiles.
+
 ## Not sure what to do next?
 
 The [Getting Started with Profiler][14] guide takes a sample service with a performance problem and shows you how to use Continuous Profiler to understand and fix the problem.
@@ -144,3 +151,7 @@ The [Getting Started with Profiler][14] guide takes a sample service with a perf
 [13]: https://pkg.go.dev/github.com/ianlancetaylor/cgosymbolizer#pkg-overview
 [14]: /getting_started/profiler/
 [15]: /profiler/enabling/supported_versions/
+[16]: https://pkg.go.dev/net/http/pprof
+[17]: /integrations/go_pprof_scraper
+[18]: /profiler/profile_visualizations/?code-lang=go#timeline-view
+[19]: /profiler/compare_profiles
