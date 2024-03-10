@@ -1,0 +1,7 @@
+version: '3'
+services:
+  pa11y:
+    image: pa11y:local
+    command: "bash -c 'CI_PROJECT_DIR=./${OUTPUT_DIR} BASE_URL=host.docker.internal:1313 SINGLE_URL=${SINGLE_URL} node index.js'"
+    volumes:
+      - "./${OUTPUT_DIR}:/app/${OUTPUT_DIR}"

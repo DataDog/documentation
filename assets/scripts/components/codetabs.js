@@ -33,6 +33,8 @@ const initCodeTabs = () => {
                     anchor.dataset.lang = lang
                     anchor.href = '#'
                     anchor.innerText = title
+                    li.setAttribute('role', 'tab')
+                    li.setAttribute('aria-controls', lang)
                     li.appendChild(anchor)
                     navTabsElement.appendChild(li)
                 })
