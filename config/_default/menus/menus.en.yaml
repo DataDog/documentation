@@ -9397,6 +9397,10 @@ api:
         - AggregateCIAppTestEvents
       unstable: []
       order: 3
+  - name: CSM Threats
+    url: /api/latest/csm-threats/
+    identifier: csm-threats
+    generated: true
   - name: Case Management
     url: /api/latest/case-management/
     identifier: case-management
@@ -9757,6 +9761,78 @@ api:
         - DownloadCloudWorkloadPolicyFile
       unstable: []
       order: 1
+  - name: Get the latest CSM Threats policy
+    url: '#get-the-latest-csm-threats-policy'
+    identifier: cloud-workload-security-get-the-latest-csm-threats-policy
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DownloadCSMThreatsPolicy
+      unstable: []
+      order: 1
+  - name: Update a CSM Threats Agent rule
+    url: '#update-a-csm-threats-agent-rule'
+    identifier: cloud-workload-security-update-a-csm-threats-agent-rule
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateCSMThreatsAgentRule
+      unstable: []
+      order: 5
+  - name: Get a CSM Threats Agent rule
+    url: '#get-a-csm-threats-agent-rule'
+    identifier: cloud-workload-security-get-a-csm-threats-agent-rule
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetCSMThreatsAgentRule
+      unstable: []
+      order: 2
+  - name: Delete a CSM Threats Agent rule
+    url: '#delete-a-csm-threats-agent-rule'
+    identifier: cloud-workload-security-delete-a-csm-threats-agent-rule
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteCSMThreatsAgentRule
+      unstable: []
+      order: 6
+  - name: Create a CSM Threats Agent rule
+    url: '#create-a-csm-threats-agent-rule'
+    identifier: cloud-workload-security-create-a-csm-threats-agent-rule
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCSMThreatsAgentRule
+      unstable: []
+      order: 4
+  - name: Get all CSM Threats Agent rules
+    url: '#get-all-csm-threats-agent-rules'
+    identifier: cloud-workload-security-get-all-csm-threats-agent-rules
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListCSMThreatsAgentRules
+      unstable: []
+      order: 3
   - name: Cloudflare Integration
     url: /api/latest/cloudflare-integration/
     identifier: cloudflare-integration
