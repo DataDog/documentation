@@ -15,7 +15,74 @@ cascade:
         category: Getting Started
 ---
 
-{{< whatsnext desc="This section includes the following topics:">}}
+## Overview
+
+The Datadog platform provides observability at every phase of software development, so you can more easily build, test, monitor, debug, and enhance your software. The platform contains many products that can be used individually or combined into a comprehensive solution.
+
+The table below lists a few examples of Datadog products:
+
+<table>
+    <thead>
+        <th>Category</th>
+        <th>Product examples</th>
+    </thead>
+    <tr>
+        <td><p><strong>Development</strong></p></td>
+        <td>
+        <ul>
+        <li>Facilitate a remote pair-programming session with <a href="/coscreen/">CoScreen</a>.</li>
+        <li>Highlight code vulnerabilities in your text editor or on GitHub with <a href="/code_analysis/?tab=codevulnerabilities">Code Analysis</a>.</li></ul>
+        </td>
+    </tr>
+    <tr>
+        <td><p><strong>Testing</strong></p></td>
+        <td>
+            <ul>
+                <li>Block faulty code from deploying to production with <a href="/quality_gates/">Quality Gates</a>.</li>
+                <li>Simulate users around the globe to test your web app, API, or mobile application with <a href="/synthetics/">Synthetic Monitoring</a>.</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><p><strong>Monitoring</strong></p></td>
+        <td>
+            <ul>
+                <li>Ingest <a href="/logs/">logs</a>, <a href="/metrics/">metrics</a>, <a href="/events/">events</a>, and <a href="/tracing/glossary/#trace">network traces</a> with granular control over processing, aggregation, and <a href="/monitors/">alerting.</a></li>
+                <li>Assess host performance with <a href="/profiler/">Continuous Profiler</a>.</li>
+                <li>Assess application performance with <a href="/tracing/">Application Performance Monitoring</a>.</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><p><strong>Troubleshooting</strong></p></td>
+        <td>
+            <ul>
+                <li>Manage <a href="/error_tracking/">errors</a> and <a href="/service_management/incident_management/">incidents</a>, summarizing issues and suggesting fixes.</li>
+                <li>Measure user churn and detect user frustration with <a href="/real_user_monitoring/">Real User Monitoring</a>.</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><p><strong>Security</strong></p></td>
+        <td>
+            <ul>
+                <li>Detect threats and attacks with <a href="/security/">Datadog Security</a>.</li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+Additionally, hundreds of [integrations][1] allow you to layer Datadog features over the technologies you already use. For example, the [AWS integration][2] collects logs, events, and metrics from more than 90 AWS services.
+
+## Learn more
+
+### Take a course
+The Datadog Learning Center offers hands-on experience with the Datadog platform. The [Getting Started courses][3] cover observability practices, key Datadog concepts, and more.
+
+For the fastest introduction to navigating Datadog, try the [Quick Start course][4].
+
+### Dive deeper into a product area
+{{< whatsnext desc="Get started with one of the guides below:">}}
 {{< nextlink href="/getting_started/application" >}}<u>Datadog</u>: Discover how to use the Datadog UI: Dashboards, infrastructure list, maps, and more.{{< /nextlink >}}
 {{< nextlink href="/getting_started/site" >}}<u>Datadog Site</u>: Select the appropriate Datadog site for your region and security requirements.{{< /nextlink >}}
 {{< nextlink href="/getting_started/devsecops" >}}<u>DevSecOps Bundles</u>: Get started with the APM DevSecOps and Infrastructure DevSecOps bundles.{{< /nextlink >}}
@@ -43,3 +110,8 @@ cascade:
 {{< nextlink href="/getting_started/workflow_automation" >}}<u>Workflow Automation</u>: Automate end-to-end processes in response to alerts and security signals.{{< /nextlink >}}
 {{< nextlink href="/getting_started/learning_center" >}}<u>Learning Center</u>: Follow a learning path, take a self-guided class or lab, and explore the Datadog certification program.{{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: /getting_started/integrations/
+[2]: /integrations/amazon_web_services/
+[3]: https://learn.datadoghq.com/collections/getting-started
+[4]: https://learn.datadoghq.com/courses/course-quickstart
