@@ -735,7 +735,7 @@ datadogLogs.createLogger('signupLogger', {
 })
 ```
 
-It can now be used in a different part of the code with:
+It can then be used in a different part of the code with:
 
 ```javascript
 import { datadogLogs } from '@datadog/browser-logs'
@@ -758,7 +758,7 @@ window.DD_LOGS.onReady(function () {
 })
 ```
 
-It can now be used in a different part of the code with:
+It can then be used in a different part of the code with:
 
 ```javascript
 window.DD_LOGS.onReady(function () {
@@ -783,7 +783,7 @@ if (window.DD_LOGS) {
 }
 ```
 
-It can now be used in a different part of the code with:
+It can then be used in a different part of the code with:
 
 ```javascript
 if (window.DD_LOGS) {
