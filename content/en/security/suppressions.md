@@ -17,8 +17,6 @@ products:
 
 {{< product-availability >}}
 
-<!-- <div class="alert alert-warning">Suppressions are available for Cloud Security Management Threats and Cloud SIEM.</div> -->
-
 ## Overview
 
 Suppressions are specific conditions for when a signal should not be generated, which can improve the accuracy and relevance of the signals that are generated.
