@@ -64,6 +64,8 @@ This machine's requirements are listed in the table below. PowerShell scripting 
 | RAM | 4GB minimum. 8GB recommended. |
 | CPU | Intel or AMD processor with 64-bit support. 2.8 GHz or faster processor recommended. |
 
+**Note:** In order for Windows Private Locations to run browser tests, the browsers (e.g. Chrome, Edge, or Firefox) must be installed on the Windows computer.
+
 You must install .NET version 4.7.2 or later on your computer before using the MSI installer. 
 
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-1.43.0.amd64.msi
