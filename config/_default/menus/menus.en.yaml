@@ -650,7 +650,7 @@ main:
     identifier: otel_host_metadata
     parent: otel_schema
     weight: 403
-  - name: Hostnames
+  - name: Hostname Mapping
     url: opentelemetry/schema_semantics/hostname/
     identifier: otel_hostname
     parent: otel_schema
