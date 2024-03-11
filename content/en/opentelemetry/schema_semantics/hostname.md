@@ -11,7 +11,7 @@ further_reading:
 
 OpenTelemetry defines certain semantic conventions related to host names. If an OTLP payload for any signal type has known hostname attributes, Datadog honors these conventions and tries to use its value as a hostname. The default hostname resolution algorithm is built with compatibility with the rest of Datadog products in mind, but you can override it if needed.
 
-This algorithm is used in the [Datadog exporter][3] as well as the [OTLP ingest pipeline in the Datadog Agent][2]. When using the [recommended configuration][6] for the Datadog exporter, the resource detection processor adds the necessary attributes to the payload to ensure accurate hostname resolution.
+This algorithm is used in the [Datadog exporter][3] as well as the [OTLP ingest pipeline in the Datadog Agent][2]. When using the [recommended configuration][4] for the Datadog exporter, the resource detection processor adds the necessary attributes to the payload to ensure accurate hostname resolution.
 
 ## Conventions used to determine the hostname
 
@@ -26,7 +26,7 @@ The following sections explain each set of specific conventions in detail.
 
 ### General hostname semantic conventions
 
-The `host` and `datadog.host.name` conventions are Datadog-specific conventions. They are considered first and can be used to override the hostname detected using the usual OpenTelemetry semantic conventions. We recommend using the `datadog.host.name` convention since it is namespaced and it is less likely to conflict with other vendor-specific behavior.
+The `host` and `datadog.host.name` conventions are Datadog-specific conventions. They are considered first and can be used to override the hostname detected using the usual OpenTelemetry semantic conventions. Prefer using the `datadog.host.name` convention since it is namespaced and it is less likely to conflict with other vendor-specific behavior.
 
 When using the OpenTelemetry Collector, you can use the `transform` processor to set the `datadog.host.name` convention in your pipelines. For example, to change set the hostname as `my-custom-hostname` in all metrics, traces and logs on a given pipeline, you can use the following configuration:
 
@@ -46,14 +46,14 @@ Don't forget to add the `transform` processor to your pipelines.
 
 The `cloud.provider` attribute is used to determine the cloud provider. Further attributes are used to determine the hostname for each specific platform. If `cloud.provider` or any of the attributes are missing, the next set of conventions is checked.
 
-#### AWS
+#### Amazon Web Services
 
 These conventions are checked if `cloud.provider` has the value `aws`:
 
-1. Check `aws.ecs.launchtype` to determine if we are running on ECS Fargate. If so, since this is a serverless environment, use `aws.ecs.task.arn` as the identifier with tag name `task_arn`.
-1. Use `host.id` as the hostname otherwise. This will match the EC2 instance id.
+1. Check `aws.ecs.launchtype` to determine if the payload comes from an ECS Fargate task. If so, since this is a serverless environment, use `aws.ecs.task.arn` as the identifier with tag name `task_arn`.
+1. Use `host.id` as the hostname otherwise. This matches the EC2 instance id.
 
-#### GCP
+#### Google Cloud
 
 These conventions are checked if `cloud.provider` has the value `gcp`:
 
@@ -80,13 +80,15 @@ The fallback hostname logic is used. This logic generates a hostname for the mac
 the Datadog exporter is running which is compatible with the rest of Datadog products.
 You can use the `hostname` setting to set a fallback hostname.
 
-This may lead to incorrect hostnames in [gateway deployments][5]. To avoid this, use the `resource detection` processor in your pipelines to ensure accurate hostname resolution.
+This may lead to incorrect hostnames in [gateway deployments][1]. To avoid this, use the `resource detection` processor in your pipelines to ensure accurate hostname resolution.
 
+[1]: https://opentelemetry.io/docs/collector/deployment/gateway/
 {{% /tab %}}
 {{% tab "OTLP ingest pipeline in the Datadog Agent" %}}
 
-The Datadog Agent hostname is used. See [How does Datadog determine the Agent hostname?][4] for more information.
+The Datadog Agent hostname is used. See [How does Datadog determine the Agent hostname?][1] for more information.
 
+[1]: /agent/faq/how-datadog-agent-determines-the-hostname/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -107,6 +109,4 @@ The following host names are deemed invalid and discarded:
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#resource-detection-processor
 [2]: /opentelemetry/interoperability/otlp_ingest_in_the_agent
 [3]: /opentelemetry/collector_exporter/otel_collector_datadog_exporter
-[4]: /agent/faq/how-datadog-agent-determines-the-hostname/
-[5]: https://opentelemetry.io/docs/collector/deployment/gateway/
-[6]: /opentelemetry/collector_exporter/hostname_tagging/?tab=host
+[4]: /opentelemetry/collector_exporter/hostname_tagging/?tab=host
