@@ -52,7 +52,7 @@ network_devices:
       privProtocol: "AES"
 ```
 
-**Note**: Multiple v3 users and passwords are supported as of Datadog Agent `7.50` or higher.
+**Note**: Multiple v3 users and passwords are supported as of Datadog Agent `7.51` or higher.
 
 ## Device namespaces
 
