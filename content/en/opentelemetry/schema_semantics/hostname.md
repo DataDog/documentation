@@ -9,26 +9,26 @@ further_reading:
 
 ## Overview
 
-OpenTelemetry defines certain semantic conventions related to host names. If an OTLP payload for any signal type has known hostname attributes, Datadog honors these conventions and tries to use its value as a hostname. The default hostname resolution algorithm is built with compatibility with the rest of Datadog products in mind, but you can override it if needed.
+OpenTelemetry defines certain semantic conventions related to hostnames. If an OpenTelemetry Protocol (OTLP) payload for any signal type has known hostname attributes, Datadog honors these conventions and tries to use its value as a hostname. The default hostname resolution algorithm is built with compatibility with the rest of Datadog products in mind, but you can override it if needed.
 
-This algorithm is used in the [Datadog exporter][3] as well as the [OTLP ingest pipeline in the Datadog Agent][2]. When using the [recommended configuration][4] for the Datadog exporter, the resource detection processor adds the necessary attributes to the payload to ensure accurate hostname resolution.
+This algorithm is used in the [Datadog exporter][3] as well as the [OTLP ingest pipeline in the Datadog Agent][2]. When using the [recommended configuration][4] for the Datadog exporter, the [resource detection processor][1] adds the necessary attributes to the payload to ensure accurate hostname resolution.
 
 ## Conventions used to determine the hostname
 
 Conventions are checked in the following order, and the first valid hostname is used. If no valid conventions are present, the fallback hostname logic is used. This fallback logic varies by product.
 
-1. Check the general `host` and `datadog.host.name` Datadog-specific conventions.
-1. Cloud provider-specific conventions for AWS, Azure and GCP.
-1. Kubernetes-specific conventions.
-1. Fall back to `host.id` and `host.name` if no specific conventions are found.
+1. Check Datadog-specific conventions: `host` and `datadog.host.name`.
+1. Check cloud provider-specific conventions for AWS, Azure and GCP.
+1. Check Kubernetes-specific conventions.
+1. If no specific conventions are found, fall back to `host.id` and `host.name`.
 
-The following sections explain each set of specific conventions in detail.
+The following sections explain each set of conventions in more detail.
 
 ### General hostname semantic conventions
 
-The `host` and `datadog.host.name` conventions are Datadog-specific conventions. They are considered first and can be used to override the hostname detected using the usual OpenTelemetry semantic conventions. Prefer using the `datadog.host.name` convention since it is namespaced and it is less likely to conflict with other vendor-specific behavior.
+The `host` and `datadog.host.name` conventions are Datadog-specific conventions. They are considered first and can be used to override the hostname detected using the usual OpenTelemetry semantic conventions. Prefer using the `datadog.host.name` convention since it is namespaced, and it is less likely to conflict with other vendor-specific behavior.
 
-When using the OpenTelemetry Collector, you can use the `transform` processor to set the `datadog.host.name` convention in your pipelines. For example, to change set the hostname as `my-custom-hostname` in all metrics, traces and logs on a given pipeline, you can use the following configuration:
+When using the OpenTelemetry Collector, you can use the `transform` processor to set the `datadog.host.name` convention in your pipelines. For example, to set the hostname as `my-custom-hostname` in all metrics, traces, and logs on a given pipeline, use the following configuration:
 
 ```yaml
 transform:
@@ -48,22 +48,23 @@ The `cloud.provider` attribute is used to determine the cloud provider. Further 
 
 #### Amazon Web Services
 
-These conventions are checked if `cloud.provider` has the value `aws`:
+If `cloud.provider` has the value `aws`, the following conventions are checked:
 
-1. Check `aws.ecs.launchtype` to determine if the payload comes from an ECS Fargate task. If so, since this is a serverless environment, use `aws.ecs.task.arn` as the identifier with tag name `task_arn`.
-1. Use `host.id` as the hostname otherwise. This matches the EC2 instance id.
+1. Check `aws.ecs.launchtype` to determine if the payload comes from an ECS Fargate task. If so, use `aws.ecs.task.arn` as the identifier with tag name `task_arn`.
+1. Otherwise, use `host.id` as the hostname. This matches the EC2 instance id.
 
 #### Google Cloud
 
-These conventions are checked if `cloud.provider` has the value `gcp`:
+If `cloud.provider` has the value `gcp`, the following conventions are checked:
 
-1. Check that both `host.name` and `cloud.account.id` are available and have the expected format, remove the prefix from `host.name` and merge both into a hostname.
+1. Check that both `host.name` and `cloud.account.id` are available and have the expected format, remove the prefix from `host.name`, and merge both into a hostname.
 
 #### Azure
 
-These conventions are checked if `cloud.provider` has the value `azure`:
+If `cloud.provider` has the value `azure`, the following conventions are checked:
 
-1. Use `host.id` as the hostname if it is available and has the expected format, fall back to `host.name` otherwise.
+1. Use `host.id` as the hostname if it is available and has the expected format.
+1. Otherwise, fall back to `host.name`.
 
 ### Kubernetes-specific conventions
 
@@ -74,10 +75,10 @@ If `k8s.node.name` and `k8s.cluster.name` are available, the hostname is set to 
 If no valid host names are found, the behavior varies depending on the ingestion path. 
 
 {{< tabs >}}
-{{% tab "Datadog exporter" %}}
+{{% tab "Datadog Exporter" %}}
 
 The fallback hostname logic is used. This logic generates a hostname for the machine where 
-the Datadog exporter is running which is compatible with the rest of Datadog products.
+the Datadog Exporter is running, which is compatible with the rest of Datadog products.
 You can use the `hostname` setting to set a fallback hostname.
 
 This may lead to incorrect hostnames in [gateway deployments][1]. To avoid this, use the `resource detection` processor in your pipelines to ensure accurate hostname resolution.
@@ -95,12 +96,12 @@ The Datadog Agent hostname is used. See [How does Datadog determine the Agent ho
 ## Invalid hostnames
 
 The following host names are deemed invalid and discarded:
-1. `0.0.0.0`
-1. `127.0.0.1`
-1. `localhost`
-1. `localhost.localdomain`
-1. `localhost6.localdomain6`
-1. `ip6-localhost`
+- `0.0.0.0`
+- `127.0.0.1`
+- `localhost`
+- `localhost.localdomain`
+- `localhost6.localdomain6`
+- `ip6-localhost`
 
 ## Further reading
 
