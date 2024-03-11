@@ -234,19 +234,18 @@ To enable single step instrumentation with Helm:
 
 You can choose to selectively instrument specific namespaces or choose to not instrument them.
 
-To enable instrumentation for specific namespaces, replace `enabled: true` with `enabledNamespaces` configuration in your `datadog-values.yaml` file:
+To enable instrumentation for specific namespaces, add `enabledNamespaces` configuration to your `datadog-values.yaml` file:
 {{< highlight yaml "hl_lines=6-8" >}}
       datadog:
         apiKeyExistingSecret: datadog-secret
         site: <DATADOG_SITE>
         apm:
           instrumentation:
+            enabled:true
             enabledNamespaces: # Add namespaces to instrument
                - namespace_1
                - namespace_2
  {{< /highlight >}}
-
-<div class="alert alert-info">The <code>enabled: true</code> option enables instrumentation for the entire cluster. You need to remove this to only enable instrumentation for specific namespaces.</a></div>
 
 To disable instrumentation for specific namespaces, add the `disabledNamespaces` configuration to your `datadog-values.yaml` file:
 {{< highlight yaml "hl_lines=7-9" >}}
