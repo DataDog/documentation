@@ -78,7 +78,7 @@ To get the cluster name, the following conventions are checked:
 
 ### `host.id` and `host.name`
 
-If none of the above conventions are present, the `host.id` and `host.name` attributes are used as is to determine the hostname. 
+If none of the above conventions are present, the `host.id` and `host.name` attributes are used as-is to determine the hostname. 
 
 **Note:** The OpenTelemetry specification allows `host.id` and `host.name` to have values that may not match those used by other Datadog products in a given environment. If using multiple Datadog products to monitor the same host, you may have to override the hostname using `datadog.host.name` to ensure consistency.
 
