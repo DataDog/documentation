@@ -9,7 +9,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_athena/
 draft: false
 git_integration_title: amazon_athena
 has_logo: true
-integration_id: amazon-athena
+integration_id: ''
 integration_title: Amazon Athena
 integration_version: ''
 is_public: true

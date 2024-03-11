@@ -1,5 +1,6 @@
 ---
-title: (LEGACY) Transforms
+title: Transforms
+legacy: true
 ---
 
 {{< site-region region="gov" >}}

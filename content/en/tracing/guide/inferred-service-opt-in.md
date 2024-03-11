@@ -44,18 +44,48 @@ To opt in, you must adjust your Datadog Agent and APM Tracer configurations. Che
 ### Datadog Agent configuration
 
 Requirements:
-- Datadog Agent version >= [7.45.0][4].
+- Datadog Agent version >= [7.50.3][4].
 
 Set the following in your `datadog.yaml` [configuration file][5]:
-- `DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true`
-- `DD_APM_PEER_SERVICE_AGGREGATION=true`
+
+{{< code-block lang="yaml" filename="datadog.yaml" collapsible="true" >}}
+
+DD_APM_COMPUTE_STATS_BY_SPAN_KIND=true 
+DD_APM_PEER_TAGS_AGGREGATION=true
+DD_APM_PEER_TAGS='["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","bucketname","cassandra.cluster","cassandra.keyspace","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.system","grpc.host","hazelcast.instance","hostname","http.host","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]'
+
+{{< /code-block >}}
+
+### OpenTelemetry Collector 
+
+Minimum version recommended: opentelemetry-collector-contrib >= [v0.95.0][7].
+
+Example [collector.yaml][6].
+
+{{< code-block lang="yaml"  collapsible="true" >}}
+
+connectors:
+  datadog/connector:
+    traces:
+      compute_stats_by_span_kind: true
+      peer_tags_aggregation: true
+      peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","bucketname","cassandra.cluster","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.system","grpc.host","hazelcast.instance","hostname","http.host","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]
+
+{{< /code-block >}}
+
+If your collector version is below [v0.95.0][7], use an exporter configuration with the following `peer_tags`:
 
 
-### OpenTelemetry Collector Datadog Exporter configuration
+{{< code-block lang="yaml" collapsible="true" >}}
 
-Set the following in your `collector.yaml` [configuration file][6]:
-- `compute_stats_by_span_kind=true`
-- `peer_service_aggregation=true`
+exporters:
+  datadog:
+    traces:
+      compute_stats_by_span_kind: true
+      peer_tags_aggregation: true
+      peer_tags: ["_dd.base_service","amqp.destination","amqp.exchange","amqp.queue","aws.queue.name","bucketname","cassandra.cluster","db.cassandra.contact.points","db.couchbase.seed.nodes","db.hostname","db.instance","db.name","db.system","grpc.host","hazelcast.instance","hostname","http.host","messaging.destination","messaging.destination.name","messaging.kafka.bootstrap.servers","messaging.rabbitmq.exchange","messaging.system","mongodb.db","msmq.queue.path","net.peer.name","network.destination.name","peer.hostname","peer.service","queuename","rpc.service","rpc.system","server.address","streamname","tablename","topicname"]   
+
+{{< /code-block >}}
 
 
 ### APM tracer configuration
@@ -71,7 +101,6 @@ To opt in, add the following environment variables or system properties to your 
 
 | Environment variable | System property |
 | ---  | ----------- |
-| `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true` | `-Ddd.trace.peer.service.defaults.enabled=true` |
 | `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `-Ddd.trace.remove.integration-service-names.enabled=true` |
 
 Remove the following settings from your configuration:
@@ -110,7 +139,6 @@ To opt in, add the following environment variables or system properties to your 
 
 | Environment variable | System property |
 | ---  | ----------- |
-| `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true` | `WithPeerServiceDefaultsEnabled(true)` |
 | `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `WithGlobalServiceName(true)` |
 
 #### Peer service mapping
@@ -141,7 +169,6 @@ To opt in, add the following environment variables or system properties to your 
 
 | Environment variable | System property |
 | ---  | ----------- |
-| `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true` | `spanComputePeerService=true` |
 | `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `spanRemoveIntegrationFromService=true` |
 
 #### Peer service mapping
@@ -173,7 +200,6 @@ To opt in, add the following environment variables or system properties to your 
 
 | Environment variable | System property |
 | ---  | ----------- |
-| `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true` | `datadog.trace.peer_service_defaults_enabled=true` |
 | `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true` | `datadog.trace.remove_integration_service_names_enabled=true` |
 
 #### Peer service mapping
@@ -199,8 +225,7 @@ DD_TRACE_PEER_SERVICE_MAPPING=10.0.32.3:my-service
 
 The minimum .NET tracer version required is [v2.35.0][1]. Regular updates to the latest version are recommended to access changes and bug fixes.
 
-To opt in, add the following environment variables to your tracer settings or system properties:
-- `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`
+To opt in, add the following environment variable to your tracer settings or system properties:
 - `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
 
 #### Peer service mapping
@@ -230,7 +255,6 @@ The minimum Python tracer version required is [v1.16.0][1]. Regular updates to t
 To opt in, add the following environment variables to your tracer settings or system properties:
 
 Add the following environment variables to your tracer settings or system properties:
-- `DD_TRACE_PEER_SERVICE_DEFAULTS_ENABLED=true`
 - `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED=true`
 
 #### Peer service mapping
@@ -305,6 +329,7 @@ Update those items to use the global default service tag (`service:<DD_SERVICE>`
 [1]: /tracing/services/service_page/
 [2]: /tracing/services/services_map/
 [3]: /tracing/service_catalog/
-[4]: https://github.com/DataDog/datadog-agent/releases/tag/7.45.0
+[4]: https://github.com/DataDog/datadog-agent/releases/tag/7.50.3
 [5]: /agent/guide/agent-configuration-files/?tab=agentv6v7
-[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L328-L341
+[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/collector.yaml#L335-L357
+[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases

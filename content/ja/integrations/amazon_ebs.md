@@ -12,7 +12,7 @@ doc_link: https://docs.datadoghq.com/integrations/amazon_ebs/
 draft: false
 git_integration_title: amazon_ebs
 has_logo: true
-integration_id: amazon-ebs
+integration_id: ''
 integration_title: Amazon Elastic Block Store
 integration_version: ''
 is_public: true
