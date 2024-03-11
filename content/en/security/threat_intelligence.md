@@ -65,9 +65,10 @@ Sources, categories, and intents are available as facets and filters on relevant
 | Category | Intention | Entity Types | Product Use Cases | Primary Products |
 |----------|----------|--------------|----------|------------------|
 | residential_proxy | suspicious | IP addresses | Reputation for credential stuffing and fraud | ASM and Cloud SIEM |
-| malware_proxy | suspicious | IP addresses | Reputation for automated application abuse and anomalous processes | Cloud SIEM |
-| malware | malicious | application library versions, file hashes | Malicious packages and communication with mining pools| ASM, CWS |
-| scanner | suspicious | IP addresses | Reputation for scanners | ASM, Cloud SIEM |
+| botnet_proxy | suspicious | IP addresses | Reputation for being part of a botnet and contributing to distributed attacks | ASM and Cloud SIEM |
+| malware | malicious | application library versions, file hashes | Malicious packages and communication with mining pools| CWS |
+| scanner | suspicious | IP addresses | Reputation for scanners | ASM and Cloud SIEM |
+| hosting_proxy | suspicious | IP addresses | Datacenter IPs with a reputation of abuse, such as for distributed credential stuffing attacks | ASM and Cloud SIEM |
 | Tor | suspicious | IP addresses  | Corporate policy violations for user activity | ASM and Cloud SIEM |
 
 ### Threat Intelligence Intents

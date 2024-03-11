@@ -18,9 +18,9 @@ further_reading:
 
 ## Overview
 
-Notifications are a key component of monitors that keep your team informed of issues and support troubleshooting. When [creating your monitor][1], add to the **Say what's happening** and **Notify your team** sections.
+Notifications are a key component of monitors that keep your team informed of issues and support troubleshooting. When [creating your monitor][1], add to the **Notify your team** section.
 
-## Say what's happening
+## Notify your team
 
 Use this section to set the notifications sent to your team.
 
@@ -65,7 +65,7 @@ If renotification is enabled, you are given the option to include an escalation 
 The escalation message can be added in the following ways:
 
 * In the `{{#is_renotify}}` block in the original notification message (recommended).
-* In the *Renotification message* field in the `Say what's happening` section.
+* In the *Renotification message* field in the `Notify your team` section.
 * With the `escalation_message` attribute in the API.
 
 If you use the `{{#is_renotify}}` block, the original notification message is also included in the renotification, so:

@@ -15,7 +15,7 @@ further_reading:
   text: 'CloudHealth + Datadog: クラウドアセットを効果的に管理'
 git_integration_title: amazon_sagemaker
 has_logo: true
-integration_id: amazon-sagemaker
+integration_id: ''
 integration_title: Amazon SageMaker
 integration_version: ''
 is_public: true
