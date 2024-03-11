@@ -30,7 +30,7 @@ Update Markdown-supported dashboard descriptions or associate [teams][1] with a 
 1. Click on the dashboard title or description to edit them. 
 1. Click the check button, to change the title.
 1. Select up to 5 teams from the **Teams** dropdown.
-1. (Optional) Add `[[suggested_dashboards]]` inside the dashboard description for a list of suggested dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other 
+1. (Optional) Add `[[suggested_dashboards]]` inside the dashboard description for a list of suggested dashboards. These dashboards are recommended based on the user activity in your organization and how often users go from this dashboard to other dashboards.
 
 ## Template variables
 
@@ -60,7 +60,7 @@ Enable notifications tracking to receive change notifications for a dashboard. A
 When notifications are activated for a dashboard, an event is created in the [Events Explorer][5]. This event provides information on text changes, widget changes, dashboard cloning, and dashboard deletion, along with the name of the user performing the action. View change events for a specific dashboard in the event explorer by searching:
 
 ```text
-tags:(audit AND dash) <DASHBOARD NAME>
+tags:(audit AND dash) <DASHBOARD_NAME>
 ```
 
 ### Copy, import, or export dashboard JSON
@@ -93,7 +93,7 @@ Use granular access controls to limit the [roles][6] that may edit a particular 
 1. Use the dropdown to select one or more roles, teams, or users that may edit the dashboard.
 1. Click **Add**.
 1. The dialog box updates to show that the role you selected has the **Editor** permission.
-1. Click **Save**
+1. Click **Save**.
 
 **Note:** To maintain your edit access to the dashboard, the system requires you to include at least one role that you are a member of before saving. For more information about roles, see the [RBAC documentation][6].
 
