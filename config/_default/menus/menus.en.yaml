@@ -4572,31 +4572,56 @@ main:
     parent: mobile_and_tv_monitoring
     identifier: rum_mobile_troubleshooting
     weight: 208
+  - name: Product Analytics
+    identifier: rum_product_analytics
+    url: real_user_monitoring/product_analytics
+    parent: rum
+    weight: 3
+  - name: Sankey Diagrams
+    url: real_user_monitoring/product_analytics/sankey
+    parent: rum_product_analytics
+    identifier: rum_sankey
+    weight: 301
+  - name: Funnel Analysis
+    url: real_user_monitoring/product_analytics/funnel_analysis
+    parent: rum_product_analytics
+    identifier: rum_funnel_analysis
+    weight: 302
+  - name: Retention Analysis
+    url: real_user_monitoring/product_analytics/retention_analysis
+    parent: rum_product_analytics
+    identifier: rum_retention_analysis
+    weight: 303
+  - name: Heatmaps
+    url: real_user_monitoring/product_analytics/heatmaps
+    parent: rum_product_analytics
+    identifier: rum_heatmaps
+    weight: 304
   - name: Session Replay
     url: real_user_monitoring/session_replay/
     parent: rum
     identifier: rum_session_replay
-    weight: 3
+    weight: 4
   - name: Mobile
     url: real_user_monitoring/session_replay/mobile
     parent: rum_session_replay
     identifier: rum_session_replay_mobile
-    weight: 301
+    weight: 401
   - name: Browser Privacy Options
     url: real_user_monitoring/session_replay/privacy_options
     parent: rum_session_replay
     identifier: rum_session_replay_privacy_options
-    weight: 302
+    weight: 402
   - name: Browser Developer Tools
     url: real_user_monitoring/session_replay/developer_tools
     parent: rum_session_replay
     identifier: rum_session_replay_developer_tools
-    weight: 303
+    weight: 403
   - name: Browser Troubleshooting
     url: real_user_monitoring/session_replay/troubleshooting
     parent: rum_session_replay
     identifier: rum_session_replay_troubleshooting
-    weight: 304
+    weight: 404
   - name: Playlists
     url: real_user_monitoring/session_replay/playlists
     parent: rum_session_replay
@@ -9377,6 +9402,10 @@ api:
         - AggregateCIAppTestEvents
       unstable: []
       order: 3
+  - name: CSM Threats
+    url: /api/latest/csm-threats/
+    identifier: csm-threats
+    generated: true
   - name: Case Management
     url: /api/latest/case-management/
     identifier: case-management
@@ -9737,6 +9766,78 @@ api:
         - DownloadCloudWorkloadPolicyFile
       unstable: []
       order: 1
+  - name: Get the latest CSM Threats policy
+    url: '#get-the-latest-csm-threats-policy'
+    identifier: cloud-workload-security-get-the-latest-csm-threats-policy
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DownloadCSMThreatsPolicy
+      unstable: []
+      order: 1
+  - name: Update a CSM Threats Agent rule
+    url: '#update-a-csm-threats-agent-rule'
+    identifier: cloud-workload-security-update-a-csm-threats-agent-rule
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateCSMThreatsAgentRule
+      unstable: []
+      order: 5
+  - name: Get a CSM Threats Agent rule
+    url: '#get-a-csm-threats-agent-rule'
+    identifier: cloud-workload-security-get-a-csm-threats-agent-rule
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetCSMThreatsAgentRule
+      unstable: []
+      order: 2
+  - name: Delete a CSM Threats Agent rule
+    url: '#delete-a-csm-threats-agent-rule'
+    identifier: cloud-workload-security-delete-a-csm-threats-agent-rule
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteCSMThreatsAgentRule
+      unstable: []
+      order: 6
+  - name: Create a CSM Threats Agent rule
+    url: '#create-a-csm-threats-agent-rule'
+    identifier: cloud-workload-security-create-a-csm-threats-agent-rule
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateCSMThreatsAgentRule
+      unstable: []
+      order: 4
+  - name: Get all CSM Threats Agent rules
+    url: '#get-all-csm-threats-agent-rules'
+    identifier: cloud-workload-security-get-all-csm-threats-agent-rules
+    parent: cloud-workload-security
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListCSMThreatsAgentRules
+      unstable: []
+      order: 3
   - name: Cloudflare Integration
     url: /api/latest/cloudflare-integration/
     identifier: cloudflare-integration

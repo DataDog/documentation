@@ -2,6 +2,8 @@
 title: Funnel Analysis
 kind: documentation
 disable_toc: false
+aliases:
+- /real_user_monitoring/funnel_analysis
 further_reading:
 - link: "/real_user_monitoring/explorer/"
   tag: "Documentation"

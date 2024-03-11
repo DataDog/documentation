@@ -2,6 +2,8 @@
 title: Heatmaps
 kind: documentation
 description: Heatmaps are a type of visualization allowing you to see where users click on your website.
+aliases:
+- /real_user_monitoring/heatmaps
 further_reading:
 - link: '/real_user_monitoring/session_replay/'
   tag: 'Documentation'
