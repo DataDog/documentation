@@ -4624,31 +4624,31 @@ main:
     weight: 305
   - name: Platform
     identifier: real_user_monitoring_platform
-    url: real_user_monitoring_platform
+    url: real_user_monitoring/platform
     parent: rum
     weight: 4
   - name: Dashboards
-    url: real_user_monitoring/dashboards/
-    parent: real_user_monitoring_platform
+    url: real_user_monitoring/platform/dashboards/
+    parent: rum_platform
     identifier: rum_dashboards
     weight: 401
   - name: Performance
-    url: real_user_monitoring/dashboards/performance
+    url: real_user_monitoring/platform/dashboards/performance
     parent: rum_dashboards
     identifier: rum_dashboards_performance
     weight: 101
   - name: Testing and Deployment
-    url: real_user_monitoring/dashboards/testing_and_deployment
+    url: real_user_monitoring/platform/dashboards/testing_and_deployment
     parent: rum_dashboards
     identifier: rum_dashboards_testing_and_deployment
     weight: 102
   - name: Usage
-    url: real_user_monitoring/dashboards/usage
+    url: real_user_monitoring/platform/dashboards/usage
     parent: rum_dashboards
     identifier: rum_dashboards_usage
     weight: 103
   - name: Errors
-    url: real_user_monitoring/dashboards/errors
+    url: real_user_monitoring/platform/dashboards/errors
     parent: rum_dashboards
     identifier: rum_dashboards_errors
     weight: 104
