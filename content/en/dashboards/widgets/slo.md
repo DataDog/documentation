@@ -61,7 +61,10 @@ If you are visualizing an SLO with multiple groups or a monitor-based SLO with m
 
 When you set the `View mode` to `Groups`, `Monitors`, or `Both`:
 - The groups are sorted by ascending status in the smallest time window by default. After adding the widget to a dashboard, you have the ability to sort by status for any of the configured time windows through the widget UI.
-- For metric-based and Time Slice SLOs, the widget displays *all* underlying groups of the SLO. For monitor-based SLOs, the widget displays up to 20 groups if specific groups have been selected for the SLO, or it displays the 5 groups with the lowest status percentages if no specific groups have been selected.  
+- For metric-based and Time Slice SLOs, the widget displays *all* underlying groups of the SLO. For monitor-based SLOs, the widget displays:
+  + Up to 20 groups if specific groups have been selected for the SLO, 
+  + All groups if the SLO contains up to 2,000 groups (and no specific groups have been selected), or
+  + No groups if the SLO contains more than 2,000 groups (and no specific groups have been selected)
 
 **Note:** For monitor-based SLOs, you can only use the `Overall` view mode when the `Global Time` time window option is selected. 
 
