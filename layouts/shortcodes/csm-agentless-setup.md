@@ -4,7 +4,7 @@ There are two ways to deploy Agentless scanners in your environment, manually us
 
 **Note**: When using Agentless Scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends to setup Agentless Scanning with Terraform as the default template, as this also avoids cross-region networking. 
 
-To establish estimates on scanner costs, reach out to your Datadog Sales Representative.
+To establish estimates on scanner costs, reach out to your [Datadog Sales][7] or [Customer Success][8] representative.
 
 ### Terraform
 
@@ -34,9 +34,13 @@ The following diagram illustrates how Agentless scanning works when deployed wit
 
 **Note**: The actual data that is scanned remains within your infrastructure, and only the findings are reported back to Datadog.
 
-- Resource Exclusion
-- How to stop certain resources from being scanned
-- How to disable
+## Disabling Agentless Scanning
+To disable Agentless Scanning through the cloud formation template, remove roles, or the EC2 scanner instance.
+
+## Resource exclusion
+
+To exclude volumes or Lambda resources in AWS, set the tag `DatadogAgentlessScanner:false`.
+
 
 
 [1]: /security/vulnerabilities
@@ -46,4 +50,6 @@ The following diagram illustrates how Agentless scanning works when deployed wit
 [5]: https://github.com/DataDog/terraform-datadog-agentless-scanner/blob/main/README.md
 [6]: /security/cloud_security_management/setup/agentless_scanning/#terraform
 [7]: /security/cloud_security_management/setup/agentless_scanning/#aws-integration
+[7]: mailto:sales@datadoghq.com
+[8]: mailto:success@datadoghq.com
 

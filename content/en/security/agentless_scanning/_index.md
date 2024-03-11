@@ -29,13 +29,13 @@ The following table provides a summary of Agentless scanning technologies in rel
 | Host Filesystem             | Btrfs, Ext2, Ext3, Ext4, xfs                                |
 | Package Manager             | Deb (debian, ubuntu) <br> RPM (amazon-linux, fedora, redhat, centos) <br> APK (alpine) |
 | Encryption                  | AWS </br> Unencrypted </br> Encrypted - Platform Managed Key (PMK) </br> Encrypted - Customer Managed Key (CMK) is **not** supported |
-| Container runtime           | Docker, containerd                                           |
+| Container runtime           | Docker, containerd </br> CRI-O is **not** supported                                         |
 | Serverless                  | AWS, AWS Lambda                                             |
 | Serverless languages        | .Net, Python, Java, Ruby, Node.js, Go                        |
 
 ## How it works
 
-After [setting up Agentless scanning][1] for your resources, Datadog initiates scans through [Remote Configuration,][2] which produce snapshots of your EC2 instances at scheduled intervals. Using the snapshots, the scanner conducts scans to generate and transmit the Software Bill of Materials (SBOM) to Datadog.
+After [setting up Agentless scanning][1] for your resources, Datadog initiates scans through [Remote Configuration,][2] which produce snapshots of your EC2 instances at scheduled intervals. Using the snapshots, the scanner conducts scans to generate and transmit the [Software Bill of Materials][8] (SBOM) to Datadog.
 
 The following diagram illustrates how Agentless Scanning works:
 
@@ -49,9 +49,18 @@ The following diagram illustrates how Agentless Scanning works:
 
 - The scanner operates as a separate EC2 instance within your infrastructure, ensuring minimal impact on existing systems and resources.
 - The scanner securely collects SBOMs from your hosts without transmitting any confidential or private information outside your infrastructure.
+- The scanner limits its use of the AWS API to prevent reaching the AWS rate limit, and will use exponential backoff if needed.
+
 
 ## What data is sent to Datadog
-Our scanner is designed to only transmit the list of SBOMs to Datadog. No confidential or private information is ever transmitted outside of your infrastructure.
+Our scanner is designed to only transmit the list of SBOMs to Datadog using the OSWAP [cycloneDX][5] format. No confidential or private information is ever transmitted outside of your infrastructure.
+
+Datadog does **not** send:
+- System and package configurations
+- Encryption keys and certificates
+- Logs and Audit Trails
+- Sensitive business data
+
 
 ## Security considerations
 
@@ -76,11 +85,11 @@ As a result, Agentless Scanning excludes resources that have the Datadog Agent i
 
 **Insert Diagram**
 
-## Cloud Service Provider Cost
+## Cloud service provider cost
 
 When using Agentless Scanning, there are additional costs for running scanners in your cloud environments. To optimize on costs while being able to reliably scan every 12 hours, Datadog recommends to setup [Agentless Scanning with Terraform][4] as the default template, as this also avoids cross-region networking. 
 
-To establish estimates on scanner costs, reach out to your Datadog Sales Representative.
+To establish estimates on scanner costs, reach out to your [Datadog Sales][6] or [Customer Success][7] representative.
 
 
 ## Further reading
@@ -91,3 +100,7 @@ To establish estimates on scanner costs, reach out to your Datadog Sales Represe
 [2]: /agent/remote_config/?tab=configurationyamlfile
 [3]: /security/cloud_security_management/setup/agentless_scanning/#permissions
 [4]: /security/cloud_security_management/setup/agentless_scanning#terraform
+[5]: https://cyclonedx.org/
+[6]: mailto:sales@datadoghq.com
+[7]: mailto:success@datadoghq.com
+[8]: https://www.cisa.gov/sbom
