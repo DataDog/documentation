@@ -227,7 +227,7 @@ TKTK
     helm upgrade --install \
         opw datadog/observability-pipelines-worker \
         -f google_gke.yaml
-        ```
+    ```
 1. Navigate back to the Observability Pipelines installation page and click **Deploy**.
 
 [1]: /resources/yaml/observability_pipelines/v2/setup/google_gke.yaml
