@@ -13,6 +13,9 @@ further_reading:
 - link: "/integrations/guide/source-code-integration/"
   tag: "Documentation"
   text: "Learn about Source Code Integration."
+- link: "https://www.datadoghq.com/blog/datadog-ide-plugins/"
+  tag: "Blog"
+  text: "Reduce context switching while troubleshooting with Datadog's IDE plugins"
 ---
 
 ## Overview

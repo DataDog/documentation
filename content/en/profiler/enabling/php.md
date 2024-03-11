@@ -66,7 +66,7 @@ Continuous Profiler is not supported on serverless platforms, such as AWS Lambda
 
 To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your Agent to version [7.20.2][1]+ or [6.20.2][2]+.
+1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][2].
 
 2. Download the `datadog-setup.php` script from the [GitHub release page][3]. Version 0.69.0 is the first tracer release to include this installer.
 

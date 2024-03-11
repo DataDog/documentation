@@ -15,6 +15,7 @@ assets:
       metadata_path: metadata.csv
       prefix: weaviate.
     process_signatures:
+    - weaviate
     - /bin/weaviate
     service_checks:
       metadata_path: assets/service_checks.json

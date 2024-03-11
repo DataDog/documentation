@@ -1,6 +1,8 @@
 ---
 title: Retention Analysis
 kind: documentation
+aliases:
+- /real_user_monitoring/retention_analysis
 ---
 
 ## Overview
