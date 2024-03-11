@@ -32,12 +32,12 @@ When using the OpenTelemetry Collector, you can use the `transform` processor to
 
 ```yaml
 transform:
-      metric_statements: &statements
-        - context: resource
-          statements:
-            - set(attributes["datadog.host.name"], "my-custom-hostname")
-      trace_statements: *statements # Use the same statements as in metrics
-      log_statements:   *statements # Use the same statements as in metrics
+  metric_statements: &statements
+    - context: resource
+      statements:
+        - set(attributes["datadog.host.name"], "my-custom-hostname")
+  trace_statements: *statements # Use the same statements as in metrics
+  log_statements:   *statements # Use the same statements as in metrics
 ```
 
 Don't forget to add the `transform` processor to your pipelines.
