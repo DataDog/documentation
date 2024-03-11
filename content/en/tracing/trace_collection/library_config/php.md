@@ -151,7 +151,7 @@ in version `0.96.0`.<br><br>
 : **INI**: `datadog.profiling.exception_message_enabled`. INI available since `0.98.0`.<br>
 **Default**: `0`<br>
 Enable the collection of exception messages with exception samples.<br><br>
-**Note**: Please be aware that your exception messages might contain PII (Personal Identifiable Information), which is the reason why this setting is default disabled
+**Note**: Please be aware that your exception messages might contain PII (Personal Identifiable Information), which is the reason why this setting is default disabled.
 
 `DD_PROFILING_EXCEPTION_SAMPLING_DISTANCE`
 : **INI**: `datadog.profiling.exception_sampling_distance`. INI available since `0.96.0`.<br>
