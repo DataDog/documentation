@@ -111,7 +111,7 @@ To easily navigate the facet list, facets are grouped together. For fields speci
 - Before creating a new facet for an integration, review if the attribute should be remapped to a [standard attribute](6) instead. Facets for standard attributes will be added automatically by Datadog when the log pipeline is published.
 - Not all attributes are meant to be used as a facet. Non-faceted attributes are still searchable. The need for facets in integrations is focused on three things:
 1. Facets that are measures allow for associated units with an attribute. For example an attribute “response_time” could have a unit of “ms” or “s”. 
-2. Facets allow for an easy filter interface for a log. Each facet will be listed under the group heading and usable for filtering
+2. Facets provide a straightforward filtering interface for logs. Each facet is listed under the group heading and usable for filtering.
 3. Facets allow for attributes with low readability to be renamed with a label that is easier to understand. For example: @deviceCPUper → Device CPU Utilization Percentage
 
 **Requirements:**
