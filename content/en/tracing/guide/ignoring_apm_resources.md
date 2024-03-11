@@ -464,7 +464,7 @@ public class GreetingController {
 <div class="alert alert-warning"><strong>Note</strong>: Filtering traces this way removes these requests from <a href="/tracing/guide/metrics_namespace/">trace metrics</a>. For information on how to reduce ingestion without affecting the trace metrics, see <a href="/tracing/trace_ingestion/ingestion_controls">ingestion controls</a>.</div>
 
 [1]: /help/
-[2]: /tracing/guide/add_span_md_and_graph_it/
+[2]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 [3]: /tracing/guide/metrics_namespace/
 [4]: /tracing/trace_ingestion/ingestion_controls
 [5]: /tracing/configure_data_security/?tab=mongodb#exclude-resources-from-being-collected

@@ -36,6 +36,7 @@ The following library versions are compatible with API Security Inventory. [Remo
 |.NET Core | v2.42.0  | Requests and responses |
 |.NET Fx   | v2.47.0  | Requests and responses |
 |Ruby      | v1.15.0  | Requests only |
+|Golang    | v1.59.0  | Requests only |
 
 ## How it works
 

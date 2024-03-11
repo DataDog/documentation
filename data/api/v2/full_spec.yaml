@@ -6135,7 +6135,7 @@ components:
           type: string
       type: object
     DowntimeScheduleOneTimeCreateUpdateRequest:
-      additionalProperties: {}
+      additionalProperties: false
       description: A one-time downtime definition.
       properties:
         end:
@@ -6270,6 +6270,7 @@ components:
       - recurrences
       type: object
     DowntimeScheduleRecurrencesUpdateRequest:
+      additionalProperties: false
       description: A recurring downtime schedule definition.
       properties:
         recurrences:
@@ -10435,7 +10436,6 @@ components:
           example: project-id
           type: string
       required:
-      - project_id
       - client_email
       type: object
     LogsArchiveIntegrationS3:
@@ -11117,6 +11117,136 @@ components:
           $ref: '#/components/schemas/MetricAllTags'
       readOnly: true
       type: object
+    MetricAssetAttributes:
+      description: Assets where only included attribute is its title
+      properties:
+        title:
+          description: Title of the asset.
+          type: string
+      type: object
+    MetricAssetDashboardRelationship:
+      description: An object of type `dashboard` that can be referenced in the `included`
+        data.
+      properties:
+        id:
+          $ref: '#/components/schemas/MetricDashboardID'
+        type:
+          $ref: '#/components/schemas/MetricDashboardType'
+      type: object
+    MetricAssetDashboardRelationships:
+      description: An object containing the list of dashboards that can be referenced
+        in the `included` data.
+      properties:
+        data:
+          description: A list of dashboards that can be referenced in the `included`
+            data.
+          items:
+            $ref: '#/components/schemas/MetricAssetDashboardRelationship'
+          type: array
+      type: object
+    MetricAssetMonitorRelationship:
+      description: An object of type `monitor` that can be referenced in the `included`
+        data.
+      properties:
+        id:
+          $ref: '#/components/schemas/MetricMonitorID'
+        type:
+          $ref: '#/components/schemas/MetricMonitorType'
+      type: object
+    MetricAssetMonitorRelationships:
+      description: A object containing the list of monitors that can be referenced
+        in the `included` data.
+      properties:
+        data:
+          description: A list of monitors that can be referenced in the `included`
+            data.
+          items:
+            $ref: '#/components/schemas/MetricAssetMonitorRelationship'
+          type: array
+      type: object
+    MetricAssetNotebookRelationship:
+      description: An object of type `notebook` that can be referenced in the `included`
+        data.
+      properties:
+        id:
+          $ref: '#/components/schemas/MetricNotebookID'
+        type:
+          $ref: '#/components/schemas/MetricNotebookType'
+      type: object
+    MetricAssetNotebookRelationships:
+      description: An object containing the list of notebooks that can be referenced
+        in the `included` data.
+      properties:
+        data:
+          description: A list of notebooks that can be referenced in the `included`
+            data.
+          items:
+            $ref: '#/components/schemas/MetricAssetNotebookRelationship'
+          type: array
+      type: object
+    MetricAssetResponseData:
+      description: Metric assets response data.
+      properties:
+        id:
+          $ref: '#/components/schemas/MetricName'
+        relationships:
+          $ref: '#/components/schemas/MetricAssetResponseRelationships'
+        type:
+          $ref: '#/components/schemas/MetricType'
+      required:
+      - id
+      - type
+      type: object
+    MetricAssetResponseIncluded:
+      description: List of included assets with full set of attributes.
+      oneOf:
+      - $ref: '#/components/schemas/MetricDashboardAsset'
+      - $ref: '#/components/schemas/MetricMonitorAsset'
+      - $ref: '#/components/schemas/MetricNotebookAsset'
+      - $ref: '#/components/schemas/MetricSLOAsset'
+    MetricAssetResponseRelationships:
+      description: Relationships to assets related to the metric.
+      properties:
+        dashboards:
+          $ref: '#/components/schemas/MetricAssetDashboardRelationships'
+        monitors:
+          $ref: '#/components/schemas/MetricAssetMonitorRelationships'
+        notebooks:
+          $ref: '#/components/schemas/MetricAssetNotebookRelationships'
+        slos:
+          $ref: '#/components/schemas/MetricAssetSLORelationships'
+      type: object
+    MetricAssetSLORelationship:
+      description: An object of type `slos` that can be referenced in the `included`
+        data.
+      properties:
+        id:
+          $ref: '#/components/schemas/MetricSLOID'
+        type:
+          $ref: '#/components/schemas/MetricSLOType'
+      type: object
+    MetricAssetSLORelationships:
+      description: An object containing a list of SLOs that can be referenced in the
+        `included` data.
+      properties:
+        data:
+          description: A list of SLOs that can be referenced in the `included` data.
+          items:
+            $ref: '#/components/schemas/MetricAssetSLORelationship'
+          type: array
+      type: object
+    MetricAssetsResponse:
+      description: Response object that includes related dashboards, monitors, notebooks,
+        and SLOs.
+      properties:
+        data:
+          $ref: '#/components/schemas/MetricAssetResponseData'
+        included:
+          description: Array of objects related to the metric assets.
+          items:
+            $ref: '#/components/schemas/MetricAssetResponseIncluded'
+          type: array
+      type: object
     MetricBulkConfigureTagsType:
       default: metric_bulk_configure_tags
       description: The metric bulk configure tags resource.
@@ -11358,6 +11488,44 @@ components:
       - MAX
       - MIN
       - SUM
+    MetricDashboardAsset:
+      description: A dashboard object with title and popularity.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricDashboardAttributes'
+        id:
+          $ref: '#/components/schemas/MetricDashboardID'
+        type:
+          $ref: '#/components/schemas/MetricDashboardType'
+      required:
+      - id
+      - type
+      type: object
+    MetricDashboardAttributes:
+      description: Attributes related to the dashboard, including title and popularity.
+      properties:
+        popularity:
+          description: Value from 0 to 5 that ranks popularity of the dashboard.
+          format: double
+          maximum: 5
+          minimum: 0
+          type: number
+        title:
+          description: Title of the asset.
+          type: string
+      type: object
+    MetricDashboardID:
+      description: The related dashboard's ID.
+      example: xxx-yyy-zzz
+      type: string
+    MetricDashboardType:
+      description: Dashboard resource type.
+      enum:
+      - dashboards
+      example: dashboards
+      type: string
+      x-enum-varnames:
+      - DASHBOARDS
     MetricDistinctVolume:
       description: Object for a single metric's distinct volume.
       properties:
@@ -11498,10 +11666,60 @@ components:
         origin:
           $ref: '#/components/schemas/MetricOrigin'
       type: object
+    MetricMonitorAsset:
+      description: A monitor object with title.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricAssetAttributes'
+        id:
+          $ref: '#/components/schemas/MetricMonitorID'
+        type:
+          $ref: '#/components/schemas/MetricMonitorType'
+      required:
+      - id
+      - type
+      type: object
+    MetricMonitorID:
+      description: The related monitor's ID.
+      example: '1775073'
+      type: string
+    MetricMonitorType:
+      description: Monitor resource type.
+      enum:
+      - monitors
+      example: monitors
+      type: string
+      x-enum-varnames:
+      - MONITORS
     MetricName:
       description: The metric name for this resource.
       example: test.metric.latency
       type: string
+    MetricNotebookAsset:
+      description: A notebook object with title.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricAssetAttributes'
+        id:
+          $ref: '#/components/schemas/MetricNotebookID'
+        type:
+          $ref: '#/components/schemas/MetricNotebookType'
+      required:
+      - id
+      - type
+      type: object
+    MetricNotebookID:
+      description: The related notebook's ID.
+      example: '12345'
+      type: string
+    MetricNotebookType:
+      description: Notebook resource type.
+      enum:
+      - notebooks
+      example: notebooks
+      type: string
+      x-enum-varnames:
+      - NOTEBOOKS
     MetricOrigin:
       description: Metric origin information.
       properties:
@@ -11575,6 +11793,31 @@ components:
           description: The type of the resource.
           type: string
       type: object
+    MetricSLOAsset:
+      description: A SLO object with title.
+      properties:
+        attributes:
+          $ref: '#/components/schemas/MetricAssetAttributes'
+        id:
+          $ref: '#/components/schemas/MetricSLOID'
+        type:
+          $ref: '#/components/schemas/MetricSLOType'
+      required:
+      - id
+      - type
+      type: object
+    MetricSLOID:
+      description: The SLO ID.
+      example: 9ffef113b389520db54391d67d652dfb
+      type: string
+    MetricSLOType:
+      description: SLO resource type.
+      enum:
+      - slos
+      example: slos
+      type: string
+      x-enum-varnames:
+      - SLOS
     MetricSeries:
       description: 'A metric to submit to Datadog.
 
@@ -18280,7 +18523,10 @@ components:
           description: Name of the standard pattern.
           type: string
         pattern:
-          description: Regex to match.
+          deprecated: true
+          description: (Deprecated) Regex to match, optionally documented for older
+            standard rules. Refer to the `description` field to understand what the
+            rule does.
           type: string
         priority:
           description: Integer from 1 (high) to 5 (low) indicating standard pattern
@@ -29578,6 +29824,54 @@ paths:
       x-menu-order: 6
       x-undo:
         type: safe
+  /api/v2/metrics/{metric_name}/assets:
+    get:
+      description: Returns dashboards, monitors, notebooks, and SLOs that a metric
+        is stored in, if any.  Updated every 24 hours.
+      operationId: ListMetricAssets
+      parameters:
+      - $ref: '#/components/parameters/MetricName'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetricAssetsResponse'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: API error response.
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIErrorResponse'
+          description: Too Many Requests
+      security:
+      - apiKeyAuth: []
+        appKeyAuth: []
+      - AuthZ: []
+      summary: Related Assets to a Metric
+      tags:
+      - Metrics
+      x-menu-order: 12
+      x-undo:
+        type: safe
   /api/v2/metrics/{metric_name}/estimate:
     get:
       description: Returns the estimated cardinality for a metric with a given tag,
@@ -29671,20 +29965,7 @@ paths:
       summary: Tag Configuration Cardinality Estimator
       tags:
       - Metrics
-      x-dd-ownership:
-        notification_configuration:
-          manual_escalation_policy: '[Points Aggregation] Primary'
-          prod_high_urgency: '@pagerduty-Points-Aggregation @slack-points-aggr-ops'
-          prod_low_urgency: '@slack-points-aggr-ops'
-          slack_support_channel: '#points-aggregation'
-          staging_high_urgency: '@slack-points-aggr-stg-ops'
-          staging_low_urgency: '@slack-points-aggr-stg-ops'
-        team: points-aggregation
-        team_escalation: '[Points Aggregation] Primary'
       x-menu-order: 11
-      x-permission:
-        operator: OPEN
-        permissions: []
       x-undo:
         type: safe
   /api/v2/metrics/{metric_name}/tags:
@@ -34235,7 +34516,7 @@ paths:
       x-menu-order: 1
       x-pagination:
         limitParam: page[size]
-        pageOffsetParam: page[number]
+        pageParam: page[number]
         resultsPath: data
       x-undo:
         type: safe
@@ -36849,7 +37130,9 @@ tags:
     [Test Visibility in Datadog page](https://docs.datadoghq.com/tests/) for more
     information.
   name: CI Visibility Tests
-- description: View and manage cases and project within Case Management
+- description: View and manage cases and projects within Case Management. See the
+    [Case Management page](https://docs.datadoghq.com/service_management/case_management/)
+    for more information.
   name: Case Management
 - description: The Cloud Cost Management API allows you to set up, edit, and delete
     Cloud Cost Management accounts for AWS and Azure. See the [Cloud Cost Management
@@ -36922,7 +37205,8 @@ tags:
 
     This is an enterprise-only feature. Request access by
 
-    contacting Datadog support.'
+    contacting Datadog support, or see the [IP Allowlist page](https://docs.datadoghq.com/account_management/org_settings/ip_allowlist/)
+    for more information.'
   name: IP Allowlist
 - description: Create, update, delete, and retrieve services which can be associated
     with incidents. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/)
@@ -36948,13 +37232,14 @@ tags:
     url: https://docs.datadoghq.com/account_management/api-app-keys/
   name: Key Management
 - description: Search your logs and send them to your Datadog platform over HTTP.
+    See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.
   name: Logs
 - description: 'Archives forward all the logs ingested to a cloud storage system.
 
 
     See the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)
 
-    for a list of the archives currently configured in web UI.'
+    for a list of the archives currently configured in Datadog.'
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/logs/archives/
@@ -37013,7 +37298,8 @@ tags:
     points\nand as the timeframe over which a metric is viewed increases,\naggregation
     between points occurs to stay below that set number.\n\nThe Post, Patch, and Delete
     `manage_tags` API methods can only be performed by\na user who has the `Manage
-    Tags for Metrics` permission."
+    Tags for Metrics` permission.\n\nSee the [Metrics page](https://docs.datadoghq.com/metrics/)
+    for more information."
   name: Metrics
 - description: '[Monitors](https://docs.datadoghq.com/monitors) allow you to watch
     a metric or check that you care about and
@@ -37029,8 +37315,8 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/monitors/create/types/
   name: Monitors
-- description: Configure your Datadog Okta integration directly through the Datadog
-    API.
+- description: Configure your [Datadog Okta integration](https://docs.datadoghq.com/integrations/okta/)
+    directly through the Datadog API.
   name: Okta Integration
 - description: 'Configure your [Datadog Opsgenie integration](https://docs.datadoghq.com/integrations/opsgenie/)
 
@@ -37044,25 +37330,33 @@ tags:
     description: Find out more at
     url: https://docs.datadoghq.com/account_management/multi_organization
   name: Organizations
-- description: 'The powerpack endpoints allow you to:
+- description: 'The Powerpack endpoints allow you to:
 
 
-    - Get a powerpack
+    - Get a Powerpack
 
-    - Create a powerpack
+    - Create a Powerpack
 
-    - Delete a powerpack
+    - Delete a Powerpack
 
-    - Get a list of all powerpacks
+    - Get a list of all Powerpacks
 
 
-    The Patch and Delete API methods can only be performed on a powerpack by
+    The Patch and Delete API methods can only be performed on a Powerpack by
 
-    a user who has the powerpack create permission for that specific powerpack.'
+    a user who has the powerpack create permission for that specific Powerpack.
+
+
+    Read [Scale Graphing Expertise with Powerpacks](https://docs.datadoghq.com/dashboards/guide/powerpacks-best-practices/)
+    for more information.'
   name: Powerpack
 - description: The processes API allows you to query processes data for your organization.
+    See the [Live Processes page](https://docs.datadoghq.com/infrastructure/process/)
+    for more information.
   name: Processes
-- description: Search or aggregate your RUM events over HTTP.
+- description: Manage your Real User Monitoring (RUM) applications, and search or
+    aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)
+    for more information
   name: RUM
 - description: 'A restriction policy defines the access control rules for a resource,
     mapping a set of relations
@@ -37088,20 +37382,24 @@ tags:
 
     [Pipelines page](https://app.datadoghq.com/logs/pipelines).'
   name: Roles
-- description: 'Detection rules for generating signals and listing of generated
-
-    signals.'
+- description: Create and manage your security rules, signals, filters, and more.
+    See the [Datadog Security page](https://docs.datadoghq.com/security/) for more
+    information.
   name: Security Monitoring
 - description: Create, update, delete, and retrieve sensitive data scanner groups
-    and rules.
+    and rules. See the [Sensitive Data Scanner page](https://docs.datadoghq.com/sensitive_data_scanner/)
+    for more information.
   name: Sensitive Data Scanner
-- description: Create, edit, and disable service accounts.
+- description: Create, edit, and disable service accounts. See the [Service Accounts
+    page](https://docs.datadoghq.com/account_management/org_settings/service_accounts/)
+    for more information.
   name: Service Accounts
 - description: API to create, update, retrieve and delete service definitions.
   externalDocs:
     url: https://docs.datadoghq.com/tracing/service_catalog/
   name: Service Definition
-- description: 'API to create, update scorecard rules and outcomes.
+- description: 'API to create, update scorecard rules and outcomes. See [Service Scorecards](https://docs.datadoghq.com/service_catalog/scorecards)
+    for more information.
 
 
     This feature is currently in BETA. If you have any feedback, contact [Datadog
@@ -37110,7 +37408,8 @@ tags:
 - description: Search and aggregate your spans from your Datadog platform over HTTP.
   name: Spans
 - description: Manage configuration of [span-based metrics](https://app.datadoghq.com/apm/traces/generate-metrics)
-    for your organization.
+    for your organization. See [Generate Metrics from Spans](https://docs.datadoghq.com/tracing/trace_pipeline/generate_metrics/)
+    for more information.
   externalDocs:
     description: Find out more at
     url: https://docs.datadoghq.com/tracing/metrics/metrics_namespace/
@@ -37122,7 +37421,8 @@ tags:
     use Datadog\u2019s API to\nmanage both test types programmatically.\n\nFor more
     information about Synthetics, see the [Synthetics overview](https://docs.datadoghq.com/synthetics/)."
   name: Synthetics
-- description: View and manage teams within Datadog.
+- description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/)
+    for more information.
   name: Teams
 - description: 'The usage metering API allows you to get hourly, daily, and
 
