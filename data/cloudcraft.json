@@ -18,11 +18,11 @@
           "Blueprints"
         ],
         "summary": "List blueprints",
-        "description": "List all of your saved blueprints.\n\nEach entry includes the blueprint ID and name, access control, and user information.\n\nThe provided blueprint IDs are required to access the other blueprint-related APIs.\n\nResponses\n=========\n- **200 OK on success**\n- 401 Unauthorized",
+        "description": "List all of your saved blueprints.\n\nEach entry includes the blueprint ID and name, access control, and user information.\n\nThe provided blueprint IDs are required to access the other blueprint-related APIs.",
         "operationId": "listMyBlueprints",
         "responses": {
           "200": {
-            "description": "List blueprints",
+            "description": "OK",
             "headers": {
               "Cache-Control": {
                 "schema": {
@@ -147,6 +147,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
@@ -155,7 +158,7 @@
           "Blueprints"
         ],
         "summary": "Create a blueprint",
-        "description": "Create a new blueprint.\n\nThe body of the request should contain the blueprint document in JSON format. The response contains the created blueprint, including the newly assigned ID.\n\nResponses\n=========\n- **201 Created on success**\n- 401 Unauthorized\n- 403 Forbidden, insufficient privileges",
+        "description": "Create a new blueprint.\n\nThe body of the request should contain the blueprint document in JSON format. The response contains the created blueprint, including the newly assigned ID.",
         "operationId": "createBlueprint",
         "requestBody": {
           "content": {
@@ -193,7 +196,7 @@
         },
         "responses": {
           "201": {
-            "description": "Create blueprint",
+            "description": "OK",
             "headers": {
               "Connection": {
                 "schema": {
@@ -314,6 +317,12 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
           }
         }
       }
@@ -324,7 +333,7 @@
           "Blueprints"
         ],
         "summary": "Retrieve a blueprint",
-        "description": "Retrieve a blueprint in JSON format.\n\n# Path Parameters\n\n*   **blueprint_id**: *UUID*. Blueprint ID. Required.\n    \n\n# Responses\n\n*   **200 OK on success**\n*   401 Unauthorized\n*   403 Forbidden, insufficient privileges\n*   404 Blueprint not found",
+        "description": "Retrieve a blueprint in JSON format.\n\n# Path Parameters\n\n*   **blueprint_id**: *UUID*. Blueprint ID. Required.",
         "operationId": "retrieveBlueprint",
         "responses": {
           "200": {
@@ -400,6 +409,15 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          },
+          "404": {
+            "description": "Blueprint not found"
           }
         }
       },
@@ -408,7 +426,7 @@
           "Blueprints"
         ],
         "summary": "Update a blueprint",
-        "description": "Update an existing blueprint.\n\nThe body of the request should contain the updated blueprint document in JSON format.\n\nOptionally, a conditional update of the blueprint can be perfomed by including the _If-Match_ HTTP header with the same ETag value as provided by the \"Retrieve blueprint\" API. If the blueprint has been modified since the retrieval, the update is rejected with a _412 Resource out of date_ response. If the update succeeds, the new ETag is returned.\n\nResponses\n=========\n- **204 No Content on success**\n- 401 Unauthorized\n- 403 Forbidden, insufficient privileges\n- 404 Blueprint not found\n- 412 Resource out of date",
+        "description": "Update an existing blueprint.\n\nThe body of the request should contain the updated blueprint document in JSON format.\n\nOptionally, a conditional update of the blueprint can be perfomed by including the _If-Match_ HTTP header with the same ETag value as provided by the \"Retrieve blueprint\" API. If the blueprint has been modified since the retrieval, the update is rejected with a _412 Resource out of date_ response. If the update succeeds, the new ETag is returned.",
         "operationId": "updateBlueprint",
         "requestBody": {
           "content": {
@@ -511,7 +529,7 @@
         },
         "responses": {
           "204": {
-            "description": "Update blueprint",
+            "description": "OK",
             "headers": {
               "Connection": {
                 "schema": {
@@ -551,6 +569,18 @@
               }
             },
             "content": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          },
+          "404": {
+            "description": "Blueprint not found"
+          },
+          "412": {
+            "description": "Resource out of date"
           }
         }
       },
@@ -559,7 +589,7 @@
           "Blueprints"
         ],
         "summary": "Delete a blueprint",
-        "description": "Delete a blueprint.\n\nWhen the deletion succeeds, *204 No Content* is returned.\n\n# Path Parameters\n\n*   **blueprint_id**: *UUID*. Blueprint ID. Required.\n    \n\n# Responses\n\n*   **204 No Content on success**\n*   401 Unathorized\n*   403 Forbidden, insufficient privileges\n*   404 Blueprint not found",
+        "description": "Delete a blueprint.\n\nWhen the deletion succeeds, *204 No Content* is returned.\n\n# Path Parameters\n\n*   **blueprint_id**: *UUID*. Blueprint ID. Required.",
         "operationId": "deleteBlueprint",
         "requestBody": {
           "content": {
@@ -597,7 +627,7 @@
         },
         "responses": {
           "204": {
-            "description": "Delete blueprint",
+            "description": "OK",
             "headers": {
               "Connection": {
                 "schema": {
@@ -631,6 +661,15 @@
               }
             },
             "content": {}
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          },
+          "404": {
+            "description": "Blueprint not found"
           }
         }
       }
@@ -641,11 +680,20 @@
           "Blueprints"
         ],
         "summary": "Export a blueprint as an image",
-        "description": "Render blueprint for export in SVG, PNG, PDF, or MxGraph format.\n\nPath Parameters\n===============\n- **blueprint_id**: _UUID_. Blueprint ID.\n- **format**: _String_. One of \"svg\", \"png\", \"pdf\", or \"mxGraph\".\n\nOptional query parameters\n=========================\n- **scale**: _Float_. Scale relative to original size (1.0), for example, 0.5 for half or 2.0 for double size.\n- **width**: _Number_. Image width in pixels (for SVG, PNG, and PDF).\n- **height**: _Number_. Image height in pixels (for SVG, PNG, and PDF).\n- **grid**: _Boolean_. Enable or disable grid rendering.\n- **transparent**: _Boolean_. Enable or disable transparent background rendering.\n- **landscape**: _Boolean_. Enable or disable landscape paper format (PDF).\n- **paperSize**: _String_. One of \"Letter\", \"Legal\", \"Tabloid\", \"Ledger\", \"A0\", \"A1\", \"A2\", \"A3\", \"A4\", \"A5\".\n\nResponses\n=========\n- **200 OK on success**, with the content type being one of:\n  - image/svg+xml\n  - image/png\n  - application/pdf\n  - application/xml\n  - application/json\n- 401 Unathorized\n- 403 Forbidden, insufficient privileges\n- 404 Blueprint not found",
+        "description": "Render blueprint for export in SVG, PNG, PDF, or MxGraph format.\n\nPath Parameters\n===============\n- **blueprint_id**: _UUID_. Blueprint ID.\n- **format**: _String_. One of \"svg\", \"png\", \"pdf\", or \"mxGraph\".\n\nOptional query parameters\n=========================\n- **scale**: _Float_. Scale relative to original size (1.0), for example, 0.5 for half or 2.0 for double size.\n- **width**: _Number_. Image width in pixels (for SVG, PNG, and PDF).\n- **height**: _Number_. Image height in pixels (for SVG, PNG, and PDF).\n- **grid**: _Boolean_. Enable or disable grid rendering.\n- **transparent**: _Boolean_. Enable or disable transparent background rendering.\n- **landscape**: _Boolean_. Enable or disable landscape paper format (PDF).\n- **paperSize**: _String_. One of \"Letter\", \"Legal\", \"Tabloid\", \"Ledger\", \"A0\", \"A1\", \"A2\", \"A3\", \"A4\", \"A5\".",
         "operationId": "exportBlueprintAsImage",
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          },
+          "404": {
+            "description": "Blueprint not found"
           }
         }
       }
@@ -656,7 +704,7 @@
           "AWS Accounts"
         ],
         "summary": "List AWS accounts",
-        "description": "List all AWS accounts linked to your Cloudcraft account.\n\nThe response is an array of AWS accounts. Each entry includes the account ID and name, access control, and user information.\n\nThe provided account IDs are required to access the other AWS-related APIs.\n\nResponses\n=========\n- **200 OK on success**\n- 401 Unauthorized",
+        "description": "List all AWS accounts linked to your Cloudcraft account.\n\nThe response is an array of AWS accounts. Each entry includes the account ID and name, access control, and user information.\n\nThe provided account IDs are required to access the other AWS-related APIs.",
         "operationId": "listMyAwsAccounts",
         "responses": {
           "200": {
@@ -791,6 +839,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
@@ -799,7 +850,7 @@
           "AWS Accounts"
         ],
         "summary": "Add an AWS account",
-        "description": "Register a new AWS account with Cloudcraft.\n\nThe body of the request should contain the account properties in JSON format. The response contains the created account object, including the newly assigned ID for use with other API endpoints.\n\nProperties\n==========\n- **name**: A human-readable name for the AWS account. For example, \"Production\" or \"Staging\".\n- **roleArn**: The ARN of the read-only IAM role you've created in your AWS account for Cloudcraft. The IAM role must be created with the unique external ID value of the person who generated the API key being used. \n- **region**: Optional property representing the AWS region to be used for account validation. By default, the account will be validated in the us-east-1 region. \n\nResponses\n=========\n- **201 Created on success**\n- 401 Unauthorized\n- 403 Forbidden, insufficient privileges",
+        "description": "Register a new AWS account with Cloudcraft.\n\nThe body of the request should contain the account properties in JSON format. The response contains the created account object, including the newly assigned ID for use with other API endpoints.\n\nProperties\n==========\n- **name**: A human-readable name for the AWS account. For example, \"Production\" or \"Staging\".\n- **roleArn**: The ARN of the read-only IAM role you've created in your AWS account for Cloudcraft. The IAM role must be created with the unique external ID value of the person who generated the API key being used. \n- **region**: Optional property representing the AWS region to be used for account validation. By default, the account will be validated in the us-east-1 region.",
         "operationId": "addAwsAccount",
         "requestBody": {
           "content": {
@@ -938,6 +989,12 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
           }
         }
       }
@@ -948,11 +1005,14 @@
           "AWS Accounts"
         ],
         "summary": "Snapshot AWS account",
-        "description": "Scan and render one region of an AWS account into a blueprint in JSON, SVG, PNG, PDF, or MxGraph format.\n\nThe time required to generate the snapshot depends on the number of resources in the AWS region.  \n\nThe API behaves as a long poll, with a wait time of up to 120 seconds for the result. For most  \nenvironments, the API call will therefore directly return a blueprint. If  \nthe wait time is exceeded, a `202 Accepted` response is returned with a  \n`{code: STILL_PROCESSING, retry: true ...}` JSON body. The snapshot will continue processing in the background, and a retry will either immediately return the result or continue waiting.\n\n# Path Parameters\n\n*   **account_id**: *UUID*. The AWS account ID as registered with Cloudcraft.\n*   **region**: *String*. The AWS region, for example, \"us-east-1\".\n*   **format**: *String*. One of \"json\", \"svg\", \"png\", \"pdf\", \"mxGraph\".\n    \n\n# Optional query parameters\n\n*   **filter**: *String*. Render a subset of the AWS account. Accepts a filter expression as used on the **Live** tab in the web application. The filter expression terms must be separated by spaces. The terms are substrings to be matched, key-value pairs, logical operators, or parentheses. For example, \\`env=dev OR env=test\\`. \n*   **exclude**: *List of Strings*. Exclude AWS services by name. For example, \"ec2,sg\" to exclude both EC2s and Security Groups. The service value is specified by the \"type\" field of Blueprint components.\n*   **label**: *Boolean*. Automatically label all components. Defaults to true.\n*   **autoconnect**: *Boolean*. Automatically connect all components. Defaults to true.\n*   **scale**: *Float*. Scale relative to original size (1.0). For example, 0.5 for half or 2.0 for double size.\n*   **width**: *Number*. Image width in pixels (for SVG, PNG, and PDF).\n*   **height**: *Number*. Image height in pixels (for SVG, PNG, and PDF).\n*   **grid**: *Boolean*. Enable or disable grid rendering.\n*   **transparent**: *Boolean*. Enable or disable transparent background rendering.\n*   **landscape**: *Boolean*. Enable or disable landscape paper format (PDF).\n*   **paperSize**: *String*. Applies when the format is PDF. One of \"Letter\", \"Legal\", \"Tabloid\", \"Ledger\", \"A0\", \"A1\", \"A2\", \"A3\", \"A4\",  or \"A5\".\n*   **projection**: *String*. The visual style of the diagram. One of \"isometric\" or \"2d\".\n*   **theme**: *String*. The color theme of the diagram. One of \"light\" or \"dark\".\n    \n\n# Responses\n\n*   **200 OK on success** with the content type being one of:\n    *   image/svg+xml\n    *   image/png\n    *   application/pdf\n    *   application/xml\n    *   application/json\n*   **202 Accepted** when the snapshot generation takes longer than the max wait time\n*   401 Unathorized\n*   403 Forbidden, insufficient privileges\n*   404 AWS account not found",
+        "description": "Scan and render one region of an AWS account into a blueprint in JSON, SVG, PNG, PDF, or MxGraph format.\n\nThe time required to generate the snapshot depends on the number of resources in the AWS region.  \n\nThe API behaves as a long poll, with a wait time of up to 120 seconds for the result. For most  \nenvironments, the API call will therefore directly return a blueprint. If  \nthe wait time is exceeded, a `202 Accepted` response is returned with a  \n`{code: STILL_PROCESSING, retry: true ...}` JSON body. The snapshot will continue processing in the background, and a retry will either immediately return the result or continue waiting.\n\n# Path Parameters\n\n*   **account_id**: *UUID*. The AWS account ID as registered with Cloudcraft.\n*   **region**: *String*. The AWS region, for example, \"us-east-1\".\n*   **format**: *String*. One of \"json\", \"svg\", \"png\", \"pdf\", \"mxGraph\".\n    \n\n# Optional query parameters\n\n*   **filter**: *String*. Render a subset of the AWS account. Accepts a filter expression as used on the **Live** tab in the web application. The filter expression terms must be separated by spaces. The terms are substrings to be matched, key-value pairs, logical operators, or parentheses. For example, \\`env=dev OR env=test\\`. \n*   **exclude**: *List of Strings*. Exclude AWS services by name. For example, \"ec2,sg\" to exclude both EC2s and Security Groups. The service value is specified by the \"type\" field of Blueprint components.\n*   **label**: *Boolean*. Automatically label all components. Defaults to true.\n*   **autoconnect**: *Boolean*. Automatically connect all components. Defaults to true.\n*   **scale**: *Float*. Scale relative to original size (1.0). For example, 0.5 for half or 2.0 for double size.\n*   **width**: *Number*. Image width in pixels (for SVG, PNG, and PDF).\n*   **height**: *Number*. Image height in pixels (for SVG, PNG, and PDF).\n*   **grid**: *Boolean*. Enable or disable grid rendering.\n*   **transparent**: *Boolean*. Enable or disable transparent background rendering.\n*   **landscape**: *Boolean*. Enable or disable landscape paper format (PDF).\n*   **paperSize**: *String*. Applies when the format is PDF. One of \"Letter\", \"Legal\", \"Tabloid\", \"Ledger\", \"A0\", \"A1\", \"A2\", \"A3\", \"A4\",  or \"A5\".\n*   **projection**: *String*. The visual style of the diagram. One of \"isometric\" or \"2d\".\n*   **theme**: *String*. The color theme of the diagram. One of \"light\" or \"dark\".",
         "operationId": "snapshotAwsAccount",
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
-            "description": "Snapshot AWS account, wait time exceeded",
+            "description": "Wait time exceeded",
             "headers": {
               "Connection": {
                 "schema": {
@@ -1048,6 +1108,15 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          },
+          "404": {
+            "description": "AWS account not found"
           }
         }
       }
@@ -1058,7 +1127,7 @@
           "AWS Accounts"
         ],
         "summary": "Update an AWS account",
-        "description": "Update an AWS account registered in Cloudcraft.\n\nThe body of the request should contain the account properties in JSON format. The response contains the updated account object.\n\nProperties\n==========\n- **name**: A human-readable name for the AWS account. For example, \"Production\" or \"Staging\".\n- **roleArn**: The ARN of the read-only IAM role you've created in your AWS account for Cloudcraft. The IAM role must be created with the unique external ID value of the person who generated the API key being used.\n\nResponses\n=========\n- **200 OK on success**\n- 401 Unauthorized\n- 403 Forbidden, insufficient privileges\n",
+        "description": "Update an AWS account registered in Cloudcraft.\n\nThe body of the request should contain the account properties in JSON format. The response contains the updated account object.\n\nProperties\n==========\n- **name**: A human-readable name for the AWS account. For example, \"Production\" or \"Staging\".\n- **roleArn**: The ARN of the read-only IAM role you've created in your AWS account for Cloudcraft. The IAM role must be created with the unique external ID value of the person who generated the API key being used.",
         "operationId": "updateAwsAccount",
         "requestBody": {
           "content": {
@@ -1089,7 +1158,13 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
           }
         }
       },
@@ -1098,11 +1173,20 @@
           "AWS Accounts"
         ],
         "summary": "Delete AWS account",
-        "description": "Delete a registered AWS account.\n\n# Path Parameters\n\n*   **account_id**: *UUID*. AWS account ID. Required.\n    \n\n# Responses\n\n*   **204 No Content on success**\n*   401 Unathorized\n*   403 Forbidden, insufficient privileges\n*   404 AWS account not found",
+        "description": "Delete a registered AWS account.\n\n# Path Parameters\n\n*   **account_id**: *UUID*. AWS account ID. Required.",
         "operationId": "deleteAwsAccount",
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          },
+          "404": {
+            "description": "AWS account not found"
           }
         }
       }
@@ -1117,7 +1201,7 @@
         "operationId": "getMyAwsIamRoleParameters",
         "responses": {
           "200": {
-            "description": "Get my AWS IAM Role parameters",
+            "description": "OK",
             "headers": {
               "Connection": {
                 "schema": {
@@ -1231,6 +1315,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
@@ -1241,11 +1328,14 @@
           "Azure Accounts"
         ],
         "summary": "List Azure accounts",
-        "description": "List all Azure accounts linked to your Cloudcraft account.\n\nThe response is an array of Azure accounts. Each entry includes the account ID and name, access control, and user information.\n\nThe provided account IDs are required to access the other Azure-related APIs.\n\n# Responses\n\n- **200 OK on success**\n- 401 Unauthorized",
+        "description": "List all Azure accounts linked to your Cloudcraft account.\n\nThe response is an array of Azure accounts. Each entry includes the account ID and name, access control, and user information.\n\nThe provided account IDs are required to access the other Azure-related APIs.",
         "operationId": "listMyAzureAccounts",
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       },
@@ -1254,7 +1344,7 @@
           "Azure Accounts"
         ],
         "summary": "Add an Azure account",
-        "description": "Register a new Azure account with Cloudcraft.\n\nThe body of the request should contain the account properties in JSON format. The response contains the created account object, including the newly assigned ID for use with other API endpoints.\n\n# Properties\n\n- **name**: A human-readable name for the Azure account. For example, \"Production\" or \"Staging\".\n- **subscriptionId**: Subscription ID of your Azure account.\n- **directoryId**: Azure Tenant or Directory ID.\n- **applicationId**: Identifier of the application registered with Azure\n- **clientSecret**: Client secret associated with the registered application.\n    \n\n# Responses\n\n- **201 Created on success**\n- 401 Unauthorized\n- 403 Forbidden, insufficient privileges",
+        "description": "Register a new Azure account with Cloudcraft.\n\nThe body of the request should contain the account properties in JSON format. The response contains the created account object, including the newly assigned ID for use with other API endpoints.\n\n# Properties\n\n- **name**: A human-readable name for the Azure account. For example, \"Production\" or \"Staging\".\n- **subscriptionId**: Subscription ID of your Azure account.\n- **directoryId**: Azure Tenant or Directory ID.\n- **applicationId**: Identifier of the application registered with Azure\n- **clientSecret**: Client secret associated with the registered application.",
         "operationId": "addAzureAccount",
         "requestBody": {
           "content": {
@@ -1300,7 +1390,7 @@
         },
         "responses": {
           "201": {
-            "description": "Add Azure account",
+            "description": "OK",
             "headers": {
               "Connection": {
                 "schema": {
@@ -1414,6 +1504,12 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
           }
         }
       }
@@ -1424,11 +1520,11 @@
           "Azure Accounts"
         ],
         "summary": "Snapshot an Azure account",
-        "description": "Scan and render one region of an Azure account into a blueprint in JSON, SVG, PNG, PDF, or MxGraph format.\n\nThe time required to generate the snapshot depends on the number of resources in the Azure region.  \n\nThe API behaves as a long poll, with a wait time of up to 120 seconds for the result. For most  \nenvironments, the API call returns a blueprint. If  \nthe wait time is exceeded, a `202 Accepted` response is returned with a  \n`{code: STILL_PROCESSING, retry: true ...}` JSON body. The snapshot will continue processing in the background, and a retry will either immediately return the result or continue waiting.\n\n# Path Parameters\n\n- **account_id**: _UUID_. Azure Account ID as registered with Cloudcraft. \n- **region**: _String_. Azure region, for example, \"eastus\".\n- **format**: _String_. One of \"json\", \"svg\", \"png\", \"pdf\", or \"mxGraph\".\n    \n\n# Optional query parameters\n\n- **filter**: _String_. Render a subset of the Azure account. Accepts a filter expression as used on the **Live** tab in the web application. The filter expression terms must be separated by spaces. The terms are substrings to be matched, key-value pairs, logical operators, or parentheses. For example, \\`env=dev OR env=test\\`.\n- **exclude**: _List of Strings_. Exclude Azure services by name. For example, \"azurevmss,azurensg\" to exclude both Virtual Machine Scale Set and Network Security Groups. The service value is specified by the \"type\" field of Blueprint components.\n- **label**: _Boolean_. Automatically label all components. Defaults to true.\n- **autoconnect**: _Boolean_. Automatically connect all components. Defaults to true.\n- **scale**: _Float_. Scale relative to original size (1.0), for example, 0.5 for half or 2.0 for double size.\n- **width**: _Number_. Image width in pixels (for SVG, PNG, and PDF).\n- **height**: _Number_. Image height in pixels (for SVG, PNG, and PDF).\n- **grid**: _Boolean_. Enable or disable grid rendering.\n- **transparent**: _Boolean_. Enable or disable transparent background rendering.\n- **landscape**: _Boolean_. Enable or disable landscape paper format (PDF).\n- **paperSize**: _String_. Applies when the format is PDF. One of \"Letter\", \"Legal\", \"Tabloid\", \"Ledger\", \"A0\", \"A1\", \"A2\", \"A3\", \"A4\", \"A5\".\n- **projection**: _String_. The visual style of the diagram. One of \"isometric\" or \"2d\".\n- **theme**: _String_. The color theme of the diagram. One of \"light\" or \"dark\".\n    \n\n# Responses\n\n- **200 OK on success** with the content type being one of:\n    - image/svg+xml\n    - image/png\n    - application/pdf\n    - application/xml\n    - application/json\n- **202 Accepted** when the snapshot generation takes longer than the max wait time\n- 401 Unathorized\n- 403 Forbidden, insufficient privileges\n- 404 Azure account not found",
+        "description": "Scan and render one region of an Azure account into a blueprint in JSON, SVG, PNG, PDF, or MxGraph format.\n\nThe time required to generate the snapshot depends on the number of resources in the Azure region.  \n\nThe API behaves as a long poll, with a wait time of up to 120 seconds for the result. For most  \nenvironments, the API call returns a blueprint. If  \nthe wait time is exceeded, a `202 Accepted` response is returned with a  \n`{code: STILL_PROCESSING, retry: true ...}` JSON body. The snapshot will continue processing in the background, and a retry will either immediately return the result or continue waiting.\n\n# Path Parameters\n\n- **account_id**: _UUID_. Azure Account ID as registered with Cloudcraft. \n- **region**: _String_. Azure region, for example, \"eastus\".\n- **format**: _String_. One of \"json\", \"svg\", \"png\", \"pdf\", or \"mxGraph\".\n    \n\n# Optional query parameters\n\n- **filter**: _String_. Render a subset of the Azure account. Accepts a filter expression as used on the **Live** tab in the web application. The filter expression terms must be separated by spaces. The terms are substrings to be matched, key-value pairs, logical operators, or parentheses. For example, \\`env=dev OR env=test\\`.\n- **exclude**: _List of Strings_. Exclude Azure services by name. For example, \"azurevmss,azurensg\" to exclude both Virtual Machine Scale Set and Network Security Groups. The service value is specified by the \"type\" field of Blueprint components.\n- **label**: _Boolean_. Automatically label all components. Defaults to true.\n- **autoconnect**: _Boolean_. Automatically connect all components. Defaults to true.\n- **scale**: _Float_. Scale relative to original size (1.0), for example, 0.5 for half or 2.0 for double size.\n- **width**: _Number_. Image width in pixels (for SVG, PNG, and PDF).\n- **height**: _Number_. Image height in pixels (for SVG, PNG, and PDF).\n- **grid**: _Boolean_. Enable or disable grid rendering.\n- **transparent**: _Boolean_. Enable or disable transparent background rendering.\n- **landscape**: _Boolean_. Enable or disable landscape paper format (PDF).\n- **paperSize**: _String_. Applies when the format is PDF. One of \"Letter\", \"Legal\", \"Tabloid\", \"Ledger\", \"A0\", \"A1\", \"A2\", \"A3\", \"A4\", \"A5\".\n- **projection**: _String_. The visual style of the diagram. One of \"isometric\" or \"2d\".\n- **theme**: _String_. The color theme of the diagram. One of \"light\" or \"dark\".",
         "operationId": "snapshotAzureAccount",
         "responses": {
           "200": {
-            "description": "Snapshot Azure account",
+            "description": "OK",
             "content": {
               "text/plain": {
                 "examples": {
@@ -1440,7 +1536,7 @@
             }
           },
           "202": {
-            "description": "Snapshot Azure account, wait time exceeded",
+            "description": "Wait time exceeded",
             "headers": {
               "Connection": {
                 "schema": {
@@ -1533,6 +1629,15 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          },
+          "404": {
+            "description": "Azure account not found"
           }
         }
       }
@@ -1543,7 +1648,7 @@
           "Azure Accounts"
         ],
         "summary": "Update an Azure account",
-        "description": "Update an Azure account registered in Cloudcraft.\n\nThe body of the request should contain the account properties in JSON format. The response contains the updated account object.\n\n# Path Parameters\n\n- **account_id**: _UUID_. Azure account ID. Required.\n    \n\n# Properties\n\n- **name**: A human-readable name for the Azure account. For example, \"Production\" or \"Staging\".\n- **subscriptionId**: Subscription ID of your Azure account.\n- **directoryId**: Azure Tenant or Directory ID.\n- **applicationId**: Identifier of the application registered with Azure.\n- **clientSecret**: Client secret associated with the registered application.\n    \n\n# Responses\n\n- **200 OK on success**\n- 401 Unauthorized\n- 403 Forbidden, insufficient privileges",
+        "description": "Update an Azure account registered in Cloudcraft.\n\nThe body of the request should contain the account properties in JSON format. The response contains the updated account object.\n\n# Path Parameters\n\n- **account_id**: _UUID_. Azure account ID. Required.\n    \n\n# Properties\n\n- **name**: A human-readable name for the Azure account. For example, \"Production\" or \"Staging\".\n- **subscriptionId**: Subscription ID of your Azure account.\n- **directoryId**: Azure Tenant or Directory ID.\n- **applicationId**: Identifier of the application registered with Azure.\n- **clientSecret**: Client secret associated with the registered application.",
         "operationId": "updateAzureAccount",
         "requestBody": {
           "content": {
@@ -1589,7 +1694,13 @@
         },
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
           }
         }
       },
@@ -1598,11 +1709,20 @@
           "Azure Accounts"
         ],
         "summary": "Delete an Azure account",
-        "description": "Delete a registered Azure account.\n\n# Path Parameters\n\n- **account_id**: _UUID_. Azure account ID. Required.\n    \n\n# Responses\n\n- **204 No Content on success**\n- 401 Unathorized\n- 403 Forbidden, insufficient privileges\n- 404 Azure account not found",
+        "description": "Delete a registered Azure account.\n\n# Path Parameters\n\n- **account_id**: _UUID_. Azure account ID. Required.",
         "operationId": "deleteAzureAccount",
         "responses": {
-          "200": {
-            "description": ""
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          },
+          "404": {
+            "description": "Azure account not found"
           }
         }
       }
@@ -1613,11 +1733,20 @@
           "Budgets"
         ],
         "summary": "Export budget for a blueprint",
-        "description": "Export the budget for a blueprint in CSV or XLSX format.\n\nPath Parameters\n===============\n- **blueprint_id**: _UUID_. Blueprint ID\n- **format**: _String_. One of \"csv\" or \"xlsx\".\n\nOptional query parameters\n=========================\n- **currency**: _String_. Currency in ISO_4217 format. Should be one of \"USD\", \"AUD\", \"CHF\", \"CKK\", \"EUR\", \"GBP\", \"HKD\", \"JPY\", \"NOK\", \"NZD\", \"SEK\", or \"ZAR\". Defaults to \"USD\".\n- **period**: _String_. Period for budget. Should be one of \"h\" (hourly), \"d\" (daily), \"w\" (weekly), \"m\" (monthly), or \"y\" (yearly). Defaults to \"m\".\n- **rate**: _String_. Should be one of \"effective\" (includes upfront fees) or \"stated\" (excludes upfront fees). Defaults to \"effective\".\n\n# Responses\n\n- **200 OK on success** with the content type being one of:\n  - text/csv\n  - application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\n- 401 Unauthorized\n- 403 Forbidden, insufficient privileges\n- 404 Blueprint not found",
+        "description": "Export the budget for a blueprint in CSV or XLSX format.\n\nPath Parameters\n===============\n- **blueprint_id**: _UUID_. Blueprint ID\n- **format**: _String_. One of \"csv\" or \"xlsx\".\n\nOptional query parameters\n=========================\n- **currency**: _String_. Currency in ISO_4217 format. Should be one of \"USD\", \"AUD\", \"CHF\", \"CKK\", \"EUR\", \"GBP\", \"HKD\", \"JPY\", \"NOK\", \"NZD\", \"SEK\", or \"ZAR\". Defaults to \"USD\".\n- **period**: _String_. Period for budget. Should be one of \"h\" (hourly), \"d\" (daily), \"w\" (weekly), \"m\" (monthly), or \"y\" (yearly). Defaults to \"m\".\n- **rate**: _String_. Should be one of \"effective\" (includes upfront fees) or \"stated\" (excludes upfront fees). Defaults to \"effective\".",
         "operationId": "exportBudgetForABlueprint",
         "responses": {
           "200": {
-            "description": ""
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden, insufficient privileges"
+          },
+          "404": {
+            "description": "Blueprint not found"
           }
         }
       }
@@ -1628,7 +1757,7 @@
           "Users"
         ],
         "summary": "Get user profile",
-        "description": "Retrieve your user profile.\n\nResponses\n=========\n- **200 OK**\n- 401 Unauthorized",
+        "description": "Retrieve your user profile.",
         "operationId": "getMyInformation",
         "responses": {
           "200": {
@@ -1747,6 +1876,9 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
