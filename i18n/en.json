@@ -363,5 +363,8 @@
   },
   "source" : {
     "other": "Source"
+  },
+  "legacy" : {
+    "other": "Legacy"
   }
 }
