@@ -1,5 +1,5 @@
 ---
-title: Sankey Diagrams
+title: Sankey Diagram
 kind: documentation
 ---
 
@@ -17,7 +17,7 @@ Each node represents a view the user visited. The thickness of each node represe
 
 If a user visits the same page multiple times during their session, that page is only counted once.
 
-Actions are not supported in Sankey diagrams.
+Actions are not currently supported in the Sankey diagram.
 
 ## Build a Sankey diagram
 
