@@ -34,7 +34,7 @@ Continuous Profiler is not supported on serverless platforms, such as AWS Lambda
 
 To begin profiling applications:
 
-1. If you are already using Datadog, upgrade your agent to version [7.20.2][4]+ or [6.20.2][5]+.
+1. Ensure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][16].
 
 2. Get `dd-trace-go` using the command:
 
@@ -144,3 +144,4 @@ The [Getting Started with Profiler][14] guide takes a sample service with a perf
 [13]: https://pkg.go.dev/github.com/ianlancetaylor/cgosymbolizer#pkg-overview
 [14]: /getting_started/profiler/
 [15]: /profiler/enabling/supported_versions/
+[16]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
