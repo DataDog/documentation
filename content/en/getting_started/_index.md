@@ -15,9 +15,9 @@ cascade:
         category: Getting Started
 ---
 
-## Overview
+## What is Datadog?
 
-The Datadog platform provides observability at every phase of software development, so you can more easily build, test, monitor, debug, and enhance your software. The platform contains many products that can be used individually or combined into a comprehensive solution.
+Datadog is an observability platform that supports every phase of software development on any stack. The platform contains many products that help you build, test, monitor, debug, optimize, and secure your software. These products can be used individually or combined into a customized solution.
 
 The table below lists a few examples of Datadog products:
 
